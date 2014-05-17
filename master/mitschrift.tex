@@ -1,0 +1,242 @@
+\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=13, BCOR=13mm]{scrartcl}
+\usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
+\usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
+
+%--Farbdefinitionen
+%-- muss vor tikz geladen werden
+\usepackage[usenames, table, x11names]{xcolor}
+\definecolor{dark_gray}{gray}{0.45}
+\definecolor{light_gray}{gray}{0.6}
+
+%--Zum Zeichnen
+%-- muss vor polyglossia bzw. babel geladen werden
+\usepackage{tikz}
+\tikzset{>=latex}
+\usetikzlibrary{shapes,arrows, intersections}
+\usetikzlibrary{calc, 3d}
+\usetikzlibrary{decorations.pathreplacing, decorations.markings}
+\usetikzlibrary{angles}
+% um Inkompatibilitaeten von quotes und polyglossia bzw babel zu vermeiden
+\tikzset{
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes}
+\usepackage{tikz-cd} %kommutative Diagramme
+\usepackage{pgfplots}
+
+
+%-- Mathe
+\usepackage{mathtools} % beinhaltet amsmath
+\mathtoolsset{showonlyrefs, centercolon}
+\usepackage{wasysym}
+\usepackage{amssymb} %zusätzliche Symbole
+\usepackage{latexsym} %zusätzliche Symbole
+\usepackage{stmaryrd} %für Blitz
+\usepackage{nicefrac} %schräge Brüche
+\usepackage{cancel} %Befehle zum Durchstreichen
+\usepackage{mathdots}
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\newcommand{\mathds}[1]{\mathbb{#1}} %Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
+\newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
+\def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
+
+%-- Alles was mit Schrift und XeteX zu tun hat
+\usepackage{ifxetex}
+\ifxetex
+    % XeLaTeX
+	\usepackage{mathspec} %beinhaltet fontspec 
+    \usepackage{polyglossia} %babel-ersatz
+    \setmainlanguage[spelling=new,babelshorthands=false]{german}
+	\usepackage[german=quotes]{csquotes}
+	\newcommand\glqq{"}
+	\newcommand\grqq{"}
+	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.4}} %
+    \setmainfont[Ligatures=Common, BoldFont={Source Sans Pro Bold}, ItalicFont={Source Sans Pro Light Italic}]{Source Sans Pro}
+	\setsansfont[Ligatures=Common, BoldFont={Avenir Heavy}]{Avenir Medium}
+	\setallmonofonts[Scale=MatchLowercase, ItalicFont={Consolas}]{Consolas}
+	\usepackage{xltxtra}
+\else
+    % default: pdfLaTeX
+    \usepackage[ngerman]{babel}
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+	\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
+    \usepackage[babel=true, tracking=true]{microtype}
+	\usepackage{lmodern}
+	\renewcommand{\familydefault}{\sfdefault} 
+\fi
+
+
+%--Mixed
+\usepackage[neverdecrease]{paralist}
+\usepackage{makeidx}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage[margin=10pt, font=small, labelfont=sf, format=plain, indention=1em]{caption}
+\captionsetup[wrapfigure]{name=Abb. }
+\usepackage{stackrel}
+\usepackage{ifthen}
+\usepackage{multicol}
+\usepackage{fontawesome}
+\flushbottom
+
+%--Unterstreichung
+\usepackage[normalem]{ulem}
+\setlength{\ULdepth}{1.8pt}
+
+%--Indexverarbeitung
+\newcommand{\bet}[1]{\textbf{#1}}
+\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
+\makeindex
+\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetex \faHandUp\fi \par \bigskip}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+
+%--Marginnote
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\color{dark_gray} \itshape \footnotesize }
+
+%--Konfiguration von Hyperref pdfstartview=FitH, 
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
+
+\ifxetex
+\let\orighref\href
+\renewcommand{\href}[2]{\orighref{#1}{#2\,\faExternalLink}}
+\renewcommand{\url}[1]{\href{#1}{\nolinkurl{#1}}}
+\fi
+
+
+%--Römische Zahlen
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
+
+%--Punkte (nach hyperref)
+\usepackage{ellipsis}
+
+%%--Abkürzungen etc.
+\newcommand{\light}{{\Large $\lightning$}}
+
+%-- Definitionen von weiteren Mathe-Befehlen
+\DeclareMathOperator{\re}{Re} %Realteil
+\DeclareMathOperator{\im}{Im} %Imaginaerteil
+\DeclareMathOperator{\id}{id} %identische Abbildung
+\DeclareMathOperator{\Sp}{Sp} %Spur
+\DeclareMathOperator{\sgn}{sgn} %Signum
+\DeclareMathOperator{\alt}{Alt} %Alternierende n-linearFormen
+\DeclareMathOperator{\End}{End} %Endomorphismen
+\DeclareMathOperator{\Vol}{Vol} %Volumen
+\DeclareMathOperator{\dom}{dom} %Domain
+\DeclareMathOperator{\Hom}{Hom} %Homomorphismen
+\DeclareMathOperator{\bild}{Bild} %Bild
+\DeclareMathOperator{\Kern}{Kern }
+\DeclareMathOperator{\rg}{rg} %Rang
+\DeclareMathOperator{\diam}{diam} %Durchmesser
+\DeclareMathOperator{\dist}{dist} %Distanz
+\DeclareMathOperator{\grad}{grad} %Gradient
+\DeclareMathOperator{\dive}{div} %Gradient
+\DeclareMathOperator{\rot}{rot} %Rotation
+\DeclareMathOperator{\hess}{Hess} %Hesse-Matrix
+\DeclareMathOperator{\koker}{Koker} %Kokern
+\DeclareMathOperator{\aut}{Aut} %Automorphismen
+\DeclareMathOperator{\ord}{ord} %Ordnung
+\DeclareMathOperator{\ggT}{ggT} %ggT
+\DeclareMathOperator{\kgV}{kgV} %kgV
+\DeclareMathOperator{\Gr}{Gr} %Gerade
+\DeclareMathOperator{\Kr}{Kr} %Kreis
+\DeclareMathOperator{\Char}{char} %Charakteristik
+\DeclareMathOperator{\Aut}{Aut} %Automorphismen
+\DeclareMathOperator{\D}{D} %formale Ableitung
+\DeclareMathOperator{\cov}{cov} %Kovarianz
+\DeclareMathOperator{\Gal}{Gal} %Galois
+\DeclareMathOperator{\supp}{supp} %Träger
+\DeclareMathOperator{\Sym}{Sym} %Symmetrische Gruppe
+\DeclareMathOperator{\Zyl}{Zyl} %Zylinder
+\DeclareMathOperator{\Mod}{Mod} %Moduln
+\DeclareMathOperator{\EPK}{EPK} %Einpunktkompaktifizierung
+\DeclareMathOperator{\conj}{conj} %Konjugation
+
+\newcommand{\Ker}{\ensuremath{\Kern \,}}
+\newcommand{\zirkel}{\rotatebox[origin = c]{-90}{$\varangle$}}
+
+%--Beweisende
+\newcommand{\bewende}{\ifmmode \tag*{$\square$} \else \hfill $\square$ \fi}
+
+%--Volumen
+\newcommand{\vol}[1]{\ensuremath{\Vol_{#1}}}
+
+%--Skalarprodukt
+\DeclarePairedDelimiterX\sprod[2]{\langle}{\rangle}{#1\,\delimsize\vert\,#2}
+
+%--Betrag
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+%--Norm
+\DeclarePairedDelimiter\doppelstrich{\Vert}{\Vert}
+\newcommand{\norm}[2][\relax]{
+\ifx#1\relax \ensuremath{\doppelstrich*{#2}}
+\else \ensuremath{\doppelstrich*{#2}_{#1}}
+\fi}
+
+
+%--Umklammern
+\DeclarePairedDelimiter\enbrace{(}{)}
+\DeclarePairedDelimiter\benbrace{[}{]}
+
+%--Mengen
+\DeclarePairedDelimiterX\mengenA[1]{\lbrace}{\rbrace}{#1}
+\DeclarePairedDelimiterX\mengenB[2]{\lbrace}{\rbrace}{#1\, \delimsize\vert \, #2}
+
+\makeatletter
+\newcommand{\set}[2][\relax]{
+\ifx#1\relax \ensuremath{
+\mengenA*{#2}}
+\else \ensuremath{%
+  \mengenB*{#1}{#2}}
+\fi}
+\makeatother
+
+
+%--offen und abgeschlossen
+\newcommand{\off}{\! \stackrel[\text{offen}]{}{\subset} \!}
+\newcommand{\abg}{\! \stackrel[\text{abg.}]{}{\subset} \!}
+
+%--Differential
+\newcommand{\diff}[2]{\ensuremath{\frac{{\partial #1}}{{\partial #2}} }}
+\newcommand{\diffd}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2} }}
+
+%--Diagonale Linien für Matrizen
+\newcommand\tikzmark[1]{%
+  \tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};}
+
+\newcommand\MyLine[3][]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[#1] (#2.south) -- (#3.north);
+  \end{tikzpicture}}
+  
+%--Jordankasten
+\newcommand{\Jord}{ \begin{BMAT}{|ccc|}{|ccc|} %
+				0 & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  0 %
+			\end{BMAT}}
+			
+%--Jordankasten mit Lambda
+\newcommand{\JordLa}[1][\empty]{%
+	\ifthenelse{\equal{#1}{\empty}}
+		{\begin{BMAT}{|ccc|}{|ccc|} %
+				\lambda & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda  %
+			\end{BMAT}}
+		{\begin{BMAT}{|ccc|}{|ccc|} %
+				\lambda_{#1}  & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda_{#1}  %
+			\end{BMAT}}}
+
+%--Inhaltsverzeichnis
+\usepackage[tocindentauto]{tocstyle}
+\usetocstyle{KOMAlike}			
