@@ -1,0 +1,1784 @@
+\input{../master/mitschrift.tex}
+\newcommand{\fach}{Grundlagen der Analysis, Topologie, Geometrie}
+\newcommand{\shortFach}{Analysis, Topologie, Geometrie}
+
+\newcommand{\prof}{Prof.\,Dr.\,Arthur Bartels}
+\input{../master/mitschrift_headings.tex}
+
+\begin{document}
+\maketitle
+\pagenumbering{Roman}
+
+\tableofcontents
+\cleardoubleoddemptypage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Topologische Räume} % (fold)
+\label{sec:1}
+
+\subsection[Definition: Metrischer Raum]{Definition} % (fold)
+\label{sub:11}
+Ein \Index{metrischer Raum} $(X,d)$ ist eine Menge $X$ mit einer Abbildung $d: X \times X \to [0,\infty)$ mit folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item $\forall x,y \in X : d(x,y) = d(y,x) $
+	\item $\forall x,y \in X : d(x,y)=0 \iff x=y$
+	\item $\forall x,y,z \in X : d(x,z) \le d(x,y) + d(y,z)$ \hfill (Dreiecksungleichung)
+\end{enumerate}
+% subsection 11 (end)
+
+\subsection[Definition: Norm auf einem $\mathds{R}$-Vektorraum]{Definition} % (fold)
+\label{sub:12}
+Sei $V$ ein $\mathds{R}$-Vektorraum. Eine \Index{Norm} auf $V$ ist eine Abbildung $\norm{.} : V \to [0,\infty)$ mit folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item $\forall v \in V, \lambda  \in \mathds{R} : \norm{\lambda  \cdot v} = \abs{\lambda}  \cdot \norm{v}  $
+	\item $\forall v,w \in V : \norm{v+w} \le \norm{v} + \norm{w} $ \hfill (Dreiecksungleichung)
+	\item $\forall v \in V : \norm{v} = 0 \iff v=0$
+\end{enumerate} 
+Durch $d(v,w) := \norm{v-w} $ erhalten wir eine Metrik auf $V$.
+% subsection 12 (end)
+
+\subsection[Beispiel: Normen auf $\mathds{R}^n$]{Beispiel} % (fold)
+\label{sub:13}
+Auf $\mathds{R}^n$ gibt es verschiedene Normen und damit auch verschiedene Metriken: Für $x= \begin{psmallmatrix}
+	x_1 \\ \vdots \\ x_n
+\end{psmallmatrix} \in \mathds{R}^n$
+\begin{enumerate}[(i)]
+	\item $\norm[2]{x} = \sqrt{\sum_{i=1}^{n} x_i^2}  $
+	\item $\norm[1]{x}  = \sum_{i=1}^{n} \abs{x_i} $
+	\item $\norm[\infty]{x} = \max \set[\abs{x_i} ]{i=1, \ldots , n}  $
+\end{enumerate}
+% subsection 13 (end)
+
+\subsection[Beispiele für Metriken]{Beispiele} % (fold)
+\label{sub:14}
+\begin{enumerate}[(i)]
+	\item \[
+		S^1 := \set[z \in \mathds{C}]{\abs*{z} = 1 } 
+	\]
+	mit $d(z,z') := \min \set[\abs*{\theta} ]{\theta \in \mathds{R} : z = e^{i \theta} z'} $
+	\item Ist $X$ ein metrischer Raum und $A$ eine Teilmenge von $X$, so wird $A$ durch die Einschränkung der Metrik auf $A$ zu einem metrischen Raum. Wir sagen dann $A$ ist 
+	ein Unterraum von $X$.
+	\item Sei $X$ eine beliebige Menge. Durch
+	\[
+		d(x,y) := \begin{cases}
+			0, &\text{ falls } x=y\\
+			1, &\text{ falls } x \not= y
+		\end{cases}
+	\]
+	wir auf $X$ eine Metrik (die \Index{diskrete Metrik}) definiert.
+	\item Sei $p$ eine Primzahl. Jedes $x \not= 0 \in \mathds{Q}$ lässt sich eindeutig schreiben als $x = \frac{a}{b} p^n$ mit $n,a,b \in \mathds{Z}, b \not= 0$ und $a,b,p$
+	paarweise teilerfremd. Dann heißt
+	\[
+		\abs*{x}_p := p^{-n} 
+	\]
+	der \bet{$p$-adische Betrag}\index{p-adischer Betrag@$p$-adischer Betrag} von $x$, $(\abs*{0}_p := 0 )$. Durch $d_p(x,y) := \abs*{x-y}_p $ erhält man die $p$-adische
+	 Metrik auf $\mathds{Q}$. 
+\end{enumerate}
+% subsection 14 (end)
+
+\subsection[Definition: Isometrie und Stetigkeit]{Definition} % (fold)
+\label{sub:15}
+Seien $(X,d_X)$ und $(Y,d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to Y$ heißt eine \Index{Isometrie}, falls gilt:
+\[
+	\forall x,x' \in X : d_Y \enbrace[\big]{f(x), f(x')} = d_X (x,x')
+\]
+$f$ heißt \Index{stetig}, falls für alle $x_0 \in X$ gilt:
+\[
+	\forall \varepsilon >0 : \exists \delta >0 : d_X(x,x_0) < \delta  \Longrightarrow d_Y \enbrace[\big]{f(x), f(x_0)} < \varepsilon 
+\] 
+% subsection 15 (end)
+
+\subsection[Definition: offene Teilmenge]{Definition} % (fold)
+\label{sub:16}
+Eine Teilmenge $U$ eines metrischen Raums $X$ heißt \Index{offen}, falls gilt 
+\[
+	\forall x \in U \exists \delta  > 0 \text{ mit } B_\delta (x) = \set[y \in X]{d(x,y) < \delta } \subseteq U   
+\]
+% subsection 16 (end)
+
+\subsection[Lemma: Charakterisierung von Stetigkeit über offene Mengen]{Lemma} % (fold)
+\label{sub:17}
+Sei $f : X \to Y$  eine Abbildung zwischen metrischen Räumen. Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $f$ ist stetig
+	\item Urbilder (unter $f$) offener Mengen in $Y$ sind offen in $X$. ($\forall U \subseteq Y$ offen ist $f ^{-1}(U) \subseteq X$ offen)
+\end{enumerate}
+\minisec{Beweis}
+Analysis \RM{2}. \bewende
+% subsection 17 (end)
+
+\subsection[Definition: Topologischer Raum]{Definition} % (fold)
+\label{sub:18}
+Ein \Index{topologischer Raum} $(X, \mathcal{O})$ ist eine Menge $X$ zusammen mit einer Familie $\mathcal{O}$ von Teilmengen von $X$ so dass gilt:
+\begin{enumerate}[(i)]
+	\item $\emptyset, X \in \mathcal{O}$
+	\item $U,V \in \mathcal{O} \Longrightarrow U \cap V \in \mathcal{O}$
+	\item Ist $I$ eine Indexmenge und $U_i \in \mathcal{O}$ für $i \in I$, so gilt $\bigcup_{i \in I} U_i \in \mathcal{O}$.
+\end{enumerate} 
+$\mathcal{O}$ heißt dann eine \Index{Topologie} auf $X$. $U \subseteq X$ heißt \Index{offen}, falls $U \in \mathcal{O}$. $A \subseteq X$ heißt \Index{abgeschlossen},
+falls $X \setminus A$ offen ist.  
+% subsection 18 (end)
+
+\subsection[Beispiele für Topologien]{Beispiele} % (fold)
+\label{sub:19}
+\begin{enumerate}[(i)]
+	\item Jeder metrische Raum wird durch 
+	\(
+		\mathcal{O} := \set[U \subseteq X]{U \text{ ist offen}} 
+	\)
+	zu einem topologischen Raum.
+	\item Sei $X$ eine beliebige Menge.
+	\begin{enumerate}[(i)]
+		\item Die \bet{grobe Topologie}\index{Topologie!grobe} ist $\mathcal{O}_{\text{grob}} := \set{\emptyset, X} $
+		\item Die \bet{diskrete Topologie}\index{Topologie!diskrete} ist $\mathcal{O}_{\text{diskret}} := \mathcal{P}(X)$
+		\item Die \bet{koendliche Topologie}\index{Topologie!koendliche}  ist 
+		$\mathcal{O}_{\text{koendl.}} := \set[U \subseteq X]{X \setminus U \text{ endlich}} \cup \set{\emptyset}$
+	\end{enumerate}
+\end{enumerate}
+% subsection 19 (end)
+
+\subsection[Definition: Stetigkeit in topologischen Räumen]{Definition} % (fold)
+\label{sub:110}
+Eine Abbildung $f :X \to Y$ zwischen topologischen Räumen heißt \Index{stetig}, wenn Urbilder von offener Mengen offen sind.
+% subsection 110 (end)
+
+\subsection[Lemma: Kompositionen stetiger Abbildungen sind stetig]{Lemma} % (fold)
+\label{sub:111}
+Seien $f : X \to Y$, $g : Y \to Z$ stetige Abbildungen. Dann ist auch $g \circ f : X \to Z$ stetig.
+\minisec{Beweis}
+Sei $U \subseteq Z$ offen. Dann ist $g ^{-1}(U) \subseteq Y$ offen, da $g$ stetig ist. Da auch $f$ stetig ist, gilt 
+$\enbrace{g \circ f } ^{-1} (U) = f ^{-1} \enbrace[\big]{g ^{-1} (U)} \subseteq  X$ offen. \bewende
+% subsection 111 (end)
+
+\subsection[Definition: Homöomorphismus]{Definition} % (fold)
+\label{sub:112}
+Seien $X,Y$ topologische Räume. Eine bijektive stetige Abbildung $f : X \to Y$ heißt ein \Index{Homöomorphismus}, falls auch ihre Umkehrabbildung  $f ^{-1} : Y \to X$ 
+stetig ist.
+
+Gibt es einen solchen Homöomorphismus, so heißen $X$ und $Y$ \Index{homöomorph} und wir schreiben $X \cong Y$, andernfalls $X \not\cong Y$.
+% subsection 112 (end)
+
+\subsection[Beispiele für homöomorphe Mengen]{Beispiel} % (fold)
+\label{sub:113}
+\begin{enumerate}[(i)]
+	\item $(0,1) \cong (0,\infty) \cong (-\infty,0) \cong \mathds{R}$ \hfill (einfach)
+	\item $(0,1)\not\cong [0,1) \not\cong [0,1] \not\cong (0,1)$ \hfill (Übung)
+	\item $\mathds{R}^n \cong \mathds{R}^m \iff n=m$ \hfill (schwer)
+\end{enumerate}
+% subsection 113 (end)
+
+\subsection[Definition: Basis der Topologie]{Definition} % (fold)
+\label{sub:114}
+Sei $X$ ein topologischer Raum. Eine Familie  $\mathcal{U}$ von offenen Teilmengen von $X$ heißt eine \Index{Basis der Topologie}, falls für jede Teilmenge $W \subseteq X$
+äquivalent sind:
+\begin{enumerate}[(1)]
+	\item $W$ ist offen
+	\item $\forall x \in W  : \exists U \in \mathcal{U}$ mit $x \in U \subseteq  W \iff W = \bigcup_{\substack{u \in \mathcal{U}  \\ u \subseteq W}} u$ 
+\end{enumerate}
+Man sagt $X$ erfüllt das \bet{zweite Abzählbarkeitsaxiom}\index{zweites Abzählbarkeitsaxiom}, falls $X$ eine abzählbare Basis der Topologie besitzt.
+% subsection 114 (end)
+
+\subsection[Beispiel: Basis der Topologie in einem metrischen Raum]{Beispiel} % (fold)
+\label{sub:115}
+Sei $X$ ein metrischer Raum. Dann ist $\set[B_\delta (x)]{x \in X, \delta > 0} $ eine Basis der Topologie von $X$. Gibt es eine abzählbare dichte Teilmenge $X_0\subseteq X$,
+so ist $\set[B_{1/n}(x)]{x \in X_0, n \in \mathds{N}} $ eine abzählbare Basis der Topologie von $X$ und $X$ erfüllt das zweite Abzählbarkeitsaxiom.
+% subsection 115 (end)
+
+\subsection[Proposition: Bedingung, dass eine Familie von Teilmengen eine Topologie ist]{Proposition} % (fold)
+\label{sub:116}
+Sei $X$ eine Menge und $\mathcal{U} $ eine Familie von Teilmengen von $X$ mit $X = \bigcup_{U \in \mathcal{U} } U$. Dann ist $\mathcal{U} $ genau dann die Basis einer Topologie 
+$\mathcal{O}$ auf $X$, wenn $\mathcal{U} $ folgende Bedingungen erfüllt:
+\[
+	\forall U,V \in \mathcal{U} : \forall x \in U \cap V : \exists W \in \mathcal{U}  \text{ mit } x \in W \subseteq U \cap V \tag*{$(\star)$}
+\]
+\minisec{Beweis}
+Sei $\mathcal{U} $ die Basis der Topologie $\mathcal{O} $ und $U,V \in \mathcal{U} $. $\Rightarrow U,V$ offen, also ist auch $U \cap V$ offen. Da $\mathcal{U} $ eine Basis
+der Topologie ist, gibt es zu jedem $x \in U \cap V$ ein $W \in \mathcal{U} $ mit $x \in W \subseteq U \cap V$. Daher gilt $(\star)$  
+
+Sei umgekehrt $(\star)$ erfüllt. Definiere $\mathcal{O} $ durch
+\[
+	W \in \mathcal{O} :\Longleftrightarrow \forall x \in W : \exists U \in \mathcal{U} : x \in U \subseteq W.  
+\]
+Dann $\emptyset \in \mathcal{O} $. Wegen $X = \bigcup_{U \in \mathcal{U} } U$ gilt auch $X \in \mathcal{O} $. Weiter ist $\mathcal{O} $ unter Vereinigungen abgeschlossen.
+Seien $W_1, W_2 \in \mathcal{O} $. Sei $x \in W_1 \cap W_2$. Dann gilt
+\begin{align*}
+	x \in W_1, W_1 \text{ offen } &\Rightarrow  \exists U_1 \in \mathcal{U} : x \in U_1 \subseteq W_1 \\
+	x \in W_2, W_2 \text{ offen } &\Rightarrow \exists U_2 \in \mathcal{U} : x \in U_2 \subseteq W_2 
+\end{align*}
+Also $x \in U_1 \cap U_2$. Mit $(\star)$ folgt: $\exists W \in \mathcal{U} $ mit $x \in W \subseteq U_1 \cap U_2 \subseteq W_1 \cap W_2$. \bewende
+% subsection 116 (end)
+
+\subsection[Bemerkung: Eindeutigkeit von Proposition \ref{sub:116}]{Bemerkung} % (fold)
+\label{sub:117}
+Die Topologie $\mathcal{O}$ in der Proposition \ref{sub:116} wird eindeutig durch $\mathcal{U}$ bestimmt.
+% subsection 117 (end)
+
+\subsection[Beispiel: Topologie der punktweisen bzw. gleichmäßigen Konvergenz]{Beispiel} % (fold)
+\label{sub:118}
+\begin{itemize}
+	\item Sei $\mathds{R}^\mathds{N}$ der $\mathds{R}$-Vektorraum aller reellen Folgen. Für 
+	$\delta >0$, $n \in \mathds{N} $, $\alpha_1, \ldots , \alpha_n \in \mathds{R}$ sei
+	\[
+		U_{n, \delta , \alpha_1, \ldots , \alpha_n} := \set[(x_i)_{i \in \mathds{N}}]{\abs*{x_i - \alpha_i} < \delta \text{ für } i=1, \ldots ,n } 
+	\]
+	Dann erfüllt $\mathcal{U} := { U_{n, \delta , \alpha_1, \ldots , \alpha_n}}$ die Bedingung $(\star)$ und ist die Basis der \Index{Topologie der punktweisen Konvergenz}.
+	\item Sei $\mathcal{C}(\mathds{R},\mathds{R}) $ der $\mathds{R}$-Vektorraum aller stetigen Abbildungen. Zu $[a,b] \subset \mathds{R}$, $\delta >0$, 
+	$g : [a,b] \to \mathds{R}$ stetig sei
+	\[
+		U_{a,b, \delta , g} := \set[f : \mathds{R} \to \mathds{R} \text{ stetig}]{\forall t \in [a,b] : \abs[\big]{f(t)- g(t)}< \delta}. 
+	\]
+	Dann erfüllt $\mathcal{U} := \set{U_{a,b,\delta ,g}}  $ $(\star)$ und ist die Basis der \Index{Topologie der gleichmäßigen Konvergenz} auf kompakten Intervallen.
+\end{itemize}
+% subsection 118 (end)
+
+\subsection[Definition: Inneres, Abschluss und Rand]{Definition} % (fold)
+\label{sub:119}
+Sei $Y$ eine Teilmenge eines topologischen Raums $X$.
+\begin{align*}
+	\mathring Y &:= \set[y \in Y]{ \exists U \subseteq X \text{ offen mit } y \in U \subseteq Y} \text{ heißt das \Index{Innere} von $Y$} \\ 
+	\overline{Y} &:= \set[x \in X]{\forall U \subseteq X \text{ offen mit } x \in U : U \cap Y \not= \emptyset}    \text{ heißt \Index{Abschluss von $Y$} } \\
+	\partial Y &:= \overline{Y} \setminus \mathring Y \text{ heißt der \Index{Rand} von $Y$. } 
+\end{align*}
+% subsection 119 (end)
+
+\subsection[Bemerkung: Gleichungen für Inneres, Abschluss und Rand]{Bemerkung} % (fold)
+\label{sub:120}
+\begin{enumerate}[1)]
+	\item $\mathring Y = X \setminus (\overline{X \setminus Y} )$, $\overline{Y} = X \setminus (X \setminus Y)^\circ  $
+	\item $\mathring Y = \bigcup_{\substack{U \subseteq Y \\ U \text{ offen}}} U$ ist offen
+	\item $\overline{Y} = \bigcap_{\substack{A \supseteq Y \\ A \text{ abgeschlossen}}} A$ ist abgeschlossen
+	\item $\partial Y = \overline{Y} \setminus \mathring Y $ ist abgeschlossen.
+\end{enumerate}
+% subsection 129 (end)
+
+\subsection[Definition: Umgebung]{Definition} % (fold)
+\label{sub:121}
+Sei $X$ ein topologischer Raum, $x \in X$. $V \subseteq X$ heißt eine \Index{Umgebung} von $x$, falls es $U \subseteq X$ offen gibt mit $x \in U \subseteq V$. Ist $V$
+offen, so heißt $V$ eine \Index{offene Umgebung} von $x$. 
+% subsection 121 (end)
+
+\subsection[Definition: Hausdorffraum]{Definition} % (fold)
+\label{sub:122}
+Ein topologischer Raum $X$ heißt \Index{hausdorffsch} (oder eine \Index{Hausdorffraum}), falls es zu jedem Paar $x,y \in X, x \not= y$ offene Umgebungen $U$ von $x$ und
+$V$ von $y$ gibt mit $U \cap V = \emptyset$.
+
+Bsp: \begin{itemize}
+	\item Metrische Räume sind hausdorffsch.
+	\item Ist $\abs*{X} \ge 2 $ so ist $(X, \mathcal{O}_{\text{grob}} )$ nicht hausdorffsch.
+\end{itemize}
+% subsection 122 (end)
+
+\subsection[Definition: topologische Mannigfaltigkeit]{Definition} % (fold)
+\label{sub:123}
+Ein Hausdorffraum $M$, der das zweite Abzählbarkeitsaxiom erfüllt, heißt eine \Index{topologische Mannigfaltigkeit} der Dimension $n$ (oder eine $n$-Mannigfaltigkeit), 
+falls er lokal homöomorph zum $\mathds{R}^n$ ist; d.h. $\forall x \in M \exists$ offene Umgebung $U$ von $x$ mit $U \cong \mathds{R}^n$.
+% subsection 123 (end)
+% section 1 (end)
+\newpage
+
+\section{Konstruktion topologischer Räume} % (fold)
+\label{sec:2}
+
+\subsection[Definition: Spurtopologie]{Definition} % (fold)
+\label{sub:21}
+Sei $X$ ein topologischer Raum und $A \subseteq X$ eine Teilmenge. Die \Index{Spurtopologie} auf $A$ besteht aus allen Teilmengen von $A$ der Form $A \cap U$ mit 
+$U \subseteq X$ offen. Mit dieser Topologie heißt $A$ ein Unterraum von $X$.
+
+\bet{Achtung:} $U \subseteq A$ offen $\not\Rightarrow 	U \subseteq X$ offen!
+% subsection 21 (end)
+
+\subsection[Bemerkung: Stetigkeit durch Verknüpfung mit Inklusion]{Bemerkung} % (fold)
+\label{sub:22}
+Sei $i : A \to X$ die Inklusion.
+\begin{enumerate}[(i)]
+	\item $i$ ist stetig.
+	\item Ist $Y$ ein weiterer topologischer Raum und $f : Y \to A$ eine Abbildung. Dann gilt:
+	\[
+		f \text{ stetig } \iff i \circ  f : Y \to X \text{ ist stetig}
+	\]
+\end{enumerate}
+% subsection 22 (end)
+
+\subsection[Definition: Produkttopologie]{Definition} % (fold)
+\label{sub:23}
+Seien $X,Y$ topologische Räume. Eine Basis für die \Index{Produkttopologie} auf $X \times Y$ ist 
+\[
+	\mathcal{U} := \set[U \times V]{U \subseteq X \text{ offen }, V \subseteq Y \text{ offen}}. 
+\]
+% subsection 23 (end)
+
+\subsection[Definition: Produkttopologie mit unendlichen vielen Faktoren]{Definition} % (fold)
+\label{sub:24}
+Seien $X_i$ für $i \in I$ topologische Räume. Die Produkttopologie auf ihrem Produkt 
+\[
+	\prod_{i \in I} X_i = \set[(x_i)_{i \in I}]{x_i \in X_i} 
+\]
+hat als Basis alle Mengen der Form $\prod_{i \in I} U_i$ mit
+\begin{enumerate}[1)]
+	\item $U_i \subseteq X_i$ ist offen
+	\item Für fast alle $i$ ist $U_i = X_i$.
+\end{enumerate}
+% subsection 24 (end)
+
+\subsection[Bemerkung zur Stetigkeit der Projektionen und Stetigkeit im Produktraum]{Bemerkung} % (fold)
+\label{sub:25}
+Seien $p_j : \prod_{i \in I} X_i \to X_j$ die Projektionen.
+\begin{enumerate}[(i)]
+	\item Die $p_j$ sind stetig.
+	\item Ist $Y$ ein weiterer topologischer Raum und $f : Y \to \prod_{i \in I} X_i$ eine Abbildung, so gilt: \\
+	$f$ ist stetig $\iff \forall j $ ist $f_j := p_j \circ f$ stetig.
+\end{enumerate}
+% subsection 25 (end)
+
+\subsection[Bemerkung zur üblichen Topologie auf $\mathds{R}^n$]{Bemerkung} % (fold)
+\label{sub:26}
+Die übliche Topologie auf $\mathds{R}^n = \prod_{i =1}^n \mathds{R}$ stimmt mit der Produkttopologie überein.
+% subsection 26 (end)
+\newpage
+
+\subsection[Beispiel: Torus]{Beispiel} % (fold)
+\label{sub:27}
+\begin{figure}[h]
+	\centering{\begin{tikzpicture}[xscale=0.9, yscale=0.6]
+	    \begin{axis}[hide axis, view={40}{50}]
+	       \addplot3[surf,
+	       colormap/cool,
+	       samples=10,
+	       domain=0:2*pi,y domain=0:2*pi,
+	       z buffer=sort]
+	       ({(2+cos(deg(x)))*cos(deg(y+pi/2))}, 
+	        {(2+cos(deg(x)))*sin(deg(y+pi/2))}, 
+	        {sin(deg(x))});
+	    \end{axis}
+	\end{tikzpicture}
+	\caption{Der Torus $T^2$, \href{http://tex.stackexchange.com/questions/348/how-to-draw-a-torus}{Quelle}}}
+\end{figure}
+$T^n := \underbrace{S^1 \times \ldots \times S^1}_{n} = \prod_{i=1}^n S1$ heißt der $n$-Torus. Der $n$-Torus ist eine $n$-Mannigfaltigkeit.
+
+
+% subsection 27 (end)
+
+\subsection[Definition: Homotopie und homotop]{Definition} % (fold)
+\label{sub:28}
+Seien $X$ und $Y$ topologische Räume und $(f_t)_{t \in [0,1]}$ eine Familie von stetigen Abbildungen $f_t : X \to Y$. Wir sagen, dass die $f_t$ stetig von $t$ abhängen,
+falls 
+\[
+	H : X \times [0,1] \to Y \text{ mit } H(x,t) = f_t(x)
+\]
+stetig bezüglich der Produkttopologie ist. In diesem Fall heißen $f_0$ und $f_1$ \Index{homotop} und $H$ eine \Index{Homotopie} zwischen $f_0$ und $f_1$. 
+\minisec{Beispiel}
+Je zwei Abbildungen $f,g : X \to \mathds{R}^n$ sind homotop; eine Homotopie wird gegeben durch $H(x,t) := (1-t)\cdot f(x) + t \cdot g(x)$. Wir werden später sehen, dass 
+$\id : S^1 \to S^1$ nicht homotop zu einer konstanten Abbildung ist.
+% subsection 28 (end)
+
+\subsection[Definition: Quotiententopologie]{Definition} % (fold)
+\label{sub:29}
+Sei $X$ ein topologischer Raum, $M$ eine Menge und $q : X \to M$ eine surjektive Abbildung. Die offenen Mengen der \Index{Quotiententopologie} auf $M$ (bezüglich $q$) sind 
+alle $U \subseteq M$ für die $q ^{-1} (U ) \subseteq X$ offen ist.
+\minisec{Bemerkung}
+\begin{enumerate}[(i)]
+	\item $q : X \to M$ ist stetig.
+	\item Ist $Y$ ein weiterer topologischer Raum und $f : M \to Y$ eine Abbildung, so gilt 
+	\[
+		f \text{ ist stetig } \iff f \circ q \text{ ist stetig}
+	\]
+\end{enumerate}
+% \faicon{external-link}
+\minisec{Bemerkung}
+Sei $\sim$ eine Äquivalenzrelation auf dem topologischen Raum $X$. Dann ist die Äquivalenzklassenabbildung $q : X \to \nicefrac{X}{\sim}$, $x \mapsto [x]_\sim$ surjektiv.
+Insbesondere wird $\nicefrac{X}{\sim}$ durch die Quotiententopologie zu einem topologischen Raum.
+
+\subsection[Beispiele zur Quotiententopologie]{Beispiele}
+\label{sub:210}
+$X = [0,1] \times [0,1]$: Definiere 
+\begin{enumerate}[(i)]
+	\item $(s,t) \sim (s', t') :\Leftrightarrow (s=s' \text{ und } t=t')$ oder $(s=0, s'=1, t=t')$. Dann \marginnote{"Zusammenkleben"{} der Seiten}
+	\[
+		\nicefrac{X}{\sim} \cong \enspace
+		\vcenter{\hbox{\begin{tikzpicture}[yscale=0.2,xscale=0.3]
+		%\fill[top color=gray!50!black,bottom color=gray!10,middle color=gray,shading=axis,opacity=0.25] (0,0) circle (2cm and 0.5cm);
+		%\fill[left color=gray!50!black,right color=gray!50!black,middle color=gray!50,shading=axis,opacity=0.25] (2,0) -- (2,6) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
+		%\fill[top color=gray!90!,bottom color=gray!2,middle color=gray!30,shading=axis,opacity=0.25] (0,6) circle (2cm and 0.5cm);
+		\draw (-2,6) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,6) ++ (-2,0) circle (2cm and 0.5cm);
+		\draw[densely dashed] (-2,0) arc (180:0:2cm and 0.5cm);
+		\end{tikzpicture}}} \enspace
+		 \cong \enspace \vcenter{\hbox{\begin{tikzpicture}[scale=0.7]
+		 	\draw (0,0) circle[radius=1];
+			\draw (0,0) circle[radius=1.3];
+			\draw (0,1) -- (0,1.3);
+		 \end{tikzpicture}}}
+	\]
+	\item $(s,t) \sim (s',t') :\Leftrightarrow (s=s' \text{ und }t=t')$ oder $(s=0, s'=1 \text{ und } t=1-t')$. Dann\marginnote{Möbiusband: Verdrehen und dann
+	 Zusammenkleben} \\
+	\begin{minipage}{\textwidth}
+		\captionsetup{type=figure, skip=0pt}
+		\centering{
+		\[
+			\nicefrac{X}{\sim} \enspace\cong  \enspace
+			\vcenter{\hbox{\begin{tikzpicture}[yscale=0.5, xscale=0.9]
+			\begin{axis}[
+			    hide axis,
+			    view={40}{40}
+			]
+			\addplot3 [
+			    surf, shader=faceted interp,
+			    point meta=x,
+			    colormap/greenyellow,
+			    samples=40,
+			    samples y=5,
+			    z buffer=sort,
+			    domain=0:360,
+			    y domain=-0.5:0.5
+			] (
+			    {(1+0.5*y*cos(x/2)))*cos(x)},
+			    {(1+0.5*y*cos(x/2)))*sin(x)},
+			    {0.5*y*sin(x/2)});
+
+			\addplot3 [
+			    samples=50,
+			    domain=-145:180, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+			    samples y=0,
+			    thick
+			] (
+			    {cos(x)},
+			    {sin(x)},
+			    {0});
+			\end{axis}
+			\end{tikzpicture}}}
+		\]
+		\caption{Möbius-Band, \href{http://tex.stackexchange.com/questions/118563/moebius-strip-using-tikz}{Quelle}}
+		}
+	\end{minipage}
+	\item Sei $\mathds{R}P^n$ die Menge aller $1$-dimensionalen Unterräume des $\mathds{R}^{n+1}$. Wir erhalten eine surjektive Abbildung 
+	\[
+		q : \mathds{R}^{n+1}\setminus \set{0} \to \mathds{R}P^n \enspace,  \quad  q(v) := \langle v\rangle>
+	\]
+	$\mathds{R}P^n$ mit der Quotiententopologie bezüglich $q$ heißt der \Index{reell projektive Raum} der Dimension $n$. Er ist eine $n$-Mannigfaltigkeit. 
+	\item Betrachte auf $\mathds{R}$ die Relation $x \sim y :\Leftrightarrow x-y \in \mathds{Q}$. Der Raum der Äquivalenzklassen bezeichnen wir mit 
+	$\nicefrac{\mathds{R}}{\mathds{Q}}$. Dann ist $\nicefrac{\mathds{R}}{\mathds{Q}}$ mit der Quotiententopologie nicht hausdorffsch, obwohl $\mathds{R}$ natürlich
+	hausdorffsch ist.\\
+	(Übung: Die Quotiententopologie auf $\nicefrac{\mathds{R}}{\mathds{Q}}$ ist die grobe Topologie.)
+	\item Sei $f : X \to X$ eine stetige Abbildung. Betrachte auf $X \times [0,1]$ die Äquivalenzrelation 
+	\[
+		(x,t) \sim (x',t') : \Leftrightarrow (x=x' \text{ und } t=t') \text{ oder } (t=0, t'=1 \text{ und } x'= f(x))
+	\] 
+	Der Quotient $T_f := \nicefrac{X \times [0,1]}{\sim}$ heißt der \Index{Abbildungstorus} von $f$. 
+\end{enumerate}
+% subsection 29 (end)
+% section 2 (end)
+\newpage
+\section{Konvergenz} % (fold)
+\label{sec:3}
+\subsection[Definition: Konvergenz in topologischen Räumen]{Definition} % (fold)
+\label{sub:31}
+Sei $X$ ein topologischer Raum und $(x_n)_{n \in \mathds{N}}$ eine Folge in $X$. Dann sagen wir $(x_n)_{n \in \mathds{N} }$ konvergiert gegen $x \in X$, falls gilt:
+Zu jeder offenen Umgebung $V$ von $x$, gibt es $N \in \mathds{N}$, sodass $x_n \in V$ für alle $n \ge N$. Wir schreiben dann $x_n \to x$ oder $x_n \xrightarrow{n \to \infty} x$. $x$ heißt ein Grenzwert von $(x_n)_{n \in \mathds{N}}$.
+
+\minisec{Bemerkung}
+Bezüglich der groben Topologie ist jeder Punkt Grenzwert jeder Folge.
+\minisec{Beispiel}
+Betrachte die Topologie der gleichmäßigen Konvergenz auf kompakten Teilmengen auf dem Raum $\mathcal{C}(\mathds{R},\mathds{R})$. Dann gilt für Folgen 
+$(f_n)_{n \in \mathds{N} }$ von stetigen Abbildungen $f_n \in \mathcal{C}(\mathds{R},\mathds{R}) $
+\[
+	f_n \to f \iff \forall a < b \text{ konvergiert } f_n|_{[a,b]} \to f_{[a,b]} \text{ gleichmäßig.}
+\]
+% subsection 31 (end)
+
+\subsection{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
+\label{sub:32}
+Sei $X$ hausdorffsch. Gilt $x_n \to x$ und $x_n \to y$, so folgt $x=y$.
+\minisec{Beweis}
+Übung!
+% subsection 32 (end)
+
+\subsection[Definition: Gerichtete Menge]{Definition} % (fold)
+\label{sub:33}
+Eine nichtleere Menge $\Lambda $ mit einer Relation "$\le$"{} heißt \bet{gerichtet}\index{gerichtete Menge}, falls gilt 
+\begin{enumerate}[(i)]
+	\item $\forall \lambda  \in \Lambda : \lambda  \le \lambda $
+	\item $\forall \lambda_1, \lambda_2, \lambda_3 \in \Lambda  : \lambda_1 \le \lambda_2 \wedge \lambda_2 \le \lambda_3 \Rightarrow \lambda_1 \le \lambda_3$
+	\hfill (transitiv)
+	\item $\forall \lambda_1, \lambda_2 \in \Lambda : \exists \mu : \lambda_1 \le \mu \wedge \lambda_2 \le \mu$
+\end{enumerate} 
+% subsection 33 (end)
+
+\subsection[Definition: Netz und Konvergenz bezüglich eines Netzes]{Definition} % (fold)
+\label{sub:34}
+Sei $X$ ein topologischer Raum. Ein \Index{Netz} $(x_\lambda)_{\lambda \in \Lambda }$ in $X$ besteht aus einer gerichteten Menge $\Lambda $ und Elementen 
+$x_\lambda \in X$ für $\lambda \in \Lambda $. Für $x \in X$ sagen wir $(x_\lambda )_{\lambda \in \Lambda }$ konvergiert gegen $x$, falls gilt:
+\[
+	\forall \text{ Umgebungen } U \text{ von } x : \exists \lambda_0 \in \Lambda : \forall \lambda \in \Lambda \text{ mit } 
+	\lambda \ge \lambda_0 \text{ gilt } x_\lambda \in U
+\]
+Wir schreiben dann $x_\lambda \xrightarrow{\lambda  \to \infty} x$ oder $x_\lambda \to x$.
+\minisec{Beispiel}
+Sei $X$ ein topologischer Raum und $x \in X$. Dann ist $\Lambda := \set[U]{U \text{ ist offene Umgebung von }x} $ gerichtet bezüglich
+\[
+	U \le V :\Leftrightarrow V \subseteq U
+\]
+Ist nun $x_U \in U$ für alle $U \in \Lambda $ so $x_U \to x$.
+% subsection 34 (end)
+
+\subsection{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
+\label{sub:35}
+Sei $X$ hausdorffsch. Gilt $x_\lambda  \to x$ und $x_\lambda \to y$, so folgt $x=y$.
+\minisec{Beweis}
+Angenommen $x \not= y$. Da $X$ hausdorffsch ist existiert eine Umgebung $U$ von $x$ und $V$ von $y$ mit $U \cap V = \emptyset$. 
+\begin{gather}
+	x_\lambda \to x \Rightarrow \exists \lambda_U : x_\lambda  \in U : \forall \lambda \ge \lambda_U \\
+	x_\lambda \to y \Rightarrow \exists \lambda_V : x_\lambda  \in V : \forall \lambda \ge \lambda_V 
+\end{gather}
+Sei nun $\mu \in \Lambda$ mit $\mu \ge \lambda_U$, $\mu \ge \lambda_V$. Dann folgt $x_\mu \in U\cap V = \emptyset$ \light \bewende
+% subsection 35 (end)
+
+\subsection[Definition: Teilnetz]{Definition} % (fold)
+\label{sub:36}
+Sei $(x_\lambda)_{\lambda  \in \Lambda}$ ein Netz in $X$. Ein \Index{Teilnetz} von $(x_\lambda )_{\lambda  \in \Lambda}$ ist eine gerichtete Menge $\Lambda'$ mit einer
+Abbildung $f : \Lambda' \to \Lambda$, so dass gilt
+\begin{enumerate}[i)]
+	\item $\lambda'_1 \le \lambda'_2 \Rightarrow f(\lambda'_1) \le f(\lambda'_2)$ \hfill ($f$ erhält $\le$)
+	\item $\forall \lambda \in \Lambda : \exists \lambda' \in \Lambda'$ mit $\lambda  \le f(\lambda' )$ \hfill ($f$ ist kofinal)
+\end{enumerate}
+Oft schreiben wir $\enbrace*{x_{f(\lambda')}}_{\lambda' \in \Lambda'}$ für ein Teilnetz.
+\minisec{Bemerkung}
+Ein Teilnetz einer Folge ist \emph{nicht} notwendig eine Teilfolge.
+% subsection 36 (end)
+% section 3 (end)
+\newpage
+
+\section{Kompakte Räume} % (fold)
+\label{sec:4}
+
+\subsection[Definition: Offene Überdeckung und Teilüberdeckung]{Definition} % (fold)
+\label{sub:41}
+Eine Familie $\mathcal{U}$ von offenen Teilmengen von $X$ heißt eine \Index{offene Überdeckung}, falls 
+\[
+	\bigcup_{U \in \,\mathcal{U}} U = X.
+\] 
+$\mathcal{V} \subseteq \mathcal{U} $ heißt eine \Index{Teilüberdeckung}, falls immer noch $X \subseteq \bigcup_{V \in \mathcal{V} } V$.
+% subsection 41 (end)
+
+\subsection[Definition: Kompaktheit]{Definition} % (fold)
+\label{sub:42}
+Ein topologischer Hausdorffraum $X$ heißt \Index{kompakt}, wenn jede offene Überdeckung von $X$ eine endliche Teilüberdeckung besitzt.
+% subsection 42 (end)
+
+\subsection[Definition: Endliche Durchschnittseigenschaft]{Definition} % (fold)
+\label{sub:43}
+Eine Familie $\mathcal{A}$ von abgeschlossenen Teilmengen von $X$ hat die \Index{endliche Durchschnittseigenschaft}, wenn für jedes $\mathcal{A}_0 \subseteq \mathcal{A}$ mit
+$\abs*{\mathcal{A}_0 } < \infty$ gilt 
+\[
+	\bigcap_{A \in \mathcal{A}_0 } A \not= \emptyset.
+\]
+% subsection 43 (end)
+
+\subsection[Lemma: Äquivalenz zur Kompaktheit eines Hausdorffraumes]{Lemma} % (fold)
+\label{sub:44}
+Sei $X$ ein Hausdorffraum. Dann ist $X$ genau dann kompakt, wenn gilt: Hat eine Familie $\mathcal{A}$ von abgeschlossenen Teilmengen von $X$ die endliche 
+Durchschnittseigenschaft, so gilt 
+\[
+	\bigcap_{A \in \mathcal{A}} A \not= \emptyset
+\]
+\minisec{Beweis}
+Ist $\mathcal{U}$ eine Familie von offenen Teilmengen, so ist $\mathcal{A} := \set[X \setminus U]{U \in \mathcal{U}}$ eine Familie von abgeschlossenen Teilmengen. Ist
+umgekehrt $\mathcal{A}$ eine Familie von abgeschlossenen Teilmengen, so ist 
+\[
+	\mathcal{U} := \set[X \setminus A]{A \in \mathcal{A} } 
+\]
+eine Familie von offenen Teilmengen.
+Dann gilt: 
+\begin{itemize}
+	\item $\mathcal{U}$ hat eine endliche Teilüberdeckung $\iff \mathcal{A}$ hat nicht die endliche Durchschnittseigenschaft.
+	\item $\mathcal{U}$ ist eine Überdeckung $\iff \bigcap_{A \in \mathcal{A} }A = \emptyset$. \bewende
+\end{itemize}
+% subsection 44 (end)
+
+\subsection[Satz: Charakterisierung von Kompaktheit durch konvergente Teilnetze]{Satz} % (fold)
+\label{sub:45}
+Sei $X$ ein Hausdorffraum. Dann sind äquivalent:
+	\begin{enumerate}[1)]
+		\item $X$ ist kompakt.
+		\item Jedes Netz in $X$ besitzt ein konvergentes Teilnetz.
+	\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item["1) $\Rightarrow $ 2)":] Sei $(x_\lambda )_{\lambda  \in \Lambda}$ ein Netz in $X$. Für $\lambda  \in \Lambda$ sei 
+	$A_\lambda := \overline{\set[x_{\lambda'}]{\lambda '  \ge \lambda } }$. \\
+	Behauptung($\star$): $\mathcal{A} := \set[A_\lambda ]{\lambda  \in \Lambda}  $ hat die endliche Durchschnittseigenschaft. Sei 
+	$\mathcal{A}_0 \subseteq \mathcal{A}$ endlich, also
+	$\mathcal{A}_0 = \set[A_\lambda ]{\lambda \in \Lambda_0}  $ für ein $\Lambda_0 \subseteq \Lambda$ endlich. Da $\Lambda$ gerichtet ist, gibt es $\lambda \in \Lambda$ mit
+	$\lambda \ge \mu$ für alle $\mu \in \Lambda_0$. Es folgt $x_\lambda \in \set[x_{\lambda'}]{\lambda ' \ge \mu} $ für alle $\mu \in \Lambda_0$. Insbesondere folgt aus 
+	\[
+		x_\lambda \in \bigcap_{\mu \in \Lambda_0} A_\mu
+	\]
+	Da $X$ kompakt ist, folgt aus $(\star)$
+	\[
+		\bigcap_{\lambda  \in \Lambda} A_\lambda \not= \emptyset.
+	\]
+	Wähle $x \in \bigcap_{\lambda  \in \Lambda} A_\lambda$. Sei $\mathcal{U} $ die Menge aller offenen Umgebungen von $x$. Sei 
+	\[
+		\Lambda_\mathcal{U} := \set[(\lambda , U)]{\lambda \in \Lambda, x_\lambda \in U \in \mathcal{U}}
+	\]
+	Durch $(\lambda , U) \le (\lambda', U') :\Leftrightarrow \lambda \le \lambda'$ und $U \supseteq U'$ wird $\Lambda_\mathcal{U}$ zu einer gerichteten Menge: 
+	Sei $(\lambda_1, U_1)$ und $(\lambda _2, U_2) \in \Lambda_\mathcal{U}$. Sei $U := U_1 \cap U_2$. Wähle $\lambda \in \Lambda$ mit $\lambda \ge \lambda_1$ und 
+	$\lambda  \ge \lambda_2$. Da $x \in A_\lambda = \overline{\set[x_{\lambda'}]{\lambda' \ge \lambda}} $ gibt es $\lambda' \ge \lambda $ mit $x_{\lambda'} \in U$.
+	Also $(\lambda', U) \in \Lambda_\mathcal{U} $ und $(\lambda_1, U_1)$, $(\lambda_2, U_2) \le (\lambda', U)$. Mit $x_{(\lambda , U)} = x_\lambda $ ist 
+	$(x_{\lambda , U})_{(\lambda ,U) \in \Lambda_\mathcal{U} }$ das gesuchte Teilnetz.
+	\item["2) $\Rightarrow $ 1)":] Sei $\mathcal{A}$ eine Familie von abgeschlossenen Teilmengen mit der endlichen Durchschnittseigenschaft. Sei 
+	$\Lambda := \set[\mathcal{A}_0 \subseteq \mathcal{A}  ]{\mathcal{A}_0 \text{ ist endlich} } $. $\Lambda$ ist gerichtet bezüglich 
+	$\mathcal{A}_0 \le \mathcal{A}_1  :\Leftrightarrow \mathcal{A}_0 \subseteq \mathcal{A}_1 $. Zu $\mathcal{A}_0 \in \Lambda $ wähle 
+	\[
+		x_{\mathcal{A}_0 } \in \bigcap_{A \in \mathcal{A}_0 } A \not= \emptyset
+	\]
+	Sei nun $(x_{f(\lambda )})_{\lambda  \in \Lambda'}$ mit $f : \Lambda' \to \Lambda$ ein konvergentes Teilnetz von $(x_{\mathcal{A}_0 })_{\mathcal{A}_0 \in \Lambda}$.
+	Sei $x$ der Grenzwert von $(x_{f(\lambda')})_{\lambda'  \in \Lambda'}$. 
+	
+	Behauptung: $x \in \bigcap_{A \in \mathcal{A}_0 } A$. \\
+	Sei $A \in \mathcal{A}_0 $ und $U = X \setminus A$. Angenommen $x \in U$. Da $U$ eine offene Umgebung von $x$ ist und $x_{f(\lambda')} \to x$ gilt, gibt es 
+	$\lambda_0' \in \Lambda$ mit $x_{f(\lambda')} \in U$ für alle $\lambda' \ge \lambda_0'$. Zu $\set{A} \in \Lambda$ gibt es $\mu \in \Lambda'$ mit $f(\mu) \ge \set{A}$. Da
+	$\Lambda '$ gerichtet ist, gibt es $\mu' \ge \mu$ und $\mu' \ge \lambda_0'$. Es folgt $A \in f(\mu')$ und damit $x_{f(\mu')} \in A$, aber andererseits 
+	$x_{f(\mu')} \in U  = X \setminus A$, da $\mu' \ge \lambda_0'$ \light \bewende
+	
+\end{description}
+% subsection 45 (end)
+
+\subsection[Bemerkung zu Kompaktheit in metrischen Räumen]{Bemerkung} % (fold)
+\label{sub:46}
+Sei $X$ ein metrischer Raum. Dann sind äquivalent:
+	\begin{enumerate}[1)]
+		\item $X$ ist kompakt.
+		\item Jede Folge in $X$ besitzt eine konvergente Teilfolge.
+	\end{enumerate}
+% subsection 46 (end)
+
+\subsection{Satz von Tychonov} % (fold)
+\label{sub:47}
+Sei $(X_i)_{i \in I}$ eine Familie von kompakten topologischen Räumen. Dann ist auch $X : = \prod_{i \in I} X_i$ kompakt.
+\minisec{Beweis}
+(unter Benutzung der nachfolgenden Punkte)\\
+Ist $(x_\lambda )_{\lambda  \in \Lambda}$ ein Netz in $\prod_i X_i$, so besitzt dieses Netz ein universelles Teilnetz $(x_{f(\mu)})_{\mu \in \Lambda'}$.
+Für jedes $i$ ist dann $p_i(x_{f(\mu)})_{\mu \in \Lambda'}$ ein universelles Netz in $X_i$ und nach dem Lemma \ref{sub:411} konvergent.
+Daher ist $(x_{f(\mu)})_{\mu \in \Lambda'}$ bezüglich der Produkttopologie konvergent
+% subsection 47 (end)
+
+
+\subsection[Beispiel: Metrik auf dem Produkt metrischer Räume, die Produkttopologie induziert]{Beispiel} % (fold)
+\label{sub:48}
+Seien $(X_i, d_i)_{i \in \mathds{N}}$ kompakte metrische Räume. Dann gibt es eine Metrik $d$ auf $\prod X_i$, so dass die zugehörige Topologie die Produkttopologie ist.
+(Übung)
+\minisec{Beweis}
+Sei $p_j : \prod_i X_i \to X_j$ die Projektion auf den $j$-ten Faktor. Sei $(x_n)_{n \in \mathds{N}}$ eine Folge in $\prod_i X_i$. Wähle induktiv 
+$\mathds{N}= N_0 \supseteq N_1 \supseteq N_2 \supseteq \ldots $ mit 
+\begin{enumerate}[(i)]
+	\item $\abs*{N_i} = \infty $
+	\item $\enbrace*{p_i(x_n)}_{n \in N_i} $ ist eine konvergente Folge in $X_i$.
+\end{enumerate}
+(Dies ist möglich, da $X_i$ kompakt ist.) Wähle nun $n_k \in N_k$ induktiv, so dass $n_k > n_{k-1}$. Dann ist $\enbrace*{x_{n_k}}_{k \in \mathds{N}} $ eine Teilfolge von
+$(x_n)_{n \in \mathds{N}}$. Für $i \in \mathds{N}$ ist $\enbrace*{p_i\enbrace[\big]{x_{n_k}}}_{k \in \mathds{N}, k \ge i}$ eine Teilfolge der konvergenten Folge 
+$(p_i(x_n))_{n \in N_i}$ und daher konvergent. Damit konvergiert auch $\enbrace*{p_i \enbrace*{x_{n_k}} }_{k \in \mathds{N}} $ für jedes $i$. Daher konvergiert 
+$(x_{n_k})_{k \in \mathds{N}}$ punktweise, also in der Produkttopologie (Übung). \bewende
+ % subsection 48 (end)
+ 
+\subsection[Definition: Netze immer wieder und schließlich in $A$]{Definition} % (fold)
+\label{sub:49}
+Sei $(x_\lambda)_{\lambda  \in \Lambda}$ ein Netz in $X$ und $A \subseteq X$. Wir sagen $(x_\lambda )_{\lambda  \in \Lambda}$ ist \Index{immer wieder in} $A$, falls gilt:
+\[
+	\forall \lambda \in \Lambda : \exists \mu \in \Lambda \text{ mit } \mu \ge \lambda \text{ und } x_\mu \in A
+\]  
+Wir sagen $(x_\lambda )_{\lambda  \in \Lambda}$ ist \Index{schließlich in} $A$, falls gilt 
+\[
+	\exists \lambda  \in \Lambda : \forall \mu \in \Lambda \text{ mit } \mu \ge \lambda \text{ gilt } x_\mu \in A
+\] 
+\minisec{Bemerkung}
+$x_\lambda  \to X \iff$ Für jede Umgebung $U$ von $x$ ist $x_\lambda $ schließlich in $U$.
+% subsection 49 (end)
+
+\subsection[Definition: Universelles Netz]{Definition} % (fold)
+\label{sub:410}
+Ein Netz $(x_\lambda )_{\lambda  \in \Lambda}$ in $X$ heißt \bet{universell}\index{Netz!universell}, falls für jede Teilmenge $A \subseteq X$ gilt: Entweder ist 
+$(x_\lambda )_{\lambda \in \Lambda}$ schließlich in $A$ \emph{oder} schließlich in $X \setminus A$.
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Ist $(x_\lambda )_{\lambda  \in \Lambda}$ universell und immer wieder in $A$, dann ist $(x_\lambda )_{\lambda  \in \Lambda}$ schließlich in $A$.
+	\item Ist $(x_\lambda )_{\lambda  \in \Lambda}$ ein universelles Netz in $X$ und $f : X \to Y$ eine Abbildung, so ist auch 
+	$\enbrace*{f(x_\lambda )}_{\lambda \in \Lambda} $ ein universelles Netz in $Y$.
+\end{itemize}
+% subsection 410 (end)
+
+\subsection[Lemma: Universelle Netze konvergieren in kompakten Räumen]{Lemma} % (fold)
+\label{sub:411}
+Ist $X$ kompakt und $(x_\lambda)_{\lambda  \in \Lambda}$ ein universelles Netz in $X$, so konvergiert $(x_\lambda )_{\lambda  \in \Lambda}$ in $X$.
+\minisec{Beweis}
+Sei $X$ kompakt und $(x_\lambda )_{\lambda  \in \Lambda}$ ein universelles Netz in $X$. Angenommen $(x_\lambda )_{\lambda  \in \Lambda}$ konvergiert nicht in $X$. Dann
+gibt es zu jedem $x \in X$ genau eine offene Umgebung $U_x$ von $x$, so dass $(x_\lambda )_{\lambda  \in \Lambda}$ nicht schließlich in $U_x$ ist. Da 
+$(x_\lambda )_{\lambda  \in \Lambda}$ universell ist, ist $(x_\lambda )_{\lambda  \in \Lambda}$ schließlich in $X \setminus U_x$.
+Da $X= \bigcup_{x \in X} U_x$ und $X$ kompakt ist, gibt es $x_1, \ldots , x_k \in X$ mit $X= U_{x_1} \cup \ldots \cup U_{x_k}$. Für jedes $i \in \set{1, \ldots, k} $ sei
+$\lambda_i \in \Lambda$ mit $x_\mu \in X \setminus U_{x_i}$ für $\mu \ge \lambda_i$. Sei nun $\mu \in \Lambda$ mit $\mu  \ge \lambda_i$ für $i=1, \ldots ,k$. Es folgt
+\[
+	x_\mu \in \bigcap_{i=1}^k (X \setminus U_{x_i}) = X \setminus \enbrace*{\bigcup_{i=1}^k U_{x_i}} = X \setminus X = \emptyset \enspace \lightning \bewende 
+\]
+% subsection 411 (end)
+
+\subsection[Proposition: Jedes Netzt besitzt universelles Teilnetz]{Proposition} % (fold)
+\label{sub:412}
+Jedes Netz besitzt ein universelles Teilnetz.
+\minisec{Beweis}
+Sei $(x_\lambda )_{\lambda  \in \Lambda}$ ein Netz in $X$. Sei 
+\[
+	\mathfrak{M} := \set[\mathfrak{B} \subseteq \mathcal{P}(X) ]{
+	\begin{array}{ll}
+		(1) & B \in \mathfrak{B} \Rightarrow (x_\lambda )_{\lambda  \in \Lambda} \text{ ist immer wieder in } B \\
+		(2) & B, B' \in \mathfrak{B} \Rightarrow B \cap B' \in \mathfrak{B}
+	\end{array}
+	} 
+\]
+Dann ist $\set{X} \in \mathfrak{M}$, insbesondere $\mathfrak{M} \not= \emptyset$. Ist $\mathfrak{M}_0 \subseteq \mathfrak{M}$ mit 
+\[
+	\mathfrak{B}, \mathfrak{B}' \in \mathfrak{M}_0 \Rightarrow \mathfrak{B} \subseteq \mathfrak(B)' \text{ oder } \mathfrak{B'} \subseteq \mathfrak{B}
+\]
+so gilt $\bigcup_{\mathfrak{B \in \mathfrak{M}_0}} \mathfrak{B} \in \mathfrak{M}$. Nach dem Zornschen Lemma enthält $\mathfrak{M}$ ein maximales Element $\mathfrak{B}$.
+Da $\mathfrak{B}$ maximal ist, ist $X \in \mathfrak{B}$. Sei 
+\[
+	\Lambda' := \set[(B,\lambda )]{B \in \mathfrak{B}, \lambda \in \Lambda, x_\lambda  \in B}. 
+\]
+Durch $(B,\lambda ) \le (B', \lambda ') :\Leftrightarrow B \supseteq B', \lambda  \le \lambda '$ wird $\Lambda'$ gerichtet.
+
+Behauptung: $(x_\lambda )_{(B,\lambda)  \in \Lambda'}$ ist universell. \\
+\minisec{Hilfssatz}
+Sei $(x_\lambda )_{(B,\lambda)  \in \Lambda'}$ immer wieder in $S$. Dann gilt $S \in \mathfrak{B}$. \\
+Beweis: Wir zeigen: $\mathfrak{B}^+ := \mathfrak{B} \cup \set[S \cap B]{B \in \mathfrak{B}}  \in \mathfrak{M}$. Da $\mathfrak{B}$ maximal ist und 
+$\mathfrak{B} \subseteq \mathfrak{B}^+$ folgt $\mathfrak{B} = \mathfrak{B}^+$ und $S \in \mathfrak{B}^+ =\mathfrak{B}$. 
+Offenbar erfüllt $\mathfrak{B}^+$ (2). Es bleibt (1) zu zeigen.
+
+Da $\mathfrak{B} \in \mathfrak{M}$ bleibt zu zeigen: $\forall B \in \mathfrak{B}$ ist $(x_\lambda )_{(\lambda \in \Lambda}$ immer wieder in $B \cap S$. Sei 
+$\lambda \in \Lambda$. Gesucht ist nun $\mu \ge \lambda $ mit $x_\mu \in B \cap S$. Da $B \in \mathfrak{B} \in \mathfrak{M}$ gibt es $\lambda ' \in \Lambda$, 
+$\lambda ' \ge \lambda $ mit $x_{\lambda'} \in B$. Also $(B, \lambda') \in \Lambda'$. Da $(x_\lambda )_{(B,\lambda)  \in \Lambda'}$ immer wieder in $S$ ist, gibt es
+\[
+	\Lambda' \ni (A, \mu) \ge (B,\lambda ') \tag{$\star$}
+\]
+mit $x_{\mu} \in S$. Da $(A,\mu) \in \Lambda'$ ist $x_\mu \in A \stackrel{(\star)}{\subseteq} B$. Sei $S \subseteq X$. Ist $(x_\lambda )_{(B,\lambda)  \in \Lambda'}$
+weder schließlich in $S$ noch schließlich in $X \setminus S$, so ist $(x_\lambda )_{(B,\lambda)  \in \Lambda'}$ immer wieder in $S$ und immer wieder in $X \setminus S$.
+Mit dem Hilfssatz folgt $S, X \setminus S \in \mathfrak{B} \Rightarrow \emptyset = S \cap (X \setminus S) \in \mathfrak{B}$ \light \bewende
+
+\subsection[Definition: Vektorraum der beschränkten Abbildungen]{Definition} % (fold)
+\label{sub:413}
+Sei $\ell^\infty(\mathds{Z}) $ der $\mathds{R}$-Vektorraum aller beschränkten Abbildungen $f : \mathds{Z} \to \mathds{R}$.
+\[
+	\norm[\infty]{f} := \sup \set[\abs*{f(n)} ]{n \in \mathds{Z}}  
+\]
+ist eine Norm auf $\ell^\infty(\mathds{Z})$.
+% subsection 413 (end)
+
+\subsection{Satz (Mittelbarkeit von $\mathds{Z}$)} % (fold)
+\label{sub:414}
+Es gibt eine Abbildung $M : \ell^\infty(\mathds{Z}) \to \mathds{R} $ mit
+\begin{enumerate}[a)]
+	\item $M$ ist $\mathds{R}$-linear
+	\item $M$ ist positiv: $f \ge 0 \Rightarrow M(f) \ge 0$
+	\item $M(\ind) =1$ für $\ind: \mathds{Z} \to \mathds{R}$ mit $\ind(n)=1$ für alle $n \in \mathds{Z}$
+	\item $M$ ist $\mathds{Z}$-invariant: Für $f \in \ell^\infty(\mathds{Z}) $ sei $T f \in \ell^\infty(\mathds{Z})$ mit $(T f) (n) = f(n+1)$, dann gilt $M(f)= M(T f)$.
+\end{enumerate}
+\minisec{Beweis}
+Sei $\mathfrak{M} := \set[M : \ell^\infty(\mathds{Z}) \to \mathds{R}]{M \text{ erfüllt a), b), c)}} $. Sei $M_n \in \mathfrak{M}$ mit 
+$M_n(f) = \frac{1}{n+1} \sum_{i=0}^{n} f(i) $. Dann gilt für $f \in \ell^\infty(\mathds{Z})$
+\begin{align*}
+	M_n(f)= M_n(T f) = \frac{1}{n+1} \sum_{i=0}^{n}  f(i) - T f(i) &= \frac{1}{n+1} \sum_{i=0}^{n} \enbrace[\big]{f(i)- f(i+1) } \\
+	&=   \frac{1}{n+1} \enbrace[\big]{f(0)- f(n+1)} 
+\end{align*}
+Es folgt $\abs*{M_n(f) - M_n(T f)} \le \frac{2 \cdot \norm[\infty]{f} }{n+1}$. Wir konstruieren nun eine kompakte Topologie auf $\mathfrak{M}$, dann können wir anschließend
+ein konvergentes Teilnetz der Folge $(M_n)_{n \in \mathds{N}}$ betrachten. Sei 
+\[
+	X := \prod_{f \in \ell^\infty(\mathds{Z})} \big[{- \norm[\infty]{f}}, \norm[\infty]{f} \big]
+\]
+Aus a), b), c) folgt für $f \in \ell^\infty(\mathds{Z})$, $M \in \mathfrak{M}$ $M(f) \in \big[{- \norm[\infty]{f}}, \norm[\infty]{f}\big]$. Mittels 
+\[
+	\mathfrak{M} \ni M \mapsto \enbrace[\big]{M(f)}_{f \in \ell^\infty(\mathds{Z})} \in X 
+\]
+wird $\mathfrak{M}$ zu einem abgeschlossenen Unterraum von $X$. $\mathfrak{M}$ ist 
+kompakt bezüglich der Produkttopologie auf $X$, also bezüglich punktweiser Konvergenz.
+
+Sei nun $\alpha : \Lambda \to \mathds{N}$, sodass $M_{\alpha(\lambda)} \to M \in \mathfrak{M}$ (existiert da $\mathfrak{M}$ kompakt). Es folgt
+\[
+	\forall f \in \ell^\infty(\mathds{Z}) : M_{\alpha(\lambda )}(f) \to M(f) 
+\]
+Wegen $M_{\alpha(\lambda )}(f) - M_{\alpha(\lambda )}(T f) \xrightarrow{\lambda  \to \infty} M(f) - M(T f) $ und
+\begin{align*}
+	\abs*{M_{\alpha(\lambda )}(f) - M_{\alpha(\lambda )}(T f)} \le \frac{2 \cdot \norm[\infty]{f} }{\alpha(\lambda )+1} \to 0  
+\end{align*}
+folgt $M(f) = M(T f)$ für alle $f \in \ell^\infty(\mathds{Z})$. \bewende
+% subsection 414 (end)
+% section 4 (end)
+\newpage
+
+\section{Kompaktifizierungen} % (fold)
+\label{sec:5}
+
+\subsection[Definition: Kompaktifizierung]{Definition} % (fold)
+\label{sub:51}
+Sei $X$ ein topologischer Raum. Ein kompakter Raum $\overline{X}$ heißt eine \Index{Kompaktifizierung} von $X$, falls er $X$ als offenen, dichten Unterraum enthält. 
+(Oft heißt $\partial X := \overline{X} \setminus X $ der Rand der Kompaktifizierung)
+% subsection 51 (end)
+
+\subsection[Beispiele für Kompaktifizierungen]{Beispiele} % (fold)
+\label{sub:52}
+\begin{enumerate}[(i)]
+	\item $(-1,1) \subseteq [-1,1]$
+	\item $\mathring D^n := \set[x \in \mathds{R}^n]{\norm[2]{x} < 1 } \subseteq D^n = \set[x \in \mathds{R}^n]{\norm[2]{x} \le 1 }  $. Für $n=2$:
+	\[
+		\tikz[baseline=-0.5]{\draw[dashed, fill=LightBlue2] (0,0) circle[radius=0.5]} \enspace\subseteq \enspace
+		\tikz[baseline=-0.5]{\draw[fill=LightBlue2!70] (0,0) circle[radius=0.5]}
+	\]
+	$\partial D^n = S^{n-1} := \set[x \in \mathds{R}^n]{\norm[2]{x} = 1 } $
+	\item $f : \mathds{R}^n \to \mathring D^n$, $f(x) := \frac{x}{1+ \norm[2]{x}} $ ist ein Homöomorphismus. Daher können wir $\mathds{R}^n$ zu
+	\[
+		\overline{\mathds{R}^n} := \mathds{R}^n \dot\cup (S^{n-1} \times \set{\infty} ) \cong D^n 
+	\]
+	kompaktifizieren.
+	\item Definiere auf $\mathds{R}^n \cup \set{\infty}$ folgende Topologie 
+	\[
+		\mathcal{O} := \set[U]{U \subseteq \mathds{R}^n \text{ ist offen}} \cup \set[U \cup \{\infty\}]{U \subseteq \mathds{R}^n \text{ offen und } \exists R > 0 : 
+		\mathds{R}^n \setminus B_R(0) \subseteq U} 
+	\]
+	Dann ist $\mathds{R}^n \cup \set{\infty}$ eine weitere Kompaktifizierung von $\mathds{R}^n$. Übung: $\mathds{R}^n \cup \set{\infty} \cong S^n $
+\end{enumerate}
+% subsection 52 (end)
+
+\subsection[Definition: lokalkompakt]{Definition} % (fold)
+\label{sub:53}
+Ein Hausdorffraum $X$ heißt \Index{lokalkompakt}, wenn für jedes $x \in X$ und jede offene Umgebung $U$ von $x$ eine kompakte Umgebung $K$ von $x$ existiert mit 
+$K \subseteq U$.
+% subsection 53 (end)
+
+\subsection[Bespiele für lokalkompakte Hausdorffräume]{Beispiel} % (fold)
+\label{sub:54}
+\begin{enumerate}[(i)]
+	\item $\mathds{R}^n$ ist lokalkompakt: Sei $x \in \mathds{R}^n$ und $U \subseteq \mathds{R}^n$ eine offene Umgebung von $x$. $U$ offen 
+	$\Rightarrow \exists \varepsilon >0$ mit $B_\varepsilon(x) \subseteq U$. Es folgt $\overline{B_{\varepsilon/2}}(x) \subseteq B_\varepsilon(x) \subseteq U $. Dann
+	ist $\overline{B}_{\varepsilon/2}(x)$ eine kompakte Umgebung von $x$, die in $U$ liegt.
+	\item Topologische Mannigfaltigkeiten sind lokalkompakt.
+	\item Offene Teilräume von lokalkompakten Räumen sind lokalkompakt.
+\end{enumerate}
+% subsection 54 (end)
+
+\subsection[Proposition: Offene Teilmengen kompakter Räume sind lokalkompakt]{Proposition} % (fold)
+\label{sub:55}
+Sei $K$ kompakt und $W \subseteq K$ offen. Dann ist $W$ lokalkompakt. Insbesondere sind kompakte Räume auch lokalkompakt.
+\minisec{Beweis}
+Sei $x \in W$ und $U$ eine offene Umgebung von $x$ in $W$. $K$ Hausdorff $\Rightarrow \forall y \in K \setminus U$ gibt es offene Umgebungen $V_y$ von $y$ und $W_y$ von $x$
+mit $V_y \cap W_y = \emptyset$. Dann ist $\set[V_y]{y \in K \setminus U} $ eine offene Überdeckung von $K \setminus U$. Da mit $K$ auch $K \setminus U$ kompakt ist, gibt es
+$Y_0 \subseteq K\setminus U$ endlich mit 
+\[
+	K\setminus U \subseteq \bigcup_{y \in Y_0} V_y
+\]
+Nun ist $L := K \setminus \bigcup_{y \in Y_0} V_y$ kompakt. Da $\bigcap_{y \in Y_0} W_y \cap U$ offen ist und 
+$\enbrace*{\bigcap_{y \in Y_0} W_y} \cap U \subseteq  L$ ist $L$ eine Umgebung von $x$. \bewende
+% subsection 55 (end)
+
+\subsection[Definition: Einpunktkompaktifizierung ($\EPK$)]{Definition} % (fold)
+\label{sub:56}
+Sei $X$ lokalkompakt. Die \Index{Einpunktkompaktifizierung} ($\EPK$) von $X$ ist $\EPK(X) := X \cup \set{\infty}$ mit der folgenden Topologie:
+\[
+	U \subseteq X \cup \set{\infty} \text{ offen } :\Leftrightarrow U \subseteq X \text{ ist offen oder } U= (X \setminus K) \cup \set{\infty} \text{ mit } K \subseteq X \text{ kompakt}  
+\] 
+% subsection 56 (end)
+
+\subsection[Proposition über Eigenschaften der Einpunktkompaktifizierung]{Proposition} % (fold)
+\label{sub:57}
+$\EPK(X)$ ist kompakt. Ist $X$ nicht kompakt, so ist $\EPK(X)$ eine Kompaktifizierung von $X$.
+\minisec{Beweis}
+Sei $\mathcal{U}$ eine offene Überdeckung von $\EPK(X)$. Sei $U_0 \in \mathcal{U}$ mit $\infty \in U_0$. Dann existiert $K \subseteq X$ kompakt mit 
+$U_0 = (X \setminus K) \cup \set{\infty}$. Da $K$ kompakt ist, gibt es $U_1, \ldots , U_n \in \mathcal{U}$ mit $K \subseteq U_1 \cup \ldots \cup U_n$. Dann ist
+$U_0, U_1, \ldots , U_n$ eine endliche Teilüberdeckung von $\EPK(X)$.
+
+Zu zeigen: $\EPK(X)$ ist Hausdorff. Seien $x,y \in \EPK(X), x \not= y$. Gilt $x \not= \infty \not= y$ so gibt es $U,V \subseteq X$ mit $x \in U,  y \in V$ und 
+$U\cap V = \emptyset$, da $X$ hausdorffsch ist. Nach Definition sind dann $U,V$ auch offen in $\EPK(X)$. Andernfalls sei o.B.d.A. $x = \infty$. Da $X$ lokalkompakt ist, 
+gibt es eine Umgebung $K$ von $y$ mit $K \subseteq X$ kompakt. Dann sind $U := \mathring K$ und $V := (X \setminus K) \cup \set{\infty} $ disjunkte offene Umgebungen von 
+$x$ und $y$.
+
+Insgesamt gezeigt: $\EPK(X)$ ist kompakt. Sei $X$ nicht kompakt. Ist $U$ eine Umgebung von $\infty \in \EPK(X)$, so gibt es $K \subseteq X$ kompakt mit 
+$U = (X \setminus K) \cup \set{\infty}$. Dann ist $U \cap X = X \setminus K$. Da $X$ nicht kompakt ist, ist $X \not= K$, also $X \setminus K  \not= \emptyset$. 
+Daher hat jede Umgebung von $\infty \in \EPK(X)$ einen nicht-trivialen Schnitt mit $X$. Also ist $X  \subseteq \EPK(X)$ dicht. \bewende
+% subsection 57 (end)
+
+\subsection[Frage nach Fortsetzungen stetiger Funktionen in der Einpunktkompaktifizierung]{Frage} % (fold)
+\label{sub:58}
+Sei $f : X \to Y$ stetig, $X,Y$ lokalkompakt. Gibt es dann eine stetige Fortsetzung $\overline{f} : \EPK(X) \to \EPK(Y)$ mit $\overline{f}(\infty) = \infty$?
+\minisec{Beispiel}
+\begin{enumerate}[(i)]
+	\item $f : \mathds{R} \to \mathds{R}$, $f(x) \equiv 0$. Dann ist $\overline{f} : \EPK(\mathds{R}) \to \EPK(\mathds{R}) $ mit 
+	\[
+		\overline{f} (x) = \begin{cases}
+			f(x)=0, &\text{ falls }x \in \mathds{R}\\
+			\infty , &\text{ falls } x =\infty
+		\end{cases}
+	\]
+	sicher nicht stetig. Natürlich ist aber $\tilde f : \EPK(\mathds{R}) \to \EPK(\mathds{R})$ mit $\tilde f (x) = 0 \,\forall x \in \EPK(\mathds{R})$ stetig.
+	\item $f : \mathds{R} \to \mathds{R}$ mit 
+	\[
+		f(x) = \begin{cases}
+			1, &\text{ falls }x \ge 1\\
+			x, &\text{ falls }x \in [0,1] \\
+			0, &\text{ falls }x \le 0
+		\end{cases}
+	\]
+	Dann gibt es keine stetige Fortsetzung $\overline{f} : \EPK(\mathds{R}) \to\EPK(\mathds{R})$, denn die Folge $x_n = n$ konvergiert in $\EPK(\mathds{R})$ gegen $\infty$.
+	Da $f(x_n) = 1$ $\forall n$ müsste $\overline{f} (\infty) = 1 $ sein. Die Folge $y_n = -n$ konvergiert in $\EPK(\mathds{R})$ auch gegen $\infty$. Da $f(y_n) = 0$
+	$\forall n$ müsste $\overline{f} (\infty) = 0 $ sein \light.
+\end{enumerate}
+% subsection 58 (end)
+
+\subsection[Definition: Eigentliche stetige Abbildung]{Definition} % (fold)
+\label{sub:59}
+Seien $X$ und $Y$ lokalkompakt. Eine stetige Abbildung $f : X \to Y$ heißt \bet{eigentlich}\index{eigentliche Abbildung}, wenn für jede kompakte Teilmenge 
+$K \subseteq Y$ auch $f ^{-1}(K) \subseteq X$ kompakt ist.
+% subsection 59 (end)
+
+\subsection[Satz: Charakterisierung von eigentlichen stetigen Abbildungen]{Satz} % (fold)
+\label{sub:510}
+Seien $X,Y$ lokalkompakt und $f : X \to Y$ stetig. Dann sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $f$ ist eigentlich
+	\item $\overline{f} : \EPK(X) \to \EPK(Y) $ mit 
+	\[
+		\overline{f} (x) = \begin{cases}
+			f(x), &\text{ falls }x \in X\\
+			\infty, &\text{ falls } x = \infty
+		\end{cases} 
+	\]
+	ist stetig
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item["(1)$\Rightarrow$(2)":] Sei $U \subseteq \EPK(Y)$ offen. Ist $\infty \not\in U$, so ist $\bar f^{-1}(U)= f ^{-1}(U)$ offen, da $f$ stetig ist. Ist 
+	$\infty \in U$, so gibt es $K \subseteq Y$ mit $U = (X \setminus K) \cup \set{\infty}$. Da $f$ eigentlich ist, ist auch $L := f ^{-1}(K) \subseteq X$ kompakt und
+	$\bar f ^{-1} (U) = (X \setminus L) \cup \set{\infty}$ ist offen in $\EPK(X)$.
+	\item["(2)$\Rightarrow $(1)":] Sei $K \subseteq Y$ kompakt. Dann ist $U = (Y \setminus K) \cup \set{\infty} \subseteq Y$ offen. Da $\bar f$ stetig ist, ist auch 
+	$\bar f ^{-1} (U) = \enbrace*{X \setminus f ^{-1}(K)} \cup \set{\infty}$ offen. Damit ist $f ^{-1}(K) \subseteq X$ kompakt. \bewende  
+\end{description}
+% subsection 510 (end)
+% section 5 (end)
+\newpage
+\section{Der Approximationssatz von Stone-Weierstraß} % (fold)
+\label{sec:6}
+
+\subsection[Definition: Verschwinden stetiger Funktionen im Unendlichen]{Definition} % (fold)
+\label{sub:61}
+Sei $X$ ein lokalkompakter Raum. Eine stetige Funktion $f : X \to \mathds{R}$ \bet{verschwindet}\index{verschwindende Funktion} im Unendlichen, falls für jedes 
+$\varepsilon >0$ 
+\[
+	K_\varepsilon := \set[x \in X]{\abs{f(x)} \ge \varepsilon} 
+\] 
+kompakt ist. Die \Index{Algebra} aller solchen Funktionen bezeichnen wir mit $C_0(X)$ und für $f \in C_0 (X) $ setzen wir 
+\[
+	\norm[\infty]{f} :=  \sup_{x \in X} \abs*{f(x)} = \max_{x \in X} \abs*{f(x)}  
+\]
+$\norm[\infty]{.} $ ist eine Norm auf $C_0(X)$.
+\minisec{Bemerkung} % (fold)
+$f : X \to \mathds{R}$ liegt in $C_0(X)$ $\iff \overline{f} : \EPK(X) \to \mathds{R} $ mit $\overline{f}(x) = \begin{cases}
+	f(x), &\text{ falls }x \in X\\
+	0 , &\text{ falls } x= \infty
+\end{cases} $ ist stetig.
+% subsection 61 (end)
+
+\subsection[Definition: $\mathcal{B} \subseteq C_0(X)$ trennt $x,y \in X$ streng]{Definition} % (fold)
+\label{sub:62}
+Sei $\mathcal{B} \subseteq C_0(X) $. Wir sagen, dass $\mathcal{B}$ die Punkte von $X$ \bet{streng trennt}, falls es zu $x,y \in X, x \not= y$ ein $f \in \mathcal{B}$ gibt 
+mit $0 \not= f(x) \not= f(y)  \not= 0$.
+\minisec{Bemerkung}
+Sei $\mathcal{A} \subseteq C_0(X) $ eine Unteralgebra. Gilt
+\begin{enumerate}[a)]
+	\item $\forall x,y \in X : \exists f \in \mathcal{A}  : f(x) \not= f(y)$
+	\item $\forall x \in X : \exists g \in \mathcal{A} : g(x) \not= 0 $
+\end{enumerate}
+so trennt $\mathcal{A}$ die Punkte von $X$ streng.
+\minisec{Beispiel}
+Sei $[a,b] \subseteq \mathds{R}$ ein kompaktes Intervall. Sei $\mathcal{A} := \set[x \mapsto p(x)]{p \in R[t]} \subseteq C_0([a,b])$. Dann trennt $\mathcal{A}$ die Punkte 
+von $[a,b]$ streng.
+% subsection 62 (end)
+
+\subsection{Satz (Stone-Weierstraß)} % (fold)
+\label{sub:63}
+Sei $X$ ein lokalkompakter Raum und sei $\mathcal{A} \subseteq C_0(X)$ eine Unteralgebra, die die Punkte von $X$ streng trennt. Dann ist $\mathcal{A} \subseteq C_0(X)$
+dicht bezüglich $\norm[\infty]{.} $.
+\minisec{Beweis (mit Lemma 1, 2, 3)}
+Sei $h \in C_0(X)$ beliebig. Sei $\varepsilon>0$ beliebig. Zu zeigen: $\exists f \in \bar{\mathcal{A} } : \norm[\infty]{f- h} < \varepsilon $
+\begin{description}
+	\item[Schritt 1:] Wir konstruieren für $y \in X$ $f_y \in \bar{\mathcal{A}}$ mit 
+	\begin{enumerate}[a)]
+		\item $f_y(y) = h(y)$
+		\item $f_y(z) \ge h(z) - \varepsilon$ für alle $z \in X$
+	\end{enumerate}
+	Zu $x \in X$ gibt es nach Lemma 3 (\ref{sub:69}) $g_x \in \mathcal{A}$ mit 
+	\[
+		g_x(y) = h(y) \quad \text{und} \quad g_x(x) = h(x).
+	\]
+	Sei $U_x := \set[z \in X]{g_x(z) > h(z) - \varepsilon}$. Da $g_x$ und $h$ stetig sind, ist $U_x$ offen. Da $g_x$ und $h$ in $\infty$ verschwinden, ist 
+	$X \setminus U_x$ kompakt.
+	Wegen $g_x(x)= h(x)$ ist $x \in U_x$. Zu festem $x_1 \in X$ gibt es dann $x_2, \ldots , x_k$ mit $X \setminus U_{x_1} \subseteq \bigcup_{i=2}^k U_{x_i}$.
+	Dann gilt auch 
+	\[
+		X \subseteq \bigcup_{i=2}^k U_{x_i}
+	\]
+	$f_y := \max \set{g_{x_1}, \ldots , g_{x_k}}$ ist die gesuchte Funktion. Wegen Lemma 2 (\ref{sub:67}) bzw. der Bemerkung \ref{sub:68} gilt $f_y \in \bar{\mathcal{A}}$.
+	\item[Schritt 2:] Konstruktion von $f$. Zu $y \in X$ sei $V_y := \set[z \in X]{f_y(z) < h(z)+ \varepsilon}$. Wieder ist $V_y$ offen, $X\setminus V_y$ kompakt und
+	$y \in V_y$. Also gibt es wieder $y_1, \ldots , y_l$ mit $X = \bigcup_{i=1}^l V_{y_i}$. Für $f := \min \set{f_{y_1}, \ldots , f_{y_l}}$ gilt dann
+	\[
+		h(z) - f(z) = \max_i h(z)- f_{y_i} (z) < \varepsilon
+	\]
+	da $f_{y_i}(z) \ge h(z) -\varepsilon$ $\overset{\text{a)}}{\Rightarrow } h(z)- f_{y_i}(z) \le \varepsilon$ für jedes $i$.
+	Weiter gilt 
+	\begin{align*}
+		f(z)- h(z) = \min_i f_{y_i}(z)- h(z) < \varepsilon
+	\end{align*} 
+	nach Definition der $V_{y_i}$. Also $\norm[\infty]{f-h} < \varepsilon $. \bewende
+\end{description}
+% subsection 63 (end)
+
+\subsection{Satz von Dini} % (fold)
+\label{sub:64}
+Sei $\enbrace*{f_n : [0,1] \to \mathds{R}}_{n \in \mathds{N}}$ eine punktweise monoton wachsende Folge stetiger Funktionen, die punktweise gegen die stetige Funktion $f$
+konvergiert. Dann $f_n \to f$ gleichmäßig, d.h. $\norm[\infty]{f_n -f} \to 0 $.
+\minisec{Beweis}
+Sei $\varepsilon >0$. Zu jedem $t \in [0,1]$ gibt es $n_t$ mit 
+\[
+	\forall n\ge n_t : f(t) \ge f_n(t) \ge f_{n_t}(t) \ge f(t) - \varepsilon. 
+\]
+Da $f$ und $f_{n_t}$ stetig sind,
+ist $U_t := \set[{s \in [0,1]}]{f(s) - f_{n_t}(s) < \varepsilon} $ offen. Da $[0,1]$ kompakt ist, gibt es $t_0, \ldots , t_k \in [0,1]$ mit 
+\[
+	[0,1] = U_{t_0} \cup \ldots \cup U_{t_k}
+\]
+Für alle $n \ge \max \set{n_{t_0}, \ldots , n_{t_k}} $ folgt
+\(
+	\norm[\infty]{f_n - f} \le \varepsilon
+\). \bewende 
+% subsection 64 (end)
+
+\subsection[Lemma 1: Folge reeller Polynome, die gleichmäßig gegen Wurzelfunktion konvergiert]{Lemma 1} % (fold)
+\label{sub:65}
+Sei $g(t) = \sqrt{t}$ für $t \in [0,1]$. Es gibt eine Folge $(p_n)_{n \in \mathds{N}}$ von reellen Polynomen so dass $p_n \to g$ gleichmäßig auf $[0,1]$ und $p_n(0)=0$.
+\minisec{Beweis}
+Sei $p_0 \equiv 0$ und für $n > 0$
+\[
+	p_{n+1} (t) := p_n(t) - \frac{1}{2} \cdot \enbrace[\big]{p_n(t)^2 - t} 
+\]
+Dann $p_n(0)=0$. Per Induktion nach $n$ zeigen wir: $0 \le p_n(t) \le \sqrt{t}$ für alle $t \in [0,1]$
+\begin{description}
+	\item[$n=0$] $\checkmark$ 
+	\item[$n \mapsto n+1$] \begin{align*}
+		p_{n+1}(t) - \sqrt{t} = p_n(t) - \sqrt{t} - \frac{1}{2} \enbrace[\Big]{p_n(t)^2 -t} &= \enbrace*{p_n(t) - \sqrt{t} }- \frac{1}{2} \enbrace*{p_n(t)- \sqrt{t}} 
+		\enbrace*{p_n(t) + \sqrt{t}}        \\
+		&=\underbrace{\enbrace*{p_n(t) - \sqrt{t}  } }_{\le 0} \underbrace{\Big( 1- \frac{1}{2}\underbrace{(p_n(t) + \sqrt{t}  )}_{\text{IV.: }\le 2 \sqrt{t}  } \Big)}_{\ge 0} 
+	\end{align*}
+	Also $p_{n+1}(t)- \sqrt{t} \le 0$. Es folgt, dass $p_n(t)$ monoton wachsend ist für jedes $t$. Wegen $p_n(t) \le \sqrt{t}$ existiert $\lim_{ n \to \infty} p_n(t)$
+	für $t \in [0,1]$. Es folgt 
+	\begin{align*}
+		0 = \lim_{ n \to \infty} p_{n+1}(t) - \lim_{ n \to \infty} p_n(t) = \lim_{ n \to \infty} \enbrace[\big]{p_{n+1}(t) - p_n(t)} &= \lim_{ n \to \infty} 
+		-\frac{1}{2} \enbrace[\big]{p_n(t)^2 -t  } \\
+		&= - \frac{1}{2} \enbrace*{ \enbrace*{\lim_{ n \to \infty} p_n(t)}^2 -t }  
+	\end{align*}
+	$\Rightarrow \lim_{ n \to \infty} p_n(t) = \sqrt{t}$. Mit Dini (\ref{sub:64}) folgt $p_n \to g$ gleichmäßig. \bewende
+\end{description}
+% subsection 1 (end)
+
+\subsection[Bemerkung: Komposition mit Polynomen ist auch der Algebra]{Bemerkung} % (fold)
+\label{sub:66}
+Sei $\mathcal{A} \subseteq C_0(X)$ eine Algebra. Ist $p \in \mathds{R}[t]$ ein Polynom mit $p(0)=0$ und $f \in \mathcal{A}$, so liegt auch $p \circ f \in \mathcal{A}$:
+$p= \sum_{i=1}^{n} a_i t^i$. Denn 
+\[
+	p\enbrace[\big]{f(t)} = \sum_{i=1}^{n} a_i f(t)^i = \enbrace*{\sum_{i=1}^{n} a_i f^i} (t) \in \mathcal{A}. 
+\]
+% subsection 66 (end)
+
+\subsection[Lemma 2: Betrag von $f \in \mathcal{A}$ liegt in $\bar{\mathcal{A}}$]{Lemma 2} % (fold)
+\label{sub:67}
+Sei $X$ lokalkompakt, $\mathcal{A} \subseteq C_0(X)$ eine Unteralgebra. Dann gilt: $f \in A \Rightarrow \abs*{f} \in \bar{\mathcal{A}}$ \\
+{\color{light_gray} ($\bar{\mathcal{A} }:= $ Abschluss von $\mathcal{A}$ bezüglich $\norm[\infty]{.} $)}
+\minisec{Beweis}
+Sei $f \in \mathcal{A}$. O.B.d.A. sei $f(X) \subseteq [{-1},1]$. Dann $f(x)^2 \in [0,1]$ für alle $x \in X$. Seien die $p_n$ die Polynome aus Lemma 1 (\ref{sub:65}). Dann
+\begin{align*}
+	\abs*{p_n \enbrace*{f(x)^2} - \sqrt{f(x)^2}} = \abs*{ p_n \enbrace*{f(x)^2} - \abs*{f(x)}} \xrightarrow{n \to \infty}  0 
+\end{align*}
+gleichmäßig in $x \in X$. Es folgt $\norm[\infty]{p_n(f^2) - \abs*{f} } \to 0 $. Wegen $f \in \mathcal{A} $ gilt $f^2 \in \mathcal{A}$ und nach \ref{sub:66} $p_n(f^2) \in \mathcal{A}$.
+Also $\abs*{f} \in \bar{\mathcal{A}}$. \bewende
+% subsection 67 (end)
+
+\subsection[Bemerkung: $\max, \min$ von Funktionen aus $\mathcal{A}$ liegen in $\bar{\mathcal{A}}$]{Bemerkung} % (fold)
+\label{sub:68}
+\begin{enumerate}[(i)]
+	\item Für $f,g \in \mathcal{A}$ liegen 
+	\[
+		\max(f,g) = \frac{1}{2} \enbrace[\big]{f+g + \abs*{f-g}} \quad , \quad \min(f,g) = \frac{1}{2} \enbrace[\big]{f+g - \abs*{f-g} }  \in \Bar{\mathcal{A}}
+	\]
+	\item Wegen $\bar{\mathcal{A} } = \bar{\bar{\mathcal{A}}}$ gilt auch 
+	$f,g \in \bar{\mathcal{A}} \Rightarrow \min(f,g), \max(f,g) \in \bar{\mathcal{A}}$. 
+\end{enumerate}
+% subsection 68 (end)
+
+\subsection[Lemma 3: Existenz von $f \in \mathcal{A}$ mit $f(x)=\alpha$, $f(y)=\beta$, wenn $\mathcal{A}$ streng trennt]{Lemma 3} % (fold)
+\label{sub:69}
+Sei $X$ lokalkompakt, $\mathcal{A} \subseteq C_0(X)$ eine Unteralgebra, die die Punkte von $X$ streng trennt. Zu $x,y \in X$, $x \not= y$, $\alpha, \beta \in \mathds{R}$
+gibt es dann $f \in \mathcal{A}$ mit $f(x) = \alpha, f(y) = \beta$.
+\minisec{Beweis}
+Es gibt $g \in \mathcal{A}$ mit $0 \not= g(x) \not= g(y) \not= 0$. Ansatz: Für $\lambda , \mu \in \mathds{R}$ betrachte $f := \lambda g + \mu g^2$.
+\[
+	\begin{aligned}
+		f(x) &{}= \alpha \\
+		f(y) &{}= \beta
+	\end{aligned} 
+	\iff
+	\begin{aligned}
+		g(x) \lambda + g(x)^2 \mu &= \alpha \\
+		g(y) \lambda + g(y)^2 \mu &= \beta
+	\end{aligned} 
+\]
+Da 
+\[
+	\det \begin{pmatrix}
+		g(x)& g(x)^2 \\
+		g(y) & g(y)^2
+	\end{pmatrix} = g(x) g(y)^2 - g(y) g(x)^2 = g(x)g(y) \enbrace*{g(y) - g(x)} \not= 0 
+\]
+gibt es $\lambda , \mu \in \mathds{R}$, sodass das Gleichungssystem eine Lösung hat. \bewende
+% subsection 69 (end)
+% section 6 (end)
+\newpage
+
+\section{Metrisierbarkeit} % (fold)
+\label{sec:7}
+
+\subsection[Definition: Metrisierbar]{Definition} % (fold)
+\label{sub:71}
+Ein topologischer Raum $X$ heißt \Index{metrisierbar}, wenn es eine Metrik auf $X$ gibt, so dass die zugehörige Topologie die Topologie von $X$ ist. 
+\minisec{Bemerkung}
+Ist $X$ metrisierbar, so gibt es für jedes $x \in X$ eine abzählbare Umgebungsbasis $\mathcal{U}_x$ bei $x$, also eine abzählbare Menge von offenen Umgebungen von $x$,
+sodass jede Umgebung von $x$ eine Menge aus $\mathcal{U}_x$ enthält. 
+\minisec{Beispiel}
+$(X, \mathcal{O}_{\text{dis}})$ ist metrisierbar: $d_{\text{dis}}(x,y) := \begin{cases}
+	1, &\text{ falls }x \not= y\\
+	0 , &\text{ sonst}
+\end{cases}$
+% subsection 71 (end)
+
+\subsection[Definition: Normaler Hausdorffraum]{Definition} % (fold)
+\label{sub:72}
+Ein topologischer Hausdorffraum $X$ heißt \bet{normal}\index{Hausdorffraum!normal}, wenn er die folgende Trennungseigenschaft hat: Sind $A,B \subseteq X$ abgeschlossen mit
+$A \cap B = \emptyset$, so gibt es $U,V \subseteq X$ offen mit $A \subseteq U$, $B \subseteq V$ mit $U \cap V = \emptyset$.
+\minisec{Bemerkung}
+Metrisierbare Räume sind normal. \hfill (Übung) 
+% subsection 72 (end)
+
+\subsection{Satz (Urysohn)} % (fold)
+\label{sub:73}
+Sei $X$ ein normaler Raum, der das zweite Abzählbarkeitsaxiom erfüllt (\ref{sub:114}). Dann ist $X$ metrisierbar.
+\minisec{Beweis (mit Urysohns Lemma, \ref{sub:74})}
+Sei $\mathcal{U}$ eine abzählbare Basis der Topologie von $X$. Da $X$ normal ist, gibt es zu jedem Paar $U,V \in \mathcal{U}$ mit $\overline{U} \subseteq V $ (also
+$\overline{U} \cap X \setminus V = \emptyset $) eine stetige Funktion $f_{U,V} : X \to [0,1]$ mit $f_{U,V} (x) = 0$ für $x \in \overline{U}$ und
+$f_{U,V}(y) = 1$ für $y \not\in V$ (\ref{sub:74}). Da $\mathcal{U}$ abzählbar ist, ist das abzählbare Produkt 
+\[
+	Z := \prod_{\substack{U,V \in \mathcal{U} \\ \overline{U} \subseteq V}} [0,1]
+\]
+metrisierbar (Übung, Blatt 4).
+Wir definieren $F : X \to Z$ durch
+\[
+	F(x) := \enbrace[\Big]{f_{U,V}(x)}_{\substack{U,V \in \mathcal{U} \\ \overline{U} \subseteq V}} 
+\]
+Da die $f_{U,V}$ stetig sind, ist $F$ bezüglich der Produkttopologie auf $Z$ auch stetig. Es bleibt zu zeigen: $F : X \to F(X) \subseteq Z$ ist ein Homöomorphismus.\smallskip \\
+Sind $x,y \in X$ mit $x \not= y$, so gibt es $U,V \in \mathcal{U}$ mit $\overline{U} \subseteq V$, $x \in U$, $y \not\in V$. Daher gilt $f_{U,V} (x) = 0 \not= 1 = f_{U,V}(y)$.
+Insbesondere ist $F$ injektiv; durch Einschränkung auf das Bild also bijektiv. Es genügt nun zu zeigen, dass $F$ offene Mengen von $X$ auf offene Mengen in $F(X)$ abbildet.
+Sei $W \subseteq X$ offen, sei $x \in W$. Wir müssen eine offene Menge $O \subseteq Z$ finden mit $F(x) \in O$ und $F ^{-1}(O) \subseteq W$.
+
+\uline{Behauptung:} $\exists U_0 \in \mathcal{U}$ mit $x \in U_0, \overline{U_0} \subseteq W$.\\
+Sei $O := \prod_{\overline{U} \subseteq V} I_{U,V}$ mit 
+\[
+	I_{U,V} = \begin{cases}
+		[0,1), &\text{ falls }U=U_0, V=W\\
+		[0,1], &\text{ sonst}
+	\end{cases}
+\]
+Dann ist $F ^{-1}(O) = f ^{-1}_{U_0, W} \enbrace[\big]{[0,1)} \subseteq W$ und $F(x) \in O$, da $f_{U_0, W} (x) = 0$.
+\minisec{Beweis der Behauptung}
+Da $X$ Hausdorff ist, ist $\set{x}$ abgeschlossen. Da auch $X \setminus W$ abgeschlossen ist, gibt es offene mengen $U_1$ und $V_1$ mit $U_1 \cap V_1 = \emptyset$, $x \in U_1$ und
+$X \setminus W \subseteq V_1$. Insbesondere ist $\overline{U_1} \subseteq X \setminus V_1 \subseteq W $. Da $\mathcal{U}$ eine Basis ist, gibt es $U_0 \in \mathcal{U}$ mit 
+$x \in U_0$ und $U_0 \subseteq U_1$. \bewende
+% subsection 73 (end)
+
+\subsection{Urysohns Lemma} % (fold)
+\label{sub:74}
+Sei $X$ normal und $A,B \subseteq X$ abgeschlossen mit $A \cap B = \emptyset$. Dann gibt es eine stetige Funktion $f : X \to [0,1]$ mit $f(a) = 0$ für alle $a \in A$ und
+$f(b)= 1$ für alle $b \in B$.
+\minisec{Beweis}
+Sei $U_1 := X \setminus B$. Da $X$ normal ist, gibt es $U_0 \subseteq X$ offen mit $A \subseteq U_0$ und $U_0 \cap B = \emptyset$, also $\overline{U_0} \subseteq U_1$.\\
+($A \subseteq U_0$ und $V_0 \supseteq B$ mit $U_0 \cap V_0 = \emptyset \Rightarrow \overline{U_0} \cap B = \emptyset $ also $\overline{U_0} \subseteq U_1$) \\
+Ebenso finden wir 
+\begin{itemize}
+	\item $U_{1/2} \subseteq X$ offen mit $\overline{U_0} \subseteq U_{1/2}$ und $\overline{U_{1/2}} \subseteq U_1$,
+	\item $U_{1/4}, U_{3/4} \subseteq X$ offen mit 
+	$\overline{U_0} \subseteq U_{1/4}, \overline{U_{1/4}} \subseteq U_{1/2}$ und $ \overline{U_{1/2}} \subseteq U_{3/4} $, $\overline{U_{3/4}} \subseteq U_1 $, \ldots
+\end{itemize}
+Induktiv finden wir für jedes $r = \frac{m}{2^n} $ mit $0 \le m \le 2^n$ eine offene Menge $U_r \subseteq X$ so dass gilt: $\overline{U_r} \subseteq U_s $ für $r < s$ mit
+$A \subseteq U_0$ und $B= X \setminus U_1$. Sei nun $f : X \to [0,1]$ definiert durch
+\[
+	f(x) = \begin{cases}
+		1, &\text{ falls }x \in B\\
+		\inf \set[r]{x \in U_r} , &\text{ falls } x \not\in B
+	\end{cases}
+\]
+Für $\alpha\in [0,1]$ ist $f ^{-1}\enbrace[\big]{[0,\alpha)} = \bigcup_{r <\alpha} U_r$ offen und 
+\[
+	f ^{-1} \enbrace[\big]{(\alpha,1]} = \bigcup_{r > \alpha} X \setminus U_r = \bigcup_{r > \alpha} X  \setminus \overline{U_r} 
+\]
+offen. Damit ergibt sich leicht die Stetigkeit von $f$. \bewende
+% subsection 74 (end)
+% section 7 (end)
+\newpage
+
+\section{Zusammenhängende topologische Räume} % (fold)
+\label{sec:8}
+
+\subsection[Definition: Zusammenhängender, wegzusammenhängender topologischer Raum]{Definition} % (fold)
+\label{sub:81}
+Sei $X$ ein topologischer Raum.
+\begin{enumerate}[(1)]
+	\item $X$ heißt \bet{zusammenhängend}\index{topologischer Raum!zusammenhängend}, falls er nicht als die disjunkte Vereinigung von zwei nicht leeren offenen Mengen 
+	geschrieben werden kann.
+	\item $X$ heißt \bet{wegzusammenhängend}\index{topologischer Raum!wegzusammenhängend}, falls es zu allen $x,y \in X$ eine stetige Abbildung $\omega : [0,1] \to X$ gibt mit
+	$\omega(0)=x$ und $\omega(1)=y$. $\omega$ heißt dann ein \Index{Weg} von $x$ nach $y$.
+	\item $X$ heißt \bet{lokal zusammenhängend}\index{topologischer Raum! lokal zusammenhängend}, falls es für jedes $x \in X$ und jede offene Umgebung $U$ von $x$ eine 
+	zusammenhängende Umgebung $V$ von $x$ gibt mit $V \subseteq U$.
+	\item $X$ heißt \bet{lokal wegzusammenhängend}\index{topologischer Raum! lokal wegzusammenhängend}, falls es für jedes $x \in X$ und jede offene Umgebung $U$ von $x$ eine 
+	wegzusammenhängende Umgebung $V$ von $x$ gibt mit $V \subseteq U$.
+\end{enumerate}
+% subsection 81 (end)
+
+\subsection[Bemerkungen zu zusammenhängenden und wegzusammenhängenden Räumen]{Bemerkung} % (fold)
+\label{sub:82}
+\begin{enumerate}[(1)]
+	\item $\mathds{R} \setminus \set{0} = (-\infty,0) \cup (0, \infty)$ ist nicht zusammenhängend und auch nicht wegzusammenhängend (ZWS!).
+	\item $[0,1]$ ist zusammenhängend: Angenommen es wäre $[0,1] = U \cup V$ mit $U, V$ offen, $U \cap V = \emptyset$. Dann sind $U= [0,1] \setminus V$ und 
+	$V= [0,1] \setminus U$
+	auch abgeschlossen. O.B.d.A. sei $0 \in U$. Dann liegt $\inf V$ sowohl in $\overline{V}$ als auch in $\overline{U}$. Also 
+	$U \cap V = \overline{U} \cap \overline{V} \not= \emptyset $ \light.
+	
+	Natürlich ist $[0,1]$ auch wegzusammenhängend: Zu $x,y\in [0,1]$ ist $\omega : [0,1]\to [0,1]$ mit $\omega(t)=(1-t)\cdot x +t\cdot y$ ein stetiger Weg von $x$ nach $y$.
+	\item Ist $f : X \to Y$ stetig und surjektiv und$X$ zusammenhängend, so ist auch $Y$ zusammenhängend: Ist $Y = U \dot{\cup} V$, so ist auch $X = f ^{-1}(U) \dot{\cup} f ^{-1}(V)$ und
+	es gilt $U \not= \emptyset \Longleftrightarrow f ^{-1}(U) \not= \emptyset$ und $V \not= \emptyset \Longleftrightarrow f ^{-1}(V) \not= \emptyset$.
+	\item Ist $X$ wegzusammenhängend, so ist $X$ auch zusammenhängend: Sei $X= U \cup V$ mit $U,V$ offen und $U \not= \emptyset$, $V \not= \emptyset$. Sei $x \in U$ und $y \in V$.
+	Da $X$ wegzusammenhängend ist, gibt es einen Weg $\omega : [0,1] \to X$ von $x$ nach $y$. Dann ist $[0,1] = \omega ^{-1}(U) \cup \omega ^{-1}(V)$. Es ist 
+	$0 \in \omega ^{-1} (U)$ und $1 \in \omega ^{-1}(V)$. Also $\omega ^{-1} (U) \not= \emptyset \not= \omega ^{-1}(V)$. Da $[0,1]$ nach (1) zusammenhängend ist, ist 
+	$\omega ^{-1} (U) \cap \omega ^{-1}(V) \not= \emptyset$. Damit ist auch $U \cap V \not= \emptyset$.
+	\item Ist $f : X \to Y$ ein Homöomorphismus, so gelten:
+	\begin{align*}
+		X \text{ wegzusammenhängend } &\iff Y \text{ wegzusammenhängend} \\
+		X \text{ zusammenhängend } &\iff Y \text{ zusammenhängend}
+	\end{align*}
+\end{enumerate}
+% subsection 82 (end)
+
+\subsection[Beispiele zu (weg-)zusammenhängenden Räumen]{Beispiel} % (fold)
+\label{sub:83}
+\begin{enumerate}[(i)]
+	\item Der sogenannte \bet{Polnische Kreis}\index{Polnischer Kreis} $PK$ gegeben durch
+	\[
+		PK = \set[(x,y) \in \mathds{R}^2]{ \begin{array}{rlcl}
+			 & (x \in [{-1,1}] &\wedge& y=1) \\
+			\vee & (x \in \set{-1,1} &\wedge& y \in [0,1])  \\
+			\vee & (x \in [-1,0] & \wedge& y = 0) \\
+			\vee & (x=0 & \wedge & y \in [-1/2, 1/2]) \\
+			\vee & (x \in (0,1] & \wedge& y= 1/2 \cdot \sin (\pi/x))
+		\end{array}} 
+	\]
+	ist wegzusammenhängend, aber nicht lokal wegzusammenhängend.
+	\item 
+	\[
+		\set[(x,y) \in \mathds{R}^2]{ \begin{array}{rlcl}
+					 & x=0 & \wedge & y \in [-1/2, 1/2] \\
+					\vee & x \in (0,1] & \wedge& y= 1/2 \cdot \sin (\pi/x)
+				\end{array}}
+	\]
+	ist zusammenhängend, aber nicht wegzusammenhängend.
+\end{enumerate}
+% subsection 83 (end)
+
+\subsection{Satz (Topologische Invarianz der Dimension)} % (fold)
+\label{sub:84}
+Es gilt: $\mathds{R}^n \cong \mathds{R}^m \iff n=m$
+\minisec{Beweis für $n=1$}
+Angenommen es gibt einen Homöomorphismus $f : \mathds{R} \to \mathds{R}^m$ mit $m \ge 2$. Durch Einschränkung von $f$ erhalten wir dann auch einen Homöomorphismus 
+$\mathds{R} \setminus\set{0} \to \mathds{R}^m \setminus \set{f(0)}$. Es ist aber $\mathds{R} \setminus \set{0}$ nicht wegzusammenhängend und für 
+$m \ge 2$, $x \in \mathds{R}^m$ ist $\mathds{R}^m \setminus \set{x}$ wegzusammenhängend \light. \bewende
+\minisec{Bemerkung}
+Eine Variante dieses Arguments kann benutzt werden, um zu zeigen, dass $\mathds{R}^n \cong \mathds{R}^m$ genau dann gilt, wenn $n=m$. Dafür benötigt man aber höher dimensionale 
+Varianten des Begriffs wegzusammenhängend.
+% subsection 84 (end)
+% section 8 (end)
+\newpage
+
+\section{Die Fundamentalgruppe} % (fold)
+\label{sec:9}
+
+\subsection[Definition: Einfach zusammenhängender topologischer Raum]{Definition} % (fold)
+\label{sub:91}
+Ein topologischer Raum $X$ heißt \bet{einfach zusammenhängend}\index{topologischer Raum!einfach zusammenhängend}, wenn jede stetige Abbildung $f : S^1 \to X$ eine stetige
+Fortsetzung $F : D^2 \to X$ besitzt.
+\minisec{Bemerkung}
+Ein topologischer Raum $X$ ist genau dann wegzusammenhängend, wenn jede stetige Abbildung $f : S^0 \to X$ ein stetige Fortsetzung $F : D^1 \to X$ besitzt.
+% subsection 91 (end)
+
+\subsection[Bemerkungen zu einfach zusammenhängenden Räumen]{Bemerkung} % (fold)
+\label{sub:92}
+\begin{enumerate}[(i)]
+	\item $\mathds{R}^n$ ist einfach zusammenhängend: Sei $f : S^1 \to \mathds{R}^n$ stetig. Definiere $F : D^2 \to \mathds{R}^n$ durch:
+	\[
+		F(t \cdot v) := t \cdot f(v) \qquad \text{ für } t \in [0,1], v \in S^1
+	\]
+	\item Ist $X \cong Y$ dann: $X$ einfach zusammenhängend $\Leftrightarrow$ $Y$ einfach zusammenhängend.
+	\item Später: $\mathds{R}^2 \setminus \set{0}$ ist nicht einfach zusammenhängend.
+\end{enumerate}
+% subsection 92 (end)
+
+\subsection[Definition: Homotopie zwischen Wegen]{Definition} % (fold)
+\label{sub:93}
+Seien $\omega_0, \omega_1 : [0,1] \to X$ Wege in $X$. Eine Homotopie mit festen Endpunkten (oder relativ $\set{0,1}$) zwischen $\omega_0$ und $\omega_1$ ist eine stetige 
+Abbildung $H : [0,1] \times [0,1] \to X$, so dass gilt:
+\begin{enumerate}[(i)]
+	\item $H(s,0)= \omega_0(s) \enspace \forall s \in [0,1]$
+	\item $H(s,1) = \omega_1(s) \enspace \forall s \in [0,1]$
+	\item $H(0,t) = \omega_0(0)= \omega_1(0) \enspace \forall t \in [0,1]$
+	\item $H(1,t) = \omega_0(1) = \omega_1(1) \enspace \forall t \in [0,1]$
+\end{enumerate}
+Durch 
+\[
+	\omega_0 \sim \omega_1 :\Leftrightarrow \exists \text{ Homotopie relativ } \set{0,1} \text{ zwischen } \omega_0 \text{ und } \omega_1
+\]
+wird eine Äquivalenzrelation auf der Menge aller Wege in $X$ erklärt. Die Äquivalenzklassen heißen \Index{Homotopieklassen}, wir schreiben $[\omega]$ für die 
+Homotopieklasse von $\omega$. 
+% subsection 93 (end)
+
+\subsection[Definition: Schleife]{Definition} % (fold)
+\label{sub:94}
+Ein Weg $\omega : [0,1] \to X$ heißt eine \Index{Schleife} in $X$, falls $\omega(0)= \omega(1)$. 
+% subsection 94 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:95}
+$X$ ist genau dann einfach zusammenhängend, wenn jede Schleife in $X$ homotop relativ $\set{0,1}$ zu einer konstanten Schleife ist.
+\minisec{Beweis}
+Beweis per Zeichnung:
+\[
+	\begin{tikzpicture}[scale=0.8]
+		\foreach \r in {0.1, 0.2,...,1}{
+			\draw (0,0) arc (0:360:\r); 
+		}
+	\end{tikzpicture}
+\]
+% subsection 95 (end)
+
+\subsection{Notation} % (fold)
+\label{sub:96}
+Für $x \in X$ bezeichne $c_x : [0,1] \to X$ die konstante Schleife bei $x$; $c_x(t)= x \enspace \forall t \in [0,1]$.
+% subsection 96 (end)
+
+\subsection[Definition: Kompositionsweg]{Definition} % (fold)
+\label{sub:97}
+Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist der \Index{Kompositionsweg} $\omega * \omega' : [0,1] \to X$ definiert durch 
+\[
+	\omega * \omega' (t) = \begin{cases}
+		\omega(2 t), &\text{ falls }t \in [0, 1/2]\\
+		\omega'(2t -1), &\text{ falls } t \in [1/2,1]
+	\end{cases}
+\] 
+% subsection 97 (end)
+\subsection{Lemma} % (fold)
+\label{sub:98}
+\begin{enumerate}[a)]
+	\item Seien $\omega, \omega', \omega''$ Wege in $X$ mit $\omega(1)= \omega'(0)$ und $\omega'(1)= \omega''(0)$. Dann gilt 
+	\[
+		\benbrace[\big]{(\omega * \omega') * \omega''} =  \benbrace[\big]{\omega * ( \omega' * \omega'')}
+	\]
+	\item Seien $\omega_0, \omega_0', \omega_1, \omega_1'$ Wege in $X$ mit $\omega_0(1)= \omega_0'(0)$, $\omega_1(1)= \omega_1'(0)$ und 
+	$[\omega_0] = [\omega_1]$ und $[\omega_0'] = [\omega_1']$. Dann gilt
+	\[
+		[\omega_0 * \omega_0'] = [\omega_1 * \omega_1']
+	\]
+	\item Sei $\omega$ ein Weg in $X$. Sei $\overline{\omega} : [0,1] \to X $ der umgekehrte Weg, also $\overline{\omega} (t) := \omega(1-t)$. Dann gilt 
+	$[\omega * \overline{\omega}] = [c_{\omega(0)}]$, $[\overline{\omega} * \omega ] = [c_{\omega(1)}]$.
+	\item Sei $\omega$ ein Weg in $X$. Dann gilt 
+	\[
+		[\omega * c_{\omega(1)}] = [\omega]
+	\]
+\end{enumerate}
+\minisec{Beweis (nur a)}
+\begin{enumerate}[(i)]
+	\item Sei $\varphi : [0,1] \to [0,1]$ mit \marginnote{Zeichnung einfügen}.
+	Dann gilt 
+	\begin{align*}
+		\enbrace[\Big]{\omega * \enbrace[\big]{\omega' * \omega''} }(s) = \enbrace[\Big]{\enbrace[\big]{\omega * \omega'} * \omega''} (\varphi(s))  
+	\end{align*}
+	Die gesuchte Homotopie mit festen Endpunkten wird durch
+	\[
+		H(s,t) := \enbrace[\Big]{ \enbrace[\big]{\omega * \omega'} * \omega'' } \enbrace[\big]{(1-t)s + t \varphi(s)}  
+	\]
+	definiert. \bewende
+\end{enumerate}
+% subsection 98 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:99}
+Sei $X$ ein topologischer Raum und $x_0 \in X$ fest. Dann wird 
+\[
+	\pi_1 (X, x_0) := \set[{[\omega]}]{\omega \text{ ist eine Schleife in }X \text{ mit } \omega(0)= x_0} 
+\]
+durch die Komposition von Wegen zu einer Gruppe mit neutralem Element $e= [c_{x_0}]$.
+% subsection 99 (end)
+
+\subsection[Definition: Fundamentalgruppe]{Definition} % (fold)
+\label{sub:910}
+$\pi_1(X, x_0)$ heißt die \Index{Fundamentalgruppe} von $X$ bezüglich des \bet{Basispunktes}\index{Basispunkt} $x_0$.
+\minisec{Bemerkung}
+$X$ ist genau dann einfach zusammenhängend, wenn $\pi_1(X,x_0)$ für alle $x_0 \in X$ die triviale Gruppe ist.
+% subsection 910 (end)
+
+\subsection[Bemerkung: Isomorphie zwischen Fundamentalgruppen]{Bemerkung} % (fold)
+\label{sub:911}
+Sei $\eta$ ein Weg in $X$ von $x_1$ nach $x_0$. Dann definiert
+\[
+	\pi_1(X,x_0) \ni [\omega] \xmapsto{\conj_\eta} \benbrace*{\eta * \omega * \overline{\eta}}  \in \pi_1(X,x_1)
+\]
+einen Isomorphismus zwischen $\pi_1{X,x_0}$ und $\pi_1(X,x_1)$. Wir zeigen nur: $\conj_\eta$ ist ein Gruppenhomomorphismus.
+\begin{align*}
+	\conj_\eta \enbrace*{ \benbrace*{\omega} * \benbrace*{\omega'}} &= \conj_\eta \enbrace[\big]{ \benbrace*{\omega * \omega'}} = \benbrace[\Big]{ \enbrace[\big]{\eta * (\omega * \omega')} * \overline{\eta}  }  \\
+	\conj_\eta \enbrace*{[\omega]} \cdot \conj_\eta \enbrace*{[\omega']} &= \benbrace[\big]{(\eta * \omega) * \overline{\eta} } \cdot  \benbrace[\big]{(\eta * \omega') * \overline{\eta}} = \benbrace[\Big]{ \enbrace[\big]{ \enbrace*{\eta * \omega}* \overline{\eta}  } * \enbrace[\big]{\enbrace*{\eta * \omega'} * \overline{\eta}  }  } \\
+	&\stackrel{\text{a)}}{=} \benbrace[\bigg]{ \enbrace[\Big]{\eta * \enbrace[\big]{\omega * \enbrace*{\overline{\eta} * \eta } }* \omega' } * \overline{\eta}  } 
+	\stackrel{\text{c)}}{=} \benbrace[\bigg]{\enbrace[\Big]{ \eta * \enbrace[\big]{\enbrace{\omega * c_{\omega(1)}} * \omega' } } * \overline{\eta}} \\
+	&\stackrel{\text{d)}}{=}
+	\benbrace[\Big]{\enbrace[\big]{\eta * \enbrace*{\omega * \omega'} } * \overline{\eta}  } 
+\end{align*}
+Insbesondere hängt der Isomorphismus von $\pi_1(X,x_0)$ für wegzusammenhängende Räume nicht von der Wahl des Basispunktes ab.
+% subsection 911 (end)
+% section 9 (end)
+\newpage
+
+\section{Die Windungszahl} % (fold)
+\label{sec:10}
+\subsection{Frage} % (fold)
+\label{sub:101}
+\[
+	\pi_1 \enbrace*{\mathds{R}^2 \setminus \set{0}, x_0 } = ? \qquad \pi_1 \enbrace*{S^1, x_0} = ?  
+\]
+% subsection 101 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:102}
+Sei $p  : \mathds{R} \to S^1$ definiert durch $p(t) = e^{2 \pi i t}$. Sei $\omega : [0,1] \to S^1$ stetig und $t_0 \in \mathds{R}$ mit $p(t_0) = \omega(0)$.
+Dann gibt es eine eindeutige stetige Abbildung. $\hat{\omega} : [0,1] \to \mathds{R}$ mit $\hat{\omega}(0) = t_0$ und $p  \circ  \hat{\omega} = \omega$
+\[
+	\begin{tikzcd}
+		\set{0} \rar{t_0} \dar& \mathds{R} \dar{p} \\
+		{[0,1]} \rar{\omega} \urar[dashed]{\hat{\omega}}& S^1 
+	\end{tikzcd}
+\]
+Ist $\eta : [0,1] \to S^1$ mit $[\eta] = [\omega]$ und $\hat{\eta} : [0,1] \to \mathds{R}$ mit $\hat{\eta}(0)= t_0$, $p \circ \hat{\eta} = \eta$ so gilt 
+$\hat{\eta}(1) = \hat{\omega}(1)$.
+\minisec{Beweis}
+Homotopiehebungssatz (später) \bewende
+% subsection 102 (end)
+
+\subsection[Definition: Windungszahl]{Definition} % (fold)
+\label{sub:103}
+Sei $\omega : [0,1] \to S^1$ eine Schleife in $S^1$ mit $\omega(0) = \omega(1) = 1$. Sei $\hat{\omega} : [0,1] \to \mathds{R}$ mit $p \circ  \hat{\omega} = \omega$ und
+$\hat{\omega}(0)=0$. Dann heißt $\hat{\omega}(1) \in \mathds{Z} = p^{-1}(1)$ die \Index{Windungszahl} von $\omega$. 
+% subsection 013 (end)
+
+\subsection[Satz: Die Windungszahl definiert einen Isomorphismus $ \pi_1(S^1,1) \cong \mathds{Z}$]{Satz} % (fold)
+\label{sub:104}
+Die Windungszahl definiert einen Isomorphismus $d : \pi_1(S^1,1) \to \mathds{Z}$, $[\omega] \mapsto \hat{\omega}(1)$.
+\minisec{Beweis}
+Nach Proposition \ref{sub:102} ist $d$ eine wohldefinierte Abbildung. 
+\begin{description}
+	\item[$d$ ist surjektiv:] Sei für $n \in \mathds{Z}$ $\hat{\omega}_n : [0,1] \to \mathds{R}$ mit $\hat{\omega}_n (t) = t \cdot n$. Dann ist 
+	\[
+		d \enbrace*{ \benbrace*{p \circ  \hat{\omega}_n}} = \hat{\omega}_n(1) = n 
+	\]
+	\item[$d$ ist Gruppenhomomorphismus:] Seien $\omega, \eta : [0,1] \to S^1$ Schleifen mit 
+	$\omega(0)= \eta(0) = 1$. Sei $\hat{\omega}, \hat{\eta} : [0,1] \to \mathds{R}$ mit 
+	$\hat{\eta}(0)=0, \hat{\omega}(0)=0$, $p \circ  \hat{\omega} = \omega$, $p \circ \hat{\eta} = \eta$. Also $d( [\omega]) = \hat{\omega}(1)$ und 
+	$d([\eta]) = \hat{\eta}(1)$. Sei $\hat{\eta}_+ : [0,1] \to \mathds{R}$ mit $\hat{\eta}_+ (s) = \hat{\eta}(s) + \hat{\omega}(1)$. Dann ist $\hat{\omega} * \hat{\eta}_+$
+	definiert, $\enbrace*{\hat{\omega} * \hat{\eta}_+}(0) = 0 $, $\enbrace*{\hat{\omega} * \hat{\eta}_+}(1) = \hat{\eta}(1) + \hat{\omega}(1)$. Also
+	\[
+		d \enbrace*{[\omega * \eta]} = \enbrace*{ \hat{\omega} * \hat{\eta}_+} (1) = \hat{\eta}(1) + \hat{\omega}(1) = d([\omega]) + d([\eta])  
+	\]
+	\item[$d$ ist injektiv:] Sei $\omega : [0,1] \to S^1$ eine Schleife mit $d([\omega]) = 0$. Dann gibt es $\hat{\omega} : [0,1] \to \mathds{R}$ mit 
+	$\hat{\omega}(0)= 0 = \hat{\omega}(1)$ und $p \circ  \hat{\omega} = \omega$. Nun ist $\hat{H} : [0,1] \times [0,1] \to \mathds{R}$ mit 
+	\[
+		\hat{H} (s,t) := (1-t)\cdot  \hat{\omega}(s)
+	\]
+	eine Homotopie mit festen Endpunkten zwischen $\hat{\omega}$ und $c_0$. Dann ist $p \circ  H$ eine Homotopie mit festen Endpunkten zwischen $\omega$ und $c_1$.
+	Also $[\omega] = e \in \pi_1(S^1,1)$. \bewende
+\end{description}
+% subsection 104 (end)
+
+\subsection[Definition: Überlagerung und elementare Umgebung]{Definition} % (fold)
+\label{sub:105}
+Eine surjektive stetige Abbildung $p : \hat{X} \to X$ heißt eine \Index{Überlagerung}, falls es zu jedem $x \in X$ eine Umgebung $U$ gibt, so dass sich $p ^{-1}(U)$ 
+schreiben lässt als die disjunkte Vereinigung von offenen Mengen $U_i  \subseteq \hat{X}$, sodass für jedes $i$ die Einschränkung $p\big|_{U_i} : U_i \to U$ ein 
+Homöomorphismus ist. Eine solche Umgebung $U$ heißt eine \Index{elementare Umgebung}. 
+% subsection 105 (end)
+
+\subsection[Beispiele für Überlagerungen]{Beispiel} % (fold)
+\label{sub:106}
+\begin{enumerate}[(1)]
+	\item $p : \mathds{R} \to S^1$, $t \mapsto e^{2 \pi  i t}$ ist eine Überlagerung.
+	\item $p_n : S^1 \to S^1$, $z \mapsto z^n$ ist eine Überlagerung.
+	\item Sind $p : \hat{X} \to X$, $q : \hat{Y} \to Y$ Überlagerungen, so ist $p \times q : \hat{X} \times \hat{Y} \to X \times Y$ eine Überlagerung.
+	zB: $R^2 \to T^2 = S^1 \times S^1$
+	\item $S^2 \to \mathds{R}P^2= \nicefrac{S^2}{x \sim -x}$ ist eine Überlagerung. \hfill (Übung!)
+\end{enumerate}
+% subsection 106 (end)
+
+\subsection[Definition: Hebung]{Definition} % (fold)
+\label{sub:107}
+Sei $p : \hat{X} \to X$ eine Überlagerung und $f : Z \to X$ eine stetige Abbildung. Eine \Index{Hebung} von $f$ (bezüglich $p$) ist eine stetige Abbildung 
+$\hat{f} : Z \to \hat{X}$ mit $p \circ  \hat{f} = f$
+\[
+	\begin{tikzcd}
+		\hat{X} \drar{p}&  \\
+		Z \rar{f} \uar[dashed]{\hat{f}}& X
+	\end{tikzcd}
+\]
+% subsection 107 (end)
+
+\subsection{Homotopiehebungssatz} % (fold)
+\label{sub:108}
+Sei $\hat{p} : \hat{X} \to X$ eine Überlagerung, $H : Z \times [0,1] \to X$ eine Homotopie und $\hat{f} : Z \to \hat{X}$ eine Hebung von 
+$f = H(-,0) := H\big|_{Z \times \set{0}}$. Dann gibt es eine \emph{eindeutige} Hebung von $H$ mit $\hat{H}(-,0)= \hat{f}$
+\[
+	\begin{tikzcd}
+		Z \times \set{0} \dar[hook, swap]{i} \rar{\hat{f}}& \hat{X} \dar{p} \\
+		Z \times [0,1] \urar[dashed]{\hat{H}} \rar{H}& X  
+	\end{tikzcd}
+\]
+\minisec{Beweis}
+Sei $\mathcal{U}$ eine Überdeckung von $X$ durch elementare Umgebungen. Wir können $\mathcal{U}$ mittels $H$ zurückziehen und erhalten eine offene Überdeckung
+$H ^{-1}(\mathcal{U}) := \set[H ^{-1}(U)]{U \in \mathcal{U}}$ von $Z \times [0,1]$. Sei $z_0 \in Z$. Da $\set{z_0} \times [0,1]$ kompakt ist, gibt es 
+$0 = t_0 < t_1 < \ldots < t_n=1$ und $U_1, \ldots , U_n \in \mathcal{U}$ mit 
+\[
+	H \enbrace[\big]{\set{z_0} \times [t_i, t_{i+1}] } \subseteq U_i 
+\]
+Da die $U_i$ offen sind gibt es zu jedem $i$ eine offene Umgebung $V_i$ von $z_0$ mit $H\enbrace[\big]{V_i \times[t_i, t_{i+1}]} \subseteq U_i$. Sei 
+$V := \bigcap_{i=1}^n V_i$, dann $H \enbrace[\big]{V \times [t_i, t_{i+1}]} \subseteq U_i$. Da alle $U_i$ elementar sind, finden wir induktiv eindeutige Hebungen
+$\hat{H}_i^V$ von $H\big|_{V \times [t_i, t_{i+1}]}$ mit 
+\[
+	\hat{H}_1^V(-,0)= \hat{f}\big|_{V}\quad \text{ und } \quad \hat{H}_i^V(-,t_{i-1}) = \hat{H}_{i-1}^V (-, t_{i-1}).
+\]
+Nun erhalten wir mit $\hat{H}^V(z,t) := \hat{H}_i^V(z,t)$ für $z \in V$, $t \in [t_{i-1},t_i]$ eine eindeutige Hebung von $H\big|_{V \times [0,1]}$ mit 
+$\hat{H}^V(-,0) = \hat{f}\big|_V$. Dabei bleibt $\hat{H}^V$ eindeutig auch wenn wir $V$ verkleinern. Nun finden wir für jedes $z \in Z$ eine Umgebung $V_z$ und eine 
+eindeutige Hebung $\hat{H}^{V_z}$ von $H\big|_{V_z \times [0,1]}$ mit 
+\(
+	\hat{H}^{V_z} (-,0) = \hat{f}\big|_{V_z}
+\).
+Wegen der Eindeutigkeit gilt 
+\[
+	\hat{H}^{V_z} (\xi,0) = \hat{H}^{V_{z'}}(\xi,t)
+\]
+für $\xi \in V_z \cap V_{z'}$. Daher definiert $\hat{H}(z,t) := \hat{H}^{V_z}(z,t)$ die gesuchte eindeutige Hebung. \bewende
+% subsection 108 (end)
+% section 10 (end)
+\newpage
+
+\section{Induzierte Abbildungen} % (fold)
+\label{sec:11}
+\subsection{Lemma} % (fold)
+\label{sub:11.1}
+Sei $f : X \to Y$ stetig mit $f(x_0)= y_0$. Dann definiert $f_*([\omega]) := [f \circ \omega]$ einen Gruppenhomomorphismus $f_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)$.
+\minisec{Beweis}
+Wir zeigen nur, dass $f_*$ wohldefiniert ist. Seien $\omega, \eta : [0,1] \to X$ Schleifen mit $\omega(0)= x_0 = \eta(0)$ und $[\omega]= [\eta]$. Dann gibt es eine 
+Homotopie $H : [0,1] \times [0,1] \to X$ mit festen Endpunkten zwischen $\omega$ und $\eta$. \footnote{$H(-,0)=\omega, H(-,1)=\eta$, $H(t,0)= H(t,1)= x_0$ für alle 
+$t \in [0,1]$} Dann ist $f \circ H$ eine Homotopie mit festen Endpunkten zwischen $f \circ \omega$ und $f \circ \eta$. Also 
+\[
+	f_*([\omega]) = \benbrace*{f \circ  \omega} = \benbrace*{f \circ \eta} = f_*([\eta]) \text{ in } \pi_1(Y,y_0) \bewende
+\]
+% subsection 111 (end)
+
+\subsection[Definition: Induzierte Abbildung]{Definition} % (fold)
+\label{sub:11.2}
+$f_*$ heißt die von $f$ \Index{induzierte Abbildung}. Manchmal schreibt man auch $\pi_1(f)$ für $f_*$, um $f_*$ von anderen induzierten Abbildungen zu unterscheiden.
+\minisec{Bemerkung}
+\begin{enumerate}[(i)]
+	\item $(f \circ g)_* = f_* \circ  g_*$
+	\item $(\id_X)_* = \id_{\pi_1(X,x_0)}$
+\end{enumerate}
+% subsection 11.2 (end)
+
+\subsection[Definition: Punktierter Raum, punktierte Abbildung und punktiert homotop]{Definition} % (fold)
+\label{sub:11.3}
+Ein topologischer Raum $X$ zusammen mit einem Basispunkt $x_0 \in X$, $(X,x_0)$ heißt ein \bet{punktierter Raum}\index{topologischer Raum!punktiert}. Eine
+\Index{punktierte Abbildung} zwischen punktierten Räumen $f : (X,x_0) \to (Y,y_0)$ ist eine stetige Abbildung $f : X \to Y$ mit $f(x_0)= y_0$. Punktierte Abbildungen 
+$f,g : (X,x_0) \to (Y,y_0)$ heißen \bet{punktiert homotop}\index{homotop!punktiert}, falls es eine Homotopie $H : X \times [0,1] \to Y$ von $f$ nach $g$ gibt mit 
+$H(x_0,t)= y_0 \enspace \forall t \in [0,1]$. 
+% subsection 11.3 (end)
+
+\subsection{Proposition (Homotopieinvarianz von $\pi_1$)} % (fold)
+\label{sub:11.4}
+Seien $f,g : (X,x_0) \to (Y,y_0)$ homotop. Dann gilt 
+\[
+	f_* = g_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)
+\]
+\minisec{Beweis}
+Sei $H$ eine Homotopie zwischen $f$ und $g$. Für $[\omega] \in \pi_1(X,x_0)$ ist $H \circ \omega$ eine Homotopie mit festen Endpunkten zwischen $f \circ \omega$ und 
+$g \circ \omega$. Also 
+\[
+	f_*([\omega]) = [f \circ \omega] = [g \circ \omega] = g_*([\omega]) \bewende
+\]
+% subsection 11.4 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:11.5}
+Seien $X,Y$ topologische Räume. Dann heißen $X$ und $Y$ \Index{homotopieäquivalent}, falls es stetige Abbildungen $f : X \to Y$, $g : Y \to X$ gibt, so dass 
+\marginnote{$f \simeq g :\Leftrightarrow$ $f$ homotop zu $g$ }
+\[
+	f \circ g \simeq \id_X \text{ und } g \circ  f \simeq \id_X
+\]
+Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f}$. Entsprechendes benutzen wir auch für punktierte Räume. Falls $X \simeq \set{0}$, so sagen wir: $X$ ist
+\Index{zusammenziehbar}.
+% subsection 115 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:11.6}
+\begin{enumerate}[(1)]
+	\item $S^{n-1}$ ist homotopieäquivalent zu $\mathds{R}^n \setminus \set{0}$: Benutze $i : S^{n-1} \hookrightarrow \mathds{R}^n \setminus \set{0}$ die Inklusion und
+	$p : \mathds{R}^n \setminus \set{0}  \to S^{n-1}$, $v \mapsto \frac{v}{\norm{v}}$. Dann gilt
+	\[
+		p \circ i = \id_{S^{n-1}} \quad , \quad i \circ p  \simeq \id_{\mathds{R}^{n} \setminus \set{0} }
+	\]
+	mit der Homotopie $H(v,t)= t  + (1-t) \frac{v}{\norm{v} } $.
+	\item Sei $K \subseteq \mathds{R}^n$ ein konvexe Teilmenge und $x_0 \in K$. Dann ist $(K,x_0)$ zusammenziehbar:
+	\begin{align*}
+		i : \enbrace*{\set{x_0}, x_0 } &\to (K,x_0) \quad \text{ die Inklusion}\\
+		p : \enbrace*{K, x_0} &\to   \enbrace*{\set{x_0}, x_0 } \quad \text{ die konstante Abbildung}
+	\end{align*}
+	$p \circ i = \id_{\enbrace*{\set{x_0}, x_0 } }$ und $i \circ p \simeq \id_{(K,x_0)}$ mit der Homotopie $H(k,t)= t \cdot k + (1-t)x_0$
+	\item Auch $X := \mathds{R}^2 \setminus \set[(x,y)]{x \in (0,\infty) , y \in [0,1]} $ ist kontrahierbar.
+	\[
+		\begin{tikzpicture}
+			\draw[fill, DeepSkyBlue1!60] (0,0) rectangle (4,1); 
+			\draw (0,1) -- (4,1);
+			\draw[->] (-2,0) -- (4,0);
+			\draw[->] (0,-1) -- (0,2);
+		\end{tikzpicture}
+	\]
+	Setze $H := \set[(x,y)]{x \le 0} $. Dann ist $X \simeq H \simeq \set{x_0} $
+\end{enumerate}
+% subsection 116 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:11.7}
+Ist $f : (X,x_0) \to (Y,y_0)$ eine Homotopieäquivalenz, so ist $f_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)$ ein Isomorphismus. Insbesondere ist $\pi_1(X,x_0) = \set{1}$, falls
+$(X,x_0)$ zusammenziehbar ist.
+\minisec{Beweis}
+Sei $g : (Y, y_0) \to (X,x_0)$ eine Homotopieinverse zu $f$, also $ g \circ f \simeq \id_X$, $f \circ g \simeq \id_Y$. Dann ist $g_*= (f_*)^{-1}$ (und $f_*$ ein 
+Isomorphismus):
+\begin{align*}
+	f_* \circ g_* &= (f \circ g)_* = (\id_Y)_* = \id_{\pi_1(Y,y_0)} \\
+	g_* \circ f_* &= (g \circ f)_* = (\id_X)_* = \id_{\pi_1(X,x_0)} \bewende
+\end{align*}
+% subsection 11.7 (end)
+
+\subsection{Fixpunktsatz von Brouwer} % (fold)
+\label{sub:11.8}
+Jede stetige Abbildung $f : D^n \to D^n$ hat einen Fixpunkt.
+\minisec{Beweis}
+Für $n=1$ ist dies eine Folgerung aus dem Zwischenwertsatz. \smallskip \\
+Angenommen $f : D^n \to D^n$ hat keinen Fixpunkt, also $f(x) \not= x$ für alle $x \in D^n$. Dann gibt es eine stetige Abbildung $F : D^n \to S^{n-1}$ mit 
+$F\big|_{S^{n-1}} = \id_{S^{n-1}}$. Konstruktion von $F$
+\[
+	\begin{tikzpicture}
+		\coordinate (Fx) at (130:2);
+		\coordinate (fx) at (-20:1);
+		\draw[thick] (0,0) circle[radius=2];
+		\draw[thick, DodgerBlue2] (fx) node[right]{$f(x)$} -- (Fx) node[left]{$F(x)$} node[midway] (x) {};
+		\node[below left] at (x) {$x$};
+		\foreach \a in {Fx, fx, x}{
+			\draw[fill=Coral2] (\a) circle[radius=0.04];
+		}
+	\end{tikzpicture} 
+\]
+\begin{enumerate}[(i)]
+	\item $F(x) = t \enbrace*{x- f(x)} + x \enspace, t\ge 0$
+	\item $F(x) \in S^{n-1}$
+\end{enumerate}
+Sei $x_0 \in S^{n-1}$. Wir haben also
+\[
+	\begin{tikzcd}
+		\enbrace*{S^{n-1}, x_0} \rar{\id} \dar[hook]{i} & \enbrace*{S^{n-1}, x_0} \\
+		\enbrace*{D^n, x_0} \urar[swap]{F}
+	\end{tikzcd}
+	\qquad \begin{tikzcd}
+		\pi_1 \enbrace*{S^{n-1}, x_0} \rar{(\id)_* =\id}  \dar{i_*}& \pi_1 \enbrace*{S^{n-1}, x_0} \\
+		\pi_1 \enbrace*{D^n, x_0} \urar[swap]{F_*}   
+	\end{tikzcd}
+\]
+Für $n=2$ ist das zweite Diagramm
+\[
+	\begin{tikzcd}
+			\mathds{Z} \rar{(\id)_* =\id}  \dar{i_*}& \mathds{Z} \\
+			\set{e} \urar[swap]{F_*} 
+		\end{tikzcd}
+\]
+Daher folgt $\id = F_* \circ  i_* = $triviale Abbildung \light \bewende
+% subsection 11.8 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:11.9}
+Für $n \in \mathds{Z}$ sei $f_n : S^1 \to S^1$, $z \mapsto z^n$. Dann ist $(f_n)_* : \pi_1(S^1, 1) \to \pi_1(S^1,1)$ gegeben durch
+Multiplikation mit $n$:
+\[
+	(f_n)_* ([\omega]) = n \cdot [\omega] \in \pi_1\enbrace{S^1,1} = \mathds{Z}
+\]
+Weiter sind die $f_n$ paarweise nicht homotop zueinander.
+\minisec{Beweis}
+Sei $p : \mathds{R} \to S^1$, $t \mapsto e^{2 \pi  i t}$. Zu jeder Schleife $\omega : [0,1] \to S^1$ mit $\omega(0)= \omega(1) = 1$ gibt es eine eindeutige Hebung
+\(
+	\hat{\omega} : [0,1]  \to \mathds{R}
+\)
+zu einem Weg mit $\hat{\omega}(0)=0$.  Der Isomorphismus $d : \pi_1(S^1,1) \to \mathds{Z}$ bildet $[\omega]$ auf $\hat{\omega}(1) \in \mathds{Z} \subseteq \mathds{R}$ ab.
+Sei $\hat{f}_n : \mathds{R} \to \mathds{R}$, $t  \mapsto n t$. Dann gilt $p \circ  \hat{f}_n = f_n \circ p$ und $\hat{f}_n (0)=0$. Ist $\hat{\omega}$ eine Hebung von 
+$\omega$, so ist $\hat{f}_n \circ \hat{w}$ eine Hebung von $f_n \circ \omega$: 
+\begin{align*}
+	(\hat{f}_n \circ  \omega) (0) &= \hat{f}_n (0) = 0 \\
+	p \circ  \hat{f}_n \circ  \hat{\omega} &= f_n \circ p \circ  \hat{\omega} = f_n \circ  \omega
+\end{align*}
+Es folgt 
+\[
+	d \enbrace*{ [f_n \circ \omega]} = (\hat{f}_n \circ  \hat{\omega}) (1) = \hat{f}_n (\hat{\omega}(1)) = hat{f}_n (d[\omega]) = n \cdot d[\omega]
+\]
+Da $d$ ein Isomorphismus ist, folgt die Behauptung. \smallskip \\
+Mit der Homotopieinvarianz von induzierten Abbildungen folgt, dass die $f_n : (S^1,1) \to (S^1,1)$ als punktierte Abbildungen nicht punktiert homotop sind. Mit dem nächsten
+Lemma folgt das die $f_n$ paarweise nicht homotop sind. \bewende
+% subsection 11.9 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:1120}
+Seien $f,g : (X,x_0) \to (S^1,1)$ stetig. Sei $H : X \times [0,1] \to S^1$ eine (unpunktierte) Homotopie zwischen $f$ und $g$. Dann ist $\tilde{H} : X \times [0,1]\to S^1$,
+\[
+	\tilde{H} (x,t) = \frac{H(x,t)}{H(x_0, t)} 
+\]
+ein punktierte Homotopie zwischen $f$ und $g$.
+% subsection 1120 (end)
+
+\subsection{Hauptsatz der Algebra} % (fold)
+\label{sub:1121}
+Jedes Polynom $p = X^n + a_{n-1} X^{n-1} + \ldots  + a_0 \in \mathds{C}[X]$ von $\grad f = n \ge 1$ hat eine Nullstelle.
+\minisec{Beweis}
+Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dann $f_n : S^1 \to S^1$ homotop zu einer konstanten Abbildung ist. Aus der Proposition folgt 
+dann aber $n=0$. \bewende
+% subsection 1121 (end)
+% section 11 (end)
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\end{document}
