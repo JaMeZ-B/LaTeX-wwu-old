@@ -1,8 +1,16 @@
 LaTeX-WWU
 =========
-Dieses Repository dient zur Zeit zur Arbeit an einer Zusammenfassung der Vorlesung *Höhere Algebra I, SoSe2014* an der WWU Münster.  
-In Zukunft werde ich hier aber eventuell auch weitere Mitschriften und Zusammenfassungen ablegen.
+This repository stores some lecture notes made during lectures at the University of Münster.
 
 ---
 
-This repository currently hosts the source code of some lecture notes for the course *Höhere Algebra I, SoSe2014* at the University of Münster.
+In diesem Repository stelle ich Mitschriften zu Vorlesungen an de WWU Münster in Quellcode und PDF zur Verfügung. Aktuell umfasst dies die Vorlesungen
+
+* Sose2014
+	* Höhere Algebra I. 
+	* Differentialformen und Mannigfaltigkeiten
+	* Grundlagen der Analysis, Topologie, Geometrie
+		
+Ich lade jeden herzlich ein, sich mittels Forks und Pull-Requests an der Entwicklung der Skripte zu beteiligen. Es gibt sicherlich noch diverse Fehler und auch bei den
+Zeichnungen fehlt noch eine ganze Menge.
+
