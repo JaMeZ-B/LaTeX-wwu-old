@@ -1,0 +1,1658 @@
+\input{\string~/Dropbox/Studium/verschiedenes/LaTeX-Vorlage/mitschrift_v2.tex}
+\newcommand{\fach}{Differentialformen und Mannigfaltigkeiten}
+%\newcommand{\shortFach}{Analysis, Topologie, Geometrie}
+
+\newcommand{\prof}{Prof.\,Dr.\,Kai Zehmisch}
+\input{\string~/Dropbox/Studium/verschiedenes/LaTeX-Vorlage-xetex/mitschrift_headings.tex}
+\automark{subsection}
+\section{Mannigfaltigkeiten}
+\begin{wrapfigure}[12]{R}[2.7cm]{6.5cm}
+	\begin{tikzpicture}[scale=1.3]
+		\begin{scope}
+			\clip (-1,0) arc (180:360:1cm and 0.5cm) arc (0:180:1cm and 0.5cm);
+  		  	\foreach \x in {-1.1,-1, -0.9,-0.8,...,1,1.1}%
+  		    	\draw[Sienna3!80,line width=0.3mm](\x,0,2)--(\x,0,-2);
+		\end{scope}
+		\draw (-1,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
+	    \draw (0,1) arc (90:270:0.5cm and 1cm);
+	    \draw[dashed] (0,1) arc (90:-90:0.5cm and 1cm);
+	    \draw (0,0) circle (1cm);
+	    \shade[ball color=blue!10!white,opacity=0.20] (0,0) circle (1cm);
+		\draw[dashed, ->] (-1.2,0) -- (1.3,0) node[right]{$x_2$};
+		\draw[dashed, ->] (0,-1.2) -- (0,1.3) node[right]{$x_3$};
+		\draw[dashed, ->] (0,0,-2) -- (0,0,2.5) node[below]{$x_1$};
+		\node[left] at (-.8,.8) {$S^2$};
+		\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=4pt},yshift=0pt, thick] (1.8,0) -- (1.8,1) node[right, midway, xshift=0.25cm]{$U_3^+$};
+		\node[color=Sienna3] at (0,-1.4) {\scriptsize $h_3^+(U_3^+) = \set[(x_1,x_2)]{x_1^2+ x_2^2 < 1} $};
+	\end{tikzpicture}
+\end{wrapfigure}
+\subsection{Sphären} % (fold)
+\label{sub:11}
+
+Die $n$-Sphäre ist gegeben durch
+\[
+	S^n := \set[(x_1, \ldots , x_{n+1}) \in \mathds{R}^{n+1}]{x_1^2 + \ldots + x_{n+1}^2 = 1} 
+\]
+Für $i=1, \ldots , n+1$ betrachten wir die (bzgl. der Relativtopologie) offenen Teilmengen
+\[
+	U_i^{\pm} = \set[(x_1, \ldots , x_{n+1}) \in S^n]{\pm x_i >0} 
+\]
+und lokale Karten {\color{light_gray}\footnotesize($\hat x_i$ heißt, dass diese Koordinate entfällt)}
+\[
+	h_i^\pm : U_i^\pm \to \mathds{R}^n, \quad (x_1, \ldots , x_{n+1}) \mapsto (x_1, \ldots , \hat x_i, \ldots , x_{n+1}) \tag{weglassen}
+\]
+Die $h_i^\pm$ sind Homöomorphismen auf ihrem Bild mit Inversen (etwa $x_i >0$)
+\[
+	(x_1, \ldots , \hat x_i, \ldots , x_{n+1}) \text{ mit } \sum_{k\not= i} x_k^2< 1 \xmapsto{(h_i^\pm) ^{-1}} \enbrace*{x_1, \ldots , \sqrt{1- \sum_{k\not=i} x_k^2 }, \ldots , x_{n+1}  } \in S^{n}  
+\]
+Wir wollen differenzierbare Funktionen auf $S^n$ erklären. Dazu betrachte ($x_j >0$, $i<j$) die Komposition $h_j^+ \circ (h_i^+) ^{-1}$. Diese bildet
+$(x_1, \ldots , \hat x_i, \ldots , x_{n+1})$ nach $\enbrace*{x_1, \ldots , \sqrt{1 - \sum_{k\not=i}x_k^2 }, \ldots , \hat x_j, \ldots , x_{n+1}  } $ ab und ist auf
+$h_i^+(U_i^+ \cap U_j^+)$ (beliebig oft) differenzierbar. Daher sagen wir:
+
+\subsubsection{Definition: Differenzierbarkeit auf $S^n$}
+Eine Funktion $f : S^n \to \mathds{R}$ ist \Index{differenzierbar}, falls alle Abbildungen 
+\[
+	f \circ (h_i^\pm) ^{-1} : h_i^\pm (U_i^\pm)  = \set[x \in \mathds{R}^n]{\norm{x}< 1 } \to \mathds{R} 
+\]
+(beliebig oft) differenzierbar sind.
+Diese Definition ist korrekt, da 
+\[
+	f \circ (h_j^\pm) ^{-1} = f \circ (h_i^\pm) ^{-1} \circ \underbrace{h_i^\pm \circ (h_j^\pm) ^{-1}}_{\in C^\infty}
+\]
+% subsection 11 (end)
+
+\subsection{Differenzierbare Mannigfaltigkeiten} % (fold)
+\label{sub:12}
+\subsubsection{Definition: $n$-dimensionale topologische Mannigfaltigkeit}
+\label{ssub:121}
+Eine \bet{$n$-dimensionale topologische  Mannigfaltigkeit}\index{n-dimensionale topologische  Mannigfaltigkeit@$n$-dimensionale topologische  Mannigfaltigkeit} $M$ ist ein 
+Hausdorff-Raum, mit abzählbarer Basis der Topologie, der lokal homöomorph zum $\mathds{R}^n$ ist.
+
+
+\begin{description}
+	\item\Index{lokal homöomorph:}  $\forall p \in M \, \exists$ offene Umgebung $U \subset M$ um $p$ und einen Homöomorphismus $h : U \to U' \subset \mathds{R}^n$  auf 
+	eine offene Teilmenge $U'$ des $\mathds{R}^n$. 
+	\item\Index{Hausdorffsch:}  Zu je zwei Punkten $p, q \in M$ mit $p \not= q$ gibt es offene Umgebungen $U,V$ von $p$ bzw. $q$, die $U \cap V = \emptyset$. Beispiel: Jeder
+	metrische Raum ist Hausdorffsch: $U := \set[x \in M]{d(x,p)< \frac{1}{3} d(p,q) } $, analog $V$ \\
+	\item\Index{Basis einer Topologie:}  Ist ein System $\mathcal{B}$ offener Mengen des topologischen Raumes $M$, sodass sich jede offene Menge in $M$ als 
+	Vereinigung von Mengen aus 
+	dem System $\mathcal{B}$ schreiben lässt. \newline Beispiel: Basis des $\mathds{R}^n$: offene Bälle 
+	$B_r(a) = \set[x \in \mathds{R}^n]{\norm{x-a} < r } $, $a \in \mathds{R}^n, r \in (0, \infty)$. Eine abzählbare Basis des $\mathds{R}^n$: 
+	\[
+		\mathcal{B} := \set[B_r(a)]{a \in \mathds{Q}^n, r \in (0,\infty) \text{ rational}} 
+	\]
+\end{description}
+
+
+\minisec{Beispiel (topologische Mannigfaltigkeit)}
+\begin{itemize}
+	\item offene Teilmengen des $\mathds{R}^n$
+	\item Untermannigfaltigkeiten des $R^{n+k}$ \hfill {\color{light_gray}(näheres in der ersten Übung)}
+\end{itemize}
+
+\minisec{Bemerkung}
+Die Hausdorff-Eigenschaft folgt \emph{nicht} aus der lokalen Homöomorphie zum $\mathds{R}^n$! Betrachte dazu  Topologie auf $M = R \cup \set{p} $. 
+$U$ ist offen in $M$, falls\\
+
+\begin{minipage}{0.55\textwidth}
+	\begin{itemize}
+		\item $U \subset \mathds{R}$ offen
+		\item $U = V \setminus \set{0} \cup \set{p}$ mit $V \subset \mathds{R}$ offen und $0 \in V$
+		\item oder Vereinigung solcher Mengen
+	\end{itemize}
+\end{minipage} \quad 
+\begin{minipage}{0.35\textwidth}
+	\captionsetup{type=figure, skip=1pt}
+	\centering{	\begin{tikzpicture}
+			\draw[very thick, SteelBlue4] (-2,0) -- (0,0) node[below,color=black]{$0$}-- (2,0) node[below]{$\mathds{R}$};
+			\draw[thick] (0,-0.1) -- (0,0.1);
+			\filldraw[SteelBlue4] (0,0.7) circle[radius=0.04cm] node[right]{$p$};
+		\end{tikzpicture}
+	\caption{Beispiel einer nicht-Hausdorffmenge}}
+\end{minipage}
+
+\subsubsection{Definition: Atlas und Kartenwechsel}
+$h$ heißt Karte, $U$ das zugehörige Kartengebiet. Eine Menge von Karten $\set[h_\alpha : U_\alpha \to U'_\alpha \subset \mathds{R}^n]{\alpha \in A} $ heißt \Index{Atlas} von
+$M$, falls $\bigcup_{\alpha \in A} U_\alpha = M$.\\
+Ein \Index{Kartenwechsel} ist ein Homöomorphismus 
+\[
+	h_{\beta \alpha} := h_\beta \circ  h_\alpha ^{-1} : h_\alpha(U_\alpha \cap U_\beta) \to h_\beta( U_\alpha \cap U_\beta)  
+\]
+
+\subsubsection{Definition: Differenzierbarer Atlas} % (fold)
+\label{ssub:123}
+Ein Atlas einer topologischen Mannigfaltigkeit heißt \Index{differenzierbar}, falls  alle Kartenwechsel (beliebig oft) differenzierbar sind.
+
+\minisec{Beispiele}
+\begin{itemize}
+	\item $U \subset \mathds{R}^n$ offen, Atlas $\set{\id : U \to U} $. Zum Beispiel $Gl(n,\mathds{R}) = \det ^{-1} \enbrace{\mathds{R} \setminus \set{0} } \subset
+	Mat_{n \times n}(\mathds{R})$.
+	
+	\bet{Bemerkung:} Die Hausdorff-Eigenschaft folgt zum Beispiel daraus, dass $U$ ein metrischer Raum ist. Eine topologische Mannigfaltigkeit mit einem abzählbaren Atlas 
+	hat eine abzählbare Basis der Topologie.
+	\item $S^n$ mit Atlas $\set[h_i^\pm : U_i^\pm \to \mathds{R}^n]{i=1, \ldots , n+1} $
+	\item $S^n$ mit Atlas $\set{h^\pm : S^n \setminus \set{(0, \ldots , 0, \pm 1)} \xrightarrow{\cong} \mathds{R}^n} $ (\Index{stereographische Projektion}, siehe Blatt 1).
+	\begin{figure}[h]
+		\centering{\begin{tikzpicture}[scale=0.8]
+			\draw[name path=real] (-5.2,0) node[above right]{$\mathds{R}^n$} -- (5.2,0);
+			\draw[name path=sphere, thick] (0,0) circle[radius=2cm];
+			
+			%einzelner Punkt mit Beschriftung
+			\draw[name path=g1,lightgray, thick, dashed] (0,2) -- (-4,0);
+			\path[name intersections={of=g1 and real, by=in1}];
+			\path[name intersections={of=g1 and sphere}];
+			\draw[fill=SteelBlue2] (in1) circle[radius=0.06cm] node[below, color=SteelBlue3]{$h^+(p)$};
+			\draw[fill=SteelBlue2] (intersection-2) circle[radius=0.06cm] node[above left, color=SteelBlue3]{$p$};
+			
+			\begin{scope}
+			\foreach \x in {-3, -2.2, 2, 2.5, 3.4, 5} %
+			{	
+				\draw[name path=g1,lightgray, thick, dashed] (0,2) -- (\x,0);
+				\path[name intersections={of=g1 and real, by=in1}];
+				\path[name intersections={of=g1 and sphere}];
+				\draw[fill=SteelBlue2] (in1) circle[radius=0.06cm];
+				\draw[fill=SteelBlue2] (intersection-1) circle[radius=0.06cm];
+				\draw[fill=SteelBlue2] (intersection-2) circle[radius=0.06cm];
+			}
+			\end{scope}
+			\foreach \x in {-3.1,-2.1, -0.7, 0.2, 0.7, 1.8, 2.9} %
+			{	
+				\path[name path=g1] (0,2) -- (\x,-2);
+				\path[name intersections={of=g1 and real, by=in1}];
+				\path[name intersections={of=g1 and sphere}];
+				\draw[name path=g1,lightgray, thick, dashed] (0,2) -- (intersection-2);
+				\draw[fill=SteelBlue2] (in1) circle[radius=0.06cm];
+				\draw[fill=SteelBlue2] (intersection-2) circle[radius=0.06cm];
+			}
+			\draw[fill=OrangeRed2] (0,2) circle[radius=0.07cm] node[above]{$N$};
+			\draw[fill=OrangeRed2] (0,-2) circle[radius=0.07cm] node[below]{$S$};
+		\end{tikzpicture}
+		\caption{Stereografische Projektion}}
+	\end{figure}
+\end{itemize}
+% subsubsection 123 (end)
+
+\subsubsection{Definition: Kompatibilität von Karten} % (fold)
+\label{ssub:124}
+Zwei Karten $(U_\alpha, h_\alpha)$ und $(U_\beta, h_\beta)$ einer topologischen Mannigfaltigkeit heißen \Index{kompatibel}, falls der Kartenwechsel $h_{\beta \alpha} = h_\beta \circ h_\alpha ^{-1}$ ein Diffeomorphismus ist, d.h. $h_{\beta \alpha}$ ist differenzierbar und $h_{\alpha \beta}$ ebenfalls.
+
+\bigskip
+Die $n$-Sphäre hat zwei Atlanten $\set{h_i^\pm} $ und $\set{h^\pm} $. Die beiden sind jeweils miteinander kompatibel, siehe Blatt 1. Wir wollen daher die beiden Atlanten
+$\set{h_i^\pm} $ und $\set{h^\pm} $ als ein und dieselbe differenzierbare Mannigfaltigkeit auffassen.
+% subsubsection 124 (end)
+
+\subsubsection{Definition: Maximaler Atlas, differenzierbare Struktur, differenzierbare Mannigfaltigkeit} % (fold)
+\label{ssub:125}
+Ein differenzierbarer Atlas $\mathcal{A} $ heißt \Index{maximal}, falls jede Karte von $M$, die mit allen Karten von $\mathcal{A} $ kompatibel ist, selbst bereits zu 
+$\mathcal{A}$ gehört. Eine \Index{differenzierbare Struktur } auf einer topologischen Mannigfaltigkeit ist ein maximaler differenzierbarer Atlas. Eine 
+\Index{differenzierbare Mannigfaltigkeit} ist eine topologische Mannigfaltigkeit mit einer differenzierbaren Struktur.
+
+\minisec{Bemerkung}
+Jeder differenzierbare Atlas ist in einem eindeutig bestimmten maximalen Atlas enthalten, den man durch Hinzunahme aller kompatiblen Karten erhält. Zur Angabe einer 
+differenzierbaren Struktur genügt es daher, einen differenzierbaren Atlas zu beschreiben (siehe Blatt 2).
+% subsubsection 125 (end)
+% subsection 12 (end)
+
+\subsection{Beispiel: Der reell projektive Raum} % (fold)
+\label{sub:13}
+\begin{wrapfigure}[7]{R}{5cm}
+	\begin{tikzpicture}[xscale=1.2, yscale=1.2]
+		\draw[->, thick] (-1,0) -- (3,0) node[right]{$x_1$};
+		\draw[->, thick] (0,-0.2) -- (0,1.5) node[above]{$x_2$};
+		\draw[name path=ebene, thick, SeaGreen4] (-1.5,1) -- (3,1) node[below]{$\set{x_2=1}$};
+		\foreach \phi / \rad in {30 / 3, 55 / 2, 78 / 1.7, 109 / 1.7, 134 / 2}
+		{
+			\draw[name path=gerade] (\phi+180:0.3) -- (0,0) -- (\phi:\rad);
+			\path[name intersections={of=ebene and gerade, by=in1}];
+			\draw[fill=Firebrick2] (in1) circle[radius=0.05cm];
+		}	
+	\end{tikzpicture}
+	\caption{Der eindimensionale projektive Raum $\mathds{R}P^1$}
+\end{wrapfigure}
+Der reell projektive Raum ist definiert durch:
+\begin{align*}
+	\mathds{R}P^n &:= \frac{\mathds{R}^{n+1}\setminus \set{0} }{x \sim y :\Leftrightarrow \exists \lambda \in \mathds{R} \setminus \set{0} : y = \lambda x } \\
+	&= \text{ Menge aller Ursprungsgeraden im }\mathds{R}^{n+1} \\
+	&= \nicefrac{S^n}{x \sim -x} 
+\end{align*}
+Für $n=1$
+
+Jede Ursprungsgerade außer $ \set{x_2=0} $ entspricht genau einem Punkt auf der affinen Gerade $\set{x_2=1}$; $\infty := \set{x_2 =0} $. $\mathds{R}P^1 = \mathds{R} \cup \set{\infty}$.\\
+Für $n=2$:
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (2,0) node[right]{$x_2$};
+		\draw (0,0) -- (0,1);
+		\draw[->] (0,0) -- (0,0,2) node[left]{$x_1$};
+		\draw (0.25,-0.5,-0.5) -- (-0.5,1,1);
+		\draw (-0.15,-0.5,-0.3) -- (0.3,1,0.6);
+		\draw (-0.3,-0.5,0.35) -- (0.6,1,-0.7);
+		\draw (0.55,-0.5,0.15) -- (-1.1,1,-0.3);
+		%\draw ( ,-0.5, ) -- ( ,1, );
+		\draw[SeaGreen4, thick, fill=SeaGreen4!20, fill opacity=0.4] (2,1,2) -- (2,1,-2) -- (-2,1,-2) -- (-2,1,2) -- cycle;
+		\draw (-0.5,1,1) -- (-1.25,2.5,2.5);
+		\draw (0.3,1,0.6) -- (0.75,2.5,1.5);
+		\draw (0.6,1,-0.7) -- (1.5,2.5,-1.75);
+		\draw (-1.1,1,-0.3) -- (-2.75,2.5,-0.75);
+		\draw[fill, Firebrick2] (-0.5,1,1) circle[radius=0.03];
+		\draw[fill, Firebrick2] (0.3,1,0.6) circle[radius=0.03];
+		\draw[fill, Firebrick2] (0.6,1,-0.7) circle[radius=0.03];
+		\draw[fill, Firebrick2] (-1.1,1,-0.3) circle[radius=0.03];
+		\draw[->] (0,1) -- (0,2) node[left]{$x_3$};
+		\draw[fill, SeaGreen4] (0,1) circle[radius=0.02];
+		\node[below right,SeaGreen4] at (2,1,0) {$\set{x_3 = 1}$} ;
+		%\draw (0,1) -- (0,2);
+	\end{tikzpicture}
+	\caption{Der 2-dimensionale projektive Raum $\mathds{R}P^2$ (projektive Ebene)}}
+\end{figure}
+Jede Ursprungsgerade im $\mathds{R}^3$, die nicht in der $x_1$-$x_2$-Ebene liegt, entspricht genau ein Punkt in der affinen Ebene $\set{x_3=1} $. Die Ursprungsgeraden in
+der $x_1$-$x_2$-Ebene bilden einen $\mathds{R}P^1$
+\[
+	\mathds{R}P^2 = \mathds{R}^2 \cup \mathds{R}P^1
+\]
+\minisec{Quotientenabbildung}
+\[
+	\pi : \mathds{R}^{n+1} \setminus \set{0} \to \mathds{R}P^n \enspace, \quad x \mapsto [x] \text{ (Urspungsgerade durch $x$)} 
+\]
+\begin{enumerate}[(i)]
+	\item \begin{itemize}
+		\item Topologie auf $\mathds{R}P^n$ (Quotiententopologie) $U \subset \mathds{R}P^n$ sei offen 
+		$:\Leftrightarrow$ $\pi ^{-1} (U) \subset \mathds{R}^{n+1} \setminus \set{0} $ offen ist ($\Rightarrow \pi $ stetig)
+		\item Hausdorff-Eigenschaft: Seien $[x] \not= [y]$ im $\mathds{R}P^n$. Dann gibt es disjunkte offene Mengen $X,Y$ im $\mathds{R}^{n+1} \setminus \set{0} $, die aus 
+		Ursprungsgeraden bestehen (ohne $0$) und die die Urspungsgeraden durch $x$ und $y$ (mit $0$ entfernt) erhalten:\\
+		\begin{minipage}{\textwidth}
+			\captionsetup{type=figure, skip=3pt}
+			\centering{\begin{tikzpicture}[scale=0.8]
+				\foreach \angle/\bez/\col in {70/x/SeaGreen3, 160/y/SkyBlue3}{
+					 \draw[fill=\col!30, very thin, dashed] (\angle+15:3) arc (\angle+15:\angle-15:3) -- (165+\angle:3) arc (165+\angle:195+\angle:3) -- cycle;
+					 \draw[thick] (\angle:3) -- (180+\angle:3);
+					 \draw[fill, Tomato2] (180+\angle:2) circle (0.03) node[above right]{$\bez$};
+					 \node[right,\col, xshift=0.1cm] at (\angle-15:2) {$\MakeUppercase{\bez}$};
+				}
+			\end{tikzpicture}}
+			\caption{Zeichnung zur Hausdorffeigenschaft von $\mathds{R}P^n$}
+		\end{minipage}\smallskip\\
+		$\Rightarrow \pi ^{-1} \enbrace[\big]{\pi ( X)} = X$, $\pi ^{-1} \enbrace[\big]{\pi (Y)} = Y$ sind offen. Also sind $\pi(X), \pi (Y)$ offene disjunkte Umgebungen von $[x]$ bzw. $[y]$.
+		\item abzählbare Basis der Topologie:\marginnote{Zeichnung unfertig \ldots umbauen mit \texttt{elipsis}}\\
+		\begin{minipage}{\textwidth}
+			\captionsetup{type=figure, skip=3pt}
+			\centering{
+			\begin{tikzpicture}
+				\coordinate (a) at (-2,1);
+				\coordinate (b) at (-2,-1);
+				\draw[help lines] (-4,-2) grid (4,2);
+				\draw[fill=Sienna3] (0,0) circle[radius=0.03cm] node[below]{$0$};
+				\begin{scope}
+					\clip (-1,0) arc (180:360:1cm and 0.5cm) arc (0:180:1cm and 0.5cm);
+		  		  	\foreach \x in {-1.1,-1, -0.9,-0.8,...,1,1.1}%
+		  		    	\draw[Sienna3!80,line width=0.3mm](\x,0,2)--(\x,0,-2);
+				\end{scope}
+				\draw (2,0) arc (180:360:1cm and 0.5cm);
+			    \draw[dashed] (2,0) arc (180:0:1cm and 0.5cm);
+			    \draw (a) arc (90:270:0.5cm and 1cm);
+			    \draw[dashed] (a) arc (90:-90:0.5cm and 1cm);
+			    \draw (3,0) circle (1cm);
+			    \shade[ball color=blue!10!white,opacity=0.20] (3,0) circle (1cm);
+			\end{tikzpicture}
+			\caption{Basis der Topologie von $\mathds{R}P^n$ (unfertig)}
+			}
+		\end{minipage} \smallskip \\
+		$\mathcal{B} = \set[\pi \protect{\enbrace[\big]{X_{a,r}}}]{a \in \mathds{Q}^n, r \in (0,\infty)\cap \mathds{Q}}$
+	\end{itemize}
+	\item Differenzierbare Struktur auf $\mathds{R}P^n$: $[x_0 : x_1 : \ldots : x_n] \in \mathds{R}P^n$ sei die Ursprungsgerade durch $(x_0, x_1, \ldots , x_n) \in
+	\mathds{R}^{n+1} \setminus \set{0}$. Dies sind die sogenannten \Index{homogenen Koordinaten}.
+	\[
+		[x_0 : \ldots : x_n] = [\lambda x_0 : \ldots : \lambda x_n] \quad \text{ mit } \lambda \not= 0
+	\]
+	Setze $U_i := \set[{[x_0 : \ldots : x_n] \in \mathds{R}P^n}]{x_i \not= 0} $ für $i=0,1,\ldots ,n$. Dann ist
+	\[
+		\pi  ^{-1} (U_i) = \set[(x_0, \ldots , x_n) \in \mathds{R}^n \setminus \set{0} ]{x_i \not= 0}  \enspace\text{ offen.}
+	\]
+	$\Rightarrow U_i$ ist offen. Betrachte nun folgende Karte
+	\[
+		h_i : U_i \to \mathds{R}^n \enspace, \quad [x_0 : \ldots : x_n] \mapsto \enbrace*{ \frac{x_0}{x_i}, \ldots , \widehat{\frac{x_i}{x_i}}, \ldots , \frac{x_n}{x_i}   } 
+	\]
+	Folgendes ist erfüllt:
+	\begin{itemize}
+		\item Die Definition hängt nicht von der Wahl des Repräsentanten ab.
+		\item $h_i$ ist bijektiv mit Inverser $h_i ^{-1} (y_1, \ldots , y_n) = [y_1 : \ldots  : y_i : 1 : y_{i+1} : \ldots : y_n]$
+		\item $h_i ^{-1}$ ist stetig: \marginnote{Einfügen nach $i$-ter Stelle!}
+		\[
+			h_i ^{-1} : (y_1, \ldots , y_n) \xmapsto{\text{stetig}} (y_1, \ldots ,1, \ldots , y_n) \xmapsto{\pi } [y_1 : \ldots : 1 : \ldots : y_n]
+		\]
+		\item $h_i$ ist stetig
+		\[
+			\begin{tikzcd}
+				\mathds{R}^{n+1} \setminus \set{0} \supset \pi  ^{-1} (U_i) \rar{\tilde h_i} \dar{\pi } & \mathds{R}^n \dar{\id} \\ 
+				\mathds{R}P^n \supset U_i \rar{h_i} & \mathds{R}^n 
+			\end{tikzcd}
+		\]
+		Es gilt $\tilde h_i (x_0, \ldots , x_n) = \enbrace*{\frac{x_0}{x_i}, \ldots , \widehat{\frac{x_i}{x_i} }, \ldots , \frac{x_n}{x_i}  } $. 
+		Sei $U \subseteq  \mathds{R}^n$ offen. Also $\pi  ^{-1} ( h_i ^{-1} ( U)) = \tilde h_i ^{-1}(U)$ ist offen, da $\tilde h_i$ stetig ist. $\Rightarrow $ Nach der
+		Quotiententopologie ist $h_i ^{-1}(U)$ offen.
+		\item $\set{(U_i, h_i)}_{i=0, \ldots ,n} $ ist ein differenzierbarer Atlas ($\Rightarrow $ abzählbare Basis der Topologie)
+		\begin{itemize}[$\diamond$]
+			\item $\bigcup_{i=0, \ldots , n} U_i = \mathds{R}P^n$
+			\item \begin{align*}
+				h_j \circ  h_i ^{-1}(y_1, \ldots , y_n) &= h_j([\underset{0}{y_1} : \ldots  : \underset{i}{1} : \ldots : y_n]) \\ &= 
+				\begin{cases}
+					\enbrace*{\frac{y_1}{y_j}, \ldots , \underset{i}{\frac{1}{y_j}}, \ldots , \widehat{\frac{y_j}{y_j} }, \ldots , \frac{y_n}{y_j}  } , &\text{ falls }i<j\\
+					\enbrace*{\frac{y_1}{y_{j+1}}, \ldots , \widehat{\frac{y_{j+1}}{y_{j+1}} }, \ldots , \underset{i}{\frac{1}{y_{j+1}}}, \ldots , \frac{y_n}{y_{j+1}}  },
+					& \text{ falls } i>j
+				\end{cases}
+			\end{align*}
+			ist $C^\infty$ auf
+			\[
+				h_i \enbrace*{U_i \cap U_j} = \begin{cases}
+					\set[y \in \mathds{R}^n]{y_j  \not= 0} , &\text{ falls }i < j\\
+					\set[y \in \mathds{R}^n]{y_{j+1} \not= 0} , &\text{ falls } i > j
+				\end{cases} 
+			\]
+		\end{itemize}
+	\end{itemize}
+\end{enumerate}
+% subsection13 (end)
+
+\subsection{Differenzierbare Funktionen} % (fold)
+\label{sub:14}
+\subsubsection[Definition: Differenzierbarkeit auf einer Mannigfaltigkeit]{Definition} % (fold)
+\label{ssub:141}
+Eine stetige Abbildung $f : M  \to N$ zwischen differenzierbaren Mannigfaltigkeiten heißt \bet{differenzierbar}\index{Differenzierbarkeit auf Mannigfaltigkeiten} in 
+$p \in M$, falls  für zwei Karten 
+\[
+	h : \underset{\ni p}{U} \to U' \quad  \text{ und } \quad k : \underset{\ni f(p)}{V }\to V'
+\]
+die Abbildung $k \circ f \circ h ^{-1}$ in $h(p) \in U'$ (beliebig oft) differenzierbar ist.
+\[
+	\begin{tikzcd}[column sep=4em]
+		M \rar{f} \dar{h}& N \dar{k}\\
+		\mathds{R}^m \rar[Chartreuse3]{k \circ f \circ h ^{-1}}& \mathds{R}^n
+	\end{tikzcd}
+\]
+\begin{itemize}
+	\item Die Stetigkeit von $f$ wird vorausgesetzt, um sicherzustellen, dass $f ^{-1}(V)$ und damit auch $h(f ^{-1}(V) \cap U)$ eine offene Menge ist.
+	\item Wie in \ref{sub:11} erklärt, ist die Definition eines differenzierbaren Atlasses gerade so gewählt, dass die obige Definition unabhängig von der Wahl der lokalen
+	Karten ist.
+\end{itemize}
+Wir setzen:
+\begin{align*}
+	C^\infty(M,N) &:= \set{\text{(in jedem Punkt) differenzierbare Abbildungen } M  \to N}  \\
+	C^\infty(M) &:= C^\infty(M,\mathds{R}),
+\end{align*}
+wobei $(\mathds{R}, \id)$ eine differenzierbare Struktur auf $\mathds{R}$ definiert. Mit $V=\mathds{R}$ muss man in diesem Spezialfall die Stetigkeit von $f$ \emph{nicht}
+voraussetzen, da $f ^{-1}(\mathds{R}) = M$ offen ist. Differenzierbare Funktionen sind stetig.
+% subsubsection 141 (end)
+
+\subsubsection[Definition: Diffeomorphismus]{Definition} % (fold)
+\label{ssub:142}
+Ein \Index{Diffeomorphismus} ist ein differenzierbarer Homöomorphismus mit differenzierbarer Inverser.
+
+\minisec{Beispiel}
+Sei $M$ der topologische Raum $\mathds{R}$. Homöomorphismen: $h_1 = \id$, $h_2(x) = x^3$. $h_1$ und $h_2$ definieren differenzierbare Strukturen auf $\mathds{R}$. Wegen
+\[
+	h_1 \circ  h_2 ^{-1} : x  \mapsto \sqrt[3]{x}
+\]
+(nicht in $0$ differenzierbar!) sind diese differenzierbare Strukturen \emph{nicht} gleich. Sie sind aber diffeomorph:
+\[
+	\begin{tikzcd}
+		(M, \mathcal{A}_1 ) \rar{x \mapsto \sqrt[3]{x}  } \dar{h_1} & (M, \mathcal{A}_2 ) \dar{h_2}\\
+		\mathds{R} \rar{\id = h_2 \circ f \circ h_1^{-1}} & \mathds{R}
+	\end{tikzcd}
+\]
+Es ist sinnvoll differenzierbare Mannigfaltigkeiten bis auf Diffeomorphie zu klassifizieren. Auf $\mathds{R}^n$, $n\not= 4$\marginnote{mind = blown} 
+gibt es bis auf Diffeomorphie genau eine 
+differenzierbare Struktur.  Auf $\mathds{R}^4$ gibt es überabzählbar viele. Auf $S^n$ mit $n \le 6$ genau eine. Auf $S^7$ genau 28.
+% subsubsection 142 (end)
+% subsection 14 (end)
+
+\subsection{Der Tangentialraum} % (fold)
+\label{sub:15}
+Sei $f :  \mathds{R}^m \to \mathds{R}^n$ differenzierbar. Das \Index{Differential} von $f$ ist in $p \in \mathds{R}^m$ ist eine lineare Abbildung 
+$T_p \mathds{R}^m \to T_{f(p)} \mathds{R}^n$ gegeben durch die Jacobi-Matrix
+\[
+	J_f (p) = \enbrace*{\frac{\partial f^i}{\partial x^j} }_{\substack{i=1,\ldots ,n \\ j=1, \ldots , m}} 
+\]
+mit $f= (f^1, \ldots , f^n)$. Der \Index{Geschwindigkeitsvektor} in $p$ einer Kurve durch $p$ wird auf den Geschwindigkeitsvektor der Bildkurve in $f(p)$ abgebildet.\\
+$T_p \mathds{R}^m $ heißt der \Index{Tangentialraum} und ist der Raum aller solchen Geschwindigkeitsvektoren, der hier kanonisch zu $\mathds{R}^m$ isomorph ist. 
+\begin{description}
+	\item[Ziel:] Differential von $f : M \xrightarrow{\text{diffb.}} N$ zu erklären. 
+	\item[Idee:] \begin{itemize} \item Tangentialebene $T_p M$ einer Fläche $M \subset \mathds{R}^3$ \smallskip\\
+		\begin{minipage}{13cm}
+			\captionsetup{type=figure, skip=5pt}
+			\centering{
+			\begin{tikzpicture}[scale=1.7]
+				%\draw[help lines] (0,0) grid (6,3);
+				\coordinate (x) at (2.6,0.7);
+				\coordinate (a) at (2.6,1.7);
+				\coordinate (b) at (3.6,0.7);
+				\draw[thick] (0,0) arc (105:70:7) node[above right, xshift=0.2cm]{$M$} arc (150:110:2.5) arc (70:105:7) arc (110:150:2.5) -- cycle;
+				\draw[very thick, Tomato2] (1,0.4) to[out=20, in=180] (x) to[out=0, in=155]  (4,0.4) node[right]{$\gamma$};
+				\draw[thick, SeaGreen3, shift=(x), fill=SeaGreen2!50, fill opacity=0.4] (1,0,1) -- ++ (0,0,-2)  -- ++ (-2,0,0) -- ++ (0,0,2) -- cycle;
+				\node[below right, SeaGreen4] (A) at (3.6,0.7,-1) {$T_p M$} ;
+				\draw[->, thick] (x) -- (a);
+				\draw pic["$\cdot$", draw, angle radius=3.5mm] {angle=b--x--a};
+				\draw[->, very thick, DodgerBlue2] (x) -- (3.4,0.7) node[above]{$\dot \gamma(0)$};
+				\draw[fill=Firebrick3, Firebrick3] (x) circle[radius=0.025] node[below]{$p$};
+			\end{tikzpicture}
+			\caption{Tangentialebene im $\mathds{R}^3$}
+			}
+		\end{minipage} \smallskip \\
+		= Raum aller Geschwindigkeitsvektoren $\dot \gamma (0)$ von Kurven $\gamma : (-\varepsilon, \varepsilon) \to M$ mit $\gamma(0)=p$.
+		\item Für $v,w \in T_0\mathds{R}^m \cong \mathds{R}^m$ gilt $v=w$ genau dann, wenn für die Richtungsableitungen aller $f \in C^\infty(\mathds{R}^m)$ gilt
+		\[
+			D_v f(0) = D_w f(0)
+		\]
+	\end{itemize}
+\end{description}
+
+\subsubsection[Definition: Tangentialraum (geometrisch)]{Definition (des Geometers)} % (fold)
+\label{ssub:151}
+Ein \Index{Tangentialvektor} im Punkt $p \in M$ ist eine Äquivalenzklasse $[\gamma]$ von differenzierbaren Wegen $\gamma : (-\varepsilon, \varepsilon) \to M$ mit 
+$\gamma(0)=p$ und $\varepsilon = \varepsilon(p)>0$ unter der Äquivalenzrelation\marginnote{Testfunktionen bezeichnen wir meist mit $\varphi$}
+\[
+	\gamma_1 \sim \gamma_2 :\Leftrightarrow \quad \forall \varphi \in C^\infty(M) :\quad  \diffd{}{t}( \varphi \circ \gamma_1)(0) = \diffd{}{t} (\varphi \circ \gamma_2) (0)   
+\]
+$X_\gamma(\varphi) := \diffd{}{t} (\varphi \cdot \gamma)(0)$ ist  Richtungsableitung von $\varphi$ in Richtung des Tangentialvektors $[\gamma]$. Es gilt
+\begin{description}
+	\item[Linearität:] Für $\lambda , \mu \in \mathds{R}$, $\varphi, \psi \in C^\infty(M) $ ist
+	\[
+		X_\gamma(\lambda  \cdot \varphi + \mu \cdot \psi) = \lambda \cdot X_\gamma(\varphi) + \mu \cdot X_\gamma(\psi)
+	\] 
+	\item[Leibnizsche Produktregel:] $\forall \varphi, \psi \in C^\infty(M) $\marginnote{$\gamma(0)=p$} gilt
+	\[
+		X_\gamma(\varphi \cdot \psi) = X_\gamma(\varphi) \cdot \psi(p) + \varphi(p) \cdot X_\gamma(\psi)
+	\]
+\end{description}
+Beispiele:
+\begin{itemize}
+	\item $X(1) = X(1 \cdot 1) = X(1) \cdot 1 + 1 \cdot X(1) \Rightarrow  X(1) =0$
+	\item $X(c)= c X(1) = 0$ für alle $c \in \mathds{R}$ aufgefasst als konstante Funktionen.
+\end{itemize}
+% subsubsection 151 (end)
+
+\subsubsection[Definition: Tangentialraum (algebraisch)]{Definition (des Algebraikers)} % (fold)
+\label{ssub:152}
+Eine Abbildung $X : C^\infty (M) \to \mathds{R}$, die linear ist und der Leibnizschen Produktregel genügt (siehe oben), heißt \Index{Derivation} (in $p \in M$).
+Der \Index{Tangentialraum} $T_p M$ der differenzierbaren Mannigfaltigkeit $M$ in $p \in M$ ist der Vektorraum der Derivationen in $p$.
+Vektorraumstruktur auf $T_p M$
+\[
+	\enbrace*{a_1 X_{\gamma_1} + a_2 X_{\gamma_2}}(\varphi) := a_1 X_{\gamma_1}(\varphi) + a_2 X_{\gamma_2}(\varphi) 
+\]
+% subsubsection 152 (end)
+
+\subsubsection[Definition: Differential (algebraisch)]{Definition (des Algebraikers)} % (fold)
+\label{sub:153}
+Das \Index{Differential} $T_p f$ einer differenzierbaren Abbildung $f : M \to N$ in $p$ ist die lineare Abbildung 
+\(
+	T_p f : T_p M \to T_{f(p)} N
+\)
+definiert durch
+\[
+	(T_p f)(X)(\varphi) = X (\varphi \circ f)
+\]
+für $\varphi \in C^\infty(N) $.
+\minisec{Behauptung}
+$T_p M$ ist ein $m$-dimensionaler Vektorraum. Dazu genügt es $T_0 \mathds{R}^m$ zu betrachten, vgl. Blatt 3.\marginnote{hängt von Karte ab}
+% subsection 153 (end)
+
+\subsubsection[Satz 1: Die partiellen Ableitungen bilden eine Basis des $T_0 \mathds{R}^m$]{Satz 1} % (fold)
+\label{ssub:154}
+Die Derivationen $\diff{}{x^i} : C^\infty(\mathds{R}^m) \to \mathds{R}$ für $i=1, \ldots ,m$
+\[
+	\varphi \mapsto \diff{\varphi}{x^i}(0) 
+\]
+bilden einen Basis des $T_0 \mathds{R}^m$.
+\minisec{Beweis}
+\begin{itemize}
+	\item $\diff{}{x^i}, \ldots , \diff{}{x^m}$ sind linear unabhängig: Falls $\sum_{i=1}^{m} a^i \diff{}{x^i} = 0$, dann
+	\[
+		0 = \enbrace*{\sum_{i=1}^{m}  a^i \diff{}{x^i} } (x^k) = a^k \quad , k=1,\ldots ,m
+	\]
+	\item Sei $X \in T_0\mathds{R}^m$. Setze $a^i := X(x^i)$. 
+	Behauptung: $X = \sum_{i=1}^{m} a^i \diff{}{x^i} $.
+	
+	Schreibe $\varphi \in C^\infty(\mathds{R}^m)$ als $\varphi = \varphi(0) + \sum_{k=1}^{m} x^k \varphi_k$ nach Lemma 2 (\ref{ssub:155}).
+	\begin{align*}
+		\Rightarrow \enbrace*{ X - \sum_{i} a^i \diff{}{x^i} } (\varphi) &=  \sum_{k=1}^{m}  \enbrace*{X - \sum_{i} a^i \diff{}{x^i}   } (x^k) \cdot \varphi_k(0) 
+		\tag{Leibniz + $x^k|_0 =0$ }  \\
+		&= \sum_{k} \enbrace*{a^k - \sum_{i} a^i \delta_i^k } \varphi_k (0) =0 
+	\end{align*}
+	Da $\varphi$ beliebig war, folgt $X= \sum_{i} a^i \diff{}{x^i} $. \bewende
+\end{itemize}
+% subsubsection 154 (end)
+
+\subsubsection{Lemma 2 (Morse)} % (fold)
+\label{ssub:155}
+$U \subseteq  \mathds{R}^m$ konvex, $0 \in U$. $f \in C^\infty(U) $. Dann gibt es $f_1, \ldots , f_m \in C^\infty(U) $, sodass 
+\[
+	f(x) = f(0) + \sum_{i=1}^{m} x^i f_i(x).
+\]
+\minisec{Beweis}
+\begin{align*}
+	f(x)- f(0) &= \int_0^1 \! \diffd{}{t} \enbrace*{f(  t x^1, \ldots , t x^m)}  \, \mathrm{d}t   \tag*{(MWS)} \\
+	&= \sum_{i=1}^{m} x^i \underbrace{\int_{0} ^{1} \! \diff{f}{x^i} (t x^1, \ldots , t x^m)  \, \mathrm{d}t  }_{=: f_i (x)} \bewende
+\end{align*}
+% subsubsection 155 (end)
+
+\subsubsection[Definition: Differential (geometrisch)]{Definition (des Geometers)} % (fold)
+\label{ssub:156}
+Das \Index{Differential} $T_p f : T_p M \to T_{f(p)} N$ einer differenzierbaren Abbildung $f : M \to N$ in $p \in M$ ist definiert durch
+\[
+	T_p f \big( [\gamma]\big) = [f \circ \gamma]
+\]
+Dies ist wohldefiniert, da 
+\[
+	\diffd{}{t} \enbrace[\big]{\varphi \circ f \circ \gamma_1} (0) = \diffd{}{t} \enbrace[\big]{\varphi \circ f \circ \gamma_2} (0) 
+\]
+und Definition von "$[.]$"{}.
+% subsubsection 156 (end)
+
+\subsubsection[Satz 3: In lokalen Koordinaten ist das Differential durch die Jacobi-Matrix gegeben]{Satz 3} % (fold)
+\label{ssub:157}
+In lokalen Koordinaten ist das Differential einer differenzierbaren Abbildung $f : M \to N$ durch die Jacobi-Matrix gegeben. 
+\minisec{Beweis}
+Mit $q=f(p)$ und lokalen Karten erhalten wir
+\[
+	\begin{tikzcd}
+		(M,p) \rar{f} \dar& (N,q)\dar \\
+		(\mathds{R}^m,0) \rar[Tomato3]{f'}& (\mathds{R}^n,0)
+	\end{tikzcd}
+\]
+Schreibe für die induzierte Abbildung {\color{Tomato3}$f'$} wieder $f$. 
+\begin{align*}
+	(y^1, \ldots , y^n) = \enbrace*{f^1(x^1, \ldots , x^m), \ldots , f^n(x^1, \ldots ,x^m)} 
+\end{align*}
+Dann gilt für alle $\varphi \in C^\infty(\mathds{R}^n)$:
+\[
+	T_0 f \enbrace*{\diff{}{x^i} }(\varphi)= \diff{}{x^i} (\varphi \circ f) (0)  = \sum_{j=1}^{n} \diff{\varphi}{y^j}(0) \cdot \diff{f^j}{x^i}(0)  
+\]
+Also 
+\[
+	T_0 f \enbrace*{\diff{}{x^i}}  = \sum_{j=1}^{n} \underbrace{\diff{f^j}{x^i} (0)}_{=J_f(0)} \diff{}{y^j} \bewende 
+\]
+% subsubsection 157 (end)
+
+\subsubsection{Definition (des Physikers \ldots )} % (fold)
+\label{ssub:158}
+Ein \Index{Tangentialvektor} im Punkt $p \in M$ ist eine Zuordnung, die jeder Karte $h : (M,p) \to (\mathds{R}^m,0)$ um $p$ einen Vektor $v \in \mathds{R}^m$ so zuordnet, 
+dass der Karte $k : (M,p) \to (\mathds{R}^m,0)$ der Vektor \marginnote{Linearisierung Kartenwechsel}
+\[
+	J_{k \circ h ^{-1}}(0)(v) 
+\]
+zugeordnet wird.
+\subsubsection{Äquivalenz der geometrischen und der algebraischen Definition}
+\label{ssub:159}
+\[
+	T_p^\text{geom}M \to T_p^\text{alg} M \enspace, \enspace[\gamma] \mapsto X_\gamma
+\]
+Wegen $X_\gamma(\varphi)= \diffd{}{t} (\varphi \circ \gamma) (0) $ und der Definition von $[\gamma]$ ist diese Abbildung wohldefiniert und injektiv.\\
+Die Abbildung ist auch surjektiv: In lokalen Koordinaten sei $\gamma(t) = (a^1 t, \ldots , a^m t)$. Dann gilt
+\[
+	X_\gamma = \sum_{i=1}^{m} a^i \diff{}{x^i} 
+\]
+Mit dieser Bijektion übertragen wir die Vektorraumstruktur von $T_p^\text{alg}M$ auf $T_p^\text{geom}M$. Auch die Definitionen der Differentiale sind miteinander 
+verträglich. 
+\[
+	\begin{tikzcd}[column sep=4em]
+		{[\gamma]} \arrow[rrr, mapsto] \arrow[ddd, mapsto] \arrow[draw=none]{dr}[sloped,auto=false]{\in} & & & {[f \circ \gamma]} \arrow[ddd, mapsto] \arrow[draw=none]{dl}[sloped,auto=false]{\ni}\\
+		 & T_p^\text{geom}M \rar{T_p^\text{geom} f} \dar & T_{f(p)}^\text{geom}N  \dar & \\
+		 & T_p^\text{alg} M \rar{T_p^\text{alg} f}& T_{f(p)}^\text{alg} N & \\
+		 X_\gamma \arrow[rrr, dashed] \arrow[draw=none]{ur}[sloped,auto=false]{\in}& & & X_{f \circ \gamma} \arrow[draw=none]{ul}[sloped,auto=false]{\ni}
+	\end{tikzcd}
+\]
+Zu zeigen: $T_p^\text{alg}f (X_\gamma) = X_{f \circ \gamma}$. Es gilt
+\begin{align*}
+	X_{f \circ \gamma} (\varphi) = \diff{}{t} \enbrace*{\varphi \circ f \circ \gamma} (0) = X_\gamma ( \varphi \circ f) = T_p^\text{alg} f(X_\gamma) (\varphi)\bewende 
+\end{align*}
+% subsubsection 158 (end)
+% subsection 15 (end)
+% section 1 (end)
+\newpage
+
+\section{Vektorfelder} % (fold)
+\label{sec:2}
+\subsection{Vektorfelder und Lie-Klammer} % (fold)
+\label{sub:21}
+
+\subsubsection[Definition: Vektorfeld]{Definition} % (fold)
+\label{ssub:211}
+Ein (differenzierbares) \Index{Vektorfeld} $X$ auf einer differenzierbaren Mannigfaltigkeit $M$ ist eine Abbildung, die jedem Punkt $p \in M$ einen Tangentialvektor
+$X_p \in T_p M$ so zuordnet, dass in lokalen Koordinaten $\enbrace[\big]{U, (x^1, \ldots , x^m)}$ gilt\marginnote{Wir unterdrücken das $p$ oft in der Notation!}
+\[
+	X|_U = \sum_{i=1}^{m} a^i \diff{}{x^i} 
+\]
+mit $a^i \in C^\infty(U)$ $\forall i=1,\ldots ,n$.
+% subsubsection 211 (end)
+
+\subsubsection[Lemma 4: Differenzierbarkeit eines Vektorfeldes]{Lemma 4} % (fold)
+\label{ssub:212}
+Die Differenzierbarkeit eines Vektorfeldes $X$ ist äquivalent zu der Aussage:
+\[
+	X(\varphi) \in C^\infty(M) \enspace\forall \varphi \in C^\infty(M) \text{ , wobei } X(\varphi)(p) := X_p(\varphi)
+\]
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow $":] Für $a^i \in C^\infty(U)$ gelte lokal: $X|_U = \sum_{i=1}^{m} a^i \diff{}{x^i} $. Damit folgt
+	\[
+		X(\varphi)|_U = \sum_{i=1}^{m} a^i \diff{\varphi}{x^i} \in C^\infty(U) 
+	\] 
+	$\Rightarrow X(\varphi) \in C^\infty(M)$
+	\item["$\Leftarrow$":] Sei $X(\varphi) \in C^\infty(M)$ für alle $\varphi \in C^\infty(M)$. Schreibe lokal $X|_U = \sum_{i=1}^{m} a^i \diff{}{x^i}$. Sei $p$ solch ein
+	Punkt. Sei $\varphi \in C^\infty(M)$ eine Testfunktion mit $\varphi \equiv x^k$ in einer Umgebung $V$ von $p$ in $U$.
+	\[
+		a^k|_V = X(\varphi)|_V \in C^\infty(V)
+	\]
+	$\Rightarrow a^i \in C^\infty(U)$. \bewende
+\end{description}
+% subsubsection 212 (end)
+
+\subsubsection[Bemerkung: Modul der differenzierbaren Vektorfelder auf einer Mannigfaltigkeit]{Bemerkung} % (fold)
+\label{ssub:213}
+Die differenzierbaren Vektorfelder auf einer differenzierbaren Mannigfaltigkeit $M$ bilden einen Modul über $C^\infty(M)$
+\[
+	(X +Y)_p = X_p + Y_p \qquad (f X)_p = f(p) \cdot X_p \quad {\color{lightgray} f\in C^\infty(M)}
+\]
+% subsubsection 213 (end)
+
+\subsubsection[Definition: Lie-Klammer]{Definition} % (fold)
+\label{ssub:214}
+Die \Index{Lie-Klammer} zweier Vektorfelder $X,Y$ auf $M$ ist das Vektorfeld, das durch  
+\[
+	[X,Y]_p \varphi := X_p (Y \varphi) - Y_p(X \varphi)
+\]
+definiert ist, wobei $\varphi \in C^\infty(M)$.
+% subsubsection 214 (end)
+
+\subsubsection[Lemma 5: Die Lie-Klammer ist ein Vektorfeld]{Lemma 5} % (fold)
+\label{ssub:215}
+Die Lie-Klammer $[X,Y]$ ist ein Vektorfeld.
+\minisec{Beweis}
+\begin{itemize}
+	\item $[X,Y]\varphi$ ist $\mathds{R}$-linear in $\varphi$
+	\item $[X,Y] \varphi \in C^\infty(M)$
+	\item Leibnizregel:
+	\begin{align*}
+		[X,Y]_p (\varphi \psi) &= X_p\enbrace[\big]{Y (\varphi \psi)} - Y_p \enbrace[\big]{X( \varphi \psi)} \tag*{(Leibniz)}\\
+		&= X_p \enbrace[\big]{Y \varphi \cdot \psi + \varphi \cdot Y \psi} - Y_p \enbrace[\big]{X \varphi \cdot \psi + \varphi \cdot X \psi} \tag*{(linear+Leibniz)}\\  
+		&= X_p( Y \varphi) \cdot \psi(p) + \mathul{SpringGreen3}{(Y \varphi)(p) \cdot X_p \psi} 
+		+ \mathul{OrangeRed1}{X_p \varphi \cdot (Y \psi)(p)} + \varphi(p) X_p (Y \psi) \\
+		& - Y_p(X \varphi) \cdot \psi(p) - \mathul{OrangeRed1}{(X \varphi)(p) \cdot Y_p \psi }
+		- \mathul{SpringGreen3}{Y_p \varphi \cdot (X \psi) (p)} - \varphi(p) \cdot Y_p(X \psi) \\
+		&= [X,Y]_p \varphi \cdot \psi(p)+ \varphi(p) \cdot [X,Y]_p \psi \bewende
+	\end{align*}
+
+\end{itemize}
+Achtung: $\varphi \mapsto X_p (Y \varphi)$ definiert im Allgemeinen \emph{kein} Vektorfeld, da die Leibniz-Regel verletzt ist.
+% subsubsection 215 (end)
+
+\subsubsection[Beispiel: Lie-Klammer im $\mathds{R}^2$]{Beispiel} % (fold)
+\label{ssub:216}
+Sei $M=\mathds{R}^2$. Dann ist $\left[ x \diff{}{y} , xy \diff{}{x} \right] = x^2 \diff{}{x} - xy \diff{}{y}$
+% subsubsection 216 (end)
+% subsection 21 (end)
+
+\subsection{Integralkurven} % (fold)
+\label{sub:22}
+Betrachte $\gamma : ({-\varepsilon}, \varepsilon) \to M$ eine differenzierbare Kurve. Für den dadurch in $\gamma(t)$ definierten Tangentialvektor 
+$[\gamma]_{\gamma(t)} \in T_{\gamma(t)}M$ schreiben wir einfach $\dot \gamma(t)$. Ein Vektorfeld $X$ auf $M$ definiert eine Differentialgleichung erster Ordnung durch
+\[
+	\dot \gamma = X(\gamma),
+\]
+d.h. für jeden Punkt $p \in M$ erhält man \marginnote{$\varepsilon= \varepsilon(p)$}
+\[
+	\gamma_p : ({-\varepsilon, \varepsilon}) \to M \enspace \text{ mit } \begin{cases}
+		\dot \gamma_p (t) = X_{\gamma_p(t)}, &t \in (-\varepsilon, \varepsilon)\\
+		\gamma_p(0) = p
+	\end{cases}
+\]
+Die Kurve $\gamma_p$ heißt \Index{Integralkurve} von $X$ durch $p$. In lokalen Koordinaten: \smallskip\\
+\begin{minipage}[c]{0.4\textwidth}
+	\begin{align*}
+		X &= X^i \diff{}{x^i} \\
+		\gamma(t) &= \enbrace*{\gamma^1(t). \ldots , \gamma^m(t)} \\
+		{\dot{\gamma}}^i (t) &= X^i \enbrace[\big]{\gamma(t)} \quad , i=1,\ldots ,m 
+	\end{align*}
+\end{minipage}
+\begin{minipage}[c]{0.55\textwidth}
+	\captionsetup{type=figure, skip=2pt}
+	\centering{\begin{tikzpicture}[xscale=1.3, yscale=1.1]
+		%\draw[help lines] (0,0) grid (4,3);
+		\coordinate (p) at (2.1,1.6);
+		\coordinate (s) at (0.5,0.7);
+		\coordinate (e) at (3.2,3);
+		%\draw[<->, thick] (4,0) node[right]{$x$} -- (0,0) -- (0,3) node[above]{$y$};
+		\foreach \x/\angle in {0.5/20, 1.5/40, 2.5/60, 3.5/80} {
+		    \foreach \y in {0.5, 1.5, 2.5} {
+		        %\fill (\x,\y) circle[radius=1pt];
+		        \draw[->,thick]  (\x, \y) -- ++(\angle:1);
+		    }
+		}
+		\draw[very thick,OliveDrab3] (s) to[out=20,in=220] (p) to[out=40, in=245] (e) node[below, xshift=0.1cm, yshift=-0.1cm]{$\gamma_p$};
+		\draw[fill, Tomato3] (p) circle (0.03) node[below]{$p$}; 
+	\end{tikzpicture}
+	\caption{Integralkurve in einem Vektorfeld}}
+\end{minipage}
+% subsection 22 (end)
+\newpage
+\subsection{Satz von Picard-Lindelöf} % (fold)
+\label{sub:23}
+Sei $U \subset \mathds{R}^n$ offen - Phasenraum. \\
+Sei $I \subset \mathds{R}$ ein nichtleeres offenes Intervall - Zeitintervall. \\
+$X : I \times U \to \mathds{R}^n$ sei ein stetiges, zeitabhängiges Vektorfeld auf $U$. Für eine Anfangszeit $t_0 \in I$ und einen Anfangspunkt $x_0 \in U$ suchen wir eine
+$C^1$-Lösung $u : I_1 \to U$ der Differentialgleichung
+\[
+	\begin{cases}
+		\dot u (t) = X\enbrace[\big]{t, u(t)}\\
+		u(t_0) = x_0
+	\end{cases}
+\]
+für alle $t \in I_1$, wobei $I_1 := I \cap (t_0- \varepsilon, t_0 + \varepsilon)$ für ein geeignetes $\varepsilon >0$. Ändert man den Anfangspunkt $x$ in 
+$U_1 = U \cap B_r(x_0)$, so soll die gefundene $C^1$-Lösung $u= u_x$, $u_x(t_0)=x$, stetig von $x \in U_1$ abhängen. Also:
+\[
+	u \in C^0(I_1 \times U_1, U) \qquad u(t,x)= u_x(t)
+\]
+% subsection 23 (end)
+
+\subsubsection[Satz 6: (Picard-Lindelöf)]{Satz 6} % (fold)
+\label{ssub:231}
+Wenn $X$ der folgenden \Index{Lipschitz-Bedingung} genügt 
+\[
+	\exists L >0 : \forall x_1, x_2 \in U : \forall t \in I : \abs*{X(t,x_1) - X(t,x_2)} \le L \cdot \abs*{x_1 - x_2}  
+\]
+Dann gibt es $\varepsilon>0, r>0$ und eine eindeutig bestimmte Lösung $u=u_x : I_1 \to U$ von $\dot u (t) = X(t, u(t))$, $u(t_0) =x$ für jedes $x \in B_r(x_0)$. Die 
+Abbildung $u : I_1 \times U_1 \to U$ ist stetig.
+\minisec{Bemerkung}
+$X$ ist also lokal eindeutig lösbar und die Lösung hängt stetig von den Anfangspunkten ab.
+\minisec{Beweis}
+Betrachte folgenden Operator
+\[
+	(T u) (t,x) = x + \int_{t_0} ^{t} \! X\enbrace[\big]{s, u (s,x)}  \, \mathrm{d}s
+\]
+Ist $u$ ein Fixpunkt des Operators $T$, d.h. $T u = u$, so ist $u$ stetig differenzierbar und es gilt: $\diffd{}{x} U(t,x) = X (t, u(t,x))$ und $u(t_0,x) =x$. Durch
+Ersetzen von $U$ und $I$ durch eventuell kleinere Umgebungen von $x_0$ und $t_0$ können wir annehmen:\marginnote{Geschwindigkeit in beliebigen Punkten in $I \times U$ 
+beschränkt} 
+\[
+	\exists K>0 : \abs*{X} < K \text{ auf } I \times U 
+\]
+\begin{figure}[ht]
+	\centering{
+	\begin{tikzpicture}[scale=1.4]
+		%\draw[help lines] (0,0) grid (4,3);
+		\coordinate (x_0) at (2,1.5);
+		\coordinate (x) at (1.9,1.6);
+		\coordinate (x1) at (0.64,1.6);
+		\coordinate (x2) at (2.85,2.6);
+		\draw[very thick] (1,0) to [out=-5, in=200](3,0) to [out=20, in=260](4,1) to [out=80, in=-85](4,2) node[right]{$U$} to [out=95, in=-20](3,3) to [out=160, in=5](1,3)
+		to [out=185, in=80](0,2) to [out=260, in=175](1,0);
+		\draw[fill] (x_0) circle (0.02) node[below]{$x_0$};
+		\draw[Firebrick2, very thick] (x_0) circle (0.4);
+		\node[Firebrick2,below right] at (2.4,1.5) {$r$};
+		\draw[very thick, SeaGreen3] (x_0) circle (1.4);
+		\draw[very thick, SeaGreen3, dashed] (x_0) circle (0.7);
+		\node[below right, SeaGreen3] at (3.4,1.5) {$2R$};
+		\draw[ultra thick, DodgerBlue2, dashed] (x1) node[above right]{$u_x(t)$} to[out=-20, in=200] (x) to[out=20,in=240] (x2);
+		\draw[fill=DodgerBlue3] (x) circle (0.03) node[above]{$x$};
+	\end{tikzpicture}
+	\caption[Zeichnung zum Beweis von Picard-Lindelöf]{Beachte: $u_x(t)$ ist für $t \in (t_0-\varepsilon, t_0 + \varepsilon)$ gezeichnet}}
+\end{figure}
+Wähle $R>0$, so dass $B_{2R}(x_0) \subset U$. Sei $r \le R$. Damit eine $C^1$-Kurve $u : I_1 \to U$ mit Anfangspunkt $x \in B_r(x_0)$ und Geschwindigkeit 
+$\abs*{\dot u} \le K $ immer im $B_{2R}\enbrace[\big]{u(x_0)}$ bleibt, wählen wir $\varepsilon < \frac{R}{K}$.\marginnote{$\varepsilon$ für verkürztes Zeitintervall 
+$I_1$} Denn dann gilt nach dem Mittelwertsatz: 
+\[
+	\abs*{u(t) - u(t_0)} \le K \cdot \abs*{t- t_0} < K \cdot \varepsilon < R  
+\]
+D.h. $\abs*{u(t) - x_0} < R + \abs*{u(t_0)- x_0} \le 2 R$.\marginnote{Abhängig $x$ unterdrückt}\\
+\uline{Ziel:} lokal eindeutige Lösbarkeit von $\dot u(t) = X\enbrace[\big]{t,u(t)}$, $u(t_0) =x \in B_r(x_0)$.
+
+Sei $A$ der Raum aller stetigen Funktionen $u : I_1 \times B_r(x_0) \to B_{2R}(x_0)$ mit $u(t_0, x) = x \enspace \forall x \in B_r(x_0)$ versehen mit der Metrik
+\[
+	d(u,v) = \norm{u -v} := \sup_{(t,x)\in I_1 \times B_r(x_0)} \abs*{u(t,x)- v(t,x)} 
+\]
+$A$ ist vollständig. \uline{Behauptung:} Es gilt $T(A) \subset A$. Da
+\begin{align*}
+	\abs[\big]{(T u)(t,x) - x} = \abs*{ \int_{t_0} ^{t} \! X \enbrace[\big]{s, u(s,x)}  \, \mathrm{d}s  }  \le \abs*{t- t_0}\cdot \sup_{I \times U} \abs*{X}  
+	< \varepsilon \cdot K < R 
+\end{align*}
+gilt $(T u)(t,x) \in B_{2 R}(x_0)$ für alle $x \in B_r(x_0)$. $T$ ist kontrahierend, da für alle $u,v \in A$ gilt
+\begin{align*}
+	\abs[\big]{(T u)(t,x)- (T v)(t,x)} &= \abs*{\int_{t_0} ^{t} \! X \enbrace[\big]{s, u(s,x)} \, \mathrm{d}s - \int_{t_0} ^{t} \!X \enbrace[\big]{s, v(s,x)}\, 
+	\mathrm{d}s} \\
+	&\le \abs*{t- t_0} \cdot L \cdot \! \!\! \sup_{I_1 \times B_r(x_0)} \!\abs*{u-v}    
+\end{align*}
+d.h. $\norm{T u - T v} \le \varepsilon \cdot L \cdot \norm{u-v}$. Wir wählen\footnote{wir haben schon $\varepsilon < \frac{R}{K}$, also 
+$\varepsilon < \min \set{\frac{R}{K}, \frac{1}{L}} $} $\varepsilon < \frac{1}{L}$, sodass $T$ kontrahierend ist. Nach dem Banachschen Fixpunktsatz
+hat $T u = u$ genau eine Lösung. Damit haben wir gezeigt, dass $X$ lokal eine Lösung hat. Diese hängt stetig vom Anfangspunkt ab. 
+
+Um zu zeigen, dass diese Lösung eindeutig
+ist, wiederhole man den Beweis mit Abbildungen $u$, die in $t$ aber \emph{nicht} notwendig in $x$ stetig sind (vgl. Definition von $A$). \bewende
+% subsubsection 231 (end)
+
+\subsubsection{Bemerkung (Quantisierung)} % (fold)
+\label{ssub:232}
+Sei $X : (t_0 - \varepsilon, t_0 +\varepsilon) \times B_{2R}(x_0) \to \mathds{R}^n$ stetig und erfülle eine Lipschitz-Bedingung bezüglich $x$ mit $L >0$. Sei weiter 
+$\abs*{X} < K $, $\varepsilon < \frac{R}{K}$ und $r < R$. Dann ist $X$ für alle Anfangspunkte in $B_r(x_0)$ lokal eindeutig lösbar. Die Bedingung 
+$\varepsilon < \frac{1}{L} $ ist dazu \emph{nicht} notwendig.
+
+In der Tat: Sei $u^0(t,x) := x$ und definiere iterativ $u^{\nu +1} := T u^\nu$ $\forall \nu \in \mathds{N}$. Es gilt die Kontraktionsabschätzung 
+\[
+	\norm{u^{\nu +1} - u^\nu} \le \frac{K \cdot L^\nu \cdot \varepsilon^{\nu +1} }{(\nu +1)!}, 
+\]
+wie eine Induktion zeigt. Ein Vergleich mit der Exponentialreihe zeigt, dass die Folge $u^\nu$ gleichmäßig gegen ein $u$ konvergiert. (Teleskopsumme: 
+$u^0 - u^1 + u^1 - u^2 + u^2 \pm \ldots - u^\nu$) Der Reihenrest kann durch 
+\[
+	\norm{u^\nu - u} < \frac{K}{L} \cdot \frac{(L \cdot \varepsilon)^{\nu +1}}{(\nu+1)!} \cdot e^{L \cdot \varepsilon}   
+\]
+abgeschätzt werden. Also ist wegen 
+\[
+	T u = \lim_{\nu \to \infty} T u^\nu = \lim_{ \nu \to \infty} u^\nu = u
+\]
+($T$ ist (Lipschitz)-stetig) $u$ ein Fixpunkt. (vgl. Blatt 5). \\
+Randbemerkung:
+\[
+	\norm{u}' := \sup_{(t,x)} \enbrace*{e^{-2 \cdot L \cdot \abs*{t-t_0} } \cdot \abs*{u(t,x)} }  \quad \leadsto \varepsilon L \leftrightarrow \frac{1}{2} 
+\]
+% subsubsection 231 (end)
+
+\subsubsection{Bemerkung (höhere Regularität)} % (fold)
+\label{ssub:233}
+Sei $X : I  \times U \to \mathds{R}^n$ beliebig oft differenzierbar, $u : (t_0 - \varepsilon, t_0 + \varepsilon)  \times B_r(x_0) \to U$ die lokale Lösung bestimmt durch
+$(t_0, x_0)$. Auf $B_{2R}(x_0)$ ist $X$ zusammen mit allen Ableitungen beschränkt (uniform in $t$). Wir wollen zeigen, dass $u$ eine $C^\infty$-Abbildung ist. Wegen 
+\[
+	\diffd{}{t} u(t,x) = X \enbrace[\big]{t, u(t,x)} 
+\]
+ist $t \mapsto u(t,x)$ beliebig oft differenzierbar für alle $x$. Ist $u$ auch bezüglich $x$ beliebig oft differenzierbar, so 
+\[
+	\diffd{}{t} \mathrm{D}_x u(t,x) = D_2 X \enbrace[\big]{t, u(t,x)}  \cdot D_x u(t,x) \qquad D_x u(t_0,x) = \id
+\]
+mit anderen Worten: $D_x u(t,x)$ löst die lineare Gleichung:
+\[
+	\diffd{}{t} v(t,x) = D_x X\enbrace[\big]{t, u(t,x) } \cdot v(t,x) \qquad v(_0, x) = \id_{n \times n}
+\] 
+für Matrix-wertige Abbildungen $v$. Um die Differenzierbarkeit von $u$ nach $x$ zu sehen, gehen wir wie folgt vor: Sei $h \in \mathds{R}^n$ mit $\abs*{h}$ klein
+($\abs*{h} \searrow 0$). Setze
+\[
+	\Delta u(t,h) := u(t, x+h) - u(t,x) \quad , \quad Y_{t,h} := \int_0^1 \! D_x X\enbrace[\Big]{t, u(t,x) + s \Delta u(t,h)}  \, \mathrm{d}s
+\]
+(Der Parameter $x$ ist in der Notation unterdrückt. Die Ortsvariable ist $h$. Beachte: $Y(t,0) = D_x X \enbrace[\big]{t, u(t,x)} $)
+\begin{align*}
+	\Rightarrow  \diffd{}{t} \Delta u(t,h) = X (t,u(t,x+h)) - X(t, u(t,x)) &= \int_{0} ^{1} \! \diffd{}{s} X\enbrace[\Big]{t,u(t,x) + s \Delta u(t,h)}  \, \mathrm{d}s\\
+	&= Y(t,h) \cdot \Delta u(t,h)
+\end{align*}
+$\Delta u(t_0,h) = h$. Das lineare Problem für unbekannte Matrizen ($n \times n$)
+\[
+	\dot V (t,h) = Y(t,h) \cdot V(t,h) \quad , \quad V(t_0,h) = \id_{n \times n}
+\]
+hat lokal genau eine Lösung $V$, die stetig in $x$ (Parameter) und $h$ (Ortsvariable, hier als Parameter) ist.\marginnote{vgl. Satz 6 \& Blatt 5} Das lineare Problem für
+unbekannte Vektoren 
+\[
+	\dot v(t,n) = Y(t,h) \cdot v(t,h) \quad , \quad v(t_0,h) = h
+\]
+wird dann von $v(t,h)= V(t,h) \cdot h$ gelöst. Die Eindeutigkeit liefert
+\[
+	\Delta u(t,h) = V(t,h) \cdot h
+\]
+Damit ist $x  \mapsto u(t,x)$ von der Klasse $C^1$ für alle $x$ und es gilt: 
+\(
+	D_x u(t,x) = V(t,0)
+\) (löst das linearisierte Problem)
+
+Um zu zeigen, dass $u$ von der Klasse $C^2$ ist, betrachten wir nun direkt das System 
+\[
+	\dot u(t,x) = X(t, u(t,x))  , \quad \dot v (t,x) = D_x X\enbrace[\big]{t, u(t,x)} \cdot v(t,x) , \quad u(t_0, x) = x , \quad v(t_0, x) = \id_{n \times n}
+\]
+(Beachte: Rechte Seite ist nur $C^1$!)
+
+Mit dem eben gezeigten ($C^1$ reicht!) ist die Lösung $(u, D_x u)$ von der Klasse $C^1$, also $u$ selbst $C^2$. Durch Wiederholen dieser Argumentation erhält man
+$u \in C^3$ usw., also $u \in C^\infty$. \bewende
+% subsubsection 233 (end)
+\newpage
+
+\subsection{Flüsse und die Lie-Ableitung} % (fold)
+\label{sub:24}
+Sei $X$ ein differenzierbares Vektorfeld auf $M$. Aus dem Satz von Picard-Lindelöf folgt, dass für jedes $p \in M$ eine offene Umgebung $U$ von $p$ und ein $\varepsilon>0$
+so existiert, dass für alle $q \in U$ die Integralkurve $\gamma_q(t)$ von $X$ auf $({-\varepsilon}, \varepsilon)$ eindeutig bestimmt ist. Die Abbildung 
+$(q,t) \mapsto \gamma_q(t)$ ist differenzierbar.
+
+\subsubsection[Definition: lokaler Fluss]{Definition} % (fold)
+\label{ssub:241}
+Die Abbildung $(q,t) \mapsto \gamma_q(t) =: \Phi_t(q)$ heißt \Index{lokaler Fluss} von $X$. 
+% subsubsection 241 (end)
+
+\subsubsection[Satz 7: Verkettung von lokalen Flüssen]{Satz 7} % (fold)
+\label{ssub:242}
+\[
+	\Phi_t \circ \Phi_s(q) = \Phi_{t+s}(q)
+\]
+\minisec{Beweis}
+$t \mapsto \gamma_q(t+s)$ und $t \mapsto \gamma_{\Phi_s(q)}(t)$ sind Integralkurven von $X$ mit identischem Anfangspunkt (also $t=0$): 
+\[
+	\gamma_q(s) = \Phi_s(q). 
+\]
+Die Eindeutigkeitsaussage im Satz von Picard-Lindelöf (\ref{sub:23}) impliziert:
+\[
+	\gamma_q(t +s) = \gamma_{\Phi_s(q)}(t),
+\]
+d.h. $\Phi_{t+s}(q) = \Phi_t \circ \Phi_s (q)$. \bewende \bigskip\\
+Wegen $\Phi_t \circ \Phi_{-t} = \Phi_0 = \id = \Phi_{-t} \circ \Phi_t$ ist $\Phi_t : M \to M$ (falls global definiert) ein Diffeomorphismus mit Inverser
+\(
+	 \enbrace*{\Phi_t} ^{-1} = \Phi_{-t} 
+\).
+% subsubsection 242 (end)
+
+\subsubsection[Definition: Lie-Ableitung]{Definition} % (fold)
+\label{ssub:243}
+Sei $X$ ein Vektorfeld auf $M$, $\Phi_t$ ein lokaler Fluss zu $X$. Für Funktionen $f \in C^\infty(M)$ setze
+\[
+	\mathcal{L} _X f := \lim_{ t \to 0} \frac{1}{t} \enbrace*{f \circ  \Phi_t - f} = \diffd{}{t}\Big|_{t=0} (f \circ \Phi_t)    
+\]
+$\mathcal{L} _X$ heißt die \Index{Lie-Ableitung}. 
+Für Vektorfelder $Y$ auf $M$ gilt
+\[
+	(\mathcal{L}_X Y)_p := \lim_{ t \to 0} \frac{1}{t} \enbrace*{T \Phi_{-t} \enbrace*{Y_{\Phi_t(p)}} - Y_p} = \diff{}{t}\Big|_{t=0} \enbrace[\Big]{T \Phi_{-t} 
+	\enbrace*{Y_{\Phi _t(p)}} }     
+\]
+% subsubsection 243 (end)
+
+\subsubsection{Satz 8} % (fold)
+\label{ssub:244}
+\begin{enumerate}[a)]
+	\item $\mathcal{L}_X f = X(f)$
+	\item $\mathcal{L}_X Y = [X,Y]$
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[zu a):] Da $t \mapsto \Phi_t(p) = \gamma_p(t)$ Integralkurve von $X$ ist, also $\dot\Phi_t = X_{\Phi_t}$, gilt nach Definition
+	\[
+		\mathcal{L} _X f = \diff{}{t}\Big|_{t=0} (f \circ  \Phi_t) = X(f). 
+	\] 
+	\item[zu b):] In lokalen Koordinaten: $X = X^i \diff{}{x^i}$, $Y = Y^j \diff{}{x^j}$. Dann gilt
+	\[
+		\mathcal{L} _X \enbrace*{\diff{}{x^j} } = \diffd{}{t}\Big|_{t=0} T \Phi_{-t} \enbrace*{\diff{}{x^j} } = \diffd{}{t}\Big|_{t=0} \diff{\Phi_{-t}î}{x^j} \diff{}{x^i} 
+		= - \diff{X^i}{x^j} \diff{}{x^i}     
+	\]
+	($\Phi_{-t}$ ist der Fluss zu $-X$) In Analogie zur Produktregel für die gewöhnliche Ableitung für reellwertige Funktionen zeigt man:
+	\begin{align*}
+		L_X(f  Y) = (L_X f) Y + f \cdot L_X Y
+	\end{align*}
+	Daraus folgt
+	\begin{align*}
+		\mathcal{L} _X\enbrace*{Y^j \diff{}{x^j}} = \mathcal{L}_X Y^j \cdot \diff{}{x^j} + Y^j \cdot \mathcal{L}_X \diff{}{x^j} = X^i \diff{Y^j}{x^i} \diff{}{x^j} 
+		- Y^j \diff{X^i}{x^j} \diff{}{x^i} = [X,Y]       
+	\end{align*}
+	vgl. Blatt 4  \bewende
+\end{description}
+% subsubsection 244 (end)
+
+\subsubsection{Notation für Diffeomorphismen} % (fold)
+\label{ssub:245}
+Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$. Dann erhält man ein neues Vektorfeld $N$ in $q \in N$ durch 
+\[
+	 \enbrace*{f_* X}_q := T _{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}}
+\]
+Damit können wir 
+\[
+	\mathcal{L}_X Y = \diffd{}{t}\Big|_{t=0}  \enbrace*{\Phi_{-t}}_* Y 
+\]
+schreiben
+% subsubsection 245 (end)
+
+\subsubsection{Beispiel} % (fold)
+\label{ssub:246}
+$M=N=\mathds{R}^2$. $f(x,y)= (x, x^2+y) \Rightarrow f ^{-1} (x,y) = (x, -x^2 +y)$. Dann $X_{x,y} = y \diff{}{x} = \binom{y}{0}$.
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}
+		\draw[help lines] (-2,-1) grid (4,4);
+	\end{tikzpicture}
+	\caption{Zeichnung zu Beispiel \ref{ssub:246} (unvollständig)}}
+\end{figure}
+
+Es gilt $T_{(x,y)}(f) = \begin{pmatrix}
+	1 & 0 \\
+	2x & 1
+\end{pmatrix}$. Damit folgt
+\[
+	\enbrace*{f_* X}_{(x,y)} = T_{(x,-x^2 +y)} f \enbrace*{X_{(x, -x^2+y)}} = \begin{pmatrix}
+		1 & 0 \\
+		2x & 1
+	\end{pmatrix} \cdot \begin{pmatrix}
+		-x^2 +y \\
+		0
+	\end{pmatrix} = (x^2+y) \begin{pmatrix}
+		1 \\
+		2x
+	\end{pmatrix} = (-x^2 +y) \enbrace*{\diff{}{x} + 2x \diff{}{y}} 
+\]
+% subsection 246 (end)
+
+\subsubsection{Lemma 9} % (fold)
+\label{ssub:247}
+Ist $f : M  \xrightarrow{\cong} N$ ein Diffeomorphismus und $\Phi_t$ der (lokale) Fluss eines Vektorfeldes $X$ auf $M$, so ist $f \circ \Phi_t \circ  f ^{-1}$ der Fluss 
+von $f_* X$ auf $N$. 
+\minisec{Beweis}
+Es gilt
+\begin{align*}
+	\diffd{}{t} \enbrace*{\Phi_t \circ f ^{-1} (q)} &= X_{f ^{-1}(q)}  \\
+	\intertext{Damit folgt}
+	\diff{}{t} \enbrace*{f \circ \Phi_t \circ f ^{-1}(q)} &= T_{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}} = \enbrace*{f_*X}_q \bewende    
+\end{align*}
+Insbesondere für $M=N$ gilt 
+\[
+	f_* X = X \iff \forall t : \Phi_t \circ f = f \circ \Phi_t
+\]
+% subsubsection 247 (end)
+
+\subsubsection{Satz 10} % (fold)
+\label{ssub:248}
+Seien $X,Y$ Vektorfelder auf $M$ mit Fluss $\Phi_t$ bzw. $\Psi_s$. Dann gilt:
+\[
+	[X,Y] = 0 \iff \Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t
+\]
+\minisec{Beweis}
+\begin{description}
+	\item["$\Leftarrow$":] Gelte $\Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t$. Dann gilt auch 
+	\begin{align*}
+		\diffd{}{s} \Phi_t \circ \Psi_s (p) = \diffd{}{s} \Psi_s \circ  \Phi_t(p) 
+	\end{align*} 
+	d.h. $T_p \Phi_t (Y_p) = Y_{\Phi_t(p)} \forall p,t$ und $(\Phi_{-t})_* Y = Y$. Dann erhalten wir
+	\begin{align*}
+		[X,Y] =  L_X Y = \diff{}{t}\Big|_{t=0} (\Phi_{-t}) Y = 0 
+	\end{align*}
+	\item["$\Rightarrow $":] Gelte $[X,Y] =0$. Nach Lemma 9  (\ref{ssub:247}) ist zu zeigen, dass $(\Phi_t)_* Y = Y \enspace\forall t$. Dann gilt 
+	\begin{align*}
+		\diff{}{t}\Big|_{t=t_0} \enbrace*{\Phi_{-t}}_* Y = \diff{}{t}\Big|_{t=0} \enbrace*{\Phi_{-t_0-t}}_* Y  = \diff{}{t}\Big|_{t=0}
+		\enbrace*{\Phi_{-t_0}}_* \enbrace*{\Phi_{-t}}_* Y = \enbrace*{\Phi_{-t_0}}_* \underbrace{L_X Y}_{= [X,Y]=0} = 0   \bewende
+	\end{align*}
+\end{description}
+% subsubsection 248 (end)
+% subsection 24 (end)
+\newpage
+\subsection{Dynamische Systeme} % (fold)
+\label{sub:25}
+
+\subsubsection[Definition: Dynamisches System]{Definition} % (fold)
+\label{ssub:251}
+Eine differenzierbare Abbildung $\Phi : \mathds{R} \times M  \to M$ heißt \Index{dynamisches System} oder ein \Index{globaler Fluss} auf der differenzierbaren 
+Mannigfaltigkeit $M$, wenn für alle $s,t \in \mathds{R}$ und $p \in M$ gilt:
+\begin{itemize}
+	\item $\Phi(0,p) = p$
+	\item $\Phi(s+t, p) = \Phi\enbrace[\big]{s, \Phi (t,p)}$
+\end{itemize}
+% subsubsection 251 (end)
+
+\subsubsection{Beispiel} % (fold)
+\label{ssub:252}
+Betrachte $A \in \mathds{R}^{n \times n}$. $\dot x = A x$ hat den Fluss $\Phi(t,x) = e^{A \cdot t} \cdot  x$, wobei\marginnote{Matrixexponential, $M=\mathds{R}^n$}
+\[
+	e^{A t} = \sum_{k=0}^{\infty} \frac{A^k t^k}{k!}  
+\]
+Für $A= \id$ entspricht dies einer Skalierung:
+\[
+	\begin{tikzpicture}
+		\foreach \x in {0,45,...,315}{
+			\draw[arrows={-stealth}, thick] (0,0) -- (\x:1);
+		}
+		\draw[fill, Tomato3] (0,0) circle (0.03);
+	\end{tikzpicture}
+\]
+Für $A = \begin{psmallmatrix*}[r]
+	1 & 0 \\
+	0 & -1
+\end{psmallmatrix*}$, Startpunkte $\hat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04]}}$ und $t \in [-1, 1]$
+\[
+	\begin{tikzpicture}[scale=0.8]
+		%\draw[help lines] (-3,-3) grid (3,3);
+		\draw[Gray0] (-3,0) -- (3,0);
+		\draw[Gray0] (0,-3) -- (0,3);
+		\begin{scope}
+		%\clip (-3,-3) rectangle (3,3);
+		\foreach \x/\y in {1/1, -1/-1, 1/-1, -1/1, 0.5/0.5, -0.5/-0.5, -0.5/0.5, 0.5/-0.5, 0/1, 0/-1, 0.5/0, -0.5/0}{
+			\draw[thick, domain=-1:1, smooth, variable=\t, arrows={-stealth}] plot ({exp(\t)*\x},{exp(-\t)*\y});
+			\draw[fill, RoyalBlue2] (\x,\y) circle[radius=0.05];
+		}
+		\end{scope}
+	\end{tikzpicture}
+\]
+Für $A = \begin{psmallmatrix*}[r]
+	0 & 1 \\
+	-1 & 0
+\end{psmallmatrix*}$, Startpunkte $\hat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04]}}$ und $t \in [-1/2, 1/2]$
+\[
+	\begin{tikzpicture}[scale=1.2]
+		%\draw[help lines] (-3,-3) grid (3,3);
+		\draw[Gray0] (-1.5,0) -- (1.5,0);
+		\draw[Gray0] (0,-1.5) -- (0,1.5);
+		\begin{scope}
+		%\clip (-3,-3) rectangle (3,3);
+		\foreach \x/\y in {1/1, -1/-1, 1/-1, -1/1, 0.5/0.5, -0.5/-0.5, -0.5/0.5, 0.5/-0.5, 0/1, 0/-1, 0.5/0, -0.5/0}{
+			\draw[thick, domain=-0.5:0.5, variable=\t, arrows={-stealth}] 
+			plot ({\x*cos(deg(\t))+ \y*sin(deg(\t))},{-\x*sin(deg(\t))+ \y*cos(deg(\t))});
+			\draw[fill, RoyalBlue2] (\x,\y) circle[radius=0.04];
+		}
+		\end{scope}
+	\end{tikzpicture}
+\]
+Betrachte $S^1 \times S^1 \subset \mathds{C} \times \mathds{C}$ (2-Torus) mit dem Fluss 
+\[
+	\Phi\enbrace[\big]{t, (z_1, z_2)} = \enbrace*{e^{it} z_1, e^{a i t} z_2}, \quad a \in \mathds{R} 
+\]
+$a=0$ \marginnote{Wie ich das mit einem Torus hinbekomme, muss ich nochmal gucken \ldots }
+\[
+	\includegraphics[width=0.4\textwidth, keepaspectratio]{Mathematica/torus.png}
+	\text{Torus} \qquad \begin{tikzpicture}[scale=0.7]
+		\draw[very thick] (0,0) rectangle (4,4);
+		\foreach \x in {0,0.5,...,4}{
+			\draw[thick, arrows={-angle 90}] (\x,1.8) -- (\x,4);
+			\draw[thick, arrows={-angle 90}] (\x,0) -- (\x,2);
+		}
+	\end{tikzpicture}
+\]
+$a= \sqrt{11}$
+\[
+	\text{Torus + Fundamentalgebiet zum zweiten}
+\]
+Betrachte nun $S^2 \subset \mathds{C} \times \mathds{R}$ 2-Sphäre
+% subsubsection 252 (end)
+
+\subsubsection{Einparameterfamilie von Diffeomorphismen} % (fold)
+\label{ssub:253}
+Betrachte die Abbildung $\Phi_t : M \to M$, $p \mapsto \Phi (t,p)$ mit 
+\begin{itemize}
+	\item $\Phi_0 = \id_M$
+	\item $\Phi_s \circ  \Phi_t = \Phi_{s+t}$
+\end{itemize}
+Daraus folgt $\enbrace*{\Phi_t} ^{-1} = \Phi_{-t}$. Eine differenzierbare Abbildung $\Phi : \mathds{R} \times M \to M$ ist ein dynamisches System, falls
+\[
+	(\mathds{R},+) \to \enbrace*{ \set{\text{Diffeomorphismen auf }M}, \circ  } \quad , t \mapsto \Phi(t, .) 
+\]
+ein Gruppenhomomorphismus ist.
+% subsubsection 253 (end)
+
+\subsubsection{Nach $M$ parametrisierte Kurvenscharen} % (fold)
+\label{ssub:254}
+\[
+	\gamma_p : \mathds{R} \to M \quad , \quad t \mapsto \Phi (t,p)
+\]
+$\gamma_p$ heißt \Index{Flusslinie}, \Index{Integralkurve}, \Index{Lösungskurve}. $\gamma(\mathds{R})$ heißt \Index{Orbit} oder \Index{Bahn} durch $p$.  
+% subsubsection 254 (end)
+
+\subsubsection[Bemerkung: Zerlegung von $M$ in ihre Bahnen]{Bemerkung} % (fold)
+\label{ssub:255}
+Ein dynamisches System zerlegt eine Mannigfaltigkeit disjunkt in ihre Bahnen:
+\[
+	q \sim p :\Leftrightarrow q= \gamma_p(t) \text{ für ein } t
+\]
+Die Bahnen entsprechen genau den Äquivalenzklassen.
+% subsubsection 255 (end)
+
+\subsubsection[Notation: Derivation definiert durch eine Kurve]{Notation} % (fold)
+\label{ssub:256}
+\[
+	\vcenter{\hbox{\begin{tikzpicture}
+		\draw[->] (0,0) -- (4,0) node[below right]{$\mathds{R}$};
+		\draw[very thick,DodgerBlue2, ->] (1,0) node[above right]{$\diff{}{t} \in T_s \mathds{R} $}-- (2,0);
+		\draw[fill, Tomato3] (1,0) circle[radius=0.03] node[below]{$s$};
+		\node[right]  at (0,-0.5) {$t \mapsto t$};
+	\end{tikzpicture}}} \quad \xrightarrow{\makebox[1cm]{$\gamma$}} \quad 
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.3]
+		%\draw[help lines] (0,0) grid (6,3);
+		\coordinate (x) at (2.6,0.7);
+		\coordinate (a) at (2.6,1.7);
+		\coordinate (b) at (3.6,0.7);
+		\draw (0,0) arc (105:70:7) node[above right, xshift=0.2cm]{$M$} arc (150:110:2.5) arc (70:105:7) arc (110:150:2.5) -- cycle;
+		\draw[very thick, Tomato2] (1,0.5) to[out=20, in=180] (x) to[out=0, in=155]  (4,0.42) node[right]{$\gamma$};
+		\draw[thick, SeaGreen3, shift=(x), fill=SeaGreen2!50, fill opacity=0.4] (1,0,1) -- ++ (0,0,-2)  -- ++ (-2,0,0) -- ++ (0,0,2) -- cycle;
+		\node[below right, SeaGreen4] (A) at (3.6,0.7,-1) {$T_p M$} ;
+		\draw[->, very thick, DodgerBlue2] (x) -- (3.4,0.7);
+		\draw[fill=Firebrick3, Firebrick3] (x) circle[radius=0.025] node[below]{$p=\gamma(s)$};
+	\end{tikzpicture}}}
+\]
+$\dot{\gamma}(s)$ steht für die Derivation, die durch $\dot{\gamma}(s) (\varphi) = \diffd{}{t}( \varphi \circ \gamma) (s) $ , $\varphi \in C^\infty(M)$ gegeben ist.
+Es gilt $\dot{\gamma}(s) = T_s \gamma\enbrace*{\diff{}{t} } $. \hfill (mehr auf Blatt 6)
+% subsubsection 256 (end)
+
+\subsubsection{Satz 11} % (fold)
+\label{ssub:257}
+Eine Flusslinie eines dynamischen Systems $\gamma = \gamma_p : \mathds{R} \to M$ ist 
+\begin{itemize}
+	\item entweder \Index{konstant}, d.h. $\gamma(t)=p \enspace \forall t$ oder \Index{regulär}, d.h. $\dot{\gamma}(t) \not= 0 \enspace \forall t$
+	\item entweder injektiv oder \Index{periodisch}, d.h. $\exists \pi \in \mathds{R}\setminus \set{0} $ mit $\gamma(t)= \gamma(t+ \pi ) \enspace \forall t$  
+\end{itemize}
+\minisec{Beweis}
+($\gamma= \gamma_p$) Es gilt
+\[
+	\gamma(s+t) = \Phi_{s+t} (p) = \Phi_s \enbrace[\big]{\Phi_t (p)} = \Phi_s \enbrace[\big]{\gamma(t)}  
+\]
+Also 
+\begin{align*}
+	\dot{\gamma}(s) = T_0 \gamma(s + .) \enbrace*{\diff{}{t}} = T_0 \enbrace*{\Phi_s \circ \gamma} \enbrace*{\diff{}{t}} &= T_{\gamma(0)} \Phi \circ T_0 \gamma 
+	\enbrace*{\diff{}{t} }    \\
+	&= T_{\gamma(0)} \Phi_s \enbrace[\big]{\dot{\gamma}(0)} 	
+\end{align*}
+Da $\Phi_s$ ein Diffeomorphismus ist, gilt entweder $\dot{\gamma}(t) = 0 \enspace \forall t$ oder $\dot{\gamma}(t) \not= 0 \enspace \forall t$. Ist $\gamma$ \emph{nicht} 
+injektiv, so gibt es $r < s$ mit $\gamma(r)= \gamma(s)$, d.h. $\Phi_r(p)= \Phi_s(p)$, also 
+\[
+	\gamma(t)= \Phi_t(p) = \Phi_{t+s-r} (p) = \gamma \enbrace[\big]{t + (s-r)} \quad \forall t \bewende 
+\]
+Sei $U \subseteq M$ offen. Die Flusslinien brauchen \emph{nicht} ganz in $U$ zu verlaufen! Da $\Phi ^{-1}(U)$ offen in $\mathds{R} \times M$ ist, verlaufen die Flusslinien
+$\gamma_p$, $p \in U$ wenigstens für ein kleines Intervall $(a_p,b_p)$ um $0 \in \mathds{R}$.
+% subsubsection 257 (end)
+
+\subsubsection[Definition: lokaler Fluss]{Definition} % (fold)
+\label{ssub:258}
+Ein \Index{lokaler Fluss} auf $M$ ist eine differenzierbare Abbildung $\Phi  : D \to M$, definiert auf einer $\set{0} \times M$ enthaltener offenen Teilmenge von
+$D \subset \mathds{R} \times M$, sodass für jeden Punkt $p \in M$ die Menge $D \cap (\mathds{R} \times \set{p})$ ein Intervall ist. Weiter gelte $\Phi(0,p) = p$ und 
+$\Phi(s+t, p) = \Phi\enbrace[\big]{s, \Phi(t,p)}$ für alle $s,t,p$, für die beide Seiten erklärt sind.\\
+Auf ${\color{Tomato2}\set{t}\times M}$ ist $\Phi_t$ kein Diffeomorphismus auf $M$, da $\Phi_t$ \emph{nicht} überall erklärt ist.
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}[scale=0.7]
+		\coordinate (A) at (-3,-4);
+		\coordinate (B) at (3,-4);
+		\coordinate (C) at (0.3,4);
+		\coordinate (D) at (-2.7,4);
+		%\draw[help lines] (-4,-4) grid (4,4);
+		\draw[->] (-4,0) -- (4,0) node[right]{$\mathds{R} \times \set{p}$};
+		\draw[->] (0,-4) node[below]{$\set{0} \times M$}-- (0,4);
+		\begin{scope}
+			\clip (A) -- (B) to[out=145,in=271] (C) -- (D) to[out=-30,in=50] cycle;
+			\foreach \y in {-3.75,-3.5,...,3.75}{
+				\draw[dashed,Chartreuse3!80] (-4,\y) -- (4,\y);
+			}
+		\end{scope}
+		\draw[Chartreuse3] (B) to[out=145,in=271] (C);
+		\draw[Chartreuse3] (D) to[out=-30,in=50] (A);
+		\draw[Tomato2, thick] (2,-4) -- (2,4) node[right]{$\set{t}\times M$};
+		\node[Chartreuse3, below] at (-1.8,3) {$D$};
+	\end{tikzpicture}
+	\caption{Veranschaulichung zu lokalen Flüssen}}
+\end{figure}
+
+
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Gilt $D=\mathds{R} \times M$, so ist $\Phi $ ein globaler Fluss.
+	\item \begin{minipage}[t]{0.7\textwidth}
+		Das Vektorfeld $\dot{\Phi}$ gegeben durch $p \mapsto X_{\gamma(p)} \equiv \dot{\gamma}(0)$ ist das \Index{Geschwindigkeitsfeld} des Flusses $\Phi$. Da 
+			\[
+				q= \gamma_p(t) \Rightarrow  \gamma_q(s)= \gamma_p(s+t) \Rightarrow \dot{\gamma}_q(0) = \dot{\gamma}_p(t)
+			\]
+			gilt $\dot{\gamma}_p(t)= \dot{\gamma}_q(0) = \dot{\Phi}_{\gamma_q(0)}$ für alle $t \in (a_p, b_p)$. (Und nicht nur für $t=0$ wie in der Definition angegeben.)
+	\end{minipage}
+	\begin{minipage}[b]{0.3\textwidth}
+		\begin{tikzpicture}[scale=0.9, baseline=(Q)]
+			\coordinate (P) at (0,0);
+			\coordinate (Q) at (1,3);
+			\coordinate (A) at (20:3);
+			\path (Q) ++ (185:2) coordinate (B);
+			%\draw[help lines] (0,0) grid (2,4);
+			\draw[very thick, IndianRed3] (P) .. controls (A) and (B) .. (Q) to[out=5, in=140] ++ (-15:1) node[below]{$\gamma$};
+			\draw[->, very thick,SpringGreen4] (P) -- ++ (20:1.5) node[below]{$\dot{\Phi}_p$};
+			\draw[->, very thick,SpringGreen4] (Q) -- ++ (5:1.1) node[right]{$\dot{\Phi}_q$};
+			\draw[fill, DodgerBlue3] (P) circle[radius=0.03] node[below]{$p$};
+			\draw[fill, DodgerBlue3] (Q) circle[radius=0.03] node[above]{$q=\gamma_p(t)$};
+		\end{tikzpicture}
+	\end{minipage}
+	\item Der Fluss eines Vektorfeldes ist ein (lokaler) Fluss. Zwei Flusslinien $\gamma_{p}^1 : I_1 \to M$ und $\gamma_p^2 : I_2 \to M$, die durch 
+	$\gamma_p^1(0)= p = \gamma_p^2(0)$ verlaufen, stimmen auf $I_1 \cap I_2$ überein. Dies gilt, da aus Stetigkeitsgründen die Menge aller $t$, auf der beide Lösungen 
+	übereinstimmen, abgeschlossen ist. Nach dem Satz von Picard-Lindelöf ist sie auch offen. Auf der Vereinigung aller Definitionsbereiche aller Lösungskurven $\gamma_p$
+	ist die eindeutig bestimmte \Index{maximale} Lösungskurve gegeben. Wir wollen mit $D$ stets den maximalen Definitionsbereich eines Flusses angeben, d.h. es gelte stets
+	\(
+		D \cap (\mathds{R} \times \set{p})
+	\) ist das maximale Definitionsintervall der maximalen Lösungskurve. \marginnote{fehlende Grafik: Zusammensetzen von Flusslinien}
+\end{itemize}
+% subsubsection 258 (end)
+
+\subsubsection{Beispiel} % (fold)
+\label{sub:259}
+Betrachte die Mannigfaltigkeit $\mathds{R}$ mit dem Vektorfeld $x^2 \diff{}{x}$. Dann ist $\Phi (t,x) = \frac{x}{1- tx}$ ein lokaler Fluss. Es gilt
+\[
+	\begin{cases}
+		\Phi (0,x) = x \\
+		\dot{\Phi}(t,x) = - \frac{(-x) x}{(1-tx)^2} = \enbrace*{\frac{x}{1-tx} }^2 \diff{}{x} = \enbrace[\big]{\Phi(t,x)}^2 \diff{}{x}     
+	\end{cases}
+\]
+$\gamma_1(t)= \Phi(t,1)= \frac{1}{1-t} $
+\[
+	\begin{tikzpicture}
+		%\draw[help lines] (-3,-3) grid (3,3);
+		\draw[->] (-3,0) -- (3,0) node[right]{$t$};
+		\draw[->] (0,-3) node[below]{$M=\mathds{R}$} -- (0,3);
+		\draw[variable=\t, domain=-3:0.65, very thick, smooth] plot ({\t}, {1 /(1-\t)});
+		\draw[variable=\t, domain=-0.65:3, very thick, smooth] plot ({\t}, {-1 /(1+\t)});
+		\node[left] at (-3,0.5) {$\gamma_1(t)= \frac{1}{1-t} $};
+		\node[right] at(3,-0.5) {$\gamma_{-1}(t)= -\frac{1}{1+t}$};
+		\draw[dashed, Sienna2, thick] (-1,-3) -- (-1,3) node[below left]{$-1$};
+		\draw[dashed, Sienna2, thick] (1,-3) -- (1,3) node[below right]{$1$};
+	\end{tikzpicture}
+\]
+Definitionsbereich: $1-tx = 0 \Leftrightarrow x = \frac{1}{t}$ \marginnote{Hier fehlt noch eine Zeichnung}
+\[
+	\text{weitere Zeichnung zum Definitionsbereich}
+\]
+\minisec{Bemerkung}
+Enthält $D$ eine Teilmenge der Form $(-\varepsilon, \varepsilon) \times M$, dann auch eine Teilmenge der Form $(-2 \varepsilon, 2 \varepsilon) \times M$.
+$\Phi $ kann auf $(-2 \varepsilon, 2 \varepsilon) \times M$ durch
+\[
+	\Phi(t,p) := \Phi \enbrace*{\frac{t}{2}, \Phi \enbrace*{\frac{t}{2}, p }  } 
+\]
+ausgedehnt werden. Da $D$ maximal ist, enthält $D$ also $\mathds{R} \times M$, d.h. $\Phi $ ist global (vollständig). Dies ist beispielsweise der Fall, wenn der Träger 
+$\overline{\set{X \not= 0}}$ des $\Phi$ erzeugenden Vektorfeldes $X$ kompakt ist. (Beispiel: $M$ kompakt) \\
+Analog sieht man, dass jedes auf $\mathds{R}^n$ definierte und beschränkte Vektorfeld global integrierbar ist. (Blatt 7)
+% subsection 259 (end)
+
+\subsubsection{Satz 12} % (fold)
+\label{ssub:2510}
+Jedes Vektorfeld ist Geschwindigkeitsfeld genau eines maximalen Flusses.
+\minisec{Beweis}
+Sei $X$ ein Vektorfeld auf $M$, $\Phi $ der zugehörige Fluss (lokal). Sei $p \in M$ und $(a_p, b_p)$ maximales Definitionsintervall der Lösungskurve $\gamma_P$.
+Dann ist $D = \bigcup_{p \in M} (a_p, b_p) \times \set{p}$. Es reicht zu zeigen: $D$ ist offen und $\Phi : D \to M$ ist differenzierbar.
+
+Sei $I_p \subset [0,\infty)$ ein Intervall bestehend aus allen $t>0$, sodass $D$ eine Umgebung von $[0,t] \times \set{p}$ enthält, auf der $\Phi $ differenzierbar ist.
+\[
+	\begin{tikzpicture}
+		\draw (0,0) -- (0,4) node[right]{$D$};
+	\end{tikzpicture}
+\]
+$\Rightarrow I_p$ ist offen.  
+\begin{description}
+	\item[$I_p$ ist \emph{nicht} leer:] Für jeden Punkt $p \in M$ gibt es $\varepsilon >0$ und eine Umgebung $U$ von $p$, sodass 
+	\[
+		\Phi  : (-\varepsilon, \varepsilon)\times U \to M
+	\]
+	differenzierbar ist. Wegen der Eindeutigkeit enthält $D$ eine Umgebung von $\set{0} \times M $ auf der $\Phi$ differenzierbar ist $\Rightarrow $ $I_p \not= \emptyset$.
+	\item[$I_p$ ist abgeschlossen:] Sei $t_0$ Häufungspunkt von $I_p$ in $[0,b_p)$. Sei $q := \gamma_p(t_0)$. Nach Definition von $I_p$ gibt es eine Umgebung $V$ von $p$,
+	$\varepsilon >0$ mit $t_0- 2 \varepsilon >0$, sodass $D$ eine Umgebung von $[0,t_0-\varepsilon] \times U$ enthält, auf der $\Phi$ erklärt und differenzierbar ist.
+	Dabei ist $U$ eine Umgebung von $q$, sodass (für ein eventuell kleineres $\varepsilon>0$) $\Phi $ auf $(t_0 - 2 \varepsilon, t_0 + 2 \varepsilon) \times U$ definiert
+	und differenzierbar ist.
+	\[
+		\begin{tikzpicture}
+			\draw[->] (-0.2,0) -- (4,0) node[right]{$t$};
+			\draw[->] (0,-0.2) -- (0,2) node[left]{$M$};
+		\end{tikzpicture}
+	\]
+	Setze: $W := \Phi_{-(t_0-\varepsilon)} \enbrace*{\Phi _{-\varepsilon} (U)} $. Also ist $\Phi$ in einer Umgebung von 
+	$[0,t_0+\varepsilon] \times W \supset [0,t_0] \times \set{p}$ erklärt und differenzierbar, wenn die Abbildung 
+	\[
+		(t_0 - 2 \varepsilon, t_0 + 2 \varepsilon) \times  W \to M \qquad (t,r) \mapsto \Phi  \enbrace*{t-t_0, \Phi(t_0,r)} 
+	\]
+	setzt aufgrund der Eindeutigkeit die auf $[0,t_0 -\varepsilon] \times W$ durch $\Phi $ gegebene Lösungskurven richtig fort. Damit folgt $t_0 \in I_p$ und somit ist
+	$I_p$ abgeschlossen. Argumentiert man für $(a_p,0]$ analog, so folgt $I_p = (a_p, b_p)$. \bewende
+\end{description}
+% subsubsection 2510 (end)
+% subsection 25 (end)
+% section 2 (end)
+\newpage
+
+\section{Teilung der Eins} % (fold)
+\label{sec:3}
+\minisec{Ziel}
+Konstruktion globaler Objekte aus lokalen Daten.
+
+\subsection{Parakompaktheit} % (fold)
+\label{sub:31}
+Wir setzen für $r \in \mathds{R}_{\ge0}$
+\[
+	C(r) := \text{ offener Würfel der Kantenlänge }2r = \set[x \in \mathds{R}^m]{\abs*{x_1}, \ldots , \abs*{x_m} < r  } 
+\]
+\subsubsection{Satz 13} % (fold)
+\label{ssub:311}
+Sei $\mathcal{U} = \set[U_\alpha]{\alpha \in A}$ eine offene Überdeckung einer differenzierbaren Mannigfaltigkeit $M$. Dann gibt es einen Atlas 
+\[
+	\mathcal{A} = \set[h_j : V_j \xrightarrow{\cong} C(3)]{j \in \mathds{N}} 
+\]
+von $M$, sodass 
+\begin{itemize}
+	\item $\set{V_j}$ ist \Index{lokal endliche Verkleinerung} von $\set{U_\alpha}$, d.h. jeder Punkt von $M$ hat eine eine Umgebung, die nur endlich viele der $V_j$
+	nicht trivial schneidet, und für jedes $j$ existiert ein $\alpha(j)$ mit $V_j \subset U_{\alpha_j}$.
+	\item $M = \bigcup_j h_j ^{-1}\enbrace[\big]{C(1)}$
+\end{itemize}
+Die Existenz einer lokal endlichen Verfeinerung zu jeder gegebenen offenen Überdeckung bezeichnet man als \Index{Parakompaktheit} des Raumes $M$. $\mathcal{A}$ heißt einer
+der Überdeckung $\mathcal{U}$ \Index{untergeordneter guter Atlas}.
+\minisec{Beweis}
+$M$ ist \Index{lokalkompakt}\footnote{d.h. jeder Punkt hat eine kompakte Umgebung}, da $M$ lokal homöomorph zu $\mathds{R}^n$ ist. Weiter hat $M$ eine abzählbare Basis der 
+Topologie\footnote{Siehe auch \ref{ssub:121}}. Daraus folgt: Es gibt eine offene Überdeckung \marginnote{Dazu kommt noch eine Übungsaufgabe}
+$B_1, B_2,\ldots , B_l, \ldots $ $l\in\mathds{N}$ von $M$ mit $\overline{B}_l$ kompakt für alle $l\in \mathds{N}$.
+
+Sei $A_1 := \overline{B}_1 $. Seien $A_1, \ldots , A_i$ induktiv konstruiert. Sei $k \in \mathds{N}$ die kleinste Zahl mit 
+\[
+	A_i \subset B_1 \cup \ldots \cup B_k \enspace , \quad k=k(i)
+\]
+Setze $A_{i+1} := \overline{B_1 \cup \ldots  \cup B_k}$. \\
+(Dieser Prozess endet genau dann nach endlich vielen Schritten, wenn $M$ kompakt ist.) \smallskip \\
+Nach Konstruktion gilt nun
+\begin{itemize}
+	\item $A_i \subset \Int(A_{i+1})$\marginnote{$\Int$ für \enquote{interior}}
+	\item $A_i$ ist kompakt.
+	\item $M = \bigcup_{i=1}^\infty A_i$
+\end{itemize}
+d.h. $\set{A_i}$ ist eine \Index{kompakte Ausschöpfung} von $M$. 
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}
+		%\draw[help lines] (0,-2) grid (10,2);
+		\coordinate (A1) at (-1,0);
+		\draw[thick] (A1) node{$A_1$} circle[radius=1];
+		\foreach \p in {0,30,...,330}{
+			\draw (A1) ++ (\p:1) circle[radius=0.3];
+		}
+		\draw[thick] (A1) circle[radius=2.3];
+		\node[above left] at ($(A1)+ (300:2.3)$) {$A_2$};
+		\node at (2,0) {$\cdots$};
+		\begin{scope}
+		%\clip (0,-2) rectangle (10,2);
+		\foreach \r/\n in {3/-1,5/{},7/+1,9/+2}{
+			\draw[thick] (\r,0) arc (0:15:9);
+			\draw[thick] (\r,0) arc (0:-15:9) node[left] {$A_{i \n}$};
+		}
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Konstruktion in Satz 13 (\ref{ssub:311}) \textbf{Noch nicht komplett!}}}
+\end{figure}
+$\Int(A_{i+1}) \setminus A_{i-1}$ ist offene Überdeckung der kompakten Menge $A_{i+1} \setminus \Int(A_{i})$. Also gibt es endlich viele Karten $h_j : V_j \xrightarrow{\cong} C(3) $, $j= j(i)$, sodass 
+\begin{itemize}
+	\item $V_i \subset \Int_{A_{i+2}} \setminus A_{i-1}$
+	\item die $h_j ^{-1}\enbrace[\big]{C(1)}$ überdecken $A_{i+1} \setminus \Int(A_i)$
+	\item $V_j \subset U_\alpha$ für ein geeignetes $\alpha$.
+\end{itemize}
+Man erhält also abzählbar viele Mengen $V_j$. Jede kompakte Umgebung eines Punktes ist für hinreichend großes $i$ in einem $A_i$ enthalten. Daher schneiden nur endlich 
+viele der $V_j$ diese Umgebung. \bewende
+% subsubsection 311 (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:312}
+Eine $\mathcal{U}$ \Index{untergeordnete Teilung der Eins} ist eine Familie $\set[\varphi_i : M \xrightarrow{C^\infty} \mathds{R}]{i \in I} $ differenzierbarer Funktionen
+mit:
+\begin{itemize}
+	\item Das Mengensystem der \Index{Träger} $\set[\supp \varphi_i]{i \in I} $ ist lokal endlich, wobei $\supp \varphi := \overline{\set[p \in M]{\varphi(p) \not= 0}}$.
+	\item $\forall i : \exists \alpha : \supp \varphi_i \subset U_\alpha$
+	\item $\varphi_i \ge 0$ und $\sum_{i \in I} \varphi_i(p) = 1 \enspace \forall p \in M$. Die Summe ist endlich, da $\set{\supp \varphi_i}$ lokal endlich ist.
+\end{itemize}
+% subsubsection 312 (end)
+
+\subsubsection{Lemma 13b} % (fold)
+\label{ssub:313}
+Es gibt eine offene Überdeckung $B_1, B_2, \ldots , B_l , \ldots $ $l \in \mathds{N}$ von $M$ mit $\overline{B}_l$ kompakt für alle $l$.
+\minisec{Beweis}
+Für jeden Punkt $p \in M$ wählen wir eine Karte $(h_p,U_p)$ mit $p \in U_p$. Für $\varepsilon_p >0$ so klein gewählt, dass 
+\(
+	\overline{B_{\varepsilon_p}(0)} \subset h_p(U_p)
+\)
+setzen wir 
+\[
+	\Omega_p := h_p ^{-1} \enbrace*{B_{\varepsilon_p}(0)}.
+\]
+$\set{\Omega_p}_{p \in M}$ ist eine offene Überdeckung vom $M$, so dass $\overline{\Omega_p}$ kompakt in $M$ ist. Da $M$ eine abzählbare Basis der Topologie hat, gibt es 
+eine offene Überdeckung $\set{B_l}_{l \in \mathds{N}}$ mit:
+\begin{itemize}
+	\item $\forall l \in \mathds{N} : \exists p=p(l) : B_l \subset \Omega_p$. Damit ist insbesondere $\overline{B}_l$ kompakt.
+	\item $\Omega_p = \bigcup_{\substack{l \in \mathds{N} \\ B_l \subset \Omega_p}} B_l$. Damit ist $B_l$ a posteriori eine Überdeckung. \bewende
+\end{itemize}
+% subsubsection 312b (end)
+
+\subsubsection{Satz 14} % (fold)
+\label{ssub:314}
+Zu jeder offenen Überdeckung $\mathcal{U}$ von $M$ gibt es eine abzählbare untergeordnete Teilung der Eins.
+\minisec{Beweis}
+Es gibt eine differenzierbare Funktion $\psi$ auf $\mathds{R}^m$, sodass 
+\begin{itemize}
+	\item $\psi \ge 0$, $\psi \le 1$,
+	\item $\psi =1$ auf $\overline{C(1)}$,
+	\item $\psi =0$ auf $\mathds{R}^m \setminus C(2)$
+\end{itemize}
+Betrachte:\\
+\begin{minipage}{0.6\textwidth}
+	\[
+		f(t) := \begin{cases}
+			e^{\frac{1}{t} }, &\text{ falls }t >0\\
+			0 , &\text{ falls } t \le 0
+		\end{cases}
+	\]	
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+	\captionsetup{type=figure, skip=4pt}
+	\centering{\begin{tikzpicture}[xscale=0.3, yscale=1.4]
+		\draw[<->] (0,1.2) -- (0,1) node[left]{$1$} -- (0,0) -- (10,0);
+		\draw[variable=\t, domain=0.0001:10, smooth, samples=50, Sienna2, very thick] plot({\t}, {exp(-1/\t)}) node[right]{$f$}; 
+		\draw[dashed] (0,1) -- (10,1);
+	\end{tikzpicture}
+	\caption{Funktion $f$ aus \ref{ssub:313}}}
+\end{minipage} \medskip\\
+\begin{minipage}{0.6\textwidth}
+	\[
+		g(t) := \frac{f(t)}{f(t)+ f(1-t)} \enspace 
+	\]
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+	\captionsetup{type=figure, skip=4pt}
+	\centering{
+	\begin{tikzpicture}[xscale=1.5, yscale=1.4]
+		\draw[<->] (0,1.2) -- (0,1) node[left]{$1$} -- (0,0) -- (2,0);
+		\draw[variable=\t, domain=0.0001:1, smooth, samples=50, SeaGreen3, very thick] plot({\t}, {exp(-1/\t)/(exp(-1/\t) + exp(-1/(1-\t)) )}) 
+		-- (2,1) node[right]{$g$}; 
+		\draw[dashed] (1,0) node[below]{$1$}-- (1,1);
+	\end{tikzpicture}
+	\caption{Funktion $g$ aus \ref{ssub:313}}
+	}
+\end{minipage} \medskip\\
+\begin{minipage}{0.6\textwidth}
+	\[
+		h(t) := g(t+2) g(2-t) \enspace
+	\]
+\end{minipage}\marginnote{Dieser Plot ist noch nicht fertig \ldots}
+\begin{minipage}{0.4\textwidth}
+	\captionsetup{type=figure, skip=4pt}
+	\centering{
+	\begin{tikzpicture}[xscale=1.5, yscale=1.4]
+		\draw[<->] (0,1.2) -- (0,1) node[left]{$1$} -- (0,0) -- (2,0);
+		% \draw[variable=\t, domain=-1.9:1.9, smooth, SeaGreen3, very thick] plot({\t}, 
+% 		{exp(-1/(\t+2))/(exp(-1/(\t+2)) + exp(-1/(1-(\t+2)))) * exp(-1/(2-\t))/(exp(-1/(2-\t)) + exp(-1/(1-(2-\t))))}) 
+% 		node[right]{$h$}; 
+		\draw[dashed] (1,0) node[below]{$1$}-- (1,1);
+	\end{tikzpicture}
+	\caption{Funktion $h$ aus \ref{ssub:313}}
+	}
+\end{minipage} \bigskip\\
+Für den mehrdimensionalen Fall setze: $\psi(x) := h(\abs*{x_1}) h(\abs*{x_2} ) \cdots h(\abs*{x_m})$. Sei 
+\[
+	\set[h_j : V_j \xrightarrow{\cong} C(3)]{j \in \mathds{N}} 
+\]
+ein $\mathcal{U}$ untergeordneter guter Atlas (\hyperref[ssub:311]{Satz 13}).
+\[
+	Zeichnung
+\]
+Setze $\psi_j := \begin{cases}
+	\psi \circ h_j, &\text{ auf }V_j\\
+	0 , \text{ sonst}
+\end{cases}$. Dann gilt
+\[
+	\varphi_j := \frac{\psi_j}{\sum_k \psi_k} \bewende
+\]
+% subsubsection 314 (end)
+% subsection 31 (end)
+
+\subsection{Riemannsche Metriken} % (fold)
+\label{sub:32}
+\subsubsection{Definition} % (fold)
+\label{ssub:321}
+Eine \Index{Riemannsche Metrik} auf einer differenzierbaren Mannigfaltigkeit $M$ ist eine Zuordnung eines Skalarproduktes $\sprod{.}{.}$ auf $T_pM$ zu jedem Punkt 
+$p\in M$, das differenzierbar von $p$ abhängt. D.h. in jeder lokalen Karte sind die \Index{metrischen Koeffizienten} 
+\[
+	g_{ij}(p)= \sprod*{\diff{}{x^i} }{\diff{}{x^j} }_p 
+\]
+differenzierbare Funktionen in $p$ sind.
+% subsubsection 321 (end)
+
+\subsubsection{Satz 15} % (fold)
+\label{ssub:322}
+Jede differenzierbare Mannigfaltigkeit besitzt eine Riemannsche Metrik.
+\minisec{Beweis}
+Sei $\set{(U_\alpha, h_\alpha)}$ ein Atlas von $M$ und $\set{\varphi_j}_{j \in \mathds{N}}$ eine untergeordnete Teilung der Eins. Das Standardskalarprodukt des 
+$\mathds{R}^m$ induziert eine Riemannsche Metrik $\sprod*{.}{.}_\alpha$ auf allen Kartengebieten $U_\alpha$. Für jedes $j \in \mathds{N}$ wähle ein $\alpha(j)$ mit 
+$\supp \varphi_j \subset U_{\alpha(j)}$. Dann ist 
+\[
+	\sprod*{.}{.}_p := \sum_{j} \varphi_j(p) \sprod*{.}{.}_{\alpha(j)} 
+\]
+eine Riemannsche Metrik auf $M$, da Symmetrie und positive Definitheit konvexe Eigenschaften sind. \bewende
+% subsubsection 322 (end)
+% subsection 32 (end)
+
+\subsection{Sternförmige Gebiete} % (fold)
+\label{sub:33}
+\subsubsection{Definition} % (fold)
+\label{ssub:331}
+Eine Teilmenge $M$ des $\mathds{R}^n$ heißt \Index{sternförmig} (mit Zentrum $0$), falls mit jedem Punkt $x \in M$ auch die Strecke $\set[t \cdot x]{t \in [0,1]}$ in $M$
+enthalten ist.  
+% subsubsection 331 (end)
+
+\subsubsection{Beispiel} % (fold)
+\label{ssub:332}
+$\varphi : B_1(0) \xrightarrow{\cong} \mathds{R}^n $, 
+\[
+	x \longmapsto   \begin{cases}
+		\tan \enbrace*{\frac{\pi }{2} \cdot \abs*{x}} \cdot \frac{x}{\abs*{x}}, &\text{ falls }x \not=0\\
+		0 , &\text{ falls } x=0
+	\end{cases}
+\]
+$\tan \enbrace*{\frac{\pi }{2} \cdot \abs*{x}} \cdot \frac{1}{\abs*{x}}$ ist Potenzreihe mit geraden Potenzen in $\abs*{x}$. Die Umkehrfunktion ist
+\[
+	\frac{2}{\pi } \arctan (\abs*{y}) \frac{y}{\abs*{y} } \longmapsfrom y  
+\]
+Es gilt
+\[
+	\mathds{R}^n \cong B_1^{n_1}(0) \times \ldots \times B_1^{n_k}(0)\quad , \quad \sum_{i} n_i = n
+\]
+% subsubsection 332 (end)
+
+\subsection{Satz 16} % (fold)
+\label{sub:333}
+Jede offene sternförmige Teilmenge des $\mathds{R}^n$ ist diffeomorph zu $\mathds{R}^n$.
+\minisec{Beweis}
+$M$ offen, sternförmig, Zentrum $0$. \uline{Ziel}: Konstruiere einen Diffeomorphismus $\mathds{R}^n \to M$, der die Strahlen $\set[t \cdot x]{t \in [0,\infty)}$ auf ihren 
+Durchschnitt mit $M$ abbildet. Diese Strahlen sind die Orbits des Vektorfeldes $X(x)=x$ auf $\mathds{R}^n$. \\
+\uline{Idee}: Finde eine positive Funktion $f : M \to \mathds{R}$, sodass das Vektorfeld $Y = f \cdot X$ auf $M$ einen globalen Fluss definiert. Wir bilden dann die 
+Orbits von $X$ auf die von $Y$ ab.
+\minisec{Umparametrisierung}
+Sei $\gamma$ eine Integralkurve von $X$, also $\dot{\gamma} = X(\gamma)$. $s : (a,b) \to \mathds{R}$ ist so zu bestimmen, dass gilt 
+\[
+	(\gamma \circ s)^\cdot (t) = \dot{\gamma} \enbrace*{s(t)} \dot{s}(t) \stackrel{!}{=} X_{(\gamma \circ s)(t)} \cdot f \enbrace*{(\gamma \circ  s)(t)}  = Y_{(\gamma \circ s)(t)}
+\]
+also $\gamma \circ  s$ Lösung von $Y = f  X$ ist. Nach dem Satz von Picard-Lindelöf existiert solch eine Lösung von $\dot{s}(t)= f \enbrace*{(\gamma \circ s)(t)}$ zumindest
+lokal. Es werden dieselben Orbits mit Geschwindigkeit $\abs*{f X} $ statt $\abs*{X}$ in gleicher Richtung durchlaufen.
+
+\uline{Genauer}: OE: $M \supset K := \overline{B_1(0)}$. Wir suchen $g : M \to \mathds{R}$ positiv und \Index{eigentlich}, d.h. für jedes $j \in \mathds{N}$ ist 
+$g ^{-1}([0,j])$ kompakt. Sei $\set{\varphi_j}_{j \in \mathds{N}}$ eine Teilung der Eins auf $M$ mit kompaktem Träger, $\supp \varphi_j$. Setze
+\[
+	g := \sum_{j=1}^{\infty} j \cdot \varphi_j
+\]
+% subsection 333 (end)
+% subsection 33 (end)
+% section 3 (end)
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\end{document}
