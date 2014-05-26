@@ -1009,33 +1009,42 @@ Damit können wir
 schreiben
 % subsubsection 245 (end)
 
-\subsubsection{Beispiel} % (fold)
+\subsubsection[Beispiel zu \ref{ssub:245}: Vektorfeld aus einem Diffeomorphismus und einem Vektorfeld ]{Beispiel} % (fold)
 \label{ssub:246}
 $M=N=\mathds{R}^2$. $f(x,y)= (x, x^2+y) \Rightarrow f ^{-1} (x,y) = (x, -x^2 +y)$. Dann $X_{x,y} = y \diff{}{x} = \binom{y}{0}$.
 \begin{figure}[h]
 	\centering{
-	\begin{tikzpicture}
-		\draw[help lines] (-2,-1) grid (4,4);
+	\begin{tikzpicture}[xscale=0.8, yscale=0.7]
+		%\draw[help lines] (-2,-1) grid (4,4);
+		\draw[->] (-1,0) -- (5,0) node[right]{$x$};
+		\draw[->] (0,-0.5) -- (0,3) node[left]{$y$};
+		\draw[domain=-1:2, variable=\t, very thick, OrangeRed2] plot (\t, \t*\t + 1) node[below left]{$f(l)$};
+		\draw[very thick,SpringGreen3] (-1,1) -- (4,1) node[right]{$l$};
+		\draw[->, thick, SlateBlue2] (1,1)  -- (2,1) node[below]{$X$};
+		\draw[fill, SlateBlue2] (1,1) circle[radius= 0.04];
+		\draw[DodgerBlue2,->, very thick] (1,2) -- ++ (1,2) node[below right]{$f_* X$};
+		\draw[fill, DodgerBlue2] (1,2) circle[radius= 0.04];
 	\end{tikzpicture}
-	\caption{Zeichnung zu Beispiel \ref{ssub:246} (unvollständig)}}
+	\caption{Zeichnung zu Beispiel \ref{ssub:246} mit $l(t)= 1$}}
 \end{figure}
 
 Es gilt $T_{(x,y)}(f) = \begin{pmatrix}
 	1 & 0 \\
 	2x & 1
 \end{pmatrix}$. Damit folgt
-\[
-	\enbrace*{f_* X}_{(x,y)} = T_{(x,-x^2 +y)} f \enbrace*{X_{(x, -x^2+y)}} = \begin{pmatrix}
+\begin{align*}
+	\enbrace*{f_* X}_{(x,y)} = T_{(x,-x^2 +y)} f \enbrace*{X_{(x, -x^2+y)}} &= \begin{pmatrix}
 		1 & 0 \\
 		2x & 1
 	\end{pmatrix} \cdot \begin{pmatrix}
 		-x^2 +y \\
 		0
-	\end{pmatrix} = (x^2+y) \begin{pmatrix}
+	\end{pmatrix} \\ 
+	&= (-x^2+y) \begin{pmatrix}
 		1 \\
 		2x
-	\end{pmatrix} = (-x^2 +y) \enbrace*{\diff{}{x} + 2x \diff{}{y}} 
-\]
+	\end{pmatrix} = (-x^2 +y) \enbrace*{\diff{}{x} + 2x \diff{}{y}}.
+\end{align*}
 % subsection 246 (end)
 
 \subsubsection{Lemma 9} % (fold)
