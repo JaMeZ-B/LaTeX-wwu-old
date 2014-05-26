@@ -1785,7 +1785,7 @@ Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dan
 \label{sub:12.1}
 Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 \begin{enumerate}[(1)]
-	\item Eine Wirkung $G \cap X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass 
+	\item Eine Wirkung $G \cap X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass \marginnote{hier ist noch ein Zeichen falsch}
 	\begin{itemize}
 		\item Für $g \in G$ ist $L_g : X \to X$, $x \mapsto g \cdot x$ stetig.
 		\item Für $g,h \in G$ gilt $g \cdot (h \cdot x)= (g \cdot h) \cdot x$
@@ -1825,8 +1825,54 @@ ist die disjunkte Vereinigung der $g U$, $g \in G$. \bewende
 		\nicefrac{\mathds{Z}}{2} \backslash S^n \cong \mathds{R}P^n
 	\]
 	Wir erhalten eine Überlagerung $S^n \to \mathds{R}P^n$. 
+	\item Zu $m,n \in \mathds{Z}$ sei $f_{n,m} : \mathds{R}^2 \to \mathds{R}^2$ mit $f_{n,m} (x,y) = (x+ h, (-1)^n y + m)$. Dann ist 
+	\[
+		G := \set[f_{n,m}]{n,m \in \mathds{Z}} 
+	\]
+	eine Gruppe bezüglich der Verknüpfung von Abbildungen. $f_{n,m} \circ f_{n',m'} = f_{n+n', m+ (-1)^n m'}$. Die kanonische Wirkung von $G$ auf $\mathds{R}^2$ 
+	$f_{n,m} \cdot x := f_{n,m}(x)$ ist e.d.k., da 
+	\[
+		f_{n,m} \enbrace*{U_\varepsilon(x)} \cap f_{n',m'} \enbrace*{U_\varepsilon(x)} = \emptyset  
+	\]
+	für $(n,m) \not= (n',m')$ und $\varepsilon < \frac{1}{2}$. Der Quotient $G\backslash \mathds{R}^1 =: K$ heißt die \Index{Kleinsche Flasche}. Wir erhalten eine Wirkung
+	$\mathds{R}^2 \to K$. \\
+	Übung: $K \cong T_{\substack{S^1 \to S^1 \\ z \mapsto -z}}$ 
 \end{enumerate}
 % subsection 12.3 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:12.4}
+Sei $X$ wegzusammenhängend und einfach zusammenhängend. Sei $G \cap X$ eine e.d.k. Wirkung. Für jedes $\overline{x}_0 \in G \backslash X$ ist dann 
+\[
+	\pi_1 \enbrace*{ G \backslash X, \overline{x}_0 } \cong G. 
+\]
+\minisec{Beweis}
+Sei $x_0 \in X$ ein Urbild von $\overline{x}_0$, also $\overline{x}_0 = G \cdot x_0 $. Zu jeder Schleife $\omega : [0,1] \to G \backslash X$ mit 
+$\omega(0) = \omega(1) = \overline{x}_0 $ gibt es eine Hebung $\hat{\omega} : [0,1] \to X$ mit $\hat{\omega}(0) = x_0$. Hier heben wir bezüglich der Überlagerung $p : X \to G \backslash X$, $x \mapsto G x$, also $p \circ  \hat{\omega} = \omega$.
+
+Da $p \enbrace*{ \hat{\omega}(1)} = \omega(1) = \overline{x}_0 $ folgt $\omega(1)\in p ^{-1} (\overline{x}_0 ) = G \cdot x_0$.  Es gibt also $g_\omega \in G$ mit 
+$g_\omega \cdot x_0 = \hat{\omega}(1)$. Wie im Fall der Überlagerung $\mathds{R} \to S^1$ zeigt man mit Hilfe des Homotopiehebungssatzes, dass $[\omega] \mapsto g_\omega$
+ein Gruppenhomomorphismus $\varphi : \pi_1(G \backslash X, \overline{x}_0 ) \to G$ definiert. 
+\begin{description}
+	\item[Surjektivität von $\varphi$ :] Sei $g \in G$. Sei $\hat{\omega} : [0,1] \to X$ ein Weg von $x_0$ nach $g \cdot x_0$ (Solch ein Weg gibt es, da $X$ 
+	wegzusammenhängend ist). Dann ist $\hat{\omega}$ die Hebung von $\omega := p \circ  \hat{\omega}$ und es folgt $\varphi( [\omega]) = g_\omega = g$, da 
+	$\hat{\omega}(1) = g \cdot  x_0$. Also $g \in \im \varphi$.
+	\item[Injektivität von $\varphi$ :] Sei $\omega : [0,1] \to G \backslash X$ eine Schleife und $\omega(0)= \omega(1) = x_0$ für die $\varphi([\omega]) = e$. Sei
+	$\hat{\omega} : [0,1] \to X$ die Hebung von $\omega$ mit $\hat{\omega}(0) = x_0$. Da $\varphi([\omega]) = e$ gilt $\hat{\omega}(1) = x_0$, $\hat{\omega}$ ist also
+	eine Schleife in $X$. Da $X$ einfach zusammenhängend ist, ist $[\hat{\omega}] = e \in \pi_1(X,x_0)$. Es folgt 
+	\[
+		[\omega] = [p \circ  \hat{\omega}] = p_* [\hat{\omega}] = p_*(e) = e. \bewende
+	\]
+\end{description}
+% subsection 12.4 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:12.5}
+Für $n \ge 1$ ist $S^n$ wegzusammenhängend. \hfill  (einfache Übung) \\
+Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übung) \medskip \\
+Nach Satz \ref{sub:12.4} ist daher $\pi_1(\mathds{R}P^n, x_0) = \nicefrac{\mathds{Z}}{2}$ für $n \ge 2$. Es folgt $\mathds{R}P^n \not\cong S^n$ für $n \ge 2$. 
+(Andererseits ist $\mathds{R}P^1 \cong S^1$.)
+% subsection 12.5 (end)
 % section 12 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
