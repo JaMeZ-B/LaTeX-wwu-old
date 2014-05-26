@@ -987,7 +987,8 @@ mit $\tilde D_i = \End_R(L_i)$. Setze $D_i := \tilde D_i^\mathrm{op}$. Damit ist
 Sei $M$ ein Links-$R$-Modul. Elemente $x_1, \ldots , x_n \in M$ heißen \bet{$R$-linear unabhängig}\index{linear unabhängig in Moduln}, wenn gilt: Sind $\alpha_1, \ldots , \alpha_n \in R$ mit 
 $\sum \alpha_i \cdot x_i$, dann ist $\alpha_i = 0$ für $i=1, \ldots ,n$. \\
 Sonst heißen $x_1, \ldots , x_n$ linear abhängig. Eine (beliebige Menge) $X \subseteq M$ heißt linear unabhängig, wenn jede endliche Teilmenge linear abhängig ist. Eine 
-linear unabhängige Menge von Erzeugern heißt \bet{Basis}\index{Basis (Modul)} für $M$. (äquivalent dazu: minimale erzeugende Menge)
+linear unabhängige Menge von Erzeugern heißt \bet{Basis}\index{Basis (Modul)} für $M$. 
+%(äquivalent dazu: minimale erzeugende Menge)
 % subsection 232 (end)
 
 \subsection[Definition: Freier Modul]{Definition} % (fold)
@@ -1586,7 +1587,7 @@ Sei $R$ ein kommutativer Ring, $U,V,W$ seien $R$-Moduln. Dann gilt
 \end{enumerate}
 % subsection 34 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Tensorprodukt mit freiem Modul]{Satz} % (fold)
 \label{sub:35}
 Sei $R$ ein kommutativer Ring, $U \in {_R \Mod}$. Dann ist $U \otimes R^n \simeq U^n= U \oplus \ldots \oplus U$. 
 \minisec{Beweis}
@@ -1638,16 +1639,57 @@ Sei $R$ ein kommutativer Ring. Eine $R$-Algebra ist ein Ring $A$, der gleichzeit
 \[
 	\alpha (x \cdot y) = x \cdot \alpha y = (\alpha x) \cdot y \quad \forall x,y \in A, r \in R
 \]
+Eine \Index{Unteralgebra} einer $R$-Algebra $A$ ist ein Unterring, der gleichzeitig ein $R$-Untermodul ist.
 % subsection 38 (end)
 
 \subsection[Beispiele für Algebren]{Beispiel} % (fold)
 \label{sub:39}
 \begin{enumerate}[(i)]
-	\item Jeder Ring $R$ ist auch $R$-Algebra.
+	\item Ist $A$ eine $R$-Algebra, dann ist das Zentrum $C(A) = \set[z \in A]{x \cdot z = z \cdot x \enspace \forall x \in A} $ eine Unteralgebra. 
+	$C(A)$ ist $R$-Untermodul: $z \in C(A)$, dann ist für $\alpha \in R, x \in A$
+		\[
+			x \cdot (\alpha z) = (\alpha x) \cdot z = z \cdot (\alpha x) = (\alpha z) \cdot x
+		\]
+	\item Jeder Ring $R$ ist auch $R$-Algebra: 
 	\item Jeder Ring wird zu einer $\mathds{Z}$-Algebra durch $n x = x + \ldots + x$, $(-n) x = - (n x)$
 \end{enumerate}
 Ein Homomorphismus von $R$-Algebren ist ein Ringhomomorphismus, der gleichzeitig $R$-linear ist.
+\minisec{Bemerkung}
+Für $y=1$ in Definition \ref{sub:38} ergibt sich $x \cdot  \alpha 1 = \alpha x$ und für $x=1$ $\alpha 1 \cdot y = \alpha \cdot y$. Also gilt 
+$\alpha 1  \cdot x = x \cdot  \alpha 1 = \alpha x$ für alle $x \in A, \alpha \in \mathds{R}$. Für $\alpha = \beta \cdot 1$ erhalten wir 
+\[
+	\alpha 1 \cdot \beta \cdot 1 = \alpha (\beta 1) = \alpha \beta \cdot 1,
+\]
+d.h. die Abbildung $R \to A$, $\alpha \mapsto \alpha \cdot 1$ ist ein Algebrahomomorphismus in das Zentrum von $A$, d.h. $R \cdot 1 \subseteq C(A)$.
+
+Umgekehrt gilt: Ist $R$ ein Ring, $f : R \to C(A)$ ein Ringhomomorphismus. Dann wir $A$ zu einer $R$-Algebra durch $\alpha \cdot x = f(x) \cdot x$ für $x\in A,\alpha\in R$.
+Mit anderen Worten: Eine $R$-Algebra ist ein Ring $A$ zusammen mit einem Homomorphismus $f : R \to C(A)$. Manchmal werden Algebren allgemeiner definiert: Eine $R$-Algebra 
+ist ein $R$-Modul $A$ mit einer bilinearen Multiplikation (nicht notwendig assoziativ oder mit Eins). Bei uns sind alle Algebren assoziativ und \Index{unital}, d.h. mit 1. 
 % subsection 39 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:310}
+Sei $R$ ein kommutativer Ring
+\begin{enumerate}[(i)]
+	\item $U \in {_R \Mod}$, $A = \End_R(U)$. Dann ist $A$ ein $R$-Modul: Für $f \in A, \alpha \in R$, $x \in U$ ist
+	\[
+		(\alpha f) (x) = f (\alpha x)
+	\]
+	Damit wir $A$ zu einer $R$-Algebra. Ist $V \simeq R^n$, dann ist $A \simeq M_n(R)$ und $C(A) \simeq R$, nämlich $\alpha \cdot \ind$, $\alpha \in R$.
+	\item $B_n(R)=$ Menge der oberen Dreiecksmatrizen ist Unteralgebra von $M_n(R)$.
+	\item Sei $M= \set[u_i]{i \in I}$ ein Monoid (= Halbgruppe mit 1) und sei $A= \mathcal{F}_M$ der freie Modul über $M$ mit Multiplikation $u_i \cdot u_j = u_k$ wie in 
+	$M$. Durch lineares Fortsetzen erhalten wir eine Multiplikation auf $A$, die $A$ zu einer $R$-Algebra macht. Dann ist $A$ assoziativ und unital, weil $M$ diese 
+	Eigenschaften hat. Diese Algebra wird mit $RM$ bezeichnet.
+	
+	Häufig: $M=G$ eine Gruppe, $R=K$ ein Körper: Dann heißt $K G$ die \Index{Gruppenalgebra} von $G$ über $K$. \uline{Spezialfälle:}
+	\begin{enumerate}[(a)]
+		\item $M= \set{1, X, X^2, X^3, \ldots }$, $RM= R[X]$.
+		\item $G=Z = \langle X \rangle$. Dann ist $KG= K[X, X ^{-1}]$ der Ring der Laurent-Polynome in $X$.
+	\end{enumerate}
+	\item Endlich dimensionale Algebra über einem Körper $K$: Ist $A$ $K$-Algebra mit $\set{u_1, \ldots , u_n}$, dann ist die Struktur von $A$ eindeutig bestimmt durch die
+	$n^3$ Strukturkonstanten $C_{ijk}$, $i,j,k = 1, \ldots ,n$ mit $u_i \cdot u_j = \sum_{k=1}^{n} c_{i,j,k} \cdot u_k$.
+\end{enumerate}
+% subsection 310 (end)
 % section 3 (end)
 \newpage
 
