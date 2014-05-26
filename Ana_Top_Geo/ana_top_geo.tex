@@ -1730,12 +1730,12 @@ Für $n=2$ ist das zweite Diagramm
 Daher folgt $\id = F_* \circ  i_* = $triviale Abbildung \light \bewende
 % subsection 11.8 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Induzierte Abbildung von $f : S^1 \to S^1$, $z	\mapsto z^n$]{Proposition} % (fold)
 \label{sub:11.9}
 Für $n \in \mathds{Z}$ sei $f_n : S^1 \to S^1$, $z \mapsto z^n$. Dann ist $(f_n)_* : \pi_1(S^1, 1) \to \pi_1(S^1,1)$ gegeben durch
 Multiplikation mit $n$:
 \[
-	(f_n)_* ([\omega]) = n \cdot [\omega] \in \pi_1\enbrace{S^1,1} = \mathds{Z}
+	(f_n)_* ([\omega]) = n \cdot [\omega] {\color{light_gray}\in \pi_1\enbrace{S^1,1} = \mathds{Z}}
 \]
 Weiter sind die $f_n$ paarweise nicht homotop zueinander.
 \minisec{Beweis}
@@ -1752,14 +1752,14 @@ $\omega$, so ist $\hat{f}_n \circ \hat{w}$ eine Hebung von $f_n \circ \omega$:
 \end{align*}
 Es folgt 
 \[
-	d \enbrace*{ [f_n \circ \omega]} = (\hat{f}_n \circ  \hat{\omega}) (1) = \hat{f}_n (\hat{\omega}(1)) = hat{f}_n (d[\omega]) = n \cdot d[\omega]
+	d \enbrace*{ [f_n \circ \omega]} = (\hat{f}_n \circ  \hat{\omega}) (1) = \hat{f}_n (\hat{\omega}(1)) = \hat{f}_n (d[\omega]) = n \cdot d[\omega]
 \]
 Da $d$ ein Isomorphismus ist, folgt die Behauptung. \smallskip \\
 Mit der Homotopieinvarianz von induzierten Abbildungen folgt, dass die $f_n : (S^1,1) \to (S^1,1)$ als punktierte Abbildungen nicht punktiert homotop sind. Mit dem nächsten
 Lemma folgt das die $f_n$ paarweise nicht homotop sind. \bewende
 % subsection 11.9 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Konstruktion einer punktierten Homotopie aus einer nicht punktierten]{Lemma} % (fold)
 \label{sub:1120}
 Seien $f,g : (X,x_0) \to (S^1,1)$ stetig. Sei $H : X \times [0,1] \to S^1$ eine (unpunktierte) Homotopie zwischen $f$ und $g$. Dann ist $\tilde{H} : X \times [0,1]\to S^1$,
 \[
@@ -1772,10 +1772,62 @@ ein punktierte Homotopie zwischen $f$ und $g$.
 \label{sub:1121}
 Jedes Polynom $p = X^n + a_{n-1} X^{n-1} + \ldots  + a_0 \in \mathds{C}[X]$ von $\grad f = n \ge 1$ hat eine Nullstelle.
 \minisec{Beweis}
-Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dann $f_n : S^1 \to S^1$ homotop zu einer konstanten Abbildung ist. Aus der Proposition folgt 
-dann aber $n=0$. \bewende
+Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dann $f_n : S^1 \to S^1$ homotop zu einer konstanten Abbildung ist. Aus der Proposition 
+\ref{sub:11.9} folgt dann aber $n=0$. \bewende
 % subsection 1121 (end)
 % section 11 (end)
+\newpage
+
+\section{Eigentlich diskontinuierliche Wirkungen} % (fold)
+\label{sec:12}
+
+\subsection{Definition} % (fold)
+\label{sub:12.1}
+Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
+\begin{enumerate}[(1)]
+	\item Eine Wirkung $G \cap X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass 
+	\begin{itemize}
+		\item Für $g \in G$ ist $L_g : X \to X$, $x \mapsto g \cdot x$ stetig.
+		\item Für $g,h \in G$ gilt $g \cdot (h \cdot x)= (g \cdot h) \cdot x$
+		\item Für das neutrale Element $e \in G$ gilt $e \cdot x = x$ für alle $x \in X$
+	\end{itemize}
+	\item Eine Wirkung heißt \bet{frei}\index{Wirkung!frei}, falls $g \cdot x = x \Rightarrow g = e$
+	\item Eine Wirkung heißt \bet{eigentlich diskontinuierlich}\index{Wirkung!eigentlich diskontinuierlich} (e.d.k.), falls es zu jedem $x \in X$ eine Umgebung $U$ von $x$
+	gibt mit $g U\cap U = \emptyset$ für alle $g \in G \setminus \set{e}$.
+	\item Durch $x \sim y :\Leftrightarrow \exists g \in G : g \cdot x = y (\Leftrightarrow G x = G y)$ wird eine 
+	Äquivalenzrelation auf $X$ erklärt. Die Äquivalenzklassen dieser Äquivalenzrelation sind genau die \bet{Bahnen}\index{Bahn} $Gx =\set[g\cdot x]{g \in G}$ der Wirkung.
+	Die Menge der Äquivalenzklassen bezeichnen wir mit $G \backslash X := \nicefrac{X}{\sim}$. Durch die Quotiententopologie bezüglich der Quotientenabbildung $X \to G\backslash X$, $x \mapsto G x$ wird $G \backslash X$ zu einem topologischen Raum.
+\end{enumerate}
+% subsection 12.1 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:12.2}
+Sei $G \cap X$ eine e.d.k Wirkung. Dann ist $p : X \to G \backslash X$, $x \mapsto Gx$ eine Überlagerung.
+\minisec{Beweis}
+Offenbar ist $p$ surjektiv und stetig. Sei $\overline{x} := G x \in G \setminus X $. Sei $U$ eine offene Umgebung von $x \in X$ für die $g U \cap U = \emptyset$ für alle $g \not= e$ ist. Dann ist $p(U)$ eine elementare Umgebung von $\overline{x}$, denn 
+\[
+	p ^{-1} \enbrace[\big]{p(U)} = \bigcup_{g \in G} g U
+\]
+ist die disjunkte Vereinigung der $g U$, $g \in G$. \bewende
+% subsection 12.2 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:12.3}
+\begin{enumerate}[(1)]
+	\item $\mathds{Z}^n \cap \mathds{R}^n$ mit $z \cdot x := x + z$ ist eine e.d.k. Wirkung: Ist $\varepsilon < \frac{1}{2}$ so gilt 
+	\[
+		B_\varepsilon(x) \cap B_\varepsilon(x) + z = B_\varepsilon(x) \cap B_\varepsilon(x +z) = \emptyset
+	\]
+	für alle $x \in \mathds{R}^n$, $z \in \mathds{Z}^n$. Da $\mathds{Z} \backslash \mathds{R} \cong S^1$ folgt 
+	$\mathds{Z}^n \backslash \mathds{R}^n = \enbrace*{\mathds{Z} \backslash \mathds{R}}^n = (S^1)^n = T^n $. Wir erhalten eine Überlagerung $\mathds{R}^n \to T^n$.
+	\item Sei $\nicefrac{\mathds{Z}}{2} = \set{e, \tau}$. Durch $\tau \cdot v := - v$ erhalten wir eine e.d.k. Wirkung $\nicefrac{\mathds{Z}}{2} \cap S^n$. Dann gilt
+	\[
+		\nicefrac{\mathds{Z}}{2} \backslash S^n \cong \mathds{R}P^n
+	\]
+	Wir erhalten eine Überlagerung $S^n \to \mathds{R}P^n$. 
+\end{enumerate}
+% subsection 12.3 (end)
+% section 12 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
