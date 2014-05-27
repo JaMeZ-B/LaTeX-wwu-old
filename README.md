@@ -13,6 +13,11 @@ In diesem Repository stelle ich Mitschriften zu Vorlesungen an de WWU Münster i
 		
 Ich lade jeden herzlich ein, sich mittels Forks und Pull-Requests an der Entwicklung der Skripte zu beteiligen. Es gibt sicherlich noch diverse Fehler und auch bei den
 Zeichnungen fehlt noch eine ganze Menge.
+Schon einmal vielen Dank an
+
+* Gautam (gdbgauda)
+
+für die Beteiligung an diesem Projekt!
 
 - - - - -
 
