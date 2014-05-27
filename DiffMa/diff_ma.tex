@@ -465,7 +465,7 @@ $\gamma(0)=p$ und $\varepsilon = \varepsilon(p)>0$ unter der Äquivalenzrelation
 \[
 	\gamma_1 \sim \gamma_2 :\Leftrightarrow \quad \forall \varphi \in C^\infty(M) :\quad  \diffd{}{t}( \varphi \circ \gamma_1)(0) = \diffd{}{t} (\varphi \circ \gamma_2) (0)   
 \]
-$X_\gamma(\varphi) := \diffd{}{t} (\varphi \cdot \gamma)(0)$ ist  Richtungsableitung von $\varphi$ in Richtung des Tangentialvektors $[\gamma]$. Es gilt
+$X_\gamma(\varphi) := \diffd{}{t} (\varphi \circ \gamma)(0)$ ist  Richtungsableitung von $\varphi$ in Richtung des Tangentialvektors $[\gamma]$. Es gilt
 \begin{description}
 	\item[Linearität:] Für $\lambda , \mu \in \mathds{R}$, $\varphi, \psi \in C^\infty(M) $ ist
 	\[
@@ -650,7 +650,7 @@ Die Differenzierbarkeit eines Vektorfeldes $X$ ist äquivalent zu der Aussage:
 		X(\varphi)\big|_U = \sum_{i=1}^{m} a^i \diff{\varphi}{x^i} \in C^\infty(U) 
 	\] 
 	$\Rightarrow X(\varphi) \in C^\infty(M)$
-	\item["$\Leftarrow$":] Sei $X(\varphi) \in C^\infty(M)$ für alle $\varphi \in C^\infty(M)$. Schreibe lokal $X|_U = \sum_{i=1}^{m} a^i \diff{}{x^i}$. Sei $p$ solch ein
+	\item["$\Leftarrow$":] Sei $X(\varphi) \in C^\infty(M)$ für alle $\varphi \in C^\infty(M)$. Schreibe lokal $X|_U = \sum_{i=1}^{m} a^i \diff{}{x^i}$. Sei $p\in U$  ein
 	Punkt. Sei $\varphi \in C^\infty(M)$ eine Testfunktion mit $\varphi \equiv x^k$ in einer Umgebung $V$ von $p$ in $U$.
 	\[
 		a^k\big|_V = X(\varphi)|_V \in C^\infty(V)
@@ -671,7 +671,7 @@ Die differenzierbaren Vektorfelder auf einer differenzierbaren Mannigfaltigkeit 
 \label{ssub:214}
 Die \Index{Lie-Klammer} zweier Vektorfelder $X,Y$ auf $M$ ist das Vektorfeld, das durch  
 \[
-	[X,Y]_p \varphi := X_p (Y \varphi) - Y_p(X \varphi)
+	[X,Y]_p \, \varphi := X_p (Y \varphi) - Y_p(X \varphi)
 \]
 definiert ist, wobei $\varphi \in C^\infty(M)$.
 % subsubsection 214 (end)
@@ -685,7 +685,7 @@ Die Lie-Klammer $[X,Y]$ ist ein Vektorfeld.
 	\item $[X,Y] \varphi \in C^\infty(M)$
 	\item Leibnizregel:
 	\begin{align*}
-		[X,Y]_p (\varphi \psi) &= X_p\enbrace[\big]{Y (\varphi \psi)} - Y_p \enbrace[\big]{X( \varphi \psi)} \tag*{(Leibniz)}\\
+		[X,Y]_p (\varphi \cdot \psi) &= X_p\enbrace[\big]{Y (\varphi \cdot \psi)} - Y_p \enbrace[\big]{X( \varphi \cdot \psi)} \tag*{(Leibniz)}\\
 		&= X_p \enbrace[\big]{Y \varphi \cdot \psi + \varphi \cdot Y \psi} - Y_p \enbrace[\big]{X \varphi \cdot \psi + \varphi \cdot X \psi} \tag*{(linear+Leibniz)}\\  
 		&= X_p( Y \varphi) \cdot \psi(p) + \mathul{SpringGreen3}{(Y \varphi)(p) \cdot X_p \psi} 
 		+ \mathul{OrangeRed1}{X_p \varphi \cdot (Y \psi)(p)} + \varphi(p) X_p (Y \psi) \\
@@ -700,7 +700,7 @@ Achtung: $\varphi \mapsto X_p (Y \varphi)$ definiert im Allgemeinen \emph{kein} 
 
 \subsubsection[Beispiel: Lie-Klammer im $\mathds{R}^2$]{Beispiel} % (fold)
 \label{ssub:216}
-Sei $M=\mathds{R}^2$. Dann ist $\left[ x \diff{}{y} , xy \diff{}{x} \right] = x^2 \diff{}{x} - xy \diff{}{y}$
+Sei $M=\mathds{R}^2$. Dann ist $\left[ x \diff{}{y} , xy \diff{}{x} \right] = x^2 \diff{}{x} - xy \diff{}{y}$.
 % subsubsection 216 (end)
 % subsection 21 (end)
 
@@ -721,9 +721,9 @@ d.h. für jeden Punkt $p \in M$ erhält man \marginnote{$\varepsilon= \varepsilo
 Die Kurve $\gamma_p$ heißt \Index{Integralkurve} von $X$ durch $p$. In lokalen Koordinaten: \smallskip\\
 \begin{minipage}[c]{0.4\textwidth}
 	\begin{align*}
-		X &= X^i \diff{}{x^i} \\
+		X &= X^i(x) \diff{}{x^i} \\
 		\gamma(t) &= \enbrace*{\gamma^1(t). \ldots , \gamma^m(t)} \\
-		{\dot{\gamma}}^i (t) &= X^i \enbrace[\big]{\gamma(t)} \quad , i=1,\ldots ,m 
+		{\dot{\gamma}}^i (t) &= X^i \enbrace[\big]{\gamma(t)} \quad ,\enspace i=1,\ldots ,m 
 	\end{align*}
 \end{minipage}
 \begin{minipage}[c]{0.55\textwidth}
@@ -934,7 +934,7 @@ Die Abbildung $(q,t) \mapsto \gamma_q(t) =: \Phi_t(q)$ heißt \Index{lokaler Flu
 \subsubsection[Satz 7: Verkettung von lokalen Flüssen]{Satz 7} % (fold)
 \label{ssub:242}
 \[
-	\Phi_t \circ \Phi_s(q) = \Phi_{t+s}(q)
+	\Phi_t \circ \Phi_s(q) = \Phi_{t+s}(q)\quad , \enspace \text{da wo definiert.}
 \]
 \minisec{Beweis}
 $t \mapsto \gamma_q(t+s)$ und $t \mapsto \gamma_{\Phi_s(q)}(t)$ sind Integralkurven von $X$ mit identischem Anfangspunkt (also $t=0$): 
@@ -959,9 +959,9 @@ Sei $X$ ein Vektorfeld auf $M$, $\Phi_t$ ein lokaler Fluss zu $X$. Für Funktion
 	\mathcal{L} _X f := \lim_{ t \to 0} \frac{1}{t} \enbrace*{f \circ  \Phi_t - f} = \diffd{}{t}\Big|_{t=0} (f \circ \Phi_t)    
 \]
 $\mathcal{L} _X$ heißt die \Index{Lie-Ableitung}. 
-Für Vektorfelder $Y$ auf $M$ gilt
+Für Vektorfelder $Y$ auf $M$ definieren wir
 \[
-	(\mathcal{L}_X Y)_p := \lim_{ t \to 0} \frac{1}{t} \enbrace*{T \Phi_{-t} \enbrace*{Y_{\Phi_t(p)}} - Y_p} = \diff{}{t}\Big|_{t=0} \enbrace[\Big]{T \Phi_{-t} 
+	(\mathcal{L}_X Y)_p := \lim_{ t \to 0} \frac{1}{t} \enbrace[\big]{T \Phi_{-t} \enbrace*{Y_{\Phi_t(p)}} - Y_p} = \diff{}{t}\Big|_{t=0} \enbrace[\Big]{T \Phi_{-t} 
 	\enbrace*{Y_{\Phi _t(p)}} }     
 \]
 % subsubsection 243 (end)
@@ -974,7 +974,7 @@ Für Vektorfelder $Y$ auf $M$ gilt
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item[zu a):] Da $t \mapsto \Phi_t(p) = \gamma_p(t)$ Integralkurve von $X$ ist, also $\dot\Phi_t = X_{\Phi_t}$, gilt nach Definition
+	\item[zu a):] Da $t \mapsto \Phi_t(p) = \gamma_p(t)$ Integralkurve von $X$ ist, also $\dot\Phi_t = X_{\Phi_t}$, gilt nach Definition\marginnote{vgl.: \ref{ssub:151}}
 	\[
 		\mathcal{L} _X f = \diff{}{t}\Big|_{t=0} (f \circ  \Phi_t) = X(f). 
 	\] 
