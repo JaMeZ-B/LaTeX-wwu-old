@@ -38,6 +38,19 @@
 	\item Eine Gruppenwirkung heißt \bet{transitiv}\index{Gruppenwirkung!transitive}, wenn $G(x)=X$ für ein $x \in X$.
 	\item Eine Gruppenwirkung heißt \bet{treu}\index{Gruppenwirkung!treue}, falls $\ker \varphi = \set{1_G}$. 
 \end{itemize}
+\minisec{Alternative Definition}
+Eine \Index{Gruppenwirkung} von $G$ auf $X$ ist (gegeben durch) eine Abbildung $G\times X \to X$, $(g,x)\mapsto g\cdot x$, mit folgenden Eigenschaften:
+\begin{itemize}
+	\item $e_G \cdot x= x$, und
+	\item $g\cdot(h\cdot x)=(gh)\cdot x$,
+\end{itemize}
+für alle $x \in X$ und alle $g,h\in G$.
+\minisec{Rechts-Gruppenwirkung}
+Die oben angegebenen Definitionen beschreiben eine \bet{linksseitige Gruppenwirkung}\Index{Gruppenwirkung!linksseitige}.\\
+Eine \bet{rechtsseitige Gruppenwirkung}\Index{Gruppenwirkung!rechtsseitige} ist (gegeben durch) eine Abbildung $X\times G \to X$, $(x,g)\mapsto x\cdot g$, 
+wobei für alle $x\in X$ und alle $g,h\in G$ die Bedingungen $x\cdot e=x$ und $(x\cdot g) \cdot h =x \cdot (gh)$ erfüllt sind.\\
+Alternativ kann eine rechtsseitige Gruppenwirkung durch einen Gruppenhomomorphismus $\varphi : G \to \Sym(X)^\mathrm{op}$ beschrieben werden, 
+wobei $\Sym(X)^\mathrm{op}:=(\Sym(X),*)$ mit $f*g:=g\circ f$ ist. (vgl. Definition \ref{sub:228}).
 % subsection 11 (end)
 
 \subsection[Bemerkung über eine Abbildung $\nicefrac{G}{G_x} \to G(x)$]{Bemerkung} % (fold)
@@ -64,39 +77,41 @@ Die letzten beiden Sätze lassen sich mit dem ersten beweisen!
 \label{sub:13}
 \begin{enumerate}[(i)]
 	\item\begin{enumerate}[(a)]
-		\item $G$ wirkt durch Rechtsmultiplikation auf sich selbst ($X = G$). Dann ist $G_x = \set{1}$ für alle $x \in X$, d.h. die Wirkung ist treu und transitiv. Solche 
+		\item $G$ wirkt durch Linksmultiplikation auf sich selbst ($X = G$). Dann ist $G_x = \set{1}$ für alle $x \in X$, d.h. die Wirkung ist treu und transitiv. Solche 
 		Wirkungen heißen \bet{regulär}\index{Gruppenwirkung!reguläre}.
 		\[
-			\varphi : G \to \Sym(G) , \quad g \mapsto\rho_g \enspace \text{ mit } \enspace\rho_g(x) = x \cdot g
+			\varphi : G \to \Sym(G) , \quad g \mapsto\rho_g \enspace \text{ mit } \enspace\rho_g(x) = g \cdot x	
 		\]
-		Gruppenhomomorphismus: $\rho_{g h} (x) = x \cdot g \cdot h = \rho_h \circ \rho_g (x)$.
-		\item $G$ wirkt durch Linksmultiplikation auf sich selbst (regulär) $\lambda_g (x) = g ^{-1} \cdot x$.
+		Gruppenhomomorphismus: $\rho_{g h} (x) = g \cdot h \cdot x = \rho_g \circ \rho_h (x)$.
+		\item $G$ wirkt durch Rechtsmultiplikation auf sich selbst (regulär) $\lambda_g (x) = x \cdot g ^{-1}$.
 	\end{enumerate}
-	\item $G$ operiert durch Konjugation auf sich selbst, d.h. $\kappa : G  \to \Aut(G) \le \Sym(G)$, $g \mapsto \kappa_g$, wobei $\kappa_g(x) = g ^{-1} \cdot x \cdot  g$
+	\item $G$ operiert durch Konjugation auf sich selbst, d.h. $\kappa : G  \to \Aut(G) \le \Sym(G)$, $g \mapsto \kappa_g$, wobei $\kappa_g(x) = g  \cdot x \cdot  g^{-1}$
 	\[
-		g \cdot  h \mapsto \kappa_{g \cdot h} \quad \kappa_{g \cdot h} (x) = h ^{-1} \cdot g ^{-1}\cdot x \cdot g \cdot h
+		g \cdot  h \mapsto \kappa_{g \cdot h} \quad \kappa_{g \cdot h} (x) = g \cdot h\cdot x \cdot h ^{-1} \cdot g ^{-1}=\kappa_g \circ \kappa_h (x)
 	\]
-	Dann ist $G_x = \set[g \in G]{g ^{-1} \cdot x \cdot g = x} = Z_G(x) $ der \Index{Zentralisator} von $x$ in $G$. Der Kern der Wirkung ist das \Index{Zentrum}  von $G$ 
-	$Z(G) = \set[g \in G]{x \cdot g = g \cdot x \text{ für alle } x \in G}$.
+	Dann ist $G_x = \set[g \in G]{g \cdot x \cdot g ^{-1}= x} =\set[g \in G]{g \cdot x =x\cdot g} = Z_G(x) $ der \Index{Zentralisator} von $x$ in $G$. Der Kern der Wirkung
+	$Z(G) = \set[g \in G]{x \cdot g = g \cdot x \text{ für alle } x \in G}$ ist das \Index{Zentrum}  von $G$ .
 	
 	\bet{Bemerkung:} $\ker \varphi = \bigcap_{x \in X} G_x$ gilt für alle Gruppenwirkungen $\varphi : G \to \Sym(X)$.
 	\item $G = \mathrm{Gl}_n(K)$, $K$ Körper, operiert auf $K^n$ durch lineare Abbildungen.
+	\bet{Bemerkung:} Die rechtsseitige Gruppenwirkung  $\tau : G  \to \Aut(G)$, $g \mapsto \tau_g$ mit $\tau_g(x) = g^{-1}  \cdot x \cdot  g$ 
+	hat dieselben Stabilisatoren und denselben Kern wie $\kappa$.
 \end{enumerate}
 % subsection 13 (end)
 
 \subsection{Bahnengleichung} % (fold)
 \label{sub:14}
-Setze $G(X) = \set[G(x)]{x \in X}$. Dann ist $X = \dot \bigcup \set[G(x)]{G(x) \in G(X)} $. Falls $X$ endlich ist gilt also
+Es gilt: $X = \dot \bigcup \set[G(x)]{x \in X} $, denn für jedes $x\in X$ ist $x\in G(x)$. Falls $X$ endlich ist gilt also
 \[
 	\abs*{X} = \sum \abs*{G(x)} = \sum \abs*{\nicefrac{G}{G_x}} = \sum [G : G_x] \tag{nach \ref{sub:12}}  
 \]
 Insbesondere ist $\abs*{G(x)} = \abs*{\nicefrac{G}{G_x}} = [G : G_x] = \frac{\abs*{G} }{\abs*{G_x} }  $ falls $G$ endlich ist. (Bijektion aus \ref{sub:12}) \\
-\bet{Spezialfall:} Wirkung von $G$ durch Konjugation auf sich selbst. $\kappa_g(x) = g ^{-1}  \cdot  x \cdot g$.
+\bet{Spezialfall:} Wirkung von $G$ durch Konjugation auf sich selbst. $\kappa_g(x) = g  \cdot  x \cdot g^{-1}$.
 % subsection 14 (end)
 
 \subsection{Klassengleichung} % (fold)
 \label{sub:15}
-Sei $K_G = \set[G(x)]{x \in G} =$ Menge der Konjugationsklassen. Sei $K_G^* = \set[G(x)]{x \in G\backslash Z(G)} = \set[G(x)]{ \abs*{G(x)} \ge 2 }  $. Für jede endliche 
+Sei $K_G = \set[G(x)]{x \in G}$ die Menge der Konjugationsklassen. Sei $K_G^* = \set[G(x)]{x \in G\backslash Z(G)} = \set[G(x)]{ \abs*{G(x)} \ge 2 }  $. Für jede endliche 
 Gruppe $G$ gilt dann nach \ref{sub:14}
 \[
 	\abs*{G} = \sum_{K_G} [G : Z_G(x)] = \abs*{Z(G)} + \sum_{K_G^*} [G : Z_G(x)] \bewende  
@@ -105,10 +120,10 @@ Gruppe $G$ gilt dann nach \ref{sub:14}
 
 \subsection[Korollar: $p$-Gruppen haben eine nichttriviales Zentrum]{Korollar} % (fold)
 \label{sub:16}
-$G$ endlich, $\abs*{G} = p^m $, $p$ prim, $m \ge 1 \Rightarrow Z(G) \not= 1$.
+$G$ endlich, $\abs*{G} = p^m $, $p$ prim, $m \ge 1 \Rightarrow p \mid Z(G) \not= 1$.
 \minisec{Beweis}
-Nach Lagrange\footnote{Ordnung einer Untergruppe teilt die Gruppenordnung. Die Umkehrung gilt nicht!} ist für jedes $x \in G$ $\abs*{Z_G(x)} = p^k $ für ein $k \le m$, 
-also ist $[G : Z_G(x)] = p^{m-k}$. Wegen $p \mid \abs*{G} $ und $\abs*{Z(G)} \ge 1 $ folgt
+Nach Lagrange\footnote{Ordnung einer Untergruppe teilt die Gruppenordnung. Die Umkehrung gilt nicht!} gilt für jedes $x \in G$, dass $\abs*{Z_G(x)} = p^k $ für ein $k \le m$, 
+also ist $[G : Z_G(x)] = p^{m-k}$. Dabei gilt für $g\in G\backslash Z(G)$, dass $k < m$, denn aus $k=m$ würde $x\inZ(G)$ folgen. Wegen $p \mid \abs*{G} $ und $\abs*{Z(G)} \ge 1 $ folgt
 $p \mid \abs*{Z(G)} $. \bewende
 % subsection 16 (end)
 
