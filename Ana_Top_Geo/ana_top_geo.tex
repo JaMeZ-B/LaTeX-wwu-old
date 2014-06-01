@@ -1818,7 +1818,7 @@ Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dan
 \label{sub:12.1}
 Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 \begin{enumerate}[(1)]
-	\item Eine Wirkung $G \wirkung X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass \marginnote{hier ist noch ein Zeichen falsch}
+	\item Eine Wirkung $G \wirkung X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass
 	\begin{itemize}
 		\item Für $g \in G$ ist $L_g : X \to X$, $x \mapsto g \cdot x$ stetig.
 		\item Für $g,h \in G$ gilt $g \cdot (h \cdot x)= (g \cdot h) \cdot x$
@@ -1912,6 +1912,58 @@ Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übu
 Nach Satz \ref{sub:12.4} ist daher $\pi_1(\mathds{R}P^n, x_0) = \nicefrac{\mathds{Z}}{2}$ für $n \ge 2$. Es folgt $\mathds{R}P^n \not\cong S^n$ für $n \ge 2$. 
 (Andererseits ist $\mathds{R}P^1 \cong S^1$.)
 % subsection 12.5 (end)
+
+\subsection[Definition: Decktransformation]{Definition} % (fold)
+\label{sub:12.6}
+Sei $p : \hat{X} \to X$ eine Überlagerung. Eine \Index{Decktransformation} von $p$ ist ein Homöomorphismus $f : \hat{X} \to \hat{X}$, sodass $p \circ f = p$. Die 
+Decktransformationen von $p$ bilden eine Gruppe $\triangle(p)$. Diese Gruppe wirkt in kanonischer Wiese auf $\hat{X}$.
+% subsection 12.6 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:12.7}
+Sei $p : \hat{X} \to X$ eine Überdeckung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Wirkung der Decktransformationsgruppe $\triangle(p)$ auf $\hat{X}$ eigentlich
+diskontinuierlich.
+\minisec{Beweis}
+Wir zeigen zunächst, dass die Wirkung frei ist. Sei $f \in \triangle(p)$ und $x \in \hat{X}$ mit $f(x) = x$. Sei $y \in \hat{X}$ und $\hat{\omega} : [0,1] \to \hat{X}$ ein
+Weg von $x$ nach $y$. Dann sind $\hat{\omega}$ und $f \circ \hat{\omega}$ zwei Hebungen von $\omega := p \circ \hat{\omega}$. Da 
+$\hat{\omega}(0) = x = f(x) = f \circ \hat{\omega}(0)$ folgt mit der Eindeutigkeit im Homotopiehebungssatz $\hat{\omega} = f \circ \hat{\omega}$ und insbesondere $y=f(y)$.
+Da $y$ beliebig war, ist $f= \id_{\hat{X}}$.
+
+Wir können nun zeigen, dass die Wirkung eigentlich diskontinuierlich ist. Sei $x \in \hat{X}$. Sei $U$ eine elementare Umgebung von $p(x)$. Dann ist $p ^{-1}(U)$ die 
+disjunkte Vereinigung von offenen Mengen $V$, $V \in \mathcal{V}$ von denen jede homöomorph auf $U$ abgebildet wird. Sei $V_0 \in \mathcal{V}$ mit $x \in V_0$. Sei 
+$f \in \triangle(p)$, $f \not= \id$. Für $y \in V_0$ gilt dann $p \enbrace*{f(y)} = p(y) $, $f(y) \not=y$ folgt $f(y) \not\in V_0$. Andernfalls wäre $p\big|_{V_0}$ nicht
+injektiv. Daher $f(V_0) \cap V_0 = \emptyset$. \bewende
+% subsection 12.7 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:12.8}
+\begin{wrapfigure}{R}{3cm}
+	\begin{tikzcd}
+		\hat{X} \rar{p} \dar{q}& X \\
+		H \backslash \hat{X} \urar{q'}&
+	\end{tikzcd}
+\end{wrapfigure}
+Sei $p : \hat{X} \to X$ eine Überlagerung wobei $\hat{X}$ wegzusammenhängend ist. Sei $H \le \triangle(p)$ eine Untergruppe. Dann ist auch die Wirkung $H \wirkung \hat{X}$
+eigentlich diskontinuierlich und die Quotientenabbildung $q : \hat{X} \to H \backslash \hat{X}$ eine Überlagerung. Weiter ist $q' : H \backslash \hat{X} \to X$ mit
+$q'(Hx) = p(x)$ stetig, da $q' \circ q = p$ stetig ist. Ist $U \subseteq X$ elementar für $p$, so ist $U$ auch elementar für $q'$. $q'$ ist also auch eine Überlagerung.
+Insgesamt haben wir also jeder Untergruppe von $\triangle (p)$ eine Überlagerung $H \backslash \hat{X}$ zugeordnet, die zwischen $\hat{X}$ und $X$ liegt.
+% subsection 12.8 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:12.9}
+Sei $p : \hat{X} \to X$ eine Überlagerung. Für $x \in X$ wirkt dann $\triangle(p)$ auf der Faser $F_x := p ^{-1}(x)$. Die Überlagerung heißt 
+\bet{normal}\index{Überlagerung!normal}, falls diese Wirkung transitiv ist, d.h. falls es zu $\hat{x}, \hat{y} \in F_x$ immer $f \in \triangle(p)$ gibt mit 
+$f(\hat{x})= \hat{y}$.
+% subsection 12.9 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:1210}
+Sei $\hat{X} \xrightarrow{p} X $ eine normale Überdeckung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Abbildung $q' : \triangle(p)\backslash X \to X$,
+$q' \enbrace*{\triangle(p) x} = p(x)$ ein Homöomorphismus.
+\minisec{Beweis}
+Wir haben schon gesehen, dass $q'$ eine Überlagerung ist. unabhängig davon ob $p$ normal ist. Ist $p$ normal, so ist $q'$ bijektive Überlagerung und daher Homöomorphismus.
+\bewende 
+% subsection 1210 (end)
 % section 12 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
