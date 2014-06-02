@@ -1667,7 +1667,7 @@ Eine \Index{Unteralgebra} einer $R$-Algebra $A$ ist ein Unterring, der gleichzei
 \end{enumerate}
 Ein Homomorphismus von $R$-Algebren ist ein Ringhomomorphismus, der gleichzeitig $R$-linear ist.
 \minisec{Bemerkung}
-Für $y=1$ in Definition \ref{sub:38} ergibt sich $x \cdot  \alpha 1 = \alpha x$ und für $x=1$ $\alpha 1 \cdot y = \alpha \cdot y$. Also gilt 
+Für $y=1$ in Definition \ref{sub:38} ergibt sich $x \cdot  \alpha 1 = \alpha x$ und für $x=1$ ergibt sich $\alpha 1 \cdot y = \alpha \cdot y$. Also gilt 
 $\alpha 1  \cdot x = x \cdot  \alpha 1 = \alpha x$ für alle $x \in A, \alpha \in \mathds{R}$. Für $\alpha = \beta \cdot 1$ erhalten wir 
 \[
 	\alpha 1 \cdot \beta \cdot 1 = \alpha (\beta 1) = \alpha \beta \cdot 1,
@@ -1747,9 +1747,47 @@ Es genügt nachzurechnen, dass diese Multiplikation bilinear ist und die Eigensc
 
 \subsection[Beispiel: Erweiterung der Skalare]{Beispiel} % (fold)
 \label{sub:314}
-Sei $K$ ein Körper, $E \supseteq K$ eine Körpererweiterung und eine $K$-Algebra $A$ gegeben. Dann ist $A \otimes E$ eine $E$-Algebra mit $\dim_E(A \otimes E)= \dim_K(A)$
-nach Beispiel \ref{sub:39}, denn $1 \otimes E \subseteq C(A \otimes_K E)$ und für eine $K$-Basis $\set{u_1, \ldots , u_n}$ von $A$ ist $\set{u_1 \otimes 1, \ldots , u_n \otimes 1} $ eine $E$-Basis für $E =: A_E$. Man sagt: $A_E$ entsteht aus $A$ durch Erweiterung der Skalare.
+\begin{enumerate}[(i)]
+	\item Sei $K$ ein Körper, $E \supseteq K$ eine Körpererweiterung und eine $K$-Algebra $A$ gegeben. Dann ist $A \otimes E$ eine $E$-Algebra mit 
+	$\dim_E(A \otimes E)= \dim_K(A)$ nach Beispiel \ref{sub:39}, denn $1 \otimes E \subseteq C(A \otimes_K E)$ und für eine $K$-Basis $\set{u_1, \ldots , u_n}$ von $A$ ist 
+	$\set{u_1 \otimes 1, \ldots , u_n \otimes 1} $ eine $E$-Basis für $E =: A_E$. Man sagt: $A_E$ entsteht aus $A$ durch Erweiterung der Skalare.
+	\item Sei $A= M_n(R)$. Dann hat $A$ eine $R$-Basis $\set[e_{ij}]{i,j \le n}$ mit Multiplikation $e_{ij} \cdot e_{kl}= \delta_{jk} e_{il}$ und $\sum e_{ii} = 1$.
+	Ist $B$ eine $R$-Algebra, dann ist $A \otimes B$ ein freier $B$-(Rechts-)Modul mit derselben Basis als $B$-Modul. d.h. $M_n(R) \otimes B \simeq M_n(B)$. Für $B=M_k(R)$
+	ist also $M_n(R) \otimes M_k(R) \simeq M_{n \cdot k}(R)$.
+\end{enumerate}
+Im Folgenden untersuchen wir endlich dimensionale Algebren über einem kommutativen Körper $K$.
 % subsection 314 (end)
+
+\subsection[Definition: Zentrale Algebra]{Definition} % (fold)
+\label{sub:315}
+Eine $K$-Algebra heißt \bet{zentral}\index{Algebra!zentral}, wenn $C(A)= K \cdot 1_A$. Ist $A$ eine endlich dimensionale einfache $K$-Algebra, dann ist nach Wedderburn (\ref{sub:229}) $A \simeq M_n(D)$ für einen Schiefkörper $D$, der endliche Dimension über $K$ hat. Weiter ist 
+\[
+	C(A) \simeq C(D) =: E \supseteq K.
+\]
+Dann ist $E$ ein kommutativer Körper und wir können $A$ als $E$-Algebra auffassen. Also solche ist $A$ dann eine zentral einfache endlich dimensionale $E$-Algebra.
+\minisec{Bemerkung}
+Sind $A,B$ $K$-Algebren, dann enthält $A \otimes B$ Unteralgebren $1 \otimes B \simeq B$ und $A \otimes 1 \simeq A$. Wir geben eine interne Charakterisierung von
+Tensorprodukten an (vgl. \ref{sub:129}). 
+% subsection 315 (end)
+
+\subsection[Definition: Linear disjunkt]{Definition} % (fold)
+\label{sub:316}
+Sei $C$ eine $K$-Algebra, $U,V \subseteq C$ $K$-Untervektorräume. Dann heißen $U$ und $V$ \Index{linear disjunkt} über $K$, wenn für linear unabhängige $u_i \in U$, 
+$v_j \in V$ die Elemente $u_i v_j \in C$ linear unabhängig sind. Mit anderen Worten ist die natürliche Abbildung $U  \otimes V \to C$, $u \otimes v \mapsto u v$ injektiv.
+% subsection 316 (end)
+
+\subsection[Proposition: Isomorphie einer $K$-Algebra zum Tensorprodukt von Unteralgebren]{Proposition} % (fold)
+\label{sub:317}
+Sei $C$ eine $K$-Algebra, $A,B \subseteq C$ Unteralgebren, dann ist $C \simeq A \otimes B$, falls gilt
+\begin{enumerate}[(i)]
+	\item $A$ und $B$ sind linear disjunkt über $K$
+	\item $A B = C$
+	\item $a b = b a$ für alle $a \in A, b \in B$. {\small \color{light_gray} $(a \otimes 1)(1 \otimes b)= (1 \otimes b)(a	\otimes 1)= a \otimes b$}
+\end{enumerate}
+\minisec{Beweis}
+Die Abbildung $A \times B \to C$, $(x,y) \mapsto xy$ ist bilinear und induziert daher eine Abbildung $A \otimes B \to C$. Diese Abbildung ist injektiv nach (i), surjektiv
+nach (ii) und ein Homomorphismus nach (iii). \bewende
+% subsection 317 (end)
 % section 3 (end)
 \newpage
 
