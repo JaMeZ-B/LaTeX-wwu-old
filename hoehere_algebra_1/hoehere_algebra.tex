@@ -1805,7 +1805,7 @@ man $c=d$, d.h. $c \in C(A)$. Damit folgt $\End_{A^e}(A) \simeq C(A)$.
 
 \subsection{Satz (Dichtheitssatz für halbeinfache Moduln)} % (fold)
 \label{sub:319}
-Sei $R$ ein Ring, $M \in {_R\Mod}$ halbeinfach, $R' = \End_R M$, $R'' = \End_{R'} M$ \marginnote{vertauschen} 
+Sei $R$ ein Ring, $M \in {_R\Mod}$ halbeinfach, $R' = \End_R (M) = C_{\End (M,+)} (\Lambda_R)$ mit $\Lambda_R = \set[\lambda_r]{r \in R} $, $R'' = \End_{R'} (M)$ \marginnote{vertauschen} 
 (für $M$ aufgefasst als $R'$-Modul). Sei $\set{x_1, \ldots , x_n} \subseteq M$,
 $a'' \in R''$, dann existiert $a \in R$ mit $a x_i = a'' x_i$ für $i=1, \ldots ,n$.
 \minisec{Beweis}
@@ -1833,6 +1833,57 @@ Nun wenden wir den Fall $n=1$ auf den $R$-Modul $M^n$ und $\varphi_{\alpha''}$. 
 	\varphi_{\alpha''}(x_1, \ldots , x_n)= \enbrace[\big]{\alpha''(x_1), \ldots , \alpha''(x_n)} = \alpha (x_1, \ldots , x_n) = (\alpha x_1, \ldots , \alpha x_n).
 \]
 % subsection 320 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:321}
+Ist $A$ eine endlich dimensionale zentral einfache $K$-Algebra, dann ist $A^e = A \otimes A^\mathrm{op} \simeq M_n(K)$ mit $n= \dim A$.
+\minisec{Beweis}
+Betrachte $A$ als $A^e$-Modul. Dann ist $A$ einfach und $\End_{A^e} (A) \simeq K$. Da $A$ endlich dimensional über $K$ ist, folgt aus dem Dichtheitssatz (\ref{sub:319}),
+dass $A^e \to \End_K(A)$ surjektiv ist. Da 
+\[
+	\dim_K A^e = \dim_K \End_K(A) = n^2
+\]
+folgt $A^e \simeq \End_K(A)$ und wegen $\End_K(A) \simeq M_n(K)$ folgt die Behauptung. \bewende
+% subsection 321 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:322}
+Sei $B$ eine $K$-Algebra. $A$ eine endlich dimensionale zentral einfache Unteralgebra. Dann gilt $B \simeq A \otimes_K C$, wobei $C= C_B(A)$ der Zentralisator von $A$ in 
+$B$ ist, d.h. $C= \set[x \in B]{x a = a x \enspace \forall a \in A}$. 
+
+Die Abbildung $I \mapsto A \otimes I$ ist Verbandsisomorphismus zwischen den Idealen von $B$ und 
+den Idealen von $C$ und es ist $C(B)= C(C)$
+\minisec{Beweis}
+Betrachte $B$ als $A^e$-Modul. Da $A^e$ nach Satz \ref{sub:321} einfach ist, $A^e = M_n(K)$, ist nach Wedderburn (\ref{sub:231}) 
+\(
+	B = \bigoplus A^e x_i
+\)
+direkte Summe von einfachen $A^e$-Moduln, die alle isomorph zu $A$ sind. Als $A^e$-Modul wird $A$ von $1_A$ erzeugt und es ist 
+\[
+	(a \otimes 1)1 = a \cdot 1 = 1 \cdot a = (1 \otimes a) 1
+\]
+und falls $(a \otimes 1)1 = 0$, dann ist $a=0$. Da alle $A^e x_i \simeq A$ als $A^e$-Moduln, existiert ein $c_i \in A^e x_i$ mit $(a \otimes 1)c_i = (1 \otimes a)c_i$
+und $(a \otimes 1)c_i =0$ $\Rightarrow a=0$. Daher ist $B= \bigoplus Ac_i$ mit $a c_i = c_i a$ für alle $a \in A$ und $a c_i = 0 \Rightarrow a=0$. Daher sind alle 
+$c_i \in C= C_B(A)$ und jedes Element in $B$ hat \emph{eindeutige} Darstellung der Form $\sum a_i c_i$ mit $a_i \in A$.
+
+Ist $c \in C$, $c = \sum a_i c_i$, dann folgt wegen $a c = c a$ für alle $a \in A$ auch $a a_i = a_i a$ für alle $a \in A$, d.h. $a_i \in C(A) \simeq K$. Daher ist
+$C = \sum K c_i$, d.h. $\set[c_i]{i \in I}$ ist Basis für $C$. Nach Proposition \ref{sub:317} ist $B = A \otimes_K C$. 
+
+Für den zweiten Teil sei $I \unlhd C$ ein Ideal. Dann ist $A \otimes I$ ein Ideal in $B = A \otimes C$ und es ist $(A \otimes I) \cap (1 \otimes C) = I$. Ist 
+$(x_1=1, x_2, \ldots , x_n)$ Basis für $A$, dann hat jedes $b \in B$ eine \emph{eindeutige} Darstellung der Form $b= \sum c_i \otimes x_i = \sum c_i x_i$ mit
+$c_i \in C$. Die Elemente von $A \otimes I$ sind von der Form $\sum d_i x_i$ mit $d_i \in I$. Daher folgt aus $b= \sum d_i x_i \in C$ schon $b= c_1 x_1$ mit $c_1 \in C$,
+d.h. $C \cap A I = \set{d_1 x_1 = d_1 \in I} = I$. Daher ist $I \mapsto A \otimes I$ injektiv.
+Ist $I'$ ein Ideal in $B$, dann ist $I'$ ein $A^e$-Untermodul von $B$, d.h. für $I = I' \cap C$ ist dann $I' = \sum A d_j$ mit $d_j \in I$. Daher ist $I' = A \cdot I_i$, 
+d.h. die Abbildung $I \mapsto A \otimes I$ ist surjektiv.
+
+Noch zu zeigen: $C(B) = C(C)$. "$\subseteq$"{} ist klar. Ist $c \in C(C)$, dann vertauscht $c$ mit allen $a \in A$ und mit allen $d \in C$, also $c \in C(B)$. \bewende
+% subsection 322 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:323}
+Ist $A$ eine endlich dimensionale zentral einfache $K$-Algebra, $C$ eine beliebige $K$-Algebra, dann ist die Abbildung $I \mapsto A \otimes I$ ein Verbandsisomorphismus 
+zwischen Idealen von $B = A \otimes C$ und den Idealen von $C$ und es ist $C(B) = C(C)$.
+% subsection 323 (end)
 % section 3 (end)
 \newpage
 
