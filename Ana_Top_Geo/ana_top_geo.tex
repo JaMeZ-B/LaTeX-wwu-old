@@ -1300,7 +1300,7 @@ Sei $X$ ein topologischer Raum.
 \subsection[Beispiele zu (weg-)zusammenhängenden Räumen]{Beispiel} % (fold)
 \label{sub:83}
 \begin{enumerate}[(i)]
-	\item Der sogenannte \bet{Polnische Kreis}\index{Polnischer Kreis} $PK$ gegeben durch
+	\item Der sogenannte \bet{Polnische Kreis}\index{Polnischer Kreis} $PK$ gegeben durch \marginnote{Zeichnung hinzufügen}
 	\[
 		PK = \set[(x,y) \in \mathds{R}^2]{ \begin{array}{rlcl}
 			 & (x \in [{-1,1}] &\wedge& y=1) \\
@@ -1308,7 +1308,7 @@ Sei $X$ ein topologischer Raum.
 			\vee & (x \in [-1,0] & \wedge& y = 0) \\
 			\vee & (x=0 & \wedge & y \in [-1/2, 1/2]) \\
 			\vee & (x \in (0,1] & \wedge& y= 1/2 \cdot \sin (\pi/x))
-		\end{array}} 
+		\end{array}}
 	\]
 	ist wegzusammenhängend, aber nicht lokal wegzusammenhängend.
 	\item 
@@ -1320,6 +1320,20 @@ Sei $X$ ein topologischer Raum.
 	\]
 	ist zusammenhängend, aber nicht wegzusammenhängend.
 \end{enumerate}
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}[scale=2]
+		\draw[domain=0.02:1, variable=\t, samples=200, very thin, smooth] plot ({\t}, {0.5 * sin(pi / \t r)});
+		\draw (1,0) -- (1,1) -- (-1,1) -- (-1,0) -- (0,0) -- (0,0.5) -- (0,-0.5);
+		\node at (-0.5,0.5) {$PK$};
+	\end{tikzpicture} \qquad \qquad 
+	\begin{tikzpicture}[scale=2]
+		\draw[domain=0.02:1, variable=\t, samples=200, very thin, smooth] plot ({\t}, {0.5 * sin(pi / \t r)});
+		\draw (0,-0.5) -- (0,0.5);
+	\end{tikzpicture}
+	\caption{Der Polnische Kreis und eine nicht wegzusammenhängende Teilmenge}
+	}
+\end{figure}
 % subsection 83 (end)
 
 \subsection{Satz (Topologische Invarianz der Dimension)} % (fold)
@@ -1382,7 +1396,7 @@ Homotopieklasse von $\omega$.
 Ein Weg $\omega : [0,1] \to X$ heißt eine \Index{Schleife} in $X$, falls $\omega(0)= \omega(1)$. 
 % subsection 94 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Charakterisierung von einfach zusammenhängend über Schleifen]{Lemma} % (fold)
 \label{sub:95}
 $X$ ist genau dann einfach zusammenhängend, wenn jede Schleife in $X$ homotop relativ $\set{0,1}$ zu einer konstanten Schleife ist.
 \minisec{Beweis}
@@ -1411,7 +1425,7 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 	\end{cases}
 \] 
 % subsection 97 (end)
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Eigenschaften des Kompositionsweg als Verknüpfung]{Lemma} % (fold)
 \label{sub:98}
 \begin{enumerate}[a)]
 	\item Seien $\omega, \omega', \omega''$ Wege in $X$ mit $\omega(1)= \omega'(0)$ und $\omega'(1)= \omega''(0)$. Dann gilt 
@@ -1431,8 +1445,8 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 	\]
 \end{enumerate}
 \minisec{Beweis (nur a)}
-\begin{enumerate}[(i)]
-	\item Sei $\varphi : [0,1] \to [0,1]$ mit \marginnote{Zeichnung einfügen}.
+\begin{minipage}[t]{0.6\textwidth}
+	Sei $\varphi : [0,1] \to [0,1]$ gegeben wie in Abbildung \ref{fig:98} gezeichnet.
 	Dann gilt 
 	\begin{align*}
 		\enbrace[\Big]{\omega * \enbrace[\big]{\omega' * \omega''} }(s) = \enbrace[\Big]{\enbrace[\big]{\omega * \omega'} * \omega''} (\varphi(s))  
@@ -1442,7 +1456,26 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 		H(s,t) := \enbrace[\Big]{ \enbrace[\big]{\omega * \omega'} * \omega'' } \enbrace[\big]{(1-t)s + t \varphi(s)}  
 	\]
 	definiert. \bewende
-\end{enumerate}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+	\captionsetup{type=figure, skip=4pt, name=Abb.}
+	\centering{
+	\begin{tikzpicture}[scale=2]
+		\coordinate (a) at (0.5,0.25);
+		\coordinate (b) at (0.75, 0.5);
+		\draw[<->] (1.2,0) -- (0,0) -- (0,1.2);
+		\draw[very thick, PaleGreen4] (0,0) -- (a) -- (b) -- (1,1) node[below right]{$\varphi$};
+		\draw (0.5,0.05) -- ++ (0,-0.1) node[below]{$\frac{1}{2}$};
+		\draw (0.75,0.05) -- ++ (0,-0.1) node[below]{$\frac{3}{4}$};
+		\draw (1,0.05) -- ++ (0,-0.1) node[below]{$1$};
+		\draw (0.05,0.25) -- ++ (-0.1,0) node[left]{$\frac{1}{4}$};
+		\draw (0.05,0.5) -- ++ (-0.1,0) node[left]{$\frac{1}{2}$};
+		\draw (0.05,1) -- ++ (-0.1,0) node[left]{$1$};
+	\end{tikzpicture}
+	\caption{Funktion $\varphi$ aus dem Beweis zu \ref{sub:98}}
+	\label{fig:98}
+	}
+\end{minipage}
 % subsection 98 (end)
 
 \subsection[Korollar: Gruppenstruktur auf der Menge der Homotopieklassen von Schleifen]{Korollar} % (fold)
@@ -1483,14 +1516,14 @@ Insbesondere hängt der Isomorphismus von $\pi_1(X,x_0)$ für wegzusammenhängen
 
 \section{Die Windungszahl} % (fold)
 \label{sec:10}
-\subsection{Frage} % (fold)
+\subsection[Frage nach der Gruppenstruktur von Fundamentalgruppen]{Frage} % (fold)
 \label{sub:101}
 \[
 	\pi_1 \enbrace*{\mathds{R}^2 \setminus \set{0}, x_0 } = ? \qquad \pi_1 \enbrace*{S^1, x_0} = ?  
 \]
 % subsection 101 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Hebung eines Weges auf $S^1$ nach $\mathds{R}$]{Proposition} % (fold)
 \label{sub:102}
 Sei $p  : \mathds{R} \to S^1$ definiert durch $p(t) = e^{2 \pi i t}$. Sei $\omega : [0,1] \to S^1$ stetig und $t_0 \in \mathds{R}$ mit $p(t_0) = \omega(0)$.
 Dann gibt es eine eindeutige stetige Abbildung. $\hat{\omega} : [0,1] \to \mathds{R}$ mit $\hat{\omega}(0) = t_0$ und $p  \circ  \hat{\omega} = \omega$
@@ -1553,7 +1586,7 @@ Homöomorphismus ist. Eine solche Umgebung $U$ heißt eine \Index{elementare Umg
 	\item $p : \mathds{R} \to S^1$, $t \mapsto e^{2 \pi  i t}$ ist eine Überlagerung.
 	\item $p_n : S^1 \to S^1$, $z \mapsto z^n$ ist eine Überlagerung.
 	\item Sind $p : \hat{X} \to X$, $q : \hat{Y} \to Y$ Überlagerungen, so ist $p \times q : \hat{X} \times \hat{Y} \to X \times Y$ eine Überlagerung.
-	zB: $R^2 \to T^2 = S^1 \times S^1$
+	zB: $\mathds{R}^2 \to T^2 = S^1 \times S^1$
 	\item $S^2 \to \mathds{R}P^2= \nicefrac{S^2}{x \sim -x}$ ist eine Überlagerung. \hfill (Übung!)
 \end{enumerate}
 % subsection 106 (end)
@@ -1610,7 +1643,7 @@ für $\xi \in V_z \cap V_{z'}$. Daher definiert $\hat{H}(z,t) := \hat{H}^{V_z}(z
 
 \section{Induzierte Abbildungen} % (fold)
 \label{sec:11}
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Gruppenhom. zwischen Fundamentalgruppen durch induzierte Abbildung]{Lemma} % (fold)
 \label{sub:11.1}
 Sei $f : X \to Y$ stetig mit $f(x_0)= y_0$. Dann definiert $f_*([\omega]) := [f \circ \omega]$ einen Gruppenhomomorphismus $f_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)$.
 \minisec{Beweis}
@@ -1654,18 +1687,18 @@ $g \circ \omega$. Also
 \]
 % subsection 11.4 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Homotopieäquivalent und zusammenziehbar]{Definition} % (fold)
 \label{sub:11.5}
 Seien $X,Y$ topologische Räume. Dann heißen $X$ und $Y$ \Index{homotopieäquivalent}, falls es stetige Abbildungen $f : X \to Y$, $g : Y \to X$ gibt, so dass 
 \marginnote{$f \simeq g :\Leftrightarrow$ $f$ homotop zu $g$ }
 \[
-	f \circ g \simeq \id_X \text{ und } g \circ  f \simeq \id_X
+	f \circ g \simeq \id_Y \text{ und } g \circ  f \simeq \id_X
 \]
-Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f}$. Entsprechendes benutzen wir auch für punktierte Räume. Falls $X \simeq \set{0}$, so sagen wir: $X$ ist
+Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f} Y$. Entsprechendes benutzen wir auch für punktierte Räume. Falls $X \simeq \set{0}$, so sagen wir: $X$ ist
 \Index{zusammenziehbar}.
 % subsection 115 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiele für Homotopieäquivalenzen und zusammenziehbare Räume]{Beispiel} % (fold)
 \label{sub:11.6}
 \begin{enumerate}[(1)]
 	\item $S^{n-1}$ ist homotopieäquivalent zu $\mathds{R}^n \setminus \set{0}$: Benutze $i : S^{n-1} \hookrightarrow \mathds{R}^n \setminus \set{0}$ die Inklusion und
@@ -1683,7 +1716,7 @@ Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f}$. Entsprechendes
 	\item Auch $X := \mathds{R}^2 \setminus \set[(x,y)]{x \in (0,\infty) , y \in [0,1]} $ ist kontrahierbar.
 	\[
 		\begin{tikzpicture}
-			\draw[fill, DeepSkyBlue1!60] (0,0) rectangle (4,1); 
+			\draw[fill, SkyBlue1!60] (0,0) rectangle (4,1); 
 			\draw (0,1) -- (4,1);
 			\draw[->] (-2,0) -- (4,0);
 			\draw[->] (0,-1) -- (0,2);
@@ -1693,7 +1726,7 @@ Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f}$. Entsprechendes
 \end{enumerate}
 % subsection 116 (end)
 
-\subsection{Korollar} % (fold)
+\subsection[Korollar: Die induzierte Abbildung einer Homotopieäquivalenz ist ein Isomorphismus]{Korollar} % (fold)
 \label{sub:11.7}
 Ist $f : (X,x_0) \to (Y,y_0)$ eine Homotopieäquivalenz, so ist $f_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)$ ein Isomorphismus. Insbesondere ist $\pi_1(X,x_0) = \set{1}$, falls
 $(X,x_0)$ zusammenziehbar ist.
@@ -1801,11 +1834,11 @@ Angenommen $p$ hat keine Nullstelle. In den Übungen haben wir gezeigt, dass dan
 \section{Eigentlich diskontinuierliche Wirkungen} % (fold)
 \label{sec:12}
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Eigentlich diskontinuierliche Wirkung]{Definition} % (fold)
 \label{sub:12.1}
 Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 \begin{enumerate}[(1)]
-	\item Eine Wirkung $G \wirkung X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass \marginnote{hier ist noch ein Zeichen falsch}
+	\item Eine Wirkung $G \wirkung X$ von $G$ auf $X$ ist eine Abbildung $G \times X \to X$, $(g,x) \mapsto g \cdot x$ so dass
 	\begin{itemize}
 		\item Für $g \in G$ ist $L_g : X \to X$, $x \mapsto g \cdot x$ stetig.
 		\item Für $g,h \in G$ gilt $g \cdot (h \cdot x)= (g \cdot h) \cdot x$
@@ -1820,7 +1853,7 @@ Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 \end{enumerate}
 % subsection 12.1 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: edk-Wirkungen definieren Überlagerungen]{Lemma} % (fold)
 \label{sub:12.2}
 Sei $G \wirkung X$ eine e.d.k Wirkung. Dann ist $p : X \to G \backslash X$, $x \mapsto Gx$ eine Überlagerung.
 \minisec{Beweis}
@@ -1831,7 +1864,7 @@ Offenbar ist $p$ surjektiv und stetig. Sei $\overline{x} := G x \in G \setminus 
 ist die disjunkte Vereinigung der $g U$, $g \in G$. \bewende
 % subsection 12.2 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiele für edk-Wirkungen]{Beispiel} % (fold)
 \label{sub:12.3}
 \begin{enumerate}[(1)]
 	\item $\mathds{Z}^n \wirkung \mathds{R}^n$ mit $z \cdot x := x + z$ ist eine e.d.k. Wirkung: Ist $\varepsilon < \frac{1}{2}$ so gilt 
@@ -1845,22 +1878,28 @@ ist die disjunkte Vereinigung der $g U$, $g \in G$. \bewende
 		\nicefrac{\mathds{Z}}{2} \backslash S^n \cong \mathds{R}P^n
 	\]
 	Wir erhalten eine Überlagerung $S^n \to \mathds{R}P^n$. 
-	\item Zu $m,n \in \mathds{Z}$ sei $f_{n,m} : \mathds{R}^2 \to \mathds{R}^2$ mit $f_{n,m} (x,y) = (x+ h, (-1)^n y + m)$. Dann ist 
+	\item Zu $m,n \in \mathds{Z}$ sei $f_{n,m} : \mathds{R}^2 \to \mathds{R}^2$ mit $f_{n,m} (x,y) = (x + n, (-1)^n y + m)$. Dann ist 
 	\[
 		G := \set[f_{n,m}]{n,m \in \mathds{Z}} 
 	\]
 	eine Gruppe bezüglich der Verknüpfung von Abbildungen. $f_{n,m} \circ f_{n',m'} = f_{n+n', m+ (-1)^n m'}$. Die kanonische Wirkung von $G$ auf $\mathds{R}^2$ 
 	$f_{n,m} \cdot x := f_{n,m}(x)$ ist e.d.k., da 
 	\[
-		f_{n,m} \enbrace*{U_\varepsilon(x)} \cap f_{n',m'} \enbrace*{U_\varepsilon(x)} = \emptyset  
+		f_{n,m} \enbrace[\big]{U_\varepsilon(x)} \cap f_{n',m'} \enbrace[\big]{U_\varepsilon(x)} = \emptyset  
 	\]
-	für $(n,m) \not= (n',m')$ und $\varepsilon < \frac{1}{2}$. Der Quotient $G\backslash \mathds{R}^1 =: K$ heißt die \Index{Kleinsche Flasche}. Wir erhalten eine Wirkung
-	$\mathds{R}^2 \to K$. \\
+	für $(n,m) \not= (n',m')$ und $\varepsilon < \frac{1}{2}$. Der Quotient $G\backslash \mathds{R}^2 =: K$ heißt die \Index{Kleinsche Flasche}. Wir erhalten eine Wirkung
+	$\mathds{R}^2 \to K$. 
+	\begin{figure}[h]
+		\centering{
+		\includegraphics[height=4cm, keepaspectratio]{Bilder/Klein_bottle.pdf}
+		\caption{Kleinsche Flasche, \href{https://en.wikipedia.org/wiki/File:Klein_bottle.svg}{Quelle}}
+		}
+	\end{figure}
 	Übung: $K \cong T_{\substack{S^1 \to S^1 \\ z \mapsto -z}}$ 
 \end{enumerate}
 % subsection 12.3 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Zusammenhang der Fundamentalgruppe mit einer edk-Wirkung]{Satz} % (fold)
 \label{sub:12.4}
 Sei $X$ wegzusammenhängend und einfach zusammenhängend. Sei $G \wirkung X$ eine e.d.k. Wirkung. Für jedes $\overline{x}_0 \in G \backslash X$ ist dann 
 \[
@@ -1893,7 +1932,204 @@ Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übu
 Nach Satz \ref{sub:12.4} ist daher $\pi_1(\mathds{R}P^n, x_0) = \nicefrac{\mathds{Z}}{2}$ für $n \ge 2$. Es folgt $\mathds{R}P^n \not\cong S^n$ für $n \ge 2$. 
 (Andererseits ist $\mathds{R}P^1 \cong S^1$.)
 % subsection 12.5 (end)
+
+\subsection[Definition: Decktransformation]{Definition} % (fold)
+\label{sub:12.6}
+Sei $p : \hat{X} \to X$ eine Überlagerung. Eine \Index{Decktransformation} von $p$ ist ein Homöomorphismus $f : \hat{X} \to \hat{X}$, sodass $p \circ f = p$. Die 
+Decktransformationen von $p$ bilden eine Gruppe $\Delta(p)$. Diese Gruppe wirkt in kanonischer Wiese auf $\hat{X}$.
+% subsection 12.6 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:12.7}
+Sei $p : \hat{X} \to X$ eine Überdeckung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Wirkung der Decktransformationsgruppe $\Delta(p)$ auf $\hat{X}$ eigentlich
+diskontinuierlich.
+\minisec{Beweis}
+Wir zeigen zunächst, dass die Wirkung frei ist. Sei $f \in \Delta(p)$ und $x \in \hat{X}$ mit $f(x) = x$. Zu zeigen: $f =\id_{\hat{X}}$.
+Sei $y \in \hat{X}$ und $\hat{\omega} : [0,1] \to \hat{X}$ ein
+Weg von $x$ nach $y$. Dann sind $\hat{\omega}$ und $f \circ \hat{\omega}$ zwei Hebungen von $\omega := p \circ \hat{\omega}$. Da 
+$\hat{\omega}(0) = x = f(x) = f \circ \hat{\omega}(0)$ folgt mit der Eindeutigkeit im Homotopiehebungssatz $\hat{\omega} = f \circ \hat{\omega}$ und insbesondere $y=f(y)$.
+Da $y$ beliebig war, ist $f= \id_{\hat{X}}$.
+
+Wir können nun zeigen, dass die Wirkung eigentlich diskontinuierlich ist. Sei $x \in \hat{X}$. Sei $U$ eine elementare Umgebung von $p(x)$. Dann ist $p ^{-1}(U)$ die 
+disjunkte Vereinigung von offenen Mengen $V$, $V \in \mathcal{V}$ von denen jede homöomorph auf $U$ abgebildet wird. Sei $V_0 \in \mathcal{V}$ mit $x \in V_0$. Sei 
+$f \in \Delta(p)$, $f \not= \id$. Für $y \in V_0$ gilt dann $p \enbrace*{f(y)} = p(y) $, $f(y) \not=y$ folgt $f(y) \not\in V_0$. Andernfalls wäre $p\big|_{V_0}$ nicht
+injektiv. Daher $f(V_0) \cap V_0 = \emptyset$. \bewende
+% subsection 12.7 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:12.8}
+\begin{wrapfigure}{R}{3cm}
+	\begin{tikzcd}
+		\hat{X} \rar{p} \dar{q}& X \\
+		H \backslash \hat{X} \urar[swap]{q'}&
+	\end{tikzcd}
+\end{wrapfigure}
+Sei $p : \hat{X} \to X$ eine Überlagerung wobei $\hat{X}$ wegzusammenhängend ist. Sei $H \le \Delta(p)$ eine Untergruppe. Dann ist auch die Wirkung $H \wirkung \hat{X}$
+eigentlich diskontinuierlich und die Quotientenabbildung $q : \hat{X} \to H \backslash \hat{X}$ eine Überlagerung. Weiter ist $q' : H \backslash \hat{X} \to X$ mit
+$q'(Hx) := p(x)$ stetig, da $q' \circ q = p$ stetig ist. Ist $U \subseteq X$ elementar für $p$, so ist $U$ auch elementar für $q'$. $q'$ ist also auch eine Überlagerung.
+Insgesamt haben wir also jeder Untergruppe von $\Delta (p)$ eine Überlagerung $H \backslash \hat{X}$ zugeordnet, die zwischen $\hat{X}$ und $X$ liegt.
+% subsection 12.8 (end)
+
+\subsection[Definition: Normale Überlagerung]{Definition} % (fold)
+\label{sub:12.9}
+Sei $p : \hat{X} \to X$ eine Überlagerung. Für $x \in X$ wirkt dann $\Delta(p)$ auf $p^{-1}(x)$. Die Überlagerung heißt 
+\bet{normal}\index{Überlagerung!normal}, falls diese Wirkung transitiv ist, d.h. falls es zu $\hat{x}, \hat{y} \in p^{-1}(x)$ immer $f \in \Delta(p)$ gibt mit 
+$f(\hat{x})= \hat{y}$.
+% subsection 12.9 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:1210}
+Sei $\hat{X} \xrightarrow{p} X $ eine normale Überlagerung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Abbildung $q' : \Delta(p)\backslash \hat{X} \to X$,
+$q' \enbrace*{\Delta(p) x} = p(x)$ ein Homöomorphismus. \\
+Wenn zusätzlich $\hat{X}$ einfach zusammenhängend und wegzusammenhängend ist, dann gilt $\pi_1(X, x_0) \cong \Delta(p)$ für einen beliebigen Basispunkt $x_0 \in X$.
+\minisec{Beweis}
+Wir haben schon gesehen, dass $q'$ eine Überlagerung ist. Unabhängig davon ob $p$ normal ist. Ist $p$ normal, so ist $q'$ bijektive Überlagerung und daher Homöomorphismus.
+\bewende 
+% subsection 1210 (end)
 % section 12 (end)
+\newpage
+
+\section{Klassifikation von Überlagerungen} % (fold)
+\label{sec:13}
+
+\subsection{Hebungssatz} % (fold)
+\label{sub:131}
+Sei $p: \hat{X} \to X$ eine Überlagerung. Sei $x_0 \in X, \hat{x}_0 \in \hat{X}$, $p(\hat{x}_0)= x_0$. Sei $Z$ wegzusammenhängend und lokal wegzusammenhängend. Sei 
+$z_0 \in Z$, $f : Z \to X$ stetig mit $f(z_0)= x_0$. Dann gibt es eine Hebung $\hat{f} : Z \to \hat{X}$ mit $\hat{f} (z_0) = \hat{x}_0$ genau dann, wenn 
+\[
+	f_*\enbrace[\big]{\pi_1 (Z, z_0)} \subseteq  p_* \enbrace[\big]{\pi_1(\hat{X}, \hat{x}_0)} \tag*{$(\star)$}
+\]
+als Untergruppe von $\pi_1(X,x_0)$ gilt. In diesem Fall ist $\hat{f}$ eindeutig.
+\[
+	\begin{tikzcd}
+		X & \hat{X} \lar{p} \\
+		Z \uar{f}  \urar[dashed, swap]{\hat{f}}&
+	\end{tikzcd}
+\]
+\minisec{Beweis}
+Existiert $\hat{f}$, so folgt $(\star)$ aus $f_* = p_* \circ\hat{f}_*$. Sei umgekehrt $(\star)$ erfüllt. Sei $z\in Z$. Sei $\omega : [0,1]\to Z$ ein Weg von $z_0$ nach $z$.
+Sei $\hat{\omega} : [0,1] \to \hat{X}$ die eindeutige Hebung von $f \circ \omega$ mit $\hat{\omega}(0)= \hat{x}_0$ (Homotopiehebungssatz, \ref{sub:108}). Existiert 
+$\hat{f}$ so ist auch $\hat{f} \circ \omega$ eine Hebung von $f \circ \omega$ mit $\hat{f} \circ \omega (0) = \hat{f}(z_0)= \hat{x}_0$, also 
+$\hat{\omega} = \hat{f} \circ \omega$ und insbesondere ist $\hat{f}(z)= \hat{f} \enbrace[\big]{\omega(1)} = \hat{\omega}(1)$. Daher ist $\hat{f}$ eindeutig, falls es 
+existiert.
+
+Zur Existenz setzen wir $\hat{f}(z) := \hat{\omega}(1)$. Wir müssen zeigen:
+\begin{description}
+	\item[Wohldefiniertheit:] Sei $\eta : [0,1] \to Z$ ein zweiter Weg von $z_0$ nach $z$. Sei $\hat{\eta} : [0,1] \to \hat{X}$ die zugehörige Hebung. Zu zeigen: 
+	$\hat{\eta}(1) = \hat{\omega}(1)$. Betrachte die Schleife $\overline{\omega} * \eta$ in $Z$. Dann ist $\overline{\hat{\omega}} * \hat{\eta}$ eine Hebung von
+	$f \circ (\overline{\omega} * \eta)$. Aus $(\star)$ folgt, dass $f \circ (\overline{\omega} * \eta )$ im Bild von $p_* : \pi_1(\hat{X}, \hat{x}_0) \to \pi_1(X,x_0)$ 
+	liegt. Mit dem Homotopiehebungssatz ergibt sich, dass auch $\overline{\hat{\omega}} * \hat{\eta}$ eine Schleife ist (Übung!). Damit folgt 
+	$\hat{\omega}(1)= \hat{\eta}(1)$
+	\item[Stetigkeit:] Sei $U \subseteq \hat{X}$ offen. Sei $z \in \hat{f} ^{-1} (U)$. Sei $V$ eine elementare Umgebung von $f(z)$. Indem wir $V$ wenn nötig klein machen
+	erhalten wir eine offene Umgebung $V'$ von $\hat{f}(z)$, die unter $p$ homöomorph auf $V$ abgebildet wird. Da $f$ stetig ist und $Z$ lokal wegzusammenhängend ist, gibt
+	es eine wegzusammenhängende Umgebung $W$ von $z$ mit $f(W) \subseteq V$. Sei nun $\omega : [0,1] \to Z$ ein Weg von $z_0$ nach $z$. Zu $z' \in W$ gibt es einen Weg
+	$\eta : [0,1] \to W$ von $z$ nach $z'$ und $\omega * \eta$ ist ein Weg von $z_0$ nach $z'$. Insbesondere ist 
+	\[
+		\hat{f}(z') = \widehat{(\omega * \eta)} (1)= \hat{\omega} * p\big|_{V'} ^{-1} (\eta) (1) = \enbrace*{p \big|_{V'}} ^{-1} \enbrace*{\eta(1)} \in V  
+	\]
+	Also $\hat{f}(W) \subseteq V' \subseteq U$. \bewende
+\end{description}
+% subsection 131 (end)
+
+\subsection{Klassifikationssatz (Eindeutigkeit)} % (fold)
+\label{sub:132}
+Seien $p_1 : \hat{X}_1 \to X$, $p_2 : \hat{X}_2 \to X$ zwei Überlagerungen. Dabei seien $\hat{X}_1$ und $\hat{X}_2$ wegzusammenhängend und lokal wegzusammenhängend.
+Seien $\hat{x}_1 \in \hat{X}_1$, $\hat{x}_2 \in \hat{X}_2$ mit $p_1(\hat{x}_1) = x_0 = p_2(\hat{x}_2)$.
+Dann sind äquivalent:
+\begin{enumerate}[a)]
+	\item Es gibt einen Homöomorphismus $f : \hat{X}_1 \to \hat{X}_2$ mit $p_2 \circ f = p_1$ und $f(\hat{x}_1) = \hat{x}_2$.
+	\item ${p_1}_*\enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} = {p_2}_* \enbrace*{\pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}}$ als Untergruppen von $\pi_1(X,x_0)$
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[a) $\Rightarrow$ b):] Ist $f$ wie in a), so ist $f_* : \pi_1 \enbrace*{\hat{X}_1, \hat{x}_1} \to \pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}$ ein Isomorphismus und es 
+	folgt 
+	\[
+		(p_1)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} =  (p_2 \circ f)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} 
+		= (p_2)_* \circ (f)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} = (p_2)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}}
+	\]
+	\item[b) $\Rightarrow$ a):] Betrachte
+	\[
+		\begin{tikzcd}
+			\mbox{ } & \hat{X}_2 \dar{p_2}\\
+			\hat{X}_1 \rar{p_1} \urar[dashed]{f}& X
+		\end{tikzcd}
+	\]
+	Hebungssatz $\Rightarrow \exists$ $f : \hat{X}_1 \to \hat{X}_2$ mit $p_2 \circ f = p_1$, $f(\hat{x}_1) = \hat{x}_2$. Weiter ist
+	\[
+		\begin{tikzcd}
+			\mbox{} & \hat{X}_1\dar{p_1} \\
+			\hat{X}_2 \rar{p_2} \urar[dashed]{g}&  X
+		\end{tikzcd}
+	\]
+	Wieder liefert der Hebungssatz: $\exists \, g : \hat{X}_2 \to \hat{X}_1$ mit $p_1 \circ  g = p_2$, $g(\hat{x}_2) = \hat{x}_1$. Betrachte nun
+	\[
+		\begin{tikzcd}[column sep=4em, row sep=4em]
+			\mbox{ } & \hat{X}_1 \dar{p_1}\\
+			\hat{X}_1 \rar{p_1} \urar[swap]{\id_{\hat{X}_1}} \urar[bend left]{g \circ f} & X
+		\end{tikzcd}
+	\]
+	Die Eindeutigkeit im Hebungssatz liefert $g \circ f = \id_{\hat{X}_1}$. Analog folgt $f \circ g = \id_{\hat{X}_2}$ \bewende.
+\end{description}
+% subsection 132 (end)
+
+\subsection{Satz (Universelle Überlagerung)} % (fold)
+\label{sub:133}
+Sei $X$ wegzusammenhängend, lokal wegzusammenhängend und lokal einfach zusammenhängend. Dann gibt es eine wegzusammenhängende und einfach zusammenhängende  Überlagerung 
+$\tilde{X} \xrightarrow{p} X $
+\minisec{Konstruktionsskizze}
+Sei $x_0 \in X$. Sei $P = \set[{\omega : [0,1] \to X \text{ Weg}}]{\omega(0)=x_0} $. Sei $\tilde{X}:= \nicefrac{P}{\text{Homotopie mit festen Endpunkten}}$. Dann induziert
+$\omega \mapsto \omega(1)$ eine wohldefinierte Abbildung $p : \tilde{X} \to X$. Sei $\omega \in P$ und $V$ eine wegzusammenhängende einfach zusammenhängende Umgebung
+von $\omega(1)$ in $X$. Setze 
+\[
+	U(V,\omega) = \set[{[\omega * \eta]}]{\rule{0cm}{1em} \eta : [0,1] \to V \text{ Weg mit } \eta(0)= \omega(1)} 
+\]
+Die $U(V,\omega)$ bilden die Basis der Topologie von $\tilde{X}$. Da $V$ wegzusammenhängend und einfach zusammenhängend ist, ist 
+\[
+	p \Big|_{U(V,\omega)} : U(V,\omega) \to V
+\]
+bijektiv. Da $X$ lokal wegzusammenhängend und lokal einfach zusammenhängend ist, ist $p \big|_{U(V,\omega)}$ sogar ein Homöomorphismus. Damit ist $V$ eine elementare 
+Umgebung von $\omega(1)$. Da $X$ wegzusammenhängend ist, ist $p$ auch surjektiv und $p : \tilde{X} \to X$ eine Überlagerung.
+
+\uline{$\tilde{X}$ ist wegzusammenhängend:} Sei $\tilde{x}_0 := [c_{x_0}] \in \tilde{X}$. Sei $\tilde{x} = [\omega] \in \tilde{X}$. Sei $\omega_s : [0,1] \to X$ mit
+\[
+	\omega_s(t) = \begin{cases}
+		\omega(t), &\text{ falls }t \le s\\
+		\omega(s), &\text{ falls } t  \ge s
+	\end{cases}
+\]
+Dann ist $\alpha : [0,1] \to \tilde{X}$ mit $\alpha(s) = [\omega_s]$ ein Weg von $\tilde{x}_0$ nach $\tilde{x}$.
+% subsection 133 (end)
+
+\subsection[Definition; Universelle Überlagerung]{Definition} % (fold)
+\label{sub:134}
+$\tilde{X} \xrightarrow{p} X $ heißt die \bet{universelle Überlagerung}\index{Überlagerung!universelle} von $X$.
+% subsection 134 (end)
+
+\subsection{Klassifikationssatz (Existenz)} % (fold)
+\label{sub:135}
+Sei $X$ wegzusammenhängend, lokal wegzusammenhängend und lokal einfach zusammenhängend. Sei $x_0 \in X$. Dann gibt es zu jeder Untergruppe $H \le \pi_1(X,x_0)$ eine
+Überlagerung $q : \hat{X} \to X$ und $\hat{x}_0 \in p ^{-1} (x_0)$ mit $q_* \enbrace*{\pi_1(\hat{X}, \hat{x}_0)} = H $
+\minisec{Beweis}
+Sei $p : \tilde{X} \to X$ die universelle Überlagerung. Der Hebungssatz impliziert, dass $p : \tilde{X} \to X$ normal ist. Es folgt $\Delta(p) \backslash \tilde{X} \cong X$
+und $\pi_1(X, x_0) \simeq \Delta(p)$. Genauer: Zu $\tilde{x}_0 \in p ^{-1}(x_0)$ gibt es einen Isomorphismus $\varphi : \Delta (p) \to \pi_1(X,x_0)$ mit 
+\[
+	\varphi(f) = [p \circ \tilde{\omega}_f]
+\]
+wobei $\tilde{\omega} : [0,1] \to \tilde{X}$ ein Weg von $\tilde{x}_0$ nach $f (\tilde{x}_0)$ ist. Setze $H_\Delta := \varphi ^{-1}(H)  \le \Delta(p)$. Wir erhalten
+Überlagerungen $\tilde{X} \xrightarrow{q'} H_\Delta \backslash \tilde{X} \xrightarrow{q} X $ mit $q'(x) = H_\Delta x$, $q (H_\Delta x) = p(x)$. Da $\tilde{X}$ einfach
+zusammenhängend ist, ist $\pi_1 \enbrace*{ H_\Delta \backslash \tilde{X}, H_\Delta \hat{x}_0} \cong H_\Delta$. Sei $\hat{x}_0 := H_\Delta \tilde{x}_0$.
+Genauer gibt es einen Isomorphismus $\psi : H_\Delta \to \pi_1 \enbrace*{H_\Delta \backslash \tilde{X}, \hat{x}_0}$ mit
+\[
+	\psi(f) = [q' \circ  \omega_f]
+\]
+Es folgt 
+\[
+	q_* \enbrace*{\psi(f)} = q_* [q' \circ \omega_f] = [q \circ q' \circ \omega_f] = [p \circ \omega_f] = \psi(f) 
+\]
+Also $q_* \enbrace*{\pi_1 \enbrace*{H_\Delta \backslash \tilde{X}, \hat{x}_0}} = H $. \bewende
+% subsection 135 (end)
+% section 13 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}

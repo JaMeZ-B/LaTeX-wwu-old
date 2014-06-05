@@ -33,12 +33,13 @@
 \label{sub:11}
 \begin{itemize}
 	\item Sei $G$ eine Gruppe, $X \not= \emptyset$ Menge. Eine \Index{Gruppenwirkung} von $G$ auf $X$ ist (gegeben durch) einen Gruppenhomomorphismus 
-	$\varphi : G \to \Sym(X)$. $\ker \varphi$ heißt \Index{Kern der Wirkung}.
+	$\varphi : G \to \Sym(X)$. $\ker \varphi$ heißt \Index{Kern der Wirkung}. Wir schreiben auch kurz $g(x)$ für $\varphi(g)(x)$.
 	\item Für $x \in X$ heißt $G_x = \set[g \in G]{g(x) = x} \le G $ der \Index{Stabilisator} von $x$.
 	\item Die \Index{Bahn} von $x \in X$ unter $G$ ist $G(x) = \set[g(x)]{g \in G} \subseteq X$. 
 	\item Eine Gruppenwirkung heißt \bet{transitiv}\index{Gruppenwirkung!transitive}, wenn $G(x)=X$ für ein $x \in X$.
 	\item Eine Gruppenwirkung heißt \bet{treu}\index{Gruppenwirkung!treue}, falls $\ker \varphi = \set{1_G}$. 
 \end{itemize}
+Für eine alternative Definition siehe Anhang \ref{sub:anh_1} auf Seite \pageref{sub:anh_1}.
 % subsection 11 (end)
 
 \subsection[Bemerkung über eine Abbildung $\nicefrac{G}{G_x} \to G(x)$]{Bemerkung} % (fold)
@@ -70,12 +71,14 @@ Die letzten beiden Sätze lassen sich mit dem ersten beweisen!
 		\[
 			\varphi : G \to \Sym(G) , \quad g \mapsto\rho_g \enspace \text{ mit } \enspace\rho_g(x) = x \cdot g
 		\]
-		Gruppenhomomorphismus: $\rho_{g h} (x) = x \cdot g \cdot h = \rho_h \circ \rho_g (x)$.
+		Gruppenhomomorphismus\footnote{Beachte: Die Addition in $\Sym(X)$ ist die \emph{linksseitige} 
+		Komposition von Abbildungen! Wir wollen also, dass $g \cdot h$ folgendermaßen wirkt: Zuerst $g$ wirken lassen und dann $h$.}: 
+		$\rho_{g h} (x) = x \cdot g \cdot h = \rho_h \circ \rho_g (x)$.
 		\item $G$ wirkt durch Linksmultiplikation auf sich selbst (regulär) $\lambda_g (x) = g ^{-1} \cdot x$.
 	\end{enumerate}
 	\item $G$ operiert durch Konjugation auf sich selbst, d.h. $\kappa : G  \to \Aut(G) \le \Sym(G)$, $g \mapsto \kappa_g$, wobei $\kappa_g(x) = g ^{-1} \cdot x \cdot  g$
 	\[
-		g \cdot  h \mapsto \kappa_{g \cdot h} \quad \kappa_{g \cdot h} (x) = h ^{-1} \cdot g ^{-1}\cdot x \cdot g \cdot h
+		g \cdot  h \mapsto \kappa_{g \cdot h} \quad \kappa_{g \cdot h} (x) = h ^{-1} \cdot g ^{-1}\cdot x \cdot g \cdot h = \kappa_h \circ \kappa_g (x)
 	\]
 	Dann ist $G_x = \set[g \in G]{g ^{-1} \cdot x \cdot g = x} = Z_G(x) $ der \Index{Zentralisator} von $x$ in $G$. Der Kern der Wirkung ist das \Index{Zentrum}  von $G$ 
 	$Z(G) = \set[g \in G]{x \cdot g = g \cdot x \text{ für alle } x \in G}$.
@@ -87,9 +90,9 @@ Die letzten beiden Sätze lassen sich mit dem ersten beweisen!
 
 \subsection{Bahnengleichung} % (fold)
 \label{sub:14}
-Setze $G(X) = \set[G(x)]{x \in X}$. Dann ist $X = \dot \bigcup \set[G(x)]{G(x) \in G(X)} $. Falls $X$ endlich ist gilt also
+Es gilt: $X = \dot{\bigcup} \set[G(x)]{x \in X} $, denn für jedes $x\in X$ ist $x\in G(x)$. Falls $X$ endlich ist gilt also
 \[
-	\abs*{X} = \sum \abs*{G(x)} = \sum \abs*{\nicefrac{G}{G_x}} = \sum [G : G_x] \tag{nach \ref{sub:12}}  
+	\abs*{X} = \sum \abs*{G(x)} = \sum \abs*{\nicefrac{G}{G_x}} = \sum [G : G_x]. \tag{nach \ref{sub:12}}  
 \]
 Insbesondere ist $\abs*{G(x)} = \abs*{\nicefrac{G}{G_x}} = [G : G_x] = \frac{\abs*{G} }{\abs*{G_x} }  $ falls $G$ endlich ist. (Bijektion aus \ref{sub:12}) \\
 \bet{Spezialfall:} Wirkung von $G$ durch Konjugation auf sich selbst. $\kappa_g(x) = g ^{-1}  \cdot  x \cdot g$.
@@ -97,20 +100,19 @@ Insbesondere ist $\abs*{G(x)} = \abs*{\nicefrac{G}{G_x}} = [G : G_x] = \frac{\ab
 
 \subsection{Klassengleichung} % (fold)
 \label{sub:15}
-Sei $K_G = \set[G(x)]{x \in G} =$ Menge der Konjugationsklassen. Sei $K_G^* = \set[G(x)]{x \in G\backslash Z(G)} = \set[G(x)]{ \abs*{G(x)} \ge 2 }  $. Für jede endliche 
+Sei $K_G = \set[G(x)]{x \in G}$ die Menge der Konjugationsklassen. Sei $K_G^* = \set[G(x)]{x \in G\backslash Z(G)} = \set[G(x)]{ \abs*{G(x)} \ge 2 }  $. Für jede endliche 
 Gruppe $G$ gilt dann nach \ref{sub:14}
 \[
-	\abs*{G} = \sum_{K_G} [G : Z_G(x)] = \abs*{Z(G)} + \sum_{K_G^*} [G : Z_G(x)] \bewende  
+	\abs*{G} = \sum_{K_G} [G : Z_G(x)] = \abs*{Z(G)} + \sum_{K_G^*} [G : Z_G(x)]. \bewende  
 \]
 % subsection 15 (end)
 
 \subsection[Korollar: $p$-Gruppen haben eine nichttriviales Zentrum]{Korollar} % (fold)
 \label{sub:16}
-$G$ endlich, $\abs*{G} = p^m $, $p$ prim, $m \ge 1 \Rightarrow Z(G) \not= 1$.
+$G$ endlich, $\abs*{G} = p^m $, $p$ prim, $m \ge 1 \Rightarrow Z(G) \not= 1$. Also haben $p$-Gruppen ein nicht-triviales Zentrum.
 \minisec{Beweis}
-Nach Lagrange\footnote{Ordnung einer Untergruppe teilt die Gruppenordnung. Die Umkehrung gilt nicht!} ist für jedes $x \in G$ $\abs*{Z_G(x)} = p^k $ für ein $k \le m$, 
-also ist $[G : Z_G(x)] = p^{m-k}$. Wegen $p \mid \abs*{G} $ und $\abs*{Z(G)} \ge 1 $ folgt
-$p \mid \abs*{Z(G)} $. \bewende
+Nach Lagrange\footnote{Ordnung einer Untergruppe teilt die Gruppenordnung. Die Umkehrung gilt nicht!} gilt für jedes $x \in G$, dass $\abs*{Z_G(x)} = p^k $ für ein 
+$k \le m$, also ist $[G : Z_G(x)] = p^{m-k}$. Für $x \notin Z(G)$ gilt dabei insbesondere $k < m$, denn aus $k=m$ würde $x \in Z(G)$ folgen.  Wegen $p \mid \abs*{G} $ und $\abs*{Z(G)} \ge 1 $ folgt $p \mid \abs*{Z(G)} $. \bewende
 % subsection 16 (end)
 
 \subsection[Definition: $p$-Sylowgruppe]{Definition} % (fold)
@@ -130,10 +132,10 @@ Sei $G$ eine endliche Gruppe, $p$ prim, $\abs*{G} = p^a \cdot m $ mit $(p,m) = 1
 Sei $S := \set[X \subset G]{ \abs*{X} = p^a } $. $G$ operiert auf $S$ durch Rechtsmultiplikation. Es ist
 \[
 	\abs*{S} = \binom{p^a \cdot m}{p^a} = \frac{\cancel{p^a} \cdot m \cdot  (p^a \cdot m -1) \cdot \ldots \cdot \big(p^a \cdot m - (p^a -1)\big)}{1 \cdot 2 \cdot \ldots 
-	\cdot p^a -1 \cdot \cancel{p^a}}.  
+	\cdot (p^a -1) \cdot \cancel{p^a}}.  
 \]
 Behauptung: $p \nmid \abs*{S} $. Betrachte dazu $k_i := \frac{p^a \cdot m -i}{i}$, für $1 \le i < p^a$. Wenn $p^j \mid p^a \cdot m -i$, dann ist $j < a$ und $p^j \mid i$.
-Daher sind $p^a \cdot m -i$ und $i$ durch dieselbe Potenz von $p$ teilbar, d.h. $p \nmid k_i$. Damit ist $p \nmid m \cdot k_1 \cdots k_{p^a-1} = \abs*{S}$.\\
+Daher sind $p^a \cdot m -i$ und $i$ durch dieselbe Potenz von $p$ teilbar, d.h. nach vollständigem Kürzen von $k_i$ ist dessen Zähler nicht durch $p$ teilbar. Damit ist $p \nmid m \cdot k_1 \cdots k_{p^a-1} = \abs*{S}$.\\
 Daher existiert eine $G$-Bahn $S_1 \subseteq S$ mit $p \nmid \abs*{S_1} $. Wähle $X \in S_1$, d.h. $\abs*{X}= p^a$. Setze $P := G_X$. Dann ist \marginnote{siehe Bahnengleichung \ref{sub:14}}
 \[
 	\abs*{S_1} = [G: G_X] = [G: P] 
@@ -166,7 +168,7 @@ Wenn $G$ nur eine $p$-Sylowgruppe $P \le G$ besitzt, dann ist $P \unlhd G$.
 
 \subsection{Satz (Frattini-Argument)} % (fold)
 \label{sub:19}
-Ist $G$ eine beliebige Gruppe, $H \unlhd G$ endlich und $P \le H$ eine $p$-Sylowgruppe von $H$. Dann ist $G =  N_G(P) \cdot H$, wobei
+Ist $G$ eine beliebige Gruppe, $H \unlhd G$ endlich und $P \le H$ eine $p$-Sylowgruppe von $H$. Dann ist $G =  N_G(P) \cdot H = H \cdot N_G(P)$, wobei
 $N_G(P) = \set[g \in G]{P^g = g ^{-1} \cdot P \cdot g = P} $.
 \minisec{Beweis}
 Sei $g \in G$. Dann ist $P^g \le H^g = H$ eine $p$-Sylowgruppe von $H$. Daher existiert ein $h \in H$ mit $P^g = P^h$. Dann ist $P = P^{g \cdot h^{-1}}$, d.h. 
@@ -176,6 +178,12 @@ $g \cdot h^{-1} \in N_G(P)$. Damit ist
 \]
 \minisec{Bemerkung}
 Sind $H_1, H_2 \le G$, $H_2 \le N_G(H_1)$, dann ist $H_1 \cdot H_2 = H_2 \cdot  H_1 \le G$.
+
+Beweis:
+Für alle $h_1\in H_1$ und $h_2\in H_2$ gilt:
+\[
+	h_1 \cdot h_2 =h_2 \cdot \underbrace{h_2^{-1} \cdot h_1 \cdot h_2}_{\in H_1} \quad\text{und}\quad h_2 \cdot h_1=\underbrace{h_2 \cdot h_1 \cdot h_2^{-1}}_{\in H_1}\cdot h_2. \bewende
+\]
 % subsection 19 (end)
 
 \subsection[Bemerkung zu $p$-Sylowgruppen in Normalteilern und Faktorgruppen]{Bemerkung} % (fold)
@@ -188,15 +196,17 @@ Offensichtlich gilt für eine endliche Gruppe $G$, $P \le G$ $p$-Sylowgruppe, $N
 	\end{enumerate}
 \end{multicols}
 \minisec{Beweis}
-Es ist $\abs*{N : P \cap N} \stackrel{\text{2. Iso}}{=} \abs*{PN : P} $ teilerfremd zu $p$ und $P \cap N$ ist $p$-Untergruppe von $N$. Wegen 
-$\nicefrac{\nicefrac{G}{N}}{\nicefrac{P N}{N}} \simeq \nicefrac{G}{PN}$ ist $\abs*{G : PN} \mid \abs*{G :P} $ teilerfremd zu $p$. Wegen $\abs*{PN : N} = \abs*{P : (P \cap N)}  $ ist $\nicefrac{PN}{N}$ eine $p$-Gruppe. \bewende
+Es ist $[N : P \cap N] \stackrel{\text{2. Iso}}{=} [PN : P] $ teilerfremd zu $p$, und $P \cap N$ ist $p$-Untergruppe von $N$. Es ist 
+$\nicefrac{\enbrace*{\nicefrac{G}{N}}}{\enbrace*{\nicefrac{P N}{N}}} \stackrel{\text{3. Iso}}{\simeq} \nicefrac{G}{PN}$, und $[G : PN] \mid [G :P] $ teilerfremd zu $p$. 
+Wegen $[PN : N] = [P : (P \cap N)]  $ ist $\nicefrac{PN}{N}$ eine $p$-Gruppe. \bewende
 % subsection 110 (end)
 
 \subsection[Definition: Normalreihe und Kompositionsreihe]{Definition} % (fold)
 \label{sub:111}
 Eine Folge von Untergruppen $(H_i)_{0 \le i \le n}$ mit $H_0 = G$, $H_n = \set{1_G} $, $H_{i+1} \unlhd H_i$ heißt \Index{Normalreihe} in $G$. Ist $\nicefrac{H_i}{H_{i+1}}$
-einfach für alle $i < n$, dann heißt die Folge \Index{Kompositionsreihe}. Zwei Normalreihen $(H_i)_{i \le n}$, $(K_j)_{j \le m}$ heißen \Index{äquivalent}, falls $n=m$
-und die auftretenden Quotienten $\enbrace*{\nicefrac{H_i}{H_{i+1}}}_{i \le n-1} $  nach geeigneter Permutation isomorph sind zu dem Quotienten 
+einfach\footnote{ Eine Gruppe $G$ heißt einfach, wenn sie $G$ und $\set{1_G}$ als einzige Normalteiler hat.} für alle $i < n$, 
+dann heißt die Folge \Index{Kompositionsreihe}. Zwei Normalreihen $(H_i)_{i \le n}$, $(K_j)_{j \le m}$ heißen \Index{äquivalent}, falls $n=m$
+und die auftretenden Quotienten $\enbrace*{\nicefrac{H_i}{H_{i+1}}}_{i \le n-1} $  nach geeigneter Permutation isomorph sind zu den Quotienten 
 $\enbrace*{\nicefrac{K_j}{K_{j+1}}}_{j \le n-1} $.
 % subsection 111 (end)
 
@@ -208,8 +218,8 @@ $\enbrace*{\nicefrac{K_j}{K_{j+1}}}_{j \le n-1} $.
 \end{align*}
 \minisec{Bemerkung}
 \begin{enumerate}[(i)]
-	\item Nicht jede Gruppe besitzt eine Kompositionsreihe, zB. $\mathds{Z}$ hat \emph{keine} Kompositionsreihe.
-	\item Eine Normalreihe ist genau dann Kompositionsreihe, wenn es keine echte Verfeinerung gibt. Insbesondere hat also jede endliche Gruppe eine Kompositionsreihe.
+	\item Nicht jede Gruppe besitzt eine Kompositionsreihe, zB. hat $\mathds{Z}$ \emph{keine} Kompositionsreihe.
+	\item Eine Normalreihe ist genau dann eine Kompositionsreihe, wenn es keine echte Verfeinerung gibt. Insbesondere hat also jede endliche Gruppe eine Kompositionsreihe.
 \end{enumerate}
 % subsection 112 (end)
 
@@ -1658,7 +1668,7 @@ Eine \Index{Unteralgebra} einer $R$-Algebra $A$ ist ein Unterring, der gleichzei
 \end{enumerate}
 Ein Homomorphismus von $R$-Algebren ist ein Ringhomomorphismus, der gleichzeitig $R$-linear ist.
 \minisec{Bemerkung}
-Für $y=1$ in Definition \ref{sub:38} ergibt sich $x \cdot  \alpha 1 = \alpha x$ und für $x=1$ $\alpha 1 \cdot y = \alpha \cdot y$. Also gilt 
+Für $y=1$ in Definition \ref{sub:38} ergibt sich $x \cdot  \alpha 1 = \alpha x$ und für $x=1$ ergibt sich $\alpha 1 \cdot y = \alpha \cdot y$. Also gilt 
 $\alpha 1  \cdot x = x \cdot  \alpha 1 = \alpha x$ für alle $x \in A, \alpha \in \mathds{R}$. Für $\alpha = \beta \cdot 1$ erhalten wir 
 \[
 	\alpha 1 \cdot \beta \cdot 1 = \alpha (\beta 1) = \alpha \beta \cdot 1,
@@ -1736,11 +1746,198 @@ und $B$ kommutativ, assoziativ und unital sind.
 Es genügt nachzurechnen, dass diese Multiplikation bilinear ist und die Eigenschaften  von $A,B$ sich übertragen. \bewende
 % subsection 313 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel: Erweiterung der Skalare]{Beispiel} % (fold)
 \label{sub:314}
-Sie $K$ ein Körper, $E \supseteq K$ eine Körpererweiterung und eine $K$-Algebra $A$ gegeben. Dann ist $A \otimes E$ eine $E$-Algebra mit $\dim_E(A \otimes E)= \dim_K(A)$
-nach Beispiel \ref{sub:39}, denn $1 \otimes E \subseteq C(A \otimes_K E)$ und für eine $K$-Basis $\set{u_1, \ldots , u_n}$ von $A$ ist $\set{u_1 \otimes 1, \ldots , u_n \otimes 1} $ eine $E$-Basis für $E =: A_E$. Man sagt: $A_E$ entsteht aus $A$ durch Erweiterung der Skalare.
+\begin{enumerate}[(i)]
+	\item Sei $K$ ein Körper, $E \supseteq K$ eine Körpererweiterung und eine $K$-Algebra $A$ gegeben. Dann ist $A \otimes E$ eine $E$-Algebra mit 
+	$\dim_E(A \otimes E)= \dim_K(A)$ nach Beispiel \ref{sub:39}, denn $1 \otimes E \subseteq C(A \otimes_K E)$ und für eine $K$-Basis $\set{u_1, \ldots , u_n}$ von $A$ ist 
+	$\set{u_1 \otimes 1, \ldots , u_n \otimes 1} $ eine $E$-Basis für $E =: A_E$. Man sagt: $A_E$ entsteht aus $A$ durch Erweiterung der Skalare.
+	\item Sei $A= M_n(R)$. Dann hat $A$ eine $R$-Basis $\set[e_{ij}]{i,j \le n}$ mit Multiplikation $e_{ij} \cdot e_{kl}= \delta_{jk} e_{il}$ und $\sum e_{ii} = 1$.
+	Ist $B$ eine $R$-Algebra, dann ist $A \otimes B$ ein freier $B$-(Rechts-)Modul mit derselben Basis als $B$-Modul. d.h. $M_n(R) \otimes B \simeq M_n(B)$. Für $B=M_k(R)$
+	ist also $M_n(R) \otimes M_k(R) \simeq M_{n \cdot k}(R)$.
+\end{enumerate}
+Im Folgenden untersuchen wir endlich dimensionale Algebren über einem kommutativen Körper $K$.
 % subsection 314 (end)
+
+\subsection[Definition: Zentrale Algebra]{Definition} % (fold)
+\label{sub:315}
+Eine $K$-Algebra heißt \bet{zentral}\index{Algebra!zentral}, wenn $C(A)= K \cdot 1_A$. Ist $A$ eine endlich dimensionale einfache $K$-Algebra, dann ist nach Wedderburn (\ref{sub:229}) $A \simeq M_n(D)$ für einen Schiefkörper $D$, der endliche Dimension über $K$ hat. Weiter ist 
+\[
+	C(A) \simeq C(D) =: E \supseteq K.
+\]
+Dann ist $E$ ein kommutativer Körper und wir können $A$ als $E$-Algebra auffassen. Also solche ist $A$ dann eine zentral einfache endlich dimensionale $E$-Algebra.
+\minisec{Bemerkung}
+Sind $A,B$ $K$-Algebren, dann enthält $A \otimes B$ Unteralgebren $1 \otimes B \simeq B$ und $A \otimes 1 \simeq A$. Wir geben eine interne Charakterisierung von
+Tensorprodukten an (vgl. \ref{sub:129}). 
+% subsection 315 (end)
+
+\subsection[Definition: Linear disjunkt]{Definition} % (fold)
+\label{sub:316}
+Sei $C$ eine $K$-Algebra, $U,V \subseteq C$ $K$-Untervektorräume. Dann heißen $U$ und $V$ \Index{linear disjunkt} über $K$, wenn für linear unabhängige $u_i \in U$, 
+$v_j \in V$ die Elemente $u_i v_j \in C$ linear unabhängig sind. Mit anderen Worten ist die natürliche Abbildung $U  \otimes V \to C$, $u \otimes v \mapsto u v$ injektiv.
+% subsection 316 (end)
+
+\subsection[Proposition: Isomorphie einer $K$-Algebra zum Tensorprodukt von Unteralgebren]{Proposition} % (fold)
+\label{sub:317}
+Sei $C$ eine $K$-Algebra, $A,B \subseteq C$ Unteralgebren, dann ist $C \simeq A \otimes B$, falls gilt
+\begin{enumerate}[(i)]
+	\item $A$ und $B$ sind linear disjunkt über $K$
+	\item $A B = C$
+	\item $a b = b a$ für alle $a \in A, b \in B$. {\small \color{light_gray} $(a \otimes 1)(1 \otimes b)= (1 \otimes b)(a	\otimes 1)= a \otimes b$}
+\end{enumerate}
+\minisec{Beweis}
+Die Abbildung $A \times B \to C$, $(x,y) \mapsto xy$ ist bilinear und induziert daher eine Abbildung $A \otimes B \to C$. Diese Abbildung ist injektiv nach (i), surjektiv
+nach (ii) und ein Homomorphismus nach (iii). \bewende
+% subsection 317 (end)
+
+\subsection[Definition: Einhüllende Algebra]{Definition} % (fold)
+\label{sub:318}
+Für eine $K$-Algebra $A$ heißt $A^e = A \otimes_K A^\mathrm{op}$ die \Index{einhüllende Algebra} von $A$. Sei $A \subseteq B$ eine Unteralgebra. Dann wird $B$ in 
+natürlicher Weise zu einem $A^e$-Modul, nämlich durch 
+\[
+	\enbrace*{\sum a_i \otimes b_i} y = \sum a_i \cdot y \cdot b_i
+\]
+für $a_i \in A, b_i \in A^\mathrm{op}, y \in B$. Aus der universellen Eigenschaft des Tensorprodukts folgt, dass dies eine wohldefinierte Modulwirkung beschreibt. 
+Insbesondere wird $A$ selber zum $A^e$-Modul. Die $A^e$-Untermoduln von $A$ sind genau die beidseitigen Ideale von $A$. Nach Lemma \ref{sub:225} ist 
+$\End_R(R,+) \simeq R^\mathrm{op}$, d.h. $R$-lineare Endomorphismen von $R \in \,{_R\Mod}$ sind genau die Rechtsmultiplikationen $\rho_r$ für $r \in R$. Daher ist 
+$\End_{A^e}(A)$ die Menge der Abbildungen, die sowohl Rechts- als auch Links-Multiplikation sind, d.h. Abbildungen $x \mapsto c \cdot x = x \cdot d$. Für $x=1$ erhält
+man $c=d$, d.h. $c \in C(A)$. Damit folgt $\End_{A^e}(A) \simeq C(A)$.
+% subsection 318 (end)
+
+\subsection{Satz (Dichtheitssatz für halbeinfache Moduln)} % (fold)
+\label{sub:319}
+Sei $R$ ein Ring, $M \in {_R\Mod}$ halbeinfach, $R' = \End_R (M) = C_{\End (M,+)} (\Lambda_R)$ mit $\Lambda_R = \set[\lambda_r]{r \in R} $, $R'' = \End_{R'} (M)$ \marginnote{vertauschen} 
+(für $M$ aufgefasst als $R'$-Modul). Sei $\set{x_1, \ldots , x_n} \subseteq M$,
+$a'' \in R''$, dann existiert $a \in R$ mit $a x_i = a'' x_i$ für $i=1, \ldots ,n$.
+\minisec{Beweis}
+Zuerst überlegen wir, dass jeder $R$-Untermodul $N \subseteq M$ auch ein $R''$-Untermodul ist. Schreibe $M= N \oplus P$ und $\pi : M = P \oplus N \to N$. Dann ist
+$\pi \in R'$ und $N = \pi(M)$. Daher ist für $\varphi \in R''$ also 
+\[
+	\varphi(N)= \varphi \pi (M) = \pi  \varphi(M) \subseteq N.
+\]
+D.h. $N$ ist $R''$-Untermodul von $M$. Ist nun $n=1$, dann ist $N= R x_i$ ein $R$-Untermoduln und daher auch $R''$-Untermodul. Wegen $x_1 \in N$ ist für $a'' \in R''$
+auch $a'' x_1 \in N= R x_1$. Also existiert $a \in R$ mit $a'' x_1 = a x_1$. Für $n\ge 1$ benutzen wir folgenden Trick:
+% subsection 319 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:320}
+Sei $M \in {_R\Mod}$, $R' = \End_R(M)$, $R'' = \End_{R'}(M)$. Dann ist für $\alpha \in R''$ die Abbildung $\varphi_\alpha : M^n  \to M^n$, 
+$(u_1, \ldots ,u_n)  \mapsto \enbrace*{\alpha(u_1), \ldots , \alpha(n_n)} $ ein Endomorphismus von $M^n$, ist also $\End_R(M^n)$-Modul.
+\minisec{Beweis}
+Nach Lemma \ref{sub:227} ist $\End_R(M^n) \simeq M_n(R')$. Offensichtlich ist $M^n$ auch $\End_R(M^n)$-Modul. Für die Behauptung ist also nur zu zeigen, dass für jedes 
+$\alpha \in R''$ die Abbildung $\varphi_\alpha$ mit jedem $R$-Endomorphismus von $M^n$ vertauscht. Dies ist der Fall, da $\alpha$ gerade mit jedem $R$-Endomorphismus von 
+$M$ vertauscht. \bewende
+\minisec{Beweis von \ref{sub:319}}
+Mit $M$ ist auch $M^n$ halbeinfach. Nach Lemma \ref{sub:320} ist für $\alpha'' \in R''$ und $\varphi_{a''}$ wie eben auch $\varphi_{\alpha''} \in \End_{\End_R(M^n)} (M^n)$.
+Nun wenden wir den Fall $n=1$ auf den $R$-Modul $M^n$ und $\varphi_{\alpha''}$. Damit finden wir für $(x_1, \ldots , x_n) \in M^n$ ein $\alpha \in R$ mit 
+\[
+	\varphi_{\alpha''}(x_1, \ldots , x_n)= \enbrace[\big]{\alpha''(x_1), \ldots , \alpha''(x_n)} = \alpha (x_1, \ldots , x_n) = (\alpha x_1, \ldots , \alpha x_n).
+\]
+% subsection 320 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:321}
+Ist $A$ eine endlich dimensionale zentral einfache $K$-Algebra, dann ist $A^e = A \otimes A^\mathrm{op} \simeq M_n(K)$ mit $n= \dim A$.
+\minisec{Beweis}
+Betrachte $A$ als $A^e$-Modul. Dann ist $A$ einfach und $\End_{A^e} (A) \simeq K$. Da $A$ endlich dimensional über $K$ ist, folgt aus dem Dichtheitssatz (\ref{sub:319}),
+dass $A^e \to \End_K(A)$ surjektiv ist. Da 
+\[
+	\dim_K A^e = \dim_K \End_K(A) = n^2
+\]
+folgt $A^e \simeq \End_K(A)$ und wegen $\End_K(A) \simeq M_n(K)$ folgt die Behauptung. \bewende
+% subsection 321 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:322}
+Sei $B$ eine $K$-Algebra. $A$ eine endlich dimensionale zentral einfache Unteralgebra. Dann gilt $B \simeq A \otimes_K C$, wobei $C= C_B(A)$ der Zentralisator von $A$ in 
+$B$ ist, d.h. $C= \set[x \in B]{x a = a x \enspace \forall a \in A}$. 
+
+Die Abbildung $I \mapsto A \otimes I$ ist Verbandsisomorphismus zwischen den Idealen von $B$ und 
+den Idealen von $C$ und es ist $C(B)= C(C)$
+\minisec{Beweis}
+Betrachte $B$ als $A^e$-Modul. Da $A^e$ nach Satz \ref{sub:321} einfach ist, $A^e = M_n(K)$, ist nach Wedderburn (\ref{sub:231}) 
+\(
+	B = \bigoplus A^e x_i
+\)
+direkte Summe von einfachen $A^e$-Moduln, die alle isomorph zu $A$ sind. Als $A^e$-Modul wird $A$ von $1_A$ erzeugt und es ist 
+\[
+	(a \otimes 1)1 = a \cdot 1 = 1 \cdot a = (1 \otimes a) 1
+\]
+und falls $(a \otimes 1)1 = 0$, dann ist $a=0$. Da alle $A^e x_i \simeq A$ als $A^e$-Moduln, existiert ein $c_i \in A^e x_i$ mit $(a \otimes 1)c_i = (1 \otimes a)c_i$
+und $(a \otimes 1)c_i =0$ $\Rightarrow a=0$. Daher ist $B= \bigoplus Ac_i$ mit $a c_i = c_i a$ für alle $a \in A$ und $a c_i = 0 \Rightarrow a=0$. Daher sind alle 
+$c_i \in C= C_B(A)$ und jedes Element in $B$ hat \emph{eindeutige} Darstellung der Form $\sum a_i c_i$ mit $a_i \in A$.
+
+Ist $c \in C$, $c = \sum a_i c_i$, dann folgt wegen $a c = c a$ für alle $a \in A$ auch $a a_i = a_i a$ für alle $a \in A$, d.h. $a_i \in C(A) \simeq K$. Daher ist
+$C = \sum K c_i$, d.h. $\set[c_i]{i \in I}$ ist Basis für $C$. Nach Proposition \ref{sub:317} ist $B = A \otimes_K C$. 
+
+Für den zweiten Teil sei $I \unlhd C$ ein Ideal. Dann ist $A \otimes I$ ein Ideal in $B = A \otimes C$ und es ist $(A \otimes I) \cap (1 \otimes C) = I$. Ist 
+$(x_1=1, x_2, \ldots , x_n)$ Basis für $A$, dann hat jedes $b \in B$ eine \emph{eindeutige} Darstellung der Form $b= \sum c_i \otimes x_i = \sum c_i x_i$ mit
+$c_i \in C$. Die Elemente von $A \otimes I$ sind von der Form $\sum d_i x_i$ mit $d_i \in I$. Daher folgt aus $b= \sum d_i x_i \in C$ schon $b= c_1 x_1$ mit $c_1 \in C$,
+d.h. $C \cap A I = \set{d_1 x_1 = d_1 \in I} = I$. Daher ist $I \mapsto A \otimes I$ injektiv.
+Ist $I'$ ein Ideal in $B$, dann ist $I'$ ein $A^e$-Untermodul von $B$, d.h. für $I = I' \cap C$ ist dann $I' = \sum A d_j$ mit $d_j \in I$. Daher ist $I' = A \cdot I_i$, 
+d.h. die Abbildung $I \mapsto A \otimes I$ ist surjektiv.
+
+Noch zu zeigen: $C(B) = C(C)$. "$\subseteq$"{} ist klar. Ist $c \in C(C)$, dann vertauscht $c$ mit allen $a \in A$ und mit allen $d \in C$, also $c \in C(B)$. \bewende
+% subsection 322 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:323}
+Ist $A$ eine endlich dimensionale zentral einfache $K$-Algebra, $C$ eine beliebige $K$-Algebra, dann ist die Abbildung $I \mapsto A \otimes I$ ein Verbandsisomorphismus 
+zwischen Idealen von $B = A \otimes C$ und den Idealen von $C$ und es ist $C(B) = C(C)$.
+\minisec{Beweis}
+Identifiziere $A,C$ mit $A \otimes I$ bzw. $1 \otimes C$ in $B= A \otimes C$. Behauptung: $C = C_B(A)$. Klar "$\subseteq $"{}. "$\supseteq$"{} wie eben. Daher folgt die
+Behauptung aus \ref{sub:322}. \bewende
+% subsection 323 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:324}
+Ist $A$ eine endlich dimensionale zentral einfache $K$-Algebra, $C$ eine beliebige $K$-Algebra, dann ist $A \otimes C$ einfach genau dann, wenn $C$ einfach ist und 
+$A \otimes C$ ist zentral genau dann, wenn $C$ zentral ist.
+Insbesondere gilt: Ist $A$ endlich dimensionale zentral einfache $K$-Algebra, $E \supseteq K$ eine Körpererweiterung, dann ist $A_E = A \otimes E$ endlich dimensionale
+zentral einfache $E$-Algebra.
+% subsection 324 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:325}
+Sind $A_1, \ldots , A_n$ endlich dimensionale zentral einfache $K$-Algebren, dann ist auch $A_i \otimes \ldots \otimes A_n$ zentral einfach und endlich dimensional.
+% subsection 325 (end)
+
+\subsection[Definition: Zerfällungskörper über zerfallende zentral einfache $K$-Algebra]{Definition} % (fold)
+\label{sub:326}
+$M_n(K)$ heißt zerfallende zentral einfache $K$-Algebra. Ist $A$ endlich dimensionale zentral einfache $K$-Algebra, dann heißt eine Körpererweiterung $E \supseteq K$
+ein Zerfällungskörper für $A$, falls $A_E = A \otimes_K E \simeq M_n(E)$ für ein $n \in \mathds{N}$. Man sagt $A$ zerfällt über $E$. 
+% subsection 326 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:327}
+\begin{enumerate}[(i)]
+	\item Ist $E$ Zerfällungskörper für $A$, dann auch jedes $E' \supseteq E $. Insbesondere ist jedes $E \supseteq K$ Zerfällungskörper für $M_n(K)$. 
+	\item Sind $A,B$ zentral einfach und $E$ Zerfällungskörper für $A,B$, dann auch für $A \otimes B$: Es ist 
+	\[
+		(A \otimes B)_E = (A \otimes B) \otimes E \simeq (A \otimes_k B) \otimes_K E \simeq (A \otimes E) \otimes (B \otimes E).
+	\]
+	$M_{n k}(E) \simeq M_n(E) \otimes M_k(E)$.
+	\item Ist $E$ Zerfällungskörper für $A$ ,dann auch für $A^\mathrm{op}$: 
+	\[
+		A \otimes E \otimes E \otimes A^\mathrm{op} = M_n(E) = M_r(E) \otimes (E \otimes A^\mathrm{op}) = M_r(E \otimes A^\mathrm{op})
+	\]
+	Daher ist $E \otimes A^\mathrm{op} \simeq M_s(E)$ mit $r \cdot s = n$.
+	\item Ist $A \simeq M_r(B)$, $B$ zentral einfach über $K$, dann ist $E \supseteq K$ Zerfällungskörper von $A$ genau dann, wenn $E$ Zerfällungskörper von $B$ ist. Es ist
+	\[
+		A \otimes E \simeq M_r(B) \otimes E \simeq M_r(K) \otimes B \otimes E \simeq M_r(B_E).
+	\]
+\end{enumerate}
+% subsection 327 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:328}
+Sei $K$ algebraisch abgeschlossen, $A$ eine endlich dimensionale $K$-Algebra. Ist $A$ nullteilerfrei, dann ist $A=K$. Insbesondere existieren keine echten endlich 
+dimensionalen Schiefkörper über einem algebraisch abgeschlossenen Körper $K$.
+\minisec{Beweis}
+Sei $a \in A$. Da $A$ endliche $K$-Dimension hat, sind die Potenzen von $a$ linear abhängig über $K$. Sei etwa $f(a) = a^n c_1  + a^{n-1} c_2 + \ldots + c_n = 0$ mit
+$c_i \in K$ und $n$ minimal. Da $K$ algebraisch abgeschlossen ist, hat $f(X) \in K[X]$ eine Nullstelle $\lambda  \in K$. Daher ist $f(X)= (X- \lambda )\cdot g(X)$ mit 
+$\deg(g) = n-1$. Nach Vorraussetzung ist aber $g(a) \not= 0$, wegen $n$ minimal. Weil $A$ nullteilerfrei ist, folgt $a= \lambda  \in K$. \bewende
+% subsection 328 (end)
 % section 3 (end)
 \newpage
 
@@ -1751,8 +1948,29 @@ nach Beispiel \ref{sub:39}, denn $1 \otimes E \subseteq C(A \otimes_K E)$ und f�
 
 
 \cleardoubleoddemptypage
+\appendix
+\section{Anhang} % (fold)
+\label{sec:anhang}
+\subsection{Alternative Definition von Gruppenwirkungen} % (fold)
+\label{sub:anh_1}
+Eine \Index{Gruppenwirkung} von $G$ auf $X$ ist (gegeben durch) eine Abbildung $G\times X \to X$, $(g,x)\mapsto g\cdot x$, mit folgenden Eigenschaften:
+\begin{itemize}
+	\item $e_G \cdot x= x$, und
+	\item $g\cdot(h\cdot x)=(gh)\cdot x$,
+\end{itemize}
+für alle $x \in X$ und alle $g,h\in G$.
+\minisec{Rechts-Gruppenwirkung}
+Die oben angegebenen Definitionen beschreiben eine \bet{linksseitige Gruppenwirkung}\index{Gruppenwirkung!linksseitige}.\\
+Eine \bet{rechtsseitige Gruppenwirkung}\index{Gruppenwirkung!rechtsseitige} ist (gegeben durch) eine Abbildung $X\times G \to X$, $(x,g)\mapsto x\cdot g$, 
+wobei für alle $x\in X$ und alle $g,h\in G$ die Bedingungen $x\cdot e=x$ und $(x\cdot g) \cdot h =x \cdot (gh)$ erfüllt sind.\\
+Alternativ kann eine rechtsseitige Gruppenwirkung durch einen Gruppenhomomorphismus $\varphi : G \to \Sym(X)^\mathrm{op}$ beschrieben werden, 
+wobei $\Sym(X)^\mathrm{op}:=(\Sym(X),*)$ mit $f*g:=g\circ f$ ist. (vgl. Definition \ref{sub:228}).
+% subsection anh_1 (end)
+% section anhang (end)
+\newpage
 \pagenumbering{Alph}
 \setcounter{page}{1}
+
 \printindex
 \listoffigures
 \end{document}
