@@ -1950,7 +1950,7 @@ $q'(Hx) := p(x)$ stetig, da $q' \circ q = p$ stetig ist. Ist $U \subseteq X$ ele
 Insgesamt haben wir also jeder Untergruppe von $\Delta (p)$ eine Überlagerung $H \backslash \hat{X}$ zugeordnet, die zwischen $\hat{X}$ und $X$ liegt.
 % subsection 12.8 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Normale Überlagerung]{Definition} % (fold)
 \label{sub:12.9}
 Sei $p : \hat{X} \to X$ eine Überlagerung. Für $x \in X$ wirkt dann $\Delta(p)$ auf $p^{-1}(x)$. Die Überlagerung heißt 
 \bet{normal}\index{Überlagerung!normal}, falls diese Wirkung transitiv ist, d.h. falls es zu $\hat{x}, \hat{y} \in p^{-1}(x)$ immer $f \in \Delta(p)$ gibt mit 
@@ -1959,8 +1959,9 @@ $f(\hat{x})= \hat{y}$.
 
 \subsection{Proposition} % (fold)
 \label{sub:1210}
-Sei $\hat{X} \xrightarrow{p} X $ eine normale Überlagerung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Abbildung $q' : \Delta(p)\backslash X \to X$,
-$q' \enbrace*{\Delta(p) x} = p(x)$ ein Homöomorphismus.
+Sei $\hat{X} \xrightarrow{p} X $ eine normale Überlagerung wobei $\hat{X}$ wegzusammenhängend ist. Dann ist die Abbildung $q' : \Delta(p)\backslash \hat{X} \to X$,
+$q' \enbrace*{\Delta(p) x} = p(x)$ ein Homöomorphismus. \\
+Wenn zusätzlich $\hat{X}$ einfach zusammenhängend und wegzusammenhängend ist, dann gilt $\pi_1(X, x_0) \cong \Delta(p)$ für einen beliebigen Basispunkt $x_0 \in X$.
 \minisec{Beweis}
 Wir haben schon gesehen, dass $q'$ eine Überlagerung ist. Unabhängig davon ob $p$ normal ist. Ist $p$ normal, so ist $q'$ bijektive Überlagerung und daher Homöomorphismus.
 \bewende 
@@ -1982,7 +1983,7 @@ als Untergruppe von $\pi_1(X,x_0)$ gilt. In diesem Fall ist $\hat{f}$ eindeutig.
 \[
 	\begin{tikzcd}
 		X & \hat{X} \lar{p} \\
-		Z \uar{f} &
+		Z \uar{f}  \urar[dashed, swap]{\hat{f}}&
 	\end{tikzcd}
 \]
 \minisec{Beweis}
@@ -2008,8 +2009,60 @@ Zur Existenz setzen wir $\hat{f}(z) := \hat{\omega}(1)$. Wir müssen zeigen:
 	\]
 	Also $\hat{f}(W) \subseteq V' \subseteq U$. \bewende
 \end{description}
-
 % subsection 131 (end)
+
+\subsection{Klassifikationssatz (Eindeutigkeit)} % (fold)
+\label{sub:132}
+Seien $p_1 : \hat{X}_1 \to X$, $p_2 : \hat{X}_2 \to X$ zwei Überlagerungen. Dabei seien $\hat{X}_1$ und $\hat{X}_2$ wegzusammenhängend und lokal wegzusammenhängend.
+Seien $\hat{x}_1 \in \hat{X}_1$, $\hat{x}_2 \in \hat{X}_2$ mit $p_1(\hat{x}_1) = x_0 = p_2(\hat{x}_2)$.
+Dann sind äquivalent:
+\begin{enumerate}[a)]
+	\item Es gibt einen Homöomorphismus $f : \hat{X}_1 \to \hat{X}_2$ mit $p_2 \circ f = p_1$ und $f(\hat{x}_1) = \hat{x}_2$.
+	\item ${p_1}_*\enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} = {p_2}_* \enbrace*{\pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}}$ als Untergruppen von $\pi_1(X,x_0)$
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[a) $\Rightarrow$ b):] Ist $f$ wie in a), so ist $f_* : \pi_1 \enbrace*{\hat{X}_1, \hat{x}_1} \to \pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}$ ein Isomorphismus und es 
+	folgt 
+	\[
+		(p_1)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} =  (p_2 \circ f)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} 
+		= (p_2)_* \circ (f)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_1, \hat{x}_1}} = (p_2)_* \enbrace*{\pi_1 \enbrace*{\hat{X}_2, \hat{x}_2}}
+	\]
+	\item[b) $\Rightarrow$ a):] Betrachte
+	\[
+		\begin{tikzcd}
+			\mbox{ } & \hat{X}_2 \dar{p_2}\\
+			\hat{X}_1 \rar{p_1} \urar[dashed]{f}& X
+		\end{tikzcd}
+	\]
+	Hebungssatz $\Rightarrow \exists$ $f : \hat{X}_1 \to \hat{X}_2$ mit $p_2 \circ f = p_1$, $f(\hat{x}_1) = \hat{x}_2$. Weiter ist
+	\[
+		\begin{tikzcd}
+			\mbox{} & \hat{X}_1\dar{p_1} \\
+			\hat{X}_2 \rar{p_2} \urar[dashed]{g}&  X
+		\end{tikzcd}
+	\]
+	Wieder liefert der Hebungssatz: $\exists \, g : \hat{X}_2 \to \hat{X}_1$ mit $p_1 \circ  g = p_2$, $g(\hat{x}_2) = \hat{x}_1$. Betrachte nun
+	\[
+		\begin{tikzcd}[column sep=4em, row sep=4em]
+			\mbox{ } & \hat{X}_1 \dar{p_1}\\
+			\hat{X}_1 \rar{p_1} \urar[swap]{\id_{\hat{X}_1}} \urar[bend left]{g \circ f} & X
+		\end{tikzcd}
+	\]
+	Die Eindeutigkeit im Hebungssatz liefert $g \circ f = \id_{\hat{X}_1}$. Analog folgt $f \circ g = \id_{\hat{X}_2}$ \bewende.
+\end{description}
+% subsection 132 (end)
+
+\subsection{Satz (Universelle Überlagerung)} % (fold)
+\label{sub:133}
+Sei $X$ wegzusammenhängend, lokal wegzusammenhängend und lokal einfach zusammenhängend. Dann gibt es eine wegzusammenhängende und einfach zusammenhängende  Überlagerung 
+$\tilde{X} \xrightarrow{p} X $
+% subsection 133 (end)
+
+\subsection[Definition; Universelle Überlagerung]{Definition} % (fold)
+\label{sub:134}
+$\tilde{X} \xrightarrow{p} X $ heißt die \bet{universelle Überlagerung}\index{Überlagerung!universelle} von $X$.
+% subsection 134 (end)
 % section 13 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
