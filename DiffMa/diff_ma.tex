@@ -1849,16 +1849,16 @@ $\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differen
 	der Jacobischen dieser Kartenwechsel. 
 \end{description}
 
-\subsubsection{Definition} % (fold)
+\subsubsection[Definition: $1$-Form]{Definition} % (fold)
 \label{ssub:421}
 Eine \bet{$1$-Form}\index{1-Form@$1$-Form} $\omega$ auf einer differenzierbaren Mannigfaltigkeit $M$ ist ein differenzierbarer Schnitt des Kotangentialbündels, d.h. 
 $\omega \in C^\infty(M, T^*M)$ mit $\pi^{(*)} \circ \omega = \id_M$. Wir definieren wieder $\Gamma(T^*M) = \set{1 \text{-Formen auf }M}$.
 
 Sei $f \in C^\infty(M)$. Betrachte Testfunktion auf $\mathds{R}$: $\mathds{R} \ni t \xmapsto{\id} t \in \mathds{R}$. Dann gilt
 \[
-	T_pf (X) (\id) = X( \id \circ f) = X(f)
+	T_p f (X) (\id) = X( \id \circ f) = X(f)
 \]
-d.h. lokal $T_pf(X) = X(f) \diff{}{t}$.
+d.h. lokal $T_p f(X) = X(f) \diff{}{t}$.
 % subsubsection 421 (end)
 
 \subsubsection{Definition} % (fold)
@@ -1871,9 +1871,160 @@ Ist also verträglich mit der Eigenschaft duale Basis zu sein. Insbesondere für
 \[
 	\mathrm{d} f_p \enbrace*{\diff{}{x^i} } = \enbrace*{\diff{}{x^i} }_p (f) = \diff{f}{x^i} (p)   
 \]
-d.h. $\mathrm{d} f = \diff{f}{x^i} \mathrm{d}x^i $ \Index{totales Differential}. 
+d.h. $\mathrm{d} f = \diff{f}{x^i} \mathrm{d}x^i $ ist das \Index{totales Differential}. 
 % subsubsection 422 (end)
 % subsection 42 (end)
+
+\subsection{Vektorraumbündel} % (fold)
+\label{sub:43}
+\subsubsection[Definition: Vektorraumbündel]{Definition} % (fold)
+\label{ssub:431}
+Ein ($n$-dimensionales reelles topologisches) \Index{Vektorraumbündel} über $B$ ist ein Tripel $(E,\pi, B)$ mit
+\begin{itemize}
+	\item $E,B$ sind Hausdorff-Räume. \marginnote{$B$ als Mannigfaltigkeit, $E$ als Menge der Tangentialräume vorstellen}
+	\item $\pi : E \to B$ ist stetige Surjektion, sodass jede \Index{Faser} $E_b := \pi ^{-1}(b)$ die Struktur eines $n$-dimensionalen Vektorraumes hat, und sodass
+	\item \Index{lokale Trivialität} gilt: Für jedes $b \in B$ gibt es eine Umgebung $U$ von $b$ und einen Homöomorphismus $\varphi : \pi^{-1}(U) \to U\times \mathds{R}^n$,
+	sodass  
+	\[
+		\varphi_{b'} := \varphi\big|_{E_{b'}} : E_{b'} \to \set{b'} \times \mathds{R}^n 
+	\]
+	ein Vektorraumisomorphismus für jedes $b' \in U$ ist.
+\end{itemize}
+$E$ heißt der \Index{Totalraum}, $\pi $ die \Index{Bündelprojektion}, $B$ die \Index{Basis}, $n$ der \Index{Rang} des Bündels und $(U,\varphi)$ \Index{Bündelkarte}.
+\[
+	\begin{tikzcd}
+		\pi ^{-1}(U) \rar{\varphi} \dar{\pi}& U \times \mathds{R}^n \dlar{\mathrm{pr}_1} \\
+		U &
+	\end{tikzcd}
+\]
+\[
+	Zeichnung hier
+\]
+Ein Bündel heißt \bet{trivial}\index{triviales Bündel}, falls es eine (globale) Bündelkarte $(B,\varphi)$ gibt, d.h. 
+\[
+	\varphi : E \xrightarrow{\cong} B \times \mathds{R}^n 
+\]
+\minisec{Beispiele}
+\begin{itemize}
+	\item $B \times \mathds{R}^n$ triviales Bündel
+	\item $(TM, \pi, M)$, $(T^*M, \pi^{(*)}, M)$
+	\item Möbiusband: 
+	\[
+		\vcenter{\hbox{\begin{tikzpicture}[yscale=0.5, xscale=0.9]
+					\begin{axis}[
+					    hide axis,
+					    view={40}{40}
+					]
+					\addplot3 [
+					    surf, shader=faceted interp,
+					    point meta=x,
+					    colormap/greenyellow,
+					    samples=40,
+					    samples y=5,
+					    z buffer=sort,
+					    domain=0:360,
+					    y domain=-0.5:0.5
+					] (
+					    {(1+0.5*y*cos(x/2)))*cos(x)},
+					    {(1+0.5*y*cos(x/2)))*sin(x)},
+					    {0.5*y*sin(x/2)});
+
+					\addplot3 [
+					    samples=50,
+					    domain=-145:180, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+					    samples y=0,
+					    thick
+					] (
+					    {cos(x)},
+					    {sin(x)},
+					    {0});
+					\end{axis}
+		\end{tikzpicture}}} \not\cong \quad S^1 \times \mathds{R}
+	\]
+	\item $B= \mathds{R}P^1 = \nicefrac{S^1}{x \sim -x}$, $E = \set[{([x], \lambda x) \in \mathds{R}P^1 \times \mathds{R}^2}]{x \in S^1, \lambda \in \mathds{R}} $ 
+	\Index{Kanonisches Bündel}, $\pi : E \to B$ mit $([x], \lambda x) \mapsto [x]$. Dann ist $E_{[x]}$ eine Gerade durch $x$ aufgefasst als Vektorraum.
+	\[
+		\begin{tikzpicture}
+			\draw (0,0) node[below]{$0$} circle[radius=1] ;
+			\draw (30:1.5) -- (210:1.5);
+		\end{tikzpicture}
+	\]
+\end{itemize}
+% subsubsection 431 (end)
+
+\subsubsection[Definition: Bündelmorphismus]{Definition} % (fold)
+\label{ssub:432}
+Ein \Index{Bündelmorphismus} $(E,\pi , B) \to (E', \pi', b')$  ist ein Paar $(f, \overline{f})$ stetiger Abbildungen $f : E \to E'$ und $\overline{f} : B \to B'$ mit
+\[
+	\overline{f} \circ \pi  = \pi' \circ f, 
+\]
+d.h. 
+\[
+	\begin{tikzcd}
+		E \rar{f} \dar{\pi }& E' \dar{\pi'}\\
+		B \rar{\overline{f}}& B'
+	\end{tikzcd}
+\]
+und mit  $f_b := f\big|_{E_b} : E_{b} \to E_{\overline{f}(b) }'$ linear für alle $b \in B$.
+\minisec{Bemerkung}
+Da $\pi $ surjektiv ist, ist $\overline{f}$ durch $f$ und durch $\overline{f} \circ pi = \pi' \circ f $ eindeutig festgelegt. Daher schreiben wir auch $f : E \to E'$ für
+einen Bündelmorphismus.
+\minisec{Beispiele}
+\begin{itemize}
+	\item Das Differential $T f : TM \to TN$ einer differenzierbaren Abbildung $f : M \to N$ ist ein Bündelmorphismus.
+	\item Falls $f : M \xrightarrow{\cong} N$, dann ist die induzierte Abbildung $f^* : T^*N \to T^* M$, $\omega \mapsto \omega \circ Tf$ ein Bündelmorphismus.
+\end{itemize}
+% subsubsection 432 (end)
+
+\subsubsection[Definition: Bündeläquivalenz]{Definition} % (fold)
+\label{ssub:433}
+Eine \Index{Bündeläquivalenz} ist ein Bündelmorphismus mit $B = B'$, $\overline{f} = \id_B$ und $f_b$ ein Isomorphismus für jedes $b \in B$.
+\minisec{Beispiel}
+\[
+	\text{Zeichnung das induzierte Bündel oder Faserprodukt}
+\]
+$(E, \pi , B)$ gegebenes Bündel. $f : B_0 \to B$ stetige Abbildung. Dann gibt es ein Bündel $(f^*E, f^*\pi, B_0)$ und einen faserweisen isomorphen Bündelmorphismus
+$(\tilde{f},f) : (f^*E, f^*\pi, B_0) \to (E,\pi , B)$
+\[
+	\begin{tikzcd}
+		 f^*E \dar{f^*\pi } \rar{\tilde{f}} & E \dar{\pi} \\
+		 B_0 \rar{f}& B
+	\end{tikzcd}
+\]
+Dieses Bündel ist eindeutig bis auf Bündeläquivalenz.
+\minisec{Konstruktion}
+Setze
+\[
+	f^*E := \set[(b_0,e) \in B_0 \times E]{f(b_0) = \pi(e)} 
+\]
+$f^* \pi : f^*E \to B_0$, $(b_0,e) \mapsto b_0$ und $\tilde{f} : f^*E \to E$, $(b_0,e) \mapsto e$. Es gilt
+\begin{align*}
+	f \circ f^* \pi (b_0,e) = f(b_0) = \pi(e) = \pi \circ \tilde{f}(b_0,e),
+\end{align*}
+d.h. $\tilde{f}$ ist ein Bündelmorphismus, falls $f^*E$ ein Bündel ist, der faserweise isomorph ist: 
+\[
+	\set[(b_0,e)]{\pi(e)= f(b_0)} = (f^*E)_{b_0} \xrightarrow{\cong} E_{f(b_0)}, (b_0,e) \mapsto e 
+\]
+\uline{$f^*E$ ist lokal trivial:} Für einen Punkt in $B_0$ wählen wir eine Umgebung $U_0 \subset B$, sodass $f(U_0) \subset U$ für eine Bündelkarte $(U,\varphi)$ für $E$.
+Das heißt $\varphi : \pi  ^{-1}(u) \xrightarrow{\cong} U \times \mathds{R}^n $ und
+\[
+	\varphi_b = \varphi\big|_{\pi ^{-1}(b)} : \pi  ^{-1}(b) \xrightarrow[\text{linear}]{\cong} \set{b} \times \mathds{R}^n 
+\]
+Wir setzen: $\varphi_0 : \pi  ^{-1} (U_0) \to U_0 \times \mathds{R}^n$, $(b_0,e) \mapsto \enbrace[\big]{b_0, \mathrm{pr}_2 \circ \varphi_{f(b_0)}(e)}$, wobei $\mathrm{pr}_2$ die Projektion auf die zweite Komponente ist. $\varphi_0$ ist faserweise isomorph. Die Inverse ist
+\[
+	\enbrace*{b_0, \varphi ^{-1} \enbrace[\big]{f(b_0), v} } \mapsfrom (b_0, v)
+\]
+\uline{Eindeutigkeit:} Sei mit $\tilde{f}_1$ faserweise isomorph
+\[
+	\begin{tikzcd}
+		E_1 \drar{g} \arrow[ddr, swap, "\pi_1", bend right] \arrow[drr, "\tilde{f}_1", bend left]& & \\
+		 & f^*E \rar{\tilde{f}} \dar{f^*\pi} & E \dar{\pi } \\
+		& B_0 \rar{f} & B
+	\end{tikzcd}
+\]
+wobei $g(e_1) = \enbrace*{\pi_1(e_1), \tilde{f}_1(e_1)} $. Das Diagramm ist kommutativ.
+% subsubsection 433 (end)
+% subsection 43 (end)
 % section 4 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
