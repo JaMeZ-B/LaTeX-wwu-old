@@ -21,7 +21,13 @@ Schon einmal vielen Dank an
 
 für die Beteiligung an diesem Projekt!
 
-- - - - -
+## Hinweise
+
+Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten __Source Sans Pro__, __Avenir Medium__ und __Consolas__ installiert sein. Erstere
+ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar. Die anderen beiden sind
+je nach Betriebssystem vorinstalliert.  
+Wenn die Schriften nicht verfügbar sind, dann müssen entweder die entsprechenden Befehle in `mitschrift.tex` modifiziert werden oder 
+man verwendet den Standardtreiber `pdfTeX`.
 
 Die Präambel darf natürlich gerne weiterverwendet werden (GPLv2-Lizenz), eine Namensnennung ist nicht nötig … aber ich freue mich natürlich drüber :)
 
