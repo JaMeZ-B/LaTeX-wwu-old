@@ -1650,7 +1650,7 @@ Eine Teilmenge $M$ des $\mathds{R}^n$ heißt \Index{sternförmig} (mit Zentrum $
 enthalten ist.  
 % subsubsection 331 (end)
 
-\subsubsection{Beispiel} % (fold)
+\subsubsection[Beispiel: Der Einheitsball ist diffeomorph zum $\mathds{R}^n$]{Beispiel} % (fold)
 \label{ssub:332}
 $\varphi : B_1(0) \xrightarrow{\cong} \mathds{R}^n $, 
 \[
@@ -2025,6 +2025,116 @@ Wir setzen: $\varphi_0 : \pi  ^{-1} (U_0) \to U_0 \times \mathds{R}^n$, $(b_0,e)
 \]
 wobei $g(e_1) = \enbrace*{\pi_1(e_1), \tilde{f}_1(e_1)} $. Das Diagramm ist kommutativ.
 % subsubsection 433 (end)
+
+\subsubsection{Produktbündel: $\xi \times \eta$} % (fold)
+\label{ssub:434}
+\index{Produktbündel}
+\begin{align*}
+	\xi & := \enbrace[\big]{E(\xi), \pi(\xi), B(\xi)} \\
+	\eta & := \enbrace[\big]{E(\eta), \pi (\eta), B(\eta)}  \\
+	\intertext{Wir setzen:}
+	E(\xi \times \eta) & := E(\xi) \times E(\eta) \\
+	B(\xi \times \eta) & := B(\xi) \times B(\eta) \\
+	\pi_{\xi \times \eta} (e,f) & := \enbrace[\big]{\pi_\xi(e), \pi_\eta(f)} 
+\end{align*}
+% subsubsection 434 (end)
+
+\subsubsection{Whitney-Summe:  $\xi \oplus \eta$} % (fold)
+\label{ssub:435}
+Seien $\xi, \eta$ Bündel über $B$. Definiere nun die \Index{Diagonalabbildung}\index{Whitney-Summe}
+\[
+	\Delta : B \to B \times B \qquad b \mapsto (b,b)
+\]
+Setze nun $\xi \oplus \eta := \Delta^*(\xi \times \eta)$. Dann gilt $E_b(\xi \oplus \eta) = E_b(\xi) \oplus E_b(\eta)$. Weiter gilt auch
+\[
+	\xi \oplus \eta \cong \eta \oplus \xi \qquad , \qquad (\xi \oplus \eta) \oplus \zeta \cong \xi \oplus (\eta \oplus \zeta)
+\]
+% subsubsection 435 (end)
+
+\subsubsection{Einschränkung eines Bündels} % (fold)
+\label{ssub:436}
+Sei $B_0 \subset B(\xi)$. Dann betrachte 
+\[
+	\xi\big|_{B_0} = \enbrace[\Big]{\pi ^{-1}(B_0), \pi\big|_{\pi ^{-1} (B_0)}, B_0} 
+\]
+Für die Inklusionsabbildung $i : B_0 \hookrightarrow B$ gilt: $i^* \xi = \xi\big|_{B_0}$ ist ein Bündel.
+\minisec{Beispiel: $S^2 \subseteq \mathds{R}^3$}
+\[
+	\begin{tikzpicture}[scale=1.5]
+		\draw (-1,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
+	    \draw (0,1) arc (90:270:0.5cm and 1cm);
+	    \draw[dashed] (0,1) arc (90:-90:0.5cm and 1cm);
+	    \draw (0,0) circle (1cm);
+	    \shade[ball color=blue!10!white,opacity=0.20] (0,0) circle (1cm);
+	\end{tikzpicture}
+\]\marginnote{Zeichnung vervollständigen!}
+Es gibt drei Bündel: $\mathds{R}^3\big|_{S^2}$, $\mathds{R} \underline{n}$, $T S^2$. Sei $\varepsilon^k$ das triviale, $k$-dimensionale Bündel (hier über $S^2$). Es gilt
+\begin{align*}
+	\mathds{R}^3\big|_{S^2} &= \varepsilon^3 = S^2 \times \mathds{R}^3 \\
+	\mathds{R} \underline{n} &= \varepsilon^1 = S^2 \times \mathds{R} \\
+	T S^2 & \not= \varepsilon^2
+\end{align*}
+Nun gilt 
+\[
+	T S^2 \oplus \varepsilon^1 \cong T \mathds{R}^3 \big|_{S^2} \cong \varepsilon^3 \cong \varepsilon^2 \oplus \varepsilon^1
+\]
+% subsubsection 436 (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:437}
+Eine stetige Abbildung $\sigma : B  \to E$ mit $\pi \circ \sigma = \id_B$ heißt \bet{Schnitt}\index{Schnitt eines Bündels} des Bündels $(E,\pi ,B)$.
+\marginnote{Zeichnung vervollständigen!}
+\[
+	\begin{tikzpicture}
+		\draw (0,0) -- (4,0) node[right]{$B$};
+	\end{tikzpicture}
+\] 
+% subsubsection 437 (end)
+
+\subsubsection[Definition: Bündelatlas]{Definition} % (fold)
+\label{ssub:438}
+Eine Menge $\set[(U_\alpha, \varphi_\alpha)]{\alpha \in A}$ von Bündelkarten für $(E,\pi ,B)$ heißt \Index{Bündelatlas}, falls $\bigcup_{\alpha \in A} U_\alpha = B$.
+Die stetigen Abbildungen
+\begin{gather}
+	\varphi_{\alpha \beta} : U_\alpha \cap U_\beta \longrightarrow Gl(k,\mathds{R}) \quad, \qquad b \longmapsto \varphi_{\beta,b} \circ \varphi_{\alpha,b} ^{-1} \\
+	 \enbrace*{ \varphi_{\alpha, b} := (\mathrm{pr}_2 \circ \varphi_\alpha)\big|_{E_b} : E_b \xrightarrow{\cong} \mathds{R}^k } 
+\end{gather}
+heißen \Index{Übergangsfunktionen}.
+\minisec{Beispiel}
+$h_\beta \circ  h_\alpha ^{-1}$ Kartenwechsel einer differenzierbaren Mannigfaltigkeit $M$. Dann ist $J_{h_\beta \circ h_\alpha ^{-1}}$ sind die Übergangsfunktionen von
+$T_p M$. \medskip\\
+Ein Bündelatlas eines Bündels über einer differenzierbaren Mannigfaltigkeit heißt \bet{differenzierbar}\index{Bündelatlas!differenzierbar}, falls also Übergangsfunktionen 
+differenzierbar sind. Ein \bet{differenzierbares Vektorbündel}\index{Vektorbündel!differenzierbar} ist ein Vektorbündel mit einem maximalen differenzierbaren Bündelatlas.
+$\Rightarrow$ Der Totalraum eines differenzierbaren $\mathds{R}^k$-Bündels über $M^m$ ist in kanonischer Weise eine $m+k$-dimensionale differenzierbare Mannigfaltigkeit.
+
+Mittels der Übergangsfunktionen lässt sich der Totalraum $E$ auch wie folgt darstellen:
+\[
+	E := \frac{\bigsqcup_{\alpha \in A} U_\alpha \times \mathds{R}^k}{(x,v) \sim \enbrace*{x, \varphi_{\alpha \beta}(x) \cdot v}} 
+\]
+wobei $(x,v) \in U_\alpha \times \mathds{R}^k$, $x\in U_\alpha \cap U_\beta$ und $\enbrace*{x, \varphi_{\alpha \beta}(x) \cdot v} \in U_\beta \times \mathds{R}^k$
+\minisec{Beispiel}
+Bis auf Äquivalenz gibt es genau zwei $\mathds{R}^k$-Bündel über $S^1$, da $Gl(k,\mathds{R})$ zwei Zusammenhangskomponenten hat.
+\[
+	\begin{tikzpicture}
+		\draw (0,0) circle[radius=2];
+	\end{tikzpicture}
+\]
+\minisec{Anwendung}
+Whitney-Summe: Betrachte
+\[
+	\set{\enbrace*{U_\alpha \cap V_\beta, \varphi_\alpha \oplus \psi_\beta}} 
+\]
+Dann gilt
+\[
+	E(\xi \oplus  \eta) = \frac{\bigsqcup_{\alpha,\beta} (U_\alpha \cap V_\beta) \times (\mathds{R}^k  \oplus  \mathds{R}^l)}{(x,(v,w)) \sim \enbrace*{x,
+	\enbrace*{\varphi_{\alpha \alpha'}(x) \cdot v, \psi_{\beta \beta'}(x) \cdot w} } } 
+\]
+wobei $(x,(v,w)) \in (U_\alpha \cap V_\beta) \times (\mathds{R}^k \oplus \mathds{R}^l) $ und $\enbrace*{x,\enbrace*{\varphi_{\alpha \alpha'}(x) \cdot v, 
+\psi_{\beta \beta'}(x) \cdot w} } \in (U_{\alpha'} \cap V_{\beta'}) \times (\mathds{R}^k \oplus \mathds{R}^l)$. \medskip \\
+Analog: $\xi \otimes  \eta$, $\xi^*$, $\Hom(\xi, \eta)$, $\eta \subseteq \xi$: $\nicefrac{\xi}{\eta}$, \ldots 
+% subsubsection 438 (end)
+
 % subsection 43 (end)
 % section 4 (end)
 \cleardoubleoddemptypage
