@@ -2114,6 +2114,219 @@ Es folgt
 Also $q_* \enbrace*{\pi_1 \enbrace*{H_\Delta \backslash \tilde{X}, \hat{x}_0}} = H $. \bewende
 % subsection 135 (end)
 % section 13 (end)
+\newpage
+
+\section{Höhere Homotopiegruppen} % (fold)
+\label{sec:14}
+\emph{Dieses Kapitel ist nur ein kleiner Exkurs zu einem Thema, das auch ganze Vorlesungsreihen füllen könnte.}
+\subsection{Rückblick} % (fold)
+\label{sub:141}
+Sei $(X,x_0)$ ein punktierter Raum. Sei in diesem Abschnitt $I= [0,1]$. Wegzusammenhängend: Punkte in $X \hat{=} I^0 = \set{x} \to X$. Wege in $X$ sind dann Homotopien 
+solcher Abbildungen. $\pi_0(X,x_0) $ ist dann die (punktierte) Menge der Homotopieklassen von Abbildungen $I^0 \to X$. Die Schleifen in $X$ sind
+stetige Abbildungen $\omega : I\to X$ mit $\omega(0)= x_0 = \omega(1)$. $\pi_1(X,x_0)$ ist die Menge der Homotopieklassen von Schleifen und heißt die Fundamentalgruppe.
+% subsection 141 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:142}
+Seien $\omega_0, \omega_1 : I^n \to X$ stetige Abbildungen mit $\omega_0(\partial I^n)= \set{x_0} = \omega_1(\partial I^n)$. Eine \Index{Homotopie} zwischen $\omega_0$ und
+$\omega_1$ ist eine stetige Abbildung $H : I^n \times [0,1] \to X$ sodass Folgendes gilt:
+\begin{itemize}
+	\item $H(s_1, \ldots , s_n, 0) = \omega_0(s_1, \ldots , s_n)$ für alle $(s_1, \ldots , s_n) \in I^n$
+	\item $H(s_1, \ldots , s_n, 1) = \omega_1(s_1, \ldots , s_n)$ für alle $(s_1, \ldots , s_n) \in I^n$
+	\item $H(s_1, \ldots , s_n, t) = x_0$ für alle $t \in [0,1]$, $(s_1, \ldots , s_n) \in \partial I^n$
+\end{itemize}
+\minisec{Bemerkung}
+Homotopie ist eine Äqivalenzrelation.
+% subsection 142 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:143}
+Sei $(X,x_0)$ ein punktierter Raum. Definiere $\pi_n(X,x_0)$ also die Menge der Homotopieklassen von Abbildungen: $\omega : I^n \to X$ mit $\omega(\partial I^n)=\set{x_0} $
+\marginnote{für $n>0$}.
+\minisec{Bemerkung}
+Für $n=2$ \marginnote{Rand auf einen Punkt kollabieren}
+\[
+	\begin{tikzcd}
+		I^2 \rar["\omega"] \arrow[d, two heads]& X \\
+		\nicefrac{I^2}{\partial I^2} \urar[dashed, "\exists"]
+	\end{tikzcd} \qquad \qquad 
+	\vcenter{\hbox{\begin{tikzpicture}
+		\draw (0,0) rectangle (2,2);
+	\end{tikzpicture}}}
+	\enspace\twoheadrightarrow \enspace
+	\vcenter{\hbox{
+	\begin{tikzpicture}
+		\draw (-1,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
+	    \draw (0,1) arc (90:270:0.5cm and 1cm);
+	    \draw[dashed] (0,1) arc (90:-90:0.5cm and 1cm);
+	    \draw (0,0) circle (1cm);
+	    \shade[ball color=blue!10!white,opacity=0.20] (0,0) circle (1cm);
+	\end{tikzpicture}}}
+\]
+allgemein: Abbildung $\omega : I^n \to X$ mit $\omega(\partial I^n) = \set{x_0}$ $\leadsto$ punktierte Abbildung $(S^n, s_0) \to (X,x_0)$.
+% subsection 143 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:144}
+Sei $1 \le k \le n$, $\omega_0, \omega_1 : I^n \to X$, $\omega_i(\partial I^n) = \set{x_0}$ für $i=1,2$. Definiere:
+\[
+	\enbrace*{\omega *_k \omega'} (s_1, \ldots , s_n) := \begin{cases}
+		\omega(s_1, \ldots , s_{k-1}, 2 s_k, s_{k+1}, \ldots , s_n), &\text{ falls } 0 \le s_k, \le \frac{1}{2} \\
+		\omega(s_1, \ldots , s_{k-1}, 1- 2 s_k, s_{k+1}, \ldots , s_n), &\text{ falls } \frac{1}{2} \le s_k \le 1 
+	\end{cases} 
+\]
+% subsection 144 (end)
+
+\subsection{Lemma (Eckmann-Hilton-Arguemnt)} % (fold)
+\label{sub:145}
+Sei $A$ eine Menge mit zwei inneren Verknüpfungen $\boxempty, \diamond : A \times A\to A $, sodass gilt 
+\begin{enumerate}[a)]
+	\item Es gibt $e \in A$ mit $e \boxempty a = a \boxempty e = a = e \diamond a = a \diamond e$ für alle $a \in A$
+	\item Für alle $a,b,c,d \in A$ gilt $(a \boxempty b) \diamond (c \boxempty d) = (a \diamond c) \boxempty (b \diamond d)$.
+\end{enumerate}
+Dann stimmen $\boxempty$ und $\diamond $ überein, sind assoziativ und kommutativ.
+\minisec{Beweis}
+\begin{align*}
+	a \boxempty b &= (e \diamond a) \boxempty (b \diamond e) = (e \boxempty b) \diamond (a \boxempty e) = b \diamond a \\
+	b \diamond a &= (b \boxempty e) \diamond (e \boxempty a) = (b \diamond e) \boxempty (e \diamond a) = b \boxempty a
+\end{align*}
+$\Rightarrow \boxempty = \diamond$ und ist kommutativ + Assoziativität. \bewende
+% subsection 145 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:146}
+\begin{enumerate}[a)]
+	\item $1 \le k \le n$, $\omega_0, \omega_0', \omega_1, \omega_1' : I^n \to X$ stetig mit $\omega_i (\partial I^n) = \set{x_0} = \omega_i'(\partial I^n)$ für $i=0,1$.
+	Es gelte $[\omega_0] = [\omega_1]$, $[\omega_0'] = [\omega_1']$ in $\pi_n(X,x_0)$. Dann gilt 
+	\[
+		[\omega_0 *_k \omega_0'] = [\omega_1 *_k \omega_1'] \in \pi_n(X, x_0)
+	\]
+	Schreibe $\cdot_k$ für die induzierte Verknüpfung.
+	\item $1 \le k,l \le n$. Dann gilt $\cdot_k = \cdot_l$. Für $n \ge 2$ ist $\cdot $ kommutativ. Außerdem assoziativ.
+	\item $\pi_n(X,x_0)$ ist eine abelsche Gruppe für $n \ge 2$.
+	\item $f : (X,x_0) \to (Y,y_0)$ stetig. Dann definiert $[\omega] \mapsto [f \circ \omega]$ einen Gruppenhomomorphismus $\pi_n(f) : \pi_n(X,x_0) \to \pi_n(Y,y_0)$,
+	falls $n \ge 1$.
+	\item $\pi_n(\id_X) = \id_{\pi_n(X,x_0)}$, $\pi_n(f \circ g) = \pi_n(f) \circ \pi_n(g)$
+	\item Ist $f$ punktiert homotop zu $g$, so gilt $\pi_n(f) = \pi_n(g)$.
+\end{enumerate}
+\minisec{Zum Beweis}
+\begin{enumerate}[a)]
+	\item \checked
+	\item für $n=2$
+	\[
+		\begin{array}{c}
+			(\omega *_1 \omega') \\
+			*_2 \\
+			(\omega'' *_1 \omega''')
+			
+		\end{array}
+		 = 
+		\vcenter{\hbox{\begin{tikzpicture}
+			\draw (0,0) grid (2,2);
+			\node at (0.5,0.5){$\omega''$};
+			\node at (0.5,1.5){$\omega$};
+			\node at (1.5,0.5){$\omega'''$};
+			\node at (1.5,1.5){$\omega'$};
+		\end{tikzpicture}}}
+		 = \begin{pmatrix}
+		 	\omega \\
+			*_2 \\
+			\omega''
+		 \end{pmatrix} *_1
+		 \begin{pmatrix}
+		 	\omega' \\
+			*_2 \\
+			\omega'''
+		 \end{pmatrix}
+	\]
+	Mit Eckmann-Hilton-Argument folgt $\cdot_k = \cdot_l$ und für $n \ge 2 $ kommutativ.
+	\item Gegeben $\omega : I^n \to X$, definiere $\overline{\omega} (s_1, \ldots , s_n) := \omega (1-s_1, s_2, \ldots , s_n)$. Damit ist $[\overline{\omega}]$ Inverses von
+	$[\omega]$
+	\item einfach
+	\item einfach
+	\item einfach \bewende
+\end{enumerate}
+% subsection 146 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:147}
+$(X,x_0) \sim (Y,y_0) \Rightarrow \pi_n(X,x_0) \cong \pi_n(Y,y_0)$ für alle $n$. Insbesondere: $(X,x_0)$ zusammenziehbar $\Rightarrow \pi_n(X,x_0) = 0$ für $n \ge 2$.
+% subsection 147 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:148}
+$p : \hat{X} \to X$ Überlagerung. $\hat{x}_0 \in \hat{X}, x_0 \in X$ mit $p(\hat{x}_0) = x_0$. Dann ist $\pi_n(p) : \pi_n(\hat{X}, \hat{x}_0) \to \pi_n(X,x_0)$ ein
+Isomorphismus für $n \ge 2$
+\minisec{Beweis}
+Übung.
+% subsection 148 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:149}
+$\pi_n(S^1, s_0) = 0$ für $n \ge 2$
+\minisec{Beweis}
+Es gibt eine Überlagerung $R \to S^1$. \bewende
+% subsection 149 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:1410}
+Eine stetige Abbildung $p : E \to B$ heißt (Serre-)\Index{Faserung}, falls sie folgende Homotopiehebungseigenschaft hat: Für jedes $n \ge 0$, jede Homotopie 
+$H : I^n \times [0,1] \to B$ und jede partielle Hebung $\tilde{H} : I^n \times \set{0} \cup \partial I^n \times [0,1]$ existiert eine Hebung $\overline{H}$ von $H$
+entlang $p$, die $\tilde{H}$ fortsetzt. Nenne $p ^{-1}(b)$ die \Index{Faser} über $b$. 
+\[
+	\begin{tikzcd}
+		I^n \times \set{0} \cup \partial I^n \times [0,1] \rar["\tilde{H}"]  \dar[hook]& E \dar["p"] \\
+		I^n \times [0,1] \rar \urar[dashed, "\overline{H} "]& B
+	\end{tikzcd}
+\]
+\minisec{Beispiel}
+\begin{itemize}
+	\item Überlagerungen sind Faserungen (!)
+	\item Die Projektion $B \times F \to B$ ist eine Faserung.
+\end{itemize}
+% subsection 1410 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:1411}
+Sei $p : E \to B$ eine Faserung. Seien $b_0 \in B, e_0 \in E$ mit $p(e_0)= b_0$. Setze $F := p ^{-1}(b)$. Sei $i : (F, e_0) \hookrightarrow (E,e_0)$ die Inklusion.
+Dann existiert eine lange exakte Sequenz
+\begin{align*}
+	\ldots  \pi_{n+1}(B,b_0) &\xrightarrow{\partial_{n+1}} \pi_n(F,e_0) \xrightarrow{\pi_n(i)} \pi_n(E,e_0) \xrightarrow{\pi_n(p)} \pi_n(B,b_0)  \xrightarrow{\partial_n} 
+	\pi_{n-1}(F,e_0) \ldots \\
+	&\longrightarrow \pi_1(B,b_0) \xrightarrow{\partial_1} \pi_0(F,e_0) \xrightarrow{\pi_0(i)} \pi_0(E,e_0) \xrightarrow{\pi_0(p)} \pi_0(B,b_0)   
+\end{align*}
+D.h.
+\begin{itemize}
+	\item $\partial_n$ ist ein Homomorphismus für $n >2$.
+	\item $\ker \pi_n(p) = \im \pi_n(i)$, $\ker( \partial_{n+1}) = \im \pi_{n+1}(p)$, $\ker \pi_n(i) = \im \partial_{n+1}$ für $n \ge 1$
+	\item $\partial_1(x) = [e_0] \iff x \in \im \pi_n(p)$
+	\item $\pi_0(i)(x) = [e_0] \iff x \in \im \partial_1$
+	\item $\pi_0(p)(x) = [b_0] \iff x \in \im \pi_0 (i)$
+\end{itemize}
+\minisec{Zum Beweis}
+Definition von $\partial_n$: Sei $\omega : I^n \to B, \omega(\partial I^n) = \set{b_0} $.
+\[
+	\begin{tikzcd}
+		I^{n-1} \times \set{0} \cup \partial I^{n-1} \times [0,1] \rar["\mathrm{const}_{e_0}"] \dar[hook]& E \dar["p"] \\
+		I^{n-1} \times [0,1] \rar["\omega"] \urar[dashed, "\tilde{\omega}"]& B 
+	\end{tikzcd}
+\]
+$\tilde{\omega}\Big|_{I^{n-1} \times \set{1}} : I^{n-1} \to F$, konstant auf $\partial I^{n-1}$. Definiere 
+$\partial_n([\omega]) := \benbrace*{\tilde{\omega}\Big|_{I^{n-1} \times \set{1}}} $. $\partial_n$ ist wohldefiniert und Homomorphismus für $n >2$.
+% subsection 1411 (end)
+
+\subsection{Anwendung} % (fold)
+\label{sub:1412}
+Es gibt eine Faserung $S^3 \xrightarrow{p} S^2 $, sodass $p ^{-1}(s) \cong S^1$ (\enquote{Hopf-Faserung}). Es gilt $\pi_1(S^n)= 1$ für $n \ge 2$, $\pi_2(S^3)= 0$
+Betrachte:
+\begin{align*}
+	\ldots  &\longrightarrow \underbrace{\pi_3(S^1)}_{=0} \longrightarrow \pi_3(S^3) \longrightarrow \pi_3(S^2) \longrightarrow \underbrace{\pi_2(S^1)}_{=0} \\
+	&\longrightarrow \underbrace{\pi_2(S^3)}_{=0} \longrightarrow \pi_2(S^2) \longrightarrow \pi_1(S^1) \longrightarrow \underbrace{\pi_1(S^3)}_{=1} \longrightarrow \ldots 
+\end{align*}
+Mit Exaktheit folgt $\pi_2(S^2) \cong \pi_1(S^1) \cong \mathds{Z}$ und $\pi_3(S^3) \cong \pi_3(S^2)$. Tatsache: $\pi_3(S^3) \cong \mathds{Z}$.
+% subsection 1412 (end)
+% section 14 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
