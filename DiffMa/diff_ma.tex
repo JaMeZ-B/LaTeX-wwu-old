@@ -1351,7 +1351,7 @@ $\gamma_1(t)= \Phi(t,1)= \frac{1}{1-t} $
 		\draw[dashed, Sienna2, thick] (1,-3) -- (1,3) node[below right]{$1$};
 	\end{tikzpicture} \qquad \quad 
 	\begin{tikzpicture}[scale=0.7]
-		\draw[variable=\t, very thin, fill, DarkOliveGreen3!60, smooth] plot[domain=0.333:3] (\t, 1/\t) -- (3,-3) -- plot[domain=-0.333:-3] (\t, 1/\t) -- (-3,3) -- cycle;
+		\draw[variable=\t, very thin, fill, DarkOliveGreen3!50, smooth] plot[domain=0.333:3] (\t, 1/\t) -- (3,-3) -- plot[domain=-0.333:-3] (\t, 1/\t) -- (-3,3) -- cycle;
 		\draw[variable=\t, very thick, smooth] plot[domain=0.333:3] (\t, 1/\t)  plot[domain=-0.333:-3] (\t, 1/\t) ;
 		\draw[->] (-3,0) -- (3,0) node[right]{$t$};
 		\draw[->] (0,-3) node[below]{$M=\mathds{R}$} -- (0,3);
@@ -1378,11 +1378,25 @@ Sei $X$ ein Vektorfeld auf $M$, $\Phi $ der zugehörige Fluss (lokal). Sei $p \i
 Dann ist $D = \bigcup_{p \in M} (a_p, b_p) \times \set{p}$. Es reicht zu zeigen: $D$ ist offen und $\Phi : D \to M$ ist differenzierbar.
 
 Sei $I_p \subset [0,\infty)$ ein Intervall bestehend aus allen $t>0$, sodass $D$ eine Umgebung von $[0,t] \times \set{p}$ enthält, auf der $\Phi $ differenzierbar ist.
-\[
-	\begin{tikzpicture}
-		\draw (0,0) -- (0,4) node[right]{$D$};
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[scale=1]
+		% \draw[help lines] (-2,0) grid (2,4);
+		\coordinate (0p) at (0,0.7) ;
+		\coordinate (tp) at (0.8,0.7) ;
+		\draw[very thick] (0,0) -- (0,4) node[below right]{$D$};
+		\draw[thick] (-1.6,4) .. controls +(-50:1.3) and +(65:1) .. (-2,0);
+		\draw[thick] (0.6,4) .. controls +(-85:1.3) and +(120:1) .. (1.5,0);
+		\draw[thick, dashed, gray!70] (0,1.4) .. controls +(185:0.5) and +(80:0.4) .. (-1,0.8) .. controls +(260:0.3) and +(170:0.4) .. (-0.6,0.1)
+		.. controls +(-10:0.4) and +(185:0.3) .. (0.45,0.35) .. controls +(5:0.3) and +(-90:0.4) ..(1,0.8) .. controls +(90:0.4) and +(5:0.6) .. cycle;
+		\draw[thick, darkgray] (0p) node[below left]{\scriptsize $(0,p)$} -- (tp) node[below]{\scriptsize $(t,p)$};
+		\foreach \b in {0p, tp} {
+			\draw[fill=Tomato1] (\b) circle[radius=0.04];
+		}
+		\draw (0.5,1) -- (2,2) node[right]{Hier ist $\Phi$  differenzierbar};
 	\end{tikzpicture}
-\]
+	\caption[Das Intervall $I_p$ aus Satz 12 (\ref{ssub:2510})]{Das Intervall $I_p$, das in einer Umgebung liegt, in der $\Phi$ differenzierbar ist}}
+\end{figure}
 $\Rightarrow I_p$ ist offen.  
 \begin{description}
 	\item[$I_p$ ist \emph{nicht} leer:] Für jeden Punkt $p \in M$ gibt es $\varepsilon >0$ und eine Umgebung $U$ von $p$, sodass 
@@ -1394,6 +1408,7 @@ $\Rightarrow I_p$ ist offen.
 	$\varepsilon >0$ mit $t_0- 2 \varepsilon >0$, sodass $D$ eine Umgebung von $[0,t_0-\varepsilon] \times U$ enthält, auf der $\Phi$ erklärt und differenzierbar ist.
 	Dabei ist $U$ eine Umgebung von $q$, sodass (für ein eventuell kleineres $\varepsilon>0$) $\Phi $ auf $(t_0 - 2 \varepsilon, t_0 + 2 \varepsilon) \times U$ definiert
 	und differenzierbar ist.
+	\todo[noline]{Zeichnung vervollständigen}
 	\[
 		\begin{tikzpicture}
 			\draw[->] (-0.2,0) -- (4,0) node[right]{$t$};
@@ -1472,7 +1487,7 @@ d.h. $\set{A_i}$ ist eine \Index{kompakte Ausschöpfung} von $M$.
 		\begin{scope}
 			\clip (7,0) arc (0:15:9) -- ++ (-2,0) arc(15:-15:9) -- ++ (2,0) arc(-15:0:9) -- cycle;
 			\foreach \y in {-2.4, -2.2,...,2.4}{
-				\draw[SteelBlue1!50, very thick] (4,\y) -- (7,\y);
+				\draw[SteelBlue1!60, very thick] (4,\y) -- (7,\y);
 			}
 			%\draw[fill=green!30] (4,-2.5) rectangle (10,2.5);
 		\end{scope}
@@ -1487,7 +1502,7 @@ d.h. $\set{A_i}$ ist eine \Index{kompakte Ausschöpfung} von $M$.
 			.. controls +(45:0.5) and +(-90:0.6) .. (8,0.7) .. controls +(90:0.7) and +(-5:1) .. (6.3,1.7) 
 			.. controls +(175:0.5) and +(20:0.6) .. (5.4,0.8) .. controls +(200:0.6) and +(105:0.5) .. cycle;
 			\foreach \x in {2,2.25,...,7}{
-				\draw[Sienna1!70, very thick, opacity=0.5] (\x,-1) -- ++ (3,3);
+				\draw[Sienna1!70, very thick, opacity=0.6] (\x,-1) -- ++ (3,3);
 			}
 		\end{scope}
 		
