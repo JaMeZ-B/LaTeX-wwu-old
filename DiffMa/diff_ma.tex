@@ -2134,9 +2134,150 @@ wobei $(x,(v,w)) \in (U_\alpha \cap V_\beta) \times (\mathds{R}^k \oplus \mathds
 \psi_{\beta \beta'}(x) \cdot w} } \in (U_{\alpha'} \cap V_{\beta'}) \times (\mathds{R}^k \oplus \mathds{R}^l)$. \medskip \\
 Analog: $\xi \otimes  \eta$, $\xi^*$, $\Hom(\xi, \eta)$, $\eta \subseteq \xi$: $\nicefrac{\xi}{\eta}$, \ldots 
 % subsubsection 438 (end)
-
 % subsection 43 (end)
 % section 4 (end)
+\newpage
+
+\section{Formen} % (fold)
+\label{sec:5}
+
+\subsection{Alternierende Formen} % (fold)
+\label{sub:51}
+
+\subsubsection[Definition: Alternierende $k$-Form]{Definition} % (fold)
+\label{ssub:511}
+Eine (alternierende) $k$-Form auf einem $n$-dimensionalen Vektorraum $V$ ist eine multilineare Abbildung 
+\[
+	\omega : \underbrace{V \times \ldots \times V}_{\text{$k$-mal}} \to \mathds{R},
+\]
+die in folgendem Sinne \Index{alternierend} ist: 
+\[
+	\forall v_1, \ldots , v_k \in V : \forall \pi \in S_k : \omega \enbrace*{v_{\pi(1), \ldots , v_{\pi(k)}}} = \sgn(\pi )\cdot  \omega(v_1, \ldots , v_k) 
+\]
+Beispiel: Die Determinante als multilineare Abbildung in ihren Spalten (Zeilen) ist eine $n$-Form. $\Lambda^k V^*$ ist der reelle Vektorraum der $k$-Formen auf $V$.
+Es ist $\Lambda^1 V^* = V^*$, $\Lambda^0 V^* := \mathds{R}$.
+% subsubsection 511 (end)
+
+\subsubsection[Definition: Äußeres Produkt, Dachprodukt]{Definition} % (fold)
+\label{ssub:512}
+Das \Index{äußere Produkt} (oder auch \Index{Dachprodukt}) zweier Formen ist eine bilineare Abbildung 
+\[
+	\Lambda^k V^* \times \Lambda^l V^* \to \Lambda^{k+l} V^*, \qquad (\omega, \sigma ) \mapsto \omega \wedge \sigma 
+\]
+das wie folgt erklärt ist: $\forall v_1, \ldots , v_{k+l} \in V :$
+\[
+	 (\omega \wedge \sigma)(V_1, \ldots , v_{k+l}) = \frac{1}{k! \cdot l!} \sum_{\pi \in S_{k+l}} \sgn(\pi ) \cdot \omega\enbrace*{v_{\pi(1)}, \ldots , v_{\pi(k)}} \cdot 
+	 \sigma \enbrace*{v_{\pi(k+1)}, \ldots , v_{\pi(k+l)} }
+\]
+\minisec{Bemerkung}
+Die rechte Seite ist gleich
+\[
+	\sum_{\pi \in S_{k+l}}' \sgn(\pi) \cdot \omega\enbrace*{v_{\pi(1)}, \ldots , v_{\pi(k)}} \cdot \sigma\enbrace*{v_{\pi(k+1)}, \ldots , v_{\pi(k+l)}}
+\]
+wobei die Summe über alle Permutationen mit $\pi(1) < \ldots < \pi(k)$, $\pi(k+1) < \ldots < \pi(k+l)$ erstreckt wird. In der alternierenden Summe der Definition kommen
+genau diejenigen Summanden mehrfach vor, deren Permutationen gewisse Zerlegungen 
+\[
+	\set{1, \ldots , k+l} = \set{\pi(1), \ldots , \pi(k)} \sqcup \set{\pi(k+1), \ldots , \pi(k+l)}  
+\]
+erhalten. Fasst man diese in Äquivalenzklassen zusammen, in sogenannte \Index{Zerlegungen} $[\pi ] \in \mathcal{Z}_{k+l}$, so hat jede solche Klasse $k!\cdot l!$ Vertreter.
+In der Summe der Bemerkung haben wir einen solchen Vertreter ausgezeichnet.
+
+Das äußere Produkt ist assoziativ:
+\[
+	(\omega \wedge \sigma) \wedge \tau = \omega \wedge (\sigma \wedge \tau)
+\]
+Dazu betrachte man Zerlegungen aus $\mathcal{Z}_{k,l,m}$ und stellt fest, dass beide Seiten angewandt auf $(v_1, \ldots , v_{k+l+m})$ geben:
+\[
+	\sum_{\pi \in S_{k+l+m}}' \sgn(\pi) \cdot \omega(v_{\pi(1)}, \ldots , v_{\pi(k)}) \cdot \sigma(v_{\pi(k+1)}, \ldots , v_{\pi(k+l)}) \cdot \tau(v_{\pi(k+l+1)}, \ldots , 
+	v_{\pi(k+l+m)})
+\]
+% subsubsection 512 (end)
+
+\subsubsection[Lemma 20: Basis des Vektorraumes $\Lambda^k V^*$]{Lemma 20} % (fold)
+\label{ssub:513}
+Sei $e_1^*, \ldots , e_n^*$ eine Basis von $V^*$, dann ist 
+\[
+	\set[e_{i_1}^* \wedge \ldots \wedge e_{i_k}^*]{i_1 < \ldots i_k} = \set[e_I^*]{I=(i_1 < \ldots < i_k)}  
+\]
+eine Basis von $\Lambda^k V^*$.
+\minisec{Beweis}
+Sei $e_1, \ldots , e_n$ die duale Basis von $V$ ($e_i^*(e_j)= \delta_{ij}$). Sei $\omega$ eine $k$-Form. Setze 
+\[
+	\omega_{i_1, \ldots , i_k} := \omega \enbrace*{e_{i_1}, \ldots , e_{i_k}} 
+\]
+Dann gilt
+\[
+	\omega = \sum_{i_1 < \ldots  < i_k} \omega_{i_1, \ldots , i_k} e_{i_1}^* \wedge \ldots \wedge e_{i_k}^*
+\]
+$\Rightarrow $ die $e_I^*$ erzeugen $\Lambda^k V^*$. Aus $0= \sum_I' \omega_I e_I^*$ folgt durch Auswerten auf $e_{i_1}, \ldots , e_{i_k} : \omega_I = 0 \forall I$.
+Also sind die $e_I^*$ linear unabhängig. \bewende \medskip \\
+Also ist $\dim \Lambda^k V^* = \binom{n}{k}$.
+% subsubsection 513 (end)
+
+\subsubsection{Lemma 21 (Antikommmutativität)} % (fold)
+\label{ssub:514}
+Sei $\omega \in \Lambda^k V^*$, $\sigma \in \Lambda^l V^*$. Dann gilt
+\[
+	\omega \wedge \sigma = (-1)^{kl} \sigma \wedge \omega
+\]
+\minisec{Beweis}
+Beide Seiten sind linear in $\omega$ und $\sigma$. Damit reicht es die Behauptung für alle Basiselemente zu zeigen. Dies folgt aus der entsprechenden Behauptung für 
+$1$-Formen: $\omega \wedge \sigma = - \sigma \wedge \omega$. Dies folgt nun mit:
+\begin{align*}
+	\omega \wedge \sigma(v,w) = \omega(v) \cdot \sigma(w) - \omega(w) \cdot \sigma(v)
+\end{align*}
+ist antisymmetrisch in $\omega$ und $\sigma$. \bewende \medskip \\
+Sei nun $\omega \in \Lambda^k V^*$, wobei $k$ ungerade ist. Dann ist $\omega \wedge \omega = 0$. Dies führt zu:
+% subsubsection 514 (end)
+
+\subsubsection{Lemma 22} % (fold)
+\label{ssub:515}
+Sind $\omega_1, \ldots , \omega_k$ $1$-Formen, so gilt $\forall v_j \in V$:
+\[
+	(\omega_1 \wedge \ldots \wedge \omega_k)(v_1, \ldots , v_k) = \det \enbrace[\big]{\omega_i(v_j)}
+\]
+\minisec{Beweis}
+Beide Seiten sind multilinear und in gleicher Weise alternierend. OE: $\omega_j = e_j^*$, $v_j = e_j$. Dann gilt
+\begin{align*}
+	e_1^* \wedge \ldots \wedge e_k^* (e_1, \ldots , e_k) = 1 = \det (\delta_{ij}) = \det \enbrace[\big]{e_i^*(e_j)}. \bewende 
+\end{align*}
+$\Lambda V^* = \bigoplus_{k=0}^\infty \Lambda^k V^*$ ist, versehen mit dem äußeren Produkt, eine reelle, graduierte, assoziative, antikommutative, $2^n$-dimensionale, 
+unitale Algebra, die \Index{äußere Algebra} (oder auch die \Index{Graßmann-Algebra}). 
+
+Betrachte nun $f : V \to W$ linear. Die \Index{induzierte Abbildung} ist eine Abbildung
+\[
+	f^* : \Lambda W^* \to \Lambda V^* , \qquad \omega \mapsto f^* \omega
+\] 
+wobei $\omega$ eine $k$-Form ist, gegeben durch
+\[
+	(f^* \omega)(v_1, \ldots , v_k) := \omega\enbrace[\big]{f(v_1), \ldots , f(v_k)}
+\]
+$f^*$ ist ein Algebrenhomomorphismus:
+\[
+	f^*( \omega \wedge \sigma) = (f^* \omega) \wedge (f^* \sigma)
+\]
+Betrachtet man nun $f : V \to V$, wobei $\dim V = n$ und eine nichttriviale $n$-Form $\omega$, d.h.
+\(
+	\omega \in \Lambda^n V^* \setminus \set{0} 
+\)
+($\dim \Lambda^n V^* = 1$), eine sogenannte \Index{Volumenform}. $\det f$ ist die eindeutig bestimmte reelle Zahl, für die gilt: $(f^* \omega) = \det(f) \cdot \omega$.
+Dies hängt nicht von der Wahl der Volumenform ab! Sei $e_1, \ldots, e_n$ eine Basis von $V$, $e_1^*, \ldots , e_n^*$ die duale Basis und 
+$\omega = e_1^* \wedge \ldots \wedge e_n^*$. Dann ist $f$ durch die Matrix 
+\[
+	A= (a_{ij}) = \benbrace*{f(e_1), \ldots , f(e_n)}
+\]
+gegeben. Damit:
+\begin{align*}
+	(f* \omega)(e_1, \ldots, e_n) = \omega \enbrace[\big]{f(e_1), \ldots , f(e_n)}  
+	&= e_1^* \wedge \ldots \wedge e_n^* \enbrace*{ \sum_k a_{k1} e_k , \ldots , \sum_k a_{kn} e_k} \\
+	&= \det \enbrace*{ e_i^* \enbrace*{\sum_k a_{kj} e_k}} \\
+	&= \det (a_{ij}) = \det A 
+\end{align*}
+$\Rightarrow $ $\det f$ stimmt mit der Determinante der Matrix $A$ überein. Diese koordinatenfreie Definition wird es uns erlauben, einen Integralbegriff auf 
+differenzierbaren Mannigfaltigkeiten einzuführen.
+% subsubsection 515 (end)
+% subsection 51 (end)
+% section 5 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
