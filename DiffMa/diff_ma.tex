@@ -1094,7 +1094,7 @@ Seien $X,Y$ Vektorfelder auf $M$ mit Fluss $\Phi_t$ bzw. $\Psi_s$. Dann gilt:
 \end{description}
 % subsubsection 248 (end)
 % subsection 24 (end)
-\newpage
+
 \subsection{Dynamische Systeme} % (fold)
 \label{sub:25}
 
@@ -1269,9 +1269,9 @@ Ein \Index{lokaler Fluss} auf $M$ ist eine differenzierbare Abbildung $\Phi  : D
 $D \subset \mathds{R} \times M$, sodass für jeden Punkt $p \in M$ die Menge $D \cap (\mathds{R} \times \set{p})$ ein Intervall ist. Weiter gelte $\Phi(0,p) = p$ und 
 $\Phi(s+t, p) = \Phi\enbrace[\big]{s, \Phi(t,p)}$ für alle $s,t,p$, für die beide Seiten erklärt sind.\\
 Auf ${\color{Tomato2}\set{t}\times M}$ ist $\Phi_t$ kein Diffeomorphismus auf $M$, da $\Phi_t$ \emph{nicht} überall erklärt ist.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering{
-	\begin{tikzpicture}[scale=0.7]
+	\begin{tikzpicture}[scale=0.7, yscale=0.9]
 		\coordinate (A) at (-3,-4);
 		\coordinate (B) at (3,-4);
 		\coordinate (C) at (0.3,4);
@@ -1790,9 +1790,36 @@ $\Rightarrow \dot{\abs*{(g \circ \gamma)} } \le 1$
 	\Rightarrow \abs*{ g \enbrace[\big]{\gamma(t)} - g \enbrace[\big]{\gamma(0)}  } \le \int_{0} ^{\abs*{t} } \abs*{\dot{(g \circ \gamma)}} \le \abs*{t}    
 \]
 Da $g$ eine eigentlich Abbildung ist, bliebe die Lösungskurve $\gamma$ in einem Kompaktum, falls $\gamma$ nur für endliche Zeiten existiert. Da dies \emph{nicht} möglich 
-ist, ist der Fluss von $Y$ global. \bewende \\
-\todo[inline]{Hier fehlt noch ein ganzes Stück, wurde anscheinend in der Vorlesung übersprungen oder vergessen!}
+ist, ist der Fluss von $Y$ global. \bewende 
 % subsubsection 341 (end)
+Auf einer vollständigen Riemannschen Mannigfaltigkeit $(M,g)$ kann man die Vollständigkeit von Flüssen durch die Beschränktheit der integrierenden Vektorfelder erzwingen:
+Sei
+\begin{itemize}
+	\item $M$ eine zusammenhängende differenzierbare Mannigfaltigkeit
+	\item $g$ eine Riemannsche Metrik auf $M$
+\end{itemize}
+\[
+	d(p,q) := \inf_{\gamma} \int_{a} ^{b} \! \abs*{\dot{\gamma}(t)}  \, \mathrm{d}t 
+\]
+definiert eine Metrik $d$ auf $M$, wobei das Infimum über alle stückweisen $C^1$-Kurven $\gamma$, die $p=\gamma(a)$ mit $q = \gamma(b)$ verbinden, erstreckt wird.
+
+Nach dem Satz von Hopf-Rinow\footnote{Sollen wir anscheinend kennen: \url{https://de.wikipedia.org/wiki/Satz_von_Hopf-Rinow}} ist eien Riemannsche Mannigfaltigkeit $(M,g)$
+\Index{vollständig} genau dann, wenn im metrischen Raum $(M,d)$ die abgeschlossenen und beschränkten Mengen kompakt sind. ($\Leftrightarrow (M,d)$ ist vollständig.)
+
+\subsubsection{Satz 18} % (fold)
+\label{ssub:342}
+Jedes beschränkte Vektorfeld auf einer vollständigen Riemannschen Mannigfaltigkeit ist vollständig integrabel.
+\minisec{Beweis}
+Sei $(M,g)$ eine vollständige Riemannsche Mannigfaltigkeit, $X$ ein beschränktes Vektorfeld auf $M$, d.h. 
+\[
+	\exists K > 0 : \abs*{X} := \sqrt{g(X,X)} < K.   
+\]
+Wegen
+\begin{align*}
+	d \enbrace[\big]{\gamma(t), \gamma(0)} \le \int_{0} ^{\abs*{t}} \!  \abs*{\dot{\gamma}(s)}  \, \mathrm{d}s \le K \cdot \abs*{t} \tag*{da $\dot{\gamma} = X_\gamma$}
+\end{align*}
+und der Kompaktheit von $\overline{B_{K \cdot \abs*{t}} \enbrace[\big]{\gamma(0)} } $ kann man wie in Satz 17 (\ref{ssub:341}) argumentieren. \bewende
+% subsubsection 342 (end) 
 % subsection 34 (end)
 % section 3 (end)
 \newpage
