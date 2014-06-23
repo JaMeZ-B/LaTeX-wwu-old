@@ -2139,7 +2139,7 @@ $\omega_1$ ist eine stetige Abbildung $H : I^n \times [0,1] \to X$ sodass Folgen
 Homotopie ist eine Äqivalenzrelation.
 % subsection 142 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Höhere Homotopiegruppe]{Definition} % (fold)
 \label{sub:143}
 Sei $(X,x_0)$ ein punktierter Raum. Definiere $\pi_n(X,x_0)$ also die Menge der Homotopieklassen von Abbildungen: $\omega : I^n \to X$ mit $\omega(\partial I^n)=\set{x_0} $
 \marginnote{für $n>0$}.
@@ -2269,7 +2269,7 @@ $\pi_n(S^1, s_0) = 0$ für $n \ge 2$
 Es gibt eine Überlagerung $R \to S^1$. \bewende
 % subsection 149 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Faserung]{Definition} % (fold)
 \label{sub:1410}
 Eine stetige Abbildung $p : E \to B$ heißt (Serre-)\Index{Faserung}, falls sie folgende Homotopiehebungseigenschaft hat: Für jedes $n \ge 0$, jede Homotopie 
 $H : I^n \times [0,1] \to B$ und jede partielle Hebung $\tilde{H} : I^n \times \set{0} \cup \partial I^n \times [0,1]$ existiert eine Hebung $\overline{H}$ von $H$
@@ -2327,6 +2327,67 @@ Betrachte:
 Mit Exaktheit folgt $\pi_2(S^2) \cong \pi_1(S^1) \cong \mathds{Z}$ und $\pi_3(S^3) \cong \pi_3(S^2)$. Tatsache: $\pi_3(S^3) \cong \mathds{Z}$.
 % subsection 1412 (end)
 % section 14 (end)
+\newpage
+
+\section{Differenzierbare Mannigfaltigkeiten} % (fold)
+\label{sec:15}
+
+\subsection[Frage zur Differenzierbarkeit von Funktionen auf Mannigfaltigkeiten]{Frage} % (fold)
+\label{sub:151}
+Sei $M$ eine topologische Mannigfaltigkeit. Welche Funktionen $f : M \to \mathds{R}$ sind differenzierbar? Was sind Richtungsableitungen für solche Funktionen? Was sind 
+Richtungen in $M$?
+\minisec{Ansatz}
+$f : M \to \mathds{R}$ heißt $C^\infty :\Leftrightarrow \forall x \in M : \exists x \in U \subseteq M$, $h : U \xrightarrow{\cong}  V \subseteq \mathds{R}^n : f \circ h ^{-1} : V \to \mathds{R}$ ist $C^\infty$ \\
+\textbf{Aber:}
+\begin{enumerate}[a)]
+	\item Ob $f \circ h ^{-1} : V \to R$ $C^\infty$ ist oder nicht, hängt von der Wahl von $h$ ab.
+	\item Jeder Homöomorphismus $f : \mathds{R} \to \mathds{R}$ ist in dieser Definition $C^\infty$!
+\end{enumerate}
+% subsection 151 (end)
+
+\subsection[Definition: Karten, Kartenwechsel, Atlanten]{Definition} % (fold)
+\label{sub:152}
+Sei $M^n$ eine topologische $n$-Mannigfaltigkeit. 
+\begin{enumerate}[a)]
+	\item Eine \Index{Karte} für $M$ ist ein Homöomorphismus $h : U \xrightarrow{\cong}  V$ mit $U \subseteq M$ offen, $V\subseteq\mathds{R}^n$ offen. $U$ heißt das 
+	\Index{Kartengebiet} von $h$. Ist $x \in U$, so heißt $h$ eine \bet{Karte um} $x$.
+	\item Sind $h_i : U_i \xrightarrow{\cong} V_i$, $i=0,1$ zwei Karten, so heißt 
+	\[
+		h_1 \circ h_0 ^{-1}\big|_{h_0(U_0 \cap U_1)} : \underset{\subseteq V_0 \subseteq \mathds{R}^n}{h_0(U_0 \cap U_1)} \to \underset{\subseteq V_1 \subseteq 
+		\mathds{R}^n}{h_1 (U_0 \cap U_1)}
+	\]
+	der \Index{Kartenwechsel} zwischen $h_0$ und $h_1$. Ein Kartenwechsel ist ein Homöomorphismus zwischen offenen Teilmengen des $\mathds{R}^n$. 
+	\item Eine Menge von Karten $\set[h_\alpha : U_\alpha \to V_\alpha]{\alpha \in A}$ heißt ein \Index{Atlas} für $M$, wenn die Kartengebiete $U_\alpha$ die 
+	Mannigfaltigkeit überdecken:
+	\(
+		M = \bigcup_{\alpha \in A} U_\alpha
+	\)
+	\item Ein Atlas $\mathcal{A}$ heißt $C^\infty$ (oder \bet{glatt}\index{Atlas!glatt}), wenn alle Kartenwechsel zwischen Karten aus $\mathcal{A}$ 
+	$C^\infty$-Abbildungen sind.
+\end{enumerate}
+% subsection 152 (end)
+
+\subsection[Definition: Differenzierbare Mannigfaltigkeit]{Definition} % (fold)
+\label{sub:153}
+Eine $C^\infty$-Mannigfaltigkeit ist eine topologische Mannigfaltigkeit zusammen mit einem $C^\infty$-Atlas $\mathcal{A}$.
+% subsection 153 (end)
+
+\subsection{Beispiele} % (fold)
+\label{sub:154}
+\begin{enumerate}[(1)]
+	\item $U \subseteq \mathds{R}^n$ offen ist eine $C^\infty$-Mannigfaltigkeit mit Atlas $\set{\id_U}$.
+	\item $S^n$: Definiere Kartengebiete $U_{kj} := \set[x \in S^n]{(-1)^j x_k > 0}$ für $k=0, \ldots, n$, $j=0,1$. Sei 
+	\[
+		h_{kj} : U_{kj} \to \mathring{D}^n = \set[x \in \mathds{R}^n]{\norm[2]{x} < 1 } 
+	\]
+	mit 
+	\[
+		h_{kj} (x_0, \ldots , x_n) = (x_0, \ldots , x_{k-1}, x_{k+1}, \ldots , x_n)
+	\]
+	Dann ist $\mathcal{A} = \set[h_{kj}]{k=0, \ldots ,n \enspace j=0,1}$ ein $C^\infty$-Atlas für $S^n$.
+\end{enumerate}
+% subsection 154 (end)
+% section 15 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
