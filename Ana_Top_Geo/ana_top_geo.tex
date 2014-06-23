@@ -2349,9 +2349,9 @@ $f : M \to \mathds{R}$ heißt $C^\infty :\Leftrightarrow \forall x \in M : \exis
 \label{sub:152}
 Sei $M^n$ eine topologische $n$-Mannigfaltigkeit. 
 \begin{enumerate}[a)]
-	\item Eine \Index{Karte} für $M$ ist ein Homöomorphismus $h : U \xrightarrow{\cong}  V$ mit $U \subseteq M$ offen, $V\subseteq\mathds{R}^n$ offen. $U$ heißt das 
+	\item Eine \Index{Karte} für $M$ ist ein Homöomorphismus $h : U \xrightarrow{\approx}V$ mit $U \subseteq M$ offen, $V\subseteq\mathds{R}^n$ offen. $U$ heißt das 
 	\Index{Kartengebiet} von $h$. Ist $x \in U$, so heißt $h$ eine \bet{Karte um} $x$.
-	\item Sind $h_i : U_i \xrightarrow{\cong} V_i$, $i=0,1$ zwei Karten, so heißt 
+	\item Sind $h_i : U_i \xrightarrow{\approx} V_i$, $i=0,1$ zwei Karten, so heißt 
 	\[
 		h_1 \circ h_0 ^{-1}\big|_{h_0(U_0 \cap U_1)} : \underset{\subseteq V_0 \subseteq \mathds{R}^n}{h_0(U_0 \cap U_1)} \to \underset{\subseteq V_1 \subseteq 
 		\mathds{R}^n}{h_1 (U_0 \cap U_1)}
@@ -2372,7 +2372,7 @@ Sei $M^n$ eine topologische $n$-Mannigfaltigkeit.
 Eine $C^\infty$-Mannigfaltigkeit ist eine topologische Mannigfaltigkeit zusammen mit einem $C^\infty$-Atlas $\mathcal{A}$.
 % subsection 153 (end)
 
-\subsection{Beispiele} % (fold)
+\subsection[Beispiele für differenzierbare Mannigfaltigkeiten]{Beispiele} % (fold)
 \label{sub:154}
 \begin{enumerate}[(1)]
 	\item $U \subseteq \mathds{R}^n$ offen ist eine $C^\infty$-Mannigfaltigkeit mit Atlas $\set{\id_U}$.
@@ -2385,8 +2385,66 @@ Eine $C^\infty$-Mannigfaltigkeit ist eine topologische Mannigfaltigkeit zusammen
 		h_{kj} (x_0, \ldots , x_n) = (x_0, \ldots , x_{k-1}, x_{k+1}, \ldots , x_n)
 	\]
 	Dann ist $\mathcal{A} = \set[h_{kj}]{k=0, \ldots ,n \enspace j=0,1}$ ein $C^\infty$-Atlas für $S^n$.
+	\item $\mathds{R}P^n = \nicefrac{S^n}{x \sim -x}$: Setze 
+	\[
+		U_k := \set[{\benbrace[\big]{(x_0, \ldots, x_n)} \in \mathds{R}P^n}]{x_k \not= 0} 
+	\]
+	und definiere $h_k : U_k \to \mathring{D}^n$ durch
+	\[
+		h_k \enbrace[\big]{[x_0, \ldots, x_n]} = \frac{x_k}{\abs*{x_k}} \enbrace*{x_0, \ldots , x_{k-1}, x_{k+1}, \ldots, x_n} .  
+	\]
+	Dann ist $\set[h_k]{k=0,\ldots , n}$ ein $C^\infty$-Atlas für $\mathds{R}P^n$.
+	\item Sind $(M, \mathcal{A})$ und $(N, \mathcal{B})$ $C^\infty$-Mannigfaltigkeiten, so ist $\set[h \times k]{h \in \mathcal{A}, k \in \mathcal{B}}$ ein
+	$C^\infty$-Atlas für $M \times N$.
 \end{enumerate}
 % subsection 154 (end)
+
+\subsection[Bemerkung: Maximaler Atlas]{Bemerkung} % (fold)
+\label{sub:155}
+Sei $(M,\mathcal{A})$ eine $C^\infty$-Mannigfaltigkeit. Eine Karte $h : U \to V$ für $M$ (nicht notwendig in $\mathcal{A}$) heißt eine $C^\infty$-Karte, wenn alle 
+Kartenwechsel zwischen $h$ und einer Karte aus $\mathcal{A}$ $C^\infty$ sind. Offenbar besteht $\mathcal{A}$ aus $C^\infty$-Karten. Es ist auch 
+$\mathcal{A}_\mathrm{max} := \set[h]{h \text{ ist $C^\infty$-Karte}}$ ein $C^\infty$-Atlas für $M$. Dieser Atlas ist maximal, d.h. man kann keine weiteren Karten zu 
+$\mathcal{A}_\mathrm{max}$ hinzufügen und immer noch einen $C^\infty$-Atlas erhalten.
+% subsection 155 (end)
+
+\subsection[Definition: Differenzierbarkeit einer Abbildung $f : M \to N$]{Definition} % (fold)
+\label{sub:156}
+Seien $M,N$ $C^\infty$-Mannigfaltigkeiten. Sei $f : M \to N$ eine stetige Abbildung.
+\begin{enumerate}[a)]
+	\item Sei $x \in M$. $f$ heißt $C^\infty$ oder \bet{glatt}\index{Differenzierbarkeit} in $x$, wenn es eine Karten $h_0 : U_0 \to V_0$ von $M$ um $x$ und 
+	$h_1 : U_1 \to V_1$ von $N$ um $f(x)$ gibt, sodass 
+	\[
+		h_1 \circ f \circ h_0 ^{-1}
+	\]
+	auf einer Umgebung von $h_0(x)$ eine $C^\infty$-Abbildung ist.
+	\item Ist $f$ in allen $x \in M$ glatt, so heißt $f$ eine \bet{$C^\infty$-Abbildung}\index{C-Abbildung@$C^\infty$-Abbildung}. Wir schreiben $C^\infty(M,N)$ für die Menge
+	der $C^\infty$-Abbildungen von $M$ nach $N$.
+	\item $M$ und $N$ heißen \Index{diffeomorph} ($\cong$), wenn es $f \in C^\infty(M,N)$ und $g \in C^\infty(N,M)$\marginnote{$\approx$ homöomorph\linebreak$\cong$ diffeomorph} 
+	gibt mit $f \circ g = \id_N$ und $g \circ f = \id_M$. 
+	
+	In diesem Fall heißen $f$ und $g$ \Index{Diffeomorphismen}. 
+\end{enumerate}
+\minisec{Beispiel}
+$(M,\mathcal{A})$ und $(M, \mathcal{A}_\mathrm{max})$ sind diffeomorph: $\id_M : (M,\mathcal{A}) \to (M, \mathcal{A}_\mathrm{max})$ ist ein Diffeomorphismus.
+% subsection 156 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:157}
+\begin{enumerate}[a)]
+	\item Ist $f : M \to N$ glatt in $x$, so ist $h_1 \circ f \circ h_0 ^{-1}$ glatt in einer Umgebung von $h_0(x)$ für \emph{alle} Wahlen von $C^\infty$-Karten
+	$h_0$ um $x$ und $h_1$ um $f(x)$.
+	\item Die Komposition von $C^\infty$-Abbildungen ist wieder eine $C^\infty$-Abbildung.
+	\item Ist $f : M \to N$ bijektiv und $C^\infty$ ist, so ist $f$ noch nicht notwendigerweise ein Diffeomorphismus. (z.B. $f : \mathds{R} \to \mathds{R}$, $x \mapsto x^3$)
+\end{enumerate}
+% subsection 157 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:158}
+\begin{enumerate}[a)]
+	\item Es gibt $C^\infty$-Mannigfaltigkeiten $M$ und $N$, sodass $M$ und $N$ zueinander homöomorph sind, aber nicht diffeomorph sind. Dabei kann man sogar $M=S^7$ wählen.
+	\item Es gibt topologische Mannigfaltigkeiten, auf denen kein $C^\infty$-Atlas existiert.
+\end{enumerate}
+% subsection 158 (end)
 % section 15 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
