@@ -583,7 +583,7 @@ Schreibe für die induzierte Abbildung {\color{Tomato3}$f'$} wieder $f$.
 \end{align*}
 Dann gilt für alle $\varphi \in C^\infty(\mathds{R}^n)$:
 \[
-	T_0 f \enbrace*{\diff{}{x^i} }(\varphi)= \diff{}{x^i} (\varphi \circ f) (0)  = \sum_{j=1}^{n} \diff{\varphi}{y^j}(0) \cdot \diff{f^j}{x^i}(0)  
+	T_0 f \enbrace*{\diff{}{x^i} }(\varphi)= \diff{}{x^i} (\varphi \circ f) (0)  = \sum_{j=1}^{n} \diff{\varphi}{y^j}(0) \cdot \diff{f^j}{x^i}(0) \marginnote{Kettenregel} 
 \]
 Also 
 \[
@@ -1879,32 +1879,33 @@ $\Gamma(TM) := \set{\text{Vektorfelder auf }M}$ ist ein reeller Vektorraum und e
 % subsection 41 (end)
 \subsection{Das Kotangentialbündel} % (fold)
 \label{sub:42}
+Wir erinnern uns an die Definition des Dualraumes aus LA \RM{2}:
 \begin{align*}
 	T_p^* M := \enbrace*{T_pM}^* = \Hom\enbrace[\big]{T_pM, \mathds{R}} &= \text{ Vektorraum dual zu } T_p M  \\
 	&= \text{ Vektorraum aller Linearformen (oder 1-Formen) auf } T_pM
 \end{align*}
 Wir setzen $T^*M := \bigcup_{p \in M} T_p^* M$. Sei weiter $\pi^{(*)} : T^*M \to M$ mit $\omega \mapsto p$, falls $\omega \in T_p^* M$. Ein Atlas 
-$\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differenzierbare Struktur auf $T^*M$ analog zum Tangentialbündel.
+$\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differenzierbare Struktur auf $T^*M$ analog zum Tangentialbündel:
 \begin{description}
 	\item[Karten:] $\tilde{h}^{(*)}_\alpha : \enbrace*{\pi^{(*)}} ^{-1} (U_\alpha) \to \mathds{R}^{2m}$, 
 	\[
 		\omega \mapsto \enbrace*{h_\alpha \enbrace*{\pi^{(*)}(\omega)}; \omega \enbrace*{\diff{}{x^1}}, \ldots , \omega \enbrace*{\diff{}{x^m} }   } 
 	\]
-	Sei $\mathrm{d}x^1, \ldots , \mathrm{d}x^m$ zu $\diff{}{x^1}, \ldots , \diff{}{x^m}$ die duale Basis definiert durch 
+	Sei $\mathrm{d}x^1, \ldots , \mathrm{d}x^m$ die zu $\diff{}{x^1}, \ldots , \diff{}{x^m}$ duale Basis definiert durch 
 	$\mathrm{d}x^i \enbrace*{\diff{}{x^j} } = \delta_{ij} $ und $\omega= \omega_i \mathrm{d}x^i$. Dann ist
 	\[
 		\tilde{h}_\alpha^{(*)} (\omega) = \enbrace*{x^1, \ldots, x^m, \omega_1, \ldots , \omega_m} 
 	\]
 	\item[Kartenwechsel:] Eine differenzierbare Abbildung $f : M \to N$ induziert eine lineare Abbildung $f^* : T^*_{f(p)}N \to T^*_pM$ definiert durch 
 	\[
-		(f^* \omega)(X) := \omega \enbrace[\big]{T_p f(X)} \qquad , \enspace \omega \in T_{f(p)}^*N, X \in T_pM
+		(f^* \omega)(X) := \omega \enbrace[\big]{T_p f(X)} \qquad  \quad \omega \in T_{f(p)}^*N, X \in T_pM
 	\]
-	In lokalen Koordinaten ist diese Abbildung durch die Transponierte $(J(f))^T$ der Jacobischen gegeben:
+	In lokalen Koordinaten ist diese Abbildung durch die Transponierte $J(f)^T$ der Jacobischen gegeben:\marginnote{siehe auch \ref{ssub:157}}
 	\begin{align*}
 		\enbrace*{f^*(\mathrm{d}y^j)} \enbrace*{\diff{}{x^i} } = \mathrm{d}y^j \enbrace[\bigg]{\underbrace{T f \enbrace*{\diff{}{x^i} }}_{= \diff{f^k}{x^i} \diff{}{y^k}} } 
-		= \mathrm{d}y^j \enbrace*{\diff{f^k}{x^i} \diff{}{y^k}} = \diff{f^k}{x^i} \mathrm{d}y^j \enbrace*{\diff{}{y^k} } = \diff{f^k}{x^i}    
+		= \mathrm{d}y^j \enbrace*{\diff{f^k}{x^i} \diff{}{y^k}} = \diff{f^k}{x^i} \mathrm{d}y^j \enbrace*{\diff{}{y^k} } = \diff{f^j}{x^i}    
 	\end{align*}
-	Damit folgt $f* \mathrm{d}y^j = \diff{f^j}{x^i} \mathrm{d} x^i $, wobei $j$ der Zeilenindex und $i$ der Spaltenindex ist. Wie für die Kartenwechsel für $TM$ sehen wir,
+	Damit folgt $f^* \mathrm{d}y^j = \diff{f^j}{x^i} \mathrm{d} x^i $, wobei $j$ der Zeilenindex und $i$ der Spaltenindex ist. Wie für die Kartenwechsel für $TM$ sehen wir,
 	dass die Kartenwechsel von $T^*M$ in den ersten $m$-Komponenten durch die Kartenwechsel auf $M$ gegeben sind. In den zweiten $m$ Komponenten durch die Transponierte 
 	der Jacobischen dieser Kartenwechsel. 
 \end{description}
@@ -1912,13 +1913,12 @@ $\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differen
 \subsubsection[Definition: $1$-Form]{Definition} % (fold)
 \label{ssub:421}
 Eine \bet{$1$-Form}\index{1-Form@$1$-Form} $\omega$ auf einer differenzierbaren Mannigfaltigkeit $M$ ist ein differenzierbarer Schnitt des Kotangentialbündels, d.h. 
-$\omega \in C^\infty(M, T^*M)$ mit $\pi^{(*)} \circ \omega = \id_M$. Wir definieren wieder $\Gamma(T^*M) = \set{1 \text{-Formen auf }M}$.
-
+$\omega \in C^\infty(M, T^*M)$ mit $\pi^{(*)} \circ \omega = \id_M$. Wir definieren wieder $\Gamma(T^*M) := \set{1 \text{-Formen auf }M}$. \smallskip \\
 Sei $f \in C^\infty(M)$. Betrachte Testfunktion auf $\mathds{R}$: $\mathds{R} \ni t \xmapsto{\id} t \in \mathds{R}$. Dann gilt
 \[
 	T_p f (X) (\id) = X( \id \circ f) = X(f)
 \]
-d.h. lokal $T_p f(X) = X(f) \diff{}{t}$.
+d.h. lokal gilt $T_p f(X) = X(f) \diff{}{t}$.
 % subsubsection 421 (end)
 
 \subsubsection[Definition: Totales Differential]{Definition} % (fold)
@@ -1943,7 +1943,8 @@ d.h. $\mathrm{d} f = \diff{f}{x^i} \mathrm{d}x^i $ ist das \Index{totale Differe
 Ein ($n$-dimensionales reelles topologisches) \Index{Vektorraumbündel} über $B$ ist ein Tripel $(E,\pi, B)$ mit
 \begin{itemize}
 	\item $E,B$ sind Hausdorff-Räume. \marginnote{$B$ als Mannigfaltigkeit, $E$ als Menge der Tangentialräume vorstellen}
-	\item $\pi : E \to B$ ist stetige Surjektion, sodass jede \Index{Faser} $E_b := \pi ^{-1}(b)$ die Struktur eines $n$-dimensionalen Vektorraumes hat, und sodass
+	\item $\pi : E \to B$ ist stetige Surjektion, sodass jede \Index{Faser} $E_b := \pi ^{-1}(b)$ für $b \in B$ die Struktur eines $n$-dimensionalen Vektorraumes 
+	hat, und sodass
 	\item \Index{lokale Trivialität} gilt: Für jedes $b \in B$ gibt es eine Umgebung $U$ von $b$ und einen Homöomorphismus $\varphi : \pi^{-1}(U) \to U\times \mathds{R}^n$,
 	sodass  
 	\[
@@ -1959,7 +1960,7 @@ $E$ heißt der \Index{Totalraum}, $\pi $ die \Index{Bündelprojektion}, $B$ die 
 		U &
 	\end{tikzcd}
 \]
- Bündel heißt \bet{trivial}\index{triviales Bündel}, falls es eine (globale) Bündelkarte $(B,\varphi)$ gibt, d.h. 
+Ein Bündel heißt \bet{trivial}\index{triviales Bündel}, falls es eine (globale) Bündelkarte $(B,\varphi)$ gibt, d.h. 
 \[
 	\varphi : E \xrightarrow{\cong} B \times \mathds{R}^n 
 \]
@@ -2008,10 +2009,10 @@ $E$ heißt der \Index{Totalraum}, $\pi $ die \Index{Bündelprojektion}, $B$ die 
 			\coordinate (x) at (35:1);
 			\coordinate (-x) at (215:1);
 			\coordinate (zero) at (0,0);
-			\draw (0,0) node[below]{$0$} circle[radius=1] ;
-			\draw (215:1.5) -- (-x) node[left]{$-x$} -- (x) node[right]{$x$}-- ++ (35:0.5);
+			\draw[thick] (0,0) node[below]{$0$} circle[radius=1] ;
+			\draw[thick] (215:1.5) -- (-x) node[left]{$-x$} -- (x) node[right]{$x$}-- ++ (35:0.5);
 			\foreach \b in {x,-x,zero}{
-				\draw[fill=Tomato1] (\b) circle[radius=0.03];
+				\draw[fill=Tomato1] (\b) circle[radius=0.035];
 			}
 		\end{tikzpicture}
 		\caption{Kanonisches Geradenbündel}}
@@ -2022,9 +2023,9 @@ $E$ heißt der \Index{Totalraum}, $\pi $ die \Index{Bündelprojektion}, $B$ die 
 \subsubsection[Definition: Bündelmorphismus]{Definition} % (fold)
 \label{ssub:432}
 Ein \Index{Bündelmorphismus} $(E,\pi , B) \to (E', \pi', b')$  ist ein Paar $(f, \overline{f})$ stetiger Abbildungen $f : E \to E'$ und $\overline{f} : B \to B'$ mit
-\[
+\(
 	\overline{f} \circ \pi  = \pi' \circ f, 
-\]
+\)
 d.h. 
 \[
 	\begin{tikzcd}
