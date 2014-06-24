@@ -1832,7 +1832,7 @@ und der Kompaktheit von $\overline{B_{K \cdot \abs*{t}} \enbrace[\big]{\gamma(0)
 Die Gesamtheit der Tangentialräume einer $m$-dimensionalen differenzierbaren Mannigfaltigkeit hat die Struktur einer $2m$-dimensionalen Mannigfaltigkeit und die eines
 sogenannten Vektorraumbündels.
 \[
-	TM := \bigcup_{p \in M} T_pM
+	TM := \bigsqcup_{p \in M} T_pM
 \]
 Es existiert eine Projektion $\pi : T M  \to M $, $X \mapsto p$, falls $X \in T_pM$. Betrachte den Atlas $\mathcal{A} = \set{(U_\alpha, h_\alpha)}_{\alpha \in A} $ für $M$ mit 
 $h_\alpha = \enbrace*{x^1_\alpha, \ldots , x^m_\alpha}$. Wir wollen die Karten definieren, die $T M$ zu einer Mannigfaltigkeit machen:
@@ -1884,7 +1884,7 @@ Wir erinnern uns an die Definition des Dualraumes aus LA \RM{2}:
 	T_p^* M := \enbrace*{T_pM}^* = \Hom\enbrace[\big]{T_pM, \mathds{R}} &= \text{ Vektorraum dual zu } T_p M  \\
 	&= \text{ Vektorraum aller Linearformen (oder 1-Formen) auf } T_pM
 \end{align*}
-Wir setzen $T^*M := \bigcup_{p \in M} T_p^* M$. Sei weiter $\pi^{(*)} : T^*M \to M$ mit $\omega \mapsto p$, falls $\omega \in T_p^* M$. Ein Atlas 
+Wir setzen $T^*M := \bigsqcup_{p \in M} T_p^* M$. Sei weiter $\pi^{(*)} : T^*M \to M$ mit $\omega \mapsto p$, falls $\omega \in T_p^* M$. Ein Atlas 
 $\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differenzierbare Struktur auf $T^*M$ analog zum Tangentialbündel:
 \begin{description}
 	\item[Karten:] $\tilde{h}^{(*)}_\alpha : \enbrace*{\pi^{(*)}} ^{-1} (U_\alpha) \to \mathds{R}^{2m}$, 
@@ -1942,7 +1942,7 @@ d.h. $\mathrm{d} f = \diff{f}{x^i} \mathrm{d}x^i $ ist das \Index{totale Differe
 \label{ssub:431}
 Ein ($n$-dimensionales reelles topologisches) \Index{Vektorraumbündel} über $B$ ist ein Tripel $(E,\pi, B)$ mit
 \begin{itemize}
-	\item $E,B$ sind Hausdorff-Räume. \marginnote{$B$ als Mannigfaltigkeit, $E$ als Menge der Tangentialräume vorstellen}
+	\item $E,B$ sind Hausdorff-Räume. \marginnote{$B$ als Mannigfaltigkeit, $E$ als Menge der Tangentialräume vorstellen $\Rightarrow$ Tangentialbündel}
 	\item $\pi : E \to B$ ist stetige Surjektion, sodass jede \Index{Faser} $E_b := \pi ^{-1}(b)$ für $b \in B$ die Struktur eines $n$-dimensionalen Vektorraumes 
 	hat, und sodass
 	\item \Index{lokale Trivialität} gilt: Für jedes $b \in B$ gibt es eine Umgebung $U$ von $b$ und einen Homöomorphismus $\varphi : \pi^{-1}(U) \to U\times \mathds{R}^n$,
@@ -2022,7 +2022,7 @@ Ein Bündel heißt \bet{trivial}\index{triviales Bündel}, falls es eine (global
 
 \subsubsection[Definition: Bündelmorphismus]{Definition} % (fold)
 \label{ssub:432}
-Ein \Index{Bündelmorphismus} $(E,\pi , B) \to (E', \pi', b')$  ist ein Paar $(f, \overline{f})$ stetiger Abbildungen $f : E \to E'$ und $\overline{f} : B \to B'$ mit
+Ein \Index{Bündelmorphismus} $(E,\pi , B) \to (E', \pi', B')$  ist ein Paar $(f, \overline{f})$ stetiger Abbildungen $f : E \to E'$ und $\overline{f} : B \to B'$ mit
 \(
 	\overline{f} \circ \pi  = \pi' \circ f, 
 \)
@@ -2344,6 +2344,116 @@ $\Rightarrow $ $\det f$ stimmt mit der Determinante der Matrix $A$ überein. Die
 differenzierbaren Mannigfaltigkeiten einzuführen.
 % subsubsection 515 (end)
 % subsection 51 (end)
+
+\subsection{Differentialformen} % (fold)
+\label{sub:52}
+\subsubsection[Definition: Differentialform]{Definition} % (fold)
+\label{ssub:521}
+Eine \Index{Differentialform} vom Grad $k$ (oder $k$-Form) auf einer differenzierbaren Mannigfaltigkeit $M$ ist eine Zuordnung einer $k$-Form $\omega_p$ auf $T_p M$ zu 
+jedem Punkt der Mannigfaltigkeit, die differenzierbar von $p$ abhängt, d.h. in jeder lokalen Karte $(U, x^1, \ldots , x^m)$ hängen die Komponentenfunktionen
+\[
+	\omega_{i_1, \ldots , i_k} := \omega \enbrace*{\diff{}{x^{i_1}}, \ldots , \diff{}{x^{i_k}}} : U \longrightarrow \mathds{R} 
+\]
+differenzierbar von $p$ ab. Wir setzen:
+\begin{align*}
+	\Omega^k M &:= \text{ $\mathds{R}$-Vektorraum aller $k$-Formen auf $M$; $C^\infty(M)$-Modul} \\
+	\Omega^0 M &:= C^\infty(M)
+\end{align*}
+% subsubsection 521 (end)
+
+\subsubsection{Bemerkung} % (fold)
+\label{ssub:522}
+Das \Index{äußere Bündel} $\Lambda^k(T^* M)$ habe die Fasern $\Lambda^k(T^*_p M)$ für alle $p \in M$. Die Übergangsfunktionen entsprechen dem komponentenweisen Anwenden von 
+$J^T_{h_\beta \circ h_\alpha ^{-1}}$ auf das $k$-fache äußere Produkt von $1$-Formen. Ein Element $\omega \in \Lambda^k(T^* M)$ lässt sich in lokalen Koordinaten durch
+\[
+	\omega = \sum_{i_1 < \ldots < i_k} \omega_{i_1, \ldots , i_k} \mathrm{d}x^{i_1} \wedge \ldots \wedge \mathrm{d}x^{i_k} \marginnote{vgl. Riemannsche Metrik}
+\]
+eindeutig darstellen. Eine $k$-Form auf $M$ ist ein differenzierbarer Schnitt in $\Lambda^k(T^* M)$
+\begin{align*}
+	\Omega^k M &= \Gamma \enbrace*{\Lambda^k(T^* M)} \tag*{Schnitte in $\Lambda^k T^* M$} \\
+	\Omega^1 M &= \Gamma (T^* M) \\
+	\Omega^0 M &= C^\infty(M) = \Gamma (\varepsilon^1 = M \times \mathds{R})
+\end{align*}
+Das äußere Produkt $\omega \wedge \sigma$ zweier Differentialformen ist punktweise durch
+\[
+	(\omega \wedge \sigma)_p := \omega_p \wedge \sigma_p \qquad \forall p \in M
+\]
+gegeben. $\Omega M := \bigoplus_{k=0}^\infty \Omega^k M$ ist die \Index{Graßmann-Algebra}. 
+% subsubsection 522 (end)
+
+\subsubsection{Lemma 23 (Tensorialitätseigenschaft)} % (fold)
+\label{ssub:523}
+$k$-Formen auf $M$ entsprechen genau den $C^\infty(M)$-multilinearen alternierenden Abbildungen
+\[
+	\underbrace{\Gamma(T M) \times \ldots \times \Gamma(T M)}_{\text{$k$-mal}} \longrightarrow
+\]
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow$":] Sei $\omega$ eine $k$-Form, $X_1, \ldots , X_k$ Vektorfelder. Betrachte
+	\[
+		\enbrace*{\omega \enbrace*{X_1, \ldots , X_k} } (p) := \omega_p \enbrace*{{X_1}_p, \ldots, {X_k}_p}  
+	\] 
+	Dies definiert eine alternierende $C^\infty(M)$-multilineare Abbildung.
+	\item["$\Leftarrow$":] Sei OE $k=1$. Sei $\omega : \Gamma(T M) \to C^\infty(M)$, $x \mapsto \omega(x)$ eine $C^\infty(M)$-lineare Abbildung. Wir wollen eine $1$-Form auf
+	$M$ erklären durch
+	\[
+		p \longmapsto \enbrace*{\omega_p : T_pM \to \mathds{R}} \qquad \omega_p(v) := \enbrace[\big]{\omega(X)}(p) 
+	\]
+	Dabei ist $X$ ein Vektorfeld auf $M$ mit $X_p= v$. Gilt für ein weiteres $X'$ $X'_p =v$, so folgt
+	\[
+		\omega(X - X')(p) = \omega(X)(p) - \omega(X')(p)
+	\]
+	\textbf{Behauptung:} Sei $Y$ ein Vektorfeld auf $M$ mit $Y_p =0$, dann gilt $\omega(Y)(p)=0$
+	
+	Mit $Y := X -X'$ folgt dann die Unabhängigkeit der Definition von der Wahl des Vektorfeldes $X$.
+	
+	Betrachte dazu die Abschneidefunktion $\varphi \in C^\infty(M)$ mit $\supp \varphi \subset U$
+	\missingfigure{Abschneidefunktion $\varphi$ (Zeichnung ähnelt einem Hut)}
+	Sei $(U, x^1, \ldots , x^m)$ eine Karte mit $p \equiv 0$. Schreibe $Y = Y^i \diff{}{x^i}$, $Y^i(0)=0$ und setze
+	\[
+		Y_i := \varphi \diff{}{x^i}  \in \Gamma(T M) \qquad a_i := \varphi Y^i \in C^\infty(M) 
+	\]
+	Dann gilt $\sum_i a_i Y_i = \varphi^2 Y$ und es folgt $Y = \sum_i a_i Y_i + (1- \varphi^2) Y$. Wir erhalten
+	\[
+		\omega(Y)(p) = \enbrace*{\sum_i a_i \omega(Y_i) + (1-\varphi^2) \omega(Y)}(p) = 0 
+	\]
+	da $a_i(p)=0$ und $\varphi(p)=1$. Durch Einsetzen von Vektorfeldern $Y_i$ in $\omega$ folgt die Differenzierbarkeit der Zuordnung $p\mapsto\omega_p$. \bewende
+\end{description}
+Damit lassen sich alle natürlichen Konzepte für alternierende $k$-Formen auf differenzierbare $k$-Formen übertragen:
+% subsubsection 523 (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:524}
+\begin{itemize}
+	\item Sei $f : M \to N$ differenzierbar. Die \Index{induzierte Abbildung}  $f^* : \Omega^k N \to \Omega^k M$ ist durch
+	\[
+		\enbrace*{f^* \omega} \enbrace*{X_1, \ldots , X_k} := \omega \enbrace*{T f(X_1), \ldots , T f (X_k)}   
+	\]
+	für Vektorfelder $X_1, \ldots , X_k$ erklärt.
+	Mit Lemma 23 \ref{ssub:523} erhält man:
+	\[
+		(f^* \omega)_p (v_1, \ldots , v_k) = \omega_{f(p)} \enbrace*{T_p f(v_1), \ldots , T_p f (v_k)} 
+	\]
+	für alle $v_1, \ldots , v_k \in T_p M$ und $p \in M$. Die Zuordnung $p \mapsto (f^* \omega)_p$ ist in der Tat differenzierbar.
+	\item $f^*(\omega \wedge \sigma) = (f^* \omega) \wedge (f^* \sigma)$
+	\item Aus der Kettenregel: $(f \circ g)^* = g^* \circ  f^*$ für $g : L \to M$ differenzierbar. \hfill(siehe Blatt 10, Aufgabe 1)
+\end{itemize}
+% subsubsection 524 (end)
+% subsection 52 (end)
+
+\subsection{Das äußere Differential} % (fold)
+\label{sub:53}
+Sei $f \in C^\infty(M)$, $X$ ein Vektorfeld auf $M$. Das äußere Differential von $f$ war $\mathrm{d}f(X) = X(f)$. Lokal:
+\[
+	\mathrm{d}f = \diff{f}{x^i} \mathrm{d}x^i 
+\]
+Die äußere Ableitung ist eine $\mathds{R}$-lineare Abbildung $\mathrm{d} : C^\infty(M) \to \Omega^1(M)$, $f \mapsto \mathrm{d}f$, die wegen 
+\begin{align*}
+	X(f \cdot g) &= X(f) \cdot g + f \cdot X(g) \\
+	\mathrm{d}(f \cdot g) &= \mathrm{d}f \cdot g + f \cdot \mathrm{d} g
+\end{align*}
+der Leibnizregel genügt. Ziel: $\mathrm{d} : \Omega^{k+1} \to \Omega^k$
+% subsection 53 (end)
 % section 5 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
