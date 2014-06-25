@@ -1,7 +1,7 @@
 \documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=13, BCOR=13mm, titlepage]{scrartcl}
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
-
+\usepackage{etoolbox}
 %--Farbdefinitionen
 %-- muss vor tikz geladen werden
 \usepackage[usenames, table, x11names]{xcolor}
@@ -11,6 +11,14 @@
 %--Zum Zeichnen
 %-- muss vor polyglossia bzw. babel geladen werden
 \usepackage{tikz}
+\usetikzlibrary{cd,external}
+\tikzexternalize[prefix=tikz/]
+\tikzset{external/system call={xelatex \tikzexternalcheckshellescape 
+    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
+
 \tikzset{>=latex}
 \usetikzlibrary{shapes,arrows, intersections}
 \usetikzlibrary{calc, 3d}
@@ -24,8 +32,10 @@
   }
 }
 \usetikzlibrary{quotes}
-\usepackage{tikz-cd} %kommutative Diagramme
+% \usepackage{tikz-cd} % kommutative Diagramme
 \usepackage{pgfplots}
+
+
 
 
 %-- Mathe
@@ -85,6 +95,10 @@
 \usepackage{ifthen}
 \usepackage{multicol}
 \usepackage[textsize=small]{todonotes}
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
 \flushbottom
 
 %--Unterstreichung
