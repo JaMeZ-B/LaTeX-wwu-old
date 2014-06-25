@@ -349,7 +349,7 @@ Die übliche Topologie auf $\mathds{R}^n = \prod_{i =1}^n \mathds{R}$ stimmt mit
 	    \begin{axis}[hide axis, view={40}{50}]
 	       \addplot3[surf,
 	       colormap/cool,
-	       samples=10,
+	       samples=50,
 	       domain=0:2*pi,y domain=0:2*pi,
 	       z buffer=sort]
 	       ({(2+cos(deg(x)))*cos(deg(y+pi/2))}, 
@@ -430,7 +430,7 @@ $X = [0,1] \times [0,1]$: Definiere
 			    surf, shader=faceted interp,
 			    point meta=x,
 			    colormap/greenyellow,
-			    samples=40,
+			    samples=70,
 			    samples y=5,
 			    z buffer=sort,
 			    domain=0:360,
@@ -441,7 +441,7 @@ $X = [0,1] \times [0,1]$: Definiere
 			    {0.5*y*sin(x/2)});
 
 			\addplot3 [
-			    samples=50,
+			    samples=60,
 			    domain=-145:180, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
 			    samples y=0,
 			    thick
@@ -831,8 +831,8 @@ Sei $X$ ein topologischer Raum. Ein kompakter Raum $\overline{X}$ heißt eine \I
 	\item $(-1,1) \subseteq [-1,1]$
 	\item $\mathring D^n := \set[x \in \mathds{R}^n]{\norm[2]{x} < 1 } \subseteq D^n = \set[x \in \mathds{R}^n]{\norm[2]{x} \le 1 }  $. Für $n=2$:
 	\[
-		\tikz[baseline=-0.5]{\draw[dashed, fill=LightBlue2] (0,0) circle[radius=0.5]} \enspace\subseteq \enspace
-		\tikz[baseline=-0.5]{\draw[fill=LightBlue2!70] (0,0) circle[radius=0.5]}
+		\tikz[baseline=-0.5]{\draw[dashed, fill=LightBlue2] (0,0) circle[radius=0.5];} \enspace\subseteq \enspace
+		\tikz[baseline=-0.5]{\draw[fill=LightBlue2!70] (0,0) circle[radius=0.5];}
 	\]
 	$\partial D^n = S^{n-1} := \set[x \in \mathds{R}^n]{\norm[2]{x} = 1 } $
 	\item $f : \mathds{R}^n \to \mathring D^n$, $f(x) := \frac{x}{1+ \norm[2]{x}} $ ist ein Homöomorphismus. Daher können wir $\mathds{R}^n$ zu
@@ -1520,7 +1520,7 @@ Dann gibt es eine eindeutige stetige Abbildung. $\hat{\omega} : [0,1] \to \mathd
 Ist $\eta : [0,1] \to S^1$ mit $[\eta] = [\omega]$ und $\hat{\eta} : [0,1] \to \mathds{R}$ mit $\hat{\eta}(0)= t_0$, $p \circ \hat{\eta} = \eta$ so gilt 
 $\hat{\eta}(1) = \hat{\omega}(1)$.
 \minisec{Beweis}
-Homotopiehebungssatz (später) \bewende
+Homotopiehebungssatz (später: \ref{sub:108}) \bewende
 % subsection 102 (end)
 
 \subsection[Definition: Windungszahl]{Definition} % (fold)
@@ -1698,7 +1698,7 @@ Wir schreiben dann $X \simeq Y$ oder $X \xrightarrow[\simeq]{f} Y$. Entsprechend
 		p : \enbrace*{K, x_0} &\to   \enbrace*{\set{x_0}, x_0 } \quad \text{ die konstante Abbildung}
 	\end{align*}
 	$p \circ i = \id_{\enbrace*{\set{x_0}, x_0 } }$ und $i \circ p \simeq \id_{(K,x_0)}$ mit der Homotopie $H(k,t)= t \cdot k + (1-t)x_0$
-	\item Auch $X := \mathds{R}^2 \setminus \set[(x,y)]{x \in (0,\infty) , y \in [0,1]} $ ist kontrahierbar. \todo[noline]{Beschriftungen hinzufügen}
+	\item Auch $X := \mathds{R}^2 \setminus \set[(x,y)]{x \in (0,\infty) , y \in [0,1]} $ ist kontrahierbar.  \todo[noline]{Beschriftungen hinzufügen}
 	\[
 		\begin{tikzpicture}
 			\draw[fill, SkyBlue1!60] (0,0) rectangle (4,1); 
@@ -1731,18 +1731,20 @@ Jede stetige Abbildung $f : D^n \to D^n$ hat einen Fixpunkt.
 Für $n=1$ ist dies eine Folgerung aus dem Zwischenwertsatz. \smallskip \\
 Angenommen $f : D^n \to D^n$ hat keinen Fixpunkt, also $f(x) \not= x$ für alle $x \in D^n$. Dann gibt es eine stetige Abbildung $F : D^n \to S^{n-1}$ mit 
 $F\big|_{S^{n-1}} = \id_{S^{n-1}}$. Konstruktion von $F$ \todo[noline]{Zeichnung vervollständigen}
-\[
+\begin{figure}[H]
+	\centering{
 	\begin{tikzpicture}
 		\coordinate (Fx) at (130:2);
 		\coordinate (fx) at (-20:1);
 		\draw[thick] (0,0) circle[radius=2];
-		\draw[thick, DodgerBlue2] (fx) node[right]{$f(x)$} -- (Fx) node[left]{$F(x)$} node[midway] (x) {};
+		\draw[thick, DodgerBlue2] (fx) node[right]{$f(x)$} -- (Fx) node[left]{$F(x)$} node[midway] (x) { };
 		\node[below left] at (x) {$x$};
 		\foreach \a in {Fx, fx, x}{
 			\draw[fill=Coral2] (\a) circle[radius=0.04];
 		}
-	\end{tikzpicture} 
-\]
+	\end{tikzpicture}
+	}
+\end{figure}
 \begin{enumerate}[(i)]
 	\item $F(x) = t \enbrace*{x- f(x)} + x \enspace, t\ge 0$
 	\item $F(x) \in S^{n-1}$
@@ -1765,7 +1767,7 @@ Für $n=2$ ist das zweite Diagramm
 			\set{e} \urar[swap]{F_*} 
 		\end{tikzcd}
 \]
-Daher folgt $\id = F_* \circ  i_* = $triviale Abbildung \light \bewende
+Daher folgt $\id = F_* \circ  i_* =$ triviale Abbildung \light \bewende
 % subsection 11.8 (end)
 
 \subsection[Proposition: Induzierte Abbildung von $f : S^1 \to S^1$, $z	\mapsto z^n$]{Proposition} % (fold)
@@ -1829,7 +1831,7 @@ Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 		\item Für $g,h \in G$ gilt $g \cdot (h \cdot x)= (g \cdot h) \cdot x$
 		\item Für das neutrale Element $e \in G$ gilt $e \cdot x = x$ für alle $x \in X$
 	\end{itemize}
-	\item Eine Wirkung heißt \bet{frei}\index{Wirkung!frei}, falls $g \cdot x = x \Rightarrow g = e$
+	\item Eine Wirkung heißt \bet{frei}\index{Wirkung!frei}, falls $g \cdot x = x \Rightarrow g = e$.
 	\item Eine Wirkung heißt \bet{eigentlich diskontinuierlich}\index{Wirkung!eigentlich diskontinuierlich} (e.d.k.), falls es zu jedem $x \in X$ eine Umgebung $U$ von $x$
 	gibt mit $g U\cap U = \emptyset$ für alle $g \in G \setminus \set{e}$.
 	\item Durch $x \sim y :\Leftrightarrow \exists g \in G : g \cdot x = y (\Leftrightarrow G x = G y)$ wird eine 
@@ -1838,7 +1840,7 @@ Sei $G$ eine Gruppe und $X$ ein topologischer Raum.
 \end{enumerate}
 % subsection 12.1 (end)
 
-\subsection[Lemma: edk-Wirkungen definieren Überlagerungen]{Lemma} % (fold)
+\subsection[Lemma: Eigentlich diskontinuierliche Wirkungen definieren Überlagerungen]{Lemma} % (fold)
 \label{sub:12.2}
 Sei $G \wirkung X$ eine e.d.k Wirkung. Dann ist $p : X \to G \backslash X$, $x \mapsto Gx$ eine Überlagerung.
 \minisec{Beweis}
@@ -1910,7 +1912,7 @@ ein Gruppenhomomorphismus $\varphi : \pi_1(G \backslash X, \overline{x}_0 ) \to 
 \end{description}
 % subsection 12.4 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: $S^n$ ist wegzusammenhängend, für $n \ge 2$ sogar einfach]{Bemerkung} % (fold)
 \label{sub:12.5}
 Für $n \ge 1$ ist $S^n$ wegzusammenhängend. \hfill  (einfache Übung) \\
 Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übung) \medskip \\
@@ -1935,7 +1937,7 @@ Weg von $x$ nach $y$. Dann sind $\hat{\omega}$ und $f \circ \hat{\omega}$ zwei H
 $\hat{\omega}(0) = x = f(x) = f \circ \hat{\omega}(0)$ folgt mit der Eindeutigkeit im Homotopiehebungssatz $\hat{\omega} = f \circ \hat{\omega}$ und insbesondere $y=f(y)$.
 Da $y$ beliebig war, ist $f= \id_{\hat{X}}$.
 
-Wir können nun zeigen, dass die Wirkung eigentlich diskontinuierlich ist. Sei $x \in \hat{X}$. Sei $U$ eine elementare Umgebung von $p(x)$. Dann ist $p ^{-1}(U)$ die 
+Wir können nun zeigen, dass die Wirkung eigentlich diskontinuierlich ist: Sei $x \in \hat{X}$. Sei $U$ eine elementare Umgebung von $p(x)$. Dann ist $p ^{-1}(U)$ die 
 disjunkte Vereinigung von offenen Mengen $V$, $V \in \mathcal{V}$ von denen jede homöomorph auf $U$ abgebildet wird. Sei $V_0 \in \mathcal{V}$ mit $x \in V_0$. Sei 
 $f \in \Delta(p)$, $f \not= \id$. Für $y \in V_0$ gilt dann $p \enbrace*{f(y)} = p(y) $, $f(y) \not=y$ folgt $f(y) \not\in V_0$. Andernfalls wäre $p\big|_{V_0}$ nicht
 injektiv. Daher $f(V_0) \cap V_0 = \emptyset$. \bewende
