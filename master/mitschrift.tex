@@ -2,6 +2,8 @@
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
+\usepackage{ifxetex}
+
 %--Farbdefinitionen
 %-- muss vor tikz geladen werden
 \usepackage[usenames, table, x11names]{xcolor}
@@ -13,8 +15,14 @@
 \usepackage{tikz}
 \usetikzlibrary{cd,external}
 \tikzexternalize[prefix=tikz/]
+
+\ifxetex
 \tikzset{external/system call={xelatex \tikzexternalcheckshellescape 
     -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+\else
+\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape 
+    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+\fi
 
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
 \AtEndEnvironment{tikzcd}{\tikzexternalenable}
@@ -55,7 +63,6 @@
 \def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
 
 %-- Alles was mit Schrift und XeteX zu tun hat
-\usepackage{ifxetex}
 \ifxetex
     % XeLaTeX
 	\usepackage{mathspec} %beinhaltet fontspec 
@@ -177,6 +184,9 @@
 \DeclareMathOperator{\ann}{ann} %Annulator
 \DeclareMathOperator{\tor}{tor} %Torsionsmodul
 \DeclareMathOperator{\Int}{Int} %Interior/Inneres
+\DeclareMathOperator{\Br}{Br} %Brauerergruppe
+\DeclareMathOperator{\GL}{GL} %allgemeine lineare Gruppe
+\DeclareMathOperator{\Tr}{Tr} %Spur/Trace
 %\DeclareMathOperator{\op}{op} %entgegengesetzter Ring
 \newcommand{\op}{\mathrm{op}}
 
