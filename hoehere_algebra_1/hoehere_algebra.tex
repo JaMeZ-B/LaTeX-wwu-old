@@ -237,6 +237,7 @@ Sei $G$ eine Gruppe, $H,K \le G$ und $H' \unlhd H, K' \unlhd K$. Dann ist
 	H'( H \cap K') \unlhd H'(H \cap K) \enspace\text{ und } \enspace K'( K \cap H') \unlhd K'(K \cap H)
 \]
 und die Quotienten sind isomorph.
+\tikzexternaldisable
 \[	
 	\begin{tikzpicture}[baseline= (a).base]
 		\node[scale=0.7] (a) at (0,0){
@@ -251,6 +252,7 @@ und die Quotienten sind isomorph.
 		};
 	\end{tikzpicture}
 \]
+\tikzexternalenable
 \minisec{Beweis}
 Setze $N := H \cap K$ und $M := H'(H \cap K')$. Dann gilt $N \le N_G(M)$ wegen $H'  \unlhd H, K' \unlhd K$ und daher $M \unlhd N \cdot M = H'(H \cap K)$.\\
 \uline{Behauptung:} Es ist $N \cap M = (H \cap K) \cap \big( H' (H \cap K')\big) = (H' \cap K) ( H \cap K')$.
@@ -2078,7 +2080,7 @@ $A$ endlich dimensionale, zentral einfache $K$-Algebra, $E \subseteq A$ Teilkör
 \begin{enumerate}[(i)]
 	\item $E' = C_A(E) = E$
 	\item $E$ ist ein maximaler kommutativer Unterring von $A$.
-	\item $[A:K] = [E.K]^2$
+	\item $[A:K] = [E:K]^2$
 	\item $[A:K] = [A:E]^2$
 \end{enumerate}
 Insbesondere gilt für maximale Unterkörper in einem Schiefkörper $D$ also 
@@ -2112,7 +2114,7 @@ Daher existieren höchstens $n$ viele Konjugierte von $H$, die alle $1_G$ enthal
 \]
 % subsection 339 (end)
 
-\subsection{Satz (Wedderburn)} % (fold)
+\subsection[Satz (Wedderburn): Endliche Schiefkörper sind kommutativ]{Satz (Wedderburn)} % (fold)
 \label{sub:340}
 Jeder endliche Schiefkörper ist kommutativ.
 \minisec{Beweis}
@@ -2121,12 +2123,127 @@ Nach Korollar \ref{sub:338} (ii) haben alle maximalen Unterkörper denselben Gra
 Da jedes Element von $a \in D$ über $K$ einen kommutativen Teilkörper erzeugt, liegt jedes $a \in D$ in einem Konjugierten von $E$. nach Lemma \ref{sub:339} (angewandt auf 
 die multiplikative Gruppe von $D$) folgt also $E=D=K$. \bewende
 % subsection 340 (end)
+
+\subsection[Definition und Satz: Die Brauergruppe]{Definition und Satz} % (fold)
+\label{sub:341}
+Zwei zentral einfache, endlich dimensionale $K$-Algebren $A$ und $B$ heißen \Index{ähnlich} (oder Brauer-äquivalent, $A \sim B$), falls $A\simeq M_n(D)$, $B\simeq M_k(D)$ 
+für einen Schiefkörper $D$ über $K$, $n,k \in \mathds{N}$. Dabei sind $D,n,k$ nach Satz \ref{sub:229} eindeutig bestimmt. Insbesondere gibt es zu jeder zentral einfachen 
+Algebra $A$ einen Schiefkörper $D$ über $K$ mit $A \sim D$. Offensichtlich ist $\sim$ eine Äquivalenzrelation. 
+
+Für jeden Körper $K$ bildet die Menge der Äquivalenzklassen bezüglich des
+Tensorprodukts eine Gruppe, die \Index{Brauergruppe} $\Br(K)$ von $K$. Dabei ist $[K]$ das Neutralelement (denn $K \sim M_n(K)$) und $A \otimes K \simeq A$ und für
+$[A] \in \Br(K)$ ist $A \otimes A^\op \simeq M_n(K)$, d.h. $[A^\op] = [A]^{-1}$.
+\minisec{Beweis}
+Wir hatten bereits gesehen, dass das Tensorprodukt kommutativ und assoziativ ist, daher ist nur zu zeigen, dass
+\(
+	[A] [B] = [A \otimes B]
+\)
+wohldefiniert ist, d.h. sind 
+\[
+	M_n(D) \otimes M_k(D') \sim M_m(D) \otimes M_l(D') \sim D \otimes D'
+\]
+\minisec{Beispiel}
+\begin{enumerate}[(i)]
+	\item Ist $K$ algebraisch abgeschlossen oder endlich, dann ist $\Br(K)=1$.
+	\item Ist $K=\mathds{R}$, dann folgt aus $[\mathds{C} : \mathds{R}]=2$ und $\mathds{C}$ algebraisch abgeschlossen nach Korollar \ref{sub:340} \todo{Nummerierung prüfen},
+	dass ein Schiefkörper über $\mathds{R}$ Grad 2 (also Dimension 4) hat. Das heißt ist $D$ endlicher Schiefkörper über $\mathds{R}$, dann ist $\dim_\mathds{R}D=\set{1,4}$.
+	Jeder echte Schiefkörper über $\mathds{R}$ ist isomorph zu den Quaternionen.
+\end{enumerate}
+% subsection 341 (end)
 % section 3 (end)
 \newpage
 
 \section{Darstellungstheorie endlicher Gruppen} % (fold)
 \label{sec:4}
 
+\subsection[Definition: Darstellung einer Gruppe]{Definition} % (fold)
+\label{sub:41}
+Eine \Index{Darstellung} einer Gruppe ist (gegeben durch) einen Homomorphismus $\rho : G \to GL(V)$ für einen (endlich dimensionalen) $K$-Vektorraum. Der \Index{Grad} der 
+Darstellung ist $\dim V$. Ist $B = \set{u_1, \ldots , u_n}$ eine $K$-Basis für $V$, dann ergibt jede Darstellung $\rho : G \to \GL(V)$ eine Matrix-Darstellung von $G$,
+indem $\rho(g) \in \GL(V)$ durch die zugehörigen Matrix bezüglich $B$ beschrieben wird. 
+
+Ist $h : G \to \Sym(n)$ ein Homomorphismus, dann erhält man die zugehörige
+\Index{Permutationsdarstellung} durch $\rho(g) u_i = u_{h(g)(i)}$. Dies hat man insbesondere für $\abs*{G}=n$ und 
+\[
+	h : G \to \Sym(G) \quad , \quad  g \mapsto \lambda_g = [x \mapsto g x].
+\]
+% subsection 41 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:42}
+\begin{enumerate}[(i)]
+	\item Ist $G= \langle g \rangle$ zyklisch, $\abs*{G}=n$, dann erhält man für $g=(1, \ldots ,n) \in \Sym(n)$ also $\rho(g)u_i = u_{i+1}$, $\rho(g)u_n= u_1$ mit
+	zugehöriger Matrixdarstellung 
+	\[
+		\rho : g \longmapsto \begin{pmatrix}
+			0 & & & 1 \\
+			1 & \ddots & 0 & \\
+			 & \ddots & \ddots &\\
+			 0 & & 1 & 0
+		\end{pmatrix}
+	\]
+	Ziel ist es, die Struktur aller Darstellungen zu verstehen. Jede Darstellung $\rho : G \to \GL(V)$ hat eine eindeutige Fortsetzung auf die Gruppenalgebra:
+	\[
+		\tilde{\rho} : K[G] \to \End(V) \simeq M_n(K)
+	\]
+	Erinnerung: $K[G]$ ist die $K$-Algebra mit Basis $G = \set{g_1, \ldots, g_n}$ mit Multiplikation 
+	\[
+		\enbrace*{\sum_{g \in G} \alpha_g g} \enbrace*{\sum_{h \in G} \beta_h h} = \sum_{g,h} \alpha_g \beta_h (g \cdot h)
+	\]
+	wobei $\alpha_g, \beta_h \in K$. Umgekehrt induziert jede Darstellung der Gruppenalgebra $K[G] \to \End(V)$ eine Darstellung der Gruppe $G \to \GL(V)$. Durch eine
+	Darstellung $\rho : K[G] \to \End_K(V)$ wird $V$ zu einem $K[G]$-Modul durch 
+	\[
+		\enbrace*{\sum_{g \in G} \alpha_g g} \cdot v= \rho \enbrace*{\sum_g \alpha_g g}(v).
+	\]
+	Das heißt endlich dimensionale Darstellungen einer Gruppe $G$ sind \enquote{das gleiche} wie $K[G]$-Moduln, die als $K$-Vektorräume endlich dimensional sind.
+	
+	
+	\textbf{Übersetzung der Begriffe:} Ist $\rho : G \to \GL{V}$ eine Darstellung, dann ist $U \le V$ ein $K[G]$-Modul von $V$ genau dann, wenn $U$ ein $\rho(G)$-invarianter
+	Untervektorraum von $V$ ist, d.h. wenn $\rho(g)U \subseteq U$ für alle $g \in G$. Ist $U$ ein $K[G]$-Untermodul, dann erhalten wir induzierte Darstellungen, nämlich 
+	$\rho\big|_{U} : G \to \GL(U)$ und die Quotientendarstellung 
+	\[
+		\rho_{\nicefrac{V}{U}} : G \to \GL{\nicefrac{V}{U}} \quad ,\quad p_{\nicefrac{V}{U}} (g) = \benbrace*{x+ U \mapsto \rho(g)(x)+U}
+	\]
+	Eine Darstellung $\rho : G \to \GL(V)$ heißt irreduzibel (bzw. vollständig reduzibel oder halbeinfach), falls $V$ als $K[G]$-Modul irreduzibel (oder einfach) bzw.
+	vollständig reduzibel (oder auch halbeinfach) ist. 
+	
+	\textbf{Erinnerung:} $M$ ist halbeinfacher $R$-Modul $\iff M= \bigoplus M_i$, $M_i$ einfacher $R$-Modul $\iff$ jeder $R$-Untermodul $U \subseteq M$ hat Komplement
+	$U^\bot$ in $M$, d.h. $M= U \oplus U^\bot$.
+\end{enumerate}
+% subsection 42 (end)
+
+\subsection[Definition: Äquivalenz von Darstellungen]{Definition} % (fold)
+\label{sub:43}
+Zwei Darstellungen $\rho_i : G \to \GL(V_i)$, $i=1,2$ heißen \Index{äquivalent}, falls ein Vektorraumisomorphismus $\varphi : V_1 \to V_2$ existiert mit 
+$\rho_2 = \varphi \rho_1 \varphi ^{-1}$. Dann sind offensichtlich $V_1$ und $V_2$ als $K[G]$-Moduln isomorph. 
+% subsection 43 (end)
+
+\subsection[Definition: Spurabbildung]{Definition} % (fold)
+\label{sub:44}
+Sei $G$ eine endliche Gruppe, $V$ ein $K[G]$-Modul (oder $G$-Modul). Die \Index{Spurabbildung} ist definiert durch 
+\[
+	\Tr_G : V \to V^G = \set[v \in V]{g v = v \forall g \in G}  \quad , \qquad  x \mapsto \sum_{g \in G} g x.
+\]
+Ist $f : V \to W$ ein $K$-Homomorphismus von $K[G]$-Moduln, dann setze $\Tr_G(f) : x \mapsto \sum_{g \in G} g f g ^{-1} x$. Dann ist $\Tr_G(f): V \to W$ ein Homomorphismus
+von $K[G]$-Moduln\footnote{$\varphi : V \to W$ ist $K[G]$-Homomorphismus: $\varphi(g \cdot v) = g \cdot \varphi(v)$}.
+% subsection 44 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:45}
+Ist $f : V \to W$ bereits ein Homomorphismus von $G$-Moduln, dann ist $\Tr_G(f)= \abs*{G} \cdot f$.
+% subsection 45 (end)
+
+\subsection{Satz (Maschke)} % (fold)
+\label{sub:46}
+Sei $G$ eine endliche Gruppe, $K$ ein Körper. Dann ist $K[G]$ genau dann halbeinfach, wenn wenn 
+\[
+	\Char(K) \nmid \abs*{G}.
+\]
+\minisec{Beweis}
+\begin{description}
+	\item["$\Leftarrow$":] Sie $n= \abs*{G}$, $\Char(K) \nmid \abs*{G}$. Dann existiert $\frac{1}{n} \in K$. 
+\end{description}
+% subsection 46 (end)
 % section 4 (end)
 
 
