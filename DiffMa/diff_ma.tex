@@ -2453,6 +2453,137 @@ Die äußere Ableitung ist eine $\mathds{R}$-lineare Abbildung $\mathrm{d} : C^\
 	\mathrm{d}(f \cdot g) &= \mathrm{d}f \cdot g + f \cdot \mathrm{d} g
 \end{align*}
 der Leibnizregel genügt. Ziel: $\mathrm{d} : \Omega^{k+1} \to \Omega^k$
+
+\subsubsection{Satz 24} % (fold)
+\label{ssub:531}
+Auf jeder differenzierbaren Mannigfaltigkeit $M$ gibt es genau eine $\mathds{R}$-lineare Abbildung
+\[
+	\mathrm{d} : \Omega M \to \Omega M
+\]
+vom Grad 1, so dass gilt
+\begin{itemize}
+	\item $\mathrm{d}\big|_{C^\infty(M)}$ stimmt mit der äußeren Ableitung für Funktionen überein,
+	\item $\mathrm{d} \circ \mathrm{d} =0$, \hfill (Komplexeigenschaft)
+	\item Für $\omega \in \Omega^k M$, $\sigma \in \Omega^l M$ gilt
+	\[
+		\mathrm{d}(\omega \wedge \sigma) = \mathrm{d} \omega \wedge \sigma + (-1)^k \omega \wedge \mathrm{d} \sigma
+	\]
+\end{itemize}
+$\mathrm{d} \omega$ ist die \Index{äußere Ableitung}
+\[
+	0 \to \sigma^0 M \xrightarrow{\mathrm{d}} \Omega^1 M \xrightarrow{\mathd} \Omega^2 M \to \ldots   
+\] 
+heißt der \Index{deRham-Komplex}.
+\minisec{Beweis}
+\begin{description}
+	\item[Schritt I:] $U$ Kartengebiet ($x^1, \ldots , x^m$). Sei $\omega$ eine $k$-Form auf $M$, also $\omega \stackrel{\text{auf $U$}}{=} \sum_{i_1 < \ldots < i_k} 
+	\omega_{i_1, \ldots , i_k} \mathrm{d}x^{i_1} \wedge \ldots \wedge \mathrm{d}x^{i_k}$. Falls es einen solchen Operator $\mathd$ gibt, so gilt
+	\[
+		\mathd \omega = \sum_{i_1 < \ldots <i_k} \mathd \omega_{i_1, \ldots , i_k} \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k}
+	\]
+	$\Rightarrow$ Eindeutigkeit. Um die Existenz zu zeigen, legen wir obige Darstellung als Definition für $\mathd$ zugrunde. Damit ist $\mathd$ $\mathds{R}$-linear und 	
+	stimmt mit dem äußeren Differential für Funktionen überein.
+\end{description}
+Produktregel: oE
+\begin{align*}
+	\omega &= f \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \\
+	\sigma &= g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l} \\
+	\mathd(\omega \wedge \sigma) &= \mathd (f \cdot g) \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \wedge \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l} \\
+	&= \enbrace*{\mathd f \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k}} \wedge \enbrace*{g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l}} + (-1)^k
+	\enbrace*{f \mathd x^{j_1} \wedge \ldots \wedge\mathd x^{j_k}} \wedge \enbrace*{\mathd g \wedge \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_k}} \\
+	&= \mathd \omega \wedge \sigma + (-1)^k \omega \wedge \mathd \sigma
+\end{align*}
+Komplexeigenschaft: Es reicht zu zeigen; $\mathd \mathd f = 0$ für alle $f \in C^\infty(M)$
+\begin{align*}
+	\mathd \mathd \omega = \mathd \sum' \mathd \omega_I \wedge \mathd x^I = \sum' \mathd \enbrace*{\mathd \omega_I \wedge \mathd x^I} 
+\end{align*}
+Es gilt
+\begin{align*}
+	\mathd \mathd f = \mathd \enbrace*{\diff{f}{x^i} \mathd x^i} = \frac{\partial^2 f}{\partial x^i \partial x^j} \mathd x^j \wedge \mathd x^i 
+\end{align*}
+Die Hessesche von $f$ ist symmetrisch; das äußere Produkt ist antisymmetrisch. Daher verschwindet die Summe auf der rechten Seite. \smallskip\\
+\textbf{Schritt II.:} Allgemeiner Fall: Sei $\omega$ eine $k$-Form auf $M$, $(U,h)$ eine Karte, $i : U \hookrightarrow M$ Inklusion. Setze
+\[
+	\omega \big|_{T U} := i^* \omega
+\]
+Für $p \in U$, mit $\mathd_u$ Differential aus Schritt I für $(U,h)$
+\[
+	(\mathd \omega)_p := \enbrace*{\mathd_u \omega\big|_{T U}}_p 
+\]
+Dies ist wohldefiniert: Sei also $(V_k)$ eine zweite Karte mit $p \in V$. Dann gilt
+\begin{align*}
+	\mathd_u \omega \big|_{T(U \cap V)} &\stackrel{\text{lokale Def.}}{=} \sum' \mathd \omega_I \wedge \mathd h^I \Big|_{T(U \cap V)} \\
+	&\stackrel{\text{lokale Def.}}{=} \mathd_{U \cap V} \omega \big|_{T(U \cap V)} \\
+	&\stackrel{\text{lokale Def.}}{=} \sum' \mathd \tilde{\omega}_I \wedge \mathd k^I \Big|_{T(U \cap V)}\\
+	&\stackrel{\text{lokale Def.}}{=} \mathd_V \omega\big|_{T(U \cap V)}.
+\end{align*}
+$\Rightarrow $ Wir erhalten einen Operator $\mathd : \Omega^k M  \to \Omega^{k+1} M$ wie im Satz. 
+
+Eindeutigkeit: Sei $\mathd'$ ein weiterer Operator wie im Satz, $(U,h)$ Karte, $p \in U$. 
+\[
+	\Rightarrow \omega \big|_{T U} = \sum' \omega_{i_1, \ldots , i_k} \mathd h^{i_1} \wedge \ldots \wedge \mathd h^{i_k}.
+\]
+Betrachte die Abschneidefunktion $\varphi \in C^\infty(M, [0,1])$
+\missingfigure{Abschneidefunktion $\varphi$}
+Setze $\tilde{\omega}_{i_1, \ldots , i_k} := \varphi \cdot \omega_{i_1, \ldots , i_k}$ und $\tilde{h}^{i_j} := \varphi \cdot h^{i_j}$. Dies sind globale Funktionen durch 
+Null auf ganz $M$ fortgesetzt. Wir erhalten eine globale $k$-Form \hfill ($\mathd' \mathd' \tilde{h}^{i_j}$)
+\[
+	\tilde{\omega} := \sum' \tilde{\omega}_{i_1, \ldots ,i_k} \mathd \tilde{h}^{i_1} \wedge \ldots \wedge \mathd \tilde{h}^{i_k}
+\]
+$\Rightarrow \mathd' \tilde{\omega} = \sum' \mathd \omega_{i_1, \ldots , i_k} \wedge \mathd \tilde{h}^{i_1} \wedge \ldots \wedge\mathd \tilde{h}^{i_k}$. Mit Schritt I
+und $\omega= \tilde{\omega}$ auf $V$ folgt
+\[
+	\enbrace*{\mathd' \tilde{\omega}}_p \stackrel{\text{(I.)}}{=} \enbrace*{\mathd_u \tilde{\omega}}_p = \enbrace*{\mathd_U \omega}_p   
+\]
+Wir wollen $(\mathd' \omega)_p = (\mathd' \tilde{\omega})_p$ zeigen: (denn dann $(\mathd' \omega)_p = (\mathd_U \omega)_p = (\mathd \omega)_p$)
+
+Wähle wieder eine Abschneidefunktion $\psi \in C^\infty(M, [0,1])$
+\missingfigure{nächste Abschneidefunktion $\psi$}
+Da $\omega = \tilde{\omega}$ auf $V$: $\psi(\tilde{\omega} - \omega) = \tilde{\omega} - \omega$. Dann folgt
+\begin{align*}
+	(\mathd' \tilde{\omega})_p - (\mathd' \omega)_p = \mathd' \enbrace[\big]{\psi(\tilde{\omega}- \omega)}\big|_p = (\mathd' \psi)_p \wedge \underbrace{(\tilde{\omega}- \omega)_p}_{=0} +
+	\underbrace{\psi(p)}_{=0} \mathd' (\tilde{\omega}- \omega) = 0 \bewende
+\end{align*}
+% subsubsection 531 (end)
+
+\subsubsection{Folgerung 25 (Natürlichkeit)} % (fold)
+\label{ssub:532}
+Sei $f : M \to N$ eine differenzierbare Abbildung, $\omega \in \Omega^k(N)$. Dann gilt
+\[
+	f^*(\mathd \omega) = \mathd(f^* \omega)
+\]
+\minisec{Beweis}
+Ist $\omega= g : N \to \mathds{R}$, dann ist die Behauptung eine Umformulierung der Kettenregel: 
+\[
+	\mathd g_f \enbrace[\big]{T f(.)} = \mathd (g \circ f)(.)
+\]
+\[
+	\begin{cases}
+		\mathd h (Y) = Y(h) \\
+		Y(h) \diff{}{t} = T h(Y) 
+	\end{cases}
+	\quad , \quad h : M \to \mathds{R} \ni t
+\]
+Sei $\omega$ eine beliebige $k$-Form, $k>0$. $i : U \hookrightarrow N$ Inklusion einer Karte $(U,h)$.
+\[
+	i^*( \mathd \omega) = (\mathd \omega)\big|_{T U} = \mathd \enbrace*{\omega \big|_{T U}} = \mathd(i^* \omega) 
+\]
+Wir können daher $N=U$ und $f = f \big|_{f ^{-1}(U)}$ annehmen. \OE: $f : M \to U \subset \mathds{R}^n$.
+\[
+	\omega = \sum' \omega_{i_1, \ldots , i_k} \mathd y^{i_1} \wedge \ldots \wedge\mathd y^{i_k} 
+\]
+Dann ist $\mathd \omega = \sum' \mathd \omega_{i_1, \ldots , i_k} \wedge \mathd y^{i_1} \wedge \ldots \wedge \mathd y^{i_k}$. Dann gilt weiter
+\begin{align*}
+	f^* \omega &= \sum' f^* \omega_{i_1, \ldots , i_k} f^* \mathd y^{i_1} \wedge \ldots \wedge f^* \mathd y^{i_k} \\
+	f^* \mathd \omega &= \sum' f^* \mathd \omega_{i_1, \ldots , i_k} f^* \mathd y^{i_1} \wedge \ldots \wedge f^* \mathd y^{i_k} \\
+	\intertext{Da $f^* \mathd y^{j} = \mathd f^* y^j \Longrightarrow \mathd f^* \mathd y^j = \mathd \mathd f^* y^j = 0$ folgt}
+	\mathd f^* \omega &= \sum' \underbrace{\mathd f^* \omega_{i_1, \ldots ,i_k}}_{f^* \mathd \omega_{i_1, \ldots , i_k}} \wedge f^* \mathd y^{i_1} \wedge \ldots \wedge
+	f^* \mathd y^{i_k} \\
+	&= f^* \mathd \omega \bewende
+\end{align*}
+
+
+% subsubsection 532 (end)
 % subsection 53 (end)
 % section 5 (end)
 \cleardoubleoddemptypage
