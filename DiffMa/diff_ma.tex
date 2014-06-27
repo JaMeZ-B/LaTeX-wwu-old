@@ -109,9 +109,8 @@ Hausdorff-Raum, mit abzählbarer Basis der Topologie, der lokal homöomorph zum 
 \end{itemize}
 
 \minisec{Bemerkung}
-Die Hausdorff-Eigenschaft folgt \emph{nicht} aus der lokalen Homöomorphie zum $\mathds{R}^n$! Betrachte dazu  Topologie auf $M = R \cup \set{p} $. 
-$U$ ist offen in $M$, falls\\
-
+Die Hausdorff-Eigenschaft folgt \emph{nicht} aus der lokalen Homöomorphie zum $\mathds{R}^n$! Betrachte dazu die Topologie auf $M = R \cup \set{p} $ definiert durch: 
+\smallskip\\ $U$ ist offen in $M$, falls\\
 \begin{minipage}{0.55\textwidth}
 	\begin{itemize}
 		\item $U \subset \mathds{R}$ offen
@@ -2483,67 +2482,68 @@ heißt der \Index{deRham-Komplex}.
 	\]
 	$\Rightarrow$ Eindeutigkeit. Um die Existenz zu zeigen, legen wir obige Darstellung als Definition für $\mathd$ zugrunde. Damit ist $\mathd$ $\mathds{R}$-linear und 	
 	stimmt mit dem äußeren Differential für Funktionen überein.
+	\item[Produktregel:] \oE 
+	\begin{align*}
+		\omega &= f \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \\
+		\sigma &= g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l} \\
+		\intertext{Dann gilt}
+		\mathd(\omega \wedge \sigma) &= \mathd (f \cdot g) \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \wedge \mathd x^{j_1} \wedge \ldots 
+		\wedge \mathd x^{j_l} \\
+		&= \enbrace*{\mathd f \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k}} \wedge \enbrace*{g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l}} \\
+		&\qquad + (-1)^k \enbrace*{f \mathd x^{j_1} \wedge\ldots\wedge\mathd x^{j_k}} \wedge\enbrace*{\mathd g \wedge \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_k}} \\
+		&= \mathd \omega \wedge \sigma + (-1)^k \omega \wedge \mathd \sigma
+	\end{align*}
+	\item[Komplexeigenschaft:] Es reicht zu zeigen; $\mathd \mathd f = 0$ für alle $f \in C^\infty(M)$
+	\begin{align*}
+		\mathd \mathd \omega = \mathd \sum' \mathd \omega_I \wedge \mathd x^I = \sum' \mathd \enbrace*{\mathd \omega_I \wedge \mathd x^I} 
+	\end{align*}
+	Es gilt
+	\begin{align*}
+		\mathd \mathd f = \mathd \enbrace*{\diff{f}{x^i} \mathd x^i} = \frac{\partial^2 f}{\partial x^i \partial x^j} \mathd x^j \wedge \mathd x^i 
+	\end{align*}
+	Die Hessesche von $f$ ist symmetrisch; das äußere Produkt ist antisymmetrisch. Daher verschwindet die Summe auf der rechten Seite.
+	\item[Schritt II:] Allgemeiner Fall: Sei $\omega$ eine $k$-Form auf $M$, $(U,h)$ eine Karte, $i : U \hookrightarrow M$ Inklusion. Setze
+	\[
+		\omega \big|_{T U} := i^* \omega
+	\]
+	Für $p \in U$, mit $\mathd_u$ Differential aus Schritt I für $(U,h)$
+	\[
+		(\mathd \omega)_p := \enbrace*{\mathd_u \omega\big|_{T U}}_p 
+	\]
+	Dies ist wohldefiniert: Sei also $(V_k)$ eine zweite Karte mit $p \in V$. Dann gilt
+	\begin{align*}
+		\mathd_u \omega \big|_{T(U \cap V)} &\stackrel{\text{lokale Def.}}{=} \sum' \mathd \omega_I \wedge \mathd h^I \Big|_{T(U \cap V)} \\
+		&\stackrel{\text{lokale Def.}}{=} \mathd_{U \cap V} \omega \big|_{T(U \cap V)} \\
+		&\stackrel{\text{lokale Def.}}{=} \sum' \mathd \tilde{\omega}_I \wedge \mathd k^I \Big|_{T(U \cap V)}\\
+		&\stackrel{\text{lokale Def.}}{=} \mathd_V \omega\big|_{T(U \cap V)}.
+	\end{align*}
+	$\Rightarrow $ Wir erhalten einen Operator $\mathd : \Omega^k M  \to \Omega^{k+1} M$ wie im Satz. 
+	\item[Eindeutigkeit:] Sei $\mathd'$ ein weiterer Operator wie im Satz, $(U,h)$ Karte, $p \in U$. 
+	\[
+		\Rightarrow \omega \big|_{T U} = \sum' \omega_{i_1, \ldots , i_k} \mathd h^{i_1} \wedge \ldots \wedge \mathd h^{i_k}.
+	\]
+	Betrachte die Abschneidefunktion $\varphi \in C^\infty(M, [0,1])$
+	\missingfigure{Abschneidefunktion $\varphi$}
+	Setze $\tilde{\omega}_{i_1, \ldots , i_k} := \varphi \cdot \omega_{i_1, \ldots , i_k}$ und $\tilde{h}^{i_j} := \varphi \cdot h^{i_j}$. Dies sind globale Funktionen 
+	durch Null auf ganz $M$ fortgesetzt. Wir erhalten eine globale $k$-Form \hfill ($\mathd' \mathd' \tilde{h}^{i_j}$)
+	\[
+		\tilde{\omega} := \sum' \tilde{\omega}_{i_1, \ldots ,i_k} \mathd \tilde{h}^{i_1} \wedge \ldots \wedge \mathd \tilde{h}^{i_k}
+	\]
+	$\Rightarrow \mathd' \tilde{\omega} = \sum' \mathd \omega_{i_1, \ldots , i_k} \wedge \mathd \tilde{h}^{i_1} \wedge \ldots \wedge\mathd \tilde{h}^{i_k}$. Mit Schritt I
+	und $\omega= \tilde{\omega}$ auf $V$ folgt
+	\[
+		\enbrace*{\mathd' \tilde{\omega}}_p \stackrel{\text{(I.)}}{=} \enbrace*{\mathd_u \tilde{\omega}}_p = \enbrace*{\mathd_U \omega}_p   
+	\]
+	Wir wollen $(\mathd' \omega)_p = (\mathd' \tilde{\omega})_p$ zeigen: (denn dann $(\mathd' \omega)_p = (\mathd_U \omega)_p = (\mathd \omega)_p$)
+
+	Wähle wieder eine Abschneidefunktion $\psi \in C^\infty(M, [0,1])$
+	\missingfigure{nächste Abschneidefunktion $\psi$}
+	Da $\omega = \tilde{\omega}$ auf $V$: $\psi(\tilde{\omega} - \omega) = \tilde{\omega} - \omega$. Dann folgt
+	\begin{align*}
+		(\mathd' \tilde{\omega})_p - (\mathd' \omega)_p = \mathd' \enbrace[\big]{\psi(\tilde{\omega}- \omega)}\big|_p = (\mathd' \psi)_p \wedge 
+		\underbrace{(\tilde{\omega}- \omega)_p}_{=0} + \underbrace{\psi(p)}_{=0} \mathd' (\tilde{\omega}- \omega) = 0 \bewende
+	\end{align*}
 \end{description}
-Produktregel: oE
-\begin{align*}
-	\omega &= f \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \\
-	\sigma &= g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l} \\
-	\mathd(\omega \wedge \sigma) &= \mathd (f \cdot g) \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k} \wedge \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l} \\
-	&= \enbrace*{\mathd f \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k}} \wedge \enbrace*{g \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_l}} + (-1)^k
-	\enbrace*{f \mathd x^{j_1} \wedge \ldots \wedge\mathd x^{j_k}} \wedge \enbrace*{\mathd g \wedge \mathd x^{j_1} \wedge \ldots \wedge \mathd x^{j_k}} \\
-	&= \mathd \omega \wedge \sigma + (-1)^k \omega \wedge \mathd \sigma
-\end{align*}
-Komplexeigenschaft: Es reicht zu zeigen; $\mathd \mathd f = 0$ für alle $f \in C^\infty(M)$
-\begin{align*}
-	\mathd \mathd \omega = \mathd \sum' \mathd \omega_I \wedge \mathd x^I = \sum' \mathd \enbrace*{\mathd \omega_I \wedge \mathd x^I} 
-\end{align*}
-Es gilt
-\begin{align*}
-	\mathd \mathd f = \mathd \enbrace*{\diff{f}{x^i} \mathd x^i} = \frac{\partial^2 f}{\partial x^i \partial x^j} \mathd x^j \wedge \mathd x^i 
-\end{align*}
-Die Hessesche von $f$ ist symmetrisch; das äußere Produkt ist antisymmetrisch. Daher verschwindet die Summe auf der rechten Seite. \smallskip\\
-\textbf{Schritt II.:} Allgemeiner Fall: Sei $\omega$ eine $k$-Form auf $M$, $(U,h)$ eine Karte, $i : U \hookrightarrow M$ Inklusion. Setze
-\[
-	\omega \big|_{T U} := i^* \omega
-\]
-Für $p \in U$, mit $\mathd_u$ Differential aus Schritt I für $(U,h)$
-\[
-	(\mathd \omega)_p := \enbrace*{\mathd_u \omega\big|_{T U}}_p 
-\]
-Dies ist wohldefiniert: Sei also $(V_k)$ eine zweite Karte mit $p \in V$. Dann gilt
-\begin{align*}
-	\mathd_u \omega \big|_{T(U \cap V)} &\stackrel{\text{lokale Def.}}{=} \sum' \mathd \omega_I \wedge \mathd h^I \Big|_{T(U \cap V)} \\
-	&\stackrel{\text{lokale Def.}}{=} \mathd_{U \cap V} \omega \big|_{T(U \cap V)} \\
-	&\stackrel{\text{lokale Def.}}{=} \sum' \mathd \tilde{\omega}_I \wedge \mathd k^I \Big|_{T(U \cap V)}\\
-	&\stackrel{\text{lokale Def.}}{=} \mathd_V \omega\big|_{T(U \cap V)}.
-\end{align*}
-$\Rightarrow $ Wir erhalten einen Operator $\mathd : \Omega^k M  \to \Omega^{k+1} M$ wie im Satz. 
-
-Eindeutigkeit: Sei $\mathd'$ ein weiterer Operator wie im Satz, $(U,h)$ Karte, $p \in U$. 
-\[
-	\Rightarrow \omega \big|_{T U} = \sum' \omega_{i_1, \ldots , i_k} \mathd h^{i_1} \wedge \ldots \wedge \mathd h^{i_k}.
-\]
-Betrachte die Abschneidefunktion $\varphi \in C^\infty(M, [0,1])$
-\missingfigure{Abschneidefunktion $\varphi$}
-Setze $\tilde{\omega}_{i_1, \ldots , i_k} := \varphi \cdot \omega_{i_1, \ldots , i_k}$ und $\tilde{h}^{i_j} := \varphi \cdot h^{i_j}$. Dies sind globale Funktionen durch 
-Null auf ganz $M$ fortgesetzt. Wir erhalten eine globale $k$-Form \hfill ($\mathd' \mathd' \tilde{h}^{i_j}$)
-\[
-	\tilde{\omega} := \sum' \tilde{\omega}_{i_1, \ldots ,i_k} \mathd \tilde{h}^{i_1} \wedge \ldots \wedge \mathd \tilde{h}^{i_k}
-\]
-$\Rightarrow \mathd' \tilde{\omega} = \sum' \mathd \omega_{i_1, \ldots , i_k} \wedge \mathd \tilde{h}^{i_1} \wedge \ldots \wedge\mathd \tilde{h}^{i_k}$. Mit Schritt I
-und $\omega= \tilde{\omega}$ auf $V$ folgt
-\[
-	\enbrace*{\mathd' \tilde{\omega}}_p \stackrel{\text{(I.)}}{=} \enbrace*{\mathd_u \tilde{\omega}}_p = \enbrace*{\mathd_U \omega}_p   
-\]
-Wir wollen $(\mathd' \omega)_p = (\mathd' \tilde{\omega})_p$ zeigen: (denn dann $(\mathd' \omega)_p = (\mathd_U \omega)_p = (\mathd \omega)_p$)
-
-Wähle wieder eine Abschneidefunktion $\psi \in C^\infty(M, [0,1])$
-\missingfigure{nächste Abschneidefunktion $\psi$}
-Da $\omega = \tilde{\omega}$ auf $V$: $\psi(\tilde{\omega} - \omega) = \tilde{\omega} - \omega$. Dann folgt
-\begin{align*}
-	(\mathd' \tilde{\omega})_p - (\mathd' \omega)_p = \mathd' \enbrace[\big]{\psi(\tilde{\omega}- \omega)}\big|_p = (\mathd' \psi)_p \wedge \underbrace{(\tilde{\omega}- \omega)_p}_{=0} +
-	\underbrace{\psi(p)}_{=0} \mathd' (\tilde{\omega}- \omega) = 0 \bewende
-\end{align*}
 % subsubsection 531 (end)
 
 \subsubsection{Folgerung 25 (Natürlichkeit)} % (fold)
@@ -2568,7 +2568,7 @@ Sei $\omega$ eine beliebige $k$-Form, $k>0$. $i : U \hookrightarrow N$ Inklusion
 \[
 	i^*( \mathd \omega) = (\mathd \omega)\big|_{T U} = \mathd \enbrace*{\omega \big|_{T U}} = \mathd(i^* \omega) 
 \]
-Wir können daher $N=U$ und $f = f \big|_{f ^{-1}(U)}$ annehmen. \OE: $f : M \to U \subset \mathds{R}^n$.
+Wir können daher $N=U$ und $f = f \big|_{f ^{-1}(U)}$ annehmen. \oE: $f : M \to U \subset \mathds{R}^n$.
 \[
 	\omega = \sum' \omega_{i_1, \ldots , i_k} \mathd y^{i_1} \wedge \ldots \wedge\mathd y^{i_k} 
 \]
