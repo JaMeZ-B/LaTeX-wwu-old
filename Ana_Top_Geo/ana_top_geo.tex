@@ -344,6 +344,7 @@ Die übliche Topologie auf $\mathds{R}^n = \prod_{i =1}^n \mathds{R}$ stimmt mit
 
 \subsection[Beispiel: Torus]{Beispiel} % (fold)
 \label{sub:27}
+\tikzsetnextfilename{Torus}
 \begin{figure}[h]
 	\centering{\begin{tikzpicture}[xscale=0.9, yscale=0.6]
 	    \begin{axis}[hide axis, view={40}{50}]
@@ -2615,7 +2616,7 @@ Dies ist eine $C^\infty$-Funktion (Analysis II.) \todo[noline]{Zeichnung vervoll
 	\begin{tikzpicture}
 		\draw[->] (0,-0.5) -- (0,1.5);
 		\draw[->] (-3,0) -- (3,0);
-		\draw[DarkGray, dashed] (-3,1)--(3,1);
+		\draw[gray, dashed] (-3,1)--(3,1);
 	\end{tikzpicture}
 \]
 Für $\varepsilon>0$ sei $\varphi_\varepsilon : \mathds{R} \to \mathds{R}$ gegeben durch $\varphi_\varepsilon(t) = \frac{\psi(t)}{\psi(t) + \psi(\varepsilon-t)}$
@@ -2670,11 +2671,49 @@ Sei $f : M \to S^n$ die durch $f(x) := \frac{f_0(x)}{\norm[2]{f_0(x)} } $ defini
 \label{sub:174}
 Allgemein lässt sich jede stetige Abbildung zwischen $C^\infty$-Mannigfaltigkeiten durch $C^\infty$-Abbildungen approximieren. Dazu zeigt man:
 \begin{enumerate}[(i)]
-	\item Jede (kompakte) $C^\infty$-Mannigfaltigkeit lässt sich in den $\mathds{R}^N$ für $N >> \dim M$ einbetten.
+	\item Jede (kompakte) $C^\infty$-Mannigfaltigkeit lässt sich in den $\mathds{R}^N$ für $N \gg \dim M$ einbetten.
 	\item $M \subseteq \mathds{R}^N$ besitzt eine \Index{Tubenumgebung}. Dies erlaubt es eine $C^\infty$-Retraktion $K \to M$ auf eine Umgebung von 
 	$M \subseteq \mathds{R}^N$ zu konstruieren.
 \end{enumerate}
 % subsection 174 (end)
+\minisec{Ziel}
+$\pi_n(S^m, e_0) = 0$ für $n <m$
+
+\subsection{Proposition} % (fold)
+\label{sub:175}
+Sei $U \subseteq \mathds{R}^n$ offen und $f : U \to \mathds{R}^m$ eine $C^\infty$-Abbildung. Ist $m \ge n$, so ist $f(U) \subseteq \mathds{R}^m$ eine Nullmenge bezüglich
+des Lebesgue-Maß.
+\minisec{Beweis}
+Jede offene Teilmenge des $\mathds{R}^n$ ist die abzählbare Vereinigung von kompakten Teilmengen. Die abzählbare Vereinigung von Nullmengen ist wieder eine Nullmenge. Daher
+genügt es zu zeigen: Ist $K \subseteq U$ kompakt, so ist $f(K) \subseteq \mathds{R}^m$ eine Nullmenge. 
+
+Da $K$ kompakt ist , ist $\norm{\D f_x} $, $x \in K$ beschränkt. Insbesondere ist $f$ auf $K$ Lipschitz-stetig. Es gibt also $\alpha >0$ mit 
+\[
+	\forall \varepsilon > 0 : f \enbrace*{B_\varepsilon(x) \cap K} \subseteq B_{\alpha \varepsilon} \enbrace[\big]{f(x)}  
+\]
+Sei $R >0$ mit $K \subseteq [-R,R]^n$. Zu $\varepsilon>0$ gibt es dann eine Überdeckung von $K$ durch $\enbrace*{2 \cdot  \ceil*{\frac{R}{\varepsilon}} }^n$ viele Bälle 
+$B_\varepsilon(x_i) \subseteq \mathds{R}^n$. Es folgt 
+\[
+	\Vol_{\mathds{R}^n}\enbrace*{f(K)} \le \enbrace*{2 \ceil*{\frac{R}{\varepsilon}}  }^n \cdot \Vol_{\mathds{R}^n} \enbrace*{B_{\alpha \varepsilon}(0)} =   
+	\enbrace*{2 \ceil*{\frac{R}{\varepsilon}}  }^n \cdot (\alpha \varepsilon)^m \cdot C_m
+\]
+mit $C_m = \Vol_{\mathds{R}^m}(B_1(0))$. Wegen $m >n$ gilt 
+$\enbrace*{2 \ceil*{\frac{R}{\varepsilon}}  }^n \cdot (\alpha \varepsilon)^m \cdot C_m \xrightarrow{\varepsilon \to 0} 0 $. \bewende
+% subsection 175 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:176}
+Sei $f : N \to M$ eine $C^\infty$-Abbildung. Sei $\dim M > \dim N$. Dann ist $M \setminus f(N) \subseteq M$ dicht. Insbesondere ist $f$ nicht surjektiv.
+\minisec{Beweis}
+Sei $y \in M$. Sei $U$ eine offene Umgebung von $y$. Zu zeigen: $U \setminus f(N) \not= \emptyset$. oBdA sei $U$ das Kartengebiet einer Karte $h : U\to V$. Da $N$ das 
+zweite Abzählbarkeitsaxiom erfüllt, können wir $f ^{-1}(U)$ durch abzählbar viele $C^\infty$-Kartengebiete $U_i$ von Karten $k_i : U_i \to V_i$ von $N$ überdecken. Nun ist
+\[
+	h \enbrace[\big]{f(N) \cap U}  = h \enbrace*{\bigcup_{i} f\enbrace*{h_i ^{-1}(V_i)}} = \bigcup_i h \circ f \circ h_i ^{-1} (V_i)
+\]
+Nach Proposition \ref{sub:175} ist jedes $h \circ f \circ h_i ^{-1}(V_i)$ eine Nullmenge in $V$. Da die abzählbare Vereinigung von Nullmengen eine Nullmenge ist, ist auch
+$h \enbrace[\big]{f(N) \cap U}$ eine Nullmenge in $V$. Insbesondere $V \setminus h \enbrace[\big]{f(N)\cap U} \not= \emptyset$. Da $h$ bijektiv ist, folgt auch 
+$U \setminus f(N) \not= \emptyset$. \bewende
+% subsection 176 (end)
 % section 17 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
