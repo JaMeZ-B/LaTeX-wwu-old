@@ -932,16 +932,16 @@ d.h. $\varphi = \rho_r$. Daher ist $\rho$ ein Isomorphismus. \bewende
 
 \subsection{Satz (Wedderburn, 1. Struktursatz)} % (fold)
 \label{sub:229}
-Sei $R$ ein Ring. Dann sind äquivalent:
+Sei $R \not= 0$ ein Ring. Dann sind äquivalent:
 \begin{enumerate}[(i)]
 	\item $R$ ist einfach als Ring und links-artinsch als $R$-Modul.
 	\item Alle einfachen $R$-Moduln sind isomorph und $R$ ist halbeinfach als Modul. 
 	\item $R \simeq M_k(D)$ für einen Schiefkörper $D$ und ein $k\ge 1$. 
-	Darüber hinaus sind $k$ und $D$ eindeutig bestimmt und der einfache $R$-Modul ist  $\simeq D^k$
+	Darüber hinaus sind $k$ und $D$ eindeutig bestimmt und der einfache $R$-Modul ist isomorph zu $D^k$.
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item["(i)$\Rightarrow $(ii)":] Sei $0  \not= I \subseteq R$ ein minimales Linksideal (existiert, da $R$ linksartinsch als Modul). Das heißt $I = R c \not= 0$ für ein
+	\item["(i)$\Rightarrow $(ii)":] Sei $0  \not= I \subseteq R$ ein minimales Linksideal (existiert, da $R$ links-artinsch als Modul). Das heißt $I = R c \not= 0$ für ein
 	$c \in R$ (zyklisch!). Dann ist 
 	\[
 		\sum_{r \in R} R c \cdot r = J
@@ -2206,7 +2206,8 @@ Ist $h : G \to \Sym(n)$ ein Homomorphismus, dann erhält man die zugehörige
 		\rho_{\nicefrac{V}{U}} : G \to \GL{\nicefrac{V}{U}} \quad ,\quad p_{\nicefrac{V}{U}} (g) = \benbrace*{x+ U \mapsto \rho(g)(x)+U}
 	\]
 	Eine Darstellung $\rho : G \to \GL(V)$ heißt irreduzibel (bzw. vollständig reduzibel oder halbeinfach), falls $V$ als $K[G]$-Modul irreduzibel (oder einfach) bzw.
-	vollständig reduzibel (oder auch halbeinfach) ist. 
+	vollständig reduzibel (oder auch halbeinfach) ist. \footnote{$p \in \End_k(V)$ zentral $G$, d.h. $\forall v \in V, g \in G : \varphi(g v)= g (\varphi(v)) \iff \varphi 
+	\in \End_{K[G]}(V)$}
 	
 	\textbf{Erinnerung:} $M$ ist halbeinfacher $R$-Modul $\iff M= \bigoplus M_i$, $M_i$ einfacher $R$-Modul $\iff$ jeder $R$-Untermodul $U \subseteq M$ hat Komplement
 	$U^\bot$ in $M$, d.h. $M= U \oplus U^\bot$.
@@ -2223,7 +2224,7 @@ $\rho_2 = \varphi \rho_1 \varphi ^{-1}$. Dann sind offensichtlich $V_1$ und $V_2
 \label{sub:44}
 Sei $G$ eine endliche Gruppe, $V$ ein $K[G]$-Modul (oder $G$-Modul). Die \Index{Spurabbildung} ist definiert durch 
 \[
-	\Tr_G : V \to V^G = \set[v \in V]{g v = v \forall g \in G}  \quad , \qquad  x \mapsto \sum_{g \in G} g x.
+	\Tr_G : V \to V^G = \set[v \in V]{g v = v \enspace\forall g \in G}  \quad , \qquad  x \mapsto \sum_{g \in G} g x.
 \]
 Ist $f : V \to W$ ein $K$-Homomorphismus von $K[G]$-Moduln, dann setze $\Tr_G(f) : x \mapsto \sum_{g \in G} g f g ^{-1} x$. Dann ist $\Tr_G(f): V \to W$ ein Homomorphismus
 von $K[G]$-Moduln\footnote{$\varphi : V \to W$ ist $K[G]$-Homomorphismus: $\varphi(g \cdot v) = g \cdot \varphi(v)$}.
@@ -2242,9 +2243,50 @@ Sei $G$ eine endliche Gruppe, $K$ ein Körper. Dann ist $K[G]$ genau dann halbei
 \]
 \minisec{Beweis}
 \begin{description}
-	\item["$\Leftarrow$":] Sie $n= \abs*{G}$, $\Char(K) \nmid \abs*{G}$. Dann existiert $\frac{1}{n} \in K$. 
+	\item["$\Leftarrow$":] Sie $n= \abs*{G}$, $\Char(K) \nmid \abs*{G}$. Dann existiert $\frac{1}{n} \in K$. Sei $V$ ein $K[G]$-Modul, $U \subseteq V$ ein $K[G]$-Untermodul.
+	Wir müssen zeigen, dass $U$ ein $G$-invariantes Komplement hat. Sei $U'$ ein beliebiges Vektorraum-Komplement von $U$ in $V$, d.h. $V= U \oplus U'$ als Vektorraum (aber
+	$U'$ ist vielleicht nicht $G$-invariant). Betrachte nun die Vektorraum-Projektion $\pi_U : V \to U$ auf $U$. Definiere $\varphi : V \to U$ durch
+	\[
+		\varphi = \frac{1}{n} \Tr_G(\pi) .
+	\]
+	Wegen $\pi\big|_U = \id_U$, gilt $\varphi\big|_{U} = \frac{1}{n} \Tr(\id_U) = \id_U$ nach Lemma \ref{sub:45}. Nun ist $\varphi$ ein $K[G]$-Modulhomomorphismus, d.h.
+	$\ker \varphi = U^\bot$ ist ein $K[G]$-Untermodul von $V$ und daher gilt
+	\[
+		V = U \otimes  U^\bot
+	\]
+	als $K[G]$-Modul.
+	\item["$\Rightarrow$":] Sei nun $\Char K \mid \abs*{G}$, $\abs*{G} = n$. Betrachte die reguläre Darstellung von $G$ auf $K[G]=V$. Dann ist $v = \sum_{g \in G} g \in V^G$
+	und $V^G \le V$ ist ein $G$-invarianter Untervektorraum von $V$, also $K[G]$-Untermodul von $V$, $0 \lneq V^G \lneq V$. Ist nun $\pi : V \to V^G$ ein beliebiger 
+	$K[G]$-Homomorphismus, betrachte 
+	\[
+		\pi(v) = \sum_g g \pi(1) = n \pi(1) = 0
+	\]
+	Daher kann es keine $K[G]$-lineare Projektion von $V$ auf $V^G$ geben und daher hat $V^G$ kein Komplement in $V$ als $K[G]$-Modul. \bewende \\
+	Ist $f$ $K[G]$-linear, dann $\Tr_G(f) = \abs*{G} f $ für $v = \sum g$ ist $\Tr_G(\pi )(v) = n \cdot \pi(v) = 0$ 
 \end{description}
+Ist nun $G$ eine Gruppe, $\rho : G \to \GL(V)$ halbeinfache Darstellung von $G$ auf einem $K$-Vektorraum $V$ (d.h. $V$ ist als $K[G]$-Modul halbeinfach), dann zerfällt $
+V$ in die direkte Summe von einfachen $K[G]$-Moduln als 
+\[
+	V = V_1^{(1)} \oplus \ldots \oplus V_1^{(m_1)} \oplus V_2^{(1)} \oplus \ldots \oplus V_2^{(m_2)} \oplus  \ldots  \oplus V_r^{(1)} \oplus \ldots \oplus V_r^{(m_r)}
+\]
+mit $V_i^{k} \simeq V_j^{l}$ als $K[G]$-Moduln genau dann, wenn $i=j$. Mit $\rho_i = \rho \big|_{V_i}$ schreibt man auch
+\[
+	\rho \sim m_i \rho_i \oplus m_2 \rho_2 \oplus \ldots \oplus m_r \rho_r.
+\]
+Dabei heißen die $m_i$ die Vielfachheiten der irreduziblen Komponenten $\rho_i$.
+\[
+	W_i = \bigoplus_{j=1}^{m_i} V_i^{(r)}
+\]
+heißt homogenene Komponente von $V$. Ist $G$ eine Gruppe, $H \unlhd G$ ein Normalteiler, $\sigma : H \to \GL(V)$ eine Darstellung, dann ist für $g \in G$ die 
+Abbildung $\sigma^g : H \to \GL(V)$, $h \mapsto [v \mapsto \sigma(g h g ^{-1}) v]$ wieder eine Darstellung von $H$ auf $V$ ($g h g ^{-1} \in H$), die zu $\sigma$ 
+konjugiert ist. Es ist $\sigma$ irreduzibel genau dann wenn $\sigma^g$ irreduzibel ist.
 % subsection 46 (end)
+
+\subsection{Satz (Clifford)} % (fold)
+\label{sub:47}
+Sei $G$ eine Gruppe, $H \unlhd G$ ein Normalteiler, $\rho G \to \GL(V)$ eine irreduzible Darstellung von $G$ auf $V$. Dann ist $\rho_H : H \to \GL(V)$ halbeinfach und alle
+homogenen irreduziblen Komponenten von $V$ als $K[H]$-Modul sind konjugiert und haben die gleiche Multiplizität.
+% subsection 47 (end)
 % section 4 (end)
 
 
