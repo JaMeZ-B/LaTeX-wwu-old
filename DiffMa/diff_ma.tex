@@ -1898,7 +1898,7 @@ $\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ definiert eine differen
 	\]
 	\item[Kartenwechsel:] Eine differenzierbare Abbildung $f : M \to N$ induziert eine lineare Abbildung $f^* : T^*_{f(p)}N \to T^*_pM$ definiert durch 
 	\[
-		(f^* \omega)(X) := \omega \enbrace[\big]{T_p f(X)} \qquad  \quad \omega \in T_{f(p)}^*N, X \in T_pM
+		(f^* \omega)(X) := \omega \enbrace[\big]{T_p f(X)} \qquad  \quad \omega \in T_{f(p)}^*N, \quad X \in T_pM
 	\]
 	In lokalen Koordinaten ist diese Abbildung durch die Transponierte $J(f)^T$ der Jacobischen gegeben:\marginnote{siehe auch \ref{ssub:157}}
 	\begin{align*}
@@ -2219,7 +2219,7 @@ Eine (alternierende) $k$-Form auf einem $n$-dimensionalen Vektorraum $V$ ist ein
 \]
 die in folgendem Sinne \Index{alternierend} ist: 
 \[
-	\forall v_1, \ldots , v_k \in V : \forall \pi \in S_k : \omega \enbrace*{v_{\pi(1), \ldots , v_{\pi(k)}}} = \sgn(\pi )\cdot  \omega(v_1, \ldots , v_k) 
+	\forall v_1, \ldots , v_k \in V : \forall \pi \in S_k : \omega \enbrace*{v_{\pi(1)}, \ldots , v_{\pi(k)}} = \sgn(\pi )\cdot  \omega(v_1, \ldots , v_k) 
 \]
 Beispiel: Die Determinante als multilineare Abbildung in ihren Spalten (Zeilen) ist eine $n$-Form. $\Lambda^k V^*$ ist der reelle Vektorraum der $k$-Formen auf $V$.
 Es ist $\Lambda^1 V^* = V^*$, $\Lambda^0 V^* := \mathds{R}$.
@@ -2233,7 +2233,7 @@ Das \Index{äußere Produkt} (oder auch \Index{Dachprodukt}) zweier Formen ist e
 \]
 das wie folgt erklärt ist: $\forall v_1, \ldots , v_{k+l} \in V :$
 \[
-	 (\omega \wedge \sigma)(V_1, \ldots , v_{k+l}) = \frac{1}{k! \cdot l!} \sum_{\pi \in S_{k+l}} \sgn(\pi ) \cdot \omega\enbrace*{v_{\pi(1)}, \ldots , v_{\pi(k)}} \cdot 
+	 (\omega \wedge \sigma)(v_1, \ldots , v_{k+l}) = \frac{1}{k! \cdot l!} \sum_{\pi \in S_{k+l}} \sgn(\pi ) \cdot \omega\enbrace*{v_{\pi(1)}, \ldots , v_{\pi(k)}} \cdot 
 	 \sigma \enbrace*{v_{\pi(k+1)}, \ldots , v_{\pi(k+l)} }
 \]
 \minisec{Bemerkung}
@@ -2309,8 +2309,7 @@ Beide Seiten sind multilinear und in gleicher Weise alternierend. OE: $\omega_j 
 	e_1^* \wedge \ldots \wedge e_k^* (e_1, \ldots , e_k) = 1 = \det (\delta_{ij}) = \det \enbrace[\big]{e_i^*(e_j)}. \bewende 
 \end{align*}
 $\Lambda V^* = \bigoplus_{k=0}^\infty \Lambda^k V^*$ ist, versehen mit dem äußeren Produkt, eine reelle, graduierte, assoziative, antikommutative, $2^n$-dimensionale, 
-unitale Algebra, die \Index{äußere Algebra} (oder auch die \Index{Graßmann-Algebra}). 
-
+unitale Algebra, die \Index{äußere Algebra} (oder auch die \Index{Graßmann-Algebra}). \\
 Betrachte nun $f : V \to W$ linear. Die \Index{induzierte Abbildung} ist eine Abbildung
 \[
 	f^* : \Lambda W^* \to \Lambda V^* , \qquad \omega \mapsto f^* \omega
@@ -2582,10 +2581,136 @@ Dann ist $\mathd \omega = \sum' \mathd \omega_{i_1, \ldots , i_k} \wedge \mathd 
 	f^* \mathd y^{i_k} \\
 	&= f^* \mathd \omega \bewende
 \end{align*}
-
-
 % subsubsection 532 (end)
 % subsection 53 (end)
+
+\subsection{Orientierung} % (fold)
+\label{sub:54}
+
+\subsubsection[Definition: Orientierung von Vektorräumen]{Definition} % (fold)
+\label{ssub:541}
+Eine \Index{Orientierung} eines $n$-dimensionalen Vektorraumes $V$ ist eine Äquivalenzklasse geordneter Basen $b=(b_1, \ldots, b_n)$ von $V$ mit 
+\[
+	b \sim b' :\Leftrightarrow \text{ Die Basistransformation } T : V \to V \text{ mit $T(b)=b'$ hat positive Determinante.}
+\]
+\begin{itemize}
+	\item Es gibt genau zwei Orientierungen auf $V$, da $\mathds{R} \setminus \set{0}$ aus zwei Zusammenhangskomponenten besteht. 
+	\item $\set{0}, \pm 1$.
+	\item Im Fall von $\mathds{R}^n$ ist $\diff{}{x^1}, \ldots , \diff{}{x^n}$ die \Index{Standardorientierung}.
+\end{itemize}
+% subsubsection 541 (end)
+
+\subsubsection[Definition: Orientierung einer Mannigfaltigkeit]{Definition} % (fold)
+\label{ssub:542}
+Eine \Index{Orientierung} einer $m$-dimensionalen Mannigfaltigkeit $M$ ist die Wahl einer Orientierung für jeden Tangentialraum $T_p M$, sodass ein Atlas 
+$\mathcal{A} = \set[(U_\alpha, h_\alpha)]{\alpha \in A}$ so existiert, dass für alle $p \in U_\alpha$ und für alle $\alpha \in A$ die Abbildung
+\[
+	T_p h_\alpha : T_p M \to T_{h_\alpha(p)} \mathds{R}^m \equiv \mathds{R}^m
+\]
+\Index{orientierungstreu} ist, d.h. die gewählte Orientierung auf $T_p M$ auf die Standardorientierung des $\mathds{R}^m$ abbildet. $\mathcal{A}$ heißt dann ein
+\bet{orientierter Atlas}\index{Atlas!orientiert}.
+\begin{itemize}
+	\item Ein Atlas ist genau dann orientiert, wenn die Jacobische aller Kartenwechsel positive Determinante hat.
+	\item Eine zusammenhängende Mannigfaltigkeit hat entweder keine oder genau zwei Orientierungen. (Eine Karte $(U,h)$ orientiert die Mannigfaltigkeit auf ganz $U$ vermöge
+	des Differentials $T h$, welches $T M$ auf $U$ trivialisiert.)
+	\item Das Möbiusband ist \emph{nicht} orientierbar:
+	\missingfigure{Orientierungen auf dem Möbiusband}
+	\item $\mathds{R}P^2$ ist \emph{nicht} orientierbar, da $\mathds{R}P^2$ ein Möbiusband erhält.
+	\missingfigure{Halbkugel mit zwei Wegen}
+\end{itemize}
+% subsubsection 542 (end)
+
+\subsubsection{Lemma 26} % (fold)
+\label{ssub:543}
+Eine $m$-dimensionale Mannigfaltigkeit ist genau dann orientierbar, wenn es auf ihr eine nirgends verschwindende $m$-Form gibt.
+\[
+	\omega \in \Gamma \enbrace[\big]{\Lambda^m T^* M \setminus \set{0} } 
+\]
+heißt dann \Index{Volumenform}. 
+\minisec{Beweis}
+Sei $\omega$ eine Volumenform. Sei $\mathcal{A} = \set{(U_\alpha, h_\alpha)}$ ein Atlas. Betrachte
+\[
+	(h_\alpha^1, \ldots , h_\alpha^m) : U_\alpha \xrightarrow{\enspace\cong \enspace} U_\alpha' \subset \mathds{R}^m(x^1, \ldots , x^m) 
+\]
+Auf $\mathds{R}^m(x^1, \ldots , x^m)$ haben wir die $m$-Form $\mathd x^1 \wedge \ldots \wedge \mathd x^m$. Es gilt
+\begin{align*}
+	h_\alpha^* \enbrace*{\mathd x^1 \wedge \ldots \wedge \mathd x^m} = f_\alpha \,\omega\big|_{TU_2} 
+\end{align*}
+Durch eventuelles Tauschen zweier Komponentenfunktionen können wir annehmen, dass $f_\alpha >0$. \uline{Behauptung:} $\set{(U_\alpha, h_\alpha)}_\alpha$ ist dann ein 
+orientierter Atlas.
+\begin{align*}
+	\enbrace*{h_\beta \circ h_\alpha ^{-1}}^* (\mathd x^1 \wedge \ldots \wedge \mathd x^m) &= \enbrace*{h_\alpha ^{-1}}^* \underbrace{f_\beta \cdot \omega  }_{\frac{f_\beta}{f_\alpha} h_\alpha^* (\mathd x^1 \wedge \ldots \wedge \mathd x^m) } \\
+	&= \underbrace{\enbrace*{\frac{f_\beta}{f_\alpha} \circ h_\alpha ^{-1} }}_{>0} \mathd x^1 \wedge \ldots \wedge \mathd x^m 
+\end{align*}
+$\det J_{h_\beta \circ h_\alpha ^{-1}} >0$. Sei umgekehrt $\set{(U_\alpha, h_\alpha)}$ ein orientierter Atlas
+\[
+	\omega_\alpha := h_\alpha^* \enbrace*{\mathd x^1 \wedge \ldots \wedge \mathd x^m} \in \Omega^m(U_\alpha) 
+\]
+Das die Jacobischen aller Kartenwechsel positive Determinante haben, zeigt obige Rechnung 
+\[
+	\enbrace*{h_\beta \circ h_\alpha ^{-1}}^* \mathd x^1 \wedge \ldots \wedge \mathd x^m = f  \mathd x^1 \wedge \ldots \wedge \mathd x^m
+\]
+für eine positive Funktion $f \equiv f_{\alpha \beta} \in C^\infty \enbrace[\big]{h_\alpha(U_\alpha \cap U_\beta)}$. Wir erhalten
+\begin{align*}
+	\omega_\beta = h_\beta^*(\mathd x^1 \wedge \ldots \wedge \mathd x^m) = (f \circ h_\alpha) h_\alpha^* (\mathd x^1 \wedge \ldots \wedge \mathd x^m) 
+	= \underbrace{\enbrace*{f \circ h_\alpha} }_{>0} \omega_\alpha.
+\end{align*}
+Sei $(\varphi_i)_{i \in I}$ eine untergeordnete Teilung der Eins mit $\supp \varphi_i \subset U_{\alpha(i)}$. Setze
+\[
+	\omega := \sum_{i \in I} \varphi_i \omega_{\alpha(i)}
+\]
+\uline{Behauptung:} $\omega$ ist nullstellenfrei: Fixiere $p \in U_{\alpha_0}$
+\begin{align*}
+	\omega_p = \enbrace*{\sum_i \phi_i(p) f_{\alpha_0 \alpha_i} (p) }\underbrace{\enbrace*{\omega_{\alpha_0}}_p }_{\not= 0}
+\end{align*}
+Konvexkombination positiver reeller Zahlen, ist also positiv. \bewende
+% subsubsection 543 (end)
+
+\subsubsection{Beispiel} % (fold)
+\label{ssub:544}
+\begin{enumerate}[(i)]
+	\item $Q^n$ Mannigfaltigkeit. $\lambda = p_i \mathd q^i$ (lokal) Liouville 1-Form auf $T^* Q$
+	\[
+		\omega = \mathd \lambda \quad \mathd \omega=0, \omega^n \not= 0
+	\]
+	Es ist lokal $\omega^n = (\mathd p_i \wedge \mathd q^i)^n = n! \mathd p_1 \wedge\mathd q^1 \wedge \ldots \wedge \mathd p_n \wedge\mathd q^n$.
+	$\Rightarrow T^* Q$ (als Mannigfaltigkeit!) ist orientiert. Ist nun $g$ eine Metrik auf $Q$, so ist 
+	\[
+		T Q \xrightarrow{\enspace \cong \enspace} T^* Q ; X \mapsto g(X,.)
+	\]
+	$\Rightarrow T Q$ ist (als Mannigfaltigkeit) orientierbar.
+	\item  Auf $\mathds{R}^n$ sei $\tau(x) := -x$ (Involution). Dann gilt
+	\[
+		\tau^*(\mathd x^1 \wedge \ldots \wedge \mathd x^n) = (-1)^n \mathd x^1 \wedge \ldots \wedge \mathd x^n
+	\]
+	$\Rightarrow \tau$ ist orientierungstreu, falls $n$ gerade, sonst umkehrend. Sei nun $\tau : S^{n-1} \to S^{n-1}$ die induzierte Antipodenabbildung.
+	\missingfigure{Antipodenabbildung $\tau$ und Teilmenge von $S^{n-1}$}
+	\[
+		\omega_p(v_1, \ldots , v_{n-1}) = \det(p, v_1, \ldots , v_{n-1})
+	\]
+	$\omega$ ist Volumenform auf $S^{n-1}$. $\tau* \omega = (-1)^n \omega$. Also ist $\tau$ orientierungstreu ($\tau : S^m \to S^m, m=n-1$), wenn $m$ ungerade ist, sonst
+	umkehrend.
+	
+	Betrachte $\mathds{R}P^m = \nicefrac{S^m}{\tau}$
+	\[
+		\begin{tikzcd}
+			S^m \rar["\tau"] \dar[swap]{$2:1$} & S^m \dlar[swap]{$2:1$} \\
+			\mathds{R}P^m &
+		\end{tikzcd}
+	\]
+	\uline{$m$ ungerade} $\exists !$ eine Orientierung auf $\mathds{R}P^m$, sodass $\pi : S^m \to \mathds{R}P^m$ orientierungstreu ist.
+	\[
+		\alpha_{[x]} (v_1, \ldots , v_m) := \omega_x \enbrace*{ (T_x \pi ) ^{-1} v_1, \ldots , (T_x \pi )^{-1} v_m} 
+	\]
+	($\tau^* \omega = \omega$), $\alpha$ ist Volumenform auf $\mathds{R}P^m$. \\
+	\uline{$m$ gerade} $\tau^* \omega = \omega$. Wäre $\alpha$ eine Volumenform auf $\mathds{R}P^m$, so gibt es \oE eine positive Funktion $f$ mit $\pi^* \alpha = f \omega$.
+	Da $\pi^* \alpha$ invariant unter $\pi^*$ ist, folgt
+	\begin{align*}
+		f \omega = \pi^* \alpha = \tau^* \pi^* \alpha = (f \circ \tau) \tau^* \omega = - (f \circ \tau) \omega \enspace \text{\light} \bewende
+	\end{align*}
+\end{enumerate}
+% subsubsection 544 (end)
+% subsection 54 (end)
 % section 5 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
