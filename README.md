@@ -17,7 +17,7 @@ Ich lade jeden herzlich ein, sich mittels Forks und Pull-Requests an der Entwick
 Zeichnungen fehlt noch eine ganze Menge.
 Schon einmal vielen Dank an
 
-* Gautam (gdbgauda)
+* Gautam (gdbgauda) _Höhere Algebra I._
 
 für die Beteiligung an diesem Projekt!
 
@@ -25,7 +25,7 @@ für die Beteiligung an diesem Projekt!
 
 Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Avenir Medium_ und _Consolas_ installiert sein. Erstere
 ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar. Die anderen beiden sind
-je nach Betriebssystem vorinstalliert.  
+sind zumindest unter Windows und OS X vorinstalliert.  
 Wenn die Schriften nicht verfügbar sind, dann müssen entweder die entsprechenden Befehle in `mitschrift.tex` modifiziert werden oder 
 man verwendet den Standardtreiber `pdfLaTeX`.
 
