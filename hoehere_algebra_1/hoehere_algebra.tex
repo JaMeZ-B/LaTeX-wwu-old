@@ -2161,8 +2161,7 @@ wohldefiniert ist, d.h. sind
 \label{sub:41}
 Eine \Index{Darstellung} einer Gruppe ist (gegeben durch) einen Homomorphismus $\rho : G \to GL(V)$ für einen (endlich dimensionalen) $K$-Vektorraum. Der \Index{Grad} der 
 Darstellung ist $\dim V$. Ist $B = \set{u_1, \ldots , u_n}$ eine $K$-Basis für $V$, dann ergibt jede Darstellung $\rho : G \to \GL(V)$ eine Matrix-Darstellung von $G$,
-indem $\rho(g) \in \GL(V)$ durch die zugehörigen Matrix bezüglich $B$ beschrieben wird. 
-
+indem $\rho(g) \in \GL(V)$ durch die zugehörigen Matrix bezüglich $B$ beschrieben wird. \\
 Ist $h : G \to \Sym(n)$ ein Homomorphismus, dann erhält man die zugehörige
 \Index{Permutationsdarstellung} durch $\rho(g) u_i = u_{h(g)(i)}$. Dies hat man insbesondere für $\abs*{G}=n$ und 
 \[
@@ -2283,7 +2282,7 @@ konjugiert ist. Es ist $\sigma$ irreduzibel genau dann wenn $\sigma^g$ irreduzib
 
 \subsection{Satz (Clifford)} % (fold)
 \label{sub:47}
-Sei $G$ eine endliche Gruppe, $H \unlhd G$ ein Normalteiler, $\rho G \to \GL(V)$ eine irreduzible Darstellung von $G$ auf $V$. Dann ist $\rho_H : H \to \GL(V)$ halbeinfach 
+Sei $G$ eine endliche Gruppe, $H \unlhd G$ ein Normalteiler, $\rho : G \to \GL(V)$ eine irreduzible Darstellung von $G$ auf $V$. Dann ist $\rho_H : H \to\GL(V)$ halbeinfach 
 und alle homogenen irreduziblen Komponenten von $V$ als $K[H]$-Modul sind konjugiert und haben die gleiche Multiplizität.
 \minisec{Beweis}
 Sei $U$ ein irreduzibler $K[H]$-Untermodul von $V$ und betrachte $\sum_{g \in G} \rho(g) U$. Dieser Raum ist $G$-invariant, weil $V$ als $K[G]$-Modul irreduzibel ist, also 
@@ -2322,22 +2321,130 @@ Wedderburn ist $A_i \simeq M_{n_i}(D_i)$ für einen Schiefkörper $D_i$ über $K
 \subsection{Satz} % (fold)
 \label{sub:411}
 Sein $G$, $K$, $A_i$ wie eben, dann entsprechen die minimalen Linksideale $J_i \subseteq A_i$ genau den irreduziblen Darstellungen von $G$.  Der Grad der zu $J_i$ gehörigen 
-Darstellung ist $n_i \cdot d_i$.
+Darstellung ist $n_i \cdot d_i$. $J_i = M_{n_i}(D_i)e_{kk}$, $A_i = \bigoplus_{k=1}^{n_i} M_{n_i}(D_i)e_{kk}$
 \minisec{Beweis}
 Für eine halbeinfache Algebra $A$ entsprechen die irreduziblen $A$-Moduln genau den minimalen Linksidealen der $A_i$. Ein minimales Linksideal in $M_n(D)$ ist von der 
-Form $M_n(D)e_{ii}$ mit $K$-Dimension $n \cdot \dim_K D$. Ist $\rho_i$ die zu $J_i = A_i$ gehörige irreduzible Darstellung, dann ist für eine beliebige Darstellung 
+Form $M_n(D)e_{ii}$ mit $K$-Dimension $n \cdot \dim_K D$. 
+
+Ist $\rho_i$ die zu $J_i = A_i$ gehörige irreduzible Darstellung, dann ist für eine beliebige Darstellung 
 $\rho : G \to \GL(V)$ (für $\Char K \nmid \abs*{G}$) also $V$ ein halbeinfacher $A(=K[G])$-Modul und zerfällt in einfache Komponenten 
 $V= \bigoplus V_j$, $V_j$ $G$-invariant. Für jedes $j$ existiert ein $i$ mit $\rho \big|_{V_j} = \rho_i$ und wir können schreiben 
 \[
-	p \sim m_1 \rho_1 \oplus \ldots \oplus m_s \rho_s
+	\rho \sim m_1 \rho_1 \oplus \ldots \oplus m_s \rho_s \bewende
 \]
 % subsection 411 (end)
 
 \subsection{Satz} % (fold)
 \label{sub:412}
-Ist $\rho : G \to K[G]$ die reguläre Darstellung, dann ist die Vielfachheit von $\rho_i$ in $\rho$ genau $n_i$ in der Notation von vorher.
+Ist $\rho : G \to K[G]$ die reguläre Darstellung, dann ist die Vielfachheit von $\rho_i$ in $\rho$ genau $n_i$ in der Notation von vorher, also
+\[
+	\rho \sim n_1 \rho_1 \oplus \ldots \oplus n_s \rho_s
+\]
+\minisec{Beweis}
+Die reguläre Darstellung ist die Linkswirkung von $G$ auf $A=K[G]$, d.h. $K[G]$ betrachtet als $K[G]$-Modul. Es ist $A= \bigoplus_{i=1}^s A_i$, 
+\[
+	A_i = M_{n_i}(D_i) = \bigoplus_{k=1}^{n_i} M_{n_i}(D_i) e_{kk}
+\]
+Daraus folgt die Behauptung. \bewende
 % subsection 412 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:413}
+Sei $G$ eine endliche Gruppe, $G= C_1 \cup \ldots \cup C_r$ die Zerlegung in die Konjugiertenklassen.\marginnote{$Z(A)= \bigoplus_{i=1}^s Z(A_i)$}
+Wir setzen $c_i = \sum_{h \in C_i}h \in A$, $i \le r$. Dann bilden 
+$c_1, \ldots , c_r$ eine Basis für $Z(A)$.
+\begin{description}
+	\item[1. Behauptung: $c_i \in Z(A)$:] Für $g \in G$ gilt 
+	\[
+		g ^{-1} c_i g = \sum_{h \in c_i} g ^{-1} h g = \sum h = c_i \in Z(A)
+	\]
+	\item[2. Behauptung: $\set{c_1,\ldots ,r_r} $ linear unabhängig:] Klar.
+	\item[3. Behauptung: $\langle \set{c_1, \ldots ,c_r}\rangle=Z(A)$:] Sei nun $c \in Z(A)$ beliebig, etwa $c = \sum_{g \in G} \gamma_g g$, $\gamma_g \in K$, $g \in G$.
+	Sei $h \in G$, also 
+	\begin{align*}
+		h ^{-1}c h = \sum_g \gamma_g h ^{-1} g h = \sum_g \gamma_{h g h ^{-1}} g = \sum_g \gamma_g g =c
+	\end{align*}
+	Ein Koeffizientenvergleich ergibt $\gamma_g = \gamma_{h g h ^{-1}}$ für alle $g,h \in G$, d.h. es existiert $\gamma_i \in K$, so dass
+	für alle $g \in C_i$ gilt $\gamma_g= \gamma_i$. Daraus folgt die Behauptung. \bewende
+\end{description}
+% subsection 413 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:414}
+Daher gilt $s \le \dim Z(A)=r$. Es gilt also $\dim Z(A) = \sum_{i=1}^s [K_i :K]=r$ und daher $r=s$ genau dann, wenn $A_i$ zentral einfach für alle $i=1, \ldots ,s$.
+Ist $K$ algebraisch abgeschlossen, dann ist immer $r=s$.
+% subsection 414 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:415}
+Sei $G$ eine endliche Gruppe, $K$ algebraisch abgeschlossen, $\Char K \nmid \abs*{G}$, $s = \#$Konjugiertenklassen von $G$. Dann ist die Anzahl der irreduziblen 
+Darstellungen von $G$ (bis auf Äquivalenz) genau $s$ und falls die $\rho_1, \ldots \rho_s$ wie eben sind mit $\deg \rho_i = n_i$, dann folgt 
+\[
+	\abs*{G} = \sum_{i=1}^s  n_i^2.
+\]
+\minisec{Beweis}
+Die erste Aussage ist genau die Vorbemerkung \ref{sub:414}. Ist $K$ algebraisch abgeschlossen, dann ist $A= K[G] = \bigoplus_{i=1}^s M_{n_i}(K)$, daher gilt 
+$\abs*{G} =\dim A = \sum_{i=1}^s n_i^2$. \bewende
+% subsection 415 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:416}
+Ist $G$ abelsch, dann ist über algebraisch abgeschlossenen Körpern $K$ mit $\Char K \nmid \abs*{G}$ jede irreduzible Darstellung $1$-dimensional, d.h. jede Darstellung
+$G \to \GL(V)$, für $V$ $K$-Vektorraum, ist diagonalisierbar.
+\minisec{Beweis}
+Es ist $s= \abs*{G}$, also $n_i=1$ für $i=1,\ldots ,s$. \bewende
+% subsection 416 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:417}
+Sei $n \in \mathds{N}$, $G=C_n$ zyklisch der Ordnung $n$, $A=\mathds{C}[G]$. Da $G$ abelsch ist, gibt es genau $n$ irreduzible Darstellungen, jeweils von Grad $1$. Die
+entsprechenden Darstellungen sind:
+\[
+	g \mapsto \enbrace*{e^{\frac{2 \pi i r}{n}}} \qquad , \qquad r=1, \ldots ,n, \enspace\langle g \rangle = C_n
+\]
+\minisec{Erinnerung}
+Ist $V$ ein $K$-Vektorraum, $L \supseteq K$ eine Körpererweiterung, dann ist $V_L = V \otimes_K L$ ein $L$-Vektorraum mit $\dim_L V_L = \dim_K V$. Jede $K$-lineare Abbildung
+von $V$ lässt sich kanonisch zu einer $L$-linearen Abbildung von $V_L$ fortsetzen. Ds gilt insbesondere für Darstellungen $\rho : G \to \GL(V)$ und entsprechend
+$\rho_L : G \to \GL(V_L)$.
+% subsection 417 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:418}
+Sei $G$ eine Gruppe, $K$ ein Körper, $L \supseteq K$ eine Körpererweiterung, $V$ ein $K$-Vektorraum. Dann gilt 
+\[
+	\End_{L[G]} V_L = L \cdot \End_K[G] V \simeq \enbrace*{\End_{K[G]} V}_L 
+\]
+\minisec{Beweis}
+Es ist 
+\begin{align*}
+	\End_{L[G]} V_L = \End_{L[G]} \enbrace*{V \otimes_K L} = \End_{K[G]} V \otimes_K L = \enbrace*{\End_{K[G]} V}_L  
+\end{align*}
+Klar ist auch $L \cdot \End_{K[G]} V \subseteq \End_{L[G]} V_L$. Für die andere Inklusion wähle eine Basis $\set[\lambda_i]{i \in I}$ für $L$ über $K$. Jedes 
+$\alpha \in \End_L V_L$ lässt sich eindeutig schreiben als $\alpha = \sum_{i \in I} \lambda_i l_i$ mit $l_i \in \End_K V$. Es ist $\alpha \in \End_{L[G]} V_L$ genau dann,
+wenn $\alpha$ mit der $G$-Wirkung vertauscht, genau dann wenn jedes $l_i$ mit der $G$-Wirkung vertauscht, d.h. wenn $l_i \in \End_{K[G]} V$. \bewende\smallskip\\
+Ist $U \subseteq V$ ein $G$-invariante Unterraum, dann ist auch $U \otimes L \subseteq V_L$ $G$-invariant. Daher ist falls $\rho_L$ irreduzibel ist, ach $\rho$ irreduzibel.
+Aber die Umkehrung gilt \emph{nicht}: 
+\minisec{Beispiel}
+Sie $G = C_4 = \langle g \rangle$, $K=\mathds{R}$, $V0\mathds{R}^2$, $\rho : G \to \GL_2(\mathds{R})$, $\rho(g) = \begin{psmallmatrix}
+	0 & 1 \\
+	-1 & 0
+\end{psmallmatrix}$, Drehung um 90°. In $V$ gibt es keine $G$-invarianten Unterräume, d.h. $\rho$ ist irreduzibel. Aber über $\mathds{C}$ hat eine abelsche Gruppe keine
+irreduzible Darstellung in Dimension $ >1$. Bei geeigneter Wahl einer Basis für $V_\mathds{C}$ wird $\rho_\mathds{C}(G)$ als Diagonalmatrix dargestellt.
+% subsection 418 (end)
+
+\subsection[Definition: Absolut irreduzible Darstellung]{Definition} % (fold)
+\label{sub:420}
+Eine Darstellung $\rho : G \to \GL(V)$ für einen $K$-Vektorraum $V$ heißt \Index{absolut irreduzibel}, falls $\rho_L$ irreduzibel ist für jeden Körper $L \supseteq K$. 
+% subsection 420 (end)
 % section 4 (end)
+
+
+
+
+
+
+
+
 
 
 \cleardoubleoddemptypage
