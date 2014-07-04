@@ -2694,7 +2694,7 @@ Konvexkombination positiver reeller Zahlen, ist also positiv. \bewende
 	Betrachte $\mathds{R}P^m = \nicefrac{S^m}{\tau}$
 	\[
 		\begin{tikzcd}
-			S^m \rar["\tau"] \dar[swap]{$2:1$} & S^m \dlar[swap]{$2:1$} \\
+			S^m \rar["\tau"] \dar[swap]{$2:1$} & S^m \dlar{$2:1$} \\
 			\mathds{R}P^m &
 		\end{tikzcd}
 	\]
@@ -2710,7 +2710,185 @@ Konvexkombination positiver reeller Zahlen, ist also positiv. \bewende
 	\end{align*}
 \end{enumerate}
 % subsubsection 544 (end)
+
 % subsection 54 (end)
+\subsection{Integration} % (fold)
+\label{sub:55}
+Betrachte einen Diffeomorphismus $\varphi : U \xrightarrow{\cong} V $ für $U,V \subseteq \mathds{R}^m$ offen. Sei $f : V \to \mathds{R}$ integrierbar. Dann ist
+\[
+	f \circ \varphi \cdot \abs*{\det J_\varphi} : U \to \mathds{R} 
+\]
+integrierbar. Es gilt nach dem Transformationssatz
+\[
+	\int_{V= \varphi(U)} \! f  \, \mathrm{d}x = \int_{U} (f \circ \varphi) \abs*{\det J_\varphi}  \, \mathrm{d}x  
+\]
+Insbesondere sind diffeomorphe Bilder messbarer Mengen wieder messbar (analoges für Nullmengen).
+
+\subsubsection[Definition: Messbare Teilmenge einer Mannigfaltigkeit]{Definition} % (fold)
+\label{ssub:551}
+Sei $A \subseteq M$, $M$ eine differenzierbare Mannigfaltigkeit, heißt \Index{messbar}, wenn für eine Überlagerung von Karten $(U,h)$ alle 
+\[
+	h(U \cap A) \subset \mathds{R}^m
+\] 
+messbar sind. Analoges für Nullmengen.
+% subsubsection 551 (end)
+
+\subsubsection{Lemma 27} % (fold)
+\label{ssub:552}
+Jede Mannigfaltigkeit ist abzählbare Vereinigung messbarer Teilmengen, die in einem Kartengebiet enthalten sind.
+\minisec{Beweis}
+Sei $\set{(U_i, h_i)}_{i \in \mathds{N}} $ ein abzählbarer Atlas (Lemma 13b, \ref{ssub:313}). Setze
+\[
+	A_1 := U_1 \quad \text{ und } \quad A_{i+1} := U_{i+1} \setminus \bigcup_{k=1}^i A_k \quad , i \ge 1
+\]
+$\Rightarrow M= \bigcup_{i=1}^\infty A_i$. \bewende \bigskip \\
+Eine \emph{eventuell unstetige} $k$-Form ist eine Abbildung $\omega : M \to \Lambda^k T^* M$ mit $\pi^{(*)} \circ \omega = \id_M$.
+% subsubsection 552 (end)
+
+\subsubsection[Definition: Integrierbarkeit und das Integral einer $k$-Form]{Definition} % (fold)
+\label{ssub:553}
+Sei $\omega$ eine eventuell unstetige $m$-Form auf $M$, wobei $M^m$ eine differenzierbare, orientierte Mannigfaltigkeit. $\omega$ heißt \Index{integrierbar}, falls:
+\begin{itemize}
+	\item $\exists$ Zerlegung $(A_i)_{i \in \mathds{N}}$ von $M$ in abzählbar viele messbare Mengen,
+	\item $\exists$ orientierten Atlas $\set{(U_i,h_i)}_{i \in \mathds{N}}$ mit $A_i \subset U_1$ (vgl. Lemma 27 (\ref{ssub:552})), sodass gilt: Die Abbildungen
+	\[
+		h_i(U_i) \xrightarrow{a_i := \omega \enbrace*{\diff{}{x^1}, \ldots , \diff{}{x^m}}\circ  h_i ^{-1} } \mathds{R} 
+	\]
+	sind für alle $i \in \mathds{N}$ über $h_i(A_i)$ Lebesgue-integrierbar und es gilt: 
+	\[
+		\sum_{i=1}^{\infty} \int_{h_i(A_i)}\! \! \! \abs*{a_i(x)}  \, \mathrm{d}x < \infty 
+	\]
+\end{itemize} 
+Das \Index{Integral} von $\omega$ ist dann:
+\[
+	\int_{M}\! \omega := \sum_{i=1}^{\infty} \int_{h_i(A_i)} \! \! \! a_i(x)  \, \mathrm{d}x  
+\] 
+% subsubsection 553 (end)
+
+\subsubsection{Satz 28} % (fold)
+\label{ssub:554}
+Die Definition ist unabhängig von der Wahl der Zerlegung in messbare Teilmengen und der Wahl des orientierten Atlasses. 
+\minisec{Beweis}
+Sei $(B_j)$ eine weitere Zerlegung. $(V_j, k_j)$ orientierte Karten, $B_j \subset V_j$. Weiter seien $k_j(V_j) \to \mathds{R}$; 
+$b_j := \omega \enbrace*{\diff{}{x^1}, \ldots , \diff{}{x^m}}\circ k_j ^{-1}$. Behauptung:
+\begin{itemize}
+	\item $b_j$ ist über $k_j(B_j)$ integrierbar $\forall j$
+	\item $\sum_{j=1}^{\infty}  \int_{k_j(B_j)} \! \!  \abs*{b_j}  \, \mathrm{d}x < \infty $ 
+	\item $\sum_{i=1}^{\infty} \int_{h_i(A_i)}\! \!  a_i(x)  \, \mathrm{d}x  = \sum_{j=1}^{\infty} \int_{k_j(B_j)}\! \! \! b_j(x)  \, \mathrm{d}x  $
+\end{itemize}
+$\forall i \in \mathds{N}$ setze $a_{ij} := a_i \big|_{h_i(A_i \cap B_j)}$. Dann sind die $a_ij$ für alle $j$ über $h_i(A_i \cap B_j)$ integrierbar. Also ist auch
+\[
+	f_n := \sum_{j=1}^{n} a_{ij}
+\]
+integrierbar und es gilt:
+\begin{itemize}
+	\item $\lim_{ n \to \infty} f_n = a_i \big|_{h_i(A_i)}$
+	\item $\abs*{f_n} \le \abs*{a_i}  $ für alle $n \in \mathds{N}$
+\end{itemize}
+Mit dem Konvergenzsatz von Lebesgue folgt
+\[
+	\sum_{j=1}^{\infty} \int_{h_i(A_i \cap B_j)} \! \! a_i  \, \mathrm{d}x = \lim_{ n \to \infty} \int f_n  \, \mathrm{d}x = \int_{h_i(A_i)} a_i  \, \mathrm{d}x 
+\]
+Analog für $\abs*{a_i}$ statt $a_i$. Setze
+\[
+	\varphi := h_i \circ k_j ^{-1} : \underset{=k_j(u_i \cap V_j)}{U} \to \underset{=h_i(U_i \cap V_j)}{V}
+\]
+Dann gilt 
+\begin{align*}
+	b_j \mathd x^1 \wedge \ldots \wedge \mathd x^m = (k_j ^{-1})^* \omega = \enbrace*{h_i ^{-1} \circ h_i \circ k_j ^{-1}}^* \omega &= \varphi^* \circ (h_i ^{-1})^* \omega\\
+	&= \varphi^* \enbrace*{a_i \mathd x^1 \wedge \ldots \wedge \mathd x^m} \\
+	&= (a_i \circ \varphi) \det (J_\varphi) \mathd x^1 \wedge \ldots \wedge \mathd x^m
+\end{align*}
+Da $\det(J_\varphi)>0$, gilt auf $U$
+\[
+	b_j = (a_i \circ \varphi) \abs*{\det J_\varphi} \tag*{analog $\abs*{b_j}, \abs*{a_i}$} 
+\]
+$\Rightarrow b_j$ ist auf $k_j(A_i \cap B_j)$ integrierbar (nach der Transfomationsformel) und es gilt
+\[
+	\int_{k_j(A_i \cap B_j)} \! \! b_j  \, \mathrm{d}x  = \int_{k_j(A_i \cap B_j)} (a_i \circ \varphi) \abs*{\det J_\varphi}   \, \mathrm{d}x  = \int_{h_i(A_i \cap B_j)} 
+	a_i  \, \mathrm{d}x 
+\]
+(Analog mit "$\abs*{.}$"). Es folgt 
+\[
+	\infty > \sum_{i=1}^{\infty} \int_{h_i(A_i)} \! \! \abs*{a_i} = \sum_{i,j} \int_{h_i(A_i \cap B_j)} \abs*{a_i}  \, \mathrm{d}x  = 
+	\sum_{i,j} \int_{k_j(A_i \cap B_j)} \abs*{b_j}  \, \mathrm{d}x   
+\]
+Mit dem Konvegenzsatz von Lebesgue folgt: $\abs*{b_j}$ ist über $k_j(B_j)$ integrierbar (wie oben) und 
+\[
+	\int_{k_j(B_j)} \! \! b_j  \, \mathrm{d}x = \sum_{i=1}^\infty \int_{k_j(A_i \cap B_j)} b_j  \, \mathrm{d}x \tag*{Analog für $\abs*{b_j}$}
+\]
+Also gilt
+\[
+	\sum_{j=1}^{\infty} \int_{k_j(B_j)} \! \!  \abs*{b_j}  \, \mathrm{d}x < \infty 
+\]
+und Punkt 3 der Auzählung gilt. Die Integrale sind gleich. \bewende
+% subsubsection 554 (end)
+
+\subsubsection{Folgerung 29} % (fold)
+\label{ssub:555}
+jede stetige $m$-Form mit kompaktem Träger $\supp \omega := \overline{\set[p \in M]{\omega_p \not= 0} } $ ist integrierbar.
+\minisec{Beweis}
+\begin{itemize}
+	\item alle \enquote{lokalen} Integrale existieren.
+	\item die Reihe wird zu einer Summe \bewende
+\end{itemize}
+Sei $\set{(U_\alpha, h_\alpha)} $ ein orientierter Atlas, $\set{\varphi_i}$ eine Zerlegung der Eins, $\supp \varphi_i \subset U_{\alpha(i)}$. Dann setze
+$\omega_i := \varphi_i \cdot \omega$. Dann ist $\omega = \sum_i \omega_i$ lokal endlich zerlegt. $\omega$ ist integrierbar 
+\begin{align*}
+	\iff &\forall i : h_{\alpha(i)}(U_{\alpha(i)}) \xrightarrow{a_i := \omega_i \enbrace*{\diff{}{x^1}, \ldots , \diff{}{x^m} \circ h_{\alpha(i)} ^{-1} }} \mathds{R} 
+	\text{ integrierbar und } \\
+	& \sum_{i} \int_{h_{\alpha(i)}(U_{\alpha(i)})} \abs*{a_i}  \, \mathrm{d}x < \infty 
+\end{align*}
+Es gilt $\int_{M} \! \omega = \sum_{i=1}^{\infty} \int_{h_{\alpha(i)}(U_{\alpha(i)})} a_i  \, \mathrm{d}x $
+% subsubsection 555 (end)
+
+\subsubsection{Folgerung 30} % (fold)
+\label{ssub:556}
+\[
+	\int_{-M} \!\omega = - \int_M \! \omega
+\]
+($-M$ ist die Mannigfaltigkeit $M$ mit der umgekehrten Orientierung)
+% subsubsection 556 (end)
+
+\subsubsection{Folgerung 31} % (fold)
+\label{ssub:557}
+Sei $\varphi : M \xrightarrow{\cong} M $ ein orientierungstreuer Diffeomorphismus. Dann ist mit $\omega \in \Omega^m(M)$, $m= \dim M$, auch $\varphi^* \omega$ integrierbar 
+und es gilt die Transformationsformel
+\[
+	\int_{M= \varphi(M)} \! \! \omega = \int_M \!\varphi^* \omega
+\]
+\minisec{Beweis}
+Benutze zur Berechnung von $\int_M \varphi^* \omega$ die Zerlegung $M= \bigcup_i \varphi ^{-1}(A_i)$ und Karten $\enbrace*{\varphi ^{-1}(u_i), h_i\circ \varphi} $ \bewende%
+\medskip \\
+Analog für $A \subset M$ messbar: $\int_A \!\omega := \int_M \! \ind_A \cdot \omega$
+% subsubsection 557 (end)
+
+\subsubsection{Folgerung 32 (Transformationsformel)} % (fold)
+\label{ssub:558}
+\[
+	\int_A \!\varphi^* \omega = \int_{\varphi(A)} \! \omega
+\]
+\phantom{HAllo} \bigskip \\
+Sei $\Omega$ eine Volumenform auf $M$. $\mu(A) := \int_A \Omega$ ein Maß auf der $\sigma$-Algebra der messbaren Mengen von $M$. $f : M \to \mathds{R}$ ist 
+\Index{integrierbar}, falls $f \Omega$ integrierbar ist und es gilt 
+\[
+	\int_M f  \, \mathrm{d}\mu = \int_M f \Omega
+\]
+$\leadsto$ Maßraum $(M, \mathfrak{M}, \mu)$. \bigskip  \\
+Sei $(M^m,g)$ eine orientierte Riemannsche Mannigfaltigkeit:  lokal:
+\[
+	g_{ij} = \sprod*{\diff{}{x^i}}{\diff{}{x^j} } \quad , \quad g := \det (g_{ij})   \quad , \quad \Omega := \sqrt{g} \mathd x^1 \wedge \ldots \wedge \mathd x^m  
+\]
+ist wohldefiniert: Sei $T$ die Jacobische eines Kartenwechsels
+\[
+	(\tilde{g}_{ij}) = T^T g_{ij} T
+\]
+(Ähnlichkeistransformation symmetrischer Bilinearformen) $\Rightarrow $ da $\det T >0 : \sqrt{\tilde{g}} = \det(T) \sqrt{g}$. 
+\[
+	\Rightarrow \sqrt{g} \mathd x^1 \wedge \ldots \wedge \mathd x^m = \sqrt{\tilde{g}}\mathd y^1 \wedge \ldots \wedge \mathd y^m  \bewende
+\]
+% subsubsection 558 (end)
+% subsection 55 (end)
 % section 5 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
