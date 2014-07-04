@@ -2611,41 +2611,74 @@ ein Diffeomorphismus ist.
 Sei $M$ ein $C^\infty$-Mannigfaltigkeit. Dann ist $C^\infty_0 (M,\mathds{R}) := C^\infty(M,\mathds{R}) \cap C_0(M,\mathds{R})$\marginnote{siehe \ref{sub:61} für 
 $C_0(M,\mathds{R})$} dicht in $C_0(M,\mathds{R})$ bezüglich $\norm[\infty]{.}$.
 \minisec{Beispiel (Glockenfunktionen)}
-Sei $\psi : \mathds{R} \to \mathds{R}$ gegeben durch 
+Seien $\psi, \varphi_\varepsilon : \mathds{R} \to \mathds{R}$ für $\varepsilon>0$ gegeben durch 
 \[
 	\psi(t) := \begin{cases}
 		0, &\text{ falls }t \le 0\\
 		e^{-t^{-2}} ,&\text{ falls } t >0
-	\end{cases}
+	\end{cases} \qquad , \qquad \varphi_\varepsilon(t) = \frac{\psi(t)}{\psi(t) + \psi(\varepsilon-t)}
 \]
-Dies ist eine $C^\infty$-Funktion (Analysis II.)
+Diese sind $C^\infty$-Funktionen (Analysis II.)
 \begin{figure}[H]
 	\centering{
-	\begin{tikzpicture}[xscale=0.8, yscale=1]
-		\draw[->, thick] (0,-0.3) -- (0,1.5);
-		\draw[->, thick] (-1,0) -- (4.1,0);
-		\draw[gray, dashed] (0,1) node[left]{$1$} --(4,1);
-		\draw[variable=\t, domain=0.01:4, smooth, very thick, Sienna3] (-0.9,0) -- (0,0) -- plot({\t},{exp(- \t^(-2))}) node[below left]{$\psi$};
-	\end{tikzpicture}
-	\caption{Erster Schritt zu einer Glockenfunktion, die Funktion $\psi$}}
-\end{figure}
-Für $\varepsilon>0$ sei $\varphi_\varepsilon : \mathds{R} \to \mathds{R}$ gegeben durch $\varphi_\varepsilon(t) = \frac{\psi(t)}{\psi(t) + \psi(\varepsilon-t)}$
-\todo[noline]{Zeichnung vervollständigen und für einheitliches Aussehen sorgen (\texttt{pgfplots})}
-\begin{figure}[H]
-	\centering{
-	\begin{tikzpicture}[xscale=1.6]
-		\draw[gray, dashed] (0.5,1.3) node[left]{$1$} --(2.5,1.3);
-		\begin{axis}[hide x axis, hide y axis, x=1cm, y=1cm, ymin=-0.3, ymax=1.5, xmin=-0.5, xmax=2.2]
-			% \draw[help lines] (axis cs: -2,-2) grid (axis cs: 2,2);
-			\draw[->, thick] (axis cs: -0.5,0) -- (axis cs: 2.2,0);
-			\draw[->, thick] (axis cs: 0,-0.3) -- (axis cs: 0,1.5);
-			\addplot[smooth, thick, DodgerBlue2, domain=-0.45:2] table {Mathematica/data2.csv};
+	\begin{tikzpicture}[baseline]
+		\begin{axis}[
+			x=1cm, y=2cm,
+			ymin=-0.3, ymax =1.5,
+			axis lines=center,
+			ytick={0,1},
+			tick style={color=black},
+			xticklabels={,,},
+		]
+			\addplot[
+				Sienna2, very thick
+			] table{Mathematica/data1.dat} node[pos=0.9, below]{$\psi$};
+			\draw[dashed, very thin] (axis cs: 0,1) -- (axis cs: 4,1);
 		\end{axis}
-		\node[below left, DodgerBlue2] at (2.5,1.3) {$\varphi_\varepsilon$};
-	\end{tikzpicture}}
-\end{figure}
+	\end{tikzpicture} \qquad \qquad 
+	\begin{tikzpicture}[baseline]
+		\begin{axis}[
+			x=2cm, y=2cm,
+			axis lines=center, 
+			ymin=-0.3, ymax=1.5,
+			ytick={0,1}, xtick={0,1,2},
+			tick style={color=black},
+			xticklabels={,,},
+		]
+			\draw[dashed, very thin] (axis cs: 0,1) -- (axis cs: 2,1);
+			\addplot[very thick, DodgerBlue2] table {Mathematica/data2.dat} node[pos=0.9, below]{$\varphi_\varepsilon$};
+			\draw[decorate, 
+				decoration={brace,amplitude=5pt, mirror, raise=3pt}, 
+				] (axis cs: 0,0) -- (axis cs: 1,0) node[below, midway, yshift=-0.2cm]{\footnotesize$\varepsilon = 1$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Die Funktionen $\psi$ und $\varphi_\varepsilon$ für $\varepsilon =1$}}
+\end{figure}%
+\todo[noline]{$\mathds{R}^2$-Variante von $f_{\varepsilon,r}$ plotten}%
 Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $f_{\varepsilon,r}(x) = 1- \varphi_\varepsilon(\norm{x}-r)$
-\missingfigure{Graph von $f_{\varepsilon,r}$}
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[baseline]
+		\begin{axis}[
+			x=1cm, y=2cm,
+			axis lines=center, 
+			ymin=-0.3, ymax=1.5,
+			ytick={0}, xtick={-3,-2.5,...,2.5,3},
+			tick style={color=black},
+			xticklabels={,,},
+		]
+			\draw[dashed, very thin] (axis cs: -2.5,1) node[left]{$1$} -- (axis cs: 2.5,1);
+			\addplot[very thick, Firebrick2] table {Mathematica/data3.dat} node[pos=0.6, above]{$f_{\varepsilon, r}$};
+			\draw[decorate, 
+				decoration={brace,amplitude=5pt, mirror, raise=3pt}, 
+				] (axis cs: 0,0) -- (axis cs: 1.5,0) node[below, midway, yshift=-0.2cm]{\footnotesize$r=1.5$};
+			\draw[decorate, 
+				decoration={brace,amplitude=5pt, mirror, raise=3pt}, 
+				] (axis cs: 1.5,0) -- (axis cs: 2.5,0) node[below, midway, yshift=-0.2cm]{\footnotesize$\varepsilon=1$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Glockenfunktion $f_{\varepsilon,r}$ für $\varepsilon=1$, $r=1.5$ sowie für $\mathds{R}$, also auch $\mathds{R}^2$}}
+\end{figure}
 $f_{\varepsilon,r} \in C^\infty(\mathds{R}^n)$, Werte von $f_{\varepsilon,r} \subseteq [0,1]$.
 $f_{\varepsilon,r}(x) = 1$ für $\abs*{x} \le r $, $f_{\varepsilon,r}(x)=0$ für $\abs*{x} \ge r +\varepsilon$.
 \minisec{Beweis}
