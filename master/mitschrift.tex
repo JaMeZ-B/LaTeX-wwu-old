@@ -14,25 +14,28 @@
 %-- muss vor polyglossia bzw. babel geladen werden
 \usepackage{tikz}
 \usetikzlibrary{cd,external}
+\tikzset{>=latex}
+\usetikzlibrary{shapes,arrows,intersections}
+\usetikzlibrary{calc,3d}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usetikzlibrary{angles}
+
+%-- Konfiguration von tikzexternalize
 \tikzexternalize[prefix=tikz/, up to date check=diff]
 
 \ifxetex
-\tikzset{external/system call={xelatex \tikzexternalcheckshellescape 
+\tikzset{external/system call={lualatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
     -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
 \else
 \tikzset{external/system call={pdflatex \tikzexternalcheckshellescape 
     -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
 \fi
 
+%-- tikzexternalize fuer tikzcd deaktivieren, da inkompatibel
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
 \AtEndEnvironment{tikzcd}{\tikzexternalenable}
 
-\tikzset{>=latex}
-\usetikzlibrary{shapes,arrows, intersections}
-\usetikzlibrary{calc, 3d}
-\usetikzlibrary{decorations.pathreplacing, decorations.markings}
-\usetikzlibrary{angles}
-% um Inkompatibilitaeten von quotes und polyglossia bzw babel zu vermeiden
+%-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
 \tikzset{
   every picture/.append style={
     execute at begin picture={\shorthandoff{"}},
@@ -40,7 +43,6 @@
   }
 }
 \usetikzlibrary{quotes}
-% \usepackage{tikz-cd} % kommutative Diagramme
 \usepackage{pgfplots}
 
 
