@@ -352,7 +352,8 @@ Die übliche Topologie auf $\mathds{R}^n = \prod_{i =1}^n \mathds{R}$ stimmt mit
 	       colormap/cool,
 	       samples=50,
 	       domain=0:2*pi,y domain=0:2*pi,
-	       z buffer=sort]
+	       z buffer=sort,
+		   shader=faceted interp,]
 	       ({(2+cos(deg(x)))*cos(deg(y+pi/2))}, 
 	        {(2+cos(deg(x)))*sin(deg(y+pi/2))}, 
 	        {sin(deg(x))});
@@ -2450,7 +2451,7 @@ $(M,\mathcal{A})$ und $(M, \mathcal{A}_\mathrm{max})$ sind diffeomorph: $\id_M :
 \end{enumerate}
 % subsection 157 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkungen zu $C^\infty$-Mannigfaltigkeiten]{Bemerkung} % (fold)
 \label{sub:158}
 \begin{enumerate}[a)]
 	\item Es gibt $C^\infty$-Mannigfaltigkeiten $M$ und $N$, sodass $M$ und $N$ zueinander homöomorph sind, aber nicht diffeomorph sind. Dabei kann man sogar $M=S^7$ wählen.
@@ -2618,11 +2619,11 @@ Seien $\psi, \varphi_\varepsilon : \mathds{R} \to \mathds{R}$ für $\varepsilon>
 		e^{-t^{-2}} ,&\text{ falls } t >0
 	\end{cases} \qquad , \qquad \varphi_\varepsilon(t) = \frac{\psi(t)}{\psi(t) + \psi(\varepsilon-t)}
 \]
-Diese sind $C^\infty$-Funktionen (Analysis II.)
-\begin{figure}[H]
+$\psi$ und $\varphi_\varepsilon$ sind $C^\infty$-Funktionen (Analysis II.). %
+\begin{figure}[H]%
 	\centering{
 	\begin{tikzpicture}[baseline]
-		\begin{axis}[
+		\begin{axis}[%
 			x=1cm, y=2cm,
 			ymin=-0.3, ymax =1.5,
 			axis lines=center,
@@ -2635,9 +2636,9 @@ Diese sind $C^\infty$-Funktionen (Analysis II.)
 			] table{Mathematica/data1.dat} node[pos=0.9, below]{$\psi$};
 			\draw[dashed, very thin] (axis cs: 0,1) -- (axis cs: 4,1);
 		\end{axis}
-	\end{tikzpicture} \qquad \qquad 
-	\begin{tikzpicture}[baseline]
-		\begin{axis}[
+	\end{tikzpicture} \qquad \qquad %
+	\begin{tikzpicture}[baseline]%
+		\begin{axis}[%
 			x=2cm, y=2cm,
 			axis lines=center, 
 			ymin=-0.3, ymax=1.5,
@@ -2651,11 +2652,10 @@ Diese sind $C^\infty$-Funktionen (Analysis II.)
 				decoration={brace,amplitude=5pt, mirror, raise=3pt}, 
 				] (axis cs: 0,0) -- (axis cs: 1,0) node[below, midway, yshift=-0.2cm]{\footnotesize$\varepsilon = 1$};
 		\end{axis}
-	\end{tikzpicture}
+	\end{tikzpicture}%
 	\caption{Die Funktionen $\psi$ und $\varphi_\varepsilon$ für $\varepsilon =1$}}
-\end{figure}%
-\todo[noline]{$\mathds{R}^2$-Variante von $f_{\varepsilon,r}$ plotten}%
-Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $f_{\varepsilon,r}(x) = 1- \varphi_\varepsilon(\norm{x}-r)$
+\end{figure} %
+Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $f_{\varepsilon,r}(x) = 1- \varphi_\varepsilon(\norm{x}-r)$.
 \begin{figure}[H]
 	\centering{
 	\begin{tikzpicture}[baseline]
@@ -2676,11 +2676,24 @@ Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $
 				decoration={brace,amplitude=5pt, mirror, raise=3pt}, 
 				] (axis cs: 1.5,0) -- (axis cs: 2.5,0) node[below, midway, yshift=-0.2cm]{\footnotesize$\varepsilon=1$};
 		\end{axis}
+	\end{tikzpicture}\qquad \qquad
+	\begin{tikzpicture}[baseline, scale=0.8]
+		\begin{axis}[
+		]
+			\addplot3[surf,
+				colormap/cool,
+				z buffer=sort,
+				shader=faceted interp,
+				mesh/cols=61,
+				mesh/rows=61,
+				line join=bevel,]
+				table[col sep=comma] {Mathematica/data4.dat} ;
+		\end{axis}
 	\end{tikzpicture}
-	\caption{Glockenfunktion $f_{\varepsilon,r}$ für $\varepsilon=1$, $r=1.5$ sowie für $\mathds{R}$, also auch $\mathds{R}^2$}}
+	\caption{Glockenfunktion $f_{\varepsilon,r}$ für $\mathds{R}$ und $\mathds{R}^2$, wobei $\varepsilon=1$, $r=1.5$}}
 \end{figure}
-$f_{\varepsilon,r} \in C^\infty(\mathds{R}^n)$, Werte von $f_{\varepsilon,r} \subseteq [0,1]$.
-$f_{\varepsilon,r}(x) = 1$ für $\abs*{x} \le r $, $f_{\varepsilon,r}(x)=0$ für $\abs*{x} \ge r +\varepsilon$.
+Es ist $f_{\varepsilon,r} \in C^\infty(\mathds{R}^n)$ und es gilt $f_{\varepsilon,r}(x) \subseteq [0,1]$ für alle $x \in \mathds{R}^n$.
+Weiter ist $f_{\varepsilon,r}(x) = 1$ für $\abs*{x} \le r $, $f_{\varepsilon,r}(x)=0$ für $\abs*{x} \ge r +\varepsilon$.
 \minisec{Beweis}
 Wende Stone-Weierstraß an: Zu zeigen:
 \[
