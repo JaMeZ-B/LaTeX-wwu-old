@@ -2425,17 +2425,64 @@ wenn $\alpha$ mit der $G$-Wirkung vertauscht, genau dann wenn jedes $l_i$ mit de
 Ist $U \subseteq V$ ein $G$-invariante Unterraum, dann ist auch $U \otimes L \subseteq V_L$ $G$-invariant. Daher ist falls $\rho_L$ irreduzibel ist, ach $\rho$ irreduzibel.
 Aber die Umkehrung gilt \emph{nicht}: 
 \minisec{Beispiel}
-Sie $G = C_4 = \langle g \rangle$, $K=\mathds{R}$, $V0\mathds{R}^2$, $\rho : G \to \GL_2(\mathds{R})$, $\rho(g) = \begin{psmallmatrix}
+Sie $G = C_4 = \langle g \rangle$, $K=\mathds{R}$, $V=\mathds{R}^2$, $\rho : G \to \GL_2(\mathds{R})$, $\rho(g) = \begin{psmallmatrix}
 	0 & 1 \\
 	-1 & 0
 \end{psmallmatrix}$, Drehung um 90°. In $V$ gibt es keine $G$-invarianten Unterräume, d.h. $\rho$ ist irreduzibel. Aber über $\mathds{C}$ hat eine abelsche Gruppe keine
 irreduzible Darstellung in Dimension $ >1$. Bei geeigneter Wahl einer Basis für $V_\mathds{C}$ wird $\rho_\mathds{C}(G)$ als Diagonalmatrix dargestellt.
+\minisec{Bemerkung}
+$\rho :G \to \GL_n(K)$ irreduzibel, $L \supseteq K$ $\not\Rightarrow$ $\rho_L : G \to \GL_n(L)$ irreduzibel. $\Leftrightarrow$ gilt aber!
 % subsection 418 (end)
 
 \subsection[Definition: Absolut irreduzible Darstellung]{Definition} % (fold)
 \label{sub:420}
 Eine Darstellung $\rho : G \to \GL(V)$ für einen $K$-Vektorraum $V$ heißt \Index{absolut irreduzibel}, falls $\rho_L$ irreduzibel ist für jeden Körper $L \supseteq K$. 
 % subsection 420 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:421}
+Sei $G$ eine endliche Gruppe, $\rho :G  \to \GL(V)$ eine Darstellung über $K$ mit $\Char K \nmid \abs*{G}$. Setze $A := K[G]$ und $A' = \End_A(V)= C_{\End_K(V)}(A)$. Dann
+ist $\rho$ irreduzibel genau dann, wenn $A'$ ein Schiefkörper ist und absolut irreduzibel, wenn $A'=K$ gilt.
+\minisec{Beweis}
+Der erste Teil der Behauptung ist Schurs Lemma (\ref{sub:226}): Wenn $\rho$ irreduzibel ist, dann ist $A'$ ein Schiefkörper. Ist umgekehrt $\rho$ nicht irreduzibel, dann ist
+$V= B \oplus C$ für $K[G]$-Untermoduln $B$ und $C$. Die Projektion $\pi_B :V \to B$ ist $K[G]$-linear, d.h. $\pi_B \in A'$, aber $\pi_B \not= 0$ und $\pi_B$ ist nicht 
+invertierbar, d.h. $A'$ ist kein Schiefkörper.
+
+Ist nun $\rho$ absolut irreduzibel und $K \subsetneq A'$, dann sei $c \in A' \setminus K$. $f $ sei das Minimalpolynom von $c$ über $K$, d.h. $\deg f > 1$ und $f$ ist
+irreduzibel, weil $A'$ ein Schiefkörper ist. Setze
+\[
+	L= \nicefrac{K[X]}{(f)}
+\]
+und betrachte $A'_L$. Dann hat $f$ eine Nullstelle in $L$, d.h. $A'_L$ ist kein Schiefkörper, weil $A'_L$ Nullteiler enthält \light $\rho$ absolut irreduzibel. Ist umgekehrt
+$A'=K$, dann ist für jeden Körper $L \supseteq K$ natürlich $A'_L = K \otimes L = L$ ein Körper, also $\rho$ absolut irreduzibel. \bewende
+% subsection 421 (end)
+
+\subsection[Definition: Zerfällungskörper einer Gruppe]{Definition} % (fold)
+\label{sub:422}
+Sei $G$ eine endliche Gruppe, $K$ ein Körper. Dann heißt $K$ \Index{Zerfällungskörper} für $G$, wenn jede Darstellung von $G$ über $K$ absolut irreduzibel ist. 
+% subsection 422 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:423}
+Sei $G$ eine endliche Gruppe, $K$ ein Körper mit $\Char K \nmid \abs*{G}$. Dann ist $K$ Zerfällungskörper für $G$ genau dann, wenn $K[G]$ die direkte Summe von 
+Matrizengruppen $M_n(K)$ ist.
+\minisec{Beweis}
+Zerlege $A=K[G]= \bigoplus A_i$, wobei $A_i$ einfach ist. Sei $J_i \subseteq A_i$ ein minimales Linksideal in $A_i$. Die irreduziblen Darstellungen von $G$ über $K$
+entsprechen genau den Darstellungen $\rho_i$ von $G$ auf $J_i$. Also ist $K$ genau dann Zerfällungskörper, wenn alle $\rho_i$ absolut irreduzibel sind. Nach Satz 
+\ref{sub:422} ist dies genau dann der Fall, wenn 
+\[
+	D_i' = \End_A J_i = K \quad \text{ für alle }i.
+\]
+Wegen der Irreduzibilität von $J_i$ ist $D_i'$ ein Schiefkörper und wegen der Doppelzentralisatoreigenschaft (Satz \ref{sub:410}) gilt
+\[
+	\End_{D_i'} J_i = \rho_i(A) \simeq M_{n_i}(D_i)
+\]
+für $D_i = (D_i')^\op$ und $n_i = \dim_{D_i'} J_i$. Da die $A_i$ einfach sind, ist $\rho_i(A)=A_i$, d.h. $A_i \simeq M_{n_i}(D_i)$. Wenn $K$ ein Zerfällungskörper ist, dann
+sind die $\rho_i$ absolut irreduzibel, d.h. $D_i' = K$ und $A_i \simeq M_{n_i}(K)$.
+
+Ist $A_i \simeq M_{n_i}(K)= M_{n_i}(D_i)$, dann folgt $K=D_i$, insbesondere $D_i'=K$ und nach Satz \ref{sub:421} sind die $\rho_i$ absolut irreduzibel, d.h.
+$K$ ist Zerfällungskörper. \bewende
+% subsection 423 (end)
 % section 4 (end)
 
 
