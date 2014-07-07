@@ -2832,8 +2832,11 @@ Insbesondere ist $T^n S^n$ ein topologischer Raum.
 
 \subsection[Bemerkung: Parallelisierbar]{Bemerkung} % (fold)
 \label{sub:182}
-$S^n$ heißt \Index{parallelisierbar}, falls es einen Homöomorphismus  $\Theta : T^n S^n\to S^n\times \mathds{R}^n$ gibt, so dass für jedes $x \in S^n$ die Einschränkung auf
-$\Theta\big|_{T_x^n S^n} : T^n_x S^n \to \set{x}\times \mathds{R}^n$ ein $\mathds{R}$-Vektorraumisomorphismus ist. Unter den Sphären sind genau $S^1$, $S^3$ und $S^7$
+$S^n$ heißt \Index{parallelisierbar}, falls es einen Homöomorphismus  $\Theta : T^n S^n\to S^n\times \mathds{R}^n$ gibt, so dass für jedes $x \in S^n$ die Einschränkung 
+\[
+	\Theta\big|_{T_x^n S^n} : T^n_x S^n \to \set{x}\times \mathds{R}^n 
+\]
+ein $\mathds{R}$-Vektorraumisomorphismus ist. Unter den Sphären sind genau $S^1$, $S^3$ und $S^7$
 parallelisierbar (Bott-Milnor).
 % subsection 182 (end)
 
@@ -2854,7 +2857,7 @@ $T_x^u M$ ist unabhängig von der Wahl der Karte $h$: Ist $k$ eine zweite an $M$
 \]
 mit $A \in \GL(n,\mathds{R})$. Das \Index{Tangentialbündel} von $M$ ist 
 \[
-	T^n M := \set[(x,v)]{x \in M, v \in T_x^n M} \subseteq M \times \mathds{R}^{n+k} 
+	T^n M := \set[(x,v)]{x \in M, v \in T_x^u M} \subseteq M \times \mathds{R}^{n+k} 
 \]
 \minisec{Bemerkung}
 Ist $V \subseteq \mathds{R}^n$ eine Untermannigfaltigkeit der Kodimension $0$, also $V \subseteq \mathds{R}^k$ offen, so ist $T^n V = \mathds{R}^n$.
@@ -2879,7 +2882,7 @@ Sei $\mathds{R}^{n+k} \supseteq U \xrightarrow{h} V \subseteq \mathds{R}^n \time
 	\begin{align*}
 		\D h_x \enbrace*{\diffd{\omega}{t}(0)} = \D(h \circ \omega)_0 (1) 
 	\end{align*}
-	Da $h \circ om : (-\varepsilon,\varepsilon) \to \mathds{R}^n \times \set{0}$ folgt $\D(h \circ \omega)_0 (1) \in \mathds{R}^k \times \set{0}$. \bewende
+	Da $h \circ \omega : (-\varepsilon,\varepsilon) \to \mathds{R}^n \times \set{0}$ folgt $\D(h \circ \omega)_0 (1) \in \mathds{R}^k \times \set{0}$. \bewende
 \end{description}
 % subsection 184 (end)
 
@@ -2890,7 +2893,63 @@ Seien $\omega, \eta : (-\varepsilon, \varepsilon) \to \mathds{R}^n$ zwei $C^\inf
 	\item $\diffd{\omega}{t}(0)= \diffd{\eta}{t}(0)$
 	\item Für alle $f \in C^\infty(\mathds{R}^n,\mathds{R})$ gilt $\diffd{(f \circ \omega)}{t}(0) = \diffd{(f \circ \eta)}{t}(0)$.
 \end{enumerate}
+\minisec{Beweis}
+Mit
+\begin{align*}
+	\diffd{(f \circ \omega)}{t}(0) = (\D f)_{\omega(0)}\enbrace*{\diffd{\omega}{t}(0)}  \tag*{(Kettenregel)}
+\end{align*}
+folgt (1) $\Rightarrow $ (2). Sei nun $P_i : \mathds{R}^n \to \mathds{R}$ die Projektion auf die $i$-te Koordinate. Dann gilt
+\begin{align*}
+	\diffd{(P_i \circ \omega)}{t}(0) = P_i \enbrace*{\diffd{\omega}{t}(0)} \tag*{(Linearisierung einer linearen Abbildung)}
+\end{align*}
+Es folgt (2) $\Rightarrow $ (1). \bewende
 % subsection 185 (end)
+
+\subsection[Definition: Tangentialraum]{Definition} % (fold)
+\label{sub:186}
+Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Sei $x \in M$. Sei $\mathcal{T}_x M$ die Menge der $C^\infty$-Abbildungen $\omega : (-\varepsilon,\varepsilon) \to M$ mit 
+$\omega(0)=x$. Durch
+\[
+	\omega \sim \eta :\Leftrightarrow \forall f \in C^\infty(M,\mathds{R}) : \diffd{(f \circ \omega)}{t}(0) = \diffd{(f \circ \eta)}{t}(0)
+\]
+erhalten wir eine Äquivalenzrelation auf $\mathcal{T}_xM$. Der \Index{Tangentialraum} zu $M$ im Punkt $x$ ist definiert also die Menge der Äquivalenzklassen 
+$T_x M := \nicefrac{\mathcal{T}_x M}{\sim}$.
+% subsection 186 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:187}
+Sei $M \subseteq \mathds{R}^{n+k}$ eine Untermannigfaltigkeit und $x \in M$. Wegen Lemma 1 (\ref{sub:184}) ist die Abbildung $\mathcal{T}_x M  \to T^u_x M$, 
+$\omega \mapsto \diffd{\omega}{t}(0)$ surjektiv und induziert wegen Lemma 2 (\ref{sub:185}) eine bijektive Abbildung $\alpha_x^u : T_x M \to T_x^u M$.
+% subsection 187 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:188}
+Sei $V \subseteq \mathds{R}^n$ offen und $x \in V$. Dann erhalten wir eine Bijektion $\alpha^u_x : T_x V \to \mathds{R}^n$, $[\omega]  \mapsto \diffd{\omega}{t}(0)$.
+% subsection 188 (end)
+
+\subsection[Bemerkung: Tangentialraum ist lokal]{Bemerkung} % (fold)
+\label{sub:189}
+Sei $U$ eine offene Umgebung von $x \in M$. Dann gilt $T_x U = T_x M$. Genauer: $U \subseteq M$ induziert eine Abbildung $\mathcal{T}_x U \to \mathcal{T}_x M$, die eine 
+kanonische Bijektion $T_x U \to T_x M$ induziert.
+% subsection 189 (end)
+
+\subsection{Lemma 3} % (fold)
+\label{sub:1810}
+Sei $\varphi : N \to M$ eine $C^\infty$-Abbildung und $x \in N$. Dann definiert $[\omega] \mapsto [\varphi \circ \omega]$ eine wohldefinierte Abbildung 
+$T_x \varphi : T_x N \to T_{\varphi(x)} M$.
+% subsection 1810 (end)
+
+\subsection[Definition: Tangentialabbildung]{Definition} % (fold)
+\label{sub:1811}
+$T_x \varphi$ heißt die \Index{Tangentialabbildung} von $\varphi$ in $x$. 
+\minisec{Bemerkung (Funktorialität der Tangentialabbildung)}
+\begin{enumerate}[a)]
+	\item Für die Identität $\id_M : M \to M$ gilt $T_x \id = \id_{T_x M}$
+	\item Für $N \xrightarrow{\varphi} M \xrightarrow{\psi} W$ gilt $T_x(\psi \circ \varphi) = T_{\varphi(x)} \psi \circ T_x \varphi$.
+	
+	Dies bezeichnet man auch als die Kettenregel für die Tangentialabbildung.
+\end{enumerate}
+% subsection 1811 (end)
 % section 18 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
