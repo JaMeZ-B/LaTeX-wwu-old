@@ -2890,6 +2890,134 @@ ist wohldefiniert: Sei $T$ die Jacobische eines Kartenwechsels
 % subsubsection 558 (end)
 % subsection 55 (end)
 % section 5 (end)
+\newpage
+
+\section{Topologie des deRham-Komplexes} % (fold)
+\label{sec:6}
+\subsection{Der Satz von Stokes} % (fold)
+\label{sub:61}
+$f \in C^1[a,b]$
+\[
+	\begin{tikzpicture}
+		\draw[very thick] (0,0) -- (3,0) node[right]{$\mathds{R}^1$};
+	\end{tikzpicture}
+\]
+$\partial [a,b] = b \cup -a$. Mit dem Hauptsatz gilt
+\[
+	\int_{a} ^{b} \! f'(t)  \, \mathrm{d}t =\int_{[a,b]}\mathd f = \int_{\partial[a,b]} f = f(b)- f(a)
+\]
+Ziel: Verallgemeinerung auf berandete Gebiete in Mannigfaltigkeiten. Definiere $\mathds{R}^n_- = \set{x^1 \le 0}$
+\[
+	\begin{tikzpicture}
+		\draw[thick] (0,-2) -- (0,2);
+		\draw[thick, ->] (0,0) -- (2,0) node[right]{$x^1$} ;
+	\end{tikzpicture}
+\]
+$\set{0} \times \mathds{R}^{n-1}  \equiv \partial \mathds{R}^n_-$
+\[
+	i_{\diff{}{x^1} }\mathd x^1 \wedge \ldots \wedge \mathd x^n = \mathd x^2 \wedge \ldots \wedge \mathd x^n
+\]
+$f \in C^1(\mathds{R}^n_-)$ mit kompakten Träger. 
+\missingfigure{Bild zu kompaktem Träger und so}
+$\omega = f \mathd x^2 \wedge \ldots \wedge \mathd x^n \in \Omega^{n-1} (\mathds{R}^n_-)$.
+$\Rightarrow \mathd \omega = \diff{f}{x^1} \mathd x^1 \wedge \ldots \wedge \mathd x^n $. 
+\[
+	\Rightarrow \int_{\mathds{R}^n_-} \!  \mathd \omega = \int_{\mathds{R}^{n-1}} 
+	\underbrace{\enbrace*{ \int_{-\infty} ^{0} \! \diff{f}{x^1} \mathd x^1 }}_{f(0, x^2, \ldots , x^n)} \mathd x^2 \ldots \mathd x^n = \int_{\partial \mathds{R}^n_-} \omega 
+\] 
+Analog für $\omega=\omega_i \mathd x^1 \wedge \ldots \wedge \widehat{\mathd x^1} \wedge \ldots  \wedge \mathd x^n$.
+
+Sei nun $M$ eine $m$-dimensionale orientierte Mannigfaltigkeit. $\omega$ eine $(m-1)$-Form mit kompaktem Träger. Sei $\set{(U_j, h_j)}_{j=1, \ldots ,k}$ eine endliche 
+Überdeckung von $\supp \omega$ durch Karten.  Sei $\varphi_j$ eine untergeordnete Teilung der Eins. Es gilt
+\[
+	\omega = \omega_1 + \ldots + \omega_k \quad ,\quad \omega_j = \varphi_j \cdot \omega
+\]
+hat Träger in $U_j$. Es gilt ($\mathd (h_j ^{-1})^* \omega_j$ hat kompakten Träger in $\mathds{R}^n$)
+\[
+	\int_{U_j} \!  \mathd \omega_j = \int_{h_j(U_j) \subset \mathds{R}^m}  \!  \overbrace{ \enbrace*{h_j ^{-1}}^* \mathd \omega_j }^{=\mathd (h_j ^{-1})^* \omega_j} = 0
+\]
+\[
+	\Rightarrow \int_{M} \! \mathd \omega = \sum_{j=1}^{k} \int_{U_j} \! \mathd \omega_j = 0
+\]
+\missingfigure{Donut in Schokoladensoße}
+Sei $N$ $n$-dimensionale Mannigfaltigkeit. $L \subset N$ Untermannigfaltigkeit, die Rand einer offenen Teilmenge es und deren Abschluss wir mit $M$ bezeichnen. $M \not= N$.
+
+\subsubsection{Einschub: Untermannigfaltigkeit} % (fold)
+\label{ssub:611}
+$L \subset N$ heißt \Index{Untermannigfaltigkeit} von $N$, wenn es zu jedem Punkt $p \in L$ eine Karte $(U,h)$ von $N$ gibt mit 
+\[
+	H(U \cap L) = h(U) \cap \mathds{R}^l.
+\] 
+$l$ ist die Dimension von $L$ und $n-l$ ist die \Index{Kodimension} von $L \subseteq N$. $L$ ist eine Mannigfaltigkeit.
+\missingfigure{Zeichnung zu Untermannigfaltigkeiten}
+% subsubsection 611 (end)
+\hrule \bigskip
+Sei nun $\Omega$ eine Volumenform auf $N$, $X$ ein Vektorfeld auf $N$, welches entlang $L= \partial M$ aus $M$ herauszeigt:
+\missingfigure{Vektorfeld auf Torusstueck mit Karte}
+
+Konstruktion von $X$ mit Teilung der Eins und orientierten Atlas. $\Rightarrow \Rightarrow (i_X \Omega) \big|_{T \partial M}$ ist Volumenform auf $\partial M$.
+Sei nun $\omega \in \Omega^{n-1} N$ mit kompaktem Träger und $\set{(U_j, h_j)} $ orientierte Karten von $N$, die entlang $\partial M$ Untermannigfaltigkeits-Karten sind 
+und $\supp \omega$ überdecken. Sei $\varphi_j$ wieder eine Teilung der Eins.
+\[
+	\omega = \omega_1 + \ldots + \omega_k \quad , \quad \omega_j := \varphi_j \cdot \omega
+\]
+Dann gilt:
+\[
+	 \int_{U_j \cap M} \! \mathd \omega_j = \int_{h_j(U_j \cap M)} \! \mathd \enbrace*{h_j ^{-1}}^* \omega_j 
+	 = \int_{h_j(U_j \cap \partial M)} \! \enbrace*{h_j ^{-1}}^* \omega_j  = \int_{U_j \cap \partial M} \!  \omega_j
+\]
+\missingfigure{Bild des Schnittes unter $h_j$}
+\[
+	\Rightarrow \int_{M} \! \mathd \omega = \sum_{j=1}^{k} \int_{\partial M \cap U_j} \! \varphi_j \cdot \omega	
+	\marginnote{$\varphi_j \big|_{\partial M}$ ist Teilung der Eins auf $\partial M$}
+\]
+Tauscht man in der Definition einer differenzierbaren Mannigfaltigkeit die Karten durch Karten im Halbraum aus, so erhält man den Begriff einer 
+\Index{differenzierbaren Mannigfaltigkeit mit Rand}.
+\missingfigure{Zeichnung zu diffbaren Mfkt mit Rand}
+\begin{itemize}
+	\item $\mathds{R}^m_- = \set{x^1 \le 0} $ hat Teilraumtopologie
+	\item $U \subset \mathds{R}^m_-$ offen, $f : U \to \mathds{R}$ ist dann differenzierbar, wenn $f$ eine differenzierbare Fortsetzung besitzt, deren Definitionsbereich
+	eine Umgebung von $\partial U := U \cap \partial \mathds{R}^m_-$ im $\mathds{R}^m$ enthält.
+	\missingfigure{Rand von $U$}
+	\item Ein \Index{Diffeomorphismus} zwischen offenen Teilmengen es $\mathds{R}^n_-$ ist eine in beide Richtungen differenzierbare Bijektion. Dieser bildet dann Randpunkte
+	auf Randpunte, innere Punkte auf innere Punkte ab.
+\end{itemize}
+$p \in \partial M$ : $T_p M := T_p^{\text{alg}} \equiv T_p^{\text{Phys}}$. Sei $X$ ein Vektorfeld auf $M$, welches entlang $\partial M$ mit der "äußeren Normalen"{} 
+übereinstimmt
+\missingfigure{Zeichnung dazu, mit Fluss auf einer Umgebung des Randes}
+Sei also $\Phi$ ein lokaler Fluss zu $X$. $\Rightarrow \exists$ Umgebung $U \subset (-\infty,0] \times \partial M$ von $\set{0} \times \partial M $, sodass 
+\[
+	U \longrightarrow M \quad , \quad (t,p) \mapsto \Phi(t,p)
+\]
+ein Diffeomorphismus auf das Bild (Einbettung) ist, der auf $\set{0} \times \partial M = \partial M $  die Identität ist.
+\missingfigure{Und noch eine Zeichnung \ldots }
+$N := M \cup_{\Phi}\enbrace[\big]{[0,\infty) \times \partial M}$
+\missingfigure{Ergebnis der Verklebung}
+
+\subsubsection{Satz 33 (Gauß-Stokes)} % (fold)
+\label{ssub:612}
+Sei $M$ eine orientierte $m$-dimensionale berandete Mannigfaltigkeit und $\omega$ eine $(m-1)$-Form auf $M$ mit kompaktem Träger. Dann gilt:
+\[
+	\int_{M}\! \mathd \omega = \int_{\partial M} \!  \omega \bewende
+\]
+% subsubsection 612 (end)
+
+\subsubsection{Folgerung 34 (Fixpunktsatz von Brouwer)} % (fold)
+\label{ssub:613}
+Jede (differenzierbare, stetige) Abbildung der abgeschlossenen $n$-dimensionalen Scheibe $D^n = \set[x \in \mathds{R}^n]{\abs*{x}\le 1}$ in sich, hat einen Fixpunkt.
+\minisec{Beweis (indirekt)}
+Betrachte $f : D^n \to D^n$ fixpunktfrei $\Rightarrow \rho : D^n \to S^{n-1}$ mit $\rho \big|_{\partial} = \id_{S^{n-1}}$ (Retraktion).
+\missingfigure{Kreisscheibe Abbildung auf den Rand}
+Sei $\eta$ positive Volumenform auf $S^{n-1}$
+und $i : S^{n-1} \hookrightarrow D^n$ die Inklusion, also $\rho \circ i = \id$ und $i^* \rho^*=(\rho \circ i)^* = \id^*$
+\begin{align*}
+	0 <  \int_{\partial D^n} \! \eta = \int_{\partial D^n} \!  \rho^* \eta \stackrel{\text{\ref{ssub:612}}}{=} \int_{D^n} \! \mathd \rho^* \eta = \int_{D^n} \! \rho^* 
+	\mathd \eta = 0 \lightning
+\end{align*}
+($\mathd \eta= 0$ aus Gradgründen) \bewende
+% subsubsection 613 (end)
+% subsection 61 (end)
+% section 6 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
