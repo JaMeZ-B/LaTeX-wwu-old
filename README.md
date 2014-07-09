@@ -25,7 +25,6 @@ Hier eine (unvollständige) Liste, was noch zu tun ist:
 
 * Höhere Algebra
 	* Ausführlichere Beweise zu 2.45 und 2.48
-	* Beweis von Blatt 3 zu 2.6 TeXen
 	* Einträge im Inhaltsverzeichnis vervollständigen
  
 
