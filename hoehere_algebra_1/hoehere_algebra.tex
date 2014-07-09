@@ -1383,11 +1383,11 @@ mit $l(d_i) \le l(d_{i+1})$. Ist $d_i \nmid d_{i+1}$. Dann transformieren wir we
 mit $d_i x + d_{i+1} y = d_i' \in \ggT(d_i, d_{i+1})$. Wie eben erhalten wir $\begin{psmallmatrix}
 	d_i' & 0 \\
 	0 & d_{i+1} f
-\end{psmallmatrix} \leadsto \ldots $ fertig. \bewende \medskip \todo[noline]{RevChap2}\\
+\end{psmallmatrix} \leadsto \ldots $ fertig. \bewende \medskip\\
 Die $d_i, \ldots , d_k$ heißen die \Index{invarianten Faktoren} von $A$. Diese sind eindeutig (bis auf Einheiten). 
 % subsection 243 (end)
 
-\subsection[Definition: $i$-Minoren und Rang]{Definition} % (fold)
+\subsection[Definition: $i$-Minoren und Rang einer Matrix]{Definition} % (fold)
 \label{sub:244}
 Ist $A \in D^{m \times n}$ und $i \le m,n$, dann ist die Determinante einer Matrix $A' \in D^{i \times i}$ ein $i$-\Index{Minor} von $A$, wenn $A'$ aus $A$ hervorgeht
 durch Streichen von $m-i$ Zeilen und $n-i$ Spalten. Der \Index{Rang} von $A$ ist das größte $i$, für das $A$ einen $i$-Minor $\not= 0$ besitzt.
@@ -1395,33 +1395,39 @@ durch Streichen von $m-i$ Zeilen und $n-i$ Spalten. Der \Index{Rang} von $A$ ist
 
 \subsection{Satz (Elementarteilersatz)} % (fold)
 \label{sub:245}
-Sei $D$ ein Hauptidealring, $A \in D^{m\times n}$, $k$ der Rang von $A$. Für $j \ne k$ sei $\delta_j = \delta_j(A)$ ein $\ggT$ aller $j$-Minoren von $A$. Dann sind die
+Sei $D$ ein Hauptidealring, $A \in D^{m\times n}$ und $k$ der Rang von $A$. Für $j \ne k$ sei $\delta_j = \delta_j(A)$ ein $\ggT$ aller $j$-Minoren von $A$. Dann sind die
 invarianten Faktoren eindeutig bestimmt (bis auf Einheiten) und von der Form $d_1 = \delta_1$, $d_i = \prod_{j \le i} \delta_j$.
 \minisec{Beweis}
 Ist $k$ der Rang von $A$, dann existiert für alle $i \le k$ ein $i$-Minor $\not= 0$ in $A$ (Laplace-Entwicklung der Determinante). Insbesondere ist 
-$\delta_1, \ldots , \delta _k \not= 0$, also $d_i \not= 0$ für $i=1, \ldots ,k$. Für $P \in D^{m \times m}$ sin die Zeilen von $P \cdot A$ Linearkombinationen der 
-Zeilen von $A$ und die $j$-Minoren von $P \cdot A$ sind Linearkombinationen der $j$-Minoren von $A$. Entsprechend für $Q \in D^{n \times n}$ und $A \cdot Q$. Wenn also
-$P \in D^{m \times m}, Q \in D^{n \times n}$ invertierbare Matrizen sind, dann folgt $\delta_j (P \cdot A \cdot Q) \mid \delta_j (A)$ und 
-$\delta_j(A) \mid \delta_j (P \cdot A \cdot Q)$ ist. Das heißt $\delta_j (P \cdot A \cdot Q) = u \cdot \delta_j(A)$ für eine Einheit $u \in D^\times$. Ist 
+$\delta_1, \ldots , \delta _k \not= 0$, also $d_i \not= 0$ für $i=1, \ldots ,k$. 
+
+Für $P \in D^{m \times m}$ sind die Zeilen von $P \cdot A$ Linearkombinationen der 
+Zeilen von $A$, also sind die $j$-Minoren von $P \cdot A$ Linearkombinationen der $j$-Minoren von $A$. Entsprechendes gilt für die Spalten von $Q \in D^{n \times n}$ und 
+$A \cdot Q$. Wenn also $P \in D^{m \times m}, Q \in D^{n \times n}$ invertierbare Matrizen sind, dann folgt $\delta_j (P \cdot A \cdot Q) \mid \delta_j (A)$ und 
+$\delta_j(A) \mid \delta_j (P \cdot A \cdot Q)$ ist. Das heißt $\delta_j (P \cdot A \cdot Q) = u \cdot \delta_j(A)$ für eine Einheit $u \in D^\times$. Ist nach Satz 
+\ref{sub:243}
 \[
-	P \cdot A \cdot Q = \begin{psmallmatrix}
-		d_1 & & & 0 & & \\
-		& \ddots & & & & \\
-		& & d_k & & & \\
-		0 & & & 0 & & \\
-		& & & & \ddots & \\
-		& & & & & 0
-	\end{psmallmatrix}
+	P \cdot A \cdot Q = \begin{pmatrix}
+		d_1 & & & 0 & \cdots & 0\\
+		& \ddots & & \vdots  & & \vdots \\
+		& & d_k & \vdots& & \vdots \\
+		0 & \cdots & \cdots & 0 & \cdots & 0 \\
+		\vdots & & & \vdots & \ddots & \vdots \\
+		0 & \cdots & \cdots & 0 & \cdots & 0
+	\end{pmatrix}
 \] 
-mit $d_i \mid d_{i+1}$, dann ist $\delta_j(A) = d_i \cdot \ldots \cdot d_j$. Dies zeigt, dass die invarianten Faktoren bis auf Einheiten eindeutig sind.
+mit $d_i \mid d_{i+1}$, dann ist $\delta_j(P \cdot A \cdot Q) = d_i \cdot \ldots \cdot d_j$. Dies zeigt, dass die invarianten Faktoren bis auf Einheiten eindeutig sind.
+\bewende\\
+Die Matrix heißt die \Index{Smith-Normalform} von A. 
 % subsection 245 (end)
 
-\subsection[Beispiel: Elementarteilersatz]{Beispiel} % (fold)
+\subsection[Beispiel: Anwendung des Elementarteilersatzes]{Beispiel} % (fold)
 \label{sub:246}
 Sei $D= \mathds{Z}$ und $A = \begin{psmallmatrix}
 	3 & 1 \\
 	0 & 4
-\end{psmallmatrix}$. Dann ist $\delta_1 = 1$, $\delta_2=12= d_2$. Damit ist $A \sim_\mathds{Z} \begin{psmallmatrix}
+\end{psmallmatrix}$. Die $1$-Minoren sind $1,3,4$, also ist $\delta_1 = 1 = d_1$. Der $2$-Minor ist $12$, also gilt $\delta_2=12= d_2$. Damit ist 
+$A \sim_\mathds{Z} \begin{psmallmatrix}
 	1 & 0 \\
 	0 & 12
 \end{psmallmatrix}$.
@@ -1443,7 +1449,7 @@ Sei $D$ ein Hauptidealring, $M$ ein endlich erzeugter $D$-Modul. Dann ist $M$ di
 	D \supsetneq \ann(m_1) \supsetneq \ann(m_2) \supsetneq \ldots \supsetneq \ann(m_k)
 \]
 \minisec{Beweis}
-Schreibe $M \simeq \nicefrac{D^s}{L}$ mit $L \simeq D^t$, $t \le s$. Dann ist $L= Dl_1 \oplus \ldots \oplus D l_t$ mit 
+Schreibe $M \simeq \nicefrac{D^s}{L}$ mit $L \simeq D^t$, $t \le s$ (siehe \ref{sub:242}). Dann ist $L= Dl_1 \oplus \ldots \oplus D l_t$ mit 
 $l_j = (a_{1j}, \ldots , a_{sj}) \in D^s$. Dann erhalten wir eine Matrix $A= (a_{ij}) \in D^{s \times t}$. Die Smith-Normalform
 \[
 	P \cdot A \cdot Q = \begin{pmatrix}
@@ -1457,9 +1463,9 @@ $l_j = (a_{1j}, \ldots , a_{sj}) \in D^s$. Dann erhalten wir eine Matrix $A= (a_
 \]
 liefert ein neues Erzeugendensystem für $D^s$, $L$ nämlich $e_1, \ldots , e_s, f_1, \ldots , f_t$ mit 
 \[
-	D^s = \bigoplus_{i=1}^s D{l_i} \quad , \quad L= \bigoplus_{j=1}^t D f_j
+	D^s = \bigoplus_{i=1}^s D{e_i} \quad , \quad L= \bigoplus_{j=1}^t D f_j
 \]
-$f_i = d_i e_i$ und 
+sowie $f_i = d_i \cdot e_i$ und 
 \[
 	\nicefrac{D^s}{L} \simeq \nicefrac{D}{(d_1)} \oplus \ldots \oplus \nicefrac{D}{(d_k)} \oplus D \oplus \ldots \oplus D
 \]
@@ -1470,7 +1476,7 @@ Für $d_i \in D^\times$ Einheit ist $\nicefrac{D}{(d_i)} = 0$, also einfach wegl
 \label{sub:249}
 Ist $A$ eine endlich erzeugte abelsche Gruppe, dann ist $A$ die direkte Summe von endlich vielen zyklischen Gruppen.
 \minisec{Beweis}
-Dies folgt unmittelbar aus der Tatsache, dass jede abelsche Gruppe ein $\mathds{Z}$-Modul ist, vgl. Bemerkung \ref{sub:23} (iv). \bewende
+Dies folgt unmittelbar aus der Tatsache, dass jede abelsche Gruppe ein $\mathds{Z}$-Modul ist, vergleiche Bemerkung \ref{sub:23} (iv). \bewende
 % subsection 249 (end)
 
 \subsection[Definition und Satz: Torsionsmodul]{Definition und Satz} % (fold)
@@ -1493,30 +1499,48 @@ Nach Satz \ref{sub:248} ist
 \[
 	M \simeq D m_1 \oplus \ldots \oplus D m_s \oplus D m_{s+1} \oplus \ldots \oplus D m_{s+k}
 \]
-mit $\ann(m_i) \not= 0$ für $i=1, \ldots ,s$ und $\ann(m_i)= 0$ für $i=s+1, \ldots , s+k$. Ein Element $d_1 m_1 + \ldots  + d_{s+k} m_{s+k} \in M$ ist ein Torsionselement
-genau dann, wenn $d_{s+1} = \ldots = d_{s+k}=0$ genau dann, wenn es in $Dm_1\oplus \ldots \oplus D m_s$ liegt. Damit ist $\tor(M)= D m_1 \oplus \ldots \oplus D m_s$.
-Es ist $\nicefrac{M}{\tor(M)} \simeq D^k$ und $k$ ist nach Satz \ref{sub:231}\todo{Nummerierung überprüfen} eindeutig bestimmt.
+mit 
+\begin{align*}
+	\ann(m_i) &\not= 0 \text{ für }i=1, \ldots ,s \\
+	\ann(m_i) &= 0 \text{ für } i=s+1, \ldots , s+k
+\end{align*}
+Ein Element $d_1 m_1 + \ldots  + d_{s+k} m_{s+k} \in M$ ist ein Torsionselement
+genau dann, wenn $d_{s+1} = \ldots = d_{s+k}=0$, also wenn es in $Dm_1\oplus \ldots \oplus D m_s$ liegt. Damit ist $\tor(M)= D m_1 \oplus \ldots \oplus D m_s$.
+Es ist $\nicefrac{M}{\tor(M)} \simeq D^k$ und $k$ ist nach Satz \ref{sub:241} eindeutig bestimmt ($M$ ist halbeinfach).\bewende
 % subsection 251 (end)
 
 \subsection[Beispiele für Zerlegungen mit dem Torsionsmodul]{Beispiel} % (fold)
 \label{sub:252}
 \begin{enumerate}[(i)]
-	\item Sei $D=Z$, $M= \nicefrac{\mathds{R}}{\mathds{Z}} \enspace {\color{light_gray} S^1 = \set[z \in \mathds{C}]{\abs*{z}=1}}$. Dann ist 
+	\item Sei $D=Z$ und $M= \nicefrac{\mathds{R}}{\mathds{Z}}$. Dann ist 
 	\(
 		\tor_\mathds{Z}(\nicefrac{\mathds{R}}{\mathds{Z}}) = \nicefrac{\mathds{Q}}{\mathds{Z}}
-	\), also gilt ($d \cdot r \in \mathds{Z} \Rightarrow r \in \mathds{Q}$)
+	\), da $d \cdot r \in \mathds{Z} \Rightarrow r \in \mathds{Q}$. Also gilt
 	\[
-		\nicefrac{\mathds{R}}{\mathds{Z}} \simeq \nicefrac{\mathds{Q}}{\mathds{Z}} \oplus \bigoplus \mathds{Q}
+		\nicefrac{\mathds{R}}{\mathds{Z}} \simeq \nicefrac{\mathds{Q}}{\mathds{Z}} \oplus \bigoplus \mathds{Q}.
 	\]
-	\item $D=\mathds{Z}$, $M=\mathds{Q}$, $\tor_\mathds{Z}(\mathds{Q})= 0$, aber $(\mathds{Q},+)$ ist \emph{kein} freier $\mathds{Z}$-Modul: Seien 
-	$\frac{r}{s}, \frac{p}{q} \in \mathds{Q}$. Dann ist $r \cdot p \in \mathds{Z} \cdot \nicefrac{r}{s} \cap \mathds{Z} \cdot \frac{p}{q} \not= 0 $.
+	Anmerkung\footnote{$\nicefrac{\mathds{R}}{\mathds{Z}}\simeq S^1 = \set[z \in \mathds{C}]{\abs*{z}=1}$ indem man $S^1$ in Polardarstellung, also nur als Menge der Winkel 
+	betrachtet.}.
+	\item Sei $D=\mathds{Z}$ und $M=\mathds{Q}$. Dann ist $\tor_\mathds{Z}(\mathds{Q})= 0$, aber $(\mathds{Q},+)$ ist \emph{kein} freier $\mathds{Z}$-Modul: Seien 
+	$\frac{r}{s}, \frac{p}{q} \in \mathds{Q}$. Dann ist 
+	\[
+		r \cdot p \in \mathds{Z} \frac{r}{s} \cap \mathds{Z} \frac{p}{q} \not= 0 
+	\]
+	$\mathds{Q}$ ist nicht endlich erzeugt als $\mathds{Z}$-Modul.
 \end{enumerate}
+Ist $A$ eine endlich erzeugte abelsche Gruppe, dann existiert $k \in \mathds{Z}$ und eine endliche Gruppe $A_0$ mit $A \simeq A_0 \oplus \mathds{Z}^k$. Dabei heißt $k$ der
+Rang von $A$. Zusammengefasst ergibt sich:
 % subsection 252 (end)
 
 \subsection[Satz: Umformulierung des Struktursatzes für endl. erzeugte abelsche Gruppen]{Satz} % (fold)
 \label{sub:253}
-Eine endlich erzeugte abelsche Gruppe ist direkte Summe einer endlichen Gruppe, der Torsionsgruppe, und einer freien abelschen Gruppe $\simeq \mathds{Z}^k$. Dabei heißt
-$k$ der Rang der Gruppe. Jede endliche abelsche Gruppe ist direkte Summe von zyklischen Gruppen.
+Eine endlich erzeugte abelsche Gruppe ist direkte Summe einer endlichen Gruppe, der Torsionsgruppe, und einer freien abelschen Gruppe isomorph zu $\mathds{Z}^k$. Dabei ist 
+der Rang $k$ invariant. Jede endliche abelsche Gruppe ist direkte Summe von zyklischen Gruppen.
+
+Jede endliche abelsche Gruppe ist die Summe von zyklischen Gruppen von Primzahlordnung. Diese Ordnung und ihre Vielfachheiten sind eindeutig bestimmt. Zwei endlich erzeugte
+abelsche Gruppen sind genau dann isomorph, wenn der Rang und diese Ordnungen übereinstimmten.
+\minisec{Bemerkung}
+Die Zerlegung ist hier anders als in Satz \ref{sub:248}. Die Zerlegung von $\tor(A)$ folgt aus den Sylow-Sätzen.
 % subsection 253 (end)
 % section 2 (end)
 \newpage
