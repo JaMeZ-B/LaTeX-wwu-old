@@ -21,7 +21,15 @@ Schon einmal vielen Dank an
 
 für die Beteiligung an diesem Projekt!
 
-## Hinweise
+Hier eine (unvollständige) Liste, was noch zu tun ist:
+
+* Höhere Algebra
+	* Ausführlichere Beweise zu 2.45 und 2.48
+	* Beweis von Blatt 3 zu 2.6 TeXen
+	* Einträge im Inhaltsverzeichnis vervollständigen
+ 
+
+## Hinweise (technische und rechtliche)
 
 Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Avenir Medium_ und _Consolas_ installiert sein. Erstere
 ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar. Die anderen beiden sind
