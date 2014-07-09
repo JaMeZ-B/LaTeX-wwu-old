@@ -37,5 +37,5 @@ sind zumindest unter Windows und OS X vorinstalliert.
 Wenn die Schriften nicht verfügbar sind, dann müssen entweder die entsprechenden Befehle in `mitschrift.tex` modifiziert werden oder 
 man verwendet den Standardtreiber `pdfLaTeX`.
 
-Die Präambel darf natürlich gerne weiterverwendet werden (GPLv2-Lizenz), eine Namensnennung ist nicht nötig … aber ich freue mich natürlich drüber :)
+Die Präambel darf natürlich gerne weiterverwendet werden (GPLv2-Lizenz, siehe `LICENSE`), eine Namensnennung ist nicht nötig … aber ich freue mich natürlich drüber :)
 
