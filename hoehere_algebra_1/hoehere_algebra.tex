@@ -1549,7 +1549,7 @@ Die Zerlegung ist hier anders als in Satz \ref{sub:248}. Die Zerlegung von $\tor
 \label{sec:3}
 Zuerst betrachten wir Tensorprodukte für Moduln über kommutativen Ringen $R$. Sind $U,V, W \in {_R \Mod}$, $f : U \times V \to W$ bilinear, dann suchen wir ein 
 universelles Objekt $T$ und eine bilineare Abbildung $\varphi$, sodass es für jedes bilineare $f$ und jedes $W$ einen eindeutigen $\mathds{R}$-Modulhomomorphismus $f'$ 
-gibt, sodass das Diagramm kommutiert.
+gibt, sodass das folgende Diagramm kommutiert.\index{Tensorprodukt}
 \[
 	\begin{tikzcd}
 		U \times V \rar{\varphi} \drar{f} & T \dar[dashed]{f'}\\
@@ -1558,8 +1558,8 @@ gibt, sodass das Diagramm kommutiert.
 \]
 \subsection[Satz: Universelle Eigenschaft des Tensorproduktes]{Satz} % (fold)
 \label{sub:31}
-Sei $R$ ein kommutativer Ring, $U,V \in {_R \Mod}$. Dann existiert ein bis auf Isomorphie eindeutiger $R$-Modul $U \otimes V$ und eine bilineare Abbildung 
-$\varphi : U \times V \to U \otimes V$, die universell für alle bilinearen Abbildungen $f : U \times V \to W$ sind.
+Sei $R$ ein kommutativer Ring und $U,V \in {_R \Mod}$. Dann existiert ein bis auf Isomorphie eindeutiger $R$-Modul $U \otimes V$ und eine bilineare Abbildung 
+$\varphi : U \times V \to U \otimes V$, die universell für alle bilinearen Abbildungen $f : U \times V \to W$ ist.
 \minisec{Beweis}
 Eindeutigkeit ist klar: Seien $T_1, \varphi_1$ und $T_2, \varphi_2$ zwei universelle Objekte. Dann betrachte
 \[
@@ -1575,14 +1575,14 @@ also $\varphi_2' \circ \varphi_1' = \id_{T_2}$, $\varphi_1' \circ \varphi_2' = \
 Für die Existenz sei $\mathcal{F}_{U \times V}$ der freie $R$-Modul mit Basis (indiziert durch) $U \times V$ und sei $B \subseteq \mathcal{F}_{U \times V}$ der Untermodul,
 der von allen Elementen der folgenden Form erzeugt wird
 \begin{align*}
-	(u+u', v) &- (u,v) - (u', v) \\
-	(u,v+v') &- (u,v) - (u,v') \\
-	(\alpha \cdot u, v) &- \alpha(u,v) \\
-	(u, \alpha \cdot v) &- \alpha(u,v)
+	&(u+u', v) - (u,v) - (u', v) \\
+	&(u,v+v') - (u,v) - (u,v') \\
+	&(\alpha \cdot u, v) - \alpha(u,v) \\
+	&(u, \alpha \cdot v) - \alpha(u,v)
 \end{align*}
 für alle $u,u' \in U$, $v,v' \in V, \alpha \in R$. Sei $\varphi$ die Hintereinanderausführung
 \[
-	0 \to U \times V \hookrightarrow \mathcal{F}_{U \times V} \to \nicefrac{\mathcal{F}_{U \times V}}{B} \to 0
+	0 \longrightarrow U \times V \xhookrightarrow{\quad} \mathcal{F}_{U \times V} \longrightarrow \nicefrac{\mathcal{F}_{U \times V}}{B} \longrightarrow 0
 \]
 Offensichtlich ist $\varphi$ bilinear: Es ist $\varphi((u,v+ v')) = (u, v+ v')+ B $. Wegen $(u, v+v')= (u,v)+ (u, v')$ usw. in $\nicefrac{\mathcal{F}_{U\times V}}{B}$ ist
 $\varphi$ bilinear. Setze $U \otimes V := \nicefrac{\mathcal{F}_{U \times V}}{B}$. Noch zu zeigen: $U \otimes V$, $\varphi$ erfüllen die universelle Eigenschaft:
@@ -1606,7 +1606,7 @@ Daher erhalten wir $f' : U \otimes V = \nicefrac{\mathcal{F}_{U \times V}}{B} \t
 $U \otimes V$ erzeugen. \bewende
 % subsection 31 (end)
 
-\subsection[Bemerkung: Elemente des Tensorprodukts, Modulstruktur des Tensorprodukts]{Bemerkung} % (fold)
+\subsection[Bemerkung: Elemente und Erzeuger des Tensorprodukts, Modulstruktur des Tensorprodukts]{Bemerkung} % (fold)
 \label{sub:32}
 Das Bild von $(u,v)$ in $U \otimes V$ unter $\varphi$ wird mit $u \otimes v$ bezeichnet. D.h. $U \otimes V$ ist $R$-Modul mit Erzeugermenge 
 $\set[u \otimes v]{u \in U, v \in V} $ und definiert Relationen
@@ -1619,6 +1619,7 @@ für alle $u,u' \in U, v,v' \in V, \alpha \in R$.
 \minisec{Achtung}
 Nicht jedes Element in $U \otimes V$ ist von der Form $u \otimes v$, $u \in U, v \in V$! Ein allgemeines Element ist von der Form $\sum_{i=1}^{k} u_i \otimes v_i $ für
 $u_i \in U$, $v_i \in V$, $k \in \mathds{N}$.
+\todo[noline]{RevChap3}
 % subsection 32 (end)
 
 \subsection[Proposition: Das Tensorprodukt als Operation auf $_R\Mod$]{Proposition} % (fold)
@@ -2613,21 +2614,21 @@ algebraisch abgeschlossenen Körpern sind die Charaktere genau die irreduziblen 
 
 \subsection{Satz (Orthogonalitätsrelationen für irreduzible Darstellungen)} % (fold)
 \label{sub:427}
-Sei $G$ eine endliche Gruppe, $K$ der Zerfällungskörper für $G$, $\Char K = 0$\marginnote{$K= \mathds{C}$}. Sind $\rho, \sigma$ irreduzible Darstellungen der Dimension $c$
-bzw. $d$, dann gilt für alle $i,j \le c$ und $p,q \le d$
+Sei $G$ eine endliche Gruppe, $K$ der Zerfällungskörper für $G$, $\Char K = 0$\marginnote{in der \enquote{Praxis}: $K= \mathds{C}$}. Sind $\rho, \sigma$ irreduzible 
+Darstellungen der Dimension $c$ bzw. $d$, dann gilt für alle $i,j \le c$ und $p,q \le d$
 \[
 	\sum_{g \in G} \rho_{ij}(g) \cdot \sigma_{pq}(g ^{-1}) = \begin{cases}
 		0, &\text{ falls }\rho, \sigma \text{ nicht äquivalent}\\
-		\frac{\abs*{G} }{d} \cdot \delta_{jp} \cdot \delta_{iq} , &\text{ falls } \rho= \sigma 
+		\frac{\abs*{G} }{d} \cdot \delta_{jp} \cdot \delta_{iq} , &\text{ falls } \rho = \sigma 
 	\end{cases}
 \]
-wobei $\rho(g)= \enbrace[\big]{\rho_{ij}(g)}_{ij} $, $\sigma(g)= \enbrace[\big]{\sigma_{pq}(g)}_{pq}$.
+wobei $\rho(g)= \enbrace[\big]{\rho_{ij }(g)}_{i,j \le c} $, $\sigma(g)= \enbrace[\big]{\sigma_{pq}(g)}_{p,q \le d}$.
 \minisec{Beweis}
-Seien $\rho : G \to \GL(U)$, $\\sigma : G \to \GL(V)$, $(u_1, \ldots , u_c)$ bzw. $(v_1, \ldots , v_d)$ Basen von $U$ bzw. $V$. Sei weiter 
+Seien $\rho : G \to \GL(U)$, $\sigma : G \to \GL(V)$, $(u_1, \ldots , u_c)$ bzw. $(v_1, \ldots , v_d)$ Basen von $U$ bzw. $V$. Sei weiter 
 \[
 	\alpha_{jp} : U \to V \quad , \quad u_i \mapsto\delta_{ij} \cdot v_p = \begin{cases}
-		u_j \mapsto v_p, &\text{ falls } i=j\\
-		u_i \mapsto 0 & \text{ falls } i \not= j
+		u_j \mapsto v_p, &\text{ für } i=j\\
+		u_i \mapsto 0 & \text{ für } i \not= j
 	\end{cases}
 \]
 $\alpha_{jp}$ ist $K$-linear und $\Tr(\alpha_{jp}): U \to V$ ist $K[G]$-linear. Sind $\rho$ und $\sigma$ nicht äquivalent, dann folgt $\Tr(\alpha_{jp})=0$ für alle $j\le c$,
@@ -2635,8 +2636,78 @@ $p \le d$. (siehe 2. Satz von Wedderburn, \ref{sub:231}). Sind $\rho \sim \sigma
 $U$ ist einfach und $\End_{K[G]} U = K$.
 
 Es ist $(\alpha_{jp})_{iq} = \delta_{ij} \cdot \delta_{pq}$, also 
-
+\[
+	\enbrace[\big]{\Tr(\alpha_{jp})}_{iq} = \sum_{\substack{h \le c, r \le d \\ g \in G}} \rho_{ij}(g) \cdot \delta_{hj} \cdot \delta_{pr} \cdot \sigma_{rq}(g) ^{-1}
+	= \sum_{g \in G} \rho_{ij}(g) \cdot \sigma_{pq}(g) ^{-1}
+\]
+Falls $\rho \not\sim \sigma$, folgt die Behauptung. Sei nun $\rho = \sigma$. Dann ist
+\begin{align*}
+	\sum_g \rho_{ij}(g) \cdot \rho_{pq}(g) ^{-1} = \lambda_{jp} \cdot \delta_{iq} 
+\end{align*}
+Für $i=q$ ergibt sich als Summe $i=1, \ldots ,d =c$
+\begin{align*}
+	d \lambda_{jp} = \sum_i \sum_g \rho_{pi}(g) ^{-1} \cdot \rho_{ij}(g) = \sum_g \rho_{pj}(1) = \abs*{G} \cdot \delta_{jp} 
+\end{align*}
+Daher gilt $\lambda_{jp}= \frac{\abs*{G} }{d} \delta_{jp}$ und damit 
+\[
+	\sum_{g} \rho_{ij}(g) \cdot \sigma_{pq}(g) ^{-1} = \frac{\abs*{G} }{d} \cdot \delta_{jp} \cdot \delta_{iq}. \bewende
+\]
 % subsection 427 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:428}
+Sei $G$ eine endliche Gruppe, $K$ ein Zerfällungskörper, $\Char K  \nmid \abs*{G}$, $\set{\rho_1, \ldots , \rho_s}$ Repräsentanten für die Äquivalenzklassen der 
+irreduziblen Darstellung über $K$. Für jedes $i=1, \ldots , s$ sei $\rho^{(i)}$ eine Matrixdarstellung für $\rho_i$. Dann gilt 
+\[
+	\sum_g \rho_{ij}^{(k)}(g) \cdot \rho_{pq}^{(l)}(g) ^{-1} = \begin{cases}
+		0, &\text{ falls }k \not= l\\
+		\frac{\abs*{G} }{\deg \rho_k} \cdot \delta_{jp} \cdot \delta_{iq} , &\text{ falls } k=l 
+	\end{cases}
+\]
+% subsection 428 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:429}
+Sind $\chi_i$, $i=1, \ldots ,s$ die zu $\rho_i$ gehörigen Charaktere, dann gilt
+\[
+	\sum_g \chi_i(g) \cdot \chi_j(g) ^{-1} = \begin{cases}
+		0, &\text{ falls }i \not= j\\
+		\abs*{G}, &\text{ falls } i=j 
+	\end{cases}
+\]
+Ist speziell $K=\mathds{C}$, dann folgt wegen Proposition \ref{sub:425}(v)
+\[
+	\sum_g \chi_i(g) \cdot \chi_j(g) ^{-1} = \sum_g \chi_i(g) \cdot \overline{\chi_j(g)} = \begin{cases}
+		0, &\text{ falls }i \not= j\\
+		\sum_g \chi_i(g) \cdot \overline{\chi_i(g)} = \sum_g \abs*{\chi_i(g)^2} = \abs*{G} , &\text{ falls } i=j   
+	\end{cases}
+\]
+Betrachte $K[G]= K^G$ als $K$-Vektorraum aller $K$-wertigen Funktionen auf $G$. Definiere inneres Produkt auf $K[G]$ durch 
+\[
+	\enbrace*{\sum_{x \in G} \alpha_x x, \sum_{y \in G} \beta_y y} = \frac{1}{\abs*{G}} \sum_{x \in G} \alpha_{x ^{-1}} \beta_x \in K ,
+\]
+falls $\Char K \nmid \abs*{G}$. Für $K=\mathds{C}$ erhalten wir eine hermitesche Form durch
+\[
+	(\varphi, \psi) = \frac{1}{\abs*{G}}  \sum_g \overline{\varphi(g)} \psi(g) .
+\]
+Dann ist 
+\begin{align*}
+	(\varphi, \varphi) = \frac{1}{\abs*{G}} \sum_g \overline{\varphi(g)} \varphi(g) = \frac{1}{\abs*{G}} \sum_g \abs*{\varphi(g)}^2 \ge 0   
+\end{align*}
+und $(\varphi, \varphi)=0 \iff \varphi=0$, d.h. $(\_, \_)$ ist positiv definit und regulär. Nach Korollar \ref{sub:429} gilt $(\chi_i, \chi_j)= \delta_{ij}$, d.h. die
+Charaktere der irreduziblen Darstellung $\chi_i , \ldots \chi_s$ bilden eine Orthonormalbasis des $\mathds{C}$-Vektorraumes der Klassenfunktionen.
+
+Ist nun $\rho : G \to \GL(\mathds{C})$ eine beliebige Darstellung mit Charakter $\chi$, dann ist $\rho \sim m_1 \rho_i \oplus \ldots \oplus m_s \rho_s$ und daher
+\[
+	\chi = m_i \cdot \chi_i \ldots + m_s \cdot \chi_s.
+\]
+Daher ist $(\chi_i, \chi_i)= m_i$, $i=1, \ldots ,s$.
+% subsection 429 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:430}
+Komplexe Darstellungen einer endlichen Gruppe sind genau dann äquivalent, wenn sie denselben Charakter haben.
+% subsection 410 (end)
 % section 4 (end)
 
 
