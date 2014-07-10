@@ -2983,7 +2983,7 @@ Sei $v \in \mathds{R}^n$. Unter $\mathds{R}^n = T_x U$ ist $v=[\omega_v]$ mit $\
 \end{align*}
 % subsection 1812 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Vektorraumstruktur des Tangentialraumes, Differential linear]{Proposition} % (fold)
 \label{sub:1813}
 \begin{enumerate}[a)]
 	\item Sei $M$ eine $C^\infty$-Mannigfaltigkeit und $x \in M$. Dann gilt es eine eindeutige $\mathds{R}$-Vektorraumstruktur auf $T_x M$ mit folgender
@@ -2994,9 +2994,12 @@ Sei $v \in \mathds{R}^n$. Unter $\mathds{R}^n = T_x U$ ist $v=[\omega_v]$ mit $\
 		T_y \varphi : \mathds{R}^k = T_y V \to T_x M
 	\)
 	$\mathds{R}$-linear.
-	\item Ist $f : N \to M$ eine $C^\infty$-Abbildung mit $f(x)=y$, so ist $T_x f : T_x N \to T_{f(x)} M$ bezüglich der $\mathds{R}$-Vektorraumstruktur aus a) 
+	\item Ist $f : N \to M$ eine $C^\infty$-Abbildung mit $f(x)=y$, so ist $T_x f : T_x N \to T_{y} M$ bezüglich der $\mathds{R}$-Vektorraumstruktur aus a) 
 	$\mathds{R}$-linear.
 \end{enumerate}
+\minisec{Bemerkung zu a)}
+Ist $M \supseteq U \xrightarrow{\enspace h \enspace} V \subseteq \mathds{R}^n $ eine Karte um $x$, so  legt $T_x h : T_x M = T_x U \to T_{h(x)}V = \mathds{R}^n$ die
+$\mathds{R}$-Vektorraumstruktur auf $T_x M$ fest.
 \minisec{Beweis}
 \begin{enumerate}[a)]
 	\item Sei $M \supseteq U \xrightarrow{h} W \subseteq \mathds{R}^n $ eine $C^\infty$-Karte um $x$. Dann ist $T_x h : T_x M = T_x U \to T_{h(x)} W = \mathds{R}^n$
@@ -3012,9 +3015,81 @@ Sei $v \in \mathds{R}^n$. Unter $\mathds{R}^n = T_x U$ ist $v=[\omega_v]$ mit $\
 		T_x (h) \circ  T_y (\varphi) = T_y (h \circ \varphi) \stackrel{\text{Lemma 4 (\ref{sub:1812})}}{=} \D_y (h \circ \varphi)
 	\]
 	aber $\mathds{R}$-linear. 
+	\item Seien $N \supseteq U \xrightarrow{\enspace h \enspace} V \subseteq \mathds{R}^n $ und 
+	$M \supseteq \hat{U} \xrightarrow{\enspace \hat{h}  \enspace} \hat{V} \subseteq \mathds{R}^n $ glatte Karten um $x$ und um $y$. Da 
+	\begin{align*}
+		T_x h : T_x N  = T_x U &\to T_{h(x)} V = \mathds{R}^n \\
+		T_y \hat{h} : T_y M = T_y \hat{U} &\to T_{\hat{h}(y)} \hat{V} = \mathds{R}^m
+	\end{align*}
+	Isomorphismen von $\mathds{R}$-Vektorräumen sind, genügt es zu zeigen, dass $(T_y \hat{h}) \circ (T_x f) \circ (T_x h) ^{-1}$ $\mathds{R}$-linear ist. Es ist 
+	\[
+		(T_y \hat{h}) \circ (T_x f) \circ (T_x h) ^{-1} = T_{h(x)} \enbrace*{\hat{h} \circ f \circ h ^{-1}} \stackrel{\text{Lemma 4 (\ref{sub:1812})}}{=} 
+		\D  \enbrace*{\hat{h} \circ  f \circ h \infty}_{h(x)} \bewende 
+	\]
 \end{enumerate}
 % subsection 1813 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:1814}
+Ist $f : N \to M$ glatt und $x \in N$, so gilt $\mathrm{Rang}_x f = \Rg \enbrace*{T_x f}$. Insbesondere ist $x$ genau dann regulär, wenn $T_x f : T_x N \to T_{f(x)} M$
+surjektiv ist.
+% subsection 1814 (end)
 % section 18 (end)
+\newpage
+
+\section{Das Tangentialbündel} % (fold)
+\label{sec:19}
+
+\subsection[Definition: Vektorraumbündel]{Definition} % (fold)
+\label{sub:191}
+Sei $X$ ein topologischer Raum. Ein $n$-dimensionales \Index{Vektorraumbündel} über $X$ ist eine stetige, surjektive Abbildung $\pi  : E \to X$, wobei für jedes 
+$x \in X$ die Faser $E_x := \pi ^{-1} (\set{x})$ mit einer $n$-dimensionalen $\mathds{R}$-Vektorraumstruktur versehen ist, so dass gilt: 
+\begin{itemize}[$(\star)$]
+	\item Für alle $x \in X$ gibt es eine offene Umgebung $U$ von $x$ und einen Homöomorphismus \marginnote{Dies bezeichnet man als lokale Trivialität}
+	\[
+		f : \pi ^{-1}(U) \xrightarrow{\enspace\approx \enspace} U \times \mathds{R}^n, 
+	\]
+	sodass für jedes $y \in U$ $g_y := f \big|_{E_y} : E_y  \to \set{y} \times \mathds{R}^n $ ein $\mathds{R}$-Vektorraumisomorphismus ist.
+\end{itemize}
+% subsection 191 (end)
+
+\subsection[Beispiel: Abbildungstorus als Möbiusband]{Beispiel} % (fold)
+\label{sub:192}
+Sei $f : \mathds{R} \to \mathds{R}$, $f(v)=-v$. Dann ist der Abbildungstorus von $f$ (vgl. \ref{sub:210}) $T(f)$ ein ein $1$-dimensionales Vektorraumbündel über $S^1$, denn
+$T(f)$ ist wieder das Möbiusband und als Vektorraumbündel nicht trivial, da $T(f) \not\cong S^1 \times \mathds{R}$.
+% subsection 192 (end)
+
+\subsection[Definition: Lineare Abbildung über $f$]{Definition} % (fold)
+\label{sub:193}
+Seien $E$ und $E'$ Vektorraumbündel über $X$ und $X'$. Sei $f : X \to X'$ stetig. Eine \bet{lineare Abbildung über $f$} ist eine stetige Abbildung $F : E \to E'$,
+so dass 
+\begin{enumerate}[(i)]
+	\item \[
+		\begin{tikzcd}
+			E \rar["F"] \dar["\pi"] & E  \dar["\pi'"]\\
+			X \rar["f"] & X'
+		\end{tikzcd}
+	\]
+	kommutiert und
+	\item $\forall x \in X$ ist $F_x := F \big|_{E_x} : E_x \to E_{f(x)}'$ $\mathds{R}$-linear
+\end{enumerate}
+\minisec{Warnung}
+$\im F$ und $\ker F$ sind im Allgemeinen keine Vektorraumbündel!
+% subsection 193 (end)
+
+\subsection[Definition: Schnitt]{Definition} % (fold)
+\label{sub:194}
+Sei $E$ ein Vektorraumbündel über $X$. Ein stetiger \Index{Schnitt} von $E$ ist eine stetige Abbildung $s : X \to E$ mit $\pi \circ s = \id_X$.
+% subsection 194 (end)
+
+\subsection[Definition: Tangentialbündel]{Definition} % (fold)
+\label{sub:195}
+Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Das \Index{Tangentialbündel} von $M$ ist 
+\[
+	T M := \bigcup_{x \in M}^{.} T_x M.
+\]
+% subsection 195 (end)
+% section 19 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
