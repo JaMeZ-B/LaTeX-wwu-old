@@ -3018,6 +3018,176 @@ und $i : S^{n-1} \hookrightarrow D^n$ die Inklusion, also $\rho \circ i = \id$ u
 % subsubsection 613 (end)
 % subsection 61 (end)
 % section 6 (end)
+\newpage
+
+\subsection{Homotopieinvarianz} % (fold)
+\label{sub:62}
+
+\subsubsection[Definition: Homotopie]{Definition} % (fold)
+\label{ssub:621}
+Sei $I = [0,1]$, $f_0, f_1 : M \to N$ differenzierbar. Eine differenzierbare Abbildung $F : I \times M  \to N$ heißt eine \Index{Homotopie} zwischen $f_0$ und $f_1$, falls 
+\begin{align*}
+	F(0, .) = f_0 \quad , \quad F(1,.)=f_1
+\end{align*}
+Wir schreiben dann $f_0 \sim f_1$
+\missingfigure{Idealisiertes Bild zur Homotopie}
+% subsubsection 621 (end)
+
+\subsubsection{Satz 34 (Monotoniesatz)} % (fold)
+\label{ssub:622}
+Sei $M$ orientiert, geschlossen (kompakt, ohne Rand). Sei $\alpha \in \Omega^m(N)$, $\mathd \alpha=0$ ($\alpha$ geschlossen) und $f_0 \sim f_1$. Dann gilt
+\[
+	\int_{M} \! f_0^* \alpha = \int_M \! f_1^* \alpha
+\]
+\minisec{Beweis}
+Sei $I \times M$ kompakte Mannigfaltigkeit mit Rand. Sei $\omega$ eine Volumenform auf $M$. Dann ist $\mathd t \wedge \omega$ Volumenform auf $I \times M$
+\missingfigure{einfache Zeichnung mit Zylinder und Orientierung}
+Es gilt $\partial(I |times M) = - \set{0} \times M \cup \set{1} \times M$, $f_0 \stackrel{F}{\sim} f_1$. Es gilt
+\[
+	\mathd \alpha \Longrightarrow 0 = F^* \mathd \alpha = \mathd F^* \alpha.
+\]
+Stokes liefert 
+\[
+	0 = \int_{I \times M}\!\mathd F^* \alpha \stackrel{\text{Satz 33}}{=} \int_{\partial (I\times M) }\! \! \! F^* \alpha = \int_{M} f_1^* \alpha - \int_M \!f_0^* 
+	\alpha\bewende
+\]
+% subsection 622 (end)
+$\pi : M \to p \in M$. $\id : M \to M$. $M$ heißt \Index{zusammenziehbar} (kontrahierbar), falls $\id \sim \pi$. Beispiel: $\mathds{R}^n, D^n$, sternförmige Gebiete.
+
+$\xRightarrow{\text{Satz 34}}$ $M$ kompakt ohne Rand, orientiert $\Rightarrow $ $M$ ist nicht zusammenziehbar: $\omega$ Volumenform: $0 < \int_M \id^* \omega$.
+\[
+	T \pi = 0 \Rightarrow \pi^* \omega \Rightarrow \int_M \pi^* \omega =0
+\]
+\minisec{Beispiel}
+$S^n$, $T^n$, $\mathds{R}P^{2m+1}$.
+\begin{description}
+	\item[Fundamentalsatz der Algebra:] Sei $g(z)= z^n + a_1 z^{n-1} + \ldots + a_n$ ein $\mathds{C}$-Polynom. $g$ habe keine Nullstellen: 
+	$g : \mathds{C} \to \mathds{C} \setminus \set{0} $
+	\[
+		\varphi : \mathds{C} \to S^1 = \set{\abs*{z}=1 } \subset \mathds{C} \quad , \quad \varphi(z) := \frac{g(z)}{\abs*{g(z)}}  
+	\]
+	$\varphi\big|_{S^1}$ ist homotop (via $F(z,t)= \varphi(t \cdot z)$) zu $\pi : S^1 \to \frac{a_n}{\abs{a_n}}$. Weiter ist $\varphi \big|_{S^1}$ homotop zu
+	\[
+		f : S^1 \to S^1 \quad , \quad z \mapsto z^n
+	\]
+	via 
+	\[
+		F(z,t)= \varphi \enbrace*{\frac{z}{t}} = \frac{z^n + t a_1 z^{n-1} + \ldots + t^n a_n}{ \abs*{z^n + t a_1 z^{n-1} + \ldots + t^n a_n} } 
+	\]
+	Es gilt 
+	\[
+		 0 = \int_{S^1} \pi^* \alpha = \int_{S^1} \varphi^* \alpha = \int_{S^1} f^* \alpha = n \cdot \int_{S^1= \partial D^2} \alpha = n \cdot \int_{D} \mathd \alpha
+		 = n \cdot \pi 
+	\]
+	mit $\alpha := \frac{1}{2}(x \mathd y - y \mathd x) $ $\Rightarrow \mathd \alpha= \mathd x \wedge\mathd y$. Es folgt $n=0$. Also gilt $g(z)= a_n = a_0$.
+\end{description}
+
+\subsubsection{Satz vom Igel} % (fold)
+\label{ssub:623}
+Die Antipodenabbildung $\tau  : S^n \to S^n$, $x \mapsto -x$ ist genau dann homotop zur Identität, wenn $n$ ungerade ist und genau dann gibt es ein nullstellenfreies 
+Vektorfeld auf $S^n$.
+\minisec{Beweis}
+\begin{description}
+	\item[$\tau \sim \id$:] Sei $\omega$ eine Volumenform auf $S^n \subset \mathds{R}^{n+1}$. $\omega_x(v_1, \ldots , v_n) = \det (x, v_1, \ldots , v_n)$
+	\[
+		0 \not= \int_{S^n} \omega \stackrel{\text{Satz 33}}{=} \int_{S^n} \tau^* \omega = (-1)^{n+1} \int_{S^n} \omega
+	\]
+	$\Rightarrow n$ ungerade
+	\item[$n=2m-1$:] $S^{2m-1} \subset \mathds{C}^m = \mathds{R}^{2m}$ ($z_j = x_j + i y_j$). $X(z) = i \cdot z \bot z$, $\abs*{X}=1 $ ist nullstellenfreies Vektorfeld auf
+	$S^n$.
+	\item $X$ ist ein Vektorfeld auf $S^n$, $\abs*{X}=1 $. $X : S^n \to S^n \subset \mathds{R}^{n+1}$. Es gilt $x \bot X(x)$.
+	\missingfigure{Sphäre mit Großkreis und Antipodenabbildung}
+	$F(x,t) = (\cos \pi t) x + (\sin \pi t) X(x)$ liefert $\id \stackrel{F}{\sim} \tau$. \bewende
+\end{description}
+% subsubsection 623 (end)
+% subsection 62 (end)
+
+\subsection{Das Poincaré-Lemma} % (fold)
+\label{sub:63}
+\subsubsection{Satz 35 (Kettenhomotopie)} % (fold)
+\label{ssub:631}
+Sei $f_0, f_1 : M \to N$ mit $f_0 \sim f_1$.
+$\exists$ $\mathds{R}$-lineare Abbildung $K : \Omega^k N \to \Omega^{k-1} M$ mit $f_1^* - f_0^* = \mathd K + K \mathd $.
+\minisec{Beweis}
+$f_0 \stackrel{F}{\sim}f_1$. Es gilt also
+\[
+	\begin{tikzcd}
+		I \times M \rar["F"] & M \\
+		M \uar["{i_0 , i_1}"] \urar["{f_0, f_1}", swap] &
+	\end{tikzcd}
+\]
+Bemerkung: $\exists K$ wie oben: $K : \Omega^k(I \times M)  \to \Omega^{k-1}M$, $i_1^* - i_0^* = \mathd K + K \mathd$.
+\(
+	\tilde{K} := K \circ F^* \leadsto \text{ Satz.}
+\)
+\begin{align*}
+	f_1^* - f_0^* = (F \circ i_1)^* - (F \circ i_0)^+ = (i_1 -i_0)^* \circ F^* = (\mathd K + K \mathd) \circ F^* = \mathd \tilde{K} + \tilde{K} \mathd.
+\end{align*}
+Beweis der Behauptung: $\alpha \in \Omega^k(I \times M)$, $K_\alpha = \int_{0} ^{1} \! \enbrace*{i_{\diff{}{t} } \alpha}  \, \mathrm{d}t $. \oE $M=\mathds{R}^n$
+\begin{enumerate}[(i)]
+	\item $\alpha = f \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_k}$ $\Rightarrow \mathd K \alpha =0$. 
+	\[
+		K \mathd \alpha = K \enbrace*{\mathd f \wedge \mathd x^{i_1} \wedge \ldots } = \enbrace*{\int_{0}^{1} \! \diff{f}{t}  \, \mathrm{d}t} \cdot \mathd x^{i_1} \wedge 
+		\ldots  = \enbrace*{i_1^* - i_0^*} \alpha 
+	\]
+	\item $\alpha = f \mathd t \wedge \mathd x^{i_1} \wedge \ldots  \wedge \mathd x^{i_{k-1}}$. Dann ist 
+	\[
+		i_{1,0}^* \mathd t = 0 \Rightarrow i_0^* \alpha = 0 = i_1^* \alpha
+	\]
+	\[
+		\mathd K \alpha = \sum_{j} \enbrace*{ \int_{0} ^{1} \! \diff{f}{x^j}  \, \mathrm{d}t } \mathd x^j \wedge \mathd x^{i_1} \wedge \ldots  
+	\]
+	\[
+		\Rightarrow K \mathd \alpha = K \enbrace*{- \diff{f}{x^j} \mathd t \wedge \mathd x^j \wedge \mathd x^{i_1} \wedge \ldots  } = - \mathd K \alpha. \bewende  
+	\]
+\end{enumerate}
+$\mathd \alpha =0$, $\alpha$ geschlossen. 
+\[
+	f_1^* \alpha - f_0^* \alpha = \mathd(K \alpha) \equiv \mathd \beta \Rightarrow \text{ Satz 34}
+\]
+$\alpha$ ist \Index{exakt} $\iff k \ge 1$ und $\exists \beta \in \Omega^{k-1}(M)$ mit $\mathd \beta = \alpha$. $\beta$ heißt \Index{Primitive} (oder Potential). 
+% subsubsection 631 (end)
+
+\subsubsection{Poincaré-Lemma} % (fold)
+\label{ssub:632}
+Sei $M$ zusammenziehbar. Dann ist jede geschlossene Form exakt.
+\minisec{Beweis}
+(mit Satz 35).
+% subsubsection 632 (end)
+% subsection 63 (end)
+
+\subsection{Die deRham-Kohomologie} % (fold)
+\label{sub:64}
+\[
+	H_{\text{dR}}^k M := \nicefrac{Z^k M}{B^k M}
+\]
+$Z^k M =$ geschlossene $k$-Formen auf $M$. $B^k M =$ exakte $k$-Formen auf $M$.
+\[
+	H_{\text{dR}}^0 M = \mathds{R}^{\# \text{ Zusammenhangskomponenten}}
+\]
+\begin{itemize}
+	\item $M$ heißt $1$-fach zusammenhängend, falls $M$ $0$-zusammenhängend ist und jede Abbildung $S^1 \to M$ homotop zu $S^1 \to * \in M$ ist ($\Rightarrow M$ 
+	orientierbar).
+	
+	$\Rightarrow H_{\text{dR}}^1 M = 0$, $\alpha \in Z^1, f(p) = \int_{0} ^{1} \! \gamma_p^* \alpha$. wobei $\gamma_p$ ein Weg von $O$ nach $p$ ist. Ist OK nach Stokes
+	\missingfigure{relative Homotopie  mit Weg dran}
+	$\mathd f (v) = \alpha(v)$
+	
+	Beispiele $S^n$ für $n\ge 2$, $\mathds{R}^n$
+	\item $f ;: M \to N$ $\mathd \circ f^* = f^* \circ \mathd$ $\leadsto f^* : H_{\text{dR}}^k N \to H_{\text{dR}}^k M$. $\Rightarrow f_0 \sim f_1$ dann ist $f_0^* = f_1^*$
+	auf $H_{\text{dR}}^*$.
+\end{itemize}
+
+\subsubsection{Poincaré-Dualität} % (fold)
+\label{ssub:634}
+$H_{\text{dR}}^k M \simeq H_{\text{dR}}^{n-k} M$, falls $M$ geschlossen, orientier und von Dimension $n$ ist.
+Insbesondere: 
+\[
+	H_{\text{dR}}^n M \xrightarrow[\int_M .]{\enspace\cong \enspace} \mathds{R}, 
+\]
+$M$ zusammenhängend. $H_{\text{dR}}^{2m}(\mathds{R}P^{2m}) = 0$, $H_{\text{dR}}^n (M \text{ nicht orientierbar})=0$.
+% subsubsection 634 (end)
+% subsection 64 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
