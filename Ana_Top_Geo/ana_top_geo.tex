@@ -1739,45 +1739,51 @@ Isomorphismus):
 Jede stetige Abbildung $f : D^n \to D^n$ hat einen Fixpunkt.
 \minisec{Beweis}
 Für $n=1$ ist dies eine Folgerung aus dem Zwischenwertsatz. \smallskip \\
-Angenommen $f : D^n \to D^n$ hat keinen Fixpunkt, also $f(x) \not= x$ für alle $x \in D^n$. Dann gibt es eine stetige Abbildung $F : D^n \to S^{n-1}$ mit 
-$F\big|_{S^{n-1}} = \id_{S^{n-1}}$. Konstruktion von $F$ \todo[noline]{Zeichnung vervollständigen}
-\begin{figure}[H]
+Angenommen $f : D^n \to D^n$ hat keinen Fixpunkt, also $f(x) \not= x$ für alle $x \in D^n$. Wir konstruieren eine stetige Abbildung $F : D^n \to S^{n-1}$ mit 
+$F\big|_{S^{n-1}} = \id_{S^{n-1}}$ sodass gilt \\
+\begin{minipage}{0.45\textwidth}
+	\begin{enumerate}[(i)]
+		\item $F(x) = t \enbrace[\big]{x- f(x)} + x \enspace, t\ge 0$
+		\item $F(x) \in S^{n-1}$
+	\end{enumerate}
+\end{minipage} \quad 
+\begin{minipage}{0.5\textwidth}
+	\captionsetup{type=figure, skip=4pt, name=Abb.}
 	\centering{
-	\begin{tikzpicture}
+	\begin{tikzpicture}[scale=0.7]
 		\coordinate (Fx) at (130:2);
 		\coordinate (fx) at (-20:1);
 		\draw[thick] (0,0) circle[radius=2];
-		\draw[thick, DodgerBlue2] (fx) node[right]{$f(x)$} -- (Fx) node[left]{$F(x)$} node[midway] (x) { };
+		\draw[very thick, DodgerBlue2] (fx) node[below]{$f(x)$} -- (Fx) node[left]{$F(x)$} node[pos=0.7] (x) { };
 		\node[below left] at (x) {$x$};
 		\foreach \a in {Fx, fx, x}{
-			\draw[fill=Coral2] (\a) circle[radius=0.04];
+			\draw[fill=Coral2] (\a) circle[radius=0.05];
 		}
 	\end{tikzpicture}
-	}
-\end{figure}
-\begin{enumerate}[(i)]
-	\item $F(x) = t \enbrace*{x- f(x)} + x \enspace, t\ge 0$
-	\item $F(x) \in S^{n-1}$
-\end{enumerate}
+	\caption{Konstruktion von $F$} }
+\end{minipage} \\
 Sei $x_0 \in S^{n-1}$. Wir haben also
 \[
-	\begin{tikzcd}
+	\begin{tikzcd}[row sep=4em]
 		\enbrace*{S^{n-1}, x_0} \rar{\id} \dar[hook]{i} & \enbrace*{S^{n-1}, x_0} \\
 		\enbrace*{D^n, x_0} \urar[swap]{F}
 	\end{tikzcd}
-	\qquad \begin{tikzcd}
+	\qquad \begin{tikzcd}[row sep=4em]
 		\pi_1 \enbrace*{S^{n-1}, x_0} \rar{(\id)_* =\id}  \dar{i_*}& \pi_1 \enbrace*{S^{n-1}, x_0} \\
 		\pi_1 \enbrace*{D^n, x_0} \urar[swap]{F_*}   
 	\end{tikzcd}
 \]
-Für $n=2$ ist das zweite Diagramm
+Da $(D^n, x_0)$ zusammenziehbar ist, gilt $\pi_1 \enbrace*{D^n, x_0} = \set{e}$.
+Für $n=2$ ist das zweite Diagramm also
 \[
 	\begin{tikzcd}
 			\mathds{Z} \rar{(\id)_* =\id}  \dar{i_*}& \mathds{Z} \\
 			\set{e} \urar[swap]{F_*} 
 		\end{tikzcd}
 \]
-Daher folgt $\id = F_* \circ  i_* =$ triviale Abbildung \light \bewende
+Daher folgt $\id = F_* \circ  i_* =$ triviale Null-Abbildung \light \bewende
+\minisec{Bemerkung}
+Für $n \ge 3$ ist $\pi_1(S^{n-1}, x_0)$ trivial. In diesem Fall benutzt der Beweis eine andere Invariante als die Fundamentalgruppe.
 % subsection 11.8 (end)
 
 \subsection[Proposition: Induzierte Abbildung von $f : S^1 \to S^1$, $z	\mapsto z^n$]{Proposition} % (fold)
