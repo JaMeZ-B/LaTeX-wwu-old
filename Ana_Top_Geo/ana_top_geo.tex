@@ -470,6 +470,8 @@ $X = [0,1] \times [0,1]$: Definiere
 		(x,t) \sim (x',t') : \Leftrightarrow (x=x' \text{ und } t=t') \text{ oder } (t=0, t'=1 \text{ und } x'= f(x))
 	\] 
 	Der Quotient $T_f := \nicefrac{X \times [0,1]}{\sim}$ heißt der \Index{Abbildungstorus} von $f$. 
+	
+	Beispiel: Betrachte $f : [{-1,1}] \to [{-1,1}]$ gegeben durch $f(x)=-x$. Dann ist $T_f$ das Möbiusband.
 \end{enumerate}
 % subsection 29 (end)
 % section 2 (end)
@@ -478,24 +480,27 @@ $X = [0,1] \times [0,1]$: Definiere
 \label{sec:3}
 \subsection[Definition: Konvergenz in topologischen Räumen]{Definition} % (fold)
 \label{sub:31}
-Sei $X$ ein topologischer Raum und $(x_n)_{n \in \mathds{N}}$ eine Folge in $X$. Dann sagen wir $(x_n)_{n \in \mathds{N} }$ konvergiert gegen $x \in X$, falls gilt:
-Zu jeder offenen Umgebung $V$ von $x$, gibt es $N \in \mathds{N}$, sodass $x_n \in V$ für alle $n \ge N$. Wir schreiben dann $x_n \to x$ oder $x_n \xrightarrow{n \to \infty} x$. $x$ heißt ein Grenzwert von $(x_n)_{n \in \mathds{N}}$.
+Sei $X$ ein topologischer Raum und $(x_n)_{n \in \mathds{N}}$ eine Folge in $X$. Dann sagen wir $(x_n)_{n \in \mathds{N} }$ \bet{konvergiert} gegen $x \in X$, falls gilt:
+\[
+	\text{Zu jeder offenen Umgebung $V$ von $x$, gibt es $N \in \mathds{N}$, sodass $x_n \in V$ für alle $n \ge N$.}
+\]
+Wir schreiben dann $x_n \longrightarrow x$ oder $x_n \xrightarrow{n \to \infty} x$. $x$ heißt ein \Index{Grenzwert} von $(x_n)_{n \in \mathds{N}}$.
 
 \minisec{Bemerkung}
 Bezüglich der groben Topologie ist jeder Punkt Grenzwert jeder Folge.
 \minisec{Beispiel}
-Betrachte die Topologie der gleichmäßigen Konvergenz auf kompakten Teilmengen auf dem Raum $\mathcal{C}(\mathds{R},\mathds{R})$. Dann gilt für Folgen 
-$(f_n)_{n \in \mathds{N} }$ von stetigen Abbildungen $f_n \in \mathcal{C}(\mathds{R},\mathds{R}) $
+Betrachte die Topologie der gleichmäßigen Konvergenz auf kompakten Teilmengen (siehe \ref{sub:118}) auf dem Raum $C(\mathds{R},\mathds{R})$. Dann gilt für Folgen 
+$(f_n)_{n \in \mathds{N} }$ von stetigen Abbildungen $f_n \in C(\mathds{R},\mathds{R}) $
 \[
-	f_n \to f \iff \forall a < b \text{ konvergiert } f_n|_{[a,b]} \to f_{[a,b]} \text{ gleichmäßig.}
+	f_n \longrightarrow f \iff \forall a < b \text{ konvergiert } f_n|_{[a,b]} \to f_{[a,b]} \text{ gleichmäßig.}
 \]
 % subsection 31 (end)
 
-\subsection{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
+\subsection[Lemma: In Hausdorffräumen sind Grenzwerte eindeutig]{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
 \label{sub:32}
 Sei $X$ hausdorffsch. Gilt $x_n \to x$ und $x_n \to y$, so folgt $x=y$.
 \minisec{Beweis}
-Übung!
+Übung! (Annahme: $x \not= y$, Hausdorffeigenschaft ausnutzen $\Rightarrow $ Widerspruch) \bewende
 % subsection 32 (end)
 
 \subsection[Definition: Gerichtete Menge]{Definition} % (fold)
@@ -512,25 +517,26 @@ Eine nichtleere Menge $\Lambda $ mit einer Relation "$\le$"{} heißt \bet{gerich
 \subsection[Definition: Netz und Konvergenz bezüglich eines Netzes]{Definition} % (fold)
 \label{sub:34}
 Sei $X$ ein topologischer Raum. Ein \Index{Netz} $(x_\lambda)_{\lambda \in \Lambda }$ in $X$ besteht aus einer gerichteten Menge $\Lambda $ und Elementen 
-$x_\lambda \in X$ für $\lambda \in \Lambda $. Für $x \in X$ sagen wir $(x_\lambda )_{\lambda \in \Lambda }$ konvergiert gegen $x$, falls gilt:
+$x_\lambda \in X$ für $\lambda \in \Lambda $. Für $x \in X$ sagen wir $(x_\lambda )_{\lambda \in \Lambda }$ \bet{konvergiert} gegen $x$, falls gilt:\index{Netz!Konvergenz}
 \[
 	\forall \text{ Umgebungen } U \text{ von } x : \exists \lambda_0 \in \Lambda : \forall \lambda \in \Lambda \text{ mit } 
 	\lambda \ge \lambda_0 \text{ gilt } x_\lambda \in U
 \]
-Wir schreiben dann $x_\lambda \xrightarrow{\lambda  \to \infty} x$ oder $x_\lambda \to x$.
+Wir schreiben dann $x_\lambda \xrightarrow{\lambda  \to \infty} x$ oder $x_\lambda \longrightarrow x$.
 \minisec{Beispiel}
-Sei $X$ ein topologischer Raum und $x \in X$. Dann ist $\Lambda := \set[U]{U \text{ ist offene Umgebung von }x} $ gerichtet bezüglich
+Sei $X$ ein topologischer Raum und $x \in X$.\marginnote{Dies ist die hauptsächliche Anwendung von Netzen!}
+Dann ist $\Lambda := \set[U]{U \text{ ist offene Umgebung von }x} $ gerichtet bezüglich
 \[
 	U \le V :\Leftrightarrow V \subseteq U
 \]
-Ist nun $x_U \in U$ für alle $U \in \Lambda $ so $x_U \to x$.
+Ist nun $x_U \in U$ für alle $U \in \Lambda $ so gilt $x_U \longrightarrow x$.
 % subsection 34 (end)
 
-\subsection{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
+\subsection[Lemma: In Hausdorffräumen sind Grenzwerte konvergenter Netze eindeutig]{Lemma (Eindeutigkeit von Grenzwerten)} % (fold)
 \label{sub:35}
-Sei $X$ hausdorffsch. Gilt $x_\lambda  \to x$ und $x_\lambda \to y$, so folgt $x=y$.
+Sei $X$ hausdorffsch. Gilt $x_\lambda  \longrightarrow x$ und $x_\lambda \longrightarrow y$, so folgt $x=y$.
 \minisec{Beweis}
-Angenommen $x \not= y$. Da $X$ hausdorffsch ist existiert eine Umgebung $U$ von $x$ und $V$ von $y$ mit $U \cap V = \emptyset$. 
+Angenommen es gilt $x \not= y$. Da $X$ hausdorffsch ist, existiert dann eine Umgebung $U$ von $x$ und $V$ von $y$ mit $U \cap V = \emptyset$. 
 \begin{gather}
 	x_\lambda \to x \Rightarrow \exists \lambda_U : x_\lambda  \in U : \forall \lambda \ge \lambda_U \\
 	x_\lambda \to y \Rightarrow \exists \lambda_V : x_\lambda  \in V : \forall \lambda \ge \lambda_V 
@@ -540,11 +546,12 @@ Sei nun $\mu \in \Lambda$ mit $\mu \ge \lambda_U$, $\mu \ge \lambda_V$. Dann fol
 
 \subsection[Definition: Teilnetz]{Definition} % (fold)
 \label{sub:36}
-Sei $(x_\lambda)_{\lambda  \in \Lambda}$ ein Netz in $X$. Ein \Index{Teilnetz} von $(x_\lambda )_{\lambda  \in \Lambda}$ ist eine gerichtete Menge $\Lambda'$ mit einer
+Sei $(x_\lambda)_{\lambda  \in \Lambda}$ ein Netz in $X$. Ein \Index{Teilnetz} von $(x_{\lambda'} )_{\lambda'  \in \Lambda'}$ ist eine gerichtete Menge $\Lambda'$ mit einer
 Abbildung $f : \Lambda' \to \Lambda$, so dass gilt
 \begin{enumerate}[i)]
-	\item $\lambda'_1 \le \lambda'_2 \Rightarrow f(\lambda'_1) \le f(\lambda'_2)$ \hfill ($f$ erhält $\le$)
+	\item $\lambda'_1 \le \lambda'_2 \Rightarrow f(\lambda'_1) \le f(\lambda'_2)$ \hfill ($f$ erhält "$\le$")
 	\item $\forall \lambda \in \Lambda : \exists \lambda' \in \Lambda'$ mit $\lambda  \le f(\lambda' )$ \hfill ($f$ ist kofinal)
+	\item $x_{\lambda'} = x_{f(\lambda')}$ für alle $\lambda ' \in \Lambda'$
 \end{enumerate}
 Oft schreiben wir $\enbrace*{x_{f(\lambda')}}_{\lambda' \in \Lambda'}$ für ein Teilnetz.
 \minisec{Bemerkung}
