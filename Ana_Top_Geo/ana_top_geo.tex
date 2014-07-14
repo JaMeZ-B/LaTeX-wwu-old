@@ -569,7 +569,7 @@ Eine Familie $\mathcal{U}$ von offenen Teilmengen von $X$ heißt eine \Index{off
 \[
 	\bigcup_{U \in \,\mathcal{U}} U = X.
 \] 
-$\mathcal{V} \subseteq \mathcal{U} $ heißt eine \Index{Teilüberdeckung}, falls immer noch $X \subseteq \bigcup_{V \in \mathcal{V} } V$.
+$\mathcal{V} \subseteq \mathcal{U} $ heißt eine \Index{Teilüberdeckung}, falls immer noch $X \subseteq \bigcup_{V \in \mathcal{V} } V$ gilt.
 % subsection 41 (end)
 
 \subsection[Definition: Kompaktheit]{Definition} % (fold)
@@ -591,7 +591,7 @@ $\abs*{\mathcal{A}_0 } < \infty$ gilt
 Sei $X$ ein Hausdorffraum. Dann ist $X$ genau dann kompakt, wenn gilt: Hat eine Familie $\mathcal{A}$ von abgeschlossenen Teilmengen von $X$ die endliche 
 Durchschnittseigenschaft, so gilt 
 \[
-	\bigcap_{A \in \mathcal{A}} A \not= \emptyset
+	\bigcap_{A \in \mathcal{A}} A \not= \emptyset.
 \]
 \minisec{Beweis}
 Ist $\mathcal{U}$ eine Familie von offenen Teilmengen, so ist $\mathcal{A} := \set[X \setminus U]{U \in \mathcal{U}}$ eine Familie von abgeschlossenen Teilmengen. Ist
@@ -603,8 +603,9 @@ eine Familie von offenen Teilmengen.
 Dann gilt: 
 \begin{itemize}
 	\item $\mathcal{U}$ hat eine endliche Teilüberdeckung $\iff \mathcal{A}$ hat nicht die endliche Durchschnittseigenschaft.
-	\item $\mathcal{U}$ ist eine Überdeckung $\iff \bigcap_{A \in \mathcal{A} }A = \emptyset$. \bewende
+	\item $\mathcal{U}$ ist eine Überdeckung von $X$ $\iff \bigcap_{A \in \mathcal{A} }A = \emptyset$. \bewende
 \end{itemize}
+Ein ausführlicher Beweis ist im Anhang, siehe \ref{sub:lemma44}, Seite \pageref{sub:lemma44}.
 % subsection 44 (end)
 
 \subsection[Satz: Charakterisierung von Kompaktheit durch konvergente Teilnetze]{Satz} % (fold)
@@ -3181,7 +3182,45 @@ zusammengeklebter Torus
 TOPOLOGIE $\to$ ALGEBRA, Bsp: $H_i : \text{TOP} \to \mathds{Q}-\text{VR}$, Kettenkomplexe, HOMOLOGIE
 % subsection algebraische_topologie (end)
 % section ausblick (end)
+
+
+
 \cleardoubleoddemptypage
+\appendix
+\section{Anhang} % (fold)
+\label{sec:anhang}
+\subsection{Ausführlicher Beweis zu Lemma \ref{sub:44}} % (fold)
+\label{sub:lemma44}
+Sei $X$ ein Hausdorffraum. Dann ist $X$ genau dann kompakt, wenn gilt: Hat eine Familie $\mathcal{A}$ von abgeschlossenen Teilmengen von $X$ die endliche 
+Durchschnittseigenschaft, so gilt 
+\[
+	\bigcap_{A \in \mathcal{A}} A \not= \emptyset.
+\]
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow $":] Sei $X$ kompakt und sei $\mathcal{A}$ eine Familie von abgeschlossenen Mengen mit der endlichen Durchschnittseigenschaft. Angenommen 
+	$\bigcap_{A \in \mathcal{A}} A = \emptyset$. Dann gilt
+	\[
+		X = X \setminus \bigcap_{A \in \mathcal{A}} A = \bigcup_{A \in \mathcal{A}} X \setminus A.
+	\]
+	Nun ist $\mathcal{U} := \set[X \setminus A]{A \in \mathcal{A} } $ eine offene Überdeckung von $X$ und da $X$ kompakt ist, existiert $\mathcal{A}_0 \subset \mathcal{A}$ 
+	endlich, sodass
+	\[
+		X = \bigcup_{A \in \mathcal{A}_0} X \setminus A = X \setminus \underbrace{\bigcap_{A \in \mathcal{A}_0 } A }_{\not= \emptyset} \quad \light
+	\]
+	\item["$\Leftarrow$":] Sei nun $\mathcal{U} = \set{U_i}_{i \in I}$ eine offene Überdeckung von $X$. Angenommen für jede endliche Teilmenge $J \subseteq I$ gilt
+	$X \not= \bigcup_{i \in J} U_i$. Betrachte nun $\mathcal{A} =  \set{X \setminus U_i}_{i \in I}$. Dann gilt nach Annahme
+	\[
+		\bigcap_{i \in J} X \setminus U_i = X \setminus \bigcup_{i \in J} U_i \not= \emptyset.
+	\]
+	Also hat $\mathcal{A}$ die endliche Durchschnittseigenschaft. Nach Vorraussetzung gilt dann
+	\[
+		\emptyset \not= \bigcap_{i \in I} X \setminus U_i = X \setminus \underbrace{\bigcup_{i \in I} U_i}_{= X} \quad \light \bewende
+	\]
+\end{description}
+% subsection lemma44 (end)
+% section anhang (end)
+\newpage
 \pagenumbering{Alph}
 \setcounter{page}{1}
 \printindex
