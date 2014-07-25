@@ -1,0 +1,198 @@
+\section{Schwache Lösungen von parabolischen Gleichungen}
+\label{sec:para12}
+	
+Erinnerung: \begin{itemize}
+	\item $H_0^1(\Omega) = \{ f \colon \Omega \rightarrow \RR : \int_{\Omega} |f|^2 dx < \infty, \text{ schwache Ableitung } Df \text{ existiert}, \int_{\Omega} |Df|^2 dx, f \big|_{\der \Omega} = 0\}$
+	\item Banachraum: normierter, vollständiger Vektorraum
+	\item Dualraum $X^*$ zu Banachraum $X$: $X^* = \{f \colon X \rightarrow \RR : f \text{ ist linear}, ||f||_{X^1} := \sup\limits_{\substack{x \in X \\ ||x||_X \leq 1}} f(x) < \infty\}$
+	\end{itemize}
+	
+\subsection{Definition}
+	$H^{-1}(\Omega)$ bezeichne den Dualraum zu $H_0^1(\Omega)$. Für $f \in H^{-1}(\Omega)$ schreiben wir auch $\langle f,v \rangle$ statt $f(v)$.
+	\[ ||f||_{H^{-1}(\Omega)} = \sup\limits_{\substack{u \in H_0^1(\Omega) \\ ||u||_{H_0^1(\Omega)} \leq 1}} \langle f,u \rangle \]
+	
+\subsection{Theorem}
+	\begin{enumerate}[(i)]
+		\item Sei $f \in H^{-1}(\Omega)$, dann gibt es Funktionen $f^0,f^1,\dots,f^n \in L^2(\Omega)$ mit
+		\begin{equation}
+			\langle f,v \rangle = \int_{\Omega} f^0 v dx + \sum\limits_{i=1}^{n} \int_{\Omega} f^i v_{x_i} dx \quad \forall v \in H_0^1(\Omega) \label{eq_stern}
+		\end{equation}
+		\item $||f||_{H^{-1}(\Omega)} = \inf\limits_{f \text{ erf. \eqref{eq_stern}}} \sqrt{\int_{\Omega} \sum\limits_{i=0}^{n} |f^i|^2}$
+		\item $(u,v)_{L^2(\Omega)} = \int_{\Omega} uvdx = \langle u,v \rangle$ für alle $v \in H_0^1(\Omega), u \in H^{-1}(\Omega) \cap L^2(\Omega)$.
+	\end{enumerate}
+	
+\minisec{Beweis}
+	\begin{enumerate}[(i)]
+	\item $H_0^1(\Omega)$ ist mit Skalarprodukt $(u,v)_{H_0^1(\Omega)} = \int_{\Omega} uv + Du Dv dx$ ein Hilbertraum. Nach \ref{thm_68} kann jedes $f \in H^{-1}(\Omega)$ dargestellt werden durch ein $u_f \in H_0^1(\Omega)$, d.h. $\langle f,v \rangle = (u_f,v)_{H_0^1(\Omega)}$ für alle $v \in H_0^1(\Omega)$. Dann folgt (i) mit $f^0 = u_f$, $f^i = (u_f) _{x_i}$.
+	\item Sei $f \in H^{-1}(\Omega)$ mit $\langle f,v \rangle = \int_{\Omega} g^0 v + \sum_{i=1}^n g^i v_{x_i} dx$ für $g^0,\dots,g^n \in L^2(\Omega)$. Es gilt:
+	\begin{equation}
+	\begin{aligned}
+		\int_{\Omega} g^0 v + \sum\limits_{i=1}^{n} g^i v_{x_i} dx \quad &\hspace{-2mm}\overset{\text{Hölder}}{\leq} ||g^0||_{L^2} ||v||_{L^2} + \sum\limits_{i=1}^{n} ||g^i||_{L^2} \\
+		&\hspace{-9mm}\overset{a \cdot b \leq |a||b| \text{ in } \RR^{n+1}}{\leq} \sqrt{\sum\limits_{i=0}^{n} ||g^i||_{L^2}^2} \sqrt{||v||_{L^2}^2 + \sum\limits_{i=1}^n ||v_{x_i}||_{L^2}^2} \\
+		&\leq \sqrt{\int_{\Omega} \sum\limits_{i=0}^n |g^i|^2 dx} \cdot ||v||_{H_0^1(\Omega)} \label{eq_stern2}
+	\end{aligned}
+	\end{equation}
+	Nun:
+	\[ ||f||_{H^{-1}(\Omega)} = \sup\limits_{||u||_{H_0^1(\Omega)} \leq 1} \langle f,u \rangle = \sup\limits_{||u||_{H_0^1(\Omega)} \leq 1} \int_{\Omega} g^0 u + \sum_{i=1}^n g^i u_{x_i} dx \overset{\text{\eqref{eq_stern2}}}{\leq} \sqrt{\int_{\Omega} \sum\limits_{i=0}^{n} |g^i|^2 dx} \]
+	und
+	\[ ||f||_{H^{-1}(\Omega)} \geq \langle f,\frac{u_f}{||u_f||_{H_0^1}} \rangle = \frac{\int_{\Omega} f^0 u + \sum\limits_{i=1}^{n} f^i u_{x_i} dx}{\sqrt{\int_\Omega u_f^2 + |Du_f|^2 dx}} = \frac{\int_{\Omega} \sum\limits_{i=0}^{n} |f^i|^2 dx}{\sqrt{\int_\Omega \sum\limits_{i=0}^{n} |f^i|^2 dx}} = \sqrt{\int_{\Omega} \sum\limits_{i=0}^{n} |f^i|^2 dx} \]
+	\item folgt aus (i). \qed
+	\end{enumerate}
+	
+\subsection{Definition}
+\begin{itemize}
+	\item Für einen Banachraum $X$ sei
+	\[L^p((0,T);X) := \{ u \colon (0,T) \rightarrow X : u \text{ ist stark messbar und } ||u||_{L^p((0,T);X)} < \infty\} \]
+	mit $||u||_{L^p((0,T);X)} = \enbrace*{ \int_{0}^{T} ||u(t)||^p dt}^{\frac{1}{p}}$ für $1 \leq p < \infty$ und $||u||_{L^\infty((0,T);X)} = \esssup_{t \in (0,T)} ||u(t)||$. \\
+	(Dabei heißt $u$ stark messbar, falls eine fast überall gegen $u$ konvergente Folge von Treppenfunktionen existiert.)
+	\item $C([0,T];X) := \penbrace*{ u\colon [0,T] \rightarrow X : u \text{ stetig}, ||u||_{C([0,T];X)} := \max\limits_{t \in [0,T]} ||u(t)|| < \infty}$
+\end{itemize}
+
+\subsection{Definition: schwache Ableitung}
+	Sei $u \in L^1((0,T);X)$. $v \in L^1((0,T);X)$ heißt \Index{schwache Ableitung} von $u$ und wir schreiben $u' = v$, wenn
+	\[ \int_{0}^{T} \phi'(t) u(t) dt = -\int_{0}^{T} \phi(t) v(t) dt \]
+	für alle $\phi \in C_c^\infty ((0,T);\RR)$.
+	
+\subsection{Bemerkung}
+	$u \in L^2((0,T);H_0^1(\Omega))$ und $u' \in L^2((0,T);H^{-1}(\Omega))$ impliziert: \begin{itemize}
+		\item $u \in C([0,T];L^2(\Omega))$
+		\item $||u(t)||_{L^2(\Omega)}^2 = ||u(0)||_{L^2(\Omega)}^2 + \int_0^t 2 \langle u'(t),u(t) \rangle dt$ \\
+		(bzw. $\frac{d}{dt} ||u(t)||_{L^2}^2 = \frac{d}{dt} \int_{\Omega} |u(t)|^2 dx = \int_{\Omega} 2u'(t)u(t) dx$)
+	\end{itemize}
+	
+\mbox{} \\
+Betrachte nun
+\begin{equation} \left. \begin{cases}
+	u_t + Lu = f & \text{ in } \Omega_T \\
+	u = 0 & \text{ auf } \der \Omega \\
+	u = y & \text{ auf } \setnull \times \Omega \end{cases} \right\} \text{ mit } f \in L^2(\Omega_T), g \in L^2(\Omega) \label{eq_A} \end{equation}
+und $Lu = -\diver (A \nabla u) + b \cdot \nabla u + cu$, $A,b,c \in L^\infty(\Omega_T)$, $A$ symmetrisch positiv definit mit kleinstem Eigenwert $\lambda$. \\
+Idee für schwache Lösung: \begin{itemize}
+	\item Fasse $u$ auf als Funktion $u\colon [0,T] \rightarrow H_0^1(\Omega)$ (analog $f \colon [0,T] \rightarrow L^2(\Omega)$)
+	\item Definiere Bilinearform $B_t[u,v] := \int_{\Omega} \nabla u \cdot A \nabla v + b \cdot \nabla uv + cuv dx = \int_{\Omega} Lu \cdot v dx$ für alle $u,v \in H_0^1(\Omega)$.
+	\item Multipliziere $u_t + Lu = f$ mit $v \in H_0^1(\Omega)$ und integriere partiell \\
+	$\Rightarrow (u_t(t),v)_{L^2(\Omega)} + B_t[u(t),v] = (f(t),v)_{L^2(\Omega)}$
+	\item außerdem $u_t = g^0 + \sum_{i=1}^{n} g_{x_i}^i$ mit $g^0 = f - b \cdot \nabla u - cu, g^i = \sum_{i=1}^{n} A_{ij} \cdot u_{x_i}$, d.h.
+	\[ ||u_t||_{H^{-1}(\Omega)} \leq \sqrt{ \sum_{i=0}^{n} ||g^i||_{L^2}^2} \leq C( ||u||_{H_0^1(\Omega)^t} ||f||_{L^1(\Omega)}) \]
+\end{itemize}
+$u \in L^2((O,T);H_0^1(\Omega))$ mit $u' \in L^2((0,T);H^{-1}(\Omega))$ heißt \Index{schwache Lösung} von \eqref{eq_A}, wenn $\langle u',v \rangle + B_t[u,v] = (f,v)_{L^2}$ für jedes $v \in H_0^1(\Omega)$ und für alle $t \in [0,T]$ sowie $u(0) = g$. (macht Sinn, da $u \in C([0,T];L^2(\Omega))$)
+
+\subsection{Definition: Garlerkin-Approximation}
+Sei $\Omega$ Lipschitz. $L^2(\Omega)$ und $H_0^1(\Omega)$ sind Hilberträume. Man kann zeigen (Evans, Kapitel 6.5.1), dass glatte Funktionen $w_k \in H_0^1$ für $k \geq 1$ existieren, sodass gilt:
+\begin{enumerate}[(i)]
+	\item $(w_k)_k$ ist eine Orthogonalbasis von $H_0^1(\Omega)$.
+	\item $(w_k)_k$ ist eine Orthonormalbasis von $L^2(\Omega)$.
+\end{enumerate}
+Für festes $m \in \NN$ approximieren wir nun eine schwache Lösung in $\langle w_1,w_2,\dots \rangle$, d.h. wir suchen
+\[ u_m(t) = \sum\limits_{k=1}^{m} d_k^m(t) w_k \]
+mit Koeffizienten $d_k^m \colon [0,T] \rightarrow \RR$, sodass
+\begin{equation}
+	\left. \begin{cases}
+	(u_m',w_k)_{L^2} + B_t [u_m,w_k] = (f,w_k)_{L^2} & \forall t \in [0,T], k = 1,\dots,m \\ 
+	\underbrace{(u_m(0),w_k)_{L^2}}_{d_m^k (0)} = (g,w_k) & \forall k
+	\end{cases} \right\} \label{eq_B}
+\end{equation}
+
+\subsection{Theorem: Existenz der Galerkin-Approximation}
+	Für jedes $m \in \NN$ existiert eine eindeutige Lösung $u_m = \sum_{k=1}^{m} d_k^m w_k$ von \eqref{eq_B}
+	
+\minisec{Beweis}
+	Sei $B_t[w_l,w_k] = e_{kl}(t), D_m(t) = (d_m^1(t), \dots, d_m^m(t))^T, E(t) = (e_{kl}^{(i)})_{k,l = 1,\dots,m} \in \RR^{m \times m}$ sowie \linebreak
+	$F(t) = ( (f(t),w_1)_{L^2},\dots,(f(t),w_m)_{L^2} )^T$. \\
+	\eqref{eq_B} $\Leftrightarrow D_m'(t) + E(t) D_m(t) = F(t)$ bzw. $D_m'(t) = -E(t) D_m(t) + F(t)$ mit $D_m(0) = ( (g,w_1)_{L^2}, \dots, (g,w_m)_{L^2})^T$.\\
+	Beachte: rechte Seite ist für jedes $t$ lipschitzstetig in $D_m$. Mit einem tiefen Satz für gewöhnliche Differentialgleichungen folgt, dass eine eindeutige Lösung $D_m(t)$ existiert. \qed
+	
+\mbox{} \\
+Wie bei den elliptischen Gleichungen wollen wir annehmen, dass $\lambda, \Lambda, \gamma > 0$ existieren mit: \begin{itemize}
+	\item $\xi' A(t,x) \xi \geq \lambda |\xi|^2$
+	\item $| \xi^TA \xi| \leq \Lambda |\xi||\xi|$
+	\item $\lambda^{-2} |b(t,x)|^2 + \lambda^{-1} |c(t,x)|^2 \leq \gamma^2, c(t,x) \geq 0$
+\end{itemize}
+
+\subsection{Theorem: Energieabschätzung}
+\label{energieabsch}
+	Es existiert ein $C < 0$ unabhängig von $m$, sodass:
+	\[ \max_{t \in [0,T]} ||u_m(t)||_{L^2(\Omega)} + ||u_m||_{L^2((0,T);H_0^1(\Omega))} + ||u'_m||_{L^2((0,T);H^{-1}(\Omega))} \leq C \enbrace*{||f||_{L^2((0,T);L^2(\Omega))} + ||g||_{L^2(\Omega)}} \]
+	
+\minisec{Beweis}
+	Multipliziere \eqref{eq_B} mit $d_k^m$ und summiere $\sum_{k=1}^m \quad \Rightarrow \quad (u_m',u_m)_{L^2} + B_t[u_m,u_m] = (f,u_m)_{L^2}$. \\
+	Wir hatten gezeigt (Theorem \ref{thm_71} bzw. Übungsblatt 9):
+	\[ \beta ||u_m||_{H_0^1(\Omega)}^2 \leq B_t[u_m,u_m] + \gamma ||u_m||_{L^2(\Omega)}^2 \text{ für Konstanten } \beta,\gamma > 0 \]
+	Damit folgt:
+	\begin{equation}
+	\begin{aligned}
+	\underbrace{\frac{d}{dt} \frac{||u_m||_{L^2(\Omega)}^2}{2}}_{= \langle u_m',u_m \rangle} + \beta ||u_m||_{H_0^1(\Omega)}^2 &\leq \overbrace{\langle u_m',u_m \rangle + B_t[u_m,u_m]}^{=(f,u_m)_{L^2(\Omega)} = \int_{\Omega} \overbrace{f u_m}^{\leq \frac{1}{2} f^2 + \frac{1}{2} u_m^2} dx} + \gamma ||u_m||_{L^2(\Omega)}^2 \\
+	&\leq \frac{1}{2} ||f||_{L^2(\Omega)}^2 + \enbrace*{\gamma + \frac{1}{2}} ||u_m||_{L^2(\Omega)}^2 \label{eq_C}
+	\end{aligned}
+	\end{equation}
+	Mit $\eta(t) := ||u_m(t)||_{L^2(\Omega)}^2, \xi(t) := \frac{1}{2} ||f(t)||_{L^2(\Omega)}^2$ ergibt sich $\eta'(t) \leq \xi(t) + (\gamma + \frac{1}{2}) \eta(t)$. Mit Gronwall \ref{gronwall} folgt:
+	\[ \eta(t) \leq e^{(\gamma + \frac{1}{2})t} (\eta(0) + \underbrace{\int_{0}^{t} \xi(s) ds}_{= \frac{1}{2} ||f||_{L^2((0,T);L^2(\Omega))}}), \]
+	wobei $\eta(0) = (u_m(0),u_m(0))_{L^2} = \sum\limits_{k=1}^{m} |d_k^m(0)|^2 \leq \sum\limits_{k=1}^{\infty} |d_k^m(0)|^2 = ||g||_{L^2}^2$.
+	\[ \Rightarrow \max_{t \in [0,T]} ||u_m||_{L^2} \leq C \sqrt{||g||_{L^2}^2 + ||f||_{L^2((0,T);L^2(\Omega))}} \leq \widetilde{C} (||g||_{L^2} + ||f||_{L^2((0,T);L^2(\Omega))}) \]
+	Integriere nun \eqref{eq_C} von 0 bis $T$:
+	\[ \frac{||u_m(T)||_{L^2}^2 - ||u_m(0)||_{L^2}^2}{2} + \beta ||u_m||_{L^2((0,T);H_0^1(\Omega))}^2 \leq \frac{||f||_{L^2((0,T);L^2(\Omega))}^2}{2} + (\gamma + \frac{1}{2}) \underbrace{\int_{0}^{T} ||u_m||_{L^2(\Omega)}^2 dt}_{\leq T \max_{t \in [0,T]} ||u_m||_{L^2(\Omega)}^2} \]
+	\[ \Rightarrow ||u_m||_{L^2((0,T);H_0^1(\Omega))}^2 \leq C (||f||_{L^2((0,T);L^2(\Omega))}^2 + ||g||_{L^2(\Omega)}^2) \]
+	Nun sei $v \in H_0^1(\Omega)$ beliebig mit $||v||_{H_0^1(\Omega)} \leq 1$.
+	\begin{equation}
+	\begin{aligned}
+		\langle u_m',v \rangle &= (u_m',v)_{L^2} \overset{\text{ONB}}{=} \enbrace*{u_m', \sum\limits_{k=1}^\infty (v,w_k)w_k}_{L^2} = \enbrace*{u_m', \overbrace{\sum\limits_{k=1}^{m} (v,w_k)w_k}^{=: v_m}}_{L^2} \\
+		&\overset{\eqref{eq_B}}{=} -B_t [u_m,v_m] + (f,v_m)_{l^2} \leq C (||u_m||_{H_0^1(\Omega)} + ||f||_{L^2(\Omega)}) \underbrace{||v_m||_{H_0^1(\Omega)}}_{\leq ||v||_{H_0^1(\Omega)} \leq 1} \notag
+	\end{aligned}
+	\end{equation}
+	\[ \Rightarrow ||u_m'||_{H^{-1}(\Omega)} \leq C( ||u_m||_{H_0^1(\Omega)} + ||f||_{L^2}) \Rightarrow \int_{0}^{T} ||u_m'||_{H^{-1}(\Omega)}^2 dt \leq 2C (||u_m||_{L^2((0,T);H_0^1(\Omega))}^2 + ||f||_{L^2((0,T);L^2(\Omega))}) \]
+	\qed
+	
+\subsection{Lemma von Gronwall}
+\label{gronwall}
+	Sei $\eta(t) \geq 0$ absolut stetig \marginnote{4. Jul} (d.h. $\eta(t) = \int_{t_0}^{t} \dots ds$) mit $\eta'(t) \leq \Phi(t) \eta(t) + \Psi(t)$ fast überall für $\Phi,\Psi \geq 0$, $\int_{\RR} |\Phi|+|\Psi| dt < \infty$. Dann gilt:
+	\[ \eta(t) \leq e^{\int_0^t \Phi(s) ds} \left\lbrack \eta(0) + \int_{0}^{t} \Psi(s) ds\right\rbrack \]
+
+\minisec{Beweis}
+	\[ \frac{d}{ds} (\eta(s) e^{-\int_{0}^{s} \Phi(r) dr} = e^{-\int_{0}^{s} \Phi(r) dr} \underbrace{(\eta'(s) - \eta(s) \Phi(s))}_{\leq \Psi(s)} \Rightarrow \eta(t) e^{-\int_{0}^{s} \Phi(r) dr} \leq \eta(0) + \int_{0}^{t} \underbrace{\Psi(s) e^{-\int_{0}^{s} \Phi(r)dr}}_{\leq \Psi(s)} ds \] \qed
+	
+\subsection{Theorem: Existenz schwacher Lösungen}
+	\eqref{eq_A} besitzt eine schwache Lösung.
+	
+\minisec{Beweis}
+	\begin{enumerate}[1)]
+		\item \begin{itemize}
+			\item $u_m$ und $u_m'$ sind wegen \ref{energieabsch} gleichmäßig beschränkt in $X:= L^2((0,T);H_0^1(\Omega))$ bzw. $L^2((0,T);H^{-1}(\Omega))$.
+			\item $X$ ist Hilbertraum mit Skalarprodukt $(u,v) = \int_{0}^{T} \int_{\Omega} uv + \nabla u \cdot \nabla v dx dt$ \\
+			$\xLongrightarrow{\ref{riesz}}$ jedes Element $f \in X^*$ kann mit einem $u_f \in X$ identifiziert werden mit $||f||_{X^*} = ||u_f||_X$. \\
+			$\Rightarrow X \equiv X^* \Rightarrow X^* \equiv X^{**} \Rightarrow X$ ist reflexiv. \marginnote{$\equiv$: isometrisch isomorph}
+			\item $L^2((0,T),H^{-1}(\Omega)$ ist auch reflexiv (gleiches Argument, da $H^{-1}(\Omega) = (H_0^1(\Omega))^* \equiv H_0^1(\Omega)$.\\
+			$\Rightarrow u_m \overset{L^2((0,T);H_0^1(\Omega)}{\rightharpoonup} u$ für Teilfolge und $u_m' \overset{L^2((0,T);H^{-1}(\Omega)}{\rightharpoonup} \widetilde{w}$ für Teilfolge. \\
+			Weiterhin $\widetilde{w} = u'$, denn sei $\Phi \in C_c^\infty((0,T);\RR), w \in H_0^1(\Omega)$, dann ist
+			\[ \underbrace{\langle \int_{0}^{T} u_m \Phi' dt, w \rangle}_{=\int_{0}^{T} \langle u_m, \Phi' w \rangle dt \xlongrightarrow{m \rightarrow \infty} \int_{0}^{T} \langle u,\Phi' w \rangle dt = \langle \int_{0}^{T} u \Phi' dt,w \rangle} = \underbrace{\langle - \int_{0}^{T} u_m' \Phi dt,w \rangle}_{= - \int_{0}^{T} \langle u_m',\Phi w\rangle dt \xlongrightarrow{m \rightarrow \infty} - \int_{0}^{T} \langle \widetilde{w},\Phi w \rangle dt = \langle -\int_{0}^{T} \widetilde{w} \Phi dt, w \rangle}  \]
+			$\Rightarrow \int_{0}^{T} u \Phi' dt = -\int_{0}^{T} \widetilde{w} \Phi dt$
+		\end{itemize}
+		\item Sei $v(t) = \sum_{k=1}^{N} d_k(t) w_k$ für ein $N \in \NN$, da glatt, $N < m$. Aus \eqref{eq_B} folgt (multipliziere mit $d_k$, summiere, integriere):
+		\begin{equation}
+			\int_{0}^{T} \langle u_m',v \rangle dt + \int_{0}^{T} B_t [u_m,v] dt = \int_{0}^{T} (f,v)_{L^2} dt \label{eq_gronwall_stern}
+		\end{equation}
+		und mit $m \rightarrow \infty$ folgt weiter:
+		\begin{equation}
+			\int_{0}^{T} \langle u',v \rangle dt + \int_{0}^{T} B_t [u,v] dt = \int_{0}^{T} (f,v)_{L^2} dt \label{eq_gronwall_stern2}
+		\end{equation}
+		Dies gilt für alle $v \in L^2((0,T);H_0^1(\Omega))$, da sich diese durch $\sum_{k=1}^{N} d_k(t) w_k$ approximieren lassen, d.h.
+		\[ \int_{0}^{T} d(t) (\langle u',v \rangle + B_t[u,v] - (f,v)_{L^2})dt = 0 \quad \text{für alle } v \in H_0^1(\Omega), d(t) \text{ messbar} \]
+		\[ \Rightarrow \langle u',v \rangle + B_t[u,v] = (f,v)_{L^2} \text{ für fast alle } t \in [0,T] \]
+		\item Sei $v \in C^1([0,T];H_0^1(\Omega))$ mit $v(T) = 0$. \eqref{eq_gronwall_stern} und \eqref{eq_gronwall_stern2} liefern:
+		\[ \int_{0}^{T} -\langle u_m, v' \rangle dt + \int_{0}^{T} B_t [u_m,v] dt = \int_{0}^{T} (f,v)_{L^2} dt + (u_m(0),v(0)) \]
+		\[ \int_{0}^{T} -\langle u, v' \rangle dt + \int_{0}^{T} B_t [u,v] dt = \int_{0}^{T} (f,v)_{L^2} dt + (u(0),v(0)) \]
+		Für $m \rightarrow \infty$ folgt aus der ersten Gleichung:
+		\[ \int_{0}^{T} -\langle u, v' \rangle dt + \int_{0}^{T} B_t [u,v] dt = \int_{0}^{T} (f,v)_{L^2} dt + (g,v(0)) \Rightarrow u(0) = g\] \qed
+	\end{enumerate}
+
+\subsection{Theorem: Eindeutigkeit schwacher Lösungen}
+	Eine schwache Lösung von \eqref{eq_A} ist eindeutig.
+	
+\minisec{Beweis}
+	Seien $u_1, u_2$ schwache Lösungen, dann erfüllt $u := u_1 - u_2$:
+	\[ \begin{cases}
+		\langle u',v \rangle + B_t[u,v] = 0 & \text{ für alle } v \in H_0^1(\Omega) \text{ und fast alle } t \in [0,T] \\
+		u(0)=0 \end{cases} \]
+	Für $v = u$ ergibt sich
+	\[ 0 = \frac{d}{dt} \enbrace*{\frac{||u||_{L^2(\Omega)}^2}{2}} + \underbrace{B_t[u,u]}_{\geq \beta ||u||_{H_0^1(\Omega)}^2 - \gamma ||u||_{L^2(\Omega)}^2} \]
+	d.h. $\frac{d}{dt} ||u||_{L^2}^2 \leq 2\gamma ||u||_{L^2}^2$. Mit dem Lemma von Gronwall \ref{gronwall} folgt $||u||_{L^2}^2 \leq e^{2 \gamma t} ||u(0)||_{L^2}^2 = 0$. \qed
+\newpage

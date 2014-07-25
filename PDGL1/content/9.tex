@@ -1,0 +1,166 @@
+% % % % % % 27. Mai
+\section{Schwache Lösungen elliptischer Gleichungen}
+\label{sec:para9}
+	Für $\Omega \subset \RR^n$ offen und beschränkt betrachte das elliptische \Index{Dirichlet-Problem} \marginnote{27. Mai}
+	\begin{equation}
+		\begin{cases}
+			Lu = f	& \text{ in } \Omega \\
+			u = g	& \text{ auf } \der \Omega
+		\end{cases} \label{eq_29}
+	\end{equation}
+	mit $f\colon \Omega \rightarrow \RR, g \in H^1(\Omega)$ und
+	\[ Lu(x) = -\diver (A(x) \nabla u(x)) + b(x) \cdot \nabla u(x) + c(x) u(x) \]
+	für $A \in \Omega \rightarrow \RR_{\text{symm}}^{n\times n}, b\colon \Omega \rightarrow \RR$.
+	
+\subsection{Definition: Elliptizität}
+\label{def_64} 
+	Der Operator $L$ heißt (gleichmäßig) \Index{elliptisch}, falls eine Konstante $\theta > 0$ existiert, sodass \marginnote{[64]}
+	\[ \xi^T A(x) \xi \geq \lambda |\xi|^2 \]
+	für fast alle $x \in \Omega$ und alle $\xi \in \RR^n$.
+	
+\mbox{} \\
+Um eine schwache Lösung zu definieren, multiplizieren wir die PDGL wieder mit einer glatten Funktion und integrieren partiell, was zu folgender Definition führt:
+
+\subsection{Definition: Schwache Lösung}
+\label{def_65}
+	$u \in g+ H_0^1(\Omega)$ heißt eine \Index{schwache Lösung} der Gleichung \eqref{eq_29}, falls \marginnote{[65]}
+	\begin{equation}
+		B(u,v) := \int_{\Omega} \nabla v(x)^T A(x) \nabla u(x) + b(x) \cdot \nabla u(x) v(x) + c(x) u(x) v(x) dx = \int_\Omega f(x) v(x) dx \label{eq_30}
+	\end{equation}
+	für alle $v \in H_0^1(\Omega)$.
+	
+\mbox{} \\
+Im Folgenden nehmen wir an, es existieren Konstanten $\lambda, \Lambda, \nu \geq 0$, sodass für alle $x \in \Omega$ und $\xi,\zeta \in \RR^n$ gilt:
+\begin{itemize}
+	\item $\xi^T A(x) \xi \geq \lambda |\xi|^2$
+	\item $|\xi^T A(x) \zeta| \leq \Lambda |\xi| |\zeta|$
+	\item $\lambda^{-2} |b(x)|^2 + \lambda^{-1}|c(x)| \leq \nu^2$
+	\item $c(x) \geq 0$
+\end{itemize}
+Als nächstes beweisen wir wie zuvor mithilfe des Maximumprinzips (Theorem \ref{thm_40}) die Existenz und Eindeutigkeit schwacher Lösungen. Im Folgenden benutzen wir die Abkürzungen $u^+ := \max{u,0}$ und $u^- := \min{u,0}$.
+
+\subsection{Theorem: Schwaches Maximumprinzip}
+\label{thm_66}
+	Sei $u \in H^1(\Omega)$ eine schwache Lösung von $Lu = 0$, dann gilt: \marginnote{[66]}
+	\[ \sup_\Omega u \leq \sup_{\der \Omega} u^+, \qquad \inf_{\Omega} u \leq \inf_{\der \Omega} u^- \]
+	
+\minisec{Beweis}
+	Für alle $v \geq 0$ mit $uv \geq 0$ ist $\int_{\Omega} \nabla v^T A \nabla u + b \cdot \nabla uv dx = -\int_{\Omega} cuvdx \leq 0$. Falls $b = 0$, folgt mit $v = (u - \sup_{\der \Omega} u^+)^+$
+	\[ \lambda \int_{\Omega} |\nabla v|^2 dx \leq 0 \]
+	und damit das erste Ergebnis (das zweite folgt analog). Im Fall $b \neq 0$ ist der Beweis anders zu führen (siehe Übung). \qed
+	
+\subsection{Theorem: Eindeutigkeit der schwachen Lösung}
+\label{thm_67}
+	Falls eine schwache Lösung von \eqref{eq_29} existiert, ist sie eindeutig. \marginnote{[67]}
+	
+\minisec{Beweis}
+	Seien $u_1,u_2$ zwei Lösungen, dann ist $w = u_1 -u_2$ schwache Lösung der Gleichung $Lw = 0$ in $\Omega$, $w= 0$ auf $\der \Omega$, und damit folgt $w \equiv 0$. \qed
+	
+\mbox{} \\
+Die Existenz einer schwachen Lösung basiert auf folgenden beiden abstrakten Hilfsmitteln:
+
+\subsection{Theorem: Rieszscher Darstellungssatz}
+\label{thm_68} \label{riesz}
+	Sei $f\colon H \rightarrow \RR$ \marginnote{[68]} ein beschränktes lineares Funktional auf einem Hilbertraum $H$, dann existiert ein $u \in H$ mit $||u||_H = ||f||$, sodass $f(v) = (u,v)_H$ für alle $v \in H$.
+	
+\subsection{Bemerkung}
+\label{bem_69}
+	Ein beschränktes lineares Funktional bzw. ein beschränkter linearer Operator ist eine lineare Abbildung \marginnote{[69]} $T\colon V \rightarrow W$, wobei $V,W$ normierte Vektorräume sind, sodass $||Tu||_W \leq C ||u||_V$ für eine Konstante $C$ und alle $u \in V$. Dies ist gleichbedeutend damit, dass $T$ stetig ist:
+	\begin{description}
+		\item[\glqq$\Rightarrow$\grqq:] Sei $u_k \rightarrow u$ in $V$, dann ist $||Tu_k - Tu||_W = ||T(u_k - u)||_W \leq C ||u_k - u||_V \rightarrow 0$.
+		\item[\glqq$\Leftarrow$\grqq:] Angenommen, es existiert ein $u_k \in V$ mit $||u_k||_V = 1$, aber $||Tu_k||_W \rightarrow \infty$. Dann ist $v_k := \frac{u_k}{||Tu_k||_W} \rightarrow 0$ in $V$ mit $||Tv_k||_W = 1$, was ein Widerspruch zur Stetigkeit von $T$ ist.
+	\end{description}
+	
+\minisec{Beweis von Theorem \ref{thm_68}}
+	Sei $u \in H$ derart, dass $f(u) = 1$ und sei $\hat{u} \in \ker(f)$ die orthogonale Projektion auf $\ker(f)$. Definiere $v = u - \hat{u}$. Wir zeigen: $f = \enbrace*{\frac{v}{||v||^2_H},\cdot}_H$. Tatsächlich gilt für $w \in H$, $w = w-f(w)v + f(w)v$:
+	\[ \enbrace*{\frac{v}{||v||_H^2},w}_H \xLongrightarrow[v \perp \ker(f)]{w - f(w)v \in \ker(f)} \enbrace*{\frac{v}{||v||_H^2},f(w)v}_H = f(w) \] \qed
+	
+\subsection{Theorem: Satz von Lax-Milgram}
+\label{thm_70}
+	Sei $H$ ein Hilbertraum und $B\colon H \times H \rightarrow \RR$ \marginnote{[70]} eine beschränkte, koerzitive Bilinearform (d.h. $|B(u,v)| \leq \alpha ||u||_H ||v||_H$ und $B(u,u) \geq \beta ||u||^2_H$ für zwei Konstanten $\alpha,\beta > 0$ und alle $u,v \in H$). Dann existiert ein beschränkter linearer Operator $A \colon H \rightarrow H$ mit einer beschränkten Inverse, sodass $B(u,v) = (Au,v)_H$ für alle $u,v \in H$.
+	
+\minisec{Beweis}
+	\begin{enumerate}[1.]
+		\item $B(u,\cdot)$ ist beschränktes lineares Funktional auf $H$ $\xLongrightarrow{\text{Thm. \ref{thm_68}}}$ es existiert ein $v \in H$ mit $B(u,\cdot) = (v,\cdot)_H$.
+		\item Definiere $Au = v$, dann ist $A$ klarerweise linear.
+		\item $||Au||_H^2 = (Au,Au)_H = B(u,Au) \leq \alpha ||u||_H ||Au||_H$, sodass $||Au||_H \leq \alpha ||u||_H$, d.h. $A$ ist beschränkt.
+		\item $\beta ||u||_H^2 \leq B(u,u) = (Au,u)_H \leq ||Au||_H ||u||_H$, sodass $||Au||_H \geq \beta ||u||_H$, d.h. $A^{-1}$ ist beschränkt, falls existent.
+		\item Wegen $||Au-Av||_H = ||A(u-v)||_H \geq \beta ||u-v||_H$ ist $A$ injektiv.
+		\item $\im(A)$ ist ein abgeschlossener Unterraum von $H$.
+		\item Es ist $\im(A) = H$: Sei $0 \neq u \in \im(A)^\perp$, dann ist $0 = (Au,u)_H = B(u,u) \geq \beta ||u||_H^2 > 0$. Widerspruch. Also existiert $A^{-1}$. \qed
+	\end{enumerate}
+	
+\subsection{Theorem: Existenz einer schwachen Lösung}
+\label{thm_71}
+	Sei $\Omega$ beschränkt mit Lipschitzrand und $f \in L^2(\Omega$ sowie $A,b,c$ beschränkt. \marginnote{[71]} Dann existiert eine schwache Lösung $u \in H^1(\Omega)$ von $\eqref{eq_29}$.
+
+\minisec{Beweis}
+	Mit $\tilde{u} = u-g$ müssen wir ein $\tilde{u} \in H_0^1(\Omega)$ finden mit $B(\tilde{u},v) = F(v) := \int_{\Omega} (f-b\cdot \nabla g - cg)v - \nabla v^T A \nabla g dx$ für alle $v \in H_0^1(\Omega)$.
+	\begin{enumerate}[1.]
+		\item $F$ ist ein beschränktes lineares Funktion auf $H_0^1(\Omega)$. Mit der Hölder-Ungleichung und Theorem \eqref{thm_68} folgt, dass ein $R(F) \in H_0^1(\Omega)$ existiert mit $F(v) = (R(F),v)_{H_0^1(\Omega)}$ für alle $v \in H_0^1(\Omega)$.
+		\item $B(\cdot,\cdot)$ ist eine beschränkte Bilinearform auf $H_0^1(\Omega)$.
+		\item Falls $b = 0$, so folgt $B(v,v) \geq \lambda ||\nabla v||_{L^2(\Omega)}^2 \geq c ||v||_{H_0^1(\Omega)}^2$ mittels der Poincaré-Ungleichung, d.h. $B$ ist koerzitiv und wir können den Satz von Lax-Milgram anwenden: Es existiert ein Operator $A$ mit beschränkter Inverse derart, dass $B(u,v) = (Au,v)_{H_0^1(\Omega)}$ für alle $u,v \in H_0^1(\Omega)$. Demnach erfüllt $\tilde{u} = A^{-1} R(F)$ die Bedingung $B(\tilde{u},v) = (R(F),v)_{H_0^1(\Omega)}$ für alle $v \in H_0^1(\Omega)$. Für $b \neq 0$ muss der Beweis angepasst werden (siehe Übung). \qed
+	\end{enumerate}
+
+\mbox{} \\
+Nachdem wir Existenz und Eindeutigkeit einer schwachen Lösung bewiesen haben, können wir nun ihre Regularität untersuchen.
+
+\subsection{Theorem: Innere Regularität}
+\label{thm_72}
+	Sei $\Omega$ beschränkt mit Lipschitzrand,\marginnote{[72]} $f \in L^2(\Omega), A \in C^{0,1}(\bar{\Omega},\RR^{n \times n}), b \in L^\infty(\Omega,\RR^n), c \in L^\infty(\Omega)$. Sei $u \in H^1(\Omega)$ die schwache Lösung von $\eqref{eq_29}$. Für jedes $\Omega' \subset \subset \Omega$ (d.h. $\overline{\Omega'} \subset \Omega$) existiert eine Konstante $C \geq 0$, sodass
+	\[ ||u||_{H^2(\Omega')} \leq C(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)}) \]
+	und damit $u \in H^2(\Omega')$.
+
+\minisec{Beweis}
+	\begin{enumerate}[1.]
+		\item Für $i \in \{0,\dots,n\}$ und $h \in \RR$ definiere den Finite-Differenzen-Operator $\Delta_i^h$ durch $\Delta_i^h u := \frac{u(\cdot +h)-u(\cdot)}{h}$. Es ist leicht nachzuprüfen, dass $Du \in L^2(\Omega)$ genau dann, wenn ein $\kappa > 0$ existiert mit $\sum_{i=1}^{n} ||\Delta_i^h u||_{L^2(\Omega)} < \kappa$ für alle genügen kleinen $|h|$. Beachte ferner: $\Delta_i^h \nabla = \nabla \Delta^h_i$.
+		\item Sei $2|h| < \dist(\supp v, d\Omega)$. Aus \eqref{eq_30} folgt:
+		\begin{equation}
+		\begin{aligned}
+			\int_{\Omega} \nabla v^T \Delta^h_i(A \nabla u) dx &= -\int_\Omega \nabla (\Delta_i^{-h} v)^T A \nabla u dx \\ \notag
+			&= \int_{\Omega} (\Delta_i^{-h} v)b \cdot \nabla u + c(\Delta_i^{-h}v)u - f(\Delta_i^{-h}v) dx
+		\end{aligned}
+		\end{equation}
+		bzw. äquivalent dazu, vermöge $\Delta_i^h(A \nabla u)(x) = A(x+he_i)\Delta_i^h(\nabla u)(x) + \Delta_i^h(A(x)) \nabla u(x)$,
+		\begin{equation}
+		\begin{aligned}
+			\int_\Omega \nabla v^T A(x+he_i) \Delta_i^h \nabla u dx &= \int_{\Omega} -\nabla v^T \Delta_i^h A \nabla u + \Delta_i^{-h} vb \cdot \nabla u + c \Delta_i^{-h} vu - f \Delta_i^{-h} v dx \\ \label{eq_31}
+			&\leq \text{const} \cdot (||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)}) || \nabla v||_{L^2(\Omega)}
+		\end{aligned}
+		\end{equation}
+		\item Mit $v = \eta^2 \Delta_i^h u$ für eine glatte Cutoff-Funktion $\eta \in C_0^\infty(\Omega,[0,1])$ mit $\eta = 1$ auf $\Omega'$ folgt:
+		\begin{equation}
+		\begin{aligned}
+			\lambda \int_{\Omega} |\eta \nabla \Delta_i^h u|^2 dx &\leq \int_{\Omega} \eta^2 \Delta_i^h \nabla u^T A(x+he_i) \Delta_i^h \nabla u dx \\ \notag
+			&\overset{\eqref{eq_31}}{\leq} \text{const} \cdot (||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)})(||\eta^2 \nabla \Delta_i^h u||_{L^2(\Omega)} + ||2\eta \Delta_i^h u \nabla \eta||_{L^2(\Omega)})
+		\end{aligned}
+		\end{equation}
+		Die Young-Ungleichung $\alpha \beta \leq \frac{\varepsilon \alpha^2}{2} + \frac{\beta^2}{2\varepsilon}$ für $\alpha, \beta, \varepsilon > 0$ sowie $(\alpha + \beta)^2 \leq 2\alpha^2 + 2\beta^2$ liefern:
+		\begin{equation}
+		\begin{aligned}
+			\lambda ||\eta \nabla \Delta_i^h u||_{L^2(\Omega)}^2 &\leq \frac{1}{2\varepsilon} \text{const}^2(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)})^2 + \frac{\varepsilon}{2}(||\eta^2 \nabla \Delta_i^hu||_{L^2(\Omega)} + ||2 \eta \Delta_i^h u \nabla \eta||_{L^2(\Omega)})^2 \\ \notag
+			&\leq \text{const}(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)} + ||2 \eta \Delta_i^h u \nabla \eta||_{L^2(\Omega)})^2 + \varepsilon||\eta^2 \nabla \Delta_i^hu ||_{L^2(\Omega)}^2
+		\end{aligned}
+		\end{equation}
+		Subtrahiere $\varepsilon ||\nabla \Delta_i^h u||_{L^2(\Omega)}^2$ auf beiden Seiten und benutze $||2 \eta \Delta_i^h u \nabla \eta||_{L^2(\Omega)}$. Damit erhalten wir:
+		\[ ||\nabla \Delta_i^h u||_{L^2(\Omega')} \leq ||\eta \nabla \Delta_i^h u||_{L^2(\Omega)} \leq \text{const}(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)}), \]
+		woraus $||D^2u||_{L^2(\Omega')} \leq \text{const}(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)})$ folgt. \qed
+	\end{enumerate}
+	
+\subsection{Bemerkung}
+\label{bem_73}
+	Benutzen wir im Beweis zu Theorem \ref{thm_72} Finite-Differenzen-Approximationen höherer Ableitungen, erhalten wir \marginnote{[73]}
+	\[ A \in C^{k,1}(\bar{\Omega}),b,c \in C^{k-1,1}(\bar{\Omega}),f \in H^k(\Omega) \quad \Rightarrow \quad u \in H^{k+2}(\Omega'). \]
+	Damit folgt für unendlich oft differenzierbare $A,b,c,f$, dass auch $u$ unendlich oft differenzierbar ist.
+	
+\subsection{Bemerkung}
+\label{bem_74}
+	Falls die Randdaten glatt sind, kann man sogar die Glattheit von $u$ auf ganz $\Omega$ zeigen: \marginnote{[74]}
+	\begin{equation}
+	\begin{aligned}
+		& A \in C^{k,1}(\overline{\Omega}, b,c \in C^{k-1,1}(\overline{\Omega}),f \in H^k(\Omega), \der\Omega \in C^{k+2}, g \in H^{k+2}(\Omega) \\ \notag
+		\Rightarrow \qquad & u \in H^{k+2}(\Omega) \text{ mit } ||u||_{H^{k+2}(\Omega)} \leq C(||u||_{L^2(\Omega)} + ||f||_{H^k(\Omega)} + ||g||_{H^{k+2}(\Omega)})
+	\end{aligned}
+	\end{equation}
+	(siehe z.B. Gilbarg \& Trudinger, \glqq Elliptic PDEs of 2nd Order\grqq, S. 187.)
+\newpage

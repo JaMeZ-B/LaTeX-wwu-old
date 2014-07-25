@@ -1,0 +1,86 @@
+\section{Einleitung}
+\label{sec:para1}
+\subsection{Definition: Partielle Differentialgleichung}
+\label{def_pdgl}
+	Sei $\Omega \subset \RR^n$ offen. \marginnote{8. Apr} Eine \Index{partielle Differentialgleichung} (PDGL, PDE) ist eine Gleichung, die eine Funktion $u\colon \Omega \rightarrow \RR$ und ihre partiellen Ableitungen miteinander verknüpft.
+	\[ F(D^k u(x), D^{k-1} u(x), \dots, Du(x),u(x),x) = 0, \]
+	wobei
+	\[F\colon \RR^{n^k} \times \RR^{n^{k-1}} \times \dots \times \RR^n \times \RR \times \Omega \longrightarrow \RR. \]
+	$k$ ist die \bet{Ordnung} der partiellen Differentialgleichung. $u$ ist die gesuchte Funktion.
+	
+\minisec{Notation}
+	\[ u_{x_1} := \frac{\partial u}{\partial x_1}; \quad u_{x_1 x_2} := \frac{\partial^2 u}{\partial x_1 \partial x_2}; \quad \text{usw.} \]
+	\[ \nabla u := \begin{pmatrix} \der / \der x_1 \\ \vdots \\ \der / \der x_n \end{pmatrix} u = \begin{pmatrix} u_{x_1} \\ \vdots \\ u_{x_n} \end{pmatrix} \]
+	\[ \Delta u := \sum\limits_{i=1}^{n} u_{x_i x_i} = \diver \nabla u \]
+	Manchmal ist die erste Variable die Zeit. Dann betrachten wir $\Omega' = (0,\Gamma) \times \Omega$ statt $\Omega$. $t$ bezeichnet dann die Zeitvariable; $(t,x) \in \Omega'$. $\nabla$ und $\Delta$ beziehen sich dann nur auf die Raumvariablen. \\
+	Ein Vektor $\alpha = (\alpha_1,\dots,\alpha_n) \in \NN_0^n$ heißt \Index{Multiindex} der Ordnung $|\alpha| = \alpha_1+\dots+\alpha_n$. Damit ist:
+	\[ D^\alpha u = \frac{\partial^{|\alpha|}u}{\partial x_1^{\alpha_1} \cdots \partial x_n^{\alpha_n}} \]
+	\[ \alpha! = \alpha_1!\alpha_2!\cdots \alpha_n! \]
+	\[ x^{\alpha} = x_1^{\alpha_1} x_2^{\alpha_2} \dots x_n^{\alpha_n} \text{ für } x \in \RR^n \]
+	
+\subsection{Beispiel}
+	\begin{itemize}
+		\item \Index{Transportgleichung}: $u_t + b(x) \cdot \nabla u = 0$ \\
+		$u_t$: z.B. Partikeldichte, $b \in \RR^n$: Flüssigkeitsgeschwindigkeit
+		\item \Index{Laplace-Gleichung}: $\Delta u = 0$ \\
+		Chemikaliendichte in Lösungsmittel
+		\item \Index{Wärmeleitungsgleichung}: $u_t = \Delta u$ \\
+		$u$: Temperatur
+		\item \Index{Wellengleichung}: $u_{tt} = \Delta u$
+	\end{itemize}
+	
+\subsection{Definition: PDGL-Problem}
+\label{def_pdgl_problem}
+	Ein \bet{PDGL-Problem} ist eine partielle Differentialgleichung mit Randbedingungen auf einem Teil $\Gamma \subset \partial \Omega$.
+	
+\subsection{Beispiel: PDGL-Probleme}
+	\[ \begin{cases}
+		\Delta u = 0 & \text{ auf } (0,\pi)^2 \\
+		u = 0 & \text{ auf } x_1=0, x_1=\pi, x_2 = 0 \\
+		u = \sin^3(x_1) & \text{ auf } x_2 = \pi
+		\end{cases} \]
+		Eine Lösung ist gegeben durch
+		\[ u(x) = \frac{3}{4} \sin x_1 \frac{\sinh x_2}{\sinh 1} - \frac{1}{4} \sin(3x_1) \frac{\sinh 3x_2}{\sinh 3} \]
+		
+	\[ \begin{cases}
+		u_t = \Delta u \text{ auf } (0,\infty) \times (0, \pi) \\
+		u(0,x) = \sin^3 (x), u(t,0) = u(t,\pi) = 0 \\
+		u \rightarrow 0 \text{ für } t \rightarrow \infty
+		\end{cases} \]
+		Eine Lösung ist gegeben durch
+		\[ u(t,x) = \frac{3}{4} \sin(x) e^{-t} - \frac{1}{4} \sin(3x) e^{-3t} \]
+		
+	\[ \begin{cases}
+		u_{tt} = u_{xx} \text{ auf } (0,\infty) \times (0, \pi) \\
+		u(0,x) = \sin^3(x), u_t (0,x) = 0 \\
+		u(t,0) = u(t,\pi) = 0
+		\end{cases} \]
+		Eine Lösung ist gegeben durch
+		\[ u(t,x) = \frac{3}{4} \sin (x) \cos (t) - \frac{1}{4} \sin (3x) \cos (3t) \]
+
+\subsection{Definition: Typen partieller Differentialgleichungen}
+\label{def_pdgl_typen}
+	Eine PDGL heißt \index{partielle Differentialgleichung!linear} \index{partielle Differentialgleichung!semilinear} \index{partielle Differentialgleichung!quasilinear} \index{partielle Differentialgleichung!nichtlinear}
+	\begin{itemize}
+		\item \bet{linear}, wenn $\sum\limits_{|\alpha| \leq k} a_\alpha (x) D^\alpha u(x) = f(x)$.
+		\item \bet{semilinear}, wenn $\sum\limits_{|\alpha| = k} a_\alpha (x) D^\alpha u(x) + a_0(D^{k-1} u(x),\dots,Du(x),u(x),x) = 0$.
+		\item \bet{quasilinear}, wenn $\sum\limits_{|\alpha| = k} a_\alpha(D^{k-1} u(x), \dots, Du(x),u(x),x)D^\alpha u(x) + a_0(D^{k-1}u(x),\dots,Du(x),u(x),x) = 0$.
+		\item \bet{nichtlinear} in allen anderen Fällen.
+	\end{itemize}
+	
+\subsection{Definition: wohlgestelltes Problem}
+\label{def_wohlgestellt}
+	Ein (PDGL)-Problem heißt \Index{wohlgestellt} nach Hadamard, wenn
+	\begin{enumerate}[(1)]
+		\item es eine Lösung besitzt
+		\item diese eindeutig ist und
+		\item diese stetig von den Daten (Randwerte, rechte Seite) abhängt.
+	\end{enumerate}
+	
+\mbox{} \\ Wir möchten die Wohlgestelltheit von verschiedenen partiellen Differentialgleichungen untersuchen, ihre Lösungen angeben und charakterisieren. Was verstehen wir unter einer Lösung? Obige Notation setzt eigentlich $k$-fache Differenzierbarkeit von $u$ voraus. Manchmal machen auch weniger reguläre Lösungen Sinn, z.B. schwach differenzierbare Lösungen. Allgemeines Vorgehen:
+\begin{enumerate}[(1)]
+	\item Zeige Existenz einer (wenig regulären) Lösung.
+	\item Schätze die Lösung ab in Termen der Daten
+	\item Eindeutigkeit und Regularität herleiten (z.B. $k$-fache Differenzierbarkeit)
+\end{enumerate}
+\newpage

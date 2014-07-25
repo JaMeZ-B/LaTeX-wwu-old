@@ -1,0 +1,57 @@
+\section{Hyperbolische PDGL -- Wellengleichung}
+\label{sec:para13}
+	\[ u_{tt} - \Delta u = 0 \]
+	physikalishe Interpretation: elastische Schwingung eines Materialstücks $\Omega$.
+	\begin{itemize}
+		\item Verschiebungsvektor $u$
+		\item Dichte $\rho$
+		\item Beschleunigung von $V \subset \Omega$: $\frac{d^2}{dt^2} \int_V udx = \int_V u_{tt} dx$
+		\item auf $V$ wirkende elastische Kraft: $-\int_{\der V} F \cdot \nu dx = - \int_V \diver F dx$ ($F \in \RR^{n \times n}$: Spannungstensor)
+		\item Spannungstensor $F \approx a Du$
+		\item Newtons Gesetz der Bewegung: $\rho \frac{d^2}{dt^2} u dx = - \int_{\der V} F \cdot \nu dx \Rightarrow \rho u_{tt} = a \Delta u$
+	\end{itemize}
+	Physikalisch (und somit hoffentlich mathematisch) sinnvolle Randbedingungen:
+	\[ \begin{cases}
+	u_{tt} - \Delta u = 0	&	\text{auf } (0,T) \times \Omega	\\
+	u = g	&	\text{auf } \setnull \times \Omega	\\
+	u_t = h	&	\text{auf } \setnull \times \Omega \\
+	u = f & \text{auf } \der \Omega
+	\end{cases} \]
+	
+\subsection{Explizite Lösung im Eindimensionalen}
+	\begin{itemize}
+		\item $\Omega = \RR$
+		\item $0 = u_{tt} - \Delta u = u_{tt} - u_{xx} = (\der_t + \der_x)\overbrace{(\der_t - \der_x)u}^{=: v}$ \\
+		$\Rightarrow v_t + v_x = 0 \Rightarrow v(t,x) = a(x-t) \Rightarrow u_t - u_x = a(x-t)$\\
+		$\Rightarrow u(t,x) = \int_{0}^{t} a(x+(t-s)-s)ds + b(x+t) = \frac{1}{2} \int_{x-t}^{x+t} a(y) dy + b(x,t)$
+		\item $u \big|_{t=0} = g = b, u_t \big|_{t=0} = a(x) + b'(x) = h \Rightarrow a = h-g'$ \\
+		\[\Rightarrow u(t,x) = \frac{1}{2} \int_{x-t}^{x+t} h(y) - g'(y) dy + g(x+t) = \frac{g(x+t)+g(x-t)}{2} + \frac{1}{2} \int_{x-t}^{x+t} h(y) dy\]
+	\end{itemize}
+	
+\subsection{Bemerkung}
+	\begin{itemize}
+		\item $u(t,x) = F(x+t) + G(x-t)$ für bestimmte $F,G$. Jede Funktion dieser Form löst $u_{tt}-u_{xx} = 0$.
+		\item Für $g \in C^2(\RR), h \in C^1(\RR)$ ist $u \in C^2$, also tatsächlich eine klassische Lösung.
+		\item Interpretation: $g(x+t)$: Welle, die nach links läuft, $g(x-t)$: Welle nach rechts.
+	\end{itemize}
+	
+\mbox{} \\
+Auf der Halbachse:
+	\[ \begin{cases}
+	u_{tt} - \Delta u = 0	&	\text{auf } (0,T) \times (0,\infty)	\\
+	u = g	&	\text{auf } \setnull \times (0,\infty)	\\
+	u' = h	&	\text{auf } \setnull \times (0,\infty) \\
+	u = 0 & \text{auf } \setnull \times \setnull
+	\end{cases} \]
+Reflektionsmethode: Definiere
+\[ \widetilde{u}(t,x) = \begin{cases}
+	u(t,x) & x \geq 0 \\
+	-u(t,-x) & x < 0 \end{cases} \]
+Analog für $g$ und $h$
+\[ \Rightarrow \begin{cases}
+	\widetilde{u}_{tt} - \Delta \widetilde{u} = 0 & \text{ auf } (0,\infty) \times \RR \\
+	\widetilde{u} = g & \text{ auf } \setnull \times \RR \\
+	\widetilde{u}_t = h & \text{ auf } \setnull \times \RR \end{cases} \]
+\[ \Rightarrow \widetilde{u}(t,x) = \frac{1}{2} (\widetilde{g}(x+t) + \widetilde{g}(x-t)) + \frac{1}{2} \int_{x-t}^{x+t} h(y) dy \]
+Interpretation: Wellen nach links werden bei 0 reflektiert.
+\newpage

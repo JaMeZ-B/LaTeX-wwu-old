@@ -1,0 +1,208 @@
+% % % % % % % % % % % 13. Mai
+\section{Partielle Differentialgleichungen zweiter Ordnung -- Elliptische PDGL}
+\label{sec:para7}
+	In diesem Abschnitt betrachten wir semilineare Gleichungen der Gestalt \marginnote{13. Mai}
+	\begin{equation}
+		\sum\limits_{i,j=1}^{n} a_{ij}(x) u_{x_ix_j}(x) + c(\nabla u(x),u(x),x) = 0 \label{eq_0905_19}
+	\end{equation}
+	mit einer symmetrischen Matrix $A := (a_{ij})_{ij}$.
+	
+\subsection{Definition: Klassifikation einer PDGL zweiter Ordnung}
+\label{def_36}
+	Die Gleichung \eqref{eq_0905_19} heißt \marginnote{[36]} \begin{itemize}
+		\item \Index{elliptisch}, falls $A$ genau $n$ positive Eigenwerte besitzt
+		\item \Index{parabolisch}, falls $A$ den Eigenwert $0$ besitzt
+		\item \Index{hyperbolisch}, falls $A$ einen positiven und $n-1$ negative Eigenwerte besitzt.
+	\end{itemize}
+	
+\mbox{} \\
+Da eine Multiplikation mit $-1$ die PDGL nicht verändert, lassen sich in der obigen Definition die Begriffe positiv und negativ vertauschen. Nichtlineare PDGL können durch Linearisierung und Betrachtung der zweiten Ableitungen lokal klassifiziert werden. Kleine Änderungen in $A$ können dazu führen, dass die PDGL ihren Typ ändert.
+
+\subsection{Definition: Laplace-Gleichung und Harmonische Funktion}
+\label{sub:def_37} \label{sub:def_harmonische_fkt}
+	Eine zweimal stetig differenzierbare Funktion, die die \Index{Laplace-Gleichung}
+	\begin{equation}
+		\Delta u = 0 \label{eq_1305_20}
+	\end{equation}
+	erfüllt, heißt \Index{harmonische Funktion}.
+	
+\mbox{} \\
+Harmonische Funktionen besitzen einige praktische Eigenschaften, die alle mehr oder weniger mit der Glattheit der Laplace-Gleichung zusammenhängen.
+
+\subsection{Theorem: Mittelwertformel}
+\label{thm:mittelwertformel} \label{thm_38}
+	$u$ ist genau dann harmonisch auf $\Omega$, falls $u \in C^2$ und \marginnote{[38]}
+	\begin{equation}
+		u(x) = \int_{\der B_r(x)} u(\tilde{x})d\tilde{x} \label{eq_1305_21}
+	\end{equation}
+	für jede Kugel $B_r(x) \subseteq \Omega$.
+	
+\minisec{Beweis}
+	\begin{itemize}
+		\item[\glqq$\Rightarrow$\grqq:] Definiere $f(\tau) = \int_{\der B_r(x)} u(\tilde{x}) d\tilde{x} = \int_{B_1(0)} u(x+rz) dz.$ \\
+		$f(0) = u(x)$ und $f'(\tau) = \int_{\der B_1(0)} \nabla u(x+rz)\cdot z dz = \int_{\der B_r(x)} \nabla u(\tilde{x}) \cdot \nu(\tilde{x}) d \tilde{x} = \frac{1}{|\der B_1(x)|} \int_{B_r(x)} \underbrace{\Delta u}_{=0} d \tilde{x}$
+		\item[\glqq$\Leftarrow$\grqq:] Angenommen, $\Delta u(x) > 0$, d.h. es existiert $B_r(x)$ mit $0 < \int_{B_r(x)} \delta u d \tilde{x}$, aber \\ $0 = f'(r) = \frac{1}{|\der B_1(x)|} \int_{B_r(x)} \Delta u d \tilde{x} > 0$ $\lightning$ \qed
+	\end{itemize}
+
+\subsection{Bemerkung}
+\label{bem_39}
+	Benutzung \marginnote{[39]} von $\int_{B_r(x)} u(\tilde{x})d\tilde{x} = \int_{0}^{r} \left( \int_{\der B_s(x)} u(\tilde{x}) d \tilde{x} \right) ds = u(x) \int_0^r \left( \int_{\der B_s(x)} d \tilde{x} \right) ds = u(x)$ liefert eine zweite Mittelwertformel.
+	
+\subsection{Theorem: Starkes Maximumprinzip}
+\label{thm:starkes_maximum} \label{thm_40}
+	Eine nichtkonstante harmonische Funktion $u \in C^2(\Omega) \cap C^0(\overline{\Omega})$ hat kein lokales Maximum auf $\Omega$.\marginnote{[40]} Insbesondere gilt:
+	\[ \max_{\overline{\Omega}} u = \max_{\der \Omega} u \]
+	(Analoges gilt für Minima: ersetze $u$ durch $-u$)
+	
+\minisec{Beweis}
+	Sei $u(x_0) = M := \max_{\overline{\Omega}} u$ für ein $x_0 \in \Omega$. Nach Theorem \ref{thm_38} bzw. Bemerkung \ref{bem_39} gilt jedoch $M = u(x_0) = \int_{B_r(x_0)} u dx < M$, sofern nicht $u = M$ auf ganz $B_r(x_0)$. Benutze dieses Argument für jeden Punkt in $\der B_r(x_0)$, anschließend für die neuen Randpunkte usw. und erhalte $u = M$ auf ganz $\Omega$. \qed
+
+\subsection{Theorem: Harnack-Ungleichung}
+\label{thm:harnack-ungl} \label{thm_41}
+	Für jede zusammenhängende offene Menge $U \subset \Omega$ existiert eine Konstante $C = C(U)$, sodass \marginnote{[41]}
+	\[ \sup_u u \leq C \inf_u u \]
+	für jede nichtnegative harmonische Funktion $u$ auf $\Omega$.
+	
+\minisec{Beweis}
+	Sei $r := \frac{1}{4} \dist(u,\der \Omega)$ und $x,y \in U$ beliebig mit $|x-y| \leq r$. Dann:
+	\[ u(x) = \int_{B_{2r}(x)} ud \tilde{x} \geq \frac{1}{2^n} \int_{B_r(y)} ud\tilde{x} = \frac{1}{2^n} u(y)\]
+	Da $U$ zusammenhängend und $\overline{U}$ kompakt, können wir $\overline{U}$ überdecken durch eine endlich viele Umgebungen $\{B_i\}_{i = 0}^N$ mit Radius $\frac{r}{2}$ und $B_i \cap B_{i-1} \neq \emptyset$. Damit folgt $u(x) \geq \left( \frac{1}{2^n} \right)^{N+1} u(y)$ für alle $x,y \in U$. \qed
+	
+\subsection{Theorem: Glattheit harmonischer Funktionen}
+\label{thm:glattheit_harm_fkt} \label{thm_42}
+	Eine harmonische Funktion $u \in C^0(\overline{\Omega})$ ist unendlich oft differenzierbar auf $\Omega$. \marginnote{[42]}
+	
+\minisec{Beweis}
+	Definiere 
+	\[\eta_\varepsilon(x) = \widetilde{\eta_\varepsilon}(|x|) = \frac{1}{\varepsilon^n} \eta \left( \frac{|x|}{\varepsilon} \right) \text{ für } \eta(|x|)= \begin{cases}
+		Ce^{\frac{1}{|x|^2-1}} & \text{ für } |x| < 1 \\
+		0 & \text{ sonst} \end{cases} \]
+	mit $C$ derart, dass $\int_{\RR^n} \eta(|x|) dx = 1$. Dann ist $\eta_\varepsilon \in C^\infty(\RR^n)$. \\
+	Setze $u_\varepsilon(x) = (u * \eta_\varepsilon)(x) = \int_\Omega u(y) \eta_\varepsilon(x-y) dy \in C^\infty(\Omega_\varepsilon)$ für $\Omega_\varepsilon = \{x \in \Omega : \dist(x,\der \Omega) > \varepsilon\}$. Dann ist $u_\varepsilon = u$ auf $\Omega_\varepsilon$:
+	\begin{equation}
+	\begin{aligned}
+		u_\varepsilon(x) &= \int_{\Omega} u(y) \widetilde{\eta_\varepsilon}(|x-y|)dy = \int_{B_\varepsilon(x)} \widetilde{\eta_\varepsilon} (|x-y|)u(y) dy \\ \notag
+		&= \int_0^\varepsilon \widetilde{\eta_\varepsilon}(r) \underbrace{\left( \int_{\der B_r(x)} u(\tilde{x}) d \tilde{x} \right)}_{u(x) |\der B_r(x)|} dr = u(x) \underbrace{\int_{B_\varepsilon(0)} \eta_\varepsilon(\tilde{x}) d\tilde{x}}_{= \int_{B_1(0)} \eta(|x|) dx = 1} = u(x) 
+	\end{aligned}
+	\end{equation}
+	\qed
+	
+% % % % 16. Mai % % % %
+\subsection{Definition: Dirichlet-Problem, Neumann-Problem}
+\label{def:dirichlet_neumann}
+	Das \Index{Dirichlet-Problem} ist gegeben durch \marginnote{16. Mai}
+	\begin{equation}
+		\begin{cases} -\Delta u(x) = f(x) \\
+		u=g \text{ auf } \der \Omega \end{cases} \label{dirichlet_problem}
+	\end{equation}
+	Das \Index{Neumann-Problem} ist gegeben durch
+	\begin{equation}
+		\begin{cases} -\Delta u(x) = f(x) \\
+		\frac{\der u}{\der \nu} \text{ auf } \der \Omega \end{cases} \label{neumann_problem}
+	\end{equation}
+	
+\subsection{Theorem: Eindeutige Lösbarkeit des Dirichlet- und Neumann-Problems}
+\label{thm_43}
+	Die Lösung des Dirichlet-Problems \eqref{dirichlet_problem} ist eindeutig, \marginnote{[43]} falls existent. Das Neumann-Problem \eqref{neumann_problem} besitzt nur dann eine Lösung, falls gilt:
+	\[ \int_\Omega f(x) dx = - \int_{\der \Omega} g(x) dx \]
+	In diesem Fall ist sie eindeutig bis auf eine konstanten Term.
+	
+\minisec{Beweis}
+	Seien $u, v$ zwei Lösungen, dann ist $w := u-v$ eine Lösung von $\Delta w = 0$. Nach Theorem \ref{thm_40} nimmt $w$ sein Maximum und Minimum auf $\der \Omega$ an. Im Fall von \eqref{dirichlet_problem} ist ferner $w = 0$ auf $\der \Omega$, also folgt $w \equiv 0$. Im Fall \eqref{neumann_problem} ist $\der w / \der \nu = 0$ auf $\der \Omega$, also ist $w$ konstant. \\
+	Beachte: Im zweiten Fall haben wir
+	\[ \int_{\Omega} f(x) dx = \int_\Omega - \Delta u(x) dx = -\int_{\der \Omega} \nabla u \cdot \nu dx = - \int_{\der \Omega} g(x) dx\]
+	\qed
+	
+\mbox{} \\
+Wir erarbeiten nun eine praktische Formel für die Lösung der \Index{Poisson-Gleichung}
+\begin{equation}
+	-\Delta u(x) = f(x) \label{poissongl}
+\end{equation}
+Dafür betrachten wir zunächst Lösungen der Laplace-Gleichung. Sei $r := |x|$ und $v(r) = u(x)$ eine Lösung der Laplace-Gleichung auf $\RR^n \setminus \setnull$. Durch Benutzung von $\frac{\der r}{\der x_i} = \frac{x_i}{r}$, also $u_{x_i} = \frac{v'(r) x_i}{r}$ und $u_{x_ix_i} = \frac{v''(r)x_i^2}{r^2} + v'(r) \left( \frac{1}{r}-\frac{x_i^2}{r^3} \right)$, erhalten wir
+\[ v''(r) + \frac{n-1}{r} v'(r) = 0 \]
+Diese Gleichung besitzt die Lösung $v''(r) = \frac{a}{r^{n-1}}$ für eine Konstante $a$.
+
+\subsection{Definition: Fundamentallösung der Laplace-Gleichung}
+\label{def:fundamentallsg_laplace} \label{def_44}
+	Die Funktion \marginnote{[44]}
+	\[ \Phi(x) = \begin{cases}
+		-\frac{1}{2}|x| & (n=1) \\
+		-\frac{1}{2\pi} \log |x| & (n=2) \\
+		-\frac{1}{(n-2)|\der B_1(0)|}\frac{1}{|x|^{n-2}} & (n \geq 3) \end{cases} \]
+	löst die Laplace-Gleichung auf $\RR^n \setminus \setnull$ und heißt \Index{Fundamentallösung} der Laplace-Gleichung.
+	
+\subsection{Definition: Delta-Verteilung}
+\label{def:delta_vert} \label{def_45}
+	Der lineare Operator $\widehat{\delta}\colon C^0(\RR^n) \rightarrow \RR$ mit $\widehat{\delta}(u) = u(0)$ heißt \bet{$\delta$-Verteilung}. Üblich ist auch die Notation \marginnote{[45]}
+	\[ \widehat{\delta}(u) = \int_{\RR^n} \delta(x) u(x) dx \]
+	wobei $\delta$ eine Funktion mit $\int_{\RR^n} \delta(x) dx = 1$ ist, die im Punkt 0 unendlich ist und an allen anderen Stellen den Wert 0 annimmt.
+	
+\mbox{} \\
+Multiplizieren wir $\Delta \Phi$ mit einer glatten Funktion $\psi$ mit $\psi = 0$ auf $\der \Omega$ und integrieren wir zweimal partiell, erhalten wir:
+\[ \int_{\Omega} \psi(x) \Delta \Phi(x) dx = \int_{\Omega} \Phi(x) \Delta \psi(x) dx \]
+
+\subsection{Theorem: Fundamentallösung}
+\label{thm_46} \label{fundamentallsg}
+	Für die $\delta$-Verteilung gilt: \marginnote{[46]}
+	\[ \Delta \Phi(x) = \delta(x) \]
+	d.h. es gilt $\Delta \Phi(x) = 0$ auf $\RR^n \setminus \setnull$ und $\int_{\RR^n} \Phi(x) \Delta \psi(x) dx = \psi(0)$ für alle glatten Funktionen $\psi$ mit kompaktem Träger.
+	
+\minisec{Beweis}
+	\dots
+	
+\mbox{} \\	
+Sei nun $\der \Omega$ Lipschitz. So wie zuvor betrachte die Lösung des folgenden Problems:
+\begin{equation}
+	\begin{cases}
+		- \Delta G^y(x) = \delta(x-y) & \text{ auf } \Omega \\
+		G^y = 0 & \text{ auf } \der \Omega \label{eq_25}
+	\end{cases}
+\end{equation}
+Motivation: Finden wir $G^y$ für alle $y \in \Omega$, dann genügt
+\begin{equation}
+	u(x) = \int_{\Omega} G^x(y) f(y) dy \label{eq_26}
+\end{equation}
+der Gleichung
+\begin{equation}
+	-\Delta u(x) = \int_{\Omega} -\Delta G^x(y) f(y) dy = f(y)
+\end{equation}
+
+\subsection{Bemerkung}
+\label{bem_47}
+	Offensichtlich ist $G^y(x) = \Phi(x-y)-\phi^y(x)$, wobei $\phi^x$ eine Lösung ist von \marginnote{[47]}
+	\begin{equation} \begin{cases}
+		\Delta \phi^y = 0 & \text{ auf } \Omega \\
+		\phi^y = \Phi(x-y) & \text{ auf } \der \Omega \end{cases} \label{eq_27}
+	\end{equation}
+
+\subsection{Theorem: Greensche Formel}
+\label{thm_48} \label{green_formel}
+	Falls $u \in C^2(\overline{\Omega})$ eine Lösung des Dirichlet-Problems \eqref{dirichlet_problem} ist, dann gilt \marginnote{[48]}
+	\[ u(x) = -\int_{\der \Omega} g(y) \frac{\der G^x(y)}{\der \nu} dy + \int_{\Omega} f(y) G^x(y) dy \]
+	
+\minisec{Beweis}
+	Nach Theorem \ref{thm_46} gilt für $x \in \Omega$:
+	\begin{equation}
+	\begin{aligned}
+	 u(x) 	&= \int_{\Omega} u(y) \Delta \Phi(y-x) dy \\ \notag
+			&= \int_{\Omega} u(y) \Delta G^x(y) dy \\
+			&= \int_{\der \Omega} u(y) \nabla G^x(y) \cdot \nu dy - \int_\Omega \nabla u(y) \cdot \nabla G^x(y) dy \\
+			&= \int_{\der \Omega} g(y) \frac{\der G^x(y)}{\der \nu} dy - \int_{\der \Omega} \nabla u(y) \cdot \nu \underbrace{G^x(y)}_{=0} dy + \int_{\Omega} \underbrace{\Delta u(y)}_{=f(y)} G^x(y) dy
+	\end{aligned}
+	\end{equation} \qed
+	
+\subsection{Beispiel: Greensche Funktion für Halbräume}
+\label{bsp_49}
+	Die Greensche Funktion $G^y$ \marginnote{[49]} für $y \in \Omega = \{x \in \RR^n : x_n > 0\}$ kann mit Hilfe der \Index{Spiegelungsmethode} (method of images) gefunden werden: $\phi^y(x) = \Phi(x-(-y))$ erfüllt Gleichung $\eqref{eq_27}$, sodass
+	\[ G^y(x) = \Phi(x-y) - \Phi(x+y) \]
+	Speziell in 2D:
+	\[ G^y(x) = \frac{1}{4\pi} \log \enbrace*{ \frac{|x-y|^2}{|x+y|^2}}\]
+	
+\subsection{Beispiel: Greensche Funktion für eine Scheibe} 
+\label{bsp_50}
+	Die Greensche Funktion $G^y$ \marginnote{[50]} für $y \in \Omega = B_r(0)$ kann ähnlich gefunden werden: Für $\widetilde{y} = \frac{r^2}{|y|^2}y$ ist $\frac{|x-y|}{|x+\widetilde{y}|} = \frac{|y|}{r}$ konstant auf $x \in \der \Omega$. Damit erhalten wir:
+	\[ G^y(x) = \Phi(x-y) - \Phi \enbrace*{(x-\widetilde{y}) \frac{|y|}{r}} \]
+
+\mbox{} \\
+Ein ähnliches Vorgehen ist für das Neumann-Problem möglich.
+\newpage

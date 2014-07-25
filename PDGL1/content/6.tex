@@ -1,0 +1,372 @@
+\section{Schwache Lösungen}
+\label{sec:para6}
+Frage: Wie können auch nicht-glatte Funktionen $u$ als (verallgemeinerte) Lösungen aufgefasst werden? \marginnote{2. Mai} \\
+Idee: Nutze partielle Integration, um Ableitungen loszuwerden.\\
+Häufig kann die PDGL in \Index{Erhaltungsform} oder \Index{Divergenzform} geschrieben werden:
+\begin{equation}
+	\diver G(x,u(x)) = R(x,u(x)) \label{eq_0205_11}
+\end{equation}
+für Funktionen $G\colon \RR^n \times \RR \rightarrow \RR^n, R\colon \RR^n \times \RR \rightarrow \RR$. Wir wollen \eqref{eq_0205_11} auf einem Gebiet $\Omega$ lösen für Cauchy-Daten
+\[u = g \text{ auf } \Gamma \subseteq \der \Omega \]
+
+\subsection{Beispiel}
+\label{bsp_15}
+	$a(x)u_{x_1} + u u_{x_2} = c(x,u)$ ist äquivalent \marginnote{[15]} zu $(au)_{x_1} + \left( \frac{u^2}{2} \right)_{x_2} = c(x,u) + a_{x_1} u$ und kann in Erhaltungsform geschrieben werden für $G(x,u) = \begin{pmatrix} au \\ u^2/2 \end{pmatrix}, R(x,u) = c(x,u) + a_{x_1} u$. \\
+	Wir multiplizieren \eqref{eq_0205_11} mit einer sogenannten \Index{Testfunktion}
+	\[ \psi \colon \RR^n \rightarrow \RR, \psi \text{ ist glatt}, \psi = 0 \text{ auf } \der \Omega \setminus \Gamma \]
+	und integrieren partiell:
+	\begin{equation}
+	\begin{aligned}
+		&\int_\Omega \psi(x) (\diver G(x,u(x)) - R(x,u(x))) dx \\ \notag
+		= &\int_{\der \Omega} \psi(x) G(x,u(x)) \cdot v(x) dx - \int_\Omega \nabla \psi(x) \cdot F(x,u(x)) + \psi(x) R(x,u(x)) dx \\
+		= &\int_\Gamma \psi(x) G(x,g(x)) \cdot v(x) dx - \int_\Omega \nabla \psi(x) \cdot G(x,u(x)) + \psi(x) R(x,u(x)) dx
+	\end{aligned}
+	\end{equation}
+	Die Gleichung macht auch für nicht-differenzierbares $u$ Sinn.
+
+% % % % % % % % % % % % % 02. Mai	
+\subsection{Definition: schwache Lösung}
+\label{def_schwache_lsg} \label{def_16}
+	Eine messbare, beschränkte Funktion $u(x)$ auf $\Omega$ heißt schwache Lösung von \eqref{eq_0205_11}, wenn sie \marginnote{[16]}
+	\begin{equation}
+		0 = \int_\Gamma \psi(x) G(x,g(x)) \cdot v(x) dx - \int_\Gamma \nabla \psi(x) \cdot G(x,u(x)) + \psi (x) R(x,u(x)) dx \label{eq_0205_12}
+	\end{equation}
+	für alle Testfunktionen $\psi$ erfüllt.
+
+\subsection{Unstetige Lösungen und Schocks}
+	Seien
+	\begin{itemize}
+		\item $G \subseteq \Omega$ stückweise glatte Hyperfläche, die $\Omega$ in $\Omega_1$ und $\Omega_2$ teilt.
+		\item $u$ eine schwache Lösung von \eqref{eq_0205_11}, die auf $\Omega_1,\Omega_2$ stetig differenzierbar ist
+		\item $\nu_i$ die äußere Einheitsnormale an $\der \Omega_i$,$i=1,2$
+		\item $[f]_-^+$: Sprung einer Funktion $f$ über $C$ von $\Omega_1$ nach $\Omega_2$
+	\end{itemize}
+	Für alle Testfunktionen $\psi$ gilt:
+	\begin{equation}
+	\begin{aligned}
+		0 &= \int_\Gamma \psi G(x,g(x)) \cdot \nu(x)dx - \int_{\Omega_1} \nabla \psi \cdot G(x,u(x)) + \psi R(x,u(x)) dx - \int_{\Omega_2} \nabla \psi \cdot G(x,u(x)) + \psi R(x,u(x)) dx \\ \notag
+		&= \int_{\Gamma} \psi G(x,g(x)) \cdot \nu(x) dx - \int_{\der\Omega_1} \psi G(x,u(x)) \cdot \nu_1(x) dx + \int_{\Omega_1} \psi (\diver G(x,u(x)) - R(x,u(x))) dx \\
+		&\quad - \int_{\der\Omega_2} \psi G(x,u(x)) \cdot \nu_2(x) dx + \int_{\Omega_2} \psi (\diver G(x,u(x)) - R(x,u(x))) dx \\
+		&= \int_C \psi[G(x,u(x))]_-^+ \cdot \nu_1(x) dx,
+	\end{aligned}
+	\end{equation}
+	da $\diver G(x,u(x)) - R(x,u(x)) = 0$ in $\Omega_1,\Omega_2$. Wir erhalten
+	\begin{equation}
+		[G(x,u(x))]_-^+ \cdot \nu(x) = 0 \label{eq_0205_13}
+	\end{equation}
+	für die Normale $\nu$ an $C$. Eine Unstetigkeit von $u$ bzw. $G$, ein sogenannter \Index{Schock}, kann also nur entlang einer Fläche $C$ normal zu $[G]_-^+$ auftreten. \\
+	\mbox{} \\
+	In 2D kann die Kurve $C$ lokal als Graph einer Funktion $x_2(x_1)$ (bzw. $x_1(x_2)$) geschrieben werden. Ein Tangentialvektor ist somit $\begin{pmatrix} 1 \\ dx_2/dx_1 \end{pmatrix}$, ein Normalvektor $\begin{pmatrix} dx_2/dx_1	\end{pmatrix}$, und \eqref{eq_0205_13} wird zur sogenannten \bet{Rankine-Hugoniot} \bet{-Bedingung} für einen Schock: \index{Rankine-Hugoniot-Bedingung}
+	\begin{equation}
+		\frac{dx_2}{dx_1} = \frac{[G_2]_-^+}{[G_1]_-^+} \label{eq_0205_14}
+	\end{equation}
+	
+\subsection{Bemerkung: Rankine-Hugoniot-Bedingung für semilineare PDGL}
+\label{bem_17}
+	Für semilineare Gleichungen \marginnote{[17]} $0 = b(x) \cdot \nabla u(x) + c(u(x),x)$ wird dies zu $\frac{dx_2}{dx_1} = \frac{b_2[u]_-^+}{b_1[u]_-^+} = \frac{b_1}{b_2}$, d.h. der Schock liegt entlang einer charakteristischen Kurve.
+	
+\subsection{Beispiel}
+\label{bsp_18}
+	Betrachte das Cauchy-Problem \marginnote{[18]}
+	\[ \begin{cases}
+		u_t+uu_x = 0 \text{ auf } (0,\infty) \times \RR \\
+		u(0,x) = g(x) := \begin{cases}
+			1	& \text{ für } x \leq 0 \\
+			1-x & \text{ für } 0 \leq x \leq 1 \\
+			0	& \text{ für } 1 \leq x \end{cases} \end{cases} \]
+	Entlang der charakteristischen Kurven $s \mapsto (s,y+g(y)s)$ für $y \in \RR$ ist $u = z(s) = g(y)$ konstant, somit
+	\[ u(t,x) = \begin{cases}
+		1	&	\text{ für } x \leq t \\
+		\frac{1-x}{1-t} & \text{ für } t \leq x \leq 1 \\
+		0	&	\text{ für } 1 \leq x \end{cases} \]
+	solange $t < 1$. In $(t,x) = (1,1)$ schneiden sich die charakteristischen Kurven, und die Lösung mithilfe der Charpits Gleichungen bricht zusammen. An dieser Stelle setzen wir einen Schock entlang einer Kurve $x = X(t)$ ein und betrachten die Erhaltungsform $u_t + \left( \frac{u^2}{2} \right)_x = 0$. Sei $(0,y_\pm(t))$ der Anfangspunkt der charakteristischen Kurven, die $X(t)$ zur Zeit $t$ von links ($-$) und von rehts ($+$) schneiden. Es gilt somit
+	\[ X(t) = y_-(t) + g(y_-(t))t = y_+(t) + g(y_+(t))t \]
+	Weiterhin gilt die Rankine-Hugoniot-Bedingung
+	\[ \frac{dX}{dt} = \frac{\frac{u_+^2}{2}-\frac{u_-^2}{2}}{u_+ - u_-} = \frac{u_+ + u_-}{2} = \frac{g(y_+(t)) + g(y_-(t))}{2} \]
+	und $X(1)=1$. Eine Lösung dieser Gleichungen ist gegeben durch $X(t) = \frac{1+t}{2}, y_-(t) = \frac{1-t}{2}, y_+(t) = \frac{1+t}{2}$ (die Charakteristiken von links und rechts haben $u_-=1, u_+ = 0$), folglich ist
+	\[ u(t,x) = \left. \begin{cases}
+		1	&	\text{ für } x \leq t \\
+		\frac{1-x}{1-t}	&	\text{ für } t \leq x \leq 1 \\
+		0	&	\text{ für } 1 \leq x \end{cases} \right\} \text{ für } t<1 \text{ und } u(t,x) = \left. \begin{cases}
+		1	&	\text{ für } x \leq \frac{1+t}{2} \\
+		0	&	\text{ für } \frac{1+t}{2} \leq x \end{cases} \right\} \text{ für } t \geq 1 \]
+	eine schwache Lösung des Problems.
+	
+\subsection{Bemerkung}
+\label{bem_19}
+	Schwache Lösungen sind im Allgemeinen nicht eindeutig. Betrachte z.B. \marginnote{[19]}
+	\[ \begin{cases} 
+		u_t + uu_x = 0 \text{ auf } (0,\infty) \times \RR \\
+		u(0,x) = g(x) := \begin{cases}
+			0 & \text{ für } x \leq 0 \\
+			1 & \text{ sonst} \end{cases} \end{cases} \]
+	mit den schwachen Lösungen:
+	\begin{itemize}
+		\item $u(t,x) = \begin{cases}
+			0 & \text{ für } x \leq t/2 \\
+			1 & \text{ sonst} \end{cases}$ \\
+		(Schock zu Erhaltungsform $u_t + \left( \frac{u^2}{2} \right)_x = 0$; Rankine-Hugoniot: $\frac{dx}{dt} = \frac{\frac{u_+^2}{2}-\frac{u_-^2}{2}}{u_+-u_-} = \frac{u_++u_-}{2}$)
+		\item $u(t,x) = \begin{cases}
+			0 & \text{ für } x \leq 2t/3 \\
+			1 & \text{ sonst} \end{cases}$ \\
+		(Schock zu Erhaltungsform $\left( \frac{u^2}{2} \right)_t + \left( \frac{u^3}{2} \right)_x = 0$; Rankine-Hugoniot: $\frac{dx}{dt} = \frac{2}{3} \frac{u_+^3-u_-^3}{u_+^2-u_-^2} = \frac{2}{3} \frac{u_+^2+u_-u_++u_-^2}{u_++u_-}$)
+		\item $u(t,x) = \begin{cases}
+			0 & \text{ für } x\leq 0 \\
+			x/t & \text{ für } 0 < x < t \\
+			1 & \text{ sonst} \end{cases}$ \\
+		(Verdünnungswelle)
+	\end{itemize}
+	Welche Erhaltungsform korrekt ist, hängt vom modellierten physikalischen Problem ab -- auch, ob ein Schock oder stattdessen eine Verdünnungswelle korrekt sind. Man kann für eine vorgegebene Erhaltungsform eine eindeutige Lösung selektieren durch Hinzunahme einer zusätzlichen Bedingung, zum Beispiel: \begin{enumerate}
+		\item Entropiebedingung: Wir legen eine bestimmte Funnktion von $f(u)$ fest, die über den Schock zunehmen soll, d.h. $[f(u)]_-^+ \geq 0$. Die Wahl $f(u) = u$ verbietet obige Schocks.
+		\item Viskosität: Wir betrachten $0 = F(\nabla u, u, x)$ als Grenzfall für $\varepsilon \rightarrow 0$ von $\varepsilon \Delta u = F(\nabla u,u,x)$, welches eine eindeutige Lösung besitzt.
+		\item Kausalität: Ist eine Variable die Zeit, so fließt physikalisch Information entlang der charakteristischen Kurven in Richtung wachsender Zeit. Es soll Information in den Schock hinein und nicht aus ihm hinaus fließen (dies verbietet obige Schocks).
+	\end{enumerate}
+
+% % % % % % % % % % % % 6. Mai	
+\subsection{Viskositätslösungen}
+	Betrachte die nichtlineare PDGL 1. Ordnung \marginnote{6. Mai}
+	\begin{equation}
+		H(x,u(x),\nabla u(x)) = 0 \text{ auf } \Omega \label{eq_0605_15}
+	\end{equation}
+	mit Randbedingungen auf $\der \Omega$, wobei $H\colon \Omega \times \RR \times \RR^n \rightarrow R$ stetig ist und konvex in $\nabla u$. \eqref{eq_0605_15} heißt auch \Index{Hamilton-Jacobi-Gleichung}. Lösungen sind typischerweise weder eindeutig, noch überall differenzierbar.
+	
+\subsection{Beispiel: Eikonalgleichung}
+\label{bsp_20}
+	Die \Index{Eikonalgleichung} \marginnote{[20]}
+		\[ 0 = H(x,u,p) = |p|-1 \]
+	wird oft verwendet, um den Abstand $u(x) = \dist(x,\Gamma)$ einer Teilmenge $\Gamma \subset \RR^n$ zu berechnen. Allerdings existiert bereits für $n = 1$ und Randdaten $u = 0$ auf $\Gamma = \{0,1\}$ keine stetig differenzierbare Lösung $u$, aber viele Funktionen $u$, die \eqref{eq_0605_15} fast überall erfüllen. \\
+	\mbox{} \\
+	Idee, um Wohlgestelltheit zu erhalten: Füge eine \glqq Viskositätsterm\grqq \ $-\varepsilon \Delta u_\varepsilon$ hinzu und betrachte $\varepsilon \rightarrow 0$:
+	\begin{equation}
+		-\varepsilon \Delta u_\varepsilon + H(x,u_\varepsilon(x),\nabla u_\varepsilon (x)) = 0 \label{eq_0605_16}
+	\end{equation}
+	
+\subsection{Lemma}
+\label{lemma_21}
+	Sei $\Omega \subset \RR^n$ offen, \marginnote{[21]} $\overline{x} \in \Omega$, $v, v_k \in C^1(\Omega)$ mit $v_k \rightarrow v$ lokal gleichmäßig. Hat $v$ ein striktes lokales Minimum in $\overline{x}$, dann existiert eine Folge $x_k \rightarrow \overline{x}$ derart, dass $v_k$ ein lokales Minimum in $x_k$ hat.
+	
+\minisec{Beweis}
+	Sei o.B.d.A. $\overline{x} = 0, v(\overline{x})=0$. \begin{itemize}
+		\item Definiere $\omega_\rho := \min_{\der B_\rho(0)} v > 0$ für $0 < \rho < r$.
+		\item Definiere $\rho_k := \inf\{ \rho : \frac{\omega_\rho}{4} \geq \sup_{B_r(0)} |v_k-v|\}$, dann gilt $\rho_k \rightarrow 0$.
+	\end{itemize}
+	Angenommen, es wäre $\rho_{k_j} \geq \delta > 0$ für eine Folge $k_j \rightarrow \infty$, dann wäre $\frac{\omega_\delta}{4} < \sup_{B_r(0)} |v_{k_j} - v| \rightarrow 0$. Widerspruch! \\
+	1. Fall: $\rho_k = 0$. \\
+	$\Rightarrow v_k = v \Rightarrow x_k = \overline{x}$ ist lokale Minimalstelle von $v_k$. \\
+	2. Fall: $\rho_k > 0$. \\
+	$\Rightarrow \min_{\der B_{\rho_k}(0)} v_k \geq \min_{\der B_{\rho_k}(0)} v - \frac{\omega_{\rho_k}}{4} = \frac{3 \omega_{\rho_k}}{4} \geq \frac{\omega_{\rho_k}}{4} \geq v_k(0) \Rightarrow v_k$ hat ein $x_k \in B_{\rho_k}(0)$ als Minimalstelle. \\
+	Damit folgt $x_k \rightarrow 0$. \qed
+
+\mbox{} \\
+Sei $u_\varepsilon \in C^2(\Omega)$ eine Lösung von \eqref{eq_0605_15} mit $u_\varepsilon \rightarrow u$ lokal gleichmäßig. Betrachte eine Vergleichsfunktion $\phi \in C^2(\Omega)$ mit $\phi \leq u$, sodass $u-\phi$ ein striktes Minimum in $\overline{x} \in \Omega$. \\
+Lemma \ref{lemma_21} impliziert, dass eine Folge $\varepsilon_k \rightarrow 0$, $x_k \rightarrow \overline{x}$ existiert, sodass $u_{\varepsilon_k} - \phi$ ein lokales Minimum in $x_k$ besitzt, das heißt:
+\[ \begin{array}{rcl}
+	\nabla(u_{\varepsilon_k}(x_k) - \phi(x_k)) = 0	&	\hspace*{1cm}	&	\text{(Ableitung = 0)} \\
+	D^2(u_{\varepsilon_k}(x_k) - \phi(x_k)) \geq 0	&	&	\text{(Hesse-Matrix positiv semidefinit)} \\
+	\Delta u_{\varepsilon_k}(x_k) - \Delta \phi(x_k) \geq 0	&	& \text{(s.o.)}
+\end{array} \]
+Damit folgt
+\begin{equation}
+\begin{aligned}
+	0 &= -\varepsilon_k \Delta u_{\varepsilon_k}(x_k) + H(x_k,u_{\varepsilon_k}(x_k)) \\ \label{eq_0605_17}
+	&\leq -\varepsilon_k \Delta\phi (x_k) + H(x_k,u_{\varepsilon_k}(x_k),\nabla \phi (x_k)) \rightarrow H(\overline{x},u_{\varepsilon_k}(\overline{x}),\nabla \phi (\overline{x}))
+\end{aligned}
+\end{equation}
+das heißt
+\[ H(\overline{x},u_{\varepsilon_k}(\overline{x})) \geq 0 \text{, falls } u-\phi \text{ ein striktes lokales Minimum in } \overline{x} \text{ besitzt.} \]
+Dies motiviert zu folgendem Begriff:
+
+\subsection{Definition: Viskositätslösung}
+\label{def_22}
+	Sei $\Omega \subset \RR^n$ offen, $H\colon \Omega \times \RR \times \RR^n$ stetig. \marginnote{[22]}
+	\begin{enumerate}
+		\item $u \in C^0(\Omega)$ heißt \bet{Viskositäts-Superlösung}, falls $H(x,u(x),\nabla\phi(x)) \geq 0$ für alle $\phi \in C^1(\Omega)$ derart, dass $u-\phi$ ein Minimum in $x$ besitzt.
+		\item $u \in C^0(\Omega)$ heißt \bet{Viskositäts-Sublösung}, falls $H(x,u(x),\nabla\phi(x)) \leq 0$ für alle $\phi \in C^1(\Omega)$ derart, dass $u-\phi$ ein Maximum in $x$ besitzt.
+		\item $u \in C^0(\Omega)$ heißt \Index{Viskositätslösung}, falls $u$ Viskositäts-Superlösung und Viskositäts-Sublösung ist.
+	\end{enumerate}
+
+\subsection{Lemma und Beispiel: Abstandsfunktion}
+\label{lemma_23}
+	Für $\Gamma \subset \RR^n$ abgeschlossen ist $u(x) = \dist(x,\Gamma)$ eine Viskositätslösung von $|\nabla u| - 1 = 0$ auf $\RR^n \setminus \Gamma$. \marginnote{[23]}
+	
+\minisec{Beweis}
+	\begin{enumerate}
+		\item zur Sublösung: Sei $x$ ein lokales Maximum von $u - \phi$, das heißt
+		\begin{equation}
+		\begin{aligned}
+			&(u-\phi)(x+z)-(u-\phi)(x) \leq 0 \\ \notag
+			\Leftrightarrow \quad &\phi(x+z) - \phi(x) \geq u(x+z) - u(x) \geq -|z| \\
+			\Rightarrow \quad &\frac{\phi(x+s\zeta) - \phi(x)}{s} \geq -|\zeta| \text{ und somit } \nabla\phi(x) \cdot \zeta \geq -|\zeta| \ \forall \zeta \in \RR^n 
+		\end{aligned}
+		\end{equation}
+		Wähle $\zeta = - \frac{\nabla \phi(x)}{|\nabla \phi(x)|}$ und erhalte $|\nabla \phi(x)| \leq 1$ oder $|\nabla \phi(x)| - 1 \leq 0$.
+		\item zur Superlösung:  Sei $x$ ein lokales Minimum von $u - \phi$, das heißt
+		\begin{equation}
+		\begin{aligned}
+			&(u-\phi)(x+z)-(u-\phi)(x) \geq 0 \\ \notag
+			\Leftrightarrow \quad &\phi(x+z) - \phi(x) \leq u(x+z) - u(x) \\
+		\end{aligned}
+		\end{equation}
+		Sei $\overline{x} \in \Gamma$ mit $u(x) = |x-\overline{x}|$ und wähle $z = -s \frac{x-\overline{x}}{|x-\overline{x}}$.
+		\begin{equation}
+		\begin{aligned}
+			&\Rightarrow \quad \frac{ \phi \left(x+s\frac{\overline{x}-x}{|\overline{x}-x|} \right) - \phi(x)}{s} \leq \frac{|\overline{x} - x| - s - |\overline{x}-x|}{s} = -1 \\ \notag
+			&\Rightarrow \quad -\nabla \phi(x) \cdot \frac{\overline{x}-x}{|\overline{x}-x|} \geq 1
+			\quad \Rightarrow \quad |\nabla\phi(x)| \geq 1 \text{ oder } |\nabla \phi(x)|-1 \geq 0. 
+		\end{aligned}
+		\end{equation}
+		\qed
+	\end{enumerate}
+	
+\subsection{Bemerkung}
+\label{bem_24}
+	Im Allgemeinen ist $u  = -\dist(x,\Gamma)$ \marginnote{[24]} keine Viskositätslösung von $|\nabla u|-1 = 0$: Sei $u_{\min} = u(\overline{x})$ ein lokales Minimum von $-\dist(x,\Gamma)$ und $\phi \equiv u_{\min}$, sodass $u  -\phi$ ein lokales Minimum in $\overline{x}$ hat. Dann ist $|\nabla \phi| - 1 = -1 < 0$ und $u$ damit keine Viskositäts-Superlösung. \\
+	Allerdings ist $u$ eine Viskositätslösung von $1-|\nabla u| = 0$.
+	
+	\mbox{} \\
+	Wir betrachten nun Hamilton-Jacobi-Gleichungen der Gestalt
+	\begin{equation}
+		H(x,\nabla u(x)) = 0 \label{eq_0605_18} 
+	\end{equation}
+	mit $H$ stetig, $H(x,\cdot)\colon \RR^n \rightarrow \RR$ gleichmäßig konvex, $H(x,p) \xlongrightarrow{|p| \rightarrow \infty} \infty$ gleichmäßig in $x$ (Koerzivität) und $H(x,0) \leq 0$.
+	
+\subsection{Definition: Stützfunktion}
+\label{def_25}
+	Eine Funktion \marginnote{[25]}
+	\begin{equation}
+	\begin{aligned}
+		L_x\colon \RR^n &\longrightarrow \RR \\ \notag
+		w &\longmapsto \sup_{H(x,p) \leq 0} w \cdot p
+	\end{aligned}
+	\end{equation}
+	heißt \Index{Stützfunktion} der Menge $\{p \in \RR^n : H(x,p) \leq 0\}$.
+	
+\subsection{Beispiel}
+\label{bsp_26}
+	$H(x,p) = |p| - \frac{1}{v(x)}$ für eine Geschwindigkeit $v(x)$ hat die Stützfunktion $L_x(w) = \frac{|w|}{v(x)}$. \marginnote{[26]}
+	
+\subsection{Definition: optische Distanz}
+\label{def_27}
+	\[ \delta(x,y) = \inf \left\{ \int_{0}^{1} L_{c(t)}(\dot{c}(t)) dt : c\colon [0,1] \rightarrow \RR^n, c(0) = x, c(1) = y\right\} \]
+	heißt die \Index{optische Distanz} zwischen $x$ und $y$. \marginnote{[27]}
+	
+\subsection{Beispiel}
+\label{bsp_28}
+	Die optische Distanz von $H(x,p) = |p| - \frac{1}{v(x)}$ ist gegeben durch
+	\[ \delta(x,y) = \inf_{\substack{c\colon[0,1] \rightarrow \RR^n \\ c(0) = x, c(1) = y}} \int_{0}^{1} \frac{|\dot{c}(t)|}{v(c(t))} dt \]
+	und beschreibt die Zeit, die eine seismische Welle mit der Ausbreitungsgeschwindigkeit $v(x)$ benötigt, um von $x$ nach $y$ zu gelangen. \marginnote{[28]}
+
+% % % % % % % 09.05.
+\subsection{Theorem: Hopf-Lax-Formel}
+\label{thm_29}
+	Sei $\Omega \subset \RR^n$ offen und beschränkt \marginnote{9. Mai \\ \ [29]} und $g\colon \der \Omega \rightarrow \RR$ mit der Eigenschaft $g(x)-g(y) \leq \delta(y,x)$ für alle $x,y \in \der \Omega$. Dann ist
+	\[ u(x) = \inf_{y \in \der \Omega} \{g(y) + \delta(y,x) \} \]
+	eine lipschitzstetige Viskositätslösung von $H(x,\nabla u(x)) = 0$ auf $\Omega$ mit $u = g$ auf $\der \Omega$.
+	
+\subsection{Bemerkung}
+\label{bem_30}
+	\begin{itemize}
+		\item Dieser Satz impliziert die Existenz einer Viskositätslösung. \marginnote{[30]}
+		\item Für $H(x,p) = |p| - \frac{1}{v(x)}$ und $g \equiv 0$ ist $u(x)$ die Ankunftszeit einer seismischen Welle, die auf $\der \Omega$ startet.
+		\item $g(x) - g(y) \leq \delta(y,x)$ bedeutet, dass die Wellenfront zum Erreichen von $x$ nicht länger braucht als um von $y$ nach $x$ zu gelangen.
+	\end{itemize}
+	
+\subsection{Lemma}
+\label{bem_31}
+	\begin{enumerate}[(i)]
+		\item $L_x$ ist konvex. \marginnote{[31]}
+		\item $L_x(w) \leq C|w|$ für eine Konstante $C$ unabhängig von $w$.
+		\item $L_x(\lambda w) = \lambda L_x(w)$ für alle $\lambda > 0$.
+	\end{enumerate}
+	
+\minisec{Beweis}
+	\begin{enumerate}[(i)]
+		\item $L_x(tq+(1-t)w) = \sup_{H(x,p) \leq 0} [tq + (1-t)w] \cdot p = \sup_{H(x,p) \leq 0} tq \cdot p + (1-t)w \cdot p$ \\
+		$\leq t \sup_{H(x,p) \leq 0} q \cdot p + (1-t) \sup_{H(x,p) \leq 0} w \cdot p = tL_x(q) + (1-t)L_x(w)$ für alle $t \in [0,1]$.
+		\item $L_x(w) = \sup_{H(x,p) \leq 0} w \cdot p \leq \sup_{H(x,p) \leq 0} |w| \cdot |p| \leq (\sup_{H(x,p) \leq 0} |p|) |w|$
+		\item $L_x(\lambda w) = \sup_{H(x,p) \leq 0} \lambda w \cdot p = \lambda \sup_{H(x,p) \leq 0} w \cdot p$ \qed
+	\end{enumerate}
+	
+\subsection{Bemerkung}
+\label{bem_32}
+	Das obige Lemma impliziert, dass $\delta$ eine Pseudometrik ist, falls $H(x,p) = H(x,-p)$. \marginnote{[32]}
+	
+\minisec{Beweis von Theorem \ref{thm_29}}
+	Wir betrachten den Fall, dass $H(x,P) \equiv H(p)$ und $H(p) = H(-p)$. In diesem Fall gilt $\delta(x,y) = L(y-x)$, da $L$ nicht von $x$ abhängig ist. \begin{enumerate}[a)]
+		\item $u$ ist lipschitzstetig und $u(x) \leq u(y) + \delta(x,y)$ für alle $x,y \in \overline{\Omega}$:
+		\begin{equation}
+		\begin{aligned}
+			u(x) - u(y) &= \inf_{z_1 \in \der\Omega} (g(z_1) + \delta(x,z_1)) - \inf_{z_2 \in \der \Omega} (g(z_2) + \delta(y,z_2)) \\ \notag
+			&\leq \sup_{z_2 \in \der \Omega} g(z_2) + \der(x,z_2) - g(z_2) - \der(y,z_2) \\
+			&\leq \der(x,y) = L(y-x) \overset{(ii)}{\leq} C|y-x|
+		\end{aligned}
+		\end{equation}
+		\item Sublösung: \\
+		$u-\phi$ habe ein lokales Maximum in $x$, d.h. $u(x')-\phi(x') \leq u(x) - \phi(x)$, bzw.
+		\[ \phi(x') - \phi(x) \geq u(x') - u(x) \geq -\delta(x,x') \]
+		Mit $\zeta$ beliebig und $x' = x + s \zeta$ folgt
+		\[ \frac{\phi(x+s\zeta)-\phi(x)}{s} \geq \frac{-\delta(x,x+s\zeta)}{s} \overset{\substack{L \text{ unabh.} \\ \text{von } x}}{=} \frac{-L(s\zeta)}{s} \overset{(iii)}{=} -L(\zeta) \quad \Rightarrow \quad \nabla \phi \cdot \zeta \geq -L(\zeta) \]
+		Analog folgt $\nabla \phi \cdot \zeta \leq L(\zeta) = \sup_{H(p) \leq 0} \zeta \cdot p$, also $|\nabla \phi \cdot \zeta| \leq L(\zeta)$ für alle $\zeta \in \RR^n$. Angenommen, $H(\nabla \phi) > 0$. Da $H$ konvex und stetig ist, existiert eine Hyperfläche mit Normale $\nu$, die $\{p : H(p) \leq 0\}$ und $\nabla \phi$ trennt. Damit wäre $|\nabla \phi \cdot \nu| > \sup_{H(p) \leq 0} p \cdot \nu = L(\nu)$. Widerspruch.
+		\item Superlösung: \\
+		Sei $u(x) = g(\overline{y}) + \delta(x,\overline{y}) = g(\overline{y}) + L(x-\overline{y})$ für ein $\overline{y} \in \der \Omega$ und definiere $c(t) = \overline{y} + t(x-\overline{y})$. Wir haben
+		\begin{equation}
+		\begin{aligned}
+			g(\overline{y}) + L(x-\overline{y}) &= u(x) \leq u(c(t)) + \delta(c(t),x) ) u(c(t)) + (1-t)L(x-\overline{y}) \\ \notag
+			&\leq g(\overline{y} + \delta(\overline{y},c(t)) + (1-t)L(x-\overline{y}) = g(\overline{y}) + L(x-\overline{y})
+		\end{aligned}
+		\end{equation}
+		sodass $u(c(t)) = g(\overline{y}) + tL(x-\overline{y}) = g(\overline{y}) + L(c(t)-\overline{y})$. Nun besitze $u-\phi$ ein lokales Minimum in $x$, d.h. $\phi(x) - \phi(x') \geq u(x) - u(x')$, und setze $x=c(1), x'=c(1-s)$. Wir erhalten:
+		\begin{equation}
+		\begin{aligned}
+			&\frac{\phi(x)-\phi(c(1-s))}{s} \geq \frac{u(x) - u(c(1-s))}{s} \\ \notag
+			\Rightarrow \quad &\nabla \phi(x) \cdot (x-\overline{y}) = \nabla \phi(x) \cdot \dot{c}(1) \geq \nabla(u) \cdot \dot{c}(1) = L(x-\overline{y}) = \sup_{H(p) \leq 0} (x-\overline{y}) \cdot p
+		\end{aligned}
+		\end{equation}
+		Daher folgt $(\nabla \phi(x) + \alpha(x-\overline{y})) \cdot (x-\overline{y}) > \sup_{H(p) \leq 0} (x-\overline{y})\cdot p$ für alle $\alpha > 0$ und somit $H(\nabla \phi(x) + \alpha(x- \overline{y})) > 0$ und $H(\nabla \phi) \geq 0$ wegen Stetigkeit.
+		\item Randdaten: \\
+		Sei $x \in \der\Omega$, dann folgt aus $g(x)-g(y) \leq \delta(y,x)$, dass $g(x) \leq g(y) + \delta(y,x)$ für alle $y \in \der\Omega$ und somit $g(x) \leq u(x)$. Des Weiteren ist $u(x) \leq g(x) + \delta(x,x) = g(x)$ und damit $u(x) = g(x)$. \qed
+	\end{enumerate}
+
+\mbox{} \\
+Für Eindeutigkeit müssen wir zusätzliche Bedingungen an $H$ stellen, wie das folgende Beispiel zeigt. Anschließend formulieren wir zwei mögliche Resultate für die Eindeutigkeit.
+
+\subsection{Beispiel}
+\label{bsp_33}
+	Sei $\Psi \in C^1(\Omega)$, $\Psi = 0$ auf $\der\Omega$,\marginnote{[33]} und betrachte $H(x,p) = |p|^2 - |\nabla \Psi(x)|^2$. Dann ist sowohl $u = \Psi$ als auch $u = -\Psi$ eine (Viskositäts-)Lösung von $0 = H(x,\nabla u (x))$.
+	
+\subsection{Theorem: Eindeutigkeit durch Vergleich}
+\label{thm_34}
+	Sei $\Omega \subset \RR^n$ beschränkt \marginnote{[34]} und offen sowie $H\colon \overline{\Omega} \times \RR \times \RR^n$ stetig mit \begin{itemize}
+		\item $H(x,u,p) - H(x,v,p) > \gamma(u-v)$ für ein $\gamma > 0$.
+		\item $|H(x,u,p) - H(y,u,p)| \leq C|y-x|(1+|p|)$ für ein $C > 0$.
+	\end{itemize}
+	Falls $u$ eine Viskositäts-Sublösung und $v$ eine Viskositäts-Superlösung von $0 = H(x,u(x),\nabla u(x))$ ist mit $u \leq v$ auf $\der \Omega$, dann ist auch $u \leq v$ auf $\Omega$. Damit folgt, dass die Viskositätslösung eindeutig ist.
+	
+\minisec{Beweisidee}
+	Angenommen, $u$ und $v$ seien glatt und $u-v$ habe ein Maximum in $x_0 \in \overline{\Omega}$ mit $u(x_0) - v(x_0) > 0$. Nach Definition \ref{def_22} haben wir
+	\[ \begin{array}{c}
+		H(x_0,u(x_0),\nabla v(x_0)) \leq 0 \\
+		H(x_0,v(x_0),\nabla u(x_0)) \geq 0
+	\end{array}\]
+	Wegen $\nabla(u-v)(x_0) = 0$ gilt $\nabla u(x_0) = \nabla v(x_0)$, und damit den Widerspruch
+	\[ 0 \geq H(x_0,u(x_0),\nabla v(x_0)) = H(x_0,u(x_0),\nabla(u(x_0)) > H(x_0,v(x_0),\nabla u(x_0)) \geq 0 \]
+	Für nichtglatte $u,v$ ist der Beweis aufwändiger. \qed
+	
+\subsection{Theorem: Eindeutigkeit für Hamilton-Jacobi-Bellman-Gleichung}
+\label{thm_35}
+	Sei \marginnote{[35]}
+	\begin{equation}
+	\begin{aligned}
+		H\colon (\RR \times \RR^{n-1}) \times \RR^n &\longrightarrow \RR \\ \notag
+		((t,x),(p^t,p^x)) &\longmapsto p^t + \tilde{H}(x,p^x)
+	\end{aligned}
+	\end{equation}
+	mit $\tilde{H}$ stetig und \begin{itemize}
+		\item $|\tilde{H}(x,p) - \tilde{H}(x-q)| \leq C|p-q|$ für ein $C > 0$
+		\item $|\tilde{H}(x,p) - \tilde{H}(y,p)| \leq C|y-x|(1+|p|)$
+	\end{itemize}
+	Dann existiert höchstens eine Viskositätslösung von $0 = H((t,x),(u_t(t,x),\nabla u(t,x))) = u_t + \tilde{H}(x,\nabla u)$ mit gegebenen Randdaten auf $t = 0$.
+	
+\minisec{Beweis}
+	siehe z.B. Evans, \glqq PDEs\grqq, S. 587 
+\newpage

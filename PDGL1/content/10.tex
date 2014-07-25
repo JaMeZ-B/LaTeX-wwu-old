@@ -1,0 +1,102 @@
+% % % % % % 03. Juni
+\section{Variationsrechnung und nichtlineare Gleichungen}
+\label{sec:para10}
+	Das Lösen einer PDGL ist oft gleichbedeutend mit der Minimierung von Energie. In der Physik sind partielle Differentialgleichungen oft eine Konsequenz aus dem Prinzip der minimalen Energie. \\
+	Wir betrachten folgende Situation:
+	\begin{itemize}
+		\item \Index{Lagrange-Dichte} $L\colon \RR^n \times \RR \times \Omega \rightarrow \RR, (p,z,x) \mapsto L(p,z,x)$ (zur Vereinfachung als glatt vorausgesetzt, Ableitungen: $L_p,L_z,L_x$)
+		\item Energie $E[u] = \int_\Omega L(\nabla u(x),u(x),x)dx$, definiert für (schwach) differenzierbare Funktionen $u\colon \Omega \rightarrow \RR$.
+		\item \Index{Gâteaux-Differential} von $E$ in Richtung $v\colon \Omega \rightarrow \RR$:
+		\[ \der_u E[u](v) = \frac{d}{dt} E[u+tv] = \int_{\Omega} L_p(\nabla u,u(x),x) \cdot \nabla v + L_z(\nabla u, u, x) v dx \]
+	\end{itemize}
+	Betrachte das Minimierungsproblem
+	\[ \min_{u \colon \Omega \rightarrow \RR} E[u] \text{ in Abhängigkeit von } u = g \text{ auf } \der \Omega \]
+	Wir nehmen an, es besitzt einen glatten Minimierer $u^*$. Dann ist 0 ein Minimierer von $t \mapsto E[u^*+tv]$ für jedes $v \in C_c^\infty(\Omega)$, d.h. $\der_u E[u^*](v) = 0$. Partielle Integration liefert
+	\[ 0 = \int_{\Omega} v(-\diver L_p(\nabla u^*,u^*,x) + L_z(\nabla u^*,u^*,x)) dx \]
+	für alle $v \in C_c^\infty (\Omega)$, d.h. $u^*$ löst die PDGL
+	\[ 0 = -\div L_p(\nabla u(x),u(x),x) + L_z(\nabla u(x),u(x),x) \text{ auf } \Omega \quad \text{ mit } u = g \text{ auf } \der \Omega \]
+	
+\subsection{Beispiel}
+\label{bsp_75}
+\marginnote{[75]} \begin{tabular}{cccc}
+Langrange-Dichte $L(p,z,x)$ & Energie $E[u]$ & PDGL &  \\ 
+$\frac{1}{2} |p|^2$ & $\int_\Omega \frac{1}{2} |\nabla u|^2 dx$ & $\Delta u = 0$ & (Laplace-Gleichung) \\ 
+$\frac{1}{2} p^T A(x)p - zf(x)$ & $\int_\Omega \frac{1}{2} \nabla u^T A \nabla u - fu dx$ & $-\diver(A\nabla u) = f$ & (allgemeine Poisson-Gleichung) \\ 
+$\frac{1}{2} |p|^2 - F(z)$ & $\int_\Omega \frac{1}{2} |\nabla u|^2 - F(u) dx$ & $-\Delta u = F'(u)$ & (nichtlineare Poisson-Gleichung) \\ 
+$\sqrt{1+|p|^2}$ & $\int_\Omega \sqrt{1+ |\nabla u|^2} dx$ & $\diver \frac{\nabla u}{\sqrt{1+ |\nabla u|^2}} = 0$ & Minimalflächengleichung \\ 
+\end{tabular} 
+
+\mbox{} \\
+Wir führen nun ein paar Hilfsmittel aus der Funktionalanalysis ein und beweisen dann die Existenz von Minimierern (und damit von Lösungen der Differentialgleichungen) für eine umfassende Klasse nichtlinearer Energien.
+
+\subsection{Definition: Dualraum}
+\label{def_76}
+	Der \Index{Dualraum} $X'$ \marginnote{[76]} eines Banachraums $X$ ist der Raum der beschränkten linearen Funktionale $f\colon X \rightarrow \RR$ auf $X$.
+
+\subsection{Definition: schwache Konvergenz, schwach-*-Konvergenz}
+\label{def_77}
+	Eine Folge $x_k \in X$ \bet{konvergiert schwach} gegen $x \in X$, falls $f(x_k) \rightarrow f(x)$ für alle $f \in X'$. Schreibe: $x_k \weak x$. \marginnote{[77]} \index{schwache Konvergenz}\\
+	Eine Folge $f_k \in X'$ \bet{konvergiert schwach-*} gegen $f \in X'$, falls $f_k(x) \rightarrow f(x)$ für alle $x \in X$. Schreibe: $f_k \weaks f$. \index{schwach-*-Konvergenz} \\
+	Offensichtlich folgt aus der Konvergenz in $X$ bzw. $X'$ auch die schwache Konvergenz bzw. die schwach-*-Konvergenz.
+	
+\subsection{Theorem: Schwach-*-Kompaktheit}
+\label{thm_78}
+	Die Einheitskugel (und damit jede abgeschlossene Teilmenge)\marginnote{[78]} eines separablen Banachraums $X$ ist schwach-*-folgenkompakt, d.h. jede Folge enthält eine konvergente Teilfolge.
+
+\minisec{Beweis}
+	siehe z.B. Alt, \glqq Lineare Funktionalanalysis\grqq, S. 229.
+	
+\subsection{Defintion: Reflexivität}
+\label{def_79}
+	Ein Banachrau $X$ heißt \Index{reflexiv}, falls er isometrisch isomorph ist zu seinem Bidualraum $(X')'$. \marginnote{[79]} \\
+	Hinweis: Nach dem vorigen Satz besitzen beschränkte Folgen in $X$ eine schwach konvergente Teilfolge, falls $X$ separabel ist.
+
+\subsection{Theorem: Sobolevräume sind reflexiv}
+\label{thm_80}
+	Sei $\Omega$ offen, beschränkt und mit Lipschitzrand sowie $k \in \NN_0$. Für $p \in (1,\infty)$ ist $W^{k,p}(\Omega)$ separabel und reflexiv. \marginnote{[80]}
+	
+\minisec{Beweis}
+	siehe z.B. Alt, \glqq Lineare Funktionalanalysis\grqq, S. 234.
+	
+% % % % % 6. Juni
+\subsection{Bemerkung}
+\label{bem_81}
+	Mit der Reflexivität von $L^p(\Omega)$ für $p \in (1,\infty)$ \marginnote{6. Jun. \\ \ [81]} und der Hölder-Ungleichung ist leicht zu sehen, dass $L^p(\Omega) \subseteq (L^{p^*}(\Omega))'$. Gleichermaßen erkennt man $L^{p^*}(\Omega) \subseteq (L^p(\Omega))'$. Tatsächlich folgt mit dem Satz von Radon-Nikodým:
+	\[ (L^p(\Omega))' = L^{p^*}(\Omega) \]
+	
+\subsection{Theorem}
+\label{thm_82}
+	Sei \marginnote{[82]} \begin{itemize}
+	\item $L(p,z,x)$ konvex in $p$
+	\item $L(p,z,x)$ halbstetig von unten in $z$
+	\item $L(p,z,x) \geq \alpha |p|^q - \beta$ für gewisse $\alpha, \beta > 0, q \in (1,\infty)$.
+	\end{itemize}
+	Falls $g \in W^{1,q}(\Omega)$, dann hat $E$ einen Minimierer in $\{u \in W^{1,q}(\Omega) : u = g \text{ auf } \der \Omega \}$.
+	
+\minisec{Beweis}
+	\glqq Direkte Methode der Variationsrechnung\grqq \begin{enumerate}[1.]
+		\item Weder gilt $E \equiv \infty$, noch ist $E$ nach unten unbeschränkt.
+		\item Betrachte eine minimierende Folge $u_k$ mit $E[u_k] \rightarrow \inf_u E[u]$ monoton.
+		\item Zeige die Kompaktheit der Folge, d.h. die Existenz einer (in einem gewissen Sinn) konvergenten Teilfolge $u_k \rightarrow u^*$ für ein $u^*$. \\
+		Es ist $E[u] \geq \alpha ||\nabla u||_{L^q(\Omega)}^q - \beta |\Omega|$, daher existiert ein $C > 0$ mit $||\nabla u_k||_{L^q(\Omega)} \leq C$ für alle $k$. Mit der Poincaré-Ungleichung folgt $||u_k||_{W^{1,q}(\Omega)} \leq C$ für eine (andere) Konstante $C \geq 0$. Da $W^{1,q}(\Omega)$ reflexiv ist, konvergiert eine Teilfolge $u_k$ schwach gegen ein $u^* \in W^{1,q}(\Omega)$.
+		\item Zeige mit $u_k$, dass $E$ halbstetig von unten ist, d.h. $E[u] \leq \liminf_{k \rightarrow \infty} E[u_k]$. \\
+		Aufgrund der kompakten Einbettung $W^{1,q}(\Omega) \hookrightarrow L^q(\Omega)$ gilt $u_k \rightarrow u^*$ im starken Sinne in $L^q(\Omega)$ für eine Teilfolge und demach sogar punktweise fast überall nach dem Entfernen einer anderen Teilfolge. Mit dem Satz von Egoroff finden wir sogar für jedes $\varepsilon > 0$ eine messbare Menge $\Omega_\varepsilon \subseteq \Omega$ mit $|\Omega \setminus \Omega_\varepsilon| < \varepsilon$ und $u_k \rightarrow u^*$ gleichmäßig in $\Omega_\varepsilon$. \\
+		O.B.d.A. sei $L \geq 0$. Da $L$ konvex in $p$, folgt
+		\[ \liminf_{k \rightarrow \infty} \int_{\Omega} L(\nabla u_k,u_k,x) dx \geq \liminf_{k \rightarrow \infty} \enbrace*{ \int_{\Omega} L(\nabla u^*,u_k,x) dx + \int_{\Omega} L_p(\nabla u^*,u_k,x) \cdot (\nabla u_k - \nabla u^*) dx }. \]
+		Damit haben wir
+		\begin{equation}
+		\begin{aligned}
+			\liminf_{k \rightarrow \infty} \int_{\Omega} L(\nabla u^*,u_k,x) dx \geq \ &\liminf_{k \rightarrow \infty} \int_{\Omega} \inf_{j \geq k} L(\nabla u^*,u_j,x) + \beta dx - \beta |\Omega| \\ \notag
+			\overset{(A)}{=} \ &\int_{\Omega} \liminf_{k \rightarrow \infty} L(\nabla u^*,u_k,x)+ \beta dx - \beta |\Omega| \overset{(B)}{\geq} \int_{\Omega} L(\nabla u^*,u^*,x)dx = E[u^*]
+		\end{aligned}
+		\end{equation}
+		wobei wir bei (A) den Satz von der monotonen Kovergenz (Beppo Levi) bzw. das Lemma von Fatou und bei (B) die Halbstetigkeit von unten von $L$ benutzen. Weiter folgt:
+		\begin{equation}
+		\begin{aligned}
+			&\int_\Omega L_p(\nabla u^*,u_k,x) \cdot (\nabla u_k,-\nabla u^*) dx \\ \notag
+			\geq \ &\int_{\Omega_\varepsilon} L_p(\nabla u^*,u^*,x) \cdot (\nabla u_k,\nabla u^*) dx + \int_{\Omega_\varepsilon} (L_p(\nabla u^*,u_k,x) - L_p(\nabla u^*,u^*,x)) \cdot (\nabla u_k - \nabla u^*) dx
+		\end{aligned}
+		\end{equation}
+		Der erste Term konvergiert wegen der schwachen Konvergenz von $u_k$ gegen 0 und der zweite wegen der Hölder-Ungleichung und der gleichmäßigen Konvergenz. Mit $\varepsilon \rightarrow 0$ folgt die Behauptung. \qed
+	\end{enumerate}
+\newpage

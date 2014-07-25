@@ -1,0 +1,113 @@
+\section{Zusatznotizen}
+\label{sec:SuppNotes}
+	Sei $x \in \RR^n$ und $r > 0$. Bezeichne im Folgenden mit $B_r(x)$ die offene Kugel um $x$ mit Radius $r$, also
+	\begin{equation}
+		B_r(x) = \{ y \in \RR^n : |y-x| < r \}, \label{supp_0.1}
+	\end{equation}
+	und mit $\der B_r(x)$ den Rand von $B_r(x)$, also
+	\begin{equation}
+		\der B_r(x) = \{ y \in \RR^n : |y-x| = r \}. \label{supp_0.2}
+	\end{equation}
+	Analog bezeichnen wir mit $B_r$ die offene Kugel um den Ursprung und mit $\der B_r$ entsprechend ihren Rand. \\
+
+\minisec{Die Coarea-Formel und Polarkoordinaten}
+	Es gilt die folgende Integrationsregel:
+	
+\subsection{Theorem}
+\label{supp_1.1}
+	Sei $f \colon \RR^n \rightarrow \RR$ stetig und integrierbar. Dann gilt für alle $x_0 \in \RR^n$:
+	\begin{equation}
+		\int_{\RR^n} f(x) dx = \int_{0}^{\infty} \enbrace*{ \int_{\der B_r(x_0)}  f(x) dS(x) } dr, \label{supp_0.3}
+	\end{equation}
+	wobei $S$ das Oberflächenmaß auf $\der B_r(x_0)$ bezeichnet.
+	
+\mbox{} \\
+Theorem \ref{supp_1.1} kann mithilfe von Polarkoordinaten bewiesen werden und ist ein Spezialfall des folgenden Satzes:
+
+\subsection{Theorem: Coarea-Formel}
+\label{supp_1.2}
+	Sei $u \colon \RR^n \rightarrow \RR$ lipschitzstetig und für fast alle $r \in \RR$ sei die Niveaumenge $\{x \in \RR^n : u(x) = r\}$ eine glatte, $(n-1)$-dimensionale Hyperfläche des $\RR^n$. Ferner sei $f \colon \RR^n \rightarrow \RR$ stetig und integrierbar. Dann gilt: \index{Coarea-Formel}
+	\begin{equation}
+		\int_{\RR^n} f(x) |\nabla u(x)| dx = \int_{-\infty}^{\infty} \enbrace*{ \int_{ \{u = r\}} f(x) dS(x) } dr. \label{supp_0.4}
+	\end{equation}
+
+\mbox{} \\
+Die Coarea-Formel ist eine Art \glqq gekrümmte\grqq \ Version des Satzes von Fubini und ermöglicht die Umformung von $n$-dimensionalen Integralen in Integrale über Niveaumengen einer geeigneten Funktion.
+
+\subsection{Bemerkung}
+\label{supp_1.3}
+	Theorem \ref{supp_1.1} folgt aus Theorem \ref{supp_1.2} für $u(x) = |x-x_0|$.
+
+\minisec{Kugelvolumen und Oberfläche}
+	Um das Volumen $|B_r(x)|$ und das Maß $S(\der B_r(x))$ der Kugeloberfläche bestimmen zu können, benötigen wir zunächst die \Index{Gamma-Funktion}. Für $t > 0$ sei:
+	\begin{equation}
+		\Gamma(t) := \int_{0}^{+\infty} e^{-x} x^{t-1} dx. \label{supp_0.5}
+	\end{equation}
+	Wir prüfen zunächst, ob $\Gamma$ wohldefiniert ist: Sei $f(x) := e^{-x} x^{t-1}$. Dann ist $f(x) < x^{t-1}$ falls $x > 0$ und $t-1 > -1$. Da andererseits $\lim\limits_{x \rightarrow +\infty} x^{t+1}e^{-x} = 0$, existiert ein $M > 0$, sodass $x^{t+1}e^{-x} < 1$ für alle $x > M$, und damit $f(x) < \frac{1}{x^2}$ für alle $x > M$. Daraus folgt die Integrierbarkeit von $f$. Also ist $\Gamma(t) < \infty$ für alle $t > 0$. \\
+	Die beiden Eigenschaften
+	\begin{enumerate}[(1)]
+		\item $\Gamma(1) = \int_{0}^{+\infty} e^{-x} dx = 1$
+		\item $\Gamma(t+1) = \int_{0}^{+\infty} x^t e^{-x} dx = t \Gamma(t)$ für alle $t \geq 0$.
+	\end{enumerate}
+	zeigen, dass die Gamma-Funktion die Fakultätsfunktion auf $(0,\infty)$ fortsetzt; tatsächlich gilt für alle $n \in \NN$:
+	\[ \Gamma(n+1) = n \Gamma(n) = n(n-1)\Gamma(n-1) = \dots = n!\Gamma(1) = n!\]
+	Ein anderer Ausdruck für die Gamma-Funktion ist gegeben durch
+	\begin{equation}
+		\Gamma(t) = 2^{1-t} \int_0^{+\infty} e^{-\frac{y^2}{2}}y^{2t-1} dy, \label{supp_0.6}
+	\end{equation}
+	welchen man durch die Substitution $x = \frac{y^2}{2}$ erhält. \\
+	Bezeichnen wir mit $Q_1 := [0,+\infty) \times [0,+\infty)$ den ersten Quadranten in der Ebene, folgt aus \eqref{supp_0.6} mithilfe von Fubini und Polarkoordinaten:
+	\begin{equation}
+	\begin{aligned}
+		\left\lbrack \Gamma \enbrace*{\frac{1}{2}} \right\rbrack^2 &= 2 \enbrace*{ \int_0^{+\infty} e^{-\frac{x^2}{2}} dx} \enbrace*{ \int_{0}^{+\infty} e^{-\frac{y^2}{2} dy}} \\ \notag
+		&= 2 \iint_{Q_1} e^{-\frac{x^2+y^2}{2}} dxdy = 2 \int_{0}^{\frac{\pi}{2}} d\vartheta \int_0^{\infty} \rho e^{-\frac{\rho^2}{2}} d\rho = \pi
+	\end{aligned}
+	\end{equation}
+	und damit $\Gamma(1/2) = \sqrt{\pi}$. \\
+	Sei nun $\omega_n$ das Volumen der Einheitskugel $B_1 \subset \RR^n$ und $\sigma_n$ das Maß der Oberfläche von $B_1$, d.h.
+	\begin{equation}
+		|B_r(x)| = r^n \omega_n, \qquad S(\der B_r(x)) = r^{n-1} \sigma_n \label{supp_0.7}
+	\end{equation}
+	
+\subsection{Theorem}
+\label{supp_2.1}
+	Für $n \geq 2$ ist $\sigma_n = n \omega_n$.
+	
+\minisec{Beweis}
+	Mit $f \equiv 1$ folgt unmittelbar aus \eqref{supp_0.3}:
+	\[	\omega_n = \int_{B_1} dx = \int_{0}^{1} \enbrace*{ \int_{\der B_\rho} dS} d\rho = \int_{0}^{1} S(\der B_\rho) d\rho = \sigma_n \int_0^1 \rho^{n-1} d\rho = \frac{\sigma_n}{n} \] \qed
+	
+Dies liefert und schließlich das Volumen $\omega_n$ der Einheitskugel für jedes $n \in \NN$:
+
+\subsection{Theorem}
+\label{supp_2.2}
+	Sei $n \geq 1$, dann gilt:
+	\begin{equation} 
+		\omega_n = \frac{\pi^{n/2}}{(n/2) \Gamma (n/2)} \label{supp_0.8} 
+	\end{equation}
+	
+\minisec{Beweis}
+	Mit $\Gamma(1) = 1$ und $\Gamma(1/2) = \sqrt{\pi}$ folgt, dass die Formel für $n=1$ und $n=2$ wahr ist:
+	\[ \omega_1 = \frac{\pi^{1/2}}{(1/2)\Gamma(1/2)} = 2, \qquad \omega_2= \frac{\pi}{1 \cdot \Gamma(1)} = \pi \]
+	Für $n \geq 3$ beweisen wir mit Induktion. Die Formel gelte also für $n - 2$, wobei $n \geq 3$. Dann gilt sie auch für $n$, denn: \\
+	Für $x \in B_1 \subset \RR^n$ schreibe $x = (x',x'')$ mit $x' = (x_1,x_2)$ und $x'' = (x_3,\dots,x_n)$, dann ist
+	\[ x' \in D_1 := \{(x_1,x_2) \in \RR^2 : x_1^2 + x_2^2 < 1 \} \]
+	und
+	\begin{equation}
+	\begin{aligned}
+		x'' \in (B_1)_{x'} := \ &\{x'' \in \RR^{n-2} : (x',x'') \in B_1 \} \\ \notag
+			= \ &\{(x_3,\dots,x_n) \in \RR^{n-2} : x_3^2 + \dots + x_n^2 < 1 - x_1^2 - x_2^2 \}
+	\end{aligned}
+	\end{equation}
+	Mit Fubini und der Induktionsannahme folgt:
+	\begin{equation}
+	\begin{aligned}
+		\omega_n &= \int_{B_1} dx = \int_{D_1} dx' \int_{(B_1)_{x'}} dx'' 
+			= \int_{D_1} \omega_{n-2} (1-x_1^2-x_2^2)^{(n-2)/2} dx_1 dx_2 \\
+			&= \omega_{n-2} \int_0^{2\pi} d \vartheta \int_0^1 (1-\rho)^{(n-2)/2} \rho d\rho 
+			= \frac{2\pi}{n} \omega_{n-2} = \frac{2\pi}{n} \frac{\pi^{(n-2)/2}}{\frac{n-2}{2} \Gamma \enbrace*{ \frac{n-2}{2}}} \\
+			&= \frac{2\pi}{n} \frac{\pi^{(n-2)/2}}{\Gamma(n/2)} = \frac{\pi^{n/2}}{(n/2) \Gamma (n/2)} \notag
+	\end{aligned}
+	\end{equation}
+	\qed
+\newpage

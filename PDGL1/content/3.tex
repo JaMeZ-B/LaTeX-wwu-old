@@ -1,0 +1,175 @@
+\section{Partielle Differentialgleichungen erster Ordnung}
+\label{sec:para3}
+
+% % % % % % 22. Apr.
+\minisec{Motivation: Linearer Fall}
+	Betrachte \marginnote{22. Apr}
+	\[ a(x) \cdot \nabla u(x) + a_0(x) = 0 \] mit Randdaten auf glatter $(n-1)$-dimensionaler Hyperfläche $\Gamma \subset \RR^n$, $u(x) = g(x)$ auf $\Gamma$. \\
+	Die Richtungsableitung von $u$ in Richtung $a$ ist $a(x) \cdot \nabla u(x) = -a_0 (x)$, d.h. wir wissen, wie sich $u$ entlang charakteristischer Kurven $s \mapsto x(s)$ ändert mit
+	\begin{equation}
+	\begin{aligned}
+		\dot{x}(s) = a(x(s)) \label{eq_2204_1}
+	\end{aligned}
+	\end{equation} \\
+	Sei $\Gamma$ parametrisiert durch $x_0 \colon \RR^{n-1} \rightarrow \Gamma$. Zu $\widehat{x} \in \RR^n$ können wir $s \in \RR, y \in \RR^{n-1}$ finden, sodass $\widehat{x} = x(s)$ für eine Lösung $x(s)$ von \eqref{eq_2204_1} mit $x(0) = x_0(y)$, d.h. wir reparametrisieren $\RR^n$ durch eine Funktion $\widehat{x}\colon \RR^{n-1} \times \RR \rightarrow \RR, (y,s) \mapsto \widehat{x}(y,s)$. Dann gilt:
+	\[ u(\widehat{x}(y,s)) = \underbrace{u(\widehat{x}(y,0))}_{g(\widehat{x}(y,0))} + \int\limits_{0}^{s} \underbrace{\frac{\der u(\widehat{x}(y,t))}{\der \tau}}_{=-a_0(\widehat{x}(y,\tau))} d\tau; \quad u(x) = (u \circ \widehat{x}) \circ \widehat{x}^{-1} \]
+	
+\subsection{Bemerkung}
+\label{bem_2}
+	Damit $u$ auf $\RR^n$ definiert ist, muss $\widehat{x}^{-1}$ definiert sein.\marginnote{[2]} Für lokale Invertierbarkeit ist hinreichend:
+	\[ \det(D \widehat{x}) \neq 0 \]
+	Auf $\Gamma$ ist $\det(D \widehat{x}(y,0) = \det( \underbrace{D x_0(y)}_{\in R^{n\times m -1}}\vert a(x_0(y)))$, d.h. wir brauchen $a(x_0(y)) \notin \operatorname{span}(Dx_0(y))$. Die Spalten von $Dx_0(y)$ spannen den Tangentialraum von $\Gamma$ an $x_0(y)$ auf. Damit dies ungleich 0 ist, muss $a \notin \operatorname{span}(Dx_0)$, d.h. $a \cdot \nu \neq 0$ mit $\nu$ als Normale auf $\Gamma$, d.h. $\Gamma$ ist nichtcharakteristisch.
+	
+\subsection{Beispiel}
+\label{bsp_3}
+	Betrachte \marginnote{[3]}
+	\[ \begin{cases}
+		u_{x_1} + u_{x_2} = 1 \text{ auf } \RR^2 \\
+		u = 0 \text{ auf } \Gamma = \{x_1 + x_2 = 0 \}
+	\end{cases} \]
+	Charakteristische Kurven: $\dot{x} = \begin{pmatrix} 1 \\ 1	\end{pmatrix} \Rightarrow x(s) = \begin{pmatrix} c_1 + s \\ c_2 + s \end{pmatrix}$. \\
+	Parametrisiere $\Gamma$:
+	\[ x_0(y) := \begin{pmatrix} y \\ -y \end{pmatrix} = x_0(y) \]
+	$\Rightarrow \widehat{x}(y,s) = x(s)$ für die Kurve $x(s)$ mit $x(0) = x_0(y) \Rightarrow \widehat{x}(y,s) = \begin{pmatrix} y+s \\ -y+s \end{pmatrix}$ \\
+	$\Rightarrow \widehat{x}^{-1}(x) = (\frac{x_1-x_2}{2},\frac{x_1+x_2}{2})$ \\
+	$\Rightarrow u(\widehat{x}(y,s)) = 0 + \int\limits_{0}^{s} 1 d\tau = s$ \\
+	$\Rightarrow u(x) = \underbrace{(u \circ \widehat{x})}_s \circ \widehat{x}^{-1}(x) = \frac{x_1+x_2}{2}$
+	
+\minisec{Nichtlinearer Fall}
+	Betrachte
+	\begin{equation}
+		0 = F(\nabla u(x),u(x),x), \quad u=g \text{ auf } \Gamma, \quad F,g,\Gamma \ C^2\text{-glatt} \label{eq_2204_2}
+	\end{equation}
+	Idee: Information fließt entlang charakteristischer Kurven \\
+	Ziel: Finde charakteristische Kurven und wandele die PDGL um in ein System von gewöhnlichen DGL entlang der Kurven. \\
+	Notation: \begin{itemize}
+	\item Für eine Kurve $x(s)$ schreibe $z(s) := u(x(s))$ und $p(s) = \nabla u(x(s))$, d.h.
+	\[ 0 = F(p(s), z(s), x(s)) \]
+	\item $\dot{} = \frac{\der}{\der s}$
+	\item $F_p,F_z,F_x$ sind partielle Ableitungen von $F$ nach erstem, zweitem und drittem Argument.
+	\end{itemize}
+	Suche GDGL für $x,p,z$.
+	
+\subsection{Theorem: Charpits Gleichungen}
+\label{thm_charpits} \label{thm_4}
+	Sei $u \in C^2(\Omega)$ eine Lösung von \eqref{eq_2204_2}.\marginnote{[4]} Entlang von Kurven $x(s)$ in $\Omega$ mit
+	\begin{equation}
+	\begin{aligned}
+		\dot{x} = F_p \label{eq_2204_3}
+	\end{aligned}
+	\end{equation}
+	gilt
+	\begin{align}
+		&\dot{z} = p \cdot F_p \label{eq_2204_4} \\
+		&\dot{p} = -pF_z - F_x \label{eq_2204_5}
+	\end{align}
+	Diese GDGLs heißen \Index{Charpits} oder \Index{charakteristische Gleichungen}, Kurven $x(s)$ oder $(x(s),z(s),p(s))$ heißen \Index{charakteristische Kurven}.
+	
+\minisec{Beweis}
+	Betrachte beliebige Kurve $x(s)$. Dann gilt:
+	\[ \begin{array}{c}
+		\dot{z}(s) = \nabla u(x(s)) \cdot \dot{x}(s) = p(s) \cdot \dot{x}(s) \\
+		\dot{p}(s) = D^2u(x(s)) \dot{x}(s)
+	\end{array} \]
+	Um $D^2u$ loszuwerden, differenziere \eqref{eq_2204_2} nach $x$:
+	\[ 0 = \frac{d}{dx} F(\nabla u(x),u(x),x) = D^2 u F_p + F_z \overbrace{\nabla u}^p + F_x \]
+	Wähle die Kurve $x(s)$, sodass $\dot{x}(s) = F_p(p(s),z(s),x(s))$, so erhalten wir
+	\[ \dot{p}(s) = -F_z p - F_x \qquad \dot{z} = p \cdot F_p \]. \qed
+
+\mbox{} \\
+\eqref{eq_2204_3}, \eqref{eq_2204_4} und \eqref{eq_2204_5} können mit Anfangswerten $x(0),z(0),p(0)$ gelöst werden. Sei $\Gamma$ parametrisiert durch $x_0(y), y \in \RR^{n-1}$. Werte für $x(0)$ und $z(0)$ sind auf $\Gamma$ gegeben durch $x(0) = x_0(y) \in \Gamma$ und $z(0) = g(x_0(y))$. $p(0)$ erhalten wir durch Lösen von
+\begin{equation}
+	\left. \begin{cases}
+	0 = F(p(0),z(0),x(0)) & \text{PDGL} \\
+	0 = \nabla x_0 (y) p(0) - \nabla_y g(x_0(y)) & \text{Abl. von } u(x_0(y)) = g(x_0(y)) \text{ nach } y
+	\end{cases} \right\}  \label{eq_2204_7} \end{equation}
+wobei
+	\[ \nabla x_0 (y) = \begin{pmatrix}
+	\der_{y_1} {x_0}_1 & \cdots & \der_{y_1} {x_0}_n \\ 
+	\vdots & \ddots & \vdots \\ 
+	\der_{y_{n-1}} {x_0}_1 & \cdots & \der_{y_{n-1}} {x_0}_n
+	\end{pmatrix} \]
+Die Lösung von \eqref{eq_2204_3}, \eqref{eq_2204_4} und \eqref{eq_2204_5} für diese Anfangswerte liefert eine Parametrisierung $\widehat{x}(y,s)$ des $\RR^n$ mit $\widehat{x}(y,s) = x(s)$ für die Kurve $x(s)$ mit $x(0) = x_0(y)$ sowie Funktionen $z(y,s),p(y,s)$.
+
+\subsection{Definition: nichtcharakteristisch}
+\label{def_nichtchar} \label{def_5}
+	Eine glatte $(n-1)$-dimensionale Hyperfläche\marginnote{[5]} $\Gamma \subset \RR^n$ heißt \Index{nichtcharakteristisch} zu \eqref{eq_2204_2}, wenn für die Einheitsnormale $\nu$ an $\Gamma$ gilt:
+	\[ F_p(p,z,x) \cdot \nu(x) \neq 0 \text{ für alle } x \in \Gamma, z \in \RR, p \in \RR^n \]
+	
+\subsection{Lemma}
+\label{lemma_6}
+	Wenn gilt: \marginnote{[6]} \begin{itemize}
+	\item $\Gamma$ ist nichtcharakteristisch
+	\item Für ein gegebenes $y_0 \in \RR^{n-1}$ existiert eine Lösung von \eqref{eq_2204_7}
+	\end{itemize}
+	dann: \begin{itemize}
+		\item kann \eqref{eq_2204_7} auch in einer Umgebung $U$ von $y_0$ nach $p(0)$ gelöst werden
+		\item existieren ein offenes Intervall $I = (-\delta,\delta)$ und eine Umgebung $V$ von $x_0(y_0)$, sodass für alle $x \in V$ ein $y \in U$ und $s \in I$ existiert mit $x = \widehat{x}(y,s)$. $\widehat{x}^{-1}$ ist $C^2$.
+	\end{itemize}
+	
+\minisec{Beweis}
+	\begin{itemize}
+		\item Existenz von $p(0)$ folgt direkt aus dem Satz über implizite Funktionen. (Beachte:
+		\[ \frac{\der}{\der p(0)} \begin{pmatrix}
+		F(p(0),z(0),x(0)) \\ \nabla x_0 (y) p(0) - \nabla_y g(x_0(y)) \end{pmatrix} = \begin{pmatrix}
+		F_p \\ \nabla x_0 (y) \end{pmatrix} \]
+		hat vollen Rang.)
+		\item Existenz und Glattheit von $\widehat{x}^{-1}$ folgt aus dem Satz über inverse Funktionen, da $\det (y_0,0) = \det \begin{pmatrix}	\nabla x_0 \\ F_p \end{pmatrix} \neq 0$ \qed
+	\end{itemize}
+	
+\subsection{Bemerkung}
+\label{bem_8}
+	Auch hier bedeutet nichtcharakteristisch,\marginnote{[7]} dass auf $\Gamma$ nach den partiellen Ableitungen von $u$ gelöst werden kann.
+	
+\subsection{Theorem: Lokale Existenz}
+\label{thm_lok_existenz} \label{thm_8}
+	Seien \marginnote{[8]} \begin{itemize}
+		\item $\Gamma, g, F$ glatt, also $C^2$
+		\item $\Gamma$ nichtcharakteristisch und
+		\item es gebe ein $y_0 \in \RR^{n-1}$ und ein $p(0) \in \RR^n$, das \eqref{eq_2204_7} löst.
+	\end{itemize}
+	Dann existiert auf der Umgebung $V$ von $x_0(y_0)$ aus Lemma \eqref{lemma_6} eine $C^2$-Lösung $u$ von \eqref{eq_2204_2} und \eqref{eq_2204_3}. Es ist $u(x) = z(y,s)$ und $\nabla u(x) = p(y,s)$ für $(y,s) = \widehat{x}^{-1} (x)$.
+
+% % % % % % % % % % % % % 25.04.
+\minisec{Beweis}
+	\begin{enumerate}[1.]
+		\item Nach Lemma \eqref{lemma_6} \marginnote{25. Apr} existiert $\widehat{x}^{-1}$ auf $V$ sowie $z(y,0) = g(x_0(y)),p(y,0)$ mit $F(p(y,0),z(y,0),\widehat{x}(y,0)) = 0$ und $\nabla x_0 (y) p(0) - \nabla_y g(x_0(y)) = 0$. Löse Charpits Gleichungen mit diesen Anfangswerten $\Rightarrow z(y,s),p(y,s)$.
+		\item Zeige: $f(y,s) := F(p(y,s),z(y,s),\widehat{x}(y,s)) = 0$. \\
+			$f(y,0) = 0, \dot{f}(y,s) = F_p \cdot \dot{p} + F_z \cdot \dot{z} + F_x \dot{\widehat{x}} = F_p(-pF_z - F_x) + F_zpF_p + F_x \cdot F_p = 0$
+		\item Zeige $p(\widehat{x}^{-1}(x)) = \nabla u(x)$ für $u(x) = z(\widehat{x}^{-1}(x))$. \marginnote{$z \equiv u \circ \widehat{x}^{-1}$ \\ $z_s = \nabla u \cdot \widehat{x}_s = p \cdot \widehat{x}_s$ \\ $z_y = \nabla u \widehat{x}_y = p \cdot \widehat{x}_y$} \begin{itemize}
+				\item $\cdot{z}(y,s) = p(y,s) \cdot \dot{\widehat{x}}(y,s)$
+				\item $z_y(y,s) = p^T(y,s) \widehat{x}_y(y,s)$, denn $r(s) := z_y(y,s) - p^T(y,s) \widehat{x}_y (y,s)$ erfüllt
+				\begin{equation}
+				\begin{aligned}
+					\dot{r}(s) &= \underbrace{\dot{z_y}(y,s)}_{p^T_y \dot{\widehat{x}} + p^T \dot{\widehat{x}}_y} - \dot{p}^T(y,s) \widehat{x}_y(y,s) - p^T(y,s) \dot{\widehat{x}}_y(y,s) = p_y^T F_p - (-pF_z - F_x)^T \widehat{x}_y \\ \notag
+					&= \frac{\der}{\der y} \underbrace{F(p(y,s),z(y,s),\widehat{x}(y,s))}_{=0} + \underbrace{p^T F_z \widehat{x}_y - F_z z_y}_{-F_z r}
+				\end{aligned}
+				\end{equation} 
+				mit Anfangswert $r(0) = \underbrace{z_y(y,0)}_{\nabla_y g(x_0(y))} - p^T(y,0) \underbrace{\widehat{x}_y(y,0)}_{\nabla_y x_0(y)} = 0$. $\Rightarrow r \equiv 0$.
+				\item $u_x = z_y y_x + z_s s_x = p^T \widehat{x}_y y_x + p^T \widehat{x}_s s_x = p^T \underbrace{(\widehat{x}_y y_x + \widehat{x}_s s_y)}_{\widehat{x}_x} = p^T, p = \nabla u$. \qed
+			\end{itemize}
+	\end{enumerate}
+
+\subsection{Beispiel}
+\label{bsp_9}
+	Löse das Cauchy-Problem \marginnote{[9]}
+	\[ \begin{cases}
+		u_t + uu_x = 1 & \text{ auf } (0,\infty) \times \RR \\
+		u = x & \text{ auf } \Gamma = \{t = 0\} \end{cases} \]
+	Charakteristische Kurven sind gegeben durch $\frac{\der}{\der s} \begin{pmatrix} (t,x) \\ z \\ 	p \end{pmatrix} = \begin{pmatrix} (1,z) \\ P-1+zp_2 \\ -p_2 p \end{pmatrix}$, also
+	\[ \begin{pmatrix} (t,x) \\ z \\ 	p \end{pmatrix} = \begin{pmatrix} (t(0)+s,x(0) + z(0)s + \frac{p_1(0)+z(0)p_2(0)}{2} s^2 \\ p_1(0)s + z(0)(1+p_2(0)s) \\ \frac{p}{1+p_2(0)s} \end{pmatrix}.\]
+	Parametrisiere $\Gamma$ durch $x_0(y) = (0,y)$. Das liefert Anfangswerte $(t(0),x(0))=x_0(y)=(0,y)$ und $z(0) = y$. Lösen von \eqref{eq_2204_7} liefert $p(0) = \begin{pmatrix} 1-y \\ 1 \end{pmatrix}$. Insgesamt ergibt sich:
+	\[ \Rightarrow \begin{pmatrix} (t,x) \\ z \\ p \end{pmatrix} = \begin{pmatrix} s,y+ys+\frac{s^2}{2} \\ y+s \\ \frac{1}{1+s} \begin{pmatrix} 1-y \\ 1 \end{pmatrix} \end{pmatrix} \Rightarrow (s,y) = \left( t,\frac{x-\frac{t^2}{2}}{1+t}\right) \Rightarrow u(t,x) = z(y,s) = y+s = t + \frac{x-\frac{t^2}{2}}{1+t} \]
+	
+\subsection{Bemerkung}
+\label{bem_10}
+	Für quasilineare PDGL der Form \marginnote{[10]}
+	\[ b(u(x),x) \cdot \nabla u(x) + c(u(x),x) = 0 \]
+	können die charakteristischen Gleichungen \eqref{eq_2204_3}, \eqref{eq_2204_4} und \eqref{eq_2204_5} vereinfacht werden: $b(z(s),x(s)) \cdot p(s) + c(z(s),x(s)) = 0$ impliziert:
+	\begin{align}
+		\dot{x}(s) = b(z(s),x(s))	\label{eq_2504_8} \\
+		\dot{z}(s) = -c(z(s),x(s))	\label{eq_2504_9} \\
+		\dot{p}(s) = -(b_z \cdot p + c_z)\cdot p - b_x p -c_x	\label{eq_2504_10}
+	\end{align}
+	Die ersten beiden Gleichungen legen bereits $x$ und $z$ fest, sodass \eqref{eq_2504_10} ignoriert werden kann.
+\newpage

@@ -1,0 +1,152 @@
+\section{Exkursion: Hölder- und Sobolevräume}
+\label{sec:para8}
+	Um die Existenz und Regularität von elliptischen Gleichungen\marginnote{20. Mai} zu verstehen, müssen wir einige Funktionenräume einführen. \\
+	Für eine stetige Funktion $u \in C^0(\overline{\Omega})$ auf $\Omega \subset \RR^n$ offen und beschränkt und $\gamma \in [0,1]$ definiere:
+	\[ \lbrack u \rbrack_\gamma = \sup_{x,y \in \overline{\Omega}, x \neq y} \frac{|u(x)-u(y)|}{|x-y|^\gamma} \]
+	
+\subsection{Definition: Hölderraum}
+\label{def_51} \label{hoelderraum}
+	Für $u \in C^k(\overline{\Omega})$ definiere die \Index{Höldernorm}: \marginnote{[51]}
+	\[ ||u||_{C^{k,\gamma}(\overline{\Omega})} := \sum_{|\alpha| \leq k} ||D^\alpha u||_{C^0(\overline{\Omega})} + \sum_{|\alpha| = k} \lbrack D^\alpha u \rbrack_\gamma \]
+	Der Funktionenraum
+	\[ C^{k,\gamma}(\overline{\Omega}) := \{ u \in C^k(\overline{\Omega}) : ||u||_{C^{k,\gamma}(\overline{\Omega})} < \infty \} \]
+	heißt \Index{Hölderraum} mit Exponent $\gamma$.
+	
+	
+\subsection{Theorem: Hölderräume sind Banachräume}
+\label{thm_52}
+	Hölderräume mit der Höldernorm sind Banachräume, d.h. jede Cauchyfolge in einem Hölderraum konvergiert. \marginnote{[52]}
+	
+\minisec{Beweis}
+	Übung.
+	
+\mbox{} \\
+Man stelle fest, dass $C^{k,0} = C^k$. Ferner ist $C^{0,1}$ der Raum der lipschitzstetigen Funktionen. \\
+Als nächstes führen wir einen abgeschwächten Begriff der Differenzierbarkeit ein.
+
+\subsection{Definition: Schwache Ableitung}
+\label{def:schwache_abl} \label{def_53}
+	Sei $u, v \in L^1_{loc}(\Omega)$ und $\alpha$ ein Multiindex. $v$ heißt die $\alpha$-te \Index{schwache Ableitung} von $u$, falls \marginnote{[53]}
+	\begin{equation}
+		\int_{\Omega} uD^\alpha \psi dx = (-1) |\alpha| \int_{\Omega} v \psi dx \label{eq_28}
+	\end{equation}
+	für alle Testfunktionen $\psi \in C_c^\infty(\Omega)$ (d.h. für alle unendlich oft differenzierbaren Funktionen mit kompaktem Träger in $\Omega$). Für die schwache Ableitung schreiben wir auch
+	\[ D^\alpha u = v \]
+	
+\subsection{Bemerkung}
+\label{bem_54}
+	Falls $u$ glatt ist, \marginnote{[54]} ist \eqref{eq_28} das exakte Ergebnis, welches man durch $k$-fache partielle Integration erhält, und $v$ ist die gewöhnliche Ableitung von $u$.
+	
+\subsection{Beispiel}
+\label{bsp_55}
+	Sei $\Omega = (0,2)$. \marginnote{[55]}
+	\begin{itemize}
+		\item Sei $u(x) = \begin{cases}
+		x & \text{ falls } 0 < x \leq 1 \\
+		1 & \text{ falls } 1 < x < 2
+		\end{cases}$ und $v(x) = \begin{cases}
+		1 & \text{ falls } 0 < x \leq 1 \\
+		0 & \text{ falls } 1 < x < 2
+		\end{cases}$, dann ist $v = Du$, da für alle $\psi \in C_c^\infty(\Omega)$ gilt:
+		\[ \int_0^2 u\psi' dx = \int_0^1 x \psi' dx + \int_1^2 \psi' dx = -\int_0^1 \psi dx + \psi(1) - \psi(1) = -\int_0^2 v\psi dx \]
+		\item Sei $u(x) = \begin{cases}
+		 x & \text{ falls} 0 < x \leq 1 \\
+		 2 & \text{ falls} 1 < x < 2 \end{cases}$, dann besitzt $u$ keine schwache Ableitung, denn kein $\psi \in C_c^\infty(\Omega)$ erfüllt
+		 \[ - \int_0^2 v \psi dx = \int_0^2 u \psi' dx = \int_0^1 x \psi'dx + 2 \int_1^2 \psi' dx = -\int_0^1 \psi dx - \psi(1) \]
+		 für beliebiges $v \in L_{loc}^1(\Omega)$.
+	\end{itemize}
+	
+\subsection{Definition: Lebesgue-Raum}
+\label{def:lebesgue_raum}
+	Sei $p \in [1,\infty]$. Dann definieren wir die \Index{Lebesgue-Norm} durch
+	\[ ||u||_{L^p(\Omega)} = \begin{cases}
+		\enbrace*{\int_{\Omega} |u|^p dx}^{1/p} & (p < \infty) \\
+		\esssup_\Omega |u| & (p = \infty)
+	\end{cases} \]
+	Der Funktionenraum
+	\[ L^p(\Omega) := \{u \colon \Omega \rightarrow \RR : u \text{ ist messbar mit } ||u||_{L^p(\Omega)} < \infty\} \]
+	heißt \index{Lebesgue-Raum} mit Exponent $p$.
+	
+\subsection{Theorem: Lebesgue-Räume sind Banachräume}
+	Lebesgue-Räume mit der Lebesgue-Norm sind Banachräume.
+	
+\subsection{Definition: Sobolevraum}
+\label{def:sobolevraum} \label{def_56}
+	Der Funktionenraum \marginnote{[56]}
+	\[ W^{k,p}(\Omega) := \{ u \in L_{loc}^1(\Omega) : \text{ für alle } |\alpha| \leq k \text{ existiert  die schwache Ableitung } D^\alpha u \text{ mit } D^\alpha u \in L^p(\Omega) \} \]
+	mit der \Index{Sobolevnorm}
+	\[ ||u||_W^{k,p}(\Omega) = \begin{cases}
+		\enbrace*{ \sum_{|\alpha| \leq k} \int_{\Omega} |D^\alpha u|^p dx}^{1/p} & 1 \leq p < \infty \\
+		\sum_{|\alpha| = k } \esssup_\Omega |D^\alpha u| & p = \infty \end{cases} \]
+	heißt \Index{Sobolevraum}. \\
+	$W_0^{k,p}(\Omega)$ ist der Abschluss von $C_c^\infty(\Omega)$ in $W^{k,p}(\Omega)$. Beachte: $W^{0,p}(\Omega) = L^p(\Omega)$.
+
+\subsection{Theorem: Sobolevräume sind Banachräume}
+\label{thm_57}
+	Sobolevräume mit der Sobolevnorm sind Banachräume. \marginnote{[57]}
+	
+\minisec{Beweis}
+	siehe z.B. Evans, S. 262.
+	
+\subsection{Bemerkung}
+\label{bem_58}
+	Die Räume \marginnote{[58]}
+	\[ H^k(\Omega) = W^{k,2}(\Omega) \]
+	sind Hilberträume. Ihre Norm wird induziert durch das Skalarprodukt
+	\[ (u,v)_{H^k(\Omega)} = \sum_{|\alpha| \leq k} \int_{\Omega} D^\alpha u D^\alpha v dx \] 
+
+\subsection{Theorem: Hölder-Ungleichung}
+\label{hoelder_ungl} \label{thm_59}
+	Sei $p, p^* \in [1,\infty], f \in L^p, g \in L^{p^*}$ und $\frac{1}{p} + \frac{1}{p^*} = 1$. Dann gilt: \marginnote{[59]}
+	\[ \int_{\Omega} |fg|dx \leq ||f||_{L^p(\Omega)} ||g||_{L^{p^*}(\Omega)} \]
+	
+\minisec{Beweis}
+	siehe Alt, \glqq Lineare Funktionalanalysis\grqq, S. 52
+	
+\subsection{Theorem: Spursatz}
+\label{thm:spursatz} \label{thm_60}
+	Sei $\Omega$ beschränkt und mit Lipschitzrand.\marginnote{[60]} Dann existiert ein stetiger linearer Operator $T\colon W^{1,p}(\Omega) \rightarrow L^p(\der \Omega)$, die \Index{Spur}, mit
+	\begin{enumerate}[(i)]
+		\item $Tu = u \big|_{\der \Omega}$, falls $u \in W^{1,p}(\Omega) \cap C^0(\overline{\Omega})$
+		\item $||Tu||_{L^p(\der \Omega)} \leq C||u||_{W^{1,p}(\Omega)}$
+		\item $Tu=0 \quad \Leftrightarrow \quad u \in W_0^{1,p}(\Omega)$
+	\end{enumerate}
+	wobei $C \geq 0$ nur von $p$ und $\Omega$ abhängt. Aus Gründen der Einfachheit meinen wir einfach  $u$ auf $\der \Omega$, wenn wir von der Spur von $u$ sprechen.
+	
+\minisec{Beweis}
+	siehe Evans, S. 272.
+	
+\subsection{Theorem: Poincaré-Ungleichung} 
+\label{thm:poincare_ungl} \label{thm_61}
+	Sei $\Omega \subset \RR^n$ beschränkt, offen, \marginnote{[61]} zusammenhängend und mit Lipschitzrand. Dann existiert eine Konstante $C = C(n,p,\Omega)$ mit 
+	\[ ||u- \frac{1}{|\Omega|} \int_{\Omega} u dx||_{L^p(\Omega)} \leq C \cdot ||\nabla u||_{L^p(\Omega)} \]
+	für alle $u \in W^{1,p}(\Omega)$ und
+	\[ ||u||_{L^p}(\Omega) \leq C \cdot ||\nabla u||_{L^p(\Omega)} \]
+	für alle $u \in W_0^{1,p}(\Omega)$. \index{Poincaré-Ungleichung}
+	
+\minisec{Beweis}
+	siehe Alt, \glqq Lineare Funktionalanalysis\grqq, S. 171.
+	
+\subsection{Theorem: Einbettungssatz von Sobolev}
+\label{thm:sobolev_einbettung} \label{thm_62}
+	Sei $\Omega \subset \RR^n$ offen, beschränkt und mit Lipschitzrand, $m_1,m_2 \in \NN_0$ und $p_1,p_2 \in [1,\infty)$. Falls \marginnote{[62]}
+	\[ m_1 \geq m_2 \text{ und } m_1 - \frac{n}{p_1} \geq m_2 - \frac{n}{p_2}, \]
+	dann ist $W^{m_1,p_1}(\Omega) \subset W^{m_2,p_2}(\Omega)$ und es existiert eine Konstante $C > 0$, sodass für alle $u$ gilt:
+	\[ ||u||_{W^{m_1,p_1}(\Omega)} \leq C \cdot ||u||_{W^{m_2,p_2}(\Omega)} \]
+	Im dem Fall, dass die Ungleichung strikt ist, ist $W^{m_1,p_1}(\Omega)$ kompakte Teilmenge von $W^{m_2,p_2}(\Omega)$.
+	
+\minisec{Beweis}
+	siehe Alt, \glqq Lineare Funktionalanalysis\grqq, S. 328.
+	
+\subsection{Theorem: Einbettungssatz von Hölder}
+\label{thm:hoelder_einbettung} \label{thm_63}
+	Sei $\Omega \subset \RR^n$ offen, beschränkt und mit Lipschitzrand, $m, k \in \NN_0, p \in [1,\infty)$ und $\alpha \in [0,1]$. Falls \marginnote{[63]}
+	\[ m - \frac{n}{p} \geq k + \alpha \text{ und } \alpha \neq 0,1 \]
+	dann ist $W^{m,p}(\Omega) \subset C^{k,\alpha}(\overline{\Omega})$, und es existiert eine Konstante $C > 0$, sodass für alle $u$ gilt:
+	\[ ||u||_{W^{m,p}(\Omega)} \leq C \cdot ||u||_{C^{k,\alpha}(\overline{\Omega})} \]
+	Falls $m - \frac{n}{p} < k + \alpha$, so ist $W^{m,p}(\Omega)$ kompakte Teilmenge von $C^{k,\alpha}(\overline{\Omega})$.
+	
+\minisec{Beweis}
+	siehe Alt, \glqq Lineare Funktionalanalysis\grqq, S. 333.
+
+\newpage

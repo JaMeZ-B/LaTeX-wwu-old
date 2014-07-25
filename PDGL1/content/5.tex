@@ -1,0 +1,53 @@
+% % % % % % % % % % % 29. Mai
+\section{Einschub: Satz von Gauß}
+\label{sec:para5}
+Wir möchten letztendlich auch nicht-glatte Funktionen $u$ als (verallgemeinerte) \marginnote{29. Apr} Lösungen zulassen. Hierzu nutzen wir Integration, um unerwünschte Ableitungen zu eliminieren. Die Grundidee im Eindimensionalen ist folgende: Gegeben sei:
+\[ u'(x) = f(x,u(x)) \text{ auf } \Omega = (a,b) \]
+Multipliziere beide Seiten mit einer glatten Funktion $\psi$ und integriere partiell:
+\[ u(b)\psi(b) - u(a)\psi(a) - \int\limits_{a}^{b} \psi'u dx = \int\limits_{a}^{b} f(x,u(x)) dx \]
+Diese Gleichung macht auch für nicht differenzierbares $u$ Sinn. Im $\RR^n$ benötigen wir den folgenden Satz:
+
+\subsection{Theorem: Satz von Gauß}
+\label{thm_13} \label{gauss}
+	Sei $\Omega \subseteq \RR^n$ offen mit stückweise stetig differenzierbarem Rand. Ist $u$ stetig differenzierbar, gilt \marginnote{[13]}
+	\[ \int_{\Omega} u_{x_i}(x) dx = \int_{\der \Omega} u(x) \nu_i(x) dx \]
+	für die nach außen zeigende Einheitsnormale $\nu$ auf $\der\Omega$.
+	
+\minisec{Beweis}
+	\begin{enumerate}
+		\item Lokalisierung: Überdecke $\der \Omega$ durch offene Mengen $U_1,\dots,U_l$, sodass $\der \Omega \cap U_j$ der Graph einer stückweise stetig differenzierbaren Funktion ist und $\Omega \cap U_j$ auf einer Seite des Graphen liegt. Füge $U_0$ mit $\overline{U_0} \subseteq \Omega$ hinzu, sodass $U_0, \dots, U_l$ ganz $\Omega$ überdecken. Wähle hierzu eine Partition der Eins, d.h. unendlich oft differenzierbare Funktionen $\eta_0,\dots,\eta_l$ mit Träger in $U_0, \dots, U_l$ und $\sum_{j=0}^{l} \eta_j = 1$. Es bleibt zu zeigen, dass $\sum_{j=0}^l \int_{\Omega} (\eta_j u)_{x_i} dx = \sum_{j=0}^l \int_{\der \Omega} \eta_j u \nu_i dx$ bzw.
+		\[ \int_{\Omega} \nabla(\eta_j u) dx = \int_{\der \Omega} \eta_j u\nu dx \]
+		\item Koordinatentransformation: Nach einer orthogonalen Koordinatentransformation dürfen wir annehmen:
+		\[ U_j \cap \Omega = \{ x \in \Omega : x_n > g(\tilde{x}) \} \]
+		für $\tilde{x} = (x_1,\dots,x_{n-1})$ und eine stückweise glatte Funktion $g \colon \RR^{n-1} \rightarrow \RR$. Die Normale an $\der \Omega \cap U_j$ ist dann gegeben durch
+		\[ \nu(\tilde{x},g(\tilde{x})) = \frac{1}{\sqrt{1+|\nabla g(\tilde{x})|^2}} \cdot \begin{pmatrix} \nabla g(\tilde{x}) \\ -1 \end{pmatrix}. \]
+		\item Partielle Integration: Mit $v(\tilde{x},h) := (\eta_j u)(\tilde{x},g(\tilde{x})+h)$ ist
+		\begin{align}
+			&\der_n v(\tilde{x},h) = \der_n (\eta_j u)(\tilde{x},g(\tilde{x}) + h), \notag \\
+			&\der_i v(\tilde{x},h) = \der_i (\eta_j u)(\tilde{x},g(\tilde{x}) + h) + \der_i g(\tilde{x}) \der_n(\eta_j u)(\tilde{x},g(\tilde{x}) + h) \notag
+		\end{align}
+		und somit
+		\begin{equation}
+		\begin{aligned}
+			\int_\Omega \nabla (\eta_j u)(x) dx &= \int_{\RR^{n-1}} \int_{0}^{\infty} \nabla(\eta_j u)(\tilde{x},g(\tilde{x}) + h) dh d\tilde{x} \\ \notag
+			&= \int_{\RR^{n-1}} \int_{0}^{\infty} \left(\nabla v - \der_n v \begin{pmatrix} \nabla g \\ 0 \end{pmatrix} \right) (\tilde{x},h) dh d\tilde{x} \\
+			&= \sum\limits_{i=1}^{n-1} \left( \int_{0}^{\infty} \int_{\RR^{n-1}} \der_i v(\tilde{x},h) d\tilde{x}, dh \right) e_i - \int_{\RR^{n-1}} \left( \int_{0}^{\infty} \der_n v(\tilde{x},h) dh \right)
+		\end{aligned}
+		\end{equation}
+		Durch partielle Integration bzgl. $x_i$ für $i < n$ ergibt sich aufgrund des kompakten Trägers von $v$:
+		\[ \int_{\RR^{n-1}} \der_i v d\tilde{x} = 0 \]
+		und durch partielle Integration bzgl. $h$:
+		\[ \int_{0}^{\infty} \der_n v(\tilde{x},h) dh = -v(\tilde{x},0) = -(\eta_j u)(\tilde{x},g(\tilde{x})) \] \qed
+	\end{enumerate}
+	
+\subsection{Bemerkung: Varianten des Satzes}
+\label{bem_14}
+	Der Satz hat verschiedene Varianten: \marginnote{[14]}
+	\begin{itemize}
+		\item $\int_\Omega \nabla u(x) dx = \int_{\der \Omega} u(x) \nu(x) dx$
+		\item $\int \diver b(x) dx = \int_{\der \Omega} b(x) \cdot \nu(x) dx$ für stetig differenzierbares $b\colon \Omega \rightarrow \RR^n$
+		\item $\int_\Omega uv_{x_i} + vu_{x_i} dx = \int_{\der \Omega} uv \nu_i dx$ für $u,v$ stetig differenzierbar
+		\item $\int_\Omega u \nabla v dx = \int_{\der \Omega} u v \nu dx - \int_\Omega v \nabla u dx \dots$
+		\item Der Satz gilt auch für Lipschitz-Rand $\der \Omega$ und schwach differenzierbare Funktionen.
+	\end{itemize}
+\newpage
