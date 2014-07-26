@@ -12,22 +12,22 @@
 	\[ Lu(x) = -\diver (A(x) \nabla u(x)) + b(x) \cdot \nabla u(x) + c(x) u(x) \]
 	für $A \in \Omega \rightarrow \RR_{\text{symm}}^{n\times n}, b\colon \Omega \rightarrow \RR$.
 	
-\subsection{Definition: Elliptizität}
-\label{def_64} 
+\begin{defn}[Elliptizität] \label{def_64} 
 	Der Operator $L$ heißt (gleichmäßig) \Index{elliptisch}, falls eine Konstante $\theta > 0$ existiert, sodass \marginnote{[64]}
 	\[ \xi^T A(x) \xi \geq \lambda |\xi|^2 \]
 	für fast alle $x \in \Omega$ und alle $\xi \in \RR^n$.
+\end{defn}
 	
 \mbox{} \\
 Um eine schwache Lösung zu definieren, multiplizieren wir die PDGL wieder mit einer glatten Funktion und integrieren partiell, was zu folgender Definition führt:
 
-\subsection{Definition: Schwache Lösung}
-\label{def_65}
+\begin{defn}[Schwache Lösung] \label{def_65}
 	$u \in g+ H_0^1(\Omega)$ heißt eine \Index{schwache Lösung} der Gleichung \eqref{eq_29}, falls \marginnote{[65]}
 	\begin{equation}
 		B(u,v) := \int_{\Omega} \nabla v(x)^T A(x) \nabla u(x) + b(x) \cdot \nabla u(x) v(x) + c(x) u(x) v(x) dx = \int_\Omega f(x) v(x) dx \label{eq_30}
 	\end{equation}
 	für alle $v \in H_0^1(\Omega)$.
+\end{defn}
 	
 \mbox{} \\
 Im Folgenden nehmen wir an, es existieren Konstanten $\lambda, \Lambda, \nu \geq 0$, sodass für alle $x \in \Omega$ und $\xi,\zeta \in \RR^n$ gilt:
@@ -39,19 +39,19 @@ Im Folgenden nehmen wir an, es existieren Konstanten $\lambda, \Lambda, \nu \geq
 \end{itemize}
 Als nächstes beweisen wir wie zuvor mithilfe des Maximumprinzips (Theorem \ref{thm_40}) die Existenz und Eindeutigkeit schwacher Lösungen. Im Folgenden benutzen wir die Abkürzungen $u^+ := \max{u,0}$ und $u^- := \min{u,0}$.
 
-\subsection{Theorem: Schwaches Maximumprinzip}
-\label{thm_66}
+\begin{defn}[Schwaches Maximumprinzip] \label{thm_66}
 	Sei $u \in H^1(\Omega)$ eine schwache Lösung von $Lu = 0$, dann gilt: \marginnote{[66]}
 	\[ \sup_\Omega u \leq \sup_{\der \Omega} u^+, \qquad \inf_{\Omega} u \leq \inf_{\der \Omega} u^- \]
+\end{defn}
 	
 \minisec{Beweis}
 	Für alle $v \geq 0$ mit $uv \geq 0$ ist $\int_{\Omega} \nabla v^T A \nabla u + b \cdot \nabla uv dx = -\int_{\Omega} cuvdx \leq 0$. Falls $b = 0$, folgt mit $v = (u - \sup_{\der \Omega} u^+)^+$
 	\[ \lambda \int_{\Omega} |\nabla v|^2 dx \leq 0 \]
 	und damit das erste Ergebnis (das zweite folgt analog). Im Fall $b \neq 0$ ist der Beweis anders zu führen (siehe Übung). \qed
 	
-\subsection{Theorem: Eindeutigkeit der schwachen Lösung}
-\label{thm_67}
+\begin{defn}[Eindeutigkeit der schwachen Lösung] \label{thm_67}
 	Falls eine schwache Lösung von \eqref{eq_29} existiert, ist sie eindeutig. \marginnote{[67]}
+\end{defn}
 	
 \minisec{Beweis}
 	Seien $u_1,u_2$ zwei Lösungen, dann ist $w = u_1 -u_2$ schwache Lösung der Gleichung $Lw = 0$ in $\Omega$, $w= 0$ auf $\der \Omega$, und damit folgt $w \equiv 0$. \qed
@@ -59,25 +59,25 @@ Als nächstes beweisen wir wie zuvor mithilfe des Maximumprinzips (Theorem \ref{
 \mbox{} \\
 Die Existenz einer schwachen Lösung basiert auf folgenden beiden abstrakten Hilfsmitteln:
 
-\subsection{Theorem: Rieszscher Darstellungssatz}
-\label{thm_68} \label{riesz}
+\begin{defn}[Rieszscher Darstellungssatz] \label{thm_68} \label{riesz}
 	Sei $f\colon H \rightarrow \RR$ \marginnote{[68]} ein beschränktes lineares Funktional auf einem Hilbertraum $H$, dann existiert ein $u \in H$ mit $||u||_H = ||f||$, sodass $f(v) = (u,v)_H$ für alle $v \in H$.
+\end{defn}
 	
-\subsection{Bemerkung}
-\label{bem_69}
+\begin{bem} \label{bem_69}
 	Ein beschränktes lineares Funktional bzw. ein beschränkter linearer Operator ist eine lineare Abbildung \marginnote{[69]} $T\colon V \rightarrow W$, wobei $V,W$ normierte Vektorräume sind, sodass $||Tu||_W \leq C ||u||_V$ für eine Konstante $C$ und alle $u \in V$. Dies ist gleichbedeutend damit, dass $T$ stetig ist:
 	\begin{description}
 		\item[\glqq$\Rightarrow$\grqq:] Sei $u_k \rightarrow u$ in $V$, dann ist $||Tu_k - Tu||_W = ||T(u_k - u)||_W \leq C ||u_k - u||_V \rightarrow 0$.
 		\item[\glqq$\Leftarrow$\grqq:] Angenommen, es existiert ein $u_k \in V$ mit $||u_k||_V = 1$, aber $||Tu_k||_W \rightarrow \infty$. Dann ist $v_k := \frac{u_k}{||Tu_k||_W} \rightarrow 0$ in $V$ mit $||Tv_k||_W = 1$, was ein Widerspruch zur Stetigkeit von $T$ ist.
 	\end{description}
+\end{bem}
 	
 \minisec{Beweis von Theorem \ref{thm_68}}
 	Sei $u \in H$ derart, dass $f(u) = 1$ und sei $\hat{u} \in \ker(f)$ die orthogonale Projektion auf $\ker(f)$. Definiere $v = u - \hat{u}$. Wir zeigen: $f = \enbrace*{\frac{v}{||v||^2_H},\cdot}_H$. Tatsächlich gilt für $w \in H$, $w = w-f(w)v + f(w)v$:
 	\[ \enbrace*{\frac{v}{||v||_H^2},w}_H \xLongrightarrow[v \perp \ker(f)]{w - f(w)v \in \ker(f)} \enbrace*{\frac{v}{||v||_H^2},f(w)v}_H = f(w) \] \qed
 	
-\subsection{Theorem: Satz von Lax-Milgram}
-\label{thm_70}
+\begin{thm}[Satz von Lax-Milgram] \label{thm_70}
 	Sei $H$ ein Hilbertraum und $B\colon H \times H \rightarrow \RR$ \marginnote{[70]} eine beschränkte, koerzitive Bilinearform (d.h. $|B(u,v)| \leq \alpha ||u||_H ||v||_H$ und $B(u,u) \geq \beta ||u||^2_H$ für zwei Konstanten $\alpha,\beta > 0$ und alle $u,v \in H$). Dann existiert ein beschränkter linearer Operator $A \colon H \rightarrow H$ mit einer beschränkten Inverse, sodass $B(u,v) = (Au,v)_H$ für alle $u,v \in H$.
+\end{thm}
 	
 \minisec{Beweis}
 	\begin{enumerate}[1.]
@@ -90,9 +90,9 @@ Die Existenz einer schwachen Lösung basiert auf folgenden beiden abstrakten Hil
 		\item Es ist $\im(A) = H$: Sei $0 \neq u \in \im(A)^\perp$, dann ist $0 = (Au,u)_H = B(u,u) \geq \beta ||u||_H^2 > 0$. Widerspruch. Also existiert $A^{-1}$. \qed
 	\end{enumerate}
 	
-\subsection{Theorem: Existenz einer schwachen Lösung}
-\label{thm_71}
+\begin{thm}[Existenz einer schwachen Lösung] \label{thm_71}
 	Sei $\Omega$ beschränkt mit Lipschitzrand und $f \in L^2(\Omega$ sowie $A,b,c$ beschränkt. \marginnote{[71]} Dann existiert eine schwache Lösung $u \in H^1(\Omega)$ von $\eqref{eq_29}$.
+\end{thm}
 
 \minisec{Beweis}
 	Mit $\tilde{u} = u-g$ müssen wir ein $\tilde{u} \in H_0^1(\Omega)$ finden mit $B(\tilde{u},v) = F(v) := \int_{\Omega} (f-b\cdot \nabla g - cg)v - \nabla v^T A \nabla g dx$ für alle $v \in H_0^1(\Omega)$.
@@ -105,11 +105,11 @@ Die Existenz einer schwachen Lösung basiert auf folgenden beiden abstrakten Hil
 \mbox{} \\
 Nachdem wir Existenz und Eindeutigkeit einer schwachen Lösung bewiesen haben, können wir nun ihre Regularität untersuchen.
 
-\subsection{Theorem: Innere Regularität}
-\label{thm_72}
+\begin{thm}[Innere Regularität] \label{thm_72}
 	Sei $\Omega$ beschränkt mit Lipschitzrand,\marginnote{[72]} $f \in L^2(\Omega), A \in C^{0,1}(\bar{\Omega},\RR^{n \times n}), b \in L^\infty(\Omega,\RR^n), c \in L^\infty(\Omega)$. Sei $u \in H^1(\Omega)$ die schwache Lösung von $\eqref{eq_29}$. Für jedes $\Omega' \subset \subset \Omega$ (d.h. $\overline{\Omega'} \subset \Omega$) existiert eine Konstante $C \geq 0$, sodass
 	\[ ||u||_{H^2(\Omega')} \leq C(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)}) \]
 	und damit $u \in H^2(\Omega')$.
+\end{thm}
 
 \minisec{Beweis}
 	\begin{enumerate}[1.]
@@ -147,14 +147,13 @@ Nachdem wir Existenz und Eindeutigkeit einer schwachen Lösung bewiesen haben, k
 		woraus $||D^2u||_{L^2(\Omega')} \leq \text{const}(||u||_{H^1(\Omega)} + ||f||_{L^2(\Omega)})$ folgt. \qed
 	\end{enumerate}
 	
-\subsection{Bemerkung}
-\label{bem_73}
+\begin{bem} \label{bem_73}
 	Benutzen wir im Beweis zu Theorem \ref{thm_72} Finite-Differenzen-Approximationen höherer Ableitungen, erhalten wir \marginnote{[73]}
 	\[ A \in C^{k,1}(\bar{\Omega}),b,c \in C^{k-1,1}(\bar{\Omega}),f \in H^k(\Omega) \quad \Rightarrow \quad u \in H^{k+2}(\Omega'). \]
 	Damit folgt für unendlich oft differenzierbare $A,b,c,f$, dass auch $u$ unendlich oft differenzierbar ist.
+\end{bem}
 	
-\subsection{Bemerkung}
-\label{bem_74}
+\begin{bem} \label{bem_74}
 	Falls die Randdaten glatt sind, kann man sogar die Glattheit von $u$ auf ganz $\Omega$ zeigen: \marginnote{[74]}
 	\begin{equation}
 	\begin{aligned}
@@ -163,4 +162,5 @@ Nachdem wir Existenz und Eindeutigkeit einer schwachen Lösung bewiesen haben, k
 	\end{aligned}
 	\end{equation}
 	(siehe z.B. Gilbarg \& Trudinger, \glqq Elliptic PDEs of 2nd Order\grqq, S. 187.)
+\end{bem}
 \newpage

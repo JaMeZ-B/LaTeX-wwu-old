@@ -2,7 +2,7 @@
 \section{Parabolische PDGL}
 \label{sec:para11}
 	
-\subsection{Definition: Wärmeleitungsgleichung}
+\begin{defn}[Wärmeleitungsgleichung]
 	Die \Index{Wärmeleitungsgleichung} \marginnote{17. Jun}
 	\begin{equation}
 		u_t - \Delta u = 0 \label{eq_32}
@@ -20,6 +20,7 @@
 	Wärmeänderung = Nettofluss $\Rightarrow$
 	\[ 0 = \frac{d}{dt} \int_V \kappa u dx + \int_{\der V} F \cdot \nu dx = \int_V \kappa u_t + \diver F dx = \int_V \kappa u_t - a \Delta u dx \]
 	und \eqref{eq_32} folgt für $\kappa = a$, da $V$ beliebig ist.
+\end{defn}
 	
 	\mbox{} \\
 	Parabolische Gleichungen sind eng mit elliptischen verwandt, daher folgen wir etwa den elliptischen Methoden. Diesmal beginnen wir jedoch mit der Fundamentallösung, da Mittelwertformeln und Maximumsprinzipien dann einfacher folgen.
@@ -33,17 +34,17 @@
 	\[ 0 = [y^{n-1} v' + \frac{1}{2} y^n v]' = [vy^{n-1} (\log v + \frac{y^2}{4})']' \]
 	d.h. eine Lösung ist $v = c \exp \enbrace*{-\frac{y^2}{4}}$.
 	
-\subsection{Definition: Fundamentallösung}
-\label{def_83}
+\begin{defn}[Fundamentallösung] \label{def_83}
 	Die Funktion \marginnote{[83]}
 	\[ \Phi(t,x) = \begin{cases}
 		\frac{1}{(4\pi t)^{n/2}} \exp \enbrace*{ - \frac{|x|^2}{4t}} & (t > 0) \\
 		0 & (t < 0) \end{cases} \]
 	löst \eqref{eq_32} auf $(\RR \setminus \setnull) \times \RR^n$ und heißt \Index{Fundamentallösung} der Wärmeleitungsgleichung.
+\end{defn}
 	
-\subsection{Bemerkung}
-\label{bem_84}
+\begin{bem} \label{bem_84}
 	Zur Zeit $t > 0$ \marginnote{[84]} ist die Fundamentallösung offfensichtlich eine $n$-dimensionale Normalverteilung/Gaußsche Glockenkurve mit Mittelwert 0 und Standardabweichung $\sqrt{2t}$.
+\end{bem}
 	
 \minisec{Beweis}
 	\begin{description}
@@ -61,13 +62,13 @@ Definiere: \begin{itemize}
 	\[ E(t,x,r) = \penbrace*{(s,y) \in \RR^{n+1} : s \leq t, \Phi(t-s,x-y) \geq \frac{1}{r^n}} \]
 \end{itemize}
 
-\subsection{Theorem: Mittelwertformel}
-\label{thm_85}
+\begin{thm}[Mittelwertformel] \label{thm_85}
 	Sei $u \in C^1((0,T]),C^2(\Omega,\RR)$ eine Lösung von \eqref{eq_32} in $\Omega_T$, dann gilt \marginnote{[85]}
 	\begin{equation}
 		u(t,x) = \frac{1}{4r^n} \int_{E(t,x,r)} u(s,y) \frac{|x-y|^2}{(t-s)^2} dyds =: U(r) \label{eq_33}
 	\end{equation}
 	für jedes $E(x,r,t) \subset \Omega_T$. (Beachte: Formel integriert nur über Vergangenheit!)
+\end{thm}
 	
 \minisec{Beweis}
 	O.B.d.A sei $t=0, x=0$. $U(r) = \frac{1}{4} \int_{E(0,0,r)} u(r^2 \tilde{s},r \tilde{y}) \frac{|0- \tilde{y|^2}}{(0-\tilde{s})^2} d\tilde{y} d\tilde{s}$. \\
@@ -87,26 +88,26 @@ Definiere: \begin{itemize}
 	\end{equation}
 	$\Rightarrow U'(r) = 0 \Rightarrow U(r) = \lim\limits_{\rho \rightarrow 0} U(\rho) = u(0,0) \lim\limits_{\rho \rightarrow 0} \underbrace{\frac{1}{4\rho^n} \int_{E(0,0,\rho)} \frac{|y|^2}{s^2} dyds}_{=\frac{1}{4} \int_{E(0,0,1)} \frac{|y|^2}{s^2} dyds = 1}$ \qed
 
-\subsection{Theorem: Starkes Maximumprinzip}
-\label{thm_86}
+\begin{thm}[Starkes Maximumprinzip] \label{thm_86}
 	$u \in C^1((0,T];C^2(\Omega,\RR)) \cap C(\Omega)$ sei eine Lösung von \eqref{eq_32} in $\Omega_T$, dann gilt: \marginnote{[86]}
 	\[ \max_{\overline{\Omega_T}} = \max_{\Gamma_T} u \]
 	Ist $u(t,x) = \max_{\overline{\Omega_T}} u$ für $(t,x) \in \Omega_T$, so ist $u$ konstant auf $\Omega_t$, falls $\Omega$ zusammenhängend ist. \\
 	(Analog für Minima durch Ersetzen von $u$ mit $-u$.)
+\end{thm}
 
 \minisec{Beweis} 
 	Sei $M = u(x,t)$ \marginnote{20. Jun} ein Maximum. Nach Theorem \ref{thm_85} ist $M = \frac{1}{4r^n} \int_{E(t,x,r)} u(s,y) \frac{|x-y|^2}{|t-s|^2} dyds \leq M$, da \linebreak $\int_{E(t,x,r)} \frac{|x-y|^2}{(t-s)^2} dyds = 1$. Gleichheit gilt genau dann, wenn $u \equiv M$ auf $E(t,x,r)$. Um jeden Punkt $(s,y)$ von $E(t,x,r)$ kann wieder ein Wärmeball gezeichnet werden, auf dem $u \equiv M$ ist. So kann $\Omega_t$ mit Wärmebällen überdeckt werden, auf denen $u$ jeweils gleich $M$ ist. \qed
 
-\subsection{Bemerkung: Unendliche Ausbreitungsgeschwindigkeit}
-\label{bem_87}
+\begin{bem}[Unendliche Ausbreitungsgeschwindigkeit] \label{bem_87}
 	Sei $u \in C^1((0,T];C^2(\Omega,\RR)) \cap C(\Omega_T)$ eine Lösung des Anfangs-Randwertproblems \marginnote{[87]}
 	\[ \begin{cases}
 		u_t - \Delta u = 0 & \text{ auf } \Omega_T \\
 		u = 0 & \text{ auf } [0,T] \times \der \Omega \\
 		u = g \text{ auf } \setnull \times \Omega \end{cases} \]
 	für $g \geq 0$. Aus dem Maximumsprinzip folgt, dass $u > 0$ auf $\Omega_T$, falls ein $x \in \Omega$ existiert mit $g(x) > 0$, d.h. die Anfagswert-Information ist unendlich schnell überall hingeflossen.
+\end{bem}
 	
-\subsection{Definition: Inhomogene Wärmeleitung}
+\begin{defn}[Inhomogene Wärmeleitung]
 	Die inhomogene Wärmeleitungsgleichung
 	\begin{equation}
 		u_t(t,x) - \Delta u(t,x) = f(t,x) \label{eq_34}
@@ -123,22 +124,23 @@ Definiere: \begin{itemize}
 	\begin{equation}
 		\der u / \der v = h \text{ auf } \der \Omega \label{eq_37}
 	\end{equation}
+\end{defn}
 
-\subsection{Theorem: Eindeutigkeit}
-\label{thm_88}
+\begin{thm}[Eindeutigkeit] \label{thm_88}
 	Sei $g \in C(\Omega), h \in C([0,T] \times \der \Omega)$, \marginnote{[88]} dann ist eine Lösung $u \in C^1((0,T];C^2(\Omega,\RR)) \cap C(\Omega_T)$ von \eqref{eq_34}, \eqref{eq_35} und \eqref{eq_36} eindeutig.
+\end{thm}
 
 \minisec{Beweis}
 	Das folgt aus dem starken Maximumsprinzip für $u - \tilde{u}$, wenn $u,\tilde{u}$ zwei Lösungen sind. \qed
 	
-\subsection{Theorem: Fundamentallösung}
-\label{thm_89}
+\begin{thm}[Fundamentallösung] \label{thm_89}
 	Es gilt \marginnote{[89]}
 	\[ \begin{cases}
 		\mathcal{L}[\Phi] := \Phi_t - \Delta \Phi = 0 & \text{ auf } (0,\infty) \times \RR^n \\
 		\Phi(0,x) = \delta(x) \end{cases} \]
 	in dem Sinn, dass für jedes $f \in C_c^1(\RR^n)$ gilt:
 	\[ \lim_{t\rightarrow 0} \int_{\RR^n} \Phi(t,x) f(x) dx = f(0) \]
+\end{thm}
 		
 \minisec{Beweis}
 	Nebenrechnung:
@@ -154,12 +156,12 @@ Definiere: \begin{itemize}
 	Der erste Summand ist betragsäßig kleiner als $A_t^n \max_\RR^n |f| \xlongrightarrow[t \rightarrow 0]{} 0$. Der zweite Summen liegt zwischen zwischen dem Minimum und dem Maximum von $f(1-A_t)$ auf $[-\sqrt[4]{t},\sqrt[4]{t}]$; beides strebt gegen $f(0)$ für $t \rightarrow 0$. \qed
 
 % % % % 24. Juni
-\subsection{Bemerkung}
-\label{bem_90}
+\begin{bem} \label{bem_90}
 	Alternativ (und vielleicht näher zu unserer Vorgehensweise für elliptische Gleichungen) kann $\Phi$ \marginnote{24. Jun \\ \ [90]} aufgefasst werden als Lösung zu
 	\[ \begin{cases}
 		\Phi_t - \Delta \Phi = \delta & \text{ auf } \RR \times \RR^n \\
 		\Phi(0,x) = 0 \end{cases} \]
+\end{bem}
 
 \mbox{} \\
 Im selben Sinn wie zuvor, betrachte nun für festes $(s,y)$ die Lösung des zu \eqref{eq_34}-\eqref{eq_36} \textit{adjungierten Problems} (eine Diffusion rückwärts in der Zeit)
@@ -182,9 +184,9 @@ und somit
 \[ u(s,y) = \int_{\Omega_s} G^{(s,y)} f dx dt + \int_{\setnull \times \Omega} G^{(s,y)} gdx - \int_{[0,s]\times \der \Omega} \der_v G^{(s,y)} dx dt,\]
 eine \textit{Greensche Darstellung} der Lösung.
 
-\subsection{Beispiel: Greensche Funktion für Halbraum}
-\label{bsp_91}
+\begin{bsp}[Greensche Funktion für Halbraum] \label{bsp_91}
 	$G(s,y)$ für $\Omega = \{x \in \RR^n : x_n > 0\}$ kann wieder mit der Spiegelungsmethode (vgl. \ref{bsp_49}) gefunden werden:
 	\[ G^{(s,y)}(t,x) = \Phi(s-t,x-y) - \Phi(s-t,x+y) \]
 	erfüllt \eqref{eq_38}.
+\end{bsp}
 \newpage

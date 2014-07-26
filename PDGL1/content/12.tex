@@ -7,11 +7,12 @@ Erinnerung: \begin{itemize}
 	\item Dualraum $X^*$ zu Banachraum $X$: $X^* = \{f \colon X \rightarrow \RR : f \text{ ist linear}, ||f||_{X^1} := \sup\limits_{\substack{x \in X \\ ||x||_X \leq 1}} f(x) < \infty\}$
 	\end{itemize}
 	
-\subsection{Definition}
+\begin{defn}
 	$H^{-1}(\Omega)$ bezeichne den Dualraum zu $H_0^1(\Omega)$. Für $f \in H^{-1}(\Omega)$ schreiben wir auch $\langle f,v \rangle$ statt $f(v)$.
 	\[ ||f||_{H^{-1}(\Omega)} = \sup\limits_{\substack{u \in H_0^1(\Omega) \\ ||u||_{H_0^1(\Omega)} \leq 1}} \langle f,u \rangle \]
+\end{defn}
 	
-\subsection{Theorem}
+\begin{thm}
 	\begin{enumerate}[(i)]
 		\item Sei $f \in H^{-1}(\Omega)$, dann gibt es Funktionen $f^0,f^1,\dots,f^n \in L^2(\Omega)$ mit
 		\begin{equation}
@@ -20,6 +21,7 @@ Erinnerung: \begin{itemize}
 		\item $||f||_{H^{-1}(\Omega)} = \inf\limits_{f \text{ erf. \eqref{eq_stern}}} \sqrt{\int_{\Omega} \sum\limits_{i=0}^{n} |f^i|^2}$
 		\item $(u,v)_{L^2(\Omega)} = \int_{\Omega} uvdx = \langle u,v \rangle$ für alle $v \in H_0^1(\Omega), u \in H^{-1}(\Omega) \cap L^2(\Omega)$.
 	\end{enumerate}
+\end{thm}
 	
 \minisec{Beweis}
 	\begin{enumerate}[(i)]
@@ -39,7 +41,7 @@ Erinnerung: \begin{itemize}
 	\item folgt aus (i). \qed
 	\end{enumerate}
 	
-\subsection{Definition}
+\begin{defn}[$L^p$-Raum]
 \begin{itemize}
 	\item Für einen Banachraum $X$ sei
 	\[L^p((0,T);X) := \{ u \colon (0,T) \rightarrow X : u \text{ ist stark messbar und } ||u||_{L^p((0,T);X)} < \infty\} \]
@@ -47,18 +49,21 @@ Erinnerung: \begin{itemize}
 	(Dabei heißt $u$ stark messbar, falls eine fast überall gegen $u$ konvergente Folge von Treppenfunktionen existiert.)
 	\item $C([0,T];X) := \penbrace*{ u\colon [0,T] \rightarrow X : u \text{ stetig}, ||u||_{C([0,T];X)} := \max\limits_{t \in [0,T]} ||u(t)|| < \infty}$
 \end{itemize}
+\end{defn}
 
-\subsection{Definition: schwache Ableitung}
+\begin{defn}[schwache Ableitung]
 	Sei $u \in L^1((0,T);X)$. $v \in L^1((0,T);X)$ heißt \Index{schwache Ableitung} von $u$ und wir schreiben $u' = v$, wenn
 	\[ \int_{0}^{T} \phi'(t) u(t) dt = -\int_{0}^{T} \phi(t) v(t) dt \]
 	für alle $\phi \in C_c^\infty ((0,T);\RR)$.
+\end{defn}
 	
-\subsection{Bemerkung}
+\begin{bem}
 	$u \in L^2((0,T);H_0^1(\Omega))$ und $u' \in L^2((0,T);H^{-1}(\Omega))$ impliziert: \begin{itemize}
 		\item $u \in C([0,T];L^2(\Omega))$
 		\item $||u(t)||_{L^2(\Omega)}^2 = ||u(0)||_{L^2(\Omega)}^2 + \int_0^t 2 \langle u'(t),u(t) \rangle dt$ \\
 		(bzw. $\frac{d}{dt} ||u(t)||_{L^2}^2 = \frac{d}{dt} \int_{\Omega} |u(t)|^2 dx = \int_{\Omega} 2u'(t)u(t) dx$)
 	\end{itemize}
+\end{bem}
 	
 \mbox{} \\
 Betrachte nun
@@ -77,7 +82,7 @@ Idee für schwache Lösung: \begin{itemize}
 \end{itemize}
 $u \in L^2((O,T);H_0^1(\Omega))$ mit $u' \in L^2((0,T);H^{-1}(\Omega))$ heißt \Index{schwache Lösung} von \eqref{eq_A}, wenn $\langle u',v \rangle + B_t[u,v] = (f,v)_{L^2}$ für jedes $v \in H_0^1(\Omega)$ und für alle $t \in [0,T]$ sowie $u(0) = g$. (macht Sinn, da $u \in C([0,T];L^2(\Omega))$)
 
-\subsection{Definition: Garlerkin-Approximation}
+\begin{defn}[Garlerkin-Approximation]
 Sei $\Omega$ Lipschitz. $L^2(\Omega)$ und $H_0^1(\Omega)$ sind Hilberträume. Man kann zeigen (Evans, Kapitel 6.5.1), dass glatte Funktionen $w_k \in H_0^1$ für $k \geq 1$ existieren, sodass gilt:
 \begin{enumerate}[(i)]
 	\item $(w_k)_k$ ist eine Orthogonalbasis von $H_0^1(\Omega)$.
@@ -92,9 +97,11 @@ mit Koeffizienten $d_k^m \colon [0,T] \rightarrow \RR$, sodass
 	\underbrace{(u_m(0),w_k)_{L^2}}_{d_m^k (0)} = (g,w_k) & \forall k
 	\end{cases} \right\} \label{eq_B}
 \end{equation}
+\end{defn}
 
-\subsection{Theorem: Existenz der Galerkin-Approximation}
+\begin{thm}[Existenz der Galerkin-Approximation]
 	Für jedes $m \in \NN$ existiert eine eindeutige Lösung $u_m = \sum_{k=1}^{m} d_k^m w_k$ von \eqref{eq_B}
+\end{thm}
 	
 \minisec{Beweis}
 	Sei $B_t[w_l,w_k] = e_{kl}(t), D_m(t) = (d_m^1(t), \dots, d_m^m(t))^T, E(t) = (e_{kl}^{(i)})_{k,l = 1,\dots,m} \in \RR^{m \times m}$ sowie \linebreak
@@ -109,10 +116,11 @@ Wie bei den elliptischen Gleichungen wollen wir annehmen, dass $\lambda, \Lambda
 	\item $\lambda^{-2} |b(t,x)|^2 + \lambda^{-1} |c(t,x)|^2 \leq \gamma^2, c(t,x) \geq 0$
 \end{itemize}
 
-\subsection{Theorem: Energieabschätzung}
+\begin{thm}[Energieabschätzung]
 \label{energieabsch}
 	Es existiert ein $C < 0$ unabhängig von $m$, sodass:
 	\[ \max_{t \in [0,T]} ||u_m(t)||_{L^2(\Omega)} + ||u_m||_{L^2((0,T);H_0^1(\Omega))} + ||u'_m||_{L^2((0,T);H^{-1}(\Omega))} \leq C \enbrace*{||f||_{L^2((0,T);L^2(\Omega))} + ||g||_{L^2(\Omega)}} \]
+\end{thm}
 	
 \minisec{Beweis}
 	Multipliziere \eqref{eq_B} mit $d_k^m$ und summiere $\sum_{k=1}^m \quad \Rightarrow \quad (u_m',u_m)_{L^2} + B_t[u_m,u_m] = (f,u_m)_{L^2}$. \\
@@ -142,16 +150,17 @@ Wie bei den elliptischen Gleichungen wollen wir annehmen, dass $\lambda, \Lambda
 	\[ \Rightarrow ||u_m'||_{H^{-1}(\Omega)} \leq C( ||u_m||_{H_0^1(\Omega)} + ||f||_{L^2}) \Rightarrow \int_{0}^{T} ||u_m'||_{H^{-1}(\Omega)}^2 dt \leq 2C (||u_m||_{L^2((0,T);H_0^1(\Omega))}^2 + ||f||_{L^2((0,T);L^2(\Omega))}) \]
 	\qed
 	
-\subsection{Lemma von Gronwall}
-\label{gronwall}
+\begin{lemma}[Lemma von Gronwall] \label{gronwall}
 	Sei $\eta(t) \geq 0$ absolut stetig \marginnote{4. Jul} (d.h. $\eta(t) = \int_{t_0}^{t} \dots ds$) mit $\eta'(t) \leq \Phi(t) \eta(t) + \Psi(t)$ fast überall für $\Phi,\Psi \geq 0$, $\int_{\RR} |\Phi|+|\Psi| dt < \infty$. Dann gilt:
 	\[ \eta(t) \leq e^{\int_0^t \Phi(s) ds} \left\lbrack \eta(0) + \int_{0}^{t} \Psi(s) ds\right\rbrack \]
+\end{lemma}
 
 \minisec{Beweis}
 	\[ \frac{d}{ds} (\eta(s) e^{-\int_{0}^{s} \Phi(r) dr} = e^{-\int_{0}^{s} \Phi(r) dr} \underbrace{(\eta'(s) - \eta(s) \Phi(s))}_{\leq \Psi(s)} \Rightarrow \eta(t) e^{-\int_{0}^{s} \Phi(r) dr} \leq \eta(0) + \int_{0}^{t} \underbrace{\Psi(s) e^{-\int_{0}^{s} \Phi(r)dr}}_{\leq \Psi(s)} ds \] \qed
 	
-\subsection{Theorem: Existenz schwacher Lösungen}
+\begin{thm}[Existenz schwacher Lösungen]
 	\eqref{eq_A} besitzt eine schwache Lösung.
+\end{thm}
 	
 \minisec{Beweis}
 	\begin{enumerate}[1)]
@@ -184,8 +193,9 @@ Wie bei den elliptischen Gleichungen wollen wir annehmen, dass $\lambda, \Lambda
 		\[ \int_{0}^{T} -\langle u, v' \rangle dt + \int_{0}^{T} B_t [u,v] dt = \int_{0}^{T} (f,v)_{L^2} dt + (g,v(0)) \Rightarrow u(0) = g\] \qed
 	\end{enumerate}
 
-\subsection{Theorem: Eindeutigkeit schwacher Lösungen}
+\begin{thm}[Eindeutigkeit schwacher Lösungen]
 	Eine schwache Lösung von \eqref{eq_A} ist eindeutig.
+\end{thm}
 	
 \minisec{Beweis}
 	Seien $u_1, u_2$ schwache Lösungen, dann erfüllt $u := u_1 - u_2$:
