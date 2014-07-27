@@ -34,6 +34,8 @@ Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 	* Teil des Beweises für Hauptsatz aus Übung TeXen
 * Differentialformen und Mannigfaltigkeiten
 	* Zeichnungen texen
+* Partielle Differentialgleichungen I
+	* Großteil der handschriftlichen Zeichnungen des Dozenten fehlen
 
 #### Hinweise (technische und rechtliche)
 Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_ und _Consolas_ installiert sein. Erstere
