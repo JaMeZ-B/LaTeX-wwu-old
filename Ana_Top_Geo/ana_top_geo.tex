@@ -1299,7 +1299,7 @@ Sei $X$ ein topologischer Raum.
 \subsection[Beispiele zu (weg-)zusammenhängenden Räumen]{Beispiel} % (fold)
 \label{sub:83}
 \begin{enumerate}[(i)]
-	\item Der sogenannte \bet{Polnische Kreis}\index{Polnischer Kreis} $PK$ gegeben durch
+	\item Der sogenannte \bet{Polnische Kreis}\index{Polnischer Kreis} $PK$, gegeben durch
 	\[
 		PK = \set[(x,y) \in \mathds{R}^2]{ \begin{array}{rlcl}
 			 & (x \in [{-1,1}] &\wedge& y=1) \\
@@ -1363,25 +1363,44 @@ Ein topologischer Raum $X$ ist genau dann wegzusammenhängend, wenn jede stetige
 \subsection[Bemerkungen zu einfach zusammenhängenden Räumen]{Bemerkung} % (fold)
 \label{sub:92}
 \begin{enumerate}[(i)]
-	\item $\mathds{R}^n$ ist einfach zusammenhängend: Sei $f : S^1 \to \mathds{R}^n$ stetig. Definiere $F : D^2 \to \mathds{R}^n$ durch:
+	\item $\mathds{R}^n$ ist einfach zusammenhängend: Sei $f : S^1 \to \mathds{R}^n$ stetig. Definiere $F : D^2 \to \mathds{R}^n$ durch
 	\[
 		F(t \cdot v) := t \cdot f(v) \qquad \text{ für } t \in [0,1], v \in S^1
 	\]
-	\item Ist $X \cong Y$ dann: $X$ einfach zusammenhängend $\Leftrightarrow$ $Y$ einfach zusammenhängend.
+	\item Ist $X \cong Y$ dann gilt: $X$ einfach zusammenhängend $\Leftrightarrow$ $Y$ einfach zusammenhängend.
 	\item Später: $\mathds{R}^2 \setminus \set{0}$ ist nicht einfach zusammenhängend.
 \end{enumerate}
 % subsection 92 (end)
 
-\subsection[Definition: Homotopie zwischen Wegen]{Definition} % (fold)
+\subsection[Definition: Homotopie mit festen Endpunkten]{Definition} % (fold)
 \label{sub:93}
-Seien $\omega_0, \omega_1 : [0,1] \to X$ Wege in $X$. Eine Homotopie mit festen Endpunkten (oder relativ $\set{0,1}$) zwischen $\omega_0$ und $\omega_1$ ist eine stetige 
-Abbildung $H : [0,1] \times [0,1] \to X$, so dass gilt:
+Seien $\omega_0, \omega_1 : [0,1] \to X$ Wege in $X$. Eine \bet{Homotopie mit festen Endpunkten}\index{Homotopie!mit festen Endpunkten} (oder relativ $\set{0,1}$) zwischen 
+$\omega_0$ und $\omega_1$ ist eine stetige Abbildung $H : [0,1] \times [0,1] \to X$, so dass gilt: \\
+\begin{minipage}[c]{0.45\textwidth}
 \begin{enumerate}[(i)]
 	\item $H(s,0)= \omega_0(s) \enspace \forall s \in [0,1]$
 	\item $H(s,1) = \omega_1(s) \enspace \forall s \in [0,1]$
 	\item $H(0,t) = \omega_0(0)= \omega_1(0) \enspace \forall t \in [0,1]$
 	\item $H(1,t) = \omega_0(1) = \omega_1(1) \enspace \forall t \in [0,1]$
-\end{enumerate}
+\end{enumerate}	
+\end{minipage} \hfill
+\begin{minipage}[c]{0.45\textwidth}
+	\captionsetup{type=figure, skip=1pt}
+	\[
+		\begin{tikzpicture}[scale=0.9]
+			\coordinate (x) at (0,0);
+			\coordinate (y) at (4,2);
+			\draw[very thick] (x) .. controls +(90:3) and +(190:2) .. (y) node[midway, above]{$\omega_0$};
+			\foreach \s / \t in {80/200, 70/210, 60/220, 50/230, 40/240, 30/250 , 20/260, 10/270, 0/280} {
+				\draw[dashed] (x) .. controls +(\s:3) and +(\t:2) .. (y);
+			}
+			\draw[very thick] (x) .. controls +(-10:3) and +(-70:2) .. (y) node[midway, below]{$\omega_1$};
+			\draw[thick, fill=Tomato3] (x) circle(0.06) node[below left]{$x$};
+			\draw[thick, fill=Tomato3] (y) circle(0.06) node[above right]{$y$};
+		\end{tikzpicture}
+	\]
+	\caption{Homotopie relativ $\set{0,1}$}
+\end{minipage} \smallskip\\
 Durch 
 \[
 	\omega_0 \sim \omega_1 :\Leftrightarrow \exists \text{ Homotopie relativ } \set{0,1} \text{ zwischen } \omega_0 \text{ und } \omega_1
@@ -1392,7 +1411,7 @@ Homotopieklasse von $\omega$.
 
 \subsection[Definition: Schleife]{Definition} % (fold)
 \label{sub:94}
-Ein Weg $\omega : [0,1] \to X$ heißt eine \Index{Schleife} in $X$, falls $\omega(0)= \omega(1)$. 
+Ein Weg $\omega : [0,1] \to X$ heißt eine \Index{Schleife} in $X$, falls $\omega(0)= \omega(1)$ gilt. Dieser Punkt heißt \Index{Basispunkt} von $\omega$. 
 % subsection 94 (end)
 
 \subsection[Lemma: Charakterisierung von einfach zusammenhängend über Schleifen]{Lemma} % (fold)
@@ -1409,7 +1428,7 @@ Beweis per Zeichnung:
 \]
 % subsection 95 (end)
 
-\subsection[Notation: Konstante Schleife]{Notation} % (fold)
+\subsection[Notation: Konstante Schleife $c_x$]{Notation} % (fold)
 \label{sub:96}
 Für $x \in X$ bezeichne $c_x : [0,1] \to X$ die konstante Schleife bei $x$; $c_x(t)= x \enspace \forall t \in [0,1]$.
 % subsection 96 (end)
@@ -1437,13 +1456,13 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 		[\omega_0 * \omega_0'] = [\omega_1 * \omega_1']
 	\]
 	\item Sei $\omega$ ein Weg in $X$. Sei $\overline{\omega} : [0,1] \to X $ der umgekehrte Weg, also $\overline{\omega} (t) := \omega(1-t)$. Dann gilt 
-	$[\omega * \overline{\omega}] = [c_{\omega(0)}]$, $[\overline{\omega} * \omega ] = [c_{\omega(1)}]$.
+	$[\omega * \overline{\omega}] = [c_{\omega(0)}]$ und $[\overline{\omega} * \omega ] = [c_{\omega(1)}]$.
 	\item Sei $\omega$ ein Weg in $X$. Dann gilt 
 	\[
 		[\omega * c_{\omega(1)}] = [\omega]
 	\]
 \end{enumerate}
-\minisec{Beweis (nur a)}
+\minisec{Beweis (nur a)}\marginnote{die anderen Beweise funktionieren ähnlich}
 \begin{minipage}[t]{0.6\textwidth}
 	Sei $\varphi : [0,1] \to [0,1]$ gegeben wie in Abbildung \ref{fig:98} gezeichnet.
 	Dann gilt 
@@ -1497,7 +1516,7 @@ $X$ ist genau dann einfach zusammenhängend, wenn $\pi_1(X,x_0)$ für alle $x_0 
 \label{sub:911}
 Sei $\eta$ ein Weg in $X$ von $x_1$ nach $x_0$. Dann definiert
 \[
-	\pi_1(X,x_0) \ni [\omega] \xmapsto{\conj_\eta} \benbrace*{\eta * \omega * \overline{\eta}}  \in \pi_1(X,x_1)
+	\pi_1(X,x_0) \ni [\omega] \xmapsto{\, \conj_\eta} \benbrace*{\eta * \omega * \overline{\eta}}  \in \pi_1(X,x_1)
 \]
 einen Isomorphismus zwischen $\pi_1(X,x_0)$ und $\pi_1(X,x_1)$. Wir zeigen nur: $\conj_\eta$ ist ein Gruppenhomomorphismus.
 \begin{align*}
@@ -1508,7 +1527,7 @@ einen Isomorphismus zwischen $\pi_1(X,x_0)$ und $\pi_1(X,x_1)$. Wir zeigen nur: 
 	&\stackrel{\text{d)}}{=}
 	\benbrace[\Big]{\enbrace[\big]{\eta * \enbrace*{\omega * \omega'} } * \overline{\eta}  } 
 \end{align*}
-Insbesondere hängt der Isomorphismus von $\pi_1(X,x_0)$ für wegzusammenhängende Räume nicht von der Wahl des Basispunktes ab.
+Insbesondere hängt der Isomorphietyp von $\pi_1(X,x_0)$ für wegzusammenhängende Räume nicht von der Wahl des Basispunktes ab.
 % subsection 911 (end)
 % section 9 (end)
 \newpage
