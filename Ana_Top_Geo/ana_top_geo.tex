@@ -1556,49 +1556,72 @@ Homotopiehebungssatz (später: \ref{sub:108}) \bewende
 
 \subsection[Definition: Windungszahl]{Definition} % (fold)
 \label{sub:103}
-\begin{wrapfigure}{r}[2cm]{0.25\textwidth}
+\begin{wrapfigure}{r}[2cm]{0.3\textwidth}
 	\vspace{-20pt}
-	\centering{
-	\begin{tikzpicture}[scale=0.65, font=\Large]
+	\centering{\quad 
+	\tikzsetnextfilename{windungszahl}
+	\begin{tikzpicture}[scale=0.7, font=\Large]
 		\begin{axis}[
 			z post scale=3,
-			xmin=-1.5, xmax=2,
+			xmin=-1.5, xmax=3,
+			zmin=-22,
 			view={15}{18},
 			hide axis,
 			]
-		\draw[dashed] (axis cs: 1,0,-18) -- (axis cs: 1,0,27);
+		\draw[dashed, gray] (axis cs: 1,0,-19) -- (axis cs: 1,0,28);
 		\addplot3[
 			domain=0:2*pi,
 			smooth,
 			samples=50,
 			samples y=1,
-			very thick,
-			SpringGreen4,
+			ultra thick,
 			postaction={decorate},
 			decoration={markings,
 				mark=at position 0.25 with {\arrow{stealth}},
 				mark=at position 0.75 with {\arrow{stealth}}}]
-			({cos(deg(x))}, {sin(deg(x))}, -17) node[pos=0, pin=0:$1 \in S^1$, minimum size=0.09cm, draw=black, thick, fill=Tomato3, inner sep=0.008cm, circle]{};
+			({cos(deg(x))}, {sin(deg(x))}, -17);
+		\addplot3[
+			domain=0:2*pi,
+			smooth,
+			samples=50,
+			samples y=1,
+			ultra thick,
+			Firebrick2,
+			dashed,
+			-stealth,
+			]
+			({cos(deg(x))}, {sin(deg(x))}, -17) node[midway, above left]{$\omega$};
+		\node[pin=0:$1 \in S^1$, minimum size=0.09cm, draw=black, thick, fill=Chartreuse3, inner sep=0.008cm, circle] at (axis cs: 1,0,-17){};
 		\addplot3[
 			domain=-1*pi:9*pi,
 			smooth,
 			samples=100,
 			samples y=1,
-			very thick,
+			ultra thick,
 			postaction={decorate},
 			decoration={markings,
 			mark=between positions 0.05 and 0.99 step 0.1 with {\arrow{stealth}}},%
 			]
 			({cos (deg(x) )},{sin(deg(x))}, {x} );
+		\addplot3[
+			domain=0:2*pi,
+			smooth,
+			samples=50,
+			samples y=1,
+			ultra thick,
+			dashed,
+			-stealth,
+			Firebrick2,
+			]
+			({cos (deg(x) )},{sin(deg(x))}, {x} ) node[midway, above left]{$\omega$};
 		\draw[-to, very thick] (axis cs:0,0,-8) -- ++(axis direction cs: 0,0,-3.5) node[midway,left]{$p$};
 		\foreach \t in {0,1,2,3,4} {\edef\temp{\noexpand
-			\node[pin=0:$\t$, minimum size=0.11cm,draw, thick,circle, fill=Tomato3, inner sep=0.01cm] at (axis cs: 1,0,\t*2*pi){}; 
+			\node[pin=0:$\t$, minimum size=0.11cm,draw, thick,circle, fill=Chartreuse3, inner sep=0.01cm] at (axis cs: 1,0,\t*2*pi){}; 
 		} \temp}
 		\node at (axis cs: 0,0,33) {$\mathds{R}$};
-		% \foreach \t in {0,1,2} {\draw (axis cs: 0,0,0)-- (axis cs: 0,0,\t); };
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Die Vorstellung bei der Windungszahl}}
+	\caption{Schleife $\omega$ mit der Windungszahl $1$}}
 \end{wrapfigure}
 Sei $\omega : [0,1] \to S^1$ eine Schleife in $S^1$ mit $\omega(0) = \omega(1) = 1$. Sei $\hat{\omega} : [0,1] \to \mathds{R}$ mit $p \circ  \hat{\omega} = \omega$ und
 $\hat{\omega}(0)=0$. Dann heißt $\hat{\omega}(1) \in \mathds{Z} = p^{-1}(1)$ die \Index{Windungszahl} von $\omega$.
