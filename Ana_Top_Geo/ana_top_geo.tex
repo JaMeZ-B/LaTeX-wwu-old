@@ -1689,28 +1689,29 @@ $\hat{f} : Z \to \hat{X}$ mit $p \circ  \hat{f} = f$
 
 \subsection{Homotopiehebungssatz} % (fold)
 \label{sub:108}
-Sei $\hat{p} : \hat{X} \to X$ eine Überlagerung, $H : Z \times [0,1] \to X$ eine Homotopie und $\hat{f} : Z \to \hat{X}$ eine Hebung von 
+Sei $p : \hat{X} \to X$ eine Überlagerung, $H : Z \times [0,1] \to X$ eine Homotopie und $\hat{f} : Z \to \hat{X}$ eine Hebung von 
 $f = H(-,0) := H\big|_{Z \times \set{0}}$. Dann gibt es eine \emph{eindeutige} Hebung von $H$ mit $\hat{H}(-,0)= \hat{f}$
 \[
-	\begin{tikzcd}
-		Z \times \set{0} \dar[hook, swap]{i} \rar{\hat{f}}& \hat{X} \dar{\hat{p}} \\
+	\begin{tikzcd}[row sep=3em]
+		Z \times \set{0} \dar[hook, swap]{i} \rar{\hat{f}}& \hat{X} \dar{p} \\
 		Z \times [0,1] \urar[dashed]{\hat{H}} \rar{H}& X  
 	\end{tikzcd}
 \]
 \minisec{Beweis}
 Sei $\mathcal{U}$ eine Überdeckung von $X$ durch elementare Umgebungen. Wir können $\mathcal{U}$ mittels $H$ zurückziehen und erhalten eine offene Überdeckung
-$H ^{-1}(\mathcal{U}) := \set[H ^{-1}(U)]{U \in \mathcal{U}}$ von $Z \times [0,1]$. Sei $z_0 \in Z$. Da $\set{z_0} \times [0,1]$ kompakt ist, gibt es 
-$0 = t_0 < t_1 < \ldots < t_n=1$ und $U_1, \ldots , U_n \in \mathcal{U}$ mit 
+$H ^{-1}(\mathcal{U}) := \set[H ^{-1}(U)]{U \in \mathcal{U}}$ von $Z \times [0,1]$. \\
+Sei $z_0 \in Z$ fest. Da $\set{z_0} \times [0,1]$ kompakt ist, gibt es 
+$0 = t_0 < t_1 < \ldots < t_n=1$ und $U_1, \ldots , U_n \in \mathcal{U}$ mit \marginnote{Die $H ^{-1}(U_i)$ überdecken $\set{z_0}\times [0,1]$}
 \[
-	H \enbrace[\big]{\set{z_0} \times [t_i, t_{i+1}] } \subseteq U_i 
+	H \enbrace[\big]{\set{z_0} \times [t_i, t_{i+1}] } \subseteq U_i .
 \]
 Da die $U_i$ offen sind gibt es zu jedem $i$ eine offene Umgebung $V_i$ von $z_0$ mit $H\enbrace[\big]{V_i \times[t_i, t_{i+1}]} \subseteq U_i$. Sei 
-$V := \bigcap_{i=1}^n V_i$, dann $H \enbrace[\big]{V \times [t_i, t_{i+1}]} \subseteq U_i$. Da alle $U_i$ elementar sind, finden wir induktiv eindeutige Hebungen
+$V := \bigcap_{i=1}^n V_i$, dann ist $H \enbrace[\big]{V \times [t_i, t_{i+1}]} \subseteq U_i$. Da alle $U_i$ elementar sind, finden wir induktiv eindeutige Hebungen
 $\hat{H}_i^V$ von $H\big|_{V \times [t_i, t_{i+1}]}$ mit 
 \[
-	\hat{H}_1^V(-,0)= \hat{f}\big|_{V}\quad \text{ und } \quad \hat{H}_i^V(-,t_{i-1}) = \hat{H}_{i-1}^V (-, t_{i-1}).
+	\hat{H}_i^V(-,0)= \hat{f}\big|_{V}\quad \text{ und } \quad \hat{H}_i^V(-,t_{i}) = \hat{H}_{i-1}^V (-, t_{i}).
 \]
-Nun erhalten wir mit $\hat{H}^V(z,t) := \hat{H}_i^V(z,t)$ für $z \in V$, $t \in [t_{i-1},t_i]$ eine eindeutige Hebung von $H\big|_{V \times [0,1]}$ mit 
+Nun erhalten wir mit $\hat{H}^V(z,t) := \hat{H}_i^V(z,t)$ für $z \in V$, $t \in [t_{i},t_{i+1}]$ eine eindeutige Hebung von $H\big|_{V \times [0,1]}$ mit 
 $\hat{H}^V(-,0) = \hat{f}\big|_V$. Dabei bleibt $\hat{H}^V$ eindeutig auch wenn wir $V$ verkleinern. Nun finden wir für jedes $z \in Z$ eine Umgebung $V_z$ und eine 
 eindeutige Hebung $\hat{H}^{V_z}$ von $H\big|_{V_z \times [0,1]}$ mit 
 \(
@@ -1718,9 +1719,9 @@ eindeutige Hebung $\hat{H}^{V_z}$ von $H\big|_{V_z \times [0,1]}$ mit
 \).
 Wegen der Eindeutigkeit gilt 
 \[
-	\hat{H}^{V_z} (\xi,0) = \hat{H}^{V_{z'}}(\xi,t)
+	\hat{H}^{V_z} (\xi,t) = \hat{H}^{V_{z'}}(\xi,t)
 \]
-für $\xi \in V_z \cap V_{z'}$. Daher definiert $\hat{H}(z,t) := \hat{H}^{V_z}(z,t)$ die gesuchte eindeutige Hebung. \bewende
+für alle $\xi \in V_z \cap V_{z'}$. Daher definiert $\hat{H}(z,t) := \hat{H}^{V_z}(z,t)$ die gesuchte eindeutige Hebung. \bewende
 % subsection 108 (end)
 % section 10 (end)
 \newpage
