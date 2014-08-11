@@ -37,6 +37,7 @@ Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 	* Zeichnungen texen
 * Partielle Differentialgleichungen I
 	* Großteil der handschriftlichen Zeichnungen des Dozenten fehlen
+* Dateien aus den vorigen Semestern einpflegen
 
 #### Hinweise (technische und rechtliche)
 Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_ und _Consolas_ installiert sein. Erstere
