@@ -33,7 +33,7 @@ Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 	* Einträge im Inhaltsverzeichnis vervollständigen
 * Grundlagen der Analysis, Topologie, Geometrie
 	* Teil des Beweises für Hauptsatz aus Übung TeXen
-	* Dateigröße verringern … 7,2MB sind zu viel …
+	* Dateigröße verringern … 7,2MB sind zu viel. Dazu müssen der Torus und die 3D-Glockenfunktion kleiner werden, jeweils >3MB
 * Differentialformen und Mannigfaltigkeiten
 	* Zeichnungen texen
 * Partielle Differentialgleichungen I
