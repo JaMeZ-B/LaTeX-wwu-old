@@ -2762,19 +2762,19 @@ Diffeomorphismus ist.
 		
 		\draw[RoyalBlue2, thick] (-2.5,1.89) .. controls +(240:0.8) and +(120:0.8) .. (-2.5,-1.89);
 		\draw[RoyalBlue2, thick, dashed] (-2.5,1.89) .. controls +(300:0.8) and +(60:0.8) .. (-2.5,-1.89);
-		\draw[fill=RoyalBlue2] (-2.5,-7) circle[radius=0.05];
+		\draw[fill=RoyalBlue2] (-2.5,-7) circle[radius=0.07];
 		
 		\draw[Firebrick2, thick] (0,2.5) .. controls +(250:0.6) and +(110:0.6) .. (0,0.5);
 		\draw[Firebrick2, thick, dashed] (0,2.5) .. controls +(290:0.6) and +(70:0.6) .. (0,0.5);
 		
 		\draw[Firebrick2, thick] (0,-0.5) .. controls +(250:0.6) and +(110:0.6) .. (0,-2.5);
 		\draw[Firebrick2, thick, dashed] (0,-0.5) .. controls +(290:0.6) and +(70:0.6) .. (0,-2.5);
-		\draw[fill=Firebrick2] (0,-7) circle[radius=0.05];
+		\draw[fill=Firebrick2] (0,-7) circle[radius=0.07];
 		
 		
 		\draw[Green2, thick] (1.75,2.25) .. controls +(250:0.6) and +(110:0.6) .. (1.75,0) .. controls +(250:0.6) and +(110:0.6) .. (1.75,-2.25);
 		\draw[Green2, thick, dashed] (1.75,2.25) .. controls +(290:0.6) and +(70:0.6) .. (1.75,0) .. controls +(290:0.6) and +(70:0.6) .. (1.75,-2.25);
-		\draw[fill=Green2] (1.75,-7) circle[radius=0.05];
+		\draw[fill=Green2] (1.75,-7) circle[radius=0.07];
 		
 		\draw (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
 		\draw[xscale=-1] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
@@ -2802,7 +2802,65 @@ $h_1 : U_1 \to V_1 \subseteq \mathds{R}^m$ Karten von $N$ um $x$ und $M$ um $f(x
 \[
 	\Rg_x f := \mathrm{Rang} \enbrace[\Big]{\D \enbrace*{h_1 \circ f \circ h_0 ^{-1}}_{h_0(x)}} .
 \]
-\missingfigure{Abbildung von Sphären mit Karten}
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}[scale=1.2, every pin edge/.style={black!80, very thin}]
+		% \draw[help lines] (-3,-2) grid (7,2);
+
+		\path (5,0) coordinate (mids1) +(40:1) coordinate (fx) +(20:1) coordinate (br1) ;
+		\path (fx) + (0.2,0) coordinate (starth1);
+		\path (-2,-1) coordinate (h0x) ++ (0.2,0.3) coordinate (endh0);
+		\path (0.1,0.1) coordinate (x) ++ (-0.3,0) coordinate (starth0);
+		\path (mids1) ++ (2,-1) coordinate (midv1) + (-0.3,0) coordinate (leftv1) + (0.3,0) coordinate (rightv1) +(0,0.2) coordinate (endh1);
+		
+		% sphere
+		\draw (-1,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed, black!60] (-1,0) arc (180:0:1cm and 0.5cm);
+	    \draw (0,1) arc (90:270:0.5cm and 1cm);
+	    \draw[dashed, black!60] (0,1) arc (90:-90:0.5cm and 1cm);
+	    \draw (0,0) circle (1cm);
+	    \shade[ball color=blue!20!white,opacity=0.20] (0,0) circle (1cm);
+		\node[] at (-1,1) {$N=S^2$};
+		
+		% U_0
+		\begin{scope}
+			\clip (x) circle[radius=0.25];
+		  		  	\foreach \y in {0.5,0.45,...,-0.3}%
+		  		    	\draw[black!60,line width=0.25mm, opacity=0.5] (-0.5,\y) .. controls +(-25:0.4) and +(205:0.4) .. (0.5,\y);
+		\end{scope}
+		\draw[] (x) circle[radius=0.25] ++ (0.43,0) node {$U_0$};
+		\draw[fill=IndianRed3, thick] (x)  circle[radius=0.04] node[pin={[pin distance=1.5ex]230:$x$}]{ };
+		
+		% h_0
+		\draw[IndianRed3, -to, thick] (starth0) to[bend right, "$h_0$"' near end] (endh0);
+		
+		% V_0
+		\begin{scope}
+			\clip (h0x) circle[radius=0.3];
+		  		  	\foreach \x in {0,-0.1,...,-1}%
+		  		    	\draw[IndianRed3!70,line width=0.25mm] (-2.5,\x)--(-1.5,\x-1);
+		\end{scope}
+		\draw[IndianRed3, thick] (h0x) circle[radius=0.3] ++ (0.5,0) node {$V_0$};
+		\draw[fill=IndianRed3, thick] (h0x) circle[radius=0.04] node[pin=230:$h_0(x)$]{ };
+		
+		% Arrow
+		\draw[-to, thick] (1.5,0) -- (3.5,0) node[midway, above]{$f$};
+		
+		% S^1
+		\draw[thick] (mids1) circle[radius=1];
+		\path (mids1) ++ (-1,1) node[] {$M=S^1$};
+		\draw[(-), DodgerBlue3, thick] (br1) arc(20:60:1) node[midway, below left] {$U_1$};
+		\draw[fill=DodgerBlue3, thick] (fx) circle[radius=0.04] node[pin=above right:$f(x)$]{ };
+		
+		% V_1
+		\draw[(-), DodgerBlue3, thick] (leftv1) node[left] {$V_1$} -- (rightv1);
+		\draw[fill=DodgerBlue3, thick] (midv1) circle[radius=0.04] node[pin=310:$h_1 \big( f(x) \big) $ ] { };
+		
+		% h_1
+		\draw[DodgerBlue3, -to, thick] (starth1) to[bend left, "$h_1$" near end] (endh1);
+	\end{tikzpicture}
+	\caption{Diagramm zur Definition des Ranges einer glatten Abbildung $f : N \to M$}}
+\end{figure}
 % subsection 163 (end)
 
 \subsection[Lemma: Die Definition des Ranges hängt nicht von Karten ab]{Lemma} % (fold)
