@@ -3,7 +3,19 @@
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
-\usepackage{ifxetex}
+
+% Compiler abhaengige IFs
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
 
 %--Farbdefinitionen
 %-- muss vor tikz geladen werden
@@ -25,7 +37,7 @@
 %-- Konfiguration von tikzexternalize
 \tikzexternalize[prefix=tikz/, up to date check=diff]
 
-\ifxetex
+\ifxetexorluatex
 \tikzset{external/system call={xelatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
     -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
 \else
@@ -67,9 +79,13 @@
 \def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
 
 %-- Alles was mit Schrift und XeteX zu tun hat
-\ifxetex
-    % XeLaTeX
-	\usepackage{mathspec} %beinhaltet fontspec 
+\ifxetexorluatex
+    % XeLaTeX or LuaTeX
+	\ifxetex
+		\usepackage{mathspec} %beinhaltet fontspec 
+	\else
+		\usepackage[no-math]{fontspec}
+	\fi
     \usepackage{polyglossia} %babel-ersatz
     \setmainlanguage[spelling=new,babelshorthands=false]{german}
 	\newcommand\glqq{"}
@@ -77,9 +93,14 @@
 	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.4}} %
     \setmainfont[Ligatures=Common, BoldFont={* Bold}, ItalicFont={* Light Italic}]{Source Sans Pro}
 	\setsansfont[Scale=MatchLowercase,Ligatures=Common, BoldFont={* Medium}]{Ubuntu}
-	\setallmonofonts[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
+	\ifxetex
+		\setallmonofonts[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
+	\else
+		\setmonofont[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
+	\fi
 	\usepackage{xltxtra}
 	\usepackage{fontawesome}
+	\usepackage{microtype}
 \else
     % default: pdfLaTeX
     \usepackage[ngerman]{babel}
@@ -118,7 +139,7 @@
 \newcommand{\bet}[1]{\textbf{#1}}
 \newcommand{\Index}[1]{\textbf{#1}\index{#1}}
 \makeindex
-\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetex \faHandUp\fi \par \bigskip}
+\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetexorluatex \faHandUp\fi \par \bigskip}
 \renewcommand{\indexpagestyle}{scrheadings}
 
 
@@ -134,7 +155,7 @@
 \usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
 
 % \let\orighref\href
-\ifxetex
+\ifxetexorluatex
 \newcommand{\hrefsym}[2]{\href{#1}{\texttt{#2\,\faExternalLink}}}
 \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
 \fi
