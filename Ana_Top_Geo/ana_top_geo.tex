@@ -2984,7 +2984,7 @@ nicht regulären Werte einer $C^\infty$-Abbildung $f : N \to M$ eine Menge mit L
 \section{Approximation durch $C^\infty$-Abbildungen} % (fold)
 \label{sec:17}
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: $C_0^\infty(M,\mathds{R})$ liegt dicht in $C_0(M,\mathds{R})$]{Proposition} % (fold)
 \label{sub:171}
 Sei $M$ ein $C^\infty$-Mannigfaltigkeit. Dann ist $C^\infty_0 (M,\mathds{R}) := C^\infty(M,\mathds{R}) \cap C_0(M,\mathds{R})$\marginnote{siehe \ref{sub:61} für 
 $C_0(M,\mathds{R})$} dicht in $C_0(M,\mathds{R})$ bezüglich $\norm[\infty]{.}$.
@@ -2996,7 +2996,7 @@ Seien $\psi, \varphi_\varepsilon : \mathds{R} \to \mathds{R}$ für $\varepsilon>
 		e^{-t^{-2}} ,&\text{ falls } t >0
 	\end{cases} \qquad , \qquad \varphi_\varepsilon(t) = \frac{\psi(t)}{\psi(t) + \psi(\varepsilon-t)}
 \]
-$\psi$ und $\varphi_\varepsilon$ sind $C^\infty$-Funktionen (Analysis II.). %
+$\psi$ und $\varphi_\varepsilon$ sind $C^\infty$-Funktionen (Analysis II.). \\%
 \begin{figure}[H]%
 	\centering{
 	\begin{tikzpicture}[baseline]
@@ -3032,7 +3032,7 @@ $\psi$ und $\varphi_\varepsilon$ sind $C^\infty$-Funktionen (Analysis II.). %
 	\end{tikzpicture}%
 	\caption{Die Funktionen $\psi$ und $\varphi_\varepsilon$ für $\varepsilon =1$}}
 \end{figure} %
-Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $f_{\varepsilon,r}(x) = 1- \varphi_\varepsilon(\norm{x}-r)$.
+Für $r>0$ sei nun $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $f_{\varepsilon,r}(x) = 1- \varphi_\varepsilon(\norm{x}-r)$.
 \begin{figure}[H]
 	\centering{
 	\tikzsetnextfilename{2D-Glockenfunktion}
@@ -3067,28 +3067,30 @@ Für $r>0$ sei $f_{\varepsilon,r} : \mathds{R}^n \to \mathds{R}$ gegeben durch $
 				line join=bevel,]
 				table[col sep=comma] {Mathematica/data4.dat} ;
 		\end{axis}
-	\end{tikzpicture}
+	\end{tikzpicture}%
 	\caption{Glockenfunktion $f_{\varepsilon,r}$ für $\mathds{R}$ und $\mathds{R}^2$, wobei $\varepsilon=1$, $r=1.5$}}
-\end{figure}
+\end{figure}%
 Es ist $f_{\varepsilon,r} \in C^\infty(\mathds{R}^n)$ und es gilt $f_{\varepsilon,r}(x) \subseteq [0,1]$ für alle $x \in \mathds{R}^n$.
 Weiter ist $f_{\varepsilon,r}(x) = 1$ für $\abs*{x} \le r $, $f_{\varepsilon,r}(x)=0$ für $\abs*{x} \ge r +\varepsilon$.
 \minisec{Beweis}
-Wende Stone-Weierstraß an: Zu zeigen:
+Wir wollen den Approximationssatz von Stone-Weierstraß(\ref{sub:63}) anwenden: Dazu müssen wir zeigen:
 \[
 	\forall x,y \in M : \exists f \in C^\infty_0(M,\mathds{R}) \text{ mit } f(x) \not= f(y) \text{ und } f(x) \not= 0\not= f(y)
 \]
-Wähle dazu Karten $\varphi : U \to V$ und $\hat{\varphi} : \hat{U} \to \hat{V}$ von $M$ mit $x \in U$, $y \in \hat{U}$, $U \cap \hat{U}= \emptyset$. $\varphi(x)=0$,
-$\hat{\varphi}(y)=0$, $B_2(0) \subseteq V$, $B_2(0) \subseteq \hat{V}$. Dann ist $f_x \in C_0^\infty(M,\mathds{R})$ mit 
+Wähle dazu Karten $\varphi : U \to V$ und $\hat{\varphi} : \hat{U} \to \hat{V}$ von $M$ mit $x \in U$, $y \in \hat{U}$ und $U \cap \hat{U}= \emptyset$. Indem wir, wenn 
+nötig, einen Isomorphismus von $\mathds{R}^n$ anwenden, können wir außerdem fordern, dass $\varphi(x)=0$,
+$\hat{\varphi}(y)=0$, $B_2(0) \subseteq V$ und $B_2(0) \subseteq \hat{V}$ gilt. Dann ist $f_x \in C_0^\infty(M,\mathds{R})$ mit 
 \[
 	f_x(z) = \begin{cases}
 		0, &\text{ falls }z \not\in U\\
-		f_{1/2,1} \enbrace*{\varphi(z)} 
+		f_{1/2,1} \enbrace[\big]{\varphi(z)} , &\text{ sonst}
 	\end{cases}
 \]
-Dann $f_x(x)=1$, $f_x(y)=0$. Ebenso gibt es $f_y \in C^\infty_0(M,\mathds{R})$ mit $f_y(x)=0$, $f_y(y)=1$. Setze nun $f := 2 f_x + f_y$. \bewende
+Dann gilt $f_x(x)=1$ und $f_x(y)=0$. Ebenso gibt es $f_y \in C^\infty_0(M,\mathds{R})$ mit $f_y(x)=0$ und $f_y(y)=1$. Nun ist $f := 2 f_x + f_y$ die gesuchte Funktion. 
+\bewende
 % subsection 171 (end)
 
-\subsection{Korollar 1} % (fold)
+\subsection[Korollar 1: Approximation einer stetigen Funktion $\varphi : M \to \mathds{R}^n$ durch $C^\infty$-Funktionen]{Korollar 1} % (fold)
 \label{sub:172}
 Sei $M$ eine kompakte $C^\infty$-Mannigfaltigkeit und $\varphi : M \to \mathds{R}^n$ stetig. Dann gibt es zu jedem $\varepsilon >0$ eine $C^\infty$-Abbildung 
 $f : M \to \mathds{R}^n$ mit $\norm[2]{\varphi(x)- f(x)}  \le \varepsilon \enspace \forall x \in M$. 
@@ -3096,13 +3098,13 @@ $f : M \to \mathds{R}^n$ mit $\norm[2]{\varphi(x)- f(x)}  \le \varepsilon \enspa
 Schreibe $\varphi= (\varphi_1, \ldots , \varphi_n)$ und approximiere die $\varphi_i$ durch $C^\infty$-Funktionen. \bewende
 % subsection 172 (end)
 
-\subsection{Korollar 2} % (fold)
+\subsection[Korollar 2: $\varphi : M \to S^n$ lässt sich approximieren durch $C^\infty$-Funktion $f: M \to S^n$]{Korollar 2} % (fold)
 \label{sub:173}
 Sei $M$ eine kompakte $C^\infty$-Mannigfaltigkeit und $\varphi : M \to S^n$ stetig. Dann gibt es zu jedem $\varepsilon >0$ eine $C^\infty$-Abbildung $f : M \to S^n$ mit
 $\norm[2]{f(x)- \varphi(x)} \le \varepsilon$ für alle $x \in M$.
 \minisec{Beweis}
-Da $S^n \subseteq \mathds{R}^{n+1}$ gibt es nach Korollar 1 (\ref{sub:172}) eine $C^\infty$-Abbildung $f_0 : M \to \mathds{R}^{n+1}$ mit $\norm[2]{f_0(x)-\varphi(x)}\le 
-\varepsilon \enspace \forall x \in M$. oBdA sei $\varepsilon <1$. Wegen $\varphi(x) \in S^n$ folgt
+Da $S^n \subseteq \mathds{R}^{n+1}$, gibt es nach Korollar 1 (\ref{sub:172}) eine $C^\infty$-Abbildung $f_0 : M \to \mathds{R}^{n+1}$ mit $\norm[2]{f_0(x)-\varphi(x)}\le 
+\varepsilon \enspace \forall x \in M$. OBdA sei $\varepsilon <1$. Wegen $\varphi(x) \in S^n$ folgt
 \[
 	1 - \varepsilon \le \norm[2]{f_0(x)} \le 1+ \varepsilon 
 \]
@@ -3110,21 +3112,24 @@ Sei $f : M \to S^n$ die durch $f(x) := \frac{f_0(x)}{\norm[2]{f_0(x)} } $ defini
 \begin{align*}
 	\norm{f(x)- \varphi(x)} &\le \norm[2]{f(x)- f_0(x)} + \norm[2]{f_0(x)- \varphi(x)}   \\
 	&\le \norm[2]{\frac{f_0(x)}{\norm[2]{f_0(x)} } - f_0(x)} + \varepsilon \\
-	&= \underbrace{\abs*{1- \frac{1}{\norm[2]{f_0(x)} } }}_{= \abs*{\frac{\norm[2]{f_0(x)}-1 }{\norm[2]{f_0(x)} } } } \cdot \norm[2]{f_0(x)} + \varepsilon \le \frac{\varepsilon}{1 - \varepsilon} (1+ \varepsilon) + \varepsilon    \bewende
+	&= \abs*{1- \frac{1}{\norm[2]{f_0(x)} } } \cdot \norm[2]{f_0(x)} + \varepsilon \\
+	&= \abs*{\frac{\norm[2]{f_0(x)}-1 }{\norm[2]{f_0(x)} } } \cdot \norm[2]{f_0(x)} + \varepsilon \\
+	&\le \frac{\varepsilon}{1 - \varepsilon} (1+ \varepsilon) + \varepsilon \xrightarrow{\varepsilon \to 0} 0
 \end{align*}
+Damit folgt die Behauptung. \bewende
 % subsection 173 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Jede stetige Abbildungen zwischen $C^\infty$-Mannigfaltigkeiten lässt sich approximieren]{Bemerkung} % (fold)
 \label{sub:174}
 Allgemein lässt sich jede stetige Abbildung zwischen $C^\infty$-Mannigfaltigkeiten durch $C^\infty$-Abbildungen approximieren. Dazu zeigt man:
 \begin{enumerate}[(i)]
 	\item Jede (kompakte) $C^\infty$-Mannigfaltigkeit lässt sich in den $\mathds{R}^N$ für $N \gg \dim M$ einbetten.
-	\item $M \subseteq \mathds{R}^N$ besitzt eine \Index{Tubenumgebung}. Dies erlaubt es eine $C^\infty$-Retraktion $K \to M$ auf eine Umgebung von 
-	$M \subseteq \mathds{R}^N$ zu konstruieren.
+	\item $M \subseteq \mathds{R}^N$ besitzt eine \Index{Tubenumgebung}\footnote{Wikipedia: \url{https://de.wikipedia.org/wiki/Tubulare_Umgebung}}. 
+	Dies erlaubt es, eine $C^\infty$-Retraktion $K \to M$ auf einer kompakten Umgebung $K$ von $M \subseteq \mathds{R}^N$ zu konstruieren.
 \end{enumerate}
 % subsection 174 (end)
 \minisec{Ziel}
-$\pi_n(S^m, e_0) = 0$ für $n <m$
+$\pi_n(S^m, e_0) = 0$ für $n <m$ \todo[noline]{RevChap17}
 
 \subsection{Proposition} % (fold)
 \label{sub:175}
