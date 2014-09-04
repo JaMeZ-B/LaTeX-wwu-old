@@ -1,0 +1,3043 @@
+\input{../!config/mitschrift.tex}
+\newcommand{\fach}{Analysis }
+\newcommand{\semester}{WiSe 2013}
+\newcommand{\homepage}{http://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/analysis_III.html}
+\newcommand{\prof}{Prof.\,Dr.\,Wilhelm Winter}
+\input{../!config/mitschrift_headings.tex}
+
+
+\begin{document}
+\pagenumbering{Roman}
+\maketitle
+\begin{abstract}
+\input{../!config/vorwort.tex}
+\end{abstract}
+
+\setcounter{page}{1}
+\tableofcontents
+\cleardoubleoddemptypage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Gewöhnliche Differentialgleichungen – Existenz und Eindeutigkeit} % (fold)
+\label{sec:1}
+
+\subsection[Definition: Gewöhnliche Differentialgleichungen]{Definition} % (fold)
+\label{sub:11}
+\begin{enumerate}[a)]
+	\item Sei $G \subset \mathds{R}^2, f : G \to \mathds{R}$ stetig. 
+	\[
+		y' = f(x,y) \tag{$\star$}
+	\] 
+	heißt \bet{gewöhnliche Differentialgleichung 1. Ordnung}. \index{Differentialgleichung!1. Ordnung} Eine Lösung von ($\star$) auf dem Intervall $I$ ist eine differenzierbare Funktion 
+	$\varphi : I \to \mathds{R}$ mit
+	\begin{enumerate}[(i)]
+		\item $\set[\big(x, \varphi(x)\big)]{x \in I} \subset G $
+		\item $\varphi ' (x) = f\big(x, \varphi(x)\big)$, $x  \in I$
+	\end{enumerate}
+	\item Sei $G \subset \mathds{R} \times \mathds{R}^n$, $f : G \to \mathds{R}^n$ stetig.
+	\[
+		y' = f(x,y) \tag{$\star \star$}
+	\]
+	heißt \bet{System von $n$ Differentialgleichungen 1. Ordnung}\index{Differentialgleichung!System von $n$}. Eine Lösung von $(\star \star)$ auf $I$ ist eine differenzierbare Funktion 
+	$\varphi : I \to \mathds{R}^n$ mit
+	\begin{enumerate}[(i)]
+		\item $\set[\big(x, \varphi(x)\big)]{x \in I} \subset G$
+		\item $\varphi'(x) = f \big(x,\varphi(x)\big)$, $x \in I$
+	\end{enumerate}
+	$(\star \star)$ und (ii) lassen sich auch schreiben als 
+	\[
+		\begin{pmatrix}
+			y_1' \\ \vdots \\ y_n'
+		\end{pmatrix} = \begin{pmatrix}
+			f_1(x, y_1, \ldots , y_n) \\
+			\vdots \\
+			f_n(x, y_1, \ldots , y_n)
+		\end{pmatrix} \qquad , \qquad \begin{pmatrix}
+			\varphi_1'(x) \\
+			\vdots \\
+			\varphi_n'(x)
+		\end{pmatrix} = \begin{pmatrix}
+			f_1\big(x, \varphi_1(x), \ldots , \varphi_n(x)\big) \\
+			\vdots \\
+			f_n\big(x, \varphi_1(x), \ldots , \varphi_n(x)\big)
+		\end{pmatrix}
+	\]
+	\item Sei $G \subseteq \mathds{R} \times \mathds{R}^n$, $f : G \to \mathds{R}$ stetig
+	\[
+		y^{(n)} = f \enbrace{x,y,y',y'', \ldots , y^{(n-1)}} \tag{$\star\star\star$}
+	\]
+	heißt \bet{Differentialgleichung $n$-ter Ordnung}\index{Differentialgleichung!$n$-ter Ordnung}. Eine Lösung von $(\star \star \star)$ ist eine $n$-mal differenzierbare
+	Funktion $\varphi : I \to \mathds{R}$ mit
+	\begin{enumerate}[(i)]
+		\item $\set[\big(x, \varphi(x), \varphi'(x), \ldots , \varphi^{(n-1)}(x)\big)]{x \in I} \subset G $
+		\item $\varphi^{(n)}(x) = f\Big(x, \varphi(x), \varphi'(x), \ldots , \varphi^{(n-1)} (x)\Big)$, $x \in I$
+	\end{enumerate}
+\end{enumerate}
+% subsection 11 (end)
+
+\subsection[Beispiel: Einfache Differentialgleichungen]{Beispiel} % (fold)
+\label{sub:12}
+\begin{enumerate}[(i)]
+	\item \label{enum:12:1} Sei $y'= \frac{y}{x} $, $G= \mathds{R}_+^* \times \mathds{R}$. Lösungen sind Geraden der Form 
+	$\varphi(x) = c \cdot x$, wo $c \in \mathds{R}$ konstant ist. Dann gilt mit $I = (0, \infty)$
+	\[
+		\varphi'(x) = \frac{c \cdot x}{x} = \frac{\varphi(x)}{x} 
+	\]
+	\item \label{enum:12:2} Sei $y'= - \frac{x}{y} $, $G = \mathds{R} \times \mathds{R}_+^*$. Lösungen sind Halbkreise der Form 
+	$\varphi(x) = \sqrt{c-x^2} , x \in \enbrace{- \sqrt{c}, \sqrt{c}}=I , c \in \mathds{R}_+ $
+	\[
+		\varphi'(x) = \frac{-2x}{2 \sqrt{c-x^2}  } = - \frac{x}{\varphi(x)}  
+	\]
+	\item $m \cdot \ddot x = F(t,x, \dot x)$ \marginnote{$t$ Zeit, $x$ Ort, $\dot x$ Geschwindigkeit, $m$ Masse, $\ddot x$ Beschleunigung, $F$ Kraft}
+\end{enumerate}
+% subsection 12 (end)
+
+\subsection[Bemerkung: geometrische Interpretationen und System von DGL $\Leftrightarrow$ DGL $n$-ter Ordnung]{Bemerkung} % (fold)
+\label{sub:13}
+\begin{enumerate}[(i)]
+	\item geometrische Interpretationen:
+	\begin{itemize}
+		\item allgemeine Darstellung:
+		\[
+			\begin{tikzpicture}[scale=0.6]
+				%\draw[help lines] (0,0) grid (10,6);
+				\coordinate (x0) at (7,0);
+				\coordinate (y0) at (0,3);
+				\coordinate (xy) at (7,3);
+				\coordinate (fpeak) at (10,4.5);
+				\draw[ultra thick, <->] (10,0) -- (0,0) -- (0,6);
+				\draw[ultra thick, Chartreuse4] (2,1) to [out=-5, in=200](6,1) to [out=20, in=260](8,3) to [out=80, in=-85](8,5) to [out=95, in=-20](4.5,5.5) 
+				to [out=160, in=5](2,5) to [out=185, in=80](1,2) to [out=260, in=175](2,1);
+				\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=4pt},yshift=0pt, thick] (10,3) -- (fpeak) node[right, midway, xshift=0.25cm]{$f(x_0,y_0)$};
+				\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=4pt},yshift=0pt, thick] (xy) -- (10,3) node[below, midway, yshift=-0.27cm]{$1$};
+				\node[Chartreuse4] at (2.5,5.8) {$G$};
+				\draw[fill] (x0) circle (0.07) node[below]{$x_0$};
+				\draw[fill] (y0) circle (0.07) node[left]{$y_0$};
+				\draw[dashed, thick] (x0) -- (xy);
+				\draw[dashed, thick] (y0) -- (xy) -- ++ (3,0) -- (fpeak);
+				\draw (2,2.3) -- ++ (130:0.7);
+				\draw (2,3) -- ++ (122:0.7);
+				\draw (2,4) -- ++ (116:0.7);
+				\draw (2,1.4) -- ++ (140:0.7);
+				\draw (3,4) -- ++ (110:0.7);
+				\draw (3,3) -- ++ (130:0.7);
+				\draw (3,2) -- ++ (165:0.7);
+				\draw (3,1.05) -- ++ (167:0.7);
+				\draw (4,4) -- ++ (125:0.7);
+				\draw (4,5) -- ++ (108:0.5);
+				\draw (4,2.7) -- ++ (160:0.7);
+				\draw (4,1.85) -- ++ (175:0.7);
+				\draw (4,1) -- ++ (177:0.7);
+				\draw (5,1) -- ++ (185:0.7);
+				\draw (5,1.84) -- ++ (188:0.3);
+				\draw (5,2.8) -- ++ (185:0.7);
+				\draw (5,3.7) -- ++ (179:0.7);
+				\draw (5,4.6) -- ++ (170:0.7);
+				\draw (6,2.1) -- ++ (195:0.7);
+				\draw (6,1.3) -- ++ (198:0.7);
+				\draw (6,3) -- ++ (195:0.7);
+				\draw (6,4.15) -- ++ (208:0.7);
+				\draw (6,5.2) -- ++ (215:0.7);
+				\draw (6.8,1.6) -- ++ (205:0.5);
+				\draw (6.8,2.4) -- ++ (208:0.5);
+				\draw (7,3.8) -- ++ (220:0.7);
+				\draw (6.7,5.2) -- ++ (245:0.7);
+				\draw (7.7,5) -- ++ (245:0.7);
+				\draw[ultra thick, DarkOrange2] (8,4.3) to [out=-110,in=26.565](xy) to [out=206.565, in=0](4.5,2.2) node[below]{$\varphi$} to [out=180, in=-80](1.2,4);
+				\draw[ultra thick, DarkOrange2] (7,5.6) to [out=270, in=0](4.5,3.2) to [out=180, in=-80](3,5.3);
+				\draw[ultra thick, Firebrick3] (6.5,2.75) -- ++(26.565:4.5) node[right]{$y'=f(x,y)$};
+			\end{tikzpicture}
+		\]
+		\item zu \ref{sub:12} (\ref{enum:12:1}) und \ref{sub:12} (\ref{enum:12:2})
+		\[
+			\vcenter{\hbox{
+			\begin{tikzpicture}[scale=0.8]
+				%\draw[help lines] (0,-3) grid (5,3);
+				\draw[ultra thick] (0,-3) -- (0,3);
+				\draw[ultra thick] (0,0) -- (3.1,0);
+				\foreach \x in {1,...,16}
+					\draw[dashed] (0,0) -- ++ (90-11.25*\x:3); 
+				\draw[ultra thick, Sienna3] (0,0) -- ++ (22.5:3.2) node[right]{$\varphi$};
+			\end{tikzpicture}}}
+			\qquad 
+			\vcenter{\hbox{
+			\begin{tikzpicture}[scale=0.8]
+				%\draw[help lines] (-3,0) grid (3,3);
+				\draw[ultra thick] (-3.2,0) -- (3.2,0);
+				\draw[ultra thick] (0,0) -- (0,3.2);
+				\foreach \x in {1,...,4}
+					\draw[thick, dashed] (\x*0.75,0) arc [radius=\x*0.75, start angle=0, end angle=180];
+				\draw[ultra thick, Sienna3](1.5,0) arc [radius=1.5, start angle=0, end angle=180] node[below]{$\varphi$};
+			\end{tikzpicture}}}
+		\]
+		Symmetrie bei \ref{sub:12} (\ref{enum:12:2}): $f(\lambda x, \lambda y)= f(x,y)$ für $(x,y) \in G, \lambda  \in \mathds{R}$
+	\end{itemize}
+	\item\label{enum:13.2} Sei $G \subset \mathds{R} \times \mathds{R}^n$, $f : G \to \mathds{R}$ stetig und sei
+	\[
+		y^{(n)} = f \enbrace{x, y, y', \ldots , y^{(n-1)}} \tag{$\star$}
+	\]
+	eine DGL $n$-ter Ordnung. Betrachte nun die Gleichung
+	\[
+		\begin{pmatrix}
+			y_0' \\ \vdots  \\ y_{n-2}' \\ y_{n-1}'
+		\end{pmatrix} = \begin{pmatrix}
+			y_1 \\ \vdots \\ y_{n-1} \\ f(x,y_0, \ldots , y_{n-1})
+		\end{pmatrix} \tag{$\star\star$}
+	\]
+	mit $Y = \enbrace{ \begin{smallmatrix}
+		y_0 \\ : \\ y_{n-1}
+	\end{smallmatrix}} , F(x,Y) = \enbrace{ \begin{smallmatrix}
+		y_1 \\ : \\ y_{n-1} \\ f(x, y_0, \ldots , y_{n-1})
+	\end{smallmatrix}} $ schreibt sich $(\star\star)$ als 
+	\[
+		Y' = F(x,Y) \tag{$\star\star\star$}
+	\]
+	ein System von DGL erster Ordnung. Falls $\varphi : I \to \mathds{R}$ Lösung von $(\star)$ ist, so ist $\Phi : I \to \mathds{R}^n$ mit
+	\[
+		\Phi (x) = \begin{pmatrix}
+			\varphi(x) \\ \varphi'(x) \\ \vdots \\ \varphi^{(n-1)}(x)
+		\end{pmatrix}
+	\]
+	eine Lösung von $(\star\star\star)$. Beweis:
+	\[
+		\Phi'(x) = \begin{pmatrix}
+			\varphi'(x) \\ \vdots \\ \varphi^{(n-1)}(x) \\ \varphi^{(n)}(x)
+		\end{pmatrix} = \begin{pmatrix}
+			\varphi'(x) \\ \vdots \\ \varphi^{(n-1)}(x) \\ f\big(x, \varphi(x), \ldots , \varphi^{(n-1)}(x)\big) 
+		\end{pmatrix} = F\big(x,\Phi(x)\big)
+	\]
+	Falls umgekehrt $\Phi = \begin{pmatrix}
+		\varphi_0 \\ \vdots \\ \varphi_{n-1}
+	\end{pmatrix} : I  \to \mathds{R}^n$ Lösung von $(\star \star \star)$ ist, so ist $\varphi_0$ Lösung von $(\star)$. \marginnote{(warum?)}
+	
+\end{enumerate}
+% subsection 13 (end)
+
+
+\subsection[Definition: Lipschitz bezüglich der 2. Variablen]{Definition} % (fold)
+\label{sub:14}
+Sei $G \subset \mathds{R} \times \mathds{R}^n, f : G \to \mathds{R}^n$. 
+\begin{enumerate}[(i)]
+	\item $f$ ist Lipschitz (bezüglich der zweiten Variablen), falls $L \ge 0$ existiert, sodass für $(x,y) , (x,\overline{y} ) \in G$ gilt:
+	\[
+		\norm[2]{f(x,y) - f(x,\overline{y} )} \le L \cdot \norm[2]{y- \overline{y} }  
+	\]
+	\item $f$ ist lokal Lipschitz (bezüglich der zweiten Variablen), falls gilt: Jedes $(a,b) \in G$ besitzt eine Umgebung $U$, sodass $f|_{U \cap G}$ Lipschitz ist.
+\end{enumerate}
+% subsection 14 (end)
+
+\subsection[Satz: Kriterium für lokal Lipschitz (stetig partiell differenzierbar bzgl. der 2. Variablen)]{Satz} % (fold)
+\label{sub:15}
+Sei $G \subset \mathds{R} \times \mathds{R}^n$ offen und $f : G \to \mathds{R}^n, (x,y) \mapsto f(x,y)$, stetig partiell differenzierbar bezüglich der 2. Variablen, d.h.
+\[
+	(x,y) \mapsto \diff{f}{y} (x,y) = \enbrace{\diff{f_i}{y_j} (x,y)}_{1 \le i,j \le n}
+\]
+ist stetig. Dann ist $f$ lokal Lipschitz.
+\minisec{Beweis}
+Sei $(a,b) \in G$. Es gibt $r>0$ sodass $K:= [a-r,a+r]\times \overline{B}_{\norm[2]{.} }(b,r) \subset G $ \hfill (warum?)\\
+Dann ist $K$ kompakt nach Heine-Borel. Für $(x,y) \in G$ ist $\diff{f}{y} (x,y) \in M_n(\mathds{R})$ und $(x,y) \mapsto \norm{\diff{f}{y} (x,y)} $ stetig. $K$ kompakt
+$\overset{\text{Ana II., 4.10}}{\Rightarrow} $ $L := \sup \set[ \norm{\diff{f}{y} (x,y)} ]{(x,y) \in K} < \infty$. Für $(x,y), (x,\overline{y} ) \in K$ gilt nach dem
+Mittelwertsatz (Ana II., 7.11)
+\[
+	\norm[2]{f(x,y) - f(x,\overline{y} )} \le L \cdot \norm[2]{y-\overline{y} }  \bewende
+\]
+% subsection 15 (end)
+
+\subsection[Satz: Eindeutigkeit von Lösungen, wenn $f$ lokal Lipschitz]{Satz (Eindeutigkeit)} % (fold)
+\label{sub:16}
+Sei $G \subset \mathds{R} \times \mathds{R}^n$, $f :G  \to \mathds{R}^n$ stetig und lokal Lipschitz. Seien $\varphi, \psi : I \to \mathds{R}^n$ Lösungen von $y'= f(x,y)$.
+Falls $\varphi(x_0)= \psi(x_0)$ für ein $x_0 \in I$, so gilt $\varphi(x)= \psi(x)$ für alle $x \in I$.
+\minisec{Beweis}
+\begin{description}
+	\item[1. Behauptung] Falls $\varphi(a)= \psi(a)$ für $a \in I$, so existiert $\varepsilon >0 : \varphi(x)= \psi (x)$ für $x \in [a- \varepsilon, a+\varepsilon]\cap I$.
+	\minisec{Beweis}
+	Es gilt $\varphi'(x)= f\big(x, \varphi(x)\big), \psi'(x)= f\big(x,\psi(x)\big)$, also 
+	\begin{align*}
+		\int_{a} ^{x} \! \enbrace{ f\big(t,\varphi(t)\big) - f\big(t,\psi(t)\big)}  \, \mathrm{d}t &= \int_{a} ^{x} \! \enbrace{\varphi'(t) - \psi'(t)}  \, \mathrm{d}t = \varphi(x)-\psi(x) 
+	\end{align*}
+	$f$ lokal Lipschitz $\Rightarrow \exists L >0$ und $\delta >0$ mit 
+	\begin{align*}
+		\norm[2]{f\big(t, \varphi(t) \big) - f\big(t, \psi(t)\big)} \le L \cdot \norm[2]{ \varphi(t) - \psi(t) }  \quad, \enspace t \in [a- \delta , a+ \delta ]\cap I
+	\end{align*} 
+	Setze $\varepsilon := \min \set{\delta , \frac{1}{2 L} } $. Für $x \in  [a- \delta , a+ \delta ] \cap I$ gilt nun
+	\begin{align*}
+		\norm[2]{\varphi(x)- \psi(x)} = \norm[2]{\int_{a} ^{x} \! \enbrace{f\big(t, \varphi(t)\big) - f\big(t, \psi(t)\big)}  \, \mathrm{d}t} &\le \int_{a} ^{x} \! 
+		\norm[2]{f\big(t, \varphi(t)\big) - f\big(t, \psi(t)\big)}  \, \mathrm{d}t \\
+		&\le L \cdot \int_{a} ^{x} \! \norm[2]{\varphi(t)- \psi(t)}  \, \mathrm{d}t 
+	\end{align*}
+	Für $x \in [a- \delta , a+ \delta ] \cap I$ setze $M(x) := \sup \set[{\norm[2]{\varphi(t)- \psi(t)}}]{t \in I, \abs{t-a}\le \abs{x-a}  } < \infty  $.
+	Für $x, \xi \in [a-\delta , a+\delta ] \cap I$ mit $\abs{\xi-a}\le \abs{x-a}  $ gilt dann 
+	\begin{align*}
+		\norm[2]{\varphi(\xi) - \psi(\xi)} \le L \cdot \int_{a} ^{\xi} \!  \norm[2]{\varphi(t)- \psi(t)}  \, \mathrm{d}t \le L \cdot \abs{\xi -a}\cdot M(x) 
+		\le L \cdot \abs{x-a} \cdot M(x) 
+	\end{align*}
+	also $M(x) \le L \cdot \abs{x-a} M(x) $. Für $\abs{x-a} < \varepsilon\le \frac{1}{2 \cdot L} $ ergibt sich 
+	\[
+		0 \le M(x) \le L \cdot \varepsilon \cdot M(x) \le \frac{1}{2} M(x)
+	\]
+	also muss $M(x)=0$ gelten und $\varphi(x)= \psi(x)$ für $x \in [a-\varepsilon, a + \varepsilon] \cap I$.
+	\item[2. Behauptung] $\varphi(x) = \psi(x)$ für $x \in [x_0,\infty) \cap I$.
+	\minisec{Beweis}
+	Setze $x_1 := \sup \set[\xi \in I]{\varphi|_{[x_0, \xi]} = \psi|_{[x_0, \xi]}} $, \marginnote{Lücke schließen mit $\varphi, \psi$ stetig}
+	dann gilt $x_1 > x_0$. Falls $x_1 \not\in I$, ist die Behauptung bewiesen. Falls
+	$x_1 \in I$ und $[x_0, x_1]= [x_0, \infty) \cap I$, so ist die Behauptung auch wieder bewiesen. Sei nun $x_1 \in I$ und $[x_0, x_1] \not= [x_0, \infty) \cap I$. Dann 
+	existiert $\eta >0$ mit $[x_0, x_1+ \eta] \subset I$. Nach der 1. Behauptung existiert $\varepsilon >0$ sodass $\varphi(x)=\psi(x)$ für 
+	$x \in [x_1 -\varepsilon, x_1 + \varepsilon	] \cap I$. Setze $\zeta := \min \set{\varepsilon, \eta} $, dann $\varphi|_{[x_0, x_1 + \zeta]} = \psi|_{[x_0, x_1+ \zeta]}$
+	\light
+	\item[3. Behauptung] $\varphi(x) = \psi(x)$ für $x \in (- \infty, x_0] \cap I$
+	\minisec{Beweis}
+	Analog zu Behauptung 2.
+\end{description}
+$\Rightarrow \varphi(x)= \psi(x)$ für $x \in (- \infty, \infty) \cap I$. \bewende 
+% subsection 16 (end)
+
+\subsection[Satz von Picard-Lindelöf (Existenz einer Lösung)]{Satz (Picard-Lindelöf)} % (fold)
+\label{sub:17}
+Sei $G \subset \mathds{R} \times \mathds{R}^n$ offen, $f : G \to \mathds{R}^n$ stetig und lokal Lipschitz, $(x_0, y_0) \in G$. Dann existiert $\varepsilon >0$, sodass 
+\[
+	y' = f(x,y) \tag{$\star$}
+\]
+auf $[x_0 - \varepsilon, x_0 + \varepsilon]$ eine Lösung $\varphi$ mit der Anfangsbedingung $\varphi(x_0)= y_0$ hat. Dabei ist 
+$\varphi(x)= \lim_{ k \to \infty} \varphi_k(x)$, wo $\varphi_0 \equiv y_0$ und
+\[
+	\varphi_{k+1} (x) = y_0 + \int_{x_0} ^{x} \! f\big(t, \varphi_k(t)\big)  \, \mathrm{d}t
+\]
+\minisec{Beweis}
+\begin{description}
+	\item[1. Schritt:] Es gibt $r>0$ sodass $K:= [x_0 -r, x_0 +r] \times \overline{B}_{\norm[2]{.} }(y_0,r) \subset G$ und $f|_{K}$ Lipschitz ist mit der Konstanten $L$. 
+	$K$ kompakt, $f$ stetig $\Rightarrow M := \sup \set[{\norm[2]{f(x,y)} }]{(x,y) \in K} < \infty $. Setze $\varepsilon := \min \set{r, \frac{r}{M} }>0 $ (dürfen $M>0$
+	annehmen). 
+	\item[2. Schritt] $\varphi : [x_0 -\varepsilon, x_0 + \varepsilon] \to \mathds{R}^n$ erfüllt $(\star)$ mit Anfangsbedingung $\varphi(x_0)=y_0$ genau dann, wenn 
+	\[
+		\varphi(x) = y_0 + \int_{x_0} ^{x} \! f\big(t, \varphi(t)\big)  \, \mathrm{d}t \tag{$\star\star$}
+	\]
+	gilt für alle $x \in  [x_0 - \varepsilon, x_0+ \varepsilon]$ (Fundamentalsatz). Wir definieren induktiv Funktionen 
+	$\varphi_k : [x_0 - \varepsilon, x_0 + \varepsilon] \to \mathds{R}^n$ durch $\varphi_0 (x)= y_0$, $x \in [x_0 - \varepsilon, x_0 + \varepsilon]$,
+	\[
+		\varphi_{k+1} := y_0 + \int_{x_0} ^{x} \! f\big(t, \varphi_k(t)\big)  \, \mathrm{d}t \quad , \qquad x \in[x_0-\varepsilon, x_0 + \varepsilon]\tag{$\star\star\star$}
+	\]
+	Zu zeigen: $\varphi_k$ ist wohldefiniert für $k \in \mathds{N}$, $\varphi_k$ konvergiert gleichmäßig auf $[x_0 -\varepsilon, x_0 +\varepsilon]$ gegen eine Lösung 
+	$\varphi$.
+	\item[3. Schritt] $(\star\star\star)$ ist wohldefiniert, falls $\norm[2]{\varphi_k(x)-y_0} \le r $ für $x \in [x_0 -\varepsilon, x_0 +\varepsilon]$. $k=0$ trivial.
+	Falls die Aussage für $k$ gilt, so folgt 
+	\begin{align*}
+		\norm[2]{\varphi_{k+1} -y_0} \le \int_{x_0} ^{x} \! \norm[2]{f\big(t, \varphi_k(t)\big)}  \, \mathrm{d}t \le   M \cdot \abs{x-x_0} \le M \cdot \varepsilon
+		\le r \qquad x \in [x_0 -\varepsilon, x_0 +\varepsilon]
+	\end{align*}
+	$\Rightarrow $ $(\star\star\star)$ ist wohldefiniert für alle $k \in \mathds{N}$
+	\item[4. Schritt] Wir zeigen 
+	\begin{align*}
+		\norm[2]{\varphi_{k+1}(x)- \varphi_k(x)} \le M \cdot L^k \cdot \frac{\abs{x-x_0}^{k+1} }{(k+1)!} 
+	\end{align*}
+	für $k \in \mathds{N}$, $x \in [x_0 -\varepsilon, x_0 +\varepsilon]$. $k=0$: 
+	\[
+		\norm[2]{\varphi_1(x) - \varphi_0(x)} = \norm[2]{\int_{x_0} ^{x} \! f(t,y_0)  \, \mathrm{d}t}  \le \int_{x_0} ^{x} \! \norm[2]{f(t,y_0)}  \, \mathrm{d}t 
+		\le M \cdot \frac{\abs{x-x_0}^{0+1} }{(0+1)!}
+	\]
+	$k-1 \mapsto k$:
+	\begin{align*}
+		\norm[2]{\varphi_{k+1}(x) - \varphi_k(x)} &= \int_{x_0} ^{x} \! \norm[2]{\Big(f\big(t, \varphi_k(t)\big) - f\big(t, \varphi_{k-1}(t)\big)\Big)  \, \mathrm{d}t} \\
+		&\le \int_{x_0} ^{x} \! \norm[2]{f\big(t,\varphi_k(t)\big) -f\big(t, \varphi_{k-1}(t)\big) }  \, \mathrm{d}t \\
+		&\le  \int_{x_0} ^{x} \! L \cdot \norm[2]{\varphi_k(t) - \varphi_{k-1}(t)}  \, \mathrm{d}t \\
+		&\le M \cdot L^k \int_{x_0} ^{x} \! \frac{\abs{t-x_0}^k}{k!}  \, \mathrm{d}t \\
+		&= M \cdot L^k \frac{\abs{x-x_0}^{k+1} }{(k+1)!} 
+	\end{align*}
+	\item[5. Schritt] Die Reihe $\sum_{k=0}^{\infty} (\varphi_{k+1} - \varphi_{k})$ wird majorisiert durch 
+	$\sum_{k=0}^{\infty} M \cdot \frac{L^k \cdot \varepsilon^{k+1}}{(k+1)!}  $
+	\begin{align*}
+		\enbrace{\norm[2]{\sum_{k=0}^{k_0} \varphi_{k+1}(x) - \varphi_{k}(x)} \le \sum_{k=0}^{k_0}  \norm[2]{\varphi_{k+1}(x) - \varphi_{k}(x)}  \le  \sum_{k=0}^{k_0}
+		\frac{M \cdot L^k \cdot \abs{x-x_0}^{k+1} }{(k+1)!}  \le \sum_{k=0}^{k_0} \frac{M \cdot L^k \cdot \varepsilon^{k+1}}{(k+1)!} }
+	\end{align*}
+	und konvergiert daher gleichmäßig; Der Limes ist stetig auf $[x_0 -\varepsilon, x_0 +\varepsilon]$. Wir erhalten \marginnote{Teleskopsumme}
+	\[
+		\varphi := \lim_{ k \to \infty} \varphi_k =  \lim_{ k \to \infty} y_0 + \sum_{l=0}^{k} \varphi_{l+1}- \varphi_l = y_0 + \lim_{ k \to \infty} \sum_{l=0}^{k}
+		\varphi_{l+1} - \varphi_l = y_0 + \sum_{k=0}^{\infty} \varphi_{k+1} - \varphi_{k}
+	\]
+	$\varphi : [x_0 -\varepsilon, x_0 +\varepsilon] \to \mathds{R}^n$ stetig. Für $k \in \mathds{N}$, $x \in [x_0 -\varepsilon, x_0 +\varepsilon]$ gilt 
+	\begin{align*}
+		\norm[2]{f(x, \varphi(x)) - f(x, \varphi_k(x))} \le L \cdot \norm[2]{\varphi (x) - \varphi_k(x)} 
+	\end{align*}
+	$\varphi_l \xrightarrow{k \to \infty} \varphi$ gleichmäßig
+	$\Rightarrow $ $\Big(x \mapsto f\big(x, \varphi_k(x)\big)\Big) \xrightarrow{k \to \infty} \Big(x \mapsto f\big(x, \varphi(x)\big)\Big)$ 
+	gleichmäßig \marginnote{warum?}
+	\begin{align*}
+		\varphi(x) \stackrel{k \to \infty}{\longleftarrow} \varphi_{k+1}(x) = y_0 + \int_{x_0} ^{x} \! f\big( t, \varphi_k(t)\big)  \, \mathrm{d}t 
+		\xrightarrow{k \to \infty} y_0 + \int_{x_0} ^{x} \! f\big(t, \varphi(t)\big)  \, \mathrm{d}t
+	\end{align*}
+	$\Rightarrow (\star\star)$ \bewende
+\end{description}
+% subsection 17 (end)
+
+\subsection[Beispiel: Anwendung von Picard-Lindelöf]{Beispiel} % (fold)
+\label{sub:18}
+Betrachte $y' = 2 \cdot x \cdot  y$, $G = \mathds{R}\times \mathds{R}$. Gesucht: Lösung $\varphi$ mit $\varphi(0)=y_0$. Setze $\varphi_0(x) := y_0$, $x \in \mathds{R}$.
+$\varphi_{k+1}(x) := y_0 + \int_{0} ^{x} \! 2 t \varphi_k(t)  \, \mathrm{d}t$, $x \in \mathds{R}$. Dann
+\begin{align*}
+	\varphi_1(x) &= y_0 + 2 \int_{0} ^{x} \! t \cdot  y_0  \, \mathrm{d}t = y_0 + y_0 \cdot x^2 \\
+	\varphi_2(x) &= y_0 + \int_{0} ^{x} \! 2 t (y_0 + y_0 \cdot x^2)  \, \mathrm{d}t = y_0 + y_0 \cdot x^2 + y_0 \cdot \frac{x^4}{2} 
+\end{align*}
+Induktion liefert dann: $\varphi(x) = y_0(1+ x^2 + \frac{x^4}{2!} + \frac{x^6}{3!} + \frac{x^8}{4!} + \ldots + \frac{x^{2k}}{k!}    )$ also 
+$\varphi_k (x) \xrightarrow{k \to \infty} y_0 \cdot e^{x^2}$
+% subsection 18 (end)
+
+\subsection[Corollar: Folgerungen aus dem Eindeutigkeits- und  Existenzsatz]{Corollar} % (fold)
+\label{sub:19}
+Sei $G \subset \mathds{R} \times \mathds{R}^n$ offen, $f : G \to \mathds{R}$ stetig und lokal Lipschitz.
+\begin{enumerate}[(i)]
+	\item Seien $\varphi, \psi : I \to \mathds{R}$ zwei Lösungen von 
+	\[
+		x^{(n)}= f\big(x, y, y', \ldots , y^{(n-1)}\big) \tag{$\star$}
+	\]
+	über dem Intervall $I$. Falls für $x_0 \in I$ gilt:
+	\[
+		\varphi(x_0)= \psi(x_0), \ldots , \varphi^{(n-1)}(x_0) = \psi^{(n-1)}(x_0)
+	\]
+	so ist $\varphi=\psi$ über $I$.
+	\item Zu $(x_0, y_0, y_1, \ldots , y_{n-1}) \in G$ existiert $\varepsilon>0$ und eine Lösung $\varphi : [x_0 -\varepsilon, x_0 +\varepsilon] \to \mathds{R}$ vom 
+	($\star$) mit 
+	\[
+		\varphi(x_0) = y_0, \enspace\varphi'(x_0)=y_1, \enspace\ldots , \enspace \varphi^{(n-1)}(x_0) = y_{n-1} 
+	\]
+	\minisec{Beweis}
+	Bemerkung \ref{sub:13} (\ref{enum:13.2}), Satz \ref{sub:16}, Satz \ref{sub:17} \bewende
+\end{enumerate}
+% subsection corollar (end)
+
+\subsection[Beispiel: Winkelfunktionen als Lösungen]{Beispiel} % (fold)
+\label{sub:110}
+$y''=-y$ ist eine Differentialgleichung 2. Ordnung. Lösungen sind $\sin(x), \cos(x), 2 \sin(x)+ \cos(x)$. Allgemeiner gilt: Für Konstanten $c_1, c_2 \in \mathds{R}$ betrachte 
+\[
+	\varphi(x) = c_1 \sin(x)+ c_2 \cos(x)
+\]
+Dann gilt $\varphi$ löst $y''=-y$ und $\varphi(0)=c_2$ und $\varphi'(0)=c_1$. Mit Eindeutigkeit folgt, dass alle diese Funktionen Lösungen sind.
+% subsection 110 (end)
+% section 1 (end)
+\newpage
+\section{Einige Lösungsmethoden} % (fold)
+\label{sec:2}
+\subsection{Trennung der Variablen} % (fold)
+\label{sub:21}
+Betrachte die Differentialgleichung
+\[
+	y' = f(x) \cdot g(y) \tag{$\star$}
+\]
+An dieser Stelle benehmen wir uns mal wie Physiker:
+\[
+	\diffd{y}{x} = f(x) \cdot g(y) \Longleftrightarrow \frac{1}{g(y)} \mathrm{d}y = f(x) \mathrm{d}x \Longleftrightarrow \int \! \frac{1}{g(y)} \mathrm{d}y = \int \! f(x) \mathrm{d}x
+\]
+\bet{Satz:} Seien $I,J \in \mathds{R}$ Intervalle $f:  I \to \mathds{R},\, g : J \to \mathds{R}^*$ stetig. Für $(x_0, y_0) \in I \times J$ definiere 
+$F : I \to \mathds{R},\, G : J \to \mathds{R}$ durch
+\[
+	F(x) = \int_{x_0} ^{x} \! f(t)  \, \mathrm{d}t \qquad \qquad G(y) = \int_{y_0} ^{y} \! \frac{1}{g(s)}  \, \mathrm{d}s 
+\]
+Sei $I' \subset I$ ein Intervall mit $x_0 \in I'$ und $F(I') \subset G(J)$. Dann besitzt 
+\[
+	y' =  f(x) \cdot g(y) \tag{$\star$}
+\]
+eine eindeutige Lösung $\varphi : I' \to J$ mit $\varphi(x_0)= y_0$. Diese Lösung erfüllt: 
+\[
+	G\big(\varphi(x)\big) = F(x) \qquad \text{ für } x \in I' \tag{$\star\star$}
+\]
+\minisec{Beweis}
+\begin{description}
+	\item[Schritt 1:] Sei $\varphi : I' \to \mathds{R}$ eine Lösung von $(\star)$ mit $\varphi(x_0)=y_0$. Wir zeigen, dass $\varphi$ ($\star\star$) erfüllt:
+	Wir haben: $\varphi'(x) = f(x) g\big(\varphi(x)\big)$, $x \in I'$. Also 
+	\begin{align*}
+		F(x) = \int_{x_0} ^{x} \! f(t)  \, \mathrm{d}t = \int_{x_0} ^{x} \! \frac{\varphi'(t)}{g\big( \varphi(t)\big)}  \, \mathrm{d}t 
+		= \int_{\varphi(x_0)} ^{\varphi(x)} \! \frac{ \mathrm{d}s}{g(s)} = \int_{y_0} ^{\varphi(x)} \! \frac{ \mathrm{d}s}{g(s)} = G \big( \varphi(x)\big)   
+	\end{align*} 
+	\item[Schritt 2 (Eindeutigkeit):] $G'(y)= \frac{1}{g(y)} \not= 0 $ ist stetig $\Rightarrow $ $G$ ist stetig differenzierbar und streng monoton. 
+	Daraus folgt: $G$ besitzt eine stetig
+	differenzierbare Umkehrfunktion $H : G(J) \to \mathds{R}$. Aus $(\star\star)$ folgt
+	\[
+		\varphi(x) = H\Big(G\big(\varphi(x)\big)\Big) = H\big(F(x)\big) \qquad x \in I'
+	\]
+	$\Rightarrow \varphi$ eindeutig bestimmt durch $F$ und $H$.
+	\item[Schritt 3 (Existenz):] Betrachte $H$ aus 2. und definiere $\varphi : I'  \to \mathds{R}$ durch $\varphi(x) = H \big( F(x)\big)$, $x \in I'$. $\varphi$ ist
+	wohldefiniert, da $F(I') \subset G(J)$. $H,F$ stetig differenzierbar, also auch $\varphi$. Anfangsbedingung:
+	\[
+		\varphi(x_0) = H \big(F(x_0) \big) = H(0) = y_0
+	\]
+	Weiter gilt $G \big(\varphi(x) \big) = F(x)$
+	\[
+		\Rightarrow f(x)= F'(x) = (G \circ \varphi)' (x)= G'\big(\varphi(x)\big) \cdot \varphi'(x) = \frac{1}{g\big(\varphi(x)\big)} \cdot \varphi'(x) 
+	\]
+	Daraus folgt $\varphi'(x)= f(x) \cdot g\big(\varphi(x)\big)$. Also löst $\varphi$ $(\star)$. \bewende
+\end{description}
+% subsection 21 (end)
+
+\subsection[Beispiel: Anwendung von \ref{sub:21} auf $y' =y^2$]{Beispiel} % (fold)
+\label{sub:22}
+\[
+	y' = y^2 = f(x) \cdot g(y) \tag{$\star$}
+\]
+Dann $f(x)= 1, g(y)= y^2$. Anfangsbedingung $\varphi(0)=y_0 \in \mathds{R}$
+\begin{description}
+	\item[1. $y_0=0$:] Aus $y_0=0$ folgt, dass $\varphi(x) \equiv 0$ löst $(\star)$
+	\item[2. $y_0 >0$:] Aus $y_0 >0$ folgt: Sei $\varphi: I \to \mathds{R}$ eine Lösung von $(\star)$ mit $\varphi(0)= y_0 > 0$. Falls es $x \in I$ gibt 
+	mit $\varphi(x)<0$, dann
+	existiert nach dem Zwischenwertsatz ein $\overline{x} \in I $ mit $\varphi(\overline{x} )=0$. Dies ist ein Widerspruch zur Eindeutigkeit der Lösung \light
+	
+	$\Rightarrow \varphi(x)>0$ für alle $x \in I$. $f : I=\mathds{R} \to \mathds{R}$, $g : J=R \to \mathds{R}_+^*$. $f(x)=1, g(x)=x^2$. Setze nun:
+	$F : I \to \mathds{R}$, $G : J  \to \mathds{R}$
+	\begin{align*}
+		F(x) &= \int_{0} ^{x} \! f(t)  \, \mathrm{d}t = x \\
+		G(y) &= \int_{y_0} ^{y} \! \frac{1}{g(s)}  \, \mathrm{d}s = \int_{y_0} ^{y} \! \frac{1}{s^2}  \, \mathrm{d}s = \frac{1}{y_0} - \frac{1}{y}   
+	\end{align*}
+	Für $I'=(- \infty, \frac{1}{y_0} )$ gilt $F(I')= (-\infty, \frac{1}{y_0} )$ und somit $F(I') \subset G(J)$. Nach \ref{sub:21} besitzt $(\star)$ eine eindeutige Lösung
+	$\varphi : I' \to \mathds{R}_+^*$ mit $\frac{1}{y_0}- \frac{1}{\varphi(x)}= x  $ $\leadsto \varphi(x)= \frac{y_0}{1- x \cdot y_0} $
+	\item[3. $y_0<0$:] Analog zu 2. $I'= (\frac{1}{y_0}, \infty )$ $\varphi(x)= \frac{y_0}{1- x \cdot y_0} $ 
+\end{description}
+% subsection 22 (end)
+
+\subsection{Satz (homogene, lineare Differentialgleichung)} % (fold)
+\label{sub:23}
+Sei $I$ ein Intervall, $a : I \to \mathds{R}$ stetig, $x_0 \in I, y_0 \in \mathds{R}$. Dann besitzt \index{Differentialgleichung!homogene,lineare}
+\[
+	y' = a(x) y \tag{$\star$}
+\]
+genau eine Lösung $\varphi : I \to \mathds{R}$ mit $\varphi(x_0)= y_0$ gegeben durch:
+\[
+	\varphi(x) = y_0 \cdot e^{\int_{x_0} ^{x} \! a(t)  \, \mathrm{d}t} \tag{$\star\star$}
+\]
+\minisec{Beweis}
+$\varphi(x_0)= y_0$ \checkmark \\
+$\varphi$ wie in $(\star \star)$ ist eine Lösung von $(\star)$ (Nachrechnen). Da $(x,y) \mapsto a(x) \cdot y$ Lipschitz $\Rightarrow$ Lösung ist eindeutig (\ref{sub:16}) \bewende
+% subsection 23 (end)
+
+\subsection[Beispiel: homogene, lineare DGL mit konstanten Koeffizienten]{Beispiel} % (fold)
+\label{sub:24}
+\[
+	y' = c \cdot y \tag{$\star$}
+\]
+hat Lösungen der Form $\varphi(x)= y_0 e^{c \abs{x-x_0} }$ mit $\varphi(x_0)=y_0$. $(\star)$ ist eine homogene lineare Differentialgleichung mit konstanten 
+Koeffizienten\index{Differentialgleichung!homogene,lineare!mit konstanten Koeffizienten}. 
+% subsection 24 (end)
+
+\subsection{Satz (inhomogene lineare DGL; Variation der Konstanten)} % (fold)
+\label{sub:25}
+Sei $I \subset \mathds{R}$ ein Intervall, $a,b : I \to \mathds{R}$ stetig, $x_0 \in I$, $y_0 \in \mathds{R}$. Dann besitzt 
+\[
+	y' = a(x)\cdot y + b(x) \tag{$\star$}
+\]
+\emph{genau eine} Lösung $\psi : I \to \mathds{R}$ mit $\psi(x_0)=y_0$, nämlich
+\[
+	\psi(x) = \underbrace{y_0 \cdot \varphi(x)}_{\text{homogene Lösung}}+ \underbrace{\varphi(x) \cdot \int_{x_0} ^{x} \! \varphi(t) ^{-1} b(t)  \,
+	 \mathrm{d}t}_{\text{inhomogene Lösung}} = \varphi(x) \underbrace{\enbrace{y_0 + \int_{x_0} ^{x} \! 
+	\varphi(t) ^{-1} b(t)  \, \mathrm{d}t}}_{\text{Variation der Konstanten}} 
+\]
+wobei $\varphi(x)= e^{\int_{x_0} ^{x} \! a(t)  \, \mathrm{d}t}$ eine Lösung der homogenen linearen DGL $y'=a(x)y$ mit $\varphi(x_0)= 1$ ist.
+\minisec{Beweis}
+$\psi$ löst $(\star)$: einsetzen. 
+$f(x,y)= a(x)y + b(x)$ ist lokal Lipschitz $\Rightarrow $ Eindeutigkeit. \bewende
+% subsection 25 (end)
+
+\subsection[Bemerkung: Variation der Konstanten bei System von linearen DGL]{Bemerkung} % (fold)
+\label{sub:26}
+Der Ansatz lässt sich (zum Teil) auf Systeme von linearen Differentialgleichungen der Form
+\[
+	y' = Ay+b \qquad \quad y,b : I \to \mathds{R}^n, A : I \to M_n(\mathds{R}) \tag{$\star$}
+\]
+übertragen. $(\star)$ schreibt sich auch als
+\[
+	\begin{pmatrix}
+		y_1' \\ \vdots \\ y_n'
+	\end{pmatrix} = \begin{pmatrix}
+		a_{11}\cdot y_1 + \ldots + a_{1n}\cdot y_n \\
+		\vdots \\
+		a_{n1}\cdot y_1 + \ldots + a_{nn}\cdot y_n
+	\end{pmatrix} + \begin{pmatrix}
+		b_1 \\ \vdots \\ b_n
+	\end{pmatrix}
+\]
+Es gilt: 
+\[
+	\set{\text{Lösungen der inhomogenen linearen DGL}} = \psi_0 + \set{\text{Lösungen der homogenen linearen DGL}}  
+\]
+wobei $\psi_0$ (irgend-)eine Lösung der inhomogenen linearen DGL ist. Die Lösungen der homogenen linearen DGL bilden einen Vektorraum.
+% subsection 26 (end)
+
+\subsection{Homogene Differentialgleichungen} % (fold)
+\label{sub:27}
+Betrachte
+\[
+	y' = f \enbrace{\frac{y}{x} } \tag{$\star$}
+\]
+Mit $z= \frac{y}{x} $ ergibt sich $y= x \cdot z$, also $y' = x \cdot z' + z$ und damit $x \cdot z' +z = f(z)$, also
+\[
+	z'=  \frac{1}{x} \big(f(z)-z\big) \tag{$\star\star$}
+\]
+$(\star\star)$ lässt sich mit Trennung der Variablen behandeln (siehe \ref{sub:21}). 
+% subsection 27 (end)
+
+\subsection[Satz: Lösung von homogenen Differentialgleichungen]{Satz} % (fold)
+\label{sub:27.2}
+Seien $I \subset \mathds{R}^*$, $J \subset \mathds{R}$ Intervalle, $f : J \to \mathds{R}$ stetig und 
+$G := \set[(x,y) \in \mathds{R}^* \times \mathds{R}]{\frac{y}{x} \in J } $. Sei $(x_0,y_0) \in G$ ein Punkt mit $x_0 \in I$. Dann gilt: Eine Funktion 
+$\varphi : I \to \mathds{R}$ ist Lösung von $y'= f(\frac{y}{x} ) \enspace(\star)$ genau dann, wenn $\psi : I  \to \mathds{R}$, $\psi(x) := \frac{\varphi(x)}{x} $ Lösung ist 
+von $z'= \frac{1}{x} \big(f(z)-z\big) \enspace (\star\star)$ mit $\psi(x_0)= \frac{y_0}{x_0} $.
+\minisec{Beweis}
+Nachrechnen \bewende
+% subsection 27 (end)
+
+\subsection[Beispiel zur Lösung einer homogenen DGL]{Beispiel} % (fold)
+\label{sub:28}
+Betrachte 
+\[
+	y' = 1+ \frac{y}{x} + \enbrace{\frac{y}{x} }^2 
+\]
+auf $\mathds{R}^* \times \mathds{R}$ mit Anfangsbedingung $(x_0,y_0)$. Die Substitution $z=\frac{y}{x} $ liefert 
+\[
+	z'= \underbrace{\frac{1}{x}}_{=:f(x)} \underbrace{(1+z^2)}_{=:g(z)} 
+\]
+mit Anfangsbedingung $(x_0, \frac{y_0}{x_0} )$. Trennung der Variablen (Satz \ref{sub:21}) liefert:
+\begin{align*}
+	\arctan (\psi(x)) - \arctan \enbrace{\frac{y_0}{x_0} }  = \int_{\frac{y_0}{x_0} } ^{\psi(x)} \! \frac{1}{1+s^2}  \, \mathrm{d}s= G(\psi(x)) = F(x) = \int_{x_0} ^{x} \! \frac{1}{t}  \, \mathrm{d}t  = \ln x - \ln x_0 = \ln \frac{x}{x_0} 
+\end{align*}
+$\Rightarrow \psi(x) = \tan \enbrace{\ln \frac{x}{x_0} + \arctan \frac{y_0}{x_0} } $ und $\varphi(x)= x \cdot \psi(x)$ löst das Anfangswertproblem 
+$y'= 1+ \frac{y}{x} + \enbrace{\frac{y}{x} }^2, (x_0, y_0) $.
+% subsection 28 (end)
+
+\subsection[Beispiel aus der Physik (?)]{Beispiel} % (fold)
+\label{sub:29}
+Sei $U : \mathds{R}^3 \to \mathds{R}$ zweimal stetig differenzierbar. Betrachte 
+\[
+	\ddot x = - \grad U(x) \tag{$\star$}
+\]
+d.h. wir suchen $x: I \to \mathds{R}^3$, $x(t)= \begin{pmatrix}
+	x_1(t) \\ x_2(t) \\ x_3(t)
+\end{pmatrix}$ mit $\ddot x(t)= - \grad U\big(x(t)\big)$, $t \in I$, also 
+\[
+	\begin{pmatrix}
+		\ddot x_1(t) \\ \ddot x_2(t) \\ \ddot x_3(t)
+	\end{pmatrix} = - \begin{pmatrix}
+		\diff{U}{x_1} \big( x_1(t), x_2(t), x_3(t)\big) \\
+		\diff{U}{x_2} \big( x_1(t), x_2(t), x_3(t)\big) \\
+		\diff{U}{x_3} \big( x_1(t), x_2(t), x_3(t)\big) 
+	\end{pmatrix}
+\]
+Wir nehmen an, dass das Potential $U$ in $0 \in \mathds{R}^3$ ein lokales Maximum hat und interessieren uns für Lösungen $x$ von ($\star$) in einer kleinen Umgebung von $0$.
+
+
+$x(t)\equiv 0$ ist Lösung , d.h. das System ist im Minimum im Gleichgewicht. Wir nehmen weiter an, dass 
+\[
+	A := ( \hess U)(0) = \enbrace{ \frac{\partial^2 U}{\partial x \partial x_j} (0)}_{i,j} \in M_3(\mathds{R})  
+\]
+positiv definit ist, d.h. es existiert $S \in M_3(\mathds{R})$ orthogonal mit 
+\[
+	B := S ^{-1} A S = \begin{pmatrix}
+		\lambda_1 & & 0 \\
+		& \lambda_2 & \\
+		0 & & \lambda_3
+	\end{pmatrix} \qquad \quad , \lambda_1, \lambda_2, \lambda_3 >0
+\]
+Ana. II $\leadsto$
+\[
+	U(\xi)= U(0 + \xi) = U(0) + \frac{1}{2} \sprod{\xi}{A \xi} + \beta(\xi)  
+\]
+für ein $\beta : \mathds{R}^3 \to \mathds{R}$ mit $\lim_{ \xi \to 0} \frac{\beta(\xi)}{\norm[2]{\xi} } = 0 $. Wir approximieren nun $U(\xi)$ durch 
+\[
+	\tilde U (\xi) := U(0)+ \frac{1}{2} \sprod{\xi}{A \cdot \xi} 
+\]
+Wie in Ana. II 8.6 (i) erhält man 
+\[
+	\grad\enbrace{\xi \mapsto \sprod{\xi}{A \cdot \xi} }  = 2 A \cdot x
+\]
+Also $\grad \tilde U (x) = A \cdot x$
+\[
+	\leadsto \ddot x = - A x
+\]
+$y := S ^{-1} x$ $\Rightarrow \ddot y = S ^{-1} \ddot x  = S ^{-1} (-A)x =- S ^{-1} A S S ^{-1} x = - B S ^{-1}  x = -B y$. Also folgt:
+\[
+	\ddot y = - B y = - \begin{pmatrix}
+		\lambda_1 & & \\
+		& \lambda_2 & \\
+		& & \lambda_3
+	\end{pmatrix}y, \qquad \quad \begin{pmatrix}
+		\ddot y_1 \\
+		\ddot y_2 \\
+		\ddot y_3
+	\end{pmatrix} = \begin{pmatrix}
+		-\lambda_1 y \\
+		-\lambda_2 y \\
+		- \lambda_3 y
+	\end{pmatrix}
+\]
+mit den Lösungen $y_i(t) = \alpha_i \cdot  \cos \enbrace{\sqrt{\lambda_i}\cdot t  } + \beta_i \cdot \sin \enbrace{\sqrt{\lambda_i} \cdot t  } $, $\alpha_i, \beta_i \in \mathds{R}$
+$i=1,2,3$
+% subsection 29 (end)
+% section 2 (end)
+\newpage
+
+\section{Treppenfunktionen: Die $L^1$-Halbnorm} % (fold)
+\label{sec:3}
+
+\subsection[Definition: Quader, Volumen, Treppenfunktion]{Definition} % (fold)
+\label{sub:31}
+\begin{enumerate}[a)]
+	\item Ein \Index{Quader} $Q \subset \mathds{R}^n$ ist eine Teilmenge der Form $Q = I_1 \times I_2 \times \ldots \times I_n$, wo $I_j \subset \mathds{R}, j=1,\ldots ,n$
+	ein beschränktes, nicht leeres Intervall ist. \\
+	(Wir lassen offene, halboffene, abgeschlossene und Intervalle mit einem Punkt zu.)
+	\item Das \Index{Volumen} eines Quaders wie in a) definieren wir als $v(Q) := \abs{I_1} \cdot \abs{I_2} \cdot \ldots \cdot \abs{I_n}$ \\
+	($\abs{I_j} $ ist die Länge von $I_j$)
+	\item $\varphi : \mathds{R}^n \to \mathds{R}$ heißt \Index{Treppenfunktion}, falls paarweise disjunkte Quader $Q_1, \ldots , Q_s \subset \mathds{R}^n$ existieren mit
+	$\varphi|_{Q_j}$ konstant für $j=1, \ldots ,s$ und 
+	\[
+		\varphi\Big|_{\mathds{R}^n \setminus \bigcup_{j=1}^s Q_j} \equiv 0
+	\]
+	$\varphi$ lässt sich dann schreiben als
+	\[
+		\varphi = \sum_{j=1}^{s} c_j \cdot \chi_{Q_j}
+	\]
+	wo $\chi_{Q_j} : \mathds{R}^n \to \mathds{R}$ die charakteristische Funktion von $Q_j$ ist, \marginnote{auch mit $\mathds{1}_{Q_j}$ bezeichnet}
+	\[
+		\chi_{Q_j}(x) = \begin{cases}
+			1, &\text{ falls }x \in Q_j\\
+			0, &\text{ falls }x \not\in Q_j 
+		\end{cases}
+	\]
+	Wir schreiben $\mathcal{T}_{\mathds{R}^n} := \set{\text{Treppenfunktionen auf }\mathds{R}^n} $.
+	\item Für eine Treppenfunktion $\varphi$ wie in c) definieren wir das \bet{Integral}\index{Integral!einer Treppenfunktion}
+	\[
+		\int_{\mathds{R}^n} \! \varphi(x)  \, \mathrm{d}x  :=  \sum_{j=1}^{s} c_j \cdot v(Q_j)
+	\]
+	Wir schreiben auch $\int\! \varphi  \, \mathrm{d}x$.
+\end{enumerate}
+% subsection 31 (end)
+
+\subsection[Bemerkung: Zerlegung von Quadern in disjunkte Quader]{Bemerkung} % (fold)
+\label{sub:32}
+Falls $Q_1, \ldots , Q_s \subset \mathds{R}^n$ Quader sind (nicht notwendig paarweise disjunkt), $c_1, \ldots , c_s \in \mathds{R}$, so ist 
+$\varphi = \sum_{j=1}^{s} c_j \cdot \chi_{Q_j}$ eine Treppenfunktion: Es existieren paarweise disjunkte Quader $Q_1', \ldots , Q_{s'}' \subset \mathds{R}^n$ mit
+$\varphi|_{Q_i'} \equiv c_i$ und $\bigcup Q_j = \bigcup Q_i'$ $\leadsto \varphi = \sum_{i=1}^{s'} c_i' \cdot \chi_{Q_i'}$
+% subsection 32 (end)
+
+\subsection[Proposition: Eigenschaften von Treppenfunktionen]{Proposition} % (fold)
+\label{sub:33}
+\begin{enumerate}[a)]
+	\item $\mathcal{T}_{\mathds{R}^n}$ ist ein Vektorraum über $\mathds{R}$.
+	\item $\int_{\mathds{R}^n} \! \varphi(x)  \, \mathrm{d}x$ hängt nicht von der Darstellung $\varphi = \sum_{k=1}^{s} c_k \cdot \chi_{Q_k}$ ab (wo 
+	$Q_1, \ldots , Q_s \subset \mathds{R}^n$ Quader sind und $c_1, \ldots , c_s \in \mathds{R}$)
+	\item Es gilt 
+	\begin{enumerate}[(i)]
+		\item $\int(\alpha \cdot \varphi + \beta \cdot \psi)  \, \mathrm{d}x  = \alpha \cdot  \int \! \varphi  \, \mathrm{d}x  + \beta \cdot \int\! \psi  \, \mathrm{d}x  $,
+		$\varphi, \psi \in \mathcal{T}_{\mathds{R}^n}$, $\alpha, \beta \in \mathds{R}$. Mit anderen Worten $(\varphi \mapsto \int\! \varphi  \, \mathrm{d}x )$ ist lineares
+		Funktional auf $\mathcal{T}_{\mathds{R}^n}$
+		\item $\abs{\int\! \varphi  \, \mathrm{d}x } \le \int \! \abs{\varphi}  \, \mathrm{d}x   $
+		\item $\varphi \le \psi \Longrightarrow \int \! \varphi  \, \mathrm{d}x  \le \int\! \psi  \, \mathrm{d}x  $
+	\end{enumerate}
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item 1. $Q, Q' \subset \mathds{R}^n$ Quader $\Rightarrow Q \cap Q'$ Quader \\
+	2. $\varphi = \sum_{k=1}^{s} c_k \cdot \chi_{Q_k}$, $\psi = \sum_{l=1}^{s'}c_l' \cdot \chi_{Q_l'} \in \mathcal{T}_{\mathds{R}^n} $, $\alpha, \beta \in \mathds{R}$. Dann
+	gilt o.E. $\cup Q_k  = \cup Q_l'$
+	\[
+		\alpha \cdot \varphi + \beta \cdot \psi = \sum_{\substack{j=1, \ldots ,s \\ l=1, \ldots ,s'}} (\alpha \cdot c_k + \beta \cdot c_l') \cdot \chi_{Q_k \cap Q_l'} \in
+		\mathcal{T}_{\mathds{R}^n} 
+	\]
+	\item Für $n=1$: Analysis \RM{1}. \\
+	Sei die Behauptung für $n-1$ bewiesen. Betrachte 
+	\[
+		\varphi = \sum_{k=1}^{s} c_k \cdot \chi_{Q_k} \in \mathcal{T}_{\mathds{R}^n} \tag{$\star$}
+	\]
+	Jeder Quader $Q_k$ lässt sich schreiben als $Q_k = Q_k ' \times Q_k'' $ mit Quadern $Q_k'  \subset \mathds{R}$ und $Q_k'' \subset \mathds{R}^{n-1}$ 
+	$Q_k = (I_1) \times \enbrace{I_2 \times \ldots \times I_n} $. Es gilt für $(x,y) \in R \times R^{n-1}= \mathds{R}^n$. Dann gilt
+	\[
+		\chi_{Q_k} ((x,y)) = \chi_{Q_k'}(x) \cdot \chi_{Q_k''}(y)
+	\]
+	Für $y \in \mathds{R}^{n-1}$ definieren wir $\varphi_y : \mathds{R} \to \mathds{R}$ durch $\varphi(y) := \varphi(x,y)$ ($\varphi_y$ hängt nicht von der Darstellung
+	in $(\star)$ ab). Dann gilt:
+	\begin{align*}
+		\varphi_y(x) &= \sum_{k=1}^{s} c_k \cdot \chi_{Q_k} (x,y) = \sum_{k=1}^{s} c_k \cdot \chi_{Q_k''}(y) \cdot \chi_{Q_k'}(x) \\
+		\intertext{Also} \varphi_y &= \sum_{k=1}^{s} c_k \cdot \chi_{Q_k''} \cdot \chi_{Q_k'} \in \mathcal{T}_{\mathds{R}} \tag{$\star\star$}
+	\end{align*}
+	nach Bemerkung \ref{sub:32}. Aus Analysis I folgt $\int \varphi_y(x)  \, \mathrm{d}x $ ist wohldefiniert und hängt nicht von der Darstellung $(\star\star)$ ab:
+	\[
+		\Phi (y) := \int \! \varphi_y(x)  \, \mathrm{d}x  = \sum_{k=1}^{s} c_k \cdot  \chi_{Q_k''}(y) \cdot v(Q_k') \tag{$\star\star\star$}
+	\]
+	Dann ist $\Phi : \mathds{R}^{n-1} \to \mathds{R}$ definiert durch $y \mapsto \Phi(y)$, eine Treppenfunktion, denn nach $(\star\star\star)$
+	\[
+		\Phi = \sum_{k=1}^{s} c_k \cdot v(Q_k') \cdot \chi_{Q_k''}
+	\]
+	I.V. $\Rightarrow $ $\int \! \Phi(y)  \, \mathrm{d}y$ ist wohldefiniert und hängt nicht von der Darstellung ($\star\star\star$) ab; es gilt
+	\[
+		\int_{\mathds{R}^{n-1}} \! \Phi (y)  \, \mathrm{d}y = \sum_{k=1}^{s} c_k \cdot v(Q_k') \cdot v(Q_k'')
+	\]
+	also 
+	\[
+		\int_{\mathds{R}^{n-1}}\! \enbrace{\int \! \varphi_y(x)  \, \mathrm{d}x } \mathrm{d}y  = \sum_{k=1}^{s} c_k \cdot v(Q_k) \tag{$\star\star\star\,\star$}
+	\]
+	und die linke Seite hängt nicht von der Darstellung ($\star$) ab. 
+	\item Übung, benutze ($\star\star\star\,\star$). \bewende
+\end{enumerate}
+% subsection 33 (end)
+
+\subsection{Corollar (Fubini für Treppenfunktionen)} % (fold)
+\label{sub:34}
+Für $\varphi \in \mathcal{T}_{\mathds{R}^n}$ gilt mit $\mathds{R}^n = R^{p} \times \mathds{R}^{n-p} $
+\[
+	\int_{\mathds{R}^n} \varphi(z)  \, \mathrm{d}z = \int_{\mathds{R}^{n-p}} \enbrace{\int_{\mathds{R}^p} \varphi(x,y)  \, \mathrm{d}x } \mathrm{d}y
+\]
+\minisec{Beweis}
+Benutze wiederholt ($\star\star\star\,\star$) aus \ref{sub:33} b) \bewende
+% subsection 34 (end)
+
+\subsection[Notation für den Funktionswert $\infty$]{Notation} % (fold)
+\label{sub:35}
+Wir versehen $(- \infty, \infty] = \mathds{R} \cup \set{\infty} $ mit Ordnung und Operationen von $\mathds{R}$ und 
+\begin{multicols}{2}
+	\begin{itemize}
+		\item $c < \infty$, $\forall c \in \mathds{R}$,
+		\item $\infty+c = c + \infty = \infty$, $c \in \mathds{R} \cup \set{\infty} $,
+		\item $\infty \cdot c = c \cdot \infty = \infty$, $c \in \mathds{R}^*$,
+		\item $\infty \cdot  0 = 0 \cdot \infty = 0$.
+	\end{itemize}
+\end{multicols}
+% subsection 35 (end)
+
+\subsection[Definition: Treppe]{Definition} % (fold)
+\label{sub:36}
+Sei $f : \mathds{R}^n \to (- \infty, \infty]$ eine Abbildung. Eine \Index{Treppe} über $f$ ist eine Reihe
+\[
+	\Phi = \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k}
+\] 
+mit folgenden Eigenschaften: 
+\begin{enumerate}[(i)]
+	\item $Q_k \subset \mathds{R}^n$ sind offene Quader, $c_k \in \mathds{R}_+$
+	\item $\abs{f(x)} \le \Phi(x) := \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k}(x)  \in (- \infty, \infty] $, $x \in \mathds{R}^n$
+\end{enumerate}
+Wir setzen $I(\Phi) := \sum_{k=0}^{\infty} c_k \cdot v(Q_k) \in (- \infty, \infty]$ \marginnote{$I$ für "{}Inhalt"}
+% subsection 36 (end)
+
+\subsection[Definition: $L^1$-Halbnorm]{Definition} % (fold)
+\label{sub:37}
+Sei $f : \mathds{R}^n \to (-\infty, \infty]$. Wir setzen\index{L1-Halbnorm@$L^1$-Halbnorm} 
+\[
+	\norm[1]{f} :=  \inf \set[I(\Phi)]{\Phi \text{ Treppe über }f } 
+\]
+% subsection 37 (end)
+
+\subsection[Bemerkungen zur $L^1$-Halbnorm]{Bemerkung} % (fold)
+\label{sub:38}
+\begin{enumerate}[1.]
+	\item Eine Treppe über $f$ existiert für jedes $f$ (warum?), daher $\norm[1]{f} \in [0, \infty] $ für jedes $f$.
+	\item Für $f,g : \mathds{R}^n \to (- \infty, \infty]$, $\lambda  \in \mathds{R}$ gilt:
+	\begin{enumerate}[(i)]
+		\item $\norm[1]{\lambda  \cdot f}  = \abs{\lambda } \cdot  \norm[1]{f}  $
+		\item $\norm[1]{f+g} \le \norm[1]{f} + \norm[1]{g}   $
+		\item $\abs{f} \le \abs{g} \Longrightarrow \norm[1]{f} \le \norm[1]{g}   $
+	\end{enumerate}
+	\uline{Beweis:} Übung.
+	\item Es gilt \emph{nicht}: $\norm[1]{f} = 0 \Longrightarrow f \equiv 0 $ (Übung)\marginnote{für stetige $f$ allerdings schon}\\
+	$\norm[1]{.} $ ist also \Index{Halbnorm} auf $\set[f : \mathds{R}^n \to \mathds{R}]{\norm[1]{f} < \infty } $ VR: Siehe \ref{sub:61} und \ref{sub:62}
+\end{enumerate}
+% subsection 38 (end)
+
+\subsection[{Proposition: Dreiecksungleichung für $\norm[1]{.} $ gilt auch für unendliche Reihen}]{Proposition} % (fold)
+\label{sub:39}
+Für $f_0, f_1, \ldots  : \mathds{R}^n \to [0, \infty]$ definiert $x \mapsto \sum_{k=0}^{\infty} f_k(x) = \lim_{ K \to \infty} \sum_{k=0}^{K} f_k(x) $, $x \in \mathds{R}^n$
+eine Abbildung $\sum_{k=0}^{\infty} f_k : \mathds{R}^n \to [0, \infty]$. Es gilt 
+\[
+	\norm[1]{\sum_{k=0}^{\infty} f_k} \le \sum_{k=0}^{\infty} \norm[1]{f_k}  
+\]
+\minisec{Beweis}
+Sei $\varepsilon >0$. Für jedes $k \in \mathds{N}$ wähle eine Treppe $\Phi_k = \sum_{i=0}^{\infty} c_{k,i} \cdot \chi_{Q_{k,i}}$ über $f_k$ mit 
+$I(\Phi_k) \le \norm[1]{f_k} + \frac{\varepsilon}{2^{k+1}} $. Wähle eine Bijektion $\gamma : \mathds{N} \to \mathds{N} \times \mathds{N}$ und setze 
+\[
+	\Phi := \sum_{l \in \mathds{N}} c_{\gamma(l)} \cdot \chi_{Q_{\gamma(l)}} = \sum_{\substack{k \in \mathds{N} \\ i \in \mathds{N}}} c_{k,i} \cdot \chi_{Q_{k,i}}
+\]
+Dann gilt 
+\begin{itemize}
+	\item $\Phi = \sum_{k=0}^{\infty} \Phi_k$, insbesondere ist $\Phi$ nicht abhängig von $\gamma$
+	\item $\Phi$ ist Treppe über $\sum_{k \in \mathds{N}} f_k$
+	\item \begin{align*}
+		\norm[1]{\sum_{k=0}^{\infty} f_k} \le I(\Phi) = \sum_{l=0}^{\infty} c_{\gamma(l)} \cdot v(Q_{\gamma(l)}) &\stackrel{\star}{=} \sum_{k=0}^{\infty} I(\Phi_k) \\
+		&\le \sum_{k=0}^{\infty} \enbrace{\norm[1]{f_k} + \frac{\varepsilon}{2^{k+1}}  } \\
+		&= \sum_{k=0}^{\infty} \norm[1]{f_k} + \varepsilon  
+	\end{align*}
+	$\Rightarrow \norm[1]{\sum_{k=0}^{\infty} f_k} \le \sum_{k=0}^{\infty} \norm[1]{f_k}  $
+\end{itemize}
+Für $\star$ benutze: $(a_k)_{k \in \mathds{N}} \subset [0,\infty]$, $\beta : \mathds{N} \to \mathds{N}$ Bijektion, dann gilt\marginnote{gilt nur, da $a_k\ge 0$;\\ $\Rightarrow $ Riemannscher Umordnungssatz}
+\[
+	S_K = \sum_{k=0}^{K} a_k \xrightarrow{K \to \infty}  \sum_{k=0}^{\infty} a_k = \sum_{k=0}^{\infty} a_{\beta(k)} \xleftarrow{L \to \infty} \sum_{k=0}^{L} a_{\beta(k)}
+	= V_L \bewende 
+\]
+% subsection 39 (end)
+
+\subsection[{Lemma: Volumen eines abgeschlossenen Quaders $Q$ entspricht $\norm[1]{\chi_Q} $}]{Lemma} % (fold)
+\label{sub:310}
+Sei $Q \subset \mathds{R}^n$ ein abgeschlossener Quader. Dann gilt 
+\[
+	\norm[1]{\chi_Q} = v(Q) \enbrace{=: \int\! \chi_Q  \, \mathrm{d}x  }
+\]
+\minisec{Beweis}
+Zu jedem $\varepsilon>0$ existiert ein offener Quader $Q' \subset \mathds{R}^n$ mit $Q \subset Q'$ und $v(Q') \le v(Q) + \varepsilon$. $\chi_{Q'}$ ist dann Treppe über 
+$\chi_Q$. Es gilt
+\[
+	I(\chi_Q') = v(Q') \le v(Q)+ \varepsilon
+\]
+also $\norm[1]{\chi_Q} = \inf \set[I(\Phi)]{\Phi \text{ Treppe über }\chi_Q} \le v(Q) $. Sei nun $\Phi = \sum_k c_k \cdot \chi_{Q_k}$ eine Treppe über $\chi_Q$. Zu 
+$\varepsilon>0$ und $x\in Q$ existieren wegen $\chi_Q (x) \le \Phi(x)$ ein $N(x) \in \mathds{N}$ mit 
+\[
+	1- \varepsilon = \chi_Q(x) - \varepsilon \le \sum_{k=0}^{N(x)} c_k \cdot \chi_{Q_k}(x)
+\]
+Die $Q_k$ sind offen, daher existiert eine Umgebung $U(x)$, so dass gilt: $x \in Q_k \Rightarrow U(x) \subset Q_k$ für $k=0,\ldots ,N(x)$. Für $y \in U(x)$ erhalten wir
+\[
+	1- \varepsilon \le \sum_{k=0}^{N(x)} c_k \cdot \chi_{Q_k}(x) \le \sum_{k=0}^{N(x)} c_k \cdot \chi_{Q_k}(y)  
+\]
+$(U(x))_{x \in Q}$ ist eine offene Überdeckung von $Q$. $Q$  ist kompakt, also gilt nach Heine-Borel
+\[
+	\exists x_1, \ldots , x_L \in Q : Q \subset \bigcup_{i=1}^L U(x)
+\]
+Setze $N := \max \set{N(x_1), \ldots , N(x_L)} $, dann gilt für $y \in Q$
+\[
+	\sum_{k=0}^{N} c_k \cdot \chi_{Q_k}(y) \ge 1- \varepsilon = (1- \varepsilon) \chi_{Q}(y) 
+\]
+also $\sum_{k=0}^{N} c_k \cdot \chi_{Q_k} \ge (1-\varepsilon) \cdot \chi_Q $. Mit Proposition \ref{sub:33} folgt dann
+\begin{align*}
+	I(\Phi) \ge \sum_{k=0}^{N} c_k \cdot v(Q_k) = \int \! \enbrace{\sum_{k=0}^{N} c_k \cdot \chi_{Q_k}(y) } \mathrm{d}y  \ge \int\! (1-\varepsilon) \chi_{Q}(y)  \, \mathrm{d}y = (1-\varepsilon) v(Q)
+\end{align*}
+Es folgt $I(\Phi) \ge v(Q)$ und damit $\norm[1]{\chi_Q} \ge v(Q)$ \bewende
+% subsection 310 (end)
+
+\subsection[{Lemma: Das Integral einer Treppenfunktion $\varphi$ ist gleich $\norm[1]{\varphi} $}]{Lemma} % (fold)
+\label{sub:311}
+Für jedes $\varphi \in \mathcal{T}_{\mathds{R}^n}$ gilt 
+\[
+	\norm[1]{\varphi} = \int\! \abs{\varphi}  \, \mathrm{d}x   
+\]
+\minisec{Beweis}
+\begin{enumerate}[1.]
+	\item Es existieren paarweise disjunkte Quader $Q_1, \ldots , Q_s, P_1, \ldots , P_r \subset \mathds{R}^n$ und $c_1, \ldots , c_s, d_1, \ldots , d_r \in \mathds{R}$
+	mit 
+	\begin{itemize}
+		\item $\varphi = \sum_{k=1}^{s} c_k \cdot \chi_{Q_k} + \sum_{l=1}^{r} d_l \cdot \chi_{P_l}$
+		\item $Q_k \subset \mathds{R}^n$ ist offen für $k=1, \ldots , s$
+		\item $v(P_l) = 0$, $l=1,\ldots ,r$ (d.h. $P_l$ ist von der Form $I_{l,1} \times \ldots \times I_{l,n}$ \marginnote{(Übung)}
+		 und mindestens ein $I_{l,j}$ besteht nur aus einem Punkt)
+	\end{itemize}
+	Es gilt dann $\abs{\varphi} = \sum_{k=1}^{s} \abs{c_k} \cdot \chi_{Q_k} + \sum_{l=1}^{r} \abs{d_l} \cdot \chi_{P_l}  $ (die Quader sind paarweise disjunkt). Sei nun
+	$\varepsilon>0$. Zu jedem $P_l$ existiert ein offener Quader $P_l'$ mit $P_l \subset P_l'$ und $v(P_l') < \varepsilon$. Dann ist 
+	\[
+		\Phi := \sum_{k=0}^{s} \abs{c_k} \cdot \chi_{Q_k} + \sum_{l=1}^{r} \abs{d_l} \cdot \chi_{P_l'}   
+	\]
+	eine Treppe über $\abs{\varphi} $ also auch über $\varphi$. Es ist 
+	\[
+		I(\Phi) = \sum_{k=1}^{s} \abs{c_k} \cdot v(Q_k) + \sum_{l=1}^{r} \abs{d_l} \cdot v(P_l') \le \sum_{k=1}^{s} \abs{c_k} \cdot v(Q_k) + \varepsilon \cdot 
+		\sum_{l=1}^{r} \abs{d_k}      
+	\]
+	also $\norm[1]{\varphi}  \le \sum_{k=1}^{s} \abs{c_k} \cdot v(Q_k) = \int \abs{\varphi}  \, \mathrm{d}x   $
+	\item Sei nun $Q \subset \mathds{R}^n$ ein abgeschlossener Quader mit $\enbrace{\bigcup Q_k} \cup \enbrace{\bigcup P_l} \subset Q$, d.h. 
+	$\varphi\big|_{R^n \setminus Q} \equiv 0$. Setze $M := \max \set{\abs{c_k}, \abs{d_l}  } = \max \abs{\varphi} \in \mathds{R} $. Setze 
+	$\psi := M \cdot \chi_Q - \abs{\varphi}$ dann ist $0 <\psi = \abs{\psi} \in \mathcal{T}_{\mathds{R}^n}$. Nach Teil 1. gilt 
+	\[
+		\norm[1]{\psi} \le \int\! \abs{\psi}  \, \mathrm{d}x = \int \!\psi  \, \mathrm{d}x   
+	\]
+	Wir erhalten 
+	\begin{align*}
+		\int \! \abs{\varphi} = \int \!  \enbrace{M \cdot \chi_Q -\psi}  \, \mathrm{d}x  &= M \cdot \int\! \chi_Q  \, \mathrm{d}x - \int\! \psi  \, \mathrm{d}x  \\
+		&= M \cdot \norm[1]{\chi_Q} - \int\! \psi  \, \mathrm{d}x \tag{\ref{sub:310}} \\
+		&= \norm[1]{M \cdot \chi_Q} - \int\! \psi  \, \mathrm{d}x  \\
+		&\le \norm[1]{M \cdot \chi_Q} - \norm[1]{\psi}   \\
+		&=  \norm[1]{\abs{\varphi} + \psi } - \norm[1]{\psi} \\
+		&\le \norm[1]{\abs{\varphi} }   \\
+		&= \norm[1]{\varphi} \bewende 
+	\end{align*}
+\end{enumerate}
+% subsection 311 (end)
+% section 3 (end)
+\newpage
+
+\section{Das Lebesgue-Integral} % (fold)
+\label{sec:4}
+
+\subsection[Definition: Lebesgue-integrierbar]{Definition} % (fold)
+\label{sub:41}
+$f : \mathds{R}^n \to (- \infty, \infty]$ heißt \Index{Lebesgue integrierbar}, falls eine Folge $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^n}$ 
+existiert mit
+\[
+	\norm[1]{f- \varphi_k} \xrightarrow{k \to \infty} 0 
+\]
+Wir setzen 
+\[
+	\int_{\mathds{R}^n} \! f(x)  \, \mathrm{d}x := \lim_{ k \to \infty} \int_{\mathds{R}^n}\! \varphi_k (x) \, \mathrm{d}x \tag{$\star$}
+	\marginnote{siehe auch \ref{sub:31}}
+\]
+Wir schreiben auch $\int\! f  \, \mathrm{d}x $.
+% subsection 41 (end)
+
+\subsection[Bemerkung: Limes existiert und Wahl der Approximationsfolge irrelevant]{Bemerkung} % (fold)
+\label{sub:42}
+\begin{enumerate}[1)]
+	\item Der Limes in $(\star)$ existiert, denn $\enbrace{\int\! \varphi_k(x)  \, \mathrm{d}x }_{k \in \mathds{N}} $ ist eine Cauchyfolge:
+\begin{align*}
+	\abs{\int\! \varphi_k  \, \mathrm{d}x - \int\!\varphi_l  \, \mathrm{d}x } \le \int\! \abs{\varphi_k- \varphi_l}  \, \mathrm{d}x = \norm[1]{\varphi_k - \varphi_l} 
+	\le \norm[1]{\varphi_k -f} + \norm[1]{f- \varphi_l }  \le \varepsilon \marginnote{für geeignete $k,l$}    
+\end{align*}
+Ebenso: Der Limes in $(\star)$ hängt nicht von der Wahl der Approximationsfolge $(\varphi_k)_{k \in \mathds{N}}$ ab. (D.h. für eine weitere Folge 
+$(\psi_k)_{k \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^n}$ mit $\norm[1]{\psi_k - f} \xrightarrow{k \to \infty} 0$, so ist 
+$\lim_k\int\! \psi_k  \, \mathrm{d}x  = \int\! \varphi_k  \, \mathrm{d}x $  )
+\item Sei $\varphi \in \mathcal{T}_{\mathds{R}^n}$. Dann ist $\varphi$ Lebesgue integrierbar und das Integral stimmt mit dem aus (\ref{sub:31}) überein.
+\end{enumerate}
+% subsection 42 (end)
+
+\subsection[Proposition: Linearität und andere Eigenschaften des Lebesgue-Integrals]{Proposition} % (fold)
+\label{sub:43}
+Seien $f,g : \mathds{R}^n \to (-\infty, \infty]$ integrierbar, $\alpha, \beta \in \mathds{R}$. Dann gilt
+\begin{enumerate}[a)]
+	\item $\alpha \cdot f + \beta \cdot g$ ist integrierbar; es gilt 
+	\[
+		\int\! (\alpha \cdot f + \beta \cdot g)  \, \mathrm{d}x  = \alpha \cdot \int\! f  \, \mathrm{d}x + \beta \cdot \int\! g  \, \mathrm{d}x. 
+	\]
+	Insbesondere ist $\mathcal{L}^{1}(\mathds{R}^n) := \set[f : \mathds{R}^n \to \mathds{R}]{f \text{ Lebesgue integrierbar}} $ ein Vektorraum über $\mathds{R}$ und
+	$\int : \mathcal{L}^{-1}(\mathds{R}^n) \to \mathds{R}$ ist linear.
+	\item $\abs{f}$ ist integrierbar und es gilt:
+	\[
+		\abs{\int\! f  \, \mathrm{d}x } \le \int\! \abs{f}  \, \mathrm{d}x   = \norm[1]{f} 
+	\]
+	\item Ist $f \le g$, so folgt $\int\! f  \, \mathrm{d}x  \le \int\! g  \, \mathrm{d}x $ \hfill(Monotonie)
+	\item Aus $g$ beschränkt folgt $f \cdot g$ ist integrierbar.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Seien $(\varphi_k)_\mathds{N}$, $(\psi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ mit 
+	$\norm[1]{f- \varphi_k}, \norm[1]{g - \psi_k} \xrightarrow{k \to \infty} 0  $. Dann ist $\alpha \cdot \varphi_k + \beta \cdot \psi_k \in \mathcal{T}_{\mathds{R}^n}$
+	und 
+	\begin{align*}
+		\norm[1]{\alpha \cdot f + \beta \cdot g - \alpha \cdot \varphi_k - \beta \cdot \psi_K}  \le \abs{\alpha} \cdot \norm[1]{f- \varphi_k} + \abs{\beta} \cdot \norm[1]{g- \psi_k} \xrightarrow{k \to \infty} 0    
+	\end{align*}
+	\item benutze $\big| \abs{f}- \abs{\varphi_k} \big|   \le \abs{f- \varphi_k} $, also $\norm[1]{\abs{f}- \abs{\varphi_k}} \le \norm[1]{f- \varphi_k}$, sowie 
+	$\norm[1]{f} - \norm[1]{f- \varphi_k} \le \norm[1]{\varphi_k} \le \norm[1]{f} + \norm[1]{f- \varphi_k}$
+	\item Übung
+	\item Übung \bewende
+\end{enumerate}
+% subsection 43 (end)
+
+\subsection[Bemerkung: Zerlegung einer Funktion in positiven und negativen Teil]{Bemerkung} % (fold)
+\label{sub:44}
+\begin{wrapfigure}{R}[2cm]{8cm}
+	\begin{tikzpicture}[domain=-3:5, xscale=0.5, yscale=0.6]
+			%\draw[help lines] (-3,-2) grid (5,2);
+			\draw[thick, ->, color=Snow4] (-3.15,0) -- (5.5,0);
+			%\draw[thick, ->] (0,-2) -- (0,2);
+			\draw[color=DodgerBlue1, thick] plot (\x,{sin(\x r)+0.3*\x }) node[right]{$f=f_+ - f_-$};
+			\draw[color=Firebrick3, ultra thick, dotted] (-3,0) node[left]{$f_+$}-- (0,0) plot[domain=0:5] (\x,{sin(\x r)+0.3*\x});
+			\draw[color=SeaGreen4, ultra thick, dotted]  plot[domain=-3:0] (\x,{abs(sin(\x r)+0.3*\x)}) (0,0) --(5,0) ;
+			\node[left, color=SeaGreen4] at (-3,1) {$f_-$};
+	\end{tikzpicture}
+	\caption{Zerteilung von $f$ in $f_+$ und $f_-$}
+\end{wrapfigure}
+Falls $f$ integrierbar ist, so auch
+\begin{align*}
+	f_+ &:= \max \set{f,0} = \frac{1}{2} \cdot  (f+ \abs{f})  \\
+	f_- &:= \max \set{-f,0} = \frac{1}{2} \cdot (-f + \abs{f} )  
+\end{align*}
+
+Dann gilt $f= f_+ - f_-$ und $f_+ \cdot f_- =0$. Entsprechend für 
+\begin{align*}
+	\max \set{f,g} &= \frac{1}{2} (f+g + \abs{f-g}), \\
+	\min \set{f,g} &= \frac{1}{2} (f+g - \abs{f-g} )  
+\end{align*}
+% subsection 44 (end)
+
+\subsection[Definition: Integral einer nur auf $A \subset \mathds{R}^n$ definierten Funktion]{Definition} % (fold)
+\label{sub:45}
+Sei $A \subset \mathds{R}^n$, $f : A \to (- \infty, \infty]$. $f$ heißt integrierbar über $A$, falls $f_A : \mathds{R}^n \to (-\infty, \infty]$ gegeben durch\marginnote{triviale Fortsetzung} 
+\[
+	f_A (x) = \begin{cases}
+		f(x), &\text{ falls }x \in A\\
+		0 , &\text{ sonst}
+	\end{cases}
+\]
+integrierbar ist.\index{triviale Fortsetzung} Wir schreiben 
+\begin{align*}
+	\int_A\! f  \, \mathrm{d}x  &:= \int_{\mathds{R}^n}\! f_A  \, \mathrm{d}x  \quad , \quad \norm[1,A]{f} := \norm[1]{f_A}  \\
+	\mathcal{L}^{1}(A) &:= \set[g : A \to \mathds{R}]{g \text{ integrierbar über }A} 
+\end{align*}
+Proposition \ref{sub:43} und Bemerkung \ref{sub:44} gelten entsprechend.
+% subsection 45 (end)
+
+\subsection[Proposition: Regelfunktionen sind Lebesgue-integrierbar]{Proposition} % (fold)
+\label{sub:46}
+Sei $f : [a,b] \to \mathds{R}$ eine Regelfunktion. Dann ist $f$ Lebesgue integrierbar und die Integrale stimmen überein.
+\minisec{Beweis}
+Sei $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}([a,b])$ eine Folge von Treppenfunktionen mit $\norm[{\infty,[a,b]}]{f- \varphi_k} \xrightarrow{k \to \infty} 0$.
+Dann 
+\begin{align*}
+	\norm[1]{f_{[a,b]} -( \varphi_k)_{[a,b]}} = \norm[1]{\abs{f- \varphi_k}_{[a,b]} } &= \norm[1]{\abs{(f- \varphi_k)_{[a,b]}} \cdot \chi_{[a,b]}}  \\
+	&\le \norm[1]{\norm[{\infty, [a,b]}]{f- \varphi_k} \cdot  \chi_{[a,b]} } \\ 
+	&= \norm[{\infty,[a,b]}]{f- \varphi_k} \cdot (b-a)\\
+	&\xrightarrow{k \to \infty} 0
+\end{align*}
+$\Rightarrow f$ ist Lebesgue integrierbar und 
+\[
+	\int_{[a,b]}\! f  \, \mathrm{d}x \stackrel{\text{\ref{sub:45}}}{=} \int_{\mathds{R}}\! f_{[a,b]}  \, \mathrm{d}x \stackrel{\text{\ref{sub:41}}}{=}
+	\lim_{ k \to \infty} \int_\mathds{R}\! (\varphi_k)_{[a,b]}  \, \mathrm{d}x = \lim_{ k \to \infty} \int_{a} ^{b} \! \varphi_k  \, \mathrm{d}x = \int_{a} ^{b} \! f  \, \mathrm{d}x \marginnote{die letzten beiden Integrale sind Regel-Integrale}\bewende
+\]
+% subsection 46 (end)
+
+\subsection{Satz (Translationsinvarianz)} % (fold)
+\label{sub:47}
+Sei $f : \mathds{R}^n \to (-\infty, \infty]$ integrierbar und $a \in \mathds{R}^n$. Dann ist auch $f_a : \mathds{R}^n \to (-\infty, \infty]$, gegeben durch 
+$f_a(x) := f(x-a)$ integrierbar und es gilt
+\[
+	\int_{\mathds{R}^n}\! f  \, \mathrm{d}x = \int_{\mathds{R}^n}\! f_a  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Für jeden Quader $Q \subset \mathds{R}^n$ ist $a+ Q := \set[x \in \mathds{R}^n]{x-a \in Q} $ wieder ein Quader. \hfill (warum?)\\
+Es gilt 
+\[
+	\int\! \chi_Q  \, \mathrm{d}x  = v(Q) = v(a+ Q) = \int\! \chi_{a+Q}  \, \mathrm{d}x = \int\! (\chi_Q)_{a}  \, \mathrm{d}x 
+\]
+Der Satz gilt daher für Funktionen der Form $\chi_Q$; wegen der Linearität auch für $f \in \mathcal{T}_{\mathds{R}^n}$, denn 
+$(\alpha \cdot  f + \cdot \beta g)_a = \alpha \cdot f_a + \beta \cdot g_a$. 
+
+Ist nun $g : \mathds{R}^n \to (-\infty,\infty]$ eine Abbildung und 
+$\Phi = \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k}$ eine Treppe über $g$, so ist $\Phi_a := \sum_{k=0}^{\infty} c_k \cdot (\chi_{Q_k})_a$ eine Treppe über $g_a$ und 
+$I(\Phi)= I(\Phi_a)$ $\Rightarrow \norm[1]{g} = \norm[1]{g_a}  $. \\
+Sei $(\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ mit $\norm[1]{f- \varphi_k} \to 0$. Dann gilt auch 
+\begin{align*}
+	\norm[1]{f_a - (\varphi_k)_a} = \norm[1]{(f- \varphi_k)_a}  = \norm[1]{f- \varphi_k} \xrightarrow{k \to \infty} 0. 
+\end{align*} 
+Also ist $f_a$ integrierbar; es gilt weiter 
+\begin{align*}
+	\int\! f_a  \, \mathrm{d}x  = \lim_{ k \to \infty} \int\! (\varphi_k)_a  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! \varphi_k = \int\! f  \, \mathrm{d}x. \bewende
+\end{align*}
+% subsection 47 (end)
+
+\subsection{Satz (Beppo Levi mit Treppenfunktionen)} % (fold)
+\label{sub:48}
+Sei $f : \mathds{R}^n \to (- \infty, \infty]$ eine Abbildung und $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^n}$ eine Folge von Treppenfunktionen mit
+\begin{enumerate}[(i)]
+	\item $(\varphi_k)_{k \in \mathds{N}}$ ist monoton wachsend,
+	\item $\varphi_k \xrightarrow{k \to \infty} f$ punktweise und
+	\item $\enbrace{\int\! \varphi_k}_{k \in \mathds{N}}$ ist beschränkt (also konvergent, da monoton).
+\end{enumerate}
+Dann ist $f$ integrierbar und es gilt
+\[
+	\int\! f  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! \varphi_k  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Für $x \in \mathds{R}^n$ gilt 
+\begin{align*}
+	f(x) - \varphi_m(x) &= \lim_{ k \to \infty} \enbrace{\varphi_k (x) - \varphi_m(x)} \\
+	&= \lim_{ k \to \infty} \enbrace{\sum_{i=m}^{k-1} \varphi_{i+1}(x)- \varphi_i(x)} \marginnote{Teleskopsumme} \\
+	&= \sum_{i=m}^{\infty} \varphi_{i+1}(x) - \varphi_i(x) \\
+	\intertext{Es folgt} f- \varphi_m &= \sum_{i=m}^{\infty} \underbrace{\varphi_{i+1}- \varphi_i}_{\ge 0} \\
+	\intertext{Damit ergibt sich} \Rightarrow \norm[1]{f- \varphi_m} &\stackrel{\text{\ref{sub:39}}}{\le} \sum_{i=m}^{\infty} \norm[1]{\varphi_{i+1}- \varphi_i} \\
+	&\stackrel{\text{\ref{sub:311}}}{=}  \sum_{i=m}^{\infty} \int \! \abs{\varphi_{i+1} - \varphi_i}  \, \mathrm{d}x = \sum_{i=m}^{\infty} \int \! \enbrace{\varphi_{i+1} - 
+	\varphi_i}  \, \mathrm{d}x  \\
+	&= \sum_{i=m}^{\infty} \enbrace{\int\! \varphi_{i+1}  \, \mathrm{d}x - \int\! \varphi_i  \, \mathrm{d}x } \\
+	&= \lim_{ k \to \infty} \int\! \varphi_k  \, \mathrm{d}x - \int\! \varphi_m  \, \mathrm{d}x  \xrightarrow{m \to \infty} 0 \bewende
+\end{align*}
+% subsection 48 (end)
+
+\subsection[Proposition: Stetige Funktionen lassen sich durch Treppenfunktionen approximieren]{Proposition} % (fold)
+\label{sub:49}
+Sei $U \subset \mathds{R}^n$ offen und $f : U \to \mathds{R}_+$ und stetig. Dann existiert $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^n}$ mit
+\begin{itemize}
+	\item $\varphi_k : \mathds{R}^n \to \mathds{R}_+$,
+	\item $(\varphi_k)_\mathds{N}$ monoton wachsend,
+	\item $\varphi_k \xrightarrow{k \to \infty}  f_U$ punktweise.
+\end{itemize}
+\minisec{Beweis}
+Sei $Q_{x,t} \subset \mathds{R}^n$ für $(x,t) \in \mathds{Q}^n \times \mathds{Q}$ durch $Q_{x,t} := [x_1 -t, x_1 +t] \times \ldots \times [x_n -t, x_n +t]$. Setze
+\[
+	Q'_{x,t} := \begin{cases}
+		Q_{x,t} &\text{ falls } Q_{x,t} \subset U\\
+		\emptyset  &\text{ sonst}
+	\end{cases}
+\]
+und
+\[
+	c_{x,t} := \begin{cases}
+		\min \set[f(y)]{y \in Q'_{x,t}}  &\text{ falls }Q'_{x,t} \not=\emptyset \\
+		0 &\text{ sonst}
+	\end{cases}
+\]
+(Das Minimum existiert aufgrund der Kompaktheit von $Q'_{x,t}$)\\
+Dann gilt für $(x,t) \in \mathds{Q}^n \times \mathds{Q}$ folgendes: $c_{x,t} \cdot \chi_{Q'_{x,t}} \le f$. Außerdem gilt: Zu jedem $y \in U$, $\varepsilon>0$ existiert ein
+$(x,t) \in \mathds{Q}^n \times \mathds{Q}$ mit 
+\begin{align*}
+	\abs{c_{x,t} \cdot \chi_{Q'_{x,t}}(y) - f(y)} < \varepsilon \tag{warum?} 
+\end{align*}
+Wähle $\gamma : \mathds{N} \to \mathds{Q}^n \times \mathds{Q}$ surjektiv und definiere $\varphi_k : \mathds{R}^n \to \mathds{R}$ durch 
+\[
+	\varphi_k (y) := \max \set[c_{\gamma(i)} \cdot \chi_{Q'_{\gamma(i)}}(y)]{i = 0, \ldots , k} 
+\]
+Dann ist $(\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ wie gewünscht. \hfill (warum?)
+% subsection 49 (end)
+
+\subsection[Satz: Stetige, beschränkte Funktionen sind über offene, beschränkte Mengen integrierbar]{Satz} % (fold)
+\label{sub:410}
+Sei $U \subset \mathds{R}^n$ offen und beschränkt, $f : U \to \mathds{R}$ stetig und beschränkt. Dann ist $f$ über $U$ integrierbar.
+\minisec{Beweis}
+Wegen $f = f_+ - f_-$ (mit $f_+,f_- : U \to \mathds{R}_+$ stetig)\marginnote{siehe auch \ref{sub:44}} und Proposition (\ref{sub:43}) genügt es zu zeigen, dass $f_+$ und $f_-$ integrierbar sind. Wir dürfen also o.E.d.A. annehmen, dass $0\le f\le M \in \mathds{R}_+$. Wähle $(\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ wie in
+(\ref{sub:49}). (D.h. $\varphi_k \ge 0$, $\varphi_k \to f_U$ monoton und punktweise). Wähle $Q \subset \mathds{R}^n$ ein Quader mit $U \subseteq Q$, dann ist
+\[
+	\int\! \varphi_k  \, \mathrm{d}x  \le \int\! M \cdot \chi_U  \, \mathrm{d}x  \le \int\! M \cdot \chi_Q  \, \mathrm{d}x = M \cdot v(Q) < \infty
+\]
+Mit Satz \ref{sub:48} folgt: $f_U$ ist integrierbar über $\mathds{R}^n$, also ist $f$ integrierbar über $U$. \bewende
+% subsection 410 (end)
+
+\subsection{Satz (Fubini für stetige Funktionen auf offenen Teilmengen)} % (fold)
+\label{sub:411}
+Sei $U \subset \mathds{R}^p \times \mathds{R}^q$ offen und beschränkt, $f : U \to \mathds{R}$ stetig und beschränkt. Für $y \in \mathds{R}^q$ definiere 
+$f_y : \mathds{R}^p \to \mathds{R}$ durch $f_y(x) := f_U(x,y)$. Dann ist $f_y$ integrierbar, die Funktion $ F : \mathds{R}^q \to \mathds{R}$, definiert durch
+$F(y) := \int_{\mathds{R}^n}\! f_y(x)  \, \mathrm{d}x $ ist ebenfalls integrierbar und es ist 
+\[
+	\int_{\mathds{R}^n}\! f_U(x,y)  \, \mathrm{d}(x,y) = \int_{\mathds{R}^q} \! F(y) \, \mathrm{d}y = \int_{\mathds{R}^q}\! \enbrace{\int_{\mathds{R}^p} f_U(x,y)  
+	\, \mathrm{d}x }  \, \mathrm{d}y.
+\]
+\minisec{Beweis}
+O.E.d.A $0 \le f \le M$. Sei $(\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ wie in Proposition \ref{sub:49}; wie im Beweis von \ref{sub:410} ist 
+$(\int\! \varphi_k  \, \mathrm{d}x )_\mathds{N}$ beschränkt. Nach Satz \ref{sub:48} gilt 
+\begin{align*}
+	\int_{\mathds{R}^n}\! f_U (x,y)  \, \mathrm{d}(x,y) = \lim_{ k \to \infty} \int_{\mathds{R}^n}\! \varphi_k(x,y)  \, \mathrm{d}(x,y)
+\end{align*}
+Für $y \in \mathds{R}^q$ ist $\psi_{y,k} : \mathds{R}^p \to \mathds{R}$, definiert durch $\psi_{y,k}(x) := \varphi_k(x,y)$ in $\mathcal{T}_{\mathds{R}^p}$ (wie in
+\ref{sub:33}). Dann gilt $\psi_{y,k} \xrightarrow{k \to \infty} f_y$ punktweise und monoton wachsend. Wie im Beweis von \ref{sub:410} sieht man, dass 
+$\enbrace{\int_{R^p}\! \psi_{y,k}  \, \mathrm{d}x }_\mathds{N} $ beschränkt ist. Mit Satz \ref{sub:48} folgt 
+\begin{align*}
+	F(y) := \int_{\mathds{R}^p}\! f_U (x,y)  \, \mathrm{d}x  =  \int_{\mathds{R}^p}\! f_y(x)  \, \mathrm{d}x = \lim_{ k \to \infty} \int_{\mathds{R}^p}\! \psi_{y,k}(x)
+	 \, \mathrm{d}x 
+\end{align*}
+Definiere $\Phi_k : \mathds{R}^q \to \mathds{R}$ durch $\Phi_k (y) := \int_{\mathds{R}^p} \! \varphi_k (x,y)  \, \mathrm{d}x  $ wie im Beweis \ref{sub:33} (bzw. \ref{sub:34}), sieht man $\Phi_k \in \mathcal{T}_{\mathds{R}^q}$. Es gilt
+\begin{align*}
+	\int_{\mathds{R}^q}\! \Phi_k (y)  \, \mathrm{d}y = \int_{\mathds{R}^n}\! \varphi_k (x,y)  \, \mathrm{d}(x,y) \le \int_{\mathds{R}^n}\! f_U(x,y)  \, \mathrm{d}(x,y)
+	< \infty
+\end{align*}
+Die Folge $(\Phi_k)_\mathds{N}$ ist monoton (wegen der Monotonie der $\varphi_k$ und des Integrals). Es gilt $\Phi_k (y) \xrightarrow{k \to \infty} F(y)$, d.h.
+$\Phi_k \nearrow F$ punktweise und monoton. Mit \ref{sub:48} folgt, dass $F$ integrierbar ist mit 
+\[
+	\int_{\mathds{R}^q}\! F(y)  \, \mathrm{d}y = \lim_{ k \to \infty} \int_{\mathds{R}^q}\! \Phi_k(y)  \, \mathrm{d}y = \lim_{ k \to \infty} \int_{\mathds{R}^n}\!
+	\varphi_k(x,y)  \, \mathrm{d}(x,y) = \int_{\mathds{R}^n}\! f_U(x,y)  \, \mathrm{d}(x,y) \bewende
+ \]
+% subsection 411 (end)
+% section 4 (end)
+\newpage
+
+\section{Messbarkeit in $\mathds{R}^n$, Nullmengen} % (fold)
+\label{sec:5}
+
+\subsection[Definition: Lebesgue-messbar]{Definition} % (fold)
+\label{sub:51}
+Eine Menge $A \subset \mathds{R}^n$ heißt \Index{Lebesgue-messbar}, falls $\chi_A$ integrierbar ist. Wir setzen $v(A) := \int_{\mathds{R}^n}\! \chi_A$.
+% subsection 51 (end)
+
+\subsection[Proposition: Einfache Mengenoperationen auf messbaren Mengen]{Proposition} % (fold)
+\label{sub:52}
+Seien $A,B \subset \mathds{R}^n$ messbar, dann sind $A \cup B$, $A \cap B$ messbar mit $v(A \cup B) = v(A) + v(B)- v(A \cap B)$. Falls $A \subset B$ gilt, so ist
+$v(A) \le v(B)$.
+\minisec{Beweis}
+Benutze (\ref{sub:43}) und:
+\begin{enumerate}[(i)]
+	\item $\chi_{A \cup B} = \chi_A + \chi_B - \chi_{A \cap B}$
+	\item $A \subset B \Longrightarrow \chi_A \le \chi_B$ \bewende
+\end{enumerate}
+% subsection 52 (end)
+
+\subsection[Proposition: Beschränkte Teilmengen von $\mathds{R}^n$ sind messbar]{Proposition} % (fold)
+\label{sub:53}
+Sei $A \subset \mathds{R}^n$ beschränkt und offen oder kompakt. Dann ist $A$ messbar.
+\minisec{Beweis}
+\begin{enumerate}[1)]
+	\item Sei $A \subset \mathds{R}^n$ beschränkt und offen. Dann ist $f \equiv 1$ stetig und beschränkt ($f : A \to \mathds{R}$).  Mit \ref{sub:410} folgt, dass
+	$f_A$ integrierbar ist. $\Rightarrow f_A = \chi_A$ integrierbar $\Rightarrow $ A messbar.
+	\item Sei $A$ kompakt. Dann existiert ein offener Quader $Q \subset \mathds{R}^n$ mit $A \subseteq Q$, dann ist $Q\setminus A \off \mathds{R}^n$ und beschränkt, also 
+	sind $\chi_{Q\setminus A}, \chi_Q$ integrierbar, also $\chi_A = \chi_Q - \chi_{Q\setminus A}$ integrierbar. \bewende
+\end{enumerate}
+% subsection 53 (end)
+
+\subsection[Beispiel: Berechnung des Volumens eines Kreises und einer Kugel]{Beispiel} % (fold)
+\label{sub:54}
+\begin{enumerate}[(i)]
+	\item $U_r := B_{\mathds{R}^2}(0,r) \off \mathds{R}^2$
+	\begin{align*}
+		v(U_r) = \int_{\mathds{R}^2}\! \chi_{U_r}(x,y)  \, \mathrm{d}(x,y) &= \int_{\mathds{R}}\! \enbrace{\int_\mathds{R}\! \chi_{U_r}(x,y)  \, \mathrm{d}x }  \, 
+		\mathrm{d}y \\
+		&= \int_\mathds{R} \! \enbrace{\int_\mathds{R}\! \chi_{(-r,r)}(y) \cdot \chi_{\enbrace{-\sqrt{r^2-y^2}, \sqrt{r^2-y^2}}}(x)  \, \mathrm{d}x  }  \, \mathrm{d}y \\
+		&= \int_\mathds{R}\! \chi_{(-r,r)}(y) \cdot \enbrace{\int_\mathds{R}\! \chi_{\enbrace{-\sqrt{r^2-y^2}, \sqrt{r^2-y^2}}}(x)  \, \mathrm{d}x }  \, \mathrm{d}y \\
+		&= \int_\mathds{R}\! \chi_{(-r,r)} (y) \cdot 2 \cdot \sqrt{r^2-y^2}  \, \mathrm{d}y \\
+		&= \int_{-r} ^{r} \! 2 \cdot \sqrt{r^2-y^2}  \, \mathrm{d}y   \\
+		&= 2 \cdot \int_{-r} ^{r} \! r \cdot \sqrt{1-\left(\frac{y}{r} \right)^2}   \, \mathrm{d}y \tag{Substitution $s= \frac{y}{r}$, $\diffd{y}{s} = r$} \\
+		&= 2 \cdot \int_{s(-r)} ^{s(r)} \! r \cdot r \cdot \sqrt{1-s^2}  \, \mathrm{d}s \\
+		&= 2 \cdot r^2 \cdot \int_{-1} ^{1} \! \sqrt{1-s^2}  \, \mathrm{d}s \tag{Analysis \RM{1}} \\
+		&= r^2 \cdot \pi   
+	\end{align*}
+	\item $S^1 \subset \mathds{R}^2$ kompakt also messbar nach \ref{sub:53}. $S_1 \subset U_{1+\varepsilon} \setminus U_1$. Mit \ref{sub:52} folgt 
+	\marginnote{$S^1$ ist die Sphäre, also die Kugeloberfläche}
+	\begin{align*}
+		v(U_{1+\varepsilon}) &= v\big(U_{1}\cup (U_{1+\varepsilon} \setminus U_1)\big) = v(U_1) + v(U_{1+\varepsilon} \setminus U_1) - v(\emptyset) \\
+		\intertext{damit folgt} v(S^1) &\le v(U_{1+\varepsilon}) - v(U_1) = \pi \cdot \big((1+\varepsilon)^2 - 1^2\big) \xrightarrow{\varepsilon \to 0} 0
+	\end{align*}
+	\item $K_r := B_{\mathds{R}^3}(0,r) \subset \mathds{R}^3$ offen.
+	\[
+		U_{r,z} := B_{\mathds{R}^2}(0,\sqrt{r^2- z^2}  )
+		\qquad \quad 
+		\vcenter{\hbox{\begin{tikzpicture}[scale=0.5]
+			%\coordinate (A) at (-2,0);
+			%\coordinate (B) at (2,0);
+			\coordinate (a) at (-2.2,0);
+			\coordinate (b) at (0,-2.2);
+			\coordinate (c) at (2.2,0);
+			\coordinate (d) at (0,2.2);
+			\coordinate (M) at (0,0);
+			\foreach \x in{a,b,c,d}%
+				\draw[color=Grey0, dashed] (M) -- (\x);
+			\draw[thick] (0,0) circle[radius=2cm];
+			\draw[thick, fill=SeaGreen1, fill opacity=0.4] (0,0) ellipse (2cm and 0.45cm);
+			\draw[thick,fill=Tomato2, fill opacity=0.5] (0,1) ellipse (1.72cm and 0.35cm);
+			\node[color=Tomato2, right] at (1.72,1) {$U_{r,z}$};
+		\end{tikzpicture}}}
+	\]
+	\begin{align*}
+		v(K_r) = \int_{\mathds{R}^3}\! \chi_{K_r}(x,y,z)  \, \mathrm{d}(x,y,z) &= \int_\mathds{R}\! \enbrace{\int_{\mathds{R}^2}\! \chi_{K_r}(x,y,z)  \, \mathrm{d}(x,y)}  \, \mathrm{d}z \\
+		&= \int_{\mathds{R}}\! \enbrace{\int_{\mathds{R}^2} \chi_{(-r,r)} (z) \cdot \chi_{U_{r,z}}(x,y)  \, \mathrm{d}(x,y)}  \, \mathrm{d}z \\
+		&= \int_{\mathds{R}}\! \chi_{(-r,r)}(z) \enbrace{\int_{\mathds{R}^2}\! \chi_{U_{r,z}}(x,y)  \, \mathrm{d}(x,y) }  \, \mathrm{d}z \\
+		&= \int_{\mathds{R}}\! \chi_{(-r,r)}(z) \cdot \big(\pi  \cdot (r^2-z^2)\big)  \, \mathrm{d}z \tag*{nach i)} \\
+		&= \pi r^2 \int_{-r} ^{r} \! 1  \, \mathrm{d}z - \pi \int_{-r} ^{r} \! z^2  \, \mathrm{d}z \\
+		&= \pi r^2 \cdot 2r - \pi \cdot 2 \cdot \frac{r^3}{3} \\
+		&= \frac{4}{3}\cdot \pi \cdot  r^3 \bewende 
+	\end{align*}
+\end{enumerate}
+% subsection 54 (end)
+
+\subsection[Bemerkung: Prinzip von Cavalieri]{Bemerkung} % (fold)
+\label{sub:55}
+Seien $U,W \subset \mathds{R}^{n-1} \times \mathds{R}$ offen. Setze $U_y := \set[x \in \mathds{R}^{n-1}]{(x,y) \in U} $ für $y \in \mathds{R}$,
+$W_y := \set[x \in \mathds{R}^{n-1}]{(x,y) \in W} $ für $y \in \mathds{R}$. Dann gilt $v_{\mathds{R}^n}(U) = v_{\mathds{R}^n}(W)$, falls gilt
+\[
+	v_{\mathds{R}^{n-1}}(U_y) = v_{\mathds{R}^{n-1}}(W_y) \quad \text{ für alle } y \in \mathds{R},
+\]
+denn $v_{\mathds{R}^n}(U) = \int_{\mathds{R}}\! v_{\mathds{R}^{n-1}} (U_y)  \, \mathrm{d}y = \int_{\mathds{R}}\! v_{\mathds{R}^{n-1}}(W_y)  \, \mathrm{d}y
+= v_{\mathds{R}^n}(W)$ gilt nach Fubini (\ref{sub:411}). Mit Translationsinvarianz (\ref{sub:47}) ergibt sich das \Index{Prinzip von Cavalieri}:
+\begin{figure}[h]
+	\centering{{\begin{tikzpicture}[scale=0.7]
+		%\draw[help lines] (0,0) grid (8,4);
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (8,0);
+		\coordinate (C) at (0,4);
+		\coordinate (C') at (9,4);
+		\draw[dashed, color=Grey0, thick] (C) --(C');
+		
+		\begin{scope}% wichtig damit die Wirkung von clip begrenzt wird
+		% Schneiden und Füllen der eigentlichen Form
+		  \clip[postaction={fill=Sienna3,fill opacity=0.2},](A)--(B)--(C);
+		% Zeichnen der Streifen
+		  \foreach \x in {0.5,1,1.5,2,2.5,...,4}%
+		           \draw[Sienna3!80,line width=0.5mm](0,\x)--(9,\x);
+		\end{scope}
+		
+		\begin{scope}% wichtig damit die Wirkung von clip begrenzt wird
+		% Schneiden und Füllen der eigentlichen Form
+		  \clip[postaction={fill=Chartreuse3,fill opacity=0.2},](A)--(B)--(C');
+		% Zeichnen der Streifen
+		  \foreach \x in {0.5,1,1.5,2,2.5,...,4}%
+		           \draw[Chartreuse3!80,line width=0.5mm, dashed](0,\x)--(9,\x);
+		\end{scope}
+		\draw (A) -- (B) -- (C) -- cycle;
+		\draw (A) -- (B) -- (C') -- cycle;
+	\end{tikzpicture}
+	\caption[Prinzip von Cavalieri]{Prinzip von Cavalieri: Beide Dreiecke haben den gleichen Flächeninhalt}}}
+\end{figure}
+% subsection 55 (end)
+
+\subsection[Proposition und Definition: Nullmenge]{Proposition und Definition} % (fold)
+\label{sub:56}
+$N \subset \mathds{R}^n$ heißt \Index{Lebesgue-Nullmenge}, falls sie eine der folgenden äquivalenten Eigenschaften erfüllt:
+\begin{enumerate}[(i)]
+	\item $N$ ist messbar und $v(N)=0$
+	\item $\norm[1]{\chi_N}=0$
+\end{enumerate} 
+Sei $E : \mathds{R}^n \to \set{\text{wahr}, \text{falsch}} $, so sagen wir $E$ gilt \Index{fast überall} (f.ü.), falls $N_E := \set[x \in \mathds{R}^n]{E(x)= \text{falsch}} $ eine
+Nullmenge ist.
+\minisec{Beweis}
+\begin{description}
+	\item[(i) $\Rightarrow $ (ii):]  $0 \le \norm[1]{\chi_N}  \stackrel{\text{\ref{sub:43} b)}}{=} \int\! \chi_N  \, \mathrm{d}x = v(N) = 0 $.
+	\item[(ii) $\Rightarrow $ (i):] Setze $\varphi_k \equiv 0 \in \mathcal{T}_{\mathds{R}^n}$ für $k \in \mathds{N}$, dann 
+	\[
+		\norm[1]{\chi_N - \varphi_k} = \norm[1]{\chi_N} = 0  
+	\]
+	also ist $\chi_N$ integrierbar. Nach Proposition \ref{sub:43} b) gilt $0 \le \int\! \chi_N  \, \mathrm{d}x = \norm[1]{\chi_N} =0$ \bewende
+\end{description}
+% subsection 56 (end)
+
+\subsection[Proposition: Teilmengen von Nullmengen und Vereinigungen von Nullmengen]{Proposition} % (fold)
+\label{sub:57}
+\begin{enumerate}[(i)]
+	\item Jede Teilmenge einer Nullmenge ist eine Nullmenge.
+	\item Jede abzählbare Vereinigung von Nullmengen ist eine Nullmenge.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Sei $M \subset N$. Es folgt $0 \le \chi_M \le \chi_N$. Mit Bemerkung \ref{sub:38} folgt $0 \le \norm[1]{\chi_M} \le \norm[1]{\chi_N}  $
+	\item Sei $N= \bigcup_{k=0}^\infty N_k$. Dann gilt $0 \le \chi_N \le \sum_{k=0}^{\infty} \chi_{N_k}$. Nach Bemerkung \ref{sub:38} und Proposition \ref{sub:39} gilt
+	\[
+		0 \le \norm[1]{\chi_N}  \le \norm[1]{\sum_{k=0}^{\infty} \chi_{N_k}} \le \sum_{k=0}^{\infty} \norm[1]{\chi_{N_k}}  =0 \bewende
+	\]
+\end{enumerate}
+% subsection 57 (end)
+
+\subsection[\protect{Proposition: $f$ mit $\norm[1]{f}< \infty $ ist fast überall endlich}]{Proposition} % (fold)
+\label{sub:58}
+Sei $f : \mathds{R}^n \to (-\infty, \infty]$ eine Abbildung mit $\norm[1]{f}< \infty $. Dann ist $f$ fast überall endlich, d.h. $N:= \set[x \in \mathds{R}^n]{f(x)=\infty} $
+ist eine Nullmenge.
+\minisec{Beweis}
+Für $\varepsilon >0 $ ist $0\le \chi_N\le \varepsilon \cdot \abs{f} $, also
+\begin{align*}
+	0 \le \norm[1]{\chi_N} \stackrel{\text{\ref{sub:38}}}{\le} \norm[1]{\varepsilon \cdot \abs{f} } \stackrel{\text{\ref{sub:38}}}{=} \varepsilon \cdot \norm[1]{f}
+	\xrightarrow{\varepsilon \to 0} 0   
+\end{align*}
+Daraus folgt $\norm[1]{\chi_N} =0 $ \bewende
+% subsection 58 (end)
+
+\subsection[Proposition: Die Integrale fast gleicher Funktionen stimmen überein]{Proposition} % (fold)
+\label{sub:59}
+Seien $f,g : \mathds{R}^n \to (-\infty, \infty]$ Abbildungen mit $f=g$ fast überall. Falls $f$ integrierbar ist, dann auch $g$ und es gilt 
+\[
+	\int\! f  \, \mathrm{d}x  = \int\! g  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Sei $N := \set[x \in \mathds{R}^n]{f(x)\not= g(x)} $, dann gilt $\int\! \chi_N  \, \mathrm{d}x =0$ nach Vorraussetzung. Definiere $h : \mathds{R}^n \to (-\infty, \infty]$
+durch 
+\[
+	h(x) := \infty \cdot \chi_N(x) = \begin{cases}
+		\infty, &\text{ falls }x \in N\\
+		0 , &\text{ falls } x \not\in N
+	\end{cases}
+\]
+Dann gilt $h = \sum_{k=0}^{\infty} \chi_N$ und $\norm[1]{h} \stackrel{\text{\ref{sub:39}}}{\le} \sum_{k=0}^{\infty} \norm[1]{\chi_N} = 0  $. $f$ ist integrierbar, als gilt
+$\exists (\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}^n}$ mit $\norm[1]{f- \varphi_k} \xrightarrow{k \to \infty} 0 $. Es gilt 
+$\abs{g - \varphi_k} \le   \abs{f- \varphi_k} +h$ also 
+\[
+	\norm[1]{g- \varphi_k} \le \norm[1]{\abs{f- \varphi_k} +h } \le \norm[1]{f- \varphi_k} + \norm[1]{h} \xrightarrow{k \to \infty} 0    
+\]
+mit (\ref{sub:41}) folgt: $g$ integrierbar und $\int\! g  \, \mathrm{d}x  = \lim_{ k \to \infty} \int\! \varphi_k  \, \mathrm{d}x = \int\! f  \, \mathrm{d}x $ \bewende
+% subsection 59 (end)
+
+\subsection[Beispiele für Nullmengen]{Beispiele} % (fold)
+\label{sub:510}
+\begin{enumerate}[(i)]
+	\item $\mathds{Q}$ ist Nullmenge in $\mathds{R}$: $v(\{x\}) =0$, $x \in \mathds{R}$. $\mathds{Q}$ ist abzählbare Vereinigung solcher Einpunktmengen, also ist 
+	$\mathds{Q}$ nach \ref{sub:57} (ii) eine Nullmenge.
+	
+	(Alternativ: Benutze Satz \ref{sub:48} (Beppo-Levi))
+	\item Sei $C \subset [0,1]$ die Cantormenge, dann ist $C$ eine Nullmenge: 
+	\[
+		[0,1] \setminus C =  \dot \bigcup_{l=0}^\infty U_l
+	\]
+	Setze $\varphi_k := \chi_{\bigcup_{l=0}^k U_l}$, $k \in \mathds{N}$. Dann ist $(\varphi_k)_\mathds{N} \subset \mathcal{T}_{\mathds{R}}$, $\varphi_k \xrightarrow{k \to \infty} \chi_{[0,1] \setminus C}$ monoton wachsend und punktweise und $\int\! \varphi_k  \, \mathrm{d}x  \le 1$, $k \in \mathds{N}$.
+	
+	Mit \ref{sub:48} folgt 
+	\begin{align*}
+		\int\! \chi_{[0,1] \setminus C}  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! \varphi_k  \, \mathrm{d}x  &= \lim_{ k \to \infty} \sum_{l=0}^{k} v(U_l)  \, \mathrm{d}x \\
+		&= \lim_{ k \to \infty} \sum_{l=0}^{k} \frac{2^l}{3^{l+1}} = \frac{1}{3} \sum_{l=0}^{\infty} \enbrace{\frac{2}{3} }^l = \frac{1}{3} \cdot \frac{1}{1-\frac{2}{3} }
+		= 1       
+	\end{align*}
+	Es folgt 
+	\begin{align*}
+		\int\! \chi_C  \, \mathrm{d}x = \int\! \enbrace{\chi_{[0,1]} - \chi_{[0,1] \setminus C}}  \, \mathrm{d}x = \int\! \chi_{[0,1]}  \, \mathrm{d}x  - \int\!
+		\chi_{[0,1] \setminus C}  \, \mathrm{d}x  = 1-1 = 0 
+	\end{align*}
+	Die Cantormenge ist also eine überabzählbare Nullmenge! \bewende
+\end{enumerate}
+% subsection 510 (end)
+
+\subsection[Bemerkung: Alternative Charakterisierung von Nullmengen]{Bemerkung} % (fold)
+\label{sub:511}
+Nullmengen lassen sich auch wie folgt charakterisieren: \\
+$N \subset \mathds{R}^n$ ist Nullmenge genau dann, wenn Folgendes gilt:
+\[
+	\forall \varepsilon > 0 \enspace \exists Q_0, Q_1, \ldots  \subset \mathds{R}^n  \text{ offene Quader mit } N \subset \bigcup_{i \in \mathds{N}}Q_i \text{ und }
+	\sum_{i \in \mathds{N}} v(Q_i) < \varepsilon
+\]
+(ohne Beweis)
+% subsection 511 (end)
+
+\subsection[Proposition: Beschränkte Folge messbarer Mengen]{Proposition} % (fold)
+\label{sub:512}
+Sei $Q \subset \mathds{R}^n$ ein Quader und $A_0, A_1, \ldots  \subset Q$ eine Folge messbarer Mengen. Dann ist $\bigcup_{l \in \mathds{N}} A_l$ messbar.
+\minisec{Beweis}
+Wende Beppo-Levi\marginnote{spätere Variante von Beppo-Levi} an auf 
+\[
+	\varphi_k := \chi_{\bigcup_{l=0}^k A_l} \bewende
+\]
+% subsection 512 (end)
+
+\subsection[Bemerkung: Zusammenfassung über Messbarkeit]{Bemerkung} % (fold)
+\label{sub:513}
+Wir haben jetzt: 
+\begin{itemize}
+	\item Beschränkte offene   Mengen sind messbar.
+	\item Kompakte Mengen sind messbar.
+	\item beschränkte abzählbare Vereinigungen von messbaren Mengen sind messbar.
+	\item Komplemente messbarer Mengen in beschränkten messbaren Mengen sind messbar.
+\end{itemize}
+\uline{Frage:} Existieren überhaupt (beschränkte) nicht messbare Mengen?
+% subsection 513 (end)
+
+\subsection[Satz: Existenz einer beschränkten nicht messbaren Teilmenge in $\mathds{R}$]{Satz} % (fold)
+\label{sub:514}
+$\mathds{R}$ besitzt\footnote{in ZFC} eine beschränkte Teilmenge, die nicht messbar ist.
+\minisec{Beweis}
+Für $x \in [0,1]$ definiere $E_x := \set[{y \in [0,1]}]{x-y \in \mathds{Q}} \subset [0,1]$. Dann gilt für $x,x' \in [0,1]: E_x= E_{x'}$ oder $E_x \cap E_{x'} = \emptyset$.
+($\exists y \in E_x \cap E_{x'} \iff \exists y \in [0,1] x-y \in \mathds{Q}$ und $x'-y \in \mathds{Q} \iff x-x' \in \mathds{Q} \iff E_x = E_{x'}$). Es gilt
+$[0,1] = \bigcup_{x \in [0,1]} E_x$.
+
+Setze $A := \set[E]{E=E_x \text{ für ein } x \in [0,1]} \subset \mathcal{P}([0,1])$. Sei $f : A  \to [0,1] = \bigcup_{E \in A} E$ eine Funktion mit $f(E) \in E$, $E \in A$.
+$f$ existiert nach dem Auswahlaxiom. Setze $M := f(A) \subset [0,1]$. Sei $J := \mathds{Q} \cap [-1,1]$, dann ist $J$ abzählbar, d.h. es existiert 
+$(j_i)_{i \in \mathds{N}}$ mit $J = \set{j_0, j_1, \ldots } $ und $j_i \not= j_{i'}$ für $i \not= i'$. Setze $M_i := M + j_i = \set[y + j_i]{y \in M} \subset[-1,2] $.\\
+Behauptungen:
+\begin{enumerate}[(i)]
+	\item $[0,1] \subset \bigcup_{i \in \mathds{N}} M_i = \set[y+ j_i]{y \in M, i \in \mathds{N}} $
+	\item $M_i \cap M_{i'} = \emptyset$ falls $i \not= i'$
+\end{enumerate}
+\uline{Beweis:}
+\begin{enumerate}[(i)]
+	\item $x \in [0,1]$, dann ist $f(E_x)  \in E_x$, d.h. $x - f(E_x) \in \mathds{Q} \cap [-1,1] = J$. Also ist $x- f(E_x) = j_i$ für ein $i \in \mathds{N}$. Daraus folgt
+	$x= f(E_x) + j_i \in M_i$.
+	\item Falls $z \in M_i \cap M_{i'}$, $i \not= i'$, so gilt $z=y+ j_i$, $z= y' + j_{i'}$ für $y,y' \in M$, $j_i \not= j_{i'}$. Es gilt 
+	$y= f(E_x) \in E_x$, $y' = f(E_{x'}) \in E_{x'}$, $x,x' \in [0,1]$. Es folgt $y-y' \in \mathds{Q} \cap [-1,1]$ und $E_x \cap E_{x'} \not= \emptyset$, also 
+	$E_x = E_{x'}$. Andererseits $j_i \not= j_{i'}$, also $y \not= y'$ %\lightning
+\end{enumerate}
+Wir haben nun $[0,1] \subset \dot \bigcup_{i \in \mathds{N}} M_i \subset [-1,2]$. Angenommen $M$ sei messbar. Wegen Translationsinvarianz ist dann auch $M_i$ messbar, 
+$i \in \mathds{N}$ und $v(M) = v(M_i)$. Weiter gilt 
+\[
+	v(M_i) = \int\! \chi_{M_i}  \, \mathrm{d}x  = \norm[1]{\chi_{M_i}} 
+\]
+Wegen $[0,1] \subset \bigcup_{i \in \mathds{N}} M_i$ gilt außerdem 
+\[
+	0 \le \chi_{[0,1]} \le \chi_{\bigcup_{i \in \mathds{N}} M_i} 
+\]
+also 
+\[
+	1 = v([0,1]) = \int\! \chi_{[0,1]}  \, \mathrm{d}x \stackrel{\text{\ref{sub:43}}}{=} \norm[1]{\chi_{[0,1]}} \le \norm[1]{\sum_{i \in \mathds{N}} \chi_{M_i}} 
+	\stackrel{\text{\ref{sub:39}}}{\le} \sum_{i \in \mathds{N}} \norm[1]{\chi_{M_i}} = \sum_{i \in \mathds{N}} v(M)
+\]
+$\Rightarrow v(M) >0$. Wähle $K \in \mathds{N}$ so groß, dass $(K+1) \cdot v(M) >3$ ist, dann 
+\[
+	3 < (K+1) \cdot v(M) = \sum_{i=0}^{K} v(M_i) = v\enbrace{\dot \bigcup_{i=0}^K } \le v ([-1,2]) = 3  \quad \lightning \bewende 
+\]
+% subsection 514 (end)
+
+\subsection[Satz: Volumen eines Parallelotops]{Satz} % (fold)
+\label{sub:515}
+Seien $\underline{x}_1, \ldots , \underline{x}_n \in \mathds{R}^n$. Setze\index{Parallelotop} \marginnote{Parallelotope hatten wir auch schon in LA2}
+\[
+	P(\underline{x}_1, \ldots , \underline{x}_n) := \set[\underline{x} \in \mathds{R}^n]{\exists t_1, \ldots , t_n \in [0,1] : \underline{x} = \sum_{i=1}^{n} t_i \cdot \underline{x}_i } 
+\]
+Dann gilt 
+\[
+	v\big(P(\underline{x}_1, \ldots , \underline{x}_n)\big) = \abs{\det \enbrace{\underline{x}_1, \ldots , \underline{x}_n} } = \abs{ \det \begin{pmatrix}
+		x_{1,1} & \cdots & x_{1,n} \\
+		\vdots  & & \vdots  \\
+		x_{n,1} & \cdots & x_{n,n}
+	\end{pmatrix}} 
+\]
+\minisec{Beweis}
+Sei 
+\[
+	D : \underbrace{\mathds{R}^n \times \ldots \times \mathds{R}^n}_{n \text{-mal}} \to \mathds{R} 
+\]
+eine Abbildung mit 
+\begin{description}
+	\item[$(D1)$] $D(\underline{a}_1, \ldots , \lambda \underline{a}_i, \ldots , \underline{a}_n) = \abs{\lambda } \cdot D(\underline{a}_1, \ldots , \underline{a}_i, \ldots , \underline{a}_n) $ für $i \in \{1, \ldots , n\}$, $\lambda  \in \mathds{R}$, $\underline{a}_1, \ldots, \underline{a}_n \in \mathds{R}^n $
+	\item[$(D2)$] $D(\underline{a}_1, \ldots , \underline{a}_i+ \underline{a}_j, \ldots , \underline{a}_j, \ldots , \underline{a}_n) = D(\underline{a}_1, \ldots , \underline{a}_n)$ für $i<j$, $\underline{a}_1, \ldots, \underline{a}_n \in \mathds{R}^n $
+	\item[$(D3)$] $D(\underline{e}_1, \ldots , \underline{e}_n) = 1$, wo $\underline{e}_i $ der $i$-te Einheitsvektor ist.
+\end{description}
+Für $\underline{a}_1, \ldots , \underline{a}_n \in \mathds{R}^n$ ist $D(\underline{a}_1, \ldots , \underline{a}_n)$ durch $(D1), (D2), (D3)$ mittels elementaren 
+Spaltenumformungen bestimmt (Vergleiche Charakterisierung der Determinante in der Linearen Algebra). Daraus folgt: Es kann höchstens eine Abbildung mit $(D1), (D2), (D3)$
+geben. Andererseits erfüllt 
+\begin{align*}
+	(\underline{a}_1, \ldots , \underline{a}_n) &\mapsto \abs{\det (\underline{a}_1, \ldots , \underline{a}_n)} \\
+	\intertext{$(D1), (D2)$ und $(D3)$. Es genügt zu zeigen: Die Abbildung }
+	(\underline{a}_1, \ldots , \underline{a}_n) &\mapsto v\big(P(\underline{a}_1, \ldots , \underline{a}_n)\big)
+\end{align*}
+erfüllt $(D1), (D2), (D3)$. 
+\begin{itemize}
+	\item $(D3)$: $v\big(P(\underline{e}_1, \ldots , \underline{e}_n)\big) = 1^n = 1$
+	\item Falls $\underline{a}_1, \ldots , \underline{a}_n$ linear abhängig sind, dann gilt 
+	\[
+		v\big(P(\underline{a}_1, \ldots , \underline{a}_n)\big) \stackrel{\text{Übung}}{=}0 = \abs{\det (\underline{a}_1, \ldots , \underline{a}_n)} 
+	\]
+	und $(D1), (D2)$ sind erfüllt.
+\end{itemize}
+Seien also $\underline{a}_1, \ldots , \underline{a}_n$ linear unabhängig.
+\begin{description}
+	\item[$(D1):$] Für $i \in \{1, \ldots , n\}$, $\lambda  \in \mathds{R}$ setze $P_\lambda := P(\underline{a}_1, \ldots , \lambda \cdot \underline{a}_i, \ldots , \underline{a}_n)$; wir wollen 
+	\[
+		v(P_\lambda ) = \abs{\lambda } \cdot v(P_1) \tag{$\star$} 
+	\]
+	zeigen: 
+	\begin{enumerate}[a)]
+		\item Zunächst für $\lambda \in \mathds{N}^*:$ \\
+		$\lambda =1$ \checkmark \\
+		$\lambda  \mapsto \lambda +1$: Es gilt $P_{\lambda +1} = P_\lambda \cup (\lambda \cdot \underline{a}_i + P_1)$
+		\[
+			\begin{tikzpicture}[scale=0.5]
+				%\draw[help lines] (0,0) grid (16,6);
+				\draw[<->, thick, color=Grey0] (0,6) -- (0,0) -- (14,0);
+				\coordinate (A1) at (1,3);
+				\coordinate (Ai) at (4,1);
+				\coordinate (2Ai) at (8,2);
+				\coordinate (3Ai) at (12,3);
+				\coordinate (A1+i) at (5,4);
+				\coordinate (A1+2i) at (9,5);
+				\draw[fill=DeepSkyBlue1, fill opacity =0.25] (0,0) -- (A1) -- ++ (Ai) -- (Ai) -- cycle;
+				\node[left, color=DeepSkyBlue3] at (3,2) {$P_1$};
+				\draw[->, ultra thick] (0,0) -- (Ai) node[midway, above]{$\underline{a}_i$};
+				\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=3pt},yshift=0pt, thick] (9,5) -- (A1) %
+				node[above left, midway, yshift=0.27cm, xshift=0.13cm]{$P_\lambda $};
+				\draw (A1+i) -- ++ (Ai) -- (2Ai) -- (Ai);
+				\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=2pt},yshift=0pt, thick] (0,0) -- (3Ai) %
+				node[below right, midway, yshift=-0.25cm, xshift=-0.1cm]{$P_{\lambda+1} $};
+				\draw[fill=DarkOrange1, fill opacity =0.4] (2Ai) -- (3Ai) -- ++ (A1) -- (A1+2i);
+				\node[color=DarkOrange3, xshift=-0.2cm] at (11,4) {$\lambda \cdot \underline{a}_i + P_1$};
+				\draw[dashed, very thick, ->, DarkOrange2] (0,0) -- (Ai) -- ++ (Ai) node[midway, above]{$\lambda \cdot \underline{a}_i$};
+			\end{tikzpicture}
+		\]
+		Weiter gilt $P_\lambda  \cap (\lambda \cdot \underline{a}_i +P_1) \subset \lambda  \cdot  \underline{a}_i + \mathrm{span} \set{\underline{a}_1, \ldots , \underline{a}_i, 
+		\ldots , \underline{a}_n} $ mit $\dim \le n-1$. Also ist 
+		\[
+			v \big( P_\lambda  \cap (\lambda  \cdot \underline{a}_i + P_1)\big) = 0 \tag{Übung}
+		\]
+		Also folgt
+		\begin{align*}
+			v (P_{\lambda +1})&= v(P_\lambda ) + v(\lambda \cdot \underline{a}_i + P_1) - v(P_\lambda \cap \lambda  \cdot \underline{a}_i + P_1) = v(P_\lambda ) +
+			v(P_1) - 0 \\ &\stackrel{\text{(I.V.)}}{=} \lambda  \cdot v(P_1)+ v(P_1) = (\lambda +1)\cdot v(P_1)
+		\end{align*}
+		Induktion $\leadsto$ $(\star)$ für $\lambda  \in \mathds{N}^*$. Ebenso zeigt man 
+		$v(P_{q \cdot \lambda }) = q \cdot v(P_\lambda )$, $q \in \mathds{N}^*, \lambda \in \mathds{R}$
+		\item Jetzt für $\lambda = \frac{p}{q} $ mit $p,q \in \mathds{N}^*$: \\
+		Nach a) gilt $v(P_{q \cdot \lambda })= v(P_p) = p \cdot v(P_1)$ und $v(P_{q \cdot \lambda })= q \cdot v(P_\lambda )$, also
+		\[
+			p \cdot v(P_1) = q \cdot v(P_\lambda ) \Longrightarrow v(P_\lambda ) = \frac{p}{q} \cdot v(P_1) = \abs{\lambda } \cdot v(P_1). 
+		\]
+		\item $\lambda \in \mathds{R}_+^*$: Zu $\varepsilon >0$ wähle $r_1, r_2 \in \mathds{Q}_+^*$ mit $r_1 \le \lambda \le r_2$ und 
+		$r_2-r_1 < \frac{\varepsilon}{v(P_1)}$. \\(Da $\underline{a}_1, \ldots , \underline{a}_n$ linear unabhängig, enthält 
+		$P_1=P(\underline{a}_1, \ldots , \underline{a}_n)$ einen offenen Quader, also ist $v(P_1)>0$).
+		
+		Dann gilt $P_{r_1} \subset P(\lambda ) \subset P_{r_2}$ und 
+		\begin{align*}
+			v(P_{r_1}) &\le v(P_{\lambda }) \le v(P_{r_2}) \tag*{und}\\
+			r_1 \cdot v(P_1) &\le \lambda  \cdot v(P_1) \le r_2 \cdot v(P_1)
+		\end{align*}
+		Wir erhalten 
+		\begin{align*}
+			\abs{v(P_\lambda )- \lambda \cdot v(P_1)} \le r_2 \cdot v(P_1) - r_1 \cdot v(P_1) = (r_2-r_1)\cdot  v(P_1) < \varepsilon
+		\end{align*}
+		Also $v(P_\lambda )= \lambda  \cdot v(P_1), \lambda  \in \mathds{R}_+^*$
+		\item $\lambda =0$: $P_0$ liegt in einer Hyperebene. Nach einer Übung folgt dann
+		\[
+			v(P_0)=0 = 0 \cdot v(P_1)
+		\]
+		\item $\lambda < 0$: $P_\lambda = \lambda  \cdot \underline{a}_i + P_{-\lambda }$ und wegen Translationsinvarianz (\ref{sub:47}) gilt dann
+		\[
+			v(P_\lambda ) = v(P_{-\lambda }) =(-\lambda) \cdot v(P_1) = \abs{\lambda } v(P_1) 
+		\]
+		Es folgt $(\star)$ für $\lambda \in \mathds{R}$ $\Rightarrow D1$
+	\end{enumerate}
+	\item[$(D2):$] (nur Idee)\\
+	\[
+		\begin{tikzpicture}[scale=0.8]
+			%\draw[help lines] (0,0) grid (7,3);
+			\draw[DarkOrange2!20, fill=DarkOrange2!20, fill opacity=0.4] (0,0)--(4,0)--(6,3)--(2,3)-- cycle;
+			\node[DarkOrange2] at (3,2.6) {$P(\underline{a}_1, \underline{a}_2)$};
+			\begin{scope}% wichtig damit die Wirkung von clip begrenzt wird
+			% Schneiden und Füllen der eigentlichen Form
+			  \clip[postaction={ultra thick, DodgerBlue2,fill=DodgerBlue2,fill opacity=0.2},](0,0)--(4,0)--(10,3)--(6,3)-- cycle;
+			% Zeichnen der Streifen
+			  \foreach \x in {0.5,1,1.5,2,2.5,...,4}%
+			           \draw[DodgerBlue2!80,line width=1.3mm, opacity=0.7](0,\x)--(10,\x);
+			\end{scope}
+			\node[DodgerBlue2] at (7,0.6) {$P(\underline{a}_1+ \underline{a}_2, \underline{a}_2)$};
+			\draw[->, ultra thick, Firebrick2] (0,0) --(4,0) node[midway, below]{$\underline{a}_2$};
+			\draw[->, ultra thick, Chartreuse4] (0,0)--(2,3) node[midway, above left]{$\underline{a}_1$};
+			\draw[->, ultra thick, DodgerBlue2] (0,0)-- (6,3) node[midway, above left]{$\underline{a}_1 + \underline{a}_2$};
+			
+		\end{tikzpicture}
+	\]
+	geschickte Zerlegung + Translationsinvarianz
+\end{description}
+% subsection 515 (end)
+
+\subsection[Corollar: Volumen eines Quaders unter einer linearen Abbildung]{Corollar} % (fold)
+\label{sub:516}
+Sei $T : \mathds{R}^n \to \mathds{R}^n$ linear und $Q \subset \mathds{R}^n$ ein Quader. Dann gilt
+\[
+	v\big( T(Q)\big) =\abs{\det T} \cdot v(Q)
+\]
+\minisec{Beweis}
+O.E. $Q \subset \mathds{R}^n$ abgeschlossen. Es gibt $\underline{a} \in \mathds{R}^n$, $\alpha_1, \ldots , \alpha_n \in \mathds{R}$ mit $Q = \underline{a} + P(\alpha \cdot \underline{e}_1, \ldots , \alpha_n \cdot \underline{e}_n)$. Dann ist $v(Q) = v\big(P(\alpha \cdot \underline{e}_1, \ldots , \alpha_n \cdot \underline{e}_n)\big) = \abs{\alpha_1 \cdot \ldots \cdot  \alpha_n}$ und
+\begin{align*}
+	T(Q) = T(\underline{a}) + T\big(P(\alpha \cdot \underline{e}_1, \ldots , \alpha_n \cdot \underline{e}_n)\big) = T(\underline{a}) 
+	+ P\big(\alpha \cdot T(\underline{e}_1), \ldots , \alpha_n \cdot T(\underline{e}_n)\big)
+\end{align*}
+Also
+\begin{align*}
+	v\big(T(Q)\big) \stackrel{\text{D1}}{=} \abs{\alpha_1 \cdot \ldots \cdot \alpha_n} \cdot P\big(T(\underline{e}_1), \ldots , T(\underline{e}_n)\big) = \abs{\alpha_1 \cdot \ldots \cdot \alpha_n} \cdot \abs{\det T}   \bewende
+\end{align*}
+% subsection 516 (end)
+% section messbarkeit_in_r_n_nullmengen (end)
+\newpage
+\section{$L^1(\mathds{R}^n)$-Konvergenzsätze} % (fold)
+\label{sec:6}
+$\mathcal{L}^1(\mathds{R}^n)$ Raum der integrierbaren Funktionen
+\subsection[\protect{Proposition: Der durch $\norm[1]{f}=0$ definierte Unterraum von $\mathcal{L}^1(\mathds{R}^n)$}]{Proposition} % (fold)
+\label{sub:61}
+\[
+	\mathcal{N} = \set[f \in \mathcal{L}^1(\mathds{R}^n)]{\norm[1]{f}=0 } 
+\]
+ist ein Untervektorraum von $\mathcal{L}^1(\mathds{R}^n)$.
+\minisec{Beweis}
+folgt aus $\norm[1]{\alpha f + \beta g} \le \abs{\alpha} \cdot \norm[1]{f} + \abs{\beta} \cdot \norm[1]{g}$
+% subsection 61 (end)
+
+\subsection[Definition: Raum der integrierbaren Funktionen als Quotientenraum]{Definition} % (fold)
+\label{sub:62}
+\[
+	L^1(\mathds{R}^n) = \nicefrac{\mathcal{L}^1(\mathds{R}^n)}{\mathcal{N}}
+\]
+ist ein Quotientenvektorraum versehen mit der Norm
+\[
+	\norm[1]{f+ \mathcal{N}} := \norm[1]{f}  \tag{links: Norm auf $L^1$, rechts Halbnorm $\mathcal{L}^1$}
+\]
+Falls $f \in \mathcal{L}^1(\mathds{R}^n)$, so schreiben wir $[f]$ oder nur $f$ für $f+\mathcal{N}$.
+% subsection 62 (end)
+
+\subsection{Satz (Riesz-Fischer)} % (fold)
+\label{sub:63}
+$L^1(\mathds{R}^n)$ ist vollständig. Ist $([f_k])_{k \in \mathds{N}} \subset L^1(\mathds{R}^n)$ eine Cauchyfolge mit Limes $[f]$, so existiert eine Teilfolge 
+$(f_{k_\nu})_{\nu \in \mathds{N}} \subset \mathcal{L}^1(\mathds{R}^n)$ mit $f_{k_\nu} \xrightarrow{\nu \to \infty} f$ punktweise fast überall und:
+\[
+	\lim_{ k \to \infty} \int\! f_k  \, \mathrm{d}x = \int\! f  \, \mathrm{d}x \tag{$\star$}
+\] 
+\minisec{Beweis}
+Sei $([f_k])k \subset L^1(\mathds{R}^n)$ Cauchy, d.h. $(f_k)_k \subset \mathcal{L}^1(\mathds{R}^n)$ erfüllt:
+\[
+	\forall \varepsilon >0 \exists N \in \mathds{N} : \forall m,n \ge N : \norm[1]{f_m -f_n} < \varepsilon \tag{$\star\star$} 
+\]
+Wähle Indizes $k_0 < k_1 < \ldots $ mit
+\[
+	\norm[1]{f_k - f_{k_\nu}} \le 2^{-(\nu+1)} \qquad \text{ falls } k \ge k_\nu.
+\]
+Es gilt dann $\sum_{\nu=0}^{\infty} \norm[1]{f_{k_{\nu+1}} - f_{k_\nu}} \le 1 $. Setze 
+\begin{align*}
+	g_\nu &:= f_{k_{\nu+1}} - f_{k_\nu}\\
+	g &:= \sum_{y=0}^{\infty} \abs{g_\nu}
+\end{align*}
+Dann sind $g_\nu \in \mathcal{L}^1(\mathds{R}^n), g: \mathds{R}^n \to [0,\infty]$ und $\norm[1]{g} \le 1 $ (nach \ref{sub:39}). Nach \ref{sub:58} ist $g$ fast überall 
+endlich, d.h. $M= \set[x \in \mathds{R}^n]{g(x)=\infty} $ ist eine Nullmenge. Es folgt, dass die Reihe $\sum_{\nu=0}^{\infty} g_\nu (x) $ absolut konvergiert für
+$x \in \mathds{R}^n \setminus M$. Definiere $f : \mathds{R}^n \to \mathds{R}$ durch
+\[
+	f(x) = \begin{cases}
+		f_{k_0}(x) + \sum_{\nu=0}^{\infty} g_\nu (x) = \lim_{ \nu \to \infty} f_{k_\nu}(x), &\text{ falls }x \not\in M\\
+		0 , &\text{ falls } x \in M
+	\end{cases} \marginnote{Teleskopsumme}
+\]
+Noch zu zeigen: $f$ ist integrierbar, $\norm[1]{f_k -f} \xrightarrow{k \to \infty} 0 $ und ($\star$). \\
+Sei $\varepsilon>0$. Wähle $\sigma \in \mathds{N}$ mit
+\[
+	\sum_{\nu=\sigma}^{\infty} \norm[1]{g_\nu} < \varepsilon \quad \text{ und } \quad \norm[1]{f_k - f_{k_\sigma}}< \varepsilon \enspace\forall k \ge k_\sigma 
+\]
+Sei $\varphi \in \mathcal{T}_{\mathds{R}^n}$ mit $\norm[1]{f_{k_\sigma} - \varphi} < \varepsilon $. Dann gilt
+\begin{align*}
+	\norm[1]{f- \varphi} \le \norm[1]{f- f_{k_\sigma}} + \norm[1]{f_{k_\sigma} - \varphi} \le 2 \varepsilon   
+\end{align*}
+Es gilt weiter
+\begin{align*}
+	f(x) &= f_{k_0}(x) + \sum_{\nu=0}^{\infty} g_\nu(x) = f_{k_\sigma} (x) + \sum_{\nu=\sigma}^{\infty}g_\nu (x) \tag{für $x \not\in M$} \\
+	\Longrightarrow f- f_{k_\sigma} &= \sum_{\nu=\sigma}^{\infty} g_\nu \tag{auf $\mathds{R}^n \setminus M$} 
+\end{align*}
+$\Rightarrow f \in \mathcal{L}^1(\mathds{R}^n)$. Für $k \ge k_\sigma$ gilt
+\[
+	\norm[1]{f-f_k} \le \norm[1]{f- f_{k_\sigma}} + \norm[1]{f_{k_\sigma} - f_k} \le \varepsilon + \varepsilon   
+\]
+d.h. $\norm[1]{f-f_k}  \xrightarrow{k \to \infty} 0 $. Trivialerweise gilt $f_{k_\nu} \to f$ punktweise fast überall (für $x \not\in M$). Für $(\star)$:
+\begin{align*}
+	\abs{\int\! f  \, \mathrm{d}x  - \int\! f_k  \, \mathrm{d}x } \le \int\! \abs{f-f_k}  \, \mathrm{d}x  = \norm[1]{f-f_k} \xrightarrow{k \to \infty} 0 \bewende
+\end{align*}
+% subsection 63 (end)
+
+\subsection[Korollar: Existenz approximierende Folge von Treppenfunktionen für integrierbare $f$]{Korollar} % (fold)
+\label{sub:64}
+\footnote{Ist $\norm[1]{f-g} =0 $ für $f,g \in \mathcal{L}^1(\mathds{R}^n)$, dann gilt $f(x)=g(x)$ fast überall}
+Sei $f \in \mathcal{L}^1(\mathds{R}^n)$. Dann existiert $(\varphi_\nu)_{\nu \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^n}$ mit:
+\begin{enumerate}[(i)]
+	\item $\norm[1]{f- \varphi_\nu} \xrightarrow{\nu \to \infty}  0 $
+	\item $\sum_{\nu=0}^{\infty} \norm[1]{\varphi_{\nu +1} - \varphi_\nu} < \infty $
+	\item $\varphi_\nu \xrightarrow{\nu \to \infty}  f$ punktweise, fast überall
+\end{enumerate}
+\minisec{Beweis}
+Da $f \in \mathcal{L}^1(\mathds{R}^n)$ existiert $(\psi_k)_k \subset \mathcal{T}_{\mathds{R}^n}$ mit $\norm[1]{f- \psi_k}  \xrightarrow{k \to \infty}  0$. Dann gilt:
+\[
+	\forall \varepsilon >0 :  \exists N \in \mathds{N} : \forall m,n \ge N : \norm[1]{\psi_n - \psi_m} < \varepsilon \tag{vgl. $(\star\star)$ in \ref{sub:63}}
+\]
+Nach Beweis von \ref{sub:63} existiert eine Teilfolge $(\psi_{k_\nu})_\nu$ mit $\sum_{\nu=0}^{\infty} \norm[1]{\psi_{k_{\nu+1}} - \psi_{k_\nu}} \le 1  $ und so dass
+$\psi_{k_\nu} \xrightarrow{\nu \to \infty} \tilde f$ punktweise fast überall. Dann gilt $f=\tilde f$ fast überall (da $\norm[1]{f- \tilde f}=0 $). Also auch
+$\psi_{k_\nu} \xrightarrow{\nu \to \infty}  f$ fast überall. \bewende
+% subsection 64 (end)
+
+\subsection[Bemerkung: Der Übergang zu einer Teilfolge in \ref{sub:63} ist wesentlich]{Bemerkung} % (fold)
+\label{sub:65}
+Der Übergang zu einer Teilfolge in \ref{sub:63} ist wesentlich. Betrachte dazu
+\[
+	f_0 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (0,2)-- (2,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+	f_1 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (2,2)-- (4,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+	f_2 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (0,2)-- (1,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+	f_3 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (1,2)-- (2,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+	f_4 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (2,2)-- (3,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+	f_5 : \!
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (0,0) node[below]{$0$} -- (2,0)node[below]{$\frac{1}{2} $} -- (4,0) node[below]{$1$};
+		\draw (0,0) -- (0,2.3);
+		\node[left] at (0,2) {$1$};
+		\draw[very thick, Firebrick3] (3,2)-- (4,2);
+	  	\foreach \x in {0,1,2,...,4}%
+	           \draw[line width=0.3mm](\x,-0.15)--(\x,0.15);
+	  	
+	\end{tikzpicture}}} \enspace
+\]
+\ldots Dann gilt: $\norm[1]{f_k -0} \xrightarrow{k \to \infty} 0 $, aber es gibt \emph{kein} $x \in [0,1]$ mit $f_k(x) \xrightarrow{k \to \infty} 0$. Wie sieht eine Teilfolge
+$(f_{k_\nu})_{\nu \in \mathds{N}}$ aus mit $f_{k_\nu} \xrightarrow{\nu \to \infty} 0$ fast überall?
+% subsection 65 (end)
+
+\subsection{Satz (Beppo-Levi)} % (fold)
+\label{sub:66}
+Sei $(f_k)_{k \in \mathds{N}}$ eine monoton wachsende Folge integrierbarer Funktionen. $f_k : \mathds{R}^n \to (-\infty, \infty]$, so dass 
+$(\int\! f_k  \, \mathrm{d}x )_{k \in \mathds{N}} \subset \mathds{R}$ beschränkt ist. Sei $f: \mathds{R}^n \to (-\infty, \infty]$ der punktweise Limes, d.h. $f(x) = \lim_{ k \to \infty} f_k(x)$. Dann ist $f$ integrierbar und 
+\[
+	 \lim_{ k \to \infty} \int\! f_k  \, \mathrm{d}x = \int\! f  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Es ist $f_k \le f_{k+1}$, also $\int\!f_k  \, \mathrm{d}x  \le \int\! f_{k+1}  \, \mathrm{d}x $, d.h. die Folge $(\int\! f_k  \, \mathrm{d}x )_{k \in \mathds{N}} \subset \mathds{R}$ ist monoton wachsend und beschränkt, also konvergent. Also gilt auch
+\[
+	\forall \varepsilon >0 : \exists N \in \mathds{N}: \forall m,k \ge N : \abs{\int\! f_k  \, \mathrm{d}x - \int\! f_m  \, \mathrm{d}x } < \varepsilon  
+\]
+Falls $m \ge k \ge N$, dann
+\begin{align*}
+	\norm[1]{f_m - f_k} = \int\! \abs{f_m - f_k}  \, \mathrm{d}x  = \int\! (f_m -f_k)  \, \mathrm{d}x  = \int\! f_m  \, \mathrm{d}x  - \int\! f_k  \, \mathrm{d}x \le
+	\abs{\int\! f_m  \, \mathrm{d}x - \int\! f_k  \, \mathrm{d}x }   
+\end{align*}
+Damit folgt: $([f_k])_k \subset L^1(\mathds{R}^n)$ ist Cauchy. Sei $\tilde f \in \mathcal{L}^1(\mathds{R}^n)$ eine Funktion mit $\norm[1]{f_k- \tilde f} \xrightarrow{k \to \infty}  0 $ 
+(existiert nach \ref{sub:63}). Nach \ref{sub:63} gibt es eine Teilfolge $(f_{k_\nu})_\nu$ mit $f_{k_\nu} \xrightarrow{\nu \to \infty}  \tilde f$ fast überall und 
+\[
+	\lim_{ \nu \to \infty} \int\! f_{k_\nu}  \, \mathrm{d}x  = \int\!\tilde f  \, \mathrm{d}x 
+\]
+$\Rightarrow f=\tilde f$ fast überall. Daher $f \in \mathcal{L}^1(\mathds{R}^n)$ und 
+\begin{align*}
+	\int\! f  \, \mathrm{d}x = \int\! \tilde f  \, \mathrm{d}x = \lim_{ \nu \to \infty} \int\! f_{k_\nu}  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! f_k  \, \mathrm{d}x 
+	\bewende 
+\end{align*}
+% subsection 66 (end)
+
+\subsection[Corollar: Messbarkeit abzählbarer Vereinigungen messbarer Mengen]{Corollar} % (fold)
+\label{sub:67}
+\begin{enumerate}[a)]
+\item Seien $A_1 \subset A_1 \subset \ldots  \subset \mathds{R}^n$ messbar. Dann ist $\bigcup_{k=0}^\infty A_k$ messbar genau dann, wenn die Folge 
+$\big(v(A_k)\big)_{k \in \mathds{N}}$ beschränkt ist;
+in diesem Fall ist 
+\[
+	v \enbrace{\bigcup_{k=0}^\infty A_k} = \sup_k v(A_k)
+\]
+\item Seien $B_0, B_1, \ldots  \subset \mathds{R}^n$ messbar so dass $B_i \cap B_j$ Nullmengen sind für $i \not= j$. Dann ist $\bigcup_{k \in \mathds{N}} B_k$ messbar genau
+dann wenn $\sum_{k=0}^{\infty} v(B_k) < \infty$;  in diesem Fall ist 
+\[
+	v \enbrace{\bigcup_{k \in\mathds{N}} B_k} = \sum_{k=0}^{\infty} v(B_k) 
+\]
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Beppo-Levi mit $f_k := \chi_{A_k}$,
+	\[
+		f = \lim_{ k \to \infty} f_k = \chi_{\bigcup_{k \in \mathds{N}} A_k}
+	\]
+	\item folgt aus a) mit $A_k := \bigcup_{i=0}^k B_i$ und
+	\[
+		v(A_k) = \sum_{i=0}^{k} v(B_i) \bewende
+	\]
+\end{enumerate}
+% subsection 67 (end)
+
+\subsection[Bemerkung: Zusammenfassung über Eigenschaften des Lebesgue-Maßes]{Bemerkung} % (fold)
+\label{sub:68}
+Setze $\Lambda := \set[E]{E \subset \mathds{R}^n \text{ messbar}} \subset \mathcal{P}(\mathds{R}^n)$. Die Abbildung $v :  \Lambda \to \mathds{R}_+$ heißt auch
+\Index{Lebesgue-Maß} und es gilt:
+\begin{description}
+	\item[(M0)] $\Lambda$ enthält alle kompakten und beschränkten offenen Mengen. 
+	\item[(M1)] $A,B \in \Lambda$, $A \subseteq B  \Longrightarrow v(A) \le v(B)$.
+	\item[(M2)] Für $a \in \mathds{R}^n$, $E \in \Lambda$ ist $a+ E \in \Lambda$ und $v(a+ E)= v(E)$.
+	\item[(M3)] Für $B_0, B_1, \ldots  \in \Lambda$ paarweise disjunkt mit $\sum_{k \in \mathds{N}} v(B_k) < \infty$ ist $\bigcup_{k \in \mathds{N}} B_k \in \Lambda$ und
+	es gilt
+	\[
+		v \enbrace{\bigcup_{k \in \mathds{N}} B_k} = \sum_{k \in \mathds{N}} v(B_k).
+	\]
+	\item[(M4)] $v(\emptyset)=0$ und $v([0,1]^n)=1$.
+\end{description} 
+Man kann zeigen: Das Lebesgue-Maß ist durch diese Eigenschaften eindeutig bestimmt.
+% subsection 68 (end)
+
+\subsection{Satz von Lebesgue über majorisierte Konvergenz} % (fold)
+\label{sub:69}
+Sei $f_k :\mathds{R}^n \to (-\infty, \infty], k \in \mathds{N}$ eine Folge integrierbarer Funktionen. Sei $f : \mathds{R}^n \to (-\infty, \infty]$ eine weitere Funktion mit 
+$f_k \xrightarrow{k \to \infty} f$ punktweise fast überall. Sei $F :\mathds{R}^n \to [0, \infty]$ integrierbar mit $F\ge \abs{f_k}, k \in \mathds{N} $. Dann ist $f$
+integrierbar und es gilt
+\[
+	\int\! f  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! f_k  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Mittels Proposition \ref{sub:58} dürfen wir annehmen, dass $f_k, F$ nur Werte in $\mathds{R}$ annehmen\marginnote{warum?}. Wir dürfen außerdem annehmen, dass $f_k \to f$
+punktweise überall.
+
+Setze 
+\[
+	g_{k, \nu} := \max \set{f_k, \ldots , f_{k+\nu}} \qquad, \qquad g_k := \sup_{i \ge k} f_i \tag*{$k, \nu \in \mathds{N}$}
+\]
+Dann sind $g_{k, \nu}, g_k : \mathds{R}^n \to \mathds{R}$ Funktionen mit  $g_{k, \nu} \xrightarrow{\nu \to \infty} g_k$ punktweise monoton wachsend. Die $g_{k, \nu}$ sind
+integrierbar und $\int\! g_{k, \nu}  \, \mathrm{d}x  \le \int\! F  \, \mathrm{d}x < \infty$. Mit Beppo-Levi (\ref{sub:66}) folgt: $g_k $ ist integrierbar und es gilt
+\[
+	\int\! g_k  \, \mathrm{d}x = \lim_{ \nu \to \infty} \int\! g_{k, \nu}  \, \mathrm{d}x 
+\]
+Weiter gilt $\abs{\int\! g_{k, \nu}  \, \mathrm{d}x } \le \int\! F  \, \mathrm{d}x $, also auch $\abs{\int\! g_k  \, \mathrm{d}x } \le \int\! F  \, \mathrm{d}x  $, $k \in \mathds{N}$. Es gilt $g_k \xrightarrow{k \to \infty} f$ punktweise monoton fallend, also $- g_k \xrightarrow{k \to \infty} -f$ punktweise monoton wachsend. Da 
+\[
+	\int\!-g_k  \, \mathrm{d}x  \le \abs{\int\! g_k  \, \mathrm{d}x} \le \abs{\int\! F  \, \mathrm{d}x} < \infty 
+\]
+ist $(\int\! -g_k  \, \mathrm{d}x )_{k \in \mathds{N}}$ beschränkt und wieder nach Beppo-Levi (\ref{sub:66}) ist $-f$ integrierbar mit 
+\[
+	\int\! -f  \, \mathrm{d}x = \lim_{ k \to \infty} \int\! g_k  \, \mathrm{d}x \enspace\Longrightarrow \enspace \int\! f  \, \mathrm{d}x  = \lim_{k \to \infty} \int\! g_k  \, \mathrm{d}x \tag{$\star$}
+\]
+Definiere nun 
+\[
+	h_{k, \nu} := \min \set{f_k , \ldots , f_{k+\nu}} \qquad , \qquad h_k := \inf_{i \ge k} f_i \tag*{$k, \nu \in \mathds{N}$}
+\]
+Dann gilt $h_{k, \nu} \xrightarrow{\nu \to \infty} h_k$ punktweise monoton fallend und $h_k \xrightarrow{k \to \infty} f$ punktweise monoton wachsend. Wie oben zeigt man
+\[
+	\int\! f  \, \mathrm{d}x = \lim_{k \to \infty} \int\! h_k  \, \mathrm{d}x \tag{$\star\star$}
+\]
+Wegen $h_k \le f_k \le g_k$ gilt 
+\[
+	\int\! f  \, \mathrm{d}x =\lim_{ k \to \infty} \int\! h_k  \, \mathrm{d}x  \le \lim_{ k \to \infty}  \int\! f_k  \, \mathrm{d}x  \ge \lim_{ k \to \infty} \int\! g_k  \, \mathrm{d}x = \int\! f  \, \mathrm{d}x  \bewende
+\]
+% subsection 69 (end)
+
+\subsection[Corollar: Der Limes einer beschränkten Folge integrierbarer Funktionen ist integrierbar]{Corollar} % (fold)
+\label{sub:610}
+Sei $A \subset \mathds{R}^n$ messbar, $f_k : A  \to \mathds{R}$, $k \in \mathds{N}$ beschränkte Folge integrierbarer Funktionen. Falls $(f_k)_{k \in \mathds{N}}$ punktweise
+fast überall gegen $f: A \to \mathds{R}$ konvergiert, so ist $f$ integrierbar und es gilt 
+\[
+	\int_A\! f  \, \mathrm{d}x = \lim_{ k \to \infty} \int_A\! f_k  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+Mit \ref{sub:69} und $\chi_A$ mal der Konstanten aus der Beschränktheit als Majorante. \bewende
+% subsection 610 (end)
+
+\subsection[Corollar: Der Hauptsatz der Integralrechnung gilt auch für das Lebesgue-Integral]{Corollar} % (fold)
+\label{sub:611}
+Sei $f: [a,x] \to \mathds{R}$ differenzierbar mit beschränkter Ableitung $f'$. Dann ist $f'$ Lebesgue-integrierbar und so gilt
+\[
+	f(x) - f(a) = \int_{[a,x]}\! f'  \, \mathrm{d}x 
+\]
+\minisec{Beweis}
+\begin{itemize}
+	\item $f$ ist differenzierbar, also stetig. Definiere $f_k : [a,x] \to \mathds{R}$ durch 
+	\[
+		f_k(t) := \begin{cases}\marginnote{vgl. Differenzenquotient}
+			(k+1)\cdot \Big(f\big(t+ \frac{1}{k+1}\big)- f(t)\Big), &\text{ falls }t \in [a,x-\frac{1}{k+1} ]\\
+			0 ,&\text{ sonst}
+		\end{cases}
+	\]
+	Dann gilt $f_k \xrightarrow{k \to \infty}  f'$ punktweise auf $[a,x)$. 
+	\item $(f_k)_{k \in \mathds{N}}$ ist beschränkt: Nach Mittelwertsatz existiert ein $s \in (t,t+ \frac{1}{k+1})$ mit 
+	\[
+		\frac{f \big(t+ \frac{1}{k+1} \big) - f(t)}{\frac{1}{k+1} } = f'(s),
+	\]
+	also gilt $\abs{f_k(t)} \le \sup \set[\abs{f'(r)}]{r \in [a,x]} < \infty  $ (dieses Supremum hängt nicht von $k$ oder $t$ ab).
+	\item $f_k$ ist integrierbar: $f_k$ ist stetig auf $[a,x- \frac{1}{k+1} ]$ und konstant 0 auf $(x-\frac{1}{k+1},x ]$, also Regelfunktion (warum?). Es gilt
+	\[
+		\int_{a} ^{x} \! f_k(t)  \, \mathrm{d}t =  \frac{1}{\frac{1}{k+1} } \cdot \enbrace{\int_{x-\frac{1}{k+1} } ^{x} \! f(t)  \, \mathrm{d}t - \int_{a} ^{a+ 
+		\frac{1}{k+1} } \! f(t)  \, \mathrm{d}t}.
+	\]
+	MWS der Integralrechnung (AnaI, Satz 13.13) liefert: Es existiert ein $\overline{t}_k \in [x- \frac{1}{k+1},x]$ mit 
+	\[
+		f(\overline{t}_k ) \cdot \frac{1}{k+1} = \int_{x- \frac{1}{k+1} } ^{x} \! f(t)  \, \mathrm{d}t
+	\]
+	entsprechend für $\overline{s}_k \in[a,a+ \frac{1}{k+1} ]$. $f$ stetig $\Longrightarrow$
+	\begin{align*}
+		\int_{a} ^{x} \! f_k(t)  \, \mathrm{d}t &= \frac{1}{\frac{1}{k+1} } \cdot \enbrace{\int\! \ldots  - \int\! \ldots } = f(\overline{t}_k )- f(\overline{s}_k )
+		\xrightarrow{k \to \infty} f(x)- f(a)
+	\end{align*}
+	mit \ref{sub:610} folgt: $f'$ ist Lebesgue-integrierbar und es gilt
+	\[
+		\int_{[a,x]}  \! f'  \, \mathrm{d}x  = \lim_{ k \to \infty} \int_{[a,x]} f_k  \, \mathrm{d}t = \lim_{ k \to \infty} \int_{a} ^{x} \! f_k(t)  \, \mathrm{d}t
+		= f(x)- f(a) \bewende
+	\]
+\end{itemize}
+% subsection 611 (end)
+
+\subsection[Definition: $\sigma$-kompakt]{Definition} % (fold)
+\label{sub:612}
+$A \subset \mathds{R}^n$ heißt \bet{$\sigma$-kompakt}\index{Sigma-kompakt@$\sigma$-kompakt}, falls $A$ abzählbare Vereinigung kompakter Mengen ist.
+% subsection 612 (end)
+
+\subsection[Beispiel: $\sigma$-kompakte Mengen]{Beispiel} % (fold)
+\label{sub:613}
+Folgende Mengen sind alle $\sigma$-kompakt:
+\begin{multicols}{2}
+	\begin{itemize}
+		\item offene Mengen
+		\item abgeschlossene Mengen
+		\item endliche Durchschnitte $\sigma$-kompakter Mengen
+		\item abzählbare Vereinigungen $\sigma$-kompakter Mengen
+	\end{itemize}
+\end{multicols}
+% subsection 613 (end)
+
+\subsection[Definition: lokal integrierbar]{Definition} % (fold)
+\label{sub:614}
+Sei $A \subseteq \mathds{R}^n$ $\sigma$-kompakt. Dann heißt $f : A \to (-\infty, \infty]$ \Index{lokal integrierbar}, falls für jedes kompakte $K \subset A$ die Funktion
+$f|_K : K \to (-\infty,\infty]$ integrierbar ist.
+% subsection 614 (end)
+
+\subsection{Corollar (Majorantenkriterium)} % (fold)
+\label{sub:615}
+Sei $A \subset \mathds{R}^n$ $\sigma$-kompakt, $f : A \to (-\infty, \infty]$ lokal integrierbar. Sei $F : A \to (-\infty, \infty]$ integrierbar mit $F\ge \abs{f} $.
+Dann ist $f$ integrierbar über $A$.
+\minisec{Beweis}
+Sei $A= \bigcup_{k \in \mathds{N}} A_k$ mit $A_k \subseteq A_{k+1}$ kompakt für alle $k \in \mathds{N}$. Dann ist $f|_{A_k}$ integrierbar, also auch 
+\[
+	f_k := f_A \cdot \chi_{A_k} \enspace{\color{light_gray} = (f|_{A_k})_{A_k}}
+\]
+es gilt dann $f_k \xrightarrow{k \to \infty}  f$ punktweise und $\abs{f_k} \le F $. Mit Satz \ref{sub:69} folgt, dass $f$ integrierbar ist. \bewende
+% subsection 615 (end)
+% section 6 (end)
+\newpage
+
+\section{Der Satz von Fubini} % (fold)
+\label{sec:7}
+\subsection[Lemma über Nullmengen]{Lemma} % (fold)
+\label{sub:71}
+Sei $A \subset \mathds{R}^p \times \mathds{R}^q$ eine Nullmenge. Dann existiert eine Nullmenge $B \subset \mathds{R}^q$ so, dass für jedes $y \in \mathds{R}^q\setminus B$
+die Menge 
+\[
+	A_y := \set[x \in \mathds{R}^p]{(x,y) \in A} \subset \mathds{R}^p
+\]
+eine Nullmenge im $\mathds{R}^p$ ist.
+\minisec{Beweis}
+$A$ ist Nullmenge, d.h. $\norm[1]{\chi_A} =0$. Sei $\varepsilon>0$. Dann existiert eine Treppe\footnote{$c_k \in \mathds{R}_+$, $Q_k$ offene Quader in $\mathds{R}^p \times \mathds{R}^q$}
+$\Phi = \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k}$ über $\chi_A$ mit $I(\Phi ) = \sum_{k=0}^{\infty} c_k v(Q_k) < \varepsilon$. Es ist $Q_k = Q_k' \times Q_k''$, wo 
+$Q_k' \subset \mathds{R}^p$ und $Q_K'' \subset \mathds{R}^q$ offene Quader sind. Definiere
+$a : \mathds{R}^q \to (-\infty, \infty]$ durch 
+\[
+	a(y) := \norm[1, \mathds{R}^p]{\chi_{A_y}} 
+\]
+Für $x \in \mathds{R}^p$ gilt 
+\[
+	\chi_{A_y}(x)  \le \chi_A(x,y) \le \Phi (x,y) = \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k'}(x) \cdot \chi_{Q_k''}(y) 
+\]
+also $\chi_{A_y} \le \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k''}(y) \cdot \chi_{Q_k'}$ und nach \ref{sub:39} gilt
+\[
+	a(y) = \norm[1]{\chi_{A_y}} \le \sum_{k=0}^{\infty} c_k \cdot \chi_{Q_k''}(y) \cdot \norm[1,\mathds{R}^p]{\chi_{Q_k'}}   = \sum_{k=0}^{\infty} c_k \cdot v(Q_k') \cdot 
+	\chi_{Q_k''}(y),
+\]
+somit $a \le \sum_{k=0}^{\infty} c_k \cdot c(Q_k') \cdot \chi_{Q_k''} =: \Psi$. $\Psi$ ist Treppe über $a$. Aber 
+\[
+	\norm[1,\mathds{R}^q]{a} \le I(\Psi) = \sum_{k=0}^{\infty} c_k \cdot v(Q_k') \cdot v(Q_k'') = I(\Phi) <\varepsilon 
+\]
+also gilt $\norm[1,\mathds{R}^q]{a}=0 $. Für $l \in \mathds{N}$ setze $B_l := \set[y \in \mathds{R}^q]{a(y) \ge \frac{1}{l+1} } $. Dann ist $B_l \subset \mathds{R}^q$
+Nullmenge (warum?). Daraus folgt mit \ref{sub:57}
+\[
+	B := \bigcup_{l \in \mathds{N}} B_l \text{ Nullmenge}
+\]
+aber $B= \set[y \in \mathds{R}^q]{a(y)>0}$ also  
+\[
+	\forall y \in \mathds{R}^q \setminus B : 0 = a(y) = \norm[1]{\chi_{A_y}} 
+\]
+$\Rightarrow A_y$ Nullmenge. \bewende
+% subsection 71 (end)
+
+\subsection[Bemerkung, warum $B$ in \ref{sub:71} ausgeschlossen werden muss]{Bemerkung} % (fold)
+\label{sub:72}
+In \ref{sub:71} ist es wesentlich, die Nullmenge $B$ auszuschließen:
+\[
+	\begin{tikzpicture}
+		%\draw[help lines] (0,0) grid (3,2);
+		\draw[<->, thick] (0,2) node[left]{1} -- (0,0) -- (3,0);
+		\draw[ultra thick, DodgerBlue2] (1,0)node[below]{$y$} -- (1,2) node[right]{$A_y$};
+		\draw[Salmon3] (1,0) -- (1,2);
+		\draw[Salmon3] (0.2,0.4) --(2.3,1.3);
+		\draw[Salmon3] (0.6,1.7) --(0.3,0.3);
+		\draw[Salmon3] (2,1.3) --(0.9,1.9);
+		\draw[Salmon3] (3,0.5) --(0.4,1.1);
+		\draw[Salmon3] (0.2,1.6) --(1.3,0.1);
+		\draw[Salmon3] (0.1,1.1) --(2.7,1.8);
+		\draw[Salmon3] (1.6,0.15) --(2.9,1.8) node[right, midway]{$A$};
+	\end{tikzpicture}
+\]
+$A \subset \mathds{R}^2$ ist eine Nullmenge, aber $A_y = [0,1] \subset \mathds{R}$ ist keine Nullmenge!
+% subsection 72 (end)
+
+\subsection{Satz von Fubini} % (fold)
+\label{sub:73}
+Sei $f : \mathds{R}^p \times \mathds{R}^q \to (-\infty, \infty]$ integrierbar. 
+\begin{enumerate}[a)]
+	\item Die Funktion $f_y : \mathds{R}^p \to (-\infty, \infty]$ mit $f_y(x) := f(x,y)$ ist für fast alle $y \in \mathds{R}^q$ integrierbar, d.h. $f_y$ ist integrierbar für
+	$y \in \mathds{R}^q \setminus N$, für eine Nullmenge $N \subset \mathds{R}^q$.
+	\item Definiere $F : \mathds{R}^q \to (-\infty,\infty)$ durch
+	\[
+		F(y) := \begin{cases}
+			\int_{\mathds{R}^p}\! f_y  \, \mathrm{d}x , &\text{ falls }y \in \mathds{R}^q \setminus N\\
+			0 ,&\text{ falls } y \in N
+		\end{cases}
+	\]
+	Dann ist $F$ integrierbar und es gilt
+	\[
+		\int_{\mathds{R}^p \times \mathds{R}^q}\! f(x,y)  \, \mathrm{d}(x,y) = \int_{R^q} F(y)  \, \mathrm{d}y
+	\]
+	"{}Kürzer"{}:
+	\[
+		\int_{\mathds{R}^p \times \mathds{R}^q}\! f(x,y)  \, \mathrm{d}(x,y) = \int_{\mathds{R}^q}\! \enbrace{\int_{\mathds{R}^p}\! f_y(x)  \, \mathrm{d}x }  
+		\, \mathrm{d}y 
+	\]
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Nach Corollar \ref{sub:64} existiert $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}_{\mathds{R}^p \times \mathds{R}^q}$ und eine Nullmenge 
+	$A \subset \mathds{R}^p \times \mathds{R}^q$ mit $\norm[1]{f- \varphi_k} \xrightarrow{k \to \infty} 0 $ und 
+	\begin{enumerate}[(i)]
+		\item $\varphi_k(x,y) \xrightarrow{k \to \infty} f(x,y)$ für $(x,y) \in \mathds{R}^p \times \mathds{R}^q \setminus A$
+		\item $ \sum_{k=0}^{\infty} \norm[1]{\varphi_{k+1} - \varphi_k} < \infty $
+	\end{enumerate}
+	Nach Lemma \ref{sub:71} existiert eine Nullmenge $N' \subset \mathds{R}^q$ so dass für $y \in \mathds{R}^q\setminus N'$ gilt:
+	\[
+		A_y := \set[x \in \mathds{R}^p]{(x,y) \in A} \subset \mathds{R}^p 
+	\]
+	ist eine Nullmenge. Aber für $x \in \mathds{R}^p \setminus A_y$ gilt $(x,y) \not\in A$, also 
+	\begin{enumerate}[(i)]
+		\setcounter{enumii}{2}
+		\item Für $y \in \mathds{R}^q \setminus N'$ gilt
+		\[
+			{\color{light_gray}(x \mapsto \varphi_k (x,y) )} \enspace(\varphi_k)_y \xrightarrow{k \to \infty} f_y \quad \text{ punktweise fast überall, d.h. für } x \in 
+			\mathds{R}^p \setminus A_y
+		\]
+	\end{enumerate}
+	Setze 
+	\[
+		H_k(y) := \int_{\mathds{R}^p}\! \underbrace{\abs{\varphi_{k+1}(x,y) - \varphi_k(x,y)}}_{\in \mathcal{T}(\mathds{R}^p \times \mathds{R}^q)}  \, \mathrm{d}x   
+		= \int_{\mathds{R}^p}\! \underbrace{\abs{(\varphi_{k+1})_y (x) - 
+		(\varphi_k)_y (x)}}_{\in \mathcal{T}(\mathds{R}^p)}  \, \mathrm{d}x  = \norm[1,\mathds{R}^p]{(\varphi_{k+1})_y - (\varphi_k)_y} 
+	\]
+	Dann gilt nach Fubini für Treppenfunktionen(\ref{sub:34}):
+	\begin{align*}
+		\int_{\mathds{R}^q} H_k(y)  \, \mathrm{d}y = \int_{\mathds{R}^q}\! \enbrace{\int_{\mathds{R}^p} \abs{\varphi_{k+1} (x,y)- \varphi_k(x,y)}  \, \mathrm{d}x  }  
+		\, \mathrm{d}y &= \int_{\mathds{R}^p \times \mathds{R}^q}\! \abs{\varphi_{k+1} - \varphi_k}  \, \mathrm{d}(x,y)\\
+		&= \norm[1,\mathds{R}^p \times \mathds{R}^q]{\varphi_{k+1} - \varphi_k}
+	\end{align*}
+	Nach (ii) gilt dann
+	\[
+		\sum_{k=0}^{\infty} \int_{\mathds{R}^q}\! H_k(y)  \, \mathrm{d}y < \infty \tag{$\star$}
+	\]
+	Nun ist $\enbrace{\sum_{k=0}^{i} H_k}_{i \in \mathds{N}}$ eine monoton wachsende Folge von integrierbaren Funktionen; die Folge der Integrale 
+	$\enbrace{\int_{\mathds{R}^q} \enbrace{\sum_{k=0}^{i} H_k}  \, \mathrm{d}y }_{i \in \mathds{N}} $ ist beschränkt durch 
+	$\sum_{k=0}^{\infty} \int_{\mathds{R}^q}\! H_k(y)  \, \mathrm{d}y \stackrel{(\star)}{<} \infty$. nach Beppo-Levi (\ref{sub:66}) ist dann
+	\[
+		H := \sum_{k=0}^{\infty} H_k : \mathds{R}^q \to (-\infty, \infty]
+	\]
+	integrierbar und nach \ref{sub:58} ist $H$ außerhalb einer Nullmenge $N'' \subset \mathds{R}^q$ endlich. Wir erhalten
+	\begin{enumerate}[(i)]
+		\setcounter{enumii}{3}
+		\item $\sum_{k=0}^{\infty} \norm[1, \mathds{R}^p]{(\varphi_{k+1})_y - (\varphi_k)_y}  = \sum_{k=0}^{\infty} H_k(y) = H(y) < \infty \quad$ für 
+		$y \in \mathds{R}^q \setminus N''$
+	\end{enumerate}
+	Setze $N:= N' \cup N'' \subset \mathds{R}^q$.
+	
+	Für $y \in \mathds{R}^q \setminus N$ gilt nach (iv): $\big((\varphi_k)_y\big)_{k \in \mathds{N}}$ ist Cauchy-Folge bezüglich $\norm[1, \mathds{R}^p]{.} $ also bildet
+	\[
+		\Big(\big[(\varphi_k)_y\big]\Big)_{k \in \mathds{N}} \subset L^1(\mathds{R}^p)
+	\]
+	eine Cauchy-Folge und konvergiert nach \ref{sub:63} in $L^1(\mathds{R}^p)$ gegen ein $[g] \in L^1(\mathds{R}^p)$ für ein $g \in \mathcal{L}^1(\mathds{R}^p)$.
+	Ebenfalls nach \ref{sub:63} gilt für eine Teilfolge $\big((\varphi_{k_\nu})_y\big)_{k \in \mathds{N}}$ mit $(\varphi_{k_\nu})_y \xrightarrow{\nu \to \infty} g$
+	punktweise fast überall.
+	
+	Nach (iii) ist dann $g=f_y$ fast überall, also ist $f_y$ integrierbar für $y \in \mathds{R}^q \setminus N$.
+	\item Nach Satz \ref{sub:63} gilt außerdem für $y \in \mathds{R}^q \setminus N$
+	\[
+		\lim_{ k \to \infty} \int_{\mathds{R}^p}\! \varphi_k(x,y)  \, \mathrm{d}x = \int_{\mathds{R}^p} f(x,y)  \, \mathrm{d}x \tag{$\star\star$}
+	\]
+	Wir setzen $\Phi_k (y) := \int_{\mathds{R}^p}\! \varphi_k(x,y) \, \mathrm{d}x $, $k \in \mathds{N}$. Dann ist $\Phi_k \in \mathcal{T}_{\mathds{R}^q}$ (vgl. Fubini für
+	Treppenfunktionen, \ref{sub:34}) und es gilt 
+	\begin{enumerate}[(i)]
+		\setcounter{enumii}{4}
+		\item $\Phi_k \xrightarrow{k \to \infty} F$ punktweise auf $\mathds{R}^q \setminus N \quad $ (nach $(\star\star)$)
+		\item $ \sum_{k=0}^{\infty} \norm[1, \mathds{R}^q]{\Phi_{k+1} - \Phi_k} \le \sum_{k=0}^{\infty} \norm[1, \mathds{R}^q]{H_k} = \sum_{k=0}^{\infty} \norm[1, 
+		\mathds{R}^q \times \mathds{R}^p]{\varphi_{k+1}- \varphi_k} \stackrel{\text{(ii)}}{<} \infty   $.
+	\end{enumerate}
+	Wegen (vi) ist $(\Phi _k)_{k \in \mathds{N}}$ Cauchy bzgl. $\norm[1,\mathds{R}^q]{.}$, also konvergiert nach \ref{sub:63} eine Teilfolge 
+	$(\Phi _{k_\nu})_{\nu \in \mathds{N}}$ punktweise fast überall gegen ein $G \in \mathcal{L}^1(\mathds{R}^q)$. Wegen (v) gilt $F=G$ fast überall und $F$ ist 
+	integrierbar.
+	
+	Wieder nach \ref{sub:63} gilt 
+	\begin{align*}
+		\int_{R^q}\! F(y)  \, \mathrm{d}y \stackrel{\text{\ref{sub:63}}}{=} \lim_{ k \to \infty} \int_{\mathds{R}^q}\! \Phi_k(y)  \, \mathrm{d}y
+		&\stackrel{\text{\ref{sub:34}}}{=} \lim_{ k \to \infty} \int_{\mathds{R}^p \times \mathds{R}^q}\! \varphi_k(x,y)  \, \mathrm{d}(x,y) \\
+		&\stackrel{\text{\ref{sub:42}}}{=} \int_{\mathds{R}^p \times \mathds{R}^q}\! f(x,y)  \, \mathrm{d}(x,y) \bewende
+	\end{align*}
+\end{enumerate}
+% subsection 73 (end)
+
+\subsection{Satz von Tonelli} % (fold)
+\label{sub:74}
+Sei $f : \mathds{R}^p \times \mathds{R}^q \to (-\infty, \infty]$ lokal integrierbar. $f$ ist genau dann integrierbar, wenn wenigstens eines der Integrale
+\[
+	\int_{\mathds{R}^q}\! \enbrace{\int_{\mathds{R}^p} \!\abs{f(x,y)}  \, \mathrm{d}x }  \, \mathrm{d}y \enspace(\star)\quad , \quad \int_{\mathds{R}^p}\! \enbrace{\int_{\mathds{R}^q} 
+	\! \abs{f(x,y)}  \, \mathrm{d}y }  \, \mathrm{d}x \enspace (\star\star)
+\]
+existiert. In diesem Fall gilt die Formel aus \ref{sub:73}.
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow$":] $f$ integrierbar $\Rightarrow $ $\abs{f} $ integrierbar; Existenz von $(\star)$ und $(\star\star)$ folgt aus \ref{sub:73}.
+	\item["$\Leftarrow$":] Nach \ref{sub:615} genügt es zu zeigen, dass $\abs{f} $ integrierbar ist. Sei $W_k := [-k,k]^{p} \times [-k,k]^q$; setze
+	\[
+		f_k := \min \set{\abs{f}, \abs{f} \cdot  \chi_{W_k} }, k \in \mathds{N} 
+	\]
+	Dann konvergiert $(f_k)_{k \in \mathds{N}}$ punktweise monoton wachsend gegen $\abs{f}$. Außerdem gilt 
+	\begin{align*}
+		0 \le\int_{\mathds{R}^p \times \mathds{R}^q}\! f_k(x,y)  \, \mathrm{d}(x,y) \stackrel{\text{\ref{sub:73}}}{=} \int_{\mathds{R}^q}\! 
+		\enbrace{ \int_{\mathds{R}^p}\! f_k(x,y)  \, \mathrm{d}x }  \, \mathrm{d}y \le \int_{\mathds{R}^q}\! 
+		\enbrace{ \int_{\mathds{R}^p}\! \abs{f(x,y)}  \, \mathrm{d}x  }  \, \mathrm{d}y \stackrel{\text{falls }(\star) \text{ ex.}}{<} \infty 
+	\end{align*}
+	$\Rightarrow \enbrace{\int_{\mathds{R}^p \times \mathds{R}^p} f_k(x,y)  \, \mathrm{d}(x,y)}_{k \in \mathds{N}} $ beschränkt. Mit Beppo-Levi (\ref{sub:66}) folgt
+	$\abs{f} $ ist integrierbar. \bewende
+\end{description}
+% subsection 74 (end)
+
+\subsection[Beispiel: Anwendung von Fubini]{Beispiel} % (fold)
+\label{sub:75}
+\[
+	f(x,y) := \begin{cases}
+		\frac{x-y}{(x+y)^3} , &\text{ falls }x+y\not= 0\\
+		0 ,&\text{ sonst } 
+	\end{cases}
+\]
+ist nicht integrierbar über $[0,1] \times [0,1]$, und 
+\[
+	\int_{0} ^{1} \! \enbrace{ \int_{0} ^{1} \! f(x,y)  \, \mathrm{d}x }  \, \mathrm{d}y \not= \int_{0} ^{1} \! \enbrace{\int_{0} ^{1} \! f(x,y)  \, \mathrm{d}y}  \, \mathrm{d}x   
+\]
+\minisec{Beweis}
+Übung.
+% subsection 75 (end)
+
+\section*{Exkurs: Die Gammafunktion} % (fold)
+\label{sec:exkurs_die_gammafunktion}
+
+
+\subsection[Proposition/Definition: Die Gamma-Funktion]{Proposition/Definition} % (fold)
+\label{sub:76}
+Für $x>0$ ist $(t \mapsto t^{x-1} e^{-t})$ integrierbar über $(0,\infty)$. Wir definieren die \Index{Gammafunktion} 
+\[
+	\Gamma(x) := \int_{(0,\infty)} \! t^{x-1} e^{-t}  \, \mathrm{d}t
+\]
+\minisec{Beweis}
+\begin{enumerate}[1.]
+	\item $0 \le t^{x-1} e^{-t}\le t^{x-1}$. $t^{x-1}$ ist integrierbar über $(0,1]$, denn 
+	\[
+		\int_{(0,1]}\! t^s  \, \mathrm{d}t \stackrel{\text{\ref{sub:66}}}{=} \lim_{ k \to \infty} \int_{[\frac{1}{k+1},1 ]} \! t^s  \, \mathrm{d}t
+		= \lim_{ k \to \infty} \int_{\frac{1}{k+1} } ^{1} \! t^s  \, \mathrm{d}t = \lim_{ k \to \infty}  \abs{\frac{1}{s+1} t^{s+1} }_{\frac{1}{k+1} }^{1}
+		= \frac{1}{s+1} \tag*{für $s>-1$}  
+	\]
+	\item $0\le t^{x-1} e^{-t} \le \frac{1}{t^2} $, falls $t\ge t_0$ für ein geeignetes $t_0$, denn $t^2 \cdot t^{x-1} e^{-t} \xrightarrow{t \to \infty} 0$. Aber 
+	$\frac{1}{t^2} $ ist integrierbar über $[t_0, \infty)$, also auch $t^{x-1} e^{-t}$.
+	\item $t^{x-1} e^{-t}$ist stetig, also auch integrierbar auf $[1,t_0]$. \bewende
+\end{enumerate}
+% subsection 76 (end)
+
+\subsection[Proposition: Rekursionsformel der Gammafunktion]{Proposition} % (fold)
+\label{sub:77}
+Für $x>0$ gilt $\Gamma(x+1)= x \cdot \Gamma(x)$. Weiter gilt $\Gamma(1)=1$, also $\Gamma(n+1)= n!$ , $n \in \mathds{N}^*$.
+\minisec{Beweis}
+\begin{enumerate}[1.)]
+	\item \begin{align*}
+		\Gamma(x+1) = \int_{(0,\infty)}\! t^{x+1-1} e^{-t}  \, \mathrm{d}t \stackrel{\text{\ref{sub:66}}}{=} \lim_{ k \to \infty} \int_{\frac{1}{k+1} } ^{k} \! 
+		t^{x} e^{-t}  \, \mathrm{d}t &= \lim_{ k \to \infty} \enbrace{-t^x e^{-t} \Big|_{\frac{1}{k+1} }^k + \int_{\frac{1}{k+1} } ^{k} \! x \cdot t^{x-1} 
+		\cdot e^{-t}  \, \mathrm{d}t} \\
+		&= x \cdot \lim_{ k \to \infty} \int_{\frac{1}{k+1} } ^{k} \! t^{x-1} e^{-t}\\
+		&= x \cdot \int_{(0,\infty)}\! t^{x-1} e^{-t}  \, \mathrm{d}t = x \cdot \Gamma(x)
+	\end{align*}
+	\item $\Gamma(1)= \int_{(0,\infty)}e^{-t}  \, \mathrm{d}t =1$.
+	\item $\Gamma(n+1)=n!$ nach Induktion. \bewende
+\end{enumerate}
+% subsection 77 (end)
+
+\subsection[Satz: Limesdarstellung der Gammafunktion]{Satz} % (fold)
+\label{sub:78}
+Für $x>0$ gilt 
+\[
+	\Gamma(x) = \lim_{ n \to \infty} \frac{n!\cdot  n^x}{x \cdot (x+1) \cdot \ldots \cdot (x+n)} 
+\]
+\minisec{Beweis}
+Es ist $e^{-t}= \lim_{ n \to \infty} \enbrace{1- \frac{t}{n} }^n $ für $t>0$ (Analysis \RM{1}). Die Folge ist monoton wachsend in $n$. Setze 
+\[
+	f_n(t) := \begin{cases}
+		t^{x-1} \cdot (1- \frac{t}{n} )^n, &\text{ falls }0 < t \le n\\
+		0 , &\text{ sonst }
+	\end{cases}
+\]
+Dann gilt für $t \in (0,\infty)$: $f_n(t) \to t^{x-1} e^{-t}$ monoton wachsend. Wir erhalten für $x>0$
+\begin{align*}
+	\Gamma(x) = \int_{(0,\infty)}\! t^{x-1} e^{-t}  \, \mathrm{d}t &\overset{n \to \infty}{\longleftarrow} \int_{(0,\infty)}\! f_n(t)  \, \mathrm{d}t
+	= \lim_{ k \to \infty} \int_{\frac{1}{k+1} } ^{n} \! t^{x-1} \cdot \enbrace{1- \frac{t}{n}}^n  \, \mathrm{d}t\\
+	&= \lim_{ k \to \infty} \enbrace{\frac{t^x}{x} \cdot \enbrace{1- \frac{t}{n} }^n \Bigg|_{\frac{1}{k+1} }^n + \int_{\frac{1}{k+1} } ^{n} \! \frac{t^x}{x} \cdot 
+		\enbrace{1- \frac{t}{n} }^{n-1}  \, \mathrm{d}t}\\
+	&= 0+ \lim_{ k \to \infty} \enbrace{\frac{t^{x+1}}{(x+1)x} \enbrace{1- \frac{t}{n} }^{n-1} \Bigg|_{\frac{1}{k+1} }^n - \int_{\frac{1}{k+1} } ^{n} \! 
+		\frac{t^{x+1}}{(x+1)x} \cdot \frac{n-1}{n} \enbrace{1- \frac{t}{n} }^{n-2}  \, \mathrm{d}t}  \\
+	&= 0 + \frac{n-1}{n} \cdot \frac{1}{(x+1)x} \cdot   \int_{0} ^{n} \! t^{x+1} \cdot \enbrace{1- \frac{t}{n} }^{n-2}  \, \mathrm{d}t = \ldots\\
+	& = \frac{(n-1) \cdot (n-2) \cdot \ldots  \cdot 1}{n \cdot n \cdot \ldots \cdot n} \cdot \frac{1}{x \cdot (x+1) \cdot \ldots \cdot (x+n-1)} \cdot  \int_{0} ^{n} \! 
+		t^{x+n+1} \enbrace{1- \frac{t}{n} }^{n-n} \\
+	&= \frac{n! \cdot n^x}{x \cdot (x+1) \cdot \ldots \cdot (x+n-1)} \bewende
+\end{align*}
+% subsection 78 (end)
+
+\subsection[Corollar: $\Gamma(1/2) = \sqrt{\pi}$]{Corollar} % (fold)
+\label{sub:79}
+$\Gamma(\frac{1}{2} ) = \sqrt{\pi }  $\marginnote{Das ist ein Knaller!}
+\minisec{Beweis}
+\begin{align*}
+	\Gamma(\frac{1}{2} )^2 &= \lim_{ n \to \infty} \frac{n! \cdot n^{\frac{1}{2} }}{\frac{1}{2}(1+ \frac{1}{2} ) \cdot \ldots \cdot (n+ \frac{1}{2} ) } \cdot 
+	\frac{n! \cdot n^{\frac{1}{2}} }{(1-\frac{1}{2} ) \cdot (2-\frac{1}{2} ) \cdot \ldots \cdot (n- \frac{1}{2} ) (n+\frac{1}{2} )}  \\
+	&= \lim_{ n \to \infty} \frac{2 \cdot  (n!)^2 \cdot n}{(n+\frac{1}{2} ) \cdot (1^2- \frac{1}{4} ) (2^2 - \frac{1}{4} ) \cdot \ldots \cdot (n^2- \frac{1}{4} )} \\
+	&= 2 \cdot \lim_{ n \to \infty}  \frac{n}{n+\frac{1}{2} } \cdot \lim_{ n \to \infty} \frac{(n!)^2}{(1^2 - \frac{1}{4} ) \cdot \ldots \cdot (n^2- \frac{1}{4} )} \\
+	&= 2 \cdot \lim_{ n \to \infty} \underbrace{\prod_{k=1}^{n} \frac{k^2}{k^2- \frac{1}{4} } }_{=: c_n}
+\end{align*}
+Setze $A_m := \int_{0} ^{\frac{\pi }{2} } \! \sin^m t  \, \mathrm{d}t$. Dann gilt $A_0 = \frac{\pi }{2}, A_1 =1 $, $A_m = \frac{m-1}{m} A_{m-2}, m \ge 2 $ 
+(partielle Integration). \\
+Induktion $\leadsto$
+\begin{align*}
+	A_{2n} &= \frac{(2n-1) (2n-3) \cdot \ldots \cdot 3 \cdot 1}{2n \cdot (2n-2) \cdot \ldots \cdot 4 \cdot 2} \cdot \frac{\pi}{2} \\
+	A_{2n+1} &= \frac{2n \cdot (2n-2) \cdot \ldots \cdot 4 \cdot 2}{(2n+1) \cdot (2n-1) \cdot \ldots \cdot 5 \cdot 3} \cdot 1 
+\end{align*}
+Es gilt $\sin^{2n+2}t \le \sin^{2n+1} t \le \sin^{2n} t $, $t \in [0, \frac{\pi}{2}]$, also
+\[
+	A_{2n+2} \le A_{2n+1} \le A_{2n}.
+\]
+Damit gilt dann $\frac{A_{2n+2}}{A_{2n}} = \frac{2n+1}{2n+2} \xrightarrow{n \to \infty} 1  $, also
+\begin{align*}
+	1\overset{\infty \leftarrow n}{\longleftarrow} \frac{A_{2n+2}}{A_{2n}} \le \underbrace{\frac{A_{2n+1}}{A_{2n}}}_{= \enbrace{\prod_{k=1}^n \frac{4k^2}{4k^2-1}} \cdot \frac{2}{\pi} = c_n \cdot \frac{2}{\pi} \to 1  } \le \frac{A_{2n}}{A_{2n}} = 1  
+\end{align*}
+Also $c_n \xrightarrow{n \to \infty} \frac{\pi }{2} $, woraus die Behauptung folgt. \bewende
+% subsection 79 (end)
+
+\subsection[Beispiel: Gaußintegral]{Beispiel} % (fold)
+\label{sub:710}
+Es gilt
+\[
+	\int_{\mathds{R}^n}\! e^{-\norm[2]{x}^2}  \, \mathrm{d}x  = \pi^{\frac{n}{2} } \enspace \text{ insbesondere } \enspace \int_{\mathds{R}}\! e^{-t^2}  \, \mathrm{d}t= 
+	\pi^{\frac{1}{2} } \tag{\Index{Gaußintegral}}
+\]
+\minisec{Beweis}
+Mit $n=t^2, \diffd{n}{t} = 2t, \mathrm{d}t = \frac{n^{-\frac{1}{2} }}{2}  \, \mathrm{d}n $
+\begin{align*}
+	\int_{\mathds{R}} e^{-t^2}  \, \mathrm{d}t \stackrel{\text{?}}{=} 2 \cdot \int_{(0,\infty)} e^{-t^2}  \, \mathrm{d}t = \int_{(0,\infty)}\! n^{-\frac{1}{2} } e^{-n}  \, \mathrm{d}n = \Gamma\enbrace{\frac{1}{2}} = \sqrt{\pi } 
+\end{align*}
+Weiter gilt nach Fubini (\ref{sub:73}) und Tonelli (\ref{sub:74})
+\begin{align*}
+	\int_{\mathds{R}^n}\! e^{- \norm[2]{x}^2 }  \, \mathrm{d}x  = \int_{\mathds{R}^n}\! e^{-(x_1^2 + x_2^2+ \ldots + x_n^2)}   \mathrm{d}(x_1, \ldots , x_n)
+	&= \int_{\mathds{R}^{n-1}}\! \enbrace{\int_{\mathds{R}}\! e^{-(x_1^2 + x_2^2+ \ldots + x_n^2)}  \, \mathrm{d}x_1 }   \mathrm{d}(x_2, \ldots , x_n) \\ 
+	&= \int_{R^{n-1}}\! \!\enbrace{ \int_{\mathds{R}}\! e^{-x_1^2}  \, \mathrm{d}x_1}  e^{-(x_2^2+ \ldots + x_n^2)}  \mathrm{d}(x_2, \ldots , x_n)   \\
+	&= \ldots = (\pi^{\frac{1}{2} })^n = \pi^{\frac{n}{2} } \bewende
+\end{align*}
+% subsection 710 (end)
+
+\subsection[Beispiel: Kugelvolumen im $\mathds{R}^n$]{Beispiel} % (fold)
+\label{sub:711}
+Für das Kugelvolumen im $\mathds{R}^n$ gilt
+\[
+	v  \Big(B_{\mathds{R}^n} (0,R)\Big) = \frac{\pi^{\frac{n}{2} } \cdot R^n}{\Gamma\enbrace{\frac{n}{2}+1} }  \quad {\color{light_gray} \xrightarrow{n \to \infty} 0}
+\]
+\minisec{Beweis}
+Übung (vgl. Beispiel \ref{sub:54}) \bewende
+% subsection 711 (end)
+
+\subsection[Beispiel: Euler'sche Betafunktion]{Beispiel} % (fold)
+\label{sub:712}
+Wir definieren die \Index{Euler'sche Betafunktion} $B :(0,\infty) \times (0,\infty) \to \mathds{R}_+$ durch 
+\[
+	B(x,y) := \int_{(0,1)}\! t^{x-1} (1-t)^{y-1}  \, \mathrm{d}t \stackrel{\text{Subs. }t=1/(1+u)}{=} \int_{(0,\infty)} \frac{u^{x-1}}{(1+u)^{x+y}}  \, \mathrm{d}u 
+\]
+{\color{light_gray} (Warum existiert das Integral?)} \\
+Behauptung: 
+\[
+	B(x,y) = \frac{\Gamma(x) \cdot \Gamma(y)}{\Gamma(x+y)} 
+\]
+\minisec{Beweis}
+Mit Substitution $t= R \cdot s, \diffd{t}{s} = R$
+\begin{align*}
+	\Gamma(z) = \int_{0} ^{\infty} \! t^{z-1} e^{-t}  \, \mathrm{d}t = \int_{0} ^{\infty} \! (R \cdot s)^{z-1} e^{-R s} \cdot R  \, \mathrm{d}s
+	= R^z \int_{0} ^{\infty} \! s^{z-1} e^{-Rs}  \, \mathrm{d}s \tag{$R>0$}
+\end{align*}
+Dann gilt für $z= x+y, R=1+u$
+\begin{align*}
+	\leadsto \frac{1}{\Gamma(x,y)} &\cdot \int_{0} ^{\infty} \! t^{x+y-1} e^{-(1+u)t}  \, \mathrm{d}t = \frac{1}{(1+u)^{x+y}} \\
+	\leadsto  B(x,y) &= \frac{1}{\Gamma(x+y)} \cdot \int_{0} ^{\infty} \! u^{x-1} \enbrace{\int_{0} ^{\infty} \! t^{x+y-1} e^{-(1+u)t}  \, \mathrm{d}t}  \, \mathrm{d}u \\
+	&= \frac{1}{\Gamma(x+y)} \int_{0} ^{\infty} \!  \enbrace{ \int_{0} ^{\infty} \! u^{x-1} t^{x+y-1} e^{-(1+u)t}   \, \mathrm{d}t }  \, \mathrm{d}u   \\
+	&= \frac{1}{\Gamma(x+y)} \cdot \int_{0} ^{\infty} \!  \enbrace{ \int_{0} ^{\infty} \! u^{x-1} t^{x+y-1} e^{-(1+u)t}  \, \mathrm{d}u }  \, \mathrm{d}t \\
+	&= \frac{1}{\Gamma(x+y)} \cdot \int_{0} ^{\infty} \! t^{x+y-1} e^{-t} \cdot  \enbrace{\int_{0} ^{\infty} \! u^{x-1} e^{-ut}  \, \mathrm{d}u}  \, \mathrm{d}t \\
+	\intertext{Substitution $ut=s$}
+	&= \frac{\Gamma(x)}{\Gamma(x+y)} \cdot \int_{0} ^{\infty} \! t^{y-1} e^{-t} = \frac{\Gamma(x) \cdot \Gamma(y)}{\Gamma(x+y)} \bewende 
+\end{align*}
+% subsection 712 (end)
+
+\subsection{Beispiel (Dirichlet)} % (fold)
+\label{sub:713}
+Sei $\triangle := \set[(x,y) \in (0,\infty) \times (0,\infty)]{x+y<1} $ das \Index{Standardsimplex} im $\mathds{R}^2$ und $f : \triangle \to \mathds{R}_+$ gegeben durch
+$f(x,y) := x^{p-1} \cdot y^{q-1}$, $p,q >0$. Es gilt
+\begin{align*}
+	\int_{\triangle}\! f(x,y)  \, \mathrm{d}(x,y) =  \int_{(0,1)}\! \enbrace{\int_{(0,1-y)}\! f(x,y)  \, \mathrm{d}x }   \mathrm{d}y 
+	&= \int_{(0,1)}\! y^{q-1} \enbrace{\int_{(0,1-y)}\! x^{p-1}  \, \mathrm{d}x }  \, \mathrm{d}y \\ 
+	&= \int_{(0,1)}\! y^{q-1} \frac{1}{p} \cdot (1-y)^p  \, \mathrm{d}y \\
+	&= \frac{1}{p} \cdot B(q,p+1) \\
+	&= \frac{1}{p} \cdot \frac{\Gamma(q) \cdot \Gamma(p+1)}{\Gamma(q+p+1)} \\
+	&= \frac{\Gamma(q) \cdot \Gamma(p)}{\Gamma(q+p+1)}  
+\end{align*}
+% subsection 713 (end)
+% section exkurs_die_gammafunktion (end)
+% section 7 (end)
+\newpage
+
+\section{Der Transformationssatz} % (fold)
+\label{sec:8}
+Erinnerung: $T : [a,b] \to [c,d]$ bijektiv, stetig differenzierbar, $f : [c,d] \to \mathds{R}$ stetig. Dann gilt 
+\[
+	\int_{a} ^{b} \! f\big(T(x)\big) \diffd{T}{x}(x) \, \mathrm{d}x  = \int_{T(a)} ^{T(b)} \! f(t)  \, \mathrm{d}t,
+\]
+also $\int_{[a,b]}\! f\big( T(x)\big) \abs{ \diffd{T}{x}(x)}  \, \mathrm{d}x = \int_{[c,d] = T([a,b])}\! f(t)  \, \mathrm{d}t$
+
+\subsection{Transformationssatz} % (fold)
+\label{sub:81}
+Seien $U,V \subset \mathds{R}^n$ offen, $T : U \to V$ ein $C^1$-\Index{Diffeomorphismus}\footnote{$T$ stetig diff'bar, $T ^{-1}$ stetig diff'bar}; sei 
+$f : V \to (-\infty, \infty]$ eine Funktion. Dann ist $f$ über $V$ integrierbar, genau dann wenn 
+\[
+	(f \circ T) \cdot \abs{\det(\mathrm{D}T)}
+\]
+über $U$ integrierbar ist. In diesem Fall gilt
+\[
+	\int_U\! (f \circ T)(x) \cdot \abs{\det \big(\mathrm{D} T (x)\big)}  \, \mathrm{d}x  = \int_V\! f(y)  \, \mathrm{d}y 
+\]
+\minisec{Beweis (Skizze)}
+\begin{description}
+	\item[Strategie:] Sei $V$ ein Quader und $f$ eine Treppenfunktion. 
+	\begin{figure}[h]
+		\centering{
+		\begin{tikzpicture}
+			\draw[thick] (7,0) grid (12,5);
+			\node[below] at (9.5,0) {$V$};
+		\end{tikzpicture}
+		\caption{Veranschaulichung der Beweisstrategie von \ref{sub:81}}}
+	\end{figure} 
+	$T ^{-1}$ ist differenzierbar, d.h. für $y \in V$ gilt 
+	\[
+		T ^{-1} (y+ \xi) = T ^{-1}(y)+ \mathrm{D}(T ^{-1})(y) \xi + \varphi(\xi)
+	\]
+	,wo $\mathrm{D}(T ^{-1})(y) : \mathds{R}^n \to \mathds{R}^n$ linear (und invertierbar) ist und $\varphi: \mathds{R}^n \to \mathds{R}^n$ eine Abbildung mit 
+	$\frac{1}{\norm[2]{\xi} } \varphi(\xi) \xrightarrow{\xi \to 0} 0 $. Setze $\tilde P_k := P_k - x_k$, $\tilde Q_k := Q_k - y_k$, dann
+	\begin{align*}
+		\tilde P_k = P_k - x_k = T ^{-1}(Q_k) - T ^{-1}(y_k) &\approx T ^{-1}(y_k)+ \mathrm{D}(T ^{-1})(y_k)(\tilde Q_k) - T ^{-1}(y_k) \\
+		&= D(T ^{-1})(T(x_k))(\tilde Q_k) = \big(\mathrm{D}T(x_k)\big) ^{-1} (\tilde Q_k)
+	\end{align*}
+	Es folgt
+	\begin{align*}
+		v(P_k) = v(\tilde P_k) \approx v\big( (\mathrm{D} T(x_k)) ^{-1} (\tilde Q_k)\big) &\stackrel{\text{\ref{sub:516}}}{=} \abs{\det \big(\mathrm{D}T (x_k)\big) ^{-1}} 
+		\cdot v(\tilde Q_k) \\
+		&= \abs{ \det \D T(x_k)} ^{-1} \cdot v(Q_k) 
+	\end{align*}
+	also $\abs{\det \D T(x_k)} \cdot v(P_k) \approx v(Q_k) $. Daraus folgt
+	\begin{align*}
+		\int_V\! f(y)  \, \mathrm{d}y = \sum_{k} f(y_k) \cdot v(Q_k) &\stackrel{!}{\approx} \sum_{k} f\big(T(x_k)\big) \cdot \abs{\det \D T(x_k)} \cdot v(P_k)   \\
+		&\stackrel{!}{\approx} \int_U\! f \circ T(x) \cdot \abs{\det \D T(x)}  \, \mathrm{d}x.
+	\end{align*}
+\end{description}
+% subsection 81 (end)
+
+\subsection[Lemma: Urbild einer Nullmenge unter einen $C^1$-Diffeomorphismus]{Lemma} % (fold)
+\label{sub:82}
+Sei $T, U,V$ wie in \ref{sub:81}, $N \subset V$ eine Nullmenge. Dann ist $T ^{-1}(N)$ eine Nullmenge.
+\minisec{Beweisidee}
+Man darf $N \subset K \subseteq V$ für ein kompaktes $K$ annehmen, benutze dann, dass $T ^{-1}\big|_K$ Lipschitz ist, sowie Bemerkung \ref{sub:511} ($N$ lässt sich durch
+abzählbar viele Quader mit kleinem Gesamtvolumen überdecken). \bewende
+% subsection 82 (end)
+
+\subsection[Lemma: Abschätzungen für das Volumen eines Quaders mit kompaktem Urbild]{Lemma} % (fold)
+\label{sub:83}
+Sei $P \subset U$ eine kompakte Teilmenge, sodass $Q := T(P) \subset V$ ein kompakter Quader ist. Dann gilt:
+\[
+	\min_{x \in P} \abs{\det \D T(x)} \cdot v(P) \le v(Q)\le \max_{x \in P} \abs{\det \D T(x)} \cdot v(P)
+\]
+\minisec{Beweis benutzt:}
+Corollar \ref{sub:516}, Lemma \ref{sub:82}, Kompaktheit von $P$ und Stetigkeit von $( x \mapsto \abs{\det \D T(x)} )$ \bewende
+% subsection 83 (end)
+
+\subsection[Proposition: Transformationssatz für Treppenfunktionen]{Proposition} % (fold)
+\label{sub:84}
+Der Transformationssatz \ref{sub:81} gilt für $f_V \in \mathcal{T}(\mathds{R}^n) $ mit $\supp f := \overline{\set[x \in V]{f(x)\not= 0}} \subset V $.\index{kompakter Träger}
+\minisec{Beweis (Skizze)}
+Wegen Linearität  und Lemma \ref{sub:82} genügt es den Satz für $f = \chi_Q$ zu beweisen, wo $Q \subset V$ ein kompakter Quader ist.
+Integrierbarkeit von $(\chi_Q \circ T) \cdot \abs{\det \D T} $ folgt aus Kompaktheit von $T ^{-1}(Q)$ und Stetigkeit von ($x \mapsto \abs{\det \D T(x)} $).
+Zu zeigen: $\int_{T ^{-1}(Q)}\! \abs{\det \D T(x)}  \, \mathrm{d}x  = \int_Q\! 1  \, \mathrm{d}y $
+
+Sei $\varepsilon>0$. $\abs{\det \D T ^{-1}} ^{-1} $ ist gleichmäßig stetig auf $Q$, daher existieren $Q_1, \ldots Q_r \subset Q$ kompakte Quader, sodass 
+\begin{enumerate}[(i)]
+	\item $Q = \bigcup_{i=1}^r Q_i$
+	\item $Q_i \cap Q_{i'}$ ist Nullmenge, falls $i \not= i'$
+	\item $\max_{y \in Q_i} \abs{\det \D (T ^{-1})(y)} ^{-1} - \min_{y \in Q_i} \abs{\det \D (T ^{-1})(y)} ^{-1} \le \varepsilon$, \quad $i=1,\ldots ,n$
+\end{enumerate}
+Wegen\marginnote{Satz von der Umkehrabbildung} $\D( T ^{-1})( T(x)) = \D T(x) ^{-1}$ und $\det (A ^{-1}) = (\det A) ^{-1}$ (für $A \in M_n(\mathds{R})$), gilt 
+\[
+	\abs{\det \D (T ^{-1}) \big( T(x)\big) } ^{-1} =  \abs{\det \D T(x)}
+\]
+Für $P_i := T ^{-1}(Q_i)$ erhalten wir: 
+\[
+	\max_{x \in P_i} \abs{\det ( \D T(x))} - \min_{x \in P_i} \abs{\det ( \D T(x))} \stackrel{\text{(iii)}}{\le} \varepsilon \tag{$\star$}
+\]
+Dann gilt:
+\[
+	\abs{\int_{P_i}\! \abs{\det \D T(x)}  \, \mathrm{d}x  - v(Q_i)} \stackrel{\text{($\star$), \ref{sub:83}}}{\le} \varepsilon \cdot v(P_i)
+\]
+Es folgt
+\begin{align*}
+	\int_{T ^{-1}(Q)}\! \abs{\det \D T(x)}  \, \mathrm{d}x \stackrel{\text{(ii), \ref{sub:82}}}{=} \sum_{i=1}^{r} \int_{P_i}\! \abs{\det \D T(x)}  \, \mathrm{d}x 
+	\underset{\substack{\sum_{i=1}^{r} \varepsilon \cdot v(P_i) \\= \varepsilon \cdot v(T ^{-1}(Q)) }}{=} \sum_{i=1}^{r} v(Q_i) = v(Q) = \int_{Q} \! 1  \, \mathrm{d}y 
+\end{align*}  
+$\varepsilon>0$ beliebig $\Rightarrow $ Behauptung. \bewende
+% subsection 84 (end)
+
+\subsection*{Beweis von \ref{sub:81} (Skizze)} % (fold)
+%\label{sub:85}
+Sei $f$ integrierbar über $V$. Konstruiere Treppenfunktionen $(\varphi_k)_{k \in \mathds{N}} \subset \mathcal{T}(\mathds{R}^n)$ mit
+\begin{enumerate}[(i)]
+	\item $\supp \varphi_k  \subset V$
+	\item $\norm[1]{f_V- \varphi_k} \xrightarrow{k \to \infty} 0$
+	\item Für eine Nullmenge $N \subset V$ gilt: $\varphi_k \xrightarrow{k \to \infty} f_V$ punktweise auf $V \setminus N$.\hfill(mit \ref{sub:63})
+\end{enumerate}
+Nach Proposition \ref{sub:84} gilt:
+\begin{align*}
+	\norm[1]{(\varphi_k \circ T) \cdot \abs{\det(\D T)} - (\varphi_l \circ T) \cdot \abs{\det(\D T)}\rule{0cm}{0.45cm} } &= \int_U \! \abs{\varphi_k \circ T- \varphi_l \circ T} \cdot 
+	\abs{\det(\D T)}  \, \mathrm{d}x \\
+	&\stackrel{\text{\ref{sub:84}}}{=} \int_V \abs{\varphi_k - \varphi_l}  \, \mathrm{d}y  \\
+	&= \norm[1]{\varphi_k - \varphi_l} 
+\end{align*}
+$\Rightarrow \enbrace{ (\varphi_k \circ T) \cdot \abs{\det (\D T)} }_{k \in \mathds{N}} $ ist Cauchy-Folge bezüglich $\norm[1]{.} $. Weiter gilt 
+\begin{align*}
+	(\varphi_k \circ T) \cdot \abs{ \det (\D T)} \xrightarrow{k \to \infty} (f_V \circ T) \circ \abs{\det(\D T)} 
+\end{align*}
+punktweise fast überall, d.h. auf $U \setminus T^{-1}(N)$ ($T ^{-1}(N)$ ist Nullmenge nach \ref{sub:82}). Nach dem Satz von Riesz-Fischer (\ref{sub:63}) ist dann
+$(f_V \circ T) \cdot \abs{\det (\D T)} $ integrierbar über $U$ und 
+\[
+	\int_U \!(f \circ T) \cdot \abs{ \det (\D T)}  \, \mathrm{d}x ) = \lim_{ k \to \infty} \int_U \! (\varphi_K \circ T) \cdot \abs{\det (\D T)}  \, \mathrm{d}x   
+	\stackrel{\text{\ref{sub:84}}}{=} \lim_{ k \to \infty} \int_V \! \varphi_k  \, \mathrm{d}y \stackrel{\text{\ref{sub:63}}}{=} \int_V \! f  \, \mathrm{d}y.
+\]
+Rückrichtung $T \leadsto T ^{-1}$ \bewende
+% subsection 85 (end)
+
+\subsection[Beispiel: Affine Transformationen und Polarkoordinaten]{Beispiel} % (fold)
+\label{sub:85}
+\begin{enumerate}[(i)]
+	\item Sei $A \in GL(n, \mathds{R})$ eine invertierbare $n \times n$-Matrix, $b \in \mathds{R}^n$. Sei $T : \mathds{R}^n \to \mathds{R}^n$ die 
+	\Index{affine Transformation} $x \mapsto A x+ b$. Dann gilt $\D T(x) =A, x \in \mathds{R}^n$ (vgl. Ana \RM{2}) und $f$ ist über $K \subset \mathds{R}^n$ integrierbar
+	genau dann, wenn $f \circ T$ über $T ^{-1} (K)$ integrierbar ist und es gilt
+	\[
+		\abs{\det A} \cdot  \int_{T ^{-1}(K)}\! f(Ax+b)  \, \mathrm{d}x = \int_K f(y)  \, \mathrm{d}y.
+	\]
+	Für $A \in O(n)$ (orthogonale Matrix) gilt 
+	\[
+		v\big( T(K)\big) = v(K)
+	\]
+	(\Index{Bewegungsinvarianz} des Lebesgue-Maßes).
+	\item Polarkoordinaten in $\mathds{R}^2$ \\
+	$P_2 : (0,\infty) \times (- \pi , \pi) \to \mathds{R}^2 \setminus (- \infty,0] \times \{0\}, \binom{r}{\varphi} \mapsto \binom{r \cdot \cos \varphi}{r \cdot \sin 
+	\varphi}$ ist bijektiv. Es ist 
+	\[
+		\D P_2 \binom{r}{\varphi} = \begin{pmatrix}
+			\cos \varphi & -r \sin \varphi \\
+			\sin \varphi & r \cos \varphi
+		\end{pmatrix} \tag{vgl. Ana \RM{2} Bsp. 8.6 (ii)}
+	\]
+	und $\det \D P_2 \binom{r}{\varphi} = r >0$. Daraus folgt $\D P_2 \binom{r}{\varphi} $ ist invertierbar $\Rightarrow P_2$ ist $C^1$-Diffeomorphismus. Für
+	$f : \mathds{R}^2 \to \mathds{R}^2$ integrierbar gilt nun
+	\begin{align*}
+		\int_{\mathds{R}^2}\! f(x,y)  \, \mathrm{d}(x,y) = \int_{\mathds{R}^2 \setminus (- \infty, 0] \times \{0\}} f(x,y)  \, \mathrm{d}(x,y)
+		&= \int_{(0, \infty) \times (-\pi , \pi )}\! f\big( P_2(r,\varphi)\big) \cdot r  \enspace \mathrm{d}(r,\varphi) \\ 
+		&= \int_{(0,\infty)}\! r \enbrace{ \int_{(-\pi ,\pi )}\! f(P_2(r,\varphi))  \, \mathrm{d}\varphi}  \mathrm{d}r 
+	\end{align*}
+	\item Kugelkoordinaten im $\mathds{R}^3$ \\
+	$P_3 : (0,\infty) \times (-\pi ,\pi )\times (- \frac{\pi}{2}, \frac{\pi}{2}) \to \mathds{R}^3 \setminus (-\infty, 0] \times \{0\} \times \mathds{R}$
+	\[
+		\begin{pmatrix}
+			r \\
+			\varphi \\
+			\theta
+		\end{pmatrix} \mapsto
+		\begin{pmatrix}
+			r \cdot \cos \varphi \cdot \cos \theta \\
+			r \cdot \sin \varphi \cdot \cos \theta \\
+			r \cdot \sin \theta
+		\end{pmatrix}
+	\]
+	ist bijektiv. Es gilt
+	\[
+		\det \enbrace{\D P_3 \begin{pmatrix}
+			r \\
+			\varphi \\
+			\theta
+		\end{pmatrix}} = r^2 \cdot \cos \theta > 0
+	\]
+	für $r>0, \theta \in (- \frac{\pi}{2}, \frac{\pi}{2})$. Für $f$ integrierbar gilt
+	\begin{align*}
+		\int_{\mathds{R}^3} f(x,y,z)  \, \mathrm{d}(x,y,z) = \int_{(0,\infty)} \int_{(-\pi , \pi )} \int_{(- \frac{\pi}{2}, \frac{\pi}{2})}
+		f\big( P_3(r, \varphi, \theta) \big) \cdot r^2  \cdot \cos \theta  \enspace \mathrm{d}\theta  \, \mathrm{d}\varphi  \, \mathrm{d}r
+	\end{align*}
+	\item 
+	\[
+		\int_{\mathds{R}^3} \chi_{B(0,R)}  \, \mathrm{d}(x,y,z) = \ldots = \frac{4}{3} \pi  R^3
+	\]
+\end{enumerate}
+% subsection 85 (end)
+
+\subsection{Corollar (Integration rotationssymetrischer Funktionen)} % (fold)
+\label{sub:86}
+Sei $g : \mathds{R}^n \to \mathds{R}$ eine Funktion, welche sich in der Form $g(x) = f(\norm[2]{x})$ schreiben lässt für eine Funktion $f : \mathds{R}_+ \to \mathds{R}$.
+Dann ist $g$ über $\mathds{R}^n$ integrierbar genau dann, wenn $f(r) \cdot r^{n-1}$ über $(0, \infty)$ integrierbar ist. In diesem Fall gilt 
+\[
+	\int_{\mathds{R}^n} \! g(x)  \, \mathrm{d}x  = n \cdot v\big(B_{\mathds{R}^n}(0,1)\big) \cdot \int_{(0,\infty)}\! f(r) r^{n-1}  \, \mathrm{d}r
+\]
+\minisec{Beweis}
+Für $n=2,3$ Übung. Für $n>3$ ohne Beweis. \index{rotationssymmetrische Funktion}
+% subsection 86 (end)
+% section 8 (end)
+\newpage
+
+\section{$\sigma$-Algebren und messbare Räume} % (fold)
+\label{sec:9}
+
+\subsection[Erinnerung: Topologien, Stetigkeit in topologischen Räumen]{Erinnerung} % (fold)
+\label{sub:91}
+Sei $X$ eine Menge. $\mathcal{T} \subset \mathcal{P}(X)$ heißt \Index{Topologie} auf $X$, falls 
+\begin{enumerate}[(i)]
+	\item $X, \emptyset \in \mathcal{T} $,
+	\item $U_1, \ldots , U_n \in \mathcal{T} \Longrightarrow  \bigcap_{i=1}^n U_i \in \mathcal{T} $,
+	\item $U_i \in \mathcal{T}, i \in I \Longrightarrow \bigcup_{i \in I} U_i \in \mathcal{T} $.
+\end{enumerate} 
+$(X,\mathcal{T})$ heißt \Index{topologischer Raum}, $U \in \mathcal{T} $ heißt \Index{offen}. Falls $(X_j, \mathcal{T}_j)$, $j=1,2$ topologischer Räume sind und
+$f : X_1 \to X_2$ eine Abbildung, dann heißt $f$ \bet{stetig}\index{topologischer Raum!Stetigkeit}, falls gilt
+\[
+	U \in \mathcal{T}_2 \Longrightarrow  f ^{-1} (U) \in \mathcal{T}_1.
+\] 
+% subsection 91 (end)
+
+\subsection[Definition: $\sigma$-Algebra, messbarer Raum]{Definition} % (fold)
+\label{sub:92}
+Sei $X$ eine Menge. $\Sigma  \subset \mathcal{P}(X)$ heißt \bet{$\sigma$-Algebra}\index{Sigma-Algebra@$\sigma$-Algebra} auf $X$, falls 
+\begin{enumerate}[(i)]
+	\item $X \in \Sigma$,
+	\item $A \in \Sigma \Rightarrow X \setminus A \in \Sigma$,
+	\item $A_n \in \Sigma, n \in \mathds{N} \Rightarrow \bigcup_{n \in N} A_n \in \Sigma$.
+\end{enumerate}
+$(X, \Sigma)$ heißt \Index{messbarer Raum}; die Elemente von $\Sigma$ heißen \Index{messbare Mengen}.  $(X_j, \Sigma_j)$ für $ j=1,2$ seien messbare Räume,
+$f : X_1 \to X_2$ eine Abbildung. $f$ heißt \bet{messbar}\index{messbare Abbildung}, falls gilt
+\[
+	A \in \Sigma_2 \Longrightarrow f ^{-1}(A) \in \Sigma_1.
+\]
+% subsection 92 (end)
+
+\subsection[Bemerkung: Schnitte und Komposition messbaren Abbildungen in $\sigma$-Algebren]{Bemerkung} % (fold)
+\label{sub:93}
+\begin{enumerate}[(i)]
+	\item $\sigma$-Algebren sind abgeschlossen bezüglich abzählbarer Vereinigungen und Durchschnitten. \marginnote{de Morgan}
+	\item $(X_j, \Sigma_j)$ für $j=1,2,3$, $f : X_1 \to X_2$, $g : X_2 \to X_3$ messbar. $\Rightarrow $ 
+	$g \circ f : X_1 \to X_3$ messbar.
+\end{enumerate}
+% subsection 93 (end)
+
+\subsection[Proposition: Kleinste $\sigma$-Algebra]{Proposition} % (fold)
+\label{sub:94}
+Sei $X$ eine Menge und $\mathcal{F} \subset \mathcal{P}(X)$ eine Menge von Teilmengen. Dann existiert eine kleinste $\sigma$-Algebra, die $\mathcal{F}$ enthält; diese nennen
+wir die von $\mathcal{F}$ \bet{erzeugte $\sigma$-Algebra}\index{Sigma-Algebra@$\sigma$-Algebra!erzeugte} $\Sigma(\mathcal{F})$. 
+\minisec{Beweis}
+Setze 
+\[
+	\Omega := \set[\Gamma \subset \mathcal{P}(X)]{ \Gamma \text{ ist } \sigma \text{-Algebra und } \mathcal{F} \subset\rule{0cm}{0.35cm} \Gamma} 
+\]
+Dann ist $\Omega \not= \emptyset$ (denn $\mathcal{P} (X) \in \Omega$). Setze $\Sigma (\mathcal{F}) := \bigcap_{\Gamma \in \Omega} \Gamma \subset \mathcal{P} (X)$. Dann ist
+$\mathcal{F} \subset \Sigma (\mathcal{F})$, denn $\mathcal{F} \subset \Gamma$ für $\Gamma \in \Omega$. Ist $\Gamma \subset \mathcal{P}(X)$ eine $\sigma$-Algebra, welche
+$\mathcal{F}$ enthält, so ist $\Gamma  \in \Omega$ und $\Sigma(\mathcal{F}) \subset \Gamma$. Es bleibt zu zeigen: $\Sigma (\mathcal{F})$ ist $\sigma$-Algebra:
+\begin{enumerate}[(i)]
+	\item $X \in \Sigma(\mathcal{F})$, denn $X \in \Gamma$ für jedes $\Gamma \in \Omega$.
+	\item $A \in \Sigma(\mathcal{F}) \Rightarrow A \in \Gamma$ für jedes $\Gamma \in \Omega$. Es folgt $X \setminus A \in \Gamma $für jedes $\Gamma  \in \Omega$.
+	Also ist $X \setminus A \in \Sigma(\mathcal{F})$.
+	\item ebenso. \bewende
+\end{enumerate}
+% subsection 94 (end)
+
+\subsection[Bemerkung: \ref{sub:94} lässt sich analog auch auf Topologien übertragen]{Bemerkung} % (fold)
+\label{sub:95}
+Die entsprechende Aussage für topologische Räume beweist man analog. 
+% subsection 95 (end)
+
+\subsection[Definition: $\sigma$-Algebra der Borelmengen, Borel-messbar]{Definition} % (fold)
+\label{sub:96}
+\begin{enumerate}[(i)]
+	\item Sei $(X,\mathcal{T})$ ein topologischer Raum. Wir nennen $\Sigma(\mathcal{T} )$ die \bet{$\sigma$-Algebra der Borelmengen}
+	\index{Sigma-Algebra@$\sigma$-Algebra! der Borelmengen} auf $X$ und schreiben $\mathcal{B}_X$ für $\Sigma(\mathcal{T} )$.
+	\item Seien $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ topologische Räume, dann heißt $f : X \to Y$ \Index{Borel-messbar}, falls $f$ messbar ist bezüglich 
+	$\mathcal{B}_X$ und $\mathcal{B}_Y$.
+\end{enumerate}
+% subsection 96 (end)
+
+\subsection[Bemerkung, welche Mengen Borel sind]{Bemerkung} % (fold)
+\label{sub:97}
+Offene und abgeschlossene Mengen sind Borel und ebenso $F_\sigma$'s (abzählbare Vereinigungen von abgeschlossenen Mengen), und $G_\delta$'s (abzählbare Durchschnitte von 
+offenen Mengen).
+% subsection 97 (end)
+
+\subsection[Proposition über Abbildungen zwischen topologischen und messbaren Räumen]{Proposition} % (fold)
+\label{sub:98}
+Sei $(X, \Sigma)$ ein messbarer Raum und $(Y, \mathcal{T} )$ ein topologischer Raum. Sei $f : X \to Y$ eine Abbildung. Dann gilt
+\begin{enumerate}[(i)]
+	\item $\Omega := \set[E \subset Y]{f ^{-1}(E) \in \Sigma} $ ist eine $\sigma$-Algebra auf $Y$.
+	\item Falls $f ^{-1}(E) \in \Sigma$ für jedes $E \in \mathcal{T} $, so ist $f$ messbar (bezüglich. $\Sigma$ und $\mathcal{B}_Y$). Insbesondere: Falls 
+	$(X, \mathcal{T}_X)$ ein topologischer Raum ist und $\Sigma = \mathcal{B}_X$ und falls $f$ stetig ist, so ist $f$ Borel.
+	\item Falls $Y=\mathds{R}$ und $f ^{-1}\big( (\alpha, \infty)\big) \in \Sigma$ für jedes $\alpha \in \mathds{R}$, so ist $f$ messbar.
+	\item Aussage (iii) gilt analog für $Y= (-\infty, \infty]$ und $(\alpha, \infty]$, wobei $\mathcal{T} $, die von $\mathcal{T}_\mathds{R}$ und $(\alpha, \infty]$, 
+	$\alpha \in \mathds{R}$ erzeugte Topologie ist.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item $f ^{-1}(Y) =X$, $f ^{-1}(Y \setminus E) = X \setminus f ^{-1}(E)$, $f ^{-1}( E_1 \cup E_2 \cup \ldots ) = f ^{-1}(E_1) \cup f ^{-1}(E_2) \cup \ldots $
+	\item Setze $\Omega := \set[E \subset Y]{f ^{-1}(E) \in \Sigma}$ wie in (i). Dann gilt $\mathcal{T}  \subset \Omega$, also $\mathcal{B}_Y \subset \Omega$ nach (i).
+	$\Rightarrow f ^{-1}(E) \in \Sigma$ für jedes $E \in \mathcal{B}_Y$ $\Rightarrow f $ ist messbar.
+	\item Wieder $\Omega := \set[E \subset Y]{f ^{-1}(E) \in \Sigma} $. Für $\alpha \in \mathds{R}$ wähle $\alpha_0 < \alpha_1 < \ldots < \alpha$ mit $\alpha_n \xrightarrow{n \to \infty} \alpha$. Dann ist $(\alpha_k, \infty) \in \Omega$ für jedes $k$. Also auch $(-\infty, \alpha_n]$ (nach (i)) und 
+	$\bigcup_{n \in \mathds{N}} (-\infty, \alpha_n] = (- \infty, \alpha) \in \Omega$. $\Rightarrow (\alpha, \beta) = (- \infty, \beta) \cap (\alpha, \infty) \in \Omega$.
+	Also für jedes $U \in \mathcal{T}_\mathds{R}$ ist $U \in \Omega$, denn $U= \bigcup_{n \in \mathds{N}} (\gamma_n, \delta_n)$ (warum?).
+	
+	Daraus folgt $\mathcal{B}_Y \subset \Omega$, also ist $f$ messbar.
+	\item Übung. \bewende
+\end{enumerate}
+% subsection 98 (end)
+
+\subsection[Proposition: $\sup$ und $\limsup$ von messbaren Funktionen sind messbar]{Proposition} % (fold)
+\label{sub:99}
+Sei $(X, \Sigma)$ ein messbarer Raum und $f_n : X \to (-\infty, \infty]$ eine Folge messbarer Funktionen. Dann sind $g := \sup_{n \in \mathds{N}} f_n$ und
+$h := \limsup _{n \to \infty} f_n$ messbar\footnote{$h(x) = \lim_k \sup_{n \ge k} f_n(x)$}.
+\minisec{Beweis}
+\[
+	g ^{-1} \big( (\alpha, \infty]\big) = \underbrace{\bigcup_{k \in \mathds{N}} \underbrace{f_n ^{-1} \big( (\alpha, \infty] \big)}_{\in\Sigma}}_{\in \Sigma}
+	\stackrel{\text{\ref{sub:98}}}{\Longrightarrow} g \text{ messbar}
+\]
+Ebenso für $\inf$ an Stelle von $\sup$. Weiter gilt 
+\[
+	h (x)= \lim_{k \to \infty} \sup_{n \ge k}f_n(x) = \underbrace{\inf_{k \ge 0} \underbrace{\sup_{n \ge k} f_n(x)}_{\text{messbar}}}_{\text{messbar}} \bewende
+\]
+% subsection 99 (end)
+
+\subsection[Corollar: Punktweise Limiten und $\max$, $\min$ messbarer Funktionen sind messbar]{Corollar} % (fold)
+\label{sub:910}
+Seien $(X, \Sigma)$ und $f_n : X \to (-\infty, \infty]$ messbar für $n \in \mathds{N}$. 
+\begin{enumerate}[(i)]
+	\item Falls $f_n \xrightarrow{n \to \infty} f$ punktweise, so ist $f$ messbar.
+	\item Falls $d,e : X\to (-\infty, \infty]$ messbar sind, so auch $\max \{d,e\}, \min \{d,e\} $, also auch $d_+$ und $ d_-$.
+\end{enumerate}
+\minisec{Beweis}
+$f = \limsup_{n \to \infty} f_n$ ; $\max \{d,e \} = \sup \set{d,e,e,e, \ldots } $ benutze \ref{sub:99}.  Mit $d_+ = \max \{d,0\}, d_- = \max \{-d,0\}$ folgt der zweite 
+Teil. \bewende
+% subsection 910 (end)
+
+\subsection[Definition: Einfache Funktion]{Definition} % (fold)
+\label{sub:911}
+Sei $(X, \Sigma)$ ein messbarer Raum. $f : X \to (-\infty, \infty)$ heißt \bet{einfach}\index{einfache Funktion}, falls $f(X)$ endlich ist. 
+% subsection 911 (end)
+
+\subsection[Bemerkung: Summenschreibweise für einfache Funktionen]{Bemerkung} % (fold)
+\label{sub:912}
+Sei $f$ einfach, dann ist $f = \sum_{i=1}^{n} \alpha_i \cdot \chi_{A_i}$ für $\set{\alpha_1, \ldots , \alpha_n} =f(X) $ und $A_i = f ^{-1} \big( \{\alpha\} \big)$.
+$f$ ist messbar genau dann, wenn die $A_i$ messbar sind. 
+% subsection 912 (end)
+
+\subsection[Prop.: Approximation nichtnegativer, messbarer Funktionen durch einfache Funktionen]{Proposition} % (fold)
+\label{sub:913}
+Sei $(X, \Sigma)$ ein messbarer Raum, $f : X \to [0, \infty]$ messbar. Dann existieren einfache, messbare Funktionen $(f_n)_{n \in \mathds{N}}$ mit 
+$0 \le f_1 \le f_2 \le \ldots $ und $f_n \xrightarrow{n \to \infty} f$ punktweise.
+\minisec{Beweis}
+Definiere $\varphi_n : [0,\infty] \to [0,\infty)$ wie folgt: 
+\[
+	\begin{tikzpicture}[xscale=1,yscale=0.7]
+		%\draw[help lines] (0,0) grid (6,4);
+		\draw[<->, thick] (0,4) node[left]{$n$} -- (0,0) -- (4,0) node[below]{$n$} -- (6,0);
+	  	\foreach \x in {0,0.25,0.5,...,3.75,4}%
+			   \draw[line width=0.5mm,Firebrick2](\x,\x)--(\x+0.25,\x);
+		\draw[line width=0.5mm,Firebrick2] (4,4) --(6,4);
+		\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=2pt},yshift=0pt, thick] (4,0) -- (4,4) %
+		node[midway, right, xshift=0.2cm]{$n \cdot 2^n $ Stufen};
+	\end{tikzpicture}
+\]
+Dann ist $\varphi_n$ messbar, also auch $\varphi_n \circ f =: f_n$. Dann gilt $f_n \nearrow f$ punktweise.\bewende
+% subsection 913 (end)
+
+\subsection[Definition: Maß und Maßraum]{Definition} % (fold)
+\label{sub:914}
+Sei $(X,\Sigma)$ ein messbarer Raum. Ein \Index{Maß} auf $(X, \Sigma)$  ist eine Abbildungen $\mu : \Sigma \to [0,\infty]$ mit $\mu(\emptyset)=0$, welche \Index{abzählbar additiv}
+ist, d.h. Falls $A_i, \, i \in \mathds{N}$ paarweise disjunkte messbare Mengen sind, so gilt 
+\[
+	\mu \enbrace{\bigcup_{i \in \mathds{N}} A_i} = \sum_{i\in \mathds{N}} \mu(A_i).  
+\]
+$(X, \Sigma, \mu)$ heißt \Index{Maßraum}; \Index{Wahrscheinlichkeitsraum} falls $\mu(X)=1$. 
+% subsection 914 (end)
+
+\subsection[Proposition: Eigenschaften von Maßen]{Proposition} % (fold)
+\label{sub:915}
+Sei $(X,\Sigma, \mu)$ ein Maßraum. Dann gilt
+\begin{enumerate}[(i)]
+	\item $A,B \in \Sigma, A \subset B$ $\Longrightarrow \mu (A) \le \mu(B)$
+	\item $A_i \in \Sigma, i \in \mathds{N}$, $A_0 \subset A_1 \subset A_2 \subset \ldots $, dann gilt $\mu (A_i) \xrightarrow{i \to \infty} \mu \enbrace{\bigcup_{i \in \mathds{N}} A_i} $.
+	\item $A_i \in \Sigma, i\in \mathds{N}$, $A_0 \supset A_1 \supset A_2 \supset \ldots $ und $\mu(A_0) < \infty$, dann gilt $\mu (A_i) \xrightarrow{i \to \infty} \mu \enbrace{\bigcap_{i \in \mathds{N}} A_i} $.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item \[
+		\mu (B) =\mu \enbrace{\bigcup_{i \in \mathds{N}} A_i}  \stackrel{\text{\ref{sub:914}}}{=} \sum_{i \in \mathds{N}} \mu(A_i)  \ge \mu (A)
+	\]
+	mit $A_0 := A, A_1 := B \setminus A, A_2 := \emptyset, A_3 := \emptyset, \ldots $ paarweise disjunkt und messbar.
+	\item Setze $B_0 := A_0, B_1 := A_1 \setminus A_0, B_2 := A_2 \setminus A_1, \ldots , B_{i+1} := A_{i+1} \setminus A_i$, dann sind die $B_i$ paarweise disjunkt und 
+	messbar;
+	\[
+		\mu \enbrace{\bigcup_{i \in \mathds{N}} A_i} = \mu \enbrace{\bigcup_{i \in \mathds{N}} B_i} = \sum_{i \in \mathds{N}} \mu(B_i) = \lim_{ n \to \infty} 
+		\sum_{i=1}^{n} \mu(B_i) = \lim_{ n \to \infty} \mu \enbrace{\bigcup_{i=1}^n B_i} = \lim_{ n \to \infty} \mu(A_n) 
+	\]
+	\item Übung. \bewende
+\end{enumerate}
+% subsection 915 (end)
+
+\subsection[Beispiele für Maßräume]{Beispiele} % (fold)
+\label{sub:916}
+\begin{enumerate}[(i)]
+	\item $(X, \mathcal{P}(X),  \mu)$ mit $\mu(E) = \begin{cases}
+			0, &\text{ falls }E = \emptyset\\
+			\infty, &\text{ falls } E \not= \emptyset
+		\end{cases}$
+	\item $(X, \mathcal{P}(X),  \mu)$ mit $\mu(E) = \begin{cases}
+			\abs{E} , &\text{ falls }E \text{ endlich}\\
+			\infty, &\text{ sonst } 
+		\end{cases} $ \hfill (\Index{Zählmaß})
+	\item $(X, \mathcal{P}(X), \delta_{x_0})$ mit $\delta_{x_0}(E) = \begin{cases}
+		1, &\text{ falls }x_0 \in E\\
+		0 , &\text{ sonst}
+	\end{cases}$ ist W'raum für jedes $X$ und $x_0 \in X$.
+	\item Sei $\mu$ das Zählmaß auf $(\mathds{N}, \mathcal{P}(\mathds{N}))$. Sei $A_i := \set{i, i+1, \ldots } $, $i \in \mathds{N}$. Dann gilt 
+	$A_1 \supset A_1 \supset A_2 \supset \ldots $ und $\mu (A_i) = \infty$, aber $\mu \enbrace{\bigcap_{i \in \mathds{N}} A_i} = 0$. In Proposition \ref{sub:915} (iii) ist
+	$\mu(A_0)< \infty$ also wesentlich!
+	\item \begin{align*}
+		\hat \Lambda &= \set[E \subset \mathds{R}^n]{\chi_E \text{ ist lokal integrierbar}} \\
+		&= \set[E \subset \mathds{R}^n]{E \cap K \text{ messbar im Sinne von Abschnitt \ref{sec:6} für jedes kompakte }K  \subset \mathds{R}^n} 
+	\end{align*}
+	ist $\sigma$-Algebra auf $\mathds{R}^n$:
+	\begin{enumerate}[a)]
+		\item $\emptyset, X \in \hat \Lambda$ denn für jedes kompakte $K$ ist $\chi_X$ über $K$ integrierbar.
+		\item Sei $E \subset \mathds{R}^n, E \in \hat \Lambda$ und $K \subset \mathds{R}^n$ kompakt: 
+		$\chi_{(\mathds{R}^n \setminus E) \cap K} = \chi_{K \setminus (K \cap E)} = \chi_{K} - \chi_{K \cap E}$ ist integrierbar. Also 
+		$\mathds{R}^n \setminus E \in \hat \Lambda$.
+		\item abzählbare Vereinigungen ähnlich (mit Beppo-Levi).
+	\end{enumerate}
+	$\hat \Lambda$ enthält die Borelmengen auf $\mathds{R}^n$ (vgl. \ref{sub:68}). $\lambda : \hat \Lambda \to [0,\infty]  $ gegeben durch 
+	\[
+		\lambda (E) := \begin{cases}
+			v(E), &\text{ falls } \chi_E \text{ integrierbar}\\
+			\infty, &\text{ sonst }
+		\end{cases}
+	\]
+	ist ein Maß auf $\mathds{R}^n$, das \Index{Lebesgue-Maß}  (vgl. Bemerkung \ref{sub:68}). 
+	\item $f \in \mathcal{L}^1(\mathds{R}^n) \Rightarrow $ $f$ ist messbar im Sinne von Abschnitt \ref{sec:9}
+	(Benutze \ref{sub:98} und Corollar \ref{sub:64}, $f$ ist fast überall punktweiser Limes von Treppenfunktionen.)
+\end{enumerate}
+% subsection 916 (end)
+
+\subsection[{Definition: Integrierbarkeit, $\norm[1]{.} $ in Maßräumen}]{Definition} % (fold)
+\label{sub:917}
+Sei $(X,\Sigma, \mu)$ ein Maßraum. 
+\begin{enumerate}[(i)]
+	\item Für eine einfache, messbare Funktion $s : X \to [0,\infty)$, $s = \sum_{i=1}^{k} \alpha_i \cdot \chi_{A_i}$ definieren wir
+	\[
+		\int\! s  \, \mathrm{d}\mu := \sum_{i=1}^{k} \alpha_i \cdot \mu(A_i)
+	\]
+	\item Für $f : X \to [0,\infty]$ messbar definieren wir \marginnote{vgl. \ref{sub:913}}
+	\[
+		\int\! f  \, \mathrm{d}\mu := \sup \set[\int\! s  \, \mathrm{d}\mu]{s \text{ ist einfach, messbar}, 0 \le s \le f} 
+	\]
+	\item Falls $f$ nicht notwendig positiv ist, aber $\int\! f_-  \, \mathrm{d}\mu < \infty$, so setzen wir $\int\! f  \, \mathrm{d}\mu := \int\! f_+  \, \mathrm{d}\mu -
+	\int\! f_-  \, \mathrm{d}\mu $.
+	\item Wir schreiben $\mathcal{L}^1(\mu) := \set[f : X \to \mathds{R}]{\int\! \abs{f}  \, \mathrm{d}\mu < \infty }$. $\mathcal{L}^1(\mu)$ ist Vektorraum und die
+	Abbildung $f \mapsto\int\! f  \, \mathrm{d}\mu$ ist lineares Funktional auf $\mathcal{L}^1(\mu)$.
+	\item Für $f \in \mathcal{L}^1(\mu)$ setzen wir $\norm[1]{f} = \int\! \abs{f}  \, \mathrm{d}\mu$. $\norm[1]{.} $ ist Halbnorm.
+\end{enumerate}
+% subsection 917 (end)
+
+\subsection[Satz: Das Lebesgue-Maß definiert das Lebesgue-Integral!]{Satz} % (fold)
+\label{sub:918}
+Für $f \in \mathcal{L}^1(\mathds{R}^n)$ gilt
+\[
+	\int\! f(x)  \, \mathrm{d}x  = \int\! f  \, \mathrm{d}\lambda 
+\]
+\minisec{Beweis}
+Klar für einfache Funktionen (Linearität). Benutze dann \ref{sub:913} und Beppo-Levi für $f_+$ und $f_-$. \bewende
+% subsection 918 (end)
+
+\subsection[Bemerkung: Aussage von Satz \ref{sub:918}]{Bemerkung} % (fold)
+\label{sub:919}
+Wir haben vorher das Lebesgue-Integral definiert und daraus das Lebesgue-Maß erhalten. Der Satz sagt, dass man umgekehrt das Integral von dem Maß erhält.
+% subsection 919 (end)
+
+\subsection[Definition: Quotientenvektorraum $L^1(\mu)$]{Definition} % (fold)
+\label{sub:920}
+$(X, \Sigma, \mu)$ Maßraum. Wir definieren wieder $\mathcal{N} := \set[f \in \mathcal{L}^1(\mu)]{\int\! \abs{f}  \, \mathrm{d}\mu = 0 } $ und $L^1(\mu) := \nicefrac{\mathcal{L}^1(\mu)}{\mathcal{N}}$.
+% subsection 920 (end)
+\bigskip
+Die folgenden Sätze beweist man wie in Abschnitt \ref{sec:6}
+
+\subsection[Satz: $L^1(\mu)$ ist ein Banachraum]{Satz} % (fold)
+\label{sub:921}
+$(L^1(\mu), \norm[1]{.} )$ ist vollständig normierter Vektorraum (Banachraum).
+% subsection 921 (end)
+
+\subsection{Satz (von Lebesgue über monotone Konvergenz)} % (fold)
+\label{sub:922}
+Sei $(X, \Sigma, \mu)$ ein Maßraum und $f_n : X \to [0,\infty]$, $n \in \mathds{N}$ eine Folge messbarer Funktionen mit $0 \le f_0 \le f_1 \le \ldots $. Dann ist 
+$f := \lim_{ n \to \infty} f_n : X \to [0,\infty]$ messbar und es gilt
+\[
+	\int\! f_n  \, \mathrm{d}\mu \xrightarrow{n \to \infty} \int\! f  \, \mathrm{d}\mu.
+\]
+% subsection 922 (end)
+
+\subsection{Lemma von Fatou} % (fold)
+\label{sub:923}
+Sei $(X, \Sigma, \mu)$ ein Maßraum und $f_n : X \to  [0,\infty]$, $n \in \mathds{N}$, eine Folge messbarer Funktionen. Dann gilt 
+\[
+	\int\! \liminf_{n \to \infty} f_n  \, \mathrm{d}\mu \le \liminf_{n \to \infty} \int\! f_n  \, \mathrm{d}\mu
+\]
+% subsection 923 (end)
+
+\subsection{Satz (von Lebesgue über dominierte Konvergenz)} % (fold)
+\label{sub:924}
+Sei $(X, \Sigma,  \mu)$ ein Maßraum und $f_n : X \to (-\infty,\infty]$, $n \in \mathds{N} $, eine Folge messbarer Funktionen, welche punktweise gegen 
+$f : X  \to (-\infty, \infty]$ konvergiert. Es sei $g : X \to [0,\infty]$ messbar mit $\int\! g  \, \mathrm{d}\mu < \infty$; es gelte $\abs{f_n} \le g $.
+Dann ist $f := \lim_{ n \to \infty} f_n$ integrierbar und es gilt
+\[
+	\int\! f_n  \, \mathrm{d}\mu \xrightarrow{n \to \infty} \int\! f  \, \mathrm{d}\mu.
+\]
+% subsection 924 (end)
+
+Haben gesehen: Maß $\mu \leadsto$ lineares Funktional auf $\mathcal{L}^1(\mu)$. Unter gewissen Umständen lassen sich umgekehrt Funktionale auf Funktionsräumen durch Integrale
+darstellen.
+
+\subsection*{Erinnerung} % (fold)
+\label{sub:erinnerung}
+Ein topologischer Raum $(X, \mathcal{T} )$ heißt \Index{lokalkompakt} und \Index{Hausdorff} falls gilt:
+\begin{enumerate}[(i)]
+	\item Jeder Punkt besitzt eine kompakte Umgebung
+	\item Je zwei Punkte lassen sich durch offene Mengen trennen.
+\end{enumerate}
+D.h. 
+\begin{enumerate}[(i)]
+	\item $\forall x \in X : \exists K \text{ kompakt }\supset V \text{ offen } \ni x$
+	\item $\forall x \not= y \in X : \exists V,W \in \mathcal{T}: x \in V, y \in W, V \cap W = \emptyset$
+\end{enumerate} 
+$C_c(X) := \set[f : X \to \mathds{R}]{\supp f \text{ kompakt}} $ 
+% subsection erinnerung (end)
+
+\subsection{Satz (Darstellungssatz von Riesz)} % (fold)
+\label{sub:925}
+Sei $(X,\mathcal{T})$ ein lokalkompakter Hausdorffraum und sei $\Phi : C_c(X) \to \mathds{R}$ ein positives $(f \ge 0 \Rightarrow \Phi(f)\ge 0)$ lineares Funktional.
+Dann existieren eine $\sigma$-Algebra $\Sigma$ auf $X$ mit $\mathcal{B}_X \subset \Sigma$ und ein Maß $\mu$ auf $(X, \Sigma)$ mit folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item $\Phi(f) = \int\! f  \, \mathrm{d}\mu$ für $f \in C_c(X)$.
+	\item $\mu(K)< \infty$ für $K$ kompakt. 
+	\item Für $E \in \Sigma$ gilt $\mu(E)= \inf\set[\mu(V)]{E \subset V \in \mathcal{T} } $
+	\item Für $E \in \Sigma$ mit $\mu(E)< \infty$ gilt $\mu(E) = \sup \set[\mu(K)]{K \subseteq E \text{ kompakt}} $
+	\item Falls $E \in \Sigma$, $\mu(E)=0$, $A \subseteq E$ dann gilt $A \in \Sigma$.
+\end{enumerate} 
+Außerdem ist $\mu$ durch diese Eigenschaften eindeutig bestimmt. \bewende(ohne Beweis)
+\minisec{Bemerkung}
+\begin{enumerate}[a)]
+	\item (iii) und (iv): $\mu$ ist \Index{reguläres Borelmaß} (von außen und von innen regulär) 
+	
+	(v): $\mu$ ist "{}vollständig"{}, d.h. Teilmengen von Nullmengen sind wieder Nullmengen.
+	\item Der Satz erlaubt es, das Lebesgue-Maß/Integral aus dem Regelintegral für stetige Funktionen mit kompaktem Träger zu gewinnen.
+\end{enumerate}
+% subsection 925 (end)
+% section 9 (end)
+\newpage
+
+\section{Ausblick} % (fold)
+\label{sec:10}
+\begin{description}
+	\item[lokalkompakte Gruppen:] $\leadsto \exists$ (links)invariantes reguläres Borelmaß $\lambda$. $\lambda (g \cdot E) = \lambda (E)$ $\leadsto L^1(G,\lambda) $.
+	Faltung $ \leadsto$ Fourieranalysis
+	\item[Dynamische Systeme:] $X$ topologischer Raum, $\alpha : X \to X$ bijektiv, stetig Borel. Existenz von invarianten Borelmaßen? $\leadsto$ Ergodentheorie.
+	\item[Mannigfaltigkeiten:] $M = \bigcup_{i \in I} U_i$ wo $U_i \approx \mathds{R}^n$
+	\item[Räume von Funktionen und Abbildungen zwischen ihnen] $L^2(\mu) := \set[f :X \to \mathds{R}]{\int \abs{f}^2  \, \mathrm{d}\mu < \infty } $
+	Skalarprodukt auf $L^2$ $\leadsto $ Hilbertraum, unendlich dimensionaler euklidischer Vektorraum.
+\end{description}
+% section 10 (end)
+
+
+
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\end{document}
