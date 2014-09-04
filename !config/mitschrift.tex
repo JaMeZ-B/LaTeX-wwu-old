@@ -277,23 +277,23 @@
 
 %--Diagonale Linien für Matrizen
 \newcommand\tikzmark[1]{%
-  \tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};}
+  \tikzexternaldisable\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};\tikzexternalenable}
 
 \newcommand\MyLine[3][]{%
-  \begin{tikzpicture}[overlay,remember picture]
+  \tikzexternaldisable\begin{tikzpicture}[overlay,remember picture]
     \draw[#1] (#2.south) -- (#3.north);
-  \end{tikzpicture}}
+  \end{tikzpicture}\tikzexternalenable}
   
 %--Jordankasten
-\newcommand{\Jord}{ \begin{BMAT}{|ccc|}{|ccc|} %
+\newcommand{\Jord}{ \tikzexternaldisable \begin{BMAT}{|ccc|}{|ccc|} %
 				0 & & \\ %
 				1\tikzmark{z} &  \diagdown & \\ %
 				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  0 %
-			\end{BMAT}}
+			\end{BMAT} \tikzexternalenable}
 			
 %--Jordankasten mit Lambda
 \newcommand{\JordLa}[1][\empty]{%
-	\ifthenelse{\equal{#1}{\empty}}
+	\tikzexternaldisable\ifthenelse{\equal{#1}{\empty}}
 		{\begin{BMAT}{|ccc|}{|ccc|} %
 				\lambda & & \\ %
 				1\tikzmark{z} &  \diagdown & \\ %
@@ -303,7 +303,7 @@
 				\lambda_{#1}  & & \\ %
 				1\tikzmark{z} &  \diagdown & \\ %
 				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda_{#1}  %
-			\end{BMAT}}}
+			\end{BMAT}}\tikzexternalenable}
 
 %--Inhaltsverzeichnis
 \usepackage[tocindentauto]{tocstyle}
