@@ -6,11 +6,20 @@ This repository stores some lecture notes made during lectures at the University
 
 In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster in Quellcode und PDF zur Verfügung. Aktuell umfasst dies die Vorlesungen
 
-* Sose2014
+* SoSe 2014
 	* [Höhere Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/hoehere_algebra_1/hoehere_algebra.pdf?raw=true "Höhere Algebra I.") (Jannes)
 	* [Differentialformen und Mannigfaltigkeiten](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffMa/diff_ma.pdf?raw=true "Differentialformen und Mannigfaltigkeiten") (Jannes)
 	* [Grundlagen der Analysis, Topologie, Geometrie](https://github.com/JaMeZ-B/latex-wwu/blob/master/Ana_Top_Geo/ana_top_geo.pdf?raw=true "Grundlagen der Analysis, Topologie und Geometrie") (Jannes)
 	* [Partielle Differentialgleichungen I.](https://github.com/JaMeZ-B/latex-wwu/blob/master/PDGL1/PDGL1.pdf?raw=true "Partielle Differentialgleichungen I.") (Phil)
+* WiSe 2013
+	* Analysis III. (Jannes)
+	* [Einführung in die Algebra](https://github.com/JaMeZ-B/latex-wwu/raw/master/EinfAlg_WS13/algebra.pdf?raw=true "Einführung in die Algebra") (Jannes)
+* SoSe 2013
+	* Analysis II. (Jannes)
+	* Lineare Algebra II. (Jannes)
+* WiSe 2012
+	* Analysis I. (Jannes)
+	* Lineare Algebra I. (Jannes)
 	
 (Die Links führen direkt zu den PDF-Dateien; hauptsächlicher Autor in Klammern)
 
