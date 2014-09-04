@@ -15,7 +15,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 	* [Analysis III.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana3_WS13/analysis3.pdf?raw=true "Analysis III.") (Jannes)
 	* [Einführung in die Algebra](https://github.com/JaMeZ-B/latex-wwu/raw/master/EinfAlg_WS13/algebra.pdf?raw=true "Einführung in die Algebra") (Jannes)
 * SoSe 2013
-	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS13/analysis3.pdf?raw=true "Analysis II.") (Jannes)
+	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS13/analysis2.pdf?raw=true "Analysis II.") (Jannes)
 	* Lineare Algebra II. (Jannes)
 * WiSe 2012
 	* Analysis I. (Jannes)
