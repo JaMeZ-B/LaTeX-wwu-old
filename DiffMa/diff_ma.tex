@@ -213,7 +213,7 @@ differenzierbaren Struktur genügt es daher, einen differenzierbaren Atlas zu be
 
 \subsection{Beispiel: Der reell projektive Raum} % (fold)
 \label{sub:13}
-\begin{wrapfigure}[7]{R}{5cm}
+\begin{wrapfigure}[8]{R}[1.5cm]{5cm}
 	\begin{tikzpicture}[xscale=1.2, yscale=1.2]
 		\draw[->, thick] (-1,0) -- (3,0) node[right]{$x_1$};
 		\draw[->, thick] (0,-0.2) -- (0,1.5) node[above]{$x_2$};
@@ -233,9 +233,7 @@ Der reell projektive Raum ist definiert durch:
 	&= \text{ Menge aller Ursprungsgeraden im }\mathds{R}^{n+1} \\
 	&= \nicefrac{S^n}{x \sim -x} 
 \end{align*}
-Für $n=1$
-
-Jede Ursprungsgerade außer $ \set{x_2=0} $ entspricht genau einem Punkt auf der affinen Gerade $\set{x_2=1}$; $\infty := \set{x_2 =0} $. $\mathds{R}P^1 = \mathds{R} \cup \set{\infty}$.\\
+Für $n=1$: Jede Ursprungsgerade außer $ \set{x_2=0} $ entspricht genau einem Punkt auf der affinen Gerade $\set{x_2=1}$; $\infty := \set{x_2 =0} $. $\mathds{R}P^1 = \mathds{R} \cup \set{\infty}$.\\
 Für $n=2$:
 \begin{figure}[h]
 	\centering{
@@ -274,10 +272,10 @@ der $x_1$-$x_2$-Ebene bilden einen $\mathds{R}P^1$
 	\pi : \mathds{R}^{n+1} \setminus \set{0} \to \mathds{R}P^n \enspace, \quad x \mapsto [x] \text{ (Urspungsgerade durch $x$)} 
 \]
 \begin{enumerate}[(i)]
-	\item \begin{itemize}
-		\item Topologie auf $\mathds{R}P^n$ (Quotiententopologie) $U \subset \mathds{R}P^n$ sei offen 
+	\item \begin{description}
+		\item[Topologie auf $\mathds{R}P^n$ (Quotiententopologie):]  $U \subset \mathds{R}P^n$ sei offen 
 		$:\Leftrightarrow$ $\pi ^{-1} (U) \subset \mathds{R}^{n+1} \setminus \set{0} $ offen ist ($\Rightarrow \pi $ stetig)
-		\item Hausdorff-Eigenschaft: Seien $[x] \not= [y]$ im $\mathds{R}P^n$. Dann gibt es disjunkte offene Mengen $X,Y$ im $\mathds{R}^{n+1} \setminus \set{0} $, die aus 
+		\item[Hausdorff-Eigenschaft:] Seien $[x] \not= [y]$ im $\mathds{R}P^n$. Dann gibt es disjunkte offene Mengen $X,Y$ im $\mathds{R}^{n+1} \setminus \set{0} $, die aus 
 		Ursprungsgeraden bestehen (ohne $0$) und die die Urspungsgeraden durch $x$ und $y$ (mit $0$ entfernt) erhalten:\\
 		\begin{minipage}{\textwidth}
 			\captionsetup{type=figure, skip=3pt}
@@ -292,32 +290,32 @@ der $x_1$-$x_2$-Ebene bilden einen $\mathds{R}P^1$
 			\caption{Zeichnung zur Hausdorffeigenschaft von $\mathds{R}P^n$}
 		\end{minipage}\smallskip\\
 		$\Rightarrow \pi ^{-1} \enbrace[\big]{\pi ( X)} = X$, $\pi ^{-1} \enbrace[\big]{\pi (Y)} = Y$ sind offen. Also sind $\pi(X), \pi (Y)$ offene disjunkte Umgebungen von $[x]$ bzw. $[y]$.
-		\item abzählbare Basis der Topologie:\todo{Zeichnung unfertig \ldots umbauen mit \texttt{elipsis}}\\
+		\item[Abzählbare Basis der Topologie:] $\mathcal{B} = \set[\pi \protect{\enbrace[\big]{X_{a,r}}}]{a \in \mathds{Q}^n, r \in (0,\infty)\cap \mathds{Q}}$ \smallskip\\
 		\begin{minipage}{\textwidth}
 			\captionsetup{type=figure, skip=3pt}
 			\centering{
-			\begin{tikzpicture}
-				\coordinate (a) at (-2,1);
-				\coordinate (b) at (-2,-1);
-				\draw[help lines] (-4,-2) grid (4,2);
-				\draw[fill=Sienna3] (0,0) circle[radius=0.03cm] node[below]{$0$};
-				\begin{scope}
-					\clip (-1,0) arc (180:360:1cm and 0.5cm) arc (0:180:1cm and 0.5cm);
-		  		  	\foreach \x in {-1.1,-1, -0.9,-0.8,...,1,1.1}%
-		  		    	\draw[Sienna3!80,line width=0.3mm](\x,0,2)--(\x,0,-2);
-				\end{scope}
-				\draw (2,0) arc (180:360:1cm and 0.5cm);
-			    \draw[dashed] (2,0) arc (180:0:1cm and 0.5cm);
-			    \draw (a) arc (90:270:0.5cm and 1cm);
-			    \draw[dashed] (a) arc (90:-90:0.5cm and 1cm);
-			    \draw (3,0) circle (1cm);
-			    \shade[ball color=blue!10!white,opacity=0.20] (3,0) circle (1cm);
+			\begin{tikzpicture}[scale=1.1]
+				% \draw[help lines] (0,-2) grid (6,2);
+				\path (4,0) coordinate (mid) + (0,1) coordinate (top) + (0,-1) coordinate(bottom);
+			    \shade[ball color=blue!30!white,opacity=0.40] (mid) circle (1cm);
+		
+				% % Strahlen
+				\draw (top)  ++(185:4) -- ++ (5:6);
+				\draw (bottom) ++(175:4) -- ++ (-5:6);
+		
+				\node[] at (6,0) {$X_{a,r}$};
+				\node[below] at (2.5,0) {$B_r(a)$};
+		
+				\fill[LightSalmon3, fill opacity=0.5] (top) arc (165.96:194.04:4.123) arc(-14.04:14.04:4.123);
+				\draw[thick] (top) arc (14.04:-30:4.123);
+				\draw[thick] (top) arc (14.04:30:4.123) node[right]{$S^n$};
+				\draw[thick, dashed] (top) arc (165.96:194.04:4.123);
 			\end{tikzpicture}
-			\caption{Basis der Topologie von $\mathds{R}P^n$ (unfertig)}
+			\caption{Basis der Topologie von $\mathds{R}P^n$}
 			}
 		\end{minipage} \smallskip \\
-		$\mathcal{B} = \set[\pi \protect{\enbrace[\big]{X_{a,r}}}]{a \in \mathds{Q}^n, r \in (0,\infty)\cap \mathds{Q}}$
-	\end{itemize}
+		Dabei ist $X_{a,r}$ der Kegel ohne $0$, der als Schnitt von $S^n$ mit dem rationalen Ball $B_r(a)$ definiert ist.
+	\end{description}
 	\item Differenzierbare Struktur auf $\mathds{R}P^n$: $[x_0 : x_1 : \ldots : x_n] \in \mathds{R}P^n$ sei die Ursprungsgerade durch $(x_0, x_1, \ldots , x_n) \in
 	\mathds{R}^{n+1} \setminus \set{0}$. Dies sind die sogenannten \Index{homogenen Koordinaten}.
 	\[
