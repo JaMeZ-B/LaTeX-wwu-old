@@ -23,8 +23,8 @@
 
 \automark{subsection}
 \section{Mannigfaltigkeiten}
-\begin{wrapfigure}[12]{R}[2.7cm]{6.5cm}
-	\begin{tikzpicture}[scale=1.3]
+\begin{figure}[h]%
+	\centering{\begin{tikzpicture}[scale=1.5]
 		\begin{scope}
 			\clip (-1,0) arc (180:360:1cm and 0.5cm) arc (0:180:1cm and 0.5cm);
   		  	\foreach \x in {-1.1,-1, -0.9,-0.8,...,1,1.1}%
@@ -41,12 +41,12 @@
 		\draw[dashed, ->] (0,0,-2) -- (0,0,2.5) node[below]{$x_1$};
 		\node[left] at (-.8,.8) {$S^2$};
 		\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=4pt},yshift=0pt, thick] (1.8,0) -- (1.8,1) node[right, midway, xshift=0.25cm]{$U_3^+$};
-		\node[color=Sienna3] at (0,-1.4) {\scriptsize $h_3^+(U_3^+) = \set[(x_1,x_2)]{x_1^2+ x_2^2 < 1} $};
+		\node[color=Sienna3] at (0,-1.4) {$h_3^+(U_3^+) = \set[(x_1,x_2)]{x_1^2+ x_2^2 < 1} $};
 	\end{tikzpicture}
-\end{wrapfigure}
+	\caption{Die dreidimensionale Sphäre $S^2$ mit dem Bild eines Kartengebiets}}
+\end{figure}
 \subsection{Sphären} % (fold)
-\label{sub:11}
-
+\label{sub:11}%
 Die $n$-Sphäre ist gegeben durch
 \[
 	S^n := \set[(x_1, \ldots , x_{n+1}) \in \mathds{R}^{n+1}]{x_1^2 + \ldots + x_{n+1}^2 = 1} 
@@ -63,7 +63,7 @@ Die $h_i^\pm$ sind Homöomorphismen auf ihrem Bild mit Inversen (etwa $x_i >0$)
 \[
 	(x_1, \ldots , \hat x_i, \ldots , x_{n+1}) \text{ mit } \sum_{k\not= i} x_k^2< 1 \xmapsto{(h_i^\pm) ^{-1}} \enbrace*{x_1, \ldots , \sqrt{1- \sum\nolimits_{k\not=i} x_k^2 }, \ldots , x_{n+1}  } \in S^{n}  
 \]
-Wir wollen differenzierbare Funktionen auf $S^n$ erklären. Dazu betrachte ($x_j >0$, $i<j$) die Komposition $h_j^+ \circ (h_i^+) ^{-1}$. Diese bildet
+Wir wollen differenzierbare Funktionen auf $S^n$ erklären. Dazu betrachte (für $x_j >0$, $i<j$) die Komposition $h_j^+ \circ (h_i^+) ^{-1}$. Diese bildet
 $(x_1, \ldots , \hat x_i, \ldots , x_{n+1})$ nach $\enbrace*{x_1, \ldots , \sqrt{1 - \sum_{k\not=i}x_k^2 }, \ldots , \hat x_j, \ldots , x_{n+1}  } $ ab und ist auf
 $h_i^+(U_i^+ \cap U_j^+)$ (beliebig oft) differenzierbar. Daher sagen wir:
 
@@ -75,7 +75,7 @@ Eine Funktion $f : S^n \to \mathds{R}$ ist \Index{differenzierbar}, falls alle A
 (beliebig oft) differenzierbar sind.
 Diese Definition ist korrekt, da 
 \[
-	f \circ (h_j^\pm) ^{-1} = f \circ (h_i^\pm) ^{-1} \circ \underbrace{h_i^\pm \circ (h_j^\pm) ^{-1}}_{\in C^\infty}
+	f \circ (h_j^\pm) ^{-1} = f \circ (h_i^\pm) ^{-1} \circ \underbrace{h_i^\pm \circ (h_j^\pm) ^{-1}}_{\in C^\infty}.
 \]
 % subsection 11 (end)
 
@@ -83,67 +83,66 @@ Diese Definition ist korrekt, da
 \label{sub:12}
 \subsubsection{Definition: $n$-dimensionale topologische Mannigfaltigkeit}
 \label{ssub:121}
-Eine \bet{$n$-dimensionale topologische  Mannigfaltigkeit}\index{n-dimensionale topologische  Mannigfaltigkeit@$n$-dimensionale topologische  Mannigfaltigkeit} $M$ ist ein 
-Hausdorff-Raum, mit abzählbarer Basis der Topologie, der lokal homöomorph zum $\mathds{R}^n$ ist.
-
-
+Eine \bet{$n$-dimensionale topologische  Mannigfaltigkeit}\index{n-dimensionale topologische  Mannigfaltigkeit@$n$-dimensionale topologische Mannigfaltigkeit} $M$ ist ein 
+Hausdorff-Raum mit abzählbarer Basis der Topologie, der lokal homöomorph zum $\mathds{R}^n$ ist.
 \begin{description}
-	\item\Index{lokal homöomorph:}  $\forall p \in M \, \exists$ offene Umgebung $U \subset M$ um $p$ und einen Homöomorphismus $h : U \to U' \subset \mathds{R}^n$  auf 
+	\item[\Index{lokal homöomorph}:]  $\forall p \in M :\, \exists$ offene Umgebung $U \subset M$ um $p$ und einen Homöomorphismus $h : U \to U' \subset \mathds{R}^n$  auf 
 	eine offene Teilmenge $U'$ des $\mathds{R}^n$. 
-	\item\Index{Hausdorffsch:}  Zu je zwei Punkten $p, q \in M$ mit $p \not= q$ gibt es offene Umgebungen $U,V$ von $p$ bzw. $q$, die $U \cap V = \emptyset$. Beispiel: Jeder
-	metrische Raum ist Hausdorffsch: $U := \set[x \in M]{d(x,p)< \frac{1}{3} d(p,q) } $, analog $V$ \\
-	\item\Index{Basis einer Topologie:}  Ist ein System $\mathcal{B}$ offener Mengen des topologischen Raumes $M$, sodass sich jede offene Menge in $M$ als 
-	Vereinigung von Mengen aus 
-	dem System $\mathcal{B}$ schreiben lässt. \newline Beispiel: Basis des $\mathds{R}^n$: offene Bälle 
+	\item[\Index{Hausdorffsch}:]  Zu je zwei Punkten $p, q \in M$ mit $p \not= q$ gibt es offene Umgebungen $U,V$ von $p$ bzw. $q$, für die $U \cap V = \emptyset$ gilt.
+	
+	Bsp.: Jeder metrische Raum ist Hausdorffsch: $U := \set[x \in M]{d(x,p)< \frac{1}{3} d(p,q) } $, analog für $V$. 
+	\item[\Index{Basis einer Topologie}:] Ist ein System $\mathcal{B}$ offener Mengen des topologischen Raumes $M$, sodass sich jede offene Menge in $M$ als 
+	Vereinigung von Mengen aus dem System $\mathcal{B}$ schreiben lässt.  
+	
+	Beispiel: Basis des $\mathds{R}^n$: offene Bälle 
 	$B_r(a) = \set[x \in \mathds{R}^n]{\norm{x-a} < r } $, $a \in \mathds{R}^n, r \in (0, \infty)$. Eine abzählbare Basis des $\mathds{R}^n$: 
 	\[
 		\mathcal{B} := \set[B_r(a)]{a \in \mathds{Q}^n, r \in (0,\infty) \text{ rational}} 
 	\]
 \end{description}
 
-
 \minisec{Beispiel (topologische Mannigfaltigkeit)}
 \begin{itemize}
 	\item offene Teilmengen des $\mathds{R}^n$
-	\item Untermannigfaltigkeiten des $R^{n+k}$ \hfill {\color{light_gray}(näheres in der ersten Übung)}
+	\item Untermannigfaltigkeiten des $R^{n+k}$ \hfill {\color{light_gray}(Näheres dazu in der ersten Übung)}
 \end{itemize}
 
 \minisec{Bemerkung}
-Die Hausdorff-Eigenschaft folgt \emph{nicht} aus der lokalen Homöomorphie zum $\mathds{R}^n$! Betrachte dazu die Topologie auf $M = R \cup \set{p} $ definiert durch: 
-\smallskip\\ $U$ ist offen in $M$, falls\\
-\begin{minipage}{0.55\textwidth}
+Die Hausdorff-Eigenschaft folgt \emph{nicht} aus der lokalen Homöomorphie zum $\mathds{R}^n$! Betrachte dazu die Topologie auf $M = \mathds{R} \cup\set{p}$ definiert durch: 
+\medskip\\ 
+\begin{minipage}[c]{0.55\textwidth}
+	$U$ ist offen in $M$, falls
 	\begin{itemize}
 		\item $U \subset \mathds{R}$ offen
 		\item $U = V \setminus \set{0} \cup \set{p}$ mit $V \subset \mathds{R}$ offen und $0 \in V$
 		\item oder Vereinigung solcher Mengen
 	\end{itemize}
-\end{minipage} \quad 
-\begin{minipage}{0.35\textwidth}
-	\captionsetup{type=figure, skip=1pt}
+\end{minipage} \qquad 
+\begin{minipage}[c]{0.35\textwidth}
+	\captionsetup{type=figure, skip=2pt}
 	\centering{	\begin{tikzpicture}
 			\draw[very thick, SteelBlue4] (-2,0) -- (0,0) node[below,color=black]{$0$}-- (2,0) node[below]{$\mathds{R}$};
 			\draw[thick] (0,-0.1) -- (0,0.1);
 			\filldraw[SteelBlue4] (0,0.7) circle[radius=0.04cm] node[right]{$p$};
 		\end{tikzpicture}
-	\caption{Beispiel einer nicht-Hausdorffmenge}}
+	\caption{Beispiel einer Nicht-Hausdorffmenge}}
 \end{minipage}
 
 \subsubsection{Definition: Atlas und Kartenwechsel}
-$h$ heißt Karte, $U$ das zugehörige Kartengebiet. Eine Menge von Karten $\set[h_\alpha : U_\alpha \to U'_\alpha \subset \mathds{R}^n]{\alpha \in A} $ heißt \Index{Atlas} von
-$M$, falls $\bigcup_{\alpha \in A} U_\alpha = M$.\\
-Ein \Index{Kartenwechsel} ist ein Homöomorphismus 
+$h$ heißt \Index{Karte}, $U$ das zugehörige \Index{Kartengebiet}. Eine Menge von Karten $\set[h_\alpha : U_\alpha \to U'_\alpha \subset \mathds{R}^n]{\alpha \in A} $ heißt 
+\Index{Atlas} von$M$, falls $\bigcup_{\alpha \in A} U_\alpha = M$. Ein \Index{Kartenwechsel} ist ein Homöomorphismus 
 \[
 	h_{\beta \alpha} := h_\beta \circ  h_\alpha ^{-1} : h_\alpha(U_\alpha \cap U_\beta) \to h_\beta( U_\alpha \cap U_\beta)  
 \]
 
 \subsubsection{Definition: Differenzierbarer Atlas} % (fold)
 \label{ssub:123}
-Ein Atlas einer topologischen Mannigfaltigkeit heißt \Index{differenzierbar}, falls  alle Kartenwechsel (beliebig oft) differenzierbar sind.
+Ein Atlas einer topologischen Mannigfaltigkeit heißt \bet{differenzierbar}\index{Atlas!differenzierbarer}, falls  alle Kartenwechsel (beliebig oft) differenzierbar sind.
 
 \minisec{Beispiele}
 \begin{itemize}
-	\item $U \subset \mathds{R}^n$ offen, Atlas $\set{\id : U \to U} $. Zum Beispiel $Gl(n,\mathds{R}) = \det ^{-1} \enbrace{\mathds{R} \setminus \set{0} } \subset
-	Mat_{n \times n}(\mathds{R})$.
+	\item Für $U \subset \mathds{R}^n$ offen ist $\set{\id : U \to U}$ ein Atlas. Zum Beispiel 
+	$Gl(n,\mathds{R}) = \det ^{-1} \enbrace{\mathds{R} \setminus \set{0} } \subset \mathrm{Mat}_{n \times n}(\mathds{R})$.
 	
 	\bet{Bemerkung:} Die Hausdorff-Eigenschaft folgt zum Beispiel daraus, dass $U$ ein metrischer Raum ist. Eine topologische Mannigfaltigkeit mit einem abzählbaren Atlas 
 	hat eine abzählbare Basis der Topologie.
@@ -188,13 +187,14 @@ Ein Atlas einer topologischen Mannigfaltigkeit heißt \Index{differenzierbar}, f
 		\caption{Stereografische Projektion}}
 	\end{figure}
 \end{itemize}
+\todo{RevChap1}
 % subsubsection 123 (end)
 
 \subsubsection{Definition: Kompatibilität von Karten} % (fold)
 \label{ssub:124}
-Zwei Karten $(U_\alpha, h_\alpha)$ und $(U_\beta, h_\beta)$ einer topologischen Mannigfaltigkeit heißen \Index{kompatibel}, falls der Kartenwechsel $h_{\beta \alpha} = h_\beta \circ h_\alpha ^{-1}$ ein Diffeomorphismus ist, d.h. $h_{\beta \alpha}$ ist differenzierbar und $h_{\alpha \beta}$ ebenfalls.
+Zwei Karten $(U_\alpha, h_\alpha)$ und $(U_\beta, h_\beta)$ einer topologischen Mannigfaltigkeit heißen \Index{kompatibel}, falls der Kartenwechsel 
+$h_{\beta \alpha} = h_\beta \circ h_\alpha ^{-1}$ ein Diffeomorphismus ist, d.h. $h_{\beta \alpha}$ ist differenzierbar und $h_{\alpha \beta}$ ebenfalls.
 
-\bigskip
 Die $n$-Sphäre hat zwei Atlanten $\set{h_i^\pm} $ und $\set{h^\pm} $. Die beiden sind jeweils miteinander kompatibel, siehe Blatt 1. Wir wollen daher die beiden Atlanten
 $\set{h_i^\pm} $ und $\set{h^\pm} $ als ein und dieselbe differenzierbare Mannigfaltigkeit auffassen.
 % subsubsection 124 (end)
@@ -213,7 +213,7 @@ differenzierbaren Struktur genügt es daher, einen differenzierbaren Atlas zu be
 
 \subsection{Beispiel: Der reell projektive Raum} % (fold)
 \label{sub:13}
-\begin{wrapfigure}[8]{R}[1.5cm]{5cm}
+\begin{wrapfigure}[7]{R}[1.5cm]{5cm}
 	\begin{tikzpicture}[xscale=1.2, yscale=1.2]
 		\draw[->, thick] (-1,0) -- (3,0) node[right]{$x_1$};
 		\draw[->, thick] (0,-0.2) -- (0,1.5) node[above]{$x_2$};
@@ -235,9 +235,9 @@ Der reell projektive Raum ist definiert durch:
 \end{align*}
 Für $n=1$: Jede Ursprungsgerade außer $ \set{x_2=0} $ entspricht genau einem Punkt auf der affinen Gerade $\set{x_2=1}$; $\infty := \set{x_2 =0} $. $\mathds{R}P^1 = \mathds{R} \cup \set{\infty}$.\\
 Für $n=2$:
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering{
-	\begin{tikzpicture}
+	\begin{tikzpicture}[scale=1.2]
 		\draw[->] (0,0) -- (2,0) node[right]{$x_2$};
 		\draw (0,0) -- (0,1);
 		\draw[->] (0,0) -- (0,0,2) node[left]{$x_1$};
@@ -297,6 +297,9 @@ der $x_1$-$x_2$-Ebene bilden einen $\mathds{R}P^1$
 			\begin{tikzpicture}[scale=1.1]
 				% \draw[help lines] (0,-2) grid (6,2);
 				\path (4,0) coordinate (mid) + (0,1) coordinate (top) + (0,-1) coordinate(bottom);
+				
+				\fill[LightSalmon3, fill opacity=0.8] (top) arc (165.96:194.04:4.123) arc(-14.04:14.04:4.123);
+				\draw[thick, dashed] (top) arc (165.96:194.04:4.123);
 			    \shade[ball color=blue!30!white,opacity=0.40] (mid) circle (1cm);
 		
 				% % Strahlen
@@ -306,10 +309,8 @@ der $x_1$-$x_2$-Ebene bilden einen $\mathds{R}P^1$
 				\node[] at (6,0) {$X_{a,r}$};
 				\node[below] at (2.5,0) {$B_r(a)$};
 		
-				\fill[LightSalmon3, fill opacity=0.5] (top) arc (165.96:194.04:4.123) arc(-14.04:14.04:4.123);
 				\draw[thick] (top) arc (14.04:-30:4.123);
 				\draw[thick] (top) arc (14.04:30:4.123) node[right]{$S^n$};
-				\draw[thick, dashed] (top) arc (165.96:194.04:4.123);
 			\end{tikzpicture}
 			\caption{Basis der Topologie von $\mathds{R}P^n$}
 			}
