@@ -17,7 +17,8 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 * SoSe 2013
 	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS13/analysis2.pdf?raw=true "Analysis II.") (Jannes)
 	* [Lineare Algebra II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/LA2_SS13/lineare_algebra2.pdf?raw=true "Lineare Algebra II.") (Jannes)
-* WiSe 2012
+* WiSe 2012,  
+_Nur der Vollständigkeit wegen hinzugefügt, Qualität bleibt hinter anderen Skripten zurück_
 	* [Analysis I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana1_WS12/analysis1.pdf?raw=true "Analysis I.") (Jannes)
 	* [Lineare Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/LA1_WS12/lineare_algebra1.pdf?raw=true "Lineare Algebra I.") (Jannes)
 	
@@ -41,13 +42,11 @@ Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 	* Ausführlichere Beweise zu 2.45 und 2.48
 	* Einträge im Inhaltsverzeichnis vervollständigen
 * Grundlagen der Analysis, Topologie, Geometrie
-	* Teil des Beweises für Hauptsatz aus Übung TeXen
 	* Dateigröße verringern … 7,2MB sind zu viel. Dazu müssen der Torus und die 3D-Glockenfunktion kleiner werden, jeweils >3MB
 * Differentialformen und Mannigfaltigkeiten
 	* Zeichnungen texen
 * Partielle Differentialgleichungen I
 	* Großteil der handschriftlichen Zeichnungen des Dozenten fehlen
-* Dateien aus den vorigen Semestern einpflegen
 
 #### Hinweise (technische und rechtliche)
 Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_ und _Consolas_ installiert sein. Erstere
