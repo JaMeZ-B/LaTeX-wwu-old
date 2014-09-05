@@ -19,7 +19,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 	* [Lineare Algebra II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/LA2_SS13/lineare_algebra2.pdf?raw=true "Lineare Algebra II.") (Jannes)
 * WiSe 2012
 	* [Analysis I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana1_WS12/analysis1.pdf?raw=true "Analysis I.") (Jannes)
-	* Lineare Algebra I. (Jannes)
+	* [Lineare Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/LA1_WS12/lineare_algebra1.pdf?raw=true "Lineare Algebra I.") (Jannes)
 	
 (Die Links führen direkt zu den PDF-Dateien; hauptsächlicher Autor in Klammern)
 
