@@ -24,7 +24,7 @@
 \automark{subsection}
 \section{Mannigfaltigkeiten}
 \begin{figure}[h]%
-	\centering{\begin{tikzpicture}[scale=1.5]
+	\centering{\begin{tikzpicture}[scale=1.4]
 		\begin{scope}
 			\clip (-1,0) arc (180:360:1cm and 0.5cm) arc (0:180:1cm and 0.5cm);
   		  	\foreach \x in {-1.1,-1, -0.9,-0.8,...,1,1.1}%
@@ -41,7 +41,7 @@
 		\draw[dashed, ->] (0,0,-2) -- (0,0,2.5) node[below]{$x_1$};
 		\node[left] at (-.8,.8) {$S^2$};
 		\draw[decorate, decoration={brace,amplitude=5pt, mirror, raise=4pt},yshift=0pt, thick] (1.8,0) -- (1.8,1) node[right, midway, xshift=0.25cm]{$U_3^+$};
-		\node[color=Sienna3] at (0,-1.4) {$h_3^+(U_3^+) = \set[(x_1,x_2)]{x_1^2+ x_2^2 < 1} $};
+		\node[color=Sienna3] at (0,-1.6) {$h_3^+(U_3^+) = \set[(x_1,x_2)]{x_1^2+ x_2^2 < 1} $};
 	\end{tikzpicture}
 	\caption{Die dreidimensionale Sphäre $S^2$ mit dem Bild eines Kartengebiets}}
 \end{figure}
@@ -141,7 +141,7 @@ Ein Atlas einer topologischen Mannigfaltigkeit heißt \bet{differenzierbar}\inde
 
 \minisec{Beispiele}
 \begin{itemize}
-	\item Für $U \subset \mathds{R}^n$ offen ist $\set{\id : U \to U}$ ein Atlas. Zum Beispiel 
+	\item Für $U \subset \mathds{R}^n$ offen ist $\set{\id : U \to U}$ ein Atlas. Ein Beispiel für ein solches $U$ ist
 	$Gl(n,\mathds{R}) = \det ^{-1} \enbrace{\mathds{R} \setminus \set{0} } \subset \mathrm{Mat}_{n \times n}(\mathds{R})$.
 	
 	\bet{Bemerkung:} Die Hausdorff-Eigenschaft folgt zum Beispiel daraus, dass $U$ ein metrischer Raum ist. Eine topologische Mannigfaltigkeit mit einem abzählbaren Atlas 
@@ -330,9 +330,10 @@ Damit definieren wir nun eine Topologie und eine differenzierbare Struktur auf $
 			\end{tikzpicture}
 			\caption{Basis der Topologie von $\mathds{R}P^n$}}
 		\end{figure}
-		Dabei ist $X_{a,r}$ der Kegel ohne $0$, der als Schnitt von $S^n$ mit dem rationalen Ball $B_r(a)$ definiert ist.  \todo{RevChap1}
+		Dabei ist $X_{a,r}$ der Kegel ohne $0$, der als Schnitt von $S^n$ mit dem rationalen Ball $B_r(a)$ definiert ist.  
 	\end{description}
-	\item Differenzierbare Struktur auf $\mathds{R}P^n$: $[x_0 : x_1 : \ldots : x_n] \in \mathds{R}P^n$ sei die Ursprungsgerade durch $(x_0, x_1, \ldots , x_n) \in
+	Damit ist $\mathds{R} P^n$ eine topologische Mannigfaltigkeit.
+	\item \textbf{Differenzierbare Struktur auf $\mathds{R}P^n$:} $[x_0 : x_1 : \ldots : x_n] \in \mathds{R}P^n$ sei die Ursprungsgerade durch $(x_0, x_1, \ldots , x_n) \in
 	\mathds{R}^{n+1} \setminus \set{0}$. Dies sind die sogenannten \Index{homogenen Koordinaten}.
 	\[
 		[x_0 : \ldots : x_n] = [\lambda x_0 : \ldots : \lambda x_n] \quad \text{ mit } \lambda \not= 0
@@ -341,19 +342,19 @@ Damit definieren wir nun eine Topologie und eine differenzierbare Struktur auf $
 	\[
 		\pi  ^{-1} (U_i) = \set[(x_0, \ldots , x_n) \in \mathds{R}^n \setminus \set{0} ]{x_i \not= 0}  \enspace\text{ offen.}
 	\]
-	$\Rightarrow U_i$ ist offen. Betrachte nun folgende Karte
+	Also ist $U_i$ offen. Betrachte nun folgende Karte
 	\[
 		h_i : U_i \to \mathds{R}^n \enspace, \quad [x_0 : \ldots : x_n] \mapsto \enbrace*{ \frac{x_0}{x_i}, \ldots , \widehat{\frac{x_i}{x_i}}, \ldots , \frac{x_n}{x_i}   } 
 	\]
 	Folgendes ist erfüllt:
 	\begin{itemize}
-		\item Die Definition hängt nicht von der Wahl des Repräsentanten ab.
+		\item Die Definition hängt nicht von der Wahl des Repräsentanten ab. \marginnote{$\lambda $ kürzen}
 		\item $h_i$ ist bijektiv mit Inverser $h_i ^{-1} (y_1, \ldots , y_n) = [y_1 : \ldots  : y_i : 1 : y_{i+1} : \ldots : y_n]$
 		\item $h_i ^{-1}$ ist stetig: \marginnote{Einfügen nach $i$-ter Stelle!}
-		\[
+		\(
 			h_i ^{-1} : (y_1, \ldots , y_n) \xmapsto{\text{stetig}} (y_1, \ldots ,1, \ldots , y_n) \xmapsto{\pi } [y_1 : \ldots : 1 : \ldots : y_n]
-		\]
-		\item $h_i$ ist stetig
+		\)
+		\item $h_i$ ist stetig:
 		\[
 			\begin{tikzcd}
 				\mathds{R}^{n+1} \setminus \set{0} \supset \pi  ^{-1} (U_i) \rar{\tilde h_i} \dar{\pi } & \mathds{R}^n \dar{\id} \\ 
@@ -361,27 +362,25 @@ Damit definieren wir nun eine Topologie und eine differenzierbare Struktur auf $
 			\end{tikzcd}
 		\]
 		Es gilt $\tilde h_i (x_0, \ldots , x_n) = \enbrace*{\frac{x_0}{x_i}, \ldots , \widehat{\frac{x_i}{x_i} }, \ldots , \frac{x_n}{x_i}  } $. 
-		Sei $U \subseteq  \mathds{R}^n$ offen. Also $\pi  ^{-1} ( h_i ^{-1} ( U)) = \tilde h_i ^{-1}(U)$ ist offen, da $\tilde h_i$ stetig ist. $\Rightarrow $ Nach der
-		Quotiententopologie ist $h_i ^{-1}(U)$ offen.
-		\item $\set{(U_i, h_i)}_{i=0, \ldots ,n} $ ist ein differenzierbarer Atlas ($\Rightarrow $ abzählbare Basis der Topologie)
-		\begin{itemize}[$\diamond$]
-			\item $\bigcup_{i=0, \ldots , n} U_i = \mathds{R}P^n$
-			\item \begin{align*}
-				h_j \circ  h_i ^{-1}(y_1, \ldots , y_n) &= h_j([\underset{0}{y_1} : \ldots  : \underset{i}{1} : \ldots : y_n]) \\ &= 
-				\begin{cases}
-					\enbrace*{\frac{y_1}{y_j}, \ldots , \underset{i}{\frac{1}{y_j}}, \ldots , \widehat{\frac{y_j}{y_j} }, \ldots , \frac{y_n}{y_j}  } , &\text{ falls }i<j\\
-					\enbrace*{\frac{y_1}{y_{j+1}}, \ldots , \widehat{\frac{y_{j+1}}{y_{j+1}} }, \ldots , \underset{i}{\frac{1}{y_{j+1}}}, \ldots , \frac{y_n}{y_{j+1}}  },
-					& \text{ falls } i>j
-				\end{cases}
-			\end{align*}
-			ist $C^\infty$ auf
-			\[
-				h_i \enbrace*{U_i \cap U_j} = \begin{cases}
-					\set[y \in \mathds{R}^n]{y_j  \not= 0} , &\text{ falls }i < j\\
-					\set[y \in \mathds{R}^n]{y_{j+1} \not= 0} , &\text{ falls } i > j
-				\end{cases} 
-			\]
-		\end{itemize}
+		Sei $U \subseteq  \mathds{R}^n$ offen. Also ist $\pi  ^{-1} ( h_i ^{-1} ( U)) = \tilde h_i ^{-1}(U)$ offen, da $\tilde h_i$ stetig ist. Nach der
+		Quotiententopologie ist dann auch $h_i ^{-1}(U)$ offen.
+		\item $\set{(U_i, h_i)}_{i=0, \ldots ,n} $ ist ein differenzierbarer Atlas ($\Rightarrow $ abzählbare Basis der Topologie):
+		Es gilt $\bigcup_{i=0, \ldots , n} U_i = \mathds{R}P^n$. Weiter ist
+		\begin{align*}
+			h_j \circ  h_i ^{-1}(y_1, \ldots , y_n) &= h_j([\underset{0}{y_1} : \ldots  : \underset{i}{1} : \ldots : y_n]) \\ &= 
+			\begin{cases}
+				\enbrace*{\frac{y_1}{y_j}, \ldots , \underset{i}{\frac{1}{y_j}}, \ldots , \widehat{\frac{y_j}{y_j} }, \ldots , \frac{y_n}{y_j}  } , &\text{ falls }i<j\\
+				\enbrace*{\frac{y_1}{y_{j+1}}, \ldots , \widehat{\frac{y_{j+1}}{y_{j+1}} }, \ldots , \underset{i}{\frac{1}{y_{j+1}}}, \ldots , \frac{y_n}{y_{j+1}}  },
+				& \text{ falls } i>j
+			\end{cases}
+		\end{align*}
+		$C^\infty$ auf \todo{RevChap1}
+		\[
+			h_i \enbrace*{U_i \cap U_j} = \begin{cases}
+				\set[y \in \mathds{R}^n]{y_j  \not= 0} , &\text{ falls }i < j\\
+				\set[y \in \mathds{R}^n]{y_{j+1} \not= 0} , &\text{ falls } i > j
+			\end{cases} 
+		\]
 	\end{itemize}
 \end{enumerate}
 % subsection13 (end)
