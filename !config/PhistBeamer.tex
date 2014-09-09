@@ -1,20 +1,44 @@
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-%		PhistGeneral.tex										%
-%		General XeLaTeX-Settings For Math Documents				%
-%		(based on 'mitschrift.tex' )							%
+%		PhistBeamer.sty											%
+%		XeLaTeX-Konfiguration für Präsentationen				%
 %																%
 %		Author: Phil Steinhorst									%
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-\RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
-\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=9pt, cleardoublepage=empty, headinclude, DIV=13, BCOR=13mm, titlepage]{scrartcl}
+% Beamer Settings
+\setbeamertemplate{navigation symbols}{}
 
-\usepackage{scrtime} 	% KOMA, Uhrzeit ermoeglicht
-\usepackage{scrpage2} 	% wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
-\usepackage{etoolbox}
-\usepackage{ifxetex}
+\title{\shorttitel}
+\author{\verfasser}
 
-\usepackage[usenames, table, x11names]{xcolor}	% Farben. Vor TikZ laden!
+\defbeamertemplate*{title page}{customized}[1][]
+{
+	\begin{center}
+	\begin{minipage}{0.4\textwidth}
+	\begin{flushleft}
+	\hspace*{1em}\includegraphics[height=1cm,keepaspectratio]{../!config/wwulogo.pdf}
+	\end{flushleft}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.4\textwidth}
+	\begin{flushright}
+	\vspace*{0.3cm}
+	\includegraphics[height=0.8cm,keepaspectratio]{../!config/fb10logo.pdf} \hspace*{1em}
+	\end{flushright}
+	\end{minipage}
+  
+	\vfill
+   
+	\textcolor{structure}{{\LARGE \titel}}\par
+	\vspace*{0.3cm}
+	\subtitel\par
+	\vspace*{1cm}
+	\verfasser \par
+	{\tt {\footnotesize \authormail}}\par
+	\vspace*{0.3cm}
+	{\footnotesize \insertdate}\par
+  \end{center}
+}
 
 % % % TikZ-Pakete % % %
 \usepackage{tikz}
@@ -25,15 +49,7 @@
 \usetikzlibrary{calc,3d}
 \usetikzlibrary{decorations.pathreplacing,decorations.markings}
 \usetikzlibrary{angles}
-\tikzexternalize[prefix=tikz/, up to date check=diff]	% -shell-escape-Flag nötig!
 
-% % % verwende LuaLaTeX, wegen dynamischer Speicherallokation
-\tikzset{external/system call={xelatex \tikzexternalcheckshellescape 
-    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
-    
-% % % tikzexternalize für tikzcd deaktivieren, da inkompatibel
-\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
-\AtEndEnvironment{tikzcd}{\tikzexternalenable}
 
 % % % um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
 \tikzset{
@@ -70,18 +86,16 @@
 \defaultfontfeatures{Mapping=tex-text, WordSpace={1.4}} %
 \setmainfont[Ligatures=Common, BoldFont={* Bold}, ItalicFont={* Light Italic}]{Source Sans Pro}
 \setsansfont[Scale=MatchLowercase,Ligatures=Common, BoldFont={* Medium}]{Ubuntu}
+\usefonttheme[onlymath]{serif}
 \setallmonofonts[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
 \usepackage{xltxtra}
 \usepackage{fontawesome}
 
 % % % Misc.
-\usepackage[neverdecrease]{paralist}
 \usepackage[german=quotes]{csquotes}
 \usepackage{booktabs}
 \usepackage{wrapfig}
 \usepackage{float}
-\usepackage[margin=10pt, font=small, labelfont=sf, format=plain, indention=1em]{caption}
-\captionsetup[wrapfigure]{name=Abb. }
 \usepackage{stackrel}
 \usepackage{ifthen}
 \usepackage{multicol}
@@ -91,24 +105,8 @@
 \usepackage[normalem]{ulem}
 \setlength{\ULdepth}{1.8pt}
 
-% % % Indexverarbeitung
-\usepackage{makeidx}
-\newcommand{\bet}[1]{\textbf{#1}}
-\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
-\makeindex
-\renewcommand{\indexpagestyle}{scrheadings}
-
-% % % Marginnote & todonotes
-\usepackage{marginnote}
-\renewcommand*{\marginfont}{\color{gray} \footnotesize }
-\usepackage[textsize=small]{todonotes}
-\makeatletter
-\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
-\makeatother
 
 % % % Konfiguration von Hyperref pdfstartview=FitH, 
-\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=RoyalBlue3, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true, pdfauthor={\verfasser}, pdfborderstyle={/S/U}, linkbordercolor=RoyalBlue3, colorlinks=true, unicode, pdfencoding=auto]{hyperref}
-
 \newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}} 	% Römische Zahlen
 \usepackage{ellipsis}										% Punkte
 

@@ -1,0 +1,123 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%		PhistUeb.tex											%
+%		XeLaTeX-Konfiguration für Übungsleiter-Dokumente		%
+%																%
+%		Author: Phil Steinhorst									%
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{fancyhdr} 	% wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
+\usepackage{etoolbox}
+\usepackage{lastpage}
+
+\usepackage[usenames, table, x11names]{xcolor}	% Farben. Vor TikZ laden!
+
+% % % TikZ-Pakete % % %
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{external}
+\tikzset{>=latex}
+\usetikzlibrary{shapes,arrows,intersections}
+\usetikzlibrary{calc,3d}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\usetikzlibrary{angles}
+
+
+% % % um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
+\tikzset{
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes}
+\usepackage{pgfplots}
+
+% % % Mathe-Zeugs
+\usepackage{mathtools} 						% beinhaltet amsmath
+\mathtoolsset{showonlyrefs, centercolon}
+\usepackage{wasysym}
+\usepackage{amssymb} 						% zusätzliche Symbole
+\usepackage{latexsym} 						% zusätzliche Symbole
+\usepackage{stmaryrd} 						% für Blitz
+\usepackage{nicefrac} 						% schräge Brüche
+\usepackage{cancel} 						% Befehle zum Durchstreichen
+\usepackage{extarrows}						% mehr Pfeile
+\usepackage{mathdots}
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\newcommand{\mathds}[1]{\mathbb{#1}} 		% um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
+\def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
+
+% % % XeTeX & Fonts
+\usepackage{mathspec} 						% beinhaltet fontspec 
+\usepackage{polyglossia} 					% babel-Ersatz
+\setmainlanguage[spelling=new,babelshorthands=false]{german}
+\newcommand\glqq{"}
+\newcommand\grqq{"}
+\defaultfontfeatures{Mapping=tex-text, WordSpace={1.4}} %
+\setmainfont[Ligatures=Common, BoldFont={* Bold}, ItalicFont={* Light Italic}]{Source Sans Pro}
+\setsansfont[Scale=MatchLowercase,Ligatures=Common, BoldFont={* Medium}]{Ubuntu}
+\setallmonofonts[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
+\usepackage{xltxtra}
+\usepackage{fontawesome}
+
+% % % Misc.
+\usepackage[neverdecrease]{paralist}
+\usepackage[german=quotes]{csquotes}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[margin=10pt, font=small, labelfont=sf, format=plain, indention=1em]{caption}
+\captionsetup[wrapfigure]{name=Abb. }
+\usepackage{stackrel}
+\usepackage{ifthen}
+\usepackage{multicol}
+%\flushbottom
+
+% % % Unterstreichung
+\usepackage[normalem]{ulem}
+\setlength{\ULdepth}{1.8pt}
+
+% % % Marginnote & todonotes
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\color{gray} \footnotesize }
+\usepackage[textsize=small]{todonotes}
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+% % % Konfiguration von Hyperref pdfstartview=FitH, 
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=RoyalBlue3, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true, pdfauthor={\tutor}, pdfborderstyle={/S/U}, linkbordercolor=RoyalBlue3, colorlinks=true, unicode, pdfencoding=auto]{hyperref}
+
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}} 	% Römische Zahlen
+\usepackage{ellipsis}										% Punkte
+
+% Seite einrichten
+\setlength\textwidth{165mm}           % Breite
+\setlength\textheight{235mm}          % Hoehe
+\setlength\headheight{41pt}           % Hoehe der Kopfzeile
+\setlength\topmargin{-12mm}           % Abstand oben
+\setlength\oddsidemargin{0mm}         % Linker Rand
+\setlength\parindent{0pt}             % und ohne Einrueckung
+\setlength\parskip{1.5\medskipamount} % Absaetze abgesetzt
+\sloppy\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt} 	%obere Trennlinie
+\renewcommand{\footrulewidth}{0.4pt} 	%untere Trennlinie
+\lhead{\textbf{\shortFach \ (\semester)}}
+\rhead{\textbf{\shorttitel}}
+\cfoot{\thepage \ / \pageref{LastPage}}
+
+
+\fancypagestyle{ErsteSeite}{ 
+	\lhead{\includegraphics[height=4em,keepaspectratio]{../!config/wwulogo.pdf}}
+	\rhead{\textbf{\fach \ (\semester)} \\ \textbf{\dozent} \\ Übungsleiter: \tutor \ (\href{\tutormail}{\tutormail})}
+	\rfoot{{\footnotesize \today}}
+	\cfoot{\thepage \ / \pageref{LastPage}}
+	\lfoot{{\footnotesize \jobname.tex}}
+} 
+
+\input{../!config/PhistMath.tex}							% selbst definierte Mathe-Befehle
+\newcommand{\qed}{\ifmmode \tag*{$\square$} \else \hfill $\square$ \fi} % qed-Symbol.
