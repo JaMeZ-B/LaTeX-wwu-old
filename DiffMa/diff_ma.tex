@@ -434,7 +434,7 @@ Sei $M$ der topologische Raum $\mathds{R}$. Die Homöomorphismen: $h_1 = \id$ un
 \]
 Es ist sinnvoll differenzierbare Mannigfaltigkeiten bis auf Diffeomorphie zu klassifizieren. Auf $\mathds{R}^n$, $n\not= 4$\marginnote{mind = blown} 
 gibt es bis auf Diffeomorphie genau eine 
-differenzierbare Struktur.  Auf $\mathds{R}^4$ gibt es überabzählbar viele verschiedene. Auf $S^n$ mit $n \le 6$ genau eine. Auf $S^7$ genau 28. \todo{RevChap1}
+differenzierbare Struktur.  Auf $\mathds{R}^4$ gibt es überabzählbar viele verschiedene. Auf $S^n$ mit $n \le 6$ genau eine. Auf $S^7$ genau 28.
 % subsubsection 142 (end)
 % subsection 14 (end)
 
@@ -480,7 +480,7 @@ $T_p \mathds{R}^m $ heißt der \Index{Tangentialraum} und ist der Raum aller sol
 
 \subsubsection[Definition: Tangentialraum (geometrisch)]{Definition (des Geometers)} % (fold)
 \label{ssub:151}
-Ein \Index{Tangentialvektor} im Punkt $p \in M$ ist eine Äquivalenzklasse $[\gamma]$ von differenzierbaren Wegen $\gamma : (-\varepsilon, \varepsilon) \to M$ mit 
+Ein \bet{Tangentialvektor}\index{Tangentialvektor!für Geometer} im Punkt $p \in M$ ist eine Äquivalenzklasse $[\gamma]$ von differenzierbaren Wegen $\gamma : (-\varepsilon, \varepsilon) \to M$ mit 
 $\gamma(0)=p$ und $\varepsilon = \varepsilon(p)>0$ unter der Äquivalenzrelation:\marginnote{Testfunktionen bezeichnen wir meist mit $\varphi$}
 \[
 	\gamma_1 \sim \gamma_2 :\Leftrightarrow \quad \forall \varphi \in C^\infty(M) :\quad  \diffd{}{t}( \varphi \circ \gamma_1)(0) = \diffd{}{t} (\varphi \circ \gamma_2) (0)   
@@ -506,8 +506,8 @@ Beispiele:
 \subsubsection[Definition: Tangentialraum (algebraisch)]{Definition (des Algebraikers)} % (fold)
 \label{ssub:152}
 Eine Abbildung $X : C^\infty (M) \to \mathds{R}$, die linear ist und der Leibnizschen Produktregel genügt (siehe oben), heißt \Index{Derivation} (in $p \in M$).
-Der \Index{Tangentialraum} $T_p M$ der differenzierbaren Mannigfaltigkeit $M$ in $p \in M$ ist der Vektorraum der Derivationen in $p$.
-Die Vektorraumstruktur auf $T_p M$ ist gegeben durch:
+Der \Index{Tangentialraum} $T_p M$ der differenzierbaren Mannigfaltigkeit $M$ in $p \in M$ ist der Vektorraum der Derivationen in $p$. 
+Die Vektorraumstruktur auf $T_p M$ ist gegeben durch: \index{Tangentialvektor!für Algebraiker}
 \[
 	\enbrace*{a_1 X_{\gamma_1} + a_2 X_{\gamma_2}}(\varphi) := a_1 X_{\gamma_1}(\varphi) + a_2 X_{\gamma_2}(\varphi) 
 \]
@@ -544,11 +544,12 @@ bilden einen Basis des $T_0 \mathds{R}^m$.
 	\item Sei $X \in T_0\mathds{R}^m$. Setze $a^i := X(x^i)$. 
 	Behauptung: $X = \sum_{i=1}^{m} a^i \diff{}{x^i} $.
 	
-	Schreibe $\varphi \in C^\infty(\mathds{R}^m)$ als $\varphi = \varphi(0) + \sum_{k=1}^{m} x^k \varphi_k$ nach Lemma 2 (\ref{ssub:155}).
+	Schreibe $\varphi \in C^\infty(\mathds{R}^m)$ als $\varphi = \varphi(0) + \sum_{k=1}^{m} x^k \varphi_k$ nach Lemma 2 (\ref{ssub:155}). 
+	Setze nun $Y := X - \sum_{i} a^i \diff{}{x^i}$. $Y$ ist eine Derivation und es gilt
 	\begin{align*}
-		\Rightarrow \enbrace*{ X - \sum_{i} a^i \diff{}{x^i} } (\varphi) &=  \sum_{k=1}^{m}  \enbrace*{X - \sum_{i} a^i \diff{}{x^i}   } (x^k) \cdot \varphi_k(0) 
-		\tag{Leibniz + $x^k|_0 =0$ }  \\
-		&= \sum_{k} \enbrace*{a^k - \sum_{i} a^i \delta_i^k } \varphi_k (0) =0 
+		Y (\varphi) &=  \underbrace{Y \enbrace[\big]{\varphi(0)}}_{=0} + \sum_{k=1}^{m}  Y (x^k) \cdot \varphi_k(0) + \underbrace{x^k(0)}_{=0} \cdot  Y (\varphi_k) 
+		\tag*{(Leibniz)} \\
+		&= \sum_{k=1}^m \enbrace*{a^k - \sum_{i} a^i \delta_i^k } \cdot \varphi_k (0) =0 .
 	\end{align*}
 	Da $\varphi$ beliebig war, folgt $X= \sum_{i} a^i \diff{}{x^i} $. \bewende
 \end{itemize}
@@ -577,7 +578,7 @@ Dies ist wohldefiniert, da
 \[
 	\diffd{}{t} \enbrace[\big]{\varphi \circ f \circ \gamma_1} (0) = \diffd{}{t} \enbrace[\big]{\varphi \circ f \circ \gamma_2} (0) 
 \]
-und Definition von "$[.]$"{}.
+nach Definition von "$[.]$"{}.
 % subsubsection 156 (end)
 
 \subsubsection[Satz 3: In lokalen Koordinaten ist das Differential durch die Jacobi-Matrix gegeben]{Satz 3} % (fold)
@@ -595,19 +596,19 @@ Schreibe für die induzierte Abbildung {\color{Tomato3}$f'$} wieder $f$.
 \begin{align*}
 	(y^1, \ldots , y^n) = \enbrace*{f^1(x^1, \ldots , x^m), \ldots , f^n(x^1, \ldots ,x^m)} 
 \end{align*}
-Dann gilt für alle $\varphi \in C^\infty(\mathds{R}^n)$:
+Dann gilt für alle $\varphi \in C^\infty(\mathds{R}^n)$: \marginnote{folgt aus Kettenregel, $\nabla (\varphi \circ f)$ berechnen, siehe Ana II. 7.7} 
 \[
-	T_0 f \enbrace*{\diff{}{x^i} }(\varphi)= \diff{}{x^i} (\varphi \circ f) (0)  = \sum_{j=1}^{n} \diff{\varphi}{y^j}(0) \cdot \diff{f^j}{x^i}(0) \marginnote{Kettenregel} 
+	T_0 f \enbrace*{\diff{}{x^i} }(\varphi)= \diff{}{x^i} (\varphi \circ f) (0)  = \sum_{j=1}^{n} \diff{\varphi}{y^j}(0) \cdot \diff{f^j}{x^i}(0) 
 \]
-Also 
+Wir erhalten also beim Einsetzen des $i$-ten Basisvektors die $i$-te Spalte der Jacobi-Matrix:
 \[
-	T_0 f \enbrace*{\diff{}{x^i}}  = \sum_{j=1}^{n} \underbrace{\diff{f^j}{x^i} (0)}_{=J_f(0)} \diff{}{y^j} \bewende 
+	T_0 f \enbrace*{\diff{}{x^i}}  = \sum_{j=1}^{n} \diff{f^j}{x^i} (0) \diff{}{y^j} \bewende 
 \]
 % subsubsection 157 (end)
 
-\subsubsection{Definition (des Physikers \ldots )} % (fold)
+\subsubsection[Definition: Tangentialvektor (Physiker-Variante)]{Definition (des Physikers \ldots )} % (fold)
 \label{ssub:158}
-Ein \Index{Tangentialvektor} im Punkt $p \in M$ ist eine Zuordnung, die jeder Karte $h : (M,p) \to (\mathds{R}^m,0)$ um $p$ einen Vektor $v \in \mathds{R}^m$ so zuordnet, 
+Ein \bet{Tangentialvektor}\index{Tangentialvektor!für Physiker} im Punkt $p \in M$ ist eine Zuordnung, die jeder Karte $h : (M,p) \to (\mathds{R}^m,0)$ um $p$ einen Vektor $v \in \mathds{R}^m$ so zuordnet, 
 dass der Karte $k : (M,p) \to (\mathds{R}^m,0)$ der Vektor \marginnote{Linearisierung Kartenwechsel}
 \[
 	J_{k \circ h ^{-1}}(0)(v) 
@@ -633,9 +634,9 @@ verträglich.
 		 X_\gamma \arrow[rrr, dashed] \arrow[draw=none]{ur}[sloped,auto=false]{\in}& & & X_{f \circ \gamma} \arrow[draw=none]{ul}[sloped,auto=false]{\ni}
 	\end{tikzcd}
 \]
-Zu zeigen: $T_p^\text{alg}f (X_\gamma) = X_{f \circ \gamma}$. Es gilt
+Zu zeigen: $T_p^\text{alg}f (X_\gamma) = X_{f \circ \gamma}$. Es gilt für $\varphi \in C^\infty(N)$
 \begin{align*}
-	X_{f \circ \gamma} (\varphi) = \diff{}{t} \enbrace*{\varphi \circ f \circ \gamma} (0) = X_\gamma ( \varphi \circ f) = T_p^\text{alg} f(X_\gamma) (\varphi)\bewende 
+	X_{f \circ \gamma} (\varphi) = \diffd{}{t} \enbrace*{\varphi \circ f \circ \gamma} (0) = X_\gamma ( \varphi \circ f) = T_p^\text{alg} f(X_\gamma) (\varphi)\bewende 
 \end{align*}
 % subsubsection 158 (end)
 % subsection 15 (end)
@@ -1018,7 +1019,7 @@ Für Vektorfelder $Y$ auf $M$ definieren wir
 
 \subsubsection[Notation für Pushforward]{Notation für Diffeomorphismen (Pushforward)} % (fold)
 \label{ssub:245}
-Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$. Dann erhält man ein neues Vektorfeld $N$ in $q \in N$ durch 
+Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$. Dann erhält man ein neues Vektorfeld auf $N$ in $q \in N$ durch 
 \[
 	 \enbrace*{f_* X}_q := T _{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}}
 \]
