@@ -871,7 +871,7 @@ ist, wiederhole man den Beweis mit Abbildungen $u$, die in $t$ aber \emph{nicht}
 \label{ssub:232}
 Sei $X : (t_0 - \varepsilon, t_0 +\varepsilon) \times B_{2R}(x_0) \to \mathds{R}^n$ stetig und erfülle eine Lipschitz-Bedingung bezüglich $x$ mit $L >0$. Sei weiter 
 $\abs*{X} < K $, $\varepsilon < \frac{R}{K}$ und $r < R$. Dann ist $X$ für alle Anfangspunkte in $B_r(x_0)$ lokal eindeutig lösbar. Die Bedingung 
-$\varepsilon < \frac{1}{L} $ ist dazu \emph{nicht} notwendig.
+$\varepsilon < \frac{1}{L} $ aus dem Beweis ist dazu \emph{nicht} notwendig.
 
 In der Tat: Sei $u^0(t,x) := x$ und definiere iterativ $u^{\nu +1} := T u^\nu$ $\forall \nu \in \mathds{N}$. Es gilt die Kontraktionsabschätzung 
 \[
@@ -887,10 +887,11 @@ abgeschätzt werden. Also ist wegen
 	T u = \lim_{\nu \to \infty} T u^\nu = \lim_{ \nu \to \infty} u^\nu = u
 \]
 ($T$ ist (Lipschitz)-stetig) $u$ ein Fixpunkt. (vgl. Blatt 5). \\
-Randbemerkung:
+Alternativ führt man den Beweis mit der Norm
 \[
 	\norm{u}' := \sup_{(t,x)} \enbrace*{e^{-2 \cdot L \cdot \abs*{t-t_0} } \cdot \abs*{u(t,x)} }  \quad \leadsto \varepsilon L \leftrightarrow \frac{1}{2} 
 \]
+Bezüglich $\norm{.}' $ ist $T$ dann kontrahierend mit Konstante $\frac{1}{2}$.
 % subsubsection 231 (end)
 
 \subsubsection{Bemerkung (höhere Regularität)} % (fold)
@@ -902,16 +903,16 @@ $(t_0, x_0)$. Auf $B_{2R}(x_0)$ ist $X$ zusammen mit allen Ableitungen beschrän
 \]
 ist $t \mapsto u(t,x)$ beliebig oft differenzierbar für alle $x$. Ist $u$ auch bezüglich $x$ beliebig oft differenzierbar, so 
 \[
-	\diffd{}{t} \mathrm{D}_x u(t,x) = D_2 X \enbrace[\big]{t, u(t,x)}  \cdot D_x u(t,x) \qquad D_x u(t_0,x) = \id
+	\diffd{}{t} \mathrm{D}_x u(t,x) = \D_x X \enbrace[\big]{t, u(t,x)}  \cdot \D_x u(t,x) \qquad \D_x u(t_0,x) = \id
 \]
-mit anderen Worten: $D_x u(t,x)$ löst die lineare Gleichung:
+mit anderen Worten: $D_x u(t,x)$ löst die linearisierte Gleichung:
 \[
-	\diffd{}{t} v(t,x) = D_x X\enbrace[\big]{t, u(t,x) } \cdot v(t,x) \qquad v(_0, x) = \id_{n \times n}
+	\diffd{}{t} v(t,x) = \D_x X\enbrace[\big]{t, u(t,x) } \cdot v(t,x) \qquad v(_0, x) = \id_{n \times n}
 \] 
 für Matrix-wertige Abbildungen $v$. Um die Differenzierbarkeit von $u$ nach $x$ zu sehen, gehen wir wie folgt vor: Sei $h \in \mathds{R}^n$ mit $\abs*{h}$ klein
 ($\abs*{h} \searrow 0$). Setze
 \[
-	\Delta u(t,h) := u(t, x+h) - u(t,x) \quad , \quad Y_{t,h} := \int_0^1 \! D_x X\enbrace[\Big]{t, u(t,x) + s \Delta u(t,h)}  \, \mathd s
+	\Delta u(t,h) := u(t, x+h) - u(t,x) \quad , \quad Y_{t,h} := \int_0^1 \! \D_x X\enbrace[\Big]{t, u(t,x) + s \Delta u(t,h)}  \, \mathd s
 \]
 (Der Parameter $x$ ist in der Notation unterdrückt. Die Ortsvariable ist $h$. Beachte: $Y(t,0) = D_x X \enbrace[\big]{t, u(t,x)} $)
 \begin{align*}
@@ -920,28 +921,33 @@ für Matrix-wertige Abbildungen $v$. Um die Differenzierbarkeit von $u$ nach $x$
 \end{align*}
 $\Delta u(t_0,h) = h$. Das lineare Problem für unbekannte Matrizen ($n \times n$)
 \[
-	\dot V (t,h) = Y(t,h) \cdot V(t,h) \quad , \quad V(t_0,h) = \id_{n \times n}
+	\begin{cases}
+		\dot{V} (t,h) = Y(t,h) \cdot V(t,h) \\
+		V(t_0,h) = \id_{n \times n}
+	\end{cases}
 \]
-hat lokal genau eine Lösung $V$, die stetig in $x$ (Parameter) und $h$ (Ortsvariable, hier als Parameter) ist.\marginnote{vgl. Satz 6 \& Blatt 5} Das lineare Problem für
+hat lokal genau eine Lösung $V$, die stetig in $x$ (Parameter) und $h$ (Ortsvariable, hier als Parameter)\marginnote{vgl. \hyperref[ssub:231]{Satz 6} \& Blatt 5} ist. Das lineare Problem für
 unbekannte Vektoren 
 \[
-	\dot v(t,n) = Y(t,h) \cdot v(t,h) \quad , \quad v(t_0,h) = h
+	\begin{cases}
+		\dot{v}(t,n) = Y(t,h) \cdot v(t,h) \\
+		v(t_0,h) = h
+	\end{cases}
 \]
 wird dann von $v(t,h)= V(t,h) \cdot h$ gelöst. Die Eindeutigkeit liefert
 \[
 	\Delta u(t,h) = V(t,h) \cdot h
 \]
-Damit ist $x  \mapsto u(t,x)$ von der Klasse $C^1$ für alle $x$ und es gilt: 
+Damit ist $x  \mapsto u(t,x)$ von der Klasse $C^1$ für alle $t$ und
 \(
-	D_x u(t,x) = V(t,0)
-\) (löst das linearisierte Problem)
+	\D_x u(t,x) = V(t,0)
+\) löst das linearisierte Problem.
 
 Um zu zeigen, dass $u$ von der Klasse $C^2$ ist, betrachten wir nun direkt das System 
 \[
-	\dot u(t,x) = X(t, u(t,x))  , \quad \dot v (t,x) = D_x X\enbrace[\big]{t, u(t,x)} \cdot v(t,x) , \quad u(t_0, x) = x , \quad v(t_0, x) = \id_{n \times n}
+	\dot u(t,x) = X(t, u(t,x))  , \quad \dot v (t,x) = \D_x X\enbrace[\big]{t, u(t,x)} \cdot v(t,x) , \quad u(t_0, x) = x , \quad v(t_0, x) = \id_{n \times n}
 \]
 (Beachte: Rechte Seite ist nur $C^1$!)
-
 Mit dem eben gezeigten ($C^1$ reicht!) ist die Lösung $(u, D_x u)$ von der Klasse $C^1$, also $u$ selbst $C^2$. Durch Wiederholen dieser Argumentation erhält man
 $u \in C^3$ usw., also $u \in C^\infty$. \bewende
 % subsubsection 233 (end)
