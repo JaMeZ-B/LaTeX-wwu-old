@@ -970,15 +970,15 @@ Die Abbildung $(q,t) \mapsto \gamma_q(t) =: \Phi_t(q)$ heißt \Index{lokaler Flu
 	\Phi_t \circ \Phi_s(q) = \Phi_{t+s}(q)\quad , \enspace \text{da wo definiert.}
 \]
 \minisec{Beweis}
-$t \mapsto \gamma_q(t+s)$ und $t \mapsto \gamma_{\Phi_s(q)}(t)$ sind Integralkurven von $X$ mit identischem Anfangspunkt (also $t=0$): 
+$t \mapsto \gamma_q(t+s)$ und $t \mapsto \gamma_{\Phi_s(q)}(t)$ sind Integralkurven von $X$ mit identischem Anfangspunkt, da für $t=0$ gilt
 \[
 	\gamma_q(s) = \Phi_s(q). 
 \]
-Die Eindeutigkeitsaussage im Satz von Picard-Lindelöf (\ref{sub:23}) impliziert:
+Die Eindeutigkeitsaussage im Satz von Picard-Lindelöf (\ref{sub:23}) impliziert
 \[
 	\gamma_q(t +s) = \gamma_{\Phi_s(q)}(t),
 \]
-d.h. $\Phi_{t+s}(q) = \Phi_t \circ \Phi_s (q)$. \bewende \bigskip\\
+also muss $\Phi_{t+s}(q) = \Phi_t \circ \Phi_s (q)$ gelten. \bewende \bigskip\\
 Wegen $\Phi_t \circ \Phi_{-t} = \Phi_0 = \id = \Phi_{-t} \circ \Phi_t$ ist $\Phi_t : M \to M$ (falls global definiert) ein Diffeomorphismus mit Inverser
 \(
 	 \enbrace*{\Phi_t} ^{-1} = \Phi_{-t} 
@@ -994,7 +994,7 @@ Sei $X$ ein Vektorfeld auf $M$, $\Phi_t$ ein lokaler Fluss zu $X$. Für Funktion
 $\mathcal{L} _X$ heißt die \Index{Lie-Ableitung}. 
 Für Vektorfelder $Y$ auf $M$ definieren wir
 \[
-	(\mathcal{L}_X Y)_p := \lim_{ t \to 0} \frac{1}{t} \enbrace[\big]{T \Phi_{-t} \enbrace*{Y_{\Phi_t(p)}} - Y_p} = \diff{}{t}\Big|_{t=0} \enbrace[\Big]{T \Phi_{-t} 
+	(\mathcal{L}_X Y)_p := \lim_{ t \to 0} \frac{1}{t} \enbrace[\big]{T \Phi_{-t} \enbrace*{Y_{\Phi_t(p)}} - Y_p} = \diffd{}{t}\Big|_{t=0} \enbrace[\Big]{T \Phi_{-t} 
 	\enbrace*{Y_{\Phi _t(p)}} }     
 \]
 % subsubsection 243 (end)
@@ -1009,42 +1009,43 @@ Für Vektorfelder $Y$ auf $M$ definieren wir
 \begin{description}
 	\item[zu a):] Da $t \mapsto \Phi_t(p) = \gamma_p(t)$ Integralkurve von $X$ ist, also $\dot\Phi_t = X_{\Phi_t}$, gilt nach Definition\marginnote{vgl.: \ref{ssub:151}}
 	\[
-		\mathcal{L} _X f = \diff{}{t}\Big|_{t=0} (f \circ  \Phi_t) = X(f). 
+		\mathcal{L} _X f = \diffd{}{t}\Big|_{t=0} (f \circ  \Phi_t) = X(f). 
 	\] 
-	\item[zu b):] In lokalen Koordinaten: $X = X^i \diff{}{x^i}$, $Y = Y^j \diff{}{x^j}$. Dann gilt
+	\item[zu b):] In lokalen Koordinaten: $X = X^i \diff{}{x^i}$, $Y = Y^j \diff{}{x^j}$. Betrachte zunächst nur einen Basisvektor
 	\[
-		\mathcal{L} _X \enbrace*{\diff{}{x^j} } = \diffd{}{t}\Big|_{t=0} T \Phi_{-t} \enbrace*{\diff{}{x^j} } = \diffd{}{t}\Big|_{t=0} \diff{\Phi_{-t}î}{x^j} \diff{}{x^i} 
-		= - \diff{X^i}{x^j} \diff{}{x^i}     
+		\mathcal{L} _X \enbrace*{\diff{}{x^j} } = \diffd{}{t}\Big|_{t=0} T \Phi_{-t} \enbrace*{\diff{}{x^j} } \stackrel{\text{Ana II. 7.7}}{=} \diffd{}{t}\Big|_{t=0} \diff{\Phi_{-t}^i}{x^j} \diff{}{x^i} 
+		= - \diff{X^i}{x^j} \diff{}{x^i}  \marginnote{$\Phi_{-t}$ ist der Fluss zu $-X$} 
 	\]
-	($\Phi_{-t}$ ist der Fluss zu $-X$) In Analogie zur Produktregel für die gewöhnliche Ableitung für reellwertige Funktionen zeigt man:
+	In Analogie zur Produktregel für die gewöhnliche Ableitung für reellwertige Funktionen zeigt\marginnote{siehe Blatt 6, Aufgabe 1} man:
 	\begin{align*}
-		L_X(f  Y) = (L_X f) Y + f \cdot L_X Y
+		\mathcal{L}_X(f  Y) = (\mathcal{L}_X f) Y + f \cdot \mathcal{L}_X Y
 	\end{align*}
 	Daraus folgt
 	\begin{align*}
-		\mathcal{L} _X\enbrace*{Y^j \diff{}{x^j}} = \mathcal{L}_X Y^j \cdot \diff{}{x^j} + Y^j \cdot \mathcal{L}_X \diff{}{x^j} = X^i \diff{Y^j}{x^i} \diff{}{x^j} 
+		\mathcal{L} _X\enbrace*{Y^j \diff{}{x^j}} = \mathcal{L}_X Y^j \cdot \diff{}{x^j} + Y^j \cdot \mathcal{L}_X \diff{}{x^j} \stackrel{\text{a)}}{=} X^i \diff{Y^j}{x^i} \diff{}{x^j} 
 		- Y^j \diff{X^i}{x^j} \diff{}{x^i} = [X,Y]       
 	\end{align*}
 	vgl. Blatt 4  \bewende
 \end{description}
 % subsubsection 244 (end)
 
-\subsubsection[Notation für Pushforward]{Notation für Diffeomorphismen (Pushforward)} % (fold)
+\subsubsection[Notation für Pushforward]{Notation für Diffeomorphismen (Pushforward\footnote{"\emph{push} tangent vectors on $M$ \emph{forward} to tangent vectors on $N$", \url{https://en.wikipedia.org/wiki/Pushforward_(differential)}})} % (fold)
 \label{ssub:245}
-Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$. Dann erhält man ein neues Vektorfeld auf $N$ in $q \in N$ durch 
+Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$.
+Dann erhält man ein neues Vektorfeld auf $N$ in $q \in N$ durch 
 \[
 	 \enbrace*{f_* X}_q := T _{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}}
 \]
-Damit können wir 
+Damit können wir die Lie-Ableitung schreiben als
 \[
 	\mathcal{L}_X Y = \diffd{}{t}\Big|_{t=0}  \enbrace*{\Phi_{-t}}_* Y 
 \]
-schreiben
 % subsubsection 245 (end)
 
 \subsubsection[Beispiel zu \ref{ssub:245}: Vektorfeld aus einem Diffeomorphismus und einem Vektorfeld ]{Beispiel} % (fold)
 \label{ssub:246}
-$M=N=\mathds{R}^2$. $f(x,y)= (x, x^2+y) \Rightarrow f ^{-1} (x,y) = (x, -x^2 +y)$. Dann $X_{x,y} = y \diff{}{x} = \binom{y}{0}$.
+Sei $M=N=\mathds{R}^2$. $f(x,y)= (x, x^2+y) \Rightarrow f^{-1} (x,y) = (x, -x^2 +y)$ ist ein Diffeomorphismus zwischen $M$ und $N$. Sei weiter ein Vektorfeld definiert durch
+$X_{x,y} = y \diff{}{x} = \binom{y}{0}$.
 \begin{figure}[h]
 	\centering{
 	\begin{tikzpicture}[xscale=0.8, yscale=0.7]
@@ -1061,7 +1062,7 @@ $M=N=\mathds{R}^2$. $f(x,y)= (x, x^2+y) \Rightarrow f ^{-1} (x,y) = (x, -x^2 +y)
 	\caption{Zeichnung zu Beispiel \ref{ssub:246} mit $l(t)= 1$}}
 \end{figure}
 
-Es gilt $T_{(x,y)}(f) = \begin{pmatrix}
+Es gilt $T_{(x,y)}(f) = J_f (x,y)= \begin{pmatrix}
 	1 & 0 \\
 	2x & 1
 \end{pmatrix}$. Damit folgt
@@ -1087,11 +1088,11 @@ von $f_* X$ auf $N$.
 \minisec{Beweis}
 Es gilt
 \begin{align*}
-	\diffd{}{t} \enbrace*{\Phi_t \circ f ^{-1} (q)} &= X_{f ^{-1}(q)}  \\
+	\diffd{}{t} \Big|_{t=0} \enbrace*{\Phi_t \circ f ^{-1} (q)} &= X_{f ^{-1}(q)}  \\
 	\intertext{Damit folgt}
-	\diff{}{t} \enbrace*{f \circ \Phi_t \circ f ^{-1}(q)} &= T_{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}} = \enbrace*{f_*X}_q \bewende    
+	\diffd{}{t} \Big|_{t=0} \enbrace*{f \circ \Phi_t \circ f ^{-1}(q)} &= T_{f ^{-1}(q)} f \enbrace*{X_{f ^{-1}(q)}} = \enbrace*{f_*X}_q \bewende    
 \end{align*}
-Insbesondere für $M=N$ gilt 
+Insbesondere gilt für $M=N$:
 \[
 	f_* X = X \iff \forall t : \Phi_t \circ f = f \circ \Phi_t
 \]
@@ -1101,22 +1102,22 @@ Insbesondere für $M=N$ gilt
 \label{ssub:248}
 Seien $X,Y$ Vektorfelder auf $M$ mit Fluss $\Phi_t$ bzw. $\Psi_s$. Dann gilt:
 \[
-	[X,Y] = 0 \iff \Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t
+	[X,Y] = 0 \iff \forall s,t : \Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t
 \]
 \minisec{Beweis}
 \begin{description}
-	\item["$\Leftarrow$":] Gelte $\Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t$. Dann gilt auch 
+	\item["$\Leftarrow$":] Es gelte $\Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t$. Dann gilt auch 
 	\begin{align*}
-		\diffd{}{s} \Phi_t \circ \Psi_s (p) = \diffd{}{s} \Psi_s \circ  \Phi_t(p) 
+		\diffd{}{s} \Big|_{s=0} \Phi_t \circ \Psi_s (p) = \diffd{}{s} \Big|_{s=0} \Psi_s \circ  \Phi_t(p) 
 	\end{align*} 
-	d.h. $T_p \Phi_t (Y_p) = Y_{\Phi_t(p)} \forall p,t$ und $(\Phi_{-t})_* Y = Y$. Dann erhalten wir
+	d.h. $T_p \Phi_t (Y_p) = Y_{\Phi_t(p)}$ für alle $p,t$ und $(\Phi_{-t})_* Y = Y$ für alle $t$. Dann erhalten wir
 	\begin{align*}
-		[X,Y] =  L_X Y = \diff{}{t}\Big|_{t=0} (\Phi_{-t}) Y = 0 
+		[X,Y] =  \mathcal{L}_X Y = \diffd{}{t}\Big|_{t=0} (\Phi_{-t})_* Y = 0 
 	\end{align*}
-	\item["$\Rightarrow $":] Gelte $[X,Y] =0$. Nach Lemma 9  (\ref{ssub:247}) ist zu zeigen, dass $(\Phi_t)_* Y = Y \enspace\forall t$. Dann gilt 
+	\item["$\Rightarrow $":] Gelte $[X,Y] =0$. Nach Lemma 9  (\ref{ssub:247}) ist zu zeigen, dass $(\Phi_t)_* Y = Y$ für alle $t$. Es gilt 
 	\begin{align*}
-		\diff{}{t}\Big|_{t=t_0} \enbrace*{\Phi_{-t}}_* Y = \diff{}{t}\Big|_{t=0} \enbrace*{\Phi_{-t_0-t}}_* Y  = \diff{}{t}\Big|_{t=0}
-		\enbrace*{\Phi_{-t_0}}_* \enbrace*{\Phi_{-t}}_* Y = \enbrace*{\Phi_{-t_0}}_* \underbrace{L_X Y}_{= [X,Y]=0} = 0   \bewende
+		\diffd{}{t}\Big|_{t=t_0} \enbrace*{\Phi_{-t}}_* Y = \diffd{}{t}\Big|_{t=0} \enbrace*{\Phi_{-t_0-t}}_* Y  = \diffd{}{t}\Big|_{t=0}
+		\enbrace*{\Phi_{-t_0}}_* \enbrace*{\Phi_{-t}}_* Y = \enbrace*{\Phi_{-t_0}}_* \underbrace{\mathcal{L}_X Y}_{= [X,Y]=0} = 0   \bewende
 	\end{align*}
 \end{description}
 % subsubsection 248 (end)
