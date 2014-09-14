@@ -1029,7 +1029,7 @@ Für Vektorfelder $Y$ auf $M$ definieren wir
 \end{description}
 % subsubsection 244 (end)
 
-\subsubsection[Notation für Pushforward]{Notation für Diffeomorphismen (Pushforward\footnote{"\emph{push} tangent vectors on $M$ \emph{forward} to tangent vectors on $N$", \url{https://en.wikipedia.org/wiki/Pushforward_(differential)}})} % (fold)
+\subsubsection[Notation für Pushforward]{Notation für Diffeomorphismen (Pushforward\footnote{"[\ldots] \emph{push} tangent vectors on $M$ \emph{forward} to tangent vectors on $N$", \url{https://en.wikipedia.org/wiki/Pushforward_(differential)}})} % (fold)
 \label{ssub:245}
 Sei $f : M \xrightarrow{\cong} N $ ein Diffeomorphismus und $X$ ein Vektorfeld auf $M$.
 Dann erhält man ein neues Vektorfeld auf $N$ in $q \in N$ durch 
@@ -1114,7 +1114,7 @@ Seien $X,Y$ Vektorfelder auf $M$ mit Fluss $\Phi_t$ bzw. $\Psi_s$. Dann gilt:
 	\begin{align*}
 		[X,Y] =  \mathcal{L}_X Y = \diffd{}{t}\Big|_{t=0} (\Phi_{-t})_* Y = 0 
 	\end{align*}
-	\item["$\Rightarrow $":] Gelte $[X,Y] =0$. Nach Lemma 9  (\ref{ssub:247}) ist zu zeigen, dass $(\Phi_t)_* Y = Y$ für alle $t$. Es gilt 
+	\item["$\Rightarrow $":] Es gelte $[X,Y] =0$. Nach Lemma 9  (\ref{ssub:247}) ist zu zeigen, dass $(\Phi_t)_* Y = Y$ für alle $t$. Es gilt 
 	\begin{align*}
 		\diffd{}{t}\Big|_{t=t_0} \enbrace*{\Phi_{-t}}_* Y = \diffd{}{t}\Big|_{t=0} \enbrace*{\Phi_{-t_0-t}}_* Y  = \diffd{}{t}\Big|_{t=0}
 		\enbrace*{\Phi_{-t_0}}_* \enbrace*{\Phi_{-t}}_* Y = \enbrace*{\Phi_{-t_0}}_* \underbrace{\mathcal{L}_X Y}_{= [X,Y]=0} = 0   \bewende
@@ -1142,7 +1142,10 @@ Betrachte $A \in \mathds{R}^{n \times n}$. $\dot x = A x$ hat den Fluss $\Phi(t,
 \[
 	e^{A t} = \sum_{k=0}^{\infty} \frac{A^k t^k}{k!}  
 \]
-Für $A= \id$ entspricht dies einer Skalierung:
+Für $A= \id$ entspricht dies einer Skalierung um $e^{t}$, da $e^{A \cdot t} = \begin{psmallmatrix*}[l]
+	e^t & 0 \\
+	0 & e^t
+\end{psmallmatrix*}$:
 \[
 	\begin{tikzpicture}
 		\foreach \x in {0,45,...,315}{
@@ -1154,7 +1157,8 @@ Für $A= \id$ entspricht dies einer Skalierung:
 Für $A = \begin{psmallmatrix*}[r]
 	1 & 0 \\
 	0 & -1
-\end{psmallmatrix*}$, Startpunkte $\widehat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04];}}$ und $t \in [-1, 1]$
+\end{psmallmatrix*}$ ergibt sich $e^{A \cdot t} = \begin{psmallmatrix*}[l] e^t & 0 \\ 0 & e^{-t} \end{psmallmatrix*}$.
+Startpunkte $\widehat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04];}}$ und $t \in [-1, 1]$ 
 \[
 	\begin{tikzpicture}[scale=0.8]
 		%\draw[help lines] (-3,-3) grid (3,3);
@@ -1172,7 +1176,11 @@ Für $A = \begin{psmallmatrix*}[r]
 Für $A = \begin{psmallmatrix*}[r]
 	0 & 1 \\
 	-1 & 0
-\end{psmallmatrix*}$, Startpunkte $\widehat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04];}}$ und $t \in [-1/2, 1/2]$
+\end{psmallmatrix*}$ ergibt sich $e^{A \cdot t} = \begin{psmallmatrix*}[l]
+	1 & e^t \\
+	e^{-t} & 1
+\end{psmallmatrix*}$.
+Startpunkte $\widehat{=}\,{\tikz[baseline=-0.5ex]{\draw[fill, RoyalBlue2] (0,0) circle[radius=0.04];}}$ und $t \in [-1/2, 1/2]$
 \[
 	\begin{tikzpicture}[scale=1.2]
 		%\draw[help lines] (-3,-3) grid (3,3);
@@ -1188,23 +1196,30 @@ Für $A = \begin{psmallmatrix*}[r]
 		\end{scope}
 	\end{tikzpicture}
 \]
-Betrachte $S^1 \times S^1 \subset \mathds{C} \times \mathds{C}$ (2-Torus) mit dem Fluss 
+Betrachte den 2-Torus $S^1 \times S^1 \subset \mathds{C} \times \mathds{C}$ mit dem Fluss 
 \[
 	\Phi\enbrace[\big]{t, (z_1, z_2)} = \enbrace*{e^{it} z_1, e^{a i t} z_2}, \quad a \in \mathds{R} 
 \]
-$a=0$ \marginnote{Wie ich das mit einem Torus hinbekomme, muss ich nochmal gucken \ldots }
+Für $a=0$ ergibt sich:
 \[
-	\includegraphics[width=0.4\textwidth, keepaspectratio]{Mathematica/torus.png}
-	\text{Torus} \qquad \begin{tikzpicture}[scale=0.7]
+	\tikzsetnextfilename{fluss_3}
+	\vcenter{\hbox{\includegraphics[width=0.4\textwidth, keepaspectratio]{Mathematica/torus.png}}}
+	\hspace{2cm} \tikzsetnextfilename{fundamentalgebiet_a_0}
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.7]
 		\draw[very thick] (0,0) rectangle (4,4);
 		\foreach \x in {0,0.5,...,4}{
 			\draw[thick, arrows={-angle 90}] (\x,1.8) -- (\x,4);
 			\draw[thick, arrows={-angle 90}] (\x,0) -- (\x,2);
 		}
-	\end{tikzpicture}
+	\end{tikzpicture}}}
 \]
 $a= \sqrt{11}$ \missingfigure{Torus + Fundamentalgebiet zum zweiten}
-Betrachte nun $S^2 \subset \mathds{C} \times \mathds{R}$ 2-Sphäre
+
+Betrachte nun die 2-Sphäre $S^2 \subset \mathds{C} \times \mathds{R}$ mit dem Fluss $\Phi\enbrace[\big]{t, (z,r)} = \enbrace*{e^{it} z, r}$
+\missingfigure{Rotation um die $r$-Achse}
+
+"Schwingen" einer Ebene um den Nordpol des $S^2$
+\missingfigure{"Schwingen" einer Ebene um den Nordpol des $S^2$}
 % subsubsection 252 (end)
 
 \subsubsection{Einparameterfamilie von Diffeomorphismen} % (fold)
