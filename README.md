@@ -8,7 +8,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 
 * SoSe 2014
 	* [Höhere Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/hoehere_algebra_1/hoehere_algebra.pdf?raw=true "Höhere Algebra I.") (Jannes)
-	* [Differentialformen und Mannigfaltigkeiten](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffMa/diff_ma.pdf?raw=true "Differentialformen und Mannigfaltigkeiten") (Jannes)
+	* [Differentialformen und Mannigfaltigkeiten](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffMa_SS14/diff_ma.pdf?raw=true "Differentialformen und Mannigfaltigkeiten") (Jannes)
 	* [Grundlagen der Analysis, Topologie, Geometrie](https://github.com/JaMeZ-B/latex-wwu/blob/master/Ana_Top_Geo/ana_top_geo.pdf?raw=true "Grundlagen der Analysis, Topologie und Geometrie") (Jannes)
 	* [Partielle Differentialgleichungen I.](https://github.com/JaMeZ-B/latex-wwu/blob/master/PDGL1/PDGL1.pdf?raw=true "Partielle Differentialgleichungen I.") (Phil)
 * WiSe 2013
