@@ -6,6 +6,9 @@ This repository stores some lecture notes made during lectures at the University
 
 In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster in Quellcode und PDF zur Verfügung. Aktuell umfasst dies die Vorlesungen
 
+* WiSe 2014
+	* [Topologie I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo1_WS14/topologie_1.pdf?raw=true "Topologie I.") (Jannes)
+	* [Funktionalanalysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/FunkAna_WS14/funktional_analysis.pdf?raw=true "Funktionalanalysis") (Jannes)
 * SoSe 2014
 	* [Höhere Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg1_SS14/hoehere_algebra.pdf?raw=true "Höhere Algebra I.") (Jannes)
 	* [Differentialformen und Mannigfaltigkeiten](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffMa_SS14/diff_ma.pdf?raw=true "Differentialformen und Mannigfaltigkeiten") (Jannes)
