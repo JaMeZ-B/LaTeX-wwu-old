@@ -72,6 +72,77 @@ Dabei müssen folgende Axiome  erfüllt sein:
 	Komposition: $f \circ^\op g := g \circ f$.
 \end{enumerate}
 % subsection 12 (end)
+
+\subsection[Bemerkungen zu Kategorien]{Bemerkung} % (fold)
+\label{sub:13}
+\begin{enumerate}[(i)]
+	\item Eine Kategorie heißt \bet{klein}\index{Kategorie!klein}, wenn ihre Objekte eine Menge bilden.
+	\item Statt $f \in \Mor_\mathcal{C}(A,B)$ schreiben wir oft $f : A \to B$ oder $A \xrightarrow{f} B$.
+\end{enumerate}
+% subsection 13 (end)
+
+\subsection[Definition: Funktor]{Definition} % (fold)
+\label{sub:14}
+Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien: Ein \Index{Funktor} $F : \mathcal{C} \to \mathcal{D}$ ordnet jedem Objekt $C$ von $\mathcal{C}$ ein Objekt $F(C)$ von 
+$\mathcal{D}$ und ordnet jedem Morphismus $C \xrightarrow{f} C'$ in $\mathcal{C}$ einen Morphismus $F(C) \xrightarrow{F(f)} F(C')$ in $\mathcal{D}$ zu.\todo{hässlicher Zeilenabstand} 
+Dabei muss gelten:
+\[
+	F(f \circ g) = F(f) \circ F(g) \quad \text{und} \quad F(\id_C) = \id_{F(C)}
+\] 
+% subsection 14 (end)
+
+\subsection[Beispiele für Funktoren]{Beispiele} % (fold)
+\label{sub:15}
+\begin{enumerate}[(1)]
+	\item Es gibt offensichtliche \enquote{Vergiss}-Funktoren:
+	\begin{align*}
+		K-\VR \longrightarrow & \MENGEN \\
+		R-\MOD \longrightarrow & \MENGEN \\
+		\TOP \longrightarrow & \MENGEN \\
+		\TOP_\bullet \longrightarrow & \MENGEN \\
+		\TOP_\bullet \longrightarrow & \TOP
+	\end{align*}
+	\item Sei $\mathcal{C}$ eine Kategorie und $C$ ein Objekt von $\mathcal{C}$. Der durch $C$ \bet{dargestellte Funktor}\index{Funktor!dargestellter} 
+	$F_C : \mathcal{C} \to \MENGEN$ ist definiert durch 
+	\[
+		\begin{array}{ll}
+			F_C(A) = \Mor_\mathcal{C}(C,A) &\text{ für } A \in  \Ob(\mathcal{C}) \\
+			F_C(f)  : \Mor_\mathcal{C}(C,A) \to \Mor_\mathcal{C}(C,A'), g \mapsto f \circ  g &\text{ für } f : A \to A' \text{ in } \mathcal{C}
+		\end{array}
+	\]
+	\item Die Fundamentalgruppe definiert einen Funktor
+	\[
+		\pi_1 : \HTOP_\bullet \longrightarrow \GRUPPEN
+	\]
+\end{enumerate}
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Ist $F : \mathcal{C} \to \mathcal{D}$ ein Funktor so schreiben wir oft kürzer und ungenauer $f_* = F(f)$.
+	\item Kategorien und Funktoren bilden die Kategorie $\KAT$.
+\end{itemize}
+% subsection 15 (end)
+
+\subsection[Definition: Natürliche Transformation]{Definition} % (fold)
+\label{sub:16}
+Seien $F,G : \mathcal{C} \to \mathcal{D}$ zwei Funktoren. Eine \Index{natürliche Transformation} $\tau : F \to G$ ordnet jedem $C \in \Ob(\mathcal{C})$ einen Morphismus
+$\tau_C : F(C) \to G(C)$ in $\mathcal{D}$ zu, sodass für jedes $f : C \to C'$ in $\mathcal{C}$
+\[
+	\begin{tikzcd}
+		F(C) \rar["F(f)"] \dar["\tau_C"]& F(C') \dar["\tau_{C'}"] \\
+		G(C) \rar["G(f)"] & G(C')
+	\end{tikzcd}
+\]
+kommutiert.
+\minisec{Bemerkung}
+Natürliche Transformationen lassen sich komponieren. Für $\tau : F \to G$, $\eta : G \to H$ ist $\eta \circ \tau : F \to H$ gegeben durch
+\marginnote{$F,G,H : \mathcal{C} \to \mathcal{D}$}
+\[
+	(\eta \circ \tau)_C :=  \eta_C \circ \tau_C : F(C) \to H(C)
+\]
+Genauer: Für festes $\mathcal{C}$ und $\mathcal{D}$ bilden die Funktoren $\mathcal{C} \to \mathcal{D}$ mit den natürlichen Transformationen eine Kategorie
+$\FUN(\mathcal{C}, \mathcal{D})$
+% subsection 16 (end)
+
 % section 1 (end)
 \newpage
 
