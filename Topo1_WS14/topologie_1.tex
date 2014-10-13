@@ -40,13 +40,13 @@ Eine \Index{Kategorie} $\mathcal{C}$ besteht aus: \marginnote{13. Okt}
 Dabei müssen folgende Axiome  erfüllt sein:
 \begin{enumerate}[(i)]
 	\item Die Komposition ist \Index{assoziativ}: Für Objekte $A,B,C,D$ von $\mathcal{C}$ und $f \in \Mor_\mathcal{C}(C,D)$, $g \in \Mor_\mathcal{C}(B,C)$, 
-	$h \in \Mor_\mathcal{C}(A,B)$ gilt:
+	$h \in \Mor_\mathcal{C}(A,B)$ gilt immer
 	\[
 		f \circ (g \circ h) = (f \circ g) \circ h
 	\]
-	\item Die Komposition ist \Index{unital}: Für jedes Objekt $A$ von $\mathcal{C}$ gilt es $\id_A \in \Mor_\mathcal{C}(A,A)$ mit:
+	\item Die Komposition ist \Index{unital}: Für jedes Objekt $A$ von $\mathcal{C}$ gibt es einen Morphismus $\id_A \in \Mor_\mathcal{C}(A,A)$ so, dass
 	\[
-		\forall f \in \Mor_\mathcal{C}(B,A) : \id_A \circ f = f  \enspace , \enspace \forall f \in \Mor_\mathcal{C}(A,B) : f \circ \id_A = f
+		\forall f \in \Mor_\mathcal{C}(B,A) : \id_A \circ f = f  \qquad  \text{und} \qquad  \forall f \in \Mor_\mathcal{C}(A,B) : f \circ \id_A = f
 	\]
 \end{enumerate}
 % subsection 11 (end)
@@ -54,22 +54,22 @@ Dabei müssen folgende Axiome  erfüllt sein:
 \subsection[Beispiele für Kategorien]{Beispiele} % (fold)
 \label{sub:12}
 \begin{enumerate}[(1)]
-	\item Die Kategorie $\TOP$. Die Objekte sind topologische Räume. Die Morphismen sind die stetigen Abbildungen.
-	\item Sei $K$ ein Körper. Die Kategorie $K-\VR$ \todo{$K-\VR$ ist unschön}: Objekte sind die $K$-Vektorräume und die Morphismen sind die $K$-linearen Abbildungen. 
-	\item Sei $R$ ein Ring. Die Kategorie $R-\MOD$: Objekte sind die $R$-Moduln, Morphismen sind die $R$-lineare Abbildungen.
-	\item Die Kategorie der Mengen $\MENGEN$. Objekte sind die Mengen und Morphismen sind die Abbildungen.
-	\item Die Kategorie der $C^\infty$-Mannigfaltigkeiten: $C^\infty-\MAN$. Objekte sind $C^\infty$-Mannigfaltigkeiten und Morphismen sind $C^\infty$-Abbildungen.
-	\item Die Kategorie $\TOP_\bullet$: Objekte sind die punktiert-topologischen Räume und Morphismen sind die punktiert-stetigen Abbildungen.
-	\item Die Kategorie $\HTOP$: Die Objekte sind topologische Räume und die Morphismen sind Homotopieklassen von stetigen Abbildungen.
-	\item Die Kategorie $\HTOP_\bullet$
-	\item Sei $G$ eine Gruppe. Dann ist $\mathcal{C}_G$ eine Kategorie durch:
-	
-	Objekte: Genau ein Objekt $*$. $\Mor_{\mathcal{C}_G}(*,*) = G$. Komposition in $\mathcal{C}_G =$ Verknüpfung in $G$.
+	\item Die Kategorie der Mengen $\MENGEN$: Objekte sind Mengen und Morphismen sind Abbildungen.
+	\item Die Kategorie der Gruppen $\GRUPPEN$: Objekte sind Gruppen und Morphismen sind Gruppenhomomorphismen.
+	\item Die Kategorie der $K$-Vektorräume $K\text{-}\VR$: Objekte sind $K$-Vektorräume und die Morphismen sind $K$-lineare Abbildungen.
+	\item Die Kategorie der $R$-Moduln $R\text{-}\MOD$: Objekte sind $R$-Moduln und Morphismen sind $R$-lineare Abbildungen.
+	\item Die Kategorie der $C^\infty$-Mannigfaltigkeiten $C^\infty\text{-}\MAN$: Objekte sind $C^\infty$-Mannigfaltigkeiten und Morphismen sind $C^\infty$-Abbildungen.
+	\item Die Kategorie der topologischen Räume $\TOP$: Objekte sind topologische Räume und Morphismen sind stetige Abbildungen.
+	\item Die Kategorie der punktierten topologischen Räume $\TOP_\bullet$: Objekte sind punktiert-topologische Räume und Morphismen sind punktiert-stetige Abbildungen.
+	\item Die Kategorie $\HTOP$: Objekte sind topologische Räume und Morphismen sind Homotopieklassen von stetigen Abbildungen.
+	\item Die Kategorie $\HTOP_\bullet$: Objekte sind punktiert-topologische Räume und Morphismen sind Homotopieklassen von punktiert-stetigen Abbildungen.
+	\item Sei $G$ eine Gruppe. Wir erhalten eine Kategorie $\mathcal{C}_G$ mit genau einem Objekt $*$ und $\Mor_{\mathcal{C}_G}(*,*) = G$. Die Komposition wird durch die
+	Verknüpfung in der Gruppe festgelegt.
 	\item Ist $\mathcal{C}$ eine Kategorie, so ist $\mathcal{C}^{\op}$ eine Kategorie, wobei $\Ob(\mathcal{C}^\op) = \Ob(\mathcal{C})$ und 
-	\[
+	\(
 		\Mor_{\mathcal{C}^\op}(A,B) := \Mor_\mathcal{C}(B,A)
-	\]
-	Komposition: $f \circ^\op g := g \circ f$.
+	\).
+	Die Komposition ist gegeben durch $f \circ^\op g := g \circ f$.
 \end{enumerate}
 % subsection 12 (end)
 
@@ -84,8 +84,7 @@ Dabei müssen folgende Axiome  erfüllt sein:
 \subsection[Definition: Funktor]{Definition} % (fold)
 \label{sub:14}
 Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien: Ein \Index{Funktor} $F : \mathcal{C} \to \mathcal{D}$ ordnet jedem Objekt $C$ von $\mathcal{C}$ ein Objekt $F(C)$ von 
-$\mathcal{D}$ und ordnet jedem Morphismus $C \xrightarrow{f} C'$ in $\mathcal{C}$ einen Morphismus $F(C) \xrightarrow{F(f)} F(C')$ in $\mathcal{D}$ zu.\todo{hässlicher Zeilenabstand} 
-Dabei muss gelten:
+$\mathcal{D}$ und ordnet jedem Morphismus $f : C \to C'$ in $\mathcal{C}$ einen Morphismus $F(f) : F(C) \to F(C')$ in $\mathcal{D}$ zu. Dabei muss gelten:
 \[
 	F(f \circ g) = F(f) \circ F(g) \quad \text{und} \quad F(\id_C) = \id_{F(C)}
 \] 
@@ -96,11 +95,11 @@ Dabei muss gelten:
 \begin{enumerate}[(1)]
 	\item Es gibt offensichtliche \enquote{Vergiss}-Funktoren:
 	\begin{align*}
-		K-\VR \longrightarrow & \MENGEN \\
-		R-\MOD \longrightarrow & \MENGEN \\
-		\TOP \longrightarrow & \MENGEN \\
-		\TOP_\bullet \longrightarrow & \MENGEN \\
-		\TOP_\bullet \longrightarrow & \TOP
+		K\text{-}\VR \enspace\longrightarrow & \enspace\MENGEN \\
+		R\text{-}\MOD \enspace\longrightarrow & \enspace\MENGEN \\
+		\TOP \enspace\longrightarrow & \enspace\MENGEN \\
+		\TOP_\bullet \enspace\longrightarrow & \enspace\MENGEN \\
+		\TOP_\bullet \enspace\longrightarrow & \enspace \TOP
 	\end{align*}
 	\item Sei $\mathcal{C}$ eine Kategorie und $C$ ein Objekt von $\mathcal{C}$. Der durch $C$ \bet{dargestellte Funktor}\index{Funktor!dargestellter} 
 	$F_C : \mathcal{C} \to \MENGEN$ ist definiert durch 
@@ -117,7 +116,7 @@ Dabei muss gelten:
 \end{enumerate}
 \minisec{Bemerkung}
 \begin{itemize}
-	\item Ist $F : \mathcal{C} \to \mathcal{D}$ ein Funktor so schreiben wir oft kürzer und ungenauer $f_* = F(f)$.
+	\item Ist $F : \mathcal{C} \to \mathcal{D}$ ein Funktor so schreiben wir oft kürzer und ungenauer $f_* := F(f)$.
 	\item Kategorien und Funktoren bilden die Kategorie $\KAT$.
 \end{itemize}
 % subsection 15 (end)
@@ -140,7 +139,7 @@ Natürliche Transformationen lassen sich komponieren. Für $\tau : F \to G$, $\e
 	(\eta \circ \tau)_C :=  \eta_C \circ \tau_C : F(C) \to H(C)
 \]
 Genauer: Für festes $\mathcal{C}$ und $\mathcal{D}$ bilden die Funktoren $\mathcal{C} \to \mathcal{D}$ mit den natürlichen Transformationen eine Kategorie
-$\FUN(\mathcal{C}, \mathcal{D})$
+$\FUN(\mathcal{C}, \mathcal{D})$.
 % subsection 16 (end)
 
 % section 1 (end)
