@@ -2,5 +2,64 @@
 \section{Einführung}
 \label{sec:para0}
 
-Noch kein Inhalt.
+\begin{enumerate}
+	\item Wir betrachten die algebraische Gruppe $\GL_n = \GL_n(k)$;\marginnote{13.10.} meist ist $k = \CC$ oder allgemeiner $k = \overline{k}$ algebraisch abgeschlossen und $\Char(k) = 0$. $\GL_n = \GL_n(\CC) \subseteq M_n(\CC)$ ist (bzgl. der üblichen Topologie) eine offene Teilmenge. Später betrachten wir die viel gröbere \Index{Zariski-Topologie}. \\
+	Sei $m = n^2$ und $\aff^m \subseteq \CC^m$ ein $m$-dimensionaler affiner Vektorraum. Wir können $\GL_n(\CC)$ auch folgendermaßen charakterisieren:
+	\[ \GL_n(\CC) = M_n(\CC) \setminus V(\det = 0), \]
+	wobei $V(f = 0) = \{x \in \aff^m : f(x) = 0 \}$ die Nullstellenmenge oder \Index{Verschwindungsmenge} der polynomialen Funktion $f\colon \aff^m \rightarrow \CC$, $f \in k[x_1,\dots,x_m]$ bezeichnet.
+	\item \textbf{Beispiel:} Sei $\aff^m = M_n(\CC)$. $G := \GL_n(\CC)$ ist eine Gruppe. Können wir die Gruppenverknüpfung, die Inversenbildung und das neutrale Element als polynomiale Funktion auffassen? \setlength{\arraycolsep}{1pt}
+	\[ \begin{array}{rrclcrrclcrrcl}
+		\mu\colon & G \times G & \longrightarrow & G & \phantom{abstand} & i\colon & G & \longrightarrow & G & \phantom{abstand} & e\colon & \{x\} & \longrightarrow & G \\
+		 & (g,h) & \longmapsto & gh & & & g & \longmapsto & g^{-1} & & & x & \longmapsto & e = \ind_n
+	\end{array} \]
+	$e$ ist offensichtlich polynomial und $\mu$ auch (vgl. Matrixmultiplikation). Jedoch ist $i$ nicht polynomial, da nach Cramerscher Regel gilt: \setlength{\arraycolsep}{3pt}
+	\[ A^{-1} = \textcolor{red}{\frac{1}{\det(A)}} \cdot \operatorname{adj}(A) \]
+	Daher müssen wir auch Quotienten polynomialer Abbildungen mit Nenner ungleich 0 zulassen.
+\end{enumerate}
+
+\minisec{Idee}
+	Eine lineare algebraische Gruppe ist abgeschlossen in $\GL_n$ und die Gruppenabbildungen sind Quotienten polynomialer Abbildungen, sodass folgende Eigenschaften erfüllt sind (d.h. die folgenden Diagramme sind kommutativ):
+	\begin{itemize}
+		\item Assoziativität: $\mu \circ (\mu,\id) = \mu \circ (\id,\mu)$
+		\[ \begin{tikzcd}
+		G \times G \times G \rar{(\mu,\id)} \dar{(\id,\mu)} & G \times G \dar{\mu} \\
+		G \times G \rar{\mu} & G
+		\end{tikzcd} \qquad	\begin{tikzcd}
+		(g,h,l) \rar[mapsto] \dar[mapsto]& (gh, l) \arrow[d,end anchor={[xshift=-1.5em,yshift=-0.5em]north east},mapsto]\\
+		(g, hl) \rar[mapsto] & g(hl) \stackrel{!}{=} (gh)l
+		\end{tikzcd} \]
+		\item Inverse: $e \circ p = \mu \circ (\id,i) \circ \Delta$ bzw. $e \circ p = \mu \circ (i,\id) \circ \Delta$
+		\[ \begin{tikzcd}
+		\mbox{} & G \times G \dar{(\id, i)} \\
+		G \rar \dar{p}  \urar{\Delta} & G \times G \dar{\mu} \\
+		\{x\}  \rar{e} & G
+		\end{tikzcd} \qquad	\begin{tikzcd}
+		\mbox{} & (g,g) \dar[mapsto] \\
+		g \rar[mapsto] \urar[mapsto] \dar[mapsto]& (g, g ^{-1}) \arrow[d,end anchor={[xshift=0.5em,yshift=-0.5em]},mapsto] \\
+		e \rar[mapsto]& e \stackrel{!}{=} g \cdot g ^{-1}
+		\end{tikzcd} \]
+		\item Neutrales Element: $\mu \circ (e,\id) = \id = \mu \circ (\id,e)$
+		\[ \begin{tikzcd}
+		G \rar{(e,\id)} \arrow[bend right, swap,end anchor={[xshift=0.5em]}]{rr}{\id} & G \times G \rar{\mu} &  G
+		\end{tikzcd} \qquad \begin{tikzcd}
+		g \rar[mapsto] \arrow[bend right,mapsto,end anchor={[xshift=2.5em]}]{rr} & (e,g) \rar[mapsto] & eg \stackrel{!}{=} g
+		\end{tikzcd} \]
+	\end{itemize}
+	
+\begin{defn}[polynomiale und rationale Funktion]
+	$f \colon \aff^n \rightarrow \aff^m$ heißt \bet{polynomial} bzw. \bet{Morphismus affiner Varietäten}, falls
+	\[ (f_1(x_1,\dots,x_n),\dots,f_m(x_1,\dots,x_n)) = f(x_1,\dots,x_n) \]
+	mit $f_j \in k[x_1,\dots,x_n]$ für alle $j \in \{1,\dots,n\}$. \index{polynomiale Funktion} \index{Morphismus!affiner Varietäten} \\	
+	Sei $U \subseteq \aff^n$ offen (im klassischen Sinne oder bzgl. Zarski-Topologie). $f\colon U \rightarrow \aff^m$ heißt \bet{polynomial}, falls $f = \frac{h}{g}$ mit $h,g \in k[x_1,\dots,x_n]$ und $g(x) \neq 0$ für alle $x \in U$. \hfill $\lceil f_j = \frac{h_j}{g_j}$ komponentenweise$\rfloor$ \\
+	$f$ wie oben heißt \bet{rational}, fall $f = \frac{h}{g}$ wie oben mit $g \not\equiv 0$ auf $U$. $f$ ist im Allgemeinen keine Abbildung, sondern nur auf $U \setminus V(g = 0)$ definiert. \index{rationale Funktion}
+\end{defn}
+
+\begin{bsp}[Beispiele für polynomiale und rationale Funktionen]
+	\begin{itemize}
+		\item $\GL_n \rightarrow \GL_n$ mit $g \mapsto g^{-1}$ ist polynomial, $M_n \rightarrow M_n$ mit \glqq$g \mapsto g^{-1}$\grqq \ ist rational.
+		\item $\det\colon \GL_n \rightarrow \CC$ und $\det\colon M_n \rightarrow \CC$ ist polynomial
+		\item $\det^{-1}\colon M_n \rightarrow \CC$ ist rational und  $\det^{-1}\colon \GL_n \rightarrow \CC$ ?
+		\item $\aff^1 = \CC \rightarrow \CC^\times$ mit $z \mapsto e^{2\pi i z}$ ist nicht polynomial
+	\end{itemize}
+\end{bsp}
 \newpage
