@@ -1,0 +1,135 @@
+\input{../!config/mitschrift.tex}
+\newcommand{\fach}{Differentialgeometrie \RM{1}.}
+\newcommand{\semester}{WiSe 2014}
+\newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/frederik.witt/diffgeoI.html}
+\newcommand{\prof}{Frederik Witt}
+\input{../!config/mitschrift_headings.tex}
+
+
+\begin{document}
+\pagenumbering{Roman}
+\maketitle
+\begin{abstract}
+\input{../!config/vorwort.tex}
+\begin{description}
+	\item[1. Differentialgeometrie] Mannigfaltigkeiten $\Rightarrow $ Differentialtopologie
+	\item[2. Riemannsche Geometrie] Längen und Winkel messen $\leadsto$ Geodäte (lokal) kürzeste Verbindung zwischen 2 Punkten einer Mannigfaltigkeit.
+	
+	Krümmung
+	
+	Allgemeine Relativitätstheorie: Krümmung = Gravitation ist für solche Effekte verantwortlich
+\end{description}
+\end{abstract}
+
+\setcounter{page}{1}
+\tableofcontents
+\cleardoubleoddemptypage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\section{Differenzierbare Mannigfaltigkeiten} % (fold)
+\label{sec:1}
+Konvention: glatt = $C^\infty$
+
+Diffeomorphismus $f : U \subseteq \mathds{R}^n \to \mathds{R}^n$ glatt, bijektiv und $f ^{-1}$ glatt.
+
+\subsection{Untermannigfaltigkeiten} % (fold)
+\label{sub:11}
+
+\subsubsection{Definition} % (fold)
+\label{ssub:111}
+Eine Abbildung $f : U \subseteq \mathds{R}^n \to \mathds{R}^m$ glatt heißt \Index{Submersion}/\Index{Immersion}/\Index{Etale} in $x \in U$, falls
+$\mathd_x f : \mathds{R}^n \to \mathds{R}^m$ surjektiv/injektiv/Isomorphismus ist. \marginnote{Insbesondere $n\ge m$/$n \le m$/$n=m$}. $f$ heißt schlechthin
+\bet{Submersion}/\bet{Immersion}/\bet{Etale}, falls $f$ Submersion/Immersion/Etale für alle $x \in U$ ist.
+% subsubsection 111 (end)
+
+\subsubsection{Bemerkung} % (fold)
+\label{ssub:112}
+Submersiv/immersiv/étale sind offene Bedingungen, d.h. ist $f$ Submersion/Immersion/Etale in $x$, so auch in einer hinreichend kleinen Umgebung von $x$ (vergleiche auch Satz 
+15 unten)
+% subsubsection 112 (end)
+
+\subsubsection{Satz über inverse Funktionen (inverse function theorem)} % (fold)
+\label{ssub:113}
+Sei $f : U \subseteq \mathds{R}^n \to \mathds{R}^m$ étale in $x$. Dann existiert eine offene Menge $x \in V \subset U \subset \mathds{R}^n$, sodass $f\big|_{V}$ ein
+Diffeomorphismus auf seinem Bild ist, d.h. $f\big|_{V} : V \xrightarrow{\sim} f(V) $ ist bijektiv und $f\big|_V$, $(f\big|_V)^{-1}$ glatt.
+% subsubsection 113 (end)
+
+\subsubsection{Satz über implizite Funktionen (implicit function theorem)} % (fold)
+\label{ssub:114}
+Sei $f : U \subset \mathds{R}^{n+k} \to \mathds{R}^n$ eine Submersion in $0$ mit $f(0)=0$. Dann existiert eine glatte Funktion $g$ auf einer Umgebung von $0 \in \mathds{R}^n$
+mit Werten in $\mathds{R}^k$, d.h.
+\[
+	g=g(x_1, \ldots , x_n) = \begin{pmatrix}
+		g_1(x_1, \ldots ,x_n) \\
+		\vdots \\
+		g_k(x_1, \ldots ,x_n)
+	\end{pmatrix}
+\]
+mit
+\[
+	f \enbrace[\big]{x_1, \ldots ,x_n , g_1(x_1, \ldots , x_n), \ldots , g_k(x_1, \ldots ,x_n)} = f \enbrace[\big]{x,g(x)} = 0
+\]
+% subsubsection 114 (end)
+
+\subsubsection{Satz (Normalenformen von Submersionen/Immersionen)} % (fold)
+\label{ssub:115}
+\begin{enumerate}[a)]
+	\item Sei $f : U \subseteq \mathds{R}^{n+k} \to \mathds{R}^n$ eine Submersion mit $f(0)=0$. Dann existiert ein Diffeomorphismus 
+	$\varphi : 0 \in V \subset \mathds{R}^{n+k} \to \mathds{R}^{n+k}$ mit $\varphi(V) \subset U$ und 
+	$f \circ \varphi(x_1, \ldots , x_{n+k}) = (x_1, \ldots , x_n) = \pi_{\mathds{R}^n}(x_1, \ldots , x_{n+k})$, d.h. modulo einer Diffeomorphismus ist jede Submersion 
+	äquivalent zu einer Projektion.
+	\item Sei $f : U \subset \mathds{R}^n \to \mathds{R}^{n+k}$ eine Immersion in $0$, $f(0)=0$. Dann existiert ein Diffeomorphismus 
+	\[
+		\varphi : 0 \in V \subset \mathds{R}^n \to \mathds{R}^{n+k}
+	\]
+	mit $\varphi(0)=0$ und 
+	\[
+		\varphi \circ f (x_1, \ldots ,x _n) = \enbrace*{x_1, \ldots , x_n, 0 , \ldots , 0} = i(x_1, \ldots , x_n) 
+	\]
+	d.h. modulo Diffeomorphismen ist $f$ äquivalent zur kanonischen Einbettung von $\mathds{R}^n \hookrightarrow \mathds{R}^{n+k}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Wähle Koordinaten $x_1, \ldots , x_n$ mit $\mathd_0 f = (A \, B)$ mit $A \in \mathds{R}^{n \times n}$, $B \in \mathds{R}^{k \times n}$ mit $\det A \not= 0$.
+	Definiere $F : U \subset \mathds{R}^n \times \mathds{R}^k \to \mathds{R}^n \times \mathds{R}^k $ durch $(p,q) \mapsto \enbrace*{f(p,q), q}$. Dann gilt
+	\[
+		\mathd_{(0,0)} F = \begin{pmatrix}
+			\mathd_0 f & \\
+			0 & \id_{k \times k}
+		\end{pmatrix} = \begin{pmatrix}
+			A & B \\
+			0 & \id_{k \times k} 
+		\end{pmatrix}
+		\Longrightarrow \det \mathd_0 F \not= 0
+	\]
+	Mit \ref{ssub:113} folgt: $\varphi = F ^{-1}$ Diffeomorphismus um $0 \in \mathds{R}^{n+k}$ herum.
+	\item Definiere $F : U \times \mathds{R}^k \to \mathds{R}^n \times \mathds{R}^k$. $F(p,q) = f(p)+ (0,q)$.
+	\[
+		\mathd_{(0,0)} F = \begin{pmatrix}
+			\mathd_0 f & 0 \\
+			0 & \id_{k \times k}
+		\end{pmatrix},
+	\]
+	also $\det \mathd_{(0,0)} F \not= 0$. $\Rightarrow  \exists \varphi = F ^{-1}$ um $0$ mit $\varphi(f(p))=\varphi \circ F (p,0) = (p,0) = i(p)$ \bewende
+\end{enumerate}
+\minisec{Bemerkung}
+Durch Komposition mit Translationen können Submersionen/Immersionen mit $F(x)=y$ (nicht notwendigerweise $=0$) behandelt werden.
+% subsubsection 115 (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:116}
+$M \subset \mathds{R}^{n+k}$ heißt $n$-dimensionale \Index{Untermannigfaltigkeit}, falls $\forall x \in M : \exists x \in U \subset \mathds{R}^{n+k}$ Umgebung, sowie eine
+Submersion $f : U \to \mathds{R}^k$ mit $U \cap M = f ^{-1}(0)$.
+% subsubsection 116 (end)
+% subsection 11 (end)
+% section 1 (end)
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\end{document}
