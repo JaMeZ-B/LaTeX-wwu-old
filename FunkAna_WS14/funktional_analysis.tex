@@ -19,6 +19,81 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+\section{Metrische Räume und der Satz von Baire} % (fold)
+\label{sec:1}
+
+\subsection[Definition: Metrischer Raum]{Definition} % (fold)
+\label{sub:11}
+Ein \Index{metrischer Raum} ist ein Paar $(X,d)$, wobei $X$ eine Menge und $d : X \times X \to [0,\infty)$ ist, sodass\marginnote{14 Okt}
+\begin{enumerate}[1)]
+	\item $d(x,y)=0 \iff x=y$ $\forall x,y \in X$
+	\item $d(x,y) = d(y,x)$ $\forall x,y \in X$
+	\item $d(x,z) \le d(x,y) + d(y,z)$ $\forall x,y,z \in X$
+\end{enumerate}
+% subsection 11 (end)
+
+\subsection[Definition: Offen und abgeschlossen]{Definition} % (fold)
+\label{sub:12}
+Sei $(X,d)$ ein metrischer Raum
+\begin{itemize}
+	\item Eine Teilmenge $U \subseteq X$ heißt \Index{offen}, falls für jedes $x \in U$ ein $\varepsilon > 0$ existiert, so dass 
+	\[
+		B(x,\varepsilon) := \set[y \in X]{d(x,y) < \varepsilon} \subset U 
+	\]
+	\item Eine Teilmenge $A \subset X$ heißt \Index{abgeschlossen}, falls $X \setminus A$ offen ist (als Teilmenge von $X$). 
+	\item $\mathcal{T}X := \set[U \subset X]{U \text{ offen}} $ ist die Topologie auf $X$ (die von der Metrik $d$ induziert wird)
+	\item Falls $W \subset X$ eine Teilmenge ist, dann bezeichnet $\overline{W}$ den \Index{Abschluss} von $W$, d.h. die kleinste abgeschlossene Teilmenge von $X$, die 
+	$W$ enthält.
+	\[
+		\overline{W} = \bigcap_{\mathclap{A \subset X \text{abg.}, W \subset A}} A 
+	\] 
+\end{itemize}
+Für metrische Räume gilt:
+\[
+	\overline{W} = \set[\lim_n x_n]{(x_n)_n \subset W \text{ konvergente Folge}}
+\]
+Warum gilt $W \subset \overline{W}$?
+% subsection 12 (end)
+
+\subsection[Definition: Stetigkeit, gleichmäßige Stetigkeit, Isometrie]{Definition} % (fold)
+\label{sub:13}
+Eine Abbildung $f : X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,d_Y)$ heißt 
+\begin{itemize}
+	\item \bet{stetig in} $x \in X$, falls: 
+	\[
+		\forall \varepsilon >0 : \exists \delta >0 : \forall x' \in X : d_X(x,x') < \delta  \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon 
+	\]
+	\item \Index{stetig}, falls $f$ an jedem Punkt $x \in X$ stetig ist.
+	
+	(Äquivalent: Für jede offene Menge $V$ in $Y$ ist $f ^{-1}(V)$ offen in $X$) 
+	\item \Index{gleichmäßig stetig}
+	\[
+		\forall \varepsilon>0 : \exists \delta >0 : \forall x,x' \in X : d_X(x,x') < \delta \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon .
+	\] 
+	\item $f$ heißt \Index{Isometrie}, falls \marginnote{automatisch injektiv}
+	\[
+		\forall x,x' \in X : d_X(x,x') = d_Y \enbrace[\big]{f(x), f(x')}.
+	\]
+	\item $f$ heißt \Index{isometrischer Isomorphismus}, falls $f$ bijektiv und isometrisch ist. \marginnote{$f ^{-1}$ auch}
+\end{itemize}
+% subsection 13 (end)
+
+\subsection[Definition: Cauchyfolge und Vollständigkeit]{Definition} % (fold)
+\label{sub:14}
+Eine Folge $(x_n)_{n \in \mathds{N}}$ in einem metrischen Raum $(X,d)$ heißt \bet{Cauchy}\index{Cauchy-Folge}, falls
+\[
+	\forall \varepsilon>0 : \exists N \in \mathds{N} : \forall n,k >N : d(x_n,x_k) < \varepsilon.
+\]
+$(X,d)$ heißt \Index{vollständig}, falls jede Cauchyfolge in $X$ konvergiert. 
+% subsection 14 (end)
+
+\subsection[Satz: Existenz einer eindeutigen Vervollständigung metrischer Räume]{Satz} % (fold)
+\label{sub:15}
+Sei $(X,d)$ ein metrischer Raum. Dann existiert ein vollständiger metrischer Raum $(\tilde{X}, \tilde{d})$ und eine Isometrie $\iota : X \hookrightarrow \tilde{X}$, sodass
+$\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(\tilde{X}, \tilde{d})$ heißt \Index{Vervollständigung} von $(X,d)$ und ist eindeutig bis auf
+isometrische Isomorphie.
+% subsection 15 (end)
+% section 1 (end)
 
 
 
