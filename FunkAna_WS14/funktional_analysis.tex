@@ -78,13 +78,13 @@ Eine Abbildung $f : X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,
 \end{itemize}
 % subsection 13 (end)
 
-\subsection[Definition: Cauchyfolge und Vollständigkeit]{Definition} % (fold)
+\subsection[Definition: Cauchy-Folge und Vollständigkeit]{Definition} % (fold)
 \label{sub:14}
 Eine Folge $(x_n)_{n \in \mathds{N}}$ in einem metrischen Raum $(X,d)$ heißt \bet{Cauchy}\index{Cauchy-Folge}, falls
 \[
 	\forall \varepsilon>0 : \exists N \in \mathds{N} : \forall n,k >N : d(x_n,x_k) < \varepsilon.
 \]
-$(X,d)$ heißt \Index{vollständig}, falls jede Cauchyfolge in $X$ konvergiert. 
+$(X,d)$ heißt \Index{vollständig}, falls jede Cauchy-Folge in $X$ konvergiert. 
 % subsection 14 (end)
 
 \subsection[Satz: Existenz einer eindeutigen Vervollständigung metrischer Räume]{Satz} % (fold)
@@ -92,7 +92,69 @@ $(X,d)$ heißt \Index{vollständig}, falls jede Cauchyfolge in $X$ konvergiert.
 Sei $(X,d)$ ein metrischer Raum. Dann existiert ein vollständiger metrischer Raum $(\tilde{X}, \tilde{d})$ und eine Isometrie $\iota : X \hookrightarrow \tilde{X}$, sodass
 $\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(\tilde{X}, \tilde{d})$ heißt \Index{Vervollständigung} von $(X,d)$ und ist eindeutig bis auf
 isometrische Isomorphie.
+\minisec{Beweis}
+\todo{Übungen einarbeiten, sobald möglich}
+\begin{description}
+	\item[Eindeutigkeit:] Angenommen, $(\hat{X}, \hat{d})$ ist ein weiterer vollständiger metrischer Raum und $\kappa : X \to \hat{X}$ eine Isometrie mit 
+	$\overline{\kappa(X)}=\hat{X}$. Definiere $\gamma : \hat{X} \to \tilde{X}$ wie folgt: Falls $y \in \hat{X}$, wähle eine Folge $(x_n)_{n \in \mathds{N}}$ in $X$, sodass
+	$y= \lim_{n \to \infty} \kappa(x_n)$. Setze nun \marginnote{(Übung)}
+	\[
+		\gamma(y) := \lim_{ n \to \infty} \iota(x_n) \in \tilde{X} 
+	\]
+	\item[Existenz:] Setze $Y := \set[(x_n)_{n \in \mathds{N}}]{(x_n)_n \text{ ist Cauchy-Folge in }X}$. Definiere eine Relation $\sim$ auf $Y$ durch:
+	\[
+		(x_n)_n \sim (x_n') :\iff \lim_{ n \to \infty} d(x_n, x_n') = 0
+	\]
+	Übung: $\sim$ ist eine Äquivalenzrelation. Definiere $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} :  \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
+	\[
+		\tilde{d} \enbrace*{\benbrace[\big]{(x_n)_n} , \benbrace[\big]{(x_n')_n}  } := \lim_{ n \to \infty} d(x_n , x_n') 
+	\]
+	Übung: $\tilde{d}$ ist wohldefiniert, ist Metrik, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann ist
+	$\lim d(x_n , x_n') = \lim d(y_n, y_n')$, $\enbrace*{d(x_n x_n')}_n$ ist Cauchy-Folge in $[0,\infty)$.
+	
+	Definiere nun $\iota : X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
+	\[
+		d(x,y) = \tilde{d} \enbrace[\big]{\iota(x),\iota(y)} = \lim_{ n \to \infty} d(x,y) 
+	\]
+	Falls $\benbrace*{(x_n)_n} \in \tilde{X}$, finde $y_k \in \iota(X)$, so dass $\benbrace*{(x_n)} = \lim_{ k} y_k$ und $y_k = \benbrace*{(x_k, x_k, \ldots )}= \iota(x_k)$.
+	Dann gilt $y_k \xrightarrow{k \to \infty} \benbrace*{(x_n)_n} $, d.h. 
+	\[
+		\lim_{ n \to \infty} d(x_k,x_n) = \tilde{d} \enbrace*{y_k, \benbrace*{(x_n)_n}} \xrightarrow{k \to \infty} 0
+	\]
+	$\leadsto \tilde{X}= \overline{\iota(X)}$. Übung: $(\tilde{X}, \tilde{d})$ ist vollständig. \bewende
+\end{description}
 % subsection 15 (end)
+
+\subsection[Definition: Raum der beschränkten, stetigen Abbildungen]{Definition} % (fold)
+\label{sub:16}
+Sei $(W,\mathcal{T})$ ein topologischer Raum und $(X,d)$ ein metrischer Raum. Sei 
+\[
+	C_b(W,X) = \set[f : W \to X]{f \text{ stetig und beschränkt}} 
+\]
+versehen mit der Metrik $d_{W,X}$, definiert durch
+\[
+	d_{W,X} = \sup_{t \in W} d \enbrace[\big]{f(t), g(t)} 
+\]
+% subsection 16 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:17}
+Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \enquote{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
+$\tilde{d}_{W,X} := \min \set{1, d_{W,X}} $ ist eine \enquote{echte} Metrik auf $C(W,X)$.
+% subsection 17 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:18}
+Falls $X$ vollständig ist, dann sind $C_b(W,X)$ und $C(W,X)$ vollständig (bezüglich $d_{W,X}$ bzw. $\tilde{d}_{W,X}$).
+\minisec{Beweis}
+Übung.
+% subsection 18 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:19}
+Sei $(X,d)$ ein vollständiger metrischer Raum und $\enbrace*{\overline{B}(x_n, \varepsilon_n)}_{n \in \mathds{N}}$ mit $\overline{B}(x_{n+1}, \varepsilon_{n+1}) \subseteq \overline{B}(x_n,\varepsilon_n)$ und $\varepsilon_n \xrightarrow{n \to \infty} 0$. Dann existiert genau ein Punkt in 
+$\bigcap_{n \in \mathds{N}} \overline{B}(x_n, \varepsilon_n)$.
+% subsection 19 (end)
 % section 1 (end)
 
 
