@@ -9,6 +9,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 * WiSe 2014
 	* [Topologie I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo1_WS14/topologie_1.pdf?raw=true "Topologie I.") (Jannes)
 	* [Funktionalanalysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/FunkAna_WS14/funktional_analysis.pdf?raw=true "Funktionalanalysis") (Jannes)
+	* [Höhere Algebra II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg2_WS14/HAlg2-Phil.pdf?raw=true "Höhere Algebra") (Phil)
 	* [Elementare Zahlentheorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EZT_WS14/EZT.pdf?raw=true "Elementare Zahlentheorie") (Phil)
 * SoSe 2014
 	* [Höhere Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg1_SS14/hoehere_algebra.pdf?raw=true "Höhere Algebra I.") (Jannes)
