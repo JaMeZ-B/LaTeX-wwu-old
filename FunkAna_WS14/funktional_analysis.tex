@@ -59,21 +59,21 @@ Warum gilt $W \subset \overline{W}$?
 \label{sub:13}
 Eine Abbildung $f : X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,d_Y)$ heißt 
 \begin{itemize}
-	\item \bet{stetig in} $x \in X$, falls: 
-	\[
+	\item \bet{stetig in} $x \in X$, falls
+	\(
 		\forall \varepsilon >0 : \exists \delta >0 : \forall x' \in X : d_X(x,x') < \delta  \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon 
-	\]
+	\)
 	\item \Index{stetig}, falls $f$ an jedem Punkt $x \in X$ stetig ist.
 	
 	(Äquivalent: Für jede offene Menge $V$ in $Y$ ist $f ^{-1}(V)$ offen in $X$) 
-	\item \Index{gleichmäßig stetig}
-	\[
+	\item \Index{gleichmäßig stetig}, falls
+	\(
 		\forall \varepsilon>0 : \exists \delta >0 : \forall x,x' \in X : d_X(x,x') < \delta \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon .
-	\] 
+	\) 
 	\item $f$ heißt \Index{Isometrie}, falls \marginnote{automatisch injektiv}
-	\[
+	\(
 		\forall x,x' \in X : d_X(x,x') = d_Y \enbrace[\big]{f(x), f(x')}.
-	\]
+	\)
 	\item $f$ heißt \Index{isometrischer Isomorphismus}, falls $f$ bijektiv und isometrisch ist. \marginnote{$f ^{-1}$ auch}
 \end{itemize}
 % subsection 13 (end)
@@ -94,34 +94,87 @@ $\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(
 isometrische Isomorphie.
 \minisec{Beweis}
 \begin{description}
-	\item[Eindeutigkeit:] \todo{Übungen einarbeiten, sobald möglich}
+	\item[Eindeutigkeit:] 
 	Angenommen, $(\hat{X}, \hat{d})$ ist ein weiterer vollständiger metrischer Raum und $\kappa : X \to \hat{X}$ eine Isometrie mit 
 	$\overline{\kappa(X)}=\hat{X}$. Definiere $\gamma : \hat{X} \to \tilde{X}$ wie folgt: Falls $y \in \hat{X}$, wähle eine Folge $(x_n)_{n \in \mathds{N}}$ in $X$, sodass
-	$y= \lim_{n \to \infty} \kappa(x_n)$. Setze nun \marginnote{(Übung)}
+	$y= \lim_{n \to \infty} \kappa(x_n)$. Setze nun
 	\[
 		\gamma(y) := \lim_{ n \to \infty} \iota(x_n) \in \tilde{X} 
 	\]
-	\item[Existenz:] Setze $Y := \set[(x_n)_{n \in \mathds{N}}]{(x_n)_n \text{ ist Cauchy-Folge in }X}$. Definiere eine Relation $\sim$ auf $Y$ durch:
+	Zu zeigen: $\gamma$ ist ein isometrischer Isomorphismus.\todo{Achtung Wortspiel: Beweis \emph{vervollständigen} ;-D}
+	\begin{description}
+		\item[Injektivität:] Seien $y,y' \in \hat{X}$ mit $\gamma(y)=\gamma(y')$. Dann existieren Folgen $(x_n)_n, (x_n')_n$ in $X$ mit
+		\[
+			\lim_{ n \to \infty} \iota(x_n) = \lim_{ n \to \infty} \iota(x_n') 
+		\]
+	\end{description}
+	\item[Existenz:] \begin{description}
+		\item[Konstruktion von $(\tilde{X}, \tilde{d})$:] Setze $Y := \set[(x_n)_{n \in \mathds{N}}]{(x_n)_n \text{ ist Cauchy-Folge in }X}$. Definiere 
 	\[
 		(x_n)_n \sim (x_n') :\iff \lim_{ n \to \infty} d(x_n, x_n') = 0
 	\]
-	Übung: $\sim$ ist eine Äquivalenzrelation. Definiere $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} :  \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
+	$\sim$ ist eine Äquivalenzrelation auf $Y$. Definiere nun $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} :  \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
 	\[
 		\tilde{d} \enbrace*{\benbrace[\big]{(x_n)_n} , \benbrace[\big]{(x_n')_n}  } := \lim_{ n \to \infty} d(x_n , x_n') 
 	\]
-	Übung: $\tilde{d}$ ist wohldefiniert, ist Metrik, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann ist
-	$\lim d(x_n , x_n') = \lim d(y_n, y_n')$, $\enbrace*{d(x_n x_n')}_n$ ist Cauchy-Folge in $[0,\infty)$.
-	
-	Definiere nun $\iota : X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
+	$\tilde{d}$ ist eine wohldefiniert, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann ist
 	\[
-		d(x,y) = \tilde{d} \enbrace[\big]{\iota(x),\iota(y)} = \lim_{ n \to \infty} d(x,y) 
+		\lim_{n \to \infty} d(x_n , x_n') = \lim_{n \to \infty} d(y_n, y_n'). \tag*{(leichte Übung)}
 	\]
-	Falls $\benbrace*{(x_n)_n} \in \tilde{X}$, finde $y_k \in \iota(X)$, so dass $\benbrace*{(x_n)} = \lim_{ k} y_k$ und $y_k = \benbrace*{(x_k, x_k, \ldots )}= \iota(x_k)$.
-	Dann gilt $y_k \xrightarrow{k \to \infty} \benbrace*{(x_n)_n} $, d.h. 
+	Weiter ist $\enbrace[\big]{d(x_n x_n')}_n$ eine Cauchy-Folge in dem vollständigen Raum $[0,\infty)$ und somit 
+	konvergent: Sei dazu $\varepsilon>0$. Dann existiert ein $N \in \mathds{N}$, sodass $d(x_n,x_m) \le \frac{\varepsilon}{2}$ und $d(x_n', x_m') \le \frac{\varepsilon}{2}$ für alle $n,m \ge N$. Dann gilt nach der \hyperref[sub:vier_ungl]{Vierecksungleichung (siehe Anhang \ref*{sub:vier_ungl})}
 	\[
-		\lim_{ n \to \infty} d(x_k,x_n) = \tilde{d} \enbrace*{y_k, \benbrace*{(x_n)_n}} \xrightarrow{k \to \infty} 0
+		\abs[\big]{d(x_n,x_n') - d(x_m,x_m')} \le d(x_n, x_m) + d(x_n', x_m') \le \varepsilon
 	\]
-	$\leadsto \tilde{X}= \overline{\iota(X)}$. Übung: $(\tilde{X}, \tilde{d})$ ist vollständig. \bewende
+	\item[Einbettung von $X:$] Definiere nun $\iota : X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
+	\[
+		\tilde{d} \enbrace[\big]{\iota(x),\iota(y)} = \lim_{ n \to \infty} d(x,y) = d(x,y)
+	\]
+	% Falls $\benbrace*{(x_n)_n} \in \tilde{X}$, finde $y_k \in \iota(X)$, so dass $\benbrace*{(x_n)} = \lim_{ k} y_k$ und $y_k = \benbrace*{(x_k, x_k, \ldots )}= \iota(x_k)$.
+% 	Dann gilt $y_k \xrightarrow{k \to \infty} \benbrace*{(x_n)_n} $, d.h.
+% 	\[
+% 		\lim_{ n \to \infty} d(x_k,x_n) = \tilde{d} \enbrace*{y_k, \benbrace*{(x_n)_n}} \xrightarrow{k \to \infty} 0
+% 	\]
+% 	$\leadsto \tilde{X}= \overline{\iota(X)}$.
+	Sei nun $\benbrace*{(x_n)_n} \in \tilde{X}$ und $\varepsilon>0$. Da $(x_n)_n$ eine Cauchy-Folge ist, gibt es ein $N \in \mathds{N}$, sodass für alle
+	$n,m \ge N$ gilt $d(x_n,x_m) <\varepsilon$. Dann gilt
+	\[
+		\tilde{d}\enbrace[\big]{\iota(x_N), \benbrace*{(x_n)_n} } = \lim_{ n \to \infty} d \enbrace*{x_N, x_n} < \varepsilon
+	\]
+	\item[Vollständigkeit von $(\tilde{X}, \tilde{d})$:] Sei $\enbrace*{\overline{x}^m}_m$ eine Cauchyfolge in $\tilde{X}$.\marginnote{$\overline{x} \in \tilde{X}$}
+	\[
+		\Longrightarrow \forall \varepsilon >0 : \exists M(\varepsilon) \in \mathds{N} : \forall m,m' > M : \tilde{d} \enbrace*{\overline{x}^m, \overline{x}^{m'}} < \frac{\varepsilon}{3} 
+	\]
+	Wenn $\overline{x}^m = \benbrace*{(x^m_n)_n}$ und $\overline{x}^{m'} = \benbrace*{(x^{m'}_n)_n} $, dann gilt also für alle $m,m' >M(\varepsilon)$
+	\begin{equation*}
+		\lim_{ n \to \infty} d \enbrace*{x^m_n, x^{m'}_n} < \frac{\varepsilon}{3}  \label{eq:15:absch1}\tag{\dag}
+	\end{equation*}
+	Für alle $m$ ist $(x^m_n)_n$ eine Cauchyfolge, also gilt
+	\begin{equation*}
+		\forall m : \exists N(m) : \forall n,n' \ge N(m) : d \enbrace*{x^m_n, x^m_{n'}} < \frac{1}{m}  \label{eq:15:absch2}\tag{\dag \dag}
+	\end{equation*}
+	Setze nun $z_n := x^n_{N(n)}$. Behauptung: $(z_n)_n$ ist eine Cauchyfolge. Sei $\varepsilon>0$. Dann gilt für $n,m>N=\max\set{M(\varepsilon), \frac{3}{\varepsilon}}$
+	für ein $k > N(m), N(n)$ \marginnote{$d(z_n,z_m)$ ist unabhängig von $k$, also kann man $k$ beliebig groß wählen}
+	\begin{align*}
+		d(z_n,z_m) = d \enbrace*{x^n_{N(n)}, x^m_{N(m)}} \le 
+		\underbrace{d\enbrace*{x^n_{N(n)}, x^n_k}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{n} < \frac{1}{N} \le \frac{\varepsilon}{3}} + 
+		\underbrace{d\enbrace[\Big]{x^n_k, x^m_k}}_{\stackrel{\text{\eqref{eq:15:absch1}}}{\le} \frac{\varepsilon}{3}}   + 
+		\underbrace{d\enbrace*{x^m_k, x^m_{N(m)}}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{m} < \frac{1}{N} \le \frac{\varepsilon}{3}} 
+		< \varepsilon
+	\end{align*}
+	$\Rightarrow (z_n)_n$ ist eine Cauchyfolge, also 
+	\begin{equation*}
+		\forall \varepsilon>0 : \exists N_z(\varepsilon) : \forall n,m > N_z(\varepsilon)  : d(z_n,z_m) < \varepsilon  \label{eq:15:absch3} \tag{\#}
+	\end{equation*}
+	Es bleibt zu zeigen: $\lim_{m \to \infty} \overline{x}^m = \benbrace*{(z_n)_n}$. Sei dazu $\varepsilon>0$. Dann gilt für 
+	$m \ge \max \set{\frac{2}{\varepsilon}, N_z(\varepsilon)}$
+	\begin{align*}
+		\tilde{d} \enbrace[\big]{\overline{x}^m, \benbrace*{(z_n)_n}} = \lim_{ n \to \infty} d \enbrace*{x^m_n, x^n_{N(n)}}\le \lim_{ n \to \infty} 
+		\enbrace[\Bigg]{ \underbrace{d\enbrace*{x_n^m, x^m_{N(m)}}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{m} \le \frac{\varepsilon}{2}  } +
+		\underbrace{d\enbrace*{x^m_{N(m)}, x^n_{N(n)}}}_{=d(z_m,z_n) \stackrel{\text{\eqref{eq:15:absch3}}}{<} \frac{\varepsilon}{2} } } < \varepsilon
+	\end{align*}
+	Also gilt $\overline{x}^m \xrightarrow{m \to \infty} \benbrace*{(z_n)_n}$ und $(\tilde{X},\tilde{d})$ ist vollständig. \bewende
+	\end{description}
 \end{description}
 % subsection 15 (end)
 
@@ -139,7 +192,7 @@ versehen mit der Metrik $d_{W,X}$, definiert durch
 
 \subsection[Bemerkung: $d_{W,X}$ als Metrik auf $C(W,X)$]{Bemerkung} % (fold)
 \label{sub:17}
-Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \enquote{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
+Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \Index{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
 $\tilde{d}_{W,X} := \min \set{1, d_{W,X}} $ ist eine \enquote{echte} Metrik auf $C(W,X)$.
 % subsection 17 (end)
 
@@ -180,6 +233,30 @@ ein Punkt in $\bigcap_{n \in \mathds{N}} \overline{B}(x_n, \varepsilon_n)$.
 
 
 
+\cleardoubleoddemptypage
+\appendix
+\section{Anhang} % (fold)
+\label{sec:anhang}
+
+\subsection{Vierecksungleichung} % (fold)
+\label{sub:vier_ungl}
+Sei $(X,d)$ ein metrischer Raum und $x,y,u,v \in X$. Dann gilt
+\[
+	\abs[\big]{d(x,y) - d(u,v)} \le d(x,u) + d(y,v) 
+\]
+\minisec{Beweis}
+Einerseits gilt nach der Dreiecksungleichung
+\[
+	d(x,y) \le d(x,u) + d(u,v) + d(v,y) \quad \Longrightarrow \quad d(x,y) - d(u,v) \le d(x,u) + d(y,v)
+\]
+Andererseits aber auch
+\[
+	d(u,v) \le d(u,x) + d(x,y) + d(y,v) \quad \Longrightarrow \quad d(u,v) - d(x,y) \le d(x,u) + d(y,v)
+\]
+Insgesamt folgt also die Behauptung. \bewende
+% subsection vier_ungl (end)
+
+% section anhang (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
