@@ -37,7 +37,7 @@ Schon einmal vielen Dank an
 
 * Gautam (gdbgauda) _Höhere Algebra I._
 * Phil (phist91) _PDGL I., Höhere Algebra II., Elementare Zahlentheorie_
-* Arne (moregrey) _Differentialformen und Mannigfaltigkeiten_
+* Arne (moregrey) _Differentialformen und Mannigfaltigkeiten, Differentialgeometrie_
 
 für die Beteiligung an diesem Projekt!
 
