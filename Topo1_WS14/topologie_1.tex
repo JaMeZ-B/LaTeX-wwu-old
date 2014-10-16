@@ -142,7 +142,7 @@ Genauer: Für eine feste kleine Kategorie $\mathcal{C}$ und $\mathcal{D}$ bilden
 Kategorie $\FUN(\mathcal{C}, \mathcal{D})$.
 % subsection 16 (end)
 
-\subsection{Ausblick} % (fold)
+\subsection[Ausblick auf Kategorien und Funktoren in der algebraischer Topologie]{Ausblick} % (fold)
 \label{sub:17}
 In der algebraischen Topologie werden topologische Fragen, wie zum Beispiel, wann $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph sind, in algebraische Fragen übersetzt. Eine
 Möglichkeit für eine solche Übersetzung sind Funktoren von einer Kategorie von topologischen Räumen, z.B. $\TOP, \TOP_\bullet, \HTOP_\bullet$, in eine algebraisch Kategorie,
@@ -195,16 +195,65 @@ Eine \Index{simpliziale Abbildung} $f : K_1=(V_1, \Sigma_1) \to K_2(V_2, \Sigma_
 $f(\sigma_1) \in \Sigma_2$ für alle $\sigma_1 \in \Sigma_1$. 
 % subsection 25 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Geometrische Realisierung]{Definition} % (fold)
 \label{sub:26}
 Sei $\sigma$ eine endliche Menge. Sei $\mathds{R}^\sigma = \prod_{v \in \sigma} \mathds{R}$ mit der Produkttopologie. Sei nun 
 \[
-	\abs*{\Delta^\sigma} := \set[x=(x_v)_{v \in \sigma} \in \mathds{R}^\sigma]{\sum_{v \in \sigma}x_v = 1 , x_v \in [0,1] \forall v \in \sigma}  
+	\abs*{\Delta^\sigma} := \set[x=(x_v)_{v \in \sigma} \in \mathds{R}^\sigma]{\sum_{v \in \sigma}x_v = 1 , x_v \in [0,1] \, \forall v \in \sigma}  
 \]
 Ist $\tau \subseteq \sigma$ so erhalten wir eine Abbildung $\iota_\tau^\sigma : \abs*{\Delta^\tau}  \to \abs*{\Delta^\sigma}$ indem wir 
-$(x_v)_{v \in \tau} \in \abs*{\Delta^\tau}$ durch $x_v=0$ für $v \in \sigma \setminus \tau$ zu $(x_v)_{v \in \tau}$ auffüllen. Ist $\eta \subseteq \tau \subseteq \sigma$ 
+$(x_v)_{v \in \tau} \in \abs*{\Delta^\tau}$ durch $x_v=0$ für $v \in \sigma \setminus \tau$ zu $(x_v)_{v \in \sigma}$ auffüllen. Ist $\eta \subseteq \tau \subseteq \sigma$ 
 so gilt $\iota^\sigma_\eta = \iota_\tau^\sigma \circ  \iota_\eta^\tau$.
+
+Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Die \Index{geometrische Realisierung} $\abs*{K}$ von $K$ ist definiert als 
+\[
+	\abs*{K} := \coprod_{\sigma \in \Sigma} \set{\sigma} \times \abs*{\Delta^\sigma} \Big/ \sim
+\] 
+wobei $\sim$ die durch $(\tau, x) \sim (\sigma, \iota_\tau^\sigma(x))$ für $\tau \subseteq \sigma$ erzeugte Äquivalenzrelation ist. Versehen mit der Quotiententopologie ist
+$\abs*{K}$ ein topologischer Raum.
 % subsection 26 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:27}
+\begin{itemize}
+	\item Sei $\partial \Delta^n := \enbrace*{\set{0, \ldots ,n}, \mathcal{P} \enbrace*{\set{0,\ldots ,n}} \setminus \set{\emptyset, \set{0, \ldots , n}}} = $ 
+	\enquote{$\Delta^n \setminus \set{0,\ldots ,n}$}. Dann gilt\todo{Texte durch Zeichnungen ersetzen}
+	\begin{align*}
+		\abs*{\partial \Delta^1} &= \text{ ein Punkt} \cong S^0\\ 
+		\abs*{\partial \Delta^2} &=  \text{ ein Dreieck} \cong S^1 \\
+		\abs*{\partial \Delta^3} &= \text{ eine Pyramide} \cong S^2 
+	\end{align*}
+	Allgemein gilt $\abs*{\partial \Delta^n} \cong S^{n-1}$.
+	\item $T^2 = S^1 \times S^1 \cong \text{ Bild Torus} \cong \text{ Zeichnung aus Skript}$ 
+\end{itemize}
+% subsection 27 (end)
+
+\subsection[Definition: Polyeder]{Definition} % (fold)
+\label{sub:28}
+Ein topologischer Raum $X$ heißt ein \Index{Polyeder}, falls er homöomorph zur Realisierung eines simplizialen Komplexes ist. 
+% subsection 28 (end)
+
+\subsection[Definition: Euler-Charakteristik]{Definition} % (fold)
+\label{sub:29}
+Sei $K=(V,\Sigma)$ ein endlicher simplizialer Komplex. Sei $a_n := \# \set[\sigma \in \Sigma]{\sigma \text{ ist ein $n$-Simplex von $K$}} $. Dann heißt 
+$\chi(K) := \sum_{n \in \mathds{N}} (-1)^n a_n $ die \Index{Euler-Charakteristik} von $K$. 
+\minisec{Beispiel}
+\begin{align*}
+	\chi(\text{Dreieck}) &= 3 -3 = 0 \\
+	\chi(\text{Viereck}) &= 4-4 =0 \\
+	\chi(n\text{-eck}) &= n-n = 0
+\end{align*}
+\begin{align*}
+	\chi(\partial \Delta^3 &= \text{Dreieckspyramide}) = 4 - 6 +4 = 2 \\
+	\chi\enbrace*{\text{Würfel}} &= 8 -12 +6 = 2 \\
+	\chi(\text{Oktaeder}) &= 6- 12  +8 = 2 
+\end{align*}
+% subsection 29 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:210}
+Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'}$, so gilt $\chi(K)= \chi(K')$.
+% subsection 210 (end)
 % section 2 (end)
 \newpage
 
