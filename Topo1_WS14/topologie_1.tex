@@ -117,7 +117,7 @@ $\mathcal{D}$ und ordnet jedem Morphismus $f : C \to C'$ in $\mathcal{C}$ einen 
 \minisec{Bemerkung}
 \begin{itemize}
 	\item Ist $F : \mathcal{C} \to \mathcal{D}$ ein Funktor so schreiben wir oft kürzer und ungenauer $f_* := F(f)$.
-	\item Kategorien und Funktoren bilden die Kategorie $\KAT$.
+	\item Kleine Kategorien und Funktoren bilden die Kategorie $\KAT$.
 \end{itemize}
 % subsection 15 (end)
 
@@ -138,8 +138,8 @@ Natürliche Transformationen lassen sich komponieren. Für $\tau : F \to G$, $\e
 \[
 	(\eta \circ \tau)_C :=  \eta_C \circ \tau_C : F(C) \to H(C)
 \]
-Genauer: Für festes $\mathcal{C}$ und $\mathcal{D}$ bilden die Funktoren $\mathcal{C} \to \mathcal{D}$ mit den natürlichen Transformationen eine Kategorie
-$\FUN(\mathcal{C}, \mathcal{D})$.
+Genauer: Für eine feste kleine Kategorie $\mathcal{C}$ und $\mathcal{D}$ bilden die Funktoren $\mathcal{C} \to \mathcal{D}$ mit den natürlichen Transformationen eine 
+Kategorie $\FUN(\mathcal{C}, \mathcal{D})$.
 % subsection 16 (end)
 
 \subsection{Ausblick} % (fold)
@@ -155,7 +155,56 @@ dass diese oft schwierig zu berechnen ist. Wir werden in dieser Vorlesung weiter
 
 \section{Kombinatorische Beschreibungen topologischer Räume} % (fold)
 \label{sec:2}
+\subsection{Beispiel} % (fold)
+\label{sub:21}
+\Index{Graphen} sind einerseits topologische Räume und andererseits kombinatorische Objekte:
+\missingfigure{Hier kommen noch zwei Graphen sowohl mit Ecken und Kanten hin} 
+% subsection 21 (end)
 
+\subsection[Definition: Simplizialer Komplex]{Definition} % (fold)
+\label{sub:22}
+Ein \Index{simplizialer Komplex} $K=(V, \Sigma)$ besteht aus einer Menge $V$ und einer Menge $\Sigma$ von nichtleeren, endlichen Teilmengen von $V$, sodass gilt
+\begin{enumerate}[(i)]
+	\item $\set{v} \in \Sigma$ für alle $v \in V$
+	\item $\sigma \in \Sigma$, $\emptyset \not= \tau \subseteq \sigma \Longrightarrow \tau \in\Sigma.$
+\end{enumerate}
+Die Elemente von $V$ heißen die \Index{Ecken} oder \Index{Vertices} von $K$. Die Elemente von $\Sigma$ heißen die \Index{Simplizes} von $K$. Enthält $\sigma \in \Sigma$ 
+genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$n$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
+
+Ist $V$ geordnet, so heißt $K$ geordnet. Ist $V$ endlich, so heißt $K$ endlich.
+% subsection 22 (end)
+
+\subsection[Beispiel für simpliziale Komplexe]{Beispiel} % (fold)
+\label{sub:23}
+\missingfigure{Ein weiterer Graph mit den Mengen $V$ und $\Sigma$}
+Ist $\sigma$ eine endliche Menge, so heißt $\Delta^\sigma := \enbrace[\big]{\sigma, \mathcal{P}(\sigma) \setminus \set{\emptyset}}$ der $\sigma$-Simplex. Für $\sigma = \set{0, \ldots , n}$ schreiben wir $\Delta^n := \Delta^{\set{0, \ldots ,n}}$.
+\missingfigure{Zeichnungen von $\Delta^0$ bis $\Delta^3$}
+% subsection 23 (end)
+
+\subsection[Definition: Unterkomplex]{Definition} % (fold)
+\label{sub:24}
+Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Ein \Index{Unterkomplex} von $K$ ist ein simplizialer Komplex $K_0 = (V_0, \Sigma_0)$ mit 
+$V_0 \subseteq V$, $\Sigma_0 \subseteq \Sigma$.
+\minisec{Beispiel}
+Sei $K=(V,\Sigma)$ ein endlicher simplizialer Komplex. Dann ist $K$ ein Unterkomplex von $\Delta^V$.
+% subsection 24 (end)
+
+\subsection[Definition: Simpliziale Abbildung]{Definition} % (fold)
+\label{sub:25}
+Eine \Index{simpliziale Abbildung} $f : K_1=(V_1, \Sigma_1) \to K_2(V_2, \Sigma_2)$ zwischen simplizialen Komplexen ist eine Abbildung $f : V_1 \to V_2$, sodass 
+$f(\sigma_1) \in \Sigma_2$ für alle $\sigma_1 \in \Sigma_1$. 
+% subsection 25 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:26}
+Sei $\sigma$ eine endliche Menge. Sei $\mathds{R}^\sigma = \prod_{v \in \sigma} \mathds{R}$ mit der Produkttopologie. Sei nun 
+\[
+	\abs*{\Delta^\sigma} := \set[x=(x_v)_{v \in \sigma} \in \mathds{R}^\sigma]{\sum_{v \in \sigma}x_v = 1 , x_v \in [0,1] \forall v \in \sigma}  
+\]
+Ist $\tau \subseteq \sigma$ so erhalten wir eine Abbildung $\iota_\tau^\sigma : \abs*{\Delta^\tau}  \to \abs*{\Delta^\sigma}$ indem wir 
+$(x_v)_{v \in \tau} \in \abs*{\Delta^\tau}$ durch $x_v=0$ für $v \in \sigma \setminus \tau$ zu $(x_v)_{v \in \tau}$ auffüllen. Ist $\eta \subseteq \tau \subseteq \sigma$ 
+so gilt $\iota^\sigma_\eta = \iota_\tau^\sigma \circ  \iota_\eta^\tau$.
+% subsection 26 (end)
 % section 2 (end)
 \newpage
 
@@ -171,6 +220,6 @@ dass diese oft schwierig zu berechnen ist. Wir werden in dieser Vorlesung weiter
 \setcounter{page}{1}
 \printindex
 \listoffigures
-% \todototoc
-% \listoftodos[Todo's und andere Baustellen]
+\todototoc
+\listoftodos[Todo's und andere Baustellen]
 \end{document}
