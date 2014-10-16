@@ -158,7 +158,55 @@ dass diese oft schwierig zu berechnen ist. Wir werden in dieser Vorlesung weiter
 \subsection{Beispiel} % (fold)
 \label{sub:21}
 \Index{Graphen} sind einerseits topologische Räume und andererseits kombinatorische Objekte:
-\missingfigure{Hier kommen noch zwei Graphen sowohl mit Ecken und Kanten hin} 
+\begin{align*}
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.2]
+		\coordinate (A) at (0,1);
+		\coordinate (B) at (1,1);
+		\coordinate (C) at (2,1);
+		\coordinate (1) at (0,0);
+		\coordinate (2) at (1,0);
+		\coordinate (3) at (2,0);
+		\foreach \x in {1,2,3} {
+			\foreach \y in {A,B,C}{
+				\draw[thick] (\x) -- (\y);
+			};
+		}
+		\foreach \x in {A,B,C} {
+			\foreach \y in {1,2,3}{
+				\draw[thick] (\x) -- (\y);
+			};
+			\draw[fill=DodgerBlue3, thick] (\x) circle[radius=0.05] node[above]{$\x$};
+		}
+		\foreach \x in {1,2,3} {
+			\draw[fill=DodgerBlue3,thick] (\x) circle[radius=0.05] node[below]{$\x$};
+		}
+	\end{tikzpicture} }}\qquad 
+	&\longleftrightarrow \quad \begin{array}{l}
+		V =  \set{A,B,C,1,2,3} \\
+		E =  \set{ \rule{0cm}{0.3cm} { \scriptstyle \set{A,1}, \set{A,2}, \set{A,3} , \set{B,1}, \set{B,2}, \set{B,3}, \set{C,1} , \set{C,2}, \set{C,3}}}  
+	\end{array}\\
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.2]
+		\coordinate (1) at (0,1);
+		\coordinate (2) at (0.5,1.5);
+		\coordinate (3) at (1,1);
+		\coordinate (4) at (1,0);
+		\coordinate (5) at (0,0);
+		\coordinate (6) at (0.5,0.5);
+		\foreach \x in {2,3,5,6} {
+			\draw[thick] (1) -- (\x);
+		}
+		\foreach \x/\y in {2/3,3/4,3/6,4/5,4/6,5/6}{
+			\draw[thick] (\x) -- (\y);
+		}
+		\foreach \x/\y in {1/left,2/above,3/right,4/right,5/left,6/right}{
+			\draw[fill=DodgerBlue3, thick] (\x) circle[radius=0.05] node[\y]{$\x$};
+		}
+	\end{tikzpicture} }}\qquad
+	&\longleftrightarrow \quad \begin{array}{l}
+		V = \set{1,2,3,4,5} \\
+		E = \set{ \rule{0cm}{0.3cm} {\scriptstyle \set{1,2}, \set{1,3}, \set{1,5} , \set{1,6}, \set{2,3}, \set{3,4}, \set{3,6} , \set{4,5}, \set{4,6}, \set{5,6}} }  
+	\end{array}
+\end{align*}
 % subsection 21 (end)
 
 \subsection[Definition: Simplizialer Komplex]{Definition} % (fold)
