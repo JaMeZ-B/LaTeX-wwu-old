@@ -276,8 +276,52 @@ für $k \in \mathds{N}$. Dann gilt
 	\bigcap_{k \in \mathds{N}}(X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \bigcap_{k \in \mathds{N}} X \setminus A_k = X \setminus 
 	\enbrace*{\bigcup_{k \in \mathds{N}} A_k} 
 \]
-Aber wegen (i) und (ii) existiert nach Proposition \ref{sub:19} ein $x \in \bigcap_{k \in \mathds{N}}\overline{B}(x_k,\varepsilon_k)$. \light 
+Aber wegen (i) und (ii) existiert nach Proposition \ref{sub:19} ein $x \in \bigcap_{k \in \mathds{N}}\overline{B}(x_k,\varepsilon_k)$. \light \medskip \\
+Wir suchen also eine Abbildung $\overline{c} : \mathds{N} \to X \times (0,1], k  \mapsto(x_k, \varepsilon_k)$ mit (i),(ii),(iii) für $k \in \mathds{N}$. Setze
+\begin{align*}
+	P_m &:= \set[{c : \set{0, \ldots ,m} \to X \times (0,1] }]{\begin{array}{l}
+		\text{(i),(iii) gilt für }k \in \set{0, \ldots , m}, \\
+		\text{(ii) gilt für }k \in \set{0, \ldots , m-1}
+	\end{array} }  \\
+	P_\infty &:= \set[{c : \mathds{N} \to X \times (0,1]}]{\text{(i),(ii),(iii) gilt für } k \in \mathds{N} \rule{0cm}{0.3cm}} 
+\end{align*}
+Die Menge $P := \enbrace*{\bigcup_{m \in \mathds{N}} P_m} \cup P_\infty$ ist partiell geordnet bezüglich $\prec$:
+\[
+	c \prec c' \text{ falls } m \le m' \text{ und } c'\big|_{\set{0,\ldots ,m}} =c , \text{ bzw.} c'=c \text{ falls } m=m'=\infty
+\]
+$P$ ist nicht leer, denn nach Vorraussetzung existiert $(x_0,\varepsilon_0)$ mit $0 < \varepsilon_0 < 1$ und $\overline{B}(x_0, \varepsilon_0) \subset 
+\bigcup_{n \in\mathds{N}} A_n$, d.h. $0 \mapsto (x_0,\varepsilon_0) \in P_0$. Jede total geordnete Teilmenge $\emptyset \not= \Gamma$ von $P$ besitzt eine obere Schranke:
+\begin{itemize}
+	\item Falls $\Gamma$ ein $c\in P_\infty$ enthält, so ist $c$ obere Schranke.\marginnote{warum?}
+	\item Ebenso falls $\Gamma$ ein $c \in P_{\overline{m}}$ enthält und $\Gamma \cap P_{m'}= \emptyset$ für alle $\overline{m} < m' \in \mathds{N} \cup \set{\infty}$.
+	\item Falls $\Gamma \subset \bigcup_{\mathds{N}} P_m$, aber $\Gamma \not\subset \bigcup_{m \le \overline{m}} P_m$ für jedes $\overline{m}$, so definieren wir eine
+	obere Schranke in $P_\infty$ durch Einschränkung.\marginnote{wie genau?} 
+\end{itemize}
+Mit dem Lemma von Zorn folgt, dass $P$ ein maximales Element $\overline{c}$ besitzt. Behauptung: $\overline{c}\in P_\infty$ wie gewünscht:
+
+Falls $\overline{c} \in P_m$ für ein $m \in \mathds{N}$, so gilt nach Annahme, dass $\enbrace*{X \setminus A_m} \cap B(x_m, \varepsilon_m) \not= \emptyset$. Dann 
+existiert aber $(x_{m+1},\varepsilon_{m+1}) \in X \times (0,1]$ mit $\varepsilon_{m+1} < \frac{1}{m+2}$ und 
+\[
+	\overline{B}(x_{m+1}, \varepsilon_{m+1}) \subset  \enbrace*{X \setminus A_m} \cap B(x_m,\varepsilon_m) 
+\]
+Definiere $\overline{\overline{c}} : \set{0, \ldots , m+1} \to X \times (0,1]$ durch
+\[
+	k \longmapsto \begin{cases}
+		(x_k,\varepsilon_k), &\text{ falls } k=m+1\\
+		\overline{c}(k), &\text{ falls } k \in \set{0, \ldots , m} 
+	\end{cases},
+\]
+dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$. \light zur Maximalität von $\overline{c}$. \bewende
 % subsection satz_baire (end)
+
+\subsection[Bemerkungen zum Satz von Baire]{Bemerkungen} % (fold)
+\label{sub:111}
+\begin{enumerate}[(i)]
+	\item Die Aussage gilt auch für lokalkompakte Hausdorffräume. \hfill(Übung)
+	\item Tatsächlich genügt eine schwächere Form des Auswahlaxioms(DC); das abzählbare Auswahlaxiom jedoch nicht.
+	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung)
+\end{enumerate}
+% subsection 111 (end)
 % section 1 (end)
 
 
