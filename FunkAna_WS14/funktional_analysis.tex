@@ -147,11 +147,11 @@ isometrische Isomorphie.
 	\]
 	Wenn $\overline{x}^m = \benbrace*{(x^m_n)_n}$ und $\overline{x}^{m'} = \benbrace*{(x^{m'}_n)_n} $, dann gilt also für alle $m,m' >M(\varepsilon)$
 	\begin{equation*}
-		\lim_{ n \to \infty} d \enbrace*{x^m_n, x^{m'}_n} < \frac{\varepsilon}{3}  \label{eq:15:absch1}\tag{\dag}
+		\lim_{ n \to \infty} d \enbrace*{x^m_n, x^{m'}_n} < \frac{\varepsilon}{3}  \label{eq:15:absch1}\tag{*}
 	\end{equation*}
 	Für alle $m$ ist $(x^m_n)_n$ eine Cauchyfolge, also gilt
 	\begin{equation*}
-		\forall m : \exists N(m) : \forall n,n' \ge N(m) : d \enbrace*{x^m_n, x^m_{n'}} < \frac{1}{m}  \label{eq:15:absch2}\tag{\dag \dag}
+		\forall m : \exists N(m) : \forall n,n' \ge N(m) : d \enbrace*{x^m_n, x^m_{n'}} < \frac{1}{m}  \label{eq:15:absch2}\tag{**}
 	\end{equation*}
 	Setze nun $z_n := x^n_{N(n)}$. Behauptung: $(z_n)_n$ ist eine Cauchyfolge. Sei $\varepsilon>0$. Dann gilt für $n,m>N=\max\set{M(\varepsilon), \frac{3}{\varepsilon}}$
 	für ein $k > N(m), N(n)$ \marginnote{$d(z_n,z_m)$ ist unabhängig von $k$, also kann man $k$ beliebig groß wählen}
@@ -241,6 +241,43 @@ ein Punkt in $\bigcap_{n \in \mathds{N}} \overline{B}(x_n, \varepsilon_n)$.
 	für jedes $n \in \mathds{N}$ und somit $d(x,y)=0 \Leftrightarrow x=y$. \bewende
 \end{description}
 % subsection 19 (end)
+
+\subsection[Satz von Baire]{Satz von Baire\protect\footnote{nach René Louis Baire, \url{https://de.wikipedia.org/wiki/René_Louis_Baire}}} % (fold)
+\label{sub:110} 
+Es gelten folgende äquivalente Formulierungen:
+\begin{enumerate}[a)]
+	\item Sei $(X,d)$ ein vollständiger metrischer Raum und $A_0, A_1, \ldots $ eine Folge abgeschlossener Teilmengen. Falls $\bigcup_{n \in \mathds{N}} A_n$ eine
+	offene Kugel enthält, so auch eines der $A_n$.
+	\item In einem vollständigen metrischen Raum hat eine abzählbare Vereinigung von abgeschlossenen Mengen ohne innere Punkte keine inneren Punkte.
+	\item In einem vollständigen metrischen Raum ist ein abzählbarer Durchschnitt von dichten offenen Mengen wieder dicht.
+\end{enumerate}
+\minisec{Beweis}
+Zunächst die Äquivalenz: 
+\begin{description}
+	\item[a)$\Rightarrow$b):] Klar, da b) Kontraposition von a) ist.
+	\item[b)$\Rightarrow$c):] Sei $U_n \subseteq X$ offen und dicht $\Rightarrow X \setminus U_n \subseteq X$ abgeschlossen und hat somit keine inneren Punkte. Aus b) folgt
+	nun 
+	\[
+		\bigcup_{n \in \mathds{N}}X \setminus U_n = X \setminus \bigcap_{n \in \mathds{N}} U_n
+	\]
+	hat keine inneren Punkte. Also ist $\bigcap_{n \in \mathds{N}} U_n$ dicht in $X$.
+	\item[c)$\Rightarrow$a):] ebenso.
+\end{description}
+Wir wollen nun a) durch Widerspruch beweisen, d.h. wir nehmen an, dass gilt: Jede offene Kugel schneidet $X \setminus A_k$ für jedes $k \in \mathds{N}$. Dazu wollen wir 
+Folgen $(x_k)_{k \in \mathds{N}} \subset X$, $(\varepsilon_k)_{k \in \mathds{N}} \subset (0,1]$ finden mit 
+\begin{enumerate}[(i)]
+	\item $\varepsilon_k < \frac{1}{k+1}$,
+	\item $\overline{B}(x_{k+1}, \varepsilon_{k+1}) \subset (X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \overline{B}(x_k, \varepsilon_k)$,
+	\item $\overline{B}(x_k, \varepsilon_k) \subset \bigcup_{n \in \mathds{N}} A_n$
+\end{enumerate}
+für $k \in \mathds{N}$. Dann gilt 
+\[
+	\bigcup_{n \in \mathds{N}} A_n \stackrel{\text{(iii),(ii)}}{\supset} \bigcap \overline{B}(x_k, \varepsilon_k) \stackrel{\text{(ii)}}{\subset} 
+	\bigcap_{k \in \mathds{N}}(X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \bigcap_{k \in \mathds{N}} X \setminus A_k = X \setminus 
+	\enbrace*{\bigcup_{k \in \mathds{N}} A_k} 
+\]
+Aber wegen (i) und (ii) existiert nach Proposition \ref{sub:19} ein $x \in \bigcap_{k \in \mathds{N}}\overline{B}(x_k,\varepsilon_k)$. \light 
+% subsection satz_baire (end)
 % section 1 (end)
 
 
