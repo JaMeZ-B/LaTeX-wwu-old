@@ -66,4 +66,90 @@
 		\item $\aff^1 = \CC \rightarrow \CC^\times$ mit $z \mapsto e^{2\pi i z}$ ist nicht polynomial.
 	\end{itemize}
 \end{bsp}
+
+\begin{defn}[Zariski-Topologie] \label{1.3}
+	Seien $g_1,\dots,g_m \in k[x_1,\dots,x_n]$\marginnote{16.10.} und $I = \sprod{g_1,\dots,g_m}$ das von $g_1,\dots,g_m$ erzeugte Ideal in $k[x_1,\dots,x_n]$.\linebreak $M \subseteq \aff^n$ heißt abgeschlossen bzgl. der \Index{Zariski-Topologie}, falls gilt:
+	\[ M = V(I) = \{x \in \aff^n : g_i(x) = 0 \text{ für } 1 \leq i \leq m \}\]
+\end{defn}
+
+\minisec{Beispiel}
+	\begin{itemize}
+		\item Es ist $V(0) = \aff^n$ und $V(1) = \emptyset$.
+		\item $GL_n(\CC)$ ist offen in $M_n(\CC)$.
+		\item $GL_n(\CC)$ lässt sich jedoch auch "abschließen" vermöge:
+		\begin{equation}
+		\begin{aligned}
+			\GL_n(\CC) &\hookrightarrow M_n(\CC) \times \CC \\
+			A &\mapsto \enbrace*{A, \frac{1}{\det(A)}}
+		\end{aligned}
+		\end{equation}
+	\end{itemize}
+
+\setlength{\fboxsep}{10pt}
+\setlength{\fboxrule}{3pt}
+\begin{center}
+	\fbox{\textbf{Ab jetzt immer, wenn nichts anderes gesagt, offen und abgeschlossen bezüglich Zariski-Topologie!}}
+\end{center}
+
+\begin{defn}[Lie-Algebra und Lie-Klammer] \label{1.4}
+	Sei $V$ ein (endlichdimensionaler) $k$-Vektorraum. Eine Abbildung
+	\begin{equation}
+	\begin{aligned}
+		[\cdot,\cdot]\colon V \times V &\longrightarrow V \\
+		(v,w) &\longmapsto [v,w]
+	\end{aligned}
+	\end{equation}
+	heißt \Index{Lie-Klammer}, falls sie folgende Eigenschaften erfüllt:
+	\begin{enumerate}[1)]
+		\item bilinear
+		\item schiefsymmetrisch, d.h. $[v,w] = -[w,v]$
+		\item \Index{Jacobi-Identität}: $\benbrace*{[u,v],w}+\benbrace*{[v,w],u}+\benbrace*{[w,u],v} = 0$
+	\end{enumerate}
+	Das Paar $(V,[\cdot,\cdot])$ heißt \Index{Lie-Algebra}.
+\end{defn}
+
+\minisec{Beispiele}
+	\begin{itemize}
+		\item Der $k$-Vektorraum $V$ mit der trivialen Lie-Klammer $[v,w] := 0$ heißt abelsche Lie-Algebra.
+		\item Die allgemeine lineare Lie-Algebra $\gl_n(k) := M_n(k)$ mit der Lie-Klammer $[A,B] := AB-BA$.
+		\item Die spezielle lineare Lie-Algebra $\slie_n(k) := \SL_n(k)$ als Lie-Unter-Algebra von $\gl_n(k)$, zum Beispiel für $n=2$ und $k = \CC$:
+		\[\slie_2(\CC) := \{A \in M_2(\CC) : \tr(A) = 0 \} = \sprod*{
+			h = \begin{pmatrix} 1 & 0 \\ 0 & -1	\end{pmatrix},
+			e = \begin{pmatrix}	0 & 1 \\ 0 & 0 \end{pmatrix},
+			f = \begin{pmatrix}	0 & 0 \\ 1 & 0 \end{pmatrix}} \]
+		Es ist $[h,e] = 2e, [h,f] = -2f$ und $[e,f] = h$, also besitzt die Abbildung $[h,\cdot]\colon V \rightarrow V$ die Eigenwerte $2$ und $-2$.
+	\end{itemize}
+	
+\begin{defn}[lineare algebraische Gruppe]\label{1.5}
+	Sei $G \leq \GL_n(\CC)$ eine abgeschlossene Untergruppe, dann heißt $G$ \Index{lineare algebraische Gruppe}.
+\end{defn}
+
+\begin{center}
+	\fbox{\textbf{Ab jetzt: "algebraische Gruppe" = "lineare algebraische Gruppe" = "affine algebraische Gruppe"}}
+\end{center}
+	
+	Zu einer algebraischen Gruppe $G$ definieren wir die zugehörige Lie-Algebra durch
+	\[ \Lie(G) := \g := T_eG, \]
+	wobei $T_eG$ den Tangentialraum in $e \in G$ bezeichnet.
+	
+	\[ T_eV(f_1,\dots,f_n) = \penbrace*{x \in \aff^n : \frac{d}{dt} f_i(e+tx) \bigg|_{t=0} = 0} \text{ über } k = \CC \]
+	
+\minisec{Beispiel}
+	\begin{itemize}
+		\item Betrachte $f = x_1^2-x_2$ in $\aff^2$, dann ist
+		\begin{equation}
+		\begin{aligned}
+			T_{(0,0)}V(f) &= \penbrace*{x \in \aff^2 : \frac{d}{dt} f( (0,0) + t(x_1,x_2)) \big|_{t=0} = 0 } = \penbrace*{x \in \aff^2 : \frac{d}{dt} (tx_1)^2 - tx_2 \big|_{t=0} = 0} \\
+			&= \penbrace*{x \in \aff^2 : 2tx_1 - x_2 \big|_{t=0} = 0} = \{ x \in \aff^2 : x_2 = 0 \} \\
+			T_{(1,1)}V(f) &= \{ x \in \aff^2 : 2x_1 - x_2 = 0 \}
+		\end{aligned}
+		\end{equation}
+		\item $T_{E}\SL_n(\CC) = \slie_n(\CC) = \penbrace*{A \in M_n(\CC) : \frac{d}{dt} \det(E + tA) - 1 \big|_{t=0} = 0} = \{A \in M_n(\CC) : \tr(A) = 0 \}$, denn:
+		\[ \det(E+tA) = \det \underbrace{\begin{pmatrix}
+		1+ta_{11} &  & ta_{ij} \\ 
+		& \ddots &  \\ 
+		ta_{ij} &  & 1+ta_{nn}
+		\end{pmatrix}}_{=:(c_ij)_{ij}} = \sum\limits_{\sigma \in S_n} \sgn(\sigma) \prod\limits_{i=1}^n c_{i,\sigma(i)} = 1 + t \cdot \tr(A) + t^2\dots + t^n \]
+		\[ \Rightarrow \frac{d}{dt} \det(E+tA) \big|_{t=0} = \tr(A) \]
+	\end{itemize}
 \newpage

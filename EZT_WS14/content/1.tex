@@ -2,7 +2,7 @@
 \label{sec:para1}
 
 \minisec{Terminologie}
-	Sei $R$ ein kommutativer Ring mit $1 \neq 0$. $R$ heißt \Index{Integritätsring} bzw. \bet{nullteilerfrei}, wenn gilt: \index{Nullteiler}
+	Sei $R$ ein kommutativer Ring mit $1 \neq 0$. $R$ heißt \Index{Integritätsring} bzw. \bet{nullteilerfrei}, wenn gilt: \index{Nullteiler} \marginnote{14.10.}
 	\[ a \cdot b = 0 \quad \Rightarrow \quad a = 0 \text{ oder } b = 0.\]
 
 \begin{bsp} \label{bsp_integritaetsringe}
@@ -174,4 +174,85 @@
 	$m$ ist also auch minimal bzgl. der Teilbarkeitsrelation $|$.
 \end{lemma}
 
+\begin{falko}[Satz von Euklid] \label{F1.5}
+	Jede Primzahl $p$ ist ein Primelement von $\ZZ$, d.h. es gilt stets \eqref{eq_def_1.6}. (Das gleiche gilt für $-p$, also für jedes unzerlegbare Element von $\ZZ$.) \index{Satz von Euklid}
+\end{falko}
+
+\minisec{Fundamentalsatz der elementaren Arithmetik}
+	In $\ZZ$ hat jedes $a \neq 0$ eine eindeutige Zerlegung in unzerlegbare Faktoren. \index{Fundamentalsatz der elementaren Arithmetik}
+
+\minisec{Bemerkung}
+	Eindeutige Zerlegung in unzerlegbare Faktoren hat man zum Beispiel auch für die Ringe $\ZZ[\sqrt{2}], \ZZ[i], K[X]$ und $K$ für $K$ Körper, $\ZZ[X]$ und $\CC\sprod{z}$, nicht aber für $\ZZ[\sqrt{-5}]$:
+	\[ 3 \cdot 3 = 9 = (2+ \sqrt{-5})(2 - \sqrt{-5}) \]
+	Dies sind zwei wesentlich verschiedene Zerlegungen in unzerlegbare Faktoren.
+
+\begin{defn}[Exponent] \label{def_1.7}
+	Sei $p$ eine Primzahl und $a \in \ZZ \setminus \setnull$. Dann heißt
+	\[ w_p(a) :=\max\{k \in \NN_0 : p^k |a \} \]
+	der \Index{Exponent} von $p$ in $a$. Wir setzen $w_p(0) := \infty$.
+\end{defn}
+
+\begin{falko}[Eigenschaften der Exponentfunktion] \label{F1.6}
+	Die Funktion $w_p \colon \ZZ \rightarrow \NN_0 \cup \{\infty\}$ hat folgende Eigenschaften:
+	\begin{enumerate}[(i)]
+		\item $w_p(a+b) \geq \min(w_p(a),w_p(b))$ und Gleichheit, falls $w_p(a) \neq w_p(b)$.
+		\item $w_p(ab) = w_p(a) + w_p(b)$
+	\end{enumerate}
+\end{falko}
+
+\begin{satz}[Fundamentalsatz der elementaren Arithmetik] \label{satz_1.2}
+	Für jedes $a \in \ZZ \setminus \setnull$ gilt $w_p(a) > 0$ nur für endlich viele $p$. Es ist
+	\begin{equation}
+		a = \sgn(a) \cdot \prod\limits_p^{} p^{w_p(a)} \label{eq_satz_1.2}
+	\end{equation}
+\end{satz}
+
+\minisec{Bemerkung}
+	\begin{enumerate}[1)]
+		\item $w_p$ lässt sich eindeutig zu einer Abbildung $w_p \colon \QQ \rightarrow \ZZ \cup \{\infty\}$ fortsetzen, sodass (ii) für alle $a,b \in \QQ$ gilt. Es gilt dann auch (i). Für $a \in \QQ \setminus \setnull$ ist $w_p(a) \neq 0$ nur für endlich viele $p$, und die Formel \eqref{eq_satz_1.2} gilt entsprechend.  Ferner gilt: $a \in \ZZ \Leftrightarrow w_p(a) \geq 0$ für alle $p$.
+		\item Sei
+		\[ \NN_0^{(\PP)} := \{ (e_p)_{p \in \PP} : e_p \in \NN_0, e_p = 0 \text{ für fast alle } p \}. \]
+		Nach Satz \ref{satz_1.2} sind $(\NN,\cdot)$ und $(\NN_0^{(\PP)},+)$ zwei zueinander isomorphe Halbgruppen. Nach Bemerkung 1) sind $\QQ^\times$ und $\{1,-1\} \times \ZZ^{(\PP)}$ sogar zwei zueinander isomorphe Gruppen.
+	\end{enumerate}
+	
+\begin{defn}[faktorieller Ring, Vertretersystem für Primelemente] \label{def_1.8}
+	Ein Integritätsring $R$ heißt \Index{faktoriell}, wenn jedes $a \in R \setminus \setnull$ eine eindeutige Zerlegung in unzerlegbare Faktoren hat. Man spricht dann auch von eindeutiger Primfaktorzerlegung in $R$. \\
+	$P$ heißt \bet{Vertretersystem für die Primelemente $\neq 0$} von $R$, wenn:
+	\begin{enumerate}[(1)]
+		\item Zu jedem Primelement $q \neq 0$ von $R$ gibt es ein $p \in P$ mit $q \assoz p$. 
+		\item Für $p, p' \in P$ mit $p \assoz p'$ gilt $p = p'$, d.h. $p$ in (1) ist eindeutig bestimmt durch $q$.
+	\end{enumerate}
+	Für $R = \ZZ$ nehme man stets $P = \PP$. Für $K$ Körper und $R = K[X]$ nimmt man $P = \{p \in K[X] : p \text{ irreduzibel und normiert}\}$. \index{Primelement} \index{Vertretersystem}
+\end{defn}
+
+\begin{falko} \label{F1.7}
+	Sei $R$ faktoriell und $P$ ein Vertretersystem für Primelemente. Es gibt zu jedem $p \in P$ eine Funktion $w_p \colon R \rightarrow \NN_0 \cup \{\infty\}$ mit den Eigenschaften (i) und (ii) aus F\ref{F1.6}, sodass gilt: \begin{enumerate}[a)]
+		\item Für jedes $a \in R \setminus \setnull$ ist $w_p(a) > 0$ nur für endlich viele $p \in P$.
+		\item Für jedes $a \in R \setminus \setnull$ gilt
+		\begin{equation}
+			a = e \prod\limits_{p \in P}^{} p^{w_p(a)} \label{eq_F1.7}
+		\end{equation}
+		mit eindeutigem $e \in \RR^\times$.
+	\end{enumerate}
+\end{falko}
+
+\begin{defn}[ggT und kgV] \label{def_1.9}
+	Sei $R$ ein kommutativer Ring mit $1 \neq 0$. Gegeben $a_1, \dots, a_n \in R$.
+	\begin{enumerate}[a)]
+		\item Ein $d \in R$ heißt ein \Index{größter gemeinsamer Teiler} (ggT) von $a_1,\dots,a_n$, falls:
+		\begin{center}
+			1. \quad $d | a_i$ für alle $i$ \hspace{3cm} 2. \quad $t | a_i$ für alle $i \Rightarrow t | d$
+		\end{center}
+		\item Ein $m \in R$ heißt ein \Index{kleinstes gemeinsames Vielfaches} (kgV) von $a_1,\dots,a_n$, falls:
+		\begin{center}
+			1. \quad $a_i | m$ für alle $i$ \hspace{3cm} 2. \quad $a_i | c$ für alle $i \Rightarrow m | c$
+		\end{center}
+	\end{enumerate}
+\end{defn}
+
+\minisec{Bemerkung}
+	\begin{enumerate}[1)]
+		\item $d, d'$ ggT von $a_1, \dots, a_n \Rightarrow d \assoz d'$ und $m, m'$ kgV von $a_1, \dots, a_n \Rightarrow m \assoz m'$
+		\item Im Allgemeinen ist die Existenz eines ggT und kgV nicht gesichert. In faktoriellen Ringen existieren sie aber immer, siehe dazu folgende Feststellung.
+	\end{enumerate}
 \newpage
