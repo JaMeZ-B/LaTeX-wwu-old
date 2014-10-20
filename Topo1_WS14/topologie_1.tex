@@ -219,7 +219,7 @@ Ein \Index{simplizialer Komplex} $K=(V, \Sigma)$ besteht aus einer Menge $V$ und
 Die Elemente von $V$ heißen die \Index{Ecken} oder \Index{Vertices} von $K$. Die Elemente von $\Sigma$ heißen die \Index{Simplizes} von $K$. Enthält $\sigma \in \Sigma$ 
 genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$n$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
 
-Ist $V$ geordnet, so heißt $K$ geordnet. Ist $V$ endlich, so heißt $K$ endlich.
+\noindent Ist $V$ geordnet, so heißt $K$ geordnet. Ist $V$ endlich, so heißt $K$ endlich.
 % subsection 22 (end)
 
 \subsection[Beispiel für simpliziale Komplexe]{Beispiel} % (fold)
@@ -373,10 +373,94 @@ Sei $S$ eine Menge, $R$ ein Ring.
 Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Sei $\Sigma_n := \set[\sigma \in \Sigma]{\sigma \text{ ist ein $n$-Simplex}}$. Sei $R$ ein Ring. Der 
 \bet{$n$-te Kettenmodul}\index{nterKettenmodul@$n$-ter Kettenmodul} von $K$ über $R$ ist definiert als 
 \[
-	C_n(K,R) := R[\Sigma_n]
+	C_n(K;R) := R[\Sigma_n]
 \]
-Ist $R=\mathds{Z}$, so schreiben wir auch kurz $C_n(K) := C_n(K,\mathds{Z})$.
+Ist $R=\mathds{Z}$, so schreiben wir auch kurz $C_n(K) := C_n(K;\mathds{Z})$.
 % subsection 34 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:35}
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Sei $\sigma = \set{v_0, \ldots ,v_n}$ ein $n$-Simplex von $K$. Bezüglich der Ordnung von $K$ sei dabei 
+$v_0 < v_1 < \ldots < v_n$. Sei $\tau$ ein $(n-1)$-Simplex von $K$. Definiere
+\[
+	\varepsilon_\sigma^\tau := \begin{cases}
+		(-1)î, &\text{ falls }\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n} \\
+		0 , &\text{ sonst}
+	\end{cases}
+\]
+\minisec{Bemerkung}
+$\varepsilon^\tau_\sigma \not= 0 \iff \tau$ ist eine Seite von $\sigma$.
+\minisec{Beispiel}
+\[
+	\text{Hier fehlt noch was } \varepsilon_{\set{0,1,2}}^{\set{0,1}} = 1 , \varepsilon_{\set{0,1,2}}^{\set{0,2}}=-1 , \varepsilon_{\set{0,1,2}}^{\set{1,2}} =1    
+\]
+\todo{2-Simplex mit Orientierung hinzufügen}
+% subsection 35 (end)
+
+\subsection[Definition: $n$-te Randabbildung]{Definition} % (fold)
+\label{sub:36}
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$n$-te Randabbildung}\index{nte Randabbildung@$n$-te Randabbildung} 
+\[
+	\partial_n : \underset{=R[\Sigma_n]}{C_n(K;R)} \to \underset{=R[\Sigma_{n-1}]}{C_{n-1}(K;R)}
+\]
+ist definiert durch
+\[
+	\partial_n(\sigma) = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \tau \in \Sigma_n
+\]
+% subsection 36 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:37}
+\[
+	\partial_{n-1} \circ \partial_n = 0
+\]
+\minisec{Beweis (mit Lemma \ref{sub:38})}
+Sei $\sigma$ ein $n$-Simplex von $K$. 
+\begin{align*}
+	\partial_{n-1} \enbrace*{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_{\sigma}^\tau \partial_{n-1} (\tau) 
+	 &= \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
+	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \varepsilon_\tau^\eta \varepsilon_\sigma^\tau}\eta 
+	 \stackrel{\text{Lemma \ref{sub:38}}}{=} 0 \bewende
+\end{align*}
+% subsection 37 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:38}
+Sei $\sigma$ ein $n$-Simplex. Sei $\eta \subseteq \sigma$ ein $(n-2)$-Simplex. Dann gibt es genau zwei $(n-1)$-Simplizes $\tau, \tau'$ von $K$, die eine Seite von $\sigma$
+sind und $\eta$ als Seite enthalten. Es gilt
+\[
+	\varepsilon_\tau^\eta \varepsilon^\tau_\sigma = - \varepsilon_{\tau'}^\eta \varepsilon^{\tau'}_\sigma.
+\]
+\minisec{Beweis}
+Sei $\sigma= \set{v_0, \ldots ,v_n}$ mit $v_0 < v_1 < \ldots < v_n$. Dann ist $\eta = \set{v_0, \ldots , v_n} \setminus \set{v_i, v_j}$ mit $i<j$. Dann sind 
+$\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n}$ und $\tau' = \set{v_0, \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}$ die gesuchten $(n-1)$-Simplizes und es gilt:
+\begin{align*}
+	\varepsilon_\sigma^\tau = (-1)^i \enspace, \enspace \varepsilon_\sigma^{\tau'} = (-1)^j \enspace, \enspace \varepsilon^\eta_\tau = (-1)^{j-1} \enspace, \enspace 
+	\varepsilon_{\tau'}^\eta = (-1)^i \bewende
+\end{align*}
+% subsection 38 (end)
+
+\subsection{Notation} % (fold)
+\label{sub:39}
+Für $\sigma \in \Sigma_n$, $ \sigma= \set{v_0, \ldots ,v_n} $ mit $v_0 < \ldots < v_n$ schreiben wir 
+\[
+	\delta^j \sigma := \set{v_0 , \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}  \in \Sigma_{n-1}
+\]
+Dann ist $\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \delta^j \sigma$.
+% subsection 39 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:310}
+$\partial_{n-1} \circ \partial_n = 0 \iff \im \partial_n \subseteq \ker \partial_{n-1}$
+% subsection 310 (end)
+
+\subsection[Definition: $n$-ter Homologiemodul]{Definition} % (fold)
+\label{sub:311}
+Sei $K$ ein geordneter simplizialer Komplex. Der \bet{$n$-te Homologiemodul}\index{nter Homologiemodul@$n$-ter Homologiemodul} von $K$ über $R$ ist definiert als
+\[
+	H_n(K;R) := \frac{\ker \partial_n : C_n(K;R) \to C_{n-1}(K;R)}{\im \partial_{n-1} : C_{n+1}(K;R) \to C_n(K;R)} 
+\]
+% subsection 311 (end)
 % section 3 (end)
 
 
