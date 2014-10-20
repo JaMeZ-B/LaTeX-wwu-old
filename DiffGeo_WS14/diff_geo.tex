@@ -134,10 +134,96 @@ Submersion $f : U \to \mathds{R}^k$ mit $U \cap M = f ^{-1}(0)$. \marginnote{Ver
 	\[
 		\mathd_x f = (2 x_1, \ldots , 2 x_{n+1}) : \mathds{R}^{n+1} \to \mathds{R}
 	\]
+	\item Die hyperbolischen Räume $H_c^n := \set[x=(x_1, \ldots ,x_{n+1}) \in \mathds{R}^{n+1}]{-x_1^2 + \sum_{i=2}^{n+1}x_i^2 = c}$
+	\missingfigure{Hyperbolische Räume für c < 0,c > 0 und c = 0}
+	Sei $f:\mathds{R}^{n+1} \to \mathds{R}$ definiert durch $f_c(x) = -x_1^2 + \sum_{i=2}^{n+1}x_i^2 - c$.\\
+	$\Rightarrow$ $f$ ist glatt und $f_c^{-1}(0) = H_c^n$\\
+	Es bleibt zu zeigen, das $f$ eine Submersion ist.
+	\[
+		\mathd_x f = (-2x_1,2x_2, \ldots,2x_{n+1}): \mathds{R}^{n+1} \to \mathds{R}	
+	\]
+	Es gilt $\mathd_x f(\nu) = 0 \forall \nu \in \mathds{R}^{n+1} \Leftrightarrow x_i = 0\ \forall i=1, \ldots,n+1$.\\
+Das heißt $\exists i: x_i \neq 0 \Rightarrow \mathd_x f\ \text{Submersion}$, wobei $\exists i: x_i \neq 0$ gilt, falls $x \in H_c^n, c \neq 0$. Also ist für $c \neq 0$ $H_c^n$ eine $n$-dimensionale Untermannigfaltigkeit. Für $c = 0$ ist $H_0^n \backslash \set{0}$ eine $n$-dimensionale Untermannigfaltigkeit.
+	\item Der $n$-Torus $T^n = \set[x=(x_1,x_2, \ldots,x_{2n-1},x_{2n})\in \mathds{R}^{2n}]{x_1^2 + x_2^2 = 1, \ldots, x_{2n-1}^2 + x_{2n}^2 = 1}$
+	\[
+		f:\mathds{R}^{2n} \to \mathds{R},\ f(x) = 
+		\begin{pmatrix}
+			x_1^2 + x_2^2 - 1\\
+			\vdots\\
+			x_{2n-1}^2 + x_{2n}^2 - 1		
+		\end{pmatrix}
+	\]
+	$\Rightarrow$ $f$ glatt, $f^{-1}(0)=T^n$
+	\[
+		\mathd_x f =
+		\begin{pmatrix}
+			2x_1 & 2x_2 & 0 & 0 &\ldots & 0\\
+			0 & 0 & 2x_3 &2x_4 &  &0\\
+			\vdots &&& \ddots &\ddots & \\
+			0 &&&& 2x_{2n-1} & 2x_{2n}
+		\end{pmatrix}
+	\]
+	$\Rightarrow$ $\mathd_x f$ ist eine Submersion.
+	\item Die orthogonale Gruppe $O(n) \subset \mathds{R}^{n \times n}$ ist eine Untermannigfaltigkeit der Dimension $\frac{n(n-1)}{2}$.
+	\[
+		O(n) = \set[A \in \mathds{R}^{n \times n}]{AA^T = \id_{\mathds{R}^n} = f^{-1}(0)},\ f(A) = AA^T - \id_{\mathds{R}^n}
+	\]
+	Es gilt $f(A)^T = {A^T}^T \cdot A^T - \id^T = AA^T - \id = f(A)$. Also $f:\mathds{R}^{n \times n} \to \text{Sym}(\mathds{R}^{n \times n}) = \set[A \subseteq \mathds{R}^{n \times n}]{A^T = A}$.\\
+	$\Rightarrow$ $f$ glatt, $f^{-1}(0) = O(n)$
+	\[
+		\mathd_A f:\mathds{R}^{n \times n} \to \text{Sym}(\mathds{R}^{n \times n}),\ \mathd_A f = HA^T+AH^T
+	\]
+	Sei $S \in \text{Sym}(\mathds{R}^{n \times})$. Setze $H = \frac{SA}{2} \Rightarrow \mathd_A f(\frac{SA}{2}) = \frac{1}{2}(SAA^T+ASA^T) = \frac{1}{2}(S +  S) = S$\\
+	$\Rightarrow$ $O(n)$ ist eine Untermannigfaltigkeit
 \end{enumerate}
 % subsubsection 117 (end)
+
+\subsubsection[Bemerkung: ]{Bemerkung} % (fold)
+\label{ssub:118}
+$M$ kann von der Form $M = f^{-1}(0)$ sein, $f$ glatt, aber keine Submersion. Zum Beispiel
+	\[
+		M = \set[(x,x)\in \mathds{R}^2]{x \in \mathds{R}} = f^{-1}(0),\ f(x,y) = x^3 +y^3	
+	\]
+%subsubsection118 (end)
+	
+\subsubsection[Satz: lokale Parametrisierung von Untermannigfaltigkeiten]{Satz}
+\label{ssub:119}
+Es sind äquivalent:
+\begin{enumerate}
+	\item $M^n\subset \mathds{R}^{n+k}$ ist $n$-dim Untermannigfaltigkeit
+	\item $\forall x \in M^n\ \exists$ Umgebungen $U$ und $V \subset \mathds{R}^{n+k}$ von $x$ und $0$, und ein Diffeomorphismus $\phi: U \to V$ mit $\phi(M\cap U) \to \underbrace{(\mathds{R}^n \times \set{0}\cap V)}_{=: W}$
+	\item $\forall x \in M^n\ \exists$ Umgebungen $U\subset \mathds{R}^{n+k}$ und $W\subset \mathds{R}^n$, sowie eine glatte Abbildung $g:W \to \mathds{R}^{n+k}$, sodass $g$ ein Homöomorphismus von $W$ auf $M\cap U$ und eine Immersion ist. $g$ nennt man eine \Index{lokale Parametrisierung}
+\end{enumerate}
+\missingfigure{Beweis des Satzes durch Zeichnung}
+%subsubsection119 (end)
+
+\subsubsection[Beispiele zur lokalen Parametrisierung]{Beispiele}
+\label{ssub:1110}
+\begin{enumerate}
+	\item Der $2$-Torus $T^2$ ist das Bild von
+	\[
+		g:\mathds{R}^2 \to \mathds{R}^2,\ g(x,y) = (\cos(x),\sin(x),\cos(y)\sin(y))\subset T^2 \subset \mathds{R}^4
+	\]
+	$g$ ist lokale Parametrisierung:
+	\[
+		\mathd_{(x,y)} g = 
+		\begin{pmatrix}
+		-\sin(x) & 0\\
+		\cos(x) & 0\\
+		0 & -\sin(x)\\
+		0 & \cos(y)
+		\end{pmatrix}
+	\]
+	$\mathd_{(x,y)} g$ hat somit immer vollen Rang 2, also ist $\mathd_{(x,y)} g$ injektiv. Es folgt somit, dass $g$ eine Immersion ist.
+	\missingfigure{Diagramm zum lok. Homöomorphismus von g}
+	\marginnote
+	$\Rightarrow\ \hat{g}$ stetig (Qoutiententopologie), $\hat{g}$ bijektiv, $T^2$ kompakt\\
+	$\Rightarrow\ \hat{g}$ Homöomorphimus\\
+	$\Rightarrow\ g$ lokaler Homöomorphismus
+\end{enumerate}
 % subsection 11 (end)
 % section 1 (end)
+
 
 
 \cleardoubleoddemptypage
