@@ -337,7 +337,7 @@ Dann existieren $\emptyset \not= U \subset X$ offen und $K \in \mathds{R}$ so, d
 \minisec{Beweis}
 Definiere 
 \begin{align*}
-	A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} \subset X = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
+	X \supset A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
 \end{align*}
 Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. Außerdem enthält dies eine nichtleere offene Menge. Also existiert ein $n$ und $U \subset X$ nichtleer und offen mit $U \subset A_n$. \bewende
 % subsection 112 (end)
@@ -387,6 +387,73 @@ Daher ist $+ : X \times X \to X$ gleichmäßig stetig bezüglich der Norm $\norm
 Daher ist $\cdot : K \times X \to X$ stetig, denn falls $(\lambda_i)_{i \in I}$ ein Netz in $K$, $(x_i)_{i \in I}$ ein Netz in $X$ mit $\lambda_i \to \lambda $, $x_i\to x$,
 dann $\lambda_i x_i \to \lambda x$.
 % subsection 23 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:24}
+Seien $X,Y$ topologische Vektorräume, $T : X \to Y$ linear. Dann sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $T$ ist stetig.
+	\item $T$ ist stetig in $0$.
+	\item $T$ ist stetig in einem Punkt $\overline{x}$.
+\end{enumerate}
+\minisec{Beweis}
+(1) $\Rightarrow$ (2) $\Rightarrow $ (3) ist klar. Wir zeigen (3) $\Rightarrow$ (1):
+
+Für $y \in X$ definiere $L_y : X \to X$, $x \mapsto y+ x$. Dann ist $L_y$ bijektiv und stetig. Da auch $L_{-y}$ stetig ist, ist $L_y$ ein Homöomorphismus. Sei nun $T$ in 
+$\overline{x}$ stetig. Sei $x_0 \in X$. Wir zeigen: $T$ ist stetig in $x_0$. Setze $y := \overline{x} - x_0$. Dann ist
+\begin{align*}
+	T(x) = T(x+y-y) = T(-y) + T(x+y) = L_{T(-y)} \circ T \circ L_y (x)
+\end{align*}
+Da $L_y(x_0) = \overline{x}$, $T$ stetig in $\overline{x}$ ist und $L_y$, $L_{T(-y)}$ stetig sind, ist somit $T$ stetig in $x_0$. \bewende
+% subsection 24 (end)
+
+\subsection[Definition: Stetige Funktionale und Operatoren]{Definition} % (fold)
+\label{sub:25}
+Für topologische Vektorräume $X,Y$ definieren wir 
+\[
+	L(X,Y) = \set[T : X \to Y]{T \text{ linear und stetig}}  
+\]
+Wir schreiben $X'$ für $L(X,K)$ für den \Index{Dualraum} von $X$. Die Elemente von $X'$ heißen (stetige) \Index{Funktionale}.\footnote{Aus der linearen Algebra: $X^* = \Hom(X,\mathds{R}) = \set[T : X \to Y]{T \text{ linear}}$. Die Elemente von $X^*$ heißen Funktionale}
+Die Elemente von $L(X,X)$ heißen (stetige) \Index{Operatoren} auf $X$. 
+% subsection 25 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:26}
+$L(X,Y)$ und $L(X,K) = X'$ sind Vektorräume, wobei die Vektorraumstruktur punktweise definiert ist. $L(X,X)$ ist sogar eine Algebra mittels Komposition.
+% subsection 26 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:27}
+Seien $X,Y$ normierte Vektorräume, $T : X \to Y$ linear. Dann ist $T$ stetig genau dann, wenn ein $\mu \ge 0$ existiert, sodass 
+\[
+	\norm[Y]{T(x)} \le \mu \cdot \norm[X]{x} \quad \forall x \in X  
+\]
+\minisec{Bemerkung}
+Ein stetiger Operator zwischen normierten Vektorräumen heißt deswegen aus \bet{beschränkt}\index{Operator!beschränkter Operator} 
+\minisec{Beweis}
+\begin{description}
+	\item[\enquote{$\Leftarrow$}:] Klar: Wenn $x_n \to 0$, dann $T(x_n) \to 0$, denn $\norm{T(x_n)} \le \mu \norm{x_n } \to 0$
+	\item[\enquote{$\Rightarrow $}:] Angenommen $T$ ist stetig. Dann setzen wir
+	\[
+		\mu := \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}  }]{x \in X \setminus \set{0} } 
+	\] 
+	Falls $\mu = \infty$, dann existieren $x_n \in X$ mit $\frac{1}{\norm[X]{x_n}} \cdot \norm[Y]{T(x_n)} \ge n$. Betrachte 
+	$x_n' :=  \frac{1}{n \cdot \norm[X]{x_n}} \cdot x_n $, dann $\norm{x_n'} = \frac{1}{n}$, also $x_n' \to 0$. Aber es gilt $T(x_n')\not\to 0$, denn
+	\begin{align*}
+		\norm[Y]{T(x_n')} = \frac{1}{n \cdot \norm[X]{x_n} } \cdot \norm[Y]{T(x_n)} \ge 1 
+	\end{align*}
+	für alle $n$, \light zur Stetigkeit von $T$. Also $\mu < \infty$. \bewende
+\end{description}
+% subsection 27 (end)
+
+\subsection[Definition: Operatornorm]{Definition} % (fold)
+\label{sub:28}
+Seien $X,Y$ normierte Vektorräume, $T \in L(X,Y)$. Die \bet{Norm} (oder \Index{Operatornorm}) von $T$ ist
+\[
+	\norm{T} = \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}}]{x \in X \setminus \set{0} } = \sup \set[{\norm[Y]{T(x)} }]{x \in X \text{ mit } \norm[X]{x} = 1}   
+\] 
+Nach \ref{sub:27} ist $\norm{T}<  \infty $ und $\norm[Y]{T x} \le \norm{T} \cdot \norm[X]{x}$ für alle $x \in X$.
+% subsection 28 (end)
 % section 2 (end)
 
 
