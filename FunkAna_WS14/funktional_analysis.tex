@@ -322,7 +322,72 @@ dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$. \light zur M
 	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung)
 \end{enumerate}
 % subsection 111 (end)
+
+\subsection{Korollar: Satz der gleichmäßigen Beschränktheit} % (fold)
+\label{sub:112}
+Sei $(X,d)$ ein vollständiger metrischer Raum. Sei $F \subset C(X,\mathds{R})$ eine Menge, die \Index{punktweise gleichmäßig beschränkt} ist, d.h. für jedes $x \in X$ 
+existiert $K_x \in \mathds{R}$, sodass
+\[
+	\abs*{f(x)} \le K_x \enspace \forall f \in F. 
+\] 
+Dann existieren $\emptyset \not= U \subset X$ offen und $K \in \mathds{R}$ so, dass 
+\[
+	\abs*{f(x)} \le K \enspace \forall x \in U, f \in F 
+\]
+\minisec{Beweis}
+Definiere 
+\begin{align*}
+	A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} \subset X = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
+\end{align*}
+Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. Außerdem enthält dies eine nichtleere offene Menge. Also existiert ein $n$ und $U \subset X$ nichtleer und offen mit $U \subset A_n$. \bewende
+% subsection 112 (end)
 % section 1 (end)
+\newpage
+
+\section{Normierte Räume, Hahn-Banach Sätze} % (fold)
+\label{sec:2}
+
+\subsection[Definition: Topologischer Vektorraum]{Definition} % (fold)
+\label{sub:21}
+Sei $X$ ein $K$-Vektorraum mit einer Topologie $\mathcal{T}$. Wir sagen $X$ ist ein \Index{topologischer Vektorraum}, falls Addition und Skalarmultiplikation stetig sind:
+\begin{align*}
+	+ : X \times X \quad &, \quad(x,y) \mapsto x+y \\
+	\cdot : K \times X \to X \quad &, \quad (\lambda ,x) \mapsto \lambda \cdot x
+\end{align*}
+% subsection 21 (end)
+
+\subsection[Proposition: Unterräume topologischer Vektorräume sind topologische Vektorräume]{Proposition} % (fold)
+\label{sub:22}
+Sei $X$ ein topologischer $K$-Vektorraum und $Y \subset X$ ein Untervektorraum. Dann sind $Y$ und $\overline{Y}$ topologische Vektorräume mit der Unterraumtopologie.
+\minisec{Beweis}
+\begin{itemize}
+	\item Klar für $Y$.
+	\item Zu zeigen: $\overline{Y}$ ist ein Untervektorraum. Seien $x_0, y_0 \in \overline{Y}$ und sei $U$ eine offene Menge in $X$ mit $x_0 + y_0 \in U$. Dann existieren
+	offene Mengen $V,W$ von $X$ mit $x_0 \in V$, $y_0 \in W$ und $V+W \subset U$, da die Addition stetig ist. Da $x_0 \in \overline{Y}$ und $x_0 \in V$, existiert 
+	$x_1 \in Y$ mit $x_1 \in V$. Analog existiert $y_1 \in Y$ mit $y_1 \in W$. Daher ist $x_1 + y_1 \in Y \cap U$. Da $U$ eine beliebige offene Umgebung um $x_0+ y_0$,
+	folgt $x_0 +y_0 \in \overline{Y}$.
+	
+	Skalarmultiplikation genauso. \bewende
+\end{itemize}
+% subsection 22 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:23}
+Ein normierter Vektorraum $(X, \norm{.})$ ist ein topologischer Vektorraum bezüglich der von $\norm{.}$ induzierten Topologie.
+\minisec{Beweis}
+Es gilt 
+\begin{align*}
+	\norm[X]{(x+y) - (x'+y')} \le \norm[X]{x-x'} + \norm[X]{y-y'}   
+\end{align*}
+Daher ist $+ : X \times X \to X$ gleichmäßig stetig bezüglich der Norm $\norm[X \times X]{(z,z')} = \norm[X]{z} + \norm[X]{z'}$ auf $X \times X$. Ähnlich folgt
+\begin{align*}
+	\norm[X]{\lambda x - \lambda' x'} = \norm[X]{\lambda (x-x') + (\lambda -\lambda')x'} \le \abs*{\lambda } \cdot \norm[X]{x-x'} + \abs*{\lambda -\lambda'} \cdot 
+	\norm[X]{x'}      
+\end{align*}
+Daher ist $\cdot : K \times X \to X$ stetig, denn falls $(\lambda_i)_{i \in I}$ ein Netz in $K$, $(x_i)_{i \in I}$ ein Netz in $X$ mit $\lambda_i \to \lambda $, $x_i\to x$,
+dann $\lambda_i x_i \to \lambda x$.
+% subsection 23 (end)
+% section 2 (end)
 
 
 
