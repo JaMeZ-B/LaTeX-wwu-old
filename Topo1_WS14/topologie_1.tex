@@ -26,7 +26,7 @@
 
 \subsection[Definition: Kategorie]{Definition} % (fold)
 \label{sub:11}
-Eine \Index{Kategorie} $\mathcal{C}$ besteht aus: \marginnote{13. Okt}
+Eine \Index{Kategorie} $\mathcal{C}$ besteht aus:
 \begin{enumerate}[i)]
 	\item Einer Klasse $\Ob(\mathcal{C})$. Die Elemente von $\Ob(\mathcal{C})$ heißen die \Index{Objekte} von $\mathcal{C}$.
 	\item Zu je zwei Objekten $A,B$ aus $\mathcal{C}$ einer Menge $\Mor_{\mathcal{C}}(A,B)$. Die Elemente von $\Mor_\mathcal{C}(A,B)$ heißen \Index{Morphismen} von
@@ -217,7 +217,7 @@ Ein \Index{simplizialer Komplex} $K=(V, \Sigma)$ besteht aus einer Menge $V$ und
 	\item $\sigma \in \Sigma$, $\emptyset \not= \tau \subseteq \sigma \Longrightarrow \tau \in\Sigma.$ \hfill {\footnotesize(Abgeschlossen bzgl. Teilmengenbildung)}
 \end{enumerate}
 Die Elemente von $V$ heißen die \Index{Ecken} oder \Index{Vertices} von $K$. Die Elemente von $\Sigma$ heißen die \Index{Simplizes} von $K$. Enthält $\sigma \in \Sigma$ 
-genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$n$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
+genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$\mathbf{n}$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
 
 \noindent Ist $V$ geordnet, so heißt $K$ geordnet. Ist $V$ endlich, so heißt $K$ endlich.
 % subsection 22 (end)
@@ -468,50 +468,53 @@ Sei $S$ eine Menge.Sei $R$ ein Ring.\marginnote{Ring mit Eins} Der \bet{freie $R
 \]
 Die $R$-Modulstruktur auf $R[S]$ ist definiert durch:
 \begin{align*}
-	r \cdot \enbrace*{\sum_{s\in S} r_s \cdot s} &:= \sum_{s \in S} (r \cdot r_s) \cdot s \\
-	\enbrace*{\sum_{s \in S} r_s \cdot s} + \enbrace*{\sum_{s \in S} r_s' s} &:= \sum_{s \in S} (r_s + r_s') \cdot s
+	r \cdot \enbrace*{\sum_{s\in S} r_s \cdot s} := \sum_{s \in S} (r \cdot r_s) \cdot s \qquad \qquad 
+	\enbrace*{\sum_{s \in S} r_s \cdot s} + \enbrace*{\sum_{s \in S} r_s' s} := \sum_{s \in S} (r_s + r_s') \cdot s
 \end{align*}
 \minisec{Bemerkung}
 Mittels $s= \sum_{s' \in S} \delta_{s,s'} \cdot s'$ fassen wir $S$ als Teilmenge von $R[S]$ auf.
 % subsection 31 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Universale Eigenschaft von freien Moduln]{Lemma} % (fold)
 \label{sub:32}
-Sei $S$ eine Menge, $R$ ein Ring.
-\begin{enumerate}[1)]
-	\item Ist $M$ ein $R$-Modul und $i : S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi : R[S] \to M$, die $i$ fortsetzt.
-	\item Sei $f : R[S] \to M$ $R$-linear und $p : N \twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f} : R[S] \to N$ mit $p \circ \hat{f} =f$.
+Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
+\begin{minipage}{0.7\textwidth}
+	\begin{enumerate}[1)]
+		\item Ist $M$ ein $R$-Modul und $i : S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi : R[S] \to M$, die $i$ fortsetzt.
+		\item Sei $f : R[S] \to M$ $R$-linear und $p : N \twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f} : R[S] \to N$ mit $p \circ \hat{f} =f$.
+	\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}{0.25\textwidth}
 	\[
 		\begin{tikzcd}
 			\mbox{ } & N \dar["p", two heads] \\
 			R[S] \rar["f"] \urar["\hat{f}", dashed] & M
 		\end{tikzcd}
-	\]\todo{platzsparender mit \texttt{minipage}}
-\end{enumerate}
+	\]
+\end{minipage}
 \minisec{Beweis}
 \begin{enumerate}[1)]
 	\item Eine solche Abbildung ist gegeben durch
-	\[
-		\varphi \enbrace*{\sum_{s \in S} r_s \cdot s} = \sum_{s \in S} r_s \cdot i(s) 
-	\]
+	\(
+		\varphi \enbrace*{\sum_{s \in S} r_s \cdot s} = \sum_{s \in S} r_s \cdot i(s)
+	\).
 	Ist $\varphi'$ eine zweite, so gilt 
 	\begin{align*}
 		\hat{\varphi} \enbrace*{\sum_{s \in S} r_s \cdot s}  = \sum_{s \in S} r_s \cdot \hat{\varphi}(s) = \sum_{s  \in S} r_s \cdot i(s)
 	\end{align*}
 	\item Wähle für jedes $s \in S$ ein Urbild $j(s)\in N$ für $f(s) \in M$ unter $p : N \twoheadrightarrow M$. Nun wende 1) auf $j : S \to N$ an, um $\hat{f} : R[S] \to N$
-	mit $\hat{f}(s) = j(s)$ zu erhalten. Nun ist $ p \circ \hat{f}(s) = f(s)$ für alle $s \in S$. Mit 1) folgt $p \circ \hat{f} = f$.
+	mit $\hat{f}(s) = j(s)$ zu erhalten. Nun ist $ p \circ \hat{f}(s) = f(s)$ für alle $s \in S$. Mit der Eindeutigkeit aus 1) folgt $p \circ \hat{f} = f$. \bewende
 \end{enumerate}
 % subsection 32 (end)
 
 \subsection[Beispiel für freie und nicht-freie Moduln]{Beispiel} % (fold)
 \label{sub:33}
 \begin{enumerate}[(i)]
-	\item Sei $K$ ein Körper, $V,M,N$ $K$-Vektorräume, $f : V \to M$, $p : N \to M$ $K$-linear, $p$ surjektiv. Dann gibt es $\hat{f} : V \to N$ mit
+	\item Sei $K$ ein Körper und $V,M,N$ seien $K$-Vektorräume, $f : V \to M$, $p : N \to M$ seien $K$-linear, $p$ surjektiv. Dann gibt es $\hat{f} : V \to N$ mit
 	$p \circ \hat{f} = f$. Wir können Lemma \ref{sub:32} benutzen, da $V$ eine Basis $B$ hat, also $V \cong K[B]$.
-	\item Sei $R=\mathds{Z}$, sie $V= \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, $M = \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, $f= \id : V \to M$, $N= \mathds{Z}$ und 
+	\item Sei $R=\mathds{Z}$, sei $V= \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ und $M = \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, sowie $f= \id : V \to M$, $N= \mathds{Z}$ und 
 	$p : \mathds{Z}n \to \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ die Projektion mit $p(n)= n + 2 \mathds{Z}$. Dann gibt es keine $\mathds{Z}$-lineare Abbildung 
 	$\hat{f} : \nicefrac{\mathds{Z}}{2 \mathds{Z}} \to \mathds{Z}$ mit $p \circ \hat{f} = f$.
-	
 	Ist $\hat{f} (1+ 2 \mathds{Z}) = n \in \mathds{Z}$, so folgt 
 	\[
 		2 n = 2 \cdot \hat{f}(1+ 2 \mathds{Z}) = \hat{f} \enbrace[\big]{2 \cdot (1+ 2 \mathds{Z})} = \hat{f} (0+ 2 \mathds{Z}) =0
@@ -523,94 +526,109 @@ Sei $S$ eine Menge, $R$ ein Ring.
 \subsection[Definition: $n$-ter Kettenmodul]{Definition} % (fold)
 \label{sub:34}
 Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Sei $\Sigma_n := \set[\sigma \in \Sigma]{\sigma \text{ ist ein $n$-Simplex}}$. Sei $R$ ein Ring. Der 
-\bet{$n$-te Kettenmodul}\index{nterKettenmodul@$n$-ter Kettenmodul} von $K$ über $R$ ist definiert als 
+\bet{$\mathbf{n}$-te Kettenmodul}\index{nterKettenmodul@$n$-ter Kettenmodul} von $K$ über $R$ ist definiert als 
 \[
 	C_n(K;R) := R[\Sigma_n]
 \]
 Ist $R=\mathds{Z}$, so schreiben wir auch kurz $C_n(K) := C_n(K;\mathds{Z})$.
 % subsection 34 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Orientierung eines $(n-1)$-Simplizes als Teilmenge eines $n$-Simplizes]{Definition} % (fold)
 \label{sub:35}
 Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Sei $\sigma = \set{v_0, \ldots ,v_n}$ ein $n$-Simplex von $K$. Bezüglich der Ordnung von $K$ sei dabei 
 $v_0 < v_1 < \ldots < v_n$. Sei $\tau$ ein $(n-1)$-Simplex von $K$. Definiere
 \[
 	\varepsilon_\sigma^\tau := \begin{cases}
-		(-1)î, &\text{ falls }\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n} \\
+		(-1)^i, &\text{ falls }\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n} \\
 		0 , &\text{ sonst}
 	\end{cases}
 \]
 \minisec{Bemerkung}
 $\varepsilon^\tau_\sigma \not= 0 \iff \tau$ ist eine Seite von $\sigma$.
 \minisec{Beispiel}
+Für den folgenden geordneten simplizialen Komplex gilt
 \[
-	\text{Hier fehlt noch was } \varepsilon_{\set{0,1,2}}^{\set{0,1}} = 1 , \varepsilon_{\set{0,1,2}}^{\set{0,2}}=-1 , \varepsilon_{\set{0,1,2}}^{\set{1,2}} =1    
+	\vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.5,0.866);
+		\coordinate (2) at (1,0);
+		\draw[very thick, 
+			postaction={decorate},
+			decoration={markings,
+				mark=at position 1/6 with {\arrow{to}},
+				mark=at position 0.5 with {\arrow{to}},
+				mark=at position 5/6 with {\arrow{to reversed}}}] 
+		(0) -- (1) -- (2) -- cycle;
+		\foreach \x/\pos in{0/left,1/above,2/right}{
+			\node[\pos] at (\x) {$\x$};
+		}
+	\end{tikzpicture}}} \qquad 
+	\varepsilon_{\set{0,1,2}}^{\set{0,1}} = 1 , \quad \varepsilon_{\set{0,1,2}}^{\set{0,2}}=-1 , \quad \varepsilon_{\set{0,1,2}}^{\set{1,2}} =1    
 \]
-\todo{2-Simplex mit Orientierung hinzufügen}
+
 % subsection 35 (end)
 
 \subsection[Definition: $n$-te Randabbildung]{Definition} % (fold)
 \label{sub:36}
-Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$n$-te Randabbildung}\index{nte Randabbildung@$n$-te Randabbildung} 
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$\mathbf{n}$-te Randabbildung}\index{nte Randabbildung@$n$-te Randabbildung} 
 \[
 	\partial_n : \underset{=R[\Sigma_n]}{C_n(K;R)} \to \underset{=R[\Sigma_{n-1}]}{C_{n-1}(K;R)}
 \]
 ist definiert durch
 \[
-	\partial_n(\sigma) = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \tau \in \Sigma_n
+	\partial_n(\sigma) = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \sigma \in \Sigma_n
 \]
 % subsection 36 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: $\partial_{n-1} \circ \partial_n = 0$]{Proposition} % (fold)
 \label{sub:37}
 \[
 	\partial_{n-1} \circ \partial_n = 0
 \]
+Damit folgt $\im \partial_n \subseteq \ker \partial_{n-1}$.
 \minisec{Beweis (mit Lemma \ref{sub:38})}
-Sei $\sigma$ ein $n$-Simplex von $K$. 
+Sei $\sigma$ ein $n$-Simplex von $K$. Dann gilt
 \begin{align*}
-	\partial_{n-1} \enbrace*{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_{\sigma}^\tau \partial_{n-1} (\tau) 
+	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_{\sigma}^\tau \cdot \partial_{n-1} (\tau) 
 	 &= \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
-	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \varepsilon_\tau^\eta \varepsilon_\sigma^\tau}\eta 
-	 \stackrel{\text{Lemma \ref{sub:38}}}{=} 0 \bewende
+	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \!\!\!\!\! \! \! \varepsilon_\tau^\eta \cdot \varepsilon_\sigma^\tau}
+	 \eta  \\
+	 &\stackrel{\mathclap{\text{Lemma \ref{sub:38}}}}{=} \quad \enspace 0 \bewende
 \end{align*}
 % subsection 37 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Ein $(n-2)$-Simplex ist Seite von genau zwei $(n-1)$-Simplizes]{Lemma} % (fold)
 \label{sub:38}
 Sei $\sigma$ ein $n$-Simplex. Sei $\eta \subseteq \sigma$ ein $(n-2)$-Simplex. Dann gibt es genau zwei $(n-1)$-Simplizes $\tau, \tau'$ von $K$, die eine Seite von $\sigma$
 sind und $\eta$ als Seite enthalten. Es gilt
 \[
-	\varepsilon_\tau^\eta \varepsilon^\tau_\sigma = - \varepsilon_{\tau'}^\eta \varepsilon^{\tau'}_\sigma.
+	\varepsilon_\tau^\eta \cdot \varepsilon^\tau_\sigma = - \varepsilon_{\tau'}^\eta \cdot \varepsilon^{\tau'}_\sigma
 \]
 \minisec{Beweis}
 Sei $\sigma= \set{v_0, \ldots ,v_n}$ mit $v_0 < v_1 < \ldots < v_n$. Dann ist $\eta = \set{v_0, \ldots , v_n} \setminus \set{v_i, v_j}$ mit $i<j$. Dann sind 
-$\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n}$ und $\tau' = \set{v_0, \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}$ die gesuchten $(n-1)$-Simplizes und es gilt:
+$\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n}$ und $\tau' = \set{v_0, \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}$ die gesuchten $(n-1)$-Simplizes und es gilt
 \begin{align*}
 	\varepsilon_\sigma^\tau = (-1)^i \enspace, \enspace \varepsilon_\sigma^{\tau'} = (-1)^j \enspace, \enspace \varepsilon^\eta_\tau = (-1)^{j-1} \enspace, \enspace 
 	\varepsilon_{\tau'}^\eta = (-1)^i \bewende
 \end{align*}
 % subsection 38 (end)
 
-\subsection{Notation} % (fold)
+\subsection[Notation für das Weglassen eines Knotens]{Notation} % (fold)
 \label{sub:39}
 Für $\sigma \in \Sigma_n$, $ \sigma= \set{v_0, \ldots ,v_n} $ mit $v_0 < \ldots < v_n$ schreiben wir 
 \[
 	\delta^j \sigma := \set{v_0 , \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}  \in \Sigma_{n-1}
 \]
-Dann ist $\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \delta^j \sigma$.
+Dann ist $\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \cdot \delta^j \sigma$.
+\todo{RevChap3}
 % subsection 39 (end)
 
-\subsection{Bemerkung} % (fold)
-\label{sub:310}
-$\partial_{n-1} \circ \partial_n = 0 \iff \im \partial_n \subseteq \ker \partial_{n-1}$
-% subsection 310 (end)
-
 \subsection[Definition: $n$-ter Homologiemodul]{Definition} % (fold)
-\label{sub:311}
-Sei $K$ ein geordneter simplizialer Komplex. Der \bet{$n$-te Homologiemodul}\index{nter Homologiemodul@$n$-ter Homologiemodul} von $K$ über $R$ ist definiert als
+\label{sub:310}
+Sei $K$ ein geordneter simplizialer Komplex. Der \bet{$\mathbf{n}$-te Homologiemodul}\index{nter Homologiemodul@$n$-ter Homologiemodul} von $K$ über $R$ ist 
+definiert als
 \[
-	H_n(K;R) := \frac{\ker \partial_n : C_n(K;R) \to C_{n-1}(K;R)}{\im \partial_{n-1} : C_{n+1}(K;R) \to C_n(K;R)} 
+	H_n(K;R) := \frac{\ker \partial_n : C_n(K;R) \to C_{n-1}(K;R)}{\im \partial_{n+1} : C_{n+1}(K;R) \to C_n(K;R)} 
 \]
 % subsection 311 (end)
 % section 3 (end)
