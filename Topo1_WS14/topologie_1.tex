@@ -339,7 +339,8 @@ Quotiententopologie ist $\abs*{K}$ ein topologischer Raum.
 			\coordinate (1) at (1,0);
 			\coordinate (2) at (0.5,0,0.866);
 			\coordinate (3) at (0.5,0.866,0.433);
-			\draw[sharp corners] (0) -- (1) -- (2) -- (0) -- (3) -- (2) -- (1) -- (3) -- cycle;
+			\draw[sharp corners, dashed] (0) -- (1);
+			\draw[sharp corners] (1) -- (2) -- (0) -- (3) -- (2) -- (1) -- (3) -- (0);
 		\end{tikzpicture}}} \cong S^2 
 	\end{align*}
 	Allgemein gilt $\abs*{\partial \Delta^n} \cong S^{n-1}$.
@@ -389,26 +390,69 @@ $\chi(K) := \sum_{n \in \mathds{N}} (-1)^n a_n $ die \Index{Euler-Charakteristik
 		\coordinate (2) at (60:0.6);
 		\draw[thick] (1) -- (0) -- (2) -- cycle;
 	\end{tikzpicture}}} } &= 3 -3 = 0 \\
-	\chi \enbrace*{\vcenter{\hbox{\begin{tikzpicture}
+	\chi \enbrace[\bigg]{\vcenter{\hbox{\begin{tikzpicture}
 		\coordinate (0) at (0,0);
 		\coordinate (1) at (0.6,0);
 		\coordinate (2) at (0.6,0.6);
 		\coordinate (3) at (0,0.6);
 		\draw[thick] (0) -- (1) -- (2) -- (3) -- cycle;
 	\end{tikzpicture}}} } &= 4-4 =0 \\
-	\chi(n\text{-eck}) &= n-n = 0
+	\chi \enbrace[\big]{\benbrace*{n\text{-Eck}}} &= n-n = 0
 \end{align*}
-\todo{RevChap2}
+
 \begin{align*}
-	\chi(\partial \Delta^3 &= \text{Dreieckspyramide}) = 4 - 6 +4 = 2 \\
-	\chi\enbrace*{\text{Würfel}} &= 8 -12 +6 = 2 \\
-	\chi(\text{Oktaeder}) &= 6- 12  +8 = 2 
+	\chi \enbrace*{\partial \Delta^3 = \vcenter{\hbox{\begin{tikzpicture}
+			\coordinate (0) at (0,0);
+			\coordinate (1) at (1,0);
+			\coordinate (2) at (0.5,0,0.866);
+			\coordinate (3) at (0.5,0.866,0.433);
+			\draw[sharp corners, dashed] (0) -- (1);
+			\draw[sharp corners] (1) -- (2) -- (0) -- (3) -- (2) -- (1) -- (3) -- (0);
+		\end{tikzpicture}}} } &= 4 - 6 +4 = 2 \\
+	\chi\enbrace[\Bigg]{ \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0,-0.6);
+		\coordinate (1) at (0.6,0,-0.6);
+		\coordinate (2) at (0.6,0.6,-0.6);
+		\coordinate (3) at (0,0.6,-0.6);
+		\draw[thick, dashed] (3) -- (0) -- (1);
+		\draw[thick] (1) -- (2) -- (3);
+		\draw[thick, dashed] (0,0) -- (0);
+		\draw[thick] (0.6,0) -- (0.6,0,-0.6);
+		\draw[thick] (0.6,0.6) -- (0.6,0.6,-0.6);
+		\draw[thick] (0,0.6) -- (0,0.6,-0.6) -- ++ (0.2,0);
+		\draw[thick] (0,0) rectangle (0.6,0.6);
+	\end{tikzpicture}}} } &= 8 -12 +6 = 2 \\
+	\chi \enbrace*{ \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (A1) at (0,0);
+		\coordinate (A2) at (0.6,0.2);
+		\coordinate (A3) at (1,0);
+		\coordinate (A4) at (0.4,-0.2);
+		\coordinate (B1) at (0.5,0.5);
+		\coordinate (B2) at (0.5,-0.5);
+		\begin{scope}[thick,dashed,]
+		\draw (A1) -- (A2) -- (A3);
+		\draw (B1) -- (A2) -- (B2);
+		\end{scope}
+		\begin{scope}[thick]
+		\draw[] (A1) -- (A4) -- (B1);
+		\draw[] (A1) -- (A4) -- (B2);
+		\draw[] (A3) -- (A4) -- (B1);
+		\draw[] (A3) -- (A4) -- (B2);
+		\draw (B1) -- (A1) -- (B2) -- (A3) --cycle;
+		\end{scope}
+	\end{tikzpicture}}} } &= 6- 12  +8 = 2 
 \end{align*}
 % subsection 29 (end)
 
 \subsection[Satz über die Euler-Charakteristik]{Satz} % (fold)
 \label{sub:210}
-Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'}$, so gilt $\chi(K)= \chi(K')$.
+Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'}$, so gilt 
+\[
+	\chi(K)= \chi(K').
+\]
+\minisec{Bemerkung}
+Die Euler-Charakteristik ist also eine topologische Invariante von simplizialen Komplexen. Sie hängt nur von der topologischen Struktur von $\abs*{K}$ und nicht
+von der kombinatorischen Struktur von $K$ ab.
 % subsection 210 (end)
 % section 2 (end)
 \newpage
