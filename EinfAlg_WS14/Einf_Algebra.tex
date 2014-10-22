@@ -289,9 +289,9 @@ Wegen $X\subseteq \lh{X}$ und $e\in \lh{X}$ folgt $\{e\}\cup W\subseteq \lh{X}$.
 Sei $G$ eine Gruppe und sei $g\in G$. Für $n\ge 1$ setze $g^n=\underbrace{g\cdot \dots \cdot g}_{n-mal}$ sowie $g^{-n}=\underbrace{g^{-1}\cdot \dots \cdot g^{-1}}_{n-mal}$ und $g^0=e$.\\
 Dann gilt $\forall k,l\in \mathds{Z}$, dass $g^k\cdot g^l = g^{k+l}$.\\
 Sei $\lh{g}=\lh{\{g\}}\stackrel{1.10}{=}\{g^n | n\in \mathds{Z}\}$. Man nennt $\lh{g}$ die von $g$ erzeugte \bet{zyklische Gruppe}\index{Gruppe!zyklische !}. Wenn für ein $n\ge 1$ gilt $g^n=e$, so heißt $n$ ein \Index{Eponent} von $g$. DIe \Index{Ordnung} von g ist der kleinste Eponent von g,
-\[O(g)=min\enbrace{\{n\ge 1 | g^n=1\}\cup \{\infty\}}\]
-$O(g)=\infty$ bedeutet: $g^n\not= e~\forall n\ge 1$\\
-$O(g)=1$ bedeutet: $g^n=g=e$
+\[o(g)=min\enbrace{\{n\ge 1 | g^n=1\}\cup \{\infty\}}\]
+$o(g)=\infty$ bedeutet: $g^n\not= e~\forall n\ge 1$\\
+$o(g)=1$ bedeutet: $g^n=g=e$
 %sub end
 
 \subsection{Zyklische Gruppen}
@@ -299,7 +299,7 @@ $O(g)=1$ bedeutet: $g^n=g=e$
 Eine Gruppe $G$ heißt \Index{zyklisch}, wenn es ein $g\in G$ gibt mit $G=\lh{g}$. Wegen $g^kg^l=g^{k+l}=g^{l+k}=g^lg^k$ gilt: zyklische Gruppen sind abelsch.
 
 \minisec{Satz}
-Sei $G=\lh{g}$ zyklisch mit $O(g)=n<\infty$. Dann gilt $\#G=n$ und $G=\{g,g^1,g^2,g^3,\dots,g^n\}$.
+Sei $G=\lh{g}$ zyklisch mit $o(g)=n<\infty$. Dann gilt $\#G=n$ und $G=\{g,g^1,g^2,g^3,\dots,g^n\}$.
 \bet{Beweis}\\
 Jedes $m\in \mathds{Z}$ lässt sich schreiben als $m=kn+l$ mit $0\le l<n$ (Teilen mit Rest), also $g^m= \underbrace{g^{kn}}_{=e}.g^l=g^l$. Es folgt $G\subseteq \{g,g^2,\dots,g^n\}, g^n=g^0$.
 Ist $g^k=g^l$ für $0\le k\le l<n$, so gilt $e=g^0=g^{l-k}$, also $l-k=0$ (wegen$l<n$), also $\#\{g,g^2,\dots,g^n=g^0\}=n$.
@@ -337,7 +337,115 @@ Dann sind äquivalent:
 
 \minisec{Folgerung}
 Jedes $g\in G$ liegt in genau einer Linksnebenklasse bzgl. $H$, nämlich $g \in gH$.
+Entsprechendes gilt natürlich für Rechtsnebenklassen. Man setzt:\\
+$\nicefrac{G}{H}=\{gH~|~g \in G \}$ Menge der Linksnebenklasse, Rechtsnebenklassen analog.
+
+\minisec{Lemma}
+Sei $H\subseteq G$ Untergruppe der Gruppe $G$, sei $a \in G$.\\
+Dann ist die Abbildung $H \to gH, h \mapsto gH$ bijektiv.\\
+\bet{Beweis}\\
+"Surjektiv" ist klar nach Definition von $gH$. Angenommen, $gh=gh' \Rightarrow h=g^{-1}gh'=h'$
+\hfill $\square$
 %sub end
+
+\subsection{Satz von Lagrange}
+\label{sub:satz_von_lagrange}
+\index{Satz von Lagrange}
+Sei $G$ eine Gruppe und $H\subseteq G$ eine Untergruppe. Wenn zwei der drei Mengen $G,H,\nicefrac{G}{H}$ endlich sind, dann ist die dritte ebenfalls endlich und es gilt:\\
+\[\#G=\#h \cdot \#\nicefrac{G}{H} \]
+Insbesondere ist dann $\#H$ eine \Index{Teiler} von $\#G$.\\
+\vfill
+\bet{Beweis}\\
+Wenn $G$ endlich ist, dann sind auch $H$ und $\nicefrac{G}{H}$ endlich.\\
+Angenommen, $\nicefrac{G}{H}$ und $H$ sind endlich. Dann ist auch $G= \bigcup \nicefrac{G}{H}=\bigcup\{gH~|~gH\in \nicefrac{G}{H} \}$ endlich, da $\#gH=\#H$ nach \hyperref[sub:nebenklassen]{1.13}.\\
+Jetzt zählen wir genauer: sei $\#\nicefrac{G}{H}=m; \#H=n$ etwa $\nicefrac{G}{H}=\{g_1H,g_2H,\dots g_mH \}$.\\
+$g_iH\stackrel{1.13}{=}n~~~~~g_iH\cap g_jH=\emptyset$ für $i\not=j$ nach 1.13.\\
+$G=g_1\cap \#g_2H\cap \dots \cap g_mH \Rightarrow \#G=m\cdot n$
+\hfill $\square$
+
+\minisec{Bem}
+\begin{enumerate}[(1)]
+	\item Eine entsprechende Aussage gilt für Rechtsnebenklassen.
+	\item Die Abbildung $G \to G,~~g\mapsto g^{-1}$ bildet die Linksnebenklassen bijektiv auf die Rechtsnebenklassen ab:
+	\[
+	(gH)^{-1}=\{(gh)^{-1}~|~h \in H \} \stackrel{\text{Achtung!}}{=}\{h^{-1}g^{-1}~|~h \in H \}=\{hg^{-1}~|~h\in H \}=Hg^{-1}~~~~~~~~\text{(ÜA)}
+	\]
+\end{enumerate}
+
+\minisec{Korollar A (Lagrange)}
+Sei $G$ eine endliche Gruppe und sei $g\in G$. Dann teilt $o(g)$ die Zahl $\#G$.\\
+\bet{Beweis}\\
+Da $G$ endlich ist, folgt $o(g)<\infty$. Nach dem \hyperref[sub:satz_von_lagrange]{Satz von Lagrange} ist $\#\lh{g}=o(g)$ ein Teiler von $\#G$.
+\hfill $\square$
+
+\minisec{Korollar B}
+Sei $G$ eine endliche Gruppe, sei $p$ eine \Index{Primzahl}  (d.h. die einzigen Teiler von $p$ sind 1 und $p$) und $p>1$. Wenn gilt $\#G=p$, dann ist $G$ zyklisch. Für jedes $g\in G \textbackslash\{e\}$ gilt $\lh{g}=G$.\\
+\bet{Beweis}\\
+Sei $g \in G\textbackslash\{e\}$. Dann ist $o(g)>1$ und $o(g)$ teilt $p$. Es folgt $o(g)=p$, also $G=\lh{g}$ vgl. \hyperref[sub:zyklische_gruppen]{1.12}.
+\hfill $\square$
+
+Für endliche Gruppen sind Teilbarkeitseigenschaften wichtig, wie wir sehen werden.\\
+Die Zahl $\#\nicefrac{G}{H}:=[G:H]$ nennt man auch den \Index{Index von H in G}.
+
+\minisec{Wichtige Rechenregeln in Gruppen}
+\begin{enumerate}[(a)]
+	\item Man darf \uline{kürzen}
+	\begin{equation*}
+	\begin{aligned}
+		ax &= ay \Rightarrow x=y\\
+		xa &= ya \Rightarrow x=y
+	\end{aligned}
+	\end{equation*}
+	(multipliziere beide Seiten von links/rechts mit $a^{-1}$)
+	\item Es gilt $(x^{-1})^{-1}=x$   ($x^{-1}x=e=xx^{-1} \Rightarrow (x^{-1})^{-1}=x$)
+	\item Beim Invertieren darf die Reihenfolge umgedreht werden:\\
+	\[(ab)^{-1}=b^{-1}a^{-1}\\
+	\enbrace{ab(b^{-1}a^{-1})=e=(b^{-1}a^{-1})ab \Rightarrow (ab)^{-1}=b^{-1}a^{-1}}\\
+	(\text{in abelschen Gruppen gilt natürlich damit} (ab)^{-1}=a^{-1}b^{-1} )
+	\]
+\end{enumerate}
+% sub end
+\subsection{Homomorphismen}
+\label{sub:homomorphismen}
+Seien $G,K$ Gruppen. Eine Abbildung $\varphi: G \to K$ heißt \bet{(Gruppen-)Homomorphismus}\index{Homomorphismus!Gruppen-}, wenn $\forall x,y \in G$ gilt
+\[\varphi\underbrace{(x\cdot y)}_{\text{Verküpfung in G} } =\underbrace{\varphi(x)\varphi(y)}_{\text{Verknüpfung in K}} \]
+
+\minisec{Bsp}
+\begin{enumerate}[(a)]
+	\item $id_G: G \to G$ ist Homomorphismus
+	\item $H \subseteq G$ Untergruppe   $i:H \hookrightarrow G,~~~h \mapsto h$ Inklusion, ist Homomorphismus.
+	\item $(G,\cdot)=(\mathds{Z},+)~~m\in \mathds{Z} ~~ \varphi:\mathds{Z} \to \mathds{Z}, x\mapsto mx$ ist Homomorphismus, denn $\phi(x+y)=m(x+y)=mx+my=\varphi(x)+\varphi(y)$
+	\item $G$ Gruppe, $a \in G,~ a\not= e,~~ \lambda_a(x)=ax$.\\
+	$\lambda: G \to G$ ist kein Homomorphismus, denn $\lambda_a(e)=a, \lambda(ee)=a$, aber $\lambda_a(e)\lambda_a(e)=aa\not=a$
+\end{enumerate}
+
+\minisec{Lemma}
+Sei $\varphi:G \to K$ ein Homomorphismus von Gruppen. Dann gilt $\varphi(e_G)=e_K$ und $\varphi(x^{-1})=\varphi(x)^{-1}~\forall x \in G$. ($e_G$ Neutralelement in $G$ und $e_K$ Neutralelement in $K$)\\
+\bet{Beweis}\\
+\[
+	\varphi(e_G)=\varphi(e_G \cdot e_G)=\varphi(e_G) \cdot \varphi(e_G)
+	\stackrel{\text{kürzen}}{\Rightarrow} e_K=\varphi(e_G)
+\]
+\[
+	e_K=\varphi(e_G)=\varphi(x^{-1}x)=\varphi(x^{-1})\varphi(x) \Rightarrow \varphi(x)^{-1}=\varphi(x^{-1})
+\]
+\hfill $\square$
+
+\uline{Achtung:} $\varphi(x)^{-1}$ ist das Inverse in $K$ von $\varphi(x)$ \uline{nicht} die Umkehrabbildung!\\
+
+Das \Index{Bild} eines Homomorphismus $\varphi:G \to K$ ist $\varphi(G)\subseteq K$,\\
+der \Index{Kern} ist $ker(\varphi)=\{x \in G~|~\varphi(x)=e_K \}\subseteq G$
+%sub end
+
+\subsection{Satz 1}
+\label{sub:satz_1}
+Bild und Kern von Gruppenhomomorphismen sind Untergruppen.\\
+\bet{Beweis}\\
+Setze $H=\varphi(G)\subseteq K$. Es folgt $e_K \in H$. Für $\varphi(x),\varphi(y)\in H$ gilt $\varphi(x)\varphi(y)=\varphi(xy)\in H$ sowie $\varphi(x)^{-1}=\varphi(x^{-1}) \in H$, also ist $H$ Untergruppe.
+
+
+
+
 %sec end
 
 
