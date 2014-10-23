@@ -576,7 +576,7 @@ Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$\mathbf{n}$-te
 \]
 ist definiert durch
 \[
-	\partial_n(\sigma) = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \sigma \in \Sigma_n
+	\partial_n(\sigma) = \sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \sigma \in \Sigma_n
 \]
 % subsection 36 (end)
 
@@ -589,8 +589,9 @@ Damit folgt $\im \partial_n \subseteq \ker \partial_{n-1}$.
 \minisec{Beweis (mit Lemma \ref{sub:38})}
 Sei $\sigma$ ein $n$-Simplex von $K$. Dann gilt
 \begin{align*}
-	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_{\sigma}^\tau \cdot \partial_{n-1} (\tau) 
-	 &= \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
+	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = 
+	\sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_{\sigma}^\tau \cdot \partial_{n-1} (\tau) 
+	 &= \sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
 	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \!\!\!\!\! \! \! \varepsilon_\tau^\eta \cdot \varepsilon_\sigma^\tau}
 	 \eta  \\
 	 &\stackrel{\mathclap{\text{Lemma \ref{sub:38}}}}{=} \quad \enspace 0 \bewende
@@ -640,12 +641,46 @@ Für $n=0$ interpretieren wir $\partial_0$ als die Nullabbildung. Daher gilt
 \label{sub:312}
 \begin{enumerate}[(1)]
 	\item Sei $K= \bullet$. Dann ist $C_0(K;R) \cong R$ und $C_i(K;R) = 0$ für $i>0$. Weiter ist $H_0(K;R) = C_0(K;R) \cong R$ und $H_i(K;R) =0$ für $i>0$.
-	\item Sein nun $K$ das $(n+1)$-Eck (Nummerierung der Vertices $0,\ldots ,n$), wobei $n \ge 3$. Dann gilt
+	\item Sein nun $K=K_n$ das $n$-Eck, wobei $n \ge 3$.  Also
 	\begin{align*}
-		C_0(K;R) &= R[\Sigma_0] \cong R^{n+1} \\
-		C_1(K;R) &= R[\Sigma_1] \cong R^{n+1} \\
+		\Sigma_0 &= \set{\tau_1=\set{1}, \tau_2=\set{2}, \ldots , \tau_n = \set{n}  } \\
+ 		\Sigma_1 &= \set{\sigma_1 = \set{1,2}, \ldots , \sigma_{n-1} = \set{n_1, n}, \sigma_n=\set{n,1} } 
+	\end{align*}
+	Dann gilt
+	\begin{align*}
+		C_0(K;R) &= R[\Sigma_0] \cong R^{n} \\
+		C_1(K;R) &= R[\Sigma_1] \cong R^{n} \\
 		C_i(K;R) &= 0 \text{ für $i>1$, insbesondere } H_i(K;R) = 0 \text{ für } i>1
 	\end{align*}
+	Es ist dann $\partial_2 = \partial_3 = \ldots  = 0$. Interessant ist $\partial_1 : C_1(K;R) \to C_0(K;R)$, denn es gilt
+	\[
+		\partial_1(\sigma_i) = \begin{cases}
+			\tau_{i+1} - \tau_i, &\text{ falls }i=1, \ldots ,n-1\\
+			\tau_n - \tau_1 , &\text{ falls } i=n
+		\end{cases}
+	\]
+	Mit $\sigma_1' := \sigma_1, \sigma_2' = \sigma_2, \ldots , \sigma_{n-1}' := \sigma_{n-1}, \sigma_n' := - \sigma_n$ gilt dann
+	\[
+		\partial_1 (\sigma_i') = \tau_{i+1} - \tau_i
+	\]
+	mit der Konvention $\tau_{n+1} = \tau_1$. Also gilt
+	\begin{align*}
+		\partial_1 \enbrace*{\sum_{i=1}^{n} r_i \sigma_i' } = \sum_{i=1}^{n} r_i \enbrace*{\tau_{i+1}- \tau_i} = \sum_{i=1}^{n} (r_{i-1} - r_i) \tau_i  
+	\end{align*}
+	Es folgt 
+	\begin{align*}
+		\ker \partial_1 &= \set[\sum_{i=1}^{n} r_i \sigma_i']{r_1=r_2= \ldots =r_n} \subseteq C_1(K;R) \\
+		\im \partial_1 &= \set[\sum_{i=1}^{n} s_i \tau_i]{\sum_{i=1}^{n} s_i =0} \subseteq C_0(K;R)
+	\end{align*}
+	Ist $\sum_{i=1}^{n} s_i =0$, so folgt für $r_n=0, r_1 = -s_1, r_2=-s_1 -s_2, \ldots , r_{n-1} = -s_1 - s_2 - \ldots - s_{n-1}$
+	\[
+		\partial_1 \enbrace*{\sum_{i=1}^{n} r_i \sigma_i'} = \sum_{i=1}^{n} s_i \tau_i 
+	\]
+	Es folgt ${\color{Firebrick1}[K] \in}\, H_1(K;R) = \nicefrac{\ker \partial_1}{\im \partial_2} = \ker \partial_1 \cong R \,{\color{Firebrick1}\ni 1}$ und 
+	\[
+		{ \color{Gold3} [\tau_i] =[p] \in }\, H_0(K;R) = \nicefrac{\ker \partial_0}{\im \partial_1} = \nicefrac{R[\Sigma_0]}{ \set[\sum_{i=1}^{n} s_i \tau_i]{\sum_{i=1}^{n} s_i =0} } \cong R \, { \color{Gold3} \ni 1 }
+	\]
+	(via $\sum_{i=1}^{n} s_i \tau_i \longmapsto \sum_{i=1}^{n} s_i$)
 \end{enumerate}
 % subsection 312 (end)
 % section 3 (end)
