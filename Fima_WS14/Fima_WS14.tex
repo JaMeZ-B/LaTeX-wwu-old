@@ -622,6 +622,7 @@ Am Ende: Glattstellen der Positionen $W_T - V_T = 0$ \textbf{$\lightning$} \\
 
 \subsection{Nullkouponanleihe}
 \label{sub: nullkouponanleihe}
+\index{Anleihe!Nullkoupon-}
 \begin{itemize}
 	\item[festverzinsliches Wertpapier:]
 	\item Fälligkeit $T$ (Maturity)
@@ -800,6 +801,7 @@ Dann gilt:\\
 \uline{Gewinn:} $\frac{N}{B(t,T)}-N = N \enbrace{\frac{1}{B(t,T)}-1}$ \\
 $R(t,T) = \frac{1}{B(t,T)}-1$ kann als Kapitalrendite interpretiert werden, die ein Investment zwischen $t$ und $T$ hervorbringt:\\
 \uline{Ziel:} Beschreibung durch einen jährlichen Zinssatz:
+
 \begin{enumerate}[(a)]
 	\item \bet{lineare Zinsmethode:} \index{Zinsmethoden!lineare} \\
 	lineare Verteilung der jährlichen Zinsen auf die Laufzeit $R(t,T)=\underbrace{(T-t)}_{Laufzeit} \cdot r_{lin}$, $r_{lin}$ ist der jährliche Zinssatz bei linearer Zinsmethode.\\
@@ -833,27 +835,168 @@ $R(t,T) = \frac{1}{B(t,T)}-1$ kann als Kapitalrendite interpretiert werden, die 
 	Ein jährlicher Zins $r$ wird linear verteilt auf die Periodenlänge. Das Kapital wird unter Berücksichtigung von Zinseszinsen verzinst.\\
 	\uline{Verzinsung:}
 	\[ K_m(r,t,T):=\enbrace{1+r \cdot \frac{T-t}{m}}^m = 1 + R(t,T) \]
-	\item \bet{stetige Zinsmethode:} \index{Zinsmethode!stetige}\\
+	\item \bet{stetige Zinsmethode:} \index{Zinsmethoden!stetige}\\
 	\begin{enumerate}[(i)]
-		\item Konstante Zinsrate $r$ \index{Zinsmethode!stetige!konstant} \\
+		\item \uline{Konstante} Zinsrate $r$ \index{Zinsmethoden!stetige!konstant} \\
 		erhält man als Grenzübergang für $m \to \infty$\\
 		$ \lim\limits_{m \to \infty} K_m(r,t,T) = e^{r(T-t)} = 1+ R(t,T)$
-		\item nicht konstante Zinsrate \index{Zinsmethode!stetige!nicht konstant} \\
+		\item \uline{nicht konstante} Zinsrate \index{Zinsmethoden!stetige!nicht konstant} \\
 		$r: [0,\infty ) \to \mathds{R}$ liefert eine Kapitalentwicklung der Form:
-		\[ K(r,t,T)= e^{\int_{t}^{T} r(s)\mathrm{d}s} \]
+		\[ K(r,t,T)= e^{\int\limits_{t}^{T} r(s)\mathrm{d}s} \]
 		zwischen $t$ und $T$.
 	\end{enumerate}
+	\newpage
+	
+	\bet{Veranschaulichung:}\\
+	$r:[0,\inf) \to \mathds{R},~~~~t_i= t+i\cdot \frac{T-t}{m}, i=0,\dots,m$\\
+	1 \texteuro in $t_0$ ergibt bei Zinsrechnung:\\
+	\begin{equation*}
+	\begin{aligned}
+		K_m(r,t,T) &= (1+r(t_0)\Delta t)+(1+r(t_1\Delta t)+ \dots +(1+r(t_m)\Delta t) \\
+		log~K_m(r,t,T) &= \sum_{i=1}^{m}log(1+r(t_{i-1})\Delta t) \\
+		&= \underbrace{\sum_{i=1}^{m}r(t_{i-1)\Delta t}}_{\int\limits_{t}^{T}r(s)\mathrm{d}s} +\underbrace{\mathcal{O}(\Delta t)}_{\stackrel{\Delta t \to 0}{\longrightarrow} 0}
+	\end{aligned}
+	\end{equation*}
 \end{enumerate}
+% subsection zinsmethoden (end)
 
+\subsection{Festzinsanleihe}
+\label{sub:festzinsanleihe}
+\index{Anleihe!Festzins-}
 
+\begin{itemize}
+	\item festverzinsliches Wertpapier
+	\item Nominal $N$
+	\item Fälligkeit $T$
+	\item Zinstermine $t_1<t_2<\dots <t_m\le T$
+	\item Koupons $K_1,K_2,\dots,K_m$
+\end{itemize}
+In der Regel werden Koupons als Zins auf das Nominal gezahlt, d.h. $K_i=N\cdot R$, $R$ Zinssatz.\\
+\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (-1.,0.) -- (7.5,0.);
+	\foreach \x in {0.,1.,2.,3.,4.,5.,6.,7.}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw [black] (1.,-0.3) node {$t_1$};
+	\draw[->,color=black] (1.,-0.6) -- (1.,-1.);
+	\draw [black] (1.,-1.3) node {$K_1$};
+	\draw [black] (2.,-0.3) node {$t_2$};
+	\draw[->,color=black] (2.,-0.6) -- (2.,-1.);
+	\draw [black] (2.,-1.3) node {$K_2$};
+	\draw [black] (3.,-0.3) node {$\dots$};
+	\draw[->,color=black] (3.,-0.6) -- (3.,-1.);
+	\draw [black] (3.,-1.3) node {$\dots$};
+	\draw [black] (5.,-0.3) node {$\dots$};
+	\draw[->,color=black] (5.,-0.6) -- (5.,-1.);
+	\draw [black] (5.,-1.3) node {$\dots$};
+	\draw [black] (6.,-0.3) node {$t_m$};
+	\draw[->,color=black] (6.,-0.6) -- (6.,-1.);
+	\draw [black] (6.,-1.3) node {$K_m$};
+	\draw [black] (7.,-0.3) node {$T$};
+	\draw[->,color=black] (7.,-0.6) -- (7.,-1.);
+	\draw [black] (7.,-1.3) node {$N$};
+	\draw [black] (0.,-0.3) node {$t$};
+	\draw[->,color=black] (0.,0.5) -- (0.,0.1);
+	\draw [black] (0.,1.) node {Preis};
+	\end{tikzpicture}
+	\captionof{figure}{Ablauf Festzinsanleihe}
+\end{center}
+Bewertung zu Zeitpunkt $t<t_1$:\\
+Mit Hilfe einer Modifikation des Replikationsprinzips:\\
+I: long in die festzinsanleihe\\
+II: long in $K_i \times$ $T_i$-Bonds, $i=1,\dots,m$, long in $N$ $T$-Bonds\\
 
+Beide Strategien erzeugen den gleichen Zahlungsstrom an Auschüttungen:
+\[K_1 in t_1, K_2 in t_2, \dots K_m in t_m \]
+und haben den gleichen Endwert $N$ in $T$.\\
+Replikationsprinzip iefert, dass die Preise in $t<t_1$ übereinstimmen müssen, d.h.
+\[\text{Preis der Festzinsanleihe in }t<t_1 \text{ ist } \]
+\[\sum_{i=1}^{m}K_i \cdot B(t,t_i)+N\cdot B(t,T) \]
 
+% subsection festzinsanleihe (end)
 
+\subsection{Variabelverzinsliche Anleihe}
+\label{sub:variableverzinsliche_anleihe}
+\index{Anleihe!Variabelverzinsliche}
+\begin{itemize}
+	\item[\bet{Floater FRN} (Floating Rate Note)]\index{Anleihe!Variabelverzinsliche!Floater FRN}
+	\item Nominal $N$
+	\item Fälligkeit $T$
+	\item Startpunkt $t_0$
+	\item Zinszahlungstermine $t_0<t_1<\dots<t_m=T$
+	\item \Index{nachschüssige Kouponzahlungen} $K_1,K_2,\dots,K_m$ entsprechend dem für die Periode geltendem Marktzins
+	\[F(t_{i-1},t_{i-1},t_i)=\frac{1}{t-t_{i-1}}\cdot \enbrace{\frac{1}{B(t_{i-1},t)}-1} \]
+	also
+	\begin{equation*}
+	\begin{aligned}
+		K_i &= N\cdot F(t_{i-1},t_{i-1},t_i)(t_i-t_{i-1})\\
+		&=N\enbrace{\frac{1}{B(t_{i-1},t_i)}-1},~~i=1,\dots,m
+	\end{aligned}
+	\end{equation*}
+	\item Bewertung in $t_0$ durch folgende replizierende Handelsstrategie:\\
+	\Index{Rollierende Anlage} des Nominals bis zum jeweiligen nächsten Zinstermin.\\
+\end{itemize}
+\uline{Genauer:}\\
+\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (-1.,0.) -- (7.5,0.);
+	\foreach \x in {0.,1.,2.,3.,6.,7.}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw [black] (1.,-0.3) node {$t_1$};
+	\draw [black] (2.,-0.3) node {$t_2$};
+	\draw [black] (3.,-0.3) node {$\dots$};
+	\draw [black] (6.,-0.3) node {$\dots$};
+	\draw [black] (7.,-0.3) node {$t_m$};
+	\draw [black] (0.,-0.3) node {$t_0$};
+	\end{tikzpicture}
+\end{center}
+\begin{itemize}
+	\item in $t_0$: Kaufe $\frac{N}{B(t_0,t_1)}~t_1$-Bonds und halte bis $t_1$
+	\item in $Tt_1$: 
+	\begin{itemize}
+		\item Reinvestition von $N$ in die 2.-Zinsperiode durch Kauf von $\frac{N}{B(t_1.t_2)}~t_2$-Bonds
+		\item Ausschüttung der Zinszahlung von $\frac{N}{B(t_0,t_1)}-N=N\cdot F(t_0,t_0,t_1)(t_1-t_0)=K_1$
+	\end{itemize}
+	\item $\dots$
+	\item$\dots$
+	\item in $t_m$:
+	\begin{itemize}
+		\item Rückzahlung von $N$
+		\item Ausschüttung der letzten Zinszahlung $\frac{N}{B(t_{m-1},t_m)}-N=K_m$
+	\end{itemize}
+\end{itemize}
+Das Halten der variabel verzinslichen Anleihe und das Durchführen der rollierenden Handelsstrategie liefern den gleichen Zahlungsstrom an Zinszahlungen und haben zur Fälligkeit das Nominal als Endwert. Für die Handelsstrategie wird in $t_0$ ein Kapital von $N$ benötigt. Desgalb ist der Preis der variabel verzinslichen Anleihe in $t_0$ durch $N$ gegeben. \\
+In $t<t_0$ ist der Preis $N\cdot B(t,t_0)$, denn durch Kauf von $N~t_0$-Bonds in $t$ kann die rollierende Handelsstrategie von $t$ beginnend durchgeführt werden.
+% subsection variabelverzinsliche anleihe (end)
 
-
-
-
-
+\subsection{Swaps}
+\label{sub:swaps}
+Ein \bet{Zinsswap}\index{Swaps!Zinsswap} liefert die Möglichkeit das \Index{Zinsänderungsrisiko} einer Festzinsanleihe zu vermeiden:\\
+\begin{itemize}
+	\item Tauschgeschäft
+	\item beim Zinsswap werden feste gegen variable Zinsen getauscht
+	\item \Index{Tenorstruktur} $t_0<t_1<\dots<t_m$
+	\item jährlichen Festzinssatz
+	\item Nominal $N$, das nur zur Berechnung der Zinsen dient
+	\item Unterscheidung in \bet{Payer- und Reciever-Swaps} \index{Swaps!Payer-}\index{Swaps!Reciever-} ausgehend von der Festzinsseite
+\end{itemize}
+Am Ende einer jeden Periode werden die festen Zinsen $N\cdot R(t_i-t_{i-1})$ gegen die variablen $N\cdot F(t_{i-1},t_{i-1},t_i)(t_i-t_{i-1})$ getauscht.\\
+Dies führt zum Zahlungsstrom
+\[N(t_i-t_{i-1})\enbrace{F(t_{i-1},t_{i-1},t_i)-R},~1\le i\le m \]
+beim Payer-Swap und
+\[N(t_i-t_{i-1})(R-F(t_{i-1},t_{i-1},t_i)) \]
+beim Reciever-Swap.\\
+Ein Payer-Swap kann repliziert werden durch eine long-Position in der FRN, short in die Festzinsanleihe zum Nominal $N$ und Zinszahlungsterminen passend zur Tenorstruktur.\\
+Deshalb gilt für den Preis Payerswap($t$) in $t\le t_0$:\\
+\begin{equation*}
+\begin{aligned}
+	\text{Payerswap}(t) &= \underbrace{N\cdot B(t,t_0)}_{\text{FRN in }t}-\underbrace{\enbrace{\sum_{i=1}^{m}N\cdot R(t_{i-1}-t_i) \cdot B(t,t_i)+N\cdot B(t,t_m)}}_{\text{Festzinspreis}}\\
+	&=N\enbrace{B(t,t_0)-B(t,t_m)-\sum_{i=1}^{m}R\cdot B(t_{i-1},t_i)}
+\end{aligned}
+\end{equation*}
+Der "faire" Festzinspreis $R$ liegt dann in $t$ vor, wenn Payer-Swap($t$)=0, also wenn
+\[R= \frac{B(t,t_0)-B(t,t_m)}{\sum_{i=1}^{m}B(t,t_i)(t_i-t_{i-1})} \]
+$R$ ist dann die sogenannte \Index{Swaprate} in $t$.
 
 
 
