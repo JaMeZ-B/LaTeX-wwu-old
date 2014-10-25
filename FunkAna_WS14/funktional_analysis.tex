@@ -322,7 +322,286 @@ dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$. \light zur M
 	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung)
 \end{enumerate}
 % subsection 111 (end)
+
+\subsection{Korollar: Satz der gleichmäßigen Beschränktheit} % (fold)
+\label{sub:112}
+Sei $(X,d)$ ein vollständiger metrischer Raum. Sei $F \subset C(X,\mathds{R})$ eine Menge, die \Index{punktweise gleichmäßig beschränkt} ist, d.h. für jedes $x \in X$ 
+existiert $K_x \in \mathds{R}$, sodass
+\[
+	\abs*{f(x)} \le K_x \enspace \forall f \in F. 
+\] 
+Dann existieren $\emptyset \not= U \subset X$ offen und $K \in \mathds{R}$ so, dass 
+\[
+	\abs*{f(x)} \le K \enspace \forall x \in U, f \in F 
+\]
+\minisec{Beweis}
+Definiere 
+\begin{align*}
+	X \supset A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
+\end{align*}
+Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. Außerdem enthält dies eine nichtleere offene Menge. Also existiert ein $n$ und $U \subset X$ nichtleer und offen mit $U \subset A_n$. \bewende
+% subsection 112 (end)
 % section 1 (end)
+\newpage
+
+\section{Normierte Räume, Hahn-Banach Sätze} % (fold)
+\label{sec:2}
+
+\subsection[Definition: Topologischer Vektorraum]{Definition} % (fold)
+\label{sub:21}
+Sei $X$ ein $K$-Vektorraum mit einer Topologie $\mathcal{T}$. Wir sagen $X$ ist ein \Index{topologischer Vektorraum}, falls Addition und Skalarmultiplikation stetig sind:
+\begin{align*}
+	+ : X \times X  \to X \quad &, \quad(x,y) \mapsto x+y \\
+	\cdot : K \times X \to X \quad &, \quad (\lambda ,x) \mapsto \lambda \cdot x
+\end{align*}
+% subsection 21 (end)
+
+\subsection[Proposition: Unterräume topologischer Vektorräume sind topologische Vektorräume]{Proposition} % (fold)
+\label{sub:22}
+Sei $X$ ein topologischer $K$-Vektorraum und $Y \subset X$ ein Untervektorraum. Dann sind $Y$ und $\overline{Y}$ topologische Vektorräume mit der Unterraumtopologie.
+\minisec{Beweis}
+\begin{itemize}
+	\item Klar für $Y$.
+	\item Zu zeigen: $\overline{Y}$ ist ein Untervektorraum. Seien $x_0, y_0 \in \overline{Y}$ und sei $U$ eine offene Menge in $X$ mit $x_0 + y_0 \in U$. Dann existieren
+	offene Mengen $V,W$ von $X$ mit $x_0 \in V$, $y_0 \in W$ und $V+W \subset U$, da die Addition stetig ist. Da $x_0 \in \overline{Y}$ und $x_0 \in V$, existiert 
+	$x_1 \in Y$ mit $x_1 \in V$. Analog existiert $y_1 \in Y$ mit $y_1 \in W$. Daher ist $x_1 + y_1 \in Y \cap U$. Da $U$ eine beliebige offene Umgebung um $x_0+ y_0$,
+	folgt $x_0 +y_0 \in \overline{Y}$.
+	
+	Skalarmultiplikation genauso. \bewende
+\end{itemize}
+% subsection 22 (end)
+
+\subsection[Proposition: Normierte Vektorräume sind topologische Vektorräume]{Proposition} % (fold)
+\label{sub:23}
+Ein normierter Vektorraum $(X, \norm{.})$ ist ein topologischer Vektorraum bezüglich der von $\norm{.}$ induzierten Topologie.
+\minisec{Beweis}
+Es gilt 
+\begin{align*}
+	\norm[X]{(x+y) - (x'+y')} \le \norm[X]{x-x'} + \norm[X]{y-y'}   
+\end{align*}
+Daher ist $+ : X \times X \to X$ gleichmäßig stetig bezüglich der Norm $\norm[X \times X]{(z,z')} = \norm[X]{z} + \norm[X]{z'}$ auf $X \times X$. Ähnlich folgt
+\begin{align*}
+	\norm[X]{\lambda x - \lambda' x'} = \norm[X]{\lambda (x-x') + (\lambda -\lambda')x'} \le \abs*{\lambda } \cdot \norm[X]{x-x'} + \abs*{\lambda -\lambda'} \cdot 
+	\norm[X]{x'}      
+\end{align*}
+Daher ist $\cdot : K \times X \to X$ stetig, denn falls $(\lambda_i)_{i \in I}$ ein Netz in $K$, $(x_i)_{i \in I}$ ein Netz in $X$ mit $\lambda_i \to \lambda $, $x_i\to x$,
+dann $\lambda_i x_i \to \lambda x$.
+% subsection 23 (end)
+
+\subsection[Proposition: Stetigkeit einer linearen Abbildung zwischen topologischen Vektorräumen]{Proposition} % (fold)
+\label{sub:24}
+Seien $X,Y$ topologische Vektorräume, $T : X \to Y$ linear. Dann sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $T$ ist stetig.
+	\item $T$ ist stetig in $0$.
+	\item $T$ ist stetig in einem Punkt $\overline{x}$.
+\end{enumerate}
+\minisec{Beweis}
+(1) $\Rightarrow$ (2) $\Rightarrow $ (3) ist klar. Wir zeigen (3) $\Rightarrow$ (1):
+
+Für $y \in X$ definiere $L_y : X \to X$, $x \mapsto y+ x$. Dann ist $L_y$ bijektiv und stetig. Da auch $L_{-y}$ stetig ist, ist $L_y$ ein Homöomorphismus. Sei nun $T$ in 
+$\overline{x}$ stetig. Sei $x_0 \in X$. Wir zeigen: $T$ ist stetig in $x_0$. Setze $y := \overline{x} - x_0$. Dann ist
+\begin{align*}
+	T(x) = T(x+y-y) = T(-y) + T(x+y) = L_{T(-y)} \circ T \circ L_y (x)
+\end{align*}
+Da $L_y(x_0) = \overline{x}$, $T$ stetig in $\overline{x}$ ist und $L_y$, $L_{T(-y)}$ stetig sind, ist somit $T$ stetig in $x_0$. \bewende
+% subsection 24 (end)
+
+\subsection[Definition: Stetige Funktionale und Operatoren]{Definition} % (fold)
+\label{sub:25}
+Für topologische Vektorräume $X,Y$ definieren wir 
+\[
+	L(X,Y) = \set[T : X \to Y]{T \text{ linear und stetig}}  
+\]
+Wir schreiben $X':= L(X,K)$ für den \Index{Dualraum} von $X$. Die Elemente von $X'$ heißen (stetige) \Index{Funktionale}.\footnote{Aus der linearen Algebra: $X^* = \Hom(X,\mathds{R}) = \set[T : X \to Y]{T \text{ linear}}$. Die Elemente von $X^*$ heißen Funktionale}
+Die Elemente von $L(X,X)$ heißen (stetige) \Index{Operatoren} auf $X$. 
+% subsection 25 (end)
+
+\subsection[Bemerkung: Vektorraumstruktur auf $L(X,Y)$, Algebrastruktur auf $L(X,X)$]{Bemerkung} % (fold)
+\label{sub:26}
+$L(X,Y)$ und $L(X,K) = X'$ sind Vektorräume, wobei die Vektorraumstruktur punktweise definiert ist. $L(X,X)$ ist sogar eine Algebra mittels Komposition.
+% subsection 26 (end)
+
+\subsection[Proposition: Stetigkeit linearer Abbildungen zwischen normierten Vektorräumen]{Proposition} % (fold)
+\label{sub:27}
+Seien $X,Y$ normierte Vektorräume, $T : X \to Y$ linear. Dann ist $T$ stetig genau dann, wenn ein $\mu \ge 0$ existiert, sodass 
+\[
+	\norm[Y]{T(x)} \le \mu \cdot \norm[X]{x} \quad \forall x \in X  
+\]
+Ein stetiger Operator zwischen normierten Vektorräumen heißt deswegen aus \bet{beschränkt}\index{Operator!beschränkter Operator} 
+\minisec{Beweis}
+\begin{description}
+	\item[\enquote{$\Leftarrow$}:] Klar: Wenn $x_n \to 0$, dann $T(x_n) \to 0$, denn $\norm{T(x_n)} \le \mu \norm{x_n } \to 0$
+	\item[\enquote{$\Rightarrow $}:] Angenommen $T$ ist stetig. Dann setzen wir
+	\[
+		\mu := \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}  }]{x \in X \setminus \set{0} } 
+	\] 
+	Falls $\mu = \infty$, dann existieren $x_n \in X$ mit $\frac{1}{\norm[X]{x_n}} \cdot \norm[Y]{T(x_n)} \ge n$. Betrachte 
+	$x_n' :=  \frac{1}{n \cdot \norm[X]{x_n}} \cdot x_n $, dann $\norm{x_n'} = \frac{1}{n}$, also $x_n' \to 0$. Aber es gilt $T(x_n')\not\to 0$, denn
+	\begin{align*}
+		\norm[Y]{T(x_n')} = \frac{1}{n \cdot \norm[X]{x_n} } \cdot \norm[Y]{T(x_n)} \ge 1 
+	\end{align*}
+	für alle $n$, \light zur Stetigkeit von $T$. Also $\mu < \infty$. \bewende
+\end{description}
+% subsection 27 (end)
+
+\subsection[Definition: Operatornorm]{Definition} % (fold)
+\label{sub:28}
+Seien $X,Y$ normierte Vektorräume, $T \in L(X,Y)$. Die \bet{Norm} (oder \Index{Operatornorm}) von $T$ ist
+\[
+	\norm{T} = \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}}]{x \in X \setminus \set{0} } = \sup \set[{\norm[Y]{T(x)} }]{x \in X \text{ mit } \norm[X]{x} 
+	= 1\rule{0cm}{0.4cm}}   
+\] 
+Nach \ref{sub:27} ist $\norm{T}<  \infty $ und $\norm[Y]{T x} \le \norm{T} \cdot \norm[X]{x}$ für alle $x \in X$.
+% subsection 28 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:29}
+Seien $X,Y$ normierte Räume, betrachte $L(X,Y)$ mit $\norm{.}$. Dann ist $L(X,Y)$ ein normierter Raum.
+\minisec{Beweis}
+\begin{itemize}
+	\item $\norm{T} \ge 0 $ für alle $T \in L(X,Y)$.
+	\item Es gilt
+	\begin{align*}
+		\norm{T}=0 \iff \forall x \in X, \norm[X]{x}=1 : \norm[Y]{Tx}=0 &\iff \forall x \in X, \norm[X]{x}=1 : Tx=0 \\ &\iff \forall x \in X : Tx=0 \\ &\iff T=0
+	\end{align*}
+	\item Sei $\lambda  \in K$, $T \in L(X,Y)$. Dann gilt
+	\[
+		\norm{\lambda \cdot T} = \sup_{\norm[X]{x}=1} \norm[Y]{\lambda  \cdot T(x)}  = \sup_{\norm[X]{x}=1 } \abs*{\lambda } \cdot \norm[Y]{Tx} =
+		\abs*{\lambda } \cdot \sup_{\norm[X]{x}=1 } \norm[Y]{Tx} = \abs*{\lambda } \cdot \norm{T}      
+	\]
+	\item Seien $T_1, T_2 \in L(X,Y)$ und $x \in X$ mit $\norm[X]{x}=1 $. Dann gilt
+	\[
+		\norm[Y]{(T_1 + T_2)(x)} = \norm[Y]{T_1 x + T_2 x} \le \norm[Y]{T_1 x} + \norm[Y]{T_2 x}
+	\]
+	Damit folgt weiter
+	\begin{align*}
+		\norm{T_1 +T_2} = \sup_{\norm[X]{x}=1 } \norm[Y]{(T_1+ T_2) (x)} &\le \sup_{\norm[X]{x}=1} \enbrace*{\norm[Y]{T_1 x} + \norm[Y]{T_2 x}  }   \\
+		&\le \sup_{\norm[X]{x}=1} \sup_{\norm[X]{x'}=1} \enbrace*{\norm[Y]{T_1 x} + \norm[Y]{T_2 x}  }  \\ &= \norm{T_1} + \norm{T_2} \bewende   
+	\end{align*}
+\end{itemize}
+% subsection 29 (end)
+
+\subsection[Definition: Normierte $K$-Algebra]{Definition} % (fold)
+\label{sub:210}
+Eine $K$-Algebra heißt \bet{normiert}\index{normierte $K$-Algebra}, falls $A$ mit einer Norm $\norm{.}$ versehen ist, so dass $(A,\norm{.} )$ ein normierter Vektorraum und
+\[
+	\norm{a b} \le \norm{a} \cdot \norm{b} \quad \forall a,b \in A   
+\]
+Falls $A$ unital ist, d.h. es existiert ein Einselement $1_A$, dann gilt $\norm{1_A} \le 1$.
+\minisec{Bemerkung}
+Wenn $\norm{1_A} < 1$, dann $\norm{1_A} = \norm{1_A \cdot 1_A} \le \norm{1_A} \cdot \norm{1_A} \Rightarrow \norm{1_A} =0 $. Also $1_A=0$ und damit $A= \set{0}$.
+% subsection 210 (end)
+
+\subsection[Beispiele für normierte Algebrenr]{Beispiele} % (fold)
+\label{sub:211}
+\begin{enumerate}[(i)]
+	\item $C(\Omega,K)$, wobei $\Omega$ ein kompakter Hausdorffraum und die Multiplikation punktweise ist. Betrachte $\norm[\infty]{.}$. Für $f,g : \Omega \to K$ gilt dann
+	$\norm[\infty]{f \cdot g} \le \norm[\infty]{f} \cdot \norm[\infty]{g}$
+	\item $L(X,X)$, für $X$ ein normierter Raum, mit $\norm{.}$. Für $S,T \in L(X,X)$ gilt
+	\[
+		\norm{S T} = \sup_{\norm[X]{x}=1} \norm[X]{S(T(x))} \le \sup_{\norm[X]{x}=1} \enbrace[\big]{\norm{S} \cdot \norm[X]{Tx}} = \norm{S} \cdot \norm{T}.     
+	\]
+\end{enumerate}
+% subsection 211 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:212}
+Seien $X,Y$ normierte Räume. Dann ist $X \times Y$ ein normierter Raum mit 
+\begin{align*}
+	 \norm[1]{(x,y)} &:= \norm[X]{x} + \norm[Y]{y}   \quad \text{ für } (x,y) \in X \times Y \\
+	\text{oder } \quad \norm[\infty]{(x,y)} &:= \max \set{\norm[X]{x}, \norm[Y]{y}}  
+\end{align*}
+Beide Normen sind äquivalent.
+% subsection 212 (end)
+
+\subsection{Proposition und Definition} % (fold)
+\label{sub:213}
+Sei $X$ ein normierter Raum und $Y \subseteq X$ ein abgeschlossener Unterraum. Dann ist $\nicefrac{X}{Y} = \set[x +Y]{x \in X}$ ein normierter Raum mit
+\[
+	\norm[\nicefrac{X}{Y}]{x +Y} := \inf \set[{\norm[X]{x+y} }]{y+Y}  
+\]
+Die Quotientenabbildung $q : X \twoheadrightarrow \nicefrac{X}{Y}$, $x \mapsto x+ Y$ ist stetig, linear und $\norm{q} \le 1$ und offen, d.h. bildet offene Mengen in $X$ auch offene Mengen in $\nicefrac{X}{Y}$ ab.
+\minisec{Bemerkung}
+Daraus folgt, dass Normtopologie und Quotiententopologie auf $\nicefrac{X}{Y}$ gleich sind.
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item $\nicefrac{X}{Y}$ ist ein Vektorraum mit $(x+Y) + (x'+Y) = (x+x') + Y$.
+	\item Sei $\overline{x} = x+ Y \in \nicefrac{X}{Y}$. Es gilt
+	\begin{itemize}
+		\item $\norm{\overline{x}} \ge 0 $ Klar für alle $\overline{x} \in \nicefrac{X}{Y}$
+		\item Angenommen $\norm[\nicefrac{X}{Y}]{\overline{x}} =0$, d.h. $\inf_{y \in Y} \norm[X]{x+y} =0$. Also existiert eine Folge $(y_n)_n \subset Y$ mit
+		$\norm[X]{x+y_n} \xrightarrow{n \to \infty} 0 \Rightarrow y_n \xrightarrow{n \to \infty} -x$. Also ist $-y$ und damit auch $y$ in $Y$, da $Y$ abgeschlossen ist.
+		Damit ist $\overline{x}=0 $ 
+	\end{itemize}
+	\item Sei $0 \not= \lambda \in K$, $x \in X$. Dann gilt
+	\begin{align*}
+		\norm[\nicefrac{X}{Y}]{\lambda \cdot \overline{x}} = \inf_{y \in Y} \norm[X]{\lambda x + y} = \inf_{y \in Y} \norm[X]{\lambda x + \lambda y} 
+		= \inf_{y \in Y} \abs*{\lambda } \cdot \norm[X]{x+y}  =   \abs*{\lambda } \cdot \norm[\nicefrac{X}{Y}]{\overline{x}}  
+	\end{align*}
+	\item Seien $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$. Dann gilt \todo{Fehler finden}
+	% \begin{align*}
+% 		\norm[\nicefrac{X}{Y}]{\overline{x} + \overline{y}} = \inf_{z \in Y} \norm[X]{x+y+z} = \inf_{z,z' \In Y} \norm[X]{x+y+z+z'} \le \inf_{z,z' \in Y}
+% 		\enbrace*{\norm[X]{x+z} + \norm[X]{y+z'}} = \norm[\nicefrac{X}{Y}]{\overline{x}} + \norm[\nicefrac{X}{Y}]{\overline{y}}
+% 	\end{align*}
+	Damit ist $\norm[\nicefrac{X}{Y}]{.}$ eine Norm auf $\nicefrac{X}{Y}$.
+	\item Linearität von $q$ ist klar. Es gilt
+	\[
+		\norm[\nicefrac{X}{Y}]{\overline{x}} = \inf_{y \in Y} \norm[X]{x+y} \le \norm[X]{x}   
+	\]
+	Also
+	\[
+		\norm{q} = \sup_{\norm[X]{x}=1} \norm[\nicefrac{X}{Y}]{q(x)} \le \sup_{\norm[X]{x}=1 } \norm[X]{x} = 1   
+	\]
+	\item Zu zeigen: $q$ ist offen. Sei $x \in X$, $\varepsilon>0$. Betrachte die offene Kugel $B(x,\varepsilon) \subset X$. Wir zeigen 
+	$B(\overline{x}, \varepsilon) \subset q \enbrace*{B(x,\varepsilon)}$. Sei also $\overline{z} = z + Y$ in $B(\overline{x},\varepsilon)$. Dann gilt
+	$\norm[\nicefrac{X}{Y}]{\overline{x}- \overline{z}} < \varepsilon$, worauf folgt
+	\[
+		\inf_{y \in Y} \norm[X]{x-z+y} < \varepsilon 
+	\]
+	$\Rightarrow$ es existiert $y \in Y : \norm[X]{x-z+y}<\varepsilon $. Es gilt $\overline{z}=\overline{z-y}\in q\enbrace*{B(x,\varepsilon)}$, da $z-y\in B(x,\varepsilon)$.
+	
+	Sei $V \subset X$ offen, zeige $q(V) \subset \nicefrac{X}{Y}$ offen. Für $x \in V$ finde $\varepsilon>0$, sodass $B(x,\varepsilon) \subset V$. Dann folgt
+	$B(\overline{x},\varepsilon) \subseteq q \enbrace*{ B(x,\varepsilon)} \subseteq q(V)$. \bewende
+\end{enumerate}
+% subsection 213 (end)
+
+\subsection[Definition: Banachraum und Banachalgebra]{Definition} % (fold)
+\label{sub:214}
+Ein \Index{Banachraum} ist ein vollständiger, normierter Raum. Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra.  
+% subsection 214 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:215}
+$C(\Omega, K)$, wobei $\Omega$ ein kompakter Hausdorffraum ist, ist eine Banachalgebra.
+% subsection 215 (end)
+
+\subsection[Proposition: Produkte und Quotienten von Banachräumen]{Proposition} % (fold)
+\label{sub:216}
+Produkte und Quotienten (nach abgeschlossenen Unterräumen) von Banachräumen sind wieder Banachräume.
+\minisec{Beweis}
+\begin{description}
+	\item[$X \times Y$:] Es gilt $\norm[\infty]{(x,y)} = \max \set{\norm{x}, \norm{y}}$. Sei $\enbrace*{(x_n, y_n)}_n \subset X \times Y$ eine Cauchyfolge.
+	Dann sind $(x_n)_n$ und $(y_n)_n$ Cauchyfolgen und es gilt $x_n \to x$ und $y_n \to y$ und somit auch $(x_n, y_n) \to (x,y)$.
+	\item[Quotient $\nicefrac{X}{Y}$:] Sei $X$ ein Banachraum und $Y \subseteq X$ ein abgeschlossener Unterraum. 
+	
+	Falls $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$, so existiert $y' \in X$, sodass $\overline{y} = \overline{y'}$ und 
+	\[
+		\norm[X]{x-y'} \le 2 \cdot \norm[\nicefrac{X}{Y}]{\overline{x} - \overline{y}}  
+	\] 
+	Sei nun $\enbrace*{\overline{x}_n }_n$ eine Cauchyfolge in $\nicefrac{X}{Y}$. Es gibt eine Teilfolge $\enbrace*{\overline{x}_{n_k}}_k$, sodass
+	\[
+		\sum_{k=1}^{\infty} \norm[\nicefrac{X}{Y}]{\overline{x}_{n_{k-1}} - \overline{x}_{n_k}} < \infty 
+	\]
+	Falls $\enbrace*{\overline{x}_{n_k} }_k $ konvergiert, dann auch $\enbrace*{\overline{x}_n}_n$. Wir dürfen also \oE annehmen, dass $\sum_{n=1}^{\infty} \norm{\overline{x}_{n-1} - \overline{x}_n }< \infty$. Wähle $x_1' \in \overline{x}_1$. Wähle induktiv $x_n' \in X$  mit
+	\[
+		\norm[X]{x_{n-1}' - x_n'} \le 2 \cdot \norm[\nicefrac{X}{Y}]{\overline{x_{n-1} - \overline{x}_n } }  
+	\]
+	und $x_n' \in \overline{x}_n$. Dann gilt $\sum_{n=1}^{\infty} \norm[X]{x_{n-1}' - x_n'} < \infty $. Daher ist $(x_n')_n$ eine Cauchyfolge in $X$. Also existiert 
+	$x \in X$ mit $x_n \to x$. Dann $\overline{x}_n  \to \overline{x}$. \bewende
+\end{description}
+% subsection 216 (end)
+% section 2 (end)
 
 
 

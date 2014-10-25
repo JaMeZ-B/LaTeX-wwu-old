@@ -9,9 +9,11 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 * WiSe 2014
 	* [Topologie I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo1_WS14/topologie_1.pdf?raw=true "Topologie I.") (Jannes)
 	* [Funktionalanalysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/FunkAna_WS14/funktional_analysis.pdf?raw=true "Funktionalanalysis") (Jannes)
-	* [Höhere Algebra II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg2_WS14/HAlg2-Phil.pdf?raw=true "Höhere Algebra") (Phil)
+	* [Höhere Algebra II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg2_WS14/HAlg2-Phil.pdf?raw=true "Höhere Algebra II.") (Phil)
 	* [Elementare Zahlentheorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EZT_WS14/EZT.pdf?raw=true "Elementare Zahlentheorie") (Phil)
 	* [Differentialgeometrie](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffGeo_WS14/diff_geo.pdf?raw=true "Differentialgeometrie") (Arne)
+	* [Einführung in die Algebra](https://github.com/JaMeZ-B/latex-wwu/raw/master/EinfAlg_WS14/Einf_Algebra.pdf?raw=true "Einführung in die Algebra") (Tobias)
+	* [Finanzmathematik](https://github.com/JaMeZ-B/latex-wwu/raw/master/Fima_WS14/Finanzmathe.pdf?raw=true "Finanzmathematik") (Tobias)
 * SoSe 2014
 	* [Höhere Algebra I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/HoehAlg1_SS14/hoehere_algebra.pdf?raw=true "Höhere Algebra I.") (Jannes)
 	* [Differentialformen und Mannigfaltigkeiten](https://github.com/JaMeZ-B/latex-wwu/raw/master/DiffMa_SS14/diff_ma.pdf?raw=true "Differentialformen und Mannigfaltigkeiten") (Jannes)
@@ -38,6 +40,7 @@ Schon einmal vielen Dank an
 * Gautam (gdbgauda) _Höhere Algebra I._
 * Phil (phist91) _PDGL I., Höhere Algebra II., Elementare Zahlentheorie_
 * Arne (moregrey) _Differentialformen und Mannigfaltigkeiten, Differentialgeometrie_
+* Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik_
 
 für die Beteiligung an diesem Projekt!
 

@@ -26,7 +26,7 @@
 
 \subsection[Definition: Kategorie]{Definition} % (fold)
 \label{sub:11}
-Eine \Index{Kategorie} $\mathcal{C}$ besteht aus: \marginnote{13. Okt}
+Eine \Index{Kategorie} $\mathcal{C}$ besteht aus:
 \begin{enumerate}[i)]
 	\item Einer Klasse $\Ob(\mathcal{C})$. Die Elemente von $\Ob(\mathcal{C})$ heißen die \Index{Objekte} von $\mathcal{C}$.
 	\item Zu je zwei Objekten $A,B$ aus $\mathcal{C}$ einer Menge $\Mor_{\mathcal{C}}(A,B)$. Die Elemente von $\Mor_\mathcal{C}(A,B)$ heißen \Index{Morphismen} von
@@ -155,7 +155,7 @@ dass diese oft schwierig zu berechnen ist. Wir werden in dieser Vorlesung weiter
 
 \section{Kombinatorische Beschreibungen topologischer Räume} % (fold)
 \label{sec:2}
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel einer kombinatorischen Beschreibung eines Raumes]{Beispiel} % (fold)
 \label{sub:21}
 \Index{Graphen} sind einerseits topologische Räume und andererseits kombinatorische Objekte:
 \begin{align*}
@@ -214,25 +214,82 @@ dass diese oft schwierig zu berechnen ist. Wir werden in dieser Vorlesung weiter
 Ein \Index{simplizialer Komplex} $K=(V, \Sigma)$ besteht aus einer Menge $V$ und einer Menge $\Sigma$ von nichtleeren, endlichen Teilmengen von $V$, sodass gilt
 \begin{enumerate}[(i)]
 	\item $\set{v} \in \Sigma$ für alle $v \in V$
-	\item $\sigma \in \Sigma$, $\emptyset \not= \tau \subseteq \sigma \Longrightarrow \tau \in\Sigma.$
+	\item $\sigma \in \Sigma$, $\emptyset \not= \tau \subseteq \sigma \Longrightarrow \tau \in\Sigma.$ \hfill {\footnotesize(Abgeschlossen bzgl. Teilmengenbildung)}
 \end{enumerate}
 Die Elemente von $V$ heißen die \Index{Ecken} oder \Index{Vertices} von $K$. Die Elemente von $\Sigma$ heißen die \Index{Simplizes} von $K$. Enthält $\sigma \in \Sigma$ 
-genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$n$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
+genau $n+1$ Elemente, so heißt $\sigma$ ein \bet{$\mathbf{n}$-Simplex}\index{n-Simplex@$n$-Simplex}. Ist $\tau \subseteq \sigma$ mit $\sigma$ ein $n$-Simplex und $\tau$ ein $n-1$-Simplex, so heißt $\tau$ eine \Index{Seite} von $\sigma$. 
 
 \noindent Ist $V$ geordnet, so heißt $K$ geordnet. Ist $V$ endlich, so heißt $K$ endlich.
 % subsection 22 (end)
 
 \subsection[Beispiel für simpliziale Komplexe]{Beispiel} % (fold)
 \label{sub:23}
-\missingfigure{Ein weiterer Graph mit den Mengen $V$ und $\Sigma$}
-Ist $\sigma$ eine endliche Menge, so heißt $\Delta^\sigma := \enbrace[\big]{\sigma, \mathcal{P}(\sigma) \setminus \set{\emptyset}}$ der $\sigma$-Simplex. Für $\sigma = \set{0, \ldots , n}$ schreiben wir $\Delta^n := \Delta^{\set{0, \ldots ,n}}$.
-\missingfigure{Zeichnungen von $\Delta^0$ bis $\Delta^3$}
+\begin{align*}
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.]
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (1,0.8);
+		\coordinate (2) at (1,-0.7);
+		\coordinate (3) at (2,0.2);
+		\filldraw[DodgerBlue2!40] (0) -- (1) -- (2) -- cycle ;
+		\foreach \x/\y in {0/1,0/2,1/2,1/3,2/3} {
+			\draw[thick] (\x) -- (\y);
+		};
+		\foreach \x/\pos in {0/left,1/above,2/below,3/right} {
+			\draw[fill=DodgerBlue3,thick] (\x) circle[radius=0.06] node[\pos]{$\x$};
+		}
+	\end{tikzpicture}}} \qquad 
+	\begin{array}{l}
+		V =  \set{0,1,2,3} \\
+		E =  \set{ \rule{0cm}{0.3cm} {\emptyset, \set{0}, \set{1}, \set{2}, \set{3}, \set{0,1}, \set{0,2},\set{1,2},\set{1,3},\set{2,3},\set{0,1,2}}}  
+	\end{array}
+\end{align*}
+Ist $\sigma$ eine endliche Menge, so heißt $\Delta^\sigma := \enbrace[\big]{\sigma, \mathcal{P}(\sigma) \setminus \set{\emptyset}}$ der $\sigma$-Simplex. Für 
+$\sigma = \set{0, \ldots , n}$ schreiben wir $\Delta^n := \Delta^{\set{0, \ldots ,n}}$. Es ist
+\[
+	\Delta^0  = \vcenter{\hbox{\begin{tikzpicture}
+		\draw[fill=DodgerBlue3,thick] (0,0) circle[radius=0.06];
+	\end{tikzpicture}}} , \qquad 
+	\Delta^1 = \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.4,0.3);
+		\draw[thick] (1) -- (0);
+		\foreach \x in {0,1} {
+			\draw[fill=DodgerBlue3,thick] (\x) circle[radius=0.06];
+		}
+	\end{tikzpicture}}} , \qquad 
+	\Delta^2 = \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.6,0);
+		\coordinate (2) at (60:0.6);
+		\draw[thick, fill=DodgerBlue2!40] (1) -- (0) -- (2) -- cycle;
+		\foreach \x in {0,1,2} {
+			\draw[fill=DodgerBlue3,thick] (\x) circle[radius=0.06];
+		}
+	\end{tikzpicture}}}, \qquad 
+	\Delta^3 = 
+	\vcenter{\hbox{\begin{tikzpicture}
+			\coordinate (0) at (0,0);
+			\coordinate (1) at (1,0);
+			\coordinate (2) at (0.5,0,0.866);
+			\coordinate (3) at (0.5,0.866,0.433);
+			\foreach \x in {0,1,2,3}{
+				\foreach \y in {0,1,2,3}{
+					\foreach \z/\col in {0/DodgerBlue2,1/DodgerBlue1,2/DodgerBlue3,3/DodgerBlue2}{
+					\draw[thick, fill=\col!40, fill opacity=0.4] (\x) -- (\y) -- (\z) -- cycle;
+					};
+				};
+			};
+			\foreach \x in {0,1,2,3} {
+				\draw[fill=DodgerBlue3,thick] (\x) circle[radius=0.06];
+			}
+		\end{tikzpicture}}}
+\]
 % subsection 23 (end)
 
 \subsection[Definition: Unterkomplex]{Definition} % (fold)
 \label{sub:24}
 Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Ein \Index{Unterkomplex} von $K$ ist ein simplizialer Komplex $K_0 = (V_0, \Sigma_0)$ mit 
-$V_0 \subseteq V$, $\Sigma_0 \subseteq \Sigma$.
+$V_0 \subseteq V$ und $\Sigma_0 \subseteq \Sigma$.
 \minisec{Beispiel}
 Sei $K=(V,\Sigma)$ ein endlicher simplizialer Komplex. Dann ist $K$ ein Unterkomplex von $\Delta^V$.
 % subsection 24 (end)
@@ -247,32 +304,78 @@ $f(\sigma_1) \in \Sigma_2$ für alle $\sigma_1 \in \Sigma_1$.
 \label{sub:26}
 Sei $\sigma$ eine endliche Menge. Sei $\mathds{R}^\sigma = \prod_{v \in \sigma} \mathds{R}$ mit der Produkttopologie. Sei nun 
 \[
-	\abs*{\Delta^\sigma} := \set[x=(x_v)_{v \in \sigma} \in \mathds{R}^\sigma]{\sum_{v \in \sigma}x_v = 1 , x_v \in [0,1] \, \forall v \in \sigma}  
+	\abs*{\Delta^\sigma} := \set[x=(x_v)_{v \in \sigma} \in \mathds{R}^\sigma]{\sum_{v \in \sigma}x_v = 1 , x_v \in [0,1] \,\, \forall v \in \sigma}  
 \]
-Ist $\tau \subseteq \sigma$ so erhalten wir eine Abbildung $\iota_\tau^\sigma : \abs*{\Delta^\tau}  \to \abs*{\Delta^\sigma}$ indem wir 
+Ist $\tau \subseteq \sigma$, so erhalten wir eine Abbildung $\iota_\tau^\sigma : \abs*{\Delta^\tau}  \to \abs*{\Delta^\sigma}$ indem wir 
 $(x_v)_{v \in \tau} \in \abs*{\Delta^\tau}$ durch $x_v=0$ für $v \in \sigma \setminus \tau$ zu $(x_v)_{v \in \sigma}$ auffüllen. Ist $\eta \subseteq \tau \subseteq \sigma$ 
 so gilt $\iota^\sigma_\eta = \iota_\tau^\sigma \circ  \iota_\eta^\tau$.
 
-Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Die \Index{geometrische Realisierung} $\abs*{K}$ von $K$ ist definiert als 
+\noindent Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Die \Index{geometrische Realisierung} $\abs*{K}$ von $K$ ist definiert als 
 \[
 	\abs*{K} := \coprod_{\sigma \in \Sigma} \set{\sigma} \times \abs*{\Delta^\sigma} \Big/ \sim
 \] 
-wobei $\sim$ die durch $(\tau, x) \sim (\sigma, \iota_\tau^\sigma(x))$ für $\tau \subseteq \sigma$ erzeugte Äquivalenzrelation ist. Versehen mit der Quotiententopologie ist
-$\abs*{K}$ ein topologischer Raum.
+wobei $\sim$ die durch $(\tau, x) \sim \enbrace[\big]{\sigma, \iota_\tau^\sigma(x)}$ für $\tau \subseteq \sigma$ erzeugte Äquivalenzrelation ist. Versehen mit der 
+Quotiententopologie ist $\abs*{K}$ ein topologischer Raum.
 % subsection 26 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel: Rand des $n$-Simplizes und der Torus]{Beispiel} % (fold)
 \label{sub:27}
 \begin{itemize}
-	\item Sei $\partial \Delta^n := \enbrace*{\set{0, \ldots ,n}, \mathcal{P} \enbrace*{\set{0,\ldots ,n}} \setminus \set{\emptyset, \set{0, \ldots , n}}} = $ 
-	\enquote{$\Delta^n \setminus \set{0,\ldots ,n}$}. Dann gilt\todo{Texte durch Zeichnungen ersetzen}
+	\item Sei $\partial \Delta^n := \enbrace[\Big]{\set{0, \ldots ,n}, \mathcal{P}\enbrace[\big]{\set{0,\ldots ,n}} \setminus \set{\emptyset, \set{0, \ldots , n}}} = $ 
+	\enquote{$\Delta^n \setminus \set{0,\ldots ,n}$}. $\partial \Delta^n$ heißt der \Index{Rand des $n$-Simplizes}. Es gilt
 	\begin{align*}
-		\abs*{\partial \Delta^1} &= \text{ ein Punkt} \cong S^0\\ 
-		\abs*{\partial \Delta^2} &=  \text{ ein Dreieck} \cong S^1 \\
-		\abs*{\partial \Delta^3} &= \text{ eine Pyramide} \cong S^2 
+		\abs*{\partial \Delta^1} &= \enspace\vcenter{\hbox{\begin{tikzpicture}
+		\draw[fill] (0,0) circle[radius=0.04];
+		\draw[fill] (0.15,0) circle[radius=0.04];
+	\end{tikzpicture}}} \enspace\cong S^0\\ 
+		\abs*{\partial \Delta^2} &=  \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.6,0);
+		\coordinate (2) at (60:0.6);
+		\draw[thick] (1) -- (0) -- (2) -- cycle;
+	\end{tikzpicture}}} \cong S^1 \\
+		\abs*{\partial \Delta^3} &= \vcenter{\hbox{
+		\begin{tikzpicture}
+			\coordinate (0) at (0,0);
+			\coordinate (1) at (1,0);
+			\coordinate (2) at (0.5,0,0.866);
+			\coordinate (3) at (0.5,0.866,0.433);
+			\foreach \x in {0,1,2,3}{
+				\foreach \y in {0,1,2,3}{
+					\foreach \z/\col in {0/DodgerBlue2,1/DodgerBlue1,2/DodgerBlue3,3/DodgerBlue2}{
+					\draw[thick, fill=\col!40, fill opacity=0.4] (\x) -- (\y) -- (\z) -- cycle;
+					};
+				};
+			};
+		\end{tikzpicture}}} \cong S^2 
 	\end{align*}
 	Allgemein gilt $\abs*{\partial \Delta^n} \cong S^{n-1}$.
-	\item $T^2 = S^1 \times S^1 \cong \text{ Bild Torus} \cong \text{ Zeichnung aus Skript}$ 
+	\item $T^2 = S^1 \times S^1 \cong 
+	\vcenter{\hbox{\begin{tikzpicture}[scale=0.3]
+		\draw (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
+		\draw[xscale=-1] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
+		\draw[rotate=180] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
+		\draw[yscale=-1] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
+
+		\draw (-2,.2) .. controls (-1.5,-0.3) and (-1,-0.5) .. (0,-.5) .. controls (1,-0.5) and (1.5,-0.3) .. (2,0.2);
+
+		\draw (-1.75,0) .. controls (-1.5,0.3) and (-1,0.5) .. (0,.5) .. controls (1,0.5) and (1.5,0.3) .. (1.75,0);
+	\end{tikzpicture}}} \cong 
+	\abs*{\vcenter{\hbox{\begin{tikzpicture}[>=to, scale=0.8]
+		\filldraw[color=DodgerBlue2!20,] (0,0) rectangle (3,3);
+		\foreach \x in {0,1,2}{
+			\foreach \y in {0,1,2}{
+				\draw (\x,\y) -- ++ (1,1);
+			};
+		};
+		\draw (0,0) grid (3,3);
+		\draw[very thick] (0,0) -- (0,3) -- (3,3) -- (3,0) -- cycle;
+		\draw[->>, thick] (0,1) -- (0,1.5);
+		\draw[->, thick] (1,3) -- (1.5,3);
+		\draw[->, thick] (1,0) -- (1.5,0);
+		\draw[->>, thick] (3,1) -- (3,1.5);
+		\clip (-0.2,-0.2) rectangle (3.2,3.2);
+	\end{tikzpicture}}}} $
 \end{itemize}
 % subsection 27 (end)
 
@@ -287,20 +390,75 @@ Sei $K=(V,\Sigma)$ ein endlicher simplizialer Komplex. Sei $a_n := \# \set[\sigm
 $\chi(K) := \sum_{n \in \mathds{N}} (-1)^n a_n $ die \Index{Euler-Charakteristik} von $K$. 
 \minisec{Beispiel}
 \begin{align*}
-	\chi(\text{Dreieck}) &= 3 -3 = 0 \\
-	\chi(\text{Viereck}) &= 4-4 =0 \\
-	\chi(n\text{-eck}) &= n-n = 0
+	\chi \enbrace*{\vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.6,0);
+		\coordinate (2) at (60:0.6);
+		\draw[thick] (1) -- (0) -- (2) -- cycle;
+	\end{tikzpicture}}} } &= 3 -3 = 0 \\
+	\chi \enbrace[\bigg]{\vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.6,0);
+		\coordinate (2) at (0.6,0.6);
+		\coordinate (3) at (0,0.6);
+		\draw[thick] (0) -- (1) -- (2) -- (3) -- cycle;
+	\end{tikzpicture}}} } &= 4-4 =0 \\
+	\chi \enbrace[\big]{\benbrace*{n\text{-Eck}}} &= n-n = 0
 \end{align*}
+
 \begin{align*}
-	\chi(\partial \Delta^3 &= \text{Dreieckspyramide}) = 4 - 6 +4 = 2 \\
-	\chi\enbrace*{\text{Würfel}} &= 8 -12 +6 = 2 \\
-	\chi(\text{Oktaeder}) &= 6- 12  +8 = 2 
+	\chi \enbrace*{\partial \Delta^3 = \vcenter{\hbox{\begin{tikzpicture}
+			\coordinate (0) at (0,0);
+			\coordinate (1) at (1,0);
+			\coordinate (2) at (0.5,0,0.866);
+			\coordinate (3) at (0.5,0.866,0.433);
+			\draw[sharp corners, dashed] (0) -- (1);
+			\draw[sharp corners] (1) -- (2) -- (0) -- (3) -- (2) -- (1) -- (3) -- (0);
+		\end{tikzpicture}}} } &= 4 - 6 +4 = 2 \\
+	\chi\enbrace[\Bigg]{ \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0,-0.6);
+		\coordinate (1) at (0.6,0,-0.6);
+		\coordinate (2) at (0.6,0.6,-0.6);
+		\coordinate (3) at (0,0.6,-0.6);
+		\draw[thick, dashed] (3) -- (0) -- (1);
+		\draw[thick] (1) -- (2) -- (3);
+		\draw[thick, dashed] (0,0) -- (0);
+		\draw[thick] (0.6,0) -- (0.6,0,-0.6);
+		\draw[thick] (0.6,0.6) -- (0.6,0.6,-0.6);
+		\draw[thick] (0,0.6) -- (0,0.6,-0.6) -- ++ (0.2,0);
+		\draw[thick] (0,0) rectangle (0.6,0.6);
+	\end{tikzpicture}}} } &= 8 -12 +6 = 2 \\
+	\chi \enbrace*{ \vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (A1) at (0,0);
+		\coordinate (A2) at (0.6,0.2);
+		\coordinate (A3) at (1,0);
+		\coordinate (A4) at (0.4,-0.2);
+		\coordinate (B1) at (0.5,0.5);
+		\coordinate (B2) at (0.5,-0.5);
+		\begin{scope}[thick,dashed,]
+		\draw (A1) -- (A2) -- (A3);
+		\draw (B1) -- (A2) -- (B2);
+		\end{scope}
+		\begin{scope}[thick]
+		\draw[] (A1) -- (A4) -- (B1);
+		\draw[] (A1) -- (A4) -- (B2);
+		\draw[] (A3) -- (A4) -- (B1);
+		\draw[] (A3) -- (A4) -- (B2);
+		\draw (B1) -- (A1) -- (B2) -- (A3) --cycle;
+		\end{scope}
+	\end{tikzpicture}}} } &= 6- 12  +8 = 2 
 \end{align*}
 % subsection 29 (end)
 
 \subsection[Satz über die Euler-Charakteristik]{Satz} % (fold)
 \label{sub:210}
-Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'}$, so gilt $\chi(K)= \chi(K')$.
+Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'}$, so gilt 
+\[
+	\chi(K)= \chi(K').
+\]
+\minisec{Bemerkung}
+Die Euler-Charakteristik ist also eine topologische Invariante von simplizialen Komplexen. Sie hängt nur von der topologischen Struktur von $\abs*{K}$ und nicht
+von der kombinatorischen Struktur von $K$ ab.
 % subsection 210 (end)
 % section 2 (end)
 \newpage
@@ -316,50 +474,53 @@ Sei $S$ eine Menge.Sei $R$ ein Ring.\marginnote{Ring mit Eins} Der \bet{freie $R
 \]
 Die $R$-Modulstruktur auf $R[S]$ ist definiert durch:
 \begin{align*}
-	r \cdot \enbrace*{\sum_{s\in S} r_s \cdot s} &:= \sum_{s \in S} (r \cdot r_s) \cdot s \\
-	\enbrace*{\sum_{s \in S} r_s \cdot s} + \enbrace*{\sum_{s \in S} r_s' s} &:= \sum_{s \in S} (r_s + r_s') \cdot s
+	r \cdot \enbrace*{\sum_{s\in S} r_s \cdot s} := \sum_{s \in S} (r \cdot r_s) \cdot s \qquad \qquad 
+	\enbrace*{\sum_{s \in S} r_s \cdot s} + \enbrace*{\sum_{s \in S} r_s' s} := \sum_{s \in S} (r_s + r_s') \cdot s
 \end{align*}
 \minisec{Bemerkung}
 Mittels $s= \sum_{s' \in S} \delta_{s,s'} \cdot s'$ fassen wir $S$ als Teilmenge von $R[S]$ auf.
 % subsection 31 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Universale Eigenschaft von freien Moduln]{Lemma} % (fold)
 \label{sub:32}
-Sei $S$ eine Menge, $R$ ein Ring.
-\begin{enumerate}[1)]
-	\item Ist $M$ ein $R$-Modul und $i : S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi : R[S] \to M$, die $i$ fortsetzt.
-	\item Sei $f : R[S] \to M$ $R$-linear und $p : N \twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f} : R[S] \to N$ mit $p \circ \hat{f} =f$.
+Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
+\begin{minipage}{0.7\textwidth}
+	\begin{enumerate}[1)]
+		\item Ist $M$ ein $R$-Modul und $i : S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi : R[S] \to M$, die $i$ fortsetzt.
+		\item Sei $f : R[S] \to M$ $R$-linear und $p : N \twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f} : R[S] \to N$ mit $p \circ \hat{f} =f$.
+	\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}{0.25\textwidth}
 	\[
 		\begin{tikzcd}
 			\mbox{ } & N \dar["p", two heads] \\
 			R[S] \rar["f"] \urar["\hat{f}", dashed] & M
 		\end{tikzcd}
-	\]\todo{platzsparender mit \texttt{minipage}}
-\end{enumerate}
+	\]
+\end{minipage}
 \minisec{Beweis}
 \begin{enumerate}[1)]
 	\item Eine solche Abbildung ist gegeben durch
-	\[
-		\varphi \enbrace*{\sum_{s \in S} r_s \cdot s} = \sum_{s \in S} r_s \cdot i(s) 
-	\]
+	\(
+		\varphi \enbrace*{\sum_{s \in S} r_s \cdot s} = \sum_{s \in S} r_s \cdot i(s)
+	\).
 	Ist $\varphi'$ eine zweite, so gilt 
 	\begin{align*}
 		\hat{\varphi} \enbrace*{\sum_{s \in S} r_s \cdot s}  = \sum_{s \in S} r_s \cdot \hat{\varphi}(s) = \sum_{s  \in S} r_s \cdot i(s)
 	\end{align*}
 	\item Wähle für jedes $s \in S$ ein Urbild $j(s)\in N$ für $f(s) \in M$ unter $p : N \twoheadrightarrow M$. Nun wende 1) auf $j : S \to N$ an, um $\hat{f} : R[S] \to N$
-	mit $\hat{f}(s) = j(s)$ zu erhalten. Nun ist $ p \circ \hat{f}(s) = f(s)$ für alle $s \in S$. Mit 1) folgt $p \circ \hat{f} = f$.
+	mit $\hat{f}(s) = j(s)$ zu erhalten. Nun ist $ p \circ \hat{f}(s) = f(s)$ für alle $s \in S$. Mit der Eindeutigkeit aus 1) folgt $p \circ \hat{f} = f$. \bewende
 \end{enumerate}
 % subsection 32 (end)
 
 \subsection[Beispiel für freie und nicht-freie Moduln]{Beispiel} % (fold)
 \label{sub:33}
 \begin{enumerate}[(i)]
-	\item Sei $K$ ein Körper, $V,M,N$ $K$-Vektorräume, $f : V \to M$, $p : N \to M$ $K$-linear, $p$ surjektiv. Dann gibt es $\hat{f} : V \to N$ mit
+	\item Sei $K$ ein Körper und $V,M,N$ seien $K$-Vektorräume, $f : V \to M$, $p : N \to M$ seien $K$-linear, $p$ surjektiv. Dann gibt es $\hat{f} : V \to N$ mit
 	$p \circ \hat{f} = f$. Wir können Lemma \ref{sub:32} benutzen, da $V$ eine Basis $B$ hat, also $V \cong K[B]$.
-	\item Sei $R=\mathds{Z}$, sie $V= \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, $M = \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, $f= \id : V \to M$, $N= \mathds{Z}$ und 
+	\item Sei $R=\mathds{Z}$, sei $V= \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ und $M = \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, sowie $f= \id : V \to M$, $N= \mathds{Z}$ und 
 	$p : \mathds{Z}n \to \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ die Projektion mit $p(n)= n + 2 \mathds{Z}$. Dann gibt es keine $\mathds{Z}$-lineare Abbildung 
 	$\hat{f} : \nicefrac{\mathds{Z}}{2 \mathds{Z}} \to \mathds{Z}$ mit $p \circ \hat{f} = f$.
-	
 	Ist $\hat{f} (1+ 2 \mathds{Z}) = n \in \mathds{Z}$, so folgt 
 	\[
 		2 n = 2 \cdot \hat{f}(1+ 2 \mathds{Z}) = \hat{f} \enbrace[\big]{2 \cdot (1+ 2 \mathds{Z})} = \hat{f} (0+ 2 \mathds{Z}) =0
@@ -371,96 +532,201 @@ Sei $S$ eine Menge, $R$ ein Ring.
 \subsection[Definition: $n$-ter Kettenmodul]{Definition} % (fold)
 \label{sub:34}
 Sei $K=(V, \Sigma)$ ein simplizialer Komplex. Sei $\Sigma_n := \set[\sigma \in \Sigma]{\sigma \text{ ist ein $n$-Simplex}}$. Sei $R$ ein Ring. Der 
-\bet{$n$-te Kettenmodul}\index{nterKettenmodul@$n$-ter Kettenmodul} von $K$ über $R$ ist definiert als 
+\bet{$\mathbf{n}$-te Kettenmodul}\index{nterKettenmodul@$n$-ter Kettenmodul} von $K$ über $R$ ist definiert als 
 \[
 	C_n(K;R) := R[\Sigma_n]
 \]
 Ist $R=\mathds{Z}$, so schreiben wir auch kurz $C_n(K) := C_n(K;\mathds{Z})$.
 % subsection 34 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Orientierung eines $(n-1)$-Simplizes als Teilmenge eines $n$-Simplizes]{Definition} % (fold)
 \label{sub:35}
 Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Sei $\sigma = \set{v_0, \ldots ,v_n}$ ein $n$-Simplex von $K$. Bezüglich der Ordnung von $K$ sei dabei 
 $v_0 < v_1 < \ldots < v_n$. Sei $\tau$ ein $(n-1)$-Simplex von $K$. Definiere
 \[
 	\varepsilon_\sigma^\tau := \begin{cases}
-		(-1)î, &\text{ falls }\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n} \\
+		(-1)^i, &\text{ falls }\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n} \\
 		0 , &\text{ sonst}
 	\end{cases}
 \]
 \minisec{Bemerkung}
 $\varepsilon^\tau_\sigma \not= 0 \iff \tau$ ist eine Seite von $\sigma$.
 \minisec{Beispiel}
+Für den folgenden geordneten simplizialen Komplex gilt
 \[
-	\text{Hier fehlt noch was } \varepsilon_{\set{0,1,2}}^{\set{0,1}} = 1 , \varepsilon_{\set{0,1,2}}^{\set{0,2}}=-1 , \varepsilon_{\set{0,1,2}}^{\set{1,2}} =1    
+	\vcenter{\hbox{\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (1) at (0.5,0.866);
+		\coordinate (2) at (1,0);
+		\draw[very thick, 
+			postaction={decorate},
+			decoration={markings,
+				mark=at position 1/6 with {\arrow{to}},
+				mark=at position 0.5 with {\arrow{to}},
+				mark=at position 5/6 with {\arrow{to reversed}}}] 
+		(0) -- (1) -- (2) -- cycle;
+		\foreach \x/\pos in{0/left,1/above,2/right}{
+			\node[\pos] at (\x) {$\x$};
+		}
+	\end{tikzpicture}}} \qquad 
+	\varepsilon_{\set{0,1,2}}^{\set{0,1}} = 1 , \quad \varepsilon_{\set{0,1,2}}^{\set{0,2}}=-1 , \quad \varepsilon_{\set{0,1,2}}^{\set{1,2}} =1    
 \]
-\todo{2-Simplex mit Orientierung hinzufügen}
+
 % subsection 35 (end)
 
 \subsection[Definition: $n$-te Randabbildung]{Definition} % (fold)
 \label{sub:36}
-Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$n$-te Randabbildung}\index{nte Randabbildung@$n$-te Randabbildung} 
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Die \bet{$\mathbf{n}$-te Randabbildung}\index{nte Randabbildung@$n$-te Randabbildung} 
 \[
 	\partial_n : \underset{=R[\Sigma_n]}{C_n(K;R)} \to \underset{=R[\Sigma_{n-1}]}{C_{n-1}(K;R)}
 \]
 ist definiert durch
 \[
-	\partial_n(\sigma) = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \tau \in \Sigma_n
+	\partial_n(\sigma) = \sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \cdot \tau \qquad \text{ für } \sigma \in \Sigma_n
 \]
 % subsection 36 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: $\partial_{n-1} \circ \partial_n = 0$]{Proposition} % (fold)
 \label{sub:37}
 \[
 	\partial_{n-1} \circ \partial_n = 0
 \]
+Damit folgt $\im \partial_n \subseteq \ker \partial_{n-1}$.
 \minisec{Beweis (mit Lemma \ref{sub:38})}
-Sei $\sigma$ ein $n$-Simplex von $K$. 
+Sei $\sigma$ ein $n$-Simplex von $K$. Dann gilt
 \begin{align*}
-	\partial_{n-1} \enbrace*{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = \sum_{\tau \in \Sigma_{n-1}} \varepsilon_{\sigma}^\tau \partial_{n-1} (\tau) 
-	 &= \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
-	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \varepsilon_\tau^\eta \varepsilon_\sigma^\tau}\eta 
-	 \stackrel{\text{Lemma \ref{sub:38}}}{=} 0 \bewende
+	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = 
+	\sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_{\sigma}^\tau \cdot \partial_{n-1} (\tau) 
+	 &= \sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
+	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \!\!\!\!\! \! \! \varepsilon_\tau^\eta \cdot \varepsilon_\sigma^\tau}
+	 \eta  \\
+	 &\stackrel{\mathclap{\text{Lemma \ref{sub:38}}}}{=} \quad \enspace 0 \bewende
 \end{align*}
 % subsection 37 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Ein $(n-2)$-Simplex ist Seite von genau zwei $(n-1)$-Simplizes]{Lemma} % (fold)
 \label{sub:38}
 Sei $\sigma$ ein $n$-Simplex. Sei $\eta \subseteq \sigma$ ein $(n-2)$-Simplex. Dann gibt es genau zwei $(n-1)$-Simplizes $\tau, \tau'$ von $K$, die eine Seite von $\sigma$
 sind und $\eta$ als Seite enthalten. Es gilt
 \[
-	\varepsilon_\tau^\eta \varepsilon^\tau_\sigma = - \varepsilon_{\tau'}^\eta \varepsilon^{\tau'}_\sigma.
+	\varepsilon_\tau^\eta \cdot \varepsilon^\tau_\sigma = - \varepsilon_{\tau'}^\eta \cdot \varepsilon^{\tau'}_\sigma
 \]
 \minisec{Beweis}
 Sei $\sigma= \set{v_0, \ldots ,v_n}$ mit $v_0 < v_1 < \ldots < v_n$. Dann ist $\eta = \set{v_0, \ldots , v_n} \setminus \set{v_i, v_j}$ mit $i<j$. Dann sind 
-$\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n}$ und $\tau' = \set{v_0, \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}$ die gesuchten $(n-1)$-Simplizes und es gilt:
+$\tau = \set{v_0, \ldots , v_{i-1}, v_{i+1}, \ldots , v_n}$ und $\tau' = \set{v_0, \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}$ die gesuchten $(n-1)$-Simplizes und es gilt
 \begin{align*}
 	\varepsilon_\sigma^\tau = (-1)^i \enspace, \enspace \varepsilon_\sigma^{\tau'} = (-1)^j \enspace, \enspace \varepsilon^\eta_\tau = (-1)^{j-1} \enspace, \enspace 
 	\varepsilon_{\tau'}^\eta = (-1)^i \bewende
 \end{align*}
 % subsection 38 (end)
 
-\subsection{Notation} % (fold)
+\subsection[Notation für das Weglassen eines Knotens]{Notation} % (fold)
 \label{sub:39}
 Für $\sigma \in \Sigma_n$, $ \sigma= \set{v_0, \ldots ,v_n} $ mit $v_0 < \ldots < v_n$ schreiben wir 
 \[
 	\delta^j \sigma := \set{v_0 , \ldots , v_{j-1}, v_{j+1}, \ldots , v_n}  \in \Sigma_{n-1}
 \]
-Dann ist $\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \delta^j \sigma$.
+Dann ist $\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \cdot \delta^j \sigma$.
+\todo{RevChap3}
 % subsection 39 (end)
 
-\subsection{Bemerkung} % (fold)
-\label{sub:310}
-$\partial_{n-1} \circ \partial_n = 0 \iff \im \partial_n \subseteq \ker \partial_{n-1}$
-% subsection 310 (end)
-
 \subsection[Definition: $n$-ter Homologiemodul]{Definition} % (fold)
-\label{sub:311}
-Sei $K$ ein geordneter simplizialer Komplex. Der \bet{$n$-te Homologiemodul}\index{nter Homologiemodul@$n$-ter Homologiemodul} von $K$ über $R$ ist definiert als
+\label{sub:310}
+Sei $K$ ein geordneter simplizialer Komplex. Der \bet{$\mathbf{n}$-te Homologiemodul}\index{nter Homologiemodul@$n$-ter Homologiemodul} von $K$ über $R$ ist 
+definiert als
 \[
-	H_n(K;R) := \frac{\ker \partial_n : C_n(K;R) \to C_{n-1}(K;R)}{\im \partial_{n-1} : C_{n+1}(K;R) \to C_n(K;R)} 
+	H_n(K;R) := \frac{\ker \partial_n : C_n(K;R) \to C_{n-1}(K;R)}{\im \partial_{n+1} : C_{n+1}(K;R) \to C_n(K;R)} 
+\]
+Für $n=0$ interpretieren wir $\partial_0$ als die Nullabbildung. Daher gilt 
+\[
+	H_0(K;R) = \frac{C_0(K;R)}{\im \partial_1 : C_1(K;R) \to C_0(K;R)} 
 \]
 % subsection 311 (end)
+
+\subsection[Beispiele für Homologiemoduln]{Beispiele} % (fold)
+\label{sub:311}
+\begin{enumerate}[(1)]
+	\item Sei $K= \bullet$. Dann ist $C_0(K;R) \cong R$ und $C_i(K;R) = 0$ für $i>0$. Weiter ist $H_0(K;R) = C_0(K;R) \cong R$ und $H_i(K;R) =0$ für $i>0$.
+	\item Sein nun $K=K_n$ das $n$-Eck, wobei $n \ge 3$.  Also
+	\begin{align*}
+		\Sigma_0 &= \set{\tau_1=\set{1}, \tau_2=\set{2}, \ldots , \tau_n = \set{n}  } \\
+ 		\Sigma_1 &= \set{\sigma_1 = \set{1,2}, \ldots , \sigma_{n-1} = \set{n_1, n}, \sigma_n=\set{n,1} } 
+	\end{align*}
+	Dann gilt
+	\begin{align*}
+		C_0(K;R) &= R[\Sigma_0] \cong R^{n} \\
+		C_1(K;R) &= R[\Sigma_1] \cong R^{n} \\
+		C_i(K;R) &= 0 \text{ für $i>1$, insbesondere } H_i(K;R) = 0 \text{ für } i>1
+	\end{align*}
+	Es ist dann $\partial_2 = \partial_3 = \ldots  = 0$. Interessant ist $\partial_1 : C_1(K;R) \to C_0(K;R)$, denn es gilt
+	\[
+		\partial_1(\sigma_i) = \begin{cases}
+			\tau_{i+1} - \tau_i, &\text{ falls }i=1, \ldots ,n-1\\
+			\tau_n - \tau_1 , &\text{ falls } i=n
+		\end{cases}
+	\]
+	Mit $\sigma_1' := \sigma_1, \sigma_2' = \sigma_2, \ldots , \sigma_{n-1}' := \sigma_{n-1}, \sigma_n' := - \sigma_n$ gilt dann
+	\[
+		\partial_1 (\sigma_i') = \tau_{i+1} - \tau_i
+	\]
+	mit der Konvention $\tau_{n+1} = \tau_1$. Also gilt
+	\begin{align*}
+		\partial_1 \enbrace*{\sum_{i=1}^{n} r_i \sigma_i' } = \sum_{i=1}^{n} r_i \enbrace*{\tau_{i+1}- \tau_i} = \sum_{i=1}^{n} (r_{i-1} - r_i) \tau_i  
+	\end{align*}
+	Es folgt 
+	\begin{align*}
+		\ker \partial_1 &= \set[\sum_{i=1}^{n} r_i \sigma_i']{r_1=r_2= \ldots =r_n} \subseteq C_1(K;R) \\
+		\im \partial_1 &= \set[\sum_{i=1}^{n} s_i \tau_i]{\sum_{i=1}^{n} s_i =0} \subseteq C_0(K;R)
+	\end{align*}
+	Ist $\sum_{i=1}^{n} s_i =0$, so folgt für $r_n=0, r_1 = -s_1, r_2=-s_1 -s_2, \ldots , r_{n-1} = -s_1 - s_2 - \ldots - s_{n-1}$
+	\[
+		\partial_1 \enbrace*{\sum_{i=1}^{n} r_i \sigma_i'} = \sum_{i=1}^{n} s_i \tau_i 
+	\]
+	Es folgt ${\color{Firebrick1}[K] \in}\, H_1(K;R) = \nicefrac{\ker \partial_1}{\im \partial_2} = \ker \partial_1 \cong R \,{\color{Firebrick1}\ni 1}$ und 
+	\[
+		{ \color{Gold3} [\tau_i] =[p] \in }\, H_0(K;R) = \nicefrac{\ker \partial_0}{\im \partial_1} = \nicefrac{R[\Sigma_0]}{ \set[\sum_{i=1}^{n} s_i \tau_i]{\sum_{i=1}^{n} s_i =0} } \cong R \, { \color{Gold3} \ni 1 }
+	\]
+	(via $\sum_{i=1}^{n} s_i \tau_i \longmapsto \sum_{i=1}^{n} s_i$)
+\end{enumerate}
+% subsection 311 (end)
+
+\subsection[Definition: $R$-Kettenkomplex, $n$-te Homologie]{Definition} % (fold)
+\label{sub:312}
+Sei $R$ ein Ring. Ein \bet{$\mathbf{R}$-Kettenkomplex}\index{R-Kettenkomplex@$R$-Kettenkomplex} $(C_*, d_*)$ ist eine Folge von $R$-Moduln $(C_n)_{n \in \mathds{N}}$ zusammen mit $R$-linearen Abbildungen 
+$(d_n : C_n \to C_{n-1})_{n \ge 1}$, so dass $d_n \circ d_{n+1} = 0$. Die $d_n$ heißen die \Index{Randabbildungen} von $(C_*,d_*)$, die $C_n$ die \Index{Kettenmoduln}.
+Die \bet{$\mathbf{n}$-te Homologie}\index{n-te Homologie@$n$-te Homologie} eines Kettenkomplexes $(C_*,d_*)$ ist definiert als
+\[
+	H_n(C_*, d_*) := \frac{\ker d_n : C_n \to C_{n-1}}{\im d_{n+1} : C_{n+1} \to C_n} 
+\]
+% subsection 312 (end)
+
+\subsection[Bemerkungen zu Kettenkomplexen]{Bemerkung} % (fold)
+\label{sub:313}
+\begin{enumerate}[(i)]
+	\item Oft werden auch Kettenkomplexe betrachtet, die $\mathds{Z}$ statt $\mathds{N}$ verwenden.
+	\item Ein Kettenkomplex $(C_*,d_*)$ heißt endlich erzeugt, wenn alle $C_n$ endlich erzeugte $R$-Moduln sind und $C_n \not= 0$ nur für endlich viele $n$ ist.
+\end{enumerate}
+% subsection 313 (end)
+
+\subsection[Definition: Simplizialer Kettenkomplex]{Definition} % (fold)
+\label{sub:314}
+Zu einem geordneten simplizialen Komplex $K$ heißt $\enbrace[\big]{C_*(K;R), \partial_*}$ der \Index{simpliziale Kettenkomplex} von $K$ über $R$. 
+\minisec{Bemerkung}
+Ist $K$ endlich, so ist $\enbrace*{C_*(K;R), \partial_*}$ endlich erzeugt.
+% subsection 314 (end)
+
+\subsection[Wiederholung: Torsionsgruppe]{Wiederholung} % (fold)
+\label{sub:315}
+Sei $A$ eine abelsche Gruppe. Dann ist 
+\[
+	T A := \set[a \in A]{\exists n \ge 1 : n a = \underbrace{a + \ldots + a}_{\text{$n$-mal}} = 0} 
+\]
+die \Index{Torsionsgruppe} von $A$. Ist $A$ endlich erzeugt, so ist auch $TA$ endlich erzeugt und es gibt Primzahlpotenzen $p_1^{n_1}, \ldots , p_k^{n_k}$ mit
+\[
+	TA \cong \nicefrac{\mathds{Z}}{(p_1^{n_1})} \oplus \ldots \oplus \nicefrac{\mathds{Z}}{(p_k^{n_k})}
+\]
+Weiter gibt es dann $n$ mit $A \cong \mathds{Z}^n \oplus TA$. $\Rg A := n$ ist der Rang von $A$.
+% subsection 315 (end)
 % section 3 (end)
 
 
