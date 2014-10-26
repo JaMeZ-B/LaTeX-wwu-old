@@ -36,4 +36,95 @@
 	Für Elemente $a_1,\dots,a_n$ in einem beliebigen kommutativen Ring $R$ mit $1 \neq 0$ setze
 	\[ (a_1,\dots,a_n) := Ra_1 + \dots + Ra_n \]
 	Man nennt $(a_1,\dots,a_n)$ das von $a_1,\dots,a_n$ erzeugte Ideal in $R$.
+	
+\begin{falko}[Satz vom größten gemeinsamen Teiler] \label{F2.1}
+	Sei $R$ ein Hauptidealring. Dann gilt: Zu jedem System $a_1,\dots,a_n$ von Elementen aus $R$ existiert ein ggT $d$ von $a_1,\dots,a_n$ und jedes solche $d$ besitzt eine Darstellung der Gestalt
+	\begin{equation}
+		d = x_1a_1+\dots+x_na_n \quad \text{mit } x_i \in R \label{eq_F2.1}
+	\end{equation}
+	Wir sagen, in $R$ gelte der \Index{Satz vom größten gemeinsamen Teiler}.
+\end{falko}
+
+\minisec{Bemerkung}
+	Sei $R$ ein beliebiger Integritätsring. Ist $d$ ein gemeinsamer Teiler von $a_1,\dots,a_n$ aus $R$ und gibt es eine Darstellung der Form \eqref{eq_F2.1}, so ist $d$ ein ggT von $a_1,\dots,a_n$.
+
+\begin{satz} \label{satz_2.1}
+	$\ZZ$ ist ein Hauptidealring.
+\end{satz}
+
+\minisec{Definition (Gaußklammer)}
+	Für $x \in \RR$ setze
+	\[ [x] = \max \{g \in \ZZ : g \leq x\} \in \ZZ \]
+	$[x]$ ist charakterisiert durch folgende zwei Eigenschaften: \begin{enumerate}[(1)]
+		\item $[x] \in \ZZ$
+		\item $[x] \leq x < [x] + 1$
+	\end{enumerate}
+
+\begin{falko}[Division mit Rest in $\ZZ$] \label{F2.2}
+	Gegeben $a, b \in \ZZ$, $a \neq 0$. Dann gibt es eine Darstellung
+	\begin{equation}
+		b = qa +r \quad \text{mit } 0 \leq r < |a| \text{ und } q,r \in \ZZ \label{eq_F2.2}
+	\end{equation}
+\end{falko}
+
+\minisec{Bemerkung}
+	\begin{enumerate}[1)]
+		\item Die Darstellung \eqref{eq_F2.2} ist eindeutig.
+		\item Es gibt eine Darstellung
+		\begin{equation}
+			b = qa + r \quad \text{mit } |r| < |a|; q,r \in \ZZ, \label{eq_D'}
+		\end{equation}
+		doch diese ist nicht mehr eindeutig, z.B. $27 = 4 \cdot 6 + 3 = 5 \cdot 6 - 3$.
+		\item Es gibt eine Darstellung
+		\begin{equation}
+			b = qa + r \quad \text{mit } -\frac{|a|}{2} < r \leq \frac{|a|}{2}; q,r \in \ZZ,
+		\end{equation}
+		und diese ist eindeutig.
+		\item Es gibt eine Darstellung
+		\[ b = qa + r \quad \text{mit } |r| \leq \frac{|a|}{2}; q,r \in \ZZ, \]
+		doch diese ist nicht eindeutig, falls $a$ gerade.
+	\end{enumerate}
+
+\begin{defn}[euklidischer Ring] \label{def_2.3}
+	Ein Integritätsring $R$ heißt ein \Index{euklidischer Ring}, falls eine Funktion $\nu\colon R \rightarrow \NN_0$ mit $\nu(0) = 0$ existiert, sodass gilt: Zu $a, b \in R$ mit $a \neq 0$ existieren $q,r \in R$ mit
+	\[b = qa + r \text{ und } \nu(r) = \nu(a) \]
+\end{defn}
+
+\minisec{Beispiele}
+	\begin{enumerate}[(1)]
+		\item $R = \ZZ$ mit $\nu(a) = |a|$.
+		\item $R = K[X], K$ Körper, mit $\nu(g) = \deg(g) + 1$ für $g \neq 0$, $\nu(0) = 0$.
+		\item $R = \ZZ[i]$ mit $\nu(z) = N(z) = z \overline{z} = |z|^2$.
+	\end{enumerate}
+	
+\begin{falko} \label{F2.3}
+	Jeder euklidische Ring ist ein Hauptidealring.
+\end{falko}
+
+\begin{falko} \label{F2.4}
+	Jeder Hauptidealring ist faktoriell.
+\end{falko}
+
+Im Folgenden sei $R$ ein euklidischer Ring mit euklidischer Normfunktion $\nu$. Allgemein gilt folgende elementare Umformung:
+\begin{equation}
+	(a_1,a_2,\dots,a_n) = (a_1, a_2-y_2a_1,\dots,a_n-y_na_1) \text{ für bel. } y_i \in R \label{eq_U}
+\end{equation}
+
+\minisec{Euklidischer Algorithmus}
+	Gegeben $a_1,\dots,a_n \in R$. Wir wollen $d \in R$ bestimmen mit \index{Euklidischer Algorithmus}
+	\[ (a_1,\dots,a_n) = (d) \]
+	Sind alle $a_i = 0$, so ist $d = 0$ und wir sind fertig. Sei daher ohne Einschränkung
+	\[ a_1 \neq 0 \text{ und } \nu(a_1) \leq \nu(a_i), \text{ falls } a_i \neq 0 \]
+	Sei $a_i = q_ia_1 + r_i$ mit $\nu(r_i) < \nu(a_1)$ für $i \geq 2$. Dann ist
+	\[ (a_1,\dots,a_n) \stackrel{\eqref{eq_U}}{=} (a_1,r_2,\dots,r_n) \]
+	Fortsetzung des Verfahrens liefert
+	\[ (d,0,0,\dots,0) = (d) \]
+	
+\minisec{Beispiel}
+\[\begin{array}{rl}
+	(\textcolor{red}{27},63,114) & 63 = 2 \cdot 27 + 9, 114 = 4 \cdot 27 + 6 \\ 
+	= (27,9,\textcolor{red}{6}) & 27 = 4 \cdot 6 + 3, 9 = 1 \cdot 6 + 3 \\ 
+	= (\textcolor{red}{3},3,6) & 3 = 1 \cdot 3 + 0, 6 = 2 \cdot 3 + 0 \\ 
+	= (3, 0, 0) = (3) & 
+\end{array}\]
 \newpage
