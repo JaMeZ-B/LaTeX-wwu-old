@@ -714,9 +714,14 @@ Zu einem geordneten simplizialen Komplex $K$ heißt $\enbrace[\big]{C_*(K;R), \p
 \minisec{Bemerkung}
 Ist $K$ endlich, so ist $\enbrace*{C_*(K;R), \partial_*}$ endlich erzeugt.
 % subsection 314 (end)
+% section 3 (end)
+\newpage
+
+\section{Euler-Charakteristik von Kettenkomplexen} % (fold)
+\label{sec:4}
 
 \subsection[Wiederholung: Torsionsgruppe]{Wiederholung} % (fold)
-\label{sub:315}
+\label{sub:41}
 Sei $A$ eine abelsche Gruppe. Dann ist 
 \[
 	T A := \set[a \in A]{\exists n \ge 1 : n a = \underbrace{a + \ldots + a}_{\text{$n$-mal}} = 0} 
@@ -726,9 +731,103 @@ die \Index{Torsionsgruppe} von $A$. Ist $A$ endlich erzeugt, so ist auch $TA$ en
 	TA \cong \nicefrac{\mathds{Z}}{(p_1^{n_1})} \oplus \ldots \oplus \nicefrac{\mathds{Z}}{(p_k^{n_k})}
 \]
 Weiter gibt es dann $n$ mit $A \cong \mathds{Z}^n \oplus TA$. $\Rg A := n$ ist der Rang von $A$.
-% subsection 315 (end)
-% section 3 (end)
+% subsection 41 (end)
 
+\subsection[Lemma: Rang einer endlich erzeugten abelschen Gruppe]{Lemma} % (fold)
+\label{sub:42}
+Sei $A$ eine endlich erzeugte abelsche Gruppe. Dann gilt $\Rg A = \max \set[m]{\exists C \le A, C \cong \mathds{Z}^m}$.
+\minisec{Beweis}
+Da $A \cong \mathds{Z}^n \oplus T A$ genügt zu zeigen: Ist $\varphi : \mathds{Z}^m \to \mathds{Z}^n \oplus T A$ ein injektiver Gruppenhomomorphismus, so ist $m \le n$.
+Schreibe $\varphi = \varphi_0 \oplus \varphi_1$, also $\varphi(a) = \varphi_0(a) + \varphi_1(a)$ mit $\varphi_0 : \mathds{Z}^m \to \mathds{Z}^n$, 
+$\varphi_1 : \mathds{Z}^m \to T A$. 
+
+Behauptung: $\varphi_0$ ist injektiv. Zu $v \in \mathds{Z}^m$ wähle $k\ge 1$ mit $k \cdot \varphi_1(v) = 0 \in T A$. Dann ist $\varphi_1(k v) = k \varphi_1(v)=0$.
+Ist $v \not= 0$, so ist $k \cdot v \not= 0 \in \mathds{Z}^m$, also ist $\varphi(k v) \not= 0$ und damit $\varphi_0(k v) \not= 0$. Es folgt $\varphi_0(v) \not= 0$, da sonst
+$\varphi_0(k \cdot v) = k \cdot \varphi_0(v)= 0$. Damit ist die Behauptung gezeigt.
+
+Gruppenhomomorphismen $\varphi_0 : \mathds{Z}^m \to \mathds{Z}^n$ werden durch $n \times m$-Matrizen beschrieben: Es gibt $A= (a_{ij}) \in \mathds{Z}^{n \times m}$ mit
+\[
+	\varphi_0 \begin{pmatrix}
+		z_1 \\ \vdots \\ z_m
+	\end{pmatrix} = \begin{pmatrix}
+		\sum_{j=1}^{m} a_{1j} z_j \\
+		\vdots \\
+		\sum_{j=1}^{m} a_{nj} z_j
+	\end{pmatrix}
+\]
+Ist $m >n$, so hat $A$, aufgefasst als Matrix über $\mathds{Q}$, einen Kern. Es gibt also einen Vektor $w = \begin{psmallmatrix}a_1/b_1 \\ : \\ a_m/b_m\end{psmallmatrix}$
+mit $A w = 0$, $w \not=0$. Dann ist $(b_1, \ldots , b_m) \cdot w \in \mathds{Z}^m$ und 
+\[
+	\varphi_0 \enbrace[\big]{(b_1, \ldots , b_m)\cdot w} = A \cdot \enbrace[\big]{(b_1, \ldots , b_m) \cdot w} = (b_1, \ldots , b_m) \cdot A \cdot w = 0 
+\]
+Also gilt $m \le n$. \bewende
+% subsection 42 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:43}
+Seien $M_0, M_1, M_2$ $R$-Moduln und $f_0 : M_0 \to M_1$, $f_1 : M_1 \to M_2$ $R$-lineare Abbildungen. Dann heißt 
+\[
+	\begin{tikzcd}
+		M_0 \rar["f_0"] & M_1 \rar["f_1"]& M_2 
+	\end{tikzcd} \tag*{$(\star)$}
+\]
+eine \Index{kurze exakte Sequenz}, wenn gilt:
+\begin{enumerate}[(i)]
+	\item $f_0$ ist injektiv,
+	\item $\im f_0 = \ker f_1$,
+	\item $f_1$ ist surjektiv.
+\end{enumerate} 
+\minisec{Bemerkung}
+Oft sagt man $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ ist exakt in $M_1$, wenn $\im f_0 = \ker f_1$ ist. Dann ist $(\star)$ eine kurze exakte Folge, wenn
+\[
+	\begin{tikzcd}
+		0 \rar & M_0 \rar["f_0"] & M_1 \rar["f_1"]& M_2 \rar & 0
+	\end{tikzcd}
+\]
+exakt in $M_0, M_1$ und $M_2$ ist.
+% subsection 43 (end)
+
+\subsection{Beispiele} % (fold)
+\label{sub:44}
+\begin{enumerate}[1)]
+	\item \[
+		\begin{tikzcd}[row sep=0.5em]
+			M_0 \rar["i",hook] & M_0 \oplus M_1 \rar["p",two heads] & M_1 \\
+			v_0 \rar["i", mapsto] & (v_0,0) \enspace (v_0,v_1) \rar["p",mapsto] & v_1
+		\end{tikzcd}
+	\]
+	ist eine kurze exakte Folge.
+	\item \[
+		\begin{tikzcd}
+			\mathds{Z} \rar["n \cdot ", hook] & \mathds{Z} \rar[two heads] & \nicefrac{\mathds{Z}}{n \mathds{Z}}
+		\end{tikzcd}
+	\]
+	ist eine kurze exakte Folge.
+\end{enumerate}
+% subsection 44 (end)
+
+\subsection[Bemerkung: Spaltung einer kurzen exakten Sequenz]{Bemerkung} % (fold)
+\label{sub:45}
+Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ ist eine $R$-lineare Abbildung $s : M_2 \to M_1$ mit $f_1 \circ s = \id_{M_2}$. In diesem Fall erhalten wir einen Isomorphismus $M_0 \oplus M_2 \to M_1$, $(v_0, v_2) \mapsto f_0(v_0) + s(v_2)$.
+\begin{description}
+	\item[Injektivität:] Sei $(v_0,v_2) \in M_0 \oplus M_2$ mit $f_0(v_0) + s(v_2) =0$. Dann gilt
+	\[
+		0 = f_1 \enbrace[\big]{f_0(v_0) + s(v_2)} = v_2 \enspace \Longrightarrow \enspace f_0(v_0)=0 \enspace\Longrightarrow \enspace v_0 =0
+	\]
+	\item[Surjektivität:] Sei $v_1 \in M_1$. Betrachte $v_2 := f_1(v_1)$. Dann ist $v_1 -s(v_2) \in \ker f_1 = \im f_0$, also gibt es $v_0$ in $M_0$ mit
+	$f_0(v_0) = v_1 - s(v_1)$. Damit ist $v_1= f_0(v_0)+ s(v_1)$.
+\end{description}
+% subsection 45 (end)
+
+\subsection[Bemerkung: Existenz einer Spaltung, wenn $M_2$ frei ist]{Bemerkung} % (fold)
+\label{sub:46}
+\begin{enumerate}[1)]
+	\item $\mathds{Z} \xrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$ spaltet nicht.
+	\item Ist $(\star)$ $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
+	Siehe Lemma \ref{sub:32}. Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
+\end{enumerate}
+% subsection 46 (end)
+% section 4 (end)
 
 
 \cleardoubleoddemptypage
