@@ -763,20 +763,22 @@ mit $A w = 0$, $w \not=0$. Dann ist $(b_1, \ldots , b_m) \cdot w \in \mathds{Z}^
 Also gilt $m \le n$. \bewende
 % subsection 42 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Kurze exakte Sequenz]{Definition} % (fold)
 \label{sub:43}
 Seien $M_0, M_1, M_2$ $R$-Moduln und $f_0 : M_0 \to M_1$, $f_1 : M_1 \to M_2$ $R$-lineare Abbildungen. Dann heißt 
 \[
 	\begin{tikzcd}
-		M_0 \rar["f_0"] & M_1 \rar["f_1"]& M_2 
+		M_0 \rar["f_0", hook] & M_1 \rar["f_1", two heads]& M_2 
 	\end{tikzcd} \tag*{$(\star)$}
 \]
 eine \Index{kurze exakte Sequenz}, wenn gilt:
-\begin{enumerate}[(i)]
-	\item $f_0$ ist injektiv,
-	\item $\im f_0 = \ker f_1$,
-	\item $f_1$ ist surjektiv.
-\end{enumerate} 
+\begin{multicols}{3}
+	\begin{enumerate}[(i)]
+		\item $f_0$ ist injektiv,
+		\item $\im f_0 = \ker f_1$,
+		\item $f_1$ ist surjektiv.
+	\end{enumerate}
+\end{multicols}
 \minisec{Bemerkung}
 Oft sagt man $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ ist exakt in $M_1$, wenn $\im f_0 = \ker f_1$ ist. Dann ist $(\star)$ eine kurze exakte Folge, wenn
 \[
@@ -791,17 +793,13 @@ exakt in $M_0, M_1$ und $M_2$ ist.
 \label{sub:44}
 \begin{enumerate}[1)]
 	\item \[
-		\begin{tikzcd}[row sep=0.5em]
+		\begin{tikzcd}[row sep=0.3em]
 			M_0 \rar["i",hook] & M_0 \oplus M_1 \rar["p",two heads] & M_1 \\
 			v_0 \rar["i", mapsto] & (v_0,0) \enspace (v_0,v_1) \rar["p",mapsto] & v_1
 		\end{tikzcd}
 	\]
 	ist eine kurze exakte Folge.
-	\item \[
-		\begin{tikzcd}
-			\mathds{Z} \rar["n \cdot ", hook] & \mathds{Z} \rar[two heads] & \nicefrac{\mathds{Z}}{n \mathds{Z}}
-		\end{tikzcd}
-	\]
+	\item $\mathds{Z} \xhookrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$
 	ist eine kurze exakte Folge.
 \end{enumerate}
 % subsection 44 (end)
@@ -822,11 +820,72 @@ Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \x
 \subsection[Bemerkung: Existenz einer Spaltung, wenn $M_2$ frei ist]{Bemerkung} % (fold)
 \label{sub:46}
 \begin{enumerate}[1)]
-	\item $\mathds{Z} \xrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$ spaltet nicht.
+	\item $\mathds{Z} \xhookrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$ spaltet nicht.
 	\item Ist $(\star)$ $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
 	Siehe Lemma \ref{sub:32}. Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
 \end{enumerate}
 % subsection 46 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:47}
+Der Rang für alle endlich erzeugten abelschen Gruppen ist additiv:
+\[
+	\Rg(A \oplus B) =\Rg A + \Rg B,
+\]
+da $A \cong \mathds{Z}^{\Rg A} \oplus T A$, $B \cong \mathds{Z}^{\Rg B} \oplus TB$, also 
+\[
+	A \oplus B \cong \mathds{Z}^{\Rg A + \Rg B} \oplus \underbrace{T A \oplus T B}_{=T(A \oplus B)}
+\]
+% subsection 47 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:48}
+Der Rang von endlich erzeugten abelschen Gruppen ist additiv für kurze exakte Folgen: Ist $(\star)$ $A \xrightarrow{i} B \xrightarrow{p}C$ eine kurze exakte Folge von endlich 
+erzeugten abelschen Gruppen, so gilt $\Rg B = \Rg A + \Rg C$.
+\minisec{Beispiel}
+mit $\mathds{Z}$
+\minisec{Beweis}
+Spaltet $(\star)$, so ist $B \cong A \oplus C$ und die Behauptung folgt aus der Bemerkung \ref{sub:47}. \smallskip \\
+Wir können annehmen: $C = \mathds{Z}^n \oplus T C$. Wir erhalten: 
+\[
+	\begin{tikzcd}
+		A \rar["i",hook] \dar[equal] & p ^{-1}(\mathds{Z}^n) \rar["p", two heads] \dar[hook,"i''"]& \mathds{Z}^n \dar[hook,"i'"]\\
+		A \rar["i"] & B \rar["p", two heads] \dar[two heads,"p''"]& C \dar[two heads,"p'"]\\
+		& \nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \rar[two heads, hook,"p' \circ p"]& T C
+	\end{tikzcd} \tag*{$(\star)$}
+\]
+Ist $p' \circ p(b)=0$, so gibt es $v \in \mathds{Z}^n$ mit $i'(v)= p(b)$. Nun gibt es $v' \in p ^{-1}(\mathds{Z}^n)$ mit $p(v')=v$. Es folgt 
+\[
+	p \enbrace*{i''(v')} = p(b) 
+\]
+also $i''(v') -b \in \ker p = i(A)$. Da $i(A) \subseteq i'' \enbrace*{p ^{-1} (\mathds{Z}^n)} $ folgt $b \in i'' \enbrace*{p ^{-1}(\mathds{Z}^n)}$.
+In $(\star)$ sind die Spalten und Zeilen exakt. Da $\mathds{Z}^n$ frei ist, spaltet $A \to p ^{-1}(\mathds{Z}^n) \to \mathds{Z}^n$ und es gilt 
+\[
+	\Rg A + \Rg C = \Rg A + n = \Rg \enbrace*{p ^{-1}(\mathds{Z}^n)} 
+\]
+Es bleibt zu zeigen: $\Rg B = \Rg  \enbrace*{p ^{-1}(\mathds{Z}^n)}$. \medskip \\
+Nebenbei: Ist $A' \subseteq B'$, so gilt $\Rg A' \le \Rg B'$, denn 
+\[
+	\Rg A' = \max \set[n']{\mathds{Z}^{n'} \cong C' \le A'} \le \max \set[n']{\mathds{Z}^{n'} \cong C' \le B'} = \Rg B'.
+\]
+Betrachte die kurze exakte Folge $p ^{-1}(\mathds{Z}^n) \to B  \to \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}$. Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
+$k$ mit $k \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k b \in p ^{-1}(\mathds{Z}^n)$. Es folgt $kB \le p ^{-1}(\mathds{Z}^n) \le B$. Ist 
+$B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. Mit der Nebenbemerkung folgt 
+$\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
+\minisec{Beweis mit Tensorprodukten (Skizze)}
+\begin{itemize}
+	\item $\mathds{Q} \otimes_\mathds{Z} : \mathds{Z}\text{-}\MOD \to \mathds{Q}\text{-}\VR $ ist ein Funktor.
+	\item $\Rg A= \dim_\mathds{Q} \mathds{Q} \otimes_\mathds{Z} A$
+	\begin{enumerate}[(a)]
+		\item $\mathds{Q} \otimes_\mathds{Z} (X \oplus Y) = \mathds{Q} \otimes_\mathds{Z} X \oplus  \mathds{Q} \otimes_\mathds{Z} Y$
+		\item $\mathds{Q} \otimes_\mathds{Z} \mathds{Z}^n \cong \mathds{Q}^n$
+		\item $\mathds{Q} \otimes_\mathds{Z} T \cong 0$ für $T$ ein Torsionsmodul.
+	\end{enumerate}
+	\item Ist $A \to B \to C$ eine kurze exakte Folge, so ist auch 
+	$\mathds{Q} \otimes_\mathds{Z} A \to \mathds{Q} \otimes_\mathds{Z} B \to \mathds{Q} \otimes_\mathds{Z} C$ eine kurze exakte Folge.
+	\item Jede kurze exakte Folge von $\mathds{Q}$-Vektorräumen spaltet und es gilt $\dim_\mathds{Q}(V \oplus W) = \dim_\mathds{Q}(V)+ \dim_\mathds{Q} (W)$.
+\end{itemize}
+% subsection 48 (end)
 % section 4 (end)
 
 
