@@ -455,7 +455,7 @@ Seien $X,Y$ normierte Vektorräume, $T \in L(X,Y)$. Die \bet{Norm} (oder \Index{
 Nach \ref{sub:27} ist $\norm{T}<  \infty $ und $\norm[Y]{T x} \le \norm{T} \cdot \norm[X]{x}$ für alle $x \in X$.
 % subsection 28 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Propostion: $L(X,Y)$ ist ein normierter Raum mit der Operatornorm]{Proposition} % (fold)
 \label{sub:29}
 Seien $X,Y$ normierte Räume, betrachte $L(X,Y)$ mit $\norm{.}$. Dann ist $L(X,Y)$ ein normierter Raum.
 \minisec{Beweis}
@@ -539,11 +539,11 @@ Daraus folgt, dass Normtopologie und Quotiententopologie auf $\nicefrac{X}{Y}$ g
 		\norm[\nicefrac{X}{Y}]{\lambda \cdot \overline{x}} = \inf_{y \in Y} \norm[X]{\lambda x + y} = \inf_{y \in Y} \norm[X]{\lambda x + \lambda y} 
 		= \inf_{y \in Y} \abs*{\lambda } \cdot \norm[X]{x+y}  =   \abs*{\lambda } \cdot \norm[\nicefrac{X}{Y}]{\overline{x}}  
 	\end{align*}
-	\item Seien $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$. Dann gilt \todo{Fehler finden}
-	% \begin{align*}
-% 		\norm[\nicefrac{X}{Y}]{\overline{x} + \overline{y}} = \inf_{z \in Y} \norm[X]{x+y+z} = \inf_{z,z' \In Y} \norm[X]{x+y+z+z'} \le \inf_{z,z' \in Y}
-% 		\enbrace*{\norm[X]{x+z} + \norm[X]{y+z'}} = \norm[\nicefrac{X}{Y}]{\overline{x}} + \norm[\nicefrac{X}{Y}]{\overline{y}}
-% 	\end{align*}
+	\item Seien $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$. Dann gilt
+	\begin{align*}
+		\norm[\nicefrac{X}{Y}]{\overline{x} + \overline{y}} = \inf_{z \in Y} \norm[X]{x+y+z} = \inf_{z,z' \in Y} \norm[X]{x+y+z+z'} &\le \inf_{z,z' \in Y}
+		\enbrace[\Big]{\norm[X]{x+z} + \norm[X]{y+z'}} \\ &= \norm[\nicefrac{X}{Y}]{\overline{x}} + \norm[\nicefrac{X}{Y}]{\overline{y}}
+	\end{align*}
 	Damit ist $\norm[\nicefrac{X}{Y}]{.}$ eine Norm auf $\nicefrac{X}{Y}$.
 	\item Linearität von $q$ ist klar. Es gilt
 	\[
@@ -571,7 +571,7 @@ Daraus folgt, dass Normtopologie und Quotiententopologie auf $\nicefrac{X}{Y}$ g
 Ein \Index{Banachraum} ist ein vollständiger, normierter Raum. Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra.  
 % subsection 214 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel für eine Banachalgebra]{Beispiel} % (fold)
 \label{sub:215}
 $C(\Omega, K)$, wobei $\Omega$ ein kompakter Hausdorffraum ist, ist eine Banachalgebra.
 % subsection 215 (end)
@@ -601,6 +601,81 @@ Produkte und Quotienten (nach abgeschlossenen Unterräumen) von Banachräumen si
 	$x \in X$ mit $x_n \to x$. Dann $\overline{x}_n  \to \overline{x}$. \bewende
 \end{description}
 % subsection 216 (end)
+
+\subsection[Definition: Sublineare Abbildung]{Definition} % (fold)
+\label{sub:217}
+Sei $X$ ein $\mathds{R}$-Vektorraum. Eine Abbildung $\varphi : X \to \mathds{R}$ heißt \Index{sublinear}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\varphi(\lambda \cdot x) = \lambda \cdot \varphi(x)$, für $x \in X$, $\lambda \in [0,\infty)$
+	\item $\varphi(x+y) \le \varphi(x) + \varphi(y)$, für $x,y \in X$.
+\end{enumerate}
+Setze $\mathcal{S}(X) := \set[\varphi : X \to \mathds{R}]{\varphi \text{ sublinear}}$. $\mathcal{S}(X)$ ist partiell geordnet mit 
+\[
+	\varphi \le \psi :\iff \varphi(x) \le \psi(x) ,\quad  x \in X
+\]
+% subsection 217 (end)
+
+\subsection[Beispiele für sublineare Abbildungen]{Beispiele} % (fold)
+\label{sub:218}
+\begin{enumerate}[(i)]
+	\item Halbnormen sind sublinear.
+	\item \[
+		\begin{tikzpicture}[scale=0.5]
+			\draw (-3,0) -- (3,0) node[below right]{$X$};
+			\draw (0,-3) -- (0,3) node[right]{$\mathds{R}$};
+			\draw[very thick, dashed,OrangeRed2] (0,0) -- (220:4);
+			\draw[very thick,SeaGreen4] (40:4) -- (0,0) -- (205:4);
+		\end{tikzpicture}
+	\]
+	$0 = \varphi(0) = \varphi(x-x) =\le \varphi(x) + \varphi(-x)$.
+\end{enumerate}
+% subsection 218 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:219}
+Sei $X$ ein $\mathds{R}$-Vektorraum. $\mathcal{S}(X)$ ist nach unten induktiv geordnet, d.h. jede nichtleere total geordnete Teilmenge besitzt eine untere Schranke.
+\minisec{Beweis}
+Sei $\emptyset \not= (\varphi_i)_{I} \subseteq \mathcal{S}(X)$ total geordnet. Setze $\varphi(x) := \inf_{i \in I} \varphi_i(x)$, dann gilt 
+\[
+	- \varphi_i(-x) \le \varphi_i(x) \enspace\Longrightarrow \enspace- \varphi(x) \le \varphi(x) \le \varphi_i(x) < \infty
+\]
+ebenso $-\varphi(x) \le \varphi(-x) \le \varphi_i(-x)$ für $x \in X$, $i \in I$. Insbesondere gilt $- \infty <  \varphi(x) < \infty$, $x \in X$. 
+Die Sublinearität von $\varphi$ und $\varphi \le \varphi_i$, $i \in I$ sind klar (Warum?). \bewende
+% subsection 219 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:220}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $\varphi$ in $\mathcal{S}(X)$ minimal genau dann, wenn $\varphi$ linear ist.
+\minisec{Beweis}
+\begin{description}
+	\item["$\Leftarrow$":] Sei $\psi \le \varphi$ mit $\psi$ sublinear und $\varphi$ linear. Dann folgt $\psi(x) \le \varphi(x)$ und $\psi(-x) \le \varphi(-x)$ für 
+	$x \in X$.
+	\[
+		 \Longrightarrow \enspace- \psi(x) \le \psi(-x) \le \varphi(-x) = - \varphi(x)
+	\]
+	Daraus folgt $\varphi(x) \le \psi(x)$ und somit muss $\varphi=\psi$ gelten. Also ist $\varphi$ minimal.
+	\item["$\Rightarrow $":] Sei $\varphi \in \mathcal{S}(X)$ minimal. Zu $\overline{x} \in X$ definiere $\varphi_{\overline{x}} : X \to \mathds{R}$ durch
+	\[
+		\varphi_{\overline{x}}(x) := \inf_{\lambda \ge 0} \enbrace[\Big]{\varphi \enbrace*{x+ \lambda \cdot \overline{x} } - \lambda \cdot \varphi(\overline{x})}
+	\]
+	Es gilt $\varphi_{\overline{x}}(x) \in (-\infty,\infty)$, denn für $x \in X, \lambda \ge 0$ ist \marginnote{mit (ii) aus \ref{sub:217}}
+	\[
+		-\varphi(-x) \le \varphi(x+ \lambda \cdot \overline{x}) - \lambda  \cdot \varphi(\overline{x}) \le \varphi(x)
+	\]
+	$\varphi_{\overline{x}}$ ist sublinear:
+	\begin{enumerate}[(i)]
+		\item Sei $\mu >0$. Dann gilt für $x \in X$.
+		\begin{align*}
+			\varphi_{\overline{x}}(\mu \cdot x) = \inf_{\lambda \ge 0} \enbrace[\Big]{ \varphi \enbrace*{\mu \cdot x + \lambda  \cdot \overline{x} } 
+			- \lambda \cdot \varphi(\overline{x} )} &= \inf_{\lambda \ge 0 } \mu \cdot  \enbrace*{ \varphi \enbrace*{x + \frac{\lambda }{\mu} \cdot \overline{x}}
+			- \frac{\lambda }{\mu} \cdot \varphi(\overline{x} )  } \\
+			&= \mu \cdot \inf_{\lambda' \ge 0} \enbrace[\Big]{ \varphi \enbrace*{x+ \lambda' \cdot \overline{x} } - \lambda' \varphi(\overline{x})} \\
+			&= \mu \cdot \varphi_{\overline{x}}(x) 
+		\end{align*}
+		$\varphi_{\overline{x}}(0 \cdot x) = 0$ ist klar.
+	\end{enumerate}
+\end{description}
+% subsection 220 (end)
 % section 2 (end)
 
 
@@ -635,4 +710,6 @@ Insgesamt folgt also die Behauptung. \bewende
 \setcounter{page}{1}
 \printindex
 \listoffigures
+\todototoc
+\listoftodos[Todo's und andere Baustellen]
 \end{document}
