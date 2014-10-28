@@ -673,9 +673,57 @@ Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $
 			&= \mu \cdot \varphi_{\overline{x}}(x) 
 		\end{align*}
 		$\varphi_{\overline{x}}(0 \cdot x) = 0$ ist klar.
+		\item Zu $x,y \in X$, $\varepsilon>0$ wähle $\lambda_x, \lambda_y \ge 0$ mit 
+		\begin{align*}
+			\varphi_{\overline{x}}(x) &\ge \varphi \enbrace*{x + \lambda_x \cdot \overline{x}} - \lambda_x \cdot \varphi(\overline{x}) - \varepsilon \\
+			\varphi_{\overline{x}}(y) &\ge \varphi \enbrace*{y + \lambda_y \cdot \overline{x}} - \lambda_y \cdot \varphi(\overline{x}) - \varepsilon 
+		\end{align*}
+		Setze $\lambda  := \lambda_x + \lambda_y$, dann gilt
+		\begin{align*}
+			\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) &\ge \varphi \enbrace*{ x+ \lambda_x \cdot \overline{x}} + 
+			\varphi \enbrace*{y+ \lambda_y \cdot \overline{x} } - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
+			&\ge  \varphi \enbrace*{x +y + \lambda \cdot \overline{x}} - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
+			&\ge \varphi_{\overline{x}} (x+y) - 2 \varepsilon
+		\end{align*}
+		Da $\varepsilon>0$ beliebig war, gilt $\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) \ge \varphi_{\overline{x}}(x+y)$. Also ist $\varphi_{\overline{x}}$
+		sublinear.
 	\end{enumerate}
+	$\varphi_{\overline{x}} \le \varphi$ ist klar. Da $\varphi$ minimal ist, folgt $\varphi_{\overline{x}} = \varphi$. Wir erhalten 
+	\[
+		\varphi(x) + 1 \cdot \varphi(\overline{x}) \le \varphi(x+ 1 \cdot \overline{x}) \le \varphi(x) + 1 \cdot \varphi(\overline{x})
+	\]
+	für jedes $x, \overline{x}\in X$. Also ist $\varphi$ additiv und somit linear. \bewende
 \end{description}
 % subsection 220 (end)
+
+\subsection{Satz von Hahn-Banach} % (fold)
+\label{sub:221}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$.\marginnote{$X$ ist nicht zwangsweise endlich-dimensional!}
+Dann existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \varphi$.
+\minisec{Beweis}
+Sei $\mathcal{S}_\varphi : =\set[\varphi' \in \mathcal{S}(X)]{\varphi' \le \varphi} \ni \varphi$. Nach Proposition \ref{sub:219} ist $\mathcal{S}(X)$ und damit auch 
+$\mathcal{S}_\varphi$ nach unten induktiv geordnet. Nach dem Lemma von Zorn enthält $\mathcal{S}_\varphi$ ein minimales Element $\psi$. $\psi$ ist auch minimal in 
+$\mathcal{S}(X)$ \hfill (Warum?)\\
+Also ist $\psi$ linear nach Proposition \ref{sub:220}. \bewende \medskip \\
+Wichtige Folgerungen: Fortsetzungs- und Trennungssätze.
+% subsection 221 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:222}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi : X \to \mathds{R}$ sublinear. Sei $Y \subset X$ ein linearer Unterraum und $\psi : Y \to \mathds{R}$ linear mit
+$\psi \le \varphi\big|_{Y}$. Dann existiert $\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi}\big|_Y = \psi$ und $\overline{\psi} \le \varphi$.
+\minisec{Beweis}
+Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch $\tilde{\varphi}(x) := \inf_{y \in Y} \enbrace*{ \varphi(x-y) + \psi(y)}$, $x \in X$. Es gilt
+\[
+	\varphi(x-y) + \psi(y) \ge \varphi(-y) - \varphi(-x) - \psi(-y) \ge - \varphi(-x) > -\infty \qquad \forall x \in X, y \in Y
+\]
+Also ist $\tilde{\varphi}$ wohldefiniert. $\tilde{\varphi}$ ist sublinear: vergleiche \ref{sub:220}. Nach Satz von Hahn-Banach (\ref{sub:221}) existiert ein 
+$\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi} \le \tilde{\varphi}$. Aus \ref{sub:220} folgt, dass $\overline{\psi}$ minimal in $\mathcal{S}(X)$ ist.
+Ebenso ist $\overline{\psi}\big|_{Y}$ minimal in $\mathcal{S}(Y)$. Also gilt
+\[
+	\overline{\psi} \le \tilde{\varphi}\big|_{Y} \le \psi \quad \Rightarrow \quad \psi = \overline{\psi}\big|_{Y} \bewende  
+\]
+% subsection 222 (end)
 % section 2 (end)
 
 
