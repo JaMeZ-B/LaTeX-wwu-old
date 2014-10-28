@@ -17,6 +17,7 @@
 \usepackage[pdftex]{graphicx} % Packet, dass das Einbinden von Grafiken aus Dateien ermöglicht
 \usepackage{makeidx}% ermöglicht das automatische Anlegen eines Index 
 \usepackage{extarrows}
+\usepackage{bbold} %indikatorfkt
 
 \flushbottom
 \usepackage[normalem]{ulem}
@@ -980,7 +981,7 @@ Ein \bet{Zinsswap}\index{Swaps!Zinsswap} liefert die Möglichkeit das \Index{Zin
 	\item Nominal $N$, das nur zur Berechnung der Zinsen dient
 	\item Unterscheidung in \bet{Payer- und Reciever-Swaps} \index{Swaps!Payer-}\index{Swaps!Reciever-} ausgehend von der Festzinsseite
 \end{itemize}
-Am Ende einer jeden Periode werden die festen Zinsen $N\cdot R(t_i-t_{i-1})$ gegen die variablen $N\cdot F(t_{i-1},t_{i-1},t_i)(t_i-t_{i-1})$ getauscht.\\
+Am Ende einer jeden Periode werden die festen Zinsen $N\cdot R(t_i-t_{i-1})$ gegen die variablen\\ $N\cdot F(t_{i-1},t_{i-1},t_i)(t_i-t_{i-1})$ getauscht.\\
 Dies führt zum Zahlungsstrom
 \[N(t_i-t_{i-1})\enbrace{F(t_{i-1},t_{i-1},t_i)-R},~1\le i\le m \]
 beim Payer-Swap und
@@ -997,6 +998,151 @@ Deshalb gilt für den Preis Payerswap($t$) in $t\le t_0$:\\
 Der "faire" Festzinspreis $R$ liegt dann in $t$ vor, wenn Payer-Swap($t$)=0, also wenn
 \[R= \frac{B(t,t_0)-B(t,t_m)}{\sum_{i=1}^{m}B(t,t_i)(t_i-t_{i-1})} \]
 $R$ ist dann die sogenannte \Index{Swaprate} in $t$.
+
+% subsection swaps (end)
+% section informelle einführung (end)
+
+\section{Aktuarielle Bewertung von Zahlungsströmungen}
+\label{sec:zahlungsströmungen}
+\bet{Ziel:} Bewertung von Zahlungsverpflichtungen, die durch biometrische Risiken verursacht werden. Biometrische Risiken sind zum Beispiel Todesfall, Invalidität,...\\
+\subsection{Zahlungsströme und deren Bewertung}
+\label{sub:zahlungsströme}
+\index{Zahlungsströme}
+\begin{itemize}
+	\item zeitdiskrete periodische Sichtweise, Zeit wird in Jahren gemessen
+	\item[\uline{Definition}]
+	\item Ein Zahlungsstrom $Z$ ist eine Folge $(Z(n))_{n \in \mathds{N}}$ von nicht negativen reellen Zahlen, $Z(n) \mathrel{\hat=}$ Auszahlung zum Zeitpunkt $n$
+	\item Frage: Was ist der Kapitalwert, der durch den Zahlungsstrom der verursachten Zahlungsverpflichtungen entsteht?
+	\item Antwort: Summe der \Index{abdiskontierten} Zahlungen
+	\item Genauer: Für jedes $n\in N$ gibt $B(k,n)$, den Preis des $n$-Bonds zum Zeitpunkt $k$, den Wert einer in $n$ fälligen Zahlungsverpflichtung von 1\texteuro an.
+	\item Deshalb definieren wir:\\
+	\[V_0(Z)= \sum_{n=0}^{\infty}Z(n)\cdot B(0,n) \]
+	Summe aller auf den Anfang abdiskontierten Zahlungsverpflichtungen, Kapitalwert von heute.\\Und
+	\[V_m(Z)= \sum_{k=0}^{\infty}Z(m+k)\cdot B(m,m+k) \]
+	Summe aller nach $m$ fälligen auf den Zeitpunkt $m$ abdiskontierten Zahlungsverpflichtungen.
+	\item $V_m(Z)$ ist das Kapital, das zum Zeitpunkt $m$ benötigt wird, um die zukünftigen Zahlungsverpflichtungen erfüllen zu können.
+	\item Praxis: Periodische Rendite $r$, periodische \Index{Diskontfaktor}
+	\[v=\frac{1}{1+r} \Rightarrow B(m,n)=v^{n-m}~~~\forall 0\le m\le n \]
+\end{itemize}
+% subsection zahlungsströme (end)
+
+\subsection{Personenversicherung und deren Bewertung}
+\label{sub:personenversicherung}
+\bet{Ziel:}\\
+Mathematische Beschreibung und Analyse einer Personenversicherung\\
+\bet{Definition:}\\
+Eine Personenversicherung ist ein Quadertupel $\Gamma=(t,s,b,T)$ mit Zahlungsströmen $(t(n))_{n \in \mathds{N}_0},~~(s(n))_{n\in \mathds{N}_0},~~(b(n))_{n \in \mathds{N}_0}$ und $(0,\infty)$-wertiger Zufallsvariabel $T$.\\
+\bet{Interpretation:}\\
+\begin{itemize}
+	\item $T$ ist eine zufällige Ausfallzeit (etwa Restlebensdauer)
+	\item \Index{Todesfallspektrum} $(t(n))_{n\in \mathds{N}_0}$
+	\[t(n)\ge 0 \mathrel{\hat=} \text{ Auszahlung in $n$ bei Ausfall in der $n$-ten Periode} \]
+	\item \Index{Erlebensspektrum} $(s(n))_{n\in \mathds{N}_0}$
+	\[s(n)\ge 0 \mathrel{\hat{=}} \text{ Auszahlung in $n$, wenn $n$ erreicht wird} \]
+	\item \Index{Beitragsspektrum} $(b(n))_{n \in \mathds{N}_0}$
+	\[b(n)\ge 0 \mathrel{\hat{=}} \text{ Premienzahlung in $n$, wenn $n$ erreicht wird} \]
+\end{itemize}
+Aus Sicht des Versicherungsunternehmens erzeugt eine Personenverischerung die folgenden zufälligen Zahlungsströme:\\
+
+\begin{minipage}[t]{8.7cm}
+	Ausgabenstrom:\\
+	$A(n)=s(n) \mathbb{1}_{\{T>n \}} + t(n) \mathbb{1}_{\{n-1<T\le n \}} \\ \forall n \in \mathds{N}_0,~~A(0)=s(0)$
+\end{minipage}
+\begin{minipage}[t]{5cm}
+	Einnahmestrom:\\
+	$I(n)=b(n)\mathbb{1}_{\{T>n \}}~~\forall n \in \mathds{N}_0$
+\end{minipage}
+Bewertung aus heutiger Sicht durch
+\begin{equation*}
+\begin{aligned}
+	V_0(A) &= s(0)+\sum_{n=1}^{\infty}s(n) \mathbb{1}_{\{T>n\}}B(0,n)+\sum_{n=1}^{\infty}t(n)\mathbb{1}_{\{n-1<T\le n \}} B(0,n) \\
+	V_0(I) &= \sum_{n=0}^{\infty}b(n)\mathbb{1}_{\{T>n\}} B(0,n)
+\end{aligned}
+\end{equation*}
+$V_0(A) \mathrel{\hat{=}}$ heutiger Kapitalwert des zufälligen Zahlungsstroms\\
+$\mathds{E}V_0(A) \mathrel{\hat{=}}$ mittlerer Kapitalwert der zukünftigen Zahlungsverpflichtung\\
+$\mathds{E}V_0(I) \mathrel{\hat{=}}$ mittlerer Kapitalwert der Einnahmen\\
+\bet{Definition:}\\
+$\mathds{E}V_0(A)$ heißt \Index{Barwert} der durch die Versicherung induzierten Zahlungsverpflichtungen. $\mathds{E}V_0(I)$ heißt \bet{Barwert} der durch die Versicherung induzierten Einnahmen.\\
+Eine Personenversicherung heißt \Index{ausgewogen} oder \Index{fair}, wenn $\mathds{E}V_0(A)=\mathds{E}V_0(I)$ gilt und beide endlich sind.\\
+Ist $\mathds{E}V_0(A)<\infty$ oder? $\mathds{E}V_0(I)<\infty$, so ist $\mathds{E}V_0(A)-\mathds{E}V_0(I)$ der Barwert der Versicherung.\\
+Dies ist als Ausgangspreis zu interpretieren, den ein Versicherungsunternehmen verlangt.\\
+\bet{Äquivalenzprinzip:}\\
+Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
+
+% subsection personenversicherung (end)
+
+\subsection{Klassische Beispiele}
+\label{sub:klassische_beispiele}
+\begin{itemize}
+	\item versichert wird eine Person
+	\item biometrisches Risiko ist das Todesfallrisiko
+	\item Ausfallzeit ist deshalb die Restlebensdauer der Person
+\end{itemize}
+\begin{enumerate}[(a)]
+	\item \bet{Todesfallversicherung:}
+	\begin{itemize}
+		\item Todesfallsumme $M$
+		\item Laufzeit $n$
+		\item konstante periodische Prämienzahlung
+		\begin{equation*}
+		\begin{aligned}
+			t(k) &= M ~~ \forall k=1,\dots,n~~~~t(k)=0 \text{ sonst}\\
+			s(k) &= 0 ~~ \forall k \in \mathds{N}_0\\
+			b(k) &= p ~~ \forall k=0,\dots,n-1~~~~b(k)=0 \text{ sonst}
+		\end{aligned}
+		\end{equation*}
+		\item Induzierte Zahlungsströme:
+		\begin{equation*}
+		\begin{aligned}
+			A(k) &= M\cdot \mathbb{1}_{\{k-1<T\le k\}},~k=1,\dots,n~~~A(k)=0 \text{ sonst}\\
+			I(k) &= p\cdot \mathbb{1}_{\{t>k\}},~k=0,\dots,n-1~~~I(k)=0 \text{ sonst}\\
+			V_0(A) &= \sum_{k=1}^{n}M\cdot B(0,k) \mathbb{1}_{\{k-1<T\le k \}}\\
+			V_0(I) &= \sum_{k=0}^{n-1} p\cdot B(0,k) \mathbb{1}_{\{T>k \}}\\
+			\text{Also } \mathds{E}V_0(A) &= \sum_{k=1}^{n}M\cdot B(0,k) \mathds{P}(k-1<T\le k)\\
+			\mathds{E}V_0(I) &= p\cdot \sum_{k=0}^{n-1}B(0,k) \mathds{P}(T>k)
+		\end{aligned}
+		\end{equation*}
+		\item Praxis:
+		\begin{itemize}
+			\item Restlebenszeit wird durch das Alter bestimmt $T_x$ Restlebenszeit eines x-Jährigen
+			\item Stationaritätsannahme $\mathds{P}(T_x>t~|~T_x>s)=\mathds{P}(T_{x+s}>t)$
+			\item $q_x= \mathds{P}(T_x\le 1)$ 1-jährige Sterbew'keit eines x-Jährigen
+			\item $p_x=1-q_x=\mathds{P}(T_x>1)$ 1-jährige Überlebensw'keit eines x-Jährigen
+			\item $_kp_x:=\mathds{P}(T_x>k)=\mathds{P}(T_x>1)\mathds{P}(T_x>k~|~T_x>1)\stackrel{Stationarität}{=} p_x \mathds{P}(t_{x+1}>k-1)=\dots=p_xp_{x+1}\dots p_{x+k-1}$
+			\item $_kq_x = 1- _kp_x = \mathds{P}(T_x\le k)$
+			\item Bezeichnung für $M=1$, Eintrittsalter $x$\\
+			$_{|n}A_x = \sum_{k=1}^{n}r^k \mathds{P}(k-1<T_x\le k)$\\
+			für $p=1$:\\
+			$ä_{x:n\rceil} = \sum_{k=0}^{n-1}r^k \mathds{P}(T_x>k)$\\
+			Die Todesfallversicherung ist fair, wenn $M\cdot~_{|n}A_x = p \cdot ä_{x:n\rceil}$\\
+			$n \to +\infty$ entspricht Todesfallversicherung ohne zeitliche Beschränkung
+			\item Bezeichnung\\
+			\begin{equation*}
+			\begin{aligned}
+				A_x &= \sum_{k=1}^{\infty}v^k \mathds{P}(k-1<T_x \le k)\\
+				ä_x &= \sum_{k=0}^{\infty}v^k \mathds{P}(T_x>k)
+			\end{aligned}
+			\end{equation*} 
+			\end{itemize}
+	\end{itemize}
+	
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
