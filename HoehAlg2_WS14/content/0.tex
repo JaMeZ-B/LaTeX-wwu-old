@@ -1,7 +1,8 @@
 \setcounter{section}{-1}
 \section{Einführung}
 \label{sec:para0}
-
+\subsection{Einführung und erste Beispiele}
+\label{sub:abschnitt_0.1}
 \begin{enumerate}
 	\item Wir betrachten die algebraische Gruppe $\GL_n = \GL_n(k)$;\marginnote{13.10.} meist ist $k = \CC$ oder allgemeiner $k = \overline{k}$ algebraisch abgeschlossen und $\Char(k) = 0$. $\GL_n = \GL_n(\CC) \subseteq M_n(\CC)$ ist (bzgl. der üblichen Topologie) eine offene Teilmenge. Später betrachten wir die viel gröbere \Index{Zariski-Topologie}. \\
 	Sei $m = n^2$ und $\aff^m \subseteq \CC^m$ ein $m$-dimensionaler affiner Vektorraum. Wir können $\GL_n(\CC)$ auch folgendermaßen charakterisieren:
@@ -134,7 +135,7 @@
 	
 	\[ T_eV(f_1,\dots,f_n) = \penbrace*{x \in \aff^n : \frac{d}{dt} f_i(e+tx) \bigg|_{t=0} = 0} \text{ über } k = \CC \]
 	
-\minisec{Beispiel}
+\minisec{Beispiele}
 	\begin{itemize}
 		\item Betrachte $f = x_1^2-x_2$ in $\aff^2$, dann ist
 		\begin{equation}
@@ -151,5 +152,48 @@
 		ta_{ij} &  & 1+ta_{nn}
 		\end{pmatrix}}_{=:(c_ij)_{ij}} = \sum\limits_{\sigma \in S_n} \sgn(\sigma) \prod\limits_{i=1}^n c_{i,\sigma(i)} = 1 + t \cdot \tr(A) + t^2\dots + t^n \]
 		\[ \Rightarrow \frac{d}{dt} \det(E+tA) \big|_{t=0} = \tr(A) \]
+		\item Die Untergruppe
+		\[ B := \penbrace*{ b \in \GL_n : b_{ij} = 0 \text{ für } i>j} = \penbrace*{(b_{ij}) \in M_n(\CC) : b_{ii} \in \CC^\times, b_{ij} = 0 \text{ für } i>j} \subseteq \GL_n = G\]
+		heißt \Index{Borel-Untergruppe}. Die zugehörige Lie-Algebra ist gegeben durch:
+		\[ \Lie(B) = \mathfrak{b} = \penbrace{ (b_{ij}) : b_{ij} = 0 \text{ für } i > j} \supseteq B \text{ offen} \]
+		$G/B$ ist eine algebraische Varietät und nicht affin.
+		\[U := \penbrace*{(b_{ij}) \in M_n(\CC) : b_{ii} = 1, b_{ij} = 0 \text{ für } i>j} \subseteq B\]
+		heißt \Index{unipotente Gruppe}.
 	\end{itemize}
+
+\subsection{Aktionen algebraischer Gruppen}
+\label{sub:abschnitt_0.2}
+
+\begin{defn}[Darstellung einer linearen algebraischen Gruppe] \label{def_2.1}
+	Sei $G$ eine lineare algebraische Gruppe und $X = V(f_1,\dots,f_r)$ abgeschlossene Teilmenge in $\AA^n$. \marginnote{20.10.} Eine \Index{Darstellung} von $G$ auf einem $\CC$-Vektorraum $W$ ist ein polynomialer Gruppenhomomorphismus $G \rightarrow \GL(W)$. $G$ operiert dann auf $W$ vermöge
+	\begin{equation}
+	\begin{aligned}
+		G \times W &\longrightarrow W \\
+		(g,w) &\longmapsto f(g)w
+	\end{aligned}
+	\end{equation}
+	Eine Aktion von $G$ auf $x$ ist eine polynomiale Abbildung $G \times X \rightarrow X$, sodass $(gh)x = g(hx)$ und $ex = x$ für alle $g,h \in G, x \in X$.
+\end{defn}
+
+\begin{bsp}
+	\begin{enumerate}[1)]
+		\item $G = \GL_n(\CC) = \GL(\CC^n) = \GL(W)$ mit Standardaktion auf $W = \CC^n$. \\
+		Orbiten: $\setnull, W \setminus \setnull$ \\
+		Stabilisatoren: $\Stab_{\GL_n}(\setnull) = \GL_n$ und
+		\[ \Stab_{\GL_n}(e_1) = \penbrace*{\left( \begin{BMAT}[5pt]{cc}{cc}
+		1 & * \\
+		0 & \GL_{n-1} 
+		\addpath{(0,1,|)rr} \addpath{(1,2,|)dd}
+		\end{BMAT}\right)} = P(1,n-1) \qquad \text{(parabolische Untergruppe)}\]
+		\item \setlength{\arraycolsep}{1pt} \[\begin{array}{rcll}
+		\GL_n & \longrightarrow & \CC^\times  & \qquad \text{Polynomialer Gruppenhomomorphismus gegeben durch } \det^m \text{ mit } m \in \ZZ \\ 
+		 &  &  &  \\ 
+		B & \longrightarrow & \CC^\times & \qquad B \twoheadrightarrow H \rightarrow \CC^\times, A \mapsto \lambda_1^{a_1} \cdots \lambda_n^{a_n}, a_i \in \ZZ (B/H =U) \\ 
+		 &  &  &  \\ 
+		H & \longrightarrow & \CC^\times & \qquad \text{z.B. } (t_1,\dots,t_n) \mapsto t_1^{a_1} \cdots t_n^{a_n}, a_i \in \ZZ \\ 
+		 &  &  &  \\ 
+		\CC^\times & \longrightarrow & \CC^\times & \qquad t \mapsto t^m, m \in \ZZ
+		\end{array} \]
+	\end{enumerate}
+\end{bsp}
 \newpage
