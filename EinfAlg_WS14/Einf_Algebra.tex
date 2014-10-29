@@ -17,7 +17,7 @@
 \usepackage[pdftex]{graphicx} % Packet, dass das Einbinden von Grafiken aus Dateien ermöglicht
 \usepackage{makeidx}% ermöglicht das automatische Anlegen eines Index 
 \usepackage{extarrows}
-
+\usepackage{mathtools}
 \flushbottom
 \usepackage[normalem]{ulem}
 \setlength{\ULdepth}{1.8pt}
@@ -135,6 +135,7 @@
 \newcommand{\zz}{$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$} % zu zeigen ZZ aus dem inet
 \setlength{\parindent}{0pt}%absatz nicht einrücken
 \newcommand{\lh}[1]{\langle #1 \rangle} %lineare Hülle
+\newcommand{\nt}{\trianglelefteqslant} %normalteiler
 
 \begin{document}
 \maketitle
@@ -301,7 +302,7 @@ Wegen $X\subseteq \lh{X}$ und $e\in \lh{X}$ folgt $\{e\}\cup W\subseteq \lh{X}$.
 \label{sub: def_zklische_gruppen}
 Sei $G$ eine Gruppe und sei $g\in G$. Für $n\ge 1$ setze $g^n=\underbrace{g\cdot \dots \cdot g}_{n-mal}$ sowie $g^{-n}=\underbrace{g^{-1}\cdot \dots \cdot g^{-1}}_{n-mal}$ und $g^0=e$.\\
 Dann gilt $\forall k,l\in \mathds{Z}$, dass $g^k\cdot g^l = g^{k+l}$.\\
-Sei $\lh{g}=\lh{\{g\}}\stackrel{1.10}{=}\{g^n | n\in \mathds{Z}\}$. Man nennt $\lh{g}$ die von $g$ erzeugte \bet{zyklische Gruppe}\index{Gruppe!zyklische !}. Wenn für ein $n\ge 1$ gilt $g^n=e$, so heißt $n$ ein \Index{Eponent} von $g$. DIe \Index{Ordnung} von g ist der kleinste Eponent von g,
+Sei $\lh{g}=\lh{\{g\}}\stackrel{1.10}{=}\{g^n | n\in \mathds{Z}\}$. Man nennt $\lh{g}$ die von $g$ erzeugte \bet{zyklische Gruppe}\index{Gruppe!zyklische !}. Wenn für ein $n\ge 1$ gilt $g^n=e$, so heißt $n$ ein \Index{Exponent} von $g$. DIe \Index{Ordnung} von g ist der kleinste Exponent von g,
 \[o(g)=min\enbrace{\{n\ge 1 | g^n=1\}\cup \{\infty\}}\]
 $o(g)=\infty$ bedeutet: $g^n\not= e~\forall n\ge 1$\\
 $o(g)=1$ bedeutet: $g^n=g=e$
@@ -501,7 +502,7 @@ h\lh{g}h^{-1}=\{hgh^{-1}, h~id~h^{-1} \} = \{\underbrace{(2,3)(1,2)(2,3)}_{=(3,1
 \]
 also ist $\lh{g}$ kein Normalteiler in $Sym(3)$.\\
 
-\bet{Schreibweise:} Ist $N\subseteq G$ ein Normalteiler, schreibt man kurz $N\vartriangle G$\\
+\bet{Schreibweise:} Ist $N\subseteq G$ ein Normalteiler, schreibt man kurz $N\trianglelefteqslant G$\\
 
 \bet{Beachte:} Ist $G$ \uline{abelsch}, dann sind alle Untergruppen $H\subseteq G$ automatisch normal.
 %sub end
@@ -513,7 +514,7 @@ Für Teilmengen $X,Y,Z \subseteq G$ in einer Gruppe schreibe kurz:\\
 \[X^{-1}=\{x^{-1}~|~x\in X \}\subseteq G \]
 Es gilt dann $(XY)Z=X(YZ)$, (weil die Verknüpfung assoziativ ist).
 \subsubsection*{Satz}
-Sei $N\vartriangle G$ Normalteiler in der Gruppe $G$. Dann ist $\nicefrac{G}{N}=\{gN~|~g\in G \}$ eine Gruppe mit der Verknüpfung $(gN)\cdot (hN)=ghN$\\
+Sei $N\trianglelefteqslant G$ Normalteiler in der Gruppe $G$. Dann ist $\nicefrac{G}{N}=\{gN~|~g\in G \}$ eine Gruppe mit der Verknüpfung $(gN)\cdot (hN)=ghN$\\
 Das Neutralelement ist $eN=N$, das Inverse zu $gN$ ist $g^{-1}N$.\\
 \bet{Beweis:}\\
 Da $N$ Normalteiler ist, gilt für $g,h \in G$
@@ -530,7 +531,7 @@ und damit assoziativ nach obiger Bemerkung. Es gilt $NgN=gNN=gN=gNN$, also ist $
 Ist $G$ eine Gruppe und $H$ eine Untergruppe, so definieren wir $\pi_H: G \to \nicefrac{G}{H}$ durch $\pi_H(g)=gH$.
 
 \subsubsection*{Satz}
-Ist $N \vartriangle G$ ein Normalteiler, dann ist $\pi_N: G \to \nicefrac{G}{N}$ ein surjektiver Homomorphismus mit Kern $N=ker(\pi_N)$.\\
+Ist $N \trianglelefteqslant G$ ein Normalteiler, dann ist $\pi_N: G \to \nicefrac{G}{N}$ ein surjektiver Homomorphismus mit Kern $N=ker(\pi_N)$.\\
 \bet{Beweis:}\\
 $\pi_N$ ist nach Definition surjektiv und \[\pi_N(gh)=ghN=gNhN=\pi_N(g)\pi_N(h)\]
 Weiter gilt \[\pi_N(g)=N \Longleftrightarrow gN=N \stackrel{\hyperref[sub:nebenklassen]{1.13}}{\Longleftrightarrow} g\in N\]
@@ -540,16 +541,16 @@ Weiter gilt \[\pi_N(g)=N \Longleftrightarrow gN=N \stackrel{\hyperref[sub:nebenk
 Jeder Normalteiler ist auch ein Kern eines Homomorphismus.
 %sub end
 
-\subsection{Der Homomorphisatz}
-\label{sub:der_homomorphisatz}
-Sei $G \stackrel{\varphi}{\to} K$ ein Homomorphismus von Gruppen, sei $N \vartriangle G$ ein Normalteiler. Wenn gilt $N\subseteq ker(\varphi)$, dann gibt es \uline{genau einen} Homomorphismus $\overline{\varphi}: \nicefrac{G}{H} \to K$ mit $\overline{\varphi} \circ \pi_H=\varphi$.
+\subsection{Der Homomorphiesatz}
+\label{sub:der_homomorphiesatz}
+Sei $G \stackrel{\varphi}{\to} K$ ein Homomorphismus von Gruppen, sei $N \trianglelefteqslant G$ ein Normalteiler. Wenn gilt $N\subseteq ker(\varphi)$, dann gibt es \uline{genau einen} Homomorphismus $\overline{\varphi}: \nicefrac{G}{H} \to K$ mit $\overline{\varphi} \circ \pi_H=\varphi$.
 
 \begin{center}
 	\begin{tikzcd}[column sep=small]
 		G \ar{rr}{\varphi} \ar{rd}[below]{\pi_N} & & K\\
 		& \nicefrac{G}{N} \ar{ru}[below]{\overline{\varphi}} &
 	\end{tikzcd}
-	\captionof{figure}{Homomorphisatz}
+	\captionof{figure}{Homomorphiesatz}
 \end{center}
 \newpage
 \bet{Beweis:}\\
@@ -567,7 +568,7 @@ Es folgt
 \]
 
 \minisec{Bemerkung:}
-In der Situation vom Homomorphisatz gilt:
+In der Situation vom Homomorphiesatz gilt:
 \begin{enumerate}[(i)]
 	\item $ker(\varphi)=\pi_N^{-1}~ker(\overline{\varphi})$
 	\item $ker(\overline{\varphi})=\pi_N~ker(\varphi)$
@@ -584,10 +585,81 @@ In der Situation vom Homomorphisatz gilt:
 \subsection{Definition Isomorphismus}
 \label{sub:def_isomorph}
 Ein Gruppenhomomorphismus $\varphi:G \to K$ heißt \bet{Mono/Epi/Isomorphismus}\index{Homomorphismen!Mono/Epi/Iso}, wenn $\varphi$ \uline{injektiv/surjektiv/bijektiv} ist.\\
-(Klar: $\varphi$ Epimorphismus $\Leftrightarrow \varphi(G)=K$)
+(Klar: $\varphi$ Epimorphismus $\Leftrightarrow \varphi(G)=K$)\\
+Für einen Mono / Epi / Isomorphismus schreibt man auch: \\
+$\stackrel{\varphi}{\rightarrowtail}$  $\stackrel{\varphi}{\twoheadrightarrow}$  und  $\stackrel{\cong}{\to}$.
 
+\subsubsection*{Lemma}
+Ein Gruppenhomomorphismus $G \stackrel{\varphi}{\to}K$ ist genau dann injektiv, wenn gilt $ker(\varphi)=\{e_G\}$.\\
 
+\bet{Beweis:}\\
+Wenn $\varphi$ injektiv ist, dann ist $ker(\varphi)=\{e_G\}$ (klar). Angenommen, $ker(\varphi)=\{e_G\}$ und $a,b\in G$ mit $\varphi(a)=\varphi(b) \rightsquigarrow \varphi(a)\varphi(b)^{-1}=\varphi(ab^{-1})=e_K \Rightarrow ab^{-1}=e_G \Rightarrow a=b$
+\hfill $\square$
 
+%sub end
+
+\subsection{Satz Eigenschaften von Gruppenhomomorphismen}
+\label{sub:satz_eigenschaften}
+Sei $G\stackrel{\varphi}{\to}K $ ein Gruppenhomomorphismus. Dann gilt folgendes:
+\begin{enumerate}[(i)]
+	\item Ist $H\subseteq G$ Untergruppe, so ist $\varphi(H) \subseteq K$ Untergruppe. Wenn $H\trianglelefteqslant G$, so gilt $\varphi(H)\trianglelefteqslant\varphi(G)$
+	\item Ist $L\subseteq K$ Untergruppe, so ist $\varphi^{-1}(L) \subseteq G$ Untergruppe. Ist $L\trianglelefteqslant K$, so gilt $\varphi^{-1}(L) \trianglelefteqslant G$.
+\end{enumerate}
+\newpage
+\bet{Beweis:}\\
+\begin{enumerate}[(i)]
+	\item Sei $a,b\in H$ und $g\in G$. Es gilt $\varphi(a)\varphi(b)=\varphi(ab)\in H,~~\varphi(a)^{-1}=\varphi(a^{-1})\in \varphi(H) $. $\varphi(e_G)=e_K \in \varphi(H) \Rightarrow \varphi(H)$ Untergruppe.\\
+	Ist $H\trianglelefteqslant G$, so folgt $\varphi(g)\varphi(H)\varphi(g)^{-1}=\varphi(gHg^{-1})\stackrel{H\trianglelefteqslant G}{=}\varphi(H)$
+	\hfill $\square$
+	\item Sei $a,b \in \varphi^{-1}(L),~~g \in G$ (also $\varphi(a),\varphi(b) \in L$). Es folgt $\varphi(ab)\in L,~~\varphi(a^{-1})=\varphi(a)^{-1}\in L$ und $\varphi(e_G)=e_K \Rightarrow ab, a^{-1},e_G \in \varphi^{-1}(L) \rightsquigarrow$ Untergruppe.\\
+	Angenommen, $L\nt K$. Es folgt $\varphi(gag^{-1})=\varphi(g)\varphi(a)\varphi(g^{-1}) \in L$, also $g\varphi^{-1}(L)g^{-1} \subseteq \varphi^{-1}(L)$.
+	\hfill $\square$
+\end{enumerate}
+
+\minisec{Beispiele}
+Gruppe $(\mathds{Z},+)$, $\varphi: \mathds{Z} \to \mathds{Z} \text{ Homomorphismus, }\varphi(z)=m\cdot z$, $m \in \mathds{Z}$ fest.\\
+$\varphi(\mathds{Z})=m\mathds{Z}=\{mz~|~z\in \mathds{Z}\}=(-m)\mathds{Z}$\\
+z.B. $m=2~\rightsquigarrow 2\mathds{Z}=\{0,\pm 2,\pm 4,\pm 6,\dots\}$ gerade Zahlen\\
+$ker(\varphi)=\left\{\begin{array}{cl} \{0\}, & \text{wenn }m\not=0\\ \mathds{Z}, & \text{wenn } m=0. \end{array}\right.$
+$\varphi$ surjektiv $\Leftrightarrow~~m=\pm 1$\\
+$\varphi$ injektiv $\Leftrightarrow~~m\not=0$\\
+
+Angenommen, $m>0$, $a,b \in \mathds{Z}$\\
+$a+m\mathds{Z}=b+m\mathds{Z} \text{ Nebenklassen }\stackrel{\hyperref[sub:nebenklassen]{1.13}}{\Leftrightarrow} a\in b+m\mathds{Z} \Leftrightarrow a-b \in m\mathds{Z}$\\
+Folglich $\nicefrac{\mathds{Z}}{m\mathds{Z}}=\{m\mathds{Z},1+m\mathds{Z},2+m\mathds{Z},\dots,(m-1)+m\mathds{Z} \}$ insbesondere $\#\nicefrac{\mathds{Z}}{m\mathds{Z}}=m$.\\
+Schreibe $\overline{k}=k+m\mathds{Z}$ \Index{Kongruenzklasse} von $k$ \Index{modulo} $m$.\\
+$\nicefrac{\mathds{Z}}{m\mathds{Z}}=\{\overline{0},\overline{1},\dots,\overline{m-1} \}$ wird erzeugt von $\overline{1} \rightsquigarrow \nicefrac{\mathds{Z}}{m\mathds{Z}}=\lh{\overline{1}}$ \uline{zyklische Gruppe der ordnung m}. $o(\overline{1})=m$. Später mehr dazu.
+%sub end
+
+\subsection{Die Isomorphiesätze}
+\label{sub:isomorphiesätze}
+\subsubsection*{Lemma}
+Sei $G$ eine Gruppe, seien $H,N \subseteq G$ Untergruppen. Wenn $N\nt G$ gilt, dann ist $ HN=NH \subseteq G$ eine Untergruppe.\\
+
+\bet{Beweis:}\\
+Es gilt $e=e\cdot e\in N\cdot H$. Weiter gilt für $h_1,h_2 \in H,~~n_1,n_2 \in N$, dass
+\[h_1n_1h_2n_2=\underbracket[1pt][4pt]{h_1h_2}_{\in H} \underbracket[1pt]{h_2^{-1}n_1h_2}_{\in N}n_2 \in HN \]
+\[(h_1n_1)^{-1}=n_1^{-1}h_1^{-1}=h_1^{-1}\underbracket[.7pt]{h_1n_1^{-1}h_1^{-1}}_{\in N} \in HN \]
+\[(HN)^{-1}=N^{-1}H^{-1}=NH \subseteq HN \text{ genauso } HN \subseteq NH \]
+\hfill $\square$
+
+\subsubsection*{Satz}
+Sei $G\stackrel{\varphi}{\to}K$ ein Epimorphismus von Gruppen. Sei $N=ker(\varphi)$. Dann ist die Abbildung $\overline{\varphi}:\nicefrac{G}{N}\to K$ aus dem \hyperref[sub:der_homomorphiesatz]{Homomorphisatz 1.20} ein Isomorphismus.\\
+
+\bet{Beweis:}\\
+$\overline{\varphi}(\nicefrac{G}{N})=\varphi(G)$ und $ker(\overline{\varphi})=\{N\}$ nach dem Beweis von \hyperref[sub:der_homomorphiesatz]{1.20}. Den Isomorphismus $\overline{\varphi}:\nicefrac{G}{ker(\varphi)} \stackrel{\cong}{\to}K$ nennt man \Index{kanonisch} oder \Index{natürlich}.
+
+\subsubsection*{Theorem: 1. Isomorphiesatz}
+Sei $G$ eine Gruppe, seien $H,N\subseteq G$ Untergruppen mit $N\nt G$. Dann gilt $H\cap N\nt H$, $N \nt NH$ und die Abbildung
+\begin{equation*}
+\begin{aligned}
+	\nicefrac{H}{H\cap N} &\to \nicefrac{NH}{N}\\
+	aH &\mapsto aNH
+\end{aligned}
+\end{equation*}
+ist ein Isomorphismus. \qquad ("Kürzungsregel")\\
+
+\bet{Beweis:}\\
 
 
 
