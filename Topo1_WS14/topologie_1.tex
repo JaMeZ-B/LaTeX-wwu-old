@@ -965,12 +965,15 @@ also $\delta_j(\sigma) = \sigma \circ \iota_{n,j}$, wobei $\iota_{n,j} : \abs*{\
 \]
 % subsection 52 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung zur Inklusion der $j$-ten Seite]{Bemerkung} % (fold)
 \label{sub:53}
-$\iota_{n,j} = \abs*{i_{n,j}}$ wobei $i_{n,j} : \Delta^{n-1} \to \Delta^n$ gegeben ist durch $i_{n,j}(k) = \begin{cases}
+Es gilt $\iota_{n,j} = \abs*{i_{n,j}}$ wobei $i_{n,j} : \Delta^{n-1} \to \Delta^n$ gegeben ist durch \marginnote{vergleiche Blatt 2, Aufgabe 2}
+\[
+	i_{n,j}(k) = \begin{cases}
 	k, &\text{ falls }k < j\\
 	k+1, &\text{ falls } k\ge j
-\end{cases}$
+\end{cases}
+\]
 % subsection 53 (end)
 
 \subsection[Definition: $n$-te singuläre Randabbildung]{Definition} % (fold)
@@ -978,33 +981,33 @@ $\iota_{n,j} = \abs*{i_{n,j}}$ wobei $i_{n,j} : \Delta^{n-1} \to \Delta^n$ gegeb
 Die \bet{$\mathbf{n}$-te singuläre Randabbildung}\index{n-te singuläre Randabbildung@$n$-te singuläre Randabbildung} $\partial_n : C_n(X;R) \to C_{n-1}(X;R)$ ist 
 definiert durch 
 \[
-	\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \delta_j(\sigma).
+	\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \cdot \delta_j(\sigma).
 \]
 % subsection 54 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Für die Randabbildungen gilt $\partial_{n-1} \circ \partial_n = 0$]{Proposition} % (fold)
 \label{sub:55}
 \[
 	\partial_{n-1} \circ \partial_n = 0
 \]
-\minisec{Beweis}
+\minisec{Beweis (mit Lemma \ref{sub:56})}
 \begin{align*}
 	\partial_{n-1} \partial_n(\sigma) = \partial_{n-1} \enbrace*{\sum_{j=0}^{n} (-1)^j \delta_j(\sigma)} &= 
 	\sum_{k=0}^{n-1} \sum_{j=0}^{n} (-1)^{j+k} \delta_k \delta_j(\sigma)   \\
-	&= \,\sum_{0 \le k \le j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_k \delta_j(\sigma) \\
-	&\stackrel{\mathclap{\text{Lemma \ref{sub:56}}}}{=} \, \sum_{0 \le k \le j \le n} \!\!\!(-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_j \delta_{k+1}(\sigma) \\
-	&= \,\sum_{0 \le k \le j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n}} \enspace(-1)^{k-1+j} \delta_j \delta_k(\sigma) \\
+	&= \,\sum_{0 \le k < j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_k \delta_j(\sigma) \\
+	&\stackrel{\mathclap{\text{Lemma \ref{sub:56}}}}{=} \, \sum_{0 \le k < j \le n} \!\!\!(-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_j \delta_{k+1}(\sigma) \\
+	&= \,\sum_{0 \le k < j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j < k \le n}} \enspace(-1)^{k-1+j} \delta_j \delta_k(\sigma) \\
 	&= 0 \bewende
 \end{align*}
 % subsection 55 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Hilflemma für Proposition \ref{sub:55}]{Lemma} % (fold)
 \label{sub:56}
-Für $0 \le j \le k \le n-1$ und $\sigma \in S_n(X)$ ist $\delta_k \delta_j(\sigma) = \delta_j \delta_{k+1}(\sigma)$
+Für $0 \le j \le k \le n-1$ und $\sigma \in S_n(X)$ ist $\delta_k \delta_j(\sigma) = \delta_j \delta_{k+1}(\sigma)$.
 \minisec{Beweis}
 Es ist
 \begin{align*}
-	\delta_k \delta_j(\sigma) \enbrace*{x, \ldots , x_{n-2}} &= \delta_j(\sigma) \enbrace[\big]{x_0, \ldots , x_{k-1}, 0, x_k , \ldots ,x_{n-2}}  \\
+	\delta_k \enbrace[\big]{\delta_j(\sigma)} \enbrace*{x, \ldots , x_{n-2}} &= \delta_j(\sigma) \enbrace[\big]{x_0, \ldots , x_{k-1}, 0, x_k , \ldots ,x_{n-2}}  \\
 	&= \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j, \ldots , x_{k-1},0,x_k, \ldots, x_{n-2}}  \\
 	\intertext{und}
 	\delta_j \delta_{k+1}(\sigma) \enbrace*{x_0, \ldots , x_{n-2}} &= \delta_{k+1}(\sigma) \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j,\ldots , x_{n-2}} \\
@@ -1017,17 +1020,17 @@ Es ist
 Sei $X$ ein topologischer Raum. Die Homologie des \Index{singulären Kettenkomplex} über $R$, $\enbrace[\big]{C_*(X;R), \partial_*}$, heißt die
 \Index{singuläre Homologie von $X$} mit Koeffizienten in $R$:
 \[
-	H_*(X;R) := H_* \enbrace[\big]{C_*(X;R), \partial_*} 
+	H_n(X;R) := H_n \enbrace[\big]{C_*(X;R), \partial_*} 
 \]  
-Für $R=\mathds{Z}$ schreiben wir kürzer $C_*(X) := C_*(X;\mathds{Z})$ und $H_*(X) := H_*(X;\mathds{Z})$.
+Für $R=\mathds{Z}$ schreiben wir kürzer $C_*(X) := C_*(X;\mathds{Z})$ und $H_n(X) := H_n(X;\mathds{Z})$.
 % subsection 57 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: $n$-Ketten, $n$-Ränder und $n$-Zykel und Homologieklasse]{Definition} % (fold)
 \label{sub:58}
 \begin{itemize}
 	\item Die Elemente von $C_n(X;R)$ heißen \bet{$\mathbf{n}$-Ketten}\index{n-Ketten@$n$-Ketten}.
-	\item Die Elemente von $\im \partial_{n+1} \subseteq C_N(X;R)$ heißen \bet{$\mathbf{n}$-Ränder}\index{n-Ränder@$n$-Ränder}.
-	\item Die Elemente von $\ker \partial_{n} \subseteq C_N(X;R)$ heißen \bet{$\mathbf{n}$-Zykel}\index{n-Zykel@$n$-Zykel}.
+	\item Die Elemente von $\im \partial_{n+1} \subseteq C_n(X;R)$ heißen \bet{$\mathbf{n}$-Ränder}\index{n-Ränder@$n$-Ränder}.
+	\item Die Elemente von $\ker \partial_{n} \subseteq C_n(X;R)$ heißen \bet{$\mathbf{n}$-Zykel}\index{n-Zykel@$n$-Zykel}.
 \end{itemize}
 Jeder $n$-Zykel $\sigma \in C_n(X;R)$ bestimmt eine \Index{Homologieklasse} $[\sigma] := \sigma + \im \partial_{n+1} \in H_n(X;R)$. 
 % subsection 58 (end)
