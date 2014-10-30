@@ -891,43 +891,54 @@ $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
 \label{sub:49}
 Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex.
 \[
-	\chi(C_*) := \sum_{i=0}^{n_0} \Rg(C_i) 
+	\chi(C_*,d_*) := \sum_{i=0}^{\infty} \Rg(C_i) = \sum_{i=0}^{n_0} \Rg(C_i) 
 \]
-heißt die \bet{Eulercharakteristik}\index{Eulercharakteristik!von $\mathds{Z}$-Kettenkomplexen} von $C_*$. Dabei ist $n_0$ so gewählt, dass $C_n =0$ für alle $n >n_0$. 
+heißt die \bet{Eulercharakteristik}\index{Eulercharakteristik!von $\mathds{Z}$-Kettenkomplexen} von $(C_*,d_*)$. Dabei ist $n_0$ so gewählt, dass $C_n =0$ für alle 
+$n >n_0$. 
 % subsection 49 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Eulercharakteristik eines endlich erzeugten $\mathds{Z}$-Kettenkomplexes]{Satz} % (fold)
 \label{sub:410}
 Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex. Dann gilt 
 \[
-	\chi(C_*) = \sum_{i=1}^{n_0} \Rg \enbrace[\big]{H_i(C_*,d_*)}.
+	\chi(C_*) = \sum_{i=1}^{\infty} (-1)^i \Rg H_i(C_*,d_*).
 \]
 \minisec{Beweis}
-Sei $B_{n+1} := \im \partial_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker \partial_n : C_n \to C_{n-1}$. Als Untermoduln von $C_n$ sind $Z_n$ und $B_n$ endlich
-erzeugt. Insbesondere ist auch $H_n(C_*,d_*)$ endlich erzeugt. Wir erhalten kurze exakte Folgen:
+Sei $B_{n+1} := \im \partial_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker \partial_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
+Als Untermoduln von $C_n$ sind $Z_n$ und $B_n$ endlich erzeugt (LA2). Insbesondere ist auch $H_n(C_*,d_*)$ endlich erzeugt und der Rang somit definiert. Auch $B_{n+1}$
+ist Untermodul des endlich erzeugten $\mathds{Z}$-Moduls $C_n$ und somit endlich erzeugt.
+Wir erhalten kurze exakte Folgen:
 \[
 	\begin{tikzcd}[row sep=0.4em]
 		B_{n+1} \rar & Z_n \rar & H_n(C_*, d_*) \\
-		Z_n \rar & C_n \rar & B_n \quad 
+		Z_n \rar[hook] & C_n \rar[two heads] & B_n \quad 
 	\end{tikzcd}
 \]
-Folglich gilt $\Rg(Z_n) = \Rg (B_{n+1}) + \Rg \enbrace[\big]{H_n(C_*,d_*)}$ und $\Rg(C_n) = \Rg(Z_n) + \Rg(B_n)$. Also gilt
+Folglich gilt $\Rg Z_n = \Rg B_{n+1} + \Rg H_n(C_*,d_*)$ und $\Rg C_n = \Rg Z_n + \Rg B_n$. Also gilt
 \begin{align*}
-	\chi(C_*) = \sum_{i=0}^{n_0} (-1)^i \Rg(C_i) &= \sum_{i=0}^{n_0} (-1)^i \enbrace[\big]{\Rg(Z_i) + \Rg(B_i)} \\  
-	&= \sum_{i=0}^{n_0} (-1)^i \enbrace[\Big]{\Rg \enbrace[\big]{H_i(C_*,d_*)} - \Rg(B_{i+1}) + \Rg(B_i) } \\
-	&= \sum_{i=0}^{n_0} (-1)^i \Rg \enbrace[\big]{H_n(C_*,d_*)} \bewende  
+	\chi(C_*) = \sum_{i=0}^{\infty} (-1)^i \Rg C_i &= \sum_{i=0}^{\infty} (-1)^i \enbrace[\big]{\Rg Z_i + \Rg B_i} \\  
+	&= \sum_{i=0}^{\infty} (-1)^i \enbrace[\Big]{\Rg H_i(C_*,d_*) + \Rg B_{i+1} + \Rg B_i} \\
+	&= \sum_{i=0}^{\infty} (-1)^i \Rg H_i(C_*,d_*) + \sum_{i=0}^{\infty} (-1)^i \Rg B_{i+1} + \sum_{i=0}^{\infty}(-1)^i \Rg B_i \\
+	&= \sum_{i=0}^{\infty} (-1)^i \Rg H_i(C_*,d_*)  \bewende  
 \end{align*}
-\todo{Rechnung korrigieren}
 % subsection 410 (end)
 
-\subsection{Korollar} % (fold)
+\subsection[Korollar: Die Eulercharakteristik eines simplizialen Komplexes]{Korollar} % (fold)
 \label{sub:411}
-Sei $K$ ein endlicher simplizialer Kettenkomplex. Dann gilt
+Sei $K$ ein endlicher, geordneter simplizialer Kettenkomplex. Dann gilt
 \[
-	\chi(K) = \sum_{i=1}^{\dim K} (-1)^i \Rg \enbrace[\big]{H_i(K;\mathds{Z})} 
+	\chi(K) = \sum_{i=1}^{\dim K} (-1)^i \Rg H_i(K;\mathds{Z})
 \]
 \minisec{Beweis}
-Wende den Satz \ref{sub:410} auf den simplizialen Kettenkomplex von $K$ an. \bewende
+Wende den Satz \ref{sub:410} auf den simplizialen Kettenkomplex von $K$ an. Da 
+\[
+	\Rg C_n(K;\mathds{Z}) = \Rg \mathds{Z}[\Sigma_n] = \# \text{ $n$-Simplizes in $K$}
+\]
+ist
+\[
+	\chi(K) = \chi \enbrace[\big]{C_*(K;\mathds{Z}), \partial_*} = \sum_{i=0}^{\infty} (-1)^i \Rg H_i \enbrace[\big]{C_*(K;\mathds{Z}), \partial_*}  =
+	\sum_{i=0}^{\infty} (-1)^i \Rg H_i \enbrace*{K;\mathds{Z}} \bewende
+\]
 % subsection 411 (end)
 % section 4 (end)
 \newpage
@@ -944,7 +955,7 @@ Sei $R$ ein Ring. Der \bet{$\mathbf{n}$-te (singuläre) Kettenmodul}\index{n-ter
 \]  
 % subsection 51 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Einschränkung eines singulären Simplizes auf eine Seite]{Definition} % (fold)
 \label{sub:52}
 Für $\sigma \in S_n(X)$ und $j \in \set{0,\ldots ,n}$ sei $\delta_j \sigma \in S_{n-1}(X)$ die Einschränkung von $\sigma$ auf die $j$-te Seite von $\abs*{\Delta^n}$,
 also $\delta_j(\sigma) = \sigma \circ \iota_{n,j}$, wobei $\iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$ die Inklusion der $j$-ten Seite ist:
