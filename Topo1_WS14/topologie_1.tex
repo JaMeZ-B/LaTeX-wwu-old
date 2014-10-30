@@ -930,7 +930,161 @@ Sei $K$ ein endlicher simplizialer Kettenkomplex. Dann gilt
 Wende den Satz \ref{sub:410} auf den simplizialen Kettenkomplex von $K$ an. \bewende
 % subsection 411 (end)
 % section 4 (end)
+\newpage
 
+\section{Singuläre Homologie} % (fold)
+\label{sec:5}
+
+\subsection[Definition: Singuläre Simplizes und $n$-ter singulärer Kettenmodul]{Definition} % (fold)
+\label{sub:51}
+Sei $X$ ein topologischer Raum. Sei $S_n(X)$ die Menge aller stetigen Abbildungen $\sigma : \abs*{\Delta^n} \to X$. Elemente von $S_n(X)$ heißen \Index{singuläre Simplizes} in $X$. 
+Sei $R$ ein Ring. Der \bet{$\mathbf{n}$-te (singuläre) Kettenmodul}\index{n-ter (singulärer) Kettemodul@$n$-ter (singulärer) Kettenmodul} von $X$ über $R$ ist
+\[
+	C_n(X;R) := R \benbrace*{S_n(X)} 
+\]  
+% subsection 51 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:52}
+Für $\sigma \in S_n(X)$ und $j \in \set{0,\ldots ,n}$ sei $\delta_j \sigma \in S_{n-1}(X)$ die Einschränkung von $\sigma$ auf die $j$-te Seite von $\abs*{\Delta^n}$,
+also $\delta_j(\sigma) = \sigma \circ \iota_{n,j}$, wobei $\iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$ die Inklusion der $j$-ten Seite ist:
+
+\[
+	\iota_{n,j}(x_0, \ldots ,x_{n-1}) = \enbrace[\big]{x_0, \ldots , x_{j-1}, 0, x_j, \ldots , x_{n-1}}
+\]
+% subsection 52 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:53}
+$\iota_{n,j} = \abs*{i_{n,j}}$ wobei $i_{n,j} : \Delta^{n-1} \to \Delta^n$ gegeben ist durch $i_{n,j}(k) = \begin{cases}
+	k, &\text{ falls }k < j\\
+	k+1, &\text{ falls } k\ge j
+\end{cases}$
+% subsection 53 (end)
+
+\subsection[Definition: $n$-te singuläre Randabbildung]{Definition} % (fold)
+\label{sub:54}
+Die \bet{$\mathbf{n}$-te singuläre Randabbildung}\index{n-te singuläre Randabbildung@$n$-te singuläre Randabbildung} $\partial_n : C_n(X;R) \to C_{n-1}(X;R)$ ist 
+definiert durch 
+\[
+	\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \delta_j(\sigma).
+\]
+% subsection 54 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:55}
+\[
+	\partial_{n-1} \circ \partial_n = 0
+\]
+\minisec{Beweis}
+\begin{align*}
+	\partial_{n-1} \partial_n(\sigma) = \partial_{n-1} \enbrace*{\sum_{j=0}^{n} (-1)^j \delta_j(\sigma)} &= 
+	\sum_{k=0}^{n-1} \sum_{j=0}^{n} (-1)^{j+k} \delta_k \delta_j(\sigma)   \\
+	&= \,\sum_{0 \le k \le j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_k \delta_j(\sigma) \\
+	&\stackrel{\mathclap{\text{Lemma \ref{sub:56}}}}{=} \, \sum_{0 \le k \le j \le n} \!\!\!(-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_j \delta_{k+1}(\sigma) \\
+	&= \,\sum_{0 \le k \le j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j \le k \le n}} \enspace(-1)^{k-1+j} \delta_j \delta_k(\sigma) \\
+	&= 0 \bewende
+\end{align*}
+% subsection 55 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:56}
+Für $0 \le j \le k \le n-1$ und $\sigma \in S_n(X)$ ist $\delta_k \delta_j(\sigma) = \delta_j \delta_{k+1}(\sigma)$
+\minisec{Beweis}
+Es ist
+\begin{align*}
+	\delta_k \delta_j(\sigma) \enbrace*{x, \ldots , x_{n-2}} &= \delta_j(\sigma) \enbrace[\big]{x_0, \ldots , x_{k-1}, 0, x_k , \ldots ,x_{n-2}}  \\
+	&= \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j, \ldots , x_{k-1},0,x_k, \ldots, x_{n-2}}  \\
+	\intertext{und}
+	\delta_j \delta_{k+1}(\sigma) \enbrace*{x_0, \ldots , x_{n-2}} &= \delta_{k+1}(\sigma) \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j,\ldots , x_{n-2}} \\
+	&= \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j, \ldots , x_{k-1},0, x_k, \ldots , x_{n-2}} \bewende
+\end{align*}
+% subsection 56 (end)
+
+\subsection[Definition: Singuläre Homologie von $X$]{Definition} % (fold)
+\label{sub:57}
+Sei $X$ ein topologischer Raum. Die Homologie des \Index{singulären Kettenkomplex} über $R$, $\enbrace[\big]{C_*(X;R), \partial_*}$, heißt die
+\Index{singuläre Homologie von $X$} mit Koeffizienten in $R$:
+\[
+	H_*(X;R) := H_* \enbrace[\big]{C_*(X;R), \partial_*} 
+\]  
+Für $R=\mathds{Z}$ schreiben wir kürzer $C_*(X) := C_*(X;\mathds{Z})$ und $H_*(X) := H_*(X;\mathds{Z})$.
+% subsection 57 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:58}
+\begin{itemize}
+	\item Die Elemente von $C_n(X;R)$ heißen \bet{$\mathbf{n}$-Ketten}\index{n-Ketten@$n$-Ketten}.
+	\item Die Elemente von $\im \partial_{n+1} \subseteq C_N(X;R)$ heißen \bet{$\mathbf{n}$-Ränder}\index{n-Ränder@$n$-Ränder}.
+	\item Die Elemente von $\ker \partial_{n} \subseteq C_N(X;R)$ heißen \bet{$\mathbf{n}$-Zykel}\index{n-Zykel@$n$-Zykel}.
+\end{itemize}
+Jeder $n$-Zykel $\sigma \in C_n(X;R)$ bestimmt eine \Index{Homologieklasse} $[\sigma] := \sigma + \im \partial_{n+1} \in H_n(X;R)$. 
+% subsection 58 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:59}
+Ist $X= \set{x_0}$ der Ein-Punkt-Raum, so ist 
+\[
+	H_* \enbrace[\big]{\set{x_0};R} \cong \begin{cases}
+	R, &\text{ falls }*=0\\
+	0 , &\text{ sonst } 
+\end{cases} 
+\]
+\minisec{Beweis}
+Es gibt für jedes $n$ genau eine Abbildung $\sigma_n : \abs*{\Delta^n} \to \set{x_0}$ und diese ist stetig. Also $C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. Für
+alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
+\[
+	\partial_n(\sigma_n) = \begin{cases}
+		0, &\text{ falls }n \text{ ungerade}\\
+		\sigma_{n-1} , &\text{ falls } n \text{ gerade}
+	\end{cases}
+\]
+Der singuläre Kettenkomplex von $\set{x_0}$ hat also folgende Gestalt:
+\[
+	\begin{tikzcd}
+		C_0 \enbrace[\big]{\set{x_0};R} & C_1 \enbrace[\big]{\set{x_0};R} \lar["0", swap] & 
+		C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] & C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap]& \cdots \lar["\cong"]
+	\end{tikzcd}
+\]
+Es folgt
+\[
+	H_n \enbrace[\big]{\set{x_0};R } \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0 , &\text{ sonst}
+	\end{cases} \bewende
+\]
+% subsection 59 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:510}
+\begin{enumerate}[1)]
+	\item Ist $X \not= \emptyset$, so ist $H_0(X) \not=0$.
+	\item Ist $X$ wegzusammenhängend, so gilt $H_0(X) \cong \mathds{Z}$
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[1)]
+	\item Sei $\varepsilon : C_0(X) \to \mathds{Z}$ definiert durch $\varepsilon \enbrace*{\sum_{\sigma \in S_n(X)}r_\sigma \cdot \sigma } = \sum_\sigma r_\sigma$.
+	Dann ist $\varepsilon \circ \partial_1 : C_1(X) \to \mathds{Z}$ trivial. Daher induziert $\varepsilon$ eine Abbildung 
+	$\overline{\varepsilon} : H_0(X) \to \mathds{Z}$. Ist $\sigma : \abs*{\Delta^0} \to X$ ein singulärer $0$-Simplex, so gilt $\overline{\varepsilon}( [\sigma])=1$.
+	Daher ist $\overline{\varepsilon}$ surjektiv und $H_0(X) \not= 0$.
+	\item Sei $\sigma_0 : \abs*{\Delta^0} \to X$ ein fest gewählter singulärer $0$-Simplex (also ein Punkt in X). Definiere $i : \mathds{Z} \to C_0(X)$ durch
+	$i(n) := n \cdot \sigma$ und $\overline{i} : \mathds{Z} \to H_0(X)$ durch $\overline{i}(n) = \benbrace*{i(n)}$. Dann ist 
+	$\overline{\varepsilon}\circ\overline{i} = \id_\mathds{Z}$. Wir behaupten, dass auch $\overline{i} \circ \overline{\varepsilon}= \id_{H_0(X)}$. Dazu definieren
+	wir $s : C_0(X) \to C_1(X)$ wie folgt:
+	
+	Zu jedem $\sigma \in C_0(X)$ wählen wir $s(\sigma) : \abs*{\Delta^1} \to X$ so, dass $\delta_0 s(\sigma) = \sigma$ und $\delta_1 s(\sigma)= \sigma_0$.
+	Dies ist möglich, da $X$ wegzusammenhängend ist: $s(\sigma)$ sei ein Weg von $\im \sigma_0$ nach $\im \sigma$. Es gilt nun
+	\[
+		\partial \circ s (\sigma) = \sigma - \sigma_0 = \sigma- i \circ \varepsilon(\sigma)
+	\]
+	für jedes $\sigma \in S_0(X)$. Damit folgt $\partial \circ s = \id_{C_0(X)} - i \circ \varepsilon$. Also ist
+	\[
+		\overline{i} \circ \overline{\varepsilon} (\sigma) = \benbrace*{i \circ \varepsilon(\sigma)} = \benbrace[\big]{\sigma - \partial \circ s(\sigma)} = [\sigma]
+	\]
+	für jedes $\sigma \in C_0(X)$. Also $\overline{\imath} \circ \overline{\varepsilon} = \id_{H_0(X)}$. \bewende
+\end{enumerate}
+% subsection 510 (end)
+% section 5 (end)
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
