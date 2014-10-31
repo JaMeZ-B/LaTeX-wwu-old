@@ -1110,7 +1110,7 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 			\item Stationaritätsannahme $\mathds{P}(T_x>t~|~T_x>s)=\mathds{P}(T_{x+s}>t)$
 			\item $q_x= \mathds{P}(T_x\le 1)$ 1-jährige Sterbew'keit eines x-Jährigen
 			\item $p_x=1-q_x=\mathds{P}(T_x>1)$ 1-jährige Überlebensw'keit eines x-Jährigen
-			\item $_kp_x:=\mathds{P}(T_x>k)=\mathds{P}(T_x>1)\mathds{P}(T_x>k~|~T_x>1)\stackrel{Stationarität}{=} p_x \mathds{P}(t_{x+1}>k-1)=\dots=p_xp_{x+1}\dots p_{x+k-1}$
+			\item $_kp_x:=\mathds{P}(T_x>k)=\mathds{P}(T_x>1)\mathds{P}(T_x>k~|~T_x>1)\stackrel{\text{Stationarität}}{=} p_x \mathds{P}(t_{x+1}>k-1)\\ =\dots=p_xp_{x+1}\dots p_{x+k-1}$
 			\item $_kq_x = 1- _kp_x = \mathds{P}(T_x\le k)$
 			\item Bezeichnung für $M=1$, Eintrittsalter $x$\\
 			$_{|n}A_x = \sum_{k=1}^{n}r^k \mathds{P}(k-1<T_x\le k)$\\
@@ -1244,10 +1244,52 @@ Für $m=0$ ist $\mathcal{D}(0)$ der Barwert der Versicherung. $\mathcal{D}(0)=0$
 \begin{equation*}
 \begin{aligned}
 	\mathds{E}(V_m(A)~|~T>m) &= \mathds{E}\enbrace{\sum_{k=0}^{\infty}A(m+k)\underbracket{B(m,m+k)}_{=v^k}~|~(T>m}\\
+	&= \sum_{k=1}^{\infty}t(k+m)B(m,m+k) \mathds{P}(m+k-1<T<m+k~|~T>n)\\
+	&+ \sum_{k=0}^{\infty}s(k+m)B(m,m+k) \mathds{P}(T>m+k~|~T>m)	
 \end{aligned}
 \end{equation*}
+\[ \text{Da } A(m+k) = t(k+m)\cdot \mathbb{1}_{\{m+k-1<T \le m+k \}} + s(k+m)\cdot \mathbb{1}_{\{T>m+k \}}\]
+Analog:
+\[ \mathds{E}(V_m(I)~|~T>m)= \sum_{k=0}^{\infty}b(m+k)B(m,m+k) \mathds{P}(T>m+k~|~T>m) \]
+% subsection deckungskapital (end)
 
-
+\subsection{Beispiele Deckungskapital}
+\label{sub:bsp_deckungskapital}
+periodischen konst. Diskontfaktor $v$\\
+\begin{enumerate}[(a)]
+	\item Todesfallverischerung:\\
+	
+	\begin{minipage}[c]{6cm}
+		\begin{itemize}
+			\item Eintrittsalter $x$
+			\item VS $M=1$
+			\item Laufzeit $n$ Jahre
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{8cm}
+		\begin{equation*}
+		\begin{aligned}
+			A(k) &= \mathbb{1}_{\{k-1<T_x\le k \}}, ~~~k=1,\dots,n\\
+			I(k) &= p\cdot \mathbb{1}_{\{T_x>k \}}, ~~~k=0,\dots,n-1 \text{ mit } p=\frac{_{|n}A_x}{ä_{x:n\rceil}}
+		\end{aligned}
+		\end{equation*}
+	\end{minipage}
+	\begin{equation*}
+	\begin{aligned}
+		\mathcal{D}_x(m) &= \sum_{k=1}^{n-m}v^k\mathds{P}(m+k-1<T_x \le m+k~|~T_x>m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_x>m+k~|~T_x>m)\\
+		&= \sum_{k=1}^{n-m}v^k\mathds{P}(k-1<T_{x+m} \le k) - p \sum_{k=0}^{n-m-1}v^k\mathds{P}(T_{x+m}>k)\\
+		&=~_{|n-m}A_{x+m} - p\cdot ä_{x+m:n-m\rceil}
+	\end{aligned}
+	\end{equation*}
+	\item Todesfallversicherung, unbegrenzte Laufzeit
+	\begin{equation*}
+	\begin{aligned}
+		\mathcal{D}_x(m) &= \sum_{k=1}^{\infty}v^k\mathds{P}(m+k-1<T_x \le m+k~|~T_x>m)-p\sum_{k=0}^{\infty}v^k\mathds{P}(T_x>m+k~|~T_x>m)\\
+		&= \sum_{k=1}^{\infty}v^k\mathds{P}(k-1<T_{x+m} \le k) - p \sum_{k=0}^{\infty}v^k\mathds{P}(T_{x+m}>k)\\
+		& =A_{x+m} - p\cdot ä_{x+m} \qquad\qquad m=0,1,2,3,\dots \qquad p\text{ erfüllt } A_x=pä_x
+	\end{aligned}
+	\end{equation*}
+\end{enumerate}
 
 
 
