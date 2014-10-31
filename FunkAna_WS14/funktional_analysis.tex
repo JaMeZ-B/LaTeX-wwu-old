@@ -763,6 +763,66 @@ Definiere eine Halbnorm durch $p(x) := \norm{x} \cdot \norm{\psi}$. Nach Satz \r
 $\abs*{\overline{\psi(x)}} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. Es folgt $\norm{\overline{\psi}} \le \norm{\psi}$. $\norm{\psi} \le \norm{\overline{\psi}}$
 ist trivial, da $\psi\big|_{Y} = \overline{\psi}$. \bewende
 % subsection 224 (end)
+
+\subsection[Definition: Konvexe Teilmenge]{Definition} % (fold)
+\label{sub:225}
+Sei $X$ ein $\mathds{K}$-Vektorraum. Sei $M \subset X$ eine Teilmenge. $M$ heißt \Index{konvex}, falls für $a,b \in M$, $\lambda \in [0,1]$ gilt
+\[
+	(1-\lambda ) \cdot a + \lambda \cdot b \in M
+\]
+Ist $X$ ein topologischer Vektorraum und $M \subset X$ konvex, so ist auch $\overline{M}$ konvex. \hfill (warum?)\\
+Ist $N \subset X$ eine beliebige Teilmenge, so ist 
+\[
+	\conv(N) := \smashoperator{\bigcap_{\substack{N \subset M \subset X \\ M \text{ konvex} }}} \, M
+\]
+$\conv(N)$ ist konvex. (warum?)
+% subsection 225 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:226}
+Sei $X$ ein $\mathds{R}$-Vektorraum, $\emptyset \not= M \subset X$ konvex, $\varphi \in \mathcal{S}(X)$. Dann existiert $\psi : X \to \mathds{R}$ linear mit 
+$\psi \le \varphi$ und 
+\begin{equation*}
+	\inf_{y \in M} \varphi(y) = \inf_{y \in M} \psi(y) \label{eq:226:1}\tag{*}
+\end{equation*}
+\minisec{Beweis}
+Setze $\mu := \inf_{y \in M} \varphi(y)$. Falls $\mu = -\infty$, so folgt die Behauptung aus dem Satz von Hahn-Banach \ref{sub:221}. $\eqref{eq:226:1}$ ist trivialerweise
+erfüllt. Sei also $\mu \in \mathds{R}$. Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch
+\[
+	\tilde{\varphi}(x) := \inf_{y \in M, \lambda  \ge 0} \enbrace[\big]{ \varphi(x+ \lambda \cdot y) - \lambda  \cdot \mu} , \quad x \in X
+\]
+Es gilt $\varphi(x + \lambda \cdot y)- \lambda \cdot \mu \ge - \varphi(-x)$, $x \in X$, $y\in M$, $\lambda \ge 0$. Also ist $\tilde{\varphi}(x) \ge - \varphi(-x) >-\infty$.
+$\tilde{\varphi}$ ist sublinear:
+\begin{enumerate}[(i)]
+	\item $\tilde{\varphi}(\gamma \cdot x) = \gamma \cdot \tilde{\varphi}(x)$, für $x \in X$, $\gamma \in \ge 0$, wie in \ref{sub:222}.
+	\item Seien $x,z \in X$ und $\varepsilon>0$. Wähle $y_x, y_z \in M$, $\lambda_x, \lambda_y \ge 0$ mit
+	\[
+		\tilde{\varphi}(x) \ge \varphi (x +\lambda_x \cdot y_x) - \lambda_x \cdot \mu -\varepsilon \quad \text{ und }\quad 
+		\tilde{\varphi}(x) \ge \varphi (z +\lambda_z \cdot y_z) - \lambda_z \cdot \mu -\varepsilon
+	\] 
+	Es folgt 
+	\begin{align*}
+		\tilde{\varphi}(x) + \tilde{\varphi}(z) &\ge \varphi \enbrace[\big]{x+z+ \lambda_x \cdot y_x + \lambda_z \cdot y_z} - (\lambda_x + \lambda_z) \cdot \mu 
+		- 2 \varepsilon \\
+		&= \varphi \enbrace[\Bigg]{x+z + (\lambda_x+ \lambda_z)\cdot \underbrace{\enbrace*{\frac{\lambda_x}{\lambda_x + \lambda_z} \cdot y_x + \frac{\lambda_z}{\lambda_x + \lambda_z} \cdot y_z }}_{\in M} } - (\lambda_x + \lambda_z) \cdot \mu -2 \varepsilon \\
+		&\ge \tilde{\varphi}(x+z) - 2 \varepsilon
+	\end{align*}
+\end{enumerate}
+Nach Hahn-Banach (\ref{sub:221}) existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \tilde{\varphi} \le \varphi$. Für $y \in M$ gilt 
+\[
+	-\psi(y) = \psi(-y) \le \tilde{\varphi}(-y) \le \varphi(-y + 1 \cdot y)- 1 \cdot \mu= -\mu
+\]
+also $\mu \le \psi(y) \le \varphi(y)$, woraus \eqref{eq:226:1} folgt. \bewende
+% subsection 226 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:227}
+Sei $X$ ein normierter $\mathds{R}$-Vektorraum und $A,B \subset X$ nichtleere konvexe Teilmengen mit \index{Distanz}
+\[
+	\dist(A,B) := \inf \set[\norm{a-b}]{a \in A, b \in B} > 0
+\]
+Dann existiert $\psi : X \to \mathds{R}$ stetig und linear mit $\psi(A) \cap \psi(B) \not= \emptyset$.
+% subsection 227 (end)
 % section 2 (end)
 
 
