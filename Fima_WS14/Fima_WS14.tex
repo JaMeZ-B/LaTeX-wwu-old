@@ -1081,7 +1081,7 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 	\item Ausfallzeit ist deshalb die Restlebensdauer der Person
 \end{itemize}
 \begin{enumerate}[(a)]
-	\item \bet{Todesfallversicherung:}
+	\item \Index{Todesfallversicherung:}
 	\begin{itemize}
 		\item Todesfallsumme $M$
 		\item Laufzeit $n$
@@ -1127,11 +1127,125 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 			\end{equation*} 
 			\end{itemize}
 	\end{itemize}
+	\newpage
+	\item \Index{aufgeschobene Rentenversicherung}\\
 	
+	\begin{minipage}[b]{8cm}
+		\begin{itemize}
+			\item Eintrittsalter $x$
+			\item Aufschubszeit $m$ Jahre		
+			\item Bezugszeit $n$ Jahre
+			\item Rentenhöhe $R$
+			\item Beitragshöhe $p$
+		\end{itemize}	
+	\end{minipage}		
+	\begin{minipage}[b]{9cm}
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+		\draw[->,color=black] (0.,0.) -- (7.5,0.);
+		\foreach \x in {0.,1.,2.,3.5,5.,7.}
+		\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+		\draw [black] (1.,-.2) node {1};
+		\draw[->, black] (1.,0.2) -- (1.,.7) node[above] {$p$};
+		\draw [black] (2.,-.2) node {2};
+		\draw[->, black] (2.,0.2) -- (2.,.7) node[above] {$p$};
+		\draw [black] (3.5,.2) node {$m$};
+		\draw[->, black] (3.5,-.2) -- (3.5,-.7) node[below] {$R$};
+		\draw [black] (5.,.2) node {$m+k$};
+		\draw[->, black] (5.,-.2) -- (5.,-.7) node[below] {$R$};
+		\draw [black] (7.,.2) node {$n+m$};
+		\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (3.5,-1.2) -- (0.,-1.2) node[midway,below]{Aufschubszeit};
+		\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (7.,-1.2) -- (3.5,-1.2) node[midway,below]{Bezugszeit};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{itemize}
+		\item[Modellierung:]
+		\item $T=T_x$ Restlebenszeit eines x-Jährigen
+		\item $t(k)=0 ~\forall k \in \mathds{N}_0$
+		\item $s(k)=0~ k=0,\dots,m-1,~~~s(m+k)=R~ k=0,\dots,n-1$
+		\item $b(k)=p~ k=0,\dots,m-1,~~~b(k)=0$ sonst
+		\item[Induzierte Zahlungsströme:]
+		\item Ausgaben: $A(m+k)= R\cdot \mathbb{1}_{\{T>m+k\}}~ k=0,\dots,n-1,~~ A(k)=0$ sonst
+		\item Einnahmen: $I(k)=p\cdot \mathbb{1}_{\{T>k\}}~ k=0,\dots,m-1 ~~ I(k)=0$ sonst
+		\item Barwert der Ausgaben: $\mathds{E}V_0(A)=\sum_{k=0}^{n-1}R\cdot v^{m+k}\mathds{P}(T_>m+k)$
+		\item Barwert der Einnahmen: $\mathds{E}V_0(I)=p\underbrace{\sum_{k=0}^{m-1}v^k \mathds{P}(T>k)}_{ä_{x:m\rceil}}=p\cdot ä_{x:m\rceil}$
+		\item Bezeichnung für $R=1$: $_{m|n}ä_x:=\sum_{k=0}^{n-1}v^{m+k}\mathds{P}(T>m+k)$
+		\item Die Versicherung ist fair, wenn $R\cdot~ _{m|n}ä_x=p\cdot ä_{x:m\rceil}$
+		\item Für $n=\infty$, lebenslange Rente: $_{m|}ä_x=\sum_{k=0}^{\infty}v^{k+m}\mathds{P}(T>m+k)$
+	\end{itemize}
+	\item \Index{Erlebensfallversicherung}\\
+	\begin{itemize}
+		\item Eintrittsalter $x$
+		\item Laufzeit $n$ Jahre
+		\item \Index{Erlebensfallsumme} $M$, Auszahlung bei Überleben von $n$ Jahren
+		\item konst. Prämie $p$, während der Laufzeit
+		\item[Modellierung:]
+		\item $T=T_x$ Restlebenszeit
+		\item $t(k)=0~\forall k\in \mathds{N}_0$
+		\item $s(k)=\left\{\begin{array}{cl} M, & k=n\\ 0, & \text{ sonst.} \end{array}\right.$
+		\item $b(k)=\left\{\begin{array}{cl} p, & k=0,\dots,n-1 \\ 0, & \text{ sonst.}	\end{array}\right.$
+		\item[Induzierte Zahlungsströme:]
+		\item Ausgaben: $A(m)=M\cdot \mathbb{1}_{\{T>m\}}$, $A(k)=0$ sonst
+		\item Einnahmen: $I(k)=p\cdot \mathbb{1}_{\{T>k\}},~~k=1,\dots,n-1$
+		\item[Bewertung:]
+		\[\mathds{E}V_0(A)= M \underbrace{v^n \mathds{P}(T>n)}_{= _mE_x}=M\cdot~_nE_x \]
+		\[\mathds{E}V_=(I)= p\cdot ä_{x:n\rceil} \]
+		\item Versicherung ist fair, wenn $ M~_nE_x=pä_{x:m\rceil}$
+	\end{itemize}
+	\item \Index{gemischte Versicherung} (Kapitalgebundene Lenbensvers.)\\
+	
+	\begin{minipage}[t]{9cm}
+		\begin{itemize}
+			\item Kombination aus Todesfall- und Erlebensversicherung
+			\item Eintrittsalter $x$
+			\item Laufzeit $n$
+			\item Versicherungssumme $M$, fällig bei Tod während der Laufzeit oder bei Überleben der Laufzeit
+			\item konst. Prämie $p$, während der Laufzeit
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{itemize}
+			\item[Modellierung:]
+			\item $T=T_x$ Restlebenszeit
+			\item $t(k)=M,~~ k=1,\dots,n$, $t(k)=0$ sonst
+			\item $s(n)=M,~~ s(k)=0$ sonst
+			\item $b(k)=p,~~ k=0,\dots,n-1$, $b(k)=0$ sonst
+		\end{itemize}
+	\end{minipage}
+	Induzierte Zahlungsströme:
+	\begin{equation*}
+	\begin{aligned}
+		A(k) &= M\cdot \mathbb{1}_{\{k-1<T\le k \}}, ~~~~~k=1,\dots,n-1\\
+		A(n) &= M\cdot (\mathbb{1}_{\{n-1<T \le n \}}+\mathbb{1}_{\{T>n\}}), ~~~~~A(k)=0 \text{ sonst}\\
+		I(k) &= p\cdot \mathbb{1}_{\{T>k\}},~~~~k=0,\dots,n-1
+	\end{aligned}
+	\end{equation*}
+	Bewertung: \[ \mathds{E}V_0(A)=M(~_{|n}A_x + ~_nE_x) \qquad \qquad \mathds{E}V_0(I)=p ä_{x:n\rceil}\]
+	Versicherung ist fair, wenn $M(~_{|n}A_x + ~_nE_x)=p ä_{x:n\rceil}$
 \end{enumerate}
+% subsection klassische beispiele (end)
 
-
-
+\subsection{Deckungskapital}
+\label{sub:deckungskapital}
+\index{Deckungskapital}
+Betrachtet wird nur der Fall einer \Index{deterministischen Zinsentwicklung},z.B. $B(k,n) \in (0,1)$ det. $\forall n \in \mathds{N},~k<n$\\
+\bet{Beobachtung:}\\
+Anfangs sind die Prämieneinnahmen pro Jahr höher, als die zu erwartenden Ausgaben pro Jahr. Dies führt zum Aufbau einer \Index{Prämienreserve}. Gegen Ende sind die zu erwartenden Leistungen pro Jahr höher, als die Prämien pro Jahr und werden durch die aufgebaute Prämienreserve finanziert.\\
+Der \bet{Deckungskapitalverlauf}\index{Deckungskapital!-verlauf} spiegelt den Auf- und Abbau der Prämienreserve wieder.\\
+\marginnote{Anfang und Ende bezieht sich auf die Versicherung, bzw. viele Versicherungen zum selben Zeitpunkt}
+\bet{Definition:}\\
+Gegeben sei eine allgemeine Prämienversicherung $\Gamma=(t,s,b,T)$. Sei $(A(n))_{n\in \mathds{N}}$ und $(I(n))_{n\in \mathds{N}}$ der Zahlungsstrom der Ausgaben und Einnahmen. Das nach $m$ Jahren gebildete Deckungskapital $\mathcal{D}(m)$ ist definiert, als die Differenz der Barwerte, der dann zukünftigen Ausgaben und Einnahmen, wobei die Diskontierung auf das Ende des n-ten Jahres vorgegeben wird.\\
+In mathematischen Formeln: 
+\[
+\mathcal{D}(m)= \mathds{E}(V_m(A)~|~\underbracket{T>m}_{\text{die nach $m$ noch leben}})- \mathds{E}(V_m(I)~|~T>m) ~~ \forall m\in \mathds{N}_0 
+\]
+Dies ist die Definition des sogenannten \bet{prospektiven Deckungskapitals}\index{Deckungskapital!prospektives} (vorausschauende Methode).\\
+Für $m=0$ ist $\mathcal{D}(0)$ der Barwert der Versicherung. $\mathcal{D}(0)=0$ liegt bei einer fairen Versicherung vor.\\
+\bet{Bemerkung:}\\
+\begin{equation*}
+\begin{aligned}
+	\mathds{E}(V_m(A)~|~T>m) &= \mathds{E}\enbrace{\sum_{k=0}^{\infty}A(m+k)\underbracket{B(m,m+k)}_{=v^k}~|~(T>m}\\
+\end{aligned}
+\end{equation*}
 
 
 
