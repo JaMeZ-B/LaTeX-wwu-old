@@ -72,7 +72,7 @@
 \DeclareMathOperator{\grad}{grad} %Gradient
 \DeclareMathOperator{\rot}{rot} %Rotation
 \DeclareMathOperator{\hess}{Hess} %Hesse-Matrix
-
+\DeclareMathOperator{\supp}{supp}
 
 %--Skalarprodukt (cooler Befehl, den ich im Internet gefunden habe; benutzt TeX-Befehle)
 \makeatletter
@@ -129,6 +129,7 @@
 %--Metadaten, die durch den \maketitle gesetzt werden
 \author{Tobias Wedemeier}
 \titlehead{\includegraphics[width=7cm, keepaspectratio]{Bilder/Logo_WWU_Muenster_light_gray.jpg}
+			\hfill
 			\includegraphics[width=6cm, keepaspectratio]{Bilder/fb10logo.jpg}}
 \title{Einführung in die Algebra}
 \subtitle{Aufarbeitung der Vorlesungsnotizen}
@@ -152,7 +153,9 @@
 	Für Fehler in der Aufarbeitung wird keine Haftung übernommen. Hinweise auf Fehler sind gerne gesehen, hierfür kann man mich in der Uni ansprechen oder alternativ eine e-Mail an: \textit{tobias.wedemeier@gmx.de}\\
 	Auch ist eine Mitarbeit über Github möglich.\\
 	\vspace{2cm}
-	Wenn Teile aus der Vorlesung selber fehlen, können diese gerne an meine e-Mail versandt werden. Ich werde diese dann einarbeiten.
+	Wenn Teile aus der Vorlesung selber fehlen, können diese gerne an meine e-Mail versandt werden. Ich werde diese dann einarbeiten.\\
+	\vspace{2cm}
+	Zum Anhang: Aussagen aus den Übungen. Die Beweise sind größtenteils aus den Musterlösungen oder vom Autor selber und sind verkürzt oder vereinfacht, für die Korrektheit wird keine Haftung übernommen. Sie sind nur zum Verständnis gedacht.
 \end{center}
 \vspace*{\fill}
 \newpage
@@ -275,7 +278,7 @@ Offensichtlich ist eine Untergruppe dann wieder eine Gruppe, mit der von $G$ ver
 \subsection{Lemma 2}
 \label{sub:lemma_2}
 Sei $G$ eine Gruppe und sei $U$ eine nicht leere Menge von Untergruppen von $G$. Dann ist auch\\
-$\bigcap U = \{g\in G | \forall H\in U$ gilt $g\in H\}$\\
+$\bigcap U = \{g\in G~|~\forall H\in U$ gilt $g\in H\}$\\
 eine Untergruppe von $G$.\\
 \bet{Beweis}\\
 Für alle $H\in U$ gilt $e\in H$, also $e\in \bigcap U$. Angenommen $x,y\in \bigcap U$. Dann gilt für alle $H\in U$, dass $xy\in H$ sowie $x^{-1}\in H$. Es folgt $xy\in \bigcap U$ sowie $x^{-1}\in \bigcap U$.
@@ -318,7 +321,7 @@ Eine Gruppe $G$ heißt \Index{zyklisch}, wenn es ein $g\in G$ gibt mit $G=\lh{g}
 Sei $G=\lh{g}$ zyklisch mit $o(g)=n<\infty$. Dann gilt $\#G=n$ und $G=\{g,g^1,g^2,g^3,\dots,g^n\}$.
 \bet{Beweis}\\
 Jedes $m\in \mathds{Z}$ lässt sich schreiben als $m=kn+l$ mit $0\le l<n$ (Teilen mit Rest), also $g^m= \underbrace{g^{kn}}_{=e}.g^l=g^l$. Es folgt $G\subseteq \{g,g^2,\dots,g^n\}, g^n=g^0$.
-Ist $g^k=g^l$ für $0\le k\le l<n$, so gilt $e=g^0=g^{l-k}$, also $l-k=0$ (wegen$l<n$), also $\#\{g,g^2,\dots,g^n=g^0\}=n$.
+Ist $g^k=g^l$ für $0\le k\le l<n$, so gilt $e=g^0=g^{l-k}$, also $l-k=0$ (wegen $l<n$), also $\#\{g,g^2,\dots,g^n=g^0\}=n$.
 \hfill $\square$
 
 \minisec{Folgerung}
@@ -361,7 +364,7 @@ $\nicefrac{G}{H}=\{gH~|~g \in G \}$ Menge der Linksnebenklasse, Rechtsnebenklass
 Sei $H\subseteq G$ Untergruppe der Gruppe $G$, sei $a \in G$.\\
 Dann ist die Abbildung $H \to gH, h \mapsto gH$ bijektiv.\\
 \bet{Beweis}\\
-"Surjektiv" ist klar nach Definition von $gH$. Angenommen, $gh=gh' \Rightarrow h=g^{-1}gh'=h'$
+'Surjektiv' ist klar nach Definition von $gH$. Angenommen, $gh=gh' \Rightarrow h=g^{-1}gh'=h'$
 \hfill $\square$
 %sub end
 
@@ -480,12 +483,13 @@ Sei $G$ eine Gruppe und $N\subseteq G$ eine Untergruppe. Wir nennen $N$ \Index{n
 
 \bet{Beweis:}\\
 (i) und (ii) sind äquivalent: multipliziere von rechts mit $a^{-1}$ bzw. $a$. Genauso sind (iii) und (iv) äquivalent.\\
-Klar: (iv) $\Rightarrow$ (iii) $(\checkmark)$\\
+Klar: (ii) $\Rightarrow$ (iv) $(\checkmark)$\\
 Zeige (iv) $\Rightarrow$ (ii): Setze $b=a^{-1}$, es folgt aus (iv), dass $bNb^{-1}\subseteq N \rightsquigarrow N\subseteq b^{-1}Nb=aNa^{-1}$. Also gilt für alle $a\in G$, dass $N\subseteq aNa^{-1}$ und $aNa^{-1}\subseteq N$, damit gilt (ii)
 \hfill $\square$
 
 \subsubsection*{Lemma}
 Ist $\varphi: G \to K$ ein Homomorphismus von Gruppen, dann ist $ker(\varphi)$ ein Normalteiler in $G$.\\
+
 \bet{Beweis:}\\
 Sei $N=ker(\varphi)=\{n\in G~|~\varphi(n)=e\}$, sei $a\in G$. Dann gilt 
 \[
@@ -683,6 +687,75 @@ ist ein Isomorphismus. \qquad ("Kürzungsregel")\\
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
+\section*{Aussagen aus den Übungen}
+\addcontentsline{toc}{section}{Aussagen aus den Übungen}
+\label{sec:übungen}
+
+\subsection*{Zettel 1}
+\label{sub:zettel_1}
+\minisec{Aufage 1.2}
+Sei $G$ eine Gruppe. $A,B$ Untergruppen von $G$.\\
+\zz: Wenn $A\cup B$ eine Untergruppe ist, dann gilt: $A\subseteq B$ oder $b\subseteq A$.\\
+
+\bet{Beweis:}\\
+Annahme: $A\not\subseteq B$. Also ex. ein $a\in A\backslash B$ und $b\in B$ beliebig. Betrachte $ab\in A\cup B$, da $AB$ Untergruppe. Also ist $ab\in A$ oder $ab\in B$.\\
+Sei $ab\in B$ und $b^{-1}\in B$, da $B$ Untergruppe, folgt, dass $abb^{-1}=a\in B$. $\lightning$ zur Annahme.\\
+Also $ab\in A$ und $a^{-1}\in A$, da $A$ Untergruppe, folgt, dass $a^{-1}ab=b\in A$. Da $b$ beliebig war, folgt $B\subseteq A$.
+\hfill $\square$
+
+\minisec{Aufgabe 1.4}
+Gruppe $G$. $A,B$ Untergruppen.Wir definieren $AB:=\{ab~|~a\in A,b \in B \}$.\\
+\begin{enumerate}[(i)]
+	\item Die Menge $AB$ ist im allgemeinen keine Untergruppe.
+	\item Wenn weiter gilt $AB=BA$, dann ist $AB$ eine Untergruppe.
+\end{enumerate}
+Beweise klar! (\checkmark)
+% sub end
+
+\subsection*{Zettel 2}
+\label{sub:zettel_2}
+\minisec{Aufgabe 2.1}
+Eine Gruppe $G$ hat \Index{Exponent} $k$, wenn für jedes Gruppenelement $g\in G$ gilt: $g^k=e$.\\
+\zz Gruppen mit Exponent 2 sind abelsch.\\
+
+\bet{Beweis:}\\
+Aus $g^2=e$ folgt $g=g^{-1}~\forall g\in G$. $a,b\in G$ beliebig\\
+\[ ab=(ab)^{-1}\stackrel{\text{G Gruppe}}{=} b^{-1}a^{-1}=ba \]
+\hfill $\square$\\
+Anmerkung: Gruppen mit Exponenten 3 sind im allgemeinen nicht abelsch.
+
+\minisec{Aufgabe 2.3}
+Menge $X$ und $Sym(X)$. Der \Index{Träger einer Permutation} $\sigma \in Sym(X)$ ist definiert wie folgt: $\supp(\sigma):=\{x\in X~|~\sigma(x)\not=x \}$.
+\begin{enumerate}[(i)]
+	\item Wenn $\supp(\rho)\cap \supp(\sigma)=\emptyset$ für $\rho, \sigma \in Sym(X)$ gilt, dann folgt $\rho \circ \sigma=\sigma \circ \rho$.
+	\item Wenn $\supp(\rho)\cap \supp(\sigma)=\emptyset$ und $\rho \circ \sigma=\id$ für $\sigma,\rho\in Sym(X)$ gilt, dann folgt $\rho=\sigma=\id$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\begin{enumerate}[(i)]
+	\item Es gilt: $\rho\circ\sigma=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$
+	oder 
+	$\sigma\circ\rho=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$\\
+	
+	Da $\supp(\rho)\cap \supp(\sigma)=\emptyset$ gilt und somit $x$ nicht von beiden Permutationen verändert wird. Da Permutationen bijektiv nach Definition sind, ist dies wohldefiniert.
+	\item Nach (i) gilt, dass $\rho\circ\sigma=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$ gilt.\\
+	
+	Also muss $\rho(x)=x$ gelten, da $\rho\circ\sigma$ gilt, analog $\sigma(x)=x$. Also folgt $\rho=\sigma=\id$.
+\end{enumerate}
+%sub end
+
+\subsection*{Zettel 3}
+\label{sub:zettel_3}
+
+
+
+
+
+
+
+
+
+
 \printindex
 \listoffigures
 \end{document}
