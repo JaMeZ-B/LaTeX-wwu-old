@@ -522,6 +522,231 @@ Benutze Atlas $\set{\enbrace{U_1=\set[(x,0)]{x\in \mathds{R}},\id},\enbrace{U_2=
 %subsubsection 124(end)
 
 % subsection 12(end)
+
+\subsection{Glatte Abbildung}
+\label{sub:13}
+
+\subsubsection[Definition: Glatte Funktionen zwischen zwei Mannigfaltigkeiten]{Definition}
+\label{ssub:131}
+
+Seien $M^n$, $N^m$ zwei Mannigfaltigkeiten und sei $f:M^n\to N^m$ eine stetige Abbildung. Dann heißt $f$ glatt, falls für alle $x$ Karten $\enbrace{U,\varphi} \subset M$ und $\enbrace{V,\psi} \subset N$ um $x$ beziehungsweise $f^{-1}(x)$ existieren mit $f(U)\subset V$ und 
+\[
+	\psi \circ f \circ \varphi^{-1}:\ \underset{\subset \mathds{R}^n}{\varphi(U)} \to \underset{\subset \mathds{R}^n}{\psi(V)}
+\]
+glatt ist. ("$f$ in Karten gelesen ist glatt")
+\missingfigure{Veranschaulichung der glatten Funktionen}
+Wir schreiben $C^{\infty}(M,N) = \set[f:M\to N]{f\ \text{glatt}}$ und als Spezialfall $C^{\infty}(M) = C^{\infty}(M,\mathds{R})$.
+% subsubsection 131(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:132}
+Glattheit ist unabhängig von der Wahl der Karten! ($\leadsto$ Diffeomorphismusbedingung!)
+% subsubsection 132(end)
+
+\subsubsection{Definition}
+\label{ssub:133}
+\begin{enumerate}[(i)]
+\item Eine glatte Abbildung $f:M\to N$ heißt Submersion/Immersion/étale, falls für ein Paar (und damit alle Karten) $\psi \circ f \circ \varphi^{-1}$ eine Submersion/Immersion/étale ist.
+\item $f$ ist Diffeomorphismus zwischen $M$ und $N$ ($M$ und $N$ sind "diffeomorph"), falls $f$ bijektiv ist und $f$ sowie $f^{-1}$ glatt ist.
+\item $f:M\to N$ heißt Einbettung, falls $f$ Immersion und Homöomorphismus auf sein Bild ist.
+\end{enumerate}
+% subsubsection 133(end)
+
+\subsubsection{Beispiele}
+\label{ssub:134}
+\begin{enumerate}[(i)]
+\item Wenn $M$ eine Untermannigfaltigkeit des $\mathds{R}^{n+k}$, $f:\mathds{R}^{n+k}\to \mathds{R}^m$ glatte Funktion, dann ist auch $f\vert_M$ glatt.
+\begin{itemize}
+\item $\set{\mathds{R}^n,\id}$, $\set{\mathds{R}^m,\id}$ $\Rightarrow\ f:\mathds{R}^n\to \mathds{R}^m$ glatt im Sinne von Definition $\ref{ssub:131}$ $\Leftrightarrow$ glatt im üblichen Sinne
+\item $x\in M$, Karte um $x$: $\varphi: U\subset \mathds{R}^{n+k} \underset{\text{Diffeo.}}{\to} V = \varphi(U)\subset \mathds{R}^{n+k}$ mit $\varphi(U\cap M) = U\cap (\mathds{R}^n\times \set{0})$ (aus $\ref{ssub:119}$), so gilt
+\[
+f\circ \varphi^{-1}: V\cap (\mathds{R}^n\times \set{0}) \overset{\varphi^{-1} \vert_{V\cap (\mathds{R}^n\times \set{0})}\in C^{\infty}(\mathds{R}^n,\mathds{R}^{n+k})}{\to} M\cap U \overset{f \in C^{\infty}(\mathds{R}^{n+k},\mathds{R}^m)}{\to} \mathds{R}^m
+\]
+Somit folgt, dass $f\vert_M$ glatt ist. 
+\missingfigure{Veranschaulichung von f}
+\end{itemize}
+\item $S^2$ ist diffeomorph zu $\mathds{C}\mathds{P}^1 = \set{\text{Ursprungsgeraden in}\ \mathds{C}^2} = \nicefrac{\mathds{C}\backslash \set{0}}{\mathds{C}^*}$. Definiere 
+\[
+f: S^2\subset \mathds{R}^3 \to \mathds{C}\mathds{P}^1,\ \enbrace{x,y,z} \mapsto
+\begin{cases}
+z\neq -1:\ [\frac{x+iy}{1+z}:1]\\
+z = -1:\ [1:0]
+\end{cases}
+\]
+Somit folgt
+\begin{enumerate}[(1)]
+\item $f$ ist bijektiv
+\item Wir "lesen nun in Karten"(, wobei $U_1 = \set[ z_1:z_2 ]{z_2\neq 0} \overset{\psi_2}{\to} \frac{z_1}{z_2}$:
+\[
+\psi \circ f \circ \varphi_S^{-1}(x,y) = \underset{\in U_1}{\psi_2 [x+iy:1]} = x + iy \underset{\mathds{C} \simeq \mathds{R}}{=} (x,y)
+\]
+Also ist $\psi \circ f \circ \varphi_S^{-1} = \id$ und somit $f \vert_{S^2\backslash\set{S}}$ ist $C^{\infty}$ und $f^{-1}$ auch $C^{\infty}$. Nun brauchen wie nur noch eine Karte um S!. Zum Beispiel $\varphi_N$. Hier $\varphi_N(S) = (0,0)$. Es gilt:
+\[
+	f\circ \varphi_N^{-1}(x,y) = 
+	\begin{cases}
+		(x,y) \neq (0,0): [\varphi_S \circ \varphi_N^{-1}(x,y):1 \overset{\mathds{C} \simeq \mathds{R}}{=} [\frac{x+iy}{x^2+y^2}:1] \in U_0]\\
+	[1:0] \in U_0 
+	\end{cases}
+\]
+Somit folgt:
+\[
+	\psi_1 \circ f \circ \varphi_N^{-1}(x,y) =
+	\begin{cases}
+		\frac{x^2+y^2}{x+iy} = x-iy\\
+		0
+	\end{cases}
+	= (x,-y)\ \text{glatt}
+\]
+\end{enumerate}
+\end{enumerate}
+% subsubsection 134(end)
+
+\subsubsection{Definition}
+\label{ssub:135}
+\begin{enumerate}[(i)]
+	\item Eine Mannigfaltigkeit erfüllt das zweite Abzählbarkeitsaxiom, falls es einen abzählbaren Atlas besitzt.
+	\item Sein $M^n$ eine Mannigfaltigkeit. Eine Familie $\set{f_i:M\to \mathds{R}}$ glatter Funktionen heißt \Index{Zerlegung der Eins}, falls
+	\begin{itemize}
+		\item $\supp f_i = \overline{\set[x\in M]{f_i(x) \neq 0}}$ "Träger von $f_i$" sind kompakt und bilden "lokal endliche Familie" (das heißt, sei $K\subset M$ kompakt, so gilt $\supp f_i \cap K = \emptyset$ außer für endlich viele $i\in I$)
+		\item $\forall x \sum_{i\in I} f_i(x) = 1$ (wohldefiniert, also $\sum$ endlich, da lokal endlich)
+	\end{itemize}
+\end{enumerate}
+% subsubsection 135(end)
+
+\subsubsection{Theorem}
+\label{ssub:136}
+Sei $\set{U_i}_{i\in I}$ eine Überdeckung von $M$. Ist $M$ zweifach abzählbar, so existiert eine Zerlegung der Eins, die $\mathcal{U}$ untergeordnet ist, das heißt $\supp f_i \subset U_i$. Dies ist nützlich um beliebig definierte Objekte zu globalen Objekten zu verkleben.
+\missingfigure{Untergeordnete Zerlegung der Eins}
+% subsubsection 136(end)
+
+\subsubsection{Whitney Theorem}
+\label{ssub:137}
+Sei $M^n$ eine zweifach abzählbare Mannigfaltigkeit. Dann existiert eine Einbettung $f:M^n\to \mathds{R}^2n$ von M (bzw. Immersion $f:M^n\to \mathds{R}^{2n-1}$) als Untermannigfaltigkeit von $\mathds{R}^{2n}$ (bzw. $\mathds{R}^{2n-1}$)
+% subsubsection 137(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:138}
+\begin{enumerate}[(i)]
+\item Können jede "abstrakte" Mannigfaltigkit $M^n$ als eine Untermannigfaltigkeit des $\mathds{R}^{2n-1}$ realisieren.
+\minisec{Aber}
+Die Einbettung ist nicht kanonisch (oder "natürlich"), das heißt gewisse Eigenschaften der Untermannigfaltigkeit entstehen durch die Einbettung und sind keine intrinsische Einbettung von $M$!
+\item Die Dimension $2n-1$ des Bildraumes ist optimal im folgenden Sinne
+\[
+\exists\ \text{Mannigfaltigkeit}\ M^n,\ \text{die sich nicht in}\ \mathds{R}^N\ \text{mit}\ N<2n-1\ \text{einbetten lassen.}
+\]
+\end{enumerate}
+\minisec{Beweisskizze}
+Wir nehmen an, das die Mannigfaltigkeit $M$ kompakt ist. So folgt mit \ref{ssub:135}, das ein endlicher Atlas $\set{\enbrace{U_i,\varphi_i : U_i \to \Omega_i\subset \mathds{R}^n}}_{i=1}^n$ mit untergeordneter Zerlegung der Eins $\set{f_i:M\to \mathds{R}}_{i=1}^n,\ \supp f_i \subset U_i$ existiert. Definiere $\psi_i:M\to \mathds{R}^n$ durch $\psi_i(x) = \varphi_i(x)f_i(x)$, so folgt $\psi_i(x) \equiv 0$ für $x\in U_i^c$ und $\psi_i$ ist glatt. Dann definiert $\psi: M\to \mathds{R}^{nr+r},\ \psi(x)=\enbrace{\psi_1(x),\ldots,\psi_r(x),f_1(x),\ldots,f_r(x)}$ eine Einbettung.\\
+Von jetzt an ist $M^n$ stets eine glatte zweifach abzählbare Mannigfaltigkeit.
+% subsubsection 138(end)
+
+% subsection 14(end)
+
+\subsection{Das Tangentialbündel einer Untermannigfaltigkeit}
+\label{sub:14}
+
+\subsubsection{Definition}
+\label{ssub:141}
+Sei $M^n\subset \mathds{R}^{n+k}$ eine $n$-dimensionale Untermannigfaltigkeit. Sei $x\in M$. $v\in \mathds{R}^{n+k}$ ist tangential an $M$ in $x$, falls eine $C^{\infty}$-Abbildung $c: 0\in I\subset \mathds{R} \to \mathds{R}^{n+k}$ existiert mit
+\begin{itemize}
+\item $c(I)\subset M$
+\item $c(0) = x$
+\item $c'(t) = v$
+\end{itemize}
+\minisec{Notation}
+$T_x M^n = $ Menge der Tangentialvektoren $v$ in $x$.
+% subsubsection 141(end)
+
+\subsubsection[Satz: Vektorraumstruktur des Tangentialraumes]{Satz}
+\label{ssub:142}
+$T_x M^n$ ist ein $n$-dim Vektorraum$\vert_{\mathds{R}}$ ($\cong \mathds{R}^n$)
+\minisec{Beweis}
+Sei $M$ eine Untermannigfaltigkeit, $x\in M$, so existiert Umgebung $U\subset \mathds{R}^{n+k}$ offen, $\varphi:U\to V\subset \mathds{R}^{n+k}$ diffeomorph mit $\varphi(U\cap M) = V\cap(\mathds{R}^n\times \set{0})$. Sei $c: I\to \mathds{R}^{n+k}$ ein Weg mit $c(I)\subset M\cap U$, so ist $\varphi \circ c$ ein Weg im $V\cap(\mathds{R}^n\times \set{0})$. Es folgt, dass $T_x M \cong \mathd_{\varphi(x)} \varphi^{-1}(\mathds{R}^n\times \set{0})$, das heißt $T_x M$ übernimmt die Vektorraumstruktur von $\mathds{R}^n \times \set{0}$ 
+\missingfigure{Beispiel eines Tangentialraumes am $S^2$}
+% subsubsection 142
+
+\subsubsection{Satz}
+\label{ssub:142}
+Sei $M^n\subset \mathds{R}^{n+k}$ eine Untermannigfaltigkeit der Dimension $n$, $x\in M$ und $U\subset \mathds{R}^{n+k}$ offene Umgebung um $x$.
+\begin{enumerate}[(i)]
+\item $U\cap M = f^{-1}(0)$ für $f:\mathds{R}^{n+k} \to \mathds{R}^k$ eine Submersion, so ist $T_x M^n = \ker \mathd_x f$.\\
+Sei zum Beispiel $M = S^2$. So ist $f(x,y,z)=x^2+y^2+z^2-1$ eine Submersion mit $S^2 = f^{-1}(0)$. Betrachte nun den Tangentialraum am Nordpol $N$. Es gilt $\mathd_N f = (0,0,z): \mathds{R}^3 \to \mathds{R}$, also gilt für den Tangentialraum: 
+\[
+T_N S^2 = \ker \mathd_N f = \set{
+\begin{pmatrix}
+x\\
+y\\
+0
+\end{pmatrix}
+\in \mathds{R}^3}
+\]
+\item Sei $\varphi: U\to V\subset \mathds{R}^{n+k}$ ein Diffeomorphismus mit $\varphi(U\cap M) = V\cap (\mathds{R}^n \times \set{0})$, dann ist $T_x M = \mathd_{\varphi(x)} \varphi^{-1}(\mathds{R}^n \times \set{0})$
+\item Ist $\enbrace{\Omega,g}$ eine Parametrisierung von $U\cap M$, so ist der Tangentialraum $T_{g(y)} M = \mathd_y g(\mathds{R}^n)$
+\end{enumerate} 
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+\item Sei $v\in T_x M$, das heißt $v = c^(0),\ c(0) = x$. So gilt $f\circ c(t) = 0$, da $c(t)\subset M\cap U = f^{-1}(0)$. Somit folgt mit der Kettenregel, das $\mathd_{c(0)} f \circ c'(0) = \mathd_x f(v) = 0$. Also ist $v\in \ker d_x f$ und es gilt $T_x M \subset \ker d_x f$. Da $T_x M$ und $\ker \mathd_x f$ $n$-dimensional, folgt somit die Gleichheit.
+\item Siehe \ref{ssub:142}
+\item Sei $\tilde{c}\subset \Omega$ eine Kurve, $c := g\circ \tilde{c}$ Kurve durch $c(0) = g\enbrace*{\tilde{c}(0)}\in M$. So ist $c'(0) = d_{\tilde{c}(0)} g(\tilde{c'(0)})\in T_{c(0)} M$. Also gilt $d_y g(\mathds{R}^n) \subset T_{g(y)} M$ und die Gleichheit folgt wie in (i) durch die Dimension.
+\end{enumerate}
+% subsubsection 142(end)
+% subsection 14(end)
+
+
+\subsection{Das Tangentialbündel einer abstrakten Mannigfaltigkeit}
+\label{sub:15}
+
+\subsubsection{Definition}
+\label{ssub:151}
+Sei $M^n$ eine abstrakte Mannigfaltigkeit, $x\in M$. Ein \Index{Tangentialvektor} von $M$ in $x$ ist eine Äquivalenzklasse von Kurven $\alpha : I\to M$ mit $\alpha(0) = x$. Dabei heißen $\alpha:I\to M$ und $\beta:J\to M$ äquivalent, falls eine Karte $(U,\varphi)$ um $x$ existiert mit
+\[
+\enbrace{\varphi \circ \alpha}'(0) = \enbrace{\varphi \circ \beta}'(0)
+\]
+\missingfigure{Veranschaulichung der Definition}
+\minisec{Notation}
+$T_x M =$ Raum der Tangentialvektoren
+% subsubsection 151(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:152}
+\begin{enumerate}[(i)]
+\item Gilt die oben genannte Äquivalenzbedingung für eine Karte,dann gilt sie für alle.
+\minisec{Beweis}
+Sei $\enbrace{V,\psi}$ eine andere Karte. Es gilt
+\begin{align*}
+\enbrace{\psi \circ \alpha}'(0) =& \enbrace{\psi \circ \varphi^{-1} \varphi \circ \alpha}'(0)\\
+=& \mathd_{\varphi(\alpha(0))} (\psi \circ \varphi^{-1})\enbrace[\big]{(\varphi \circ \alpha)'(0)}\\
+=& \mathd_{\varphi(\beta(0))} (\psi \circ \varphi^{-1})\enbrace[\big]{(\varphi \circ \beta)'(0)} = \enbrace{\psi \circ \beta}'(0)
+\end{align*}
+\item $T_x M$ ist $n$-dimensionaler Vektorraum$\vert_{\mathds{R}}$.
+\minisec{Beweis}
+Sei $\enbrace{U,\varphi}$ eine Karte um $x$. Sei $\Gamma_{(U,\varphi,x)}: T_x M\to \mathds{R}^n$, $\underset{\in T_x M}{[\alpha]} \mapsto (\varphi \circ \alpha)' (0)$. Aus der Äquivalenzrelation folgt, das $\Gamma$ wohldefiniert und bijektiv. Also können wir die Vektorraumstruktur auf $T_x M$ durch $\Gamma_{(U,\varphi,x)}$ erklären. Dies ist wohldefiniert, da $\mathd_{\varphi(x)} (\psi \circ \varphi^{-1})$ für jede weitere Karte $(V,\psi)$ um $x$ ein linearer Isomorphismus ist. (Da $\psi \circ \varphi^{-1}$ Diffeomorphismus.) 
+\end{enumerate}
+% subsubsection 152(end)
+
+\subsubsection{Definiiton}
+\label{ssub:153}
+Sei $M$ eine Mannigfaltigkeit, $x\in M$, $(U,\varphi)$ und $(V,\psi)$ zwei Karten um $x$. Seien $u,v\in \mathds{R}^n$. Als Äquivalenzrelation ist definiert:
+\[
+u \sim v \overset{\text{Def.}}{\Leftrightarrow} v = \mathd_{\varphi(x)}(\psi \circ \varphi^{-1})(u)
+\]
+Ein \Index{Tangentialvektor} in $x$ auf $M$ ist eine solche Äquivalenzklasse $[(U,\varphi,u)]$
+\missingfigure{}
+% subsubsection 153(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:154}
+Sei $x\in M$, $(U,\varphi)$ Karte um $x$. So ist
+\[
+\Theta_{(U,\varphi,x)}: \underset{\in \varphi(x) + \mathds{R}^n}{u} \to [(U,\varphi,u)]\in T_x M
+\]
+eine Bijektion, die wohldefiniert $\text{VR}\vert_{\mathds{R}^n}$ auf $T_x M$ induziert.
+% subsubsection 154(end)
+
+\subsubsection{Definition}
+\label{ssub:155}
+$TM := \bigcap_{x\in M} T_x M$ ist das \Index{Tangentialbündel} von $M$.
+
 % section 1 (end)
 
 
