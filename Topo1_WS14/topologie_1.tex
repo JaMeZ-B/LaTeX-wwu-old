@@ -1117,9 +1117,105 @@ Es folgt
 
 \subsection{Bemerkung} % (fold)
 \label{sub:511}
-Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex.
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Sei $\sigma= \set{v_o, \ldots , v_n} \in \Sigma_n $ ein $n$-Simplex von $K$ mit $v_0 < v_1 < \ldots < v_n$. Wir
+ordnen $\sigma$ den singulären $n$-Simplex $f_\sigma : \abs*{\Delta^n} \to \abs*{\Delta^\sigma} \subseteq \abs*{K}$ zu, wobei
+\begin{align*}
+	f_\sigma \enbrace*{\sum_{i=0}^{n} t_i e_i} = \sum_{i=0}^{n} t_i v_i. 
+\end{align*}
+Nun erhalten wir eine Abbildung 
+\[
+	C_*(K;R) \to C_*(\abs*{K},R) \quad , \qquad   \sum_{\sigma \in \Sigma_n} r_\sigma \cdot \sigma \longmapsto \sum_{\sigma \in \Sigma_n} r_\sigma \cdot f_\sigma.
+\]
+Diese Abbildung induziert(!) eine weitere Abbildung $H_*(K;R) \xrightarrow{\cong} H_*(\abs*{K};R )$ von der wir später zeigen werden, dass sie ein Isomorphismus ist.
 % subsection 511 (end)
 % section 5 (end)
+\newpage
+
+\section{Funktorialität} % (fold)
+\label{sec:6}
+
+\subsection[Definition: $R$-Kettenabbildung]{Definition} % (fold)
+\label{sub:61}
+Seien $(C_*,d_*)$ und $(C_*',d_*')$ zwei $R$-Kettenkomplexe. Eine \bet{$\mathbf{R}$-Kettenabbildung}\index{R-Kettenabbildung@$R$-Kettenabbildung}
+$f_* : (C_*,d_*) \to (C_*',d_*')$ ist eine Folge von $R$-linearen Abbildungen $f_n : C_n \to C_n'$, sodass
+\[
+	d_n' \circ f_n = f_{n-1} \circ d_n
+\]
+für alle $n\ge 1$ ist.
+\[
+	\begin{tikzcd}
+		C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"] \dar["f_1", Firebrick3] & C_2 \lar["d_2"] \dar["f_2", Firebrick3]& C_3 \lar["d_3"] \dar["f_3", Firebrick3]& \ldots \lar \\
+		C_0' & C_1' \lar["d_1'"] & C_2' \lar["d_2'"]& C_3' \lar["d_3'"]& \ldots \lar
+	\end{tikzcd}
+\]
+% subsection 61 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:62}
+Ist $f_* : (C_*,d_*) \to (C_*'.d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung $H_n(f_*) : H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
+\[
+	H_n(f_*) \enbrace*{[v]} := \benbrace*{f_n(v)}  
+\]
+für $v \in \ker d_n$, denn:
+\begin{itemize}
+	\item $d_n' \enbrace*{f_n(v)} = f_{n-1} \enbrace*{d_n(v)} = 0 $, also $f_n(v) \in \ker d_n'$ für $v \in \ker d_n$.
+	\item Ist $[v]=[w]$, mit $v,w \in\ker d_n$, so gibt es $x \in C_{n+1}$ mit $d_{n+1}(x)=v-w$. Dann ist 
+	\[
+		d_{n+1}'\enbrace[\big]{f_{n+1}(x)} = f_n \enbrace*{d_{n+1}(x)} = f_n(v)- f_n(w) 
+	\]
+	also $\benbrace*{f_n(v)} = \benbrace*{f_n(w)} \in H_n(C_*',d_*')$.
+\end{itemize}
+% subsection 62 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:63}
+\begin{enumerate}[a)]
+	\item $R$-Kettenkomplexe mit Kettenabbildungen bilden die Kategorie $R\text{-}\mathrm{KETTEN}$.
+	\item Homologie definiert nun einen Funktor: $H_n : R\text{-}\mathrm{KETTEN} \to R\text{-}\MOD$.
+	
+	Es gilt $H_n(\id_{(C_*,d_*)}) = \id_{H_n(C_*,d_*)}$ und $H_n(f \circ g) = H_n(f) \circ H_n(g)$, da
+	\[
+		H_n(f \circ g) \enbrace*{[v]} = \benbrace*{f_n \circ g_n(v)} = \benbrace*{f_n \enbrace[\big]{g_n(v)} } = H_n(f) \benbrace*{g_n(v)} = H_n(f) \enbrace[\big]{H_n(g)(v)}     
+	\]
+	\item Definiert man die Kategorie der \Index{graduierten} $R$-Moduln als die Kategorie deren  Objekte Folgen $(V_n)_n$ von $\mathds{R}$-Moduln sind und deren
+	Morphismen Folgen von $R$-linearen Abbildungen $(f_n)_{n}$ sind, so kann man die $H_n$, $n \in \mathds{N}$ zu einem Funktor
+	\[
+		H_* : R\text{-}\mathrm{KETTEN} \longrightarrow \mathrm{GR}\text{-}R\text{-}\MOD \quad , \qquad (C_*,d_*) \longmapsto \enbrace[\big]{H_n(C_*,d_*)}_n 
+	\]
+	zusammensetzen.
+\end{enumerate}
+% subsection 63 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:64}
+Sei $f : X \to Y$ stetig. Wir definieren $C_n(f;R) : C_n(X;R) \to C_n(Y;R)$ durch
+\[
+	C_n(f;R) \enbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot  \sigma} := \smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot \enbrace*{f \circ \sigma} 
+\]
+(Für $\sigma \in S_n(X)$ ist $f \circ \sigma \in S_n(Y)$.)
+% subsection 64 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:65}
+Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$ zu einem Funktor
+\[
+	C_*(-;R) : \TOP \to R\text{-}\textsc{Ketten}
+\]
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item $C_*(f;R)$ ist eine $R$-Kettenabbildung:
+	\begin{align*}
+		C_{n-1}(f;R) \circ \partial_n \enbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot  \sigma} &= C_{n-1}(f;R) \enbrace*{\sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j
+		r_\sigma (\delta_j \sigma)} \\
+		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace*{f_{n-1} \circ (\delta_j \sigma)} \\
+		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace*{f_{n-1} \circ (\sigma \circ \iota_{n,j})} \\
+		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace*{(f_{n-1} \circ \sigma) \circ \iota_{n,j}} \\
+		&= \sum_{j=0}^{n} (-1)^j \enbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \underbrace{\enbrace*{f_{n-1} \circ \sigma} \circ \iota_{n,j}}_{\delta_j (f \circ \sigma)} } \\
+		&= \partial_n \circ C_n \enbrace*{f;R}(\sigma) 
+	\end{align*}
+\end{enumerate}
+% subsection 65 (end)
+% section 6 (end)
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
