@@ -1035,7 +1035,7 @@ Für $R=\mathds{Z}$ schreiben wir kürzer $C_*(X) := C_*(X;\mathds{Z})$ und $H_n
 Jeder $n$-Zykel $\sigma \in C_n(X;R)$ bestimmt eine \Index{Homologieklasse} $[\sigma] := \sigma + \im \partial_{n+1} \in H_n(X;R)$. 
 % subsection 58 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel: Die Homologie des Ein-Punkt-Raumes]{Beispiel} % (fold)
 \label{sub:59}
 Ist $X= \set{x_0}$ der Ein-Punkt-Raum, so ist 
 \[
@@ -1045,8 +1045,8 @@ Ist $X= \set{x_0}$ der Ein-Punkt-Raum, so ist
 \end{cases} 
 \]
 \minisec{Beweis}
-Es gibt für jedes $n$ genau eine Abbildung $\sigma_n : \abs*{\Delta^n} \to \set{x_0}$ und diese ist stetig. Also $C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. Für
-alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
+Es gibt für jedes $n$ genau eine Abbildung, nämlich die konstante, $\sigma_n : \abs*{\Delta^n} \to \set{x_0}$ und diese ist stetig. Also 
+$C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. Für alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
 \[
 	\partial_n(\sigma_n) = \begin{cases}
 		0, &\text{ falls }n \text{ ungerade}\\
@@ -1055,9 +1055,10 @@ alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
 \]
 Der singuläre Kettenkomplex von $\set{x_0}$ hat also folgende Gestalt:
 \[
-	\begin{tikzcd}
+	\begin{tikzcd}[row sep=0.4em]
 		C_0 \enbrace[\big]{\set{x_0};R} & C_1 \enbrace[\big]{\set{x_0};R} \lar["0", swap] & 
-		C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] & C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap]& \cdots \lar["\cong"]
+		C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] & C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap]& \cdots \lar["\cong"] \\
+		R & R \lar["0"] & R \lar["\id"] & R \lar["0"] & 
 	\end{tikzcd}
 \]
 Es folgt
@@ -1069,7 +1070,7 @@ Es folgt
 \]
 % subsection 59 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Eigenschaften von $H_0(X)$ für $X \not= \emptyset$ und $X$ wegzusammenhängend]{Proposition} % (fold)
 \label{sub:510}
 \begin{enumerate}[1)]
 	\item Ist $X \not= \emptyset$, so ist $H_0(X) \not=0$.
@@ -1077,27 +1078,47 @@ Es folgt
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[1)]
-	\item Sei $\varepsilon : C_0(X) \to \mathds{Z}$ definiert durch $\varepsilon \enbrace*{\sum_{\sigma \in S_n(X)}r_\sigma \cdot \sigma } = \sum_\sigma r_\sigma$.
-	Dann ist $\varepsilon \circ \partial_1 : C_1(X) \to \mathds{Z}$ trivial. Daher induziert $\varepsilon$ eine Abbildung 
-	$\overline{\varepsilon} : H_0(X) \to \mathds{Z}$. Ist $\sigma : \abs*{\Delta^0} \to X$ ein singulärer $0$-Simplex, so gilt $\overline{\varepsilon}( [\sigma])=1$.
-	Daher ist $\overline{\varepsilon}$ surjektiv und $H_0(X) \not= 0$.
-	\item Sei $\sigma_0 : \abs*{\Delta^0} \to X$ ein fest gewählter singulärer $0$-Simplex (also ein Punkt in X). Definiere $i : \mathds{Z} \to C_0(X)$ durch
-	$i(n) := n \cdot \sigma$ und $\overline{i} : \mathds{Z} \to H_0(X)$ durch $\overline{i}(n) = \benbrace*{i(n)}$. Dann ist 
-	$\overline{\varepsilon}\circ\overline{i} = \id_\mathds{Z}$. Wir behaupten, dass auch $\overline{i} \circ \overline{\varepsilon}= \id_{H_0(X)}$. Dazu definieren
-	wir $s : C_0(X) \to C_1(X)$ wie folgt:
+	\item Sei $\varepsilon : C_0(X) \to \mathds{Z}$ definiert durch $\varepsilon \enbrace*{\sum_{\sigma \in S_0(X)}r_\sigma \cdot \sigma } = \sum_\sigma r_\sigma$.
+	Dann ist $\varepsilon \circ \partial_1 : C_1(X) \to \mathds{Z}$ trivial, denn für $\sigma \in S_1(X)$ ist 
+	$\varepsilon \circ \partial_1(\sigma)= \varepsilon(\delta_0 \sigma - \delta_1 \sigma) = 0$.
+	Daher induziert $\varepsilon$ eine Abbildung 
+	$\overline{\varepsilon} : H_0(X) \to \mathds{Z}$. Da $X \not= \emptyset$ ist, gibt es einen singulären $0$-Simplex $\sigma : \abs*{\Delta^0} \to X$. Für $\sigma$ gilt 
+	$\overline{\varepsilon}( [\sigma])=1$ und daher ist $\overline{\varepsilon}$ surjektiv und $H_0(X) \not= 0$.
+	\item Wir zeigen: $\overline{\varepsilon} : H_0(X) \to \mathds{Z}$ ist ein Isomorphismus, falls $X$ wegzusammenhängend ist. Dazu zeigen wir 
+	$\ker \varepsilon = \im \partial_1$. Dazu definieren wir $s : C_0(X) \to C_1(X)$ wie folgt: Sei $\sigma_0$ ein fest gewählter singulärer $0$-Simplex.
+	Zu $\sigma \in S_0(X)$ gibt es, da $X$ wegzusammenhängend ist, $s(\sigma) \in S_1(X)$ mit $\delta_0 s(\sigma)= \sigma$, $\delta_1 s(\sigma)= \sigma_0$.
+	Es gilt nun 
+	\begin{align*}
+		\partial_1 \circ s(\sigma) = \sigma - \sigma_0 = \id_{C_0(X)} - i \circ \varepsilon
+	\end{align*}
+	wobei $i : \mathds{Z} \to C_0(X)$, $n \mapsto n \cdot \sigma_0$. Ist nun $v \in \ker \varepsilon$, so folgt 
+	\[
+		\partial_1 \circ s(v)= v- i \circ \underbrace{\varepsilon(v)}_{=0} = v
+	\]
+	also $v \in \im \partial_1$. \bewende
 	
-	Zu jedem $\sigma \in C_0(X)$ wählen wir $s(\sigma) : \abs*{\Delta^1} \to X$ so, dass $\delta_0 s(\sigma) = \sigma$ und $\delta_1 s(\sigma)= \sigma_0$.
-	Dies ist möglich, da $X$ wegzusammenhängend ist: $s(\sigma)$ sei ein Weg von $\im \sigma_0$ nach $\im \sigma$. Es gilt nun
-	\[
-		\partial \circ s (\sigma) = \sigma - \sigma_0 = \sigma- i \circ \varepsilon(\sigma)
-	\]
-	für jedes $\sigma \in S_0(X)$. Damit folgt $\partial \circ s = \id_{C_0(X)} - i \circ \varepsilon$. Also ist
-	\[
-		\overline{i} \circ \overline{\varepsilon} (\sigma) = \benbrace*{i \circ \varepsilon(\sigma)} = \benbrace[\big]{\sigma - \partial \circ s(\sigma)} = [\sigma]
-	\]
-	für jedes $\sigma \in C_0(X)$. Also $\overline{\imath} \circ \overline{\varepsilon} = \id_{H_0(X)}$. \bewende
+	% Sei $\sigma_0 : \abs*{\Delta^0} \to X$ ein fest gewählter singulärer $0$-Simplex (also ein Punkt in X). Definiere $i : \mathds{Z} \to C_0(X)$ durch
+% 	$i(n) := n \cdot \sigma$ und $\overline{i} : \mathds{Z} \to H_0(X)$ durch $\overline{i}(n) = \benbrace*{i(n)}$. Dann ist
+% 	$\overline{\varepsilon}\circ\overline{i} = \id_\mathds{Z}$. Wir behaupten, dass auch $\overline{i} \circ \overline{\varepsilon}= \id_{H_0(X)}$. Dazu definieren
+% 	wir $s : C_0(X) \to C_1(X)$ wie folgt:
+%
+% 	Zu jedem $\sigma \in C_0(X)$ wählen wir $s(\sigma) : \abs*{\Delta^1} \to X$ so, dass $\delta_0 s(\sigma) = \sigma$ und $\delta_1 s(\sigma)= \sigma_0$.
+% 	Dies ist möglich, da $X$ wegzusammenhängend ist: $s(\sigma)$ sei ein Weg von $\im \sigma_0$ nach $\im \sigma$. Es gilt nun
+% 	\[
+% 		\partial \circ s (\sigma) = \sigma - \sigma_0 = \sigma- i \circ \varepsilon(\sigma)
+% 	\]
+% 	für jedes $\sigma \in S_0(X)$. Damit folgt $\partial \circ s = \id_{C_0(X)} - i \circ \varepsilon$. Also ist
+% 	\[
+% 		\overline{i} \circ \overline{\varepsilon} (\sigma) = \benbrace*{i \circ \varepsilon(\sigma)} = \benbrace[\big]{\sigma - \partial \circ s(\sigma)} = [\sigma]
+% 	\]
+% 	für jedes $\sigma \in C_0(X)$. Also $\overline{\imath} \circ \overline{\varepsilon} = \id_{H_0(X)}$. \bewende
 \end{enumerate}
 % subsection 510 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:511}
+Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex.
+% subsection 511 (end)
 % section 5 (end)
 
 \cleardoubleoddemptypage
