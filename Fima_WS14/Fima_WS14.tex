@@ -1,110 +1,4 @@
-\documentclass[a4paper, pagesize=pdftex, pdftex, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=13, BCOR=13mm]{scrartcl}
-
-\usepackage[ngerman]{babel}
-\usepackage{scrtime} % Bestandteil von KOMA-Skript, ermoeglicht Zugriff auf Uhrzeit des Kompilierens 
-\usepackage{scrpage2} % ermöglicht Bearbeiten von Kopf- und Fusszeilen (wie fancyhdr, nur optimiert auf KOMA-Skript, leich andere Syntax)
-\usepackage[utf8]{inputenc} % Gibt an in welcher Textcodierung der Code verstandne werden soll
-\usepackage{etex} % sehr technisch, ermöglicht LaTeX mehr Speicher zu belegen
-\usepackage[T1]{fontenc} % auch sehr technisch; ist wichtig, um die Schriftarten richtig zu behandeln
-\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
-\usepackage{amsmath} % Packet der American Mathematical Society, das viele Mathematik-Umgebungen und -Befehle definiert
-\usepackage{amssymb} %zusätzliche Symbole
-\usepackage{latexsym} % nochmal zusätzliche Symbole
-\usepackage{stmaryrd} % nochmal mehr zusätzliche Symbole, u.a. Blitz für Widerspruchsbeweise ;)
-\usepackage{nicefrac} % schräge Brüche, benutzte ich für Quotienvektorräume
-\usepackage{paralist} % redefiniert alle Listenbefehle, sodass diese einen optionalen Parameter haben, der die Nummerierung angibt
-\usepackage{dsfont} % Schriftart für N,Z,Q,R die ich momentan benutze (mittels \mathds{R} z.B)
-\usepackage[pdftex]{graphicx} % Packet, dass das Einbinden von Grafiken aus Dateien ermöglicht
-\usepackage{makeidx}% ermöglicht das automatische Anlegen eines Index 
-\usepackage{extarrows}
-\usepackage{bbold} %indikatorfkt
-\usepackage{mathtools}
-
-\flushbottom
-\usepackage[normalem]{ulem}
-\setlength{\ULdepth}{1.8pt}
-
-%--Indexverarbeitung
-\newcommand{\bet}[1]{\uline{\textbf{#1}}} %Betonung von Text
-\newcommand{\Index}[1]{\uline{\textbf{#1}}\index{#1}} % Befehl, der gleichzeitg das Argument hervorhebt und in den Index mitaufnimmt
-\makeindex % startet das automatische Sammeln der Index-Einträge
-% Ein kleiner Text am Anfang des Index
-\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar!} \par \bigskip}
-\renewcommand{\indexpagestyle}{scrheadings} % Seitenstil für den Index festlegen
-
-%--Farbdefinitionen
-\usepackage[usenames, table, x11names]{xcolor} %usenames und x11names, aktivieren viele Farben; siehe Dokumentation von xcolor
-% Es lassen sich natürlich auch eigene Farben definieren (hier nur Graustufen)
-\definecolor{dark_gray}{gray}{0.45}
-\definecolor{light_gray}{gray}{0.7}
-
-%--Zum Zeichnen (ich habe es jetzt mal mit aufgenommen, aber es ist eigentlich nochmal ein ganz anderes Thema, sodass ich da jetzt nicht viel zu sagen werde)
-\usepackage{tikz} % TikZ steht übrigens für "TikZ ist kein Zeichenprogramm", ein rekursives Akronym ...
-\tikzset{>=latex}
-\usetikzlibrary{shapes,arrows}
-\usetikzlibrary{calc}
-\usetikzlibrary{decorations.pathreplacing}
-% Hiermit kann man ganz leicht kommutative Diagramme zeichnen (deswegen auch "cd")
-\usepackage{tikz-cd}
-
-%--Marginnote, ermöglicht es kleine Notizen an neben den eigentlichen Textkörper zu setzten
-\usepackage{marginnote}
-\renewcommand*{\marginfont}{\color{Honeydew4} \footnotesize }
-
-%--Schriftarten
-\usepackage{lmodern} % neuere Version der Standard-LaTeX-Schriftarten
-\renewcommand{\familydefault}{\sfdefault} %Standardschriftart auf die serifenlose Schriftart setzen
-
-%--Hyperref; aktiviert Hyperlinks in der erzeugten PDF-Datei und definiert deren Aussehen
-\usepackage[colorlinks, pdfpagelabels, pdfstartview=FitH, bookmarksopen=true, bookmarksnumbered=true,linkcolor=black,urlcolor=SkyBlue2, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true]{hyperref}
-
-%--Römische Zahlen
-\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
-
-
-
-%-- Definitionen von weiteren Mathe-Befehlen, die dann das "richtige" Aussehen haben. Hier sind der Phantasie keine Grenzen gesetzt
-\DeclareMathOperator{\id}{id} %identische Abbildung
-\DeclareMathOperator{\End}{End} %Endomorphismen
-\DeclareMathOperator{\rg}{rg} %Rang
-\DeclareMathOperator{\diam}{diam} %Durchmesser
-\DeclareMathOperator{\dist}{dist} %Distanz
-\DeclareMathOperator{\grad}{grad} %Gradient
-\DeclareMathOperator{\rot}{rot} %Rotation
-\DeclareMathOperator{\hess}{Hess} %Hesse-Matrix
-
-
-%--Skalarprodukt (cooler Befehl, den ich im Internet gefunden habe; benutzt TeX-Befehle)
-\makeatletter
-\newcommand{\sprod}[2]{\ensuremath{%
-  \setbox0=\hbox{\ensuremath{#2}}
-  \dimen@\ht0
-  \advance\dimen@ by \dp0
-  \left\langle \left.#1 \,\rule[-\dp0]{0pt}{\dimen@}\right|#2\right\rangle}}
-\makeatother
-
-%--Norm (auch aus dem Internet, wird auch auf der Beispielseite verwandt)
-\newcommand{\norm}[2][\relax]{
-\ifx#1\relax \ensuremath{\left\Vert#2\right\Vert}
-\else \ensuremath{\left\Vert#2\right\Vert_{#1}}
-\fi}
-
-
-%--selbstgeschriebenen Befehle
-%--Betrag
-\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
-
-%--Umklammern mit passender Größe der Klammern
-\newcommand{\enbrace}[1]{\ensuremath{\left( #1\right)}}
-
-%--Mengen
-\newcommand{\penbrace}[1]{\ensuremath{\left\{#1\right\}}}
-
-%--Differential
-\newcommand{\diff}[2]{\ensuremath{\frac{\partial #1}{\partial #2} }}
-
-\newcommand{\zz}{$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$} % zu zeigen ZZ aus dem inet
-\setlength{\parindent}{0pt}%absatz nicht einrücken
+\input{Präambel.tex}
 
 
 
@@ -131,7 +25,7 @@
 \author{Tobias Wedemeier}
 \titlehead{\includegraphics[width=7cm, keepaspectratio]{Bilder/Logo_WWU_Muenster_light_gray.jpg} \hfill \includegraphics[width=6cm, keepaspectratio]{Bilder/fb10logo.jpg}}
 \title{Finanzmathematik}
-\subtitle{\includegraphics[width=9cm]{Bilder/boerse.jpg}}
+%\subtitle{\includegraphics[width=9cm]{Bilder/boerse.jpg}}
 \publishers{gelesen von \\ PD Dr. Paulsen}
 
 
@@ -1017,7 +911,7 @@ $R$ ist dann die sogenannte \Index{Swaprate} in $t$.
 	\item Ein Zahlungsstrom $Z$ ist eine Folge $(Z(n))_{n \in \mathds{N}}$ von nicht negativen reellen Zahlen, $Z(n) \mathrel{\hat=}$ Auszahlung zum Zeitpunkt $n$
 	\item Frage: Was ist der Kapitalwert, der durch den Zahlungsstrom der verursachten Zahlungsverpflichtungen entsteht?
 	\item Antwort: Summe der \Index{abdiskontierten} Zahlungen
-	\item Genauer: Für jedes $n\in N$ gibt $B(k,n)$, den Preis des $n$-Bonds zum Zeitpunkt $k$, den Wert einer in $n$ fälligen Zahlungsverpflichtung von 1\texteuro an.
+	\item Genauer: Für jedes $n\in N$ gibt $B(k,n)$, den Preis des $n$-Bonds zum Zeitpunkt $k$, den Wert einer in $n$ fälligen Zahlungsverpflichtung von 1\texteuro$~$an.
 	\item Deshalb definieren wir:\\
 	\[V_0(Z)= \sum_{n=0}^{\infty}Z(n)\cdot B(0,n) \]
 	Summe aller auf den Anfang abdiskontierten Zahlungsverpflichtungen, Kapitalwert von heute.\\Und
@@ -1099,7 +993,7 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 		\begin{equation*}
 		\begin{aligned}
 			A(k) &= M\cdot \mathbb{1}_{\{k-1<T\le k\}},~k=1,\dots,n~~~A(k)=0 \text{ sonst}\\
-			I(k) &= p\cdot \mathbb{1}_{\{t>k\}},~k=0,\dots,n-1~~~I(k)=0 \text{ sonst}\\
+			I(k) &= p\cdot \mathbb{1}_{\{T>k\}},~k=0,\dots,n-1~~~I(k)=0 \text{ sonst}\\
 			V_0(A) &= \sum_{k=1}^{n}M\cdot B(0,k) \mathbb{1}_{\{k-1<T\le k \}}\\
 			V_0(I) &= \sum_{k=0}^{n-1} p\cdot B(0,k) \mathbb{1}_{\{T>k \}}\\
 			\text{Also } \mathds{E}V_0(A) &= \sum_{k=1}^{n}M\cdot B(0,k) \mathds{P}(k-1<T\le k)\\
@@ -1190,7 +1084,7 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 		\item Einnahmen: $I(k)=p\cdot \mathbb{1}_{\{T>k\}},~~k=1,\dots,n-1$
 		\item[Bewertung:]
 		\[\mathds{E}V_0(A)= M \underbrace{v^n \mathds{P}(T>n)}_{= _mE_x}=M\cdot~_nE_x \]
-		\[\mathds{E}V_=(I)= p\cdot ä_{x:n\rceil} \]
+		\[\mathds{E}V_0(I)= p\cdot ä_{x:n\rceil} \]
 		\item Versicherung ist fair, wenn $ M~_nE_x=pä_{x:m\rceil}$
 	\end{itemize}
 	\item \Index{gemischte Versicherung} (Kapitalgebundene Lenbensvers.)\\
@@ -1314,75 +1208,7 @@ periodischen konst. Diskontfaktor $v$\\
 \pagenumbering{Alph}
 \setcounter{page}{1}
 
-\section*{Aussagen aus den Übungen}
-\addcontentsline{toc}{section}{Aussagen aus den Übungen}
-\label{sec:übungenfima}
-
-\subsection*{Zettel 1}
-\label{sub:zettel_1fima}
-\minisec{Aufgabe 1}
-\bet{Bear Spread}:\\ \index{Strategien!Bear Spread}
-long put, strike $K_2$, short put, strike $K_1<K_2$
-\begin{center}
-	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
-	\draw[->,color=black] (-1.,0.) -- (12.5,0.);
-	\foreach \x in {3.,9.}
-	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
-	\draw[->,color=black] (0.,-2.) -- (0.,5.);
-	\foreach \y in {}
-	\draw[shift={(\y,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
-	\draw (12.5, -.1) node[anchor=north west] {$S_T$};
-	\draw (.1,5.) node[anchor=north west] {Profit};
-	\draw[red] (0.,3.) -- (3.,3.) node [black,midway,below] {Bear Spread};
-	\draw[red] (3.,3.) -- (9.,-.5);
-	\draw[red] (9.,-.5) -- (12.,-.5);
-	\draw[black, style=dashed] (0.,4.3) -- (9.,-1.);
-	\draw[black,style=dashed] (9.,-1.) -- (12.,-1.) node [right] {long put};
-	\draw[black, style=dashed] (0.,-1.) -- (3.,2.5);
-	\draw[black,style=dashed] (3.,2.5) -- (12.,2.5) node [right] {short put};
-	\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (-0.01,0.) -- (-0.01,2.5) node[midway,left]{$p_1$};
-	\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (-0.01,-1.) -- (-0.01,0.) node[midway,left]{$p_2$};
-	\draw (3.,0.) node [below] {$K_1$};
-	\draw (9.,0.) node [below] {$K_2$};
-	\end{tikzpicture}
-\end{center}
-Profit: $(K_2-S_T)^+ - p_2+p_1-(K_1-S_T)^+=(K_2-K_1)+(p_1-p_2)$
-
-\minisec{Aufgabe 3}
-\Index{Exchange-Option}:\\
-Analog zur Put-Call-Parität.
-% subsection zettel 1 (end)
-
-\subsection*{Zettel 2}
-\label{sub:zettel_2fima}
-
-\minisec{Aufgabe 1}
-\bet{Eigenschaften des Put-Preises:}\\
-\begin{enumerate}[(i)]
-	\item innerer Wert: $P(S_0,T,K)\ge max\{0,K\cdot B(0,T)-S_0\}$
-	\item obere Grenze: $P(S_0,T,K)<K$
-	\item Monoton im strike: $K_1\le K_2\Rightarrow P(S_0,T,K_1)\le P(S_0,T,K_2)$
-	\item $B(0,T)(K_2-K_1)\ge P(K_2)-P(K_1)\quad \forall K_1\le K_2$
-	\item Konvexität in $K$: 
-	\[ P(K_2)\le \lambda P(K_1)+(1-\lambda)P(K_3)\quad \forall K_1<K_2<K_3\text{ mit } \lambda=\frac{K_3-K_2}{K_3-K_1} \]
-\end{enumerate}
-Beweise analog zum \hyperref[sub:call-preis]{Call-Preis}.
-
-\minisec{Aufgabe 2}
-Gelte \uline{No-Arbitrage} und \uline{keine Deflation},d.h. $0<B(0,T)<1$.\\
-Dann ist der Call-Preis monoton in der Zeit, also \[ T_1<T_2:~~C(T_1)\le C(T_2) \]
-\bet{Beweis:}\\
-folgt!
-
-\minisec{Aufgabe 4}
-\bet{Terminzinssatz}\\
-Der Kunde zahlt jedes Jahr $K \texteuro$ an die Versicherung, die dafür eine bestimmte, im voraus festgelegte Rendite $R$ zusichert. Erstelle einen geeigneten Sparplan.\\
-Annahme: Kunde zahlt immer am Jahresanfang. Die Versicherung muss heute, in $t_0$, $n\cdot K \texteuro$ anlegen um die garantierte Rendite zu gewährleisten.\\
-in $t_0$ short in Zero-Bonds: \[ K\cdot B(t_0,1), K\cdot B(t_0,2), \cdot, K\cdot B(t_0,n-1) \]
-Also zu jedem $j=1,\dots,n-1$ muss die Versicherung $K\texteuro$ an die Bank zurück zahlen, dies wird gerade durch die jährlichen Prämien der Kunden getilgt.\\
-Also hat die Versicherung am Anfang ein Kapital von $K+\sum_{j=1}^{n-1}K\cdot B(t_0,j)$ zur Verfügung. Lege dies in Zero-Bonds an mit Laufzeit $n$ Jahren an: \[ \enbrace{K\cdot \sum_{j=1}^{n-1}K\cdot B(t_0,j)}\times \text{long in n-Zero-Bonds} \]
-Daher Auszahlung bei $T=n$: \[ R=\enbrace{K\cdot \enbrace{1+\sum_{j=1}^{n-1}B(t_0,j)}}\cdot \frac{1}{B(t_0,n)} \]
-$R$ ist dann die mögliche garantierte Auszahlung.
+\input{Übungen_fima.tex}
 
 \printindex
 \listoffigures

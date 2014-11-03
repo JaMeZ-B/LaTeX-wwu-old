@@ -1,109 +1,4 @@
-\documentclass[a4paper, pagesize=pdftex, pdftex, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=13, BCOR=13mm]{scrartcl}
-
-\usepackage[ngerman]{babel}
-\usepackage{scrtime} % Bestandteil von KOMA-Skript, ermoeglicht Zugriff auf Uhrzeit des Kompilierens 
-\usepackage{scrpage2} % ermöglicht Bearbeiten von Kopf- und Fusszeilen (wie fancyhdr, nur optimiert auf KOMA-Skript, leich andere Syntax)
-\usepackage[utf8]{inputenc} % Gibt an in welcher Textcodierung der Code verstandne werden soll
-\usepackage{etex} % sehr technisch, ermöglicht LaTeX mehr Speicher zu belegen
-\usepackage[T1]{fontenc} % auch sehr technisch; ist wichtig, um die Schriftarten richtig zu behandeln
-\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
-\usepackage{amsmath} % Packet der American Mathematical Society, das viele Mathematik-Umgebungen und -Befehle definiert
-\usepackage{amssymb} %zusätzliche Symbole
-\usepackage{latexsym} % nochmal zusätzliche Symbole
-\usepackage{stmaryrd} % nochmal mehr zusätzliche Symbole, u.a. Blitz für Widerspruchsbeweise ;)
-\usepackage{nicefrac} % schräge Brüche, benutzte ich für Quotienvektorräume
-\usepackage{paralist} % redefiniert alle Listenbefehle, sodass diese einen optionalen Parameter haben, der die Nummerierung angibt
-\usepackage{dsfont} % Schriftart für N,Z,Q,R die ich momentan benutze (mittels \mathds{R} z.B)
-\usepackage[pdftex]{graphicx} % Packet, dass das Einbinden von Grafiken aus Dateien ermöglicht
-\usepackage{makeidx}% ermöglicht das automatische Anlegen eines Index 
-\usepackage{extarrows}
-\usepackage{bbold}
-\usepackage{mathtools}
-
-\flushbottom
-\usepackage[normalem]{ulem}
-\setlength{\ULdepth}{1.8pt}
-
-%--Indexverarbeitung
-\newcommand{\bet}[1]{\uline{\textbf{#1}}} %Betonung von Text
-\newcommand{\Index}[1]{\uline{\textbf{#1}}\index{#1}} % Befehl, der gleichzeitg das Argument hervorhebt und in den Index mitaufnimmt
-\makeindex % startet das automatische Sammeln der Index-Einträge
-% Ein kleiner Text am Anfang des Index
-\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar!} \par \bigskip}
-\renewcommand{\indexpagestyle}{scrheadings} % Seitenstil für den Index festlegen
-
-%--Farbdefinitionen
-\usepackage[usenames, table, x11names]{xcolor} %usenames und x11names, aktivieren viele Farben; siehe Dokumentation von xcolor
-% Es lassen sich natürlich auch eigene Farben definieren (hier nur Graustufen)
-\definecolor{dark_gray}{gray}{0.45}
-\definecolor{light_gray}{gray}{0.7}
-
-%--Zum Zeichnen (ich habe es jetzt mal mit aufgenommen, aber es ist eigentlich nochmal ein ganz anderes Thema, sodass ich da jetzt nicht viel zu sagen werde)
-\usepackage{tikz} % TikZ steht übrigens für "TikZ ist kein Zeichenprogramm", ein rekursives Akronym ...
-\tikzset{>=latex}
-\usetikzlibrary{shapes,arrows}
-\usetikzlibrary{calc}
-\usetikzlibrary{decorations.pathreplacing}
-% Hiermit kann man ganz leicht kommutative Diagramme zeichnen (deswegen auch "cd")
-\usepackage{tikz-cd}
-
-%--Marginnote, ermöglicht es kleine Notizen an neben den eigentlichen Textkörper zu setzten
-\usepackage{marginnote}
-\renewcommand*{\marginfont}{\color{Honeydew4} \footnotesize }
-
-%--Schriftarten
-\usepackage{lmodern} % neuere Version der Standard-LaTeX-Schriftarten
-\renewcommand{\familydefault}{\sfdefault} %Standardschriftart auf die serifenlose Schriftart setzen
-
-%--Hyperref; aktiviert Hyperlinks in der erzeugten PDF-Datei und definiert deren Aussehen
-\usepackage[colorlinks, pdfpagelabels, pdfstartview=FitH, bookmarksopen=true, bookmarksnumbered=true,linkcolor=black,urlcolor=SkyBlue2, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true]{hyperref}
-
-%--Römische Zahlen
-\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
-
-
-
-%-- Definitionen von weiteren Mathe-Befehlen, die dann das "richtige" Aussehen haben. Hier sind der Phantasie keine Grenzen gesetzt
-\DeclareMathOperator{\id}{id} %identische Abbildung
-\DeclareMathOperator{\End}{End} %Endomorphismen
-\DeclareMathOperator{\rg}{rg} %Rang
-\DeclareMathOperator{\diam}{diam} %Durchmesser
-\DeclareMathOperator{\dist}{dist} %Distanz
-\DeclareMathOperator{\grad}{grad} %Gradient
-\DeclareMathOperator{\rot}{rot} %Rotation
-\DeclareMathOperator{\hess}{Hess} %Hesse-Matrix
-\DeclareMathOperator{\supp}{supp}
-
-%--Skalarprodukt (cooler Befehl, den ich im Internet gefunden habe; benutzt TeX-Befehle)
-\makeatletter
-\newcommand{\sprod}[2]{\ensuremath{%
-  \setbox0=\hbox{\ensuremath{#2}}
-  \dimen@\ht0
-  \advance\dimen@ by \dp0
-  \left\langle \left.#1 \,\rule[-\dp0]{0pt}{\dimen@}\right|#2\right\rangle}}
-\makeatother
-
-%--Norm (auch aus dem Internet, wird auch auf der Beispielseite verwandt)
-\newcommand{\norm}[2][\relax]{
-\ifx#1\relax \ensuremath{\left\Vert#2\right\Vert}
-\else \ensuremath{\left\Vert#2\right\Vert_{#1}}
-\fi}
-
-
-%--selbstgeschriebenen Befehle
-%--Betrag
-\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
-
-%--Umklammern mit passender Größe der Klammern
-\newcommand{\enbrace}[1]{\ensuremath{\left( #1\right)}}
-
-%--Mengen
-\newcommand{\penbrace}[1]{\ensuremath{\left\{#1\right\}}}
-
-%--Differential
-\newcommand{\diff}[2]{\ensuremath{\frac{\partial #1}{\partial #2} }}
-
-
+\input{Präambel.tex}
 
 
 
@@ -135,10 +30,7 @@
 \subtitle{Aufarbeitung der Vorlesungsnotizen}
 \publishers{gelesen von \\ Prof. Dr. Kramer}
 
-\newcommand{\zz}{$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$} % zu zeigen ZZ aus dem inet
-\setlength{\parindent}{0pt}%absatz nicht einrücken
-\newcommand{\lh}[1]{\langle #1 \rangle} %lineare Hülle
-\newcommand{\nt}{\trianglelefteqslant} %normalteiler
+
 
 \begin{document}
 \maketitle
@@ -687,71 +579,8 @@ ist ein Isomorphismus. \qquad ("Kürzungsregel")\\
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
-\section*{Aussagen aus den Übungen}
-\addcontentsline{toc}{section}{Aussagen aus den Übungen}
-\label{sec:übungenalg}
 
-\subsection*{Zettel 1}
-\label{sub:zettel_1alg}
-\minisec{Aufage 1.2}
-Sei $G$ eine Gruppe. $A,B$ Untergruppen von $G$.\\
-\zz: Wenn $A\cup B$ eine Untergruppe ist, dann gilt: $A\subseteq B$ oder $b\subseteq A$.\\
-
-\bet{Beweis:}\\
-Annahme: $A\not\subseteq B$. Also ex. ein $a\in A\backslash B$ und $b\in B$ beliebig. Betrachte $ab\in A\cup B$, da $AB$ Untergruppe. Also ist $ab\in A$ oder $ab\in B$.\\
-Sei $ab\in B$ und $b^{-1}\in B$, da $B$ Untergruppe, folgt, dass $abb^{-1}=a\in B$. $\lightning$ zur Annahme.\\
-Also $ab\in A$ und $a^{-1}\in A$, da $A$ Untergruppe, folgt, dass $a^{-1}ab=b\in A$. Da $b$ beliebig war, folgt $B\subseteq A$.
-\hfill $\square$
-
-\minisec{Aufgabe 1.4}
-Gruppe $G$. $A,B$ Untergruppen.Wir definieren $AB:=\{ab~|~a\in A,b \in B \}$.\\
-\begin{enumerate}[(i)]
-	\item Die Menge $AB$ ist im allgemeinen keine Untergruppe.
-	\item Wenn weiter gilt $AB=BA$, dann ist $AB$ eine Untergruppe.
-\end{enumerate}
-Beweise klar! (\checkmark)
-% sub end
-
-\subsection*{Zettel 2}
-\label{sub:zettel_2lga}
-\minisec{Aufgabe 2.1}
-Eine Gruppe $G$ hat \Index{Exponent} $k$, wenn für jedes Gruppenelement $g\in G$ gilt: $g^k=e$.\\
-\zz Gruppen mit Exponent 2 sind abelsch.\\
-
-\bet{Beweis:}\\
-Aus $g^2=e$ folgt $g=g^{-1}~\forall g\in G$. $a,b\in G$ beliebig\\
-\[ ab=(ab)^{-1}\stackrel{\text{G Gruppe}}{=} b^{-1}a^{-1}=ba \]
-\hfill $\square$\\
-Anmerkung: Gruppen mit Exponenten 3 sind im allgemeinen nicht abelsch.
-
-\minisec{Aufgabe 2.3}
-Menge $X$ und $Sym(X)$. Der \Index{Träger einer Permutation} $\sigma \in Sym(X)$ ist definiert wie folgt: $\supp(\sigma):=\{x\in X~|~\sigma(x)\not=x \}$.
-\begin{enumerate}[(i)]
-	\item Wenn $\supp(\rho)\cap \supp(\sigma)=\emptyset$ für $\rho, \sigma \in Sym(X)$ gilt, dann folgt $\rho \circ \sigma=\sigma \circ \rho$.
-	\item Wenn $\supp(\rho)\cap \supp(\sigma)=\emptyset$ und $\rho \circ \sigma=\id$ für $\sigma,\rho\in Sym(X)$ gilt, dann folgt $\rho=\sigma=\id$.
-\end{enumerate}
-
-\bet{Beweis:}\\
-\begin{enumerate}[(i)]
-	\item Es gilt: $\rho\circ\sigma=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$
-	oder 
-	$\sigma\circ\rho=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$\\
-	
-	Da $\supp(\rho)\cap \supp(\sigma)=\emptyset$ gilt und somit $x$ nicht von beiden Permutationen verändert wird. Da Permutationen bijektiv nach Definition sind, ist dies wohldefiniert.
-	\item Nach (i) gilt, dass $\rho\circ\sigma=\left\{\begin{array}{cl} x, & \text{wenn } x\notin \supp(\rho),~\supp(\sigma)\\ \rho(x), & \text{wenn } x\in \supp(\rho)\\ \sigma(x), & \text{wenn } x\in \supp(\sigma) \end{array}\right.$ gilt.\\
-	
-	Also muss $\rho(x)=x$ gelten, da $\rho\circ\sigma$ gilt, analog $\sigma(x)=x$. Also folgt $\rho=\sigma=\id$.
-\end{enumerate}
-%sub end
-
-\subsection*{Zettel 3}
-\label{sub:zettel_3alg}
-
-
-
-
-
-
+\input{Übungen_Alg.tex}
 
 
 
