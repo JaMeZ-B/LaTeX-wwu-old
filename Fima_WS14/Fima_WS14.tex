@@ -346,7 +346,7 @@ Durch Kombination von einfachen Positionen bildet man \Index{Strategien}.
 	\item Profit: \\
 	\begin{equation*}
 	\begin{aligned}
-		S_T + (K-S_T)^+ -(K+p) = (S_T-K) + (K - S_T)^+ - p = -p_{\{S_T \le K\}} + (S_T- (K+p))_{\{S_T>K\}}
+		S_T + (K-S_T)^+ -(K+p) = (S_T-K) + (K - S_T)^+ - p = -p\mathbb{1}_{\{S_T \le K\}} + (S_T- (K+p))\mathbb{1}_{\{S_T>K\}}
 	\end{aligned}
 	\end{equation*}
 	
@@ -408,7 +408,7 @@ Idee: Risikoarme Spekulation auf ein Anziehen des Kurses \\
 	& mit strike $K_1$ & mit strike $K_2 > K_1$ & \\
 	\hline
 	Kosten & $c_1$ & $-c_2$ & $c_1-c_2 >0$ \\
-	Payoff & $(S_T-K_1)^+$ & $-(S_T -K_2)^+$ & $(S_T-K_1)_{\{K_1<S_T<K_2\}}+(K_2-K_1)_{\{S_T>K_2\}}$ \\
+	Payoff & $(S_T-K_1)^+$ & $-(S_T -K_2)^+$ & $(S_T-K_1)\mathbb{1}_{\{K_1<S_T<K_2\}}+(K_2-K_1)\mathbb{1}_{\{S_T>K_2\}}$ \\
 \end{tabular}
 \marginnote{Je kleiner der strike, desto teuerer ist der call.}
 \begin{center}
@@ -445,7 +445,7 @@ strike: $K_1<K_2<K_3$ \\
 	\hline
 	Kosten & $c_1$ & $c_3$ & $-2c_2$ & $c_1+c_3-2c_2$ \\
 \end{tabular}\\
-Payoff: $(S_T-K_1)_{\{K_1<S_T<K_2\}}+(2K_2-K_1-S_T)_{\{K_2<S_T<K_3\}}+2K_2-(K_1+K_3)_{\{S_T>K_3\}}$ \\
+Payoff: $(S_T-K_1)\mathbb{1}_{\{K_1<S_T<K_2\}}+(2K_2-K_1-S_T)\mathbb{1}_{\{K_2<S_T<K_3\}}+2K_2-(K_1+K_3)\mathbb{1}_{\{S_T>K_3\}}$ \\
 Fall $K_2 = \frac{1}{2}(K_1+K_3) \Rightarrow c_1+c_3-2c_2 > 0$ \\
 \begin{center}
 	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
@@ -596,7 +596,7 @@ Recht auf Auszahlung eines festen Geldbetrags (etwa 1 \texteuro) bei Eintreten e
 \uline{z.B.}\\
 \begin{tabular}{c c}
 	digitaler call & digtialer put\\
-	$1_{\{S_T\ge K\}}$ & $1_{\{S_T\le K \}}$ \\
+	$\mathbb{1}_{\{S_T\ge K\}}$ & $\mathbb{1}_{\{S_T\le K \}}$ \\
 \end{tabular}
 
 % subsection digitale position (end)
@@ -643,7 +643,7 @@ Dann gilt:\\
 	\item Sei $K_1 \le K_2$:\\
 	Falls $C(K_1)<C(K_2)$ gehe  short in $K_2$ und long in $K_1$.\\
 	am Anfang: $C(K_2) - C(K_1) > 0$\\
-	am Ende: $(S_T-K_1)^+ -(S_T-K_2)^+ = (S_T-K_1)_{\{K_1\le S_T\le K_2\}}-(K_2-K_1)_{\{S_T>K_2\}}>0~~ \lightning_{No-Arbitrage}$
+	am Ende: $(S_T-K_1)^+ -(S_T-K_2)^+ = (S_T-K_1)\mathbb{1}_{\{K_1\le S_T\le K_2\}}-(K_2-K_1)\mathbb{1}_{\{S_T>K_2\}}>0\quad \lightning_{No-Arbitrage}$
 	\item Sei $K_1<K_2$.\\
 	Falls $C(K_1)-C(K_2)>(K_2-K_1)\cdot B(0,T)$ gehe short in $K_1$, long in $K_2$, long $(K_2-K_1)\times$ Nullkouponanleihe\\ 
 	am Anfang: $C(K_1)-C(K_2)-(K_2-K_1)\cdot B(0,T)>0$\\
@@ -655,9 +655,9 @@ Dann gilt:\\
 	\begin{equation*}
 	\begin{aligned}
 		\lambda (S_T -K_1)^+ +(1-\lambda)(S_T-K_3)^+-(S_T-K_2)^+
-		&= \lambda(S_T-K_1)_{\{K_1<S_T<K_2\}} \\
-		&+ \left[\lambda(S_T-K_1)-(S_T-K_2)\right]_{\{K_2<S_T<K_3\}} \\
-		&+ \underbrace{\left[K_2 -(\lambda K_1+(1-\lambda)K_3)\right]_{\{S_T>K_3\}}}_{=0}
+		&= \lambda(S_T-K_1)\mathbb{1}_{\{K_1<S_T<K_2\}} \\
+		&+ \left[\lambda(S_T-K_1)-(S_T-K_2)\right]\mathbb{1}_{\{K_2<S_T<K_3\}} \\
+		&+ \underbrace{\left[K_2 -(\lambda K_1+(1-\lambda)K_3)\right]\mathbb{1}_{\{S_T>K_3\}}}_{=0}
 	\end{aligned}
 	\end{equation*}
 	da 
