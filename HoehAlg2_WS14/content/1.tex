@@ -105,3 +105,110 @@
 	\end{itemize}
 \end{bsp}
 
+\begin{defn}[affine algebraische Varietät]
+	Sei $\mathfrak{a}$ ein Ideal. $Z(\mathfrak{a})$ heißt \Index{affine algebraische Varietät}, falls $Z(\mathfrak{a})$ irreduzibel ist.
+\end{defn}
+
+\subsection{Ideale}	\label{sub_1.3}
+	Sei $Y \subseteq \aff^n$\marginnote{30.10.} Teilmenge und $I(Y) = \{f \in S = k[x_1,\dots,x_n] : f(x) = 0 \text{ für alle } y \in Y\}$ das Verschwindungsideal von $Y$. Sei $T \subseteq S$ und $Z(T)$ die Nullstellenmenge von $T$.
+	
+\begin{satz}
+	\begin{enumerate}[a)]
+		\item $T_1 \subseteq T_2 \Rightarrow Z(T_1) \supseteq Z(T_2)$
+		\item $Y_1 \subseteq Y_2 \subseteq \aff^n \Rightarrow I(Y_1) \supseteq I(Y_2)$
+		\item $Y_1,Y_2 \subseteq \aff^n \Rightarrow I(Y_1 \cup Y_2) = I(Y_1) \cap I(Y_2)$
+		\item $\mathfrak{a} \subseteq S$ Ideal $\Rightarrow I(Z(\mathfrak{a})) = \sqrt{\mathfrak{a}} := \{f \in S : f^m \in \mathfrak{a} \text{ für ein } m\}$ (\Index{Radikal} von $\mathfrak{a}$) 
+		\item $Y \subseteq \aff^n, Z(I(Y)) = \overline{Y}$ Abschluss von $Y$ in Zariski-Topologie.
+	\end{enumerate}
+\end{satz}
+
+\minisec{Beweis}
+	Nur d) mit Hilberts Nullstellensatz: \\
+	$f$ verschwindet auf $Y \Leftrightarrow f^m$ verschwindet auf $Y$. $f \in I(Z(\mathfrak{a})) \xLongrightarrow{\text{Hilbert}} f^m \in \mathfrak{a}$. \qed
+
+\begin{satz}
+	\[ \begin{array}{rcl}
+	\{\text{abgeschlossene Teilmengen in } \aff^n\} & \xlongleftrightarrow{1:1} & \{\text{radikale in } \mathfrak{a} \text{ in } S, \mathfrak{a} = \sqrt{\mathfrak{a}}\} \\ 
+	 \rotatebox{90}{$\subseteq$} \qquad \phantom{a} &  & \qquad \rotatebox{90}{$\subseteq$} \\ 
+	\{\text{irreduzible Teilmengen}\} & \xlongleftrightarrow{1:1} & \{\text{Primideale in } S\} \marginnote{$p$ PI $\Rightarrow \sqrt{p} = p$}
+	\end{array}  \]
+\end{satz}
+
+\minisec{Bemerkung}
+	$p$ ist genau dann ein Primideal, wenn gilt:
+	\[ fg \in p \Rightarrow f \in p \text{ oder } g \in p\]
+	Damit gilt: $f^n \in p \Rightarrow f \in p$ oder $f^{n-1} \in p \Rightarrow \dots \Rightarrow f \in p$ \\
+	$(X^2) \subseteq k[X] \rightarrow \sqrt{(X^2)} = (X)$.
+	
+\minisec{Bemerkung}
+	Ist $f \in S$ irreduzibel, dann heißt $Z(f)$ \Index{Hyperfläche} in $\aff^n$.
+	
+\minisec{Beispiel}
+	$Q \subseteq \aff^n$ Quadrik ist eine Hyperfläche. \\
+	maximale Ideale: $(x_1-\lambda_1, \dots, x_n - \lambda_n) = \maxid = \maxid_{\underline{\lambda}}$ mit $\underline{\lambda} = (\lambda_1,\dots,\lambda_n) \in \aff^n$ \\
+	$Z(\maxid) = \{ \underline{\lambda} \}$ Einpunktmenge ist als minimale abgeschlossene nicht-lineare Teilmenge irreduzibel.
+	
+	$k = \RR \neq \overline{k}, Z(X^2+Y^2+1) = \emptyset \Rightarrow$ Theorem ist falsch, da $X^2+Y^2+1$ irreduzibel.  \\
+	Trick: $f_1,\dots,f_r \in k[\underline{x}]$, $V(f_1,\dots,f_r) = \{ (x_1,\dots,x_n) : \aff_{\overline{k}}^n : f_i(\underline{x}) = 0 \text{ für alle } i\}$
+	
+Sei $Y = Z(\mathfrak{a})$ eine algebraische Teilmenge in $\aff^n$, dann definieren wir den \Index{Koordinatenring} von $Y$:
+\[ A(Y) := "k[Y]" = S/\sqrt{\mathfrak{a}} \]
+Ist $Y$ irreduzibel oder eine algebraische Varietät, dann ist $A(Y)$ ein Integritätsbereich. Setze $K(Y) := \Quot(A(Y))$.
+
+Sei $\overline{f} \in A(Y)$, dann können wir $\overline{f}$ als Funktion $Y \rightarrow k$ auffassen, denn: \\
+Sei $f \in S, f\colon \aff^n \rightarrow k, f \big|_Y \colon Y \rightarrow k$. Wir wollen $f \big|_Y \in A(Y)$. \\
+Sei $f' \in S$ mit $f - f' \in \mathfrak{a}$, d.h. $\overline{f} = \overline{f'}$ in $A(Y) = S/\mathfrak{a}$ ($\mathfrak{a} = \sqrt{\mathfrak{a}}$, da irreduzibel) \\
+$\Rightarrow f \big|_Y = f'\big|_Y$, d.h. $\overline{f} = \overline{f'} \colon Y \rightarrow k$ Funktion, d.h. Elemente von $A(Y)$ sind Funktionen auf $Y$ mit Werten in $k$.
+
+\begin{defn}[Lokalisierung]
+	Sei $A = A(Y)$ endlich erzeugter Integritätsring über $k = \overline{k}$, z.B. $A = k[x_1,\dots,x_n]/I$ mit $I$ Primideal. \begin{enumerate}[1)]
+		\item $A_{(0)} = \Quot(A), \Quot(A(Y)) =: K(Y)$
+		\item $A_p = \penbrace*{\frac{f}{g} \in \Quot(A) : g \notin p}$ \qquad \Index{Lokalisierung} nach einem Primideal \\
+		$A_p$ und $\Quot(A)$ sind im Allgemeinen nicht endlich erzeugte Ringe
+		\item $A_f = \penbrace*{ \frac{g}{f^n} : g \in A, n \geq 0}, f \in A$ \qquad \Index{Lokalisierung} nach einem Element \marginnote{$A_f \neq A_{(f)}$ !}
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Lokaler Ring]
+	Ein Ring $A$ heißt \bet{lokal}, falls $A$ ein eindeutiges maximales Ideal besitzt. \index{lokaler Ring}
+\end{defn}
+
+\minisec{Beispiele}
+	\begin{itemize}
+		\item Sei $K$ ein Körper, dann ist $\setnull$ das einzige echte Ideal und maximal.
+		\item $pA_p = (p) \subseteq A_p$ ist maximales Ideal
+		\item $k[x]_{(x-1)} = \penbrace*{ \frac{f}{g} : g \notin (x- \lambda)} = \penbrace*{\frac{f}{g} : g(\lambda) \neq 0}$ \\
+		$(x-\lambda) = (x - \lambda) k[x]_{(x-\lambda)} = \penbrace*{ \frac{f}{g} : f(\lambda) = 0, g(\lambda) \neq 0} \subseteq k[x]_{(x-\lambda)}$ Hauptideal \\
+		Einheiten in $k[x]_{(x-\lambda)} = \penbrace*{ \frac{f}{g} : f(\lambda) \neq 0, g(\lambda) \neq 0} = k[x]_{(x-\lambda)} \setminus (x-\lambda)$
+		\item $\ZZ_3 = \penbrace*{ \frac{a}{3^i} : a\in \ZZ, i \in \ZZ_0}$ \\
+		$\ZZ_3^\times = \{ \pm 3^i : i \in \ZZ\}$
+		\item $k[x]_{x-\lambda} = \penbrace*{ \frac{g}{(x-\lambda)^i} : g \in k[x]}$ \\
+		$k[x]_{x - \lambda}^\times = \{a(x-\lambda)^i : i \in \ZZ, a \in k^\times\}$		
+	\end{itemize}
+	
+\begin{defn}[noetherscher topologischer Raum]
+	Ein topologischer Raum $X$ heißt \Index{noethersch}, falls jede absteigende Kette abgeschlossener Teilmengen $Y_1 \supseteq Y_2 \supseteq Y_3 \supseteq \dots$ stationär wird, d.h. es gibt ein $r \in \NN$, sodass $Y_r = Y_i$ für alle $i > r$.
+\end{defn}
+
+\minisec{Beispiel}
+	$\aff^n$ ist ein noetherscher topologischer Raum, weil $S$ ein noetherscher Ring ist. Sei $Y_1 \supseteq Y_2 \supseteq \supseteq \dots$ eine Kette von algebraisch abgeschlossenen Teilmengen, dann ist $I(Y_1) \subseteq I(Y_2) \subseteq \dots$ aufsteigende Kette von Idealen in $S = k[\underline{x}]$ und wird stationär, d.h. $I(Y_r) = I(Y_i)$ für $i \geq r \Rightarrow Y_r = Z(I(Y_i)) = Y_i = Z(I(Y_i))$ für alle $i \geq r$.
+	
+\begin{defn}[Dimension (topologischer Raum, algebraische Varietät)]
+	Ein topologischer Raum $X$ hat die Dimension
+	\[ \dim(X) = \sup \{r \in \ZZ_{\geq 0} : \text{ es ex. Kette } Z_0 \subsetneq Z_1 \subsetneq \dots \subsetneq Z_r \text{ von irreduziblen abgeschlossenen Teilmengen } Z_i \} \]
+	Die Dimension einer algebraischen Varietät $X$ entspricht der Dimension von $X$ als topologischer Raum bzgl. der Zariski-Topologie.
+\end{defn}	
+	
+\begin{satz}
+	In einem noetherschen topologischen Raum $X$ ist jede abgeschlossene Teilmenge $Y$ eine endliche Vereinigung $Y = Y_1 \cup \dots \cup Y_r$ von irreduziblen abgeschlossenen Teilmengen $Y_i$. Fordern wir zusätzlich $Y_i \nsubseteq Y_j$ für $i \neq j$, dann ist die Zerlegung eindeutig bis auf Umordnung.
+\end{satz}
+
+\minisec{Beweis}
+	Existenz: Sei $\mathcal{S} := \{Y \subseteq X \text{ abgeschlossen } : Y \text{ besitzt keine solche Zerlegung} \}$. \\
+	$X$ noetherscher topologischer Raum $\Rightarrow \mathcal{S}$ hat minimales Element oder ist leer. Sei $Y \in \mathcal{S}$ minimal, dann ist $Y$ nicht irreduzibel, also $Y = Y' \cup Y''$ mit $Y' \nsupseteq Y'' \nsupseteq Y'$ algebraische Teilmengen. Wegen Minimalität ist $Y', Y'' \notin \mathcal{S}$. \\
+	$\Rightarrow Y' = Y_1' \cup \dots \cup Y_r', Y'' = Y_1'' \cup \dots \cup Y_s''$ 
+	$\Rightarrow Y = Y_1' \cup \dots \cup Y_r' \cup Y_1'' \cup \dots \cup Y_r''$ \\
+	
+	Eindeutigkeit: Sei $Y = Y_1' \cup \dots \cup Y_s' = Y_1 \cup \dots \cup Y_r$ zwei Zerlegungen. Dann ist $Y_1' \subseteq Y = \bigcup_{i=1}^r Y_i$ \\
+	$\Rightarrow Y_1' = \bigcup_{i=1}^r (Y_1' \cap Y_i)$ irreduzibel $\Rightarrow Y_1' \subseteq Y_i$, o.B.d.A. $i=1$. $Y_1 \subseteq Y = \bigcup_{j=1}^s Y_j' \Rightarrow \dots \Rightarrow Y_1 \subseteq Y_j' \Rightarrow j=1.$ \\
+	$z = \overline{(Y \setminus Y_1)} = Y_2 \cup \dots \cup Y_r = Y_2' \cup \dots \cup Y_s' \xRightarrow{\text{Ind.}} r=s, Y_i = Y_i'$ \qed
