@@ -1177,6 +1177,21 @@ periodischen konst. Diskontfaktor $v$\\
 		&=~_{|n-m}A_{x+m} - p\cdot ä_{x+m:n-m\rceil}
 	\end{aligned}
 	\end{equation*}
+	\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (0.,0.) -- (5.5,0.);
+	\foreach \x in {0,5}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw (5.,0.) node[below] {$n$};
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (5,0);
+	\coordinate (a) at (2,2);
+	\coordinate (c) at (3,2);
+	\draw[cap=round]
+		(A) .. controls (a) and (c) ..(B);
+	\end{tikzpicture}
+	\captionof{figure}{Deckungskapital: Todesfall,begrenzt}
+	\end{center}
 	\item Todesfallversicherung, unbegrenzte Laufzeit
 	\begin{equation*}
 	\begin{aligned}
@@ -1185,7 +1200,232 @@ periodischen konst. Diskontfaktor $v$\\
 		& =A_{x+m} - p\cdot ä_{x+m} \qquad\qquad m=0,1,2,3,\dots \qquad p\text{ erfüllt } A_x=pä_x
 	\end{aligned}
 	\end{equation*}
+	\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (0.,0.) -- (6,0.);
+	\foreach \x in {0}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (6,0);
+	\coordinate (a) at (2,3);
+	\coordinate (c) at (3,0);
+	\draw[cap=round]
+	(A) .. controls (a) and (c) ..(B);
+	\end{tikzpicture}
+	\captionof{figure}{Deckungskapital: Todesfall, unbegrenzt}
+	\end{center}
+	\item Erlebensfallversicherung:\\
+	\begin{minipage}[c]{8cm}
+		\begin{itemize}
+			\item Eintrittsalter $x$
+			\item Laufzeit $n$
+			\item Versicherungssumme 1
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{8cm}
+		\begin{equation*}
+		\begin{aligned}
+			A(k) &= \mathbb{1}_{\{T_x>k \}} \text{ für } k=n\\
+			A(k) &= 0 \text{ sonst}\\
+			I(k) &= p\mathbb{1}_{\{T_x>k \}}\quad k=0,\dots,n-1
+		\end{aligned}
+		\end{equation*}
+	\end{minipage}
+	Deckungskapitalverlauf:
+	\begin{equation*}
+	\begin{aligned}
+		\mathcal{D}_x(m)  &= v^{n-m}\mathds{P}(T_x>n~|~T_x>n+m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_x>m+k~|~T_x>m)\\
+		\text{Stationarität }\Rightarrow &=v^{n-m}\mathds{P}(T_{x+m}>n-m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_{x+m}>k)\\
+		&= ~_{n-m}E_{x+m}-pä_{x+m:n-m\rceil}
+	\end{aligned}
+	\end{equation*}
+	\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.6cm,y=.6cm]
+	\draw[->,color=black] (-.5,0.) -- (5.5,0.);
+	\foreach \x in {0,5}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw[->,color=black] (0.,-.5) -- (0,5.5);
+	\foreach \y in {0,5}
+	\draw[shift={(\y,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw (5.,0.) node[below] {$n$};
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (5,5);
+	\coordinate (a) at (4,.5);
+	\coordinate (b) at (4.5,3.5);
+	\draw[cap=round]
+	(A) .. controls (a) and (b) ..(B);
+	\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (5,5) -- (5,0) node[midway,right]{1};
+	\end{tikzpicture}
+	\captionof{figure}{Deckungskapital: Erlebensfall}
+	\end{center}
+	\item gemischte Versicherung:\\
+	\begin{itemize}
+		\item Todesfall + Erlebensfall
+		\item Deckungskapitalverlauf als Summe der Deckungskapitalien der einzelnen Versicherungen
+		\item in Formeln: \quad $\cdot$Laufzeit $n$ \quad $\cdot$Eintrittsalter $x$
+		\[ \mathcal{D}_x(m)=A_{x+m:n-m\rceil}-pä_{x+m:n-m\rceil} \text{ mit } A_{x+m:n-m\rceil}=pä_{x+m:n-m\rceil} \]
+		Wobei $A_{x:n\rceil}=~_{|n}A_x+~_nE_x$ Barwert der gemischten Versicherung
+	\end{itemize}
+	\begin{center}
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.6cm,y=.6cm]
+		\draw[->,color=black] (-.5,0.) -- (5.5,0.);
+		\foreach \x in {0,5}
+		\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+		\draw[->,color=black] (0.,-.5) -- (0,5.5);
+		\foreach \y in {0,5}
+		\draw[shift={(\y,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+		\draw (5.,0.) node[below] {$n$};
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (5,5);
+		\coordinate (a) at (.5,4);
+		\coordinate (b) at (3.5,4.5);
+		\draw[cap=round]
+		(A) .. controls (a) and (b) ..(B);
+		\draw[thick,black,decorate,decoration={brace,amplitude=2pt}] (5,5) -- (5,0) node[midway,right]{1};
+		\end{tikzpicture}
+		\captionof{figure}{Deckungskapital: gemischte Versicherung}
+	\end{center}
+	\item Aufgeschobene Rentenversicherung:\\
+	\begin{minipage}[c]{8cm}
+		\begin{itemize}
+			\item Eintrittsalter $x$
+			\item Aufschubszeit $n$
+			\item Rentenbezugszeit bis zum Tod
+			\item Rentenhöhe 1
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{8cm}
+		\begin{itemize}
+			\item Ausgaben: \[A(n+k)=\mathbb{1}_{\{T_x>m+k \}},\quad k=0,1,2,\dots \]
+			\item Einnahmen: \[I(k)= p\mathbb{1}_{\{T_x>k \}}, \quad k=0,\dots,n-1 \]
+		\end{itemize}
+	\end{minipage}
+	Versicherung ist fair, wenn $pä_{x:n\rceil}=~_{|n}ä_x$\\
+	Deckungskapitalverlauf:
+	\begin{equation*}
+	\begin{aligned}
+		m=0,\dots,n-1: \mathcal{D}_x(m) &= \sum_{k=0}^{\infty}v^{n-m+k} \mathds{P}(T_{x+m}>n-m+k) -p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_{x+m}>k)\\
+		&=~_{|n-m}ä_{x+m}-pä_{x+m:n-m\rceil}\\
+		m=n:\quad \mathcal{D}_x(n) &= ä_{x+n}\\
+		m>n:\quad \mathcal{D}_x(m) &= ä_{x+m}
+	\end{aligned}
+	\end{equation*}
+	\begin{center}
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.6cm,y=.6cm]
+		\draw[->,color=black] (-.5,0.) -- (5.5,0.);
+		\foreach \x in {0,5}
+		\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+		\draw[->,color=black] (0.,-.5) -- (0,5.5);
+		\foreach \y in {0,5}
+		\draw[shift={(\y,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (2.5,5);
+		\coordinate (C) at (5,0);
+		\coordinate (a) at (1.5,.5);
+		\coordinate (b) at (2,4);
+		\coordinate (c) at (3,4);
+		\coordinate (d) at (3.5,.5);
+		\draw[cap=round]
+		(A) .. controls (a) and (b) .. (B);
+		\draw[cap=round]
+		(B) .. controls (c) and (d).. (C);
+		\draw[style=dotted] (2.5,5) -- (2.5,0) node[midway,right,sloped]{$ä_{x+m}$};
+		\draw (2.5,0) node[below] {$n$};
+		\end{tikzpicture}
+		\captionof{figure}{Deckungskapital: Rentenversicherung}
+	\end{center}
 \end{enumerate}
+
+
+% subsection beispiele deckungskapital (end)
+
+Weitere Beispiele für Personenversicherungen bei denen die Ausfallzeiten nicht durch die Restlebenszeit einer einzelnen Person gegeben ist:
+
+\subsection{Personengemeinschaften, verbundene Leben}
+\label{sub:verbundene_leben}
+\index{Personengemeinschaften}
+\begin{itemize}
+	\item $n$ Personen mit Restlebensdauer $T_1,\dots,T_n$
+	\item Aus diesen wird eine Ausfallzeit der Gemeinschaft definiert durch $\Gamma=f(T_1,\dots,T_n)$ für eine geeignete Funktion $f$
+	\item \uline{Bsp:} $n=2$ $T=min\{T_1,T_2\}=T_1\land T_2$ oder $T=max\{T_1,T_2\}=T_1\lor T_2$
+	\item \uline{Bem:} Bei unabhängigen $T_1,\dots,T_2$ kann die Verteilung von $max\{T_1,\dots,T_n\}$ bzw. $min\{T_1,\dots,T_n\}$ ausgerechnet werden, denn
+	\begin{equation*}
+	\begin{aligned}
+		&\mathds{P}(max\{T_1,\dots,T_n\}\le t)=\mathds{P}(T_1\le t,\dots,T_n\le t)=\prod_{i=1}^{n}\mathds{P}(T_i\le t)\\
+		&\mathds{P}(min\{T_1,\dots,T_n\}>t)=\mathds{P}(T_1>t,\dots,T_n>t)=\prod_{i=1}^{n}\mathds{P}(T_i>t)
+	\end{aligned}
+	\end{equation*}
+	\item \uline{Beispiel:} Todesfallversicherung eines Ehepaares
+	\begin{itemize}
+		\item Eintrittsalter erste Person $x$, zweite Person $y$
+		\item Laufzeit $n$ Jahre
+		\item Versicherungssumme M wird fällig, wenn eine der beiden Personen stirbt (1. Tod)
+		\item konst. Prämie solange wie beiden leben
+	\end{itemize}
+	\item \uline{Modell:}\\
+	Setze $T_{xy}=T_x\cap T_y$.\\
+	$t(m)=M,\quad m=1,\dots,n;\qquad b(m)=p, \quad m=0,\dots,n-1;\qquad s(m)=0,\quad \forall n\in \mathds{N}_0$\\
+	Dann beschreibt $\Gamma=(t,s,b,T_{xy})$ diese Versicherung.\\
+	Bestimmung von $p$:\\
+	\[A(k)=m\mathbb{1}_{\{k-1<T_{xy}<k\}}, \quad k=1,\dots,n\]
+	\[I(K)=p\mathbb{1}_{\{T_{xy}<k\}}, \quad k=0,\dots,n-1\]
+	Fair, wenn \[p\sum_{k=0}^{n-1}v^k\mathds{P}(T_{xy}>k)=M\sum_{k=1}^{n}v^k\mathds{P}(k-1<T_{xy}\le k) \]
+	Es gilt: 
+	\begin{equation*}
+	\begin{aligned}
+		\mathds{P}(T_{xy}>k) &= \mathds{P}(T_{xy}>k~|~T_{xy}>k-1)\mathds{P}(T_{xy}>k-1)\\
+		&= \mathds{P}(T_{x+k-1,y+k-1}>1)\mathds{P}(T_{xy}>k-1)\\
+		&=\mathds{P}_{x+k-1}^{(1)}\mathds{P}_{y+k-1}^{(2)}\mathds{P}(T_{xy}>k-1)=\mathds{P}_{x+k-1}^{(1)}\mathds{P}_{y+k-1}^{(2)}\cdot \dots \cdot \mathds{P}_x^{(1)}\mathds{P}_y^{(2)}
+	\end{aligned}
+	\end{equation*}
+	und
+	\begin{equation*}
+	\begin{aligned}
+		\mathds{P}(k-1<T_{xy}\le k) &= \mathds{P}(T_{xy}\le k~|~T_{xy}>k-1)\mathds{P}(T_{xy}>k-1)\\
+		&= \mathds{P}(T_{x+k-1,y+k-1}\le 1)\mathds{P}(T_{xy}>k-1)\\
+		&=(1-\mathds{P}_{x+k-1}^{(1)}\mathds{P}_{y+k-1}^{(2)}\mathds{P}(T_{xy}>k-1))
+	\end{aligned}
+	\end{equation*}
+\end{itemize}
+
+%subsection personengemeinschaften (end)
+
+\subsection{Konkurrierende Ausscheideursachen}
+\label{sub:ausscheideursachen}
+\begin{itemize}
+	\item Ausfallzeit $T$
+	\item mehrere konkurrierende Ausscheideursachen. Welche Ursache zum Ausscheiden führt ist zufällig und wird durch eine $\{1,\dots,m\}$-wertige Zufallsvariable $J$ beschrieben.
+	\item Leistung bei Ausfall hängt von der Ausscheideursache ab
+	\item Modellierung erfolgt dadurch, dass die Todesfallleistung ersetzt bzw. modifiziert wird durch Ausfallleistungen.
+	\item \uline{Definition:} Sei $T$ eine $(0,\infty)$-wertige ZV und $J$ eine $\{1,\dots,m\}$-wertige ZV. Seien $(t_j)_{j=1,\dots,m},~s,~b$ Zahlungsströme.
+	\item Dann heißt $\Gamma=\enbrace{(t_j)_{j=1,\dots,m},s,b,T,J}$ Personenversicherung unter $m$ konkurrierenden Risiken
+	\item \uline{Interpretation:} Anfangszustand\\
+	\begin{center}
+		$T~\mathrel{\hat{=}}$ Verweilzeit im Anfangszustand\\
+		$J~\mathrel{\hat{=}}$ zufällige Wahl einer Ausscheideursache\\
+		$t_j(n)~\mathrel{\hat{=}}$ Leistung bei Ausfall in der $n$-ten Periode, wegen Ursache $j$\\
+		$s(n)~\mathrel{\hat{=}}$ Leistung bei einer Verweildauer größer als $n$\\
+		$b(n)~\mathrel{\hat{=}}$ Beitrag bei Ausfall nach n
+	\end{center}
+	\item \uline{Zahlungsströme:}
+	\begin{equation*}
+	\begin{aligned}
+		A(n) &= \sum_{j=1}^{m}t_j(n)\mathbb{1}_{\{n-1<T\le n,~J=j \}}+s(n)\mathbb{1}_{\{T>n\}}\\
+		I(n) &= b(n)\mathbb{1}_{\{T>n\}}
+	\end{aligned}
+	\end{equation*}
+	\item \uline{Bewertung:}
+	\begin{equation*}
+	\begin{aligned}
+		\mathds{E}V(A) &= \sum_{n=1}^{\infty}\sum_{j=1}^{m}t_j(n)v^n\mathds{P}(n-1<T\le n,~J=j)\\
+		&+ \sum_{n=0}^{\infty}s(n)v^n\mathds{P}(T>n)\\
+		\mathds{E}V(A) &= \sum_{n=0}^{\infty}b(n)v^n\mathds{P}(T>n)
+	\end{aligned}
+	\end{equation*}
+	Für eine praktische Berechnung muss die Stationaritätsannahme geeignet modifiziert werden.\\
+	\item \uline{Definition:} $\enbrace{(T_x)_{x\in \mathds{N}_0},J}$ ist stationär, falls gilt
+	\[\mathds{P}(T_x\le n+k,~J=j~|~T_x>n)=\mathds{P}(T_{x+n}\le k,~ J=j)\quad \forall n\in \mathds{N}_0,~k\in\mathds{N},~j\in \{1,\dots,m\} \]
+\end{itemize}
 
 
 
