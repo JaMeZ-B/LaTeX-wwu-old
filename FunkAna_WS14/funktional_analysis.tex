@@ -428,7 +428,7 @@ Seien $X,Y$ normierte Vektorräume, $T : X \to Y$ linear. Dann ist $T$ stetig ge
 \[
 	\norm[Y]{T(x)} \le \mu \cdot \norm[X]{x} \quad \forall x \in X  
 \]
-Ein stetiger Operator zwischen normierten Vektorräumen heißt deswegen aus \bet{beschränkt}\index{Operator!beschränkter Operator} 
+Ein stetiger Operator zwischen normierten Vektorräumen heißt deswegen auch \bet{beschränkt}\index{Operator!beschränkter Operator} 
 \minisec{Beweis}
 \begin{description}
 	\item[\enquote{$\Leftarrow$}:] Klar: Wenn $x_n \to 0$, dann $T(x_n) \to 0$, denn $\norm{T(x_n)} \le \mu \norm{x_n } \to 0$
@@ -505,7 +505,7 @@ Wenn $\norm{1_A} < 1$, dann $\norm{1_A} = \norm{1_A \cdot 1_A} \le \norm{1_A} \c
 \end{enumerate}
 % subsection 211 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Norm auf dem Produkt normierter Räume]{Proposition} % (fold)
 \label{sub:212}
 Seien $X,Y$ normierte Räume. Dann ist $X \times Y$ ein normierter Raum mit 
 \begin{align*}
@@ -515,7 +515,7 @@ Seien $X,Y$ normierte Räume. Dann ist $X \times Y$ ein normierter Raum mit
 Beide Normen sind äquivalent.
 % subsection 212 (end)
 
-\subsection{Proposition und Definition} % (fold)
+\subsection[Proposition und Definition: Norm auf dem Quotientenraum]{Proposition und Definition} % (fold)
 \label{sub:213}
 Sei $X$ ein normierter Raum und $Y \subseteq X$ ein abgeschlossener Unterraum. Dann ist $\nicefrac{X}{Y} = \set[x +Y]{x \in X}$ ein normierter Raum mit
 \[
@@ -631,7 +631,7 @@ Setze $\mathcal{S}(X) := \set[\varphi : X \to \mathds{R}]{\varphi \text{ subline
 \end{enumerate}
 % subsection 218 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Die sublinearen Abbildungen $\mathcal{S}(X)$ sind nach unten induktiv geordnet]{Proposition} % (fold)
 \label{sub:219}
 Sei $X$ ein $\mathds{R}$-Vektorraum. $\mathcal{S}(X)$ ist nach unten induktiv geordnet, d.h. jede nichtleere total geordnete Teilmenge besitzt eine untere Schranke.
 \minisec{Beweis}
@@ -764,7 +764,7 @@ $\abs*{\overline{\psi(x)}} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. Es 
 ist trivial, da $\psi\big|_{Y} = \overline{\psi}$. \bewende
 % subsection 224 (end)
 
-\subsection[Definition: Konvexe Teilmenge]{Definition} % (fold)
+\subsection[Definition: Konvexe Teilmenge eines $\mathds{K}$-Vektorraums]{Definition} % (fold)
 \label{sub:225}
 Sei $X$ ein $\mathds{K}$-Vektorraum. Sei $M \subset X$ eine Teilmenge. $M$ heißt \Index{konvex}, falls für $a,b \in M$, $\lambda \in [0,1]$ gilt
 \[
@@ -817,14 +817,49 @@ also $\mu \le \psi(y) \le \varphi(y)$, woraus \eqref{eq:226:1} folgt. \bewende
 
 \subsection{Satz} % (fold)
 \label{sub:227}
-Sei $X$ ein normierter $\mathds{R}$-Vektorraum und $A,B \subset X$ nichtleere konvexe Teilmengen mit \index{Distanz}
+Sei $X$ ein normierter $\mathds{R}$-Vektorraum und $A,B \subset X$ nichtleere konvexe Teilmengen mit \index{Distanz $\dist$}
 \[
 	\dist(A,B) := \inf \set[\norm{a-b}]{a \in A, b \in B} > 0
 \]
 Dann existiert $\psi : X \to \mathds{R}$ stetig und linear mit $\psi(A) \cap \psi(B) \not= \emptyset$.
+\minisec{Beweis}
+$A - B := \set[a-b]{a \in A, b \in B} \subset X$ ist konvex. (Warum?) Nach Satz \ref{sub:226} existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \norm{.}$ und 
+\[
+	0 < \dist(A,B)=  \inf_{y \in A -B} \norm{y} = \inf_{y \in A-B} \psi(y) = \inf_{a \in A} \psi(a) - \sup_{b \in B} \psi(b). \bewende
+\]
 % subsection 227 (end)
 % section 2 (end)
+\newpage
 
+\section{Operatoren zwischen Banachräumen. Die Sätze von der offenen Abbildung und vom abgeschlossenen Graphen} % (fold)
+\label{sec:3}
+
+\subsection[Proposition: $Y$ vollständig $\Rightarrow $ $L(X,Y)$ ist vollständig]{Proposition} % (fold)
+\label{sub:31}
+Seien $X,Y$ normierte Vektorräume, $Y$ vollständig. Dann ist $L(X,Y)$ vollständig bezüglich $\norm[L(X,Y)]{.}$.
+\minisec{Beweis}
+Sei $(T_n)_{n \in \mathds{N}} \subseteq L(X,Y)$ eine Cauchy-Folge bezüglich $\norm[L(X,Y)]{.}$. Für $x \in X$ ist dann auch $(T_n x)_{n \in \mathds{N}} \subset Y$ Cauchy
+bezüglich $\norm[Y]{.}$. (Warum?)\footnote{mit $\norm[Y]{T_n x- T_m x} \le \norm{T_n -T_m} \cdot \norm{x}$}
+Da $Y$ ein Banachraum ist, folgt $T_n x \xrightarrow{n \to \infty} y$ für ein $y \in Y$. Wir definieren $T : X \to Y$ durch $T(x) := \lim_{ n \to \infty} T_n(x)$ für 
+$x \in X$. $T$ ist linear: Klar (Warum?).
+
+$T$ ist stetig: $(T_n)_{n \in \mathds{N}}$ ist Cauchy, also auch $\enbrace*{\norm{T_n}}_{n \in \mathds{N}} \subset \mathds{R}$ eine Cauchyfolge (Warum?)\footnote{mit 
+$\norm{T_n} = \norm{T_n - T_{n_0}+ T_{n_0}} \le \norm{T_n- T_{n_0}} + \norm{T_{n_0}}$}. Dann existiert $C \ge 0$ mit $\norm[L(X,Y)]{T_n} \le C $, $n \in \mathds{N}$, also
+gilt $\norm[Y]{T x} \le C \cdot \norm{x}$, $x \in X$, woraus $\norm[L(X,Y)]{T} \le C$ und die Stetigkeit von $T$ folgt. Also ist $T \in L(X,Y)$.
+
+\noindent Falls $\varepsilon >0$, so existiert $n_0 \in \mathds{N}$ mit $\norm[L(X,Y)]{T_n - T_m}  < \varepsilon$ für $n,m \ge n_0$. Insbesondere: 
+\begin{align*}
+	\norm[Y]{(T_n- T_m)x} \le \norm[L(X,Y)]{T_n -T_m} \cdot \norm[X]{x} < \varepsilon \cdot \norm[X]{x}    
+\end{align*}
+für $n,m \ge n_0$, $x \in X$. Weiter gilt 
+\begin{align*}
+	\norm[Y]{(T_n- T)x} \le \norm[Y]{(T_n - T_m)x} + \norm[Y]{(T_m-T)x} &\le \norm[L(X,Y)]{T_n - T_m} \cdot \norm[X]{x} + \norm[Y]{(T_m-T)x} \\
+	&\le \varepsilon \cdot \norm[X]{x} + \varepsilon \cdot \norm[X]{x}  
+\end{align*}
+für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
+$\norm[L(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to T$ bezüglich $\norm[L(X,Y)]{.}$. \bewende
+% subsection 31 (end)
+% section 3 (end)
 
 
 
