@@ -859,6 +859,58 @@ für $n,m \ge n_0$, $x \in X$. Weiter gilt
 für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
 $\norm[L(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to T$ bezüglich $\norm[L(X,Y)]{.}$. \bewende
 % subsection 31 (end)
+
+\subsection[Corollar: Der Dualraum ist vollständig, $L(X,X)$ ist Banachalgebra, falls $X$ Banachraum ist]{Corollar} % (fold)
+\label{sub:32}
+\begin{enumerate}[(i)]
+	\item Der Dualraum $X^*$ eines normierten $\mathds{K}$-Vektorraumes $X$ ist vollständig. 
+	\item Falls $\set{0} \not= X$ ein Banachraum ist, so ist $L(X,X)$ eine Banachalgebra.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item $X^*=L(X,\mathds{K})$ und $\mathds{K}$ ist vollständig. Wende \ref{sub:31} an.
+	\item $L(X,X)$ ist ein Banachraum nach \ref{sub:31}. $L(X,X)$ ist eine normierte Algebra: 
+	\begin{itemize}
+		\item $\norm[L(X,X)]{\id_X}=1$ \hfill (Warum?)
+		\item Für $S,T \in L(X,X)$, $x \in X$ gilt
+		\begin{align*}
+			\norm[X]{(S \circ T)x} \le \norm{S} \cdot \norm[X]{T x} \le \norm{S} \cdot \norm{T} \cdot \norm[X]{x}   
+		\end{align*}
+		Also ist $\norm{S \circ T} \le \norm{S} \cdot \norm{T}$. \bewende
+	\end{itemize}
+\end{enumerate}
+% subsection 32 (end)
+
+\subsection[Definition und Proposition: lineare Isometrie $\iota_X : X \to X^{**}$]{Definition und Proposition} % (fold)
+\label{sub:33}
+Sei $X$ ein normierter Raum. Definiere $\iota_X : X \to X^{**} \enspace{\color{light_gray}\enbrace[\big]{=(X^*)^*}}$ durch
+\[
+	x \longmapsto \enbrace[\big]{\varphi \mapsto \varphi(x) } 
+\]
+für $x \in X$. Die Abbildung $\iota_X$ ist eine lineare Isometrie.
+\minisec{Beweis}
+\begin{description}
+	\item[Wohldefiniertheit:] Die Linearität von $\iota_X(x)$ ist klar. Mit
+	\begin{align*}
+		\abs*{\iota_X(x)(\varphi)} = \abs*{\varphi(x)} \le \norm[X^*]{\varphi} \cdot \norm[X]{x} = \norm[X]{x} \cdot \norm[X^*]{\varphi}      
+	\end{align*}
+	folgt $\varphi \in X^*$ und somit $\norm[X^{**}]{\iota_X(x)} \le \norm[X]{x}$, also ist $\iota_X(x)$ stetig.
+	\item[$\iota_X$ ist linear:] Für $\alpha, \beta \in \mathds{K}$, $x,y \in X$, $\varphi \in L(X,\mathds{K})= X^*$ gilt
+	\begin{align*}
+		\iota_X(\alpha \cdot x + \beta \cdot y)(\varphi)= \varphi(\alpha \cdot x + \beta \cdot y) = \alpha \circ \varphi(x) + \beta \cdot \varphi(y) 
+		&= \alpha \cdot \iota_X(x)(\varphi) + \beta \cdot \iota_X(y)(\varphi) \\
+		&= \enbrace[\big]{\alpha \cdot \iota_X(x) + \beta \cdot \iota_X(y)}(\varphi) 
+	\end{align*}
+	\item[Isometrie:] Es bleibt zu zeigen: $\norm[X^{**}]{\iota_X(x)} \ge \norm[X]{x}$ für $0 \not= x \in X$. Sei $Y := \mathds{K}\cdot x$ und $\psi : Y \to \mathds{K}$
+	gegeben durch $\psi(\alpha \cdot x) := \alpha \cdot \norm[X]{x}$. Dann ist $Y \subset X$ ein linearer Unterraum und $\psi(Y) \to \mathds{K}$ linear mit
+	$\norm{\psi}=1$. Nach Satz \ref{sub:224} existiert $\overline{\psi}. X \to \mathds{K}$ linear mit $\overline{\psi}(x) = \psi(x) = \norm[X]{x}$ und 
+	$\norm{\overline{\psi}}= \norm{\psi} = 1$. Es gilt 
+	\begin{align*}
+		\norm[X^{**}]{\iota_X(x)} \ge \abs*{\iota_X(x)(\overline{\psi})} = \abs*{\overline{\psi}(x)} = \norm[X]{x}. \bewende
+	\end{align*}
+\end{description}
+ 
+% subsection 33 (end)
 % section 3 (end)
 
 
