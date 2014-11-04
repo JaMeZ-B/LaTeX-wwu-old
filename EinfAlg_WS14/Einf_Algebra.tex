@@ -445,8 +445,8 @@ Sei $G \stackrel{\varphi}{\to} K$ ein Homomorphismus von Gruppen, sei $N \triang
 
 \begin{center}
 	\begin{tikzcd}[column sep=small]
-		G \ar{rr}{\varphi} \ar{rd}[below]{\pi_N} & & K\\
-		& \nicefrac{G}{N} \ar{ru}[below]{\overline{\varphi}} &
+		G \ar{rr}{\varphi} \ar{rd}[below,left]{\pi_N} & & K\\
+		& \nicefrac{G}{N} \ar{ru}[below,right]{\overline{\varphi}} &
 	\end{tikzcd}
 	\captionof{figure}{Homomorphiesatz}
 \end{center}
@@ -576,6 +576,7 @@ Sei $G\stackrel{\varphi}{\to}K$ ein Gruppenhomomorphismus. Dann sind äquivalent
 Betrachte die Abbildung $\varphi:H\to \nicefrac{HN}{N}\subseteq \nicefrac{G}{N},~h\mapsto hN$ das ist ein Homomorphismus,\\ weil $H\stackrel{i}{\to}G\stackrel{\pi_N}{\to}\nicefrac{G}{N}$ einer ist. Für $hn\in HN$ gilt $\varphi(h)=hN=hnN$, also ist $\varphi$ ein Epimorphismus. Der Kern ist $ker(\varphi)=\{h\in H~|~hN=N \}=H\cap N$. Also gilt nach dem vorigem Satz 
 \[\nicefrac{H}{n\cap H}\xrightarrow[\cong]{\overline{\varphi}}\nicefrac{HN}{N}\]
 \hfill $\square$
+\newpage
 
 \subsubsection*{Theorem: 2. Isomorphiesatz}
 Sei $G$ Gruppe, seien $M,N\nt G$ Normalteiler mit $M\subseteq N\subseteq G$. Dann gilt $\nicefrac{N}{M}\nt \nicefrac{G}{M}$ und 
@@ -585,6 +586,89 @@ Sei $G$ Gruppe, seien $M,N\nt G$ Normalteiler mit $M\subseteq N\subseteq G$. Dan
 Es gilt $\nicefrac{N}{M}=\{nM~|~n\in N\}=\pi_M(N)\subseteq \nicefrac{G}{M}$\\
 Nach\hyperref[sub:satz_eigenschaften]{1.22(i)} gilt $\nicefrac{N}{M}\nt \nicefrac{G}{M}$.\\
 Jetzt Homomorphiesatz \hyperref[sub:der_homomorphiesatz]{1.20}
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		G \ar{rr}{\pi_N} \ar{rd}[below,left]{\pi_M} & & K\\
+		& \nicefrac{G}{N} \ar{ru}[below,right]{\overline{\pi_N}\leftarrow \text{surjektiv}} &
+	\end{tikzcd}
+	\captionof{figure}{2. Isomorphiesatz}
+\end{center}
+Nach dem vorigen Satz gilt:\\
+\[\nicefrac{\nicefrac{G}{M}}{ker(\overline{\pi_N})}\stackrel{\cong}{\to} \nicefrac{G}{N}\]
+\[ker(\overline{\pi_N})\stackrel{\hyperref[sub:der_homomorphiesatz]{1.20}}{=}\pi_M(N)=\nicefrac{N}{M} \]
+\hfill $\square$
+%sub end
+
+\subsection{Produkte von Gruppen}
+\label{sub:produkte}
+Seien $G,K$ zwei Gruppen. Dann ist das Produkt $G\times K$ wieder eine Gruppe das \Index{direkte Produkt}, mit Verknüpfung \[(g_1,k_1)\cdot(g_2,k_2)=(g_1g_2,k_1k_2) \]
+\[\text{Neutralelement } e=(e_G,e_K) \]
+\[\text{Das Inverse zu }(g,k)\in G\times K \text{ ist }(g,k)^{-1}=(g^{-1},k^{-1})\]
+Den Beweis lassen wir weg, die Gruppenaxiome (G1)-(G3) sind leicht zu prüfen.\\
+Wir haben kanonische Homomorphismen:\\
+\begin{minipage}[c]{8cm}
+	\begin{equation*}
+	\begin{aligned}
+		i_G: G &\to G\times K\\
+		g &\mapsto (g,e_K)
+	\end{aligned}
+	\end{equation*}
+\end{minipage}
+\begin{minipage}[c]{8cm}
+	\begin{equation*}
+	\begin{aligned}
+	i_K: K &\to G\times K\\
+	k &\mapsto (e_G,k)
+	\end{aligned}
+	\end{equation*}
+\end{minipage}
+sowie \[pr_G:G\times K \to G,\quad (g,k)\mapsto g \]
+\[pr_K:G\times K \to K,\quad (g,k)\mapsto k \]
+mit \[pr_G\circ i_G=\id_G \qquad\qquad pr_K\circ i_K=\id_K \]
+\[ ker(pr_G)=\{e_G\}\times K\cong K \qquad\qquad ker(pr_K)=G\times \{e_K\}\cong G \]
+
+Das geht auch mit Familien von (endliche vielen) Gruppen: ist $(G_i)_{i\in I}$ eine Familie von Gruppen, so ist $\prod\limits_{i\in I}G_i$ wieder eine Gruppe, das \bet{direkte Produkt} der $G_i$. Die Elemente sind Folgen $(g_i)_{i\in I},~g_i\in G_i$ mit Verknüpfung $(g_i)_{i\in I}\cdot (g_i')_{i\in I}=(g_ig_i')_{i\in I}$ usw.\\
+\newpage
+
+\minisec{Satz}
+Sei $G$ eine Gruppe mit Untergruppe $H,K\subseteq G$.Angenommen, es gilt folgendes
+\begin{enumerate}[(i)]
+	\item $G=HK$
+	\item $H\cap K=\{e\}$
+	\item $hk=kh\quad \forall h\in H,~k\in K$
+\end{enumerate}
+Dann ist die Abbildung $H\times K \stackrel{\varphi}{\to} G$, $(h,k)\mapsto hk$ ein Isomorphismus, d.h. $G$ 'ist' das direkte Produkt aus $H$ und $K$.
+
+\bet{Beweis:}\\
+Wegen (iii) gilt
+\begin{equation*}
+\begin{aligned}
+	\varphi((h_1,k_1)(h_2,k_2)) &= \varphi(h_1h_2,k_1k_2)=h_1h_2k_1k_2\\
+	\varphi(h_1,k_1)\varphi(h_2,k_2) &= h_1k_1h_2k_2=h_1h_2k_1k_2
+\end{aligned}
+\end{equation*}
+also ist $\varphi$ ein Homomorphismus. Wegen (i) ist $\varphi$ surjektiv.\[ (h,k)\in ker(\varphi) \Leftrightarrow hk=e \Leftrightarrow \underbracket[.7pt]{h}_{\in H}=\underbracket[.7pt]{k^{-1}}_{\in K} \Leftrightarrow h=k=e \text{ wegen (ii)}\]
+\hfill $\square$
+
+\minisec{Beispiel}
+$G=\nicefrac{\mathds{Z}}{6\mathds{Z}}=\{\overline{0},\dots,\overline{5}\}$ vgl. \hyperref[sub:satz_eigenschaften]{1.22}.Dann sind $H=\{\overline{0},\overline{3}\}$ sowie $K=\{\overline{0},\overline{2},\overline{4}\}$ Untergruppen (nachrechnen!), $H\cong \nicefrac{\mathds{Z}}{2\mathds{Z}},~K\cong \nicefrac{\mathds{Z}}{3\mathds{Z}}$ und (i),(ii),(iii) aus dem vorigen Satz sind erfüllt. Es folgt
+\[\nicefrac{\mathds{Z}}{6\mathds{Z}}\cong \nicefrac{\mathds{Z}}{3\mathds{Z}}\times \nicefrac{\mathds{Z}}{2\mathds{Z}} \qquad \INVd \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %sec end
 
 
