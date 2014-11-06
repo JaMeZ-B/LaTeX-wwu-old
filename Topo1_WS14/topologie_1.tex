@@ -1150,7 +1150,7 @@ für alle $n\ge 1$ ist.
 \]
 % subsection 61 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Induzierte Abbildung einer Kettenabbildung]{Bemerkung} % (fold)
 \label{sub:62}
 Ist $f_* : (C_*,d_*) \to (C_*'.d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung $H_n(f_*) : H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
 \[
@@ -1167,7 +1167,7 @@ für $v \in \ker d_n$, denn:
 \end{itemize}
 % subsection 62 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Homologie definiert einen Funktor]{Bemerkung} % (fold)
 \label{sub:63}
 \begin{enumerate}[a)]
 	\item $R$-Kettenkomplexe mit Kettenabbildungen bilden die Kategorie $R\text{-}\textsc{Ketten}$.
@@ -1195,7 +1195,7 @@ Sei $f : X \to Y$ stetig. Wir definieren $C_n(f;R) : C_n(X;R) \to C_n(Y;R)$ durc
 (Für $\sigma \in S_n(X)$ ist $f \circ \sigma \in S_n(Y)$.)
 % subsection 64 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Der singuläre Kettenkomplex bildet einen Funktor]{Proposition} % (fold)
 \label{sub:65}
 Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$ zu einem Funktor
 \[
@@ -1204,17 +1204,94 @@ Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$
 \minisec{Beweis}
 \begin{enumerate}[(i)]
 	\item $C_*(f;R)$ ist eine $R$-Kettenabbildung:
+	% \begin{align*}
+	% 	C_{n-1}(f;R) \circ \partial_n \enbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot  \sigma} &= C_{n-1}(f;R) \enbrace*{\sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j
+	% 	\cdot r_\sigma (\delta_j \sigma)} \\
+	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\delta_j \sigma)} \\
+	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\sigma \circ \iota_{n,j})} \\
+	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{(f_{n-1} \circ \sigma) \circ \iota_{n,j}} \\
+	% 	&= \sum_{j=0}^{n} (-1)^j \enbrace[\Bigg]{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \underbrace{\enbrace*{f_{n-1} \circ \sigma} \circ \iota_{n,j}}_{\delta_j (f \circ \sigma)} } \\
+	% 	&= \partial_n \circ C_n \enbrace*{f;R}(\sigma)
+	% \end{align*}
 	\begin{align*}
-		C_{n-1}(f;R) \circ \partial_n \enbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot  \sigma} &= C_{n-1}(f;R) \enbrace*{\sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j
-		\cdot r_\sigma (\delta_j \sigma)} \\
-		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\delta_j \sigma)} \\
-		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\sigma \circ \iota_{n,j})} \\
-		&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{(f_{n-1} \circ \sigma) \circ \iota_{n,j}} \\
-		&= \sum_{j=0}^{n} (-1)^j \enbrace[\Bigg]{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \underbrace{\enbrace*{f_{n-1} \circ \sigma} \circ \iota_{n,j}}_{\delta_j (f \circ \sigma)} } \\
-		&= \partial_n \circ C_n \enbrace*{f;R}(\sigma) 
+		C_{n-1}(F;R) \circ \partial_n(\sigma) = C_{n-1} (f;R) \enbrace*{\sum_{l=0}^{n}  (-1)^l \sigma \circ \iota_{n,l}} &=
+		\sum_{l=0}^{n} (-1)^l (f \circ \sigma) \circ \iota_{n,l} \\
+		&= \partial_n(f \circ \sigma) = \partial \enbrace*{C_n(f;R)(\sigma)} 
 	\end{align*}
+	\item Zu zeigen: $C_*(f \circ g;R) = C_*(f;R) \circ C_*(g;R)$:
+	\begin{align*}
+		C_n(f \circ g;R)(\sigma) = f \circ (g \circ \sigma) = C_n(f;R)(g \circ \sigma) = C_n(f;R) \enbrace[\big]{C_n(g;R)(\sigma)} 
+	\end{align*}
+	\item Zu zeigen: $C_*(\id_X;R) = \id_{C_*(X;R)}$:
+	\[
+		C_n(\id_X;R)(\sigma) = \id_X \circ \sigma = \sigma
+	\]
 \end{enumerate}
 % subsection 65 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:66}
+Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) : \TOP \to R\text{-}\textsc{Mod}$.
+\minisec{Beweis}
+$H_n(-;R)$ ist die Komposition der Funktoren $C_*(-;R) : \TOP \to R\text{-}\textsc{Ketten}$ und $H_* : R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$. \bewende
+% subsection 66 (end)
+
+\subsection[Bemerkung: Notation und Formel für $H_n(f;R)$]{Bemerkung} % (fold)
+\label{sub:67}
+\begin{itemize}
+	\item Oft schreiben wir $f_* = H_n(f;R)$.
+	\item Es gilt für $\benbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot \sigma} \in H_n(X;R)$
+	\[
+		f_* \enbrace*{\benbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot  \sigma}} =  \benbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma
+		\cdot f\circ \sigma} \in H_n(Y;R)
+	\]
+\end{itemize}
+% subsection 67 (end)
+
+\subsection[Definition: Summe oder Koprodukt von topologischen Räumen]{Definition} % (fold)
+\label{sub:68}
+Seien $X_i$, $i \in I$ topologische Räume. Mit 
+\[
+	X := \coprod_{i \in I} X_i 
+\]
+bezeichnen wir die \Index{Summe} (oder auch das \Index{Koprodukt}) der $X_i$. Als Menge
+ist $X$ die disjunkte Vereinigung der $X_i$. $U \subseteq X$ ist offen genau dann, wenn $X_i \cap U \subseteq X_i$ offen ist für jedes $i \in I$. Für jedes $i_o$ erhalten
+wir eine stetige Inklusion $j_{i_0} : X_{i_0} \to \coprod_{i} X_i$.
+\minisec{Bemerkung}
+Für jedes $i_o$ mit $X_{i_0} \subseteq \coprod_i X_i$ offen und abgeschlossen.
+% subsection 68 (end)
+
+\subsection[Definition: Summe von $R$-Moduln]{Definition} % (fold)
+\label{sub:69}
+Seien $V_i$, $i \in I$ $R$-Moduln. Mit 
+\[
+	V := \bigoplus_{i \in I} V_i
+\]
+bezeichnen wir die \Index{Summe} (oder auch das \Index{Koprodukt}) der $V_i$. Elemente von $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit $v_i \in V_i$ und $v_i=0$ für
+alle bis auf endlich viele $i$. Die $R$-Modulstruktur ist erklärt durch:
+\[
+	(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I} \quad ,\quad r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}
+\]
+Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} : V_{i_0} \to V$ mit
+\[
+	\enbrace*{j_{i_0} (v)}_{i} = \begin{cases}
+		v, &\text{ falls }i=i_0\\
+		0 ,&\text{ sonst}
+	\end{cases} 
+\]
+\minisec{Bemerkung}
+Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i : V_i \to W$ von $R$-linearen Abbildungen eine
+$R$-lineare Abbildung 
+\(
+	\oplus_{i \in I} f_i : \bigoplus_{i \in I} V_i \to W  
+\)
+mit
+\[
+	\enbrace*{\oplus_{i \in I} f_i} \enbrace[\big]{(v_i)_{i \in I}} = \sum_{i \in I} f_i(v_i)  
+\]
+Ist umgekehrt $f : \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so ist $f_i := f \circ j_{i}$ eine Folge von $R$-linearen Abbildungen mit 
+$f = \bigoplus_{i \in I} f_i$
+% subsection 69 (end)
 % section 6 (end)
 
 \cleardoubleoddemptypage
