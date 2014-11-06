@@ -1270,7 +1270,7 @@ Seien $V_i$, $i \in I$ $R$-Moduln. Mit
 bezeichnen wir die \Index{Summe} (oder auch das \Index{Koprodukt}) der $V_i$. Elemente von $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit $v_i \in V_i$ und $v_i=0$ für
 alle bis auf endlich viele $i$. Die $R$-Modulstruktur ist erklärt durch:
 \[
-	(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I} \quad ,\quad r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}
+	(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I} \qquad ,\qquad r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}
 \]
 Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} : V_{i_0} \to V$ mit
 \[
@@ -1292,7 +1292,63 @@ mit
 Ist umgekehrt $f : \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so ist $f_i := f \circ j_{i}$ eine Folge von $R$-linearen Abbildungen mit 
 $f = \bigoplus_{i \in I} f_i$
 % subsection 69 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:610}
+Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die $j_i : X_i \to X$ einen Isomorphismus
+\[
+	\bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\bigoplus_{i \in I} (j_i)_*}  H_n(X;R)
+\]
+\minisec{Beweis}
+Da die $X_i \subseteq X$ offen und abgeschlossen sind und $\abs*{\Delta^n}$ zusammenhängend ist (sogar wegzusammenhängend), gibt es für jedes 
+$\sigma : \abs*{\Delta^n} \to X $ ein eindeutiges $i$ mit $\im \sigma \subseteq  X_i$. Es gilt also $S_n(X) = \dot{\bigcup} S_n(X_i)$. Daher induzieren die $j_i$
+einen Isomorphismus
+\[
+	\oplus_{i \in I} C_n(j_i;R) : \bigoplus_{i \in I}C_n(X_i;R) \xrightarrow{\enspace\cong \enspace} C_n(X;R) 
+\]
+Da diese Isomorphismen mit den Randabbildungen vertauschen, erhalten wir einen Isomorphismus von $R$-Kettenkomplexen
+\[
+	\varphi := \oplus_{i \in I} C_*(j_i;R) : \bigoplus C_*(X_i;R) \to C_*(X;R)
+\]
+Da $\bigoplus H_n \enbrace*{C_*(X_i;R),\partial_*} \cong H_n \enbrace*{\bigoplus_i C_*(X_i;R), \partial_*}$ induzieren dann auch die $(j_i)_*$ einen Isomorphismus
+\[
+	\bigoplus (j_i)_* : \bigoplus_{i \in I} H_n(X_i;R) \longrightarrow H_n(X;R) \bewende
+\]
+% subsection 610 (end)
 % section 6 (end)
+\newpage
+
+\section{Homotopieinvarianz} % (fold)
+\label{sec:7}
+
+\subsection{Bemerkung} % (fold)
+\label{sub:71}
+Sei $f : X \to Y$ eine Homöomorphismus. Dann ist 
+\[
+	f_* : H_n(X;R) \longrightarrow H_n(Y;R)
+\]
+ein Isomorphismus.
+\minisec{Beweis}
+Da Homologie ein Funktor ist, gilt
+\begin{align*}
+	f_* \circ (f^{-1})_* &= (f \circ f ^{-1})_* = (\id_Y)_* = \id_{H_n(Y;R)} \qquad \text{ und} \\
+	(f ^{-1})_* \circ f_* &= (f ^{-1} \circ f)_* = (\id_X)_* = \id_{H_n(X;R)}
+\end{align*}
+Also $(f_*)^{-1}=(f ^{-1})_*$. Insbesondere ist $f_*$ ein Isomorphismus. \bewende
+% subsection 71 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:72}
+Seien $f,g : X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt $H_n(f;R) = H_n(g;R)$.
+% subsection 72 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:73}
+Ist $f : X \to Y$ eine Homotopieäquivalenz \todo{Def als Fußnote}, so ist $f_* : H_n(X;R) \to H_n(Y;R)$ ein Isomorphismus.
+\minisec{Beweis}
+
+% subsection 73 (end)
+% section 7 (end)
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
