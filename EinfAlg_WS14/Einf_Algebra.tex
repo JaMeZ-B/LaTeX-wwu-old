@@ -652,24 +652,104 @@ also ist $\varphi$ ein Homomorphismus. Wegen (i) ist $\varphi$ surjektiv.\[ (h,k
 
 \minisec{Beispiel}
 $G=\nicefrac{\mathds{Z}}{6\mathds{Z}}=\{\overline{0},\dots,\overline{5}\}$ vgl. \hyperref[sub:satz_eigenschaften]{1.22}.Dann sind $H=\{\overline{0},\overline{3}\}$ sowie $K=\{\overline{0},\overline{2},\overline{4}\}$ Untergruppen (nachrechnen!), $H\cong \nicefrac{\mathds{Z}}{2\mathds{Z}},~K\cong \nicefrac{\mathds{Z}}{3\mathds{Z}}$ und (i),(ii),(iii) aus dem vorigen Satz sind erfüllt. Es folgt
-\[\nicefrac{\mathds{Z}}{6\mathds{Z}}\cong \nicefrac{\mathds{Z}}{3\mathds{Z}}\times \nicefrac{\mathds{Z}}{2\mathds{Z}} \qquad \INVd \]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\[\nicefrac{\mathds{Z}}{6\mathds{Z}}\cong \nicefrac{\mathds{Z}}{3\mathds{Z}}\times \nicefrac{\mathds{Z}}{2\mathds{Z}} \]
 
 %sec end
+\newpage
+
+\section{Gruppenwirkungen und Sylow-Sätze}
+\label{sec:gruppen_sylow}
+
+\subsection{Gruppenwirkungen}
+\label{sub:gruppenwirkungen}
+Sei $G$ eine Gruppe und $X$ eine nicht leere Menge. Eine \Index{Wirkung} von G auf $X$ (auch: \bet{$G$-Wirkung}, \bet{'$G$-Aktion'}) ist ein Homomorphismus $\alpha:G\to Sym(X)$. Für $g\in G$ und $x\in X$ schreibe kurz \[g(x)=\alpha(g)(x) \] (wenn klar ist welches $\alpha$ gemeint ist). Die Abbildung $G\times X\to X,\quad (g,x)\mapsto g(x)$ erfüllt folgende Eigenschaften:
+\begin{enumerate}[(W1)]
+	\item $e(x)=x~\forall x\in X$ ($e\in G$ Neutralelement)
+	\item $(a\circ b)(x)=a(b(x))~\forall a,b\in G,~x\in X$
+\end{enumerate}
+Ist umgekehrt eine Abbildung $G\times X\to X$ gegeben die (W1) und (W2) erfüllt, so erhalten wir eine Wirkung $\alpha: G\to Sym(X)$ durch \[\alpha(g)=[x\mapsto g(x)] \]
+denn aus (W2) folgt: $\alpha(g^{-1})$ ist Inverse zu $\alpha(g)$, also ist die Abbildung $\alpha(g):X\to X$ bijektiv und $\alpha:G\to Sym(X)$ ist ein Homomorphismus nach (W2).
+%sub end
+
+\subsection{mehrere Definitionen}
+\label{sub:mehrere_def}
+Gegeben sei eine $G$-Wirkung $G\times X\to X$. Für $x\in X$ ist der \Index{Stabilisator} (die \Index{Standgruppe})
+\[G_x=\{g\in G~|~g(x)=x \}\subseteq G \]
+Die \Index{Bahn} (der \Index{Orbit}) von $x$ ist 
+\[G(x)=\{g(x)~|~g\in G \}\subseteq X \]
+Der \uline{Kern} der Wirkung ist $\bigcap\limits_{x\in X}G_x\subseteq G$.
+
+\subsubsection{Satz}
+Der Stabilisator $G_x$ ist eine Untergruppe und der Kern ist ein Normalteiler.\\
+
+\bet{Beweis:}\\
+Es gilt $e(x)=x \rightsquigarrow e\in G_x$. Für $a,b\in G_x$ gilt \[(ab)(x)=a(\underbracket{b(x)}_{=x})=a(x)=x \rightsquigarrow ab\in G_x\]
+\[a^{-1}(x)=a^{-1}(\underbracket{a(x)}_{=x})=(a^{-1}a)(x)=e(x)=x \rightsquigarrow a^{-1}\in G_x \]
+Also ist $G_x\subseteq G$ Untergruppe.\\
+Es gilt: \[\bigcap\limits_{x\in X}G_x=\{g(x)=x~|~\forall x\in X \} \]
+Das ist genau der Kern der zugehörigen Homomorphie $\alpha:G\to Sym(X)$, also ein Normalteiler.
+\hfill $\square$
+%sub end
+
+\subsection{Beispiele Wirkungen}
+\label{sub:bsp_wirkungen}
+\begin{enumerate}[(a)]
+	\item Sei $G$ eine Gruppe. Für $g\in G$ definiere eine Abbildung $\lambda_g:G\to G$ durch $\lambda_g(x)=gx$. Es folgt
+	\[\lambda_g\circ\lambda_h=\lambda_{gh} \quad \lambda_e=\id_G \rightsquigarrow \lambda_g\lambda_{g^{-1}}=\id_G=\lambda_{g^{-1}}\lambda_g \]
+	also $\lambda_g\in Sym(G)$. Die Gruppe $G$ wirkt also auf der Menge $G=X$. Es gilt für die Wirkung:
+	\[G_x=\{g\in G~|~\lambda_g(x)=x \}=\{g\in G~|~gx=x \}=\{e\} \]
+	Zu $x,y\in G$ gibt es genau ein $g\in G$ mit $\lambda_g(x)=y$, nämlich $g=yx^{-1}$.\\
+	Man nennt das die \bet{Linksreguläre Wirkung}\index{Wirkung!Linksregulär} von $G$ auf sich.
+	\item Sei $G$ eine Gruppe und $H\subseteq G$ Untergruppe. Sei $X=\nicefrac{G}{H}=\{aH~|~a\in G \}$. Die Gruppe $G$ wirkt auf $X$ durch \[\lambda_g:\nicefrac{G}{H}\to \nicefrac{G}{H},~aH\mapsto gaH \]
+	Es gilt wieder $\lambda_g\lambda_h=\lambda_{gh},~\lambda_e=\id_{\nicefrac{G}{H}}$.\\
+	Der Stabilisator von $x=H\in X$ ist \[G_x=\{g\in G~|~gH=H \}=H \]
+	Zu $x=aH,y=bH\in X$ gibt es wieder $g\in G$ mit $g(x)=y$, nämlich $g=ba^{-1}$. Anders als im Bsp(a) ist $g$ nicht eindeutig, falls $H\not= \{e\}$ gilt (für $H=\{e\}$ erhalten wir wieder Bsp(a)). 
+\end{enumerate}
+%sub end
+
+\subsection{Satz von Cayley}
+\label{sub:satz_von_cayley}
+Zu jeder Gruppe $G$ gibt es eine Menge $X$ und ein injektiven Homomorphismus $\alpha:G\to Sym(X)$.\\
+
+\bet{Beweis:}\\
+Setze $G=X$ und $\lambda:G\to Sym(X)$ wie in \hyperref[sub:bsp_wirkungen]{Beispiel 2.3(a)}
+\hfill $\square$
+
+Eine Untergruppe von $Sym(X)$ nennt man auch eine \Index{Permutationsgruppe}. Der Satz von Cayley wird auch so formuliert:\\
+\uline{Jede} Gruppe 'ist' (bis auf Isomorphie) eine Permutationsgruppe.
+%sub end
+
+\subsection{Definition transitiv}
+\label{sub:def_transitiv}
+Eine $G$-Wirkung $G\times X\to X$ heißt \Index{transitiv}, wenn es für alle $x,y\in G$ ein $g\in G$ gibt mit $g(x)=y$.\\
+Die in \hyperref[sub:bsp_wirkungen]{Bsp. 2.3(a)(b)} betrachteten Wirkungen sind also transitiv.
+
+\subsubsection*{Satz}
+Gegeben sei ein transitive $G$-Wirkung $G\times X\to X$. Sei $x\in X$ und $H=G_x$. Dann ist die Abbildung $\nicefrac{G}{H}\to X,~gH\mapsto g(x)$ wohldefiniert und bijektiv. Für jedes $y\in X$ mit $y=g(x)$ gilt $G_y=gG_xg^{-1}$.\\
+
+\bet{Beweis:}\\
+Betrachte die Abbildung $\epsilon:G\to X,\epsilon(g)=g(x)$. Es gilt \[\epsilon(g)=\epsilon(g') \Leftrightarrow g(x)=g'(x) \Leftrightarrow g^{-1}g'=x \Leftrightarrow g^{-1}g'\in G_x=H \stackrel{\hyperref[sub:nebenklassen]{1.13}}{\Leftrightarrow} g'H=gH\]
+Damit ist die erste Behauptung gezeigt.\\
+Für $y=g(x)$ gilt \[a(y)=y \Leftrightarrow ag(x)=g(x) \Leftrightarrow g^{-1}ag(x)=x \Leftrightarrow g^{-1}ag\in G_x \Leftrightarrow a\in gG_xg^{-1}\]
+\hfill $\square$
+%sub end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
