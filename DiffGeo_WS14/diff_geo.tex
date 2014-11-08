@@ -83,7 +83,7 @@ mit
 	äquivalent zu einer Projektion.
 	\item Sei $f : U \subset \mathds{R}^n \to \mathds{R}^{n+k}$ eine Immersion in $0$, $f(0)=0$. Dann existiert ein Diffeomorphismus 
 	\[
-		\varphi : 0 \in V \subset \mathds{R}^n \to \mathds{R}^{n+k}
+		\varphi : 0 \in V \subset \mathds{R}^{n+k} \to \mathds{R}^{n+k}
 	\]
 	mit $\varphi(0)=0$ und 
 	\[
@@ -668,7 +668,7 @@ Sei $M$ eine Untermannigfaltigkeit, $x\in M$, so existiert Umgebung $U\subset \m
 % subsubsection 142
 
 \subsubsection{Satz}
-\label{ssub:142}
+\label{ssub:143}
 Sei $M^n\subset \mathds{R}^{n+k}$ eine Untermannigfaltigkeit der Dimension $n$, $x\in M$ und $U\subset \mathds{R}^{n+k}$ offene Umgebung um $x$.
 \begin{enumerate}[(i)]
 \item $U\cap M = f^{-1}(0)$ für $f:\mathds{R}^{n+k} \to \mathds{R}^k$ eine Submersion, so ist $T_x M^n = \ker \mathd_x f$.\\
@@ -691,7 +691,7 @@ y\\
 \item Siehe \ref{ssub:142}
 \item Sei $\tilde{c}\subset \Omega$ eine Kurve, $c := g\circ \tilde{c}$ Kurve durch $c(0) = g\enbrace*{\tilde{c}(0)}\in M$. So ist $c'(0) = d_{\tilde{c}(0)} g(\tilde{c'(0)})\in T_{c(0)} M$. Also gilt $d_y g(\mathds{R}^n) \subset T_{g(y)} M$ und die Gleichheit folgt wie in (i) durch die Dimension.
 \end{enumerate}
-% subsubsection 142(end)
+% subsubsection 143(end)
 % subsection 14(end)
 
 
@@ -747,8 +747,105 @@ eine Bijektion, die wohldefiniert $\text{VR}\vert_{\mathds{R}^n}$ auf $T_x M$ in
 
 \subsubsection{Definition}
 \label{ssub:155}
-$TM := \bigcap_{x\in M} T_x M$ ist das \Index{Tangentialbündel} von $M$.
+$TM := \bigcup_{x\in M} T_x M$ ist das \Index{Tangentialbündel} von $M$.
+% subsubsection 155(end)
 
+\subsubsection{Theorem}
+\label{ssub:156}
+$TM^n$ trägt eine natürliche Differentialstruktur und hat die Dimension $2n$. (Beweis benutzt \ref{ssub:156})
+\minisec{Beweis}
+Definiere $\pi: TM\to M,\ \xi \in T_x M \mapsto \pi(\xi) = x\in M$ "Fußpunkt". $\pi$ ist surjektiv. Wir wollen nun \ref{ssub:157} anwenden. Für Karte $(U,\varphi)$ um $x\in M$ definiere $(\pi^{-1}(U),\Phi_{(U,\varphi)})$ durch 
+\marginnote{$\Theta$ aus \ref{ssub:154}. Wieso genügt es nicht, $\Phi$ als $\Theta^{-1}$ zu erklären? Ich denke um zu gewährleisten, dass $\Phi$ bijektiv ist.}
+\[
+\Phi_{(U,\varphi)} (\xi) = \enbrace{\varphi \circ \pi(\xi),\Theta^{-1}_{(U,\varphi,\pi(\xi))}(\xi)}
+\]
+Es gilt $\bigcup_{(U,\varphi)} \pi^{-1}(U) = TM$ und $\Phi_{(U,\varphi)}(\pi^{-1}(U)) = \varphi(U)\times \mathds{R}^n \overset{\text{offen}}{\subset} \mathds{R}^n\times \mathds{R}^n$ ist eine Bijektion, da $\Theta$ bijektiv.\\
+Verifiziere (i) und (ii):
+\begin{enumerate}[(i)]
+\item 
+\[
+\underbrace{\Phi_{(V,\psi)}^{-1}(\underset{\in \varphi(v)}{a},v)}_{T_{\psi^{-1}(a)} M} = \Theta_{(V,\psi,\psi ^{-1}(a))} (v) \xrightarrow{\Phi_{(V,\psi)}} \enbrace*{\psi\enbrace*{\psi^{-1}(a)}, \Theta^{-1}_{(V,\psi,\psi ^{-1}(a))}\enbrace*{\Theta_{(V,\psi,\psi ^{-1}(a))}(v)}}
+\]
+Berechne Übergangsfunktion:
+\[
+\Phi_{(U,\varphi)} \circ \Phi_{(V,\psi)}^{-1} (a,v) = \Phi_{(U,\varphi)}\enbrace*{\Theta_{(V,\psi,\psi ^{-1}(a))} (v)} = \enbrace{\varphi \circ \psi^{-1} (a), \mathd_{\phi(a)}(\varphi \circ \psi^{-1})(v)}
+\]
+(Beachte hierbei, das $T_{\varphi^{-1}(a)} \ni \big[(V,\psi,v)\big] = [(U,\varphi,\mathd_{\psi(a)}(\varphi \circ \psi^{-1})(v))]$)
+\item Seien $\xi,\eta \in TM$. Falls $\pi(\xi) = \pi(\eta)$, so sind $\xi,\eta \in \pi^{-1}(U)$ für eine Karte um $x$. Falls $\pi(\xi) = x,\ \pi(\eta) = y,\ x\neq y$, so ist $\xi \in \pi^{-1}(U),\ \eta \in \pi^{-1}(V)$ für Karten $U,V$ von $x, y$ mit $U\cap V = \emptyset$, (diese existieren, da $M$ Hausdorff). Also $\pi^{-1}(U)\cap \pi^{-1}(V) = \emptyset$.
+\end{enumerate}
+% subsubsection156(end)
+
+\subsubsection{Lemma}
+\label{ssub:157}
+Sei $M$ eine Menge mit Überdeckung $\set{U_i\subset M}_{i\in I}$, das heißt $\bigcup_{i\in I} U_i = M$. Seien für alle $i\in I$ $\varphi_i:U_i\to \mathds{R}^n$ Bijektionen mit offene Mengen $\varphi(U_i)\subset \mathds{R}^n$. Falls
+\begin{enumerate}[(i)]
+\item $\forall\ i,j\in I\ \varphi_i \circ \varphi_j^{-1}$ ist glatt
+\item $\forall\ x,y\in M$ gilt $\exists i\in I\ x,y\in U_i$ oder $\exists\ i,j$ und $U_i\cap U_j = \emptyset$ mit $x\in U_i$ und $y\in U_j$
+\end{enumerate}
+dann existiert eine eindeutig bestimmte Hausdorff-Topologie auf $M$ und eine differenzierbare Struktur, für die $\set{U_i,\varphi_i}$ ein Atlas ist.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+\item $\leadsto$ Übergangsfunktion sind Diffeomorphismen
+\item $\leadsto$ Hausdorff
+\end{enumerate}
+Siehe auch O'Neill.
+% subsubsection 157(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:158}
+Ist $M$ eine sogenannte $C^p$-Mannigfaltigkeit, das heißt die Übergangsfunktionen sind $C^p$, so folgt mit dem Beweis von \ref{ssub:156}, das $TM$ eine $C^{p-1}$.Mannigfaltigkeit ist.\\
+\\
+$TM$ ist ein spezielles Beispiel der folgenden Klasse an Mannigfaltigkeiten.
+
+\subsubsection[Definition: Vektorbündel]{Definition}
+Seien $E,B$ zwei Mannigfaltigkeiten und $\pi: E\to B$ glatt. $\enbrace{E,B,\pi}$ heißt \Index{Vektorbündel} vom Rang $r$ über $B$, falls
+\begin{enumerate}[(i)]
+\item $\pi$ surjektiv
+\item Es existiert eine offene Überdeckung $\set{U_i}_{i\in I}$ von $B$ und Diffeomorphismen $\Phi_i: \pi^{-1}(U_i) \to U_i\times \mathds{R}^r$, sodass $\forall x\in U_i:\ \Phi_i(\pi^{-1}(x)) = \set{x}\times \mathds{R}^r$.
+\item Die "Übergangsfunktionen"
+\[
+\Phi_{ji} = \Phi_j \circ \Phi_i^{-1}: U_{ji}\times \mathds{R}^r \to U_{ji}\times \mathds{R}^r
+\]
+sind von der Form $\Phi_{ji} (x,v) = \enbrace*{x,g_{ji}(x) v}$, wobei $g_{ji}: U_{ji} \to GL(r,R)$, das heißt $g_{ji} = \enbrace*{(u_{kl}(x))_{k,l=1}^r}$
+\begin{figure}[H]
+	\centering{
+\begin{tikzcd}[column sep=small]
+\pi^{-1}(U_i) \arrow{rr}{\Phi_i} \arrow{dr}{\pi} & & U_i\times \mathds{R}^n \arrow{dl}{pr_1}\\
+& U_i   &
+\end{tikzcd}
+	}
+\end{figure}
+Insbesondere ist $\Phi_{ji}(x,.):\mathds{R}^r \to \mathds{R}^r$ ein linearer Isomorphismus gegeben durch $g_{ji}(x)\in GL(r,\mathds{R}^)$	
+\end{enumerate}
+\minisec{Notation}
+\begin{itemize}
+\item $E$ Totalraum
+\item $B$ Basis
+\item $\pi^{-1}(x)$ Faser über $x$
+\end{itemize}
+\missingfigure{Vektorbündel}
+% subsubsection 158(end)
+
+\subsubsection{Beispiel}
+\label{ssub:159}
+\begin{enumerate}[(i)]
+\item Sei $M$ eine Mannigfaltigkeit. $E = M^n\times \mathds{R}^r \xrightarrow{\pi = pr_1} M$ surjektiv und glatt, so ist dies ein "triviales Bündel", $\Phi: \pi^{-1}(M) = M^n\times \mathds{R}^r \xrightarrow{\id} M^n\times \mathds{R}^r,\ \Phi(x,.) = \id \in GL(r,\mathds{R})$.\\
+Allgemein sagen wir, das $(E,\pi,B)$ trivial ist, falls ein Diffeomorphismus $\Phi: E^r \to B\times R^r$ existiert mit
+\marginnote{$r =$ Rang von $E$}
+\begin{figure}[H]
+	\centering{
+\begin{tikzcd}[column sep=small]
+E \arrow{rr}{\Phi_i} \arrow{dr}{\pi} & & B\times \mathds{R}^n \arrow{dl}{pr_1}\\
+& B &
+\end{tikzcd}
+	}
+\end{figure}
+kommutativ und $\forall x\in B$ ist $\Phi\vert_{\pi^{-1}(x)}$ ein linearer Isomorphismus.
+\item $TM \to M$ ist ein Vektorbündel vom Rang $n = \dim M$. Vegleiche dazu Karten $\Phi_{(U,\varphi)}$ aus \ref{ssub:155}.
+\end{enumerate}
+% subsubsection 159(end)
+
+% subsection 15(end)
 % section 1 (end)
 
 
