@@ -58,8 +58,9 @@ Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 	* Großteil der handschriftlichen Zeichnungen des Dozenten fehlen
 
 #### Hinweise (technische und rechtliche)
-Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_ und _Consolas_ installiert sein. Erstere
-ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar. _Ubuntu_ ist [HIER](https://www.google.com/fonts/specimen/Ubuntu "Ubuntu auf GoogleFonts") frei verfügbar. Die letzte ist zumindest unter Windows und OS X vorinstalliert.  
+Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_, _Linux Libertine_ und _Consolas_ installiert sein. Erstere
+ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar, _Ubuntu_ ist [HIER](https://www.google.com/fonts/specimen/Ubuntu "Ubuntu auf GoogleFonts") frei verfügbar und _Linux Libertine_ ist [HIER](http://www.linuxlibertine.org/index.php?id=91&L=1 "linuxlibertine.org") frei verfügbar.
+ Die letzte ist zumindest unter Windows und OS X vorinstalliert.  
 Wenn die Schriften nicht verfügbar sind, dann müssen entweder die entsprechenden Befehle in `mitschrift.tex` modifiziert werden oder 
 man verwendet den Standardtreiber `pdfLaTeX`.
 

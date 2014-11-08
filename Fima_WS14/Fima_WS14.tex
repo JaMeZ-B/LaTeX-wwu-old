@@ -893,7 +893,7 @@ Deshalb gilt für den Preis Payerswap($t$) in $t\le t_0$:\\
 \end{aligned}
 \end{equation*}
 Der "faire" Festzinspreis $R$ liegt dann in $t$ vor, wenn Payer-Swap($t$)=0, also wenn
-\[R= \frac{B(t,t_0)-B(t,t_m)}{\sum_{i=1}^{m}B(t,t_i)(t_i-t_{i-1})} \]
+\[R= \frac{B(t,t_0)-B(t,t_m)}{\sum\limits_{i=1}^{m}B(t,t_i)(t_i-t_{i-1})} \]
 $R$ ist dann die sogenannte \Index{Swaprate} in $t$.
 
 % subsection swaps (end)
@@ -949,6 +949,7 @@ Aus Sicht des Versicherungsunternehmens erzeugt eine Personenverischerung die fo
 	Einnahmestrom:\\
 	$I(n)=b(n)\mathbb{1}_{\{T>n \}}~~\forall n \in \mathds{N}_0$
 \end{minipage}
+
 Bewertung aus heutiger Sicht durch
 \begin{equation*}
 \begin{aligned}
@@ -1003,15 +1004,15 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 		\item Praxis:
 		\begin{itemize}
 			\item Restlebenszeit wird durch das Alter bestimmt $T_x$ Restlebenszeit eines x-Jährigen
-			\item Stationaritätsannahme $\mathds{P}(T_x>t~|~T_x>s)=\mathds{P}(T_{x+s}>t)$
+			\item Stationaritätsannahme $\mathds{P}(T_x>t+s~|~T_x>s)=\mathds{P}(T_{x+s}>t)$
 			\item $q_x= \mathds{P}(T_x\le 1)$ 1-jährige Sterbew'keit eines x-Jährigen
 			\item $p_x=1-q_x=\mathds{P}(T_x>1)$ 1-jährige Überlebensw'keit eines x-Jährigen
 			\item $_kp_x:=\mathds{P}(T_x>k)=\mathds{P}(T_x>1)\mathds{P}(T_x>k~|~T_x>1)\stackrel{\text{Stationarität}}{=} p_x \mathds{P}(t_{x+1}>k-1)\\ =\dots=p_xp_{x+1}\dots p_{x+k-1}$
 			\item $_kq_x = 1- _kp_x = \mathds{P}(T_x\le k)$
 			\item Bezeichnung für $M=1$, Eintrittsalter $x$\\
-			$_{|n}A_x = \sum_{k=1}^{n}r^k \mathds{P}(k-1<T_x\le k)$\\
+			$_{|n}A_x = \sum\limits_{k=1}^{n}r^k \mathds{P}(k-1<T_x\le k)$\\
 			für $p=1$:\\
-			$ä_{x:n\rceil} = \sum_{k=0}^{n-1}r^k \mathds{P}(T_x>k)$\\
+			$ä_{x:n\rceil} = \sum\limits_{k=0}^{n-1}r^k \mathds{P}(T_x>k)$\\
 			Die Todesfallversicherung ist fair, wenn $M\cdot~_{|n}A_x = p \cdot ä_{x:n\rceil}$\\
 			$n \to +\infty$ entspricht Todesfallversicherung ohne zeitliche Beschränkung
 			\item Bezeichnung\\
@@ -1062,11 +1063,11 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 		\item[Induzierte Zahlungsströme:]
 		\item Ausgaben: $A(m+k)= R\cdot \mathbb{1}_{\{T>m+k\}}~ k=0,\dots,n-1,~~ A(k)=0$ sonst
 		\item Einnahmen: $I(k)=p\cdot \mathbb{1}_{\{T>k\}}~ k=0,\dots,m-1 ~~ I(k)=0$ sonst
-		\item Barwert der Ausgaben: $\mathds{E}V_0(A)=\sum_{k=0}^{n-1}R\cdot v^{m+k}\mathds{P}(T_>m+k)$
-		\item Barwert der Einnahmen: $\mathds{E}V_0(I)=p\underbrace{\sum_{k=0}^{m-1}v^k \mathds{P}(T>k)}_{ä_{x:m\rceil}}=p\cdot ä_{x:m\rceil}$
-		\item Bezeichnung für $R=1$: $_{m|n}ä_x:=\sum_{k=0}^{n-1}v^{m+k}\mathds{P}(T>m+k)$
+		\item Barwert der Ausgaben: $\mathds{E}V_0(A)=\sum\limits_{k=0}^{n-1}R\cdot v^{m+k}\mathds{P}(T_>m+k)$
+		\item Barwert der Einnahmen: $\mathds{E}V_0(I)=p\underbrace{\sum\limits_{k=0}^{m-1}v^k \mathds{P}(T>k)}_{ä_{x:m\rceil}}=p\cdot ä_{x:m\rceil}$
+		\item Bezeichnung für $R=1$: $_{m|n}ä_x:=\sum\limits_{k=0}^{n-1}v^{m+k}\mathds{P}(T>m+k)$
 		\item Die Versicherung ist fair, wenn $R\cdot~ _{m|n}ä_x=p\cdot ä_{x:m\rceil}$
-		\item Für $n=\infty$, lebenslange Rente: $_{m|}ä_x=\sum_{k=0}^{\infty}v^{k+m}\mathds{P}(T>m+k)$
+		\item Für $n=\infty$, lebenslange Rente: $_{m|}ä_x=\sum\limits_{k=0}^{\infty}v^{k+m}\mathds{P}(T>m+k)$
 	\end{itemize}
 	\item \Index{Erlebensfallversicherung}\\
 	\begin{itemize}
@@ -1139,8 +1140,8 @@ Für $m=0$ ist $\mathcal{D}(0)$ der Barwert der Versicherung. $\mathcal{D}(0)=0$
 \bet{Bemerkung:}\\
 \begin{equation*}
 \begin{aligned}
-	\mathds{E}(V_m(A)~|~T>m) &= \mathds{E}\enbrace{\sum_{k=0}^{\infty}A(m+k)\underbracket{B(m,m+k)}_{=v^k}~|~(T>m}\\
-	&= \sum_{k=1}^{\infty}t(k+m)B(m,m+k) \mathds{P}(m+k-1<T<m+k~|~T>n)\\
+	\mathds{E}(V_m(A)~|~T>m) &= \mathds{E}\enbrace{\sum_{k=0}^{\infty}A(m+k)\underbracket{B(m,m+k)}_{=v^k}~|~(T>m)}\\
+	&= \sum_{k=1}^{\infty}t(k+m)B(m,m+k) \mathds{P}(m+k-1<T<m+k~|~T>m)\\
 	&+ \sum_{k=0}^{\infty}s(k+m)B(m,m+k) \mathds{P}(T>m+k~|~T>m)	
 \end{aligned}
 \end{equation*}
@@ -1427,9 +1428,157 @@ Weitere Beispiele für Personenversicherungen bei denen die Ausfallzeiten nicht 
 	\[\mathds{P}(T_x\le n+k,~J=j~|~T_x>n)=\mathds{P}(T_{x+n}\le k,~ J=j)\quad \forall n\in \mathds{N}_0,~k\in\mathds{N},~j\in \{1,\dots,m\} \]
 \end{itemize}
 
+\minisec{Definition}
+$\enbrace{(T_x)_{x\in \mathds{N}_0},J}$ ist stationär, falls gilt \[ \mathds{P}(T_X\le n+k,J=j~|~T_x>n)=\mathds{P}(T_{x+n}\le k,J=j)\quad \forall n\in \mathds{N}_0,~k\in \mathds{N},~j\in \{1,\dots,m\} \]
 
+\minisec{Lemma}
+Ist $\enbrace{(T_x)_{x\in \mathds{N}_0},J}$ stationär, so ist auch $(T_x)_{x\in \mathds{N}_0}$ stationär. Es gilt also \[ \mathds{P}(T_x\le n+k~|~T_x>n)=\mathds{P}(T_{x+n}\le k) \]
 
+\bet{Beweis:}\\
+\[ \mathds{P}(T_x\le n+k~|~T_x>n)= \sum_{j=1}^{m}\mathds{P}(T_x\le n+k,J=j~|~T_x>n)= \sum_{j=1}^{m}\mathds{P}(T_{x+n}\le k,J=j)= \mathds{P}(T_{x+n}\le k) \]
 
+Setze $q_{x,j}=\mathds{P}(T_x\le 1,J=j)$ als W'keit eines $x$-Jährigen im nächsten Jahr wegen Ursache $j$ auszuscheiden.\\
+$q_x=\mathds{P}(T_x\le 1)=\sum\limits_{j=1}^{m}q_{x,j}$.\\
+$p_x=1-q_x$ einjährige Verweildauer eines x-Jährigen.\\
+Wegen der Stationaritätsannahme gilt dann: \[ \mathds{P}(T_x>n)=\mathds{P}(T_x>n~|~T_x>n-1)\cdot\dots \cdot \mathds{P}(T_x>1)= p_{x+n-1}\cdot \dots\cdot p_x \]
+bzw.
+\begin{equation*}
+\begin{aligned}
+	\mathds{P}(n-1<T_x\le n,J=j) &= \mathds{P}(n-1<T_x\le n,J=j~|~T_x>n-1)\mathds{P}(T_x>n-1)\\
+	&= \mathds{P}(T_{x+n-1}\le 1,J=j)\mathds{P}(T_x>n-1)\\
+	&= q_{x+n-1,j}\mathds{P}(T_x>n-1)
+\end{aligned}
+\end{equation*}
+Für eine Berechnung der Barwerte genügt es also die $q_{x,j}$ zu spezifizieren.\\
+
+\uline{Bsp:} Invaliditätsrente:\\
+\begin{itemize}
+	\item Eintrittsalter $x$
+	\item Grundzustand aktiv (a)
+	\item $n$ Restlaufzeit zur gesetzlichen Rente
+	\item mögliche Ausscheideursachen
+	\begin{itemize}
+		\item Invalidität
+		\item Tod
+	\end{itemize}
+\end{itemize}
+Bei Invalidität wird eine lebenslange Rente der Höhe $R$ gezahlt.\\
+\uline{Modell:}\\
+\begin{center}
+	$T_x \mathrel{\hat{=}}$ Verweilzeit im Zustand a\\
+	$\mathds{P}(T_x>k) \mathrel{\hat{=}}$ als aktiver $k$ Jahre zu überleben\\
+	$J=1 \mathrel{\hat{=}}$ Invalidität\\
+	$J=2 \mathrel{\hat{=}}$ Tod\\
+	$t_1(k)=R\cdot ä_{x+k} \mathrel{\hat{=}}$ Leistung bei Invalidisierung im $k$-ten Jahr, Barwert des Rentenanspruchs, $k=1,\dots,n$\\
+	$t_2(k)=0~\forall k\in \mathds{N}_0,~s(k)=0,~\forall k\in \mathds{N}_0,~b(k)=p,~ k=0,\dots,n-1$
+\end{center}
+\uline{Bewertung:}\\
+\begin{equation*}
+\begin{aligned}
+	\mathds{E}V(A) &= R\sum_{k=1}^{n}ä_{x+k}v^k\mathds{P}(k-1<T_x\le k,J=j)\\
+	&= R\sum_{k=1}^{n}ä_{x+k}v^kq_{x+k-1}\mathds{P}(T_x>k-1)\\
+	\mathds{E}V(A) &= p\sum_{k=0}^{n-1}v^k\mathds{P}(T_x>k)
+\end{aligned}
+\end{equation*}
+$i(y):=q_{y,1}$ einjährige Invalidisierungsw'keit eines $y$-Jährigen\\
+$q_y^a:=q_{y,2}$ einjährige Sterbew'keit eines aktiven\\
+$q_y=q_y^a+i(y)$ W'keit eines aktiven $y$-Jährigen im nächsten Jahr auszuscheiden.\\
+$p_y=1-q_y$\\
+% subsection ausscheideursachen (end)
+% section zahlungsströme (end)
+
+\section{Exkurs stochastische Prozesse}
+\label{sec:stoch_prozesse}
+
+\subsection{Definitionen}
+\label{sub:def}
+Sei $(\Omega,\mathcal{F},\mathds{P})$ ein W'Raum. Sei $T\subseteq \mathds{R}$ eine Zeitparametermenge. Sei $(E,\mathcal{E})$ ein messbarer Raum als Zustandsraum. Eine Familie $(X_t)_{t \in T}$ von $E$-wertigen ZV'en heißt \Index{stochastischer Prozess}.\\
+\marginnote{man glaubt es nicht ein W'Raum ;) }
+Eine Familie $(\mathcal{F}_t)_{t\in T}$ von Unter-$\sigma$-Algebren von $\mathcal{F}$ heißt \Index{Filtration},wenn \[\mathcal{F}_s\subseteq \mathcal{F}_t~\forall s\le t,~s,t\in T\]
+$(\mathcal{F}_t)_{t\in T}$ gibt ein Informationsverlauf wieder. $\mathcal{F}_t \mathrel{\hat{=}}$ Informatio, die bis zum Zeitpunkt $t$ verfügbar ist.\\
+$(X_t)_{t\in T}$ heißt \Index{adaptiert} bzgl. der Filtration $(\mathcal{F}_t)_{t\in T}$, falls gilt $X_t$ ist messbar bzgl. $\mathcal{F}_t~\forall t\in T$. In der Regel: $T\subseteq \mathds{N}_0$ oder $T\subseteq [0,\infty)$, $E=\mathds{R}^d,~\mathcal{E}=\mathcal{L}(\mathds{R}^{^0d})$\\
+
+\uline{Beispiel:}\\
+Die Preisentwicklung von $d$ Finanzgütern kann man durch einen stochastischen Prozess $(X_t)_{t\in T}$ mit Werten in $\mathds{R}^d$ beschreiben.
+
+%subsection definitionen (end)
+
+\subsection{Das N-Perioden CRR-Modell}
+\label{sub:crr_modell}
+\begin{minipage}[c]{12cm}
+	(Anmerkung: CRR steht für Coxe-Ross-Rubinstein)\\
+	$\Omega=\{0,1\}^N,~\mathcal{F}=\mathds{P}(\Omega),~0<d<u$\\
+	$Y_n:\Omega\to \mathds{R},~\omega\mapsto u^{\omega_n}d^{1-\omega_n}=\left\{\begin{array}{cl} u, & \text{falls }\omega_n=1\\ d, & \text{falls }\omega_n=0    \end{array}\right.$\\
+	$S_n=Y_1Y_2\cdot\dots\cdot Y_n$ Preis nach $n$-Perioden, $(S_n)_{n=0,\dots,N}$ Verlauf einer Aktie über $N$ Perioden.\\
+	Zusätzlich zur Aktie betrachtet man ein \Index{Geldmarktkonto} mit konst. periodischer Verzinsung $r$.\\
+	$\begin{pmatrix} (1+r)^n \\ S_n \end{pmatrix}_{n=0,\dots,N}$ beschreibt im \Index{CRR-Modell} den Verlauf der Preise dieser beiden Basisfinanzgüter.\\
+		
+	Anmerkung zur Abbildung 20: bei sehr kleinen Zeitsprüngen ist es möglich anzunehmen, dass das Finanzgut nur einen kleinen Sprung nach oben oder unten machen kann (zetliche Darstellung der Black-Scholes Formel).
+\end{minipage}
+\begin{minipage}[t]{5cm}
+	\begin{center}
+	\begin{tikzcd}[column sep=small]
+		& & & u^3 \\
+		& & u^2 \ar{ru} \ar{rd} &\\
+		& u \ar{ru} \ar{rd} & & u^2d  \\
+		1 \ar{ru} \ar{rd}  &  & ud \ar{ru} \ar{rd} &\\
+		& d \ar{ru} \ar{rd} & & ud^2\\
+		& & d^2\ar{ru} \ar{rd} &\\
+		& & & d^3 
+	\end{tikzcd}
+	\captionof{figure}{CRR-Modell}
+	\end{center}
+\end{minipage}
+
+% subsection crr-modell (end)
+
+\subsection{Random-Walk}
+\label{sub:random_walk}
+Sei$(Y_n)_{n\in \mathds{N}}$ eine Folge von iid ZV'en. Sei $Y_0$ unabhängig von $(Y_n)_{n\in \mathds{N}}$.\\
+Durch $S_n=Y_0+\sum\limits_{k=1}^{n}Y_k,~n\in \mathds{N}$ wird ein sogenannter \Index{Random-Walk} definiert.\\
+Durch $S_n=Y_0\cdot \prod\limits_{k=0}^{n}Y_k,~n\in \mathds{N}$ wird ein \bet{geometrischer Random-Walk}\index{Random-Walk!geometrischer} definiert. Die Aktie im CRR-Modell ist ein geom. Random-Walk.
+
+% subsection random-walk (end)
+
+\subsection{Bedingter Erwartungswert}
+\label{sub:bed_ew}
+Sei $(\Omega,\mathcal{F},\mathds{P})$ ein W'Raum. $G$ Unter-$\sigma$-Algebra von $\mathcal{F}$. $X:\Omega\to \mathds{R}$ sei messbar bzgl.$\mathcal{F}$ und es existiert  $\mathds{E}X$.\\
+Dann heißt $Z:\Omega\to\mathds{R}$ eine Version des \bet{bedingten Erwartungswertes}\index{bedingter Erwartungswert} von $X$ bzgl. $G$, wenn gilt:\\
+\begin{enumerate}[(i)]
+	\item $Z$ ist messbar bzgl. $G$
+	\item $\int\limits_{A}Z\mathrm{d}\mathds{P}=\int\limits_{A}X\mathrm{d}\mathds{P}\quad \forall A\in G$
+\end{enumerate}
+Schreibweise $Z=\mathds{E}(X~|~G)$; ist $G=\sigma(Y)$ für eine ZV $Y$,so schreibt man $\mathds{E}(X~|~G)=\mathds{E}(X~|~Y)$
+
+% subsection bed ew (end)
+
+\subsection{Existenz \& Eindeutigkeit}
+\label{sub:ex&eind}
+Gegeben seien die Bezeichnungen von \hyperref[sub:bed_ew]{3.4}. Dann existiert der bedingte Erwartungswert von $X$ bzgl. $G$ und ist $\mathds{P}$-f.s. eindeutig bestimmt, d.h. erfüllen $Z_1,Z_2$ die Bedingungen (i),(ii) aus 3.4, so gilt $Z_1=Z_2,~\pfs$\\
+
+\bet{Beweis:}\\
+\uline{Existenz:} 1.Fall: $X\ge 0$\\
+$\mu(A)=\int\limits_AX\dint\mathds{P},~A\in G$ definiert ein $\sigma$-endliches Maß auf $(\Omega,G)$mit $\mu \ll \mathds{P}$.\\
+Satz von Radon-Nikodym liefert ein $G$-messbares $Z$ mit $\mu(A)=\int\limits_A Z\dint\mathds{P}$. Also $Z=\mathds{E}(X~|~G)~\forall A\in G$\\
+2.Fall: $X=X^+-X^-$\\
+$\mathds{E}(X^+~|~G),~\mathds{E}(X^-~|~G)$ existiert nach Fall 1.
+\begin{equation*}
+\begin{aligned}
+	\int\limits_AX\dint\mathds{P} &= \int\limits_AX^+\dint\mathds{P}-\int\limits_Ax^-\dint\mathds{P}\\
+	&= \int\limits_A\mathds{E}(x^+~|~G)\dint\mathds{P}-\int\limits_A\mathds{E}(X^-~|~G)\dint\mathds{P}\\
+	&= \int\limits_A\mathds{E}(X^+~|~G)-\mathds{E}(X^-~|~G)\dint\mathds{P}\quad A\in G
+\end{aligned}
+\end{equation*}
+Also ist $\mathds{E}(X^+~|~G)-\mathds{E}(X^-~|~G)$ der bedingte Erwartungswert von $X$ bzgl. $G$.\\
+\uline{Eideutigkeit:} $Z_1,Z_2$ bedingte EW. Sei $A=\{Z_1-Z_2>\frac{1}{n}\}$, ist $G$ messbar.
+\begin{equation*}
+\begin{aligned}
+	&\int\limits_{A}Z_1-Z_2\dint\mathds{P}\stackrel{Z_1,Z_2\text{ EW}}{=} \int\limits_AX\dint\mathds{P}-\int\limits_AX\dint\mathds{P}=0\\
+	&\Rightarrow \mathds{P}(Z_1-Z_2>\frac{1}{n})=0~\forall n\in \mathds{N}\\
+	&\Rightarrow \mathds{P}(Z_1-Z_2>0)=0\\
+	&\text{Genauso folgt } \mathds{P}(Z_2-Z_1>0)=0
+\end{aligned}
+\end{equation*}
 
 
 
