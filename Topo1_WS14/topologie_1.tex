@@ -1419,16 +1419,73 @@ Sei $x \in H_n(C_*.d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. D
 
 \subsection{Lemma} % (fold)
 \label{sub:78}
-Die Homotopieinvarianz von $H_n(-;R)$ folgt aus:
+Die Homotopieinvarianz von $H_n(-;R)$ folgt aus folgenden Spezialfall:
 \begin{equation*}
-	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. \\ Dann gilt $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
+	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. $\Longrightarrow$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
 \end{equation*}
 \minisec{Beweis}
-Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt \eqref{eq:78}
+Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt
 \begin{align*}
 	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
 \end{align*}
 % subsection 78 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:79}
+Zum Beweis von \eqref{eq:78} werden wir eine explizite Kettenhomotopie $h_*$ zwischen $C_*(i_0;R)$ und $C_*(i_1;R)$ konstruieren. Wir brauchen also 
+$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ mit $\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R)$.
+
+\minisec{"Ansatz"}
+Für $\sigma : \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} : \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. Dann ist
+"$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{(0,1]}$" und 
+\[
+	\partial_{n+1}(h_n \sigma) = \partial_{n+1}(\sigma \times \id_{[0,1]}) = (\sigma \times \id)\Big|_{\partial (\abs*{\Delta^n} \times [0,1] )} = \partial_n \sigma \times \id_{[0,1]} + i_0 \sigma + i_1 \sigma
+\]
+$\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1} $
+
+Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes:
+\missingfigure{Hier komme noch ein paar Simplizes hin mit Zerlegung und so }
+% subsection 79 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:710}
+Für $j=0, \ldots ,n$ sie $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ die eindeutige lineare Abbildung für die $k_{n,j}(e_0)=(e_0,0)$,
+$k_{n,j}(e_1)= (e_1,0), \ldots , k_{n,j}(e_j)= (e_j,0), k_{n,j}(e_{j+1})= (e_j,1), \ldots , k_{n,j}(e_{n+1})= (e_n,1)$. \todo{schöner machen}
+% subsection 710 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:711}
+Für $j=0, \ldots ,n$ ist $ \iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$ die eindeutige affin lineare Abbildung für die
+\[
+	\iota_{n,j}(e_0) = e_0 ,\ldots , \iota_{n,j}(e_{j-1})= e_{j-1}, \iota_{n,j}(e_j)= e_{j+1} , \ldots , \iota_{n,j}(e_{n-1}) = e_n
+\]
+% subsection 711 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:712}
+\begin{enumerate}[(i)]
+	\item Für $0 \le l < j \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l} \times \id_{[0,1]}} \circ k_{n-1,j-1}$
+	\item Für $1 \le j+1 < l \le n+1$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l-1} \times \id_{[0,1]}} \circ k_{n-1,j} $
+	\item Für $1 \le j+1 = l \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = k_{n,j+1} \circ \iota_{n+1,l}$
+	\item Für $i=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
+	\item Für $l=n,j=n+1$ ist $k_{n,j} \circ \iota_{n+1,l} = i_0 : \Delta^n \to \Delta^n \times [0,1]$
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item per Zeichnung
+	\missingfigure{linke Seite}
+	
+	\missingfigure{rechte Seite}
+\end{enumerate}
+% subsection 712 (end)
+
+\subsection[Beweis von {[\#]}]{Beweis von \protect\eqref{eq:78}} % (fold)
+\label{sub:713}
+Sei $h_n : C_n(C;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
+\[
+	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \enbrace*{\sigma \times \id} \circ k_{n,j} 
+\] 
+% subsection 713 (end)
 % section 7 (end)
 
 \cleardoubleoddemptypage
