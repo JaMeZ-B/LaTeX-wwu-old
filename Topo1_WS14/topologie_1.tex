@@ -1321,7 +1321,7 @@ Da $\bigoplus H_n \enbrace*{C_*(X_i;R),\partial_*} \cong H_n \enbrace*{\bigoplus
 \section{Homotopieinvarianz} % (fold)
 \label{sec:7}
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Die induzierte Abbildung eines Homöomorphismus ist ein Isomorphismus]{Bemerkung} % (fold)
 \label{sub:71}
 Sei $f : X \to Y$ eine Homöomorphismus. Dann ist 
 \[
@@ -1337,17 +1337,98 @@ Da Homologie ein Funktor ist, gilt
 Also $(f_*)^{-1}=(f ^{-1})_*$. Insbesondere ist $f_*$ ein Isomorphismus. \bewende
 % subsection 71 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Definition: Homotopieäquivalenz]{Definition} % (fold)
 \label{sub:72}
-Seien $f,g : X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt $H_n(f;R) = H_n(g;R)$.
+Eine stetige Abbildung $f : X \to Y$ heißt eine \Index{Homotopieäquivalenz}, falls es eine stetige Abbildung $g : Y \to X$ gibt, so dass $g \circ f$ homotop zu $\id_X$ ist
+und $f \circ g$ homotop zu $\id_Y$ ist. $g$ heißt dann eine \Index{Homotopieinverse} zu $f$.
+\minisec{Bemerkung}
+\begin{enumerate}[(i)]
+	\item $f$ ist genau dann eine Homotopieäquivalenz, wenn $[f]$ in $\HTOP$ invertierbar ist. In $\HTOP$ ist dann $[f]^{-1} = [g]$.
+	\item Die Homotopieinverse ist eindeutig bis auf Homotopie.
+\end{enumerate}
 % subsection 72 (end)
 
-\subsection{Korollar} % (fold)
+\subsection[Satz: Homotopieinvarianz der Homologie]{Satz} % (fold)
 \label{sub:73}
-Ist $f : X \to Y$ eine Homotopieäquivalenz \todo{Def als Fußnote}, so ist $f_* : H_n(X;R) \to H_n(Y;R)$ ein Isomorphismus.
+Seien $f,g : X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt $H_n(f;R) = H_n(g;R)$ für alle $n \in \mathds{N}$.
 \minisec{Beweis}
-
+\emph{siehe \ldots } \todo{hinzufügen} \bewende
 % subsection 73 (end)
+
+\subsection[Korollar: Die induzierte Abbildung einer Homotopieäquivalenz ist ein Isomorphismus]{Korollar} % (fold)
+\label{sub:74}
+Ist $f : X \to Y$ eine Homotopieäquivalenz, so ist $f_* : H_n(X;R) \to H_n(Y;R)$ ein Isomorphismus.
+\minisec{Beweis}
+Sei $g : Y \to X$ ein Homotopieinverses zu $f$. Es folgt 
+\begin{align*}
+	f_* \circ g_* &\stackrel{\text{Funktor}}{=} (f \circ g)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_Y)_* \stackrel{\text{Funktor}}{=} \id_{H_n(Y;R)} \\
+	g_* \circ f_* &\stackrel{\text{Funktor}}{=} (g \circ f)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_X)_* \stackrel{\text{Funktor}}{=} \id_{H_n(X;R)}
+\end{align*}
+% subsection 74 (end)
+
+\subsection[Korollar: Homologie eines kontrahierbaren Raumes]{Korollar} % (fold)
+\label{sub:75}
+Ist $X$ \Index{kontrahierbar}, d.h. es gibt eine Homotopie $H : X \times [0,1] \to X$ mit $H_0 =\id_X$ und $H_1$ konstant, so gilt 
+\[
+	H_n(X;R) \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases}
+\] 
+\minisec{Beweis}
+Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopieäquivalenz. Also gilt nach \ref{sub:74}
+\[
+	H_n(X;R) \cong H_n(\set{x_0};R) = \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases} \bewende
+\]
+\minisec{Beispiel}
+\[
+	H_n(\mathds{R}^k;R) \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases} \qquad \text{ und } \qquad 
+	H_n(D^k;R) \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases}
+\]
+% subsection 75 (end)
+
+\subsection[Definition: Kettenhomotopie]{Definition} % (fold)
+\label{sub:76}
+Seien $(C_*,D_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_+ : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
+ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mathds{N}$, sodass für alle $n$ gilt:
+\[
+	d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
+\] 
+In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
+% subsection 76 (end)
+
+\subsection[Proposition: Die induzierten Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
+\label{sub:77}
+Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ und $g_*$ kettenhomotop, so gilt $H_n(f_*) = H_n(g_*)$ für alle $n$.
+\minisec{Beweis}
+Sei $x \in H_n(C_*.d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
+\begin{align*}
+	H_n(f_*)(x) = H_n(f_*) \enbrace*{[v]} = \benbrace*{f_n(v)}  &= \benbrace[\Big]{g_n(v) +\underbrace{ d_{n+1}' \circ h_n(v)}_{\in \im d_{n+1}'} + \underbrace{h_{n-1} \circ d_n(v)}_{=0}} \\
+	&= \benbrace*{g_n(v)} = H_n(g_*) \enbrace*{[v]} = H_n(g_*)(x) \bewende
+\end{align*}
+% subsection 77 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:78}
+Die Homotopieinvarianz von $H_n(-;R)$ folgt aus:
+\begin{equation*}
+	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. \\ Dann gilt $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
+\end{equation*}
+\minisec{Beweis}
+Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt \eqref{eq:78}
+\begin{align*}
+	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
+\end{align*}
+% subsection 78 (end)
 % section 7 (end)
 
 \cleardoubleoddemptypage
