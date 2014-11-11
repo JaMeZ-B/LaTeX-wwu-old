@@ -990,9 +990,58 @@ Für $\varphi \in X = Z^{*}$ existiert $C_\varphi \ge 0$ mit $\abs*{T \varphi} =
 für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende
 % subsection 36 (end)
 
-Tatsache für Übungen: $X,Y$ Banachräume, $T \in L(X,Y)$ surjektiv $\Rightarrow T$ ist offen.
+\subsection{Corollar} % (fold)
+\label{sub:37}
+Sei $X$ ein Banachraum und $Z$ ein normierter Raum. $M \subset L(X,Z)$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ und $x \in X$ existiert $C_{x,\varphi} \ge 0$
+mit
+\[
+	\abs*{\varphi \enbrace[\big]{T(x)}} \le C_{x,\varphi}, \quad T \in M
+\]
+Dann ist $M$ beschränkt.
+\minisec{Beweis}
+Für jedes $x \in X$ folgt aus Corollar \ref{sub:36} mit $N := \set[T(x)]{T \in M}$, dass $N$ beschränkt ist. Es folgt, dass $ \set[x \mapsto \norm{T(x)} ]{T \in M}$ ist 
+punktweise gleichmäßig beschränkt. Mit Satz \ref{sub:35} folgt: $M$ ist beschränkt. \bewende
+% subsection 37 (end)
 
-Corollar: $T \in L(X,Y)$ bijektiv $\Rightarrow $ $T ^{-1}$ stetig.
+\subsection{Satz: Prinzip der offenen Abbildung} % (fold)
+\label{sub:38}
+Seien $X,Y$ Banachräume, $T \in L(X,Y)$ surjektiv. Dann ist $T$ offen, d.h. für eine offene Menge $U \subset X$ ist $T(U) \subset Y$ offen.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Sei $0 \in W \subset X$ offen, dann existiert $\emptyset \not= V \subset Y$ offen mit $V \subset \overline{T(W)}$: $0 \in W \subset X$ $\Rightarrow $ 
+	$B(0,\varepsilon) \subset W$ für ein $\varepsilon>0$. Dann gilt
+	\[
+		X=\bigcup_{n \in \mathds{N}} n \cdot B(0,\varepsilon) = \bigcup_{n \in \mathds{N}} n \cdot W
+	\]
+	Aus der Surjektivität von $T$ folgt $Y = \bigcup_{n \in \mathds{N} }n \cdot T(W) = \bigcup_{n \in \mathds{N}} n \cdot \overline{T(W)}$. Nach dem Satz von Baire 
+	(\ref{sub:110}) folgt: Ein $n \cdot \overline{T(W)}$ enthält eine nichtleere offene Teilmenge, also auch $\overline{T(W)}$.
+	\item Sei $= \in M \subset X$ offen, dann ist $0$ ein innerer Punkt von $\overline{T(M)}$: 
+	
+	Die Abbildung $X \times X \to X$, $(x_1,x_2) \mapsto x_1 -x_2$ ist stetig.\footnote{Banachräume sind topologische Vektorräume} $\Rightarrow$ es gibt $0 \in W \subset X$ 
+	offen mit
+	\[
+		W - W = \set[x_1 -x_2]{x_1,x_2 \in W} \subset M 
+	\]
+	Es folgt 
+	\[
+		\overline{T(M)} \supset \overline{T(W-W)} = \overline{T(W)- T(W)} \stackrel{\text{(Warum?)}}{\supset} \overline{T(W)}- \overline{T(W)} \stackrel{\text{(i)}}{\supset}
+		V -V
+	\]
+	für $\emptyset \not= V$ offen in $Y$ wie in (i). Aber $0 \in V-V = \bigcup_{y \in V}\set{y}- V$ ist offen in $Y$. Also ist $0$ ein innerer Punkt von $\overline{T(M)}$.
+	\item Ist $0 \in N \subset X$ offen, so existiert $0 \in Z \subset Y$ offen mit $Z \subset T(M)$:
+	
+	Sei $\varepsilon_0 >0$. Wähle $\varepsilon_i >0$, $1 \le i \in \mathds{N}$ mit $\sum_{i=1}^{\infty} \varepsilon_i < \varepsilon_0$. Nach (ii) gilt: Zu $\varepsilon_i$, 
+	$i \in N$ existiert ein $\delta_i >0$ mit $B_Y(0,\delta_i) \subset \overline{T \enbrace*{B_X(0,\varepsilon_i)}}$. Es gilt $\delta_i \xrightarrow{i \to \infty} 0$. Sei 
+	nun $y \in B_Y(0,\delta_0)$. Dann gilt $y \in \overline{T \enbrace*{B_X(0,\varepsilon_0)}}$. $\Rightarrow $ es existiert $x_0 \in B_X(0,\varepsilon)$ mit 
+	$\norm[Y]{y- T(x_0)}< \delta_1$. Folglich existiert $x_1 \in B_X(0,\varepsilon_1)$ mit $\norm[Y]{y- T(x_0) - T(x_1)} < \delta_2$. Per Induktion folgt
+	\[
+		\exists x_i \in B_X(0,\varepsilon_i) \text{ mit } \norm[Y]{y- \sum\nolimits_{j=0}^{i}T(x_i)} < \delta_{i+1}, \qquad i \in \mathds{N} 
+	\]
+	$\sum_{i \in \mathds{N}}x_i$ konvergiert in $X$ und $\norm[X]{\sum_{i\in \mathds{N}} x_i} < 2 \cdot \varepsilon_0 $, es gilt $T \enbrace*{\sum_{i \in \mathds{N}}x_i}=y$
+	($x_i \in N$, falls $B(0,2 \varepsilon_0) \subset N$).
+\end{enumerate}
+% subsection 38 (end)
+
 % section 3 (end)
 
 
@@ -1019,6 +1068,10 @@ Andererseits aber auch
 \]
 Insgesamt folgt also die Behauptung. \bewende
 % subsection vier_ungl (end)
+
+Tatsache für Übungen: $X,Y$ Banachräume, $T \in L(X,Y)$ surjektiv $\Rightarrow T$ ist offen.
+
+Corollar: $T \in L(X,Y)$ bijektiv $\Rightarrow $ $T ^{-1}$ stetig.
 
 % section anhang (end)
 \cleardoubleoddemptypage
