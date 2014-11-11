@@ -1032,17 +1032,64 @@ Seien $X,Y$ Banachräume, $T \in L(X,Y)$ surjektiv. Dann ist $T$ offen, d.h. fü
 	
 	Sei $\varepsilon_0 >0$. Wähle $\varepsilon_i >0$, $1 \le i \in \mathds{N}$ mit $\sum_{i=1}^{\infty} \varepsilon_i < \varepsilon_0$. Nach (ii) gilt: Zu $\varepsilon_i$, 
 	$i \in N$ existiert ein $\delta_i >0$ mit $B_Y(0,\delta_i) \subset \overline{T \enbrace*{B_X(0,\varepsilon_i)}}$. Es gilt $\delta_i \xrightarrow{i \to \infty} 0$. Sei 
-	nun $y \in B_Y(0,\delta_0)$. Dann gilt $y \in \overline{T \enbrace*{B_X(0,\varepsilon_0)}}$. $\Rightarrow $ es existiert $x_0 \in B_X(0,\varepsilon)$ mit 
+	nun $y \in B_Y(0,\delta_0) =: Z$. Dann gilt $y \in \overline{T \enbrace*{B_X(0,\varepsilon_0)}}$. $\Rightarrow $ es existiert $x_0 \in B_X(0,\varepsilon)$ mit 
 	$\norm[Y]{y- T(x_0)}< \delta_1$. Folglich existiert $x_1 \in B_X(0,\varepsilon_1)$ mit $\norm[Y]{y- T(x_0) - T(x_1)} < \delta_2$. Per Induktion folgt
 	\[
 		\exists x_i \in B_X(0,\varepsilon_i) \text{ mit } \norm[Y]{y- \sum\nolimits_{j=0}^{i}T(x_i)} < \delta_{i+1}, \qquad i \in \mathds{N} 
 	\]
-	$\sum_{i \in \mathds{N}}x_i$ konvergiert in $X$ und $\norm[X]{\sum_{i\in \mathds{N}} x_i} < 2 \cdot \varepsilon_0 $, es gilt $T \enbrace*{\sum_{i \in \mathds{N}}x_i}=y$
-	($x_i \in N$, falls $B(0,2 \varepsilon_0) \subset N$).
+	$\sum_{i \in \mathds{N}}x_i$ konvergiert in $X$ und $\norm[X]{\sum_{i\in \mathds{N}} x_i} < 2 \cdot \varepsilon_0 $, es gilt $T \enbrace*{\sum_{i \in \mathds{N}}x_i}=y$.
+	($x_i \in N$, falls $B(0,2 \varepsilon_0) \subset N$)
+	\item Sei $U \subset X$ offen. Dann ist $T(U) \subset Y$ offen:
+	
+	Zu $x \in U$ existiert $0 \in N \subset X$ offen mit $x+ N \subset U$, also $T(x)+ T(N)\subset T(U)$. Nach (iii) existiert $0 \in Z \subset Y$ offen mit $Z \subset T(N)$,
+	also $T(x)+ Z \subset T(U)$. Aber $T(x) \in T(x)+ Z$ ist offen in $Y$ und $T(U)$ ist Umgebung von $T(x)$. $x \in U$ war beliebig, also ist $T(U)$ offen. \bewende
 \end{enumerate}
 % subsection 38 (end)
 
+\subsection{Corollar: Satz von der inversen Abbildung} % (fold)
+\label{sub:39}
+Seien $X,Y$ Banachräume, $T \in L(X,Y)$ bijektiv. Dann gilt $T ^{-1} \in L(Y,X)$, d.h. $T$ ist ein Homöomorphismus\index{Homöomorphismus}.
+\minisec{Beweis}
+Nach Satz \ref{sub:38} ist $T$ offen und somit ist $T ^{-1}$ stetig. \bewende
+% subsection 39 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:310}
+Sei $X$ ein Vektorraum und seien $\mathcal{T}_1, \mathcal{T}_2$ zwei Topologien auf $X$, die durch Banachraumnormen $\norm[1]{\cdot }$ und $\norm[2]{\cdot}$ induziert sind.
+Falls $\mathcal{T}_1 \subset \mathcal{T}_2$, so gilt bereits $\mathcal{T}_1 = \mathcal{T}_2$.
+\minisec{Beweis}
+$\mathcal{T}_1 \subset \mathcal{T}_2$ $\Rightarrow $ $(X,\mathcal{T}_1) \xrightarrow{\id_X} (X,\mathcal{T}_2)$ ist stetig und bijektiv, also ist $\id_X$ nach 
+\ref{sub:39} ein Homöomorphismus. \bewende
+% subsection 310 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:311}
+Sei $X$ ein Banachraum mit abgeschlossenen Teilräumen $X_1,X_2$, sodass $X_1 \cap X_2 = \set{0}$ und $X= X_1 + X_2$. Dann sind $X$ und $X_1 \times X_2$ als topologische
+Vektorräume isomorph.
+\minisec{Beweis}
+Die Abbildung $X_1 \times X_2 \to X$, $(x_1,x_2) \mapsto x_1 + x_2$ ist linear und bijektiv. Sie ist stetig, wegen 
+\[
+	\norm[X]{x_1 + x_2} \le \norm[X]{x_1} + \norm[X]{x_2} = \norm[1,X_1 \times X_2]{(x_1,x_2)} 
+\]
+Mit Corollar \ref{sub:39} folgt die Behauptung. \bewende
+% subsection 311 (end)
 % section 3 (end)
+\newpage
+
+\section{$L^p$-Räume und der Satz von Riesz-Fischer} % (fold)
+\label{sec:4}
+
+\subsection{Erinnerung} % (fold)
+\label{sub:41}
+Sei $(X,\Sigma, \mu)$ ein \Index{Maßraum}.\footnote{$X$ Menge, $\Sigma$ eine $\sigma$-Algebra, $\mu$ Maß}  $f : X \to (-\infty,\infty]$ heißt \Index{messbar}, falls 
+$f ^{-1}(E) \in \Sigma$ gilt für $E \subset \mathcal{B}(\mathds{R})$ (Borelmengen\todo{Def. hinzufügen}). $s : X \to (-\infty,\infty]$ heißt \Index{einfach}, falls 
+$s(X)$ endlich. Für $f : X \to [0,\infty]$ messbar setze
+\[
+	\int f  \, \mathd \mu := \sup \set[\int s \, \mathd \mu]{s \text{ einfach, messbar }, 0 \le s \le f} 
+\] 
+Für $f : X \to (-\infty,\infty]$ messbar setze $\int f \, \mathd \mu := \int f_+ \, \mathd \mu - \int f_- \, \mathd \mu$, falls $\int f_- \, \mathd \mu < \infty$.
+% subsection 41 (end)
+% section 4 (end)
 
 
 
