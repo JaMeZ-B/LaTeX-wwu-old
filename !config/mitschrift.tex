@@ -3,6 +3,7 @@
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
+\usepackage{letltxmacro}
 
 % Compiler abhaengige IFs
 \usepackage{ifxetex,ifluatex}
@@ -151,9 +152,12 @@
 \usepackage{marginnote}
 \renewcommand*{\marginfont}{\color{dark_gray} \itshape \footnotesize }
 \usepackage[textsize=small]{todonotes}
-\makeatletter
-\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
-\makeatother
+
+%--Todonotes mit tikz/externalize kompatibel machen
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
 
 %--Konfiguration von Hyperref pdfstartview=FitH, 
 \usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
