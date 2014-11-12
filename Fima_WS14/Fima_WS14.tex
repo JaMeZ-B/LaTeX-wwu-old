@@ -741,9 +741,9 @@ $R(t,T) = \frac{1}{B(t,T)}-1$ kann als Kapitalrendite interpretiert werden, die 
 	1 \texteuro in $t_0$ ergibt bei Zinsrechnung:\\
 	\begin{equation*}
 	\begin{aligned}
-		K_m(r,t,T) &= (1+r(t_0)\Delta t)+(1+r(t_1\Delta t)+ \dots +(1+r(t_m)\Delta t) \\
+		K_m(r,t,T) &= (1+r(t_0)\Delta t)cdot(1+r(t_1\Delta t)\cdot \dots \cdot(1+r(t_m)\Delta t) \\
 		log~K_m(r,t,T) &= \sum_{i=1}^{m}log(1+r(t_{i-1})\Delta t) \\
-		&= \underbrace{\sum_{i=1}^{m}r(t_{i-1)\Delta t}}_{\int\limits_{t}^{T}r(s)\mathrm{d}s} +\underbrace{\mathcal{O}(\Delta t)}_{\stackrel{\Delta t \to 0}{\longrightarrow} 0}
+		&= \underbrace{\sum_{i=1}^{m}r(t_{i-1})\Delta t}_{\int\limits_{t}^{T}r(s)\mathrm{d}s} +\underbrace{\mathcal{O}(\Delta t)}_{\stackrel{\Delta t \to 0}{\longrightarrow} 0}
 	\end{aligned}
 	\end{equation*}
 \end{enumerate}
@@ -1468,7 +1468,7 @@ Bei Invalidität wird eine lebenslange Rente der Höhe $R$ gezahlt.\\
 \begin{aligned}
 	\mathds{E}V(A) &= R\sum_{k=1}^{n}ä_{x+k}v^k\mathds{P}(k-1<T_x\le k,J=j)\\
 	&= R\sum_{k=1}^{n}ä_{x+k}v^kq_{x+k-1}\mathds{P}(T_x>k-1)\\
-	\mathds{E}V(A) &= p\sum_{k=0}^{n-1}v^k\mathds{P}(T_x>k)
+	\mathds{E}V(I) &= p\sum_{k=0}^{n-1}v^k\mathds{P}(T_x>k)
 \end{aligned}
 \end{equation*}
 $i(y):=q_{y,1}$ einjährige Invalidisierungsw'keit eines $y$-Jährigen\\
@@ -1570,11 +1570,114 @@ Also ist $\mathds{E}(X^+~|~G)-\mathds{E}(X^-~|~G)$ der bedingte Erwartungswert v
 	&\text{Genauso folgt } \mathds{P}(Z_2-Z_1>0)=0
 \end{aligned}
 \end{equation*}
+\hfill $\square$
+
+\minisec{Beispiel}
+$X_1,\dots,X_n $ iid ZV'en, sei $S_n:=\sum\limits_{i=1}^{n}X_i$.\\
+\uline{Frage:} Was ist $\mathds{E}(X_1~|~S_n)$?\\
+Vermutung: $\mathds{E}(X_1~|~S_n)=\mathds{E}(X_2~|~S_n)=\dots=\mathds{E}(X_n~|~S_n)$\\
+Dann gilt: \[n\mathds{E}(X_1~|~S_n)=\sum_{i=1}^{n}\mathds{E}(X_i~|~S_n)=\mathds{E}\enbrace{\sum_{i=1}^{n}X_i~|~S_n}=\mathds{E}(S_n~|~S_n)=S_n\]
+$\Rightarrow \mathds{E}(X_1~|~S_n)=\frac{1}{n}S_n$\\
+Wieso ist $\mathds{E}(X_1~|~S_n)=\mathds{E}(X_k~|~S_n)$?\\
+
+\zz: $\int\limits_{\{S_n\in B\}}X_1\dint\mathds{P}= \int\limits_{\{S_n\in B\}}X_k\dint\mathds{P}\quad \forall B\in \mathcal{L}$\\
+
+Da die $X_1,\dots,X_n$ stochastisch unabhängig sind, ist die Verteilung durch $\mathds{P}^{(X_{\pi(1)},\dots,X_{\pi(n)}}$ gegeben. Daher folgt \[ \int\limits_{\penbrace{x\in \mathds{R}^n~|~\sum_{i=1}^{n}x_i \in B}}X_1\mathds{P}^{(X_{\pi(1)},\dots,X_{\pi(n)}}\mathrm{d}(x_1,\dots,x_n)\]
+Betrachte Permutation $\pi$ mit $\pi(1)=k$, dann folgt \[=\int\limits_{\{S_n\in B\}}X_k\dint\mathds{P} \]
+
+% subsection existenz und eindeutigkeit (end)
+
+\subsection{Faktorisierter bedingter Erwartungswert}
+\label{sub:fakt_ew}
+Sei $X:(\Omega,\mathcal{F},\mathds{P}) \to (\mathds{R},\mathcal{L})$ eine Zufallsvariable, $Y:(\Omega,\mathcal{F},\mathds{P}) \to (E,\mathcal{E})$ messbar.\\ Sei $G=\sigma(Y)$. Dann gilt:\\
+Eine Zufallsvariable $Z:\Omega\to \mathds{R}$ ist $G$-messbar genau dann, wenn es eine $\mathcal{E}$-messbare Abbildung $h:E\to \mathds{R}$ gibt mit $Z=h\circ Y$
 
 
 
+Falls $Z$ eine Version der bedingten Erwartung von $X$ gegeben $Y$ ist, so gibt es also ein $h:E\to \mathds{R}$ mit $Z=h\circ Y$.\\
+Schreibweise $h(y)=\mathds{E}(X~|~Y=y)$, $h$ heißt Version der \bet{faktorisierten}\index{bedingter Erwartungswert!faktorisierte bed. EW} bedingten Erwartung von $X$gegeben $Y$.\\
+Sind $h_1,h_2$ Versionen der bedingten Erwartung von $X$ gegeben $Y$, so gilt \[h_1(y)=h_2(y) \text{ für }\mathds{P}^y-\text{f.a. }y\in E \]
+$y\mapsto \mathds{E}(X~|~Y=y)$ ist eindeutig festgelegt für $\mathds{P}^y$-f.a. $y$ durch \[\mathds{E}\mathbb{1}_{\{Y\in B\}}=\int\limits_{\{Y\in B\}}\mathds{E}(X~|~Y)\dint \mathds{P} \]
+\[\int\limits_{\{Y\in B\}}hY\dint\P = \int\limits_B h(y) \P^y(\dint y) \quad \forall B\in \mathcal{L} \]
 
+Ausrechnen des bedingten Erwartungswertes erfolgt häufig durch Spezifikation der bedingten Verteilung.
 
+% subsection fakt. EW (end)
+
+\subsection{Stochastischer Kern}
+\label{sub:stoch_kern}
+Seien $(\Omega,\mathcal{F}),(E,\mathcal{E})$ messbare Räume. Ein \Index{stochastischer Kern} ist eine Abbildung $K:\E\times K \to [0,1]$ mit folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item $K(y,.)$ ist ein W-Maß für alle $y\in E$
+	\item $K(.,A)$ ist messbar für alle $A\in \mathcal{F}$
+\end{enumerate}
+
+%sub end
+
+\subsection{bedingte W'keit und bedingte Verteilungen}
+\label{sub:bed_wk_vert}
+$(\Omega,\mathcal{F},\mathds{P})$ ein W'Raum, $G$ Unter-$\sigma$-Algebra von $\mathcal{F}$. Für jedes $\Gamma\in \mathcal{F}$ heißt $\E(\mathbb{1}_\Gamma~|~G)$ \Index{bedingte Wahrscheinlichkeit} von $\Gamma$ gegeben $G$\\
+Schreibweise: \[\Pw(\Gamma~|~G):=\E(\mathbb{1}_\Gamma)~|~G \]
+Seien $X:(\Omega,\mathcal{F})\to (E_1,\mathcal{E}_1)$, $Y:(\Omega,\mathcal{F})\to (E_2,\mathcal{E}_2)$ messbare Abbildungen.\\
+Die \Index{bedingte Verteilung} von $X$gegeben $Y$ ist ein stochastischer Kern $K:E_2\times \mathcal{E}_1\to [0,1]$ derart, dass $y\mapsto K(y,A)$ eine Version der faktorisierten bedingten Erwartung von $\Pw(X\in A~|~Y)$ ist für alle $A\in\mathcal{E}_1$.\\
+Schreibweise: \[K(y,A)=\Pw(X\in A~|~Y=y) \]
+Durch Erweiterungsschluss kann man zeigen \[\E(f(X)~|~Y=y)= \int f(x) K(Y,\dint x) \]
+für jedes messbare $f:E_1\to(\Omega,\mathcal{L})$.
+%sub end
+
+\subsection{Beispiel: diskrete Zufallsvariablen}
+\label{sub:bsp_dis_zv}
+Sei $(E_1,\mathcal{E}_1)$ messbar, $E_2$ abzählbar
+\begin{equation*}
+\begin{aligned}
+	\mathcal{E}_2 &= \mathcal{P}(E_2)\\
+	X &: (\Omega,\mathcal{F})\to (E_2,\mathcal{E}_2) \text{ messbar}\\
+	Y &: (\Omega,\mathcal{F})\to (E_2,\mathcal{E}_2)\text{ messbar}
+\end{aligned}
+\end{equation*}
+Die bedingte Verteilung von $X$ gegeben $Y=y$ ist definiert durch \[\Pw(X\in A~|~Y=y)=\frac{\Pw(X\in A,Y=y)}{\Pw(Y=y)}\quad \forall y\in E_2 \text{ mit } \Pw(Y=y)>0 \]
+Definiere den stochastischen Kern $K: E_2\times \mathcal{E}_1\to [0,1]$\\
+$K(y,A)=\left\{\begin{array}{cl} 
+\frac{\Pw(X\in A,Y=y)}{\Pw(Y=y)} & \forall A\in \mathcal{E}_1,y\in E_2 \text{ mit }\Pw(Y=y)>0\\
+\text{irgendwie} & \text{d.h. wähle W'Maß auf } (E_1,\mathcal{E}_1)\\
+	& \text{ und setze } K(y,A)=\mu(A)~\forall A\in \mathcal{E}_1  \end{array}\right.$\\
+
+Dann ist $K$ die bedingte Verteilung von $X$ gegeben $Y$.
+%sub end
+\newpage
+
+\subsection{Lebesgue-Dichten}
+\label{sub:lebesgue_dichten}
+Sei $(X,Y)$ ein zweidimensionaler Zufallsvektor mit \Index{Lebesgue-Dichte} $h:\R^2\to \R_{\ge 0}$\\
+\begin{equation*}
+\begin{aligned}
+	\Pw(X\in A,Y\in B) &= \int\limits_{A\times B}h(x,y)\lambda^2(\dint x,\dint y)\\
+	&= \int\limits_A\int\limits_B h(x,y) \lambda(\dint y)\lambda(\dint x)\quad \forall B\in \mathcal{L}
+\end{aligned}
+\end{equation*}
+Setze $f(y)0\int\limits_{\R}h(x,y)\dint x$.\\
+Dann ist $f$ messbar wegen Fubini und die Lebesgue-Dichte von $Y$, denn:
+\begin{equation*}
+\begin{aligned}
+	\Pw(Y\in B) &= \Pw(Y\in B,X\in \R)= \int\limits_{\R\times B}h(x,y)\dint(x,y)\\
+	&=\int\limits_B\underbracket{\int\limits_\R h(x,y)\dint x}_{f(y)}\dint y \quad \forall B\in \mathcal{L}
+\end{aligned}
+\end{equation*}
+Definiere den stochastischen Kern $K:\R\times \mathcal{L}\to[0,1]$ durch
+$\left\{\begin{array}{cl} \int\limits_A \frac{h(x,y)}{f(y)}\lambda(\dint x) & \text{falls } f(y)>0\\ \text{irgendwie}    \end{array}\right.$
+\[ \frac{\Pw(X\in A,Y=y)}{\Pw(Y=y)}\stackrel{X\text{ diskret}}{=} \frac{\sum_{x\in A}\Pw(X=x,Y=y)}{\Pw(Y=y)} \]
+Dann ist $K$ eine bedingte Verteilung von $Y$,denn
+\begin{equation*}
+\begin{aligned}
+	\Pw(X\in A,Y\in B) &= \int\limits_{A\times B} h(x,y)\lambda^2(\dint x, \dint y)\\
+	&= \int\limits_B\int\limits_Ah(x,y)\dint x \dint y\\
+	&= \int\limits_{b\cap\{f>0\}}\int\limits_A \frac{h(x,y)}{f(y)}\dint x \cdot f(y)\dint y\\
+	&= \int\limits_{b\cap\{f>0\}}K(y,A)f(y)\dint y\\
+	&= \int\limits_BK(y,A)\Pw^y(\dint y)
+\end{aligned}
+\end{equation*}
+Also gilt: $\omega\mapsto K(Y(\omega),A)$ ist eine Version von $\Pw(X\in A,Y)$\\
+$\Rightarrow y\mapsto K(y,A)$ ist eine Versionvon $\Pw(X\in A~|~Y=y)$
 
 
 
