@@ -1433,7 +1433,10 @@ Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f 
 \subsection{Bemerkung} % (fold)
 \label{sub:79}
 Zum Beweis von \eqref{eq:78} werden wir eine explizite Kettenhomotopie $h_*$ zwischen $C_*(i_0;R)$ und $C_*(i_1;R)$ konstruieren. Wir brauchen also 
-$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ mit $\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R)$.
+$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ mit 
+\begin{equation*}
+	\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R). \label{eq:79} \tag{\#\#}
+\end{equation*}
 
 \minisec{"Ansatz"}
 Für $\sigma : \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} : \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. Dann ist
@@ -1479,13 +1482,40 @@ Für $j=0, \ldots ,n$ ist $ \iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n
 \end{enumerate}
 % subsection 712 (end)
 
-\subsection[Beweis von {[\#]}]{Beweis von \protect\eqref{eq:78}} % (fold)
+\subsection[Beweis von {[\#\#]}]{Beweis von \protect\eqref{eq:79}} % (fold)
 \label{sub:713}
 Sei $h_n : C_n(C;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
 \[
-	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \enbrace*{\sigma \times \id} \circ k_{n,j} 
-\] 
+	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \enbrace*{\sigma \times \id} \circ k_{n,j}
+\]
+\begin{align*}
+	\partial_{n+1} \enbrace*{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
+	&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \enbrace*{ \sigma \times \id \circ k_{n,j} \circ \iota_{n+1,l}} \\
+	&= \sum_{0 \le l < j \le n} (-1)^{j+l} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j-1} + \sum_{1 \le j+1 < l < n+1} (-1)^{j+l}
+	\enbrace*{\sigma \circ \iota_{n,l-1} \times \id} \circ k_{n-1,j} \\
+	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l}  \sigma\times\id \circ k_{n,j}
+	\circ \iota_{n+1,l} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
+	&= \sum_{0 \le l \le j \le n-1} (-1)^{j+l+1} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j} + \sum_{1 \le j+1 \le l \le n+1} (-1)^{j+l+1}
+	\enbrace*{\sigma \circ \iota_{n,l} \times \id} \circ k_{n-1,j} \\
+	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l} \sigma\times \id \circ k_{n,j}
+	\circ \iota_{n+1,l} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
+	&= - \sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1  -
+	\sigma \circ i_0 \\
+	&= - \sum_{j=0}^{n-1} \sum_{l=0}^{n} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1 - \sigma \circ i_0 \\
+	&= - h_{n-1}(\partial_n \sigma) + C_n(i_1;R)(\sigma) - C_n(i_0;R)(\sigma) \bewende  
+\end{align*}
+\todo[inline]{Das ist höchstwahrscheinlich noch nicht ganz richtig \ldots }
 % subsection 713 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:714}
+Ist $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f$ und $g$, so erhalten wir eine Kettenhomotopie $k$ zwischen $C_*(f;R)$ und $C_*(g;R)$ durch
+\[
+	k_n(\sigma) := C_{n+1}(H;R) \circ h_n = \sum_{j=0}^{n} (-1)^j H \circ (\sigma \times \id) \circ k_{n,j}
+\]
+% subsection 714 (end)
 % section 7 (end)
 
 \cleardoubleoddemptypage
