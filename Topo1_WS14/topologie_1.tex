@@ -1338,10 +1338,10 @@ Da Homologie ein Funktor ist, gilt
 	f_* \circ (f^{-1})_* &= (f \circ f ^{-1})_* = (\id_Y)_* = \id_{H_n(Y;R)} \qquad \text{ und} \\
 	(f ^{-1})_* \circ f_* &= (f ^{-1} \circ f)_* = (\id_X)_* = \id_{H_n(X;R)}
 \end{align*}
-Also ist $(f_*)^{-1}=(f ^{-1})_*$. Insbesondere ist $f_*$ ein Isomorphismus. \bewende \todo{Rev Chap 7}
+Also ist $(f_*)^{-1}=(f ^{-1})_*$. Insbesondere ist $f_*$ ein Isomorphismus. \bewende
 % subsection 71 (end)
 
-\subsection[Definition: Homotopieäquivalenz]{Definition} % (fold)
+\subsection[Definition: Homotopieäquivalenz und Homotopieinverse]{Definition} % (fold)
 \label{sub:72}
 Eine stetige Abbildung $f : X \to Y$ heißt eine \Index{Homotopieäquivalenz}, falls es eine stetige Abbildung $g : Y \to X$ gibt, so dass $g \circ f$ homotop zu $\id_X$ ist
 und $f \circ g$ homotop zu $\id_Y$ ist. $g$ heißt dann eine \Index{Homotopieinverse} zu $f$.
@@ -1356,7 +1356,8 @@ und $f \circ g$ homotop zu $\id_Y$ ist. $g$ heißt dann eine \Index{Homotopieinv
 \label{sub:73}
 Seien $f,g : X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt $H_n(f;R) = H_n(g;R)$ für alle $n \in \mathds{N}$.
 \minisec{Beweis}
-\emph{siehe \ldots } \todo{hinzufügen} \bewende
+\emph{Siehe \ref{sub:78}, sowie \ref{sub:713} } \bewende
+
 % subsection 73 (end)
 
 \subsection[Korollar: Die induzierte Abbildung einer Homotopieäquivalenz ist ein Isomorphismus]{Korollar} % (fold)
@@ -1382,7 +1383,7 @@ Ist $X$ \Index{kontrahierbar}, d.h. es gibt eine Homotopie $H : X \times [0,1] \
 \minisec{Beweis}
 Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopieäquivalenz. Also gilt nach \ref{sub:74}
 \[
-	H_n(X;R) \cong H_n(\set{x_0};R) = \begin{cases}
+	H_n(X;R) \cong H_n(\set{x_0};R) \stackrel{\text{\ref{sub:59}}}{=} \begin{cases}
 		R, &\text{ falls }n=0\\
 		0, &\text{ sonst}
 	\end{cases} \bewende
@@ -1402,7 +1403,7 @@ Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopi
 
 \subsection[Definition: Kettenhomotopie]{Definition} % (fold)
 \label{sub:76}
-Seien $(C_*,D_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_+ : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
+Seien $(C_*,D_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
 ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mathds{N}$, sodass für alle $n$ gilt:
 \[
 	d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
@@ -1410,9 +1411,12 @@ ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mat
 In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
 % subsection 76 (end)
 
-\subsection[Proposition: Die induzierten Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
+\subsection[Proposition: induzierte Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
 \label{sub:77}
-Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ und $g_*$ kettenhomotop, so gilt $H_n(f_*) = H_n(g_*)$ für alle $n$.
+Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ und $g_*$ kettenhomotop, so gilt für alle $n$
+\[
+	H_n(f_*) = H_n(g_*)
+\]
 \minisec{Beweis}
 Sei $x \in H_n(C_*.d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
 \begin{align*}
@@ -1421,7 +1425,7 @@ Sei $x \in H_n(C_*.d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. D
 \end{align*}
 % subsection 77 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Reduktion von Satz \ref{sub:73} auf Beweis eines Spezialfalles]{Lemma} % (fold)
 \label{sub:78}
 Die Homotopieinvarianz von $H_n(-;R)$ folgt aus folgenden Spezialfall:
 \begin{equation*}
@@ -1432,12 +1436,13 @@ Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f 
 \begin{align*}
 	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
 \end{align*}
+\todo{Rev Chap 7}
 % subsection 78 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung zum Vorgehen beim Beweis von \textbf{[\#]}]{Bemerkung} % (fold)
 \label{sub:79}
 Zum Beweis von \eqref{eq:78} werden wir eine explizite Kettenhomotopie $h_*$ zwischen $C_*(i_0;R)$ und $C_*(i_1;R)$ konstruieren. Wir brauchen also 
-$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ mit 
+$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathds{N}$ mit 
 \begin{equation*}
 	\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R). \label{eq:79} \tag{\#\#}
 \end{equation*}
