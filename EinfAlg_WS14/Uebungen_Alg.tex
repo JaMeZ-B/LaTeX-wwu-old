@@ -1,10 +1,68 @@
-\section*{Aussagen aus den Übungen}
-\addcontentsline{toc}{section}{Aussagen aus den Übungen}
+\input{Praeambel.tex}
+
+
+
+%--Konfiguration von scrheadings (hierzu findet man auch massig zusätzliche Infos im scrguide)
+\setheadsepline{1pt}[\color{light_gray}] 
+\pagestyle{scrheadings} %definiert welcher Seitenstil im Dokument normalerweise verwendet werden soll
+\clearscrheadfoot % erstmal alles, was eventuell in Kopf- und Fusszeile steht, löschen
+
+% ohead steth für "outer Head", auf einer linken Seite als für den linken Kopf, auf einer rechten für den rechten (es wird ja ein doppelseitiges Layout verwandt)
+% durch den hfill-Befehl wird die allesdings untergraben, was aber von mir beabsichtig ist
+\ohead{\footnotesize \sffamily \color{light_gray} \includegraphics[height=0.5 cm, keepaspectratio]{Bilder/Logo_WWU_Muenster_light_gray.jpg}
+	\includegraphics[height=0.4cm, keepaspectratio]{Bilder/fb10logo.jpg}
+	Tobias Wedemeier -- Übungen Einführung in die Algebra
+	\hfill { \tiny \sffamily \color{light_gray} Stand: \today \; \thistime[:]}}
+
+% durch den optionalen Parameter (eckige Klammern) wird auch der plain-Pagestyle bearbeitet, damit auch auf leeren Seiten die Seitenzahl steht
+\ofoot[{ \color{dark_gray} \LARGE \sffamily \thepage}]{{ \color{dark_gray} \LARGE \sffamily \thepage}} 
+
+% hier wird die aktuelle section in den "inner foot" gesetzt
+\automark{section}
+\ifoot{ \color{dark_gray} \small \leftmark}
+
+%--Metadaten, die durch den \maketitle gesetzt werden
+\author{Tobias Wedemeier}
+\titlehead{\includegraphics[width=7cm, keepaspectratio]{Bilder/Logo_WWU_Muenster_light_gray.jpg}
+	\hfill
+	\includegraphics[width=6cm, keepaspectratio]{Bilder/fb10logo.jpg}}
+\title{Einführung in die Algebra}
+\subtitle{Aufarbeitung der Übungsaufgaben}
+\publishers{gelesen von \\ Prof. Dr. Kramer}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\newpage
+	
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+	Hierbei handelt es sich um eine Aufarbeitung der Übungsaufgaben von \textbf{Prof. Dr. Kramer}, WWU Münster, aus der Vorlesung \textbf{Einführung in die Algebra} im Wintersemester 2014/15.\\
+	\vspace{2cm}
+	Für Fehler in der Aufarbeitung wird keine Haftung übernommen. Hinweise auf Fehler sind gerne gesehen, hierfür kann man mich in der Uni ansprechen oder alternativ eine e-Mail an: \textit{tobias.wedemeier@gmx.de}\\
+	Auch ist eine Mitarbeit über Github möglich.\\
+	\vspace{2cm}
+	Die Beweise sind größtenteils aus den Musterlösungen oder vom Autor selber und sind verkürzt oder vereinfacht, für die Korrektheit wird keine Haftung übernommen. Sie sind nur zum Verständnis gedacht.
+\end{center}
+\vspace*{\fill}
+\newpage
+	
+\pagenumbering{Roman}
+	
+\tableofcontents
+\cleardoubleoddemptypage %sorgt dafür, dass alles folgende erst auf der nächsten freien "rechten" Seite steht
+	
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Aussagen aus den Übungen}
 \label{sec:übungenalg}
 
-\subsection*{Zettel 1}
+\subsection{Zettel 1}
 \label{sub:zettel_1alg}
-\minisec{Aufage 1.2}
+\subsubsection{Aufage 1.2}
 Sei $G$ eine Gruppe. $A,B$ Untergruppen von $G$.\\
 \zz: Wenn $A\cup B$ eine Untergruppe ist, dann gilt: $A\subseteq B$ oder $b\subseteq A$.\\
 
@@ -14,7 +72,7 @@ Sei $ab\in B$ und $b^{-1}\in B$, da $B$ Untergruppe, folgt, dass $abb^{-1}=a\in 
 Also $ab\in A$ und $a^{-1}\in A$, da $A$ Untergruppe, folgt, dass $a^{-1}ab=b\in A$. Da $b$ beliebig war, folgt $B\subseteq A$.
 \hfill $\square$
 
-\minisec{Aufgabe 1.4}
+\subsubsection{Aufgabe 1.4}
 Gruppe $G$. $A,B$ Untergruppen.Wir definieren $AB:=\{ab~|~a\in A,b \in B \}$.\\
 \begin{enumerate}[(i)]
 	\item Die Menge $AB$ ist im allgemeinen keine Untergruppe.
@@ -23,9 +81,9 @@ Gruppe $G$. $A,B$ Untergruppen.Wir definieren $AB:=\{ab~|~a\in A,b \in B \}$.\\
 Beweise klar! (\checkmark)
 % sub end
 
-\subsection*{Zettel 2}
+\subsection{Zettel 2}
 \label{sub:zettel_2lga}
-\minisec{Aufgabe 2.1}
+\subsubsection{Aufgabe 2.1}
 Eine Gruppe $G$ hat \Index{Exponent} $k$, wenn für jedes Gruppenelement $g\in G$ gilt: $g^k=e$.\\
 \zz Gruppen mit Exponent 2 sind abelsch.\\
 
@@ -35,7 +93,7 @@ Aus $g^2=e$ folgt $g=g^{-1}~\forall g\in G$. $a,b\in G$ beliebig\\
 \hfill $\square$\\
 Anmerkung: Gruppen mit Exponenten 3 sind im allgemeinen nicht abelsch.
 
-\minisec{Aufgabe 2.3}
+\subsubsection{Aufgabe 2.3}
 Menge $X$ und $Sym(X)$. Der \Index{Träger einer Permutation} $\sigma \in Sym(X)$ ist definiert wie folgt: $\supp(\sigma):=\{x\in X~|~\sigma(x)\not=x \}$.
 \begin{enumerate}[(i)]
 	\item Wenn $\supp(\rho)\cap \supp(\sigma)=\emptyset$ für $\rho, \sigma \in Sym(X)$ gilt, dann folgt $\rho \circ \sigma=\sigma \circ \rho$.
@@ -55,9 +113,19 @@ Menge $X$ und $Sym(X)$. Der \Index{Träger einer Permutation} $\sigma \in Sym(X)
 \end{enumerate}
 %sub end
 
-\subsection*{Zettel 3}
+\subsection{Zettel 3}
 \label{sub:zettel_3alg}
 
 
 
 
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+
+
+
+
+\printindex
+\listoffigures
+\end{document}
