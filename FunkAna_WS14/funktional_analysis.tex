@@ -1080,7 +1080,7 @@ Mit Corollar \ref{sub:39} folgt die Behauptung. \bewende
 \section{$L^p$-Räume und der Satz von Riesz-Fischer} % (fold)
 \label{sec:4}
 
-\subsection{Erinnerung} % (fold)
+\subsection[Erinnerung: $L^1(\mu)$ ist ein Banachraum]{Erinnerung} % (fold)
 \label{sub:41}
 Sei $(X,\Sigma, \mu)$ ein \Index{Maßraum}.\footnote{$X$ Menge, $\Sigma$ eine $\sigma$-Algebra, $\mu$ Maß}  $f : X \to (-\infty,\infty]$ heißt \Index{messbar}, falls 
 $f ^{-1}(E) \in \Sigma$ gilt für $E \subset \mathcal{B}(\mathds{R})$ (Borelmengen\todo{Def. hinzufügen}). $s : X \to (-\infty,\infty]$ heißt \Index{einfach}, falls 
@@ -1088,8 +1088,130 @@ $s(X)$ endlich. Für $f : X \to [0,\infty]$ messbar setze
 \[
 	\int f  \, \mathd \mu := \sup \set[\int s \, \mathd \mu]{s \text{ einfach, messbar }, 0 \le s \le f} 
 \] 
-Für $f : X \to (-\infty,\infty]$ messbar setze $\int f \, \mathd \mu := \int f_+ \, \mathd \mu - \int f_- \, \mathd \mu$, falls $\int f_- \, \mathd \mu < \infty$.
+Für $f : X \to (-\infty,\infty]$ messbar setze $\int\! f \, \mathd \mu := \int \! f_+ \, \mathd \mu - \int \! f_- \, \mathd \mu$, falls $\int \! f_- \, \mathd \mu < \infty$.
+Betrachte
+\begin{align*}
+	\mathcal{L}^1(\mu) := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}\,\mathd_\mu < \infty } 
+\end{align*}
+mit der Halbnorm $\norm[1]{f} := \int \! \abs*{f} \, \mathd_\mu $. Setze nun $\mathcal{N}^1 := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f} \, \mathd_\mu =0 }$.
+$L^1(\mu)$ ist ein topologischer Vektorraum (Topologie induziert durch $\norm[1]{\cdot}$) und $\mathcal{N}^1 \subset \mathcal{L}^1(\mu)$ ist ein abgeschlossener 
+Untervektorraum (Übung). Definiere 
+\[
+	L^1(\mu) := \nicefrac{\mathcal{L}^1}{\mathcal{N}^1}
+\]
+$\norm[1]{\cdot }$ induziert eine Norm $\norm[1]{\cdot }$ auf $L^1(\mu)$ via  
+\[
+	\norm[1]{f+ \mathcal{N}^1} := \norm[1]{f} \quad , \quad f \in \mathcal{L}^1(\mu) \tag*{(Übung)}
+\]
+$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (Ana \RM{3}, 9.23).\todo{CopyPaste aus Ana3}
 % subsection 41 (end)
+
+\subsection[Beispiele für $L^1$-Räume]{Beispiele} % (fold)
+\label{sub:42}
+\begin{enumerate}[(i)]
+	\item $L^1(\mathds{R}^n) := L^1(\mathds{R}^n, \Lambda, \lambda)$, wobei $\Lambda$ die Lebesgue-messbaren Mengen sind und $\lambda $ das Lebesgue-Maß ist.
+	\item $\ell^1(\mathds{N})= L^1 \enbrace[\big]{\mathds{N}, \mathcal{P}(\mathds{N}), \delta} = \set[f : \mathds{N} \to \mathds{R}]{\sum \abs*{f(n)} < \infty } $, 
+	wobei $\delta$ das Zählmaß\footnote{siehe auch \url{http://de.wikipedia.org/wiki/Zählmaß_(Maßtheorie)}} ist.
+\end{enumerate}
+% subsection 42 (end)
+
+\subsection[Definition und Proposition: Der Raum $L^p(\mu)$]{Definition und Proposition} % (fold)
+\label{sub:43}
+Für einen Maßraum $(X,\Sigma,\mu)$ definiere 
+\begin{align*}
+	\mathcal{L}^p(\mu) &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd_\mu < \infty } \\
+	\mathcal{N}^p &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd_\mu = 0 } 
+\end{align*}
+$\mathcal{L}^p(\mu)$ und $\mathcal{N}^p$ sind Vektorräume; wir setzen 
+\[
+	L^p(\mu) := \nicefrac{\mathcal{L}^p(\mu)}{\mathcal{N}^p}
+\]
+Definiere $\norm[p]{\cdot } : \mathcal{L}^p(\mu) \to [0,\infty)$ durch $\norm[p]{f} := \enbrace*{\int \abs*{f}^p \mathd_\mu }^{1/p}$. $\norm[p]{\cdot }$ induziert eine 
+Abbildung $\norm[p]{\cdot } : L^P(\mu) \to [0,\infty) $ via $\norm[p]{f + \mathcal{N}^p} := \norm[p]{f} $, für $f \in \mathcal{L}^p$.
+\minisec{Beweis}
+\begin{description}
+	\item[$\mathcal{L}^p(\mu)$ ist Vektorraum:]  Für $f,g \in \mathcal{L}^p(\mu)$ und $\alpha, \beta \in \mathds{R}$
+	\begin{align*}
+		\int \abs*{\alpha \cdot f + \beta \cdot g}^p \mathd_\mu \le \int \enbrace[\big]{\abs*{\alpha \cdot f} + \abs*{\beta \cdot g}}^p \mathd_\mu
+		&\le \int \enbrace[\Big]{2 \cdot \sup \set{\abs*{\alpha \cdot f}, \abs*{\beta \cdot g}  } }^p \mathd_\mu \\ 
+		&\le \int \enbrace*{2^p \cdot \sup \set{\abs*{\alpha \cdot f}^p, \abs*{\beta \cdot g}^p  \rule{0cm}{1em}} } \mathd_\mu \\ 
+		&\le \int 2^p \cdot  \enbrace[\big]{\abs*{\alpha \cdot f}^p + \abs*{\beta \cdot g}^p} \mathd_\mu < \infty 
+	\end{align*}
+	\item[$\mathcal{N}^p$ ist Vektorraum:] Übung.
+	\item[{$\norm[p]{\cdot}$ wohldefiniert auf $L^p(\mu)$:}] Übung. \bewende
+\end{description}
+% subsection 43 (end)
+
+\subsection[Proposition: Abschätzung für $\alpha, \beta \ge 0$ und $p,q >1$ mit $\frac{1}{p} + \frac{1}{q}=1$]{Proposition} % (fold)
+\label{sub:44}
+Für $\alpha, \beta \ge 0$, $p,q >1$ mit $\frac{1}{p} + \frac{1}{q}=1$. Dann gilt 
+\begin{equation*}
+	\alpha \cdot \beta \le \frac{\alpha^p}{p} + \frac{\beta^q}{q}  \label{eq:44}\tag{\#}
+\end{equation*}
+\minisec{Beweis}
+\begin{align*}
+	\frac{1}{p} + \frac{1}{q}=1 \iff p+q= pq \iff (p-1)(q-1)= 1 \iff p (q-1) = q \iff q (p-1) =p
+\end{align*}
+Falls $\beta = \alpha^{p-1}$, so gilt $\alpha \cdot \beta = \alpha^p$ und 
+\[
+	\frac{\alpha^p}{p} + \frac{\beta^q}{q} = \frac{\alpha^p}{p} + \frac{(\alpha^{p-1})^q}{q} = \frac{\alpha^p}{p} + \frac{\alpha^p}{q} = \alpha^p = \alpha \cdot \beta   
+\]
+Also gilt Gleichheit in \eqref{eq:44}. Für festes $\alpha \ge 0$ betrachte $f_\alpha : [0,\infty) \to [0,\infty)$ gegeben durch
+$f_\alpha(\beta) := \frac{\alpha^p}{p} + \frac{\beta^q}{q} - \alpha \cdot \beta$. Dann ist $f_\alpha$ stetig auf $[0,\infty)$ und differenzierbar auf $(0,\infty)$. Es gilt
+$f_\alpha'(\beta) = \beta^{q-1} -\alpha$ und weiter
+\[
+	f_\alpha'(\beta)=0 \iff \beta^{q-1} = \alpha \iff \beta= \alpha^{p-1}
+\]
+$f_\alpha''(\alpha^{p-1}) \ge 0$, also hat $f_\alpha$ bei $\beta = \alpha^{p-1}$ ein lokales Minimum. Es gilt $f_\alpha(\alpha^{p-1})= 0 \le f_\alpha(0)$, also
+hat $f_\alpha$ bei $\beta=\alpha^{p-1}$ ein globales Minimum. $\Rightarrow $ \eqref{eq:44}. \bewende
+% subsection 44 (end)
+
+\subsection{Satz: Höldersche Ungleichung} % (fold)
+\label{sub:45}
+Sei $(X,\Sigma,\mu)$ ein Maßraum. Seien $p,q \ge 1$ mit $\frac{1}{p} +\frac{1}{q}=1 $, $f \in \mathcal{L}^p(\mu)$, $g \in \mathcal{L}^q(\mu)$. Dann gilt 
+$f \cdot g \in \mathcal{L}^1{\mu}$ und
+\[
+	\norm[1]{f \cdot g} \le \norm[p]{f} \cdot \norm[q]{g}   
+\]
+Die entsprechenden Aussagen gelten dann auch für $L^p(\mu)$, $L^q(\mu)$, $L^1(\mu)$.
+\minisec{Beweis}
+Klar, falls $\norm[p]{f} =0 $ oder $\norm[q]{g} =0$ (Warum?). Sei also $\norm[p]{f}, \norm[q]{g} \not= 0$. Nach Proposition \ref{sub:44} gilt für $x \in X$
+\[
+	0 \le \underbrace{\underbrace{\frac{\abs*{f(x)} }{\norm[p]{f}}}_{=\alpha} \cdot \underbrace{\frac{\abs*{g(x)} }{\norm[q]{g} }}_{=\beta} }_{\text{messbar}}
+	\le \underbrace{\frac{1}{p} \cdot \frac{\abs*{f(x)}^p }{\norm[p]{f}^p } + \frac{1}{q} \cdot \frac{\abs*{g(x)}^q }{\norm[q]{g}^q }}_{\text{integrierbar}}
+\]
+$\abs*{f}^p , \abs*{g}^q  \in \mathcal{L}^1(\mu)$, also $\abs*{ f \cdot g } \in \mathcal{L}^1(\mu)$. Es gilt
+\begin{align*}
+	\frac{\int \abs*{f \cdot g} \mathd_\mu}{\norm[p]{f} \cdot \norm[q]{g}} \le \frac{1}{p} \cdot \frac{\int \abs*{f}^p \mathd_\mu }{\norm[p]{f}^p } +
+	\frac{1}{q} \cdot \frac{\int \abs*{g}^q \mathd_\mu }{\norm[q]{g}^q} = \frac{1}{p} + \frac{1}{q} = 1       
+\end{align*}
+$\Rightarrow \inf \abs*{f \cdot g} \mathd_\mu  \le \norm[p]{f}  \cdot \norm[q]{g}$. \bewende
+% subsection 45 (end)
+
+\subsection{Satz: Minkowskische Ungleichung} % (fold)
+\label{sub:46}
+Für $p>1$, $f,g \in \mathcal{L}^p(\mu)$ (bzw. $L^p(\mu)$) gilt 
+\[
+	\norm[p]{f +g} \le \norm[p]{f} + \norm[p]{g}   
+\]
+\minisec{Beweis}
+Sei $\norm[p]{f+g} >0 $ (sonst trivial). Es gilt 
+\begin{align*}
+	\abs*{f +g}^p = \abs*{f+g}^{p-1} \cdot \abs*{f+g} \le \abs*{f+g}^{p-1} \enbrace[\big]{\abs*{f} + \abs*{g}}     
+\end{align*}
+Sei $q>1$ mit $\frac{1}{p} + \frac{1}{q}=1$. Es gilt $\abs*{f+g}^{p-1} \in \mathcal{L}^q(\mu)$, da $\abs*{f+g}^{(p-1)q} = \abs*{f+g}^p \in \mathcal{L}^1(\mu)$. Nach Höder
+\ref{sub:45} gilt
+\begin{align*}
+	\int \abs*{f+g}^p \mathd_\mu \le \int \abs*{f+g}^{p-1} \abs*{f} \mathd_\mu + \int \abs*{f+g}^{p-1} \abs*{g}\mathd_\mu &\le \norm[p]{f} \cdot \norm[q]{\abs*{f+g}^{p-1}}
+	+ \norm[p]{g} \cdot \norm[q]{\abs*{f+g}^{p-1} } \\        
+	&= \enbrace*{\norm[p]{f} + \norm[p]{g}} \cdot \enbrace*{\int \abs*{f+g}^{(p-1)q} \mathd_\mu }^{\frac{1}{q}} \\
+	&= \enbrace*{\norm[p]{f} + \norm[p]{g}} \cdot \enbrace*{\int \abs*{f+g}^{p} \mathd_\mu }^{q} \\
+\end{align*}
+Also gilt 
+\[
+	\enbrace*{\int \abs*{f+g}^p \mathd_\mu}^{1- \frac{1}{q}} = \enbrace*{\int \abs*{f+g}^{p} \mathd_\mu }^{\frac{1}{p}} \le \norm[p]{f} + \norm[p]{g} \bewende    
+\]
+% subsection 46 (end)
 % section 4 (end)
 
 
