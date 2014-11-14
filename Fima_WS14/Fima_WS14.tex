@@ -1627,10 +1627,10 @@ Seien $(\Omega,\mathcal{F}),(E,\mathcal{E})$ messbare Räume. Ein \Index{stochas
 
 \subsection{bedingte W'keit und bedingte Verteilungen}
 \label{sub:bed_wk_vert}
-$(\Omega,\mathcal{F},\mathds{P})$ ein W'Raum, $G$ Unter-$\sigma$-Algebra von $\mathcal{F}$. Für jedes $\Gamma\in \mathcal{F}$ heißt $\E(\mathbb{1}_\Gamma~|~G)$ \Index{bedingte Wahrscheinlichkeit} von $\Gamma$ gegeben $G$\\
-Schreibweise: \[\Pw(\Gamma~|~G):=\E(\mathbb{1}_\Gamma)~|~G \]
+$(\Omega,\mathcal{F},\mathds{P})$ ein W'Raum, $\G$ Unter-$\sigma$-Algebra von $\mathcal{F}$. Für jedes $\Gamma\in \mathcal{F}$ heißt $\E(\mathbb{1}_\Gamma~|~\G)$ \Index{bedingte Wahrscheinlichkeit} von $\Gamma$ gegeben $\G$\\
+Schreibweise: \[\Pw(\Gamma~|~\G):=\E(\mathbb{1}_\Gamma)~|~\G \]
 Seien $X:(\Omega,\mathcal{F})\to (E_1,\mathcal{E}_1)$, $Y:(\Omega,\mathcal{F})\to (E_2,\mathcal{E}_2)$ messbare Abbildungen.\\
-Die \Index{bedingte Verteilung} von $X$gegeben $Y$ ist ein stochastischer Kern $K:E_2\times \mathcal{E}_1\to [0,1]$ derart, dass $y\mapsto K(y,A)$ eine Version der faktorisierten bedingten Erwartung von $\Pw(X\in A~|~Y)$ ist für alle $A\in\mathcal{E}_1$.\\
+Die \Index{bedingte Verteilung} von $X$ gegeben $Y$ ist ein stochastischer Kern $K:E_2\times \mathcal{E}_1\to [0,1]$ derart, dass $y\mapsto K(y,A)$ eine Version der faktorisierten bedingten Erwartung von $\Pw(X\in A~|~Y)$ ist für alle $A\in\mathcal{E}_1$.\\
 Schreibweise: \[K(y,A)=\Pw(X\in A~|~Y=y) \]
 Durch Erweiterungsschluss kann man zeigen \[\E(f(X)~|~Y=y)= \int f(x) K(Y,\dint x) \]
 für jedes messbare $f:E_1\to(\Omega,\mathcal{L})$.
@@ -1690,6 +1690,156 @@ Dann ist $K$ eine bedingte Verteilung von $Y$,denn
 Also gilt: $\omega\mapsto K(Y(\omega),A)$ ist eine Version von $\Pw(X\in A,Y)$\\
 $\Rightarrow y\mapsto K(y,A)$ ist eine Versionvon $\Pw(X\in A~|~Y=y)$
 
+%sub end
+\newpage
+
+\subsection{Eigenschaften}
+\label{sub:eigenschaften}
+Sei $(\Omega,\mathcal{F},\mathds{P})$ W'Raum, $\G\subseteq \mathcal{F}$ Unter-$\sigma$-Algebra. Seien $X,X_1,X_2$ integrierbare ZV'en. Dann gilt:
+\begin{enumerate}[(i)]
+	\item $\E(\alpha X_1+\beta X_2~|~\G)=\alpha\E(X_1~|~\G)+\beta \E(X_2~|~\G)$ für alle $\alpha,\beta$
+	\item $X_1\le X_2 \Rightarrow \E(X_1~|~\G)\le \E(X_2~|~\G)$
+	\item Sei $Z$ eine $\G$-messbare ZV, so dass $\E ZX$ existiert. Dann gilt \[ \E(ZX~|~\G)=Z\E(X~|~\G)\]
+	\item Sind $G_1,G_2$ Unter-$\sigma$-Algebren mit $G_1\subseteq G_2$, so folgt \[\E(X~|~G_1)=\E(\E(X~|~G_2)~|~G_1)\quad \text{ '\Index{Tower Property}'} \]
+	\item Sind $X$ und $\G$ stoch. unabhängig, so gilt \[\E(X~|~\G)=\E X \]
+	\item Sind $Z_1,Z_2$ stoch. unabh. ZV'en mit Werten in $(E_1,\mathcal{E}_1),(E_2,\mathcal{E}_2)$ und ist $h:E_1\times E_2 \to (\R,\mathcal{L})$ messbar mit ex. $\E h(Z_1,Z_2)$, so gilt \[\E(h(Z_1,Z_2)~|~Z_2=z_2)= \E h(Z_1,z_2)  \]
+	für $\Pw^{Z_2}$-f.a. $z_2\in E_2$
+	\item $\E \E(X~|~\G)=\E X$
+\end{enumerate}
+
+\bet{Beweis:}\\
+(i),(ii) einfach (\checkmark).\\
+(iii): 1.Fall: $Z\ge 0,~X\ge0$\\
+Ist $Z=\mathbb{1}_G$ mit $G\in \G$, so gilt für alle $A\in G$ 
+\begin{equation*}
+\begin{aligned}
+	\int\limits_A ZX\dint \Pw &=\int\limits_A \mathbb{1}_G X\dint \Pw =\int\limits_{A\cap G}X\dint\Pw\\
+	&= \int\limits_{A\cap G}\E(X~|~G)\dint\Pw =\int\limits_A Z\E(X~|~G)\dint\Pw\\
+	&\Rightarrow \E(ZX~|~G)=Z\E(X~|~G)
+\end{aligned}
+\end{equation*}
+Ist $Z=\sum_{i=1}^{n}\alpha_i \mathbb{1}_{G_i},~ G_i\in \G,~\alpha_i\ge 0$ so gilt wegen (i)
+\begin{equation*}
+\begin{aligned}
+	\E(ZX~|~G)&=\E\enbrace{\sum_{i=1}^{n}\alpha_i\mathbb{1}_{G_i}X~|~\G}= \sum_{i=1}^{n}\alpha_i\E(\mathbb{1}_{G_i}X~|~\G)\\
+	&= \sum_{i=1}^{n}\alpha_i\mathbb{1}_{G_i}\E(X~|~\G)=Z\E(X~|~\G)
+\end{aligned}
+\end{equation*}
+Ist $Z\ge0$, so ex. eine Folge von Treppenfunktionen $(Z_n)_{n\in \N}$ mit $0\le Z_1\le Z_2\le \dots \uparrow Z \Rightarrow Z_nX\uparrow ZX$\\
+Für jedes $A\in G$ folgt mit monotoner Konvergenz 
+\begin{equation*}
+\begin{aligned}
+	\int\limits_A ZX\dint\Pw &= \E ZX\mathbb{1}_A = \lim\limits_{n\to\infty}\E Z_nX\mathbb{1}_A =\lim\limits_{n\to\infty} \E\E(Z_nX~|~\G)\mathbb{1}_A\\
+	&\Rightarrow \E(ZX~|~\G)=Z\E(X~|~\G)=\lim\limits_{n\to \infty}\E Z_n\E(X~|~\G)\mathbb{1}_A=\E Z\E(X~|~\G)\mathbb{1}_A
+\end{aligned}
+\end{equation*}
+Es ex. $\E ZX$.\\ $ZX=U-V$ mit $U=Z^+X^++Z^-X^-\ge0,~V=Z^+X^-+Z^-X^+\ge0$
+\begin{equation*}
+\begin{aligned}
+	(Z^+-Z^-)(X^+-X^-)= Z^+X^++Z^-X^- -(Z^-X^++X^-Z^+)
+\end{aligned}
+\end{equation*}
+Also \begin{equation*}
+\begin{aligned}
+	\E(ZX~|~\G) &= \E(U~|~\G)-\E(V~|~\G)= \E(Z^+X^+~|~\G)+\E(Z^-X^-~|~\G)-\big(\E(Z^-X^+~|~\G)+\E(Z^+X^-~|~\G)\big)\\
+	&= Z^+\E(X^+~|~\G)-Z^-\E(X^+~|~\G)-\big(Z^+\E(X^-~|~\G)-Z^-\E(X^-~|~\G)\big)\\
+	&= Z(\E(X^+~|~\G)-\E(X^-~|~\G)) = Z\E(X~|~\G)
+\end{aligned}
+\end{equation*}
+
+(iv): Sei $A\in G_1$.
+\begin{equation*}
+\begin{aligned}
+	&\int\limits_A \E(X~|~G_2)\dint\Pw \stackrel{A\in G_2}{=} \int\limits_A X\dint\Pw \stackrel{A\in G_1}{=} \int\limits_A \E(X~|~G_1)\dint\Pw\\
+	&\Rightarrow \E(\E(X~|~G_2)~|~G_1)=\E(X~|~G_1)
+\end{aligned}
+\end{equation*}
+
+(vi): \zz $\E(h(Z_1,Z_2)~|~ Z_2=z_2)=\E h(Z_1,z_2)$\\
+Für $B\in \mathcal{E}_2$ gilt:
+\begin{equation*}
+\begin{aligned}
+	&\int\limits_{\{Z_2\in B\}} h(Z_1,Z_2)\dint\Pw = \E h(Z_1,Z_2)\mathbb{1}_{\{Z_2\in B,\Z_1\in E_1 \}}\\
+	&=\int\limits_B\int\limits_{E_1}h(z_1,z_2)\Pw^{Z_1}(\dint z_1)\Pw^{Z_2}(\dint z_2)
+\end{aligned}
+\end{equation*}
+da $\int\limits_{E_1}h(z_1,z_2)\Pw^{Z_1}(\dint z_1)= \E h(Z_1,z_2)$ für $\Pw^{Z_2}$-f.a. $z_2$, ist 
+\[\E(h(Z_1,Z_2)~|~ Z_2=z_2)=\E h(Z_1,z_2) \text{ für }\Pw^{Z_2}-\text{f.a.} z_2 \]
+%sub end
+
+\subsection{Bestapproximation}
+Sei $(\Omega,\mathcal{F},\mathds{P})$, $X$ Zv mit $\E X^2<\infty$ $\G\subseteq \mathcal{F}$ Unter-$\sigma$-Algebra,
+\[L_2(\Omega,\mathcal{F},\mathds{P})= \{Y:\Omega\to \R~|~Y \text{ ist }\mathcal{F}-\text{messbar und }\E Y^2<\infty \} \]
+\[L_2(\Omega,\mathcal{G},\mathds{P})= \{Y:\Omega\to \R~|~Y \text{ ist }\G-\text{messbar und }\E Y^2<\infty \} \]
+\[ L_2(\Omega,\mathcal{G},\mathds{P})\subseteq L_2(\Omega,\mathcal{F},\Pw)\]
+Für $X\in L_2(\Omega,\mathcal{F},\mathds{P})$ ist $\hat{X}:= \E(X~|~\mathcal{G})$ die \Index{Orthogonalprojektion} auf $L_2(\Omega,\mathcal{F},\mathds{P})$, d.h. $\hat{X}\in L_2(\Omega,\mathcal{G},\mathds{P})$
+\[ \norm{X-\hat{X}}_2^2=\inf\norm{X-Z}_2^2,~Z\in L_2(\Omega,\G,\Pw) \]
+Durch $\sprod{Y}{Z}:=\E YZ $ wird ein Skalarprodukt auf $L_2(\Omega,\mathcal{F},\Pw)$ definiert.
+
+$\norm{Y}_2^2=\sprod{Y}{Y}$ für alle $Y\in L_2(\Omega,\mathcal{F},\mathds{P})$. $L_2(\Omega,\mathcal{G},\mathds{P})$ ist ein abgeschlossener Teilraum.\\ %grafik
+
+\bet{Beweis:}\\
+Es gilt $X=\hat{X}+X-\hat{X}$. \zz $X-\hat{X}\perp Z$ für alle $Z\in L_2(\Omega,\mathcal{G},\mathds{P})$\\
+Eigenschaften des bedingten Erwartungswertes implizieren:
+\begin{equation*}
+\begin{aligned}
+	\sprod{\mathbb{1}_A}{X }&= \int \mathbb{1}_A X\dint \Pw=\int \mathbb{1}_A\hat{X}\dint \Pw= \sprod{\mathbb{1}_A}{\hat{X}}~\forall A\in \mathcal{G}\\
+	&\Rightarrow \sprod{\sum_{i=1}^{n}\alpha_i\mathbb{1}_{A_i}}{X}=\sprod{\sum_{i=1}^{n}\alpha_i\mathbb{1}_{A_i}}{\hat{X}}~\forall A_i\in \mathcal{G},~\alpha_i\in \R\\
+	&\Rightarrow \sprod{Z}{X}=\sprod{Z}{\hat{X}}~\forall Z\in L_2(\Omega,\G,\Pw)
+\end{aligned}
+\end{equation*}
+da $\sprod{.}{X}$ bzw. $\sprod{.}{\hat{X}}$ stetig sind. $\Rightarrow X-\hat{X}\perp L_2(\Omega,\G,\Pw)$\\
+Mit Pythagoras folgt \[\norm{X-Z}_2^2=\norm{X-\hat{X}+\hat{X}-Z}_2^2=\norm{X-\hat{X}}_2^2+\norm{\hat{X}-Z}_2^2\ge\norm{X-\hat{X}_2^2} \]
+
+%sub end
+
+\subsection{Martingale}
+\label{sub:martingale}
+Sei $T$ eine Zeitparametermenge. $(\F_t)_{t\in T}$ eine Filtration und $(M_t)_{t\in T}$ ein \Index{adaptiv-stochastischer Prozess}.\\
+$M$ heißt \Index{Martingal}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\E\abs{M_t}<\infty~\forall t\in T$
+	\item $\E(M_t~|~\F_s)=M_s~\forall s,t\in T,~s\le t$
+	\marginnote{$\E(M_t~|~\F_s)$ Schätzung der zukünftigen Zahlung eines Spielers}
+\end{enumerate}
+$M$ heißt \bet{Submartingal}\index{Martingal!Sub-}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\E\abs{M_t}<\infty~\forall t\in T$
+	\item $\E(M_t~|~\F_s)\ge M_s~\forall s,t\in T,~s\le t$
+	\marginnote{ist günstig weiter zu spielen}
+\end{enumerate}
+$M$ heißt \bet{Supermartingal}\index{Martingal!Super-}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\E\abs{M_t}<\infty~\forall t\in T$
+	\item $\E(M_t~|~\F_s)\le M_s~\forall s,t\in T,~s\le t$
+	\marginnote{jetzt sollte man gehen}
+\end{enumerate}
+%sub end
+
+\subsection{Beispiele Martingale}
+\label{sub:bsp_martingale}
+\begin{enumerate}[(i)]
+	\item \uline{Random-Walk:}\index{Random-Walk}\\
+	$S_n=S_0+\sum\limits_{i=1}^{n}X_i$, $S_0$ unabhängig von $(X_i)_{i\in \N}$ und iid, $\E\abs{X_i}<\infty,~\E\abs{S_0}<\infty$ und $\F_n=\sigma(S_0,S_1,S_2,\dots,S_n)=\sigma(S_0,X_1,\dots,X_n)$.\\
+	Dann gilt:
+	\begin{equation*}
+	\begin{aligned}
+		&\E(S_{n+1}~|~\F_n) = \E(S_n+X_{n+1}~|~\F_n) = \E(S_N~|~\F_n)+\E(X_{n+1}~|~\F_n)\\
+		&\stackrel{S_n~\F_n\text{-messbar}}{=} S_n+\E(X_{n+1}~|~\F_n)\stackrel{X_{n+1\text{ unabh. von }\F_n}}{=}S_n+\E X_{n+1}\\
+		&\left\{\begin{array}{lc} > & \\ = & S_n \\ < &   \end{array}\right. \Leftrightarrow \begin{array}{ccc}  & > & \\ \E X_{n+1} & = & 0\\ & < & \end{array}
+	\end{aligned}
+	\end{equation*}
+	\item \uline{geometrischer Random-Walk:}\\
+	$S_n=S_0\cdot\prod\limits_{i=1}^{n}X_i,~(X_i)_{i\in \N}$ iid, $\E\abs{X_i}<\infty$, $\F_n=\sigma(S_0,X_1,\dots,X_n)$\\
+	Dann gilt:
+	\begin{equation*}
+	\begin{aligned}
+		&\E(S_{n+1}~|~\F_n) = \E(S_n\cdot X_{n+1}~|~S_0,\dots,S_n)\\
+		&\stackrel{S_n~\F_n\text{-messbar}}{=} S_n\cdot\E(X_{n+1}~|~S_0,\dots,S_n)=S_n\cdot\E X_{n+1}
+	\end{aligned}
+	\end{equation*}
+	$(S_n)$ ist ein Martingal genau dann, wenn $\E X_i=1~\forall i\in \N$, für Submartingal bzw. Supermartingal verschiedene Fälle betrachten.
+\end{enumerate}
 
 
 
