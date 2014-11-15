@@ -987,7 +987,186 @@ Somit gilt
 \end{itemize}
 % subsubsection 179(end)
 
+\subsubsection*{Einschub}
+\marginnote{$\delta$ lin. Abb. und $\delta:C_x^\infty \to \mathds{R}$, also $\delta \in C_x^\infty(M)^*$}
+Wie schaut $\delta\in C_x^\infty (M)^*$ Derivation in der Karte $\varphi$ aus?\\
+Sei $\varphi(x) = \enbrace*{x^1(x),\ldots, x^n(x)}$. Dann definiert
+\[
+\frac{\partial}{\partial x^j}(x): C^\infty_x (M) \to \mathds{R},\ \frac{\partial f}{\partial x^j}(x) := \frac{\partial}{\partial x^j}\enbrace*{f\circ \varphi^{-1}}\enbrace*{\varphi(x)}
+\]
+eine Derivation.
+\missingfigure{Derivationen in der Karte}
+Insbesondere gilt dann (vgl. \ref{ssub:179}), wobei $\varphi = (x^1,\ldots,x^n)$, also $x^j:U\to \mathds{R}$:
+\[
+\underset{\in C^\infty_x (M) \simeq C^\infty_0 (\mathds{R}^n}{\delta f} = \sum_j \delta(x^j) \frac{\partial}{\partial x^j}(x)
+\]
+Definiere für $v\in T_x M$ die Derivation:
+\[
+\mathcal{L}_v f := \mathd_x f(v) \in \mathds{R}
+\]
+das heißt $\mathcal{L}_v: C^\infty_x (M) \to \mathds(R)$.
+
+\subsubsection{Theorem}
+\label{ssub:1710}
+$v\in T_x M \to \mathcal{L}_v \in \mathcal{D}_x(M)$ ist ein linearer Isomorphismus.
+\minisec{Beweis}
+\begin{itemize}
+\item Linearität klar
+\item Surjektivität: Sei $v = [(U,\varphi,u)] \in T_x M$, $f\in C^\infty_x (M)$. Es gilt
+\[
+\mathcal{L}_v f = \mathd_x f(v) = \mathd_{\varphi(x)}\enbrace*{f\circ \varphi^{-1}}(u) = \sum_{j=1}^n u^j \frac{\partial}{\partial x^j}\enbrace*{f\circ \varphi^{-1}}\enbrace*{\varphi(x)} = \sum_{j=1}^n u^j \frac{\partial}{\partial x^j} f(x) 
+\]
+Ist also $\delta \in \mathcal{D}_x (M)$, dann $\delta = \mathcal{L}_{v_\delta} f$ mit $v_\delta = \benbrace*{U,\varphi,\enbrace*{\delta(x^1),\ldots,\delta(x^n)}}$
+\item Injektivität: Angenommen $\mathcal{L}_v f = 0$ für alle $f\in C_x^\infty (M)$ und $v = \benbrace*{\enbrace*{U,\varphi,u}}$ mit oBdA $u = \enbrace*{u^1,\ldots, u^n},\ u^1\neq 0$. 
+\marginnote{$\partial_i = \frac{\partial}{\partial x^i}$}
+Sei $g$ auf $\varphi(U)$ $C^\infty$ mit $\partial_1 g(\varphi(x)) \neq 0$, $g \equiv g(x^1)$. Es folgt $\partial_j g(\varphi(x)) = 0,\ j \geq 2$. So ist 
+\[
+\mathcal{L}_v (g\circ \varphi) = \sum_{j=1}^n u^j \frac{\partial}{\partial x^j} g(\varphi(x)) = u^1 \frac{\partial}{\partial x^1} g(\varphi(x)) \neq 0 \lightning
+\]
+Also folgt aus $\mathcal{L}_v f = 0$ für alle $f\in C^\infty_x (M)$, das $v = 0$, das heißt Injektivität.
+\end{itemize}
+% subsubsection 1710(end)
+Insbesondere definiert $\frac{\partial}{\partial x^j} (x)$ für $\enbrace*{U,\varphi = (x^1,\ldots, x^n)}$ Karte einen Vektor in $T_x M$.
+\minisec{Übungsaufgabe}
+\begin{enumerate}[(i)]
+\item $x\in U \mapsto \frac{\partial}{\partial x^j}(x)\in T_x M$ glatt, das heißt $\frac{\partial}{\partial x^j} \in \Gamma(U,TM\vert_U)$ "Schnitt von TM über $U$" oder ein Vektorfeld auf $U$.
+\item $\forall\ x \in U$ ist $\enbrace*{\partial_{x^1}, \ldots, \partial_{x^n}}$ eine Basis von $T_x M$.
+\missingfigure{}
+\end{enumerate}
+Insbesondere folgt: Sind $a^1,\ldots,a^n$ glatte Funktionen auf $U\subset M$, $(U,\varphi)$ Karte. So folgt
+\[
+X(x) = \sum_i a^i(x) \partial_{x^j}(x) \in T_x M
+\]
+ist ein glattes Vektorfeld auf $U$. Umgekehrt ist jedes $X\in \Gamma(U,TM)$ von dieser Form, das heißt ist $X\in \Gamma(TM)$, so gilt
+\[
+X\vert_{(U,\varphi)} = \sum a^j(x) \partial_j(x) = 
+\begin{pmatrix}
+a^1(x)\\
+\vdots \\
+a^n(x)\\
+\end{pmatrix}\quad \text{Vektor mit glatten Einträgen}
+\]
+beschreibt Vektorfeld lokal.
+
+\subsubsection[Definition: Derivation auf M]{Definition}
+\label{ssub:1711}
+Eine \Index{Derivation} auf $M$ ist eine Abbildung $\delta:C^\infty (M) \to C^\infty (M)$ mit
+\[
+\delta(fg) = f\delta(g) + \delta(f)g
+\]
+\minisec{Beispiel}
+Sei $X\in \Gamma(TM)$, so definiert
+\[
+\enbrace*{\mathcal{L}_X \underset{\in C^\infty (M)}{f}}(x) = \mathcal{L}_{X(x)} [f,x] = \mathd_x f(X(x)) =: \mathd f(X)(x)
+\]
+eine Derivation auf $M$.
+% subsubsection 1711(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:1712}
+Eine Derivation auf $M$ ist ein lokaler Operator $\delta: C^\infty (M) \to C^\infty (M)$, das heißt ist $f\in C^\infty (M)$ mit $f\vert_U = 0$, so folgt $(\delta f)\vert_U = 0$. Sei nämlich $x\in U$. Dann nehme $\psi \in C^\infty (M)$ mit $\psi(x) = 1$, $\supp \psi \subset U$, also $\psi \vert_{U^c} \equiv 0$. So gilt $\psi \cdot f \equiv 0$ auf $M$, das heißt $\delta(\psi f) = 0$. Es gilt 
+\[
+\delta(\psi f)(x) = \delta(\psi)(x)\underset{= 0}{f(x)} + \underset{= 1}{\psi(x)}\delta(f)(x) = \delta(f)(x)
+\]
+für alle $x\in U$. Also $(\delta f)\vert_U = (\delta(\psi f))\vert_U = 0$.
+% subsubsection 1712(end)
+
+\subsubsection{Theorem}
+\label{ssub:1713}
+$\Gamma(TM) \to \mathcal{D}$, $X \mapsto \mathcal{L}_X$ ist ein Linearer Isomophismus.
+\minisec{Beweis}
+\begin{itemize}
+\item Abbildung ist wohldefiniert:\\
+Sei $X\vert_U = \sum_j a^j \delta X_j$, so gilt $\mathcal{L}_{X(x)}[f,x] = \sum_j \underbrace{a^j(x)}_{C^\infty} \underbrace{\delta_j f(x)}_{C^\infty}$. Also $\mathcal{L}_X: C^\infty(M) \to C^\infty(M)$.
+\item Abbildung injektiv:\\
+Angenommen $\mathcal{L}_X f = 0$ für alle $f\in C^\infty(M)$, das heißt $\mathcal{L}_X = 0$. Es ist zu zeigen, das $X = 0$. Dazu:
+\[
+\mathcal{L}_X f(x) = \mathcal{L}_{X(x)} [f,x] = 0\quad \forall\ [f,x]\in C^\infty_x (M)
+\]
+In \ref{ssub:1710} wurde gezeigt, das $T_x M \simeq D_x$, also aus $\mathcal{L}_v [f,x] = 0$ für alle $[f,x]\in C^\infty_x (M)$ folgt $v = 0$. Somit gilt $\mathcal{L}_X f(x) = 0\ \forall f\in C^\infty (M)\Rightarrow X(x) = 0\ \forall x$, also $X = 0$. 
+\item Abbildung surjektiv:\\
+Sei $\delta \in \mathcal{D}(M)$. Gesucht ist dann $X\in \Gamma(TM)$ mit $\mathcal{L}_X = \delta$. Dazu sei $\underbrace{X(x)}_{\in T_x M \simeq \mathcal{D}_x} = \delta_x$ definiert durch $\delta_x [f,x] = (\delta f)(x)$. Es muss gezeigt werden ,das $\delta_X$ wohldefiniert ist. Dafür nehmen wir $[f,x] = [g,x]$ an. Nach der Definition \ref{ssub:176} der Keime existiert eine Umgebung $V$ von $x$ mit $f\vert_V = g\vert_V$, also $(f-g)\vert_V$. Mit Bemerkung \ref{ssub:1712} folgt $\delta(f-g)\vert_V = 0$ und insbesondere $\delta(f)(x) = \delta(g)(x)$. Also ist die Definition von $X$ wohldefiniert und es gilt $X: M \to TM$ mit $\pi \circ X = \id_M$. Es bleibt zu zeigen, das $X$ glatt ist. Dazu gilt für geeignete Karte $(U,\varphi)$ 
+\[
+\delta_x(f) \overset{\ref{ssub:179}}{=} \sum_j \delta_x (x^j) \delta_{x^j} f(x) = \sum_j \delta(x^j)(x)\cdot \delta_x^j f(x) 
+\]
+Also
+\[
+X(x) = \sum_j \delta_x (x^j) \delta_{x^j} (x) = \sum_j \underbrace{\delta(x^j)(x)}_{C^\infty}\cdot \delta_x^j (x)
+\]
+das heißt $X$ ist $C^\infty$.
+\end{itemize}
+% subsubsection 1713(end)
+Im nächsten Abschnitt wollen wir uns anschauen, wie $\mathcal{L}_X$ und $\mathcal{L}_Y$ sinnvoll verkettet werden können. So ist 
+\[
+\mathcal{L}_X \circ \mathcal{L}_Y: C^\infty (M) \xrightarrow{\mathcal{L}_Y} C^\infty (M) \xrightarrow{\mathcal{L}_X} C^\infty (M)
+\]
+im Allgemeinen falsch, aber
+
+\subsubsection{Definition und Satz}
+\label{ssub:1714}
+Sei $X,Y \in \Gamma(TM) \to \mathcal{L}_X,\mathcal{L}_Y \in \mathcal{D}$. So ist 
+\[
+\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}:= \mathcal{L}_X \cdot \mathcal{L}_Y - \mathcal{L}_Y \cdot \mathcal{L}_X 
+\]
+der \Index{Kommutator} bzw. die \Index{Lie-Klammer} von $X$ und $Y$ eine Derivation von $M$. Das zugehörige Vektorfeld wird $\benbrace{X,Y}$ geschrieben, das heißt $\mathcal{L}_{\benbrace{X,Y}} = \benbrace*{\mathcal{L}_X,\mathcal{L}_Y}$
+\minisec{Beweis}
+Es ist zu zeigen, das $\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}$ die Leibniz-Regel für $f,g\in C^\infty (M)$ erfüllt.
+\begin{align*}
+\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}(fg) 
+=& \mathcal{L}_X \enbrace{f\mathcal{L}_Y g + g\mathcal{L}_X f} - \mathcal(L)_Y \enbrace{f\mathcal{L}_X g}\\ 
+=& \mathcal{L}_X f \mathcal{L}_Y g + f \mathcal{L}_X \mathcal{L}_Y g + \mathcal{L}_X g \mathcal{L}_Y f + g \mathcal{L}_X \mathcal{L}_Y f \\
+-& \mathcal{L}_Y f \mathcal{L}_X g - f \mathcal{L}_Y \mathcal{L}_X g - \mathcal{L}_Y g \mathcal{L}_X f - g \mathcal{L}_Y \mathcal{L}_X f\\
+=& f\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}(g) + g\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}(f)
+\end{align*}
+% subsubsection 1714(end)
 % subsection 17(end)
+
+\subsection{Der Fluß eines Vektorfeldes}
+\label{sub:18}
+\missingfigure{Vektorfeld auf $\mathds{R}^2$}
+Frage: Existiert $c:I\to \mathds{R}^2$ mit $c(0) = x,\ \frac{\mathd}{\mathd t}c(t) = c'(t) = X(c(t))$\\
+Wir wissen aus Analysis (I-IV), das Lösung mit Startbedingung $c(0) = x$ lokal um $0$ (das heißt $I = (-\epsilon,\epsilon)$) existieren und $\psi_X:U\times (-\epsilon,\epsilon) \to \mathds{R}^n$ mit $\psi(x,t) = c_x(t)$ glatte Abbildung. Wie sieht das auf Mannigfaltigkeiten aus?
+
+\subsubsection{Satz und Definition}
+\label{ssub:181}
+Sei $X\in \Gamma(TM)$, $x\in M$. Dann existiert eine Kurve $c_X:0\in I\to M$ mit $c_x(0) = x$, $c_x'(t) := \mathd_t c_x \enbrace*{\frac{\mathd}{\mathd t}} = X(c(t))$, die sogenannte \Index{Integralkurve} von $X$ durch $x$.
+\minisec{Beweis}
+\marginnote{Ausführlich wurde Picard - Lindelöf für Mfkt. in der Mitschrift zu Diffformen und Mfkt. aus dem letzten Semester behandelt}
+Lesen in Karte + Standard ODE Theorie ($\leadsto$ Berger-Gostiaux)
+% subsubsection 181(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:182}
+Es folgt mit ODE - Theorie: Sind $c_x:I\to M,\ \tilde{c}_x:\tilde{I}\to M$ zwei Integralkurven von $X$ durch $x$, dann gilt $\tilde{c}_x = c_x$ auf $\tilde{I}\cap I$. Es existiert ein maximales Intervall $I_x$ mit Integralkurve $c_x: I_X\to M$
+% subsubsection 182(end)
+
+\subsubsection{Satz und Definition}
+\label{ssub:183}
+Für $x\in M$ existiert Umgebung $U$ um $x$ und $I$ Intervall um $0$, sodass die Abbildung
+\[
+\psi_X: U\times I\to M,\ \psi_X(x,t) := c_x(t)
+\]
+glatt ist. $\psi_X$ heißt \Index{lokaler Fluß} von $X$. ($c_x$ kann auf $I_X$ mit $I \subsetneq I_X$ definiert sein.)
+\missingfigure{Fluss eines Vektorfeldes}
+% subsubsection 183(end)
+
+\subsubsection{Beispiel}
+\label{ssub:184}
+\missingfigure{}
+Sei $X(x,y) = \partial_{x^1}(x,y)$ Vektorfeld auf $\mathds{R}^2$, so ist $c_{(x,y)} = (x,y) + (t,0)$ eine Integralkurve von $X$, denn $c_{(x,y)}$ und $c'(t) = \partial_{x^1}(c(t)) = X(c(t))$.\\
+Für $y\neq 0$ ist $c_{(x,y)}(t)$ auf ganz $\mathds{R}^2$ definiert. Falls $y = 0$ ist $c_{(x,0)}:(0,\infty)\to \mathds{R}^2$ für $x > 0$ und $c_{(x,0)}:(-\infty,0)\to \mathds{R}^2$ für $x < 0$.
+% subsubsection 184(end)
+
+\subsubsection{Definition}
+\label{ssub:185}
+Sei $X\in \Gamma(TM)$, definiere
+\[
+\mathcal{D}_X := \set[(x,y)]{x\in M, t\in I_X} \overset{\text{offen}}{\subset}
+\]
+wobei $I_X$ max. Intervall von $c_x$. Die glatte Abbildung $\psi_X:\mathcal{D}_X \to M,\ (x,t)\mapsto \psi_X(x,t) = c_x(t)$ heißt \Index{globaler Fluss}. $X$ heißt vollständig, falls $\mathcal{D} = M\times \mathds{R}$
+% subsubsection 185(end)
+
+% subsection 18(end)
 
 % section 1 (end)
 
