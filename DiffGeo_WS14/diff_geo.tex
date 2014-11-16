@@ -1123,7 +1123,24 @@ Es ist zu zeigen, das $\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}$ die Leibniz-Rege
 
 \subsection{Der Fluß eines Vektorfeldes}
 \label{sub:18}
-\missingfigure{Vektorfeld auf $\mathds{R}^2$}
+\begin{wrapfigure}[8]{R}[1.5cm]{4cm}
+\centering{\begin{tikzpicture}[xscale=1.3, yscale=1.1]
+		%\draw[help lines] (0,0) grid (4,3);
+		\coordinate (p) at (2.1,1.6);
+		\coordinate (s) at (0.5,0.7);
+		\coordinate (e) at (3.2,3);
+		%\draw[<->, thick] (4,0) node[right]{$x$} -- (0,0) -- (0,3) node[above]{$y$};
+		\foreach \x/\angle in {0.5/20, 1.5/40, 2.5/60, 3.5/80} {
+		    \foreach \y in {0.5, 1.5, 2.5} {
+		        %\fill (\x,\y) circle[radius=1pt];
+		        \draw[->,thick]  (\x, \y) -- ++(\angle:1);
+		    }
+		}
+		\draw[very thick,OliveDrab3] (s) to[out=20,in=220] (p) to[out=40, in=245] (e) node[below, xshift=0.1cm, yshift=-0.1cm]{$\gamma_p$};
+		\draw[fill, Tomato3] (p) circle (0.03) node[below]{$p$}; 
+	\end{tikzpicture}
+	\caption{Integralkurve in einem Vektorfeld des $\mathds{R}^2$}}
+\end{wrapfigure}
 Frage: Existiert $c:I\to \mathds{R}^2$ mit $c(0) = x,\ \frac{\mathd}{\mathd t}c(t) = c'(t) = X(c(t))$\\
 Wir wissen aus Analysis (I-IV), das Lösung mit Startbedingung $c(0) = x$ lokal um $0$ (das heißt $I = (-\epsilon,\epsilon)$) existieren und $\psi_X:U\times (-\epsilon,\epsilon) \to \mathds{R}^n$ mit $\psi(x,t) = c_x(t)$ glatte Abbildung. Wie sieht das auf Mannigfaltigkeiten aus?
 
@@ -1147,14 +1164,52 @@ Für $x\in M$ existiert Umgebung $U$ um $x$ und $I$ Intervall um $0$, sodass die
 \psi_X: U\times I\to M,\ \psi_X(x,t) := c_x(t)
 \]
 glatt ist. $\psi_X$ heißt \Index{lokaler Fluß} von $X$. ($c_x$ kann auf $I_X$ mit $I \subsetneq I_X$ definiert sein.)
-\missingfigure{Fluss eines Vektorfeldes}
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[scale = 0.8]
+		%\draw[help lines] (0,0) grid (12,6);
+		\draw[dashed] (1,3) .. controls +(80:1) and +(180:1) .. (3,5) node[above]{$U$}
+		.. controls +(0:1) and +(90:1) .. (6,3.5)
+		.. controls +(270:1.5) and +(0:1.5) .. (3,1.5)
+		.. controls +(180:1) and +(270:1) .. (1,3);
+		\draw[dashed] (5,3) .. controls +(90:1.5) and +(180:0) .. (7,4.5)
+		.. controls +(0:1.5) and +(90:1) .. (11,3)  node[above,right]{$\psi_X(U)$}
+		.. controls +(270:1.5) and +(0:2) .. (8,1)
+		.. controls +(180:1.5) and +(270:2) .. (5,3);
+		\foreach \x/\angle in {2.5/30, 4/15, 5.5/00, 7/345, 8.5/330}{
+			\foreach \y in {2.5, 3, 3.5, 4}{
+				\draw[->,thick] (\x,\y) -- ++(\angle:1);
+			}
+		}
+		\draw[thick,OliveDrab3] (2.5,2.5) .. controls +(30:2) and +(150:2) .. (10,2.5) node[right]{$c_y$};
+		\draw[thick,OliveDrab3] (2.5,3.25) .. controls +(30:2) and +(150:2) .. (10,3.25) node[right]{$c_x$};
+	\end{tikzpicture}
+	\caption{lokaler Fluß eines Vektorfeldes}}
+\end{figure}
 % subsubsection 183(end)
 
 \subsubsection{Beispiel}
 \label{ssub:184}
-\missingfigure{}
+\begin{wrapfigure}[6]{L}[1.5cm]{4cm}
+	\begin{tikzpicture}[xscale=0.6, yscale=0.4]
+		%\draw[help lines] (0,0) grid (6,4);
+		\draw [->] (3,2.05) -- (3,4);
+		\draw [->] (3.05,2) -- (6,2);
+		\draw [->] (3,1.95) -- (3,0);
+		\draw [->] (2.95,2) -- (0,2);
+		\draw (3,2) circle (0.05);
+			\foreach \x in {3.5,2.5,1.5,0.5}
+				\foreach \y in {4.5,3.5,2.5,1.5,0.5}
+					\draw [->] (\y, \x) -- (\y +0.7, \x);
+			\foreach \y in {4.2,3.2,2.2,1.2,0.2}
+				\draw[color=Sienna3,->] (\y, 2) -- (\y +0.7, 2);
+				\node[color=Sienna3,below] at (5,2) {$y = 0$};
+	\end{tikzpicture}
+	\caption{Vektorfeld auf $\mathds{R}^2$}
+\end{wrapfigure}
 Sei $X(x,y) = \partial_{x^1}(x,y)$ Vektorfeld auf $\mathds{R}^2$, so ist $c_{(x,y)} = (x,y) + (t,0)$ eine Integralkurve von $X$, denn $c_{(x,y)}$ und $c'(t) = \partial_{x^1}(c(t)) = X(c(t))$.\\
-Für $y\neq 0$ ist $c_{(x,y)}(t)$ auf ganz $\mathds{R}^2$ definiert. Falls $y = 0$ ist $c_{(x,0)}:(0,\infty)\to \mathds{R}^2$ für $x > 0$ und $c_{(x,0)}:(-\infty,0)\to \mathds{R}^2$ für $x < 0$.
+Für $y\neq 0$ ist $c_{(x,y)}(t)$ auf ganz $\mathds{R}^2$ definiert. Falls $y = 0$ ist $c_{(x,0)}:(0,\infty)\to \mathds{R}^2$ für $x>0$ und $c_{(x,0)}:(-\infty,0)\to \mathds{R}^2$ für $x<0$.\\.
+\\.
 % subsubsection 184(end)
 
 \subsubsection{Definition}
