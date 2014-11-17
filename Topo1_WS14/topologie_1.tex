@@ -1626,6 +1626,101 @@ das Diagramm
 \]
 kommutiert.
 % subsection 88 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:89}
+\begin{enumerate}[(1)]
+	\item Ist die Inklusion $i  :A \to X$ eine Homotopieäquivalenz, so ist $H_n(X,A;R)= 0$ für alle $n$.
+	\item Sei $A$ kontraktibel. Dann gilt für alle $n \ge 1$. $H_n(X;R) \cong H_n(X,A;R)$
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(1)]
+	\item Betrachte den folgenden Ausschnitt aus der langen exakten Folge:
+	\[
+		\begin{tikzcd}
+			H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] & H_{n-1}(A;R) \rar["i_*"] & H_n(X;R)
+		\end{tikzcd}
+	\]
+	$\ker j_* = \im i_* = H_n(X;R)$, also folgt $j_* = 0$. Da $\im \partial_n = \ker i_* = 0$, folgt $\partial_n=0$. Nun ist 
+	\[
+		H_n(X,A;R) = \ker \partial_n = \im j_* = 0
+	\]
+	\item Übung! \bewende
+\end{enumerate}
+% subsection 89 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:810}
+Seien 
+\begin{equation*}
+	(C_*,d_*) \xrightarrow{i_*} (C_*',d_*') \xrightarrow{p_*} (C_*'',d_*'') \label{eq:810}\tag{\#}
+\end{equation*}
+$R$-Kettenabbildungen. Ist für jedes $n$
+\[
+	\begin{tikzcd}
+		C_n \rar["i_n"] & C_n' \rar["p_n"] & C_n''
+	\end{tikzcd}
+\]
+kurz exakt, so heißt \eqref{eq:810} eine kurze exakte Folge von Kettenkomplexen.
+% subsection 810 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:811}
+Für jedes Paar $(X,A)$ ist 
+\[
+	\begin{tikzcd}
+		\enbrace*{C_*(A;R),\partial_n} \rar & \enbrace*{C_*(X;R),\partial_*} \rar & \enbrace*{C_*(X,A;R),\partial_*}   
+	\end{tikzcd}
+\]
+eine kurze exakte Folge von $R$-Kettenkomplexen.
+% subsection 811 (end)
+
+\subsection{Schlangenlemma} % (fold)
+\label{sub:812}
+Sei 
+\[
+	\begin{tikzcd}
+		(C_*,d_*) \rar["i_*"] & (C_*',d_*') \rar["p_*"] & (C_*'',d_*'')
+	\end{tikzcd}
+\]
+eine kurze exakte Folge von $R$-Kettenkomplexen.
+\begin{enumerate}[a)]
+	\item Für jedes $n$ gibt es eine eindeutige wohldefinierte $R$-lineare Abbildung $\partial_n : H_n(C_*'',d_*'') \to H_{n-1}(C_*,d_*)$ mit:
+	
+	Für $v' \in C_n'$ mit $d_n'' p_n(v')=0$ ist 
+	\[
+		\partial_n \enbrace[\Big]{\underbrace{\benbrace*{p_n(v')}}_{\in H_n(C_*'',d_*'')} } = [v] \in H_{n-1}(C_*,d_*)
+	\]
+	wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$
+	\item \missingfigure{Diagramm, das den Namen begründet}
+\end{enumerate}
+\minisec{Beweis}
+\[
+	\begin{tikzcd}[row sep=2em, column sep=3em]
+		C_{n+1} \rar["i_{n+1}"] \dar["d_{n+1}"] & C_{n+1}' \rar["p_{n+1}"] \dar["d_{n+1}'"] & C_{n+1}'' \dar["d_{n+1}''"] \\
+		C_n \rar["i_n"] \dar["d_{n}"]& C_n' \rar["p_n"] \dar["d_{n}'"]& C_n'' \dar["d_{n}''"]\\
+		C_{n-1} \rar["i_{n-1}"] \dar["d_{n-1}"]& C_{n-1}'  \rar["p_{n-1}"] \dar["d_{n-1}'"]& C_{n-1}'' \dar["d_{n-1}''"]\\
+		C_{n-2} \rar["i_{n-2}"]& C_{n-2}' \rar["p_{n-2}"] & C_{n-2}''
+	\end{tikzcd}
+\]
+Sei $x'' \in H_n(C_*'',d_*'')$, also $x'' = [v'']$ mit $v'' \in \ker d_n''$. Da $p_n$ surjektiv ist, existiert $v' \in C_n'$ mit $p_n(v')=v''$. Es gilt
+\[
+	p_{n-1} d_n'(v) = d_n'' p_n(v') = d_n''(v'') = 0
+\]
+$\Rightarrow v' \in \ker p_{n-1}$. Weiter gilt $\ker p_{n-1}= \im i_{n-1}$, also $\exists v \in C_{n-1} : i_{n-1}(v)= d_n'(v')$. Dann gilt
+\[
+	i_{n-2} \enbrace*{d_{n-1}(v)} = d_{n-1} \enbrace*{i_{n-1}(v)} = d_{n-1}' \enbrace*{d_n'(v')} = 0   
+\]
+Da $i_{n-2}$ injektiv ist, folgt somit $d_{n-1}(v)=0$. Setze $\partial_n(x'') := [v]$. Zu zeigen: $[v] \in H_{n-1}(C_*,d_*)$ ist unabhängig von der Wahl von $v''$ und $v'$.
+Seien $w'' \in \ker d_n''$, $w' \in C_n'$, $w \in C_{n-1}$ mit $x''=[w'']$, $p_n(w')=w''$ und $i_{n-1}(w)= d_n'(w')$. 
+
+$[v'']=[w'']$, also folgt $\exists a'' \in C_{n+1}'' : d_{n+1}'' (a'')=v'' - w''$. $p_{n+1}$ ist surjektiv, also existiert $a' \in C_{n+1}'$ mit
+$p_{n+1}(a')=a''$. Es gilt
+\[
+	p_n(v'-w'- d_{n+1}'(a')) = v'' - w'' - \underbrace{d_{n+1}(p_{n+1}(a'))}_{v''- w''} = 0
+\]
+Mit $\ker p_n = \im i_n$ folgt: $\exists a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es bleibt zu zeigen: $d_n(a)= v-w$.
+% subsection 812 (end)
 % section 8 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
