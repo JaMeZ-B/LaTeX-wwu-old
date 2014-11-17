@@ -1526,7 +1526,107 @@ Ist $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f$ und $g$, so erhalten 
 \]
 % subsection 714 (end)
 % section 7 (end)
+\newpage
 
+\section{Homologie von Paaren} % (fold)
+\label{sec:8}
+
+\subsection[Definition: Paar von topologischen Räumen]{Definition} % (fold)
+\label{sub:81}
+Sei $A$ ein Teilraum von $X$, dann heißt $(X,A)$ ein \Index{Paar von topologischen Räumen}. Eine Abbildung von Paaren $f : (X,A) \to (Y,B)$ ist eine stetige Abbildung
+$f : X \to Y$ mit $f(A) \subseteq B$. Manchmal schreiben wir $(f,f|_{A}) : (X,A) \to (Y,B)$. 
+
+Die Kategorie von Paaren von topologischen Räumen bezeichnen wir mit $\TOP^2$.
+% subsection 81 (end)
+
+\subsection[Definition: Singulärer Kettenkomplex von Paaren]{Definition} % (fold)
+\label{sub:82}
+Sei $(X,A)$ ein Paar. Dann definieren wir den singulären Kettenkomplex von $(X,A)$ über $R$ durch
+\begin{align*}
+	C_n(X,A;R) := \nicefrac{C_n(X;R)}{C_n(A;R)} \\
+	\partial_n \enbrace[\big]{\sigma+ C_n(A;R)} := \partial_n \sigma + C_{n-1}(A;R)
+\end{align*}
+Dies ist wohldefiniert, da $\partial_n \enbrace[\big]{C_n(A;R)} \subseteq C_{n-1}(A;R)$. Weiter heißt
+\[
+	H_n(X,A;R) := H_n \enbrace[\big]{C_*(X,A;R),\partial_*} 
+\]
+der $n$-te singuläre Homologiemodul von $(X,A)$ mit Koeffizienten in $R$.
+% subsection 82 (end)
+
+\subsection[Definition: Der singuläre Kettenkomplex von Paaren definiert einen Funktor]{Bemerkung} % (fold)
+\label{sub:83}
+Der singuläre Kettenkomplex von Paaren definiert einen Funktor: $\TOP^2 \to R\text{-}\textsc{Ketten}$. Durch Komposition mit Homologie (als Funktor 
+$R\text{-}\textsc{Ketten} \to R\text{-}\MOD$) erhalten wir einen Funktor
+\[
+	H_n(-,-;R) : \TOP^2 \to R\text{-}\MOD
+\]
+% subsection 83 (end)
+
+\subsection[Bemerkung: Topologische Räume als Paar auffassen]{Bemerkung} % (fold)
+\label{sub:84}
+Via $X \mapsto (X,\emptyset)$ können wir jeden Raum auch als Paar auffassen. Es gilt $H_n(X,\emptyset;R) = H_n(X;R)$.
+% subsection 84 (end)
+
+\subsection{Frage} % (fold)
+\label{sub:85}
+Können wir $H_n(X,A;R)$ durch $H_n(X;R)$ und $H_n(A;R)$ ausdrücken? 
+\begin{description}
+	\item[Ansatz 1:] 
+	\[
+		H_n(X,A;R) \cong \nicefrac{H_n(X;R)}{H_n(A;R)}
+	\]
+	\ifxetexorluatex \faWarningSign \fi Problem: $H_n(A;R)$ ist kein Untermodul von $H_n(X;R)$
+	\item[Ansatz 2:] Ist $H_n(X;R) \to H_n(X,A;R)$ surjektiv?
+	
+	Sei $x \in H_n(X,A;R)$. Dann gibt es $\sigma + C_n(A;R) \in C_n(X,A;R)$ mit $\partial_n \enbrace[\big]{\sigma + C_n(A;R)} = 0$ und $x= [\sigma]$. Es ist 
+	$\sigma \in C_1(X;R)$, aber wir wissen nur $\partial_n \sigma \in C_{n-1}(A;R)$, nicht $\partial_n(\sigma)= 0$ \hfill \ifxetexorluatex {\large \faMeh} \fi
+\end{description}
+% subsection 85 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:86}
+In $C_n \enbrace[\big]{\abs*{\Delta^n}, \abs*{\partial \Delta^n};R}$ gilt für $\sigma := \id : \abs*{\Delta^n} \to \abs*{\Delta^n}$, dass $\partial_n(\sigma)=0$ ist, da
+in $C_n(\abs*{\Delta^n};)$ $\partial_n \sigma \in C_{n-1} \enbrace*{\abs*{\partial \Delta^n};R}$. Wir werden später sehen, dass $[\sigma]$ den Homologiemodul
+\[
+	H_n \enbrace[\big]{\abs*{\Delta^n}, \abs*{\partial \Delta^n};R  } \cong R 
+\]
+erzeugt.
+% subsection 86 (end)
+
+\subsection[Definition: Lange exakte Sequenz]{Definition} % (fold)
+\label{sub:87}
+Eine Folge von $R$-linearen Abbildungen 
+\[
+	\begin{tikzcd}
+		\mbox{ }  \rar & M_n \rar["f_n"]  & M_{n-1} \rar["f_{n-1}"] & M_{n-2} \rar & \cdots \rar & M_1 \rar & M_0
+	\end{tikzcd}
+\]
+heißt \Index{lange exakte Folge}, wenn sie exakt an jeder Stelle $M_i$ ist, d.h. für alle $i$ gilt $\im f_i = \ker f_{i-1}$ 
+% subsection 87 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:88}
+Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;R)$ nach $(X,A) \mapsto H_{n-1}(A;R)$, sodass für jedes Paar $(X,A)$ gilt
+\todo{schöner machen}
+\[
+	\begin{tikzcd}[row sep=1em, column sep=1.4em]
+		\cdots \rar& H_{n+1}(X,A;R) \rar["\partial_{n+1}"] & H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] 
+		& H_{n-1}(A;R) \rar & H_{n-1}(X;R) \rar & \mbox{ }\\
+		\cdots \rar["\partial_1"] & H_0(A;R) \rar & H_0(X;R) \rar & H_0(X,A) \rar & 0
+	\end{tikzcd}
+\]
+eine lange exakte Folge ist. Dabei sind $i : A \to X$ und $j : (X,\emptyset) \to (X,A)$ die Inklusionen. Das bedeutet: \smallskip\\
+Für jedes Paar $(X,A)$ haben wir eine $R$-lineare Abbildung $\partial_n : H_n(X,A;R) \to H_{n-1}(A;R)$, sodass für jede Abbildung $(f,f|_{A}) : (X,A) \to (Y,B)$ von Paaren
+das Diagramm
+\[
+	\begin{tikzcd}
+		H_{n(X,A;R)} \rar["\partial_n"] \dar["{(f,f|_A)_*}"] & H_{n-1}(A;R) \dar["{(f|_A)_*}"] \\
+		H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R)
+	\end{tikzcd}
+\]
+kommutiert.
+% subsection 88 (end)
+% section 8 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
