@@ -975,9 +975,9 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 			\item $_kp_x:=\mathds{P}(T_x>k)=\mathds{P}(T_x>1)\mathds{P}(T_x>k~|~T_x>1)\stackrel{\text{Stationarität}}{=} p_x \mathds{P}(t_{x+1}>k-1)\\ =\dots=p_xp_{x+1}\dots p_{x+k-1}$
 			\item $_kq_x = 1- _kp_x = \mathds{P}(T_x\le k)$
 			\item Bezeichnung für $M=1$, Eintrittsalter $x$\\
-			$_{|n}A_x = \sum\limits_{k=1}^{n}r^k \mathds{P}(k-1<T_x\le k)$\\
+			$_{|n}A_x = \sum\limits_{k=1}^{n}v^k \mathds{P}(k-1<T_x\le k)$\\
 			für $p=1$:\\
-			$ä_{x:n\rceil} = \sum\limits_{k=0}^{n-1}r^k \mathds{P}(T_x>k)$\\
+			$ä_{x:n\rceil} = \sum\limits_{k=0}^{n-1}v^k \mathds{P}(T_x>k)$\\
 			Die Todesfallversicherung ist fair, wenn $M\cdot~_{|n}A_x = p \cdot ä_{x:n\rceil}$\\
 			$n \to +\infty$ entspricht Todesfallversicherung ohne zeitliche Beschränkung
 			\item Bezeichnung\\
@@ -1830,10 +1830,137 @@ $M$ heißt \bet{Supermartingal}\index{Martingal!Super-}, falls gilt:
 	\end{equation*}
 	$(S_n)$ ist ein Martingal genau dann, wenn $\E X_i=1~\forall i\in \N$, für Submartingal bzw. Supermartingal verschiedene Fälle betrachten.
 \end{enumerate}
+%sub end
+
+\subsection{Stopzeit}
+\label{sub:stopzeit}
+Sei $(\F_t)_{t\in T}$ eine Filtration, $\tau:\Omega\to T\cup \{+\infty\}$ heißt \Index{Stopzeit}, falls \[ \{\tau\le t\}\in \F_t\]
+
+Stopzeiten kann man als Verkaufsstrategie interpretieren. Die Entscheidung über $t$ hinaus fortzufahren. $\{t\in T\}$ darf nur von der bis $t$ verfügbaren Informationen abhängen.
+
+Beispiel: $(S_n)_{n\in \N}$ reellwertiger stoch. Prozess $\F_n=\sigma(S_0,\dots,S_n)~\forall n\in \N$. $\tau=\inf\{n\in \N_0~|~S_n>a\}$ ist eine Stopzeit, denn $\{\tau>n\}=\{S_0\le a,\dots,S_n\le a\}\subseteq \F_n$.
+
+\begin{center}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (-1.,0.) -- (7.5,0.);
+	\foreach \x in {2,4,7}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw[->,color=black] (0.,-1.) -- (0.,5.);
+	\foreach \y in {4.5}
+	\draw[shift={(0,\y)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw (0,4.5) node [left] {$a$};
+	\draw (4,0) node [below] {$\tau$};
+	\draw (7,0) node [below] {$N$};
+	\draw (0,2)--(2,3.5);
+	\draw (2,3.5)--(2.5,2.7);
+	\draw (2.5,2.7)--(4,3.8);
+	\draw (4,3.8)--(5,2);
+	\draw (5,2)--(6,4.5);
+	\draw (6,4.5)--(7,2.5);
+	\end{tikzpicture}
+	\captionof{figure}{Stopzeiten}
+\end{center}
+
+$\tau=\inf\{0\le k\le N~|~S_k=\max\{S_0,\dots,S_n\} \}$ ist keine Stopzeit, da zur Stopentscheidung in die Zukunft geschaut werden muss.
+%sub end
+
+\subsection{Martingal als faires Glücksspiel}
+Sei $(\F_n)_{n\in \N_0}$ eine Filtration und $(M_n)_{n\in \N_0}$ adaptierter stoch. Prozess mit $\E\abs{M_n}<\infty$ für alle $n\in \N_0$.
+
+$M_n\mathrm{\hat{=}}$ Auszahlung, die ein Spieler erhält, wenn er das Spiel zum Zeitpunkt $n$ beendet.\\
+Stopzeiten $\mathrm{\hat{=}}$ Strategien, die ein Spieler verwirklichen kann.\\
+$\tau$ ist eine beschränkte Stopzeit, falls es ein $N\in \N$ ex. mit $\tau\le N$.\\
+Beschränkte Stopzeiten $\mathrm{\hat{=}}$ real umsetzbare Strategien.\\
+
+\minisec{Satz:}
+Es gilt: $(M_n)_{n\in \N_0}$ ist ein Martingal genau dann, wenn \[\E M_{\tau}=\E M_0 \text{ für jede beschränkte Stopzeit }\tau \]
+d.h. durch Spielen des Glücksspiels kann sich ein Spieler im Mittel weder verbessern noch verschlechtern (faires Glücksspiel).\\
+
+\bet{Beweis:}\\
+\uline{$\Rightarrow$:} Sei $\tau$ Stopzeit mit $\tau\le N$.
+\begin{equation*}
+\begin{aligned}
+	\E M_\tau &=\E \sum_{n=0}^{N}M_\tau \mathbb{1}_{\{\tau=n\}}= \E \sum_{n=0}^{N}M_n \mathbb{1}_{\{\tau=n\}}\\ 
+	&=\sum_{n=0}^{N}\E M_n \mathbb{1}_{\{\tau=n\}}= \sum_{n=0}^{N}\E\E(M_N~|~\F_n) \mathbb{1}_{\{\tau=n\}}\\
+	&= \sum_{n=0}^{N}\E\E(M_N\mathbb{1}_{\{\tau=n\}}~|~\F_n)= \sum_{n=0}^{N}\E M_N\mathbb{1}_{\{\tau=n\}}\\
+	&=\E\sum_{n=0}^{N}M_N \mathbb{1}_{\{\tau=n\}}= \E M_N= \E M_0
+\end{aligned}
+\end{equation*}
+Also: $\E M_\tau=\E M_0$.\\
+
+\uline{$\Leftarrow$:} Sei $m<n$. \zz $\E(M_m~|~\F)=M_n$, d.h. $\int_A M_m\dint \Pw = \int_A M_n\dint\Pw$ für alle $A\in \F_n$.\\
+Zu $A\in \F_n$ definiere Stopzeit:
+\[\tau_A(\omega)=\left\{\begin{array}{cl}  m, & \omega\in A\\ n, & \omega \in A^c   \end{array}\right. \]
+$\tau_A=m\mathbb{1}_A+n\mathbb{1}_{A^c}$\\
+$\tau$ ist eine beschränkte Stopzeit. Es gilt also:
+\begin{equation*}
+\begin{aligned}
+	\E M_0 &=\E M_{\tau_A}= \E M_m\mathbb{1}_A+ \E M_n \mathbb{1}_{A^c}\\
+	&= \E  M_m\mathbb{1}_A+ \E M_N- \E M_n \mathbb{1}_{A}
+\end{aligned}
+\end{equation*}
+Weiter gilt mit $\tau = n$ \[\E M_0=\E M_\tau =\E M_n \]
+Einsetzen  liefert \[\E M_m\mathbb{1}_A=\E M_n\mathbb{1}_A \]
+%sub end
+
+\subsection{Optional Sampling}
+\label{sub:opt_sampling}
+Frage: Wann gilt $\E M_\tau=\E M_0$, wenn $M$ ein Martingal ist. Für beschränkte Stopzeiten klar. Für unbeschränkte Stopzeiten braucht man Voraussetzungen.\\
+\bet{Beispiel:} Irrfahrt auf $\Z$\\
+$S_n=\sum_{i=1}^{n}X_i,~ (X_i)_{i\in \N}$ iid, $\Pw(X_i=1)=\frac{1}{2}=\Pw(X_i=-1)~ \tau=\inf\{n\in \N_0~|~S_n=1\}$\\
+%grafik
+Es gilt: $\Pw(\tau<\infty)=1$ $\Pw$-f.s. $S_\tau=1\Rightarrow \E S_\tau=1\not=\E S_0=0$.
+
+Antwort liefert das \Index{Optional-Sampling Theorem}.\\
+\minisec{Satz:}
+Sei $(M_n)_{n\in \N_0}$ ein Martingal bzgl. einer Filtration $(\F_n)_{n\in \N_0}$. Sei $\tau$ eine Stopzeit mit den folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item $\Pw(\tau<\infty)=1$
+	\item $\E\abs{M_\tau}<\infty$
+	\item $\E\abs{M_n}\mathbb{1}_{\{\tau>n\}} \stackrel{n\to\infty}{\to}0$
+\end{enumerate}
+Dann gilt: \[\E M_\tau=\E M_0 \]
+
+\bet{Beweis:}\\
+Approximiere $\tau$ durch beschränkte Stopzeiten $\tau\lor m$. Es gilt $\E M_{\tau\lor m} =\E M_0$. Also 
+\begin{equation*}
+\begin{aligned}
+	\abs{\E M\tau-\E m_0}&=\abs{\E M\tau-\E M_{\tau\lor m}} =\abs{\E M\tau-\E M_\tau\mathbb{1}_{\{\tau\le n\}}-\E M_n\mathbb{1}_{\{\tau> n\}}}\\
+	&= \abs{\E M_\tau\mathbb{1}_{\{\tau\ge n}- \E M_n\mathbb{1}_{\{\tau >n\}}}\\
+	&\le \E\abs{M_\tau}\mathbb{1}_{\{\tau\ge n\}}+ \E\abs{M_n}\mathbb{1}_{\{\tau>n\}} \to 0
+\end{aligned}
+\end{equation*}
+Wegen (ii),(iii) und einer Anwendung des Satzes von der majorisierten Konvergenz.
 
 
+%sub end
 
+\subsection{Anwendung}
 
+Berechnung von Ruinwahrscheinlichkeiten. Sei $(X_n)_{n\in \N}$ iid mit $\Pw(X_n=1)=p=1-\Pw(X_n=-1)$ $S_n=\sum_{i=1}^{n} X_i$ für alle $n\in \N$\\
+Anfangskapital von $k$ Euro. $S_n^{(k)}=k+S_n=k+\sum_{i=0}^{n} X_i$ Vermögen nach $n$-Spielen bei Anfangskapital $k$.
+
+Wir spielen solange, bis wir ein Vermögen von $l>k$ Euro erreichen oder ruiniert sind \[\tau=\inf\{n\in \N~|~S_n^{k}=0\text{ oder } S_n^{k}=l \} = \inf\{n\in \N~|~S_n=0-k\text{ oder } S_n=l-k \}\]
+ist die Strategie.
+
+\begin{equation*}
+\begin{aligned}
+	\{S_\tau=-k\} &= \{S_\tau^{(k)}=0\} \text{ ist Ruin}\\
+	\{S_\tau=l-k\} &= \{S_\tau^{(k)}=l\} \text{ ist Gewinn}
+\end{aligned}
+\end{equation*}
+Man kann zeigen: \[\Pw(\tau<\infty)=1,~\E \tau<\infty \]
+
+\begin{enumerate}
+	\item $p=\frac{1}{2}$ der faire Fall:\\
+	Dann ist $(S_n)_{n\in \N_0}$ ein Martingal.
+	\[\E\abs{S_\tau}\le \max\{k,k-l\}<\infty\]
+	\[\E\abs{S_n}\mathbb{1}_{\{\tau>n\}}\le \max\{k,l-k\}\Pw(\tau>n)\to 0 \]
+	Optional-Sampling liefert \[0=\E S_\tau= -k\Pw(S_\tau=-k)+(l-k)\Pw(S_\tau=l-k) \]
+	Zusammen mit $\Pw(S_\tau=-k)+\Pw(S_\tau=l-k)=1$ folgt
+	\[\Pw(S_\tau=-k)=\frac{l-k}{l}\text{ Ruinw'keit} \]
+	\[\Pw(S_\tau=l-k)=\frac{k}{l}\text{ Gewinnw'keit} \]
+\end{enumerate}
 
 
 
