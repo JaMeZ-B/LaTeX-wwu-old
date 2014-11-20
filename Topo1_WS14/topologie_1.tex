@@ -1383,7 +1383,7 @@ Ist $X$ \Index{kontrahierbar}, d.h. es gibt eine Homotopie $H : X \times [0,1] \
 \minisec{Beweis}
 Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopieäquivalenz. Also gilt nach \ref{sub:74}
 \[
-	H_n(X;R) \cong H_n(\set{x_0};R) \stackrel{\text{\ref{sub:59}}}{=} \begin{cases}
+	H_n(X;R) \cong H_n \enbrace[\big]{\set{x_0};R} \stackrel{\text{\ref{sub:59}}}{=} \begin{cases}
 		R, &\text{ falls }n=0\\
 		0, &\text{ sonst}
 	\end{cases} \bewende
@@ -1403,7 +1403,7 @@ Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopi
 
 \subsection[Definition: Kettenhomotopie]{Definition} % (fold)
 \label{sub:76}
-Seien $(C_*,D_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
+Seien $(C_*,d_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
 ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mathds{N}$, sodass für alle $n$ gilt:
 \[
 	d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
@@ -1608,13 +1608,13 @@ heißt \Index{lange exakte Folge}, wenn sie exakt an jeder Stelle $M_i$ ist, d.h
 \label{sub:88}
 Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;R)$ nach $(X,A) \mapsto H_{n-1}(A;R)$, sodass für jedes Paar $(X,A)$ gilt
 \todo{schöner machen}
-\[
+\begin{equation*}
 	\begin{tikzcd}[row sep=1em, column sep=1.4em]
-		\cdots \rar& H_{n+1}(X,A;R) \rar["\partial_{n+1}"] & H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] 
-		& H_{n-1}(A;R) \rar & H_{n-1}(X;R) \rar & \mbox{ }\\
+		\cdots  \rar["\partial_{n+1}"] & H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] 
+		& H_{n-1}(A;R) \rar & \cdots \\
 		\cdots \rar["\partial_1"] & H_0(A;R) \rar & H_0(X;R) \rar & H_0(X,A) \rar & 0
-	\end{tikzcd}
-\]
+	\end{tikzcd} \label{eq:88}\tag{*}
+\end{equation*}
 eine lange exakte Folge ist. Dabei sind $i : A \to X$ und $j : (X,\emptyset) \to (X,A)$ die Inklusionen. Das bedeutet: \smallskip\\
 Für jedes Paar $(X,A)$ haben wir eine $R$-lineare Abbildung $\partial_n : H_n(X,A;R) \to H_{n-1}(A;R)$, sodass für jede Abbildung $(f,f|_{A}) : (X,A) \to (Y,B)$ von Paaren
 das Diagramm
@@ -1625,6 +1625,8 @@ das Diagramm
 	\end{tikzcd}
 \]
 kommutiert.
+\minisec{Beweis}
+\emph{siehe \ref{sub:813}.}
 % subsection 88 (end)
 
 \subsection{Korollar} % (fold)
@@ -1705,11 +1707,11 @@ eine kurze exakte Folge von $R$-Kettenkomplexen.
 \]
 Sei $x'' \in H_n(C_*'',d_*'')$, also $x'' = [v'']$ mit $v'' \in \ker d_n''$. Da $p_n$ surjektiv ist, existiert $v' \in C_n'$ mit $p_n(v')=v''$. Es gilt
 \[
-	p_{n-1} d_n'(v) = d_n'' p_n(v') = d_n''(v'') = 0
+	p_{n-1} d_n'(v') = d_n'' p_n(v') = d_n''(v'') = 0
 \]
 $\Rightarrow v' \in \ker p_{n-1}$. Weiter gilt $\ker p_{n-1}= \im i_{n-1}$, also $\exists v \in C_{n-1} : i_{n-1}(v)= d_n'(v')$. Dann gilt
 \[
-	i_{n-2} \enbrace*{d_{n-1}(v)} = d_{n-1} \enbrace*{i_{n-1}(v)} = d_{n-1}' \enbrace*{d_n'(v')} = 0   
+	i_{n-2} \enbrace*{d_{n-1}(v)} = d'_{n-1} \enbrace*{i_{n-1}(v)} = d_{n-1}' \enbrace*{d_n'(v')} = 0   
 \]
 Da $i_{n-2}$ injektiv ist, folgt somit $d_{n-1}(v)=0$. Setze $\partial_n(x'') := [v]$. Zu zeigen: $[v] \in H_{n-1}(C_*,d_*)$ ist unabhängig von der Wahl von $v''$ und $v'$.
 Seien $w'' \in \ker d_n''$, $w' \in C_n'$, $w \in C_{n-1}$ mit $x''=[w'']$, $p_n(w')=w''$ und $i_{n-1}(w)= d_n'(w')$. 
@@ -1719,8 +1721,77 @@ $p_{n+1}(a')=a''$. Es gilt
 \[
 	p_n(v'-w'- d_{n+1}'(a')) = v'' - w'' - \underbrace{d_{n+1}(p_{n+1}(a'))}_{v''- w''} = 0
 \]
-Mit $\ker p_n = \im i_n$ folgt: $\exists a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es bleibt zu zeigen: $d_n(a)= v-w$.
+Mit $\ker p_n = \im i_n$ folgt: $\exists a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es bleibt zu zeigen: $d_n(-a)= v-w$.
+\begin{align*}
+	i_{n-1} \enbrace*{-d_n(a)- (v-w)} & = -i_{n-1} \enbrace*{d_n(a)} - i_{n-1}(v-w) \\ &= - d_n' \enbrace*{i_n(a)} - \enbrace*{d_n'(v')- d_n'(w')}  \\  
+	&= -d_n' \enbrace*{ d_{n+1}' (a') - (v'-w')} - \enbrace*{ d_n'(v') - d_n'(w')}  \\
+	&= - d_n' d_{n+1}' (a') + d_n'(v'- w') -  \enbrace*{d_n'(v'-w')} = 0
+\end{align*}
+da $i_{n-1}$ injektiv ist, folgt $-d_n(a)- (v-w) = 0$, also $d_n(-a)=(v-w)$.
+\begin{description}
+	\item[\uline{$\im (i_n)_* = \ker (p_n)_*$:}] 
+	\begin{description}
+		\item["$\subseteq$":] $(p_n)_* \circ (i_n)_* = \enbrace*{p_n-i_n}_* = (0)_* =0 $
+		\item["$\supseteq$":] Sei $x' \in \ker (p_n)_*$. Sei $x'= [v']$ mit $v' \in C_n'$, $d_n'(v')=0$. Da $\benbrace*{p_n(v')}= (p_n)_* [x'] = 0$ gibt es $a'' \in C_n''$
+		mit $d_{n+1}''(a'') = p_n(v')$. Da $p_{n+2}$ surjektiv ist, existiert $a' \in C_{n+1}'$ mit $p_{n+1}(a')=a''$. Dann gilt
+		\begin{align*}
+			p_n \enbrace*{v' - d_{n+1}'(a')} = p_n(v') - p_n d_{n+1}'(a') = p_n(v') -  \underbrace{ d_{n+1}''\enbrace[\Big]{\underbrace{p_{n+1}(a')}_{a''}}}_{p_n(v')} = 0  
+		\end{align*}
+		Da $\ker p_n = \im i_n$ gibt es $a \in C_n$ mit $i_n(a)= v'- d_{n+1}'(a')$. Nun ist 
+		\[
+			i_{n-1} \enbrace[\big]{d_n(a)} = d_n' \enbrace[\big]{i_n(a)} = d_n' \enbrace*{v'- d_{n+1}(a')}  = d_n'(v') = 0 
+		\]
+		Da $i_{n-1}$ injektiv ist, folgt $d_n(a)=0$. Insbesondere $[a] \in H_n \enbrace*{(C_*,d_*)}$. Nun ist 
+		\[
+			(i_n)_* [a] = [i_n(a)] = \benbrace*{v'- d_{n+1}'(a')} = [v'] = x' 
+		\]
+		Also $x' \in \im (i_n)_*$.
+	\end{description}
+	\item[\uline{$\im \partial_{n+1} = \ker (i_n)_*$:}] \begin{description}
+		\item["$\subseteq$":] $i_n \enbrace*{d_{n+1}(x'')}= 0 \enspace\checkmark$
+		\item["$\supseteq$":] Sei $x \in \ker (i_n)_*$. Sei $v \in C_n$, $d_n(v)=0$, $[v]=x$. $\leadsto x= d_n [v'']$.
+	\end{description} 
+\end{description}
 % subsection 812 (end)
+
+\subsection[Beweis von Satz 8.8]{Beweis von Satz \ref{sub:88}} % (fold)
+\label{sub:813}
+Für jedes Paar $(X,A)$ ist die Folge  der singulären Kettenkomplexe
+\[
+	\begin{tikzcd}
+		\enbrace*{C_*(A;R), \partial_*^A} \rar["C_*(i;R)"] &  \enbrace*{C_*(X;R), \partial_*^X} \rar["C_*(j;R)"] & \enbrace*{C_*(X,A;R), \partial_*^{(X,A)}}
+	\end{tikzcd}
+\]
+kurz exakt. Das Schlangenlemma {\ref{sub:812}} produziert $\partial_n : H_n(X,A;R) \to H_{n-1}(A;R)$ und die lange exakte Sequenz \eqref{eq:88}.
+Es bleibt zu zeigen, dass die Randabbildungen aus dem Schlangenlemma wie behauptet eine natürliche Transformation definieren: Sei $(f,F|_{A}) : (X,A) \to (Y,B)$ eine
+Abbildung von Paaren. Zu zeigen ist, dass
+\[
+	\begin{tikzcd}
+		H_n(X,A;R) \rar["\partial_n"]  \dar["{(f,f|_A)_*}"]& H_{n-1}(A;R) \dar["{(f|_{A})_*}"] \\
+		H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R)
+	\end{tikzcd}
+\]
+kommutiert. Sei $x'' \in H_n(X,A;R)$. Sei $v' \in C_n(X;R)$ mit $\partial_n^X(v') \in C_n(A;R)$ und $\benbrace*{v' + C_n(A;R)}= x''$. Dann ist 
+$\partial_n(x'')= \benbrace*{\partial_n^X(v')} \in H_n(A;R)$. Dann ist 
+\[
+	\enbrace*{f,f|_A}_*(x'') =  \enbrace*{f,f|_A}_* \benbrace*{v' + C_n(A;R)}  = \benbrace*{f(v')+ C_n(B;R)} \in H_n(Y,B;R) 
+\]
+Es ist 
+\(
+	\partial_n^Y \enbrace*{f_*(v')} = \enbrace*{f|_A}_* \enbrace[\Big]{\underbrace{\partial_n^X(v')}_{\in C_n(A;R)}} \in C_n(B;R)   
+\).
+Also
+\begin{align*}
+	\partial_n \enbrace*{\enbrace*{f,f|_A}_*(x'') } = \benbrace*{\partial_n^Y \enbrace*{f_*(v')} } = \benbrace*{f_* \circ \partial_n^X(v')} = f_* \partial_n(X'') \bewende  
+\end{align*}
+% subsection 813 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:814}
+Für eine Abbildung $(f,f|_A) : (X,A) \to (Y,B)$ erhalten wir ein kommutierendes Diagramm:
+\missingfigure{langes Diagramm}
+
+% subsection 814 (end)
 % section 8 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
