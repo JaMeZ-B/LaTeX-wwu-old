@@ -1960,7 +1960,158 @@ Man kann zeigen: \[\Pw(\tau<\infty)=1,~\E \tau<\infty \]
 	Zusammen mit $\Pw(S_\tau=-k)+\Pw(S_\tau=l-k)=1$ folgt
 	\[\Pw(S_\tau=-k)=\frac{l-k}{l}\text{ Ruinw'keit} \]
 	\[\Pw(S_\tau=l-k)=\frac{k}{l}\text{ Gewinnw'keit} \]
+	\item $p\not= \frac{1}{2}$ der unfaire Fall:\\
+	$S_n=\sum_{k=1}^{n}X_k$, $\tau=\inf\{n\in \N_0~|~S_n=-k\text{ oder }S_n=l-k\}$\\
+	Betrachte den geometrischen Random-Walk \[M_n=a^{S_n}=\prod_{i=1}^{n}a^{X_i}\text{ mit }a>0 \]
+	$(M_n)_{n\in \N_0}$ ist ein Martingal $\Leftrightarrow \E a^{X_1}=1 \Leftrightarrow ap+\frac{1}{a}(1-p)=1 \Leftrightarrow a=1$ oder $a=\frac{1-p}{p}$\\
+	Für $p\not= \frac{1}{2}$ ist $a\not=1$\\
+	Weiter gilt:
+	\begin{equation*}
+	\begin{aligned}
+		&\E \abs{M_\tau}\le \max\{a^{-k},a^{l-k}\}<\infty\\
+		&\E\abs{M_n}\mathbb{1}_{\{\tau>n\}}\le \max\{a^{-k},a^{l-k}\}\Pw(\tau>n)\stackrel{n\to\infty}{\to}0\\
+		&\text{Optional Sampling liefert: }\\
+		&~1=\E M_\tau0a^{-k}\Pw(S_\tau=-k)+a^{l-k}\Pw(S_\tau=l-k)
+	\end{aligned}
+	\end{equation*}
+	Zusammen mit $\Pw(S_\tau=-k)+\Pw(S_\tau=l-k)=1$ folgt \[P(S_\tau=-k)=\frac{a^k-a^l}{1-a^l}\text{ und } \Pw(S_\tau=l)=\frac{1-a^k}{1-a^l}\]
+	Es folgt der Nachweis von $\Pw(\tau<\infty)=1$.\\
+	Betrachte dazu für $b\in \Z$, $\tau_b=\inf\{n\in \N_0~|~S_n=b\}$\\
+	Dann gilt:
+	\begin{equation*}
+	\begin{aligned}
+		&\Pw(\tau_b\infty)=\Pw(\tau_1\infty)\Pw(\tau_{b-1}<\infty)=\Pw(\tau_1<\infty)^b\\
+		&\Pw(\tau_{-a}<\infty)=\Pw(\tau_{-1}<\infty)^a \text{ für alle }a,b\in \N
+	\end{aligned}
+	\end{equation*}
+	Weiter ist 
+	\begin{equation*}
+	\begin{aligned}	
+		\Pw(\tau_1<\infty) &= \Pw(\tau_1<\infty,X_1=1)+\Pw(\tau_1<\infty,X_1=-1)\\
+		&= \Pw(X_1=1)+\Pw(X_1=-1)P(\tau_2<\infty)\\
+		&=p+(1-p)\Pw(\tau_1<\infty)^2
+	\end{aligned}
+	\end{equation*}
+	Also ist $\Pw(\tau_1<\infty)$ Lösung von \[(1-p)x^2-x+p=0 \]
+	\[\Rightarrow \Pw(\tau_1<+\infty)=1\text{ oder }\Pw(\tau_1<+\infty)=\frac{p}{1-p}\]
+	Der Fall $p\ge \frac{1}{2}$:\\
+	$p\ge \frac{1}{2}\Rightarrow\frac{p}{1-p}\ge 1 \Rightarrow\Pw(\tau_1<+\infty)=1$\\
+	
+	Der Fall $p<\frac{1}{2}$:\\
+	Dann ist $\frac{p}{1-p}<1$\\
+	\begin{equation*}
+	\begin{aligned}
+	\text{SLLN } &\Rightarrow \frac{S_n}{n}\stackrel{n\to\infty}{\to}\E X_1=2p-1<0\\
+	&\Rightarrow S_n\to -\infty~\Pw-f.s.\\
+	&\Rightarrow \Pw(\sup\limits_{n\in \N} S_n=+\infty)=0
+	\end{aligned}
+	\end{equation*}
+	Wäre $\Pw(\tau_1<\infty)=1$, so wäre $\Pw(\tau_b<\infty)=1~\forall b\in \N$ und damit
+	\begin{equation*}
+	\begin{aligned}
+		\Pw(\sup\limits_{n\in \N}S_n=+\infty) &= \lim\limits_{b\to\infty}\Pw(\sup\limits_{n\in \N}S_n\ge +\infty)\\
+		&= \lim\limits_{b\to\infty}\Pw(\tau_b<\infty)=1 \lightning
+	\end{aligned}
+	\end{equation*}
+	Widerspruch, also gilt $\Pw(\tau_1<\infty)=\frac{p}{1-p}$ falls $p<\frac{1}{2}$\\
+	$(M_n)_{n\in \N_0}$ ist Martingal $\Leftrightarrow~ \E a^{X_1}=1\Leftrightarrow ap+\frac{1}{a}(1-p)=1\Leftrightarrow a=1$ oder $a=\frac{1-p}{p}$\\
+	Analog kann man schließen $\Pw(\tau_{-1}<\infty)=\left\{\begin{array}{cl}  1, &\text{falls } p\le \frac{1}{2} \\ \frac{1-p}{p}, & \text{falls }p>\frac{1}{2}  \end{array}\right.$\\
+	Insgesamt folgt für $a<0<b,~a,b\in \R$, und $\tau_{ab}=\inf\{n\in \N_0~|~S_n=a\text{ oder }S_n=b\}$
+	\[\Pw(\tau_{ab}<\infty)=\Pw(\tau_a<\infty\text{ oder }\tau_b<\infty)=1\]
+	
+	Berechnung von $\E \tau_{ab}$:\\
+	\begin{enumerate}[(1)]
+		\item unfairer Fall:\\
+		$S_n-n\E X_1= S_n-(2p-1),~n\in N_0$ ist ein \bet{zentrierter Random-Walk}\index{Random-Walk!zentrierter} und deshalb ein Martingal. Optional Sampling liefert: \[ \E(S_{\tau_{\land n}}-(\tau_{\land n})(2p-1))=0 \Leftrightarrow \E(\tau_{\land n})(2p-1)=\E S_{\tau_{\land n}} \]
+		$\E \tau_{\land n} \uparrow \E\tau$ monotone Konvergenz\\
+		$\E S_{\tau_{\land n}}\stackrel{\tiny n\to\N_0}{\to} \E S_\tau$ majorisierte Konvergenz, da $\abs{S_{\tau_{\land n}}}\le \max\{\abs{a},b \}$\\
+		Es gilt $\E S_{\tau_{\land n}}=a\Pw(S_\tau=a)+b\Pw(S_\tau=b)=(2p-1)\E \tau$\\
+		Also folgt:
+		\[\E\tau_{ab}= \frac{1}{2p-1}\cdot \enbrace{a\frac{\enbrace{\frac{1-p}{p}}^{\abs{a}}-\enbrace{\frac{1-p}{p}}^{\abs{a}+b}}{1-\enbrace{\frac{1-p}{p}}^{\abs{a}+b}}+ b\frac{1-\enbrace{\frac{1-p}{p}}^{\abs{a}}}{1-\enbrace{\frac{1-p}{p}}^{\abs{a}+b}}} \]
+		\item fairer Fall: $p=\frac{1}{2}$\\
+		$(S_n^2-n\E X_1^2)_{n\in \N_0}$ ist ein Martingal, denn
+		\begin{equation*}
+		\begin{aligned}
+			\E(S_{n+1}^2~|~\F_n) &= \E((S_n+X_{n+1})^2~|~\F_n)\\
+			&= \E(S_n^2~|~\F_n)+2\E(X_{n+1}S_n~|~\F_n)+\E(X_{n+1}^2~|~\F_n)\\
+			&= S_n^2+ 2S_n\E(X_{n+1}~|~\F_n)+ \E X_{n+1}^2\\
+			&= S_n^2+ 2S_n+\underbracket{\E X_{n+1}}_{=0}+ \E X_{n+1}^2\\
+			&= S_n^2+ \E X_{n+1}
+		\end{aligned}
+		\end{equation*}
+		Hieraus folgt die Martingaleigenschaft. Optioal Smapling liefert: \[\E(S_{\tau_{\land n}}^2-(\tau_{\land n})\E X_1^2=0 \Leftrightarrow \E S_{\tau_{\land n}}^2= \underbracket{X_1^2}_{=1}\cdot \E(\tau_{\land n}) \]
+		$\E \tau_{\land n}\uparrow \E\tau$ mon. Konv. und $\E S_{\tau_{\land n}}^2 \to \E S_\tau^2$ maj. Konv.\\
+		\begin{equation*}
+		\begin{aligned}
+			\Rightarrow \E\tau &= \E S_\tau^2 = a^2\Pw(S_\tau=a)+b\Pw(S_\tau=b)\\
+			&= a^2\cdot \frac{b}{\abs{a}+b}+b^2\cdot \frac{\abs{a}}{\abs{a}+b}=\frac{\abs{a}b(\abs{a}+b)}{\abs{a}+b}\\
+			&= \abs{a}b
+		\end{aligned}
+		\end{equation*}
+		\end{enumerate}
 \end{enumerate}
+%sub end
+
+\subsection{Vorhersehbare Prozesse}
+\label{sub:vorher_prozesse}
+Sei $(\F_n)_{n\in \N}$ eine Filtration. Ein stochastischer Prozess $(X_n)_{n\in \N}$ heißt \Index{vorhersehbar}, wenn gilt \marginnote{man kennt den Wert für $X_n$ schon vor Beginn der Periode}
+\[ X_n\text{ ist } \F_{n-1}-\text{messbar }\forall n \in \N \]
+
+%sub end
+\newpage
+\subsection{Doob-Meyer Zerlegung}
+\label{sub:doob-meyer}
+Sei $(X_n)_{n\in \N_0}$ ein, zu einer Filtration $(\F_n)_{n\in \N_0}$, adaptierter Prozess, mit \[\E\abs{X_n}<\infty~\forall n\in\N_0\]
+Dann existiert genau eine Zerlegung der Form \[X_n= Y + M_n + \Lambda_n \quad \Pw-\text{f.s. }\forall n\in \N_0 \]
+mit $Y$ ist $\F_o$-messbare Startvariable, $(M_n)_{n\in \N_0}$ ist ein Martingal, mit $M_0=0$ und $(\Lambda_n)_{n\in \N}$ ist vorhersehbar, $\Lambda_0=0$.\\
+Eindeutigkeit bedeutet, wenn es eine weiter Zerlegung $X=Y'+M_n'+\Lambda_n'$ gibt,so folgt: \[Y=Y',M_n=M_n',~\Lambda_n=\Lambda_n'~\Pw\text{-f.s.},~\forall n\in \N_0  \]
+
+\bet{Beweis:}\\
+\uline{Existenz:}\\
+Setze $M_0=0,~\Lambda_0=0$ und $M_1=X_1-\E(X_1~|~\F_0),~\Lambda_1=\E(X_1~|~\F_0)-X_0$.\\
+Definiere rekursiv:\\
+\[ M_{n+1}=M_n+X_{n+1}-\E(X_{n+1}~|~\F_n) \]
+\[ \Lambda_{n+1}=\Lambda_n+\E(X_{n+1}~|~\F_n)-X_n \]
+Dann gilt $(\Lambda_n)_{n\in \N_0}$ ist vorhersehbar, $(M_n)_{n\in \N_0}$ ist ein Martingal, denn
+\begin{equation*}
+\begin{aligned}
+	\E(M_{n+1}~|~\F_n) &= \E(M_n+X_{n+1}-\E(X_{n+1}~|~\F_n)~|~\F_n)\\
+	&= M_n+\E(X_{n+1}~|~\F_n)-\E(X_{n+1}~|~\F_n)=M_n
+\end{aligned}
+\end{equation*}
+\uline{Behauptung:} \[X_n=X_0+M_n+\Lambda_n,~\forall n\in \N_0 \]
+Induktion nach $n$:\\
+$n=0$ klar(\checkmark)\\
+\uline{$n\to n+1$:}
+\begin{equation*}
+\begin{aligned}
+	X_{n+1} &= X_{n+1}-X_n+X_n\\
+	&\stackrel{\text{IV}}{=} X_{n+1}-X_n+X_0+M_n*\Lambda_n\\
+	&= X_0+M_n*X_{n+1}-\E(X_{n+1}~|~\F_n)+\Lambda_n+\E(X_{n+1}~|~\F_n)-X_1\\
+	&= X_0+M_{n+1}+\Lambda_{n+1}
+\end{aligned}
+\end{equation*}
+
+Eindeutigkeit folgt aus der Tatsache, dass ein vorhersehbares Martingal konstant sein muss, d.h. sei $(Z_n)_{n\in\N}$ ein Martingal und vorhersehbar, dann folgt \[ \exists Y\in\R:~Y \F_0\text{-messbar}:~Z_n=Y~\Pw\text{-f.s.}\]
+\uline{Beweis:} \[ Z_{n+1}=\E(Z_{n+1}~|~\F_n)=Z_n=\dots=Z_1=Y ~ \F_0\text{-messbar} \] \hfill $\square$
+
+\begin{equation*}
+\begin{aligned}
+	&\text{Sei } Y+M_n+\Lambda_n=Y'+M_n'+\Lambda_n'\\
+	&\Rightarrow Y=Y', \text{ da } M_0=M_0'=0,~ \Lambda_0=\Lambda_0'=0\\
+	&\Rightarrow M_n+\Lambda_n=M_n'+\Lambda_n'\\
+	&\Rightarrow M_n+M-n'=\Lambda_n'-\Lambda_n
+\end{aligned}
+\end{equation*}
+Also ist $(M_n-M_n')_{n\in \N_0}$ ein vorhersehbares Martingal. Also folgt $M_n-M_n'=Z~\forall n\in \N_0$ für ein $\F_0$-messbares $Z$.
+\[Z=\E(M_n-M-n'~|~\F_0)=M_0-M_0'=0 \Rightarrow Z\equiv 0 \]
+\hfill $\square$
+
+
+
+
+
+
 
 
 
