@@ -1308,9 +1308,119 @@ Noch zu zeigen: $f \in L^p(\mu)$: Die Folge $\norm[p]{f_{n_k}}^p$ ist beschränk
 \[
 	\int \abs*{f}^p \mathd \mu \le \liminf\limits_{k \to \infty} \int \abs*{f_{n_k}}^p \mathd \mu < \infty
 \]
-nach dem Lemma von Fatou. $\Rightarrow f \in L^p(\mu)$ und $f_n -f$ in $\norm[p]{\cdot }$. \bewende 
+nach dem Lemma von Fatou. Also gilt $f \in L^p(\mu)$.
+Noch zu zeigen: $f_n \xrightarrow{n \to \infty} f$ bezüglich $\norm[p]{\cdot }$. Sei dazu $j \in \mathds{N}$. Sei $n \ge n_j$. Für $i>j$ gilt
+\[
+	\norm[p]{f_n - f_{n_i}} \le \norm[p]{f_n - f_{n_j}} + \norm[p]{f_{n_j}- f_{n_i}} < 2 \cdot \frac{1}{2^j}    
+\]
+Weiter gilt $\abs*{f_{n}- f_{n_i}}^p \xrightarrow{i \to \infty} \abs*{f_n -f}^p$ fast überall. Mit dem Lemma von Fatou folgt 
+\[
+	\int\!\abs*{f_n- f}^p \mathd\mu \le \liminf \int \! \abs*{f_n - f_{n_i}}^p \mathd\mu  \le \enbrace*{2 \cdot \frac{1}{2^j}}^p
+\]
+$\Rightarrow \norm[p]{f_n -f} \le 2 \cdot \frac{1}{2^j}$, falls $n \ge n_j$, also $\norm[p]{f_n -f} \xrightarrow{n \to \infty} 0 $. \bewende
 % subsection 411 (end)
 % section 4 (end)
+\newpage
+
+\section{Schwache Topologien, Reflexivität} % (fold)
+\label{sec:5}
+\subsection[Definition: Schwache Topologie]{Definition} % (fold)
+\label{sub:51}
+Sei $X$ ein normierter $\mathds{K}$-Vektorraum. Die \Index{schwache Topologie} $\schwachT{X}$ ist die gröbste\footnote{auch: "dollste"} Topologie auf $X$, sodass alle 
+$\varphi \in X^*$ stetig sind.
+% subsection 51 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:52}
+\begin{enumerate}[(i)]
+	\item Jedes $\varphi \in X^*$ ist (nach Definition von $X^*=\mathcal{L}(X,\mathds{K})$) stetig bezüglich $\mathcal{T}^{\norm{\cdot}}_X$, d.h. 
+	$\schwachT{X} \subset \mathcal{T}_X^{\norm{\cdot}}$. Mit anderen Worten: Die Abbildung 
+	$\id_X: \enbrace*{X,\mathcal{T}_X^{\norm{\cdot}}}\to\enbrace[\Big]{X,\schwachT{X}}$ ist stetig.
+	\item Mengen der Form $\varphi ^{-1}(U)$ für $U \subset K$ offen, $\varphi \in X^*$ bilden eine Subbasis für $\schwachT{X}$. Mengen der Form 
+	\[
+		\bigcap_{i=1}^n \varphi_i ^{-1} (U_i) \qquad, \qquad U_i \subset \mathds{K} \text{ offen}, \varphi_i \in X^*
+	\]
+	bilden eine Basis für $\schwachT{X}$.
+\end{enumerate}
+% subsection 52 (end)
+
+\subsection[Proposition: Die schwache Topologie ist Hausdorffsch]{Proposition} % (fold)
+\label{sub:53}
+$\enbrace[\big]{X,\schwachT{X}}$ ist Hausdorffsch.
+\minisec{Beweis}
+Seien $x \not= y \in X$. Nach \hyperref[sub:221]{Hahn-Banach} existiert $\varphi \in X^*$ mit $\varphi(x) \not= \varphi(y)$. Setze 
+$\varepsilon := \frac{\abs*{\varphi(x)- \varphi(y)} }{2}>0$, dann sind $\varphi ^{-1} \enbrace[\big]{B_\mathds{K} \enbrace*{\varphi(x),\varepsilon} } $ und
+$\varphi ^{-1} \enbrace[\big]{B_\mathds{K} \enbrace*{\varphi(y), \varepsilon}}$ disjunkte offene Umgebungen von $x$ bzw. $y$. \bewende
+% subsection 53 (end)
+
+\subsection[Proposition: Äquivalenz zu schwacher Konvergenz]{Proposition} % (fold)
+\label{sub:54}
+Sei $X$ ein normierter Raum, $x \in X$, $(x_\lambda )_\Lambda \subset X$ ein Netz. Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $x_\lambda \xrightarrow{\w}  x$, d.h. $x_\lambda \to x$ in $\schwachT{X}$
+	\item $\varphi(x_\lambda ) \to \varphi(x)$ für alle $\varphi \in X^*$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii):] Sei $\varphi \in X^*$, $\varepsilon>0$. $\varphi(x) \in B_\mathds{K}\enbrace[\big]{\varphi(x),\varepsilon} \subset \mathds{K}$ offen.
+	$\varphi$ stetig bezüglich $\schwachT{X}$
+	\[
+		\Rightarrow  x \in \varphi ^{-1} \enbrace[\Big]{ B_\mathds{K}\enbrace[\big]{\varphi(x), \varepsilon} } \underset{\text{$\w$-offen}}{\subset} X 
+	\] 
+	$x_\lambda \xrightarrow{\w} x  \Rightarrow  \exists \overline{\lambda } \in \Lambda$ mit 
+	$x_\lambda \in \varphi^{-1}\enbrace[\big]{B_\mathds{K}\enbrace*{\varphi(x), \varepsilon}}$, falls $\lambda \ge \overline{\lambda }$. Dann folgt
+	$\varphi(x_\lambda ) \in B_\mathds{K}\enbrace*{\varphi(x),\varepsilon}$ falls $\lambda \ge \overline{\lambda}$, also $\varphi(x_\lambda ) \to \varphi(x)$ in $\mathds{K}$.
+	\item[(ii)$\Rightarrow$(i):] Sei $x \in V \subset X$ $\w$-offen. Nach \ref{sub:52}(ii) existieren $\varphi_1, \ldots , \varphi_m \in X^*$, $U_1, \ldots , U_m$ offen in
+	$\mathds{K}$ mit 
+	\[
+		x \in \phi_1 ^{-1}(U_1) \cap \ldots  \cap \varphi_m ^{-1}(U_m) \subset V
+	\]
+	Wegen (ii) existieren $\lambda_1, \ldots , \lambda _m \in \Lambda$ mit $\varphi_i(x_\lambda ) \in U_i$, falls $\lambda  \ge \lambda_i$, $i=1,\ldots,m$.
+	Wähle $\overline{\lambda} \in \Lambda$ mit $\overline{\lambda} \ge \lambda_1, \ldots , \lambda_m$. Dann gilt $\varphi_i(x_\lambda) \in U_i$, falls 
+	$\lambda \ge \overline{\lambda}$, $i=1,\ldots ,m$. Damit ist $x_\lambda \in \varphi_i ^{-1}(U_i)$, falls $\lambda \ge \overline{\lambda}$, $i=1,\ldots,m$. Also gilt
+	$x_\lambda \in \bigcap_{i=1}^m \varphi_i ^{-1}(U_i) \subset V$, falls $\lambda \ge \overline{\lambda}$. \bewende
+\end{description}
+% subsection 54 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:55}
+Wenn $x_\lambda \xrightarrow{\w} x$, dann gilt $(x_\lambda)_\Lambda \subset X$ ist beschränkt.
+\minisec{Beweis}
+Prinzip der gleichmäßigen Beschränktheit (siehe \ref{sub:35}). \bewende
+% subsection 55 (end)
+
+\subsection[Beispiel: Konvergenz impliziert schwache Konvergenz, aber nicht umgekehrt]{Beispiel} % (fold)
+\label{sub:56}
+Im Allgemeinen gilt
+\[
+	x_\lambda \xrightarrow{\norm{\cdot}} \quad \begin{matrix}
+		\Rightarrow \\
+		\nLeftarrow 
+	\end{matrix} \quad  x_\lambda \xrightarrow{\w} x 
+\]
+Betrachte $X=\ell^2(\mathds{N})$ mit $\norm[2]{\cdot }$. 
+Sei $e_n \in \ell^2(\mathds{N})$ gegeben durch $e_n(m) := \delta_{n,m}$\marginnote{Kronecker-Delta}. Dann gilt $e_n  \not\to 0$ für $n \to \infty$ in 
+$\mathcal{T}^{\norm[2]{\cdot }}$, denn $\norm[2]{e_n -0} = \norm[2]{e_n} \equiv 1 \not\to 0$. Aber $e_n \xrightarrow{\w} 0$ für $n \to	\infty$: 
+
+Wir werden später sehen, dass $\ell^2(\mathds{N})^* \cong \ell^2(\mathds{N})$ via $\sprod*{a}{b} = \sum \overline{a}(k) b(k)$.
+Es gilt aber $\sprod*{a}{e_n} = \sum \overline{a(k)} e_n(k) = \overline{a(n)} \xrightarrow{n \to \infty} 0$. $\Rightarrow e_n \xrightarrow{\w}0$, $n \to \infty$. \smallskip\\
+\emph{Direktes Argument: Übung.}
+% subsection 56 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:57}
+Seien $X,Y$ metrische Räume, $T \in \mathcal{L}(X,Y)$ ein beschränkter (d.h. normstetiger) linearer Operator. Dann ist $T$ auch stetig bezüglich der schwachen Topologie auf
+$X$ und $Y$.
+\minisec{Beweis}
+Zu zeigen: Falls $U \subset Y$ schwach-offen ist, so ist $T ^{-1}(U)$ schwach-offen in $X$. Wir können annehmen, dass $U$ von der Form
+$\varphi ^{-1} \enbrace*{B_\mathds{K}(\lambda,\varepsilon)}$, $\varphi \in Y^*, \lambda \in \mathds{K}, \varepsilon>0$ ist, da diese Mengen eine Subbasis bilden.
+Es gilt nun
+\begin{align*}
+	T ^{-1} \enbrace[\Big]{ \varphi ^{-1} \enbrace[\big]{ B_\mathds{K}(\lambda,\varepsilon)} } = \enbrace[\Big]{\underbrace{\varphi \circ T}_{\in X^*}} ^{-1} 
+	\enbrace[\big]{B_\mathds{K}(\lambda,\varepsilon)} \underset{\text{$\w$-offen}}{\subset} X   \bewende
+\end{align*}
+% subsection 57 (end)
+% section 5 (end)
 
 
 
