@@ -662,7 +662,7 @@ Es gilt $e(x)=x \rightsquigarrow e\in G_x$. Für $a,b\in G_x$ gilt \[(ab)(x)=a(\
 \[a^{-1}(x)=a^{-1}(\underbracket{a(x)}_{=x})=(a^{-1}a)(x)=e(x)=x \rightsquigarrow a^{-1}\in G_x \]
 Also ist $G_x\subseteq G$ Untergruppe.\\
 Es gilt: \[\bigcap\limits_{x\in X}G_x=\{g(x)=x~|~\forall x\in X \} \]
-Das ist genau der Kern der zugehörigen Homomorphie $\alpha:G\to Sym(X)$, also ein Normalteiler.
+Das ist genau der Kern der zugehörigen Homomorphie $\alpha:G\to \sym(X)$, also ein Normalteiler.
 \hfill $\square$
 %sub end
 
@@ -684,7 +684,7 @@ Das ist genau der Kern der zugehörigen Homomorphie $\alpha:G\to Sym(X)$, also e
 
 \subsection{Satz 4, Satz von Cayley}
 \label{sub:satz_von_cayley}
-Zu jeder Gruppe $G$ gibt es eine Menge $X$ und ein injektiven Homomorphismus $\alpha:G\to Sym(X)$.\\
+Zu jeder Gruppe $G$ gibt es eine Menge $X$ und ein injektiven Homomorphismus $\alpha:G\to \sym(X)$.\\
 
 \bet{Beweis:}\\
 Setze $G=X$ und $\lambda:G\to \sym(X)$ wie in \hyperref[sub:bsp_wirkungen]{Beispiel 2.3(a)}
@@ -1012,11 +1012,249 @@ Sei $G$ eine endliche Gruppe mit $\#=pq,~p\not=q$ Primzahlen. Dann gilt es gibt 
 \end{aligned}
 \end{equation*}
 \hfill $\square$
+%sub end
 
+Wir betrachten als nächstes $p$-Gruppen genauer.\\
 
+\subsection{Lemma 4}
+\label{sub:lemma_4}
+Sei $G$ eine Gruppe. Dann ist jede Untergruppe $H\subseteq Z(G)$ Normalteiler in $G$.\\
 
+\bet{Beweis:}\\
+Sei $g\in G$ und $h\in H\subseteq Z(G)$. Es folgt $ghg^{-1}=h$, also $gHg^{-1}=H$.
+\hfill $\square$
 
+\subsubsection*{Satz}
+Sei $p$ Primzahl und $G$ eine $p$-Gruppe, $\#G=p^m$, $m\ge 1$. Dann gibt es Normalteiler $G_k\nt G$ mit $\#G_k=p^k$ für $0\le k\le m$ und mit \[ G_m\nt G_{m-1}\nt \dots \nt G_1\nt G_0=\{e\} \]
 
+\bet{Beweis:}\\
+Induktion nach $m$. Für $m=1$ ist nichts zu zeigen. Sei jetzt $\#G=p^m$, $m\ge 1$.\\
+Nach \hyperref[sub:kor_zentrum]{2.10} ist $Z(G)\not=\{e\}$, also $Z(G)=p^s$ für ein $s>1$ (Lagrange). Nach Cauchys Satz \hyperref[sub:cauchys_satz]{2.12} gibt es $g\in Z(G)$ mit $o(g)=p$. Setze $G_1=\lh{g}$ und $G\stackrel{\pi}{\to}\tilde{G}=\nicefrac{G}{G_1}$ (nach dem Lemma gilt $G_1\nt G$).\\
+Es folgt $\#\tilde{G}=p^{m-1}$ nach Induktionannahme gibt es $\tilde{G}_k\nt \tilde{G}$ mit $\#\tilde{G}_k=p^k,~\tilde{G}\supseteq \tilde{G}_{m-2}\supseteq \dots \supseteq \tilde{G}_0$. Setze $G_{k+1}=\pi^{-1}(G_k)$, es folgt nach \hyperref[sub:satz_eigenschaften]{1.22}, dass $G_{k+1}\nt G$, sowie $G_m\supseteq G_{m-1}\supseteq \dots \supseteq G_0=\{e\}$. Wegen $G_1\subseteq G_{k+1}$ folgt $\tilde{G}_k\cong \nicefrac{G_{k+1}}{G_1}$, also \[\#G_{k+1}=p\cdot \#\tilde{G}_k=p^{k+1} \]
+\hfill $\square$
+
+\subsubsection*{Folgerung}
+Ist $G$ eine endliche Gruppe, $p$ eine Primzahl und ist $p^k$ ein Teiler von $\#G$, dann hat $G$ eine Untergruppe der Ordnung $p^k$.\\
+
+\bet{Beweis:}\\
+Sei $U\in \syl_p(G),~\#U=p^m$.\\
+Dann gilt $k\le m$ und nach dem vorigen Satz gibt es eine Untergruppe $H\subseteq U$ mit $\#H=p^k$
+\hfill $\square$
+%sub end
+
+\subsection{Definition Normalreihe}
+\label{sub:def_normalreihe}
+Sei $G$ eine Gruppe, sei $G=G_m\supseteq G_{m-1}\supseteq \dots\supseteq G_0=\{e\}$ Untergruppen. Wenn gilt \[G_{k-1}\nt \G_k, \]
+dann heißt $G_m\supseteq \dots\supseteq G_0$ \Index{Normalreihe} in $G$. Die Quotienten $\nicefrac{G_k}{G_{k+1}}$ heißen \Index{Faktoren} der Normalreihe.\\
+Eine Gruppe, die eine Normalreihe mit ableschen Faktoren hat, heißt \Index{auflösbare Gruppe}.
+
+\subsubsection*{Beispiele}
+\begin{enumerate}[(a)]
+	\item $G$ abelsch $\Rightarrow G$ auflösbar, setze $G_1=GG\supseteq G_0=\{e\}$
+	\item $G=\sym(3),~\#G=6$, $\tau:\{1,2,3\}\to \{1,2,3\}~\tau:\begin{array}{c} 1\mapsto 2\\ 2\mapsto 3\\ 3\mapsto 1    \end{array}$\\
+	$o(\tau)=3,~G_1=\lh{\tau}\nt G$ (weil $[G:G_1]=2$,ÜA 3.2 oder \hyperref[sub:satz_8]{2.16})\\
+	$\#\nicefrac{G}{G_1}=2\rightsquigarrow$ abelsch, also ist $\sym(3)$ auflösbar.
+	\item Nach Satz \hyperref[sub:lemma_4]{2.17} ist jede $p$-Gruppe auflösbar.
+\end{enumerate}
+
+Wir betrachten jetzt \uline{abelsche} $p$-Gruppen.
+
+\subsection{Lemmata 5,6,7}
+\label{sub:lemmata}
+\subsubsection*{Lemma A}
+Sei $G$ abelsche $p$-Gruppe. Wenn $G$ genau eine Untergruppe $H\subseteq G$ der Ordnung $p$ hat, dann ist $G$ zyklisch.\\
+
+\bet{Beweis:}\\
+Setze $\#G=p^m,~m\ge 1$. Induktion nach $m$. Für $m=1$ ist nichts zu zeigen. Sei jetzt $m>1$. Betrachte den Homomorphismus $\varphi: G\to G,~g\mapsto g^p$ (das ist ein Homomorphismus, weil $G$ abelsch ist: $(gh)^p=g^ph^p$).\\
+Es gilt $\ker(\varphi)=\big\{g\in G~|~g^p=e \big\}=\big\{g\in G~|~o(g)\in \{1,p\} \big\}$.Ist $o(g)=p$,so folgt aus der Annahme $g\in H$, also $H=\ker(\varphi)$, denn $h\in H\rightsquigarrow o(h)\in \{1,p\}$.\\
+Setze $K=\varphi(G)$. Nach dem Homomorphiesatz \hyperref[sub:der_homomorphiesatz]{1.20} gilt $K\cong \nicefrac{G}{H}$, also $\#K=p^{m-1}$. Wegen $m>1$ folgt aus Cauchys Satz \hyperref[sub:cauchys_satz]{2.12}, dass $K$ ein Element der Ordnung $p$ enthält. Folglich gilt $H\subseteq K$. Also hat $K$ genau eine Untergruppe der Ordnung $p$ und ist deswegen nach Induktionsannahme zyklisch, $K=\lh{k}$ für ein $k\in K=\varphi(G)$. Wähle $g\in G$ mit $\varphi(g)=g^p=k$. Wegen $o(g)=p\cdot r$ folgt $o(g^r)=p\rightsquigarrow H\subseteq \lh{g}$ (wegen der Eindeutigkeit von $H$), also \[\nicefrac{\lh{g}}{H}\cong K\Rightarrow\#\lh{g}=\#K\cdot\#H=\#G\Rightarrow G=\lh{g}\]
+\hfill $\square$
+
+\subsubsection*{Lemma B}
+Sei $G$zyklisch mit $\#G=k\cdot l$. Dann hat $G$ genau eine Untergruppe $H\subseteq G$ mit $\#H=k$ (ÜA 4.1).\\
+
+\bet{Beweis:}\\
+Betrachte $\varphi:G\to G,~g\mapsto g^k$, das ist ein Homomorphismus. Der Kern ist $K=\{g\in G~|~g^k=e \}$. Ist $H\subseteq G$ Untergruppe mit $\#H=k$,so folgt $H\subseteq K$. Sei $u\in G$ Erzeuger, $G=\lh{u}$. Das Bildvon $\varphi$ ist dann $\varphi(G)=\lh{u^k}$ und $o(u^k)=l$. Also folgt \[ l=\#\varphi(G)= \frac{\#G}{\#K} \Rightarrow \#K=k \Rightarrow H=K. \]
+\hfill $\square$
+
+\subsubsection*{Lemma C}
+Sei $G$ eine abelsche $p$-Gruppe, sei $u\in G$ eine Element maximaler Ordnung in $G$ und sei $U=\lh{u}$. Dann gibt es eine Untergruppe $H\subseteq G$ mit
+\[ H\cap U=\{e\} \text{ und } G=HUs, \text{ d.h. } H\times UU\cong G. \]
+
+\bet{Beweis:}\\
+Setze $\#G=p^m$. Für $m=1$ist $G$ zyklisch, setze $U=G$ und $H=\{e\} \rightsquigarrow$ fertig.\\
+Sei jetzt $m>1$, Induktion nach $m$.\\
+1. Fall: $G$ zyklisch, $G=U,~H=\{e\}\rightsquigarrow$ fertig.\\
+2. Fall: $G$ nicht zyklisch. Da $U$ genau eine Untergruppe der Ordnung $p$ hat (Lemma B) gibt es nach Lemma A und Cauchys Satz \hyperref[sub:cauchys_satz]{2.12} ein Element $w\in G\backslash U$ mit $o(w)=p$. Setze $W=\lh{w}$.\\
+Es folgt $U\cap W=\{e\}$,weil $w\notin U$ ($\#U\cap W$ ist $p$-Potenz). Betrachte $\pi:G\to \nicefrac{G}{W}$. Wegen $\ker(\pi)=W$ ist die Einschränkung von $\pi$ auf $U$ injektiv, d.h. $o(\pi(u))=o(u)$. Folglich ist $\pi(u)$ ein Element maximaler Ordnung in $L=\nicefrac{G}{H}$, und $\#\nicefrac{G}{W}=p^{m-1}$.\\
+
+Nach Induktionsannahme gibt es eine Untergruppe $H'\subseteq L$ mit $H'\cap \pi(U)=\{e_L\}$ und $L=\pi(U)H'\cong \pi(U)\times H'$.\\
+Setze $H=\pi^{-1}(H')$. Es folgt $H\cap U=\{e\}$, denn:
+\[ h\in H,~\pi(h)\in \pi(U)\rightsquigarrow \pi(h)=e_L \rightsquigarrow h\in W. \]
+Weiter gilt für $g\in G$, dass 
+\begin{equation*}
+\begin{aligned}
+	&\pi(g)=\pi(u^k)\pi(h)\qquad \text{für ein } k\ge 0,~h\in H\\
+	&\rightsquigarrow g=u^k(h\cdot w^l)\qquad\text{für ein } l\ge 0,\text{ aber } w\in H\\
+	&\Rightarrow G=UH
+\end{aligned}
+\end{equation*}
+\hfill $\square$
+
+\subsubsection*{Korollar}
+Sei $G$ eine abelsche $p$-Gruppe, $\#G=p^m$ mit $m\ge 1$. Dann gibt es Zahlen $n_1\ge \dots \ge n_r\ge 1$ mit $m=n_1+\dots+n_r$ und \[ G\cong \nicefrac{\Z}{p^{n_1}\Z} \times \nicefrac{\Z}{p^{n_2}\Z} \times \dots \times \nicefrac{\Z}{p^{n_r}\Z} \]
+
+\bet{Beweis:}\\
+Wähle $u_1\in G$ mit maximaler Ordnung $o(u_1)=p^{n_1}$, $U_1=\lh{u_1}\cong \nicefrac{\Z}{p^{n_1}\Z}$ und eine Untergruppe $G_1\subseteq G$ wie in Lemma C mit $U_1\cap G_1=\{e\},~G=U_1G_1\cong U_1\times G_1$. Wähle $u_2\in G_1$ mit maximaler Ordung $o(u_2)=p^{n_2}, ~U_2=\lh{u_2}\cong \nicefrac{\Z}{p^{n_2}\Z},~ G_1=U_2G_2$ usw. Nach endlich vielen Schritten \[G=U_1U_2\cdots U_r\cong U_1\times \dots \times U_r \]
+Zur \uline{Eindeutigkeit} der Zahlen $n_1,\dots,n_r$:\\
+Für $l\ge 1$ sei $\varphi_l:G\to G,~g\mapsto g^{p^l}$.\\
+Da $G$ abelsch ist, ist $\varphi_l$ ein Homomorphismus mit \[\ker(\varphi_l)=\{g\in G~|~o(g)\text{ teilt }p^l\}, \]
+insbesondere
+\[ \left.\begin{array}{cl} \varphi_l(u_i)=e & \text{für } l\ge n_i\\ \varphi_l(u_i)\not= & \text{sonst}    \end{array}\right\}\Rightarrow \#\varphi_l(U_i)=\left\{\begin{array}{cl} \{1\} & l\ge n_i\\ \nicefrac{\Z}{p^{n_i-l}\Z} & l<n_i    \end{array}\right. \]
+$\Rightarrow \#\varphi_l(G)=\prod_{n_i>l}p^{n_i-l}=p^{N_l}$,aus den Zahlen $N_1,N_2,\dots$ lassen sich die $n_i$ berechnen, $N_l=\sum_{n_i>l}(n_i-l)$
+\hfill $\square$
+% sub end
+
+\subsection{Satz 9}
+\label{sub:satz_9}
+Sei $G$ eine endliche abelsche Gruppe,$\#G=p_1^{l_1}\cdots p_s^{l_s},~ 2\le p_1<p_2<\dots<p_s$ Primzahlen, $l_1,\dots,l_s\ge 1$. Dann gilt \[G\cong P_1\times \dots\times P_s \]
+wobei $P_j$eine abelsche $p_j$-Gruppe der Ordnung $p_j^{l_j}$ ist wie im vorigen Korollar.\\
+Insbesondere ist jede endliche abelsche Gruppe eine Produkt von zyklischen Gruppen.\\
+\newpage
+
+\bet{Beweis:}\\
+Da $G$ abelsch ist,ist jede Sylow-$p_j$-gruppe in $G$ normal, also gibt es (wegen \hyperref[sub:def_sylow_gruppe]{2.14(2)}) genau eine Sylow-$p_j$-Gruppe$P_j\subseteq G$, und $P_j$ enthält alle Elemente $g\in G$, deren Ordnung eine $p_j$-Potenz ist.\\
+Betrachte
+\begin{equation*}
+\begin{aligned}
+	\varphi:P_1\times\dots\times P_s&\to G\\
+	(g_1,\dots,g_s)&\mapsto g_1g_2\cdots g_s
+\end{aligned}
+\end{equation*}
+Weil $G$ abelsch ist, ist $\varphi$ ein Homomorphismus (oder: weil für alle $i<j$ gilt $P_i\cap P_j=\{e\}\rightsquigarrow$ B6 A($\ast$)). Es genügt zu zeigen, dass $\varphi$ injektiv ist, dann folgt aus Kardinalitätsgründen, dass $\varphi$ bijektiv ist.\\
+\zz  $\ker(\varphi)=\{e\}$.\\
+Angenommen, $g_1\cdots g_s=e,~ g_i\in P_i$.\\
+Setze $r_i=\frac{\#G}{p_i^{l_i}}$.Für $i\neq j$ folgt $g_j^{r_i}=e$, weil $\#P_j$ ein Teiler von $r_i$ ist. Also gilt \[ (g_1\cdot g_s)^{r_i}=g_1^{r_i}\cdot g_s^{r_i}=g_i^{r_1}=e^{r_i}=e \]
+Also ist $o(g_i)$ ein Teiler von $r_i$. Weil $o(g_i)$ eine $p_i$-Potenz ist, folgt $o(g_i)=1$, d.h. $g_i=1$.\\
+Es folgt $\ker(\varphi)=\{(e,\dots,e)\}$.
+\hfill $\square$
+%sub end
+
+\subsection{Satz 10}
+\label{sub:satz 10}
+Sei $G$ eine endliche auflösbare Gruppe mit einer Normalreihe $G=G_m\nt\dots\nt G_0$ mit abelschen Faktoren. Dann gibt es für jedes $1\le k\le m$ Untergruppe $H_j$ mit
+\[
+G_k\nt H_l\nt\dots\nt H_0=\G_{k-1}
+\]
+mit $\nicefrac{H_j}{H_{j-1}}\cong \nicefrac{\Z}{p_j\Z},\quad p_j$ Primzahl.\\
+Insbesondere hat jede endliche auflösbare Gruppe eine Normalreihe, in der alle Faktoren zyklisch von Primzahlordnung sind.\\
+
+\bet{Beweis:}\\
+Betrachte die abelsche Gruppe $A=\nicefrac{G_k}{G_{k-1}}$.\\
+Nach Satz \hyperref[sub:satz_9]{2.20} und \hyperref[sub:lemma_4]{2.17}, angewandt auf die Sylowgruppen von $A$, gibt es Untergruppen
+\[
+A=A_l\supseteq \dots\supseteq A_0=\{e\}\text{ mit } \nicefrac{A_j}{A_{j-1}}\cong\nicefrac{\Z}{p_j\Z},~p_j\text{ Primzahl}
+\] 
+Setze $\pi:\G_k\to\nicefrac{G_k}{G_{k-1}}=A$ kanonischee Epimorphismus und $H_j=\pi^{-1}(A_j)\rightsquigarrow H_j\nt G_k$ und
+\[
+G_k\nt H_l\nt \dots H_0=G_{k-1}
+\]
+\[
+\nicefrac{H_j}{H_{j-1}}\stackrel{\text{2.Iso-satz}}{\cong} \nicefrac{A_j}{A_{j-1}} \cong \nicefrac{\Z}{p_j\Z}
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Komutatoren}
+\label{sub:komutatoren}
+Sei $G$ eine Gruppe, $a,b\in G$. Der \Index{Komutator} von $a$ und $b$ ist 
+\[ 
+[a,b]=aba^{-1}b^{-1}=ab(ba)^{-1}\rightsquigarrow ab=[a,b]ba
+\]
+Offensichtlich gilt $[a,b]^{-1}=[b,a]$ und 
+\[
+[a,b]=e\Leftrightarrow a\text{ zentralisiert }b\Leftrightarrow b\text{ zentralisiert }a\Leftrightarrow a\text{ und }b\text{ vertauschen}
+\]
+Die \Index{Kommutatorengruppe} von $G$ ist
+\[
+\D G=\sprod{[a,b]}{a,b\in G},
+\]
+die von allen Komutatoren erzeugte Gruppe.
+
+\subsubsection*{Satz}
+Sei $G$ eine Gruppe. Dann gilt
+\begin{enumerate}[(i)]
+	\item $\D G\nt G$
+	\item $\nicefrac{G}{\D G}$ ist abelsch
+	\item Ist $A$ abelsche Gruppe und $\varphi:G\to A$ ein Homomorphismus, so gilt $\D G\subseteq \ker(\varphi)$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\begin{enumerate}[(i)]
+	\item Für $g,a,b \in G$ gilt $g[a,b]g^{-1}=[gag^{-1},gbg^{-1}]$ (nachrechnen), also gilt für alle $g\in G,~a_1,\dots,a_s,b_1,\dots,b_s\in G$, dass
+	\[
+	g[a_1,b_1]\cdots[a_s,b_s]g^{-1}\in \D G
+	\]
+	also $g\D G g^{-1}\subseteq \D G$ für alle $g\in G\Rightarrow \D G\nt G$.
+	\item Sei $g,h\in G$. Es folgt wegen $gh=[g,h]hg$, dass
+	\[
+	gh\D G=\underbracket{[g,h]}_{\in \D G}hg \D G=hg\D G
+	\]
+	und damit, dass $\nicefrac{G}{\D G}$ abelsch ist.
+	\item Für alle $g,h\in G$ gilt
+	\[
+	\varphi([g,h])=[\varphi(g),\varphi(h)]=e_A, \text{ weil $A$ abelsch ist,}
+	\]
+	also 
+	\[
+	\{[g,h]~|~g,h\in G \}\subseteq \ker(\varphi)\Rightarrow\D G\subseteq \ker(\varphi)
+	\]
+	\hfill $\square$
+\end{enumerate}
+Man definiert rekursiv
+\[
+\D^0 G=G,~\D^1 G=G,~\D^{k+1}G=\D(\D^kG)
+\]
+Es folgt $D^{k+1}G\nt G$.\\
+Genauer: $D^{k+1}G\nt G$ mit Induktion
+\[
+a,b\in \D^kG\Rightarrow g[a,b]g^{-1}=[\underbracket{gag^{-1}}_{\in \D^kG},\underbracket{gbg^{-1}}_{\in \D^kG}]\in D^{k+1}G
+\]
+also $g(D^{k+1}G)g^{-1}\subseteq D^{k+1}G$.
+%sub end
+
+\subsection{Satz 11}
+\label{sub:satz_11}
+Eine Gruppe $G$ ist auflösbar genau dann, wenn gilt $D^mG=\{e\}$für ein $m\ge 0$.\\
+
+\bet{Beweis:}\\
+Angenommmen, $D^mG=\{e\}$ für ein $m\ge 0$. Dann ist $\D^0G\supseteq \D^1G\supseteq \dots\supseteq \D^mG=\{e\}$ eine Normalreihe und $\nicefrac{\D^kG}{\D^{k+1}G}=\nicefrac{\D^kG}{\D(\D^kG)}$ ist abelsch nach \hyperref[sub:satz_10]{2.21(ii)}, also ist $G$ auflösbar.\\
+Ist umgekehrt $G=G_m\nt\dots\nt G_0$ eine Normalreihe mit abelschen Faktoren, so folgt aus \hyperref[sub:satz_10]{2.21(iii)}, dass $\D G_k\subseteq G_{k+1}$, also iteriert auch
+\[
+D^{l+1}G_k\subseteq D^lG_{k+1}
+\]
+\[
+\Rightarrow \D^mG=\D^mG_0\subseteq \D^{m-1}G_1\subseteq\dots\subseteq \D^0G_m=\{e\}
+\]
+\hfill $\square$
+
+\subsubsection*{Korollar}
+Bilder und Untergruppen von auflösbaren Gruppen sind wieder auflösbar.\\
+
+\bet{Beweis:}\\
+Sei $\varphi:G\to K$ Homomorphismus und $G$ auflösbar, $D^mG=\{e\}$. Es folgt
+\[
+\D^m(\varphi(G))= \varphi(\D^mG)=\varphi(e_G)=\{e_K\} \marginnote{Bilder von Komutatoren sind Komutatoren}
+\]
+Ist $H\subseteq G$,so folgt $\D^kH\subseteq \D^kG$ für alle $k\ge 0$, also 
+\[
+\D^mG\{e_g\}\Rightarrow D^mH=\{e_G\}
+\]
+\hfill $\square$
+
+\subsubsection*{Bemerkung}
+Eine Gruppe $G$ heißt \Index{perfekt}, wen gilt $\D G=G$.\\
+Beispiele für perfekte Gruppen sind die Alternierden Gruppen $Alt(n)$ für $n\ge 5$, vgl. Lineare Algebra 4.6 im Skript.
 
 
 
