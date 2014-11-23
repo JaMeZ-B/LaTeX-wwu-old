@@ -1,0 +1,118 @@
+\section{Die prime Restklassengruppe $\modu m$}
+\label{sec:para4}
+
+\begin{defn}[prime Restklassengruppe]
+	Sei $m \in \NN$, $m > 1$. Dann heißt $(\ZZ/m\ZZ)^\times$ die \Index{prime Restklassengruppe} $\modu m$. Wir wissen: \begin{enumerate}[(1)]
+		\item $\overline{a} \in (\ZZ/m\ZZ)^\times \Leftrightarrow (a,m)=1$
+		\item $M := \{k \in \ZZ : 0 \leq k < m, (k,m) = 1 \}$ ist ein Vertretersystem von $(\ZZ/m\ZZ)^\times$. \\
+		$(\ZZ/m\ZZ)^\times$ hat $\varphi(m) = \# M$ Elemente und ist eine abelsche Gruppe der Ordnung $\varphi(m)$.
+		\item $\overline{a} = \alpha \in (\ZZ/m\ZZ)^\times \Rightarrow \alpha^{\varphi(m)} = 1 \Leftrightarrow a^{\varphi(m)} \kon 1 \modu m$ (Satz von Euler-Fermat)
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Primitivwurzel]
+	Ein $\omega \in (\ZZ/m\ZZ)^\times$ heißt eine \Index{Primitivwurzel} von $(\ZZ/m\ZZ)^\times$, wenn sich jedes Element $\alpha \in (\ZZ/m\ZZ)^\times$ in der Form
+	\[ \alpha = \omega^i \text{ für ein } i \in \NN_0 \]
+	schreiben lässt; jedes $g \in \ZZ$ mit $\omega = \overline{g} = g \modu m$ heißt dann eine Primitivwurzel $\modu m$.
+\end{defn}
+
+\begin{satz}[Satz von Gauß] \label{satz_4.1}
+	Ist $p$ eine Primzahl, so besitzt $(\ZZ/p\ZZ)^\times$ eine Primitivwurzel. Es gibt also ein $\omega \in (\ZZ/p\ZZ)^\times$, sodass sich jedes $\alpha \in (\ZZ/p\ZZ)^\times$ darstellen lässt in der Form
+	\begin{equation}
+		\alpha = \omega^i \text{ mit } 0 \leq i < p-1 \label{eq_4.1}
+	\end{equation}
+	Die Darstellung \eqref{eq_4.1} ist unter der Bedingung $0 \leq i < p-1$ eindeutig; $i = i(\alpha) = i_\omega(\alpha)$ heißt der \Index{Index} von $\alpha$ bezüglich $\omega$.
+\end{satz}
+
+Wählt man ein $g \in \ZZ$ mit $\omega = g \modu m$, so gilt also: Zu jedem $a \in \ZZ$ mit $p \not | a$ gibt es genau ein $i \in \ZZ$ mit
+\[ a \kon gî \modu p, 0 \leq i < p-1 \]
+$i = i(a) = i_g(a)$ heißt der Index von $a$ bzgl. $g$.
+
+\minisec{Zusatz}
+	Es gibt genau $\varphi(p-1)$ verschiedene Primitivwurzeln von $(\ZZ/p\ZZ)^\times$.
+
+\subsection{Gruppentheoretische Vorbereitungen}
+\begin{defn}[Ordnung eines Gruppenelements] \label{def_ordnung}
+	Sei $G$ eine (abelsche) Gruppe der Ordnung $n$, d.h. $\#G = n$. Sei $\alpha \in G$. Wir wissen: $\alpha^n = 1$. Unter allen $m \in \NN$ mit $\alpha^m = 1$ sei nun $k$ das kleinste. Setze dann
+	\[ \ord(\alpha) := k, \]
+	die \Index{Ordnung} von $\alpha$. $\sprod{\alpha} := \penbrace{\alpha^j : j \in \ZZ}$ ist offenbar eine Untergruppe von $G$.
+\end{defn}
+
+\begin{lemma} \label{lemma_4.1}
+	In der Situation von Definition \ref{def_ordnung} gelten: \begin{enumerate}[(1)]
+		\item $\sprod{\alpha} = \{1, \alpha, \alpha^2, \dots, \alpha^{k-1}\}$, insbesondere $\ord(\alpha) = \ord(\sprod{\alpha})$.
+		\item $\alpha^m = 1$ für $m \in \ZZ \Rightarrow \ord(\alpha) | m$
+		\item Sei $\ord(\alpha) = k$ wie oben, dann vermittelt der Gruppenhomomorphismus
+		\begin{equation}
+		\begin{aligned}
+			\ZZ &\longrightarrow \sprod{\alpha} \\
+			j &\longmapsto \alpha^j
+		\end{aligned}
+		\end{equation}
+		einen Gruppenisomorphismus $\ZZ/k\ZZ \rightarrow \sprod{\alpha}$, also $\sprod{\alpha} \simeq \ZZ/k\ZZ$.
+		\item $G$ zyklisch $\Leftrightarrow \exists \alpha \in G$ mit $\ord(\alpha) = \ord(G)$. \\
+		Eine Gruppe $G$ heißt \Index{zyklisch}, wenn es ein $\alpha \in G$ gibt mit $G = \sprod{\alpha}$. $\alpha$ heißt dann ein \Index{Erzeuger} von $G$.
+	\end{enumerate}
+\end{lemma}
+
+\minisec{Bemerkung}
+	Definitionsgemäß gilt:
+	\[ (\ZZ/m\ZZ)^\times \text{ besitzt Primitivwurzel} \quad \Leftrightarrow \quad (Z/m\ZZ)^\times \text{ ist zyklisch}, \]
+	und nach dem zuvor Gesagten:
+	\[ \omega \text{ ist Primitivwurzel von } (\ZZ/m\ZZ)^\times \quad \Leftrightarrow \quad \ord(\omega) = \varphi(m)\]
+	
+\begin{defn}[Gruppenexponent]
+	Sei $G$ eine endliche Gruppe. Das kgV aller $\ord(\alpha), \alpha \in G$ heißt der \Index{Exponent} $e = e(G)$ der Gruppe $G$.
+\end{defn}
+
+\minisec{Bemerkung}
+	Ist $n = \ord(G), e=e(G)$, so gilt stets $e|n$, denn für jedes $\alpha \in G$ gilt $\alpha^n=1 \Rightarrow \ord(\alpha) | n \Rightarrow e|n$.
+	
+\begin{falko} \label{F4.1}
+	Sei $G$ eine endliche abelsche Gruppe und sei $e$ ihr Exponent. Dann gibt es ein Element $\omega \in G$ mit $\ord(\omega) = e$.
+\end{falko}
+
+\setcounter{countsatz}{0}
+\begin{satz}
+	Sei $K$ ein Körper und $G$ eine endliche Untergruppe von $K^\times$. Dann ist $G$ zyklisch.
+\end{satz}
+
+\subsection{Restklassengruppen}
+\begin{defn}[Restklassen, Restklassenabbildung]
+	Sei $G$ eine Gruppe und $H \subseteq G$ eine Untergruppe. \marginnote{21.11. \\ \ [12]} Für $x,y \in G$ definiere eine Relation:
+	\[ x \overset{H}{\sim} y :\Leftrightarrow yx^{-1} \in H (\Leftrightarrow y \in Hx), \]
+	oder für eine abelsche Gruppe mit $+$ statt $\cdot$ als Verknüpfungssymbol:
+	\[ x \overset{H}{\sim} y :\Leftrightarrow y-x \in H (\Leftrightarrow y \in H+x), \]
+	$\overset{H}{\sim}$ ist eine Äquivalenzrelation. Mit $G/H$ bezeichnen wir die Menge der zugehörigen Äquivalenzklassen (\Index{Restklassen}). Die Abbildung
+	\begin{equation}
+	\begin{aligned}
+		G &\longrightarrow G/H \\
+		x &\longmapsto \overline{x} := Hx
+	\end{aligned}
+	\end{equation}
+	heißt \Index{Restklassenabbildung}.
+\end{defn}
+
+\minisec{Bemerkung}
+	Die Relation $\overset{H}{\sim}$ ist verträglich mit der Multiplikation, falls $G$ abelsch ist. In diesem Fall ist $G/H$ eine Gruppe und die Restklassenabbildung ein Homomorphismus. \\
+	Ist $G$ eine beliebige Gruppe, so gilt gleiches für $G/H$ genau dann, wenn für jedes $x \in G$ gilt: $Hx = xH$.
+	
+\begin{falko} \label{F4.2}
+	Sei $G$ eine abelsche Gruppe der Ordnung $n$ und $n = p_1^{\nu_1} p_2^{\nu_2} \dots p_r^{\nu_r}$ die Primfaktorzerlegung von $n$. Für $1 \leq i \leq r$ sei
+	\[ G_{p_i} := \{\alpha \in G : \alpha^{p_i^{\nu_i}} = 1 \} \leq G \]
+	Dann ist die Abbildung
+	\begin{equation}
+	\begin{aligned}
+		f\colon \prod_{i=1}^{r} G_{p_i} &\longrightarrow G \\
+		(\alpha_1,\dots,\alpha_r) &\longmapsto \alpha_1 \alpha_2 \cdots \alpha_r \label{eq_F4.2}
+	\end{aligned}
+	\end{equation}
+	ein Isomorphismus von Gruppen. Ferner gilt $\# G_{p_i} = p_i^{\nu_i}$ für $1 \leq i \leq r$.
+\end{falko}
+
+\minisec{Bemerkung 1}
+	$G$ endliche Gruppe, $\alpha \in G$, $j \in \ZZ$. Dann gilt:
+	\[ \ord(\alpha^j) = \frac{\ord(\alpha)}{(\ord(\alpha),j)} \]
+	
+\minisec{Bemerkung 2}
+	Eine zyklische Gruppe der Ordnung $n$ hat genau $\varphi(n)$ Elemente der Ordnung $n$, also $\varphi(n)$ Erzeuger.
