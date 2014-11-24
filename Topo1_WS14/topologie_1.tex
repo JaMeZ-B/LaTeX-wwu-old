@@ -1778,7 +1778,7 @@ $\partial_n(x'')= \benbrace*{\partial_n^X(v')} \in H_n(A;R)$. Dann ist
 \]
 Es ist 
 \(
-	\partial_n^Y \enbrace*{f_*(v')} = \enbrace*{f|_A}_* \enbrace[\Big]{\underbrace{\partial_n^X(v')}_{\in C_n(A;R)}} \in C_n(B;R)   
+	\partial_n^Y \enbrace[\big]{f_*(v')} = \enbrace*{f|_A}_* \enbrace[\Big]{\underbrace{\partial_n^X(v')}_{\in C_n(A;R)}} \in C_n(B;R)   
 \).
 Also
 \begin{align*}
@@ -1792,7 +1792,145 @@ Für eine Abbildung $(f,f|_A) : (X,A) \to (Y,B)$ erhalten wir ein kommutierendes
 \missingfigure{langes Diagramm}
 
 % subsection 814 (end)
+
+\subsection{Fünfer-Lemma} % (fold)
+\label{sub:815}
+Seien die Zeilen in folgendem kommutativen Diagramm von $\mathds{R}$-Moduln exakt.
+\[
+	\begin{tikzcd}
+		A_4 \rar["\alpha_4"] \dar["f_4"] & A_3 \rar["\alpha_3"] \dar["f_3"] & A_2 \rar["\alpha_2"]  \dar["f_2"] & A_1 \rar["\alpha_1"] \dar["f_1"] & A_0  \dar["f_0"]\\
+		B_4 \rar["\beta_4"] & B_3 \rar["\beta_3"] & B_2 \rar["\beta_2"] & B_1 \rar["\beta_1"] & B_0 
+	\end{tikzcd}
+\]
+Sind $f_4, f_3, f_1$ und $f_0$ Isomorphismen, so ist auch $f_2$ ein Isomorphismus.
+\minisec{Beweis}
+\begin{description}
+	\item[Injektivität:] Sei $a_2 \in A_2$ und $f_2(a_2)=0$. $f_1 \enbrace[\big]{\alpha_2(a_2)} = \beta_2 \enbrace[\big]{f_2(a_2)} = \beta_2(0)=0$. Da $f_1$ ein 
+	Isomorphismus ist, folgt $\alpha_2(a_2)=0$. $a_2 \in \ker \alpha_2 = \im \alpha_3$, also existiert $a_2 \in A_3$ mit $\alpha_3(a_3)= a_2$. Es gilt
+	\[
+		\beta_3 \enbrace[\big]{f_3(a_3)} = f_2 \enbrace[\big]{\alpha_3(a_3)} = f_2(a_2)=0  
+	\]
+	Also $f_3(a_3) \in \ker \beta_3 = \im \beta_4$. Da $f_4$ Isomorphismus ist, gibt es $a_4 \in A_4$ mit $\beta_4 \enbrace[\big]{f_4(a_4)} = f_3(a_3)$. Nun gilt
+	\[
+		f_3 \enbrace[\big]{\alpha_4(a_4)- a_3} = f_3 \enbrace[\big]{\alpha_4(a_4)} - f_3(a_3) = \beta_4 \enbrace[\big]{f_4(a_4)} - f_3(a_3) = f_3(a_3)- f_3(a_3) =0
+	\]
+	Da $f_3$ ein Isomorphismus ist, folgt nun $\alpha_4(a_4)=a_3$. Nun ist 
+	\[
+		a_2= \alpha_3(\alpha_3)= \alpha_3 \enbrace[\big]{\alpha_4(a_4)} = \underbrace{\alpha_3 \circ \alpha_4}_{=0}(a_4) =0
+	\]
+	\item[Surjektivität:] Sei $b_2 \in B_2$. Fall 1: $\beta_2(b_2)=0$. Da $\im \beta_3 = \ker \beta_2$ und $f_3$ Isomorphismus, folgt $\exists a_3 \in A_3$ mit
+	$\beta_3 \enbrace[\big]{f_3(a_3)} = b_2$. Also ist $b_2= \beta_3 \enbrace[\big]{f_3(a_3)} = f_2  \enbrace[\big]{\alpha_3(a_3)} \in \im f_2$. 
+	
+	Ist $b_2$ beliebig, so genügt es zu zeigen: $\exists a_2 \in A_2$ mit $\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} =0$. $f_1$ ist ein Isomorphismus, also $\exists a_1 \in A_1$
+	mit $f_1(a_1) = \beta_2(b_2)$. Dann folgt
+	\[
+		f_0 \enbrace[\big]{\alpha_1(a_1)} = \beta_1 \enbrace[\big]{f_1(a_1)} = \beta_1 \enbrace[\big]{\beta_2(b_2)} = \underbrace{\beta_1 \circ \beta_2}_{=0} (b_2)=0
+	\]
+	Da $f_0$ ein Isomorphismus ist, folgt $\alpha_1(a_1)=0$. Da $\ker \alpha_1 = \im \alpha_2$, folgt $\alpha_2(a_2)=a_1$. Es gilt nun
+	\begin{align*}
+		\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} = \beta_2(b_2) - \beta_2 \enbrace[\big]{f_2(a_2)} &= \beta_2(b_2) - f_1 \enbrace[\big]{\alpha_2(a_2)} \\ 
+		&= \beta_2(b_2) - f_1(a_1)
+		= \beta_2(b_2) - \beta_2(b_2) =0 \bewende
+	\end{align*}
+\end{description}
+% subsection 815 (end)
+
+\subsection{Lemma ("2 von 3")} % (fold)
+\label{sub:816}
+Sei $f : (X,A) \to (Y,B)$ eine Abbildung von Paaren. Seien von den drei Abbildungen
+\begin{enumerate}[(i)]
+	\item $(f|_A)_* :  H_n(A;R) \to H_n(B;R)$
+	\item $f_* : H_n(X;R) \to H_n(Y;R)$
+	\item $(f,f|_A)_* : H_n(X,A;R) \to H_n(Y,B;R)$
+\end{enumerate}
+zwei für jeweils alle $n$ Isomorphismen. Dann ist auch die dritte für alle $n$ ein Isomorphismus.
+\minisec{Beweis}
+Da die Randabbildungen in der Paarfolge eine natürliche Transformation ist, erhalten wir ein kommutatives Leiterdiagramm:
+\[
+	\begin{tikzcd}[column sep=1.2em, font=\scriptsize]
+		H_{n+1}(A;R) \rar \dar["{(f|_A)_*}"] & H_{n+1}(X;R) \rar \dar["f_*"] & H_{n+1}(X,A;R) \rar["\partial_{n+1}"] \dar["{(f,f|_A)_*}"] & H_n(A;R) \rar \dar["(f|_A)_*"] & H_n(X;R) \rar \dar["f_*"] & H_n(X,A;R) \rar["\partial_n"] \dar["{(f,f|_A)_*}"] & H_{n-1}(A;R) \dar["{(f|_A)_*}"] \\
+		H_{n+1}(B;R) \rar & H_{n+1}(Y;R) \rar & H_{n+1}(Y,B;R) \rar["\partial_{n+1}"] & H_n(B;R) \rar & H_n(Y;R) \rar & H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R) \\
+	\end{tikzcd}
+\]
+Da die Zeilen lang exakt sind, folgt die Behauptung aus dem Fünfer-Lemma. \bewende
+% subsection 816 (end)
 % section 8 (end)
+\newpage
+
+\section{Ausschneidung und die Mayer-Vietoris Folge} % (fold)
+\label{sec:9}
+
+\subsection{Satz} % (fold)
+\label{sub:91}
+Sei $(X,A)$ ein Paar und $L \subseteq A$, sodass der Abschluss $\overline{L}$ von im Inneren $\mathring{A}$ von $A$ liegt. Dann induziert die Inklusion
+$\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphismus $j_* : H_n(X \setminus L, A \setminus L;R) \to H_n(X,A;R)$.
+% subsection 91 (end)
+
+\subsection{Satz (Mayer-Vietoris Folge)} % (fold)
+\label{sub:92}
+Seien $A,B \subseteq X$ offen und $X=A \cup B$. Seien $i_A : A \hookrightarrow X$, $i_B : B \hookrightarrow X$, $j_A : A \cap B \hookrightarrow A$ und 
+$j_B : A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \partial_n^{X=A\cup B} : H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
+\[
+	\begin{tikzcd}[column sep=3.5em]
+		\cdots \rar["\partial_{n+1}"] & H_n(A \cap B;R) \rar["{\begin{psmallmatrix}(j_A)_* \\ (j_B)_* \end{psmallmatrix}}"] 
+		&  \bigoplus\limits_{H_n(B;R)}^{H_n(A;R)} \rar["(i_A)_* - (i_B)_*"] 
+		& H_n(X;R) \rar["\partial_n"] & H_{n-1}(A\cap B;R) \rar & \cdots
+	\end{tikzcd}
+\]
+eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Sei $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$. ist $f :X \to X'$ mit
+$f(A) \subseteq A'$ und $f(B) \subseteq B'$, so kommutiert
+\[
+	\begin{tikzcd}[column sep=3em]
+		H_n(X;R) \rar["\partial_n^{X=A \cup B}"] \dar["f_*"]  & H_{n-1}(A \cap B;R) \dar["\enbrace*{f|_{A \cap B}}_*"] \\
+		H_n(X';R) \rar["\partial_n^{X'=A' \cup B'}"] & H_n(A' \cap B';R)
+	\end{tikzcd}
+\]
+\minisec{Beweis}
+Sei $L := X \setminus B$. Dann ist $L$ abgeschlossen und $L \subseteq A=\mathring{A}$. Wir erhalten daher einen Ausschneideisomorphismus 
+\[
+	H_n(B,A \cap B,R) = H_n(X \setminus L, A \setminus L;R) \xrightarrow{\enspace \cong \enspace} H_n(X,A;R) 
+\]
+Betrachte das folgende kommutative Leiterdiagramm. \todo{$\cong$ schöner platzieren}
+\[
+	\begin{tikzcd}[font=\scriptsize, column sep=1.8em, row sep=2.5em]
+		\cdots \rar & H_{n+1}(B,A \cap B;R) \rar["\partial_{n+1}^{B,A \cap B}"] \dar["{(i_B,j_A)_* \cong}"] & H_n(A \cap B;R) \rar["(j_B)_*"] \dar["(j_A)_*"] 
+		& H_n(B;R) \rar["(l_B)_*"] \dar["(i_B)_*"] & H_n(B,A \cap B;R) \rar["\partial_n"] \dar["{(i_B,j_A)_* \cong}"]
+		& H_{n-1}(A \cap B;R) \rar \dar["(j_A)_*"] & \cdots \\
+		\cdots \rar & H_{n+1}(X,A;R) \rar["\partial_{n+1}^{X,A}"] & H_n(A;R) \rar["(i_A)_*"]  & H_n(X;R) \rar["(l_X)_*"] & H_n(X,A;R) \rar["\partial_n^{X,A}"] & H_{n-1}(A;R) \rar & \cdots
+	\end{tikzcd}
+\]
+dabei sind $l_B : (B,\emptyset) \to (B,A \cap B)$ und $l_X : (X, \emptyset) \to (X,A)$ die Inklusionen von Paaren.
+Definiere nun $\partial_n : H_n(X,R) \to H_{n-1}(A\cap B;R)$ durch
+\[
+	\partial_n := \partial_n^{B, A\cap B} \circ  \enbrace*{(i_B,i_A)_*} ^{-1} \circ (l_X)_* 
+\]
+Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit von $\partial_n$.
+
+Zu zeigen: $\im \begin{psmallmatrix}
+	(j_A)_* \\ (j_B)_*
+\end{psmallmatrix} = \ker \enbrace*{(i_A)_* - (i_B)_*} $: 
+\begin{description}
+	\item["$\supseteq $":] Sei $(a,b) \in \ker \enbrace*{(i_A)_* - (i_B)_*}$. Also $(i_A)_*(a) = (i_B)_*(b)$. Es ist 
+	\[
+		(i_B,j_A)_* \enbrace*{(l_B)_*(b)} = (l_X)_* \circ (j_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
+	\]
+	$(i_B,j_A)_*$ ist ein Isomorphismus, also $(l_B)_*(b)=0$. $\ker (l_B)_* = \im (j_B)_*$. Damit folgt $\exists x \in H_n(A \cap B;R) : (j_B)_*(x)=b$. Dann gilt
+	\[
+		(i_A)_* \enbrace*{a - (j_A)-*(x)} = (i_A)_*(a) - i_B \enbrace*{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
+	\]
+	Mit $\ker (i_A)_*  =\im \partial_n^{X,A}$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
+	\[
+		\partial_n^{X,A} \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
+	\]
+	Es folgt für $z := x + \partial_n^{B,A \cap B}(y)$.
+	\begin{align*}
+		(j_B)_*(z) & =(j_B)_*(x) = b \\
+		(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\partial_n^{B,A \cap B}(y)} = (j_A)_*(x) + \partial_n^{X,A} \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
+		(j_A)_*(x) = a  
+	\end{align*}
+\end{description}
+% subsection 92 (end)
+% section 9 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
