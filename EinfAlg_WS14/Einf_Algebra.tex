@@ -1276,19 +1276,100 @@ Der Stabilisator von $n$ ist isomorph zu $\sym(n-1)$.
 \[
 \stackrel{\text{Bahnengl.}}{\Rightarrow} \#\sym(n)=n\cdot \sym(n-1)\text{ und }\#\sym(1)=1
 \]
-Erinnerung an LAII, Kapitel über Determinanten, 4.6.\\
-Für $\pi\in \sym(n)$ setze $\sign(\pi)=\prod_{i<j}\frac{\pi(i)-\pi(j)}{i-j}\in \{\pm 1\}=C_2$. \marginnote{abelsche Gruppe der ordnung 2 bzgl. Multiplikation}\\
+Erinnerung an LA II, Kapitel über Determinanten, 4.6.\\
+Für $\pi\in \sym(n)$ setze $\sign(\pi)=\prod_{i<j}\frac{\pi(i)-\pi(j)}{i-j}\in \{\pm 1\}=C_2$. \marginnote{abelsche Gruppe der Ordnung 2 bzgl. Multiplikation}\\
 $\sign:\sym(n)\to C_2$ ist ein Homomorphismus.\\
-Der kern von $\sign$ ist die alternierende Gruppe 
+Der Kern von $\sign$ ist die alternierende Gruppe 
 \[
 \alt(n)=\{\pi\in\sym(n)~|~\sign(\pi)=1\}
 \]
-Aus \hyperref[sub:]{2.22} folgt $\D\sym(n)\subseteq \alt(n)$, weil $C_2$ abelsch ist.
+Aus \hyperref[sub:komutatoren]{2.22} folgt $\D\sym(n)\subseteq \alt(n)$, weil $C_2$ abelsch ist.
 
 \subsubsection*{Satz}
-Es gilt $\D\sym(n)=\alt(n)$. Für $n\ge 5$ ist $\alt(n)$ perfekt.
+Es gilt $\D\sym(n)=\alt(n)$. Für $n\ge 5$ ist $\alt(n)$ perfekt.\\
 
+\bet{Beweis:}\\
+Seien $i_1,\dots,i_k$ $k$ paarweise verschiedene Zahlen in $\{1,\dots,n\}$. Die Permutation $i_1\stackrel{\pi}{\to} i_2\stackrel{\pi}{\to} i_3\stackrel{\pi}{\to}\dots,\stackrel{\pi}{\to} i_k\stackrel{\pi}{\to} i_1$, also $\pi(i_l)=i_{l+1}$ für $l=1,\dots,k$, $\pi(i_k)=i_1$ und $\pi(j)=j$ sonst. Diese Permutation nennt man ein \Index{$k$-Zykel} und schreibt sich kurz mit $\pi=(i_1,\dots,i_k)$.\\
+Die 2-Zykel vertauschen zwei Zahlen $i_1,i_2$, man nennt sie \Index{Transpositionen}. Nach LA II Übungsaufgabe 4.3 ist jede Permutation ein Produkt von 2-Zykeln. Weiter gilt $\sign((i_1,i_2))=-1$. Also besteht $\alt(n)$ aus allen Permutationen, die sich schreiben lassen als Produkt einer \uline{geraden} Anzahl von 2-Zykeln.\\
+\newpage
+\uline{Behauptung:} $\alt(n)$ wird von den 3-Zykeln erzeugt.\\
+\uline{Beweis:} Seien $a,b,c,d\in \{1,\dots,n\}$ paarweise verschieden. Es gilt
+\[
+(a,c)\circ(a,b)=(a,b,c) \text{ sowie } (a,b)\circ (c,d)=(a,d,c)\circ (a,b,c)
+\] 
+\hfill $\square$
 
+\uline{Zum Satz:} 
+\[
+[(a,b,c),(b,c)]=(b,a,c)\in \D \sym(n)\Rightarrow \D\sym(n)=\alt(n)
+\]
+Seien $a,b,c,d,e$ paarweise verschieden
+\[
+[(a,b,c),(c,d,e)]=(d,c,a)\Rightarrow \D \alt(n)=\alt(n)\text{ für }n\ge 5
+\]
+\hfill $\square$
+
+\subsubsection*{Folgerung}
+Für $n\ge 5$ ist $\sym(n)$ \uline{nicht} auflösbar.\\
+Für $n=1,2,3,4$ ist $\sym(n)$ auflösbar. (ÜA)
+
+\subsubsection*{Ausblick}
+\begin{enumerate}[(1)]
+	\item Jede endliche Gruppe $G$ mit ungerader Ordnung ist auflösbar. (Feit-Thompson-Theorem, viele hundert Seiten langer Beweis)
+	\item Eine Gruppe $G$ heißt \Index{einfach}, wenn $G\neq \{e\}$ und wenn $G,\{e\}$ die einzigen Normalteiler in $G$ sind.
+\end{enumerate}
+
+\subsubsection*{Theorem (Klassifikation der endlichen einfachen Gruppen)}
+Sei $G$ eine endliche einfache Gruppe. Dann kommt $G$ in folgender Liste vor:
+\begin{itemize}
+	\item abelsche einfache Gruppe $\nicefrac{\Z}{p\Z},~p$ Primzahl\marginnote{Die größte sporadische Gruppe, das "Monster", hat mehr Elemente als es Elemntarteilchen gibt.}
+	\item $\alt(n),~n\ge 5$
+	\item Matrizengruppen wie $\Sl_n(F),~F$ endlicher Körper, "Gruppenvom Lie-Typ"
+	\item 26 sogenannte sporadische einfache endliche Gruppen.\\
+	Der Beweis ist ca. 10000 Seiten in vielen Arbeiten lang, ca. 1980er Jahre.
+\end{itemize} 
+%sub end 
+%sec end
+\newpage
+
+\section{Kommutative Ringe}
+\label{sec:komm_ringe}
+\subsection{Erinnerung / Definiton}
+\label{sub:erinnerung_def}
+Sei $(R,+)$ eine abelsche Gruppe mit Neutralelement $0\in R$. Angenommen, es gibt eine weitere assoziative Verknüpfung auf $R$, die \uline{Multiplikation} $R\times R\to R,~ (a,b)\mapsto a\cdot b=ab$.\\
+Weiter gilt: 
+\begin{enumerate}[(R1)]
+	\item es gelten die \uline{Distributivgesetze},
+	\begin{equation*}
+	\begin{aligned}
+		a(x+y)&= ax+ay\\
+		(x+y)a&= xa+ya
+	\end{aligned}
+	\end{equation*}
+	\item Es gibt ein \uline{Einselement} $1\in R$, d.h. 
+	\[
+	1\cdot x=x=x\cdot 1~\forall x\in R
+	\]
+	\item $ab=ba$ für alle $a,b\in R$
+\end{enumerate}
+dann heißt $(R,+,\cdot)$ ein \Index{kommutativer Ring}. Verlangt man nur (R1)\& (R2), spricht man von einem \uline{nicht kommutativem Ring}. Wenn man nur (R1) fordert, spricht man von einem \uline{Ring ohne Eins} oder \Index{Rng} (Jacobsen).
+
+\subsubsection*{Beispiele}
+\begin{enumerate}[(a)]
+	\item Jeder Körper ist ein Ring, z.B. $\Q,\R,\C$
+	\item $\Z$ ist ein Ring (kommutativ).
+	\item $V$ ein $K$-Vektorraum, $\End(V)=\{\varphi:V\to V~|~\varphi \text{ linear}\}$\\
+	\begin{equation*}
+	\begin{aligned}
+		\varphi,\psi\in \End(V): &(\varphi+\psi)(v)=\varphi(v)+\psi(v),~v\in V\\
+		&(\varphi\circ\psi)(v)=\varphi(\psi(v))
+	\end{aligned}
+	\end{equation*}
+	$\Rightarrow \End(V)$ Ring, nicht kommutativ, falls $\dim(V)\ge 2$.
+	\item $m\Z=\{mk~|~k\in \Z \}$ für ein $m\ge 1$\\
+	Rng, wenn $m\ge 2$.
+	\item $R=\{0\}$ mit $0\cdot 0=0=0+0$ der \uline{Nullring}. Im Nullring gilt $0=1$. 
+\end{enumerate}
 
 
 
