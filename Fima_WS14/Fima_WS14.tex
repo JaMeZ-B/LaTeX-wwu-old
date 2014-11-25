@@ -1200,7 +1200,7 @@ periodischen konst. Diskontfaktor $v$\\
 	Deckungskapitalverlauf:
 	\begin{equation*}
 	\begin{aligned}
-		\mathcal{D}_x(m)  &= v^{n-m}\mathds{P}(T_x>n~|~T_x>n+m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_x>m+k~|~T_x>m)\\
+		\mathcal{D}_x(m)  &= v^{n-m}\mathds{P}(T_x>n~|~T_x>m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_x>m+k~|~T_x>m)\\
 		\text{Stationarität }\Rightarrow &=v^{n-m}\mathds{P}(T_{x+m}>n-m)-p\sum_{k=0}^{n-m-1}v^k\mathds{P}(T_{x+m}>k)\\
 		&= ~_{n-m}E_{x+m}-pä_{x+m:n-m\rceil}
 	\end{aligned}
@@ -1329,7 +1329,7 @@ Weitere Beispiele für Personenversicherungen bei denen die Ausfallzeiten nicht 
 		\item konst. Prämie solange wie beiden leben
 	\end{itemize}
 	\item \uline{Modell:}\\
-	Setze $T_{xy}=T_x\cap T_y$.\\
+	Setze $T_{xy}=T_x\land T_y$.\\
 	$t(m)=M,\quad m=1,\dots,n;\qquad b(m)=p, \quad m=0,\dots,n-1;\qquad s(m)=0,\quad \forall n\in \mathds{N}_0$\\
 	Dann beschreibt $\Gamma=(t,s,b,T_{xy})$ diese Versicherung.\\
 	Bestimmung von $p$:\\
@@ -1389,8 +1389,6 @@ Weitere Beispiele für Personenversicherungen bei denen die Ausfallzeiten nicht 
 	\end{aligned}
 	\end{equation*}
 	Für eine praktische Berechnung muss die Stationaritätsannahme geeignet modifiziert werden.\\
-	\item \uline{Definition:} $\enbrace{(T_x)_{x\in \mathds{N}_0},J}$ ist stationär, falls gilt
-	\[\mathds{P}(T_x\le n+k,~J=j~|~T_x>n)=\mathds{P}(T_{x+n}\le k,~ J=j)\quad \forall n\in \mathds{N}_0,~k\in\mathds{N},~j\in \{1,\dots,m\} \]
 \end{itemize}
 
 \minisec{Definition}
@@ -1529,13 +1527,13 @@ Satz von Radon-Nikodym liefert ein $G$-messbares $Z$ mit $\mu(A)=\int\limits_A Z
 $\mathds{E}(X^+~|~G),~\mathds{E}(X^-~|~G)$ existiert nach Fall 1.
 \begin{equation*}
 \begin{aligned}
-	\int\limits_AX\dint\mathds{P} &= \int\limits_AX^+\dint\mathds{P}-\int\limits_Ax^-\dint\mathds{P}\\
-	&= \int\limits_A\mathds{E}(x^+~|~G)\dint\mathds{P}-\int\limits_A\mathds{E}(X^-~|~G)\dint\mathds{P}\\
+	\int\limits_AX\dint\mathds{P} &= \int\limits_AX^+\dint\mathds{P}-\int\limits_AX^-\dint\mathds{P}\\
+	&= \int\limits_A\mathds{E}(X^+~|~G)\dint\mathds{P}-\int\limits_A\mathds{E}(X^-~|~G)\dint\mathds{P}\\
 	&= \int\limits_A\mathds{E}(X^+~|~G)-\mathds{E}(X^-~|~G)\dint\mathds{P}\quad A\in G
 \end{aligned}
 \end{equation*}
 Also ist $\mathds{E}(X^+~|~G)-\mathds{E}(X^-~|~G)$ der bedingte Erwartungswert von $X$ bzgl. $G$.\\
-\uline{Eideutigkeit:} $Z_1,Z_2$ bedingte EW. Sei $A=\{Z_1-Z_2>\frac{1}{n}\}$, ist $G$ messbar.
+\uline{Eindeutigkeit:} $Z_1,Z_2$ bedingte EW. Sei $A=\{Z_1-Z_2>\frac{1}{n}\}$, ist $G$ messbar.
 \begin{equation*}
 \begin{aligned}
 	&\int\limits_{A}Z_1-Z_2\dint\mathds{P}\stackrel{Z_1,Z_2\text{ EW}}{=} \int\limits_AX\dint\mathds{P}-\int\limits_AX\dint\mathds{P}=0\\
@@ -1569,7 +1567,7 @@ Eine Zufallsvariable $Z:\Omega\to \mathds{R}$ ist $G$-messbar genau dann, wenn e
 \begin{minipage}[c]{7cm}
 	\begin{center}
 	\begin{tikzcd}[column sep=small]
-		\Omega \ar{r}{Y} \ar{rd}[below,left]{\E(X~Y~Y)} & (E,\mathcal{E}) \ar{d}[right]{h}\\
+		\Omega \ar{r}{Y} \ar{rd}[below,left]{\E(X~|~Y)} & (E,\mathcal{E}) \ar{d}[right]{h}\\
 		& (\R,\mathcal{L})
 	\end{tikzcd}
 	\captionof{figure}{fakt. bed. Erwartungswert}
@@ -1591,7 +1589,7 @@ Ausrechnen des bedingten Erwartungswertes erfolgt häufig durch Spezifikation de
 
 \subsection{Stochastischer Kern}
 \label{sub:stoch_kern}
-Seien $(\Omega,\mathcal{F}),(E,\mathcal{E})$ messbare Räume. Ein \Index{stochastischer Kern} ist eine Abbildung $K:\E\times K \to [0,1]$ mit folgenden Eigenschaften:
+Seien $(\Omega,\mathcal{F}),(E,\mathcal{E})$ messbare Räume. Ein \Index{stochastischer Kern} ist eine Abbildung $K:\E\times \F \to [0,1]$ mit folgenden Eigenschaften:
 \begin{enumerate}[(i)]
 	\item $K(y,.)$ ist ein W-Maß für alle $y\in E$
 	\item $K(.,A)$ ist messbar für alle $A\in \mathcal{F}$
@@ -2172,10 +2170,133 @@ Z=\E(M_n-M-n'~|~\F_0)=M_0-M_0'=0 \Rightarrow Z\equiv 0
 \]
 \hfill $\square$
 
+%sub end
 
+\section{Diskrete Finanzmarktmodelle}
+\label{sec:disk_finanzmarktmodelle}
+\begin{itemize}
+	\item[Ziel:]
+	\item Modellierung von Finanzmärkten in diskreter Zeit
+	\item Formulierung des Arbitragebegriffs
+	\item Arbitrage freie Bewertung von Derivaten
+	\item Zusammenhang zur W'theorie, das No-Arbitrage Theorem
+\end{itemize}
 
+\subsection{Beschreibung von Finanzmärkten}
+\label{sub:beschreibung_fimarkt}
+\begin{itemize}
+	\item periodische Sichtweise
+	\item $N$ Perioden
+	\item $N$ Handelszeitpunkte $0,1,\dots,N-1$
+	\item Informationsverlauf wir gegeben durch eine Filtration $(\F_n)_{n=0,\dots,N}$
+	\item $d$ risikobehaftete Finanzgüter, mit zu $(\F_n)_{n=0,\dots,N}$ adaptierten Preisprozessen
+	\[
+	S_1(n),\dots,S_d(n),~n=0,\dots,N
+	\]
+	$S=(S_1,\dots,S_d)$ beschreibt die Entwicklung der Basisfinanzgüter (\Index{risky assets}).\\
+	$S(n)$ ist der zufällige Vektor der Preis nach $n$ Perioden für die risky assets.
+	\item ein \Index{Numeraire Asset} (Verrechnungsgut) mit Preisprozess $S_0(n),~n=0,\dots,N$, wobei vorausgesetzt wird, dass $S_0(n)>0,~n=0,\dots,N$\\
+	$S_0$ ist adaptiert bzgl.$(\F_n)_{n=0,\dots,N}$.\\
+	Das Numeraire Asset dient zur Verrechnung. Häufig wird ein Geldmarktkonto hierzu benutzt, d.h.
+	\begin{equation*}
+	\begin{aligned}
+		S_0(n)=\beta(n)&=(1+\rho(1))(1+\rho(2))\cdots(1+\rho(n)),~ n=1,\dots,N,~\beta(0)=1\\
+		&=\prod_{i=1}^{n}1+\rho(i)
+	\end{aligned}
+	\end{equation*}
+	wobei $(S(n))_{n=1,\dots,N}$ ein vorhersehbarer Prozess ist mit 
+	\[
+	\rho(n)>-1,~\Pw-\text{f.s. }n=1,\dots,N
+	\]
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+	\draw[->,color=black] (-1.,0.) -- (7.5,0.);
+	\foreach \x in {0,1,5,6,7}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw (0,0) node[below] {$0$};
+	\draw (1,0) node[below] {$1$};
+	\draw (5,0) node[below] {$n-1$};
+	\draw (6,0) node[below] {$n$};
+	\draw (7,0) node[below] {$N$};
+	\draw (1,0) node[above] {$(1+\rho(1))$};
+	\end{tikzpicture}
+	
+	$\rho(n)$ beschreibt die zufällige Zinsrate der $n$-ten Periode
+	\item gehandelt werden kann durch Erwerb bzw. Verkauf von Anteilen an den $(d+1)$ Basisfinanzgütern in den Handelszeitpunkten. Die Entwicklung der Anzahl an Anteilen der Basisfinanzgütern entspricht dabei vorhersehbaren Prozessen $(\varphi,H)$, mit $\varphi(n)$ entspricht der Anzahl an Anteilen des Numeriare Assets in der $n$-ten Periode und $H_j(n)$ entspricht der Anzahl an Anteilen im $j$-ten risky Assets in der $n$-ten Periode.\\
+	\[
+	H=(H_1,\dots,H_d)
+	\]
+	Ein solches Paar $(\varphi,H)$ heißt \Index{Handelsstrategie}. Vorhersehbar, da am Anfang einer Periode das Portfolio zusammengesetzt wird.
+\end{itemize}
+Eine Handelsstrategie $(\varphi,H)$ induziert eine \Index{Vermögensentwicklung}
+\[
+V(n)=\varphi(n)S_0(n)+\sum_{j=1}^{d}H_j(n)S_j(n),~n=1,\dots,N
+\]
+Wert nach $n$ Perioden.
+\[
+	V(0)=\varphi(1)S_0(0)+\sum_{j=1}^{d}H_j(1)S_j(0)
+\]
+Anfangsvermögen. $V(0)$ kann als Anfangskapital interpretiert werden, dass ein Investor einsetzen muss, um die Handelsstrategie $(\varphi,H)$ durchführen zu können. $V(n)$ entspricht dem Vermögen am Ende der $n$-ten Periode, vor Umschichtung des Portfolios.
 
+%sub end
 
+\subsection{Selbstfinanzierung}
+\label{sub:selbstfinanzierung}
+Wird beim Handel in den Handelszeitpunkten $^,\dots,N-1$ kein Kapital hinzugefügt bzw. entnommen, so nennt man diese Handelsstrategie \Index{selbstfinanzierend}.\\
+\uline{Formal:} $(\varphi,H)$ heißt selbstfinanzierend, wenn
+\begin{equation*}
+\begin{aligned}
+	V_n(H)&=\varphi(n)S_0(n)+\sum_{j=1}^{d}H_j(n)S_j(n)\\
+	&=\varphi(n+1)S_0(n)+\sum_{j=1}^{d}H_j(n+1)S_j(n),~n=1,\dots,N-1
+\end{aligned}
+\end{equation*}
+Beispiele für selbstfinanzierende Strategien
+\begin{enumerate}[(a)]
+	\item Buy and hold Strategie:\\
+	Ein Anfangskapital $x>0$ wird in das erste risky asset investiert und wird bis zum Ende gehalten.
+	$H_1(1)=\frac{x}{S_1(0)}$ Kaufen am Anfang\\
+	$H_1(n)=\frac{x}{S_1(0)},~n=2,\dots,N$ Halten über die Perioden\\
+	$H_j\equiv 0$ für alle anderen $j$\\
+	Wertentwicklung:\\
+	\[
+	V(n)=H_1(n)S_1(n)=\frac{x}{S_1(0)}S_1(n)
+	\]
+	\item short selling and hold einer Aktie:\\
+	$H_1(1)=-1$ short selling der Aktie, Verkauf am Anfang\\
+	$H_1(n)=-1$ Halten der Verkaufoption von $n=2,\dots,N$\\
+	Anfangskapital:
+	\[
+	-S_1(0)<0
+	\]
+	Wertentwicklung:
+	\[
+	-S_1(n),~n=2,\dots,N
+	\]
+	\newpage
+	\item kaufe Aktie 1, halte diese $k$-Perioden und tausche danach in Aktie 2, falls $S_2(k)<S_1(k)$ und halte diese Position bis zum Ende.\\
+	Also:
+	$H_1(n)=1$, $H_2(n)=0$ für $n=1,\dots,k$\\
+	\[
+	H_2(k+1)=\frac{V(k)}{S_2(k)}\mathbb{1}_{\{S_2(k)<S_1(k)\}}=\frac{S_1(k)}{S_2(k)}\mathbb{1}_{\{S_2(k)<S_1(k)\}}
+	\] 
+	zufällige Umschichtung in Aktie 2 am Anfang der $(k+1)$-Periode.\\
+	\[
+	H_1(k+1)=\mathbb{1}_{\{S_2(k)>S_1(k)\}}
+	\]
+	\[
+	H_2(n)=\frac{S_1(k)}{S_2(k)}\mathbb{1}_{\{S_2(k)<S_1(k)\}}
+	\]
+	\[
+	H_1(n)=\mathbb{1}_{\{S_2(k)>S_1(k)\}},~ n=k+2,\dots,N
+	\]
+	Halten bis zum Ende.\\
+	$H$ ist vorhersehbar und selbstfinanzierend, da 
+	\begin{equation*}
+	\begin{aligned}
+		V(k) &= S_1(k)=\frac{S_1(k)}{S_2(k)}\mathbb{1}_{\{S_2(k)<S_1(k)\}}S_2(k)+\mathbb{1}_{\{S_2(k>S_1(k))\}}S_1(k)\\
+		&= H_2(k+1)S_2(k)+H_1(k+1)S_1(k)
+	\end{aligned}
+	\end{equation*}
+\end{enumerate}
 
 
 
