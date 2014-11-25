@@ -1143,7 +1143,7 @@ $f_* : (C_*,d_*) \to (C_*',d_*')$ ist eine Folge von $R$-linearen Abbildungen $f
 \[
 	d_n' \circ f_n = f_{n-1} \circ d_n
 \]
-für alle $n\ge 1$ ist. \todo{RevChap6}
+für alle $n\ge 1$ ist. Also kommutiert folgendes Diagramm\todo{RevChap6}
 \[
 	\begin{tikzcd}
 		C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"] \dar["f_1", Firebrick3] & C_2 \lar["d_2"] \dar["f_2", Firebrick3]& C_3 \lar["d_3"] \dar["f_3", Firebrick3]& \ldots \lar \\
@@ -1589,23 +1589,23 @@ $\partial_n \sigma \in C_{n-1} \enbrace*{\abs*{\partial \Delta^n};R}$. Wir werde
 \[
 	H_n \enbrace[\big]{\abs*{\Delta^n}, \abs*{\partial \Delta^n};R  } \cong R 
 \]
-erzeugt. \todo{RevChap8}
+erzeugt.
 % subsection 86 (end)
 
-\subsection[Definition: Lange exakte Sequenz]{Definition} % (fold)
+\subsection[Definition: Lange exakte Sequenz von $R$-Moduln]{Definition} % (fold)
 \label{sub:87}
-Eine Folge von $R$-linearen Abbildungen 
+Eine Folge von $R$-linearen Abbildungen zwischen $R$-Moduln $M_i$
 \[
 	\begin{tikzcd}
-		\mbox{ }  \rar & M_n \rar["f_n"]  & M_{n-1} \rar["f_{n-1}"] & M_{n-2} \rar & \cdots \rar & M_1 \rar & M_0
+		\cdots \rar & M_n \rar["f_n"]  & M_{n-1} \rar["f_{n-1}"] & M_{n-2} \rar & \cdots \rar & M_1 \rar & M_0
 	\end{tikzcd}
 \]
-heißt \Index{lange exakte Folge}, wenn sie exakt an jeder Stelle $M_i$ ist, d.h. für alle $i$ gilt $\im f_i = \ker f_{i-1}$ 
+heißt \Index{lange exakte Folge}, wenn sie exakt an jeder Stelle $M_i$ ist, d.h. für alle $i$ gilt $\im f_i = \ker f_{i-1}$.
 % subsection 87 (end)
 
 \subsection[Satz: Existenz der Paarsequenz]{Satz} % (fold)
 \label{sub:88}
-Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;R)$ nach $(X,A) \mapsto H_{n-1}(A;R)$, sodass für jedes Paar $(X,A)$ gilt
+Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;R)$ nach $(X,A) \mapsto H_{n-1}(A;R)$, sodass für jedes Paar $(X,A)$
 \begin{equation*}
 	\begin{tikzcd}[row sep=1em, column sep=2em]
 		\cdots  \rar["\partial_{n+1}"] & H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] 
@@ -1613,7 +1613,7 @@ Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;
 		\cdots \rar["\partial_1"] & H_0(A;R) \rar & H_0(X;R) \rar & H_0(X,A;R) \rar & 0
 	\end{tikzcd} \label{eq:88}\tag{*}
 \end{equation*}
-eine lange exakte Folge ist. Dabei sind $i : A \to X$ und $j : (X,\emptyset) \to (X,A)$ die Inklusionen. Das bedeutet: \smallskip\\
+eine lange exakte Folge ist. Dabei sind $i : A \hookrightarrow X$ und $j : (X,\emptyset) \hookrightarrow (X,A)$ die Inklusionen. Das bedeutet: \smallskip\\
 Für jedes Paar $(X,A)$ haben wir eine $R$-lineare Abbildung $\partial_n : H_n(X,A;R) \to H_{n-1}(A;R)$, sodass für jede Abbildung $(f,f|_{A}) : (X,A) \to (Y,B)$ von Paaren
 folgendes Diagramm kommutiert
 \[
@@ -1640,6 +1640,7 @@ folgendes Diagramm kommutiert
 			H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] & H_{n-1}(A;R) \rar["i_*"] & H_n(X;R)
 		\end{tikzcd}
 	\]
+	Nach \ref{sub:74} ist $i_* : H_n(A;R) \to H_n(X;R)$ ein Isomorphismus. Wegen der Exaktheit gilt
 	$\ker j_* = \im i_* = H_n(X;R)$, also folgt $j_* = 0$. Da $\im \partial_n = \ker i_* = 0$, folgt $\partial_n=0$. Nun ist 
 	\[
 		H_n(X,A;R) = \ker \partial_n = \im j_* = 0
@@ -1648,27 +1649,29 @@ folgendes Diagramm kommutiert
 \end{enumerate}
 % subsection 89 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Kurze exakte Folge von Kettenkomplexen]{Definition} % (fold)
 \label{sub:810}
 Seien 
 \begin{equation*}
-	(C_*,d_*) \xrightarrow{i_*} (C_*',d_*') \xrightarrow{p_*} (C_*'',d_*'') \label{eq:810}\tag{\#}
+	\begin{tikzcd}
+		(C_*,d_*) \rar["i_*"] & (C_*',d_*') \rar["p_*"] & (C_*'',d_*'') 
+	\end{tikzcd} \label{eq:810}\tag{\#}
 \end{equation*}
-$R$-Kettenabbildungen. Ist für jedes $n$
-\[
+\hyperref[sub:61]{$R$-Kettenabbildungen}. Ist für jedes $n$ die Folge
+\(
 	\begin{tikzcd}
 		C_n \rar["i_n"] & C_n' \rar["p_n"] & C_n''
 	\end{tikzcd}
-\]
-kurz exakt, so heißt \eqref{eq:810} eine kurze exakte Folge von Kettenkomplexen.
+\)
+kurz exakt, so heißt \eqref{eq:810} eine \Index{kurze exakte Folge von Kettenkomplexen}.
 % subsection 810 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel einer kurzen exakten Folge von Kettenkomplexen]{Beispiel} % (fold)
 \label{sub:811}
 Für jedes Paar $(X,A)$ ist 
 \[
 	\begin{tikzcd}
-		\enbrace*{C_*(A;R),\partial_*} \rar & \enbrace*{C_*(X;R),\partial_*} \rar & \enbrace*{C_*(X,A;R),\partial_*}   
+		\enbrace*{C_*(A;R),\partial_*} \rar["i_*"] & \enbrace*{C_*(X;R),\partial_*} \rar["j_*"] & \enbrace*{C_*(X,A;R),\partial_*}   
 	\end{tikzcd}
 \]
 eine kurze exakte Folge von $R$-Kettenkomplexen.
@@ -1685,12 +1688,11 @@ Sei
 eine kurze exakte Folge von $R$-Kettenkomplexen.
 \begin{enumerate}[a)]
 	\item Für jedes $n$ gibt es eine eindeutige wohldefinierte $R$-lineare Abbildung $\partial_n : H_n(C_*'',d_*'') \to H_{n-1}(C_*,d_*)$ mit:
-	
-	Für $v' \in C_n'$ mit $d_n'' p_n(v')=0$ ist 
+	Für $v' \in C_n'$ mit $d_n'' \circ p_n(v')=0$ ist 
 	\[
-		\partial_n \enbrace[\Big]{\underbrace{\benbrace*{p_n(v')}}_{\in H_n(C_*'',d_*'')} } = [v] \in H_{n-1}(C_*,d_*)
+		\partial_n \enbrace[\Big]{\underbrace{\benbrace*{p_n(v')}}_{\mathclap{\in H_n(C_*'',d_*'')}} } = [v] \in H_{n-1}(C_*,d_*)
 	\]
-	wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$
+	wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$. \todo{RevChap8}
 	\item \missingfigure{Diagramm, das den Namen begründet}
 \end{enumerate}
 \minisec{Beweis}
