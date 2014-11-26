@@ -1692,8 +1692,30 @@ eine kurze exakte Folge von $R$-Kettenkomplexen.
 	\[
 		\partial_n \enbrace[\Big]{\underbrace{\benbrace*{p_n(v')}}_{\mathclap{\in H_n(C_*'',d_*'')}} } = [v] \in H_{n-1}(C_*,d_*)
 	\]
-	wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$. \todo{RevChap8}
-	\item \missingfigure{Diagramm, das den Namen begründet}
+	wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$.
+	\item 
+	\[
+		\begin{tikzcd}
+			\cdots \rar["\partial_{n+1}"] & H_n(C_*,d_*) \rar["i_*"] & 
+				H_n(C_*',d_*') \arrow[d, phantom, ""{coordinate, name=Z}] \rar["p_*"] 
+					& H_n(C_*'',d_*'') \arrow[dll, "\partial_n" very near start, rounded corners, to path={
+																	-- ([xshift=2ex]\tikztostart.east)
+																	|- (Z) [near end]\tikztonodes
+																	-| ([xshift=-2ex]\tikztotarget.west)
+																	-- (\tikztotarget)
+																	}] & \\
+			& H_{n-1}(C_*,d_*) \rar["i_*"] 
+				& H_{n-1}(C_*',d_*') \rar["p_*"] \arrow[d, phantom, ""{coordinate, name=R}]
+					& \quad \cdots  \quad \arrow[dll, "\partial_1" very near start, rounded corners, to path={
+																	-- ([xshift=2ex]\tikztostart.east)
+																	|- (R) [near end]\tikztonodes
+																	-| ([xshift=-2ex]\tikztotarget.west)
+																	-- (\tikztotarget)
+																	}]& \\
+			& H_0(C_*,d_*) \rar["i_*"] & H_0(C_*',d_*') \rar["p_*"] & H_0(C_*'',d_*'') \rar & 0
+		\end{tikzcd}
+	\]
+	ist eine lange exakte Folge. \todo{RevChap8}
 \end{enumerate}
 \minisec{Beweis}
 \[
@@ -1722,7 +1744,7 @@ $p_{n+1}(a')=a''$. Es gilt
 \]
 Mit $\ker p_n = \im i_n$ folgt: $\exists a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es bleibt zu zeigen: $d_n(-a)= v-w$.
 \begin{align*}
-	i_{n-1} \enbrace*{-d_n(a)- (v-w)} & = -i_{n-1} \enbrace*{d_n(a)} - i_{n-1}(v-w) \\ &= - d_n' \enbrace*{i_n(a)} - \enbrace*{d_n'(v')- d_n'(w')}  \\  
+	i_{n-1} \enbrace[\big]{-d_n(a)- (v-w)} & = -i_{n-1} \enbrace*{d_n(a)} - i_{n-1}(v-w) \\ &= - d_n' \enbrace*{i_n(a)} - \enbrace*{d_n'(v')- d_n'(w')}  \\  
 	&= -d_n' \enbrace*{ d_{n+1}' (a') - (v'-w')} - \enbrace*{ d_n'(v') - d_n'(w')}  \\
 	&= - d_n' d_{n+1}' (a') + d_n'(v'- w') -  \enbrace*{d_n'(v'-w')} = 0
 \end{align*}
@@ -1869,7 +1891,7 @@ $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphis
 \subsection{Satz (Mayer-Vietoris Folge)} % (fold)
 \label{sub:92}
 Seien $A,B \subseteq X$ offen und $X=A \cup B$. Seien $i_A : A \hookrightarrow X$, $i_B : B \hookrightarrow X$, $j_A : A \cap B \hookrightarrow A$ und 
-$j_B : A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \partial_n^{X=A\cup B} : H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
+$j_B : A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \rand{X=A\cup B}_n : H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
 \[
 	\begin{tikzcd}[column sep=3.5em]
 		\cdots \rar["\partial_{n+1}"] & H_n(A \cap B;R) \rar["{\begin{psmallmatrix}(j_A)_* \\ (j_B)_* \end{psmallmatrix}}"] 
@@ -1880,9 +1902,9 @@ $j_B : A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbild
 eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Sei $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$. ist $f :X \to X'$ mit
 $f(A) \subseteq A'$ und $f(B) \subseteq B'$, so kommutiert
 \[
-	\begin{tikzcd}[column sep=3em]
-		H_n(X;R) \rar["\partial_n^{X=A \cup B}"] \dar["f_*"]  & H_{n-1}(A \cap B;R) \dar["\enbrace*{f|_{A \cap B}}_*"] \\
-		H_n(X';R) \rar["\partial_n^{X'=A' \cup B'}"] & H_n(A' \cap B';R)
+	\begin{tikzcd}[column sep=4em, row sep=3em]
+		H_n(X;R) \rar["\rand{X=A \cup B}_n"] \dar["f_*"]  & H_{n-1}(A \cap B;R) \dar["\enbrace*{f|_{A \cap B}}_*"] \\
+		H_n(X';R) \rar["\rand{X'=A' \cup B'}_n"] & H_n(A' \cap B';R)
 	\end{tikzcd}
 \]
 \minisec{Beweis}
@@ -1890,19 +1912,19 @@ Sei $L := X \setminus B$. Dann ist $L$ abgeschlossen und $L \subseteq A=\mathrin
 \[
 	H_n(B,A \cap B,R) = H_n(X \setminus L, A \setminus L;R) \xrightarrow{\enspace \cong \enspace} H_n(X,A;R) 
 \]
-Betrachte das folgende kommutative Leiterdiagramm. \todo{$\cong$ schöner platzieren}
+Betrachte das folgende kommutative Leiterdiagramm: \marginnote{"$R$" aus Platzgründen weggelassen}
 \[
-	\begin{tikzcd}[font=\scriptsize, column sep=1.8em, row sep=2.5em]
-		\cdots \rar & H_{n+1}(B,A \cap B;R) \rar["\partial_{n+1}^{B,A \cap B}"] \dar["{(i_B,j_A)_* \cong}"] & H_n(A \cap B;R) \rar["(j_B)_*"] \dar["(j_A)_*"] 
-		& H_n(B;R) \rar["(l_B)_*"] \dar["(i_B)_*"] & H_n(B,A \cap B;R) \rar["\partial_n"] \dar["{(i_B,j_A)_* \cong}"]
-		& H_{n-1}(A \cap B;R) \rar \dar["(j_A)_*"] & \cdots \\
-		\cdots \rar & H_{n+1}(X,A;R) \rar["\partial_{n+1}^{X,A}"] & H_n(A;R) \rar["(i_A)_*"]  & H_n(X;R) \rar["(l_X)_*"] & H_n(X,A;R) \rar["\partial_n^{X,A}"] & H_{n-1}(A;R) \rar & \cdots
+	\begin{tikzcd}[font=\small, column sep=1.8em, row sep=2.5em]
+		\cdots \rar & H_{n+1}(B,A \cap B) \rar["\rand{B,A \cap B}_{n+1}"] \arrow{d}{(i_B,j_A)_*}[swap]{\cong} & H_n(A \cap B) \rar["(j_B)_*"] \dar["(j_A)_*"] 
+		& H_n(B) \rar["(l_B)_*"] \dar["(i_B)_*"] & H_n(B,A \cap B) \rar["\rand{B,A\cap B}_n"] \arrow{d}{(i_B,j_A)_*}[swap]{\cong}
+		& H_{n-1}(A \cap B) \rar \dar["(j_A)_*"] & \cdots \\
+		\cdots \rar & H_{n+1}(X,A) \rar["\rand{X,A}_{n+1}"] & H_n(A) \rar["(i_A)_*"] & H_n(X) \rar["(l_X)_*"] & H_n(X,A) \rar["\partial_n^{X,A}"] & H_{n-1}(A) \rar & \cdots
 	\end{tikzcd}
 \]
 dabei sind $l_B : (B,\emptyset) \to (B,A \cap B)$ und $l_X : (X, \emptyset) \to (X,A)$ die Inklusionen von Paaren.
-Definiere nun $\partial_n : H_n(X,R) \to H_{n-1}(A\cap B;R)$ durch
+Definiere nun $\partial_n : H_n(X;R) \to H_{n-1}(A\cap B;R)$ durch
 \[
-	\partial_n := \partial_n^{B, A\cap B} \circ  \enbrace*{(i_B,i_A)_*} ^{-1} \circ (l_X)_* 
+	\partial_n := \rand{B, A\cap B}_n \circ  \enbrace[\big]{(i_B,i_A)_*} ^{-1} \circ (l_X)_* 
 \]
 Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit von $\partial_n$.
 
@@ -1912,20 +1934,20 @@ Zu zeigen: $\im \begin{psmallmatrix}
 \begin{description}
 	\item["$\supseteq $":] Sei $(a,b) \in \ker \enbrace*{(i_A)_* - (i_B)_*}$. Also $(i_A)_*(a) = (i_B)_*(b)$. Es ist 
 	\[
-		(i_B,j_A)_* \enbrace*{(l_B)_*(b)} = (l_X)_* \circ (j_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
+		(i_B,j_A)_* \enbrace[\big]{(l_B)_*(b)} = (l_X)_* \circ (j_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
 	\]
 	$(i_B,j_A)_*$ ist ein Isomorphismus, also $(l_B)_*(b)=0$. $\ker (l_B)_* = \im (j_B)_*$. Damit folgt $\exists x \in H_n(A \cap B;R) : (j_B)_*(x)=b$. Dann gilt
 	\[
-		(i_A)_* \enbrace*{a - (j_A)-*(x)} = (i_A)_*(a) - i_B \enbrace*{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
+		(i_A)_* \enbrace[\big]{a - (j_A)-*(x)} = (i_A)_*(a) - i_B \enbrace[\big]{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
 	\]
-	Mit $\ker (i_A)_*  =\im \partial_n^{X,A}$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
+	Mit $\ker (i_A)_*  =\im \rand{X,A}_n$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
 	\[
-		\partial_n^{X,A} \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
+		\rand{X,A}_n \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
 	\]
 	Es folgt für $z := x + \partial_n^{B,A \cap B}(y)$.
 	\begin{align*}
 		(j_B)_*(z) & =(j_B)_*(x) = b \\
-		(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\partial_n^{B,A \cap B}(y)} = (j_A)_*(x) + \partial_n^{X,A} \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
+		(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\rand{B,A \cap B}(y)}_n = (j_A)_*(x) + \rand{X,A}_n \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
 		(j_A)_*(x) = a  
 	\end{align*}
 \end{description}
