@@ -1106,7 +1106,7 @@ im Allgemeinen falsch, aber
 \label{ssub:1714}
 Sei $X,Y \in \Gamma(TM) \to \mathcal{L}_X,\mathcal{L}_Y \in \mathcal{D}$. So ist 
 \[
-\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}:= \mathcal{L}_X \cdot \mathcal{L}_Y - \mathcal{L}_Y \cdot \mathcal{L}_X 
+\benbrace*{\mathcal{L}_X,\mathcal{L}_Y}:= \mathcal{L}_X \mathcal{L}_Y - \mathcal{L}_Y \mathcal{L}_X 
 \]
 der \Index{Kommutator} bzw. die \Index{Lie-Klammer} von $X$ und $Y$ eine Derivation von $M$. Das zugehörige Vektorfeld wird $\benbrace{X,Y}$ geschrieben, das heißt $\mathcal{L}_{\benbrace{X,Y}} = \benbrace*{\mathcal{L}_X,\mathcal{L}_Y}$
 \minisec{Beweis}
@@ -1218,10 +1218,282 @@ Sei $X\in \Gamma(TM)$, definiere
 \[
 \mathcal{D}_X := \set[(x,y)]{x\in M, t\in I_X} \overset{\text{offen}}{\subset}
 \]
-wobei $I_X$ max. Intervall von $c_x$. Die glatte Abbildung $\psi_X:\mathcal{D}_X \to M,\ (x,t)\mapsto \psi_X(x,t) = c_x(t)$ heißt \Index{globaler Fluss}. $X$ heißt vollständig, falls $\mathcal{D} = M\times \mathds{R}$
+wobei $I_X$ max. Intervall von $c_x$. Die glatte Abbildung $\psi_X:\mathcal{D}_X \to M,\ (x,t)\mapsto \psi_X(x,t) = c_x(t)$ heißt \Index{globaler Fluss}. $X$ heißt vollständig, falls $\mathcal{D}_X = M\times \mathds{R}$.
 % subsubsection 185(end)
 
+\subsubsection{Proposition}
+\label{ssub:186}
+Für einen vollständigen Fluss $\Psi$ gilt. (Schreibweise $\Psi_t (x) = \Psi(x,t), \Psi:M\to M$)
+\begin{enumerate}
+\item $\Psi_0 = \id_M$
+\item $\Psi_s \circ \Psi_t = \Psi_{s+t}$
+\item $\Psi_t$ ist ein Diffeomorphismus und $\enbrace{\Psi_t}^{-1} = \Psi_{-t}$
+\end{enumerate}
+Das heit $\Psi$ definiert einen Gruppenhomomorphismus $\enbrace{\mathds{R},+} \to \text{Diff}(M)$. So etwas nennt man eine 1-Parametergruppe.
+% subsubsection 186(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:187}
+\ref{ssub:186} gilt für lokale Flüsse, sofern die Ausdrücke definiert sind. Ein lokaler Fluss: $\Psi_t:U\to M$ ist ein Diffeomorphismus auf das Bild.
+% subsubsection 187(end)
+
+\subsubsection{Satz}
+\label{ssub:188}
+Jedes Vektorfeld mit kompakten Träger ist schon vollständig. Insbesondere ist jedes Vektorfeld auf kompakten Mannigfaltigkeiten vollständig.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+\item 
+\marginnote{da $c_x'(t) = X(c(t)) = 0$}
+Sei $K = \supp K = \overline{\set[x\in M]{X(x)\neq 0}}$. Für $x\in K^c$ ist $c_x(t) = x\ \forall t\in \mathds{R}$ die Integralkurve von $X$ um $x$.
+\item Es gibt eine endliche Überdeckung $K\subset \bigcup_j U_j$, sodass der lokale Fluss $\Psi^{(j)}: U_j\times (-\epsilon_j,\epsilon_j) \to M$ definiert ist. Setze $\epsilon = \min_j e_j > 0$, dann ist $M\times (-\epsilon,\epsilon)\subset \mathcal{D}_x$.
+\item Angenommen $c < \infty$, sodass $c_x(s) = \Psi_s (x)$ nur für $|s| < c$ existiert. Dann betrachte
+\[
+c_{\Psi_s(x)} (t) = \Psi\enbrace{\Psi_s (x), t} = \Psi_t(\Psi_s(x)) =\Psi_{t+s} (x)
+\]
+definiert für $|t| < \epsilon$ (nach (ii)). Wähle $s, t$, sodass $s+t > c$. $\lightning$ Also existiert $c_x(s)$ für alle $s\in \mathds{R}$.
+\end{enumerate}
+% subsubsection 188(end
 % subsection 18(end)
+
+\subsection{Verhalten von Vektorfelden unter Diffeomorphismen}
+\label{sub:19}
+\missingfigure{Abbildung zwischen Tangentialräumen}
+
+\subsubsection[Proposition und Definition: Push-Forward]{Proposition und Definition}
+\label{ssub:191}
+Sei $\phi:M\to N$ ein Diffeomorphismus. $X\in \Gamma(TM)$, dann ist durch $y\mapsto \phi_{*} X(y) = \mathd_{\phi^{-1}(y)} \phi\enbrace{X(\phi^{-1}(y))}$ ein Vektorfeld auf $N$ gegeben, der \Index{Push-Forward} von $X$. Die assoziierte Derivation ist $\enbrace{\mathcal{L}_{\phi_* X} f}(x) = \mathcal{L}_X (f\circ \phi)(\phi^{-1}(y))$ für $f\in C^\infty (N)$
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+\item Es ist zu zeigen, das $\phi_* X$ ein Vektorfeld ist. Da $\phi_* X$ ein Schnitt auf $\Gamma(TN)$ ist, bleibt Glattheit von $\phi_* X$ zu zeigen. Wähle Karten $\enbrace*{U, \Phi = \enbrace*{x^1,\ldots,x^n}}$ um $\phi^{-1}(y)\in M$ und $\enbrace*{\phi(U),\Psi = \Phi \circ \phi = \enbrace*{y^,\ldots,y^n}}$ um $y\in N$.
+\begin{enumerate}[Step 1:]
+\item Zeige zunächst $\phi_* \delta_{x^j} = \delta_{y^j}$. Es ist $\delta_{x^j} = \benbrace{U,\Phi,e_j}$, $\delta_{y^j} = \benbrace{\phi(U),\Psi,e_j}$ wobei $e_j$ Standardbasis des $\mathds{R}^n$. Nach Definition gilt
+\begin{align*}
+\phi_* \delta_{x^j}\enbrace*{\phi^{-1}(y)} &= \mathd_{\phi^{-1} (y)} \phi\enbrace*{\benbrace*{U,\Phi,e_j}}\\
+&= \benbrace[\big]{\phi(U),\Psi, \mathd_{\Phi\enbrace*{\phi^{-1}(y)}} \underbrace{\enbrace*{\Psi \circ \phi \circ \Phi^{-1}}}_{\id_{\mathds{R}^n}}(e_j)}\\
+&= \benbrace{\phi(U),\Psi,e_j} = \delta_{y^j}(y)
+\end{align*}
+\item Sei $X = \sum_j a^j \delta_{x^j}$, dann gilt
+\[
+\phi_* X(y) = \sum_j a^j(\phi^{-1}(y))\phi_* \delta_{x^j}(y) = \sum_j \underbrace{a^j\enbrace{\phi^{-1}(y)}}_{\text{glatt}} \delta_{y^j} (y)
+\]
+Also ist $\phi_* X$ ein glattes Vektorfeld.
+\end{enumerate}
+\item Mit der lokalen Form der Lie-Ableitung und der oben gezeigten Darstellung von $\phi_* X$ folgt
+\[
+\mathcal{L}_{\phi_* X} f(y) = \sum_j a^j\enbrace*{\phi^{-1}(y)} \partial_{y^j} f(y)
+\]
+für $f\in C^\infty (N)$. Nach \ref{ssub:179} gilt
+\begin{align*}
+\partial_{y^j}(y) &= \sum_k \partial_{y^j}y^k(y)\partial_k \enbrace*{f\circ \Psi^{-1}}(\Psi(y))\\
+&= \partial_j \enbrace*{f\circ \Psi^{-1}}(\Psi(y)) = \partial_j \enbrace*{f\circ \phi\circ \Phi^{-1}} = \partial_{x^j}(f\circ \phi)(\phi^{-1}(y))
+\end{align*}
+Somit folgt
+\[
+\mathcal{L}_{\phi_* X} f(y) = \sum_j a^j \enbrace*{\phi^{-1}(y)}\partial_{x^j}(f\circ \phi) (\phi^{-1}(y)) = \mathcal{L}_X (f\circ \phi)(\phi^{-1}(y))
+\]
+\end{enumerate}
+% subsubsection 191(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:192}
+\begin{enumerate}[(i)]
+\item Wir schreiben $\phi^* f = f\circ \phi$ für den \Index{Pullback} von $f$. Dann ist
+\[
+\mathcal{L}_{\phi_* X} = \enbrace{\phi^{-1}}^* \circ \mathcal{L}_X \circ \phi
+\]
+\item Es ist $(\phi\circ \psi)^* f = f\circ \phi\ psi = \psi^*(f\circ \phi) = \psi^* \phi^* f$, das heißt der Pullback $(\phi\circ \psi)^* = \psi^* \circ \phi^*$ ist kontravariant und der Push-Forward $(\phi\circ \psi)_* X = \phi_* \circ \psi_* X$ ist kovariant.
+\end{enumerate}
+% subsubsection 192(end)
+
+\subsubsection{Korollar}
+\label{ssub:193}
+Sei $\phi: M\to N$ ein Diffeomorphismus, $X,Y$ Vektorfelder auf $M$. Dann gilt
+\[
+\phi_*\benbrace*{X,Y} = \benbrace{\phi_* X,\phi_* Y}
+\]
+\minisec{Beweis}
+\begin{align*}
+\mathcal{L}_{\benbrace{\phi_* X, \phi_* Y}} &= \mathcal{L}_{\phi_* X} \mathcal{L}_{\phi_* Y} - \mathcal{L}_{\phi_* Y} \mathcal{L}_{\phi_* X}\\
+&= \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{X} \circ \phi^* \circ \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{Y} \circ \phi^* - \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{Y} \circ \phi^* \circ \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{X} \circ \phi^*\\
+&= \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{X} \circ \mathcal{L}_{Y} \circ \phi^* - \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{Y} \circ \mathcal{L}_{X} \circ \phi^*\\
+&= \enbrace{\phi^{-1}}^* \circ (\mathcal{L}_{X} \circ \mathcal{L}_{Y} - \mathcal{L}_{Y} \circ \mathcal{L}_{X}) \circ \phi^*\\
+&= \enbrace{\phi^{-1}}^* \circ \mathcal{L}_{\benbrace{X,Y}} \circ \phi^* = \mathcal{L}_{\phi_* \benbrace{X,Y}}
+\end{align*}
+% subsubsection 193(end)
+
+\subsubsection{Proposition}
+\label{ssub:194}
+Für (lokale) Flüsse gilt:
+\[
+\Psi_{\phi_* X,t} = \phi \circ \Psi_{X,t} \circ \phi^{-1}
+\]
+\minisec{Beweis}
+Es ist zu zeigen,das für alle $s$, für die $\Psi_{X,s}(x)$ definiert ist, gilt:
+\[
+\frac{\mathd}{\mathd t} \phi \circ \Psi_{X,t} \circ \phi^{-1}\vert_{t=s} = \phi_* X\enbrace{\phi \circ \Psi_{X,s} \circ \phi^{-1}}
+\]
+\begin{enumerate}[(i)]
+\item Sei $s = 0$. Es gilt
+\begin{align*}
+\frac{\mathd}{\mathd t} \phi \circ \Psi_{X,t} \circ \phi^{-1}(y) \Big\vert_{t=0}& = \frac{\mathd}{\mathd t} \phi \enbrace*{\Psi_{X,t} \circ \phi^{-1}(y)} \Big\vert_{t=0}\\
+&= \mathd_{\phi^{-1}(y)} \phi\enbrace[\bigg]{\frac{\mathd}{\mathd t} \Psi_{X,t}\enbrace*{\phi^{-1}(y)}\Big\vert_{t=0}}\\
+&= \mathd_{\phi^{-1}(y)} \phi \enbrace*{X \enbrace*{\phi^{-1}(y)}}\\
+&= \phi_* X(y)
+\end{align*}
+\item Setze $r = t - s$, $\Psi_{X,t} = \Psi_{X,r} \circ \Psi_{X,s}$. Es gilt
+\[
+\frac{\mathd}{\mathd t} \phi \circ \Psi_{X,t} \circ \phi^{-1}(y) \Big\vert_{t=s} = \frac{\mathd}{\mathd r} \phi \circ \Psi_{X,r} \circ \Psi_{X,s} \circ \phi^{-1}(y) \Big\vert_{r=0} = \phi_* X\enbrace*{\phi \circ \Psi_{X,s}\enbrace*{\phi^{-1}(y)}}
+\]
+\end{enumerate}
+% subsubsection 194(end)
+
+\subsubsection{Theorem}
+\label{ssub:195}
+Seien $X,Y \in \Gamma(TM)$, $\Psi_t$ sei der Fluss von $Y$. Dann gilt
+\[
+\frac{\mathd}{\mathd t} \enbrace{\Psi_t^{-1}}_* X \Big\vert_{t=0} = \benbrace{Y,X}
+\]
+\minisec{Beweis}
+siehe Skript
+% subsubsection 195(end)
+
+\subsubsection[Korollar: Jacobi-Identität]{Korollar (Jacobi-Identität)}
+\label{ssub:196}
+Seien $X,Y,Z\in \Gamma(TM)$. Dann gilt
+\[
+\benbrace{X,\benbrace{Y,Z}} + \benbrace{Z,\benbrace{X,Y}} + \benbrace{Y,\benbrace{Z,X}} = 0
+\]
+\minisec{Beweis}
+Übungsaufgabe
+% subsubsection 196(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:197}
+Sei $V$ ein Vektorraum (in der Regel $\mathds{R}$ oder $\mathds{C}$). Sei $\benbrace{.,.}:V\times V \to V$ eine schiefsymmetrische bilineare Abbildung mit Jacobi-Identität, zum Beispiel $V = \Gamma(TM)$ mit $\benbrace{.,.} = $ Lie-Klammer. Dann heißt $\enbrace{V,\benbrace{.,.}}$ Lie-Algebra. Ein weiteres Beispiel ist $\mathds{R}^{n\times n}$ mit $\benbrace{A,B} = AB-BA$ "Matrixkommutator". Die Lie-Algebra ist ein zentrales Objekt der Darstellungstheorie von Lie-Gruppen, zum Beispiel $\GL(n,\mathds{R}),\ O(n),\ \SU(n)$
+% subsubsection 197(end)
+
+% subsection 19(end)
+
+\subsection{Tensorbündel}
+\label{sub:110}
+
+\subsubsection[Wiederholung:Tensorprodukt von Vektorräumen]{Wiederholung}
+\label{ssub:1101}
+Seien $V,W$ (endlich) dimensionale VR$\vert_{\mathds{R}}$. Dann existiert ein VR$\vert_{\mathds{R}}$ mit folgender Eigenschaft. Ist $U$ VR$\vert_{\mathds{R}}$, dann
+\[
+\underbrace{L_2\enbrace{V\times W, U}}_{\text{bilineare Abb.} V\times W\to U} \underbrace{\cong L\enbrace{V\otimes W, U}}_{\text{lineare Abb.}V\otimes W \to U}
+\]
+Genauer:
+\begin{figure}[H]
+	\centering{
+\begin{tikzcd}[column sep=small]
+& V\otimes W \arrow{d}{\hat{B}}\\
+V\times W \arrow{r}{B} \arrow{ur}{L_2\enbrace{V\times W,V\otimes W} \ni \otimes} & U
+\end{tikzcd}
+	\caption{"universelle Eigenschaft" von $\otimes$}}
+\end{figure}
+wobei $B\in L_2\enbrace{V\times W, U} \simeq \enbrace{V\otimes W, U}$ gegeben durch $B\mapsto \hat{B}$. $\hat{B}$ ist eindeutig bestimmt, das heißt $B(v,w) = \hat{B}(v\otimes w)$.\\
+Im Allgemeinen:
+\[
+\underbrace{L_n\enbrace{V_1\times \ldots \times V_n, U}}_{\text{n-lineare Abbildung}} \simeq L\enbrace{V_1\otimes \ldots \otimes V_n, U}
+\]
+Es gilt $V\otimes W\cong W\otimes V$ und $\enbrace{V\otimes W} \otimes U \cong V\otimes \enbrace{W\otimes V}$, das heißt $\otimes$ ist kommutativ und assoziativ. 
+\minisec{Konkret}
+ Ist $\set{e_i}_{i = 1}^n,\ \set{f_i}_{i = 1}^n$ Basis von $V$ beziehungsweise $W$, so ist die Basis von $V\otimes W$ gegeben durch $\set{e_i\otimes f_j}_{i,j = 1}^{n,m}$(, wobei das Bild von $(e_i,f_j)$ unter $\otimes$: $\otimes(e_i,f_j) = e_i \otimes f_j$). Insbesondere ist $\dim V\otimes W = \dim V \cdot \dim W$. Dann gilt für $v = \sum v^i e_i,w = \sum w^j f_j$.
+\[
+\otimes(v,w) = v\otimes w = \otimes\enbrace{\sum v^i e_i, \sum w^j e_j} = \sum_{i,j} v^i w^j e_i\otimes f_j
+\]
+\minisec{Bemerkung}
+\begin{enumerate}[(i)]
+\item Seien $v,v'\in V, w\in W$, so ist $v\otimes w\in V\otimes W$ und 
+\[
+(v+v')\otimes w = \otimes (v+v',w) = \otimes (v,w) + \otimes (v',w) = v\otimes w + v'\otimes w
+\]
+\item In der Regel lässt sich $t\in V\otimes W$ nicht als $v\otimes w$ für $v\in V,w\in W$ schreiben, denn sei $\set{e_i\otimes f_j}$ Basis von $V\otimes W$, das heißt $t = \sum t^{ij} e_i\otimes f_j$ für $t^{ij}\in \mathds{R}$. Ist $t = v\otimes w = \sum_{i,j} \enbrace{v^i e_i}\otimes \enbrace{w^j f_j} \overset{(i)}{=} \sum v^i w^j e_i\otimes f_j$, das heißt $t^{ij} = v^i\cdot w^j,\ \forall i,j$ ist im Allgemeinen falsch.\\
+Aber $\set[v\otimes w]{v\in V, w\in W}$ ist ein Erzeugendensystem von $V\otimes W$
+\end{enumerate}
+% subsubsection 1101(end)
+
+\subsubsection{Beispiel}
+\label{ssub:1102}
+Seien $V,W$ VR$\vert_{\mathds{R}}$, also $V^*,W^*$ der zugehörige duale Vektorraum. Dann ist
+\[
+V^* \otimes W^* \cong L_2\enbrace{V\times W,\mathds{R}} \cong L\enbrace{V\otimes W,\mathds{R}} = \enbrace{V\otimes W}^*
+\]
+\[
+\alpha \otimes \beta \in V^* \otimes W^* \mapsto \enbrace*{(v,w)\in V\times W \to \alpha(v)\beta(w) \in \mathds{R}} \in L_2 \enbrace{V\times W,\mathds{R}}
+\]
+\minisec{Zum Beispiel}
+Sei $V = \mathds{R}^2 = \lenbrace*{\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\1\end{pmatrix}}, 
+W = \mathds{R}^3 = 
+\lenbrace*{\begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix},\begin{pmatrix}0\\0\\1\end{pmatrix}
+}
+$. So ist 
+\[L_2\enbrace{\mathds{R}^2\times \mathds{R}^3,\mathds{R}} = \set[
+\begin{pmatrix}
+x_1 & x_2 & x_3\\
+y_1 & y_2 & y_3
+\end{pmatrix}]{x_j,v_j \in \mathds{R}},\quad
+(\alpha_1,\alpha_2)\begin{pmatrix}
+x_1 & x_2 & x_3\\
+y_1 & y_2 & y_3
+\end{pmatrix}\begin{pmatrix}b_1\\b_2\\b_3\end{pmatrix} = B(v,w)
+\]
+$B = x_1 e^1\otimes f^1 + x_2 e^1\otimes f^2 + x_3 e^1\otimes f^3 + \sum_{j=1}^3 y^j e^2\otimes f^j,\quad e^i,f^j$ duale Basis. Zum Beispiel
+\[
+B\enbrace*{\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix}} = \sum_{j=1}^3 \enbrace*{x_j e^1\otimes f^j + y_j e^2\otimes f^j}(e_1,f_2) = \sum_{j=1} x_j \underbrace{e^1(e_1)}_{1}\cdot \underbrace{f^j(f_2)}_{0} + y_j e^2(e_1) f^j(f_2) = x_2
+\]
+Übungsaugabe: $L(V,W) \simeq W\otimes V^*$
+% subsubsection 1102(end)
+
+\subsubsection{Tensorprodukt der linearen Abbildung}
+\label{ssub:1103}
+Erinnerung: Sei $V, W$ Vektorräume und $V^*,W^*$ der zugehörige duale Vektorraum. Sei $f:V\to W$ linearer Morphismus, so ist $f^T: W^*\to V^*$ die Transponierte von $f$. Seien $a\in L(V,V'), b\in L(W,W')$, so ist $a\otimes b \in L(V\otimes W,V'\otimes W')$ das Tensorprodukt von $a$ und $b$ definiert durch $a\otimes(v\otimes w) = a(v)\otimes b(w)\in V'\otimes W'$ und setzen es linear fort.
+\[
+a\otimes b (v\otimes w +v'\otimes w') = a\otimes b(v\otimes w) + a\otimes b(v'\otimes w')
+\]
+etc. Zum Beispiel
+\[
+a\otimes b (v\otimes w +v\otimes w') = a(v)\otimes b(w) + a(v)\otimes b(w') = a(v)\otimes (b(w)+b(w')) = a(v)\otimes b(w+w')
+\]
+% subsubsection 1103(end)
+
+\subsubsection{Tensorbündel}
+\label{ssub:1104}
+Wir betrachten Tensoren nun über Mannigfaltigkeiten $M$. Definiere
+\[
+\bigotimes^p TM = \bigcup_{x\in M} \bigotimes^p T_x M\times \set{x}
+\]
+wobei $\otimes^p T_x M = \underbrace{T_x M \otimes \ldots \otimes T_x M}_{\text{p-mal}} = T_x M^{\otimes^p}$, das p-te Tensorprodukt von $TM$. Dies ist ein Vektorbündel $\pi_{\otimes^p TM}: \otimes^p TM\to M$ von Rang $(\dim M)^p$
+\begin{itemize}
+\item $v\in T_x M^{\otimes^p}\times \set{x} \mapsto x = \pi_{\otimes^p TM}(v) \in M$
+\item Sei $(U,\varphi)$ Karte von $M$, $\enbrace{\pi_{\otimes^p TM}^{-1}(U), \Theta_{U,\varphi}^{-1}}$ Karten von $TM$, so ist $\enbrace{\pi_{\otimes^p TM}^{-1}(U), \Theta^{-1}_{U,\varphi}\otimes \ldots \otimes \Theta^{-1}_{U,\varphi}}$ Karte von $\otimes^p TM$
+\end{itemize} 
+% subsubsection 1104(end)
+
+\subsubsection{Kotangentialbündel von M}
+\label{ssub:1105}
+Idee: Ersetze $T_x M$ durch $T_x^* M$ und erhalte das \Index{Kotangentialbündel} $T^* M = \bigcup_{x\in M} T_x^* M \times \set{x}$. Atlas ist gegeben durch $\enbrace{\pi_{\otimes^p TM}^{-1}(U), \enbrace{\Theta_{U,\varphi}}^{T}}$. \ref{ssub:1104} und \ref{ssub:1105} können allgemein für jedes Vektorfeld durchgeführt werden, das heißt sind $E\to M, F\to M$ Vektorbündel über $M$, so können $E^*\to M,\ E\oplus F\to M,\ E\otimes F\to M$ etc. konstruiert werden.
+Insbesondere gilt: Ist $x^1,\ldots,x^n$ Koordinatensystem auf $U\subset M$, $\partial_{x^1},\ldots, \partial_{x^n}$ Basis von $TM\vert_U$, so ist $\partial_{x^{i_1}}\otimes \ldots \otimes \partial_{x^{i_p}}$ Basis von $TM^{\otimes^p}$ und $\enbrace*{\partial_{x^i}}^* =: \mathd x^i$ Basis von $T^* M\vert_U$
+% subsubsection 1105(end)
+
+\subsubsection{Tensorbündel}
+\label{ssub:1106}
+Sei $\enbrace{p,q}\in \mathds{N}\times \mathds{N}$, so ist
+\[
+\mathcal{T}^p_q M := TM^{\otimes^p}\otimes T^* M^{\otimes^q}\to M
+\]
+Bündel der $(p,q)$-Tensoren, glatte Schnitte aus $\Gamma(\mathcal{T}^p_q M)$ heißen $(p,q)$- Tensor(felder).
+\minisec{Spezialfall}
+\begin{itemize}
+\item $\mathcal{T}_0^0 M := M\times \mathds{R}$, $\Gamma(\mathcal{T}_0^0) = C^\infty (M)$
+\item $\mathcal{T}_0^1 M := TM$, $\Gamma(TM)$ Vektorfelder
+\item $\mathcal{T}_1^0 M := T^*M$, $\Gamma(T^* M)$ 1-Formen
+\item $\mathcal{T}_0^p M := \mathcal{T}_0^p M$ kovariante Tensoren
+\end{itemize}
+% subsubsection 1106(end)
+
+% subsection 110(end)
 
 % section 1 (end)
 
