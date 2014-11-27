@@ -1892,11 +1892,12 @@ $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphis
 \label{sub:92}
 Seien $A,B \subseteq X$ offen und $X=A \cup B$. Seien $i_A : A \hookrightarrow X$, $i_B : B \hookrightarrow X$, $j_A : A \cap B \hookrightarrow A$ und 
 $j_B : A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \rand{X=A\cup B}_n : H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
+\marginnote{"$R$" aus Platzgründen weggelassen}
 \[
 	\begin{tikzcd}[column sep=3.5em]
-		\cdots \rar["\partial_{n+1}"] & H_n(A \cap B;R) \rar["{\begin{psmallmatrix}(j_A)_* \\ (j_B)_* \end{psmallmatrix}}"] 
-		&  \bigoplus\limits_{H_n(B;R)}^{H_n(A;R)} \rar["(i_A)_* - (i_B)_*"] 
-		& H_n(X;R) \rar["\partial_n"] & H_{n-1}(A\cap B;R) \rar & \cdots
+		\cdots \rar["\partial_{n+1}"] & H_n(A \cap B) \rar["{\begin{psmallmatrix}(j_A)_* \\ (j_B)_* \end{psmallmatrix}}"] 
+		&  \bigoplus\limits_{H_n(B)}^{H_n(A)} \rar["(i_A)_* - (i_B)_*"] 
+		& H_n(X) \rar["\partial_n"] & H_{n-1}(A\cap B) \rar & \cdots
 	\end{tikzcd}
 \]
 eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Sei $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$. ist $f :X \to X'$ mit
@@ -1924,34 +1925,144 @@ Betrachte das folgende kommutative Leiterdiagramm: \marginnote{"$R$" aus Platzgr
 dabei sind $l_B : (B,\emptyset) \to (B,A \cap B)$ und $l_X : (X, \emptyset) \to (X,A)$ die Inklusionen von Paaren.
 Definiere nun $\partial_n : H_n(X;R) \to H_{n-1}(A\cap B;R)$ durch
 \[
-	\partial_n := \rand{B, A\cap B}_n \circ  \enbrace[\big]{(i_B,i_A)_*} ^{-1} \circ (l_X)_* 
+	\partial_n := \rand{B, A\cap B}_n \circ  (i_B,i_A)_*^{-1} \circ (l_X)_* 
 \]
-Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit von $\partial_n$.
+Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit von $\partial_n$. \smallskip \\
 
-Zu zeigen: $\im \begin{psmallmatrix}
-	(j_A)_* \\ (j_B)_*
-\end{psmallmatrix} = \ker \enbrace*{(i_A)_* - (i_B)_*} $: 
-\begin{description}
-	\item["$\supseteq $":] Sei $(a,b) \in \ker \enbrace*{(i_A)_* - (i_B)_*}$. Also $(i_A)_*(a) = (i_B)_*(b)$. Es ist 
-	\[
-		(i_B,j_A)_* \enbrace[\big]{(l_B)_*(b)} = (l_X)_* \circ (j_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
-	\]
-	$(i_B,j_A)_*$ ist ein Isomorphismus, also $(l_B)_*(b)=0$. $\ker (l_B)_* = \im (j_B)_*$. Damit folgt $\exists x \in H_n(A \cap B;R) : (j_B)_*(x)=b$. Dann gilt
-	\[
-		(i_A)_* \enbrace[\big]{a - (j_A)-*(x)} = (i_A)_*(a) - i_B \enbrace[\big]{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
-	\]
-	Mit $\ker (i_A)_*  =\im \rand{X,A}_n$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
-	\[
-		\rand{X,A}_n \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
-	\]
-	Es folgt für $z := x + \partial_n^{B,A \cap B}(y)$.
-	\begin{align*}
-		(j_B)_*(z) & =(j_B)_*(x) = b \\
-		(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\rand{B,A \cap B}(y)}_n = (j_A)_*(x) + \rand{X,A}_n \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
-		(j_A)_*(x) = a  
-	\end{align*}
-\end{description}
+\begin{itemize}
+	\item Zu zeigen: $\im \begin{psmallmatrix} (j_A)_* \\ (j_B)_* \end{psmallmatrix} = \ker \enbrace[\big]{(i_A)_* - (i_B)_*} $: 
+	\begin{description}
+		\item["$\supseteq $":] Sei $(a,b) \in \ker \enbrace*{(i_A)_* - (i_B)_*}$. Also $(i_A)_*(a) = (i_B)_*(b)$. Es ist 
+		\[
+			(i_B,j_A)_* \enbrace[\big]{(l_B)_*(b)} = (l_X)_* \circ (j_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
+		\]
+		$(i_B,j_A)_*$ ist ein Isomorphismus, also $(l_B)_*(b)=0$. $\ker (l_B)_* = \im (j_B)_*$. Damit folgt $\exists x \in H_n(A \cap B;R) : (j_B)_*(x)=b$. Dann gilt
+		\[
+			(i_A)_* \enbrace[\big]{a - (j_A)-*(x)} = (i_A)_*(a) - i_B \enbrace[\big]{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
+		\]
+		Mit $\ker (i_A)_*  =\im \rand{X,A}_n$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
+		\[
+			\rand{X,A}_n \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
+		\]
+		Es folgt für $z := x + \partial_n^{B,A \cap B}(y)$.
+		\begin{align*}
+			(j_B)_*(z) & =(j_B)_*(x) = b \\
+			(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\rand{B,A \cap B}(y)}_n = (j_A)_*(x) + \rand{X,A}_n \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
+			(j_A)_*(x) = a  
+		\end{align*}
+		\item["$\subseteq$":] Sei $x \in H_n(A\cap B;R)$. Dann gilt
+		\begin{align*}
+			\enbrace*{(i_A)_* - (i_B)_*} \begin{pmatrix}
+				(j_A)_* \\ (j_B)_*
+			\end{pmatrix}  (x) = (i_A)_* \circ (j_A)_* (x) - (i_B)_* \circ (j_B)_*(x) = (i_A \circ j_A)_* (x) - (i_B \circ j_B)_* (x) = 0
+		\end{align*}
+		da $i_A \circ j_A = i_B \circ j_B$.
+	\end{description}
+	\item Wir zeigen nun $\im (i_A)_* - (i_B)_* = \ker \partial_n$:
+	\begin{description}
+		\item["$\supseteq$":] Sei $v \in \ker \partial_n$. 
+		\item["$\subseteq$":] Sei $\begin{psmallmatrix} a \\ b \end{psmallmatrix} \in \bigoplus\limits_{H_n(B)}^{H_n(A)}$. Dann gilt
+		\[
+			\partial_n \enbrace*{(i_A)_* - (i_B)_*}  \begin{psmallmatrix} a \\ b \end{psmallmatrix} = \partial_n \enbrace[\big]{(i_A)_*(a)- (i_B)_*(b)}  =0
+		\]
+	\end{description}
+	\item Noch zu zeigen: $\im \partial_n = \ker \begin{psmallmatrix} (j_A)_* \\ (j_B)_* \end{psmallmatrix}$.
+	
+	\emph{Übung!}
+\end{itemize}
 % subsection 92 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:93}
+Für die Mayer-Vietoris-Folge müssen $A$ und $B$ nicht notwendig offen sein. Es genügt, dass die Inklusion $(B,A \cap B) \hookrightarrow (X,A)$ einen Isomorphismus
+$H_*(B,A \cap B;R) \to H_*(X,A;R)$ induziert.
+% subsection 93 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:94}
+\begin{equation*}
+	H_k \enbrace*{S^n ;R} \cong \begin{cases}
+		R \oplus R , &\text{ falls }k=n=0\\
+		R, &\text{ falls } k=0, n \not= 0 \\
+		R, &\text{ falls } k=n\not= 0 \\
+		0, &\text{ sonst}
+	\end{cases} \label{eq:94} \tag{\#}
+\end{equation*}
+% subsection 94 (end)
+
+\subsection[Definition: Reduzierte Homologie]{Definition} % (fold)
+\label{sub:95}
+Sei $X$ ein nichtleerer topologischer Raum. Sei $p : X  \to \set{\mathrm{pt}}$ die Projektion auf den Ein-Punkt-Raum. die \Index{reduzierte singuläre Homologie} von $X$ ist definiert
+durch 
+\[
+	\tilde{H}_k(X;R) := \ker \enbrace[\Big]{ p_* : H_k(X;R) \to H_k(\set{\mathrm{pt}};R )} 
+\]
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Es gilt $\tilde{H}_k(X;R) =H_k(X;R)$ für $k>0$ und $H_0(X;R) = R \oplus \tilde{H}_0(X;R)$
+	\item Es ist nicht schwer die Eigenschaften von singulärer Homologie auf die reduzierte singuläre Homologie zu übertragen. Insbesondere ist $\tilde{H}_*$ 
+	homotopieinvariant und es gibt eine Mayer-Vietoris-Folge.
+	\item Es ist $\tilde{H}_k \enbrace*{\set{\mathrm{pt}}}=0$.
+\end{itemize}
+% subsection 95 (end)
+
+\subsection[Bemerkung: Die Aussage von Satz \ref{sub:94} in reduzierter Homologie]{Bemerkung} % (fold)
+\label{sub:96}
+In reduzierter singulärer Homologie wird \eqref{eq:94} zu
+\begin{equation*}
+	\tilde{H}_k(S^n) \cong \begin{cases}
+		R, &\text{ falls }k=n\\
+		0 , &\text{ sonst}
+	\end{cases} \label{eq:96}\tag{\#\#}
+\end{equation*}
+% subsection 96 (end)
+
+\subsection[Beweis von \textbf{[\#\#]}]{Beweis von \eqref{eq:96}} % (fold)
+\label{sub:97}
+Induktion nach $n$:
+\begin{description}
+	\item[Induktionsanfang: $n=0$:] Es gilt
+	\begin{align*}
+		H_k(S^0;R) \stackrel{\xleftarrow{\varphi}}{\cong} H_k \enbrace[\big]{\set{\mathrm{pt}};R } \oplus H_k \enbrace[\big]{\set{\mathrm{pt}};R } = \begin{cases}
+			R \oplus R, &\text{ falls }k=0\\
+			0 ,&\text{ sonst}
+		\end{cases}
+	\end{align*} 
+	Sei $i_- : \set{\mathrm{pt}} \hookrightarrow S^0$, $i_+ : \set{\mathrm{pt}} \hookrightarrow S^0$. $\im i_{pm} = \set{\pm 1}$.
+	Der Isomorphismus $\varphi$ ist gegeben durch $\varphi = (i_-)_* + (i_+)_*$. Für
+	$(a,b) \in H_k \enbrace*{\set{-1};R}\oplus H_k \enbrace*{\set{+1};R}$ gilt dann
+	\[
+		p_* \enbrace[\big]{i_-(a), i_+(b)} = (p \circ i_-)_*(a) + (p \circ i_+)(b) = \id_*(a) + \id_*(b)= a+b
+	\]
+	Also $\ker p_* = \set[(a,-a)]{a \in H_k \enbrace[\big]{\set{\mathrm{pt}};R}}$. Also 
+	\[
+		\tilde{H}_k(S^0) = \begin{cases}
+			0, &\text{ falls }k \not= 0\\
+			R ,&\text{ falls }k=0
+		\end{cases}
+	\]
+	\item[Induktionsschritt: $n-1  \mapsto n$:] Sei $D_n^+ = S^n \setminus \set{(-1,0,\ldots ,0)}$ und $D_n^- = S^n \setminus \set{1,0,\ldots ,0}$. Dann gilt
+	$S^n = D_n^+ \cup D_n^-$ und $D_n^+, D_n^- \subseteq S^n$ offen und $\D_n^+ \simeq \set{\mathrm{pt}}$ und $D_n^- \simeq \set{\mathrm{pt}}$
+	Weiter gilt 
+	\[
+		D_n^+ \cap D_n^- = \set[x=(x_0, \ldots , x_n) \in S^n]{x_0 \not\in \set{\pm 1}} \simeq S^{n-1} = \set{x=(0, x_1, \ldots , x_n) \in S^n}.
+	\]
+	Betrachte nun die Mayer-Vietoris-Folge zu $S^n = D_n^+ \cup D_n^-$: \marginnote{"$R$" aus Platzgründen weggelassen}
+	\[
+		\begin{tikzcd}
+			\underset{=0}{\tilde{H}_k(D_n^+)} \oplus \underset{=0}{\tilde{H}_k(D_n^-)} \rar & 
+			\tilde{H}_k(S^n) \rar["\partial_k", "\cong"'] &
+			\tilde{H}_{k-1} \enbrace*{D_n^+ \cup D_n^-} \rar & 
+			\underset{=0}{\tilde{H}_{k-1}(D_n^+)} \oplus \underset{=0}{\tilde{H}_{k-1}(D_n^-)} \\
+			 & & \tilde{H}_{k-1}(S^{n-1}) \uar["\cong", "(\iota_*)"']& 
+		\end{tikzcd}
+	\]
+	Es folgt $\tilde{H}_k(S^n;R) \cong \tilde{H}_{k-1}(S^{n-1};R) \stackrel{\text{I.A.}}{=} \begin{cases}
+		R, &\text{ falls }k=1\\
+		0, &\text{ sonst}
+	\end{cases}$ \bewende
+\end{description}
+% subsection 97 (end)
 % section 9 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
