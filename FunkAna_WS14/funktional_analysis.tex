@@ -861,7 +861,7 @@ für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
 $\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to T$ bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \bewende
 % subsection 31 (end)
 
-\subsection[Corollar: Der Dualraum ist vollständig, $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum ist]{Corollar} % (fold)
+\subsection[Corollar: Dualraum ist vollständig und $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum]{Corollar} % (fold)
 \label{sub:32}
 \begin{enumerate}[(i)]
 	\item Der Dualraum $X^*$ eines normierten $\mathds{K}$-Vektorraumes $X$ ist vollständig. 
@@ -1522,7 +1522,7 @@ Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[
 \end{enumerate}
 % subsection 511 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Metrisierbarkeit von $\overline{B_{X^*}(0,1)}$ bezüglich der $\w^*$-Topologie]{Satz} % (fold)
 \label{sub:512}
 Sei $X$ ein separabler normierter Raum. Dann ist $\overline{B_{X^*}(0,1)}$ bezüglich $\weakTstar{X^*}$ metrisierbar. Insbesondere ist $\overline{B_{X^*}(0,1)}$ bezüglich
 $\weakTstar{X^*}$ 2. abzählbar und kompakt, und jede Folge besitzt eine konvergente Teilfolge.
@@ -1555,6 +1555,62 @@ denn dann stimmen $\weakTstar{X^*}$ und $\mathcal{T}_{X^*}^d$ überein. (Warum?)
 	$x \in X$. \bewende
 \end{description}
 % subsection 512 (end)
+
+\subsection[Definition: Reflexiver normierter Raum]{Definition} % (fold)
+\label{sub:513}
+Der normierte Raum $X$ heißt \Index{reflexiv}, falls die kanonische Abbildung $\iota_X : X \to X^{**}$ ein Isomorphismus ist. 
+($\iota_X$ ist Isomorphismus genau dann, wenn $\iota_X$ surjektiv ist.)
+% subsection 513 (end)
+
+\subsection[Proposition: Abgeschlossene Unterräume von reflexiven Banachräumen sind reflexiv]{Proposition} % (fold)
+\label{sub:514}
+Sei $X$ ein reflexiver Banachraum und $Y \subset X$ ein abgeschlossener Teilraum. Dann ist $Y$ reflexiv.
+\minisec{Beweis}
+Sei $\kappa : Y \hookrightarrow X$ die Inklusion. Dann ist $\kappa \in \mathcal{L}(Y,X)$ und nach \ref{sub:34} kommutiert das Diagramm
+\[
+	\begin{tikzcd}
+		Y \rar[hook, "\iota_Y"] \dar["\kappa", hook]& Y^{**}  \dar["\kappa^{\tr \,\tr}"] \\
+		X \rar["\iota_X","\cong"', hook] & X^{**}
+	\end{tikzcd}
+\]
+Sei $f\in Y^{**}$, dann existiert $x \in X$ mit $\iota_X(x)=\kappa^{\tr\,\tr}(f)$. Für $\varphi \in X^*$ gilt 
+\[
+	\varphi(x)=\iota_X(x)(\varphi)=\kappa^{\tr\,\tr}(f)(\varphi).
+\]
+Aber $(\kappa^\tr)^\tr (f) = f \circ \kappa^\tr$ und $\kappa^\tr(\varphi) = \varphi \circ \kappa = \varphi|_{Y}$, also $\varphi(x)= f \enbrace*{\varphi|_Y}$ für jedes 
+$\varphi \in X^*$. Falls $x \not\in Y$, so existiert nach Hahn-Banach ein $\psi \in X^*$ mit $\psi|_{Y}=0$, $\psi(x)\not= 0$. Damit folgt 
+\[
+	0 \not= \varphi(x) = f \enbrace*{\psi|_{Y}}=0 \enspace\light
+\]
+also gilt $x \in Y$. Weiter gilt $\iota_Y(x)=f$, denn $\kappa^{\tr\,\tr}$ ist injektiv. Andernfalls existiert $0 \not= g \in Y^{**}$ mit $\kappa^{\tr\,\tr}(g)=0$, also
+existiert $\sigma \in Y^*$ mit $g(\sigma) \not= 0$. Nach Hahn-Banach existiert $\rho \in X^*$ mit $\rho|_{Y}=\sigma$. Nun gilt 
+\[
+	0 = \kappa^{\tr\,\tr}(g) = g \enbrace*{\rho|_Y} = \rho(g) \not= 0 \enspace \light 
+\]
+$\Rightarrow \kappa^{\tr\,\tr}$ ist injektiv. \bewende
+% subsection 514 (end)
+
+\subsection[Proposition: Für Banachräume gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv]{Proposition} % (fold)
+\label{sub:515}
+Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv.
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow$":] $\iota_X : X \xrightarrow{\cong} X^{**}$ ist ein isometrischer Isomorphismus. Nach Blatt 6, Aufgabe 2 ist $\iota_X^{\tr} : X^{***} \to X^*$
+	auch ein isometrischer Isomorphismus. Nach \ref{sub:34} gilt  $\iota_X^{\tr} \circ \iota_{X^*}= \id_{X^{*}}$, also ist $\enbrace*{\iota_X^\tr}^{-1} = \iota_{X^*}$
+	ebenfalls ein isometrischer Isomorphismus.
+	\item["$\Leftarrow$":] genauso \checkmark \bewende
+\end{description}
+% subsection 515 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:516}
+Sei $X$ ein Banachraum. Dann gilt 
+\[
+	\overline{B_X(0,1)} \underset{\text{$\w^*$-dicht}}{\subset} \overline{B_{X^{**}}(0,1)}  
+\]
+\minisec{Beweis}
+
+% subsection 516 (end)
 % section 5 (end)
 
 
