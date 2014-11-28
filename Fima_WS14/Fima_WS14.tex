@@ -2330,9 +2330,127 @@ Beispiele für selbstfinanzierende Strategien
 	\end{aligned}
 	\end{equation*}
 \end{enumerate}
+% sub end
 
+\subsection{Beispiele CRR-Modell}
+\label{sub:bsp_crr}
+\begin{enumerate}[(a)]
+	\item Das $N$-Perioden CRR-Modell:\\
+	$N$-Perioden, $n=1,\dots,N$, $S_0$ Anfangskurs, Filtration $(\F_n)_{n=1,\dots,N}$.\\
+	Sei $(Z_n)_{n=1,\dots,N}$ die Anzahl der Aufwärtssprünge in den ersten $n$ Perioden.\\
+	Annahme: $Z_n=\sum_{i=1}^{n}Y_i$ mit iid. ZV'en $Y_1,\dots,Y_N$, $\Pw(Y_i=1)=p=1-\Pw(Y_i=-1)$.\\
+	Die Sprunghöhen sind $0<d<u$, damit ergibt sich der Preisprozess der risky assets (Aktie), der Form 
+	\[
+	S_n=S_0u^{Z_n}d^{n-Z_n}~ n=1,\dots,N	
+	\]
+	Also ergibt sich
+	\[
+	S_{n+1}=S_nu^{Y_{n+1}}d^{1-Y_{n+1}}
+	\]
+	$(Y_i)_{i=1,\dots,N}$ adaptiert bzgl. der Filtration.\\
+	\uline{Bemerkung:} $(S_n)_{n=1,\dots,N}$ ist ein geometrischer Random-Walk, startend aus $S_0>0$.\\
+	\uline{Andere Darstellung:}
+	\[
+	S_n=S_0\cdot \prod_{i=1}^{n}X_i \text{ mit } X_i=u^{Y_i}d^{1-Y_i}
+	\]
+	Das Numeriare Asset ist ein Geldmarktkonto mit konstanter periodischer Zinsrate $\rho>-1$, d.h.
+	\[
+	\beta(n)=(1+\rho)^n ~ n=1,\dots,N
+	\]
+	\item Mehrdimensionales CRR-Modell:\\
+	Gegeben seinen $l$ Aktien und $l$ Aktienpreisprozesse, entsprechend dem einfachen CRR-Modell.
+	\[
+	S_j(n) = S_j(0)u_j^{Z_j(n)}d_j^{n-Z_j(n)},~ n=1,\dots, N
+	\]
+	Sei $(\F_n)_{n=1,\dots,N}$ eine Filtration. $(Z_n)_{n=1,\dots,N}$ ist ein $l$-dim. Random-Walk mit 
+	\[
+	Z(n)=\sum_{i=1}^{n}Y(i)
+	\]
+	$Y(i)=(Y_1(i),\dots,Y_l(i))$ mit $\Pw(Y_j(i)=1)=p_j=1-\Pw(Y_j(i)=0)$. 
+	Die $Y_1,\dots,Y_N$ sind iid., aber in einer Periode können die $Y_1(i),\dots,Y_l(i)$ abhängig sein.\marginnote{mehrdimimensionales Bernoulli-Experiment,aber Aktien beeinflussen sich gegenseitig}\\
+	Das Numeraire Asset ist wie beim CRR-Modell ein Geldmarktkonto:
+	\[
+	\beta(n)=\prod_{i=1}^{n}(1+\rho)=(1+\rho)^n
+	\]
+	\item Das verallgemeinerte CRR-Modell:\\
+	Idee: Ersetze den Random-Walk $(Z_n)$, der die Aufwärtssprünge zählt, durch eine zeitlich inhomogene \Index{Markov-Kette}.\\
+	Genauer: $(\Omega,\F,\Pw)$ sei W'Raum, $(\F_n)_{n=0,\dots,N}$ eine Filtration und $(Z_n)_{n=0,\dots,N}$ ein \Index{Markov-Prozess}, adaptiert bzgl. $(\F_n)$ mit
+	\begin{enumerate}[(i)]
+		\item $Z_0=0$
+		\item Übergangswahrscheinlichkeiten:
+		\[
+		\Pw(Z_{n+1}=k+1~|~Z_n=k)=p_n(k)=1-\Pw(Z_{n+1}=k~|~Z_n=k),~ k=0,\dots,n
+		\]
+	\end{enumerate}
+	Markov-Eigenschaft bedeutet:
+	\[
+	\Pw(Z_{n+1}=k~|~\F_n)=\Pw(Z_{n+1}=k~|~Z_n)
+	\]
+	insbesondere folgt damit:
+	\[
+	\Pw(Z_{k+1}=k~|~Z_n=k_n,Z_{n-1}=k_{n-1},\dots,Z_1=k_1,Z_0=0)=\Pw(Z_{k+1}=k~|~Z_n=k_n)
+	\]
+	$Z(n)$ zählt die Aufwärtssprünge der ersten $n$-Perioden. Setze als Preisprozess des risky asset
+	\[
+	S(n)=S_0u^{Z_n}d^{n-Z_n}\text{ mit }0<d<u
+	\]
+	Für die Entwicklung des Geldmarktkontos wird angenommen, dass die Zinsrate in einer Periode von der bis dahin erfolgten Anzahl an Aufwärtssprüngen abhängt, d.h.
+	\[
+	\rho(n)=r(n,Z_{n-1}),~n=1,\dots,N \marginnote{kennen den Zins in der $n$-ten Periode, da wir $Z_{n-1}$ kennen}
+	\]
+	mit $r:\N\times \{0,\dots,N\}\to (-1,\infty)$. 
+	$\rho(n)$ ist dann die zufällige Zinsrate in der $n$-ten Periode. 
+	$S(n)$ ist $\F_{n-1}$-messbar für $n=1,\dots,N$, $\rho$ ist also vorhersehbar.\\
+	Der Preisprozess des Geldmarktkontos ergibt sich durch
+	\[
+	\beta(n)=\prod_{i=1}^{n}(1+\rho(i)),~n=0,\dots,N
+	\]
+\end{enumerate}
+% sub end
 
+\subsection{Das diskontierte Finanzmarktmodell}
+\label{sub:disk_finanzmarktmodell}
+Gegeben sei ein Modell entsprechend \hyperref[sub:beschreibung_fimarkt]{4.1} mit $S=(S_1,\dots,S_d)$ als Preisprozess fürdie risky assets und $S_0$ als Preisprozess für das Numeraire Asset.\\
+Alle Preise sind hier in Geldeinheiten (Euro) notiert. 
+Eine weitere Möglichkeit Preise zu notieren besteht darin, diese in Anzahl an Anteilen des Numeraire Assets anzugeben. 
+$x$ Geldeinheiten zum Zeitpunkt $t$ entsprechen $\frac{x}{S_0(t)}$-Anteilen des Numeraire Assets.\\
+Im Falle das $S_0$ das Geldmarktkonto ist, $(S_0(n)=\beta(n))$, ist dies der übliche Diskontierungsvorgang. 
+Dies drückt aus wie viel Geld zum Zeitpunkt $t$ heute wert ist. 
+$x$ Euro in $t$ entsprechen $\frac{x}{\beta(t)}$ heute. 
+Führt man diese "Diskontierung" für die Basisfinanzgüter durch, erhält man ein Finanzmarktmodell, dessen Preise in Anteilen des Numeraire Assets notiert sind.
+Definiere:
+\[
+S_j^*(t)=\frac{S_j(t)}{S_o(t)},~t=0,\dots,N,~1\le j \le d
+\]
+$S_j^*$ ist dann der Preisprozess des $j$-ten risky assets ausgedrückt in Anteilen des Numeraire Assets.
+$(S_1^*,\dots,S_d^*)$ ist dann das "abdiskontierte" Finanzmarktmodell.
 
+Für eine Handelsstrategie $(\varphi,H)$ ist der Wertprozess, in Anteilen des Numeraire Assets ausgedrückt, gegeben durch
+\[
+V^*(n) = \varphi(n)+\sum_{j=1}^{d}H_j(n)S_j^*(n)
+\]
+% sub end
+
+\subsection{Charakterisierung der Selbstfinazierung}
+\label{sub:charkt_selbstfinazierung}
+Eine Handelsstrategie $(\varphi,H)$ ist selbstfinazierend genau dann, wenn sich ihre Vermögensentwicklung aus dem Anfangskapital und den Periodengewinnen bzw. Verlusten ergibt.\\
+Genauer: Für eine Handelsstrategie $(\varphi,H)$ sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $(\varphi,H)$ ein selbstfinanzierend
+	\item 
+	\[
+	V(n) = V(0)+\sum_{k=1}^{n}\varphi(k)\Delta S_0(k) + \sum_{k=1}^{n}\sum_{j=1}^{d}H_j(k)\Delta S_j(k),~n=1,\dots,N
+	\]
+	\item 
+	\[
+	V^*(n)= V^*(0)+\sum_{k=1}^{n}\sum_{j=1}^{d} H_j(k)\Delta S_j^*(k),~ n=1,\dots,N
+	\]
+\end{enumerate}
+Für ein stochastischen Prozess $(X(n))_{n=0,1,2,\dots}$ bedeutet 
+\[
+\Delta X(n)= X(n)-X(n-1)
+\]
+Prozess der Periodenzuwächse.
 
 
 \cleardoubleoddemptypage
