@@ -1510,9 +1510,51 @@ Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[
 		\item \Index{2. abzählbar}, falls gilt: $\mathcal{T}_X$ besitzt eine abzählbare Basis, d.h. es gibt offene Mengen $W_i$, $i \in N$, sodass für jedes $V \subset X$ 
 		offen gilt: $V= \bigcup_{W_i \subset V} W_i$.
 	\end{enumerate}
-	\item 2. abzählbar $\Rightarrow $ 1. abzählbar.
+	\item 2. abzählbar $\Rightarrow $ 1. abzählbar und separabel.
+	\item Ist $X$ kompakt und 1. abzählbar, so besitzt jede Folge in $X$ eine konvergente Teilfolge.
+	
+	Beweisskizze: $(x_n)_{\mathds{N}} \subset X$, setze $A_n := \overline{\set{x_n, x_{n+1}, \ldots }}$. Dann ist $\bigcap_\mathds{N} A_n$ nichtleer wegen Kompaktheit, also
+	hat $(x_n)_\mathds{N}$ einen Häufungspunkt. Benutze nun 1. abzählbar.
+	\item Sei $X$ kompakt und Hausdorff. Dann ist $X$ metrisierbar $\iff$ $X$ ist 2. abzählbar.
+	
+	"$\Longrightarrow$" ist eine einfache Übung. "$\Longleftarrow$" Urysohn, Metrisierungssätze. Den Satz von Urysohn hatten wir auch in "Grundlagen der Analysis, Topologie 
+	und Geometrie" im letzen Semester bewiesen.
 \end{enumerate}
 % subsection 511 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:512}
+Sei $X$ ein separabler normierter Raum. Dann ist $\overline{B_{X^*}(0,1)}$ bezüglich $\weakTstar{X^*}$ metrisierbar. Insbesondere ist $\overline{B_{X^*}(0,1)}$ bezüglich
+$\weakTstar{X^*}$ 2. abzählbar und kompakt, und jede Folge besitzt eine konvergente Teilfolge.
+\minisec{Beweis}
+Sei $\set[x_n]{n \in \mathds{N}} \subset B_X(0,1)$ dicht. Definiere eine Abbildung $d: X^* \times X^* \to [0,\infty)$ durch
+\[
+	d(\varphi, \psi) := \sum_{n \in \mathds{N}} \frac{1}{2^n} \cdot \abs[\big]{\varphi(x_n) - \psi(x_n)}
+\]
+Dann ist $d$ eine Metrik: $d$ ist offensichtlich symmetrisch und erfüllt die Dreiecksungleichung. Zu zeigen: $d$ ist definit:
+\(
+	\varphi \not= \psi \Rightarrow \exists x \in B_X(0,1) \text{ mit } \varphi(x) \not= \psi(x).
+\)
+Also existiert $x_n$ mit $\varphi(x_n) \not= \psi(x_n)$. Dann ist $d(\varphi,\psi) \not= 0$.
+
+Sei nun $(\varphi_\lambda)_{\lambda \in \Lambda} \subset \overline{B_{X^*}(0,1)}$ ein Netz und $\varphi \in \overline{B_{X^*}(0,1)}$. Es genügt zu zeigen
+\[
+	\varphi_\lambda \xrightarrow{\w^*} \varphi \enspace \iff \enspace  d(\varphi_\lambda, \varphi) \longrightarrow 0
+\]
+denn dann stimmen $\weakTstar{X^*}$ und $\mathcal{T}_{X^*}^d$ überein. (Warum?)
+\begin{description}
+	\item["$\Rightarrow $":] Es gelte $\varphi_\lambda \xrightarrow{\w^*} \varphi$, also $\varphi_\lambda(x_n) \to \varphi(x_n)$ für $n \in \mathds{N}$ (nach 
+	\ref{sub:59}(iii)). Sei $\varepsilon>0$. Wähle $n_0 \in \mathds{N}$ mit $\sum_{n \ge n_0} \frac{1}{2^n} < \frac{\varepsilon}{4}$. Wähle $\overline{\lambda} \in \Lambda$
+	mit $\abs*{\varphi_\lambda(x_n)- \varphi(x_n)} < \frac{\varepsilon}{4}$ falls $n < n_0$, $\lambda \ge \overline{\lambda}$. Dann gilt für $\lambda \ge\overline{\lambda}$
+	\begin{align*}
+		d(\varphi_\lambda,\varphi) &\le \sum_{n < n_0} \frac{1}{2^n} \cdot \abs[\big]{\varphi_\lambda(x_n)- \varphi(x_n)} + \sum_{n \ge n_0} \frac{1}{2^n} \cdot 
+		\underbrace{\abs[\big]{\varphi_\lambda(x_n) - \varphi(x_n)}}_{\le 2} \\
+		&< 2 \cdot \frac{\varepsilon}{4} + 2 \cdot \frac{\varepsilon}{4}  = \varepsilon
+	\end{align*}
+	\item["$\Leftarrow$":] Übung mit: $\forall n . \varphi_\lambda(x_n) \to \varphi(x_n)$ und $ \set{x_n}$ dicht $\Rightarrow \varphi_\lambda(x) \to \varphi(x)$ für jedes
+	$x \in X$. \bewende
+\end{description}
+% subsection 512 (end)
 % section 5 (end)
 
 
