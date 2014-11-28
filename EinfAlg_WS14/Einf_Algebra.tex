@@ -1370,6 +1370,275 @@ dann heißt $(R,+,\cdot)$ ein \Index{kommutativer Ring}. Verlangt man nur (R1)\&
 	Rng, wenn $m\ge 2$.
 	\item $R=\{0\}$ mit $0\cdot 0=0=0+0$ der \uline{Nullring}. Im Nullring gilt $0=1$. 
 \end{enumerate}
+%sub end
+
+\subsection{Rechenregeln in Ringen}
+\label{sub:rechenregeln_ringen}
+\begin{enumerate}[(a)]
+	\item \uline{Additiv} darf man kürzen:
+	\[
+	a+x=a+y\Rightarrow x=y
+	\]
+	(addieren von $-a$ auf beiden Seiten)
+	\item Es gilt stets 
+	\[
+	0\cdot a=a\cdot 0=0
+	\]
+	\item Es gilt 
+	\[
+	a(-b)=-(ab)=(-a)b,~ (-a)(-b)=ab \text{ und } (-1)a=-a=a(-1)
+	\]
+\end{enumerate}
+
+\bet{Beweis:}\\
+(b):
+\[
+0\cdot a =(0+0)a\stackrel{\text{R1}}{=}0a+0a\stackrel{\text{Kürzen}}{\Rightarrow} 0a=0
+\]
+genauso $a\cdot 0=0$.\\
+(c): 
+\[
+a(-b)+ab\bgl{\text{R1}} a(b-b)=a0=0\Rightarrow a(-b)=-(ab)
+\]
+genauso
+\[
+(-a)b+ab=(-a+a)b=0b=0\Rightarrow (-a)b=-(ab)
+\]
+\[
+(-a)(-b)=-(a(-b))=-(-(ab))=ab
+\]
+sowie
+\[
+(-1)a=-(1a)=-a=a(-1)
+\]
+\hfill $\square$\\
+\uline{Vorsicht!} Beim Multiplizieren darf man nicht immer einfach kürzen. Beispiel:
+\[
+a=\begin{pmatrix}1&0\\0&0\end{pmatrix},~x=\begin{pmatrix}1&0\\0&2\end{pmatrix},~y=\begin{pmatrix}1&0\\0&3\end{pmatrix}
+\]
+$a,x,y\in \R^{2\times 2},~ ax=ay$, aber $x\neq y$.
+%sub end
+
+\subsection{Definition Einheiten}
+\label{sub:def_einheiten}
+Sei $R$ ein Ring. Ein Element $a\in R$ heißt \Index{Einheit}, wenn es $b\in R$ gibt mit 
+\[
+ab=1=ba
+\]
+Die Menge aller Einheiten ist die \Index{Einheitengruppe}
+\[
+R^*=\{a\in R~|~a\text{ Einheit}\}
+\]
+Offensichtlich ist $(R^*,\cdot)$ eine Gruppe, mit $1$ als Neutralelement.\\
+
+\uline{Beispiel:}
+\begin{enumerate}[(a)]
+	\item $K$ Körper, $K^*=K\backslash \{0\}$
+	\item $\Z^*=\{\pm 1\}$
+	\item $\End(V)^*=\Gl(V)=\{\varphi:V\to V~|~\varphi\text{ linear + bijektiv}\}$
+	\item $R=\{0\},~R^*=R$
+\end{enumerate}
+% sub end
+
+\subsection{Homomorphismen und Ideale}
+\label{sub:homomor_ideale}
+Seien $R$ und $S$ Ringe. Eine Abbildung $\varphi:R\to S$ heißt \Index{Ringhomomorphismus}, wenn für alle $x,y\in R$ gilt:
+\begin{enumerate}[(H1)]
+	\item $\varphi(x+y)=\varphi(x)+\varphi(y)$
+	\item $\varphi(xy)=\varphi(x)\varphi(y)$
+	\item $\varphi(1_R)=1_S$
+\end{enumerate}
+(H1) sagt, dass $\varphi$ ein Homomorphismus der additven Gruppe $(R,+)$ und $(S,+)$ ist.\\
+Der \uline{Kern} eines Ringhomomorphismus $\varphi$ ist
+\[
+\ker(\varphi)=\{x\in R~|~\varphi(x)=0 \}
+\]
+Ist $R$ ein Ring und $S\subseteq R$ eine Teilmenge mit folgenden Eigenschaften, so heißt $S$ \Index{Teilring} oder \Index{Unterring}
+\begin{enumerate}[(TR1)]
+	\item $0\in S$ und $x\pm y\in S$ für alle $x,y\in S$
+	\item $x\cdot y\in S$ für alle $x,y\in S$
+	\item $1\in S$
+\end{enumerate}
+Wenn nur (TR1) und (TR2) verlangt wird, spricht man von einem "Teilrng".\\
+Sei $R$ ein Ring. Ein Teilrng $I\in R$ heißt \Index{Ideal}, wenn für alle $r\in R$ und $i\in I$ gilt
+\[
+ir\in I \text{ und } ri\in I
+\]
+Man schreibt $I\trianglelefteq R$.
+Für ein Ideal $I\trianglelefteq R$ gilt offensichtlich
+\[
+I=R\Leftrightarrow 1\in I
+\]
+(denn: $1\in I\Rightarrow r=r\cdot 1\in I$ für alle$r\in R$.)
+
+\subsubsection*{Konstruktion}
+Sei $R$ ein Ring und $I\trianglelefteq R$ Ideal. Dann ist 
+\[
+\nicefrac{R}{I}=\{x+I~|~x\in R\}
+\]
+ein Ring mit Multiplikation
+\[
+(x+I)(y+I)=xy+I
+\]
+\uline{Denn:} Das ist eine wohldefinierte Verknüpfung,\\
+\begin{equation*}
+\begin{aligned}
+&\begin{array}{c} x+I=x'+I\\ y+I=y'+I    \end{array} \Rightarrow \begin{array}{c} x'=x+i\\y'=y+j \end{array} \text{ für } i,j\in I \Rightarrow x'y'+I=(x+i)(y+j)+I\\
+&= xy+\underbracket{iy+xj+ij}_{\in I}+I=xy+I
+\end{aligned}
+\end{equation*}
+Es gilt weiter
+\[
+(1+I)(x+I)=(x+I)=(x+I)(1+I)
+\]
+\hfill $\square$
+
+\subsubsection*{Satz}
+Sei $R$ ein Ring und $I\subseteq R$. Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $I\trianglelefteq R$
+	\item Es gibt ein Ring $S$ und einen Homomorphismus $R\stackrel{\tiny \varphi}{\to} S$ mit $\ker(\varphi)=I$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):} Setze $S=\nicefrac{R}{I},~\pi_I:R\to S,~x\mapsto x+I$\\
+Nach obiger Konstruktion ist $\nicefrac{R}{I}$ ein Ring.
+Es gilt 
+\[
+\ker(\pi_I)=\{x\in R~|~x+I=I \}=I
+\]
+\uline{(ii)$\Rightarrow$(i):} Sei $\varphi:R\to S$ ein Ringhomomorphismus mit $I=\ker(\varphi)$. Dann ist $(I,+)$ Untergruppe von $(R,+)$. Für alle $i\in I,~r\in R$ gilt
+\[
+\left.\begin{array}{c} \varphi(ir)=\varphi(i)\varphi(r)=0_S\cdot \varphi(r)=0_S\\ \text{und } \varphi(ri)=\dots=0_S    \end{array}\right\} \Rightarrow ir,ri\in I
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Homomorphiesatz für Ringe, Isomorphiesätze}
+\label{sub:homosatz_isosatz}
+\subsubsection*{Satz (Homomorphiesatz)}
+Sei $R\stackrel{\varphi}{\to}S$ ein Ringhomomorphismus, sei $I\trianglelefteq R$ Ideal mit $I\subseteq \ker(\varphi)$. 
+Dann gibt es genau ein Ringhomomorphismus $\overline{\varphi}:\nicefrac{R}{I}\to S$ mit $\overline{\varphi}\circ \pi_I=\varphi$
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		R \ar{rr}{\varphi} \ar{rd}[below,left]{\pi_I} & & S\\
+		& \nicefrac{R}{I} \ar{ru}[below,right]{\overline{\varphi}} &
+	\end{tikzcd}
+	\captionof{figure}{Homomorphiesatz für Ringe}
+\end{center}
+
+\bet{Beweis:}\\
+Aus dem Isomorphiesatz für Gruppen \hyperref[sub:der_homomorphiesatz]{1.20} angewandt auf den Gruppenhomomorphismus $(R,+)\stackrel{\varphi}{\to} (S,+)$ erhalten wir die Existenz und Eindeutigkeit des Gruppenhomomorphismus $\overline{\varphi}$. Zu zeigen bleibt, dass$\overline{\varphi}$ ein Ringhomomorphismus ist. Für $x\in R$ gilt
+\[
+\overline{\varphi}(x+I)=\varphi(x)\qquad \text{vgl. \hyperref[sub:der_homomorphiesatz]{1.20}}
+\]
+\[
+\overline{\varphi}(xy*I)=\varphi(xy)\bgl{\varphi\text{ Ringhom.}}\varphi(x)\varphi(y)=\overline{\varphi}(x+I)\overline{\varphi}(y+I)
+\]
+sowie
+\[
+\overline{\varphi}(1_R+I)=\varphi(1_R)=1_S
+\]
+\hfill $\square$
+
+\subsubsection*{Satz (1. Isomorphiesatz für Ringe)}
+Sei $R$ ein Ring, $S\subseteq R$ Teilring und $I\trianglelefteq R$ ein Ideal. Dann ist $S+I=\{s+i~|~s\in S,~i\in I\}\subseteq R$ Teilring und $S\cap I\trianglelefteq S$ Ideal. Die Abbildung
+\[
+\nicefrac{s}{s\cap I}\stackrel{\varphi}{\to}\nicefrac{S+I}{I},~s+S\cap I\mapsto s+I
+\]
+ist ein Ringisomorphismus (bijektiver Ringhomomorphismus).\\
+
+\bet{Beweis:}\\
+Klar: $S+I$ und $S\cap I$ sind Untergruppen in $(R,+)$.
+Für $s,s'\in S,~i,i'\in I$ gilt
+\[
+(s+i)(s'+i')=ss'+\underbracket{is'+si+ii'}_{\in I}\in S+I
+\]
+sowie $1\in S\subseteq S+I\Rightarrow S+I\subseteq R$ ist Teilring.
+Für $s\in S,~i\in I\cap S$ gilt $\left.\begin{array}{c} is\in I\cap S\\ si\in I\cap S \end{array}\right\} \Rightarrow I\cap S \trianglelefteq S$.\\
+Die Abbildung $\varphi:s+S\cap I \mapsto s+I$ ist nach \hyperref[sub:isomorphisaetze]{1.23} ein Gruppenisomorphismus bzgl. der Addition. Es gilt $\varphi(1+S\cap I)=1+I$ sowie für $s,t\in S$
+\[
+\varphi(st+I\cap S)=st+I=(s+I)(t+I)=\varphi(s+I\cap S)\varphi(t+I\cap s)
+\]
+\hfill $\square$
+
+\subsubsection*{Satz (2. Isomorphiesatz für Ringe)}
+Sei $R$ ein Ring, $I,J\trianglelefteq R$ Ideale mit $I\subseteq J$. Dann ist 
+\[
+\nicefrac{J}{I}=\{j+I~|~j\in J \}\subseteq \nicefrac{R}{I}
+\]
+ein Ideal un es gibt 
+\[
+\nicefrac{\nicefrac{R}{I}}{\nicefrac{J}{I}} \stackrel{\cong}{\to} \nicefrac{R}{J}
+\]
+einen Ringisomorphismus.\\
+
+\bet{Beweis:}\\
+Genau wie in \hyperref[sub:isomorphiesaetze]{1.23}. Betrachte $\psi:R\to\nicefrac{R}{J},~x\mapsto x+J \rightsquigarrow \text{ Homomorphismus }\overline{\psi}:\nicefrac{R}{I}\to\nicefrac{R}{J}$ (Homomorphiesatz). $\ker(\overline{\psi}=\nicefrac{J}{I})$, also existiert der Ringisomorphismus.
+\hfill $\square$
+
+\subsubsection*{Bemerkung}
+Ein \Index{Ringisomorphismus} ist also ein bijektiver Ringhomomorphismus $\varphi:R\to S$. 
+Die Umkehrabbildung $\psi$ von $\varphi$, $\psi:S\to R$ ist dann ebenfalls ein Ringhomomorphismus (Ringisomorphismus).
+
+%sub end
+
+\subsection{Rechnen mit Idealen}
+\label{sub:rechnen_ideale}
+Sei $R$ ein Ring mit Idealen $I,J\trianglelefteq R$. Dann sind auch die folgenden Mengen Ideale:
+\begin{enumerate}[(a)]
+	\item $I+J=\{i+j~|~i\in I,~j\in J\}$
+	\item $I\cap J$
+	\item $IJ=\{i_1j_1+i_2j_2+\dots+i_lj_l~|~l\ge 1,~i_1,\dots,i_l\in I,~j_1,\dots,j_l\in J \}$
+\end{enumerate}
+Es gilt
+\[
+IJ\subseteq I\cap J\subseteq I,J\subseteq I+J
+\]
+
+\bet{Beweis:}\\
+Klar: $I+J,~I\cap J$ und $IJ$ sind additive Gruppen.Sei $r\in R,~i\in I,~j\in J$. 
+Es folgt
+\[
+r(i+j)=\underbracket{ri+rj}_{\in I+J}
+\]
+\[
+(i+j)r=\underbracket{ir+jr}_{\in I+J}\Rightarrow I+J\trianglelefteq R
+\]
+\[
+i\in I\cap J \Rightarrow ri\in I\cap J\Rightarrow I\cap J\trianglelefteq R
+\]
+\[
+r(ij)=\underbracket{ri}_{\in I}\cdot j\in J \text{ genauso } r(ij)\in I
+\]
+also $IJ\trianglelefteq R$ und $IJ\subseteq I\cap J$.
+\hfill $\square$
+%sub end
+
+\subsection{Beispiele Ideale}
+\label{sub:bsp_ideale}
+\begin{enumerate}[(a)]
+	\item $K$ ein Körper. Ist $I\trianglelefteq K$ Ideal und $I\neq \{0\}$, so folgt $1\in I$, denn:
+	\[
+	i\in I\backslash\{0\}\Rightarrow i^{-1}i=1\in I \Rightarrow I=K.
+	\]
+	Also sind $\{0\}$ und $K$ die einzigen Ideale in $K$.
+	\item $V\neq \{0\}$ ein $K$-Vektorraum, $R=\End(V)$. Die einzigen Ideale in $R$ sind $\{0\},R$ ($\rightsquigarrow$ höhere Algebra?)
+	\item $R$ kommutativer Ring, $a\in R$. Setze $(a)=Ra=\{ra~|~r\in R\}$. Dann gilt $(a)\trianglelefteq R$ (später genauer).
+	\item $R=\Z$. Wir zeigen gleich: jedes Ideal $I\trianglelefteq \Z$ ist von der Form $I=m\Z=\{mk~|~k\in \Z\}$ für ein $m\in \N$. Als Quotient erhältman für $m\ge 1$
+	\[
+	\nicefrac{\Z}{m}=\nicefrac{\Z}{m\Z}=\{\overline{0},\dots,\overline{m-1},\overline{m}=\overline{0} \}
+	\]
+	$\overline{k}=k+m\Z$ (die Bedeutung des Querstrichs hängt also vom $m$ ab!)\\
+	$\overline{k}\cdot\overline{l}=\overline{kl}$ nach \hyperref[sub:homomor_ideale]{3.4}. Also ist für $m\ge 1$ $\nicefrac{\Z}{m}$ ein kommutativer Ring mit $m$ Elementen.
+\end{enumerate}
+
+
+
+
+
+
+
 
 
 
