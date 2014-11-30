@@ -1493,6 +1493,199 @@ Bündel der $(p,q)$-Tensoren, glatte Schnitte aus $\Gamma(\mathcal{T}^p_q M)$ he
 \end{itemize}
 % subsubsection 1106(end)
 
+\subsubsection{Operatoren für Tensoren}
+\label{ssub:1107}
+Eine kleine Zeitreise zurück in die lineare Algebra.
+\begin{enumerate}[(i)]
+\item \Index{Tensorprodukt}: $\mathcal{T}_q^p V \times \mathcal{T}_{q'}^{p'} V \to \mathcal{T}_{q+q'}^{p+p'	} V$ bilinear, definiert durch:
+\begin{align*}
+&\enbrace*{v_1\otimes \ldots \otimes v_p \otimes v^1 \otimes \ldots \otimes v^p, w_1\otimes \ldots \otimes \w_{p'} \otimes w^1 \otimes \ldots \otimes w^{p'}}\\
+\mapsto\ &v_1\otimes \ldots \otimes v_p \otimes w_1\otimes \ldots \otimes \w_{p'}\otimes v^1 \otimes \ldots \otimes v^p \otimes w^1 \otimes \ldots \otimes w^{p'}
+\end{align*}
+\item \Index{Kontraktion} ("\Index{Tensorverjüngung}"): $C_j^i: \mathcal{T}_q^p V \to \mathcal{T}_{q-1}^{p-1}$, definiert durch:
+\marginnote{$\hat{v}_i$ bzw. $\hat{v}^j$ heißt, das dies auslassen}
+\begin{align*}
+&C_j^i\enbrace*{v_1\otimes \ldots \otimes v_i \otimes \ldots \otimes v_p \otimes v^1\otimes \ldots \otimes v^i \otimes \ldots \otimes v^q}\\
+&= v^j(v_i) v_1\otimes \ldots \otimes \hat{v}_i \otimes \ldots \otimes v_p \otimes v^1\otimes \ldots \otimes \hat{v}^i \otimes \ldots \otimes v^q
+\end{align*}
+\minisec{Beispiel}
+Spurbildung eines Endomorphismus $A\in \End(V)$.\\
+Ist $e_1,\ldots, e_n$ Basis von $V$,so können wir $A$ also als $A = (A_j^i)\in \mathds{R}^{n\times n}$ betrachten und die Spur definieren $\Tr(A) = \sum A_i^i$. Da $\Tr(\Gamma A \Gamma^{-1}) = \Tr(A)$ für $\Gamma \in \GL(n,\mathds{R})$, ist die Definition der Spur unabhängig von der Basis.\\
+Alternativ:\\
+$\End(V) \cong V\otimes V^*$, dann $\Tr(A) = C_1^1(A)$. Zum Beispiel $v\otimes \alpha \cong A\cdot \w \mapsto \alpha(w)\cdot v$, $\Tr(A) = \alpha(v) \in \mathds{R}$.
+\item Ein Spezialfall von (ii), das \Index{innere Produkt} für kovariante Tensoren und Vektoren. Sei $v\in V,\ \alpha\in \mathcal{T}_q^0 V = \mathcal{T}_q V$.
+\[
+i_v \alpha := C_1^1\enbrace{\underbrace{v\otimes \alpha}_{\in \mathcal{T}_q^1 V}} \in \mathcal{T}_{q-1} V = \underbrace{V^*\otimes \ldots \otimes V^*}_{q-1 \text{- mal}} \cong L_{q-1}\enbrace{V\times \ldots \times V,\mathds{R}}
+\]
+Konkret $i_v \alpha\enbrace{v_1,\ldots,v_{q-1}} = \alpha\enbrace{v,v_1,\ldots,v_{q-1}}$.
+\end{enumerate}
+Dies induziert entsprechende Operationen auf Mannigfaltigkeiten indem man Tensoren durch Tensorfelder ersetzt und faserweise definiert. Sei zum Beispiel $S\in \Gamma(\mathcal{T}_q^p M), S'\in \Gamma(\mathcal{T}_{q'}^{p'} M)$, so ist $S\otimes S' \in \Gamma(\mathcal{T}_{q+q'}^{p+p'} M)$ definiert durch $(S\otimes S')_{x\in M} = S_x\otimes S'_x \in \mathcal{T}_{q+q'}^{p+p'} T_x M$. Es bleibt zu zeigen, das $S\otimes S'$ wirklich glatt ist. Dies ist klar, denn lokal gilt 
+\[S\vert_U = \sum S_{j_1,\ldots,j_q}^{i_1,\ldots,i_p} \partial_{i_1}\otimes \ldots \otimes \partial_{i_p} \otimes \mathd x^{i_1}\otimes \ldots \otimes \mathd x^{i_q}
+\]
+\[
+S'\vert_U = \sum (S')_{k_1,\ldots,k_{q'}}^{l_1,\ldots,l_{p'}} \partial_{l_1}\otimes \ldots \otimes \partial_{l_{p'}} \otimes \mathd x^{k_1}\otimes \ldots \otimes \mathd x^{k_{q'}}
+\]
+und somit folgt lokal für das Tensorprodukt $S\otimes S'$
+\[
+S\otimes S'\vert_U = \sum \underbrace{S_{j_1,\ldots,j_q}^{i_1,\ldots,i_p} \sum (S')_{k_1,\ldots,k_q}^{l_1,\ldots,l_p}}_{\text{glatt}} \partial_{l_1}\otimes \ldots \otimes \partial_{i_p'+l_{p'}} \otimes \mathd x^{k_1}\otimes \ldots \otimes \mathd x^{j_q + k_{q'}}
+\]
+oder sei $X\in \Gamma(TM) = \Gamma(\mathcal{T}_0^1 M)$, $\alpha\in \Gamma(\mathcal{T}_1^0 M) = \Gamma(T^* M)$ mit 
+\[
+i_x(\alpha) = C_1^1(X,\alpha) = \alpha(X) \in C^\infty (M),\quad a(X)\underset{(x)}{\in M} = \underset{\alpha_x}{\in T^*_x M}(X(x))\in \mathds{R}
+\]
+so ist $\tilde{\alpha}:\Gamma(TM) \to C^\infty(M)$, definiert durch $X\mapsto \alpha(X) = i_X(\alpha)$ $\mathds{R}$-linear und insbesondere auch $C^\infty (M)$-linear.
+\begin{figure}[H]
+\centering{
+\begin{minipage}{0.9\textwidth}
+$\Gamma (TM)$, allgemein $\Gamma(\mathcal{T}_q^p)$ sind
+\begin{enumerate}[(a)]
+\item $\mathds{R}$-Vektorräume (punktweise Addition + Skalarmultiplikation)
+\item $\underbrace{C^p (M)}_{\text{Ring}}$-Modul: $f\in C^\infty (M), S\in \Gamma(\mathcal{T}_q^p M)$, so gilt $\enbrace{fS}_x = f(x)\cdot S_x$
+\end{enumerate}
+\end{minipage}}
+\end{figure}
+Dann $\alpha(fX)(x) = \alpha_x(f(x)\cdot X(x)) \underset{\mathds{R}\text{-linear}}{=} f(x) \underbrace{\alpha_x(X(x))}_{\alpha(X)(x)} = \enbrace{f\cdot \alpha(X)}(x)$.\\
+Allgemein: Sei $S\in \Gamma(\mathcal{T}_q^p M) = \Gamma(\bigotimes^p TM \otimes \bigotimes^q T^* M)$, so ist 
+\[
+\tilde{S}:\Gamma(TM)\times \ldots \times \Gamma(TM)\times \Gamma(T^* M)\times \ldots \times \Gamma(T^* M)\to C^\infty (M)
+\]
+mit $\tilde{S}\in L_{q+p}\enbrace*{\bigtimes^q \Gamma(TM)\times \bigtimes^p \Gamma(T^* M),C^\infty (M)}$ definiert durch
+\[
+\tilde{S}\enbrace*{X_1,\ldots,X_q,\alpha^1,\ldots, \alpha^p}(x) = \underset{\in \mathds{R}}{S_x}\enbrace*{\alpha^1(x),\ldots, \alpha^p(x), X_1(x),\ldots, X_q(x)}
+\]
+\todo{Hier fehlt noch etwas}
+%subsubsection 1107(end)
+
+\subsubsection{Beispiel}
+\label{ssub:1108}
+Betrachte Lie-Klammer als Abbildung
+\[
+\Gamma(TM)\times \Gamma(TM)\times \Gamma(T^* M) \to C^\infty (M),\quad (X,Y,\alpha)\mapsto \alpha\enbrace{\benbrace{X,Y}} = i_{\benbrace{X,Y}} \alpha
+\]
+Wobei beachte $L_r\enbrace{V\times\ldots \times V,W}\simeq L_r\enbrace{V\times \ldots \times W^*,\mathds{R}}$, zum Beispiel 
+\[
+L(V,W) \simeq L(V\times W^*,\mathds{R}) = V\otimes W^*,\quad V\to W \simeq V\times W^* \to \mathds{R}
+\]
+für Mannigfaltigkeiten :
+\[
+\Gamma(TM)\times \Gamma(TM) \xrightarrow{[.,.] \mathds{R}-\text{linear}} \Gamma(TM) \cong \Gamma(TM)\times \Gamma(TM)\times \Gamma(T^* M) \to C^\infty (M)
+\]
+Dann ist $\benbrace{.,.}$ nicht $C^\infty (M)$-linear (aber natürlich $\mathds{R}$-linear). Zum Beispiel sei $f\in C^\infty (M)$
+\begin{align*}
+\enbrace{f\cdot X, Y,\alpha} \mapsto \alpha\enbrace{\underbrace{\benbrace{fX,Y}}_{
+fX(Y)-Y(fX) = fX(Y) - Y(f)X - fY(X)
+}} =& \alpha\enbrace{-\mathd f(Y)\cdot X + f(\benbrace{X,Y})}\\
+=& -\mathd f(Y)\alpha(X) + f\alpha\enbrace{\benbrace{X,Y}}\\
+\neq& f\alpha(\benbrace{X,Y})
+\end{align*}
+% subsubsection 1108(end)
+
+\subsubsection{Satz}
+\label{ssub:1109}
+Sei $\Lambda \in L_{p+q} \enbrace{\bigtimes^p \Gamma(T^* M)\times \bigtimes^q \Gamma(TM),C^\infty (M)}$. Dann ist $\Lambda$ $C^\infty$-linear $\Leftrightarrow \Lambda = \tilde{S}$ für $S\in \Gamma(\mathcal{T}_q^p M)$. Hier ist $\tilde{S}:\Gamma(T^* M)\times \ldots \times \Gamma(T^* M)\times \Gamma(TM)\times \ldots \times \Gamma(TM)\to C^\infty(M)$ definiert durch
+\[
+\tilde{S}\enbrace{\alpha^1,\ldots,\alpha^p,X_1,\ldots,X_q}(x) = S_x\enbrace{\alpha_x^1,\ldots,\alpha_x^p,X_1(x),\ldots,X_p(x)}
+\]
+\minisec{Beweis}
+\begin{itemize}
+\item "$\Leftarrow$":
+\item "$\Rightarrow$": Sei $\Lambda$ $C^\infty$-linear gegeben. Definiere $S_x\in \mathcal{T}_q^p T_x M\cong L_{p+q}\enbrace*{\bigtimes^p T^*_x M \times \bigtimes^q T_x M,\mathds{R}}$ durch
+\[
+S_x\enbrace{\alpha^1,\ldots,\alpha^p,v_1,\ldots,v_q} = \underbrace{\Lambda\enbrace{\hat{\alpha}^1,\ldots,\hat{\alpha}^p,\hat{v}_1,\ldots,\hat{v}_q}}_{C^\infty(M)}(x) \in \mathds{R}
+\]
+mit $\hat{\alpha}_j \in \Gamma(T^* M), \hat{v}_j \in \Gamma(TM)$ glatte Fortsetzung nach \ref{ssub:11010}
+\begin{enumerate}[(a)]
+\item Es ist zu zeigen, das $S$ ein wohldefinierter Schnitt ist,das heißt unabhängig von der Fortsetzung. Dazu oBdA $\Lambda:\Gamma(TM)\to C^\infty (M)$ (allgemeiner Fall läuft genauso). Dann gilt $\Lambda$ lokaler Operator. Stärker noch:
+\[
+X(x) = 0\Rightarrow \Lambda(X)(x) = 0
+\]
+,denn
+\[
+\Lambda(X)\underset{\in U\ \text{Karte}}{(x)} = \Lambda(X)\vert_U (x) \underset{\text{lok. Operator}}{=} \underbrace{\Lambda(X\vert_U)}_{\sum X^j \partial_j,\ X^j\in C^\infty (M)}(x) = \sum X^j(x) \Lambda(\partial_j)(x) = 0
+\]
+da $X(x) = \sum X^j(x)\partial_j(x) = 0 \Leftrightarrow X^j(x) = 0$. Sei nun $X,X' \in \Gamma(TM)$ mit $X(x) = X'(x) = v$. So gilt $S_x(v) = \Lambda(X)(x) = \Lambda(X')(x)$, da $\Lambda(X-X')(x) = 0 = \Lambda(X)(x) - \Lambda(X')(x)$.
+\item $S$ also definiert als Schnitt mit:  Ist $X\in \Gamma(TM)$, dann $S_x(X(x)) = \Lambda(X)(x)$. Also gilt lokal: $S\vert_U = \sum_j \Lambda(\partial_j)\mathd x^j$ glatt, da $\Lambda$ glatt.
+\end{enumerate}
+\end{itemize}
+% subsubsection 1109(end)
+
+\subsubsection{Lemma}
+\label{ssub:11010}
+Sei $E\to B$ ein Vektorbündel, $x\in E_x$. Dann existiert ein glatter Schnitt $s_v\in \Gamma(E)$ mit $s_v(x) = v$. Anders gesagt: Jeder Schnitt $s:\set{x}\to E_x$ über einen Punkt kann glatt auf ganz $M$ fortgesetzt werden.
+\minisec{Beweis}
+Übung
+% subsubsection 11010(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:11011}
+In diesem Sinne sind $C^\infty (M)$-lineare Abbildung nicht nur lokal (wie zum Beispiel $\benbrace{.,.}$), sondern punktweise bestimmte Objekt, das heißt zum Beispiel für $\Lambda:\Gamma(TM)\to C\infty(M)$ $C^\infty(M)$-linear hängt $\Lambda(X)(x)$ nur von $X(x)$ ab.
+% subsubsection 11011(end)
+
+\subsubsection{Definition}
+\label{ssub:11012}
+Sei $f:M\to N$ glatte Abbildung, $S\in \Gamma(\mathcal{T}_q M)$. Der \Index{Pullback} von $S$ unter $f$ ist der Tensor $S^* \in \Gamma(\mathcal{T}_q M)$ definiert durch
+\[
+\underset{\in L_q \enbrace*{\bigtimes^q T_x M,\mathds{R}}}{\enbrace*{f^* S}_x} \enbrace{v_1,\ldots,v_q} := \underset{\in L_q \enbrace*{\bigtimes^q T_{f(x)} N,\mathds{R}}}{S_{f(x)}} \enbrace{\mathd_x f(v_1),\ldots,\underbrace{\mathd_x f(v_p)}_{T_x M \to T_{f(x)} N}}
+\]
+% subsubsection 11012(end)
+
+\subsubsection[Satz:Funktionelle Eigenschaften]{Satz}
+\label{ssub:11013}
+\begin{enumerate}[(i)]
+\item Ist $f:M\to N,g:M\to N$ glatt, so ist $(g\circ f)^* = f^*\circ g^*$. ($f^*:\Gamma(\mathcal{T}_q N)\to \Gamma(\mathcal{T}_q M),g^*:\Gamma(\mathcal{T}_q P)\to \Gamma(\mathcal{T}_q N)$)
+\item Ist $S\in \Gamma(\mathcal{T}_q N), T\Gamma(\mathcal{T}_q N)$, so gilt
+\[
+f^*(\underbrace{S\otimes T}_{\in \mathcal{T}_{q+q'} N}) = f^* S \otimes f^* T
+\]
+\end{enumerate}
+% subsubsection 11013(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:11014}
+\begin{enumerate}[(i)]
+\item Ist $f:M\to N$ ein Diffeomorphismus, so kann man den \Index{Pullback} auf kontravarianten Tensoren via dem \Index{Push-Forward} definieren, nämlich ist zum Beipsiel $X\in \Gamma(TN)$, so ist: $f^*X:= (f^{-1})_* X \in \Gamma(TM)$. Also $f^*:\Gamma(\mathcal{T}_q^p N)\to \Gamma(\mathcal{T}_q^p M)$.
+\item $f^*$ kommutiert mit $C_j^i$-Kontraktion
+\end{enumerate}
+% subsubsection 11014(end)
+
+Setzt damit nun $\mathcal{L}_X$ "Lie-Ableitung" (definiert für $f\in C^\infty(M), Y\in \Gamma(TM)$) auf $\Gamma(\mathcal{T}_q^p M)$ fort.
+
+\subsubsection{Definition}
+\label{ssub:11015}
+Sei $X\in \Gamma(TM)$. Dann ist
+\[
+\mathcal{L}_X:\Gamma(\mathcal{T}_q^p M) \to \Gamma(\mathcal{T}_q^p M)
+\]
+definiert durch
+\[
+\mathcal{L}_X S:= \frac{\mathd}{\mathd t} \underbrace{\Psi^*_{X,t}}_{\text{Fluss von } X} S\vert_{t=0}
+\]
+(Beachte $\Psi_{X,t} S$ Kurve in $\Gamma(\mathcal{T}_q^p) M$)
+% subsubsection 11015(end)
+
+\subsubsection[Satz:Eigenschaften von $\mathcal{L}_X$]{Satz}
+\label{ssub:11016}
+\begin{enumerate}[(i)]
+\item $\mathcal{L}_X f = \mathd f(X) = \underset{f\text{ in Richtung }X\text{ ableiten}}{X. f} \in C^\infty(M),\quad f\in C^\infty (M)$
+\item $\mathcal{L}_X Y = \benbrace{X,Y},\quad Y\in \Gamma(TM)$
+\item $\mathcal{L}_X (S\otimes T) = \mathcal{L}_X S \otimes T + S\otimes \mathcal{L}_X T$
+\item $\mathcal{L}_X(C_j^i(S)) = C_j^i(\mathcal{L}_X S)$
+\item $\underbrace{\enbrace{\mathcal{L}_X \alpha}}_{\in \Gamma(T^* M)}(Y) = \underbrace{\mathcal{L}_X(\alpha(Y))}_{\in C^\infty (M)} - \underbrace{\alpha(\mathcal{L}_X Y)}_{\in C^\infty (M)} = X.(\alpha(Y)) - \alpha\enbrace{\benbrace{X,Y}}$
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+\item $\enbrace*{\mathcal{L}_X f}(x) = \frac{\mathd}{\mathd t}\enbrace*{\Psi_{X,t}^* f}(x)\vert_{t = 0} = \frac{\mathd}{\mathd t} f\enbrace*{\Psi_{X,t}(x)}\vert_{t = 0} = \mathd f\enbrace*{\frac{\mathd}{\mathd t} \Psi_{X,t}(x)\vert_{t = 0}} = \mathd f\enbrace[\big]{X\enbrace*{\Psi_{X,0}(x)}} = \mathd f(X)(x)$
+\item Theorem \ref{ssub:195}
+\item Leite die Identifikation $\Psi_{X,t}^*(S\otimes T) = \Psi_{X,t}^* S \otimes \Psi_{X,t}^* T$ und $C_j^i(\Psi_{X,t}^* S) = \Psi_{X,t}^* C_j^i(S)$ ab.
+\item Siehe (iii)
+\item Sei $\alpha\in \Gamma(T^* M)$, Dann ist $C_1^1(Y\otimes \alpha) = \alpha(Y) \in C^\infty (M)$.
+\begin{align*}
+X.(\alpha(Y)) &= \mathcal{L}_X (\alpha(Y)) =\mathcal{L}_X \enbrace*{C_1^1(Y\otimes \alpha)} = C_1^1 \mathcal{L}_X \enbrace{Y\otimes \alpha}\\
+&= C_1^1 \enbrace{\mathcal{L}_X Y \otimes \alpha} + C_1^1\enbrace{Y\otimes \mathcal{L}_X \alpha} = \alpha(\mathcal{L}_X Y) + (\mathcal{L}_X \alpha)(Y)
+\end{align*}
+\end{enumerate}
+% subsubsection 11016(end)
+
 % subsection 110(end)
 
 % section 1 (end)
