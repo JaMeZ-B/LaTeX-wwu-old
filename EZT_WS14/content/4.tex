@@ -115,4 +115,116 @@ $i = i(a) = i_g(a)$ heißt der Index von $a$ bzgl. $g$.
 	\[ \ord(\alpha^j) = \frac{\ord(\alpha)}{(\ord(\alpha),j)} \]
 	
 \minisec{Bemerkung 2}
-	Eine zyklische Gruppe der Ordnung $n$ hat genau $\varphi(n)$ Elemente der Ordnung $n$, also $\varphi(n)$ Erzeuger.
+	Eine zyklische Gruppe der Ordnung $n$ hat genau $\varphi(n)$ Elemente der Ordnung $n$, also $\varphi(n)$ Erzeuger. \\
+	
+	
+Wir werden jetzt die Struktur der primen Restklassengruppe modulo $p^\nu$ \marginnote{25.11. \\ \ [13]}
+\[ G = G_\nu = (\ZZ/p^\nu\ZZ)^\times, p \text{ Primzahl}, \nu \in \NN, \nu > 1 \]
+untersuchen. Es ist
+\[ \ord(G) = \varphi(p^\nu) = \# \{0 \leq a < p^\nu : p \not | \ a \} = p^\nu - \# \{0 \leq a < p^\nu : p | a \} = p^\nu - p^{\nu-1} = (p-1) p^{\nu-1} \]
+Damit gilt für jedes $n \in \NN$:
+\[ \varphi(n) = \varphi \enbrace*{ \prod_{p|n} p^{w_p(n)}} = \prod_{p | n} \varphi \enbrace*{p^{w_p(n)}} = \prod_{p | n} \enbrace*{p^{w_p(n)}-p^{w_p(n)-1}} = \prod_{p | n} p^{w_p(n)} \enbrace{1- \frac{1}{p}} = n \prod_{p | n} \enbrace*{1- \frac{1}{p}}\]
+
+\begin{falko} \label{F4.3}
+	Für jedes $n \in \NN$ gilt:
+	\[ \varphi(n) = \prod_{p|n} \enbrace*{p^{w_p(n)} - p^{w_p(n)-1}} = n \prod_{p | n} \enbrace*{1 - \frac{1}{p}} \]
+\end{falko}
+
+\begin{defn}[1-Einheit und 1-Einheitengruppe]
+	Sei $G_\nu = (\ZZ/p^\nu\ZZ)^\times$. Der Kern $G_\nu^{(1)}$ des Homomorphismus \index{1-Einheit}
+	\begin{equation}
+	\begin{aligned}
+		(\ZZ/p^\nu\ZZ)^\times &\longrightarrow (\ZZ/p\ZZ)^\times \\
+		a \modu p^\nu &\longmapsto a \modu p
+	\end{aligned}
+	\end{equation}
+	heißt die \bet{Gruppe der 1-Einheiten} von $(\ZZ/p^\nu \ZZ)^\times$. Sie besteht aus den Elementen $a \modu p^\nu$ von $(\ZZ/p^\nu\ZZ)^\times$ mit $a \kon 1 \modu p$. Es ist $\ord(G_\nu^{(1)}) = p^{\nu-1}$.
+\end{defn}
+
+\begin{lemma} \label{lemma_4.2}
+	Sei $p$ Primzahl, $j \in \NN$, $a \in \ZZ$. Es gelte
+	\begin{equation}
+		a \kon 1 \modu p^j, \text{ aber } a \not\kon 1 \modu p^{j+1} \label{eq_lemma_4.2_1}
+	\end{equation}
+	Dann folgt -- außer für $p=2$ und $j = 1$ --
+	\begin{equation}
+		a^p \kon 1 \modu p^{j+1}, \text{ aber } a^p \not\kon 1 \modu p^{j+2} \label{eq_lemma_4.2_2}
+	\end{equation}
+\end{lemma}
+
+\begin{falko} \label{F4.4}
+	Sei $\nu > 1$. \begin{enumerate}[(i)]
+		\item Im Fall $p \neq 2$ ist für jedes $a$ der Gestalt $a = 1+cp$ mit $p \not | \ c$ die Restklasse $a \modu p^\nu$ ein Element der Ordnung $p^{\nu - 1}$ in der 1-Einheitengruppe von $(\ZZ/p^\nu\ZZ)^\times$. Insbesondere gilt dies für $a = 1+p$. \\
+		Die 1-Einheitengruppe von $(\ZZ/p^\nu\ZZ)^\times$ ist also für $p \neq 2$ zyklisch mit kanonischem Erzeuger $1+p \modu p^\nu$.
+		\item Im Falle $p=2$ gilt: Für $\nu \geq 3$ ist $5 \modu 2^\nu$ ein Element der Ordnung $2^{\nu-2}$ in $(\ZZ/2^\nu\ZZ)^\times$. \\
+		Für $\nu=2$: $(\ZZ/4\ZZ)^\times$ ist zyklisch mit $-1 \modu 4$ als Erzeuger.
+	\end{enumerate}
+\end{falko}
+
+\begin{satz} \label{satz_4.2}
+	Sei $p \neq 2$. Auch für $\nu \geq 2$ ist dann $(\ZZ/p^\nu\ZZ)^\times$ zyklisch. Mit anderen Worten: $(\ZZ/p^\nu\ZZ)^\times$ besitzt eine Primitivwurzel. Es existiert also ein $g \in \ZZ$, sodass es zu jedem $a \in \ZZ$ mit $(a,p) = 1$ genau ein $i \in \ZZ$ gibt mit
+	\[ a \kon g^i \modu p^\nu \quad \text{und} \quad 0 \leq i < \varphi(p^\nu) \]
+	Es gibt genau $\varphi(\varphi(p^\nu)) = \varphi((p-1)p^{\nu-1}) = \varphi(p-1) \varphi(p^{\nu-1})$ Primitivwurzeln von $(\ZZ/p^\nu)^\times$.
+\end{satz}
+
+\minisec{Zusatz}
+	Ist schon eine Primitivwurzel $g_0 \modu p$ bekannt, so findet man eine Primitivwurzel $\modu p^\nu$ wie folgt: Ist $g_0^{p-1} \not\kon 1 \modu p^2$, so ist $g = g_0$ eine Primitivwurzel $\modu p^\nu$. Ist $g_0^{p-1} \kon 1 \modu p^2$, so ist $g = g_0 + p$ eine Primitivwurzel $\modu p^\nu$.
+	
+\minisec{Bemerkung}
+	Folgende Aussagen sind für $p \neq 2$ und $g \in \ZZ$ äquivalent: \begin{enumerate}[(i)]
+		\item $g$ ist Primitivwurzel $\modu p$ und $g^{p-1} \not \kon 1 \modu p^2$.
+		\item $g$ ist Primitivwurzel $\modu p^n$ für alle $n \in \NN$.
+		\item $g$ ist Primitivwurzel $\modu p^2$.
+	\end{enumerate}
+	
+\begin{satz} \label{satz_4.3}
+	Sei $\nu \in \NN, \nu \geq 3$. Zu jeder ungeraden Zahl $a \in \ZZ$ gibt es eindeutig bestimmte $k \in \{0,1\}$ und $j \in \{0,1,\dots,2^{\nu-2}-1\}$ mit
+	\[ a \kon (-1)^k 5^j \modu 2^\nu \]
+	Mit anderen Worten: Die Abbildung
+	\begin{equation}
+	\begin{aligned}
+		\ZZ/2\ZZ \times \ZZ/2^{\nu-2}\ZZ &\longrightarrow (\ZZ/2^\nu\ZZ)^\times \\
+		(k \modu 2, j \modu 2^{\nu-2}) &\longmapsto (-1 \modu 2^\nu)^k \cdot (5 \modu 2^\nu)^j \label{eq_satz_4.3}
+	\end{aligned}
+	\end{equation}
+	ist ein Isomorphismus von Gruppen. Es ist also
+	\[ (\ZZ/2^\nu\ZZ)^\times = \sprod{-1 \modu 2^\nu} \times \sprod{5 \modu 2^\nu} \simeq \ZZ/2\ZZ \times \ZZ/2^{\nu-2}\ZZ \]
+	Insbesondere ist $(\ZZ/2^\nu\ZZ)^\times$ nicht zyklisch.
+\end{satz}
+
+\setcounter{countsatz}{2}
+\begin{satz} \label{satz_4.3a}
+	Sei $p$ Primzahl mit $p \neq 2$, $\nu \in \NN$, $\nu \geq 2$. Dann existiert eine Primitivwurzel $g \modu p$, sodass die Abbildung
+	\begin{equation}
+	\begin{aligned}
+		\ZZ/(p-1)\ZZ \times \ZZ/p^{\nu-1}\ZZ &\longrightarrow (\ZZ/p^\nu\ZZ)^\times \\
+		(i \modu (p-1), j \modu p^{\nu-1}) &\longmapsto g^i(1+p)^j \modu p^\nu \label{eq_satz_4.3a}
+	\end{aligned}
+	\end{equation}
+	wohldefiniert und ein Isomorphismus von Gruppen ist. Insbesondere ist $(\ZZ/p^\nu\ZZ)^\times$ zyklisch.
+\end{satz}
+
+\minisec{Bemerkung}
+	Das direkte Produkt $G_1 \times G_2 \times \dots \times G_r$ \marginnote{28.11. \\ \ [14]} zyklischer Gruppen $G_i$ mit paarweise teilerfremden Ordnungen $m_i$ ist zyklisch von der Ordnung $m_1m_2\cdots m_r$. 
+	
+\begin{falko} \label{satz_4.5}
+	Seien $G_1,G_2,\dots,G_r$ endliche abelsche Gruppen der Ordnungen $m_1,m_2,\dots,m_r$. Wenn $G:= G_1 \times \dots \times G_r$ zyklisch ist, so sind die $m_1,\dots,m_r$ paarweise teilerfremd und die $G_i$ sind zyklisch.
+\end{falko}
+
+\begin{falko} \label{satz_4.6}
+	Sei $G$ eine zyklische Gruppe der Ordnung $n$. Dann ist jede Untergruppe $H$ von $G$ zyklisch mit $\ord(H) | n$. Die Abbildung $H \mapsto \ord(H)$ ist eine Bijektion zwischen der Menge aller Untergruppen $H$ von $G$ und der Menge aller natürlichen Teiler $d$ von $n$, und zwar ist $H_d := \{x \in G : x^d = 1\}$ \underline{die} Untergruppe der Ordnung $d$ von $G$. Es ist
+	\[ H_{\frac{n}{d}} = \{x \in G : x^{\frac{n}{d}}=1 \} \overset{!}{=} \{y^d ; y \in G\} \]
+	die Untergruppe der $d$-ten Potenzen in $G$.
+\end{falko}
+
+\minisec{Korollar}
+	Für beliebige $n \in \NN$ gilt:
+	\[ \sum_{d | n} \varphi(d) = n \]
+	
+\minisec{Bemerkung}
+	Sei $G$ eine beliebige endliche Gruppe der Ordnung $n$. Für jedes $d | n, d \in \NN$ habe $G$ höchstens $d$ Elemente $x$ mit $x^d = 1$. Dann ist $G$ zyklisch.
+	
+\begin{satz} \label{satz_4.4}
+	Sei $m \in \NN, m > 1$. Genau dann besitzt $(\ZZ/m\ZZ)^\times$ eine Primitivwurzel, wenn $m$ eine der Zahlen folgender Gestalt ist (mit einer Primzahl $p \neq 2$ und $\nu \geq 1$):
+	\[ 2, \qquad 4, \qquad p^\nu, \qquad 2p^\nu \]
+\end{satz}
