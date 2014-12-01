@@ -2064,6 +2064,152 @@ Induktion nach $n$:
 \end{description}
 % subsection 97 (end)
 % section 9 (end)
+\newpage
+
+\section{Anwendungen} % (fold)
+\label{sec:10}
+
+\subsection[Satz: Invarianz der Dimension]{Satz (Invarianz der Dimension)} % (fold)
+\label{sub:101}
+Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$.
+\minisec{Beweis}
+Sei $h : \mathds{R}^n \to \mathds{R}^m$ ein Homöomorphismus. Sei $x_0 \in \mathds{R}^n$ beliebig. Dann erhalten wir auch einen Homöomorphismus 
+$k := h\big|_{\mathds{R}^n\setminus \set{x_0}} : \mathds{R}^n \setminus \set{x_0} \to \mathds{R}^m  \setminus \set{h(x_0)}$. Nun ist $\mathds{R}^n \setminus \set{x_0}$
+homotopieäquivalent zu $S^{n-1}$ und $\mathds{R}^{m}\setminus\set{h(x_0)}$ ist homotopieäquivalent zu $S^{m-1}$. Da $k$ ein Homöomorphismus ist, ist $k_*$ ein Isomorphismus.
+Wir erhalten
+\begin{align*}
+	H_*(S^{n-1}) \cong H_* \enbrace[\big]{\mathds{R}^n \setminus \set{x_0}}  \cong H_* \enbrace[\big]{\mathds{R}^m \setminus \set{h(x_0)}} \cong H_*(S^{m-1})
+\end{align*}
+Es ist aber $H_*(S^{n-1}) \cong H_*(S^{m-1})$ genau dann, wenn $n=m$. \bewende
+% subsection 101 (end)
+
+\subsection{Fixpunktsatz von Brouwer} % (fold)
+\label{sub:102}
+Jede stetige Abbildung $f : D^n \to D^n$ besitzt einen Fixpunkt.
+\minisec{Beweis}
+Durch Widerspruch: Angenommen es gibt $f : D^n \to D^n$ ohne Fixpunkt. Aus dem letzten Semester wissen wir, dass es dann eine stetige Abbildung $F : D^n \to S^{n-1}$ gibt 
+mit $F|_{S^{n-1}} = \id_{S^{n-1}}$. In Homologie erhalten wir folgendes kommutatives Diagramm \marginnote{\oE $n\ge 2$}
+\[
+	\begin{tikzcd}
+		0 = H_{n-1}(D^n) \rar["(F)_*"] & H_{n-1}(S^{n-1}) \cong \mathds{Z} \\
+		H_{n-1}(S^{n-1}) \uar["i_*"] \urar["(\id_{S^{n-1}})_* = \id_{H_{n-1}(S^{n-1})}"']
+	\end{tikzcd}
+\]
+wobei $i : S^{n-1} \hookrightarrow D^n$ die Inklusion ist. Da $F \circ i = \id_{S^{n-1}}$ ist, gilt $F_* \circ i_* = \id_{H_{n-1}(S^{n-1})}$. \light \bewende
+% subsection 102 (end)
+\section*{Abbildungsgrad}
+
+\subsection[Definition: Abbildungsgrad]{Definition} % (fold)
+\label{sub:103}
+Sei $f : S^n \to S^n$ eine stetige Abbildung. Da $\tilde{H}_n(S^n) \cong Z$ ist, gibt es eine ganze Zahl $d(f)$, so dass $f_*(x)= d(f) \cdot x$ für alle 
+$x \in \tilde{H}_n(S^n)$. Diese Zahl heißt der \Index{Abbildungsgrad} von $f$. 
+% subsection 103 (end)
+
+\subsection[Proposition: Einfache Eigenschaften des Abbildungsgrades]{Proposition} % (fold)
+\label{sub:104}
+\begin{enumerate}[a)]
+	\item $d(\id_{S^n}) = 1$.
+	\item Sind $f$ und $g$ homotop, so gilt $d(f)=d(g)$.
+	\item $d(f \circ g) = d(f) \cdot d(g)$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item $(\id_{S^n})_*(x)= \id(x)= x$.
+	\item Sind $f$ und $g$ homotop, so gilt $f_*=g_*$.
+	\item Für alle $x \in \tilde{H}_n(S^n)$ gilt: $d(f \circ g) \cdot x = (f \circ g)_* (x) = f_* \circ g_*(x)= d(f) \cdot d(g) \cdot x$. Da 
+	$\tilde{H}_n(S^n) \cong \mathds{Z}$ folgt $d(f \circ g) = d(f) \cdot d(g)$. \bewende
+\end{enumerate}
+% subsection 104 (end)
+
+\subsection[Beispiel: Abbildungsgrad der Spiegelung]{Beispiel} % (fold)
+\label{sub:105}
+Sei $i \in \set{0, \ldots ,n}$ und $R_i : S^n \to S^n$ die Spiegelung $R_i(x_0, \ldots , x_n) = (x_0, \ldots , - x_i, \ldots , x_n)$. Dann ist $d(R_i) = -1$.
+\minisec{Beweis}
+Sei $f : S^n \to S^n$ der Homöomorphismus, der die $0$-te und die $i$-te Koordinate vertauscht: $f(x_0, \ldots , x_n) = (x_i, \ldots , x_0, \ldots , x_m)$. Dann ist
+$R_i = f \circ R_0 \circ f$. Da $f$ ein Homöomorphismus ist, ist $f_*$ ein Isomorphismus und daher $d(f)$ invertierbar, also $d(f) \in \set{\pm 1}$ mit 
+$d(R_i) = d(f) \cdot d(R_0) \cdot d(f)$ folgt $d(R_0)=d(R_i)$. Es genügt also $R_0$ zu betrachten.
+
+Wir zeigen $d(R_0)= -1$ durch Induktion nach $n$.
+\begin{description}
+	\item[Induktionsanfang:] Sei $i_- : \set{\mathrm{pt}} \to S^0$ mit $\im i_- = \set{-1}$ und $i_+ : \set{\mathrm{pt}} \to S^0 $ mit $\im i_+ = \set{+1}$. Dann ist
+	\begin{align*}
+		H_0(S^0) &= \set[(i_-)_*(a)+ (i_+)_*(b)]{a,b \in H_0(\set{\mathrm{pt}})} \qquad \text{und}\\
+		\tilde{H}_=(S^0) &= \set[(i_-)_*(a)- (i_+)_*(a)]{a \in H_0(\set{\mathrm{pt}})}
+	\end{align*}
+	Nun ist
+	\begin{align*}
+		(R_0)_* \enbrace*{(i_-)_*(a)- (i_+)_*(a)} = (R_0)_* (i_-)_* (a) - (R_0)_* (i_+)_* (a) &= (R_0 \circ i_-)_*(a) - (R_0 \circ i_+)_*(a)\\ 
+		&= (i_+)_*(a) - (i_-)_*(a) \\ 
+		&= - \enbrace[\big]{(i_-)_*(a) + (i_+)_*(a)} 
+	\end{align*}
+	Also folgt $d(R_0)=-1$.
+	\item[Induktionsschritt:] Sei 
+	\begin{align*}
+		D_+^n &= \set[(x_0, \ldots , x_n) \in S^n]{x_n \not= -1} \\
+		D_-^n &= \set[(x_0, \ldots , x_m) \in S^n]{x_n \not= +1}  
+	\end{align*}
+	Wir wissen schon, dass die Randabbildung aus der dazugehörigen Mayer-Vietoris-Folge $\tilde{H}_n(S^1) \xrightarrow{\partial_n} \tilde{H}_{n-1}(D^n_+ \cap D_-^n)$ ein 
+	Isomorphismus ist. Da die Randabbildung natürlich ist, erhalten wir ein kommutatives Diagramm\todo{fertig stellen}
+	\[
+		\begin{tikzcd}[row sep=3em, column sep=4em]
+			\tilde{H}_n(S^n) \rar["\partial_n", "\cong"'] \dar["(R_0)_*"]
+			& \tilde{H}_{n}(D^n_- \cap D^n_+) \dar["\enbrace*{R_0\big|_{(D^n_- \cap D^n_+)}}_*"]  
+			& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*", "\cong"'] \\
+			\tilde{H}_n(S^n) \rar["\partial_n", "\cong"']
+			& \tilde{H}_{n+1}(D^n_- \cap D^n_+) 
+			& H_{n-1}(S^{n-1})
+		\end{tikzcd}
+	\]
+	dabei ist $i: S^{n-1} \to D^n_- \cap D_+^n$ die Homotopieäquivalenz $i(x_0, \ldots , x_{n-1}) = (x_0, \ldots , x_{n-1},0)$.
+	Nach Induktionsannahme ist $\enbrace*{R_0\big|_{S^{n-1}}}_*(y)= -y$ für alle $y \in \tilde{H}_{n-1}(S^{n-1})$. Für $x \in \tilde{H}_n(S^n)$ folgt
+	\begin{align*}
+		(R_0)_+(x) &= (\partial_n) ^{-1} \circ  (i_*) \circ \enbrace*{R_0\big|_{S^{n-1}}}_* \enbrace[\big]{(i_* ^{-1} \circ \partial_n) \cdot (x)} \\
+		&= (\partial_n) ^{-1} \circ (i_*) \enbrace*{- i_*^{-1} \enbrace*{\partial_n (x)} } \\
+		&= - \partial_n ^{-1} \circ (i_*) \circ (i_*)^{-1} \circ \partial_n(x)= -x 
+	\end{align*}
+	Also $d(R_0)=-1$. \bewende
+\end{description}
+% subsection 105 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:106}
+Der Grad der Punktspiegelung $R : S^n \to S^n$ $x  \mapsto -x$ ist $(-1)^{n+1}$.
+\minisec{Beweis}
+$d(R)= d(R_0 \circ R_1 \circ \ldots \circ R_n) = d(R_0) \cdot \ldots \cdot d(R_n)= (-1)^{n+1}$. \bewende
+% subsection 106 (end)
+
+\subsection[Erinnerung: Vektorfelder]{Erinnerung} % (fold)
+\label{sub:107}
+Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Ein \Index{Vektorfeld} auf $M$ ist eine stetige Abbildung $v : M \to \Tmap M$ mit $v(x) \in \Tmap_X M$ für alle $x \in M$.
+Für $M=S^n$ entspricht ein Vektorfeld genau einer stetigen Abbildung $v : S^n \to \mathds{R}^{n+1}$ mit $\sprod*{v(x)}{x} =0$ für alle $x \in S^n$.
+\missingfigure{$S^2$ mit Vektorfeld} 
+% subsection 107 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:108}
+Es gibt genau dann ein Vektorfeld ohne Nullstellen auf $S^n$, wenn $n$ ungerade ist.
+\minisec{Beweis}
+Ist $n$ ungerade, so ist $S^{n} \subseteq \mathds{R}^{n+1} = \mathds{C}^{k}$ mit $k=\frac{n+1}{2}$. Punkte in $S^n$ sind dann genau $k$-Tupel $z=(z_1, \ldots , z_k)$ mit
+$\abs*{z_1}^2 + \ldots + \abs*{z_k}^2 = 1$. Ein Vektorfeld entspricht dann einer stetigen Abbildung $v : S^n \to \mathds{C}^k$, so dass für das kanonische komplexe 
+Skalarprodukt $\sprod*{\cdot }{\cdot}_\mathds{C} $ auf $\mathds{C}^k$ gilt
+\[
+	\sprod*{z}{v(z)}_\mathds{C} \in i \mathds{R} 
+\]
+Definiere nun $v : S^n \to \mathds{C}^k$ durch $v(z) := i z$. Dann $i z\not= 0$ für alle $z \in S^n$ und $\sprod*{z}{i z}= -i \norm[2]{z} \in i \mathds{R}$. Sei umgekehrt
+$v : S^n \to \mathds{R}^{n+1}$ ein Vektorfeld ohne Nullstellen. Zu zeigen: $d( \text{Punktspiegelung }R)=1$ (Da $d(R)=(-1)^{n+1}$ folgt dann die Behauptung).
+Zeige dazu: $R$ ist homotop zu $\id$. Seien $H, K : S^n \times [0,1] \to S^n$ definiert durch 
+\[
+	H(x,t) := \frac{t x + (1-t)v(x)}{\norm{tx + (1-t)v(x)} } \qquad \text{bzw.}\qquad K(x,t) :=  \frac{-t x + (1-t)v(x)}{\norm{-tx + (1-t)v(x)}}
+\]
+Da $\sprod*{v(x)}{x}=0$ folgt für alle $x$ und $v(x)\not=0$ ist, folgt 
+\begin{align*}
+	\norm{t x + (1-t)v(x)}^2 &= \norm{tx}^2 + \norm{(1-t)v(x)}^2 \not=0   \\
+	\norm{-t x + (1-t)v(x)}^2 &= \norm{-tx}^2 + \norm{(1-t)v(x)}^2 \not=0
+\end{align*}
+Also sind $H$ und $K$ wohldefiniert. $H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $ und $K$ ist Homotopie zwischen $-\id$ und 
+$x \mapsto \frac{v(x)}{\norm{v(x)} } $. \bewende
+% subsection 108 (end)
+% section 10 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
