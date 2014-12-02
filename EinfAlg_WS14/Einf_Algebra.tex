@@ -1717,7 +1717,7 @@ ax=ay\Rightarrow a(x-y)=0 \Rightarrow x-y=0\Rightarrow x=y
 %sub end
 
 \subsection{Definition Integritätsbereich}
-\label{sub:def_integritätsbereich}
+\label{sub:def_integritaetsbereich}
 Ein kommutativer Ring $R\neq \{0\}$ heißt \Index{Integritätsbereich} (engl.: integral domain oder domain), wenn 0 der einzige Nullteiler in $R$ ist.
 
 \subsubsection*{Beispiele}
@@ -1727,9 +1727,69 @@ Ein kommutativer Ring $R\neq \{0\}$ heißt \Index{Integritätsbereich} (engl.: i
 	\item $\nicefrac{\Z}{6}$ ist \uline{kein} Integritätsbereich.
 \end{enumerate}
 
+\subsubsection*{Lemma}
+Jeder endliche Integritätsbereich ist ein Körper.\\
 
+\bet{Beweis:}\\
+Sei $R$ ein endlicher Integritätsbereich.
+Also gilt $R\neq \{0\}$.
+Sei $a\in R\backslash \{0\}$, zeige, dass $a$ eine Einheit ist, d.h. es gibt $b\in R$ mit $ab=1$.\\
+Betrachte die Abbildung $\lambda_a:R\to R,~x\mapsto ax$.
+Diese Abbildung $\lambda_a$ ist injektiv, denn 
+\[
+\lambda_a(x)=\lambda_a(y)\Rightarrow ax=ay\stackrel{a\neq 0}{\Rightarrow} x=y
+\]
+Weil $R$ endlich ist, ist $\lambda_a$ auch surjektiv, insbesondere gibt es $b\in R$ mit
+\[
+\lambda_a(b)=ab=1
+\]
+\hfill $\square$
+\subsubsection*{Bemerkung}
+$\Z$ ist ein (unendlicher) Integritätsbereich, aber \uline{kein} Körper.
+%sub end
 
+\subsection{Der Quotientenkörper eines Integritätsbereiches}
+\label{sub:quotientenkoeper}
+\uline{Ziel:} $R$ Integritätsbereich, konstruiere aus $R$ ein Körper $Q$, der $R$ als Teilring enthält.
+\uline{Idee:} Kopiere die Konstruktion von $\Q$ aus $\Z$.\\
 
+Sei $R$ ein Integritätsbereich, z.B. $R=\Z$.
+Setze $M=\{(x,y)~|~x,y\in R,~y\neq 0\}$.
+Definiere Verknüpfungen $+$ und $\cdot$ auf $M$ durch
+\[
+(x,y)+(u,v):=(xv+yu,\underbracket{yv}_{\neq 0})
+\]
+\[
+(x,y)\cdot (u,v):=(xu,\underbracket{yv}_{\neq 0})
+\]
+Es gilt $(x,y)+(0,1)=(x,y)=(0,1)+(x,y)$, ebenso $(x,y)\cdot (1,1)=(x,y)=(1,1)\cdot (x,y)$.\\
+Beide Verknüpfungen sind assoziativ (nachzurechnen...), aber es fehlen Kürzungs- und Erweiterungsregeln für Brüche.
+Inverse funktionieren so nicht.\\
+Wir definieren eine Relation $\sim$ auf $M$ durch:
+\[
+(x,y)\sim(x',y')\stackrel{\text{DEF}}{\Leftrightarrow}\qquad \enbrace{\frac{x}{y}=\frac{x'}{y'}\Leftrightarrow xy'=x'y}
+\] 
+\uline{Behauptung:} Das ist $\sim$ eine Äquivalenzrelation auf $M$.\\
+\uline{Denn:} 
+\[
+(x,y)\sim(x,y)~ (\text{\checkmark})
+\]
+\[
+(x,y)\sim(x',y')\Rightarrow(x',y')\sim(x,y)~ (\text{\checkmark})
+\]
+\[
+(x,y)\sim(x',y')\sim(x'',y'')\stackrel{!}{\Rightarrow}(x,y)\sim(x'',y'')
+\]
+Folgt aus: $xy'=x'y$ und $x'y''=x''y'$
+\[
+\Rightarrow xx'y''=xx''y',~ xx'y''=x'x''y \stackrel{x'\neq 0}{\Rightarrow} xy''=x''y
+\]
+Wenn $x'=0$, dann $x=x''=0$. (\checkmark)\\
+
+Wir bezeichnen die Äquivalenzklassen von $(x,y)\in M$ mit 
+\[
+\frac{x}{y}=\{(x',y')\in M~|~(x,y)\sim(x',y') \}
+\]
 
 
 
