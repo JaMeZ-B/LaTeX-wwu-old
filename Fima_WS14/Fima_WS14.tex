@@ -2199,7 +2199,7 @@ Z_{n+1}=\E(Z_{n+1}~|~\F_n)=Z_n=\dots=Z_1=Y ~ \F_0\text{-messbar}
 \end{equation*}
 Also ist $(M_n-M_n')_{n\in \N_0}$ ein vorhersehbares Martingal. Also folgt $M_n-M_n'=Z~\forall n\in \N_0$ für ein $\F_0$-messbares $Z$.
 \[
-Z=\E(M_n-M-n'~|~\F_0)=M_0-M_0'=0 \Rightarrow Z\equiv 0 
+Z=\E(M_n-M_n'~|~\F_0)=M_0-M_0'=0 \Rightarrow Z\equiv 0 
 \]
 \hfill $\square$
 
@@ -2432,7 +2432,7 @@ V^*(n) = \varphi(n)+\sum_{j=1}^{d}H_j(n)S_j^*(n)
 % sub end
 
 \subsection{Charakterisierung der Selbstfinazierung}
-\label{sub:charkt_selbstfinazierung}
+\label{sub:charkt_selbstfinanzierung}
 Eine Handelsstrategie $(\varphi,H)$ ist selbstfinazierend genau dann, wenn sich ihre Vermögensentwicklung aus dem Anfangskapital und den Periodengewinnen bzw. Verlusten ergibt.\\
 Genauer: Für eine Handelsstrategie $(\varphi,H)$ sind äquivalent:
 \begin{enumerate}[(i)]
@@ -2440,6 +2440,7 @@ Genauer: Für eine Handelsstrategie $(\varphi,H)$ sind äquivalent:
 	\item 
 	\[
 	V(n) = V(0)+\sum_{k=1}^{n}\varphi(k)\Delta S_0(k) + \sum_{k=1}^{n}\sum_{j=1}^{d}H_j(k)\Delta S_j(k),~n=1,\dots,N
+	\marginnote{alternativ auch mit Skalarprodukt $\sprod{H(k)}{\Delta S(k)}$}
 	\]
 	\item 
 	\[
@@ -2450,7 +2451,175 @@ Für ein stochastischen Prozess $(X(n))_{n=0,1,2,\dots}$ bedeutet
 \[
 \Delta X(n)= X(n)-X(n-1)
 \]
-Prozess der Periodenzuwächse.
+Prozess der Periodenzuwächse.\\
+
+\bet{Beweis:}
+Für jede Handelsstrategie $(\varphi,H)$ gilt:
+\begin{equation*}
+\begin{aligned}
+	V(1)-V(0) &= \varphi(1)S_0(1)-\varphi(1)S_0(0)+\sprod{H(1)}{S(1)}-\sprod{H(1)}{S(0)}\\
+	&= \varphi(1)\Delta S_0(1)+\sprod{H(1)}{\Delta S(1)}
+\end{aligned}
+\end{equation*}
+Deshalb gilt: 
+\begin{equation*}
+\begin{aligned}
+	\text{(ii) ist erfüllt} \Leftrightarrow &\Delta V(k)=\varphi(k)\Delta S_0(k)+\sprod{H(k)}{\Delta S(k)}~k=2,\dots,N\\
+	\Leftrightarrow &\varphi(k)S_0(k)+\sprod{H(k)}{S(k)}- \varphi(k-1)S_0(k-1)-\sprod{H(k-1)}{S(k-1)}\\
+	&=\varphi(k)S_0(k)-\varphi(k)S_0(k-1)+\sprod{H(k)}{S(k)}-\sprod{H(k)}{S(k-1)}~k=2,\dots,N\\
+	\stackrel{l=k-1}{\Leftrightarrow} &\sprod{H(l+1)}{S(l)}+\varphi(l+1)S_0(l)=\sprod{H(l)}{S(l)}+\varphi(l)S_0(l)~l=1,\dots,N-1\\
+	\Leftrightarrow &(\varphi,H) \text{ ist selbstfinanzierend}
+\end{aligned}
+\end{equation*}
+Weiter gilt:
+\begin{equation*}
+\begin{aligned}
+	\text{(iii) ist erfüllt} \Leftrightarrow &\Delta V^*(k)=\sprod{H(k)}{\Delta S^*(k)}~ k=2,\dots,N\\
+	\Leftrightarrow &\varphi(k)+\sprod{H(k)}{S(k)}\frac{1}{S_0(k)}-\varphi(k-1)-\sprod{H(k-1)}{S(k-1)}\frac{1}{S_0(k-1)}\\
+	&=\frac{1}{S_0(k)}\sprod{H(k)}{S(k)}-\frac{1}{S_0(k-1)}\sprod{H(k)}{S(k-1)}~ k=2,\dots,N\\
+	\Leftrightarrow &\varphi(k)S_0(k-1)+\sprod{H(k)}{S(k-1)}= \varphi(k-1)S_0(k-1)+\sprod{H(k-1)}{S(k-1)}~ k=2,\dots,N\\
+	\Leftrightarrow &(\varphi,H) \text{ ist selbstfinanzierend}
+\end{aligned}
+\end{equation*}
+%sub end
+
+Wichtig ist, dass im Handel in den risky assets durch Aufbau einer geeigneten Position im Numeraire Asset zu einer selbstfinanzierenden Handelsstrategie gemacht werden kann.
+
+\subsection{Satz}
+\label{sub:satz}
+Sei $S_0(0)=1$. Zu jedem $\R^d$-wertigem vorhersehbarem Prozess $H$ und jedem ANfangskapital $V_0$ ex. genau ein vorhersehbarer Prozess $\varphi$, so dass $(\varphi,H)$ selbstfinanzierend ist und 
+\[
+V^*(n)= V_0+\sum_{k=1}^{n}\sprod{H(k)}{\Delta S^*(k)}~n=1,\dots,N
+\]
+
+\bet{Beweis:}\\
+Zu bestimmen ist ein $\varphi$, so dass der abdiskontierte Wertprozess von $(\varphi,H)$ durch $(\ast)$ gegeben ist.\\
+Damit ist $(\varphi,H)$ selbstfinanzierend wegen \hyperref[sub:charkt_selbstfinanzierung]{4.5}.\\
+Wegen
+\[
+V_0=\varphi(1)S_0(0)+\sprod{H(1)}{S(0)}
+\]
+folgt
+\[
+\varphi(1)=\frac{\sprod{H(1)}{S(0)}-V_0}{S_0(0)}
+\]
+Bestimmung von $\varphi(n)$ für $n\ge 2$:\\
+Wegen
+\[
+V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}=V^*(n)=\varphi(n)+\sprod{H(n)}{S^*(n)}
+\]
+erhält man
+\[
+V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n)}-\sprod{H(n)}{S^*(n-1)}=\varphi(n)+\sprod{H(n)}{S^*(n)}
+\]
+Also setzt man
+\[
+\varphi(n)=V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n-1)}
+\]
+Bezeichne mit $\mathcal{H}$ die Menge aller $\R^d$-wertigen vorhersehbaren stoch. Prozesse.
+Definiere den stoch. Prozess $H\cdot S^*$ durch
+\[
+(H\cdot S^*)(n)=\sum_{k=1}^{n}\sprod{H(k)}{\Delta S^*(k)}~ n=1,\dots,N,~ (H\cdot S^*)(0)=0
+\]
+$(H\cdot S^*)(n)$ ist die Summe der Periodengewinne bzgl. $S^*$ über die ersten $n$-Perioden.
+$H\cdot S^*$ wird als diskreter stoch. Integralprozess bezeichnet.
+
+%sub end
+
+\subsection{Arbitrage}
+\label{sub:arbitrage_math}
+Eine selbstfinanziernde Handelsstrategie $(\varphi,H)$ heißt \Index{Arbitrage}, wenn gilt 
+\[
+V_0\le 0,~V_N\ge 0 \text{ und } \Pw(V_N-V_0>0)>0
+\]
+Ausgedrückt in Anteilen des Numeraire Assets ist dies äquivalent zu, mit $S(0)=1$:
+\[
+V_0\le 0,~ V^*(N)=\frac{V(N)}{S_0(N)}\le 0 \text{ und } \Pw(V^*(N)-V_0 > 0) > 0
+\]
+Da $V^*(N)-V_0=H\cdot S^*(N)$.\\
+Es gibt eine Arbitragemöglichkeit genau dann, wenn es ein Anfangskapital $V_0\le 0$ und ein $H\in \mc{H}$ gibt mit
+\[
+V_0+(H\cdot S^*)(N)\le 0 \text{ und } \Pw(H\cdot S^*(N)>0)>0
+\]
+
+\bet{Bemerkung:} 
+Existiert ein Arbitrage, so existiert auch ein Arbitrage zum Anfangskapital 0.\\
+
+\bet{Beweis:}\\
+Sei $(\varphi,H)$ ein Arbitrage mit
+\[
+V(0)=\varphi(1)S_0(0)+\sprod{H(1)}{S(0)}<0
+\]
+Dann ist
+\[
+V^*(N)=V(0)+(H\cdot S^*)(N)\ge 0 \text{ und } \Pw(H\cdot S^*(N)>0)>0
+\]
+Zum Anfangskapital 0 existiert eine selbstfinanzierende Handelsstrategie $(\Psi,H)$ mit 
+\[
+V_{(\Psi,H)}^*(N)= 0+ (H\cdot S^*)(N)\ge -V(0)>0
+\]
+%sub end
+
+\subsection{Beispiele Arbitrage}
+\label{sub:bsp_arbitrage}
+\minisec{Satz}
+Das CRR-Modell ist genau dann arbitragefrei, wenn $d<1+\rho<u$ gilt.\\
+
+\bet{Beweis:}\\
+\uline{"$\Rightarrow$":} per Kontraposition: Ist $1+\rho \le d<u$, so ist immer die Aktie besser als das Bankkonto.
+Die buy and hold Strategie für die Aktie liefert dann ein Arbitrage.
+Setze $H\equiv 1$.\\
+Dann existiert zum Anfangskapital 0 eine selbstfin. Handelsstrategie $(\varphi,H)$ mit Wertprozess
+\[
+V^*(n)=0+(H\cdot S^*)(n)~ n=0,\dots,N
+\]
+Also
+\[
+V^*(n)=\sum_{k=1}^{n}H(k)\Delta S^*(k)=S^*(N)-S^*(0)\ge S(0)\frac{d^N}{(1+\rho)^N}-S(0)\ge 0
+\]
+und 
+\[
+\Pw(V^*(N)>0)>0
+\]
+Ist  $d<u\le 1+\rho$, so ist das Bankkonto immer besser als die Aktie.
+Also kann man durch ein short selling der Aktie ein Arbitrage konstruieren.
+Setze also $H(n)\equiv -1,~ n=1,\dots,N$.
+Dann existiert zum Anfangskapital 0 eine selbstfin. Handelsstrategie $(\varphi,H)$mit Wertprozess
+\[
+V^*(N)=(H\cdots^*)(n)
+\] 
+also
+\[
+V^*(N)=H\cdot S^*(N)=-(S^*(N)-S(0)=S(0)-S^*(N)\ge S(0)-S(0)\frac{u^N}{(1+\rho)^N}\ge S(0)-S(0)=0
+\]
+und 
+\[
+\Pw(V^*(N)-V(0)>0)>0
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \cleardoubleoddemptypage
