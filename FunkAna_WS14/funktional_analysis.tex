@@ -1448,7 +1448,7 @@ Sei $X$ ein normierter Raum. Die \bet{$\mathbf{w}^{\mathbf{*}}$-Topologie} $\wea
 \label{sub:510}
 Sei $X$ ein normierter Raum. Dann ist die abgeschlossene Einheitskugel in $X^*$
 \[
-	\overline{B_{X*}(0,1)} = \set[\varphi \in X^*]{\norm[X^*]{\varphi} \le 1}  
+	\overline{B_{X^*}(0,1)} = \set[\varphi \in X^*]{\norm[X^*]{\varphi} \le 1}  
 \]
 $\w^*$-kompakt.
 \minisec{Beweis}
@@ -1556,6 +1556,21 @@ denn dann stimmen $\weakTstar{X^*}$ und $\mathcal{T}_{X^*}^d$ überein. (Warum?)
 \end{description}
 % subsection 512 (end)
 
+\subsection*{Nachtrag (zum Beweis von \ref{sub:512})} % (fold)
+\label{sub:nachtrag_512}
+Topologien sind durch Konvergenz von Netzen bestimmt: Sei $(X,\mathcal{T})$ ein topologischer Raum. 
+\begin{align*}
+	U \subset X \text{ offen } &\iff \forall x \in U : \exists x \in V \subset U, V \in \mathcal{T} \\
+	U \subset X \text{ nicht offen } &\iff \exists x \in U : \text{ für jedes } x \in V \underset{\mathclap{\text{offen}}}{\subset} X \text{ gilt } V \cap (X \setminus U) 
+	\not= \emptyset \\
+	&\stackrel{\text{(\#)}}{\iff} \exists x \in U, \exists \text{ Netz } (x_\lambda)_{\lambda \in \Lambda} \subset X \setminus U \text{ mit } x_\lambda \to x
+\end{align*}
+$\stackrel{\text{(\#)}}{\Longleftarrow}$ ist trivial. $\stackrel{\text{(\#)}}{\Longrightarrow}$: $\Lambda := \set[V]{x \in V \subset X \text{ offen}}$ ist 
+gerichtet bezüglich "$\subset$". Zu jedem $V \in \Lambda$ wähle \marginnote{Auswahlaxiom nötig!} $x_V \in (X \setminus U) \cap V$. Dann gilt 
+$(x_v)_{v \in \Lambda} \subset X \setminus U$ und $x_v \to x$.
+
+% subsection nachtrag_512 (end)
+
 \subsection[Definition: Reflexiver normierter Raum]{Definition} % (fold)
 \label{sub:513}
 Der normierte Raum $X$ heißt \Index{reflexiv}, falls die kanonische Abbildung $\iota_X : X \to X^{**}$ ein Isomorphismus ist. 
@@ -1569,7 +1584,7 @@ Sei $X$ ein reflexiver Banachraum und $Y \subset X$ ein abgeschlossener Teilraum
 Sei $\kappa : Y \hookrightarrow X$ die Inklusion. Dann ist $\kappa \in \mathcal{L}(Y,X)$ und nach \ref{sub:34} kommutiert das Diagramm
 \[
 	\begin{tikzcd}
-		Y \rar[hook, "\iota_Y"] \dar["\kappa", hook]& Y^{**}  \dar["\kappa^{\tr \,\tr}"] \\
+		Y \rar[hook, "\iota_Y"] \dar["\kappa"', hook]& Y^{**}  \dar["\kappa^{\tr \,\tr}"] \\
 		X \rar["\iota_X","\cong"', hook] & X^{**}
 	\end{tikzcd}
 \]
@@ -1609,8 +1624,76 @@ Sei $X$ ein Banachraum. Dann gilt
 	\overline{B_X(0,1)} \underset{\text{$\w^*$-dicht}}{\subset} \overline{B_{X^{**}}(0,1)}  
 \]
 \minisec{Beweis}
-
+Zu zeigen: Zu $f \in \overline{B_{X^{**}}(0,1)}$ und $\varepsilon>0$, $\varphi_1, \ldots , \varphi_n \in X^*$, existiert $x \in \overline{B_X(0,1)}$ mit
+$\abs*{f(\varphi_i)- \varphi_i(x)} < \varepsilon$ für $i=1,\ldots ,n$. Behauptung: Es gilt (gegeben $f,\varphi_1, \ldots , \varphi_n$)
+\[
+	\inf_{x \in \overline{B_X(0,1)} } \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x)}^2 = 0
+\]
+Sei $h(x) := \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2 $ und $\inf_{x\in \overline{B_X(0,1)}} h(x) =: \mu \ge 0$. Wähle 
+$(x_k)_{k \in \mathds{N}} \subset \overline{B_X(0,1)}$ mit $\lim_{k \to \infty} h(x_k)= \mu$. Nach Übergang zu einer Teilfolge dürfen wir annehmen, dass 
+$\enbrace[\big]{\varphi_i(x_k)}_{k \in \mathds{N}}$ gegen  $\gamma_i \in \mathds{K}$ konvergiert für $i=1,\ldots ,n$. Setze $\delta_i := f(\varphi_i) -\gamma_i$, dann
+gilt $\mu = \sum_{i=1}^{n} \abs*{\delta_i}^2$. Für $y \in \overline{B_X(0,1)}$, $t \in [0,1]$ gilt 
+\begin{align*}
+	\mu \le h\enbrace[\Big]{\underbrace{(1-t) \cdot x_k + t \cdot y}_{\in \overline{B_X(0,1)}}} &= 
+	\sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- (1-t) \cdot \varphi_i(x_k) - t \cdot \varphi_i(y)}^2 \\
+	&= \sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- \varphi(x_k) - t \cdot  \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} }^2 \\
+	&= \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x_k)}^2 + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \varphi_i(x_k)}^2 \\
+	& \quad - 2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} \cdot \overline{\enbrace[\big]{f(\varphi_i)- \varphi_i(x_k)} } \\
+	\xrightarrow{k \to \infty} &\underbrace{\sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \gamma_i}^2}_{=\mu} + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2  
+	-2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i }
+\end{align*}
+Nach Abziehen von $\mu$ folgt für $t >0$
+\begin{align*}
+	&0 \le t \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2 - 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i}  \\
+	\xRightarrow{t \searrow 0} \enspace & 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i} \le 0 \text{ für alle } y \in \overline{B_X(0,1) }
+\end{align*}
+Für $y \in \overline{B_X(0,1)}$ gilt $\re \sum_{i=1}^{n} \enbrace*{\varphi_i(y)- \gamma_i} \cdot \overline{\delta _i} \le 0$.
+Definiere $\varphi := \sum_{i=1}^{n} \overline{\delta _i} \cdot \varphi_i \in X^*$, dann gilt für $y \in \overline{B_X(0,1)}$
+\[
+	\re \varphi(y) \le \re \sum_{i=1}^{n} \gamma_i \overline{\delta_i} 
+\]
+also $\norm[X^*]{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$. Aber 
+\[
+	\varphi(x_k) = \sum_{i=1}^{n} \overline{\delta_i} \cdot \varphi_i(x_k) \xrightarrow{k \to \infty} \sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i, 
+\]
+das heißt $\abs*{\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i} \le \norm{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$ und somit
+$\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i = \norm[X^*]{\varphi}$. Wir erhalten 
+\begin{align*}
+	\mu = \sum_{i=1}^{n} \overline{\delta_i} \delta_i = \sum_{i=1}^{n}\overline{\delta_i} \enbrace[\big]{f(\varphi_i)- \gamma_i} = f(\varphi)-\norm[X^*]{\varphi} \le 0 \bewende
+\end{align*}
 % subsection 516 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:517}
+Sei $X$ ein Banachraum, $f \in \overline{B_{X^{**}}(0,1)}$, $\varphi_1, \ldots , \varphi_n \in X^*$. Falls $\overline{B_X(0,1)}$ $\w$-kompakt ist, so existiert 
+$x \in \overline{B-X(0,1)}$ mit $f(\varphi_i)= \varphi_i(x)$, $i=1,\ldots ,n$.
+\minisec{Beweis}
+Definiere $h : X \to \mathds{R}$ durch $h(x):= \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2$ ist stetig auf $X$ bezüglich $\weakT{X}$, nimmt also auf
+$\overline{B_X(0,1)}$ ihr Minimum an. \bewende
+% subsection 517 (end)
+
+
+\subsection{Satz} % (fold)
+\label{sub:518}
+Sei $X$ ein Banachraum. Dann sind äquivalent: 
+\begin{enumerate}[(i)]
+	\item $X$ ist reflexiv.
+	\item $\overline{B_X(0,1)}$ ist $\w^*$-kompakt.
+	\item $\weakT{X^*}= \weakTstar{X^*}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii):] $\overline{B_{X^{**}}(0,1)}$ ist $\w^*$-kompakt nach \ref{sub:510}. Nach \ref{sub:515} ist $X^*$ reflexiv, daher stimmen auf $X^{**}$
+	die $\w^*$- und die $\w$-Topologie überein. $\Rightarrow \overline{B_{X^{**}}(0,1)}$ ist $\w$-kompakt. Aber unter $X \cong X^{**}$ stimmen die jeweiligen $\w$-Topologien
+	überein; ebenso $\overline{B_{X}(0,1)} \cong \overline{B_{X^{**}}(0,1)}$.
+	\item[(ii)$\Rightarrow$(i):] Es gilt $(X,\weakT{X}) \subset (X^{**}, \weakTstar{X^{**}})$ in der Relativtopologie (warum?).
+	$\overline{B_X(0,1)}$ kompakt $\Rightarrow \overline{B_X(0,1)} \subset \overline{B_{X^{**}}(0,1)}$ $\w^*$-abgeschlossen und $\w^*$-dicht. Also folgt
+	$\overline{B_X(0,1)} = \overline{B_{X^{**}}(0,1)}$ und somit $X=X^{**}$.
+	\item[(iii)$\Rightarrow$(i):] $\overline{B_{X^*}(0,1)}$ ist $\w^*$-kompakt nach Banach-Alaoglu (\ref{sub:510}). Mit (iii) folgt, dass $\overline{B_{X^*}(0,1)}$
+	$\w$-kompakt ist. Da (ii)$\Rightarrow$(i) folgt, dass $X^*$ reflexiv ist und somit ist nach \ref{sub:516} auch $X$ reflexiv.
+	\item[(i)$\Rightarrow$(iii):] klar. \bewende
+\end{description}
+% subsection 518 (end)
 % section 5 (end)
 
 
