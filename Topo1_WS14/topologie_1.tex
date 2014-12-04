@@ -2218,6 +2218,109 @@ Da $\sprod*{v(x)}{x}=0$ folgt für alle $x$ und $v(x)\not=0$ ist, folgt
 Also sind $H$ und $K$ wohldefiniert. $H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $ und $K$ ist Homotopie zwischen $-\id$ und 
 $x \mapsto \frac{v(x)}{\norm{v(x)} } $. \bewende
 % subsection 108 (end)
+
+\subsection{Satz (Jordanscher Kurvensatz)} % (fold)
+\label{sub:109}
+Sei $f \colon S^1 \to \mathds{R}^2$ eine stetige, injektive Abbildung. Dann hat $\mathds{R}^2 \setminus f(S^1)$ genau zwei Wegzusammenhangskomponenten. Eine davon ist 
+beschränkt, die andere nicht.
+\minisec{Beweis (mit \ref{sub:1010})}
+Wir können $f$ auch als injektive Abbildung $f \colon S^1 \to \mathds{R}^2 \subseteq S^2 = \mathds{R}^1 \cup \set{\infty}$ auffassen. Nun ist 
+$\tilde{H}_0 \enbrace[\big]{S^2 \setminus f(S^1)} =\mathds{Z}$. Also $H_0 \enbrace[\big]{S^2 \setminus f(S^1)}= \mathds{Z} \oplus \mathds{Z}$. Daher besteht
+$S^2 \setminus f(S^1)$ aus zwei Wegzusammenhangskomponenten $U_1$ und $U_2$. Sei \oE $\infty \in U_2$. Dann sind $U_1$ und $U_2 \setminus \set{\infty}$ die
+Wegzusammenhangskomponenten von $\mathds{R}^2 \setminus f(S^1)$. $U_1$ ist beschränkt und $U_2$ ist unbeschränkt. \bewende \smallskip \\
+Warum ist $U_2 \setminus \set{\infty}$ noch wegzusammenhängend?
+\minisec{Antwort}
+Seien $x,y \in U_2$, dann gibt es eine Umgebung $V$ von $\infty \in S^2$ mit $V \setminus \set{\infty} \equiv D^2 \setminus \set{0} $,  $x,y \not\in V$ und
+$f(S^1) \cap V = \emptyset$
+% subsection 109 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:1010}
+\begin{enumerate}[a)]
+	\item Sei $f \colon D^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt $\tilde{H}_i\enbrace[\big]{S^n \setminus f(D^k)} =0$ für alle $i$.
+	\item Sei $f \colon S^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt 
+	\[
+		\tilde{H}_i \enbrace[\big]{S^n \setminus f(S^k)} = \begin{cases}
+			\mathds{Z}, &\text{ falls }i=n-k-1\\
+			0, &\text{ sonst}
+		\end{cases}
+	\]
+\end{enumerate}
+\minisec{Beweis (mit \ref{sub:1011})}
+\begin{enumerate}[a)]
+	\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(D^0)$ homöomorph zu $\mathds{R}^n$ und die Behauptung folgt.
+	
+	Induktionsschritt $k \mapsto k+1$: Da $D^{k+1}$ und $[0,1]^{k+1}$ homöomorph sind, können wir $D^{k+1}$ durch $[0,1]^{k+1}$ ersetzen. Sei 
+	$x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$. Es ist
+	\[
+		S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^{k}} = S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2}}  \times [0,1]^k} \cup S^n \setminus f \enbrace*{\benbrace*{\nicefrac{1}{2},1} \times [0,1]^k}   
+	\]
+	eine Vereinigung von offenen Mengen. Weiter ist 
+	\begin{align*}
+		\enbrace*{S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2} } \times [0,1]^k} } \cap \enbrace*{S^n \setminus f \enbrace*{\benbrace*{\nicefrac{1}{2} ,1} \times [0,1]^k}} =   S^n \setminus f \enbrace*{[0,1]^{k+1}} 
+	\end{align*}
+	Nun benutzten wir die zugehörige Mayer-Vietoris-Folge: \todo{schöner machen}
+	\[
+		\begin{tikzcd}[column sep=1.3em]
+			\underset{=0 \text{ nach I.A.}}{\tilde{H}_{i+1} \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}}  \times [0,1]^k}}} \rar &
+			\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}} }  \dar["\cong"] & \\
+			& \bigoplus\limits_{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[\nicefrac{1}{2},1] \times [0,1]^k} } }
+			^{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[0,\nicefrac{1}{2}] \times [0,1]^k} } } \rar &
+			\underset{=0 \text{ nach I.A.}}{\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^k } } }
+		\end{tikzcd}
+	\]
+	Angenommen $x \not=0$. Dann ist das Bild von $x$ in $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,\nicefrac{1}{2}] \times [0,1]^k} }$ ungleich Null oder in
+	$\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[\nicefrac{1}{2},1] \times [0,1]^k}}$ ungleich Null. Indem wir dieses Argument iterieren erhalten wir eine Folge
+	von Intervallen
+	\[
+		[0,1] \supseteq I_1 \supseteq I_2 \supseteq \ldots \text{ mit } \bigcap_n I_n = \set{t} 
+	\]
+	und das Bild von $x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$ unter der von der Inklusion 
+	$i_a \colon S^n \setminus f \enbrace*{[0,1]^{k+1}} \to S^n \setminus f \enbrace*{I_a \times [0,1]^k}$ induzierten Abbildung 
+	$(i_a)_* \colon \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}} \to \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k} } $ ungleich Null 
+	ist. Nun ist aber 
+	\[
+		\bigcup_a \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k}} = S^n \setminus f \enbrace*{\set{t} \times [0,1]^k }  
+	\]
+	und wieder nach Induktionsannahme das Bild von $x$ in $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{t} \times [0,1]^k}} =0$ Null. Nach Proposition 
+	\ref{sub:1011}(2) muss $x$ aber schon in einer $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k} }$ trivial sein. \light
+	\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(S^0) \cong \mathds{R}^n \setminus \set{0}$. Da $\mathds{R}^n \setminus \set{0} \simeq S^{n-1}$
+	folgt für $k=0$ die Behauptung.
+	
+	Induktionsschritt $k-1 \mapsto k$: Seien $D^k_+ := \set[(x_0,\ldots ,x_k)]{x_k \ge 0}$ und $D^k_- := \set[(x_0, \ldots , x_k)]{x_k \le 0}$. Dann ist 
+	$D^k_+ \cap D^k_- = \set[(x_0, \ldots ,x_k)]{x_k=0} \cong S^{k-1}$. Wieder ist 
+	\[
+		S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} \enbrace*{S^n \setminus f(D^k_+)} \cup \enbrace*{S^n \setminus f(D^k_-)}  
+	\]
+	eine offene Vereinigung mit $\enbrace*{S^n \setminus f(D^k_+)} \cap (S^n \setminus f(D^k_-)) = S^n \setminus f(S^k)$. Wegen a) ist die Randabbildung in der zugehörigen
+	Mayer-Vietoris-Folge
+	\[
+		\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} } \xrightarrow{\partial_i \cong} \tilde{H}_{i-1} \enbrace*{S^n \setminus f(S^k)}   
+	\]
+	ein Isomorphismus. Die Behauptung folgt per Induktion. \bewende
+\end{enumerate}
+% subsection 1010 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:1011}
+Seien $U_1 \subseteq U_2 \subseteq \ldots  \subseteq X$ offen mit $X = \bigcup_{i=1}^\infty U_i$. Seien $i_{a,b} \colon U_a \hookrightarrow U_b$ für $a < b$ und 
+$i_a \colon U_a \hookrightarrow X$ die Inklusionen.
+\begin{enumerate}[(1)]
+	\item Für jedes $x \in H_k(X;R)$ gibt es $a >0$ und $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=x$.
+	\item Ist $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x)=0$, so gibt es $b >a$ mit $(i_{a,b})_*(x_a)=0$.
+\end{enumerate}
+\minisec{Bemerkung}
+Diese Proposition gilt genauso für reduzierte Homologie.
+\minisec{Beweis}
+Sei $\sigma \colon \abs*{\Delta^n} \to X$ ein singulärer Simplex in $X$. Dann ist $\sigma ^{-1}(U_a)$, $a \in \mathds{N}$ eine offene Überdeckung von $\abs*{\Delta^n}$. Da 
+$\abs*{\Delta^n}$ kompakt ist, gibt es $a$ mit $\abs*{\Delta^n} \subseteq \sigma ^{-1}(U_a)$, also $\sigma \enbrace*{\abs*{\Delta^n}} \subseteq U_a$. Da Elemente  von
+$C_n(X;R)$ endliche $R$-Linearkombinationen von singulären Simplizes sind, folgt 
+\[
+	C_n(X;R) = \bigcup_a C_n(U_a;R).
+\]
+Damit ergeben sich leicht (1) und (2). \bewende
+
+% subsection 1011 (end)
 % section 10 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
