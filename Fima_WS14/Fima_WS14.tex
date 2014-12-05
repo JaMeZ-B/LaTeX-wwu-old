@@ -2562,7 +2562,7 @@ V_{(\Psi,H)}^*(N)= 0+ (H\cdot S^*)(N)\ge -V(0)>0
 %sub end
 
 \subsection{Beispiele Arbitrage}
-\label{sub:bsp_arbitrage}
+%\label{sub:bsp_arbitrage}
 \minisec{Satz}
 Das CRR-Modell ist genau dann arbitragefrei, wenn $d<1+\rho<u$ gilt.\\
 
@@ -2598,11 +2598,167 @@ und
 \Pw(V^*(N)-V(0)>0)>0
 \]
 
+\uline{"$\Leftarrow$":} per Kontraposition: Sei das Modell nicht arbitragefrei.\\
+Dann existiert ein vorhersehbares $H$ mit
+\[
+V^*_N=(H\cdot S^*)(N)\ge 0 \text{ und } \Pw(H\cdot Sq*(N)>0)>0
+\]
+Wegen $V^*(N)=\sum_{k=1}^{N}H(k)\Delta S^*(k)$ existiert eine Periode $n$ mit 
+\[
+H(n)\Delta S^*(n)\ge 0 \text{ und } \Pw(H(n)\Delta S^*(n)>0)>0
+\]
+Also auch
+\begin{equation*}
+\begin{aligned}
+	0\le H(n)\frac{\Delta S^*(n)}{S^*(n-1)}&=H(n)(\frac{S^*}{S^*(n-1)}-1)\\
+	&= H(n)(\frac{1}{1+\rho}u^{X_n}d^{1-X_n}-1)
+\end{aligned}
+\end{equation*}
+Daher folgt:
+\begin{equation*}
+\begin{aligned}
+	S(n)&=u^{Z_n}d^{n-Z_n}S(0)\\
+	Z_n&=\sum_{i=1}^{n}X_i,~ \Pw(X_i=1)=p=1-\Pw(X_i=0)\\
+	S^*(n)&=\frac{S(n)}{(1+\rho)^n},~ \beta(n)=S_0(n)=(1+\rho)^n	
+\end{aligned}
+\end{equation*}
+Annahme: $d<1+\rho<u$.\\
+Dann ist mit $R(n)=\frac{1}{1+\rho}u^{X_n}d^{1-X_n}-1$:
+\begin{equation*}
+\begin{aligned}
+	1=\Pw(H(n)R(n)\ge 0)&=\Pw(H(n)>0,R(n)>0)+\Pw(H(n)<0,R(n)<0)+\Pw(H(n)=0)\\
+	&=\Pw(H(n)<0)\Pw(R(n)>0)+\Pw(H(n)<0)\Pw(R(n)<0)+\Pw(H(n)=0)
+\end{aligned}
+\end{equation*}
+Da $H(n)$ $\F_{n-1}$-messbar ist und $R(n)$ unabhängig von $\F_{n-1}$ ist.
+\[
+=qp+r(1-p)+1-(q+r)
+\]
+mit $q=\Pw(H(n)>0),~r=\Pw(H(n)<0)$.\\
+Aus $\Pw(H(n)=0)<1$ folgt
+\[
+q>0 \text{ oder } r>0
+\]
+Wegen
+\begin{equation*}
+\begin{aligned}
+	1&=qp+r(1-p)+1-(q+r)\\
+	&<q+r+1-(q+r)=1\lightning
+\end{aligned}
+\end{equation*}
+\hfill $\square$\\
+
+\uline{Ziel:} No-Arbitrage Theorem\\
+Charakterisierung von arbitragefreien Märkten im probabilistischem Sinne.
+
+%sub end
+
+\subsection{Äquivalente Maße}
+%\label{sub:aequiv_maße}
+Sei $(\Omega,\F,\Pw)$ ein W'Raum.
+\[
+\mc{N}=\{N\in \R~|~\Pw(N)=0\}
+\]
+ist das System der $\Pw$-\Index{Nullmengen}.\\
+Ein W'Maß $Q$ ist \Index{absolut-stetig} bzgl. $\Pw$
+\[
+Q\ll P \Leftrightarrow \mc{N}_\Pw \subseteq \mc{N}_Q
+\]
+
+$Q$ heißt \Index{äquivalent} zu $\Pw$ genau dann, wenn $\mc{N}_\Pw=\mc{N}_Q$.\\
+Ist $L\ge 0$ ZV mit $\int L\dint \Pw=1$, so wird durch
+\[
+Q(A)=\int\limits_A L\dint \Pw~\forall A\in \Omega
+\]
+ein W'Maß $Q$ definiert mit $Q\ll \Pw$.
+$L$ ist die $\Pw$-Dichte von $Q$.
+Schreibweise: $L=\frac{\dint Q}{\dint \Pw}$.\\
+Gilt $\Pw(L>0)=1$ und $\frac{\dint Q}{\dint \Pw}=L$, so ist
+\[
+\Pw \sim Q \text{ und } \frac{\dint \Pw}{\dint Q}=\frac{1}{L}
+\]
+Weiter: Sind $L,L'$ Dichten von $Q$ bzgl. $\Pw$, so gilt $P(L=L')=1$. Für jede ZV $X$ gilt:
+\[
+\E_Q(X)=\int X\dint Q=\int XL\dint\Pw=\E_\Pw(LX)
+\]
+sofern obiger Erwartungswert existiert.\\
+
+Zusammenhang zur Modellierung von Finanzmärkten:
+\begin{itemize}
+	\item Ein Finanzmarktmodell wird im westenlichen bestimmt durch die zufällige Entwicklung der Basisfinanzgüter.
+	\item Dabei ist nicht entscheidend, welche Verteilung ein Akteur im Finanzmarkt postuliert.
+	\item Zwei Akteure sind im gleichem Finanzmarkt, wenn die beiden postulierten Verteilungen für die Basisfinanzgüter die gleichen Ereignisse mit positiver W'keit eintreten lassen können.
+	Das bedeutet, dass die Verteilungen zueinander äquivalent sind.
+	\item Ein Übergang zu einem äquivalenten W'Maß ändert den Finanzmarkt nicht, wohl aber die Verteilung der Basisfinanzgüter.
+	\item Ein endliches Finanzmarktmodell, z.B. $\abs{\Omega}<\infty$, wird nicht verändert, wenn die Menge der Elementarereignisse mit positiver W'keit unverändert bleibt.
+\end{itemize}
+%sub end
+
+\subsection{Äquivalentes Martingalmaß}
+%\label{sub:aequiv_martingalmaß}
+Gegeben sei ein Finanzmarktmodell mit Preisprozess $S=(S_1,\dots,S_d)$ der risky assets und ein Informationsverlauf $(\F_n)_{n=0,\dots,N}$.
+Sei $S_0$ das Numeriare Asset und
+\[
+S_j^*:= \frac{S_j}{S_0},~j=1,\dots,d
+\]
+Ein W'Maß $\Pw^*$ auf $(\Omega,\F)$ heißt \Index{äquivalentes Martingalmaß}, wenn gilt 
+\begin{enumerate}[(i)]
+	\item $\Pw^* \sim \Pw$
+	\item $(S_j^*(n))_{n=0,\dots,N}$ ist ein $\Pw^*$-Martingal für alle $j=1,\dots,d$
+\end{enumerate}
+Kurz: Bzgl. $\Pw^*$ ist der Finanzmarkt fair.\\
+
+\uline{Ziel:} Arbitragefreier Markt $\Leftrightarrow$ Existiert ein äquivalentes Martingalmaß.
+\uline{"$\Leftarrow$":} leicht.\\
+\uline{"$\Rightarrow$":} etwas schwierig, math. Argument ist der Trennungssatz von Minkowski. %\marginnote{vgl. Funkanalysis}
+%sub end
+
+\subsection{Separationssatz von Minkowski}
+\label{sub:separationssatz}
+Seien $C_1$ und $C_2$ nicht leere konvexe Mengen des $\R^n$ mit $C_1\cap C_2=\emptyset$.
+Sei $C_1$ abgeschlossen und $C_2$ kompakt.\\
+Dann gibt es eine lineare Abbildung $\varphi:\R^n\to\R$ und reelle Zahlen $\beta_1<\beta_2$ mit
+\[
+\varphi(x)\le \beta_1<\beta_2\le \varphi(y),~\forall x\in C_1,~y\in C_2
+\]
+d.h.
+\[
+\sup\limits_{x\in C_1}\varphi(x)<\sup\limits_{y\in C_2}\varphi(y)
+\]
+Graphische Veranschaulichung:
+grafik
 
 
+Wieso Kompaktheit von $C_2$:
+grafik
 
+%sub end
+Zur Bestimmung der zu trennenden konvexen Mengen wird die Arbitragefreiheit umformuliert.
 
+\subsection{Umformulierung der Arbitragefreiheit}
+\label{sub:umf_arbitragefreiheit}
+Finanzmarktmodell über $N$ Perioden mit $S=(S_1,\dots,S_d)$ als Preisprozess der risky assets.
+Mit $L^0(\Omega,\F,\Pw)$ sei die Menge der meßbaren Abb. von $\Omega$ nach $\R$.
+$\G^*:=\{(H\cdot S^*)(N)~|~H\in\mc{H} \}$ bezeichnet die Menge der möglichen Gewinne, notiert in Anteile des Numeriare Assets, die beim Handel entsprechend einer selbstfinaziernden Handelsstrategie erzielt werden können.
+Dabei ist $\mc{H}$ die Menge der vorhersehbaren $\R^d$-wertigen Prozesse.\\
 
+Der Markt ist arbitragefrei, wenn
+\[
+\G^*\cap L_+^0(\Omega,\F,\Pw)=\{0\}
+\]
+wobei $L_+^0(\Omega,\F,\Pw)=\{X\in L^0~|~X\ge 0\}$.\\
+$\G^*$ ist ein Vektorraum.\\
+grafik\\
+$\mc{K}^*:=\{C^*\in L^0~|~\text{es ex. ein }G^*\in \G^*\text{ mit }G^*\ge C^* \}$ $\mc{K}^*$ ist der Kegel aus Elementen aus $L^0$, die unterhalb von $\G^*$ liegen.
+Es gilt:
+\[
+\G^*\cap L_+^0=\{0\}\Leftrightarrow \mc{K}^*\cap L_+^0=\{0\}
+\]
+Weiter
+\[
+\mc{K}^*\cap (-\mc{K}^*)=\G^*
+\]
+Mittels $\G^*$ und $\mc{K}^*$ können äquivalente Martingalmaße charakterisiert werden.
 
 
 
