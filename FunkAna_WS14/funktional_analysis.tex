@@ -1683,7 +1683,7 @@ Sei $X$ ein Banachraum. Dann sind äquivalent:
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item[(i)$\Rightarrow$(ii):] $\overline{B_{X^{**}}(0,1)}$ ist $\w^*$-kompakt nach \ref{sub:510}. Nach \ref{sub:515} ist $X^*$ reflexiv, daher stimmen auf $X^{**}$
+	\item[(i)$\Rightarrow$(ii):] $\overline{B}_{X^{**}}(0,1)$ ist $\w^*$-kompakt nach \ref{sub:510}. Nach \ref{sub:515} ist $X^*$ reflexiv, daher stimmen auf $X^{**}$
 	die $\w^*$- und die $\w$-Topologie überein. $\Rightarrow \overline{B_{X^{**}}(0,1)}$ ist $\w$-kompakt. Aber unter $X \cong X^{**}$ stimmen die jeweiligen $\w$-Topologien
 	überein; ebenso $\overline{B_{X}(0,1)} \cong \overline{B_{X^{**}}(0,1)}$.
 	\item[(ii)$\Rightarrow$(i):] Es gilt $(X,\weakT{X}) \subset (X^{**}, \weakTstar{X^{**}})$ in der Relativtopologie (warum?).
@@ -1694,7 +1694,124 @@ Sei $X$ ein Banachraum. Dann sind äquivalent:
 	\item[(i)$\Rightarrow$(iii):] klar. \bewende
 \end{description}
 % subsection 518 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:519}
+\begin{enumerate}[a)]
+	\item Sei $X$ ein normierter Raum. Falls $X^*$ separabel (bezüglich $\mathcal{T}_{X^*}^{\norm{\cdot}}$) ist, so ist $X$ separabel (bezüglich 
+	$\mathcal{T}_X^{\norm{\cdot}}$)
+	\item Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $\overline{B}_X(0,1)$ ist folgenkompakt bezüglich $\weakT{X}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Übung.
+	\item \begin{description}
+		\item["$\Rightarrow$":] leicht.
+		\item["$\Leftarrow$":] nicht so leicht. 
+	\end{description}
+\end{enumerate}
+% subsection 519 (end)
 % section 5 (end)
+\newpage
+
+\section{Gleichmäßig konvexe Räume, noch einmal $L^p$} % (fold)
+\label{sec:6}
+
+\subsection[Definition und Proposition: Gleichmäßig konvexer Raum]{Definition und Proposition} % (fold)
+\label{sub:61}
+Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+\begin{enumerate}[(i)]
+	\item Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y} \le 1$ gilt:
+	\[
+		\norm{x-y} \ge \varepsilon \enspace\Longrightarrow \enspace\norm{\frac{1}{2} (x+y) } \le 1 -\delta 
+	\]
+	\item Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y}= 1$ gilt:
+	\[
+		\norm{x-y} \ge \varepsilon \enspace\Longrightarrow \enspace\norm{\frac{1}{2} (x+y)} \le 1-\delta   
+	\]
+	\item Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\norm{x_n} = \norm{y_n}=1$ für alle $n \in \mathds{N}$ gilt: 
+	\[
+		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
+	\]
+	\item Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\limsup_n \norm{x_n} = \limsup_n \norm{y_n}=1$ gilt:
+	\[
+		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
+	\]
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii)$\Rightarrow$(iii):] trivial.
+	\item[(iii)$\Rightarrow$(iv):] einfach. Zeige zunächst: Aus $\limsup \norm{x_n}, \limsup \norm{y_n}\le 1$ und $\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1$
+	folgt $\lim_{ n \to \infty} \norm{x_n}=\lim_{ n \to \infty} \norm{y_n}=1$.
+	\item[(iv)$\Rightarrow$(i):] Angenommen (i) gilt nicht, d.h. $\exists \varepsilon>0$ und für jedes $\delta_n=\frac{1}{n+1}$ existieren $x_n,y_n \in X$ mit 
+	$\norm{x_n}, \norm{y_n}\le 1$, $\norm{x_n-y_n}\ge \varepsilon$ und $\norm{\frac{1}{2}(x_n+y_n)} > 1- \frac{1}{n+1}$. \light zu (iv). \bewende
+\end{description}
+% subsection 61 (end)
+
+\subsection[Beispiel für gleichmäßig konvexe Räume]{Beispiel} % (fold)
+\label{sub:62}
+$(\mathds{R}^n, \norm[p]{\cdot})$ ist gleichmäßig konvex für $1 < p < \infty$ aber nicht für $p=1, p=\infty$
+\todo[inline]{Zeichnung vervollständigen}
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[scale=1.2]
+		\draw[darkgray] (-2.4,0) -- (2.4,0);
+		\draw[darkgray] (0,-2.4) -- (0,2.4);
+		\draw[thick] circle[radius=2];
+		\draw[thick,DarkGoldenrod2] (2,0) -- (0,2) -- (-2,0) -- (0,-2) -- cycle;
+		\draw[thick,Firebrick3] (-2,-2) rectangle (2,2);
+	\end{tikzpicture}
+	\caption{${\color{DarkGoldenrod2}p=1}$}, $p=2$, ${\color{Firebrick3}p=\infty}$}
+\end{figure}
+% subsection 62 (end)
+
+\subsection[Definition und Proposition: Strikt konvexer Raum]{Definition und Proposition} % (fold)
+\label{sub:63}
+Ein gleichmäßig konvexer normierter $\mathds{R}$-Vektorraum ist \Index{strikt konvex}, d.h. für alle $0\not= x,y \in X$ mit $\norm{x+y}=\norm{x} + \norm{y}$ existiert 
+$\lambda >0$ mit $x=\lambda \cdot y$. 
+\minisec{Beweis}
+Seien $x,y$ wie angegeben; \oE $\norm{x}=1$. Setze $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$, $\beta := \norm{x+y-a}$
+\todo[inline]{Zeichnung vervollständigen}
+\[
+	\begin{tikzpicture}[scale=1.4]
+		\coordinate (x) at (2,1);
+		\coordiante (x') at (2,0);
+		\coordinate (xy) at (2.8,0);
+		\draw (0,0)node[left]{$0$} -- (x') node[below]{$x'$} -- (xy) node[right]{$x+y$};
+	\end{tikzpicture}
+\]
+Es gilt 
+\[
+	\norm{x+y-x'} = \enbrace*{1- \frac{1}{\norm{x+y}}} \cdot \norm{x+y} = \norm{x+y}-1 = 1 + \norm{y} -1 = \norm{y}      
+\]
+also $\beta = \norm{x+y-a} \le \doppelstrich[\big]{\frac{x+y-x}{2}} + \doppelstrich[\big]{\frac{x+y-x'}{2}}\le \frac{\norm{y}}{2} + \frac{\norm{y}}{2} = \norm{y}$. Weiter gilt
+$\alpha = \norm{a} \le \frac{\doppelstrich{x}}{2} + \frac{\doppelstrich{x'}}{2} =1$ und
+\begin{align*}
+	1 + \norm{y} = \norm{x+y} \le \norm{a} + \norm{x+y-a} = \alpha+ \beta\le 1 + \norm{y} 
+\end{align*}
+also $1 \le \alpha \le 1$. Wegen $\norm{x}=1$, $\norm{x'}=1$ und $\norm{\frac{1}{2} (x+x')}= \norm{a}=\alpha=1 > 1 -\delta$ für jedes $\delta >0$ erhalten wir aus 
+gleichmäßiger Konvexität $\norm{x-x'} \le \varepsilon$ für jedes $\varepsilon>0 \Rightarrow x=x'$ und $y=\norm{y} \cdot x$. \bewende
+% subsection 63 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:64}
+Sei $X$ ein normierter $\mathds{R}$-Vektorraum, $a \in X$, $W \subset X$ konvex und abgeschlossen. 
+\begin{enumerate}[(i)]
+	\item Ist $W$ strikt konvex (normiert?), so existiert höchstens ein $x \in W$ mit $\norm{a -x}= \inf_{y \in W} \norm{a-y}$.
+	\item Ist $X$ vollständig und gleichmäßig konvex, so existiert genau ein $x \in W$ mit $\norm{a-x}= \inf_{y \in W} \norm{a-y}$
+\end{enumerate}
+\minisec{Beweis}
+Wir dürfen ohne Einschränkungen $a=0$ annehmen. Für $a \in W$ ist nichts zu beweisen; für $a \not\in W$ gilt $\inf_{y \in W} \norm{a-y} >0$ (denn $W$ ist abgeschlossen).
+Ohne Einschränkungen dürfen wir außerdem $\inf_{y \in W} \norm{a-y}=1$ annehmen. 
+\begin{enumerate}[(i)]
+	\item Sei $x,x' \in W$ mit $\norm{a-y}= \norm{a-x'}= \inf_{y \in W} \norm{a-y}$, also $\norm{x}=\norm{x'}=1$. Dann gilt 
+	\[
+		1= \inf_{y \in W} \norm{a-y} \le \doppelstrich[\bigg]{\underbrace{\frac{1}{2} (x+x')}_{\in W}} \le \frac{1}{2} \norm{x} + \frac{1}{2} \norm{x'} =1   
+	\]
+	Es folgt aus strikter Konvexität, dass $x=\lambda \cdot x'$ für ein $\lambda \ge 0$. Wegen $\norm{x}=\norm{x'}=1$ folgt $\lambda=1$ und $x=x'$. 
+\end{enumerate}
+% subsection 64 (end)
+% section 6 (end)
 
 
 
