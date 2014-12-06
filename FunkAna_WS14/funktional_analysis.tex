@@ -1800,15 +1800,37 @@ Ein gleichmäßig konvexer normierter $\mathds{R}$-Vektorraum ist \Index{strikt 
 $\lambda >0$ mit $x=\lambda \cdot y$. 
 \minisec{Beweis}
 Seien $x,y$ wie angegeben; \oE $\norm{x}=1$. Setze $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$, $\beta := \norm{x+y-a}$
-\todo[inline]{Zeichnung vervollständigen}
-\[
-	\begin{tikzpicture}[scale=1.4]
+\begin{figure}{H}
+	\centering{
+	\begin{tikzpicture}[scale=3, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray}]
+		\coordinate (0) at (0,0);
+		\coordinate (a) at (2,0.5);
 		\coordinate (x) at (2,1);
 		\coordinate (x') at (2,0);
-		\coordinate (xy) at (2.8,0);
-		\draw (0,0)node[left]{$0$} -- (x') node[below]{$x'$} -- (xy) node[right]{$x+y$};
+		\coordinate (x+y) at (2.8,0);
+		\draw[thick] (0,0)  -- (x+y);
+		\draw[my brace] (0) -- (x') node[midway, yshift=-0.6cm]{$\norm{x'}=1$};
+		\draw[my brace] (x') --(x+y) node[midway, yshift=-0.6cm]{$\norm{y}$};
+		
+		\draw[thick] (0) -- (x);
+		\draw[my brace] (x) -- (0) node[midway, above left, yshift=0.16cm]{$\norm{x}=1$};
+		
+		\draw[thick] (x) -- (x');
+		
+		\draw[thick] (x+y) -- (x);
+		\draw[my brace] (x+y) -- (x) node[midway, above right, xshift=0.1cm]{$\norm{y}$};
+		
+		\draw[thick,dashed] (0) -- (a) -- (x+y);
+		\draw[my brace] (0) -- (a) node[midway, below,yshift=-0.2cm,xshift=0.17cm]{$\alpha$};
+		\draw[my brace] (a) -- (x+y) node[midway, below,yshift=-0.2cm,xshift=-0.22cm]{$\beta$};
+		
+		\foreach \t/\pos in {0/left,x/above,x'/below,x+y/right,a/above right}{
+			\draw[fill=DodgerBlue2,thick] (\t) circle (0.02) node[\pos]{$\t$};
+		}
 	\end{tikzpicture}
-\]
+	\caption[Zeichnung zum Beweis von \ref{sub:63}]{Die Tatsache, dass $\norm{x}$ und $\norm{x'}$ in dieser Zeichnung nicht gleich sind, weißt schon darauf hin, dass diese 
+	Zeichnung in Wahrheit \enquote{degeneriert}.}}
+\end{figure}
 Es gilt 
 \[
 	\norm{x+y-x'} = \enbrace*{1- \frac{1}{\norm{x+y}}} \cdot \norm{x+y} = \norm{x+y}-1 = 1 + \norm{y} -1 = \norm{y}      
