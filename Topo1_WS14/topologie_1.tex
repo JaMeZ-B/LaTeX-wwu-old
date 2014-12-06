@@ -1434,11 +1434,10 @@ Die Homotopieinvarianz von $H_n(-;R)$ folgt aus folgenden Spezialfall:
 	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. $\Longrightarrow$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
 \end{equation*}
 \minisec{Beweis}
-Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt
+Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt mittels Funktorialität 
 \begin{align*}
 	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
 \end{align*}
-\todo{RevChap7}
 % subsection 78 (end)
 
 \subsection[Bemerkung zum Vorgehen beim Beweis von \textbf{[\#]}]{Bemerkung} % (fold)
@@ -1451,19 +1450,152 @@ $h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathds{N}$ mit
 
 \minisec{"Ansatz"}
 Für $\sigma : \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} : \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. Dann ist
-"$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{(0,1]}$" und 
+"$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{[0,1]}$" und 
 \[
 	\partial_{n+1}(h_n \sigma) = \partial_{n+1}(\sigma \times \id_{[0,1]}) = (\sigma \times \id)\Big|_{\partial (\abs*{\Delta^n} \times [0,1] )} = \partial_n \sigma \times \id_{[0,1]} + i_0 \sigma + i_1 \sigma
 \]
-$\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1} $
+da $\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1}$.
 
-Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes:
-\missingfigure{Hier kommen noch ein paar Simplizes hin mit Zerlegung und so }
+Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes. $\Delta^n \times [0,1]$ hat die folgende Form für
+$n \in \set{0,1,2}$:
+\begin{figure}[H]
+	\centering{
+	\scalebox{0.7}{\begin{tikzpicture}[scale=2.0]
+		\coordinate (1) at (0,1);
+		\coordinate (2) at (0,0);
+		
+		\coordinate (3) at (1.7,1);
+		\path (3) ++ (1,0) coordinate (4) ++ (0,-1) coordinate (6) ++ (-1,0) coordinate (5);
+		% \coordinate (4) at (3,1);
+		% \coordinate (5) at (2,0);
+		% \coordinate (6) at (3,0);
+		
+		\coordinate (7) at (4.5,1);
+		\path (7) ++ (0.9,-0.15) coordinate (8);
+		\path (7) ++ (0.5,0.18) coordinate (9);
+		\path (7) ++ (0,-1) coordinate (10);
+		\path (8) ++ (0,-1) coordinate (11);
+		\path (9) ++ (0,-1) coordinate (12);
+		
+		\draw[thick] (2) -- (1) node[above, yshift=0.4cm]{$\Delta^0$} node[midway, left, xshift=-0.3cm]{$[0,1]$};
+		
+		\draw[thick] (3) node[left]{$(0,0)$}-- (4) node[midway, above, yshift=0.4cm]{$\Delta^1$} node[right]{$(1,0)$} -- (6) node[right]{$(1,1)$} 
+		-- (5) node[left]{$(0,1)$} -- cycle;
+		
+		
+		\draw[thick] (7) node[left]{$(0,0)$} node[above, yshift=0.4cm, xshift=0.9cm]{$\Delta^2$} -- (8) node[right]{$(2,0)$} -- (9) node[right]{$(1,0)$} -- cycle;
+		
+		\draw[thick] (7) -- (10) node[left]{$(0,1)$} -- (11) node[right]{$(2,1)$} -- (8);
+		\draw[thick, dashed] (10) -- (12) node[above left]{$(1,1)$} -- (9);
+		\draw[thick, dashed] (12) -- (11);
+		
+		\foreach \x in {1,...,12}{
+			\filldraw (\x) circle(0.03);
+		}
+	\end{tikzpicture}}
+	\caption{$\Delta^n \times [0,1]$ für $n=0,1,2$}}
+\end{figure}
+Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
+\begin{figure}[H]
+	\centering{
+	\[
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=1.8]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed] (10) -- (12) -- (9);
+			\draw[thick, dashed] (12) -- (11);
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+		\enspace =\enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=1.8]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			\draw[very thick, Firebrick3] (7) -- (10) -- (11) -- (12) -- (7) -- (11) -- (12) -- (10) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=1.8]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick, Goldenrod3] (7) -- (9) -- (12) -- (7) -- (11) -- (12) -- (9) -- (11) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=1.8]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick,RoyalBlue3] (7) -- (8) -- (9) -- (11) -- (7) -- (8) -- (11)-- (9) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+	\]
+	\caption{Zerlegung von $\Delta^2 \times [0,1]$ in $3$-Simplizes}}
+\end{figure}
+Diese verallgemeinern wir jetzt für beliebiges $n \in \mathds{N}$:
 % subsection 79 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Affin lineare Abbildung {$\abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$}]{Definition} % (fold)
 \label{sub:710}
-Für $j=0, \ldots ,n$ sei $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ die eindeutige lineare Abbildung für die 
+Für $j=0, \ldots ,n$ sei $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ die eindeutige affin lineare Abbildung für die gilt:
 \begin{align*}
 	k_{n,j}(e_0)&=(e_0,0) \\
 	k_{n,j}(e_1)&= (e_1,0) \enspace\ldots \\
@@ -1471,6 +1603,7 @@ Für $j=0, \ldots ,n$ sei $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \time
 	k_{n,j}(e_{j+1})&= (e_j,1) \enspace\ldots \\
 	k_{n,j}(e_{n+1})&= (e_n,1)
 \end{align*}
+\todo{RevChap7}
 % subsection 710 (end)
 
 \subsection{Bemerkung} % (fold)
