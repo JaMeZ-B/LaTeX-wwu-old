@@ -2090,6 +2090,163 @@ Wir bezeichnen die Äquivalenzklassen von $(x,y)\in M$ mit
 \[
 \frac{x}{y}=\{(x',y')\in M~|~(x,y)\sim(x',y') \}
 \]
+Setze $\Quot(R):= \penbrace{\frac{a}{b}~|~(a,b)\in Q}$.\\
+\uline{Behauptung:}
+\[
+\left.\begin{array}{c} (x,y)\sim(x',y')\\ (u,v)\sim(u',v') \end{array}\right\} \Rightarrow \begin{array}{c} (x,y)+(u,v)\sim (x',y')\sim (u',v')\\\text{und } (x,y)\cdot(u,v)\sim(x',y')\cdot(u',v') \end{array}
+\]
+Denn:
+\begin{equation*}
+\begin{aligned}
+	&(xxv+yu,yv)\sim(x'v'+u'y',y'v')\\
+	&\Leftrightarrow \underbracket{xy'}vv'+\underbracket{uv'}yy'=\underbracket{x'y}vv'+\underbracket{u'v}yy'
+\end{aligned}
+\end{equation*}
+und $xy'=x'y$ sowie $uv'=u'v$, Rest genauso.\\
+
+\uline{Folgerung:} Wir erhalten wohldefinierte Verknüpfungen
+\[
+\frac{x}{y}+\frac{u}{v}=\frac{xv+yu}{yv},~\frac{x}{y}\cdot\frac{u}{v}=\frac{xu}{yv}
+\]
+Eine Routine-Rechnung zeigt: $(\Quot(R),+,\cdot)$ ist ein Ring mit Nullelement $\frac{0}{1}$ und Einselement $\frac{1}{1}\neq \frac{0}{1}$.
+Ist $a,b\neq 0$ so gilt $\frac{a}{b}\cdot\frac{b}{a}=\frac{1}{1}$, also ist $\Quot(R)$ sogar ein \uline{Körper}.\\
+Wir definieren $\iota:R\to\Quot(R),~ r\mapsto \frac{r}{1}$, das ist ein Ringhomomorphismus und injektiv, $\ker(\iota)=\{e\}$.
+Für $R=\Z$ erhalten wir genau $\Quot(\Z)=\Q$.
+
+\subsubsection*{Satz}
+Der \Index{Quotientenkörper} $\Quot(R)$ hat folgende \uline{universelle Eigenschaft}:\\
+Ist $K$ ein Körper und $R$ ein Integritätsbereich und ist $\varphi:R\to K$ ein injektiver Ringhomomorphismus, so gibt es genau einen Ringhomomorphismus $\tilde{\varphi}$ mit
+\[
+\tilde{\varphi}\circ \iota=\varphi
+\]
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		R \ar{rr}{\varphi} \ar{rd}[below,left]{\iota} & & K\\
+		& \Quot(R) \ar{ru}[below,right]{\tilde{\varphi}} &
+	\end{tikzcd}
+	\captionof{figure}{Quotientenkörper}
+\end{center}
+
+\bet{Beweis:}\\
+Definiere $\tilde{\varphi}\enbrace{\frac{a}{b}}=\frac{\varphi(a)}{\varphi(b)}$.
+Das ist wohldefiniert:
+\begin{equation*}
+\begin{aligned}
+	&\frac{a}{b}=\frac{a'}{b'}\Rightarrow ab'=a'b \Rightarrow\varphi(a)\underbracket{\varphi(b')}_{\neq 0}=\varphi(a')\underbracket{\varphi(b)}_{\neq 0} \text{ da $\varphi$ injektiv}\\
+	&\Rightarrow \frac{\varphi(a)}{\varphi(b)}=\frac{\varphi(a')}{\varphi(b')}
+\end{aligned}
+\end{equation*}
+Es folgt (nachrechnen), dass $\tilde{\varphi}$ ein Homomorphismus ist
+\[
+\tilde{\varphi}\enbrace{\frac{a}{b}+\frac{u}{v}}=\tilde{\varphi}\enbrace{\frac{a}{b}}+\tilde{\varphi}\enbrace{\frac{u}{v}},~\tilde{\varphi}\enbrace{\frac{a}{b}\cdot\frac{u}{v}}=\tilde{\varphi}\enbrace{\frac{a}{b}}\cdot\tilde{\varphi}\enbrace{\frac{u}{v}},~\tilde{\varphi}\enbrace{\frac{1}{1}}=\mathbb{1}_K
+\]
+Zur Eindeutigkeit von $\tilde{\varphi}$:
+Angenommen, $\psi:\Quot(R)\to K$ ist ein Homomorphismus mit $\psi\circ\iota=\varphi$.
+Für $a,b\in R,~b\neq 0$ folgt
+\[
+\varphi(a)=\psi\enbrace{\frac{a}{1}},~\varphi(b)=\psi\enbrace{\frac{b}{1}}\neq 0 \Rightarrow \psi\enbrace{\frac{1}{b}}=\frac{1}{\varphi(b)}\Rightarrow \psi\enbrace{\frac{a}{b}}=\psi\enbrace{\frac{a}{1}\cdot\frac{1}{b}}=\frac{\varphi(a)}{\varphi(b)}
+\]
+\hfill $\square$
+% sub end
+
+\subsection{Satz 13}
+\label{sub:satz_13}
+Sei $\varphi:R\to S$ ein Homomorphismus von (kommutativen oder nicht kommutativen) Ringen.
+Wenn $I\trianglelefteq R$ ein Ideal ist, so ist $\varphi(I)\trianglelefteq \varphi(R)$ ein Ideal (und $\varphi(R)\subseteq S$ ist Teilring).
+Wenn $J\trianglelefteq S$ ein Ideal ist, so ist $\varphi^{-1}(J)=\{r\in R~|~\varphi(r)\in J\}\trianglelefteq R$ ein Ideal.\\
+
+\bet{Beweis:}\\
+Übungsaufgabe!
+\hfill $\square$
+%sub end
+
+\subsection{Definition verschiedener Ideale}
+\label{sub:def_vers_ideale}
+Sei $R$ ein kommutativer Ring und $I\trianglelefteq R$ ein Ideal.
+\begin{enumerate}[(a)]
+	\item $I$ heißt \bet{maximales Ideal}\index{Ideal!maximales}, wenn $I\neq R$ und wenn es kein Ideal $J\trianglelefteq R$ gibt mit
+	\[
+	I\nsubseteq J\nsubseteq R
+	\]
+	\item $I$ heißt \bet{Primideal}\index{Ideal!Primideal}, wenn gilt:
+	$I\neq R$ und für $a,b\in R$ und $ab\in I$, so folgt
+	\[
+	a\in I \text{ oder } b\in I
+	\]
+\end{enumerate}
+
+\subsubsection*{Satz}
+Sei $R$ ein kommutativer Ring, sei $I\trianglelefteq R$ ein Ideal.
+\begin{enumerate}[(i)]
+	\item $I$ ist Primideal genau dann, wenn $\nicefrac{R}{I}$ ein Integritätsbereich ist.
+	\item $I$ ist maximales Ideal genau dann, wenn $\nicefrac{R}{I}$ ein Körper ist.
+\end{enumerate}
+
+\bet{Beweis:}\\
+(i): Ist $I$ Primideal, so ist $I\neq R\rightsquigarrow \nicefrac{R}{I}\neq \{0\}$.
+Ist $x=r+I,~y=s+I$ und $xy=I$, so folgt $rs\in I\rightsquigarrow r\in I$ oder $s\in I\rightsquigarrow x=I$ oder $y=I$ $\Rightarrow \nicefrac{R}{I}$ Integritätsbereich.\\
+Ist $\nicefrac{R}{I}$ ein Integritätsbereich, so ist $I\neq R$.
+Für $r,s\in R$ gilt 
+\[
+\pi_I(rs)=0+I\Leftrightarrow rs\in I \Leftrightarrow\pi_I(r)=r+I=I \text{ oder } \pi_I(s)=s+I=I \Leftrightarrow r\in I \text{ oder } s\in I
+\]
+\hfill $\square$\\
+
+(ii): Sei $I\trianglelefteq R$ ein maximales Ideal, sei $a+I\in \nicefrac{R}{I}$ mit $a\notin I$.
+Da $(a)+I=aR+I$ ein Ideal ist und $I\nsubseteq (a)+I$, folgt $R=(a)+I$, d.h. es gibt $b\in R$ und $i\in I$ mit $ab+i=1$.
+Es folgt 
+\[
+(a+I)(b+I)=ab+i+I=ab+I=1+I,
+\]
+also $a+I\in\enbrace{\nicefrac{R}{I}}^*$ Einheit $\Rightarrow \nicefrac{R}{I}$ ist Körper.\\
+Ist $\nicefrac{R}{I}$ ein Körper, so ist $I\neq R$.
+Angenommen, $J\trianglelefteq R$ ist ein Ideal mit $I\nsubseteq J$.
+Es folgt aus \hyperref[sub:satz_13]{3.12}, dass $\pi_I(J)\subseteq \nicefrac{R}{I}$ ein Ideal ist und $\pi_I(J)\neq \{0_{\nicefrac{R}{I}}\}$.
+Da $\nicefrac{R}{I}$ ein Körper ist, folgt mit \hyperref[sub:bsp_ideale]{3.7(a)},dass $\pi_I(J)=\nicefrac{R}{I}$.
+Wegen $I\supseteq J$ folgt
+\[
+J=\pi_I^{-1}(\pi_I(J))=R
+\]
+\hfill $\square$
+
+\subsubsection*{Korollar}
+Jedes maximale Ideal ist ein Primideal.\\
+
+\bet{Beweis:}\\
+Jeder Körper ist ein Integritätsbereich.
+\hfill $\square$
+% sub end
+
+\subsection{Satz 14}
+\label{sub:satz_14}
+Sei $R$ ein kommutativer Ring, sei $R\neq I\trianglelefteq R$ ein Ideal.
+Dann existiert ein maximales Ideal $J\trianglelefteq R$ mit 
+\[
+I\subseteq J\nsubseteq R.
+\]
+
+\bet{Beweis:}\\
+Sei $P=\{J\trianglelefteq R~|~1\notin J\text{ und }I\subseteq J \}$.
+Dann ist $P$ bzgl. $\subseteq$ partiell geordnet.
+Wir benutzen Zorns Lemma, vgl. LA II §7.
+Sei $C\subseteq P$ eine Kette (d.h. für alle $J,K\in C$ gilt $J\subseteq K$ oder $K\subseteq J$).
+Setze $J=\bigcup C$.
+Es folgt $1\notin J$ (weil $1\notin \bigcup P$).\\
+\uline{Behauptung:} $J$ ist ein Ideal.\\
+Denn: $a,b\in J,~r\in R\rightsquigarrow$ es gibt $K,L\in C$ mit $a\in K,~b\in L$.\\
+\OE $K\subseteq L$: $\Rightarrow a,b\in L\rightsquigarrow a\pm b\in L,~a\cdot b\in L,~ra\in L$.
+Wegen $L\subseteq J$ folgt
+\[
+a\cdot b,~a\pm b,~ ra\in J.
+\]
+Also $J\trianglelefteq R$.
+Wegen $1\notin J$ ist $R\neq J$, also (wegen $I\subseteq J$) $J\in P$.\\
+Nach Zorns Lemma gibt es maximale Elemente in $P$.
+Nach Konstruktion und \hyperref[sub:homomor_ideale]{3.4} besteht $P$ genau aus allen Idealen $J\trianglelefteq R$ mit
+\[
+I\subseteq J\nsupseteq R
+\]
+\hfill $\square$
 
 
 
@@ -2102,21 +2259,7 @@ Wir bezeichnen die Äquivalenzklassen von $(x,y)\in M$ mit
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
