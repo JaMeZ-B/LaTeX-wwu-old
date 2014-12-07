@@ -1460,7 +1460,7 @@ Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Ve
 $n \in \set{0,1,2}$:
 \begin{figure}[H]
 	\centering{
-	\scalebox{0.7}{\begin{tikzpicture}[scale=2.0]
+	\scalebox{0.9}{\begin{tikzpicture}[scale=2.0]
 		\coordinate (1) at (0,1);
 		\coordinate (2) at (0,0);
 		
@@ -1495,12 +1495,12 @@ $n \in \set{0,1,2}$:
 	\end{tikzpicture}}
 	\caption{$\Delta^n \times [0,1]$ für $n=0,1,2$}}
 \end{figure}
-Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
+\noindent Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
 \begin{figure}[H]
 	\centering{
 	\[
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=1.8]
+		\begin{tikzpicture}[scale=2]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1521,7 +1521,7 @@ Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
 		}}
 		\enspace =\enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=1.8]
+		\begin{tikzpicture}[scale=2]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1543,7 +1543,7 @@ Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
 		}} 
 		\enspace\cup \enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=1.8]
+		\begin{tikzpicture}[scale=2]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1566,7 +1566,7 @@ Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
 		}} 
 		\enspace\cup \enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=1.8]
+		\begin{tikzpicture}[scale=2]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1590,77 +1590,92 @@ Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
 	\]
 	\caption{Zerlegung von $\Delta^2 \times [0,1]$ in $3$-Simplizes}}
 \end{figure}
-Diese verallgemeinern wir jetzt für beliebiges $n \in \mathds{N}$:
+\noindent Diese verallgemeinern wir jetzt für beliebiges $n \in \mathds{N}$:
 % subsection 79 (end)
 
-\subsection[Definition: Affin lineare Abbildung {$\abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$}]{Definition} % (fold)
+\subsection[Definition: Affin lineare Abbildungen zur Konstruktion der Kettenhomotopie]{Definition} % (fold)
 \label{sub:710}
-Für $j=0, \ldots ,n$ sei $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ die eindeutige affin lineare Abbildung für die gilt:
+Für $j=0, \ldots ,n$ seien $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ und $\iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$\marginnote{
+$e_1, \ldots , e_n$ sind wieder die Einheitsvektoren von $\mathds{R}^n$} die eindeutigen affin linearen Abbildungn, für die gilt:
 \begin{align*}
-	k_{n,j}(e_0)&=(e_0,0) \\
-	k_{n,j}(e_1)&= (e_1,0) \enspace\ldots \\
-	k_{n,j}(e_j)&= (e_j,0) \\
-	k_{n,j}(e_{j+1})&= (e_j,1) \enspace\ldots \\
-	k_{n,j}(e_{n+1})&= (e_n,1)
+	k_{n,j}(e_0)&=(e_0,0) & \iota_{n,j}(e_0) &= e_0\\
+	k_{n,j}(e_1)&= (e_1,0) \enspace\ldots & \iota_{n,j}(e_1)&=e_1  \enspace \ldots \\
+	k_{n,j}(e_j)&= (e_j,0) & \iota_{n,j}(e_{j-1})&= e_{j-1}\\
+	k_{n,j}(e_{j+1})&= (e_j,1) \enspace\ldots & \iota_{n,j}(e_j)&= e_{j+1} \enspace \ldots \\
+	k_{n,j}(e_{n+1})&= (e_n,1)& \iota_{n,j}(e_{n-1}) &= e_n
 \end{align*}
-\todo{RevChap7}
 % subsection 710 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Lemma: Gleichungen für die Abbildungen aus \ref{sub:710}]{Lemma} % (fold)
 \label{sub:711}
-Für $j=0, \ldots ,n$ ist $ \iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$ die eindeutige affin lineare Abbildung für die
-\[
-	\iota_{n,j}(e_0) = e_0 ,\ldots , \iota_{n,j}(e_{j-1})= e_{j-1}, \iota_{n,j}(e_j)= e_{j+1} , \ldots , \iota_{n,j}(e_{n-1}) = e_n
-\]
-% subsection 711 (end)
-
-\subsection{Lemma} % (fold)
-\label{sub:712}
+Es gelten folgende fünf Gleichungen für die Abbildungen $k_{n,j}$ und $\iota_{n,j}$:
 \begin{enumerate}[(i)]
 	\item Für $0 \le l < j \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l} \times \id_{[0,1]}} \circ k_{n-1,j-1}$
 	\item Für $1 \le j+1 < l \le n+1$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l-1} \times \id_{[0,1]}} \circ k_{n-1,j} $
 	\item Für $1 \le j+1 = l \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = k_{n,j+1} \circ \iota_{n+1,l}$
-	\item Für $i=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
+	\item Für $l=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
 	\item Für $l=n,j=n+1$ ist $k_{n,j} \circ \iota_{n+1,l} = i_0 : \Delta^n \to \Delta^n \times [0,1]$
 \end{enumerate}
 \minisec{Beweis}
-\begin{enumerate}[(i)]
-	\item per Zeichnung
-	\missingfigure{linke Seite}
-	
-	\missingfigure{rechte Seite}
-\end{enumerate}
+Wir zeigen hier nur exemplarisch die erste Gleichung:
+Die linke Seite der Gleichung entspricht
+	\[
+		\begin{tikzcd}[row sep=2.4em, column sep=0.5em, font=\small]
+			\abs*{\Delta^n} \dar["\iota_{n+1,l}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \drar[mapsto]& \cdots & e_j \drar[mapsto]& \cdots 
+			& e_n \drar[mapsto]& \\
+			\abs*{\Delta^{n+1}} \dar["k_{n,j}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto] & e_{l+1} \dar[mapsto]& e_{j} \dar[mapsto] 
+			& e_{j+1} \arrow[ddl,mapsto, bend left] & e_n & e_{n+1} \arrow[ddl,mapsto, bend left] \\
+			\abs*{\Delta^{n}} \times [0,1] && (e_0,0) & (e_{l-1},0) & (e_l,0) & (e_{l+1},0)& (e_j,0) & & \\
+			 &&  &  &  & & (e_j,1) & \cdots & (e_n,1)
+		\end{tikzcd}
+	\]
+	und die rechte Seite entspricht
+	\[
+		\begin{tikzcd}[row sep=2.4em, column sep=0.2em, font=\small]
+			\abs*{\Delta^n} \dar["k_{n-1,j-1}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto]& \cdots 
+			& e_{j-1} \dar[mapsto]& e_j \arrow[ddl,bend left,mapsto]& e_{j+1} \arrow[ddl,bend left,mapsto] & \cdots & e_n \arrow[ddl,mapsto,bend left] \\
+			\abs*{\Delta^{n-1}} \times [0,1] \arrow[dd,"\iota_{n,l}\times \id_{[0,1]}" description] && (e_0,0) \arrow[dd,mapsto] & (e_{l-1},0) \arrow[dd,mapsto] 
+			& (e_l,0) \arrow[ddr, mapsto] & \cdots & (e_{j-1},0) \arrow[dd, controls={+(225:1.2) and +(135:1.2)}, mapsto] &   &  & \cdots \\
+			 &&&&&& (e_{j-1},1) \arrow[dd, controls={+(-45:1) and +(45:1)}, end anchor={[xshift=2ex]north}, mapsto] & (e_{j},1) \arrow[dd, mapsto] & \cdots 
+			 & (e_{n-1},1) \arrow[dd,mapsto]\\
+			 \abs*{\Delta^n} \times [0,1] && (e_0,0)  & (e_{l-1},0) & (e_l,0) & (e_{l+1},0) &(e_j,0) & & & \\
+			 &&&&&& (e_j,1) & (e_{j+1},1) & \cdots & (e_n,1)
+		\end{tikzcd}
+	\]
+	Also folgt insgesamt die Gleichheit. Die anderen Gleichungen folgen genauso. \bewende
 % subsection 712 (end)
 
-\subsection[Beweis von \textbf{[\#\#]}]{Beweis von \protect\eqref{eq:79}} % (fold)
-\label{sub:713}
-Sei $h_n : C_n(C;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
+\subsection[Beweis von \textbf{[\#\#]}/Konstruktion der Kettenhomotopie]{Beweis von \protect\eqref{eq:79}} % (fold)
+\label{sub:712}
+Sei $h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
 \[
-	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \enbrace*{\sigma \times \id} \circ k_{n,j}
+	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \cdot \enbrace*{\sigma \times \id} \circ k_{n,j}
 \]
+$h_*$ ist die gesuchte Kettenhomotopie, da für $n \in \mathds{N}$ unter Anwendung der Gleichungen aus \ref{sub:712} gilt:
 \begin{align*}
-	\partial_{n+1} \enbrace*{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
-	&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \enbrace*{ \sigma \times \id \circ k_{n,j} \circ \iota_{n+1,l}} \\
-	&= \sum_{0 \le l < j \le n} (-1)^{j+l} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j-1} + \sum_{1 \le j+1 < l < n+1} (-1)^{j+l}
-	\enbrace*{\sigma \circ \iota_{n,l-1} \times \id} \circ k_{n-1,j} \\
-	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l}  \sigma\times\id \circ k_{n,j}
-	\circ \iota_{n+1,l} \\
-	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
-	&= \sum_{0 \le l \le j \le n-1} (-1)^{j+l+1} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j} + \sum_{1 \le j+1 \le l \le n+1} (-1)^{j+l+1}
-	\enbrace*{\sigma \circ \iota_{n,l} \times \id} \circ k_{n-1,j} \\
-	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l} \sigma\times \id \circ k_{n,j}
-	\circ \iota_{n+1,l} \\
-	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
-	&= - \sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1  -
-	\sigma \circ i_0 \\
-	&= - \sum_{j=0}^{n-1} \sum_{l=0}^{n} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1 - \sigma \circ i_0 \\
+	\partial_{n+1} \enbrace[\big]{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
+	&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \cdot \enbrace*{ \sigma \times \id} \circ k_{n,j} \circ \iota_{n+1,l} \tag*{(nach Definition \ref{sub:52})}\\
+	&= \smashoperator[r]{\sum_{0 \le l < j \le n}} \, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j-1} 
+	+ \enspace\smashoperator{\sum_{1 \le j+1 < l \le n+1}}\, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l-1}) \times \id} \circ k_{n-1,j} \\
+	& \quad + \smashoperator[r]{\sum_{1 \le j+1=l \le n}} \,(-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} 
+	+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \, (-1)^{j+l} (\sigma\times\id) \circ k_{n,j}\circ \iota_{n+1,l} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 
+	+ \smashoperator[r]{\sum_{n+1=j+1=l}}\, (-1)^{j+l} (\sigma \times \id) \circ i_0 \\
+	&= \smashoperator[r]{\sum_{0 \le l \le j \le n-1}}\, (-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} 
+	+ \enspace\smashoperator{\sum_{1 \le j+1 \le l \le n}} \,(-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} \\
+	& \quad + \underbrace{\smashoperator[r]{\sum_{1 \le j=l \le n}}\, (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} 
+	+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \,(-1)^{j+l} (\sigma\times \id) \circ k_{n,j} \circ \iota_{n+1,l}}_{=0} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 + \smashoperator[r]{\sum_{n+1=j+1=l}} (-1)^{j+l} (\sigma\times \id) \circ i_0 \\
+	&= - \smashoperator[r]{\sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}}} \,(-1)^{j+l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} 
+	+ (\sigma\times \id) \circ i_1  - (\sigma\times \id) \circ i_0 \\
+	&= - \sum_{j=0}^{n-1} (-1)^j \sum_{l=0}^{n} (-1)^{l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j}
+	+ \underbrace{(\sigma\times \id) \circ i_1}_{= i_0 \circ \sigma}  - \underbrace{(\sigma\times \id) \circ i_0}_{= i_1 \circ \sigma} \\
 	&= - h_{n-1}(\partial_n \sigma) + C_n(i_1;R)(\sigma) - C_n(i_0;R)(\sigma) \bewende  
 \end{align*}
-\todo[inline]{Das ist höchstwahrscheinlich noch nicht ganz richtig \ldots }
 % subsection 713 (end)
 
-\subsection{Bemerkung} % (fold)
-\label{sub:714}
+\subsection[Bemerkung: Konstruktion einer Kettenhomotopie aus einer Homotopie]{Bemerkung} % (fold)
+\label{sub:713}
 Ist $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f$ und $g$, so erhalten wir eine Kettenhomotopie $k$ zwischen $C_*(f;R)$ und $C_*(g;R)$ durch
 \[
 	k_n(\sigma) := C_{n+1}(H;R) \circ h_n = \sum_{j=0}^{n} (-1)^j H \circ (\sigma \times \id) \circ k_{n,j}
