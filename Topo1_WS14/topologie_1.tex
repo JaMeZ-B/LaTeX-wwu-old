@@ -731,14 +731,14 @@ die \Index{Torsionsgruppe} von $A$. Ist $A$ endlich erzeugt, so ist auch $TA$ en
 \[
 	TA \cong \nicefrac{\mathds{Z}}{(p_1^{n_1})} \oplus \ldots \oplus \nicefrac{\mathds{Z}}{(p_k^{n_k})}
 \]
-Weiter gibt es dann $n$ mit $A \cong \mathds{Z}^n \oplus TA$. $\Rg A := n$ ist der Rang von $A$\index{Rang einer abelschen Gruppe}. \todo{RevChap4}
+Weiter gibt es dann $n$ mit $A \cong \mathds{Z}^n \oplus TA$. $\Rg A := n$ ist der \bet{Rang} von $A$\index{Rang einer abelschen Gruppe}.
 % subsection 41 (end)
 
 \subsection[Lemma: Rang einer endlich erzeugten abelschen Gruppe]{Lemma} % (fold)
 \label{sub:42}
 Sei $A$ eine endlich erzeugte abelsche Gruppe. Dann gilt $\Rg A = \max \set[m]{\exists C \le A, C \cong \mathds{Z}^m}$.
 \minisec{Beweis}
-Da $A \cong \mathds{Z}^n \oplus T A$ genügt zu zeigen: Ist $\varphi : \mathds{Z}^m \to \mathds{Z}^n \oplus T A$ ein injektiver Gruppenhomomorphismus, so ist $m \le n$.
+Da $A \cong \mathds{Z}^n \oplus T A$ ist, genügt zu zeigen: Ist $\varphi : \mathds{Z}^m \to \mathds{Z}^n \oplus T A$ ein injektiver Gruppenhomomorphismus, so ist $m \le n$.
 Schreibe $\varphi = \varphi_0 \oplus \varphi_1$, also $\varphi(a) = \varphi_0(a) + \varphi_1(a)$ mit $\varphi_0 : \mathds{Z}^m \to \mathds{Z}^n$, 
 $\varphi_1 : \mathds{Z}^m \to T A$. 
 
@@ -800,7 +800,9 @@ exakt in $M_0, M_1$ und $M_2$ ist.
 		\end{tikzcd}
 	\]
 	ist eine kurze exakte Folge.
-	\item $\mathds{Z} \xhookrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$
+	\item $\begin{tikzcd}
+		\mathds{Z} \rar[hook,"\cdot n"] & \mathds{Z} \rar[two heads] &  \nicefrac{\mathds{Z}}{n \mathds{Z}}
+	\end{tikzcd}$
 	ist eine kurze exakte Folge.
 \end{enumerate}
 % subsection 44 (end)
@@ -821,9 +823,17 @@ Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \x
 \subsection[Bemerkung: Existenz einer Spaltung, wenn $M_2$ frei ist]{Bemerkung} % (fold)
 \label{sub:46}
 \begin{enumerate}[1)]
-	\item $\mathds{Z} \xhookrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$ spaltet nicht.
-	\item Ist $(\star)$ $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
+	\item $\begin{tikzcd}
+		\mathds{Z} \rar[hook,"\cdot n"] & \mathds{Z} \rar[two heads] &  \nicefrac{\mathds{Z}}{n \mathds{Z}}
+	\end{tikzcd}$
+	spaltet nicht.
+	\item Ist $\begin{tikzcd}
+		M_0 \rar["f_0"] & M_1 \rar["f_1"] & M_2
+	\end{tikzcd}$
+	eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
 	Siehe Lemma \ref{sub:32}. Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
+	
+	Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
 \end{enumerate}
 % subsection 46 (end)
 
@@ -841,26 +851,36 @@ da $A \cong \mathds{Z}^{\Rg A} \oplus T A$, $B \cong \mathds{Z}^{\Rg B} \oplus T
 
 \subsection[Proposition: Der Rang ist für kurze exakte Folgen endl. erz., abelscher Gruppen additiv]{Proposition} % (fold)
 \label{sub:48}
-Der Rang von endlich erzeugten abelschen Gruppen ist additiv für kurze exakte Folgen: Ist $(\star)$ $A \xrightarrow{i} B \xrightarrow{p}C$ eine kurze exakte Folge von endlich 
+Der Rang von endlich erzeugten abelschen Gruppen ist additiv für kurze exakte Folgen: Ist
+\begin{equation*}
+	\begin{tikzcd}
+		A \rar["i",hook] & B \rar["p", two heads] & C
+	\end{tikzcd} \label{eq:48}\tag{$\star$}
+\end{equation*}
+eine kurze exakte Folge von endlich 
 erzeugten abelschen Gruppen, so gilt $\Rg B = \Rg A + \Rg C$.
-\minisec{Beispiel}
-mit $\mathds{Z}$
+% \minisec{Beispiel}
+% mit $\mathds{Z}$
 \minisec{Beweis}
-Spaltet $(\star)$, so ist $B \cong A \oplus C$ und die Behauptung folgt aus der Bemerkung \ref{sub:47}. \smallskip \\
-Wir können annehmen: $C = \mathds{Z}^n \oplus T C$. Wir erhalten: 
+Spaltet \eqref{eq:48}, so ist $B \cong A \oplus C$ und die Behauptung folgt aus der Bemerkung \ref{sub:47}. \smallskip \\
+Wir können annehmen, dass $C = \mathds{Z}^n \oplus T C$ gilt. Wir erhalten folgendes Diagramm: 
 \[
 	\begin{tikzcd}
 		A \rar["i",hook] \dar[equal] & p ^{-1}(\mathds{Z}^n) \rar["p", two heads] \dar[hook,"i''"]& \mathds{Z}^n \dar[hook,"i'"]\\
-		A \rar["i"] & B \rar["p", two heads] \dar[two heads,"p''"]& C \dar[two heads,"p'"]\\
+		A \rar["i",hook] & B \rar["p", two heads] \dar[two heads,"p''"]& C \dar[two heads,"p'"] & \text{\eqref{eq:48}}\\
 		& \nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \rar[two heads, hook,"p' \circ p"]& T C
-	\end{tikzcd} \tag*{$(\star)$}
+	\end{tikzcd} 
 \]
 Ist $p' \circ p(b)=0$, so gibt es $v \in \mathds{Z}^n$ mit $i'(v)= p(b)$. Nun gibt es $v' \in p ^{-1}(\mathds{Z}^n)$ mit $p(v')=v$. Es folgt 
 \[
-	p \enbrace*{i''(v')} = p(b) 
+	p \enbrace[\big]{i''(v')} = p(b) 
 \]
-also $i''(v') -b \in \ker p = i(A)$. Da $i(A) \subseteq i'' \enbrace*{p ^{-1} (\mathds{Z}^n)} $ folgt $b \in i'' \enbrace*{p ^{-1}(\mathds{Z}^n)}$.
-In $(\star)$ sind die Spalten und Zeilen exakt. Da $\mathds{Z}^n$ frei ist, spaltet $A \to p ^{-1}(\mathds{Z}^n) \to \mathds{Z}^n$ und es gilt 
+also $i''(v') -b \in \ker p = i(A)$. Da $i(A) \subseteq i'' \enbrace*{p ^{-1} (\mathds{Z}^n)}$, folgt $b \in i'' \enbrace*{p ^{-1}(\mathds{Z}^n)}$.
+In dem Diagramm sind die Spalten und Zeilen exakt. Da $\mathds{Z}^n$ frei ist, spaltet 
+$\begin{tikzcd}
+	A \rar[hook,"i"] & p^{-1}(\mathds{Z}^n) \rar["p", two heads] & \mathds{Z}^n
+\end{tikzcd}$
+und es gilt 
 \[
 	\Rg A + \Rg C = \Rg A + n = \Rg \enbrace*{p ^{-1}(\mathds{Z}^n)} 
 \]
@@ -869,22 +889,35 @@ Nebenbei: Ist $A' \subseteq B'$, so gilt $\Rg A' \le \Rg B'$, denn
 \[
 	\Rg A' = \max \set[n']{\mathds{Z}^{n'} \cong C' \le A'} \le \max \set[n']{\mathds{Z}^{n'} \cong C' \le B'} = \Rg B'.
 \]
-Betrachte die kurze exakte Folge $p ^{-1}(\mathds{Z}^n) \to B  \to \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}$. Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
-$k$ mit $k \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k b \in p ^{-1}(\mathds{Z}^n)$. Es folgt $kB \le p ^{-1}(\mathds{Z}^n) \le B$. Ist 
-$B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. Mit der Nebenbemerkung folgt 
-$\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
+Betrachte die kurze exakte Folge
+$\begin{tikzcd}
+	p^{-1}(\mathds{Z}^n) \rar & B \rar & \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}
+\end{tikzcd}$. 
+Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
+$k$ mit $k \cdot \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k \cdot b \in p ^{-1}(\mathds{Z}^n)$. Es folgt 
+$kB \subseteq  p ^{-1}(\mathds{Z}^n)$. Ist  $B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. 
+Mit der Nebenbemerkung folgt $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$ aus $kB \subseteq  p ^{-1}(\mathds{Z}^n) \subseteq B$. \bewende
 \minisec{Beweis mit Tensorprodukten (Skizze)}
 \begin{itemize}
 	\item $\mathds{Q} \otimes_\mathds{Z} : \mathds{Z}\text{-}\MOD \to \mathds{Q}\text{-}\VR $ ist ein Funktor.
-	\item $\Rg A= \dim_\mathds{Q} \mathds{Q} \otimes_\mathds{Z} A$
+	\item $\Rg A= \dim_\mathds{Q} (\mathds{Q} \otimes_\mathds{Z} A)$
 	\begin{enumerate}[(a)]
 		\item $\mathds{Q} \otimes_\mathds{Z} (X \oplus Y) = \mathds{Q} \otimes_\mathds{Z} X \oplus  \mathds{Q} \otimes_\mathds{Z} Y$
 		\item $\mathds{Q} \otimes_\mathds{Z} \mathds{Z}^n \cong \mathds{Q}^n$
 		\item $\mathds{Q} \otimes_\mathds{Z} T \cong 0$ für $T$ ein Torsionsmodul.
 	\end{enumerate}
-	\item Ist $A \to B \to C$ eine kurze exakte Folge, so ist auch 
-	$\mathds{Q} \otimes_\mathds{Z} A \to \mathds{Q} \otimes_\mathds{Z} B \to \mathds{Q} \otimes_\mathds{Z} C$ eine kurze exakte Folge.
-	\item Jede kurze exakte Folge von $\mathds{Q}$-Vektorräumen spaltet und es gilt $\dim_\mathds{Q}(V \oplus W) = \dim_\mathds{Q}(V)+ \dim_\mathds{Q} (W)$.
+	\item Ist $\begin{tikzcd}
+		A \rar & B \rar & C
+	\end{tikzcd}$ eine kurze exakte Folge, so ist auch 
+	\[
+		\begin{tikzcd}
+				\mathds{Q} \otimes_\mathds{Z} A \rar & \mathds{Q} \otimes_\mathds{Z} B \rar & \mathds{Q} \otimes_\mathds{Z} C
+			\end{tikzcd}
+	\] 
+	eine kurze exakte Folge.
+	\item Jede kurze exakte Folge $\begin{tikzcd}
+		V_0 \rar & V_1 \rar & V_2
+	\end{tikzcd}$ von $\mathds{Q}$-Vektorräumen spaltet und daher gilt $V_1 \cong V_0 \oplus V_2$ und $\dim_\mathds{Q}(V \oplus W) = \dim_\mathds{Q}(V)+ \dim_\mathds{Q} (W)$.
 \end{itemize}
 % subsection 48 (end)
 
@@ -892,7 +925,7 @@ $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
 \label{sub:49}
 Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex.
 \[
-	\chi(C_*,d_*) := \sum_{i=0}^{\infty} \Rg(C_i) = \sum_{i=0}^{n_0} \Rg(C_i) 
+	\chi(C_*) := \sum_{i=0}^{\infty} \Rg(C_i) = \sum_{i=0}^{n_0} \Rg(C_i) 
 \]
 heißt die \bet{Eulercharakteristik}\index{Euler-Charakteristik!von $\mathds{Z}$-Kettenkomplexen} von $(C_*,d_*)$. Dabei ist $n_0$ so gewählt, dass $C_n =0$ für alle 
 $n >n_0$. 
@@ -905,13 +938,13 @@ Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex. Dann gilt
 	\chi(C_*) = \sum_{i=1}^{\infty} (-1)^i \Rg H_i(C_*,d_*).
 \]
 \minisec{Beweis}
-Sei $B_{n+1} := \im \partial_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker \partial_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
+Sei $B_{n+1} := \im d_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker d_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
 Als Untermoduln von $C_n$ sind $Z_n$ und $B_n$ endlich erzeugt (LA2). Insbesondere ist auch $H_n(C_*,d_*)$ endlich erzeugt und der Rang somit definiert. Auch $B_{n+1}$
 ist Untermodul des endlich erzeugten $\mathds{Z}$-Moduls $C_n$ und somit endlich erzeugt.
 Wir erhalten kurze exakte Folgen:
 \[
 	\begin{tikzcd}[row sep=0.4em]
-		B_{n+1} \rar & Z_n \rar & H_n(C_*, d_*) \\
+		B_{n+1} \rar[hook] & Z_n \rar[two heads] & H_n(C_*, d_*) \\
 		Z_n \rar[hook] & C_n \rar[two heads] & B_n \quad 
 	\end{tikzcd}
 \]
@@ -1189,7 +1222,7 @@ für $v \in \ker d_n$, denn:
 \end{enumerate}
 % subsection 63 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Induzierte Abbildung auf Kettenkomplexen]{Definition} % (fold)
 \label{sub:64}
 Sei $f : X \to Y$ stetig. Wir definieren $C_n(f;R) : C_n(X;R) \to C_n(Y;R)$ durch
 \[
@@ -1232,7 +1265,7 @@ Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$
 \end{enumerate}
 % subsection 65 (end)
 
-\subsection{Korollar} % (fold)
+\subsection[Korollar: Homologie ist ein Funktor $\TOP \to R\text{-}\textsc{Mod}$]{Korollar} % (fold)
 \label{sub:66}
 Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) : \TOP \to R\text{-}\textsc{Mod}$.
 \minisec{Beweis}
@@ -1296,7 +1329,7 @@ Ist umgekehrt $f : \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so
 $f = \bigoplus_{i \in I} f_i$
 % subsection 69 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Homologie des Koproduktes topologischer Räume]{Satz} % (fold)
 \label{sub:610}
 Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die $j_i : X_i \to X$ einen Isomorphismus
 \[
@@ -1410,14 +1443,14 @@ ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mat
 In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
 % subsection 76 (end)
 
-\subsection[Proposition: induzierte Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
+\subsection[Prop.: induzierte Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
 \label{sub:77}
 Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ und $g_*$ kettenhomotop, so gilt für alle $n$
 \[
 	H_n(f_*) = H_n(g_*)
 \]
 \minisec{Beweis}
-Sei $x \in H_n(C_*.d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
+Sei $x \in H_n(C_*,d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
 \begin{align*}
 	H_n(f_*)(x) = H_n(f_*) \enbrace*{[v]} = \benbrace*{f_n(v)}  &= \benbrace[\Big]{g_n(v) +\underbrace{ d_{n+1}' \circ h_n(v)}_{\in \im d_{n+1}'} + \underbrace{h_{n-1} \circ d_n(v)}_{=0}} \\
 	&= \benbrace*{g_n(v)} = H_n(g_*) \enbrace*{[v]} = H_n(g_*)(x) \bewende
@@ -1431,11 +1464,10 @@ Die Homotopieinvarianz von $H_n(-;R)$ folgt aus folgenden Spezialfall:
 	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. $\Longrightarrow$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
 \end{equation*}
 \minisec{Beweis}
-Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt
+Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt mittels Funktorialität 
 \begin{align*}
 	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
 \end{align*}
-\todo{RevChap7}
 % subsection 78 (end)
 
 \subsection[Bemerkung zum Vorgehen beim Beweis von \textbf{[\#]}]{Bemerkung} % (fold)
@@ -1448,77 +1480,232 @@ $h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathds{N}$ mit
 
 \minisec{"Ansatz"}
 Für $\sigma : \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} : \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. Dann ist
-"$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{(0,1]}$" und 
+"$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{[0,1]}$" und 
 \[
 	\partial_{n+1}(h_n \sigma) = \partial_{n+1}(\sigma \times \id_{[0,1]}) = (\sigma \times \id)\Big|_{\partial (\abs*{\Delta^n} \times [0,1] )} = \partial_n \sigma \times \id_{[0,1]} + i_0 \sigma + i_1 \sigma
 \]
-$\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1} $
+da $\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1}$.
 
-Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes:
-\missingfigure{Hier kommen noch ein paar Simplizes hin mit Zerlegung und so }
+Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes. $\Delta^n \times [0,1]$ hat die folgende Form für
+$n \in \set{0,1,2}$:
+\begin{figure}[H]
+	\centering{
+	\scalebox{0.9}{\begin{tikzpicture}[scale=2.0]
+		\coordinate (1) at (0,1);
+		\coordinate (2) at (0,0);
+		
+		\coordinate (3) at (1.7,1);
+		\path (3) ++ (1,0) coordinate (4) ++ (0,-1) coordinate (6) ++ (-1,0) coordinate (5);
+		% \coordinate (4) at (3,1);
+		% \coordinate (5) at (2,0);
+		% \coordinate (6) at (3,0);
+		
+		\coordinate (7) at (4.5,1);
+		\path (7) ++ (0.9,-0.15) coordinate (8);
+		\path (7) ++ (0.5,0.18) coordinate (9);
+		\path (7) ++ (0,-1) coordinate (10);
+		\path (8) ++ (0,-1) coordinate (11);
+		\path (9) ++ (0,-1) coordinate (12);
+		
+		\draw[thick] (2) -- (1) node[above, yshift=0.4cm]{$\Delta^0$} node[midway, left, xshift=-0.3cm]{$[0,1]$};
+		
+		\draw[thick] (3) node[left]{$(0,0)$}-- (4) node[midway, above, yshift=0.4cm]{$\Delta^1$} node[right]{$(1,0)$} -- (6) node[right]{$(1,1)$} 
+		-- (5) node[left]{$(0,1)$} -- cycle;
+		
+		
+		\draw[thick] (7) node[left]{$(0,0)$} node[above, yshift=0.4cm, xshift=0.9cm]{$\Delta^2$} -- (8) node[right]{$(2,0)$} -- (9) node[right]{$(1,0)$} -- cycle;
+		
+		\draw[thick] (7) -- (10) node[left]{$(0,1)$} -- (11) node[right]{$(2,1)$} -- (8);
+		\draw[thick, dashed] (10) -- (12) node[above left]{$(1,1)$} -- (9);
+		\draw[thick, dashed] (12) -- (11);
+		
+		\foreach \x in {1,...,12}{
+			\filldraw (\x) circle(0.03);
+		}
+	\end{tikzpicture}}
+	\caption{$\Delta^n \times [0,1]$ für $n=0,1,2$}}
+\end{figure}
+\noindent Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
+\begin{figure}[H]
+	\centering{
+	\[
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed] (10) -- (12) -- (9);
+			\draw[thick, dashed] (12) -- (11);
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+		\enspace =\enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			\draw[very thick, Firebrick3] (7) -- (10) -- (11) -- (12) -- (7) -- (11) -- (12) -- (10) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick, Goldenrod3] (7) -- (9) -- (12) -- (7) -- (11) -- (12) -- (9) -- (11) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick,RoyalBlue3] (7) -- (8) -- (9) -- (11) -- (7) -- (8) -- (11)-- (9) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+	\]
+	\caption{Zerlegung von $\Delta^2 \times [0,1]$ in $3$-Simplizes}}
+\end{figure}
+\noindent Diese verallgemeinern wir jetzt für beliebiges $n \in \mathds{N}$:
 % subsection 79 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Affin lineare Abbildungen zur Konstruktion der Kettenhomotopie]{Definition} % (fold)
 \label{sub:710}
-Für $j=0, \ldots ,n$ sie $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ die eindeutige lineare Abbildung für die $k_{n,j}(e_0)=(e_0,0)$,
-$k_{n,j}(e_1)= (e_1,0), \ldots , k_{n,j}(e_j)= (e_j,0), k_{n,j}(e_{j+1})= (e_j,1), \ldots , k_{n,j}(e_{n+1})= (e_n,1)$. \todo{schöner machen}
+Für $j=0, \ldots ,n$ seien $k_{n,j} : \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ und $\iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$\marginnote{
+$e_1, \ldots , e_n$ sind wieder die Einheitsvektoren von $\mathds{R}^n$} die eindeutigen affin linearen Abbildungn, für die gilt:
+\begin{align*}
+	k_{n,j}(e_0)&=(e_0,0) & \iota_{n,j}(e_0) &= e_0\\
+	k_{n,j}(e_1)&= (e_1,0) \enspace\ldots & \iota_{n,j}(e_1)&=e_1  \enspace \ldots \\
+	k_{n,j}(e_j)&= (e_j,0) & \iota_{n,j}(e_{j-1})&= e_{j-1}\\
+	k_{n,j}(e_{j+1})&= (e_j,1) \enspace\ldots & \iota_{n,j}(e_j)&= e_{j+1} \enspace \ldots \\
+	k_{n,j}(e_{n+1})&= (e_n,1)& \iota_{n,j}(e_{n-1}) &= e_n
+\end{align*}
 % subsection 710 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Lemma: Gleichungen für die Abbildungen aus \ref{sub:710}]{Lemma} % (fold)
 \label{sub:711}
-Für $j=0, \ldots ,n$ ist $ \iota_{n,j} : \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$ die eindeutige affin lineare Abbildung für die
-\[
-	\iota_{n,j}(e_0) = e_0 ,\ldots , \iota_{n,j}(e_{j-1})= e_{j-1}, \iota_{n,j}(e_j)= e_{j+1} , \ldots , \iota_{n,j}(e_{n-1}) = e_n
-\]
-% subsection 711 (end)
-
-\subsection{Lemma} % (fold)
-\label{sub:712}
+Es gelten folgende fünf Gleichungen für die Abbildungen $k_{n,j}$ und $\iota_{n,j}$:
 \begin{enumerate}[(i)]
 	\item Für $0 \le l < j \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l} \times \id_{[0,1]}} \circ k_{n-1,j-1}$
 	\item Für $1 \le j+1 < l \le n+1$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l-1} \times \id_{[0,1]}} \circ k_{n-1,j} $
 	\item Für $1 \le j+1 = l \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = k_{n,j+1} \circ \iota_{n+1,l}$
-	\item Für $i=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
+	\item Für $l=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
 	\item Für $l=n,j=n+1$ ist $k_{n,j} \circ \iota_{n+1,l} = i_0 : \Delta^n \to \Delta^n \times [0,1]$
 \end{enumerate}
 \minisec{Beweis}
-\begin{enumerate}[(i)]
-	\item per Zeichnung
-	\missingfigure{linke Seite}
-	
-	\missingfigure{rechte Seite}
-\end{enumerate}
+Wir zeigen hier nur exemplarisch die erste Gleichung:
+Die linke Seite der Gleichung entspricht
+	\[
+		\begin{tikzcd}[row sep=2.4em, column sep=0.5em, font=\small]
+			\abs*{\Delta^n} \dar["\iota_{n+1,l}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \drar[mapsto]& \cdots & e_j \drar[mapsto]& \cdots 
+			& e_n \drar[mapsto]& \\
+			\abs*{\Delta^{n+1}} \dar["k_{n,j}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto] & e_{l+1} \dar[mapsto]& e_{j} \dar[mapsto] 
+			& e_{j+1} \arrow[ddl,mapsto, bend left] & e_n & e_{n+1} \arrow[ddl,mapsto, bend left] \\
+			\abs*{\Delta^{n}} \times [0,1] && (e_0,0) & (e_{l-1},0) & (e_l,0) & (e_{l+1},0)& (e_j,0) & & \\
+			 &&  &  &  & & (e_j,1) & \cdots & (e_n,1)
+		\end{tikzcd}
+	\]
+	und die rechte Seite entspricht
+	\[
+		\begin{tikzcd}[row sep=2.4em, column sep=0.2em, font=\small]
+			\abs*{\Delta^n} \dar["k_{n-1,j-1}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto]& \cdots 
+			& e_{j-1} \dar[mapsto]& e_j \arrow[ddl,bend left,mapsto]& e_{j+1} \arrow[ddl,bend left,mapsto] & \cdots & e_n \arrow[ddl,mapsto,bend left] \\
+			\abs*{\Delta^{n-1}} \times [0,1] \arrow[dd,"\iota_{n,l}\times \id_{[0,1]}" description] && (e_0,0) \arrow[dd,mapsto] & (e_{l-1},0) \arrow[dd,mapsto] 
+			& (e_l,0) \arrow[ddr, mapsto] & \cdots & (e_{j-1},0) \arrow[dd, controls={+(225:1.2) and +(135:1.2)}, mapsto] &   &  & \cdots \\
+			 &&&&&& (e_{j-1},1) \arrow[dd, controls={+(-45:1) and +(45:1)}, end anchor={[xshift=2ex]north}, mapsto] & (e_{j},1) \arrow[dd, mapsto] & \cdots 
+			 & (e_{n-1},1) \arrow[dd,mapsto]\\
+			 \abs*{\Delta^n} \times [0,1] && (e_0,0)  & (e_{l-1},0) & (e_l,0) & (e_{l+1},0) &(e_j,0) & & & \\
+			 &&&&&& (e_j,1) & (e_{j+1},1) & \cdots & (e_n,1)
+		\end{tikzcd}
+	\]
+	Also folgt insgesamt die Gleichheit. Die anderen Gleichungen folgen genauso. \bewende
 % subsection 712 (end)
 
-\subsection[Beweis von \textbf{[\#\#]}]{Beweis von \protect\eqref{eq:79}} % (fold)
-\label{sub:713}
-Sei $h_n : C_n(C;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
+\subsection[Beweis von \textbf{[\#\#]}/Konstruktion der Kettenhomotopie]{Beweis von \protect\eqref{eq:79}} % (fold)
+\label{sub:712}
+Sei $h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
 \[
-	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \enbrace*{\sigma \times \id} \circ k_{n,j}
+	h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \cdot \enbrace*{\sigma \times \id} \circ k_{n,j}
 \]
+$h_*$ ist die gesuchte Kettenhomotopie, da für $n \in \mathds{N}$ unter Anwendung der Gleichungen aus \ref{sub:712} gilt:
 \begin{align*}
-	\partial_{n+1} \enbrace*{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
-	&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \enbrace*{ \sigma \times \id \circ k_{n,j} \circ \iota_{n+1,l}} \\
-	&= \sum_{0 \le l < j \le n} (-1)^{j+l} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j-1} + \sum_{1 \le j+1 < l < n+1} (-1)^{j+l}
-	\enbrace*{\sigma \circ \iota_{n,l-1} \times \id} \circ k_{n-1,j} \\
-	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l}  \sigma\times\id \circ k_{n,j}
-	\circ \iota_{n+1,l} \\
-	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
-	&= \sum_{0 \le l \le j \le n-1} (-1)^{j+l+1} \enbrace*{\sigma \circ \iota_{n,l}} \times \id \circ k_{n-1,j} + \sum_{1 \le j+1 \le l \le n+1} (-1)^{j+l+1}
-	\enbrace*{\sigma \circ \iota_{n,l} \times \id} \circ k_{n-1,j} \\
-	& \quad + \sum_{1 \le j+1=l \le n} (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} + \sum_{1 \le j=l \le n} (-1)^{j+l} \sigma\times \id \circ k_{n,j}
-	\circ \iota_{n+1,l} \\
-	& \quad + \sum_{0=l=j}  (-1)^{j+l} \sigma \circ i_1 + \sum_{n+1=j+1=l} (-1)^{j+l} \sigma \circ i_0 \\
-	&= - \sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1  -
-	\sigma \circ i_0 \\
-	&= - \sum_{j=0}^{n-1} \sum_{l=0}^{n} (-1)^{j+l} \enbrace*{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} + \sigma \circ i_1 - \sigma \circ i_0 \\
+	\partial_{n+1} \enbrace[\big]{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
+	&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \cdot \enbrace*{ \sigma \times \id} \circ k_{n,j} \circ \iota_{n+1,l} \tag*{(nach Definition \ref{sub:52})}\\
+	&= \smashoperator[r]{\sum_{0 \le l < j \le n}} \, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j-1} 
+	+ \enspace\smashoperator{\sum_{1 \le j+1 < l \le n+1}}\, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l-1}) \times \id} \circ k_{n-1,j} \\
+	& \quad + \smashoperator[r]{\sum_{1 \le j+1=l \le n}} \,(-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} 
+	+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \, (-1)^{j+l} (\sigma\times\id) \circ k_{n,j}\circ \iota_{n+1,l} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 
+	+ \smashoperator[r]{\sum_{n+1=j+1=l}}\, (-1)^{j+l} (\sigma \times \id) \circ i_0 \\
+	&= \smashoperator[r]{\sum_{0 \le l \le j \le n-1}}\, (-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} 
+	+ \enspace\smashoperator{\sum_{1 \le j+1 \le l \le n}} \,(-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} \\
+	& \quad + \underbrace{\smashoperator[r]{\sum_{1 \le j=l \le n}}\, (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} 
+	+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \,(-1)^{j+l} (\sigma\times \id) \circ k_{n,j} \circ \iota_{n+1,l}}_{=0} \\
+	& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 + \smashoperator[r]{\sum_{n+1=j+1=l}} (-1)^{j+l} (\sigma\times \id) \circ i_0 \\
+	&= - \smashoperator[r]{\sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}}} \,(-1)^{j+l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} 
+	+ (\sigma\times \id) \circ i_1  - (\sigma\times \id) \circ i_0 \\
+	&= - \sum_{j=0}^{n-1} (-1)^j \sum_{l=0}^{n} (-1)^{l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j}
+	+ \underbrace{(\sigma\times \id) \circ i_1}_{= i_0 \circ \sigma}  - \underbrace{(\sigma\times \id) \circ i_0}_{= i_1 \circ \sigma} \\
 	&= - h_{n-1}(\partial_n \sigma) + C_n(i_1;R)(\sigma) - C_n(i_0;R)(\sigma) \bewende  
 \end{align*}
-\todo[inline]{Das ist höchstwahrscheinlich noch nicht ganz richtig \ldots }
 % subsection 713 (end)
 
-\subsection{Bemerkung} % (fold)
-\label{sub:714}
+\subsection[Bemerkung: Konstruktion einer Kettenhomotopie aus einer Homotopie]{Bemerkung} % (fold)
+\label{sub:713}
 Ist $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f$ und $g$, so erhalten wir eine Kettenhomotopie $k$ zwischen $C_*(f;R)$ und $C_*(g;R)$ durch
 \[
 	k_n(\sigma) := C_{n+1}(H;R) \circ h_n = \sum_{j=0}^{n} (-1)^j H \circ (\sigma \times \id) \circ k_{n,j}
@@ -1960,7 +2147,7 @@ Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit
 	\end{description}
 	\item Wir zeigen nun $\im (i_A)_* - (i_B)_* = \ker \partial_n$:
 	\begin{description}
-		\item["$\supseteq$":] Sei $v \in \ker \partial_n$. 
+		\item["$\supseteq$":] Sei $v \in \ker \partial_n$. \todo{Rest hinzufügen}
 		\item["$\subseteq$":] Sei $\begin{psmallmatrix} a \\ b \end{psmallmatrix} \in \bigoplus\limits_{H_n(B)}^{H_n(A)}$. Dann gilt
 		\[
 			\partial_n \enbrace*{(i_A)_* - (i_B)_*}  \begin{psmallmatrix} a \\ b \end{psmallmatrix} = \partial_n \enbrace[\big]{(i_A)_*(a)- (i_B)_*(b)}  =0
@@ -1972,13 +2159,13 @@ Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit
 \end{itemize}
 % subsection 92 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung zur Mayer-Vietoris-Folge]{Bemerkung} % (fold)
 \label{sub:93}
 Für die Mayer-Vietoris-Folge müssen $A$ und $B$ nicht notwendig offen sein. Es genügt, dass die Inklusion $(B,A \cap B) \hookrightarrow (X,A)$ einen Isomorphismus
 $H_*(B,A \cap B;R) \to H_*(X,A;R)$ induziert.
 % subsection 93 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Homologie der Sphäre $S^n$]{Satz} % (fold)
 \label{sub:94}
 \begin{equation*}
 	H_k \enbrace*{S^n ;R} \cong \begin{cases}
@@ -2071,7 +2258,7 @@ Induktion nach $n$:
 
 \subsection[Satz: Invarianz der Dimension]{Satz (Invarianz der Dimension)} % (fold)
 \label{sub:101}
-Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$.
+Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$. \todo{RevChap10}
 \minisec{Beweis}
 Sei $h : \mathds{R}^n \to \mathds{R}^m$ ein Homöomorphismus. Sei $x_0 \in \mathds{R}^n$ beliebig. Dann erhalten wir auch einen Homöomorphismus 
 $k := h\big|_{\mathds{R}^n\setminus \set{x_0}} : \mathds{R}^n \setminus \set{x_0} \to \mathds{R}^m  \setminus \set{h(x_0)}$. Nun ist $\mathds{R}^n \setminus \set{x_0}$
@@ -2088,7 +2275,7 @@ Es ist aber $H_*(S^{n-1}) \cong H_*(S^{m-1})$ genau dann, wenn $n=m$. \bewende
 Jede stetige Abbildung $f : D^n \to D^n$ besitzt einen Fixpunkt.
 \minisec{Beweis}
 Durch Widerspruch: Angenommen es gibt $f : D^n \to D^n$ ohne Fixpunkt. Aus dem letzten Semester wissen wir, dass es dann eine stetige Abbildung $F : D^n \to S^{n-1}$ gibt 
-mit $F|_{S^{n-1}} = \id_{S^{n-1}}$. In Homologie erhalten wir folgendes kommutatives Diagramm \marginnote{\oE $n\ge 2$}
+mit $F|_{S^{n-1}} = \id_{S^{n-1}}$. In Homologie erhalten wir folgendes kommutatives Diagramm \marginnote{\oE: $n\ge 2$}
 \[
 	\begin{tikzcd}
 		0 = H_{n-1}(D^n) \rar["(F)_*"] & H_{n-1}(S^{n-1}) \cong \mathds{Z} \\
@@ -2171,7 +2358,7 @@ Wir zeigen $d(R_0)= -1$ durch Induktion nach $n$.
 \end{description}
 % subsection 105 (end)
 
-\subsection{Beispiel} % (fold)
+\subsection[Beispiel: Grad der Punktspiegelung]{Beispiel} % (fold)
 \label{sub:106}
 Der Grad der Punktspiegelung $R : S^n \to S^n$ $x  \mapsto -x$ ist $(-1)^{n+1}$.
 \minisec{Beweis}
@@ -2180,12 +2367,12 @@ $d(R)= d(R_0 \circ R_1 \circ \ldots \circ R_n) = d(R_0) \cdot \ldots \cdot d(R_n
 
 \subsection[Erinnerung: Vektorfelder]{Erinnerung} % (fold)
 \label{sub:107}
-Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Ein \Index{Vektorfeld} auf $M$ ist eine stetige Abbildung $v : M \to \Tmap M$ mit $v(x) \in \Tmap_X M$ für alle $x \in M$.
+Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Ein \Index{Vektorfeld} auf $M$ ist eine stetige Abbildung $v : M \to \Tmap M$ mit $v(x) \in \Tmap_x M$ für alle $x \in M$.
 Für $M=S^n$ entspricht ein Vektorfeld genau einer stetigen Abbildung $v : S^n \to \mathds{R}^{n+1}$ mit $\sprod*{v(x)}{x} =0$ für alle $x \in S^n$.
 \missingfigure{$S^2$ mit Vektorfeld} 
 % subsection 107 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Es gibt ein Vektorfeld ohne Nullstellen auf $S^n \iff n$ ist ungerade]{Satz} % (fold)
 \label{sub:108}
 Es gibt genau dann ein Vektorfeld ohne Nullstellen auf $S^n$, wenn $n$ ungerade ist.
 \minisec{Beweis}
@@ -2209,7 +2396,288 @@ Da $\sprod*{v(x)}{x}=0$ folgt für alle $x$ und $v(x)\not=0$ ist, folgt
 Also sind $H$ und $K$ wohldefiniert. $H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $ und $K$ ist Homotopie zwischen $-\id$ und 
 $x \mapsto \frac{v(x)}{\norm{v(x)} } $. \bewende
 % subsection 108 (end)
+
+\subsection{Satz (Jordanscher Kurvensatz)} % (fold)
+\label{sub:109}
+Sei $f \colon S^1 \to \mathds{R}^2$ eine stetige, injektive Abbildung. Dann hat $\mathds{R}^2 \setminus f(S^1)$ genau zwei Wegzusammenhangskomponenten. Eine davon ist 
+beschränkt, die andere nicht.
+\minisec{Beweis (mit \ref{sub:1010})}
+Wir können $f$ auch als injektive Abbildung $f \colon S^1 \to \mathds{R}^2 \subseteq S^2 = \mathds{R}^1 \cup \set{\infty}$ auffassen. Nun ist 
+$\tilde{H}_0 \enbrace[\big]{S^2 \setminus f(S^1)} =\mathds{Z}$. Also $H_0 \enbrace[\big]{S^2 \setminus f(S^1)}= \mathds{Z} \oplus \mathds{Z}$. Daher besteht
+$S^2 \setminus f(S^1)$ aus zwei Wegzusammenhangskomponenten $U_1$ und $U_2$. Sei \oE $\infty \in U_2$. Dann sind $U_1$ und $U_2 \setminus \set{\infty}$ die
+Wegzusammenhangskomponenten von $\mathds{R}^2 \setminus f(S^1)$. $U_1$ ist beschränkt und $U_2$ ist unbeschränkt. \bewende \smallskip \\
+Warum ist $U_2 \setminus \set{\infty}$ noch wegzusammenhängend?
+\minisec{Antwort}
+Seien $x,y \in U_2$, dann gibt es eine Umgebung $V$ von $\infty \in S^2$ mit $V \setminus \set{\infty} \equiv D^2 \setminus \set{0} $,  $x,y \not\in V$ und
+$f(S^1) \cap V = \emptyset$
+% subsection 109 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:1010}
+\begin{enumerate}[a)]
+	\item Sei $f \colon D^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt $\tilde{H}_i\enbrace[\big]{S^n \setminus f(D^k)} =0$ für alle $i$.
+	\item Sei $f \colon S^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt 
+	\[
+		\tilde{H}_i \enbrace[\big]{S^n \setminus f(S^k)} = \begin{cases}
+			\mathds{Z}, &\text{ falls }i=n-k-1\\
+			0, &\text{ sonst}
+		\end{cases}
+	\]
+\end{enumerate}
+\minisec{Beweis (mit \ref{sub:1011})}
+\begin{enumerate}[a)]
+	\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(D^0)$ homöomorph zu $\mathds{R}^n$ und die Behauptung folgt.
+	
+	Induktionsschritt $k \mapsto k+1$: Da $D^{k+1}$ und $[0,1]^{k+1}$ homöomorph sind, können wir $D^{k+1}$ durch $[0,1]^{k+1}$ ersetzen. Sei 
+	$x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$. Es ist
+	\[
+		S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^{k}} = S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2}}  \times [0,1]^k} \cup S^n \setminus f \enbrace*{\benbrace*{\nicefrac{1}{2},1} \times [0,1]^k}   
+	\]
+	eine Vereinigung von offenen Mengen. Weiter ist 
+	\begin{align*}
+		\enbrace*{S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2} } \times [0,1]^k} } \cap \enbrace*{S^n \setminus f \enbrace*{\benbrace*{\nicefrac{1}{2} ,1} \times [0,1]^k}} =   S^n \setminus f \enbrace*{[0,1]^{k+1}} 
+	\end{align*}
+	Nun benutzten wir die zugehörige Mayer-Vietoris-Folge: \todo{schöner machen}
+	\[
+		\begin{tikzcd}[column sep=1.3em]
+			\underset{=0 \text{ nach I.A.}}{\tilde{H}_{i+1} \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}}  \times [0,1]^k}}} \rar &
+			\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}} }  \dar["\cong"] & \\
+			& \bigoplus\limits_{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[\nicefrac{1}{2},1] \times [0,1]^k} } }
+			^{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[0,\nicefrac{1}{2}] \times [0,1]^k} } } \rar &
+			\underset{=0 \text{ nach I.A.}}{\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^k } } }
+		\end{tikzcd}
+	\]
+	Angenommen $x \not=0$. Dann ist das Bild von $x$ in $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,\nicefrac{1}{2}] \times [0,1]^k} }$ ungleich Null oder in
+	$\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[\nicefrac{1}{2},1] \times [0,1]^k}}$ ungleich Null. Indem wir dieses Argument iterieren erhalten wir eine Folge
+	von Intervallen
+	\[
+		[0,1] \supseteq I_1 \supseteq I_2 \supseteq \ldots \text{ mit } \bigcap_n I_n = \set{t} 
+	\]
+	und das Bild von $x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$ unter der von der Inklusion 
+	$i_a \colon S^n \setminus f \enbrace*{[0,1]^{k+1}} \to S^n \setminus f \enbrace*{I_a \times [0,1]^k}$ induzierten Abbildung 
+	$(i_a)_* \colon \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}} \to \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k} } $ ungleich Null 
+	ist. Nun ist aber 
+	\[
+		\bigcup_a \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k}} = S^n \setminus f \enbrace*{\set{t} \times [0,1]^k }  
+	\]
+	und wieder nach Induktionsannahme das Bild von $x$ in $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{t} \times [0,1]^k}} =0$ Null. Nach Proposition 
+	\ref{sub:1011}(2) muss $x$ aber schon in einer $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k} }$ trivial sein. \light
+	\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(S^0) \cong \mathds{R}^n \setminus \set{0}$. Da $\mathds{R}^n \setminus \set{0} \simeq S^{n-1}$
+	folgt für $k=0$ die Behauptung.
+	
+	Induktionsschritt $k-1 \mapsto k$: Seien $D^k_+ := \set[(x_0,\ldots ,x_k)]{x_k \ge 0}$ und $D^k_- := \set[(x_0, \ldots , x_k)]{x_k \le 0}$. Dann ist 
+	$D^k_+ \cap D^k_- = \set[(x_0, \ldots ,x_k)]{x_k=0} \cong S^{k-1}$. Wieder ist 
+	\[
+		S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} \enbrace*{S^n \setminus f(D^k_+)} \cup \enbrace*{S^n \setminus f(D^k_-)}  
+	\]
+	eine offene Vereinigung mit $\enbrace*{S^n \setminus f(D^k_+)} \cap (S^n \setminus f(D^k_-)) = S^n \setminus f(S^k)$. Wegen a) ist die Randabbildung in der zugehörigen
+	Mayer-Vietoris-Folge
+	\[
+		\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} } \xrightarrow{\partial_i \cong} \tilde{H}_{i-1} \enbrace*{S^n \setminus f(S^k)}   
+	\]
+	ein Isomorphismus. Die Behauptung folgt per Induktion. \bewende
+\end{enumerate}
+% subsection 1010 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:1011}
+Seien $U_1 \subseteq U_2 \subseteq \ldots  \subseteq X$ offen mit $X = \bigcup_{i=1}^\infty U_i$. Seien $i_{a,b} \colon U_a \hookrightarrow U_b$ für $a < b$ und 
+$i_a \colon U_a \hookrightarrow X$ die Inklusionen.
+\begin{enumerate}[(1)]
+	\item Für jedes $x \in H_k(X;R)$ gibt es $a >0$ und $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=x$.
+	\item Ist $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x)=0$, so gibt es $b >a$ mit $(i_{a,b})_*(x_a)=0$.
+\end{enumerate}
+\minisec{Bemerkung}
+Diese Proposition gilt genauso für reduzierte Homologie.
+\minisec{Beweis}
+Sei $\sigma \colon \abs*{\Delta^n} \to X$ ein singulärer Simplex in $X$. Dann ist $\sigma ^{-1}(U_a)$, $a \in \mathds{N}$ eine offene Überdeckung von $\abs*{\Delta^n}$. Da 
+$\abs*{\Delta^n}$ kompakt ist, gibt es $a$ mit $\abs*{\Delta^n} \subseteq \sigma ^{-1}(U_a)$, also $\sigma \enbrace*{\abs*{\Delta^n}} \subseteq U_a$. Da Elemente  von
+$C_n(X;R)$ endliche $R$-Linearkombinationen von singulären Simplizes sind, folgt 
+\[
+	C_n(X;R) = \bigcup_a C_n(U_a;R).
+\]
+Damit ergeben sich leicht (1) und (2). \bewende
+% subsection 1011 (end)
 % section 10 (end)
+\newpage
+
+\section{\CW-Komplexe} % (fold)
+\label{sec:11}
+
+\subsection[Definition: Pushout]{Definition} % (fold)
+\label{sub:111}
+Ein kommutatives Diagramm von topologischen Räumen der Form \todo{RevChap11}
+\begin{equation*}
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+		Y \rar["\overline{f}"] & Z
+	\end{tikzcd} \label{eq:111} \tag{\#}
+\end{equation*}
+\begin{minipage}{0.65\textwidth}
+	heißt ein \Index{Pushout}, falls es folgende universelle Eigenschaft hat: \smallskip\\
+	\centering{$\forall \hat{f} \colon X \to \hat{Z}$, $\hat{g}: Y \to \hat{Z}$ mit 
+	$\hat{f} \circ f = \hat{g} \circ g$ gilt: 
+	\[
+		\exists ! \varphi \colon Z \to \hat{Z} \text{ mit } \hat{f}= \varphi \circ \overline{g} , \hat{g} = \varphi \circ \overline{f}.
+	\]}
+\end{minipage}
+\hfill \begin{minipage}{0.3\textwidth}
+	\(
+		\begin{tikzcd}
+			A \rar["f"] \dar["g"] & X \dar["\overline{g}"] \arrow[ddr, "\hat{f}", bend left, Firebrick3] \\
+			Y \rar["\overline{f}"] \arrow[drr, "\hat{g}",bend right, Firebrick3] & Z  \drar["\varphi", DodgerBlue3] \\
+			& & \hat{Z}
+		\end{tikzcd}
+	\)
+\end{minipage}\\
+Wir sagen dann auch: \eqref{eq:111} ist der Pushout von 
+\(
+	\begin{tikzcd}[sep=small]
+		A \rar["f"] \dar["g"']& X \\
+		Y
+	\end{tikzcd}
+\)
+\minisec{Bemerkung}
+Jedes Diagramm $\begin{tikzcd}[sep=small]
+		A \rar["f"] \dar["g"']& X \\
+		Y
+	\end{tikzcd}$ lässt sich zu einem Pushout vervollständigen:
+Betrachte dazu den Raum $X \cup_A Y := \nicefrac{X \coprod Y}{f(a) \sim g(a) \forall a \in A}$ mit der Quotiententopologie. Sind $\overline{f} : Y \to X \cup_A Y $  und 
+$\overline{g} : X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow X \coprod Y$ und $Y \hookrightarrow X \coprod Y$ induzierten Abbildungen. So ist 
+\[
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+		Y \rar["\overline{f}"] & X \cup_A Y
+	\end{tikzcd}
+\]
+Existenz und Eindeutigkeit
+aus der universellen Eigenschaft können benutzt werden um zu zeigen, dass der Pushout eindeutig bis auf kanonischen Homöomorphismus ist.
+% subsection 111 (end)
+
+\subsection[Definition: \CW-Komplex]{Definition} % (fold)
+\label{sub:112}
+Ein \bet{\CW-Komplex}\index{CW-Komplex@\CW-Komplex} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung der Unterräume von $X$: 
+\[
+	\emptyset = X^{(-1)} \subseteq X^{(0)} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^{(n)} \subseteq X^{(n+1)} \subseteq \ldots \subseteq X
+\]
+sodass die folgenden zwei Eigenschaften erfüllt sind:
+\begin{enumerate}[(i)]
+	\item \Index{Zellstruktur}: Zu jedem $n \in N$ gibt einen Pushout von topologischen Räumen 
+	\[
+		\begin{tikzcd}[row sep = large, column sep = 5.4em]
+			\smashoperator{\coprod\limits_{i \in I^{(n)}}} S^{n-1} \rar["\coprod_{i \in I^{(n)}} q_i^{(n)}"] \dar["\coprod_{i \in I^{(n)}} j_i"', hook] 
+			& X^{(n-1)} \dar[hook, "k^{(n)}"] \\
+			\smashoperator{\coprod\limits_{i \in I^{(n)}}} D^n \rar["\coprod_{i \in I^{(n)}} Q_i^{(n)}"] & X^{(n)}
+		\end{tikzcd}
+	\]
+	wobei $j_i \colon S^{n-1} \hookrightarrow D^n$ und $k_n \colon X^{(n-1)} \to X^{(n)}$ die Inklusionen sind.
+	\item \Index{Schwache Topologie}: Es ist $X= \bigcup_{n \in \mathds{N}} X^{(n)}$ und $U \subseteq X$ ist genau dann offen, wenn $U \cap X^{(n)} \subseteq X^{(n)}$ für 
+	alle $n$ offen ist.
+\end{enumerate}
+Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär}, falls $f \enbrace*{X^{(n)}} \to Y^{(n)}$ für alle $n \in \mathds{N}$. 
+% subsection 112 (end)
+
+\subsection[Bemerkungen zur Definition von \CW-Komplexen]{Bemerkung} % (fold)
+\label{sub:113}
+\begin{enumerate}[(i)]
+	\item Die Abbildungen $q_i^{(n)}$ und $Q_i^{(n)}$ sind \emph{nicht} Teil der Struktur eines \CW-Komplex. Nur die Existenz von $q_i^{(n)}$ und $Q_i^{(n)}$ wird 
+	gefordert --- sie ist nicht notwendig eindeutig. Hat man $q_i^{(n)}$ und $Q_i^{(n)}$ \emph{gewählt}, so heißen $q_i^{(n)}$ die \Index{anklebende Abbildung} der $i$-ten
+	$n$-Zelle und $Q_i^{(n)}$ die \Index{charakteristische Abbildung} der $i$-ten $n$-Zelle.
+	\item Sei $\mathring{D}^n = D^n \setminus S^{n-1}$ das Innere von $D^n$. Die Abbildungen $Q_i^{(n)}$ schränken sich zu einem Homöomorphismus 
+	$\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^{(n)} \setminus X^{(n-1)}$ ein. Insbesondere lässt ich $I^{(n)}$ mit der Menge der Wegzusammenhangskomponenten von 
+	$X^{(n)} \setminus X^{(n-1)}$ identifizieren. Die Wegzusammenhangskomponenten heißen die \bet{offenen Zellen}\index{offene Zelle} von $X$. Damit ist jeder \CW-Komplex 
+	die disjunkte Vereinigung seiner offenen Zellen.
+	
+	\ifxetexorluatex \faWarningSign \, \fi Achtung: Jede offene $n$-Zelle ist offen in $X^{(n)}$, aber nicht notwendig in $X$.
+	\item Der Abschluss einer offenen Zelle $Q_i^{(n)}(\mathring{D}^n)$ ist $Q_i^{(n)}(D^n)$ und insbesondere kompakt. Die $Q_i^{(n)}(D^n)$ heißen die
+	\bet{abgeschlossenen Zellen}\index{abgeschlossene Zelle} und sind als Abschluss von offenen Zellen unabhängig von der Wahl der $q_i^{(n)}$, $Q_i^{(n)}$.
+	
+	\ifxetexorluatex \faWarningSign \, \fi Achtung: Abgeschlossene Zellen sind Bilder von $D^n$ unter stetigen Abbildungen, aber nicht notwendig homöomorph zu $D^n$.
+	\item Ein \CW-Komplex $X$ heißt \bet{endlich}\index{CW-Komplex@\CW-Komplex!endlicher}, wenn er nur aus endlich vielen Zellen besteht, also wenn 
+	$I = \bigcup_{n \in \mathds{N} } I^{(n)}$ endlich ist. Insbesondere gibt es dann ein $n$ mit $X=X^{(n)}$.
+	
+	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$: $\dim X = N$, falls $X^{(N)}=X$, $X^{(N-1)} \subsetneq X$. Gibt es kein solches $N$ so
+	$\dim X = \infty$.
+\end{enumerate}
+% subsection 113 (end)
+
+\subsection[Beispiele für \CW-Komplexe]{Beispiele} % (fold)
+\label{sub:114}
+\begin{enumerate}[(i)]
+	\item $S^n$ mit 
+	\[
+		(S^n)^{(k)} = \begin{cases}
+			\emptyset, &\text{ falls }k=-1\\
+			\set{(1,0,\ldots ,0)}, &\text{ falls } k=0, \ldots n-1 \\
+			S^n , &\text{ falls } k \ge n 
+		\end{cases}
+	\]
+	ist ein \CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$
+	\[
+		\begin{tikzcd}
+			S^{n-1} \rar \dar & \enbrace*{S^n}^{(n-1)}=\set{(1,0,\ldots ,0)}  \dar \\
+			D^n \rar & S^n  
+		\end{tikzcd}
+	\]
+	\item $S^n$ mit $(S^n)^{(k)} = \set{(x_0, \ldots ,x_k,0, \ldots ,0) \in S^n} $ ist ebenfalls eine \CW-Struktur auf $S^n$.
+	\item Sei $K=(V,\Sigma)$ ein simplizialer Komplex. Es ist $\abs*{\Delta^n} \cong D^n$ und $\abs*{\partial \Delta^n} \cong S^{n-1}$. Sei 
+	$\Sigma^{(n)} := \Sigma_0 \cup \Sigma_1 \cup \ldots \cup \Sigma_n$. Dann wir $\abs*{K}$ durch $\abs*{K}^{(n)} := \abs*{\enbrace*{V,\Sigma^{(n)}}}$ für $n \ge 0$ zu 
+	einem \CW-Komplex. Ist $f \colon K \to L$ eine simpliziale Abbildung, so ist $\abs*{f} \colon \abs*{K} \to \abs*{L}$ eine zelluläre Abbildung.
+	\item Der $n$-dimensionale reelle projektive Raum $\mathds{R}P^n$ kann definiert werden durch 
+	\[
+		\mathds{R}P^n := \nicefrac{\mathds{R}^{n+1} \setminus \set{0}}{x \sim \lambda x} = \nicefrac{S^n}{x \sim -x}
+	\]
+	Punkte in $\mathds{R}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln reeller Zahlen und werden als die sogenannten homogenen Koordinaten $[x_0 : \ldots : x_n]$ 
+	geschrieben. Es ist 
+	\[
+		\mathds{R}P^n = \set[{[x_0 : \ldots : x_n]}]{(x_0, \ldots ,x_n) \in S^n \rule{0cm}{1em}} 
+		= \set[{[x_0 : \ldots : x_n]}]{(x_0, \ldots ,x_n) \in S^n, x_n \ge 0 \rule{0cm}{1em}}
+	\]
+	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^n}{x \sim -x, x \in S^{n-1}} \to \mathds{R}P^n$ mit
+	\[
+		f \enbrace*{x_1, \ldots ,x_n} = \benbrace*{x_1 : \ldots : x_n : \sqrt{1- \sum\nolimits_{i=1}^{n} x_i^2}} 
+	\]
+	Ist $Q^{(n)} : D^n \to \mathds{R}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^n \twoheadrightarrow \nicefrac{D^n}{x \sim -x, x \in S^{n-1}}$ und 
+	$q^{(n)} \colon S^{n-1} \to \mathds{R}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
+	\[
+		\begin{tikzcd}
+			S^{n-1} \rar["q^{(n)}"] \dar[hook]& \mathds{R}P^{n-1} \dar[hook] \\
+			D^n \rar["Q^{(n)}"] & \mathds{R}P^n
+		\end{tikzcd}
+	\]
+	Induktiv erhalten wir einen \CW-Struktur auf $\mathds{R}P^n$ mit genau einer $k$-Zelle für $k=0,\ldots ,n$ und 
+	\[
+		\enbrace*{\mathds{R}P^n}^{(k)} \cong \mathds{R}P^k 
+	\]
+	\item Der $n$-dimensionale komplexe projektive Raum $\mathds{C}P^n$ kann definiert werden durch 
+	\[
+		\mathds{C}P^n := \nicefrac{\mathds{C}^{n+1} \setminus \set{0}}{z \sim \lambda z} = \nicefrac{S^{2n+1}}{z \sim \lambda z, \lambda \in S^1}
+	\]
+	Punkte in $\mathds{C}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln komplexer Zahlen und werden als die sogenannten homogenen Koordinaten $[x_0 : \ldots : x_n]$ 
+	geschrieben. Es ist 
+	\[
+		\mathds{C}P^n = \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1} \rule{0cm}{1em}} 
+		= \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1}, z_n \ge 0 \rule{0cm}{1em}}
+	\]
+	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, \lambda \in S^{2n}} \to \mathds{C}P^n$ mit
+	\[
+		f \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- \sum\nolimits_{i=1}^{n} \abs{z_i}^2}} 
+	\]
+	Ist $Q^{(2n)} : D^{2n} \to \mathds{C}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^{2n} \twoheadrightarrow \nicefrac{D^{2n}}{z \sim \lambda z, z \in S^{2n}}$ und 
+	$q^{(n)} \colon S^{2n+1} \to \mathds{C}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
+	\[
+		\begin{tikzcd}
+			S^{2n-1} \rar["q^{(n)}"] \dar[hook]& \mathds{C}P^{n-1} \dar[hook] \\
+			D^{2n} \rar["Q^{(n)}"] & \mathds{C}P^n
+		\end{tikzcd}
+	\]
+	Induktiv erhalten wir einen \CW-Struktur auf $\mathds{C}P^n$ mit genau einer $k$-Zelle für $k=0,2,\ldots ,2n$ und 
+	\[
+		\enbrace*{\mathds{C}P^n}^{(k)} \cong \mathds{C}P^{\lfloor \frac{k}{2} \rfloor } 
+	\]
+\end{enumerate}
+% subsection 114 (end)
+% section 11 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
