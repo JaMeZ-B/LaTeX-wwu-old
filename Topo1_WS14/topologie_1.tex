@@ -800,7 +800,9 @@ exakt in $M_0, M_1$ und $M_2$ ist.
 		\end{tikzcd}
 	\]
 	ist eine kurze exakte Folge.
-	\item $\mathds{Z} \xhookrightarrow{n \cdot } \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$
+	\item $\begin{tikzcd}
+		\mathds{Z} \rar[hook,"\cdot n"] & \mathds{Z} \rar[two heads] &  \nicefrac{\mathds{Z}}{n \mathds{Z}}
+	\end{tikzcd}$
 	ist eine kurze exakte Folge.
 \end{enumerate}
 % subsection 44 (end)
@@ -821,8 +823,14 @@ Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \x
 \subsection[Bemerkung: Existenz einer Spaltung, wenn $M_2$ frei ist]{Bemerkung} % (fold)
 \label{sub:46}
 \begin{enumerate}[1)]
-	\item $\mathds{Z} \xhookrightarrow{\,n \cdot \,\,} \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{n \mathds{Z}}$ spaltet nicht.
-	\item Ist $(\star)$ $M_0 \xrightarrow{f_0} M_1 \xrightarrow{f_1} M_2$ eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
+	\item $\begin{tikzcd}
+		\mathds{Z} \rar[hook,"\cdot n"] & \mathds{Z} \rar[two heads] &  \nicefrac{\mathds{Z}}{n \mathds{Z}}
+	\end{tikzcd}$
+	spaltet nicht.
+	\item Ist $\begin{tikzcd}
+		M_0 \rar["f_0"] & M_1 \rar["f_1"] & M_2
+	\end{tikzcd}$
+	eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
 	Siehe Lemma \ref{sub:32}. Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
 	
 	Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
@@ -839,31 +847,40 @@ da $A \cong \mathds{Z}^{\Rg A} \oplus T A$, $B \cong \mathds{Z}^{\Rg B} \oplus T
 \[
 	A \oplus B \cong \mathds{Z}^{\Rg A + \Rg B} \oplus \underbrace{T A \oplus T B}_{=T(A \oplus B)}
 \]
-\todo{RevChap4}
 % subsection 47 (end)
 
 \subsection[Proposition: Der Rang ist für kurze exakte Folgen endl. erz., abelscher Gruppen additiv]{Proposition} % (fold)
 \label{sub:48}
-Der Rang von endlich erzeugten abelschen Gruppen ist additiv für kurze exakte Folgen: Ist $(\star)$ $A \xrightarrow{i} B \xrightarrow{p}C$ eine kurze exakte Folge von endlich 
+Der Rang von endlich erzeugten abelschen Gruppen ist additiv für kurze exakte Folgen: Ist
+\begin{equation*}
+	\begin{tikzcd}
+		A \rar["i",hook] & B \rar["p", two heads] & C
+	\end{tikzcd} \label{eq:48}\tag{$\star$}
+\end{equation*}
+eine kurze exakte Folge von endlich 
 erzeugten abelschen Gruppen, so gilt $\Rg B = \Rg A + \Rg C$.
-\minisec{Beispiel}
-mit $\mathds{Z}$
+% \minisec{Beispiel}
+% mit $\mathds{Z}$
 \minisec{Beweis}
-Spaltet $(\star)$, so ist $B \cong A \oplus C$ und die Behauptung folgt aus der Bemerkung \ref{sub:47}. \smallskip \\
-Wir können annehmen: $C = \mathds{Z}^n \oplus T C$. Wir erhalten: 
+Spaltet \eqref{eq:48}, so ist $B \cong A \oplus C$ und die Behauptung folgt aus der Bemerkung \ref{sub:47}. \smallskip \\
+Wir können annehmen, dass $C = \mathds{Z}^n \oplus T C$ gilt. Wir erhalten folgendes Diagramm: 
 \[
 	\begin{tikzcd}
 		A \rar["i",hook] \dar[equal] & p ^{-1}(\mathds{Z}^n) \rar["p", two heads] \dar[hook,"i''"]& \mathds{Z}^n \dar[hook,"i'"]\\
-		A \rar["i"] & B \rar["p", two heads] \dar[two heads,"p''"]& C \dar[two heads,"p'"]\\
+		A \rar["i",hook] & B \rar["p", two heads] \dar[two heads,"p''"]& C \dar[two heads,"p'"] & \text{\eqref{eq:48}}\\
 		& \nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \rar[two heads, hook,"p' \circ p"]& T C
-	\end{tikzcd} \tag*{$(\star)$}
+	\end{tikzcd} 
 \]
 Ist $p' \circ p(b)=0$, so gibt es $v \in \mathds{Z}^n$ mit $i'(v)= p(b)$. Nun gibt es $v' \in p ^{-1}(\mathds{Z}^n)$ mit $p(v')=v$. Es folgt 
 \[
-	p \enbrace*{i''(v')} = p(b) 
+	p \enbrace[\big]{i''(v')} = p(b) 
 \]
-also $i''(v') -b \in \ker p = i(A)$. Da $i(A) \subseteq i'' \enbrace*{p ^{-1} (\mathds{Z}^n)} $ folgt $b \in i'' \enbrace*{p ^{-1}(\mathds{Z}^n)}$.
-In $(\star)$ sind die Spalten und Zeilen exakt. Da $\mathds{Z}^n$ frei ist, spaltet $A \to p ^{-1}(\mathds{Z}^n) \to \mathds{Z}^n$ und es gilt 
+also $i''(v') -b \in \ker p = i(A)$. Da $i(A) \subseteq i'' \enbrace*{p ^{-1} (\mathds{Z}^n)}$, folgt $b \in i'' \enbrace*{p ^{-1}(\mathds{Z}^n)}$.
+In dem Diagramm sind die Spalten und Zeilen exakt. Da $\mathds{Z}^n$ frei ist, spaltet 
+$\begin{tikzcd}
+	A \rar[hook,"i"] & p^{-1}(\mathds{Z}^n) \rar["p", two heads] & \mathds{Z}^n
+\end{tikzcd}$
+und es gilt 
 \[
 	\Rg A + \Rg C = \Rg A + n = \Rg \enbrace*{p ^{-1}(\mathds{Z}^n)} 
 \]
@@ -872,22 +889,35 @@ Nebenbei: Ist $A' \subseteq B'$, so gilt $\Rg A' \le \Rg B'$, denn
 \[
 	\Rg A' = \max \set[n']{\mathds{Z}^{n'} \cong C' \le A'} \le \max \set[n']{\mathds{Z}^{n'} \cong C' \le B'} = \Rg B'.
 \]
-Betrachte die kurze exakte Folge $p ^{-1}(\mathds{Z}^n) \to B  \to \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}$. Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
-$k$ mit $k \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k b \in p ^{-1}(\mathds{Z}^n)$. Es folgt $kB \le p ^{-1}(\mathds{Z}^n) \le B$. Ist 
-$B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. Mit der Nebenbemerkung folgt 
-$\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
+Betrachte die kurze exakte Folge
+$\begin{tikzcd}
+	p^{-1}(\mathds{Z}^n) \rar & B \rar & \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}
+\end{tikzcd}$. 
+Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
+$k$ mit $k \cdot \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k \cdot b \in p ^{-1}(\mathds{Z}^n)$. Es folgt 
+$kB \subseteq  p ^{-1}(\mathds{Z}^n)$. Ist  $B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. 
+Mit der Nebenbemerkung folgt $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$ aus $kB \subseteq  p ^{-1}(\mathds{Z}^n) \subseteq B$. \bewende
 \minisec{Beweis mit Tensorprodukten (Skizze)}
 \begin{itemize}
 	\item $\mathds{Q} \otimes_\mathds{Z} : \mathds{Z}\text{-}\MOD \to \mathds{Q}\text{-}\VR $ ist ein Funktor.
-	\item $\Rg A= \dim_\mathds{Q} \mathds{Q} \otimes_\mathds{Z} A$
+	\item $\Rg A= \dim_\mathds{Q} (\mathds{Q} \otimes_\mathds{Z} A)$
 	\begin{enumerate}[(a)]
 		\item $\mathds{Q} \otimes_\mathds{Z} (X \oplus Y) = \mathds{Q} \otimes_\mathds{Z} X \oplus  \mathds{Q} \otimes_\mathds{Z} Y$
 		\item $\mathds{Q} \otimes_\mathds{Z} \mathds{Z}^n \cong \mathds{Q}^n$
 		\item $\mathds{Q} \otimes_\mathds{Z} T \cong 0$ für $T$ ein Torsionsmodul.
 	\end{enumerate}
-	\item Ist $A \to B \to C$ eine kurze exakte Folge, so ist auch 
-	$\mathds{Q} \otimes_\mathds{Z} A \to \mathds{Q} \otimes_\mathds{Z} B \to \mathds{Q} \otimes_\mathds{Z} C$ eine kurze exakte Folge.
-	\item Jede kurze exakte Folge von $\mathds{Q}$-Vektorräumen spaltet und es gilt $\dim_\mathds{Q}(V \oplus W) = \dim_\mathds{Q}(V)+ \dim_\mathds{Q} (W)$.
+	\item Ist $\begin{tikzcd}
+		A \rar & B \rar & C
+	\end{tikzcd}$ eine kurze exakte Folge, so ist auch 
+	\[
+		\begin{tikzcd}
+				\mathds{Q} \otimes_\mathds{Z} A \rar & \mathds{Q} \otimes_\mathds{Z} B \rar & \mathds{Q} \otimes_\mathds{Z} C
+			\end{tikzcd}
+	\] 
+	eine kurze exakte Folge.
+	\item Jede kurze exakte Folge $\begin{tikzcd}
+		V_0 \rar & V_1 \rar & V_2
+	\end{tikzcd}$ von $\mathds{Q}$-Vektorräumen spaltet und daher gilt $V_1 \cong V_0 \oplus V_2$ und $\dim_\mathds{Q}(V \oplus W) = \dim_\mathds{Q}(V)+ \dim_\mathds{Q} (W)$.
 \end{itemize}
 % subsection 48 (end)
 
@@ -895,7 +925,7 @@ $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$. \bewende
 \label{sub:49}
 Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex.
 \[
-	\chi(C_*,d_*) := \sum_{i=0}^{\infty} \Rg(C_i) = \sum_{i=0}^{n_0} \Rg(C_i) 
+	\chi(C_*) := \sum_{i=0}^{\infty} \Rg(C_i) = \sum_{i=0}^{n_0} \Rg(C_i) 
 \]
 heißt die \bet{Eulercharakteristik}\index{Euler-Charakteristik!von $\mathds{Z}$-Kettenkomplexen} von $(C_*,d_*)$. Dabei ist $n_0$ so gewählt, dass $C_n =0$ für alle 
 $n >n_0$. 
@@ -908,13 +938,13 @@ Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex. Dann gilt
 	\chi(C_*) = \sum_{i=1}^{\infty} (-1)^i \Rg H_i(C_*,d_*).
 \]
 \minisec{Beweis}
-Sei $B_{n+1} := \im \partial_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker \partial_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
+Sei $B_{n+1} := \im d_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker d_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
 Als Untermoduln von $C_n$ sind $Z_n$ und $B_n$ endlich erzeugt (LA2). Insbesondere ist auch $H_n(C_*,d_*)$ endlich erzeugt und der Rang somit definiert. Auch $B_{n+1}$
 ist Untermodul des endlich erzeugten $\mathds{Z}$-Moduls $C_n$ und somit endlich erzeugt.
 Wir erhalten kurze exakte Folgen:
 \[
 	\begin{tikzcd}[row sep=0.4em]
-		B_{n+1} \rar & Z_n \rar & H_n(C_*, d_*) \\
+		B_{n+1} \rar[hook] & Z_n \rar[two heads] & H_n(C_*, d_*) \\
 		Z_n \rar[hook] & C_n \rar[two heads] & B_n \quad 
 	\end{tikzcd}
 \]
@@ -2621,7 +2651,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 		\mathds{C}P^n = \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1} \rule{0cm}{1em}} 
 		= \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1}, z_n \ge 0 \rule{0cm}{1em}}
 	\]
-	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, z \in S^{2n}} \to \mathds{C}P^n$ mit
+	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, \lambda \in S^{2n}} \to \mathds{C}P^n$ mit
 	\[
 		f \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- \sum\nolimits_{i=1}^{n} \abs{z_i}^2}} 
 	\]
