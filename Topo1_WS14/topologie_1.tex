@@ -2228,7 +2228,7 @@ Induktion nach $n$:
 
 \subsection[Satz: Invarianz der Dimension]{Satz (Invarianz der Dimension)} % (fold)
 \label{sub:101}
-Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$.
+Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$. \todo{RevChap10}
 \minisec{Beweis}
 Sei $h : \mathds{R}^n \to \mathds{R}^m$ ein Homöomorphismus. Sei $x_0 \in \mathds{R}^n$ beliebig. Dann erhalten wir auch einen Homöomorphismus 
 $k := h\big|_{\mathds{R}^n\setminus \set{x_0}} : \mathds{R}^n \setminus \set{x_0} \to \mathds{R}^m  \setminus \set{h(x_0)}$. Nun ist $\mathds{R}^n \setminus \set{x_0}$
@@ -2467,9 +2467,179 @@ $C_n(X;R)$ endliche $R$-Linearkombinationen von singulären Simplizes sind, folg
 	C_n(X;R) = \bigcup_a C_n(U_a;R).
 \]
 Damit ergeben sich leicht (1) und (2). \bewende
-
 % subsection 1011 (end)
 % section 10 (end)
+\newpage
+
+\section{\CW-Komplexe} % (fold)
+\label{sec:11}
+
+\subsection[Definition: Pushout]{Definition} % (fold)
+\label{sub:111}
+Ein kommutatives Diagramm von topologischen Räumen der Form \todo{RevChap11}
+\begin{equation*}
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+		Y \rar["\overline{f}"] & Z
+	\end{tikzcd} \label{eq:111} \tag{\#}
+\end{equation*}
+heißt ein \Index{Pushout}, falls es folgende universelle Eigenschaft hat: $\forall \hat{f} \colon X \to \hat{Z}$, $\hat{g}: Y \to \hat{Z}$ mit 
+$\hat{f} \circ f = \hat{g} \circ g$ gilt: $\exists ! \varphi \colon Z \to \hat{Z}$ mit $\hat{f}= \varphi \circ \overline{g} $, $\hat{g} = \varphi \circ \overline{f}$.
+\[
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"] & X \dar["\overline{g}"] \arrow[ddr, "\hat{f}", bend left, Firebrick3] \\
+		Y \rar["\overline{f}"] \arrow[drr, "\hat{g}",bend right, Firebrick3] & Z  \drar["\varphi", DodgerBlue3] \\
+		& & \hat{Z}
+	\end{tikzcd}
+\]
+Wir sagen dann auch: \eqref{eq:111} ist der Pushout von 
+\[
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"]& X \\
+		Y
+	\end{tikzcd}
+\]
+\minisec{Bemerkung}
+Jedes Diagramm $\begin{tikzcd}
+		A \rar["f"] \dar["g"]& X \\
+		Y
+	\end{tikzcd}$ lässt sich zu einem Pushout vervollständigen:
+Betrachte $X \cup_A Y := \nicefrac{X \coprod Y}{f(a) \sim g(a) \forall a \in A}$ mit der Quotiententopologie. Sind $\overline{f} : Y \to X \cup_A Y $  und 
+$\overline{g} : X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow X \coprod Y$ und $Y \hookrightarrow X \coprod Y$ induzierten Abbildungen. So ist 
+\[
+	\begin{tikzcd}
+		A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+		Y \rar["\overline{f}"] & X \cup_A Y
+	\end{tikzcd}
+\]
+Existenz und Eindeutigkeit
+aus der universellen Eigenschaft können benutzt werden um zu zeigen, dass der Pushout eindeutig bis auf kanonischen Homöomorphismus ist.
+% subsection 111 (end)
+
+\subsection[Definition: \CW-Komplex]{Definition} % (fold)
+\label{sub:112}
+Ein \bet{\CW-Komplex}\index{CW-Komplex@\CW-Komplex} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung der Unterräume von $X$: 
+\[
+	\emptyset = X^{(-1)} \subseteq X^{(0)} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^{(n)} \subseteq X^{(n+1)} \subseteq \ldots \subseteq X
+\]
+sodass die folgenden zwei Eigenschaften erfüllt sind:
+\begin{enumerate}[(i)]
+	\item \Index{Zellstruktur}: Zu jedem $n \in N$ gibt einen Pushout von topologischen Räumen 
+	\[
+		\begin{tikzcd}[row sep = large, column sep = huge]
+			\smashoperator{\coprod\limits_{i \in I^{(n)}}} S^{n-1} \rar["\coprod_{i \in I^{(n)}} q_i^{(n)}"] \dar["\coprod_{i \in I^{(n)}} j_i"', hook] 
+			& X^{(n-1)} \dar[hook, "k^{(n)}"] \\
+			\smashoperator{\coprod\limits_{i \in I^{(n)}}} D^n \rar["\coprod_{i \in I^{(n)}} Q_i^{(n)}"] & X^{(n)}
+		\end{tikzcd}
+	\]
+	wobei $j_i \colon S^{n-1} \hookrightarrow D^n$ und $k_n \colon X^{(n-1)} \to X^{(n)}$ die Inklusionen sind.
+	\item \Index{Schwache Topologie}: Es ist $X= \bigcup_{n \in \mathds{N}} X^{(n)}$ und $U \subseteq X$ ist genau dann offen, wenn $U \cap X^{(n)} \subseteq X^{(n)}$ für 
+	alle $n$ offen ist.
+\end{enumerate}
+Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär}, falls $f \enbrace*{X^{(n)}} \to Y^{(n)}$ für alle $n \in \mathds{N}$. 
+% subsection 112 (end)
+
+\subsection[Bemerkungen zur Definition von \CW-Komplexen]{Bemerkung} % (fold)
+\label{sub:113}
+\begin{enumerate}[(i)]
+	\item Die Abbildungen $q_i^{(n)}$ und $Q_i^{(n)}$ sind \emph{nicht} Teil der Struktur eines \CW-Komplex. Nur die Existenz von $q_i^{(n)}$ und $Q_i^{(n)}$ wird 
+	gefordert --- sie ist nicht notwendig eindeutig. Hat man $q_i^{(n)}$ und $Q_i^{(n)}$ \emph{gewählt}, so heißen $q_i^{(n)}$ die \Index{anklebende Abbildung} der $i$-ten
+	$n$-Zelle und $Q_i^{(n)}$ die \Index{charakteristische Abbildung} der $i$-ten $n$-Zelle.
+	\item Sei $\mathring{D}^n = D^n \setminus S^{n-1}$ das Innere von $D^n$. Die Abbildungen $Q_i^{(n)}$ schränken sich zu einem Homöomorphismus 
+	$\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^{(n)} \setminus X^{(n-1)}$ ein. Insbesondere lässt ich $I^{(n)}$ mit der Menge der Wegzusammenhangskomponenten von 
+	$X^{(n)} \setminus X^{(n-1)}$ identifizieren. Die Wegzusammenhangskomponenten heißen die \bet{offenen Zellen}\index{offene Zelle} von $X$. Damit ist jeder \CW-Komplex 
+	die disjunkte Vereinigung seiner offenen Zellen.
+	
+	\ifxetexorluatex \faWarningSign \, \fi Achtung: Jede offene $n$-Zelle ist offen in $X^{(n)}$, aber nicht notwendig in $X$.
+	\item Der Abschluss einer offenen Zelle $Q_i^{(n)}(\mathring{D}^n)$ ist $Q_i^{(n)}(D^n)$ und insbesondere kompakt. Die $Q_i^{(n)}(D^n)$ heißen die
+	\bet{abgeschlossenen Zellen}\index{abgeschlossene Zelle} und sind als Abschluss von offenen Zellen unabhängig von der Wahl der $q_i^{(n)}$, $Q_i^{(n)}$.
+	
+	\ifxetexorluatex \faWarningSign \, \fi Achtung: Abgeschlossene Zellen sind Bilder von $D^n$ unter stetigen Abbildungen, aber nicht notwendig homöomorph zu $D^n$.
+	\item Ein \CW-Komplex $X$ heißt \bet{endlich}\index{CW-Komplex@\CW-Komplex!endlicher}, wenn er nur aus endlich vielen Zellen besteht, also wenn 
+	$I = \bigcup_{n \in \mathds{N} } I^{(n)}$ endlich ist. Insbesondere gibt es dann ein $n$ mit $X=X^{(n)}$.
+	
+	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$: $\dim X = N$, falls $X^{(N)}=X$, $X^{(N-1)} \subsetneq X$. Gibt es kein solches $N$ so
+	$\dim X = \infty$.
+\end{enumerate}
+% subsection 113 (end)
+
+\subsection[Beispiele für \CW-Komplexe]{Beispiele} % (fold)
+\label{sub:114}
+\begin{enumerate}[(i)]
+	\item $S^n$ mit 
+	\[
+		(S^n)^{(k)} = \begin{cases}
+			\emptyset, &\text{ falls }k=-1\\
+			\set{(1,0,\ldots ,0)}, &\text{ falls } k=0, \ldots n-1 \\
+			S^n , &\text{ falls } k \ge n 
+		\end{cases}
+	\]
+	ist ein \CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$
+	\[
+		\begin{tikzcd}
+			S^{n-1} \rar \dar & \enbrace*{S^n}^{(n-1)}=\set{(1,0,\ldots ,0)}  \dar \\
+			D^n \rar & S^n  
+		\end{tikzcd}
+	\]
+	\item $S^n$ mit $(S^n)^{(k)} = \set{(x_0, \ldots ,x_k,0, \ldots ,0) \in S^n} $ ist ebenfalls eine \CW-Struktur auf $S^n$.
+	\item Sei $K=(V,\Sigma)$ ein simplizialer Komplex. Es ist $\abs*{\Delta^n} \cong D^n$ und $\abs*{\partial \Delta^n} \cong S^{n-1}$. Sei 
+	$\Sigma^{(n)} := \Sigma_0 \cup \Sigma_1 \cup \ldots \cup \Sigma_n$. Dann wir $\abs*{K}$ durch $\abs*{K}^{(n)} := \abs*{\enbrace*{V,\Sigma^{(n)}}}$ für $n \ge 0$ zu 
+	einem \CW-Komplex. Ist $f \colon K \to L$ eine simpliziale Abbildung, so ist $\abs*{f} \colon \abs*{K} \to \abs*{L}$ eine zelluläre Abbildung.
+	\item Der $n$-dimensionale reelle projektive Raum $\mathds{R}P^n$ kann definiert werden durch 
+	\[
+		\mathds{R}P^n := \nicefrac{\mathds{R}^{n+1} \setminus \set{0}}{x \sim \lambda x} = \nicefrac{S^n}{x \sim -x}
+	\]
+	Punkte in $\mathds{R}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln reeller Zahlen und werden als die sogenannten homogenen Koordinaten $[x_0 : \ldots : x_n]$ 
+	geschrieben. Es ist 
+	\[
+		\mathds{R}P^n = \set[{[x_0 : \ldots : x_n]}]{(x_0, \ldots ,x_n) \in S^n \rule{0cm}{1em}} 
+		= \set[{[x_0 : \ldots : x_n]}]{(x_0, \ldots ,x_n) \in S^n, x_n \ge 0 \rule{0cm}{1em}}
+	\]
+	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^n}{x \sim -x, x \in S^{n-1}} \to \mathds{R}P^n$ mit
+	\[
+		f \enbrace*{x_1, \ldots ,x_n} = \benbrace*{x_1 : \ldots : x_n : \sqrt{1- \sum\nolimits_{i=1}^{n} x_i^2}} 
+	\]
+	Ist $Q^{(n)} : D^n \to \mathds{R}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^n \twoheadrightarrow \nicefrac{D^n}{x \sim -x, x \in S^{n-1}}$ und 
+	$q^{(n)} \colon S^{n-1} \to \mathds{R}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
+	\[
+		\begin{tikzcd}
+			S^{n-1} \rar["q^{(n)}"] \dar[hook]& \mathds{R}P^{n-1} \dar[hook] \\
+			D^n \rar["Q^{(n)}"] & \mathds{R}P^n
+		\end{tikzcd}
+	\]
+	Induktiv erhalten wir einen \CW-Struktur auf $\mathds{R}P^n$ mit genau einer $k$-Zelle für $k=0,\ldots ,n$ und 
+	\[
+		\enbrace*{\mathds{R}P^n}^{(k)} \cong \mathds{R}P^k 
+	\]
+	\item Der $n$-dimensionale komplexe projektive Raum $\mathds{C}P^n$ kann definiert werden durch 
+	\[
+		\mathds{C}P^n := \nicefrac{\mathds{C}^{n+1} \setminus \set{0}}{z \sim \lambda z} = \nicefrac{S^{2n+1}}{z \sim \lambda z, \lambda \in S^1}
+	\]
+	Punkte in $\mathds{C}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln komplexer Zahlen und werden als die sogenannten homogenen Koordinaten $[x_0 : \ldots : x_n]$ 
+	geschrieben. Es ist 
+	\[
+		\mathds{C}P^n = \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1} \rule{0cm}{1em}} 
+		= \set[{[z_0 : \ldots : z_n]}]{(z_0, \ldots ,z_n) \in S^{2n+1}, z_n \ge 0 \rule{0cm}{1em}}
+	\]
+	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, z \in S^{2n}} \to \mathds{C}P^n$ mit
+	\[
+		f \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- \sum\nolimits_{i=1}^{n} \abs{z_i}^2}} 
+	\]
+	Ist $Q^{(2n)} : D^{2n} \to \mathds{C}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^{2n} \twoheadrightarrow \nicefrac{D^{2n}}{z \sim \lambda z, z \in S^{2n}}$ und 
+	$q^{(n)} \colon S^{2n+1} \to \mathds{C}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
+	\[
+		\begin{tikzcd}
+			S^{2n-1} \rar["q^{(n)}"] \dar[hook]& \mathds{C}P^{n-1} \dar[hook] \\
+			D^{2n} \rar["Q^{(n)}"] & \mathds{C}P^n
+		\end{tikzcd}
+	\]
+	Induktiv erhalten wir einen \CW-Struktur auf $\mathds{C}P^n$ mit genau einer $k$-Zelle für $k=0,2,\ldots ,2n$ und 
+	\[
+		\enbrace*{\mathds{C}P^n}^{(k)} \cong \mathds{C}P^{\lfloor \frac{k}{2} \rfloor } 
+	\]
+\end{enumerate}
+% subsection 114 (end)
+% section 11 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
