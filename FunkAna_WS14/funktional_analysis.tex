@@ -1,0 +1,1996 @@
+<<<<<<< HEAD
+=======
+\input{../!config/mitschrift.tex}
+\newcommand{\fach}{Einführung in die Funktionalanalysis}
+\newcommand{\semester}{WiSe 2014}
+\newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/funktionalanalysis.html}
+\newcommand{\prof}{Prof.\,Dr.\,Wilhelm Winter}
+\input{../!config/mitschrift_headings.tex}
+
+
+\begin{document}
+\pagenumbering{Roman}
+\maketitle
+\begin{abstract}
+\input{../!config/vorwort.tex}
+\end{abstract}
+
+\setcounter{page}{1}
+\tableofcontents
+\cleardoubleoddemptypage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Metrische Räume und der Satz von Baire} % (fold)
+\label{sec:1}
+
+\subsection[Definition: Metrischer Raum]{Definition} % (fold)
+\label{sub:11}
+Ein \Index{metrischer Raum} ist ein Paar $(X,d)$, wobei $X$ eine Menge und $d : X \times X \to [0,\infty)$ ist, sodass\marginnote{14 Okt}
+\begin{enumerate}[1)]
+	\item $d(x,y)=0 \iff x=y$ $\forall x,y \in X$
+	\item $d(x,y) = d(y,x)$ $\forall x,y \in X$
+	\item $d(x,z) \le d(x,y) + d(y,z)$ $\forall x,y,z \in X$
+\end{enumerate}
+% subsection 11 (end)
+
+\subsection[Definition: Offen, abgeschlossen und Abschluss]{Definition} % (fold)
+\label{sub:12}
+Sei $(X,d)$ ein metrischer Raum
+\begin{itemize}
+	\item Eine Teilmenge $U \subseteq X$ heißt \Index{offen}, falls für jedes $x \in U$ ein $\varepsilon > 0$ existiert, so dass 
+	\[
+		B(x,\varepsilon) := \set[y \in X]{d(x,y) < \varepsilon} \subset U 
+	\]
+	\item Eine Teilmenge $A \subset X$ heißt \Index{abgeschlossen}, falls $X \setminus A$ offen ist (als Teilmenge von $X$). 
+	\item $\mathcal{T}X := \set[U \subset X]{U \text{ offen}} $ ist die Topologie auf $X$ (die von der Metrik $d$ induziert wird)
+	\item Falls $W \subset X$ eine Teilmenge ist, dann bezeichnet $\overline{W}$ den \Index{Abschluss} von $W$, d.h. die kleinste abgeschlossene Teilmenge von $X$, die 
+	$W$ enthält. Es gilt
+	\[
+		\overline{W} = \enspace\bigcap_{\mathclap{A \subset X \text{abg.}, W \subset A}} \enspace A 
+	\] 
+\end{itemize}
+Für metrische Räume gilt:
+\(
+	\overline{W} = \set[\lim_n x_n]{(x_n)_n \subset W \text{ konvergente Folge}}.
+\)
+Warum gilt $W \subset \overline{W}$?
+% subsection 12 (end)
+
+\subsection[Definition: Stetigkeit, gleichmäßige Stetigkeit, Isometrie]{Definition} % (fold)
+\label{sub:13}
+Eine Abbildung $f : X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,d_Y)$ heißt 
+\begin{itemize}
+	\item \bet{stetig in} $x \in X$, falls
+	\(
+		\forall \varepsilon >0 : \exists \delta >0 : \forall x' \in X : d_X(x,x') < \delta  \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon 
+	\)
+	\item \Index{stetig}, falls $f$ in jedem Punkt $x \in X$ stetig ist.
+	
+	(Äquivalent: Für jede offene Menge $V$ in $Y$ ist $f ^{-1}(V)$ offen in $X$) 
+	\item \Index{gleichmäßig stetig}, falls
+	\(
+		\forall \varepsilon>0 : \exists \delta >0 : \forall x,x' \in X : d_X(x,x') < \delta \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon .
+	\) 
+	\item $f$ heißt \Index{Isometrie}, falls \marginnote{automatisch injektiv}
+	\(
+		\forall x,x' \in X : d_X(x,x') = d_Y \enbrace[\big]{f(x), f(x')}.
+	\)
+	\item $f$ heißt \Index{isometrischer Isomorphismus}, falls $f$ bijektiv und isometrisch ist. \marginnote{$f ^{-1}$ auch}
+\end{itemize}
+% subsection 13 (end)
+
+\subsection[Definition: Cauchy-Folge und Vollständigkeit]{Definition} % (fold)
+\label{sub:14}
+Eine Folge $(x_n)_{n \in \mathds{N}}$ in einem metrischen Raum $(X,d)$ heißt \bet{Cauchy-Folge}\index{Cauchy-Folge}, falls
+\[
+	\forall \varepsilon>0 : \exists N \in \mathds{N} : \forall n,k >N : d(x_n,x_k) < \varepsilon.
+\]
+$(X,d)$ heißt \Index{vollständig}, falls jede Cauchy-Folge in $X$ konvergiert. 
+% subsection 14 (end)
+
+\subsection[Satz: Existenz einer eindeutigen Vervollständigung metrischer Räume]{Satz} % (fold)
+\label{sub:15}
+Sei $(X,d)$ ein metrischer Raum. Dann existiert ein vollständiger metrischer Raum $(\tilde{X}, \tilde{d})$ und eine Isometrie $\iota : X \hookrightarrow \tilde{X}$, sodass
+$\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(\tilde{X}, \tilde{d})$ heißt \Index{Vervollständigung} von $(X,d)$ und ist eindeutig bis auf
+isometrische Isomorphie.
+\minisec{Beweis}
+\begin{description}
+	\item[Eindeutigkeit:] 
+	Angenommen, $(\hat{X}, \hat{d})$ ist ein weiterer vollständiger metrischer Raum und $\kappa : X \to \hat{X}$ eine Isometrie mit 
+	$\overline{\kappa(X)}=\hat{X}$. Definiere $\gamma : \hat{X} \to \tilde{X}$ wie folgt: Falls $y \in \hat{X}$, wähle eine Folge $(x_n)_{n \in \mathds{N}}$ in $X$, sodass
+	$y= \lim_{n \to \infty} \kappa(x_n)$. Setze nun
+	\[
+		\gamma(y) := \lim_{ n \to \infty} \iota(x_n) \in \tilde{X} 
+	\]
+	Zu zeigen: $\gamma$ ist ein isometrischer Isomorphismus.\todo{Achtung Wortspiel: Beweis \emph{vervollständigen} ;-D}
+	\begin{description}
+		\item[Injektivität:] Seien $y,y' \in \hat{X}$ mit $\gamma(y)=\gamma(y')$. Dann existieren Folgen $(x_n)_n, (x_n')_n$ in $X$ mit
+		\[
+			\lim_{ n \to \infty} \iota(x_n) = \lim_{ n \to \infty} \iota(x_n') 
+		\]
+	\end{description}
+	\item[Existenz:] \begin{description}
+		\item[Konstruktion von $(\tilde{X}, \tilde{d})$:] Setze $Y := \set[(x_n)_{n \in \mathds{N}}]{(x_n)_n \text{ ist Cauchy-Folge in }X}$. Definiere 
+	\[
+		(x_n)_n \sim (x_n') :\iff \lim_{ n \to \infty} d(x_n, x_n') = 0
+	\]
+	$\sim$ ist eine Äquivalenzrelation auf $Y$. Definiere nun $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} :  \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
+	\[
+		\tilde{d} \enbrace*{\benbrace[\big]{(x_n)_n} , \benbrace[\big]{(x_n')_n}  } := \lim_{ n \to \infty} d(x_n , x_n') 
+	\]
+	$\tilde{d}$ ist eine wohldefiniert, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann ist
+	\[
+		\lim_{n \to \infty} d(x_n , x_n') = \lim_{n \to \infty} d(y_n, y_n'). \tag*{(leichte Übung)}
+	\]
+	Weiter ist $\enbrace[\big]{d(x_n x_n')}_n$ eine Cauchy-Folge in dem vollständigen Raum $[0,\infty)$ und somit 
+	konvergent: Sei dazu $\varepsilon>0$. Dann existiert ein $N \in \mathds{N}$, sodass $d(x_n,x_m) \le \frac{\varepsilon}{2}$ und $d(x_n', x_m') \le \frac{\varepsilon}{2}$ für alle $n,m \ge N$. Dann gilt nach der \hyperref[sub:vier_ungl]{Vierecksungleichung (siehe Anhang \ref*{sub:vier_ungl})}
+	\[
+		\abs[\big]{d(x_n,x_n') - d(x_m,x_m')} \le d(x_n, x_m) + d(x_n', x_m') \le \varepsilon
+	\]
+	\item[Einbettung von $X:$] Definiere nun $\iota : X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
+	\[
+		\tilde{d} \enbrace[\big]{\iota(x),\iota(y)} = \lim_{ n \to \infty} d(x,y) = d(x,y)
+	\]
+	% Falls $\benbrace*{(x_n)_n} \in \tilde{X}$, finde $y_k \in \iota(X)$, so dass $\benbrace*{(x_n)} = \lim_{ k} y_k$ und $y_k = \benbrace*{(x_k, x_k, \ldots )}= \iota(x_k)$.
+% 	Dann gilt $y_k \xrightarrow{k \to \infty} \benbrace*{(x_n)_n} $, d.h.
+% 	\[
+% 		\lim_{ n \to \infty} d(x_k,x_n) = \tilde{d} \enbrace*{y_k, \benbrace*{(x_n)_n}} \xrightarrow{k \to \infty} 0
+% 	\]
+% 	$\leadsto \tilde{X}= \overline{\iota(X)}$.
+	Sei nun $\benbrace*{(x_n)_n} \in \tilde{X}$ und $\varepsilon>0$. Da $(x_n)_n$ eine Cauchy-Folge ist, gibt es ein $N \in \mathds{N}$, sodass für alle
+	$n,m \ge N$ gilt $d(x_n,x_m) <\varepsilon$. Dann gilt
+	\[
+		\tilde{d}\enbrace[\big]{\iota(x_N), \benbrace*{(x_n)_n} } = \lim_{ n \to \infty} d \enbrace*{x_N, x_n} < \varepsilon
+	\]
+	\item[Vollständigkeit von $(\tilde{X}, \tilde{d})$:] Sei $\enbrace*{\overline{x}^m}_m$ eine Cauchyfolge in $\tilde{X}$.\marginnote{$\overline{x} \in \tilde{X}$}
+	\[
+		\Longrightarrow \forall \varepsilon >0 : \exists M(\varepsilon) \in \mathds{N} : \forall m,m' > M : \tilde{d} \enbrace*{\overline{x}^m, \overline{x}^{m'}} < \frac{\varepsilon}{3} 
+	\]
+	Wenn $\overline{x}^m = \benbrace*{(x^m_n)_n}$ und $\overline{x}^{m'} = \benbrace*{(x^{m'}_n)_n} $, dann gilt also für alle $m,m' >M(\varepsilon)$
+	\begin{equation*}
+		\lim_{ n \to \infty} d \enbrace*{x^m_n, x^{m'}_n} < \frac{\varepsilon}{3}  \label{eq:15:absch1}\tag{*}
+	\end{equation*}
+	Für alle $m$ ist $(x^m_n)_n$ eine Cauchyfolge, also gilt
+	\begin{equation*}
+		\forall m : \exists N(m) : \forall n,n' \ge N(m) : d \enbrace*{x^m_n, x^m_{n'}} < \frac{1}{m}  \label{eq:15:absch2}\tag{**}
+	\end{equation*}
+	Setze nun $z_n := x^n_{N(n)}$. Behauptung: $(z_n)_n$ ist eine Cauchyfolge. Sei $\varepsilon>0$. Dann gilt für $n,m>N=\max\set{M(\varepsilon), \frac{3}{\varepsilon}}$
+	für ein $k > N(m), N(n)$ \marginnote{$d(z_n,z_m)$ ist unabhängig von $k$, also kann man $k$ beliebig groß wählen}
+	\begin{align*}
+		d(z_n,z_m) = d \enbrace*{x^n_{N(n)}, x^m_{N(m)}} \le 
+		\underbrace{d\enbrace*{x^n_{N(n)}, x^n_k}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{n} < \frac{1}{N} \le \frac{\varepsilon}{3}} + 
+		\underbrace{d\enbrace[\Big]{x^n_k, x^m_k}}_{\stackrel{\text{\eqref{eq:15:absch1}}}{\le} \frac{\varepsilon}{3}}   + 
+		\underbrace{d\enbrace*{x^m_k, x^m_{N(m)}}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{m} < \frac{1}{N} \le \frac{\varepsilon}{3}} 
+		< \varepsilon
+	\end{align*}
+	$\Rightarrow (z_n)_n$ ist eine Cauchyfolge, also 
+	\begin{equation*}
+		\forall \varepsilon>0 : \exists N_z(\varepsilon) : \forall n,m > N_z(\varepsilon)  : d(z_n,z_m) < \varepsilon  \label{eq:15:absch3} \tag{\#}
+	\end{equation*}
+	Es bleibt zu zeigen: $\lim_{m \to \infty} \overline{x}^m = \benbrace*{(z_n)_n}$. Sei dazu $\varepsilon>0$. Dann gilt für 
+	$m \ge \max \set{\frac{2}{\varepsilon}, N_z(\varepsilon)}$
+	\begin{align*}
+		\tilde{d} \enbrace[\big]{\overline{x}^m, \benbrace*{(z_n)_n}} = \lim_{ n \to \infty} d \enbrace*{x^m_n, x^n_{N(n)}}\le \lim_{ n \to \infty} 
+		\enbrace[\Bigg]{ \underbrace{d\enbrace*{x_n^m, x^m_{N(m)}}}_{\stackrel{\text{\eqref{eq:15:absch2}}}{<} \frac{1}{m} \le \frac{\varepsilon}{2}  } +
+		\underbrace{d\enbrace*{x^m_{N(m)}, x^n_{N(n)}}}_{=d(z_m,z_n) \stackrel{\text{\eqref{eq:15:absch3}}}{<} \frac{\varepsilon}{2} } } < \varepsilon
+	\end{align*}
+	Also gilt $\overline{x}^m \xrightarrow{m \to \infty} \benbrace*{(z_n)_n}$ und $(\tilde{X},\tilde{d})$ ist vollständig. \bewende
+	\end{description}
+\end{description}
+% subsection 15 (end)
+
+\subsection[Definition: Raum der beschränkten, stetigen Abbildungen]{Definition} % (fold)
+\label{sub:16}
+Sei $(W,\mathcal{T})$ ein topologischer Raum und $(X,d)$ ein metrischer Raum. Sei 
+\[
+	C_b(W,X) = \set[f : W \to X]{f \text{ stetig und beschränkt}} 
+\]
+versehen mit der Metrik $d_{W,X}$, definiert durch
+\[
+	d_{W,X}(f,g) = \sup_{t \in W} d \enbrace[\big]{f(t), g(t)} 
+\]
+% subsection 16 (end)
+
+\subsection[Bemerkung: $d_{W,X}$ als Metrik auf $C(W,X)$]{Bemerkung} % (fold)
+\label{sub:17}
+Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \Index{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
+$\tilde{d}_{W,X} := \min \set{1, d_{W,X}} $ ist eine \enquote{echte} Metrik auf $C(W,X)$.
+% subsection 17 (end)
+
+\subsection[Proposition: $X$ vollständig $\Rightarrow$ $C-B(W,X)$ und $C8W,X$ vollständig]{Proposition} % (fold)
+\label{sub:18}
+Falls $X$ vollständig ist, dann sind $C_b(W,X)$ und $C(W,X)$ vollständig (bezüglich $d_{W,X}$ bzw. $\tilde{d}_{W,X}$).
+\minisec{Beweis}
+Sei $(f_n)_n$ eine Cauchy-Folge in $C_b(W,X)$, also
+\[
+	\forall \varepsilon>0 : \exists N \in \mathds{N} : \forall n,m >N : \sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}< \varepsilon 
+\]
+$\Rightarrow$ für alle $t$ ist $\enbrace[\big]{f_n(t)}_n$ eine Cauchyfolge in $X$. Da $X$ vollständig ist, existiert ein $x_t \in X$ sodass 
+$f_n(t) \xrightarrow{n \to \infty} x_t$. Definiere $f(t) := x_t$ punktweise.
+\begin{description}
+	\item[Vorbereitung:] Es gilt $\forall \varepsilon>0 : \exists N_t$ sodass $d(x_t, f_{N_t}(t)) \le \varepsilon$. Weiter ist
+	\[
+		\sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N_t
+	\]
+	$\Rightarrow \forall t : d \enbrace*{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N$
+\end{description}
+\todo{Beweis zu Ende führen}
+% subsection 18 (end)
+
+\subsection[Proposition über eine Folge von Bällen]{Proposition} % (fold)
+\label{sub:19}
+Sei $(X,d)$ ein vollständiger metrischer Raum und $\enbrace*{\overline{B}(x_n, \varepsilon_n)}_{n \in \mathds{N}}$ mit 
+$\overline{B}(x_{n+1}, \varepsilon_{n+1}) \subseteq \overline{B}(x_n,\varepsilon_n)$ und $\varepsilon_n \xrightarrow{n \to \infty} 0$. Dann existiert genau 
+ein Punkt in $\bigcap_{n \in \mathds{N}} \overline{B}(x_n, \varepsilon_n)$.
+\minisec{Beweis}
+\begin{description}
+	\item[Existenz:] Behauptung: Die Folge der Mittelpunkte $(x_n)_{n \in\mathds{N}}$ ist eine Cauchy-Folge: Sei $\varepsilon >0$. Finde $N \in \mathds{N}$,
+	sodass $\varepsilon_n \le \varepsilon$ für alle $n \ge N$. Dann gilt für alle $n \ge m \ge N$
+	\[
+		d(x_n, x_m) \le \varepsilon_m \le \varepsilon,
+	\]
+	da $x_n \in \overline{B}(x_m, \varepsilon)$ ist. Da $X$ vollständig ist, existiert ein $x \in X$ mit $x_n \xrightarrow{n \to \infty} x$.
+	
+	Behauptung: $x \in \bigcap_{n \in \mathds{N}} \overline{B}(x_n, \varepsilon_n)$. Wähle dazu ein $N \in \mathds{N}$. Dann ist $(x_n)_{n \ge N}$ eine
+	Cauchy-Folge in $\overline{B}(x_N,\varepsilon_N)$. $\overline{B}(x_N,\varepsilon_N)$ ist ein abgeschlossener Teilraum von $X$ und somit vollständig. 
+	Also ist $x \in \overline{B}(x_N,\varepsilon_N)$. Da $N$ beliebig war, gilt $x \in \overline{B}(x_n,\varepsilon_n)$ für jedes $n \in \mathds{N}$.
+	\item[Eindeutigkeit:] Es seien $x,y \in \bigcap_{n \in \mathds{N}} \overline{B}(x_n,\varepsilon_n)$, also 
+	$x,y \in \overline{B}(x_n, \varepsilon_n) $ für alle $ n \in \mathds{N}$. Dann gilt
+	\[
+		d(x,y) \le d(x,x_n) + d(x_n,y) \le 2 \cdot \varepsilon_n \xrightarrow{n \to \infty} 0
+	\]
+	für jedes $n \in \mathds{N}$ und somit $d(x,y)=0 \Leftrightarrow x=y$. \bewende
+\end{description}
+% subsection 19 (end)
+
+\subsection[Satz von Baire]{Satz von Baire\protect\footnote{nach René Louis Baire, \url{https://de.wikipedia.org/wiki/René_Louis_Baire}}} % (fold)
+\label{sub:110} 
+Es gelten folgende äquivalente Formulierungen:
+\begin{enumerate}[a)]
+	\item Sei $(X,d)$ ein vollständiger metrischer Raum und $A_0, A_1, \ldots $ eine Folge abgeschlossener Teilmengen. Falls $\bigcup_{n \in \mathds{N}} A_n$ eine
+	offene Kugel enthält, so auch eines der $A_n$.
+	\item In einem vollständigen metrischen Raum hat eine abzählbare Vereinigung von abgeschlossenen Mengen ohne innere Punkte keine inneren Punkte.
+	\item In einem vollständigen metrischen Raum ist ein abzählbarer Durchschnitt von dichten offenen Mengen wieder dicht.
+\end{enumerate}
+\minisec{Beweis}
+Zunächst die Äquivalenz: 
+\begin{description}
+	\item[a)$\Rightarrow$b):] Klar, da b) Kontraposition von a) ist.
+	\item[b)$\Rightarrow$c):] Sei $U_n \subseteq X$ offen und dicht $\Rightarrow X \setminus U_n \subseteq X$ abgeschlossen und hat somit keine inneren Punkte. Aus b) folgt
+	nun 
+	\[
+		\bigcup_{n \in \mathds{N}}X \setminus U_n = X \setminus \bigcap_{n \in \mathds{N}} U_n
+	\]
+	hat keine inneren Punkte. Also ist $\bigcap_{n \in \mathds{N}} U_n$ dicht in $X$.
+	\item[c)$\Rightarrow$a):] ebenso.
+\end{description}
+Wir wollen nun a) durch Widerspruch beweisen, d.h. wir nehmen an, dass gilt: Jede offene Kugel schneidet $X \setminus A_k$ für jedes $k \in \mathds{N}$. Dazu wollen wir 
+Folgen $(x_k)_{k \in \mathds{N}} \subset X$, $(\varepsilon_k)_{k \in \mathds{N}} \subset (0,1]$ finden mit 
+\begin{enumerate}[(i)]
+	\item $\varepsilon_k < \frac{1}{k+1}$,
+	\item $\overline{B}(x_{k+1}, \varepsilon_{k+1}) \subset (X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \overline{B}(x_k, \varepsilon_k)$,
+	\item $\overline{B}(x_k, \varepsilon_k) \subset \bigcup_{n \in \mathds{N}} A_n$
+\end{enumerate}
+für $k \in \mathds{N}$. Dann gilt 
+\[
+	\bigcup_{n \in \mathds{N}} A_n \stackrel{\text{(iii),(ii)}}{\supset} \bigcap \overline{B}(x_k, \varepsilon_k) \stackrel{\text{(ii)}}{\subset} 
+	\bigcap_{k \in \mathds{N}}(X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \bigcap_{k \in \mathds{N}} X \setminus A_k = X \setminus 
+	\enbrace*{\bigcup_{k \in \mathds{N}} A_k} 
+\]
+Aber wegen (i) und (ii) existiert nach Proposition \ref{sub:19} ein $x \in \bigcap_{k \in \mathds{N}}\overline{B}(x_k,\varepsilon_k)$. \light \medskip \\
+Wir suchen also eine Abbildung $\overline{c} : \mathds{N} \to X \times (0,1], k  \mapsto(x_k, \varepsilon_k)$ mit (i),(ii),(iii) für $k \in \mathds{N}$. Setze
+\begin{align*}
+	P_m &:= \set[{c : \set{0, \ldots ,m} \to X \times (0,1] }]{\begin{array}{l}
+		\text{(i),(iii) gilt für }k \in \set{0, \ldots , m}, \\
+		\text{(ii) gilt für }k \in \set{0, \ldots , m-1}
+	\end{array} }  \\
+	P_\infty &:= \set[{c : \mathds{N} \to X \times (0,1]}]{\text{(i),(ii),(iii) gilt für } k \in \mathds{N} \rule{0cm}{0.3cm}} 
+\end{align*}
+Die Menge $P := \enbrace*{\bigcup_{m \in \mathds{N}} P_m} \cup P_\infty$ ist partiell geordnet bezüglich $\prec$:
+\[
+	c \prec c' \text{ falls } m \le m' \text{ und } c'\big|_{\set{0,\ldots ,m}} =c , \text{ bzw.} c'=c \text{ falls } m=m'=\infty
+\]
+$P$ ist nicht leer, denn nach Vorraussetzung existiert $(x_0,\varepsilon_0)$ mit $0 < \varepsilon_0 < 1$ und $\overline{B}(x_0, \varepsilon_0) \subset 
+\bigcup_{n \in\mathds{N}} A_n$, d.h. $0 \mapsto (x_0,\varepsilon_0) \in P_0$. Jede total geordnete Teilmenge $\emptyset \not= \Gamma$ von $P$ besitzt eine obere Schranke:
+\begin{itemize}
+	\item Falls $\Gamma$ ein $c\in P_\infty$ enthält, so ist $c$ obere Schranke.\marginnote{warum?}
+	\item Ebenso falls $\Gamma$ ein $c \in P_{\overline{m}}$ enthält und $\Gamma \cap P_{m'}= \emptyset$ für alle $\overline{m} < m' \in \mathds{N} \cup \set{\infty}$.
+	\item Falls $\Gamma \subset \bigcup_{\mathds{N}} P_m$, aber $\Gamma \not\subset \bigcup_{m \le \overline{m}} P_m$ für jedes $\overline{m}$, so definieren wir eine
+	obere Schranke in $P_\infty$ durch Einschränkung.\marginnote{wie genau?} 
+\end{itemize}
+Mit dem Lemma von Zorn folgt, dass $P$ ein maximales Element $\overline{c}$ besitzt. Behauptung: $\overline{c}\in P_\infty$ wie gewünscht:
+
+Falls $\overline{c} \in P_m$ für ein $m \in \mathds{N}$, so gilt nach Annahme, dass $\enbrace*{X \setminus A_m} \cap B(x_m, \varepsilon_m) \not= \emptyset$. Dann 
+existiert aber $(x_{m+1},\varepsilon_{m+1}) \in X \times (0,1]$ mit $\varepsilon_{m+1} < \frac{1}{m+2}$ und 
+\[
+	\overline{B}(x_{m+1}, \varepsilon_{m+1}) \subset  \enbrace*{X \setminus A_m} \cap B(x_m,\varepsilon_m) 
+\]
+Definiere $\overline{\overline{c}} : \set{0, \ldots , m+1} \to X \times (0,1]$ durch
+\[
+	k \longmapsto \begin{cases}
+		(x_k,\varepsilon_k), &\text{ falls } k=m+1\\
+		\overline{c}(k), &\text{ falls } k \in \set{0, \ldots , m} 
+	\end{cases},
+\]
+dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$. \light zur Maximalität von $\overline{c}$. \bewende
+% subsection satz_baire (end)
+
+\subsection[Bemerkungen zum Satz von Baire]{Bemerkungen} % (fold)
+\label{sub:111}
+\begin{enumerate}[(i)]
+	\item Die Aussage gilt auch für lokalkompakte Hausdorffräume. \hfill(Übung)
+	\item Tatsächlich genügt eine schwächere Form des Auswahlaxioms(DC); das abzählbare Auswahlaxiom jedoch nicht.
+	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung)
+\end{enumerate}
+% subsection 111 (end)
+
+\subsection{Korollar: Satz der gleichmäßigen Beschränktheit} % (fold)
+\label{sub:112}
+Sei $(X,d)$ ein vollständiger metrischer Raum. Sei $F \subset C(X,\mathds{R})$ eine Menge, die \Index{punktweise gleichmäßig beschränkt} ist, d.h. für jedes $x \in X$ 
+existiert $K_x \in \mathds{R}$, sodass
+\[
+	\abs*{f(x)} \le K_x \enspace \forall f \in F. 
+\] 
+Dann existieren $\emptyset \not= U \subset X$ offen und $K \in \mathds{R}$ so, dass 
+\[
+	\abs*{f(x)} \le K \enspace \forall x \in U, f \in F 
+\]
+\minisec{Beweis}
+Definiere 
+\begin{align*}
+	X \supset A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
+\end{align*}
+Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. Außerdem enthält dies eine nichtleere offene Menge. Also existiert ein $n$ und $U \subset X$ nichtleer und offen mit $U \subset A_n$. \bewende
+% subsection 112 (end)
+% section 1 (end)
+\newpage
+
+\section{Normierte Räume, Hahn-Banach Sätze} % (fold)
+\label{sec:2}
+
+\subsection[Definition: Topologischer Vektorraum]{Definition} % (fold)
+\label{sub:21}
+Sei $X$ ein $\mathds{K}$-Vektorraum mit einer Topologie $\mathcal{T}$. Wir sagen, $X$ ist ein \Index{topologischer Vektorraum}, falls Addition und Skalarmultiplikation stetig sind:
+\begin{align*}
+	+ : X \times X  \to X \quad &, \quad(x,y) \mapsto x+y \\
+	\cdot : \mathds{K} \times X \to X \quad &, \quad (\lambda ,x) \mapsto \lambda \cdot x
+\end{align*}
+% subsection 21 (end)
+
+\subsection[Proposition: Unterräume topologischer Vektorräume sind topologische Vektorräume]{Proposition} % (fold)
+\label{sub:22}
+Sei $X$ ein topologischer $\mathds{K}$-Vektorraum und $Y \subset X$ ein Untervektorraum. Dann sind $Y$ und $\overline{Y}$ topologische Vektorräume mit der Unterraumtopologie.
+\minisec{Beweis}
+\begin{itemize}
+	\item Klar für $Y$.
+	\item Zu zeigen: $\overline{Y}$ ist ein Untervektorraum. Seien $x_0, y_0 \in \overline{Y}$ und sei $U$ eine offene Menge in $X$ mit $x_0 + y_0 \in U$. Dann existieren
+	offene Mengen $V,W$ von $X$ mit $x_0 \in V$, $y_0 \in W$ und $V+W \subset U$, da die Addition stetig ist. Da $x_0 \in \overline{Y}$ und $x_0 \in V$, existiert 
+	$x_1 \in Y$ mit $x_1 \in V$. Analog existiert $y_1 \in Y$ mit $y_1 \in W$. Daher ist $x_1 + y_1 \in Y \cap U$. Da $U$ eine beliebige offene Umgebung um $x_0+ y_0$ ist,
+	folgt $x_0 +y_0 \in \overline{Y}$.
+	
+	Skalarmultiplikation genauso. \bewende
+\end{itemize}
+% subsection 22 (end)
+
+\subsection[Proposition: Normierte Vektorräume sind topologische Vektorräume]{Proposition} % (fold)
+\label{sub:23}
+Ein normierter Vektorraum $(X, \norm{\cdot})$ ist ein topologischer Vektorraum bezüglich der von $\norm{\cdot}$ induzierten Topologie.
+\minisec{Beweis}
+Es gilt 
+\begin{align*}
+	\norm[X]{(x+y) - (x'+y')} \le \norm[X]{x-x'} + \norm[X]{y-y'}   
+\end{align*}
+Daher ist $+ : X \times X \to X$ gleichmäßig stetig bezüglich der Norm $\norm[X \times X]{(z,z')} := \norm[X]{z} + \norm[X]{z'}$ auf $X \times X$. Ähnlich folgt
+\begin{align*}
+	\norm[X]{\lambda x - \lambda' x'} = \norm[X]{\lambda (x-x') + (\lambda -\lambda')x'} \le \abs*{\lambda } \cdot \norm[X]{x-x'} + \abs*{\lambda -\lambda'} \cdot 
+	\norm[X]{x'}      
+\end{align*}
+Daher ist $\cdot : \mathds{K} \times X \to X$ stetig, denn falls $(\lambda_i)_{i \in I}$ ein Netz in $\mathds{K}$ und $(x_i)_{i \in I}$ ein Netz in $X$ ist mit 
+$\lambda_i \to \lambda $, $x_i\to x$, dann  gilt $\lambda_i x_i \to \lambda x$, also $\norm[X]{\lambda_i x_i - \lambda x} \to 0$. \bewende
+% subsection 23 (end)
+
+\subsection[Proposition: Stetigkeit einer linearen Abbildung zwischen topologischen Vektorräumen]{Proposition} % (fold)
+\label{sub:24}
+Seien $X,Y$ topologische Vektorräume, $T : X \to Y$ linear. Dann sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $T$ ist stetig.
+	\item $T$ ist stetig in $0$.
+	\item $T$ ist stetig in einem Punkt $\overline{x}$.
+\end{enumerate}
+\minisec{Beweis}
+(1) $\Rightarrow$ (2) $\Rightarrow $ (3) ist klar. Wir zeigen (3) $\Rightarrow$ (1):
+
+Für $y \in X$ definiere $L_y : X \to X$, $x \mapsto y+ x$. Dann ist $L_y$ bijektiv und stetig. Da auch $L_{-y}$ stetig ist, ist $L_y$ ein Homöomorphismus. Sei nun $T$ in 
+$\overline{x}$ stetig. Sei $x_0 \in X$. Wir zeigen: $T$ ist stetig in $x_0$. Setze $y := \overline{x} - x_0$. Dann ist
+\begin{align*}
+	T(x_0) = T(x_0+y-y) = T(-y) + T(x_0+y) = L_{T(-y)} \circ T \circ L_y (x_0)
+\end{align*}
+Da $L_y(x_0) = \overline{x}$, $T$ stetig in $\overline{x}$ ist und $L_y$, $L_{T(-y)}$ stetig sind, ist somit $T$ stetig in $x_0$. \bewende
+% subsection 24 (end)
+
+\subsection[Definition: Stetige Funktionale und Operatoren]{Definition} % (fold)
+\label{sub:25}
+Für topologische Vektorräume $X,Y$ definieren wir 
+\[
+	\mathcal{L}(X,Y) = \set[T : X \to Y]{T \text{ linear und stetig}}  
+\]
+Wir schreiben $X^*:= \mathcal{L}(X,\mathds{K})$ für den \Index{Dualraum} von $X$. Die Elemente von $X^*$ heißen (stetige) \Index{Funktionale}.\footnote{Aus der linearen Algebra: $X^* = \Hom(X,\mathds{R}) = \set[T : X \to Y]{T \text{ linear}}$. Die Elemente von $X^*$ heißen Funktionale.}
+Die Elemente von $\mathcal{L}(X,X)$ heißen (stetige) \Index{Operatoren} auf $X$. 
+% subsection 25 (end)
+
+\subsection[Bemerkung: Vektorraumstruktur auf $\mathcal{L}(X,Y)$, Algebrastruktur auf $\mathcal{L}(X,X)$]{Bemerkung} % (fold)
+\label{sub:26}
+$\mathcal{L}(X,Y)$ und $\mathcal{L}(X,\mathds{K}) = X^*$ sind Vektorräume, wobei die Vektorraumstruktur punktweise definiert ist. $\mathcal{L}(X,X)$ ist sogar eine Algebra mittels Komposition.
+% subsection 26 (end)
+
+\subsection[Proposition: Stetigkeit linearer Abbildungen mittels Normabschätzung]{Proposition} % (fold)
+\label{sub:27}
+Seien $X,Y$ normierte Vektorräume, $T : X \to Y$ linear. Dann ist $T$ stetig genau dann, wenn ein $\mu \ge 0$ existiert, sodass 
+\[
+	\norm[Y]{T(x)} \le \mu \cdot \norm[X]{x} \quad \forall x \in X  
+\]
+Ein stetiger Operator zwischen normierten Vektorräumen heißt deswegen auch \bet{beschränkt}\index{Operator!beschränkter Operator}.
+\minisec{Beweis}
+\begin{description}
+	\item[\enquote{$\Leftarrow$}:] Klar: Wenn $x_n \to 0$, dann $T(x_n) \to 0$, denn $\norm{T(x_n)} \le \mu \norm{x_n } \to 0$. Also ist $T$ stetig in $0$ und nach
+	\ref{sub:24} überall.
+	\item[\enquote{$\Rightarrow $}:] Angenommen $T$ ist stetig. Dann setzen wir
+	\[
+		\mu := \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}  }]{x \in X \setminus \set{0} } 
+	\] 
+	Falls $\mu = \infty$, dann existieren $x_n \in X$ mit $\frac{1}{\norm[X]{x_n}} \cdot \norm[Y]{T(x_n)} \ge n$. Betrachte 
+	$x_n' :=  \frac{1}{n \cdot \norm[X]{x_n}} \cdot x_n $, dann $\norm{x_n'} = \frac{1}{n}$, also $x_n' \to 0$. Aber es gilt $T(x_n')\not\longrightarrow 0$, denn
+	\begin{align*}
+		\norm[Y]{T(x_n')} = \frac{1}{n \cdot \norm[X]{x_n} } \cdot \norm[Y]{T(x_n)} \ge 1 
+	\end{align*}
+	für alle $n$, \light zur Stetigkeit von $T$. Also $\mu < \infty$. \bewende 
+\end{description}
+% subsection 27 (end)
+
+\subsection[Definition: Operatornorm]{Definition} % (fold)
+\label{sub:28}
+Seien $X,Y$ normierte Vektorräume, $T \in \mathcal{L}(X,Y)$. Die \bet{Norm} (oder \Index{Operatornorm}) von $T$ ist
+\[
+	\norm{T} = \sup \set[{\frac{1}{\norm[X]{x}} \cdot \norm[Y]{T(x)}}]{x \in X \setminus \set{0} } = \sup \set[{\norm[Y]{T(x)} }]{x \in X \text{ mit } \norm[X]{x} 
+	= 1\rule{0cm}{0.4cm}}   
+\] 
+Nach \ref{sub:27} ist $\norm{T}<  \infty $ und $\norm[Y]{T x} \le \norm{T} \cdot \norm[X]{x}$ für alle $x \in X$.
+% subsection 28 (end)
+
+\subsection[Propostion: $\mathcal{L}(X,Y)$ ist ein normierter Raum mit der Operatornorm]{Proposition} % (fold)
+\label{sub:29}
+Seien $X,Y$ normierte Räume, betrachte $\mathcal{L}(X,Y)$ mit $\norm{\cdot}$. Dann ist $\mathcal{L}(X,Y)$ ein normierter Raum.
+\minisec{Beweis}
+\begin{itemize}
+	\item $\norm{T} \ge 0 $ für alle $T \in \mathcal{L}(X,Y)$.
+	\item Es gilt
+	\begin{align*}
+		\norm{T}=0 \iff \forall x \in X, \norm[X]{x}=1 : \norm[Y]{Tx}=0 &\iff \forall x \in X, \norm[X]{x}=1 : Tx=0 \\ &\iff \forall x \in X : Tx=0 \\ &\iff T=0
+	\end{align*}
+	\item Sei $\lambda  \in \mathds{K}$, $T \in \mathcal{L}(X,Y)$. Dann gilt
+	\[
+		\norm{\lambda \cdot T} = \sup_{\norm[X]{x}=1} \norm[Y]{\lambda  \cdot T(x)}  = \sup_{\norm[X]{x}=1 } \abs*{\lambda } \cdot \norm[Y]{Tx} =
+		\abs*{\lambda } \cdot \sup_{\norm[X]{x}=1 } \norm[Y]{Tx} = \abs*{\lambda } \cdot \norm{T}      
+	\]
+	\item Seien $T_1, T_2 \in \mathcal{L}(X,Y)$ und $x \in X$ mit $\norm[X]{x}=1 $. Dann gilt
+	\[
+		\norm[Y]{(T_1 + T_2)(x)} = \norm[Y]{T_1 x + T_2 x} \le \norm[Y]{T_1 x} + \norm[Y]{T_2 x}
+	\]
+	Damit folgt weiter
+	\begin{align*}
+		\norm{T_1 +T_2} = \sup_{\norm[X]{x}=1 } \norm[Y]{(T_1+ T_2) (x)} &\le \sup_{\norm[X]{x}=1} \enbrace*{\norm[Y]{T_1 x} + \norm[Y]{T_2 x}  }   \\
+		&\le \sup_{\norm[X]{x}=1} \sup_{\norm[X]{x'}=1} \enbrace*{\norm[Y]{T_1 x} + \norm[Y]{T_2 x'}  }  \\ &= \norm{T_1} + \norm{T_2} \bewende   
+	\end{align*}
+\end{itemize}
+% subsection 29 (end)
+
+\subsection[Definition: Normierte $\mathds{K}$-Algebra]{Definition} % (fold)
+\label{sub:210}
+Eine $\mathds{K}$-Algebra heißt \bet{normiert}\index{normierte $\mathds{K}$-Algebra}, falls $A$ mit einer Norm $\norm{\cdot}$ versehen ist, so dass $(A,\norm{\cdot} )$ ein normierter Vektorraum und
+\[
+	\norm{a b} \le \norm{a} \cdot \norm{b} \quad \forall a,b \in A   
+\]
+Falls $A$ unital ist, d.h. es existiert ein Einselement $1_A$, dann gilt $\norm{1_A} \le 1$.
+\minisec{Bemerkung}
+Wenn $\norm{1_A} < 1$, dann $\norm{1_A} = \norm{1_A \cdot 1_A} \le \norm{1_A} \cdot \norm{1_A} \Rightarrow \norm{1_A} =0 $. Also $1_A=0$ und damit $A= \set{0}$.\todo{Rev Chap 2}
+% subsection 210 (end)
+
+\subsection[Beispiele für normierte Algebren]{Beispiele} % (fold)
+\label{sub:211}
+\begin{enumerate}[(i)]
+	\item $C(\Omega,\mathds{K})$, wobei $\Omega$ ein kompakter Hausdorffraum und die Multiplikation punktweise ist. Betrachte $\norm[\infty]{.}$. Für $f,g : \Omega \to K$ gilt dann
+	$\norm[\infty]{f \cdot g} \le \norm[\infty]{f} \cdot \norm[\infty]{g}$
+	\item $\mathcal{L}(X,X)$ für einen normierten Raum $X$ mit $\norm{.}$. Für $S,T \in \mathcal{L}(X,X)$ gilt
+	\[
+		\norm{S T} = \sup_{\norm[X]{x}=1} \norm[X]{S(T(x))} \le \sup_{\norm[X]{x}=1} \enbrace[\big]{\norm{S} \cdot \norm[X]{Tx}} = \norm{S} \cdot \norm{T}.     
+	\]
+\end{enumerate}
+% subsection 211 (end)
+
+\subsection[Proposition: Norm auf dem Produkt normierter Räume]{Proposition} % (fold)
+\label{sub:212}
+Seien $X,Y$ normierte Räume. Dann ist $X \times Y$ ein normierter Raum mit 
+\begin{align*}
+	 \norm[1]{(x,y)} &:= \norm[X]{x} + \norm[Y]{y}   \quad \text{ für } (x,y) \in X \times Y \\
+	\text{oder } \quad \norm[\infty]{(x,y)} &:= \max \set{\norm[X]{x}, \norm[Y]{y}}  
+\end{align*}
+Beide Normen sind äquivalent.
+% subsection 212 (end)
+
+\subsection[Proposition und Definition: Norm auf dem Quotientenraum]{Proposition und Definition} % (fold)
+\label{sub:213}
+Sei $X$ ein normierter Raum und $Y \subseteq X$ ein abgeschlossener Unterraum. Dann ist $\nicefrac{X}{Y} = \set[x +Y]{x \in X}$ ein normierter Raum mit
+\[
+	\norm[\nicefrac{X}{Y}]{x +Y} := \inf \set[{\norm[X]{x+y} }]{y \in Y}  
+\]
+Die Quotientenabbildung $q : X \twoheadrightarrow \nicefrac{X}{Y}$, $x \mapsto x+ Y$ ist stetig, linear und $\norm{q} \le 1$ und offen, d.h. bildet offene Mengen in $X$ auf offene Mengen in $\nicefrac{X}{Y}$ ab.
+\minisec{Bemerkung}
+Daraus folgt, dass Normtopologie und Quotiententopologie auf $\nicefrac{X}{Y}$ gleich sind.
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item $\nicefrac{X}{Y}$ ist ein Vektorraum mit $(x+Y) + (x'+Y) = (x+x') + Y$.
+	\item Sei $\overline{x} = x+ Y \in \nicefrac{X}{Y}$. Es gilt
+	\begin{itemize}
+		\item $\norm{\overline{x}} \ge 0 $ ist klar für alle $\overline{x} \in \nicefrac{X}{Y}$
+		\item Angenommen $\norm[\nicefrac{X}{Y}]{\overline{x}} =0$, d.h. $\inf_{y \in Y} \norm[X]{x+y} =0$. Also existiert eine Folge $(y_n)_n \subset Y$ mit
+		$\norm[X]{x+y_n} \xrightarrow{n \to \infty} 0 \Rightarrow y_n \xrightarrow{n \to \infty} -x$. Also ist $-y$ und damit auch $y$ in $Y$, da $Y$ abgeschlossen ist.
+		Damit ist $\overline{x}=0 $ 
+	\end{itemize}
+	\item Sei $0 \not= \lambda \in \mathds{K}$, $x \in X$. Dann gilt
+	\begin{align*}
+		\norm[\nicefrac{X}{Y}]{\lambda \cdot \overline{x}} = \inf_{y \in Y} \norm[X]{\lambda x + y} = \inf_{y \in Y} \norm[X]{\lambda x + \lambda y} 
+		= \inf_{y \in Y} \abs*{\lambda } \cdot \norm[X]{x+y}  =   \abs*{\lambda } \cdot \norm[\nicefrac{X}{Y}]{\overline{x}}  
+	\end{align*}
+	\item Seien $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$. Dann gilt
+	\begin{align*}
+		\norm[\nicefrac{X}{Y}]{\overline{x} + \overline{y}} = \inf_{z \in Y} \norm[X]{x+y+z} = \inf_{z,z' \in Y} \norm[X]{x+y+z+z'} &\le \inf_{z,z' \in Y}
+		\enbrace[\Big]{\norm[X]{x+z} + \norm[X]{y+z'}} \\ &= \norm[\nicefrac{X}{Y}]{\overline{x}} + \norm[\nicefrac{X}{Y}]{\overline{y}}
+	\end{align*}
+	Damit ist $\norm[\nicefrac{X}{Y}]{.}$ eine Norm auf $\nicefrac{X}{Y}$.
+	\item Linearität von $q$ ist klar. Es gilt
+	\[
+		\norm[\nicefrac{X}{Y}]{\overline{x}} = \inf_{y \in Y} \norm[X]{x+y} \le \norm[X]{x}   
+	\]
+	Also
+	\[
+		\norm{q} = \sup_{\norm[X]{x}=1} \norm[\nicefrac{X}{Y}]{q(x)} \le \sup_{\norm[X]{x}=1 } \norm[X]{x} = 1   
+	\]
+	\item Zu zeigen: $q$ ist offen. Sei $x \in X$, $\varepsilon>0$. Betrachte die offene Kugel $B(x,\varepsilon) \subset X$. Wir zeigen 
+	$B(\overline{x}, \varepsilon) \subset q \enbrace*{B(x,\varepsilon)}$. Sei also $\overline{z} = z + Y$ in $B(\overline{x},\varepsilon)$. Dann gilt
+	$\norm[\nicefrac{X}{Y}]{\overline{x}- \overline{z}} < \varepsilon$, worauf folgt
+	\[
+		\inf_{y \in Y} \norm[X]{x-z+y} < \varepsilon 
+	\]
+	$\Rightarrow$ es existiert $y \in Y : \norm[X]{x-z+y}<\varepsilon $. Es gilt $\overline{z}=\overline{z-y}\in q\enbrace*{B(x,\varepsilon)}$, da $z-y\in B(x,\varepsilon)$.
+	
+	Sei $V \subset X$ offen, zeige $q(V) \subset \nicefrac{X}{Y}$ offen. Für $x \in V$ finde $\varepsilon>0$, sodass $B(x,\varepsilon) \subset V$. Dann folgt
+	$B(\overline{x},\varepsilon) \subseteq q \enbrace[\big]{ B(x,\varepsilon)} \subseteq q(V)$. \bewende
+\end{enumerate}
+% subsection 213 (end)
+
+\subsection[Definition: Banachraum und Banachalgebra]{Definition} % (fold)
+\label{sub:214}
+Ein \Index{Banachraum} ist ein vollständiger, normierter Raum. Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra.  
+% subsection 214 (end)
+
+\subsection[Beispiel für eine Banachalgebra]{Beispiel} % (fold)
+\label{sub:215}
+$C(\Omega, \mathds{K} )$, wobei $\Omega$ ein kompakter Hausdorffraum ist, ist eine Banachalgebra.
+% subsection 215 (end)
+
+\subsection[Proposition: Produkte und Quotienten von Banachräumen]{Proposition} % (fold)
+\label{sub:216}
+Produkte und Quotienten (nach abgeschlossenen Unterräumen) von Banachräumen sind wieder Banachräume.
+\minisec{Beweis}
+\begin{description}
+	\item[Produkt $X \times Y$:] Es gilt $\norm[\infty]{(x,y)} = \max \set{\norm{x}, \norm{y}}$. Sei $\enbrace*{(x_n, y_n)}_n \subset X \times Y$ eine Cauchyfolge.
+	Dann sind $(x_n)_n$ und $(y_n)_n$ Cauchyfolgen und es gilt $x_n \to x$ und $y_n \to y$ und somit auch $(x_n, y_n) \to (x,y)$.
+	\item[Quotient $\nicefrac{X}{Y}$:] Sei $X$ ein Banachraum und $Y \subseteq X$ ein abgeschlossener Unterraum. 
+	
+	Falls $\overline{x}, \overline{y} \in \nicefrac{X}{Y}$, so existiert $y' \in X$, sodass $\overline{y} = \overline{y'}$ und 
+	\[
+		\norm[X]{x-y'} \le 2 \cdot \norm[\nicefrac{X}{Y}]{\overline{x} - \overline{y}}  
+	\] 
+	Sei nun $\enbrace*{\overline{x}_n }_n$ eine Cauchyfolge in $\nicefrac{X}{Y}$. Es gibt eine Teilfolge $\enbrace*{\overline{x}_{n_k}}_k$, sodass
+	\[
+		\sum_{k=1}^{\infty} \norm[\nicefrac{X}{Y}]{\overline{x}_{n_{k-1}} - \overline{x}_{n_k}} < \infty 
+	\]
+	Falls $\enbrace*{\overline{x}_{n_k} }_k $ konvergiert, dann auch $\enbrace*{\overline{x}_n}_n$. Wir dürfen also \oE annehmen, dass $\sum_{n=1}^{\infty} \norm{\overline{x}_{n-1} - \overline{x}_n }< \infty$. Wähle $x_1' \in \overline{x}_1$. Wähle induktiv $x_n' \in X$  mit
+	\[
+		\norm[X]{x_{n-1}' - x_n'} \le 2 \cdot \norm[\nicefrac{X}{Y}]{\overline{x_{n-1} - \overline{x}_n } }  
+	\]
+	und $x_n' \in \overline{x}_n$. Dann gilt $\sum_{n=1}^{\infty} \norm[X]{x_{n-1}' - x_n'} < \infty $. Daher ist $(x_n')_n$ eine Cauchyfolge in $X$. Also existiert 
+	$x \in X$ mit $x_n \to x$. Dann $\overline{x}_n  \to \overline{x}$. \bewende
+\end{description}
+% subsection 216 (end)
+
+\subsection[Definition: Sublineare Abbildung]{Definition} % (fold)
+\label{sub:217}
+Sei $X$ ein $\mathds{R}$-Vektorraum. Eine Abbildung $\varphi : X \to \mathds{R}$ heißt \Index{sublinear}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\varphi(\lambda \cdot x) = \lambda \cdot \varphi(x)$, für $x \in X$, $\lambda \in [0,\infty)$
+	\item $\varphi(x+y) \le \varphi(x) + \varphi(y)$, für $x,y \in X$.
+\end{enumerate}
+Setze $\mathcal{S}(X) := \set[\varphi : X \to \mathds{R}]{\varphi \text{ sublinear}}$. $\mathcal{S}(X)$ ist partiell geordnet mit 
+\[
+	\varphi \le \psi :\iff \varphi(x) \le \psi(x) ,\quad  x \in X
+\]
+% subsection 217 (end)
+
+\subsection[Beispiele für sublineare Abbildungen]{Beispiele} % (fold)
+\label{sub:218}
+\begin{enumerate}[(i)]
+	\item Halbnormen sind sublinear.
+	\item \[
+		\begin{tikzpicture}[scale=0.5]
+			\draw (-3,0) -- (3,0) node[right]{$X$};
+			\draw (0,-3) -- (0,3) node[right]{$\mathds{R}$};
+			\draw[very thick, dashed,OrangeRed2] (0,0) -- (220:4);
+			\draw[very thick,SeaGreen4] (40:4) -- (0,0) -- (205:4);
+		\end{tikzpicture}
+	\]
+	$0 = \varphi(0) = \varphi(x-x) \le \varphi(x) + \varphi(-x)$.
+\end{enumerate}
+% subsection 218 (end)
+
+\subsection[Proposition: Die sublinearen Abbildungen $\mathcal{S}(X)$ sind nach unten induktiv geordnet]{Proposition} % (fold)
+\label{sub:219}
+Sei $X$ ein $\mathds{R}$-Vektorraum. $\mathcal{S}(X)$ ist nach unten induktiv geordnet, d.h. jede nichtleere total geordnete Teilmenge besitzt eine untere Schranke.
+\minisec{Beweis}
+Sei $\emptyset \not= (\varphi_i)_{I} \subseteq \mathcal{S}(X)$ total geordnet. Setze $\varphi(x) := \inf_{i \in I} \varphi_i(x)$, dann gilt 
+\[
+	- \varphi_i(-x) \le \varphi_i(x) \enspace\Longrightarrow \enspace- \varphi(x) \le \varphi(x) \le \varphi_i(x) < \infty
+\]
+ebenso $-\varphi(x) \le \varphi(-x) \le \varphi_i(-x)$ für $x \in X$, $i \in I$. Insbesondere gilt $- \infty <  \varphi(x) < \infty$, $x \in X$. 
+Die Sublinearität von $\varphi$ und $\varphi \le \varphi_i$, $i \in I$ sind klar (Warum?). \bewende
+% subsection 219 (end)
+
+\subsection[Propostion: Minimale Elemente in $\mathcal{S}(X)$ sind genau die lineare Abbildungen]{Proposition} % (fold)
+\label{sub:220}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $\varphi$ in $\mathcal{S}(X)$ minimal genau dann, wenn $\varphi$ linear ist.
+\minisec{Beweis}
+\begin{description}
+	\item["$\Leftarrow$":] Sei $\psi \le \varphi$ mit $\psi$ sublinear und $\varphi$ linear. Dann folgt $\psi(x) \le \varphi(x)$ und $\psi(-x) \le \varphi(-x)$ für 
+	$x \in X$.
+	\[
+		 \Longrightarrow \enspace- \psi(x) \le \psi(-x) \le \varphi(-x) = - \varphi(x)
+	\]
+	Daraus folgt $\varphi(x) \le \psi(x)$ und somit muss $\varphi=\psi$ gelten. Also ist $\varphi$ minimal.
+	\item["$\Rightarrow $":] Sei $\varphi \in \mathcal{S}(X)$ minimal. Zu $\overline{x} \in X$ definiere $\varphi_{\overline{x}} : X \to \mathds{R}$ durch
+	\[
+		\varphi_{\overline{x}}(x) := \inf_{\lambda \ge 0} \enbrace[\Big]{\varphi \enbrace*{x+ \lambda \cdot \overline{x} } - \lambda \cdot \varphi(\overline{x})}
+	\]
+	Es gilt $\varphi_{\overline{x}}(x) \in (-\infty,\infty)$, denn für $x \in X, \lambda \ge 0$ ist \marginnote{mit (ii) aus \ref{sub:217}}
+	\[
+		-\varphi(-x) \le \varphi(x+ \lambda \cdot \overline{x}) - \lambda  \cdot \varphi(\overline{x}) \le \varphi(x)
+	\]
+	$\varphi_{\overline{x}}$ ist sublinear:
+	\begin{enumerate}[(i)]
+		\item Sei $\mu >0$. Dann gilt für $x \in X$.
+		\begin{align*}
+			\varphi_{\overline{x}}(\mu \cdot x) = \inf_{\lambda \ge 0} \enbrace[\Big]{ \varphi \enbrace*{\mu \cdot x + \lambda  \cdot \overline{x} } 
+			- \lambda \cdot \varphi(\overline{x} )} &= \inf_{\lambda \ge 0 } \mu \cdot  \enbrace*{ \varphi \enbrace*{x + \frac{\lambda }{\mu} \cdot \overline{x}}
+			- \frac{\lambda }{\mu} \cdot \varphi(\overline{x} )  } \\
+			&= \mu \cdot \inf_{\lambda' \ge 0} \enbrace[\Big]{ \varphi \enbrace*{x+ \lambda' \cdot \overline{x} } - \lambda' \varphi(\overline{x})} \\
+			&= \mu \cdot \varphi_{\overline{x}}(x) 
+		\end{align*}
+		$\varphi_{\overline{x}}(0 \cdot x) = 0$ ist klar.
+		\item Zu $x,y \in X$, $\varepsilon>0$ wähle $\lambda_x, \lambda_y \ge 0$ mit 
+		\begin{align*}
+			\varphi_{\overline{x}}(x) &\ge \varphi \enbrace*{x + \lambda_x \cdot \overline{x}} - \lambda_x \cdot \varphi(\overline{x}) - \varepsilon \\
+			\varphi_{\overline{x}}(y) &\ge \varphi \enbrace*{y + \lambda_y \cdot \overline{x}} - \lambda_y \cdot \varphi(\overline{x}) - \varepsilon 
+		\end{align*}
+		Setze $\lambda  := \lambda_x + \lambda_y$, dann gilt
+		\begin{align*}
+			\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) &\ge \varphi \enbrace*{ x+ \lambda_x \cdot \overline{x}} + 
+			\varphi \enbrace*{y+ \lambda_y \cdot \overline{x} } - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
+			&\ge  \varphi \enbrace*{x +y + \lambda \cdot \overline{x}} - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
+			&\ge \varphi_{\overline{x}} (x+y) - 2 \varepsilon
+		\end{align*}
+		Da $\varepsilon>0$ beliebig war, gilt $\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) \ge \varphi_{\overline{x}}(x+y)$. Also ist $\varphi_{\overline{x}}$
+		sublinear.
+	\end{enumerate}
+	$\varphi_{\overline{x}} \le \varphi$ ist klar. Da $\varphi$ minimal ist, folgt $\varphi_{\overline{x}} = \varphi$. Wir erhalten 
+	\[
+		\varphi(x) + 1 \cdot \varphi(\overline{x}) \le \varphi(x+ 1 \cdot \overline{x}) \le \varphi(x) + 1 \cdot \varphi(\overline{x})
+	\]
+	für jedes $x, \overline{x}\in X$. Also ist $\varphi$ additiv und somit linear. \bewende
+\end{description}
+% subsection 220 (end)
+
+\subsection{Satz von Hahn-Banach} % (fold)
+\label{sub:221}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$.\marginnote{$X$ ist nicht zwangsweise endlich-dimensional!}
+Dann existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \varphi$.
+\minisec{Beweis}
+Sei $\mathcal{S}_\varphi : =\set[\varphi' \in \mathcal{S}(X)]{\varphi' \le \varphi} \ni \varphi$. Nach Proposition \ref{sub:219} ist $\mathcal{S}(X)$ und damit auch 
+$\mathcal{S}_\varphi$ nach unten induktiv geordnet. Nach dem Lemma von Zorn enthält $\mathcal{S}_\varphi$ ein minimales Element $\psi$. $\psi$ ist auch minimal in 
+$\mathcal{S}(X)$ \hfill (Warum?)\\
+Also ist $\psi$ linear nach Proposition \ref{sub:220}. \bewende \medskip \\
+Wichtige Folgerungen: Fortsetzungs- und Trennungssätze.
+% subsection 221 (end)
+
+\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung]{Satz} % (fold)
+\label{sub:222}
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi : X \to \mathds{R}$ sublinear. Sei $Y \subset X$ ein linearer Unterraum und $\psi : Y \to \mathds{R}$ linear mit
+$\psi \le \varphi\big|_{Y}$. Dann existiert $\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi}\big|_Y = \psi$ und $\overline{\psi} \le \varphi$.
+\minisec{Beweis}
+Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch $\tilde{\varphi}(x) := \inf_{y \in Y} \enbrace[\big]{ \varphi(x-y) + \psi(y)}$, $x \in X$. Es gilt
+\[
+	\varphi(x-y) + \psi(y) \ge \varphi(-y) - \varphi(-x) - \psi(-y) \ge - \varphi(-x) > -\infty \qquad \forall x \in X, y \in Y
+\]
+Also ist $\tilde{\varphi}$ wohldefiniert. $\tilde{\varphi}$ ist sublinear: vergleiche \ref{sub:220}. Nach Satz von Hahn-Banach (\ref{sub:221}) existiert ein 
+$\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi} \le \tilde{\varphi}$. Aus \ref{sub:220} folgt, dass $\overline{\psi}$ minimal in $\mathcal{S}(X)$ ist.
+Ebenso ist $\overline{\psi}\big|_{Y}$ minimal in $\mathcal{S}(Y)$. Also gilt
+\[
+	\overline{\psi} \le \tilde{\varphi}\big|_{Y} \le \psi \quad \Rightarrow \quad \psi = \overline{\psi}\big|_{Y} \bewende  
+\]
+% subsection 222 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:223}
+Sei nun $X$ ein $\mathds{K}$-Vektorraum und $p : X \to \mathds{R}$ eine Halbnorm. Sei $Y \subset X$ ein Untervektorraum und $\psi : Y \to \mathds{K}$ linear mit
+$\abs*{\psi(y)} \le p(y)$ für $y \in Y$. Dann existiert $\overline{\psi} : X \to \mathds{K}$ linear mit $\overline{\psi}\big|_{Y} = \psi$ und 
+\[
+	\abs*{\overline{\psi}(x) } \le p(x) \quad \text{ für } x \in X 
+\]
+\minisec{Beweis}
+Sei zunächst $\mathds{K}=\mathds{R}$. $p$ ist sublinear und es gilt $\psi \le p\big|_{Y}$. Nach \ref{sub:222} existiert eine lineare Fortsetzung 
+$\overline{\psi} : X \to \mathds{R}$ mit $\overline{\psi} \le p$. Es gilt auch
+\begin{align*}
+	- \overline{\psi}(x) =  \overline{\psi}(-x) \le p(-x)  = p(x) \quad \Longrightarrow \quad \abs*{\overline{\psi}(x) } \le p(x) \quad \text{ für } x \in X
+\end{align*}
+Sei nun $\mathds{K}=\mathds{C}$. Definiere $\psi_1 := \re(\psi) : Y \to \mathds{R}$. $\psi_1$ ist $\mathds{R}$-linear (warum?). Es gilt 
+$\abs*{\psi_1(y)} \le \abs*{\psi(y)} \le p(y)$, $y \in Y$. Es existiert also ein $\overline{\psi}_1 : X \to \mathds{R}$ $\mathds{R}$-linear mit
+\[
+	\overline{\psi}_1 (y) = \psi_1(y), \enspace y \in Y \quad \text{ und } \quad \abs*{\overline{\psi}_1(x)} \le p(x) , \enspace x \in X 
+\]
+Definiere jetzt $\overline{\psi} : X \to \mathds{C}$ durch $\overline{\psi}(x) := \overline{\psi}_1(x) - i \cdot \overline{\psi}_1(i \cdot x)$, $x \in X$.
+Dann ist $\overline{\psi}$ $\mathds{C}$-linear (warum?). Weiter gilt $\overline{\psi}(y) = \psi(y)$ für $y \in Y$.
+($\re(\overline{\psi}\big|_{Y})= \re(\psi)$ und $\overline{\psi}\big|_{Y}$ und $\psi$ sind beide $\mathds{C}$-linear).
+
+Zu $x \in X$ wähle $\lambda \in \mathds{C}$ mit $\abs*{\lambda }=1$ und 
+\[
+	\abs*{\overline{\psi}(x)} = \lambda  \cdot \overline{\psi}(x) = \overline{\psi}(\lambda \cdot x) = \overline{\psi}_1(\lambda \cdot x) \le p(\lambda \cdot x)
+	= \abs*{\lambda } \cdot p(x) = p(x) \bewende     
+\]
+% subsection 223 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:224}
+Sei $X$ ein normierter $\mathds{K}$-Vektorraum, $Y \subset X$ ein Unterraum und $\psi : Y \to \mathds{K}$ linear und stetig. Dann existiert eine lineare Fortsetzung 
+$\overline{\psi} : X \to \mathds{K}$ mit $\norm[\mathcal{L}(X,\mathds{K})]{\overline{\psi}} = \norm[\mathcal{L}(Y,\mathds{K})]{\psi}$.
+\minisec{Beweis}
+Definiere eine Halbnorm durch $p(x) := \norm{x} \cdot \norm{\psi}$. Nach Satz \ref{sub:223} besitzt $\psi$ eine lineare Fortsetzung $\overline{\psi}$ mit
+$\abs*{\overline{\psi(x)}} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. Es folgt $\norm{\overline{\psi}} \le \norm{\psi}$. $\norm{\psi} \le \norm{\overline{\psi}}$
+ist trivial, da $\psi\big|_{Y} = \overline{\psi}$. \bewende
+% subsection 224 (end)
+
+\subsection[Definition: Konvexe Teilmenge eines $\mathds{K}$-Vektorraums]{Definition} % (fold)
+\label{sub:225}
+Sei $X$ ein $\mathds{K}$-Vektorraum. Sei $M \subset X$ eine Teilmenge. $M$ heißt \Index{konvex}, falls für $a,b \in M$, $\lambda \in [0,1]$ gilt
+\[
+	(1-\lambda ) \cdot a + \lambda \cdot b \in M
+\]
+Ist $X$ ein topologischer Vektorraum und $M \subset X$ konvex, so ist auch $\overline{M}$ konvex. \hfill (warum?)\\
+Ist $N \subset X$ eine beliebige Teilmenge, so ist 
+\[
+	\conv(N) := \smashoperator{\bigcap_{\substack{N \subset M \subset X \\ M \text{ konvex} }}} \, M
+\]
+$\conv(N)$ ist konvex. (warum?)
+% subsection 225 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:226}
+Sei $X$ ein $\mathds{R}$-Vektorraum, $\emptyset \not= M \subset X$ konvex, $\varphi \in \mathcal{S}(X)$. Dann existiert $\psi : X \to \mathds{R}$ linear mit 
+$\psi \le \varphi$ und 
+\begin{equation*}
+	\inf_{y \in M} \varphi(y) = \inf_{y \in M} \psi(y) \label{eq:226:1}\tag{*}
+\end{equation*}
+\minisec{Beweis}
+Setze $\mu := \inf_{y \in M} \varphi(y)$. Falls $\mu = -\infty$, so folgt die Behauptung aus dem Satz von Hahn-Banach \ref{sub:221}. $\eqref{eq:226:1}$ ist trivialerweise
+erfüllt. Sei also $\mu \in \mathds{R}$. Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch
+\[
+	\tilde{\varphi}(x) := \inf_{y \in M, \lambda  \ge 0} \enbrace[\big]{ \varphi(x+ \lambda \cdot y) - \lambda  \cdot \mu} , \quad x \in X
+\]
+Es gilt $\varphi(x + \lambda \cdot y)- \lambda \cdot \mu \ge - \varphi(-x)$, $x \in X$, $y\in M$, $\lambda \ge 0$. Also ist $\tilde{\varphi}(x) \ge - \varphi(-x) >-\infty$.
+$\tilde{\varphi}$ ist sublinear:
+\begin{enumerate}[(i)]
+	\item $\tilde{\varphi}(\gamma \cdot x) = \gamma \cdot \tilde{\varphi}(x)$, für $x \in X$, $\gamma \in \ge 0$, wie in \ref{sub:222}.
+	\item Seien $x,z \in X$ und $\varepsilon>0$. Wähle $y_x, y_z \in M$, $\lambda_x, \lambda_y \ge 0$ mit
+	\[
+		\tilde{\varphi}(x) \ge \varphi (x +\lambda_x \cdot y_x) - \lambda_x \cdot \mu -\varepsilon \quad \text{ und }\quad 
+		\tilde{\varphi}(x) \ge \varphi (z +\lambda_z \cdot y_z) - \lambda_z \cdot \mu -\varepsilon
+	\] 
+	Es folgt 
+	\begin{align*}
+		\tilde{\varphi}(x) + \tilde{\varphi}(z) &\ge \varphi \enbrace[\big]{x+z+ \lambda_x \cdot y_x + \lambda_z \cdot y_z} - (\lambda_x + \lambda_z) \cdot \mu 
+		- 2 \varepsilon \\
+		&= \varphi \enbrace[\Bigg]{x+z + (\lambda_x+ \lambda_z)\cdot \underbrace{\enbrace*{\frac{\lambda_x}{\lambda_x + \lambda_z} \cdot y_x + \frac{\lambda_z}{\lambda_x + \lambda_z} \cdot y_z }}_{\in M} } - (\lambda_x + \lambda_z) \cdot \mu -2 \varepsilon \\
+		&\ge \tilde{\varphi}(x+z) - 2 \varepsilon
+	\end{align*}
+\end{enumerate}
+Nach Hahn-Banach (\ref{sub:221}) existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \tilde{\varphi} \le \varphi$. Für $y \in M$ gilt 
+\[
+	-\psi(y) = \psi(-y) \le \tilde{\varphi}(-y) \le \varphi(-y + 1 \cdot y)- 1 \cdot \mu= -\mu
+\]
+also $\mu \le \psi(y) \le \varphi(y)$, woraus \eqref{eq:226:1} folgt. \bewende
+% subsection 226 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:227}
+Sei $X$ ein normierter $\mathds{R}$-Vektorraum und $A,B \subset X$ nichtleere konvexe Teilmengen mit \index{Distanz $\dist$}
+\[
+	\dist(A,B) := \inf \set[\norm{a-b}]{a \in A, b \in B} > 0
+\]
+Dann existiert $\psi : X \to \mathds{R}$ stetig und linear mit $\psi(A) \cap \psi(B) = \emptyset$.
+\minisec{Beweis}
+$A - B := \set[a-b]{a \in A, b \in B} \subset X$ ist konvex. (Warum?) Nach Satz \ref{sub:226} existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \norm{.}$ und 
+\[
+	0 < \dist(A,B)=  \inf_{y \in A -B} \norm{y} = \inf_{y \in A-B} \psi(y) = \inf_{a \in A} \psi(a) - \sup_{b \in B} \psi(b). \bewende
+\]
+% subsection 227 (end)
+% section 2 (end)
+\newpage
+
+\section[Operatoren zwischen Banachräumen, Satz von der offenen Abbildung]{Operatoren zwischen Banachräumen. Die Sätze von der offenen Abbildung und vom abgeschlossenen Graphen} % (fold)
+\label{sec:3}
+
+\subsection[Proposition: $Y$ vollständig $\Rightarrow $ $\mathcal{L}(X,Y)$ ist vollständig]{Proposition} % (fold)
+\label{sub:31}
+Seien $X,Y$ normierte Vektorräume, $Y$ vollständig. Dann ist $\mathcal{L}(X,Y)$ vollständig bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \todo{RevChap3}
+\minisec{Beweis}
+Sei $(T_n)_{n \in \mathds{N}} \subseteq \mathcal{L}(X,Y)$ eine Cauchy-Folge bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. Für $x \in X$ ist dann auch $(T_n x)_{n \in \mathds{N}} \subset Y$ Cauchy
+bezüglich $\norm[Y]{.}$. (Warum?)\footnote{mit $\norm[Y]{T_n x- T_m x} \le \norm{T_n -T_m} \cdot \norm{x}$}
+Da $Y$ ein Banachraum ist, folgt $T_n x \xrightarrow{n \to \infty} y$ für ein $y \in Y$. Wir definieren $T : X \to Y$ durch $T(x) := \lim_{ n \to \infty} T_n(x)$ für 
+$x \in X$. $T$ ist linear: Klar (Warum?).
+
+$T$ ist stetig: $(T_n)_{n \in \mathds{N}}$ ist Cauchy, also auch $\enbrace*{\norm{T_n}}_{n \in \mathds{N}} \subset \mathds{R}$ eine Cauchyfolge (Warum?)\footnote{mit 
+$\norm{T_n} = \norm{T_n - T_{n_0}+ T_{n_0}} \le \norm{T_n- T_{n_0}} + \norm{T_{n_0}}$}. Dann existiert $C \ge 0$ mit $\norm[\mathcal{L}(X,Y)]{T_n} \le C $, $n \in \mathds{N}$, also
+gilt $\norm[Y]{T x} \le C \cdot \norm{x}$, $x \in X$, woraus $\norm[\mathcal{L}(X,Y)]{T} \le C$ und die Stetigkeit von $T$ folgt. Also ist $T \in \mathcal{L}(X,Y)$.
+
+\noindent Falls $\varepsilon >0$, so existiert $n_0 \in \mathds{N}$ mit $\norm[\mathcal{L}(X,Y)]{T_n - T_m}  < \varepsilon$ für $n,m \ge n_0$. Insbesondere: 
+\begin{align*}
+	\norm[Y]{(T_n- T_m)x} \le \norm[\mathcal{L}(X,Y)]{T_n -T_m} \cdot \norm[X]{x} < \varepsilon \cdot \norm[X]{x}    
+\end{align*}
+für $n,m \ge n_0$, $x \in X$. Weiter gilt 
+\begin{align*}
+	\norm[Y]{(T_n- T)x} \le \norm[Y]{(T_n - T_m)x} + \norm[Y]{(T_m-T)x} &\le \norm[\mathcal{L}(X,Y)]{T_n - T_m} \cdot \norm[X]{x} + \norm[Y]{(T_m-T)x} \\
+	&\le \varepsilon \cdot \norm[X]{x} + \varepsilon \cdot \norm[X]{x}  
+\end{align*}
+für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
+$\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to T$ bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \bewende
+% subsection 31 (end)
+
+\subsection[Corollar: Dualraum ist vollständig und $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum]{Corollar} % (fold)
+\label{sub:32}
+\begin{enumerate}[(i)]
+	\item Der Dualraum $X^*$ eines normierten $\mathds{K}$-Vektorraumes $X$ ist vollständig. 
+	\item Falls $\set{0} \not= X$ ein Banachraum ist, so ist $\mathcal{L}(X,X)$ eine Banachalgebra.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item $X^*=\mathcal{L}(X,\mathds{K})$ und $\mathds{K}$ ist vollständig. Wende \ref{sub:31} an.
+	\item $\mathcal{L}(X,X)$ ist ein Banachraum nach \ref{sub:31}. $\mathcal{L}(X,X)$ ist eine normierte Algebra: 
+	\begin{itemize}
+		\item $\norm[\mathcal{L}(X,X)]{\id_X}=1$ \hfill (Warum?)
+		\item Für $S,T \in \mathcal{L}(X,X)$, $x \in X$ gilt
+		\begin{align*}
+			\norm[X]{(S \circ T)x} \le \norm{S} \cdot \norm[X]{T x} \le \norm{S} \cdot \norm{T} \cdot \norm[X]{x}   
+		\end{align*}
+		Also ist $\norm{S \circ T} \le \norm{S} \cdot \norm{T}$. \bewende
+	\end{itemize}
+\end{enumerate}
+% subsection 32 (end)
+
+\subsection[Definition und Proposition: lineare Isometrie $\iota_X : X \to X^{**}$]{Definition und Proposition} % (fold)
+\label{sub:33}
+Sei $X$ ein normierter Raum. Definiere $\iota_X : X \to X^{**} \enspace{\color{light_gray}\enbrace[\big]{=(X^*)^*}}$ durch
+\[
+	x \longmapsto \enbrace[\big]{\varphi \mapsto \varphi(x) } 
+\]
+für $x \in X$. Die Abbildung $\iota_X$ ist eine lineare Isometrie.
+\minisec{Beweis}
+\begin{description}
+	\item[Wohldefiniertheit:] Die Linearität von $\iota_X(x)$ ist klar. Mit
+	\begin{align*}
+		\abs*{\iota_X(x)(\varphi)} = \abs*{\varphi(x)} \le \norm[X^*]{\varphi} \cdot \norm[X]{x} = \norm[X]{x} \cdot \norm[X^*]{\varphi}      
+	\end{align*}
+	folgt $\varphi \in X^*$ und somit $\norm[X^{**}]{\iota_X(x)} \le \norm[X]{x}$, also ist $\iota_X(x)$ stetig.
+	\item[$\iota_X$ ist linear:] Für $\alpha, \beta \in \mathds{K}$, $x,y \in X$, $\varphi \in \mathcal{L}(X,\mathds{K})= X^*$ gilt
+	\begin{align*}
+		\iota_X(\alpha \cdot x + \beta \cdot y)(\varphi)= \varphi(\alpha \cdot x + \beta \cdot y) = \alpha \circ \varphi(x) + \beta \cdot \varphi(y) 
+		&= \alpha \cdot \iota_X(x)(\varphi) + \beta \cdot \iota_X(y)(\varphi) \\
+		&= \enbrace[\big]{\alpha \cdot \iota_X(x) + \beta \cdot \iota_X(y)}(\varphi) 
+	\end{align*}
+	\item[Isometrie:] Es bleibt zu zeigen: $\norm[X^{**}]{\iota_X(x)} \ge \norm[X]{x}$ für $0 \not= x \in X$. Sei $Y := \mathds{K}\cdot x$ und $\psi : Y \to \mathds{K}$
+	gegeben durch $\psi(\alpha \cdot x) := \alpha \cdot \norm[X]{x}$. Dann ist $Y \subset X$ ein linearer Unterraum und $\psi(Y) \to \mathds{K}$ linear mit
+	$\norm{\psi}=1$. Nach Satz \ref{sub:224} existiert $\overline{\psi}. X \to \mathds{K}$ linear mit $\overline{\psi}(x) = \psi(x) = \norm[X]{x}$ und 
+	$\norm{\overline{\psi}}= \norm{\psi} = 1$. Es gilt 
+	\begin{align*}
+		\norm[X^{**}]{\iota_X(x)} \ge \abs*{\iota_X(x)(\overline{\psi})} = \abs*{\overline{\psi}(x)} = \norm[X]{x}. \bewende
+	\end{align*}
+\end{description}
+% subsection 33 (end)
+
+\subsection[Definition und Proposition: Die transponierte Abbildung]{Definition und Proposition} % (fold)
+\label{sub:34}
+Seien $X,Y$ normierte Räume. Definiere eine Abbildung $.^{\tr} : \mathcal{L}(X,Y) \to \mathcal{L}(Y^*,X^*)$ durch $T \mapsto T^{\tr} = (\varphi \mapsto \varphi \circ T)$.
+$.^\tr$ ist eine lineare Isometrie und das Diagramm
+\[
+	\begin{tikzcd}
+		X \rar["\iota_X"] \dar["T"]& X^{**} \dar["T^{\tr \, \tr}= (T^\tr)^\tr"]\\
+		Y \rar["\iota_Y"]& Y^{**}
+	\end{tikzcd}
+\]
+kommutiert für jedes $T \in \mathcal{L}(X,Y)$. Für $\iota_{X^*} : X^* \to X^{***}$ und $\iota_{X}^\tr : X^{***} \to X^*$ gilt $\iota_X^\tr \circ \iota_{X^*} = \id_{X^*}$.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Für $T,S \in \mathcal{L}(X,Y)$, $\alpha, \beta \in \mathds{K}$, $\varphi \in Y^*$ gilt
+	\begin{align*}
+		\enbrace*{\alpha \cdot T + \beta \cdot S}^\tr (\varphi) = \varphi \circ \enbrace*{\alpha \cdot T + \beta \cdot S} \!\!\stackrel{\text{linear}}{=} \!\!
+		\alpha \cdot (\varphi \circ T) + \beta \cdot (\varphi \circ S)  &= \alpha \cdot T^\tr(\varphi) + \beta \cdot S^\tr(\varphi)\\
+		&= \enbrace*{\alpha \cdot T^\tr + \beta \cdot S^\tr}(\varphi) 
+	\end{align*}
+	\item Für $x \in X$, $\psi \in Y^*$ gilt $\enbrace[\big]{\iota_Y T(x)}(\psi) = \psi \enbrace[\big]{T(x)}$; weiter gilt
+	\begin{align*}
+		\enbrace[\big]{T^{\tr \, \tr} \iota_X(x)} (\psi) = \enbrace[\big]{(T^\tr)^\tr \iota_X(x)}(\psi)  = \enbrace[\big]{\iota_X(x) \circ T^\tr}(\psi)
+		&= \iota_X(x) \enbrace*{T^\tr(\psi)}  \\
+		&= T^\tr(\psi)(x) = \psi \circ T(x) \\
+		&= \iota_Y \enbrace[\big]{T(x)} (\psi) 
+	\end{align*}
+	$\Rightarrow T^{\tr \, \tr} \iota_X(x) = \iota_Y \enbrace[\big]{T(x)} = \iota_Y \circ T (x)$. Also $T^{\tr \, \tr} \circ \iota_X = \iota_Y  \circ T$. Also kommutiert
+	das Diagramm.
+	\item Es ist $\abs{(T^\tr \psi)(x)} = \abs*{\psi T(x)} \le \norm[Y^*]{\psi} \cdot \norm[Y]{T x} \le \norm[Y^*]{\psi} \cdot \norm[\mathcal{L}(X,Y)]{T} \cdot \norm[X]{x}$. Also
+	ist $\norm[X^*]{T^\tr \psi} \le  \norm[Y^*]{\psi} \cdot  \norm[\mathcal{L}(X,Y)]{T}$ und damit folgt 
+	\[
+		\norm[\mathcal{L}(Y^*,X^*)]{T^\tr} \le \norm[\mathcal{L}(X,Y)]{T}  
+	\]
+	Ebenso ist $\norm[\mathcal{L}(X^{**},Y^{**})]{T^{\tr \, \tr}} \le \norm[\mathcal{L}(Y^*,X^*)]{T^\tr} \le \norm[\mathcal{L}(X,Y)]{T}$. Andererseits gilt 
+	$\norm[\mathcal{L}(X,Y)]{T} \le \norm[\mathcal{L}(X^{**},Y^{**})]{T^{\tr\, \tr}}$ nach \ref{sub:33} und da das Diagramm kommutiert (Warum?). 
+	\[
+		\Rightarrow \norm[\mathcal{L}(X,Y)]{T} \le \norm[\mathcal{L}(Y^*,X^*)]{T^\tr}  \le  \norm[\mathcal{L}(X,Y)]{T} 
+	\]
+	also ist $.^\tr$ eine Isometrie.
+	\item Für $\varphi \in X^*$, $x \in X$ gilt
+	\begin{align*}
+		\enbrace[\big]{\iota_X^\tr \circ \iota_{X^*} (\varphi)} (x) = \iota_{X^*}(\varphi) \circ \iota_X (x) = \iota_X(x)(\varphi) = \varphi(x)
+	\end{align*}
+	$\Rightarrow \iota_X^\tr \circ \iota_{X^*}(\varphi)= \varphi$, also $\iota_X^\tr \circ  \iota_{X^*} = \id_{X^*}$. \bewende
+\end{enumerate}
+% subsection 34 (end)
+
+\subsection{Satz: Prinzip der gleichmäßigen Beschränktheit für Banachräume} % (fold)
+\label{sub:35}
+Sei $X$ ein Banachraum und $Y$ ein normierter Raum. Sei $M \subset \mathcal{L}(X,Y)$, sodass die Menge 
+\[
+	\set[{x \mapsto \norm[Y]{T x}}]{T \in M \rule{0cm}{1em}} \subset C(X,\mathds{R} )
+\]
+punktweise gleichmäßig beschränkt ist, d.h. für $x \in X$ existiert $C_x \ge 0$ mit $\norm[Y]{T x} \le C_x$, $T \in M$. Dann existiert $C \ge 0$ mit $\norm[\mathcal{L}(X,Y)]{T} \le C$,
+$T \in M$.
+\minisec{Beweis}
+Nach Corollar \ref{sub:112} (Prinzip der gleichmäßigen Beschränktheit für metrische Räume) existieren eine offene Kugel $\emptyset \not= B(x_0,\varepsilon) \subset X$ und 
+$K \ge 0$ mit $\norm[Y]{T x} \le K$ für $x \in B(x_0, \varepsilon)$, $T \in M$. Für $x \in X$ mit $\norm{x} \le 1$ gilt 
+\begin{align*}
+	\norm[X]{T x} = \frac{e}{\varepsilon} \cdot  \norm[Y]{T \enbrace*{\frac{\varepsilon}{2} \cdot x}} &= \frac{2}{\varepsilon} \cdot 
+	\norm[Y]{T \enbrace*{\frac{\varepsilon}{2} \cdot x + x_0 - x_0 } }  \\
+	&\le \frac{2}{\varepsilon} \cdot   \enbrace*{ \doppelstrich[\Bigg]{T \enbrace[\Bigg]{\underbrace{\frac{\varepsilon}{2} \cdot x + x_0}_{\in B(x_0,\varepsilon)} } }_Y +
+	 \norm[Y]{T  \enbrace[\bigg]{\underset{\in B(x_0,\varepsilon)}{x_0}} }} \\
+	&\le \frac{2}{\varepsilon} (K+K) = \frac{4K}{\varepsilon}   
+\end{align*}
+$\Rightarrow \norm[\mathcal{L}(X,Y)]{T} \le \frac{4 K}{\varepsilon} =: C$. \bewende
+% subsection 35 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:36}
+Sei $Z$ ein metrischer Raum und $N \subset Z$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ existiert $C_\varphi \ge 0$ mit $\abs*{\varphi(z)} \le C_\varphi$, 
+$z \in N$.  Dann ist $N$ beschränkt.
+\minisec{Beweis}
+$\iota_Z : Z \to Z^{**}$ ist eine Isometrie nach \ref{sub:33}. Wende Satz \ref{sub:35} an mit $X=Z^{*}$, $Y=\mathds{K}$ und 
+$M = \iota_Z(N) \subset Z^{**}= \mathcal{L}(Z^*,\mathds{K})$.
+Für $\varphi \in X = Z^{*}$ existiert $C_\varphi \ge 0$ mit $\abs*{T \varphi} = \abs*{\iota_Z(z) (\varphi)} = \abs*{\varphi(z)} \le C_\varphi$, wo $T= \iota_Z(z) \in M$
+für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende
+% subsection 36 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:37}
+Sei $X$ ein Banachraum und $Z$ ein normierter Raum. $M \subset \mathcal{L}(X,Z)$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ und $x \in X$ existiert $C_{x,\varphi} \ge 0$
+mit
+\[
+	\abs*{\varphi \enbrace[\big]{T(x)}} \le C_{x,\varphi}, \quad T \in M
+\]
+Dann ist $M$ beschränkt.
+\minisec{Beweis}
+Für jedes $x \in X$ folgt aus Corollar \ref{sub:36} mit $N := \set[T(x)]{T \in M}$, dass $N$ beschränkt ist. Es folgt, dass $ \set[x \mapsto \norm{T(x)} ]{T \in M}$ ist 
+punktweise gleichmäßig beschränkt. Mit Satz \ref{sub:35} folgt: $M$ ist beschränkt. \bewende
+% subsection 37 (end)
+
+\subsection{Satz: Prinzip der offenen Abbildung} % (fold)
+\label{sub:38}
+Seien $X,Y$ Banachräume, $T \in \mathcal{L}(X,Y)$ surjektiv. Dann ist $T$ offen, d.h. für eine offene Menge $U \subset X$ ist $T(U) \subset Y$ offen.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Sei $0 \in W \subset X$ offen, dann existiert $\emptyset \not= V \subset Y$ offen mit $V \subset \overline{T(W)}$: $0 \in W \subset X$ $\Rightarrow $ 
+	$B(0,\varepsilon) \subset W$ für ein $\varepsilon>0$. Dann gilt
+	\[
+		X=\bigcup_{n \in \mathds{N}} n \cdot B(0,\varepsilon) = \bigcup_{n \in \mathds{N}} n \cdot W
+	\]
+	Aus der Surjektivität von $T$ folgt $Y = \bigcup_{n \in \mathds{N} }n \cdot T(W) = \bigcup_{n \in \mathds{N}} n \cdot \overline{T(W)}$. Nach dem Satz von Baire 
+	(\ref{sub:110}) folgt: Ein $n \cdot \overline{T(W)}$ enthält eine nichtleere offene Teilmenge, also auch $\overline{T(W)}$.
+	\item Sei $= \in M \subset X$ offen, dann ist $0$ ein innerer Punkt von $\overline{T(M)}$: 
+	
+	Die Abbildung $X \times X \to X$, $(x_1,x_2) \mapsto x_1 -x_2$ ist stetig.\footnote{Banachräume sind topologische Vektorräume} $\Rightarrow$ es gibt $0 \in W \subset X$ 
+	offen mit
+	\[
+		W - W = \set[x_1 -x_2]{x_1,x_2 \in W} \subset M 
+	\]
+	Es folgt 
+	\[
+		\overline{T(M)} \supset \overline{T(W-W)} = \overline{T(W)- T(W)} \stackrel{\text{(Warum?)}}{\supset} \overline{T(W)}- \overline{T(W)} \stackrel{\text{(i)}}{\supset}
+		V -V
+	\]
+	für $\emptyset \not= V$ offen in $Y$ wie in (i). Aber $0 \in V-V = \bigcup_{y \in V}\set{y}- V$ ist offen in $Y$. Also ist $0$ ein innerer Punkt von $\overline{T(M)}$.
+	\item Ist $0 \in N \subset X$ offen, so existiert $0 \in Z \subset Y$ offen mit $Z \subset T(M)$:
+	
+	Sei $\varepsilon_0 >0$. Wähle $\varepsilon_i >0$, $1 \le i \in \mathds{N}$ mit $\sum_{i=1}^{\infty} \varepsilon_i < \varepsilon_0$. Nach (ii) gilt: Zu $\varepsilon_i$, 
+	$i \in N$ existiert ein $\delta_i >0$ mit $B_Y(0,\delta_i) \subset \overline{T \enbrace*{B_X(0,\varepsilon_i)}}$. Es gilt $\delta_i \xrightarrow{i \to \infty} 0$. Sei 
+	nun $y \in B_Y(0,\delta_0) =: Z$. Dann gilt $y \in \overline{T \enbrace*{B_X(0,\varepsilon_0)}}$. $\Rightarrow $ es existiert $x_0 \in B_X(0,\varepsilon)$ mit 
+	$\norm[Y]{y- T(x_0)}< \delta_1$. Folglich existiert $x_1 \in B_X(0,\varepsilon_1)$ mit $\norm[Y]{y- T(x_0) - T(x_1)} < \delta_2$. Per Induktion folgt
+	\[
+		\exists x_i \in B_X(0,\varepsilon_i) \text{ mit } \norm[Y]{y- \sum\nolimits_{j=0}^{i}T(x_i)} < \delta_{i+1}, \qquad i \in \mathds{N} 
+	\]
+	$\sum_{i \in \mathds{N}}x_i$ konvergiert in $X$ und $\norm[X]{\sum_{i\in \mathds{N}} x_i} < 2 \cdot \varepsilon_0 $, es gilt $T \enbrace*{\sum_{i \in \mathds{N}}x_i}=y$.
+	($x_i \in N$, falls $B(0,2 \varepsilon_0) \subset N$)
+	\item Sei $U \subset X$ offen. Dann ist $T(U) \subset Y$ offen:
+	
+	Zu $x \in U$ existiert $0 \in N \subset X$ offen mit $x+ N \subset U$, also $T(x)+ T(N)\subset T(U)$. Nach (iii) existiert $0 \in Z \subset Y$ offen mit $Z \subset T(N)$,
+	also $T(x)+ Z \subset T(U)$. Aber $T(x) \in T(x)+ Z$ ist offen in $Y$ und $T(U)$ ist Umgebung von $T(x)$. $x \in U$ war beliebig, also ist $T(U)$ offen. \bewende
+\end{enumerate}
+% subsection 38 (end)
+
+\subsection{Corollar: Satz von der inversen Abbildung} % (fold)
+\label{sub:39}
+Seien $X,Y$ Banachräume, $T \in \mathcal{L}(X,Y)$ bijektiv. Dann gilt $T ^{-1} \in \mathcal{L}(Y,X)$, d.h. $T$ ist ein Homöomorphismus\index{Homöomorphismus}.
+\minisec{Beweis}
+Nach Satz \ref{sub:38} ist $T$ offen und somit ist $T ^{-1}$ stetig. \bewende
+% subsection 39 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:310}
+Sei $X$ ein Vektorraum und seien $\mathcal{T}_1, \mathcal{T}_2$ zwei Topologien auf $X$, die durch Banachraumnormen $\norm[1]{\cdot }$ und $\norm[2]{\cdot}$ induziert sind.
+Falls $\mathcal{T}_1 \subset \mathcal{T}_2$, so gilt bereits $\mathcal{T}_1 = \mathcal{T}_2$.
+\minisec{Beweis}
+$\mathcal{T}_1 \subset \mathcal{T}_2$ $\Rightarrow $ $(X,\mathcal{T}_1) \xrightarrow{\id_X} (X,\mathcal{T}_2)$ ist stetig und bijektiv, also ist $\id_X$ nach 
+\ref{sub:39} ein Homöomorphismus. \bewende
+% subsection 310 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:311}
+Sei $X$ ein Banachraum mit abgeschlossenen Teilräumen $X_1,X_2$, sodass $X_1 \cap X_2 = \set{0}$ und $X= X_1 + X_2$. Dann sind $X$ und $X_1 \times X_2$ als topologische
+Vektorräume isomorph.
+\minisec{Beweis}
+Die Abbildung $X_1 \times X_2 \to X$, $(x_1,x_2) \mapsto x_1 + x_2$ ist linear und bijektiv. Sie ist stetig, wegen 
+\[
+	\norm[X]{x_1 + x_2} \le \norm[X]{x_1} + \norm[X]{x_2} = \norm[1,X_1 \times X_2]{(x_1,x_2)} 
+\]
+Mit Corollar \ref{sub:39} folgt die Behauptung. \bewende
+% subsection 311 (end)
+% section 3 (end)
+\newpage
+
+\section{$L^p$-Räume und der Satz von Riesz-Fischer} % (fold)
+\label{sec:4}
+
+\todo{RevChap4}
+\subsection[Erinnerung: $L^1(\mu)$ ist ein Banachraum]{Erinnerung} % (fold)
+\label{sub:41}
+Sei $(X,\Sigma, \mu)$ ein \Index{Maßraum}.\footnote{$X$ Menge, $\Sigma$ eine $\sigma$-Algebra, $\mu$ Maß}  $f : X \to (-\infty,\infty]$ heißt \Index{messbar}, falls 
+$f ^{-1}(E) \in \Sigma$ gilt für $E \subset \mathcal{B}(\mathds{R})$ (Borelmengen\todo{Def. hinzufügen}). $s : X \to (-\infty,\infty]$ heißt \Index{einfach}, falls 
+$s(X)$ endlich. Für $f : X \to [0,\infty]$ messbar setze
+\[
+	\int f  \, \mathd \mu := \sup \set[\int s \, \mathd \mu]{s \text{ einfach, messbar }, 0 \le s \le f} 
+\] 
+Für $f : X \to (-\infty,\infty]$ messbar setze $\int\! f \, \mathd \mu := \int \! f_+ \, \mathd \mu - \int \! f_- \, \mathd \mu$, falls $\int \! f_- \, \mathd \mu < \infty$.
+Betrachte
+\begin{align*}
+	\mathcal{L}^1(\mu) := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}\,\mathd \mu < \infty } 
+\end{align*}
+mit der Halbnorm $\norm[1]{f} := \int \! \abs*{f} \, \mathd \mu $. Setze nun $\mathcal{N}^1 := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f} \, \mathd \mu =0 }$.
+$L^1(\mu)$ ist ein topologischer Vektorraum (Topologie induziert durch $\norm[1]{\cdot}$) und $\mathcal{N}^1 \subset \mathcal{L}^1(\mu)$ ist ein abgeschlossener 
+Untervektorraum (Übung). Definiere 
+\[
+	L^1(\mu) := \nicefrac{\mathcal{L}^1}{\mathcal{N}^1}
+\]
+$\norm[1]{\cdot }$ induziert eine Norm $\norm[1]{\cdot }$ auf $L^1(\mu)$ via  
+\[
+	\norm[1]{f+ \mathcal{N}^1} := \norm[1]{f} \quad , \quad f \in \mathcal{L}^1(\mu) \tag*{(Übung)}
+\]
+$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (Ana \RM{3}, 9.23).\todo{CopyPaste aus Ana3}
+% subsection 41 (end)
+
+\subsection[Beispiele für $L^1$-Räume]{Beispiele} % (fold)
+\label{sub:42}
+\begin{enumerate}[(i)]
+	\item $L^1(\mathds{R}^n) := L^1(\mathds{R}^n, \Lambda, \lambda)$, wobei $\Lambda$ die Lebesgue-messbaren Mengen sind und $\lambda $ das Lebesgue-Maß ist.
+	\item $\ell^1(\mathds{N})= L^1 \enbrace[\big]{\mathds{N}, \mathcal{P}(\mathds{N}), \delta} = \set[f : \mathds{N} \to \mathds{R}]{\sum \abs*{f(n)} < \infty } $, 
+	wobei $\delta$ das Zählmaß\footnote{siehe auch \url{http://de.wikipedia.org/wiki/Zählmaß_(Maßtheorie)}} ist.
+\end{enumerate}
+% subsection 42 (end)
+
+\subsection[Definition und Proposition: Der Raum $L^p(\mu)$]{Definition und Proposition} % (fold)
+\label{sub:43}
+Für einen Maßraum $(X,\Sigma,\mu)$ definiere 
+\begin{align*}
+	\mathcal{L}^p(\mu) &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu < \infty } \\
+	\mathcal{N}^p &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu = 0 } 
+\end{align*}
+$\mathcal{L}^p(\mu)$ und $\mathcal{N}^p$ sind Vektorräume; wir setzen 
+\[
+	L^p(\mu) := \nicefrac{\mathcal{L}^p(\mu)}{\mathcal{N}^p}
+\]
+Definiere $\norm[p]{\cdot } : \mathcal{L}^p(\mu) \to [0,\infty)$ durch $\norm[p]{f} := \enbrace*{\int \abs*{f}^p \mathd \mu }^{1/p}$. $\norm[p]{\cdot }$ induziert eine 
+Abbildung $\norm[p]{\cdot } : L^P(\mu) \to [0,\infty) $ via $\norm[p]{f + \mathcal{N}^p} := \norm[p]{f} $, für $f \in \mathcal{L}^p$.
+\minisec{Beweis}
+\begin{description}
+	\item[$\mathcal{L}^p(\mu)$ ist Vektorraum:]  Für $f,g \in \mathcal{L}^p(\mu)$ und $\alpha, \beta \in \mathds{R}$
+	\begin{align*}
+		\int \abs*{\alpha \cdot f + \beta \cdot g}^p \mathd \mu \le \int \!\enbrace[\big]{\abs*{\alpha \cdot f} + \abs*{\beta \cdot g}}^p \mathd \mu
+		&\le \int \!\enbrace[\big]{2 \cdot \sup \set{\abs*{\alpha \cdot f}, \abs*{\beta \cdot g}  } }^p \mathd \mu \\ 
+		&\le \int \enbrace*{2^p \cdot \sup \set{\abs*{\alpha \cdot f}^p, \abs*{\beta \cdot g}^p  \rule{0cm}{1em}} } \mathd \mu \\ 
+		&\le \int \!2^p \cdot  \enbrace[\big]{\abs*{\alpha \cdot f}^p + \abs*{\beta \cdot g}^p} \mathd \mu < \infty 
+	\end{align*}
+	\item[$\mathcal{N}^p$ ist Vektorraum:] Übung.
+	\item[{$\norm[p]{\cdot}$ wohldefiniert auf $L^p(\mu)$:}] Übung. \bewende
+\end{description}
+% subsection 43 (end)
+
+\subsection[Proposition: Speziallfall der Youngschen Ungleichung]{Proposition} % (fold)
+\label{sub:44}
+Für $\alpha, \beta \ge 0$, $p,q >1$ mit $\frac{1}{p} + \frac{1}{q}=1$. Dann gilt 
+\begin{equation*}
+	\alpha \cdot \beta \le \frac{\alpha^p}{p} + \frac{\beta^q}{q}  \label{eq:44}\tag{\#}
+\end{equation*}
+Dies ist ein Spezialfall der Youngschen Ungleichung,  \hrefsym{https://de.wikipedia.org/wiki/Youngsche_Ungleichung_(Produkt)}{Wikipedia-Link}.
+\minisec{Beweis}
+\begin{align*}
+	\frac{1}{p} + \frac{1}{q}=1 \iff p+q= pq \iff (p-1)(q-1)= 1 \iff p (q-1) = q \iff q (p-1) =p
+\end{align*}
+Falls $\beta = \alpha^{p-1}$, so gilt $\alpha \cdot \beta = \alpha^p$ und 
+\[
+	\frac{\alpha^p}{p} + \frac{\beta^q}{q} = \frac{\alpha^p}{p} + \frac{(\alpha^{p-1})^q}{q} = \frac{\alpha^p}{p} + \frac{\alpha^p}{q} = \alpha^p = \alpha \cdot \beta   
+\]
+Also gilt Gleichheit in \eqref{eq:44}. Für festes $\alpha \ge 0$ betrachte $f_\alpha : [0,\infty) \to [0,\infty)$ gegeben durch
+$f_\alpha(\beta) := \frac{\alpha^p}{p} + \frac{\beta^q}{q} - \alpha \cdot \beta$. Dann ist $f_\alpha$ stetig auf $[0,\infty)$ und differenzierbar auf $(0,\infty)$. Es gilt
+$f_\alpha'(\beta) = \beta^{q-1} -\alpha$ und weiter
+\[
+	f_\alpha'(\beta)=0 \iff \beta^{q-1} = \alpha \iff \beta= \alpha^{p-1}
+\]
+$f_\alpha''(\alpha^{p-1}) \ge 0$, also hat $f_\alpha$ bei $\beta = \alpha^{p-1}$ ein lokales Minimum. Es gilt $f_\alpha(\alpha^{p-1})= 0 \le f_\alpha(0)$, also
+hat $f_\alpha$ bei $\beta=\alpha^{p-1}$ ein globales Minimum. $\Rightarrow $ \eqref{eq:44}. \bewende
+% subsection 44 (end)
+
+\subsection{Satz: Höldersche Ungleichung} % (fold)
+\label{sub:45}
+Sei $(X,\Sigma,\mu)$ ein Maßraum. Seien $p,q \ge 1$ mit $\frac{1}{p} +\frac{1}{q}=1 $, $f \in \mathcal{L}^p(\mu)$, $g \in \mathcal{L}^q(\mu)$. Dann gilt 
+$f \cdot g \in \mathcal{L}^1{\mu}$ und
+\[
+	\norm[1]{f \cdot g} \le \norm[p]{f} \cdot \norm[q]{g}   
+\]
+Die entsprechenden Aussagen gelten dann auch für $L^p(\mu)$, $L^q(\mu)$, $L^1(\mu)$.
+\minisec{Beweis}
+Klar, falls $\norm[p]{f} =0 $ oder $\norm[q]{g} =0$ (Warum?). Sei also $\norm[p]{f}, \norm[q]{g} \not= 0$. Nach Proposition \ref{sub:44} gilt für $x \in X$
+\[
+	0 \le \underbrace{\underbrace{\frac{\abs*{f(x)} }{\norm[p]{f}}}_{=\alpha} \cdot \underbrace{\frac{\abs*{g(x)} }{\norm[q]{g} }}_{=\beta} }_{\text{messbar}}
+	\le \underbrace{\frac{1}{p} \cdot \frac{\abs*{f(x)}^p }{\norm[p]{f}^p } + \frac{1}{q} \cdot \frac{\abs*{g(x)}^q }{\norm[q]{g}^q }}_{\text{integrierbar}}
+\]
+$\abs*{f}^p , \abs*{g}^q  \in \mathcal{L}^1(\mu)$, also $\abs*{ f \cdot g } \in \mathcal{L}^1(\mu)$. Es gilt
+\begin{align*}
+	\frac{\int \abs*{f \cdot g} \mathd \mu}{\norm[p]{f} \cdot \norm[q]{g}} \le \frac{1}{p} \cdot \frac{\int \abs*{f}^p \mathd \mu }{\norm[p]{f}^p } +
+	\frac{1}{q} \cdot \frac{\int \abs*{g}^q \mathd \mu }{\norm[q]{g}^q} = \frac{1}{p} + \frac{1}{q} = 1       
+\end{align*}
+$\Rightarrow \inf \abs*{f \cdot g} \mathd \mu  \le \norm[p]{f}  \cdot \norm[q]{g}$. \bewende
+% subsection 45 (end)
+
+\subsection{Satz: Minkowskische Ungleichung} % (fold)
+\label{sub:46}
+Für $1\le p < \infty$, $f,g \in \mathcal{L}^p(\mu)$ (bzw. $L^p(\mu)$) gilt 
+\[
+	\norm[p]{f +g} \le \norm[p]{f} + \norm[p]{g}   
+\]
+\minisec{Beweis}
+Sei $\norm[p]{f+g} >0 $ (sonst trivial). Es gilt 
+\begin{align*}
+	\abs*{f +g}^p = \abs*{f+g}^{p-1} \cdot \abs*{f+g} \le \abs*{f+g}^{p-1} \enbrace[\big]{\abs*{f} + \abs*{g}}     
+\end{align*}
+Sei $q>1$ mit $\frac{1}{p} + \frac{1}{q}=1$. Es gilt $\abs*{f+g}^{p-1} \in \mathcal{L}^q(\mu)$, da $\abs*{f+g}^{(p-1)q} = \abs*{f+g}^p \in \mathcal{L}^1(\mu)$. Nach Hölder
+\ref{sub:45} gilt
+\begin{align*}
+	\int \!\abs*{f+g}^p \mathd \mu \le \int \!\abs*{f+g}^{p-1} \abs*{f} \mathd \mu + \int \!\abs*{f+g}^{p-1} \abs*{g}\mathd \mu &\le \norm[p]{f} \cdot \norm[q]{\abs*{f+g}^{p-1}}
+	+ \norm[p]{g} \cdot \norm[q]{\abs*{f+g}^{p-1} } \\        
+	&= \enbrace*{\norm[p]{f} + \norm[p]{g}} \cdot \enbrace*{\int \abs*{f+g}^{(p-1)q} \mathd \mu }^{\frac{1}{q}} \\
+	&= \enbrace*{\norm[p]{f} + \norm[p]{g}} \cdot \enbrace*{\int \abs*{f+g}^{p} \mathd \mu }^{q} \\
+\end{align*}
+Also gilt 
+\[
+	\enbrace*{\int \abs*{f+g}^p \mathd \mu}^{1- \frac{1}{q}} = \enbrace*{\int \abs*{f+g}^{p} \mathd \mu }^{\frac{1}{p}} \le \norm[p]{f} + \norm[p]{g} \bewende    
+\]
+% subsection 46 (end)
+
+\subsection[Corollar: $L^p(\mu)$ ist ein normierter Vektorraum für $1 \le p < \infty$]{Corollar} % (fold)
+\label{sub:47}
+$L^p(\mu)$ ist ein normierter Vektorraum für $1 \le p < \infty$.
+% subsection 47 (end)
+
+\subsection[Definition und Proposition: Der normierte Raum $L^\infty(\mu)$ und ]{Definition und Proposition} % (fold)
+\label{sub:48}
+\begin{align*}
+	\mathcal{L}^\infty(\mu) &:= \set[f : X \to \mathds{R} \text{ messbar}]{\exists C \ge 0 : \abs*{f} \le C \text{ fast überall} \rule{0cm}{0.7em} }  \\
+	\mathcal{N}^\infty &:= \set[f : X \to \mathds{R}]{f=0 \text{ fast überall}} 
+\end{align*}
+Wir definieren $L^\infty(\mu) := \nicefrac{\mathcal{L}^\infty(\mu)}{\mathcal{N}^\infty}$. Wir definieren eine Norm auf $\mathcal{L}^\infty(\mu)$ durch
+\[
+	\norm[\infty]{f} := \inf \set[C]{\abs*{f} \le C \text{ fast überall} }\quad , \qquad f \in \mathcal{L}^\infty(\mu)  
+\]
+Dies induziert wieder eine Norm auf $L^\infty(\mu)$ durch $\norm[\infty]{f + \mathcal{N}} := \norm[\infty]{f}$. Damit ist $\enbrace*{L^\infty(\mu), \norm[\infty]{\cdot}}$
+ein normierter Vektorraum. Für $f \in L^1{\mu}$, $g \in L^\infty(\mu)$ gilt $f \cdot g \in L^1(\mu)$ und $\norm[1]{f \cdot g} \le \norm[1]{f} \cdot \norm[\infty]{g}$
+\minisec{Beweis}
+Übung. \bewende
+% subsection 48 (end)
+
+\subsection[Beispiele für $L^p$-Räume]{Beispiele} % (fold)
+\label{sub:49}
+\begin{enumerate}[(i)]
+	\item $(\mathds{R}^n, \norm[p]{\cdot})$, $1 \le p < \infty$, also $X=\set{1,\ldots,n}, \Sigma=\mathcal{P}(X), \mu =$ Zählmaß.
+	\item $\enbrace[\big]{\ell^p(\mathds{N}), \norm[p]{\cdot }}$, $1 \le p \le \infty$, also $X=\mathds{N}, \Sigma=\mathcal{P}(\mathds{N}), \mu=$ Zählmaß.
+	Dabei ist 
+	\[
+		\ell^p(\mathds{N}) = \set[(a_n)_n]{a_n \in \mathds{R}, \sum_{n \in \mathds{N}} \abs*{a_n}^p < \infty} 
+	\]
+	für $p < \infty$ bzw. $\ell^p(\mathds{N})= \set{\text{beschränkte Folgen}}$ für $p=\infty$.
+\end{enumerate}
+% subsection 49 (end)
+
+\subsection[Proposition: Lineare Isometrie $\iota_p : L^p(\mu) \to L^q(\mu)^*$]{Proposition} % (fold)
+\label{sub:410}
+Sei $(X,\Sigma,\mu)$ ein Maßraum, $p,q >1$ mit $\frac{1}{p} + \frac{1}{q}=1$, bzw. $p=1$, $q=\infty$. Die Abbildung $\iota_p : L^p(\mu) \to L^q(\mu)^*$, gegeben durch
+\[
+	\iota_p(f)(g) := \int \! f \cdot g \, \mathd \mu
+\]
+ist eine lineare Isometrie.
+\minisec{Beweis}
+\begin{description}
+	\item[$\iota_p(f) : L^q(\mu) \to \mathds{R}$ ist linear und wohldefiniert:] Übung!
+	\item[$\iota_p$ linear und wohldefiniert:] Übung!
+\end{description}
+$\iota_p(f)$ ist beschränkt durch $\norm[p]{f}$ nach Hölder (\ref{sub:45}), also ist $\iota_p$ beschränkt durch $1$. Noch zu zeigen: Zu $f \in L^p(\mu)$ existiert 
+$g \in L^q(\mu)$ mit $\abs*{\iota_p(f)(g)} = \norm[p]{f} \cdot \norm[q]{g}$. (Denn dann $\norm[L^q(\mu)^*]{\iota_p(f)}  \ge \norm[p]{f}$)
+
+\noindent Gegeben $f \in L^p(\mu)$, setze $g := \sgn(f) \cdot \abs*{f}^{p-1}$. Dann ist $\abs*{g}^q= \abs*{f}^p$, also $g \in L^q(\mu)$. Weiter gilt
+\begin{align*}
+	\int \!f \cdot g \,\mathd \mu = \int \! \abs*{f \cdot g} \mathd \mu = \int \!\abs*{f}^p \mathd \mu  = \enbrace*{\int\! \abs*{f}^p \mathd \mu }^{\frac{1}{p}}
+	\cdot  \enbrace*{\int \!  \abs*{f}^p \mathd\mu}^{\frac{1}{q}} = \norm[p]{f} \cdot \norm[q]{g}    
+\end{align*}
+Für $p=1$ und $q=\infty$ Übung. \bewende
+% subsection 410 (end)
+
+\subsection{Satz von Riesz-Fischer} % (fold)
+\label{sub:411}
+Sei $(X,\Sigma,\mu)$ ein Maßraum. $L^p(\mu)$ ist vollständig für $p \in [1,\infty]$.
+\minisec{Beweis}
+Für $p=\infty$: Übung. Sei also $p <\infty$ und sei $(f_n)_{n \in \mathds{N}} \subset L^p(\mu)$ Cauchy.
+\begin{description}
+	\item[Behauptung:] Es gibt $E_l \subset X$, $l \in \mathds{N}$, messbare Teilmenge mit $\mu(E_l) <\infty$ und sodass für $E := \bigcup_{l \in \mathds{N}} E_l$ gilt 
+	$\chi_{X \setminus E} \cdot f_n = 0$ in $L^p(\mu)$ für $n \in \mathds{N}$. Beweis: Übung!
+\end{description}
+Wähle $n_0 < n_1 < \ldots $ mit $\norm[p]{f_n - f_{n_k}} < \frac{1}{2^k}$ für $n > n_k$, $k \in \mathds{N}$. Für jedes $l,k \in \mathds{N}$ gilt
+$\abs*{f_{n_{k+1}} - f_{n_k}} \in L^p(\mu)$ und $\chi_{E_l} \in L^q(\mu)$ (wobei $\frac{1}{p} + \frac{1}{q}=1$), also ist nach Hölder (\ref{sub:45}) auch
+\(
+	\abs*{f_{n_{k+1}} - f_{n_k}} \cdot \chi_{E_l} \in L^1(\mu)
+\).
+Weiter gilt für $j \in \mathds{N}$, $l \in \mathds{N}$
+\[
+	\sum_{k=0}^{j}  \doppelstrich[\Big]{\abs*{f_{n_{jk+1}}- f_{n_k}} \cdot \chi_{E_l}}_{1}
+	\le \sum_{k=0}^{j} \norm[p]{f_{n_{k+1}}- f_{n_k}} \cdot \norm[q]{\chi_{E_l}} \le \sum_{k=0}^{j} \frac{1}{2^k} \cdot \norm[q]{\chi_{E_l}}
+\]
+$\enbrace*{\sum_{k=0}^{j} \abs*{f_{n_{k+1}} - f_{n_k}} \cdot \chi_{E_l}}_{j \in \mathds{N}}$ ist aufsteigende Folge von integrierbaren Funktionen. Nach dem Satz von
+Lebesgue über monotone Konvergenz gilt: $\sum_{k=0}^{\infty} \abs*{f_{n_{k+1}} - f_{n_k}} $ konvergiert auf $E_l$ fast überall. Da abzählbare Vereinigungen von Nullmengen
+Nullmengen sind, folgt: $\sum_{k=0}^{\infty} \abs*{f_{n_{k+1}}- f_{n_k}}$ konvergiert auf $E$ fast überall. Also konvergiert $\sum_{k=0}^{\infty} \abs*{f_{n_{k+1}}- f_{n_k}}$
+auf $X$ fast überall. $\Rightarrow \sum_{k=0}^{\infty} f_{n_{k+1}}- f_{n_k}$ konvergiert auf $X$ fast überall. Also konvergiert auch $(f_{n_k})_{k \in \mathds{N}}$ auf
+$X$ fast überall.\todo{vlt strukturiert übereinander?} Setze
+\[
+	f(x) := \begin{cases}
+		\lim_{k\to \infty} f_{n_k}, &\text{ falls der Limes existiert}\\
+		0, &\text{ sonst}
+	\end{cases}
+\]
+$f$ ist messbar (Limes messbarer Funktionen). Weiter gilt $\abs*{f_{n_k}}^p \to \abs*{f}^p$ fast überall. 
+
+Noch zu zeigen: $f \in L^p(\mu)$: Die Folge $\norm[p]{f_{n_k}}^p$ ist beschränkt, da $(f_n)_{n \in \mathds{N}}$ eine Cauchyfolge bezüglich $\norm[p]{\cdot}$ ist. Es gilt
+\marginnote{$\abs*{f}^p \stackrel{\text{f.ü.}}{=} \liminf \abs*{f_{n_k}}^p$}
+\[
+	\int \abs*{f}^p \mathd \mu \le \liminf\limits_{k \to \infty} \int \abs*{f_{n_k}}^p \mathd \mu < \infty
+\]
+nach dem Lemma von Fatou. Also gilt $f \in L^p(\mu)$.
+Noch zu zeigen: $f_n \xrightarrow{n \to \infty} f$ bezüglich $\norm[p]{\cdot }$. Sei dazu $j \in \mathds{N}$. Sei $n \ge n_j$. Für $i>j$ gilt
+\[
+	\norm[p]{f_n - f_{n_i}} \le \norm[p]{f_n - f_{n_j}} + \norm[p]{f_{n_j}- f_{n_i}} < 2 \cdot \frac{1}{2^j}    
+\]
+Weiter gilt $\abs*{f_{n}- f_{n_i}}^p \xrightarrow{i \to \infty} \abs*{f_n -f}^p$ fast überall. Mit dem Lemma von Fatou folgt 
+\[
+	\int\!\abs*{f_n- f}^p \mathd\mu \le \liminf \int \! \abs*{f_n - f_{n_i}}^p \mathd\mu  \le \enbrace*{2 \cdot \frac{1}{2^j}}^p
+\]
+$\Rightarrow \norm[p]{f_n -f} \le 2 \cdot \frac{1}{2^j}$, falls $n \ge n_j$, also $\norm[p]{f_n -f} \xrightarrow{n \to \infty} 0 $. \bewende
+% subsection 411 (end)
+% section 4 (end)
+\newpage
+
+\section{Schwache Topologien, Reflexivität} % (fold)
+\label{sec:5}
+\subsection[Definition: Schwache Topologie]{Definition} % (fold)
+\label{sub:51}
+Sei $X$ ein normierter $\mathds{K}$-Vektorraum. Die \Index{schwache Topologie} $\weakT{X}$ ist die gröbste\footnote{auch: "dollste"} Topologie auf $X$, sodass alle 
+$\varphi \in X^*$ stetig sind. 
+\todo{RevChap5}
+% subsection 51 (end)
+
+\subsection[Bemerkungen zu schwachen Topologie]{Bemerkung} % (fold)
+\label{sub:52}
+\begin{enumerate}[(i)]
+	\item Jedes $\varphi \in X^*$ ist (nach Definition von $X^*=\mathcal{L}(X,\mathds{K})$) stetig bezüglich $\mathcal{T}^{\norm{\cdot}}_X$, d.h. 
+	$\weakT{X} \subset \mathcal{T}_X^{\norm{\cdot}}$. Mit anderen Worten: Die Abbildung 
+	$\id_X: \enbrace*{X,\mathcal{T}_X^{\norm{\cdot}}}\to\enbrace[\Big]{X,\weakT{X}}$ ist stetig.
+	\item Mengen der Form $\varphi ^{-1}(U)$ für $U \subset K$ offen, $\varphi \in X^*$ bilden eine Subbasis für $\weakT{X}$. Mengen der Form 
+	\[
+		\bigcap_{i=1}^n \varphi_i ^{-1} (U_i) \quad, \qquad U_i \subset \mathds{K} \text{ offen}, \varphi_i \in X^*
+	\]
+	bilden eine Basis für $\weakT{X}$.
+\end{enumerate}
+% subsection 52 (end)
+
+\subsection[Proposition: Die schwache Topologie ist Hausdorffsch]{Proposition} % (fold)
+\label{sub:53}
+$\enbrace[\big]{X,\weakT{X}}$ ist Hausdorffsch.
+\minisec{Beweis}
+Seien $x \not= y \in X$. Nach \hyperref[sub:227]{Hahn-Banach} existiert $\varphi \in X^*$ mit $\varphi(x) \not= \varphi(y)$. Setze 
+$\varepsilon := \frac{\abs*{\varphi(x)- \varphi(y)} }{2}>0$, dann sind $\varphi ^{-1} \enbrace[\big]{B_\mathds{K} \enbrace*{\varphi(x),\varepsilon} } $ und
+$\varphi ^{-1} \enbrace[\big]{B_\mathds{K} \enbrace*{\varphi(y), \varepsilon}}$ disjunkte offene Umgebungen von $x$ bzw. $y$. \bewende
+% subsection 53 (end)
+
+\subsection[Proposition: Äquivalenz zu schwacher Konvergenz]{Proposition} % (fold)
+\label{sub:54}
+Sei $X$ ein normierter Raum, $x \in X$, $(x_\lambda )_\Lambda \subset X$ ein Netz. Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $x_\lambda \xrightarrow{\w}  x$, d.h. $x_\lambda \to x$ in $\weakT{X}$
+	\item $\varphi(x_\lambda ) \to \varphi(x)$ für alle $\varphi \in X^*$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii):] Sei $\varphi \in X^*$, $\varepsilon>0$. $\varphi(x) \in B_\mathds{K}\enbrace[\big]{\varphi(x),\varepsilon} \subset \mathds{K}$ offen.
+	$\varphi$ stetig bezüglich $\weakT{X}$
+	\[
+		\Rightarrow  x \in \varphi ^{-1} \enbrace[\Big]{ B_\mathds{K}\enbrace[\big]{\varphi(x), \varepsilon} } \underset{\text{$\w$-offen}}{\subset} X 
+	\] 
+	$x_\lambda \xrightarrow{\w} x  \Rightarrow  \exists \overline{\lambda } \in \Lambda$ mit 
+	$x_\lambda \in \varphi^{-1}\enbrace[\big]{B_\mathds{K}\enbrace*{\varphi(x), \varepsilon}}$, falls $\lambda \ge \overline{\lambda }$. Dann folgt
+	$\varphi(x_\lambda ) \in B_\mathds{K}\enbrace*{\varphi(x),\varepsilon}$ falls $\lambda \ge \overline{\lambda}$, also $\varphi(x_\lambda ) \to \varphi(x)$ in $\mathds{K}$.
+	\item[(ii)$\Rightarrow$(i):] Sei $x \in V \subset X$ $\w$-offen. Nach \ref{sub:52}(ii) existieren $\varphi_1, \ldots , \varphi_m \in X^*$, $U_1, \ldots , U_m$ offen in
+	$\mathds{K}$ mit 
+	\[
+		x \in \phi_1 ^{-1}(U_1) \cap \ldots  \cap \varphi_m ^{-1}(U_m) \subset V
+	\]
+	Wegen (ii) existieren $\lambda_1, \ldots , \lambda _m \in \Lambda$ mit $\varphi_i(x_\lambda ) \in U_i$, falls $\lambda  \ge \lambda_i$, $i=1,\ldots,m$.
+	Wähle $\overline{\lambda} \in \Lambda$ mit $\overline{\lambda} \ge \lambda_1, \ldots , \lambda_m$. Dann gilt $\varphi_i(x_\lambda) \in U_i$, falls 
+	$\lambda \ge \overline{\lambda}$, $i=1,\ldots ,m$. Damit ist $x_\lambda \in \varphi_i ^{-1}(U_i)$, falls $\lambda \ge \overline{\lambda}$, $i=1,\ldots,m$. Also gilt
+	$x_\lambda \in \bigcap_{i=1}^m \varphi_i ^{-1}(U_i) \subset V$, falls $\lambda \ge \overline{\lambda}$. \bewende
+\end{description}
+% subsection 54 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:55}
+Wenn $x_\lambda \xrightarrow{\w} x$, dann gilt $(x_\lambda)_\Lambda \subset X$ ist beschränkt.
+\minisec{Beweis}
+Prinzip der gleichmäßigen Beschränktheit (siehe \ref{sub:35}). \bewende
+% subsection 55 (end)
+
+\subsection[Beispiel: Konvergenz impliziert schwache Konvergenz, aber nicht umgekehrt]{Beispiel} % (fold)
+\label{sub:56}
+Im Allgemeinen gilt
+\[
+	x_\lambda \xrightarrow{\norm{\cdot}} \quad \begin{matrix}
+		\Rightarrow \\
+		\nLeftarrow 
+	\end{matrix} \quad  x_\lambda \xrightarrow{\w} x 
+\]
+Betrachte $X=\ell^2(\mathds{N})$ mit $\norm[2]{\cdot }$. 
+Sei $e_n \in \ell^2(\mathds{N})$ gegeben durch $e_n(m) := \delta_{n,m}$\marginnote{Kronecker-Delta}. Dann gilt $e_n  \not\to 0$ für $n \to \infty$ in 
+$\mathcal{T}^{\norm[2]{\cdot }}$, denn $\norm[2]{e_n -0} = \norm[2]{e_n} \equiv 1 \not\to 0$. Aber $e_n \xrightarrow{\w} 0$ für $n \to	\infty$: 
+
+Wir werden später sehen, dass $\ell^2(\mathds{N})^* \cong \ell^2(\mathds{N})$ via $\sprod*{a}{b} = \sum \overline{a}(k) b(k)$.
+Es gilt aber 
+\[
+	\sprod*{a}{e_n} = \sum \overline{a(k)} e_n(k) = \overline{a(n)} \xrightarrow{n \to \infty} 0.
+\] 
+$\Rightarrow e_n \xrightarrow{\w}0$ für $n \to \infty$. \smallskip\\
+\emph{Direktes Argument: Übung.}
+% subsection 56 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:57}
+Seien $X,Y$ metrische Räume, $T \in \mathcal{L}(X,Y)$ ein beschränkter (d.h. normstetiger) linearer Operator. Dann ist $T$ auch stetig bezüglich der schwachen Topologie auf
+$X$ und $Y$.
+\minisec{Beweis}
+Zu zeigen: Falls $U \subset Y$ schwach-offen ist, so ist $T ^{-1}(U)$ schwach-offen in $X$. Wir können annehmen, dass $U$ von der Form
+$\varphi ^{-1} \enbrace*{B_\mathds{K}(\lambda,\varepsilon)}$, $\varphi \in Y^*, \lambda \in \mathds{K}, \varepsilon>0$ ist, da diese Mengen eine Subbasis bilden.
+Es gilt nun
+\begin{align*}
+	T ^{-1} \enbrace[\Big]{ \varphi ^{-1} \enbrace[\big]{ B_\mathds{K}(\lambda,\varepsilon)} } = \enbrace[\Big]{\underbrace{\varphi \circ T}_{\in X^*}} ^{-1} 
+	\enbrace[\big]{B_\mathds{K}(\lambda,\varepsilon)} \underset{\text{$\w$-offen}}{\subset} X   \bewende
+\end{align*}
+% subsection 57 (end)
+
+\subsection[Definition: Die $\w^*$-Topologie auf $X^*$]{Definition} % (fold)
+\label{sub:58}
+Sei $X$ ein normierter Raum. Die \bet{$\mathbf{w}^{\mathbf{*}}$-Topologie} $\weakTstar{ }$\index{w-Topologie@$\w^*$-Topologie} ist die gröbste Topologie auf $X^*$, sodass alle $\iota_X(x) \in X^{**}$ stetig sind.
+% subsection 58 (end)
+
+\subsection[Bemerkungen zur $\w^*$-Topologie auf $X^*$]{Bemerkung} % (fold)
+\label{sub:59}
+\begin{enumerate}[(i)]
+	\item Es gilt $\weakTstar{X^*} \subset \weakT{X^*} \subset \mathcal{T}^{\norm[X^*]{\cdot}}_{X^*}$
+	\item Mengen der Form $W(\varphi,x \varepsilon) := \set[\psi \in X^*]{\abs*{\psi(x)- \varphi(x)}< \varepsilon}$ bilden eine Subbasis für $\weakTstar{X^*}$.
+	Mengen der Form $\set[\psi]{ \psi(x) \in U}$, $U \subseteq \mathds{K}$ offen, bilden ebenfalls eine Subbasis für $\weakTstar{X^*}$.
+	\item Ein Netz $(\varphi_\lambda)_{\lambda \in \Lambda} \subset X^*$ konvergiert $\w^*$ gegen $\varphi \in X^*$ genau dann, wenn 
+	$\iota_X(x)(\varphi_\lambda)=\varphi_\lambda(x) \xrightarrow{\lambda} \varphi(x) = \iota_X(x)(\varphi)$ für jedes $x \in X$.
+	\item $\weakTstar{X^*}$ ist Hausdorff. Beweis: Übung.
+\end{enumerate}
+% subsection 59 (end)
+
+\subsection{Satz (Banach-Alaoglu)} % (fold)
+\label{sub:510}
+Sei $X$ ein normierter Raum. Dann ist die abgeschlossene Einheitskugel in $X^*$
+\[
+	\overline{B_{X^*}(0,1)} = \set[\varphi \in X^*]{\norm[X^*]{\varphi} \le 1}  
+\]
+$\w^*$-kompakt.
+\minisec{Beweis}
+Für $x \in X$ setze $F_x := \mathds{K}$ und $F := \prod_{x \in X} F_x$. Wir versehen $F$ mit der Produkttopologie $\mathcal{T}_F^\Pi$. Definiere eine Abbildung
+$\kappa : X^* \to F$ durch $\kappa(\varphi)_x := \varphi(x)$, $x \in X$. Dann ist $\kappa$ injektiv (warum?) und $\weakTstar{ }$ stimmt überein mit der durch $\kappa$ und
+$\mathcal{T}_F^\Pi$ induzierten Topologie auf $X^*$. Diese besteht aus den Mengen $\set[\kappa ^{-1}(U)]{U \in \mathcal{T}_F^\Pi}$. Eine Basis für $\mathcal{T}_F^\Pi$ sind
+Mengen der Form 
+\[
+	\prod_{x \in X} U_x, \quad U_x \subset \mathds{K} \text{ offen} 
+\]
+mit $U_x = \mathds{K}$ für alle bis auf endlich viele $x \in X$. Eine Basis, für die durch
+$\kappa$ und $\mathcal{T}_F^\Pi$ induzierte Topologie auf $X^*$ sind Mengen der Form
+\[
+	\kappa ^{-1} \enbrace*{ \prod_{x \in X} U_x} = \underbrace{\bigcap_{i=1}^n \set[\varphi]{\varphi(x_i) \in U_{x_i}} }_{
+	\text{bilden Basis für $\weakTstar{X^*}$, \ref{sub:59}(ii)}}
+\]
+mit $U_x$ wie oben. Dabei erhalten wir die $x_i$ durch $\kappa ^{-1} \enbrace*{\prod_{x \in X} V_x} = \set[\varphi]{\varphi(x_i)\in U_{x_i}}$, wobei 
+\[
+	V_x = \begin{cases}
+		\mathds{K}, &\text{ falls } x \not= x_i\\
+		U_{x_i}, &\text{ falls } x=x_i
+	\end{cases}
+\]
+Falls $\norm{\varphi} \le 1$, so gilt $\abs*{\varphi(x)} \le \norm[X]{x}$, also 
+\[
+	\kappa \enbrace*{\overline{B_{X^*}(0,1)}} \subset \underbrace{\prod_{x \in X} \overline{B_{\mathds{K}}(0, \norm{x})}}_{\text{kompakt nach Tychonov}} \subset F
+\]
+Bleibt zu zeigen: $\kappa \enbrace*{\overline{B_{X^*}(0,1)}} \subset F$ ist abgeschlossen. Sei $f \in \overline{\kappa \enbrace*{\overline{B_{X^*}(0,1)}}}$. Dies definiert
+eine Abbildung $\varphi_f : X \to \mathds{K}$ durch $\varphi_f(x) := f_x$. Falls nun $\varphi_f$ linear und stetig ist mit $\norm{\varphi_f} \le 1$, so gilt
+$\kappa(\varphi_f) = f$, denn $\kappa(\varphi_f)(x) = \varphi_f(x) = f_x$. Damit folgt $f \in \kappa \enbrace*{ \overline{B_{X^*}(0,1)}}$ und damit 
+$\overline{B_{X^*}(0,1)}$ kompakt.
+\begin{description}
+	\item[Additivität:] Seien $y,z \in X$, $\varepsilon>0$. Dann ist 
+	\[
+		W_\varepsilon := \set[g \in \prod_{x \in X} \overline{B_\mathds{K}(0, \norm{x} )} ]{\begin{array}{r}
+			\abs*{g_{y+z}- f_{y+z}} < \varepsilon \\ \enspace\abs*{g_y-f_y} < \varepsilon \\ \enspace\abs*{g_z -f_z}  < \varepsilon
+		\end{array}  }  
+		\underset{\text{offen}}{\subset} \prod_{x \in X} \overline{B_\mathds{K}(0,\norm{x})} 
+	\]
+	$f \in \overline{\kappa \enbrace*{\overline{B_{X^*}(0,1)}}} \Rightarrow \exists g \in W_\varepsilon \cap \kappa \enbrace*{\overline{B_{X^*}(0,1)}}$. Sei 
+	$g' \in \overline{B_{X^*}(0,1)}$ mit $\kappa(g')=g$. $g' \in X^*$ ist linear, also gilt auch $g_{y+z}= g_y + g_z$ und daher 
+	\[
+		\abs*{f_{y+z} - (f_y + f_z)} < \varepsilon + \varepsilon + \varepsilon= 3 \varepsilon
+	\]
+	$\varepsilon>0$ war beliebig, also $f_{y+z}= f_y+f_z$ und $\varphi_f(y+z)= \varphi_f(y)+ \varphi_f(z)$. Also ist $\varphi$ additiv;
+	\item[Skalarmultiplikation:] analog.
+\end{description}
+Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[X^*]{\varphi_f} \le 1$. \bewende
+% subsection 510 (end)
+
+\subsection[Erinnerung: separabel, 1. abzählbar, 2. abzählbar]{Erinnerung} % (fold)
+\label{sub:511}
+\begin{enumerate}[(a)]
+	\item Ein topologischer Raum heißt
+	\begin{enumerate}[(i)]
+		\item \Index{separabel}, falls $X$ eine abzählbare dichte Teilmenge enthält.
+		\item \Index{1. abzählbar}, falls gilt: Jedes $x \in X$ besitzt abzählbar viele Umgebungen $U_i$, $i \in \mathds{N}$, sodass jede Umgebung $V$ von $x$ wenigstens ein
+		$U_i$ enthält.  
+		\item \Index{2. abzählbar}, falls gilt: $\mathcal{T}_X$ besitzt eine abzählbare Basis, d.h. es gibt offene Mengen $W_i$, $i \in N$, sodass für jedes $V \subset X$ 
+		offen gilt: $V= \bigcup_{W_i \subset V} W_i$.
+	\end{enumerate}
+	\item 2. abzählbar $\Rightarrow $ 1. abzählbar und separabel.
+	\item Ist $X$ kompakt und 1. abzählbar, so besitzt jede Folge in $X$ eine konvergente Teilfolge.
+	
+	Beweisskizze: $(x_n)_{\mathds{N}} \subset X$, setze $A_n := \overline{\set{x_n, x_{n+1}, \ldots }}$. Dann ist $\bigcap_\mathds{N} A_n$ nichtleer wegen Kompaktheit, also
+	hat $(x_n)_\mathds{N}$ einen Häufungspunkt. Benutze nun 1. abzählbar.
+	\item Sei $X$ kompakt und Hausdorff. Dann ist $X$ metrisierbar $\iff$ $X$ ist 2. abzählbar.
+	
+	"$\Longrightarrow$" ist eine einfache Übung. "$\Longleftarrow$" Urysohn, Metrisierungssätze. Den Satz von Urysohn hatten wir auch in "Grundlagen der Analysis, Topologie 
+	und Geometrie" im letzen Semester bewiesen.
+\end{enumerate}
+% subsection 511 (end)
+
+\subsection[Satz: Metrisierbarkeit von $\overline{B_{X^*}(0,1)}$ bezüglich der $\w^*$-Topologie]{Satz} % (fold)
+\label{sub:512}
+Sei $X$ ein separabler normierter Raum. Dann ist $\overline{B_{X^*}(0,1)}$ bezüglich $\weakTstar{X^*}$ metrisierbar. Insbesondere ist $\overline{B_{X^*}(0,1)}$ bezüglich
+$\weakTstar{X^*}$ 2. abzählbar und kompakt, und jede Folge besitzt eine konvergente Teilfolge.
+\minisec{Beweis}
+Sei $\set[x_n]{n \in \mathds{N}} \subset B_X(0,1)$ dicht. Definiere eine Abbildung $d: X^* \times X^* \to [0,\infty)$ durch
+\[
+	d(\varphi, \psi) := \sum_{n \in \mathds{N}} \frac{1}{2^n} \cdot \abs[\big]{\varphi(x_n) - \psi(x_n)}
+\]
+Dann ist $d$ eine Metrik: $d$ ist offensichtlich symmetrisch und erfüllt die Dreiecksungleichung. Zu zeigen: $d$ ist definit:
+\(
+	\varphi \not= \psi \Rightarrow \exists x \in B_X(0,1) \text{ mit } \varphi(x) \not= \psi(x).
+\)
+Also existiert $x_n$ mit $\varphi(x_n) \not= \psi(x_n)$. Dann ist $d(\varphi,\psi) \not= 0$.
+
+Sei nun $(\varphi_\lambda)_{\lambda \in \Lambda} \subset \overline{B_{X^*}(0,1)}$ ein Netz und $\varphi \in \overline{B_{X^*}(0,1)}$. Es genügt zu zeigen
+\[
+	\varphi_\lambda \xrightarrow{\w^*} \varphi \enspace \iff \enspace  d(\varphi_\lambda, \varphi) \longrightarrow 0
+\]
+denn dann stimmen $\weakTstar{X^*}$ und $\mathcal{T}_{X^*}^d$ überein. (Warum?)
+\begin{description}
+	\item["$\Rightarrow $":] Es gelte $\varphi_\lambda \xrightarrow{\w^*} \varphi$, also $\varphi_\lambda(x_n) \to \varphi(x_n)$ für $n \in \mathds{N}$ (nach 
+	\ref{sub:59}(iii)). Sei $\varepsilon>0$. Wähle $n_0 \in \mathds{N}$ mit $\sum_{n \ge n_0} \frac{1}{2^n} < \frac{\varepsilon}{4}$. Wähle $\overline{\lambda} \in \Lambda$
+	mit $\abs*{\varphi_\lambda(x_n)- \varphi(x_n)} < \frac{\varepsilon}{4}$ falls $n < n_0$, $\lambda \ge \overline{\lambda}$. Dann gilt für $\lambda \ge\overline{\lambda}$
+	\begin{align*}
+		d(\varphi_\lambda,\varphi) &\le \sum_{n < n_0} \frac{1}{2^n} \cdot \abs[\big]{\varphi_\lambda(x_n)- \varphi(x_n)} + \sum_{n \ge n_0} \frac{1}{2^n} \cdot 
+		\underbrace{\abs[\big]{\varphi_\lambda(x_n) - \varphi(x_n)}}_{\le 2} \\
+		&< 2 \cdot \frac{\varepsilon}{4} + 2 \cdot \frac{\varepsilon}{4}  = \varepsilon
+	\end{align*}
+	\item["$\Leftarrow$":] Übung mit: $\forall n . \varphi_\lambda(x_n) \to \varphi(x_n)$ und $ \set{x_n}$ dicht $\Rightarrow \varphi_\lambda(x) \to \varphi(x)$ für jedes
+	$x \in X$. \bewende
+\end{description}
+% subsection 512 (end)
+
+\subsection*{Nachtrag (zum Beweis von \ref{sub:512})} % (fold)
+\label{sub:nachtrag_512}
+Topologien sind durch Konvergenz von Netzen bestimmt: Sei $(X,\mathcal{T})$ ein topologischer Raum. 
+\begin{align*}
+	U \subset X \text{ offen } &\iff \forall x \in U : \exists x \in V \subset U, V \in \mathcal{T} \\
+	U \subset X \text{ nicht offen } &\iff \exists x \in U : \text{ für jedes } x \in V \underset{\mathclap{\text{offen}}}{\subset} X \text{ gilt } V \cap (X \setminus U) 
+	\not= \emptyset \\
+	&\stackrel{\text{(\#)}}{\iff} \exists x \in U, \exists \text{ Netz } (x_\lambda)_{\lambda \in \Lambda} \subset X \setminus U \text{ mit } x_\lambda \to x
+\end{align*}
+$\stackrel{\text{(\#)}}{\Longleftarrow}$ ist trivial. $\stackrel{\text{(\#)}}{\Longrightarrow}$: $\Lambda := \set[V]{x \in V \subset X \text{ offen}}$ ist 
+gerichtet bezüglich "$\subset$". Zu jedem $V \in \Lambda$ wähle \marginnote{Auswahlaxiom nötig!} $x_V \in (X \setminus U) \cap V$. Dann gilt 
+$(x_v)_{v \in \Lambda} \subset X \setminus U$ und $x_v \to x$.
+
+% subsection nachtrag_512 (end)
+
+\subsection[Definition: Reflexiver normierter Raum]{Definition} % (fold)
+\label{sub:513}
+Der normierte Raum $X$ heißt \Index{reflexiv}, falls die kanonische Abbildung $\iota_X : X \to X^{**}$ ein Isomorphismus ist. 
+($\iota_X$ ist Isomorphismus genau dann, wenn $\iota_X$ surjektiv ist.)
+% subsection 513 (end)
+
+\subsection[Proposition: Abgeschlossene Unterräume von reflexiven Banachräumen sind reflexiv]{Proposition} % (fold)
+\label{sub:514}
+Sei $X$ ein reflexiver Banachraum und $Y \subset X$ ein abgeschlossener Teilraum. Dann ist $Y$ reflexiv.
+\minisec{Beweis}
+Sei $\kappa : Y \hookrightarrow X$ die Inklusion. Dann ist $\kappa \in \mathcal{L}(Y,X)$ und nach \ref{sub:34} kommutiert das Diagramm
+\[
+	\begin{tikzcd}
+		Y \rar[hook, "\iota_Y"] \dar["\kappa"', hook]& Y^{**}  \dar["\kappa^{\tr \,\tr}"] \\
+		X \rar["\iota_X","\cong"', hook] & X^{**}
+	\end{tikzcd}
+\]
+Sei $f\in Y^{**}$, dann existiert $x \in X$ mit $\iota_X(x)=\kappa^{\tr\,\tr}(f)$. Für $\varphi \in X^*$ gilt 
+\[
+	\varphi(x)=\iota_X(x)(\varphi)=\kappa^{\tr\,\tr}(f)(\varphi).
+\]
+Aber $(\kappa^\tr)^\tr (f) = f \circ \kappa^\tr$ und $\kappa^\tr(\varphi) = \varphi \circ \kappa = \varphi|_{Y}$, also $\varphi(x)= f \enbrace*{\varphi|_Y}$ für jedes 
+$\varphi \in X^*$. Falls $x \not\in Y$, so existiert nach Hahn-Banach ein $\psi \in X^*$ mit $\psi|_{Y}=0$, $\psi(x)\not= 0$. Damit folgt 
+\[
+	0 \not= \varphi(x) = f \enbrace*{\psi|_{Y}}=0 \enspace\light
+\]
+also gilt $x \in Y$. Weiter gilt $\iota_Y(x)=f$, denn $\kappa^{\tr\,\tr}$ ist injektiv. Andernfalls existiert $0 \not= g \in Y^{**}$ mit $\kappa^{\tr\,\tr}(g)=0$, also
+existiert $\sigma \in Y^*$ mit $g(\sigma) \not= 0$. Nach Hahn-Banach existiert $\rho \in X^*$ mit $\rho|_{Y}=\sigma$. Nun gilt 
+\[
+	0 = \kappa^{\tr\,\tr}(g) = g \enbrace*{\rho|_Y} = \rho(g) \not= 0 \enspace \light 
+\]
+$\Rightarrow \kappa^{\tr\,\tr}$ ist injektiv. \bewende
+% subsection 514 (end)
+
+\subsection[Proposition: Für Banachräume gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv]{Proposition} % (fold)
+\label{sub:515}
+Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv.
+\minisec{Beweis}
+\begin{description}
+	\item["$\Rightarrow$":] $\iota_X : X \xrightarrow{\cong} X^{**}$ ist ein isometrischer Isomorphismus. Nach Blatt 6, Aufgabe 2 ist $\iota_X^{\tr} : X^{***} \to X^*$
+	auch ein isometrischer Isomorphismus. Nach \ref{sub:34} gilt  $\iota_X^{\tr} \circ \iota_{X^*}= \id_{X^{*}}$, also ist $\enbrace*{\iota_X^\tr}^{-1} = \iota_{X^*}$
+	ebenfalls ein isometrischer Isomorphismus.
+	\item["$\Leftarrow$":] genauso \checkmark \bewende
+\end{description}
+% subsection 515 (end)
+
+\subsection[Satz: Die Einheitskugel eines Banachraumes $X$ liegt $\w^*$-dicht in der Einheitskugel von $X^{**}$]{Satz} % (fold)
+\label{sub:516}
+Sei $X$ ein Banachraum. Dann gilt 
+\[
+	\overline{B_X(0,1)} \underset{\text{$\w^*$-dicht}}{\subset} \overline{B_{X^{**}}(0,1)}  
+\]
+\minisec{Beweis}
+Zu zeigen: Zu $f \in \overline{B_{X^{**}}(0,1)}$ und $\varepsilon>0$, $\varphi_1, \ldots , \varphi_n \in X^*$, existiert $x \in \overline{B_X(0,1)}$ mit
+$\abs*{f(\varphi_i)- \varphi_i(x)} < \varepsilon$ für $i=1,\ldots ,n$. Behauptung: Es gilt (gegeben $f,\varphi_1, \ldots , \varphi_n$)
+\[
+	\inf_{x \in \overline{B_X(0,1)} } \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x)}^2 = 0
+\]
+Sei $h(x) := \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2 $ und $\inf_{x\in \overline{B_X(0,1)}} h(x) =: \mu \ge 0$. Wähle 
+$(x_k)_{k \in \mathds{N}} \subset \overline{B_X(0,1)}$ mit $\lim_{k \to \infty} h(x_k)= \mu$. Nach Übergang zu einer Teilfolge dürfen wir annehmen, dass 
+$\enbrace[\big]{\varphi_i(x_k)}_{k \in \mathds{N}}$ gegen  $\gamma_i \in \mathds{K}$ konvergiert für $i=1,\ldots ,n$. Setze $\delta_i := f(\varphi_i) -\gamma_i$, dann
+gilt $\mu = \sum_{i=1}^{n} \abs*{\delta_i}^2$. Für $y \in \overline{B_X(0,1)}$, $t \in [0,1]$ gilt 
+\begin{align*}
+	\mu \le h\enbrace[\Big]{\underbrace{(1-t) \cdot x_k + t \cdot y}_{\in \overline{B_X(0,1)}}} &= 
+	\sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- (1-t) \cdot \varphi_i(x_k) - t \cdot \varphi_i(y)}^2 \\
+	&= \sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- \varphi(x_k) - t \cdot  \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} }^2 \\
+	&= \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x_k)}^2 + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \varphi_i(x_k)}^2 \\
+	& \quad - 2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} \cdot \overline{\enbrace[\big]{f(\varphi_i)- \varphi_i(x_k)} } \\
+	\xrightarrow{k \to \infty} &\underbrace{\sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \gamma_i}^2}_{=\mu} + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2  
+	-2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i }
+\end{align*}
+Nach Abziehen von $\mu$ folgt für $t >0$
+\begin{align*}
+	&0 \le t \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2 - 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i}  \\
+	\xRightarrow{t \searrow 0} \enspace & 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i} \le 0 \text{ für alle } y \in \overline{B_X(0,1) }
+\end{align*}
+Für $y \in \overline{B_X(0,1)}$ gilt $\re \sum_{i=1}^{n} \enbrace*{\varphi_i(y)- \gamma_i} \cdot \overline{\delta _i} \le 0$.
+Definiere $\varphi := \sum_{i=1}^{n} \overline{\delta _i} \cdot \varphi_i \in X^*$, dann gilt für $y \in \overline{B_X(0,1)}$
+\[
+	\re \varphi(y) \le \re \sum_{i=1}^{n} \gamma_i \overline{\delta_i} 
+\]
+also $\norm[X^*]{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$. Aber 
+\[
+	\varphi(x_k) = \sum_{i=1}^{n} \overline{\delta_i} \cdot \varphi_i(x_k) \xrightarrow{k \to \infty} \sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i, 
+\]
+das heißt $\abs*{\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i} \le \norm{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$ und somit
+$\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i = \norm[X^*]{\varphi}$. Wir erhalten 
+\begin{align*}
+	\mu = \sum_{i=1}^{n} \overline{\delta_i} \delta_i = \sum_{i=1}^{n}\overline{\delta_i} \enbrace[\big]{f(\varphi_i)- \gamma_i} = f(\varphi)-\norm[X^*]{\varphi} \le 0 \bewende
+\end{align*}
+% subsection 516 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:517}
+Sei $X$ ein Banachraum, $f \in \overline{B_{X^{**}}(0,1)}$, $\varphi_1, \ldots , \varphi_n \in X^*$. Falls $\overline{B_X(0,1)}$ $\w$-kompakt ist, so existiert 
+$x \in \overline{B-X(0,1)}$ mit $f(\varphi_i)= \varphi_i(x)$, $i=1,\ldots ,n$.
+\minisec{Beweis}
+Definiere $h : X \to \mathds{R}$ durch $h(x):= \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2$ ist stetig auf $X$ bezüglich $\weakT{X}$, nimmt also auf
+$\overline{B_X(0,1)}$ ihr Minimum an. \bewende
+% subsection 517 (end)
+
+
+\subsection{Satz} % (fold)
+\label{sub:518}
+Sei $X$ ein Banachraum. Dann sind äquivalent: 
+\begin{enumerate}[(i)]
+	\item $X$ ist reflexiv.
+	\item $\overline{B_X(0,1)}$ ist $\w^*$-kompakt.
+	\item $\weakT{X^*}= \weakTstar{X^*}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii):] $\overline{B}_{X^{**}}(0,1)$ ist $\w^*$-kompakt nach \ref{sub:510}. Nach \ref{sub:515} ist $X^*$ reflexiv, daher stimmen auf $X^{**}$
+	die $\w^*$- und die $\w$-Topologie überein. $\Rightarrow \overline{B_{X^{**}}(0,1)}$ ist $\w$-kompakt. Aber unter $X \cong X^{**}$ stimmen die jeweiligen $\w$-Topologien
+	überein; ebenso $\overline{B_{X}(0,1)} \cong \overline{B_{X^{**}}(0,1)}$.
+	\item[(ii)$\Rightarrow$(i):] Es gilt $(X,\weakT{X}) \subset (X^{**}, \weakTstar{X^{**}})$ in der Relativtopologie (warum?).
+	$\overline{B_X(0,1)}$ kompakt $\Rightarrow \overline{B_X(0,1)} \subset \overline{B_{X^{**}}(0,1)}$ $\w^*$-abgeschlossen und $\w^*$-dicht. Also folgt
+	$\overline{B_X(0,1)} = \overline{B_{X^{**}}(0,1)}$ und somit $X=X^{**}$.
+	\item[(iii)$\Rightarrow$(i):] $\overline{B_{X^*}(0,1)}$ ist $\w^*$-kompakt nach Banach-Alaoglu (\ref{sub:510}). Mit (iii) folgt, dass $\overline{B_{X^*}(0,1)}$
+	$\w$-kompakt ist. Da (ii)$\Rightarrow$(i) folgt, dass $X^*$ reflexiv ist und somit ist nach \ref{sub:516} auch $X$ reflexiv.
+	\item[(i)$\Rightarrow$(iii):] klar. \bewende
+\end{description}
+% subsection 518 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:519}
+\begin{enumerate}[a)]
+	\item Sei $X$ ein normierter Raum. Falls $X^*$ separabel (bezüglich $\mathcal{T}_{X^*}^{\norm{\cdot}}$) ist, so ist $X$ separabel (bezüglich 
+	$\mathcal{T}_X^{\norm{\cdot}}$)
+	\item Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $\overline{B}_X(0,1)$ ist folgenkompakt bezüglich $\weakT{X}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Übung.
+	\item \begin{description}
+		\item["$\Rightarrow$":] leicht.
+		\item["$\Leftarrow$":] nicht so leicht. 
+	\end{description}
+\end{enumerate}
+% subsection 519 (end)
+% section 5 (end)
+\newpage
+
+\section{Gleichmäßig konvexe Räume, noch einmal $L^p$} % (fold)
+\label{sec:6}
+
+\subsection[Definition und Proposition: Gleichmäßig konvexer Raum]{Definition und Proposition} % (fold)
+\label{sub:61}
+Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+\begin{enumerate}[(i)]
+	\item Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y} \le 1$ gilt:
+	\[
+		\norm{x-y} \ge \varepsilon \enspace\Longrightarrow \enspace\norm{\frac{1}{2} (x+y) } \le 1 -\delta 
+	\]
+	\item \label{61:enum:2} Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y}= 1$ gilt:
+	\[
+		\norm{x-y} \ge \varepsilon \enspace\Longrightarrow \enspace\norm{\frac{1}{2} (x+y)} \le 1-\delta   
+	\]
+	\item Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\norm{x_n} = \norm{y_n}=1$ für alle $n \in \mathds{N}$ gilt: 
+	\[
+		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
+	\]
+	\item Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\limsup_n \norm{x_n} = \limsup_n \norm{y_n}=1$ gilt:
+	\[
+		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
+	\]
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii)$\Rightarrow$(iii):] trivial.
+	\item[(iii)$\Rightarrow$(iv):] einfach. Zeige zunächst: Aus $\limsup \norm{x_n}, \limsup \norm{y_n}\le 1$ und $\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1$
+	folgt $\lim_{ n \to \infty} \norm{x_n}=\lim_{ n \to \infty} \norm{y_n}=1$.
+	\item[(iv)$\Rightarrow$(i):] Angenommen (i) gilt nicht, d.h. $\exists \varepsilon>0$ und für jedes $\delta_n=\frac{1}{n+1}$ existieren $x_n,y_n \in X$ mit 
+	$\norm{x_n}, \norm{y_n}\le 1$, $\norm{x_n-y_n}\ge \varepsilon$ und $\norm{\frac{1}{2}(x_n+y_n)} > 1- \frac{1}{n+1}$. \light zu (iv). \bewende
+\end{description}
+% subsection 61 (end)
+
+\subsection[Beispiel für gleichmäßig konvexe Räume]{Beispiel} % (fold)
+\label{sub:62}
+$(\mathds{R}^n, \norm[p]{\cdot})$ ist gleichmäßig konvex für $1 < p < \infty$ aber nicht für $p=1, p=\infty$
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[scale=0.8]
+		\coordinate (x1) at (5:2);
+		\coordinate (x2) at (80:2);
+		\draw[lightgray] (-2.4,0) -- (2.4,0);
+		\draw[lightgray] (0,-2.4) -- (0,2.4);
+		\draw[very thick, Chartreuse3] (0,0) circle(2);
+		\draw[thick, dashed] (x1) -- (x2) node[midway, name=mid]{ };
+		\draw[fill=DodgerBlue2] (x1) circle(0.05) node[right]{$x$};
+		\draw[fill=DodgerBlue2] (x2) circle(0.05) node[above]{$y$};
+		\draw[fill=DodgerBlue2] (mid) circle(0.05) node[below left]{$\frac{1}{2}(x+y)$};
+	\end{tikzpicture}
+	\qquad 
+	\begin{tikzpicture}[scale=0.8]
+		\coordinate (x1) at (1.8,0.2);
+		\coordinate (x2) at (0.4,1.6);
+		\draw[lightgray] (-2.4,0) -- (2.4,0);
+		\draw[lightgray] (0,-2.4) -- (0,2.4);
+		\draw[very thick,DarkGoldenrod2] (2,0) -- (0,2) -- (-2,0) -- (0,-2) -- cycle;
+		\draw[thick, dashed] (x1) -- (x2) node[midway, name=mid]{ };
+		\draw[fill=DodgerBlue2] (x1) circle(0.05) node[above right]{$x$};
+		\draw[fill=DodgerBlue2] (x2) circle(0.05) node[above right]{$y$};
+		\draw[fill=DodgerBlue2] (mid) circle(0.05) node[above right]{$\frac{1}{2}(x+y)$};
+	\end{tikzpicture}
+	\qquad 
+	\begin{tikzpicture}[scale=0.8]
+		\coordinate (x1) at (2,-1.1);
+		\coordinate (x2) at (2,1.8);
+		\draw[lightgray] (-2.4,0) -- (2.4,0);
+		\draw[lightgray] (0,-2.4) -- (0,2.4);
+		\draw[very thick,Firebrick3] (-2,-2) rectangle (2,2) ;
+		\draw[thick, dashed] (x1) -- (x2) node[midway, name=mid]{ };
+		\draw[fill=DodgerBlue2] (x1) circle(0.05) node[right]{$x$};
+		\draw[fill=DodgerBlue2] (x2) circle(0.05) node[right]{$y$};
+		\draw[fill=DodgerBlue2] (mid) circle(0.05) node[right]{$\frac{1}{2}(x+y)$};
+	\end{tikzpicture}
+	\caption[Einheitskugel für $p=2$, ${\color{DarkGoldenrod2}p=1}$ und ${\color{Firebrick3}p=\infty}$]{Einheitskugel für $p=2$, ${\color{DarkGoldenrod2}p=1}$ und 
+	${\color{Firebrick3}p=\infty}$. Nur für $p \not\in \set{1,\infty}$ ist (\ref{61:enum:2}) aus 
+	\ref{sub:61} erfüllt. Anschaulich gesprochen bedeutet dies, dass nur in gleichmäßig konvexen Räumen Bälle auch tatsächlich \enquote{rund} sind.}}
+\end{figure}
+% subsection 62 (end)
+
+\subsection[Definition und Proposition: Strikt konvexer Raum]{Definition und Proposition} % (fold)
+\label{sub:63}
+Ein gleichmäßig konvexer normierter $\mathds{R}$-Vektorraum ist \Index{strikt konvex}, d.h. für alle $0\not= x,y \in X$ mit $\norm{x+y}=\norm{x} + \norm{y}$ existiert 
+$\lambda >0$ mit $x=\lambda \cdot y$. 
+\minisec{Beweis}
+Seien $x,y$ wie angegeben; \oE $\norm{x}=1$. Setze $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$, $\beta := \norm{x+y-a}$
+\begin{figure}{H}
+	\centering{
+	\begin{tikzpicture}[scale=3, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray}]
+		\coordinate (0) at (0,0);
+		\coordinate (a) at (2,0.5);
+		\coordinate (x) at (2,1);
+		\coordinate (x') at (2,0);
+		\coordinate (x+y) at (2.8,0);
+		\draw[thick] (0,0)  -- (x+y);
+		\draw[my brace] (0) -- (x') node[midway, yshift=-0.6cm]{$\norm{x'}=1$};
+		\draw[my brace] (x') --(x+y) node[midway, yshift=-0.6cm]{$\norm{y}$};
+		
+		\draw[thick] (0) -- (x);
+		\draw[my brace] (x) -- (0) node[midway, above left, yshift=0.16cm]{$\norm{x}=1$};
+		
+		\draw[thick] (x) -- (x');
+		
+		\draw[thick] (x+y) -- (x);
+		\draw[my brace] (x+y) -- (x) node[midway, above right, xshift=0.1cm]{$\norm{y}$};
+		
+		\draw[thick,dashed] (0) -- (a) -- (x+y);
+		\draw[my brace] (0) -- (a) node[midway, below,yshift=-0.2cm,xshift=0.17cm]{$\alpha$};
+		\draw[my brace] (a) -- (x+y) node[midway, below,yshift=-0.2cm,xshift=-0.22cm]{$\beta$};
+		
+		\foreach \t/\pos in {0/left,x/above,x'/below,x+y/right,a/above right}{
+			\draw[fill=DodgerBlue2,thick] (\t) circle (0.02) node[\pos]{$\t$};
+		}
+	\end{tikzpicture}
+	\caption[Zeichnung zum Beweis von \ref{sub:63}]{Die Tatsache, dass $\norm{x}$ und $\norm{x'}$ in dieser Zeichnung nicht gleich sind, weißt schon darauf hin, dass diese 
+	Zeichnung in Wahrheit \enquote{degeneriert}.}}
+\end{figure}
+Es gilt 
+\[
+	\norm{x+y-x'} = \enbrace*{1- \frac{1}{\norm{x+y}}} \cdot \norm{x+y} = \norm{x+y}-1 = 1 + \norm{y} -1 = \norm{y}      
+\]
+also $\beta = \norm{x+y-a} \le \doppelstrich[\big]{\frac{x+y-x}{2}} + \doppelstrich[\big]{\frac{x+y-x'}{2}}\le \frac{\norm{y}}{2} + \frac{\norm{y}}{2} = \norm{y}$. Weiter gilt
+$\alpha = \norm{a} \le \frac{\doppelstrich{x}}{2} + \frac{\doppelstrich{x'}}{2} =1$ und
+\begin{align*}
+	1 + \norm{y} = \norm{x+y} \le \norm{a} + \norm{x+y-a} = \alpha+ \beta\le 1 + \norm{y} 
+\end{align*}
+also $1 \le \alpha \le 1$. Wegen $\norm{x}=1$, $\norm{x'}=1$ und $\norm{\frac{1}{2} (x+x')}= \norm{a}=\alpha=1 > 1 -\delta$ für jedes $\delta >0$ erhalten wir aus 
+gleichmäßiger Konvexität $\norm{x-x'} \le \varepsilon$ für jedes $\varepsilon>0 \Rightarrow x=x'$ und $y=\norm{y} \cdot x$. \bewende
+% subsection 63 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:64}
+Sei $X$ ein normierter $\mathds{R}$-Vektorraum, $a \in X$, $W \subset X$ konvex und abgeschlossen. 
+\begin{enumerate}[(i)]
+	\item Ist $W$ strikt konvex, so existiert höchstens ein $x \in W$ mit $\norm{a -x}= \inf_{y \in W} \norm{a-y}$.
+	\item Ist $X$ vollständig und gleichmäßig konvex, so existiert genau ein $x \in W$ mit $\norm{a-x}= \inf_{y \in W} \norm{a-y}$
+\end{enumerate}
+\minisec{Beweis}
+Wir dürfen ohne Einschränkungen $a=0$ annehmen. Für $a \in W$ ist nichts zu beweisen; für $a \not\in W$ gilt $\inf_{y \in W} \norm{a-y} >0$ (denn $W$ ist abgeschlossen).
+Ohne Einschränkungen dürfen wir außerdem $\inf_{y \in W} \norm{a-y}=1$ annehmen. 
+\begin{enumerate}[(i)]
+	\item Sei $x,x' \in W$ mit $\norm{a-y}= \norm{a-x'}= \inf_{y \in W} \norm{a-y}$, also $\norm{x}=\norm{x'}=1$. Dann gilt 
+	\[
+		1= \inf_{y \in W} \norm{a-y} \le \doppelstrich[\bigg]{\underbrace{\frac{1}{2} (x+x')}_{\in W}} \le \frac{1}{2} \norm{x} + \frac{1}{2} \norm{x'} =1   
+	\]
+	Es folgt aus strikter Konvexität, dass $x=\lambda \cdot x'$ für ein $\lambda \ge 0$. Wegen $\norm{x}=\norm{x'}=1$ folgt $\lambda=1$ und $x=x'$. 
+	\item Wähle eine Folge $(x_n)_{\mathds{N}} \subset W$ mit \marginnote{\oE wieder $a=0$}
+	\[
+		\lim_{ n \to \infty} \norm{x_n} = \lim_{ n \to \infty} \norm{a-x_n} = \inf_{y \in W} \norm{a-y} = 1 
+	\]
+	Behauptung: Diese Folge ist Cauchy. $W$ ist konvex, also folgt $\frac{1}{2} (x_n+x_m) \in W$. Es gilt dann 
+	\begin{equation*}
+		1 \le \norm{\frac{1}{2}(x_n+x_m)} \le \frac{1}{2} \enbrace[\big]{\norm{x_n}+ \norm{x_m}} \enspace\text{ für } n,m \in \mathds{N} \label{eq:64} \tag{\#}
+	\end{equation*}
+	Angenommen $(x_n)_\mathds{N}$ sei nicht Cauchy. Dann existiert $\varepsilon>0$, so dass gilt: Für jedes $N \in \mathds{N}$ existieren $n,m >N$ mit 
+	$\norm{x_n +x_m} >\varepsilon$. Wir können daher Teilfolgen $(x_{n_k})_{k \in \mathds{N}}$, $(x_{m_k})_{k \in \mathds{N}}$ bilden mit 
+	$\liminf_k \norm{x_{n_k} - x_{m_k}} \ge \varepsilon$. Es gilt aber $\lim_{ k \to \infty} \norm{x_{n_k}} = \lim_{ k \to \infty} \norm{x_{n_k}}=1$ und wegen \eqref{eq:64}
+	gilt $\lim_{ k \to \infty} \norm{\frac{1}{2} (x_{n_k} + x_{m_k})} = 1$ \light zu \ref{sub:61} (iv). \bewende
+\end{enumerate}
+% subsection 64 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:65}
+Der Beweis von (ii) zeigt auch: Sei $X$ gleichmäßig konvex und $(x_n)_\mathds{N} \subset X$ eine Folge mit $\limsup_n \norm{x_n}\le 1$ und 
+$\lim_{ n,m \to \infty} \norm{\frac{1}{2} (x_n+x_m)}=1$. Dann gilt $\lim_{ n \to \infty} \norm{x_n}=1$ und $(x_n)_{\mathds{N}}$ ist Cauchy.
+% subsection 65 (end)
+
+\subsection{Proposition: Jensensche Ungleichung} % (fold)
+\label{sub:66}
+Für $\alpha,\beta \ge 0$, $p \ge r >0$ gilt $(\alpha^p + \beta^p)^{\frac{1}{p}} \le \enbrace*{\alpha^r + \beta^r}^{\frac{1}{r}}$.
+\minisec{Beweis}
+Setze $A := \enbrace*{\alpha^r +\beta^r}^{\frac{1}{r}}$ ($\not=0$ oBdA). Dann gilt 
+\[
+	1=\frac{1}{A^r} \cdot \enbrace*{\alpha^r+\beta^r} = \enbrace[\bigg]{\underbrace{\frac{\alpha}{A}}_{\le 1}}^r + \enbrace[\bigg]{\underbrace{\frac{\beta}{A}}_{\le 1}}^r
+	\ge \enbrace[\bigg]{\frac{\alpha}{A} }^p + \enbrace[\bigg]{\frac{\beta}{A} }^p    
+\]
+$\Rightarrow \enbrace*{\frac{1}{A^p} \cdot \enbrace*{\alpha^p + \beta^p}}^{\frac{1}{p} } \le 1 = \enbrace*{\frac{1}{A^r} \enbrace*{\alpha^r+ \beta^r}}^{\frac{1}{r} }$. 
+Kürzen von $\frac{1}{A}$ liefert die Behauptung. \bewende
+% subsection 66 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:67}
+Sei $(X,\Sigma,\mu)$ ein Maßraum, $1 < p,q < \infty$ mit $\frac{1}{p} +\frac{1}{q}=1$ und $f,g \in L^p(\mu)$.
+\begin{enumerate}[(i)]
+	\item Falls $p\ge 2$, so gilt $\norm[p]{f+g}^p + \norm[p]{f-g}^p \le 2^{p-1} \enbrace*{\norm[p]{f}^p + \norm[p]{g}^p}$.
+	\item Falls $p < 2$, so gilt $\norm[p]{f+g}^q + \norm[p]{f-g}^q \le 2 \cdot \enbrace*{\norm[p]{f}^p + \norm[p]{g}^p}^{q-1}$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Nach \ref{sub:66} gilt für $\gamma,\delta  \in \mathds{R}$
+	\begin{equation*}
+		\enbrace[\big]{\abs*{\gamma+\delta }^p + \abs*{\gamma-\delta }^p}^{\frac{1}{p}} \le \enbrace*{\abs*{\gamma+\delta }^2 + \abs*{\gamma-\delta}^2}^{\frac{1}{2}}
+		= 2^{\frac{1}{2}} \cdot \enbrace*{\gamma^2 + \delta^2}^{\frac{1}{2}} \label{eq:67} \tag{*}
+	\end{equation*}
+	$[p>2]$ Sei $r := \frac{p}{p-2}$, sodass $\frac{1}{\frac{p}{2}} + \frac{1}{r}=1$. Die Höldersche Ungleichung (\ref{sub:45}) für $\mathds{R}^2$ liefert für 
+	$(\gamma^2,\delta^2)$ und $(1,1)$
+	\[
+		\gamma^2 \cdot 1 + \delta^2 \cdot 1 \le \enbrace*{\enbrace{\gamma^2}^{\frac{p}{2} } + \enbrace*{\delta^2}^{\frac{p}{2}} }^{\frac{2}{p}} 
+		\cdot (1^r+ 1^r)^{\frac{1}{r}} = \enbrace[\big]{\abs*{\gamma}^p + \abs*{\delta}^p}^{\frac{2}{p}} \cdot 2^{\frac{p-2}{p}} 
+	\]
+	Es folgt 
+	\begin{align*}
+		\sqrt{2} \cdot \enbrace*{\gamma^2+ \delta^2}^{\frac{1}{2}} \le 2^{\frac{p}{2p}} \cdot \enbrace[\big]{\abs*{\gamma}^p + \abs*{\delta }^p}^{\frac{1}{p}} \cdot 2^{\frac{p-2}{2p} } = 2^{\frac{p-1}{p}} \cdot \enbrace[\big]{\abs*{\gamma}^p +\abs*{\delta}^p}^{\frac{1}{p} } 
+	\end{align*}
+	Mit \eqref{eq:67} folgt $\abs*{\gamma+\delta}^p + \abs*{\gamma-\delta}^p \le 2^{p-1} \cdot  \enbrace[\big]{\abs*{\gamma}^p + \abs*{\delta}^p}$. Integration liefert (i).
+	
+	Für $p=2$ folgt die Aussage mit Pythagoras.
+	\item Übung. \bewende
+\end{enumerate}
+% subsection 67 (end)
+
+\subsection[Satz: Für $1 <p <\infty$ ist $L^p(\mu)$ gleichmäßig konvex]{Satz} % (fold)
+\label{sub:68}
+Sei $(X,\Sigma,\mu)$ ein Maßraum, $1 <p < \infty$. Dann ist $L^p(\mu)$ gleichmäßig konvex.
+\minisec{Beweis}
+Seien $(f_n)_\mathds{N}, (g_n)_\mathds{N} \subset L^P(\mu)$ Folgen mit $\norm[p]{f_n}= \norm[p]{g_n}= 1 $ für $n \in \mathds{N}$ und 
+$\lim_{ n \to \infty} \norm[p]{\frac{1}{2} (f_n+g_n)}=1$. Zu zeigen: $\norm[p]{f_n-g_n} \xrightarrow{n \to \infty} 0$, dann gilt \ref{sub:61}(iii). Nach \ref{sub:67}
+gilt 
+\[
+	\underbrace{\norm[p]{f_n+g_n}^p}_{\xrightarrow{n \to \infty} 2^p} + \norm[p]{f_n-g_n}^p \le 2^{p} 
+\]
+Falls $p\ge 2$ bzw. für $p < 2$
+\[
+	\underbrace{\norm[p]{f_n+g_n}^q }_{\xrightarrow{n \to \infty} 2^q}+ \norm[p]{f_n-g_n}^q \le 2^q
+\]
+Also folgt $\norm[p]{f_n -g_n}^p \xrightarrow{n \to \infty} 0$ bzw. $\norm[p]{f_n-g_n}^q \xrightarrow{n \to \infty} 0$. Also gilt 
+$\norm[p]{f_n -g_n} \xrightarrow{n \to \infty} 0$. \bewende
+% subsection 68 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:69}
+Sei $X$ ein gleichmäßig konvexer Banachraum. Dann ist $X$ reflexiv.
+\minisec{Beweis}
+Sei $f \in X^{**}$, $\norm[X^{**}]{f}=1$. Zu zeigen: $f \in \iota(X)$. Wir wählen $\varphi_n \in X^*$ mit $\norm[X^*]{\varphi_n}=1$ und $f(\varphi_n) > 1- \frac{1}{n+1}$
+für $n \in \mathds{N}$. Nach (dem Beweis von) \ref{sub:516} gilt für $n \in \mathds{N}$
+\[
+	\inf_{x \in \overline{B}_X(0,1) } \sum_{i=0}^{n} \abs*{f(\varphi_i) - \varphi_i(x)}^2 =0
+\]
+$\Rightarrow \exists x_n \in X$ für $n \in \mathds{N}$ mit $\norm[X]{x_n}=1$, $\abs*{f(\varphi_i)- \varphi_i(x_n)} < \frac{1}{2(n+1)}$ und
+$1- \frac{3}{2(n+1)}< \varphi_i(x_n) \le 1$ für $0 \le i \le n$.
+% subsection 69 (end)
+% section 6 (end)
+
+
+
+\cleardoubleoddemptypage
+\appendix
+\section{Anhang} % (fold)
+\label{sec:anhang}
+
+\subsection{Vierecksungleichung} % (fold)
+\label{sub:vier_ungl}
+Sei $(X,d)$ ein metrischer Raum und $x,y,u,v \in X$. Dann gilt
+\[
+	\abs[\big]{d(x,y) - d(u,v)} \le d(x,u) + d(y,v) 
+\]
+\minisec{Beweis}
+Einerseits gilt nach der Dreiecksungleichung
+\[
+	d(x,y) \le d(x,u) + d(u,v) + d(v,y) \quad \Longrightarrow \quad d(x,y) - d(u,v) \le d(x,u) + d(y,v)
+\]
+Andererseits aber auch
+\[
+	d(u,v) \le d(u,x) + d(x,y) + d(y,v) \quad \Longrightarrow \quad d(u,v) - d(x,y) \le d(x,u) + d(y,v)
+\]
+Insgesamt folgt also die Behauptung. \bewende
+% subsection vier_ungl (end)
+
+% section anhang (end)
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\todototoc
+\listoftodos[Todo's und andere Baustellen]
+\end{document}
+>>>>>>> origin/master
