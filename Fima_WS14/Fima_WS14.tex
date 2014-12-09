@@ -2485,8 +2485,8 @@ Weiter gilt:
 
 Wichtig ist, dass der Handel in den risky assets durch Aufbau einer geeigneten Position im Numeraire Asset zu einer selbstfinanzierenden Handelsstrategie gemacht werden kann.
 
-\subsection{Satz}
-\label{sub:satz}
+\subsection{Satz 1}
+\label{sub:satz_1}
 Sei $S_0(0)=1$. Zu jedem $\R^d$-wertigem vorhersehbarem Prozess $H$ und jedem Anfangskapital $V_0$ ex. genau ein vorhersehbarer Prozess $\varphi$, so dass $(\varphi,H)$ selbstfinanzierend ist und 
 \[
 V^*(n)= V_0+\sum_{k=1}^{n}\sprod{H(k)}{\Delta S^*(k)}~n=1,\dots,N \tag*{$(\ast)$}
@@ -2769,7 +2769,7 @@ Zur Bestimmung der zu trennenden konvexen Mengen wird die Arbitragefreiheit umfo
 \label{sub:umf_arbitragefreiheit}
 Finanzmarktmodell über $N$ Perioden mit $S=(S_1,\dots,S_d)$ als Preisprozess der risky assets.
 Mit $L^0(\Omega,\F,\Pw)$ sei die Menge der meßbaren Abb. von $\Omega$ nach $\R$.
-$\G^*:=\{(H\cdot S^*)(N)~|~H\in\mc{H} \}$ bezeichnet die Menge der möglichen Gewinne, notiert in Anteile des Numeriare Assets, die beim Handel entsprechend einer selbstfinaziernden Handelsstrategie erzielt werden können.
+$\G^*:=\{(H\cdot S^*)(N)~|~H\in\mc{H} \}$ bezeichnet die Menge der möglichen Gewinne, notiert in Anteile des Numeriare Assets, die beim Handel entsprechend einer selbstfinanziernden Handelsstrategie erzielt werden können.
 Dabei ist $\mc{H}$ die Menge der vorhersehbaren $\R^d$-wertigen Prozesse.\\
 
 Der Markt ist arbitragefrei, wenn
@@ -2802,10 +2802,155 @@ Weiter
 \]
 Mittels $\G^*$ und $\mc{K}^*$ können äquivalente Martingalmaße charakterisiert werden.
 
+%sub end
 
+\subsection{Satz 2}
+\label{sub:satz_2}
+Sei $\abs{\Omega}<\infty$.
+Für ein zu $\Pw$ äquivalentes W'Maß $\Pw^*$ sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $\Pw^*$ ist ein Martingalmaß, d.h. $S_j^*$ ist ein $\Pw^*$-Martingal für alle $j=1,\dots,d$.
+	\item $\E^*C^*=0$ für alle $C^*\in \G^*$.
+	\item $\E^*K^*\le 0$ für alle $K^*\in \mc{K}^*$.
+\end{enumerate}
 
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):}
+Für $H\in \mc{H}$ ist $V^*(n)=(H\cdot S^*)(n),~n=1,\dots,N,~V^*(0)=0$ ein $\Pw^*$-Martingal, denn
+\begin{equation*}
+\begin{aligned}
+	\E^*(\Delta V^*(k)~|~\F_{k-1}) &= \E^*(V^*(k)-V^*(k-1)~|~\F_{k-1})\\
+	&= \E^*(\sprod{H(k)}{\Delta S^*(k)}~|~\F_{k-1}) = \E^*(\sum_{j=1}^{d}H_j(k)\Delta S_j^*(k)~|~\F_{k-1})\\
+	&= \sum_{j=1}^{d}\E^*(H_j(k)\Delta S_j^*(k)~|~\F_{k-1}) = \sum_{j=1}^{d}H_j(k)\underbracket{\E^*(\Delta S_j^*(k)~|~\F_{k-1})}_{=0} = 0~ k=1,\dots,N
+\end{aligned}\marginnote{äquivalente Bedingung zur Martingaleigenschaft}
+\end{equation*}
+Für $C^*=(H\cdot S^*)(N)$ folgt also
+\[
+\E C^*= \E(H\cdot S^*(N))=\E^* V^*(N)=\E^* V^*(0)=0
+\]
 
+\uline{(ii)$\Rightarrow$(i):}
+Zeige die Martingaleigenschaft von $S_j^*$ bzgl. $\Pw^*$ für alle $j=1,\dots,d$.\\
+$\zz: \E^*(S_j^*(k)~|~\F_{k-1})=S_j^*(k-1)$\\
+$\Leftrightarrow \E^*(\delta S_j^*(k)~|~\F_{k-1})=0\Leftrightarrow \E^*\mathbb{1}_A \ \Delta S_j^*(k)=0$ für alle $A\in \F_{k-1}$.\\
 
+$\mathbb{1}_A \Delta S_j^*(k)$ ist der Gewinn der Handelsstrategie, die in der $k$-ten Periode long in $S_j$ geht, wenn $A$ eintritt, d.h.
+\[
+H_j(k)=\mathbb{1}_A,~H_j(n)=0 \text{ sonst}
+\]
+\[
+(H\cdot S^*)(N)=H_j(k)\Delta S_j^*(k)=\mathbb{1}_A\Delta s_j^*(k),~ H_i\equiv 0\text{ für } i\neq j
+\]
+wegen (ii) folgt $\E^*\mathbb{1}_A \Delta S_j(k)=0$ für alle $A\in \F_{k-1}$.\\
+Also ist $S_j^*$ ein $\Pw^*$-Martingal.\\
+
+\uline{(ii)$\Rightarrow$(iii):}
+Klar,wegen Monotonie des Erwartungswertes.\\
+
+\uline{(iii)$\Rightarrow$(ii):}
+Ist $C^*\in \G^*$ dann folgt $C^*\in \mc{K}^*\Rightarrow \E^*C^*\le 0$.
+$\G^*$ ist ein Vektorraum:
+\[
+\Rightarrow -C^*\in\G^*\Rightarrow-C^*\in\mc{K}^*\Rightarrow\E^*-C^*\le 0\Rightarrow\E^*C^*\ge 0
+\]
+Nach dem Separationssatz existiert eine lineare Abbildung $\varphi:L^*(\Omega,\F,\Pw)\to \R$ mit
+\[
+\varphi(C^*)<\inf\limits_{Q\in \Pw}\varphi(Q)
+\]
+Da der Dualraum von $L^*(\Omega,\F,\Pw)$ durch $L^1(\Omega,\F,\Pw)$ gegeben ist, ist $\varphi\in L^1(\Omega,\F,\Pw)$, d.h.
+\[
+\varphi(X)=\sum_{\omega\in \Omega} X(\omega)\varphi(\omega)
+\]
+Da $\G^*$ ein Teilraum ist und $\varphi(C^*)\le \alpha,~\forall C^*\in \G^*$ folgt $\varphi(C^*)=0,~\forall C^*\in \G^*$.\\
+Für $e_\omega=\mathbb{1}_{\{\omega\}}$ gilt $e_\omega\in \Pw$ und
+\[
+0<\varphi(e_\omega)=\varphi(\omega)
+\]
+Da dies für alle $\omega\in\Omega$ gilt kann man ein $\Pw^*$ durch
+\[
+\Pw^*(\omega)=\frac{\varphi(\omega)}{\sum_{\omega'\in\Omega}\varphi(\omega')}~\forall \omega\in\Omega
+\]
+definieren.
+\[
+\Pw^*(\omega)>0~\forall \omega\in\Omega \Rightarrow \Pw^*\sim \Pw
+\]
+Wegen
+\begin{equation*}
+\begin{aligned}
+	\E^*C^* &= \sum_{\omega\in\Omega}C^*(\omega)\Pw^*(\omega) = \sum_{\omega\in \Omega}C^*(\omega)\frac{\varphi(\omega)}{\sum_{\omega'\in\Omega}\varphi(\omega')}\\
+	&= \frac{1}{\sum_{\omega'\in\Omega}\varphi(\omega')}\underbracket{\varphi(C^*)}_{=0}=0
+\end{aligned}
+\end{equation*}
+$\stackrel{\hyperref[sub:umf_arbitragefreiheit]{4.12}}{\Rightarrow} \Pw^*$ ist ein Martingalmaß.
+\hfill $\square$
+%sub end
+
+Zusammen mit dem Separationssatz kann man das No-Arbitrage Theorem beweisen.
+
+\subsection{Das No-Arbitrage Theorem}
+\label{sub:no-arbitrage_theorem}
+1. Fundamentalsatz der Preistheorie:\\
+Gegeben sei ein Finanzmarkt $S$ über einem endlichem $\Omega$ mit Informationsverlauf $(\F_n)_{n=0,\dots,N}$ bzgl. einem W'Raum $(\Omega,\F,\Pw)$.\\
+Dann sind äquivalent
+\begin{enumerate}[(i)]
+	\item Der Markt ist arbitragefrei
+	\[
+	\G^*\cap L_+^0=\{0\}.
+	\]
+	\item Es existiert ein äquivalentes Martingalmaß $\Pw^*$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\uline{(ii)$\Rightarrow$(i):}
+ist einfach: $C^*\in\G^*\cap L_+^0$.
+Dann gilt:
+\[
+C^*\ge 0\text{ und } \E^*C^*=0\Rightarrow C^*=0~ \Pfs[*]\Rightarrow C^*=0~ \Pfs \Rightarrow C^*=\{0\}
+\]
+
+\uline{(i)$\Rightarrow$(ii):}
+O.E.d.A. $\Pw(\{\omega\})>0~\forall \omega\in \Omega$.\\
+$\G^*$ ist als Teilraum von $L^0(\Omega,\F,\Pw)$ konvex und abgeschlossen.
+\[
+\Pw=\{Q:\Omega\to \R~|~Q(\omega)\ge 0~\forall \omega\in \Omega,~\sum_{\omega\in \Omega}Q(\omega)=1 \}
+\]
+ist die konvexe und kompakte Menge der W'Maße auf $(\Omega,\F)$.\\
+Wegen (i) ist $\G^*\cap\Pw=\emptyset$.
+\hfill $\square$
+
+%sub end
+
+\subsection{Bestimmung von äquivalenten Martingalmaßen}
+\label{sub:bestimmung_mmase}
+\begin{enumerate}[(a)]
+	\item CRR-Modell:
+	\begin{itemize}
+		\item $N$ Perioden.
+		\[
+		Z_n=\sum_{i=1}^{N}X_i,~X_1,\dots,X_N,\text{ iid, }\Pw(X_i=1)=p=1-\Pw(X_i=0)
+		\]
+		\item $S(n)=S_0u^{Z_n}d^{1-Z_n}$
+		\item $\F_n=\sigma(X_1,\dots,X_n)=\sigma(Z_1,\dots,Z_n)$
+		\item $\beta(n)=\prod_{i=1}^{d}1+p=(1+p)^n,~p>-1$,
+		\[
+		S^*(n)=\frac{S(n)}{\beta(n)}=S_0u^{Z_n}d^{n-Z_n}\frac{1}{(1+p)^n}=S_0\prod_{i=1}^{n}\frac{u^{X_i}d^{1-X_i}}{1+p}
+		\]
+	\end{itemize}
+	ist ein geometrischer Random-Walk.
+	$S^*$ ist ein Martingal genau dann, wenn
+	\begin{equation*}
+	\begin{aligned}
+		&\E^*\frac{u^{X_i}d^{1-X_i}}{1+p}=1 \Leftrightarrow u\cdot p^*+d(1-p^*)=1+p\\
+		&\Leftrightarrow p^*=\frac{1+p-d}{u-d}\in (0,1) \Leftrightarrow d<1+p<u
+	\end{aligned}
+	\end{equation*}
+	Durch $p\in(0,1)$ werden alle äquivalenten CRR-Modelle parametrisiert und genau für den Parameter
+	\[
+	\Pw^*=\frac{(1+p)-d}{u-d}
+	\]
+	ist das Modell risikoneutral.
+	Dies bedeutet, dass $S^*$ ein Martingal ist, bzgl. dem Parameter $\Pw^*$.
+\end{enumerate}
 
 
 
