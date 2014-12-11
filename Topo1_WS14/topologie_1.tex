@@ -2197,7 +2197,7 @@ durch
 \label{sub:96}
 In reduzierter singulärer Homologie wird \eqref{eq:94} zu
 \begin{equation*}
-	\tilde{H}_k(S^n) \cong \begin{cases}
+	\tilde{H}_k(S^n;R) \cong \begin{cases}
 		R, &\text{ falls }k=n\\
 		0 , &\text{ sonst}
 	\end{cases} \label{eq:96}\tag{\#\#}
@@ -2513,7 +2513,7 @@ Ein kommutatives Diagramm von topologischen Räumen der Form \todo{RevChap11}
 		Y \rar["\overline{f}"] & Z
 	\end{tikzcd} \label{eq:111} \tag{\#}
 \end{equation*}
-\begin{minipage}{0.65\textwidth}
+\noindent\begin{minipage}{0.65\textwidth}
 	heißt ein \Index{Pushout}, falls es folgende universelle Eigenschaft hat: \smallskip\\
 	\centering{$\forall \hat{f} \colon X \to \hat{Z}$, $\hat{g}: Y \to \hat{Z}$ mit 
 	$\hat{f} \circ f = \hat{g} \circ g$ gilt: 
@@ -2525,7 +2525,7 @@ Ein kommutatives Diagramm von topologischen Räumen der Form \todo{RevChap11}
 	\(
 		\begin{tikzcd}
 			A \rar["f"] \dar["g"] & X \dar["\overline{g}"] \arrow[ddr, "\hat{f}", bend left, Firebrick3] \\
-			Y \rar["\overline{f}"] \arrow[drr, "\hat{g}",bend right, Firebrick3] & Z  \drar["\varphi", DodgerBlue3] \\
+			Y \rar["\overline{f}"] \arrow[drr, "\hat{g}"',bend right, Firebrick3] & Z  \drar["\varphi", DodgerBlue3] \\
 			& & \hat{Z}
 		\end{tikzcd}
 	\)
@@ -2546,7 +2546,7 @@ Betrachte dazu den Raum $X \cup_A Y := \nicefrac{X \coprod Y}{f(a) \sim g(a) \fo
 $\overline{g} : X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow X \coprod Y$ und $Y \hookrightarrow X \coprod Y$ induzierten Abbildungen. So ist 
 \[
 	\begin{tikzcd}
-		A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+		A \rar["f"] \dar["g"'] & X \dar["\overline{g}"] \\
 		Y \rar["\overline{f}"] & X \cup_A Y
 	\end{tikzcd}
 \]
@@ -2677,7 +2677,99 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	\]
 \end{enumerate}
 % subsection 114 (end)
+
+\subsection[Lemma: Kompaktheit von Teilmengen eines \CW-Komplexes]{Lemma} % (fold)
+\label{sub:115}
+Sei $X$ ein \CW-Komplex und $K \subseteq X$. Dann ist $K$ genau dann kompakt, wenn $K$ abgeschlossen ist und $K$ nur endlich viele offene Zellen von $X$ schneidet.
+\minisec{Beweis}
+Zunächst: Ist $S \subseteq X$ ein Unterraum der jede offene Zelle höchstens in einem Punkt schneidet, so ist $S$ diskret. Für $S_0 \subseteq S$ ist 
+$S_0 \cap (X^{(n)} \setminus X^{(n-1)})$ abgeschlossen in $X^{(n)}$, da $S_0$ jede offene $n$-Zelle von $X$ höchstens in einem Punkt schneidet.  Daher ist 
+$S_0 \cap X^{(n)} \subseteq X^{(n)}$ abgeschlossen für alle $n$. Damit ist auch $S_0 \subseteq X$ abgeschlossen und $S$ diskret.
+
+Sei nun $K \subseteq X$ kompakt. Dann ist $K$ sicher abgeschlossen. Sei $S \subseteq K$ ein Teilraum der aus jeder offenen Zelle von $X$, die $K$ schneidet, genau einen 
+Punkt enthält. Wegen der Vorüberlegung ist $S$ diskret. Da $S \subseteq K$ abgeschlossen und $K$ kompakt ist, ist $S$ auch kompakt. Damit ist $S$ endlich und $K$
+schneidet nur endlich viele offene Zellen.
+
+Ist nun umgekehrt $K$ abgeschlossen und schneidet nur endlich viele offene Zellen, so ist $K$ enthalten in einer endlichen Vereinigung von abgeschlossen Zellen von $X$.
+Da diese abgeschlossen Zellen kompakt sind, ist auch diese Vereinigung kompakt, K ist also eine abgeschlossener Teilraum eines kompakten Teilraums und damit selbst kompakt.
+\bewende
+% subsection 115 (end)
+
+\subsection[Korollar: Ein \CW-Komplex ist genau dann kompakt, wenn er endlich ist.]{Korollar} % (fold)
+\label{sub:116}
+Ein \CW-Komplex ist genau dann kompakt, wenn er endlich ist.
+% subsection 116 (end)
 % section 11 (end)
+\newpage
+
+\section{Zelluläre Homologie} % (fold)
+\label{sec:12}
+
+\subsection{Definition} % (fold)
+\label{sub:121}
+Sei $X$ ein \CW-Komplex. Dann heißt 
+\[
+	C_n^{\cell}(X;R) := H_n \enbrace*{X^{(n)}, X^{(n-1)};R} 
+\]
+der \bet{$\mathbf{n}$-te zelluläre Kettenmodul}\index{n-ter zellulärer Kettenmodul@$n$-ter zelluläre Kettenmodul} von X mit Koeffizienten in $R$. Die $n$-te Randabbildung
+$\partial^{\cell}_n : C_n^{\cell}(X;R) \to C_{n-1}^{\cell}(X;R)$ wird durch die Komposition 
+\[
+	\begin{tikzcd}[column sep=huge, row sep=large]
+		H_n \enbrace*{X^{(n)}, X^{(n-1)};R} \rar["\partial_n^{\enbrace{X^{(n)}, X^{(n-1)}}}"] & H_{n-1} \enbrace*{X^{(n-1)};R} \dar["\enbrace*{j^{(n-1)}}_*"] \\
+		& H_{n-1} \enbrace*{X^{(n-1)}, X^{(n-2)};R} 
+	\end{tikzcd}
+\]
+definiert. Dabei ist $\partial_n^{\enbrace{X^{(n)}, X^{(n-1)}}}$ die Randabbildung aus der Paarfolge für $\enbrace*{X^{(n)},X^{(n-1)}}$ und $j^{(n-1)}$ die Inklusion
+$\enbrace*{X^{(n-1)},\emptyset} \hookrightarrow \enbrace*{X^{(n-1)}, X^{(n-2)}}$.
+% subsection 121 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:122}
+\[
+	\partial_{n-1}^{\cell} \circ \partial_n^{\cell} =0
+\]
+\minisec{Beweis}
+\[
+	\begin{tikzcd}
+		H_n \enbrace*{X^{(n)}, X^{(n-1)};R} \rar["\partial_n"] & H_{n-1}(X^{(n-1)};R) \dar[equal] \rar & \cdots\\
+		& H_{n-1}\enbrace*{X^{n-1};R} \rar["\enbrace*{j^{(n-1)}}_*"] & H_{n-1} \enbrace*{X^{(n-1)}, X^{(n-2)};R} \rar["\partial_{n-1}"] & H_{n-2} \enbrace*{X^{(n-2)};R} 
+		\rar & \cdots \\ 
+		& & & H_{n-2} \enbrace*{X^{(n-2)};R}  \rar["\enbrace*{j^{(n-2)}}_*"] & H_{n-2} \enbrace*{X^{(n-2)}, X^{(n-3)}} 
+	\end{tikzcd}
+\]
+Also $\partial^{\cell}_{n-1} \circ \partial^{\cell}_n =0$, da schon $\partial_{n-2} \circ j^{(n-1)}_* =0$. \bewende
+% subsection 122 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:123}
+$\enbrace*{C_*^{\cell}(X;R),\partial_*^{\cell}}$ heißt der \Index{zelluläre Kettenkomplex} von $X$ über $R$. Seine Homologie $H_*^{\cell}(X;R)$ heißt die \Index{zelluläre 
+Homologie} von $X$.
+% subsection 123 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:124}
+Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der \CW-Komplexe und zellulären Abbildungen.
+% subsection 124 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:125}
+Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktur auf $X$.
+\begin{enumerate}[a)]
+	\item 
+	\[
+		\enbrace*{\coprod_{i \in I^{(n)}} Q_i^{(n)}, \coprod_{i \in I^{(n)}} q_i^{(n)}} \colon \enbrace*{\coprod_i D^n, \coprod_i S^{n-1}}  \longrightarrow 
+		\enbrace*{X^{(n)}, X^{(n-1)}} 
+	\]
+	induziert einen Isomorphismus in $H_*$.
+	\item \[
+		H_k \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R} = \begin{cases}
+			R[I^{(n)}], &\text{ falls }k=n\\
+			0 &, \text{ sonst}
+		\end{cases}
+	\] 
+\end{enumerate}
+% subsection 125 (end)
+% section 12 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
