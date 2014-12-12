@@ -1970,7 +1970,7 @@ Sei $I\subseteq \Z$ eine Teilmenge. Dann sind äquivalent:
 
 \bet{Beweis:}\\
 (iv)$\Rightarrow$(iii)$\Rightarrow$(ii) nach Definition.
-Wir haben eben überlegt, dass $m\Z\trianglelefteq \Z$,also (i)$\Rightarrow$(iv).
+Wir haben eben überlegt, dass $m\Z\trianglelefteq \Z$, also (i)$\Rightarrow$(iv).
 Fehlt noch (ii)$\Rightarrow$(i): Sei $I\subseteq \Z$ Untergruppe bzgl. "+".\\
 
 \uline{Fall 1:} $I=\{0\}=0\Z$ fertig.\\
@@ -2293,7 +2293,7 @@ Zwei Zahlen $k,l\in \Z$ heißen \Index{teilerfremd} oder \Index{koprim}, wenn $\
 Sei $k,l\in\Z$. 
 Dann sind äquivalent:
 \begin{enumerate}[(i)]
-	\item $k$ udn $l$ sin koprim.
+	\item $k$ und $l$ sind koprim.
 	\item $1\in k\Z+l\Z$ (äquivalent: $\Z=k\Z+l\Z$, vgl. \hyperref[sub:homomor_ideale]{3.4} und \hyperref[sub:rechnen_ideale]{3.6}).
 	\item $\overline{k}$ ist Einheit in $\nicefrac{\Z}{l\Z}$.
 \end{enumerate}
@@ -2390,7 +2390,7 @@ Der Kern von $\pi$ ist
 \]
 \hfill $\square$
 
-\subsubsection*{Korollar (Chinesischer Restsatz, Sun Zi)}
+\subsubsection*{Korollar A (Chinesischer Restsatz, Sun Zi)}
 Seien $l_1,\dots,l_n\in\Z$ $n$ verschiedene paarweise koprime ganze Zahlen.
 Dann gibt es zu jedem $n$-Tupel $(x_1,\dots,x_n)\in \Z^n$ eine ganze Zahl $y\in \Z$ mit
 \[
@@ -2398,9 +2398,201 @@ y+l_i\Z=x_i+l_i\Z,~i=1,\dots,n
 \]
 \hfill $\square$
 
+\subsubsection*{Korollar B}
+Seien $l_1,\dots,l_n\in \Z$ $n$ paarweise koprime ganze Zahlen.
+Dann existiert ein Ringisomorphismus
+\[
+\nicefrac{\Z}{l_1\cdots l_n\Z}\stackrel{\cong}{\to} \nicefrac{\Z}{l_1\Z}\times \dots \times \nicefrac{\Z}{l_n\Z}
+\]
+
+\bet{Beweis:}\\
+Betrachte $\pi:\Z\to \nicefrac{\Z}{l_1\Z}\times \dots \times \nicefrac{\Z}{l_n\Z}$ Epimorphismus wie im Theorem.
+Es gilt
+\[
+\ker(\pi)=l_1\Z \cap\dots\cap l_n\Z.
+\]
+Für $n=2$ erhalten wir $l_1\Z\cap l_n\Z=l_1l_2\Z$ (denn $l_1l_2$ ist das kleinste gemeinsame Vielfache von $l_1,l_2$ vgl. ÜA 8.2) und damit sofort
+\[
+l_1\Z\dt{\cap}l_n\Z=l_1\cdots l_n\Z
+\]
+per Induktion.
+Jetzt Homomorphiesatz \hyperref[sub:homosatz_isosatz]{3.5}.
+\hfill $\square$
+%sub end
+
+\subsection{Polynomringe}
+\label{sub:polynomringe}
+Sei $R$ ein kommutativer Ring.
+Sei $R^{(\N)}=\{(r_i)_{i\in \N}~|~r_i=0\text{für fast alle }i\in \N \}$ ('für fast alle' heißt: nur endlich viele Ausnahmen).
+Dann ist $R^{(\N)}$ eine abelsche Gruppe bzgl. komponentenweiser Addition
+\[
+(r_i)_{i\in\N}+(s_i)_{i\in\N}=(r_i+s_i)_{i\in \N}.
+\]
+Wir definieren eine Multiplikation auf $\R^{(\N)}$ wie folgt:
+\[
+(r_i)_{i\in \N}\cdot (s_i)_{i\in \N}=(t_i)_{i\in \N},~t_j=\sum_{i=0}^jr_is_{j-i}
+\]
+Eine einfache Rechnung zeigt:
+$\R^{(\N)}$ wird mit diesen beiden Verknüpfungen ein kommutativer Ring.\\
+Sei $T$ ein nicht in $R$ enthaltenes Element.
+Ist $(r_i)_{i\in \N}\in R^{(\N)}$, so gibt es ein $n\in \N$ mit $r_i=0$ für alle $i>n$ (weil nur endlich viele $r_i\neq 0$).\\
+Schreibe formal
+\[
+(r_i)_{i\in \N}=r_0+r_1T+r_2T^2\dt{+}r_nT^n
+\]
+Die Terme $r_iT^i$ mit $r_i=0$ lässt man auch weg.
+Die beiden Verknüpfungen + und $\cdot$ schreiben sich dann intuitiv als
+\[
+(r_0+r_1T\dt{+}r_nT^n)+(s_0+s_1T\dt{+}s_nT^n)=(r_0+s_0)+(r_1+s_1)T\dt{+}(r_n+s_n)T^n
+\]
+wobei $n\gg 1$ so gewählt wird, dass $r_i=0=s_i$ für alle $i>n$ gilt.
+\[
+(r_0\dt{+}r_nT^n)\cdot(s_0\dt{+}s_nT^n)=\sum_{j=0}^{n}\sum_{i=0}^{j}r_is_{j-i}T^j
+\]
+Man nennt $R[T]=\R^{(\N)}$ den \Index{Polynomring} über $\R$ (in der Unbekannten $T$).
+Die Elemente von $R[T]$ heißen \Index{Polynome} in R(in der Unbekannten $T$).
+
+\subsubsection*{Bemerkung}
+\begin{itemize}
+	\item $T,T^2,T^\dt{,}T^n$ sind Terme,die man symbolisch hinschreibt.
+	Statt $T$ nennt man die Unbekannten oft auch $X$ und schreibt $R[X]$ usw.
+	\item Der Polynomring $R[T]$ enthält $R$ als Teilring via $R\to R[T],~t\mapsto r=r+0T$.
+	Das Nullelement in $R[T]$ ist 0 (das \Index{Nullpolynom}), das Einselement ist $1=1+0T$.
+	Die Polynome der Form $r,~r\in R$ nennt man auch \uline{konstant} oder \uline{Skalare}.
+	\item Warum haben wir $R[T]$ nicht definiert als Menge der Abbildungen der Form
+	\[
+	f(x)=r_0+xr_1+x^2r_2\dt{+}x^nr_n~?
+	\]
+	\uline{Beispiel:} $R=\mathds{F}_2=\{0,1\}$.
+	Die beiden Abbildungen
+	\[
+	f(x)=0,~g(x)=x+x^2
+	\]
+	stimmen überein.
+	Dagegen sind die Polynome $0,~T+T^2\in\mathds{F}_2[T]$ so, wie wir das definiert haben, von einander \uline{verschieden}.
+	In der Algebra ist der Unterschied wichtig!
+\end{itemize}
+Der \bet{Grad} eines Polynoms $f=r_0+r_1T\dt{+} r_nT^n\neq 0$ ist
+\[
+\deg(f)=\max\{k\ge 0~|~r_k\neq 0\}.
+\]
+Für das Nullpolynom setzt man $\deg(0)=-\infty$.
+Ist $f=r_0+r_1T\dt{+}r_nT^n$ mit Grad $\deg(f)=n$, so heißt $r_n$ der \Index{Leitkoeffizient} von $f$ und $r_0$ heißt der \Index{konst. Term} von $f$.
+%sub end
+
+\subsection{Lemma 8}
+\label{sub:lemma_8}
+Seien $f=r_0\dt{+}r_nT^n,~g=s_0\dt{+}s_mT^m$ Polynome in $R[T]$, $R$ ein kommutativer Ring, mit $\deg(f)=n$ und $\deg(g)=m,~n,m\ge 0$.\\
+Dann gilt
+\[
+\deg(f+g)\le \max\penbrace{\deg(f),\deg(g)}
+\]
+\[
+\deg(f\cdot g)\le \deg(f)\cdot\deg(g)
+\]
+Wenn die Leitkoeffizienten $r_n$ und $s_m$ keine Nullteiler sind, gilt
+\[
+\deg(fg)=\deg(f)+\deg(g)
+\]
+
+\bet{Beweis:}\\
+Die beiden Formeln folgen direkt aus den Addition- und Multiplikationsregeln für Polynome.
+Es gilt
+\[
+f\cdot g=r_0s_0\dt{+}r_ns_mT^{n+m}
+\]
+Wenn also $r_n,s_m$ keine Nullteiler sind, so folgt, dass $r_ns_m$ der Leitkoeffizient von $f\cdot g$ ist.
+
+\subsubsection*{Korollar}
+Sei $R$ ein kommutativer Ring.
+Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $R$ ist Integritätsbereich
+	\item $R[T]$ ist Integritätsbereich
+\end{enumerate}
+
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):}
+Ist $f,g\neq 0$, so ist $\deg(f\cdot g)\neq -\infty$, also $f\cdot g\neq 0$.\\
+\uline{(ii)$\Rightarrow$(i):}
+$R$ ist ein Teilring von $R[T]$
+\hfill $\square$
+
+%sub end
+%sec end
+\newpage
+
+\section{Teilbarkeit in Integritätsbereichen}
+\label{sec:teilbarkeit_intbereiche}
+\subsection{Definition Teiler}
+\label{sub:def_teiler}
+Sei $R$ ein kommutativer Ring, sei $a,b\in R$.
+Wir nennen $a$ einen \Index{Teiler} von $b$, wenn es ein $x\in R$ gibt mit $ax=b$.
+Schreibe dafür kurz
+\[
+a\mid b\qquad (\text{'$a$ teilt $b$'})
+\]
+Wenn $a$ \uline{kein} Teiler von $b$ ist, schreibe $a\nmid b$.\\
+Klar: $1\mid a$ und $a\mid 0$ gilt für alle $a\in R$.
+Weiter gilt 
+\[
+a\mid 1 \Leftrightarrow a\text{ Einheit}
+\]
+\[
+a\mid b\text{ und } b\mid c \Rightarrow a\mid c
+\]
+Wenn $a$ kein Nullteiler ist und wenn gilt
+\[
+a\mid b\text{ und } b\mid a,
+\]
+so folgt: es gibt eine Einheit $u\in R^*$  mit $au=b$.\\
+Denn:
+\[
+b=ax,~ a=by \Rightarrow a=axy \stackrel{a\text{ kein Nullteiler}}{\Rightarrow} 1=xy
+\]
+Ist $u\in R^*$,so gilt stets $ua\mid a$.
+Sind $b_1\dt{,}b_n\in R$ und gilt
+\[
+a\mid b_1\dt{,} a\mid b_n,\text{ so folgt } a\mid b_1\dt{+}b_n.
+\]
+%sub end
+
+\subsubsection*{Definition ggT}
+Sei $R$ ein Integritätsbereich, sei $b_1\dt{,}b_n\in R$.
+Wir nennen $a$ einen \Index{größten gemeinsamen Teiler} von $b_1\dt{,}b_n$, wenn gilt:
+\begin{enumerate}[(1)]
+	\item $a\mid b_1\dt{,}a\mid b_n$
+	\item Ist $c\in R$ mit $c\mid b_1\dt{,} c\mid b_n$, so folgt $c\mid a$.
+\end{enumerate}
+Schreibe kurz $a\in \ggT(b_1\dt{,}b_n)$. (Der ggT ist im allgemeinen nicht eindeutig bestimmt: ist $u\in R^*$ und $a\in \ggT(b_1\dt{,}b_n)$, so folgt $au\in \ggT(b_1\dt{,}b_n)$.
+Über die Existenz einen ggT wird heier nichts behauptet.)
+%sub end
+
+\subsection{Definition Hauptideal}
+\label{sub:def_hauptideal}
+Sei $R$ ein kommutativer Ring, sei $a_1\dt{,}a_n\in R$.
+Wir setzen $(a_1\dt{,}a_n)=a_1R\dt{+}a_nR$ (übliche, aber etwas problematische Schreibweise - links steht kein $n$-Tupel...).\\
+Ist speziell $n=1$,so heißt $(a_1)=a_1R$ das von $a_1$ erzeugte \Index{Hauptideal}.\\
+Ein Integritätsbereich $R$ heißt \Index{Hauptidealbereich} (\bet{Hauptidealring}, engl. principal ideal domain PID), wenn alle Ideal in $R$  Hauptideale sind.
+
+\subsubsection*{Beispiele}
+\begin{enumerate}[(a)]
+	\item Jeder Körper $K$ ist ein Hauptidealbereich, denn $\{0\}=(0)$ und $K=(1)$ sind die einzigen Ideale.
+\end{enumerate}
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
