@@ -2932,11 +2932,17 @@ Wegen (i) ist $\G^*\cap\Pw=\emptyset$.
 		\item $S(n)=S_0u^{Z_n}d^{1-Z_n}$
 		\item $\F_n=\sigma(X_1,\dots,X_n)=\sigma(Z_1,\dots,Z_n)$
 		\item $\beta(n)=\prod_{i=1}^{d}1+p=(1+p)^n,~p>-1$,
-		\[
-		S^*(n)=\frac{S(n)}{\beta(n)}=S_0u^{Z_n}d^{n-Z_n}\frac{1}{(1+p)^n}=S_0\prod_{i=1}^{n}\frac{u^{X_i}d^{1-X_i}}{1+p}
-		\]
 	\end{itemize}
+	Gesucht ist ein $\Pw^*$ mit 
+	\begin{enumerate}[(i)]
+		\item $\Pw \sim \Pw^*$
+		\item $S^*$ ist ein $\Pw^*$-Martingal
+	\end{enumerate}
+	\[
+	S^*(n)=\frac{S(n)}{\beta(n)}=S_0u^{Z_n}d^{n-Z_n}\frac{1}{(1+p)^n}=S_0\prod_{i=1}^{n}\frac{u^{X_i}d^{1-X_i}}{1+p}
+	\]
 	ist ein geometrischer Random-Walk.
+	\marginnote{ab hier könnte sich einiges wiederholen, da er in zwei Vorlesungen das selbe jeweils entwas anders gemacht hat}
 	$S^*$ ist ein Martingal genau dann, wenn
 	\begin{equation*}
 	\begin{aligned}
@@ -2949,20 +2955,138 @@ Wegen (i) ist $\G^*\cap\Pw=\emptyset$.
 	\Pw^*=\frac{(1+p)-d}{u-d}
 	\]
 	ist das Modell risikoneutral.
-	Dies bedeutet, dass $S^*$ ein Martingal ist, bzgl. dem Parameter $\Pw^*$.
+	Dies bedeutet, dass $S^*$ ein Martingal ist, bzgl. dem Parameter $\Pw^*$.\\
+	\uline{Genauer:}\\
+	Wegen 
+	\[
+	\Pw^*(X=x)=\frac{\Pw^*(X=x)}{\Pw(X=x)}\cdot \Pw(X=x),~\forall x\in \{0,1\}
+	\]
+	ist die Dichte von $(\Pw^*)^X$ bzgl. $\Pw^X$ gegeben durch
+	\[
+	l(x)=\frac{(p^*)^{Z_N}(1-p^*)^{N-Z_N}}{p^{Z_N}(1-p)^{N-Z_N}},~Z_N=\sum_{i=1}^{N}X_i
+	\]
+	Hieraus erhält man durch $L:\Omega\to(0,\infty),~\omega\mapsto l(X_1(\omega),\dots,X_N(\omega))=\frac{(p^*)^{Z_N(\omega)}(1-p^*)^{N-Z_N(\omega)}}{p^{Z_N(\omega)}(1-p)^{N-Z_N(\omega)}}$ die Dichte von $\Pw^*$ bzgl. $\Pw$.\\
+	Setze also $\Pw^*$ an mittels
+	\[
+	\Pw^*(A)=\int\limits_A L\dint \Pw,~\forall A\in \F_N
+	\]
+	Dann ist $\Pw^*$ äquivalent zu $\Pw$, da $L>0~\Pfs$ und es gilt
+	\begin{equation*}
+	\begin{aligned}
+		\Pw^*(X=x) &= \int\limits_{\{X=x\}}L\dint \Pw=\enbrace{\frac{p^*}{p}}^{\sum_{i=1}^{N}X_i}\enbrace{\frac{(1-p^*)}{1-p}}^{N-\sum_{i=1}^{N}X_i} \Pw(X=x)\\
+		&= (p^*)^{\sum_{i=1}^{N}X_i}(1-p^*){N-\sum_{i=1}^{N}X_i}
+	\end{aligned}
+	\end{equation*}
+	Bzgl. des so definierten Maßes $\Pw^*$ ist $S(n)=S_0u^{Z_n}d^{n-Z_n},~n=0,\dots,N$ ein geometrischer Random-Walk mit $\E^*S(1)=S_0(1+\rho)$.
+	Deshalb ist $(S^*(n))$ ein $\Pw^*$-Martingal und damit $\Pw^*$ ein äquivalentes Martingalmaß.
 \end{enumerate}
+%sub end
+%sec end
 
 
+\section{Bewerten von Derivaten}
+\label{sec:bewerten_derivate}
+Gegeben sei ein Finanzmarktmodell über $N$ Perioden mit Preisprozess $(S_1,\dots,S_d)$ der risky assets und $S_0$ des Numeraire Assets.\\
 
+\uline{Grundannahme:}\\
+Der Finanzmarkt ist arbitragefrei $\Leftrightarrow$ Existenz eines äquivalenten Martingalmaßes.\\
+Bezeichne mit $\mc{P}$ die Menge aller äquivalenten Martingalmaße.
+Dann ist $\mc{P}$ eine konvexe Teilmenge, der Menge aller zu $\Pw$ äquivalenten Maße.
 
+\subsection{Claim und Hedge}
+\label{sub:claim_hedge}
+Ein Derivat ist ein Wertpapier, das eine Auszahlung am Ende der Laufzeit ($N$) verbrieft.\\
+Mathematisch gesehen entspricht dies einer $\F_N$-messbaren Abbildung $C$.
+Diese wird auch als \Index{Claim} bezeichnet.
+Zum Beispiel $C=(S(N)-K)^+$.\\
+$C^*=\frac{C}{S_0(N)}$ ist dann die \bet{Claimauszahlung}\index{Claim!-auszahlung}, notiert in Einheiten des Numeraire Assets.\\
+Denkt man an das Replikationsprinzip, so ist gesucht eine Strategie, durch Handel am Finanzmarkt den Claim zu replizieren.
+Im Modell bedeutet dies:\\
+Gesucht ist ein Anfangskapital $V_0$ und ein $H\in \mc{H}$ mit 
+\[
+V_0+\sum_{n=1}^{N}\sprod{H(n)}{\Delta S^*(n)}=V_0+(H\cdot S^*)(N)=C^*
+\]
+$V_0$ und $H$ definieren dann eindeutig eine selbstfinanzierende Handelsstrategie $(\varphi,H)$ mit
+\[
+V_0((\varphi,H))=V_0,~ V_N((\varphi,H))=C\marginnote{Vorausgesetzt wird $S_0(0)=1$.}
+\]
 
+Ist dies möglich, so heißt $C$ \bet{hedgebar}\index{Hedge!hedgebar} und $(\varphi,H)$ bzw. $V_0$ und $H$ definieren eine \bet{Hedgestrategie}\index{Hedge!Hedgestrategie}.\\
+In Analogie zum Replikationsprinzip kann man fragen:\\
+Ist $V_0$ der eindeutige arbitragefreie Anfangspreis für $C$?\\
+\newpage
+\bet{Informelle Argumentation:}\\
+Ein Anfangspreis $x>V_0$ liefert ein Arbitrage für den Verkäufer, denn 
+\begin{itemize}
+	\item gehe short ins Claim, erhalte $x$
+	\item investiere $V_0$ in die selbstfinanzierende Handelsstrategie und handle entsprechend dieser Strategie
+\end{itemize}
+$x-V_0$ ist der Gewinn am Anfang.
+Benutze am Ende das Vermögen aus der Handelsstrategie, um die short-Position im Claim aufzulösen.
+\[
+V_N(H)-C=0
+\]
+Ein Anfangspreis $x<V_0$ liefert ein Arbitrage für den Käufer, denn
+\begin{itemize}
+	\item gehe short im Hedge, erhalte $V_0$.
+	\item investiere $x$ in den Claim.
+\end{itemize}
+$V_0-x$ ist Gewinn am Anfang, handle nun entsprechend der short-Position im Hedge.
+Am Ende benutze den Claim, um die short-Position im Hedge aufzulösen.
+\[
+C-V_N(H)=0
+\]
+Diese Argumentation legt nahe, dass $x=V_0$ der arbitragefreie Anfangspreis eines hedgebaren Claims $C$ ist.\\
+Im Folgendem wird dies mathematisch präzisiert.
+%sub end
 
+\subsection{Satz 3}
+\label{sub:satz_3}
+Sei $C$ ein hedgebarer Claim und $H,H'\in \mc{H}$ Hedgestrategien zu Anfangskapitalien $V_0$ bzw. $V_0'$.\\
+Dan gilt:
+\[
+V_0=V_0'=\E^*C^*,~\forall \Pw^*\in\mc{P}
+\]
+und
+\[
+V_0+(H\cdot S^*)(n)=V_H^*(n)=V_{H'}^*(n)=V_0'+(H\cdot S^*)(n)=\E^*(C^*~|~\F_n),~\forall n=1,\dots,N
+\]
 
+\bet{Beweis:}\\
+Dies folgt aus der Martingaleigenschaft von $S^*$ bzw. $(H\cdot S^*)$ bzgl. $\Pw^*$:
+\begin{equation*}
+\begin{aligned}
+	V_0+(H\cdot S^*)(N)=C^*=V_0'+(H'\cdot S^*)(N)\\
+	\Rightarrow V_0=\E^*(V_0(H\cdot S^*)(N))=\underbracket{\E^*C^*}_{=V_0'}=\E^*(V_0'+(H'\cdot S^*)(N))\\
+	\Rightarrow \E^*(H\cdot S^*)(N)=0
+\end{aligned}
+\end{equation*}
+Das gleiche Argument liefert:
+\begin{equation*}
+\begin{aligned}
+	V_H^*(n) &= V_0+(H\cdot S^*)(n)=\E^*(V_0+(H\cdot S^*)(N)~|~\F_n)\\
+	&= \E^*(C^*~|~\F_n)=\E^*(V_0+(H'\cdot S^*)(N)~|~\F_n)\\
+	&= V_0'+(H'\cdot S^*)(N)= V_{H'}^*(n)
+\end{aligned}
+\end{equation*}
+\hfill $\square$
+%sub end
 
-
-
-
-
+\subsection{Superreplizierbare Claims}
+\label{sub:superrepl_claims}
+Ein Claim $C$ heißt \bet{upper hedgebar}\index{Hedge!upper hedgebar} wem Anfangskapital $V_0$, falls ein $H\in\mc{H}$ gibt mit
+\[
+V_0+(H\cdot S^*)(N)\ge C^*
+\]
+Dies ist der Fall, wenn
+\[
+C^*-V_0\in \mc{K}^*
+\]
+$\G^*=\{(H\cdot S^*)(N)~|~H\in\mc{H}\}$ Gewinne, $\mc{K}^*=\{C^*~|~\text{es ex. }G\in\G\text{ mit }G\ge C^* \}$.\\
+$C$ heißt \bet{strikt upperhedgebar} zum Anfangskapital $V_0$, falls es eine $H\in \mc{H}$ gibt mit
+\[
+V_0+(H\cdot S^*)(N)\ge C^*\text{ und }\Pw(V_0+(H\cdot S^*)(N)>C^*)>0
+\]
 
 
 
