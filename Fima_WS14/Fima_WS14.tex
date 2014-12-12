@@ -2510,11 +2510,11 @@ V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}=V^*(n)=\varphi(n)+\sprod{H(n)}{S^*
 \]
 erhält man
 \[
-V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n)}-\sprod{H(n)}{S^*(n-1)}=\varphi(n)+\sprod{H(n)}{S^*(n)}
+V_0+\sum_{k=1}^{n}\sprod{H(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n)}-\sprod{H(n)}{S^*(n-1)}=\varphi(n)+\sprod{H(n)}{S^*(n)}
 \]
 Also setzt man
 \[
-\varphi(n)=V_0+\sum_{k=1}^{n}\sprod{h(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n-1)}
+\varphi(n)=V_0+\sum_{k=1}^{n}\sprod{H(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n-1)}
 \]
 Bezeichne mit $\mathcal{H}$ die Menge aller $\R^d$-wertigen vorhersehbaren stoch. Prozesse.
 Definiere den stoch. Prozess $H\cdot S^*$ durch
@@ -2534,12 +2534,12 @@ V_0\le 0,~V_N\ge 0 \text{ und } \Pw(V_N-V_0>0)>0
 \]
 Ausgedrückt in Anteilen des Numeraire Assets ist dies äquivalent zu, mit $S_0(0)=1$:
 \[
-V_0\le 0,~ V^*(N)=\frac{V(N)}{S_0(N)}\le 0 \text{ und } \Pw(V^*(N)-V_0 > 0) > 0
+V_0\le 0,~ V^*(N)=\frac{V(N)}{S_0(N)}\ge 0 \text{ und } \Pw(V^*(N)-V_0 > 0) > 0
 \]
 Da $V^*(N)-V_0=H\cdot S^*(N)$.\\
 Es gibt eine Arbitragemöglichkeit genau dann, wenn es ein Anfangskapital $V_0\le 0$ und ein $H\in \mc{H}$ gibt mit
 \[
-V_0+(H\cdot S^*)(N)\le 0 \text{ und } \Pw(H\cdot S^*(N)>0)>0
+V_0+(H\cdot S^*)(N)\ge 0 \text{ und } \Pw(H\cdot S^*(N)>0)>0
 \]
 
 \bet{Bemerkung:} 
@@ -2585,13 +2585,13 @@ und
 Ist  $d<u\le 1+\rho$, so ist das Bankkonto immer besser als die Aktie.
 Also kann man durch ein short selling der Aktie ein Arbitrage konstruieren.
 Setze also $H(n)\equiv -1,~ n=1,\dots,N$.
-Dann existiert zum Anfangskapital 0 eine selbstfin. Handelsstrategie $(\varphi,H)$mit Wertprozess
+Dann existiert zum Anfangskapital 0 eine selbstfin. Handelsstrategie $(\varphi,H)$ mit Wertprozess
 \[
-V^*(N)=(H\cdots^*)(n)
+V^*(N)=(H\cdots S^*)(N)
 \] 
 also
 \[
-V^*(N)=H\cdot S^*(N)=-(S^*(N)-S(0))=S(0)-S^*(N)\ge S(0)-S(0)\frac{u^N}{(1+\rho)^N}\ge S(0)-S(0)=0
+V^*(N)=(H\cdot S^*)(N)=-(S^*(N)-S(0))=S(0)-S^*(N)\ge S(0)-S(0)\frac{u^N}{(1+\rho)^N}\ge S(0)-S(0)=0
 \]
 und 
 \[
@@ -2601,7 +2601,7 @@ und
 \uline{"$\Leftarrow$":} per Kontraposition: Sei das Modell nicht arbitragefrei.\\
 Dann existiert ein vorhersehbares $H$ mit
 \[
-V^*_N=(H\cdot S^*)(N)\ge 0 \text{ und } \Pw(H\cdot Sq*(N)>0)>0
+V^*_N=(H\cdot S^*)(N)\ge 0 \text{ und } \Pw((H\cdot S^*)(N)>0)>0
 \]
 Wegen $V^*(N)=\sum_{k=1}^{N}H(k)\Delta S^*(k)$ existiert eine Periode $n$ mit 
 \[
@@ -2627,7 +2627,7 @@ Dann ist mit $R(n)=\frac{1}{1+\rho}u^{X_n}d^{1-X_n}-1$:
 \begin{equation*}
 \begin{aligned}
 	1=\Pw(H(n)R(n)\ge 0)&=\Pw(H(n)>0,R(n)>0)+\Pw(H(n)<0,R(n)<0)+\Pw(H(n)=0)\\
-	&=\Pw(H(n)<0)\Pw(R(n)>0)+\Pw(H(n)<0)\Pw(R(n)<0)+\Pw(H(n)=0)
+	&=\Pw(H(n)>0)\Pw(R(n)>0)+\Pw(H(n)<0)\Pw(R(n)<0)+\Pw(H(n)=0)
 \end{aligned}
 \end{equation*}
 Da $H(n)$ $\F_{n-1}$-messbar ist und $R(n)$ unabhängig von $\F_{n-1}$ ist.
@@ -2707,9 +2707,9 @@ Ein W'Maß $\Pw^*$ auf $(\Omega,\F)$ heißt \Index{äquivalentes Martingalmaß},
 \end{enumerate}
 Kurz: Bzgl. $\Pw^*$ ist der Finanzmarkt fair.\\
 
-\uline{Ziel:} Arbitragefreier Markt $\Leftrightarrow$ Existiert ein äquivalentes Martingalmaß.
+\uline{Ziel:} Arbitragefreier Markt $\Leftrightarrow$ Existiert ein äquivalentes Martingalmaß.\\
 \uline{"$\Leftarrow$":} leicht.\\
-\uline{"$\Rightarrow$":} etwas schwierig, math. Argument ist der Trennungssatz von Minkowski. \marginnote{vgl. Funktional A1nalysis}
+\uline{"$\Rightarrow$":} etwas schwierig, math. Argument ist der Trennungssatz von Minkowski. \marginnote{vgl. Funktional Analysis}
 %sub end
 
 \subsection{Separationssatz von Minkowski}
@@ -2820,19 +2820,19 @@ Für $H\in \mc{H}$ ist $V^*(n)=(H\cdot S^*)(n),~n=1,\dots,N,~V^*(0)=0$ ein $\Pw^
 \begin{equation*}
 \begin{aligned}
 	\E^*(\Delta V^*(k)~|~\F_{k-1}) &= \E^*(V^*(k)-V^*(k-1)~|~\F_{k-1})\\
-	&= \E^*(\sprod{H(k)}{\Delta S^*(k)}~|~\F_{k-1}) = \E^*(\sum_{j=1}^{d}H_j(k)\Delta S_j^*(k)~|~\F_{k-1})\\
+	&= \E^*(\sprod{H(k)}{\Delta S^*(k)}~|~\F_{k-1}) = \E^*\left(\sum_{j=1}^{d}H_j(k)\Delta S_j^*(k)~|~\F_{k-1}\right)\\
 	&= \sum_{j=1}^{d}\E^*(H_j(k)\Delta S_j^*(k)~|~\F_{k-1}) = \sum_{j=1}^{d}H_j(k)\underbracket{\E^*(\Delta S_j^*(k)~|~\F_{k-1})}_{=0} = 0~ k=1,\dots,N
 \end{aligned}\marginnote{äquivalente Bedingung zur Martingaleigenschaft}
 \end{equation*}
 Für $C^*=(H\cdot S^*)(N)$ folgt also
 \[
-\E C^*= \E(H\cdot S^*(N))=\E^* V^*(N)=\E^* V^*(0)=0
+\E C^*= \E((H\cdot S^*)(N))=\E^* V^*(N)=\E^* V^*(0)=0
 \]
 
 \uline{(ii)$\Rightarrow$(i):}
 Zeige die Martingaleigenschaft von $S_j^*$ bzgl. $\Pw^*$ für alle $j=1,\dots,d$.\\
 $\zz: \E^*(S_j^*(k)~|~\F_{k-1})=S_j^*(k-1)$\\
-$\Leftrightarrow \E^*(\delta S_j^*(k)~|~\F_{k-1})=0\Leftrightarrow \E^*\mathbb{1}_A \ \Delta S_j^*(k)=0$ für alle $A\in \F_{k-1}$.\\
+$\Leftrightarrow \E^*(\Delta S_j^*(k)~|~\F_{k-1})=0\Leftrightarrow \E^*\mathbb{1}_A \ \Delta S_j^*(k)=0$ für alle $A\in \F_{k-1}$.\\
 
 $\mathbb{1}_A \Delta S_j^*(k)$ ist der Gewinn der Handelsstrategie, die in der $k$-ten Periode long in $S_j$ geht, wenn $A$ eintritt, d.h.
 \[
@@ -2845,7 +2845,7 @@ wegen (ii) folgt $\E^*\mathbb{1}_A \Delta S_j(k)=0$ für alle $A\in \F_{k-1}$.\\
 Also ist $S_j^*$ ein $\Pw^*$-Martingal.\\
 
 \uline{(ii)$\Rightarrow$(iii):}
-Klar,wegen Monotonie des Erwartungswertes.\\
+Klar, wegen Monotonie des Erwartungswertes.\\
 
 \uline{(iii)$\Rightarrow$(ii):}
 Ist $C^*\in \G^*$ dann folgt $C^*\in \mc{K}^*\Rightarrow \E^*C^*\le 0$.
