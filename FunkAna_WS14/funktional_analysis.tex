@@ -884,7 +884,7 @@ $\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to
 
 \subsection[Definition und Proposition: lineare Isometrie $\iota_X : X \to X^{**}$]{Definition und Proposition} % (fold)
 \label{sub:33}
-Sei $X$ ein normierter Raum. Definiere $\iota_X : X \to X^{**} \enspace{\color{light_gray}\enbrace[\big]{=(X^*)^*}}$ durch
+Sei $X$ ein normierter Raum. Definiere $\iota_X \colon X \to X^{**} \enspace{\color{light_gray}\enbrace[\big]{=(X^*)^*}}$ durch
 \[
 	x \longmapsto \enbrace[\big]{\varphi \mapsto \varphi(x) } 
 \]
@@ -914,7 +914,7 @@ für $x \in X$. Die Abbildung $\iota_X$ ist eine lineare Isometrie.
 
 \subsection[Definition und Proposition: Die transponierte Abbildung]{Definition und Proposition} % (fold)
 \label{sub:34}
-Seien $X,Y$ normierte Räume. Definiere eine Abbildung $.^{\tr} : \mathcal{L}(X,Y) \to \mathcal{L}(Y^*,X^*)$ durch $T \mapsto T^{\tr} = (\varphi \mapsto \varphi \circ T)$.
+Seien $X,Y$ normierte Räume. Definiere eine Abbildung $.^{\tr} \colon \mathcal{L}(X,Y) \to \mathcal{L}(Y^*,X^*)$ durch $T \mapsto T^{\tr} = (\varphi \mapsto \varphi \circ T)$.
 $.^\tr$ ist eine lineare Isometrie und das Diagramm
 \[
 	\begin{tikzcd}
@@ -922,7 +922,7 @@ $.^\tr$ ist eine lineare Isometrie und das Diagramm
 		Y \rar["\iota_Y"]& Y^{**}
 	\end{tikzcd}
 \]
-kommutiert für jedes $T \in \mathcal{L}(X,Y)$. Für $\iota_{X^*} : X^* \to X^{***}$ und $\iota_{X}^\tr : X^{***} \to X^*$ gilt $\iota_X^\tr \circ \iota_{X^*} = \id_{X^*}$.
+kommutiert für jedes $T \in \mathcal{L}(X,Y)$. Für $\iota_{X^*} \colon X^* \to X^{***}$ und $\iota_{X}^\tr \colon X^{***} \to X^*$ gilt $\iota_X^\tr \circ \iota_{X^*} = \id_{X^*}$.
 \minisec{Beweis}
 \begin{enumerate}[(i)]
 	\item Für $T,S \in \mathcal{L}(X,Y)$, $\alpha, \beta \in \mathds{K}$, $\varphi \in Y^*$ gilt
@@ -1104,7 +1104,7 @@ $\norm[1]{\cdot }$ induziert eine Norm $\norm[1]{\cdot }$ auf $L^1(\mu)$ via
 \[
 	\norm[1]{f+ \mathcal{N}^1} := \norm[1]{f} \quad , \quad f \in \mathcal{L}^1(\mu) \tag*{(Übung)}
 \]
-$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (Ana \RM{3}, 9.23).\todo{CopyPaste aus Ana3}
+$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (Ana \RM{3}, 9.23).
 % subsection 41 (end)
 
 \subsection[Beispiele für $L^1$-Räume]{Beispiele} % (fold)
@@ -1719,7 +1719,7 @@ Sei $X$ ein Banachraum. Dann sind äquivalent:
 
 \subsection[Definition und Proposition: Gleichmäßig konvexer Raum]{Definition und Proposition} % (fold)
 \label{sub:61}
-Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:\todo{RevChap6}
 \begin{enumerate}[(i)]
 	\item Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y} \le 1$ gilt:
 	\[
@@ -1950,13 +1950,119 @@ Sei $X$ ein gleichmäßig konvexer Banachraum. Dann ist $X$ reflexiv.
 Sei $f \in X^{**}$, $\norm[X^{**}]{f}=1$. Zu zeigen: $f \in \iota(X)$. Wir wählen $\varphi_n \in X^*$ mit $\norm[X^*]{\varphi_n}=1$ und $f(\varphi_n) > 1- \frac{1}{n+1}$
 für $n \in \mathds{N}$. Nach (dem Beweis von) \ref{sub:516} gilt für $n \in \mathds{N}$
 \[
-	\inf_{x \in \overline{B}_X(0,1) } \sum_{i=0}^{n} \abs*{f(\varphi_i) - \varphi_i(x)}^2 =0
+	\inf_{x \in \overline{B}_X(0,1) } \sum_{i=0}^{n} \,\abs[\big]{f(\varphi_i) - \varphi_i(x)}^2 =0
 \]
-$\Rightarrow \exists x_n \in X$ für $n \in \mathds{N}$ mit $\norm[X]{x_n}=1$, $\abs*{f(\varphi_i)- \varphi_i(x_n)} < \frac{1}{2(n+1)}$ und
-$1- \frac{3}{2(n+1)}< \varphi_i(x_n) \le 1$ für $0 \le i \le n$.
-% subsection 69 (end)
-% section 6 (end)
+$\Rightarrow \exists (x_n)_{n \in \mathds{N}} \subset X$, sodass $\norm[X]{x_n}=1$ und $\abs*{f(\varphi_m)- \varphi_m(x_n)} < \frac{1}{2(n+1)}$ für $0 \le m \le n$ also auch
+$1- \frac{3}{2(m+1)}\le \varphi_m(x_n) \le 1$. Behauptung: $(x_n)_\mathds{N}$ ist Cauchy. Es gilt für $n \ge m$
+\begin{align*}
+	\underbrace{1- \frac{3}{2(m+1)}  + 1 - \frac{3}{2(m+1)}}_{\xrightarrow{n,m \to \infty} 2} \le \varphi_m(x_m) + \varphi_m(x_n) = \varphi_m(x_m+x_n) &\le \norm{\varphi_m} \cdot \norm[X]{x_m+x_n} \\
+	&\le \norm[X]{x_m} + \norm[X]{x_n} = 2  
+\end{align*}
+$\Rightarrow \norm[X]{\frac{1}{2} (x_m+x_n)} \xrightarrow{n,m \to \infty} 1$. Mit Bemerkung \ref{sub:65} folgt, dass $(x_n)_\mathds{N}$ Cauchy ist. Sei 
+$\overline{x} := \lim_{ n \to \infty} x_n$. Es gilt $\norm[X]{\overline{x}}=1$. Behauptung: $\iota_X(\overline{x})=f$. Für $n \ge m$ gilt
+\begin{align*}
+	\abs[\Big]{f(\varphi_m) - \underbrace{\varphi_m(x_n)}_{\xrightarrow{n \to \infty} \varphi_m(\overline{x} )}} < \frac{1}{2(n+1)}  
+\end{align*}
+$\varphi_m$ ist stetig, also ist $f(\varphi_m)=\varphi_m(\overline{x})= \iota(\overline{x})(\varphi_m)$ für jedes $m \in\mathds{N}$. Sei $\tilde{x} \in X$ ein weiterer Punkt
+mit $\norm{\tilde{x}}=1$ und $f(\varphi_m) = \varphi_m(\tilde{x})$, $m \in \mathds{N}$. Das obige Argument für die Folge 
+$(\overline{x}, \tilde{x}, \overline{x}, \tilde{x}, \ldots)$ liefert: $(\overline{x}, \tilde{x}, \overline{x}, \tilde{x}, \ldots)$ ist Cauchy 
+$\Rightarrow \overline{x}=\tilde{x}$.
 
+Noch zu zeigen: $f(\varphi)= \varphi(\overline{x})$ für alle $\varphi \in X^*$. Das obige Argument für $(\varphi, \varphi_1, \varphi_2, \ldots )$ an Stelle von
+$(\varphi_0, \varphi_1, \varphi_2,\ldots )$ liefert eine Folge $(y_n)_\mathds{N} \subset X$ mit $\norm{y_n}=1$, $(y_n)_\mathds{N}$ ist Cauchy; 
+Dann erfüllt $\overline{y} := \lim_{ n \to \infty} y_n$ die Gleichung $f(\varphi_m)=\varphi_m(\overline{y})$, $m \ge 1$. $f(\varphi)=\varphi(\overline{y})$.
+$\Rightarrow \overline{y}=\overline{x}$. Damit folgt $\iota(\overline{x})(\varphi)= \varphi(\overline{x})= \varphi(\overline{y})= f(\varphi)$ für jedes $\varphi \in X^*$,
+also ist $\iota(\overline{x})=f$. \bewende
+% subsection 69 (end)
+
+\subsection[Corollar: $L^p(\mu)$ ist für $1<p<\infty$ reflexiv.]{Corollar} % (fold)
+\label{sub:610}
+Für einen Maßraum $(X,\Sigma, \mu)$ und $1 < p< \infty$ ist $L^p(\mu)$ reflexiv.
+\minisec{Beweis}
+Kombiniere die Aussagen aus \ref{sub:68} und \ref{sub:69}. \bewende
+% subsection 610 (end)
+
+\subsection[Satz: Isometrischer Isomorphismus $\iota_p \colon L^p(\mu) \to L^q(\mu)^*$]{Satz} % (fold)
+\label{sub:611}
+Sei $(X,\Sigma,\mu)$ ein Maßraum, $\frac{1}{p} + \frac{1}{q}=1$. Dann ist die Abbildung $\iota_p \colon L^p(\mu) \to L^q(\mu)^*$ gegeben durch 
+$\iota_p(f)(g) := \int \!f g \,\mathd\mu$ ein isometrischer Isomorphismus.
+\minisec{Beweis}
+$\iota_p$ ist eine lineare Isometrie nach Proposition \ref{sub:410}, wir müssen also nur Surjektivität zeigen. $\iota_p \enbrace*{L^p(\mu)}$ ist vollständig, also 
+abgeschlossen in $L^q(\mu)^*$. Falls $\iota_p(L^p(\mu)) \subsetneq L^q(\mu)$, so existiert nach Hahn-Banach (\ref{sub:227}) ein $0 \not= \psi \in L^q(\mu)^{**}$ mit
+$\psi \enbrace*{\iota_p(L^p(\mu))} =0$. $L^q(\mu)$ ist reflexiv, also existiert $g \in L^q(\mu)$ mit $\iota(g)=\psi$, d.h. $\varphi(g)= \iota_p(g)(\varphi)=\psi(\varphi)$,
+$\varphi \in L^q(\mu)^*$. Für $f\in L^p(\mu)$ gilt dann
+\[
+	0 = \psi \enbrace*{\iota_p(f)} = \iota_p(f)(g) = \int\! f g \, \mathd\mu \enspace \Longrightarrow g=0 \light \text{ zu } \psi \not= 0 \bewende
+\]
+% subsection 611 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:612}
+Weiter kann man zeigen, dass die kanonische Abbildung $\iota_\infty : L^\infty(\mu) \to L^1(\mu)^*$, $\iota_\infty(f)(g) = \int\! fg \, \mathd\mu$, ein isometrischer
+Isomorphismus ist. \hfill \emph{(ohne Beweis)}\\
+Die Isometrie $\iota_1 : L^1(\mu) \to L^\infty(\mu)^*$ ist jedoch \emph{nicht} surjektiv! \hfill \emph{(Übung)}
+% subsection 612 (end)
+% section 6 (end)
+\newpage
+\section{Hilberträume und selbstadjungierte Operatoren} % (fold)
+\label{sec:7}
+
+\subsection[Definition: Hermitesche Form]{Definition} % (fold)
+\label{sub:71}
+Sei $X$ ein $\mathds{K}$-Vektorraum. Eine \Index{hermitesche Form} auf $X$ ist eine Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ mit
+\begin{align*}
+	\skal*{x}{y+y'} &= \skal*{x}{y} + \skal*{x}{y'} \\
+	\skal*{x}{\alpha \cdot y} &= \alpha \cdot \skal*{x}{y} \\
+	\skal*{x}{y} &= \overline{\skal*{y}{x}} \qquad \text{ für } x,y,y' \in X, \alpha \in \mathds{K}       
+\end{align*}
+$\skal*{\cdot}{\cdot } $ heißt \bet{positiv semidefinit}\index{hermitesche Form!positiv semidefinit}, falls $\skal*{x}{x}\ge 0$ für $x \in X$.  $\skal*{\cdot }{\cdot } $ 
+heißt \bet{positiv definit}\index{hermitesche Form!positiv definit}, falls 
+$\skal*{x}{x} >0$ für $0 \not= x \in X$. In diesem Fall heißt $\skal*{\cdot }{\cdot }$ auch \Index{Skalarprodukt}.  
+% subsection 71 (end)
+
+\subsection[Bemerkung: Einfache Eigenschaften von hermiteschen Formen]{Bemerkung} % (fold)
+\label{sub:72}
+Für eine hermitesche Form gilt 
+\begin{align*}
+	\skal*{x+x'}{y} &= \skal*{x}{y} + \skal*{x'}{y} \\
+	\skal*{\alpha \cdot x}{y} &= \overline{\alpha} \cdot \skal*{x}{y} \\
+	\skal*{x}{x} \in \mathds{R} 
+\end{align*}
+für $x,x',y \in X$, $\alpha \in \mathds{K}$
+% subsection 72 (end)
+
+\subsection[Beispiele für hermitesche Formen]{Beispiele} % (fold)
+\label{sub:73}
+\begin{enumerate}[(i)]
+	\item Auf $\mathds{C}^n$ definiert $\skal*{\underline{x}}{\underline{y}} := \sum_{i=1}^{n} \overline{x}_i \cdot y_i$ ein Skalarprodukt.
+	\item Auf $L^2(\mathds{R})$ definiert $\skal*{f}{g} := \int\! fg \,\mathd\lambda$ ein Skalarprodukt.
+	Auf 
+	\[
+		L^2_\mathds{C}(\mathds{R}) := \set[f \colon \mathds{R} \to \mathds{C}]{\re f, \im f \text{ messbar}, \int \! \bar{f} f \mathd\mu < \infty } / \mathcal{N}
+	\]
+	definiert $\skal*{f}{g} := \int\! \bar{f} g \, \mathd\lambda$ ein Skalarprodukt.
+	\item $\ell^2_{\color{gray}\mathds{C}}(\mathds{N})$ mit $\skal*{(a_n)}{(b_n)} := \sum_{n \in \mathds{N}} \overline{a}_n b_n$.
+\end{enumerate}
+% subsection 73 (end)
+
+\subsection{Proposition (Cauchy-Schwarz Ungleichung)} % (fold)
+\label{sub:74}
+Sei $X$ ein $\mathds{K}$-Vektorraum mit einer positiv semidefiniten hermiteschen Form. Dann gilt für $x,y \in X$
+\[
+	\abs[\big]{\skal*{x}{y}}^2 \le \skal*{x}{x} \cdot \skal*{y}{y}
+\]
+\minisec{Beweis}
+Für $\lambda \in \mathds{K}$, $x,y \in X$ gilt: 
+\begin{align*}
+0 \le \skal*{x+\lambda y}{x + \lambda y} = \skal*{x}{x} + \lambda \cdot \skal*{x}{y} + \overline{\lambda} \cdot \skal*{y}{x} + \lambda \overline{\lambda} \skal*{y}{y}  
+\end{align*}
+Falls $\skal*{y}{y} \not=0$, so setze $\lambda := - \frac{\skal*{y}{x}}{\skal*{y}{y}}$. Es folgt 
+\begin{align*}
+	0 \le \skal*{x}{x} - \frac{\skal*{y}{x} \cdot \skal*{x}{y}}{\skal*{y}{y}} + \overline{\lambda} \enbrace*{\skal*{y}{x}  - \frac{\skal*{y}{x}}{\skal*{y}{y}} \skal*{y}{y}   } = \skal*{x}{x} - \frac{\abs*{\skal*{x}{y}}^2 }{\skal*{y}{y}} 
+\end{align*}
+Falls $\skal*{x}{x} \not= 0$, so vertausche die Rollen von $x$ und $y$. Falls $\skal*{x}{x}=\skal*{y}{y}=0$ gilt, so setzen wir $\lambda := - \skal*{y}{x}$. \bewende
+% subsection 74 (end)
+% section 7 (end)
 
 
 \cleardoubleoddemptypage
