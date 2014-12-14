@@ -66,3 +66,144 @@ Problem 2) ist schwieriger und tiefer. Eine Antwort liefert das \bet{quadratisch
 	\end{aligned}
 	\end{equation}
 \end{falko}
+
+Damit ist alles reduziert auf den Fall $m = p$ mit $p \neq 2$ Primzahl. \marginnote{09.12. \\ \ [17]}
+\begin{equation}
+	X^2 \kon a \modu p, \quad (a,p) = 1 \label{eq_legendre}
+\end{equation}
+
+\begin{defn}[Legendresymbol]
+	Sei $p \neq 2$ eine Primzahl. Der Ausdruck
+	\begin{equation}
+		\leg{a}{p} := \begin{cases}
+			1, & \text{ falls \eqref{eq_legendre} lösbar} \\
+			-1, & \text{ falls \eqref{eq_legendre} nicht lösbar} \\
+		\end{cases}
+	\end{equation}
+	ist definiert für jedes $a \in \ZZ$ mit $(a,p) = 1$. \index{Legendresymbol}
+\end{defn}
+
+$S = \{ 1,2,\dots,p-1\}$ ist ein primes Restsystem modulo $p$ (Vertretersystem von $(\ZZ/p)^\times$). $H := \penbrace*{1, 2, \dots, \frac{p-1}{2}}$ heißt ein \bet{unteres Halbsystem} und $H' := \penbrace*{ \frac{p+1}{2}, \dots, p-2, p-1 }$ ein \bet{oberes Halbsystem}. Ist $a$ quadratischer Rest modulo $p$, so gibt es genau ein $b \in H$ mit $b^2 \kon a \modu p$. Also:
+
+\begin{falko} \label{F6.3}
+	Es gibt genau $\frac{p-1}{2}$ quadratische Reste modulo $p$ und ebenso viele quadratische Reste modulo $p$.
+\end{falko}
+
+\begin{falko}[Eulersches Kriterium] \label{F6.4}
+	Für jedes $a$ teilerfremd zu $p \neq 2$ gilt
+	\[ \leg{a}{p} \kon a^{\frac{p-1}{2}} \modu p \]
+\end{falko}
+
+\minisec{Bemerkung}
+	\begin{enumerate}[1)]
+		\item \ref{F6.3} und \ref{F6.4} folgen auch sofort aus der Existenz einer Primitivwurzel modulo $p$. ($G = (\ZZ/p\ZZ)^\times$ ist zyklisch von der Ordnung $p-1$.)
+		\item Aus $\leg{a}{p} \kon \varepsilon \modu p$ mit $\varepsilon \in \{1,-1\}$ folgt $\leg{a}{p} = \varepsilon$. Denn $1 \modu -1 \modu p$ ist unmöglich für $p \neq 2$.
+		\item \ref{F6.4} für $a = -1$: $\leg{-1}{p} \kon (-1)^\frac{p-1}{2} \modu p$
+		\begin{equation}
+			\xRightarrow{\text{2)}} \leg{-1}{p} = (-1)^\frac{p-1}{2} = \begin{cases}
+				1, & \text{ für } p \kon 1 \modu 4 \\
+				-1, & \text{ für } p \kon 3 \modu 4
+			\end{cases} \label{eq_F6.4}
+		\end{equation}
+		Also folgt erneut \ref{F3.8}. (\Index{1. Ergänzungssatz})
+	\end{enumerate}
+	
+\begin{falko} \label{F6.5}
+	\begin{enumerate}[(i)]
+		\item Das Legendresymbol $\leg{a}{p}$ hängt von $a$ nur modulo $p$ ab.
+		\item $\leg{ab}{p} = \leg{a}{p} \cdot \leg{b}{p}$ für alle $a,b$ prim zu $p$.
+	\end{enumerate}
+\end{falko}
+
+\minisec{Bemerkung}
+	\begin{enumerate}[1)]
+		\item Das Legendresymbol vermittelt eine Abbildung
+		\begin{equation}
+		\begin{aligned}
+			\chi\colon (\ZZ/p)^\times &\longrightarrow \{1, -1\} \\
+			a \modu p &\longmapsto \leg{a}{p}
+		\end{aligned}
+		\end{equation}
+		Diese ist ein Homomorphismus von Gruppen. $\chi(a \modu p)$ gibt quadratischen Charakter von $a \modu p$ an. Allgemein: Jeder Homomorphismus einer endlichen abelschen Gruppe $G$ in $\CC^\times$ heißt ein \Index{Charakter} von $G$.
+		\item $a = \pm q_1 q_2 \dots q_s$ mit $q_i \neq p$ Primzahlen.
+		\[ \leg{a}{p} = \leg{\pm 1}{p} \leg{q_1}{p} \leg{q_2}{p} \cdots \leg{q_s}{p} \]
+	\end{enumerate}
+	
+Zur Beantwortung von Problem 2 ist wegen \ref{F6.2} nur zu fragen: Für welche Primzahlen $p \neq 2$ ist die gegebene Zahl $a$ quadratischer Rest modulo $p$? Wegen \ref{F6.5} genügt es dann weiter, für $a$ folgende Fälle zu betrachten: \begin{enumerate}[1.]
+	\item $a = -1$. Schon erlegt durch den 1. Ergänzungssatz.
+	\item $a = 2$. Wird erledigt durch den 2. Ergänzungssatz. \index{2. Ergänzungssatz}
+	\item $a$ ist eine ungerade Primzahl $q$. Lösung durch das quadratische Reziprozitätsgesetz. \index{Quadratisches Reziprozitätsgesetz}
+\end{enumerate}
+
+\begin{falko}[Gaußsches Lemma] \label{F6.6}
+	\[ \leg{a}{p} = \prod_{x \in H} \varepsilon(ax) \]
+\end{falko}
+
+\begin{falko}[2. Ergänzungssatz] \label{F6.7}
+	\[ \leg{2}{p} = \begin{cases}
+		+1 & \text{ für } p \kon \pm 1 \modu 8 \\
+		-1 & \text{ für } p \kon \pm 5 \modu 8
+	\end{cases} \] \index{2. Ergänzungssatz}
+\end{falko}
+
+\begin{satz}[Quadratisches Reziprozitätsgesetz] \label{satz_6.1}
+	Für ungerade Primzahlen $p \neq q$ gilt
+	\begin{equation}
+		\leg{p}{q} \leg{q}{p} = (-1)^{\frac{p-1}{2} \frac{q-1}{2}} \label{eq_quadrez}
+	\end{equation}
+	Das bedeutet: \index{Quadratisches Reziprozitätsgesetz} \begin{enumerate}[1)]
+		\item Ist eine der beiden Primzahlen $p,q$ kongruent zu $1 \modu 4$, so gilt
+			\[ \leg{q}{p} = \leg{p}{q}, \]
+			d.h. $q$ ist quadratischer Rest modulo $p$ genau dann, wenn $p$ quadratischer Rest modulo $q$ ist.
+		\item Sind beide Primzhlen $p$ und $q$ kongruent zu $3 \modu 4$, so gilt
+			\[ \leg{q}{p} = -\leg{p}{q}, \]
+			d.h. $q$ ist quadratischer Rest modulo $p$ genau dann, wenn $p$ quadratischer Nichtrest modulo $q$ ist.
+	\end{enumerate}
+\end{satz}
+
+\minisec{Zusatz für $p \neq 2$}
+	\[ \leg{-1}{p} = (-1)^\frac{p-1}{2} \text{ nach 1. Ergänzungssatz} \]
+	\[ \leg{2}{p} = (-1)^\frac{p^2-1}{8} \text{ nach 2. Ergänzungssatz} \]
+	Das bedeutet:
+	\begin{equation}
+	\begin{aligned}
+		-1 \text{ quadratischer Rest modulo } p &\Leftrightarrow p \kon 1 \modu 4 \\
+		2 \text{ quadratischer Rest modulo } p &\Leftrightarrow p \kon \pm 1 \modu 8 
+	\end{aligned}
+	\end{equation}
+	
+\begin{defn}[Jacobi-Symbol]
+	Seien $a, b \in \ZZ \setminus \setnull$, $b$ ungerade, $(a,b) = 1$. Definiere das \Index{Jacobi-Symbol} durch \marginnote{12.12. \\ \ [18]}
+	\begin{equation}
+		\leg{a}{b}_J = \prod \leg{a}{p}^{w_p(b)}
+	\end{equation}
+	Für $b = p$ prim ist also $\leg{a}{p}_J = \leg{a}{p}$. Daher verzichten wir auf das $J$ im Index.
+\end{defn}
+
+\minisec{Eigenschaften}
+	\begin{enumerate}[(1)]
+		\item $a \kon a' \modu b \Rightarrow \leg{a}{b} = \leg{a'}{b}$
+		\item $\leg{a}{b} \leg{a'}{b} = \leg{aa'}{b}$ und $\leg{a}{bb'} = \leg{a}{b} \leg{a}{b'}$
+		\item $\leg{x^2}{b} = 1 = \leg{a}{y^2}, \leg{ax^2}{b} = \leg{a}{b} = \leg{a}{by^2}$ für $(x,b) = (y,a) = 1$ und $y$ ungerade
+		\item $a$ quadratischer Rest $\modu b \Rightarrow \leg{a}{b} = 1$
+	\end{enumerate}
+	
+\setcounter{countsatz}{0}
+\begin{satz}[Reziprozitätsgesetz für das Jacobi-Symbol] \label{satz_6.1a}
+	Sei $b \in \ZZ$ ungerade.
+		\begin{equation}
+			\leg{-1}{b} = (-1)^{\frac{b-1}{2} + \frac{\sgn(b)-1}{2}} \label{eq_jacobi_E1} 	
+		\end{equation}
+		\begin{equation}
+			\leg{2}{b} = (-1)^\frac{b^2-1}{8} = \begin{cases}
+				+1 & \text{ für } b \kon \pm 1 \modu 8 \\
+				-1 & \text{ für } b \kon \pm 3 \modu 8
+			\end{cases} \label{eq_jacobi_E2}
+		\end{equation}
+		\begin{equation}
+			\leg{a}{b} \leg{b}{a} = (-1)^{\frac{a-1}{2} \frac{b-1}{2} + \frac{\sgn(a)-1}{2} \frac{\sgn(b)-1}{2}} \text{ für } a \text{ ungerade und } (a,b)=1 \label{eq_jacobi_R}
+		\end{equation}
+\end{satz}
+
+\minisec{Korollar}
+	Sei $a \in \NN$ gegeben. Für alle ungeraden $b \in \ZZ$ prim zu $a$ hängt $\leg{a}{b}$ von $b$ nur modulo $4a$ ab, im Falle $a \kon 1 \modu 4$ sogar nur modulo $a$.
