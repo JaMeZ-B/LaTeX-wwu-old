@@ -2009,7 +2009,7 @@ Die Isometrie $\iota_1 : L^1(\mu) \to L^\infty(\mu)^*$ ist jedoch \emph{nicht} s
 
 \subsection[Definition: Hermitesche Form]{Definition} % (fold)
 \label{sub:71}
-Sei $X$ ein $\mathds{K}$-Vektorraum. Eine \Index{hermitesche Form} auf $X$ ist eine Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ mit
+Sei $X$ ein $\mathds{K}$-Vektorraum. Eine \Index{hermitesche Form} auf $X$ ist eine Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ mit\todo{RevChap7}
 \begin{align*}
 	\skal*{x}{y+y'} &= \skal*{x}{y} + \skal*{x}{y'} \\
 	\skal*{x}{\alpha \cdot y} &= \alpha \cdot \skal*{x}{y} \\
@@ -2062,6 +2062,100 @@ Falls $\skal*{y}{y} \not=0$, so setze $\lambda := - \frac{\skal*{y}{x}}{\skal*{y
 \end{align*}
 Falls $\skal*{x}{x} \not= 0$, so vertausche die Rollen von $x$ und $y$. Falls $\skal*{x}{x}=\skal*{y}{y}=0$ gilt, so setzen wir $\lambda := - \skal*{y}{x}$. \bewende
 % subsection 74 (end)
+
+\subsection[Proposition: Ein Skalarprodukt definiert eine Norm]{Proposition} % (fold)
+\label{sub:75}
+Sei $X$ ein $\mathds{K}$-Vektorraum mit Skalarprodukt. Dann definiert $x \mapsto \norm{x} := \skal*{x}{x}^{\frac{1}{2}}$ eine Norm auf $X$.
+\minisec{Beweis}
+$\norm{\cdot }$ ist positiv definit: $\skal*{\cdot}{\cdot}$ ist positiv definit. Weiter gilt
+\begin{align*}
+	\norm{\lambda \cdot x} &= \skal*{\lambda \cdot x}{\lambda \cdot x}^{\frac{1}{2}} = \enbrace*{\overline{\lambda} \lambda \skal*{x}{x}}^{\frac{1}{2}} 
+	= \abs*{\lambda} \cdot \norm{x}    \\
+	\shortintertext{Die Dreieckungleichung gilt, da}
+	\norm{x+y}^2 &= \skal*{x+y}{x+y} = \skal*{x}{x} + \skal*{x}{y} + \skal*{y}{x} + \skal*{y}{y} \le \skal*{x}{x} +  \enbrace*{\skal*{x}{x} \skal*{y}{y}}^{\frac{1}{2}}
+	+ \skal*{y}{y}  \\
+	&= \norm{x}^2 + 2 \cdot \norm{x} \cdot \norm{y} + \norm{y}^2 = \enbrace*{\norm{x} + \norm{y}}^2    
+\end{align*}
+$\Rightarrow \norm{x+y} \le \norm{x} + \norm{y}$. \bewende
+% subsection 75 (end)
+
+\subsection[Bemerkungen über Cauchy-Schwarz und die Stetigkeit von $\skal*{\cdot}{\cdot}$]{Bemerkung} % (fold)
+\label{sub:76}
+\begin{enumerate}[(i)]
+	\item Die Cauchy-Schwarz Ungleichung schreibt sich auch als $\abs*{\skal*{x}{y}} \le \norm{x} \cdot \norm{y}$.
+	\item Die Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ ist stetig:
+	\begin{align*}
+		\abs*{\skal*{x}{y}- \skal*{x'}{y'}} = \ldots \le \norm{x-x'} \cdot \norm{y} + \norm{x'} \cdot \norm{y'-y}.     
+	\end{align*}
+\end{enumerate}
+% subsection 76 (end)
+
+\subsection[Proposition über Zusammenhang von Norm und Skalarprodukt mit dem Parallelogrammgesetz]{Proposition} % (fold)
+\label{sub:77}
+Für einen normierten Raum $X$ sind äquivalent: \todo{eventuell Bild von Parallelogramm hinzufügen}
+\begin{enumerate}[(i)]
+	\item Es gilt das Parallelogrammgesetz $\norm{x+y}^2 + \norm{x-y}^2 = 2 \enbrace*{\norm{x}^2 + \norm{y}^2}$ für alle $x,y \in X$.
+	\item $\skal*{x}{y} := \frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{-x+y}^2 + i \cdot \norm{i \cdot x +y}^2 - i \cdot \norm{-i \cdot x+ y}^2}$ für $\mathds{K}=\mathds{C}$ bzw.
+	
+	$\skal*{x}{y} := \frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{x-y}^2}$ für $\mathds{K}=\mathds{R}$ definiert ein Skalarprodukt auf $X$. In diesem Fall gilt
+	$\skal*{x}{x} = \norm{x}^2$ für alle $x \in X$; insbesondere ist $\skal*{\cdot}{\cdot}$ stetig auf $X \times X$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(ii)$\Rightarrow$(i):] Es gilt $\norm{x}^2 = \skal*{x}{x}$ für $x \in X$. und (i) folgt durch einfache Rechnung.
+	\item[(i)$\Rightarrow$(ii):] $\skal*{\cdot}{\cdot} \colon X \times X \to X$ ist stetig (klar). Linearität (für $\mathds{K}=\mathds{C}$):
+	\begin{gather*}
+		\skal*{x}{y+y'} = \frac{1}{4} \enbrace*{\norm{x+y+y'}^2 - \norm{-x+y+y'}^2 + i  \norm{i x + y+ y'}^2 - i \norm{- ix +y+y'}^2} \label{eq:77:1}\tag{*} \\ 
+		\begin{split}
+			\skal*{x}{y} + \skal*{x}{y'} = \frac{1}{4} \Big( &\norm{x+y}^2 - \norm{-x+y}^2 + i  \norm{ix +y}^2 - i  \norm{-ix +y}^2 + \\
+			&\norm{x+y'}^2 + \norm{-x+y'} + i  \norm{ix + y'} - i  \norm{-ix +y'} \Big)
+		\end{split}
+		\label{eq:77:2}\tag{**}
+	\end{gather*}
+	Vergleich der Imgaginärteile: Es gilt
+	\begin{align*}
+		\norm{x+y+y'}^2 &= - \norm{x+y-y'}^2 + 2 \norm{x+y}^2 + 2 \norm{y'}  \\
+		\shortintertext{und}
+		\norm{x+y+y'}^2 &= - \norm{x-y+y'}^2 + 2 \norm{x+y'} + 2 \norm{y}^2 \\
+		&= - \frac{1}{2} \enbrace*{\norm{x+y-y'}^2 + \norm{x-y+y'}^2} + \norm{x+y}^2 + \norm{x+y'}^2 + \norm{y'}^2 + \norm{y}^2         
+	\end{align*}
+	$\Rightarrow$ Realteile von \eqref{eq:77:1} und \eqref{eq:77:2} stimmen überein. $\ldots \Rightarrow \skal*{x}{y} + \skal*{x}{y'}= \skal*{x}{y+y'}$.
+	$\Rightarrow \skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{N} \setminus \set{0}$ ($\skal*{x}{0}=0$ ist trivial). Damit folgt auch
+	$\skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{Z}$. Es gilt nun für $\alpha=\frac{m}{n} \in \mathds{Q}$
+	\[
+		\skal*{x}{\alpha \cdot y} = \frac{n}{n} \cdot \skal*{x}{\frac{m}{n} \cdot y } = \frac{m}{n} \cdot \skal*{x}{\frac{n}{n}\cdot y } = \alpha \cdot \skal*{x}{y}  
+	\]
+	Mit der Stetigkeit von $\skal*{\cdot}{\cdot}$ folgt nun $\skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{R}$.
+	$\skal*{x}{i \cdot y} = i \cdot \skal*{x}{y}$ ist trivial und damit ist $\skal*{x}{\alpha \cdot y }= \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{C}$. Also ist
+	$\skal*{\cdot}{\cdot}$ linear in der zweiten Variablen. $\skal*{x}{y} = \overline{\skal*{y}{x}}$ ist trivial. \bewende
+\end{description}
+% subsection 77 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:78}
+Ist $X$ ein $\mathds{C}$-Vektorraum und $q \colon X \times X \to \mathds{C}$ eine \Index{Sesquilinearform} (d.h. $q$ ist linear in der zweiten Variable und konjugiert 
+linear in der ersten), dann ist $q$ durch die Abbildung $n_q \colon X \to \mathds{C}$, $n_q(x) := q(x,x)$ eindeutig bestimmt durch die Polarisierungsidentität
+\[
+	q(x,y) = \frac{1}{4} \enbrace[\Big]{n_q(x+y) - n_q(-x+y) + i \cdot n_q(i x +y) - i \cdot n_q(-ix +y)}.  
+\]
+% subsection 78 (end)
+
+\subsection[Definition: Prä-Hilbertraum und Hilbertraum]{Definition} % (fold)
+\label{sub:79}
+Ein $\mathds{K}$-Vektorraum $\mathcal{H}$ heißt \Index{Prä-Hilbertraum}, falls $\mathcal{H}$ ein Skalarprodukt besitzt. $\mathcal{H}$ heißt \Index{Hilbertraum}, falls
+$\mathcal{H}$ vollständig ist bzgl. der durch $\skal*{\cdot}{\cdot}$ induzierten Norm. 
+% subsection 79 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:710}
+Sei $\mathcal{H}$ ein Prä-Hilbertraum und $\overline{\mathcal{H}}^{\norm{\cdot}}$ die Vervollständigung bezüglich $\norm{x} = \skal*{x}{x}^{\frac{1}{2}}$. Dann ist
+$\overline{\mathcal{H}}^{\norm{\cdot}}$ in kanonischer Weise ein Hilbertraum.
+\minisec{Beweis}
+$\enbrace*{\mathcal{H}, \norm{\cdot}} \hookrightarrow \enbrace*{\overline{\mathcal{H}}^{\norm{\cdot}}, \norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}}$ ist isometrisch
+mit dichtem Bild. $\norm{\cdot}$ erfüllt das Parallelogrammgesetz und daher auch $\norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$. Mit \ref{sub:77} folgt, dass 
+$\overline{\mathcal{H}}^{\norm{\cdot}}$ ein Skalarprodukt besitzt, welches die Norm $\norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$ induziert und auf $\mathcal{H}$ mit
+$\skal*{\cdot}{\cdot}$ übereinstimmt. Das Skalarprodukt auf $\overline{\mathcal{H}}^{\norm{\cdot}}$ ist wegen Stetigkeit hierdurch eindeutig bestimmt. \bewende
+% subsection 710 (end)
 % section 7 (end)
 
 
