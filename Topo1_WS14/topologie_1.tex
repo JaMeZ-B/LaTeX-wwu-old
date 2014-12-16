@@ -1172,13 +1172,13 @@ Diese Abbildung induziert(!) eine weitere Abbildung $H_*(K;R) \xrightarrow{\cong
 \subsection[Definition: $R$-Kettenabbildung]{Definition} % (fold)
 \label{sub:61}
 Seien $(C_*,d_*)$ und $(C_*',d_*')$ zwei $R$-Kettenkomplexe. Eine \bet{$\mathbf{R}$-Kettenabbildung}\index{R-Kettenabbildung@$R$-Kettenabbildung}
-$f_* : (C_*,d_*) \to (C_*',d_*')$ ist eine Folge von $R$-linearen Abbildungen $f_n : C_n \to C_n'$, sodass
+$f_* \colon (C_*,d_*) \to (C_*',d_*')$ ist eine Folge von $R$-linearen Abbildungen $f_n \colon C_n \to C_n'$, sodass
 \[
 	d_n' \circ f_n = f_{n-1} \circ d_n
 \]
-für alle $n\ge 1$ ist. Also kommutiert folgendes Diagramm\todo{RevChap6}
+für alle $n\ge 1$ gilt. Also kommutiert folgendes Diagramm
 \[
-	\begin{tikzcd}
+	\begin{tikzcd}[sep=normal]
 		C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"] \dar["f_1", Firebrick3] & C_2 \lar["d_2"] \dar["f_2", Firebrick3]& C_3 \lar["d_3"] \dar["f_3", Firebrick3]& \ldots \lar \\
 		C_0' & C_1' \lar["d_1'"]  & C_2' \lar["d_2'"]& C_3' \lar["d_3'"]& \ldots \lar
 	\end{tikzcd}
@@ -1188,11 +1188,11 @@ für alle $n\ge 1$ ist. Also kommutiert folgendes Diagramm\todo{RevChap6}
 
 \subsection[Bemerkung: Induzierte Abbildung einer Kettenabbildung]{Bemerkung} % (fold)
 \label{sub:62}
-Ist $f_* : (C_*,d_*) \to (C_*',d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung $H_n(f_*) : H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
+Ist $f_* \colon (C_*,d_*) \to (C_*',d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung auf Homologie $H_n(f_*) \colon H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
 \[
 	H_n(f_*) \enbrace*{[v]} := \benbrace*{f_n(v)}  
 \]
-für $v \in \ker d_n$, denn:
+für $v \in \ker d_n$. Dies ist wohldefiniert, denn:
 \begin{itemize}
 	\item $d_n' \enbrace[\big]{f_n(v)} = f_{n-1} \enbrace[\big]{d_n(v)} = 0 $, also $f_n(v) \in \ker d_n'$ für $v \in \ker d_n$.
 	\item Ist $[v]=[w]$, mit $v,w \in\ker d_n$, so gibt es $x \in C_{n+1}$ mit $d_{n+1}(x)=v-w$. Dann ist 
@@ -1207,16 +1207,16 @@ für $v \in \ker d_n$, denn:
 \label{sub:63}
 \begin{enumerate}[a)]
 	\item $R$-Kettenkomplexe mit Kettenabbildungen bilden die Kategorie $R\text{-}\textsc{Ketten}$.
-	\item Homologie definiert nun einen Funktor: $H_n : R\text{-}\textsc{Ketten} \to R\text{-}\MOD$.
+	\item Homologie definiert nun einen Funktor: $H_n \colon R\text{-}\textsc{Ketten} \to R\text{-}\MOD$.
 	
 	Es gilt $H_n(\id_{(C_*,d_*)}) = \id_{H_n(C_*,d_*)}$ und $H_n(f \circ g) = H_n(f) \circ H_n(g)$, da
 	\[
-		H_n(f \circ g) \enbrace*{[v]} = \benbrace*{f_n \circ g_n(v)} = \benbrace*{f_n \enbrace[\big]{g_n(v)} } = H_n(f) \benbrace*{g_n(v)} = H_n(f) \enbrace[\big]{H_n(g)(v)}     
+		H_n(f \circ g) \enbrace*{[v]} = \benbrace*{f_n \circ g_n(v)} = \benbrace*{f_n \enbrace[\big]{g_n(v)} } = H_n(f) \enbrace[\big]{\benbrace*{g_n(v)}} = H_n(f) \enbrace[\big]{H_n(g)(v)}     
 	\]
 	\item Definiert man die Kategorie der \Index{graduierten} $R$-Moduln als die Kategorie, deren Objekte Folgen $(V_n)_n$ von $\mathds{R}$-Moduln sind und deren
 	Morphismen Folgen von $R$-linearen Abbildungen $(f_n)_{n}$ sind, so kann man die $H_n$, $n \in \mathds{N}$ zu einem Funktor
 	\[
-		H_* : R\text{-}\textsc{Ketten} \longrightarrow \textsc{Gr}\text{-}R\text{-}\MOD \quad , \qquad (C_*,d_*) \longmapsto \enbrace[\big]{H_n(C_*,d_*)}_n 
+		H_* \colon R\text{-}\textsc{Ketten} \longrightarrow \textsc{Gr}\text{-}R\text{-}\MOD \quad , \qquad (C_*,d_*) \longmapsto \enbrace[\big]{H_n(C_*,d_*)}_n 
 	\]
 	zusammensetzen.
 \end{enumerate}
@@ -1224,63 +1224,54 @@ für $v \in \ker d_n$, denn:
 
 \subsection[Definition: Induzierte Abbildung auf Kettenkomplexen]{Definition} % (fold)
 \label{sub:64}
-Sei $f : X \to Y$ stetig. Wir definieren $C_n(f;R) : C_n(X;R) \to C_n(Y;R)$ durch
+Sei $f : X \to Y$ stetig. Wir definieren $C_n(f;R) \colon C_n(X;R) \to C_n(Y;R)$ durch
 \[
 	C_n(f;R) \enbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot  \sigma} := \smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot \enbrace*{f \circ \sigma} 
 \]
-(Für $\sigma \in S_n(X)$ ist $f \circ \sigma \in S_n(Y)$.)
+Dies ist wohldefiniert, denn für $\sigma \in S_n(X)$ ist $f \circ \sigma \in S_n(Y)$. 
 % subsection 64 (end)
 
-\subsection[Proposition: Der singuläre Kettenkomplex bildet einen Funktor]{Proposition} % (fold)
+\subsection[Proposition: Der singuläre Kettenkomplex über $R$ bildet einen Funktor]{Proposition} % (fold)
 \label{sub:65}
 Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$ zu einem Funktor
 \[
-	C_*(-;R) : \textsc{Top} \to R\text{-}\textsc{Ketten}
+	C_*(-;R) \colon \textsc{Top} \to R\text{-}\textsc{Ketten}
 \]
 \minisec{Beweis}
 \begin{enumerate}[(i)]
-	\item $C_*(f;R)$ ist eine $R$-Kettenabbildung:
-	% \begin{align*}
-	% 	C_{n-1}(f;R) \circ \partial_n \enbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot  \sigma} &= C_{n-1}(f;R) \enbrace*{\sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j
-	% 	\cdot r_\sigma (\delta_j \sigma)} \\
-	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\delta_j \sigma)} \\
-	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{f_{n-1} \circ (\sigma \circ \iota_{n,j})} \\
-	% 	&= \sum_{\sigma \in S_n(X)} \sum_{j=0}^{n} (-1)^j \cdot r_\sigma \enbrace[\big]{(f_{n-1} \circ \sigma) \circ \iota_{n,j}} \\
-	% 	&= \sum_{j=0}^{n} (-1)^j \enbrace[\Bigg]{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \underbrace{\enbrace*{f_{n-1} \circ \sigma} \circ \iota_{n,j}}_{\delta_j (f \circ \sigma)} } \\
-	% 	&= \partial_n \circ C_n \enbrace*{f;R}(\sigma)
-	% \end{align*}
+	\item $C_*(f;R)$ ist eine $R$-Kettenabbildung: Es gilt
 	\begin{align*}
-		C_{n-1}(F;R) \circ \partial_n(\sigma) = C_{n-1} (f;R) \enbrace*{\sum_{l=0}^{n}  (-1)^l \sigma \circ \iota_{n,l}} &=
+		C_{n-1}(f;R) \circ \partial_n(\sigma) = C_{n-1} (f;R) \enbrace*{\sum_{l=0}^{n}  (-1)^l \sigma \circ \iota_{n,l}} &=
 		\sum_{l=0}^{n} (-1)^l (f \circ \sigma) \circ \iota_{n,l} \\
-		&= \partial_n(f \circ \sigma) = \partial \enbrace*{C_n(f;R)(\sigma)} 
+		&= \partial_n(f \circ \sigma) = \partial \enbrace[\big]{C_n(f;R)(\sigma)}.
 	\end{align*}
-	\item Zu zeigen: $C_*(f \circ g;R) = C_*(f;R) \circ C_*(g;R)$:
+	\item Zu zeigen: $C_*(f \circ g;R) = C_*(f;R) \circ C_*(g;R)$. Es gilt
 	\begin{align*}
-		C_n(f \circ g;R)(\sigma) = f \circ (g \circ \sigma) = C_n(f;R)(g \circ \sigma) = C_n(f;R) \enbrace[\big]{C_n(g;R)(\sigma)} 
+		C_n(f \circ g;R)(\sigma) = f \circ (g \circ \sigma) = C_n(f;R)(g \circ \sigma) = C_n(f;R) \enbrace[\big]{C_n(g;R)(\sigma)}.
 	\end{align*}
-	\item Zu zeigen: $C_*(\id_X;R) = \id_{C_*(X;R)}$:
+	\item Zu zeigen: $C_*(\id_X;R) = \id_{C_*(X;R)}$. Es gilt
 	\[
-		C_n(\id_X;R)(\sigma) = \id_X \circ \sigma = \sigma
+		C_n({\id_X};R)(\sigma) = {\id_{X}} \circ {\sigma} = \sigma \bewende
 	\]
 \end{enumerate}
 % subsection 65 (end)
 
 \subsection[Korollar: Homologie ist ein Funktor $\TOP \to R\text{-}\textsc{Mod}$]{Korollar} % (fold)
 \label{sub:66}
-Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) : \TOP \to R\text{-}\textsc{Mod}$.
+Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) \colon \TOP \to R\text{-}\textsc{Mod}$.
 \minisec{Beweis}
-$H_n(-;R)$ ist die Komposition der Funktoren $C_*(-;R) : \TOP \to R\text{-}\textsc{Ketten}$ und $H_* : R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$. \bewende
+$H_n(-;R)$ ist die Komposition der Funktoren $C_*(-;R) \colon \TOP \to R\text{-}\textsc{Ketten}$ und $H_* \colon R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$. \bewende
 % subsection 66 (end)
 
-\subsection[Bemerkung: Notation und Formel für $H_n(f;R)$]{Bemerkung} % (fold)
+\subsection[Bemerkung: Notation für die auf Homologie induzierte Abbildung]{Bemerkung} % (fold)
 \label{sub:67}
 \begin{itemize}
-	\item Oft schreiben wir $f_* = H_n(f;R)$.
-	\item Es gilt für $\benbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \cdot \sigma} \in H_n(X;R)$
-	\[
-		f_* \enbrace*{\benbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot  \sigma}} =  \benbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma
-		\cdot f\circ \sigma} \in H_n(Y;R)
-	\]
+	\item Oft schreiben wir kurz $f_* = H_n(f;R)$.
+	\item Für $\benbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \sigma} \in H_n(X;R)$ ist
+	\(
+		f_* \enbrace*{\benbrace*{\sum\limits_{\sigma \in S_n(X)} r_\sigma \sigma}} =  \benbrace*{\sum\limits_{\sigma \in S_n(X)} r_\sigma
+		f\circ \sigma} \in H_n(Y;R)
+	\)
 \end{itemize}
 % subsection 67 (end)
 
@@ -1290,11 +1281,11 @@ Seien $X_i$, $i \in I$ topologische Räume. Mit
 \[
 	X := \coprod_{i \in I} X_i 
 \]
-bezeichnen wir die \Index{Summe} (oder auch das \Index{Koprodukt}) der $X_i$. Als Menge
-ist $X$ die disjunkte Vereinigung der $X_i$. $U \subseteq X$ ist offen genau dann, wenn $X_i \cap U \subseteq X_i$ offen ist für jedes $i \in I$. Für jedes $i_o$ erhalten
-wir eine stetige Inklusion $j_{i_0} : X_{i_0} \to \coprod_{i} X_i$.
+bezeichnen wir die \bet{Summe}\index{Summe!topologischer Räume} (oder auch das \bet{Koprodukt}\index{Koprodukt!topologischer Räume}) der $X_i$. Als Menge
+ist $X$ die disjunkte Vereinigung der $X_i$. $U \subseteq X$ ist offen genau dann, wenn $X_i \cap U \subseteq X_i$ offen ist für jedes $i \in I$. Für jedes $i_0$ erhalten
+wir eine stetige Inklusion $j_{i_0} \colon X_{i_0} \to \coprod_{i} X_i$.
 \minisec{Bemerkung}
-Für jedes $i_o$ mit $X_{i_0} \subseteq \coprod_i X_i$ offen und abgeschlossen.
+Für jedes $i_0$ ist $X_{i_0} \subseteq \coprod_i X_i$ offen und abgeschlossen.
 % subsection 68 (end)
 
 \subsection[Definition: Summe von $R$-Moduln]{Definition} % (fold)
@@ -1303,12 +1294,12 @@ Seien $V_i$, $i \in I$ $R$-Moduln. Mit
 \[
 	V := \bigoplus_{i \in I} V_i
 \]
-bezeichnen wir die \Index{Summe} (oder auch das \Index{Koprodukt}) der $V_i$. Elemente von $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit $v_i \in V_i$ und $v_i=0$ für
+bezeichnen wir die \bet{Summe}\index{Summe!von $R$-Moduln} (oder auch das \bet{Koprodukt}\index{Koprodukt!von $R$-Moduln}) der $V_i$. Elemente von $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit $v_i \in V_i$ und $v_i=0$ für
 alle bis auf endlich viele $i$. Die $R$-Modulstruktur ist erklärt durch:
 \[
 	(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I} \qquad ,\qquad r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}
 \]
-Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} : V_{i_0} \to V$ mit
+Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} \colon V_{i_0} \to V$ mit
 \[
 	\enbrace*{j_{i_0} (v)}_{i} = \begin{cases}
 		v, &\text{ falls }i=i_0\\
@@ -1316,22 +1307,22 @@ Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} : V_{i_0
 	\end{cases} 
 \]
 \minisec{Bemerkung}
-Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i : V_i \to W$ von $R$-linearen Abbildungen eine
+Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i \colon V_i \to W$ von $R$-linearen Abbildungen eine
 $R$-lineare Abbildung 
 \(
-	\oplus_{i \in I} f_i : \bigoplus_{i \in I} V_i \to W  
+	\oplus_{i \in I} f_i \colon \bigoplus_{i \in I} V_i \to W  
 \)
 mit
 \[
 	\enbrace*{\oplus_{i \in I} f_i} \enbrace[\big]{(v_i)_{i \in I}} = \sum_{i \in I} f_i(v_i)  
 \]
-Ist umgekehrt $f : \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so ist $f_i := f \circ j_{i}$ eine Folge von $R$-linearen Abbildungen mit 
-$f = \bigoplus_{i \in I} f_i$
+Ist umgekehrt $f \colon \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so ist $f_i := f \circ j_{i}$ eine Folge von $R$-linearen Abbildungen mit 
+$f = \bigoplus_{i \in I} f_i$. \todo{RevChap6}
 % subsection 69 (end)
 
 \subsection[Satz: Homologie des Koproduktes topologischer Räume]{Satz} % (fold)
 \label{sub:610}
-Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die $j_i : X_i \to X$ einen Isomorphismus
+Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \to X$ einen Isomorphismus
 \[
 	\bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\bigoplus_{i \in I} (j_i)_*}  H_n(X;R)
 \]
@@ -1699,7 +1690,7 @@ $h_*$ ist die gesuchte Kettenhomotopie, da für $n \in \mathds{N}$ unter Anwendu
 	&= - \smashoperator[r]{\sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}}} \,(-1)^{j+l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} 
 	+ (\sigma\times \id) \circ i_1  - (\sigma\times \id) \circ i_0 \\
 	&= - \sum_{j=0}^{n-1} (-1)^j \sum_{l=0}^{n} (-1)^{l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j}
-	+ \underbrace{(\sigma\times \id) \circ i_1}_{= i_0 \circ \sigma}  - \underbrace{(\sigma\times \id) \circ i_0}_{= i_1 \circ \sigma} \\
+	+ \underbrace{(\sigma\times \id) \circ i_1}_{= i_1 \circ \sigma}  - \underbrace{(\sigma\times \id) \circ i_0}_{= i_0 \circ \sigma} \\
 	&= - h_{n-1}(\partial_n \sigma) + C_n(i_1;R)(\sigma) - C_n(i_0;R)(\sigma) \bewende  
 \end{align*}
 % subsection 713 (end)
@@ -2134,8 +2125,8 @@ Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit
 		Es folgt für $z := x + \partial_n^{B,A \cap B}(y)$.
 		\begin{align*}
 			(j_B)_*(z) & =(j_B)_*(x) = b \\
-			(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\rand{B,A \cap B}(y)}_n = (j_A)_*(x) + \rand{X,A}_n \circ  \enbrace*{i_B, j_A}_*(y) = (j_A)_*(x) + a -
-			(j_A)_*(x) = a  
+			(j_A)_*(z) &= (j_A)_*(x) + (j_A)_* \enbrace*{\rand{B,A \cap B}(y)}_n &= (j_A)_*(x) + \rand{X,A}_n \circ  \enbrace*{i_B, j_A}_*(y) \\ 
+			&&= (j_A)_*(x) + a - (j_A)_*(x) = a  
 		\end{align*}
 		\item["$\subseteq$":] Sei $x \in H_n(A\cap B;R)$. Dann gilt
 		\begin{align*}
@@ -2439,11 +2430,11 @@ $f(S^1) \cap V = \emptyset$
 	\end{align*}
 	Nun benutzten wir die zugehörige Mayer-Vietoris-Folge: \todo{schöner machen}
 	\[
-		\begin{tikzcd}[column sep=1.3em]
+		\begin{tikzcd}[column sep=1.3em, font=\small]
 			\underset{=0 \text{ nach I.A.}}{\tilde{H}_{i+1} \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}}  \times [0,1]^k}}} \rar &
 			\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}} }  \dar["\cong"] & \\
-			& \bigoplus\limits_{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[\nicefrac{1}{2},1] \times [0,1]^k} } }
-			^{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[0,\nicefrac{1}{2}] \times [0,1]^k} } } \rar &
+			& {\displaystyle\bigoplus\limits_{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[\nicefrac{1}{2},1] \times [0,1]^k} } }
+			^{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[0,\nicefrac{1}{2}] \times [0,1]^k} } }} \rar &
 			\underset{=0 \text{ nach I.A.}}{\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^k } } }
 		\end{tikzcd}
 	\]
@@ -2615,7 +2606,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	ist ein \CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$
 	\[
 		\begin{tikzcd}
-			S^{n-1} \rar \dar & \enbrace*{S^n}^{(n-1)}=\set{(1,0,\ldots ,0)}  \dar \\
+			S^{n-1} \rar \dar & \enbrace*{S^n}^{(n-1)} \rar[equal] \dar & \set{(1,0,\ldots ,0)}   \\
 			D^n \rar & S^n  
 		\end{tikzcd}
 	\]
@@ -2635,7 +2626,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	\]
 	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^n}{x \sim -x, x \in S^{n-1}} \to \mathds{R}P^n$ mit
 	\[
-		f \enbrace*{x_1, \ldots ,x_n} = \benbrace*{x_1 : \ldots : x_n : \sqrt{1- \sum\nolimits_{i=1}^{n} x_i^2}} 
+		f \enbrace*{x_1, \ldots ,x_n} = \benbrace*{x_1 : \ldots : x_n : \sqrt{1- {\textstyle\sum\nolimits_{i=1}^{n}} x_i^2}} 
 	\]
 	Ist $Q^{(n)} : D^n \to \mathds{R}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^n \twoheadrightarrow \nicefrac{D^n}{x \sim -x, x \in S^{n-1}}$ und 
 	$q^{(n)} \colon S^{n-1} \to \mathds{R}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
@@ -2661,7 +2652,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	\]
 	Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, \lambda \in S^{2n}} \to \mathds{C}P^n$ mit
 	\[
-		f \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- \sum\nolimits_{i=1}^{n} \abs{z_i}^2}} 
+		f \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- {\textstyle\sum\nolimits_{i=1}^{n}} \abs{z_i}^2}} 
 	\]
 	Ist $Q^{(2n)} : D^{2n} \to \mathds{C}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^{2n} \twoheadrightarrow \nicefrac{D^{2n}}{z \sim \lambda z, z \in S^{2n}}$ und 
 	$q^{(n)} \colon S^{2n+1} \to \mathds{C}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
@@ -2730,12 +2721,18 @@ $\enbrace*{X^{(n-1)},\emptyset} \hookrightarrow \enbrace*{X^{(n-1)}, X^{(n-2)}}$
 \]
 \minisec{Beweis}
 \[
-	\begin{tikzcd}
+	\tikzexternaldisable
+	\begin{tikzpicture}[baseline= (a).base]
+	\node[scale=0.8] (a) at (0,0){
+	\begin{tikzcd}[font=\normalsize,column sep=2.0em]
 		H_n \enbrace*{X^{(n)}, X^{(n-1)}} \rar["\partial_n"] & H_{n-1}(X^{(n-1)}) \dar[equal] \rar & \cdots\\
-		& H_{n-1}\enbrace*{X^{n-1}} \rar["\enbrace*{j^{(n-1)}}_*"] & H_{n-1} \enbrace*{X^{(n-1)}, X^{(n-2)}} \rar["\partial_{n-1}"] & H_{n-2} \enbrace*{X^{(n-2)}} 
-		\rar & \cdots \\ 
-		& & & H_{n-2} \enbrace*{X^{(n-2)}}  \rar["\enbrace*{j^{(n-2)}}_*"] & H_{n-2} \enbrace*{X^{(n-2)}, X^{(n-3)}} 
+		& H_{n-1}\enbrace*{X^{n-1}} \rar["j^{(n-1)}_*"] & H_{n-1} \enbrace*{X^{(n-1)}, X^{(n-2)}} \rar["\partial_{n-1}"] 
+		& H_{n-2} \enbrace*{X^{(n-2)}} \dar[equal] \rar & \cdots \\ 
+		& & & H_{n-2} \enbrace*{X^{(n-2)}}  \rar["j^{(n-2)}_*"] & H_{n-2} \enbrace*{X^{(n-2)}, X^{(n-3)}} 
 	\end{tikzcd}
+	};
+	\end{tikzpicture}
+	\tikzexternalenable
 \]
 Also $\partial^{\cell}_{n-1} \circ \partial^{\cell}_n =0$, da schon $\partial_{n-2} \circ j^{(n-1)}_* =0$. \bewende
 % subsection 122 (end)
@@ -2757,7 +2754,8 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 \begin{enumerate}[a)]
 	\item 
 	\[
-		\enbrace*{\coprod_{i \in I^{(n)}} Q_i^{(n)}, \coprod_{i \in I^{(n)}} q_i^{(n)}}_* \colon \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R}  \longrightarrow 
+		\enbrace*{{\textstyle\coprod\limits_{i \in I^{(n)}}} Q_i^{(n)}, {\textstyle\coprod\limits_{i \in I^{(n)}}} q_i^{(n)}}_* 
+		\colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow 
 		\enbrace*{X^{(n)}, X^{(n-1)};R} 
 	\]
 	induziert einen Isomorphismus in $H_*$.
@@ -2772,17 +2770,17 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 \begin{enumerate}[a)]
 	\item Sei $D^n_0 = D^n \setminus \set{0}$, $\frac{1}{2} D^n = \set[\frac{x}{2} ]{x \in D^n}$ und $\frac{1}{2} D^n_0 = \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
 	\[
-		X^{(n-1)}_{++} := X^{(n)} \setminus \bigcup_{i \in I^{(n)}} Q_i^{(n)}(\set{0}) \enspace\text{ und } \enspace
-		X^{(n-1)}_+ := X^{(n)} \setminus \bigcup_{i \in I^{(n)}} Q_i^{(n)}\enbrace*{\frac{1}{2} D^n}
+		X^{(n-1)}_{++} := X^{(n)} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^{(n)}(\set{0}) \quad \text{ und } \quad 
+		X^{(n-1)}_+ := X^{(n)} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^{(n)}\enbrace*{\frac{1}{2} D^n}
 	\]
 	Dann sind 
 	$X^{(n-1)} \hookrightarrow X_+^{(n-1)} \hookrightarrow X_{++}^{(n-1)}$ Homotopieäquivalenzen. Betrachte:
 	\[
 		\begin{tikzcd}[sep=large]
 			\enbrace*{\coprod D^n, \coprod S^{n-1}} \dar["\enbrace*{\coprod Q_i^{(n)}, \coprod q_i^{(n)}}"] \rar["(1)"] & \enbrace*{\coprod D^n, \coprod D^n_0} \dar &
-			\enbrace*{\coprod \frac{1}{2} D^n, \coprod_{i \in I^{(n)}}   \frac{1}{2} D_0^n} \lar["(2)"] \dar["(3)"] \\
+			\enbrace*{\coprod \frac{1}{2} D^n, \coprod_{i \in I^{(n)}}   \frac{1}{2} D_0^n} \lar["(2)"'] \dar["(3)"] \\
 			\enbrace*{X^{(n)}, X^{(n-1)}} \rar["(5)"] & \enbrace*{X^{(n)}, X^{(n-1)}_{++}}    
-			& \enbrace*{X^{(n)} \setminus X^{(n-1)}_+ , X^{(n-1)}_{++} \setminus X^{(n-1)}_+} \lar["(4)"] 
+			& \enbrace*{X^{(n)} \setminus X^{(n-1)}_+ , X^{(n-1)}_{++} \setminus X^{(n-1)}_+} \lar["(4)"'] 
 		\end{tikzcd}
 	\]
 	$(1), (2), (5)$ sind Homotopieäquivalenzen und induzieren Isomorphismen in Homologie. $(3)$ ist ein Homöomorphismus und induziert einen Isomorphismus in Homologie.
