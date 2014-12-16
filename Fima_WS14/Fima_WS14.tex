@@ -3077,7 +3077,7 @@ Das gleiche Argument liefert:
 
 \subsection{Superreplizierbare Claims}
 \label{sub:superrepl_claims}
-Ein Claim $C$ heißt \bet{upper hedgebar}\index{Hedge!upper hedgebar} wem Anfangskapital $V_0$, falls ein $H\in\mc{H}$ gibt mit
+Ein Claim $C$ heißt \bet{upper hedgebar}\index{Hedge!upper hedgebar} zum Anfangskapital $V_0$, falls ein $H\in\mc{H}$ gibt mit
 \[
 V_0+(H\cdot S^*)(N)\ge C^*
 \]
@@ -3090,6 +3090,159 @@ $C$ heißt \bet{strikt upperhedgebar} zum Anfangskapital $V_0$, falls es eine $H
 \[
 V_0+(H\cdot S^*)(N)\ge C^*\text{ und }\Pw(V_0+(H\cdot S^*)(N)>C^*)>0
 \]
+
+$C^*$ heißt \bet{lower hedgebar}\index{Hedge!lower hedgebar} zum Anfangskapital $V_0$, wenn es ein $H\in \mc{H}$ gibt mit
+\[
+V_0-(H\cdot S^*)(N)\le C^*
+\]
+(\bet{strikt} für $\le$ und $\Pw(V_0-(H\cdot S^*)(N)<C^*)>0$)
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.8cm,y=.8cm]
+\draw[->,color=black] (-3.,0.) -- (3,0.);
+\draw[->,color=black] (0.,-3.) -- (0.,3.);
+\draw (-3,3)--(3,-3) node[below]{$G^*$};
+\draw (-3,4)--(3,-2) node[below]{$V_0\neq G^*$};
+\draw[->] (0,0)--(2,2);
+\draw (4,2) node{$\Omega=\penbrace{\omega_1,\omega_2}$};
+\end{tikzpicture}
+
+Der Kegel $\mc{K}^*$, der zum Anfangskapital 0 upper hedgebaren Claims lässt sich durch die erwarteten Auszahlungen bzgl. der äquivalenten Martingalmaße charakterisieren.
+%sub end
+
+\subsection{Satz 4}
+\label{sub:satz_4fima}
+Für einen Claim $C$ sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $C^*\in \mc{K}^*$
+	\item $\E^*c^*\le 0~\forall \Pw^*\in \mc{P}$
+\end{enumerate}
+
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):}
+Ist $C^*\in\mc{K}^*\Rightarrow\exists H\in \mc{H}$ mit $(H\cdot S^*)(N)\ge C^*\Rightarrow 0=\E^*[(H\cdot S^*)(N)]\ge \E^*C^*~\forall \Pw\in \mc{P}$.\\
+\uline{(ii)$\Rightarrow$(i):}
+Dies ergibt sich aus dem Bipolartheorem.
+% sub end
+
+\subsection{Das Bipolartheorem}
+\label{sub:bipolartheorem}
+Betrachte den $\R^n$ mit einem Skalarprodukt.
+Eine Teilmenge $C\in \R^n$ heißt \Index{Kegel}, wenn
+\[
+\lambda x\in C ~\forall \lambda>0,~x\in C
+\]
+(heißt \bet{konvexer Kegel}\index{Kegel!konvexer}, wenn $C$ ein Kegel ist und konvex ist.
+Dies ist der Fall, wenn gilt
+\[
+x\in C,~x>0\Rightarrow \lambda x\in C
+\]
+\[
+x,y\in C\Rightarrow x+y\in C
+\]
+)\\
+Zu einem Kegel $C$ ist die \Index{Polarmenge} $C^0$ definiert durch
+\[
+C^0=\penbrace{y\in \R^n~|~\sprod{x}{y}\le 0~\forall x\in C}
+\]
+%grafik
+\begin{minipage}[c]{7cm}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.60cm,y=.60cm]
+	\draw[->,color=black] (-4.3,0.) -- (4,0.);
+	\draw[->,color=black] (0.,-4.3) -- (0.,4);
+	\fill[color=red,fill=red,fill opacity=0.1] (1.42,2.46) -- (0.,0.) -- (2.58,1.12) -- cycle;
+	\fill[color=blue,fill=blue,fill opacity=0.1] (-2.54,1.24) -- (0.,0.) -- (1.62,-2.94) -- (0.36,-3.8) -- (-3.32,0.16) -- cycle;
+	\draw (0.,0.)-- (1.42,2.46);
+	\draw (0.,0.)-- (2.58,1.12);
+	\draw [dash pattern=on 5pt off 5pt] (-1.62,2.9)-- (1.62,-2.94);
+	\draw [dash pattern=on 2pt off 2pt] (-2.54,1.24)-- (3.02,-1.48);
+	\draw (-1,-1) node {$C^0$};
+	\draw(1.4,1.3) node {$C$};
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}[c]{7cm}
+$C^0$ ist ein abgeschlossener Kegel, denn
+\[
+y\in C^0,~\lambda>0\Rightarrow\sprod{x}{\lambda y}=\lambda \sprod{x}{y}\le 0~\forall x\in C
+\]
+Die Abgeschlossenheit folgt aus der Stetigkeit des Skalarprodukts.
+\end{minipage}
+
+Das Bipolartheorem besagt, dass das Bipolar von $C$ mit dem Abschluss von $C$ übereinstimmt
+\[
+(C^0)^0=\overline{C}.
+\]
+Anwendung von \hyperref[sub:satz_4fima]{5.4}:
+Für eine Menge $E\subseteq \R^n$ sei $\cone(E)$ der von $E$ erzeugte Kegel.
+Definiere
+\[
+\cone(E):= \bigcap\limits_{C\text{ Kegel},~E\subseteq C}C=\penbrace{\lambda x~|~ \lambda>0,~x\in E}.
+\]
+Es gilt: (wegen \hyperref[sub:satz_2]{4.13}) $\Pw^*$ ist ein Martingalmaß genau dann, wenn
+\[
+\E^*C^*\le o~\forall C^*\in\mc{K}^*.
+\]
+Deshalb ist $(\mc{K}^*)^0=\overline{\cone(\mc{P})}=\cone(\overline{\mc{P}})$
+\[
+\Rightarrow (\mc{K}^*)^{0^0}=\overline{\cone(\mc{P})}^0
+\]
+\[
+\stackrel{\text{Bip.t.}}{\Rightarrow} \mc{K}^*=(\mc{K^*})^{0^0}=\overline{\cone(\mc{P})}^0=\cone(\mc{P})^0
+\]
+Also gilt:
+\[
+\E^*C^*\le 0 ~\forall \Pw^*\in\mc{P}\Rightarrow C^*\in \cone(\mc{P})^0\Rightarrow C^*\in\mc{K}^*
+\]
+%sub end
+
+\subsection{Upper and lower hedging Preise}
+\label{sub:upper_lower_preise}
+Sei $C$ ein Claim.
+$P_+(C)=\inf\{x\in \R~|~C^*$ ist upper hedgbar zum Anfangskapital $x\}$ und\\
+$P_-(C)=\sup\{x\in \R~|~C^*$ ist lower hedgebar zum Anfangskapital $x \}$.\\
+Aus \hyperref[sub:satz_4fima]{5.4} folgt, dass das Infimum bzw. Supremum angenommen wird.
+
+\minisec{Satz}
+\begin{enumerate}[(i)]
+	\item Die Menge der upper hedging Preise ist ein abgeschlossenes Intervall $[P_+(C),+\infty)$
+	\item Die Menge der lower hedging Preise ist ein abgeschlossenes Intervall $(-\infty,P_-(C)]$
+	\item $P_-(C)\le P_+(C)$
+\end{enumerate}
+
+\bet{Beweis:}\\
+(i): Klar ist, dass die Menge der upper hedging Preise ein nach oben unbeschränktes Intervall bildet.
+Für die Abgeschlossenheit betrachte upper hedging Preise $a_n$ mit $a_n\searrow a$.\\
+\zz~a ist upper hedging Preis.
+Dann gilt 
+\[
+C^*-a_n\in \mc{K}^*~\forall n\in\N
+\]
+Wegen \hyperref[sub:satz_2]{4.13} gilt für $\Pw^*\in\mc{P}$: $\E^*(C^*-a_n)\le 0~\forall n\in N$, außerdem folgt wegen $C^*-a_n\to C^*-a$, dass $0\ge \E^*(C^*-a_n)\to \E^*(C^*-a) ~\forall \Pw^*\in \mc{P}$.\\
+\hyperref[sub:satz_4fima]{5.4} liefert $C^*-a\in \mc{K}^*$ also ist $a$ ein upper hedging Preis.\\
+
+(ii): geht wie (i): $a$ ist lowerhedging Preis genau dann, wenn es ein $K\in \G^*$ gibt mit
+\[
+a+K\le C^* \Leftrightarrow -(C^*-a)\le-K \Leftrightarrow -(C^*-a)\in \mc{K}^*
+\]
+$a_n \nearrow a,~a_n$ lower hedging Preise $\Rightarrow -(C^*-a_n)\in\mc{K}^*\Rightarrow\E^*(-(C^*-a_n))\le 0~\forall\Pw^*\in\mc{P},~\forall n\in\N$\\
+$C^*-a_n\to C^*-a\Rightarrow\E^*(-(C^*-a))\le0~\forall \Pw^*\in\mc{P}\Rightarrow-(C^*-a)\in\mc{K}^*$\\
+$\Rightarrow a$ ist lower hedging Preis (für $C^*$).\\
+
+(iii): Ist $a$ lower hedging Preis und $b$ upper hedging Preis,so gilt
+\begin{equation*}
+\begin{aligned}
+	(C^*-b)\in \mc{K}^* &\Leftrightarrow \E^*(C^*-b)\le 0 ~\forall \Pw^*\in\mc{P}\\
+	&\Leftrightarrow \sup\limits_{\Pw^*\in\mc{P}} \E^*C^*\le b\\
+	-(C^*-a)\in\mc{K}^* &\Leftrightarrow \E^*(-(C^*-a))\le 0~\forall\Pw^*\in\mc{P}\\
+	&\Leftrightarrow \inf\limits_{\Pw^*\in\mc{P}}\E^*C^*\ge a\\
+	a\le \inf\limits_{\Pw^*\in\mc{P}}\E^*C^* &\le \sup\limits_{\Pw^*\in\mc{P}} \E^*C^* \le b
+\end{aligned}
+\end{equation*}
+
+Prinzipiell ergeben sich zwei Fälle:
+\begin{enumerate}[(a)]
+	\item $P_-(C)=P_+(C)$, dies ergibt sich, wenn $C$ hedgebar ist.
+	\item $P_-(C)<P_+(C)$, dies ergibt sich, wenn $C$ nicht hedgebar ist.
+\end{enumerate}
+
 
 
 
