@@ -2739,7 +2739,7 @@ d=b_1r_1\dt{+}b_nr_n,
 weil $d\in (b_1\dt{,}b_n)$.
 Wenn also $c\in R$ein gemeinsamer Teiler der $b_j$ ist, so gilt $c\mid d$.
 \hfill $\square$\\
-In Hauptidealbereichen existieren also immer ggT's.
+In Hauptidealbereichen existieren also immer $\ggT$'s.
 
 \subsubsection*{Korollar (Lemma von Bézout)}
 Ist $b_1\dt{,}b_n\in \Z$ und ist $d$ ein ggT von $b_1\dt{,}b_n$, so gibt es $r_1\dt{,}r_n\in \Z$ mit
@@ -2901,7 +2901,208 @@ Dann ist \uline{jeder} Teiler von $r$ von der Form
 \[
 s=p_1^{k_1}\cdots p_n^{k_n}\cdot u \text{ mit } u\in R^*,~k_i\le l_i~(p_j^0=1)
 \]
-Folglich existieren in faktoriellen Ringen ggT's.
+Folglich existieren in faktoriellen Ringen $\ggT$'s.
+%sub end
+
+\subsection{Definition euklidischer Bereich}
+\label{sub:def_euklid_bereich}
+Sei $R$ ein Integritätsbereich.
+Eine Abbildung $\delta:R\to\N$ heißt \Index{Gradfunktion}, wenn gilt:
+Für alle $a,b\in R$ mit $b\neq 0$ gibt es $q,r\in R$ mit
+\[
+a=bq+r \text{ und } \delta(r)<\delta(b).
+\]
+Ein Integritätsbereich mit Gradfunktion heißt \Index{euklidischer Bereich} (euklidischer Ring).
+
+\subsubsection*{Beispiel}
+\begin{enumerate}[(a)]
+	\item $R=\Z,~\delta(x)=\abs{x}$ Absolutbetrag.
+	Dann liefert teilen mit Rest: ist $a,b\in\Z,~b\neq 0$, so gibt es $q,r\in\Z$ mit
+	\[
+	a=bq+r,~0\le r<\abs{b}
+	\]
+	\item $K$ Körper, $\delta(x)\left\{\begin{array}{cl}1 & x\neq 0\\ 0 & x=0 \end{array}\right.$ ist Gradfunktion:
+	\[
+	a=bq \text{ mit } q=ab^{-1} \text{ (Teilen ohne Rest)}
+	\]
+\end{enumerate}
+%sub end
+
+\subsection{Satz 17}
+\label{sub:satz_17}
+Jeder euklidischer Bereich ist ein Hauptidealbereich.\\
+
+\bet{Beweis:}\\
+Sei $\delta$ eine Gradfunktion auf $R$, sei $I\trianglelefteq R$.
+Für $I=\{0\}=(0)$ ist $I$ ein Hauptideal.
+Für $I\neq \{0\}$ wähle $b\in I\backslash\{0\}$ so, dass $\delta(b)$ minimal ist.
+Ist $a\in I$ schreibe $a=bq+r$ mit $\delta(r)<\delta(b)$.
+Es folgt
+\[
+r=a-bq\in I,\text{ also } r=0\rightsquigarrow a\in (b) \rightsquigarrow I=(b)
+\]
+\hfill $\square$\\
+Gezeigt ist damit:\\
+$R$ Körper $\Rightarrow$ $R$ euklidischer Bereich $\Rightarrow$ $R$ Hauptidealbereich $\Rightarrow$ $R$ faktoriell\\
+(keiner der Pfeile ist umkehrbar!).
+%sub end
+
+\subsection{Lemma 10 (Polynomdivision)}
+\label{sub:polynomdivision}
+Sei $R$ ein Integritätsbereich, sei $g=a_0+a_1T\dt{+}a_mT^m\in R[T]$ mit $\deg(g)=m\ge 0$ und Leitkoeffizient $a_m\in R^*$.
+Sei $f\in R[T]$.
+Dann gibt es eindeutig bestimmte Polynome $q,r\in R[T]$ mit
+\[
+f=q\cdot g+r \text{ und } \deg(r)<m.
+\]
+
+\bet{Beweis:}\\
+\uline{Eindeutigkeit:}
+$f=gq+r=g\tilde{q}+\tilde{r}$ und $\deg(\tilde{r})<m \rightsquigarrow g(q-\tilde{q})=\tilde{r}-r.$
+Da $a_m\in R^*$ folgt
+\[
+\deg(g(q-\tilde{q}))=\underbracket{\deg(g)}_{=m}+\deg(q-\tilde{q})=\underbracket{\deg(\tilde{r}-r)}_{<m}
+\]
+also
+\[
+\deg(q-\tilde{q})=-\infty \text{ d.h. } q=\tilde{q} \rightsquigarrow r=\tilde{r}
+\]
+
+\uline{Existenz:}
+Induktion nach $\deg(f)=n$.
+Für $n<m$ setze $q=0$ und $r=f\rightsquigarrow$ fertig.
+Sei jetzt $n\ge m\ge 0,~ f=b_o\dt{+}b_nT^n$.
+Setze $h=f-b_na_m^{-1}T^{n-m}\cdot g$, es folgt $\deg(h)<n$.
+Also gibt es $\tilde{q},r\in R[T]$ mit
+\[
+h=g\cdot \tilde{q}+r,~\deg(r)<m.
+\]
+Es folgt
+\[
+f=h+b_na_m^{-1}T^{n-m}g=g(\tilde{q}+b_na_m^{-1}T^{n-m})+r
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Korollar 1}
+\label{sub:korllar_1}
+Sei $K$ ein Körper.
+Dann ist der Polynomring $K[T]$ ein euklidischer Bereich und insbesondere faktoriell.\\
+
+\bet{Beweis:}\\
+Setze $\delta(f)=2{-\deg(f)},~2{-\infty}=0 \rightsquigarrow \delta$ ist Gradfunktion nach \hyperref[sub:polynomdivision]{4.11}.
+\hfill $\square$\\
+%sub end
+
+Unser nächstes Ziel ist der \uline{Satz von Gauß}:
+wenn $R$ faktoriell ist,so ist auch $R[T]$ faktoriell.\\
+Die Idee:
+betrachte $\underbracket{R\subseteq R[T]\subseteq Q[T]}_{\text{faktoriell}},~Q=\Quot(R)$.
+
+\subsection{Vorbereitung für den Satz von Gauß}
+\label{sub:vorbereitung_satz_von_gauss}
+Sei $R$ ein faktorieller Integritätsbereich.
+\begin{enumerate}[(A)]
+	\item Es gilt $R[T]^*=R^*$.
+	Ist $r\in R$ irreduzibel in $R$,so ist $r$ auch irreduzibel in $R[T]$ (ÜA).
+	\item Sei $f\in R[T]$ mit $\deg(f)=m\ge 1,~f=a_0\dt{+}a_mT^m$.
+	Sei $d\in\ggT(a_0\dt{,}a_m)$, es folgt mit $a_i=d\cdot b_i$, dass
+	\[
+	f=d(b_0\dt{+}b_mT^m) \text{ und } 1\in \ggT(b_0\dt{,}b_m).
+	\]
+	Man nennt ein Polynom $g\in R[T]$ mit $\deg(g)=m\ge 1$ \Index{primitiv}, wenn 
+	\[
+	g=b_0\dt{+}b_mT^m \text{ und } 1\in \ggT(b_0\dt{,}b_m).
+	\]
+	Jedes Polynom $f\in R[T]$ mit $\deg(f)\ge 1$ lässt sich also schreiben als $f=d\cdot \tilde{f}$, mit $d\in R$ und $\tilde{f}\in R[T]$ primitiv.
+	Diese Zerlegung ist eindeutig bis auf Multiplikation mit Einheiten, weil $\ggT$ bis auf Einheiten eindeutig ist.
+	Außerdem sind irreduzible Polynome von $\deg(.)\ge 1$ primitiv.
+	\item Sei $m=\deg(f)\ge 1,~f=\frac{a_0}{b_0}\dt{+} \frac{a_m}{b_m}T^m,~b=b_0\cdot b_m,~a_i,b_i\in R$.
+	Es folgt $b\cdot f\in R[T]\rightsquigarrow b\cdot f =d\cdot \tilde{f}$ mit $\tilde{f}\in R[T]$ primitiv, $d\in R\rightsquigarrow f=\frac{d}{b}\cdot \tilde{f}$.
+	Ist $f=\frac{x}{y}\tilde{\tilde{f}}$ mit $\tilde{\tilde{f}}\in R[T]$ primitiv, $x,y\in R$, so folgt
+	\[
+	y\cdot d\cdot \tilde{f}=x\cdot b\cdot \tilde{\tilde{f}}\stackrel{\text{(B)}}{\Rightarrow} \tilde{\tilde{f}}=u\cdot \tilde{f} \text{ für } u\in R^*
+	\]
+\end{enumerate}
+%sub end
+
+\subsection{Lemma 11 (Gauß Lemma)}
+\label{sub:gauss_lemma}
+Sei $R$ faktoriell, seien $f,g\in R[T]$ primitiv, $\deg(f),\deg(g)\ge 1$.\\
+Dann ist $h=f\cdot g$ primitiv.\\
+
+\bet{Beweis:}\\
+Angenommen, das ist falsch.
+Dann existiert ein Element $p\in R$, $p$ prim, mit $h=p\cdot \tilde{h},~\tilde{h}\in R[T]$.
+Betrachte $\varphi:R\to \nicefrac{R}{(p)}$ \marginnote{Integritätsbereich weil $(p)$ Primideal} und $\varphi:R[T]\to \nicefrac{R}{(p)}[T],~ a_0\dt{+}a_nT^n\mapsto \varphi(a_0)\dt{+}\varphi(a_n)T^n$.
+Es folgt $\varphi(h)=0$, aber $\varphi(f)\neq 0 \neq \varphi(g)$, weil $p$ \uline{nicht} alle Koeffizienten von $f$ und $g$ teilt. $\lightning$
+\hfill $\square$
+%sub end
+
+\subsection{Satz 18}
+\label{sub:satz_18}
+Sei $R$ faktoriell und $f\in R[T]$ mit $\deg(f)\ge 1$.
+Wenn $f$ irreduzibel in $R[T]$ ist, so ist $f$ auch irreduzibel in $Q[T],~Q=\Quot(R)$.\\
+\newpage
+\bet{Beweis:}\\
+Angenommen, es gibt $g,h\in Q[T]$ mit $\deg(g),\deg(h)\ge 1$ und $f=g\cdot h$ (Skalare sind Einheiten in $Q[T]$).
+Schreibe $g=a\tilde{g},~h=b\cdot \tilde{h}$ mit $\tilde{g},\tilde{h}\in R[T]$ primitiv $\rightsquigarrow f=a\cdot b\cdot \underbracket{(\tilde{g}\tilde{h})}_{\text{primitiv}}$.
+Andererseits $f=d\cdot \tilde{f}$ mit $\tilde{f}$ primitiv.
+Schriebe $ab=\frac{x}{y}$ mit $x,y\in R$:
+\[
+y\cdot d\cdot \tilde{f}=x\cdot (\tilde{g}\cdot \tilde{h}) \rightsquigarrow \tilde{f}=u\cdot \tilde{g}\cdot
+\tilde{h}
+\]
+für ien $u\in R^*$ und \hyperref[sub:vorbereitung_satz_von_gauss]{4.13 (B)}$\lightning$
+\hfill $\square$
+%sub end
+
+\subsection{Theorem (Satz von Gauß)}
+\label{sub:satz_von_gauss}
+Wenn $R$ ein faktorieller Integritätsbereich ist, os ist auch $R[T]$ faktoriell.\\
+
+\bet{Beweis:}\\
+Wir wenden Theorem \hyperref[sub:satz_16]{4.7} an.
+Sei zuerst $f\in R[T]$ mit $\deg(f)\ge 1$ primitiv.
+Wenn $f$ nicht irreduzibel ist, gibt es $g,h\in R[T]$ mit $f=g\cdot h,~g,h\notin R[T]^*=R^*$.
+Weil $f$ primitiv ist, folgt $\deg(g),\deg(h)\ge 1$ und $g,h$ sind ebenfalls primitiv.
+Induktiv folgt
+\[
+f=q_1\cdots q_m,~q_i\in R[T] \text{ primitiv, irreduzibel, }\deg(q_i)\ge 1.
+\]
+Angenommen, $\tilde{q}_1\dt{,}\tilde{q}_n\in R[T]$ sind ebenfalls irreduzibel mit $f=ilde{q}_1\cdots\tilde{q}_n$.
+Das folgt (weil $f$ primitiv) $\deg(\tilde{q}_j)\ge 1$ und $\tilde{q}_j$ primitiv.
+Nach Satz \hyperref[sub:satz_18]{4.15} sind die $\tilde{q}_j,q_i$ irreduzibel in $Q[T]$.
+Da $Q[T]$ faktoriell ist, folgt $n=m$ und nach Umsortieren
+\[
+\tilde{q}_i=a_iq_i,~a_i=\frac{x_i}{y_i}\in Q,~x_i,y_i\in R
+\]
+Wegen $y_i\tilde{q}_i=x_iq_i$ folgt $a_i\in R^*$ (wie vorher) $\Rightarrow$ die Zerlegung $f=q_1\cdots q_n$ ist eindeutig bis auf Einheiten in $R^*$.\\
+Sei jetzt $f\in R[T],~f\neq 0,~f\notin R[T]^*=R^*$.
+Wenn $\deg(f)=0$, so ist $f\in R$ und hat eine eindeutige Zerlegung in $R$ (weil $R$ faktoriell ist), also auch in $R[T]$ nach \hyperref[sub:vorbereitung_satz_von_gauss]{4.13 (A)}.
+Ist $\deg(f)\le 1$ schreibe $f=D\cdot \tilde{f}$ mit $\tilde{f}\in R[T]$ primitiv, dann folgt
+\[
+f=c_1\cdots c_k\cdot g_1\cdots g_l,~c_i\in R\text{ irreduzibel, } g_j\in R[T] \text{ prmitiv und irreduzibel, }\deg(g_i)\ge 1
+\]
+Ist $f=\tilde{c}_1\cdots \tilde{c}_{\tilde{k}}\cdot \tilde{g}_1\cdots\tilde{g}_{\tilde{l}}$ eine zweite Zerlegung in primitive Elemente, mit $\tilde{c}_i\in R,~\deg(\tilde{g}_i)\ge 1$, so sind die $\tilde{g}_j$ primitiv (weil irreduzibel).
+Es folgt
+\[
+\tilde{c}_1\cdots\tilde{c}_{\tilde{k}}=c_1\cdots c_k\cdot u,~u\in R^*\qquad \tilde{g}_1\cdots \tilde{g}_{\tilde{l}}=g_1\cdots g_k\cdot u^{-1}
+\]
+und damit $k=\tilde{k},~l=\tilde{l}$ und (nach Umsortieren)
+\[
+\tilde{c}_i=u_ic_i,~u_i\in R^*\qquad\tilde{g}_j=v_jg_j,~v_j\in R^*
+\]
+\hfill $\square$
+
+
+
+
+
+
+
+
+
 
 
 
