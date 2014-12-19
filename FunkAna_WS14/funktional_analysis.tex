@@ -1231,7 +1231,7 @@ Wir definieren $L^\infty(\mu) := \nicefrac{\mathcal{L}^\infty(\mu)}{\mathcal{N}^
 	\norm[\infty]{f} := \inf \set[C]{\abs*{f} \le C \text{ fast überall} }\quad , \qquad f \in \mathcal{L}^\infty(\mu)  
 \]
 Dies induziert wieder eine Norm auf $L^\infty(\mu)$ durch $\norm[\infty]{f + \mathcal{N}} := \norm[\infty]{f}$. Damit ist $\enbrace*{L^\infty(\mu), \norm[\infty]{\cdot}}$
-ein normierter Vektorraum. Für $f \in L^1{\mu}$, $g \in L^\infty(\mu)$ gilt $f \cdot g \in L^1(\mu)$ und $\norm[1]{f \cdot g} \le \norm[1]{f} \cdot \norm[\infty]{g}$
+ein normierter Vektorraum. Für $f \in L^1(\mu)$, $g \in L^\infty(\mu)$ gilt $f \cdot g \in L^1(\mu)$ und $\norm[1]{f \cdot g} \le \norm[1]{f} \cdot \norm[\infty]{g}$
 \minisec{Beweis}
 Übung. \bewende
 % subsection 48 (end)
@@ -2022,13 +2022,12 @@ $\skal*{x}{x} >0$ für $0 \not= x \in X$. In diesem Fall heißt $\skal*{\cdot }{
 
 \subsection[Bemerkung: Einfache Eigenschaften von hermiteschen Formen]{Bemerkung} % (fold)
 \label{sub:72}
-Für eine hermitesche Form gilt 
+Für eine hermitesche Form $\skal*{\cdot}{\cdot}$ und $x,x',y \in X$, $\alpha \in \mathds{K}$ gilt 
 \begin{align*}
 	\skal*{x+x'}{y} &= \skal*{x}{y} + \skal*{x'}{y} \\
 	\skal*{\alpha \cdot x}{y} &= \overline{\alpha} \cdot \skal*{x}{y} \\
 	\skal*{x}{x} \in \mathds{R} 
 \end{align*}
-für $x,x',y \in X$, $\alpha \in \mathds{K}$
 % subsection 72 (end)
 
 \subsection[Beispiele für hermitesche Formen]{Beispiele} % (fold)
@@ -2156,6 +2155,111 @@ mit dichtem Bild. $\norm{\cdot}$ erfüllt das Parallelogrammgesetz und daher auc
 $\overline{\mathcal{H}}^{\norm{\cdot}}$ ein Skalarprodukt besitzt, welches die Norm $\norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$ induziert und auf $\mathcal{H}$ mit
 $\skal*{\cdot}{\cdot}$ übereinstimmt. Das Skalarprodukt auf $\overline{\mathcal{H}}^{\norm{\cdot}}$ ist wegen Stetigkeit hierdurch eindeutig bestimmt. \bewende
 % subsection 710 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:711}
+Sei $\mathcal{H}$ ein Hilbertraum und $\kappa : \mathcal{H} \to \mathcal{H}^*$ definiert durch $\kappa(x)(y) := \skal*{x}{y}$, $x,y \in \mathcal{H}$. Dann gilt
+\begin{enumerate}[(i)]
+	\item $\kappa$ ist konjugiert linear, d.h. $\kappa(\alpha x+ \alpha' x') = \overline{\alpha} \kappa(x) + \overline{\alpha'}\kappa(x')$ mit $x,x' \in \mathcal{H}$, 
+	$\alpha, \alpha' \in \mathds{K}$.
+	\item $\kappa$ ist isometrisch (insbesondere injektiv).
+	\item $\kappa$ ist surjektiv.
+\end{enumerate}
+\minisec{Beweis}
+$\kappa(x) \in \mathcal{H}^*$: $\kappa(x) \colon \mathcal{H} \to \mathds{K}$ ist offensichtlich linear. $\kappa(x)$ is stetig, da
+\begin{align*}
+	\abs*{\kappa(x)(y)}= \abs*{\skal*{x}{y}}  \le \norm{x} \cdot \norm{y}  \Longrightarrow \norm[\mathcal{H}^*]{\kappa(x)} \le \norm{x}  
+\end{align*}
+\begin{enumerate}[(i)]
+	\item klar.
+	\item Es gilt $\kappa(x) \enbrace*{\frac{1}{\norm{x}}x }= \frac{1}{\norm{x}} \skal*{x}{x} = \norm{x}$. Daraus folgt $\norm[\mathcal{H}^*]{\kappa(x)} \ge \norm{x}$, also
+	auch $\norm[\mathcal{H}^*]{\kappa(x)}= \norm{x}$.
+	\item Sei $\varphi \in \mathcal{H}^*$. Ohne Einschränkungen gelte $\norm[\mathcal{H}^*]{\varphi}=1$. 
+	
+	Behauptung: Es gibt $\overline{x} \in \mathcal{H}$ mit $\norm{\overline{x}}=1 $ und
+	$\varphi(\overline{x} )=1$. Wähle $(x_n)_\mathds{N} \subset \mathcal{H}$ mit $\norm{x_n}=1$ und $0\le \varphi(x_n) \xrightarrow{n \to \infty} 1$.
+	Zu $1 >\varepsilon>0$ existiert $N \in \mathds{N}$ mit $\varphi(x_n) > 1- \frac{\varepsilon}{8} $ für $n \ge N$, also $\varphi(x_n +x_m) > 2- \frac{\varepsilon}{4}$.
+	Aus dem Parallelogrammgesetz folgt für $n,m \ge N$
+	\begin{align*}
+		\norm{x_n -x_m}^2 = 2 \cdot \norm{x_n}^2 + 2 \cdot \norm{x_m}^2 - \norm{x_n +x_m}^2 \le 4 - \enbrace*{2-\frac{\varepsilon}{4} }^2 \le \varepsilon 
+	\end{align*}
+	Es folgt, dass $(x_n)_\mathds{N}$ eine Cauchyfolge ist. $\overline{x} := \lim_{ n \to \infty} x_n$ erfüllt die Behauptung.
+	
+	Behauptung: $\varphi= \kappa(\overline{x})$, d.h. $\varphi(y)= \kappa(\overline{x})(y)$ für $y \in \mathcal{H}$. Sei $\mathds{K}=\mathds{R}$. Für $\lambda>0$ gilt
+	wegen der Dreiecksungleichung und $\norm[\mathcal{H}*]{\varphi}\le 1$
+	\begin{align*}
+		-\frac{1}{\lambda} \enbrace*{\norm{\overline{x} - \lambda \cdot y } - \norm{\overline{x}}} \le -\frac{1}{\lambda} \enbrace*{\varphi \enbrace*{\overline{x}- \lambda 
+		\cdot y} - \varphi(\overline{x})} = \varphi(y) \\
+		\shortintertext{und}
+		\varphi(y) = \frac{1}{\lambda} \enbrace*{\varphi(\overline{x}+\lambda \cdot y) - \underbrace{\varphi(\overline{x})}_{=1}} 
+		\le \frac{1}{\lambda} \cdot \enbrace[\Big]{\norm{\overline{x} + \lambda \cdot y } - \underbrace{\norm{\overline{x}}}_{=1} }    \\
+		\shortintertext{also insgesamt}
+		 \underbrace{-\frac{1}{\lambda} \enbrace*{\norm{\overline{x} - \lambda \cdot y } - \norm{\overline{x}}} }_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
+		 \le \varphi(y) 
+		 \le \underbrace{\frac{1}{\lambda} \cdot \enbrace*{\norm{\overline{x} +\lambda\cdot y} - \norm{\overline{x}}}}_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
+	\end{align*}
+	nach l'Hospital. Im Detail: \todo{stimmt noch nicht so ganz, aber passt schon …}
+	\begin{align*}
+		\norm{\overline{x} + \lambda y} - \norm{\overline{x}} = \skal*{\overline{x} + \lambda y }{\overline{x} + \lambda y }^{\frac{1}{2}} - \norm{\overline{x}}= \enbrace*{\skal*{\overline{x}}{\overline{x}} +
+		\skal*{\overline{x}}{\lambda y} + \lambda^2 \skal*{y}{y}}^{\frac{1}{2}} - \skal*{\overline{x}}{\overline{x}}^{\frac{1}{2}}
+	\end{align*}
+	ist in $\lambda=0$ differenzierbar nach $\lambda$ mit 
+	\[
+		\diffd{}{t}(\cdots) = \enbrace*{2 \skal*{\overline{x}}{y} + 2 \lambda \norm{y}^2}^{-\frac{1}{2} } \frac{1}{2} \enbrace*{\cdots}^{-\frac{1}{2}} 
+		\xrightarrow{\lambda \to 0}  \skal*{\overline{x}}{y}
+	\]
+	Wir erhalten $\varphi(y)= \skal*{\overline{x}}{y} = \kappa(\overline{x})(y)$, also $\varphi=\kappa(\overline{x})$. 
+	
+	Für $\mathds{K}=\mathds{C}$: $\mathcal{H}$ ist reeller Vektorraum und $\skal*{\cdot}{\cdot}_\mathds{R} := \re \enbrace*{\skal*{\cdot}{\cdot}}$. Es gilt dann 
+	$\varphi(y) = \rho(y) - i \cdot \rho(y)$ mit $\rho(\cdot ) := \re \enbrace*{\varphi(\cdot )}$. Es gilt nämlich
+	\[
+		\im \enbrace*{\varphi(y)} = - \re \enbrace*{i \cdot \varphi(y)} = - \re \enbrace*{\varphi(i \cdot y)} = - \rho (i \cdot y)   
+	\]
+	Es ist $\rho(y) = \skal*{\overline{x}}{y}_\mathds{R} = \re \enbrace*{\skal*{\overline{x}}{y}}$ für ein $\overline{x} \in \mathcal{H}$. Also gilt
+	$\varphi(y)= \rho(y)- i \cdot \rho(i \cdot y)= \ldots = \skal*{\overline{x}}{y}$. \bewende
+\end{enumerate}
+% subsection 711 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:712}
+Hilberträume sind reflexiv.
+\minisec{Beweis}
+Das Diagramm
+\[
+	\begin{tikzcd}[sep=large]
+		\mathcal{H} \rar["\iota_{\mathcal{H}}"] \dar["\kappa"] & \mathcal{H}^{**} \dar["\kappa^\tr"]\\
+		\mathcal{H}^* \rar["\varphi \mapsto \overline{\varphi}"] & \mathcal{H}^*
+	\end{tikzcd}
+\]
+kommutiert, da gilt
+\begin{align*}
+	\kappa^\tr \circ \iota_{\mathcal{H}}(x)(y) = \kappa^\tr \enbrace*{\iota_{\mathcal{H}}(x)}(y)  =\iota_{\mathcal{H}}(x) \circ \kappa (y) 
+	= \kappa(y)(x) = \skal*{y}{x} = \overline{\skal*{x}{y}} = \overline{\kappa(x)(y)} 
+\end{align*}
+Die Abbildungen $\kappa, \kappa^\tr$ und $(\varphi \mapsto \overline{\varphi})$ sind surjektive Isometrien, also ist auch 
+$\iota_{\mathcal{H}} \colon \mathcal{H} \to \mathcal{H}^{**}$ eine surjektive Isometrie.\bewende
+% subsection 712 (end)
+
+\subsection[Definition: Orthogonal, Orthonormalsystem und Hilbertraumbasis]{Definition} % (fold)
+\label{sub:713}
+Sei $\mathcal{H}$ ein Hilbertraum.
+\begin{enumerate}[(i)]
+	\item $x,y \in \mathcal{H}$ heißen \Index{orthogonal}, $x\bot y$, falls $\skal*{x}{y}=0$.
+	\item $A,B  \subset \mathcal{H}$ heißen \Index{orthogonal}, falls $x \bot y$ für alle $x \in A$, $y \in B$. 
+	\item Für $A \subset \mathcal{H}$ heißt $A^\bot := \set[x \in \mathcal{H}]{\skal*{x}{y}=0 \text{ für alle } y \in A}$ \Index{orthogonales Komplement} von $A$.
+	\item $\set{x_i}_{I} \subset \mathcal{H}$ heißt \Index{Orthonormalsystem}, falls $\skal*{x_i}{x_j}= \delta_{ij}$, $i,j \in I$.
+	\item $\set{x_i}_{I} \subset \mathcal{H}$ heißt \Index{Hilbertraumbasis} (bzw. Basis), falls es ein maximales Orthonormalsystem ist. 
+\end{enumerate}
+% subsection 713 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:714}
+\begin{enumerate}[(i)]
+	\item Für $x \bot y \in \mathcal{H}$ gilt der Satz des Pythagoras: $\norm{x+y}^2 = \norm{x}^2  + \norm{y}^2$.
+	\item Wir werden sehen, dass jeder Hilbertraum eine Hilbertraumbasis besitzt.
+	\item Im Allgemeinen ist eine Hilbertraumbasis \emph{keine} Vektorraumbasis (Hamelbasis).
+\end{enumerate}
+% subsection 714 (end)
 % section 7 (end)
 
 
