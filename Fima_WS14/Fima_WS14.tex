@@ -1798,18 +1798,18 @@ Seien $X,X_1,X_2$ integrierbare ZV'en. Dann gilt:
 \bet{Beweis:}\\
 (i), (ii) einfach (\checkmark).\\
 (iii): 1.Fall: $Z\ge 0,~X\ge0$\\
-Ist $Z=\mathbb{1}_G$ mit $G\in \G$, so gilt für alle $A\in G$ 
+Ist $Z=\mathbb{1}_G$ mit $G\in \G$, so gilt für alle $A\in \G$ 
 \begin{equation*}
 \begin{aligned}
 	\int\limits_A ZX\dint \Pw &=\int\limits_A \mathbb{1}_G X\dint \Pw =\int\limits_{A\cap G}X\dint\Pw\\
-	&= \int\limits_{A\cap G}\E(X~|~G)\dint\Pw =\int\limits_A Z\E(X~|~G)\dint\Pw\\
-	&\Rightarrow \E(ZX~|~G)=Z\E(X~|~G)
+	&= \int\limits_{A\cap G}\E(X~|~\G)\dint\Pw =\int\limits_A Z\E(X~|~\G)\dint\Pw\\
+	&\Rightarrow \E(ZX~|~\G)=Z\E(X~|~\G)
 \end{aligned}
 \end{equation*}
 Ist $Z=\sum_{i=1}^{n}\alpha_i \mathbb{1}_{G_i},~ G_i\in \G,~\alpha_i\ge 0$ so gilt wegen (i)
 \begin{equation*}
 \begin{aligned}
-	\E(ZX~|~G)&=\E\enbrace{\sum_{i=1}^{n}\alpha_i\mathbb{1}_{G_i}X~|~\G}= \sum_{i=1}^{n}\alpha_i\E(\mathbb{1}_{G_i}X~|~\G)\\
+	\E(ZX~|~\G)&=\E\enbrace{\sum_{i=1}^{n}\alpha_i\mathbb{1}_{G_i}X~|~\G}= \sum_{i=1}^{n}\alpha_i\E(\mathbb{1}_{G_i}X~|~\G)\\
 	&= \sum_{i=1}^{n}\alpha_i\mathbb{1}_{G_i}\E(X~|~\G)=Z\E(X~|~\G)
 \end{aligned}
 \end{equation*}
@@ -3110,7 +3110,7 @@ Wegen (i) ist $\G^*\cap\Pw=\emptyset$.
 %sub end
 %sec end
 
-
+\newpage
 \section{Bewerten von Derivaten}
 \label{sec:bewerten_derivate}
 Gegeben sei ein Finanzmarktmodell über $N$ Perioden mit Preisprozess $(S_1,\dots,S_d)$ der risky assets und $S_0$ des Numeraire Assets.\\
@@ -3141,7 +3141,7 @@ V_0((\varphi,H))=V_0,~ V_N((\varphi,H))=C\marginnote{Vorausgesetzt wird $S_0(0)=
 Ist dies möglich, so heißt $C$ \bet{hedgebar}\index{Hedge!hedgebar} und $(\varphi,H)$ bzw. $V_0$ und $H$ definieren eine \bet{Hedgestrategie}\index{Hedge!Hedgestrategie}.\\
 In Analogie zum Replikationsprinzip kann man fragen:\\
 Ist $V_0$ der eindeutige arbitragefreie Anfangspreis für $C$?\\
-\newpage
+
 \bet{Informelle Argumentation:}\\
 Ein Anfangspreis $x>V_0$ liefert ein Arbitrage für den Verkäufer, denn 
 \begin{itemize}
@@ -3170,7 +3170,7 @@ Im Folgendem wird dies mathematisch präzisiert.
 \subsection{Satz 3}
 \label{sub:satz_3}
 Sei $C$ ein hedgebarer Claim und $H,H'\in \mc{H}$ Hedgestrategien zu Anfangskapitalien $V_0$ bzw. $V_0'$.\\
-Dan gilt:
+Dann gilt:
 \[
 V_0=V_0'=\E^*C^*,~\forall \Pw^*\in\mc{P}
 \]
@@ -3220,6 +3220,7 @@ $C^*$ heißt \bet{lower hedgebar}\index{Hedge!lower hedgebar} zum Anfangskapital
 V_0-(H\cdot S^*)(N)\le C^*
 \]
 (\bet{strikt} für $\le$ und $\Pw(V_0-(H\cdot S^*)(N)<C^*)>0$)
+
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=.8cm,y=.8cm]
 \draw[->,color=black] (-3.,0.) -- (3,0.);
 \draw[->,color=black] (0.,-3.) -- (0.,3.);
@@ -3237,7 +3238,7 @@ Der Kegel $\mc{K}^*$, der zum Anfangskapital 0 upper hedgebaren Claims lässt si
 Für einen Claim $C$ sind äquivalent:
 \begin{enumerate}[(i)]
 	\item $C^*\in \mc{K}^*$
-	\item $\E^*c^*\le 0~\forall \Pw^*\in \mc{P}$
+	\item $\E^*C^*\le 0~\forall \Pw^*\in \mc{P}$
 \end{enumerate}
 
 \bet{Beweis:}\\
@@ -3411,7 +3412,7 @@ x\le P_-(C)\le P_+(C)\le x \Rightarrow P_-(C)=P_+(C)
 
 "$\Leftarrow$":
 Sei $P_-(C)=P_+(C)$.
-Wegen \hyperref[sub:]{5.6} ist $x$ ein upper hedging Preis und ein lower hedging Preis.
+Wegen \hyperref[sub:upper_lower_preise]{5.6} ist $x$ ein upper hedging Preis und ein lower hedging Preis.
 Also ist $C^*-x\in \mc{K}^*$ und $-(C^*-x)\in\mc{K}^*$.
 Daher gilt:
 \[
@@ -3489,7 +3490,7 @@ Daraus folgt:
 \[
 C^*-x\notin \mc{K}^*
 \]
-Wegen \hyperref[sub:]{5.4} existiert ein $\Pw^*\in\mc{P}$ mit
+Wegen \hyperref[sub:satz_4fima]{5.4} existiert ein $\Pw^*\in\mc{P}$ mit
 \[
 \E^*C^*-x>0\Rightarrow \E^*C^*>x.
 \]
