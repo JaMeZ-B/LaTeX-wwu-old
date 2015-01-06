@@ -3531,13 +3531,164 @@ Also
 P_-(C)<\E^*C^*<P_+(C)~\forall \Pw^*\in\mc{P}
 \]
 \hfill $\square$
+%sub end
 
+\subsection{Erweitertes Finanzmarktmodell}
+\label{sub:erw_finanzmarktmodell}
+Arbitragefreier Finanzmarkt mit $S=(S_1\dt{,}S_d)$ als Preisprozess der Basisgüter.
+$S_0$ bezeichne das Numeraire Asset, $(\F_n)_{n=0,\dots,N}$ Informationsverlauf.\\
+Im Markt seu $C$ die Auszahlung eines Claims zum Zeitpunkt $N$.
+Das arbitragefreie Anfangspreisintervall für $C$ sei gegeben durch
+\[
+\pi(C)=(P_-(C),P_+(C)\text{ bzw. } \pi(C)=P(C) \text{ falls }P_-(C)=P_+(C)
+\]
+Der Finanzmarkt soll um den Handel mit $C$ erweitert werden, sodass der erweiterte Finanzmarkt arbitragefrei bleibt.
+Der Claim wird als $(d+1)$-tes risky asset angesehen.
+Bezeichne dessen Preisprozess mit $(S_{d+1}(n))_{n=0\dt{,}N}$.\\
+Ist $x\in \pi(C)$,so existiert ein $\Pw^*\in\mc{P}$ mit $x=\E^*C^*$.
+Durch
+\[
+S_{d+1}(n)=S_0(n)\cdot \E^*(C^*~|~\F_n)~n=1\dt{,}N
+\]
+kann dann ein Preisprozess definiert werden, für den gilt:
+\[
+S_{d+1}(N)=S_0(N)C^*=C \text{ und }S_{d+1}(0)=\underbracket{S_0(0)}_{=1}\E^*(C^*~|~\F_0)=\E^*C^*=x
+\]
+$\F_0$ sei trivial, d.h. $\Pw(A)\in \{0,1\}~\forall A\in \F_0$.
+Weiter ist $S_{d+1}^*(n)=\E^*(C^*~|~\F_n),~n=0\dt{,}N$ ein $\Pw^*$-Martingal und damit definiert $\Pw^*$ ein äquivalentes Martingalmaß für das erweiterte Modell $(S_0\dt{,}S_d,S_{d+1})$.\\
+Umgekehrt ist $(S_{d+1}(n))_{n=0\dt{,}N}$ ein Preisprozess für $C$ mit $S_{d+1}(N)=C$ und ist das erweiterte Modell arbitragefrei, so existiert ein äquivalentes Martingalmaß $\Pw^*$ für das erweiterte Modell.
+Insbesondere gilt:
+\[
+S_{d+1}(n)=S_0(n)\E^*(C^*~|~\F_n)~n=0\dt{,}N.
+\]
+Da $\Pw^*$ auch ein äquivalentes Martingalmaß für das Ausgangsmodell ist und$S_{d+1}(0)=\E^*C^*$, gilt
+\[
+S_{d+1}(0)\in \pi(C).
+\]
+Insgesamt erhält man:\\
+\bet{Theorem:}\\
+Der Finanzmarkt ist um den Handel mit $C$ arbitragefrei erweiterbar, genau dann, wenn es ein $\Pw^*\in \mc{P}$ gibt mit
+\[
+S_{d+1}^*(n)=\E^*(C^*~|~\F_n)~n=0\dt{,}N.
+\]
+%sub end
 
+\subsection{Vollständigkeit}
+\label{sub:vollstaendigkeit}
+Für hedgebare Claims ist der arbitragefreie Anfangspreis eindeutig bestimmt.
+Finanzmärkte, in denen jeder Claim hedgebar ist, nennt man \Index{vollständig}.\\
+Definition: Ein Finanzmarkt heißt vollständig, falls $P_-(C)=P_+(C)$ gilt für alle Claims $C$.
+%sub end
 
+\subsection{2. Fundamentalsatz der Preistheorie}
+\label{sub:2_fundamentalsatz_preistheorie}
+Für ein arbitragefreies Finanzmarktmodell mit äquivalentem Martingalmaß $\Pw^*$ sind äquivalent:
+\begin{enumerate}[(i)]
+	\item Das Modell ist vollständig.
+	\item Das äquivalente Martingalmaß ist eindeutig, i.e.
+	\[
+	\mc{P}=\penbrace{\Pw^*}
+	\]
+	\item Zu jedem $\Pw^*$-Martingal $M$ existiert eine Darstellung der Form
+	\[
+	M_n=\E M_0 + (H\cdot S^*)(n) ~\forall ^\le n\le N
+	\]
+	mit vorhersehbarem $H\in\mc{H}$.
+\end{enumerate}
 
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):}
+Sei $\Pw^*$ ein äquivalentes Martingalmaß.
+Für $A\in \F_N$ ist $C=\mathbb{1}_A S_0(N)$ ein Claim mit $C^*=\mathbb{1}_A$.
+Also gilt:
+\[
+\Pw_1^*(A)=\E_1^*C^*\stackrel{C\text{ ist hedgebar}}{=} \E^*C^*=\Pw^*(A) \Rightarrow \Pw_1^*=\Pw^*
+\]
 
+\uline{(ii)$\Rightarrow$(i):}
+$\mc{P}=\penbrace{\Pw^*}\Rightarrow P_+(C)=P_-(C)$ für alle $C$ und damit ist jedes $C$ hedgebar.\\
 
+\uline{(i)$\Rightarrow$(iii):}
+Sei $M$ ein $(\F_n)$ Martingal bzgl. $\Pw^*$.
+Dann ist $C=M(N)S_0(N)$ ein Claim mit $C^*=M(N)$.
+Wegen der Vollständigkeit ist $C$ hedgebar.
+Also existiert ein $V_0\in \R$ und ein preversibles $H$ mit 
+\[
+V_0+(H\cdot S^*)(N)=C^*=M(N)
+\]
+Also gilt:
+\[
+V_0=\E^*(V_0+(H\cdot S^*)(N))=\E^*C^*=\E^* M(N)=\E^* M(0)
+\]
+und
+\[
+\E^* M_0+ (H\cdot S^*)(n)=V_0+(H\cdot S^*)(n)= \E^*(V_0+(H\cdot S^*)(N)~|~\F_n)=\E^*(M(N)~|~\F_n)=M_n
+\]
 
+\uline{(iii)$\Rightarrow$(i):}
+Ist $C$ ein Claim, so ist
+\[
+M_n=\E^*(C^*~|~\F_n),~n=0\dt{,}N
+\]
+ein $\Pw^*$-Martingal.
+Wegen (iii) gibt es zu $\E^*C^*=\E^*M_0$ ein preversibles $H$ mit
+\[
+\E^*C^*+(H\cdot S^*)(N)=C^*
+\]
+Also ist $C$ hedgebar, also ist der Finanzmarkt vollständig.
+\hfill $\square$
+%sub end
+
+\subsection{Satz 5}
+\label{sub:satz_5fima}
+Das arbitragefreie CRR und das verallgemeinerte arbitragefreie CRR-Modell sind vollständig.\\
+
+\bet{Beweis:}\\
+Dies folgt aus der Eindeutigkeit des äquivalenten Martingalmaßes.
+\hfill $\square$
+%sub end
+
+\subsection{Hedgen im CRR-Modell}
+\label{sub:hedgen_im_crr-modell}
+Gegeben sei ein $N$-Perioden CRR-Modell und ein Claim
+\[
+C=g(S(N))
+\]
+Problem: Wie kann man algorithmisch den Hedge und damit auch den Preis ausrechnen?\\
+Es gilt:
+\[
+S(n)=S(0)u^{Z_n}d^{n-Z_n},~Z_n=\sum_{k=1}^{n}K_k
+\]
+Gesucht ist ein preversibles $H$ und Anfangskapital $V_0$ mit
+\[
+V_0+(H\cdot S^*)(N)=C^*=\frac{g(S(N))}{(1+\rho)^N}
+\]
+Für den Wert der Hedgestrategie nach $n$-Perioden gilt:
+\begin{equation*}
+\begin{aligned}
+V_n^*=V_0+(H\cdot S^*)(n) &= \E^*(C^*~|~\F_n) = \E^*(\E^*(C^*~|~\F_{n+1})~|~\F_n) = \E^*(V_{n+1}^*~|~\F_n)\\
+&\stackrel{\text{Markov-Eigenschaft}}{=} \E^*(V_{n+1}^*~|~S(n))\\
+&= \sum_{k=0}^{n}\E^*(V_{n+1}^*~|~Z_n=k)\mathbb{1}_{\penbrace{S(n)=S(0)u^kd^{n-k}}}
+\end{aligned}
+\end{equation*}
+setze
+\[
+v^*(n,k)=\E^*(V_{n+1}^*~|~Z_n=k)=\E^*(C^*~|~Z_n=k),~ n=0\dt{,}N,~k=0\dt{,}n
+\]
+$v^*$ kann dann rekursiv berechnet werden durch
+\[
+v^*(N,k)=\enbrace{\frac{1}{1+\rho}}^N\cdot g(S(0)u^kd^{N-k}),~k=0\dt{,}N
+\]
+'Initialisierung':\\
+for $n=N-1$ downto 0 do
+\[
+v^*(n,k)= p^*v^*(n+1,k+1)+(1-p^*)v^*(n+1,k) \text{ für } k=n,n-1\dt{,}0
+\]
+Es gilt:
+\[
+V_n^*=\sum_{k=0}^{n}v^*(n,k)\mathbb{1}_{\penbrace{Z_n=k}}
+\]
+Damit ist der Wertprozess der Hedgestrategie algorithmisch berechnet.
 
 
 
