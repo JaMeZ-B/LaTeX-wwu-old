@@ -2186,7 +2186,7 @@ $\Z$ ist ein (unendlicher) Integritätsbereich, aber \uline{kein} Körper.
 %sub end
 
 \subsection{Der Quotientenkörper eines Integritätsbereiches}
-\label{sub:quotientenkoeper}
+\label{sub:quotientenkoerper}
 \uline{Ziel:} $R$ Integritätsbereich, konstruiere aus $R$ ein Körper $Q$, der $R$ als Teilring enthält.
 \uline{Idee:} Kopiere die Konstruktion von $\Q$ aus $\Z$.\\
 
@@ -3097,14 +3097,182 @@ und damit $k=\tilde{k},~l=\tilde{l}$ und (nach Umsortieren)
 \tilde{c}_i=u_ic_i,~u_i\in R^*\qquad\tilde{g}_j=v_jg_j,~v_j\in R^*
 \]
 \hfill $\square$
+%sub end
 
+%sec end
+\newpage
+\section{Körper, Körpererweiterungen und Konstruierbarkeit}
+\label{sec:k,k,k}
+\subsection{Definition Charakteristik}
+\label{sub:def_charakteristik}
+Sei $K$ ein Körper, sei $c:\Z\to K$ der Ringhomomorphismus $c(n)=n\cdot 1_K=\underbracket{1_K+1_K\dt{+}1_K}_{n-\text{mal}}$.
+Es gilt $\ker(c)=l\Z$ für ein $l\in \N$ nach \hyperref[sub:satz_12]{3.8} ($I\subseteq \Z \Leftrightarrow I=l\Z$ für ein $l\in\N$).
+Die Zahl $l$ nennt man die \Index{Charakteristik} von $K$, $l=\Char(K)$.
+Da $c(\Z)\subseteq K$ ein Integritätsbereich ist, folgt $l=0$ oder $l$ ist Primzahl, vgl. \hyperref[sub:def_vers_ideale]{3.13} und \hyperref[sub:bsp_7]{3.15}. 
+\begin{center}
+	denn:
+	\begin{tikzcd}[column sep=small]
+		\Z \ar{rr}{c} \ar{rd}[below,left]{} & & c(\Z)\\
+		& \nicefrac{\Z}{l\Z} \ar{ru}[below,right]{\cong} &
+	\end{tikzcd}
+	\captionof{figure}{Charakteristik von $K$}
+\end{center}
+%sub end
 
+\subsection{Beobachtungen über Körper}
+\label{sub:beo_koerper}
+\begin{enumerate}[(a)]
+	\item Sind $K,L$ Körper und ist $\varphi: K\to L$ ein Ringhomomorphismus, so ist $\varphi$ injektiv, weil $\{0\},K$ die einzigen Ideale in $K$ sind und weil $\varphi(1_K)=1_L$.
+	Es folgt $\Char(K)=\Char(L)$ (denn: $\Z\stackrel{c}{\to}K\stackrel{\varphi}{\hookrightarrow}L)$, also $\ker(c:\Z\to K)=\ker(\varphi\circ c=c':\Z\to L)$).
+	\item Ist $K$ ein Körper, $X\subseteq K$ eine Teilmenge, so ist
+	\[
+	\bigcap \penbrace{L\subseteq K~|~L\text{ Teilkörper, }X\subseteq L}\subseteq K \text{ ein Teilkörper}
+	\]
+	der von $X$ erzeugte \Index{Teilkörper}.
+\end{enumerate}
 
+\subsubsection*{Satz}
+Jeder Körper $K$ besitzt einen eindeutig bestimmten minimalen Teilkörper $K_0\subseteq K$, den \Index{Primkörper}.
+Wenn $\Char(K)=0$, gilt $K_0\cong \Q$ und wenn $\Char(K)=l>0$ gilt, ist $K_0=c(\Z)\cong \nicefrac{\Z}{l\Z}$.\\
 
+\bet{Beweis:}\\
+Sei $K_0=\bigcap\penbrace{L\subseteq K~|~L\text{ Teilkörper}}$, dann ist $K_0\subseteq K$ ein Teilkörper nach \hyperref[sub:beo_koerper]{5.2}.
+Wegen $1_K\in K_0$ folgt $c(\Z)\subseteq K_0$.
+Wenn $l>0$ ist, $c(\Z)\cong \nicefrac{\Z}{l\Z}$ ein Teilkörper, also $K_0\subseteq c(\Z)$, also
+\[
+c(\Z)=K_0
+\]
+Ist $\Char(K)=0$, so ist $c:\Z\to K$, so ist $c$ injektiv, nach \hyperref[sub:quotientenkoerper]{3.11} existiert ein (eindeutiger) Homomorphismus:
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		\Z \ar{rr}{c} \ar{rd}[below,left]{} & & K_0\subseteq K\\
+		& \Q \ar{ru}[below,right]{\tilde{c}} &
+	\end{tikzcd}
+\end{center}
+\[
+\Rightarrow \underbracket{\tilde{c}(\Q)}_{\cong \Q}=K_0
+\]
+\hfill $\square$
+%sub end
 
+\subsection{Erinnerung an LA II, der verbesserte Einsetzungshomomorphismus}
+\label{sub:verbesserte_einsetzungshomomorphismus}
+Seien $R,S$ kommutative Ringe, $\varphi:R\to S$ ein Ringhomomorphismus.
+Sei $a\in S$.
+Definiere
+\[
+\Phi_a:R[T]\to S,+ \Phi_a(r_0\dt{+}r_nT^n)=\varphi(r_0)\dt{+}\varphi(r_n)a^n
+\]
+Das ist ein Ringhomomorphismus, der \Index{Einsetzungshomomorphismus}.\\
+Für $R=S$ und $\varphi=\id_R$ schreibe $\Phi_a(f)=f(a)$.
+%sub end
 
+\subsection{Definition Körpererweiterung}
+\label{sub:def_koepererweiterung}
+Sei $K\subseteq L$ ein Teilkörper des Körpers $L$.
+Dann nennt man $L$ eine \Index{Körpererweiterung} von $K$.\\
+\uline{Beispiele:}
+$\Q\subseteq \R\subseteq \C$ sind Körpererweiterungen.\\
 
+Sei nun $u\in L$, betrachte $\Phi_u:K[T]\to L,~r_0\dt{+}r_nT^n\mapsto r_0\dt{+}r_nu^n$.\\
+1. Möglichkeit: $\Phi_u$ ist injektiv:
+Dann heißt $u$ \Index{transzendent} über $K$, das heißt es gibt kein Polynom $f\neq 0$ in $K[T]$ mit
+\[
+\Phi_u(f)=f(u)=0,
+\]
+also erfüllt $u$ \uline{keine} algebraische Gleichung über $K$.\\
+\uline{Beispiele:}
+$e=2.71828..=\exp(1)$ und $\pi=3.14159..$ sind transzendent über $\Q$ (!)\\
+Der kleinste Teilkörper von $L$, der $K\cup \{u\}$ enthält, ist dann \uline{isomorph} zu
+\[
+K(T)=\Quot(K[T])=\penbrace{\frac{f}{g}~|~f,g\in K[T],~g\neq 0}
+\]
+dem Körper der \uline{rationalen Funktionen} auf $K$, denn wir haben nach \hyperref[sub:quotientenkoerper]{3.11}:
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		K[T] \ar{rr}{\Phi_u} \ar{rd}[below,left]{} & & L\\
+		& \Quot(K[T])=K(T) \ar{ru}[below,right]{\tilde{\Phi_u}} &\\
+		
+	\end{tikzcd}
+\end{center}
+Man schreibt $K(u)=\penbrace{\frac{f(u)}{g(u)}\in L~|~f,g\in K[T],~g\neq 0}\cong K(T)$.\\
 
+2. Möglichkeit: $\Phi_u K[T]\to L$ ist nicht injektiv, also gibt es $f\neq 0,~f\in K[T]$ mit
+\[
+\Phi_u(f)=f(u)=0.
+\]
+Nach \hyperref[sub:]{4.12} ist $K[T]$ ein Hauptidealbereich, alos gibt es ein Polynom $\mu\in K[T]$ mit
+\[
+\ker(\Phi_u)=(\mu)\subseteq K[T].
+\]
+Es gilt $\deg(\mu)\ge 1$ (denn fpr $f\in K[T]$ mit $\deg(f)=0$ gilt $\Phi_u(f)\neq 0$).
+Bis auf Multiplikation mit Skalaren $a\in K^*$ ist $\mu$ eindeutig bestimmt (\hyperref[sub:]{4.1}), wir dürfen annehmen, dass
+\[
+\mu=\mu_u=r_0\dt{+}r_{n-1}T^{n-1}+T^n \text{ und } \deg(\mu)=n\ge 1.
+\]
+Man nennt $\mu=r_0\dt{+}T^n$ das \Index{Minimalpolynom} von $u$ üder $K$ und nennt $u$ \Index{algebraisch} über $K$.
+Da $L$ ein Integritätsbereich ist, ist $(\mu)$ ein Primideal in $K[T]$, und da $\deg(\mu)\ge 1$ ist $(\mu)\neq K[T]$.
+Also ist $(\mu)$ nach \hyperref[sub:]{4.5} ein maximales Ideal und damit ist $\Phi_u(K[T])\cong \nicefrac{K[T]}{(\mu)}$ ein Körper, der kleinste Teilkörpervon $L$, der $K\cup\{u\}$ enthält.
+Man schreibt dann kurz
+\[
+K[u]=\penbrace{f(u)~|~f\in K[T]}\subseteq L
+\]
+und nennt $u$ einen \Index{primitiven Erzeuger} von $K[u]$.\\
+
+\uline{Beispiel:}
+$K=\Q,~l=\R,~u=\sqrt{2}\notin \Q$.
+Es gilt $f(u)=0$ für $f=T^2-2$ und $u=f$ das Minimalpolynom von $u$.
+Es folgt, dass $\Q\subseteq \Q[\sqrt{2}]\subseteq \R$ ein Teilkörper ist.\\
+
+In beiden Fällen 1. und 2. schreibt man
+\[
+K(u)\bigcap \penbrace{M\subseteq L \text{ Teilkörper}~|~K\cup\{u\}\subseteq M}
+\]
+$u$ algebraisch $\Rightarrow K(u)=K[u]$,\\
+$u$ transzendent $\Rightarrow K(u)=\penbrace{\frac{f(u)}{g(u)}~|~f,g\in K[T],~g\neq 0}$.
+%sub end
+
+\subsection{Definition }
+\label{sub:def_}
+Sei $K\subseteq L$ eine Körpererweiterung.
+Dann ist $L$ ein $K$-Vektorraum:
+$(L,+)$ ist abelsche Gruppe, für $v\in L,~a\in K$ ist $va\in L$ und die Vektorraumaxiome gelten alle.
+Man nennt die Dimension von $L$ als $K$-Vektorraum den \Index{Grad der Körpererweiterung} und schreibt:
+\[
+[L:K]=\dim_K L \marginnote{Teilkörper $K\subseteq L$ mit angeben!}
+\]
+
+\subsubsection*{Satz}
+Sei $K\subseteq L$ eine Körpererweiterung, sei $u\in L,~n\in \N$.
+Dann sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $u$ ist algebraisch über $K$ mit Minimalpolynom $\mu$ und $\deg(\mu)=n$.
+	\item $[K(u):K]=n<\infty$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):}
+Sei $g\in K[T]$ beliebig, dann $g=q\cdot \mu+r$ mit $q,r\in K[T],~\deg(r)<n=\deg(\mu)$, vgl. \hyperref[sub:]{4.11}.
+Es folgt:
+\[
+g(u)=\underbracket{q(u)\cdot \underbracket{\mu(u)}_{=0}}_{=0}+r(u)=r(u),
+\]
+also
+\[
+K[u]=\penbrace{r_0\dt{+}r_{n-1}u^{n-1}~|~r_0\dt{,}r_{n-1}\in K}
+\]
+daraus folgt: $\dim_K K[u]\le n$, denn $\{1,u\dt{,}u^{n-1} \}$ ist ein lineares Erzeugendensystem von $K[u]$.
+Dieses ERZ ist linear unabhängig:
+\[
+r_0\cdot 1\dt{+}r_{n-1}u^{n-1}=0 \rightsquigarrow f=r_0\dt{+}r_{n-1}T^{n-1} \rightsquigarrow f\in (\mu),
+\]
+aber $\deg(f)<\deg(\mu) \Rightarrow f=0$.\\
+ALso ist $\{1,u\dt{,u^{n-1}}\}$ eine Basis von $K[u]$ als $K$-Vektorraum.\\
+\uline{(ii)$\Rightarrow$(i):}
+Angenommen, $u$ ist transzendent über $K$.
+Dann gilt $g(u)\neq 0$ für alle $g\in K[T],+g\neq 0$.
+Folglich ist die unendliche Menge $\{1,u,u^2,...\}$ linear unabhängig über $K$, daraus folgt $\dim_K K(u)$ ist nicht endlich.
+\hfill $\square$
 
 
 
