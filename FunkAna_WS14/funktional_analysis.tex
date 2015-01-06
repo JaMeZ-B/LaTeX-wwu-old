@@ -2260,6 +2260,109 @@ Sei $\mathcal{H}$ ein Hilbertraum.
 	\item Im Allgemeinen ist eine Hilbertraumbasis \emph{keine} Vektorraumbasis (\Index{Hamelbasis}).
 \end{enumerate}
 % subsection 714 (end)
+
+\subsection[Proposition über Schnitt und Summe eines Unterraumes mit seinem orthogonalen Komplement]{Proposition} % (fold)
+\label{sub:715}
+Sei $\mathcal{H}$ ein Hilbertraum, $\mathcal{H}_0 \subset \mathcal{H}$ ein abgeschlossener Unterraum. Dann gilt $\mathcal{H}_0 \cap \mathcal{H}_0^\bot = \set{0}$ und 
+$\mathcal{H}_0 + \mathcal{H}_0^\bot = \mathcal{H}$. Wir schreiben in diesem Fall auch $\mathcal{H} = \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$.
+\minisec{Beweis}
+$\mathcal{H}_0 \cap \mathcal{H}_0^\bot= \set{0}$ ist klar (warum?). Sei $x \in \mathcal{H}$. Dann ist $\kappa(x) \in \mathcal{H}^*$ gegeben durch 
+$\kappa(x)(y)=\skal*{x}{y}$, und $\kappa(x)|_{\mathcal{H}_0} \in \mathcal{H}_0^*$. $\mathcal{H}_0 \subset \mathcal{H}$ abgeschlossen, ist also selbst ein Hilbertraum. 
+Sei $\kappa_0 \colon \mathcal{H}_0 \to \mathcal{H}_0^*$ der konjugiert lineare, isometrische Isomorphismus aus \ref{sub:711}. Nach \ref{sub:711} existiert 
+$x_0 \in \mathcal{H}_0$ mit $\kappa_0(x_0)= \kappa(x)|_{\mathcal{H}_0}$. Das heißt für $y \in \mathcal{H}_0$ gilt 
+\begin{align*}
+	\skal*{x_0}{y} = \kappa_0(x_0)(y) = \kappa(x)\big|_{\mathcal{H}_0}(y) = \kappa(x)(y) = \skal*{x}{y}
+\end{align*}
+Daraus folgt $\skal*{x-x_0}{y}=0$ für jedes $y \in \mathcal{H_0}$, also ist $x_1 := x-x_0 \in \mathcal{H}_0^\bot$ (und $x=x_0+x_1$). \bewende
+% subsection 715 (end)
+
+\subsection[Definition: Summierbar]{Definition} % (fold)
+\label{sub:716}
+Sei $\mathcal{H}$ ein Hilbertraum. Eine Familie $\set{x_i}_{i \in I} \subset \mathcal{H}$ heißt \Index{summierbar} zu $x \in \mathcal{H}$, falls gilt: 
+Zu $\varepsilon>0$ existiert $\overline{J} \Subset I$ endlich, sodass für alle $\overline{J} \subset J \Subset I$ endlich gilt $\norm{\sum_{i \in J}x_i - x } < \varepsilon$.
+
+Wir schreiben dann auch $x= \sum_{i \in I} x_i$. (Warum kann es höchstens ein solches $x$ geben?) Formulierung mit Netzen: 
+\[
+	\enbrace*{\sum_{i \in J} x_i}_{\!\!\set[J]{J \Subset I \text{ endlich}}} \hspace{-4em} \longrightarrow \enspace x \qquad \text{ oder} \qquad \sum_{i \in J}x_i \xrightarrow{J \Subset I} x 
+\]
+Dabei ist $\set[J]{J \Subset I \text{ endlich}}$ gerichtet bezüglich Inklusion.
+% subsection 716 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:717}
+Sei $\mathcal{H}$ ein Hilbertraum, $\set{x_i}_{i \in I} \subset \mathcal{H}$. 
+\begin{enumerate}[(i)]
+	\item $\set{x_i}_{i \in I}$ ist genau dann summierbar, wenn gilt: Zu jedem $\varepsilon>0$ existiert $\overline{J} \Subset I$ endlich, sodass 
+	$\norm{\sum_{i \in J'}x_i}< \varepsilon$ für jedes $J' \Subset I$ endlich mit $J' \cap \overline{J} = \emptyset$.
+	\item $\set{x_i}_{i \in I}$ ist genau dann summierbar zu $x \in \mathcal{H}$, wenn gilt: Es sind höchstens abzählbar viel der $x_i \not=0$ und für jede Abzählung 
+	$x_{i_0}, x_{i_1}, \ldots $ dieser $x_i$ gilt 
+	\[
+		x= \lim_{n \to \infty} \sum_{k=0}^{n} x_{i_k}.
+	\]
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Angenommen $\sum_{i\in I} x_i \in \mathcal{H}$ existiert. Sei $\varepsilon>0$. Dann existiert $\overline{J}\Subset I$, sodass für $\overline{J}\subset J\Subset I$ 
+	gilt $\norm{\sum_{i \in J} x_i - \sum_{i \in I} x_i} < \frac{\varepsilon}{2}$. Für $J' \Subset I$, $J' \cap \overline{J}=\emptyset$ gilt
+	\begin{align*}
+		\norm{\sum_{i \in J'} x_i} = \norm{\sum_{i \in J' \cup \overline{J}} x_i - \sum_{i \in \overline{J}} x_i}  \le \norm{\sum_{i \in J' \cup \overline{J}}x_i - \sum_{i \in I} x_i} + \norm{\sum_{i \in \overline{J}} x_i - \sum_{i \in I}x_i}< \varepsilon  
+	\end{align*}
+	
+	Zur Rückrichtung: Für $n \in \mathds{N}$ existiert $J_n \Subset I$ endlich, sodass für $J' \Subset I$ mit $J' \cap J_n = \emptyset$ gilt 
+	$\norm{\sum_{i \in J'} x_i}< \frac{1}{n+1}$. Aber dann ist 
+	\begin{align*}
+		\enbrace*{\sum_{i \in J_0 \cup J_1 \cup \ldots \cup J_n} \hspace{-1em} x_i}_{n \in \mathds{N}} \subset \mathcal{H}
+	\end{align*}
+	eine Cauchyfolge. Für den Limes $x$ gilt $x= \sum_{i \in I} x_i$ (Warum? Zu $\varepsilon>0$ wähle $n$ mit $\frac{1}{n+1}<\frac{\varepsilon}{2}$ und 
+	$\norm{x - \sum_{i \in J_0 \cup J_1 \cup \ldots \cup J_n} x_i}< \frac{\varepsilon}{2}$. Setze $\overline{J}:= J_n$)
+	\item Angenommen $\set{x_i}_{i \in I}$ ist summierbar. Seien die $J_n$ wie oben. Dann ist $\bigcup_{n \in \mathds{N}} J_n$ abzählbar. Falls 
+	$I \ni i \not\in \bigcup_{n \in \mathds{N}} J_n$, so gilt $\norm{x_i} < \frac{1}{n+1}$ für jedes $n \in \mathds{N}$, also $x_i=0$.
+	
+	Die Rückrichtung ist klar. (sonst noch einmal an Analysis I. erinnern \ldots ) \bewende
+\end{enumerate}
+% subsection 717 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:718}
+Sei $\mathcal{H}$ ein Hilbertraum, $z \in \mathcal{H}$, $\alpha, \beta \in \mathds{K}$, $\set{x_i}_{i \in I}, \set{y_i}_{i \in I}$ summierbare Familien. Dann gilt
+\begin{align*}
+	\alpha \cdot \sum_{i \in I} x_i + \beta \cdot \sum_{i \in I} y_i = \sum_{i \in I} \enbrace*{\alpha \cdot x_i + \beta \cdot y_i} 
+	\qquad \text{ und } \qquad 
+	\skal*{\sum_{i \in I} x_i}{z} = \sum_{i \in I} \skal*{x_i}{z}
+\end{align*}
+\minisec{Beweis}
+Übung. \bewende
+% subsection 718 (end)
+
+\subsection[Proposition: Kriterium für die Summierbarkeit orthogonaler Vektoren]{Proposition} % (fold)
+\label{sub:719}
+Sei $\set{x_i}_{i \in I}\subset \mathcal{H}$ eine Familie paarweise orthogonaler Vektoren. Dann ist $\set{x_i}_{i \in I}$ summierbar genau dann, wenn 
+$\sum_{i \in I} \norm{x_i}^2$ endlich ist. In diesem Fall gilt
+\[
+	\norm{\sum_{i \in I}x_i}^2 = \sum_{i \in I} \norm{x_i}^2  
+\]
+\minisec{Beweis}
+Falls $\set{x_i}_{i \in I}$ summierbar ist, so gilt
+\begin{align*}
+	\norm{\sum_{i \in I} x_i}^2 =  
+	\skal*{\sum_{i \in I}x_i}{\sum_{j \in I} x_j} \stackrel{\text{\ref{sub:718}}}{=} \sum_{i \in I} \skal*{x_i}{\sum_{j \in I} x_j}\stackrel{\text{\ref{sub:718}}}{=}
+	\sum_{i \in I} \enbrace*{\sum_{j \in I} \skal*{x_i}{x_j}} = \sum_{i \in I} \norm{x_i}^2  
+\end{align*}
+Äquivalenz: Übung mit 
+\[
+	\norm{\sum_{i \in I}x_i}^2 \xleftarrow{J \Subset I}\norm{\sum_{i \in J} x_i}^2 = \sum_{i \in J} \norm{x_i}^2 \xrightarrow{J \Subset I} \sum_{i \in I} \norm{x_i}^2  
+\]
+für $J \Subset I$ endlich und \ref{sub:717}. \bewende
+% subsection 719 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:720}
+Sei $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem, $x \in \mathcal{H}$. 
+\begin{enumerate}[(i)]
+	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$, (\Index{Besselsche Ungleichung}).
+	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 = \norm{x}^2$ (\Index{Parcelvalsche Gleichung}) genau dann, wenn $x= \sum_{i \in I} \skal*{x_i}{x} \cdot x_i$.
+\end{enumerate}
+% subsection 720 (end)
 % section 7 (end)
 
 
