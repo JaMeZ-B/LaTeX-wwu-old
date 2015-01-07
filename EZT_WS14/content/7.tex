@@ -87,4 +87,54 @@ $n = 3 \cdot 15 \cdot 17 \cdot 257 \cdot 65537 = F_5 - 2 = 2^{32} - 1 = 4.294.96
 	Definiere Folge natürlicher Zahlen $s_1, s_2, \dots$ durch $s_1 = 4, s_{n+1} = s_n^2 - 2$. Dann gilt:
 	\[ M_p \text{ prim } \Leftrightarrow s_{p-1} \kon 0 \modu M_p \]
 \end{falko}
+
+\setcounter{countfalko}{2}
+\begin{falko} \label{F7.3}
+	Sei $p$ ein Primteiler einer Fermatschen Zahl $F_n$ bzw. einer Mersenne-Zahl $M_q$. Genau dann geht auch $p^2$ in $F_n$ bzw. $M_q$ auf, wenn die Bedingung \marginnote{06.01. \\ \ [21]}
+	\begin{equation}
+		2^{p-1} \kon 1 \modu p^2 \label{eq_W}
+	\end{equation}
+	erfüllt ist.
+\end{falko}
+
+Eine Primzahl, die \eqref{eq_W} erfüllt, heißt eine \Index{Wieferich-Primzahl}. Bisher sind nur die Wieferich-Primzahlen 1093 und 3511 bekannt; bis $10^{15}$ gibt es keine weiteren. Die Primzahlen $p = 1093$ und $p = 3511$ kommen aber wegen $1093 = 1 + 273 \cdot 2^2$ und $3511 = 1 + 1755 \cdot 2^1$ nicht als Primteiler einer Fermatzahl $F_n$ in Frage. Und auch nicht als Primteiler einer Mersenne-Zahl $M_q$, denn sonst wäre $q$ -- wegen $2^q \kon 1 \modu p$ -- ein Primteiler von $p-1$, also wegen $1093 - 1 = 2^2 \cdot 3 \cdot 7 \cdot 13$ und $3511 - 1 = 2 \cdot 3^3 \cdot 5 \cdot 13$ eine der Primzahlen $q = 2,3,5,7$ oder $13$. Für alle diese $q$ ist aber $M_q$ prim (und verschieden von 1093 und 3511).
+
+\minisec{Bemerkung}
+	Die \Index{Fermatsche Vermutung} besagt: Die Gleichung
+	\begin{equation}
+		X^n + Y^n = Z^n \label{eq_fermat}
+	\end{equation}
+	besitzt für $n \geq 3$ keine Lösung in natürlichen Zahlen, d.h. es gibt kein Tripel $(a,b,c) \in \NN^3$ mit $a^n+b^n=c^n$. Um dies für alle $n \geq 3$ zu etablieren, genügt es offenbar zu zeigen, dass \eqref{eq_fermat} im Falle einer Primzahl $n = p \geq 3$ keine Lösung $(a,b,c) \in \NN^3$ besitzt sowie im Falle $n = 4$. Den Fall $n = 4$ konnte bereits Fermat erledigen (F\ref{F7.3} auf Seite~\pageref{F7.3}). \\
+	Im Falle $n = p \geq 3$ prim besagt der so genannte erste Fall der Fermatschen Vermutung, dass die Gleichung \eqref{eq_fermat} keine Lösung $(a,b,c) \in \NN^3$ hat, bei der keine der Zahlen $a,b,c$ durch $p$ teilbar ist. Dies, so konnte Wieferich zeigen, gilt unter der Voraussetzung, dass $p$ die Bedingung $2^{p-1} \not\kon 1 \modu p^2$ erfüllt.
+
+\subsection{Zur Bedeutung der Mersenneschen Primzahlen}
+\begin{defn}[vollkommene Zahl]
+	Eine natürliche Zahl $n$ heißt $\Index{vollkommen}$, wenn sie gleich der Summe ihrer natürlichen Teiler $d < n$ ist. Wir definieren für $n \in \NN$ die Summation über alle natürlichen Teiler von $n$:
+	\[ \sigma(n) := \sum_{d \mid n} d \]
+\end{defn}
+
+$n \in \NN$ ist genau dann vollkommen, wenn $\sigma(n) = 2n$. Ist $\sigma(n) < 2n$, so heißt $n$ \Index{defizient}. Andernfalls heißt $n$ \Index{abundant}.
+\begin{enumerate}[(1)]
+	\item $\sigma(p^k) = 1 + p + p^2 + \dots + p^k = \frac{p^{k+1}-1}{p-1} < 2p^k$, defizient
+	\item $(n_1,n_2) = 1 \Rightarrow \sigma(n_1n_2) = \sigma(n_1) \sigma(n_2)$ \\
+	$d_1 \mid n_1, d_2 \mid n_2 \Rightarrow d_1 d_2 \mid n_1 n_2$ \\
+	$d \mid n_1 n_2 \Rightarrow d=d_1d_2$ mit $d_i \mid n_i$
+	$\sum\limits_{d \mid n_1n_2} d = \sum\limits_{d_1 \mid n_1, d_2 \mid n_2} d_1d_2 = \sum\limits_{d_1 \mid n_1} d_1 \cdot \sum\limits_{d_2 \mid n_2} d_2$
+\end{enumerate}
+
+\setcounter{countfalko}{5}
+\begin{falko}	\label{F7.6}
+	Hat $n$ die Gestalt $n = 2^{k-1} (2^k-1)$ und ist dabei $2^k - 1$ eine Primzahl, so ist $n$ vollkommen.
+\end{falko}
+
+\begin{falko}	\label{F7.7}
+	Die geraden vollkommenen Zahlen $n$ sind genau die Zahlen der Gestalt $n = 2^{p-1} M_p$ mit $M_p$ prim.
+\end{falko}
+
+\minisec{Problem (ungelöst)}
+	Gibt es ungerade vollkommene Zahlen?
+	
+\minisec{Bemerkung}
+	Man weiß: $n$ ungerade mit weniger als 8 Primteilern ist nicht vollkommen. \\
+	Jedes ungerade $n \leq 10^{200}$ nicht vollkommen.
 \newpage
