@@ -2705,13 +2705,13 @@ Ein \CW-Komplex ist genau dann kompakt, wenn er endlich ist.
 
 \subsection[Definition: $n$-ter zellulärer Kettenmodul und zelluläre Randabbildung]{Definition} % (fold)
 \label{sub:121}
-\todo{RevChap12}
 Sei $X$ ein \CW-Komplex. Dann heißt 
 \[
 	C_n^{\cell}(X;R) := H_n \enbrace*{X^{(n)}, X^{(n-1)};R} 
 \]
-der \bet{$\mathbf{n}$-te zelluläre Kettenmodul}\index{n-ter zellulärer Kettenmodul@$n$-ter zelluläre Kettenmodul} von X mit Koeffizienten in $R$. Die $n$-te Randabbildung
-$\partial^{\cell}_n : C_n^{\cell}(X;R) \to C_{n-1}^{\cell}(X;R)$ wird durch die Komposition 
+der \bet{$\mathbf{n}$-te zelluläre Kettenmodul}\index{n-ter zellulärer Kettenmodul@$n$-ter zelluläre Kettenmodul} von $X$ mit Koeffizienten in $R$. Die 
+\bet{$\mathbf{n}$-te Randabbildung}\index{n-te Randabbildung@$n$-te Randabbildung!zellulär}
+$\partial^{\cell}_n \colon C_n^{\cell}(X;R) \to C_{n-1}^{\cell}(X;R)$ wird durch die Komposition 
 \[
 	\begin{tikzcd}[column sep=huge, row sep=large]
 		H_n \enbrace*{X^{(n)}, X^{(n-1)};R} \rar["\partial_n^{\enbrace{X^{(n)}, X^{(n-1)}}}"] & H_{n-1} \enbrace*{X^{(n-1)};R} \dar["\enbrace*{j^{(n-1)}}_*"] \\
@@ -2722,43 +2722,44 @@ definiert. Dabei ist $\partial_n^{\enbrace{X^{(n)}, X^{(n-1)}}}$ die Randabbildu
 $\enbrace*{X^{(n-1)},\emptyset} \hookrightarrow \enbrace*{X^{(n-1)}, X^{(n-2)}}$.
 % subsection 121 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Für die zellulären Randabbildungen gilt $\partial_{n-1}^{\cell} \circ \partial_n^{\cell} =0$]{Lemma} % (fold)
 \label{sub:122}
 \[
 	\partial_{n-1}^{\cell} \circ \partial_n^{\cell} =0
 \]
 \minisec{Beweis}
+Wir schreiben die Paarsequenz für $\enbrace*{X^{(n)},X^{(n-1)}}$ dreimal übereinander und erhalten:
 \[
 	\tikzexternaldisable
 	\begin{tikzpicture}[baseline= (a).base]
-	\node[scale=0.8] (a) at (0,0){
-	\begin{tikzcd}[font=\normalsize,column sep=2.0em]
-		H_n \enbrace*{X^{(n)}, X^{(n-1)}} \rar["\partial_n"] & H_{n-1}(X^{(n-1)}) \dar[equal] \rar & \cdots\\
+	\node[scale=0.81] (a) at (0,0){
+	\begin{tikzcd}[font=\normalsize,column sep=2.0em,arrows=thick]
+		H_n \enbrace*{X^{(n)}, X^{(n-1)}} \rar["\partial_n"] \arrow[rrd, bend right,"\partial_n^{\cell}"',Firebrick3]& H_{n-1}(X^{(n-1)}) \dar[equal] \rar & \cdots\\
 		& H_{n-1}\enbrace*{X^{n-1}} \rar["j^{(n-1)}_*"] & H_{n-1} \enbrace*{X^{(n-1)}, X^{(n-2)}} \rar["\partial_{n-1}"] 
-		& H_{n-2} \enbrace*{X^{(n-2)}} \dar[equal] \rar & \cdots \\ 
+		\arrow[rrd, bend right,"\partial_{n-1}^{\cell}"',Firebrick3] & H_{n-2} \enbrace*{X^{(n-2)}} \dar[equal] \rar & \cdots \\ 
 		& & & H_{n-2} \enbrace*{X^{(n-2)}}  \rar["j^{(n-2)}_*"] & H_{n-2} \enbrace*{X^{(n-2)}, X^{(n-3)}} 
 	\end{tikzcd}
 	};
 	\end{tikzpicture}
 	\tikzexternalenable
 \]
-Also $\partial^{\cell}_{n-1} \circ \partial^{\cell}_n =0$, da schon $\partial_{n-2} \circ j^{(n-1)}_* =0$. \bewende
+Also $\partial^{\cell}_{n-1} \circ \partial^{\cell}_n =0$, da wegen der Exaktheit der Paarfolge schon $\partial_{n-1} \circ j^{(n-1)}_* =0$ ist. \bewende
 % subsection 122 (end)
 
 \subsection[Definition: Zellulärer Kettenkomplex und zelluläre Homologie]{Definition} % (fold)
 \label{sub:123}
-$\enbrace*{C_*^{\cell}(X;R),\partial_*^{\cell}}$ heißt der \Index{zelluläre Kettenkomplex} von $X$ über $R$. Seine Homologie $H_*^{\cell}(X;R)$ heißt die \Index{zelluläre 
-Homologie} von $X$.
+$\enbrace*{C_*^{\cell}(X;R),\partial_*^{\cell}}$ heißt der \bet{zelluläre Kettenkomplex}\index{zellulärer Kettenkomplex} von $X$ über $R$. Seine Homologie $H_*^{\cell}(X;R)$ 
+heißt die \Index{zelluläre Homologie} von $X$.
 % subsection 123 (end)
 
 \subsection[Bemerkung: Funktorialität des zellulären Kettenkomplexes und der zellulären Homologie]{Bemerkung} % (fold)
 \label{sub:124}
-Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der \CW-Komplexe und zellulären Abbildungen.
+Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der \CW-Komplexe und zellulären Abbildungen. \todo{RevChap12}
 % subsection 124 (end)
 
 \subsection{Lemma} % (fold)
 \label{sub:125}
-Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktur auf $X$.
+Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktur auf $X$. Dann gilt
 \begin{enumerate}[a)]
 	\item 
 	\[
@@ -2768,7 +2769,7 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 	\]
 	induziert einen Isomorphismus in $H_*$.
 	\item \[
-		H_k \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R} = \begin{cases}
+		H_k \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R} = \begin{cases}
 			R[I^{(n)}], &\text{ falls }k=n\\
 			0, & \text{ sonst}
 		\end{cases}
