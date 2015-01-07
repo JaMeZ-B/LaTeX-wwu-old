@@ -2069,7 +2069,7 @@ $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphis
 \subsection{Satz (Mayer-Vietoris Folge)} % (fold)
 \label{sub:92}
 Seien $A,B \subseteq X$ offen und $X=A \cup B$. Seien $i_A \colon A \hookrightarrow X$, $i_B \colon B \hookrightarrow X$, $j_A \colon A \cap B \hookrightarrow A$ und 
-$j_B \colon A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \rand{X=A\cup B}_n : H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
+$j_B \colon A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \rand{X=A\cup B}_n \colon H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
 \marginnote{"$R$" aus Platzgründen weggelassen}
 \[
 	\begin{tikzcd}[column sep=3.7em]
@@ -2078,7 +2078,7 @@ $j_B \colon A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randa
 		& H_n(X) \rar["\partial_n"] & H_{n-1}(A\cap B) \rar & \cdots
 	\end{tikzcd}
 \]
-eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Sei $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$. ist $f :X \to X'$ mit
+eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Sei $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$. ist $f\colon X \to X'$ mit
 $f(A) \subseteq A'$ und $f(B) \subseteq B'$, so kommutiert
 \[
 	\begin{tikzcd}[column sep=4em, row sep=3em]
@@ -2754,17 +2754,17 @@ heißt die \Index{zelluläre Homologie} von $X$.
 
 \subsection[Bemerkung: Funktorialität des zellulären Kettenkomplexes und der zellulären Homologie]{Bemerkung} % (fold)
 \label{sub:124}
-Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der \CW-Komplexe und zellulären Abbildungen. \todo{RevChap12}
+Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der \CW-Komplexe und zellulären Abbildungen. 
 % subsection 124 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma über $\enbrace{\coprod Q_i^{(n)}, \coprod q_i^{(n)}}_* $ und $H_k \enbrace{\coprod_i D^n, \coprod_i S^{n-1};R}$]{Lemma} % (fold)
 \label{sub:125}
 Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktur auf $X$. Dann gilt
 \begin{enumerate}[a)]
 	\item 
 	\[
 		\enbrace*{{\textstyle\coprod\limits_{i \in I^{(n)}}} Q_i^{(n)}, {\textstyle\coprod\limits_{i \in I^{(n)}}} q_i^{(n)}}_* 
-		\colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow 
+		\! \colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow
 		\enbrace*{X^{(n)}, X^{(n-1)};R} 
 	\]
 	induziert einen Isomorphismus in $H_*$.
@@ -2777,24 +2777,25 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[a)]
-	\item Sei $D^n_0 = D^n \setminus \set{0}$, $\frac{1}{2} D^n = \set[\frac{x}{2} ]{x \in D^n}$ und $\frac{1}{2} D^n_0 = \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
+	\item Sei $D^n_0 := D^n \setminus \set{0}$, $\frac{1}{2} D^n := \set[\frac{x}{2} ]{x \in D^n}$ und $\frac{1}{2} D^n_0 := \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
 	\[
 		X^{(n-1)}_{++} := X^{(n)} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^{(n)}(\set{0}) \quad \text{ und } \quad 
 		X^{(n-1)}_+ := X^{(n)} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^{(n)}\enbrace*{\frac{1}{2} D^n}
 	\]
 	Dann sind 
-	$X^{(n-1)} \hookrightarrow X_+^{(n-1)} \hookrightarrow X_{++}^{(n-1)}$ Homotopieäquivalenzen. Betrachte:
+	$X^{(n-1)} \hookrightarrow X_+^{(n-1)} \hookrightarrow X_{++}^{(n-1)}$ Homotopieäquivalenzen, da $\coprod_{i \in I^{(n)}} Q^{(n)}_i$ ein Homöomorphismus auf den offenen 
+	$n$-Zellen ist. Betrachte:
 	\[
 		\begin{tikzcd}[sep=large]
 			\enbrace*{\coprod D^n, \coprod S^{n-1}} \dar["\enbrace*{\coprod Q_i^{(n)}, \coprod q_i^{(n)}}"] \rar["(1)"] & \enbrace*{\coprod D^n, \coprod D^n_0} \dar &
-			\enbrace*{\coprod \frac{1}{2} D^n, \coprod_{i \in I^{(n)}}   \frac{1}{2} D_0^n} \lar["(2)"'] \dar["(3)"] \\
+			\enbrace*{\coprod \frac{1}{2} D^n, \coprod \frac{1}{2} D_0^n} \lar["(2)"'] \dar["(3)"] \\
 			\enbrace*{X^{(n)}, X^{(n-1)}} \rar["(5)"] & \enbrace*{X^{(n)}, X^{(n-1)}_{++}}    
 			& \enbrace*{X^{(n)} \setminus X^{(n-1)}_+ , X^{(n-1)}_{++} \setminus X^{(n-1)}_+} \lar["(4)"'] 
 		\end{tikzcd}
 	\]
-	$(1), (2), (5)$ sind Homotopieäquivalenzen und induzieren Isomorphismen in Homologie. $(3)$ ist ein Homöomorphismus und induziert einen Isomorphismus in Homologie.
-	$(4)$ erfüllt die Vorraussetzungen für den Ausschneideisomorphismus und induziert daher auch einen Isomorphismus in Homologie. Damit folgt a).
-	\item Es gilt
+	$(1), (2)$ und $(5)$ sind Homotopieäquivalenzen und induzieren Isomorphismen in Homologie. $(3)$ ist ein Homöomorphismus und induziert einen Isomorphismus in Homologie.
+	$(4)$ erfüllt die Vorraussetzungen für den \hyperref[sub:91]{Ausschneideisomorphismus} und induziert daher auch einen Isomorphismus in Homologie. Damit folgt a).
+	\item Da die Randabbildung aus der Paarsequenz in diesem Fall ein Isomorphismus ist, gilt \todo{RevChap12}
 	\begin{align*}
 		H_k \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R} \xleftarrow{\cong} \bigoplus_i H_k (D^n,S^{n-1};R) &\xrightarrow{\cong} \bigoplus_i \tilde{H}_{k-1}(S^{n-1};R)\\
 		&\cong \bigoplus_i \begin{cases}
