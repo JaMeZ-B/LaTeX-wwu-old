@@ -2527,14 +2527,14 @@ Ein kommutatives Diagramm von topologischen Räumen der Form
 Wir sagen dann auch: \eqref{eq:111} ist der Pushout von 
 \(
 	\begin{tikzcd}[sep=small]
-		A \rar["f"] \dar["g"']& X \\
-		Y
+		Y & A \rar["f"] \lar["g"']& X 
 	\end{tikzcd}
-\)
-\minisec{Bemerkung}
+\).
+% subsection 111 (end)
+\subsection[Bemerkung zur Existenz und zur Eindeutigkeit des Pushouts]{Bemerkung} % (fold)
+\label{sub:112}
 Jedes Diagramm $\begin{tikzcd}[sep=small]
-		A \rar["f"] \dar["g"']& X \\
-		Y
+		Y & A \rar["f"] \lar["g"']& X 
 	\end{tikzcd}$ lässt sich zu einem Pushout vervollständigen:
 Betrachte dazu den Raum $X \cup_A Y := \nicefrac{X \coprod Y}{f(a) \sim g(a) \forall a \in A}$ mit der Quotiententopologie. Sind $\overline{f}\colon Y \to X \cup_A Y $  und 
 $\overline{g}\colon X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow X \coprod Y$ und $Y \hookrightarrow X \coprod Y$ induzierten Abbildungen, so ist 
@@ -2546,12 +2546,12 @@ $\overline{g}\colon X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow
 \]
 ein Pushout. 
 Existenz und Eindeutigkeit aus der universellen Eigenschaft können benutzt werden um zu zeigen, dass der Pushout eindeutig bis auf kanonischen Homöomorphismus ist.
-\todo{RevChap11}
-% subsection 111 (end)
+% subsection 112 (end)
+
 
 \subsection[Definition: \CW-Komplex]{Definition} % (fold)
-\label{sub:112}
-Ein \bet{$\mathbf{CW}$-Komplex}\index{CW-Komplex@\CW-Komplex} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Filter_(Mathematik)}} durch Unterräume von $X$: 
+\label{sub:113}
+Ein \bet{$\mathbf{CW}$-Komplex}\index{CW-Komplex@\CW-Komplex}\footnote{Zitat von \hrefsym{https://en.wikipedia.org/wiki/CW_complex}{Wikipedia} zum Namen: \textenglish{\emph{The C stands for "closure-finite", and the W for "weak topology".}}} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Filter_(Mathematik)}} durch Unterräume von $X$: 
 \[
 	\emptyset = X^{(-1)} \subseteq X^{(0)} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^{(n)} \subseteq X^{(n+1)} \subseteq \ldots \subseteq X
 \]
@@ -2565,39 +2565,42 @@ sodass die folgenden zwei Eigenschaften erfüllt sind:
 			\smashoperator{\coprod\limits_{i \in I^{(n)}}} D^n \rar["\coprod_{i \in I^{(n)}} Q_i^{(n)}"] & X^{(n)}
 		\end{tikzcd}
 	\]
-	wobei $j_i \colon S^{n-1} \hookrightarrow D^n$ und $k_n \colon X^{(n-1)} \to X^{(n)}$ die Inklusionen sind.
+	wobei $j_i \colon S^{n-1} \hookrightarrow D^n$ und $k_n \colon X^{(n-1)} \hookrightarrow X^{(n)}$ die Inklusionen sind.
 	\item \Index{Schwache Topologie}: Es ist $X= \bigcup_{n \in \mathds{N}} X^{(n)}$ und $U \subseteq X$ ist genau dann offen, wenn $U \cap X^{(n)} \subseteq X^{(n)}$ für 
 	alle $n$ offen ist.
 \end{enumerate}
-Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär}, falls $f \enbrace*{X^{(n)}} \to Y^{(n)}$ für alle $n \in \mathds{N}$. 
-% subsection 112 (end)
+Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär}, falls $f\enbrace*{X^{(n)}}\subseteq Y^{(n)}$ für alle $n \in \mathds{N}$ gilt. 
+% subsection 113 (end)
 
 \subsection[Bemerkungen zur Definition von \CW-Komplexen]{Bemerkung} % (fold)
-\label{sub:113}
+\label{sub:114}
 \begin{enumerate}[(i)]
 	\item Die Abbildungen $q_i^{(n)}$ und $Q_i^{(n)}$ sind \emph{nicht} Teil der Struktur eines \CW-Komplex. Nur die Existenz von $q_i^{(n)}$ und $Q_i^{(n)}$ wird 
-	gefordert --- sie ist nicht notwendig eindeutig. Hat man $q_i^{(n)}$ und $Q_i^{(n)}$ \emph{gewählt}, so heißen $q_i^{(n)}$ die \Index{anklebende Abbildung} der $i$-ten
+	gefordert --- sie ist nicht notwendig eindeutig. Hat man $q_i^{(n)}$ und $Q_i^{(n)}$ \emph{gewählt}, so heißt $q_i^{(n)}$ die \Index{anklebende Abbildung} der $i$-ten
 	$n$-Zelle und $Q_i^{(n)}$ die \Index{charakteristische Abbildung} der $i$-ten $n$-Zelle.
 	\item Sei $\mathring{D}^n = D^n \setminus S^{n-1}$ das Innere von $D^n$. Die Abbildungen $Q_i^{(n)}$ schränken sich zu einem Homöomorphismus 
-	$\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^{(n)} \setminus X^{(n-1)}$ ein. Insbesondere lässt ich $I^{(n)}$ mit der Menge der Wegzusammenhangskomponenten von 
+	$\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^{(n)} \setminus X^{(n-1)}$ ein.\footnote{Dass dies ein Homöomorphismus ist, folgt 
+	aus der Pushout-Eigenschaft und dem letzen Teil der Bemerkung \ref{sub:112}, denn es gilt demnach 
+	$X^{(n)}\cong X^{(n-1)}\cup_{\coprod S^{n-1}} \coprod D^n$.} 
+	Insbesondere lässt ich $I^{(n)}$ mit der Menge der Wegzusammenhangskomponenten von 
 	$X^{(n)} \setminus X^{(n-1)}$ identifizieren. Die Wegzusammenhangskomponenten heißen die \bet{offenen Zellen}\index{offene Zelle} von $X$. Damit ist jeder \CW-Komplex 
 	die disjunkte Vereinigung seiner offenen Zellen.
 	
 	\ifxetexorluatex \faWarningSign \, \fi Achtung: Jede offene $n$-Zelle ist offen in $X^{(n)}$, aber nicht notwendig in $X$.
 	\item Der Abschluss einer offenen Zelle $Q_i^{(n)}(\mathring{D}^n)$ ist $Q_i^{(n)}(D^n)$ und insbesondere kompakt. Die $Q_i^{(n)}(D^n)$ heißen die
-	\bet{abgeschlossenen Zellen}\index{abgeschlossene Zelle} und sind als Abschluss von offenen Zellen unabhängig von der Wahl der $q_i^{(n)}$, $Q_i^{(n)}$.
+	\bet{abgeschlossenen Zellen}\index{abgeschlossene Zelle} und sind als Abschluss von offenen Zellen unabhängig von der Wahl der $Q_i^{(n)}$.
 	
 	\ifxetexorluatex \faWarningSign \, \fi Achtung: Abgeschlossene Zellen sind Bilder von $D^n$ unter stetigen Abbildungen, aber nicht notwendig homöomorph zu $D^n$.
 	\item Ein \CW-Komplex $X$ heißt \bet{endlich}\index{CW-Komplex@\CW-Komplex!endlicher}, wenn er nur aus endlich vielen Zellen besteht, also wenn 
 	$I = \bigcup_{n \in \mathds{N} } I^{(n)}$ endlich ist. Insbesondere gibt es dann ein $n$ mit $X=X^{(n)}$.
 	
-	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$: $\dim X = N$, falls $X^{(N)}=X$, $X^{(N-1)} \subsetneq X$. Gibt es kein solches $N$ so
-	$\dim X = \infty$.
+	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$, also $\dim X := N$, falls $X^{(N)}=X$, $X^{(N-1)} \subsetneq X$. Gibt es kein solches $N$ so 
+	setzen wir $\dim X := \infty$.
 \end{enumerate}
-% subsection 113 (end)
+% subsection 114 (end)
 
 \subsection[Beispiele für \CW-Komplexe]{Beispiele} % (fold)
-\label{sub:114}
+\label{sub:115}
 \begin{enumerate}[(i)]
 	\item $S^n$ mit 
 	\[
@@ -2607,10 +2610,10 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 			S^n , &\text{ falls } k \ge n 
 		\end{cases}
 	\]
-	ist ein \CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$
+	ist ein \CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$ \todo{RevChap11}
 	\[
 		\begin{tikzcd}
-			S^{n-1} \rar \dar & \enbrace*{S^n}^{(n-1)} \rar[equal] \dar & \set{(1,0,\ldots ,0)}   \\
+			S^{n-1} \rar \dar[hook] & \enbrace*{S^n}^{(n-1)} \rar[equal] \dar[hook] & \set{(1,0,\ldots ,0)}   \\
 			D^n \rar & S^n  
 		\end{tikzcd}
 	\]
@@ -2671,10 +2674,10 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 		\enbrace*{\mathds{C}P^n}^{(k)} \cong \mathds{C}P^{\floor*{\frac{k}{2}}} 
 	\]
 \end{enumerate}
-% subsection 114 (end)
+% subsection 115 (end)
 
 \subsection[Lemma: Kompaktheit von Teilmengen eines \CW-Komplexes]{Lemma} % (fold)
-\label{sub:115}
+\label{sub:116}
 Sei $X$ ein \CW-Komplex und $K \subseteq X$. Dann ist $K$ genau dann kompakt, wenn $K$ abgeschlossen ist und $K$ nur endlich viele offene Zellen von $X$ schneidet.
 \minisec{Beweis}
 Zunächst: Ist $S \subseteq X$ ein Unterraum der jede offene Zelle höchstens in einem Punkt schneidet, so ist $S$ diskret. Für $S_0 \subseteq S$ ist 
@@ -2688,12 +2691,12 @@ schneidet nur endlich viele offene Zellen.
 Ist nun umgekehrt $K$ abgeschlossen und schneidet nur endlich viele offene Zellen, so ist $K$ enthalten in einer endlichen Vereinigung von abgeschlossen Zellen von $X$.
 Da diese abgeschlossen Zellen kompakt sind, ist auch diese Vereinigung kompakt, K ist also eine abgeschlossener Teilraum eines kompakten Teilraums und damit selbst kompakt.
 \bewende
-% subsection 115 (end)
+% subsection 116 (end)
 
 \subsection[Korollar: Ein \CW-Komplex ist genau dann kompakt, wenn er endlich ist.]{Korollar} % (fold)
-\label{sub:116}
+\label{sub:117}
 Ein \CW-Komplex ist genau dann kompakt, wenn er endlich ist.
-% subsection 116 (end)
+% subsection 117 (end)
 % section 11 (end)
 \newpage
 
