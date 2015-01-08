@@ -124,7 +124,7 @@ $\mathcal{D}$ und ordnet jedem Morphismus $f : C \to C'$ in $\mathcal{C}$ einen 
 \subsection[Definition: Natürliche Transformation]{Definition} % (fold)
 \label{sub:16}
 Seien $F,G : \mathcal{C} \to \mathcal{D}$ zwei Funktoren. Eine \Index{natürliche Transformation} $\tau : F \to G$ ordnet jedem $C \in \Ob(\mathcal{C})$ einen Morphismus
-$\tau_C : F(C) \to G(C)$ in $\mathcal{D}$ zu, sodass für jedes $f : C \to C'$ in $\mathcal{C}$
+$\tau_C \colon F(C) \to G(C)$ in $\mathcal{D}$ zu, sodass für jedes $f \colon C \to C'$ in $\mathcal{C}$
 \[
 	\begin{tikzcd}
 		F(C) \rar["F(f)"] \dar["\tau_C"]& F(C') \dar["\tau_{C'}"] \\
@@ -2063,6 +2063,8 @@ Da die Zeilen lang exakt sind, folgt die Behauptung aus dem Fünfer-Lemma. \bewe
 \label{sub:91}
 Sei $(X,A)$ ein Paar und $L \subseteq A$, sodass der Abschluss $\overline{L}$ von im Inneren $\mathring{A}$ von $A$ liegt. Dann induziert die Inklusion
 $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphismus $j_* \colon H_n(X \setminus L, A \setminus L;R) \to H_n(X,A;R)$.
+\minisec{Beweis}
+\emph{Siehe Kapitel \ref{sec:13}.}
 \todo{RevChap9}
 % subsection 91 (end)
 
@@ -3137,11 +3139,11 @@ Daher induziert auch die Inklusion $(\star)$ einen Isomorphismus in $H_*$. \bewe
 \missingfigure{Zerteilung Simplex mit Bild in $X$}
 % subsection 136 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Schwerpunkt und \enquote{Abkegeln}]{Definition} % (fold)
 \label{sub:137}
 $s_n := \enbrace*{\frac{1}{n+1}, \ldots , \frac{1}{n+1}} \in \abs*{\Delta^n}$ heißt der \Index{Schwerpunkt} von $\abs*{\Delta^n}$. Ist 
 $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ ein singulärer $p$-Simplex, so definieren wir $(K_{\Delta^n})(\sigma) \colon \abs*{\Delta^{p+1}} \to \abs*{\Delta^n}$ 
-durch
+durch \marginnote{\enquote{Abkegeln}}
 \[
 	\enbrace*{K_{\Delta^n}} (\sigma) \enbrace*{t_0, \ldots , t_{p+1}} = t_0 \cdot s_n + (1-t_0) \cdot \sigma \enbrace*{\frac{(t_1,\ldots ,t_{p+1})}{1-t_0}} 
 \]
@@ -3168,14 +3170,88 @@ Sei $\sigma$ ein singulärer $p$-Simplex in $\abs*{\Delta^n}$. Dann ist
 \end{align*}
 % subsection 138 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition von Zerteilungsoperatoren]{Definition} % (fold)
 \label{sub:139}
 Wir definieren induktiv natürliche Transformationen $B_n \colon C_n(-;R) \to C_n(-;R)$ und $H_n \colon C_n(-;R) \to C_{n+1}(-;R)$ wie folgt: Für $n=0$ setzen wir
-$(B_0)_X = \id$. Sei $B_k$ nun schon für $k=0, \ldots ,n-1$ definiert. Betrachte $\id_{\abs*{\Delta^n}} \in C_n \enbrace*{\abs*{\Delta^n};R}$. Setze 
+$(B_0)_X = \id$. Sei $B_k$ nun schon für $k=0, \ldots ,n-1$ definiert. Betrachte zunächst $\id_{\abs*{\Delta^n}} \in C_n \enbrace*{\abs*{\Delta^n};R}$. Setze 
 \[
 	(B_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}} :=  (K_{\Delta^n})_{n-1} \circ (B_{n-1})_{\abs*{\Delta^n}}\circ \partial_n \enbrace*{\id_{\abs*{\Delta^n}}} 
 \]
+Ist $\sigma \colon \abs*{\Delta^n} \to X$ ein beliebiger singulärer $n$-Simplex in $X$, so ist $\sigma = \sigma_*\enbrace*{\id_{\abs*{\Delta^n}}}$, also setzen wir \footnote{
+$(B_n)_X(\sigma) = (B_n)_X\enbrace*{\sigma_*(\id_{\abs*{\Delta^n}})}= \sigma_*\enbrace[\big]{(B_n)_{\abs*{\Delta^n}(\id_{\abs*{\Delta^n}})}}$ muss wegen Natürlichkeit gelten}
+\[
+	(B_n)_X(\sigma) := \sigma_* \enbrace*{ (B_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}}} 
+\]
+Für $n=0$ und $\sigma \colon \abs*{\Delta^0} \to X$ setzen wir $(H_0)_X(\sigma)$ als den konstanten $1$-Simplex $\tau$ mit $\im \tau = \im \sigma$. Ist $H_{n-1}$ schon 
+definiert, so setzen wir für einen singulären $n$-Simplex $\sigma \colon \abs*{\Delta^n} \to X$
+\[
+	(H_n)_X(\sigma) := \sigma_* \enbrace*{ (K_{\Delta^n})_n \enbrace*{ \id_{\abs*{\Delta^n}} - (H_{n-1})_{\abs*{\Delta^n}}\circ\partial_n \enbrace*{\id_{\abs*{\Delta^n}}}}} 
+\]
 % subsection 139 (end)
+
+\subsection{Lemma 1} % (fold)
+\label{sub:1310}
+Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $(B_*)_X$ und der Identität.
+\minisec{Beweis}
+
+% subsection 1310 (end)
+
+\subsection{Lemma 2} % (fold)
+\label{sub:1311}
+Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Sei $\alpha\in C_n(X;R)$. Dann gibt es $k_0\ge 0$ so, dass $(B_n)^{k}_X(\alpha)\in C^\mathcal{U}_n(X;R)$ für alle $k \ge k_0$.
+% subsection 1311 (end)
+
+\subsection{Beweis des Satzes über kleine Simplizes (\ref{sub:133})} % (fold)
+\label{sub:1312}
+Sei $x \in H_n(X;R)$. Wähle $\alpha \in C_n(X;R)$ mit $[\alpha]=X$. Nach \hyperref[sub:1311]{Lemma 2} gibt es ein $k$ mit $(B_n)_X^k(\alpha) \in C_n^\mathcal{U}(X;R)$.
+Mit \hyperref[sub:1310]{Lemma 1} folgt $x=[\alpha]= \benbrace*{(B_n)_X^k(\alpha)}$. Daher ist die von $C_*^\mathcal{U} \to C_*(X;R)$ induzierte Abbildung in $H_*$ surjektiv.
+
+Sei nun $x \in \ker H_n \enbrace*{C_*^\mathcal{U}(X;R) \to C_*(X;R)}$. Sei $\alpha \in C_n^\mathcal{U}(X;R)$ mit $x=[\alpha]$. Da $x$ im Kern liegt, gibt es 
+$\beta \in C_{n+1}(X;R)$ mit $\partial_n(\beta)=\alpha$. Nach \hyperref[sub:1311]{Lemma 2} gibt es $k$ mit $(B_n)_X^k(\beta) \in C_n^\mathcal{U}(X;R)$. Mit 
+\hyperref[sub:1310]{Lemma 1} folgt 
+\[
+	x = [\alpha] = \benbrace*{(B_n)_X^k(\alpha)} = \benbrace*{(B_n)_X^k(\partial_n \beta)} = \benbrace*{\partial_n \enbrace*{(B_{n+1})_X^k (\beta)} }   
+\]
+Also ist $x=0$ in $H_* \enbrace*{C_*^\mathcal{U}(X;R)}$. \bewende
+% subsection 1312 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:1313}
+Seien $(C_*,\partial_*)$ und $(C_*',\partial_*')$ Kettenkomplexe. $s_n \colon C_n \to C_{n+1}'$ eine Abbildung, die den Grad um $1$ erhöht. Dann ist $s_{n-1} \circ \partial_n + \partial_{n+1}' \circ s_n$ eine Kettenabbildung:
+\[
+	\enbrace*{s_{n-1} \circ \partial + \partial_{n+1}' \circ s_n} \circ \partial_{n+1} = \partial_{n+1}' \circ  \enbrace*{s_n \circ \partial_{n+1} + \partial_{n+2}' \circ s_{n+1}}  
+\]
+Insbesondere ist $s \circ \partial + \partial' \circ s = f -g$ mit $f$ eine Kettenabbildung. Dann ist auch $g$ eine Kettenabbildung. 
+% subsection 1313 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:1314}
+Seien $v_0, \ldots ,v_p \in \abs*{\Delta^n}$. Dann bezeichnen wir mit $[v_0, \ldots ,v_p]$ den singulärer $p$-Simplex mit $\sum_{i=0}^{p} t_i e_i \to \sum_{i=1}^{p} t_i v_i$.
+Singuläre Simplizes dieser Form heißen \Index{affin}. 
+% subsection 1314 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:1315}
+Sei $\norm{\cdot}$ eine Norm auf $\mathds{R}^{n+1}$. Für einen singulären Simplex $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ definieren wir den \Index{Durchmesser}
+durch
+\[
+	\diam(\sigma) := \max \set[\norm{\sigma(x)- \sigma(y)} ]{x,y \in \abs*{\Delta^p}} 
+\]
+% subsection 1315 (end)
+
+\subsection{Lemma 3} % (fold)
+\label{sub:1316}
+Sei $[v_0, \ldots , v_p]$ ein affiner singulärer Simplex in $\abs*{\Delta^n}$. Dann gilt:
+\begin{enumerate}[(i)]
+	\item $\diam \enbrace*{[v_0, \ldots ,v_p]}= \max \set[\norm{v_i - v_j} ]{0 \le i,j\le p}$
+	\item Es ist 
+	\[
+		(B_n)_{\abs*{\Delta^n}} \enbrace*{[v_0, \ldots ,v_p]} = \sum_{\sigma \in \sum_{\set{v_0,\ldots ,v_p}}} \sgn(\sigma)  
+		\underbrace{\benbrace*{\frac{\sum_{i=0}^{p} \sigma(v_i)}{p+1}, \frac{\sum_{i=0}^{p-1} \sigma(v_i)}{p} ,\ldots , \sigma(v_0)  } }_{=: \tau_\sigma}
+	\]
+	\item Für $\sigma \in \sum_{\set{v_0, \ldots ,v_p}}$ ist $\diam \tau_\sigma \le \frac{n}{n+1} \diam [v_0,\ldots ,v_p]$.
+\end{enumerate}
+% subsection 1316 (end)
 % section 13 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
