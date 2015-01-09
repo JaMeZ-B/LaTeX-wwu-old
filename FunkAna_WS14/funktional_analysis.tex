@@ -1617,7 +1617,7 @@ Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv.
 \end{description}
 % subsection 515 (end)
 
-\subsection[Satz: Die Einheitskugel eines Banachraumes $X$ liegt $\w^*$-dicht in der Einheitskugel von $X^{**}$]{Satz} % (fold)
+\subsection[Satz: Einheitskugel eines Banachraumes $X$ liegt $\w^*$-dicht in Einheitskugel von $X^{**}$]{Satz} % (fold)
 \label{sub:516}
 Sei $X$ ein Banachraum. Dann gilt 
 \[
@@ -2194,9 +2194,9 @@ $\kappa(x) \in \mathcal{H}^*$: $\kappa(x) \colon \mathcal{H} \to \mathds{K}$ ist
 		\varphi(y) = \frac{1}{\lambda} \enbrace*{\varphi(\overline{x}+\lambda \cdot y) - \underbrace{\varphi(\overline{x})}_{=1}} 
 		\le \frac{1}{\lambda} \cdot \enbrace[\Big]{\norm{\overline{x} + \lambda \cdot y } - \underbrace{\norm{\overline{x}}}_{=1} }    \\
 		\shortintertext{also insgesamt}
-		 \underbrace{-\frac{1}{\lambda} \enbrace*{\norm{\overline{x} - \lambda \cdot y } - \norm{\overline{x}}} }_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
+		 \underbrace{-\frac{1}{\lambda} \enbrace[\Big]{\norm{\overline{x} - \lambda \cdot y } - \norm{\overline{x}}} }_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
 		 \le \varphi(y) 
-		 \le \underbrace{\frac{1}{\lambda} \cdot \enbrace*{\norm{\overline{x} +\lambda\cdot y} - \norm{\overline{x}}}}_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
+		 \le \underbrace{\frac{1}{\lambda} \cdot \enbrace[\Big]{\norm{\overline{x} +\lambda\cdot y} - \norm{\overline{x}}}}_{\xrightarrow{\lambda \to 0} \skal*{\overline{x}}{y}}
 	\end{align*}
 	nach l'Hospital. Im Detail: \todo{stimmt noch nicht so ganz, aber passt schon …}
 	\begin{align*}
@@ -2360,9 +2360,103 @@ für $J \Subset I$ endlich und \ref{sub:717}. \bewende
 Sei $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem, $x \in \mathcal{H}$. 
 \begin{enumerate}[(i)]
 	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$, (\Index{Besselsche Ungleichung}).
-	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 = \norm{x}^2$ (\Index{Parcelvalsche Gleichung}) genau dann, wenn $x= \sum_{i \in I} \skal*{x_i}{x} \cdot x_i$.
+	\item Es gilt die \Index{Parcelvalsche Gleichung} $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 = \norm{x}^2$  g.d.w. $x= \sum_{i \in I} \skal*{x_i}{x} \cdot x_i$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Für $J \Subset I$ endlich gilt
+	\begin{align*}
+		0 \le\norm{ x - \sum_{i \in J} \skal*{x_i}{x} x_i}^2 &= \skal*{x}{x} - \sum_{i \in J} \skal*{\skal*{x_i}{x}  x_i}{x} - 
+		\sum_{i \in J} \skal*{x}{\skal*{x_i}{x} x_i} \\
+		&\hphantom{= } + \sum_{i \in J} \sum_{j \in J} \skal*{\skal*{x_i}{x} x_i}{\skal*{x_j}{x} x_j} \\
+		&= \skal*{x}{x} - \sum_{i \in J} \overline{\skal*{x_i}{x}} \skal*{x_i}{x} - \sum_{i \in J} \skal*{x_i}{x} \overline{\skal*{x_i}{x}}
+		+ \sum_{i \in J} \overline{\skal*{x_i}{x}} \skal*{x_i}{x}   
+	\end{align*}
+	$\Rightarrow \sum_{i \in J} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2 < \infty$, also gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$.
+	\item Die Rechnung aus (i) zeigt auch: 
+	\[
+		\sum_{i \in J} \abs*{\skal*{x_i}{x}}^2 \xrightarrow{J \Subset I} \norm{x}^2  \iff \sum_{i \in J} \skal*{x_i}{x} \cdot x_i \xrightarrow{J \Subset I}  x \bewende
+	\]
 \end{enumerate}
 % subsection 720 (end)
+
+\subsection[Definition und Proposition: Summe von Hilberträumen]{Definition und Proposition} % (fold)
+\label{sub:721}
+Seien $\mathcal{H}_i$ für $i \in I$ Hilberträume. Dann ist
+\[
+	\bigoplus_{i \in I} \mathcal{H}_i := \set[(x_i)_{i \in I}]{x_i \in \mathcal{H}_i, \sum_{i \in I} \norm[\mathcal{H}_i]{x_i}^2 < \infty} 
+\]
+ein Hilbertraum mit $\skal*{(x_i)_{i \in I}}{(y_i)_{i \in I}} := \sum_{i \in I} \skal*{x_i}{y_i}_{\mathcal{H}_i}$.
+\minisec{Beweis}
+\emph{Übung!} \bewende
+% subsection 721 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:722}
+Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem. Dann sind äquivalent: 
+\begin{enumerate}[(i)]
+	\item $\set{x_i}_{i \in I}$ ist eine Hilbertraumbasis. 
+	\item Falls $x \bot x_i$ für alle $i \in I$, so gilt $x=0$.
+	\item Es gibt einen isometrischen Isomorphismus $\bigoplus_{i \in I} \mathcal{H}_i \cong \mathcal{H}$ 
+	\[
+		\enbrace*{\lambda_i \cdot x_i}_{i \in I} \longmapsto \sum_{i \in I} \lambda_i \cdot x_i 
+	\]
+	wobei $\mathcal{H}_i = \mathds{K} \cdot x_i$ der von $x_i$ erzeugte Unterhilbertraum ist.
+	\item Für jedes $x \in \mathcal{H}$ gilt $x= \sum_{i \in I} \skal*{x_i}{x} \cdot x$.
+	\item Für alle $x,y \in \mathcal{H}$ gilt $\skal*{x}{y} = \sum_{i \in I} \skal*{x}{x_i} \cdot \skal*{x_i}{y}$.
+	\item Für alle $x \in \mathcal{H}$ gilt die Parsevalsche Gleichung $\norm{x}^2 = \sum \abs*{\skal*{x_i}{x}}^2$.
+\end{enumerate}
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Rightarrow$(ii):] Falls $0 \not= x \bot x_i$ für $i \in I$, so ist $\set{x_i}_{i \in I} \cup \set{\frac{1}{\norm{x}} \cdot x}$ ein Orthonormalsystem. \light
+	\item[(ii)$\Rightarrow$(iii):] $\gamma \colon \bigoplus_{i \in I} \mathcal{H}_i \to \mathcal{H}$, $(\lambda_i \cdot x_i)_I \mapsto \sum \lambda_i \cdot x_i$ ist eine
+	wohldefinierte lineare Isometrie nach \ref{sub:719}. Außerdem erhält $\gamma$ das Skalarprodukt. $\gamma \enbrace*{\bigoplus_{i \in I} \mathcal{H}_i}$ ist vollständig,
+	also abgeschlossen in $\mathcal{H}$. Falls $\gamma \enbrace*{\bigoplus_{i\in I} \mathcal{H}_o} \not= \mathcal{H}$, so ist nach \ref{sub:715} 
+	$\gamma \enbrace*{\bigoplus_{i \in I} \mathcal{H}_i}^\bot \not \set{0}$. \light zu (ii). 
+	\item[(iii)$\Rightarrow$(iv):] Für $x \in \mathcal{H}$ existieren $\lambda_i \in \mathds{K}$,  sodass 
+	$x= \gamma \enbrace[\big]{(\lambda_i \cdot x_i)_{i \in I}} = \sum_{i \in I} \lambda_i \cdot x_i$ gilt. Es gilt 
+	\begin{align*}
+		\skal*{x_j}{x} = \skal*{x_j}{\sum_{i \in I} \lambda_i \cdot x_i} = \sum_{i \in I} \skal*{x_j}{\lambda_i \cdot x_i} = \sum_{i\in I} \lambda_i \cdot \delta_{ij} = \lambda_j
+	\end{align*}
+	Damit folgt (iv).
+	\item[(iv)$\Rightarrow$(v):] Klar.
+	\item[(v)$\Rightarrow$(vi):] Klar.
+	\item[(vi)$\Rightarrow$(i):] Falls $x \bot x_i$ für alle $i \in I$, so gilt $\norm{x}^2= \sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 =0$. Also ist $x=0$ und damit das 
+	Orthonormalsystem maximal. \bewende
+\end{description}
+% subsection 722 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:723}
+\begin{enumerate}[(i)]
+	\item Jeder Hilbertraum besitzt eine Basis (Lemma von Zorn).
+	\item Wegen \ref{sub:722} (iii) ist ein Hilbertraum bis auf isometrischen Isomorphismus durch die Mächtigkeit seiner Basis eindeutig bestimmt.
+	\item Jeder separable Hilbertraum ist isometrisch isomorph zu $\mathds{K}^n$ für ein $n \in \mathds{N}$ oder zu $\ell^2(\mathds{N})$.
+\end{enumerate}
+% subsection 723 (end)
+
+\subsection[Beispiele für Basen von Hilberträumen]{Beispiele} % (fold)
+\label{sub:724}
+\begin{enumerate}[(i)]
+	\item $\set{e_i}_{i \in \mathds{N}}$ bzw. $\set{e_i}_{i \in \mathds{Z}}$ bilden Basen von $\ell^2(\mathds{N})$ bzw. $\ell^2(\mathds{Z})$, wobei 
+	$e_i(j)= \delta_{ij}$ ist.
+	\item $\enbrace*{e^{2 \pi i n t}}_{n \in \mathds{N}}$ bilden eine Basis von $L^2([0,1])$.
+\end{enumerate}
+% subsection 724 (end)
+
+\subsection{Definition und Proposition} % (fold)
+\label{sub:725}
+Seien $\mathcal{H}_1$, $\mathcal{H}_2$ Hilberträume und $T \in \mathcal{L}(\mathcal{H}_1, \mathcal{H_2})$. Dann existiert genau ein Operator 
+$T^* \in \mathcal{L}(\mathcal{H}_2, \mathcal{H}_1)$, sodass für alle $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$ gilt 
+\begin{equation*}
+	\skal*{T^* y}{x}_{\mathcal{H}_1} = \skal*{y}{T x}_{\mathcal{H}_2} \label{eq:725} \tag{\#}
+\end{equation*}
+Die Abbildung ${ }^*  \colon \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2) \to \mathcal{L}(\mathcal{H}_2, \mathcal{H}_1)$ ist konjugiert linear und isometrisch. Weiter gilt
+$T^{**} = T$. Ist $\mathcal{H}_3$ ein weiterer Hilbertraum und $S \in \mathcal{L}(\mathcal{H}_2, \mathcal{H}_3)$, so gilt
+\[
+	(S \circ T)^* = T^* \circ S^*
+\]
+% subsection 725 (end)
 % section 7 (end)
 
 
