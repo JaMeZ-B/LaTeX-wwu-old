@@ -20,5 +20,90 @@
 		\item $f, g$ multiplikativ $\Rightarrow fg$ multiplikativ
 		\item $f \neq 0$ heißt vollständig multiplikativ, wenn $f(n_1n_2) = f(n_1)f(n_2)$ für alle $n_1, n_2 \in \NN$. Dann gilt $f(p^k) = f(p)^k$.
 	\end{enumerate}
+	
+\begin{falko}[Summatorische Funktion] \label{F8.1}
+	Ist $f$ multiplikativ, so auch die zugehörige \Index{summatorische Funktion} $g$, definiert durch \marginnote{09.01. \\ \ [22]}
+	\[ g(n) = \sum\limits_{d \mid n} f(d) \]
+\end{falko}
 
+\minisec{Beispiel (Teilersummenfunktionen)}
+	\[ \sigma_\alpha(n) = \sum\limits_{d \mid n} d^\alpha = \prod\limits_{p} \frac{p^{\alpha(w_p(n)+1)}-1}{p^\alpha - 1}, \quad \alpha \in \CC \index{Teilersummenfunktion}\]
+
+\begin{falko} \label{F8.2}
+	Ist $f$ multiplikativ, so gilt für jedes $n = \prod_p p^{w_p(n)}$ die Formel
+	\[ \sum\limits_{d \mid n} f(d) = \prod\limits_{p \mid n} (1+f(p) + f(p^2) + \dots + f(p^{w_p(n)})) \]
+\end{falko}
+
+\begin{defn}[Möbiusfunktion] \label{def_8.2}
+	Wir definieren die multiplikative \Index{Möbiusfunktion} $\mu$ durch (vgl. Bemerkung 2 zur Definition~\ref{def_8.1}):
+	\[ \mu(p^\nu) = \begin{cases}
+		-1 & \text{für } \nu = 1 \\
+		0 & \text{für } \nu > 1 \\
+		1 & \text{für } \nu = 0 \\
+	\end{cases} \]
+	Also für $n \in \NN$ mit Primfaktorzerlegung $n = p_1^{k_1} \cdots p_r^{k_r}$:
+	\[ \mu(n) = \begin{cases}
+		(-1)^r, & \text{falls } k_1 = \dots = k_r = 1, \text{ d.h. } n \text{ quadratfrei} \\
+		0, & \text{sonst}
+	\end{cases} \]
+\end{defn}
+
+\begin{falko} \label{F8.3}
+	Setze $\varepsilon(n) := \sum\limits_{d \mid n} \mu(d)$, d.h. $\varepsilon$ sei die zur Möbiusfunktion gehörige summatorische Funktion. Dann gilt:
+	\[ \varepsilon(n) = \begin{cases}
+		1 & \text{für } n=1 \\
+		0 & \text{für } n \neq 1
+	\end{cases} \]
+	Also ist $\varepsilon$ die charakteristische Funktion zur Teilmenge $\{1\}$ von $\NN$. $\varepsilon$ ist vollständig multiplikativ (im Gegensatz zu $\mu$).
+\end{falko}
+
+\begin{falko} \label{F8.4}
+	Ist $f$ multiplikativ, so gilt
+	\[ \sum\limits_{d \mid n} \mu(d) f(d) = \prod\limits_{p \mid n} (1-f(p)) \]
+\end{falko}
+
+\begin{defn}[Dirichlet-Faltung] \label{def_8.3}
+	Für zahlentheoretische Funktionen $f,g$ definiere die \Index{Dirichlet-Faltung} $f * g$ durch
+	\[ (f * g)(n) = \sum\limits_{d \mid n} f(d) g\enbrace*{\frac{n}{d}} = \sum\limits_{\substack{a,b \in \NN \\ ab = n}} f(a) g(b) \]
+	Es gelten $f * g = g*f, (f*g)*h = f*(g*h)$ sowie $\varepsilon*f = f*\varepsilon = f$.
+\end{defn}
+
+\minisec{Bemerkung}
+	Die Menge $R$ der zahlentheoretischen Funktionen $f \colon \NN \rightarrow \CC$ bildet mit $+$ und $*$ einen kommutativen Ring mit Einselement $\varepsilon$.
+
+\begin{falko} \label{F8.5}
+	$f,g$ multiplikativ $\Rightarrow f * g$ multiplikativ.
+\end{falko}
+
+\begin{satz}[Möbius-Umkehrformeln] \label{satz_8.1}
+	Für zahlentheoretische Funktionen $f,g$ sind folgende Aussagen äquivalent: \index{Möbius-Umkehrformeln} \begin{enumerate}[(i)]
+		\item $g(n) = \sum\limits_{d \mid n} f(d)$, d.h. $g$ ist summatorische Funktion zu $f$, d.h. $g = f * i_0$
+		\item $f(n) = \sum\limits_{d \mid n} \mu\enbrace*{\frac{n}{d}} g(d)$, d.h. $f = g * \mu$.
+	\end{enumerate}
+\end{satz}
+
+\minisec{Korollar}
+	Jede zahlentheoretische Funktion $g$ ist summatorische Funktion zu genau einer Funktion $f$. Dabei gilt:
+	\[ g \text{ multiplikativ } \Leftrightarrow f \text{ multiplikativ} \]
+	Ist $g$ multiplikativ so gilt für $f$ außerdem noch die Formel
+	\[ f \enbrace*{\prod_p p^{\nu_p}} = \prod\limits_{p \mid n} (g(p^{\nu_p}) - g(p^{\nu_p - 1})) \]
+	
+\minisec{Bemerkung}
+	Zu jeder zahlentheoretischen Funktion $f$ mit $f(1) \neq 0$ gibt es eine (eindeutig bestimmte) Funktion $h$ mit $f * h = h * f = \varepsilon$.
+	
+\minisec{Bemerkung}
+	Nach dem Korollar zu Satz~\ref{satz_8.1} gibt es zu $i(n) = n$ eine eindeutig bestimmte Funktion $\varphi\colon \NN \rightarrow \CC$ mit \begin{enumerate}[(1)]
+		\item $\sum\limits_{d \mid n} \varphi(d) = n$, und es gilt weiter
+		\item $\varphi$ ist multiplikativ
+		\item $\varphi(n) = \sum\limits_{d \mid n} \mu\enbrace*{\frac{n}{d}}d = \sum\limits_{d \mid n} \mu(d) \frac{n}{d} = n \sum\limits_{d \mid n} \frac{\mu(d)}{d}$
+		\item $\varphi\enbrace*{\prod_p p^{\nu_p}} = \prod\limits_{p \mid n} \enbrace*{p^{\nu_p} - p^{\nu_p - 1}}$ bzw.1
+		$\varphi(n) = \prod\limits_{p \mid n} \enbrace*{p^{w_p(n)} - p^{w_p(n)-1}} = n \prod\limits_{p \mid n} \enbrace*{1 - \frac{1}{p}}$, speziell \\
+		$\varphi(p^\nu) = p^\nu - p^{\nu-1}, \nu \geq 1$
+		\item $\varphi(n) = \# \{k \in \NN : 1 \leq k \leq n \text{ mit } (k,n)=1\}$
+	\end{enumerate}
+	
+\begin{falko} \label{F8.6}
+	Sei $f$ multiplikativ. Dann gilt:
+	\[ f \text{ vollständig multiplikativ } \Leftrightarrow \mu f * f = \varepsilon \]
+\end{falko}
 \newpage
