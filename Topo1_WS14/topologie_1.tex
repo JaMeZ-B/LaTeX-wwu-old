@@ -2765,11 +2765,11 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 \begin{enumerate}[a)]
 	\item 
 	\[
-		\enbrace*{{\textstyle\coprod\limits_{i \in I^{(n)}}} Q_i^{(n)}, {\textstyle\coprod\limits_{i \in I^{(n)}}} q_i^{(n)}}_* 
-		\! \colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow
+		\enbrace*{{\textstyle\coprod\limits_{i \in I^{(n)}}} Q_i^{(n)}, {\textstyle\coprod\limits_{i \in I^{(n)}}} q_i^{(n)}} 
+		\colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow
 		\enbrace*{X^{(n)}, X^{(n-1)};R} 
 	\]
-	induziert einen Isomorphismus in $H_*$.
+	induziert einen Isomorphismus in Homologie.
 	\item \[
 		H_k \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R} = \begin{cases}
 			R[I^{(n)}], &\text{ falls }k=n\\
@@ -2797,7 +2797,7 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 	\]
 	$(1), (2)$ und $(5)$ sind Homotopieäquivalenzen und induzieren Isomorphismen in Homologie. $(3)$ ist ein Homöomorphismus und induziert einen Isomorphismus in Homologie.
 	$(4)$ erfüllt die Vorraussetzungen für den \hyperref[sub:91]{Ausschneideisomorphismus} und induziert daher auch einen Isomorphismus in Homologie. Damit folgt a).
-	\item Da die Randabbildung aus der Paarsequenz in diesem Fall ein Isomorphismus ist, gilt \todo{RevChap12}
+	\item Da die Randabbildung aus der Paarsequenz in diesem Fall ein Isomorphismus ist, gilt 
 	\begin{align*}
 		H_k \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R} \xleftarrow{\cong} \bigoplus_i H_k (D^n,S^{n-1};R) &\xrightarrow{\cong} \bigoplus_i \tilde{H}_{k-1}(S^{n-1};R)\\
 		&\cong \bigoplus_i \begin{cases}
@@ -2812,20 +2812,27 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^{(n)}$ und $Q_i^{(n)}$ für die Zellstruktu
 \end{enumerate}
 % subsection 125 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Matrixform der Randabbildung $\partial_n^{\cell}$]{Bemerkung} % (fold)
 \label{sub:126}
+Wir haben soeben gezeigt, dass die folgenden Isomorphismen existieren:
 \[
 	\begin{tikzcd}[row sep=tiny]
-		C_n^{\cell}(X;R) \dar[equal] \rar["\partial_n^{\cell}"] & C_{n-1}^{\cell}(X;R) \dar[equal]\\
+		C_n^{\cell}(X;R) \arrow[draw=none]{d}[sloped,auto=false]{=} \rar["\partial_n^{\cell}"] & C_{n-1}^{\cell}(X;R) \arrow[draw=none]{d}[sloped,auto=false]{=}\\
 		H_n \enbrace*{X^{(n)},X^{(n-1)};R} \rar \arrow[draw=none]{d}[sloped,auto=false]{\cong}
 		& H_{n-1} \enbrace*{X^{(n-1)},X^{(n-2)};R} \arrow[draw=none]{d}[sloped,auto=false]{\cong}\\
-		R[I^{(n)}] \rar & R[I^{(n)}]  
+		R[I^{(n)}] \rar & R[I^{(n-1)}]  
 	\end{tikzcd}
 \]
 Die Randabbildung $\partial_n^{\cell}$ wird unter diesen Isomorphismen zu einer $I^{(n-1)} \times I^{(n)}$-Matrix. Für $j \in I^{(n-1)}$ und $k \in I^{(n)}$ ist der 
-$(j,k)$-Eintrag dieser Matrix genau der Abbildungsgrad einer Selbstabbildung der $(n-1)$-Sphäre. Diese $\enbrace*{Q_i^{(n-1)}, q_i^{(n-1)}}$ induzieren einen Homöomorphismus
-$\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \xleftarrow{\cong} \nicefrac{X^{(n)}}{X^{(n-1)}}$. Durch Komposition mit der Projektion auf die $j$-te Zelle: 
-$\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \xrightarrow{p_j^{(n-1)}}  \nicefrac{D^{n-1}}{S^{n-2}} \cong S^{n-1}$. Der $(j,k)$-te Eintrag ist nun der 
+$(j,k)$-Eintrag dieser Matrix genau der Abbildungsgrad einer Selbstabbildung der $(n-1)$-Sphäre: 
+
+Die $\enbrace{Q_i^{\scriptscriptstyle(n-1)}, q_i^{\scriptscriptstyle(n-1)}}$ induzieren einen Homöomorphismus
+$\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \cong \nicefrac{X^{(n)}}{X^{(n-1)}}$. Durch Komposition mit der Projektion auf die $j$-te Zelle erhalten wir die folgenden 
+Abbildung
+\[
+	\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \xrightarrow{p_j^{(n-1)}}  \nicefrac{D^{n-1}}{S^{n-2}} \cong S^{n-1}.
+\] 
+Der $(j,k)$-te Eintrag ist nun der 
 Abbildungsgrad von 
 \[
 	\begin{tikzcd}
@@ -2838,7 +2845,7 @@ Abbildungsgrad von
 \subsection[Definition: Natürlicher Isomorphismus]{Definition} % (fold)
 \label{sub:127}
 Eine natürliche Transformation $\tau$ zwischen Funktoren $F,G\colon \mathcal{C} \to \mathcal{D}$ heißt ein \Index{natürlicher Isomorphismus}, wenn 
-$\tau_C \colon F(C) \to G(C)$ für alle Objekte $C$ von $\mathcal{C}$ ein Isomorphismus in $\mathcal{D}$ ist.
+$\tau_C \colon F(C) \to G(C)$ für alle Objekte $C$ von $\mathcal{C}$ ein Isomorphismus in $\mathcal{D}$ ist. \todo{RevChap12}
 % subsection 127 (end)
 
 \subsection{Satz} % (fold)
@@ -2872,30 +2879,32 @@ Damit folgt die Behauptung. \bewende
 Sei $X$ ein \CW-Komplex.
 \begin{enumerate}[a)]
 	\item Für $k >n$ ist $H_k(X^{(n)};R)=0$.
-	\item Für $k <n$ induziert die Inklusion $l_n : X^{(n)} \hookrightarrow X$. einen Isomorphismus $(l_n)_* : H_k(X^{(n)};R) \to H_k(X;R)$.
+	\item Für $k <n$ induziert die Inklusion $l_n\colon X^{(n)} \hookrightarrow X$ einen Isomorphismus $(l_n)_* \colon H_k(X^{(n)};R) \to H_k(X;R)$.
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[a)]
-	\item Ist $k>n$, so erhalten wir aus der Paarfolge einen Isomorphismus 
+	\item Ist $k>n$, so erhalten wir aus der Paarfolge einen Isomorphismus
 	\[
 		\begin{tikzcd}[column sep=small]
-			\underset{=0}{H_{k+1}\enbrace*{X^{(n)}, X^{(n-1)};R}} \rar &  H_k(X^{(n-1)};R) \rar["\cong"] & H_k(X^{(n)};R) \rar 
-			& H_k \underset{=0}{\enbrace*{X^{(n)}, X^{(n-1)};R} }
+			\underset{\textstyle\stackrel{\mbox{{\scriptsize\ref{sub:125}}}}{=} 0}{H_{k+1}\enbrace*{X^{(n)}, X^{(n-1)};R}} \rar &  H_k(X^{(n-1)};R) \rar["\cong"] & 
+			H_k(X^{(n)};R) \rar 
+			& H_k \underset{\textstyle\stackrel{\mbox{\scriptsize\ref{sub:125}}}{=}0}{\enbrace*{X^{(n)}, X^{(n-1)};R} }
 		\end{tikzcd}
 	\]
-	Da $H_k(X^{(0)};R)=0$ für $k>0$ folgt a) nun durch endliche Induktion für $n=0,1, \ldots , k-1$.
-	\item Ist $n >k$, so erhalten wir 
+	Da $H_k(X^{(0)};R)=0$ für $k>0$, folgt a) nun durch endliche Induktion für $n=0,1, \ldots , k-1$.
+	\item Ist $n >k$, so erhalten wir aus der Paarfolge
 	\[
 		\begin{tikzcd}[column sep=small]
-			\underset{=0}{H_{k+1} \enbrace*{X^{(n+1)},X^{(n)};R}} \rar & H_k \enbrace*{X^{(n)};R} \rar["\cong"] & H_k \enbrace*{X^{(n+1)};R} \rar 
-			& \underset{=0}{H_k \enbrace*{X^{(n+1)},X^{(n)};R}   }
+			\underset{\textstyle\stackrel{\mbox{\scriptsize\ref{sub:125}}}{=}0}{H_{k+1} \enbrace*{X^{(n+1)},X^{(n)};R}} \rar & H_k \enbrace*{X^{(n)};R} \rar["\cong"] 
+			& H_k \enbrace*{X^{(n+1)};R} \rar 
+			& \underset{\textstyle\stackrel{\mbox{\scriptsize\ref{sub:125}}}{=}0}{H_k \enbrace*{X^{(n+1)},X^{(n)};R}   }
 		\end{tikzcd}
 	\]
-	Für $m \ge n >k$ induziert die Inklusion $X^{(n)} \hookrightarrow X^{(m)}$ daher einen Isomorphismus $H_k(X^{(n)};R) \to H_k(X^{(m)};R)$. Ist $\dim X$ endlich, so folgt
+	Für $m \ge n >k$ induziert die Inklusion $X^{\scriptscriptstyle(n)} \hookrightarrow X^{\ssbrace{m}}$ daher einen Isomorphismus $H_k(X^{(n)};R) \to H_k(X^{(m)};R)$. Ist $\dim X$ endlich, so folgt
 	die Behauptung. 
 	
-	Für den allgemeinen Fall beobachten wir zunächst, dass es zu jeder stetigen Abbildung $\sigma\colon\abs*{\Delta^j}\to X$ ein $n$ gibt mit $\im \sigma \subseteq X^{(n)}$,
-	da $\im \sigma \subseteq X$ kompakt ist und daher nur endlich viele offene Zellen von $X$ trifft (\ref{sub:115}).
+	Für den allgemeinen Fall beobachten wir zunächst, dass es zu jeder stetigen Abbildung $\sigma\colon\abs{\Delta^j}\to X$ ein $n$ gibt mit 
+	$\im \sigma \subseteq X^{\scriptscriptstyle(n)}$, da $\im \sigma \subseteq X$ kompakt ist und daher nur endlich viele offene Zellen von $X$ trifft (siehe \ref{sub:115}).
 	\[
 		\Longrightarrow C_*(X;R) = \bigcup_n C_*(X^{(n)};R)
 	\]
