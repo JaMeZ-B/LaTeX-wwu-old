@@ -3207,13 +3207,24 @@ definiert, so setzen wir für einen singulären $n$-Simplex $\sigma \colon \abs*
 \subsection{Lemma 1} % (fold)
 \label{sub:1310}
 Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $(B_*)_X$ und der Identität.
-\minisec{Beweis}
-
 % subsection 1310 (end)
 
 \subsection{Lemma 2} % (fold)
 \label{sub:1311}
-Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Sei $\alpha\in C_n(X;R)$. Dann gibt es $k_0\ge 0$ so, dass $(B_n)^{k}_X(\alpha)\in C^\mathcal{U}_n(X;R)$ für alle $k \ge k_0$.
+Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Sei $\alpha\in C_n(X;R)$. Dann gibt es $k_0\ge 0$ so, dass $(B_n)^{k}_X(\alpha)\in C^\mathcal{U}_n(X;R)$ für alle $k\ge k_0$.
+\minisec{Beweis (mit Lemma 3, \ref{sub:1316})}
+Es genügt $\alpha= \sigma \colon \abs*{\Delta^n} \to X$ zu betrachten. Sei $\sigma^* \mathcal{U}= \set[\sigma ^{-1}(U)]{U \in \mathcal{U}}$. Dann gilt
+\[
+	\sigma^* \enbrace*{C_*^{\sigma^*\mathcal{U}} \enbrace*{\abs*{\Delta^n};R}} \subseteq C_*^\mathcal{U}(X;R). 
+\]
+Da $(B_n)_X^k(\sigma) = \sigma_* \enbrace*{(B_n)_{\abs*{\Delta^n}^k} (\id_{\abs*{\Delta^n} })}$ genügt es zu zeigen: 
+$(B_n)^k_{\abs*{\Delta^n}} (\id_{\abs*{\Delta^n} }) \in C_*^{\sigma^* \mathcal{U}}\enbrace*{\abs*{\Delta^n};R}$. Sei $\varepsilon>0$ eine 
+Lebesguezahl\footnote{siehe \url{https://de.wikipedia.org/wiki/Lebesguezahl}} für $\sigma^*\mathcal{U}$, das heißt 
+\(
+	\forall x \in \abs*{\Delta^n} : \exists V \in \sigma^*\mathcal{U} : B_\varepsilon(x) \subseteq V 
+\).
+Ist $k>0$ mit $\enbrace*{\frac{n}{n+1}}^k \diam(\id_{\abs*{\Delta^n}})< \varepsilon$, so ist 
+$\enbrace*{(B_n)_{\abs*{\Delta^n} }}^k (\id_{\abs*{\Delta^n}}) \in C_*^{\sigma^*\mathcal{U}} \enbrace*{\abs*{\Delta^n};R}$ nach \hyperref[sub:1316]{Lemma 3 (iii)}. \bewende
 % subsection 1311 (end)
 
 \subsection{Beweis des Satzes über kleine Simplizes (\ref{sub:133})} % (fold)
@@ -3239,13 +3250,13 @@ Seien $(C_*,\partial_*)$ und $(C_*',\partial_*')$ Kettenkomplexe. $s_n \colon C_
 Insbesondere ist $s \circ \partial + \partial' \circ s = f -g$ mit $f$ eine Kettenabbildung. Dann ist auch $g$ eine Kettenabbildung. 
 % subsection 1313 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Affiner singulärer Simplex]{Definition} % (fold)
 \label{sub:1314}
-Seien $v_0, \ldots ,v_p \in \abs*{\Delta^n}$. Dann bezeichnen wir mit $[v_0, \ldots ,v_p]$ den singulärer $p$-Simplex mit $\sum_{i=0}^{p} t_i e_i \to \sum_{i=1}^{p} t_i v_i$.
+Seien $v_0, \ldots ,v_p \in \abs*{\Delta^n}$. Dann bezeichnen wir mit $[v_0,\ldots ,v_p]$ den singulären $p$-Simplex mit $\sum_{i=0}^{p} t_i e_i \to \sum_{i=1}^{p} t_i v_i$.
 Singuläre Simplizes dieser Form heißen \Index{affin}. 
 % subsection 1314 (end)
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Durchmesser eines Simplizes]{Definition} % (fold)
 \label{sub:1315}
 Sei $\norm{\cdot}$ eine Norm auf $\mathds{R}^{n+1}$. Für einen singulären Simplex $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ definieren wir den \Index{Durchmesser}
 durch
@@ -3256,18 +3267,124 @@ durch
 
 \subsection{Lemma 3} % (fold)
 \label{sub:1316}
-Sei $[v_0, \ldots , v_p]$ ein affiner singulärer Simplex in $\abs*{\Delta^n}$. Dann gilt:
+Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n}$. Dann gilt:
 \begin{enumerate}[(i)]
 	\item $\diam \enbrace*{[v_0, \ldots ,v_p]}= \max \set[\norm{v_i - v_j} ]{0 \le i,j\le p}$
 	\item Es ist 
 	\[
-		(B_n)_{\abs*{\Delta^n}} \enbrace*{[v_0, \ldots ,v_p]} = \sum_{\sigma \in \sum_{\set{v_0,\ldots ,v_p}}} \sgn(\sigma)  
+		(B_p)_{\abs*{\Delta^n}} \enbrace[\big]{[v_0, \ldots ,v_p]} = \sum_{\sigma \in \sum_{\set{v_0,\ldots ,v_p}}} \hspace{-1.8em}\sgn(\sigma)  
 		\underbrace{\benbrace*{\frac{\sum_{i=0}^{p} \sigma(v_i)}{p+1}, \frac{\sum_{i=0}^{p-1} \sigma(v_i)}{p} ,\ldots , \sigma(v_0)  } }_{=: \tau_\sigma}
 	\]
 	\item Für $\sigma \in \sum_{\set{v_0, \ldots ,v_p}}$ ist $\diam \tau_\sigma \le \frac{n}{n+1} \diam [v_0,\ldots ,v_p]$.
 \end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Seien $v,v' \in \im [v_0, \ldots ,v_p]$. Dann ist $v = \sum_{i=0}^{p} t_i v_i$, $v' = \sum_{i=0}^{p} t_i' v_i$ mit $t_i, t_i' \ge 0$, 
+	$\sum_{i=0}^{p} t_i =1 = \sum_{i=0}^{p} t_i'$. Dann gilt
+	\begin{align*}
+		\norm{v-v'} &= \norm{\sum_{i=0}^{p} t_i v_i - v'} = \norm{\sum_{i=0}^{p} t_i v_i - \sum_{i=0}^{p} t_i v'} = \norm{\sum_{i=0}^{p} t_i(v_i -v')}
+		\le \sum_{i=0}^{p} \norm{v_i -v'}   \\
+		&\le \enbrace*{\sum_{i=0}^{p} t_i} \max_i \norm{v_i -v'} = \max_i \norm{v_i -v} \le \max_{i,j} \norm{v_i - v_j}.   
+	\end{align*}
+	\item Per Induktion nach $p$.
+	\begin{description}
+		\item[$p=0$:] Klar.
+		\item[$p-1 \mapsto p$:] Es genügt $n=p$, $v_0=e_0, \ldots , v_n=e_n$ zu betrachten. Es gilt
+		\begin{align*}
+			\hspace{-1em}\enbrace*{B_{\abs*{\Delta^p}}}_p \enbrace*{[v_0,\ldots ,v_p]} &= (K_{\Delta^p}) \circ (B_{\abs*{\Delta^p}})_{p-1} \circ \partial_p [e_0, \ldots ,e_p] \\
+			&= \sum_{i=0}^{p} (-1)^i (K_{\Delta^p}) \circ (B_{\abs*{\Delta^p}})_{p-1} \circ [e_0, \ldots , e_{i-1}, e_{i+1}, \ldots ,e_p] \\
+			&= \sum_{i=0}^{p} (-1)^i \hspace{-1em} \sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_{i-1}, e_{i+1}, \ldots e_p} }}  \hspace{-3.2em}\sgn(\sigma) (K_{\Delta^p}) \enbrace*{
+			\textstyle\benbrace*{\frac{\sigma(e_0) + \ldots \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p} } } \\
+			&= \sum_{i=0}^{p} (-1)^i \hspace{-1em}\sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_{i-1}, e_{i+1}, \ldots e_p} }} \hspace{-3.2em} \sgn(\sigma)
+			\benbrace*{\textstyle\frac{e_0 + \ldots + e_p}{p+1}, \frac{\sigma(e_0) + \ldots \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p}, \ldots} \\
+			&=\ldots = \sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_n}}} \sgn(\sigma) \benbrace*{\textstyle \frac{\sum_{i=0}^{p} \sigma(e_i)}{p}, \ldots , \ldots} 
+		\end{align*}  
+	\end{description}
+	\item Es genügt $\sigma=\id$ zu betrachten. Es ist 
+	\begin{align*}
+		\diam \benbrace*{\frac{v_0+ \ldots +v_p}{p+1}, \frac{v_0 + \ldots v_{p-1}}{p}, \ldots ,v_0} &\stackrel{\text{(i)}}{=} \max_{i <j}
+		\norm{\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1}}  \\
+		&= \max_{i <j} \norm{\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1} - \frac{v_{i+1}+ \ldots + v_j}{j+1}} \\
+		&= \max_{i<j} \norm{\frac{(j+1)- (i+1)}{(i+1)(j+1)}(v_0 + \ldots + v_i) - \frac{1}{j+1} (v_{i+1} + \ldots +v_j)}  \\
+		&= \max_{i<j} \frac{j-1}{j+1} \doppelstrich[\bigg]{\underbrace{\frac{v_0 + \ldots +v_i}{i+1}}_{\in \im [v_0, \ldots ,v_n]} - \underbrace{\frac{v_{i+1} + \ldots  + v_j}{j-1}}_{\in 
+		\im [v_0, \ldots , v_n]}} \\
+		&\le  \max_{i<j} \frac{j-1}{j+1} \diam [v_0, ld, v_n] \\
+		&\le \max_j \frac{j}{j+1} \diam [v_0, \ldots ,v_n] \le \frac{n}{n+1} \diam [v_0, \ldots , v_n]   
+	\end{align*}
+\end{enumerate}
 % subsection 1316 (end)
 % section 13 (end)
+\newpage
+
+\section{Axiome für Homologie} % (fold)
+\label{sec:14}
+\subsection{Bezeichnung} % (fold)
+\label{sub:141}
+Mit $V \colon \TOP^2 \to \TOP^2$ bezeichnen wir den Funktor $V(X,A) = (A,\emptyset)=A$.
+% subsection 141 (end)
+
+\subsection[Definition: Homologietheorie]{Definition} % (fold)
+\label{sub:142}
+Eine \Index{Homologietheorie} mit Werten in $R$-Moduln ist ein Funktor 
+\[
+	E_* \colon \HTOP^2 \longrightarrow \textsc{Gr}\text{-}R\text{-}\MOD
+\]
+zusammen mit einer natürlichen Transformation $\partial_{*+1} \colon E_{*+1}  \to E_{*} \circ V$,\footnote{Genauer: Sei 
+$S \colon \textsc{Gr}\text{-}R\text{-}\MOD \to \textsc{Gr}\text{-}R\text{-}\MOD$ der Funktor $(S M)_n = M_{n+1}$. Dann ist $\partial_*$ eine natürliche Transformation
+$S \circ E_* \to E_* \circ V$, also für $(X,A)$ $\enbrace*{S \enbrace*{E_*(X,A)}}_n \to \enbrace*{E_* \enbrace*{V(X,A)}}$, $E_{n+1}(X,A) \xrightarrow{\partial_*}E_n(A)$.}  
+sodass folgende Axiome gelten:
+\begin{enumerate}[(i)]
+	\item \Index{Paarfolge}: Sei $(X,A)$ ein Paar von topologischen Räumen. Seien $X= (X,\emptyset) \xrightarrow{j} (X,A)$ und 
+	$A= (A,\emptyset) \xrightarrow{i} X=(X,\emptyset)$ die Inklusionen. Dann ist 
+	\[
+		\begin{tikzcd}
+			\cdots \rar & E_{n+1}(X,A) \rar["\partial_{n+1}"] & E_n(A) \rar["E_n(i)"] & E_n(X) \rar["E_n(j)"] & E_n(X,A) \rar["\partial_{n-1}"] & E_{n-1}(A) \rar & \cdots
+		\end{tikzcd}
+	\] 
+	eine lange exakte Folge.
+	\item \Index{Ausschneidung}: Sei $(X,A)$ ein Paar von topologischen Räumen und $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. Dann induziert die Inklusion
+	$i \colon \enbrace*{X \setminus L, A \setminus L} \to (X,A)$ einen Isomorphismus
+	\[
+		E_*(i) \colon E_* \enbrace*{X \setminus L, A \setminus L} \xrightarrow{\enspace \cong \enspace} E_*(X,A)  
+	\] 
+\end{enumerate}
+% subsection 142 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:143}
+Homologietheorien sind homotopieinvariant. Oft wird dies als eigenes Axiom formuliert.
+% subsection 143 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:144}
+Für jede Homologietheorie gibt es eine Mayer-Vietoris-Folge. Dies ist eine formale Konsequenz aus der Paarfolge und dem Ausschneidungsisomorphismus. Eine einfache Folgerung 
+aus der Mayer-Vietoris-Folge ist, dass jede Homologietheorie mit \emph{endlichen} disjunkten Vereinigungen verträglich ist: Ist $X= X_1 \amalg \cdots \amalg X_n$ und
+$j_i \colon X_i \to X$ die Inklusion, dann ist 
+\[
+	E_*(X_1) \oplus \cdots \oplus E_*(X_n) \xrightarrow{E_*(j_1) \oplus \cdots \oplus E_*(j_n)} E_*)X
+\]
+ein Isomorphismus.
+% subsection 144 (end)
+
+\subsection[Definition: Dimensionsaxiom disjunkte Vereinigung]{Definition} % (fold)
+\label{sub:145}
+Zwei weitere Axiome die Homologietheorien mit Werten in $R$-Moduln erfüllen können sind:
+\begin{description}
+	\item[Dimensionsaxiom:] \index{Dimensionsaxiom}Für den Einpunktraum $\set{x_0}$ ist $E_0(\set{x_0})\cong R$ und $E_n(\set{x_0})=0$ für $n \not=0$.
+	\item[Disjunkte Vereinigung:] \index{disjunkte Vereinigung!Axiom} Sei $X = \coprod_{i \in I} X_i$ und $j_i \colon X_i \to X$ die Inklusion. Dann ist 
+	\[
+		\bigoplus_{i \in I} E_*(j_i) \colon \bigoplus_{i \in I} E_*(X_i) \longrightarrow E_*(X)
+	\]
+	ein Isomorphismus.
+\end{description}
+% subsection 145 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:146}
+In Kapitel \ref{sec:6} haben wir $\textsc{Gr}\text{-}R\text{-}\MOD$ als die Kategorie der $\mathds{N}$-graduierten $R$-Moduln definiert. Für viele Homologietheorien muss man
+diese Kategorie etwas vergrößern und $\mathds{Z}$-graduierte $R$-Moduln zulassen. Objekte sind dann Folgen $(M_n)_{n \in \mathds{Z}}$ über $\mathds{Z}$ von $R$-Moduln $M_n$.
+% subsection 146 (end)
+% section 14 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
