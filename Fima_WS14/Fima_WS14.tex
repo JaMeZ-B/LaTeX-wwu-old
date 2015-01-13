@@ -3588,7 +3588,7 @@ Insbesondere gilt:
 \[
 S_{d+1}(n)=S_0(n)\E^*(C^*~|~\F_n)~n=0\dt{,}N.
 \]
-Da $\Pw^*$ auch ein äquivalentes Martingalmaß für das Ausgangsmodell ist und$S_{d+1}(0)=\E^*C^*$, gilt
+Da $\Pw^*$ auch ein äquivalentes Martingalmaß für das Ausgangsmodell ist und $S_{d+1}(0)=\E^*C^*$, gilt
 \[
 S_{d+1}(0)\in \pi(C).
 \]
@@ -3776,7 +3776,7 @@ H(n)=\sum_{k=0}^{n-1}h(n,k)\mathbb{1}_{\penbrace{Z(n-1)=k}}
 \uline{1. Schritt:} Einperiodenfall:\\
 $N=1$: Anfangskurs $S_0$, Endkurse $(uS_0,mS_0,dS_0),~0<d<m<u$, Zinsrate $\rho,~d<1+\rho<u$.
 \[
-\Delta S^*(1)=S^*(1)-S^*(0)=(\frac{uS_0}{1+\rho}-S_0,\frac{mS_0}{1+\rho}-S_0,\frac{dS_0}{1+\rho}-S_0)=S_0(\frac{uS_0}{1+\rho}-1,\frac{mS_0}{1+\rho}-1,\frac{dS_0}{1+\rho}-1)=S_0\cdot R
+\Delta S^*(1)=S^*(1)-S^*(0)=(\frac{uS_0}{1+\rho}-S_0,\frac{mS_0}{1+\rho}-S_0,\frac{dS_0}{1+\rho}-S_0)=S_0(\frac{u}{1+\rho}-1,\frac{m}{1+\rho}-1,\frac{d}{1+\rho}-1)=S_0\cdot R
 \]
 Ein Claim $C$ entspricht einem Vektor $C=(c_1,c_2,c_3)^T$
 \[
@@ -3881,6 +3881,153 @@ for $n=N-1$ down to 0 do\\
 	Setze $v^+(n,(k,l))=P_+(C)$ und $h^+(n+1,(k,l))=H^+$\\
 	Berechne den lower hedging Preis, sowie lower Hedge im Trinomialmodell mit Anfangskurs $S_0u^kd^lm^{n-(k+l)}$ und Claim $C^-=(v^-(n+1,(k+1,l)),~v^-(n+1,(k,l)),v^-(n+1,(k,l-1)))$\\
 	Setze $v^-(n,(k,l))=P_-(C)$ und $h^-(n+1,(k,l))=H^-$\\
+
+Es gilt:
+\[
+v^+\big(0,(0,0)\big)=P_+(C)
+\]
+ist das Anfangskapital des minimalen upper hegdes und 
+\[
+H_n^+:=\sum_{k=0}^{n-1}\sum_{l=0}^{n-k-1}h^+(n,(k,l))\mathbb{1}_{\penbrace{Z_1(n-1)=k}}\mathbb{1}_{\penbrace{Z_2(n-1)=l}}
+\]
+die minimale upper hedge Strategie, insbesondere gilt damit
+\[
+P_+(C)=\sum_{k=1}^{N}H(k)\Delta S^*(k)\ge C^*
+\]
+Entsprechend
+\[
+v^-(0,(0,0))=P_-(C)
+\]
+das Anfangskapital für den maximalen lower hedge und
+\[
+H_n^-=\sum_{k=0}^{n-1}\sum_{l=0}^{n-k-1}h^-(n,(k,l))\mathbb{1}_{\penbrace{Z_1(n-1)=k}}\mathbb{1}_{\penbrace{Z_2(n-1)=l}}
+\]
+ist der maximale lower hedge
+\[
+P_-(C)=\sum_{k=1}^{N}H(k)\Delta S^*(k)\le C^*
+\]
+%sub end
+
+\subsection{Allgemeine Call-Formel}
+\label{sub:allg_call-formel}
+Betrachte Finanzmarkt über $N$-Perioden mit $(S(n))_{n=0\dt{,}N}\subseteq \R_+$ als Preisprozess für das risky asset und $(\beta(n))_{n=0\dt{,}N}$ als Geldmarktkonto, $(\F_n){n=0\dt{,}N}$ Filtration und damit
+\[
+\beta(n)=\prod_{k=1}^{n}(1+\zeta(k))
+\]
+mit vorhersehbarem Prozess $\zeta>-1$.
+Wir betrachten einen Call mit strike $K$, d.h. $C=(S(N)-K)^+$ ist die Claimauszahlung nach $N$ Perioden.\\
+Annahme: $C$ sei hedgebar und das Modell arbitragefrei.\\
+Dann gilt: $\E^*C^*$ ist der eindeutige arbitragefreie Anfangspreis für $C$, wobei $\Pw^*\in \mc{P}$ beliebig gewählt werden kann.
+\begin{equation*}
+\begin{aligned}
+	P(C)&=\E^*C^*=\E^*\enbrace{\frac{(S(N)-K)^+}{\beta(N)}}\\
+	&= \E^*\frac{S(N)}{\beta(N)}\mathbb{1}_{\penbrace{S(N)>K}}-\E^*\frac{K}{\beta(N)}\mathbb{1}_{\penbrace{S(N)>K}}\\
+	&= \E^*S^*(N)\mathbb{1}_{\penbrace{S(N)>K}}-K-\E^*\frac{1}{\beta(N)}\mathbb{1}_{\penbrace{S(N)>K}}\\
+	&= S_0\cdot \E^*\frac{S^*(N)}{S_0}\mathbb{1}_{\penbrace{S(N)>K}}-K\cdot B(0,N)\cdot \E^*\frac{1}{\beta(N)}\cdot\frac{1}{B(0,N)}\mathbb{1}_{\penbrace{S(N)>K}} \text{ mit } B(0,N):=\E^*\frac{1}{\beta(N)}
+\end{aligned}
+\end{equation*}
+Definiere äquivalente Maße $\Pw_1^*$ und $\Pw_2^*$ durch
+\[
+\frac{d\Pw_1^*}{d\Pw^*}\left|_{\F_N}\right.=\frac{S^*(N)}{S_0}\text{ und }\frac{d\Pw_2^*}{d\Pw^*}\left|_{\F_N}\right.=\frac{1}{\beta(N)}\frac{1}{B(0,N)}
+\]
+Dann gilt:
+\[
+P(C)=S(0)\Pw_1^*(S(N)>K)-KB(0,N)\Pw_2^*(S(N)>K)
+\]
+Im CRR-Modell ist
+\[
+\beta(N)=(1+\zeta)^N,\text{ also }\Pw_2^*=\Pw^*
+\]
+somit folgt:
+\[
+P(C)=S(0)\Pw_1^*(S(N)>K)-K(1+\zeta)^{-N}\Pw^*(S(N)>K)
+\]
+\[
+\frac{S(N)}{S(0)}=u^{Z(N)}d^{N-Z(N)}
+\]
+Dann folgt:
+\[
+S(N)>K\Leftrightarrow Z(N)>\frac{\ln\frac{K}{S(0)}-N\ln d}{\ln u-\ln d}=b_N
+\]
+Bzgl. $\Pw^*$ ist $Z(N)$ eine $\Bin(N,p^*)$ verteilte Zufallsvariable mit
+\[
+p^*=\frac{(1+\zeta)-d}{u-d}
+\]
+Im CRR-Modell ist bzgl. $\Pw_1^*$ der Zählprozess $(Z(n))_{n=0\dt{,}N}$ ein Random-Walk $Z(n)=\sum_{k=1}^{n}X_k$, mit 
+\[
+\Pw_1^*(X_k=1)=p_1^*=\frac{p^*u}{1+\zeta}
+\]
+Bzgl. $\Pw_1^*$ ist $Z(N)$ eine $\Bin(N,p_1^*)$ verteilte Zufallsvariable. Also gilt:
+\[
+P(C)=S(0)\Bin(N,p_1^*)((b_N,\infty))-K\Bin(N,p^*)((b_N,\infty))
+\]
+Dies ist die diskrete \Index{Black-Scholes Formel}
+%sub end
+%sec end
+\newpage
+
+\section{Das Black-Scholes Modell}
+\label{sec:black_scholes_modell}
+Ziel: Modellierung von Finanzmärkten in stetiger Zeit.
+
+\subsection{Beschreibung des Modells}
+\label{sub:beschreibung_des_modells}
+Finanzmarktmodell besteht aus
+\begin{itemize}
+	\item einem Geldmarktkonto
+	\item ein risky asset
+	\item Laufzeit $T$
+	\item[Geldmarktkonto:]
+	\item Annahme: deterministische stetige Verzinsung mit Rate $r$.
+	Daher entwickelt sich das Geldmarktkonto gemäß
+	\[
+	\beta(t)=e^{rt},~0\le t\le T
+	\]
+	\item[risky asset:]
+	\item Anfangskurs $S_0>=$. Annahme:
+	\begin{enumerate}[(a)]
+		\item die relativen Kursänderungen sind unabhängig und zeitlich stationär
+		\item die Kursänderungen sind stetig
+	\end{enumerate} 
+	Hieraus folgt, dass der Kursverlauf $(S(t))_{0\le t\le T}$ des risky assets durch einen stochastischen Prozess der Form
+	\[
+	S(t)=S(0)\exp\enbrace{\sigma W(t)-\frac{1}{2}\sigma^2t}e^{\mu t},~t\le T\text{ mit } \mu\in \R,\sigma>0
+	\]
+	beschrieben werden kann. $(W(t))_{t\ge 0}$ bezeichnet dabei den \Index{Wiener-Prozess}. Dieser ist definiert durch die folgenden Bedingungen
+	\begin{enumerate}[(i)]
+		\item $W(0)=0 \pfs$
+		\item Für beliebige $0\le t_0<t_1\dt{<}t_n,~n\in \N$ sind 
+		\[
+		W_{t_1}-W_{t_0},W_{t_2}-W_{t_1}\dt{,}W_{t_n}-W_{t_{n-1}}
+		\]
+		stochastisch unabhängig.
+		\item Für alle $0\le s,~t>0$ gilt
+		\[
+		W_{s+t}-W_s\sim W_t-W_0=W_t\sim N(0,t)
+		\]
+		\item $(W_t)_{t\ge0}$ hat stetige Pfade
+	\end{enumerate}
+	Wieso erfüllt das Modell die Annahmen?\\
+	Die relativen Kursänderungen in $t_1\dt{<}t_n$ sind gegeben durch
+	\[
+	\frac{S(t_1)-S(t_0)}{S(t_0)},\frac{S(t_2)-S(t_1)}{S(t_1)}\dt{,}\frac{S(t_n)-S(t_{n-1})}{S(t_{n-1})}.
+	\]
+	Da
+	\[
+	S\frac{S(t_i)-S(t_{i-1})}{S(t_{i-1})}= \exp\enbrace{\sigma(W(t_i)-W(t_{i-1}))-\frac{1}{2}\sigma^2(t_i-t_{i-1})}e^{\mu(t_i-t_{i-1})}-1
+	\]
+	folgt die Unabhängigkeit und zeitliche Stationarität der relativen Kursänderungen aus (ii) und (iii).
+	Die Annahme (b) ist erfüllt wegen (iv).
+	Das das Modell aus den Annahmen folgt, ist nicht ganz so einfach zu beweisen.
+	Das folgt aus der Tatsache, dass ein stochastischer Prozess $X$ mit unabhängigen stationären Zuwächsen der stetige Pfade hat, notwendigerweise ein Wiener-Prozess mit Drift sein muss, d.h.
+	\[
+	X(t)=\sigma W(t)+\nu t\text{ mit }\sigma>0\text{ und }\nu\in\R
+	\]
+	Nur aus der Annahme (a) ergeben sich sogenannte \Index{Levy-Prozess Modelle}.
+\end{itemize}
+
+
+
 
 
 
