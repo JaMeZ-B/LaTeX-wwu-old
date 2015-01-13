@@ -2451,7 +2451,7 @@ Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ 
 \end{enumerate}
 % subsection 724 (end)
 
-\subsection{Definition und Proposition} % (fold)
+\subsection[Definition und Proposition: Der zu $T \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ adjungierte Operator $T^*$]{Definition und Proposition} % (fold)
 \label{sub:725}
 Seien $\mathcal{H}_1$, $\mathcal{H}_2$ Hilberträume und $T \in \mathcal{L}(\mathcal{H}_1, \mathcal{H_2})$. Dann existiert genau ein Operator 
 $T^* \in \mathcal{L}(\mathcal{H}_2, \mathcal{H}_1)$, sodass für alle $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$ gilt 
@@ -2463,7 +2463,127 @@ $T^{**} = T$. Ist $\mathcal{H}_3$ ein weiterer Hilbertraum und $S \in \mathcal{L
 \[
 	(S \circ T)^* = T^* \circ S^*
 \]
+\minisec{Beweis}
+Sei $\kappa_i \colon \mathcal{H}_i \to \mathcal{H}_i^*$ wie in \ref{sub:711}. Wir haben 
+\begin{align*}
+	& \skal*{T^* y}{x}_{\mathcal{H}_1} = \skal*{y}{T x}_{\mathcal{H}_2} & \tag*{[\textbf{\#}]} \\
+	\iff & \kappa_1(T^* y)(x) =\kappa_2(y)(T x) &\text{ für } x \in \mathcal{H}_1, y \in \mathcal{H}_2 \\
+	\iff & \kappa_1(T^* y) =\kappa_2(y)\circ T & \text{ für } y \in \mathcal{H}_2\\
+	\iff & \kappa_1(T^* y) = T^\tr \circ \kappa_2(y) &\text{ für } y \in \mathcal{H}_2\\
+	\iff & T^* y = \kappa_1 ^{-1} \circ T^\tr \circ \kappa_2(y) &\text{ für } y \in \mathcal{H}_2
+\end{align*}
+Also definieren wir $T^* := \kappa_1 ^{-1} \circ T^\tr \circ \kappa_2 \in \mathcal{L}(\mathcal{H}_2, \mathcal{H}_1)$. Durch \eqref{eq:725} ist $T^*$ eindeutig bestimmt.
+$\kappa_1 ^{-1}$ und $\kappa_2$ sind Isometrien; da außerdem $\norm{T^\tr}= \norm{T}$, gilt $\norm{T^*}=\norm{T}$ und somit ist $T \mapsto T^*$ isometrisch.
+$\kappa_1 ^{-1}$ ist konjugiert linear, also auch $T \mapsto T^*$. Weiter gilt
+\begin{align*}
+	(S T)^* = \kappa_1 ^{-1} (S T)^\tr \kappa_3 = \kappa_1 ^{-1} T^\tr S^\tr \kappa_3 = \kappa_1 ^{-1} T^\tr \kappa_2 \kappa_2 ^{-1} S^\tr \kappa_3 = T^* S^*
+\end{align*}
+Des weiteren erfüllt $T^{**} = (T^*)^* \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ für alle $x \in \mathcal{H}_1, y \in \mathcal{H}_2$
+\[
+	\skal*{T^{**} x}{y}_{\mathcal{H}_2} = \skal*{x}{T^* y}_{\mathcal{H}_1}
+\]
+Ebenso gilt $\skal*{T x}{y}_{\mathcal{H}_2}= \overline{\skal*{y}{T_x}_{\mathcal{H}_2}} = \overline{\skal*{T^* y}{x}_{\mathcal{H}_1}} = \skal*{x}{T^* y}_{\mathcal{H}_1}$ für
+alle $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$. Folglich muss $T^{**} x = T x$ gelten.\marginnote{gleiche Werte auf allen Elementen, Hahn-Bannach} \bewende 
 % subsection 725 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:726}
+Für $T \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ gilt: 
+\begin{align*}
+	\norm{T} &= \inf \set[\lambda \in \mathds{R}]{ \abs*{\skal*{y}{T x}_{\mathcal{H}_2}} \le \lambda \cdot \norm{y} \cdot \norm{x} \forall x \in \mathcal{H}_1, y \in \mathcal{H}_2}  \\
+	&= \sup \set[\abs*{\skal*{y}{T x}}_{\mathcal{H}_2}]{ x \in \overline{B}_{\mathcal{H}_1}(0,1), y \in \overline{B}_{\mathcal{H}_2}(0,1)} 
+\end{align*}
+\minisec{Beweis}
+Sei $\gamma$ die rechte Seite der oberen Gleichung.
+Es gilt $\abs*{\skal*{y}{Tx}_{\mathcal{H}_2}} \le \norm{T} \cdot \norm{y} \cdot \norm{x}$ für $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$, also ist 
+$\gamma \le \norm{T}$. Weiter gilt 
+\[
+	\norm{T x}^2 = \abs*{\skal*{T x}{T x}} \le \gamma \norm{T x} \cdot \norm{x} \le \gamma \cdot \norm{T} \cdot \norm{x}^2
+\]
+also ist $\norm{T x} \le \sqrt{\gamma} \cdot \sqrt{\norm{T}} \cdot \norm{x}$ für $x \in \mathcal{H}_1$ und es folgt $\norm{T} \le \sqrt{\gamma} \cdot \sqrt{\norm{T}}$. Also
+gilt $\sqrt{\norm{T}} \le \sqrt{\gamma}$ $\Rightarrow $ $\norm{T} \le \gamma$ und somit insgesamt $\gamma = \norm{T}$.
+Die zweite Gleichheit ist klar. \bewende
+% subsection 726 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:727}
+Sei $\mathcal{H}$ ein $\mathds{K}$-Hilbertraum, $T\in \mathcal{L}(\mathcal{H})$ und $\beta\ge 0$. Falls $\abs*{\skal*{x}{T x}}\le\beta\norm{x}^2$ für alle $x\in\mathcal{H}$,
+so gilt für $x,y \in \mathcal{H}$
+\begin{align*}
+	\abs*{\skal*{y}{T x} + \skal*{T y}{x}} &\le 2 \beta \cdot \norm{x} \cdot \norm{y} \\
+	\shortintertext{Falls $\mathds{K}=\mathds{C}$, gilt sogar}
+	\abs*{\skal*{y}{T x}} + \abs*{\skal*{T y}{x}} &\le 2 \beta \cdot \norm{x} \cdot \norm{y}
+\end{align*}
+In diesem Fall gilt also $T=0 \iff \skal*{x}{T x}=0$ für alle $x \in \mathcal{H}$.
+\minisec{Beweis}
+Für alle $x,y \in \mathcal{H} \setminus \set{0} $ gilt (für $0$ ist die Ungleichung trivial)
+\begin{align*}
+	2 \abs*{\skal*{y}{T x}+ \skal*{T y}{x}} = \abs*{\skal*{x+y}{T(x+y)} - \skal*{x-y}{T(x-y)}} &\le \beta \norm{x+y}^2 + \beta \norm{x-y}^2 \\
+	&\le 2 \beta \enbrace*{\norm{x}^2 + \norm{y}^2}
+\end{align*}
+Ersetze $x$ durch $\enbrace*{\frac{\norm{y}}{\norm{x}} }^{\frac{1}{2}} \!\cdot x$ und $y$ durch $\enbrace*{\frac{\norm{x}}{\norm{y}}}^{\frac{1}{2}}\! \cdot y$. Dann folgt
+\begin{equation*}
+	\bcancel{2}\cdot  \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \le \bcancel{2} \cdot \beta \cdot \enbrace[\Big]{\norm{x} \cdot \norm{y} + \norm{x} \cdot \norm{y}} 
+	= \bcancel{2} \cdot 2 \cdot \beta \cdot \norm{x} \cdot \norm{y} \label{eq:727} \tag{*}
+\end{equation*}
+Falls $\mathds{K}=\mathds{C}$, so gilt für $\rho, \sigma \in \mathds{R}_+$ geeignet \todo{das stimmt noch nicht so ganz \ldots}
+\begin{align*}
+	\abs*{\skal*{y}{T x}} + \abs*{\skal*{T y}{x}} &= \abs*{ e^{i(\rho +\sigma)} \cdot \skal*{y}{T x} + e^{i(\rho-\sigma)} \cdot {\skal*{x}{T y}}} \\
+	&= \abs*{e^{i \rho} \cdot \enbrace*{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x} } + \skal*{e^{i \sigma} \cdot x}{T y} } } \\
+	&= \abs*{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x} } + \overline{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x}}}} \\
+	\ldots & \stackrel{\mathclap{\mbox{\scriptsize\eqref{eq:727}}}}{\le} 2 \cdot \beta \cdot \norm{x} \cdot \norm{y}  \bewende
+\end{align*}
+% subsection 727 (end)
+
+\subsection[Definition: Selbstadjungierter Operator]{Definition} % (fold)
+\label{sub:728}
+$T \in \mathcal{L}(\mathcal{H})$ heißt \Index{selbstadjungiert}, falls $T=T^*$. Wir setzen
+\[
+	\mathcal{L}(\mathcal{H})_\sa := \set[T \in \mathcal{L}(\mathcal{H})]{T \text{ selbstadjungiert}} 
+\]
+% subsection 728 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:729}
+Für $T$ selbstadjungiert gilt 
+\[
+	\norm{T}= \inf \set[\lambda \in \mathds{R}]{\abs*{\skal*{x}{T x}} \le \lambda \norm{x}^2 \text{ für alle } x \in \mathcal{H}}  
+\]
+\minisec{Beweis}
+Sei $\beta$ das Infimum auf der rechten Seite. Dann gilt
+\begin{align*}
+	2 \abs*{\skal*{x}{T x}} = \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \stackrel{\mbox{\scriptsize \ref{sub:727}}}{\le} 2 \beta \norm{x} \cdot \norm{y} 
+\end{align*}
+Nach \ref{sub:726} folgt $\norm{T} \le \beta \le \norm{T}$. \bewende
+% subsection 729 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:730}
+Falls $\mathds{K}=\mathds{C}$ und $T \in \mathcal{L}(\mathcal{H})$, so gilt
+\[
+	T \text{ selbstadjungiert } \iff \skal*{x}{T x} \in \mathds{R} \text{ für alle } x \in \mathcal{H}
+\]
+\minisec{Beweis}
+Um "$\Rightarrow$" zu zeigen, betrachte $\skal*{x}{T x} = \skal*{T x}{x} = \overline{\skal*{x}{T x}}$ für $x \in \mathcal{H}$. Für die Rückrichtung betrachte
+$\skal*{x}{T x} = \skal*{T x}{x} = \skal*{x}{T^* x}$. Dann ist $\skal*{x}{(T-T^*)x}=0$ für $x \in \mathcal{H}$. Es folgt dann $T- T^*=0$. \bewende 
+% subsection 730 (end)
+
+\subsection{Definition und Proposition} % (fold)
+\label{sub:731}
+Seien $R,S,T \in \mathcal{L}(\mathcal{H})$ selbstadjungiert. Wir schreiben 
+\begin{itemize}
+	\item $T \ge 0$, falls $\skal*{x}{T x} \ge 0$ für alle $x \in \mathcal{H}$ gilt.
+	\item $T \ge S$, falls $T-S \ge 0$
+\end{itemize}
+"$\ge$" ist eine partielle Ordnung auf $\mathcal{L}(\mathcal{H})_\sa$, das heißt $T \ge T$; $T \ge S$, $S \ge T \Rightarrow S=T$, $T \ge S, S \ge R \Rightarrow T \ge R$ (folgt mit \ref{sub:729}).
+Es gilt $-\norm{T} \id_{\mathcal{H}} \le T  \le \norm{T} \cdot \id_{\mathcal{H}}$. Falls $T \ge 0$ ist, so gilt 
+\begin{equation*}
+	\abs*{\skal*{y}{T x}}^2 \le  \skal*{x}{T x} \cdot \skal*{y}{T y} \label{eq:731} \tag{*}
+\end{equation*}
+insbesondere gilt $\skal*{x}{T x}=0 \iff T x=0$
+\minisec{Beweis}
+\emph{Übung, für die letzte Aussage benutze \ref{sub:74} und: $(y,x) \mapsto \skal*{y}{T x}$ ist positiv semidefinit hermitesch.}
+% subsection 731 (end)
 % section 7 (end)
 
 
