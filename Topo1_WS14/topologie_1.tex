@@ -3320,7 +3320,7 @@ Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n
 
 \section{Axiome für Homologie} % (fold)
 \label{sec:14}
-\subsection{Bezeichnung} % (fold)
+\subsection[Bezeichnung: Funktor mit $(X,A) \mapsto (X,\emptyset)$]{Bezeichnung} % (fold)
 \label{sub:141}
 Mit $V \colon \TOP^2 \to \TOP^2$ bezeichnen wir den Funktor $V(X,A) = (A,\emptyset)=A$.
 % subsection 141 (end)
@@ -3352,12 +3352,12 @@ sodass folgende Axiome gelten:
 \end{enumerate}
 % subsection 142 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung zur Homotopieinvarianz von Homologietheorien]{Bemerkung} % (fold)
 \label{sub:143}
 Homologietheorien sind homotopieinvariant. Oft wird dies als eigenes Axiom formuliert.
 % subsection 143 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung zu Mayer-Vietoris-Folge und disjunkten Vereinigungen]{Bemerkung} % (fold)
 \label{sub:144}
 Für jede Homologietheorie gibt es eine Mayer-Vietoris-Folge. Dies ist eine formale Konsequenz aus der Paarfolge und dem Ausschneidungsisomorphismus. Eine einfache Folgerung 
 aus der Mayer-Vietoris-Folge ist, dass jede Homologietheorie mit \emph{endlichen} disjunkten Vereinigungen verträglich ist: Ist $X= X_1 \amalg \cdots \amalg X_n$ und
@@ -3368,7 +3368,7 @@ $j_i \colon X_i \to X$ die Inklusion, dann ist
 ein Isomorphismus.
 % subsection 144 (end)
 
-\subsection[Definition: Dimensionsaxiom disjunkte Vereinigung]{Definition} % (fold)
+\subsection[Definition: Dimensionsaxiom und Axiom über disjunkte Vereinigungen]{Definition} % (fold)
 \label{sub:145}
 Zwei weitere Axiome die Homologietheorien mit Werten in $R$-Moduln erfüllen können sind:
 \begin{description}
@@ -3381,11 +3381,92 @@ Zwei weitere Axiome die Homologietheorien mit Werten in $R$-Moduln erfüllen kö
 \end{description}
 % subsection 145 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Statt $\mathds{N}$-graduierten Moduln sind oft auch $\mathds{Z}$-graduierte Moduln nötig]{Bemerkung} % (fold)
 \label{sub:146}
 In Kapitel \ref{sec:6} haben wir $\textsc{Gr}\text{-}R\text{-}\MOD$ als die Kategorie der $\mathds{N}$-graduierten $R$-Moduln definiert. Für viele Homologietheorien muss man
 diese Kategorie etwas vergrößern und $\mathds{Z}$-graduierte $R$-Moduln zulassen. Objekte sind dann Folgen $(M_n)_{n \in \mathds{Z}}$ über $\mathds{Z}$ von $R$-Moduln $M_n$.
 % subsection 146 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:147}
+\begin{itemize}
+	\item Für jede Homologietheorie $E_*$ gilt: 
+	\(
+		E_*(S^n) \cong E_* \enbrace*{\set{\mathrm{pt}}} \oplus E_{*-n} \enbrace*{\set{\mathrm{pt}} }  
+	\)
+	\item Die Konstruktion des zellulären Kettenkomplexes in singulärer Homologie benutzte nur die Axiome aus \ref{sub:142}. Für die Identifikation der zellulären Homologie 
+	mit der singulären Homologie waren zusätzlich die Axiome aus \ref{sub:145} notwendig. Ohne das Axiom über disjunkte Vereinigungen kann man nur endliche \CW-Komplexe 
+	behandeln. Ohne das Dimensionsaxiom erhält man an der Stelle der zellulären Kettenkomplex eine sogenannte \Index{Spektralfolge}, die Atiyah-Hirzebruch Spektralfolge. 
+\end{itemize}
+% subsection 147 (end)
+
+\subsection[Definition: Morphismus von Homologietheorien]{Definition} % (fold)
+\label{sub:148}
+Seien $(E_*,\partial_*^E)$ und $(F_*,\partial_*^F)$ Homologietheorien. Ein \Index{Morphismus von Homologietheorien} ist eine natürliche Transformation
+$\tau_* \colon E_* \to F_*$, sodass $\tau_* \circ \partial_{*+1}^E = \partial_*^F \circ \tau_{*+1}$. Also kommutiert für alle $(X,A)$ das folgende Diagramm
+\[
+	\begin{tikzcd}
+		E_{n+1}(X,A) \rar["\partial_{n+1}^E"] \dar["\tau_{n+1,(X,A)}"] & E_n(A) \dar["\tau_{n,A}"] \\
+		F_{n+1}(X,A) \rar["\partial_{n+1}^F"] & F_n(A)
+	\end{tikzcd}
+\]
+% subsection 148 (end)
+
+\subsection[Satz: Isomorphie der Homologie von \CW-Komplexen von zwei Homologietheorien]{Satz} % (fold)
+\label{sub:149}
+Sei $\tau_* \colon (E_*,\partial_*^E) \to (F_*,\partial_*^F)$ ein Morphismus von Homologietheorien. Ist 
+\[
+	(\tau_*)_{\set{\mathrm{pt}}} \colon E_*(\set{\mathrm{pt}}) \to F_*(\set{\mathrm{pt}}) 
+\]
+ein Isomorphismus. Dann ist $(\tau_*)_X$ für jeden endlichen \CW-Komplex ein 
+Isomorphismus. Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen verträglich, so ist $(\tau_*)_X$ für alle \CW-Komplexe ein Isomorphismus.
+\minisec{Beweis}
+\begin{description}
+	\item[Schritt 1:] Sei $X$ ein $0$-dimensionaler endlicher \CW-Komplex,also eine endliche Menge mit der diskreten Topologie. Für $x \in X$ sei $i_x \colon \set{x} \to X$
+	die Inklusion. Wir erhalten folgendes Diagramm:
+	\[
+		\begin{tikzcd}[column sep=4em, row sep=2.5em]
+			E_*(X) \rar["(\tau_*)_X"] & F_*(X) \\
+			\bigoplus\limits_{\mathclap{x \in X}} E_*(\set{x}) \uar["\cong"] \rar["\bigoplus_{x \in X} (\tau_*)_{\set{x}}","\cong"'] 
+			& \bigoplus\limits_{\mathclap{x \in X}} F_*(\set{x}) \uar["\cong"]
+		\end{tikzcd}
+	\]
+	Das Diagramm kommutiert, da $\tau_*$ eine natürliche Transformation ist.
+	\item[Schritt 2:] Angenommen $(\tau_*)_X$ ist ein Isomorphismus für jeden endlichen \CW-Komplex von Dimension echt kleiner als $n$. Sei $X$ ein $n$-dimensionaler
+	endlicher \CW-Komplex:
+	\[
+		\begin{tikzcd}
+			\coprod\limits_{\mathclap{i \in I}} S^{n-1} \rar["\coprod q_i^\ssbrace{n}"] \dar & X^\ssbrace{n-1} \dar\\
+			\coprod\limits_{\mathclap{i \in I}} D^{n} \rar["\coprod Q_i^\ssbrace{n}"] & X
+		\end{tikzcd}
+	\]
+	Sei $X_+^\ssbrace{n-1} := X^\ssbrace{n-1} \cup \coprod_{i \in I} Q_i^\ssbrace{n} \enbrace*{D^n \setminus \set{0}}$ und 
+	$Z := \coprod_{i \in I} Q_i^\ssbrace{n}(\mathring{D^n})$. Dann sind $X_+^\ssbrace{n-1}$, $Z$ und $Z\cap X_+^\ssbrace{n-1}$ homotopieäquivalent zu endlichen \CW-Komplexen
+	mit Dimension echt kleiner $n$. Insbesondere sind $(\tau_*)_{X_+^\ssbrace{n-1}}$, $(\tau_*)_Z$ und $(\tau_*)_{X^\ssbrace{n-1}_+ \cap Z}$ Isomorphismen. Da
+	$X^\ssbrace{n-1}_+ \subseteq X$ und $\mathds{Z} \subseteq X$ offen sind, erhalten wir in $E_*$ und $F_*$ zugehörigen Mayer-Vietoris-Folgen:
+	\[
+		\!\!\begin{tikzcd}[column sep=1.8em, row sep=2.5em,font=\small]
+			\cdots \rar & E_* \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar \dar["(\tau_*)_{X_+^\ssbrace{n-1} \cap Z}","\cong"']
+			& E_*\enbrace{X_+^\ssbrace{n-1}} \oplus E_*(\mathds{Z}) \rar \dar["(\tau_*)_{X_+^\ssbrace{n-1}} \oplus (\tau_*)_{Z}","\cong"']
+			& E_*(X) \rar["\partial_*^{\mathrm{MV},E}"] \dar["(\tau_*)_X"]
+			& E_{*-1} \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar \dar["(\tau_{*-1})_{X_+^\ssbrace{n-1} \cap Z}", "\cong"'] & \cdots  \\
+			\cdots \rar & F_* \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar & F_*\enbrace{X_+^\ssbrace{n-1}} \oplus F_*(\mathds{Z}) \rar 
+			& F_*(X) \rar["\partial_*^{\mathrm{MV},F}"] & F_{*-1} \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar & \cdots
+		\end{tikzcd}
+	\]
+	Da $\tau_*$ eine natürliche Transformation ist, kommutierten die beiden linken Vierecke. Da $\tau_*$ mit der Randabbildung der Paarfolgen von $E_*$ und $F_*$ 
+	kommutiert, kommutiert auch $\tau_*$ mit den Randabbildungen der Mayer-Vietoris-Folgen in $E_*$ und $F_*$. Also kommutiert auch das das dritte Viereck. Mit dem 
+	5er-Lemma (\ref*{sub:815}) folgt, dass $(\tau_*)_X$ auch ein Isomorphismus ist.
+	
+	Erfüllen $E_*$ und $F_*$ auch das Dimensionsaxiom, so zeigen die Argumente aus Schritt 1 und 2, dass $(\tau_*)_X$ ein Isomorphismus ist für jeden endlich dimensionalen
+	\CW-Komplex.
+	\item[Schritt 3:] Sei $X$ ein \CW-Komplex. Sei \todo{hier entsteht noch ein Beweis \ldots}
+	\[
+		X^+ := \set[(x,t)]{x \in X^\ssbrace{n}, t \in } 
+	\]
+\end{description}
+
+% subsection 149 (end)
 % section 14 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
