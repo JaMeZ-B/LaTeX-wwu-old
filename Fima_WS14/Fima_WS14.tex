@@ -11,7 +11,7 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-\newpage
+\cleardoubleoddemptypage
 
 \thispagestyle{empty}
 \vspace*{\fill}
@@ -4025,11 +4025,118 @@ Finanzmarktmodell besteht aus
 	\]
 	Nur aus der Annahme (a) ergeben sich sogenannte \Index{Levy-Prozess Modelle}.
 \end{itemize}
+%sub end
 
-
-
-
-
+\subsection{Approximation eines Black-Scholes Modells durch ein CRR-Modell}
+\label{sub:appox_bs-modell}
+Gegeben: BS-Modell mit Parametern $\sigma>0$ für die \Index{Volatilität}, $T>0$ für die Laufzeit, $\mu>0$ für den Trend und $R>0$ für die Zinsrate, daraus ergibt sich
+\[
+S(t)=S(0)e^{\mu t}\exp\enbrace{\sigma W_t-\frac{1}{2}\sigma^2t}
+\]
+Es soll in geeigneter Weise ein CRR-Modell angepasst werden.
+Teile hierzu den Zeitbereich in äquidistante Intervalle $[t_{i-1},t_i]$ mit $0=t_0,~T=t_n$, erhalten $\frac{T}{n}=\Delta_n$ als Intervalllänge.
+Approximiere $S(t_j)=S(j\Delta)$ für $j=1\dt{,}n$ durch
+\[
+S_n(t_j)=S(0)u_n^{Z_n(j)}d_n^{j-Z_n(j)}
+\]
+mit $Y_1\dt{,}Y_n$ iid. $\Pw(Y_i=u_n)=p_n=1+\Pw(Y_i=d_n)$ und $Z_n(j)=\sum_{k=1}^{j}\mathbb{1}_{\penbrace{Y_k=u_n}}$.
+$(S_n(t_j))_{j=0\dt{,}n}$ definiert einen Aktienpreisprozess in einem CRR-Modell.\\
+Frage: Wie kann man $u_n,d_n,p_n$ sinnvoll wählen.\\
+Ansatz: Wähle $u_n,d_n,p_n$ so, dass der Erwartungswert und die Varianz der log Rendite bis $T$ übereinstimmen.
+Es gilt:
+\begin{equation*}
+\begin{aligned}
+	\E\log\enbrace{\frac{S(T)}{S(0)}}&=\E\enbrace{\mu T+\sigma W_t-\frac{1}{2}\sigma^2T}\\
+	&=\enbrace{\mu-\frac{1}{2}\sigma^2}T\\
+	\V \log\frac{S(T)}{S(0)}&=\sigma^2\V W_t=\sigma^2T
+\end{aligned}
+\end{equation*}
+Im CRR-Modell:
+\begin{equation*}
+\begin{aligned}
+	\E \log\frac{S_n(T)}{S_n(0)}&=\E\log\prod_{k=1}^{n}Y_k = \E\sum_{k=1}^{n}\log Y_k\\
+	&=n\E\log Y_1 = n((\log u_n)p_n+(\log d_n)(1-p_n))\\
+	\V \log\frac{S_n(T)}{S_n(0)}&= \sum_{k=1}^{n}\V(\log Y_1)\\
+	&=n\bigg(p_n(\log u_n)^2+(1-p_n)(\log d_n)^2-\big((\log u_n)p_n+(\log d_n)(1-p_n)\big)^2 \bigg)
+\end{aligned}
+\end{equation*}
+Das führt auf die Gleichungen
+\begin{equation*}
+\begin{aligned}
+	p_n\log u_n + (1-p_n)\log d_n &= \enbrace{\mu-\frac{1}{2}\sigma^2}\frac{T}{n}\\
+	p_n\log^2 u_n + (1-p_n)\log^2 d_n &= \frac{\sigma^2T}{n}+\enbrace{\frac{\enbrace{\mu-\frac{1}{2}\sigma^2}T}{n}}^2
+\end{aligned}
+\end{equation*}
+welche durch
+\begin{equation*}
+\begin{aligned}
+	\log u_n &= \frac{\enbrace{\mu-\frac{1}{2}\sigma^2}T}{n}+\enbrace{\frac{1-p_n}{p_n}\frac{\sigma^2T}{n}}^{\frac{1}{2}}\\
+	\log d_n &= \frac{\enbrace{\mu-\frac{1}{2}\sigma^2}T}{n}-\enbrace{\frac{1-p_n}{p_n}\frac{\sigma^2T}{n}}^{\frac{1}{2}}
+\end{aligned}
+\end{equation*}
+Strebt $p_n\to p\in (0,1)$ für $n\to \infty$, so ist
+\[
+d_n<\underbracket{e^{r\frac{T}{n}}}_{=1+\zeta_n}< u_n
+\]
+denn 
+\begin{equation*}
+\begin{aligned}
+	\log u_n &\sim \enbrace{\frac{1-p_n}{p_n}\frac{\sigma^2T}{n}}^{\frac{1}{2}}>r\frac{T}{n}\\
+	\log d_n &\sim -\enbrace{\frac{1-p_n}{p_n}\frac{\sigma^2T}{n}}^{\frac{1}{2}}<r\frac{T}{n}
+\end{aligned}
+\end{equation*}
+Im folgenden setze die Sprungwahrscheinlichkeit
+\[
+p_n=p\in (0,1)~\forall n\in \N
+\]
+setze $\eta=\mu-\frac{1}{2}\sigma^2$.\\
+Definiere mit dem diskreten CRR-Aktienprozess $(S_n(t_j))_{j=0\dt{,}n}$ einen stochastischen Prozess, mit $(S_n(t))_{0\le t\le T}$ durch
+\[
+S_n(t)=S_n(t_{i-1})\text{ für } t_{i-1}\le t<t_i~\forall 1\le i\le n
+\]
+Für festes $t\in[0,T]$ und für $i_n=\rfloor n\frac{t}{T}\lfloor$ gilt:
+\[
+i_n\frac{T}{n}\le t<(i_n+1)\frac{T}{n},~\frac{i_n}{n}\to \frac{t}{T}
+\]
+Mit Hilfe des zentralen Grenzwertsatzes für Dreiecksschemata gilt:
+\begin{equation*}
+\begin{aligned}
+	\log\frac{S_n(t)}{S_n(0)} &= \log\enbrace{\frac{S_n\enbrace{i_n\frac{T}{n}}}S_n(0)}\\
+	&=\underbracket{\log\enbrace{\frac{S_n\enbrace{i_n\frac{T}{n}}}S_n(0)}-i_n\frac{1}{n}\enbrace{\mu-\frac{1}{2}\sigma^2}T}_{\to N(0,\sigma^2t)\text{ in Vert. nach CLT}}+\underbracket{\frac{i_n}{n}\enbrace{\mu-\frac{1}{2}\sigma^2}T}_{\to \enbrace{\mu-\frac{1}{2}\sigma^2}t}
+\end{aligned}
+\end{equation*}
+da
+\begin{equation*}
+\begin{aligned}
+	\E\log\enbrace{\frac{S_n\enbrace{i_n\frac{T}{n}}}{S_n(0)}}&= i_n\frac{1}{n}\enbrace{\mu-\frac{1}{2}\sigma^2}T\\
+	\V\log\enbrace{\frac{S_n\enbrace{i_n\frac{T}{n}}}{S_n(0)}}&= i_n\frac{1}{n}\sigma^2T
+\end{aligned}
+\end{equation*}
+Also gilt:
+\[
+\log\enbrace{\frac{S_n(t)}{S_n(0)}}\stackrel{n\to\infty}{\to} N\enbrace{\enbrace{\mu-\frac{1}{2}\sigma^2}t,\sigma^2t}\text{ in Verteilung}
+\]
+Da 
+\[
+\log\enbrace{\frac{S(t)}{S(0)}}\sim N\enbrace{\enbrace{\mu-\frac{1}{2}\sigma^2}t,\sigma^2t}
+\]
+folgt hieraus
+\[
+S_n(t)\stackrel{n\to\infty}{\to}S(t)\text{ Konvergenz in Verteilung (mit d bezeichnet).}
+\]
+Für $0<s_1<s_2\dt{<}s_k\le T$ folgt wegen der Unabhängigkeit und Stationarität von $\enbrace{\log\frac{S_n(t_j)}{S_n(0)}}_{j=0\dt{,}n}$ analog mit dem CLT, dass
+\[
+\enbrace{\log\enbrace{\frac{S_n(s_1)}{S_n(0)}}\dt{,}\log\enbrace{\frac{S_n(s_k)}{S_n(0)}}}\stackrel{\text{d}}{\to}\enbrace{\log\enbrace{\frac{S(s_1)}{S(0)}}\dt{,}\log\enbrace{\frac{S(s_k)}{S(0)}}}
+\]
+Hieraus erhält man, dasss die Familie der endlich dimensionalen Verteilungen von $S_n$ gegen die Familie der endlich dimensionalen Verteilungen von $S$ konvergieren.
+Genauer: Für alle $0<t_1\dt{<}t_k\le T,~k\in \N$ gilt
+\[
+\enbrace{S_n(t_1)\dt{,}S_n(t_k)}\stackrel{\text{d}}{\to}\enbrace{S(t_1)\dt{,}S(t_k)}
+\]
+Zusammen mit einer \Index{Straffheitsbedingung} folgt hieraus die schwache Konvergenz von $(S_n)_{n\in \N}$ gegen $S$ in $\mathds{D}[0,T]$, wobei
+\[
+\mathds{D}[0,T]=\penbrace{x:[0,T]\to\R~|~x \text{ ist rechtsseitig stetig und hat linksseitige Limites}}
+\]
 
 
 
