@@ -2552,7 +2552,7 @@ Für $T$ selbstadjungiert gilt
 \minisec{Beweis}
 Sei $\beta$ das Infimum auf der rechten Seite. Dann gilt
 \begin{align*}
-	2 \abs*{\skal*{x}{T x}} = \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \stackrel{\mbox{\scriptsize \ref{sub:727}}}{\le} 2 \beta \norm{x} \cdot \norm{y} 
+	2 \cdot \abs*{\skal*{x}{T x}} = \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \stackrel{\mbox{\scriptsize \ref{sub:727}}}{\le} 2 \cdot \beta \norm{x} \cdot \norm{y} 
 \end{align*}
 Nach \ref{sub:726} folgt $\norm{T} \le \beta \le \norm{T}$. \bewende
 % subsection 729 (end)
@@ -2584,8 +2584,87 @@ insbesondere gilt $\skal*{x}{T x}=0 \iff T x=0$
 \minisec{Beweis}
 \emph{Übung, für die letzte Aussage benutze \ref{sub:74} und: $(y,x) \mapsto \skal*{y}{T x}$ ist positiv semidefinit hermitesch.}
 % subsection 731 (end)
-% section 7 (end)
 
+\subsection{Satz} % (fold)
+\label{sub:732}
+Sei $(T_j)_{j \in I} \subset \mathcal{L}(\mathcal{H})_\sa$ ein monoton wachsendes und beschränktes Netz selbstadjungierter Operatoren. Dann konvergiert $(T_j)_{j \in I}$
+punktweise gegen ein $T \in \mathcal{L}(\mathcal{H})_\sa$, das heißt $T_j x \to T x$ in Norm für jedes $x \in \mathcal{H}$. Wir schreiben auch $T_j \xrightarrow{\so} T$,
+d.h. $(T_j)_{j \in I}$ konvergiert gegen $T$ in der \bet{starken Operatortopologie}\index{starke Operatortopologie}.
+\minisec{Beweis}
+Nach Polarisierung (vergleiche \hyperref[sub:78]{Bemerkung \ref*{sub:78}}) gilt (für $\mathds{K}=\mathds{C}$)
+\[
+	\skal[\big]{x}{T_j y} = \frac{1}{4} \enbrace[\Big]{\skal[\big]{x+y}{T_j(x+y)} + \skal[\big]{x-y}{T_j(x-y)} + i \skal[\big]{i x +y}{T_j(ix +y)} 
+	- i \skal[\big]{i x -y}{T_j(ix-y)}}
+\]
+Die rechte Seite konvergiert (warum?), also auch die linke Seite. $\Rightarrow$ Für jedes $x \in \mathcal{H}$ konvergiert 
+$\skal*{x}{T_j(\cdot)} \colon \mathcal{H} \to \mathds{C}$ gegen ein $\varphi_x \colon \mathcal{H} \to \mathds{C}$. Aber $\varphi_x \in \mathcal{H}^*$ (warum?). Es gilt
+\begin{equation*}
+	\norm[\mathcal{H}^*]{\varphi_x} \le \limsup_j \norm{T_j} \norm{x} < \infty. 
+\end{equation*}
+Die Abbildung $x \mapsto \kappa ^{-1}(\varphi_x)$ ist linear (warum?). Definiere 
+$T \colon \mathcal{H} \to \mathcal{H}$ durch $T(x) := \kappa ^{-1}(\varphi_x)$. Es gilt $\norm{T(x)} = \norm{\varphi_x}$, also $\norm{T}\le\limsup_j \norm{T_j} \le \infty$.
+Damit ist $T \in \mathcal{L}(\mathcal{H})$. Außerdem gilt für $x,y \in \mathcal{H}$
+\begin{align*}
+	\skal*{T x}{y} = \kappa(T x)(y) = \varphi_x(y) = \lim_j \skal[\big]{x}{T_j y} = \lim_j \skal*{T_j x}{y} = \overline{\lim_j \skal*{y}{T_j x}} 
+	= \overline{\varphi_y(x)} &= \overline{\skal*{T y}{x}}\\  &= \skal*{x}{T y}  
+\end{align*}
+Also ist $T$ auch selbstadjungiert. Es gilt für $\lim_j \skal*{x}{T_j y} = \skal*{x}{T y}$ für $x,y \in \mathcal{H}$, das heißt $T_j \xrightarrow{\mathrm{w.o.}} T$
+($T_j \to T$ in der schwachen Operatortopologie). Für $j \ge j'$ gilt $T_j - T_{j'} \ge 0$, also nach \ref{sub:731} für $x \in \mathcal{H}$
+\begin{align*}
+	\skal[\Big]{\enbrace*{T_j - T_{j'}}(x)}{\enbrace*{T_j - T_{j'}}(x)} &\le \skal[\Big]{x}{\enbrace*{T_j - T_{j'}}(x) } \cdot 
+	\skal*{\enbrace*{T_j - T_{j'}}(x)}{\enbrace*{T_j - T_{j'}}^2(x) } \\
+	&\le \skal[\Big]{x}{\enbrace*{T_j - T_{j'}}(x)} \cdot \enbrace*{2 \cdot \limsup_j \norm{T_j} }^3 \cdot \norm{x}^2 <  \varepsilon
+\end{align*}
+falls $j'$ groß genug ist. Also $\norm{T_j(x-)- T_{j'}(x)}< \varepsilon$ falls $j \ge j'$ groß. Damit folgt dann $T_j(x) \to T(x)$ in Norm (warum?). \bewende
+% subsection 732 (end)
+% section 7 (end)
+\newpage
+
+\section{Kompakte Operatoren und ein Spektralsatz} % (fold)
+\label{sec:8}
+
+\subsection[Definition: Spektrum eines Bachnachraumes]{Definition} % (fold)
+\label{sub:81}
+Sei $X$ ein $\mathds{K}$-Banachraum und $T \in \mathcal{L}(X)$. Wir definieren das \Index{Spektrum} von $T$ als \todo{RevChap8}
+\[
+	\sigma(T) := \set[\lambda \in \mathds{K}]{T- \lambda \cdot \id_X \text{ ist nicht invertierbar}} \subset \mathds{K} \marginnote{auch $\spec(T)$} 
+\]
+Die \Index{Resolventenmenge} ist $\res(T) :=  \rho(T) := \mathds{K} \setminus \sigma(T)$. Wir schreiben $\resolv(T,\lambda) := (T- \lambda \cdot \id_X) ^{-1}$ für
+die \Index{Resolvente} von $T$ in $\lambda \in \rho(T)$. 
+% subsection 81 (end)
+
+\subsection[Bemerkung zum Zusammenhang von Spektralwerten und Eigenwerten]{Bemerkung} % (fold)
+\label{sub:82}
+\begin{enumerate}[(i)]
+	\item Jeder Eigenwert von $T$ ist ein Spektralwert.
+	\item Für $X$ endlichdimensional gilt auch die Umkehrung, für beliebige $X$ jedoch nicht: Sei $X=\ell^2(\mathds{N})$, dann ist $S \in \mathcal{L}\enbrace[\big]{\ell^2(\mathds{N})}$
+	gegeben durch $S(x_0, x_i, \ldots) := (0,x_0, x_1, \ldots)$ (\Index{unilateraler Shift}) linear, stetig und sogar isometrisch, aber \emph{nicht} surjektiv. Dann ist
+	$0 \in \sigma(S)$, aber $0$ ist kein Eigenwert, da $S$ injektiv ist.
+\end{enumerate}
+% subsection 82 (end)
+
+\subsection{Proposition} % (fold)
+\label{sub:83}
+Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). Falls für $S \in \mathcal{L}(X,Y)$ gilt 
+\[
+	\norm[\mathcal{L}(X,Y)]{T-S} < \norm[\mathcal{L}(Y,X)]{T^{-1}}^{-1}, 
+\]
+so ist auch $S$ bijektiv.
+\minisec{Beweis}
+Es gilt $S= T \enbrace[\big]{\id_X - T ^{-1}(T-S)}$. Für $k \le l$ gilt mit $C := \norm{T ^{-1}} \cdot \norm{T-S} < 1$ 
+\begin{align*}
+	\norm{\sum_{n=k}^{l} \enbrace[\big]{T^{-1}(T-S)}^n } \le \sum_{n=k}^{l} \norm{\enbrace[\big]{T ^{-1}(T-S)}^n} \le \sum_{n=k}^{l} \norm{T ^{-1}} \cdot \norm{T-S}^n
+	= \sum_{n=k}^{l} C^n      
+\end{align*}
+also ist $\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n$ konvergent in $\mathcal{L}(X,X)$. Weiter ist 
+$\enbrace*{\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n} T ^{-1} \in \mathcal{L}(Y,X)$ das Inverse von $S$ (warum?). \bewende
+% subsection 83 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:84}
+Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.
+% subsection 84 (end)
+% section 8 (end)
 
 \cleardoubleoddemptypage
 \appendix
