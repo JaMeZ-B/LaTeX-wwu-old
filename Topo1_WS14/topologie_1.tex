@@ -296,7 +296,7 @@ Sei $K=(V,\Sigma)$ ein endlicher simplizialer Komplex. Dann ist $K$ ein Unterkom
 
 \subsection[Definition: Simpliziale Abbildung]{Definition} % (fold)
 \label{sub:25}
-Eine \Index{simpliziale Abbildung} $f : K_1=(V_1, \Sigma_1) \to K_2(V_2, \Sigma_2)$ zwischen simplizialen Komplexen ist eine Abbildung $f : V_1 \to V_2$, sodass 
+Eine \Index{simpliziale Abbildung} $f \colon K_1=(V_1, \Sigma_1) \to K_2(V_2, \Sigma_2)$ zwischen simplizialen Komplexen ist eine Abbildung $f \colon V_1 \to V_2$, sodass 
 $f(\sigma_1) \in \Sigma_2$ für alle $\sigma_1 \in \Sigma_1$. 
 % subsection 25 (end)
 
@@ -2621,8 +2621,8 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	\]
 	\item $S^n$ mit $(S^n)^{(k)} = \set{(x_0, \ldots ,x_k,0, \ldots ,0) \in S^n} $ ist ebenfalls eine \CW-Struktur auf $S^n$.
 	\item Sei $K=(V,\Sigma)$ ein simplizialer Komplex. Es ist $\abs*{\Delta^n} \cong D^n$ und $\abs*{\partial \Delta^n} \cong S^{n-1}$. Sei 
-	$\Sigma^{(n)} := \Sigma_0 \cup \Sigma_1 \cup \ldots \cup \Sigma_n$. Dann wir $\abs*{K}$ durch $\abs*{K}^{(n)} := \abs*{\enbrace*{V,\Sigma^{(n)}}}$ für $n \ge 0$ zu 
-	einem \CW-Komplex. Ist $f \colon K \to L$ eine simpliziale Abbildung, so ist $\abs*{f} \colon \abs*{K} \to \abs*{L}$ eine zelluläre Abbildung.
+	$\Sigma^{(n)} := \Sigma_0 \cup \Sigma_1 \cup \ldots \cup \Sigma_n$. Dann wird $\abs*{K}$ durch $\abs*{K}^{(n)} := \abs*{\enbrace*{V,\Sigma^{(n)}}}$ für $n \ge 0$ zu 
+	einem \CW-Komplex. Ist $f \colon K \to L$ eine \hyperref[sub:25]{simpliziale Abbildung}, so ist $\abs*{f} \colon \abs*{K} \to \abs*{L}$ eine zelluläre Abbildung.
 	\item \label{enum:115:4}Der $n$-dimensionale reelle projektive Raum $\mathds{R}P^n$ kann definiert werden durch\index{reell projektiver Raum} 
 	\[
 		\mathds{R}P^n := \nicefrac{\mathds{R}^{n+1} \setminus \set{0}}{x \sim \lambda x} = \nicefrac{S^n}{x \sim -x}
@@ -2988,9 +2988,9 @@ Wir müssen die Randabbildung verstehen. In der \CW-Struktur können wir $(\math
 $q^\ssbrace{k+1} \colon S^k \to \mathds{R}P^k$ der $(k+1)$-Zelle ist die Projektion $(x_0, \ldots ,x_k) \mapsto [x_0 : \ldots : x_k]$. Die charakteristische Abbildung 
 $Q^\ssbrace{k+1} \colon D^{k+1} \to \mathds{R}P^{k+1}$ der $(k+1)$-Zelle ist gegeben durch 
 \[
-	(x_0, \ldots ,x_k) \mapsto \benbrace*{x_0 : \ldots : x_k : {\textstyle\sqrt{\cramped 1- \norm[2]{(x_1,\ldots, x_k)}^2}}} 
+	(x_0, \ldots ,x_k) \mapsto \benbrace*{x_0 : \ldots : x_k : {\textstyle\sqrt{\cramped 1- \norm{(x_1,\ldots, x_k)}^2}}} 
 \]
-Betrachte folgendes kommutatives Diagramm:
+Betrachte folgendes kommutatives Diagramm:\marginnote{Das linke untere Quadrat kommutiert, da die Randabbildung aus der Paarfolge eine natürliche Transformation ist. Das rechte, da die zugrunde liegenden Abbildungen kommutieren.}
 \[
 	\begin{tikzcd}[column sep=huge, row sep=large]
 		C_{k+1}^{\cell}(\mathds{R}P^n) \arrow[rr,"\partial_{k+1}^{\cell}"] \dar[equal] & & C_k^{\cell}(\mathds{R}P^n) \dar[equal]\\
@@ -3006,45 +3006,52 @@ Das Bild von $\partial_{k+1}^{\cell}$ stimmt also mit dem Bild der Komposition
 		H_k(S^k) \rar["j_*"] & H_k(S^k,S^{k-1}) \rar["\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_*"] & H_k \enbrace*{\mathds{R}P^k, \mathds{R}P^{k-1}} 
 	\end{tikzcd}
 \]
-überein. Sei $i_{\pm} \colon D^k \to S^k$ definiert durch $i_{\pm}(x)= \enbrace[\big]{\pm x,\pm\sqrt{\cramped 1-{\scriptscriptstyle\norm[2]{\textstyle x}^{2}}}}$. Sei $l\colon S^{k-1} \to i_-(D^k)$ die Inklusion und 
-$R \colon S^k \to S^k$ die Punktspiegelung $x \mapsto -x$. Es ist $i_+ = R \circ i_-$. Betrachte\marginnote{Die beiden Isomorphien haben wir in den Übungen gezeigt}
+überein. Sei $i_{\pm} \colon D^k \to S^k$ definiert durch $i_{\pm}(x)= \enbrace[\big]{\pm x,\pm\sqrt{\cramped 1-{\scriptscriptstyle\norm{\textstyle x}^{2}}}}$. Sei 
+$l\colon S^{k-1} \hookrightarrow i_-(D^k)$ die Inklusion und $R \colon S^k \to S^k$ die Punktspiegelung $x \mapsto -x$. Es ist $i_+ = R \circ i_-$. Betrachte
 \begin{equation*}
 	\begin{tikzcd}[column sep=huge, row sep=large]
 		& \tilde{H}_k(S^k) \dar["j_*"] \\
-		\bigoplus\limits_{\displaystyle H_k(D^k,S^{k-1})}^{\displaystyle H_k(D^k,S^{k-1})} 
+		\bigoplus\limits_{\displaystyle {\color{light_gray}y_- \in } H_k(D^k,S^{k-1})}^{\displaystyle {\color{light_gray}y_+ \in }H_k(D^k,S^{k-1})} 
 		\rar["\bigplus\limits^{\scriptstyle(i_+,i_+|_{S^{k-1}})_*}_{\scriptstyle(i_-,i_-|_{S^{k-1}})_*}","\cong"'] 
 		& H_k(S^k,S^{k-1}) \dar["\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_*"] \rar["\cong"',"{\begin{pmatrix}
 			\enbrace*{\id_{S^k},l}_* \\ \enbrace{R,R|_{S^{k-1}}}_*
 		\end{pmatrix}}"] 
-		& \bigoplus\limits_{\displaystyle H_k \enbrace*{S^k,i_-(D^k)} }^{\displaystyle H_k \enbrace*{S^k,i_-(D^k)}} \\
+		& \bigoplus\limits_{\displaystyle H_k \enbrace*{S^k,i_-(D^k)} {\color{light_gray} \ni x_-}}^{\displaystyle H_k \enbrace*{S^k,i_-(D^k)} {\color{light_gray} \ni x_+}} \\
 		& H_k \enbrace*{\mathds{R}P^k,\mathds{R}P^{k-1}} 
 	\end{tikzcd}
 	\label{eq:1213} \tag{\#}
 \end{equation*}
-Sei $x \in \tilde{H}_k(S^k)$ ein Erzeuger. Seien $(x_+,x_-)$ und $(y_+,y_-)$ die Elemente, die $j_+(x)$ unter den horizontalen Isomorphismen in \eqref{eq:1213} 
-entsprechen, wobei $(x_+,x_-)$ Element des rechten Moduls und $(y_+,y_-)$ des linken Moduls ist.
-Mit Hilfe der Paarfolge zu $(S^k,i_-(D^k))$ sehen wir, dass $x_+$ ein Erzeuger von $H_k(S^k, i_-(D^k))$ ist. Es ist $x_+ = \enbrace*{\id_{S^k},l}_* \enbrace*{j_*(x)} $ und
+In der Übungen haben wir gesehen, dass die horizontalen Abbildungen Isomorphismen sind.\todo{eventuell in Anhang?}
+Sei $x \in \tilde{H}_k(S^k)$ ein Erzeuger. Seien $(x_+,x_-)$ und $(y_+,y_-)$ die Elemente, die $j_*(x)$ unter den horizontalen Isomorphismen in \eqref{eq:1213} entsprechen.
+Mit Hilfe der Paarfolge zu $\enbrace{S^k,i_-(D^k)}$ sehen wir, dass die Inklusion $j_- \colon (S^k, \emptyset) \hookrightarrow \enbrace{S^k,i_-(D^k)}$ einen
+Isomorphismus $(j_-)_* \colon \tilde{H}_k(S^k) \to \tilde{H}_k \enbrace{S^k, i_-(D^k)}$ induziert. Es ist nun $(\id_{S^k},l) \circ j = j_-$ und 
+$(R,R|_{S^{k-1}}) \circ j= j_- \circ R$. Damit ist $x_+$ ein Erzeuger von $H_k(S^k,i_+(D^k))$. Weiter entspricht $R_*$ der Multiplikation mit $(-1)^{k+1}$ nach \ref{sub:106}.
+Damit folgt
 \begin{align*}
 	 x_- = \enbrace*{R,R\big|_{S^{k+1}}}_* \circ j_* (x) = \enbrace*{\id_{S^k},l} \circ j_* \circ R_*(x) = \enbrace*{\id_{S^k},l}_* \circ j_* \enbrace*{(-1)^{k+1}x} = 
-	 (-1)^{k+1}x_+    
+	 (-1)^{k+1}\cdot x_+    
 \end{align*}
-Die Komposition der horizontalen Isomorphismen in \eqref{eq:1213} ist gegeben durch 
+% Da $(\id_{S^k},l) \circ (i_+,i_+|_{S^{k-1}}) = (R,R|_{S^{k-1}}) \circ (i_-,i_-|_{S^{k-1}})$, folgt auch $y_- = (-1)^{k+1} y_+$.
+Die Komposition der horizontalen Isomorphismen in \eqref{eq:1213} ist gegeben durch \\
+\emph{Da bin ich anderer Meinung, bzw. sehe ich nicht ein warum \ldots}\todo{Problem beheben/Details hinzufügen}
 \[
 	\begin{pmatrix}
 		\enbrace*{i_+,l \circ i_+|_{S^{k-1}}}_* & 0 \\
-		0 & \enbrace*{R,R|_{S^{k-1}}}_*  \circ \enbrace*{i_-, i_-|_{S^{k-1}}}_* 
-	\end{pmatrix}= 
+		0 & \enbrace*{R,R|_{S^{k-1}}}_*  \circ \enbrace*{i_-, i_-|_{S^{k-1}}}_*
+	\end{pmatrix}=
 	\begin{pmatrix}
 		\enbrace*{i_+, l \circ i_+|_{S^{k-1}}}_* & \\
-		& \enbrace*{i_+,l \circ i_+|_{S^{k-1}}}_*  
+		& \enbrace*{i_+,l \circ i_+|_{S^{k-1}}}_*
 	\end{pmatrix}
 \]
-Es folgt, dass $y_+$ ein Erzeuger von $H_k(D^k,S^{k-1})$ ist und $y_- = (-1)^{k+1} y_+$ ist. In \eqref{eq:1213} wird $y_+$ auf $\enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_*(y_+)$
-abgebildet. Insbesondere wird $y_+$ auf einen Erzeuger $z_k \in H_k(\mathds{R}P^k,\mathds{R}P^{k-1})$ abgebildet. Es folgt 
+Es folgt, dass $y_+$ ein Erzeuger von $H_k(D^k,S^{k-1})$ ist und $y_- = (-1)^{k+1} y_+$\todo{Für die Gleichung unten brauchen wir doch $\scriptscriptstyle\enbrace*{i_-,i_-|_{S^{k-1}}}_*(y_-) = (-1)^{k+1} \enbrace*{i_+,i_+|_{S^{k-1}}}_*(y_+)$ ??} ist. In \eqref{eq:1213} wird $y_+$ auf 
+$(q^\ssbrace{k+1},q^\ssbrace{k}) \circ (i_+,i_+|_{S^{k-1}}) = \enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_*(y_+)$
+abgebildet. Insbesondere wird $y_+$ auf einen Erzeuger $z_k \in H_k(\mathds{R}P^k,\mathds{R}P^{k-1})$ abgebildet, da diese Abbildung nach \ref{sub:125} ein Isomorphismus 
+ist. Es folgt 
 \begin{align*}
-	\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace*{j_*(x)} &= \enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace*{\enbrace*{i_+,i_+\big|_{S^{k-1}}}_*(y_+) +
+	\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace[\big]{j_*(x)} &= \enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace*{\enbrace*{i_+,i_+\big|_{S^{k-1}}}_*(y_+) +
 	\enbrace*{i_-,i_-\big|_{S^{k-1}}}_*(y_-) } \\
-	&= \enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_* \enbrace*{y_+ (-1)^{k+1} y_+} \\
+	&= \enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_* \enbrace*{y_+ + (-1)^{k+1} y_+} \\
 	& = \begin{cases}
 		2 z_k, &\text{ falls }k \text{ ungerade}\\
 		0 , &\text{ sonst}
@@ -3063,7 +3070,9 @@ Der zelluläre Kettenkomplex ist daher isomorph zu:
 		\mathds{Z} & \mathds{Z} \lar["0"'] & \mathds{Z} \lar["2"'] & \mathds{Z} \lar["0"'] & \cdots \lar & \overset{n}{\mathds{Z}} \lar & 0 \lar & 0 \lar
 	\end{tikzcd}
 \]
-Für $R=\nicefrac{\mathds{Z}}{2 \mathds{Z}}$ ist somit
+Womit die Behauptung folgt. \bewende
+\minisec{Beispiel}
+Für $R=\nicefrac{\mathds{Z}}{2 \mathds{Z}}$ ist
 \[
 	H_k \enbrace*{\mathds{R}P^n; \nicefrac{\mathds{Z}}{2 \mathds{Z}}} = \begin{cases}
 		\nicefrac{\mathds{Z}}{2 \mathds{Z}}, &\text{ falls }k=0,\ldots ,n\\
@@ -3072,7 +3081,7 @@ Für $R=\nicefrac{\mathds{Z}}{2 \mathds{Z}}$ ist somit
 \]
 % subsection 1213 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Isomorphie zwischen $C_*(K;R)$ und $C^{\cell}_n \enbrace*{\abs*{K};R}$]{Satz} % (fold)
 \label{sub:1214}
 Sei $K$ ein geordneter simplizialer Komplex. Für $\sigma = \set{v_0, \ldots ,v_n} \in \Sigma_n$ mit $v_0 < v_1 < \ldots  < v_n$ sei 
 $f_\sigma \colon \abs*{\Delta^n} \to \abs*{K}$ gegeben durch $f_\sigma \enbrace*{\sum_{i=0}^{n} t_i e_i} = \sum_{i=0}^{n} t_i v_i$. Wir erhalten 
@@ -3093,7 +3102,7 @@ Betrachte
 		C_n(K;R) \rar["\tau"] & H_n \enbrace*{\abs*{K}^{(n)}, \abs*{K}^{(n-1)};R} 
 	\end{tikzcd}
 \]
-Nun ist auch $\tau$ ein Isomorphismus, da $[f_\sigma]$ ein Erzeuger von $H_n \enbrace*{\abs*{\Delta^\sigma}, \abs*{\partial \Delta^\sigma};R}$ ist, siehe Übungen. Es bleibt
+Nun ist auch $\tau$ ein Isomorphismus, da $[f_\sigma]$ ein Erzeuger von $H_n \enbrace*{\abs*{\Delta^\sigma}, \abs*{\partial \Delta^\sigma};R}$ ist, siehe Blatt 8. Es bleibt
 zu zeigen, dass $\sigma \mapsto  [f_\sigma]$ mit den Randabbildungen vertauscht. Dies ergibt sich sofort aus $f_{\partial_j \sigma} = \partial_j f_\sigma$.\bewende
 % subsection 1214 (end)
 % section 12 (end)
