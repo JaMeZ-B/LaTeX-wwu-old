@@ -622,7 +622,7 @@ Setze $\mathcal{S}(X) := \set[\varphi \colon X \to \mathds{R}]{\varphi \text{ su
 \subsection[Beispiele für sublineare Abbildungen]{Beispiele} % (fold)
 \label{sub:218}
 \begin{enumerate}[(i)]
-	\item Halbnormen sind sublinear.
+	\item Halbnormen\footnote{Es \enquote{fehlt} nur die positive Definitheit einer Norm.} sind sublinear.
 	\item \[
 		\begin{tikzpicture}[scale=0.5]
 			\draw (-3,0) -- (3,0) node[right]{$X$};
@@ -631,7 +631,7 @@ Setze $\mathcal{S}(X) := \set[\varphi \colon X \to \mathds{R}]{\varphi \text{ su
 			\draw[very thick,SeaGreen4] (40:4) -- (0,0) -- (205:4);
 		\end{tikzpicture}
 	\]
-	Benutze: $0 = \varphi(0) = \varphi(x-x) \le \varphi(x) + \varphi(-x)$. \todo{Rev Chap 2}
+	Benutze: $0 = \varphi(0) = \varphi(x-x) \le \varphi(x) + \varphi(-x)$.
 \end{enumerate}
 % subsection 218 (end)
 
@@ -641,7 +641,7 @@ Sei $X$ ein $\mathds{R}$-Vektorraum. $\mathcal{S}(X)$ ist nach unten \Index{indu
 \minisec{Beweis}
 Sei $\emptyset \not= (\varphi_i)_{I} \subseteq \mathcal{S}(X)$ total geordnet. Setze $\varphi(x) := \inf_{i \in I} \varphi_i(x)$, dann gilt 
 \[
-	- \varphi_i(-x) \le \varphi_i(x) \enspace\Longrightarrow \enspace- \varphi(x) \le \varphi(x) \le \varphi_i(x) < \infty
+	- \varphi_i(-x) \le \varphi_i(x) \enspace\Longrightarrow \enspace- \varphi(-x) \le \varphi(x) \le \varphi_i(x) < \infty
 \]
 ebenso $-\varphi(x) \le \varphi(-x) \le \varphi_i(-x)$ für $x \in X$, $i \in I$. Insbesondere gilt $- \infty <  \varphi(x) < \infty$, $x \in X$. 
 Die Sublinearität von $\varphi$ und $\varphi \le \varphi_i$, $i \in I$ sind klar (Warum?). \bewende
@@ -658,14 +658,16 @@ Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $
 		 \Longrightarrow \enspace- \psi(x) \le \psi(-x) \le \varphi(-x) = - \varphi(x)
 	\]
 	Daraus folgt $\varphi(x) \le \psi(x)$ und somit muss $\varphi=\psi$ gelten. Also ist $\varphi$ minimal.
-	\item["$\Rightarrow $":] Sei $\varphi \in \mathcal{S}(X)$ minimal. Zu $\overline{x} \in X$ definiere $\varphi_{\overline{x}} : X \to \mathds{R}$ durch
+	\item["$\Rightarrow $":] Sei $\varphi \in \mathcal{S}(X)$ minimal. Zu $\overline{x} \in X$ definiere $\varphi_{\overline{x}} \colon X \to \mathds{R}$ durch
 	\[
 		\varphi_{\overline{x}}(x) := \inf_{\lambda \ge 0} \enbrace[\Big]{\varphi \enbrace*{x+ \lambda \cdot \overline{x} } - \lambda \cdot \varphi(\overline{x})}
 	\]
-	Es gilt $\varphi_{\overline{x}}(x) \in (-\infty,\infty)$, denn für $x \in X, \lambda \ge 0$ ist \marginnote{mit (ii) aus \ref{sub:217}}
-	\[
-		-\varphi(-x) \le \varphi(x+ \lambda \cdot \overline{x}) - \lambda  \cdot \varphi(\overline{x}) \le \varphi(x)
-	\]
+	Es gilt $\varphi_{\overline{x}}(x) \in (-\infty,\infty)$, denn für $x \in X, \lambda \ge 0$ ist
+	\begin{align*}
+		&\hphantom{-}\,\, \varphi(\lambda \cdot \overline{x}) = \varphi(x+ \lambda \cdot \overline{x} -x ) \le \varphi(x + \lambda \cdot \overline{x}) + \varphi(-x)\\
+		\iff &- \varphi(\lambda \cdot \overline{x}) \ge - \varphi(-x) - \varphi(x + \lambda \cdot \overline{x}) \\
+		\iff & - \varphi(-x) \le \varphi(x + \lambda \cdot \overline{x}) - \lambda \cdot \varphi(\overline{x} ) \stackrel{\mbox{\scriptsize \ref{sub:217} (ii)}}{\le} \varphi(x)
+	\end{align*}
 	$\varphi_{\overline{x}}$ ist sublinear:
 	\begin{enumerate}[(i)]
 		\item Sei $\mu >0$. Dann gilt für $x \in X$.
@@ -687,14 +689,14 @@ Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $
 			\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) &\ge \varphi \enbrace*{ x+ \lambda_x \cdot \overline{x}} + 
 			\varphi \enbrace*{y+ \lambda_y \cdot \overline{x} } - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
 			&\ge  \varphi \enbrace*{x +y + \lambda \cdot \overline{x}} - \lambda  \cdot \varphi(\overline{x}) - 2 \varepsilon \\
-			&\ge \varphi_{\overline{x}} (x+y) - 2 \varepsilon
+			&\ge \varphi_{\overline{x}} (x+y) - 2 \varepsilon \tag*{(nach Definition)}
 		\end{align*}
 		Da $\varepsilon>0$ beliebig war, gilt $\varphi_{\overline{x}}(x) + \varphi_{\overline{x}}(y) \ge \varphi_{\overline{x}}(x+y)$. Also ist $\varphi_{\overline{x}}$
 		sublinear.
 	\end{enumerate}
-	$\varphi_{\overline{x}} \le \varphi$ ist klar. Da $\varphi$ minimal ist, folgt $\varphi_{\overline{x}} = \varphi$. Wir erhalten 
+	$\varphi_{\overline{x}} \le \varphi$ ist klar mit $\lambda=0$. Da $\varphi$ minimal ist, folgt $\varphi_{\overline{x}} = \varphi$. Wir erhalten 
 	\[
-		\varphi(x) + 1 \cdot \varphi(\overline{x}) \le \varphi(x+ 1 \cdot \overline{x}) \le \varphi(x) + 1 \cdot \varphi(\overline{x})
+		\varphi(x) + 1 \cdot \varphi(\overline{x}) \le \varphi(x+ 1 \cdot \overline{x}) \stackrel{\text{sublinear}}{\le} \varphi(x) + 1 \cdot \varphi(\overline{x})
 	\]
 	für jedes $x, \overline{x}\in X$. Also ist $\varphi$ additiv und somit linear. \bewende
 \end{description}
@@ -703,54 +705,56 @@ Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$. Dann ist $
 \subsection{Satz von Hahn-Banach} % (fold)
 \label{sub:221}
 Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \in \mathcal{S}(X)$.\marginnote{$X$ ist nicht zwangsweise endlich-dimensional!}
-Dann existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \varphi$.
+Dann existiert $\psi \colon X \to \mathds{R}$ linear mit $\psi \le \varphi$.
 \minisec{Beweis}
 Sei $\mathcal{S}_\varphi : =\set[\varphi' \in \mathcal{S}(X)]{\varphi' \le \varphi} \ni \varphi$. Nach Proposition \ref{sub:219} ist $\mathcal{S}(X)$ und damit auch 
 $\mathcal{S}_\varphi$ nach unten induktiv geordnet. Nach dem Lemma von Zorn enthält $\mathcal{S}_\varphi$ ein minimales Element $\psi$. $\psi$ ist auch minimal in 
-$\mathcal{S}(X)$ \hfill (Warum?)\\
+$\mathcal{S}(X)$ (Warum?).
 Also ist $\psi$ linear nach Proposition \ref{sub:220}. \bewende \medskip \\
 Wichtige Folgerungen: Fortsetzungs- und Trennungssätze.
 % subsection 221 (end)
 
-\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung]{Satz} % (fold)
+\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung (mit sublinearer Schranke)]{Satz} % (fold)
 \label{sub:222}
-Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi : X \to \mathds{R}$ sublinear. Sei $Y \subset X$ ein linearer Unterraum und $\psi : Y \to \mathds{R}$ linear mit
-$\psi \le \varphi\big|_{Y}$. Dann existiert $\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi}\big|_Y = \psi$ und $\overline{\psi} \le \varphi$.
+Sei $X$ ein $\mathds{R}$-Vektorraum und $\varphi \colon X \to \mathds{R}$ sublinear. Sei $Y \subset X$ ein linearer Unterraum und $\psi \colon Y \to \mathds{R}$ linear mit
+$\psi \le \varphi\big|_{Y}$. Dann existiert $\overline{\psi} \colon X \to \mathds{R}$ linear mit $\overline{\psi}\big|_Y = \psi$ und $\overline{\psi} \le \varphi$.
 \minisec{Beweis}
-Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch $\tilde{\varphi}(x) := \inf_{y \in Y} \enbrace[\big]{ \varphi(x-y) + \psi(y)}$, $x \in X$. Es gilt
+Definiere $\tilde{\varphi} \colon X \to \mathds{R}$ durch $\tilde{\varphi}(x) := \inf_{y \in Y} \enbrace[\big]{ \varphi(x-y) + \psi(y)}$, $x \in X$. Es gilt
+$0 \le \varphi(x +y - x-y) \le \varphi(x-y) + \varphi(-x) + \varphi(y)$, womit folgt
 \[
 	\varphi(x-y) + \psi(y) \ge \varphi(-y) - \varphi(-x) - \psi(-y) \ge - \varphi(-x) > -\infty \qquad \forall x \in X, y \in Y
 \]
-Also ist $\tilde{\varphi}$ wohldefiniert. $\tilde{\varphi}$ ist sublinear: vergleiche \ref{sub:220}. Nach Satz von Hahn-Banach (\ref{sub:221}) existiert ein 
-$\overline{\psi} : X \to \mathds{R}$ linear mit $\overline{\psi} \le \tilde{\varphi}$. Aus \ref{sub:220} folgt, dass $\overline{\psi}$ minimal in $\mathcal{S}(X)$ ist.
-Ebenso ist $\overline{\psi}\big|_{Y}$ minimal in $\mathcal{S}(Y)$. Also gilt
+Also ist $\tilde{\varphi}$ wohldefiniert. Analog zu \ref{sub:220} folgt, dass $\tilde{\varphi}$ sublinear ist. Nach dem Satz von Hahn-Banach (\ref{sub:221}) existiert ein 
+$\overline{\psi} \colon X \to \mathds{R}$ linear mit $\overline{\psi} \le \tilde{\varphi} \le \varphi$. Es bleibt nur $\overline{\psi}|_Y=\psi$ zu zeigen.
+
+Aus $\tilde{\varphi}(y_0) = \inf_{y \in Y}\varphi(y_0-y) + \psi(y)$ folgt $\tilde{\varphi}|_{Y} \le \psi$ mittels $y=y_0$. Weiter folgt aus \ref{sub:220}, dass $\psi$ minimal in 
+$\mathcal{S}(Y)$ ist. Also muss insgesamt gelten:
 \[
-	\overline{\psi} \le \tilde{\varphi}\big|_{Y} \le \psi \quad \Rightarrow \quad \psi = \overline{\psi}\big|_{Y} \bewende  
+	\overline{\psi}\big|_Y \le \tilde{\varphi}\big|_{Y} \le \psi \quad \Longrightarrow \quad \psi = \overline{\psi}\big|_{Y} \bewende  
 \]
 % subsection 222 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung (mit Halbnorm)]{Satz} % (fold)
 \label{sub:223}
-Sei nun $X$ ein $\mathds{K}$-Vektorraum und $p : X \to \mathds{R}$ eine Halbnorm. Sei $Y \subset X$ ein Untervektorraum und $\psi : Y \to \mathds{K}$ linear mit
-$\abs*{\psi(y)} \le p(y)$ für $y \in Y$. Dann existiert $\overline{\psi} : X \to \mathds{K}$ linear mit $\overline{\psi}\big|_{Y} = \psi$ und 
+Sei nun $X$ ein $\mathds{K}$-Vektorraum und $p \colon X \to \mathds{R}$ eine Halbnorm. Sei $Y \subset X$ ein Untervektorraum und $\psi \colon Y \to \mathds{K}$ linear mit
+$\abs*{\psi(y)} \le p(y)$ für $y \in Y$. Dann existiert $\overline{\psi} \colon X \to \mathds{K}$ linear mit $\overline{\psi}\big|_{Y} = \psi$ und 
 \[
 	\abs*{\overline{\psi}(x) } \le p(x) \quad \text{ für } x \in X 
 \]
 \minisec{Beweis}
-Sei zunächst $\mathds{K}=\mathds{R}$. $p$ ist sublinear und es gilt $\psi \le p\big|_{Y}$. Nach \ref{sub:222} existiert eine lineare Fortsetzung 
-$\overline{\psi} : X \to \mathds{R}$ mit $\overline{\psi} \le p$. Es gilt auch
+Sei zunächst $\mathds{K}=\mathds{R}$. $p$ ist sublinear und es gilt $\psi \le p|_{Y}$. Nach \ref{sub:222} existiert eine lineare Fortsetzung 
+$\overline{\psi} \colon X \to \mathds{R}$ mit $\overline{\psi} \le p$. Es gilt auch
 \begin{align*}
 	- \overline{\psi}(x) =  \overline{\psi}(-x) \le p(-x)  = p(x) \quad \Longrightarrow \quad \abs*{\overline{\psi}(x) } \le p(x) \quad \text{ für } x \in X
 \end{align*}
-Sei nun $\mathds{K}=\mathds{C}$. Definiere $\psi_1 := \re(\psi) : Y \to \mathds{R}$. $\psi_1$ ist $\mathds{R}$-linear (warum?). Es gilt 
-$\abs*{\psi_1(y)} \le \abs*{\psi(y)} \le p(y)$, $y \in Y$. Es existiert also ein $\overline{\psi}_1 : X \to \mathds{R}$ $\mathds{R}$-linear mit
+Sei nun $\mathds{K}=\mathds{C}$. Definiere $\psi_1 := \re(\psi) \colon Y \to \mathds{R}$. Dann ist $\psi_1$ $\mathds{R}$-linear (warum?). Es gilt 
+$\abs*{\psi_1(y)} \le \abs*{\psi(y)} \le p(y)$, $y \in Y$. Es existiert also ein $\mathds{R}$-lineares $\overline{\psi}_1 \colon X \to \mathds{R}$  mit
 \[
 	\overline{\psi}_1 (y) = \psi_1(y), \enspace y \in Y \quad \text{ und } \quad \abs*{\overline{\psi}_1(x)} \le p(x) , \enspace x \in X 
 \]
-Definiere jetzt $\overline{\psi} : X \to \mathds{C}$ durch $\overline{\psi}(x) := \overline{\psi}_1(x) - i \cdot \overline{\psi}_1(i \cdot x)$, $x \in X$.
+Definiere jetzt $\overline{\psi} \colon X \to \mathds{C}$ durch $\overline{\psi}(x) := \overline{\psi}_1(x) - i \cdot \overline{\psi}_1(i \cdot x)$, $x \in X$.
 Dann ist $\overline{\psi}$ $\mathds{C}$-linear (warum?). Weiter gilt $\overline{\psi}(y) = \psi(y)$ für $y \in Y$.
 ($\re(\overline{\psi}\big|_{Y})= \re(\psi)$ und $\overline{\psi}\big|_{Y}$ und $\psi$ sind beide $\mathds{C}$-linear).
-
 Zu $x \in X$ wähle $\lambda \in \mathds{C}$ mit $\abs*{\lambda }=1$ und 
 \[
 	\abs*{\overline{\psi}(x)} = \lambda  \cdot \overline{\psi}(x) = \overline{\psi}(\lambda \cdot x) = \overline{\psi}_1(\lambda \cdot x) \le p(\lambda \cdot x)
@@ -758,48 +762,48 @@ Zu $x \in X$ wähle $\lambda \in \mathds{C}$ mit $\abs*{\lambda }=1$ und
 \]
 % subsection 223 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz (Hahn-Banach): Existenz einer stetigen linearen Fortsetzung]{Satz} % (fold)
 \label{sub:224}
-Sei $X$ ein normierter $\mathds{K}$-Vektorraum, $Y \subset X$ ein Unterraum und $\psi : Y \to \mathds{K}$ linear und stetig. Dann existiert eine lineare Fortsetzung 
-$\overline{\psi} : X \to \mathds{K}$ mit $\norm[\mathcal{L}(X,\mathds{K})]{\overline{\psi}} = \norm[\mathcal{L}(Y,\mathds{K})]{\psi}$.
+Sei $X$ ein normierter $\mathds{K}$-Vektorraum, $Y \subset X$ ein Unterraum und $\psi \colon Y \to \mathds{K}$ linear und stetig. Dann existiert eine stetige, lineare 
+Fortsetzung $\overline{\psi} : X \to \mathds{K}$ mit $\norm[\mathcal{L}(X,\mathds{K})]{\overline{\psi}} = \norm[\mathcal{L}(Y,\mathds{K})]{\psi}$.
 \minisec{Beweis}
-Definiere eine Halbnorm durch $p(x) := \norm{x} \cdot \norm{\psi}$. Nach Satz \ref{sub:223} besitzt $\psi$ eine lineare Fortsetzung $\overline{\psi}$ mit
-$\abs*{\overline{\psi(x)}} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. Es folgt $\norm{\overline{\psi}} \le \norm{\psi}$. $\norm{\psi} \le \norm{\overline{\psi}}$
-ist trivial, da $\psi\big|_{Y} = \overline{\psi}$. \bewende
+Definiere eine Halbnorm durch $p(x) := \norm{x} \cdot \norm{\psi}$. Wegen \ref{sub:27} gilt $\abs*{\psi(x)} \le p(x)$, also
+besitzt $\psi$ nach Satz \ref{sub:223} eine lineare Fortsetzung $\overline{\psi}$ mit $\abs[\big]{\overline{\psi}(x)} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. 
+Es folgt $\norm{\overline{\psi}} \le \norm{\psi}$. $\norm{\psi} \le \norm{\overline{\psi}}$ ist trivial, da $\psi|_{Y} = \overline{\psi}$. \bewende
 % subsection 224 (end)
 
-\subsection[Definition: Konvexe Teilmenge eines $\mathds{K}$-Vektorraums]{Definition} % (fold)
+\subsection[Definition: Konvexe Teilmenge eines $\mathds{K}$-Vektorraums, konvexe Hülle]{Definition} % (fold)
 \label{sub:225}
 Sei $X$ ein $\mathds{K}$-Vektorraum. Sei $M \subset X$ eine Teilmenge. $M$ heißt \Index{konvex}, falls für $a,b \in M$, $\lambda \in [0,1]$ gilt
 \[
 	(1-\lambda ) \cdot a + \lambda \cdot b \in M
 \]
-Ist $X$ ein topologischer Vektorraum und $M \subset X$ konvex, so ist auch $\overline{M}$ konvex. \hfill (warum?)\\
-Ist $N \subset X$ eine beliebige Teilmenge, so ist 
+Ist $X$ ein topologischer Vektorraum und $M \subset X$ konvex, so ist auch $\overline{M}$ konvex.\footnote{für normierte Vektorräume siehe Anhang \ref{sub:ab_konvex}}
+Ist $N \subset X$ eine beliebige Teilmenge, so definieren wir die \Index{konvexe Hülle} von $N$ durch  
 \[
 	\conv(N) := \smashoperator{\bigcap_{\substack{N \subset M \subset X \\ M \text{ konvex} }}} \, M
 \]
 $\conv(N)$ ist konvex. (warum?)
 % subsection 225 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung (mit konvexer Teilmenge)]{Satz} % (fold)
 \label{sub:226}
-Sei $X$ ein $\mathds{R}$-Vektorraum, $\emptyset \not= M \subset X$ konvex, $\varphi \in \mathcal{S}(X)$. Dann existiert $\psi : X \to \mathds{R}$ linear mit 
+Sei $X$ ein $\mathds{R}$-Vektorraum, $\emptyset \not= M \subset X$ konvex, $\varphi \in \mathcal{S}(X)$. Dann existiert $\psi \colon X \to \mathds{R}$ linear mit 
 $\psi \le \varphi$ und 
 \begin{equation*}
 	\inf_{y \in M} \varphi(y) = \inf_{y \in M} \psi(y) \label{eq:226:1}\tag{*}
 \end{equation*}
 \minisec{Beweis}
-Setze $\mu := \inf_{y \in M} \varphi(y)$. Falls $\mu = -\infty$, so folgt die Behauptung aus dem Satz von Hahn-Banach \ref{sub:221}. $\eqref{eq:226:1}$ ist trivialerweise
-erfüllt. Sei also $\mu \in \mathds{R}$. Definiere $\tilde{\varphi} : X \to \mathds{R}$ durch
+Setze $\mu := \inf_{y \in M} \varphi(y)$. Falls $\mu = -\infty$, so folgt die Behauptung aus dem Satz von Hahn-Banach \ref{sub:221}. $\eqref{eq:226:1}$ ist dann 
+trivialerweise erfüllt. Sei also $\mu \in \mathds{R}$. Definiere $\tilde{\varphi} \colon X \to \mathds{R}$ durch
 \[
 	\tilde{\varphi}(x) := \inf_{y \in M, \lambda  \ge 0} \enbrace[\big]{ \varphi(x+ \lambda \cdot y) - \lambda  \cdot \mu} , \quad x \in X
 \]
-Es gilt $\varphi(x + \lambda \cdot y)- \lambda \cdot \mu \ge - \varphi(-x)$, $x \in X$, $y\in M$, $\lambda \ge 0$. Also ist $\tilde{\varphi}(x) \ge - \varphi(-x) >-\infty$.
-$\tilde{\varphi}$ ist sublinear:
+Es gilt $\varphi(x + \lambda \cdot y)- \lambda \cdot \mu \ge - \varphi(-x)$ für $x \in X$, $y\in M$, $\lambda \ge 0$ (siehe \ref{sub:220}). Also ist 
+$\tilde{\varphi}(x) \ge - \varphi(-x) >-\infty$ und $\tilde{\varphi}$ somit wohldefiniert. $\tilde{\varphi}$ ist sublinear:
 \begin{enumerate}[(i)]
 	\item $\tilde{\varphi}(\gamma \cdot x) = \gamma \cdot \tilde{\varphi}(x)$, für $x \in X$, $\gamma \in \ge 0$, wie in \ref{sub:222}.
-	\item Seien $x,z \in X$ und $\varepsilon>0$. Wähle $y_x, y_z \in M$, $\lambda_x, \lambda_y \ge 0$ mit
+	\item Seien $x,z \in X$ und $\varepsilon>0$. Wähle $y_x, y_z \in M$, $\lambda_x, \lambda_z \ge 0$ mit
 	\[
 		\tilde{\varphi}(x) \ge \varphi (x +\lambda_x \cdot y_x) - \lambda_x \cdot \mu -\varepsilon \quad \text{ und }\quad 
 		\tilde{\varphi}(x) \ge \varphi (z +\lambda_z \cdot y_z) - \lambda_z \cdot \mu -\varepsilon
@@ -811,23 +815,25 @@ $\tilde{\varphi}$ ist sublinear:
 		&= \varphi \enbrace[\Bigg]{x+z + (\lambda_x+ \lambda_z)\cdot \underbrace{\enbrace*{\frac{\lambda_x}{\lambda_x + \lambda_z} \cdot y_x + \frac{\lambda_z}{\lambda_x + \lambda_z} \cdot y_z }}_{\in M} } - (\lambda_x + \lambda_z) \cdot \mu -2 \varepsilon \\
 		&\ge \tilde{\varphi}(x+z) - 2 \varepsilon
 	\end{align*}
+	Da $\varepsilon>0$ beliebig war, gilt $\tilde{\varphi}(x) + \tilde{\varphi}(z) \ge \tilde{\varphi}(x+z)$ für alle $x,z \in X$.
 \end{enumerate}
-Nach Hahn-Banach (\ref{sub:221}) existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \tilde{\varphi} \le \varphi$. Für $y \in M$ gilt 
+Nach Hahn-Banach (\ref{sub:221}) existiert $\psi \colon X \to \mathds{R}$ linear mit $\psi \le \tilde{\varphi} \le \varphi$. Für $y \in M$ gilt 
 \[
 	-\psi(y) = \psi(-y) \le \tilde{\varphi}(-y) \le \varphi(-y + 1 \cdot y)- 1 \cdot \mu= -\mu
 \]
 also $\mu \le \psi(y) \le \varphi(y)$, woraus \eqref{eq:226:1} folgt. \bewende
 % subsection 226 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz (Hahn-Banach): Existenz einer linearen Fortsetzung (zwei konvexe Teilmengen)]{Satz} % (fold)
 \label{sub:227}
 Sei $X$ ein normierter $\mathds{R}$-Vektorraum und $A,B \subset X$ nichtleere konvexe Teilmengen mit \index{Distanz $\dist$}
 \[
 	\dist(A,B) := \inf \set[\norm{a-b}]{a \in A, b \in B} > 0
 \]
-Dann existiert $\psi : X \to \mathds{R}$ stetig und linear mit $\psi(A) \cap \psi(B) = \emptyset$.
+Dann existiert $\psi \colon X \to \mathds{R}$ stetig und linear mit $\psi(A) \cap \psi(B) = \emptyset$.
 \minisec{Beweis}
-$A - B := \set[a-b]{a \in A, b \in B} \subset X$ ist konvex. (Warum?) Nach Satz \ref{sub:226} existiert $\psi : X \to \mathds{R}$ linear mit $\psi \le \norm{.}$ und 
+$A - B := \set[a-b]{a \in A, b \in B} \subset X$ ist konvex. (Warum?) Nach Satz \ref{sub:226} existiert, da Normen sublinear sind, $\psi \colon X \to \mathds{R}$ linear mit 
+$\psi \le \norm{.}$, und 
 \[
 	0 < \dist(A,B)=  \inf_{y \in A -B} \norm{y} = \inf_{y \in A-B} \psi(y) = \inf_{a \in A} \psi(a) - \sup_{b \in B} \psi(b). \bewende
 \]
@@ -2691,6 +2697,21 @@ Andererseits aber auch
 \]
 Insgesamt folgt also die Behauptung. \bewende
 % subsection vier_ungl (end)
+
+\subsection{Abschluss einer konvexen Menge ist konvex} % (fold)
+\label{sub:ab_konvex}
+Sei $X$ ein topologischer Vektorraum, von dem wir der Einfachheit halber annehmen, dass die Topologie von einer Norm induziert wird. Sei $M \subset X$ konvex. Dann ist auch 
+$\overline{M}$ konvex.
+\minisec{Beweis}
+Seien $a,b \in \overline{M}$, $\lambda \in [0,1]$. Dann existieren für jedes $\varepsilon>0$ Elemente $a',b' \in M$ mit $\norm{a-a'}< \varepsilon$ und 
+$\norm{b-b'}< \varepsilon$. Dann gilt
+\begin{align*}
+	\norm{\enbrace[\big]{(1-\lambda)\cdot a +\lambda \cdot b} -\enbrace[\big]{(1-\lambda)\cdot a'+\lambda \cdot b'}} &= \norm{(1-\lambda)\cdot (a-a') +\lambda\cdot (b-b')}\\
+	&\le \abs*{1-\lambda} \cdot \norm{a-a'} + \abs*{\lambda} \cdot \norm{b-b'}  \\
+	&\le \abs*{1- \lambda + \lambda} \cdot \varepsilon  = \varepsilon 
+\end{align*}
+Da $\varepsilon>0$ beliebig war, folgt somit $(1-\lambda) \cdot a + \lambda \cdot b \in \overline{M}$. \bewende
+% subsection ab_konvex (end)
 
 % section anhang (end)
 \cleardoubleoddemptypage
