@@ -196,7 +196,7 @@ Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \Index{erwei
 $\tilde{d}_{W,X} := \min \set{1, d_{W,X}} $ ist eine \enquote{echte} Metrik auf $C(W,X)$.
 % subsection 17 (end)
 
-\subsection[Proposition: $X$ vollständig $\Rightarrow$ $C-B(W,X)$ und $C8W,X$ vollständig]{Proposition} % (fold)
+\subsection[Proposition: $X$ vollständig $\Rightarrow$ $C_b(W,X)$ und $C(W,X)$ vollständig]{Proposition} % (fold)
 \label{sub:18}
 Falls $X$ vollständig ist, dann sind $C_b(W,X)$ und $C(W,X)$ vollständig (bezüglich $d_{W,X}$ bzw. $\tilde{d}_{W,X}$).
 \minisec{Beweis}
@@ -846,28 +846,35 @@ $\psi \le \norm{.}$, und
 
 \subsection[Proposition: $Y$ vollständig $\Rightarrow $ $\mathcal{L}(X,Y)$ ist vollständig]{Proposition} % (fold)
 \label{sub:31}
-Seien $X,Y$ normierte Vektorräume, $Y$ vollständig. Dann ist $\mathcal{L}(X,Y)$ vollständig bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \todo{RevChap3}
+Seien $X,Y$ normierte Vektorräume, $Y$ vollständig. Dann ist $\mathcal{L}(X,Y)$ vollständig bezüglich $\norm[\mathcal{L}(X,Y)]{.}$.
 \minisec{Beweis}
-Sei $(T_n)_{n \in \mathds{N}} \subseteq \mathcal{L}(X,Y)$ eine Cauchy-Folge bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. Für $x \in X$ ist dann auch $(T_n x)_{n \in \mathds{N}} \subset Y$ Cauchy
-bezüglich $\norm[Y]{.}$. (Warum?)\footnote{mit $\norm[Y]{T_n x- T_m x} \le \norm{T_n -T_m} \cdot \norm{x}$}
-Da $Y$ ein Banachraum ist, folgt $T_n x \xrightarrow{n \to \infty} y$ für ein $y \in Y$. Wir definieren $T : X \to Y$ durch $T(x) := \lim_{ n \to \infty} T_n(x)$ für 
-$x \in X$. $T$ ist linear: Klar (Warum?).
-
-$T$ ist stetig: $(T_n)_{n \in \mathds{N}}$ ist Cauchy, also auch $\enbrace*{\norm{T_n}}_{n \in \mathds{N}} \subset \mathds{R}$ eine Cauchyfolge (Warum?)\footnote{mit 
-$\norm{T_n} = \norm{T_n - T_{n_0}+ T_{n_0}} \le \norm{T_n- T_{n_0}} + \norm{T_{n_0}}$}. Dann existiert $C \ge 0$ mit $\norm[\mathcal{L}(X,Y)]{T_n} \le C $, $n \in \mathds{N}$, also
+Sei $(T_n)_{n \in \mathds{N}} \subseteq \mathcal{L}(X,Y)$ eine Cauchy-Folge bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. Für $x \in X$ ist dann auch 
+$(T_n x)_{n \in \mathds{N}} \subset Y$ Cauchy bezüglich $\norm[Y]{.}$ (Warum?)\footnote{mit $\norm[Y]{T_n x- T_m x} \le \norm{T_n -T_m} \cdot \norm{x}$}.
+Da $Y$ ein Banachraum ist, folgt $T_n x \to y$ für ein $y \in Y$. Wir definieren $T \colon X \to Y$ durch 
+\[
+	T(x) := \lim_{ n \to \infty} T_n(x)
+\]
+für $x \in X$. $T$ ist linear: Klar, da die $T_n$ linear sind. $T$ ist stetig: $(T_n)_{n \in \mathds{N}}$ ist Cauchy, also auch 
+$\enbrace*{\norm{T_n}}_{n \in \mathds{N}} \subset \mathds{R}$ eine Cauchyfolge, da wegen der umgekehrten Dreiecksungleich gilt
+\[
+	\abs[\big]{\norm{T_n} - \norm{T_m}} \le \norm{T_n -T_m} \le \varepsilon 
+\]%
+% \footnote{mit $\norm{T_n} = \norm{T_n - T_{n_0}+ T_{n_0}} \le \norm{T_n- T_{n_0}} + \norm{T_{n_0}}$} 
+Dann existiert $C \ge 0$ mit $\norm[\mathcal{L}(X,Y)]{T_n} \le C $ für alle $n \in \mathds{N}$, also
 gilt $\norm[Y]{T x} \le C \cdot \norm{x}$, $x \in X$, woraus $\norm[\mathcal{L}(X,Y)]{T} \le C$ und die Stetigkeit von $T$ folgt. Also ist $T \in \mathcal{L}(X,Y)$.
 
-\noindent Falls $\varepsilon >0$, so existiert $n_0 \in \mathds{N}$ mit $\norm[\mathcal{L}(X,Y)]{T_n - T_m}  < \varepsilon$ für $n,m \ge n_0$. Insbesondere: 
+Wir müssen nun noch zeigen, dass $(T_n)_n \to T$ in der Operatornorm gilt. Da $(T_n)_{n \in \mathds{N}}$ eine Cauchyfolge ist, existiert für $\varepsilon >0$ ein
+$n_0 \in \mathds{N}$ mit $\norm[\mathcal{L}(X,Y)]{T_n - T_m}  < \frac{\varepsilon}{2} $ für $n,m \ge n_0$. Insbesondere gilt
 \begin{align*}
-	\norm[Y]{(T_n- T_m)x} \le \norm[\mathcal{L}(X,Y)]{T_n -T_m} \cdot \norm[X]{x} < \varepsilon \cdot \norm[X]{x}    
+	\norm[Y]{(T_n- T_m)(x)} \le \norm[\mathcal{L}(X,Y)]{T_n -T_m} \cdot \norm[X]{x} < \frac{\varepsilon}{2}  \cdot \norm[X]{x}    
 \end{align*}
 für $n,m \ge n_0$, $x \in X$. Weiter gilt 
 \begin{align*}
-	\norm[Y]{(T_n- T)x} \le \norm[Y]{(T_n - T_m)x} + \norm[Y]{(T_m-T)x} &\le \norm[\mathcal{L}(X,Y)]{T_n - T_m} \cdot \norm[X]{x} + \norm[Y]{(T_m-T)x} \\
-	&\le \varepsilon \cdot \norm[X]{x} + \varepsilon \cdot \norm[X]{x}  
+	\norm[Y]{(T_n- T)(x)} \le \norm[Y]{(T_n - T_m)(x)} + \norm[Y]{(T_m-T)(x)} &\le \norm{T_n - T_m} \cdot \norm[X]{x} + \norm[Y]{(T_m-T)x} \\
+	&\le \frac{\varepsilon}{2}  \cdot \norm[X]{x} + \frac{\varepsilon}{2}  \cdot \norm[X]{x}  = \varepsilon \cdot \norm[X]{x} 
 \end{align*}
 für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
-$\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to T$ bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \bewende
+$\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für $n \ge n_0$, also $T_n \to T$ bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \bewende
 % subsection 31 (end)
 
 \subsection[Corollar: Dualraum ist vollständig und $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum]{Corollar} % (fold)
@@ -881,17 +888,17 @@ $\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für$n \ge n_0$, also $T_n \to
 	\item $X^*=\mathcal{L}(X,\mathds{K})$ und $\mathds{K}$ ist vollständig. Wende \ref{sub:31} an.
 	\item $\mathcal{L}(X,X)$ ist ein Banachraum nach \ref{sub:31}. $\mathcal{L}(X,X)$ ist eine normierte Algebra: 
 	\begin{itemize}
-		\item $\norm[\mathcal{L}(X,X)]{\id_X}=1$ \hfill (Warum?)
+		\item Es gilt $\norm[\mathcal{L}(X,X)]{\id_X}=1$
 		\item Für $S,T \in \mathcal{L}(X,X)$, $x \in X$ gilt
 		\begin{align*}
-			\norm[X]{(S \circ T)x} \le \norm{S} \cdot \norm[X]{T x} \le \norm{S} \cdot \norm{T} \cdot \norm[X]{x}   
+			\norm[X]{(S \circ T)(x)} \le \norm{S} \cdot \norm[X]{T x} \le \norm{S} \cdot \norm{T} \cdot \norm[X]{x}   
 		\end{align*}
 		Also ist $\norm{S \circ T} \le \norm{S} \cdot \norm{T}$. \bewende
 	\end{itemize}
 \end{enumerate}
 % subsection 32 (end)
 
-\subsection[Definition und Proposition: lineare Isometrie $\iota_X : X \to X^{**}$]{Definition und Proposition} % (fold)
+\subsection[Definition und Proposition: Lineare Isometrie $\iota_X : X \to X^{**}$ (kanonische Inklusion)]{Definition und Proposition} % (fold)
 \label{sub:33}
 Sei $X$ ein normierter Raum. Definiere $\iota_X \colon X \to X^{**} \enspace{\color{light_gray}\enbrace[\big]{=(X^*)^*}}$ durch
 \[
@@ -904,19 +911,19 @@ für $x \in X$. Die Abbildung $\iota_X$ ist eine lineare Isometrie.\index{kanoni
 	\begin{align*}
 		\abs*{\iota_X(x)(\varphi)} = \abs*{\varphi(x)} \le \norm[X^*]{\varphi} \cdot \norm[X]{x} = \norm[X]{x} \cdot \norm[X^*]{\varphi}      
 	\end{align*}
-	folgt $\varphi \in X^*$ und somit $\norm[X^{**}]{\iota_X(x)} \le \norm[X]{x}$, also ist $\iota_X(x)$ stetig.
+	folgt $\norm[X^{**}]{\iota_X(x)} \le \norm[X]{x}$, also ist $\iota_X(x)$ stetig.
 	\item[$\iota_X$ ist linear:] Für $\alpha, \beta \in \mathds{K}$, $x,y \in X$, $\varphi \in \mathcal{L}(X,\mathds{K})= X^*$ gilt
 	\begin{align*}
-		\iota_X(\alpha \cdot x + \beta \cdot y)(\varphi)= \varphi(\alpha \cdot x + \beta \cdot y) = \alpha \circ \varphi(x) + \beta \cdot \varphi(y) 
+		\iota_X(\alpha \cdot x + \beta \cdot y)(\varphi)= \varphi(\alpha \cdot x + \beta \cdot y) = \alpha \cdot \varphi(x) + \beta \cdot \varphi(y) 
 		&= \alpha \cdot \iota_X(x)(\varphi) + \beta \cdot \iota_X(y)(\varphi) \\
 		&= \enbrace[\big]{\alpha \cdot \iota_X(x) + \beta \cdot \iota_X(y)}(\varphi) 
 	\end{align*}
-	\item[Isometrie:] Es bleibt zu zeigen: $\norm[X^{**}]{\iota_X(x)} \ge \norm[X]{x}$ für $0 \not= x \in X$. Sei $Y := \mathds{K}\cdot x$ und $\psi : Y \to \mathds{K}$
-	gegeben durch $\psi(\alpha \cdot x) := \alpha \cdot \norm[X]{x}$. Dann ist $Y \subset X$ ein linearer Unterraum und $\psi(Y) \to \mathds{K}$ linear mit
-	$\norm{\psi}=1$. Nach Satz \ref{sub:224} existiert $\overline{\psi}. X \to \mathds{K}$ linear mit $\overline{\psi}(x) = \psi(x) = \norm[X]{x}$ und 
-	$\norm{\overline{\psi}}= \norm{\psi} = 1$. Es gilt 
+	\item[Isometrie:] Es bleibt zu zeigen: $\norm[X^{**}]{\iota_X(x)} \ge \norm[X]{x}$ für $0 \not= x \in X$. Sei $Y := \mathds{K}\cdot x$ und 
+	$\psi \colon Y \to \mathds{K}$ gegeben durch $\psi(\alpha \cdot x) := \alpha \cdot \norm[X]{x}$. Dann ist $Y \subset X$ ein linearer Unterraum und 
+	$\psi$ linear mit $\norm{\psi}=1$. Nach Satz \ref{sub:224} existiert nun $\overline{\psi} \colon X \to \mathds{K}$ linear mit 
+	$\overline{\psi}(x) = \psi(x) = \norm[X]{x}$ und $\norm{\overline{\psi}}= \norm{\psi} = 1$. Es gilt 
 	\begin{align*}
-		\norm[X^{**}]{\iota_X(x)} \ge \abs*{\iota_X(x)(\overline{\psi})} = \abs*{\overline{\psi}(x)} = \norm[X]{x}. \bewende
+		\norm[X^{**}]{\iota_X(x)} \ge \abs*{\iota_X(x)(\overline{\psi})} = \abs*{\overline{\psi}(x)} = \norm[X]{x} \bewende
 	\end{align*}
 \end{description}
 % subsection 33 (end)
@@ -940,16 +947,17 @@ kommutiert für jedes $T \in \mathcal{L}(X,Y)$. Für $\iota_{X^*} \colon X^* \to
 		\alpha \cdot (\varphi \circ T) + \beta \cdot (\varphi \circ S)  &= \alpha \cdot T^\tr(\varphi) + \beta \cdot S^\tr(\varphi)\\
 		&= \enbrace*{\alpha \cdot T^\tr + \beta \cdot S^\tr}(\varphi) 
 	\end{align*}
-	\item Für $x \in X$, $\psi \in Y^*$ gilt $\enbrace[\big]{\iota_Y T(x)}(\psi) = \psi \enbrace[\big]{T(x)}$; weiter gilt
+	Damit ist $.^\tr$ eine lineare Abbildung.
+	\item Für $x \in X$, $\psi \in Y^*$ gilt $\enbrace[\big]{\iota_Y \circ T(x)}(\psi) = \psi \enbrace[\big]{T(x)}$. Weiter gilt dann
 	\begin{align*}
-		\enbrace[\big]{T^{\tr \, \tr} \iota_X(x)} (\psi) = \enbrace[\big]{(T^\tr)^\tr \iota_X(x)}(\psi)  = \enbrace[\big]{\iota_X(x) \circ T^\tr}(\psi)
+		\enbrace[\big]{T^{\tr \, \tr} \circ \iota_X(x)} (\psi) = \enbrace[\big]{(T^\tr)^\tr \circ \iota_X(x)}(\psi)  = \enbrace[\big]{\iota_X(x) \circ  T^\tr}(\psi)
 		&= \iota_X(x) \enbrace*{T^\tr(\psi)}  \\
 		&= T^\tr(\psi)(x) = \psi \circ T(x) \\
 		&= \iota_Y \enbrace[\big]{T(x)} (\psi) 
 	\end{align*}
-	$\Rightarrow T^{\tr \, \tr} \iota_X(x) = \iota_Y \enbrace[\big]{T(x)} = \iota_Y \circ T (x)$. Also $T^{\tr \, \tr} \circ \iota_X = \iota_Y  \circ T$. Also kommutiert
-	das Diagramm.
-	\item Es ist $\abs{(T^\tr \psi)(x)} = \abs*{\psi T(x)} \le \norm[Y^*]{\psi} \cdot \norm[Y]{T x} \le \norm[Y^*]{\psi} \cdot \norm[\mathcal{L}(X,Y)]{T} \cdot \norm[X]{x}$. Also
+	$\Rightarrow T^{\tr \, \tr} \iota_X(x) = \iota_Y \enbrace[\big]{T(x)} = \iota_Y \circ T (x)$. Also $T^{\tr \, \tr} \circ \iota_X = \iota_Y  \circ T$ und 
+	das Diagramm kommutiert.
+	\item Es ist $\abs{(T^\tr \psi)(x)} = \abs*{\psi \circ T(x)} \le \norm[Y^*]{\psi} \cdot \norm[Y]{T x} \le \norm[Y^*]{\psi} \cdot \norm[\mathcal{L}(X,Y)]{T} \cdot \norm[X]{x}$. Also
 	ist $\norm[X^*]{T^\tr \psi} \le  \norm[Y^*]{\psi} \cdot  \norm[\mathcal{L}(X,Y)]{T}$ und damit folgt 
 	\[
 		\norm[\mathcal{L}(Y^*,X^*)]{T^\tr} \le \norm[\mathcal{L}(X,Y)]{T}  
@@ -962,42 +970,47 @@ kommutiert für jedes $T \in \mathcal{L}(X,Y)$. Für $\iota_{X^*} \colon X^* \to
 	also ist $.^\tr$ eine Isometrie.
 	\item Für $\varphi \in X^*$, $x \in X$ gilt
 	\begin{align*}
-		\enbrace[\big]{\iota_X^\tr \circ \iota_{X^*} (\varphi)} (x) = \iota_{X^*}(\varphi) \circ \iota_X (x) = \iota_X(x)(\varphi) = \varphi(x)
+		\enbrace[\big]{\iota_X^\tr \circ \iota_{X^*} (\varphi)} (x) = (\iota_{X^*}(\varphi) \circ \iota_X)(x) = \iota_X(x)(\varphi) = \varphi(x)
 	\end{align*}
-	$\Rightarrow \iota_X^\tr \circ \iota_{X^*}(\varphi)= \varphi$, also $\iota_X^\tr \circ  \iota_{X^*} = \id_{X^*}$. \bewende
+	$\Rightarrow \iota_X^\tr \circ \iota_{X^*}(\varphi)= \varphi$, also erhalten wir $\iota_X^\tr \circ  \iota_{X^*} = \id_{X^*}$. \bewende 
 \end{enumerate}
 % subsection 34 (end)
 
 \subsection{Satz: Prinzip der gleichmäßigen Beschränktheit für Banachräume} % (fold)
 \label{sub:35}
-Sei $X$ ein Banachraum und $Y$ ein normierter Raum. Sei $M \subset \mathcal{L}(X,Y)$, sodass die Menge 
+Sei $X$ ein Banachraum und $Y$ ein normierter Raum. Sei $M \subset \mathcal{L}(X,Y)$, sodass die Menge\marginnote{Vergleiche \ref{sub:112}, diese Aussage ist 
+deutlich stärker!} 
 \[
 	\set[{x \mapsto \norm[Y]{T x}}]{T \in M \rule{0cm}{1em}} \subset C(X,\mathds{R} )
 \]
-punktweise \Index{gleichmäßig beschränkt} ist, d.h. für $x \in X$ existiert $C_x \ge 0$ mit $\norm[Y]{T x} \le C_x$, $T \in M$. Dann existiert $C \ge 0$ mit $\norm[\mathcal{L}(X,Y)]{T} \le C$,
-$T \in M$.
+\Index{punktweise gleichmäßig beschränkt} ist, d.h. für $x \in X$ existiert $C_x \ge 0$ mit $\norm[Y]{T x} \le C_x$, $T \in M$. Dann existiert $C \ge 0$ mit 
+$\norm[\mathcal{L}(X,Y)]{T} \le C$, $T \in M$.
 \minisec{Beweis}
-Nach Corollar \ref{sub:112} (Prinzip der gleichmäßigen Beschränktheit für metrische Räume) existieren eine offene Kugel $\emptyset \not= B(x_0,\varepsilon) \subset X$ und 
+Nach Corollar \ref{sub:112} (Prinzip der gleichmäßigen Beschränktheit für metrische Räume) existieren eine offene Kugel $\emptyset \not= B(x_0,\varepsilon)\subset X$ und 
 $K \ge 0$ mit $\norm[Y]{T x} \le K$ für $x \in B(x_0, \varepsilon)$, $T \in M$. Für $x \in X$ mit $\norm{x} \le 1$ gilt 
 \begin{align*}
-	\norm[X]{T x} = \frac{e}{\varepsilon} \cdot  \norm[Y]{T \enbrace*{\frac{\varepsilon}{2} \cdot x}} &= \frac{2}{\varepsilon} \cdot 
+	\norm[X]{T x} = \frac{2}{\varepsilon} \cdot  \norm[Y]{T \enbrace*{\frac{\varepsilon}{2} \cdot x}} &= \frac{2}{\varepsilon} \cdot 
 	\norm[Y]{T \enbrace*{\frac{\varepsilon}{2} \cdot x + x_0 - x_0 } }  \\
 	&\le \frac{2}{\varepsilon} \cdot   \enbrace*{ \doppelstrich[\Bigg]{T \enbrace[\Bigg]{\underbrace{\frac{\varepsilon}{2} \cdot x + x_0}_{\in B(x_0,\varepsilon)} } }_Y +
 	 \norm[Y]{T  \enbrace[\bigg]{\underset{\in B(x_0,\varepsilon)}{x_0}} }} \\
 	&\le \frac{2}{\varepsilon} (K+K) = \frac{4K}{\varepsilon}   
 \end{align*}
-$\Rightarrow \norm[\mathcal{L}(X,Y)]{T} \le \frac{4 K}{\varepsilon} =: C$. \bewende
+Es folgt $\norm[\mathcal{L}(X,Y)]{T} \le \frac{4 K}{\varepsilon} =: C$. \bewende
 % subsection 35 (end)
 
-\subsection{Corollar} % (fold)
+\subsection[Corollar über Beschränktheit einer Teilmenge eines normierten Raumes]{Corollar} % (fold)
 \label{sub:36}
-Sei $Z$ ein metrischer Raum und $N \subset Z$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ existiert $C_\varphi \ge 0$ mit $\abs*{\varphi(z)} \le C_\varphi$, 
+Sei $Z$ ein normierter Raum und $N \subset Z$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ existiert $C_\varphi \ge 0$ mit $\abs*{\varphi(z)} \le C_\varphi$, 
 $z \in N$.  Dann ist $N$ beschränkt.
 \minisec{Beweis}
-$\iota_Z : Z \to Z^{**}$ ist eine Isometrie nach \ref{sub:33}. Wende Satz \ref{sub:35} an mit $X=Z^{*}$, $Y=\mathds{K}$ und 
-$M = \iota_Z(N) \subset Z^{**}= \mathcal{L}(Z^*,\mathds{K})$.
+$\iota_Z \colon Z \to Z^{**}$ ist eine Isometrie nach \ref{sub:33}. Wende Satz \ref{sub:35} an mit 
+\begin{align*}
+	X &=Z^{*} \\
+	Y &=\mathds{K} \\
+	M &= \iota_Z(N) \subset Z^{**}= \mathcal{L}(Z^*,\mathds{K})
+\end{align*}
 Für $\varphi \in X = Z^{*}$ existiert $C_\varphi \ge 0$ mit $\abs*{T \varphi} = \abs*{\iota_Z(z) (\varphi)} = \abs*{\varphi(z)} \le C_\varphi$, wo $T= \iota_Z(z) \in M$
-für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende
+für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende \todo{RevChap3}
 % subsection 36 (end)
 
 \subsection{Corollar} % (fold)
@@ -1005,7 +1018,7 @@ für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\no
 Sei $X$ ein Banachraum und $Z$ ein normierter Raum. $M \subset \mathcal{L}(X,Z)$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ und $x \in X$ existiert $C_{x,\varphi} \ge 0$
 mit
 \[
-	\abs*{\varphi \enbrace[\big]{T(x)}} \le C_{x,\varphi}, \quad T \in M
+	\abs*{\varphi \enbrace[\big]{Tx}} \le C_{x,\varphi} \enspace, \qquad T \in M
 \]
 Dann ist $M$ beschränkt.
 \minisec{Beweis}
