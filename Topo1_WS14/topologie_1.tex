@@ -3474,9 +3474,178 @@ Isomorphismus. Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen vert
 		X^+ := \set[(x,t)]{x \in X^\ssbrace{n}, t \in } 
 	\]
 \end{description}
-
 % subsection 149 (end)
 % section 14 (end)
+\newpage
+\section{Zusammenhang zwischen $\pi_1(X,x_0)$ und $H_1(X,\mathds{Z})$} % (fold)
+\label{sec:15}
+
+\section*{Vorbereitung: Abelisierung von Gruppen} % (fold)
+
+\subsection{Definition} % (fold)
+\label{sub:151}
+Sei $G$ eine Gruppe. Dann heißt die Untergruppe von $G$, die erzeugt wird von Elementen der Form $[g,h]:= g h g^{-1} h ^{-1}$, \Index{Kommutatorgruppe} von $G$. Wir schreiben
+hierfür auch $[G,G] \subset G$.
+% subsection 151 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:152}
+$[G,G] \subset G$ ist ein Normalteiler von $G$.
+\minisec{Beweis}
+Seien $g_0, \ldots ,g_n,h \in G$. Dann ist 
+\begin{align*}
+	h [g_0,g_1] \cdot \ldots \cdot [g_{n-1},g_n] \cdot h ^{-1} = [h g h ^{-1}, h g_1 h ^{-1}] \cdot \ldots \cdot [h g_{n-1} h ^{-1}, h g_1 h ^{-1}] \bewende
+\end{align*}
+% subsection 152 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:153}
+Der Quotient $G^\ab := \nicefrac{G}{[G,G]}$ heißt \Index{Abelisierung} (manchmal auch Abelianisierung) von G. 
+% subsection 153 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:154}
+\begin{itemize}
+	\item $\GRUPPEN \xrightarrow{\minwidthbox{\ab}{3em}} \ABELGRUPPEN , \qquad G \longmapsto G^\ab $
+	definiert einen Funktor.
+	\item Dieser Funktor hat die folgende universelle Eigenschaft: Zu jeder abelschen Gruppe $A$ und einem Homomorphismus $\varphi \colon G \to A$ existiert ein eindeutiger
+	Gruppenhomomorphismus $\varphi^\ab \colon G^\ab \to A$ sodass folgendes Diagramm kommutiert
+	\[
+		\begin{tikzcd}
+			G \rar["\varphi"] \dar[two heads]& A \\
+			G^\ab \urar["\varphi^\ab"']
+		\end{tikzcd}
+	\]
+\end{itemize}
+% subsection 154 (end)
+
+\subsection{Schleifen und 1-Zykel} % (fold)
+\label{sub:155}
+Sei $X$ ein topologischer Raum. Da $\abs*{\Delta^1} \cong [0,1]$, liefert jeder Pfad $\omega \colon [0,1] \to X$ einen $1$-Simplex in $C_1(X;\mathds{Z})$.
+% subsection 155 (end)
+
+\subsection{Lemma 1} % (fold)
+\label{sub:156}
+Seien $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(1)=\omega'(0)$, dann ist $\omega * \omega' - \omega- \omega' \in C_1(X;\mathds{Z})$ der Rand eines 
+$2$-Simplex.
+\minisec{Beweis}
+Zur Erinnerung: $\abs*{\Delta^2} = \set[(x_0,x_1,x_2) \in \mathds{R}^3]{\sum_{i=0}^{3}x_i=1, x_j \ge 0 \forall j \in \set{0,1,2}}$. Betrachte: 
+$\sigma \colon \abs*{\Delta^2}  \to X$ definiert durch 
+\[
+	(x_0,x_1,x_2) \mapsto(\omega*\omega') \enbrace*{\frac{1}{2} (1-x_0-x_2)} = \omega * \omega' \enbrace*{\frac{1}{2}(2x_0 + x_1) }  
+\]
+Es gilt 
+\begin{align*}
+	(\delta_0 \sigma)(s) &= \sigma(0,s,1-s) = \omega * \omega' \enbrace*{\frac{1}{2} s}=\omega(s) \\
+	(\delta_1 \sigma)(s) &= \sigma(s, 0, 1-s) = \omega * \omega*(s) \\
+	(\delta_2 \sigma)(s) &= \sigma(s,1-s,0) = (\omega * \omega') \enbrace*{\frac{1}{2} (1+s)} = \omega'(s)
+\end{align*}
+Dann folgt $\partial \sigma = \delta_0 \sigma - \delta_1 \sigma + \delta_2 \sigma = \omega - \omega * \omega' + \omega'$. Bild: \bewende
+\missingfigure{Simplex kollabieren und so weiter} 
+% subsection 156 (end)
+
+\subsection{Lemma 2} % (fold)
+\label{sub:157}
+\begin{enumerate}[a)]
+	\item Sei $\omega \colon [0,1] \to X$ ein Pfad, sei $\omega ^{-1}(s) = \omega(1-s)$. Dann ist $\omega + \omega ^{-1}$ Rand einer $2$-Kette, also von einem Element von
+	$C_2(X;\mathds{Z})$
+	\item Der konstante Pfad ist Rand einer $2$-Kette.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Sei $\sigma \colon \abs*{\Delta^2} \to X$ gegeben durch $\sigma(x_0,x_1,x_2) = \omega(x_1)$. Dann ist 
+	\[
+		\partial \sigma = \omega- \underbrace{\const_{\omega(0)}}_{=\partial \tau} + \omega ^{-1}
+	\]
+	Also ist nach b) $\omega + \omega ^{-1} = \partial(\sigma-\tau)$.
+	\item Der Rand des konstanten $2$-Simplex ist der konstante Pfad. \bewende
+\end{enumerate}
+% subsection 157 (end)
+
+\subsection{Lemma 3} % (fold)
+\label{sub:158}
+Sind $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(0)=\omega'(0)$ und $\omega(1)= \omega'(1)$, dann gilt: Ist $\omega$ homotop zu $\omega'$ relativ Endpunkte, 
+dann ist $\omega- \omega'$ Rand einer $2$-Kette.
+\minisec{Beweis}
+Sei $H \colon [0,1] \times [0,1] \to X$ eine Homotopie zwischen $\omega$ und $\omega'$ mit $H(0,s) = \omega(s)$, $H(1,s)=\omega'(s)$, $H(t,0)=\const_{\omega(0)}$ und
+$H(t,1)= \const_{\omega(1)}$.
+\missingfigure{Quadrat nach $X$, linke Seite kollabieren, Simplex nach $X$}
+Wähle Homöomorphismus durch
+\[
+	\kappa \colon \nicefrac{[0,1] \times [0,1]}{[0,1] \times \set{0}} \to \abs*{\Delta^2} , \qquad [t,s] \longmapsto \enbrace[\big]{st, s(1-t), (1-s)}
+\]
+Betrachte $\sigma := H \circ \kappa ^{-1} \colon \abs*{\Delta^2} \to X$. Die Ränder sind $\delta_0 \sigma = \omega$ und $\delta_1 \sigma = \omega'$ und
+$\delta_2 \sigma = \const_{\omega(1)}$. Also folgt, dass $\omega- \omega'$ der Rand einer $2$-Kette ist.
+% subsection 158 (end)
+
+\subsection{Die Hurewicz-Abbildung} % (fold)
+\label{sub:159}
+Falls $\omega \colon [0,1] \to X$ eine Schleife ist, dann ist $\partial \omega = \omega(1)- \omega(0)=0$. Also repräsentiert $\omega$ ein Element 
+$\homologieklasse{\omega} \in H_1(X)$. Nach \hyperref[sub:158]{Lemma 3} erhalten wir eine Abbildung $\theta \colon \pi_1(X,x_0) \to H_1(X)$. Nach \hyperref[sub:156]{Lemma 1} bildet diese
+Abbildung die Verknüpfung von Schleifen auf Summen von $1$-Ketten ab.
+\begin{align*}
+	\homologieklasse*{\omega * \omega'} = \homologieklasse*{\omega} + \homologieklasse*{\omega'} \quad ,\quad  \homologieklasse*{\omega ^{-1}} = - \homologieklasse*{\omega}
+\end{align*}
+Zusammen mit \hyperref[sub:157]{Lemma 2} erhalten wir einen Gruppenhomomorphismus. Aus der universellen Eigenschaft der Abelisierung erhalten wir 
+\[
+	\theta^\ab \colon \pi_1(X,x_0)^\ab \longrightarrow H_1(X;\mathds{Z})
+\]
+% subsection 159 (end)
+
+\subsection{Theorem(Hurewicz)} % (fold)
+\label{sub:1510}
+Für wegzusammenhängende Räume ist $\theta^\ab$ ein Isomorphismus.
+\minisec{Beweis}
+Sei $X$ wegzusammenhängend. Wähle für jedes $x \in X$ einen Pfad $\lambda_x$ von $x_0$ nach $x$. Wähle $\lambda_{x_0} = \const_{x_0}$. Betrachte 
+\[
+	\overline{\rho} \colon C_1(X;\mathds{Z}) \longrightarrow \pi_1(X,x_0)^\ab \quad , 
+	\qquad  \omega \longmapsto \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(1)}^{-1}}
+\]
+Somit (nach Lemma 4) induziert $\overline{\rho}$ einen Homomorphismus: $\rho \colon H_1(X;\mathds{Z}) \to \pi_1(X,x_0)^\ab$. Es gilt:
+\begin{align*}
+	(\rho \circ \theta)[\omega] = \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(0)} ^{-1}} = [\omega] 
+\end{align*}
+Wir haben $\lambda \colon C_0(X;\mathds{Z}) \to C_1(X;\mathds{Z})$, $\sum_{i} n_i x_i  \mapsto\sum_i n_i \lambda_{x_i}$.
+Mit Lemma 5 folgt, dass $ \theta^\ab$ ein Isomorphismus ist für wegzusammenhängende Räume $X$. \bewende
+% subsection 1510 (end)
+
+\subsection{Lemma 4} % (fold)
+\label{sub:1511}
+$\overline{\rho}$ bildet die Ränder von $2$-Simplizes auf $1 \in \pi_1(X,x_0)^\ab$ ab.
+\minisec{Beweis}
+Sei $\sigma \in C_2(X;\mathds{Z})$ ein $2$-Simplex. Es gilt
+\begin{align*}
+	\overline{\rho}(\partial \sigma) = \overline{\rho}(\partial_0 \sigma - \partial_1 \sigma + \partial_2 \sigma) 
+	&= \overline{\rho}(\omega_0) \cdot \overline{\rho}(\omega_1) ^{-1}   \cdot \overline{\rho}(\omega_2) \\
+	&= \benbrace[\Big]{\lambda_{\omega_0(0)} * \omega_0 * \lambda_{\omega_0(1)} ^{-1} * 
+	\underbrace{\enbrace*{\lambda_{\omega_1(0)} * \omega_1 * \lambda_{\omega_1(1)}} ^{-1}}_{=\lambda_{\omega_0(1)} * \omega_1 ^{-1} * \lambda_{\omega_1(0)} ^{-1}}
+	 * \lambda_{\omega_2(0) * \omega_2 * \lambda_{\omega_2(1)}}} \\
+	 &= \benbrace[\Big]{\lambda_{\omega_0(0)} * \underbrace{\omega_0 * \omega_1 ^{-1} * \omega_2}_{=: \gamma} * \lambda_{\omega_2(1)=\omega_0(0)} ^{-1}} \\
+	 \intertext{Der Pfad $\gamma$ ist die Schleife, die einmal auf dem Rand es $2$-Simplex herumläuft. Also 
+	$\gamma \colon [0,1] \to \abs*{\partial \Delta^2} \hookrightarrow \abs*{\delta^2} \to X$. Aber $\abs*{\partial \Delta^2} \hookrightarrow \abs*{\Delta^2}$ ist homotop zur 
+	konstanten Abbildung auf $\omega_0(0)$ mit einer Homotopie, die den Punkt $\omega_0(0)$ fixiert.}
+	&= \benbrace*{\lambda_{\omega_0(0)} * \lambda_{\omega_0(0)} ^{-1}} = 1 
+\end{align*}
+\missingfigure{Pfade am Bild eines Simplex und Verbindungen zu $x_0$}
+% subsection 1511 (end)
+
+\subsection{Lemma 5} % (fold)
+\label{sub:1512}
+Sei $\omega \colon \Delta^1 \to X$ ein $1$-Simple, dann gilt $\theta \circ \overline{\rho}(\omega) = \homologieklasse{\omega - \lambda_{\partial \omega}} $
+\minisec{Beweis}
+Es gilt
+\begin{align*}
+	(\theta \circ \overline{\rho}) (\omega) = \theta \enbrace*{ \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(0)} ^{-1}} } =
+	\homologieklasse{\lambda_{\omega(0)} * \omega * \lambda_{\omega(1)} ^{-1}} = \homologieklasse{\omega} \underbrace{- \homologieklasse{\lambda_{\omega(1)}} + 
+	\homologieklasse{\lambda_{\omega(0)}} }_{\lambda_{\omega(1)- \omega(0)} = \lambda_{\partial \omega}}
+\end{align*}
+% subsection 1512 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:1513}
+$(\theta \circ \rho) \enbrace*{\homologieklasse{c}} = \homologieklasse{c}$. $\homologieklasse{c} \in H_1(X;\mathds{Z})$ 
+% subsection 1513 (end)
+% section 15 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
