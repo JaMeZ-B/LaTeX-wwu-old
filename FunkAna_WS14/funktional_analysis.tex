@@ -2688,6 +2688,110 @@ $\enbrace*{\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n} T ^{-1} \in \math
 \label{sub:84}
 Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.
 % subsection 84 (end)
+
+\subsection[Satz: Die Resolventenabbildung ist lokal durch eine Potenzreihe gegeben]{Satz} % (fold)
+\label{sub:85}
+Sei $X$ ein Banachraum und $T in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
+lokal durch eine Potenzreihe mit Koeffizienten in $\mathcal{L}(X)$ gegeben. Mit anderen Worten $R(T,\cdot )$ ist lokal analytisch\index{analytisch}.
+\minisec{Beweis}
+Sei $\lambda_0 \in \rho(T)$. Setze $S_0 := T- \lambda_0 \cdot \id_X$, $S_\lambda := T- \lambda \cdot \id_X$, $\lambda \in \rho(T)$. Sei $\lambda \in \rho(T)$ mit 
+\[
+	\norm{S_0 - S_\lambda} = \abs*{\lambda-\lambda_0}< \norm{S_0 ^{-1}} ^{-1}
+\]
+Nach Proposition \ref{sub:83} ist $S_\lambda$ invertierbar und es gilt 
+\[
+	R(T,\lambda) = S_\lambda ^{-1} = \sum_{n=0}^{\infty} \enbrace*{S_0^{-1} (S_0-S_\lambda)}^n S_0^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n \cdot S_0^{-(n+1)}
+	= \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n R(T,\lambda_0)^{n+1}
+\]
+Durch Abschätzung mit der geometrischen Reihe folgt die Beschränktheit. \bewende
+% subsection 85 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:86}
+Sei $X$ ein $\mathds{C}$-Banachraum und $T \in \mathcal{L}(X)$. Dann ist $\sigma(T)$ nichtleer, kompakt und es gilt 
+\[
+	\sigma(T) \subset \set[z \in \mathds{C}]{\abs*{z} \le \norm{T}} 
+\]
+\minisec{Beweis}
+Wir wissen bereits, dass $\sigma(T)$ abgeschlossen in $\mathds{C}$ ist. Für $\lambda\not=0$ ist $S_\lambda := -\lambda \cdot \id_X$ invertierbar und es gilt
+$\cramped{\norm{S_\lambda ^{-1}}^{-1} =\lambda}$. Falls $\cramped{\norm{S_\lambda - (T-\lambda \cdot \id_X)}=\norm{T} < \abs*{\lambda}= \norm{S_\lambda ^{-1}} ^{-1}}$, so 
+ist nach \ref{sub:83} $T- \lambda \cdot \id_X$ invertierbar, also ist $\lambda \not\in \sigma(T)$. Damit folgt 
+$\sigma(T) \subset \set[z \in \mathds{C}]{\abs*{z}\le \norm{T}}$ und die Kompaktheit von $\sigma(T)$.
+
+Angenommen $\sigma(T)= \emptyset$. $R(T,\lambda)$ ist stetig auf $\set[\lambda \in \mathds{C}]{\abs*{z} \le 2 \cdot \norm{T}}$, also beschränkt. Weiter gilt für 
+$\abs*{\lambda} \ge 2 \cdot \norm{T}$
+\[
+	R(T,\lambda) = \enbrace*{T- \lambda \cdot \id_X}^{-1} = -\lambda ^{-1} \cdot \enbrace*{- \frac{T}{\lambda} + \id_X}^{-1} 
+	= -\lambda ^{-1} \cdot \sum_{n=0}^{\infty} \enbrace*{\frac{T}{\lambda}}^n 
+\]
+also $\norm{R(T,\lambda)} \le \abs*{\lambda}^{-1}\cdot \sum_{n=0}^{\infty} \norm{\frac{T}{\lambda}}^n\le \frac{1}{2 \norm{T}} \cdot 2 = \frac{1}{\norm{T}}$. Damit ist 
+$R(T,\lambda)$ auf $\mathds{C}$ beschränkt. Für $x \in X$ und $\varphi \in X^*$ gilt: 
+\[
+	\lambda \mapsto \varphi \enbrace[\big]{R(T,\lambda)(x)} {\color{Grey0} \enspace = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n 
+	\underbrace{\varphi\enbrace*{R(T,\lambda)^{n+1}(x)} }_{\in \mathds{C}}}
+\]
+ist lokal analytisch (auf ganz $\mathds{C}$), also ganz, und beschränkt. Nach dem Satz von Liouville\footnote{$f$ ganz $\leadsto f(z)=\sum_{n=0}^{\infty}a_n \cdot z^n$ mit 
+$a_k = \frac{f^{(k)}(0)}{k!} \stackrel{\text{Cauchy}}{=} \frac{1}{2 \pi i} \cdot \oint_{C_r} \frac{f(\zeta)}{\zeta^{k+1}} \mathd\zeta$, wobei $C_r$ der Kreis mit Radius $r$ 
+ist. Dann folgt $\abs*{f(z)} \le M$, also $\abs*{a_k} \le \frac{1}{r^k}$, $r>0$, $k \ge 1$ $\Rightarrow a_k=0, k \ge 1$. Siehe auch
+\url{https://de.wikipedia.org/wiki/Satz_von_Liouville_(Funktionentheorie)}} folgt
+\begin{align*}
+	&&\varphi \enbrace[\big]{R(T,\lambda)(x)} &\equiv \varphi \enbrace[\big]{R(T,0)(x)} \\  
+	\Longrightarrow  && R(T,\lambda)(x) &\equiv R(T,0)(x) 	\quad , x \in X \\
+	\Longrightarrow  && \enbrace*{T- \lambda \cdot \id_X}^{-1} = R(T,\lambda) &\equiv R(T,0) = T ^{-1} \light \bewende
+\end{align*}
+% subsection 86 (end)
+
+\subsection[Definition und Proposition: Kompakte Operatoren]{Definition und Proposition} % (fold)
+\label{sub:87}
+Sei $X$ ein Banachraum. $T \in \mathcal{L}(X)$ heißt \bet{kompakt}\index{kompakter Operator}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+\begin{enumerate}[(i)]
+	\item Das Bild jeder beschränkten Menge $M$ unter $T$ ist relativ kompakt, d.h. $\overline{T(M)} \subset X$ kompakt.
+	\item $\overline{T \enbrace*{B_X(0,1)}}$ ist kompakt. 
+	\item Ist $(x_n)_\mathds{N} \subset X$ beschränkt, so enthält $\enbrace*{T(x_n)}_{n \in \mathds{N}}$ eine konvergente Teilfolge.
+\end{enumerate}
+Wir schreiben $\mathcal{K}(X)$ für die Menge der kompakten Operatoren auf $X$.
+\minisec{Beweis}
+\begin{description}
+	\item[(i)$\Leftrightarrow$(ii):] Klar, da $T$ linear ist.
+	\item[(i)$\Leftrightarrow$(iii):] Für metrische Räume ist kompakt äquivalent zu folgenkompakt. \bewende
+\end{description}
+% subsection 87 (end)
+
+\subsection[Bemerkung zu kompakten Operatoren]{Bemerkung} % (fold)
+\label{sub:88}
+\begin{enumerate}[(i)]
+	\item Sei $X$ ein Banachraum. Dann gilt \hfill \emph{(Übung!)}
+	\[
+		\overline{B}_X(0,1) \text{ ist kompakt } \iff \id_X \text{ ist kompakt } \iff X \text{ ist endlichdimensional}
+	\]
+	\item Entsprechend kann man $\mathcal{K}(X,Y)$ definieren.
+\end{enumerate}
+% subsection 88 (end)
+
+\subsection[Proposition: Die Menge der kompakten Operatoren ist ein abgeschlossenes Ideal in $\mathcal{L}(X)$]{Proposition} % (fold)
+\label{sub:89}
+Sei $X$ ein Banachraum. Dann ist $\mathcal{K}(X) \lhd \mathcal{L}(X)$ ein abgeschlossenes Ideal.
+\minisec{Beweis}
+\begin{description}
+	\item[$\mathcal{K}(X) \subset \mathcal{L}(X)$ ist ein linearer Unterraum:] $T,T' \in \mathcal{K}(X)$, $\alpha \in \mathds{K}$. $\alpha \cdot T \in \mathcal{K}(X)$ ist 
+	klar. Wir müssen nur $T+T' \in \mathcal{K}(X)$ zeigen: Sei $(x_n)_\mathds{N} \subset X$ beschränkt. Da $T$ kompakt ist, existiert eine Teilfolge 
+	$(x_{n_k})_{k \in \mathds{N}}$, sodass $(T x_{n_k})_{k \in \mathds{N}}$ konvergiert. Da $T'$ kompakt ist, gibt es wiederum eine Teilfolge 
+	$\enbrace[\big]{\cramped{x_{n_{k_l}}}}_{l \in \mathds{N}}$, sodass $\enbrace{T x_{n_{k_l}}}_{l \in \mathds{N}}$ konvergiert. Dann muss auch 
+	$\enbrace{(T+T')x_{n_{k_l}}}_{l \in \mathds{N}}$ konvergieren.
+	\item[$\mathcal{K}(X)$ ist Ideal:] Sei $T \in \mathcal{K}(X)$, $S \in \mathcal{L}(X)$. Dann gilt auch $TS, ST \in \mathcal{K}(X)$, wie man sich leicht überlegt.
+	\item[$\mathcal{K}(X)$ ist abgeschlossen:] Zu $T \in \overline{\mathcal{K}(X)}$ existiert $(T_k)_{k \in \mathds{N}} \subset \mathcal{K}(X)$ mit
+	$\norm{T-T_k} \to 0$. Sei $(x_n)_{n \in \mathds{N}} \subset X$ beschränkt. Wähle Teilfolge $(x_n^\ssbrace{0})_{n \in \mathds{N}}$, sodass 
+	$(T_0 x_n^\ssbrace{0})_{n \in \mathds{N}}$ konvergiert und in einem $\frac{1}{1}$-Ball liegt. Wähle Teilfolge $(x_n^\ssbrace{1})_{n \in \mathds{N}}$ von
+	$(x_n^\ssbrace{0})_{n \in \mathds{N}}$ mit: $(T_1 x_n^\ssbrace{1})_{n \in \mathds{N}}$ konvergiert und liegt in einem $\frac{1}{2}$-Ball. Induktiv folgt, dass
+	für $(x_n^\ssbrace{n})_{n \in \mathds{N}}$ gilt: $(x_n^\ssbrace{n})_{n \in \mathds{N}}$ ist Teilfolge von $(x_n)_{n \in \mathds{N}}$ und 
+	$(Tx_n^\ssbrace{n})_{n \in \mathds{N}}$ konvergiert. \bewende
+\end{description}
+% subsection 89 (end)
+
+\subsection[Satz: Diagonalisierbarkeit selbstadjungierter, kompakter Operatoren]{Satz} % (fold)
+\label{sub:810}
+Sei $T \in \mathcal{K}(X)$ ein selbstadjungierter, kompakter Operator auf dem Hilbertraum $\mathcal{H}$. Dann ist $T$ diagonalisierbar.
+% subsection 810 (end)
 % section 8 (end)
 
 \cleardoubleoddemptypage
