@@ -24,7 +24,7 @@
 
 \subsection[Definition: Metrischer Raum]{Definition} % (fold)
 \label{sub:11}
-Ein \Index{metrischer Raum} ist ein Paar $(X,d)$, wobei $X$ eine Menge und $d : X \times X \to [0,\infty)$ ist, sodass
+Ein \Index{metrischer Raum} ist ein Paar $(X,d)$, wobei $X$ eine Menge und $d \colon X \times X \to [0,\infty)$ ist, sodass
 \begin{enumerate}[1)]
 	\item $d(x,y)=0 \iff x=y$ $\forall x,y \in X$
 	\item $d(x,y) = d(y,x)$ $\forall x,y \in X$
@@ -57,7 +57,7 @@ Warum gilt $W \subset \overline{W}$?
 
 \subsection[Definition: Stetigkeit, gleichmäßige Stetigkeit, Isometrie]{Definition} % (fold)
 \label{sub:13}
-Eine Abbildung $f : X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,d_Y)$ heißt 
+Eine Abbildung $f \colon X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und $(Y,d_Y)$ heißt 
 \begin{itemize}
 	\item \bet{stetig in} $x \in X$, falls
 	\(
@@ -1010,10 +1010,10 @@ $\iota_Z \colon Z \to Z^{**}$ ist eine Isometrie nach \ref{sub:33}. Wende Satz \
 	M &= \iota_Z(N) \subset Z^{**}= \mathcal{L}(Z^*,\mathds{K})
 \end{align*}
 Für $\varphi \in X = Z^{*}$ existiert $C_\varphi \ge 0$ mit $\abs*{T \varphi} = \abs*{\iota_Z(z) (\varphi)} = \abs*{\varphi(z)} \le C_\varphi$, wo $T= \iota_Z(z) \in M$
-für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende \todo{RevChap3}
+für ein $z \in N$. Nach \ref{sub:35} folgt: Es existiert ein $C \ge 0$ mit $\norm[Z]{z} = \norm[Z^{**}]{\iota_Z(z)}  \le C$, $z \in N$. \bewende
 % subsection 36 (end)
 
-\subsection{Corollar} % (fold)
+\subsection[Corollar über Beschränktheit einer Teilmenge von $\mathcal{X,Z}$]{Corollar} % (fold)
 \label{sub:37}
 Sei $X$ ein Banachraum und $Z$ ein normierter Raum. $M \subset \mathcal{L}(X,Z)$ eine Teilmenge, so dass gilt: Für alle $\varphi \in Z^*$ und $x \in X$ existiert $C_{x,\varphi} \ge 0$
 mit
@@ -1022,8 +1022,8 @@ mit
 \]
 Dann ist $M$ beschränkt.
 \minisec{Beweis}
-Für jedes $x \in X$ folgt aus Corollar \ref{sub:36} mit $N := \set[T(x)]{T \in M}$, dass $N$ beschränkt ist. Es folgt, dass $ \set[x \mapsto \norm{T(x)} ]{T \in M}$ ist 
-punktweise gleichmäßig beschränkt. Mit Satz \ref{sub:35} folgt: $M$ ist beschränkt. \bewende
+Für jedes $x \in X$ folgt aus Corollar \ref{sub:36} mit $N := \set[T(x)]{T \in M}$, dass $N$ beschränkt ist. Es folgt, dass $ \set[x \mapsto \norm{T(x)} ]{T \in M}$ 
+punktweise gleichmäßig beschränkt ist. Mit Satz \ref{sub:35} folgt: $M$ ist beschränkt. \bewende
 % subsection 37 (end)
 
 \subsection{Satz: Prinzip der offenen Abbildung} % (fold)
@@ -1031,17 +1031,18 @@ punktweise gleichmäßig beschränkt. Mit Satz \ref{sub:35} folgt: $M$ ist besch
 Seien $X,Y$ Banachräume, $T \in \mathcal{L}(X,Y)$ surjektiv. Dann ist $T$ offen, d.h. für eine offene Menge $U \subset X$ ist $T(U) \subset Y$ offen.
 \minisec{Beweis}
 \begin{enumerate}[(i)]
-	\item Sei $0 \in W \subset X$ offen, dann existiert $\emptyset \not= V \subset Y$ offen mit $V \subset \overline{T(W)}$: $0 \in W \subset X$ $\Rightarrow $ 
-	$B(0,\varepsilon) \subset W$ für ein $\varepsilon>0$. Dann gilt
+	\item Sei $0 \in W \subset X$ offen, dann existiert $\emptyset \not= V \subset Y$ offen mit $V \subset \overline{T(W)}$: 
+	
+	$0 \in W \subset X$ $\Rightarrow $ $B(0,\varepsilon) \subset W$ für ein $\varepsilon>0$. Dann gilt
 	\[
 		X=\bigcup_{n \in \mathds{N}} n \cdot B(0,\varepsilon) = \bigcup_{n \in \mathds{N}} n \cdot W
 	\]
 	Aus der Surjektivität von $T$ folgt $Y = \bigcup_{n \in \mathds{N} }n \cdot T(W) = \bigcup_{n \in \mathds{N}} n \cdot \overline{T(W)}$. Nach dem Satz von Baire 
 	(\ref{sub:110}) folgt: Ein $n \cdot \overline{T(W)}$ enthält eine nichtleere offene Teilmenge, also auch $\overline{T(W)}$.
-	\item Sei $= \in M \subset X$ offen, dann ist $0$ ein innerer Punkt von $\overline{T(M)}$: 
+	\item Sei $0 \in M \subset X$ offen, dann ist $0$ ein innerer Punkt von $\overline{T(M)}$: 
 	
 	Die Abbildung $X \times X \to X$, $(x_1,x_2) \mapsto x_1 -x_2$ ist stetig.\footnote{Banachräume sind topologische Vektorräume} $\Rightarrow$ es gibt $0 \in W \subset X$ 
-	offen mit
+	offen mit\marginnote{mit $W$ als Urbild einer offenen Umgebung der $0$ in $M$}
 	\[
 		W - W = \set[x_1 -x_2]{x_1,x_2 \in W} \subset M 
 	\]
@@ -1051,6 +1052,7 @@ Seien $X,Y$ Banachräume, $T \in \mathcal{L}(X,Y)$ surjektiv. Dann ist $T$ offen
 		V -V
 	\]
 	für $\emptyset \not= V$ offen in $Y$ wie in (i). Aber $0 \in V-V = \bigcup_{y \in V}\set{y}- V$ ist offen in $Y$. Also ist $0$ ein innerer Punkt von $\overline{T(M)}$.
+	\todo{RevChap3}
 	\item Ist $0 \in N \subset X$ offen, so existiert $0 \in Z \subset Y$ offen mit $Z \subset T(M)$:
 	
 	Sei $\varepsilon_0 >0$. Wähle $\varepsilon_i >0$, $1 \le i \in \mathds{N}$ mit $\sum_{i=1}^{\infty} \varepsilon_i < \varepsilon_0$. Nach (ii) gilt: Zu $\varepsilon_i$, 
