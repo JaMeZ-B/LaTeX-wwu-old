@@ -2284,7 +2284,7 @@ Per Induktion nach $n$:
 Sind $\mathds{R}^n$ und $\mathds{R}^m$ homöomorph, so gilt $n=m$.
 \minisec{Beweis}
 Sei $h \colon \mathds{R}^n \to \mathds{R}^m$ ein Homöomorphismus. Sei $x_0 \in \mathds{R}^n$ beliebig. Dann erhalten wir auch einen Homöomorphismus 
-$k := h\big|_{\mathds{R}^n\setminus \set{x_0}} \colon \mathds{R}^n \setminus \set{x_0} \to \mathds{R}^m  \setminus \set{h(x_0)}$. Nun ist $\mathds{R}^n \setminus \set{x_0}$
+$k := h|_{\mathds{R}^n\setminus \set{x_0}} \colon \mathds{R}^n \setminus \set{x_0} \to \mathds{R}^m  \setminus \set{h(x_0)}$. Nun ist $\mathds{R}^n \setminus \set{x_0}$
 homotopieäquivalent zu $S^{n-1}$ und $\mathds{R}^{m}\setminus\set{h(x_0)}$ ist homotopieäquivalent zu $S^{m-1}$. Da $k$ ein Homöomorphismus ist, ist $k_*$ ein Isomorphismus.
 Wir erhalten
 \begin{align*}
@@ -3510,7 +3510,7 @@ Isomorphismus. Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen vert
 
 Zur Vorbereitung müssen wir kurz wiederholen, was eine Abelisierung ist:
 
-\subsection{Definition} % (fold)
+\subsection[Definition: Kommutatorgruppe]{Definition} % (fold)
 \label{sub:151}
 Sei $G$ eine Gruppe. Dann heißt die Untergruppe von $G$, die erzeugt wird von Elementen der Form $[g,h]:= g h g^{-1} h ^{-1}$, \Index{Kommutatorgruppe} von $G$. Wir schreiben
 hierfür auch $[G,G] \subset G$.
@@ -3620,7 +3620,7 @@ Zusammen mit \hyperref[sub:157]{Lemma 2} erhalten wir einen Gruppenhomomorphismu
 \]
 % subsection 159 (end)
 
-\subsection{Theorem(Hurewicz)} % (fold)
+\subsection{Theorem (Hurewicz)} % (fold)
 \label{sub:1510}
 Für wegzusammenhängende Räume ist $\theta^\ab$ ein Isomorphismus.
 \minisec{Beweis}
@@ -3673,6 +3673,162 @@ Es gilt
 \label{sub:1513}
 $(\theta \circ \rho) \enbrace*{\homologieklasse{c}} = \homologieklasse{c}$. $\homologieklasse{c} \in H_1(X;\mathds{Z})$ 
 % subsection 1513 (end)
+
+\section*{Der Satz von Hurewicz} % (fold)
+\label{sec:der_satz_von_hurewicz}
+
+\subsection{Definition} % (fold)
+\label{sub:1514}
+Sei $X$ ein topologischer Raum mit Basispunkt $x_0 \in X$, sei $I=[0,1]$. Sei $n \in \mathds{N}_0$. Die \bet{$\mathbf{n}$-te absolute Homotopiegruppe}\index{Homotopiegruppe}
+$\pi_n(X,x_0)$ ist die Menge der Äquivalenzklassen von stetigen Abbildungen $\omega\colon I^n \to X$ mit $\omega(\partial I^n)=x_0$. Die Äquivalenzrelation ist Homotopie 
+relativ zu $\partial I^n$, d.h. $H \colon I^n \times [0,1] \to X$ erfüllt $H_t(\partial I^n)= x_0$ für alle $t \in [0,1]$. Die Gruppenverknüpfung in $\pi_n(X,x_0)$ ist
+gegeben durch 
+\[
+	(\omega * \omega')(s_1,\ldots ,s_n) = \begin{cases}
+		\omega(2s_1, s_2, \ldots ,s_n), &\text{ falls }0\le s_1 \le \frac{1}{2} \\
+		\omega'(2s_1 -1, s_2, \ldots , s_n) ,&\text{ falls } \frac{1}{2} \le s_1 \le 1
+	\end{cases}
+\]
+Bild für $n=2$:
+\[	
+	\begin{tikzpicture}[baseline={(current bounding box.center)},scale=1.2]
+		\draw (0,0) rectangle (1,1);
+	\end{tikzpicture}
+	 * 
+ 	\begin{tikzpicture}[baseline={(current bounding box.center)},scale=1.2]
+ 		\draw (0,0) rectangle (1,1);
+ 	\end{tikzpicture}
+	= 
+	\begin{tikzpicture}[baseline={(current bounding box.center)},scale=1.2]
+		\draw (0,0) rectangle (1,1);
+		\draw (0.5,0) -- (0.5,1);
+		\node at (0.25,0.5) {$\omega$};
+		\node at (0.75,0.5) {$\omega^\prime$};
+	\end{tikzpicture}
+\]
+% subsection 1514 (end)
+
+\subsection{Eigenschaften von $\pi_n(X,x_0)$} % (fold)
+\label{sub:1515}
+\begin{itemize}
+	\item \enquote{$*$} ist assoziativ, hat die konstante Abbildung auf $x_0$ als neutrales Element und $\omega ^{-1}(s_1,\ldots ,s_n)= \omega(1-s_1,s_2, \ldots ,s_n)$ als inverses
+	Element.
+	\item \enquote{$*$} ist abelsch für $n \ge 2$ (Eckmann-Hilton Argument) \todo{Zeichnung fertig machen}
+	\[
+		\begin{tikzpicture}[baseline={(current bounding box.center)},scale=1.2]
+			\draw (0,0) rectangle (1,1);
+			\draw (0.5,0) -- (0.5,1);
+			\node at (0.25,0.5) {$\omega$};
+			\node at (0.75,0.5) {$\omega^\prime$};
+		\end{tikzpicture}
+		\sim
+		\sim
+		\sim
+		\begin{tikzpicture}[baseline={(current bounding box.center)},scale=1.2]
+			\draw (0,0) rectangle (1,1);
+			\draw (0.5,0) -- (0.5,1);
+			\node at (0.25,0.5) {$\omega^\prime$};
+			\node at (0.75,0.5) {$\omega$};
+		\end{tikzpicture}		
+	\]
+	\item $\pi_n\colon \TOP  \to \ABELGRUPPEN$ ist ein Funktor, d.h. $f \colon (X,x_0) \to (Y,y_0)$ induziert $\pi_n(f) \colon \pi_n(X,x_0) \to \pi_n(Y,y_0)$.
+	\item Da $\nicefrac{I^n}{\partial I^n} \cong S^n$, ergibt sich $\pi_n(X,x_0)$ auch aus den punktierten Homotopieklassen von Abbildungen $(S^n,*) \to (X,x_0)$.
+	\item Falls $x_0$ und $x_0'$ in der gleichen Wegzusammenhangskomponente von $X$ liegen, dann induziert ein Weg von $x_0$ nach $x_0'$ einen Isomorphismus
+	$\pi_n(X,x_0) \cong \pi_n(X,x_0)$
+\end{itemize}
+% subsection 1515 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:1516}
+Sei $n \in \mathds{N}_0$. Ein topologischer Raum $X$ heißt \bet{$\mathbf{n}$-zusammenhängend}\index{n-zusammenhängend@$n$-zusammenhängend}, falls $\pi_0(X)=\set{*}$ und
+$\pi_k(X,x_0)$ trivial ist für alle $k \le n$ und einen Basispunkt $x_0 \in X$.
+% subsection 1516 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:1517}
+Da ein $n$-zusammenhängender Raum $X$ für $n \ge 0$ mindestens wegzusammenhängend ist, gilt $\pi_k(X,x_0) \cong \pi_k(X,x_0')$. Somit ist die Definition unabhängig von der 
+Wahl des Basispunktes.
+% subsection 1517 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:1518}
+$0$-zusammenhängend entspricht wegzusammenhängend und $1$-zusammenhängend entspricht wegsammenhängend und einfach zusammenhängend.
+% subsection 1518 (end)
+
+\subsection{Definition: Relative Homotopiegruppen} % (fold)
+\label{sub:1519}
+Sei $X$ ein topologischer Raum, $A \subset X$ ein Unterraum und $x_0 \in A$ ein Basispunkt von $A$ und $X$. Wir identifizieren $I^{n-1} \subset I^n$ mit der Seitenfläche 
+von $I^n$, für die $s_n=0$ gilt. Außerdem setzen wir $\overline{J^{n-1}=\partial I^n \setminus I^{n-1}}$. Die \Index{relative Homotopiegruppe} $\pi_n(X,A,x_0)$ besteht aus 
+den Homotopieklassen von stetigen Abbildungen $\omega\colon I^n  \to X$ mit $\omega(I^{n-1}) \subset A$, $\omega(J^{n-1})=x_0$. Die Homotopien müssen ebenfalls 
+$H_t(I^{n-1}) \subset A$ und $H_t(J^{n-1}) =x_0$ für alle $t \in [0,1]$ erfüllen.
+\missingfigure{Bild zu relativen Homotopiegruppen}
+Alternativ: $\pi_n(X,A,x_0)$ sind Homotopieklassen von Abbildungen $(D^n,S^{n-1},*) \to (X,A,x_0)$
+% subsection 1519 (end)
+
+\subsection{Bemerkung} % (fold)
+\label{sub:1520}
+\begin{itemize}
+	\item Homotopiegruppen bilden \emph{keine} verallgemeinerte Homologietheorie.
+	\item Es gibt eine lange exakte Sequenz von Homotopiegruppen:
+	\[
+		\begin{tikzcd}
+			\cdots \rar & \pi_n(A,x_0) \rar & \pi_n(X,x_0) \rar & \pi_n(X,A,x_0) \rar["\partial"] & \pi_{n-1}(A,x_0) \rar & \cdots
+		\end{tikzcd}
+	\]
+\end{itemize}
+% subsection 1520 (end)
+
+\subsection{Die Hurewicz-Abbildung} % (fold)
+\label{sub:1521}
+Sei $\vartheta \colon \abs*{\Delta^n} \xrightarrow{\cong} D^n$ ein Homöomorphismus. Dies liefert eine Homologieklasse 
+$\homologieklasse{\vartheta} \in H_n(D^n,S^{n-1}) \cong \mathds{Z}$. Diese Klasse ist ein Generator der Gruppe $H_n(D^n,S{n-1})$. Sei $[\omega] \in \pi_n(X,A,x_0)$
+repräsentiert durch $\omega \colon (D^n,S^{n-1},*) \to (X,A,x_0)$. Setze 
+\[
+	\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A) \enspace, \quad [\omega] \longmapsto \omega_*\homologieklasse{\vartheta} 
+\]
+für $n \ge 2$. Dies ist wohldefiniert, denn falls $\omega$ homotop zu $\omega'$ (bezüglich $(A,x_0)$), dann ist $\omega_*=\omega_*'$
+% subsection 1521 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:1522}
+$\theta_n$ ist ein Gruppenhomomorphismus.
+% subsection 1522 (end)
+
+\subsection{Theorem (Hurwicz)} % (fold)
+\label{sub:1523}
+Seien $(X,A)$ mit $A \subset X$ beide wegzusammenhängend. Sei $\pi_1(A,x_0)=1$ und seien $\pi_k(X,A,x_0)=0$ für $k \le n-1$, $n \ge 2$. Dann ist 
+\[
+	\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A)
+\]
+ein Isomorphismus.
+% subsection 1523 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:1524}
+Ist $X$ ein $(n-1)$-zusammenhängender Raum für ein $n \ge 2$, dann ist 
+\[
+	\theta_n \colon \pi_n(X,x_0)=(X,x_0,x_0) \longrightarrow H_n(X,x_0)\cong H_n(X)
+\]
+ein Isomorphismus.
+% subsection 1524 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:1525}
+Sei $n \ge 1$. Dann ist $\pi_n(S^n,*)\cong \mathds{Z}$ und $\pi_k(S^n,*)=0$ für $k <n$.
+\minisec{Beweis}
+Für $n=1$ gilt $\pi_0(S^n,*)= \set{*}$ und $\pi_1(S^1,*)\cong \mathds{Z}$. Für $n>1$ wissen wir aus dem letzten Semester $\pi_1(S^n,*)=1$ und $S^n$ wegzusammenhängend, also
+ist $S^n$ $1$-zusammenhängend.
+
+Angenommen $\pi_i(S^n,*)=0$ für $i=0,\ldots ,k$, $0 \le k < n$. Dann ist $S^n$ $k$-zusammenhängend und wir erhalten 
+\[
+	\pi_{k+1}(S^n,*) \xrightarrow{\cong} H_{k+1}(S^n)= \begin{cases}
+		\mathds{Z}, &\text{ falls }k+1=n\\
+		0 , &\text{ sonst}
+	\end{cases}
+\]
+Falls $k+1<n$, so ist auch $\pi_{k+1}(S^n,*)=0$, sonst sind wir fertig. \bewende
+% subsection 1525 (end)
+% section der_satz_von_hurewicz (end)
 % section 15 (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
