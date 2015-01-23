@@ -3518,7 +3518,7 @@ Also gilt:
 \pi(C)\subseteq (P_-(C),P_+(C))
 \]
 Begründung für den strikten upper hedge:
-Wegen der Abgeschlossenheit existiert ein $H\in\mc{H}$ mit $P_+(C)(H\cdot S^*)(N)\ge C^*$.
+Wegen der Abgeschlossenheit existiert ein $H\in\mc{H}$ mit $P_+(C)+(H\cdot S^*)(N)\ge C^*$.
 Es gilt $\Pw^*(P_+(C)+(H\cdot S^*)(N)>C^*)>0$, denn sonst wäre $H$ eine Hedgestrategie, was $P_-(C)=P_+(C)$ implizieren würde.
 Für den strikten lower hedge analog.\\
 
@@ -3526,7 +3526,7 @@ Zeige weiter:
 \[
 \sup\limits_{\Pw^*\in\mc{P}}\E^*C^*=P_+(C) \text{ und } \inf\limits_{\Pw^*\in\mc{P}}\E^*C^*=P_-(C)
 \]
-Ist $x>P_+(C)$, so existiert kein upper hedge für $C$ mit Anfangskapital $x$.
+Ist $x<P_+(C)$, so existiert kein upper hedge für $C$ mit Anfangskapital $x$.
 Daraus folgt:
 \[
 C^*-x\notin \mc{K}^*
@@ -3535,7 +3535,7 @@ Wegen \hyperref[sub:satz_4fima]{5.4} existiert ein $\Pw^*\in\mc{P}$ mit
 \[
 \E^*C^*-x>0\Rightarrow \E^*C^*>x.
 \]
-Ist $x>P_-(C)$, so existiert ein lower hedge für $C$ zum Anfangskapital $x$.
+Ist $x>P_-(C)$, so existiert kein lower hedge für $C$ zum Anfangskapital $x$.
 Also ist
 \[
 -(C^*-x)\notin \mc{K}^*
@@ -3942,7 +3942,7 @@ Dann gilt: $\E^*C^*$ ist der eindeutige arbitragefreie Anfangspreis für $C$, wo
 \end{equation*}
 Definiere äquivalente Maße $\Pw_1^*$ und $\Pw_2^*$ durch
 \[
-\frac{d\Pw_1^*}{d\Pw^*}\left|_{\F_N}\right.=\frac{S^*(N)}{S_0}\text{ und }\frac{d\Pw_2^*}{d\Pw^*}\left|_{\F_N}\right.=\frac{1}{\beta(N)}\frac{1}{B(0,N)}
+\left.\frac{d\Pw_1^*}{d\Pw^*}\right|_{\F_N}=\frac{S^*(N)}{S_0}\text{ und } \left.\frac{d\Pw_2^*}{d\Pw^*}\right|_{\F_N}=\frac{1}{\beta(N)}\frac{1}{B(0,N)}
 \]
 Dann gilt:
 \[
@@ -3998,7 +3998,7 @@ Finanzmarktmodell besteht aus
 	\beta(t)=e^{rt},~0\le t\le T
 	\]
 	\item[risky asset:]
-	\item Anfangskurs $S_0>=$. Annahme:
+	\item Anfangskurs $S_0>0$. Annahme:
 	\begin{enumerate}[(a)]
 		\item die relativen Kursänderungen sind unabhängig und zeitlich stationär
 		\item die Kursänderungen sind stetig
@@ -4009,7 +4009,7 @@ Finanzmarktmodell besteht aus
 	\]
 	beschrieben werden kann. $(W(t))_{t\ge 0}$ bezeichnet dabei den \Index{Wiener-Prozess}. Dieser ist definiert durch die folgenden Bedingungen
 	\begin{enumerate}[(i)]
-		\item $W(0)=0 \pfs$
+		\item $W(0)=0~\pfs$
 		\item Für beliebige $0\le t_0<t_1\dt{<}t_n,~n\in \N$ sind 
 		\[
 		W_{t_1}-W_{t_0},W_{t_2}-W_{t_1}\dt{,}W_{t_n}-W_{t_{n-1}}
@@ -4108,7 +4108,7 @@ Definiere mit dem diskreten CRR-Aktienprozess $(S_n(t_j))_{j=0\dt{,}n}$ einen st
 \[
 S_n(t)=S_n(t_{i-1})\text{ für } t_{i-1}\le t<t_i~\forall 1\le i\le n
 \]
-Für festes $t\in[0,T]$ und für $i_n=\rfloor n\frac{t}{T}\lfloor$ gilt:
+Für festes $t\in[0,T]$ und für $i_n=\lfloor n\frac{t}{T}\rfloor$ gilt:
 \[
 i_n\frac{T}{n}\le t<(i_n+1)\frac{T}{n},~\frac{i_n}{n}\to \frac{t}{T}
 \]
@@ -4172,7 +4172,7 @@ Dann gilt:
 \begin{enumerate}[(i)]
 	\item $W$ ist ein Martingal
 	\item $(W_t^2-t)$ ist ein Martingal
-	\item $\enbrace{\exp\enbrace{\nu W_t-\frac{1}{2}\nu t}}_{t\ge 0}$ ist ein Martingal
+	\item $\enbrace{\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2 t}}_{t\ge 0}$ ist ein Martingal
 \end{enumerate}
 
 \bet{Beweis:}\\
@@ -4198,7 +4198,7 @@ Dann gilt:
 		\E(\exp(\nu W_t)~|~\F_s) &= \E(\exp(\nu(W_s+W_t-W_s))~~\F_s)= \E(\exp(\nu W_s)\exp(\nu(W_t-W_s)~|~\F_s))\\
 		&= \exp(\nu W_s)\E(\exp(\nu(W_t-W_s)~|~\F_s)) = \exp(\nu W_s)\E(\exp(\nu(W_t-W_s)))\\
 		&= \exp(\nu W_s)\E(\exp(\nu W_{t-s})) = \exp(\nu W_s)\exp\enbrace{\frac{1}{2}\nu^2(t-s)}
-	\end{aligned}
+	\end{aligned}\marginnote{letzter Schritt stoch. Analysis (vgl.brownsche Bewegung)}
 	\end{equation*}
 \end{enumerate}
 %sub end
@@ -4218,9 +4218,9 @@ Dann gilt:
 	\[
 	\bar{\E}(Y~|~\F_s)=\frac{\E(YL_t~|~\F_s)}{L_s}~\forall s\le t
 	\]
-	dabei ist $\bar{\E}Y=\int Y\dint \bar{\Pw}$ und $\bar{\E}(Y~Y~\F_t)$ der bedingte Erwartungswert von $Y$ bzgl. $\bar{\Pw}$.
+	dabei ist $\bar{\E}Y=\int Y\dint \bar{\Pw}$ und $\bar{\E}(Y~|~\F_t)$ der bedingte Erwartungswert von $Y$ bzgl. $\bar{\Pw}$.
 	\item $(M_t)_{t\ge0}$ ist ein $\bar{\Pw}$-Martingal genau dann, wenn $(M_tL_t)_{t\ge0}$ ein $\Pw$-Martingal ist.
-	\item Ist $(R_t)_{t\ge 0}$ ein positives $\Pw$-Martingal mit $\E R_t=1~\forall t\ge 0$, so kann auf jedem $\F_T$ ein W'Maß $Q_T$ definiert werden mit
+	\item Ist $(R_t)_{t\ge 0}$ ein positives $\Pw$-Martingal mit $\E R_t=1~\forall t\ge 0$, so kann auf jedem $\F_T$ ein W'Maß $Q_T$ definiert werden, mit
 	\[
 	\left.\frac{\dint Q_T}{\dint \Pw}\right|_{\F_t}=R_t~\forall t\le T
 	\]
