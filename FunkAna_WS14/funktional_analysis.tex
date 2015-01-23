@@ -2797,7 +2797,78 @@ Sei $X$ ein Banachraum. Dann ist $\mathcal{K}(X) \lhd \mathcal{L}(X)$ ein abgesc
 
 \subsection[Satz: Diagonalisierbarkeit selbstadjungierter, kompakter Operatoren]{Satz} % (fold)
 \label{sub:810}
-Sei $T \in \mathcal{K}(X)$ ein selbstadjungierter, kompakter Operator auf dem Hilbertraum $\mathcal{H}$. Dann ist $T$ diagonalisierbar.
+Sei $T \in \mathcal{K}(\mathcal{H})$ ein selbstadjungierter, kompakter Operator auf dem Hilbertraum $\mathcal{H}$. Dann ist $T$ diagonalisierbar; genauer gilt:
+\begin{enumerate}[(i)]
+	\item $\sigma(T) \subset \mathds{R}$ ist abzählbar; der einzige mögliche Häufungspunkt ist $0$.
+	\item Jedes $\lambda \in \sigma(T)$ ist ein Eigenwert. Die Eigenräume zu verschiedenen Eigenwerten sind\marginnote{Letzteres gilt allgemein für selbstadjungierte 
+	Operatoren} orthogonal.
+	\item Seien $\tilde{\lambda}_0, \tilde{\lambda}_1, \ldots $ die unterschiedlichen Spektralwerte (d.h. Eigenwerte \emph{ohne} Vielfachheiten) und 
+	$\tilde{X}_0,\tilde{X}_1,\ldots$ die zugehörigen Eigenräume. Dann ist $\tilde{X}_i$ für jedes $\tilde{\lambda}_i\not=0$ endlichdimensional und es gilt 
+	$\mathcal{H}= \bigoplus_i \tilde{X}_i$.
+	\item Seien $\lambda_0, \lambda_1,\ldots $ die nichtverschwindenden Eigenwerte, gezählt \emph{mit} Vielfachheiten. Dann existiert ein Orthonormalsystem 
+	$\set{e_i}_{i \in \mathds{N}}$ von zugehörigen Eigenvektoren und für jedes solche Orthonormalsystem gilt für $x \in \mathcal{H}$
+	\[
+		T x = \sum_{i=0}^{\infty} \lambda_i \cdot \skal*{e_i}{x} \cdot e_i 
+	\]
+	Falls $T\ge 0$, kann man die $\lambda_i$ absteigend wählen und es gilt $\lambda_i \to 0$ (falls es unendlich viele $\lambda_i\not=0$ gibt).
+\end{enumerate}
+\minisec{Beweis (für $T \ge 0$)}
+Für $x \in \mathcal{H}$ setze $\mu(x) := \frac{\skal*{x}{T x}}{\skal*{x}{x}}\ge 0$ und 
+\[
+	\overline{\mu} := \sup_{x \in \mathcal{H}} \mu(x) = \sup_{x \in \overline{B}(0,1)} \skal*{x}{T x} \le \norm{T} 
+\]
+Wir nehmen $\mu >0$ an, denn andernfalls ist $T=0$ nach Bemerkung \ref{sub:729}. Wähle $(x_k)_{k \in \mathds{N}} \subset \mathcal{H}$ mit $\norm{x_k}=1$ und 
+$\mu(x_k)= \skal*{x_k}{T x_k} \to \overline{\mu}$. Da $T$ kompakt ist, dürfen wir (eventuell nach Übergang zu einer Teilfolge) annehmen, dass $T x_k \to \overline{y}$ für
+ein $\overline{y}\in \mathcal{H}$.
+Nach \ref{sub:510} ist $\overline{B}_{\mathcal{H}^*}(0,1)$ $\w^*$-kompakt, also gilt (wieder eventuell nach Übergang zu einer Teilfolge) 
+\[
+	\kappa(x_k) \xrightarrow{\w^*} \overline{\varphi} \in \mathcal{H}^*
+\]
+Setze nun $\overline{x} := \kappa ^{-1}\enbrace*{\overline{\varphi}}$. Für jedes $x \in \mathcal{H}$ gilt  
+$\skal*{x_k}{T x} = \kappa(x_k)(T x) \to \overline{\varphi}(T x) = \skal*{\overline{x}}{T x}$. Also insbesondere
+\[
+	0 = \lim_{k\to \infty} \skal*{x_k -\overline{x}}{T x} = \lim_{ k \to \infty} \skal*{T x_k - T \overline{x}}{x}= \skal*{\lim_{ k \to \infty} T x_k - T \overline{x} }{x}
+	= \skal*{\overline{y} - T \overline{x}}{x}
+\]
+Damit folgt $\overline{y}=T \overline{x}$. Es gilt $\norm{\overline{x}}=1$ und\footnote{\enquote{teilweiser Limes} mit: 
+$\abs*{\skal*{x_k}{T x_k} - \skal*{x_k}{\overline{y}}}=\abs*{\skal*{x_k}{T x_k - \overline{y}}} \le \norm{x_k} \cdot \norm{T x_k - \overline{y}} \to 0$}
+\[
+	\overline{\mu} = \lim_{ k \to \infty} \skal*{x_k}{T x_k} = \lim_{ k \to \infty}  \skal*{x_k}{\overline{y}} = \skal*{\overline{x}}{\overline{y}} = 
+	\skal*{\overline{x}}{T \overline{x}} = \mu(\overline{x})
+\]
+das heißt $\overline{\mu}$ ist das Maximum von $\mu \colon \mathcal{H} \to \mathds{R}$. Für $z \in \mathcal{H}$ definiere $f_z \colon \mathds{R} \to \mathds{R}$ durch
+$f_z(t) := \mu(\overline{x}+ t \cdot z)$. Dann ist $f_z$ in $t=0$ differenzierbar und es gilt
+\[
+	0 = f_z'(0) = \frac{2 \cdot \skal*{z}{T \overline{x}} \cdot \norm{\overline{x}}^2 - 2 \cdot \skal*{\overline{x}}{T \overline{x}} \cdot 
+	\skal*{z}{\overline{x}}}{\norm{\overline{x}}^4} 
+\]
+Also ist $\skal*{z}{T \overline{x} - \overline{\mu} \cdot \overline{x}} =0$ für alle $z \in \mathcal{H}$. Es folgt $T \overline{x}= \overline{\mu} \cdot \overline{x}$.
+Setze nun $\lambda_0 := \overline{\mu}$, $e_0:= \overline{x}$. Definiere $\mathcal{H}_1 := \set{e_0}^\bot$. Dann ist $\mathcal{H}_1 \subset \mathcal{H}$ ein Untervektorraum.
+Für $x \in \mathcal{H}_1$ gilt $\skal*{e_0}{Tx} = \skal*{T e_0}{x}= \lambda_0 \cdot \skal*{e_0}{x}=0$. Also ist $Tx \in \mathcal{H}_1$. Wir können also 
+\[
+	T_1 := T\big|_{\mathcal{H}_1} \in \mathcal{L}(\mathcal{H}_1)
+\]
+definieren. Tatsächlich gilt $0 \le T_1 = T_1^* \in \mathcal{K}(\mathcal{H}_1)$. Induktion liefert Eigenwerte $\lambda_0 \ge \lambda_1 \ge \lambda_2 \ge \ldots>0$ zu
+normierten Eigenvektoren $e_0, e_1, e_2, \ldots$ (Die Folge ist endlich falls ein $\lambda_i=0$ oder $\dim \mathcal{H} < \infty$). Die Eigenvektoren sind paarweise orthogonal
+und für jedes $X_k := \Span \set{e_0, \ldots ,e_k}$ und $x \in X_k^\bot$ gilt $\mu(x) \le \lambda_k$.
+
+(Noch zu zeigen: $\lambda_k \to 0$)
+
+Für $\tilde{\mathcal{H}} := \overline{\bigcup_{k=0}^\infty X_k}$ und $x \in \tilde{\mathcal{H}}^\bot$ gilt $\mu(x) \le \lambda_k$, $k \in \mathds{N}$, also $\mu(x)=0$.
+Damit folgt $\skal*{x}{T x}=0$ und wegen $T|_{\tilde{\mathcal{H}}^\bot} \in \mathcal{K} \enbrace[\big]{\tilde{\mathcal{H}}^\bot}$ selbstadjungiert gilt nach Bemerkung 
+\ref{sub:729} $T|_{\tilde{\mathcal{H}}^\bot} =0$, das heißt $\tilde{\mathcal{H}}^\bot \subset \ker T$.
+
+Die $e_k$ bilden eine Orthonormalbasis von $\tilde{\mathcal{H}}$: Für $x \in \mathcal{H}$ existieren $\tilde{x} \in \tilde{\mathcal{H}}$ und $\tilde{x}^\bot \in \tilde{\mathcal{H}}^\bot$ mit $x= \tilde{x} + \tilde{x}^\bot$. Es gilt dann 
+\[
+	T x = T \tilde{x} + T(\tilde{x}^\bot) = T \tilde{x} = T \enbrace*{\sum_{k=0}^{\infty} \skal*{e_k}{\tilde{x}}} \cdot e_k = \sum_{k=0}^{\infty} \skal*{e_k}{x} T e_k
+	= \sum_{k=0}^{\infty} \lambda_k \skal*{e_k}{x} \cdot e_k 
+\]
+Also gilt (iv). Damit folgt auch (ii). (i) folgt aus (iv) und (ii). Da $T$ kompakt ist, existiert eine konvergente Teilfolge $(T e_{k_l})_{l \in \mathds{N}}$. Es gilt
+\[
+	0=\lim_{l,m \to \infty} \norm{T e_{k_l} - T e_{k_n}} = \lim_{l,m \to \infty} \norm{\lambda_{k_l} \cdot e_{k_l} - \lambda_{k_m} e_{k_m}} = 
+	\lim_{l,m \to \infty}  \sqrt{\lambda_{k_l}^2 + \lambda_{k_m}^2}  
+\]
+Damit folgt $\lambda_{k_l} \xrightarrow{l \to \infty} 0$. Damit müssen wegen der Absteigenden Folge auch $\lambda_k \xrightarrow{k \to \infty} 0$. \bewende
 % subsection 810 (end)
 % section 8 (end)
 
