@@ -4210,7 +4210,7 @@ Konstruktion des äquivalenten Martingalmaßes im Black-Scholes Modell.
 \label{sub:masswechsel}
 Sei $(\Omega,\F,\Pw)$ ein W'Raum, $(\F_t)_{t\ge 0}$ eine Filtration, sei $(L_t)_{t\ge0}$ ein positives Martingal bzgl. $\Pw$ und $\bar{\Pw}$ ein weiteres W'Maß auf $(\Omega,\F)$ mit:
 \[
-\frac{\dint \bar{\Pw}}{\dint \Pw}|_{\F_t}=L_t~\forall t\ge 0
+\left.\frac{\dint \bar{\Pw}}{\dint \Pw}\right|_{\F_t}=L_t~\forall t\ge 0
 \]
 Dann gilt:
 \begin{enumerate}[(i)]
@@ -4222,7 +4222,7 @@ Dann gilt:
 	\item $(M_t)_{t\ge0}$ ist ein $\bar{\Pw}$-Martingal genau dann, wenn $(M_tL_t)_{t\ge0}$ ein $\Pw$-Martingal ist.
 	\item Ist $(R_t)_{t\ge 0}$ ein positives $\Pw$-Martingal mit $\E R_t=1~\forall t\ge 0$, so kann auf jedem $\F_T$ ein W'Maß $Q_T$ definiert werden mit
 	\[
-	\frac{\dint Q_T}{\dint \Pw}|_{\F_t}=R_t~\forall t\le T
+	\left.\frac{\dint Q_T}{\dint \Pw}\right|_{\F_t}=R_t~\forall t\le T
 	\]
 \end{enumerate}
 
@@ -4232,7 +4232,7 @@ Sei $Y$ $\F_t$-messbar und $A\in \F_s$
 \begin{equation*}
 \begin{aligned}
 	\int\ablim{A}Y\dint \Pw &= \int\ablim{A}YL_t\dint\Pw = \int\ablim{A}\E(YL_t~|~\F_s)\dint\Pw\\
-	&= \int\ablim{A}\E(YL_t~|~\F_s)\frac{1}{L_s}\dint\bar{\Pw}, \text{ da } \frac{\dint \bar{\Pw}}{\dint \Pw}|_{\F_s}=L_s
+	&= \int\ablim{A}\E(YL_t~|~\F_s)\frac{1}{L_s}\dint\bar{\Pw}, \text{ da } \left.\frac{\dint \bar{\Pw}}{\dint \Pw}\right|_{\F_s}=L_s
 \end{aligned}
 \end{equation*}
 
@@ -4265,7 +4265,7 @@ Für $A\in \F_t$ mit $t\le T$ gilt:
 Sei $(W_t)_{t\ge 0}$ ein Wiener-Prozess bzgl. einer Filtration $(\F_t)_{t\ge0}$.
 Sei für $\nu\in \R$ ein weiteres Maß $\Pw_\nu$ auf $(\Omega,\F_\infty)$ gegeben mit
 \[
-\frac{\dint\Pw_\nu}{\dint \Pw}|_{\F_t}=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}~\forall t\ge0
+\left.\frac{\dint\Pw_\nu}{\dint \Pw}\right|_{\F_t}=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}~\forall t\ge0
 \]
 und $\F_\infty:=\sigma\enbrace{\bigcup\ablim{t\ge0}\F_t}$.\\
 Dann gilt:
@@ -4286,10 +4286,12 @@ ist klar.\\
 Sei $g:\R\to\R$ beschränkt messbar.
 \begin{equation*}
 \begin{aligned}
-\E_\nu (g(\bar{W}_t-\bar{W}_s)~|~\F_s) &= \E (g(\bar{W}_t-\bar{W}_s)L_t~|~\F_s)\frac{1}{L_s} \text{ mit } L_t=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}\\
-&= \E\enbrace{g(W_t-W_s-\nu(t-s))\frac{L_t}{L_s}~|~\F_s} = \E\enbrace{g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)}~|~\F_s}\\
-&= \E g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)} = \E g(W_{t-s}-\nu(t-s))\exp\enbrace{\nu W_{t-s}-\frac{1}{2}\nu^2(t-s)}\\
-&= \E_\nu g(\bar{W}_{t-s})
+	\E_\nu (g(\bar{W}_t-\bar{W}_s)~|~\F_s) &= \E (g(\bar{W}_t-\bar{W}_s)L_t~|~\F_s)\frac{1}{L_s} \text{ mit } L_t=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}\\
+	&= \E\enbrace{g(W_t-W_s-\nu(t-s))\frac{L_t}{L_s}~|~\F_s}\\
+	&= \E\enbrace{g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)}~|~\F_s}\\
+	&= \E g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)}\\
+	&= \E g(W_{t-s}-\nu(t-s))\exp\enbrace{\nu W_{t-s}-\frac{1}{2}\nu^2(t-s)}\\
+	&= \E_\nu g(\bar{W}_{t-s})
 \end{aligned}
 \end{equation*}
 Hieraus folgt: $\bar{W}_t-\bar{W}_s$ ist stochastisch unabhängig von $\F_s$ und genauso verteilt wie $\bar{W}_{t-s}$.
@@ -4319,8 +4321,176 @@ Definition: Ein W'Maß $\Pw^*$ auf $(\Omega,\F_T)$ heißt äquivalentes Martinga
 	\item $S^*(t):=\frac{S(t)}{\beta(t)}=e^{-rtS(t)},~0\le t\le T$ ist ein $\Pw^*$-Martingal.
 \end{enumerate}
 
+\bet{Beweis:}\\
+Ansatz: 
+\[
+\left.\difff{\Pw^*}{\Pw}\right|_{\F_t}=\exp\enbrace{\nu W(t)-\frac{1}{2}\nu^2t},
+\]
+zu bestimmen ist $\nu$.\\
+Girsanov liefert $W^*(t)=W(t)-\nu t,~t\ge 0$ ist ein Wiener-Prozess bzgl. $\Pw^*$.
+Bzgl. $\Pw^*$ gilt:
+\begin{equation*}
+\begin{aligned}
+	S(t)&=S_0 e^{\mu t}\exp\enbrace{\sigma W_t-\frac{1}{2}\sigma^2t}\\
+	&=S_0 e^{\mu t}\exp\enbrace{\sigma (W_t^*+\nu t)-\frac{1}{2}\sigma^2t}\\
+	&=S_0 \exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t} e^{(\mu+\sigma \nu)t}
+\end{aligned}
+\end{equation*}
+Also
+\[
+S_t^*=e^{-rt}S_t=S_0 \exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t} e^{(\mu+\sigma \nu)t}
+\]
+und damit $(S_t^*)$ ist ein $\Pw^*$-Martingal genau dann, wenn
+\[
+\mu -r+\sigma \nu \Leftrightarrow \nu = -\frac{\mu-r}{\sigma}
+\]
+\uline{Ergebnis:}\\
+Für $\nu = -\frac{\mu-r}{\sigma}$ ist $\Pw^*$ ein äquivalentes Martingalmaß.\\
 
+\bet{Bemerkung:}\\
+Bzgl. $\Pw^*$ gilt:
+\[
+S(t)=S_0 e^{r t}\exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t},~t\ge 0
+\]
+Also ist $S$ ein geometrischer Wiener-Prozess mit Trend $r$ und Volatiliät $\sigma$.\\
+$\enbrace{\frac{S_t^*}{S_0}}_{t\ge0}$ ist ein $\Pw^*$-Martingal und damit ein positives Martingal mit
+\[
+\E^*\frac{S_t^*}{S_0}=\frac{S_0^*}{S_0}=1
+\]
+Deshalb kann ein Maßwechsel durchgeführt werden:
+\[
+\left.\difff{\Pw_\sigma^*}{\Pw}\right|_{\F_t}=\frac{S_t^*}{S_0}=\exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t}
+\]
+Da $W^*$ ein Wiener-Prozess bzgl. $\Pw^*$ ist, gilt nach Girsanov
+\[
+W_t^**=W_t^*-\sigma t,~t\ge0
+\]
+ist ein Wiener-Prozess bzgl. $\Pw_\sigma^*$.
+Weiter ist:
+\begin{equation*}
+\begin{aligned}
+	S(t)&= S_0 e^{r t}\exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t}\\
+	&= S_0 e^{rt}\exp\enbrace{\sigma(W_t^**+\sigma t)-\frac{1}{2}\sigma^2t}\\
+	&= S_0 e^{(r+\sigma^2)t}\exp\enbrace{\sigma W_t^**-\frac{1}{2}\sigma^2t}
+\end{aligned}
+\end{equation*}
+\uline{Ergebnis:}\\
+Der Aktienpreisprozess $(S(t))_{t\ge0}$ ist ein geometrischer Wiener-Prozess mit Trend $\mu$ und Volatilität $\sigma$ bzgl. $\Pw$, dann $r$ und $\sigma$ bzgl. $\Pw^*$ und abschließend $r+\sigma^2$ und $\sigma$ bzgl. $\Pw_\sigma^*$. 
+%sub end
 
+\subsection{Bewertung von Claims}
+\label{sub:bewertung_claims}
+Ein Derivat ist ein Wertpapier, das eine zufällige Auszahlung $C$ zum Zeitpunkt $T$ garantiert.
+Im mathematischem Modell entspricht dies einer $\F_T$-messbaren Zufallsvariablen $C$.\\
+Annahme:
+\[
+\E^*\abs{C^*}<\infty, \text{ wobei } C^*:=e^{-rt}C
+\]
+Klar
+\[
+\E^*\abs{C^*}<\infty \Leftrightarrow \E^*\abs{C}<\infty
+\]
+Es gilt:
+$C$ ist durch eine selbstfinanzierende Handelsstrategie replizierbar.
+Zum Nachweis hierfür benötigt man die stochastische Analysis (siehe Höhere Finanzmathematik).
+Dies folgt aus dem \bet{Martingaldarstellungssatz}.\\
+Deshalb gibt es einen eindeutigen arbitragefreien Preisprozess $(P_t(C))_{0\le t\le T}$.
+Analog zum diskreten ist dieser gegeben durch
+\[
+e^{-rt} P_t(C)= \E^*(C^*~|~\F_t),~0\le t\le T
+\]
+Insbesondere ist damit $P_0(C)=\E^*(C^*)=\E^*e^{-rT}C$.
+%sub end
+
+\subsection{Black-Scholes Formel}
+\label{sub:black_scholes_formel}
+\index{Black-Scholes Formel}
+Betrachtet wird eine Call-Option
+\[
+C=(S_T-K)^+
+\]
+Zu bestimmen ist:
+\[
+\E^*(e^{-rT}(S_T-K)^+~|~\F_t)=P_t(C)e^{-rt}
+\]
+Zunächst für $t=0$:
+\begin{equation*}
+\begin{aligned}
+	\E^*e^{-rt}(S_T-K)^+ &= \E^*e^{-rt}S_T\mathbb{1}_{\penbrace{S_T>K}}-e^{-rt}K\Pw^*(S_T>K)\\
+	S_0\cdot \E\frac{S_T^*}{S_0}\mathbb{1}_{\penbrace{S_T>K}}-e^{-rt}K\Pw^*(S_T>K)\\
+	&= S_0\underbracket{\Pw_\sigma^*(S_T>K)}_{(1)}-e^{-rt}K\underbracket{\Pw^*(S_T>K)}_{(2)}\\
+\end{aligned}
+\end{equation*}
+Mit $S_T=S_0\exp\enbrace{\sigma W_T^**-\frac{1}{2}\sigma^2 T}e^{(r+\sigma^2)T}$ folgt
+\begin{equation*}
+\begin{aligned}
+	\Pw_\sigma^*(S_T>K) &= \Pw_\sigma^*\enbrace{\log\frac{S_T}{S_0}>\log\frac{K}{S_0}}\\
+	&= \Pw_\sigma^*\enbrace{\sigma W_T^**-\frac{1}{2}\sigma^2 T+(r+\sigma^2)T>\log\frac{K}{S_0}}\\
+	&= \Pw_\sigma^*\enbrace{\frac{W_T^**}{\sqrt{T}}>\frac{\log\frac{K}{S_0}+\frac{1}{2}\sigma^2T-(r+\sigma^2)T}{\sigma\sqrt{T}}}\\
+	&= \phi\enbrace{\frac{\log\frac{S_0}{K}+\enbrace{r+\frac{1}{2}\sigma^2}T}{\sigma\sqrt{T}}}\\
+	&\text{mit } \phi(y)=\frac{1}{\sqrt{2\pi}}\int\ablim{-\infty}^ye^{-\frac{1}{2}z^2}\dint z
+\end{aligned}
+\end{equation*}
+Weiter:
+\begin{equation*}
+\begin{aligned}
+	\Pw^*(S_T>K) &= \Pw^*\enbrace{\log\frac{S_t}{S_0}>\log\frac{K}{S_0}}\\
+	&= \Pw^*\enbrace{\sigma W_T^*-\frac{1}{2}\sigma^2T+rT>\log\frac{K}{S_0}}\\
+	&= \Pw^*\enbrace{\frac{W_T}{\sqrt{T}}>\frac{\log\frac{K}{S_0}-rT+\frac{1}{2}\sigma^2T}{\sigma\sqrt{T}}}\\
+	&= \phi\enbrace{\frac{\log\frac{S_0}{K}+\enbrace{r-\frac{1}{2}\sigma^2}T}{\sigma\sqrt{T}}}
+\end{aligned}
+\end{equation*}
+\uline{Ergebnis:}\\
+Bezeichnet $c(S_0,T,K)$ den ANfangspreis einer Call-Option mit Laufzeit $T$, strike $K$ und Anfangsaktienkurs $S_0$, so gilt:
+\[
+c(S_0,T,K)= S_0\phi(h_1(S_0,T))-Ke^{-rt}\phi(h_2(S_0,T))
+\]
+mit 
+\[
+h_1(S_0,T)=\frac{\log\frac{S_0}{K}+\enbrace{r+\frac{1}{2}\sigma^2}T}{\sigma\sqrt{T}},~h_2(S_0,T)=\frac{\log\frac{S_0}{K}+\enbrace{r-\frac{1}{2}\sigma^2}T}{\sigma\sqrt{T}}
+\]
+Da der Aktienpreisprozess - gegeben $\F_t$ - sich verhält wie in einem Black-Scholes Modell, mit Laufzeit $T-t$ und Anfangskurs $S_t$, ergibt sich für den Call-Preis zum Zeitpunkt $t$:
+\[
+P_t(C)=c(S_t,T_t,K)
+\]
+Genauer kann man zeigen, mit Hilfe der Markov-Eigenschaft:
+\begin{equation*}
+\begin{aligned}
+	P_t(C) &= \E^*\enbrace{e^{-rt}(S_T-K)^+~|~\F_t}e^{rt} = e^{-r(T-t)}\E^*((S_T-K)^+~|~\F_t)\\
+	&= e^{-r(T-t)}\E^*((S_T-K)^+~|~S_t) = \E^*(e^{-r(T-t)}(S_T-K)^+~|~S_t)\\
+	&= c(S_t,T-t,K)
+\end{aligned}
+\end{equation*}
+denn
+\[
+\E^*((S_T-K)^+~|~S_t=x) = \E^*((S_{T-t}-K)^+~|~S_0=x)
+\]
+%sub end
+
+\subsection{Greeks}
+\label{sub:greeks}
+\uline{Eigenschaften des Call-Preises:}\\
+Sei $c(x,t,\sigma,K)$ der Preis einer Call-Option mit Laufzeit $t$, Volatilität $\sigma$, strike $K$ und Anfangskurs $x$.
+\[
+c(x,t,\sigma,K)= S_0\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
+\]
+\begin{enumerate}[(i)]
+	\item $\lim\ablim{t\downarrow 0}c(x,t,\sigma,K)=(x-K)^+$
+	\item $\partial_tc+\frac{1}{2}\sigma^2x^2\partial_x^2c+x\partial_xc=rc$ auf $(0,\infty)\times(0,\infty)$.
+	Dies ist die \Index{Black-Scholes Differenzialgleichung}.
+	Dann gilt:
+	\[
+	x\varphi(h_1(x,t))-Ke^{-rt}\varphi(h_2(x,t))=0
+	\]
+	\item $c$ ist strikt wachsend als Funktion des Aktienanfangskurses mit
+	\[
+	\Delta =\partial_xc=\phi(h_1)>0
+	\]
+	$\partial_xc$ ist das sogenannte \Index{Delta der Option}.
+	Das Delta bestimmt die Replikationsstrategie.\\
+	Setze $H(t)=\partial_xc(S(t),T-t)$ und $\psi(t)=-Ke^{-rt}\phi(h_2(S(t),T-t))$.
+	Dann wird durch $(\psi(t),H(t))_{0\le t\le T}$ eine selbstfinanzierende Handelsstrategie definiert, die die Call-Option repliziert.
+\end{enumerate}
 
 
 
