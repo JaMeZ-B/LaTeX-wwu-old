@@ -196,7 +196,7 @@ bis auf isometrische Isomorphie.
 \label{sub:16}
 Sei $(W,\mathcal{T})$ ein topologischer Raum und $(X,d)$ ein metrischer Raum. Sei 
 \[
-	C_b(W,X) = \set[f : W \to X]{f \text{ stetig und beschränkt}} 
+	C_b(W,X) := \set[f \colon W \to X]{f \text{ stetig und beschränkt}} 
 \]
 versehen mit der Metrik $d_{W,X}$, definiert durch
 \[
@@ -206,7 +206,7 @@ versehen mit der Metrik $d_{W,X}$, definiert durch
 
 \subsection[Bemerkung: $d_{W,X}$ als Metrik auf $C(W,X)$]{Bemerkung} % (fold)
 \label{sub:17}
-Auf $C(W,X) = \set{f : W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \Index{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
+Auf $C(W,X) = \set{f \colon W \to X \text{ stetig}} $ ist $d_{W,X}$ eine \Index{erweiterte Metrik}, d.h. der Wert $\infty$ ist möglich.
 $\tilde{d}_{W,X} := \min \set{1, d_{W,X}} $ ist eine \enquote{echte} Metrik auf $C(W,X)$.
 % subsection 17 (end)
 
@@ -1125,55 +1125,56 @@ Mit Corollar \ref{sub:39} folgt die Behauptung. \bewende
 \section{$L^p$-Räume und der Satz von Riesz-Fischer} % (fold)
 \label{sec:4}
 
-\todo{RevChap4}
 \subsection[Erinnerung: $L^1(\mu)$ ist ein Banachraum]{Erinnerung} % (fold)
 \label{sub:41}
-Sei $(X,\Sigma, \mu)$ ein \Index{Maßraum}.\footnote{$X$ Menge, $\Sigma$ eine $\sigma$-Algebra, $\mu$ Maß}  $f : X \to (-\infty,\infty]$ heißt \Index{messbar}, falls 
-$f ^{-1}(E) \in \Sigma$ gilt für $E \subset \mathcal{B}(\mathds{R})$ (Borelmengen\todo{Def. hinzufügen}). $s : X \to (-\infty,\infty]$ heißt \Index{einfach}, falls 
-$s(X)$ endlich. Für $f : X \to [0,\infty]$ messbar setze
+Sei $(X,\Sigma, \mu)$ ein \Index{Maßraum}.\footnote{$X$ Menge, $\Sigma$ eine $\sigma$-Algebra auf $X$, $\mu$ Maß} Eine Abbildung $f\colon X \to (-\infty,\infty]$ heißt 
+\Index{messbar}, falls $f ^{-1}(E) \in \Sigma$ gilt für $E \subset \mathcal{B}(\mathds{R})$ (Borelmengen\footnote{$\sigma$-Algebra, die von den offenen Intervallen mit 
+rationalen Endpunkten aufgespannt wird, siehe auch \url{https://de.wikipedia.org/wiki/Borelsche_σ-Algebra}}). Eine Abbildung $s\colon X \to (-\infty,\infty]$ heißt 
+\Index{einfach}, falls $s(X)$ endlich ist. Für $f \colon X \to [0,\infty]$ messbar setzen wir
 \[
-	\int f  \, \mathd \mu := \sup \set[\int s \, \mathd \mu]{s \text{ einfach, messbar }, 0 \le s \le f} 
+	\int \! f  \, \mathd \mu := \sup \set[\int \! s \, \mathd \mu]{s \text{ einfach, messbar mit } 0 \le s \le f} 
 \] 
-Für $f : X \to (-\infty,\infty]$ messbar setze $\int\! f \, \mathd \mu := \int \! f_+ \, \mathd \mu - \int \! f_- \, \mathd \mu$, falls $\int \! f_- \, \mathd \mu < \infty$.
-Betrachte
+Für $f\colon X \to (-\infty,\infty]$ messbar setze $\int\! f \, \mathd \mu := \int \! f_+ \, \mathd \mu - \int \! f_- \, \mathd \mu$, falls 
+$\int \! f_- \, \mathd \mu < \infty$. Betrachte
 \begin{align*}
-	\mathcal{L}^1(\mu) := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}\,\mathd \mu < \infty } 
+	\mathcal{L}^1(\mu) := \set[f \colon X \to \mathds{R} \text{ messbar}]{\int \abs*{f}\,\mathd \mu < \infty } 
 \end{align*}
-mit der Halbnorm $\norm[1]{f} := \int \! \abs*{f} \, \mathd \mu $. Setze nun $\mathcal{N}^1 := \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f} \, \mathd \mu =0 }$.
+mit der Halbnorm $\norm[1]{f} := \int \! \abs*{f} \, \mathd \mu $. Setze nun $\mathcal{N}^1 := \set[f\colon X\to\mathds{R} \text{ messbar}]{\int \abs*{f} \, \mathd \mu =0 }$.
 $L^1(\mu)$ ist ein topologischer Vektorraum (Topologie induziert durch $\norm[1]{\cdot}$) und $\mathcal{N}^1 \subset \mathcal{L}^1(\mu)$ ist ein abgeschlossener 
-Untervektorraum (Übung). Definiere 
+Untervektorraum. Definiere 
 \[
-	L^1(\mu) := \nicefrac{\mathcal{L}^1}{\mathcal{N}^1}
+	L^1(\mu) := \nicefrac{\mathcal{L}^1(\mu)}{\mathcal{N}^1}
 \]
-$\norm[1]{\cdot }$ induziert eine Norm $\norm[1]{\cdot }$ auf $L^1(\mu)$ via  
+$\norm[1]{\cdot }$ induziert eine wohldefinierte Norm auf $L^1(\mu)$ -- die wir auch wieder mit $\norm[1]{\cdot }$ bezeichnen -- via  
 \[
 	\norm[1]{f+ \mathcal{N}^1} := \norm[1]{f} \quad , \quad f \in \mathcal{L}^1(\mu) \tag*{(Übung)}
 \]
-$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (Ana \RM{3}, 9.23).
+$(L^1(\mu),\norm[1]{\cdot})$ ist ein Banachraum (siehe Analysis \RM{3}, 9.23).
 % subsection 41 (end)
 
-\subsection[Beispiele für $L^1$-Räume]{Beispiele} % (fold)
+\subsection[Beispiele für $L^1$-Räume mit Lebesgue-Maß und Zählmaß]{Beispiele} % (fold)
 \label{sub:42}
 \begin{enumerate}[(i)]
-	\item $L^1(\mathds{R}^n) := L^1(\mathds{R}^n, \Lambda, \lambda)$, wobei $\Lambda$ die Lebesgue-messbaren Mengen sind und $\lambda $ das Lebesgue-Maß ist.
-	\item $\ell^1(\mathds{N})= L^1 \enbrace[\big]{\mathds{N}, \mathcal{P}(\mathds{N}), \delta} = \set[f : \mathds{N} \to \mathds{R}]{\sum \abs*{f(n)} < \infty } $, 
-	wobei $\delta$ das Zählmaß\footnote{siehe auch \url{http://de.wikipedia.org/wiki/Zählmaß_(Maßtheorie)}} ist.
+	\item $L^1(\mathds{R}^n) := L^1(\mathds{R}^n, \Lambda, \lambda)$, wobei $\Lambda$ die Lebesgue-messbaren Mengen sind und $\lambda $ das Lebesgue-Maß 
+	ist.\index{Lebesgue-Maß}
+	\item $\ell^1(\mathds{N}) := L^1 \enbrace[\big]{\mathds{N}, \mathcal{P}(\mathds{N}), \delta} = \set[f\colon \mathds{N} \to \mathds{R}]{\sum \abs*{f(n)} < \infty } $, 
+	wobei $\delta$ das Zählmaß\footnote{siehe auch \url{http://de.wikipedia.org/wiki/Zählmaß_(Maßtheorie)}}\index{Zählmaß} ist.
 \end{enumerate}
 % subsection 42 (end)
 
 \subsection[Definition und Proposition: Der Raum $L^p(\mu)$]{Definition und Proposition} % (fold)
 \label{sub:43}
-Für einen Maßraum $(X,\Sigma,\mu)$ definiere 
+Ähnlich wie oben definieren wir für einen Maßraum $(X,\Sigma,\mu)$
 \begin{align*}
-	\mathcal{L}^p(\mu) &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu < \infty } \\
-	\mathcal{N}^p &:= \set[f : X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu = 0 } 
+	\mathcal{L}^p(\mu) &:= \set[f \colon X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu < \infty } \\
+	\mathcal{N}^p &:= \set[f \colon X \to \mathds{R} \text{ messbar}]{\int \abs*{f}^p \mathd \mu = 0 } 
 \end{align*}
-$\mathcal{L}^p(\mu)$ und $\mathcal{N}^p$ sind Vektorräume; wir setzen 
+$\mathcal{L}^p(\mu)$ und $\mathcal{N}^p$ sind Vektorräume. Wir setzen wieder
 \[
 	L^p(\mu) := \nicefrac{\mathcal{L}^p(\mu)}{\mathcal{N}^p}
 \]
-Definiere $\norm[p]{\cdot } : \mathcal{L}^p(\mu) \to [0,\infty)$ durch $\norm[p]{f} := \enbrace*{\int \abs*{f}^p \mathd \mu }^{1/p}$. $\norm[p]{\cdot }$ induziert eine 
-Abbildung $\norm[p]{\cdot } : L^P(\mu) \to [0,\infty) $ via $\norm[p]{f + \mathcal{N}^p} := \norm[p]{f} $, für $f \in \mathcal{L}^p$.
+Definiere $\norm[p]{\cdot } \colon \mathcal{L}^p(\mu) \to [0,\infty)$ durch $\norm[p]{f} := \enbrace*{\int \abs*{f}^p \mathd \mu }^{1/p}$. $\norm[p]{\cdot }$ induziert eine 
+Abbildung $\norm[p]{\cdot } \colon L^p(\mu) \to [0,\infty) $ via $\norm[p]{f + \mathcal{N}^p} := \norm[p]{f} $, für $f \in \mathcal{L}^p$.
 \minisec{Beweis}
 \begin{description}
 	\item[$\mathcal{L}^p(\mu)$ ist Vektorraum:]  Für $f,g \in \mathcal{L}^p(\mu)$ und $\alpha, \beta \in \mathds{R}$
@@ -1183,8 +1184,8 @@ Abbildung $\norm[p]{\cdot } : L^P(\mu) \to [0,\infty) $ via $\norm[p]{f + \mathc
 		&\le \int \enbrace*{2^p \cdot \sup \set{\abs*{\alpha \cdot f}^p, \abs*{\beta \cdot g}^p  \rule{0cm}{1em}} } \mathd \mu \\ 
 		&\le \int \!2^p \cdot  \enbrace[\big]{\abs*{\alpha \cdot f}^p + \abs*{\beta \cdot g}^p} \mathd \mu < \infty 
 	\end{align*}
-	\item[$\mathcal{N}^p$ ist Vektorraum:] Übung.
-	\item[{$\norm[p]{\cdot}$ wohldefiniert auf $L^p(\mu)$:}] Übung. \bewende
+	\item[$\mathcal{N}^p$ ist Vektorraum:] Wie obige Ungleichung, dann Linearität des Integrals anwenden.
+	\item[{$\norm[p]{\cdot}$ wohldefiniert auf $L^p(\mu)$:}] Übung. \bewende \todo{RevChap4}
 \end{description}
 % subsection 43 (end)
 
