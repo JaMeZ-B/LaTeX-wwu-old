@@ -11,6 +11,9 @@
 \maketitle
 \begin{abstract}
 \input{../!config/vorwort.tex}
+\section*{Anmerkung}
+Innerhalb dieser Mitschrift wird man öfter den Ausdruck \enquote{Warum?} finden. Dies sind vom Dozenten bewusst weggelassene Details, die zu verstärktem Mitdenken beim Lesen 
+animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sachverhalte.
 \end{abstract}
 
 \setcounter{page}{1}
@@ -41,18 +44,17 @@ Sei $(X,d)$ ein metrischer Raum
 		B(x,\varepsilon) := \set[y \in X]{d(x,y) < \varepsilon} \subset U 
 	\]
 	\item Eine Teilmenge $A \subset X$ heißt \Index{abgeschlossen}, falls $X \setminus A$ offen ist (als Teilmenge von $X$). 
-	\item $\mathcal{T}X := \set[U \subset X]{U \text{ offen}} $ ist die Topologie auf $X$ (die von der Metrik $d$ induziert wird)
+	\item $\mathcal{T}_X := \set[U \subset X]{U \text{ offen im obigen Sinne}} $ ist die von der Metrik induzierte Topologie auf $X$.
 	\item Falls $W \subset X$ eine Teilmenge ist, dann bezeichnet $\overline{W}$ den \Index{Abschluss} von $W$, d.h. die kleinste abgeschlossene Teilmenge von $X$, die 
 	$W$ enthält. Es gilt
 	\[
 		\overline{W} = \enspace\bigcap_{\mathclap{A \subset X \text{abg.}, W \subset A}} \enspace A 
-	\] 
+	\]
+	Für metrische Räume ist dies äquivalent zu
+	\[
+		\overline{W} = \set[x \in X]{\exists (x_n)_n \subset W : \lim_{n \to \infty} x_n = x} \tag*{(warum?)}
+	\]
 \end{itemize}
-Für metrische Räume gilt:
-\(
-	\overline{W} = \set[\lim_n x_n]{(x_n)_n \subset W \text{ konvergente Folge}}.
-\)
-Warum gilt $W \subset \overline{W}$?
 % subsection 12 (end)
 
 \subsection[Definition: Stetigkeit, gleichmäßige Stetigkeit, Isometrie]{Definition} % (fold)
@@ -89,24 +91,36 @@ $(X,d)$ heißt \Index{vollständig}, falls jede Cauchy-Folge in $X$ konvergiert.
 
 \subsection[Satz: Existenz einer eindeutigen Vervollständigung metrischer Räume]{Satz} % (fold)
 \label{sub:15}
-Sei $(X,d)$ ein metrischer Raum. Dann existiert ein vollständiger metrischer Raum $(\tilde{X}, \tilde{d})$ und eine Isometrie $\iota : X \hookrightarrow \tilde{X}$, sodass
-$\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(\tilde{X}, \tilde{d})$ heißt \Index{Vervollständigung} von $(X,d)$ und ist eindeutig bis auf
-isometrische Isomorphie.
+Sei $(X,d)$ ein metrischer Raum. Dann existiert ein vollständiger metrischer Raum $(\tilde{X}, \tilde{d})$ und eine Isometrie $\iota \colon X \hookrightarrow \tilde{X}$, 
+sodass $\overline{\iota(X)} = \tilde{X}$ (d.h. $\iota(X)$ ist dicht in $\tilde{X}$). $(\tilde{X}, \tilde{d})$ heißt \Index{Vervollständigung} von $(X,d)$ und ist eindeutig 
+bis auf isometrische Isomorphie.
 \minisec{Beweis}
 \begin{description}
 	\item[Eindeutigkeit:] 
-	Angenommen, $(\hat{X}, \hat{d})$ ist ein weiterer vollständiger metrischer Raum und $\kappa : X \to \hat{X}$ eine Isometrie mit 
-	$\overline{\kappa(X)}=\hat{X}$. Definiere $\gamma : \hat{X} \to \tilde{X}$ wie folgt: Falls $y \in \hat{X}$, wähle eine Folge $(x_n)_{n \in \mathds{N}}$ in $X$, sodass
+	Angenommen, $(\hat{X}, \hat{d})$ ist ein weiterer vollständiger metrischer Raum und $\kappa \colon X \to \hat{X}$ eine Isometrie mit 
+	$\overline{\kappa(X)}=\hat{X}$. Definiere $\gamma\colon\hat{X} \to \tilde{X}$ wie folgt: Falls $y \in \hat{X}$, wähle eine Folge $(x_n)_{n \in \mathds{N}}$ in $X$, sodass
 	$y= \lim_{n \to \infty} \kappa(x_n)$. Setze nun
 	\[
 		\gamma(y) := \lim_{ n \to \infty} \iota(x_n) \in \tilde{X} 
 	\]
-	Zu zeigen: $\gamma$ ist ein isometrischer Isomorphismus.\todo{Achtung Wortspiel: Beweis \emph{vervollständigen} ;-D}
+	Der Grenzwert existiert, da $\tilde{X}$ vollständig ist
+	Zu zeigen: $\gamma$ ist ein wohldefinierter isometrischer Isomorphismus.
 	\begin{description}
-		\item[Injektivität:] Seien $y,y' \in \hat{X}$ mit $\gamma(y)=\gamma(y')$. Dann existieren Folgen $(x_n)_n, (x_n')_n$ in $X$ mit
-		\[
-			\lim_{ n \to \infty} \iota(x_n) = \lim_{ n \to \infty} \iota(x_n') 
-		\]
+		\item[Wohldefiniertheit:] $(\kappa(x_n))_n$ ist konvergent, also auch Cauchy. Da $\kappa$ eine Isometrie ist, muss $(x_n)_n$ auch eine Cauchyfolge in $X$ sein.
+		Nun ist aber auch $\iota$ eine Isometrie und somit $(\iota(x_n))_n$ eine Cauchyfolge in $\tilde{X}$. Da $\tilde{X}$ vollständig ist, existiert also obiger Grenzwert
+		
+		Wir müssen außerdem zeigen, dass die Definition nicht von der Wahl der Folge abhängt: Angenommen $(x_n')_n$ ist eine weitere Folge, sodass $\kappa(x_n') \to y$.
+		Sei $z \in \tilde{X}$ der Grenzwert dieser Folge unter $\iota$. Dann folgt $\gamma(y)=z$ aus
+		\begin{align*}
+			\tilde{d}\enbrace[\big]{\gamma(y),z} = \lim_{n \to \infty} \tilde{d}\enbrace[\big]{\iota(x_n), \iota(x_n')} = \lim_{n \to \infty} d \enbrace[\big]{x_n,x_n'}
+			= \lim_{n \to \infty} \hat{d}\enbrace[\big]{\kappa(x_n), \kappa(x_n')} = \hat{d}(y,y) =0
+		\end{align*}
+		\item[Isometrie:] Analog zu obiger Rechnung folgt für $z,z' \in \hat{X}$ und Folgen $(x_n)_n$, $(x_n')_n$ mit $\kappa(x_n) \to z$ und $\kappa(x_n')\to z'$
+		\begin{align*}
+			\tilde{d}\enbrace[\big]{\gamma(z),\gamma(z')} = \lim_{n \to \infty} \tilde{d}\enbrace[\big]{\iota(x_n), \iota(x_n')} = \lim_{n \to \infty} d \enbrace[\big]{x_n,x_n'}
+			= \lim_{n \to \infty} \hat{d}\enbrace[\big]{\kappa(x_n), \kappa(x_n')} = \hat{d}(z,z')
+		\end{align*}
+		\item[Bijektivität:] Eine Umkehrabbildung lässt sich leicht konstruieren, indem man in obiger Konstruktion die Rollen von $\hat{X}$ und $\tilde{X}$ vertauscht.
 	\end{description}
 	\item[Existenz:] \begin{description}
 		\item[Konstruktion von $(\tilde{X}, \tilde{d})$:] Setze $Y := \set[(x_n)_{n \in \mathds{N}}]{(x_n)_n \text{ ist Cauchy-Folge in }X}$. Definiere 
@@ -534,7 +548,7 @@ Daraus folgt, dass Normtopologie und Quotiententopologie auf $\nicefrac{X}{Y}$ g
 	\begin{itemize}
 		\item $\norm{\overline{x}} \ge 0 $ ist klar für alle $\overline{x} \in \nicefrac{X}{Y}$
 		\item Angenommen $\norm[\nicefrac{X}{Y}]{\overline{x}} =0$, d.h. $\inf_{y \in Y} \norm[X]{x+y} =0$. Also existiert eine Folge $(y_n)_n \subset Y$ mit
-		$\norm[X]{x+y_n} \xrightarrow{n \to \infty} 0 \Rightarrow y_n \xrightarrow{n \to \infty} -x$. Also ist $-y$ und damit auch $y$ in $Y$, da $Y$ abgeschlossen ist.
+		$\norm[X]{x+y_n} \xrightarrow{n \to \infty} 0 \Rightarrow y_n \xrightarrow{n \to \infty} -x$. Also ist $-x$ und damit auch $x$ in $Y$, da $Y$ abgeschlossen ist.
 		Damit ist $\overline{x}=0 $ 
 	\end{itemize}
 	\item Sei $0 \not= \lambda \in \mathds{K}$, $x \in X$. Dann gilt
@@ -727,8 +741,8 @@ $0 \le \varphi(x +y - x-y) \le \varphi(x-y) + \varphi(-x) + \varphi(y)$, womit f
 Also ist $\tilde{\varphi}$ wohldefiniert. Analog zu \ref{sub:220} folgt, dass $\tilde{\varphi}$ sublinear ist. Nach dem Satz von Hahn-Banach (\ref{sub:221}) existiert ein 
 $\overline{\psi} \colon X \to \mathds{R}$ linear mit $\overline{\psi} \le \tilde{\varphi} \le \varphi$. Es bleibt nur $\overline{\psi}|_Y=\psi$ zu zeigen.
 
-Aus $\tilde{\varphi}(y_0) = \inf_{y \in Y}\varphi(y_0-y) + \psi(y)$ folgt $\tilde{\varphi}|_{Y} \le \psi$ mittels $y=y_0$. Weiter folgt aus \ref{sub:220}, dass $\psi$ minimal in 
-$\mathcal{S}(Y)$ ist. Also muss insgesamt gelten:
+Für $y_0 \in Y$ gilt $\tilde{\varphi}(y_0) = \inf_{y \in Y}\enbrace[\big]{\varphi(y_0-y) + \psi(y)}$ und somit folgt $\tilde{\varphi}|_{Y} \le \psi$ mittels $y=y_0$. Weiter 
+folgt aus \ref{sub:220}, dass $\psi$ minimal in $\mathcal{S}(Y)$ ist. Also muss insgesamt gelten:
 \[
 	\overline{\psi}\big|_Y \le \tilde{\varphi}\big|_{Y} \le \psi \quad \Longrightarrow \quad \psi = \overline{\psi}\big|_{Y} \bewende  
 \]
