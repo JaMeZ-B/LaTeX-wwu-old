@@ -218,16 +218,33 @@ Sei $(f_n)_n$ eine Cauchy-Folge in $C_b(W,X)$, also
 \[
 	\forall \varepsilon>0 : \exists N \in \mathds{N} : \forall n,m >N : \sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}< \varepsilon 
 \]
-$\Rightarrow$ für alle $t$ ist $\enbrace[\big]{f_n(t)}_n$ eine Cauchyfolge in $X$. Da $X$ vollständig ist, existiert ein $x_t \in X$ sodass 
-$f_n(t) \xrightarrow{n \to \infty} x_t$. Definiere $f(t) := x_t$ punktweise.
+Also ist $\enbrace[\big]{f_n(t)}_n$ für alle $t$ eine Cauchyfolge in $X$. Da $X$ vollständig ist, existiert ein $x_t \in X$ sodass 
+$f_n(t) \xrightarrow{n \to \infty} x_t$. Definiere also $f(t) := x_t$ punktweise.
 \begin{description}
-	\item[Vorbereitung:] Es gilt $\forall \varepsilon>0 : \exists N_t$ sodass $d(x_t, f_{N_t}(t)) \le \varepsilon$. Weiter ist
+	\item[$f$ ist Grenzwert:] Sei $\varepsilon>0$. Dann gibt es ein $N\in\mathds{N}$, sodass für alle $k,l\ge N$ gilt $d_{W,X}(f_k,f_l)<\varepsilon$, da $(f_n)_n$ Cauchy ist.
+	Für $n \ge N$ gilt nun $d_{W,X}(f,f_n)\le\varepsilon$, da 
 	\[
-		\sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N_t
+		\sup_{t\in W} d \enbrace[\big]{f(t),f_n(t)} = \adjustlimits \sup_{t\in W} \lim_{k \to \infty} d \enbrace[\big]{f_k(t),f_n(t)} \le \varepsilon
 	\]
-	$\Rightarrow \forall t : d \enbrace*{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N$
+	\item[$f$ ist stetig:] Sei $\varepsilon>0$ und $t \in W$. Wir finden ein $N \in \mathds{N}$ mit $d_{W,X}(f,f_N)<\frac{\varepsilon}{3}$. Da $f_N$ stetig ist in $t$,
+	existiert eine offene Umgebung $U$ von $t$, sodass $d \enbrace[\big]{f_N(t),f_N(s)}< \frac{\varepsilon}{3}$ für alle $s \in U$. Es folgt
+	\[
+		d \enbrace[\big]{f(t),f(s)} \le d \enbrace[\big]{f(t), f_N(t)} + d \enbrace[\big]{f_N(t),f_N(s)} + d \enbrace[\big]{f_N(s),f(s)} < 
+		\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3} = \varepsilon     
+	\]
+	Damit ist $f$ stetig in $t \in W$, also auch auf ganz $W$, da $t$ beliebig war.
+	\item[$f$ ist beschränkt:] Seien $x,y \in W$. Sei $c>0$. Finde $N \in \mathds{N}$, sodass $d_{W,X}(f,f_N) < c$. Dann gilt
+	\[
+		d \enbrace[\big]{f(x),f(y)} \le d \enbrace[\big]{f(x), f_N(x)} + d \enbrace[\big]{f_N(x),f_N(y)} + d \enbrace[\big]{f_N(y),f(y)} < 
+		2c + d \enbrace[\big]{f_N(x),f_N(y)} < \infty
+	\]
+	da $f_N$ beschränkt ist.
+	% Es gilt $\forall \varepsilon>0 : \exists N_t$ sodass $d(x_t, f_{N_t}(t)) \le \varepsilon$. Weiter ist
+% 		\[
+% 			\sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N_t
+% 		\]
+% 		$\Rightarrow \forall t : d \enbrace*{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N$
 \end{description}
-\todo{Beweis zu Ende führen}
 % subsection 18 (end)
 
 \subsection[Proposition über eine Folge von Bällen]{Proposition} % (fold)
