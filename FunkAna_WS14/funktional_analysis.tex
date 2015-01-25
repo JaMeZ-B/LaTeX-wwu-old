@@ -238,7 +238,7 @@ $f_n(t) \xrightarrow{n \to \infty} x_t$. Definiere also $f(t) := x_t$ punktweise
 		d \enbrace[\big]{f(x),f(y)} \le d \enbrace[\big]{f(x), f_N(x)} + d \enbrace[\big]{f_N(x),f_N(y)} + d \enbrace[\big]{f_N(y),f(y)} < 
 		2c + d \enbrace[\big]{f_N(x),f_N(y)} < \infty
 	\]
-	da $f_N$ beschränkt ist.
+	da $f_N$ beschränkt ist. \bewende
 	% Es gilt $\forall \varepsilon>0 : \exists N_t$ sodass $d(x_t, f_{N_t}(t)) \le \varepsilon$. Weiter ist
 % 		\[
 % 			\sup_{t \in W} d \enbrace[\big]{f_n(t), f_m(t)}\le \varepsilon \enspace \forall n,m \ge N_t
@@ -286,13 +286,13 @@ Es gelten folgende äquivalente Formulierungen:
 Zunächst die Äquivalenz: 
 \begin{description}
 	\item[a)$\Rightarrow$b):] Klar, da b) Kontraposition von a) ist.
-	\item[b)$\Rightarrow$c):] Sei $U_n \subseteq X$ offen und dicht $\Rightarrow X \setminus U_n \subseteq X$ abgeschlossen und hat somit keine inneren Punkte. Aus b) folgt
-	nun 
+	\item[b)$\Rightarrow$c):] Für $n \in N$ sei $U_n \subseteq X$ offen und dicht. Dann ist $X \setminus U_n \subseteq X$ abgeschlossen und hat keine inneren Punkte. Aus b) 
+	folgt nun, dass
 	\[
 		\bigcup_{n \in \mathds{N}}X \setminus U_n = X \setminus \bigcap_{n \in \mathds{N}} U_n
 	\]
-	hat keine inneren Punkte. Also ist $\bigcap_{n \in \mathds{N}} U_n$ dicht in $X$.
-	\item[c)$\Rightarrow$a):] ebenso.
+	keine inneren Punkte hat. Also ist $\bigcap_{n \in \mathds{N}} U_n$ dicht in $X$.
+	\item[c)$\Rightarrow$a):] Ebenso (Zeige: Keines der $A_n$ enthält offene Kugel $\Rightarrow \bigcup_n A_n$ enthält keine offen Kugel).
 \end{description}
 Wir wollen nun a) durch Widerspruch beweisen, d.h. wir nehmen an, dass gilt: Jede offene Kugel schneidet $X \setminus A_k$ für jedes $k \in \mathds{N}$. Dazu wollen wir 
 Folgen $(x_k)_{k \in \mathds{N}} \subset X$, $(\varepsilon_k)_{k \in \mathds{N}} \subset (0,1]$ finden mit 
@@ -303,58 +303,60 @@ Folgen $(x_k)_{k \in \mathds{N}} \subset X$, $(\varepsilon_k)_{k \in \mathds{N}}
 \end{enumerate}
 für $k \in \mathds{N}$. Dann gilt 
 \[
-	\bigcup_{n \in \mathds{N}} A_n \stackrel{\text{(iii),(ii)}}{\supset} \bigcap \overline{B}(x_k, \varepsilon_k) \stackrel{\text{(ii)}}{\subset} 
+	\bigcup_{k \in \mathds{N}} A_k \stackrel{\text{(iii)}}{\supset} \bigcap_{k \in \mathds{N}} \overline{B}(x_k, \varepsilon_k) \stackrel{\text{(ii)}}{\subset} 
 	\bigcap_{k \in \mathds{N}}(X \setminus A_k) \cap B(x_k, \varepsilon_k) \subset \bigcap_{k \in \mathds{N}} X \setminus A_k = X \setminus 
 	\enbrace*{\bigcup_{k \in \mathds{N}} A_k} 
 \]
 Aber wegen (i) und (ii) existiert nach Proposition \ref{sub:19} ein $x \in \bigcap_{k \in \mathds{N}}\overline{B}(x_k,\varepsilon_k)$. \light \medskip \\
-Wir suchen also eine Abbildung $\overline{c} : \mathds{N} \to X \times (0,1], k  \mapsto(x_k, \varepsilon_k)$ mit (i),(ii),(iii) für $k \in \mathds{N}$. Setze
+Wir suchen also eine Abbildung $\overline{c} \colon \mathds{N} \to X \times (0,1], k  \mapsto(x_k, \varepsilon_k)$ mit (i),(ii),(iii) für $k \in \mathds{N}$. Wir setzen
 \begin{align*}
-	P_m &:= \set[{c : \set{0, \ldots ,m} \to X \times (0,1] }]{\begin{array}{l}
+	P_m &:= \set[{c \colon \set{0, \ldots ,m} \to X \times (0,1] }]{\begin{array}{l}
 		\text{(i),(iii) gilt für }k \in \set{0, \ldots , m}, \\
 		\text{(ii) gilt für }k \in \set{0, \ldots , m-1}
 	\end{array} }  \\
-	P_\infty &:= \set[{c : \mathds{N} \to X \times (0,1]}]{\text{(i),(ii),(iii) gilt für } k \in \mathds{N} \rule{0cm}{0.3cm}} 
+	P_\infty &:= \set[{c \colon \mathds{N} \to X \times (0,1]}]{\text{(i),(ii),(iii) gilt für } k \in \mathds{N} \rule{0cm}{0.3cm}} 
 \end{align*}
-Die Menge $P := \enbrace*{\bigcup_{m \in \mathds{N}} P_m} \cup P_\infty$ ist partiell geordnet bezüglich $\prec$:
+Die Menge $P := \enbrace*{\bigcup_{m \in \mathds{N}} P_m} \cup P_\infty$ ist partiell geordnet bezüglich \enquote{$\prec$}:
 \[
-	c \prec c' \text{ falls } m \le m' \text{ und } c'\big|_{\set{0,\ldots ,m}} =c , \text{ bzw.} c'=c \text{ falls } m=m'=\infty
+	c \prec c' :\iff m \le m' \text{ und } c'\big|_{\set{0,\ldots ,m}} =c , \text{ bzw. } c'=c \text{ falls } m=m'=\infty
 \]
 $P$ ist nicht leer, denn nach Vorraussetzung existiert $(x_0,\varepsilon_0)$ mit $0 < \varepsilon_0 < 1$ und $\overline{B}(x_0, \varepsilon_0) \subset 
-\bigcup_{n \in\mathds{N}} A_n$, d.h. $0 \mapsto (x_0,\varepsilon_0) \in P_0$. Jede total geordnete Teilmenge $\emptyset \not= \Gamma$ von $P$ besitzt eine obere Schranke:
+\bigcup_{n \in\mathds{N}} A_n$, d.h. $\enbrace[\big]{0 \mapsto (x_0,\varepsilon_0)} \in P_0$. Jede total geordnete Teilmenge $\emptyset \not= \Gamma$ von $P$ besitzt eine 
+obere Schranke:
 \begin{itemize}
-	\item Falls $\Gamma$ ein $c\in P_\infty$ enthält, so ist $c$ obere Schranke.\marginnote{warum?}
+	\item Falls $\Gamma$ ein $c\in P_\infty$ enthält, so ist $c$ obere Schranke (Warum?).
 	\item Ebenso falls $\Gamma$ ein $c \in P_{\overline{m}}$ enthält und $\Gamma \cap P_{m'}= \emptyset$ für alle $\overline{m} < m' \in \mathds{N} \cup \set{\infty}$.
 	\item Falls $\Gamma \subset \bigcup_{\mathds{N}} P_m$, aber $\Gamma \not\subset \bigcup_{m \le \overline{m}} P_m$ für jedes $\overline{m}$, so definieren wir eine
-	obere Schranke in $P_\infty$ durch Einschränkung.\marginnote{wie genau?} 
+	obere Schranke in $P_\infty$ durch Einschränkung (Wie genau?).
 \end{itemize}
-Mit dem Lemma von Zorn folgt, dass $P$ ein maximales Element $\overline{c}$ besitzt. Behauptung: $\overline{c}\in P_\infty$ wie gewünscht:
+Mit dem Lemma von Zorn folgt, dass $P$ ein maximales Element $\overline{c}$ besitzt. Wir müssen noch zeigen, dass $\overline{c}\in P_\infty$ wie gewünscht:
 
 Falls $\overline{c} \in P_m$ für ein $m \in \mathds{N}$, so gilt nach Annahme, dass $\enbrace*{X \setminus A_m} \cap B(x_m, \varepsilon_m) \not= \emptyset$. Dann 
 existiert aber $(x_{m+1},\varepsilon_{m+1}) \in X \times (0,1]$ mit $\varepsilon_{m+1} < \frac{1}{m+2}$ und 
 \[
-	\overline{B}(x_{m+1}, \varepsilon_{m+1}) \subset  \enbrace*{X \setminus A_m} \cap B(x_m,\varepsilon_m) 
+	\overline{B}(x_{m+1}, \varepsilon_{m+1}) \subset  \enbrace*{X \setminus A_m} \cap B(x_m,\varepsilon_m) ,
 \]
-Definiere $\overline{\overline{c}} : \set{0, \ldots , m+1} \to X \times (0,1]$ durch
+da $\enbrace*{X \setminus A_m} \cap B(x_m,\varepsilon_m)$ offen ist. Definiere $\overline{\overline{c}} : \set{0, \ldots , m+1} \to X \times (0,1]$ durch
 \[
 	k \longmapsto \begin{cases}
 		(x_k,\varepsilon_k), &\text{ falls } k=m+1\\
 		\overline{c}(k), &\text{ falls } k \in \set{0, \ldots , m} 
 	\end{cases},
 \]
-dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$. \light zur Maximalität von $\overline{c}$. \bewende
+dann gilt $\overline{c} \prec \overline{\overline{c}} \in P_{m+1}$ im Widerspruch zur Maximalität von $\overline{c}$. \bewende
 % subsection satz_baire (end)
 
 \subsection[Bemerkungen zum Satz von Baire]{Bemerkungen} % (fold)
 \label{sub:111}
 \begin{enumerate}[(i)]
-	\item Die Aussage gilt auch für lokalkompakte Hausdorffräume.\index{lokalkompakt} \hfill(Übung)
-	\item Tatsächlich genügt eine schwächere Form des Auswahlaxioms(DC); das abzählbare Auswahlaxiom jedoch nicht.
-	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung)
+	\item Die Aussage gilt auch für lokalkompakte Hausdorffräume.\index{lokalkompakt} \hfill(Übung, Blatt 2, Aufgabe 2)
+ 	\item Tatsächlich genügt eine schwächere Form des Auswahlaxioms (DC); das abzählbare Auswahlaxiom jedoch nicht.
+	\item Falls $X$ \Index{separabel} ist (d.h. falls eine abzählbare dichte Teilmenge von $X$ existiert), dann lässt sich der Satz auch ohne (AC) beweisen.\hfill (Übung, 
+	Blatt 2, Aufgabe 1)
 \end{enumerate}
 % subsection 111 (end)
 
-\subsection{Korollar: Satz der gleichmäßigen Beschränktheit} % (fold)
+\subsection{Corollar: Satz der gleichmäßigen Beschränktheit} % (fold)
 \label{sub:112}
 Sei $(X,d)$ ein vollständiger metrischer Raum. Sei $F \subset C(X,\mathds{R})$ eine Menge, die \Index{punktweise gleichmäßig beschränkt} ist, d.h. für jedes $x \in X$ 
 existiert $K_x \in \mathds{R}$, sodass
@@ -366,11 +368,12 @@ Dann existieren $\emptyset \not= U \subset X$ offen und $K \in \mathds{R}$ so, d
 	\abs*{f(x)} \le K \enspace \forall x \in U, f \in F 
 \]
 \minisec{Beweis}
-Definiere 
+Definiere für $n \in \mathds{N}$
 \begin{align*}
-	X \supset A_n := \set[x \in X]{\abs*{f(x)} \le n \forall f \in F \rule{0cm}{0.3cm}} = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
+	X \supset A_n := \set[x \in X]{\abs*{f(x)} \le n \enspace \forall f \in F \rule{0cm}{0.3cm}} = \bigcap_{f \in F} f ^{-1} \enbrace[\big]{[-n,n]} 
 \end{align*}
-Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. Außerdem enthält dies eine nichtleere offene Menge. Also existiert ein $n$ und $U \subset X$ nichtleer und offen mit $U \subset A_n$. \bewende
+Also sind die $A_n \subset X$ abgeschlossen. Es ist $\bigcup_{n \in \mathds{N}} A_n = X$, wegen der Voraussetzung von punktweiser gleichmäßiger Beschränktheit. 
+Da $X$ eine nichtleere, offene Teilmenge $U$ enthält, existiert nach dem \hyperref[sub:110]{Satz von Baire} ein $n \in N$ mit $U \subset A_n$. \bewende
 % subsection 112 (end)
 % section 1 (end)
 \newpage
