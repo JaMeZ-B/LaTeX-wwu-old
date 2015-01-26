@@ -1465,7 +1465,7 @@ beschränkt ist, gibt es ein $C_\varphi>0$ mit
 \]
 Nach \ref{sub:31} ist $X^*$ vollständig, also können wir nun das \hyperref[sub:35]{Prinzip der gleichmäßigen Beschränktheit} anwenden und erhalten ein $C>0$ mit 
 $\norm{\iota_X(x_\lambda)} \le C$ für alle $\lambda\in \Lambda$. Da $\iota_X$ isometrisch ist, gilt also auch $\norm{x_\lambda} \le C$ für alle $\lambda\in \Lambda$, also 
-ist das Netz beschränkt. \bewende \todo{RevChap5}
+ist das Netz beschränkt. \bewende
 % subsection 55 (end)
 
 \subsection[Beispiel: Konvergenz impliziert schwache Konvergenz, aber nicht umgekehrt]{Beispiel} % (fold)
@@ -1479,10 +1479,8 @@ Im Allgemeinen gilt
 \]
 Betrachte $X=\ell^2(\mathds{N})$ mit $\norm[2]{\cdot }$. 
 Sei $e_n \in \ell^2(\mathds{N})$ gegeben durch $e_n(m) := \delta_{n,m}$\marginnote{Kronecker-Delta}. Dann gilt $e_n  \not\to 0$ für $n \to \infty$ in 
-$\mathcal{T}^{\norm[2]{\cdot }}$, denn $\norm[2]{e_n -0} = \norm[2]{e_n} \equiv 1 \not\to 0$. Aber $e_n \xrightarrow{\w} 0$ für $n \to	\infty$: 
-
-Wir werden später sehen, dass $\ell^2(\mathds{N})^* \cong \ell^2(\mathds{N})$ via $\sprod*{a}{b} = \sum \overline{a}(k) b(k)$.
-Es gilt aber 
+$\mathcal{T}^{\norm[2]{\cdot }}$, denn $\norm[2]{e_n -0} = \norm[2]{e_n} \equiv 1 \not\to 0$. Aber $e_n \xrightarrow{\w} 0$ für $n \to	\infty$, denn es ist
+-- wie wir später sehen werden --  $\ell^2(\mathds{N})^* \cong \ell^2(\mathds{N})$ via $\sprod*{a}{b} = \sum \overline{a(k)} \cdot b(k)$. Es gilt aber 
 \[
 	\sprod*{a}{e_n} = \sum \overline{a(k)} e_n(k) = \overline{a(n)} \xrightarrow{n \to \infty} 0.
 \] 
@@ -1490,9 +1488,9 @@ $\Rightarrow e_n \xrightarrow{\w}0$ für $n \to \infty$. \smallskip\\
 \emph{Direktes Argument: Übung.}
 % subsection 56 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Elemente aus $\mathcal{L}(X,Y)$ sind auch stetig bezüglich schwachen Topologie]{Proposition} % (fold)
 \label{sub:57}
-Seien $X,Y$ metrische Räume, $T \in \mathcal{L}(X,Y)$ ein beschränkter (d.h. normstetiger) linearer Operator. Dann ist $T$ auch stetig bezüglich der schwachen Topologie auf
+Seien $X,Y$ normierte Räume, $T \in \mathcal{L}(X,Y)$ ein beschränkter (d.h. normstetiger) linearer Operator. Dann ist $T$ auch stetig bezüglich der schwachen Topologie auf
 $X$ und $Y$.
 \minisec{Beweis}
 Zu zeigen: Falls $U \subset Y$ schwach-offen ist, so ist $T ^{-1}(U)$ schwach-offen in $X$. Wir können annehmen, dass $U$ von der Form
@@ -1512,35 +1510,40 @@ Sei $X$ ein normierter Raum. Die \bet{$\mathbf{w}^{\mathbf{*}}$-Topologie} $\wea
 \subsection[Bemerkungen zur $\w^*$-Topologie auf $X^*$]{Bemerkung} % (fold)
 \label{sub:59}
 \begin{enumerate}[(i)]
-	\item Es gilt $\weakTstar{X^*} \subset \weakT{X^*} \subset \mathcal{T}^{\norm[X^*]{\cdot}}_{X^*}$
-	\item Mengen der Form $W(\varphi,x \varepsilon) := \set[\psi \in X^*]{\abs*{\psi(x)- \varphi(x)}< \varepsilon}$ bilden eine Subbasis für $\weakTstar{X^*}$.
+	\item Es gilt $\weakTstar{X^*} \subset \weakT{X^*} \subset \mathcal{T}^{\norm{\cdot}}_{X^*}$.
+	\item Mengen der Form $W(\varphi,x, \varepsilon) := \set[\psi \in X^*]{\abs*{\psi(x)- \varphi(x)}< \varepsilon}$ bilden eine Subbasis für $\weakTstar{X^*}$.
 	Mengen der Form $\set[\psi]{ \psi(x) \in U}$, $U \subseteq \mathds{K}$ offen, bilden ebenfalls eine Subbasis für $\weakTstar{X^*}$.
 	\item Ein Netz $(\varphi_\lambda)_{\lambda \in \Lambda} \subset X^*$ konvergiert $\w^*$ gegen $\varphi \in X^*$ genau dann, wenn 
-	$\iota_X(x)(\varphi_\lambda)=\varphi_\lambda(x) \xrightarrow{\lambda} \varphi(x) = \iota_X(x)(\varphi)$ für jedes $x \in X$.
-	\item $\weakTstar{X^*}$ ist Hausdorff. Beweis: Übung.
+	\[
+		\iota_X(x)(\varphi_\lambda)=\varphi_\lambda(x) \xrightarrow{\minwidthbox{\lambda}{1.5em}} \varphi(x) = \iota_X(x)(\varphi)
+	\]
+	für jedes $x \in X$.
+	\item $\weakTstar{X^*}$ ist Hausdorff.
 \end{enumerate}
+\minisec{Beweis}
+\emph{Übung!} 
 % subsection 59 (end)
 
 \subsection{Satz (Banach-Alaoglu)} % (fold)
 \label{sub:510}
 Sei $X$ ein normierter Raum. Dann ist die abgeschlossene Einheitskugel in $X^*$
 \[
-	\overline{B_{X^*}(0,1)} = \set[\varphi \in X^*]{\norm[X^*]{\varphi} \le 1}  
+	\overline{B}_{X^*}(0,1) = \set[\varphi \in X^*]{\norm[X^*]{\varphi} \le 1}  
 \]
 $\w^*$-kompakt.
 \minisec{Beweis}
 Für $x \in X$ setze $F_x := \mathds{K}$ und $F := \prod_{x \in X} F_x$. Wir versehen $F$ mit der Produkttopologie $\mathcal{T}_F^\Pi$. Definiere eine Abbildung
-$\kappa : X^* \to F$ durch $\kappa(\varphi)_x := \varphi(x)$, $x \in X$. Dann ist $\kappa$ injektiv (warum?) und $\weakTstar{ }$ stimmt überein mit der durch $\kappa$ und
+$\kappa \colon X^* \to F$ durch $\kappa(\varphi)_x := \varphi(x)$, $x \in X$. Dann ist $\kappa$ injektiv (warum?) und $\weakTstar{X^*}$ stimmt überein mit der durch $\kappa$ und
 $\mathcal{T}_F^\Pi$ induzierten Topologie auf $X^*$. Diese besteht aus den Mengen $\set[\kappa ^{-1}(U)]{U \in \mathcal{T}_F^\Pi}$. Eine Basis für $\mathcal{T}_F^\Pi$ sind
 Mengen der Form 
-\[
+\begin{equation*}
 	\prod_{x \in X} U_x, \quad U_x \subset \mathds{K} \text{ offen} 
-\]
+\end{equation*}
 mit $U_x = \mathds{K}$ für alle bis auf endlich viele $x \in X$. Eine Basis, für die durch
 $\kappa$ und $\mathcal{T}_F^\Pi$ induzierte Topologie auf $X^*$ sind Mengen der Form
 \[
 	\kappa ^{-1} \enbrace*{ \prod_{x \in X} U_x} = \underbrace{\bigcap_{i=1}^n \set[\varphi]{\varphi(x_i) \in U_{x_i}} }_{
-	\text{bilden Basis für $\weakTstar{X^*}$, \ref{sub:59}(ii)}}
+	\mbox{\scriptsize bilden Basis für $\weakTstar{X^*}$, \ref{sub:59}(ii)}}
 \]
 mit $U_x$ wie oben. Dabei erhalten wir die $x_i$ durch $\kappa ^{-1} \enbrace*{\prod_{x \in X} V_x} = \set[\varphi]{\varphi(x_i)\in U_{x_i}}$, wobei 
 \[
@@ -1551,29 +1554,29 @@ mit $U_x$ wie oben. Dabei erhalten wir die $x_i$ durch $\kappa ^{-1} \enbrace*{\
 \]
 Falls $\norm{\varphi} \le 1$, so gilt $\abs*{\varphi(x)} \le \norm[X]{x}$, also 
 \[
-	\kappa \enbrace*{\overline{B_{X^*}(0,1)}} \subset \underbrace{\prod_{x \in X} \overline{B_{\mathds{K}}(0, \norm{x})}}_{\text{kompakt nach Tychonov}} \subset F
+	\kappa \enbrace*{\overline{B}_{X^*}(0,1)} \subset \underbrace{\prod_{x \in X} \overline{B}_{\mathds{K}}(0, \norm{x})}_{\text{kompakt nach Tychonov}} \subset F
 \]
-Bleibt zu zeigen: $\kappa \enbrace*{\overline{B_{X^*}(0,1)}} \subset F$ ist abgeschlossen. Sei $f \in \overline{\kappa \enbrace*{\overline{B_{X^*}(0,1)}}}$. Dies definiert
-eine Abbildung $\varphi_f : X \to \mathds{K}$ durch $\varphi_f(x) := f_x$. Falls nun $\varphi_f$ linear und stetig ist mit $\norm{\varphi_f} \le 1$, so gilt
-$\kappa(\varphi_f) = f$, denn $\kappa(\varphi_f)(x) = \varphi_f(x) = f_x$. Damit folgt $f \in \kappa \enbrace*{ \overline{B_{X^*}(0,1)}}$ und damit 
-$\overline{B_{X^*}(0,1)}$ kompakt.
+Bleibt zu zeigen: $\kappa \enbrace*{\overline{B}_{X^*}(0,1)} \subset F$ ist abgeschlossen. Sei $f \in \overline{\kappa \enbrace*{\overline{B}_{X^*}(0,1)}}$. Dies definiert
+eine Abbildung $\varphi_f \colon X \to \mathds{K}$ durch $\varphi_f(x) := f_x$. Falls nun $\varphi_f$ linear und stetig ist mit $\norm{\varphi_f} \le 1$, so gilt
+$\kappa(\varphi_f) = f$, denn $\kappa(\varphi_f)_x = \varphi_f(x) = f_x$. Damit folgt $f \in \kappa \enbrace*{ \overline{B}_{X^*}(0,1)}$ und dann ist
+$\overline{B}_{X^*}(0,1)$ kompakt.
 \begin{description}
 	\item[Additivität:] Seien $y,z \in X$, $\varepsilon>0$. Dann ist 
 	\[
-		W_\varepsilon := \set[g \in \prod_{x \in X} \overline{B_\mathds{K}(0, \norm{x} )} ]{\begin{array}{r}
+		W_\varepsilon := \set[g \in \prod_{x \in X} \overline{B}_\mathds{K}(0, \norm{x} ) ]{\begin{array}{r}
 			\abs*{g_{y+z}- f_{y+z}} < \varepsilon \\ \enspace\abs*{g_y-f_y} < \varepsilon \\ \enspace\abs*{g_z -f_z}  < \varepsilon
 		\end{array}  }  
-		\underset{\text{offen}}{\subset} \prod_{x \in X} \overline{B_\mathds{K}(0,\norm{x})} 
+		\underset{\text{offen}}{\subset} \prod_{x \in X} \overline{B}_\mathds{K}(0,\norm{x}) 
 	\]
-	$f \in \overline{\kappa \enbrace*{\overline{B_{X^*}(0,1)}}} \Rightarrow \exists g \in W_\varepsilon \cap \kappa \enbrace*{\overline{B_{X^*}(0,1)}}$. Sei 
-	$g' \in \overline{B_{X^*}(0,1)}$ mit $\kappa(g')=g$. $g' \in X^*$ ist linear, also gilt auch $g_{y+z}= g_y + g_z$ und daher 
+	Da $f \in \overline{\kappa \enbrace*{\overline{B}_{X^*}(0,1)}}$ existiert ein $ g \in W_\varepsilon \cap \kappa \enbrace*{\overline{B}_{X^*}(0,1)}$. Sei 
+	$g' \in \overline{B}_{X^*}(0,1)$ mit $\kappa(g')=g$. $g' \in X^*$ ist linear, also gilt auch $g_{y+z}= g_y + g_z$ und daher 
 	\[
 		\abs*{f_{y+z} - (f_y + f_z)} < \varepsilon + \varepsilon + \varepsilon= 3 \varepsilon
 	\]
-	$\varepsilon>0$ war beliebig, also $f_{y+z}= f_y+f_z$ und $\varphi_f(y+z)= \varphi_f(y)+ \varphi_f(z)$. Also ist $\varphi$ additiv;
+	$\varepsilon>0$ war beliebig, also $f_{y+z}= f_y+f_z$ und $\varphi_f(y+z)= \varphi_f(y)+ \varphi_f(z)$. Also ist $\varphi$ additiv.
 	\item[Skalarmultiplikation:] analog.
 \end{description}
-Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[X^*]{\varphi_f} \le 1$. \bewende
+Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[X^*]{\varphi_f} \le 1$. \bewende \todo{RevChap5}
 % subsection 510 (end)
 
 \subsection[Erinnerung: separabel, 1. abzählbar, 2. abzählbar]{Erinnerung} % (fold)
