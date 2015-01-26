@@ -958,7 +958,7 @@ Das ist genau der Kern der zugehörigen Homomorphie $\alpha:G\to \sym(X)$, also 
 
 \subsection{Satz 4, Satz von Cayley}
 \label{sub:satz_von_cayley}
-Zu jeder Gruppe $G$ gibt es eine Menge $X$ und ein injektiven Homomorphismus $\alpha:G\to \sym(X)$.\\
+Zu jeder Gruppe $G$ gibt es eine Menge $X$ und einen injektiven Homomorphismus $\alpha:G\to \sym(X)$.\\
 
 \bet{Beweis:}\\
 Setze $G=X$ und $\lambda:G\to \sym(X)$ wie in \hyperref[sub:bsp_wirkungen]{Beispiel 2.3(a)}.
@@ -971,7 +971,7 @@ Der Satz von Cayley wird auch so formuliert:\\
 
 \subsection{Definition transitiv}
 \label{sub:def_transitiv}
-Eine $G$-Wirkung $G\times X\to X$ heißt \Index{transitiv}, wenn es für alle $x,y\in G$ ein $g\in G$ gibt mit $g(x)=y$.\\
+Eine $G$-Wirkung $G\times X\to X$ heißt \Index{transitiv}, wenn es für alle $x,y\in X$ ein $g\in G$ gibt mit $g(x)=y$.\\
 Die in \hyperref[sub:bsp_wirkungen]{Bsp. 2.3(a)(b)} betrachteten Wirkungen sind also transitiv.
 
 \subsubsection*{Satz}
@@ -1014,7 +1014,7 @@ Genauso folgt auch $G(y)\supseteq G(x)$, also $G(x)=G(y)$.
 Für jedes $x\in X$ wirkt $G$ transitiv auf der Bahn $G(x)\subseteq X$.
 Denn für $y,z\in G(x),~y=a(x)$ und $z=b(x)$ folgt
 \[
-x=a^{-1}(y) \rightsquigarrow z=ba^{-1}(x)
+x=a^{-1}(y) \rightsquigarrow z=ba^{-1}(y)
 \]
 Weiter gilt $g(y)=ga(x)\in G(x)$.
 
@@ -1084,7 +1084,7 @@ Sei $\#S=m$, $S=\{s_1,\dots,s_m\} \rightsquigarrow X=G(s_1)\stackrel{.}{\cup} G(
 
 \subsection{Automorphismen und Konjugationswirkungen}
 \label{sub:automor}
-Sei $G$ Gruppe. 
+Sei $G$ eine Gruppe. 
 Ein bijektiver Homomorphismus $\alpha:G\to G$ heißt \Index{Automorphismus} von $G$. 
 Die Menge 
 \[
@@ -1103,7 +1103,7 @@ Denn:
 	&\gamma_a(g)=e \Leftrightarrow aga^{-1}=e \Leftrightarrow g=a^{-1}ea=e\\
 	\marginnote{oder: $\gamma_a\circ\gamma_a=\id_G=\gamma_{a^{-1}}\circ\gamma_a$}
 	&\rightsquigarrow \gamma_a \text{ Monomorphismus},~ \ker(\gamma_a)=\{e\}\\
-	&\text{Gegeben } g\in G \text{ folgt } \gamma_a(aga^{-1})=g\\
+	&\text{Gegeben } g\in G \text{ folgt } \gamma_a(a^{-1}ga)=g\\
 	&\rightsquigarrow \gamma_a \text{ Epimorphismus}\\
 	&\Rightarrow \gamma_a \text{ Automorphismus}
 \end{aligned}
@@ -4133,7 +4133,9 @@ Sei $n\in \N,~n\ge 3$.
 	\draw [fill=green] (-1.4142135623730974,1.414213562373095) circle (1.5pt);
 	\draw [fill=green] (-1.4142135623730991,-1.414213562373099) circle (1.5pt);
 	\draw [fill=green] (1.414213562373095,-1.414213562373101) circle (1.5pt);
+	\draw (1,.5) node {\tiny$\frac{360\degree}{8}$};
 	\end{tikzpicture}
+	\captionof{figure}{Konstruktion eines 8-Ecks}
 \end{center}
 Beispiel: für $n=8$ müssen wir den Winkel $\frac{360\degree}{8}$ konstruieren.\\
 
@@ -4231,7 +4233,7 @@ e=\exp(1)=\sum_{k=0}^{\infty}\frac{1}{k!} \text{ nicht algebraisch über }\Q\tex
 Sei $K\subseteq L$ eine Körpererweiterung.
 Die \Index{algebraische Hülle} von $K$ in $L$ ist
 \[
-\acl_L(K)=\penbrace{u\in L~|~ u \text{ algebraisch über }K}\qquad(\text{acl='algebraic cloure})
+\acl_L(K)=\penbrace{u\in L~|~ u \text{ algebraisch über }K}\qquad(\text{acl='algebraic cloure'})
 \]
 
 \subsubsection*{Satz}
@@ -4244,8 +4246,173 @@ Es gilt:
 \[
 \acl_L(\acl_L(K))=\acl(K).
 \]
+\newpage
+\bet{Beweis:}\\
+Sei $u,v\in L$ algebraisch über $K$.
+Es folgt
+\[
+u\pm v,~u\cdot v,~\frac{u}{v}\in K(u,v)
+\]
+und
+\[
+[K(u,v):K]=\underbracket{[K(u,v):K(u)]}_{\text{endlich}}\cdot \underbracket{[K(u):K]}_{\text{endlich}}
+\]
+weil $u,v$ algebraisch sind.
+Nach ÜA 11.4 ist jedes Element von $K(u,v)$ algebraisch über $K$.
+Also ist $\acl_L(K)\subseteq L$ ein Körper.
+Sei $K'=\acl_L(K)$ und $u\in \acl_L(K')$.
+Dann gibt es $w_1\dt{,}w_r\in K'$ mit
+\[
+u\in\acl_LK(w_1\dt{,}w_r)
+\]
+Damit folgt, dass
+\[
+[K(u,w_1\dt{,}w_r):K]=[K(u,w_1\dt{,}w_r):K(w_1\dt{,}w_r)]\cdot [K(w_1\dt{,}w_r):K]
+\]
+Beide Faktoren sind endlich $\rightsquigarrow u$ algebraisch über $K$ nach ÜA 11.4 $\Rightarrow u\in\acl_L(K)$.
+\hfill $\square$\\
+
+Eine Vorüberlegung zur Existenz reeller Zahlen, die transzendent über $\Q$ sind.
+$\Q$ ist abzählbar, jedes Polynom $f\in \Q[T]$ hat endlich viele rationale Koeffizienten $\rightsquigarrow \Q[T]$ ist abzählbar.
+Jedes Polynom in $\Q[T]$ hat nur endliche viele Nullstellen (überlegen wir später nochmal!) daraus folgt, dass $\acl_\C(\Q)$ und $\acl_\R(\Q)$ sind beides \uline{abzählbare} Körper.
+Da $\R$ und $\C$ überabzählbar sind, ist 'fast jede' reelle oder komplexe Zahl transzendent über $\Q$.
+%sub end
+
+\subsection{Definition formale Ableitung}
+\label{sub:def_formale_ableitung}
+Für $f=a_nT^n\dt{+}a_0\in R[T]$ setzen wir 
+\[
+Df=na_nT^{n-1}\dt{+}a_1\in R[T]
+\] 
+als \Index{formale Ableitung}, sowie
+\[
+F=(1+D\dt{+}D^n)f,~n=\deg(f)
+\]
+($F$ löst dann formal die DGL $(1-D)F=f$).\\
+Für $f=\frac{1}{n!}T^n\in \Q[T]$ ergibt sich
+\[
+F=1+T+\frac{1}{2}T^2\dt{+}\frac{1}{n!}T^n=\sum_{k=0}^{n}\frac{1}{k!}T^k \tag*{$\ast$}
+\]
+%sub end
+
+\subsection{Lemma 14}
+\label{sub:lemma_14}
+Sei $f=\sum_{k=0}^{n}a_kT^k\in\C[T]$.
+Sei $F=(1+D\dt{+}D^n)f$.
+Für jedes $z\in \C$ gilt dann
+\[
+\abs{F(0)\exp(z)-F(z)}\le\sum_{k=0}^{n}\abs{a_k}\cdot\abs{z}^k\exp(z)
+\]
 
 \bet{Beweis:}\\
+\begin{equation*}
+\begin{aligned}
+	\abs{F(0)\exp(z)-F(z)} &= \abs{\sum_{k=0}^na_kk!\cdot \sum_{k=0}^n \frac{z^l}{l!}-\sum_{k=0}^{n}a_k\underbracket{\sum_{k=0}^{n}\frac{k!}{l!}z^l}_{\text{ nach }\ast}}\\
+	&= \abs{\sum_{k=0}^n a_k\cdot \sum_{l\ge k}\frac{k!}{l!}z^l} \le \sum_{k=0}^n \sum_{l\ge k}\abs{a_k} \frac{k!}{l!}\abs{z}^l\\
+	&\le \sum_{k=0}^n \sum_{l\ge k}\abs{a_k}\abs{z}^k \frac{1}{(l-k)!}\abs{z}^{l-k}~\text{ weil } \binom{l}{k}=\frac{l!}{k!(l-k)!}\ge 1\\
+	&\le \sum_{k=0}^{n}\abs{a_k}\cdot \abs{k}^k\exp\abs{z}
+\end{aligned}
+\end{equation*}
+\hfill $\square$
+%sub end
+
+\subsection{Bemerkung zu Nullstellen}
+\label{sub:bemerkung_nullstellen}
+Sei $p\in \N$ eine Primzahl und sei $n\ge 1$.
+Betrachte
+\[
+f=\frac{1}{(p-1)!}\cdot \underbracket{T^{p-1}}_{p-1\text{-fache NS}}\cdot  \prod_{k=1}^{n}\underbracket{(k-T)^p}_{p\text{-fache NS}}\in \C[T]
+\]
+Es folgt
+\begin{equation*}
+\begin{aligned}
+	D^mf(v) &= 0\text{ für }m\le p-2,~v=0\dt{,}n\\
+	D^{p-1}f(v) &= 0\text{ für } v=1\dt{,}n\\
+	D^{p-1}f(0) &= \frac{(p-1)!}{(p-1)!}(n!)^p=(n!)^p
+\end{aligned}
+\end{equation*}
+Für $m\ge p$ hat $D^mf$ ganzzahlige Koeffizienten, die alle von $p$ geteilt werden.
+(Das folgt alles mit der Produktregel für Ableitungen.)\\
+Sei $F=(1+D\dt{+}D^n)f,~N=\deg(f)$.
+Es folgt 
+\[
+F(0)\equiv (n!)^p \mod{p},~ F(v)\equiv 0 \mod{p}
+\]
+Schreibe $f=\sum_{n=1}^N a_nT^n,~a_n\in \Q$.
+%sub end
+
+\subsection{Satz 25 (Hermite 1873)}
+\label{sub:satz_25}
+Die Zahl $e=\exp(1)\approx 2.71..$ ist transzendent.\\
+
+\bet{Beweis:}\\
+Es genügt, folgendes zu zeigen.
+Ist $q_0\dt{,}q_n\in \Z$ mit $q_0\neq 0$, so ist
+\[
+q_0\dt{+}q_ne^n \neq 0,
+\]
+denn wenn $e$ algebraisch wäre, gäbe es ein Polynom $f\in \Q[T]$ mit $f(e)=0$, $\deg(f)\ge 1$.
+Nach Durchmultiplizieren mit dem Hauptnenner hätten wir $f\in \Z[T]$ mit $f(e)=0,~\deg(f)\ge 1$ und nach Division durch eine $e$-Potenz, dass $f(0)\neq 0$.\\
+Sei nun $p\in \N$ eine Primzahl mit $p>m$ und $p>\abs{q_0}$.
+Esfolgt (mit der Bezeichnung aus \hyperref[sub:bemerkung_nullstellen]{5.24} für dieses $p$ und $n$)
+\begin{equation*}
+\begin{aligned}
+	&\sum_{v=0}^{n}q_vF(v)\equiv q_0\cdot (n!)^p\not\equiv 0 \mod{p}\\
+	\Rightarrow &\sum_{v=0}^n q_vF(0)e^v=\sum_{v=0}^{n}q_vF(v)+\epsilon
+\end{aligned}
+\end{equation*}
+und
+\[
+\abs{\epsilon}\le \underbracket{\sum_{v=0}^{n}\abs{q_v}e^v}_{\text{hängt nicht von $p$ ab}}\underbracket{\sum_{k=1}^{N}\abs{a_k}\cdot\abs{v^k}}_{\text{hängt von $p$ ab}}
+\]
+nach \hyperref[sub:lemma_14]{5.23}, mit $f=\sum_{k=1}^{N}a_kT^k$.\\
+Nun gilt für jedes $v$
+\begin{equation*}
+\begin{aligned}
+	\sum_{k=1}^{N}\abs{a_k}\cdot\abs{v}^k &= \sum_{k=1}^{N}\abs{a_k}\cdot v^k\\
+	&\stackrel{(\ast\ast)}{\le} \frac{v^{p-1}}{(p-1)!}\prod_{k=1}^N(k+v)^p\\
+	&= \frac{1}{(p-1)!}\underbracket{\prod_{k=1}^{N}(k+v)}_{=\alpha}\underbracket{\enbrace{v\prod_{k=1}^{N}(k+v)}^p}_{=\beta} = \alpha\frac{\beta^p}{(p-1)!}
+\end{aligned}
+\end{equation*}
+wobei $\alpha, \beta$ nur von $n$ und $v$ abhängen, nihct von $p$.\\
+Für $p\gg 1$ wird $\alpha\frac{\beta^p}{(p-1)!}$ beliebig klein.
+Da es beliebig große Primzahlen $p$ gibt, können wir also durch geeignete Wahl von $p\gg 1$ erreichen, dass
+\[
+\abs{\epsilon}\le \sum_{v=0}^{N}\abs{q_v}e^v\cdot \alpha\frac{\beta^p}{(p-1)!}>\frac{1}{2}
+\]
+gilt.
+Da $\sum_{v=0}^{N}q_vF(v)\in \Z\backslash\{0\}$ gilt,folgt
+\[
+F(0)\cdot \sum_{v=0}^{N}q_ve^v\neq 0
+\]
+Zu $(\ast\ast)$:
+\begin{equation*}
+\begin{aligned}
+	(k-T)^p &= \sum_{l=0}^{p}\binom{p}{l}k^{p-l}(-1)^lT^l\\
+	(k+T)^p &= \sum_{k=0}^{p}\binom{p}{l}k^{p-l}t^l
+\end{aligned}
+\end{equation*}
+Ausmultiplizieren liefert die Abschätzung.
+\hfill $\square$\\
+
+Der vorige Beweis stammt aus \uline{E. Landaus} Zahlentheorie-Buch (Lindenmann 1882).
+Ein etwas anderer Beweis steht bei Jacobsen.
+
+\subsubsection*{Korollar}
+Die Zahl $e$ ist nicht mit Zirkel und Lineal aus $\{0,1\}$  konstruierbar.
+
+\subsubsection*{Bemerkung}
+Mit ähnlichen Methoden kann man zeigen, dass $\pi\approx 3.14..$ transzendent über $\Q$ ist.
+Der Beweis ist allerdings erheblich länger (siehe Landau oder Jacobsen) - im Prinzip aber genauso elementar.
+
+\subsubsection*{Korollar}
+Die 'Quadratur des Kreises' mit Zirkel und Lineal ist unmöglich, d.h. man kann aus $\{0,1\}$ mit Zirkel und Lineal kein Quadrat mit Fläche $\pi$ konstruieren.
+
+
+
+
+
+
 
 
 
