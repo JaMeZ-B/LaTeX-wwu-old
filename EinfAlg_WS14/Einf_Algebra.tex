@@ -4381,7 +4381,7 @@ Da es beliebig große Primzahlen $p$ gibt, können wir also durch geeignete Wahl
 \abs{\epsilon}\le \sum_{v=0}^{N}\abs{q_v}e^v\cdot \alpha\frac{\beta^p}{(p-1)!}>\frac{1}{2}
 \]
 gilt.
-Da $\sum_{v=0}^{N}q_vF(v)\in \Z\backslash\{0\}$ gilt,folgt
+Da $\sum_{v=0}^{N}q_vF(v)\in \Z\backslash\{0\}$ gilt, olgt
 \[
 F(0)\cdot \sum_{v=0}^{N}q_ve^v\neq 0
 \]
@@ -4407,9 +4407,117 @@ Der Beweis ist allerdings erheblich länger (siehe Landau oder Jacobsen) - im Pr
 
 \subsubsection*{Korollar}
 Die 'Quadratur des Kreises' mit Zirkel und Lineal ist unmöglich, d.h. man kann aus $\{0,1\}$ mit Zirkel und Lineal kein Quadrat mit Fläche $\pi$ konstruieren.
+%sub end
 
+%sec end
 
+\newpage
+\section{Zerfällungskörper und algebraischer Abschluss}
+\label{sec:zerfaellungskoerper_alg_abschluss}
+\subsection{Lemma 15}
+\label{sub:lemma_15}
+Sei $K$ ein Körper, sei $f\in K[T]$ mit $\deg(f)=n\ge1$.
+Angenommen,$u_1\dt{,}u_m\in K$ sind Nullstellen von $f$, d.h.
+\[
+f(u_j)=0 \text{ für } j=1\dt{,}m
+\]
+Wenn für alle $i<j$ gilt $u_i\neq u_j$,so gibt es $g\in K[T]$ mit 
+\[
+f=(T-u_1)(T-u_2)\cdots(T-u_m)\cdot g
+\]
+Insbesondere ist $m\le n$.\\
 
+\bet{Beweis:}\\
+Angenommen, $u\in K$ ist eine Nullstelle von $f$.
+Teilen mit Rest wie in \hyperref[sub:polynomdivision]{4.11}:
+\[
+f=(T-u)\cdot q+r\qquad \deg(r)<\deg(T-u)=1\Rightarrow r\in K\text{ konstant}
+\]
+da
+\[
+0=f(u)=(u-u)\cdot q(u)+r
+\]
+Es folgt $f=(T-u)\cdot q$.
+Ist $v\neq u$ eine weitere Nullstelle von $f$, so folgt
+\[
+0=f(v)=\underbracket{v-u}_{\neq 0}\cdot q(v)\rightsquigarrow v\text{ ist Nullstelle von }q=q_1\neq 0
+\]
+Daraus folgt $q=(T-v)q_2$ und
+\[
+f=(T-u_1)\cdots(T-u_m)q_m,~q_m\neq 0
+\]
+und
+\[
+\deg(f)=m+\deg(q_m)
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Definition normiert}
+\label{sub:def_normiert}
+Ein Polynom $f$ dessen Leitkoeffizient 1 ist, also $f=T+a_{n-1}T^{n-1}\dt{+}a_0$ heißt \Index{normiert}.
+Ist $K$ ein Körper,so ist jedes $f\in K[T],~f\neq 0$ von der Form $f=a\cdot \tilde{f},~\tilde{f}\in K[T]$ normiert, $a\in K^*$ und $f,\tilde{f}$ haben die gleichen Nullstellen (klar).
+Ist $f\in K[T]$ normiert und gibt es $u_1\dt{,}u_m\in K$ mit
+\[
+f=(T-u_1)\cdots(T-u_m),
+\]
+so \Index{zerfällt} $f$ in \Index{Linearfaktoren} über $K$ ($\rightsquigarrow$ Jordannormalform).
+%sub end
+
+\subsection{Definition Zerfällungskörper}
+\label{sub:def_zerfaellungskoerper}
+Sei $K$ ein Körper, $f\in K[T]$ normiert.
+Eine Körpererweiterung $K\subseteq L$ heißt \Index{Zerfällungskörper} von $f$, wenn es $u_1\dt{,}u_m\in L$ gibt es mit
+\begin{enumerate}[(i)]
+	\item $f=(T-u_1)\cdots(T-u_m)$
+	\item $L=K(u_1\dt{,}u_m)$ (folglich $[L:K]<\infty$)
+\end{enumerate}
+
+\subsubsection*{Beispiel}
+\[
+f=T^2+1\in \R[T]\qquad f=(T-i)(T+i),~i\in \C
+\]
+$\C=\R(i)\rightsquigarrow \C$ ist Zerfällungskörper von $T^2+1$.
+%sub end
+
+\subsection{Satz 26}
+\label{sub:satz_26}
+Sei $K$ ein Körper und sei $f\in K[T]$ normiert mit $n=\deg(f)\ge 1$.
+Dann existiert ein Zerfällungskörper $L\supseteq K$ mit 
+\[
+[L:K]\le n!
+\]
+
+\bet{Beweis:}\\
+Induktion nach $n$:\\
+\uline{$n=1$:} $f=T-u,~u\in K\rightsquigarrow L=K$ fertig.\\
+\uline{Sei jetzt $n\ge 2$:} Schreibe $f=g\cdot h$ mit $g\in K[T]$ normiert und irreduzibel.
+Dann ist $K'=\nicefrac{K[T]}{(g)}$ ein Körper nach \hyperref[sub:satz_15]{4.5}.\\
+Via $K\hookrightarrow K[T]\stackrel{\pi}{\rightarrow}K'$ können wir $K$ als Teilkörper von $K'$ auffassen - die Elemente von $K'$ sind von der Form
+\[
+f+(g),~f\in K[T].
+\]
+Setze $u=\pi(T)\in K',~u=T+(g)\rightsquigarrow u^k=T^k+(g)$ dann folgt
+\[
+g=T^n\dt{+}a_0\Rightarrow g(u)=\underbracket{T^n\dt{+}a_0}_{=g}+(g)=(g)
+\]
+also ist $u$ eine Nullstelle von $g$.\\
+In $K'[T]$ folgt $g=(T-u)\cdot \tilde{g}$.
+Weiter gilt $\mu_u=g$,da $g$ irreduzibel ist, also gilt für $K'=K(u)$, dass
+\[
+[K':K]=\deg(g)\le n.
+\]
+Nun $\deg(\tilde{g}\cdot h)=n-1\rightsquigarrow$ es gibt ein Zerfällungskörper $L\supseteq K'$ für $\tilde{g}\cdot h$ mit
+\[
+L=K'(u_2\dt{,}u_m)=K(u_1\dt{,}u_m),~u=u_1
+\]
+also
+\[
+[L:K]=\underbracket{L:K'}_{\le (n-1)!}\cdot \underbracket{[K':K]}_{\le n}\le n!
+\]
+\hfill $\square$\\
+
+Wir zeigen jetzt, dass ein Zerfällungskörper bis auf Isomorphie eindeutig bestimmt ist.
 
 
 
