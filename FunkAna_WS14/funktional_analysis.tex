@@ -1654,41 +1654,41 @@ Topologien sind durch Konvergenz von Netzen bestimmt: Sei $(X,\mathcal{T})$ ein 
 \end{align*}
 Die Implikation $\stackrel{\text{(\#)}}{\Longleftarrow}$ ist trivial. Für $\stackrel{\text{(\#)}}{\Longrightarrow}$ betrachten wir die Menge 
 $\Lambda := \set[V]{x \in V \subset X \text{ offen}}$. Diese ist gerichtet bezüglich "$\subset$". Zu jedem $V \in \Lambda$ wählen wir\marginnote{Auswahlaxiom nötig!} 
-$x_V \in (X \setminus U) \cap V$. Dann gilt $(x_V)_{V \in \Lambda} \subset X \setminus U$ und $x_V \to x$. \bewende \todo{RevChap5}
+$x_V \in (X \setminus U) \cap V$. Dann gilt $(x_V)_{V \in \Lambda} \subset X \setminus U$ und $x_V \to x$. \bewende
 % subsection 512 (end)
 
 \subsection[Definition: Reflexiver normierter Raum]{Definition} % (fold)
 \label{sub:513}
-Der normierte Raum $X$ heißt \Index{reflexiv}, falls die kanonische Abbildung $\iota_X : X \to X^{**}$ ein Isomorphismus ist. 
-($\iota_X$ ist Isomorphismus genau dann, wenn $\iota_X$ surjektiv ist.)
+Der normierte Raum $X$ heißt \Index{reflexiv}, falls die kanonische Abbildung $\iota_X \colon X \to X^{**}$ ein Isomorphismus ist. 
+($\iota_X$ ist ein Isomorphismus genau dann, wenn $\iota_X$ surjektiv ist.)
 % subsection 513 (end)
 
 \subsection[Proposition: Abgeschlossene Unterräume von reflexiven Banachräumen sind reflexiv]{Proposition} % (fold)
 \label{sub:514}
 Sei $X$ ein reflexiver Banachraum und $Y \subset X$ ein abgeschlossener Teilraum. Dann ist $Y$ reflexiv.
 \minisec{Beweis}
-Sei $\kappa : Y \hookrightarrow X$ die Inklusion. Dann ist $\kappa \in \mathcal{L}(Y,X)$ und nach \ref{sub:34} kommutiert das Diagramm
+Sei $\kappa \colon Y \hookrightarrow X$ die Inklusion. Dann ist $\kappa \in \mathcal{L}(Y,X)$ und nach \ref{sub:34} kommutiert das Diagramm
 \[
 	\begin{tikzcd}
 		Y \rar[hook, "\iota_Y"] \dar["\kappa"', hook]& Y^{**}  \dar["\kappa^{\tr \,\tr}"] \\
 		X \rar["\iota_X","\cong"', hook] & X^{**}
 	\end{tikzcd}
 \]
-Sei $f\in Y^{**}$, dann existiert $x \in X$ mit $\iota_X(x)=\kappa^{\tr\,\tr}(f)$. Für $\varphi \in X^*$ gilt 
+Sei $f\in Y^{**}$, dann existiert $x \in X$ mit $\iota_X(x)=\kappa^{\tr\,\tr}(f)$. Für $\varphi \in X^*$ gilt dann also
 \[
 	\varphi(x)=\iota_X(x)(\varphi)=\kappa^{\tr\,\tr}(f)(\varphi).
 \]
-Aber $(\kappa^\tr)^\tr (f) = f \circ \kappa^\tr$ und $\kappa^\tr(\varphi) = \varphi \circ \kappa = \varphi|_{Y}$, also $\varphi(x)= f \enbrace*{\varphi|_Y}$ für jedes 
+Aber $(\kappa^\tr)^\tr (f) = f \circ \kappa^\tr$ und $\kappa^\tr(\varphi) = \varphi \circ \kappa = \varphi|_{Y}$, also gilt $\varphi(x)= f \enbrace*{\varphi|_Y}$ für jedes 
 $\varphi \in X^*$. Falls $x \not\in Y$, so existiert nach Hahn-Banach ein $\psi \in X^*$ mit $\psi|_{Y}=0$, $\psi(x)\not= 0$. Damit folgt 
 \[
-	0 \not= \varphi(x) = f \enbrace*{\psi|_{Y}}=0 \enspace\light
+	0 \not= \psi(x) = f \enbrace*{\psi|_{Y}}=0 \enspace\light
 \]
-also gilt $x \in Y$. Weiter gilt $\iota_Y(x)=f$, denn $\kappa^{\tr\,\tr}$ ist injektiv. Andernfalls existiert $0 \not= g \in Y^{**}$ mit $\kappa^{\tr\,\tr}(g)=0$, also
-existiert $\sigma \in Y^*$ mit $g(\sigma) \not= 0$. Nach Hahn-Banach existiert $\rho \in X^*$ mit $\rho|_{Y}=\sigma$. Nun gilt 
+Also gilt $x \in Y$. Weiter gilt $\iota_Y(x)=f$, denn $\kappa^{\tr\,\tr}$ ist injektiv. Andernfalls existiert $0 \not= g \in Y^{**}$ mit $\kappa^{\tr\,\tr}(g)=0$. 
+Da $g\not= 0$, existiert ein $\sigma \in Y^*$ mit $g(\sigma) \not= 0$. Nach Hahn-Banach existiert eine Fortsetzung $\rho \in X^*$ mit $\rho|_{Y}=\sigma$. Nun gilt 
 \[
-	0 = \kappa^{\tr\,\tr}(g) = g \enbrace*{\rho|_Y} = \rho(g) \not= 0 \enspace \light 
+	0 = \kappa^{\tr\,\tr}(g)(\rho) = g \circ \kappa^\tr(\rho)= g \enbrace*{\rho|_Y} = g(\sigma) \not= 0 \enspace \light 
 \]
-$\Rightarrow \kappa^{\tr\,\tr}$ ist injektiv. \bewende
+Also ist $\kappa^{\tr\,\tr}$ ist injektiv. \bewende
 % subsection 514 (end)
 
 \subsection[Proposition: Für Banachräume gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv]{Proposition} % (fold)
@@ -1696,87 +1696,88 @@ $\Rightarrow \kappa^{\tr\,\tr}$ ist injektiv. \bewende
 Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $X^*$ reflexiv.
 \minisec{Beweis}
 \begin{description}
-	\item["$\Rightarrow$":] $\iota_X : X \xrightarrow{\cong} X^{**}$ ist ein isometrischer Isomorphismus. Nach Blatt 6, Aufgabe 2 ist $\iota_X^{\tr} : X^{***} \to X^*$
+	\item["$\Rightarrow$":] $\iota_X\colon X\xrightarrow{\cong} X^{**}$ ist ein isometrischer Isomorphismus. Nach Blatt 6, Aufgabe 2 ist $\iota_X^{\tr}\colon X^{***}\to X^*$
 	auch ein isometrischer Isomorphismus. Nach \ref{sub:34} gilt  $\iota_X^{\tr} \circ \iota_{X^*}= \id_{X^{*}}$, also ist $\enbrace*{\iota_X^\tr}^{-1} = \iota_{X^*}$
 	ebenfalls ein isometrischer Isomorphismus.
-	\item["$\Leftarrow$":] genauso \checkmark \bewende
+	\item["$\Leftarrow$":] Wenn $X^*$ reflexiv ist, dann ist nach "$\Rightarrow$" auch $X^{**}$ reflexiv. Nun ist aber $\iota_X(X) \subset X^{**}$ abgeschlossen (Satz vom 
+	Abgeschlossenen Graphen). Mit \ref{sub:514} folgt dann, dass auch $\iota_X(X) \cong X$ reflexiv ist.\bewende
 \end{description}
 % subsection 515 (end)
 
 \subsection[Satz: Einheitskugel eines Banachraumes $X$ liegt $\w^*$-dicht in Einheitskugel von $X^{**}$]{Satz} % (fold)
 \label{sub:516}
-Sei $X$ ein Banachraum. Dann gilt 
+Sei $X$ ein Banachraum. Dann gilt (unter der Inklusion $\iota_X \colon X \hookrightarrow X^{**}$)
 \[
-	\overline{B_X(0,1)} \underset{\text{$\w^*$-dicht}}{\subset} \overline{B_{X^{**}}(0,1)}  
+	\overline{B}_X(0,1) \underset{\text{$\w^*$-dicht}}{\subset} \overline{B}_{X^{**}}(0,1)
 \]
 \minisec{Beweis}
-Zu zeigen: Zu $f \in \overline{B_{X^{**}}(0,1)}$ und $\varepsilon>0$, $\varphi_1, \ldots , \varphi_n \in X^*$, existiert $x \in \overline{B_X(0,1)}$ mit
-$\abs*{f(\varphi_i)- \varphi_i(x)} < \varepsilon$ für $i=1,\ldots ,n$. Behauptung: Es gilt (gegeben $f,\varphi_1, \ldots , \varphi_n$)
+Zu zeigen: Zu $f \in \overline{B}_{X^{**}}(0,1)$ und $\varepsilon>0$, sowie $\varphi_1, \ldots , \varphi_n \in X^*$, existiert ein $x \in \overline{B}_X(0,1)$ mit
+$\abs*{f(\varphi_i)- \varphi_i(x)} < \varepsilon$ für $i=1,\ldots ,n$. Behauptung: Gegeben $f$ und $\varphi_1, \ldots , \varphi_n$ gilt
 \[
-	\inf_{x \in \overline{B_X(0,1)} } \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x)}^2 = 0
+	\inf_{x \in \overline{B}_X(0,1)} \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x)}^2 = 0
 \]
-Sei $h(x) := \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2 $ und $\inf_{x\in \overline{B_X(0,1)}} h(x) =: \mu \ge 0$. Wähle 
-$(x_k)_{k \in \mathds{N}} \subset \overline{B_X(0,1)}$ mit $\lim_{k \to \infty} h(x_k)= \mu$. Nach Übergang zu einer Teilfolge dürfen wir annehmen, dass 
+Sei $h(x) := \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2 $ und $\inf_{x\in \overline{B}_X(0,1)} h(x) =: \mu \ge 0$. Wähle 
+$(x_k)_{k \in \mathds{N}} \subset \overline{B}_X(0,1)$ mit $\lim_{k \to \infty} h(x_k)= \mu$. Nach Übergang zu einer Teilfolge dürfen wir annehmen, dass 
 $\enbrace[\big]{\varphi_i(x_k)}_{k \in \mathds{N}}$ gegen  $\gamma_i \in \mathds{K}$ konvergiert für $i=1,\ldots ,n$. Setze $\delta_i := f(\varphi_i) -\gamma_i$, dann
-gilt $\mu = \sum_{i=1}^{n} \abs*{\delta_i}^2$. Für $y \in \overline{B_X(0,1)}$, $t \in [0,1]$ gilt 
+gilt $\mu = \sum_{i=1}^{n} \abs*{\delta_i}^2$. Für $y \in \overline{B}_X(0,1)$ und $t \in [0,1]$ gilt nun
 \begin{align*}
-	\mu \le h\enbrace[\Big]{\underbrace{(1-t) \cdot x_k + t \cdot y}_{\in \overline{B_X(0,1)}}} &= 
+	\mu \le h\enbrace[\Big]{\underbrace{(1-t) \cdot x_k + t \cdot y}_{\in \overline{B}_X(0,1)}} &= 
 	\sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- (1-t) \cdot \varphi_i(x_k) - t \cdot \varphi_i(y)}^2 \\
-	&= \sum_{i=1}^{n} \abs[\Big]{f(\varphi_i)- \varphi(x_k) - t \cdot  \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} }^2 \\
-	&= \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x_k)}^2 + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \varphi_i(x_k)}^2 \\
-	& \quad - 2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} \cdot \overline{\enbrace[\big]{f(\varphi_i)- \varphi_i(x_k)} } \\
-	\xrightarrow{k \to \infty} &\underbrace{\sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \gamma_i}^2}_{=\mu} + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2  
+	&= \sum_{i=1}^{n} \abs[\Big]{\enbrace[\big]{f(\varphi_i)- \varphi_i(x_k)} - t \cdot  \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} }^2 \\
+	&= \sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \varphi_i(x_k)}^2 + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \varphi_i(x_k)}^2 \marginnote{mit $z \cdot 
+	\overline{z}=\abs*{z}^2$ und $z+ \overline{z}=2 \re(z)$}\\
+	& \quad - 2 t \cdot \re \enbrace*{\sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \varphi_i(x_k)} \cdot \overline{\enbrace[\big]{f(\varphi_i)- \varphi_i(x_k)} }} \\
+	\xrightarrow{k \to \infty} &\hphantom{=} \underbrace{\sum_{i=1}^{n} \abs[\big]{f(\varphi_i)- \gamma_i}^2}_{=\mu} + t^2 \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2  
 	-2 t \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i }
 \end{align*}
 Nach Abziehen von $\mu$ folgt für $t >0$
 \begin{align*}
 	&0 \le t \cdot \sum_{i=1}^{n} \abs[\big]{\varphi_i(y)- \gamma_i}^2 - 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i}  \\
-	\xRightarrow{t \searrow 0} \enspace & 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i} \le 0 \text{ für alle } y \in \overline{B_X(0,1) }
+	\xRightarrow{\minwidthbox{t \searrow 0}{2em}} \enspace & 2 \cdot \re \sum_{i=1}^{n} \enbrace[\big]{\varphi_i(y)- \gamma_i} \cdot \overline{\delta_i} \le 0 \text{ für alle } y \in \overline{B}_X(0,1)
 \end{align*}
-Für $y \in \overline{B_X(0,1)}$ gilt $\re \sum_{i=1}^{n} \enbrace*{\varphi_i(y)- \gamma_i} \cdot \overline{\delta _i} \le 0$.
-Definiere $\varphi := \sum_{i=1}^{n} \overline{\delta _i} \cdot \varphi_i \in X^*$, dann gilt für $y \in \overline{B_X(0,1)}$
+Definiere nun $\varphi \in X^*$ durch $\varphi := \sum_{i=1}^{n} \overline{\delta _i} \cdot \varphi_i \in X^*$. Dann gilt für $y \in \overline{B}_X(0,1)$
 \[
-	\re \varphi(y) \le \re \sum_{i=1}^{n} \gamma_i \overline{\delta_i} 
+	\re \varphi(y) \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i},
 \]
-also $\norm[X^*]{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$. Aber 
+also ist $\norm[X^*]{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$. Andererseits gilt aber\todo[noline]{Das verstehe ich noch nicht \ldots}
 \[
 	\varphi(x_k) = \sum_{i=1}^{n} \overline{\delta_i} \cdot \varphi_i(x_k) \xrightarrow{k \to \infty} \sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i, 
 \]
 das heißt $\abs*{\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i} \le \norm{\varphi} \le \re \sum_{i=1}^{n} \gamma_i \cdot \overline{\delta_i}$ und somit
 $\sum_{i=1}^{n} \overline{\delta_i} \cdot \gamma_i = \norm[X^*]{\varphi}$. Wir erhalten 
 \begin{align*}
-	\mu = \sum_{i=1}^{n} \overline{\delta_i} \delta_i = \sum_{i=1}^{n}\overline{\delta_i} \enbrace[\big]{f(\varphi_i)- \gamma_i} = f(\varphi)-\norm[X^*]{\varphi} \le 0 \bewende
+	\mu = \sum_{i=1}^{n} \overline{\delta_i} \cdot \delta_i = \sum_{i=1}^{n}\overline{\delta_i} \cdot \enbrace[\big]{f(\varphi_i)- \gamma_i} = f(\varphi)-\norm[X^*]{\varphi} \le 0 \bewende
 \end{align*}
 % subsection 516 (end)
 
-\subsection{Corollar} % (fold)
+\subsection[Corollar: $f \in \overline{B}_{X^{**}}(0,1)$ lässt sich auf endlich vielen $\varphi_i$ als Einsetzung auffassen]{Corollar} % (fold)
 \label{sub:517}
-Sei $X$ ein Banachraum, $f \in \overline{B_{X^{**}}(0,1)}$, $\varphi_1, \ldots , \varphi_n \in X^*$. Falls $\overline{B_X(0,1)}$ $\w$-kompakt ist, so existiert 
-$x \in \overline{B-X(0,1)}$ mit $f(\varphi_i)= \varphi_i(x)$, $i=1,\ldots ,n$.
+Sei $X$ ein Banachraum, $f \in \overline{B}_{X^{**}}(0,1)$ und $\varphi_1, \ldots , \varphi_n \in X^*$. Falls $\overline{B}_X(0,1)$ $\w$-kompakt ist, so existiert 
+$x \in \overline{B}_X(0,1)$ mit $f(\varphi_i)= \varphi_i(x)$ für $i=1,\ldots ,n$.
 \minisec{Beweis}
-Definiere $h : X \to \mathds{R}$ durch $h(x):= \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2$ ist stetig auf $X$ bezüglich $\weakT{X}$, nimmt also auf
-$\overline{B_X(0,1)}$ ihr Minimum an. \bewende
+Definiere $h \colon X \to \mathds{R}$ durch $h(x):= \sum_{i=1}^{n} \abs*{f(\varphi_i)- \varphi_i(x)}^2$ wie in Satz \ref{sub:516}. $h$ ist stetig auf $X$ bezüglich 
+$\weakT{X}$, nimmt also auf $\overline{B}_X(0,1)$ ihr Minimum an. \bewende
 % subsection 517 (end)
 
 
-\subsection{Satz} % (fold)
+\subsection[Satt: Äquivalenzen zu: $X$ ist reflexiv]{Satz} % (fold)
 \label{sub:518}
 Sei $X$ ein Banachraum. Dann sind äquivalent: 
 \begin{enumerate}[(i)]
 	\item $X$ ist reflexiv.
-	\item $\overline{B_X(0,1)}$ ist $\w$-kompakt.
+	\item $\overline{B}_X(0,1)$ ist $\w$-kompakt.
 	\item $\weakT{X^*}= \weakTstar{X^*}$.
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
 	\item[(i)$\Rightarrow$(ii):] $\overline{B}_{X^{**}}(0,1)$ ist $\w^*$-kompakt nach \ref{sub:510}. Nach \ref{sub:515} ist $X^*$ reflexiv, daher stimmen auf $X^{**}$
-	die $\w^*$- und die $\w$-Topologie überein. $\Rightarrow \overline{B_{X^{**}}(0,1)}$ ist $\w$-kompakt. Aber unter $X \cong X^{**}$ stimmen die jeweiligen $\w$-Topologien
-	überein; ebenso $\overline{B_{X}(0,1)} \cong \overline{B_{X^{**}}(0,1)}$.
+	die $\w^*$- und die $\w$-Topologie überein. Damit ist $ \overline{B}_{X^{**}}(0,1)$ $\w$-kompakt. Aber unter $X \cong X^{**}$ stimmen die jeweiligen $\w$-Topologien
+	überein; daher ist $\overline{B}_{X}(0,1) \cong \overline{B}_{X^{**}}(0,1)$ $\w$-kompakt.
 	\item[(ii)$\Rightarrow$(i):] Es gilt $(X,\weakT{X}) \subset (X^{**}, \weakTstar{X^{**}})$ in der Relativtopologie (warum?).
-	$\overline{B_X(0,1)}$ kompakt $\Rightarrow \overline{B_X(0,1)} \subset \overline{B_{X^{**}}(0,1)}$ $\w^*$-abgeschlossen und $\w^*$-dicht. Also folgt
-	$\overline{B_X(0,1)} = \overline{B_{X^{**}}(0,1)}$ und somit $X=X^{**}$.
-	\item[(iii)$\Rightarrow$(i):] $\overline{B_{X^*}(0,1)}$ ist $\w^*$-kompakt nach Banach-Alaoglu (\ref{sub:510}). Mit (iii) folgt, dass $\overline{B_{X^*}(0,1)}$
-	$\w$-kompakt ist. Da (ii)$\Rightarrow$(i) folgt, dass $X^*$ reflexiv ist und somit ist nach \ref{sub:516} auch $X$ reflexiv.
+	$\overline{B}_X(0,1)$ ist kompakt, also ist $\overline{B}_X(0,1) \subset \overline{B}_{X^{**}}(0,1)$ $\w^*$-abgeschlossen. Nach \ref{sub:516} ist $\overline{B}_X(0,1)$ 
+	sogar $\w^*$-dicht. Also folgt $\overline{B}_X(0,1) = \overline{B}_{X^{**}}(0,1)$ und somit $X=X^{**}$.
+	\item[(iii)$\Rightarrow$(i):] $\overline{B}_{X^*}(0,1)$ ist $\w^*$-kompakt nach Banach-Alaoglu (\ref{sub:510}). Mit (iii) folgt, dass $\overline{B}_{X^*}(0,1)$
+	$\w$-kompakt ist. Da (ii)$\Rightarrow$(i) folgt, dass $X^*$ reflexiv ist und somit ist nach \ref{sub:515} auch $X$ reflexiv.
 	\item[(i)$\Rightarrow$(iii):] klar. \bewende
 \end{description}
 % subsection 518 (end)
@@ -1784,13 +1785,12 @@ Sei $X$ ein Banachraum. Dann sind äquivalent:
 \subsection{Bemerkung} % (fold)
 \label{sub:519}
 \begin{enumerate}[a)]
-	\item Sei $X$ ein normierter Raum. Falls $X^*$ separabel (bezüglich $\mathcal{T}_{X^*}^{\norm{\cdot}}$) ist, so ist $X$ separabel (bezüglich 
-	$\mathcal{T}_X^{\norm{\cdot}}$)
+	\item Sei $X$ ein normierter Raum. Falls $X^*$ separabel ist, so ist $X$ separabel.\marginnote{bzgl. der Normtopologie}
 	\item Für einen Banachraum $X$ gilt: $X$ reflexiv $\iff$ $\overline{B}_X(0,1)$ ist folgenkompakt bezüglich $\weakT{X}$.
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[a)]
-	\item Übung.
+	\item Übung (Blatt 10, Aufgabe 2)
 	\item \begin{description}
 		\item["$\Rightarrow$":] leicht.
 		\item["$\Leftarrow$":] nicht so leicht. 
