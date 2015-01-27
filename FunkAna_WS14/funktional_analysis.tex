@@ -2925,7 +2925,91 @@ Also gilt (iv). Damit folgt auch (ii). (i) folgt aus (iv) und (ii). Da $T$ kompa
 \]
 Damit folgt $\lambda_{k_l} \xrightarrow{l \to \infty} 0$. Damit müssen wegen der Absteigenden Folge auch $\lambda_k \xrightarrow{k \to \infty} 0$. \bewende
 % subsection 810 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:811}
+\begin{enumerate}[(i)]
+	\item $\mathcal{K}(\mathcal{H})= \overline{\mathcal{F}(\mathcal{H})}^{\norm{\cdot}}$, wobei 
+	$\mathcal{F}(\mathcal{H}) := \set[T \in \mathcal{L}(\mathcal{H})]{T(\mathcal{H}) \text{ endlichdimensional}}$.\marginnote{Kompakte Operatoren lassen sich also gut 
+	approximieren}
+	\item $\mathcal{K}(\mathcal{H})$ ist selbstadjungiert, das heißt $T \in \mathcal{K}(\mathcal{H}) \iff T^* \in \mathcal{K}(\mathcal{H})$.
+\end{enumerate}
+\minisec{Beweis}
+\emph{Übung! (Blatt 13)} \bewende
+% subsection 811 (end)
 % section 8 (end)
+\newpage
+
+\section{Fredholm-Operatoren. Ein Index} % (fold)
+\label{sec:9}
+
+\subsection[Definition: Fredholm-Operator und Fredholm-Index]{Definition} % (fold)
+\label{sub:91}
+Sei $\mathcal{H}$ ein Hilbertraum. Ein Operator $T \in \mathcal{L}(\mathcal{H})$ heißt \Index{Fredholm-Operator}\footnote{nach Erik Ivar Fredholm, siehe 
+\url{https://de.wikipedia.org/wiki/Erik_Ivar_Fredholm}}, falls gilt:
+\begin{enumerate}[(i)]
+	\item $\ker T$ ist endlichdimensional.
+	\item $\im T \subset \mathcal{H}$ ist abgeschlossen.
+	\item $\nicefrac{\mathcal{H}}{\im T}$ ist endlichdimensional (endliche Kodimension).
+\end{enumerate}
+In diesem Fall definieren wir den \Index{Fredholm-Index} von $T$ als 
+\[
+	\idx(T) := \dim(\ker T) - \dim (\nicefrac{\mathcal{H}}{\im T}) \in \mathds{Z} 
+\]
+Wir schreiben $\Fred(\mathcal{H}) := \set[T \in \mathcal{L}(\mathcal{H})]{T \text{ ist Fredholm}}$. \todo{RevChap9}
+% subsection 91 (end)
+
+\subsection{Satz (Fredholm-Riesz)} % (fold)
+\label{sub:92}
+Sei $\mathcal{H}$ ein Hilbertraum und $S \in \mathcal{K}(\mathcal{H})$. Dann ist $T := \id_\mathcal{H}-S$ Fredholm.
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item $\ker T \subset \mathcal{H}$ ist abgeschlossen, also ein Unterhilbertraum. Sei $P := \mathrm{proj}_{\ker T}$ die orthogonale Projektion auf $\ker T$, das heißt 
+	für $\mathcal{H} \ni x = x_0 + x_1$ mit $x_0 \in \ker T$ und $x_1 \in (\ker T)^\bot$ ist $P(x)=x_0$. Es ist $P \in \mathcal{L}(\mathcal{H})$ (warum?).
+	Dann ist 
+	\[
+		P=\id_\mathcal{H} \circ P \stackrel{T \circ P=0}{=} S \circ P \in \mathcal{K}(\mathcal{H})
+	\]
+	Also ist $P|_{\ker T} = \id_{\ker T} \in \mathcal{K}(\ker T)$. Damit ist $\ker T$ endlichdimensional.
+	\item Es ist $T|_{(\ker T)^\bot} \colon (\ker T)^\bot \to \im T$ ist bijektiv und stetig. Zu zeigen ist, dass $\enbrace*{T|_{(\ker T)^\bot}} ^{-1}$ stetig ist, denn dann
+	ist $\im T$ vollständig, also auch abgeschlossen. Falls $\enbrace*{T|_{(\ker T)^\bot}}^{-1}$ nicht stetig ist, so existiert eine Folge $(x_n)_n \subset (\ker T)^\bot$
+	mit $\norm{x_n}=1$ und $T x_n \to 0$. Nach Übergang zu einer Teilfolge dürfen wir $S x_n \to \overline{y}$ für ein $\overline{y} \in \mathcal{H}$ annehmen. Da
+	$T x_n \to 0$, folgt $x_n = \id_x x_n \to \overline{y}$. Aber dann ist auch $\overline{y} \in (\ker T)^\bot$, $\norm{\overline{y}}=1$ und $\overline{y} \in \ker T$. 
+	\light
+	\item Es ist 
+	\begin{align*}
+		(\nicefrac{\mathcal{H}}{\im T})^* \cong\enbrace*{(\im T)^\bot}^* = \kappa \enbrace*{(\im T)^\bot} 
+		&= \set[\skal*{y}{\cdot}]{\skal*{y}{T x}=0 \text{ für alle }x \in \mathcal{H}} \\
+		&= \set[\skal*{y}{\cdot }]{\skal*{T^*y}{x}=0 \text{ für alle }x \in \mathcal{H}} \\
+		&= \set[\skal*{y}{\cdot}]{y \in \ker T^*} \\
+		&= \kappa \enbrace*{\ker T^*}  \cong \ker T^* = \ker(\id_\mathcal{H}- S^*)
+	\end{align*}
+	Dies ist endlichdimensional nach (i), da $S^* \in \mathcal{K}(\mathcal{H})$.\bewende
+\end{enumerate}
+% subsection 92 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:93}
+$\Fred(\mathcal{H}) \subset \mathcal{L}(\mathcal{H})$ ist offen bezüglich der Normtopologie. Die Abbildung $\idx \colon \Fred(\mathcal{H}) \to \mathds{Z}$ ist steig.
+\minisec{Beweis}
+Sei $T \in \Fred(\mathcal{H})$. Wir haben $\ker T \oplus (\ker T)^\bot = \mathcal{H} = \im T \oplus (\im T)^\bot$ abgeschlossen.
+\begin{enumerate}[(i)]
+	\item Für $S \in \mathcal{L}(\mathcal{H})$ definiere $\tilde{S} \colon \tilde{H} := (\ker T)^\bot \oplus (\im T)^\bot \to \mathcal{H}$ durch
+	$\tilde{S}(v,w) := S(v)+w$. Dann ist $\tilde{S}$ stetig und die Abbildung 
+	\[
+		\tilde{\minwidthbox{ }{5pt}} \colon \mathcal{L}(\mathcal{H}) \longrightarrow \mathcal{L}(\tilde{\mathcal{H}}, \mathcal{H}) , \quad S \longmapsto \tilde{S}
+	\]
+	stetig. $\tilde{T}$ ist bijektiv und stetig. Nach dem \hyperref[sub:39]{Satz von Inversen Operator} ist $\tilde{T}$ also ein Homöomorphismus. Mit \ref{sub:83} folgt,
+	dass $\tilde{T}$ eine Umgebung von Homöomorphismen in $\mathcal{L}(\tilde{\mathcal{H}},\mathcal{H})$ besitzt. Also besitzt $T$ eine Umgebung 
+	$U \subset \mathcal{L}(\mathcal{H})$, sodass für alle $S \in U$ der Operator $\tilde{S}$ ein Homöomorphismus ist. Für jedes $S \in U$ gilt:
+	\begin{enumerate}[1)]
+		\item $S\enbrace*{(\ker T)^\bot} \subset \mathcal{H}$ ist abgeschlossen, denn $\tilde{S}\enbrace*{(\ker T)^\bot}= (\tilde{S}^{-1})^{-1}\enbrace*{(\ker T)^\bot}$, 
+		$(\ker T)^\bot$ ist abgeschlossen und $S\enbrace*{(\ker T)^\bot} = \tilde{S} \enbrace*{(\ker T)^\bot}$
+		\item 
+	\end{enumerate}
+\end{enumerate}
+% subsection 93 (end)
+% section 9 (end)
 
 \cleardoubleoddemptypage
 \appendix
