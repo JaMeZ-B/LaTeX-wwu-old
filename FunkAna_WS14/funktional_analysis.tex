@@ -799,7 +799,7 @@ Zu $x \in X$ wähle $\lambda \in \mathds{C}$ mit $\abs*{\lambda }=1$ und
 \subsection[Satz (Hahn-Banach): Existenz einer stetigen linearen Fortsetzung]{Satz} % (fold)
 \label{sub:224}
 Sei $X$ ein normierter $\mathds{K}$-Vektorraum, $Y \subset X$ ein Unterraum und $\psi \colon Y \to \mathds{K}$ linear und stetig. Dann existiert eine stetige, lineare 
-Fortsetzung $\overline{\psi} : X \to \mathds{K}$ mit $\norm[\mathcal{L}(X,\mathds{K})]{\overline{\psi}} = \norm[\mathcal{L}(Y,\mathds{K})]{\psi}$.
+Fortsetzung $\overline{\psi} \colon X \to \mathds{K}$ mit $\norm[\mathcal{L}(X,\mathds{K})]{\overline{\psi}} = \norm[\mathcal{L}(Y,\mathds{K})]{\psi}$.
 \minisec{Beweis}
 Definiere eine Halbnorm durch $p(x) := \norm{x} \cdot \norm{\psi}$. Wegen \ref{sub:27} gilt $\abs*{\psi(x)} \le p(x)$, also
 besitzt $\psi$ nach Satz \ref{sub:223} eine lineare Fortsetzung $\overline{\psi}$ mit $\abs[\big]{\overline{\psi}(x)} \le p(x)= \norm{\psi} \cdot \norm{x}$, $x \in X$. 
@@ -1808,7 +1808,7 @@ Sei $X$ ein Banachraum. Dann sind äquivalent:
 
 \subsection[Definition und Proposition: Gleichmäßig konvexer Raum]{Definition und Proposition} % (fold)
 \label{sub:61}
-Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:\todo{RevChap6}
+Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
 \begin{enumerate}[(i)]
 	\item Für jedes $\varepsilon>0$ existiert $\delta >0$, sodass für $x,y \in X$ mit $\norm{x}, \norm{y} \le 1$ gilt:
 	\[
@@ -1822,16 +1822,20 @@ Ein normierter Raum $X$ heißt \Index{gleichmäßig konvex}, falls eine der folg
 	\[
 		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
 	\]
-	\item Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\limsup_n \norm{x_n} = \limsup_n \norm{y_n}=1$ gilt:
+	\item \label{61:enum:4}Für $(x_n)_\mathds{N}, (y_n)_\mathds{N} \subset X$ mit $\limsup_n \norm{x_n}, \limsup_n \norm{y_n}\le 1$ gilt:
 	\[
 		\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1 \enspace\Longrightarrow \enspace\lim_{ n \to \infty} \norm{x_n- y_n}=0  
 	\]
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item[(i)$\Rightarrow$(ii)$\Rightarrow$(iii):] trivial.
-	\item[(iii)$\Rightarrow$(iv):] einfach. Zeige zunächst: Aus $\limsup \norm{x_n}, \limsup \norm{y_n}\le 1$ und $\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1$
-	folgt $\lim_{ n \to \infty} \norm{x_n}=\lim_{ n \to \infty} \norm{y_n}=1$.
+	\item[(i)$\Rightarrow$(ii)$\Rightarrow$(iii):] trivial; für (ii)$\Rightarrow$(iii) einfach Implikation umkehren und Aussagen negieren. 
+	\item[(iii)$\Rightarrow$(iv):] Aus $\lim_{ n \to \infty} \norm{\frac{1}{2} (x_n+y_n)}=1$ folgt $\lim_{n \to \infty} \norm{x_n +y_n}=2$. Wir haben
+	\[
+		2 = \lim_{n \to \infty} \norm{x_n +y_n} = \liminf_{n \to \infty} \norm{x_n +y_n} \le \liminf_{n \to \infty} \enbrace[\big]{\norm{x_n} + \norm{y_n}}    
+	\]
+	Also stimmen Limes superior und Limes inferior jeweils überein und es folgt $\lim_{ n \to \infty} \norm{x_n}=1$ und $ \lim_{ n \to \infty} \norm{y_n}=1$, woraus mit (iii)
+	dann wiederum die gewünschte Implikation folgt.
 	\item[(iv)$\Rightarrow$(i):] Angenommen (i) gilt nicht, d.h. $\exists \varepsilon>0$ und für jedes $\delta_n=\frac{1}{n+1}$ existieren $x_n,y_n \in X$ mit 
 	$\norm{x_n}, \norm{y_n}\le 1$, $\norm{x_n-y_n}\ge \varepsilon$ und $\norm{\frac{1}{2}(x_n+y_n)} > 1- \frac{1}{n+1}$. \light zu (iv). \bewende
 \end{description}
@@ -1877,18 +1881,20 @@ $(\mathds{R}^n, \norm[p]{\cdot})$ ist gleichmäßig konvex für $1 < p < \infty$
 		\draw[fill=DodgerBlue2] (x2) circle(0.05) node[right]{$y$};
 		\draw[fill=DodgerBlue2] (mid) circle(0.05) node[right]{$\frac{1}{2}(x+y)$};
 	\end{tikzpicture}
-	\caption[Einheitskugeln für $p=2$, ${\color{DarkGoldenrod2}p=1}$ und ${\color{Firebrick3}p=\infty}$]{Einheitskugeln für $p=2$, ${\color{DarkGoldenrod2}p=1}$ und 
-	${\color{Firebrick3}p=\infty}$. Nur für $p \not\in \set{1,\infty}$ ist (\ref{61:enum:2}) aus 
-	\ref{sub:61} erfüllt. Anschaulich gesprochen bedeutet dies, dass nur in gleichmäßig konvexen Räumen Bälle auch tatsächlich \enquote{rund} sind.}}
+	\caption[Einheitskugeln der $p$-Norm auf $\mathds{R}^2$ für $p=2$, ${\color{DarkGoldenrod3}p=1}$ und ${\color{Firebrick3}p=\infty}$]{Einheitskugeln der $p$-Norm auf 
+	$\mathds{R}^2$ für $p=2$, ${\color{DarkGoldenrod2}p=1}$ und ${\color{Firebrick3}p=\infty}$. Nur für $p \not\in \set{1,\infty}$ ist (\ref{61:enum:2}) aus 
+	\ref{sub:61} erfüllt. Anschaulich gesprochen bedeutet dies, dass nur in gleichmäßig konvexen Räumen Bälle auch tatsächlich \enquote{rund} oder zumindest 
+	\enquote{rundlich} sind.}}
 \end{figure}
 % subsection 62 (end)
 
-\subsection[Definition und Proposition: Strikt konvexer Raum]{Definition und Proposition} % (fold)
+\subsection[Definition und Proposition: Gleichmäßig konvexe Räume sind strikt konvex]{Definition und Proposition} % (fold)
 \label{sub:63}
 Ein gleichmäßig konvexer normierter $\mathds{R}$-Vektorraum ist \Index{strikt konvex}, d.h. für alle $0\not= x,y \in X$ mit $\norm{x+y}=\norm{x} + \norm{y}$ existiert 
 $\lambda >0$ mit $x=\lambda \cdot y$. 
 \minisec{Beweis}
-Seien $x,y$ wie angegeben; \oE $\norm{x}=1$. Setze $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$, $\beta := \norm{x+y-a}$
+Seien $x,y$ wie angegeben. Ohne Einschränkungen sei $\norm{x}=1$. Wir setzen nun $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$ und 
+$\beta := \norm{x+y-a}$.
 \begin{figure}{H}
 	\centering{
 	\begin{tikzpicture}[scale=3, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray}]
@@ -1898,39 +1904,42 @@ Seien $x,y$ wie angegeben; \oE $\norm{x}=1$. Setze $x' := \frac{x+y}{\norm{x+y}}
 		\coordinate (x') at (2,0);
 		\coordinate (x+y) at (2.8,0);
 		\draw[thick] (0,0)  -- (x+y);
-		\draw[my brace] (0) -- (x') node[midway, yshift=-0.6cm]{$\norm{x'}=1$};
-		\draw[my brace] (x') --(x+y) node[midway, yshift=-0.6cm]{$\norm{y}$};
+		\draw[my brace] (0) -- (x') node[midway, below=6pt]{$\norm{x'}=1$};
+		\draw[my brace] (x') --(x+y) node[midway, below=6pt]{$\norm{y}$};
 		
 		\draw[thick] (0) -- (x);
-		\draw[my brace] (x) -- (0) node[midway, above left, yshift=0.16cm]{$\norm{x}=1$};
+		\draw[my brace] (x) -- (0) node[midway, above=6pt, sloped]{$\norm{x}=1$}; % above left, yshift=0.16cm,
 		
 		\draw[thick] (x) -- (x');
 		
 		\draw[thick] (x+y) -- (x);
-		\draw[my brace] (x+y) -- (x) node[midway, above right, xshift=0.1cm]{$\norm{y}$};
+		\draw[my brace] (x+y) -- (x) node[midway, above=6pt,sloped]{$\norm{y}$};
 		
 		\draw[thick,dashed] (0) -- (a) -- (x+y);
-		\draw[my brace] (0) -- (a) node[midway, below,yshift=-0.2cm,xshift=0.17cm]{$\alpha$};
-		\draw[my brace] (a) -- (x+y) node[midway, below,yshift=-0.2cm,xshift=-0.22cm]{$\beta$};
+		\draw[my brace] (0) -- (a) node[midway, below=6pt,sloped]{$\alpha$};
+		\draw[my brace] (a) -- (x+y) node[midway, below=6pt, sloped]{$\beta$};
 		
 		\foreach \t/\pos in {0/left,x/above,x'/below,x+y/right,a/above right}{
-			\draw[fill=DodgerBlue2,thick] (\t) circle (0.02) node[\pos]{$\t$};
+			\draw[fill=DodgerBlue2,thick] (\t) circle (0.02) node[\pos=2pt]{$\t$};
 		}
 	\end{tikzpicture}
-	\caption[Zeichnung zum Beweis von \ref{sub:63}]{Die Tatsache, dass $\norm{x}$ und $\norm{x'}$ in dieser Zeichnung nicht gleich sind, weißt schon darauf hin, dass diese 
-	Zeichnung in Wahrheit \enquote{degeneriert}.}}
+	\caption[Zeichnung zum Beweis von \ref{sub:63}]{Zeichnung zum Beweis von \ref{sub:63}. Die Tatsache, dass $\norm{x}$ und $\norm{x'}$ in dieser Zeichnung nicht gleich 
+	sind, weißt schon darauf hin, dass diese Zeichnung in Wahrheit \enquote{degeneriert}.}}
 \end{figure}
-Es gilt 
+Es gilt dann
 \[
 	\norm{x+y-x'} = \enbrace*{1- \frac{1}{\norm{x+y}}} \cdot \norm{x+y} = \norm{x+y}-1 = 1 + \norm{y} -1 = \norm{y}      
 \]
-also $\beta = \norm{x+y-a} \le \doppelstrich[\big]{\frac{x+y-x}{2}} + \doppelstrich[\big]{\frac{x+y-x'}{2}}\le \frac{\norm{y}}{2} + \frac{\norm{y}}{2} = \norm{y}$. Weiter gilt
+Also ist $\beta = \norm{x+y-a} \le \doppelstrich[\big]{\frac{x+y-x}{2}} + \doppelstrich[\big]{\frac{x+y-x'}{2}}= \frac{\norm{y}}{2} + \frac{\norm{y}}{2} = \norm{y}$. Weiter gilt
 $\alpha = \norm{a} \le \frac{\doppelstrich{x}}{2} + \frac{\doppelstrich{x'}}{2} =1$ und
 \begin{align*}
-	1 + \norm{y} = \norm{x+y} \le \norm{a} + \norm{x+y-a} = \alpha+ \beta\le 1 + \norm{y} 
+	1 + \norm{y} = \norm{x+y} \le \norm{a} + \norm{x+y-a} \le \alpha+ \beta\le 1 + \norm{y} 
 \end{align*}
 also $1 \le \alpha \le 1$. Wegen $\norm{x}=1$, $\norm{x'}=1$ und $\norm{\frac{1}{2} (x+x')}= \norm{a}=\alpha=1 > 1 -\delta$ für jedes $\delta >0$ erhalten wir aus 
-gleichmäßiger Konvexität $\norm{x-x'} \le \varepsilon$ für jedes $\varepsilon>0 \Rightarrow x=x'$ und $y=\norm{y} \cdot x$. \bewende
+gleichmäßiger Konvexität $\norm{x-x'} \le \varepsilon$ für jedes $\varepsilon>0$, also$ x=x'$. Es folgt nun
+\[
+	x= \frac{x+y}{\norm{x+y}} \iff \norm{x} \cdot x + \norm{y}\cdot x = x+y \iff \norm{y} \cdot x = y \bewende    
+\]
 % subsection 63 (end)
 
 \subsection{Proposition} % (fold)
@@ -1941,17 +1950,17 @@ Sei $X$ ein normierter $\mathds{R}$-Vektorraum, $a \in X$, $W \subset X$ konvex 
 	\item Ist $X$ vollständig und gleichmäßig konvex, so existiert genau ein $x \in W$ mit $\norm{a-x}= \inf_{y \in W} \norm{a-y}$
 \end{enumerate}
 \minisec{Beweis}
-Wir dürfen ohne Einschränkungen $a=0$ annehmen. Für $a \in W$ ist nichts zu beweisen; für $a \not\in W$ gilt $\inf_{y \in W} \norm{a-y} >0$ (denn $W$ ist abgeschlossen).
+Wir dürfen ohne Einschränkungen $a=0$ annehmen. Für $a \in W$ ist nichts zu beweisen. Für $a \not\in W$ gilt $\inf_{y \in W} \norm{a-y} >0$, denn $W$ ist abgeschlossen.
 Ohne Einschränkungen dürfen wir außerdem $\inf_{y \in W} \norm{a-y}=1$ annehmen. 
 \begin{enumerate}[(i)]
-	\item Sei $x,x' \in W$ mit $\norm{a-y}= \norm{a-x'}= \inf_{y \in W} \norm{a-y}$, also $\norm{x}=\norm{x'}=1$. Dann gilt 
+	\item Sei $x,x' \in W$ mit $\norm{a-x}= \norm{a-x'}= \inf_{y \in W} \norm{a-y}$, also $\norm{x}=\norm{x'}=1$. Dann gilt 
 	\[
 		1= \inf_{y \in W} \norm{a-y} \le \doppelstrich[\bigg]{\underbrace{\frac{1}{2} (x+x')}_{\in W}} \le \frac{1}{2} \norm{x} + \frac{1}{2} \norm{x'} =1   
 	\]
 	Es folgt aus strikter Konvexität, dass $x=\lambda \cdot x'$ für ein $\lambda \ge 0$. Wegen $\norm{x}=\norm{x'}=1$ folgt $\lambda=1$ und $x=x'$. 
-	\item Wähle eine Folge $(x_n)_{\mathds{N}} \subset W$ mit \marginnote{\oE wieder $a=0$}
+	\item Wähle eine Folge $(x_n)_{\mathds{N}} \subset W$ mit 
 	\[
-		\lim_{ n \to \infty} \norm{x_n} = \lim_{ n \to \infty} \norm{a-x_n} = \inf_{y \in W} \norm{a-y} = 1 
+		\lim_{ n \to \infty} \norm{x_n} = \lim_{ n \to \infty} \norm{a-x_n} = \inf_{y \in W} \norm{a-y} = 1 \marginnote{\oE{} wieder $a=0$ und $\inf\limits_{y \in W} \norm{a-y}=1$}
 	\]
 	Behauptung: Diese Folge ist Cauchy. $W$ ist konvex, also folgt $\frac{1}{2} (x_n+x_m) \in W$. Es gilt dann 
 	\begin{equation*}
@@ -1959,8 +1968,9 @@ Ohne Einschränkungen dürfen wir außerdem $\inf_{y \in W} \norm{a-y}=1$ annehm
 	\end{equation*}
 	Angenommen $(x_n)_\mathds{N}$ sei nicht Cauchy. Dann existiert $\varepsilon>0$, so dass gilt: Für jedes $N \in \mathds{N}$ existieren $n,m >N$ mit 
 	$\norm{x_n +x_m} >\varepsilon$. Wir können daher Teilfolgen $(x_{n_k})_{k \in \mathds{N}}$, $(x_{m_k})_{k \in \mathds{N}}$ bilden mit 
-	$\liminf_k \norm{x_{n_k} - x_{m_k}} \ge \varepsilon$. Es gilt aber $\lim_{ k \to \infty} \norm{x_{n_k}} = \lim_{ k \to \infty} \norm{x_{n_k}}=1$ und wegen \eqref{eq:64}
-	gilt $\lim_{ k \to \infty} \norm{\frac{1}{2} (x_{n_k} + x_{m_k})} = 1$ \light zu \ref{sub:61} (iv). \bewende
+	$\liminf_k \norm{x_{n_k} - x_{m_k}} \ge \varepsilon$. Es gilt aber $\lim_{ k \to \infty} \norm{x_{n_k}} = \lim_{ k \to \infty} \norm{x_{m_k}}=1$ und wegen \eqref{eq:64}
+	gilt $\lim_{ k \to \infty} \norm{\frac{1}{2} (x_{n_k} + x_{m_k})} = 1$ \light zu \hyperref[61:enum:4]{\ref*{sub:61} (\ref*{61:enum:4})}. 
+	Die Folge ist also Cauchy und konvergiert damit gegen ein $x \in W$, da $W$ vollständig ist. Nach (i) ist $x$ eindeutig. \bewende \todo{RevChap6}
 \end{enumerate}
 % subsection 64 (end)
 
