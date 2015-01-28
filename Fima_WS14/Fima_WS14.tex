@@ -2115,17 +2115,18 @@ Dann gilt:
 \]
 
 \bet{Beweis:}\\
-Approximiere $\tau$ durch beschränkte Stopzeiten $\tau\land m$. 
-Es gilt $\E M_{\tau\land m} =\E M_0$. 
+Approximiere $\tau$ durch beschränkte Stopzeiten $\tau\land n$. 
+Es gilt $\E M_{\tau\land n} =\E M_0$. 
 Also 
 \begin{equation*}
 \begin{aligned}
-	\abs{\E M_\tau-\E M_0}&=\abs{\E M_\tau-\E M_{\tau\land m}} =\abs{\E M_\tau-\E M_\tau\mathbb{1}_{\{\tau\le n\}}-\E M_n\mathbb{1}_{\{\tau> n\}}}\\
+	\abs{\E M_\tau-\E M_0}&=\abs{\E M_\tau-\E M_{\tau\land n}} =\abs{\E M_\tau-\E M_\tau\mathbb{1}_{\{\tau\le n\}}-\E M_n\mathbb{1}_{\{\tau> n\}}}\\
 	&= \abs{\E M_\tau\mathbb{1}_{\{\tau> n\}}- \E M_n\mathbb{1}_{\{\tau >n\}}}\\
 	&\le \E\abs{M_\tau}\mathbb{1}_{\{\tau> n\}}+ \E\abs{M_n}\mathbb{1}_{\{\tau>n\}} \to 0
 \end{aligned}
 \end{equation*}
 Wegen (ii),(iii) und einer Anwendung des Satzes von der majorisierten Konvergenz.
+\hfill $\square$
 
 
 %sub end
@@ -2682,7 +2683,7 @@ V_0+\sum_{k=1}^{n-1}\sprod{H(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n)}-\sprod{H(n)
 \]
 Also setzt man
 \[
-\varphi(n)=V_0+\sum_{k=1}^{n-1}\sprod{H(k)}{\Delta S^*(k)}+\sprod{H(n)}{S^*(n-1)}
+\varphi(n)=V_0+\sum_{k=1}^{n-1}\sprod{H(k)}{\Delta S^*(k)}-\sprod{H(n)}{S^*(n-1)}
 \]
 \hfill $\square$\\
 Bezeichne mit $\mathcal{H}$ die Menge aller $\R^d$-wertigen vorhersehbaren stoch. Prozesse.
@@ -3100,7 +3101,7 @@ $\stackrel{\hyperref[sub:umf_arbitragefreiheit]{4.12}}{\Rightarrow} \Pw^*$ ist e
 		\]
 		\item $S(n)=S_0u^{Z_n}d^{1-Z_n}$
 		\item $\F_n=\sigma(X_1,\dots,X_n)=\sigma(Z_1,\dots,Z_n)$
-		\item $\beta(n)=\prod_{i=1}^{n}1+p=(1+p)^n,~p>-1$,
+		\item $\beta(n)=\prod_{i=1}^{n}1+\rho=(1+\rho)^n,~\rho>-1$,
 	\end{itemize}
 	Gesucht ist ein $\Pw^*$ mit 
 	\begin{enumerate}[(i)]
@@ -3108,20 +3109,20 @@ $\stackrel{\hyperref[sub:umf_arbitragefreiheit]{4.12}}{\Rightarrow} \Pw^*$ ist e
 		\item $S^*$ ist ein $\Pw^*$-Martingal
 	\end{enumerate}
 	\[
-	S^*(n)=\frac{S(n)}{\beta(n)}=S_0u^{Z_n}d^{n-Z_n}\frac{1}{(1+p)^n}=S_0\prod_{i=1}^{n}\frac{u^{X_i}d^{1-X_i}}{1+p}
+	S^*(n)=\frac{S(n)}{\beta(n)}=S_0u^{Z_n}d^{n-Z_n}\frac{1}{(1+\rho)^n}=S_0\prod_{i=1}^{n}\frac{u^{X_i}d^{1-X_i}}{1+\rho}
 	\]
 	ist ein geometrischer Random-Walk.
 	\marginnote{ab hier könnte sich einiges wiederholen, da er in zwei Vorlesungen das selbe jeweils entwas anders gemacht hat}
 	$S^*$ ist ein Martingal genau dann, wenn
 	\begin{equation*}
 	\begin{aligned}
-		&\E^*\frac{u^{X_i}d^{1-X_i}}{1+p}=1 \Leftrightarrow u\cdot p^*+d(1-p^*)=1+p\\
-		&\Leftrightarrow p^*=\frac{1+p-d}{u-d}\in (0,1) \Leftrightarrow d<1+p<u
+		&\E^*\frac{u^{X_i}d^{1-X_i}}{1+\rho}=1 \Leftrightarrow u\cdot p^*+d(1-p^*)=1+\rho\\
+		&\Leftrightarrow p^*=\frac{1+\rho-d}{u-d}\in (0,1) \Leftrightarrow d<1+\rho<u
 	\end{aligned}
 	\end{equation*}
-	Durch $p\in(0,1)$ werden alle äquivalenten CRR-Modelle parametrisiert und genau für den Parameter
+	Durch $\rho\in(0,1)$ werden alle äquivalenten CRR-Modelle parametrisiert und genau für den Parameter
 	\[
-	\Pw^*=\frac{(1+p)-d}{u-d}
+	\Pw^*=\frac{(1+\rho)-d}{u-d}
 	\]
 	ist das Modell risikoneutral.
 	Dies bedeutet, dass $S^*$ ein Martingal ist, bzgl. dem Parameter $\Pw^*$.\\
@@ -4231,7 +4232,7 @@ Dann gilt:
 Sei $Y$ $\F_t$-messbar und $A\in \F_s$
 \begin{equation*}
 \begin{aligned}
-	\int\ablim{A}Y\dint \Pw &= \int\ablim{A}YL_t\dint\Pw = \int\ablim{A}\E(YL_t~|~\F_s)\dint\Pw\\
+	\int\ablim{A}Y\dint \bar{\Pw} &= \int\ablim{A}YL_t\dint\Pw = \int\ablim{A}\E(YL_t~|~\F_s)\dint\Pw\\
 	&= \int\ablim{A}\E(YL_t~|~\F_s)\frac{1}{L_s}\dint\bar{\Pw}, \text{ da } \left.\frac{\dint \bar{\Pw}}{\dint \Pw}\right|_{\F_s}=L_s
 \end{aligned}
 \end{equation*}
@@ -4240,7 +4241,7 @@ Sei $Y$ $\F_t$-messbar und $A\in \F_s$
 $(M_t)_{t\ge0}$ ist ein $\bar{\Pw}$-Martingal
 \begin{equation*}
 \begin{aligned}
-	&\Leftrightarrow \bar{\E}(M_t~|~\F_s)=M_s~\forall s\le t \Leftrightarrow \E(M_tL_t~|~\F_s)\frac{1}{L}=M_s~\forall s\le t\\
+	&\Leftrightarrow \bar{\E}(M_t~|~\F_s)=M_s~\forall s\le t \Leftrightarrow \E(M_tL_t~|~\F_s)\frac{1}{L_s}=M_s~\forall s\le t\\
 	&\Leftrightarrow \E(M_tL_t~|~\F_s)=M_sL_s~\forall s\le t \Leftrightarrow ML \text{ ist ein }\Pw\text{-Martingal}
 \end{aligned}
 \end{equation*}
@@ -4480,7 +4481,7 @@ c(x,t,\sigma,K)= S_0\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 	Dies ist die \Index{Black-Scholes Differenzialgleichung}.
 	Dann gilt:
 	\[
-	x\varphi(h_1(x,t))-Ke^{-rt}\varphi(h_2(x,t))=0
+	x\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))=0
 	\]
 	\item $c$ ist strikt wachsend als Funktion des Aktienanfangskurses mit
 	\[
@@ -4490,7 +4491,105 @@ c(x,t,\sigma,K)= S_0\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 	Das Delta bestimmt die Replikationsstrategie.\\
 	Setze $H(t)=\partial_xc(S(t),T-t)$ und $\psi(t)=-Ke^{-rt}\phi(h_2(S(t),T-t))$.
 	Dann wird durch $(\psi(t),H(t))_{0\le t\le T}$ eine selbstfinanzierende Handelsstrategie definiert, die die Call-Option repliziert.
+	\begin{equation*}
+	\begin{aligned}
+		V_t((\psi,H)) &= H(t)S(t)+\psi(t)\beta(t)=S(t)\Delta+\psi(t)\beta(t)\\
+		&= S(t)\phi(h_1(S(t),T-t))-Ke^{-r(T-t)}\phi(h_2(S(t),T-t))\\
+		&= c(S(t),U,T-t)
+	\end{aligned}
+	\end{equation*}
+	Preis der Call-Option mit Fälligkeit $T$ in $t$ bei $S(t)$.
+	\item Das \Index{Gamma} einer Option
+	\[
+	\Gamma=\partial_x^2c=\phi(h_1(x,t))\partial_xh(x,t)>0
+	\]
+	$\Gamma$ ist ein Maß für die Änderung der $\Delta$.
+	\item \Index{Theta} einer Option:
+	\[
+	\Theta:= \partial_tc=\frac{x\sigma}{2\sqrt{t}}\phi(h_1)+Kre^{-rt}\phi(h_2)
+	\]
+	Preis der Option ist monoton wachsend in der Laufzeit.
+	\item \Index{Lambda} oder \Index{Vega}
+	\[
+	\Lambda := \diff{c}{\sigma}=x\phi(h_1(x,y))\sqrt{t}>0
+	\]
+	Eine höhere Volatilität signalisiert eine erhöhte Unsicherheit im Markt, die zu höheren Optionspreisen führt.
+	\item \Index{Rho} einer Option
+	\[
+	\rho:= \diff{c}{r}=Kte^{-rt}\phi(h_2)>0
+	\]
+	Der Optionspreis wächst mit der Zinsrate $r$.
 \end{enumerate}
+%sub end
+
+\subsection{Smile Effekt}
+\label{sub:smile_effekt}
+Das Black-Scholes Modell ist ein sehr einfaches Modell zur Beschreibung von Aktienkursen.\\
+\uline{Frage:}
+Erklärt das Modell die empirischen Phänomene?\\
+\uline{Antwort:}
+Nein, da der beobachtete \Index{Smile-Effekt} im Black-Scholes Modell nicht vorkommt.\\
+Fixiere hierzu eine Aktie mit Anfangskurs $x$, fixiere Laufzeit $T$. 
+Betrachte die zur Laufzeit gehörige Zinsrate $r$, betrachte den Call-Preis als Funktion der Basis zu verschiedenen Basispreisen $K$, dann sind $C_{\text{Markt}}(K)$ Marktpreise der dazugehörigen Option abrufbar.
+Zu jedem $K$ kann die Modellvolatilität $\sigma(K)$ so bestimmt werden, dass Modellpreis und Marktpreis übereinstimmen, d.h.
+\[
+c(x,T,\sigma(K),K)=c_{\text{Markt}}(K)
+\]
+Wäre das B-S-Modell exakt richtig, so müsste $\sigma(K)$ konstant sein.
+Man stellt aber folgenden Verlauf für $\sigma(K)$ fest:
+\begin{center}
+	Grafik
+\end{center}
+Verbesserung:
+Ersetze die globale Volatilität $\sigma$ durch eine lokale Volatilitätsfunktion $(t,x)\mapsto \sigma(t,x)$.\\
+Es ergibt sich dann bzgl. eines äquivalenten Martingalmaßes $\Pw^*$ der Aktienpreisprozess:
+\[
+dS_t=S_t(rdt+\sigma(t,S_t))dW_t^*
+\]
+Dieser wird gelöst durch
+\[
+S_t=S_0e^{rt}\exp\enbrace{\int\limits_0^t \sigma(u,S_u)\dint W^*(u)-\frac{1}{2}\int\limits_0^t \sigma^2(u,S_u)\dint u}
+\]
+
+Das Black-Scholes Modell für 2 Aktien:
+\begin{itemize}
+	\item Handelszeitraum $[0,T]$ und Informationsverlauf $(\F_t)_{0\le t\le T}$
+	\item Geldmarktkonto $\beta(t)=e^{rt},~0\le t\le T$
+	\item Unabhängige Wiener-Prozesse, $W_1,W_2$ die die Aktien treiben
+	\[
+	S_1(t)=S_1(0)e^{\mu_1t}\exp\enbrace{\sigma_1(\rho W_2(t)+\sqrt{1-\rho^2}W_1(t)-\frac{1}{2}\sigma_1^2t}
+	\]
+	\[
+	S_2(t)=S_2(0)e^{\mu_2t}\exp\enbrace{\sigma_2 W_2(t)-\frac{1}{2}\sigma_2^2t}
+	\]
+	mit $S_1(0),S_2(0)>0$ als Anfangskurse.
+	$\mu_1,\mu_2\in \R$ Trendparameter, $\sigma_1,\sigma_2$ Volatilitäten und $\abs{\rho}<1$ Korrelation zwischen den Wiener-Prozessen
+\end{itemize}
+
+\bet{Bemerkung:}
+\[
+\beta(t)=\rho W_2(t)+\sqrt{1-\rho^2}W_1(t),~=\le t\le T
+\]
+ist ein Wiener-Prozess bzgl. $(\F_t)_{t=0}$
+\[
+\cov(\beta(t),W_2(t))=\cov(\rho W_2(t),W_2(t))=\rho t
+\]
+Bestimmung des äquivalenten Martingalmaßes:\\
+Ansatz:
+zweimalige Anwendung des Satzes von Girsanov:\\
+1. Schritt:
+Girsanov auf Aktie 2 anwenden
+\[
+\left.\difff{\Pw_{\nu_2}}{\Pw}\right|_{\F_t}=\exp\enbrace{\nu_2 W_2(t)-\frac{1}{2}\nu_2^2t}
+\]
+Dann ist $W_2^*(t)=W_2(t)-\nu_2(t),~t\ge0$ ein Wiener-Prozess bzgl. $\Pw_{\nu_2}$.\\
+2. Schritt:
+Wende Girsanov auf Aktie 1 an, genauer auf $W_1$.
+Für $\nu_1\in \R$ definiere
+\[
+\left.\difff{\Pw{(\nu_1,\nu_2)}}{\Pw_{\nu_2}}\right|_{\F_t}=\exp\enbrace{\nu_1 W_1(t)-\frac{1}{2}\nu_1^2t},~0\le t\le T
+\]
+
 
 
 
