@@ -2126,9 +2126,9 @@ Also kann ein solches $\psi$ nicht existieren und es folgt die Surjektivität vo
 
 \subsection[Definition: Hermitesche Form, Skalarprodukt]{Definition} % (fold)
 \label{sub:71}
-Sei $X$ ein $\mathds{K}$-Vektorraum. Eine \Index{hermitesche Form} auf $X$ ist eine Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ mit\todo{RevChap7}
+Sei $X$ ein $\mathds{K}$-Vektorraum. Eine \Index{hermitesche Form} auf $X$ ist eine Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ mit
 \begin{align*}
-	\skal*{x}{y+y'} &= \skal*{x}{y} + \skal*{x}{y'} \\
+	\skal*{x}{y+y'} &= \skal*{x}{y} + \skal*{x}{y'} \marginnote{linear im zweiten Eintrag}\\
 	\skal*{x}{\alpha \cdot y} &= \alpha \cdot \skal*{x}{y} \\
 	\skal*{x}{y} &= \overline{\skal*{y}{x}} \qquad \text{ für } x,y,y' \in X, \alpha \in \mathds{K}       
 \end{align*}
@@ -2141,7 +2141,7 @@ $\skal*{x}{x} >0$ für $0 \not= x \in X$. In diesem Fall heißt $\skal*{\cdot }{
 \label{sub:72}
 Für eine hermitesche Form $\skal*{\cdot}{\cdot}$ und $x,x',y \in X$, $\alpha \in \mathds{K}$ gilt 
 \begin{align*}
-	\skal*{x+x'}{y} = \skal*{x}{y} + \skal*{x'}{y} \quad , \quad \qquad 
+	\skal*{x+x'}{y} = \skal*{x}{y} + \skal*{x'}{y} \quad , \quad \qquad \marginnote{konjugiert linear im ersten Eintrag}
 	\skal*{\alpha \cdot x}{y} = \overline{\alpha} \cdot \skal*{x}{y} \qquad \text{und} \qquad 
 	\skal*{x}{x} \in \mathds{R} 
 \end{align*}
@@ -2151,10 +2151,10 @@ Für eine hermitesche Form $\skal*{\cdot}{\cdot}$ und $x,x',y \in X$, $\alpha \i
 \label{sub:73}
 \begin{enumerate}[(i)]
 	\item Auf $\mathds{C}^n$ definiert $\skal*{\underline{x}}{\underline{y}} := \sum_{i=1}^{n} \overline{x}_i \cdot y_i$ ein Skalarprodukt.
-	\item Auf $L^2(\mathds{R})$ definiert $\skal*{f}{g} := \int\! fg \,\mathd\lambda$ ein Skalarprodukt.
+	\item Auf $L^2(\mathds{R})$ definiert $\skal*{f}{g} := \int\! f  g \,\mathd\lambda$ ein Skalarprodukt.
 	Auf 
 	\[
-		L^2_\mathds{C}(\mathds{R}) := \set[f \colon \mathds{R} \to \mathds{C}]{\re f \text{ und } \im f \text{ messbar}, \int \! \bar{f} f \mathd\mu < \infty } / \mathcal{N}
+		L^2_\mathds{C}(\mathds{R}) := \set[f \colon \mathds{R} \to \mathds{C}]{\re f \text{ und } \im f \text{ messbar}, \int \! \bar{f} f\, \mathd\lambda < \infty } / \mathcal{N}
 	\]
 	definiert $\skal*{f}{g} := \int\! \bar{f} g \, \mathd\lambda$ ein Skalarprodukt.
 	\item Auf $\ell^2_{\color{gray}\mathds{C}}(\mathds{N})$ definieren wir ein Skalarprodukt durch $\skal*{(a_n)}{(b_n)} := \sum_{n \in \mathds{N}} \overline{a}_n b_n$.
@@ -2170,13 +2170,19 @@ Sei $X$ ein $\mathds{K}$-Vektorraum mit einer positiv semidefiniten hermiteschen
 \minisec{Beweis}
 Für $\lambda \in \mathds{K}$, $x,y \in X$ gilt: 
 \begin{align*}
-0 \le \skal*{x+\lambda y}{x + \lambda y} = \skal*{x}{x} + \lambda \cdot \skal*{x}{y} + \overline{\lambda} \cdot \skal*{y}{x} + \lambda \overline{\lambda} \skal*{y}{y}  
+	0 \le \skal*{x+\lambda y}{x + \lambda y} = \skal*{x}{x} + \lambda \cdot \skal*{x}{y} + \overline{\lambda} \cdot \skal*{y}{x} 
+	+ \lambda \cdot \overline{\lambda} \cdot \skal*{y}{y}  
 \end{align*}
 Falls $\skal*{y}{y} \not=0$, so setze $\lambda := - \frac{\skal*{y}{x}}{\skal*{y}{y}}$. Es folgt 
 \begin{align*}
-	0 \le \skal*{x}{x} - \frac{\skal*{y}{x} \cdot \skal*{x}{y}}{\skal*{y}{y}} + \overline{\lambda} \enbrace*{\skal*{y}{x}  - \frac{\skal*{y}{x}}{\skal*{y}{y}} \skal*{y}{y}   } = \skal*{x}{x} - \frac{\abs*{\skal*{x}{y}}^2 }{\skal*{y}{y}} 
+	0 \le \skal*{x}{x} - \frac{\skal*{y}{x} \cdot \skal*{x}{y}}{\skal*{y}{y}} + \overline{\lambda} \cdot \enbrace*{\skal*{y}{x}  
+	- \frac{\skal*{y}{x}}{\skal*{y}{y}} \skal*{y}{y}   } = \skal*{x}{x} - \frac{\abs*{\skal*{x}{y}}^2 }{\skal*{y}{y}} 
 \end{align*}
-Falls $\skal*{x}{x} \not= 0$, so vertausche die Rollen von $x$ und $y$. Falls $\skal*{x}{x}=\skal*{y}{y}=0$ gilt, so setzen wir $\lambda := - \skal*{y}{x}$. \bewende
+Falls $\skal*{x}{x} \not= 0$, so vertausche die Rollen von $x$ und $y$. Falls $\skal*{x}{x}=\skal*{y}{y}=0$ gilt, so setzen wir $\lambda := - \skal*{y}{x}$ und erhalten
+\[
+	0 \le - \skal*{y}{x} \cdot \skal*{x}{y} - \overline{\skal*{y}{x}} \cdot \skal*{y}{x} = -2 \cdot \abs*{\skal*{x}{y}}^2 
+\]
+Also muss in diesem Fall bereits $\abs*{\skal*{x}{y}}^2 =0$ und somit die gewünschte (Un-)Gleichung gelten. \bewende
 % subsection 74 (end)
 
 \subsection[Proposition: Ein Skalarprodukt definiert eine Norm]{Proposition} % (fold)
@@ -2185,69 +2191,108 @@ Sei $X$ ein $\mathds{K}$-Vektorraum mit Skalarprodukt. Dann definiert $x \mapsto
 \minisec{Beweis}
 $\norm{\cdot }$ ist positiv definit, also ist auch $\skal*{\cdot}{\cdot}$ positiv definit. Weiter gilt
 \begin{align*}
-	\norm{\lambda \cdot x} &= \skal*{\lambda \cdot x}{\lambda \cdot x}^{\frac{1}{2}} = \enbrace*{\overline{\lambda} \lambda \cdot \skal*{x}{x}}^{\frac{1}{2}} 
+	\norm{\lambda \cdot x} = \skal*{\lambda \cdot x}{\lambda \cdot x}^{\frac{1}{2}} \,&= \enbrace*{\overline{\lambda} \lambda \cdot \skal*{x}{x}}^{\frac{1}{2}} 
 	= \abs*{\lambda} \cdot \norm{x}    \\
-	\shortintertext{Die Dreieckungleichung gilt, da}
-	\norm{x+y}^2 &= \skal*{x+y}{x+y} = \skal*{x}{x} + \skal*{x}{y} + \skal*{y}{x} + \skal*{y}{y} \le \skal*{x}{x} +  \enbrace*{\skal*{x}{x} \skal*{y}{y}}^{\frac{1}{2}}
+	\intertext{Die Dreiecksungleichung gilt, da}
+	\norm{x+y}^2 = \skal*{x+y}{x+y} &= \skal*{x}{x} + \skal*{x}{y} + \skal*{y}{x} + \skal*{y}{y} \\
+	&\stackrel{\mathclap{\mbox{\scriptsize \hyperref[sub:74]{C.S.}}}}{\le} \skal*{x}{x} + 2 \cdot \enbrace[\big]{\skal*{x}{x} \cdot \skal*{y}{y}}^{\frac{1}{2}}
 	+ \skal*{y}{y}  \\
-	&= \norm{x}^2 + 2 \cdot \norm{x} \cdot \norm{y} + \norm{y}^2 = \enbrace*{\norm{x} + \norm{y}}^2    
+	&= \norm{x}^2 + 2 \cdot \norm{x} \cdot \norm{y} + \norm{y}^2 = \enbrace[\big]{\norm{x} + \norm{y}}^2    
 \end{align*}
-$\Rightarrow \norm{x+y} \le \norm{x} + \norm{y}$. \bewende
+Durch Wurzelziehen folg $\norm{x+y} \le \norm{x} + \norm{y}$. \bewende
 % subsection 75 (end)
 
 \subsection[Bemerkungen über Cauchy-Schwarz und die Stetigkeit von $\skal*{\cdot}{\cdot}$]{Bemerkung} % (fold)
 \label{sub:76}
 \begin{enumerate}[(i)]
-	\item Die Cauchy-Schwarz Ungleichung schreibt sich auch als $\abs*{\skal*{x}{y}} \le \norm{x} \cdot \norm{y}$.
+	\item Die Cauchy-Schwarz-Ungleichung schreibt sich auch als $\abs*{\skal*{x}{y}} \le \norm{x} \cdot \norm{y}$.
 	\item Die Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ ist stetig:
 	\begin{align*}
-		\abs*{\skal*{x}{y}- \skal*{x'}{y'}} = \ldots \le \norm{x-x'} \cdot \norm{y} + \norm{x'} \cdot \norm{y'-y}.     
+		\abs[\big]{\skal*{x}{y}- \skal*{x'}{y'}} = \abs[\big]{\skal*{x}{y} -\skal*{x'}{y} + \skal*{x'}{y} -\skal*{x'}{y'}} &= \abs[\big]{\skal*{x-x'}{y} -\skal*{x'}{y'-y}}\\
+		&\le \abs[\big]{\skal*{x-x'}{y}} + \abs[\big]{\skal*{x'}{y'-y}} \\
+		&\stackrel{\mathclap{\mbox{\scriptsize \hyperref[sub:74]{C.S.}}}}{\le} \norm{x-x'} \cdot \norm{y} + \norm{x'} \cdot \norm{y'-y}    
 	\end{align*}
+	% \ldots \le \norm{x-x'} \cdot \norm{y} + \norm{x'} \cdot \norm{y'-y}.   
 \end{enumerate}
 % subsection 76 (end)
 
-\subsection[Proposition über Zusammenhang von Norm und Skalarprodukt mit dem Parallelogrammgesetz]{Proposition} % (fold)
+\subsection[Proposition: Zusammenhang Norm $\leftrightarrow$ Skalarprodukt mit dem Parallelogrammgesetz]{Proposition} % (fold)
 \label{sub:77}
-Für einen normierten Raum $X$ sind äquivalent: \todo{eventuell Bild von Parallelogramm hinzufügen}
+\begin{figure}[b]
+	\centering{
+	\begin{tikzpicture}
+		\coordinate (0) at (0,0);
+		\coordinate (x) at (2,1.4);
+		\coordinate (y) at (3,0);
+		\coordinate (x+y) at ($(x)+(y)$);
+		
+		\draw[thick, gray, dashed] (0) -- (x+y);
+		\draw[thick, gray, dashed] (y) -- (x);
+		\draw[thick] (0,0) -- (x) -- (x+y) -- (y) -- cycle;
+		\foreach \x/\pos in {0/below left,x/above left,y/below right,x+y/above right}{
+			\filldraw (\x) circle[radius=0.04] node[\pos]{$\x$};
+		}
+	\end{tikzpicture}
+	\caption[Die Parallelogrammgleichung in $\mathds{C}\cong \mathds{R}^2$]{Die Parallelogrammgleichung in $\mathds{C}\cong \mathds{R}^2$. Die gestrichelten Linien sind
+	zusammen genauso lang wie die durchgezogenen. In $\mathds{C}$ lässt sich die Gleichung sehr einfach mittels $\abs*{z}^2= z \cdot \overline{z}$ beweisen. Ein andere 
+	einfache Möglichkeit ist der Kosinussatz aus der Schule; \hrefsym{https://de.wikipedia.org/wiki/Parallelogrammgleichung}{Wikipedia-Link}.}
+	}
+\end{figure}
+Für einen normierten Raum $X$ sind äquivalent:
 \begin{enumerate}[(i)]
 	\item Es gilt das \Index{Parallelogrammgesetz}: $\norm{x+y}^2 + \norm{x-y}^2 = 2 \enbrace*{\norm{x}^2 + \norm{y}^2}$ für alle $x,y \in X$.
-	\item $\skal*{x}{y} := \frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{-x+y}^2 + i \cdot \norm{i \cdot x +y}^2 - i \cdot \norm{-i \cdot x+ y}^2}$ für $\mathds{K}=\mathds{C}$ bzw.
-	
-	$\skal*{x}{y} := \frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{x-y}^2}$ für $\mathds{K}=\mathds{R}$ definiert ein Skalarprodukt auf $X$. In diesem Fall gilt
+	\item \[
+		\skal*{x}{y} := \begin{cases}
+			\frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{-x+y}^2 + i \cdot \norm{i \cdot x +y}^2 - i \cdot \norm{-i \cdot x+ y}^2}, &\text{ falls }\mathds{K}=\mathds{C}\\
+			\frac{1}{4} \enbrace*{\norm{x+y}^2 - \norm{x-y}^2}, &\text{ falls }\mathds{K}=\mathds{R}
+		\end{cases}
+	\]
+	definiert ein Skalarprodukt auf $X$. In diesem Fall gilt
 	$\skal*{x}{x} = \norm{x}^2$ für alle $x \in X$; insbesondere ist $\skal*{\cdot}{\cdot}$ stetig auf $X \times X$.
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item[(ii)$\Rightarrow$(i):] Es gilt $\norm{x}^2 = \skal*{x}{x}$ für $x \in X$. und (i) folgt durch einfache Rechnung.
-	\item[(i)$\Rightarrow$(ii):] $\skal*{\cdot}{\cdot} \colon X \times X \to X$ ist stetig (klar). Linearität (für $\mathds{K}=\mathds{C}$):
+	\item[(ii)$\Rightarrow$(i):] Wie man leicht nachrechnet gilt $\norm{x}^2 = \skal*{x}{x}$ für $x \in X$. (i) folgt ebenfalls durch eine einfache Rechnung.
+	\item[(i)$\Rightarrow$(ii):] $\skal*{\cdot}{\cdot} \colon X \times X \to X$ ist stetig (klar). Linearität (für $\mathds{K}=\mathds{C}$): Es gilt
 	\begin{gather*}
 		\skal*{x}{y+y'} = \frac{1}{4} \enbrace*{\norm{x+y+y'}^2 - \norm{-x+y+y'}^2 + i  \norm{i x + y+ y'}^2 - i \norm{- ix +y+y'}^2} \label{eq:77:1}\tag{*} \\ 
 		\begin{split}
 			\skal*{x}{y} + \skal*{x}{y'} = \frac{1}{4} \Big( &\norm{x+y}^2 - \norm{-x+y}^2 + i  \norm{ix +y}^2 - i  \norm{-ix +y}^2 + \\
-			&\norm{x+y'}^2 + \norm{-x+y'} + i  \norm{ix + y'} - i  \norm{-ix +y'} \Big)
+			&\norm{x+y'}^2 - \norm{-x+y'} + i  \norm{ix + y'} - i  \norm{-ix +y'} \Big)
 		\end{split}
 		\label{eq:77:2}\tag{**}
 	\end{gather*}
-	Vergleich der Imaginärteile: Es gilt
+	Vergleich der Imaginärteile: Es gilt nach (i) sowohl
 	\begin{align*}
 		\norm{x+y+y'}^2 &= - \norm{x+y-y'}^2 + 2 \norm{x+y}^2 + 2 \norm{y'}  \\
-		\shortintertext{und}
-		\norm{x+y+y'}^2 &= - \norm{x-y+y'}^2 + 2 \norm{x+y'} + 2 \norm{y}^2 \\
-		&= - \frac{1}{2} \enbrace*{\norm{x+y-y'}^2 + \norm{x-y+y'}^2} + \norm{x+y}^2 + \norm{x+y'}^2 + \norm{y'}^2 + \norm{y}^2         
+		\shortintertext{als auch}
+		\norm{x+y+y'}^2 &= - \norm{x-y+y'}^2 + 2 \norm{x+y'} + 2 \norm{y}^2 
 	\end{align*}
-	$\Rightarrow$ Realteile von \eqref{eq:77:1} und \eqref{eq:77:2} stimmen überein. $\ldots \Rightarrow \skal*{x}{y} + \skal*{x}{y'}= \skal*{x}{y+y'}$.
-	$\Rightarrow \skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{N} \setminus \set{0}$ ($\skal*{x}{0}=0$ ist trivial). Damit folgt auch
-	$\skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{Z}$. Es gilt nun für $\alpha=\frac{m}{n} \in \mathds{Q}$
+	Wir multiplizieren beide Gleichungen mit $\frac{1}{2}$, addieren diese und erhalten
+	\[
+		\norm{x+y+y'}^2= - \frac{1}{2} \enbrace*{\norm{x+y-y'}^2 + \norm{x-y+y'}^2} + \norm{x+y}^2 + \norm{x+y'}^2 + \norm{y'}^2 + \norm{y}^2         
+	\]
+	Wir substituieren $x$ mit $-x$ und ziehen die Gleichungen voneinander ab
+	\[
+		\norm{x+y+y'}^2 - \norm{-x+y+y'}^2 = \norm{x+y}^2 + \norm{x+y'}^2 -\norm{-x+y}^2 - \norm{-x+y'}^2
+	\]
+	Also stimmen die Realteile von \eqref{eq:77:1} und \eqref{eq:77:2} überein. Der Beweis für die Imaginärteile erfolgt analog. Es gilt also
+	$\skal*{x}{y} + \skal*{x}{y'}= \skal*{x}{y+y'}$. Daraus folgt
+	\begin{align*}
+		\skal*{x}{\alpha \cdot y} &= \alpha \cdot \skal*{x}{y} && \text{ für $\alpha \in \mathds{N}\setminus \set{0} $} \\
+		\Longrightarrow \skal*{x}{\alpha \cdot y} &= \alpha \cdot \skal*{x}{y} && \text{ für $\alpha \in \mathds{Z}$ ($\skal*{x}{0}=0$ ist trivial)}
+	\end{align*}
+	Es gilt nun für $\alpha=\frac{m}{n} \in \mathds{Q}$
 	\[
 		\skal*{x}{\alpha \cdot y} = \frac{n}{n} \cdot \skal*{x}{\frac{m}{n} \cdot y } = \frac{m}{n} \cdot \skal*{x}{\frac{n}{n}\cdot y } = \alpha \cdot \skal*{x}{y}  
 	\]
-	Mit der Stetigkeit von $\skal*{\cdot}{\cdot}$ folgt nun $\skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{R}$.
-	$\skal*{x}{i \cdot y} = i \cdot \skal*{x}{y}$ ist trivial und damit ist $\skal*{x}{\alpha \cdot y }= \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{C}$. Also ist
+	Mit der Stetigkeit von $\skal*{\cdot}{\cdot}$ folgt nun $\skal*{x}{\alpha \cdot y} = \alpha \cdot \skal*{x}{y}$ auch für $\alpha \in \mathds{R}$.
+	$\skal*{x}{i \cdot y} = i \cdot \skal*{x}{y}$ ist klar und damit ist $\skal*{x}{\alpha \cdot y }= \alpha \cdot \skal*{x}{y}$ für $\alpha \in \mathds{C}$. Also ist
 	$\skal*{\cdot}{\cdot}$ linear in der zweiten Variablen. $\skal*{x}{y} = \overline{\skal*{y}{x}}$ ist trivial. \bewende
 \end{description}
 % subsection 77 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Polarisierungsidentität]{Bemerkung} % (fold)
 \label{sub:78}
 Ist $X$ ein $\mathds{C}$-Vektorraum und $q \colon X \times X \to \mathds{C}$ eine \Index{Sesquilinearform} (d.h. $q$ ist linear in der zweiten Variable und konjugiert 
 linear in der ersten), dann ist $q$ durch die Abbildung $n_q \colon X \to \mathds{C}$, $n_q(x) := q(x,x)$ eindeutig bestimmt durch die \Index{Polarisierungsidentität}
@@ -2259,7 +2304,7 @@ linear in der ersten), dann ist $q$ durch die Abbildung $n_q \colon X \to \mathd
 \subsection[Definition: Prä-Hilbertraum und Hilbertraum]{Definition} % (fold)
 \label{sub:79}
 Ein $\mathds{K}$-Vektorraum $\mathcal{H}$ heißt \Index{Prä-Hilbertraum}, falls $\mathcal{H}$ ein Skalarprodukt besitzt. $\mathcal{H}$ heißt \Index{Hilbertraum}, falls
-$\mathcal{H}$ vollständig ist bzgl. der durch $\skal*{\cdot}{\cdot}$ induzierten Norm. 
+$\mathcal{H}$ vollständig ist bezüglich der durch $\skal*{\cdot}{\cdot}$ induzierten Norm. \todo{RevChap7}
 % subsection 79 (end)
 
 \subsection{Proposition} % (fold)
