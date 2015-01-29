@@ -1322,7 +1322,7 @@ $f = \bigoplus_{i \in I} f_i$.
 
 \subsection[Satz: Homologie des Koproduktes topologischer Räume]{Satz} % (fold)
 \label{sub:610}
-Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \to X$ einen Isomorphismus
+Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \hookrightarrow X$ einen Isomorphismus
 \[
 	\bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\bigoplus_{i \in I} (j_i)_*}  H_n(X;R)
 \]
@@ -1337,7 +1337,7 @@ Da diese Isomorphismen mit den Randabbildungen vertauschen, erhalten wir einen I
 \[
 	\varphi := \oplus_{i \in I} C_*(j_i;R) \colon \bigoplus C_*(X_i;R) \xrightarrow{\enspace\cong \enspace} C_*(X;R)
 \]
-Da $\bigoplus H_n \enbrace[\big]{C_*(X_i;R)} \cong H_n \enbrace[\big]{\bigoplus_i C_*(X_i;R)}$ induzieren dann auch die $(j_i)_*$ einen Isomorphismus
+Da $\bigoplus_i H_n \enbrace[\big]{C_*(X_i;R)} \cong H_n \enbrace[\big]{\bigoplus_i C_*(X_i;R)}$ induzieren dann auch die $(j_i)_*$ einen Isomorphismus
 \[
 	\oplus_{i \in I} (j_i)_* \colon \bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\enspace\cong \enspace} H_n(X;R) \bewende
 \]
@@ -2344,51 +2344,53 @@ Dann ist $d(R_i) = -1$.
 Sei $f \colon S^n \to S^n$ der Homöomorphismus, der die $0$-te und die $i$-te Koordinate vertauscht, also gilt $f(x_0, \ldots , x_n) = (x_i, \ldots , x_0, \ldots , x_m)$. 
 Dann ist $R_i = f \circ R_0 \circ f$. Da $f$ ein Homöomorphismus ist, ist $f_*$ ein Isomorphismus und daher ist $d(f)$ invertierbar, also $d(f) \in \set{\pm 1}$. Mit 
 $d(R_i) = d(f) \cdot d(R_0) \cdot d(f)$ folgt $d(R_0)=d(R_i)$. Es genügt also $R_0$ zu betrachten.
-Wir zeigen $d(R_0)= -1$ durch Induktion nach $n$.\todo{RevChap10}
+Wir zeigen $d(R_0)= -1$ durch Induktion nach $n$.
 \begin{description}
-	\item[Induktionsanfang:] Sei $i_- \colon \set{\mathrm{pt}} \to S^0$ die Abbildung mit $\im i_- = \set{-1}$ und $i_+ \colon\set{\mathrm{pt}} \to S^0 $ mit $\im i_+ = \set{+1}$. Dann ist
+	\item[Induktionsanfang:] Sei $i_- \colon \set{\mathrm{pt}} \to S^0$ die Abbildung mit $\im i_- = \set{-1}$ und $i_+ \colon\set{\mathrm{pt}} \to S^0 $ die Abbildung mit 
+	$\im i_+ = \set{+1}$. Dann ist \marginnote{Unter $H_0(S_0)\cong \mathds{Z} \otimes \mathds{Z}$ induziert $R_0$ $(x,y) \mapsto (y,x)$}
 	\begin{align*}
-		H_0(S^0) &= \set[(i_-)_*(a)+ (i_+)_*(b)]{a,b \in H_0(\set{\mathrm{pt}})\rule{0cm}{0.8em}} \qquad \text{und}\\
-		\tilde{H}_0(S^0) &= \set[(i_-)_*(a)- (i_+)_*(a)]{a \in H_0(\set{\mathrm{pt}})\rule{0cm}{0.8em}}
+		H_0(S^0) &= \set[(i_-)_*(a)+ (i_+)_*(b)]{a,b \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}} \qquad \text{und}\\
+		\tilde{H}_0(S^0) &= \set[(i_-)_*(a)- (i_+)_*(a)]{a \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}}
 	\end{align*}
 	Nun ist
 	\begin{align*}
 		(R_0)_* \enbrace[\Big]{(i_-)_*(a)- (i_+)_*(a)} = (R_0)_* (i_-)_* (a) - (R_0)_* (i_+)_* (a) &= (R_0 \circ i_-)_*(a) - (R_0 \circ i_+)_*(a)\\ 
 		&= (i_+)_*(a) - (i_-)_*(a) \\ 
-		&= - \enbrace[\big]{(i_-)_*(a) + (i_+)_*(a)} 
+		&= - \enbrace[\big]{(i_-)_*(a) - (i_+)_*(a)} 
 	\end{align*}
-	Also folgt $d(R_0)=-1$.
-	\item[Induktionsschritt:] Sei 
+	Also folgt $d(R_0)=-1$, da wir den Abbildungsgrad für reduzierte Homologie definiert hatten.
+	\item[Induktionsschritt:] Wir definieren zwei offene Teilmengen von $S^n$ wie folgt 
 	\begin{align*}
-		D_+^n &= \set[(x_0, \ldots , x_n) \in S^n]{x_n \not= -1} \\
+		D_+^n &= \set[(x_0, \ldots , x_n) \in S^n]{x_n \not= -1}\\
 		D_-^n &= \set[(x_0, \ldots , x_m) \in S^n]{x_n \not= +1}  
 	\end{align*}
-	Wir wissen schon, dass die Randabbildung aus der dazugehörigen Mayer-Vietoris-Folge $\tilde{H}_n(S^1) \xrightarrow{\partial_n} \tilde{H}_{n-1}(D^n_+ \cap D_-^n)$ ein 
-	Isomorphismus ist. Da die Randabbildung natürlich ist, erhalten wir ein kommutatives Diagramm\todo{fertig stellen}
+	Wir wissen schon aus \ref{sub:97}, dass die Randabbildung aus der dazugehörigen Mayer-Vietoris-Folge 
+	$\tilde{H}_n(S^n) \xrightarrow{\partial_n} \tilde{H}_{n-1}(D^n_+ \cap D_-^n)$ ein Isomorphismus ist. Da die Randabbildung natürlich ist, erhalten wir ein kommutatives 
+	Diagramm
 	\[
 		\begin{tikzcd}[row sep=3em, column sep=4em]
-			\tilde{H}_n(S^n) \rar["\partial_n", "\cong"'] \dar["(R_0)_*"]
-			& \tilde{H}_{n}(D^n_- \cap D^n_+) \dar["\enbrace*{R_0\big|_{(D^n_- \cap D^n_+)}}_*"]  
-			& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*", "\cong"'] \\
-			\tilde{H}_n(S^n) \rar["\partial_n", "\cong"']
-			& \tilde{H}_{n+1}(D^n_- \cap D^n_+) 
-			& H_{n-1}(S^{n-1})
+			\tilde{H}_n(S^n) \rar["\partial_n","\cong"'] \dar["(R_0)_*"]
+			& \tilde{H}_{n-1}(D^n_- \cap D^n_+) \dar["\enbrace*{R_0|_{D^n_- \cap D^n_+}}_*"]  
+			& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*","\cong"'] \dar["\enbrace*{R_0|_{S^{n-1}}}_*"]\\
+			\tilde{H}_n(S^n) \rar["\partial_n","\cong"']
+			& \tilde{H}_{n-1}(D^n_- \cap D^n_+) 
+			& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*","\cong"']
 		\end{tikzcd}
 	\]
 	dabei ist $i\colon S^{n-1} \to D^n_- \cap D_+^n$ die Homotopieäquivalenz $i(x_0, \ldots , x_{n-1}) = (x_0, \ldots , x_{n-1},0)$.
-	Nach Induktionsannahme ist $\enbrace*{R_0\big|_{S^{n-1}}}_*(y)= -y$ für alle $y \in \tilde{H}_{n-1}(S^{n-1})$. Für $x \in \tilde{H}_n(S^n)$ folgt
+	Nach Induktionsannahme ist $\enbrace*{R_0\big|_{S^{n-1}}}_*(y)= -y$ für alle $y \in \tilde{H}_{n-1}(S^{n-1})$. Für $x \in \tilde{H}_n(S^n)$ folgt dann
 	\begin{align*}
-		(R_0)_+(x) &= (\partial_n) ^{-1} \circ  (i_*) \circ \enbrace*{R_0\big|_{S^{n-1}}}_* \enbrace[\big]{(i_* ^{-1} \circ \partial_n) \cdot (x)} \\
+		(R_0)_*(x) &= (\partial_n) ^{-1} \circ  (i_*) \circ \enbrace*{R_0\big|_{S^{n-1}}}_* \enbrace[\big]{(i_* ^{-1} \circ \partial_n) (x)} \\
 		&= (\partial_n) ^{-1} \circ (i_*) \enbrace*{- i_*^{-1} \enbrace*{\partial_n (x)} } \\
 		&= - \partial_n ^{-1} \circ (i_*) \circ (i_*)^{-1} \circ \partial_n(x)= -x 
 	\end{align*}
-	Also $d(R_0)=-1$. \bewende
+	Also gilt für den Abbildungsgrad der Spiegelung $d(R_0)=-1$. \bewende
 \end{description}
 % subsection 105 (end)
 
 \subsection[Beispiel: Grad der Punktspiegelung]{Beispiel} % (fold)
 \label{sub:106}
-Der Grad der Punktspiegelung $R \colon S^n \to S^n$ $x  \mapsto -x$ ist $(-1)^{n+1}$.
+Der Grad der Punktspiegelung $R \colon S^n \to S^n$, $x  \mapsto -x$ ist $d(R)=(-1)^{n+1}$.
 \minisec{Beweis}
 $d(R)= d(R_0 \circ R_1 \circ \ldots \circ R_n) = d(R_0) \cdot \ldots \cdot d(R_n)= (-1)^{n+1}$. \bewende
 % subsection 106 (end)
@@ -2397,31 +2399,42 @@ $d(R)= d(R_0 \circ R_1 \circ \ldots \circ R_n) = d(R_0) \cdot \ldots \cdot d(R_n
 \label{sub:107}
 Sei $M$ eine $C^\infty$-Mannigfaltigkeit. Ein \Index{Vektorfeld} auf $M$ ist eine stetige Abbildung $v \colon M \to \Tmap M$ mit $v(x) \in \Tmap_x M$ für alle $x \in M$.
 Für $M=S^n$ entspricht ein Vektorfeld genau einer stetigen Abbildung $v \colon S^n \to \mathds{R}^{n+1}$ mit $\sprod*{v(x)}{x} =0$ für alle $x \in S^n$.
-\missingfigure{$S^2$ mit Vektorfeld} 
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}[scale=1.5]
+		\foreach \r in {0,20,...,340}{
+			% \filldraw (\r:1) circle[radius=0.02];
+			\draw[->, thick, DodgerBlue3] (\r:1) -- ++ ($(\r+90:1)$);
+		}
+		\draw[ultra thick] (0,0) circle(1) node{$S^1$};
+	\end{tikzpicture}
+	\caption{Ein nirgends verschwindendes Vektorfeld auf $S^1$}
+	}
+\end{figure}
 % subsection 107 (end)
 
 \subsection[Satz: Es gibt ein Vektorfeld ohne Nullstellen auf $S^n \iff n$ ist ungerade]{Satz} % (fold)
 \label{sub:108}
-Es gibt genau dann ein Vektorfeld ohne Nullstellen auf $S^n$, wenn $n$ ungerade ist.
+Es gibt genau dann ein Vektorfeld ohne Nullstellen auf $S^n$, wenn $n$ ungerade ist.\todo{RevChap10}
 \minisec{Beweis}
 Ist $n$ ungerade, so ist $S^{n} \subseteq \mathds{R}^{n+1} = \mathds{C}^{k}$ mit $k=\frac{n+1}{2}$. Punkte in $S^n$ sind dann genau $k$-Tupel $z=(z_1, \ldots , z_k)$ mit
 $\abs*{z_1}^2 + \ldots + \abs*{z_k}^2 = 1$. Ein Vektorfeld entspricht dann einer stetigen Abbildung $v \colon S^n \to \mathds{C}^k$, so dass für das kanonische komplexe 
 Skalarprodukt $\sprod*{\cdot }{\cdot}_\mathds{C} $ auf $\mathds{C}^k$ gilt
 \[
-	\sprod*{z}{v(z)}_\mathds{C} \in i \mathds{R} 
+	\sprod*{z}{v(z)}_\mathds{C} \in i \mathds{R} \marginnote{einfach nachzurechnen}
 \]
 Definiere nun $v \colon S^n \to \mathds{C}^k$ durch $v(z) := i z$. Dann $i z\not= 0$ für alle $z \in S^n$ und $\sprod*{z}{i z}= -i \norm[2]{z} \in i \mathds{R}$. Sei 
-umgekehrt $v \colon S^n \to \mathds{R}^{n+1}$ ein Vektorfeld ohne Nullstellen. Zu zeigen: $d( \text{Punktspiegelung }R)=1$ (Da $d(R)=(-1)^{n+1}$ folgt dann die Behauptung).
+umgekehrt $v \colon S^n \to \mathds{R}^{n+1}$ ein Vektorfeld ohne Nullstellen. Zu zeigen: $d(R)=1$, denn dann folgt die Behauptung, da $d(R)=(-1)^{n+1}$.
 Zeige dazu: $R$ ist homotop zu $\id$. Seien $H, K \colon S^n \times [0,1] \to S^n$ definiert durch 
 \[
 	H(x,t) := \frac{t x + (1-t)v(x)}{\norm{tx + (1-t)v(x)} } \qquad \text{bzw.}\qquad K(x,t) :=  \frac{-t x + (1-t)v(x)}{\norm{-tx + (1-t)v(x)}}
 \]
-Da $\sprod*{v(x)}{x}=0$ folgt für alle $x$ und $v(x)\not=0$ ist, folgt 
+Da $\sprod*{v(x)}{x}=0$  und $v(x)\not=0$ folgt für alle $x \in S^n$, folgt\marginnote{für orthogonale Vektoren gilt der Satz von Pythagoras}
 \begin{align*}
 	\norm{t x + (1-t)v(x)}^2 &= \norm{tx}^2 + \norm{(1-t)v(x)}^2 \not=0   \\
 	\norm{-t x + (1-t)v(x)}^2 &= \norm{-tx}^2 + \norm{(1-t)v(x)}^2 \not=0
 \end{align*}
-Also sind $H$ und $K$ wohldefiniert. $H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $ und $K$ ist Homotopie zwischen $-\id$ und 
+Also sind $H$ und $K$ wohldefiniert. $H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $ und $K$ ist Homotopie zwischen $-\id=R$ und 
 $x \mapsto \frac{v(x)}{\norm{v(x)} } $. \bewende
 % subsection 108 (end)
 
@@ -2455,7 +2468,6 @@ $f(S^1) \cap V = \emptyset$
 \minisec{Beweis (mit \ref{sub:1011})}
 \begin{enumerate}[a)]
 	\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(D^0)$ homöomorph zu $\mathds{R}^n$ und die Behauptung folgt.
-	
 	Induktionsschritt $k \mapsto k+1$: Da $D^{k+1}$ und $[0,1]^{k+1}$ homöomorph sind, können wir $D^{k+1}$ durch $[0,1]^{k+1}$ ersetzen. Sei 
 	$x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$. Es ist
 	\[
