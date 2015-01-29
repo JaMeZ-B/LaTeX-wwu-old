@@ -3235,7 +3235,7 @@ Das gleiche Argument liefert:
 \begin{aligned}
 	V_H^*(n) &= V_0+(H\cdot S^*)(n)=\E^*(V_0+(H\cdot S^*)(N)~|~\F_n)\\
 	&= \E^*(C^*~|~\F_n)=\E^*(V_0'+(H'\cdot S^*)(N)~|~\F_n)\\
-	&= V_0'+(H'\cdot S^*)(N)= V_{H'}^*(n)
+	&= V_0'+(H'\cdot S^*)(n)= V_{H'}^*(n)
 \end{aligned}
 \end{equation*}
 \hfill $\square$
@@ -3382,12 +3382,12 @@ Dann gilt
 \[
 C^*-a_n\in \mc{K}^*~\forall n\in\N
 \]
-Wegen \hyperref[sub:satz_2fima]{4.13} gilt für $\Pw^*\in\mc{P}$: $\E^*(C^*-a_n)\le 0~\forall n\in N$, außerdem folgt wegen $C^*-a_n\to C^*-a$, dass $0\ge \E^*(C^*-a_n)\to \E^*(C^*-a) ~\forall \Pw^*\in \mc{P}$.\\
+Wegen \hyperref[sub:satz_2fima]{4.13} gilt für $\Pw^*\in\mc{P}$: $\E^*(C^*-a_n)\le 0~\forall n\in \N$, außerdem folgt wegen $C^*-a_n\to C^*-a$, dass $0\ge \E^*(C^*-a_n)\to \E^*(C^*-a) ~\forall \Pw^*\in \mc{P}$.\\
 \hyperref[sub:satz_4fima]{5.4} liefert $C^*-a\in \mc{K}^*$ also ist $a$ ein upper hedging Preis.\\
 
 (ii): geht wie (i): $a$ ist lower hedging Preis genau dann, wenn es ein $K\in \G^*$ gibt mit
 \[
-a+K\le C^* \Leftrightarrow -(C^*-a)\le-K \Leftrightarrow -(C^*-a)\in \mc{K}^*
+a-K\le C^* \Leftrightarrow -(C^*-a)\le K \Leftrightarrow -(C^*-a)\in \mc{K}^*
 \]
 $a_n \nearrow a,~a_n$ lower hedging Preise $\Rightarrow -(C^*-a_n)\in\mc{K}^*\Rightarrow\E^*(-(C^*-a_n))\le 0~\forall\Pw^*\in\mc{P},~\forall n\in\N$\\
 $C^*-a_n\to C^*-a\Rightarrow\E^*(-(C^*-a))\le0~\forall \Pw^*\in\mc{P}\Rightarrow-(C^*-a)\in\mc{K}^*$\\
@@ -3709,7 +3709,7 @@ Für den Wert der Hedgestrategie nach $n$-Perioden gilt:
 \begin{equation*}
 \begin{aligned}
 V_n^*=V_0+(H\cdot S^*)(n) &= \E^*(C^*~|~\F_n) = \E^*(\E^*(C^*~|~\F_{n+1})~|~\F_n) = \E^*(V_{n+1}^*~|~\F_n)\\
-&\stackrel{\text{Markov-Eigenschaft}}{=} \E^*(V_{n+1}^*~|~S(n))\\
+&\stackrel{\text{Markov-Eigenschaft}}{=} \E^*(V_{n+1}^*~|~Z(n))\\
 &= \sum_{k=0}^{n}\E^*(V_{n+1}^*~|~Z_n=k)\mathbb{1}_{\penbrace{S(n)=S(0)u^kd^{n-k}}}
 \end{aligned}
 \end{equation*}
@@ -4029,7 +4029,7 @@ Finanzmarktmodell besteht aus
 	\]
 	Da
 	\[
-	S\frac{S(t_i)-S(t_{i-1})}{S(t_{i-1})}= \exp\enbrace{\sigma(W(t_i)-W(t_{i-1}))-\frac{1}{2}\sigma^2(t_i-t_{i-1})}e^{\mu(t_i-t_{i-1})}-1
+	\frac{S(t_i)-S(t_{i-1})}{S(t_{i-1})}= \exp\enbrace{\sigma(W(t_i)-W(t_{i-1}))-\frac{1}{2}\sigma^2(t_i-t_{i-1})}e^{\mu(t_i-t_{i-1})}-1
 	\]
 	folgt die Unabhängigkeit und zeitliche Stationarität der relativen Kursänderungen aus (ii) und (iii).
 	Die Annahme (b) ist erfüllt wegen (iv).
@@ -4089,6 +4089,7 @@ welche durch
 	\log d_n &= \frac{\enbrace{\mu-\frac{1}{2}\sigma^2}T}{n}-\enbrace{\frac{1-p_n}{p_n}\frac{\sigma^2T}{n}}^{\frac{1}{2}}
 \end{aligned}
 \end{equation*}
+gelöst werden.\\
 Strebt $p_n\to p\in (0,1)$ für $n\to \infty$, so ist
 \[
 d_n<\underbracket{e^{r\frac{T}{n}}}_{=1+\zeta_n}< u_n
@@ -4259,6 +4260,7 @@ Für $A\in \F_t$ mit $t\le T$ gilt:
 	&= \int\ablim{A}R_t\dint\Pw
 \end{aligned}
 \end{equation*}
+\hfill $\square$
 %sub end
 
 \subsection{Girsanov Transformation}
@@ -4287,7 +4289,7 @@ ist klar.\\
 Sei $g:\R\to\R$ beschränkt messbar.
 \begin{equation*}
 \begin{aligned}
-	\E_\nu (g(\bar{W}_t-\bar{W}_s)~|~\F_s) &= \E (g(\bar{W}_t-\bar{W}_s)L_t~|~\F_s)\frac{1}{L_s} \text{ mit } L_t=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}\\
+	\E_\nu (g(\bar{W}_t-\bar{W}_s)~|~\F_s) &= \E (g(\bar{W}_t-\bar{W}_s)L_t~|~\F_s)\frac{1}{L_s} \qquad \text{ mit } L_t=\exp\enbrace{\nu W_t-\frac{1}{2}\nu^2t}\\
 	&= \E\enbrace{g(W_t-W_s-\nu(t-s))\frac{L_t}{L_s}~|~\F_s}\\
 	&= \E\enbrace{g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)}~|~\F_s}\\
 	&= \E g(W_t-W_s-\nu(t-s))\exp\enbrace{\nu(W_t-W_s)-\frac{1}{2}\nu^2(t-s)}\\
@@ -4306,6 +4308,7 @@ Dies ist eine $N(0,t-s)$ Verteilung, denn
 \end{aligned}
 \end{equation*}
 Also ist $ \bar{W}_t$ $N(0,t)$-verteilt bzgl. $\Pw_\nu$.
+\hfill $\square$
 %sub end
 
 \subsection{Äquivalentes Martingalmaß im Black-Scholes Modell}
@@ -4364,15 +4367,15 @@ Deshalb kann ein Maßwechsel durchgeführt werden:
 \]
 Da $W^*$ ein Wiener-Prozess bzgl. $\Pw^*$ ist, gilt nach Girsanov
 \[
-W_t^**=W_t^*-\sigma t,~t\ge0
+W_t^{**}=W_t^*-\sigma t,~t\ge0
 \]
 ist ein Wiener-Prozess bzgl. $\Pw_\sigma^*$.
 Weiter ist:
 \begin{equation*}
 \begin{aligned}
 	S(t)&= S_0 e^{r t}\exp\enbrace{\sigma W_t^*-\frac{1}{2}\sigma^2t}\\
-	&= S_0 e^{rt}\exp\enbrace{\sigma(W_t^**+\sigma t)-\frac{1}{2}\sigma^2t}\\
-	&= S_0 e^{(r+\sigma^2)t}\exp\enbrace{\sigma W_t^**-\frac{1}{2}\sigma^2t}
+	&= S_0 e^{rt}\exp\enbrace{\sigma(W_t^{**}+\sigma t)-\frac{1}{2}\sigma^2t}\\
+	&= S_0 e^{(r+\sigma^2)t}\exp\enbrace{\sigma W_t^{**}-\frac{1}{2}\sigma^2t}
 \end{aligned}
 \end{equation*}
 \uline{Ergebnis:}\\
