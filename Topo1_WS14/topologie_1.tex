@@ -759,40 +759,40 @@ Weiter gibt es dann $n$ mit $A \cong \mathds{Z}^n \oplus TA$. $\Rg A := n$ ist d
 \label{sub:42}
 Sei $A$ eine endlich erzeugte abelsche Gruppe. Dann gilt $\Rg A = \max \set[m]{\exists C \le A, C \cong \mathds{Z}^m}$.
 \minisec{Beweis}
-Da $A \cong \mathds{Z}^n \oplus T A$ ist, genügt zu zeigen: Ist $\varphi : \mathds{Z}^m \to \mathds{Z}^n \oplus T A$ ein injektiver Gruppenhomomorphismus, so ist $m \le n$.
-Schreibe $\varphi = \varphi_0 \oplus \varphi_1$, also $\varphi(a) = \varphi_0(a) + \varphi_1(a)$ mit $\varphi_0 : \mathds{Z}^m \to \mathds{Z}^n$, 
-$\varphi_1 : \mathds{Z}^m \to T A$. 
+Da $A \cong \mathds{Z}^n \oplus T A$ ist, genügt zu zeigen: Ist $\varphi \colon \mathds{Z}^m \to \mathds{Z}^n \oplus T A$ ein injektiver Gruppenhomomorphismus, so ist 
+$m \le n$. Schreibe $\varphi = \varphi_0 \oplus \varphi_1$, also $\varphi(a) = \varphi_0(a) + \varphi_1(a)$ mit $\varphi_0 \colon \mathds{Z}^m \to \mathds{Z}^n$, 
+$\varphi_1 \colon \mathds{Z}^m \to T A$. 
 
 Behauptung: $\varphi_0$ ist injektiv. Zu $v \in \mathds{Z}^m$ wähle $k\ge 1$ mit $k \cdot \varphi_1(v) = 0 \in T A$. Dann ist $\varphi_1(k v) = k \varphi_1(v)=0$.
 Ist $v \not= 0$, so ist $k \cdot v \not= 0 \in \mathds{Z}^m$, also ist $\varphi(k v) \not= 0$ und damit $\varphi_0(k v) \not= 0$. Es folgt $\varphi_0(v) \not= 0$, da sonst
 $\varphi_0(k \cdot v) = k \cdot \varphi_0(v)= 0$. Damit ist die Behauptung gezeigt.
 
-Gruppenhomomorphismen $\varphi_0 : \mathds{Z}^m \to \mathds{Z}^n$ werden durch $n \times m$-Matrizen beschrieben: Es gibt $A= (a_{ij}) \in \mathds{Z}^{n \times m}$ mit
+Gruppenhomomorphismen $\varphi_0 \colon \mathds{Z}^m \to \mathds{Z}^n$ werden durch $n \times m$-Matrizen beschrieben: Es gibt $A= (a_{ij}) \in \mathds{Z}^{n \times m}$ mit
 \[
 	\varphi_0 \begin{pmatrix}
 		z_1 \\ \vdots \\ z_m
 	\end{pmatrix} = \begin{pmatrix}
-		\sum_{j=1}^{m} a_{1j} z_j \\
+		\sum_{j=1}^{m} a_{1j} \cdot z_j \\
 		\vdots \\
-		\sum_{j=1}^{m} a_{nj} z_j
+		\sum_{j=1}^{m} a_{nj} \cdot z_j
 	\end{pmatrix}
 \]
 Ist $m >n$, so hat $A$, aufgefasst als Matrix über $\mathds{Q}$, einen Kern. Es gibt also einen Vektor $w = \begin{psmallmatrix}a_1/b_1 \\ : \\ a_m/b_m\end{psmallmatrix}$
 mit $A w = 0$, $w \not=0$. Dann ist $(b_1, \ldots , b_m) \cdot w \in \mathds{Z}^m$ und 
 \[
-	\varphi_0 \enbrace[\big]{(b_1, \ldots , b_m)\cdot w} = A \cdot \enbrace[\big]{(b_1, \ldots , b_m) \cdot w} = (b_1, \ldots , b_m) \cdot A \cdot w = 0 
+	\varphi_0 \enbrace[\big]{(b_1, \ldots , b_m)\cdot w} = A \cdot \enbrace[\big]{(b_1, \ldots , b_m) \cdot w} = (b_1, \ldots , b_m) \cdot A \cdot w = 0 \enspace\light
 \]
-Also gilt $m \le n$. \bewende
+Dies ist ein Widerspruch zur Injektivität von $\varphi_0$. Also gilt $m \le n$. \bewende
 % subsection 42 (end)
 
 \subsection[Definition: Kurze exakte Sequenz]{Definition} % (fold)
 \label{sub:43}
-Seien $M_0, M_1, M_2$ $R$-Moduln und $f_0 : M_0 \to M_1$, $f_1 : M_1 \to M_2$ $R$-lineare Abbildungen. Dann heißt 
-\[
+Seien $M_0, M_1, M_2$ $R$-Moduln und $f_0 \colon M_0 \to M_1$, $f_1 \colon M_1 \to M_2$ $R$-lineare Abbildungen. Dann heißt 
+\begin{equation*}
 	\begin{tikzcd}
 		M_0 \rar["f_0", hook] & M_1 \rar["f_1", two heads]& M_2 
-	\end{tikzcd} \tag*{$(\star)$}
-\]
+	\end{tikzcd} \label{eq:43} \tag{*}
+\end{equation*}
 eine \Index{kurze exakte Sequenz}, wenn gilt:
 \begin{multicols}{3}
 	\begin{enumerate}[(i)]
@@ -837,23 +837,30 @@ Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \x
 		0 = f_1 \enbrace[\big]{f_0(v_0) + s(v_2)} = v_2 \enspace \Longrightarrow \enspace f_0(v_0)=0 \enspace\Longrightarrow \enspace v_0 =0
 	\]
 	\item[Surjektivität:] Sei $v_1 \in M_1$. Betrachte $v_2 := f_1(v_1)$. Dann ist $v_1 -s(v_2) \in \ker f_1 = \im f_0$, also gibt es $v_0$ in $M_0$ mit
-	$f_0(v_0) = v_1 - s(v_1)$. Damit ist $v_1= f_0(v_0)+ s(v_1)$.
+	$f_0(v_0) = v_1 - s(v_1)$. Damit ist $v_1= f_0(v_0)+ s(v_1)$. \bewende
 \end{description}
 % subsection 45 (end)
 
 \subsection[Bemerkung: Existenz einer Spaltung, wenn $M_2$ frei ist]{Bemerkung} % (fold)
 \label{sub:46}
 \begin{enumerate}[1)]
-	\item $\begin{tikzcd}
+	\item Die kurze exakte Sequenz $\begin{tikzcd}
 		\mathds{Z} \rar[hook,"\cdot n"] & \mathds{Z} \rar[two heads] &  \nicefrac{\mathds{Z}}{n \mathds{Z}}
 	\end{tikzcd}$
 	spaltet nicht.
 	\item Ist $\begin{tikzcd}
 		M_0 \rar["f_0"] & M_1 \rar["f_1"] & M_2
 	\end{tikzcd}$
-	eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet $(\star)$.
-	Siehe Lemma \ref{sub:32}. Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
-	
+	eine kurze exakte Folge mit $M_2$ frei, also $M_2 \cong R[S]$, so spaltet \eqref{eq:43}.
+	Insbesondere ist $M_1 \cong M_0 \oplus M_2$.
+	Dazu wenden wir Lemma \ref{sub:32} an und erhalten eine $R$-lineare Abbildung $s \colon M_2 \to M_1$, sodass folgendes Diagramm kommutiert
+	\[
+		\begin{tikzcd}
+			\mbox{ } & M_1 \dar["f_1",two heads] \\
+			R[S] \urar["s", dashed] \rar["\id"] &  R[S]
+		\end{tikzcd}
+	\]
+	$s$ ist also die gesuchte Spaltung.
 	Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
 \end{enumerate}
 % subsection 46 (end)
@@ -911,16 +918,18 @@ Nebenbei: Ist $A' \subseteq B'$, so gilt $\Rg A' \le \Rg B'$, denn
 	\Rg A' = \max \set[n']{\mathds{Z}^{n'} \cong C' \le A'} \le \max \set[n']{\mathds{Z}^{n'} \cong C' \le B'} = \Rg B'.
 \]
 Betrachte die kurze exakte Folge
-$\begin{tikzcd}
-	p^{-1}(\mathds{Z}^n) \rar & B \rar & \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}
-\end{tikzcd}$. 
+\[
+	\begin{tikzcd}
+		p^{-1}(\mathds{Z}^n) \rar & B \rar & \nicefrac{B}{p ^{-1}(\mathds{Z}^n)}
+	\end{tikzcd}
+\]
 Wegen $\nicefrac{B}{p ^{-1}(\mathds{Z}^n)} \cong T C$ gibt es ein
 $k$ mit $k \cdot \enbrace*{b+ p ^{-1}(\mathds{Z}^n)} =0$ für alle $b \in B$. Also $k \cdot b \in p ^{-1}(\mathds{Z}^n)$. Es folgt 
 $kB \subseteq  p ^{-1}(\mathds{Z}^n)$. Ist  $B \cong \mathds{Z}^{\Rg B}+ TB$, so ist $k B \cong (k \mathds{Z})^{\Rg B}+ T(kB)$ und $\Rg kB = n = \Rg B$. 
 Mit der Nebenbemerkung folgt $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$ aus $kB \subseteq  p ^{-1}(\mathds{Z}^n) \subseteq B$. \bewende
 \minisec{Beweis mit Tensorprodukten (Skizze)}
 \begin{itemize}
-	\item $\mathds{Q} \otimes_\mathds{Z} : \mathds{Z}\text{-}\MOD \to \mathds{Q}\text{-}\VR $ ist ein Funktor.
+	\item $\mathds{Q} \otimes_\mathds{Z} \colon \mathds{Z}\text{-}\MOD \to \mathds{Q}\text{-}\VR $ ist ein Funktor.
 	\item $\Rg A= \dim_\mathds{Q} (\mathds{Q} \otimes_\mathds{Z} A)$
 	\begin{enumerate}[(a)]
 		\item $\mathds{Q} \otimes_\mathds{Z} (X \oplus Y) = \mathds{Q} \otimes_\mathds{Z} X \oplus  \mathds{Q} \otimes_\mathds{Z} Y$
@@ -930,11 +939,11 @@ Mit der Nebenbemerkung folgt $\Rg p ^{-1}(\mathds{Z}^n) = \Rg B$ aus $kB \subset
 	\item Ist $\begin{tikzcd}
 		A \rar & B \rar & C
 	\end{tikzcd}$ eine kurze exakte Folge, so ist auch 
-	\[
-		\begin{tikzcd}
+	\(
+		\begin{tikzcd}[sep=small]
 				\mathds{Q} \otimes_\mathds{Z} A \rar & \mathds{Q} \otimes_\mathds{Z} B \rar & \mathds{Q} \otimes_\mathds{Z} C
 			\end{tikzcd}
-	\] 
+	\) 
 	eine kurze exakte Folge.
 	\item Jede kurze exakte Folge $\begin{tikzcd}
 		V_0 \rar & V_1 \rar & V_2
@@ -959,7 +968,7 @@ Sei $(C_*,d_*)$ ein endlich erzeugter $\mathds{Z}$-Kettenkomplex. Dann gilt
 	\chi(C_*) = \sum_{i=1}^{\infty} (-1)^i \Rg H_i(C_*,d_*).
 \]
 \minisec{Beweis}
-Sei $B_{n+1} := \im d_{n+1} : C_{n+1} \to C_n$ und $Z_n := \ker d_n : C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
+Sei $B_{n+1} := \im d_{n+1} \colon C_{n+1} \to C_n$ und $Z_n := \ker d_n \colon C_n \to C_{n-1}$. Also $H_n(C_*,d_*) = \nicefrac{Z_n}{B_{n+1}}$.
 Als Untermoduln von $C_n$ sind $Z_n$ und $B_n$ endlich erzeugt (LA2). Insbesondere ist auch $H_n(C_*,d_*)$ endlich erzeugt und der Rang somit definiert. Auch $B_{n+1}$
 ist Untermodul des endlich erzeugten $\mathds{Z}$-Moduls $C_n$ und somit endlich erzeugt.
 Wir erhalten kurze exakte Folgen:
@@ -969,7 +978,7 @@ Wir erhalten kurze exakte Folgen:
 		Z_n \rar[hook] & C_n \rar[two heads] & B_n \quad 
 	\end{tikzcd}
 \]
-Folglich gilt $\Rg Z_n = \Rg B_{n+1} + \Rg H_n(C_*,d_*)$ und $\Rg C_n = \Rg Z_n + \Rg B_n$. Also gilt
+Nach Proposition \ref{sub:48} gilt $\Rg Z_n = \Rg B_{n+1} + \Rg H_n(C_*,d_*)$ und $\Rg C_n = \Rg Z_n + \Rg B_n$. Also gilt
 \begin{align*}
 	\chi(C_*) = \sum_{i=0}^{\infty} (-1)^i \Rg C_i &= \sum_{i=0}^{\infty} (-1)^i \enbrace[\big]{\Rg Z_i + \Rg B_i} \\  
 	&= \sum_{i=0}^{\infty} (-1)^i \enbrace[\Big]{\Rg H_i(C_*,d_*) + \Rg B_{i+1} + \Rg B_i} \\
@@ -980,7 +989,9 @@ Folglich gilt $\Rg Z_n = \Rg B_{n+1} + \Rg H_n(C_*,d_*)$ und $\Rg C_n = \Rg Z_n 
 
 \subsection[Korollar: Die Eulercharakteristik eines simplizialen Komplexes]{Korollar} % (fold)
 \label{sub:411}
-Sei $K$ ein endlicher, geordneter simplizialer Kettenkomplex. Dann gilt
+Sei $K$ ein endlicher, geordneter simplizialer Kettenkomplex. Dann gilt\marginnote{Eine vereinfachte Variante dieser Aussage kam in Aufgabe 2 von Blatt3 vor: Dort haben wir
+den Homologiemodul über einen Körper betrachtet. Deshalb konnte wir da dann die Dimensionsformeln anwenden, um die beiden Vorraussetzungen für die Rechnung in \ref{sub:410} 
+zu erhalten.}
 \[
 	\chi(K) = \sum_{i=1}^{\dim K} (-1)^i \Rg H_i(K;\mathds{Z})
 \]
