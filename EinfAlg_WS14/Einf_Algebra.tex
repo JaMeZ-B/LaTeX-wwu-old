@@ -4518,9 +4518,127 @@ also
 \hfill $\square$\\
 
 Wir zeigen jetzt, dass ein Zerfällungskörper bis auf Isomorphie eindeutig bestimmt ist.
+%sub end
 
+\subsection{Definition Homomorphismus}
+\label{sub:def_homomorphismus}
+Sei $\varphi:K\to K'$ ein Isomorphismus von Körpern.
+\begin{enumerate}[(a)]
+	\item Für $f\in K[T],~f=a_nT^n\dt{+}a_0$ setze $\varphi(f)=\varphi(a_n)T^n\dt{+}\varphi(a_0)\in K'[T]$.
+	Dann ist
+	\[
+	\varphi:K[T]\to K'[T]
+	\]
+	ein Isomorphismus.
+	\item Wenn $L\supseteq K$ und $L'\supseteq K'$ Körpererweiterungen sind und $\psi:L\to L'$ ein Homomorphismus mit 
+	\[
+	\psi|_K=\varphi
+	\]
+	so heißt $\psi$ \Index{Homomorphismus} über $\phi$.
+	\begin{center}
+		\begin{tikzcd}[column sep=small]
+			 L \ar{r}{\psi} & L'\\
+			 K \ar{r}{\varphi} \ar[u,hook] & K' \ar[u,hook] 
+		\end{tikzcd}
+		\captionof{figure}{Homomorphismus}
+	\end{center}
+\end{enumerate}
+%sub end
 
+\subsection{Lemma 16}
+\label{sub:lemma_16}
+Sei $\varphi:K\to K'$ ein Isomorphismus von Körpern, seien $L\supseteq K$ und $L'\supseteq K'$ Körpererweiterungen.
+Sei $u\in L$ mit normierten Minimalpolynom $\mu_u=g$.
+\begin{enumerate}[(i)]
+	\item Wenn $v\in L'$ eine Nullstelle von $\varphi(g)$ ist, gibt es \uline{genau ein} Isomorphismus 
+	\[
+	K(u)\stackrel{\psi}{\to}K'(u)
+	\]
+	über $\varphi$ mit $\psi(u)=v$.
+	\item Wenn $\varphi(g)$ keine Nullstelle in $L'$ hat, gibt es \uline{kein} Homomorphismus
+	\[
+	\psi:K(u)\to L'
+	\]
+	über $\varphi$.
+\end{enumerate}
 
+\bet{Beweis:}\\
+\uline{zu (i):}\\
+Da $g$ irreduzibel ist und $\varphi:K[T]\to K'[T]$ ein Isomorphismus ist, ist $\varphi(g)$ irreduzibel.
+Betrachte
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		K(u) \ar{r}{\cong}& \nicefrac{K[T]}{(g)} \ar{r}{\cong} & \nicefrac{K'[T]}{(\varphi(g))} \ar{r}{\cong} & K(u)\\
+		K \ar[r,equal]\ar[u,hook] & K \ar{r}{\phi} \ar[u,hook] & K' \ar[r,equal]\ar[u,hook] & K' \ar[u,hook]  
+	\end{tikzcd}
+	\captionof{figure}{Beweis Lemma 16}
+\end{center}
+Es folgt die Existenz von $\psi:K(u)\stackrel{\cong}{\to}K(u)$ mit $\psi(u)=v$.
+Jedes Element $z\in K(u)$ ist von der Form
+\[
+z=a_lu^l\dt{+}a_0 \text{ und }a_j\in K,
+\]
+also ist $\psi(z)$ festgesetzt durch $\psi(u)$.
+\hfill $\square$\\
+\uline{zu (ii):}\\
+Ist $\psi:K(u)\to L'$ ein Homomorphismus über $\varphi$, so folgt für $\psi(u)=v$, dass 
+\[
+\varphi(g)(v)=\psi(g(u))=0
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Satz 27}
+\label{sub:satz_27}
+Sei $\varphi:K\to K'$ ein Isomorphismus von Körpern,sei $f\in K[T]$ normiert, seien $L\supseteq K$ sowie $L'\supseteq K'$ Zerfällungskörper von $f$ bzw. $\varphi(f)$.
+Sei 
+\[
+H =\penbrace{\psi: L\to L'~|~\psi\text{ Isoorphismus über }\varphi}
+\]
+Dann gilt
+\[
+1\le\# H\le [L:K]
+\]
+(d.h. es gibt solche Isomorphismen über $\varphi$, aber höchstens $[L:K]$ viele).\\
+
+\bet{Beweis:}\\
+Induktion nach $n=\deg(f)$.\\
+\uline{$n=1$:} $f=T-u$ und $\varphi(f)=T-\varphi(u),~u\in K,~\varphi(u)\in K'$.
+Dann folgt
+\[
+L=K,~L'=K'\Rightarrow \psi=\phi \text{ fertig.}
+\]
+\uline{$n\ge 2$:} Schreibe $f=g\cdot h,~g\i  K[T]$ normiert und irreduzibel.
+Da $f$ in $L[T]$ in Linearfaktoren zerfällt, zerfällt auch $g$ in $L[T]$ in Linearfaktoren.
+Sei $u\in  L$ eine Nullstelle von $g$.
+Sei $v\in L'$ eine Nullstelle von $\varphi(g)$ ($\varphi(g)$ zerfällt in $L'[T]$ in Linearfaktoren).\\
+Nach \hyperref[sub:lemma_16]{Lemma 6.6} gibt es genau ein Isomorphismus $\zeta:K(u)\to K'[T]$ über $\varphi$ mit $\zeta(u)=v$.
+Setze $M=K(u)\subseteq L$ sowie $M'=K'(u)\subseteq L'$.
+Dann folgt
+\[
+g(T-u)\tilde{g}\text{ für }\tilde{g}\in M[T]
+\]
+und 
+\[
+f=(t-u)\cdot \tilde{g}\cdot h \text{ für }\tilde{g}\in M[T].
+\]
+Nach Induktionsschritt gibt es ein Isomorphismus $\psi$ über $\zeta$, also über $\varphi$.
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		L \ar{r}{\psi} & L'\\
+		M \ar{r}{\zeta} \ar[u,hook] & M' \ar[u,hook]\\
+		K \ar{r}{\varphi} \ar[u,hook] & K' \ar[u,hook]
+	\end{tikzcd}
+	\captionof{figure}{Beweis Satz 27}
+\end{center}
+Für $\psi$ über $\zeta$ gibt es höchstens $[L:M]$ Möglichkeiten.
+Ist $\psi$ über $\varphi$, so gibt es höchstens $\deg(g)$ viele Möglichkeiten für $\psi(u)=v$, zu jeder davon höchstens $[M:K]$ Möglichkeiten über $K(u)\stackrel{\varphi}{\to}K'(u)$, also höchstens
+\[
+[L:M]\cdot [M:K]=[L:K]
+\]
+Möglichkeiten.
+\hfill $\square$
+%sub end
 
 
 
