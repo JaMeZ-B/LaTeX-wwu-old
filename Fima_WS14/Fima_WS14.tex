@@ -4420,17 +4420,17 @@ Zu bestimmen ist:
 Zunächst für $t=0$:
 \begin{equation*}
 \begin{aligned}
-	\E^*e^{-rt}(S_T-K)^+ &= \E^*e^{-rt}S_T\mathbb{1}_{\penbrace{S_T>K}}-e^{-rt}K\Pw^*(S_T>K)\\
-	S_0\cdot \E\frac{S_T^*}{S_0}\mathbb{1}_{\penbrace{S_T>K}}-e^{-rt}K\Pw^*(S_T>K)\\
-	&= S_0\underbracket{\Pw_\sigma^*(S_T>K)}_{(1)}-e^{-rt}K\underbracket{\Pw^*(S_T>K)}_{(2)}\\
+	\E^*e^{-rT}(S_T-K)^+ &= \E^*e^{-rT}S_T\mathbb{1}_{\penbrace{S_T>K}}-e^{-rT}K\Pw^*(S_T>K)\\
+	&= S_0\cdot \E\frac{S_T^*}{S_0}\mathbb{1}_{\penbrace{S_T>K}}-e^{-rT}K\Pw^*(S_T>K)\\
+	&= S_0\underbracket{\Pw_\sigma^*(S_T>K)}_{(1)}-e^{-rT}K\underbracket{\Pw^*(S_T>K)}_{(2)}\\
 \end{aligned}
 \end{equation*}
-Mit $S_T=S_0\exp\enbrace{\sigma W_T^**-\frac{1}{2}\sigma^2 T}e^{(r+\sigma^2)T}$ folgt
+Mit $S_T=S_0\exp\enbrace{\sigma W_T^{**}-\frac{1}{2}\sigma^2 T}e^{(r+\sigma^2)T}$ folgt
 \begin{equation*}
 \begin{aligned}
 	\Pw_\sigma^*(S_T>K) &= \Pw_\sigma^*\enbrace{\log\frac{S_T}{S_0}>\log\frac{K}{S_0}}\\
-	&= \Pw_\sigma^*\enbrace{\sigma W_T^**-\frac{1}{2}\sigma^2 T+(r+\sigma^2)T>\log\frac{K}{S_0}}\\
-	&= \Pw_\sigma^*\enbrace{\frac{W_T^**}{\sqrt{T}}>\frac{\log\frac{K}{S_0}+\frac{1}{2}\sigma^2T-(r+\sigma^2)T}{\sigma\sqrt{T}}}\\
+	&= \Pw_\sigma^*\enbrace{\sigma W_T^{**}-\frac{1}{2}\sigma^2 T+(r+\sigma^2)T>\log\frac{K}{S_0}}\\
+	&= \Pw_\sigma^*\enbrace{\frac{W_T^{**}}{\sqrt{T}}>\frac{\log\frac{K}{S_0}+\frac{1}{2}\sigma^2T-(r+\sigma^2)T}{\sigma\sqrt{T}}}\\
 	&= \phi\enbrace{\frac{\log\frac{S_0}{K}+\enbrace{r+\frac{1}{2}\sigma^2}T}{\sigma\sqrt{T}}}\\
 	&\text{mit } \phi(y)=\frac{1}{\sqrt{2\pi}}\int\ablim{-\infty}^ye^{-\frac{1}{2}z^2}\dint z
 \end{aligned}
@@ -4445,9 +4445,9 @@ Weiter:
 \end{aligned}
 \end{equation*}
 \uline{Ergebnis:}\\
-Bezeichnet $c(S_0,T,K)$ den ANfangspreis einer Call-Option mit Laufzeit $T$, strike $K$ und Anfangsaktienkurs $S_0$, so gilt:
+Bezeichnet $c(S_0,T,K)$ den Anfangspreis einer Call-Option mit Laufzeit $T$, strike $K$ und Anfangsaktienkurs $S_0$, so gilt:
 \[
-c(S_0,T,K)= S_0\phi(h_1(S_0,T))-Ke^{-rt}\phi(h_2(S_0,T))
+c(S_0,T,K)= S_0\phi(h_1(S_0,T))-Ke^{-rT}\phi(h_2(S_0,T))
 \]
 mit 
 \[
@@ -4476,7 +4476,7 @@ denn
 \uline{Eigenschaften des Call-Preises:}\\
 Sei $c(x,t,\sigma,K)$ der Preis einer Call-Option mit Laufzeit $t$, Volatilität $\sigma$, strike $K$ und Anfangskurs $x$.
 \[
-c(x,t,\sigma,K)= S_0\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
+c(x,t,\sigma,K)= x\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 \]
 \begin{enumerate}[(i)]
 	\item $\lim\ablim{t\downarrow 0}c(x,t,\sigma,K)=(x-K)^+$
@@ -4504,7 +4504,7 @@ c(x,t,\sigma,K)= S_0\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 	Preis der Call-Option mit Fälligkeit $T$ in $t$ bei $S(t)$.
 	\item Das \Index{Gamma} einer Option
 	\[
-	\Gamma=\partial_x^2c=\phi(h_1(x,t))\partial_xh(x,t)>0
+	\Gamma=\partial_x^2c=\phi(h_1(x,t))\partial_xh_1(x,t)>0
 	\]
 	$\Gamma$ ist ein Maß für die Änderung der $\Delta$.
 	\item \Index{Theta} einer Option:
@@ -4533,7 +4533,7 @@ Erklärt das Modell die empirischen Phänomene?\\
 \uline{Antwort:}
 Nein, da der beobachtete \Index{Smile-Effekt} im Black-Scholes Modell nicht vorkommt.\\
 Fixiere hierzu eine Aktie mit Anfangskurs $x$, fixiere Laufzeit $T$. 
-Betrachte die zur Laufzeit gehörige Zinsrate $r$, betrachte den Call-Preis als Funktion der Basis zu verschiedenen Basispreisen $K$, dann sind $C_{\text{Markt}}(K)$ Marktpreise der dazugehörigen Option abrufbar.
+Betrachte die zur Laufzeit gehörige Zinsrate $r$, betrachte den Call-Preis als Funktion der Basis zu verschiedenen Basispreisen $K$, dann sind $c_{\text{Markt}}(K)$ Marktpreise der dazugehörigen Option abrufbar.
 Zu jedem $K$ kann die Modellvolatilität $\sigma(K)$ so bestimmt werden, dass Modellpreis und Marktpreis übereinstimmen, d.h.
 \[
 c(x,T,\sigma(K),K)=c_{\text{Markt}}(K)
