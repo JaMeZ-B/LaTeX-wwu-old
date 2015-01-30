@@ -3076,16 +3076,100 @@ Sei $T \in \Fred(\mathcal{H})$. Wir haben $\ker T \oplus (\ker T)^\bot = \mathca
 		\tilde{\minwidthbox{ }{5pt}} \colon \mathcal{L}(\mathcal{H}) \longrightarrow \mathcal{L}(\tilde{\mathcal{H}}, \mathcal{H}) , \quad S \longmapsto \tilde{S}
 	\]
 	stetig. $\tilde{T}$ ist bijektiv und stetig. Nach dem \hyperref[sub:39]{Satz von Inversen Operator} ist $\tilde{T}$ also ein Homöomorphismus. Mit \ref{sub:83} folgt,
-	dass $\tilde{T}$ eine Umgebung von Homöomorphismen in $\mathcal{L}(\tilde{\mathcal{H}},\mathcal{H})$ besitzt. Also besitzt $T$ eine Umgebung 
+	dass $\tilde{T}$ eine Umgebung von Homöomorphismen $\tilde{U}\subset\mathcal{L}(\tilde{\mathcal{H}},\mathcal{H})$ besitzt. Also besitzt $T$ eine Umgebung 
 	$U \subset \mathcal{L}(\mathcal{H})$, sodass für alle $S \in U$ der Operator $\tilde{S}$ ein Homöomorphismus ist. Für jedes $S \in U$ gilt:
 	\begin{enumerate}[1)]
 		\item $S\enbrace*{(\ker T)^\bot} \subset \mathcal{H}$ ist abgeschlossen, denn $\tilde{S}\enbrace*{(\ker T)^\bot}= (\tilde{S}^{-1})^{-1}\enbrace*{(\ker T)^\bot}$, 
 		$(\ker T)^\bot$ ist abgeschlossen und $S\enbrace*{(\ker T)^\bot} = \tilde{S} \enbrace*{(\ker T)^\bot}$
-		\item 
+		\item Es gilt
+		\[
+			\dim \nicefrac{\mathcal{H}}{S\enbrace*{(\ker T)^\bot}} = \dim \nicefrac{\mathcal{H}}{\tilde{S}\enbrace*{(\ker T)^\bot}} = \dim  
+			\nicefrac{\tilde{\mathcal{H}}}{(\ker T)^\bot} = \dim (\im T)^\bot
+		\]
+		\item Es gilt $(\ker S) \cap (\ker T)^\bot = \set{0}$: Es ist $S|_{(\ker T)^\bot} = \tilde{S}|_{(\ker T)^\bot}$, aber $\tilde{S}$ ist injektiv, da $S \in U$. 
+		Insbesondere $\dim (\ker S) \le \dim (\ker T) < \infty$.
+		\item $\im S \subseteq \mathcal{H}$ ist abgeschlossen: $S \enbrace*{(\ker T)^\bot} \subset S(\mathcal{H})=\im S$. Nach 1) ist 
+		$S \enbrace*{(\ker T)\bot} \subset \mathcal{H}$ abgeschlossen. Es gilt
+		\[
+			\dim \enbrace*{\nicefrac{S(\mathcal{H})}{S \enbrace*{(\ker T)\bot} }} \le \dim \enbrace*{\nicefrac{\mathcal{H}}{S \enbrace*{(\ker T)^\bot} }}  
+			= \dim (\im T)^\bot < \infty
+		\]
+		Also ist $S(\mathcal{H})= S \enbrace*{(\ker T)^\bot} + V$ für ein $V \subset \mathcal{H}$ endlichdimensional und damit ist $S(\mathcal{H}) \subset \mathcal{H}$
+		abgeschlossen.
+		\item Es ist $\dim \nicefrac{\mathcal{H}}{S(\mathcal{H})} \le \dim  \nicefrac{\mathcal{H}}{S \enbrace*{(\ker T)^\bot}}<\infty$.
 	\end{enumerate}
+	Aus 3), 4) und 5) folgt nun, dass $S \subset U$ ein Fredholm-Operator ist.
+	\item Sei $S \in U$. Dann ist $(\ker S) \cap (\ker T)^\bot \stackrel{\text{3)}}{=} \set{0}$, also $\ker S \times (\ker T)^\bot \times Z \cong \mathcal{H}$ als Vektorräume
+	für ein $Z \subset \mathcal{H}$ endlichdimensional. Dann gilt
+	\[
+		\dim (\ker S) + \dim Z =\dim (\ker T)
+	\]
+	Wir wissen bereits, dass $\dim \enbrace*{\nicefrac{\mathcal{H}}{S \enbrace*{(\ker T)^\bot} }}=\dim (\im T)^\bot =\dim \enbrace*{\nicefrac{\mathcal{H}}{\im T}}$ gilt.
+	Es ist $\im S \cong S \enbrace*{(\ker T)^\bot} \times S(Z)$, also
+	\[
+		\dim \enbrace*{\nicefrac{\mathcal{H}}{\im S}} = \dim \enbrace*{\nicefrac{\mathcal{H}}{S \enbrace*{(\ker T)^\bot}}} - \dim \enbrace*{S(Z)}
+		= \underbrace{\dim \enbrace*{\nicefrac{\mathcal{H}}{\im T}} - \dim (\ker T)}_{=\idx T} + \dim (\ker S)
+	\]
+	Also ist $\idx S = \idx T$. \bewende
 \end{enumerate}
 % subsection 93 (end)
+
+\subsection{Corollar} % (fold)
+\label{sub:94}
+Sei $K \in \mathcal{K}(\mathcal{H})$. Dann gilt $\idx(\id_\mathcal{H}- K)=0$.
+\minisec{Beweis}
+Die Abbildung $t \mapsto \id_\mathcal{H} - t \cdot K$ ist stetig, also ist $\idx \enbrace*{\id_\mathcal{H}- t \cdot K}=\idx \id_\mathcal{H}=0$. \bewende
+% subsection 94 (end)
+
+\subsection{Beispiele} % (fold)
+\label{sub:95}
+\begin{enumerate}[(i)]
+	\item Sei $S \in \mathcal{L}\enbrace*{\ell^2(\mathds{N})}$ der unilaterale Shift\index{unilateraler Shift}, d.h. 
+	$S \enbrace*{(\alpha_i)_i}= (0, \alpha_0, \alpha_1, \ldots )$. $S$ ist offensichtlich isometrisch, also auch injektiv und somit ist $\dim (\ker S)=0$. Weiter ist
+	$\dim \enbrace*{\nicefrac{\ell^2(\mathds{N})}{\im S}} =1$. Damit ist $S$ ein Fredholm-Operator mit $\idx S = -1$.
+	\item Für $k \in C \enbrace*{[0,1] \times [0,1]}$ sei $K \in \mathcal{L} \enbrace*{L^2([0,1])}$ gegeben durch
+	\[
+		K(f)(t) := \int_{[0,1]}\hspace{-1em} k(s,t)\cdot f(s)\mathd s
+	\]
+	Es ist $K \in \mathcal{K} \enbrace*{L^2([0,1])}$. Dann ist $\ker(\id-K)$ der Lösungsraum der Integralgleichung $f(t)= \int \!k(s,t)\cdot f(s) \mathd s$.
+	\item Sei $M$ ein $C^\infty$-Mannigfaltigkeit, $\mu$ ein verträgliches Borelmaß. Dann ist $C^\infty(M) \subset L^2(M)$ dicht. Sei $\D \colon C^\infty(M) \to C^\infty(M)$
+	ein geeigneter Differentialoperator. $\D$ ist im Allgemeinen nicht beschränkt. Aber dann ist der Operator 
+	\[
+		\tilde{\D} := \frac{\D}{\sqrt{1+ \D^* \D}} 
+	\]
+	beschränkt und dicht definiert und lässt sich auf ganz $L^2(M)$ fortsetzen. Unter geeigneten Bedingungen ist $\tilde{\D}$ Fredholm. $\ker \tilde{\D}$ bzw. 
+	$\coker \tilde{\D}$ entsprechen Lösungsräumen von partielle Differentialgleichungen.
+\end{enumerate}
+% subsection 95 (end)
 % section 9 (end)
+\newpage
+
+\section{Ausblick} % (fold)
+\label{sec:10}
+
+\subsection{Frage} % (fold)
+\label{sub:101}
+Sei $T \in \mathcal{L}(\mathcal{H})$. ¿Existiert ein nicht trivialer Unterraum $X \subset \mathcal{H}$ mit $T(X) \subset X$? Das gilt nicht für Operatoren auf Banachräumen 
+(Per Enflo, \url{https://de.wikipedia.org/wiki/Per_Enflo}).
+% subsection 101 (end)
+
+\subsection{Beispiel} % (fold)
+\label{sub:102}
+\begin{enumerate}[(i)]
+	\item Sie $G$ eine abzählbare diskrete Gruppe. Sei $u \colon G \to \mathcal{L}\enbrace*{\ell^2(G)}$ gegeben durch $u_g(f)(h) := f (g ^{-1} h)$ für 
+	$g \in G, f \in \ell^2(G), h \in G$. Betrachte 
+	\begin{align*}
+		C_r^*(G) &:= \overline{\mathrm{Alg}(u_g : g \in G)}^{\norm{\cdot}} \subset \mathcal{L}\enbrace*{\ell^2(G)} \\
+		\mathrm{VN}(G) &:= \overline{\mathrm{Alg}(u_g : g \in G)}^{\mathrm{w.o.t.}} \subset \mathcal{L}\enbrace*{\ell^2(\mathds{N})} 
+	\end{align*}
+	Was ist die Struktur dieser Algebra? ¿$\mathrm{VN}(\mathds{F}_m) \cong \mathrm{VN}(\mathds{F}_n)$?
+	\item Sei $\Omega$ ein kompakter Hausdorffraum, $\alpha \colon \Omega \to \Omega$ ein Homöomorphismus. $\leadsto$ Wirkung von $\mathds{Z}$ auf $C(\Omega)$.
+	$(\Omega,\alpha)$ heißt dynamischer System. $\leadsto C(\Omega) \rtimes \mathds{Z}$. Zum Beispiel
+	$\Omega =S^1$, $\alpha$ Rotation um $2 \pi \Theta$. Nun ist interessant, ob $\Theta \in \mathds{Q}$ oder $\Theta \not\in \mathds{Q}$. Damit ergibt sich die 
+	Rotationsalgebra $A_\Theta$, die sich den Winkel $\Theta$ \enquote{merkt}.
+\end{enumerate}
+% subsection 102 (end)
+% section 10 (end)
 
 \cleardoubleoddemptypage
 \appendix
