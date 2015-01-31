@@ -503,7 +503,9 @@ Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
 \begin{minipage}{0.7\textwidth}
 	\begin{enumerate}[1)]
 		\item Ist $M$ ein $R$-Modul und $i \colon S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi \colon R[S] \to M$, die $i$ fortsetzt.
-		\item Sei $f\colon R[S]\to M$ $R$-linear und $p\colon N\twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f}\colon R[S]\to N$ mit $p\circ \hat{f} =f$.
+		\item Sei $f\colon R[S]\to M$ $R$-linear und $p\colon N\twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f}\colon R[S]\to N$ mit $p\circ \hat{f}=f$.
+		
+		Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
 	\end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}{0.25\textwidth}
@@ -861,7 +863,7 @@ Eine \Index{Spaltung} für eine kurze exakte Folge $M_0 \xrightarrow{f_0} M_1 \x
 		\end{tikzcd}
 	\]
 	$s$ ist also die gesuchte Spaltung.
-	Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
+	Dieses Vorgehen funktioniert bei jedem projektiven Modul.\index{projektiver Modul}
 \end{enumerate}
 % subsection 46 (end)
 
@@ -1389,9 +1391,9 @@ Da $\bigoplus_i H_n \enbrace[\big]{C_*(X_i;R)} \cong H_n \enbrace[\big]{\bigoplu
 \subsection[Bemerkung: Die induzierte Abbildung eines Homöomorphismus ist ein Isomorphismus]{Bemerkung} % (fold)
 \label{sub:71}
 Sei $f \colon X \to Y$ ein Homöomorphismus. Dann ist 
-\[
+\(
 	f_* \colon H_n(X;R) \longrightarrow H_n(Y;R)
-\]
+\)
 ein Isomorphismus.
 \minisec{Beweis}
 Da Homologie ein Funktor ist, gilt
@@ -1415,7 +1417,7 @@ $\id_X$ ist und $f \circ g$ homotop zu $\id_Y$ ist. $g$ heißt dann eine \Index{
 
 \subsection[Satz: Homotopieinvarianz der Homologie]{Satz} % (fold)
 \label{sub:73}
-Seien $f,g \colon X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt $H_n(f;R) = H_n(g;R)$ für alle $n \in \mathds{N}$.
+Seien $f,g \colon X \to Y$ stetige Abbildungen. Sind $f$ und $g$ homotop, so gilt für die induzierten Abbildungen $H_n(f;R) = H_n(g;R)$ für alle $n \in \mathds{N}$.
 \minisec{Beweis}
 \emph{Siehe \ref{sub:78}, sowie \ref{sub:713} } \bewende
 
@@ -1428,7 +1430,7 @@ Ist $f \colon X \to Y$ eine Homotopieäquivalenz, so ist $f_* \colon H_n(X;R) \t
 Sei $g \colon Y \to X$ ein Homotopieinverses zu $f$. Es folgt 
 \begin{align*}
 	f_* \circ g_* &\stackrel{\text{Funktor}}{=} (f \circ g)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_Y)_* \stackrel{\text{Funktor}}{=} \id_{H_n(Y;R)} \\
-	g_* \circ f_* &\stackrel{\text{Funktor}}{=} (g \circ f)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_X)_* \stackrel{\text{Funktor}}{=} \id_{H_n(X;R)}
+	g_* \circ f_* &\stackrel{\text{Funktor}}{=} (g \circ f)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_X)_* \stackrel{\text{Funktor}}{=} \id_{H_n(X;R)}\bewende
 \end{align*}
 % subsection 74 (end)
 
@@ -1464,12 +1466,21 @@ Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopi
 
 \subsection[Definition: Kettenhomotopie]{Definition} % (fold)
 \label{sub:76}
-Seien $(C_*,d_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_* : (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
-ist eine Folge von $R$-linearen Abbildungen $h_n :C_n \to C_{n+1}'$, $n \in \mathds{N}$, sodass für alle $n$ gilt:
-\[
-	d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
-\] 
-In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
+\begin{minipage}{0.7\textwidth}
+	Seien $(C_*,d_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. Seien $f_*,g_* \colon (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen. Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$
+	ist eine Folge von $R$-linearen Abbildungen $h_n \colon C_n \to C_{n+1}'$, $n \in \mathds{N}$, sodass für alle $n$ gilt:
+	\[
+		d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
+	\] 
+	In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
+\end{minipage}\marginnote{Kettenhomotopie definiert eine Äquivalenzrelation wie in Aufgabe 2 von Blatt 5 gezeigt.}\hfill
+\begin{minipage}{0.25\textwidth}
+	\centering{
+	\begin{tikzcd}[row sep=2.5em, column sep=3em]
+		C_{n-1} \drar["h_{n-1}"'] & C_n \lar["d_n"'] \dar[shift left,"f_n"] \dar[shift right,"g_n"'] \drar["h_n"] \\
+		& C_n' & C_{n+1}' \lar["d_{n+1}'"]
+	\end{tikzcd}}
+\end{minipage}
 % subsection 76 (end)
 
 \subsection[Prop.: induzierte Abbildungen von kettenhomotopen Kettenabbildungen sind gleich]{Proposition} % (fold)
@@ -1479,7 +1490,7 @@ Seien $f_*,g_* \colon (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ u
 	H_n(f_*) = H_n(g_*)
 \]
 \minisec{Beweis}
-Sei $x \in H_n(C_*,d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
+Sei $x \in H_n(C_*,d_*)$. Also $x=[v]$ mit $v \in \ker d_n \colon C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
 \begin{align*}
 	H_n(f_*)(x) = H_n(f_*) \enbrace*{[v]} = \benbrace*{f_n(v)}  &= \benbrace[\Big]{g_n(v) +\underbrace{ d_{n+1}' \circ h_n(v)}_{\in \im d_{n+1}'} + \underbrace{h_{n-1} \circ d_n(v)}_{=0}} \\
 	&= \benbrace*{g_n(v)} = H_n(g_*) \enbrace*{[v]} = H_n(g_*)(x) \bewende
@@ -1488,12 +1499,12 @@ Sei $x \in H_n(C_*,d_*)$. Also $x=[v]$ mit $v \in \ker d_n : C_n \to C_{n-1}$. D
 
 \subsection[Lemma: Reduktion von Satz \ref{sub:73} auf Beweis eines Spezialfalles]{Lemma} % (fold)
 \label{sub:78}
-Die Homotopieinvarianz von $H_n(-;R)$ folgt aus folgenden Spezialfall:
+Die Homotopieinvarianz von $H_n(-;R)$, also Satz \ref{sub:73}, folgt aus folgenden Spezialfall:
 \begin{equation*}
-	\text{Seien $i_0,i_1  :X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. $\Longrightarrow$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
+	\text{Seien $i_0,i_1 \colon X \hookrightarrow X \times [0,1]$ Inklusionen mit $i_0(x)= (x,0)$, $i_1(x)=(x,1)$. $\Longrightarrow$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
 \end{equation*}
 \minisec{Beweis}
-Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt mittels Funktorialität 
+Sei $H \colon X \times [0,1] \to Y$ eine Homotopie zwischen $f,g \colon X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt mittels Funktorialität 
 \begin{align*}
 	f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \bewende
 \end{align*}
@@ -1502,24 +1513,24 @@ Sei $H : X \times [0,1] \to Y$ eine Homotopie zwischen $f,g : X \to Y$, also $f 
 \subsection[Bemerkung zum Vorgehen beim Beweis von \textbf{[\#]}]{Bemerkung} % (fold)
 \label{sub:79}
 Zum Beweis von \eqref{eq:78} werden wir eine explizite Kettenhomotopie $h_*$ zwischen $C_*(i_0;R)$ und $C_*(i_1;R)$ konstruieren. Wir brauchen also 
-$h_n : C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathds{N}$ mit 
+$h_n \colon C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathds{N}$ mit 
 \begin{equation*}
 	\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R). \label{eq:79} \tag{\#\#}
 \end{equation*}
 
-\minisec{"Ansatz"}
+\subsection*{"Ansatz"}
 Für $\sigma \colon \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} \colon \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. Dann ist
 "$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{[0,1]}$" und 
 \[
 	\partial_{n+1}(h_n \sigma) = \partial_{n+1}(\sigma \times \id_{[0,1]}) = (\sigma \times \id)\Big|_{\partial (\abs*{\Delta^n} \times [0,1] )} = \partial_n \sigma \times \id_{[0,1]} + i_0 \sigma + i_1 \sigma
 \]
-da $\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \dot{\cup} \abs*{\Delta^n} \times \set{0,1}$.
+da $\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \,\dot{\cup}|, \abs*{\Delta^n} \times \set{0,1}$. \medskip
 
-Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes. $\Delta^n \times [0,1]$ hat die folgende Form für
+\noindent Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes. $\Delta^n \times [0,1]$ hat die folgende Form für
 $n \in \set{0,1,2}$:
 \begin{figure}[H]
 	\centering{
-	\scalebox{0.9}{\begin{tikzpicture}[scale=2.0]
+	\scalebox{0.9}{\begin{tikzpicture}[scale=2.3]
 		\coordinate (1) at (0,1);
 		\coordinate (2) at (0,0);
 		
@@ -1542,7 +1553,7 @@ $n \in \set{0,1,2}$:
 		-- (5) node[left]{$(0,1)$} -- cycle;
 		
 		
-		\draw[thick] (7) node[left]{$(0,0)$} node[above, yshift=0.4cm, xshift=0.9cm]{$\Delta^2$} -- (8) node[right]{$(2,0)$} -- (9) node[right]{$(1,0)$} -- cycle;
+		\draw[thick] (7) node[left]{$(0,0)$} node[above, yshift=0.4cm, xshift=0.9cm]{$\Delta^2$} -- (8) node[right]{$(2,0)$} -- (9) node[right,yshift=2pt]{$(1,0)$} -- cycle;
 		
 		\draw[thick] (7) -- (10) node[left]{$(0,1)$} -- (11) node[right]{$(2,1)$} -- (8);
 		\draw[thick, dashed] (10) -- (12) node[above left]{$(1,1)$} -- (9);
@@ -1559,7 +1570,7 @@ $n \in \set{0,1,2}$:
 	\centering{
 	\[
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=2]
+		\begin{tikzpicture}[scale=2.3]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1580,7 +1591,7 @@ $n \in \set{0,1,2}$:
 		}}
 		\enspace =\enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=2]
+		\begin{tikzpicture}[scale=2.3]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1602,7 +1613,7 @@ $n \in \set{0,1,2}$:
 		}} 
 		\enspace\cup \enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=2]
+		\begin{tikzpicture}[scale=2.3]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1625,7 +1636,7 @@ $n \in \set{0,1,2}$:
 		}} 
 		\enspace\cup \enspace
 		\vcenter{\hbox{
-		\begin{tikzpicture}[scale=2]
+		\begin{tikzpicture}[scale=2.3]
 			\coordinate (7) at (0,1);
 			\path (7) ++ (0.9,-0.15) coordinate (8);
 			\path (7) ++ (0.5,0.18) coordinate (9);
@@ -1679,7 +1690,7 @@ Es gelten folgende fünf Gleichungen für die Abbildungen $k_{n,j}$ und $\iota_{
 Wir zeigen hier nur exemplarisch die erste Gleichung:
 Die linke Seite der Gleichung entspricht
 	\[
-		\begin{tikzcd}[row sep=2.4em, column sep=0.5em, font=\small]
+		\begin{tikzcd}[row sep=2.8em, column sep=0.5em, font=\small]
 			\abs*{\Delta^n} \dar["\iota_{n+1,l}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \drar[mapsto]& \cdots & e_j \drar[mapsto]& \cdots 
 			& e_n \drar[mapsto]& \\
 			\abs*{\Delta^{n+1}} \dar["k_{n,j}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto] & e_{l+1} \dar[mapsto]& e_{j} \dar[mapsto] 
@@ -1690,7 +1701,7 @@ Die linke Seite der Gleichung entspricht
 	\]
 	und die rechte Seite entspricht
 	\[
-		\begin{tikzcd}[row sep=2.4em, column sep=0.2em, font=\small]
+		\begin{tikzcd}[row sep=2.8em, column sep=0.2em, font=\small]
 			\abs*{\Delta^n} \dar["k_{n-1,j-1}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto]& \cdots 
 			& e_{j-1} \dar[mapsto]& e_j \arrow[ddl,bend left,mapsto]& e_{j+1} \arrow[ddl,bend left,mapsto] & \cdots & e_n \arrow[ddl,mapsto,bend left] \\
 			\abs*{\Delta^{n-1}} \times [0,1] \arrow[dd,"\iota_{n,l}\times \id_{[0,1]}" description] && (e_0,0) \arrow[dd,mapsto] & (e_{l-1},0) \arrow[dd,mapsto] 
@@ -3732,7 +3743,7 @@ Sei $\sigma \in C_2(X;\mathds{Z})$ ein $2$-Simplex. Es gilt
 
 \subsection{Lemma 5} % (fold)
 \label{sub:1512}
-Sei $\omega \colon \Delta^1 \to X$ ein $1$-Simple, dann gilt $\theta \circ \overline{\rho}(\omega) = \homologieklasse{\omega - \lambda_{\partial \omega}} $
+Sei $\omega \colon \Delta^1 \to X$ ein $1$-Simplex, dann gilt $\theta \circ \overline{\rho}(\omega) = \homologieklasse{\omega - \lambda_{\partial \omega}} $
 \minisec{Beweis}
 Es gilt
 \begin{align*}
