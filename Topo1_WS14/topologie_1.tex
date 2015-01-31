@@ -1217,14 +1217,14 @@ $f_* \colon (C_*,d_*) \to (C_*',d_*')$ ist eine Folge von $R$-linearen Abbildung
 für alle $n\ge 1$ gilt. Also kommutiert folgendes Diagramm
 \[
 	\begin{tikzcd}[sep=normal]
-		C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"] \dar["f_1", Firebrick3] & C_2 \lar["d_2"] \dar["f_2", Firebrick3]& C_3 \lar["d_3"] \dar["f_3", Firebrick3]& \ldots \lar \\
+		C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"'] \dar["f_1", Firebrick3] & C_2 \lar["d_2"'] \dar["f_2", Firebrick3]& C_3 \lar["d_3"'] \dar["f_3", Firebrick3]& \ldots \lar \\
 		C_0' & C_1' \lar["d_1'"]  & C_2' \lar["d_2'"]& C_3' \lar["d_3'"]& \ldots \lar
 	\end{tikzcd}
 \]
 
 % subsection 61 (end)
 
-\subsection[Bemerkung: Induzierte Abbildung einer Kettenabbildung]{Bemerkung} % (fold)
+\subsection[Bemerkung: Induzierte Abbildung einer Kettenabbildung auf Homologie]{Bemerkung} % (fold)
 \label{sub:62}
 Ist $f_* \colon (C_*,d_*) \to (C_*',d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung auf Homologie $H_n(f_*) \colon H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
 \[
@@ -1244,7 +1244,7 @@ für $v \in \ker d_n$. Dies ist wohldefiniert, denn:
 \subsection[Bemerkung: Homologie definiert einen Funktor]{Bemerkung} % (fold)
 \label{sub:63}
 \begin{enumerate}[a)]
-	\item $R$-Kettenkomplexe mit Kettenabbildungen bilden die Kategorie $R\text{-}\textsc{Ketten}$.
+	\item $R$-Kettenkomplexe mit $R$-Kettenabbildungen bilden die Kategorie $R\text{-}\textsc{Ketten}$.
 	\item Homologie definiert nun einen Funktor: $H_n \colon R\text{-}\textsc{Ketten} \to R\text{-}\MOD$.
 	
 	Es gilt $H_n(\id_{(C_*,d_*)}) = \id_{H_n(C_*,d_*)}$ und $H_n(f \circ g) = H_n(f) \circ H_n(g)$, da
@@ -1298,7 +1298,7 @@ Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$
 \label{sub:66}
 Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) \colon \TOP \to R\text{-}\textsc{Mod}$.
 \minisec{Beweis}
-$H_n(-;R)$ ist die Komposition der Funktoren $C_*(-;R) \colon \TOP \to R\text{-}\textsc{Ketten}$ und $H_* \colon R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$. \bewende
+$H_n(-;R)$ ist die Komposition des Funktors $C_*(-;R) \colon \TOP \to R\text{-}\textsc{Ketten}$ aus \ref{sub:65} mit dem Funktor $H_n \colon R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$ aus \ref{sub:63}. \bewende
 % subsection 66 (end)
 
 \subsection[Bemerkung: Notation für die auf Homologie induzierte Abbildung]{Bemerkung} % (fold)
@@ -1345,7 +1345,7 @@ Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} \colon V
 	\end{cases} 
 \]
 \minisec{Bemerkung}
-Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i \colon V_i \to W$ von $R$-linearen Abbildungen eine
+Seien $V_i$ für $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i \colon V_i \to W$ von $R$-linearen Abbildungen eine
 $R$-lineare Abbildung 
 \(
 	\oplus_{i \in I} f_i \colon \bigoplus_{i \in I} V_i \to W  
@@ -1367,17 +1367,17 @@ Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die Inklusionen $j_i \colon X_i
 \minisec{Beweis}
 Da die $X_i \subseteq X$ offen und abgeschlossen sind und $\abs*{\Delta^n}$ zusammenhängend ist (sogar wegzusammenhängend), gibt es für jedes 
 $\sigma \colon \abs*{\Delta^n} \to X $ ein eindeutiges $i$ mit $\im \sigma \subseteq  X_i$. Es gilt also $S_n(X) = {\dot{\bigcup}} S_n(X_i)$. Daher induzieren die $j_i$
-einen Isomorphismus
+für jedes $n$ einen Isomorphismus
 \[
-	\oplus_{i \in I} C_n(j_i;R) \colon \bigoplus_{i \in I}C_n(X_i;R) \xrightarrow{\enspace\cong \enspace} C_n(X;R) 
+	{\textstyle\bigoplus\limits_{i \in I}} C_n(j_i;R) \colon \bigoplus_{i \in I}C_n(X_i;R) \xrightarrow{\enspace\cong \enspace} C_n(X;R) 
 \]
 Da diese Isomorphismen mit den Randabbildungen vertauschen, erhalten wir einen Isomorphismus von $R$-Kettenkomplexen
 \[
-	\varphi := \oplus_{i \in I} C_*(j_i;R) \colon \bigoplus C_*(X_i;R) \xrightarrow{\enspace\cong \enspace} C_*(X;R)
+	\varphi := {\textstyle\bigoplus\limits_{i \in I}} C_*(j_i;R) \colon \bigoplus C_*(X_i;R) \xrightarrow{\enspace\cong \enspace} C_*(X;R)
 \]
 Da $\bigoplus_i H_n \enbrace[\big]{C_*(X_i;R)} \cong H_n \enbrace[\big]{\bigoplus_i C_*(X_i;R)}$ induzieren dann auch die $(j_i)_*$ einen Isomorphismus
 \[
-	\oplus_{i \in I} (j_i)_* \colon \bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\enspace\cong \enspace} H_n(X;R) \bewende
+	{\textstyle\bigoplus\limits_{i \in I}} (j_i)_* \colon \bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\enspace\cong \enspace} H_n(X;R) \bewende
 \]
 % subsection 610 (end)
 % section 6 (end)
