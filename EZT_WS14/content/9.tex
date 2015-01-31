@@ -1,0 +1,71 @@
+\section{Der Vier-Quadrate-Satz}
+\label{sec:para9}
+
+\begin{satz}[Satz von Lagrange] \label{satz_langrange}
+	Jede natürliche Zahl ist Summe von vier Quadraten, d.h. jedes $n \in \NN$ hat eine Darstellung der Gestalt \marginnote{23.01. \\ \ [26]}
+	\begin{equation}
+		n = x_1^2 + x_2^2 + x_3^2 + x_4^2 \text{ mit } x_i \in \ZZ \label{eq_4quad}
+	\end{equation}
+\end{satz}
+
+\begin{defn}
+	Für jedes $n \in \NN$ sei $r_4(n)$ die Anzahl der Quadrupel $(x_1,x_2,x_3,x_4) \in \ZZ^4$ mit \eqref{eq_4quad}.
+\end{defn}
+
+\begin{lemma}[Formel von Jacobi]
+	Es gilt
+	\begin{equation}
+		r_4(n) = \begin{cases}
+			8\sigma(n), & \text{falls } n \text{ ungerade} \\
+			3\cdot 8 \sigma(u), & \text{falls } n \text{ gerade}
+		\end{cases} \label{eq_jacobiformel}
+	\end{equation}
+	wobei $u$ den ungeraden Teil von $n$ bezeichnet, also $u = n \cdot 2^{-w_2(n)}$, und $\sigma$ die Teilersummenfunktion.
+\end{lemma}
+
+\subsection{Der Drei-Quadrate-Satz}
+
+\begin{falko} \label{F10.1}
+	Ist $n$ eine natürliche Zahl der Gestalt
+	\begin{equation}
+		n = 4^j \cdot (8k + 7) \text{ mit } j,k \in \NN_0, \label{eq_F10.1}
+	\end{equation}
+	so ist $n$ keine Summe von drei Quadraten in $\ZZ$.
+\end{falko}
+
+\minisec{Beweis}
+Die Quadrate in $\ZZ/8\ZZ$ sind $0, 1$ und $4$, also ist $x^2+y^2+z^2 \not\kon 7 \modu 8$ für alle $x,y,z \in \ZZ$. Somit ist kein $n$ von der Gestalt $n = 8k+7$ eine Summe von drei Quadraten in $\ZZ$. 
+Jetzt Induktion nach $j$: \\
+Sei $j \geq 1$, dann ist $n = 4m$, und nach Induktionsanfang ist $m$ keine Summe von drei Quadraten. \\
+Angenommen, es ist $4m = n = x^2+y^2+z^2$, dann folgt $x^2+y^2+z^2 \kon 0 \modu 4$. Dann sind $x,y$ und $z$ gerade, und es folgt $m = \leg{x}{2}^2 + \leg{y}{2}^2 + \leg{z}{2}^2 \quad \lightning$
+
+\begin{satz}[Drei-Quadrate-Satz] \label{3quadsatz}
+	Jede natürliche Zahl $n$, die nicht von der in F\ref{F10.1} genannten Gestalt \eqref{eq_F10.1} ist, ist eine Summe von drei Quadraten in $\ZZ$, d.h. $n$ hat eine Darstellung der Gestalt
+	\begin{equation}
+		n = x_1^2 + x_2^2 + x_3^2 \text{ mit } x_i \in \ZZ \label{eq_10_1}
+	\end{equation}
+	Ist zudem $n$ nicht durch $4$ teilbar, also $m \kon 1,2,3,5$ oder $6 \modu 8$, so existiert stets auch eine primitive Darstellung der Gestalt \eqref{eq_10_1}, d.h. eine mit
+	\begin{equation}
+		\ggT(x_1,x_2,x_3) = 1 \label{eq_10_2}
+	\end{equation}
+\end{satz}
+
+Der Drei-Quadrate-Satz liegt anscheinend viel tiefer als der Vier-Quadrate-Satz, der aus dem Drei-Quadrate-Satz unmittelbar folgt: Sei $n \in \NN$ beliebig. Wir können annehmen, dass $n$ die Gestalt $n = 4^jm$ mit $m \kon 7 \modu 8$ hat (denn andernfalls ist $n$ ja schon eine Summe von drei Quadraten in $\ZZ$). Dann ist $m - 1 \kon 6 \modu 8$, also ist $m-1$ eine Summe von drei Quadraten und somit $m$ eine Summe von vier Quadraten. Aber dann ist auch $n = 4^jm$ eine Summe von vier Quadraten. \\
+Der Drei-Quadrate-Satz folgt -- allerdings ohne den Zusatz \eqref{eq_10_2} -- aus einem allgemeinen Prinzip der Algebraischen Zahlentheorie ($\rightarrow$ Lokal-Global-Prinzip von Hasse). Was eine möglichst direkte Begründung des Drei-Quadrate-Satzes (ohne den Zusatz \eqref{eq_10_2}) angeht, so sind derzeit kursierende Beweise insofern "nicht elementar", als sie (anders als Gauß) den nachstehenden Satz von Dirichlet benutzen, dessen Beweis essentiell auf Methoden der komplexen Analysis beruht.
+
+\begin{satz}[Satz von Dirichlet] \label{satz_dirichlet}
+	Für beliebige $m > 1$ aus $\NN$ und jedes zu $m$ prime $a \in \ZZ$ gibt es unendlich viele Primzahlen $p$ mit $p \kon a \modu m$.
+\end{satz}
+
+\minisec{Bemerkungen}
+\begin{enumerate}[1)]
+	\item Auf den Zusatz \eqref{eq_10_2} im Drei-Quadrate-Satz legte schon Legendre Wert. Man beachte: Während z.B. $45 = 6^2+3^2$ im Wesentlichen die einzige Darstellung von $45$ als Summe von zwei Quadraten ist (und diese nicht primitiv ist), hat $45$ neben $45 = 6^2+3^2+0^2$ auch die primitive Darstellung $45 = 5^2+4^2+2^2$ als Summe von drei Quadraten.
+	\item Gauß hat auch über die Anzahl $r_3(n)$ der Darstellungen $n = x_1^2 + x_2^2+x_3^2$ bzw. die Anzahl $R_3(n)$ der entsprechenden primitiven Darstellungen interessante Aussagen gemacht.
+	\item Unabhängig von Gauß erhält man durch einfaches Abzählen der $(x_1,x_2,x_3,x_4)$ mit $n = x_1^2+x_2^2+x_3^2+x_4^2$ für $x_1 = 0, x_1=1, x_2 =2, \dots$ die banale Formel
+	\begin{equation}
+		r_4(n) = r_3(n) + 2r_3(n-1^2) + 2r_3(n-2^2) + 2r_3(n-3^2)+ \cdots \label{eq_10_3}
+	\end{equation}
+	Mit der Formel von Jacobi für $r_4(n)$ liefert \eqref{eq_10_3} eine gute Rekursionsformel für die $r_3(n)$. Aber dieser Rekursionsformel lässt sich nicht entnehmen -- jedenfalls nicht auf einfache Weise --, dass stets $r_3(n) \neq 0$, wenn $n$ nicht von der Gestalt $n = 4^j(8k+7)$ ist.
+	\item In einer Extra-Vorlesung am 03. Februar 2015, 12:00 Uhr, wird Prof. Lorenz die Idee des Gaußschen Beweises für den Drei-Quadrate-Satzes vorstellen.
+\end{enumerate}
+\newpage
