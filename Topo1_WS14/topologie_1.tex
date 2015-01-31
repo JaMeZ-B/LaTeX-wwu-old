@@ -1059,7 +1059,7 @@ definiert durch
 \]
 \minisec{Beweis (mit Lemma \ref{sub:56})}
 \begin{align*}
-	\partial_{n-1} \partial_n(\sigma) = \partial_{n-1} \enbrace*{\sum_{j=0}^{n} (-1)^j \delta_j(\sigma)} &= 
+	\partial_{n-1} \circ \partial_n(\sigma) = \partial_{n-1} \enbrace*{\sum_{j=0}^{n} (-1)^j \delta_j(\sigma)} &= 
 	\sum_{k=0}^{n-1} \sum_{j=0}^{n} (-1)^{j+k} \delta_k \delta_j(\sigma)   \\
 	&= \,\sum_{0 \le k < j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) +\!\!\!\smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_k\delta_j(\sigma) \\
 	&\stackrel{\mathclap{\text{Lemma \ref{sub:56}}}}{=} \, \sum_{0 \le k < j \le n} \!\!\!(-1)^{k+j} \delta_k \delta_j(\sigma) + \!\!\!\smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_j \delta_{k+1}(\sigma) \\
@@ -1112,7 +1112,7 @@ Ist $X= \set{x_0}$ der Ein-Punkt-Raum, so ist
 \end{cases} 
 \]
 \minisec{Beweis}
-Es gibt für jedes $n$ genau eine Abbildung, nämlich die konstante, $\sigma_n \colon \abs*{\Delta^n} \to \set{x_0}$ und diese ist stetig. Also 
+Es gibt für jedes $n$ genau eine Abbildung $\sigma_n \colon \abs*{\Delta^n} \to \set{x_0}$ nämlich die konstant. Diese ist offensichtlich stetig. Also ist
 $C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. Für alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
 \[
 	\partial_n(\sigma_n) = \begin{cases}
@@ -1123,8 +1123,11 @@ $C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. Für alle $j$ ist $\delta_j \sigma_n =
 Der singuläre Kettenkomplex von $\set{x_0}$ hat also folgende Gestalt:
 \[
 	\begin{tikzcd}[row sep=0.4em]
-		C_0 \enbrace[\big]{\set{x_0};R} & C_1 \enbrace[\big]{\set{x_0};R} \lar["0", swap] & 
-		C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] & C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap]& \cdots \lar["\cong",swap] \\
+		C_0 \enbrace[\big]{\set{x_0};R} \arrow[draw=none]{d}[sloped,auto=false]{\cong} 
+		& C_1 \enbrace[\big]{\set{x_0};R} \lar["0", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} & 
+		C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} 
+		& C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong}
+		& \cdots \lar["\cong",swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} \\
 		R & R \lar["0"] & R \lar["\id"] & R \lar["0"] & R \lar["\id"]
 	\end{tikzcd}
 \]
@@ -1141,28 +1144,31 @@ Es folgt
 \label{sub:510}
 \begin{enumerate}[1)]
 	\item Ist $X \not= \emptyset$, so ist $H_0(X) \not=0$.
-	\item Ist $X$ wegzusammenhängend, so gilt $H_0(X) \cong \mathds{Z}$
+	\item Ist $X$ wegzusammenhängend, so gilt $H_0(X) \cong \mathds{Z}$.\marginnote{Tatsächlich gilt auch die Umkehrung, wie in Aufgabe 4 von Blatt 3 gezeigt.}
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[1)]
-	\item Sei $\varepsilon \colon C_0(X) \to \mathds{Z}$ definiert durch $\varepsilon \enbrace*{\sum_{\sigma \in S_0(X)}r_\sigma \cdot \sigma } := \sum_\sigma r_\sigma$.
-	Dann ist $\varepsilon \circ \partial_1 \colon C_1(X) \to \mathds{Z}$ trivial, denn für $\sigma \in S_1(X)$ ist 
-	$\varepsilon \circ \partial_1(\sigma)= \varepsilon(\delta_0 \sigma - \delta_1 \sigma) = 0$.
-	Daher induziert $\varepsilon$ eine Abbildung 
-	$\overline{\varepsilon} \colon H_0(X) \to \mathds{Z}$. Da $X \not= \emptyset$ ist, gibt es einen singulären $0$-Simplex $\sigma \colon \abs*{\Delta^0} \to X$. Für $\sigma$ gilt 
-	$\overline{\varepsilon}( [\sigma])=1$ und daher ist $\overline{\varepsilon}$ surjektiv und $H_0(X) \not= 0$.
-	\item Wir zeigen: $\overline{\varepsilon} \colon H_0(X) \to \mathds{Z}$ ist ein Isomorphismus, falls $X$ wegzusammenhängend ist. Dazu zeigen wir 
-	$\ker \varepsilon = \im \partial_1$. Dazu definieren wir $s \colon C_0(X) \to C_1(X)$ wie folgt: Sei $\sigma_0$ ein fest gewählter singulärer $0$-Simplex.
+	\item Sei die sogenannte \Index{Augmentierung} $\epsilon \colon C_0(X) \to \mathds{Z}$ definiert durch 
+	\[
+		\epsilon \enbrace*{\sum_{\sigma \in S_0(X)} \hspace{-1ex} r_\sigma \cdot \sigma } := \sum_\sigma r_\sigma.
+	\]
+	Dann ist $\epsilon \circ \partial_1 \colon C_1(X) \to \mathds{Z}$ trivial, denn für $\sigma \in S_1(X)$ ist 
+	$\epsilon \circ \partial_1(\sigma)= \epsilon(\delta_0 \sigma - \delta_1 \sigma) = 0$.
+	Daher induziert $\epsilon$ eine Abbildung 
+	$\overline{\epsilon} \colon H_0(X) \to \mathds{Z}$. Da $X \not= \emptyset$ ist, gibt es einen singulären $0$-Simplex $\sigma \colon \abs*{\Delta^0} \to X$. Für $\sigma$ gilt 
+	$\overline{\epsilon}( [\sigma])=1$ und daher ist $\overline{\epsilon}$ surjektiv und $H_0(X) \not= 0$.
+	\item Wir zeigen, dass $\overline{\epsilon} \colon H_0(X) \to \mathds{Z}$ ein Isomorphismus ist, falls $X$ wegzusammenhängend ist. Dazu zeigen wir 
+	$\ker \epsilon = \im \partial_1$. Dazu definieren wir $s \colon C_0(X) \to C_1(X)$ wie folgt: Sei $\sigma_0$ ein fest gewählter singulärer $0$-Simplex.
 	Zu $\sigma \in S_0(X)$ gibt es, da $X$ wegzusammenhängend ist, $s(\sigma) \in S_1(X)$ mit $\delta_0 s(\sigma)= \sigma$, $\delta_1 s(\sigma)= \sigma_0$.
 	Es gilt nun 
 	\begin{align*}
-		\partial_1 \circ s(\sigma) = \sigma - \sigma_0 = \enbrace*{\id_{C_0(X)} - i \circ \varepsilon }(\sigma)
+		\partial_1 \circ s(\sigma) = \sigma - \sigma_0 = \enbrace*{\id_{C_0(X)} - i \circ \epsilon }(\sigma)
 	\end{align*}
-	wobei $i \colon \mathds{Z} \to C_0(X)$, $n \mapsto n \cdot \sigma_0$. Ist nun $v \in \ker \varepsilon$, so folgt 
+	wobei $i \colon \mathds{Z} \to C_0(X)$, $n \mapsto n \cdot \sigma_0$. Ist nun $v \in \ker \epsilon$, so folgt 
 	\[
-		\partial_1 \circ s(v)= v- i \circ \underbracket[1pt][2pt]{\varepsilon(v)}_{=0} = v
+		\partial_1 \circ s(v)= v- i \circ \underbracket[1pt][2pt]{\epsilon(v)}_{=0} = v
 	\]
-	also $v \in \im \partial_1$. \bewende
+	also ist $v \in \im \partial_1$ und es folgt die Behauptung. \bewende
 	
 	% Sei $\sigma_0 : \abs*{\Delta^0} \to X$ ein fest gewählter singulärer $0$-Simplex (also ein Punkt in X). Definiere $i : \mathds{Z} \to C_0(X)$ durch
 % 	$i(n) := n \cdot \sigma$ und $\overline{i} : \mathds{Z} \to H_0(X)$ durch $\overline{i}(n) = \benbrace*{i(n)}$. Dann ist
@@ -1187,7 +1193,7 @@ Es folgt
 Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. Sei $\sigma= \set{v_o, \ldots , v_n} \in \Sigma_n $ ein $n$-Simplex von $K$ mit $v_0 < v_1 < \ldots < v_n$. Wir
 ordnen $\sigma$ den singulären $n$-Simplex $f_\sigma \colon \abs*{\Delta^n} \to \abs*{\Delta^\sigma} \subseteq \abs*{K}$ zu, wobei
 \begin{align*}
-	f_\sigma \enbrace*{\sum_{i=0}^{n} t_i e_i} = \sum_{i=0}^{n} t_i v_i. 
+	f_\sigma \enbrace*{\sum_{i=0}^{n} t_i \cdot e_i} = \sum_{i=0}^{n} t_i \cdot v_i. 
 \end{align*}
 Nun erhalten wir eine Abbildung 
 \[
