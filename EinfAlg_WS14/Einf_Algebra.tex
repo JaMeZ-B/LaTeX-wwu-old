@@ -1,10 +1,10 @@
-\input{extra_files/Praeambel.tex}
+\input{../extra_files/Praeambel.tex}
 
 \newcommand{\vorlesung}{Einführung in die Algebra}
 \newcommand{\Prof}{Prof. Dr. Kramer}
 \newcommand{\subt}{Aufarbeitung der Vorlesungsnotizen}
 
-\input{extra_files/headings.tex}
+\input{../extra_files/headings.tex}
 
 
 \begin{document}
@@ -4640,9 +4640,150 @@ Möglichkeiten.
 \hfill $\square$
 %sub end
 
+\subsection{Korollar 2}
+\label{sub:korollar_2}
+Sei $f\in K[T]$ normiert, sei $L\supseteq K$ ein Zerfällungskörper.
+Sei
+\[
+\aut(L~|~K)=\penbrace{\psi:L\to L~|~\psi \text{ Isomorphismus über }\id_K}
+\]
+Dann ist $\aut(L~|~K)$ eine Gruppe (bzgl. Komposition von Isomorphismen) und
+\[
+\#\aut(L~|~K)\le n! \text{ wobei } n=[L:K]
+\]
 
+\subsubsection*{Bemerkung}
+Über Eigenschaften der Gruppe $\aut(L~|~K)$ kann man Aussagen über die Lösbarkeit der Gleichung $f(u)=0$ machen.
+Das ist (unter anderem) Inhalt der \Index{Galois-Theorie}.
+Auflösbarkeit von $\aut(L~|~K)$ entspricht (grob gesagt) der Auflösbarkeit der Gleichung $f(u)=0$ durch Wurzeln (vgl. Mitternachtsformel für $\deg(f)=2$).
+Die nicht-Auflösbarkeit von $\sym(n)$ für $n\ge 5$ entspricht dern nicht-Existenz von allgemeinen Lösungsformeln für Gleichungen von Grad $n\ge 5$.
+%sub end
 
+\subsection{Definition algebraisch abgeschlossen}
+\label{sub:def_alg_abgeschlossen}
+Ein Körper $K$ heißt \Index{algebraisch abgeschlossen}, wenn er eine der folgenden äquivalenten Bedingungen erfüllt
+\begin{enumerate}[(i)]
+	\item jedes normierte Polynom $f\in K[T]$ mit $\deg(f)=n\ge1$ zerfällt in Linearfaktoren,
+	\[
+	f=(T-u_1)\cdots(T-u_n),~u_j\in K.
+	\]
+	\item jedes Polynom $f\in K[T]$ mit $\deg(f)=n\ge 1$ hat mindestens eine Nullstelle $u\in K$.
+\end{enumerate}
 
+\bet{Beweis:}\\
+\uline{(i)$\Rightarrow$(ii):} nach \hyperref[sub:def_normiert]{6.2}.\\
+\uline{(ii)$\Rightarrow$(i):} nach \hyperref[sub:lemma_15]{6.1} mit Induktion nach $n$.
+
+\subsubsection*{Beispiel}
+Den Körper $\C$ ist abgeschlossen nach LA 5.27.
+%sub end
+
+\subsection{Satz 28}
+\label{sub:satz_28}
+Sei $K\subseteq L$ eine Körpererweiterung.
+Wenn $L$ algebraisch abgeschlossen ist, dann ist $\acl_L(K)\subseteq L$ algebraisch abgeschlossen.\\
+
+\bet{Beweis:}\\
+Sei $K'=\acl_L(K)$, sei $f\in K'[T]$ normiert, $\deg(f)\ge1$.
+Sei $u\in L$ eine Nullstelle von $f$.
+Dann gilt
+\[
+u\in \acl_L(K')\bgl{\hyperref[sub:alg_huelle]{5.21}}\acl_L(K)=K'
+\]
+\hfill $\square$
+%sub end
+
+\subsection{Satz 29}
+\label{sub:satz_29}
+Sei $K$ ein Körper.
+Dann existiert eine Körpererweiterung $L\supseteq K$ mit
+\begin{enumerate}[(i)]
+	\item $L$ ist algebraisch über $K$
+	\item $L$ ist algebraisch abgeschlossen.
+\end{enumerate}
+
+\bet{Beweis:}\\
+Mengentheoretische Vorüberlegung:
+Es gilt
+\[
+\#K[T]\le \#(K\times \N).
+\]
+Jedes Polynom hat nur endlich viele Nullstellen.
+Ist also $M\supseteq K$ algebraisch, so folgt
+\[
+\#M\le \#(K\times \N),
+\]
+denn jedes Polynom $f\in K[T]$ hat höchstens endlich viele Nullstellen
+Es folgt:
+es gibt eine Menge $U$ mit folgenden Eigenschaften:
+\begin{enumerate}[(i)]
+	\item Ist $L\supseteq K$ algebraisch,so gibt es ein zu $L$ isomorphen Körper $L'$, dessen Elemente der Menge $K\cup U$ sind.
+	\item Sind $M\supseteq L\supseteq K$ beides algebraische Körpererweiterungen (dann ist auch $M\supseteq K$ algebraisch nach \hyperref[sub:alg_huelle]{5.21}!) und ist $L$ Teilmenge von $U\cup K$, so gibt es einen Körper
+	\[
+	M'\subseteq U\cup K,
+	\] 
+	der über $L$ isomorph zu $M$ ist.
+\end{enumerate}
+
+Sei $\mc{P}=\penbrace{M\supseteq K~|~M\text{ alg. Körpererweiterung, die Elemente von $M$ sind Elemente von }U\cup K}$.\\
+Definiere $M_1\le M_2 \Leftrightarrow M_1\subseteq M_2$ ist eine Körpererweiterung.
+Damit ist $(\mc{P},\le)$ partiell geordnet.
+Ist $C\subseteq \mc{P}$ eine Kette, setze $\tilde{L}=\bigcup C$.\\
+\uline{Behauptung:} $\tilde{L}\in \mc{P}$.\\
+Sei $a,b\in \tilde{L} \rightsquigarrow$ es gibt $L_1,L_2\in C$ mit
+\[
+a\in L_1,~b\in L_2 ~\OE~ L_1\le L_2
+\]
+\[
+\rightsquigarrow a,b,a\pm b,a\cdot b,\frac{a}{b} \in L_2
+\]
+\[
+\Rightarrow \tilde{L} \text{ Körper}
+\]
+weiter ist $a\in L_2$ algebraisch über $K\rightsquigarrow \tilde{L}$ algebraisch über $K\rightsquigarrow \tilde{L}\in \mc{P}$.\\
+Nach Zorns Lemma gibt es in $\mc{P}$ maximale Elemente.
+Sei $L\in \mc{P}$ maximal.
+Behauptung: Dann ist $L$ algebraisch abgeschlossen.\\
+\uline{Denn:}
+$f\in L[T]$ nihct konstant $\rightsquigarrow M\supseteq L$ algebraisch, $f$ hat Nullstelle $u\in M$ (z.B. $M$ ein Zerfällungskörper von $f$ über $L$) $\OE~ M\in \mc{P}$.
+(jetzt die Mengentheoretische Vorüberlegung)
+\[
+\Rightarrow M=L \Rightarrow u\in L
+\]
+Also ist $L$ algebraisch abgeschlossen.
+\hfill $\square$\\
+
+Man nennt $L\supseteq K$ einen (den) \Index{algebraischen Abschluss} von $K$.
+%sub end
+
+\subsection{Satz 30, Eindeutigkeit des algebraischen Abschlusses}
+\label{sub:satz_30}
+Sei $K$ ein Körper, seinen $L\supseteq K$ und $L'\supseteq K'$ algebraische Körpererweiterungen.
+Wenn $L$ und $L'$ algebraisch abgeschlossen sind, gibt es einen Isomorphismus $\varphi:L\to L'$ über $\id_K$.\\
+
+\bet{Beweis:}\\
+Sei $\mc{P}=\penbrace{\left.M \xrightarrow[\cong]{\psi}M'\right| M\subseteq L,~M'\subseteq L'\text{ Teilkörper, }\psi \text{ Isomophismus über }\id_K}$.
+Dann folgt: $K\stackrel{\id}{\to} K\in \mc{P}$.
+Definiere $(M\xrightarrow{\psi}M')\le (N\xrightarrow{\rho}N')$ gilt genau dann, wenn
+\begin{center}
+	\begin{tikzcd}[column sep=small]
+		N \ar{r}{\rho} & N'\\
+		M \ar[u,hook] \ar{r}{\psi} & M' \ar[u,hook]
+	\end{tikzcd}
+\end{center}
+Dann folgt jede Kette in $\mc{P}$ hat obere Schranke (ähnlich wie eben), daher hat $\mc{P}$ maximale Elemente.
+Sei $\enbrace{M\xrightarrow[\cong]{\varphi}M'}\in \mc{P}$ maximal.
+Ist $u\in L$ so erhalten wir mit \hyperref[sub:def_homomorphismus]{6.5}
+\[
+(M(u)\stackrel{\cong}{to}M'(u))\in \mc{P}
+\]
+\[
+\Rightarrow u\in M,~u'\in M' \Rightarrow M=L\text{ und } M'=L'
+\]
+\hfill $\square$
+%sub end
+
+%sec end
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
