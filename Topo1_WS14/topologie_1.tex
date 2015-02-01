@@ -1944,7 +1944,7 @@ eine kurze exakte Folge von $R$-Kettenkomplexen.
 			& H_0(C_*,d_*) \rar["i_*"] & H_0(C_*',d_*') \rar["p_*"] & H_0(C_*'',d_*'') \rar & 0
 		\end{tikzcd}
 	\]
-	ist eine lange exakte Folge. \todo{RevChap8}
+	ist eine lange exakte Folge.
 \end{enumerate}
 \minisec{Beweis}
 \[
@@ -1955,53 +1955,78 @@ eine kurze exakte Folge von $R$-Kettenkomplexen.
 		C_{n-2} \rar["i_{n-2}"]& C_{n-2}' \rar["p_{n-2}"] & C_{n-2}''
 	\end{tikzcd}
 \]
-Sei $x'' \in H_n(C_*'',d_*'')$, also $x'' = [v'']$ mit $v'' \in \ker d_n''$. Da $p_n$ surjektiv ist, existiert $v' \in C_n'$ mit $p_n(v')=v''$. Es gilt
-\[
-	p_{n-1} d_n'(v') = d_n'' p_n(v') = d_n''(v'') = 0
-\]
-$\Rightarrow v' \in \ker p_{n-1}$. Weiter gilt $\ker p_{n-1}= \im i_{n-1}$, also $\exists v \in C_{n-1} : i_{n-1}(v)= d_n'(v')$. Dann gilt
-\[
-	i_{n-2} \enbrace[\big]{d_{n-1}(v)} = d'_{n-1} \enbrace[\big]{i_{n-1}(v)} = d_{n-1}' \enbrace[\big]{d_n'(v')} = 0   
-\]
-Da $i_{n-2}$ injektiv ist, folgt somit $d_{n-1}(v)=0$. Setze $\partial_n(x'') := [v]$. Zu zeigen: $[v] \in H_{n-1}(C_*,d_*)$ ist unabhängig von der Wahl von $v''$ und $v'$.
-Seien $w'' \in \ker d_n''$, $w' \in C_n'$, $w \in C_{n-1}$ mit $x''=[w'']$, $p_n(w')=w''$ und $i_{n-1}(w)= d_n'(w')$. 
-
-$[v'']=[w'']$, also folgt $\exists a'' \in C_{n+1}'' : d_{n+1}'' (a'')=v'' - w''$. $p_{n+1}$ ist surjektiv, also existiert $a' \in C_{n+1}'$ mit
-$p_{n+1}(a')=a''$. Es gilt
-\[
-	p_n(v'-w'- d_{n+1}'(a')) = v'' - w'' - \underbrace{d_{n+1}(p_{n+1}(a'))}_{v''- w''} = 0
-\]
-Mit $\ker p_n = \im i_n$ folgt: $\exists a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es bleibt zu zeigen: $d_n(-a)= v-w$.
-\begin{align*}
-	i_{n-1} \enbrace[\big]{-d_n(a)- (v-w)} & = -i_{n-1} \enbrace*{d_n(a)} - i_{n-1}(v-w) \\ &= - d_n' \enbrace*{i_n(a)} - \enbrace*{d_n'(v')- d_n'(w')}  \\  
-	&= -d_n' \enbrace*{ d_{n+1}' (a') - (v'-w')} - \enbrace*{ d_n'(v') - d_n'(w')}  \\
-	&= - d_n' d_{n+1}' (a') + d_n'(v'- w') -  \enbrace*{d_n'(v'-w')} = 0
-\end{align*}
-da $i_{n-1}$ injektiv ist, folgt $-d_n(a)- (v-w) = 0$, also $d_n(-a)=(v-w)$.
-\begin{description}
-	\item[\uline{$\im (i_n)_* = \ker (p_n)_*$:}] 
+\begin{enumerate}[a)]
+	\item Sei $x'' \in H_n(C_*'',d_*'')$, also $x'' = [v'']$ mit $v'' \in \ker d_n''$. Da $p_n$ surjektiv ist, existiert $v' \in C_n'$ mit $p_n(v')=v''$. Es gilt
+	\[
+		p_{n-1} \circ d_n'(v') = d_n'' \circ p_n(v') = d_n''(v'') = 0
+	\]
+	Also ist $d_n'(v') \in \ker p_{n-1}$. Weiter gilt $\ker p_{n-1}= \im i_{n-1}$, also existiert ein$ v\in C_{n-1}$ mit $i_{n-1}(v)= d_n'(v')$. Dann gilt
+	\[
+		i_{n-2} \enbrace[\big]{d_{n-1}(v)} = d'_{n-1} \enbrace[\big]{i_{n-1}(v)} = d_{n-1}' \enbrace[\big]{d_n'(v')} = 0   
+	\]
+	Da $i_{n-2}$ injektiv ist, folgt somit $d_{n-1}(v)=0$. Also setzen wir $\partial_n(x'') := [v] \in H_{n-1}(C_*,d_*)$. 
+	
+	Es bleibt zu zeigen, dass $[v] \in H_{n-1}(C_*,d_*)$ unabhängig von der Wahl von $v''$ und $v'$ ist.
+	Seien $w'' \in \ker d_n''$, $w' \in C_n'$ und  $w \in C_{n-1}$ mit $x''=[w'']$, $p_n(w')=w''$ und $i_{n-1}(w)= d_n'(w')$.
+	Es ist $[v'']=[w'']$, also existiert ein $a'' \in C_{n+1}''$ mit $d_{n+1}'' (a'')=v'' - w''$. $p_{n+1}$ ist surjektiv, also existiert $a' \in C_{n+1}'$ mit
+	$p_{n+1}(a')=a''$. Es gilt
+	\[
+		p_n \enbrace[\big]{v'-w'- d_{n+1}'(a')} = v'' - w'' - \underbrace{d_{n+1}'' \enbrace[\big]{p_{n+1}(a')}}_{=v''- w''} = 0
+	\]
+	Mit $\ker p_n = \im i_n$ folgt die Existenz von $a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es gilt nun %bleibt zu zeigen: $d_n(-a)= v-w$.
+	\begin{align*}
+		i_{n-1} \enbrace[\big]{d_n(a)- (v-w)} & = i_{n-1} \enbrace[\big]{d_n(a)} - i_{n-1}(v-w) \\ &= d_n' \enbrace[\big]{i_n(a)} - \enbrace[\big]{d_n'(v')- d_n'(w')}  \\  
+		&= d_n' \enbrace*{ -d_{n+1}'(a') + v'-w'} - d_n' \enbrace*{v' - w'}  \\
+		&= -d_n' d_{n+1}' (a') + d_n'(v'- w') -  d_n'(v'-w') = 0
+	\end{align*}
+	Da $i_{n-1}$ injektiv ist, folgt $d_n(a)- (v-w) = 0$, also $d_n(a)=(v-w)$. Es folgt $[v]=[w]$.
+	\item Exaktheit der langen Folge:
 	\begin{description}
-		\item["$\subseteq$":] $(p_n)_* \circ (i_n)_* = \enbrace*{p_n-i_n}_* = (0)_* =0 $
-		\item["$\supseteq$":] Sei $x' \in \ker (p_n)_*$. Sei $x'= [v']$ mit $v' \in C_n'$, $d_n'(v')=0$. Da $\benbrace*{p_n(v')}= (p_n)_* [x'] = 0$ gibt es $a'' \in C_n''$
-		mit $d_{n+1}''(a'') = p_n(v')$. Da $p_{n+2}$ surjektiv ist, existiert $a' \in C_{n+1}'$ mit $p_{n+1}(a')=a''$. Dann gilt
-		\begin{align*}
-			p_n \enbrace*{v' - d_{n+1}'(a')} = p_n(v') - p_n d_{n+1}'(a') = p_n(v') -  \underbrace{ d_{n+1}''\enbrace[\Big]{\underbrace{p_{n+1}(a')}_{=a''}}}_{p_n(v')} = 0  
-		\end{align*}
-		Da $\ker p_n = \im i_n$ gibt es $a \in C_n$ mit $i_n(a)= v'- d_{n+1}'(a')$. Nun ist 
+		\item[{$\boxed{\im (i_n)_* = \ker (p_n)_*}$ :}] 
+		\enquote{$\subseteq$} folgt aus $(p_n)_* \circ (i_n)_* = \enbrace*{p_n \circ i_n}_* = (0)_* =0 $.
+		
+		Für \enquote{$\supseteq$} betrachte $x' \in \ker (p_n)_*$, wobei $x'= [v']$ mit $v' \in C_n'$ und $d_n'(v')=0$.
+		Da nun $\benbrace*{p_n(v')}= (p_n)_* [x'] = 0$ ist, gibt es $a''\in C_n''$ mit $d_{n+1}''(a'') = p_n(v')$.
+		Da $p_{n+1}$ surjektiv ist, existiert $a' \in C_{n+1}'$ mit $p_{n+1}(a')=a''$. Dann gilt
 		\[
-			i_{n-1} \enbrace[\big]{d_n(a)} = d_n' \enbrace[\big]{i_n(a)} = d_n' \enbrace[\big]{v'- d_{n+1}(a')}  = d_n'(v') = 0 
+			p_n \enbrace*{v' - d_{n+1}'(a')} =p_n(v') - p_n \circ d_{n+1}'(a') = p_n(v') -
+			\underbracket[0.7pt][2pt]{d_{n+1}''\enbrace[\Big]{\underbracket[0.7pt][2pt]{p_{n+1}(a')}_{=a''}}}_{=p_n(v')} = 0 
 		\]
-		Da $i_{n-1}$ injektiv ist, folgt $d_n(a)=0$. Insbesondere $[a] \in H_n \enbrace*{(C_*,d_*)}$. Nun ist 
+		Da $\ker p_n = \im i_n$, gibt es $a \in C_n$ mit $i_n(a)= v'- d_{n+1}'(a')$. Nun ist
+		\[
+			i_{n-1} \enbrace[\big]{d_n(a)} = d_n' \enbrace[\big]{i_n(a)} = d_n' \enbrace[\big]{v'- d_{n+1}'(a')}  = d_n'(v') = 0 
+		\]
+		Da $i_{n-1}$ injektiv ist, folgt $d_n(a)=0$. Insbesondere $[a] \in H_n \enbrace*{C_*,d_*}$. Nun ist 
 		\[
 			(i_n)_* [a] = [i_n(a)] = \benbrace*{v'- d_{n+1}'(a')} = [v'] = x' 
 		\]
-		Also $x' \in \im (i_n)_*$.
+		Also ist $x' \in \im (i_n)_*$.
+		\item[{$\boxed{\im (p_n)_*=\ker \partial_n}$ :}] Für \enquote{$\subseteq$} betrachte $x'' \in \im (p_n)_*$. Dann gibt es $v' \in C_n'$ mit $d_n'(v')=0$ und
+		$x'' = [p_n(v')]$. Es ist $d_n'(v') \in \ker p_{n-1} = \im i_{n-1}$, also existiert ein $v \in C_{n-1}$ mit $i_{n-1}(v)=d_n'(v')$. Es gilt nun $\partial_n(x'')=[v]$.
+		Wegen der Injektivität von $i_{n-1}$ ist $v=0$, also $\partial_n(x'')=[0]$.
+		
+		Sei nun umgekehrt $x'' \in \ker \partial_n$. Wir finden wieder $v' \in C_n'$ und $v \in C_{n-1}$ mit $x''=[p_n(v')]$, $i_{n-1}(v)=d_n'(v')$ und 
+		$0=\partial_n(x'')= [v]$. Daher gibt es $a \in C_n$ mit $d_n(a)=v$. Es folgt
+		\[
+			d_n' \enbrace[\big]{v' - i_n(a)} = i_{n-1}(v) - i_{n-1}\enbrace[\big]{d_n(a)} = 0 
+		\]
+		Es gilt nun $(p_n)_* \benbrace[\big]{v' -i_n(a)}  = \benbrace[\big]{p_n(v') - p_n(i_n(a))} = \benbrace*{p_n(v')} = x''$.
+		\item[{$\boxed{\im \partial_n=\ker (i_{n-1})_*}$ :}] Für \enquote{$\subseteq$} sei $x \in \im \partial_n$. Dann gibt es wieder $v' \in C_n'$ und $v \in C_{n-1}$ mit
+		$d_n''\enbrace*{p_n(v')}=0$, $d_n'(v')=i_{n-1}(v)$ und $x=[v]$. Dann gilt
+		\[
+			(i_{n-1})_*(x) = (i_{n-1})_*[v] = [i_{n-1}(v)] = \benbrace*{d_n'(v')} = 0 
+		\]
+		
+		Sei nun umgekehrt $x \in \ker (i_{n-1})_*$ und $v \in C_{n-1}$ mit $d_{n-1}(v)=0$ und $x=[v]$. Da nun $(i_{n-1})_*(x) = \benbrace*{i_{n-1}(v)}$ und 
+		$x \in \ker (i_{n-1})_*$  ist, gibt es $v' \in C_n'$ mit $d_n'(v')=i_{n-1}(v)$. Es gilt nun
+		\[
+			d_n'' \enbrace*{p_n(v')} = p_{n-1} \enbrace*{d_n'(v')} = p_{n-1} \enbrace*{i_{n-1}(v)} = 0 
+		\]
+		Daraus folgt $\partial_n \benbrace*{p_n(v')}=x$. \bewende
 	\end{description}
-	\item[\uline{$\im \partial_{n+1} = \ker (i_n)_*$:}] \begin{description}
-		\item["$\subseteq$":] $i_n \enbrace*{d_{n+1}(x'')}= 0 \enspace\checkmark$
-		\item["$\supseteq$":] Sei $x \in \ker (i_n)_*$. Sei $v \in C_n$, $d_n(v)=0$, $[v]=x$. $\leadsto x= d_n [v'']$.
-	\end{description} 
-\end{description}
+\end{enumerate}
+
+
 % subsection 812 (end)
 
 \subsection[Beweis von Satz 8.8]{Beweis von Satz \ref{sub:88}} % (fold)
@@ -2024,7 +2049,7 @@ Abbildung von Paaren. Zu zeigen ist, dass
 kommutiert. Sei $x'' \in H_n(X,A;R)$. Sei $v' \in C_n(X;R)$ mit $\partial_n^X(v') \in C_n(A;R)$ und $\benbrace*{v' + C_n(A;R)}= x''$. Dann ist 
 $\partial_n(x'')= \benbrace*{\partial_n^X(v')} \in H_{n-1}(A;R)$. Dann ist 
 \[
-	\enbrace*{f,f|_A}_*(x'') =  \enbrace*{f,f|_A}_* \benbrace*{v' + C_n(A;R)}  = \benbrace*{f(v')+ C_n(B;R)} \in H_n(Y,B;R) 
+	\enbrace*{f,f|_A}_*(x'') =  \enbrace*{f,f|_A}_* \benbrace[\big]{v' + C_n(A;R)}  = \benbrace[\big]{f_*(v')+ C_n(B;R)} \in H_n(Y,B;R) 
 \]
 Es ist 
 \(
@@ -2032,7 +2057,8 @@ Es ist
 \).
 Also
 \begin{align*}
-	\partial_n \enbrace[\big]{\enbrace*{f,f|_A}_*(x'') } = \benbrace[\Big]{\partial_n^Y \enbrace[\big]{f_*(v')} } = \benbrace*{f_* \circ \partial_n^X(v')} = f_* \partial_n(X'') \bewende  
+	\partial_n^Y \enbrace[\big]{\enbrace*{f,f|_A}_*(x'') } = \benbrace[\Big]{\partial_n^Y \enbrace[\big]{f_*(v')} } = \benbrace*{f_* \circ \partial_n^X(v')} = f_* \circ 
+	\partial_n(x'') \bewende  
 \end{align*}
 % subsection 813 (end)
 
@@ -2040,7 +2066,7 @@ Also
 \label{sub:814}
 Für eine Abbildung $(f,f|_A) \colon (X,A) \to (Y,B)$ erhalten wir ein kommutierendes Diagramm:
 \[
-	\begin{tikzcd}[row sep=2.5em]
+	\begin{tikzcd}[row sep=2.2em]
 		\cdots \rar["\partial_{n+1}"] & H_n(A;R) \rar["i^A_*"] \dar["(f|_A)_*"] & H_n(X;R) \rar["j^X_*"] \dar["f_*"]& H_n(X,A;R) \rar["\partial_n"] \dar["{(f,f|_A)_*}"]  
 		& H_{n-1}(A;R) \rar \dar["(f|_A)_*"] & \cdots \\
 		\cdots \rar & H_n(B;R) \rar["i^B_*"] & H_n(Y;R) \rar["j^Y_*"] & H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R) \rar & \cdots
@@ -2061,12 +2087,15 @@ Seien die Zeilen in folgendem kommutativen Diagramm von $R$-Moduln exakt.
 Sind $f_4, f_3, f_1$ und $f_0$ Isomorphismen, so ist auch $f_2$ ein Isomorphismus.
 \minisec{Beweis}
 \begin{description}
-	\item[Injektivität:] Sei $a_2 \in A_2$ und $f_2(a_2)=0$. $f_1 \enbrace[\big]{\alpha_2(a_2)} = \beta_2 \enbrace[\big]{f_2(a_2)} = \beta_2(0)=0$. Da $f_1$ ein 
-	Isomorphismus ist, folgt $\alpha_2(a_2)=0$. $a_2 \in \ker \alpha_2 = \im \alpha_3$, also existiert $a_2 \in A_3$ mit $\alpha_3(a_3)= a_2$. Es gilt
+	\item[Injektivität:] Sei $a_2 \in A_2$ mit $f_2(a_2)=0$. Wir erhalten 
+	\[
+		f_1 \enbrace[\big]{\alpha_2(a_2)} = \beta_2 \enbrace[\big]{f_2(a_2)} = \beta_2(0)=0. 
+	\]
+	Da $f_1$ ein Isomorphismus ist, folgt $\alpha_2(a_2)=0$. Damit ist $a_2 \in \ker \alpha_2 = \im \alpha_3$, also existiert $a_3 \in A_3$ mit $\alpha_3(a_3)= a_2$. Es gilt
 	\[
 		\beta_3 \enbrace[\big]{f_3(a_3)} = f_2 \enbrace[\big]{\alpha_3(a_3)} = f_2(a_2)=0  
 	\]
-	Also $f_3(a_3) \in \ker \beta_3 = \im \beta_4$. Da $f_4$ Isomorphismus ist, gibt es $a_4 \in A_4$ mit $\beta_4 \enbrace[\big]{f_4(a_4)} = f_3(a_3)$. Nun gilt
+	Also ist $f_3(a_3) \in \ker \beta_3 = \im \beta_4$. Da $f_4$ Isomorphismus ist, gibt es $a_4 \in A_4$ mit $\beta_4 \enbrace[\big]{f_4(a_4)} = f_3(a_3)$. Nun gilt
 	\[
 		f_3 \enbrace[\big]{\alpha_4(a_4)- a_3} = f_3 \enbrace[\big]{\alpha_4(a_4)} - f_3(a_3) = \beta_4 \enbrace[\big]{f_4(a_4)} - f_3(a_3) = f_3(a_3)- f_3(a_3) =0
 	\]
@@ -2074,11 +2103,11 @@ Sind $f_4, f_3, f_1$ und $f_0$ Isomorphismen, so ist auch $f_2$ ein Isomorphismu
 	\[
 		a_2= \alpha_3(\alpha_3)= \alpha_3 \enbrace[\big]{\alpha_4(a_4)} = \underbrace{\alpha_3 \circ \alpha_4}_{=0}(a_4) =0
 	\]
-	\item[Surjektivität:] Sei $b_2 \in B_2$. Fall 1: $\beta_2(b_2)=0$. Da $\im \beta_3 = \ker \beta_2$ und $f_3$ Isomorphismus, folgt $\exists a_3 \in A_3$ mit
+	\item[Surjektivität:] Sei $b_2 \in B_2$. Fall 1: $\beta_2(b_2)=0$. Da $\im \beta_3 = \ker \beta_2$ und $f_3$ Isomorphismus, existiert $a_3 \in A_3$ mit
 	$\beta_3 \enbrace[\big]{f_3(a_3)} = b_2$. Also ist $b_2= \beta_3 \enbrace[\big]{f_3(a_3)} = f_2  \enbrace[\big]{\alpha_3(a_3)} \in \im f_2$. 
 	
-	Ist $b_2$ beliebig, so genügt es zu zeigen: $\exists a_2 \in A_2$ mit $\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} =0$. $f_1$ ist ein Isomorphismus, also $\exists a_1 \in A_1$
-	mit $f_1(a_1) = \beta_2(b_2)$. Dann folgt
+	Ist $b_2$ beliebig, so genügt es zu zeigen: Es existiert ein $a_2 \in A_2$ mit $\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} =0$. $f_1$ ist ein Isomorphismus, also existiert 
+	ein $ a_1 \in A_1$ mit $f_1(a_1) = \beta_2(b_2)$. Dann folgt
 	\[
 		f_0 \enbrace[\big]{\alpha_1(a_1)} = \beta_1 \enbrace[\big]{f_1(a_1)} = \beta_1 \enbrace[\big]{\beta_2(b_2)} = \underbrace{\beta_1 \circ \beta_2}_{=0} (b_2)=0
 	\]
@@ -2091,7 +2120,7 @@ Sind $f_4, f_3, f_1$ und $f_0$ Isomorphismen, so ist auch $f_2$ ein Isomorphismu
 \end{description}
 % subsection 815 (end)
 
-\subsection{Lemma ("2 von 3")} % (fold)
+\subsection{Lemma (\enquote{2 von 3})} % (fold)
 \label{sub:816}
 Sei $f \colon (X,A) \to (Y,B)$ eine Abbildung von Paaren. Seien von den drei Abbildungen
 \begin{enumerate}[(i)]
@@ -3451,7 +3480,7 @@ Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n
 \label{sec:14}
 \subsection[Bezeichnung: Funktor mit $(X,A) \mapsto (X,\emptyset)$]{Bezeichnung} % (fold)
 \label{sub:141}
-Mit $V \colon \TOP^2 \to \TOP^2$ bezeichnen wir den Funktor $V(X,A) = (A,\emptyset)=A$.
+Mit $V \colon \TOP^2 \to \TOP^2$ bezeichnen wir den Funktor $V(X,A) = (A,\emptyset)=A$. \todo{RevChap14}
 % subsection 141 (end)
 
 \subsection[Definition: Homologietheorie]{Definition} % (fold)
@@ -3600,7 +3629,7 @@ Isomorphismus. Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen vert
 \section{Zusammenhang zwischen $\pi_1(X,x_0)$ und $H_1(X,\mathds{Z})$} % (fold)
 \label{sec:15}
 
-Zur Vorbereitung müssen wir kurz wiederholen, was eine Abelisierung ist:
+Zur Vorbereitung müssen wir kurz wiederholen, was eine Abelisierung ist: \todo{RevChap15}
 
 \subsection[Definition: Kommutatorgruppe]{Definition} % (fold)
 \label{sub:151}
