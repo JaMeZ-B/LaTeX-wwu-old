@@ -47,6 +47,8 @@ für die Beteiligung an diesem Projekt!
 #### Todo-Liste
 Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 
+* Allgemein
+	* Synchronisation mit Sciebo einrichten
 * Höhere Algebra
 	* Ausführlichere Beweise zu 2.45 und 2.48
 	* Einträge im Inhaltsverzeichnis vervollständigen
