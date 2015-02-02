@@ -2388,7 +2388,7 @@ Durch Widerspruch: Angenommen es gibt $f\colon D^n \to D^n$ ohne Fixpunkt. Aus d
 gibt mit $F|_{S^{n-1}} = \id_{S^{n-1}}$. In Homologie erhalten wir folgendes kommutatives Diagramm \marginnote{\oE: $n\ge 2$, $n=1$ haben wir bereits im letzen Semester 
 bewiesen}
 \[
-	\begin{tikzcd}[row sep=large]
+	\begin{tikzcd}[row sep=large, column sep=1em]
 		\mathds{Z}\cong H_{n-1}(S^{n-1}) \arrow[rr,"(\id_{S^{n-1}})_* = \id" ] \arrow[dr,"i_*"'] && H_{n-1}(S^{n-1}) \cong \mathds{Z} \\
 		& H_{n-1}(D^n)=0  \urar["(F)_*"']&
 	\end{tikzcd}
@@ -2399,7 +2399,8 @@ wobei $i\colon S^{n-1} \hookrightarrow D^n$ die Inklusion ist. Da $F \circ i = \
 
 \subsection[Definition: Abbildungsgrad einer stetigen Abbildung $f \colon S^n \to S^n$]{Definition} % (fold)
 \label{sub:103}
-Sei $f \colon S^n \to S^n$ eine stetige Abbildung. Da $\tilde{H}_n(S^n) \cong \mathds{Z}$ ist, gibt es eine ganze Zahl $d(f)$, so dass $f_*(x)= d(f) \cdot x$ für alle 
+Sei $f \colon S^n \to S^n$ eine stetige Abbildung.\marginnote{reduzierte Homologie!} 
+Da $\tilde{H}_n(S^n) \cong \mathds{Z}$ ist, gibt es eine ganze Zahl $d(f)$, so dass $f_*(x)= d(f) \cdot x$ für alle 
 $x \in \tilde{H}_n(S^n)$. Diese Zahl heißt der \Index{Abbildungsgrad} von $f$. 
 % subsection 103 (end)
 
@@ -2531,11 +2532,11 @@ Sei $f \colon S^1 \to \mathds{R}^2$ eine stetige, injektive Abbildung. Dann hat 
 beschränkt, die andere nicht.\index{Jordanscher Kurvensatz}
 \minisec{Beweis (mit \ref{sub:1010})}
 Wir können $f$ auch als injektive Abbildung $f \colon S^1 \to \mathds{R}^2 \subseteq S^2 = \mathds{R}^2 \cup \set{\infty}$ auffassen. Nun ist 
-$\tilde{H}_0 \enbrace[\big]{S^2 \setminus f(S^1)} =\mathds{Z}$. Also $H_0 \enbrace[\big]{S^2 \setminus f(S^1)}= \mathds{Z} \oplus \mathds{Z}$. Daher besteht
-$S^2 \setminus f(S^1)$ aus zwei Wegzusammenhangskomponenten $U_1$ und $U_2$. Sei ohne Einschränkungen $\infty \in U_2$. Dann ist $U_2 \setminus \set{\infty}$ immer noch
-wegzusammenhängend: Seien $x,y \in U_2$, dann gibt es eine Umgebung $V$ von $\infty \in S^2$ mit $V \setminus \set{\infty} \cong D^2 \setminus \set{0} $, $x,y \not\in V$ und
-$f(S^1) \cap V = \emptyset$. Also sind $U_1$ und $U_2 \setminus \set{\infty}$ die Wegzusammenhangskomponenten von $\mathds{R}^2 \setminus f(S^1)$. $U_1$ ist beschränkt und
-$U_2$ ist unbeschränkt. \bewende
+$\tilde{H}_0 \enbrace[\big]{S^2 \setminus f(S^1)} =\mathds{Z}$ nach Satz \ref{sub:1010} b). Also $H_0 \enbrace[\big]{S^2 \setminus f(S^1)}= \mathds{Z} \oplus \mathds{Z}$. 
+Daher besteht $S^2 \setminus f(S^1)$ aus zwei Wegzusammenhangskomponenten $U_1$ und $U_2$. Sei ohne Einschränkungen $\infty \in U_2$. Dann ist $U_2 \setminus \set{\infty}$ 
+immer noch wegzusammenhängend: Seien $x,y \in U_2$, dann gibt es eine Umgebung $V$ von $\infty \in S^2$ mit $V \setminus \set{\infty} \cong D^2 \setminus \set{0} $, 
+$x,y \not\in V$ und $f(S^1) \cap V = \emptyset$. Also sind $U_1$ und $U_2 \setminus \set{\infty}$ die Wegzusammenhangskomponenten von $\mathds{R}^2 \setminus f(S^1)$. $U_1$ 
+ist beschränkt und $U_2$ ist unbeschränkt. \bewende
 % subsection 109 (end)
 
 \subsection[Satz: Homologie von $S^n$ ohne Einbettung vonScheiben $D^k$ und Sphären $S^k$ mit $k<n$]{Satz} % (fold)
@@ -2700,9 +2701,13 @@ Existenz und Eindeutigkeit aus der universellen Eigenschaft können benutzt werd
 
 \subsection[Definition: \CW-Komplex]{Definition} % (fold)
 \label{sub:113}
-Ein \bet{$\mathbf{CW}$-Komplex}\index{CW-Komplex@\CW-Komplex}\footnote{Zitat von \hrefsym{https://en.wikipedia.org/wiki/CW_complex}{Wikipedia} zum Namen: \textenglish{\emph{The C stands for "closure-finite", and the W for "weak topology".}}} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Filter_(Mathematik)}} durch Unterräume von $X$: 
+Ein \bet{$\mathbf{CW}$-Komplex}\index{CW-Komplex@\CW-Komplex}\footnote{Zitat von \hrefsym{https://en.wikipedia.org/wiki/CW_complex}{Wikipedia} zum Namen: 
+\textenglish{\emph{The C stands for "closure-finite", and the W for "weak topology".}} C für \emph{"cell"} scheint mir allerdings auch sinnvoll.} ist ein topologischer Raum 
+$X$ zusammen mit einer Filtrierung\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Filter_(Mathematik)}} durch Unterräume von $X$:\marginnote{$X^\ssbrace{i}$ 
+bezeichnet man auch als $i$-Gerüst oder $i$-Skelett} 
 \[
-	\emptyset = X^{(-1)} \subseteq X^{\ssbrace{0}} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^\ssbrace{n} \subseteq X^\ssbrace{n+1} \subseteq \ldots \subseteq X
+	\emptyset = X^{(-1)} \subseteq X^{\ssbrace{0}} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^\ssbrace{n} \subseteq X^\ssbrace{n+1} 
+	\subseteq \ldots \subseteq X
 \]
 sodass die folgenden zwei Eigenschaften erfüllt sind:
 \begin{enumerate}[(i)]
@@ -2731,7 +2736,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	$\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^\ssbrace{n} \setminus X^\ssbrace{n-1}$ ein.\footnote{Dass dies ein Homöomorphismus ist, folgt 
 	aus der Pushout-Eigenschaft und dem letzen Teil der Bemerkung \ref{sub:112}, denn es gilt demnach 
 	$X^\ssbrace{n}\cong X^\ssbrace{n-1}\cup_{\coprod S^{n-1}} \coprod D^n$.} 
-	Insbesondere lässt ich $I^{(n)}$ mit der Menge der Wegzusammenhangskomponenten von 
+	Insbesondere lässt ich $I^\ssbrace{n}$ mit der Menge der Wegzusammenhangskomponenten von 
 	$X^\ssbrace{n} \setminus X^\ssbrace{n-1}$ identifizieren. Die Wegzusammenhangskomponenten heißen die \bet{offenen Zellen}\index{offene Zelle} von $X$. Damit ist jeder \CW-Komplex 
 	die disjunkte Vereinigung seiner offenen Zellen.
 	
@@ -2741,10 +2746,10 @@ Eine Abbildung $f \colon X \to Y$ zwischen \CW-Komplexen heißt \Index{zellulär
 	
 	\ifxetexorluatex \faWarningSign \, \fi Achtung: Abgeschlossene Zellen sind Bilder von $D^n$ unter stetigen Abbildungen, aber nicht notwendig homöomorph zu $D^n$.
 	\item Ein \CW-Komplex $X$ heißt \bet{endlich}\index{CW-Komplex@\CW-Komplex!endlicher}, wenn er nur aus endlich vielen Zellen besteht, also wenn 
-	$I = \bigcup_{n \in \mathds{N} } I^{(n)}$ endlich ist. Insbesondere gibt es dann ein $n$ mit $X=X^\ssbrace{n}$.
+	$I = \bigcup_{n \in \mathds{N} } I^\ssbrace{n}$ endlich ist. Insbesondere gibt es dann ein $n$ mit $X=X^\ssbrace{n}$.
 	
-	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$, also $\dim X := N$, falls $X^{(N)}=X$, $X^{(N-1)} \subsetneq X$. Gibt es kein solches $N$ so 
-	setzen wir $\dim X := \infty$.
+	Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$, also $\dim X := N$, falls $X^\ssbrace{N}=X$, $X^\ssbrace{N-1} \subsetneq X$. Gibt es kein solches 
+	$N$ so setzen wir $\dim X := \infty$.
 \end{enumerate}
 % subsection 114 (end)
 
