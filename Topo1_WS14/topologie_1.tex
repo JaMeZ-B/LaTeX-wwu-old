@@ -31,7 +31,7 @@ Eine \Index{Kategorie} $\mathcal{C}$ besteht aus:
 	\item Einer Klasse $\Ob(\mathcal{C})$. Die Elemente von $\Ob(\mathcal{C})$ heißen die \Index{Objekte} von $\mathcal{C}$.
 	\item Zu je zwei Objekten $A,B$ aus $\mathcal{C}$ einer Menge $\Mor_{\mathcal{C}}(A,B)$. Die Elemente von $\Mor_\mathcal{C}(A,B)$ heißen \Index{Morphismen} von
 	$\mathcal{C}$.
-	\item Zu je drei Objekten $A,B,C$ aus $\mathcal{C}$ einer Abbildung: 
+	\item Zu je drei Objekten $A,B,C \in \Ob(\mathcal{C})$ aus einer Abbildung: 
 	\[
 		\Mor_\mathcal{C}(B,C) \times \Mor_\mathcal{C}(A,B) \to \Mor_\mathcal{C}(A,C) \enspace, \quad (f,g) \mapsto f \circ g
 	\]
@@ -39,8 +39,8 @@ Eine \Index{Kategorie} $\mathcal{C}$ besteht aus:
 \end{enumerate}
 Dabei müssen folgende Axiome  erfüllt sein:
 \begin{enumerate}[(i)]
-	\item Die Komposition ist \Index{assoziativ}: \\ Für Objekte $A,B,C,D$ von $\mathcal{C}$ und 
-	$f \in \Mor_\mathcal{C}(C,D), g \in \Mor_\mathcal{C}(B,C), h \in \Mor_\mathcal{C}(A,B)$ gilt immer
+	\item Die Komposition ist \Index{assoziativ}: Für Objekte $A,B,C,D$ von $\mathcal{C}$ und 
+	$f \in \Mor_\mathcal{C}(C,D)$, $ g \in \Mor_\mathcal{C}(B,C)$ und $ h \in \Mor_\mathcal{C}(A,B)$ gilt immer
 	\[
 		f \circ (g \circ h) = (f \circ g) \circ h
 	\]
@@ -106,7 +106,7 @@ $\mathcal{D}$ und ordnet jedem Morphismus $f : C \to C'$ in $\mathcal{C}$ einen 
 	\[
 		\begin{array}{ll}
 			F_C(A) = \Mor_\mathcal{C}(C,A) &\text{ für } A \in  \Ob(\mathcal{C}) \\
-			F_C(f) \colon \Mor_\mathcal{C}(C,A) \to \Mor_\mathcal{C}(C,A'), g \mapsto f \circ  g &\text{ für } f \colon A \to A' \text{ in } \mathcal{C}
+			F_C(f) \colon \Mor_\mathcal{C}(C,A) \to \Mor_\mathcal{C}(C,A'), g \mapsto f \circ  g &\text{ für } f \colon A \to A' \text{ in } \Mor(A,A')
 		\end{array}
 	\]
 	\item Die Fundamentalgruppe definiert einen Funktor
@@ -324,12 +324,12 @@ Versehen mit der Quotiententopologie ist $\abs*{K}$ ein topologischer Raum.
 	$\mathds{R}^n$ mit $n:= \# V$ ist via $\benbrace[\big]{\enbrace*{\set{\sigma}, (x_{v_i})_{v_i \in \sigma} } } \mapsto \sum_{v_i \in \sigma} x_{v_i} \cdot e_i$.
 	\item In Aufgabe 2 von Blatt 2 haben wir gezeigt, dass $\abs*{\,\cdot\,} $ einen Funktor $\SIMP \to \TOP$ definiert.
 	
-	Dazu definiert man eine Abbildung zunächst auf den zugrunde liegenden Räumen durch\footnote{hier wird eine formale Summe anstatt eines Tupels benutzt; da $\sigma$ stets 
-	eine endliche Menge ist, macht dies aber keinen Unterschied.}
+	Dazu definiert man eine Abbildung zunächst auf den zugrunde liegenden Räumen durch
 	\[
 		\enbrace*{\sigma, \sum\nolimits_{v \in \sigma} x_v \cdot v} \longmapsto \enbrace*{f(\sigma), \sum\nolimits_{v \in \sigma} x_v \cdot f(v)} 
 	\]
-	und wendet diese unter Benutzung der universellen Eigenschaft der Quotiententopologie auf Repräsentanten an.
+	und wendet diese unter Benutzung der universellen Eigenschaft der Quotiententopologie auf Repräsentanten an.\footnote{hier wird eine formale Summe anstatt eines Tupels 
+	benutzt; da $\sigma$ stets eine endliche Menge ist, macht dies aber keinen Unterschied.}
 \end{itemize}
 
 % subsection 26 (end)
@@ -397,7 +397,7 @@ Versehen mit der Quotiententopologie ist $\abs*{K}$ ein topologischer Raum.
 
 \subsection[Definition: Polyeder]{Definition} % (fold)
 \label{sub:28}
-Ein topologischer Raum $X$ heißt ein \Index{Polyeder}, falls er homöomorph zur Realisierung eines simplizialen Komplexes ist. 
+Ein topologischer Raum $X$ heißt ein \Index{Polyeder}, falls er homöomorph zur geometrischen Realisierung eines simplizialen Komplexes ist. 
 % subsection 28 (end)
 
 \subsection[Definition: Euler-Charakteristik]{Definition} % (fold)
@@ -475,6 +475,8 @@ Seinen $K$ und $K'$ endliche simpliziale Komplexe. Gilt $\abs*{K} \cong \abs*{K'
 \minisec{Bemerkung}
 Die Euler-Charakteristik ist also eine topologische Invariante von simplizialen Komplexen. Sie hängt nur von der topologischen Struktur von $\abs*{K}$ und nicht
 von der kombinatorischen Struktur von $K$ ab.
+\minisec{Beweis}
+\emph{Siehe \ref{sub:1210}.}
 % subsection 210 (end)
 % section 2 (end)
 \newpage
@@ -486,7 +488,7 @@ von der kombinatorischen Struktur von $K$ ab.
 \label{sub:31}
 Sei $S$ eine Menge.Sei $R$ ein Ring.\marginnote{Ring mit Eins} Der \bet{freie $R$-Modul mit Basis $S$}\index{freier Modul}, $R[S]$, besteht aus allen endlichen formalen $R$-Linearkombinationen
 \[
-	\sum_{s \in S} r_s \cdot s \quad , r_s \in R, r_s \not=0 \text{ für endliche viele }s \in S
+	\sum_{s \in S} r_s \cdot s \quad , r_s \in R \text{ und } r_s \not=0 \text{ für endliche viele }s \in S
 \]
 Die $R$-Modulstruktur auf $R[S]$ ist definiert durch:
 \begin{align*}
@@ -500,7 +502,7 @@ Mittels $s= \sum_{s' \in S} \delta_{s,s'} \cdot s'$ fassen wir $S$ als Teilmenge
 \subsection[Lemma: Universale Eigenschaft von freien Moduln]{Lemma} % (fold)
 \label{sub:32}
 Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
-\begin{minipage}{0.7\textwidth}
+\begin{minipage}[c]{0.7\textwidth}
 	\begin{enumerate}[1)]
 		\item Ist $M$ ein $R$-Modul und $i \colon S \to M$ eine Abbildung, so gibt es genau eine $R$-lineare Abbildung $\varphi \colon R[S] \to M$, die $i$ fortsetzt.
 		\item Sei $f\colon R[S]\to M$ $R$-linear und $p\colon N\twoheadrightarrow M$ $R$-linear und surjektiv. Dann gibt es $\hat{f}\colon R[S]\to N$ mit $p\circ \hat{f}=f$.
@@ -508,7 +510,7 @@ Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
 		Moduln mit dieser Eigenschaft bezeichnet man als \bet{projektiv}\index{projektiver Modul}. Freie Moduln sind also projektiv.
 	\end{enumerate}
 \end{minipage}\hfill
-\begin{minipage}{0.25\textwidth}
+\begin{minipage}[c]{0.25\textwidth}
 	\[
 		\begin{tikzcd}
 			\mbox{ } & N \dar["p", two heads] \\
@@ -539,12 +541,12 @@ Sei $S$ eine Menge, $R$ ein Ring. Es gilt\\
 	mit $p \circ \hat{f} = f$. Wir können Lemma \ref{sub:32} benutzen, da $V$ eine Basis $B$ hat, also $V \cong K[B]$.
 	\item Sei $R=\mathds{Z}$, sei $V= \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ und $M = \nicefrac{\mathds{Z}}{2 \mathds{Z}}$, sowie $f= \id \colon V \to M$, $N= \mathds{Z}$ und 
 	$p \colon \mathds{Z} \twoheadrightarrow \nicefrac{\mathds{Z}}{2 \mathds{Z}}$ die Projektion mit $p(n)= n + 2 \mathds{Z}$. Dann gibt es \emph{keine} $\mathds{Z}$-lineare 
-	Abbildung $\hat{f} \colon \nicefrac{\mathds{Z}}{2 \mathds{Z}} \to \mathds{Z}$ mit $p \circ \hat{f} = f$.
-	Ist $\hat{f} (1+ 2 \mathds{Z}) = n \in \mathds{Z}$, so folgt 
+	Abbildung $\hat{f} \colon \nicefrac{\mathds{Z}}{2 \mathds{Z}} \to \mathds{Z}$ mit $p \circ \hat{f} = f$ denn falls $\hat{f} (1+ 2 \mathds{Z}) = n \in \mathds{Z}$ ist, so 
+	folgt 
 	\[
 		2 n = 2 \cdot \hat{f}(1+ 2 \mathds{Z}) = \hat{f} \enbrace[\big]{2 \cdot (1+ 2 \mathds{Z})} = \hat{f} (0+ 2 \mathds{Z}) =0
 	\]
-	also $n=0$. $\nicefrac{\mathds{Z}}{2 \mathds{Z}}$ ist also kein freier Modul.
+	also $n=0$ und somit $p \circ \hat{f}=0$. $\nicefrac{\mathds{Z}}{2 \mathds{Z}}$ ist also kein freier Modul.
 \end{enumerate}
 % subsection 33 (end)
 
@@ -577,7 +579,8 @@ Für den folgenden geordneten simplizialen Komplex gilt
 		\coordinate (0) at (0,0);
 		\coordinate (1) at (0.5,0.866);
 		\coordinate (2) at (1,0);
-		\draw[very thick, 
+		\draw[very thick,
+			fill=DodgerBlue2!40,
 			postaction={decorate},
 			decoration={markings,
 				mark=at position 1/6 with {\arrow{to}},
@@ -614,7 +617,7 @@ Damit folgt $\im \partial_n \subseteq \ker \partial_{n-1}$.
 \minisec{Beweis (mit Lemma \ref{sub:38})}
 Sei $\sigma$ ein $n$-Simplex von $K$. Dann gilt
 \begin{align*}
-	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}} \varepsilon_\sigma^\tau \cdot \tau} = 
+	\partial_{n-1} \enbrace[\big]{\partial_n (\sigma)} = \partial_{n-1} \enbrace*{ \smashoperator[r]{\sum_{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \cdot \tau} = 
 	\sum_{\mathclap{\tau \in \Sigma_{n-1}}} \varepsilon_{\sigma}^\tau \cdot \partial_{n-1} (\tau) 
 	 &= \smashoperator[r]{\sum_{\tau \in \Sigma_{n-1}}} \varepsilon_\sigma^\tau \enbrace*{ \sum_{\eta \in \Sigma_{n-2}} \varepsilon_\tau^\eta \cdot \eta} \\
 	 &= \sum_{\eta \in \Sigma_{n-2}} \enbrace*{ \sum_{\tau \in \Sigma_{n-1}, \eta \subseteq \tau \subseteq \sigma} \!\!\!\!\! \! \! \varepsilon_\tau^\eta \cdot \varepsilon_\sigma^\tau}
@@ -2556,7 +2559,7 @@ ist beschränkt und $U_2$ ist unbeschränkt. \bewende
 \subsection[Proposition über Homologie von $X= \bigcup_{a \in N} U_a$ wobei $U_a \subseteq U_{a+1}$]{Proposition} % (fold)
 \label{sub:1011}
 Seien $U_1 \subseteq U_2 \subseteq \ldots  \subseteq X$ offen mit $X = \bigcup_{i=1}^\infty U_i$. Seien $i_{a,b} \colon U_a \hookrightarrow U_b$ für $a < b$ und 
-$i_a \colon U_a \hookrightarrow X$ die Inklusionen.
+$i_a \colon U_a \hookrightarrow X$ die entsprechenden Inklusionen. Dann gilt
 \begin{enumerate}[(1)]
 	\item Für jedes $x \in H_k(X;R)$ gibt es $a >0$ und $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=x$.
 	\item Ist $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=0$, so gibt es $b >a$ mit $(i_{a,b})_*(x_a)=0$.
@@ -3288,7 +3291,7 @@ erzeugen den Unterkettenkomplex $\enbrace*{C_*^{\mathcal{U}},\partial_*}$ des si
 
 \subsection{Satz über kleine Simplizes} % (fold)
 \label{sub:133}
-Die Inklusion $C_*^\mathcal{U}(X;R) \to C_*(X;R)$ induziert einen Isomorphismus in Homologie.
+Die Inklusion $C_*^\mathcal{U}(X;R) \hookrightarrow C_*(X;R)$ induziert einen Isomorphismus in Homologie.
 % subsection 133 (end)
 
 \subsection{Bemerkung} % (fold)
@@ -3303,7 +3306,7 @@ Dann induziert die Inklusion $C_*^\mathcal{U}(X,A;R) \to C_*(X,A;R)$ einen Isomo
 \subsection{Beweis des Ausschneidungssatzes (\ref{sub:131})} % (fold)
 \label{sub:135}
 Seien $\mathcal{U} := \set{\mathring{A},X \setminus \overline{L}}$ und $\mathcal{U}_L := \set{\mathring{A} \setminus L, X \setminus \overline{L}}$. Dann gilt nach
-dem Satz über kleine Simplizes
+dem Satz über kleine Simplizes\todo{Details hinzufügen}
 \[
 	\begin{tikzcd}
 		C_*^{\mathcal{U}_L} \enbrace*{X \setminus L, A \setminus L;R} \rar["\cong"] \dar[hook,"\cong_{H_*}"']
