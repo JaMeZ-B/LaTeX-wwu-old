@@ -1,10 +1,10 @@
-\input{extra_files/Praeambel.tex}
+\input{../extra_files/Praeambel.tex}
 
 \newcommand{\vorlesung}{Finanzmathematik}
 \newcommand{\Prof}{PD Dr. Paulsen}
 \newcommand{\subt}{Mitschrift der Tafelnotizen}
 
-\input{extra_files/headings.tex}
+\input{../extra_files/headings.tex}
 
 
 
@@ -27,7 +27,7 @@
 	Ich werde diese dann einarbeiten.\\
 \end{center}
 \vspace*{\fill}
-\newpage
+\cleardoubleoddemptypage
 
 \pagenumbering{Roman}
 
@@ -812,7 +812,7 @@ Replikationsprinzip liefert, dass die Preise in $t<t_1$ übereinstimmen müssen,
 	\item Zinszahlungstermine $t_0<t_1<\dots<t_m=T$
 	\item \Index{nachschüssige Kouponzahlungen} $K_1,K_2,\dots,K_m$ entsprechend dem für die Periode geltendem Marktzins
 	\[
-	F(t_{i-1},t_{i-1},t_i)=\frac{1}{t-t_{i-1}}\cdot \enbrace{\frac{1}{B(t_{i-1},t_i)}-1} 
+	F(t_{i-1},t_{i-1},t_i)=\frac{1}{t_i-t_{i-1}}\cdot \enbrace{\frac{1}{B(t_{i-1},t_i)}-1} 
 	\]
 	also
 	\begin{equation*}
@@ -1080,7 +1080,7 @@ Man wähle $(t,s,b)$ so, dass die Versicherung fair ist.
 		\item[Induzierte Zahlungsströme:]
 		\item Ausgaben: $A(m+k)= R\cdot \mathbb{1}_{\{T>m+k\}}~ k=0,\dots,n-1,~~ A(k)=0$ sonst
 		\item Einnahmen: $I(k)=p\cdot \mathbb{1}_{\{T>k\}}~ k=0,\dots,m-1 ~~ I(k)=0$ sonst
-		\item Barwert der Ausgaben: $\mathds{E}V_0(A)=\sum_{k=0}^{n-1}R\cdot v^{m+k}\mathds{P}(T_>m+k)$
+		\item Barwert der Ausgaben: $\mathds{E}V_0(A)=\sum_{k=0}^{n-1}R\cdot v^{m+k}\mathds{P}(T>m+k)$
 		\item Barwert der Einnahmen: $\mathds{E}V_0(I)=p\sum_{k=0}^{m-1}v^k \mathds{P}(T>k)=p\cdot ä_{x:m\rceil}$ \marginnote{\tiny $ä_{x:m\rceil}=\sum_{k=0}^{m-1}v^k \mathds{P}(T>k)$}
 		\item Bezeichnung für $R=1$: $_{m|n}ä_x:=\sum_{k=0}^{n-1}v^{m+k}\mathds{P}(T>m+k)$
 		\item Die Versicherung ist fair, wenn $R\cdot~ _{m|n}ä_x=p\cdot ä_{x:m\rceil}$
@@ -1161,7 +1161,7 @@ Sei $(A(n))_{n\in \mathds{N}}$ und $(I(n))_{n\in \mathds{N}}$ der Zahlungsstrom 
 Das nach $m$ Jahren gebildete Deckungskapital $\mathcal{D}(m)$ ist definiert, als die Differenz der Barwerte, der dann zukünftigen Ausgaben und Einnahmen, wobei die Diskontierung auf das Ende des n-ten Jahres vorgegeben wird.\\
 In mathematischen Formeln: 
 \[
-\mathcal{D}(m)= \mathds{E}(V_m(A)~|~\underbracket{T>m}_{\text{die nach $m$ noch leben}})- \mathds{E}(V_m(I)~|~T>m) ~~ \forall m\in \mathds{N}_0 
+\mathcal{D}(m)= \mathds{E}(V_m(A)~|~\underbracket{T>m}_{\mathclap{\text{die nach $m$ noch leben}}})- \mathds{E}(V_m(I)~|~T>m) ~~ \forall m\in \mathds{N}_0 
 \]
 Dies ist die Definition des sogenannten \bet{prospektiven Deckungskapitals}\index{Deckungskapital!prospektives} (vorausschauende Methode).\\
 Für $m=0$ ist $\mathcal{D}(0)$ der Barwert der Versicherung. 
@@ -3445,7 +3445,7 @@ Dann folgt:
 \]
 Auch gilt:
 \[
-x-((-H)\cdot S^*(N)\le C^* \Rightarrow -(C^*-x)\in\mc{K}^* \Rightarrow x\text{ ist ein lower hedging Preis}
+x-\big((-H)\cdot S^*(N)\big)\le C^* \Rightarrow -(C^*-x)\in\mc{K}^* \Rightarrow x\text{ ist ein lower hedging Preis}
 \]
 Also gilt:
 \[
@@ -3987,6 +3987,7 @@ Ziel: Modellierung von Finanzmärkten in stetiger Zeit.
 
 \subsection{Beschreibung des Modells}
 \label{sub:beschreibung_des_modells}
+\index{Black-Scholes Modell}
 Finanzmarktmodell besteht aus
 \begin{itemize}
 	\item einem Geldmarktkonto
@@ -4481,11 +4482,12 @@ c(x,t,\sigma,K)= x\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 \begin{enumerate}[(i)]
 	\item $\lim\ablim{t\downarrow 0}c(x,t,\sigma,K)=(x-K)^+$
 	\item $\partial_tc+\frac{1}{2}\sigma^2x^2\partial_x^2c+x\partial_xc=rc$ auf $(0,\infty)\times(0,\infty)$.
-	Dies ist die \Index{Black-Scholes Differenzialgleichung}.
-	Dann gilt:
+	Dies ist die \Index{Black-Scholes Differentialgleichung}.
+	Da gilt:
 	\[
-	x\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))=0
+	x\varphi(h_1(x,t))-Ke^{-rt}\varphi(h_2(x,t))=0
 	\]
+	$\varphi$ bezeichnet dabei die Dichtefunktion der Normalverteilung.
 	\item $c$ ist strikt wachsend als Funktion des Aktienanfangskurses mit
 	\[
 	\Delta =\partial_xc=\phi(h_1)>0
@@ -4504,12 +4506,12 @@ c(x,t,\sigma,K)= x\phi(h_1(x,t))-Ke^{-rt}\phi(h_2(x,t))
 	Preis der Call-Option mit Fälligkeit $T$ in $t$ bei $S(t)$.
 	\item Das \Index{Gamma} einer Option
 	\[
-	\Gamma=\partial_x^2c=\phi(h_1(x,t))\partial_xh_1(x,t)>0
+	\Gamma=\partial_x^2c=\varphi(h_1(x,t))\partial_xh_1(x,t)>0
 	\]
 	$\Gamma$ ist ein Maß für die Änderung der $\Delta$.
 	\item \Index{Theta} einer Option:
 	\[
-	\Theta:= \partial_tc=\frac{x\sigma}{2\sqrt{t}}\phi(h_1)+Kre^{-rt}\phi(h_2)
+	\Theta:= \partial_tc=\frac{x\sigma}{2\sqrt{t}}\varphi(h_1)+Kre^{-rt}\phi(h_2)
 	\]
 	Preis der Option ist monoton wachsend in der Laufzeit.
 	\item \Index{Lambda} oder \Index{Vega}
