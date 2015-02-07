@@ -72,7 +72,7 @@ Eine Abbildung $f \colon X \to Y$ zwischen zwei metrischen Räumen $(X,d_X)$ und
 	\(
 		\forall \varepsilon>0 : \exists \delta >0 : \forall x,x' \in X : d_X(x,x') < \delta \Longrightarrow d_Y \enbrace[\big]{f(x), f(x')} < \varepsilon .
 	\) 
-	\item $f$ heißt \Index{Isometrie}, falls \marginnote{automatisch injektiv}
+	\item $f$ heißt \Index{Isometrie}, falls \marginnote{automatisch injektiv und stetig}
 	\(
 		\forall x,x' \in X : d_X(x,x') = d_Y \enbrace[\big]{f(x), f(x')}.
 	\)
@@ -127,20 +127,21 @@ bis auf isometrische Isomorphie.
 	\[
 		(x_n)_n \sim (x_n') :\iff \lim_{ n \to \infty} d(x_n, x_n') = 0
 	\]
-	$\sim$ ist eine Äquivalenzrelation auf $Y$. Definiere nun $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} :  \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
+	$\sim$ ist eine Äquivalenzrelation auf $Y$. Definiere nun $\tilde{X} := \nicefrac{Y}{\sim}$ und $\tilde{d} \colon \tilde{X} \times \tilde{X} \to [0, \infty)$ durch
 	\[
 		\tilde{d} \enbrace*{\benbrace[\big]{(x_n)_n} , \benbrace[\big]{(x_n')_n}  } := \lim_{ n \to \infty} d(x_n , x_n') 
 	\]
-	$\tilde{d}$ ist eine wohldefiniert, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann ist
+	$\tilde{d}$ ist eine wohldefinierte Abbildung, d.h. falls $\benbrace*{(x_n)_n} = \benbrace*{(y_n)_n} $ und $\benbrace*{(x_n')_n} = \benbrace*{(y_n')_n}$, dann erhalten wir
 	\[
 		\lim_{n \to \infty} d(x_n , x_n') = \lim_{n \to \infty} d(y_n, y_n'). \tag*{(leichte Übung)}
 	\]
-	Weiter ist $\enbrace[\big]{d(x_n x_n')}_n$ eine Cauchy-Folge in dem vollständigen Raum $[0,\infty)$ und somit 
-	konvergent: Sei dazu $\varepsilon>0$. Dann existiert ein $N \in \mathds{N}$, sodass $d(x_n,x_m) \le \frac{\varepsilon}{2}$ und $d(x_n', x_m') \le \frac{\varepsilon}{2}$ für alle $n,m \ge N$. Dann gilt nach der \hyperref[sub:vier_ungl]{Vierecksungleichung (siehe Anhang \ref*{sub:vier_ungl})}
+	Weiter ist $\enbrace[\big]{d(x_n, x_n')}_n$ eine Cauchy-Folge in dem vollständigen Raum $[0,\infty)$ und somit 
+	konvergent: Sei nun $\varepsilon>0$. Dann existiert ein $N \in \mathds{N}$, sodass $d(x_n,x_m) \le \frac{\varepsilon}{2}$ und $d(x_n', x_m') \le \frac{\varepsilon}{2}$ für alle $n,m \ge N$. Dann gilt nach der \hyperref[sub:vier_ungl]{Vierecksungleichung (siehe Anhang \ref*{sub:vier_ungl})}
 	\[
 		\abs[\big]{d(x_n,x_n') - d(x_m,x_m')} \le d(x_n, x_m) + d(x_n', x_m') \le \varepsilon
 	\]
-	\item[Einbettung von $X:$] Definiere nun $\iota : X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
+	Also existiert der Grenzwert und $\tilde{d}$ ist wohldefiniert.
+	\item[Einbettung von $X$:] Definiere nun $\iota \colon X \to \tilde{X}$ durch $x \mapsto [(x,x,x, \ldots )] \in \tilde{X}$. $\iota$ ist Isometrie, da
 	\[
 		\tilde{d} \enbrace[\big]{\iota(x),\iota(y)} = \lim_{ n \to \infty} d(x,y) = d(x,y)
 	\]
@@ -155,6 +156,7 @@ bis auf isometrische Isomorphie.
 	\[
 		\tilde{d}\enbrace[\big]{\iota(x_N), \benbrace*{(x_n)_n} } = \lim_{ n \to \infty} d \enbrace*{x_N, x_n} < \varepsilon
 	\]
+	Damit hat $\iota$ ein dichtes Bild.
 	\item[Vollständigkeit von $(\tilde{X}, \tilde{d})$:] Sei $\enbrace*{\overline{x}^m}_m$ eine Cauchyfolge in $\tilde{X}$.\marginnote{$\overline{x} \in \tilde{X}$}
 	\[
 		\Longrightarrow \forall \varepsilon >0 : \exists M(\varepsilon) \in \mathds{N} : \forall m,m' > M : \tilde{d} \enbrace*{\overline{x}^m, \overline{x}^{m'}} < \frac{\varepsilon}{3} 
@@ -198,7 +200,7 @@ Sei $(W,\mathcal{T})$ ein topologischer Raum und $(X,d)$ ein metrischer Raum. Se
 \[
 	C_b(W,X) := \set[f \colon W \to X]{f \text{ stetig und beschränkt}} 
 \]
-versehen mit der Metrik $d_{W,X}$, definiert durch
+versehen mit der Metrik $d_{W,X}$, die definiert ist durch
 \[
 	d_{W,X}(f,g) = \sup_{t \in W} d \enbrace[\big]{f(t), g(t)} 
 \]
@@ -2776,7 +2778,7 @@ insbesondere gilt $\skal*{x}{T x}=0 \iff T x=0$
 \emph{Übung, siehe Anhang \ref{sub:bew_731}.}\bewende
 % subsection 731 (end)
 
-\subsection[Satz: Konvergenz eines monoton wachsenden, beschränkten Netzes selbstadjungierter Operatoren]{Satz} % (fold)
+\subsection[Satz: Konvergenz monoton wachsendes, beschränktes Netz selbstadjungierter Operatoren]{Satz} % (fold)
 \label{sub:732}
 Sei $(T_j)_{j \in I} \subset \mathcal{L}(\mathcal{H})_\sa$ ein monoton wachsendes und beschränktes Netz selbstadjungierter Operatoren. Dann konvergiert $(T_j)_{j \in I}$
 punktweise gegen ein $T \in \mathcal{L}(\mathcal{H})_\sa$, das heißt $T_j x$ konvergiert gegen $T x$ in Norm für jedes $x \in \mathcal{H}$. 
@@ -2864,7 +2866,7 @@ Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.\todo
 Sei $X$ ein Banachraum und $T \in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
 lokal durch eine Potenzreihe mit Koeffizienten in $\mathcal{L}(X)$ gegeben. Mit anderen Worten $R(T,\cdot )$ ist lokal analytisch\index{analytisch}.
 \minisec{Beweis}
-Sei $\lambda_0 \in \rho(T)$. Setze $S_0 := T- \lambda_0 \cdot \id_X$, $S_\lambda := T- \lambda \cdot \id_X$, $\lambda \in \rho(T)$. Sei $\lambda \in \rho(T)$ mit 
+Sei $\lambda_0 \in \rho(T)$. Setze $S_0 := T- \lambda_0 \cdot \id_X$ und $S_\lambda := T- \lambda \cdot \id_X$ für $\lambda \in \rho(T)$. Sei $\lambda \in \rho(T)$ mit 
 \[
 	\norm{S_0 - S_\lambda} = \abs*{\lambda-\lambda_0}< \norm{S_0 ^{-1}} ^{-1}
 \]
@@ -2876,7 +2878,7 @@ Nach Proposition \ref{sub:83} ist $S_\lambda$ invertierbar und es gilt
 Durch Abschätzung mit der geometrischen Reihe folgt die Beschränktheit. \bewende
 % subsection 85 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Für $\mathds{K}=\mathds{C}$ ist $\sigma(T)$ nichtleer, kompakt und ${\sigma(T) \subset \set[z \in \mathds{C}]{\abs*{z} \le \norm{T}}}$]{Satz} % (fold)
 \label{sub:86}
 Sei $X$ ein $\mathds{C}$-Banachraum und $T \in \mathcal{L}(X)$. Dann ist $\sigma(T)$ nichtleer, kompakt und es gilt 
 \[
@@ -2884,11 +2886,11 @@ Sei $X$ ein $\mathds{C}$-Banachraum und $T \in \mathcal{L}(X)$. Dann ist $\sigma
 \]
 \minisec{Beweis}
 Wir wissen bereits, dass $\sigma(T)$ abgeschlossen in $\mathds{C}$ ist. Für $\lambda\not=0$ ist $S_\lambda := -\lambda \cdot \id_X$ invertierbar und es gilt
-$\cramped{\norm{S_\lambda ^{-1}}^{-1} =\lambda}$. Falls $\cramped{\norm{S_\lambda - (T-\lambda \cdot \id_X)}=\norm{T} < \abs*{\lambda}= \norm{S_\lambda ^{-1}} ^{-1}}$, so 
+$\cramped{\norm{S_\lambda ^{-1}}^{-1} =\abs*{\lambda}}$. Falls $\cramped{\norm{S_\lambda - (T-\lambda \cdot \id_X)}=\norm{T} < \abs*{\lambda}= \norm{S_\lambda ^{-1}} ^{-1}}$, so 
 ist nach \ref{sub:83} $T- \lambda \cdot \id_X$ invertierbar, also ist $\lambda \not\in \sigma(T)$. Damit folgt 
 $\sigma(T) \subset \set[z \in \mathds{C}]{\abs*{z}\le \norm{T}}$ und die Kompaktheit von $\sigma(T)$.
 
-Angenommen $\sigma(T)= \emptyset$. $R(T,\lambda)$ ist stetig auf $\set[\lambda \in \mathds{C}]{\abs*{z} \le 2 \cdot \norm{T}}$, also beschränkt. Weiter gilt für 
+Angenommen $\sigma(T)= \emptyset$. $R(T,\lambda)$ ist stetig auf $\set[z \in \mathds{C}]{\abs*{z} \le 2 \cdot \norm{T}}$, also beschränkt. Weiter gilt für 
 $\abs*{\lambda} \ge 2 \cdot \norm{T}$
 \[
 	R(T,\lambda) = \enbrace*{T- \lambda \cdot \id_X}^{-1} = -\lambda ^{-1} \cdot \enbrace*{- \frac{T}{\lambda} + \id_X}^{-1} 
@@ -2898,9 +2900,9 @@ also $\norm{R(T,\lambda)} \le \abs*{\lambda}^{-1}\cdot \sum_{n=0}^{\infty} \norm
 $R(T,\lambda)$ auf $\mathds{C}$ beschränkt. Für $x \in X$ und $\varphi \in X^*$ gilt: 
 \[
 	\lambda \mapsto \varphi \enbrace[\big]{R(T,\lambda)(x)} {\color{Grey0} \enspace = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n 
-	\underbrace{\varphi\enbrace*{R(T,\lambda)^{n+1}(x)} }_{\in \mathds{C}}}
+	\underbrace{\varphi\enbrace*{R(T,\lambda_0)^{n+1}(x)} }_{\in \mathds{C}}}
 \]
-ist lokal analytisch (auf ganz $\mathds{C}$), also ganz, und beschränkt. Nach dem Satz von Liouville\footnote{$f$ ganz $\leadsto f(z)=\sum_{n=0}^{\infty}a_n \cdot z^n$ mit 
+ist lokal analytisch (auf ganz $\mathds{C}$), also ganz und beschränkt. Nach dem Satz von Liouville\footnote{$f$ ganz $\leadsto f(z)=\sum_{n=0}^{\infty}a_n \cdot z^n$ mit 
 $a_k = \frac{f^{(k)}(0)}{k!} \stackrel{\text{Cauchy}}{=} \frac{1}{2 \pi i} \cdot \oint_{C_r} \frac{f(\zeta)}{\zeta^{k+1}} \mathd\zeta$, wobei $C_r$ der Kreis mit Radius $r$ 
 ist. Dann folgt $\abs*{f(z)} \le M$, also $\abs*{a_k} \le \frac{1}{r^k}$, $r>0$, $k \ge 1$ $\Rightarrow a_k=0, k \ge 1$. Siehe auch
 \url{https://de.wikipedia.org/wiki/Satz_von_Liouville_(Funktionentheorie)}} folgt
