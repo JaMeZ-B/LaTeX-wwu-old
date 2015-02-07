@@ -911,7 +911,7 @@ für $n,m \ge n_0$ und $m$ groß genug, $x \in X$. Damit folgt nun
 $\norm[\mathcal{L}(X,Y)]{T_n -T} \le \varepsilon$ für $n \ge n_0$, also $T_n \to T$ bezüglich $\norm[\mathcal{L}(X,Y)]{.}$. \bewende
 % subsection 31 (end)
 
-\subsection[Corollar: Dualraum ist vollständig und $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum]{Corollar} % (fold)
+\subsection[Corollar: Dualraum vollständig und $\mathcal{L}(X,X)$ ist Banachalgebra, falls $X$ Banachraum]{Corollar} % (fold)
 \label{sub:32}
 \begin{enumerate}[(i)]
 	\item Der Dualraum $X^*$ eines normierten $\mathds{K}$-Vektorraumes $X$ ist vollständig. 
@@ -1594,7 +1594,7 @@ Es gilt $\abs*{\varphi_f(x)} = \abs*{f_x} \le \norm{x}$, $x \in X$, also $\norm[
 	\item Ist $X$ kompakt und 1. abzählbar, so besitzt jede Folge in $X$ eine konvergente Teilfolge.
 	
 	Beweisskizze: $(x_n)_n \subset X$, setze $A_n := \overline{\set{x_n, x_{n+1}, \ldots }}$. Dann ist $\bigcap_n A_n$ nichtleer wegen Kompaktheit, also
-	hat $(x_n)_n$ einen Häufungspunkt. Benutze nun 1. abzählbar.
+	hat $(x_n)_n$ einen Häufungspunkt. Benutze nun 1. abzählbar.\todo{genauer ausführen}
 	\item Sei $X$ kompakt und Hausdorff. Dann ist $X$ metrisierbar $\iff$ $X$ ist 2. abzählbar.
 	
 	Die Hinrichtung ist eine einfache Übungsaufgabe (Blatt 10, Aufgabe 3). Die Rückrichtung benutzt Urysohn und Metrisierungssätze. Den Satz von Urysohn haben wir auch in 
@@ -2208,7 +2208,7 @@ Durch Wurzelziehen folg $\norm{x+y} \le \norm{x} + \norm{y}$. \bewende
 	\item Die Cauchy-Schwarz-Ungleichung schreibt sich auch als $\abs*{\skal*{x}{y}} \le \norm{x} \cdot \norm{y}$.
 	\item Die Abbildung $\skal*{\cdot}{\cdot} \colon X \times X \to \mathds{K}$ ist stetig:
 	\begin{align*}
-		\abs[\big]{\skal*{x}{y}- \skal*{x'}{y'}} = \abs[\big]{\skal*{x}{y} -\skal*{x'}{y} + \skal*{x'}{y} -\skal*{x'}{y'}} &= \abs[\big]{\skal*{x-x'}{y} -\skal*{x'}{y'-y}}\\
+		\abs[\big]{\skal*{x}{y}- \skal*{x'}{y'}} = \abs[\big]{\skal*{x}{y} -\skal*{x'}{y} + \skal*{x'}{y} -\skal*{x'}{y'}} &= \abs[\big]{\skal*{x-x'}{y} +\skal*{x'}{y'-y}}\\
 		&\le \abs[\big]{\skal*{x-x'}{y}} + \abs[\big]{\skal*{x'}{y'-y}} \\
 		&\stackrel{\mathclap{\mbox{\scriptsize \hyperref[sub:74]{C.S.}}}}{\le} \norm{x-x'} \cdot \norm{y} + \norm{x'} \cdot \norm{y'-y}    
 	\end{align*}
@@ -2304,39 +2304,42 @@ linear in der ersten), dann ist $q$ durch die Abbildung $n_q \colon X \to \mathd
 \subsection[Definition: Prä-Hilbertraum und Hilbertraum]{Definition} % (fold)
 \label{sub:79}
 Ein $\mathds{K}$-Vektorraum $\mathcal{H}$ heißt \Index{Prä-Hilbertraum}, falls $\mathcal{H}$ ein Skalarprodukt besitzt. $\mathcal{H}$ heißt \Index{Hilbertraum}, falls
-$\mathcal{H}$ vollständig ist bezüglich der durch $\skal*{\cdot}{\cdot}$ induzierten Norm. \todo{RevChap7}
+$\mathcal{H}$ vollständig ist bezüglich der durch $\skal*{\cdot}{\cdot}$ induzierten Norm.
 % subsection 79 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Die Vervollständigung eines Prä-Hilbertraumes ist ein Hilbertraum]{Proposition} % (fold)
 \label{sub:710}
 Sei $\mathcal{H}$ ein Prä-Hilbertraum und $\overline{\mathcal{H}}^{\norm{\cdot}}$ die Vervollständigung bezüglich $\norm{x} = \skal*{x}{x}^{\frac{1}{2}}$. Dann ist
 $\overline{\mathcal{H}}^{\norm{\cdot}}$ in kanonischer Weise ein Hilbertraum.
 \minisec{Beweis}
-$\enbrace*{\mathcal{H}, \norm{\cdot}} \hookrightarrow \enbrace*{\overline{\mathcal{H}}^{\norm{\cdot}}, \norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}}$ ist isometrisch
-mit dichtem Bild. $\norm{\cdot}$ erfüllt das Parallelogrammgesetz und daher auch $\norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$. Mit \ref{sub:77} folgt, dass 
-$\overline{\mathcal{H}}^{\norm{\cdot}}$ ein Skalarprodukt besitzt, welches die Norm $\norm[\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$ induziert und auf $\mathcal{H}$ mit
-$\skal*{\cdot}{\cdot}$ übereinstimmt. Das Skalarprodukt auf $\overline{\mathcal{H}}^{\norm{\cdot}}$ ist wegen Stetigkeit hierdurch eindeutig bestimmt. \bewende
+$\enbrace{\mathcal{H}, \norm{\cdot}}\hookrightarrow\enbrace{\overline{\mathcal{H}}^{\scriptscriptstyle\norm{\cdot}}, 
+\norm[\scriptscriptstyle\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}}$ ist isometrisch mit dichtem Bild nach \hyperref[sub:15]{Satz \ref*{sub:15}}. $\norm{\cdot}$ erfüllt 
+das Parallelogrammgesetz und daher auch $\norm[\scriptscriptstyle\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$. Mit \ref{sub:77} folgt, dass 
+$\overline{\mathcal{H}}^{\scriptscriptstyle\norm{\cdot}}$ ein Skalarprodukt besitzt, welches die Norm 
+$\norm[\scriptscriptstyle\overline{\mathcal{H}}^{\norm{\cdot}}]{\cdot}$ induziert und auf $\mathcal{H}$ mit $\skal*{\cdot}{\cdot}$ übereinstimmt. Das Skalarprodukt auf 
+$\overline{\mathcal{H}}^{\scriptscriptstyle\norm{\cdot}}$ ist wegen Stetigkeit hierdurch eindeutig bestimmt. \bewende
 % subsection 710 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Isometrischer Isomorphismus $\kappa \colon \mathcal{H} \to \mathcal{H}^*$]{Proposition} % (fold)
 \label{sub:711}
-Sei $\mathcal{H}$ ein Hilbertraum und $\kappa \colon \mathcal{H} \to \mathcal{H}^*$ definiert durch $\kappa(x)(y) := \skal*{x}{y}$, $x,y \in \mathcal{H}$. Dann gilt
+Sei $\mathcal{H}$ ein Hilbertraum und $\kappa \colon \mathcal{H} \to \mathcal{H}^*$ definiert durch $\kappa(x)(y) := \skal*{x}{y}$, $x,y \in \mathcal{H}$. Dann gilt:
 \begin{enumerate}[(i)]
-	\item $\kappa$ ist \Index{konjugiert linear}, d.h. $\kappa(\alpha x+ \alpha' x') = \overline{\alpha} \kappa(x) + \overline{\alpha'}\kappa(x')$ mit $x,x' \in \mathcal{H}$, 
-	$\alpha, \alpha' \in \mathds{K}$.
-	\item $\kappa$ ist isometrisch (insbesondere injektiv).
+	\item $\kappa$ ist \Index{konjugiert linear}, das heißt $\kappa(\alpha x+ \alpha' x') = \overline{\alpha} \kappa(x) + \overline{\alpha'}\kappa(x')$ mit 
+	$x,x' \in \mathcal{H}$, $\alpha, \alpha' \in \mathds{K}$.
+	\item $\kappa$ ist isometrisch, also insbesondere injektiv.
 	\item $\kappa$ ist surjektiv.
 \end{enumerate}
 \minisec{Beweis}
 Es gilt $\kappa(x) \in \mathcal{H}^*$, da $\kappa(x) \colon \mathcal{H} \to \mathds{K}$ offensichtlich linear ist. Weiter ist $\kappa(x)$ stetig, da
 \begin{align*}
-	\abs*{\kappa(x)(y)}= \abs*{\skal*{x}{y}}  \le \norm{x} \cdot \norm{y}  \Longrightarrow \norm[\mathcal{H}^*]{\kappa(x)} \le \norm{x}  
+	\abs*{\kappa(x)(y)}= \abs*{\skal*{x}{y}} \stackrel{\mathclap{\mbox{\scriptsize \hyperref[sub:74]{C.S.}}}}{\le} \norm{x} \cdot \norm{y} 
+	\Longrightarrow \norm[\mathcal{H}^*]{\kappa(x)} \le \norm{x}  
 \end{align*}
 \begin{enumerate}[(i)]
 	\item klar.
 	\item Es gilt $\kappa(x) \enbrace*{\frac{1}{\norm{x}}x }= \frac{1}{\norm{x}} \skal*{x}{x} = \norm{x}$. Daraus folgt $\norm[\mathcal{H}^*]{\kappa(x)} \ge \norm{x}$, also
-	auch $\norm[\mathcal{H}^*]{\kappa(x)}= \norm{x}$.
-	\item Sei $\varphi \in \mathcal{H}^*$. Ohne Einschränkungen gelte $\norm[\mathcal{H}^*]{\varphi}=1$. 
+	auch $\norm[\mathcal{H}^*]{\kappa(x)}= \norm{x}$, da wir die andere Abschätzung eben gezeigt haben.
+	\item Sei $\varphi \in \mathcal{H}^*$. Ohne Einschränkungen gelte $\norm[\mathcal{H}^*]{\varphi}=1$. \todo{Beweis vervollständigen}
 	
 	Behauptung: Es gibt $\overline{x} \in \mathcal{H}$ mit $\norm{\overline{x}}=1 $ und
 	$\varphi(\overline{x} )=1$. Wähle $(x_n)_\mathds{N} \subset \mathcal{H}$ mit $\norm{x_n}=1$ und $0\le \varphi(x_n) \xrightarrow{n \to \infty} 1$.
@@ -2382,7 +2385,7 @@ Es gilt $\kappa(x) \in \mathcal{H}^*$, da $\kappa(x) \colon \mathcal{H} \to \mat
 \end{enumerate}
 % subsection 711 (end)
 
-\subsection{Korollar} % (fold)
+\subsection[Corollar: Hilberträume sind reflexiv]{Corollar} % (fold)
 \label{sub:712}
 Hilberträume sind reflexiv.
 \minisec{Beweis}
@@ -2393,7 +2396,7 @@ Das Diagramm
 		\mathcal{H}^* \rar["\varphi \mapsto \overline{\varphi}"] & \mathcal{H}^*
 	\end{tikzcd}
 \]
-kommutiert, da gilt
+kommutiert, da folgendes gilt:
 \begin{align*}
 	\kappa^\tr \circ \iota_{\mathcal{H}}(x)(y) = \kappa^\tr \enbrace*{\iota_{\mathcal{H}}(x)}(y)  =\iota_{\mathcal{H}}(x) \circ \kappa (y) 
 	= \kappa(y)(x) = \skal*{y}{x} = \overline{\skal*{x}{y}} = \overline{\kappa(x)(y)} 
@@ -2409,12 +2412,12 @@ Sei $\mathcal{H}$ ein Hilbertraum.
 	\item $x,y \in \mathcal{H}$ heißen \Index{orthogonal}, $x\perp y$, falls $\skal*{x}{y}=0$.
 	\item $A,B  \subset \mathcal{H}$ heißen \Index{orthogonal}, falls $x \perp y$ für alle $x \in A$, $y \in B$. 
 	\item Für $A \subset \mathcal{H}$ heißt $A^\bot := \set[x \in \mathcal{H}]{\skal*{x}{y}=0 \text{ für alle } y \in A}$ \Index{orthogonales Komplement} von $A$.
-	\item $\set{x_i}_{I} \subset \mathcal{H}$ heißt \Index{Orthonormalsystem}, falls $\skal*{x_i}{x_j}= \delta_{ij}$, $i,j \in I$.
+	\item $\set{x_i}_{I} \subset \mathcal{H}$ heißt \Index{Orthonormalsystem}, falls $\skal*{x_i}{x_j}= \delta_{ij}$ für $i,j \in I$.
 	\item $\set{x_i}_{I} \subset \mathcal{H}$ heißt \Index{Hilbertraumbasis} (bzw. Basis), falls es ein maximales Orthonormalsystem ist. 
 \end{enumerate}
 % subsection 713 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Satz von Pythagoras, Vergleich Hilbertraumbasis mit Vektorbasis]{Bemerkung} % (fold)
 \label{sub:714}
 \begin{enumerate}[(i)]
 	\item Für $x \perp y \in \mathcal{H}$ gilt der \Index{Satz des Pythagoras}: $\norm{x+y}^2 = \norm{x}^2  + \norm{y}^2$.
@@ -2423,26 +2426,28 @@ Sei $\mathcal{H}$ ein Hilbertraum.
 \end{enumerate}
 % subsection 714 (end)
 
-\subsection[Proposition über Schnitt und Summe eines Unterraumes mit seinem orthogonalen Komplement]{Proposition} % (fold)
+\subsection[Proposition: Für einen abgeschlossenen Unterraum $\mathcal{H}_0$ gilt $\mathcal{H}= \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$]{Proposition} % (fold)
 \label{sub:715}
 Sei $\mathcal{H}$ ein Hilbertraum, $\mathcal{H}_0 \subset \mathcal{H}$ ein abgeschlossener Unterraum. Dann gilt $\mathcal{H}_0 \cap \mathcal{H}_0^\bot = \set{0}$ und 
 $\mathcal{H}_0 + \mathcal{H}_0^\bot = \mathcal{H}$. Wir schreiben in diesem Fall auch $\mathcal{H} = \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$.
 \minisec{Beweis}
-$\mathcal{H}_0 \cap \mathcal{H}_0^\bot= \set{0}$ ist klar (warum?). Sei $x \in \mathcal{H}$. Dann ist $\kappa(x) \in \mathcal{H}^*$ gegeben durch 
-$\kappa(x)(y)=\skal*{x}{y}$, und $\kappa(x)|_{\mathcal{H}_0} \in \mathcal{H}_0^*$. $\mathcal{H}_0 \subset \mathcal{H}$ abgeschlossen, ist also selbst ein Hilbertraum. 
-Sei $\kappa_0 \colon \mathcal{H}_0 \to \mathcal{H}_0^*$ der konjugiert lineare, isometrische Isomorphismus aus \ref{sub:711}. Nach \ref{sub:711} existiert 
-$x_0 \in \mathcal{H}_0$ mit $\kappa_0(x_0)= \kappa(x)|_{\mathcal{H}_0}$. Das heißt für $y \in \mathcal{H}_0$ gilt 
+$\mathcal{H}_0 \cap \mathcal{H}_0^\bot= \set{0}$ ist klar. Sei $x \in \mathcal{H}$. Dann ist $\kappa(x) \in \mathcal{H}^*$ gegeben durch 
+$\kappa(x)(y)=\skal*{x}{y}$ und es ist $\kappa(x)|_{\mathcal{H}_0} \in \mathcal{H}_0^*$. Nun ist $\mathcal{H}_0 \subset \mathcal{H}$ abgeschlossen und somit selbst ein 
+Hilbertraum. Sei $\kappa_0 \colon \mathcal{H}_0 \to \mathcal{H}_0^*$ der konjugiert lineare, isometrische Isomorphismus aus \ref{sub:711}. Wegen der Surjektivität von 
+$\kappa_0$ existiert $x_0 \in \mathcal{H}_0$ mit $\kappa_0(x_0)= \kappa(x)|_{\mathcal{H}_0}$. Das heißt für $y \in \mathcal{H}_0$ gilt 
 \begin{align*}
 	\skal*{x_0}{y} = \kappa_0(x_0)(y) = \kappa(x)\big|_{\mathcal{H}_0}(y) = \kappa(x)(y) = \skal*{x}{y}
 \end{align*}
-Daraus folgt $\skal*{x-x_0}{y}=0$ für jedes $y \in \mathcal{H_0}$, also ist $x_1 := x-x_0 \in \mathcal{H}_0^\bot$ (und $x=x_0+x_1$). \bewende
+Daraus folgt $\skal*{x-x_0}{y}=0$ für jedes $y \in \mathcal{H}_0$, also ist $x_1 := x-x_0 \in \mathcal{H}_0^\bot$ und $x=x_0+x_1$. \bewende
 % subsection 715 (end)
 
-\subsection[Definition: Summierbar]{Definition} % (fold)
+\subsection[Definition: Summierbare Familie (in einem Hilbertraum)]{Definition} % (fold)
 \label{sub:716}
 Sei $\mathcal{H}$ ein Hilbertraum. Eine Familie $\set{x_i}_{i \in I} \subset \mathcal{H}$ heißt \Index{summierbar} zu $x \in \mathcal{H}$, falls gilt: 
-Zu $\varepsilon>0$ existiert $\overline{J} \finSub I$ endlich, sodass für alle $\overline{J} \subset J \finSub I$ endlich gilt $\norm{\sum_{i \in J}x_i - x } < \varepsilon$.
-
+Zu jedem $\varepsilon>0$ existiert $\overline{J} \finSub I$ endlich, sodass für alle $\overline{J} \subset J \finSub I$ endlich gilt 
+\[
+	\norm{\sum_{i \in J}x_i - x } < \varepsilon.
+\]
 Wir schreiben dann auch $x= \sum_{i \in I} x_i$. (Warum kann es höchstens ein solches $x$ geben?) Formulierung mit Netzen: 
 \[
 	\enbrace*{\sum_{i \in J} x_i}_{\!\!\set[J]{J \finSub I \text{ endlich}}} \hspace{-4em} \longrightarrow \enspace x \qquad \text{ oder} \qquad \sum_{i \in J}x_i \xrightarrow{J \finSub I} x 
@@ -2450,9 +2455,9 @@ Wir schreiben dann auch $x= \sum_{i \in I} x_i$. (Warum kann es höchstens ein s
 Dabei ist $\set[J]{J \finSub I \text{ endlich}}$ gerichtet bezüglich Inklusion.
 % subsection 716 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Charakterisierungen von Summierbarkeit]{Proposition} % (fold)
 \label{sub:717}
-Sei $\mathcal{H}$ ein Hilbertraum, $\set{x_i}_{i \in I} \subset \mathcal{H}$. 
+Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ eine Familie in $\mathcal{H}$. 
 \begin{enumerate}[(i)]
 	\item $\set{x_i}_{i \in I}$ ist genau dann summierbar, wenn gilt: Zu jedem $\varepsilon>0$ existiert $\overline{J} \finSub I$ endlich, sodass 
 	$\norm{\sum_{i \in J'}x_i}< \varepsilon$ für jedes $J' \finSub I$ endlich mit $J' \cap \overline{J} = \emptyset$.
@@ -2465,9 +2470,9 @@ Sei $\mathcal{H}$ ein Hilbertraum, $\set{x_i}_{i \in I} \subset \mathcal{H}$.
 \minisec{Beweis}
 \begin{enumerate}[(i)]
 	\item Angenommen $\sum_{i\in I} x_i \in \mathcal{H}$ existiert. Sei $\varepsilon>0$. Dann existiert $\overline{J}\finSub I$, sodass für $\overline{J}\subset J\finSub I$ 
-	gilt $\norm{\sum_{i \in J} x_i - \sum_{i \in I} x_i} < \frac{\varepsilon}{2}$. Für $J' \finSub I$, $J' \cap \overline{J}=\emptyset$ gilt
+	gilt $\norm{\sum_{i \in J} x_i - \sum_{i \in I} x_i} < \frac{\varepsilon}{2}$. Für $J' \finSub I$ mit $J' \cap \overline{J}=\emptyset$ gilt dann
 	\begin{align*}
-		\norm{\sum_{i \in J'} x_i} = \norm{\sum_{i \in J' \cup \overline{J}} x_i - \sum_{i \in \overline{J}} x_i}  \le \norm{\sum_{i \in J' \cup \overline{J}}x_i - \sum_{i \in I} x_i} + \norm{\sum_{i \in \overline{J}} x_i - \sum_{i \in I}x_i}< \varepsilon  
+		\norm{\sum_{i \in J'} x_i} = \norm{\sum_{i \in J' \cup \overline{J}} x_i - \sum_{i \in \overline{J}} x_i}  \le \norm{\sum_{i \in J' \cup \overline{J}}x_i - \sum_{i \in I} x_i} + \norm{\sum_{i \in I} x_i - \sum_{i \in \overline{J}}x_i}< \varepsilon  
 	\end{align*}
 	
 	Zur Rückrichtung: Für $n \in \mathds{N}$ existiert $J_n \finSub I$ endlich, sodass für $J' \finSub I$ mit $J' \cap J_n = \emptyset$ gilt 
@@ -2475,8 +2480,16 @@ Sei $\mathcal{H}$ ein Hilbertraum, $\set{x_i}_{i \in I} \subset \mathcal{H}$.
 	\begin{align*}
 		\enbrace*{\sum_{i \in J_0 \cup J_1 \cup \ldots \cup J_n} \hspace{-1em} x_i}_{n \in \mathds{N}} \subset \mathcal{H}
 	\end{align*}
-	eine Cauchyfolge. Für den Limes $x$ gilt $x= \sum_{i \in I} x_i$ (Warum? Zu $\varepsilon>0$ wähle $n$ mit $\frac{1}{n+1}<\frac{\varepsilon}{2}$ und 
-	$\norm{x - \sum_{i \in J_0 \cup J_1 \cup \ldots \cup J_n} x_i}< \frac{\varepsilon}{2}$. Setze $\overline{J}:= J_n$)
+	eine Cauchyfolge. Für den Limes $x$ gilt $x= \sum_{i \in I} x_i$.
+	
+	Sei dazu $\varepsilon>0$. Wähle $n \in \mathds{N}$, sodass $\frac{1}{n+1}<\frac{\varepsilon}{2}$ und außerdem 
+	$\norm{x - \sum_{i \in J_0 \cup \ldots \cup J_n} x_i}< \frac{\varepsilon}{2}$ gilt. Setze nun $\overline{J}:= J_n$. Dann gilt für 
+	$\overline{J} \subset J \finSub I$
+	\[
+		\norm{x - \sum_{i \in J}x_i} \le \norm{x- \sum_{i \in J_0 \cup \ldots \cup J_n} \hspace{-1em} x_i } 
+		+ \norm{\sum_{i \in J_0 \cup \ldots \cup J_n}\hspace{-1em} x_i - \sum_{i \in J} x_i}
+		< \frac{\varepsilon}{2} + \frac{1}{n+1} < \varepsilon  
+	\]
 	\item Angenommen $\set{x_i}_{i \in I}$ ist summierbar. Seien die $J_n$ wie oben. Dann ist $\bigcup_{n \in \mathds{N}} J_n$ abzählbar. Falls 
 	$I \ni i \not\in \bigcup_{n \in \mathds{N}} J_n$, so gilt $\norm{x_i} < \frac{1}{n+1}$ für jedes $n \in \mathds{N}$, also $x_i=0$.
 	
@@ -2484,7 +2497,7 @@ Sei $\mathcal{H}$ ein Hilbertraum, $\set{x_i}_{i \in I} \subset \mathcal{H}$.
 \end{enumerate}
 % subsection 717 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Linearität von unendlichen Summen und Verträglichkeit Skalarprodukt]{Proposition} % (fold)
 \label{sub:718}
 Sei $\mathcal{H}$ ein Hilbertraum, $z \in \mathcal{H}$, $\alpha, \beta \in \mathds{K}$, $\set{x_i}_{i \in I}, \set{y_i}_{i \in I}$ summierbare Familien. Dann gilt
 \begin{align*}
@@ -2493,7 +2506,7 @@ Sei $\mathcal{H}$ ein Hilbertraum, $z \in \mathcal{H}$, $\alpha, \beta \in \math
 	\skal*{\sum_{i \in I} x_i}{z} = \sum_{i \in I} \skal*{x_i}{z}
 \end{align*}
 \minisec{Beweis}
-Übung. \bewende
+\emph{Übung!} \bewende
 % subsection 718 (end)
 
 \subsection[Proposition: Kriterium für die Summierbarkeit orthogonaler Vektoren]{Proposition} % (fold)
@@ -2507,8 +2520,8 @@ $\sum_{i \in I} \norm{x_i}^2$ endlich ist. In diesem Fall gilt
 Falls $\set{x_i}_{i \in I}$ summierbar ist, so gilt
 \begin{align*}
 	\norm{\sum_{i \in I} x_i}^2 =  
-	\skal*{\sum_{i \in I}x_i}{\sum_{j \in I} x_j} \stackrel{\text{\ref{sub:718}}}{=} \sum_{i \in I} \skal*{x_i}{\sum_{j \in I} x_j}\stackrel{\text{\ref{sub:718}}}{=}
-	\sum_{i \in I} \enbrace*{\sum_{j \in I} \skal*{x_i}{x_j}} = \sum_{i \in I} \norm{x_i}^2  
+	\skal*{\sum_{i \in I}x_i}{\sum_{j \in I} x_j} \stackrel{\mbox{\scriptsize\ref{sub:718}}}{=} \sum_{i \in I} \skal*{x_i}{\sum_{j \in I} x_j}
+	\stackrel{\mbox{\scriptsize\ref{sub:718}}}{=} \sum_{i \in I} \sum_{j \in I} \skal*{x_i}{x_j} = \sum_{i \in I} \norm{x_i}^2  
 \end{align*}
 Äquivalenz: Übung mit 
 \[
@@ -2517,11 +2530,11 @@ Falls $\set{x_i}_{i \in I}$ summierbar ist, so gilt
 für $J \finSub I$ endlich und \ref{sub:717}. \bewende
 % subsection 719 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Besselsche Ungleichung und Parselvalsche Gleichung]{Proposition} % (fold)
 \label{sub:720}
-Sei $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem, $x \in \mathcal{H}$. 
+Sei $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem und $x \in \mathcal{H}$. 
 \begin{enumerate}[(i)]
-	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$, 
+	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$
 	(\Index{Besselsche Ungleichung}\footnote{nach Friedrich Wilhelm Bessel, \url{http://de.wikipedia.org/wiki/Friedrich_Wilhelm_Bessel}}).
 	\item Es gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 = \norm{x}^2$ 
 	(\Index{Parselvalsche Gleichung}\footnote{nach Marc-Antoine Parseval, \url{http://de.wikipedia.org/wiki/Marc-Antoine_Parseval}}) 
@@ -2534,13 +2547,13 @@ Sei $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem, $x \in \mat
 \begin{enumerate}[(i)]
 	\item Für $J \finSub I$ endlich gilt
 	\begin{align*}
-		0 \le\norm{ x - \sum_{i \in J} \skal*{x_i}{x} x_i}^2 &= \skal*{x}{x} - \sum_{i \in J} \skal*{\skal*{x_i}{x}  x_i}{x} - 
-		\sum_{i \in J} \skal*{x}{\skal*{x_i}{x} x_i} \\
-		&\hphantom{= } + \sum_{i \in J} \sum_{j \in J} \skal*{\skal*{x_i}{x} x_i}{\skal*{x_j}{x} x_j} \\
+		\hspace{-1ex} 0 \le\norm{ x - \sum_{i \in J} \skal*{x_i}{x} x_i}^2 &= \skal*{x}{x} - \sum_{i \in J} \skal[\big]{\skal*{x_i}{x}  x_i}{x} - 
+		\sum_{i \in J} \skal[\big]{x}{\skal*{x_i}{x} x_i} \\
+		&\hphantom{= } + \sum_{i \in J} \sum_{j \in J} \skal[\big]{\skal*{x_i}{x} x_i}{\skal*{x_j}{x} x_j} \\
 		&= \skal*{x}{x} - \sum_{i \in J} \overline{\skal*{x_i}{x}} \skal*{x_i}{x} - \sum_{i \in J} \skal*{x_i}{x} \overline{\skal*{x_i}{x}}
 		+ \sum_{i \in J} \overline{\skal*{x_i}{x}} \skal*{x_i}{x}   
 	\end{align*}
-	$\Rightarrow \sum_{i \in J} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2 < \infty$, also gilt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$.
+	Also $\sum_{i \in J} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2 < \infty$ und somit folgt $\sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 \le \norm{x}^2$.
 	\item Die Rechnung aus (i) zeigt auch: 
 	\[
 		\sum_{i \in J} \abs*{\skal*{x_i}{x}}^2 \xrightarrow{J \finSub I} \norm{x}^2  \iff \sum_{i \in J} \skal*{x_i}{x} \cdot x_i \xrightarrow{J \finSub I}  x 
@@ -2557,10 +2570,10 @@ Seien $\mathcal{H}_i$ für $i \in I$ Hilberträume. Dann ist
 \]
 ein Hilbertraum mit $\skal*{(x_i)_{i \in I}}{(y_i)_{i \in I}} := \sum_{i \in I} \skal*{x_i}{y_i}_{\mathcal{H}_i}$.
 \minisec{Beweis}
-\emph{Übung!} \bewende
+\emph{Übung, Aufgabe 1 von Blatt 12} \bewende
 % subsection 721 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz über Äquivalenzen zu: $\set{x_i}_{i \in I}$ ist eine Hilbertraumbasis]{Satz} % (fold)
 \label{sub:722}
 Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ ein Orthonormalsystem. Dann sind äquivalent: 
 \begin{enumerate}[(i)]
@@ -2577,9 +2590,12 @@ Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ 
 \end{enumerate}
 \minisec{Beweis}
 \begin{description}
-	\item[(i)$\Rightarrow$(ii):] Falls $0 \not= x \perp x_i$ für $i \in I$, so ist $\set{x_i}_{i \in I} \cup \set{\frac{1}{\norm{x}} \cdot x}$ ein Orthonormalsystem. \light
-	\item[(ii)$\Rightarrow$(iii):] $\gamma \colon \bigoplus_{i \in I} \mathcal{H}_i \to \mathcal{H}$, $(\lambda_i \cdot x_i)_I \mapsto \sum \lambda_i \cdot x_i$ ist eine
-	wohldefinierte lineare Isometrie nach \ref{sub:719}. Außerdem erhält $\gamma$ das Skalarprodukt. $\gamma \enbrace*{\bigoplus_{i \in I} \mathcal{H}_i}$ ist vollständig,
+	\item[(i)$\Rightarrow$(ii):] Falls $0 \not= x \perp x_i$ für alle $i \in I$, so ist $\set{x_i}_{i \in I} \cup \set{\frac{1}{\norm{x}} \cdot x}$ ein Orthonormalsystem. 
+	\light
+	\item[(ii)$\Rightarrow$(iii):] $\gamma \colon \bigoplus_{i \in I} \mathcal{H}_i \to \mathcal{H}$ gegeben durch 
+	$(\lambda_i \cdot x_i)_I \mapsto \sum \lambda_i \cdot x_i$ ist eine wohldefinierte lineare Isometrie nach \ref{sub:718},\ref{sub:719} und \ref{sub:721}. Außerdem erhält 
+	$\gamma$ das Skalarprodukt. $\gamma \enbrace*{\bigoplus_{i \in I} \mathcal{H}_i}$ ist vollständig,\footnote{Das Bild eines vollständigen Raumes unter eine stetigen 
+	Abbildung $f \colon (X,d) \to (X'.d')$ mit $d(x,y) \le d'\enbrace[\big]{f(x),f(y)}$ ist vollständig.}
 	also abgeschlossen in $\mathcal{H}$. Falls $\gamma \enbrace*{\bigoplus_{i\in I} \mathcal{H}_o} \not= \mathcal{H}$, so ist nach \ref{sub:715} 
 	$\gamma \enbrace*{\bigoplus_{i \in I} \mathcal{H}_i}^\bot \not= \set{0}$. \light zu (ii). 
 	\item[(iii)$\Rightarrow$(iv):] Für $x \in \mathcal{H}$ existieren $\lambda_i \in \mathds{K}$,  sodass 
@@ -2588,19 +2604,25 @@ Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ 
 		\skal*{x_j}{x} = \skal*{x_j}{\sum_{i \in I} \lambda_i \cdot x_i} = \sum_{i \in I} \skal*{x_j}{\lambda_i \cdot x_i} = \sum_{i\in I} \lambda_i \cdot \delta_{ij} = \lambda_j
 	\end{align*}
 	Damit folgt (iv).
-	\item[(iv)$\Rightarrow$(v):] Klar.
+	\item[(iv)$\Rightarrow$(v):] Es gilt
+	\[
+		\skal*{x}{y} = \skal*{\sum_{i \in I}\skal*{x_i}{x} x_i}{\sum_{j \in I} \skal*{x_j}{y} x_j} = 
+		\sum_{i \in I} \sum_{j \in I} \overline{\skal*{x_i}{x}} \skal*{x_j}{y} \skal*{x_i}{x_j} = \sum_{i \in I} \skal*{x}{x_i} \skal*{x_i}{y}
+	\]
 	\item[(v)$\Rightarrow$(vi):] Klar.
-	\item[(vi)$\Rightarrow$(i):] Falls $x \perp x_i$ für alle $i \in I$, so gilt $\norm{x}^2= \sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 =0$. Also ist $x=0$ und damit das 
+	\item[(vi)$\Rightarrow$(i):] Falls $x \perp x_i$ für alle $i \in I$, so gilt $\norm{x}^2= \sum_{i \in I} \abs*{\skal*{x_i}{x}}^2 =0$. Also ist $x=0$ und damit ist das 
 	Orthonormalsystem maximal. \bewende
 \end{description}
 % subsection 722 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkungen zu Hilbertraumbasen und Mächtigkeit deren Mächtigkeit]{Bemerkung} % (fold)
 \label{sub:723}
 \begin{enumerate}[(i)]
 	\item Jeder Hilbertraum besitzt eine Basis (Lemma von Zorn).
 	\item Wegen \ref{sub:722} (iii) ist ein Hilbertraum bis auf isometrischen Isomorphismus durch die Mächtigkeit seiner Basis eindeutig bestimmt.
 	\item Jeder separable Hilbertraum ist isometrisch isomorph zu $\mathds{K}^n$ für ein $n \in \mathds{N}$ oder zu $\ell^2(\mathds{N})$.
+	
+	Dies folgt mit Aufgabe 2 von Blatt 12: Jeder separable Hilbertraum hat eine höchstens abzählbare Hilbertraumbasis. 
 \end{enumerate}
 % subsection 723 (end)
 
@@ -2609,7 +2631,7 @@ Sei $\mathcal{H}$ ein Hilbertraum und $\set{x_i}_{i \in I} \subset \mathcal{H}$ 
 \begin{enumerate}[(i)]
 	\item $\set{e_i}_{i \in \mathds{N}}$ bzw. $\set{e_i}_{i \in \mathds{Z}}$ bilden Basen von $\ell^2(\mathds{N})$ bzw. $\ell^2(\mathds{Z})$, wobei 
 	$e_i(j)= \delta_{ij}$ ist.
-	\item $\enbrace*{e^{2 \pi i n t}}_{n \in \mathds{N}}$ bilden eine Basis von $L^2([0,1])$.
+	\item $\enbrace*{e_n}_{n \in \mathds{N}}$, wobei $e_n(t)=\exp(2 \pi i n t)$ ist, definiert eine Basis von $L^2([0,1])$.
 \end{enumerate}
 % subsection 724 (end)
 
@@ -2625,6 +2647,7 @@ $T^{**} = T$. Ist $\mathcal{H}_3$ ein weiterer Hilbertraum und $S \in \mathcal{L
 \[
 	(S \circ T)^* = T^* \circ S^*
 \]
+$T^*$ heißt der zu $T$ \bet{adjungierte Operator}\index{adjungierter Operator}.
 \minisec{Beweis}
 Sei $\kappa_i \colon \mathcal{H}_i \to \mathcal{H}_i^*$ wie in \ref{sub:711}. Wir haben 
 \begin{align*}
@@ -2640,47 +2663,48 @@ $\kappa_1 ^{-1}$ ist konjugiert linear, also auch $T \mapsto T^*$. Weiter gilt
 \begin{align*}
 	(S T)^* = \kappa_1 ^{-1} (S T)^\tr \kappa_3 = \kappa_1 ^{-1} T^\tr S^\tr \kappa_3 = \kappa_1 ^{-1} T^\tr \kappa_2 \kappa_2 ^{-1} S^\tr \kappa_3 = T^* S^*
 \end{align*}
-Des weiteren erfüllt $T^{**} = (T^*)^* \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ für alle $x \in \mathcal{H}_1, y \in \mathcal{H}_2$
+Des Weiteren erfüllt $T^{**} = (T^*)^* \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ für alle $x \in \mathcal{H}_1, y \in \mathcal{H}_2$ die Gleichung
 \[
 	\skal*{T^{**} x}{y}_{\mathcal{H}_2} = \skal*{x}{T^* y}_{\mathcal{H}_1}
 \]
-Ebenso gilt $\skal*{T x}{y}_{\mathcal{H}_2}= \overline{\skal*{y}{T_x}_{\mathcal{H}_2}} = \overline{\skal*{T^* y}{x}_{\mathcal{H}_1}} = \skal*{x}{T^* y}_{\mathcal{H}_1}$ für
-alle $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$. Folglich muss $T^{**} x = T x$ gelten.\marginnote{gleiche Werte auf allen Elementen, Hahn-Bannach} \bewende 
+Ebenso gilt $\skal*{T x}{y}_{\mathcal{H}_2}= \overline{\skal*{y}{T_x}}_{\mathcal{H}_2} = \overline{\skal*{T^* y}{x}}_{\mathcal{H}_1} = \skal*{x}{T^* y}_{\mathcal{H}_1}$ für
+alle $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$. Folglich muss $T^{**} x = T x$ gelten.\bewende
 % subsection 725 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Darstellung der Operatornorm durch $\inf$ und $\sup$ für Hilberträume]{Proposition} % (fold)
 \label{sub:726}
 Für $T \in \mathcal{L}(\mathcal{H}_1, \mathcal{H}_2)$ gilt: 
 \begin{align*}
-	\norm{T} &= \inf \set[\lambda \in \mathds{R}]{ \abs*{\skal*{y}{T x}_{\mathcal{H}_2}} \le \lambda \cdot \norm{y} \cdot \norm{x} \forall x \in \mathcal{H}_1, y \in \mathcal{H}_2}  \\
-	&= \sup \set[\abs*{\skal*{y}{T x}}_{\mathcal{H}_2}]{ x \in \overline{B}_{\mathcal{H}_1}(0,1), y \in \overline{B}_{\mathcal{H}_2}(0,1)} 
+	\norm{T} &= \inf \set[\lambda \in \mathds{R}]{ \abs*{\skal*{y}{T x}_{\mathcal{H}_2}} \le \lambda \cdot \norm{y} \cdot \norm{x} \,\forall x \in \mathcal{H}_1, y \in 
+	\mathcal{H}_2\rule{0cm}{1em}}  \\
+	&= \sup \set[\abs*{\skal*{y}{T x}}_{\mathcal{H}_2}]{ x \in \overline{B}_{\mathcal{H}_1}(0,1), y \in \overline{B}_{\mathcal{H}_2}(0,1) \rule{0cm}{1em}} 
 \end{align*}
 \minisec{Beweis}
 Sei $\gamma$ die rechte Seite der oberen Gleichung.
 Es gilt $\abs*{\skal*{y}{Tx}_{\mathcal{H}_2}} \le \norm{T} \cdot \norm{y} \cdot \norm{x}$ für $x \in \mathcal{H}_1$, $y \in \mathcal{H}_2$, also ist 
 $\gamma \le \norm{T}$. Weiter gilt 
 \[
-	\norm{T x}^2 = \abs*{\skal*{T x}{T x}} \le \gamma \norm{T x} \cdot \norm{x} \le \gamma \cdot \norm{T} \cdot \norm{x}^2
+	\norm{T x}^2 = \abs*{\skal*{T x}{T x}} \le \gamma \cdot \norm{T x} \cdot \norm{x} \le \gamma \cdot \norm{T} \cdot \norm{x}^2
 \]
 also ist $\norm{T x} \le \sqrt{\gamma} \cdot \sqrt{\norm{T}} \cdot \norm{x}$ für $x \in \mathcal{H}_1$ und es folgt $\norm{T} \le \sqrt{\gamma} \cdot \sqrt{\norm{T}}$. Also
-gilt $\sqrt{\norm{T}} \le \sqrt{\gamma}$ $\Rightarrow $ $\norm{T} \le \gamma$ und somit insgesamt $\gamma = \norm{T}$.
+gilt $\sqrt{\norm{T}} \le \sqrt{\gamma}$, woraus $\norm{T} \le \gamma$ folgt und somit insgesamt $\gamma = \norm{T}$.
 Die zweite Gleichheit ist klar. \bewende
 % subsection 726 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Abschätzung von $\abs*{\skal*{y}{T x} + \skal*{T y}{x}}$]{Proposition} % (fold)
 \label{sub:727}
 Sei $\mathcal{H}$ ein $\mathds{K}$-Hilbertraum, $T\in \mathcal{L}(\mathcal{H})$ und $\beta\ge 0$. Falls $\abs*{\skal*{x}{T x}}\le\beta\norm{x}^2$ für alle $x\in\mathcal{H}$,
 so gilt für $x,y \in \mathcal{H}$
 \begin{align*}
 	\abs*{\skal*{y}{T x} + \skal*{T y}{x}} &\le 2 \beta \cdot \norm{x} \cdot \norm{y} \\
-	\shortintertext{Falls $\mathds{K}=\mathds{C}$, gilt sogar}
+	\shortintertext{Falls $\mathds{K}=\mathds{C}$ ist, gilt sogar}
 	\abs*{\skal*{y}{T x}} + \abs*{\skal*{T y}{x}} &\le 2 \beta \cdot \norm{x} \cdot \norm{y}
 \end{align*}
 In diesem Fall gilt also $T=0 \iff \skal*{x}{T x}=0$ für alle $x \in \mathcal{H}$.
 \minisec{Beweis}
 Für alle $x,y \in \mathcal{H} \setminus \set{0} $ gilt (für $0$ ist die Ungleichung trivial)
 \begin{align*}
-	2 \abs*{\skal*{y}{T x}+ \skal*{T y}{x}} = \abs*{\skal*{x+y}{T(x+y)} - \skal*{x-y}{T(x-y)}} &\le \beta \norm{x+y}^2 + \beta \norm{x-y}^2 \\
+	2 \abs[\big]{\skal*{y}{T x}+ \skal*{T y}{x}} = \abs[\big]{\skal*{x+y}{T(x+y)} - \skal*{x-y}{T(x-y)}} &\le \beta \norm{x+y}^2 + \beta \norm{x-y}^2 \\
 	&\le 2 \beta \enbrace*{\norm{x}^2 + \norm{y}^2}
 \end{align*}
 Ersetze $x$ durch $\enbrace*{\frac{\norm{y}}{\norm{x}} }^{\frac{1}{2}} \!\cdot x$ und $y$ durch $\enbrace*{\frac{\norm{x}}{\norm{y}}}^{\frac{1}{2}}\! \cdot y$. Dann folgt
@@ -2688,11 +2712,13 @@ Ersetze $x$ durch $\enbrace*{\frac{\norm{y}}{\norm{x}} }^{\frac{1}{2}} \!\cdot x
 	\bcancel{2}\cdot  \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \le \bcancel{2} \cdot \beta \cdot \enbrace[\Big]{\norm{x} \cdot \norm{y} + \norm{x} \cdot \norm{y}} 
 	= \bcancel{2} \cdot 2 \cdot \beta \cdot \norm{x} \cdot \norm{y} \label{eq:727} \tag{*}
 \end{equation*}
-Falls $\mathds{K}=\mathds{C}$, so gilt für $\rho, \sigma \in \mathds{R}_+$ geeignet \todo{das stimmt noch nicht so ganz \ldots}
+Damit ist die Aussage für $\mathds{K}=\mathds{R}$ gezeigt. Falls $\mathds{K}=\mathds{C}$ ist, so finden wir $\rho, \sigma \in \mathds{R}_+$, sodass\todo{Das stimmt noch 
+nicht so ganz. man bräuchte noch $e^{-i \sigma} \skal*{x}{T y} \in \mathds{R}$ oder Ähnliches, um die Konjugation loszuwerden. Solche $\rho,\sigma$ muss es aber nicht 
+unbedingt geben \ldots}
 \begin{align*}
 	\abs*{\skal*{y}{T x}} + \abs*{\skal*{T y}{x}} &= \abs*{ e^{i(\rho +\sigma)} \cdot \skal*{y}{T x} + e^{i(\rho-\sigma)} \cdot {\skal*{x}{T y}}} \\
 	&= \abs*{e^{i \rho} \cdot \enbrace*{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x} } + \skal*{e^{i \sigma} \cdot x}{T y} } } \\
-	&= \abs*{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x} } + \overline{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x}}}} \\
+	&= \abs*{\skal*{y}{T \enbrace*{e^{i \sigma} \cdot x} } + \overline{\skal*{Ty}{e^{i \sigma} \cdot x}}} \\
 	\ldots & \stackrel{\mathclap{\mbox{\scriptsize\eqref{eq:727}}}}{\le} 2 \cdot \beta \cdot \norm{x} \cdot \norm{y}  \bewende
 \end{align*}
 % subsection 727 (end)
@@ -2705,55 +2731,59 @@ $T \in \mathcal{L}(\mathcal{H})$ heißt \Index{selbstadjungiert}, falls $T=T^*$.
 \]
 % subsection 728 (end)
 
-\subsection{Bemerkung} % (fold)
+\subsection[Bemerkung: Operatornorm von selbstadjungierten Operatoren als ein Infimum]{Bemerkung} % (fold)
 \label{sub:729}
 Für $T$ selbstadjungiert gilt 
 \[
 	\norm{T}= \inf \set[\lambda \in \mathds{R}]{\abs*{\skal*{x}{T x}} \le \lambda \norm{x}^2 \text{ für alle } x \in \mathcal{H}}  
 \]
 \minisec{Beweis}
-Sei $\beta$ das Infimum auf der rechten Seite. Dann gilt
+Sei $\beta$ das Infimum auf der rechten Seite. Dann gilt für $x,y \in \mathcal{H}$
 \begin{align*}
-	2 \cdot \abs*{\skal*{x}{T x}} = \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \stackrel{\mbox{\scriptsize \ref{sub:727}}}{\le} 2 \cdot \beta \norm{x} \cdot \norm{y} 
+	2 \cdot \abs*{\skal*{y}{T x}} = \abs*{\skal*{y}{T x} + \skal*{T y}{x}} \stackrel{\mbox{\scriptsize \ref{sub:727}}}{\le} 2 \cdot \beta \cdot \norm{x} \cdot \norm{y} 
 \end{align*}
-Nach \ref{sub:726} folgt $\norm{T} \le \beta \le \norm{T}$. \bewende
+Nach \ref{sub:726} folgt nun $\norm{T} \le \beta \le \norm{T}$. \bewende
 % subsection 729 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Charakterisierung von selbstadjungiert im komplexen Fall]{Proposition} % (fold)
 \label{sub:730}
 Falls $\mathds{K}=\mathds{C}$ und $T \in \mathcal{L}(\mathcal{H})$, so gilt
 \[
 	T \text{ selbstadjungiert } \iff \skal*{x}{T x} \in \mathds{R} \text{ für alle } x \in \mathcal{H}
 \]
 \minisec{Beweis}
-Um "$\Rightarrow$" zu zeigen, betrachte $\skal*{x}{T x} = \skal*{T x}{x} = \overline{\skal*{x}{T x}}$ für $x \in \mathcal{H}$. Für die Rückrichtung betrachte
+Die Hinrichtung folgt aus $\skal*{x}{T x} = \skal*{T x}{x} = \overline{\skal*{x}{T x}}$ für $x \in \mathcal{H}$. Für die Rückrichtung betrachte
 $\skal*{x}{T x} = \skal*{T x}{x} = \skal*{x}{T^* x}$. Dann ist $\skal*{x}{(T-T^*)x}=0$ für $x \in \mathcal{H}$. Es folgt dann $T- T^*=0$. \bewende 
 % subsection 730 (end)
 
-\subsection{Definition und Proposition} % (fold)
+\subsection[Definition und Proposition: Partielle Ordnung auf den selbstadjungierten Operatoren]{Definition und Proposition} % (fold)
 \label{sub:731}
 Seien $R,S,T \in \mathcal{L}(\mathcal{H})$ selbstadjungiert. Wir schreiben 
 \begin{itemize}
 	\item $T \ge 0$, falls $\skal*{x}{T x} \ge 0$ für alle $x \in \mathcal{H}$ gilt.
 	\item $T \ge S$, falls $T-S \ge 0$
 \end{itemize}
-"$\ge$" ist eine partielle Ordnung auf $\mathcal{L}(\mathcal{H})_\sa$, das heißt $T \ge T$; $T \ge S$, $S \ge T \Rightarrow S=T$, $T \ge S, S \ge R \Rightarrow T \ge R$ (folgt mit \ref{sub:729}).
-Es gilt $-\norm{T} \id_{\mathcal{H}} \le T  \le \norm{T} \cdot \id_{\mathcal{H}}$. Falls $T \ge 0$ ist, so gilt 
+\enquote{$\ge$} ist eine partielle Ordnung auf $\mathcal{L}(\mathcal{H})_\sa$. Das heißt 
+\[
+	T \ge T \qquad T \ge S, S \ge T \Longrightarrow S=T \qquad T \ge S, S \ge R \Longrightarrow T \ge R\marginnote{folgt mit \ref{sub:729}}
+\]
+Es gilt $-\norm{T} \cdot \id_{\mathcal{H}} \le T  \le \norm{T} \cdot \id_{\mathcal{H}}$. Falls $T \ge 0$ ist, so gilt 
 \begin{equation*}
 	\abs*{\skal*{y}{T x}}^2 \le  \skal*{x}{T x} \cdot \skal*{y}{T y} \label{eq:731} \tag{*}
 \end{equation*}
 insbesondere gilt $\skal*{x}{T x}=0 \iff T x=0$
 \minisec{Beweis}
-\emph{Übung, für die letzte Aussage benutze \ref{sub:74} und: $(y,x) \mapsto \skal*{y}{T x}$ ist positiv semidefinit hermitesch.}
+\emph{Übung, siehe Anhang \ref{sub:bew_731}.}\bewende
 % subsection 731 (end)
 
-\subsection{Satz} % (fold)
+\subsection[Satz: Konvergenz eines monoton wachsenden, beschränkten Netzes selbstadjungierter Operatoren]{Satz} % (fold)
 \label{sub:732}
 Sei $(T_j)_{j \in I} \subset \mathcal{L}(\mathcal{H})_\sa$ ein monoton wachsendes und beschränktes Netz selbstadjungierter Operatoren. Dann konvergiert $(T_j)_{j \in I}$
-punktweise gegen ein $T \in \mathcal{L}(\mathcal{H})_\sa$, das heißt $T_j x \to T x$ in Norm für jedes $x \in \mathcal{H}$. Wir schreiben auch $T_j \xrightarrow{\so} T$,
-d.h. $(T_j)_{j \in I}$ konvergiert gegen $T$ in der \bet{starken Operatortopologie}\index{starke Operatortopologie}.
+punktweise gegen ein $T \in \mathcal{L}(\mathcal{H})_\sa$, das heißt $T_j x$ konvergiert gegen $T x$ in Norm für jedes $x \in \mathcal{H}$. 
+
+\noindent Wir schreiben auch $T_j \xrightarrow{\so} T$, d.h. $(T_j)_{j \in I}$ konvergiert gegen $T$ in der \bet{starken Operatortopologie}\index{starke Operatortopologie}.
 \minisec{Beweis}
-Nach Polarisierung (vergleiche \hyperref[sub:78]{Bemerkung \ref*{sub:78}}) gilt (für $\mathds{K}=\mathds{C}$)
+Nach Polarisierung (vergleiche \hyperref[sub:78]{Bemerkung \ref*{sub:78}}) gilt für $\mathds{K}=\mathds{C}$ \todo{Beweis vervollständigen/korrigieren}
 \[
 	\skal[\big]{x}{T_j y} = \frac{1}{4} \enbrace[\Big]{\skal[\big]{x+y}{T_j(x+y)} + \skal[\big]{x-y}{T_j(x-y)} + i \skal[\big]{i x +y}{T_j(ix +y)} 
 	- i \skal[\big]{i x -y}{T_j(ix-y)}}
@@ -2787,7 +2817,7 @@ falls $j'$ groß genug ist. Also $\norm{T_j(x-)- T_{j'}(x)}< \varepsilon$ falls 
 
 \subsection[Definition: Spektrum eines Bachnachraumes]{Definition} % (fold)
 \label{sub:81}
-Sei $X$ ein $\mathds{K}$-Banachraum und $T \in \mathcal{L}(X)$. Wir definieren das \Index{Spektrum} von $T$ als \todo{RevChap8}
+Sei $X$ ein $\mathds{K}$-Banachraum und $T \in \mathcal{L}(X)$. Wir definieren das \Index{Spektrum} von $T$ als
 \[
 	\sigma(T) := \set[\lambda \in \mathds{K}]{T- \lambda \cdot \id_X \text{ ist nicht invertierbar}} \subset \mathds{K} \marginnote{auch $\spec(T)$} 
 \]
@@ -2805,7 +2835,7 @@ die \Index{Resolvente} von $T$ in $\lambda \in \rho(T)$.
 \end{enumerate}
 % subsection 82 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Bijektivität von Operatoren in einer Umgebung eines bijektiven Operators]{Proposition} % (fold)
 \label{sub:83}
 Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). Falls für $S \in \mathcal{L}(X,Y)$ gilt 
 \[
@@ -2813,23 +2843,25 @@ Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). 
 \]
 so ist auch $S$ bijektiv.
 \minisec{Beweis}
-Es gilt $S= T \enbrace[\big]{\id_X - T ^{-1}(T-S)}$. Für $k \le l$ gilt mit $C := \norm{T ^{-1}} \cdot \norm{T-S} < 1$ 
+
+Es gilt $S= T \enbrace[\big]{\id_X - T ^{-1}(T-S)}$. Setze $C := \norm{T ^{-1}} \cdot \norm{T-S} <1$.\marginnote{Ausführlicher Beweis im Anhang \ref{sub:bew_83}}
+Für $k \le l$ gilt dann 
 \begin{align*}
-	\norm{\sum_{n=k}^{l} \enbrace[\big]{T^{-1}(T-S)}^n } \le \sum_{n=k}^{l} \norm{\enbrace[\big]{T ^{-1}(T-S)}^n} \le \sum_{n=k}^{l} \norm{T ^{-1}} \cdot \norm{T-S}^n
+	\norm{\sum_{n=k}^{l} \enbrace[\big]{T^{-1}(T-S)}^n } \le \sum_{n=k}^{l} \norm{\enbrace[\big]{T ^{-1}(T-S)}^n} \le \sum_{n=k}^{l} \norm{T ^{-1}}^n \cdot \norm{T-S}^n
 	= \sum_{n=k}^{l} C^n      
 \end{align*}
 also ist $\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n$ konvergent in $\mathcal{L}(X,X)$. Weiter ist 
 $\enbrace*{\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n} T ^{-1} \in \mathcal{L}(Y,X)$ das Inverse von $S$ (warum?). \bewende
 % subsection 83 (end)
 
-\subsection{Corollar} % (fold)
+\subsection[Corollar: Die Resolventenmenge von $T \in \mathcal{L}(X)$ ist offen in $\mathds{K}$]{Corollar} % (fold)
 \label{sub:84}
-Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.
+Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.\todo{RevChap8}
 % subsection 84 (end)
 
 \subsection[Satz: Die Resolventenabbildung ist lokal durch eine Potenzreihe gegeben]{Satz} % (fold)
 \label{sub:85}
-Sei $X$ ein Banachraum und $T in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
+Sei $X$ ein Banachraum und $T \in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
 lokal durch eine Potenzreihe mit Koeffizienten in $\mathcal{L}(X)$ gegeben. Mit anderen Worten $R(T,\cdot )$ ist lokal analytisch\index{analytisch}.
 \minisec{Beweis}
 Sei $\lambda_0 \in \rho(T)$. Setze $S_0 := T- \lambda_0 \cdot \id_X$, $S_\lambda := T- \lambda \cdot \id_X$, $\lambda \in \rho(T)$. Sei $\lambda \in \rho(T)$ mit 
@@ -3233,6 +3265,62 @@ $l \in \mathds{N}$ mit $\abs*{f_n(x)} > \frac{1}{l}$, also $x \in E_{l,n} \subse
 $\set[x \in X]{f_n(x)=\infty}$ nicht. Also gilt die Gleichung fast überall. \bewende
 % subsection blatt7_aufg2 (end)
 
+\subsection{Beweis der Aussagen aus \ref{sub:731}} % (fold)
+\label{sub:bew_731}
+Wir zeigen zunächst $T \le \norm{T} \cdot \id_{\mathcal{H}}$
+\[
+	\skal*{x}{\norm{T} \cdot x - T x} = \norm{T}\cdot \skal*{x}{x} - \skal*{x}{T x} \stackrel{\mbox{\scriptsize \ref{sub:729}}}{\ge} \norm{T} \cdot \norm{x}^2 - 
+	\norm{T} \cdot \norm{x}^2 = 0  
+\]
+Genauso folgt $-\norm{T} \cdot \id_{\mathcal{H}} \le T$ aus der Abschätzung $\abs*{\skal*{x}{Tx}} \le \norm{T} \cdot \norm{x}^2$ (\ref{sub:729})
+\[
+	\skal[\big]{x}{T x - (- \norm{T}\cdot x)} = \skal*{x}{T x} + \norm{T}\cdot \skal*{x}{x} \ge 0 
+\]
+Die Abbildung $\skal*{\cdot}{\cdot}_T \colon  (y,x) \mapsto \skal*{y}{T x}$ ist positiv-semidefinit hermitesch, da $T$ selbstadjungiert ist und $T\ge 0$ gilt. Also können 
+wir die \hyperref[sub:74]{Cauchy-Schwarz-Ungleichung} anwenden:
+\[
+	\abs*{\skal*{y}{Tx}}^2=\abs*{\skal*{y}{x}_T}^2 \le \skal*{y}{y}_T \cdot \skal*{x}{x}_T = \skal*{y}{T y} \cdot \skal*{x}{T x}
+\]
+Damit ist auch die letzte Aussage bewiesen. \bewende
+% subsection bew_731 (end)
+
+\subsection{Ausführlicher Beweis zu \ref{sub:83}, Aufgabe 2 von Blatt 5} % (fold)
+\label{sub:bew_83}
+Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). Falls für $S \in \mathcal{L}(X,Y)$ gilt 
+\[
+	\norm[\mathcal{L}(X,Y)]{T-S} < \norm[\mathcal{L}(Y,X)]{T^{-1}}^{-1}, 
+\]
+so ist auch $S$ bijektiv.
+\minisec{Über Neumann-Reihen}
+Für $T \in \mathcal{L}(X,X)$ ist die \Index{Neumann-Reihe} definiert als 
+\[
+	\sum_{n=0}^{\infty} T^n
+\]
+Sie hat unter anderem die folgenden wichtigen Eigenschaften\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Neumann-Reihe}}
+\begin{enumerate}[(i)]
+	\item Wenn $\sum_{n=0}^{\infty} T^n$ bezüglich $\norm{\cdot}$ konvergiert, so ist $\id_X - T$ invertierbar mit $(\id_X-T)^{-1}= \sum_{n=0}^{\infty}T^n$
+	\item Die Reihe konvergiert, falls $(X,\norm{\cdot})$ ein Banachraum ist und $\norm{T}<1$ gilt.
+\end{enumerate}
+Ersteres sieht man leicht, denn wenn die Summe konvergiert, dann gilt
+\[
+	\lim_{k \to \infty} \enbrace*{\id_X -T} \enbrace*{\sum_{n=0}^{k} T^n} = \lim_{k \to \infty} \enbrace*{\sum_{n=0}^{k} T^n - \sum_{n=0}^{k} T^{n+1}} 
+	= \lim_{k \to \infty} \enbrace*{\id_X - T^{k+1}} = \id_X
+\]
+Für die zweite Aussage zeigt man, dass $\sum_{n=0}^{\infty}\norm{T^n}$ konvergiert:
+\[
+	\sum_{n=0}^{k} \norm{T^n} \le \sum_{n=0}^{k} \norm{T}^n \le \sum_{n=0}^{\infty} \norm{T}^n \stackrel{\norm{T}<1}{=} \frac{1}{1- \norm{T}}< \infty    
+\]
+Jetzt muss man nur noch zeigen, dass in Banachräumen aus absoluter Konvergenz normale Konvergenz folgt, um das Argument abzuschließen.
+\minisec{Beweis der der eigentlichen Aussage}
+Es gilt $S=T-(T-S)=T \enbrace*{\id_X - T ^{-1}(T-S)}$. Wir erhalten nun
+\begin{align*}
+	\norm{T ^{-1}(T-S)} = \sup_{x \in X} \norm[X]{T ^{-1} \enbrace*{T x- S x} } \le \sup_{x \in X} \norm{T ^{-1}} \cdot \norm[Y]{T x- S x}
+	= \norm{T ^{-1}} \cdot \norm{T-S} < 1  
+\end{align*}
+Also ist $\id_X - T ^{-1}(T-S)$ nach den obigen Eigenschaften der Neumann-Reihe invertierbar. Da $T$ invertierbar ist, ist $S= T \enbrace*{\id_X - T ^{-1}(T-S)}$ als Komposition 
+invertierbarer Abbildungen auch invertierbar mit $S ^{-1} = \enbrace*{\sum_{n=0}^\infty \enbrace*{T ^{-1}(T-S)}^n} T ^{-1}$. \bewende
+% subsection ausfuhrlicher_beweis_zu_ref_sub_83 (end)
+
 % section anhang (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
@@ -3241,11 +3329,4 @@ $\set[x \in X]{f_n(x)=\infty}$ nicht. Also gilt die Gleichung fast überall. \be
 \listoffigures
 \todototoc
 \listoftodos[Todo's und andere Baustellen]
-\end{document}=======
-	$x,y \in \overline{B}(x_n, \varepsilon_n) $ für alle $ >>>>>>> External Changes
-=======
-		\norm{S T} = \sup_{\norm[X]{x}=1} \norm[X]{S(T(x))} \le \sup_{\norm[X]{x}=1} \enbrace[\big]{\norm{S} \cdot \norm[>>>>>>> External Changes
-=======
-	$x,y \in \overline{B}(x_n, \varepsilon_n) $ für alle $ >>>>>>> External Changes
-=======
-Zu $x \in>>>>>>> External Changes
+\end{document}
