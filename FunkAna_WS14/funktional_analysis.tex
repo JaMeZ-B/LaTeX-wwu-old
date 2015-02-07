@@ -2817,7 +2817,7 @@ falls $j'$ groß genug ist. Also $\norm{T_j(x-)- T_{j'}(x)}< \varepsilon$ falls 
 
 \subsection[Definition: Spektrum eines Bachnachraumes]{Definition} % (fold)
 \label{sub:81}
-Sei $X$ ein $\mathds{K}$-Banachraum und $T \in \mathcal{L}(X)$. Wir definieren das \Index{Spektrum} von $T$ als \todo{RevChap8}
+Sei $X$ ein $\mathds{K}$-Banachraum und $T \in \mathcal{L}(X)$. Wir definieren das \Index{Spektrum} von $T$ als
 \[
 	\sigma(T) := \set[\lambda \in \mathds{K}]{T- \lambda \cdot \id_X \text{ ist nicht invertierbar}} \subset \mathds{K} \marginnote{auch $\spec(T)$} 
 \]
@@ -2835,7 +2835,7 @@ die \Index{Resolvente} von $T$ in $\lambda \in \rho(T)$.
 \end{enumerate}
 % subsection 82 (end)
 
-\subsection{Proposition} % (fold)
+\subsection[Proposition: Bijektivität von Operatoren in einer Umgebung eines bijektiven Operators]{Proposition} % (fold)
 \label{sub:83}
 Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). Falls für $S \in \mathcal{L}(X,Y)$ gilt 
 \[
@@ -2843,23 +2843,25 @@ Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). 
 \]
 so ist auch $S$ bijektiv.
 \minisec{Beweis}
-Es gilt $S= T \enbrace[\big]{\id_X - T ^{-1}(T-S)}$. Für $k \le l$ gilt mit $C := \norm{T ^{-1}} \cdot \norm{T-S} < 1$ 
+
+Es gilt $S= T \enbrace[\big]{\id_X - T ^{-1}(T-S)}$. Setze $C := \norm{T ^{-1}} \cdot \norm{T-S} <1$.\marginnote{Ausführlicher Beweis im Anhang \ref{sub:bew_83}}
+Für $k \le l$ gilt dann 
 \begin{align*}
-	\norm{\sum_{n=k}^{l} \enbrace[\big]{T^{-1}(T-S)}^n } \le \sum_{n=k}^{l} \norm{\enbrace[\big]{T ^{-1}(T-S)}^n} \le \sum_{n=k}^{l} \norm{T ^{-1}} \cdot \norm{T-S}^n
+	\norm{\sum_{n=k}^{l} \enbrace[\big]{T^{-1}(T-S)}^n } \le \sum_{n=k}^{l} \norm{\enbrace[\big]{T ^{-1}(T-S)}^n} \le \sum_{n=k}^{l} \norm{T ^{-1}}^n \cdot \norm{T-S}^n
 	= \sum_{n=k}^{l} C^n      
 \end{align*}
 also ist $\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n$ konvergent in $\mathcal{L}(X,X)$. Weiter ist 
 $\enbrace*{\sum_{n=0}^{\infty} \enbrace[\big]{T ^{-1}(T-S)}^n} T ^{-1} \in \mathcal{L}(Y,X)$ das Inverse von $S$ (warum?). \bewende
 % subsection 83 (end)
 
-\subsection{Corollar} % (fold)
+\subsection[Corollar: Die Resolventenmenge von $T \in \mathcal{L}(X)$ ist offen in $\mathds{K}$]{Corollar} % (fold)
 \label{sub:84}
-Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.
+Für $T \in \mathcal{L}(X)$ ist die Resolventenmenge offen in $\mathds{K}$.\todo{RevChap8}
 % subsection 84 (end)
 
 \subsection[Satz: Die Resolventenabbildung ist lokal durch eine Potenzreihe gegeben]{Satz} % (fold)
 \label{sub:85}
-Sei $X$ ein Banachraum und $T in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
+Sei $X$ ein Banachraum und $T \in \mathcal{L}(X)$. Dann ist die \Index{Resolventenabbildung} $R(T,\cdot ) \colon \rho(T) \to \mathcal{L}(X)$, $\lambda \mapsto R(T,\lambda)$
 lokal durch eine Potenzreihe mit Koeffizienten in $\mathcal{L}(X)$ gegeben. Mit anderen Worten $R(T,\cdot )$ ist lokal analytisch\index{analytisch}.
 \minisec{Beweis}
 Sei $\lambda_0 \in \rho(T)$. Setze $S_0 := T- \lambda_0 \cdot \id_X$, $S_\lambda := T- \lambda \cdot \id_X$, $\lambda \in \rho(T)$. Sei $\lambda \in \rho(T)$ mit 
@@ -3282,6 +3284,43 @@ wir die \hyperref[sub:74]{Cauchy-Schwarz-Ungleichung} anwenden:
 Damit ist auch die letzte Aussage bewiesen. \bewende
 % subsection bew_731 (end)
 
+\subsection{Ausführlicher Beweis zu \ref{sub:83}, Aufgabe 2 von Blatt 5} % (fold)
+\label{sub:bew_83}
+Seien $X,Y$ Banachräume und $T \in \mathcal{L}(X,Y)$ bijektiv (also injektiv). Falls für $S \in \mathcal{L}(X,Y)$ gilt 
+\[
+	\norm[\mathcal{L}(X,Y)]{T-S} < \norm[\mathcal{L}(Y,X)]{T^{-1}}^{-1}, 
+\]
+so ist auch $S$ bijektiv.
+\minisec{Über Neumann-Reihen}
+Für $T \in \mathcal{L}(X,X)$ ist die \Index{Neumann-Reihe} definiert als 
+\[
+	\sum_{n=0}^{\infty} T^n
+\]
+Sie hat unter anderem die folgenden wichtigen Eigenschaften\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Neumann-Reihe}}
+\begin{enumerate}[(i)]
+	\item Wenn $\sum_{n=0}^{\infty} T^n$ bezüglich $\norm{\cdot}$ konvergiert, so ist $\id_X - T$ invertierbar mit $(\id_X-T)^{-1}= \sum_{n=0}^{\infty}T^n$
+	\item Die Reihe konvergiert, falls $(X,\norm{\cdot})$ ein Banachraum ist und $\norm{T}<1$ gilt.
+\end{enumerate}
+Ersteres sieht man leicht, denn wenn die Summe konvergiert, dann gilt
+\[
+	\lim_{k \to \infty} \enbrace*{\id_X -T} \enbrace*{\sum_{n=0}^{k} T^n} = \lim_{k \to \infty} \enbrace*{\sum_{n=0}^{k} T^n - \sum_{n=0}^{k} T^{n+1}} 
+	= \lim_{k \to \infty} \enbrace*{\id_X - T^{k+1}} = \id_X
+\]
+Für die zweite Aussage zeigt man, dass $\sum_{n=0}^{\infty}\norm{T^n}$ konvergiert:
+\[
+	\sum_{n=0}^{k} \norm{T^n} \le \sum_{n=0}^{k} \norm{T}^n \le \sum_{n=0}^{\infty} \norm{T}^n \stackrel{\norm{T}<1}{=} \frac{1}{1- \norm{T}}< \infty    
+\]
+Jetzt muss man nur noch zeigen, dass in Banachräumen aus absoluter Konvergenz normale Konvergenz folgt, um das Argument abzuschließen.
+\minisec{Beweis der der eigentlichen Aussage}
+Es gilt $S=T-(T-S)=T \enbrace*{\id_X - T ^{-1}(T-S)}$. Wir erhalten nun
+\begin{align*}
+	\norm{T ^{-1}(T-S)} = \sup_{x \in X} \norm[X]{T ^{-1} \enbrace*{T x- S x} } \le \sup_{x \in X} \norm{T ^{-1}} \cdot \norm[Y]{T x- S x}
+	= \norm{T ^{-1}} \cdot \norm{T-S} < 1  
+\end{align*}
+Also ist $\id_X - T ^{-1}(T-S)$ nach den obigen Eigenschaften der Neumann-Reihe invertierbar. Da $T$ invertierbar ist, ist $S= T \enbrace*{\id_X - T ^{-1}(T-S)}$ als Komposition 
+invertierbarer Abbildungen auch invertierbar mit $S ^{-1} = \enbrace*{\sum_{n=0}^\infty \enbrace*{T ^{-1}(T-S)}^n} T ^{-1}$. \bewende
+% subsection ausfuhrlicher_beweis_zu_ref_sub_83 (end)
+
 % section anhang (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
@@ -3290,11 +3329,4 @@ Damit ist auch die letzte Aussage bewiesen. \bewende
 \listoffigures
 \todototoc
 \listoftodos[Todo's und andere Baustellen]
-\end{document}=======
-	$x,y \in \overline{B}(x_n, \varepsilon_n) $ für alle $ >>>>>>> External Changes
-=======
-		\norm{S T} = \sup_{\norm[X]{x}=1} \norm[X]{S(T(x))} \le \sup_{\norm[X]{x}=1} \enbrace[\big]{\norm{S} \cdot \norm[>>>>>>> External Changes
-=======
-	$x,y \in \overline{B}(x_n, \varepsilon_n) $ für alle $ >>>>>>> External Changes
-=======
-Zu $x \in>>>>>>> External Changes
+\end{document}
