@@ -1908,7 +1908,7 @@ $\lambda >0$ mit $x=\lambda \cdot y$.
 \minisec{Beweis}
 Seien $x,y$ wie angegeben. Ohne Einschränkungen sei $\norm{x}=1$. Wir setzen nun $x' := \frac{x+y}{\norm{x+y}}$, $a := \frac{x+x'}{2}$, $\alpha := \norm{a}$ und 
 $\beta := \norm{x+y-a}$.
-\begin{figure}{H}
+\begin{figure}[t]
 	\centering{
 	\begin{tikzpicture}[scale=3, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray}]
 		\coordinate (0) at (0,0);
@@ -2073,7 +2073,7 @@ Abschätzung kommt \ldots }
 \[
 	\abs*{f(\varphi_m)- \varphi_m(x_n)} < \frac{1}{2(n+1)} \quad \text{also auch } \quad 1- \frac{3}{2(m+1)}\le \varphi_m(x_n) \le 1
 \]
-Behauptung: $(x_n)_\mathds{N}$ ist Cauchy. Es gilt für $n \ge m$
+Behauptung: $(x_n)_\mathds{N}$ ist Cauchy. Es gilt für $n \ge m$ \todo{das muss mit dem Zeilenabstand doch auch noch besser gehen}
 \begin{align*}
 	\underbrace{1- \frac{3}{2(m+1)}  + 1 - \frac{3}{2(m+1)}}_{\xrightarrow{n,m \to \infty} 2} \le \varphi_m(x_m) + \varphi_m(x_n) = \varphi_m(x_m+x_n) &\le \norm{\varphi_m} \cdot \norm[X]{x_m+x_n} \\
 	&\le \norm[X]{x_m} + \norm[X]{x_n} = 2  
@@ -2111,11 +2111,11 @@ Sei $(X,\Sigma,\mu)$ ein Maßraum und $\frac{1}{p} + \frac{1}{q}=1$. Dann ist di
 ein isometrischer Isomorphismus.
 \minisec{Beweis}
 $\iota_p$ ist eine lineare Isometrie nach Proposition \ref{sub:410}, wir müssen also nur Surjektivität zeigen. $\iota_p \enbrace*{L^p(\mu)}$ ist vollständig, also 
-abgeschlossen in $L^q(\mu)^*$. Falls $\iota_p(L^p(\mu)) \subsetneq L^q(\mu)$, so existiert nach \hyperref[sub:227]{Hahn-Banach} ein $0 \not= \psi \in L^q(\mu)^{**}$ mit
+abgeschlossen in $L^q(\mu)^*$. Falls $\iota_p(L^p(\mu)) \subsetneq L^q(\mu)^*$, so existiert nach \hyperref[sub:227]{Hahn-Banach} ein $0 \not= \psi \in L^q(\mu)^{**}$ mit
 $\psi \enbrace[\big]{\iota_p(L^p(\mu))} =0$. $L^q(\mu)$ ist reflexiv nach \ref{sub:610}, also existiert $g \in L^q(\mu)$ mit $\iota(g)=\psi$, d.h. 
 $\varphi(g)= \iota(g)(\varphi)=\psi(\varphi)$ für alle $\varphi \in L^q(\mu)^*$. Für jedes $f\in L^p(\mu)$ gilt dann
 \[
-	0 = \psi \enbrace*{\iota_p(f)} = \iota_p(f)(g) = \int\! f g \, \mathd\mu \enspace \Longrightarrow \enspace g=0 \enspace\light
+	0 = \psi \enbrace[\big]{\iota_p(f)} = \iota_p(f)(g) = \int\! f g \, \mathd\mu \enspace \Longrightarrow \enspace g=0 \enspace\light
 \]
 Also kann ein solches $\psi$ nicht existieren und es folgt die Surjektivität von $\iota_p$. \bewende
 % subsection 611 (end)
@@ -2123,7 +2123,7 @@ Also kann ein solches $\psi$ nicht existieren und es folgt die Surjektivität vo
 \subsection[Bemerkung zur Gültigkeit von Satz \ref{sub:611} für $p\in \set{1,\infty}$]{Bemerkung} % (fold)
 \label{sub:612}
 \begin{itemize}
-	\item Weiter kann man zeigen, dass die kanonische Abbildung 
+	\item Weiter kann man zeigen, dass die kanonische Abbildung\marginnote{Ich meine irgendwo gelesen zu haben, dass dafür das Maß aber $\sigma$-endlich sein muss} 
 	\[
 		\iota_\infty \colon L^\infty(\mu) \to L^1(\mu)^* \enspace,  \quad \iota_\infty(f)(g) = \int\! fg \, \mathd\mu
 	\]
@@ -2165,7 +2165,7 @@ Für eine hermitesche Form $\skal*{\cdot}{\cdot}$ und $x,x',y \in X$, $\alpha \i
 \begin{enumerate}[(i)]
 	\item Auf $\mathds{C}^n$ definiert $\skal*{\underline{x}}{\underline{y}} := \sum_{i=1}^{n} \overline{x}_i \cdot y_i$ ein Skalarprodukt.
 	\item Auf $L^2(\mathds{R})$ definiert $\skal*{f}{g} := \int\! f  g \,\mathd\lambda$ ein Skalarprodukt.
-	Auf 
+	Auf\marginnote{wohldefiniert nach Hölder}
 	\[
 		L^2_\mathds{C}(\mathds{R}) := \set[f \colon \mathds{R} \to \mathds{C}]{\re f \text{ und } \im f \text{ messbar}, \int \! \bar{f} f\, \mathd\lambda < \infty } / \mathcal{N}
 	\]
@@ -2336,6 +2336,7 @@ $\overline{\mathcal{H}}^{\scriptscriptstyle\norm{\cdot}}$ ist wegen Stetigkeit h
 \subsection[Proposition: Isometrischer Isomorphismus $\kappa \colon \mathcal{H} \to \mathcal{H}^*$]{Proposition} % (fold)
 \label{sub:711}
 Sei $\mathcal{H}$ ein Hilbertraum und $\kappa \colon \mathcal{H} \to \mathcal{H}^*$ definiert durch $\kappa(x)(y) := \skal*{x}{y}$, $x,y \in \mathcal{H}$. Dann gilt:
+\marginnote{Diese Aussage wird manchmal als Rieszscher Darstellungssatz bezeichnet}
 \begin{enumerate}[(i)]
 	\item $\kappa$ ist \Index{konjugiert linear}, das heißt $\kappa(\alpha x+ \alpha' x') = \overline{\alpha} \kappa(x) + \overline{\alpha'}\kappa(x')$ mit 
 	$x,x' \in \mathcal{H}$, $\alpha, \alpha' \in \mathds{K}$.
@@ -2442,7 +2443,7 @@ Sei $\mathcal{H}$ ein Hilbertraum.
 \subsection[Proposition: Für einen abgeschlossenen Unterraum $\mathcal{H}_0$ gilt $\mathcal{H}= \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$]{Proposition} % (fold)
 \label{sub:715}
 Sei $\mathcal{H}$ ein Hilbertraum, $\mathcal{H}_0 \subset \mathcal{H}$ ein abgeschlossener Unterraum. Dann gilt $\mathcal{H}_0 \cap \mathcal{H}_0^\bot = \set{0}$ und 
-$\mathcal{H}_0 + \mathcal{H}_0^\bot = \mathcal{H}$. Wir schreiben in diesem Fall auch $\mathcal{H} = \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$.
+$\mathcal{H}_0 + \mathcal{H}_0^\bot = \mathcal{H}$. Wir schreiben in diesem Fall auch $\mathcal{H} = \mathcal{H}_0 \oplus \mathcal{H}_0^\bot$ (\Index{Direkte Summe}).
 \minisec{Beweis}
 $\mathcal{H}_0 \cap \mathcal{H}_0^\bot= \set{0}$ ist klar. Sei $x \in \mathcal{H}$. Dann ist $\kappa(x) \in \mathcal{H}^*$ gegeben durch 
 $\kappa(x)(y)=\skal*{x}{y}$ und es ist $\kappa(x)|_{\mathcal{H}_0} \in \mathcal{H}_0^*$. Nun ist $\mathcal{H}_0 \subset \mathcal{H}$ abgeschlossen und somit selbst ein 
