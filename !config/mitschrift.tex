@@ -4,8 +4,9 @@
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
 \usepackage{letltxmacro}
+\usepackage{ifthen}
 
-% Compiler abhaengige IFs
+%-- Compiler-abhaengige IFs
 \usepackage{ifxetex,ifluatex}
 \newif\ifxetexorluatex
 \ifxetex
@@ -64,33 +65,36 @@
 
 
 
-%-- Mathe
+%-- Mathesymbole etc.
 \usepackage{mathtools} % beinhaltet amsmath
 \mathtoolsset{showonlyrefs, centercolon}
 \newtagform{brackets}[\textbf]{[}{]}
 \usetagform{brackets}
-\usepackage{wasysym}
-\usepackage{amssymb} %zusätzliche Symbole
-\usepackage{latexsym} %zusätzliche Symbole
-\usepackage{stmaryrd} %für Blitz
-\usepackage{nicefrac} %schräge Brüche
-\usepackage{cancel} %Befehle zum Durchstreichen
-\usepackage{mathdots}
-% \usepackage{bm}
+\usepackage{wasysym} % zusätzliche Symbole
+\usepackage{amssymb} % zusätzliche Symbole
+\usepackage{latexsym} % zusätzliche Symbole
+\usepackage{stmaryrd} % für Blitz
+\usepackage{nicefrac} % schräge Brüche
+\usepackage{cancel} % Befehle zum Durchstreichen
+\usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
+
+%-- einzelne Symbole aus dem mathx-package
 \DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
 \DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
 \DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
 \DeclareMathSymbol{\bigplus}{1}{mathx}{"90}
 
+%-- 
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
-\newcommand{\mathds}[1]{\mathbb{#1}} %Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
+\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
 \newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
+
 \def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}
 
-%-- Alles was mit Schrift und XeteX zu tun hat
+%-- Alles was mit Schrift und XeTeX zu tun hat
 \ifxetexorluatex
     % XeLaTeX or LuaTeX
 	\ifxetex
@@ -98,7 +102,7 @@
 	\else
 		\usepackage[no-math]{fontspec}
 	\fi
-    \usepackage{polyglossia} %babel-ersatz
+    \usepackage{polyglossia} % moderner babel-ersatz
     \setmainlanguage[spelling=new,babelshorthands=true]{german}
 	\shorthandoff{"}
 	\setotherlanguage{english}
@@ -137,14 +141,9 @@
 \usepackage[margin=10pt, font=small, labelfont={sf, bf}, format=plain, indention=1em]{caption}
 \captionsetup[wrapfigure]{name=Abb. }
 \usepackage{stackrel}
-\usepackage{ifthen}
 \usepackage{multicol}
-% \usepackage{grid}
-% \usepackage{grid-system}
-\flushbottom
 
-%--Hyphenation
-\hyphenation{di-men-si-o-na-le}
+\flushbottom
 
 
 %--Unterstreichung
@@ -256,7 +255,6 @@
 \DeclareMathOperator{\resolv}{R} %Resolventenmenge
 \DeclareMathOperator{\idx}{ind} %Fredholm Index
 \DeclareMathOperator{\Fred}{Fred} %menge der Fredholm-Operatoren
-% \DeclareMathOperator{\tr}{tr}
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\w}{\mathrm{w}}
 \newcommand{\sa}{\mathrm{s.a.}}
@@ -271,25 +269,15 @@
 \DeclareMathOperator{\Ob}{Ob} %Objekte
 \DeclareMathOperator{\Mor}{Mor} %Morphismen
 
-% \DeclareMathOperator{\TOP}{TOP} %Topologische Räume
 \newcommand{\TOP}{\textsc{Top}}
-% \DeclareMathOperator{\HTOP}{HTOP} %Topologische Räume + Homotopieäquivalenz
 \newcommand{\HTOP}{\textsc{HTop}}
-% \DeclareMathOperator{\VR}{VR} %Vektorräume
 \newcommand{\VR}{\textsc{VR}}
-% \DeclareMathOperator{\MOD}{MOD} %Moduln
 \newcommand{\MOD}{\textsc{Mod}}
-% \DeclareMathOperator{\MENGEN}{MENGEN} %Mengen
 \newcommand{\MENGEN}{\textsc{Mengen}}
-% \DeclareMathOperator{\MAN}{MAN} %Mannigfaltigkeiten
 \newcommand{\MAN}{\textsc{Man}}
-% \DeclareMathOperator{\GRUPPEN}{GRUPPEN} %Gruppen
 \newcommand{\GRUPPEN}{\textsc{Gruppen}}
-% \DeclareMathOperator{\ABELGRUPPEN}{ABEL.GRUPPEN} %abelsche Gruppen
 \newcommand{\ABELGRUPPEN}{\textsc{Abel.Gruppen}}
-% \DeclareMathOperator{\KAT}{KAT} %Kategorien
 \newcommand{\KAT}{\textsc{Kat}}
-% \DeclareMathOperator{\FUN}{FUN} %Funktoren
 \newcommand{\FUN}{\textsc{Fun}}
 \newcommand{\SIMP}{\textsc{Simp}}
 
