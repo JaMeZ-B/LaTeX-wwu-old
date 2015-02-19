@@ -244,7 +244,40 @@ Es sind äquivalent:
 	\item $\forall x \in M^n\ \exists$ Umgebungen $U$ und $V \subset \mathds{R}^{n+k}$ von $x$ und $0$, und ein Diffeomorphismus $\phi: U \to V$ mit $\phi(M\cap U) \to \underbrace{(\mathds{R}^n \times \set{0}\cap V)}_{=: W}$
 	\item $\forall x \in M^n\ \exists$ Umgebungen $U\subset \mathds{R}^{n+k}$ und $W\subset \mathds{R}^n$, sowie eine glatte Abbildung $g:W \to \mathds{R}^{n+k}$, sodass $g$ ein Homöomorphismus von $W$ auf $M\cap U$ und eine Immersion ist. $g$ nennt man eine \Index{lokale Parametrisierung}
 \end{enumerate}
-\missingfigure{Beweis des Satzes durch Zeichnung}
+\begin{figure}[H]
+\centering{
+
+\begin{tikzpicture}[xscale=1,yscale=0.7]
+	%\draw[help lines] (0,0) grid (10,9);
+	\draw[<->] (1,9) node[left]{$\mathds{R}^k$} -- (1,5) node[left]{$\mathds{R}^{n+k}$} -- (5,5) node[below]{$\mathds{R}^n$};
+	\draw[<->] (1,4) -- (1,1) -- (5,1) node[below]{$\mathds{R}^n\times \set{0}$};
+	\draw (9,5) node[below]{$\mathds{R}^k$} -- (9,5) -- (9,9);
+	\draw[fill=OrangeRed2] (9,7) node[right] {$0$} circle[radius=0.05cm];
+
+	
+	\draw (1.5,5.5) .. controls +(75:0.5) and +(220:0.25) .. (2.25,6.5)
+	 		.. controls +(40:0.25) and +(205:0.25) .. (3,7)
+		 	.. controls +(25:1) and +(255:0.5) .. (4.5,8.5) node[right]{$M^n$};
+	\draw[SteelBlue2] (1.89,6.16) .. controls +(47.5:0.4) and +(215:0.25) .. (2.65,6.8) node[right] {$U\cap M$};
+	\draw[fill=OrangeRed2] (2.25,6.5) circle[radius=0.05cm];
+	\draw[SeaGreen4,dashed] (2.25,6.5) circle[radius=0.5cm];
+	\node[SeaGreen4,above] at (2.25,7) {$U$};
+	
+	\draw[->] (5.5,7) .. controls +(30:0.5) and +(180:0.5) .. (7,7.4) node[above] {$f$}
+			 .. controls +(0:0.5) and +(150:0.5) .. (8.5,7);
+			 
+	\draw[SteelBlue2] (2,1) -- (3,1) node[below right] {$W$};	 
+	\draw[fill=OrangeRed2] (2.5,1) circle[radius=0.05cm];
+	\draw[SeaGreen4,dashed] (2.5,1) circle[radius=0.5cm];
+	\node[SeaGreen4,above] at (2.5,1.5) {$V$};
+	
+	\draw[->] (2.25,1.5) .. controls +(110:1) and +(270:1) .. (1.75,3.75) node[right] {$\varphi$ Satz 5}
+			 .. controls +(90:1) and +(250:1) .. (2.25,5.9);
+			 
+	\draw[->] (4.5,2.5) -- (8.5,6);
+\end{tikzpicture}
+\caption{Beweis von \ref{ssub:19}}}
+\end{figure}
 %subsubsection 19 (end)
 
 \subsubsection[Beispiele zur lokalen Parametrisierung]{Beispiele}
@@ -252,7 +285,7 @@ Es sind äquivalent:
 \begin{enumerate}[(i)]
 	\item Der $2$-Torus $T^2$ ist das Bild von
 	\[
-		g:\mathds{R}^2 \to \mathds{R}^2,\ g(x,y) = \enbrace[\big]{\cos(x),\sin(x),\cos(y),\sin(y)}\subset T^2 \subset \mathds{R}^4
+		g:\mathds{R}^2 \to \mathds{R}^4,\ g(x,y) = \enbrace[\big]{\cos(x),\sin(x),\cos(y),\sin(y)}\subset T^2 \subset \mathds{R}^4
 	\]
 	$g$ ist lokale Parametrisierung:
 	\[
@@ -265,14 +298,24 @@ Es sind äquivalent:
 		\end{pmatrix}
 	\]
 	$\mathd_{(x,y)} g$ hat somit immer vollen Rang 2, also ist $\mathd_{(x,y)} g$ injektiv. Es folgt somit, dass $g$ eine Immersion ist.
-%	\begin{wrapfigure}{R}{7cm}
-%		\begin{minipage}{6cm}
-%			Sei $X$ ein topologischer Raum , $\sim$ eine Äquivalenzrelation. So ist $\nicefrac{X}{\sim}$ ein topologischer Raum versehen mit der Quotiententopologie, also $U\subset\ \nicefrac{X}{\sim}$ offen $\Leftrightarrow\ p^{-1}(U)$ offen. Somit folgt für $X \overset{p}{\to} \nicefrac{X}{\sim}$, dass $p$ stetig und auch ein lokaler Hoöomorphismus ist.
-%		\end{minipage}
-%	\end{wrapfigure}
-	\missingfigure{Diagramm zum lok. Homöomorphismus von g}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.4\textwidth}
+		\begin{tikzcd}[column sep=tiny,row sep=small]
+			\mathds{R}^2 \arrow{rr} \arrow{dr}{p} && T^2\subset \mathds{R}^4\\
+			& \enbrace{\nicefrac{\mathds{R}}{2\pi \mathds{Z}}}^2 \simeq S^1\times S^1 \arrow{ur}{\hat{g}} &
+		\end{tikzcd}
+		\caption{Diagramm zum lok. Homöomorphismus von g}
+		\end{minipage}
+		\hfill
+		\color{SeaGreen4}\fbox{
+		\begin{minipage}{0.49\textwidth}
+			Sei $X$ ein topologischer Raum , $\sim$ eine Äquivalenzrelation. So ist $\nicefrac{X}{\sim}$ ein topologischer Raum versehen mit der Quotiententopologie, also $U\subset\ \nicefrac{X}{\sim}$ offen $\Leftrightarrow\ p^{-1}(U)$ offen. Somit folgt für $X \overset{p}{\to} \nicefrac{X}{\sim}$, dass $p$ stetig und auch ein lokaler Hoöomorphismus ist.
+		\end{minipage}}	
+	\end{figure}
 	$\hat{g}$ ist stetig (Quotiententopologie), $\hat{g}$ bijektiv und $T^2$ kompakt. Damit folgt, dass $\hat{g}$ ein Homöomorphimus und somit $g$ ein lokaler Homöomorphismus ist.
 	\item 
+	Betrachte
 	\[
 		g:\mathds{R}^2 \to \mathds{R}^3\text{, } g(x,y) = \enbrace[\big]{\sin(x)\cos(y),\sin(x)\sin(y),\cos(x)} \in S^2\subset \mathds{R}^3
 	\]
@@ -287,11 +330,11 @@ Es sind äquivalent:
 		Betrachte:
 		\begin{figure}[H]
 		\centering{
-			\begin{tikzpicture}[scale = 0.8]
+			\begin{tikzpicture}[scale = 0.6]
 				%\draw[help lines] (0,0) grid (12,4);
 				\draw (1,2) node[below]{$\infty$} -- (3,2) node[below]{$\mathds{R}$} -- (5,2) node[below]{$-\infty$};
 				\draw[color = blue, thick, ->] (2,2) -- (3,2) node[above]{$\nu,\ \mathd_x g \neq 0$} -- (4,2);
-				\draw[->] (5.5,2) .. controls +(25:0.25) and +(180:0.25) .. (6,2.25) node[above]{$g$} .. controls +(0:0.25) and +(155:0.25) .. (6.5,2);
+				\draw[->] (5.5,2) .. controls +(25:0.125) and +(180:0.125) .. (6,2.125) node[above]{$g$} .. controls +(0:0.125) and +(155:0.125) .. (6.5,2);
 				\draw[<->] (7,4) -- (7,0) -- (11,0);
 				\draw[<->] (9,2) .. controls +(90:1) and +(180:0.5) .. (10,3.5)
 				.. controls +(0:0.5) and +(90:0.5) .. (10.75,2.75)
@@ -306,7 +349,22 @@ Es sind äquivalent:
 		\end{figure}
 		$g$ ist immersiv, hat aber keine Umkehrfunktion und ist somit kein Homöomophismus.
 		\item
-		\missingfigure{Weiteres Beispiel zur lok. Par.}
+		Betrachte $C = \set[(t^2,t^3)\in \mathds{R}^2]{t\in \mathds{R}}$
+		\begin{figure}[H]
+		\centering
+			\begin{tikzpicture}[yscale = 0.4, xscale= 0.6]
+				%\draw[help lines] (0,0) grid (12,8);
+				\draw (1,1) -- (1,7);
+				\draw (1,4) -- (7,4);
+				\draw (1,4)  .. controls +(3:3) and +(225:1) .. (6,7); 
+				\draw (1,4)  .. controls +(357:3) and +(135:1) .. (6,1);
+	
+				\draw (10,1) node[right]{$\mathds{R}$} -- (10,7);
+				\draw[->] (9.5,4) -- (8.5,4) node[above]{$g$} -- (7.5,4);
+		
+				\draw[SteelBlue2,->] (0.1,4.9) node[above]{$\mathd_0 g = 0$} -- (0.9,4.1);
+			\end{tikzpicture}
+		\end{figure}
 		$g$ ist keine lokale Parametrisierung, da $g$ nicht immersiv in $0$ ist. $g(t) = \enbrace[\big]{g_1(t),g_2(t)}\in \mathds{R}^2 \Rightarrow g_1^2(t) = g_2^3(t) \Rightarrow \mathd_0 g = 0$
 \end{enumerate}
 %subsubsection 111 (end)
@@ -318,7 +376,45 @@ Sei $M^n$ eine $n$-dim glatte Untermannigfaltigkeit, $x\in M$, und seien $U_1,U_
 	g_2^{-1} \circ g_1:\Omega_1 \cap g_1^{-1}(U_2) \overset{g_1}{\to} g_1(\Omega_1) \cap U_2 \overset{g_2^{-1}}{\to} \Omega_2 \cap g_2^{-1}(U_1)
 \]
 ein $C^{\infty}$-Diffeomorphismus.
-\missingfigure{Veranschaulichung des Wechsel lok. Parametrisierung}
+\begin{figure}[H]
+\centering{
+\begin{tikzpicture}[scale=0.6]
+	%\draw[help lines] (0,0) grid (12,8);
+	
+	\draw (1.5,5) .. controls +(140:1) and +(200:1) .. (2,7.5) node[above]{$\Omega_1$}
+	 .. controls +(20:1) and +(135:1) .. (4,7)
+	 .. controls +(315:1) and +(40:1) .. (3.5,5)
+	 .. controls +(220:1) and +(320:1) .. (1.5,5) node[left]{$\Omega_1\cap g_1^{-1}(U_2)$};
+	 
+	\draw[fill=SteelBlue2,fill opacity=0.2] (3.5,5) .. controls +(220:1) and +(320:1) .. (1.5,5) .. controls +(20:0.5) and +(160:0.5) .. (3.5,5);
+
+	\draw (1.5,1) node[left]{$\Omega_2$} .. controls +(150:1) and +(210:1) .. (2,3.5) node[left]{$\Omega_2\cap g_2^{-1}(U_1)$}
+	 .. controls +(30:0.7) and +(145:0.7) .. (3.5,3.5)
+	 .. controls +(325:1) and +(30:1) .. (3.5,1)
+	 .. controls +(210:1) and +(330:1) .. (1.5,1);
+	 
+	\draw[fill=SteelBlue2,fill opacity=0.2] (2,3.5) .. controls +(30:0.7) and +(145:0.7) .. (3.5,3.5) .. controls +(200:0.5) and +(340:0.5) .. (2,3.5);
+	
+	\draw[->] (2.4,4.5) .. controls +(250:0.125) and +(90:0.125) .. (2.3,4.1) node[right]{$g_2^{-1}\circ g_1$} .. controls +(270:0.125) and +(110:0.125) .. (2.4,3.7);
+	
+	\draw (8.5,2) .. controls +(150:1) and +(210:1) .. (9,4.5)
+	 .. controls +(30:0.7) and +(145:0.7) .. (10.5,4.5)
+	 .. controls +(325:1) and +(30:1) .. (10.5,2) node[below right]{$U_2\cap M$}
+	 .. controls +(210:1) and +(330:1) .. (8.5,2);
+	 
+	\draw (9,4.5) .. controls +(150:1) and +(210:1) .. (9,7)
+	 .. controls +(30:0.7) and +(145:0.7) .. (10.5,7) node[right]{$U_1\cap M$}
+	 .. controls +(325:1) and +(30:1) .. (10.5,4.5)
+	 .. controls +(210:0.7) and +(330:0.7) .. (9,4.5);
+	 
+	\draw[fill=SteelBlue2,fill opacity=0.2] (9,4.5) .. controls +(30:0.7) and +(145:0.7) .. (10.5,4.5) .. controls +(210:0.7) and +(330:0.7) .. (9,4.5); 
+
+	\draw[->] (5,6) -- (6.25,6) node[above]{$g_1$} -- (7.5,6);
+	\draw[->] (5,3) -- (6.25,3) node[above]{$g_2$} -- (7.5,3);
+\end{tikzpicture}
+\caption{Veranschaulichung des Wechsel lok. Parametrisierung}
+}
+\end{figure}
 \minisec{Bemerkung}
 	\begin{itemize}
 		\item $h:\Omega_1 \to \Omega_2$ Homöomorphismus, offene Menge in $\Omega_1$ $\leftrightarrow$ offene Menge in $\Omega_2$
@@ -411,16 +507,80 @@ Dann gilt zum Beispiel $U \overset{offen}{\subset} \mathds{R}^n$ ist Untermannig
 			\varphi_S \circ \varphi_N^{-1}:\ \mathds{R}^n\backslash \set{0} \to \mathds{R}^n\backslash \set{0},\ x\in \mathds{R}^n\backslash \set{0} \mapsto \frac{x}{\|x\|^2}\\
 		\end{align*}
 		\minisec{Bemerkung} $\set{\enbrace*{S^n,\id_{\mathds{R}^{n+1}}\vert_{S^n}}}$ ist kein Atlas, denn $S^n$ ist nicht offen im $\mathds{R}^{n+1}$.
-		\item Der $n$-Torus $T^n$. Betrachte $f:\mathds{R}^n \to \mathds{C}^n,\ \enbrace{x_1, \ldots, x_n} \mapsto \enbrace{\exp(ix_1), \ldots, \exp(ix_n)}\in \underbrace{S^1\times \ldots \times S^1}_{n-\text{mal}} \subset \mathds{C}\times \ldots \times \mathds{C}$, so folgt $f(\mathds{R}^n) = T^n$
-		\missingfigure{Veranschaulichung der Wahl der Karten}
-		Schränke $f\vert_{\enbrace{a_1-\epsilon,a_1+\epsilon}\times \ldots \times \enbrace{a_n-\epsilon,a_n+\epsilon}}$ auf sein Bild ein. $\varphi_a := f^{-1} : \underset{= U_a \subset T}{f(I_a)} \to I_a \overset{\text{offen}}{\subset} \mathds{R}^n$. Somit ist $\set{\enbrace{U_a,\varphi_a}}_{a\in \mathds{R}^n}$ eine Familie von Karten, die $T^n$ überdeckt. Es bleibt zu zeigen, dass $\varphi_{ab} = \varphi_a \circ \varphi_b$ ein Diffeomorphismus ist, was wir an dieser Stelle dem Leser überlassen. Somit folgt, dass $\set{\enbrace{U_a,\varphi_a}}_{a\in \mathds{R}^n}$ ein Atlas ist.
+		\item Der $n$-Torus $T^n$. Betrachte $f:\mathds{R}^n \to \mathds{C}^n,\ \enbrace{x_1, \ldots, x_n} \mapsto \enbrace{\exp(ix_1), \ldots, \exp(ix_n)}\in \underbrace{S^1\times \ldots \times S^1}_{n-\text{mal}} \subset \mathds{C}\times \ldots \times \mathds{C}$, so folgt $f(\mathds{R}^n) = T^n,\ f(a_1,\cdot,a_n) = (e^{ia_1},\cdot,e^{ia_n})\in T^n$.
+\begin{figure}[H]
+	\centering{
+	\begin{tikzpicture}[yscale=0.6,xscale=0.8]
+		\begin{axis}[
+			z post scale=3,
+			xmin=-1.5, xmax=3,
+			zmin=-22,
+			view={15}{18},
+			hide axis,
+			]
+		%\draw[dashed, gray] (axis cs: 1,0,-19) -- (axis cs: 1,0,28);
+		\addplot3[
+			domain=0:2*pi,
+			smooth,
+			samples=50,
+			samples y=1,
+			ultra thick,
+			postaction={decorate},
+			decoration={markings,
+				mark=at position 0.25 with {\arrow{stealth}},
+				mark=at position 0.75 with {\arrow{stealth}}}]
+			({cos(deg(x))}, {sin(deg(x))}, -17);
+		\addplot3[
+			domain=-0.2*pi:0.2*pi,
+			smooth,
+			samples=50,
+			samples y=1,
+			ultra thick,
+			Firebrick2,
+			dashed,
+			-stealth,
+			]
+			({cos(deg(x))}, {sin(deg(x))}, -17);
+		\node[pin=0:$e^{ia}$, minimum size=0.09cm, draw=black, thick, fill=Chartreuse3, inner sep=0.008cm, circle] at (axis cs: 1,0,-17){};
+		\addplot3[
+			domain=-1*pi:9*pi,
+			smooth,
+			samples=100,
+			samples y=1,
+			ultra thick,
+			postaction={decorate},
+			decoration={markings,
+			mark=between positions 0.05 and 0.99 step 0.1 with {\arrow{stealth}}},%
+			]
+			({cos (deg(x) )},{sin(deg(x))}, {x} );
+		\addplot3[
+			domain=3.8*pi:4.2*pi,
+			smooth,
+			samples=50,
+			samples y=1,
+			ultra thick,
+			dashed,
+			-stealth,
+			Firebrick2,
+			]
+			({cos (deg(x) )},{sin(deg(x))}, {x} );
+		\draw[-to, very thick] (axis cs:0,0,-8) -- ++(axis direction cs: 0,0,-3.5) node[midway,left]{$\exp$};
+		\foreach \t in {-2,0,2} {\edef\temp{\noexpand
+			\node[pin=0:a + $\t \pi$, minimum size=0.11cm,draw, thick,circle, fill=Chartreuse3, inner sep=0.01cm] at (axis cs: 1,0,\t*pi+4*pi){}; 
+		} \temp}
+		\node at (axis cs: 0,0,31) {$\mathds{R}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Veranschaulichung der Wahl der Karten}}
+\end{figure}
+Schränke $f\vert_{\enbrace{a_1-\epsilon,a_1+\epsilon}\times \ldots \times \enbrace{a_n-\epsilon,a_n+\epsilon}}$ auf sein Bild ein. $\varphi_a := f^{-1} : \underset{= U_a \subset T}{f(I_a)} \to I_a \overset{\text{offen}}{\subset} \mathds{R}^n$. Somit ist $\set{\enbrace{U_a,\varphi_a}}_{a\in \mathds{R}^n}$ eine Familie von Karten, die $T^n$ überdeckt. Es bleibt zu zeigen, dass $\varphi_{ab} = \varphi_a \circ \varphi_b$ ein Diffeomorphismus ist, was wir an dieser Stelle dem Leser überlassen. Somit folgt, dass $\set{\enbrace{U_a,\varphi_a}}_{a\in \mathds{R}^n}$ ein Atlas ist.
 		\item Betrachte den Hyperbolischen Raum $H^n$.
 		\missingfigure{Veranschaulichung der Wahl der Karten}
 		$H^n$ ist eine Mannigfaltigkeit mit einer Karte, gegeben durch stereographische Projektion. Man sagt daher, dass $H^n$ diffeomorph zu $\mathds{R}^n$
 		\item Würfel $Q\subset \mathds{R}^n$
 		\begin{figure}[H]
 			\centering{			
-			\begin{tikzpicture}[scale = 0.8]
+			\begin{tikzpicture}[scale = 0.6]
 				%\draw[help lines] (0,0) grid (6,6);
 				\draw[<->] (0,3) -- (6,3);
 				\draw[<->] (3,0) -- (3,6);
@@ -500,7 +660,7 @@ Dann gilt zum Beispiel $U \overset{offen}{\subset} \mathds{R}^n$ ist Untermannig
 	\item Sei $M$ ein topologischer Raum mit differenzierbarer Struktur, so ist er nicht automatisch Hausdorff! Zum Beispiel
 \begin{figure}[H]
 \centering{
-			\begin{tikzpicture}
+			\begin{tikzpicture}[yscale=0.6]
 				%\draw[help lines] (0,0) grid (8,5);
 				\draw (1,4) -- (7,4);
 				\draw[thick] (4,3.9) -- (4,4.1) node[below right]{$0$};
@@ -2004,7 +2164,21 @@ g = h\vert_U :\underset{\subset \Gamma(TN)\vert_M}{\Gamma(TM)} \times \underset{
 definiert durch $g\enbrace{\underbrace{X,Y}_{\in \Gamma(TM)\times \Gamma(TM)}} = h\enbrace{X,Y}\in C^\infty (M)$. (Vergleiche $V\subset (W,g)$ euklidischer Vektorraum $\leadsto$ $\enbrace{V,g\Vert_V: V\times V \to \mathds{R}}$ euklidischer Vektorraum)\\
 Zum Beispiel: $S^n \subset \mathds{R}^{n+1}, g_{euk}\vert_{S^n} = g_{rou}$ "runde" Metrik
 \item Betrachte $S^n \times \mathds{R}_{>0} \simeq \mathds{R}^{n+1}\backslash \set{0}$. 
-\missingfigure{$S^1\times \mathds{R}_{>0}$}
+%\begin{figure}[H]
+%\centering{
+%\begin{tikzpicture}[scale = 0.6]
+%	%\draw[help lines] (0,0) grid (7,6);
+%	\draw[thick,->] (0,3) -- (3,3) -- (6,3);
+%	\draw[thick,->] (3,0) -- (3,3) -- (3,6);
+%	\draw[dashed] (3,3) circle[radius = 2];
+%	\node[below right] at (1,5){$S^1$};
+%	\draw (3,3) -- (5.5,5.5) node[below right] {$\mathds{R}_{>0}$};
+%	\draw[red] (4,3) node[above left]{$\theta$} arc (0:45:1);
+%	\draw[green] (3,3) -- (4,4) node[above]{$r$} -- (5,5);
+%\end{tikzpicture}
+%\caption{$S^1\times \mathds{R}_{>0} \simeq \mathds{R}^2\backslash\set{0}$}
+%}
+%\end{figure}
 $T_{\theta,r} \enbrace{S^n\times \mathds{R}_{>0}} = T_\theta S^n \oplus T_r \mathds{R}_{>0}$ mit Metrik $r^2 g_{rou} + \mathd t^2$ $\cong$ $g_{euk}\vert_{\mathds{R}^{n+1}\backslash \set{0}}$
 \item Sei $f:M\to N$ Immersion in $x\in M$, das heißt $\mathd_x f: T_x M \to T_{f(x)} N$ ist injektiv. Ist $h$ Metrik auf $N$, so ist $f^* h$ Metrik auf einer Umgebung von $x$. Nämlich
 \begin{itemize}
@@ -2020,7 +2194,7 @@ $T_{\theta,r} \enbrace{S^n\times \mathds{R}_{>0}} = T_\theta S^n \oplus T_r \mat
 \begin{enumerate}[(i)]
 \item Eine Abbildung $p:M\to N$ heißt Überlagerung von $N$, falls for alle $y\in N$ eine Umgebung $y\in V\subset N$ existiert, sodass $p^{-1}(V) = \dot{\bigcup_j}U_j$ disjunkte Vereinigung offener $U_j \subset M$ mit $p\vert_{U_j}$ ist Diffeomorphismus auf sein Bild.
 \missingfigure{$S^n = \nicefrac{\mathds{R}}{2\pi \mathds{Z}}$}
-Sei $h$ eine Metrik auf $N$. Dann exisiert eine eindeutig bestimmte Metrik $g$ auf $M$, sodass $p$ eine lokale Isometrie wird, nämlich $g = p^* h$. Im Allgemeinen nennt man eine Überlagerung $p:(M,g)\to (N,h)$ Riemannsch, falls $p$ lokaler Isomorphismus. Insbesondere existiert eine kanonische Riemannsche Metrik auf der sogenannten "universellen Überlagerung" $\tilde{N}$ einer Riemannschen Mannigfaltigkeit. 
+Sei $h$ eine Metrik auf $N$. Dann exisiert eine eindeutig bestimmte Metrik $g$ auf $M$, sodass $p$ eine lokale Isometrie wird, nämlich $g = p^* h$. Im Allgemeinen nennt man eine Überlagerung $p:(M,g)\to (N,h)$ Riemannsch, falls $p$ lokale Isometrie. Insbesondere existiert eine kanonische Riemannsche Metrik auf der sogenannten "universellen Überlagerung" $\tilde{N}$ einer Riemannschen Mannigfaltigkeit. 
 \item Sei $G\subset \Diff(M)$ Untergruppe.
 \[
 G\times M\to M, (f,x)\mapsto f(x)\quad \text{Gruppenwirkung}
@@ -2044,10 +2218,143 @@ Daraus, dass die Wirkung eigentlich ist, folgt, dass $\nicefrac{M}{G}$ Hausdorff
 \missingfigure{Darstellung der Hausdorffeigenschaft}
 Aus der Diskontinuierlichkeit der Wirkung, folgt die Existenz der Überlagerung $\mathds{Z}^n \times \mathds{R}^n \to \mathds{R}^n$
 \end{enumerate}
+\todo{Hier fehlt noch etwas}
 %subsubsection 24(end)
 
+\subsubsection{Satz}
+\label{ssub:25}
+Auf jeder Mannigfaltigkeit existiert eine Riemannsche Metrik.
+\minisec{Beweis}
+Sei $\set{(U_i,\varphi_i)}$ Atlas, $\set{\theta_i:M\to\mathds{R}}$ untergeordnete Zerlegung der Eins, $g_i:=\varphi_i^*g_{euc}$ Metrik auf $U_i$. So ist $\theta_i g_i\in\Gamma(\mathcal{T}_2 M)$ durch 0 fortgesetzter symmetrischer (0,2)-Tensor und damit $g=\sum_i \theta_i g_i$ Riemannsche Metrik, denn 
+\begin{itemize}
+\item $g_x=\sum_{\text{endl.}} \theta_i g_i$ mit $x\in \supp \theta_i$, also ist $g$ wohldefiniert
+\item g ist symmetrisch und nicht negativ, da $(\theta_i\underset{\geq 0}{\underbrace{g_i(v,v)}}\geq 0)$
+\item $g_x(v,v)=0\Rightarrow \theta_ig_i(v)=0~\forall i\Rightarrow v=0$ (für j mit $v\in U_j\Rightarrow g_j$ Riemannsche Metrik)
+\end{itemize}
+
+Metrik induziert mehrere Objekte 
+\begin{itemize}
+\item kanonischen Isomorphismus $TM\simeq T^*M$
+\item kanonische $\nabla^g$ kovariante Ableitung
+\item kanonische Distanzfunktion $d^g$
+\end{itemize}
+%subsubsection 25(end)
+
+\subsubsection{Musikalische Isomorphismen}
+\label{ssub:26}
+Sei $g$ positiv definit, also insbesondere nicht ausgeartet, d.h. ist $g_x(v,w)=0~\forall w\in T_xM\iff v=0$. So können wir definieren
+\[
+b:TM\to T^* M,\ b: v\in T_x M\mapsto \enbrace*{g_x (v,.):T_x M\to\mathds{R}\ \text{linear}}\in T_x^* M
+\]
+$b$ ist Bündelisomorphismus das heißt $b\vert_{T_x M}$ ist linearer Isomorphismus, denn angenommen $b(v)=0$, das heißt $b(v)(w) = g(v,w) = 0\ \forall w\in T_x M$, so folgt $v=0$, das heißt $b$ injektiv und damit $(\dim T_x^* M = \dim T_x M)$ Isomorphismus\\
+Die Umkehrabbildung $\#:T^* M\to TM$ definiert durch $(\#\alpha_x)$, das definiert durch die Gleichung $g_x(\#\alpha_x,\omega)=\alpha_x(\omega)$ für $\omega\in T_x M$\\
+\minisec{Bezeichnung}
+Lokal ist Vextorfeld $X$ bzw. 1-Form $\alpha$ durch 
+\[X\vert_U=\sum X^i\partial_i,\ \alpha\vert_U=\sum\alpha_idx^i\]
+Also senkt $b$ die Indizes von $X$ ($b(X)$ ist $1-Form$) und $\#$ hebt die Indizes von $\alpha$ ($\#(\alpha)$ ist Vektorfeld).
+In der Folge identifiziere $TM$ oft mit $T^*M$, falls Metrik fixiert ist. Zum Beispiel induziert Metrik $g$ eine Metrik $g^*$ auf $T^* M$, in den man $g^*(\alpha,\beta)=g(\#\alpha,\#\beta)$ setzt. 
+%subsubsection 26(end)
 
 % subsection 21(end)
+
+\subsection{Kovariante Abbildung}
+
+\subsubsection{Definition}
+\label{ssub:27}
+Eine \Index{kovariante Abbildung} auf $M$ ist eine $\mathds{R}$-lineare Abbildung
+\[
+\nabla:\Gamma(TM)\to\Gamma(TM\otimes T^* M) = \Gamma(\End(TM))=\Gamma(\mathcal{T}_1^1 M)
+\]
+mit $\nabla(f\cdot X) = X\otimes df + f\nabla X$ (Produkt - Regel)
+\minisec{Schreibweise}
+\[
+\nabla_X Y = C_1^1\enbrace{\underbrace{X\otimes \nabla Y}_{\in \Gamma(TM\otimes TM\otimes T^* M) = \Gamma(\mathcal{T}_1^2)}} \in \Gamma (TM)
+\]
+Es gilt
+\[
+\nabla Y\in\Gamma(TM\otimes T^*M)\leftrightarrow\nabla Y:\Gamma(T^*M)\times\Gamma(TM)\to C^\infty(M)\leftrightarrow \nabla Y:\Gamma(TM)\to\Gamma(TM)
+\]
+das heißt $\nabla_XY\in\Gamma(TM)$. Punktweise gilt:
+\[
+\enbrace{\nabla Y}_x\in T_x M\otimes T^*_x M \simeq \End (T_x M),\ (\nabla_v Y)_x := (\nabla Y)_x(v)\in T_x M
+\]
+%subsubsection 27(end)
+
+\subsubsection{Beispiel}
+\label{ssub:28}
+\begin{enumerate}[(i)]
+\item Sei $\mathds{R}^n$ mit "flacher" kovarianter Ableitung. Sei $Y\in\Gamma(T\mathds{R}^n)$
+\[
+\sum Y^i \partial_i = \begin{pmatrix}Y^1\\ \vdots\\Y^n\end{pmatrix}, Y^i:\mathds{R}^n\to\mathds{R}
+\]
+So ist $\nabla_X Y\in \Gamma(T\mathds{R}^n)$ definiert durch 
+\[
+\nabla_X Y=\mathd Y(X)=\begin{pmatrix}dY^1(X)\\\vdots\\dY^n(X)\\\end{pmatrix}
+\]
+$dY(X) = $ Richtungsableitung von Y nach X 
+\begin{itemize}
+\item $\mathds{R}$-linear und $\nabla Y=\mathd Y(.):\Gamma(T\mathds{R}^n)\to\Gamma(T\mathds{R}^n)$
+\item Leibniz-Regel: 
+\[
+\nabla_X(fY)=(Y\otimes \mathd f)(X) + f\nabla  Y(X) = \mathd f(X)\cdot Y + f\nabla_X Y = df(X)\cdot Y + f\mathd Y(X)
+\]
+Andererseits $\nabla_X(fY)=d(fY)(X)=df(X)\cdot Y+fdY(X)$ (Produktregel der Ableitung)
+\end{itemize}
+Intuition der konvarianten Ableitung $\nabla_XY$ als Richtungsableitung von Y nach X. 
+\item $\nabla$ induziert kovariante Ableitung $\nabla:\Gamma(\mathcal{T}^p_qM)\to\Gamma(\mathcal{T}^p_{q+1})$ durch 
+\begin{itemize}
+\item $\nabla_Xf:=df(X),\ f\in C^\infty(M)$
+\item $\enbrace{\nabla_X\alpha}(Y)=X.\alpha(Y) - \alpha(\nabla_X Y)$ bestimmt $\nabla_X\alpha\in\Gamma(T^*M)$ gesehen als $C^\infty$-lineare Abbildung $\Gamma(TM)\to C^\infty(M)$
+\item $\nabla_X (S\otimes T)=\nabla_X S\otimes T + S\otimes\nabla_X T$
+\end{itemize}
+\end{enumerate}
+%subsubsection 28(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:29}
+\begin{enumerate}[(i)]
+\item Sei $\nabla Y\in\Gamma(TM\otimes T^* M)$ das heißt $\nabla Y: \Gamma(TM)\to \Gamma(TM)$. $\nabla_X Y$ ist $C^\infty (M)$-linear in $X$, das heißt $\nabla_{f X} Y = f\nabla_X Y\ \forall f\in C^\infty(M)$. Anders gesagt $\nabla_X Y$ ist \Index{tensoriell} in X (anders als $\mathcal{L}_X Y$). Insbesondere hängt $(\nabla_X Y)(x)\in T_xM$ nur von $X(x)$ ab! (Und nicht von der Umgebung von $X(x)$)
+\item Abhängigkeit von Y? Betrachte lokale Darstellung von $\nabla_X Y:$
+\[
+X\vert_U=\sum X^i\partial_i, Y\vert_U=\sum Y^i\partial_i\ \text{für lokale Koordianten}
+\]
+\marginnote{$\Gamma_{ij}^k$ sog. Christoffel-Symbole von $\nabla$}
+\begin{align*}
+\enbrace{\nabla_X Y}(x) &= \enbrace{\nabla_X Y\vert_U}(x)\\
+&=\sum \enbrace{\nabla_X Y^i}\partial_i + Y^i\nabla_X \partial_i\\
+&=\sum_{i,j}\enbrace{X^j \underbrace{\nabla_{\partial_j} Y^i}_{\mathd ^i(\partial_j)}}\partial_i+ X^j Y^i\underbrace{\nabla_{\partial_j}\partial_i(x)}_{=\sum \Gamma_{ij}^k \partial_k \in \Gamma(TM\vert_U)}\\
+&=\sum_k \enbrace*{\sum_j\enbrace*{X^j \mathd Y^k(\partial_j)+\sum_i X^j Y^i \Gamma_{i,j}^k}}\partial_k(x)\\
+&=\sum_k \enbrace*{\sum_j \enbrace*{\underbrace{X^j(x) \mathd_x Y^k(\partial_j)}_{\mathd_x Y^k\enbrace*{\sum_j X^j(x) \partial_j} = \mathd_x Y^k(X(x))} + \sum_i X^j(x)Y^i(x)\Gamma_{i,j}^k(x)}}\partial_k(x)
+\end{align*}
+Hängt nur von $X^j(x)$, $Y^j(x)$ und $\mathd_x Y^k(X(x)) = \frac{\mathd}{\mathd t} Y^k(\alpha(t))$, das heißt von $Y$ entlang einer Kurve $\alpha$ mit $\alpha(0) = x, \dot{\alpha}(0) = X(x)$.
+\item Werden sehen: Kovariante Ableitungen existieren immer. Wie sieht der Raum der kovarianten Ableitungen aus? Angenommen $\nabla$ ist kovariante Ableitung 
+\[
+A\in \Gamma(\underbrace{TM\otimes T^* M\otimes T^* M}_{\End(TM\otimes T^* M)}) \hat{=} A:\Gamma(TM)\to\Gamma(\End T^*M), X\mapsto A_X
+\]
+$\Rightarrow \nabla^A=\nabla+A$ definiert durch 
+\[
+\nabla_x^A Y = \nabla_x Y+A_x Y \in \Gamma(TM)\ \text{wobei}\ A_X = C_2^1(X\otimes A
+\]
+kovariante Ableitung, da 
+\[
+\nabla_x^A(fY)=\nabla_X(fY) + \underset{\text{tensoriell in X und Y}}{A_x fY}=\mathd f(X)Y+f\nabla_X Y + f A_X Y = \mathd f(X)Y + f\nabla_X^AY
+\]
+Umgekehrt: Seien $\nabla,\tilde{\nabla}$ zwei kovariante Ableitungen 
+\[\nabla-\tilde{\nabla}:\Gamma(TM)\to\Gamma(TM\otimes T^*M)=\Gamma(\End(TM))\]
+$C^\infty$-linear? Falls ja, $A = \nabla-\tilde{\nabla}\in \Gamma(End(TM)\otimes T^* M)$, das heißt $\tilde{\nabla}=\nabla + A = \nabla^A$
+Also ist der Raum der kovarianten Ableitungen ist ein affiner Vektorraum $\nabla+\Gamma(\End(TM)\otimes T^* M)$
+Tatsächlich 
+\begin{align*}
+\nabla_X(fY) - \tilde{\nabla}_X(fY) &= df(X)Y+f\nabla_XY-df(X)Y-f\tilde{\nabla}_XY\\
+&= f\nabla_X Y - f\tilde{\nabla}_X Y\\
+&= f(\nabla_X Y-\tilde{\nabla}_X Y)
+\end{align*}
+\end{enumerate}
+%subsubsection 29(end)
+
+\subsubsection{Beispiel}
+\label{ssub:29}
+%subsubsection 29(end)
 
 % section 2(end)
 
