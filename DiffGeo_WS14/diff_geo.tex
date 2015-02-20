@@ -4,7 +4,6 @@
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/frederik.witt/diffgeoI.html}
 \newcommand{\prof}{Frederik Witt}
 \newcommand{\verfasser}{Arne Grauer}
-\newcommand{\mail}{arne.grauer@uni-muenster.de}
 \input{../!config/mitschrift_headings.tex}
 
 
@@ -2320,6 +2319,7 @@ Intuition der konvarianten Ableitung $\nabla_XY$ als Richtungsableitung von Y na
 X\vert_U=\sum X^i\partial_i, Y\vert_U=\sum Y^i\partial_i\ \text{für lokale Koordianten}
 \]
 \marginnote{$\Gamma_{ij}^k$ sog. Christoffel-Symbole von $\nabla$}
+Es gilt:
 \begin{align*}
 \enbrace{\nabla_X Y}(x) &= \enbrace{\nabla_X Y\vert_U}(x)\\
 &=\sum \enbrace{\nabla_X Y^i}\partial_i + Y^i\nabla_X \partial_i\\
@@ -2330,20 +2330,20 @@ X\vert_U=\sum X^i\partial_i, Y\vert_U=\sum Y^i\partial_i\ \text{für lokale Koor
 Hängt nur von $X^j(x)$, $Y^j(x)$ und $\mathd_x Y^k(X(x)) = \frac{\mathd}{\mathd t} Y^k(\alpha(t))$, das heißt von $Y$ entlang einer Kurve $\alpha$ mit $\alpha(0) = x, \dot{\alpha}(0) = X(x)$.
 \item Werden sehen: Kovariante Ableitungen existieren immer. Wie sieht der Raum der kovarianten Ableitungen aus? Angenommen $\nabla$ ist kovariante Ableitung 
 \[
-A\in \Gamma(\underbrace{TM\otimes T^* M\otimes T^* M}_{\End(TM\otimes T^* M)}) \hat{=} A:\Gamma(TM)\to\Gamma(\End T^*M), X\mapsto A_X
+A\in \Gamma(\underbrace{TM\otimes T^* M\otimes T^* M}_{\End(TM\otimes T^* M)}) \hat{=} A:\Gamma(TM)\to\Gamma(\End TM), X\mapsto A_X
 \]
 $\Rightarrow \nabla^A=\nabla+A$ definiert durch 
 \[
-\nabla_x^A Y = \nabla_x Y+A_x Y \in \Gamma(TM)\ \text{wobei}\ A_X = C_2^1(X\otimes A
+\nabla_X^A Y = \nabla_X Y+\underbrace{A_X Y}_{\in \Gamma(TM)}\ \text{, wobei}\ A_X = C_2^1(X\otimes A)
 \]
 kovariante Ableitung, da 
 \[
-\nabla_x^A(fY)=\nabla_X(fY) + \underset{\text{tensoriell in X und Y}}{A_x fY}=\mathd f(X)Y+f\nabla_X Y + f A_X Y = \mathd f(X)Y + f\nabla_X^AY
+\nabla_X^A(fY)=\nabla_X(fY) + \underset{\text{tensoriell in X und Y}}{A_X fY}=\mathd f(X)Y+f\nabla_X Y + f A_X Y = \mathd f(X)Y + f\nabla_X^AY
 \]
 Umgekehrt: Seien $\nabla,\tilde{\nabla}$ zwei kovariante Ableitungen 
 \[\nabla-\tilde{\nabla}:\Gamma(TM)\to\Gamma(TM\otimes T^*M)=\Gamma(\End(TM))\]
-$C^\infty$-linear? Falls ja, $A = \nabla-\tilde{\nabla}\in \Gamma(End(TM)\otimes T^* M)$, das heißt $\tilde{\nabla}=\nabla + A = \nabla^A$
-Also ist der Raum der kovarianten Ableitungen ist ein affiner Vektorraum $\nabla+\Gamma(\End(TM)\otimes T^* M)$
+$C^\infty$-linear? Falls ja, $A = \nabla-\tilde{\nabla}\in \Gamma(\End(TM)\otimes T^* M)$, das heißt $\tilde{\nabla}=\nabla + A = \nabla^A$
+Also ist der Raum der kovarianten Ableitungen ist ein affiner Vektorraum $\nabla+\Gamma(\End(TM)\otimes T^* M)$.
 Tatsächlich 
 \begin{align*}
 \nabla_X(fY) - \tilde{\nabla}_X(fY) &= df(X)Y+f\nabla_XY-df(X)Y-f\tilde{\nabla}_XY\\
@@ -2353,9 +2353,110 @@ Tatsächlich
 \end{enumerate}
 %subsubsection 29(end)
 
+\subsubsection[Definition: kovariante Ableitung entlang $gamma$]{Definition und Satz}
+\label{ssub:211}
+Sei $\nabla$ kovariante Ableitung auf $M$, $\gamma:I\to M$ Weg und $\Gamma_\gamma(TM) = \set[Y:I\to TM]{Y(t)\in T_{\gamma(t)} M}$. Elemente aus $\Gamma_\gamma(TM)$ nennen wir "Vektorfelder entlang $\gamma$". Dann existiert eine Abbildung, die sogenannte \Index{kovariante Ableitung entlang $\gamma$} 
+\[
+\frac{\nabla}{\mathd t}:\Gamma_\gamma(TM) \to \Gamma_\gamma(TM)
+\]
+,die durch folgende Eigenschaften eindeutig bestimmt ist:
+\begin{itemize}[(i)]
+\item $\frac{\nabla}{\mathd t}(f Y) = \dot{f}(t)Y(t) + f(t)\frac{\nabla}{\mathd t} Y(t)$ für $f\in C^\infty(I)$
+\item Ist $Y(t) = \bar{Y}(\gamma(t))$, wobei $\bar{Y} \in \Gamma(TM)$, so gilt $\enbrace{\frac{\nabla}{\mathd t} Y}(t) = \enbrace{\nabla_{\dot{\gamma}(t)} \bar{Y}}(\gamma(t))$
+\end{itemize}
+\minisec{Beweis}
+\begin{itemize}[(a)]
+\item Eindeutigkeit: Sei $Y \in \Gamma_\gamma(TM)$ und $\frac{\nabla}{\mathd t}$ eine kovariante Ableitung entlang $\gamma$ mit den oben genannten Eigenschaften. Sei $\gamma(t) \in U$ Karten mit lokalen Koordinaten $x_1,\ldots,x_n$, so können wir lokal $Y\vert_U = \sum Y^i (t) \partial_i (\gamma(t))$ schreiben. Für $J\subset I$ mit $\gamma(J) \subset U$ gilt mit (i)
+\marginnote{Verstehe ich momentan leider nicht, wieso der zweite Summand so aussieht}
+\begin{align*}
+	\frac{\nabla}{\mathd t} Y\vert_J (t) &= \sum_i \dot{Y}^i(t)\partial_i(\gamma(t)) + Y^i(t) \enbrace{\frac{\nabla}{\mathd t} \partial_i}(t)\\
+	& \overset{(ii)}{=} \sum_i \dot{Y}^i(t)\partial_i(\gamma(t)) + Y^i(t) \nabla_{\dot{\gamma}(t)} \partial(\gamma(t))
+\end{align*}
+Somit ist $\frac{\nabla}{\mathd t} Y$ durch $\nabla$ eindeutig bestimmt.
+\item Existenz: Definiere $\enbrace{\frac{\nabla}{\mathd t} Y}(t)$ wie oben auf $J\subset I$, sodass $\gamma(J) \subset U$. Aufgrund der oben gezeigten Eindeutigkeit müssen die so definierten $\frac{\nabla}{\mathd t}$ auf $J_1\cap J_2$ übereinstimmen.\\
+(Wobei man hierfür im Beweis der Eindeutigkeit noch die Unabhängigkeit der Kartenwahl zeigen müsste.)
+\end{itemize}
+%subsubsection 211(end)
+
 \subsubsection{Beispiel}
-\label{ssub:29}
-%subsubsection 29(end)
+\label{ssub:212}
+Sei $\mathds{R}^n$ mit flacher kovarianter Ableitung gegeben, so folgt aus dem Beweis $\ref{ssub:210}$ direkt, dass für ein Vektorfeld $X:I\to \mathds{R}^n$ entlang $\gamma$ gilt:
+\[
+\frac{\nabla}{\mathd t} X = \frac{\mathd}{\mathd s} X(s)\vert_t = \dot{X}(t)
+\]
+%subsubsection 212(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:213}
+$\nabla$ wird durch die kovariante Ableitung $\enbrace*{\frac{\nabla}{\mathd t}}$ bereits bestimmt. Sei $X,Y$ Vektorfelder und $\alpha:I\to M$ ein Weg mit $\alpha(0) =  x$ und $\dot{\alpha}(0) = X(x)$, so gilt
+\[
+\enbrace{\nabla_X Y}(x) = \enbrace{\nabla_{X(x)} Y}(x) = \frac{\nabla}{\mathd t}\enbrace{Y\circ \alpha}(0)
+\]
+%subsubsection 213(end)
+
+\subsubsection{Fortsetzung von $nabla$ auf $\Gamma(\mathcal{T}_q^p M)$}
+\label{ssub:214}
+Wurde schon in $\ref{ssub:28}$ behandelt.
+%subsubsection 214(end)
+
+\subsubsection{Definition}
+\label{ssub:215}
+Die \Index{Torsion} von $\nabla$ $T^\nabla \in \Gamma(\wedge^2 T^* M \otimes TM)$ ist definiert durch 
+\[
+T^\nabla (X,Y) = \nabla_X Y - \nabla_Y X - \benbrace{X,Y}
+\]
+(gesehen als $\underbrace{\Gamma(TM)\times \Gamma(TM)}_{\text{schiefsymmetrisch}} \to \Gamma(TM)$). $\nabla$ heißt \Index{torsionsfrei}, falls $T^\nabla = 0$.\\
+Für $f\in C^\infty(M)$ gilt:
+\[
+T^\nabla (fX,Y) = T^\nabla (X,fY) = f T^\nabla(X,Y)
+\]
+Somit folgt $T^\nabla \in \Gamma(T^* M \otimes T^* M \otimes TM)$ und da $T^\nabla (X,Y) = - T^\nabla (Y,X)$ folgt $T^\nabla \in \Gamma(\wedge^2 T^* M \otimes TM)$.
+%subsubsection 215(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:216}
+Lokal ist $T^\nabla (\partial_i,\partial_j) = \sum_k \Gamma_{ij}^{\nabla k} \partial_k$. Es gilt
+\[
+\underset{= \Gamma_{ij}^k}{\nabla_{\partial_i} \partial_j} - \underset{= \Gamma_{ji}^k}\nabla_{\partial_j} \partial_i - \underset{= 0}{\benbrace{\partial_i,\partial_j}}
+\]
+somit folgt, $\Gamma_{ij}^{\nabla k} = \Gamma_{ij}^k - \Gamma_{ji}^k$, also misst $T^\nabla$ die Kommutativität der Christoffelsymbol in i und j.
+%subsubsection 216(end)
+
+\subsubsection{Beispiel}
+\label{ssub:217}
+Die flache kovariante Ableitung $\nabla = \mathd$ auf $\mathds{R}^n$ ist torsionsfrei ($\Gamma_{ij}^k = 0$).
+%subsubsection 217(end)
+
+\subsubsection[Definition: Krümmung von $\nabla$]{Definition}
+\label{ssub:218}
+Die \Index{Krümmung von $\nabla$} $R^\nabla \in \Gamma(\mathcal{T}_3^1 M)$ (gesehen als $R^\nabla: \Gamma(TM)\times \Gamma(TM) \times \Gamma(TM) \to \Gamma(TM)$) ist definiert durch
+\[
+R^\nabla (X,Y) Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{\benbrace{Y,X}}Z = \enbrace{\nabla_{\benbrace{X,Y}} - [\nabla_X,\nabla_Y]}Z
+\]
+(Eigentlich $R(X,Y,Z)$, aber wir sehen das hier als $R(X,Y):\Gamma(TM)\to \Gamma(TM)$)
+Hier ist $\benbrace{\nabla_X,\nabla_Y} = \nabla_X \circ \nabla_Y - \nabla_Y \circ \nabla_X$ der Abbildungskommutator. (vergleiche mit $\ref{ssub:187}: \mathcal{L}_{\benbrace{X,Y}} - \benbrace{\mathcal{L}_X,\mathcal{L}_Y} = 0$) $\nabla$ ist \Index{flach}, falls $R^\nabla = 0$
+%subsubsection 218(end)
+
+\subsubsection{Beispiel}
+\label{ssub:219}
+Die "flache" kovariante Ableitung auf $\mathds{R}^n$ ist wirklich flach.
+%subsubsection 219(end)
+
+\subsubsection{Fundamentallemma der Riemannschen Geometrie}
+\label{ssub:220}
+Sei $(M,g)$ eine Riemannsche Mannigfaltigkeit. Dann existiert eine eindeutig bestimmte kovariante Ableitung $\nabla^g$ die sogenannte \Index{Levi-Civita kovariante Ableitung} mit folgenden Eigenschaften:
+\begin{itemize}
+\item $\nabla^g$ ist torsionsfrei
+\item $\nabla^g$ ist metrisch, das heißt $\nabla^g g = 0$
+\end{itemize}
+$\nabla^g_X Y$ wird durch die Koszul-Formel eindeutig bestimmt: Für alle $Z\in \Gamma(TM)$ gilt 
+\[
+2g\enbrace{\nabla^g_X Y,Z} = X.g(Y,Z) + Y.g(X,Z) - Z.g(X,Y) + g(\benbrace{X,Y},Z) - g(\benbrace{X,Z},Y) - g(\benbrace{Y,Z},X)
+\]
+(benutzt die Nicht-Degeneriertheit vgl. $\ref{ssub:26}$ Musikalische Isomorphismen).\\
+$R^g = R^{\nabla^g}$ heißt Krümmungstensor bzgl. $\nabla^g$ und wir nennen $g$ flach, falls $\nabla^g$ flach.
+\minisec{Beweis}
+%subsubsection 220(end)
 
 % section 2(end)
 
