@@ -3,6 +3,8 @@
 \newcommand{\semester}{WiSe 2014}
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/funktionalanalysis.html}
 \newcommand{\prof}{Prof.\,Dr.\,Wilhelm Winter}
+%-- Zweckentfremden für Titelbild
+\publishers{\LARGE\emph{\enquote{\,Das folgt mit Hahn-Banach}}} %-- Wenn eine neue Version von Source Sans Pro verfügbar ist kann "\," entfernt werden
 \input{../!config/mitschrift_headings.tex}
 
 
@@ -2981,7 +2983,7 @@ Sei $X$ ein Banachraum. Dann ist $\mathcal{K}(X) \lhd \mathcal{L}(X)$ ein abgesc
 \end{description}
 % subsection 89 (end)
 
-\subsection[Satz: Diagonalisierbarkeit selbstadjungierter, kompakter Operatoren]{Satz} % (fold)
+\subsection[Satz: Diagonalisierbarkeit selbstadjungierter, kompakter Operatoren (Spektralsatz)]{Satz (Spektralsatz)} % (fold)
 \label{sub:810}
 Sei $T \in \mathcal{K}(\mathcal{H})$ ein selbstadjungierter, kompakter Operator auf dem Hilbertraum $\mathcal{H}$. Dann ist $T$ diagonalisierbar. Genauer gilt:
 \begin{enumerate}[(i)]
@@ -2996,14 +2998,14 @@ Sei $T \in \mathcal{K}(\mathcal{H})$ ein selbstadjungierter, kompakter Operator 
 	\[
 		T x = \sum_{i=0}^{\infty} \lambda_i \cdot \skal*{e_i}{x} \cdot e_i 
 	\]
-	Falls $T\ge 0$, kann man die $\lambda_i$ absteigend wählen und es gilt $\lambda_i \to 0$ (falls es unendlich viele $\lambda_i\not=0$ gibt).
+	Falls $T\ge 0$ ist, kann man die $\lambda_i$ absteigend wählen und es gilt $\lambda_i \to 0$, falls es unendlich viele $\lambda_i\not=0$ gibt.
 \end{enumerate}
 \minisec{Beweis (für $T \ge 0$)}
-Für $x \in \mathcal{H}$ setze $\mu(x) := \frac{\skal*{x}{T x}}{\skal*{x}{x}}\ge 0$ und \todo{Beweis durchsehen \ldots}
+Für $x \in \mathcal{H}$ setze $\mu(x) := \frac{\skal*{x}{T x}}{\skal*{x}{x}}\ge 0$ und
 \[
 	\overline{\mu} := \sup_{x \in \mathcal{H}} \mu(x) = \sup_{x \in \overline{B}(0,1)} \skal*{x}{T x} \le \norm{T} 
 \]
-Wir nehmen $\mu >0$ an, denn andernfalls ist $T=0$ nach Bemerkung \ref{sub:729}. Wähle $(x_k)_{k \in \mathds{N}} \subset \mathcal{H}$ mit $\norm{x_k}=1$ und 
+Wir nehmen $\overline{\mu} >0$ an, denn andernfalls ist $T=0$ nach Bemerkung \ref{sub:729}. Wähle $(x_k)_{k \in \mathds{N}} \subset \mathcal{H}$ mit $\norm{x_k}=1$ und 
 $\mu(x_k)= \skal*{x_k}{T x_k} \to \overline{\mu}$. Da $T$ kompakt ist, dürfen wir (eventuell nach Übergang zu einer Teilfolge) annehmen, dass $T x_k \to \overline{y}$ für
 ein $\overline{y}\in \mathcal{H}$.
 Nach \ref{sub:510} ist $\overline{B}_{\mathcal{H}^*}(0,1)$ $\w^*$-kompakt, also gilt (wieder eventuell nach Übergang zu einer Teilfolge) 
@@ -3011,50 +3013,52 @@ Nach \ref{sub:510} ist $\overline{B}_{\mathcal{H}^*}(0,1)$ $\w^*$-kompakt, also 
 	\kappa(x_k) \xrightarrow{\w^*} \overline{\varphi} \in \mathcal{H}^*
 \]
 Setze nun $\overline{x} := \kappa ^{-1}\enbrace*{\overline{\varphi}}$. Für jedes $x \in \mathcal{H}$ gilt  
-$\skal*{x_k}{T x} = \kappa(x_k)(T x) \to \overline{\varphi}(T x) = \skal*{\overline{x}}{T x}$. Also insbesondere
+$\skal*{x_k}{T x} = \kappa(x_k)(T x) \xrightarrow{k \to \infty} \overline{\varphi}(T x) = \skal*{\overline{x}}{T x}$. Also insbesondere
 \[
 	0 = \lim_{k\to \infty} \skal*{x_k -\overline{x}}{T x} = \lim_{ k \to \infty} \skal*{T x_k - T \overline{x}}{x}= \skal*{\lim_{ k \to \infty} T x_k - T \overline{x} }{x}
 	= \skal*{\overline{y} - T \overline{x}}{x}
 \]
-Damit folgt $\overline{y}=T \overline{x}$. Es gilt $\norm{\overline{x}}=1$ und\footnote{\enquote{teilweiser Limes} mit: 
+Da $x \in \mathcal{H}$ beliebig war, folgt $\overline{y}=T \overline{x}$. Es gilt $\norm{\overline{x}}=1$ und\footnote{\enquote{teilweiser Limes} mit: 
 $\abs*{\skal*{x_k}{T x_k} - \skal*{x_k}{\overline{y}}}=\abs*{\skal*{x_k}{T x_k - \overline{y}}} \le \norm{x_k} \cdot \norm{T x_k - \overline{y}} \to 0$}
 \[
 	\overline{\mu} = \lim_{ k \to \infty} \skal*{x_k}{T x_k} = \lim_{ k \to \infty}  \skal*{x_k}{\overline{y}} = \skal*{\overline{x}}{\overline{y}} = 
 	\skal*{\overline{x}}{T \overline{x}} = \mu(\overline{x})
 \]
-das heißt $\overline{\mu}$ ist das Maximum von $\mu \colon \mathcal{H} \to \mathds{R}$. Für $z \in \mathcal{H}$ definiere $f_z \colon \mathds{R} \to \mathds{R}$ durch
+Das heißt $\overline{\mu}$ ist das Maximum von $\mu \colon \mathcal{H} \to \mathds{R}$. Für $z \in \mathcal{H}$ definiere $f_z \colon \mathds{R} \to \mathds{R}$ durch
 $f_z(t) := \mu(\overline{x}+ t \cdot z)$. Dann ist $f_z$ in $t=0$ differenzierbar und es gilt
 \[
 	0 = f_z'(0) = \frac{2 \cdot \skal*{z}{T \overline{x}} \cdot \norm{\overline{x}}^2 - 2 \cdot \skal*{\overline{x}}{T \overline{x}} \cdot 
 	\skal*{z}{\overline{x}}}{\norm{\overline{x}}^4} 
 \]
 Also ist $\skal*{z}{T \overline{x} - \overline{\mu} \cdot \overline{x}} =0$ für alle $z \in \mathcal{H}$. Es folgt $T \overline{x}= \overline{\mu} \cdot \overline{x}$.
-Setze nun $\lambda_0 := \overline{\mu}$, $e_0:= \overline{x}$. Definiere $\mathcal{H}_1 := \set{e_0}^\bot$. Dann ist $\mathcal{H}_1 \subset \mathcal{H}$ ein Untervektorraum.
+Setze nun $\lambda_0 := \overline{\mu}$, $e_0:= \overline{x}$ und definiere $\mathcal{H}_1 := \set{e_0}^\bot$. Dann ist $\mathcal{H}_1 \subset \mathcal{H}$ ein Untervektorraum.
 Für $x \in \mathcal{H}_1$ gilt $\skal*{e_0}{Tx} = \skal*{T e_0}{x}= \lambda_0 \cdot \skal*{e_0}{x}=0$. Also ist $Tx \in \mathcal{H}_1$. Wir können also 
 \[
 	T_1 := T\big|_{\mathcal{H}_1} \in \mathcal{L}(\mathcal{H}_1)
 \]
-definieren. Tatsächlich gilt $0 \le T_1 = T_1^* \in \mathcal{K}(\mathcal{H}_1)$. Induktion liefert Eigenwerte $\lambda_0 \ge \lambda_1 \ge \lambda_2 \ge \ldots>0$ zu
-normierten Eigenvektoren $e_0, e_1, e_2, \ldots$ (Die Folge ist endlich falls ein $\lambda_i=0$ oder $\dim \mathcal{H} < \infty$). Die Eigenvektoren sind paarweise orthogonal
-und für jedes $X_k := \Span \set{e_0, \ldots ,e_k}$ und $x \in X_k^\bot$ gilt $\mu(x) \le \lambda_k$.
-
-(Noch zu zeigen: $\lambda_k \to 0$)
+definieren. Tatsächlich gilt $0 \le T_1 = T_1^* \in \mathcal{K}(\mathcal{H}_1)$. Wir können also die gleiche Konstruktion für $T_1$ durchführen und erhalten induktiv
+Eigenwerte $\lambda_0 \ge \lambda_1 \ge \lambda_2 \ge \ldots>0$ zu normierten Eigenvektoren $e_0, e_1, e_2, \ldots$. Die Folge ist endlich, falls ein $\lambda_i=0$ ist oder 
+$\dim \mathcal{H} < \infty$ gilt. Die Eigenvektoren sind paarweise orthogonal und für jedes $X_k := \Span \set{e_0, \ldots ,e_k}$ und $x \in X_k^\bot$ gilt 
+$\mu(x) \le \lambda_k$.
 
 Für $\tilde{\mathcal{H}} := \overline{\bigcup_{k=0}^\infty X_k}$ und $x \in \tilde{\mathcal{H}}^\bot$ gilt $\mu(x) \le \lambda_k$, $k \in \mathds{N}$, also $\mu(x)=0$.
 Damit folgt $\skal*{x}{T x}=0$ und wegen $T|_{\tilde{\mathcal{H}}^\bot} \in \mathcal{K} \enbrace[\big]{\tilde{\mathcal{H}}^\bot}$ selbstadjungiert gilt nach Bemerkung 
 \ref{sub:729} $T|_{\tilde{\mathcal{H}}^\bot} =0$, das heißt $\tilde{\mathcal{H}}^\bot \subset \ker T$.
-
-Die $e_k$ bilden eine Orthonormalbasis von $\tilde{\mathcal{H}}$: Für $x \in \mathcal{H}$ existieren $\tilde{x} \in \tilde{\mathcal{H}}$ und $\tilde{x}^\bot \in \tilde{\mathcal{H}}^\bot$ mit $x= \tilde{x} + \tilde{x}^\bot$. Es gilt dann 
+Wir zeigen nun, dass die $e_k$ eine Orthonormalbasis von $\tilde{\mathcal{H}}$ bilden:
+Für $x \in \mathcal{H}$ existieren $\tilde{x} \in \tilde{\mathcal{H}}$ und $\tilde{x}^\bot \in \tilde{\mathcal{H}}^\bot$ mit $x= \tilde{x} + \tilde{x}^\bot$. Es gilt dann 
 \[
-	T x = T \tilde{x} + T(\tilde{x}^\bot) = T \tilde{x} = T \enbrace*{\sum_{k=0}^{\infty} \skal*{e_k}{\tilde{x}}} \cdot e_k = \sum_{k=0}^{\infty} \skal*{e_k}{x} T e_k
-	= \sum_{k=0}^{\infty} \lambda_k \skal*{e_k}{x} \cdot e_k 
+	T x = T \tilde{x} + \underbracket[0.7pt][2pt]{T(\tilde{x}^\bot)}_{=0} = T \tilde{x} = T \enbrace*{\sum_{k=0}^{\infty} \skal*{e_k}{\tilde{x}} \cdot e_k} 
+	= \sum_{k=0}^{\infty} \skal*{e_k}{x} \cdot T e_k = \sum_{k=0}^{\infty} \lambda_k \cdot \skal*{e_k}{x} \cdot e_k 
 \]
-Also gilt (iv). Damit folgt auch (ii). (i) folgt aus (iv) und (ii). Da $T$ kompakt ist, existiert eine konvergente Teilfolge $(T e_{k_l})_{l \in \mathds{N}}$. Es gilt
+Also gilt (iv). Damit folgt auch (ii) (Warum?).
+$\sigma(T)$ ist abzählbar nach (iv) und (ii).
+Da $T$ kompakt ist, existiert eine konvergente Teilfolge $(T e_{k_l})_{l \in \mathds{N}}$ von $(T e_k)_{k \in \mathds{N}}$. Es gilt
 \[
-	0=\lim_{l,m \to \infty} \norm{T e_{k_l} - T e_{k_n}} = \lim_{l,m \to \infty} \norm{\lambda_{k_l} \cdot e_{k_l} - \lambda_{k_m} e_{k_m}} = 
+	0=\lim_{l,m \to \infty} \norm{T e_{k_l} - T e_{k_m}} = \lim_{l,m \to \infty} \norm{\lambda_{k_l} \cdot e_{k_l} - \lambda_{k_m} e_{k_m}} = 
 	\lim_{l,m \to \infty}  \sqrt{\lambda_{k_l}^2 + \lambda_{k_m}^2}  
 \]
-Damit folgt $\lambda_{k_l} \xrightarrow{l \to \infty} 0$. Damit müssen wegen der Absteigenden Folge auch $\lambda_k \xrightarrow{k \to \infty} 0$. \bewende
+Damit folgt $\lambda_{k_l} \xrightarrow{l \to \infty} 0$. Damit muss wegen der absteigenden Folge auch $\lambda_k \xrightarrow{k \to \infty} 0$ gelten. 
+Die verbleibende Aussage (iii) folgt aus (i). \bewende
 % subsection 810 (end)
 
 \subsection[Corollar: Approximierbarkeit kompakter Operatoren und $\mathcal{K}(\mathcal{H})$ ist selbstadjungiert]{Corollar} % (fold)
