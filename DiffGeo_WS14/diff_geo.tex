@@ -2763,19 +2763,111 @@ Seien $x^1,\ldots,x^n$ Normalkoordinaten um $x$. Dann
 \[
 \frac{\mathd^2}{\mathd t^2}(x^k\circ \gamma_v) + \sum_{i,j} \Gamma_{ij}^k (\gamma_v) \frac{\mathd}{\mathd t}(x^i \circ \gamma_v) \frac{\mathd}{\mathd t}(x^j \circ \gamma_v) = 0\quad \text{für alle}\ k
 \]
-Außerdem gilt
+Aus der Homogenität von der Geodäte $\gamma_v$ folgt:
 \[
 x^k(\gamma_v(t)) = x^k(\gamma_{tv}(1)) = ta^k
 \]
+somit verschwindet der Term der zweiten Ableitung und es bleibt übrig:
+\[
+\sum_{i,j} \Gamma_{ij}^k (\gamma_v(t)) \frac{\mathd}{\mathd t}(x^i \circ \gamma_v(t)) \frac{\mathd}{\mathd t}(x^j \circ \gamma_v(t)) = \sum_{i,j} \Gamma_{ij}^k (\gamma_v(t)) a^i a^j = 0
+\]
+Für $t=0$ ist $\gamma_v(t) = x$ und somit unabhängig von der Wahl von $v$, also gilt
+\[
+\sum_{i,j} \Gamma_{ij}^k (\gamma_v(t)) a^i a^j = 0\quad \forall a^i \in \mathds{R}
+\]
+Damit folgt $\Gamma_{ij}^k$.
 \end{enumerate}
 %subsubsection 247(end)
+Aufgrund von Beispiel $\ref{ssub:244}$ können wir nicht annehmen, dass $\exp_x$ eine Isometrie ist. Jedoch gilt für $\mathd_v \exp_x: T_v T_x M \to T_{\exp_x(v)} M$
+\[
+\mathd_v \exp_x(v) = \frac{\mathd}{\mathd t} \exp_x ((1+t)v)\vert_{t=0} = \frac{\mathd}{\mathd t} \gamma_{(1+t)v}(1)\vert_{t=0} = \frac{\mathd}{\mathd t} \gamma_v(1+t)\vert_{t=0} = \dot{\gamma}_v (1) 
+\]
+Somit folgt:
+\[
+\abs{\mathd_v \exp_x(v)} = \abs{\dot{\gamma}_v (1)} = \abs{\dot{\gamma}_v (0)} = \abs{v}
+\]
+Also ist $\mathd_v \exp_x$ Isometrie in radialer Richtung
+
+\subsubsection{Gauß-Lemma}
+\label{ssub:248}
+Ist $w\in T_v T_x M$ orthogonal zu $v\in T_vT_x M$, so ist $\mathd_v \exp_x(w)$ orthogonal zu $\mathd_v \exp_x (v)$ in $T_{\gamma_v(1)} M$ (Orthogonalität zu radialen Richtungen bleibt erhalten)
+\minisec{Beweis}
+Es ist schwer $\mathd_v \exp_x(w)$ auszurechnen, aber wir sind nur an $g\enbrace*{\mathd_v \exp_x(v),\mathd_v \exp_x(w)}$ interessiert. Angenommen, wir hätten eine glatte Variation $\gamma_s(t)$ von $\gamma_0 = \gamma_v$ definiert auf $t\in \benbrace{0,1}$. Dann
+\begin{align*}
+\frac{\mathd}{\mathd t} L(\gamma_s)\vert_{s=0} & = \frac{1}{\abs{v}} \enbrace*{g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(1)\vert_{s=0},\dot{\gamma}_v(1)} - g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0},\dot{\gamma}_v(0)}}\\
+& = \frac{1}{\abs{v}} \enbrace*{g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(1)\vert_{s=0},\mathd_v \exp(v)} - g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0},v}}
+\end{align*}
+Somit folgt 
+\[
+g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(1)\vert_{s=0},\mathd_v \exp(v)} = g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0},v}
+\]
+Nun konstruieren wir eine Variation, sodass $\frac{\mathd}{\mathd s} \gamma_s(1)\vert_{s=0} = \mathd_v \exp_x(w)$. Definiere die Kurve $\alpha:(-\delta,\delta)\to T_x M$ Kurve mit $\alpha(0) = v$ und $\dot{\alpha}(0) = w$, $\alpha \subset S_{\abs{r}}^{n-1}$. Für $s\in (-\delta,\delta)$ sei $\rho_s(t)$ der Strahl von $0_x$ nach $\alpha(s)$, also $\rho_0(t) = tv$, $\rho_s(0) = 0_x$ und $\rho_s(1) = \alpha(s)$. Dann ist $\gamma_s(t) = \exp(\rho_s(t))$ die benötigte Variation. (Da $\gamma_0(t) = \exp(\rho_0(t)) = \exp(tv) = \gamma_tv(1) = \gamma_v(t)$)
+Es gilt 
+\[
+\frac{\mathd}{\mathd s} \gamma_s(1)\vert_{s=0} = \frac{\mathd}{\mathd s} \exp_x (\alpha(s))\vert_{s=0} = \mathd_{\alpha(0)} \exp_x(\dot{\alpha}(0)) = \mathd_v \exp_x(w)
+\]
+Zusammen mit $\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0} = \frac{\mathd}{\mathd s} \exp_x(0_x)\vert_{s=0} = 0_x$ folgt dann, dass $\mathd_v \exp_x(w)$ orthongonal zu $\mathd_v \exp_x(v)$
+%subsubsection 248(end)
 
 \subsubsection{Bemerkung}
-\label{ssub:241}
+\label{ssub:249}
+Äquivalent, gibt uns die Parametrisierung
+\[
+(0,\epsilon)\times S^{n-1} \to \exp_x(B_\epsilon(0_x))\backslash \set{x},\quad (r,v)\mapsto \exp_x(rv) 
+\]
+gibt uns "Polarkoordinaten auf $U\backslash \set{x}$" in diesen Koordinaten gilt
+\[
+g_{(r,v)} = \mathd r^2 + h_{(r,v)}
+\]
+wobei $h_{(r,v)}$ die Metrik induziert auf $\exp_x (\set{r}\times S^{n-1})$
+%subsubsection 249(end)
 
-%subsubsection 241(end)
+\subsubsection{Korollar}
+\label{ssub:250}
+Sei $\tilde{B} := B_r(0_x)\subset T_x M$ ein \Index{normaler Koordinatenball}, das heißt $\exp_x\vert_{\tilde{B}}$ ist Diffeomorphismus auf sein Bild $B:= \exp_x (\tilde{B})$. Dann: Sei $v\in \tilde{B}$, so ist die \Index{Radialgeodäte} $\gamma_v:\benbrace{0,1}\to M$ die (bis auf Reparametrisierung) eindeutig bestimmte Kurve mit 
+\[
+\mathd^g(x,\exp_x(v)) = L(\gamma_v) = \int_0^1 \abs{\dot{\gamma}}\mathd t = \abs{v}
+\]
+$\tilde{B}$ und $B$ nennen wir \Index{Normalkoordinatenbälle mit Radius $r > 0$}. Insbesonde gilt $B = B_r(x) = \set[y\in M]{\mathd^g(x,y)<r}$
+\minisec{Beweis}
+\begin{enumerate}[(a)]
+\item Sei $c:\benbrace{0,1}\to M$ stückweise glatte Kurve mit $c(0) = x, c(1) = y$. Der Schlüssel zu zeigen ist die Existenz eines $t_1\in \benbrace{0,1}$ mit
+\[
+L(c) \geq \abs{v} + \int_{t_1}^1 \abs{\dot{c}}\mathd t 
+\]
+Wähle Polarkoordinaten auf $B$, $c=(r(c),\theta^1(c),\ldots,\theta^{n-1}(c))^t$, dann $\dot{c} = \mathd r(\dot{c})\partial_r + \sum_i \mathd \theta^i (\dot{c})\partial_{\theta_i}$. Mit dem Gauß Lemma folgt, dass $g(\dot{c},\partial_r) \leq \abs{\dot{c}}$, womit
+\[
+L(c) \geq \int_0^{t_0} \frac{\mathd}{\mathd t} r(c)\vert_t \mathd t + \int_{t_0}^1 \abs{\dot{c}} \mathd t = r(c(t_0)) + \int_{t_0}^1 \abs{\dot{c}} \mathd t
+\]
+Aus der Definition von $t_0$ erhalten wir $r(c(t))\geq \abs{v}$. Mit dem Mittelwertsatz folgt die Existenz ein $t_1$, sodass $r(c(t_1)) = \abs{v}$. Somit ist $L(c) \geq \abs{v} + \int_{t_1}^1 \abs{\dot{c}}\mathd t$ erfüllt. Im Besonderen $L(\gamma_v)$ erreicht das Minimum und ist dadurch gleich zur Distanz. Um Gleichheit zu erreichen, müssen wir zunächst $\abs{\dot{c}(t)} = 0$ für $t\geq t_1$ und $c$ an dieser Stelle glatt, also können wir annehmen, dass $t_1 = 1$, falls $L(c) = L(\gamma)$. Außerdem brauchen wir Gleichheit in $g_{c(t)}(\dot{c}(t),\partial_r) \leq \abs{\dot{c}(t)}$, was genau dann gilt, wenn $\dot{c}$ ist radial, das heißt $\dot{c} = \mathd r(\dot{c})\partial_r$ immer wenn $c$ glatt und $\mathd r(\dot{c}) \geq 0$. Da $c$ stetig, können keine nicht-trivialen Bruchpunkte existieren und somit ist $c$ glatt und $c(t) = \gamma_v(r(c(t)))$, sa dass $c$ eine Reparametrisierung von $\gamma_v$ ist.
+\item Es ist klar, das wir jeden Punkt $y\in B\subset B_r(0)$ mit $x$ durch eine Geodäte mit Länge kleiner $r$ verbinden kann. $B_r(0) \subset B$ zeigen wir, indem wir annehmen $y \not \in B$ und dann zeigen wollen, dass $\mathd^g(x,y) > r$. Dafür müssen wir zeigen: Falls $c$ eine Kurve zwischen $x$ und $y$, dann $L(c)>r$. Tatsächlich, da $\alpha$ $B$ verlässt, schneidet es jede Sphäre $\exp_x (S_\epsilon)$, $\epsilon<r$. Da die kürzeste Verbindung $c_\epsilon$ von $x$ zum Schnittpunkt von $\exp_x(S_\epsilon)$, gilt $L(c)\geq L(c_\epsilon) \geq \epsilon$. Also $L(c) \geq r$. 
+\end{enumerate}
+%subsubsection 250(end)
 
 %subsection 25(end)
+
+\subsection{Theorem von Hopf-Rinow}
+\label{sub:26}
+
+\subsubsection{Definition}
+\label{ssub:251}
+$(M,g)$ heißt \Index{geodätisch vollständig}, falls jede Geodäte auf ganz $\mathds{R}$ definiert ist. Äquivalent $\exp: TM\to M$ auf ganz $TM$ definiert.
+%subsubsection 251(end)
+
+\subsubsection{Beispiele}
+\label{ssub:252}
+\begin{enumerate}[(i)]
+\item $\enbrace{\mathds{R}^n,g_{\text{eukl}}},\enbrace{S^n,g_{\text{rou}}},\enbrace{H^n,g_{\text{hyp}}}$ alle vollständig
+\item $\enbrace{\mathds{R}^n\backslash \set{0},g_{\text{eukl}}\vert_{\enbrace{\mathds{R}^n\backslash \set{0}}}}$ nicht vollständig, zum Beispiel $\gamma:(-\infty,-\epsilon] \to \mathds{R}^n\backslash \set{0},\ \gamma(t) = (t,0)$.
+\item $(g_p)_x (v,v) = 4\sum_i \frac{v_i^2}{(1-\abs{x}^2)^2}$ definiert \Index{Poincaré-Metrik} auf $B_1(0),\ v=\sum v^i \partial_i$. $(B_1(0),g_p)$ vollständig.
+\end{enumerate}
+%subsubsection 252(end)
+
+\subsubsection{Definition}
+\label{ssub:251}
+%subsubsection 251(end)
+
+% subsection 26(end)
 
 % section 2(end)
 
