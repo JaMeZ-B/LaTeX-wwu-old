@@ -2523,22 +2523,259 @@ L(\gamma \circ s) = L(\gamma)
 \end{itemize}
 %subsubsection 228(end)
 
-\subsubsection{Definition}
-\label{ssub:225}
+\subsubsection{Beispiel}
+\label{ssub:229}
+Sei $\enbrace{\mathds{R}^n,g_{\text{eukl}}}$, so ist $\mathd^{g_{\text{eukl}}}$ die übliche Distanzfunktion auf $\mathds{R}^n$. Insbesonder ist $\enbrace{{R}^n,g_{\text{eukl}}}$ der natürliche metrische Raum, die Topologie wird erzeugt durch metrische Bälle $R_r(x)=\set[y\in T]{\mathd^g (x,y) < r}$. Diese Bälle haben den Durchmesser $\rho(B_r(x),g_{\text{eukl}}) = 2r$ und für den ganzen Raum gilt $\rho(\mathds{R}^n,g_{\text{eukl}}) = \infty$
+%subsubsection 229(end)
 
-%subsubsection 225(end)
+\subsubsection[Bemerkung: Durchmesser kompakter Mannigfaltigkeiten]{Bemerkung}
+\label{ssub:230}
+Insbesondere kann der Durchmesser $\rho(M,g) = +\infty$ für nicht kompakte Mannigfaltigkeiten sein. ($M$ kompakt $\Rightarrow \rho(M,g) < + \infty$, da $\mathd^g$ stetig $\leadsto$ wichtige metrische Invariante)
+%subsubsection 230(end)
 
-\subsubsection{Definition}
-\label{ssub:225}
-
-%subsubsection 225(end)
-
-\subsubsection{Definition}
-\label{ssub:225}
-
-%subsubsection 225(end)
+\subsubsection{Satz}
+\label{ssub:231}
+Sei $(M,g)$ Riemannsche Mannigfaltigkeit, so gilt
+\begin{itemize}[(i)]
+\item $\mathd^g$ ist Distanzfunktion (im Sinne der Topologie)
+\item Die Topologie die aus dem metrischen Raum entsteht ist äquivalent zur Topologie der Mannigfaltigkeit
+\end{itemize}
+\minisec{Beweis}
+\begin{itemize}[(i)]
+\item Der schwierige Punkt ist zu zeigen, dass $\mathd^g(x,y) = 0 \Rightarrow x = y$.
+Angenommen $x \neq y$.
+\missingfigure{Bild zur Trennung von $x$ und $y$}
+So wähle lok. Koordinaten $x^1,\ldots,x^n$ auf $U$ mit $x \in U$. So können wir die Metrik $g$ darstellen $g\vert_U = \sum g_{ij} \mathd x^i \otimes \mathd x^j$. Definiere auf $U$ zweite Metrik: $g_{\text{eukl}}\vert_U = \sum \mathd x^i \otimes \mathd x^j$. Betrachte einen Ball um $x$ $B_r(x) = \set[p]{\mathd^{g_{\text{eukl}}}(x,y) < r}$, sodass $y \not\in B_r(x)$ (hier wird die Hausdorff-Eigenschaft von $M$ genutzt). Da $g_{ij}$ eine symmetrische pos. def. Matrix für alle $x\in U$ existiert ein kleinste Eigenwert $\lambda$ von $g_{ij}$ und es folgt $\abs{v}_{g}^2 = g(v,v) \geq \lambda g_{\text{eukl}}(v,v) = \abs{v}_{g_{\text{eukl}}}^2$. Sei $\gamma$ nun eine Kurve von $x$ nach $y$. So verlässt diese Kurve zwingend $B_r(x)$ und es folgt somit
+\[
+L(\gamma) = \int_I \abs{\dot{\gamma}}_g \mathd t \geq \lambda \int_I \abs{\dot{\gamma}}_{g_{\text{eukl}}} \mathd t \geq \lambda r
+\]
+Somit folgt $\mathd^g (x,y) > 0$ und somit der Widerspruch.
+\item Der interessante Punkt zu beweisen ist, dass aus $U\subset M$ offen folgt, dass $x\in U, \epsilon>0$ existiert mit $B_\epsilon (x) = \set[y\in M]{\mathd^g (x,y)<\epsilon}\subset U$. Also "jede offene Menge $U\subset M$ enthält einen metrische Ball". Angenommen dies ist nicht der Fall, so existiert ein $x\in U$ und eine Folge $y_n\not\in U$ mit $\mathd^g(x,y_n) = \frac{1}{n}$. Nach Definition der Riemanschen Distanz existiert also eine Kurve $\gamma_n: I \to M$ mit $\gamma(a) = x$ und $\gamma(b) = y_n$, für die gilt $L(\gamma) < \frac{1}{n}$. Dies ist ein Widerspruch, da im ersten Teil gezeigt wurde, das $L(\gamma) \geq c > 0$ für alle Kurven von $x\in U$ nach $y_n \not\in U$.
+\end{itemize}
+%subsubsection 231(end)
 
 %subsection 23(end)
+
+\subsection{Erste Variation der Bogenlänge und Geodäten}
+
+Seien $x,y$ gegeben mit $x\neq y$. So stellt sich die Frage, ob eine Kurve von $x$ nach $y$ existiert, die das Infinum der Länge annimmt, also ob eine Kurve mit $L(\gamma) = \mathd^g (x,y)$ existiert. Variatonsrechnung liefert notwendige Bedingun an ein solches $\gamma$.
+
+\subsubsection{Definition}
+\label{ssub:232}
+Sei $\gamma:[a,b]=I\to M$ (glatte) Kurve. Die \Index{Variation} ist die glatte Abbildung 
+\[
+F:Q:=(-\epsilon,\epsilon) \to M
+\] für festes $s\in (-\epsilon,\epsilon)$ def. wir die Kurve $\gamma_s := F(s,.):I\to M$. Für $s=0$ folgt $\gamma = \gamma_0 = F(0,.)$. Eine \Index{Vektorfeld entlang von $F$} ist eine Abbildung $Y: Q\to TM$ mit $Y(q)\in T_{F(q)} M$. Die Menge der Vektorfelder entlang $F$ bezeichnen wir mit $\Gamma(F* TM)$
+%subsubsection 232(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:233}
+Wir können uns den Raum der glatten Kurven von $x$ nach $y$ $\Omega_0 (x,y)$ als unendlich-dimensionale Mannigfaltigkeit vorstellen. Hierbei ist der Tangentialraum $T_\gamma \Omega_0 (x,y)$ vorstellbar als Raum der Derivationen $\frac{\mathd \gamma_s}{\mathd s}(0,t) = \frac{\mathd F}{\mathd s}(0,t)$ für eine Variation $F$ von $\gamma$. Definiere $V(s,t) := \frac{\mathd}{\mathd s} F(s,t)\in \Gamma(F*TM)$. Das \Index{Variationsvektorfeld} ist dann gegeben durch $V_\gamma(t):=V(0,t) \in \Gamma_\gamma(TM)$. Es gilt $T_\gamma \Omega_0 (x,y) \simeq \Gamma_\gamma(TM)$.
+%subsubsection 233(end)
+
+\subsubsection{Definition}
+\label{ssub:234}
+Sei $F$ Variation von $\gamma$, $(Y:Q\to TM) \in \Gamma(F*TM)$ glatt mit $Y(q) \in T_{F(q)}M$. So existiert 
+\[
+\nabla^F:\Gamma(TQ)\times \Gamma(F^* TM) \to \Gamma(F^* TM),\ \nabla^F (X,Y) = \nabla_X^F V
+\]
+mit folgenden Eigenschaften:
+\begin{itemize}
+\item tensoriell in $X$
+\item Leibnitz-Regel in $V$
+\item $\nabla_X^F V = \nabla_X^g V$, falls $V(q) = \tilde{V}(F(q))$, $\tilde{V}\in \Gamma(TM)$
+\end{itemize}
+%$\enbrace*{\frac{\nabla^\gamma}{\mathd t}: \Gamma_\gamma(TM)\to \Gamma_\gamma(TM),\ \frac{\nabla^\gamma}{\mathd t} V = \nabla_j^\gamma V}$
+In lokaler Betrachtung ist $V = \sum V^i(q) \partial_i(F(q))$ und somit folgt 
+\[
+(\nabla_X^F V)(q) = \sum \mathd_q V^i(X(q))\partial(F(q))+V^i(q)\enbrace*{\nabla_{X(q)}\partial_i}(F(q))
+\]
+Ein Vektorfeld $X\in \Gamma(TQ)$ induziert ein Vektorfeld entlang $F$ durch  $\bar{X}(q) = \mathd F_q(X(q))\in \Gamma(F^* TM)$. (Beachte $Y\in \Gamma(F^* TM)$ ist im Allgemeinen kein Vektorfeld auf $F(Q)$)
+%subsubsection 234(end)
+
+\subsubsection{Lemma}
+\label{ssub:235}
+Sei $F$ Variation von $\gamma$. Seien $X,Y\in \Gamma(TQ), V,W\in \Gamma(F^* TM)$. Dann gilt
+\begin{enumerate}[(i)]
+\item $\nabla_X^F \bar{Y} - \nabla_Y^F \bar{X} = \overline{\benbrace{X,Y}}$
+\item $X.\underbrace{g(V,W)}_{C^\infty (Q)} = g(\nabla_X^F V,W) + g(V,\nabla_X^F W)$, wobei $g(V,W)(q) = g_{F(q)}\enbrace{V(q),W(q)}$
+\item $\nabla_{\benbrace{X,Y}}^F - \benbrace{\nabla_X^F,\nabla_Y^F} = R^g(\bar{X},\bar{Y})$
+\end{enumerate}
+%subsubsection 235(end)
+
+\subsubsection{Satz: 1.Variation von $L$, glatter Fall}
+\label{ssub:236}
+Sei $\gamma:I\to M$ eine glatte Kurve, nach Bogenlänge parametrisiert mit $c=\abs{\dot{\gamma}}$. Sei $F(s,t) = \gamma_s(t)$ eine Variation von $\gamma = \gamma_0$, das heißt $F(0,t) = \gamma_0(t) = \gamma(t)$ und sei $V_\gamma$ das zugehörige Variationsvektorfeld ($V_\gamma \in \Gamma_\gamma(TM),\ V_\gamma (t) = \bar{\partial}_s (0,t)$).
+Dann gilt
+\[
+\frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = \frac{1}{c}\enbrace*{g(V_\gamma,\dot{\gamma})\vert_a^b - \int_a^b g(V_\gamma,\frac{\nabla^\gamma}{\mathd t}\dot{\gamma})\mathd t}
+\]
+Falls $F$ Variation mit festen Endpunkten, also $F(s,0) = \gamma(a)$ und $F(s,1) = \gamma(b)$ für alle s, so gilt
+\[
+\frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = - \frac{1}{c} \int_a^b g(V_\gamma,\frac{\nabla^\gamma}{\mathd t}\dot{\gamma})\mathd t
+\]
+\minisec{Beweis}
+Seien $V = \bar{\partial}_s, T = \bar{\partial}_t$. (Bemerkung: $V,T \in \Gamma(F^* TM),\ V(0,t) = \gamma(t), T(s,t) = \mathd_{(s,t)} F(s,t) = \dot{\gamma}$) Mit $\ref{ssub:235}$ folgt, dass $\partial_s g(\dot{\gamma}_s,\dot{\gamma}_s) = 2g(\nabla_{\partial_s}^F T,T)$. Dann folgt
+\begin{align*}
+\frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} &  = \int_a^b \partial_s \sqrt{g\enbrace*{\dot{\gamma}_s (t),\dot{\gamma}_s (t)}}\vert_{s=0} \mathd t\\
+& = \int_a^b \frac{1}{\abs{\dot{\gamma}}} g(\nabla_{\partial_s}^F T,T)\vert_{s=0} \mathd t\\
+& = \frac{1}{c} \int_a^b g(\nabla_{\partial_t}^F + \overline{\benbrace{\partial_s,\partial_t}},T)\vert_{s=0}\mathd t\\
+& = \frac{1}{c} \int_a^b g(\nabla_{\partial_t}^F,T)\vert_{s=0}\mathd t\\
+& = \frac{1}{c} \int_a^b \partial_t g(V,T) - g(V,\nabla_{\partial_t}^F T)\vert_{s=0} \mathd t\\
+& = \frac{1}{c} \underbrace{g(V,T)\vert_{s=0}}_{g(V_\gamma,\dot{\gamma}_0)}\big\vert_a^b - \int_a^b g(V,\underbrace{\nabla_{\partial_t}^F T(0,t)}_{\frac{\nabla^\gamma}{\mathd t} \dot{\gamma}(t)}) \mathd t
+\end{align*}
+$\hfill \square$
+\\
+Letzten Endes wollen wir $\gamma \in \Omega(x,y)$ betrachten, das heißt stückweise stetige Kurven $\gamma$. So müssen wir auch stückweise glatte Variation betrachten, das heißt es existiert $a=t_0 < \ldots < t_n = b$, $F\vert_{(-\epsilon,\epsilon)\times [t_i,t_{i+1}]}$ glatt und $F:Q\to M$ stetig. (O.B.d.A) haben $F$ und $\gamma$ die gleichen Bruchpunkte $t_i$
+%subsubsection 236(end)
+
+\subsubsection{Theorem: 1. Variationsformel für $L$}
+\label{ssub:237}
+Sei $\gamma$ stückweise glatt, nach Bogenlänge parametrisiert, $F$ stückweise glatte Variation von $\gamma$ mit fixierten Endpunkten und $\Delta \dot{\gamma}(t_i) = \dot{\gamma}\vert_{\benbrace{t_i,t_{i+1}}}(t_i) -\dot{\gamma}\vert_{\benbrace{t_{i-1},t_i}}(t_i)$. Dann gilt
+\[
+\frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = \frac{1}{c} \enbrace*{\sum_{i=1}^{N-1} g\enbrace*{V_\gamma,\Delta \dot{\gamma}(t_i)} - \int_a^b g\enbrace*{V_\gamma,\frac{\nabla^\gamma}{\mathd t}\dot{\gamma}} \mathd t}
+\]
+\minisec{Beweis}
+Folgt direkt aus $\ref{ssub:236}$.
+%subsubsection 237(end)
+
+\subsubsection[Definition: Geodäte]{Definition}
+\label{ssub:238}
+Eine glatte, nach Bogenlänge parametrisierte Kurve $\gamma:I\to M$ heißt Geodäte, falls
+\[
+\frac{\nabla^\gamma}{\mathd t} \dot{\gamma} = 0
+\]
+In lokalen Koordinaten $x^1,\ldots,x^n$ (vgl. $\ref{ssub:22}$) lautet die Bedingung
+\[
+\frac{\mathd^2}{\mathd t^2} x^k\circ \gamma + \sum \Gamma_{ij}^k(\gamma) \frac{\mathd}{\mathd t}(x^i\circ \gamma)\frac{\mathd}{\mathd t}(x^j\circ \gamma) = 0\quad \text{für}\ k=1,\ldots,n
+\]
+%subsubsection 238(end)
+
+\subsubsection{Korollar}
+\label{ssub:239}
+Für alle $x\in M, v\in T_x M$ existiert eine eindeutig bestimmte Geodäte $\gamma_v:(-\delta,\delta)\to M$ mit $\gamma_v(0) = x, \dot{\gamma}_v (0) = v$
+%subsubsection 239(end)
+
+
+\subsubsection{Beispiele}
+\label{ssub:240}
+\begin{enumerate}[(i)]
+\item Sei $(\mathds{R}^n,g_{\text{eukl}})$ gegeben. Da $\mathds{R}^n$ mit der euklidischen Metrik versehen gilt $\Gamma_{ij}^k = 0$ und somit reduziert sich die Bedingung, damit $\gamma:I\to \mathds{R}^n$ eine Geodäte ist, auf $\ddot{\gamma} = 0$. Also sind Geodäten Geraden auf $(\mathds{R}^n,g_{\text{eukl}})$.
+\item Sei $M^n\subset \mathds{R}^{n+k}$ eine $n$-dimensionale Riemannsche Untermannigfaltigkeit mit der Metrik $h = g_{\text{eukl}}\vert_M$. Es gilt 
+\[
+\enbrace*{\frac{\nabla^{h, \gamma}}{\mathd t} \dot{\gamma}} = \enbrace*{\frac{\nabla^\gamma}{\mathd t} \dot{\gamma}}^T = (\ddot{\gamma})^T
+\]
+($M^n\subset \mathds{R}^{n+k} \Rightarrow T\mathds{R}^{n+k}\vert_{M^n} = TM^n \oplus \underbrace{NM^n}_{\text{Normalenbündel}}$)
+Also heißt dies, dass $\gamma$ Geodäte genau dann, wenn die Beschleunigung $\ddots{\gamma}$ normal zu $M$ ist.
+\item Zum Beispiel sind die Geodäten von $S^n\subset \mathds{R}^{n+1},\ h= g_{\text{rou}} = g_{\text{eukl}}\vert_{S^n}$ Großkreise (nach Bogenlänge parametrisiert)
+\item Sei $H^n\subset \mathds{R}^{n+1}$.
+\missingfigure{Veranschaulichung der Geodäten auf $H^n\subset \mathds{R}^{n+1}$}
+\item Sei $f:(M,g)\to (N,h)$ Isometrie, so gilt $f\circ \gamma$ Geodäte genau dann, wenn $\gamma$ Geodäte. So ist zum Beispiel bei Riemannschen Überlagerungen, wie $p:\mathds{R}^n \to \nicefrac{\mathds{R}^n}{\mathds{Z}^n} = T^n$ Torus mit flacher Metrik die Geodäten nur Projektion der Geraden in $\mathds{R}^n$.
+\end{enumerate}
+%subsubsection 240(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:241}
+$L$ ist invariant unter Reparametrisierung, aber nicht Geodäten. (nehme $s$ mit $(\gamma \circ s) \neq \text{const.} \Rightarrow \frac{\nabla^{\gamma\circ s}}{\mathd t}\gamma\circ s \neq 0$ (nur für $s = \alpha t + \beta$ ist dies erfüllt))
+%subsubsection 241(end)
+
+\subsubsection{Satz}
+\label{ssub:242}
+Sei $\gamma$  stückweise glatte nach Bogenlänge parametrisierte (insb. $\abs{\dot{\gamma}} = \text{const.}$) Kurve. So ist $\gamma$ ein kritischer Punkt von $L$ genau dann ,wenn $\gamma$ Geodäte (insb. glatt)
+\minisec{Beweis}
+\begin{itemize}
+\item "$\Leftarrow$": klar
+\item "$\Rightarrow$": Wir wollen primär die Glattheit von $\gamma$ zeigen. Sei $\frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = 0$ für alle Variationen von $\gamma$ gegeben. Es ist zu zeigen, dass $\Delta \dot{\gamma}(t_i) = \dot{\gamma}(t_i+0) - \dot{\gamma}(t_i-0) = 0$. Da $\gamma$ stückweise glatt ist $\gamma\vert_{\benbrace{t_i,t_{i+1}}}$ glatt. Sei $v\in T_{\gamma(t)} M$ für $t\in \enbrace{t_i,t_{i+1}}$, wir erweitern dies zu einem Vektorfeld $V_\gamma \in \Gamma_\gamma(TM)$ mit Träger $\supp V_\gamma \subset \enbrace{t-\delta,t+\delta}\subset \benbrace{t_i,t_{i+1}}$, wobei wir $\delta > 0$ so klein wählen, so dass $g(V_\gamma,\frac{\nabla^\gamma}{\mathd t} \dot{\gamma})$ nicht das Vorzeichen wechselt. Somit folgt mit der Annahme
+\[
+0 = \frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = \int_{t_i}^{t_{i+1}} g(V_\gamma,\frac{\nabla^\gamma}{\mathd t} \dot{\gamma}) \mathd t = \int_a^b g(V_\gamma,\frac{\nabla^\gamma}{\mathd t} \dot{\gamma}) \mathd t
+\]
+dass $\frac{\nabla^\gamma}{\mathd t} = 0$, also fehlt nur noch zu zeigen, dass $\gamma$ glatt ist. Es folgt aus $\ref{ssub:237}$
+\[
+0 = \frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = \sum_{i=1}^{N-1} g(\Delta \dot{\gamma}(t_i),V_\gamma)
+\]
+Daraus können wir folgern, dass $\Delta \dot{\gamma}(t_i) = 0$ für alle Bruchpunkte $t_i$. Somit ist $\gamma \in C^1$. Aus $\frac{\mathd^2}{\mathd t^2} \gamma^k + \sum \Gamma_{ij}^k(\gamma) \dot{\gamma}^i \dot{\gamma}^j  = 0$ folgt $\gamma \in C^2$ usw.
+\end{itemize}
+%subsubsection 242(end)
+
+%subsection 24(end)
+
+\subsection{Die Expoentialabbildung}
+\label{sub:25}
+Im folgenden Teil stellen wir uns die Frage, wann Geodäten längenminimierend sind. Wir haben beobachtet, sei $v\in T_x M$ und $\gamma_v$ eindeutig bestimmte Geodäte mit $\gamma_v(0) = x$ und $\dot{\gamma}(0) = v$. Seien $s\in \mathds{R}$ und $\tilde{\gamma}(t) = \gamma_v (st)$ mit $\dot{\tilde{\gamma}} = sv$, so folgt aus der Eindeutigkeit $\gamma_v(st) = \tilde{\gamma}(t) = \gamma_{sv}(t)$. Insbesondere für $t=1$: $\gamma_v(s) = \gamma_{sv}(1)$.\\
+(Denn $\tilde{\gamma}(0) = \gamma_v(0) = x$ und $\dot{\tilde{\gamma}} = \frac{\mathd}{\mathd t} \gamma_{v} (st)\vert_{t=0} = s \frac{\mathd}{\mathd t} \gamma_{v} (t)\vert_{t=0} = sv \in T_x M$, also $\tilde{\gamma} = \gamma_{sv}$)
+
+\subsubsection{Definition}
+\label{ssub:243}
+Für $x\in M$ setze $\mathcal{V}_x := \set[v\in T_x M]{\gamma_v(1)\ \text{ist definiert}}$
+\begin{enumerate}[(i)]
+\item \Index{Exponentialabbildung in $x$}
+\[
+\exp_x : \mathcal{V}_x\subset T_x M \to M,\quad v\mapsto \exp_x(v) := \gamma_v (1)
+\]
+\item \Index{Exponentialabbildung}
+\[
+\exp: \mathcal{V} := \bigcup_{x\in M} \mathcal{V}_x \to M,\quad \exp(v) = \exp_{\pi(v)}(v)
+\]
+\item \Index{erweiterte Exponentialabbildung}
+\[
+\widetilde{\exp}: \mathcal{V} \to M\times M,\quad \widetilde{\exp} = \enbrace{\pi(v), \exp(v)}
+\]
+\end{enumerate}
+%subsubsection 243(end)
+
+\subsubsection{Beispiele}
+\label{ssub:244}
+Die Exponentialabbildung am Nordpol des $S^2\subset \mathds{R}^3$
+%subsubsection 244(end)
+
+\subsubsection{Satz}
+\label{ssub:245}
+\begin{enumerate}[(i)]
+\item $\mathcal{V}_x\subset T_x M$ offen, enthält $0_x$ (Ursprung von $T_x M$) und $\exp_x$ ist glatt. Außerdem $\mathd_{0_x} \exp_x: T_{0_x}T_x M \simeq T_x M \to T_{\exp_x(0_x)}M$
+\item $\mathcal{V}\subset TM$ offen, enthält Nullschnitt $\set[0_x\in T_x M]{x\in M}$ und $\exp:\mathcal{V}\to M$ glatt
+\item $\widetilde{\exp}\to M\times M$ ist glatt und für alle $x\in M$ ein lokaler Diffeomorphismus um $0_x$.
+\end{enumerate}
+%subsubsection 245(end)
+
+\subsubsection{Korollar}
+\label{ssub:246}
+Sei $x\in M$. Dann eixistert $\epsilon>0$ und eine Umgebung $U$ von $x$ mit: Je zwei Punkte in $U$ können durch eine Geodäte der Länge kleiner $\epsilon$ verbunden werden. Außerdem ist die Einschränkung von $\exp_y$ auf $B_\epsilon (0_y)$ ein Diffeomorphismus auf das Bild.
+\minisec{Beweis}
+Nach $\ref{ssub:244}$ existiert eine Umgebung $\mathcal{W}$ von $0_y$ in $T_x M$ mit $\widetilde{\exp}\vert_\mathcal{W}$ Diffeomorphismus auf das Bild. Außerdem existiert eine Umgebung $W$ um $x$ in $M$ und $\epsilon>0$, sodass $\mathcal{W}_\epsilon := \bigcup_{y\in W} B_\epsilon(0_y) \subset \mathcal{W}$. Da $(x,x) = \exp(0_x)$ gilt $(x,x) \in \widetilde{\exp}(\mathcal{W}_\epsilon)$ und somit existiert eine offene Menge $U\subset M$ um $x$, sodass $U\times U\subset \widetilde{\exp}(\mathcal{W}_\epsilon)$. Sind also $p,q\in U$, dann existiert ein (eindeutiges) $v\in \mathcal{W_\epsilon}$, sodass $(p,q) = \enbrace{\pi(v), \exp_{\pi(v)} v}$.
+Schließlich folgt
+\[
+L(\gamma_v \vert_{\benbrace{0,1}}) = \int_0^1 \abs{\dot{\gamma}_v}\mathd t = \abs{v} < \epsilon,\quad \text{da}\ v\in B_\epsilon (0_p)
+\]
+\marginnote{Hier fehlt vllt. noch ein kleiner Kommentar}
+%subsubsection 246(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:247}
+Seien $x^1,\ldots,x^n$ Normalkoordinaten um $x$. Dann
+\begin{enumerate}[(a)]
+\item $g_{ij}(x) = \delta_{ij}$
+\item $\Gamma^k_{ij}(x) = 0$ ($\nabla_{\partial_i}^g \partial_j(y) = \sum_k \Gamma^k_{ij} (y) \partial_k(y)$)
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(a)]
+\item Klar, da $g\vert_U = \sum_{ij} g_{ij} \mathd x^i \otimes \mathd x^j\Rightarrow g_{ij} := g(\partial_i,\partial_j)$, in $x: \partial_i(x) = e_i$, $(e_i)$ orthonormal
+\item Falls $x^1,\ldots,x^n$ normale Koordinaten, für $v = \sum a^i e_i$ gilt $x^i(\exp_x(v)) = \enbrace{\exp^{-1}_x(\gamma_v(1))}^i = a^i$. Da $\gamma_v$ Geodäte erfüllt dies
+\[
+\frac{\mathd^2}{\mathd t^2}(x^k\circ \gamma_v) + \sum_{i,j} \Gamma_{ij}^k (\gamma_v) \frac{\mathd}{\mathd t}(x^i \circ \gamma_v) \frac{\mathd}{\mathd t}(x^j \circ \gamma_v) = 0\quad \text{für alle}\ k
+\]
+Außerdem gilt
+\[
+x^k(\gamma_v(t)) = x^k(\gamma_{tv}(1)) = ta^k
+\]
+\end{enumerate}
+%subsubsection 247(end)
+
+\subsubsection{Bemerkung}
+\label{ssub:241}
+
+%subsubsection 241(end)
+
+%subsection 25(end)
 
 % section 2(end)
 
