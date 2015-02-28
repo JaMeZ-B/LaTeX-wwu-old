@@ -2249,7 +2249,7 @@ b:TM\to T^* M,\ b: v\in T_x M\mapsto \enbrace*{g_x (v,.):T_x M\to\mathds{R}\ \te
 $b$ ist Bündelisomorphismus das heißt $b\vert_{T_x M}$ ist linearer Isomorphismus, denn angenommen $b(v)=0$, das heißt $b(v)(w) = g(v,w) = 0\ \forall w\in T_x M$, so folgt $v=0$, das heißt $b$ injektiv und damit $(\dim T_x^* M = \dim T_x M)$ Isomorphismus\\
 Die Umkehrabbildung $\#:T^* M\to TM$ definiert durch $(\#\alpha_x)$, das definiert durch die Gleichung $g_x(\#\alpha_x,\omega)=\alpha_x(\omega)$ für $\omega\in T_x M$\\
 \minisec{Bezeichnung}
-Lokal ist Vextorfeld $X$ bzw. 1-Form $\alpha$ durch 
+Lokal ist Vektorfeld $X$ bzw. 1-Form $\alpha$ durch 
 \[X\vert_U=\sum X^i\partial_i,\ \alpha\vert_U=\sum\alpha_idx^i\]
 Also senkt $b$ die Indizes von $X$ ($b(X)$ ist $1-Form$) und $\#$ hebt die Indizes von $\alpha$ ($\#(\alpha)$ ist Vektorfeld).
 In der Folge identifiziere $TM$ oft mit $T^*M$, falls Metrik fixiert ist. Zum Beispiel induziert Metrik $g$ eine Metrik $g^*$ auf $T^* M$, in den man $g^*(\alpha,\beta)=g(\#\alpha,\#\beta)$ setzt. 
@@ -2863,9 +2863,71 @@ $(M,g)$ heißt \Index{geodätisch vollständig}, falls jede Geodäte auf ganz $\
 \end{enumerate}
 %subsubsection 252(end)
 
-\subsubsection{Definition}
-\label{ssub:251}
-%subsubsection 251(end)
+\subsubsection{Theorem: Hopf-Rinow}
+\label{ssub:253}
+Sei $\exp_x : T_x M\to M$ auf ganz $T_x M$ definiert. Dann gilt: Für alle $y\in M$ existiert Geodäte $\gamma$, die $x$ mit $y$ verbindet und längenminimierend ist mit $L(\gamma) = \mathd^g(x,y)$.\\
+Insbesondere: Ist $(M,g)$ geodätisch vollstängig $\Rightarrow$ Je zwei Punkte können durch eine minimierende Geodäte verbunden werden.
+\minisec{Beweis}
+Sei $B = B_r(x)$ normaler Koordinatenball.
+\begin{enumerate}[(a)]
+\item Lemma: Falls $y\not\in B$, dann existiert ein $z\in \partial B$ mit $\mathd^g(x,y) = r + \mathd^g(z,y)$.
+\missingfigure{Veranschaulichung des Lemmas}
+\item Sei $y\in M$.\\
+1.Schritt: Wähle $z\in \partial B$ mit $\mathd:= \mathd^g (x,y) = \mathd^g(x,z) + \mathd^g(z,y)$. Sei $\gamma$ die radiale Geodäte von $x$ nach $z$, das heißt $\abs{\dot{\gamma}} \equiv 1$, so gilt $\mathd^g(x,z) = L(\gamma) = \int_0^r \abs{\dot{\gamma}}\mathd t = r$. Damit folgt $\mathd = r + \mathd^g(\gamma(t),y)$. Definiere $J = \set[t\in \mathds{R}]{\mathd = t + \mathd^g(\gamma(t),y)}$. Dies ist eine sinnvolle Definition, da $\gamma$ auf ganz $\mathds{R}$ definiert ist. Außerdem ist $J$ nach Definition abgeschlossen. Da $r\in J$ ist $J$ nichtleer. Sei $y\not \in B$, so folgt $r<\mathd$ und somit $J\cap \benbrace{0,d} \neq \emptyset$. $T = \sup (J\cap \benbrace{0,d}) \in J$, da $J$ abgeschlossen. Es gilt $T\leq \mathd$.\\
+Behauptung: $T = d$. Angenommen dies ist nicht der Fall, also $T < d$, so folgt $\gamma(T)\neq y$. Mit dem Lemma aus (a) existiert $\tilde{r} > 0$ und $\tilde{z}\in M$, sodass $\mathd^g(\gamma(T),\tilde{z}) = \tilde{r}$ und $\mathd^g (\gamma(T),\tilde{z}) + \mathd^g(\tilde{z}, y) = \mathd^g (\gamma(T),y)$. Folglich ist $\mathd^g(\tilde{z}, y) = d - T -\tilde{r}$, so dass 
+\[
+\mathd > T +\tilde{r} = \mathd^g(x,\gamma(T)) + \mathd^g(\gamma(T),\tilde{z}) \geq \mathd^g(x,\tilde{z}) \geq \mathd - \mathd^g(\tilde{z},y) = T+\tilde{r}
+\]
+Man sieht direkt, dass im oberen Ausdruck Gleichheit herrscht. Sei $\tilde{\gamma}$ normale radiale Geodäte von $\gamma(T)$ nach $\tilde{z}$, definiere
+\[
+\sigma(t) = 
+\begin{cases}
+\gamma(t) &\text{für}\ t\in \benbrace{0,T}\\
+\tilde{\gamma}(t-T) &\text{für}\ t\in \benbrace{T,T+\tilde{r}}
+\end{cases}
+\]
+so folgt $L((\sigma) = T + \tilde{r} = \mathd(x,\tilde{z})$, also ist $\sigma$ längenminimierend, somit $\sigma$ Geodäte insbesondere glatt. Also ist $\sigma$ glatte Fortsetzung von $\gamma\vert_{\benbrace{0,T}}$ und damit $\sigma = \gamma\vert_{\benbrace{0,T+\tilde{r}}}$, da $\gamma$ auf $\mathds{R}$ definiert.
+Daraus folgt mit der oberen Gleichung, dass $d = T +\tilde{r} + \mathd^g(\tilde{z},y) = T + \tilde{r} + \mathd^g(\gamma(T+\tilde{r}),y)$.
+Also ist $T+\tilde{r} \in J$ und es gilt $\mathd > T + \tilde{r} > T$. Dies ist ein Widerspruch zu $T = \sup (J\cap \benbrace{0,d})$.
+Also gilt $T\geq d$. ($T = \mathd \Rightarrow \mathd = \mathd^g(x,y) = T + \mathd^g(\gamma(T),y) \Rightarrow \mathd^g(\gamma(d),y) = 0 \Rightarrow \gamma(d) = y$)
+\end{enumerate}
+%subsubsection 253(end)
+
+\subsubsection{Korollar}
+\label{ssub:255}
+Für eine riemannsche Mannigfaltigkeit $(M,g)$ sind äquivalent:
+\begin{enumerate}
+\item[$(MV)$] $(M,\mathd^g)$ ist vollständig (als metrischer Raum)
+\item[$(GV)$] $(M,g)$ ist geodätisch vollständig
+\item[$(GV_1)$] $\exists x\in M\ \exp_x:T_x M \to M$ ist auf $T_x M$ definiert
+\item[$(HB)$] Jede abgeschlossene, $\mathd^g$-beschränkte Menge $K$ ist kompakt
+\minisec{Beweis}
+\begin{itemize}
+\item "$(MV) \Rightarrow (GV)$": Sei $\gamma:I\to M$ Geodäte (oBdA $\gamma$ normal). Sei $t_n\in [0,b)$ eine Folge, die gegen $b$ konvergiert. Es gilt $\mathd^g(\gamma(t_n),\gamma(t_m)) \leq \abs{t_n - t_m}$, also ist $\gamma(t_n)$ Cauchy-Folge. Da $(M,\mathd^g)$ vollständig, konvergiert $\gamma(t_n) \to y\in M$ ($y$ unabhängig von $\gamma(t_n)$). Also lässt sich $\gamma$ stetig auf $\benbrace{0,b}$ fortsetzen. Also ist $I$ abgeschlossen. Außerdem existiert ein $\epsilon > 0$, sodass jede normale Geodäte die in $y$ startet auf $(-\epsilon,\epsilon)$ definiert ist. Damit ist $I$ offen und somit, da $\mathds{R}$ zusammenhängend folgt, das $I = \mathds{R}$.
+\item "$(GV) \Rightarrow (GV_1)$": Klar
+\item "$(GV_1) \Rightarrow (HB)$": Sei $K\subset M$ abgeschlossen und beschränkt, so folgt aus Theorem $\ref{ssub:254}$, dass ein $R$ existiert mit $K\subset B_R(x) := \exp_x(B_R(0_x))$. Sei nun $\tilde{K} := \exp^{-1}(\underbrace{K}_{\text{abg.}}) \subset B_R (0_x) \subset T_x M$ abgeschlossen und beschränkt. Mit Heine-Borel folgt nun, dass $\tilde{K}$ kompakt ist. ($T_x M$ ist ein endlich dimensionaler $\mathds{R}$-VR). Da $\exp_x$ stetig ist folgt somit, dass $\exp_x(\tilde{K}) = K$ kompakt ist.
+\item "$(HB) \Rightarrow (MV)$": Jede Cauchy-Folge ist beschränkt, also in $K$ kompakt enthalten, also konvergent.
+\end{itemize}
+Insbesondere ist jede kompakte Riemannsche Mannigfaltigkeit $(M,g)$ (geod.) vollständig.
+\end{enumerate}
+%subsubsection 255(end)
+
+\subsubsection{Satz}
+\label{ssub:256}
+Sei $p:(M,g)\to (N,h)$ lokale Isometrie. $(M,g)$ ist geodätisch vollstänig genau dann, wenn $p$ ist Riemannsche Überlagerung und $(N,h)$ geodätisch vollständig.
+%subsubsection 256(end)
+
+\subsubsection{Beispiele}
+\label{ssub:257}
+\begin{enumerate}[(i)]
+\item $\enbrace{\mathds{R}^n,g_{\text{eukl}}} \to \enbrace{T^n,g_{\text{eukl}}}$ (Riemannsche Überlagerung) lok. Isometrie reicht, so ist $\enbrace{T^n,g_{\text{eukl}}}$.
+\item 
+\begin{itemize}
+\item $S^n\to \nicefrac{S^n}{\mathds{Z}_2} = \mathds{R}P^n$ Riemannsche Überlagerung
+\item $S^n \backslash \set{N} \xrightarrow{p} \mathds{R}P^n$ lokale Isometrie, aber keine Riemannsche Überlagerung, denn $p^{-1}(p(S)) = \set{S}$, aber für alle anderen Punkte $y\in  \mathds{R}P^n$ hat $p^{-1}(y)$ zwei Elemente.
+\end{itemize}
+\end{enumerate}
+%subsubsection 257(end)
 
 % subsection 26(end)
 
