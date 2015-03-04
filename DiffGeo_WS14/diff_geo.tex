@@ -1426,20 +1426,21 @@ definiert für $|t| < \epsilon$ (nach (ii)). Wähle $s, t$, sodass $s+t > c$. $\
 
 \subsubsection[Proposition und Definition: Push-Forward]{Proposition und Definition}
 \label{ssub:163}
-Sei $\phi:M\to N$ ein Diffeomorphismus. $X\in \Gamma(TM)$, dann ist durch $y\mapsto \phi_{*} X(y) = \mathd_{\phi^{-1}(y)} \phi\enbrace{X(\phi^{-1}(y))}$ ein Vektorfeld auf $N$ gegeben, der \Index{Push-Forward} von $X$. Die assoziierte Derivation ist $\enbrace{\mathcal{L}_{\phi_* X} f}(x) = \mathcal{L}_X (f\circ \phi)(\phi^{-1}(y))$ für $f\in C^\infty (N)$
+Sei $\phi:M\to N$ ein Diffeomorphismus. $X\in \Gamma(TM)$, dann ist durch $y\mapsto \phi_{*} X(y) = \mathd_{\phi^{-1}(y)} \phi\enbrace{X(\phi^{-1}(y))}$ ein Vektorfeld auf $N$ gegeben, der \Index{Push-Forward} von $X$. Die assoziierte Derivation ist $\enbrace{\mathcal{L}_{\phi_* X} f}(y) = \mathcal{L}_X (f\circ \phi)(\phi^{-1}(y))$ für $f\in C^\infty (N)$
 \minisec{Beweis}
 \begin{enumerate}[(i)]
-\item Es ist zu zeigen, das $\phi_* X$ ein Vektorfeld ist. Da $\phi_* X$ ein Schnitt auf $\Gamma(TN)$ ist, bleibt Glattheit von $\phi_* X$ zu zeigen. Wähle Karten $\enbrace*{U, \Phi = \enbrace*{x^1,\ldots,x^n}}$ um $\phi^{-1}(y)\in M$ und $\enbrace*{\phi(U),\Psi = \Phi \circ \phi = \enbrace*{y^,\ldots,y^n}}$ um $y\in N$.
+\item Es ist zu zeigen, das $\phi_* X$ ein Vektorfeld ist. Da $\phi_* X$ ein Schnitt auf $\Gamma(TN)$ ist, bleibt Glattheit von $\phi_* X$ zu zeigen. Wähle Karten $\enbrace*{U, \Phi = \enbrace*{x^1,\ldots,x^n}}$ um $\phi^{-1}(y)\in M$ und $\enbrace*{\phi(U),\Psi = \Phi \circ \phi^{-1} = \enbrace*{y^1,\ldots,y^n}}$ um $y\in N$.
 \begin{enumerate}[Step 1:]
-\item Zeige zunächst $\phi_* \delta_{x^j} = \delta_{y^j}$. Es ist $\delta_{x^j} = \benbrace{U,\Phi,e_j}$, $\delta_{y^j} = \benbrace{\phi(U),\Psi,e_j}$ wobei $e_j$ Standardbasis des $\mathds{R}^n$. Nach Definition gilt
+\item Zeige zunächst $\phi_* \partial_{x^j} = \partial_{y^j}$. Es ist $\partial_{x^j} = \benbrace{U,\Phi,e_j}$, $\partial_{y^j} = \benbrace{\phi(U),\Psi,e_j}$ wobei $e_j$ Standardbasis des $\mathds{R}^n$. Nach Definition gilt
+\marginnote{Bin mir hier uneins mit der Mitschrift und dem Skript, aber meiner Meinung nach macht es nur Sinn $\phi_* \partial_{x^j}\enbrace*{y}$ zu betrachten und nicht $\phi_* \partial_{x^j}\enbrace*{\phi^{-1}(y)}$}
 \begin{align*}
-\phi_* \delta_{x^j}\enbrace*{\phi^{-1}(y)} &= \mathd_{\phi^{-1} (y)} \phi\enbrace*{\benbrace*{U,\Phi,e_j}}\\
+\phi_* \partial_{x^j}\enbrace*{y} &= \mathd_{\phi^{-1} (y)} \phi\enbrace*{\benbrace*{U,\Phi,e_j}}\\
 &= \benbrace[\big]{\phi(U),\Psi, \mathd_{\Phi\enbrace*{\phi^{-1}(y)}} \underbrace{\enbrace*{\Psi \circ \phi \circ \Phi^{-1}}}_{\id_{\mathds{R}^n}}(e_j)}\\
-&= \benbrace{\phi(U),\Psi,e_j} = \delta_{y^j}(y)
+&= \benbrace{\phi(U),\Psi,e_j} = \partial_{y^j}(y)
 \end{align*}
-\item Sei $X = \sum_j a^j \delta_{x^j}$, dann gilt
+\item Sei $X = \sum_j a^j \partial_{x^j}$, dann gilt
 \[
-\phi_* X(y) = \sum_j a^j(\phi^{-1}(y))\phi_* \delta_{x^j}(y) = \sum_j \underbrace{a^j\enbrace{\phi^{-1}(y)}}_{\text{glatt}} \delta_{y^j} (y)
+\phi_* X(y) = \sum_j a^j(\phi^{-1}(y))\phi_* \partial_{x^j}(y) = \sum_j \underbrace{a^j\enbrace{\phi^{-1}(y)}}_{\text{glatt}} \partial_{y^j} (y)
 \]
 Also ist $\phi_* X$ ein glattes Vektorfeld.
 \end{enumerate}
@@ -1447,10 +1448,11 @@ Also ist $\phi_* X$ ein glattes Vektorfeld.
 \[
 \mathcal{L}_{\phi_* X} f(y) = \sum_j a^j\enbrace*{\phi^{-1}(y)} \partial_{y^j} f(y)
 \]
-für $f\in C^\infty (N)$. Nach \ref{ssub:179} gilt
+für $f\in C^\infty (N)$. Nach \ref{ssub:149} gilt
+\marginnote{$\partial_k$ ist hier dabb die partielle Ableitung einer Abbildung von $\mathds{R}^n$ nach $\mathds{R}$}
 \begin{align*}
 \partial_{y^j}(y) &= \sum_k \partial_{y^j}y^k(y)\partial_k \enbrace*{f\circ \Psi^{-1}}(\Psi(y))\\
-&= \partial_j \enbrace*{f\circ \Psi^{-1}}(\Psi(y)) = \partial_j \enbrace*{f\circ \phi\circ \Phi^{-1}} = \partial_{x^j}(f\circ \phi)(\phi^{-1}(y))
+&= \partial_j \enbrace*{f\circ \Psi^{-1}}(\Psi(y)) = \partial_j \enbrace*{f\circ \phi\circ \Phi^{-1}}(\Phi\circ \phi^{-1}(y)) = \partial_{x^j}(f\circ \phi)(\phi^{-1}(y))
 \end{align*}
 Somit folgt
 \[
@@ -1466,7 +1468,7 @@ Somit folgt
 \[
 \mathcal{L}_{\phi_* X} = \enbrace{\phi^{-1}}^* \circ \mathcal{L}_X \circ \phi
 \]
-\item Es ist $(\phi\circ \psi)^* f = f\circ \phi\ psi = \psi^*(f\circ \phi) = \psi^* \phi^* f$, das heißt der Pullback $(\phi\circ \psi)^* = \psi^* \circ \phi^*$ ist kontravariant und der Push-Forward $(\phi\circ \psi)_* X = \phi_* \circ \psi_* X$ ist kovariant.
+\item Es ist $(\phi\circ \psi)^* f = f\circ \phi\circ \psi = \psi^*(f\circ \phi) = \psi^* \phi^* f$, das heißt der Pullback $(\phi\circ \psi)^* = \psi^* \circ \phi^*$ ist kontravariant und der Push-Forward $(\phi\circ \psi)_* X = \phi_* \circ \psi_* X$ ist kovariant.
 \end{enumerate}
 % subsubsection 164(end)
 
