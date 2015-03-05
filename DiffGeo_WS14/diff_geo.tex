@@ -1564,7 +1564,7 @@ Im Allgemeinen:
 \[
 \underbrace{L_n\enbrace{V_1\times \ldots \times V_n, U}}_{\text{n-lineare Abbildung}} \simeq L\enbrace{V_1\otimes \ldots \otimes V_n, U}
 \]
-Es gilt $V\otimes W\cong W\otimes V$ und $\enbrace{V\otimes W} \otimes U \cong V\otimes \enbrace{W\otimes V}$, das heißt $\otimes$ ist kommutativ und assoziativ. 
+Es gilt $V\otimes W\cong W\otimes V$ und $\enbrace{V\otimes W} \otimes U \cong V\otimes \enbrace{W\otimes U}$, das heißt $\otimes$ ist kommutativ und assoziativ. 
 \minisec{Konkret}
  Ist $\set{e_i}_{i = 1}^n,\ \set{f_i}_{i = 1}^n$ Basis von $V$ beziehungsweise $W$, so ist die Basis von $V\otimes W$ gegeben durch $\set{e_i\otimes f_j}_{i,j = 1}^{n,m}$(, wobei das Bild von $(e_i,f_j)$ unter $\otimes$: $\otimes(e_i,f_j) = e_i \otimes f_j$). Insbesondere ist $\dim V\otimes W = \dim V \cdot \dim W$. Dann gilt für $v = \sum v^i e_i,w = \sum w^j f_j$.
 \[
@@ -1608,14 +1608,14 @@ y_1 & y_2 & y_3
 \]
 $B = x_1 e^1\otimes f^1 + x_2 e^1\otimes f^2 + x_3 e^1\otimes f^3 + \sum_{j=1}^3 y^j e^2\otimes f^j,\quad e^i,f^j$ duale Basis. Zum Beispiel
 \[
-B\enbrace*{\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix}} = \sum_{j=1}^3 \enbrace*{x_j e^1\otimes f^j + y_j e^2\otimes f^j}(e_1,f_2) = \sum_{j=1} x_j \underbrace{e^1(e_1)}_{1}\cdot \underbrace{f^j(f_2)}_{0} + y_j e^2(e_1) f^j(f_2) = x_2
+B\enbrace*{\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix}} = \sum_{j=1}^3 \enbrace*{x_j e^1\otimes f^j + y_j e^2\otimes f^j}(e_1,f_2) = \sum_{j=1} x_j \underbrace{e^1(e_1)}_{1}\cdot \underbrace{f^j(f_2)}_{\delta_2^j} + y_j \underbrace{e^2(e_1)}_{0} f^j(f_2) = x_2
 \]
 Übungsaugabe: $L(V,W) \simeq W\otimes V^*$
 % subsubsection 171(end)
 
 \subsubsection{Tensorprodukt der linearen Abbildung}
 \label{ssub:172}
-Erinnerung: Sei $V, W$ Vektorräume und $V^*,W^*$ der zugehörige duale Vektorraum. Sei $f:V\to W$ linearer Morphismus, so ist $f^T: W^*\to V^*$ die Transponierte von $f$. Seien $a\in L(V,V'), b\in L(W,W')$, so ist $a\otimes b \in L(V\otimes W,V'\otimes W')$ das Tensorprodukt von $a$ und $b$ definiert durch $a\otimes(v\otimes w) = a(v)\otimes b(w)\in V'\otimes W'$ und setzen es linear fort.
+Erinnerung: Sei $V, W$ Vektorräume und $V^*,W^*$ der zugehörige duale Vektorraum. Sei $f:V\to W$ linearer Morphismus, so ist $f^T: W^*\to V^*$ die Transponierte von $f$. Seien $a\in L(V,V'), b\in L(W,W')$, so ist $a\otimes b \in L(V\otimes W,V'\otimes W')$ das Tensorprodukt von $a$ und $b$ definiert durch $a\otimes b (v\otimes w) = a(v)\otimes b(w)\in V'\otimes W'$ und setzen es linear fort.
 \[
 a\otimes b (v\otimes w +v'\otimes w') = a\otimes b(v\otimes w) + a\otimes b(v'\otimes w')
 \]
@@ -1653,10 +1653,11 @@ Sei $\enbrace{p,q}\in \mathds{N}\times \mathds{N}$, so ist
 Bündel der $(p,q)$-Tensoren, glatte Schnitte aus $\Gamma(\mathcal{T}^p_q M)$ heißen $(p,q)$- Tensor(felder).
 \minisec{Spezialfall}
 \begin{itemize}
-\item $\mathcal{T}_0^0 M := M\times \mathds{R}$, $\Gamma(\mathcal{T}_0^0) = C^\infty (M)$
+\item $\mathcal{T}_0^0 M := M\times \mathds{R}$, $\Gamma(\mathcal{T}_0^0 M) = C^\infty (M)$
 \item $\mathcal{T}_0^1 M := TM$, $\Gamma(TM)$ Vektorfelder
 \item $\mathcal{T}_1^0 M := T^*M$, $\Gamma(T^* M)$ 1-Formen
-\item $\mathcal{T}_0^p M := \mathcal{T}_0^p M$ kovariante Tensoren
+\item $\mathcal{T}_0^p M := \mathcal{T}^p M$ kontravariante Tensoren
+\item $\mathcal{T}_q^0 M := \mathcal{T}_q M$ kovariante Tensoren
 \end{itemize}
 % subsubsection 175(end)
 
@@ -1666,14 +1667,14 @@ Eine kleine Zeitreise zurück in die lineare Algebra.
 \begin{enumerate}[(i)]
 \item \Index{Tensorprodukt}: $\mathcal{T}_q^p V \times \mathcal{T}_{q'}^{p'} V \to \mathcal{T}_{q+q'}^{p+p'	} V$ bilinear, definiert durch:
 \begin{align*}
-&\enbrace*{v_1\otimes \ldots \otimes v_p \otimes v^1 \otimes \ldots \otimes v^p, w_1\otimes \ldots \otimes \w_{p'} \otimes w^1 \otimes \ldots \otimes w^{p'}}\\
-\mapsto\ &v_1\otimes \ldots \otimes v_p \otimes w_1\otimes \ldots \otimes \w_{p'}\otimes v^1 \otimes \ldots \otimes v^p \otimes w^1 \otimes \ldots \otimes w^{p'}
+&\enbrace*{v_1\otimes \ldots \otimes v_p \otimes v^1 \otimes \ldots \otimes v^q, w_1\otimes \ldots \otimes \w_{p'} \otimes w^1 \otimes \ldots \otimes w^{q'}}\\
+\mapsto\ &v_1\otimes \ldots \otimes v_p \otimes w_1\otimes \ldots \otimes \w_{p'}\otimes v^1 \otimes \ldots \otimes v^q \otimes w^1 \otimes \ldots \otimes w^{q'}
 \end{align*}
 \item \Index{Kontraktion} ("\Index{Tensorverjüngung}"): $C_j^i: \mathcal{T}_q^p V \to \mathcal{T}_{q-1}^{p-1}$, definiert durch:
 \marginnote{$\hat{v}_i$ bzw. $\hat{v}^j$ heißt, das dies auslassen}
 \begin{align*}
 &C_j^i\enbrace*{v_1\otimes \ldots \otimes v_i \otimes \ldots \otimes v_p \otimes v^1\otimes \ldots \otimes v^i \otimes \ldots \otimes v^q}\\
-&= v^j(v_i) v_1\otimes \ldots \otimes \hat{v}_i \otimes \ldots \otimes v_p \otimes v^1\otimes \ldots \otimes \hat{v}^i \otimes \ldots \otimes v^q
+&= v^j(v_i) v_1\otimes \ldots \otimes \hat{v}_i \otimes \ldots \otimes v_p \otimes v^1\otimes \ldots \otimes \hat{v}^j \otimes \ldots \otimes v^q
 \end{align*}
 \minisec{Beispiel}
 Spurbildung eines Endomorphismus $A\in \End(V)$.\\
@@ -1698,7 +1699,7 @@ S\otimes S'\vert_U = \sum \underbrace{S_{j_1,\ldots,j_q}^{i_1,\ldots,i_p} \sum (
 \]
 oder sei $X\in \Gamma(TM) = \Gamma(\mathcal{T}_0^1 M)$, $\alpha\in \Gamma(\mathcal{T}_1^0 M) = \Gamma(T^* M)$ mit 
 \[
-i_x(\alpha) = C_1^1(X,\alpha) = \alpha(X) \in C^\infty (M),\quad a(X)\underset{(x)}{\in M} = \underset{\alpha_x}{\in T^*_x M}(X(x))\in \mathds{R}
+i_X(\alpha) = C_1^1(X\otimes \alpha) = \alpha(X) \in C^\infty (M),\quad a(X)\underset{\in M}{(x)} = \underset{\in T^*_x M}{\alpha_x}(X(x))\in \mathds{R}
 \]
 so ist $\tilde{\alpha}:\Gamma(TM) \to C^\infty(M)$, definiert durch $X\mapsto \alpha(X) = i_X(\alpha)$ $\mathds{R}$-linear und insbesondere auch $C^\infty (M)$-linear.
 \begin{figure}[H]
@@ -1707,7 +1708,7 @@ so ist $\tilde{\alpha}:\Gamma(TM) \to C^\infty(M)$, definiert durch $X\mapsto \a
 $\Gamma (TM)$, allgemein $\Gamma(\mathcal{T}_q^p)$ sind
 \begin{enumerate}[(a)]
 \item $\mathds{R}$-Vektorräume (punktweise Addition + Skalarmultiplikation)
-\item $\underbrace{C^p (M)}_{\text{Ring}}$-Modul: $f\in C^\infty (M), S\in \Gamma(\mathcal{T}_q^p M)$, so gilt $\enbrace{fS}_x = f(x)\cdot S_x$
+\item $\underbrace{C^\infty (M)}_{\text{Ring}}$-Modul: $f\in C^\infty (M), S\in \Gamma(\mathcal{T}_q^p M)$, so gilt $\enbrace{fS}_x = f(x)\cdot S_x$
 \end{enumerate}
 \end{minipage}}
 \end{figure}
@@ -1799,7 +1800,7 @@ Sei $f:M\to N$ glatte Abbildung, $S\in \Gamma(\mathcal{T}_q N)$. Der \Index{Pull
 \subsubsection[Satz:Funktionelle Eigenschaften]{Satz}
 \label{ssub:182}
 \begin{enumerate}[(i)]
-\item Ist $f:M\to N,g:M\to N$ glatt, so ist $(g\circ f)^* = f^*\circ g^*$. ($f^*:\Gamma(\mathcal{T}_q N)\to \Gamma(\mathcal{T}_q M),g^*:\Gamma(\mathcal{T}_q P)\to \Gamma(\mathcal{T}_q N)$)
+\item Ist $f:M\to N,g:N\to P$ glatt, so ist $(g\circ f)^* = f^*\circ g^*$. ($f^*:\Gamma(\mathcal{T}_q N)\to \Gamma(\mathcal{T}_q M),g^*:\Gamma(\mathcal{T}_q P)\to \Gamma(\mathcal{T}_q N)$)
 \item Ist $S\in \Gamma(\mathcal{T}_q N), T\in \Gamma(\mathcal{T}_q N)$, so gilt
 \[
 f^*(\underbrace{S\otimes T}_{\in \mathcal{T}_{q+q'} N}) = f^* S \otimes f^* T
@@ -1810,7 +1811,7 @@ f^*(\underbrace{S\otimes T}_{\in \mathcal{T}_{q+q'} N}) = f^* S \otimes f^* T
 \subsubsection{Bemerkung}
 \label{ssub:183}
 \begin{enumerate}[(i)]
-\item Ist $f:M\to N$ ein Diffeomorphismus, so kann man den \Index{Pullback} auf kontravarianten Tensoren via dem \Index{Push-Forward} definieren, nämlich ist zum Beipsiel $X\in \Gamma(TN)$, so ist: $f^*X:= (f^{-1})_* X \in \Gamma(TM)$. Also $f^*:\Gamma(\mathcal{T}_q^p N)\to \Gamma(\mathcal{T}_q^p M)$.
+\item Ist $f:M\to N$ ein Diffeomorphismus, so kann man den \Index{Pullback} auf kontravarianten Tensoren via dem \Index{Push-Forward} definieren, nämlich ist zum Beispiel $X\in \Gamma(TN)$, so ist: $f^*X:= (f^{-1})_* X \in \Gamma(TM)$. Also $f^*:\Gamma(\mathcal{T}_q^p N)\to \Gamma(\mathcal{T}_q^p M)$.
 \item $f^*$ kommutiert mit $C_j^i$-Kontraktion
 \end{enumerate}
 % subsubsection 183(end)
@@ -1821,9 +1822,8 @@ Sei $\enbrace{U_i,\phi_i}$ Karten und $S\in \Gamma\enbrace*{\mathcal{T}_q^p M}$ 
 \[
 \enbrace*{\phi_i \circ \phi_j^{-1}}^* S_j \Big\vert_{\phi_j(U_j\cap U_i)} = S_i \Big\vert_{\phi_i(U_j\cap U_i)}
 \]
-Sind Tensorfelder $S_i$ gegeben, die diese Bedingung erfüllen, so lassen sie sich eindeutig zu einem Tensorfeld auf $M$ verkleben.
+Sind Tensorfelder $S_i$ gegeben, die diese Bedingung erfüllen, so lassen sie sich eindeutig zu einem Tensorfeld auf $M$ verkleben.\\
 % subsubsection 184(end)
-
 Setzt damit nun $\mathcal{L}_X$ "Lie-Ableitung" (definiert für $f\in C^\infty(M), Y\in \Gamma(TM)$) auf $\Gamma(\mathcal{T}_q^p M)$ fort.
 
 \subsubsection{Definition}
@@ -1883,7 +1883,7 @@ A_p \enbrace{v_1\otimes \ldots \otimes v_p} = \sum_{\sigma \in S_p} \sgn(\sigma)
 Zum Beispiel:
 \begin{align*}
 A_2(v\otimes w) = &v\otimes w - w\otimes v\\
-A_3(v\otimes w\otimes u) = &v\otimes w\otimes u + u\otimes v \otimes w + w\otimes u \otimes u\\
+A_3(v\otimes w\otimes u) = &v\otimes w\otimes u + u\otimes v \otimes w + w\otimes u \otimes v\\
  -& v\otimes u \otimes w - u\otimes w \otimes v - w\otimes v \otimes u
 \end{align*}
 Definiere $\Lambda^p V = \im A_P \subset \otimes^p V$. Sei $(e_i)$ eine Basis von $V$, so hat $\Lambda^p V$ die Basis $\enbrace{\underbrace{e_{i_1}\wedge \ldots \wedge e_{i_p}}_{= A_p\enbrace{e_{i_1}\otimes \ldots \otimes e_{i_p}}}}_{1\leq i_1 < \ldots < i_p \leq n}$
@@ -1901,7 +1901,7 @@ Das Wedgeprodukt ist
 \begin{itemize}
 \item bilinear
 \item assoziativ: $a\wedge (b\wedge c) = (a\wedge b)\wedge c$
-\item graduiert kommutativ: $a\wedge b = (-1)^{pq} b\wedge a$, wenn $a \Lambda^p V, b \Lambda^q V$
+\item graduiert kommutativ: $a\wedge b = (-1)^{pq} b\wedge a$, wenn $a \in \Lambda^p V, b\in \Lambda^q V$
 \end{itemize}
 \minisec{Beispiel}
 Sei $\alpha \in \Lambda^1 V^*, \beta \in \Lambda^1 V^*$, so ist mit $(\alpha \otimes \beta)(v,w) = \alpha(v)\beta(w)$:
@@ -1920,24 +1920,24 @@ Für $\alpha: V\to V$ lineare Abbildung erhalten wir eine lineare Abbildung
 \item $\Lambda^p V^* = (\Lambda^p V)^*$
 \item $\wedge^n \alpha$ ist die Multiplikation mit der Determinante von $\alpha$
 \end{itemize}
-Für die Dimension von $\Lambda^p V$ gilt: $\dim \Lambda^p V = \binom{n}{b}$ (somit $\dim \Lambda^0 V = 1,\ \dim \Lambda^1 V = n, \dim \Lambda^n V = 0$).
+Für die Dimension von $\Lambda^p V$ gilt: $\dim \Lambda^p V = \binom{n}{b}$ (somit $\dim \Lambda^0 V = 1,\ \dim \Lambda^1 V = n, \dim \Lambda^n V = 1$).
 % subsubsection 188(end)
 
 \subsubsection{Definition}
 \label{ssub:189}
 Das Bündel der äußeren $p$-Formen (Differentialformen) ist das Vektorbündel $\Lambda^p T^* M$. Die glatten Schnitte heißen (äußere) $p$-Formen (Differentialformen), wir schreiben $\Omega^p (M) = \Gamma(\Lambda^p T^* M)$. Wir haben $\Lambda^0 T^* M = M\times \mathds{R},\ \Omega^0(M) = C^\infty (M)$. In lokalen Koordinaten $(U,x^i)$:
-\[\alpha \in \Omega^p (M) \leadsto \alpha\vert_U = \sum_{1\leq i_1 < \ldots < i_p \leq n} \alpha_{i_1,\ldots,i_p} \mathd x^{i_1} \wedge \ldots \wedge x^{i_p}\]
+\[\alpha \in \Omega^p (M) \leadsto \alpha\vert_U = \sum_{1\leq i_1 < \ldots < i_p \leq n} \alpha_{i_1,\ldots,i_p} \mathd x^{i_1} \wedge \ldots \mathd \wedge x^{i_p}\]
 % subsubsection 189(end)
 
 \subsubsection{Bemerkung}
 \label{ssub:190}
-Sei $f:M\to N$, so ist $f^*:\Omega^p(N) \to \Omega^p(M)$ definiert durch
+Sei $f:M\to N$ glatt, so ist $f^*:\Omega^p(N) \to \Omega^p(M)$ definiert durch
 \[
-(f^* \omega)(v_1,\ldots,v_p) = \omega\vert_{f(x)} \enbrace*{\mathd f\vert_{x} (v_1),\ldots, \mathd f\vert_{x} (v_p)}
+(f^* \omega)\vert_x(v_1,\ldots,v_p) = \omega\vert_{f(x)} \enbrace*{\mathd f\vert_{x} (v_1),\ldots, \mathd f\vert_{x} (v_p)}
 \]
 Es gilt:
 \begin{itemize}
-\item $\enbrace*{f\circ g}^* g^* \circ f^*$
+\item $\enbrace*{f\circ g}^* = g^* \circ f^*$
 \item $f^*(\alpha \wedge \beta) = (f^* \alpha) \wedge (f^* \beta)$ für $\alpha,\beta$ Differentialformen
 \item $\mathcal{L}_X \alpha$ ist wieder eine Differentialformen
 \[
@@ -1949,7 +1949,7 @@ i_X:\Omega^p (M)\to \Omega^{p-1} (M),\quad \omega \mapsto \omega (X,.)
 \]
 Für $\alpha \in \Omega^p (M), \beta \in \Omega^q (M)$ ist 
 \[
-i_X(\alpha \wedge \beta) = (i_X \alpha)\wedge + (-1)^p \alpha \wedge i_X(\beta)
+i_X(\alpha \wedge \beta) = (i_X \alpha)\wedge \beta+ (-1)^p \alpha \wedge i_X(\beta)
 \]
 \end{itemize}
 % subsubsection 190(end)
@@ -1957,23 +1957,23 @@ i_X(\alpha \wedge \beta) = (i_X \alpha)\wedge + (-1)^p \alpha \wedge i_X(\beta)
 \subsubsection{Satz/Definition}
 \label{ssub:191}
 Auf $\Omega^p(M)$ gibt es einen lokalen linearen Operator $\mathd : \Omega^p (M) \to \Omega^{p+1} (M)$, der durch folgende Eigenschaften eindeutig bestimmt ist:
-\begin{itemize}
+\begin{enumerate}[(i)]
 \item Für $p = 0$ ist $\mathd: C^\infty (M) \to \Omega^1 (M)$ das gewöhnliche Differential
 \item Für $f\in C^\infty (M)$ ist $\mathd(\mathd f) = 0$
-\item Für $\alpha\in \Omega^p(M), \beta \in \Omega^p(M)$ ist:
+\item Für $\alpha\in \Omega^p(M), \beta \in \Omega^q(M)$ ist:
 \[
 \mathd(\alpha \wedge \beta) = (\mathd \alpha) \wedge \beta + (-1)^p \alpha \wedge (\mathd \beta)
 \]
-\end{itemize}
+\end{enumerate}
 Beweis:
 \begin{itemize}
 \item Eindeutigkeit: Sei $\enbrace{U,x^1,\ldots,x^n}$ Karte, so gilt
 \begin{align*}
-(\mathd \alpha)\vert_U \overset{\text{lokal}}{=} \mathd(\alpha\vert_U) &\overset{\text{linear}}{=} \sum_{1\leq i_1,\ldots,i_p,\leq n} \mathd \enbrace*{\alpha_{i_1,\ldots, i_p} \wedge \mathd x^{i_1} \wedge \ldots \wedge x^{i_p}}\\
-&\overset{(i),(ii),(iii)}{=} \sum_{1\leq i_1,\ldots,i_p,\leq n} \underbrace{\mathd\alpha_{i_1,\ldots, i_p}}_{\text{bekannt (i)}} \wedge \mathd x^{i_1} \wedge \ldots \wedge x^{i_p}\quad (\star)
+(\mathd \alpha)\vert_U \overset{\text{lokal}}{=} \mathd(\alpha\vert_U) &\overset{\text{linear}}{=} \sum_{1\leq i_1,\ldots,i_p,\leq n} \mathd \enbrace*{\alpha_{i_1,\ldots, i_p}  \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_p}}\\
+&\overset{(i),(ii),(iii)}{=} \sum_{1\leq i_1,\ldots,i_p,\leq n} \underbrace{\mathd\alpha_{i_1,\ldots, i_p}}_{\text{bekannt (i)}}\mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_p}\quad (\star)
 \end{align*}
 \item Lokal definieren durch $(\star)$ (also auf $\Omega^p (V), V\overset{\text{offen}}{\subset} \mathds{R}^n$. Dann ist zu zeigen, dass dies die Eigenschaften erfüllt.
-\item $\phi: V\subset \mathds{R}^n \to U \mathds{R}^n$ glatt $\leadsto$ $\phi^* \circ \mathd = \mathd \circ \phi^*$
+\item $\phi: V\subset \mathds{R}^n \to U \subset \mathds{R}^n$ glatt $\leadsto$ $\phi^* \circ \mathd = \mathd \circ \phi^*$
 \item Zusammenkleben mit Bemerkung \ref{ssub:184} um $\mathd$ auf ganz $M$ fortzusetzen.
 \end{itemize}
 % subsubsection 191(end)
@@ -2005,7 +2005,7 @@ $\leadsto$ Kettenkomplex
 \label{ssub:194}
 Für $\alpha \in \Omega^1 (M),\ \alpha = \sum \alpha_j \mathd x^j$ gilt
 \[
-(\mathd \alpha)\vert_U = \mathd(\alpha\vert_U) = \sum_{1\leq i_1 < \ldots <i_p \leq n } \sum_{j} \enbrace{\partial_j \alpha_{i_1,\ldots, i_p}} \mathd x^j \wedge \mathd x^{i_1} \wedge \ldots \wedge \mathd x^{i_p}
+(\mathd \alpha)\vert_U = \mathd(\alpha\vert_U) = \sum_i \sum_{j\neq i} \enbrace{\partial_j \alpha_i \mathd x^j} \wedge \mathd x^i
 \]
 % subsubsection 194(end)
 
@@ -2075,7 +2075,7 @@ Die Unabhängigkeit von $\enbrace{\rho_i}$ und dem Atlas ist eine Übungsaufgabe
 \label{ssub:1100}
 Wenn $M$ kompakt und alle Jacobideterminanten der Übergangsfunktion positiv sind, setze 
 \[
-\Vol_\omega (M) = \int_M \omega
+\Vol_\omega (M) = \int_M \mathd \omega
 \]
 % subsubsection 192(end)
 
@@ -2105,14 +2105,14 @@ Somit folgt, dass $\det \mathd_{(x,v)} \Phi_{ij} > 0$.
 $M$ ist orientierbar, genau dann wenn eine Volumenform auf $M$ existiert.
 \minisec{Beweis}
 \begin{itemize}
-\item "$\Rightarrow$": Sei $\omega$ Volumenform. Wähle Atlas mit $\enbrace{U_i,\phi_i}$ mit $\phi_i^{-1*} \omega = \omega_i \mathd x^1 \wedge \ldots \wedge \mathd x^n$, sodass $\omega_i > 0$. Das ist möglich, da $\omega_i(x) \neq 0\ \forall x\in U_i$ und man für $\omega_i < 0$ die Karte $\phi_i$ mit der Abbildung $\mathds{R}^n \to \mathds{R}^n, 
+\item "$\Leftarrow$": Sei $\omega$ Volumenform. Wähle Atlas mit $\enbrace{U_i,\phi_i}$ mit $\phi_i^{-1*} \omega = \omega_i \mathd x^1 \wedge \ldots \wedge \mathd x^n$, sodass $\omega_i > 0$. Das ist möglich, da $\omega_i(x) \neq 0\ \forall x\in U_i$ und man für $\omega_i < 0$ die Karte $\phi_i$ mit der Abbildung $\mathds{R}^n \to \mathds{R}^n, 
 \begin{psmallmatrix}
 -1&&&\\
 &1&&\\
 &&\ddots&\\
 &&&1
 \end{psmallmatrix}$ verknüpfen kann um eine neue Karte mit $\omega_i' > 0$ zu erhalten. Mit $\omega_V = \det \mathd F(\omega_U \circ F)$ folgt, dass die Jacobideterminante der Übergangsfunktion größer $0$ ist.
-\item "$\Leftarrow$": Wähle Orientierungsatlas $\enbrace{U_i,\phi_i}$ und untergeordnete Teilung der Eins $\enbrace{\rho_i}$. Setze $\omega_i = \phi_i^*\enbrace{\mathd x^1 \wedge \ldots \wedge \mathd x^n}$. Dann ist $\omega := \sum_i \rho_i \omega_i$ Volumenform auf $M$, da
+\item "$\Rightarrow$": Wähle Orientierungsatlas $\enbrace{U_i,\phi_i}$ und untergeordnete Teilung der Eins $\enbrace{\rho_i}$. Setze $\omega_i = \phi_i^*\enbrace{\mathd x^1 \wedge \ldots \wedge \mathd x^n}$. Dann ist $\omega := \sum_i \rho_i \omega_i$ Volumenform auf $M$, da
 \begin{align*}
 \phi_k^{-1*} \omega &= \sum_i \rho_i \phi_k^{-1*} \phi_i^* \enbrace{\mathd x^1 \wedge \ldots \wedge \mathd x^n}\\
 &= \sum_i \rho_i \enbrace{\phi_i\circ \phi_k^{-1}}^* \enbrace{\mathd x^1 \wedge \ldots \wedge \mathd x^n}\\
