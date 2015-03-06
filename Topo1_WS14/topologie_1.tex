@@ -3646,7 +3646,7 @@ Isomorphismus. Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen vert
 \section{Zusammenhang zwischen $\pi_1(X,x_0)$ und $H_1(X;\mathds{Z})$} % (fold)
 \label{sec:15}
 
-Zur Vorbereitung müssen wir kurz wiederholen, was eine Abelisierung ist: \todo{RevChap15}
+Zur Vorbereitung müssen wir kurz wiederholen, was eine Abelisierung ist:
 
 \subsection[Definition: Kommutatorgruppe]{Definition} % (fold)
 \label{sub:151}
@@ -3654,7 +3654,7 @@ Sei $G$ eine Gruppe. Dann heißt die Untergruppe von $G$, die erzeugt wird von E
 hierfür auch $[G,G] \subset G$.
 % subsection 151 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Die Kommutatorgruppe ist ein Normalteiler]{Lemma} % (fold)
 \label{sub:152}
 $[G,G] \subset G$ ist ein Normalteiler von $G$.
 \minisec{Beweis}
@@ -3666,17 +3666,18 @@ Seien $g_0, \ldots ,g_n,h \in G$. Dann ist
 
 \subsection[Definition: Abelianisierung]{Definition} % (fold)
 \label{sub:153}
-Der Quotient $G^\ab := \nicefrac{G}{[G,G]}$ heißt \Index{Abelisierung} (manchmal auch Abelianisierung) von G.\marginnote{Für eine abelsche Gruppe $G$ ist sinnigerweise
-$G^\ab=G$.} 
+Der Quotient $G^\ab := \nicefrac{G}{[G,G]}$ heißt \Index{Abelisierung} (manchmal auch Abelianisierung)\marginnote{Für eine abelsche Gruppe $G$ ist sinnigerweise $G^\ab=G$.} 
+von G und ist offensichtlich stets abelsch.
+
 % subsection 153 (end)
 
 \subsection[Bemerkung: Funktorialität der Abelianisierung]{Bemerkung} % (fold)
 \label{sub:154}
 \begin{itemize}
-	\item $\GRUPPEN \xrightarrow{\minwidthbox{\ab}{3em}} \ABELGRUPPEN , \qquad G \longmapsto G^\ab $
+	\item $\GRUPPEN \xrightarrow{\minwidthbox{\ab}{3em}} \ABELGRUPPEN , \quad G \longmapsto G^\ab $
 	definiert einen Funktor.
 	\item Dieser Funktor hat die folgende universelle Eigenschaft: Zu jeder abelschen Gruppe $A$ und einem Homomorphismus $\varphi \colon G \to A$ existiert ein eindeutiger
-	Gruppenhomomorphismus $\varphi^\ab \colon G^\ab \to A$ sodass folgendes Diagramm kommutiert
+	Gruppenhomomorphismus $\varphi^\ab \colon G^\ab \to A$, sodass folgendes Diagramm kommutiert
 	\[
 		\begin{tikzcd}
 			G \rar["\varphi"] \dar[two heads]& A \\
@@ -3691,24 +3692,46 @@ $G^\ab=G$.}
 Sei $X$ ein topologischer Raum. Da $\abs*{\Delta^1} \cong [0,1]$, liefert jeder Pfad $\omega \colon [0,1] \to X$ einen $1$-Simplex in $C_1(X;\mathds{Z})$.
 % subsection 155 (end)
 
-\subsection{Lemma 1} % (fold)
+\subsection[Lemma 1: Für Pfade $\omega,\omega'$ ist $\omega * \omega' - \omega- \omega'$ der Rand eines $2$-Simplex]{Lemma 1} % (fold)
 \label{sub:156}
-Seien $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(1)=\omega'(0)$, dann ist $\omega * \omega' - \omega- \omega' \in C_1(X;\mathds{Z})$ der Rand eines 
+Seien $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(1)=\omega'(0)$,\marginnote{\enquote{$\,*$} bezeichnet die Verkettung von Pfaden} 
+dann ist $\omega * \omega' - \omega- \omega' \in C_1(X;\mathds{Z})$ der Rand eines 
 $2$-Simplex.
 \minisec{Beweis}
-Zur Erinnerung: $\abs*{\Delta^2} = \set[(x_0,x_1,x_2) \in \mathds{R}^3]{\sum_{i=0}^{3}x_i=1, x_j \ge 0 \,\forall j \in \set{0,1,2}}$. Betrachte: 
-$\sigma \colon \abs*{\Delta^2}  \to X$ definiert durch 
+Zur Erinnerung: Die geometrische Realisierung des $2$-Simplex ist gegeben durch 
 \[
-	(x_0,x_1,x_2) \mapsto(\omega*\omega') \enbrace*{\frac{1}{2} (1-x_0-x_2)} = \omega * \omega' \enbrace*{\frac{1}{2}(2x_0 + x_1) }  
+	\abs*{\Delta^2} = \set[(x_0,x_1,x_2) \in \mathds{R}^3]{\sum_{i=0}^{2}x_i=1, x_j \ge 0 \,\forall j \in \set{0,1,2}}.
+\] 
+Betrachte nun folgenden singulären Simplex $\sigma \colon \abs*{\Delta^2} \to X$ definiert durch 
+\[
+	(x_0,x_1,x_2) \mapsto(\omega*\omega') \enbrace*{\frac{1}{2} (1+x_0-x_2)} = \omega * \omega' \enbrace*{\frac{1}{2}(2x_0 + x_1) }  
 \]
-Es gilt 
+Die Ränder sind
 \begin{align*}
 	(\delta_0 \sigma)(s) &= \sigma(0,s,1-s) = \omega * \omega' \enbrace*{\frac{1}{2} s}=\omega(s) \\
-	(\delta_1 \sigma)(s) &= \sigma(s, 0, 1-s) = \omega * \omega*(s) \\
+	(\delta_1 \sigma)(s) &= \sigma(s, 0, 1-s) = \omega * \omega'(s) \\
 	(\delta_2 \sigma)(s) &= \sigma(s,1-s,0) = (\omega * \omega') \enbrace*{\frac{1}{2} (1+s)} = \omega'(s)
 \end{align*}
-Dann folgt $\partial \sigma = \delta_0 \sigma - \delta_1 \sigma + \delta_2 \sigma = \omega - \omega * \omega' + \omega'$. Bild: \bewende
-\missingfigure{Simplex kollabieren und so weiter} 
+Dann folgt $\partial \sigma = \delta_0 \sigma - \delta_1 \sigma + \delta_2 \sigma = \omega - \omega * \omega' + \omega'$. \bewende \todo{RevChap15}
+\begin{figure}[t]
+	\centering{
+	$\vcenter{\hbox{\begin{tikzpicture}[scale=2]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+		\draw (c) -- ($ (a)!0.5!(b) $) node[midway, below left]{$\downarrow$} node[midway, below right]{$\downarrow$};
+		\draw[thick] (a) -- (b) node[midway, below]{$\omega * \omega'$} -- (c) node[midway, above right]{$\omega'$} -- cycle node[midway, above left]{$\omega$};
+	\end{tikzpicture}}} \quad \xrightarrow{\hspace{1.2cm}} \quad 
+	\vcenter{\hbox{
+	\begin{tikzpicture}[scale=2, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray}]
+		\draw[thick] (1,0.09)--(1,0);
+		\draw[thick] (0,0) -- (2,0);
+		\draw[my brace] (0,0) -- (1,0) node[midway, below=6pt]{$\omega$};
+		\draw[my brace] (1,0) -- (2,0) node[midway, below=6pt]{$\omega'$};
+	\end{tikzpicture}
+	}}
+	$ \caption{Skizze zum Beweis von Lemma \ref{sub:156}}}
+\end{figure}
 % subsection 156 (end)
 
 \subsection{Lemma 2} % (fold)
