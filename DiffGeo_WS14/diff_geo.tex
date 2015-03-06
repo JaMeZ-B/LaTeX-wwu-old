@@ -1422,7 +1422,53 @@ definiert für $|t| < \epsilon$ (nach (ii)). Wähle $s, t$, sodass $s+t > c$. $\
 
 \subsection{Verhalten von Vektorfelden unter Diffeomorphismen}
 \label{sub:19}
-\missingfigure{Abbildung zwischen Tangentialräumen}
+\begin{figure}[H]
+\centering{
+\begin{tikzpicture}[scale = 0.6]
+	%\draw [help lines] (0,0) grid (18,5);
+	\draw (1,1) .. controls +(180:0.5) and +(270:0.5) .. (0,1.5)
+	 .. controls +(90:1) and +(140:0.5) .. (2,2.8)
+	 .. controls +(320:1.5) and +(180:1) .. (5,2.5)
+	 .. controls +(0:0.5) and +(90:1) .. (6,1.5)
+	 .. controls +(270:0.5) and +(0:0.5) .. (5,0.5)
+	 .. controls +(180:2) and +(0:2) .. (1,1);
+
+	\draw (0.5,1.5) .. controls +(90:0.5) and +(160:0.5) .. (1.5,2.2);
+	\draw (0.5,1.5) .. controls +(0:0.25) and +(240:0.25) .. (1.5,2.2);	 
+	 
+	\draw (4.5,1.2) .. controls +(80:0.25) and +(160:0.25) .. (5,1.7);
+	\draw (4.5,1.2) .. controls +(350:0.4) and +(320:0.25) .. (5,1.7);	
+	
+	\draw (11,1) .. controls +(90:1.5) and +(180:1.5) .. (15,3)
+	 .. controls +(0:1) and +(160:0.5) .. (17,2.5)
+	 .. controls +(340:1) and +(0:1) .. (16,0.2)
+	 .. controls +(180:0.5) and +(0:1) .. (13.5,1.2)
+	 .. controls +(180:0.5) and +(0:0.5) .. (11.5,0.5)
+	 .. controls +(180:0.35) and +(270:0.35) .. (11,1); 
+
+	\draw (15.5,1.1) .. controls +(20:0.4) and +(160:0.4) .. (16.5,1);
+	\draw (15.5,1.1) .. controls +(320:0.4) and +(220:0.4) .. (16.5,1);
+	
+	\draw (15.4,2.5) .. controls +(0:0.4) and +(140:0.4) .. (16.2,2.2);
+	\draw (15.4,2.5) .. controls +(290:0.4) and +(200:0.4) .. (16.2,2.2);	
+	
+	\draw[->] (6.5,1.7) .. controls +(30:0.5) and +(180:0.5) .. (8.5,2.1) node[above]{$\phi$ Diffeo}
+	 .. controls +(0:0.5) and +(150:0.5) .. (10.5,1.7);
+	 
+	\draw[->] (6.5,1) -- (8.5,1) node[below]{$\mathd_x \phi$} -- (10.5,1);
+	
+	\draw[fill=OrangeRed2] (5.4,0.9) node[below]{$x$} circle[radius=0.05cm];
+	\draw[->] (5.4,0.9) -- (5.9,1.3);
+	
+	\draw[fill=OrangeRed2] (12,1.7) node[below]{$f(x)$} circle[radius=0.05cm];
+	\draw[->] (12,1.7) -- (12.7,1.8);
+	
+	\draw[dashed] (4.5,0.9) -- (5.5,1.7) -- (6.3,0.7) -- (5.3,-0.1)  node[below]{$T_x M$} -- (4.5,0.9);
+	
+	\draw[dashed] (11.5,1.9) -- (12.5,2.7) -- (13.3,1.7) node[right]{$T_x N$} -- (12.3,0.9) -- (11.5,1.9);
+\end{tikzpicture}
+\caption{Abbildung zwischen Tangentialräumen}}
+\end{figure}
 
 \subsubsection[Proposition und Definition: Push-Forward]{Proposition und Definition}
 \label{ssub:163}
@@ -2188,7 +2234,7 @@ $T_{\theta,r} \enbrace{S^n\times \mathds{R}_{>0}} = T_\theta S^n \oplus T_r \mat
 \item Sei $f:M\to N$ Immersion in $x\in M$, das heißt $\mathd_x f: T_x M \to T_{f(x)} N$ ist injektiv. Ist $h$ Metrik auf $N$, so ist $f^* h$ Metrik auf einer Umgebung von $x$. Nämlich
 \begin{itemize}
 \item Symmetrie: $f^* h \in \Gamma(\mathcal{T}_2 M)$ und $\enbrace{f^* h}_x (v,w) = h_{f(x)} \enbrace{\mathd f_x (v),\mathd f_x (w)} = h_{f(x)} \enbrace{\mathd f_x (w),\mathd f_x (v)} = \enbrace{f^* h}_x (w,v)$
-\item Positiv Definitheit: $\enbrace{f^* h}_x (v,v) = h_{f(x)} \enbrace{\mathd f_x (v),\mathd f_x (v)} \leq 0$
+\item Positiv Definitheit: $\enbrace{f^* h}_x (v,v) = h_{f(x)} \enbrace{\mathd f_x (v),\mathd f_x (v)} \geq 0$
 \item $h_{f(x)} \enbrace{\mathd f_x (v),\mathd f_x (v)} = 0 \Rightarrow \mathd f_x (v) = 0 \xRightarrow{f\ \text{Immersion}} v = 0$
 \end{itemize}
 \end{enumerate}
@@ -2197,7 +2243,7 @@ $T_{\theta,r} \enbrace{S^n\times \mathds{R}_{>0}} = T_\theta S^n \oplus T_r \mat
 \subsubsection{Allgemeine Konstruktion}
 \label{ssub:24}
 \begin{enumerate}[(i)]
-\item Eine Abbildung $p:M\to N$ heißt Überlagerung von $N$, falls for alle $y\in N$ eine Umgebung $y\in V\subset N$ existiert, sodass $p^{-1}(V) = \dot{\bigcup_j}U_j$ disjunkte Vereinigung offener $U_j \subset M$ mit $p\vert_{U_j}$ ist Diffeomorphismus auf sein Bild.
+\item Eine Abbildung $p:M\to N$ heißt \Index{Überlagerung} von $N$, falls für alle $y\in N$ eine Umgebung $y\in V\subset N$ existiert, sodass $p^{-1}(V) = \dot{\bigcup}_j U_j$ disjunkte Vereinigung offener $U_j \subset M$ mit $p\vert_{U_j}$ ist Diffeomorphismus auf sein Bild.
 \missingfigure{$S^n = \nicefrac{\mathds{R}}{2\pi \mathds{Z}}$}
 Sei $h$ eine Metrik auf $N$. Dann exisiert eine eindeutig bestimmte Metrik $g$ auf $M$, sodass $p$ eine lokale Isometrie wird, nämlich $g = p^* h$. Im Allgemeinen nennt man eine Überlagerung $p:(M,g)\to (N,h)$ Riemannsch, falls $p$ lokale Isometrie. Insbesondere existiert eine kanonische Riemannsche Metrik auf der sogenannten "universellen Überlagerung" $\tilde{N}$ einer Riemannschen Mannigfaltigkeit. 
 \item Sei $G\subset \Diff(M)$ Untergruppe.
@@ -2252,7 +2298,7 @@ Sei $g$ positiv definit, also insbesondere nicht ausgeartet, d.h. ist $g_x(v,w)=
 b:TM\to T^* M,\ b: v\in T_x M\mapsto \enbrace*{g_x (v,.):T_x M\to\mathds{R}\ \text{linear}}\in T_x^* M
 \]
 $b$ ist Bündelisomorphismus das heißt $b\vert_{T_x M}$ ist linearer Isomorphismus, denn angenommen $b(v)=0$, das heißt $b(v)(w) = g(v,w) = 0\ \forall w\in T_x M$, so folgt $v=0$, das heißt $b$ injektiv und damit $(\dim T_x^* M = \dim T_x M)$ Isomorphismus\\
-Die Umkehrabbildung $\#:T^* M\to TM$ definiert durch $(\#\alpha_x)$, das definiert durch die Gleichung $g_x(\#\alpha_x,\omega)=\alpha_x(\omega)$ für $\omega\in T_x M$\\
+Die Umkehrabbildung $\#:T^* M\to TM$ definiert ist durch $(\#\alpha_x)$, das definiert durch die Gleichung $g_x(\#\alpha_x,\omega)=\alpha_x(\omega)$ für $\omega\in T_x M$\\
 \minisec{Bezeichnung}
 Lokal ist Vektorfeld $X$ bzw. 1-Form $\alpha$ durch 
 \[X\vert_U=\sum X^i\partial_i,\ \alpha\vert_U=\sum\alpha_idx^i\]
