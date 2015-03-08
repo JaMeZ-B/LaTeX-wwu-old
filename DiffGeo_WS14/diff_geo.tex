@@ -2308,11 +2308,11 @@ In der Folge identifiziere $TM$ oft mit $T^*M$, falls Metrik fixiert ist. Zum Be
 
 % subsection 21(end)
 
-\subsection{Kovariante Abbildung}
+\subsection{Kovariante Ableitung}
 
 \subsubsection{Definition}
 \label{ssub:27}
-Eine \Index{kovariante Abbildung} auf $M$ ist eine $\mathds{R}$-lineare Abbildung
+Eine \Index{kovariante Ableitung} auf $M$ ist eine $\mathds{R}$-lineare Abbildung
 \[
 \nabla:\Gamma(TM)\to\Gamma(TM\otimes T^* M) = \Gamma(\End(TM))=\Gamma(\mathcal{T}_1^1 M)
 \]
@@ -2373,15 +2373,16 @@ X\vert_U=\sum X^i\partial_i, Y\vert_U=\sum Y^i\partial_i\ \text{für lokale Koor
 Es gilt:
 \begin{align*}
 \enbrace{\nabla_X Y}(x) &= \enbrace{\nabla_X Y\vert_U}(x)\\
-&=\sum \enbrace{\nabla_X Y^i}\partial_i + Y^i\nabla_X \partial_i\\
-&=\sum_{i,j}\enbrace{X^j \underbrace{\nabla_{\partial_j} Y^i}_{\mathd ^i(\partial_j)}}\partial_i+ X^j Y^i\underbrace{\nabla_{\partial_j}\partial_i(x)}_{=\sum \Gamma_{ij}^k \partial_k \in \Gamma(TM\vert_U)}\\
-&=\sum_k \enbrace*{\sum_j\enbrace*{X^j \mathd Y^k(\partial_j)+\sum_i X^j Y^i \Gamma_{i,j}^k}}\partial_k(x)\\
-&=\sum_k \enbrace*{\sum_j \enbrace*{\underbrace{X^j(x) \mathd_x Y^k(\partial_j)}_{\mathd_x Y^k\enbrace*{\sum_j X^j(x) \partial_j} = \mathd_x Y^k(X(x))} + \sum_i X^j(x)Y^i(x)\Gamma_{i,j}^k(x)}}\partial_k(x)
+&=\enbrace*{\sum_i \enbrace{\mathd Y^i(X)}\partial_i + Y^i\nabla_X \partial_i}(x)\\
+&=\enbrace*{\sum_{i,j}\enbrace{X^j \mathd  Y^i(\partial_j)}\partial_i+ X^j Y^i\underbrace{\nabla_{\partial_j}\partial_i}_{=\sum \Gamma_{ij}^k \partial_k \in \Gamma(TM\vert_U)}}(x)\\
+&=\enbrace*{\sum_k \enbrace*{\sum_j\enbrace*{X^j \mathd Y^k(\partial_j)+\sum_i X^j Y^i \Gamma_{i,j}^k}}\partial_k}(x)\\
+&=\sum_k \enbrace*{\sum_j \enbrace*{\underbrace{X^j(x) \mathd_x Y^k(\partial_j)}_{\mathd_x Y^k\enbrace*{\sum_j X^j(x) \partial_j} = \mathd_x Y^k(X(x))} + \sum_i X^j(x)Y^i(x)\Gamma_{i,j}^k(x)}}\partial_k(x)\\
+&= \sum_k \enbrace*{  \mathd_x Y^k(X(x)) + \sum_{j,i} X^j(x)Y^i(x)\Gamma_{i,j}^k(x)}\partial_k(x)
 \end{align*}
 Hängt nur von $X^j(x)$, $Y^j(x)$ und $\mathd_x Y^k(X(x)) = \frac{\mathd}{\mathd t} Y^k(\alpha(t))$, das heißt von $Y$ entlang einer Kurve $\alpha$ mit $\alpha(0) = x, \dot{\alpha}(0) = X(x)$.
 \item Werden sehen: Kovariante Ableitungen existieren immer. Wie sieht der Raum der kovarianten Ableitungen aus? Angenommen $\nabla$ ist kovariante Ableitung 
 \[
-A\in \Gamma(\underbrace{TM\otimes T^* M\otimes T^* M}_{\End(TM\otimes T^* M)}) \hat{=} A:\Gamma(TM)\to\Gamma(\End TM), X\mapsto A_X
+A\in \Gamma(\underbrace{TM\otimes T^* M\otimes T^* M}_{\End(TM)\otimes T^* M}) \hat{=} A:\Gamma(TM)\to\Gamma(\End TM), X\mapsto A_X
 \]
 $\Rightarrow \nabla^A=\nabla+A$ definiert durch 
 \[
@@ -2412,7 +2413,7 @@ Sei $\nabla$ kovariante Ableitung auf $M$, $\gamma:I\to M$ Weg und $\Gamma_\gamm
 \]
 ,die durch folgende Eigenschaften eindeutig bestimmt ist:
 \begin{itemize}[(i)]
-\item $\frac{\nabla}{\mathd t}(f Y) = \dot{f}(t)Y(t) + f(t)\frac{\nabla}{\mathd t} Y(t)$ für $f\in C^\infty(I)$
+\item $\frac{\nabla}{\mathd t}(f Y)(t) = \dot{f}(t)Y(t) + f(t)\frac{\nabla}{\mathd t} Y(t)$ für $f\in C^\infty(I)$
 \item Ist $Y(t) = \bar{Y}(\gamma(t))$, wobei $\bar{Y} \in \Gamma(TM)$, so gilt $\enbrace{\frac{\nabla}{\mathd t} Y}(t) = \enbrace{\nabla_{\dot{\gamma}(t)} \bar{Y}}(\gamma(t))$
 \end{itemize}
 \minisec{Beweis}
@@ -2421,7 +2422,7 @@ Sei $\nabla$ kovariante Ableitung auf $M$, $\gamma:I\to M$ Weg und $\Gamma_\gamm
 \marginnote{Verstehe ich momentan leider nicht, wieso der zweite Summand so aussieht}
 \begin{align*}
 	\frac{\nabla}{\mathd t} Y\vert_J (t) &= \sum_i \dot{Y}^i(t)\partial_i(\gamma(t)) + Y^i(t) \enbrace{\frac{\nabla}{\mathd t} \partial_i}(t)\\
-	& \overset{(ii)}{=} \sum_i \dot{Y}^i(t)\partial_i(\gamma(t)) + Y^i(t) \nabla_{\dot{\gamma}(t)} \partial(\gamma(t))
+	& \overset{(ii)}{=} \sum_i \dot{Y}^i(t)\partial_i(\gamma(t)) + Y^i(t) \enbrace*{\nabla_{\dot{\gamma}(t)} \partial_i}(\gamma(t))
 \end{align*}
 Somit ist $\frac{\nabla}{\mathd t} Y$ durch $\nabla$ eindeutig bestimmt.
 \item Existenz: Definiere $\enbrace{\frac{\nabla}{\mathd t} Y}(t)$ wie oben auf $J\subset I$, sodass $\gamma(J) \subset U$. Aufgrund der oben gezeigten Eindeutigkeit müssen die so definierten $\frac{\nabla}{\mathd t}$ auf $J_1\cap J_2$ übereinstimmen.\\
@@ -2431,9 +2432,9 @@ Somit ist $\frac{\nabla}{\mathd t} Y$ durch $\nabla$ eindeutig bestimmt.
 
 \subsubsection{Beispiel}
 \label{ssub:212}
-Sei $\mathds{R}^n$ mit flacher kovarianter Ableitung gegeben, so folgt aus dem Beweis $\ref{ssub:210}$ direkt, dass für ein Vektorfeld $X:I\to \mathds{R}^n$ entlang $\gamma$ gilt:
+Sei $\mathds{R}^n$ mit flacher kovarianter Ableitung gegeben, so folgt aus dem Beweis $\ref{ssub:211}$ direkt, dass für ein Vektorfeld $X:I\to \mathds{R}^n$ entlang $\gamma$ gilt:
 \[
-\frac{\nabla}{\mathd t} X = \frac{\mathd}{\mathd s} X(s)\vert_t = \dot{X}(t)
+\frac{\nabla}{\mathd t} X(t) = \frac{\mathd}{\mathd s} X(s)\vert_t = \dot{X}(t)
 \]
 %subsubsection 212(end)
 
@@ -2596,7 +2597,7 @@ Sei $(M,g)$ Riemannsche Mannigfaltigkeit, so gilt
 \item Der schwierige Punkt ist zu zeigen, dass $\mathd^g(x,y) = 0 \Rightarrow x = y$.
 Angenommen $x \neq y$.
 \missingfigure{Bild zur Trennung von $x$ und $y$}
-So wähle lok. Koordinaten $x^1,\ldots,x^n$ auf $U$ mit $x \in U$. So können wir die Metrik $g$ darstellen $g\vert_U = \sum g_{ij} \mathd x^i \otimes \mathd x^j$. Definiere auf $U$ zweite Metrik: $g_{\text{eukl}}\vert_U = \sum \mathd x^i \otimes \mathd x^j$. Betrachte einen Ball um $x$ $B_r(x) = \set[p]{\mathd^{g_{\text{eukl}}}(x,y) < r}$, sodass $y \not\in B_r(x)$ (hier wird die Hausdorff-Eigenschaft von $M$ genutzt). Da $g_{ij}$ eine symmetrische pos. def. Matrix für alle $x\in U$ existiert ein kleinste Eigenwert $\lambda$ von $g_{ij}$ und es folgt $\abs{v}_{g}^2 = g(v,v) \geq \lambda g_{\text{eukl}}(v,v) = \abs{v}_{g_{\text{eukl}}}^2$. Sei $\gamma$ nun eine Kurve von $x$ nach $y$. So verlässt diese Kurve zwingend $B_r(x)$ und es folgt somit
+So wähle lok. Koordinaten $x^1,\ldots,x^n$ auf $U$ mit $x \in U$. So können wir die Metrik $g$ darstellen $g\vert_U = \sum g_{ij} \mathd x^i \otimes \mathd x^j$. Definiere auf $U$ zweite Metrik: $g_{\text{eukl}}\vert_U = \sum \mathd x^i \otimes \mathd x^i$. Betrachte einen Ball um $x$ $B_r(x) = \set[p]{\mathd^{g_{\text{eukl}}}(x,p) < r}$, sodass $y \not\in B_r(x)$ (hier wird die Hausdorff-Eigenschaft von $M$ genutzt). Da $(g_{ij})$ eine symmetrische pos. def. Matrix für alle $x\in U$ existiert ein kleinster Eigenwert $\lambda > 0$ von $(g_{ij})$ und es folgt $\abs{v}_{g}^2 = g(v,v) \geq \lambda^2 g_{\text{eukl}}(v,v) =\lambda^2 \abs{v}_{g_{\text{eukl}}}^2$. Sei $\gamma$ nun eine Kurve von $x$ nach $y$. So verlässt diese Kurve zwingend $B_r(x)$ und es folgt somit
 \[
 L(\gamma) = \int_I \abs{\dot{\gamma}}_g \mathd t \geq \lambda \int_I \abs{\dot{\gamma}}_{g_{\text{eukl}}} \mathd t \geq \lambda r
 \]
@@ -2615,31 +2616,31 @@ Seien $x,y$ gegeben mit $x\neq y$. So stellt sich die Frage, ob eine Kurve von $
 \label{ssub:232}
 Sei $\gamma:[a,b]=I\to M$ (glatte) Kurve. Die \Index{Variation} ist die glatte Abbildung 
 \[
-F:Q:=(-\epsilon,\epsilon) \to M
-\] für festes $s\in (-\epsilon,\epsilon)$ def. wir die Kurve $\gamma_s := F(s,.):I\to M$. Für $s=0$ folgt $\gamma = \gamma_0 = F(0,.)$. Eine \Index{Vektorfeld entlang von $F$} ist eine Abbildung $Y: Q\to TM$ mit $Y(q)\in T_{F(q)} M$. Die Menge der Vektorfelder entlang $F$ bezeichnen wir mit $\Gamma(F* TM)$
+F:Q:=(-\epsilon,\epsilon)\times I \to M
+\] für festes $s\in (-\epsilon,\epsilon)$ def. wir die Kurve $\gamma_s := F(s,.):I\to M$. Für $s=0$ folgt $\gamma = \gamma_0 = F(0,.)$. Eine \Index{Vektorfeld entlang von $F$} ist eine Abbildung $Y: Q\to TM$ mit $Y(q)\in T_{F(q)} M$. Die Menge der Vektorfelder entlang $F$ bezeichnen wir mit $\Gamma(F^* TM)$
 %subsubsection 232(end)
 
 \subsubsection{Bemerkung}
 \label{ssub:233}
-Wir können uns den Raum der glatten Kurven von $x$ nach $y$ $\Omega_0 (x,y)$ als unendlich-dimensionale Mannigfaltigkeit vorstellen. Hierbei ist der Tangentialraum $T_\gamma \Omega_0 (x,y)$ vorstellbar als Raum der Derivationen $\frac{\mathd \gamma_s}{\mathd s}(0,t) = \frac{\mathd F}{\mathd s}(0,t)$ für eine Variation $F$ von $\gamma$. Definiere $V(s,t) := \frac{\mathd}{\mathd s} F(s,t)\in \Gamma(F*TM)$. Das \Index{Variationsvektorfeld} ist dann gegeben durch $V_\gamma(t):=V(0,t) \in \Gamma_\gamma(TM)$. Es gilt $T_\gamma \Omega_0 (x,y) \simeq \Gamma_\gamma(TM)$.
+Wir können uns den "'Raum der glatten Kurven von $x$ nach $y$"' $\Omega_0 (x,y)$ als unendlich-dimensionale Mannigfaltigkeit vorstellen. Hierbei ist der Tangentialraum $T_\gamma \Omega_0 (x,y)$ vorstellbar als Raum der Derivationen $\frac{\mathd \gamma_s}{\mathd s}(0,t) = \frac{\mathd F}{\mathd s}(0,t)$ für eine Variation $F$ von $\gamma$. Definiere $V(s,t) := \frac{\mathd}{\mathd s} F(s,t)\in \Gamma(F^*TM)$. Das \Index{Variationsvektorfeld} ist dann gegeben durch $V_\gamma(t):=V(0,t) \in \Gamma_\gamma(TM)$. Es gilt $T_\gamma \Omega_0 (x,y) \simeq \Gamma_\gamma(TM)$.
 %subsubsection 233(end)
 
 \subsubsection{Definition}
 \label{ssub:234}
-Sei $F$ Variation von $\gamma$, $(Y:Q\to TM) \in \Gamma(F*TM)$ glatt mit $Y(q) \in T_{F(q)}M$. So existiert 
+Sei $F$ Variation von $\gamma$, $(Y:Q\to TM) \in \Gamma(F^*TM)$ glatt mit $Y(q) \in T_{F(q)}M$. So existiert 
 \[
-\nabla^F:\Gamma(TQ)\times \Gamma(F^* TM) \to \Gamma(F^* TM),\ \nabla^F (X,Y) = \nabla_X^F V
+\nabla^F:\Gamma(TQ)\times \Gamma(F^* TM) \to \Gamma(F^* TM),\ \nabla^F (X,V) = \nabla_X^F V
 \]
 mit folgenden Eigenschaften:
 \begin{itemize}
 \item tensoriell in $X$
 \item Leibnitz-Regel in $V$
-\item $\nabla_X^F V = \nabla_X^g V$, falls $V(q) = \tilde{V}(F(q))$, $\tilde{V}\in \Gamma(TM)$
+\item $\nabla_X^F V = \nabla_{\bar{X}}^g \tilde{V}$, falls $V(q) = \tilde{V}(F(q))$, $\tilde{V}\in \Gamma(TM)$
 \end{itemize}
 %$\enbrace*{\frac{\nabla^\gamma}{\mathd t}: \Gamma_\gamma(TM)\to \Gamma_\gamma(TM),\ \frac{\nabla^\gamma}{\mathd t} V = \nabla_j^\gamma V}$
 In lokaler Betrachtung ist $V = \sum V^i(q) \partial_i(F(q))$ und somit folgt 
 \[
-(\nabla_X^F V)(q) = \sum \mathd_q V^i(X(q))\partial(F(q))+V^i(q)\enbrace*{\nabla_{X(q)}\partial_i}(F(q))
+(\nabla_X^F V)(q) = \sum \mathd_q V^i(X(q))\partial_i(F(q))+V^i(q)\enbrace*{\nabla_{X(q)}\partial_i(F(q))}
 \]
 Ein Vektorfeld $X\in \Gamma(TQ)$ induziert ein Vektorfeld entlang $F$ durch  $\bar{X}(q) = \mathd F_q(X(q))\in \Gamma(F^* TM)$. (Beachte $Y\in \Gamma(F^* TM)$ ist im Allgemeinen kein Vektorfeld auf $F(Q)$)
 %subsubsection 234(end)
@@ -2666,7 +2667,7 @@ Falls $F$ Variation mit festen Endpunkten, also $F(s,0) = \gamma(a)$ und $F(s,1)
 \frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} = - \frac{1}{c} \int_a^b g(V_\gamma,\frac{\nabla^\gamma}{\mathd t}\dot{\gamma})\mathd t
 \]
 \minisec{Beweis}
-Seien $V = \bar{\partial}_s, T = \bar{\partial}_t$. (Bemerkung: $V,T \in \Gamma(F^* TM),\ V(0,t) = \gamma(t), T(s,t) = \mathd_{(s,t)} F(s,t) = \dot{\gamma}$) Mit $\ref{ssub:235}$ folgt, dass $\partial_s g(\dot{\gamma}_s,\dot{\gamma}_s) = 2g(\nabla_{\partial_s}^F T,T)$. Dann folgt
+Seien $V = \bar{\partial}_s, T = \bar{\partial}_t$. (Bemerkung: $V,T \in \Gamma(F^* TM),\ V(0,t) = V_\gamma(t), T(s,t) = \mathd_{(s,t)} F(s,t) = \dot{\gamma}_s(t)$) Mit $\ref{ssub:235}$ folgt, dass $\partial_s g(\dot{\gamma}_s,\dot{\gamma}_s) = 2g(\nabla_{\partial_s}^F T,T)$. Dann folgt
 \begin{align*}
 \frac{\mathd}{\mathd s} L(\gamma_s)\vert_{s=0} &  = \int_a^b \partial_s \sqrt{g\enbrace*{\dot{\gamma}_s (t),\dot{\gamma}_s (t)}}\vert_{s=0} \mathd t\\
 & = \int_a^b \frac{1}{\abs{\dot{\gamma}}} g(\nabla_{\partial_s}^F T,T)\vert_{s=0} \mathd t\\
@@ -2692,7 +2693,7 @@ Folgt direkt aus $\ref{ssub:236}$.
 
 \subsubsection[Definition: Geodäte]{Definition}
 \label{ssub:238}
-Eine glatte, nach Bogenlänge parametrisierte Kurve $\gamma:I\to M$ heißt Geodäte, falls
+Eine glatte, nach Bogenlänge parametrisierte Kurve $\gamma:I\to M$ heißt \Index{Geodäte}, falls
 \[
 \frac{\nabla^\gamma}{\mathd t} \dot{\gamma} = 0
 \]
@@ -2717,7 +2718,7 @@ Für alle $x\in M, v\in T_x M$ existiert eine eindeutig bestimmte Geodäte $\gam
 \enbrace*{\frac{\nabla^{h, \gamma}}{\mathd t} \dot{\gamma}} = \enbrace*{\frac{\nabla^\gamma}{\mathd t} \dot{\gamma}}^T = (\ddot{\gamma})^T
 \]
 ($M^n\subset \mathds{R}^{n+k} \Rightarrow T\mathds{R}^{n+k}\vert_{M^n} = TM^n \oplus \underbrace{NM^n}_{\text{Normalenbündel}}$)
-Also heißt dies, dass $\gamma$ Geodäte genau dann, wenn die Beschleunigung $\ddots{\gamma}$ normal zu $M$ ist.
+Also heißt dies, dass $\gamma$ Geodäte genau dann, wenn die Beschleunigung $\ddot{\gamma}$ normal zu $M$ ist.
 \item Zum Beispiel sind die Geodäten von $S^n\subset \mathds{R}^{n+1},\ h= g_{\text{rou}} = g_{\text{eukl}}\vert_{S^n}$ Großkreise (nach Bogenlänge parametrisiert)
 \item Sei $H^n\subset \mathds{R}^{n+1}$.
 \missingfigure{Veranschaulichung der Geodäten auf $H^n\subset \mathds{R}^{n+1}$}
@@ -2750,9 +2751,9 @@ Daraus können wir folgern, dass $\Delta \dot{\gamma}(t_i) = 0$ für alle Bruchp
 
 %subsection 24(end)
 
-\subsection{Die Expoentialabbildung}
+\subsection{Die Exponentialabbildung}
 \label{sub:25}
-Im folgenden Teil stellen wir uns die Frage, wann Geodäten längenminimierend sind. Wir haben beobachtet, sei $v\in T_x M$ und $\gamma_v$ eindeutig bestimmte Geodäte mit $\gamma_v(0) = x$ und $\dot{\gamma}(0) = v$. Seien $s\in \mathds{R}$ und $\tilde{\gamma}(t) = \gamma_v (st)$ mit $\dot{\tilde{\gamma}} = sv$, so folgt aus der Eindeutigkeit $\gamma_v(st) = \tilde{\gamma}(t) = \gamma_{sv}(t)$. Insbesondere für $t=1$: $\gamma_v(s) = \gamma_{sv}(1)$.\\
+Im folgenden Teil stellen wir uns die Frage, wann Geodäten längenminimierend sind. Wir haben beobachtet, sei $v\in T_x M$ und $\gamma_v$ eindeutig bestimmte Geodäte mit $\gamma_v(0) = x$ und $\dot{\gamma}_v(0) = v$. Seien $s\in \mathds{R}$ und $\tilde{\gamma}(t) = \gamma_v (st)$ mit $\dot{\tilde{\gamma}} = sv$, so folgt aus der Eindeutigkeit $\gamma_v(st) = \tilde{\gamma}(t) = \gamma_{sv}(t)$. Insbesondere für $t=1$: $\gamma_v(s) = \gamma_{sv}(1)$.\\
 (Denn $\tilde{\gamma}(0) = \gamma_v(0) = x$ und $\dot{\tilde{\gamma}} = \frac{\mathd}{\mathd t} \gamma_{v} (st)\vert_{t=0} = s \frac{\mathd}{\mathd t} \gamma_{v} (t)\vert_{t=0} = sv \in T_x M$, also $\tilde{\gamma} = \gamma_{sv}$)
 
 \subsubsection{Definition}
@@ -2790,13 +2791,15 @@ Die Exponentialabbildung am Nordpol des $S^2\subset \mathds{R}^3$
 
 \subsubsection{Korollar}
 \label{ssub:246}
-Sei $x\in M$. Dann eixistert $\epsilon>0$ und eine Umgebung $U$ von $x$ mit: Je zwei Punkte in $U$ können durch eine Geodäte der Länge kleiner $\epsilon$ verbunden werden. Außerdem ist die Einschränkung von $\exp_y$ auf $B_\epsilon (0_y)$ ein Diffeomorphismus auf das Bild.
+Sei $x\in M$. Dann existiert $\epsilon>0$ und eine Umgebung $U$ von $x$ mit: Je zwei Punkte in $U$ können durch eine Geodäte der Länge kleiner $\epsilon$ verbunden werden. Außerdem ist die Einschränkung von $\exp_y$ auf $B_\epsilon (0_y)$ ein Diffeomorphismus auf das Bild.
 \minisec{Beweis}
-Nach $\ref{ssub:244}$ existiert eine Umgebung $\mathcal{W}$ von $0_y$ in $T_x M$ mit $\widetilde{\exp}\vert_\mathcal{W}$ Diffeomorphismus auf das Bild. Außerdem existiert eine Umgebung $W$ um $x$ in $M$ und $\epsilon>0$, sodass $\mathcal{W}_\epsilon := \bigcup_{y\in W} B_\epsilon(0_y) \subset \mathcal{W}$. Da $(x,x) = \exp(0_x)$ gilt $(x,x) \in \widetilde{\exp}(\mathcal{W}_\epsilon)$ und somit existiert eine offene Menge $U\subset M$ um $x$, sodass $U\times U\subset \widetilde{\exp}(\mathcal{W}_\epsilon)$. Sind also $p,q\in U$, dann existiert ein (eindeutiges) $v\in \mathcal{W_\epsilon}$, sodass $(p,q) = \enbrace{\pi(v), \exp_{\pi(v)} v}$.
+Nach $\ref{ssub:245}$ existiert eine Umgebung $\mathcal{W}$ von $0_y$ in $TM$ mit $\widetilde{\exp}\vert_\mathcal{W}$ Diffeomorphismus auf das Bild. Außerdem existiert eine Umgebung $W$ um $x$ in $M$ und $\epsilon>0$, sodass $\mathcal{W}_\epsilon := \bigcup_{y\in W} B_\epsilon(0_y) \subset \mathcal{W}$. Da $(x,x) = \exp(0_x)$ gilt $(x,x) \in \widetilde{\exp}(\mathcal{W}_\epsilon)$ und somit existiert eine offene Menge $U\subset M$ um $x$, sodass $U\times U\subset \widetilde{\exp}(\mathcal{W}_\epsilon)$. Sind also $p,q\in U$, dann existiert ein (eindeutiges) $v\in \mathcal{W_\epsilon}$, sodass $(p,q) = \enbrace{\pi(v), \exp_{\pi(v)} v}$.
 Schließlich folgt
 \[
 L(\gamma_v \vert_{\benbrace{0,1}}) = \int_0^1 \abs{\dot{\gamma}_v}\mathd t = \abs{v} < \epsilon,\quad \text{da}\ v\in B_\epsilon (0_p)
 \]
+\\
+Wir können uns nach $\ref{ssub:245}$ $\exp$ auch als Familie von Karten abhängig von $x$ vorstellen. So können wir annehmen, dass $\exp_x: \mathcal{V}_x \subset T_x M \to U_x \subset M$ ein Diffeomorphismus auf das Bild ist. Wählen wir eine Orthonormalbasis $e_1,\ldots,e_n$ auf $T_x M$ so gibt und $\exp^{-1}_x: U_x \to \mathds{R}^n$ eine Karte um $x$. Die resultierenden Koordinaten nennen wir \Index{Normalkoordinaten}.
 \marginnote{Hier fehlt vllt. noch ein kleiner Kommentar}
 %subsubsection 246(end)
 
@@ -2824,9 +2827,9 @@ somit verschwindet der Term der zweiten Ableitung und es bleibt übrig:
 \]
 Für $t=0$ ist $\gamma_v(t) = x$ und somit unabhängig von der Wahl von $v$, also gilt
 \[
-\sum_{i,j} \Gamma_{ij}^k (\gamma_v(t)) a^i a^j = 0\quad \forall a^i \in \mathds{R}
+\sum_{i,j} \Gamma_{ij}^k (x) a^i a^j = 0\quad \forall a^i \in \mathds{R}
 \]
-Damit folgt $\Gamma_{ij}^k$.
+Damit folgt $\Gamma_{ij}^k = 0$.
 \end{enumerate}
 %subsubsection 247(end)
 Aufgrund von Beispiel $\ref{ssub:244}$ können wir nicht annehmen, dass $\exp_x$ eine Isometrie ist. Jedoch gilt für $\mathd_v \exp_x: T_v T_x M \to T_{\exp_x(v)} M$
@@ -2852,7 +2855,7 @@ Somit folgt
 \[
 g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(1)\vert_{s=0},\mathd_v \exp(v)} = g\enbrace*{\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0},v}
 \]
-Nun konstruieren wir eine Variation, sodass $\frac{\mathd}{\mathd s} \gamma_s(1)\vert_{s=0} = \mathd_v \exp_x(w)$. Definiere die Kurve $\alpha:(-\delta,\delta)\to T_x M$ Kurve mit $\alpha(0) = v$ und $\dot{\alpha}(0) = w$, $\alpha \subset S_{\abs{r}}^{n-1}$. Für $s\in (-\delta,\delta)$ sei $\rho_s(t)$ der Strahl von $0_x$ nach $\alpha(s)$, also $\rho_0(t) = tv$, $\rho_s(0) = 0_x$ und $\rho_s(1) = \alpha(s)$. Dann ist $\gamma_s(t) = \exp(\rho_s(t))$ die benötigte Variation. (Da $\gamma_0(t) = \exp(\rho_0(t)) = \exp(tv) = \gamma_tv(1) = \gamma_v(t)$)
+Nun konstruieren wir eine Variation, sodass $\frac{\mathd}{\mathd s} \gamma_s(1)\vert_{s=0} = \mathd_v \exp_x(w)$. Definiere die Kurve $\alpha:(-\delta,\delta)\to T_x M$ Kurve mit $\alpha(0) = v$ und $\dot{\alpha}(0) = w$, $\alpha \subset S_{\abs{r}}^{n-1}$. Für $s\in (-\delta,\delta)$ sei $\rho_s(t)$ der Strahl von $0_x$ nach $\alpha(s)$, also $\rho_0(t) = tv$, $\rho_s(0) = 0_x$ und $\rho_s(1) = \alpha(s)$. Dann ist $\gamma_s(t) = \exp(\rho_s(t))$ die benötigte Variation. (Da $\gamma_0(t) = \exp(\rho_0(t)) = \exp(tv) = \gamma_{tv}(1) = \gamma_v(t)$)
 Es gilt 
 \[
 \frac{\mathd}{\mathd s} \gamma_s(1)\vert_{s=0} = \frac{\mathd}{\mathd s} \exp_x (\alpha(s))\vert_{s=0} = \mathd_{\alpha(0)} \exp_x(\dot{\alpha}(0)) = \mathd_v \exp_x(w)
@@ -2866,7 +2869,7 @@ Zusammen mit $\frac{\mathd}{\mathd s}\gamma_s(0)\vert_{s=0} = \frac{\mathd}{\mat
 \[
 (0,\epsilon)\times S^{n-1} \to \exp_x(B_\epsilon(0_x))\backslash \set{x},\quad (r,v)\mapsto \exp_x(rv) 
 \]
-gibt uns "Polarkoordinaten auf $U\backslash \set{x}$" in diesen Koordinaten gilt
+gibt uns "'Polarkoordinaten auf $U\backslash \set{x}$"' in diesen Koordinaten gilt
 \[
 g_{(r,v)} = \mathd r^2 + h_{(r,v)}
 \]
@@ -2924,7 +2927,7 @@ Sei $B = B_r(x)$ normaler Koordinatenball.
 \item Lemma: Falls $y\not\in B$, dann existiert ein $z\in \partial B$ mit $\mathd^g(x,y) = r + \mathd^g(z,y)$.
 \missingfigure{Veranschaulichung des Lemmas}
 \item Sei $y\in M$.\\
-1.Schritt: Wähle $z\in \partial B$ mit $\mathd:= \mathd^g (x,y) = \mathd^g(x,z) + \mathd^g(z,y)$. Sei $\gamma$ die radiale Geodäte von $x$ nach $z$, das heißt $\abs{\dot{\gamma}} \equiv 1$, so gilt $\mathd^g(x,z) = L(\gamma) = \int_0^r \abs{\dot{\gamma}}\mathd t = r$. Damit folgt $\mathd = r + \mathd^g(\gamma(t),y)$. Definiere $J = \set[t\in \mathds{R}]{\mathd = t + \mathd^g(\gamma(t),y)}$. Dies ist eine sinnvolle Definition, da $\gamma$ auf ganz $\mathds{R}$ definiert ist. Außerdem ist $J$ nach Definition abgeschlossen. Da $r\in J$ ist $J$ nichtleer. Sei $y\not \in B$, so folgt $r<\mathd$ und somit $J\cap \benbrace{0,d} \neq \emptyset$. $T = \sup (J\cap \benbrace{0,d}) \in J$, da $J$ abgeschlossen. Es gilt $T\leq \mathd$.\\
+1.Schritt: Wähle $z\in \partial B$ mit $\mathd:= \mathd^g (x,y) = \mathd^g(x,z) + \mathd^g(z,y)$. Sei $\gamma$ die radiale Geodäte von $x$ nach $z$, das heißt $\abs{\dot{\gamma}} \equiv 1$, so gilt $\mathd^g(x,z) = L(\gamma) = \int_0^r \abs{\dot{\gamma}}\mathd t = r$. Damit folgt $\mathd = r + \mathd^g(\gamma(r),y)$. Definiere $J = \set[t\in \mathds{R}]{\mathd = t + \mathd^g(\gamma(t),y)}$. Dies ist eine sinnvolle Definition, da $\gamma$ auf ganz $\mathds{R}$ definiert ist. Außerdem ist $J$ nach Definition abgeschlossen. Da $r\in J$ ist $J$ nichtleer. Sei $y\not \in B$, so folgt $r<\mathd$ und somit $J\cap \benbrace{0,d} \neq \emptyset$. $T = \sup (J\cap \benbrace{0,d}) \in J$, da $J$ abgeschlossen. Es gilt $T\leq \mathd$.\\
 Behauptung: $T = d$. Angenommen dies ist nicht der Fall, also $T < d$, so folgt $\gamma(T)\neq y$. Mit dem Lemma aus (a) existiert $\tilde{r} > 0$ und $\tilde{z}\in M$, sodass $\mathd^g(\gamma(T),\tilde{z}) = \tilde{r}$ und $\mathd^g (\gamma(T),\tilde{z}) + \mathd^g(\tilde{z}, y) = \mathd^g (\gamma(T),y)$. Folglich ist $\mathd^g(\tilde{z}, y) = d - T -\tilde{r}$, so dass 
 \[
 \mathd > T +\tilde{r} = \mathd^g(x,\gamma(T)) + \mathd^g(\gamma(T),\tilde{z}) \geq \mathd^g(x,\tilde{z}) \geq \mathd - \mathd^g(\tilde{z},y) = T+\tilde{r}
@@ -2937,7 +2940,7 @@ Man sieht direkt, dass im oberen Ausdruck Gleichheit herrscht. Sei $\tilde{\gamm
 \tilde{\gamma}(t-T) &\text{für}\ t\in \benbrace{T,T+\tilde{r}}
 \end{cases}
 \]
-so folgt $L((\sigma) = T + \tilde{r} = \mathd(x,\tilde{z})$, also ist $\sigma$ längenminimierend, somit $\sigma$ Geodäte insbesondere glatt. Also ist $\sigma$ glatte Fortsetzung von $\gamma\vert_{\benbrace{0,T}}$ und damit $\sigma = \gamma\vert_{\benbrace{0,T+\tilde{r}}}$, da $\gamma$ auf $\mathds{R}$ definiert.
+so folgt $L(\sigma) = T + \tilde{r} = \mathd(x,\tilde{z})$, also ist $\sigma$ längenminimierend, somit $\sigma$ Geodäte insbesondere glatt. Also ist $\sigma$ glatte Fortsetzung von $\gamma\vert_{\benbrace{0,T}}$ und damit $\sigma = \gamma\vert_{\benbrace{0,T+\tilde{r}}}$, da $\gamma$ auf $\mathds{R}$ definiert.
 Daraus folgt mit der oberen Gleichung, dass $d = T +\tilde{r} + \mathd^g(\tilde{z},y) = T + \tilde{r} + \mathd^g(\gamma(T+\tilde{r}),y)$.
 Also ist $T+\tilde{r} \in J$ und es gilt $\mathd > T + \tilde{r} > T$. Dies ist ein Widerspruch zu $T = \sup (J\cap \benbrace{0,d})$.
 Also gilt $T\geq d$. ($T = \mathd \Rightarrow \mathd = \mathd^g(x,y) = T + \mathd^g(\gamma(T),y) \Rightarrow \mathd^g(\gamma(d),y) = 0 \Rightarrow \gamma(d) = y$)
@@ -2956,7 +2959,7 @@ Für eine riemannsche Mannigfaltigkeit $(M,g)$ sind äquivalent:
 \begin{itemize}
 \item "$(MV) \Rightarrow (GV)$": Sei $\gamma:I\to M$ Geodäte (oBdA $\gamma$ normal). Sei $t_n\in [0,b)$ eine Folge, die gegen $b$ konvergiert. Es gilt $\mathd^g(\gamma(t_n),\gamma(t_m)) \leq \abs{t_n - t_m}$, also ist $\gamma(t_n)$ Cauchy-Folge. Da $(M,\mathd^g)$ vollständig, konvergiert $\gamma(t_n) \to y\in M$ ($y$ unabhängig von $\gamma(t_n)$). Also lässt sich $\gamma$ stetig auf $\benbrace{0,b}$ fortsetzen. Also ist $I$ abgeschlossen. Außerdem existiert ein $\epsilon > 0$, sodass jede normale Geodäte die in $y$ startet auf $(-\epsilon,\epsilon)$ definiert ist. Damit ist $I$ offen und somit, da $\mathds{R}$ zusammenhängend folgt, das $I = \mathds{R}$.
 \item "$(GV) \Rightarrow (GV_1)$": Klar
-\item "$(GV_1) \Rightarrow (HB)$": Sei $K\subset M$ abgeschlossen und beschränkt, so folgt aus Theorem $\ref{ssub:254}$, dass ein $R$ existiert mit $K\subset B_R(x) := \exp_x(B_R(0_x))$. Sei nun $\tilde{K} := \exp^{-1}(\underbrace{K}_{\text{abg.}}) \subset B_R (0_x) \subset T_x M$ abgeschlossen und beschränkt. Mit Heine-Borel folgt nun, dass $\tilde{K}$ kompakt ist. ($T_x M$ ist ein endlich dimensionaler $\mathds{R}$-VR). Da $\exp_x$ stetig ist folgt somit, dass $\exp_x(\tilde{K}) = K$ kompakt ist.
+\item "$(GV_1) \Rightarrow (HB)$": Sei $K\subset M$ abgeschlossen und beschränkt, so folgt aus Theorem $\ref{ssub:253}$, dass ein $R$ existiert mit $K\subset B_R(x) := \exp_x(B_R(0_x))$. Sei nun $\tilde{K} := \exp^{-1}(\underbrace{K}_{\text{abg.}}) \subset B_R (0_x) \subset T_x M$ abgeschlossen und beschränkt. Mit Heine-Borel folgt nun, dass $\tilde{K}$ kompakt ist. ($T_x M$ ist ein endlich dimensionaler $\mathds{R}$-VR). Da $\exp_x$ stetig ist folgt somit, dass $\exp_x(\tilde{K}) = K$ kompakt ist.
 \item "$(HB) \Rightarrow (MV)$": Jede Cauchy-Folge ist beschränkt, also in $K$ kompakt enthalten, also konvergent.
 \end{itemize}
 Insbesondere ist jede kompakte Riemannsche Mannigfaltigkeit $(M,g)$ (geod.) vollständig.
@@ -2965,7 +2968,7 @@ Insbesondere ist jede kompakte Riemannsche Mannigfaltigkeit $(M,g)$ (geod.) voll
 
 \subsubsection{Satz}
 \label{ssub:256}
-Sei $p:(M,g)\to (N,h)$ lokale Isometrie. $(M,g)$ ist geodätisch vollstänig genau dann, wenn $p$ ist Riemannsche Überlagerung und $(N,h)$ geodätisch vollständig.
+Sei $p:(M,g)\to (N,h)$ lokale Isometrie. $(M,g)$ ist geodätisch vollständig genau dann, wenn $p$ ist Riemannsche Überlagerung und $(N,h)$ geodätisch vollständig.
 %subsubsection 256(end)
 
 \subsubsection{Beispiele}
