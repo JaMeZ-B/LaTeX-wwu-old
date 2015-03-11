@@ -2926,8 +2926,8 @@ Sei $X$ ein \CW-Komplex. Wähle $q_i^\ssbrace{n}$ und $Q_i^\ssbrace{n}$ für die
 	induziert einen Isomorphismus in Homologie.
 	\item Es gilt
 	\[
-		H_k \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R} = \begin{cases}
-			R[I^{(n)}], &\text{ falls }k=n\\
+		H_k \enbrace*{{\textstyle\coprod\limits_{i\in I^\ssbrace{n}}} D^n, {\textstyle\coprod\limits_{i\in I^\ssbrace{n}}} S^{n-1};R} = \begin{cases}
+			R[I^\ssbrace{n}], &\text{ falls }k=n\\
 			0, & \text{ sonst}
 		\end{cases}
 	\] 
@@ -4071,21 +4071,82 @@ Alternativ können wir relative Homotopiegruppen auch wie folgt beschreiben: $\p
 
 \subsection{Die Hurewicz-Abbildung} % (fold)
 \label{sub:1521}
-Sei $\vartheta \colon \abs*{\Delta^n} \xrightarrow{\cong} D^n$ ein Homöomorphismus. Dies liefert eine Homologieklasse 
-$\homologieklasse{\vartheta} \in H_n(D^n,S^{n-1}) \cong \mathds{Z}$. Diese Klasse ist ein Generator der Gruppe $H_n(D^n,S{n-1})$. Sei $[\omega] \in \pi_n(X,A,x_0)$
+Sei $\vartheta \colon \abs*{\Delta^n} \xrightarrow{\cong} D^n$ ein Homöomorphismus. Dann gilt $\vartheta \enbrace*{\abs*{\partial \Delta^n}}= S^{n-1}$ und $\vartheta$ liefert eine 
+Homologieklasse $\homologieklasse{\vartheta} \in H_n(D^n,S^{n-1}) \cong \mathds{Z}$. Diese Klasse ist ein Generator der Gruppe $H_n(D^n,S^{n-1})$. Sei nun $[\omega] \in \pi_n(X,A,x_0)$
 repräsentiert durch $\omega \colon (D^n,S^{n-1},*) \to (X,A,x_0)$. Setze 
 \[
 	\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A) \enspace, \quad [\omega] \longmapsto \omega_*\homologieklasse{\vartheta} 
 \]
-für $n \ge 2$. Dies ist wohldefiniert, denn falls $\omega$ homotop zu $\omega'$ (bezüglich $(A,x_0)$), dann ist $\omega_*=\omega_*'$
+für $n \ge 2$. Dies ist wohldefiniert, denn falls $\omega$ homotop zu $\omega'$ ist (bezüglich $(A,x_0)$), dann ist $\omega_*=\omega_*'$.
 % subsection 1521 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: $\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A)$ ist ein Gruppenhomomorphismus]{Lemma} % (fold)
 \label{sub:1522}
-$\theta_n$ ist ein Gruppenhomomorphismus.
+$\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A)$ ist ein Gruppenhomomorphismus.
+\minisec{Beweis}
+Wir brauchen eine alternative Beschreibung der Gruppenverknüpfung: 
+Sei dazu $\gamma \colon D^n \to \nicefrac{D^n}{S^{n-2}} \cong D^n \vee D^n$. Dann gilt $\gamma(S^{n-1})= S^{n-1} \vee S^{n-1}$, das heißt $\gamma$ ist eine Abbildung von Raumpaaren
+$\gamma \colon (D^n,S^{n-1}) \to (D^n \vee D^n, S^{n-1} \vee S^{n-1})$. Seien nun $\omega, \omega' \colon (D^n, S^{n-1},*) \to (X,A,x_0)$ 
+Für die Verknüpfung $[\omega * \omega'] \in \pi_n(X,A,x_0)$ gilt
+\[
+	\benbrace[\big]{(\omega \vee \omega') \circ \gamma} = [\omega * \omega'] 
+\]
+\begin{figure}[t]
+	\centering{
+	\begin{tikzpicture}[scale=0.8,>={Classical TikZ Rightarrow[width=2mm,length=1mm]}]
+		\coordinate (a) at (5,-1.2);
+		\coordinate (b) at (7,-1.2);
+		\coordinate (x1) at (5.7,-1.8);
+		\coordinate (x2) at (6.3,-1.8);
+		\draw (-1,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed, black!60] (-1,0) arc (180:0:1cm and 0.5cm);
+	    \draw (0,0) circle (1cm);
+	    \shade[ball color=blue!20!white,opacity=0.20] (0,0) circle (1cm);
+		
+		\draw[->] (1.5,0) -- (3.5,0) node[midway, above]{$\gamma$};
+		
+		\draw (4,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed, black!60] (4,0) arc (180:0:1cm and 0.5cm);
+	    \draw (5,0) circle (1cm);
+	    \shade[ball color=blue!20!white,opacity=0.20] (5,0) circle (1cm);
+		
+		\draw (6,0) arc (180:360:1cm and 0.5cm);
+	    \draw[dashed, black!60] (6,0) arc (180:0:1cm and 0.5cm);
+	    \draw (7,0) circle (1cm);
+	    \shade[ball color=blue!20!white,opacity=0.20] (7,0) circle (1cm);
+		\draw[->] (a) .. controls +(-90:0.4) and +(180:0.4).. (x1) node[midway, below left,yshift=2mm]{$\omega\vphantom{\omega^\prime}$};
+		\draw[->] (b) .. controls +(-90:0.4) and +(0:0.4).. (x2) node[midway, below right,yshift=2mm]{$\omega'$};
+		\node at (6,-1.8){$X$};
+	\end{tikzpicture}
+	\caption{Die Abbildung $\gamma$ aus Lemma \ref{sub:1522}}}
+\end{figure}%
+Sei $p_j \colon (D^n \vee D^n, S^{n-1} \vee S^{n-1}) \to (D^n,S^{n-1})$ die Abbildung, die die $j$-te Kopie von $D^n$ auf den Basispunkt abbildet und auf der anderen Kopie die 
+Identität ist. Sei weiter $i_k \colon (D^n,S^{n-1}) \to (D^n \vee D^n, S^{n-1} \vee S^{n-1})$ die Inklusion auf die $k$-te Kopie von $(D^n, S^{n-1})$. Betrachte nun die Abbildung
+\[
+	\enbrace[\big]{(p_1)_*, (p_2)_*} \colon H_n(D^n \vee D^n, S^{n-1} \vee S^{n-1}) \longrightarrow H_n(D^n,S^{n-1}) \oplus H_n(D^n,S^{n-1}) 
+\]
+Dies ist ein Isomorphismus mit inverser Abbildung
+\[
+	(i_{1})_* + (i_2)_* \colon H_n(D^n,S^{n-1}) \oplus H_n(D^n,S^{n-1}) \longrightarrow H_n(D^n \vee D^n, S^{n-1} \vee S^{n-1})
+\]
+denn es gilt
+\begin{align*}
+	\enbrace[\big]{(p_{1})_*, (p_{2})_*} \circ \enbrace[\big]{(i_{1})_* + (i_{2})_*} = \enbrace*{
+	\enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_1 \circ i_1}_{\id}}_* + \enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_1 \circ i_2}_{\const}}_* , 
+	\enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_2 \circ i_1}_{\const}}_* + \enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_2 \circ i_2}_{\id}} _*} = \id
+\end{align*}
+Also ist $\enbrace[\big]{(p_1)_*, (p_2)_*}$ eine surjektive Abbildung und Quelle und Ziel sind freie abelsche Gruppen von gleichem Rang. Die Abbildung $p_j \circ \gamma$ ist homotop 
+zur Identität (Übung). Also folgt 
+$\enbrace[\big]{(p_1)_*, (p_2)_*} \circ \gamma \enbrace*{\homologieklasse{\vartheta}} = \enbrace*{\homologieklasse{\vartheta}, \homologieklasse{\vartheta}} $ und weiter
+\begin{align*}
+	\theta_n \enbrace*{\benbrace*{\omega * \omega'}} = (\omega \vee \omega')_* \circ \gamma_* \enbrace*{\homologieklasse{\vartheta}} &= 
+	(\omega \vee \omega')_* \circ \enbrace[\big]{(i_1)_* + (i_2)_*} \circ \enbrace[\big]{(p_1)_*, (p_2)_*}   \circ \gamma_* \enbrace*{\homologieklasse{\vartheta}} \\
+	&= (\omega \vee \omega')_* \circ \enbrace*{(i_1)_* \enbrace*{\homologieklasse{\vartheta}} + (i_2)_* \enbrace*{\homologieklasse{\vartheta}} } \\
+	&= \omega_* \enbrace*{\homologieklasse{\vartheta}}  + \omega'_* \enbrace*{\homologieklasse{\vartheta}} \bewende
+\end{align*}
 % subsection 1522 (end)
 
-\subsection{Theorem (Hurwicz)} % (fold)
+\subsection{Theorem (Hurewicz)} % (fold)
 \label{sub:1523}
 Seien $(X,A)$ mit $A \subset X$ beide wegzusammenhängend. Sei $\pi_1(A,x_0)=1$ und seien $\pi_k(X,A,x_0)=0$ für $k \le n-1$, $n \ge 2$. Dann ist 
 \[
