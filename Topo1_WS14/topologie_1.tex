@@ -3274,7 +3274,7 @@ $(X \setminus L, A \setminus L) \hookrightarrow (X,A)$ den Ausschneidungs-Isomor
 \begin{figure}[ht]
 	\centering{
 	\tikzsetnextfilename{skizze_kleine_simplizes_ausschneidung}
-	\begin{tikzpicture}[scale=0.9, line join=bevel]
+	\begin{tikzpicture}[scale=0.8, line join=bevel]
 		% \draw[help lines] (-4,-3) grid (4,3);
 		\draw[very thick] (0,0) ellipse(4cm and 2.5cm);
 		\node at (-3,2) {$X$};
@@ -3380,7 +3380,7 @@ Daher induziert auch die Inklusion $(\star)$ einen Isomorphismus in $H_*$. \bewe
 
 \subsection{Idee zum Beweis des Satzes über kleine Simplizes} % (fold)
 \label{sub:136}
-Um den Satz über kleine Simplizes beweisen zu können, müssen wir uns überlegen, wie wir einen Simplex systematisch in kleinere zerlegen können:\todo{RevChap13}
+Um den Satz über kleine Simplizes beweisen zu können, müssen wir uns überlegen, wie wir einen Simplex systematisch in kleinere zerlegen können:
 \begin{figure}[ht]
 	\centering{
 	\tikzsetnextfilename{zerteilung_simplex}
@@ -3439,13 +3439,50 @@ Um den Satz über kleine Simplizes beweisen zu können, müssen wir uns überleg
 
 \subsection[Definition: Schwerpunkt und \enquote{Abkegeln}]{Definition} % (fold)
 \label{sub:137}
+\begin{wrapfigure}[8]{R}{5cm}
+	\vspace{-25pt}
+	\centering{
+	\tikzsetnextfilename{abkegeln}
+	\begin{tikzpicture}[scale=3.5, rotate=230, font=\small]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+	
+		\draw[thick] (a) -- (b) -- (c) -- cycle;
+	
+		\coordinate (ab) at ($(a)!.5!(b)$);
+		\coordinate (ac) at ($(a)!.5!(c)$);
+		\coordinate (bc) at ($(b)!.5!(c)$);
+	
+		\path[name path=erster] (a) -- (bc);
+		\path[name path=zweiter] (b) -- (ac);
+		\path[name intersections={of=erster and zweiter, name=i}] (i-1) coordinate (m);
+		
+		\draw[very thick, Firebrick2] (ab) -- (b) node[midway, above left]{\normalsize$\sigma$};
+		\draw[DarkOrange2, thick] (m) -- (ab) node[midway, above right,xshift=-0.2cm]{$K_{\Delta^n}(\sigma)$};
+		\foreach \x in {0.1,0.2,...,0.9,1.0}{
+			\draw[DarkOrange2, thick] (m) -- ($(ab)!\x!(b)$);
+		}
+		
+		% drawing circles
+		\foreach \x in {a,b,c}{
+			\draw[thick,fill=DodgerBlue2] (\x) circle[radius=0.015];
+		}
+		\foreach \x in {ab,bc,ac}{
+			\draw[thick,fill=SeaGreen3] (\x) circle[radius=0.015];
+		}
+		\draw[thick,fill=Yellow2] (m) circle[radius=0.015];
+	\end{tikzpicture}
+	\caption{Skizze des \enquote{Abkegelns}}
+	}
+\end{wrapfigure}
 $s_n := \enbrace*{\frac{1}{n+1}, \ldots , \frac{1}{n+1}} \in \abs*{\Delta^n}$ heißt der \Index{Schwerpunkt} von $\abs*{\Delta^n}$. Ist 
 $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ ein singulärer $p$-Simplex, so definieren wir $(K_{\Delta^n})(\sigma) \colon \abs*{\Delta^{p+1}} \to \abs*{\Delta^n}$ 
 durch \marginnote{\enquote{Abkegeln}}
 \[
 	\enbrace*{K_{\Delta^n}} (\sigma) \enbrace*{t_0, \ldots , t_{p+1}} = t_0 \cdot s_n + (1-t_0) \cdot \sigma \enbrace*{\frac{(t_1,\ldots ,t_{p+1})}{1-t_0}} 
 \]
-Wir erhalten eine Abbildung $\enbrace*{K_{\Delta^n}}_p \colon C_p \enbrace*{\abs*{\Delta^n};R} \to C_{p+1} \enbrace*{\abs*{\Delta^n};R}$.
+Wir erhalten eine Abbildung $\enbrace*{K_{\Delta^n}}_p \colon C_p \enbrace*{\abs*{\Delta^n};R} \to C_{p+1} \enbrace*{\abs*{\Delta^n};R}$. \todo{RevChap13}
 % subsection 137 (end)
 
 \subsection[Lemma: Kettenhomotopie zwischen $\const_{s_n}$ und $\id$ auf $\abs*{\Delta^n}$]{Lemma} % (fold)
