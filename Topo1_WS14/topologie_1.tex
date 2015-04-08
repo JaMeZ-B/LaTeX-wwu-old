@@ -3526,13 +3526,66 @@ Ist $H_{n-1}$ schon definiert, so setzen wir für einen singulären $n$-Simplex 
 	(H_n)_X(\sigma) := \sigma_* \enbrace[\Big]{ (K_{\Delta^n})_n \enbrace[\big]{ \id_{\abs*{\Delta^n}} - (H_{n-1})_{\abs*{\Delta^n}}\circ\partial_n 
 	\enbrace{\id_{\abs*{\Delta^n}}}}} 
 \]
-\todo{RevChap13}
-\missingfigure{Skizze zu den neu definierten Operatoren für $n=1,2,3$}
+\begin{figure}[ht]
+	\centering{
+	\tikzsetnextfilename{Zerteilungsoperatoren}
+	\begin{tikzpicture}[scale=1.5, thick]
+		% \draw[help lines] (0,0) grid (8,4);
+		
+		% oberer Teil
+		\node at (-1,2.7) {$B_n$};
+		\coordinate (c) at (0,2.7);
+		\draw (2,2.7) coordinate (d) -- ++(2,0) coordinate (e);
+		\draw ($(d)!0.5!(e) + (0,0.15)$) -- ($(d)!0.5!(e) + (0,-0.15)$);
+		\coordinate (mid) at (7,2.5);
+		\coordinate (f) at ($(mid) + (90:1)$);
+		\coordinate (g) at ($(mid) + (210:1)$);
+		\coordinate (h) at ($(mid) + (-30:1)$);
+		\draw (f) -- (g) -- (h) -- cycle;
+		\draw (f) -- ($(g)!.5!(h) + (0,-0.1)$);
+		\draw (g) -- ($(f)!.5!(h) + (30:0.1)$);
+		\draw (h) -- ($(g)!.5!(f) + (150:0.1)$);
+		
+		% unterer Teil
+		\node at (-1,0.5) {$H_n$};
+		\draw (0,0) coordinate (a) -- (0,1) coordinate (b);
+		\draw (2,-0.5) coordinate (i) -- ++(2,0) coordinate (j) -- ++(0,2) coordinate (k) -- ++ (-2,0) coordinate (l) -- cycle;
+		\draw ($(i)!.5!(j)$) -- (k);
+		\draw ($(i)!.5!(j)$) -- (l);
+		
+		\draw (5.5,-0.5) coordinate (m) -- ++(3,0) coordinate (n) -- ($(m)!.5!(n) + (0,0.75)$) coordinate (o) -- cycle;
+		\draw (m) -- ++ (0,1) coordinate (p);
+		\draw (n) -- ++ (0,1) coordinate (q);
+		\draw[dashed] (o) -- ++ (0,1) coordinate (r);
+		\draw (p) -- (q) -- (r) -- cycle;
+		\coordinate (mitte) at ($(o) + (0,-0.45)$);
+		
+		\coordinate (mitte2) at ($(m)!.5!(n)$);
+		\draw[Chartreuse3, dashed] (m) -- (n) --(q) -- (mitte2) -- (p) -- cycle;
+		\draw[Chartreuse3, dashed] (m) -- (mitte) --(n);
+		\draw[Chartreuse3, dashed] (mitte2) -- (mitte) -- (p);
+		\draw[Chartreuse3, dashed] (mitte) -- (q);
+		
+		\foreach \y in {p,q,r}{
+			\draw[IndianRed2, densely dashed] (mitte) -- (\y);
+		}
+		\draw[IndianRed2, densely dashed] (p) -- (q) -- (r) -- cycle;
+		
+		
+		% punkte
+		\foreach \x in {a,b,...,r}{
+			\draw[fill=DodgerBlue2] (\x) circle[radius=0.045];
+		}
+		
+	\end{tikzpicture}
+	\caption{Die natürlichen Transformationen $B_n$ und $H_n$ für $n=0,1,2$}}
+\end{figure}
 % subsection 139 (end)
 
 \subsection[Lemma 1: Kettenhomotopie zwischen $(H_*)_X$ und der Identität]{Lemma 1} % (fold)
 \label{sub:1310}
-Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $(B_*)_X$ und der Identität.
+Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $(B_*)_X$ und der Identität.\todo{Beweis {\TeX}en} 
+\todo{RevChap13}
 % subsection 1310 (end)
 
 \subsection[Lemma 2: Eigenschaft von $(B_n)_X$ in Bezug auf eine offene Überdeckung $\mathcal{U}$ von $X$]{Lemma 2} % (fold)
