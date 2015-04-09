@@ -1,6 +1,5 @@
 \input{../!config/mitschrift.tex}
 \newcommand{\fach}{Topologie \RM{1}.}
-% \newcommand{\shortFach}{Analysis, Topologie, Geometrie}
 \newcommand{\semester}{WiSe 2014/2015}
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/reine/u/topos/lehre/WS2014-2015/Topologie1/Topologie1.html}
 
@@ -3548,12 +3547,14 @@ Ist $H_{n-1}$ schon definiert, so setzen wir für einen singulären $n$-Simplex 
 		
 		% unterer Teil
 		\node at (-1,0.5) {$H_n$};
+		
 		\draw (0,0) coordinate (a) -- (0,1) coordinate (b);
+		
 		\draw (2,-0.5) coordinate (i) -- ++(2,0) coordinate (j) -- ++(0,2) coordinate (k) -- ++ (-2,0) coordinate (l) -- cycle;
 		\draw ($(i)!.5!(j)$) -- (k);
 		\draw ($(i)!.5!(j)$) -- (l);
 		
-		\draw (5.5,-0.5) coordinate (m) -- ++(3,0) coordinate (n) -- ($(m)!.5!(n) + (0,0.75)$) coordinate (o) -- cycle;
+		\draw ($(5.5,-0.5) + (0,0.125)$) coordinate (m) -- ++(3,0) coordinate (n) -- ($(m)!.5!(n) + (0,0.75)$) coordinate (o) -- cycle;
 		\draw (m) -- ++ (0,1) coordinate (p);
 		\draw (n) -- ++ (0,1) coordinate (q);
 		\draw[dashed] (o) -- ++ (0,1) coordinate (r);
@@ -3584,7 +3585,34 @@ Ist $H_{n-1}$ schon definiert, so setzen wir für einen singulären $n$-Simplex 
 
 \subsection[Lemma 1: Kettenhomotopie zwischen $(H_*)_X$ und der Identität]{Lemma 1} % (fold)
 \label{sub:1310}
-Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $(B_*)_X$ und der Identität.\todo{Beweis {\TeX}en} 
+Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine \hyperref[sub:76]{Kettenhomotopie} zwischen $(B_*)_X$ und der Identität.
+\minisec{Beweis}
+Wir müssen zeigen, dass folgende Gleichung gilt
+\begin{equation}
+	\partial_{n+1} \circ (H_n)_X + (H_{n-1})_X \circ \partial_n = (B_n)_X - \id \tag{\#} \label{eq:1310}
+\end{equation}
+Da $\id$ eine Kettenabbildung ist, ist dann auch $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $\id$ und $(B_*)_X$. Wir beweisen \eqref{eq:1310}
+durch Induktion nach $n$. Für $n=0$ und $\sigma \colon \abs*{\Delta^0} \to X$ ist
+\[
+	\partial_1 \enbrace[\big]{ (H_0)_X (\sigma)} = 0 \qquad \text{ und } \qquad  (B_0)_X(\sigma) = \sigma 
+\]
+Also gilt \eqref{eq:1310} für $n=0$. Für den Induktionsschritt $n-1 \mapsto n$ betrachten wir $\sigma \colon \abs*{\Delta^n} \to X$. Es gilt
+\begin{align*}
+	\partial_{n+1} \circ (H_n)_X (\sigma) &= \sigma_* \circ \partial_{n+1} \circ (H_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}} \\
+	&= \sigma_* \circ \partial_{n+1} \enbrace[\Big]{(K_{\abs*{\Delta^n} })_n \enbrace*{ \id_{\abs*{\Delta^n}}- (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n 
+	\enbrace{\id_{\abs*{\Delta^n}}}}} \\
+	&\stackrel{\mathclap{\mbox{\scriptsize vgl. \ref{sub:138}}}}{=} \sigma_* \enbrace[\Big]{- (K_{\abs*{\Delta^n}})_{n-1} \circ \partial_n \enbrace*{\id_{\abs{\Delta^n}} 
+	- (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n (\id_{\abs*{\Delta^n} }) } } \\
+	&\phantom{ = } + \sigma_* \enbrace*{\id_{\abs*{\Delta^n}} - (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n (\id_{\abs*{\Delta^n}})} \\
+	&\stackrel{\mathclap{\text{I.A.}}}{=} \sigma_*  \enbrace*{- (K_{\abs*{\Delta^n}})_{n-1} \circ \partial_n (\id_{\abs*{\Delta^n}})}  
+	- \sigma_* \enbrace[\Big]{- (K_{\abs*{\Delta^n}})_{n-1} \circ  \enbrace*{\id - (B_{n-1})_{\abs*{\Delta^n}}} \circ \partial_n (\id_{\abs*{\Delta^n} }) } \\
+	&\phantom{ = } + \sigma- (H_{n-1})_X \circ \partial_n(\sigma) \\
+	&= - \sigma_* \enbrace*{(K_{\abs*{\Delta^n}})_{n-1} \circ (B_{n-1})_{\abs*{\Delta^n}} \circ \partial_n(\id_{\abs*{\Delta^n}})}
+	+ \sigma - (H_{n-1})_X \circ \partial_n(\sigma) \\
+	&= - \sigma_* (B_n)_{\abs*{\Delta^n}} \enbrace{\id_{\abs*{\Delta^n}}} + \sigma - (H_{n-1})_X \circ \partial (\sigma) \\
+	&= -(B_n)_X(\sigma) + \sigma - (H_{n-1})_X \circ \partial_n(\sigma)
+\end{align*}
+Also ist $\partial_{n+1} \circ H_n(\sigma) + H_{n-1} \circ \partial_{n}(\sigma) = \sigma - (B_n)_X(\sigma)$. \bewende
 \todo{RevChap13}
 % subsection 1310 (end)
 
