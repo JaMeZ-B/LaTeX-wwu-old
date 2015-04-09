@@ -8,6 +8,8 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 
 * SoSe 2015
 	* [Elliptische Kurven und Kryptographie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EKK_SS15/EKK.pdf?raw=true "Elliptische Kurven und Kryptographie") (Phil)
+	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes)
+	* [Numerische Analysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/NumAna_SS15/Num_Ana.pdf?raw=true "Numerische Analysis") (Tobias)
 * WiSe 2014
 	* [Topologie I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo1_WS14/topologie_1.pdf?raw=true "Topologie I.") (Jannes)
 	* [Funktionalanalysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/FunkAna_WS14/funktional_analysis.pdf?raw=true "Funktionalanalysis") (Jannes)
