@@ -1,0 +1,121 @@
+\input{../!config/Tazdr/extra_files/Praeambel.tex}
+
+\newcommand{\vorlesung}{Numerische Analysis}
+\newcommand{\Prof}{Prof. Dr. Ohlberger}
+\newcommand{\subt}{Mitschrift der Tafelnotizen}
+
+\input{../!config/Tazdr/extra_files/headings.tex}
+
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\cleardoubleoddemptypage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+	Hierbei handelt es sich um eine \subt von \textbf{\Prof}, WWU Münster, aus der Vorlesung \textbf{\vorlesung} im Wintersemester 2014/15. 
+	Dies ist kein Skript der Vorlesung und keine eigene Arbeit des Autors.\\
+	\vspace{2cm}
+	Für Fehler in der Mitschrift wird keine Haftung übernommen. 
+	Hinweise auf Fehler sind gerne gesehen, hierfür kann man mich in der Uni ansprechen oder alternativ eine e-Mail an: \textit{tobias.wedemeier@gmx.de}\\
+	Auch ist eine Mitarbeit über Github möglich.\\
+	\vspace{2cm}
+	Wenn Teile aus der Vorlesung selber fehlen, können diese gerne an meine e-Mail versandt werden. 
+	Ich werde diese dann einarbeiten.\\
+\end{center}
+\vspace*{\fill}
+\cleardoubleoddemptypage
+
+\pagenumbering{Roman}
+
+\tableofcontents
+\cleardoubleoddemptypage %sorgt dafür, dass alles folgende erst auf der nächsten freien "rechten" Seite steht
+
+\thispagestyle{empty}
+
+\setcounter{section}{-1}
+
+\section{Einleitung}
+\label{sec:einleitung}
+
+\subsection{Variationsprinzip und Galerkinapproximation}
+\label{sub:vartiation_galerkin}
+\bet{Beispiel:} Elastizitätstheorie in der Physik:\\
+Gesucht: $u:\R^d\to \R,~ d=1,2,3$, Gegeben: Energiefunktional $E:\R\to \R$\\
+Aufgabe: Finde $\argmin\ablim{u\in X}E(u)$\\
+$u$ entspricht der Auslenkung/Verschiebevektor, $\nabla u$ der Gradient (Jacobimatrix); der Symmetrische Gradient $\frac{1}{2}(\nabla u+ \nabla u^T)=:\epsilon(u)$, dann ist die elastische Gesamtenergie:
+\[
+E(u):= \frac{1}{2}\int\limits_{\Omega} \Theta:\epsilon(u)\dint x-\int\limits_{\Omega}f(x)u(x)\dint x
+\]\marginnote{: ist das Skalarprodukt}
+mit symmetrischem Spannungstensor $\Theta$ und äußerer Kraft $f:\R^d\to \R^d$.\\
+Materialgesetz: Der Spannungstensor ist proportional zum Verzerrungstensor:
+\begin{equation*}
+\begin{aligned}
+	\Theta(u) &= A \epsilon(u)\\
+	\Theta(u)_{i,j} &= A_{ijkl}\epsilon(u)_{kl}~\forall i,j,k,l=1\dt{,}d
+\end{aligned}
+\end{equation*}
+\[
+\Rightarrow E(u)=\frac{1}{2}\int\limits_{\Omega} A\epsilon(u):\epsilon(u)\dint x-\int\limits_{\Omega}f(x)u(x)\dint x
+\]
+%sub end
+
+\subsection{Definition 1 (Energieminimierung/Vartiationsprinzip)}
+\label{sub:def_1}
+\begin{enumerate}[(a)]
+	\item Physikalisches Prinzip: Ein physikalisches System strebt immer in einen Zustand minimaler Energie.
+	\item Mathematisches Prinzip: Sei $\bar{u}(x,t)$ eine Zustandsvariable und $E(u)$ die Energie eines Systems, das durch $\bar{u}$ repräsentiert wird.
+	Dann strebt $\bar{u}$ gegen ein $u=u(x)$, der die Energie minimiert, d.h. falls $E$ genügend glatt ist gilt:
+	\[
+	\difff{ }{\epsilon}E(u+\epsilon\varphi)|_{\epsilon=0}=0\qquad \forall \text{zulässigen Variationen von }\varphi
+	\]
+	Elastizität:
+	\begin{equation*}
+	\begin{aligned}
+		\difff{ }{\epsilon}E(u+\epsilon\varphi)|_{\epsilon=0} &= \difff{ }{\epsilon}\cenbrace{\frac{1}{2}\int\limits_{\Omega} A\epsilon(u+\epsilon\varphi):\epsilon(u+\epsilon\varphi)\dint x-\int\limits_{\Omega}f(x)u(x)\dint x}_{\epsilon=0}\\
+		&=\int\limits_{\Omega}A\epsilon(u):\epsilon(\varphi)\dint x-\int\limits_{\Omega}f\varphi \bgl{!} 0\\
+		&\Rightarrow \nabla(A\epsilon(u))=f \text{ Dgl.}
+	\end{aligned}
+	\end{equation*}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+
+
+\printindex
+\listoffigures
+\end{document}
