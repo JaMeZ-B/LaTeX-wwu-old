@@ -50,8 +50,8 @@ $u$ entspricht der Auslenkung/Verschiebevektor, $\nabla u$ der Gradient (Jacobim
 \[
 E(u):= \frac{1}{2}\int\limits_{\Omega} \Theta:\epsilon(u)\dint x-\int\limits_{\Omega}f(x)u(x)\dint x
 \]\marginnote{: ist das Skalarprodukt}
-mit symmetrischem Spannungstensor $\Theta$ und äußerer Kraft $f:\R^d\to \R^d$.\\
-Materialgesetz: Der Spannungstensor ist proportional zum Verzerrungstensor:
+mit symmetrischem \Index{Spannungstensor} $\Theta$ und äußerer Kraft $f:\R^d\to \R^d$.\\
+Materialgesetz: Der Spannungstensor ist proportional zum \Index{Verzerrungstensor}:
 \begin{equation*}
 \begin{aligned}
 	\Theta(u) &= A \epsilon(u)\\
@@ -63,8 +63,8 @@ Materialgesetz: Der Spannungstensor ist proportional zum Verzerrungstensor:
 \]
 %sub end
 
-\subsection{Definition 1 (Energieminimierung/Vartiationsprinzip)}
-\label{sub:def_1}
+\subsection{Definition 1 (Energieminimierung/Variationsprinzip)}
+\label{sub:def_1}\index{Variationsprinzip}
 \begin{enumerate}[(a)]
 	\item Physikalisches Prinzip: Ein physikalisches System strebt immer in einen Zustand minimaler Energie.
 	\item Mathematisches Prinzip: Sei $\bar{u}(x,t)$ eine Zustandsvariable und $E(u)$ die Energie eines Systems, das durch $\bar{u}$ repräsentiert wird.
@@ -77,10 +77,85 @@ Materialgesetz: Der Spannungstensor ist proportional zum Verzerrungstensor:
 	\begin{aligned}
 		\difff{ }{\epsilon}E(u+\epsilon\varphi)|_{\epsilon=0} &= \difff{ }{\epsilon}\cenbrace{\frac{1}{2}\int\limits_{\Omega} A\epsilon(u+\epsilon\varphi):\epsilon(u+\epsilon\varphi)\dint x-\int\limits_{\Omega}f(x)u(x)\dint x}_{\epsilon=0}\\
 		&=\int\limits_{\Omega}A\epsilon(u):\epsilon(\varphi)\dint x-\int\limits_{\Omega}f\varphi \bgl{!} 0\\
-		&\Rightarrow \nabla(A\epsilon(u))=f \text{ Dgl.}
+		&\Rightarrow -\nabla(A\epsilon(u))=f \text{ Dgl.}
 	\end{aligned}
 	\end{equation*}
+	Diese Dgl. gliedert sich auf in 
+	\[
+	-\sum_{i=1}^{d}\sum_{k,l=1}^{d}\partial_{x_i}A_{ijkl}\epsilon(u)_{kl}=f_i\qquad \forall j=1\dt{,}d
+	\]
+	Im 1D ergibt sich $-\difff{ }{x}\enbrace{A \difff{ }{x}u}=f$, mit $A\in \R$.
+	Für $A=1:~ -u''(x)=f$.\\
+	Im 2D ergibt sich:
+	\[
+	-\nabla(A\nabla u)=f;~A=\id \Rightarrow -\Delta u=f
+	\]
 \end{enumerate}
+%sub end
+
+\subsection{Galerkinverfahren}
+\label{sub:galerkin}
+\uline{Idee:} Energieminimierung in endlich-dimensionalen Teilräumen.
+Sei $X$ Funktionenraum und $E:V\to \R$ ein Energiefunktional.
+Gesucht ist $u=\argmin\ablim{v\in X}E(v)$.\\
+Sei $X_h\subseteq X$ endlich-dimensionaler Teilraum von $X$.
+Wir erhalten die \Index{Galerkin-Approximation}
+\[
+u_h\in X_h:~ u_h=\argmin\ablim{v_h\in X_h} E(v_h)
+\]
+\[
+\Rightarrow \difff{ }{\epsilon}E(u_h+\epsilon v_h)|_{\epsilon=0}=0~\forall v_h\in X_h
+\]
+$X_h$ endl.-dim. $\Rightarrow \exists$ Basis $\Phi:=\penbrace{\varphi_i|i=1\dt{,}N:=\dim(X_h)}$, mit der Basisdarstellung $u_h(x)=\sum_{i=1}^{N}u_i\varphi_i(x)$, $u_i\in \R,~i=1\dt{,}N$.
+\[
+\Rightarrow \difff{ }{\epsilon}E\enbrace{\sum_{i=1}^{N}u_i\varphi_i+\epsilon \varphi_j}_{\epsilon=0}=0~\forall j=1\dt{,}N
+\]
+Dies ist ein Gleichungssystem mit $N$ Unbekannten und $N$ Gleichungen. 
+Allgemein ist das System nicht linear.
+%sub end
+
+\subsection{Beispiel Elastizität in 1D}
+\label{sub:bsp_elastizitaet}
+\[
+E(u)= \frac{1}{2}\int\limits_{0}^{1}(u'(x))^2+ fu;~A=1
+\]
+Betrachte
+\begin{equation*}
+\begin{aligned}
+	\difff{ }{\epsilon}E(u+\epsilon\varphi)|_{\epsilon=0} &= \difff{ }{\epsilon}\frac{1}{2}\int_{0}^{1}(u'+\epsilon\varphi')^2-fu|_{\epsilon=0}\\
+	&= \int\limits_{0}^{1}u'\varphi'-f\varphi
+\end{aligned}
+\end{equation*}
+Sei $(u,v):=\int_{0}^{1}uv$ das $L^2$-Skalarprodukt, so folgt
+\[
+(u',\varphi')=(f,\varphi)~\forall \varphi\in X
+\]
+Analog folgt für $u_h\in X_h$:
+\[
+(u_h',\varphi_h')=(f,\varphi_h)~\forall \varphi_h\in X_h
+\]
+Sei $\varphi_1\dt{,}\varphi_N$ Basis von $X_h$, $u_h=\sum_{i=1}^{N}u_i\varphi_i$.
+Dann folgt
+\begin{equation*}
+\begin{aligned}
+	\enbrace{\sum_{i=1}^{N}u_i\varphi_i',\varphi_j'}=(f,\varphi_j),~j=1\dt{,}N\\
+	\Rightarrow \sum_{i=1}^{N}u_i(\varphi_i',\varphi_j')=(f,\varphi_j),~j=1\dt{,}N\\
+	U_i=u_i,~i=1\dt{,}N;~U\in \R^N,~S_{ij}=(\varphi_i',\varphi_j'),~S\in \R^{N\times N}\\
+	F_j=(f,\varphi_i),~F\in \R^N\\
+	\Rightarrow SU=F \text{ lin. Gleichungssystem}
+\end{aligned}
+\end{equation*}
+%sub end
+%sec end
+\section{Interpolation}
+\label{sec:interpolation}
+Sei $\penbrace{\Phi(x,a_0\dt{,}a_n|a_0\dt{,}a_n\in \R)}$ eine Familie von Funktionen mit $x\in \R$.
+Ein Element aus dieser Familie ist durch $(n+1)$ Parameter $a_0\dt{,}a_n\in \R$ charakterisiert.\\
+\uline{Aufgabe:} Zu $(x_k,f_k)\in \R^2,~k=0\dt{,}n$ mit $x_i\neq x_k$ für $i\neq k$, finde Parameter $a_0\dt{,}a_n\in \R$,so dass
+\[
+\Phi(x_k,a_0\dt{,}a_n)=f_k,~k=0\dt{,}n.
+\]
+Dies ist ein Gleichungssystem mit $(n+1)$ Gleichungen und Unbekannten.
 
 
 
