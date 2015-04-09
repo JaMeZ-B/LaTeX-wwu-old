@@ -1,0 +1,143 @@
+\input{../!config/mitschrift.tex}
+\newcommand{\fach}{Dynamische Systeme}
+% \newcommand{\shortFach}{Analysis, Topologie, Geometrie}
+\newcommand{\semester}{WiSe 2014/2015}
+\newcommand{\homepage}{https://wwwmath.uni-muenster.de/num/herrmann/sose2015/vl_dyn_sys/index.html}
+
+\newcommand{\prof}{Prof.\ Dr.\ Michael Herrmann}
+\input{../!config/mitschrift_headings.tex}
+
+\begin{document}
+\pagenumbering{Roman}
+\maketitle
+\begin{abstract}
+\input{../!config/vorwort.tex}
+\end{abstract}
+
+\tableofcontents
+\cleardoubleoddemptypage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\setcounter{section}{-1}
+\section{Einführung} % (fold)
+\label{sec:einfuhrung}
+\enquote{Systeme} (physikalische, biologische) entwickeln sich mit der Zeit $t$. Abstrakt: Zustandsraum $\Omega$, momentaner Zustand $x(t) \in \Omega$. Es gibt zwei große 
+Unterklassen: Kontinuierliche und diskrete Dynamik, die auch Beziehung zueinander stehen. Erstere zeichnet sich durch eine kontinuierliche Zeit $t \ge t_0$ aus. In letzterer 
+betrachtet man nur abzählbar viele Zeiten $t_0 < t_1 < t_2 < \ldots $ $(t_i \xrightarrow{i \to \infty} \infty)$, oftmals $t_i = i \cdot \Delta t$ mit $\Delta t >0$.
+
+Das prototypische Modell für eine kontinuierliche Dynamik ist eine gewöhnliche Differentialgleichung
+\[
+	\dot{x}(t) = f \enbrace[\big]{t,x(t)} 
+\]
+Für eine diskrete Dynamik ist $x_i$ der Zustand zur Zeit $t_i$
+\[
+	x_{i+1} = f (t_i, x_i)
+\]
+Dabei ist $x_i$ die Gegenwart und $x_{i+1}$ die Zukunft.
+\subsection{Fragen} % (fold)
+\label{sub:fragen}
+\begin{itemize}
+	\item Existenz und Eindeutigkeit einer Lösung
+	\item Qualitative Eigenschaften
+	\begin{itemize}
+		\item Muster oder spezielle Lösung (etwa Oszillation)
+		\item Langzeitverhalten
+		\item Stabilität von Lösungen
+		\item Chaos
+	\end{itemize}
+\end{itemize}
+% subsection fragen (end)
+% section einfuhrung (end)
+\newpage
+
+\section{Diskrete Dynamik und iterierte Abbildungen} % (fold)
+\label{sec:1}
+
+\subsection*{Generalannahme} % (fold)
+\label{sub:Generalannahme}
+\begin{itemize}
+	\item $(X,d)$ sei ein metrischer Raum, zum Beispiel $X=\mathds{R}^n$ mit $d(x,\tilde{x})= \abs*{x - \tilde{x}}$
+	\item \enquote{Zustandsraum} $\Omega \subseteq X$
+	\item $f \colon \Omega \to \Omega$ ist stetig
+\end{itemize}
+% subsection Generalannahme (end)
+
+\subsection*{Dynamik} % (fold)
+\label{sub:dynamik}
+\begin{itemize}
+	\item Wähle einen Startwert $x_{i_0}$ (meist $i_0 =0$)
+	\item $x_{i_0+1} := f(x_i)$, $x_{i_0+2} := f(x_{i_0+1})$ \ldots $x_{i_0+k+1} := f(x_{i_0+k})$
+\end{itemize}
+Interpretation: $x_i$ ist der Zustand des Systems zur Zeit $t_i= i \cdot \Delta t$
+% subsection dynamik (end)
+
+\subsection*{Beispiele} % (fold)
+\label{sub:beispiele}
+\begin{enumerate}[(1)]
+	\item Wachstums- und Zerfallsprozesse: Dabei stellt $x_i$ zum Beispiel die Menge einer Substanz zur Zeit $t_i$. Eine dynamische Gleichung dafür könnte wie folgt aussehen
+	\[
+		x_{i+1} = a \cdot x_i
+	\]
+	wobei $a$ eine Konstante ist. Die Lösung dafür ist $x_i = a^i x_0 = \exp(i \ln a) x_0 = \exp(t_i \cdot \lambda) \cdot x_0$ mit $\lambda= \frac{\ln a}{\Delta t}$ für 
+	$\lambda <0$ beziehungsweise $0 < a < 1$ spricht man von einem Zerfall und für $\lambda>0$ von Wachstum.
+	\item Kaninchenzucht: Sei $n_i = \#$ Anzahl der Kaninchen im Monat $i$. Annahme: Jedes Kaninchen wird nach einem Monat geschlechtsreif und produziert im Schnitt ein 
+	Nachkommen pro Monat. Weiter nehmen wir an, dass es keine Todesfälle gibt.\footnote{Das ist natürlich spätestens im Winter falsch \ldots} Wir erhalten folgende 
+	dynamische Gleichung
+	\[
+		n_{i+2} = n_{i+1} + n_i
+	\]
+	Diese Gleichung entdeckte Fibonacci (1170-1240). Auch wenn dies im Sachkontext Blödsinn ist, betrachtet man oft die Anfangswerte $n_0=1$, $n_1=1$ und erhalt die Lösung
+	$1,1,2,3,5,8,13,21, \ldots $. Für den Zustandsraum können wir $\Omega \subset \mathds{N}^2$ wählen mit $x_i=(n_{i+1}, n_i)$. Damit können wir die dynamische Gleichung
+	wie folgt umformulieren
+	\[
+		x_{i+1} = (n_{i+2}, n_{i+1}) = f(x_i) \quad , \quad f(n_{i+1}, n_i) = (n_{i+1} + n_i, n_{i+1})
+	\]
+	\item Newton-Verfahren zur Bestimmung einer Nullstelle: Sei $g \colon \mathds{R} \to \mathds{R}$ stetig und strikt monoton wachsend mit einer eindeutigen Nullstelle 
+	$x_*$.
+	\missingfigure{Skizze zum Newtonverfahren}
+	$x_i =f(x_i)$. Wir setzen $f(x):= x- \frac{g(x)}{g'(x)}$. Dann ist $f \colon \mathds{R} \to \mathds{R}$ wohldefiniert und es gilt $x_i \xrightarrow{i \to \infty} x_*$.
+	
+	In einem weiteren Fall mit weniger Annahmen an $g$ ist $f$ nicht immer wohldefiniert
+	\missingfigure{Skizze mit Funktion mit 3 Nullstellen}
+	Dies führt zu einem fraktalen Muster der Einzugsbereiche.
+	\item Euler-Verfarhen für Gewöhnliche Differentialgleichungen: 
+	\[
+		\dot{x}(t) = g \enbrace[\big]{x(t)} 
+	\]
+	Diskretisiere die kontinuierliche Zeit $t$ mit $t_i = i \cdot \Delta t$. $x(t_i) \approx x_i$. Wir erhalten
+	\[
+		\frac{x_{i+1} -x_i}{\Delta t} = g(x_i) \quad \leadsto \quad x_{i+1} = x_i + \Delta t g(x_i) =: f(x_i)
+	\]
+	Die Lösungen dieses diskreten Systems konvergieren in einem geeigneten Sinne gegen eine Lösung der kontinuierlichen Gleichung
+	\item Mandelbrot und Julia-Mengen: Sei $\Omega = \mathds{C} \ni z$ und $c \in \mathds{C}$ eine gegeben Zahl
+	\[
+		z_{i+1} = z_i^2 - c = f(z_i)
+	\]
+	Man betrachtet nur den Einheitskreis und markiert Punkte mit verschiedenen Farben, je nachdem, nach wie vielen Iterationsschritten sie den Einheitskreis verlassen.
+	Dies ist ein erstes Beispiel für Fraktale/Chaos
+\end{enumerate}
+% subsection beispiele (end)
+
+\subsection*{Über iterierte Abbildung in einer Dimension} % (fold)
+\label{sub:uber_iterierte_abbildung_in_einer_dimension}
+Sei nun $\Omega $ ein Intervall $I$ und $f \colon I \to I$ stetig. Setze $x_0, x_i := f(x_0), x_2 := f \enbrace[\big]{f(x_0)},\ldots $. Wir betrachten nun
+\[
+	(x_0,x_1), (x_1, x_2), (x_2, x_3) \in \mathrm{graph} f
+\]
+\missingfigure{Skizze}
+% subsection uber_iterierte_abbildung_in_einer_dimension (end)
+% section 1 (end)
+
+
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\printindex
+\listoffigures
+\todototoc
+\listoftodos[To-do's und andere Baustellen]
+\end{document}
