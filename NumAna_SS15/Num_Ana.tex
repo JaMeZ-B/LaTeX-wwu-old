@@ -138,11 +138,11 @@ Sei $\varphi_1\dt{,}\varphi_N$ Basis von $X_h$, $u_h=\sum_{i=1}^{N}u_i\varphi_i$
 Dann folgt
 \begin{equation*}
 \begin{aligned}
-	\enbrace{\sum_{i=1}^{N}u_i\varphi_i',\varphi_j'}=(f,\varphi_j),~j=1\dt{,}N\\
-	\Rightarrow \sum_{i=1}^{N}u_i(\varphi_i',\varphi_j')=(f,\varphi_j),~j=1\dt{,}N\\
-	U_i=u_i,~i=1\dt{,}N;~U\in \R^N,~S_{ij}=(\varphi_i',\varphi_j'),~S\in \R^{N\times N}\\
-	F_j=(f,\varphi_i),~F\in \R^N\\
-	\Rightarrow SU=F \text{ lin. Gleichungssystem}
+	\enbrace{\sum_{i=1}^{N}u_i\varphi_i',\varphi_j'}&=(f,\varphi_j),~j=1\dt{,}N\\
+	\Rightarrow \sum_{i=1}^{N}u_i(\varphi_i',\varphi_j')&=(f,\varphi_j),~j=1\dt{,}N\\
+	U_i=u_i,~i=1\dt{,}N;~U&\in \R^N,~S_{ij}=(\varphi_i',\varphi_j'),~S\in \R^{N\times N}\\
+	F_j=(f,\varphi_i&),~F\in \R^N\\
+	\Rightarrow SU=F &\text{ lin. Gleichungssystem}
 \end{aligned}
 \end{equation*}
 %sub end
@@ -151,11 +151,218 @@ Dann folgt
 \label{sec:interpolation}
 Sei $\penbrace{\Phi(x,a_0\dt{,}a_n|a_0\dt{,}a_n\in \R)}$ eine Familie von Funktionen mit $x\in \R$.
 Ein Element aus dieser Familie ist durch $(n+1)$ Parameter $a_0\dt{,}a_n\in \R$ charakterisiert.\\
-\uline{Aufgabe:} Zu $(x_k,f_k)\in \R^2,~k=0\dt{,}n$ mit $x_i\neq x_k$ für $i\neq k$, finde Parameter $a_0\dt{,}a_n\in \R$,so dass
+\uline{Aufgabe:} Zu $(x_k,f_k)\in \R^2,~k=0\dt{,}n$ mit $x_i\neq x_k$ für $i\neq k$, finde Parameter $a_0\dt{,}a_n\in \R$, so dass
 \[
 \Phi(x_k,a_0\dt{,}a_n)=f_k,~k=0\dt{,}n.
 \]
-Dies ist ein Gleichungssystem mit $(n+1)$ Gleichungen und Unbekannten.
+Dies ist ein Gleichungssystem mit $(n+1)$ Gleichungen und Unbekannten.\\
+Familie von linearen prarmeterabh. Funktionen:
+Sei $f\in C^0(\R)$ und $V\subseteq C^0(\R)$ sei ein Teilraum mit $\dim(V)=n+1$.
+Sei $\varphi_0\dt{,}\varphi_n$ eine Basis von $V$, so setze
+\[
+\Phi(x,a_0\dt{,}a_n)=\sum_{i=0}^{n}a_i\varphi_i(x)
+\]
+
+\subsection{Beispiel: Polynominterpolation}
+\label{sub:polynom}
+Hier wählt man $V=\Pw_n$ und z.B. $\varphi_i(x)=x^i;~i=0\dt{,}n$.
+\[
+\Rightarrow \Phi(x,a_0\dt{,}a_n)=\sum_{i=0}^{n}a_ix^i=:p(x)
+\]
+Aufgabe: Finde $p\in \Pw$ mit $p(x_i)=f_i,~i=0\dt{,}n$.
+
+\subsection{Beispiel: Trigonometrische Interpolation}
+\label{sub:trigonometrische}
+$\Phi(x,a_0\dt{,}a_n)=a_0+a_1e^{ix}\dt{+}a_ne^{nix}=\sum_{j=0}^{n}a_je^{jix}=a_0=\sum_{k=1}^{n}a_k(\cos(kx)+i\sin(kx))$
+
+\subsection{Beispiel: Nicht lineare Interpolation}
+\label{sub:nicht_linear}
+Exponentielle Interpolation:
+\[
+\Phi(x,a_0\dt{,}a_n)=a_0e^{\lambda_0x}\dt{+}a_ne^{\lambda_nx}
+\]
+mit $\lambda_0\dt{,}\lambda_n\in \R$ fest gewählt oder
+\[
+\Phi(x,a_0\dt{,}a_n)= \sum_{i=0}^{n}a_ie^{\lambda_ix}\text{ und }(m+1)\cdot 2=n+1
+\]
+
+\subsection{Beispiel: Rationale Interpolation}
+\label{sub:rational}
+\begin{equation*}
+\begin{aligned}
+\Phi(x,a_0\dt{,}a_n,b_0\dt{,}b_m) &= \frac{a_0\dt{+}a_nx^n}{b_0\dt{+}b_mx^m}
+\end{aligned}
+\end{equation*}
+mit $(m+1)\cdot 2=n+1$.
+
+\subsection{Erweitertes Problem: Hermite-Interpolation}
+\label{sub:hermite}\index{Interpolation!Hermite-}
+Aufgabe: zu Stützstellen $x_0\dt{,}x_n$ seien die Funktionswerte $f_0\dt{,}f_n$ und Ableitungen $f_0^{(p)}\dt{,}f_n^{(p)},~p=1\dt{,}p_{\max}$ gegeben.
+Ist $p_{\max}=1$, so suchen wir ein Interpolationsproblem
+\[
+p(x)=\sum_{i=0}^N a_ix^i
+\]
+mit $(n+1)\cdot 2=N+1$ mit $p(x_k)=f_k,~p'(x_k)=f'(x_k),~k=0\dt{,}n$.
+
+\subsection{Beispiel: Spline-Interpolation}
+\label{sub:spline}\index{Interpolation!Spline-}
+Gesucht: $\Phi\in C^q(\R)$ mit $q$ fest gewählt mit 
+\[
+\Phi(x_k)=f_k \text{ und } \Phi|_{[x_k,x_{k+1}]}\in \Pw_r.
+\] 
+Das heißt $(q,r)$ bestimmen die Klasse von \Index{Splines}.
+
+\subsection{Polynominterpolation}
+\label{sub:polynominterpolation}
+Gegeben: $(x_0,f_0)\dt{,}(x_n,f_n)\in \R^2$ mit $x_i\neq x_k,~i\neq k$.\\
+Gesucht: $p\in Pw_N$ mit $p(x_i)=f_i,~i=0\dt{,}n$ und $N$ minimal gewählt.\\
+Beispiel: $(x_0,f_0)=(0,0),~(x_1,f_1)=(1,1)$ dann folgt $p\in\Pw_1,~p=x$ ist eindeutiges Interpolationspolynom, aber jedes Monom $x^k$ erfüllt die Interpolationsaufgabe.
+
+\subsection{Satz 1}
+\label{sub:satz_1}
+Es existiert genau ein $p\in \Pw_n$ mit 
+\[
+p(x_i)=f_i,~i=0\dt{,}n.
+\]
+
+\bet{Beweis:}\\
+Sei $\varphi_0\dt{,}\varphi_n$ eine Basis von $\Pw_n$.
+Dann ist das Interpolationsproblem äquivalent zu einem linearem Gleichungssystem:
+\[
+A\cdot a=f \text{ mit }A\in \R^{(n+1)\times(n+1)},~a\in \R^{(n+1)},~f\in \R^{(n+1)}
+\]
+so dass $p(x)=\sum_{i=0}^{n}a_i\varphi_i(x)$ und $A_{ik}=\varphi_k(x_i)~\forall k,i=0\dt{,}n$, dann folgt
+\[
+(A\cdot a)_j=\enbrace{\sum_{k=0}^{n}A_{ik}a_k}_j=p(x_j)=f_j
+\]
+Zeige: $A$ ist regulär.
+Sei $a=(a_0\dt{,}a_n)^T$ Lösung der Gleichung $Aa=0$, das heißt
+\[
+\sum_{k=0}^{n}a_k\varphi_k(x_i)=0~\forall i=0\dt{,}n
+\]
+Es ist $p(x)=\sum_{k=0}^{n}a_k\varphi_k(x)\in \Pw_n$.
+Dann hat $p\in \Pw_n$ mindestens $n+1$ Nullstellen.
+Mit dem Fundamentalsatz der Algebra folgt $p\equiv 0$ und somit $a_0\dt{=}a_n=0$.
+Also ist $A$ regulär und somit $p\in \Pw_n$ eindeutig bestimmt.
+\hfill $\square$
+
+\minisec{Bemerkung}
+Interpolation $\Leftrightarrow Aa=f$ mit $A_{ik}=\varphi_k(x_i),~i,k=0\dt{,}n$.\\
+1. Ansatz: Monombasis $\varphi_k(x)=x^k \rightsquigarrow p(x)=\sum_{i=0}^{n}a_ix^i$ \Index{Normalform} von $p\in \Pw_N$.
+\begin{equation*}
+\begin{aligned}
+	\Rightarrow A= \begin{pmatrix}
+	\varphi_0(x_0) & \dots & \varphi_n(x_0)\\
+	\ddots & & \ddots\\
+	\varphi_0(x_n) & \dots & \varphi_n(x_n)
+	\end{pmatrix} = \begin{pmatrix}
+	1 & x_0 & \dots & x_0^n\\
+	1 & x_1 & \dots & x_1^n\\
+	\ddots & & & \ddots\\
+	1 & x_n & \dots & x_n^n
+	\end{pmatrix}
+\end{aligned}
+\end{equation*}
+Dies ist die \Index{Vandermondsche Matrix}, insbesondere ist $A$ vol besetzt und sie ist schlecht konditioniert.\\
+Idee: Konstruiere eine Basis $\varphi_0\dt{,}\varphi_n$ so, dass gilt
+\[
+A=\id
+\]
+Dann wäre $a=f$, d.h. $a_i=f_i~\forall i=0\dt{,}n$ die Lösung des Interpolationsproblems.
+\begin{enumerate}[(a)]
+	\item Lagrange-Form des Interpolationsproblems:
+	\[
+	A=\id \Leftrightarrow \varphi_k(x_i)=\delta_{ik}~(0\le k,i\le n)
+	\]
+	Ansatz: $\varphi_k(x)=c\cdot \prod_{i=0,i\neq k}^{n}(x-x_i) \Rightarrow \varphi_k(x_i)=0~\forall i\neq k$.
+	Aus $\varphi_k(x_k)=1$ folgt
+	\[
+	c=\enbrace{\prod_{i=0, i\neq k}^{n}(x_k-x_i)}^{-1}
+	\]
+	\[
+	\Rightarrow \varphi_k(x)= \prod_{i=0,i\neq k}^{n}\frac{(x-x_i)}{(x_k-x_i)},~k=0\dt{,}n
+	\]
+\end{enumerate}
+\subsection{Defintion 2 (Lagrange-Polynome)}
+\label{sub:def_2}
+Die Polynome 
+\[
+l_k^n(x)= \prod_{i=0,i\neq k}^{n}\frac{(x-x_i)}{(x_k-x_i)}
+\]
+heißen \Index{Lagrange-Polynome} $(l_0^n\dt{,}l_n^n)$ bilden eine Basis von $\Pw_n$ und 
+\[
+p(x)= \sum_{k=0}^n a_k l_k^n(x)
+\]
+heißt \Index{Lagrange-Form} von $p\in \Pw_n$.
+Es ist 
+\[
+p(x)= \sum_{k=0}^{n}f_kl_k^n(x)
+\]
+die Lösung des Interpolationsproblems zu $(x_0,f_0)\dt{,}(x_n,f_n)$.
+Für die Lagrange-Polynome gilt 
+\[
+l_i^n(x_j)=\delta_{ij}.
+\]
+
+\minisec{Bemerkung:}
+Diese Darstellung ist insbesondere für die Theorie sehr nützlich, edr Nachteil ist, dass die Polynome sich bei Hinzunahme von Stützstellen ändern.
+
+\begin{enumerate}[(b)]
+	\item Newton-Form des Interpolationsproblems:\\
+	Wähle eine Basis von $\Pw_n$, so dass $A$ eine untere Dreiecksmatrix wird:
+	\[
+	\varphi_k(x)= \prod_{j=0}^{k-1}(x-x_j) ~k=0\dt{,}n
+	\]
+	Dann gilt $\varphi_k\in \Pw_n$.
+	Dann ist 
+	\begin{equation*}
+	\begin{aligned}
+		\varphi_0(x)&=1 \text{ (verwende die Konvention, dass $\prod_{j=j_0}^{j_n}a_j=1$, falls $j_n<j_0)$}\\
+		\varphi_1(x)&=(x-x_0)\\
+		\varphi_2(x)&=(x-x_0)(x-x_1)
+		&\ddots
+	\end{aligned}
+	\end{equation*}
+	Es gilt $\varphi_k(x_i)=0$ für $i<k \Rightarrow A$ ist eine untere Dreiecksmatrix.
+\end{enumerate}
+
+\subsection{Definiton 3 (Newton-Polynome)}
+\label{sub:def_3}
+Die Polynome
+\[
+N_k^n:= \prod_{j=0}^{k-1}(x-x_j)
+\]
+heißen \Index{Newton-Polynome} und 
+\[
+p(x)=\sum_{k=0}^{n}a_kN_k^n(x)
+\]
+heißt \Index{Newton-Form} von $p\in \Pw_n$.
+Für das Interpolationsproblem gilt:
+\begin{equation*}
+\begin{aligned}
+	a_0&= \frac{f_0}{\varphi_0(x_0)}=f_0\\
+	a_1&= \frac{f_1-\varphi_0(x_1a_0)}{\varphi_1(x_1)}=\frac{f_1-f_0}{x_1-x_0}=: f[x_0,x_1]\\
+	a_2 &= \dots = \frac{f[x_1,x_2]-f[x_0,x_1]}{x_2-x_0} =: f[x_0,x_1,x_2]
+\end{aligned}
+\end{equation*}
+Die Koeffizienten $a_0\dt{,}a_n$ werden iterativ über die sogenannten \Index{dividierten Differenzen} $f[x_0\dt{,}x_n]$ berechnet ($\rightsquigarrow$ § 3).
+
+\section{Funktionsinterpolation durch Polynome}
+\label{sec:funktionsinterpolation}
+Gegeben: $x_0\dt{,}x_m$ und $f\in C^0(\R)$\\
+Gesucht: Interpolationspolynom zu $(x_0,f(x_0))\dt{,}(x_n,f(x_n))$\\
+Frage: Approximationsfehlerabschätzung:
+\[
+||f-p||_{\infty}\le ??
+\]
+
+\subsection{Satz 4 (Fehlerdarstellung)}
+\label{sub:satz_4}
+Sei $f\in C^{n+1}(a,b)$ und $p\in \Pw_n$ das Interpolationsproblem zu den Stützstellen $x_0\dt{,}x_n$ (paarweise verschieden). 
+Dann existiert zu jedem $x\in (a,b)$ ein $\xi_x\in (a,b)$ mit
+\[
+f(x)-p(x)= \frac{1}{(n+1)!}f^{(n+1)}(\xi_x)\cdot \underbracket{\prod_{k=0}^{n}(x-x_k) }_{\text{Knotenpolynom}}\tag{$\ast$}
+\]
 
 
 
