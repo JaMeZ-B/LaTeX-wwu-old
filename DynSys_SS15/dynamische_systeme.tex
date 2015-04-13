@@ -68,7 +68,7 @@ Dabei ist $x_i$ die Gegenwart und $x_{i+1}$ die Zukunft.
 \label{sub:dynamik}
 \begin{itemize}
 	\item Wähle einen Startwert $x_{i_0}$ (meist $i_0 =0$)
-	\item $x_{i_0+1} := f(x_i)$, $x_{i_0+2} := f(x_{i_0+1})$ \ldots $x_{i_0+k+1} := f(x_{i_0+k})$
+	\item $x_{i_0+1} := f(x_i)$, $x_{i_0+2} := f(x_{i_0+1}), \ldots, x_{i_0+k+1} := f(x_{i_0+k})$
 \end{itemize}
 Interpretation: $x_i$ ist der Zustand des Systems zur Zeit $t_i= i \cdot \Delta t$
 % subsection dynamik (end)
@@ -126,8 +126,141 @@ Sei nun $\Omega $ ein Intervall $I$ und $f \colon I \to I$ stetig. Setze $x_0, x
 \[
 	(x_0,x_1), (x_1, x_2), (x_2, x_3) \in \mathrm{graph} f
 \]
-\missingfigure{Skizze}
+\missingfigure{Skizze mit Graph und Diagonale}
 % subsection uber_iterierte_abbildung_in_einer_dimension (end)
+
+\subsection{Definition 1 (Orbits)} % (fold)
+\label{sub:definition_1}
+Seien Startdaten $(i_0,x_{i_0})$ gegeben. Dann heißt die Folge $(x_i)_{i \ge i_0} \subseteq \Omega$ mit $x_{i+1}=f(x_i)$ der von $(i_0,x_{i_0})$ erzeugte 
+(Vorwärts-)\Index{Orbit} bezüglich $f$. Ist $f$ invertierbar, so heißt $(x_i)_{i \le i_0}$ mit $x_{i-1} f ^{-1}(x_i)$ der Rückwärtsorbit. Diese werden mit 
+$O \enbrace*{(i_0,x_{i_0})}$ und $O ^{-1} \enbrace*{(i_0,x_{i_0})}$ bezeichnet.
+\minisec{Bemerkung}
+\begin{enumerate}[(1)]
+	\item Meist ist $i_0=0$.
+	\item Manchmal wird der Vorwärtsorbit auch als Menge definiert: $\set[x_i]{i \ge i_0}$.
+\end{enumerate}
+% subsection definition_1 (end)
+
+\subsection{Definition 2 (Fixpunkte)} % (fold)
+\label{sub:definition_2}
+$p \in \Omega$ heißt \Index{Fixpunkt} (der von $f$ erzeugten Dynamik/von $f$), falls $p=f(p)$. Der entsprechende Orbit ( $(x_i)_{i \ge i_0}$ mit $x_i=p$ für alle $i \ge i_0$)
+heißt \Index{stationärer Orbit}.
+\minisec{Bemerkung}
+Statt Fixpunkt findet man in der Literatur auch die Begriffe \enquote{stationärer Punkt} oder \enquote{Gleichgewicht}.
+\minisec{Notation}
+Im Folgenden sei $f^n \colon \Omega \to \Omega$ die $n$-fache Iterierte von $f$, also
+\[
+	f^n(x) := \Underbrace{f \enbrace[\bigg]{f \enbrace[\Big]{f \enbrace[\big]{\ldots f(x)} } } }{\text{$n$-mal}}
+\]
+mit $f^0 := \id$.
+% subsection definition_2 (end)
+
+\subsection{Definition 3 (periodischer Punkt)} % (fold)
+\label{sub:definition_3}
+Sei $k \in \mathds{N}_+$. $p \in \Omega$ heißt \bet{$k$-periodischer Punkt}\index{k-periodischer Punkt@$k$-periodischer Punkt}, falls $f^k(p)=p$. Der entsprechende Orbit heißt \bet{$k$-periodischer Orbit}
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Ist $p$ $k$-periodisch, so ist $p$ auch $nk$-periodisch, für alle $n \in \mathds{N}_+$. Die kleinste Periode wird auch \Index{Primperiode} von $p$ genannt.
+	\item $p$ ist Fixpunkt genau dann, wenn $p$ $1$-periodisch ist.
+	\item Ist $p$ $k$-periodisch und $q=f^m(p)$, so ist auch $q$ $k$-periodisch.
+\end{itemize}
+\minisec{Bemerkung für den 1-dimensionalen Fall}
+\todo[inline]{vielleicht ne Skizze einfügen?}
+\begin{itemize}
+	\item Fixpunkte sind Schnittpunkte von Graph und Diagonalen.
+	\item 2-periodische Punkte kann man am Graphen von $f^2$ ablesen.
+\end{itemize}
+% subsection definition_3 (end)
+
+\subsection{Definition 4} % (fold)
+\label{sub:definition_4}
+Die \Index{stabile Menge} eines periodischen Punktes mit Primperiode $k$ ist
+\[
+	W_S(p) := \set[x \in \Omega]{\lim_{n \to \infty} f^{nk}(x)=p} 
+\]
+Jeder Punkt $x \in W_S(p)$ heißt \Index{vorwärtsasymptotisch} für $p$.
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Übungsaufgabe: Beispiele
+	\item Definition 4 ist ein globales Konzept (siehe Definition 6)
+\end{itemize} 
+% subsection definition_4 (end)
+
+\subsection{Lemma 5} % (fold)
+\label{sub:lemma_5}
+Seien $p_1, p_2$ zwei periodische Punkte von $f$ (mit Primperioden $k_1$ und $k_2$), so gilt
+\[
+	W_S(p_1) \cap W_S(p_2) =\emptyset
+\]
+\minisec{Beweis}
+Sei $x \in W_S(p_1) \cap W_S(p_2)$. Dann gilt $\lim_{n \to \infty}f^{nk}(x)=p_l $, $l=1,2$. Teilfolgenargument:
+\[
+	\lim_{m \to \infty} f^{m k_2 k_1}(x) =p_1 \quad , \quad \lim_{m \to \infty} f^{m k_1 k_2}(x)=p_2
+\]
+Also ist $p_1=p_2$. \bewende
+\minisec{Bemerkung}
+Ist $f$ invertierbar, so ist jeder periodische Punkt von $f$ auch periodischer Punkt von $f ^{-1}$ (Beachte $f^{-k}= (f ^{-1})^k$, $f^k \circ f^{-k}=\id$).
+Dann wird durch
+\[
+	W_I(p) := \set[x \in \Omega]{\lim_{n \to \infty} f^{-nk}(x)=p} 
+\]
+die stabile Menge definiert. Diese ist die stabile Menge von $p$ bezüglich $f ^{-1}$.
+\minisec{Idee}
+Übergang $f \leadsto f ^{-1}$ entspricht Zeitumkehr.
+\missingfigure{Skizze mit zwei Graphen}
+% subsection lemma_5 (end)
+
+\subsection{Stabile Fixpunkte 1.1.2} % (fold)
+\label{sub:stabile_fixpunkte_1_1_2}
+In diesem Abschnitt ist 
+\begin{itemize}
+	\item $(X,d)=\mathds{R}^n$ mit euklidischer Norm, $\Omega \subseteq \mathds{R}^n$
+	\item $B_r(x)= \set[y \in \mathds{R}^n]{\abs*{x-y}<r } $ offene Kugel
+	\item $\overline{B}_r(x) = \set[y \in \mathds{R}^n]{\abs*{x-y} \le r } $ abgeschlossene Kugel
+\end{itemize}
+% subsection stabile_fixpunkte_1_1_2 (end)
+
+\subsection{Definition 6 (Stabilität eines Fixpunktes)} % (fold)
+\label{sub:definition_6}
+\begin{enumerate}[(i)]
+	\item $p$ heißt \Index{stabil}(\Index{Ljapunow-stabil}), falls für jedes $\varepsilon>0$ ein $\delta=\delta(i_0)>0$ mit 
+	\[
+		x \in B_r(p) \Rightarrow f^i(x) \subset B_\varepsilon(p)
+	\]
+	für alle $i\ge 1$ gilt.
+	\item $p$ heißt \Index{asymptotisch stabil}, falls $p$ stabil und außerdem ein $\hat{\delta}>0$ existiert, sodass 
+	\[
+		x \in B_{\hat{\delta}}(p) \Rightarrow f^i(x) \xrightarrow{i \to \infty} p 
+	\]
+\end{enumerate}
+\minisec{Bemerkung}
+\begin{itemize}
+	\item Stabilität von periodischen Punkten mit  Primperiode $k$ analog mit $f^k$ statt  $f$
+	\item $p$ asymptotisch stabil $\Rightarrow $ $p$ ist innerer Punkt von $W_S(p)$.
+	\item Ist $p$ nicht stabil, so heißt $p$ auch instabil.
+\end{itemize}
+\missingfigure{Mal wieder zwei Graphen}
+\minisec{Bemerkung}
+Stabilität im Sinne von Definition 6 ist ein lokales Konzept! (besseres Konzept als stabile Menge von Definition 4)
+% subsection definition_6 (end)
+
+\subsection{Satz 7 (Stabilität in einer Dimension)} % (fold)
+\label{sub:satz_7}
+Sei $f \colon I \to I$ stetig differenzierbar und sei $p$ sowohl Fixpunkt von $f$ als auch innerer Punkt von $I$. Dann gilt
+\begin{enumerate}[(1)]
+	\item Ist $\abs*{f'(p)} < 1 $, so ist $p$ asymptotisch stabil. Insbesondere gibt es ein $\delta>0$ mit
+	\begin{enumerate}[i)]
+		\item $f \colon B_\delta(p) \to B_\delta(p)$
+		\item $x \in B_\delta(p) \Rightarrow f^p(x) \xrightarrow{i \to \infty} p$
+	\end{enumerate}
+	\item ist $\abs*{f'(p)}>1$, so ist $p$ instabil. Insbesondere existiert $\delta>0$ mit: Für jedes $x \in B_\delta(p)$ existiert $n \in \mathds{N}$, sodass 
+	$f^n(x) \not\in B_\delta(p)$.
+\end{enumerate}
+\minisec{Beweis}
+
+
+\missingfigure{Yay, mal wieder zwei Graphen oder vielleicht auch 4}
+% subsection satz_7 (end)
 % section 1 (end)
 
 
