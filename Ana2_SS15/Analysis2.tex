@@ -1,0 +1,271 @@
+\input{../!config/VorlagenTim/mitschrift.tex}
+
+\newcommand{\Semester}{SoSe 2015}
+\newcommand{\fach}{Analysis 2}
+\newcommand{\prof}{Prof.\ Ebert}
+
+\input{../!config/VorlagenTim/mitschrift_headings.tex}
+
+
+\begin{document}
+\maketitle
+\pagenumbering{Alph}
+\input{../!config/VorlagenTim/vorwort.tex}
+
+\newpage
+
+\tableofcontents
+\cleardoubleoddemptypage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\section{Normierte und metrische Räume} % (fold)
+\label{sec:Normierte und metrische Räume}
+
+\begin{centering}
+	$\mathbb{R} \hspace{1cm} \rightarrow{} \hspace{1cm}  \mathbb{R}^n \hspace{1cm}  \rightarrow{} \hspace{1cm}  $Normierte Vektorräume$ \hspace{1cm} \rightarrow{} \hspace{1cm}  $Metrische Räume
+\end{centering}
+
+\subsection{Der $\mathbb{R}^n$} % (fold)
+\label{sub:der_mathbb_r_n}
+
+\[
+	\mathbb{R}^n = \left\{ \left. \begin{pmatrix} x_1 \\ \vdots \\ x_n \\ \end{pmatrix}  \right| x_i \in \mathbb{R} \right\}
+\]
+
+Der $\mathbb{R}^n$ ist ein $\mathbb{R}$-Vektorraum und $\dim_{\mathbb{R}}(\mathbb{R}^n)=n$.
+
+Sei
+\[
+	e_i = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix} \leftarrow \text{i-ter Eintrag}
+\]
+
+\((e_1,\dots,e_n)\) ist eine Basis von $\mathbb{R}^n$ und heißt {\bfseries Standardbasis}. 
+
+Ist \(x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}\), so gilt \(x=\sum^{n}_{i=1}x_ie_i\)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+
+Das Skalarprodukt auf $\mathbb{R}^n$ ist die Abbildung \[ \langle\, .\,,\,.\,\rangle : \mathbb{R}^n \times \, \mathbb{R}^n \to \mathbb{R}\] mit 
+
+\[
+ x = \left< \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} , \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \right> := \sum_{i=1}^{n}x_iy_i \in \mathbb{R} 
+ \]
+ 
+es gilt:
+\begin{description}
+	\item[(S1)] (Bilinearität) $\forall \, x_0,x_1,y_0,y_1, \in \mathbb{R}^n \hspace{4pt} \forall \, a,b \in \mathbb{R}$
+	 \begin{eqnarray}
+	 \langle x_0+x_1\,,\, y_0+y_1\rangle & =& \langle x_0\,,\, y_0\rangle + \langle x_1\,,\,y_1\rangle + \langle x_1\,,\, y_0\rangle + \langle x_1\,,\, y_1\rangle \\
+	 \langle ax_0\,,\, by_0\rangle &=& ab \langle x_0\,,\, y_0\rangle 
+	 \end{eqnarray}
+	 \item[(S2)](Symmetrie) $\forall \, x,y \in \mathbb{R}^n$ gilt $\skal{x}{y} = \skal{y}{x}$
+	
+	\item[(S3)](positive Definitheit) $\forall \, x \in \mathbb{R}$ gilt $\skal{x}{x} \geq 0$ und $\skal{x}{x}=0$ nur dann, wenn $x=0$
+\end{description}
+Desweiteren gilt $\skal{e_i}{e_j}=\delta_y := \begin{cases} 1 & i=j \\ 0 &i\neq j \end{cases}$ \hspace{1cm} (Kronecker-Symbol)
+
+Ist \[
+	x=\sum_{i=1}^{n}x_ie_i \in \mathbb{R}^n \hspace{1cm} (x_i \in \mathbb{R})
+	\]
+so ist \begin{gather*}
+	\skal{x}{e_j} = \skal{\sum_{i=1}^{n}x_ie_i}{e_j} \stackrel{(S1)}{=} \sum_{i=1}^{n}x_i \skal{e_i}{e_j} = \sum^{n}_{i=1}x_i \delta_{ij} = x_j \\
+	\Rightarrow x = \sum^{n}_{j=1} \skal{x}{e_j}e_j
+\end{gather*}
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Sei $x \in \mathbb{R}^n$. Die $l^2$-Norm von $x$ ist die Zahl
+\[
+	\norm{x}_2:= \sqrt{\skal{x}{x}} 
+\]
+Schreibweise manchmal auch: $\norm{x}_2 = \norm{x}$
+% subsubsection definition (end)
+
+\subsection{Euklidsche und normierte Vektorräume} % (fold)
+\label{sub:euklidsche_und_normierte_vektorraume}
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Sei $ V$  ein $\mathbb{R}$-Vektorraum. Ein {\bfseries Skalarprodukt} auf $ V$  ist eine Abbildung $\skal{.}{.}:V \times V \to \mathbb{R}$, welche die Axiome S1,S2,S3 erfüllt. \\
+Ein {\bfseries euklidscher Vektorraum} ist ein Paar $(V,\skal{}{})$. $ V$  ist ein $\mathbb{R}$-Vektorraum und $\skal{}{}$ ist Skalarprodukt auf $ V$. \\
+Ist $(V,\skal{}{})$ ein eukdlischer Vektorraum, so ist die durch $\skal{}{}$ induzierte Norm definiert als \[
+	\norm{v}=\sqrt{\skal{v}{v}} \hspace{1cm}  v \in V 
+	\]
+
+\subsubsection{Beispiele} % (fold)
+\label{ssub:beispiele}
+
+\begin{itemize}
+	\item $\mathbb{R}^n$ mit Standardskalarprodukt
+	\item Die Abbildung \begin{align*}
+		 \mathbb{C} \times \mathbb{C} &\to \mathbb{R} \\
+		 (z,w) &\mapsto Re(\bar z \cdot w)
+		 \end{align*}
+		 ist ein Skalarprodukt. Die induzierte Norm ist der Absolutbetrag.      
+\end{itemize}
+% subsubsection beispiele (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Sei $ V$ ein $\mathbb{R} $-Vektorraum. Eine {\bfseries Norm} auf $ V$ ist eine Abbildung $\norm{.}:V \to \mathbb{R} , v \mapsto \norm{v}$ mit
+\begin{description}
+	\item[(N1)]$\norm{v} \geq 0 \hspace{1cm} \forall \, v \in V$ 
+	\item[(N2)] $\norm{v}=0 \Leftrightarrow v=0$
+	\item[(N3)] $\norm{av}=|a|\cdot \norm{v} \hspace{1cm}  \forall\,v \in V, a \in \mathbb{R}$
+	\item[(N4)] $\norm{v+w} \leq \norm{v}+\norm{w} \hspace{1cm} \forall\, v,w \in V$ \hspace{1cm} (Dreiecksungleichung) 
+\end{description} 
+Ein normierter Vektorraum ist ein Paar $(V,\norm{.})$ bestehend aus einem $\mathbb{R}$-VR $ V$ und einer Norm auf $ V$.
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Sei $(V,\skal{}{})$ ein euklidscher Vektorraum. Für $v \in V$ setzte $\norm{v}=\sqrt{\skal{v}{v}}$ \\ Dann gilt:
+\begin{description}
+	\item[1.)] $\norm{.}$ ist eine Norm auf $ V$ 
+	\item[2.)] $\forall\, v,w \in V$ gilt die {\bfseries Cauchy-Schwarz-Ungleichung}:
+	\[
+		|\skal{v}{w}| \leq \norm{v} \cdot \norm{w}
+	\]  
+\end{description}
+\minisec{Beweis:}
+\begin{enumerate}
+	\item \begin{description}
+		\item[N1:] $\norm{v}=\sqrt{\underbrace{\skal{v}{v}}}_{\geq 0} \geq  0$
+		\item[N2:] $\norm{v}=\sqrt{\skal{v}{v}}=0 \Rightarrow \skal{v}{v}=0 \stackrel{\text{S3}}{\Rightarrow} v=0$ 
+		\item[N3:] $a \in \mathbb{R} , v \in V$ \[
+			\norm{av}=\sqrt{\skal{av}{av}} \stackrel{\text{S1}}{=} \sqrt{a^2 \skal{v}{v}} = \sqrt{a^2} \sqrt{\skal{v}{v}} = \abs{a} \norm{v}
+		\] 
+	\end{description}
+	\item CS-Ungleichung ist trivial, wenn $w=0$ \\
+	Ann.: $w \neq 0$: Sei $f:\mathbb{R} \to \mathbb{R} $ mit
+	\begin{align*}
+		f(t) &=\skal{v+tw}{v+tw} \\
+		& = \skal{v}{v} +2t \skal{v}{w} + t^2 \skal{w}{w} \\
+		& = \norm{v}^2+ 2t \underbrace{\skal{v}{w}}_{\in \mathbb{R}} + t^2 \norm{w}^2 
+	\end{align*} 
+	aus S3 folgt $f(t)\geq 0$. f ist Polynom
+	\begin{gather*}
+		f'(t)=0 \Leftrightarrow t_0 = - \frac{\skal{v}{w}}{\norm{w}^2} \\
+		f''(t)=2 \norm{w}^2 > 0
+	\end{gather*}
+ $\Rightarrow$ $f$ nimmt bei $t_0$ globales Minimum an
+ \begin{gather*}
+ 	0 \leq f(t_0)=\norm{v}^2 - \frac{2 \skal{v}{w}^2}{\norm{w}^2} + \frac{\skal{v}{w}^2}{\norm{w}^4} \norm{w}^2 = \norm{v}^2 - \frac{\skal{v}{w}^2}{\norm{w}^2} \\
+	\Rightarrow \frac{\skal{v}{w}^2}{\norm{w}^2} \leq \norm{v}^2 \\ \Rightarrow \skal{v}{w}^2 \leq \norm{v}^2 \norm{w}^2 \\
+	\Rightarrow \abs{\skal{v}{w}} = \sqrt{\skal{v}{w}^2} \leq \sqrt{\norm{v}^2 \norm{w}^2} = \norm{v} \cdot \norm{w}
+ \end{gather*}
+ \bewende
+\end{enumerate}
+\begin{description}
+	\item[(N4)]\begin{align*}
+		\norm{v+w}^2 &= \skal{v+w}{v+w} \\ 
+		&\stackrel{\text{S1}}{=} \norm{v}^2+ 2 \skal{v}{w}+ \norm{w}^2 \\
+		&\leq \norm{v} + 2 \abs{\skal{v}{w}}+ \norm{w}^2 \\
+		&\stackrel{\text{CS}}{\leq} \norm{v}^2+2 \norm{v}\norm{w}+ \norm{w}^2 \\
+		&=(\norm{v}+\norm{w})^2
+	\end{align*} 
+Wurzel ziehen zeigt N4
+\bewende
+\end{description}
+% subsubsection satz (end)
+
+\subsubsection{Weitere Beispiele für Normen auf $\mathbb{R}$} % (fold)
+\label{ssub:weitere_beispiele_fur_normen_auf_mathbb_r}
+
+\begin{gather*}
+	 x = \sum^{n}_{i=1}x_ie_i \hspace{1cm}  x_i \in  \mathbb{R}
+	 \end{gather*}
+\begin{itemize}
+	\item \text{$l^1$-Norm} $\hspace{1cm}  \norm{x}_1 = \sum^{n}_{i=1}\abs{x_i}$ 
+	\item $l^{\infty}$-Norm $\hspace{1cm} \norm{x}_{\infty}=\max{\{\abs{x_i}\,|\,i=1,\dots,n}\}$
+	\item Ist $p \in [1,\infty)$, so ist die $l^p$-Norm
+	\[
+		\norm{x}_p = \left( \sum^{n}_{i=1}\abs{x_i}^p \right)^{\frac{1}{p}} \hspace{1cm} \text{(Beweis Schwer)}
+	\] 
+\end{itemize}
+% subsubsection weitere_beispiele_fur_normen_auf_mathbb_r (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$ V$ $\mathbb{R}$-VR , $\norm{.}_0 , \norm{.}_1$ Normen auf $ V$. Die Normen $\norm{.}_0 , \norm{.}_1$ heißen {\bfseries äquivalent}, falls $C,c>0$ existieren, so dass für alle $v \in  V$ gilt:
+\[
+	c \norm{v}_0 \leq \norm{v}_1 \leq C \norm{v}_0 
+\] 
+\minisec{Bemerkung:} Das ist eine Äquivalenzrelation
+\begin{itemize}
+	\item {\bfseries Reflexiv}: klar
+	\item {\bfseries Symmetrie}: \begin{gather*}
+		c \norm{v}_0 \leq \norm{v}_1 \leq C \norm{v}_0 \\
+		\Rightarrow \frac{1}{c} \norm{v}_1 \leq \norm{v}_0 \leq \frac{1}{C} \norm{v}_1
+	\end{gather*}
+	\item {\bfseries Transitiv}: \begin{gather*}
+		c \norm{v}_0 \leq \norm{v}_1 \leq C \norm{v}_0 \hspace{0.5cm} \text{und}\hspace{0.5cm} d \norm{v}_1 \leq \norm{v}_2 \leq D \norm{v}_1  \hspace{1cm} (C,c,D,d > 0)	\end{gather*}
+		\[
+		\Rightarrow cd \norm{v}_0 \leq CD \norm{v}_0
+		\]
+\end{itemize}
+
+\subsubsection{Beispiel} % (fold)
+\label{ssub:beispiel}
+Die $l^1, l^2 \, \text{und} \, l^{\infty}$-Norm auf $\mathbb{R}^n $ sind äquivalent und zwar gilt:
+\[
+	\norm{v}_{\infty} \leq \norm{v}_2 \leq \norm{v}_1 \leq n \norm{v}_{\infty} \hspace{1cm} \text{(Beweis Übung)}
+\]
+% subsubsection beispiel (end)
+
+\subsection{Metrische Räume} % (fold)
+\label{sub:metrische_raume}
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$(V,\norm{.})$ normierter Vektorraum, $v,w \in  V$ \\
+Der {\bfseries Abstand} von $v$ und $w$ ist \[
+d(v,w):= \norm{v-w}	
+\] 
+% subsubsection definition (end)
+ \subsubsection{Definition} % (fold)
+ \label{ssub:definition}
+Sei $X$ eine Menge \\
+Eine {\bfseries Metrik} (oder Abstandsfunktion) ist eine Abbildung $d: X \times X \to \mathbb{R} , (x,y) \mapsto d(x,y)$, sodass gilt:
+\begin{description}
+	\item[(M1)] $\forall\, x,y \in X: \hspace{1cm}  d(x,y) \geq  0$
+	\item[(M2)] $\forall\, x,y \in X: \hspace{1cm}  d(x,x)=0   \hspace{1cm} \text{und} \hspace{1cm} 
+		 		d(x,y)=0 \Rightarrow x=y$
+	\item[(M3)] $\forall\, x,y \in X: \hspace{1cm} d(x,y)=d(y,x)$
+	\item[(M4)] $\forall\, x,y,z \in X: \hspace{1cm}  d(x,z) \leq d(x,y)+d(y,z) \hspace{1cm}$ ({\bfseries Dreiecksungleichung}) 
+\end{description}
+Ein {\bfseries Metrischer Raum} ist ein Paar $(X,d)$, $X$ Menge, $d$ Metrik auf $X$
+\minisec{Beispiele:}
+\begin{itemize}
+	\item Ist $(V,\norm{.})$ normierter Vektorraum, so ist durch $d(v,w):= \norm{v-w}$ eine Metrik auf $ V$ gegeben.
+
+\begin{align*}
+	v,w,u \in V \hspace{1cm} d(v,u) &= \norm{v-u} = \norm{v-w+w-u} \\
+	&\stackrel{\text{$\triangle$-Ungl.}}{\leq} \norm{v-w} + \norm{w-u} \\ 
+	&= d(v,w)+d(w,u)
+\end{align*}
+ 
+\minisec{Unterbeispiel:}
+$V=\mathbb{R}$. Dann ist $x \mapsto \abs{x} $ eine Norm auf $\mathbb{R}$ und die induzierte Metrik auf $\mathbb{R}$ ist $d(x,y)=\norm{x-y}$
+ % subsubsection definition (end)
+ \item $(X,d_X)$ metrischer Raum $Y\subseteq X$ Teilmenge. Dann ist $(Y,d_y)$ ein metrischer Raum, wobei für $y_0,y_1 \in Y \text{gilt, dass} \, d_y(y_0,y_1):=d_x(y_0,y_1)$ \\
+ \underline{Vereinbarung:} Ist $X \subseteq \mathbb{R}^n$ eine Teilmenge, so ist $X$ immer mit der durch das Standardskalarprodukt induzierte Metrik versehen. (es sei denn, etwas anderes ist gesagt) 
+\end{itemize}
+
+\minisec{Konvergenz}
+Erinnerung (Ana I): $(x_n)_n$ Folge in $\mathbb{R}$, $x \in  \mathbb{R}$. Dann 
+\[
+\lim\limits_{n \to \infty}x_n=x \, :\Leftrightarrow \, \forall\, \epsilon > 0 \exists n_0 \forall\, n \geq n_0: \, \abs{x-x_1}< \epsilon
+ \]
+% subsection metrische_raume (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$(X,d)$ metrischer Raum, $(x_n)_n$ FOlge in $X$ ( d.h eine Abbildung $x: \mathbb{N} \to X$). $y \in X$ Dann Konvergiert die Folge $(x_n)_n$ gegen $y :\Leftrightarrow \forall\, \epsilon>0 \exists n_0: \forall\, n \geq n_0 \, d(x_n,y)<\epsilon$
+
+
+% subsubsection definition (end)
+% subsection euklidsche_und_normierte_vektorraume (end)
+
+\end{document}	

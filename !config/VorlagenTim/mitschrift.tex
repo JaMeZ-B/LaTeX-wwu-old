@@ -1,0 +1,309 @@
+\RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
+\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage]{scrartcl}
+\usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
+\usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
+\usepackage{etoolbox}
+\usepackage{letltxmacro}
+\usepackage{ifthen}
+
+%-- Compiler-abhaengige IFs
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
+
+%--Farbdefinitionen
+%-- muss vor tikz geladen werden
+\usepackage[usenames, table, x11names]{xcolor}
+\definecolor{dark_gray}{gray}{0.45}
+\definecolor{light_gray}{gray}{0.6}
+
+%--Zum Zeichnen
+%-- muss vor polyglossia bzw. babel geladen werden
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{external}
+\tikzset{>=latex}
+\usetikzlibrary{shapes,arrows,intersections}
+\usetikzlibrary{calc,3d}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings, decorations.pathmorphing}
+\usetikzlibrary{angles}
+
+%-- Konfiguration von tikzexternalize
+\tikzexternalize[prefix=tikz/, up to date check=diff]
+
+\ifxetexorluatex
+\tikzset{external/system call={xelatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
+    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+\else
+\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape 
+    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+\fi
+
+%-- tikzexternalize fuer tikzcd deaktivieren, da inkompatibel
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
+
+%-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
+\tikzset{
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{compat=1.10}
+
+
+
+%-- Mathesymbole etc.
+\usepackage{mathtools} % beinhaltet amsmath
+\mathtoolsset{showonlyrefs, centercolon}
+\newtagform{brackets}[\textbf]{[}{]}
+\usetagform{brackets}
+\usepackage{wasysym} % zusätzliche Symbole
+\usepackage{amssymb} % zusätzliche Symbole
+\usepackage{latexsym} % zusätzliche Symbole
+\usepackage{stmaryrd} % für Blitz
+\usepackage{nicefrac} % schräge Brüche
+\usepackage{cancel} % Befehle zum Durchstreichen
+\usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
+\usepackage{mathrsfs} % das X wurde benötigt
+
+%-- einzelne Symbole aus dem mathx-package
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathSymbol{\bigplus}{1}{mathx}{"90}
+
+%-- 
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
+\newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
+
+\def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+%-- Underbrace als Befehl in LaTeX-Syntax (und ohne Spacing probleme mit nachfolgenden Operatoren...)
+\newcommand{\Underbrace}[2]{{\underbrace{#1}_{#2}}}
+
+%-- Alles was mit Schrift und XeTeX zu tun hat
+\ifxetexorluatex
+    % XeLaTeX or LuaTeX
+	\ifxetex
+		\usepackage{mathspec} %beinhaltet fontspec 
+	\else
+		\usepackage[no-math]{fontspec}
+	\fi
+    \usepackage{polyglossia} % moderner babel-ersatz
+    \setmainlanguage[spelling=new,babelshorthands=true]{german}
+	\shorthandoff{"}
+	\setotherlanguage{english}
+	% \newcommand\glqq{"}
+	% \newcommand\grqq{"}
+	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.4}} %
+    \setmainfont[Ligatures=Common, BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
+	\setsansfont[Scale=MatchLowercase,Ligatures=Common, BoldFont={* Medium}]{Ubuntu}
+	% \newfontface\fancy{texgyreadventor-italic.otf}
+	% \setkomafont{title}{\fancy\Huge}
+	\ifxetex
+		\setallmonofonts[Scale=MatchLowercase, ItalicFont={*}]{Consolas} 
+	\else
+		\setmonofont[Scale=MatchLowercase, ItalicFont={*}]{Consolas}
+	\fi
+	\usepackage{xltxtra}
+	\usepackage{fontawesome}
+	\usepackage{microtype}
+\else
+    % default: pdfLaTeX
+    \usepackage[ngerman]{babel}
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+	\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
+    \usepackage[babel=true, tracking=true]{microtype}
+	\usepackage{lmodern}
+	\renewcommand{\familydefault}{\sfdefault} 
+\fi
+
+
+%--Mixed
+\usepackage[neverdecrease]{paralist}
+\usepackage[german=quotes]{csquotes}
+\usepackage{makeidx}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[margin=10pt, font=small, labelfont={sf, bf}, format=plain, indention=1em]{caption}
+\captionsetup[wrapfigure]{name=Abb. }
+\usepackage{stackrel}
+\usepackage{multicol}
+
+\flushbottom
+
+
+%--Unterstreichung
+\usepackage[normalem]{ulem}
+\setlength{\ULdepth}{1.8pt}
+
+%--Indexverarbeitung
+\newcommand{\bet}[1]{\textbf{#1}}
+\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
+\makeindex
+\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetexorluatex \faHandUp\fi \par \bigskip}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+
+%--Marginnote & todonotes
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\ }
+\usepackage[fulladjust]{marginnote}
+\renewcommand*{\marginfont}{\color{dark_gray} \itshape \footnotesize}
+\usepackage[textsize=small]{todonotes}
+\usepackage{ragged2e}
+\renewcommand*{\raggedleftmarginnote}{\RaggedLeft}
+\renewcommand*{\raggedrightmarginnote}{\RaggedRight}
+
+%--Todonotes mit tikz/externalize kompatibel machen
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
+
+%--Konfiguration von Hyperref pdfstartview=FitH, 
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
+
+\ifxetexorluatex
+\newcommand{\hrefsym}[2]{\href{#1}{\texttt{#2\,\faExternalLink}}}
+\newcommand{\hrefsymmail}[2]{\href{#1}{\texttt{\faEnvelope\,#2}}}
+\renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
+\fi
+\providecommand{\hrefsym}{\href}
+\providecommand{\hrefsymmail}{\hrefsym}
+
+
+% -- QR-Codes
+\usepackage{qrcode} %-- hinter hyperref laden!
+
+%--Römische Zahlen
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
+\renewcommand{\thesection}{\Roman{section}}
+
+%%--Abkürzungen etc.
+\newcommand{\light}{\text{\Large $\lightning$}}
+
+%-- Definitionen von weiteren Mathe-Befehlen
+\DeclareMathOperator{\re}{Re} %Realteil
+\DeclareMathOperator{\im}{Im} %Imaginaerteil
+\DeclareMathOperator{\id}{id} %identische Abbildung
+
+
+
+\newcommand{\mathd}{\ensuremath{\mathrm{d}\mkern-1.0mu}}
+
+
+
+%--Beweisende
+\newcommand{\bewende}{\ifmmode \tag*{$\square$} \else \hfill $\square$ \fi}
+
+
+%--Skalarprodukt
+\DeclarePairedDelimiterX\sprod[2]{\langle}{\rangle}{#1\,\delimsize\vert\,#2}
+\DeclarePairedDelimiterX\skal[2]{\langle}{\rangle}{#1\,,\,#2}
+
+%--Betrag, Gaußklammer
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+%--Norm
+\DeclarePairedDelimiter\doppelstrich{\Vert}{\Vert}
+\newcommand{\norm}[2][\relax]{
+\ifx#1\relax \ensuremath{\doppelstrich*{#2}}
+\else \ensuremath{\doppelstrich*{#2}_{#1}}
+\fi}
+
+
+%--Umklammern
+\DeclarePairedDelimiter\enbrace{(}{)}
+\DeclarePairedDelimiter\benbrace{[}{]}
+\DeclarePairedDelimiter\lenbrace{<}{>}
+\newcommand{\ssbrace}[1]{{\scriptscriptstyle\enbrace{#1}}}
+
+%--Mengen
+\DeclarePairedDelimiterX\mengenA[1]{\lbrace}{\rbrace}{#1}
+\DeclarePairedDelimiterX\mengenB[2]{\lbrace}{\rbrace}{#1\, \delimsize\vert \, #2}
+
+\makeatletter
+\newcommand{\set}[2][\relax]{
+\ifx#1\relax \ensuremath{
+\mengenA*{#2}}
+\else \ensuremath{%
+  \mengenB*{#1}{#2}}
+\fi}
+\makeatother
+
+\DeclareRobustCommand{\minwidthbox}[2]{%
+  \ifmmode
+    \expandafter\mathmakebox
+  \else
+    \expandafter\makebox
+  \fi
+  [\ifdim#2<\width\width\else#2\fi]{#1}%
+}
+
+
+%--offen und abgeschlossen
+\newcommand{\off}{\! \stackrel[\text{offen}]{}{\subset} \!}
+\newcommand{\abg}{\! \stackrel[\text{abg.}]{}{\subset} \!}
+
+%--Differential
+\newcommand{\diff}[2]{\ensuremath{\frac{{\partial #1}}{{\partial #2}} }}
+\newcommand{\diffd}[2]{\ensuremath{\frac{\mathd #1}{\mathd #2} }}
+
+%--Diagonale Linien für Matrizen
+\newcommand\tikzmark[1]{%
+  \tikzexternaldisable\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};\tikzexternalenable}
+
+\newcommand\MyLine[3][]{%
+  \tikzexternaldisable\begin{tikzpicture}[overlay,remember picture]
+    \draw[#1] (#2.south) -- (#3.north);
+  \end{tikzpicture}\tikzexternalenable}
+  
+%--Jordankasten
+\newcommand{\Jord}{ \tikzexternaldisable \begin{BMAT}{|ccc|}{|ccc|} %
+				0 & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  0 %
+			\end{BMAT} \tikzexternalenable}
+			
+%--Jordankasten mit Lambda
+\newcommand{\JordLa}[1][\empty]{%
+	\tikzexternaldisable\ifthenelse{\equal{#1}{\empty}}
+		{\begin{BMAT}{|ccc|}{|ccc|} %
+				\lambda & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda  %
+			\end{BMAT}}
+		{\begin{BMAT}{|ccc|}{|ccc|} %
+				\lambda_{#1}  & & \\ %
+				1\tikzmark{z} &  \diagdown & \\ %
+				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda_{#1}  %
+			\end{BMAT}}\tikzexternalenable}
+
+%--Inhaltsverzeichnis
+\usepackage[tocindentauto]{tocstyle}
+\usetocstyle{KOMAlike}	
+\shorthandon{"}
+		
+%--Punkte (als letztes laden)
+\usepackage{ellipsis}
