@@ -3486,7 +3486,7 @@ Wir erhalten eine Abbildung $\enbrace*{K_{\Delta^n}}_p \colon C_p \enbrace*{\abs
 
 \subsection[Lemma: Kettenhomotopie zwischen $\const_{s_n}$ und $\id$ auf $\abs*{\Delta^n}$]{Lemma} % (fold)
 \label{sub:138}
-Sei $\const_{s_n} \colon \abs*{\Delta^n} \to \abs*{\Delta^n}$ die konstante Abbildung mit $\im (\const_{s_n}) = \set{s_n} $. Dann ist $\enbrace*{K_{\Delta^n}}_*$ eine \hyperref[sub:76]{Kettenhomotopie} 
+Sei $\const_{s_n} \!\colon \abs*{\Delta^n} \to \abs*{\Delta^n}$ die konstante Abbildung mit $\im (\const_{s_n}) = \set{s_n} $. Dann ist $\enbrace*{K_{\Delta^n}}_*$ eine \hyperref[sub:76]{Kettenhomotopie} 
 zwischen $\id$ und $(\const_{s_n})_*$.
 \minisec{Beweis}
 Sei $\sigma$ ein singulärer $p$-Simplex in $\abs*{\Delta^n}$. Dann ist 
@@ -3684,7 +3684,9 @@ Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n
 	\item Es gilt $\diam \enbrace*{[v_0, \ldots ,v_p]}= \max \set[\norm{v_i - v_j} ]{0 \le i,j\le p\rule{0cm}{0.9em}}$
 	\item Es ist 
 	\[
-		(B_p)_{\abs*{\Delta^n}} \enbrace[\big]{[v_0, \ldots ,v_p]} =\hspace{-0.5em} \sum_{\sigma \in \sum_{\set{v_0,\ldots ,v_p}}} \hspace{-1.3em}\sgn(\sigma)  \cdot  
+		(B_p)_{\abs*{\Delta^n}} \enbrace[\big]{[v_0, \ldots ,v_p]} =
+		\smashoperator{\sum_{\hspace{3em}\sigma \in \sum_{\set{v_0,\ldots ,v_p}}}}
+		\enspace\sgn(\sigma)  \cdot  
 		\underbrace{\benbrace*{\frac{\sum_{i=0}^{p} \sigma(v_i)}{p+1}, \frac{\sum_{i=0}^{p-1} \sigma(v_i)}{p} ,\ldots , \sigma(v_0)  } }_{=: \tau_\sigma}
 	\]
 	\item Für $\sigma \in \sum_{\set{v_0, \ldots ,v_p}}$ ist $\diam \tau_\sigma \le \frac{n}{n+1} \diam [v_0,\ldots ,v_p]$.
@@ -3700,30 +3702,32 @@ Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n
 		&= \max_i \norm{v_i - \sum_{j=0}^{p} t'_j v_j} \\
 		&= \max_i \norm{ \sum_{j=0}^{p} t'_j v_i + \sum_{j=0}^p t'_j v_j} \\ 
 		&\le \ldots \le \max_{i,j} \norm{v_i - v_j}.   
-	\end{align*} \todo{RevChap13}
-	\item Per Induktion nach $p$.
-	\begin{description}
-		\item[$p=0$:] Klar.
-		\item[$p-1 \mapsto p$:] Es genügt $n=p$, $v_0=e_0, \ldots , v_n=e_n$ zu betrachten. Es gilt
-		\begin{align*}
-			\hspace{-1em}\enbrace*{B_{\abs*{\Delta^p}}}_p \enbrace*{[v_0,\ldots ,v_p]} &= (K_{\Delta^p}) \circ (B_{\abs*{\Delta^p}})_{p-1} \circ \partial_p [e_0, \ldots ,e_p] \\
-			&= \sum_{i=0}^{p} (-1)^i (K_{\Delta^p}) \circ (B_{\abs*{\Delta^p}})_{p-1} \circ [e_0, \ldots , e_{i-1}, e_{i+1}, \ldots ,e_p] \\
-			&= \sum_{i=0}^{p} (-1)^i \hspace{-1em} \sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_{i-1}, e_{i+1}, \ldots e_p} }}  \hspace{-3.2em}\sgn(\sigma) (K_{\Delta^p}) \enbrace*{
-			\textstyle\benbrace*{\frac{\sigma(e_0) + \ldots \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p} } } \\
-			&= \sum_{i=0}^{p} (-1)^i \hspace{-1em}\sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_{i-1}, e_{i+1}, \ldots e_p} }} \hspace{-3.2em} \sgn(\sigma)
-			\benbrace*{\textstyle\frac{e_0 + \ldots + e_p}{p+1}, \frac{\sigma(e_0) + \ldots \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p}, \ldots} \\
-			&=\ldots = \sum_{\sigma \in \Sigma_{\set{e_0, \ldots ,e_n}}} \sgn(\sigma) \benbrace*{\textstyle \frac{\sum_{i=0}^{p} \sigma(e_i)}{p}, \ldots , \ldots} 
-		\end{align*}  
-	\end{description}
+	\end{align*}
+	\item Per Induktion nach $p$. Für $p=0$ ist $(B_0)_{\abs{\Delta^n}}=\id$ und die Aussage wahr.
+	
+	Für $p-1 \mapsto p$ genügt es $n=p$ und $[v_0,\ldots ,v_p] =[e_0, \ldots ,e_p]$ zu betrachten. Es gilt
+	\begin{align*}\marginnote{Aus Platzgründen wird der Index $\abs*{\Delta^p}$ bei den Abbildugen $(K_{\abs*{\Delta^p}})_*$ und $(B_*)_{\abs*{\Delta^p}}$ weggelassen}
+		B_p \enbrace[\big]{[v_0,\ldots ,v_p]} &= K_{p-1} \circ B_{p-1} \circ \partial_p \enbrace[\big]{[e_0, \ldots ,e_p]} \\
+		&= \sum_{i=0}^{p} (-1)^i \cdot K_{p-1} \circ B_{p-1} \enbrace[\big]{[e_0, \ldots , e_{i-1}, e_{i+1}, \ldots ,e_p]} \\
+		&\stackrel{\mathclap{\text{I.V.}}}{=} \sum_{i=0}^{p} (-1)^i \cdot
+		\smashoperator{\sum_{\hspace{4em}\sigma \in \sum_{\set{e_0, \ldots, e_p}\setminus \set{e_i}}} }
+		\enspace\sgn(\sigma) \cdot K_{p-1} 
+		\enbrace*{\textstyle\benbrace*{\frac{\sigma(e_0) + \ldots +\sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p},\ldots  } } \\
+		&= \sum_{i=0}^{p} (-1)^i \cdot 
+		\smashoperator{\sum_{\hspace{4em}\sigma \in \sum_{\set{e_0, \ldots, e_p}\setminus \set{e_i}}} }
+		\enspace \sgn(\sigma)\cdot 
+		\benbrace*{\textstyle\frac{e_0 + \ldots + e_p}{p+1}, \frac{\sigma(e_0) + \ldots + \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p}, \ldots} \\
+		&=\ldots = \smashoperator{\sum_{\hspace{3em}\sigma \in \sum_{\set{e_0, \ldots ,e_n}}}} \enspace\sgn(\sigma) \cdot \benbrace*{\textstyle \frac{\sum_{i=0}^{p} \sigma(e_i)}{p+1}, \ldots , \sigma(e_0)} 
+	\end{align*}
 	\item Es genügt $\sigma=\id$ zu betrachten. Es ist 
 	\begin{align*}
-		\diam \benbrace*{\frac{v_0+ \ldots +v_p}{p+1}, \frac{v_0 + \ldots v_{p-1}}{p}, \ldots ,v_0} &\stackrel{\text{(i)}}{=} \max_{i <j}
-		\norm{\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1}}  \\
-		&= \max_{i <j} \norm{\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1} - \frac{v_{i+1}+ \ldots + v_j}{j+1}} \\
-		&= \max_{i<j} \norm{\frac{(j+1)- (i+1)}{(i+1)(j+1)}(v_0 + \ldots + v_i) - \frac{1}{j+1} (v_{i+1} + \ldots +v_j)}  \\
-		&= \max_{i<j} \frac{j-1}{j+1} \doppelstrich[\bigg]{{\underbrace{\frac{v_0 + \ldots +v_i}{i+1}}_{\in \im [v_0, \ldots ,v_n]}} - \underbrace{\frac{v_{i+1} + \ldots  + v_j}{j-1}}_{\in 
-		\im [v_0, \ldots , v_n]}} \\
-		&\le  \max_{i<j} \frac{j-1}{j+1} \diam [v_0, ld, v_n] \\
+		\diam \benbrace*{\textstyle\frac{v_0+ \ldots +v_p}{p+1}, \frac{v_0 + \ldots + v_{p-1}}{p}, \ldots ,v_0} &\stackrel{\text{(i)}}{=} \max_{i <j}
+		\norm{\textstyle \frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1}}  \\
+		&= \max_{i <j} \norm{\textstyle\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_i}{j+1} - \frac{v_{i+1}+ \ldots + v_j}{j+1}} \\
+		&= \max_{i<j} \norm{\textstyle\frac{(j+1)- (i+1)}{(i+1)(j+1)}(v_0 + \ldots + v_i) - \frac{1}{j+1} (v_{i+1} + \ldots +v_j)}  \\
+		&= \max_{i<j} \frac{j-i}{j+1} \cdot \doppelstrich[\bigg]{\textstyle{\underbrace{\frac{v_0 + \ldots +v_i}{i+1}}_{\in \im [v_0, \ldots ,v_n]}} - 
+		\underbrace{\frac{v_{i+1} + \ldots  + v_j}{j-i}}_{\in \im [v_0, \ldots , v_n]}} \\
+		&\le  \max_{i<j} \frac{j-i}{j+1} \diam [v_0, \ldots, v_n] \\
 		&\le \max_j \frac{j}{j+1} \diam [v_0, \ldots ,v_n] \le \frac{n}{n+1} \diam [v_0, \ldots , v_n]  \bewende
 	\end{align*}
 \end{enumerate}
