@@ -68,7 +68,7 @@ es gilt:
 Desweiteren gilt $\skal{e_i}{e_j}=\delta_y := \begin{cases} 1 & i=j \\ 0 &i\neq j \end{cases}$ \hspace{1cm} (Kronecker-Symbol)
 
 Ist \[
-	x=\sum_{i=1}^{n}x_ie_i \in \mathbb{R}^n \hspace{1cm} (x_i \in \mathbb{R})
+	x=\sum_{i=1}^{n}x_ie_i \in \mathbb{R}^n \qquad (x_i \in \mathbb{R})
 	\]
 so ist \begin{gather*}
 	\skal{x}{e_j} = \skal{\sum_{i=1}^{n}x_ie_i}{e_j} \stackrel{(S1)}{=} \sum_{i=1}^{n}x_i \skal{e_i}{e_j} = \sum^{n}_{i=1}x_i \delta_{ij} = x_j \\
@@ -132,7 +132,7 @@ Sei $(V,\skal{}{})$ ein euklidscher Vektorraum. Für $v \in V$ setzte $\norm{v}=
 \minisec{Beweis:}
 \begin{enumerate}
 	\item \begin{description}
-		\item[N1:] $\norm{v}=\sqrt{\underbrace{\skal{v}{v}}}_{\geq 0} \geq  0$
+		\item[N1:] $\norm{v}=\sqrt{\underset{\geq 0}{\underbrace{\skal{v}{v}}}} \geq  0$
 		\item[N2:] $\norm{v}=\sqrt{\skal{v}{v}}=0 \Rightarrow \skal{v}{v}=0 \stackrel{\text{S3}}{\Rightarrow} v=0$ 
 		\item[N3:] $a \in \mathbb{R} , v \in V$ \[
 			\norm{av}=\sqrt{\skal{av}{av}} \stackrel{\text{S1}}{=} \sqrt{a^2 \skal{v}{v}} = \sqrt{a^2} \sqrt{\skal{v}{v}} = \abs{a} \norm{v}
@@ -257,15 +257,163 @@ $V=\mathbb{R}$. Dann ist $x \mapsto \abs{x} $ eine Norm auf $\mathbb{R}$ und die
 \minisec{Konvergenz}
 Erinnerung (Ana I): $(x_n)_n$ Folge in $\mathbb{R}$, $x \in  \mathbb{R}$. Dann 
 \[
-\lim\limits_{n \to \infty}x_n=x \, :\Leftrightarrow \, \forall\, \epsilon > 0 \exists n_0 \forall\, n \geq n_0: \, \abs{x-x_1}< \epsilon
- \]
+\lim_{n \to \infty}x_n=x \, :\Leftrightarrow \, \forall\, \varepsilon > 0 \,\exists \,n_0 \, \forall\, n \geq n_0: \, \abs{x-x_1}< \varepsilon
+ \] 
 % subsection metrische_raume (end)
 \subsubsection{Definition} % (fold)
 \label{ssub:definition}
-$(X,d)$ metrischer Raum, $(x_n)_n$ FOlge in $X$ ( d.h eine Abbildung $x: \mathbb{N} \to X$). $y \in X$ Dann Konvergiert die Folge $(x_n)_n$ gegen $y :\Leftrightarrow \forall\, \epsilon>0 \exists n_0: \forall\, n \geq n_0 \, d(x_n,y)<\epsilon$
+$(X,d)$ metrischer Raum, $(x_n)_n$ Folge in $X$ (d.h eine Abbildung $x: \mathbb{N} \to X$) $y \in X$. Dann Konvergiert die Folge $(x_n)_n$ gegen $y :\Leftrightarrow \forall\, \varepsilon >0 \, \exists \, n_0: \forall \ n \geq n_0 \, d(x_n,y)< \varepsilon $
+\underline{Äquivalent}: Die Folge (in $\mathbb{R}$) $d(x_n,y)$ ist eine Nullfolge.
+% subsubsection definition (end)
 
+\subsubsection{Beispiel} % (fold)
+\label{ssub:3.4}
+$X=\mathbb{R}^n$ mit Metrik, die durch $l^1$-$ l^2$-$ \text{ oder } l^{\infty}$- Norm induziert wird. Folge $k \mapsto x(k) \in \mathbb{R}^n$.
+\[
+	x(k)= \sum_{i=1}^{n}x_i(k)e_i \qquad e_i \text{ Standard-Basisvektor} \qquad x_i(k) \in  \mathbb{R} \qquad x=\sum^{n}_{i=1}x_ie_i
+\]
+Dann sind äquivalent
+\begin{description}
+	\item[1)] für alle $i=1,\dots,n$ gilt $\lim_{k \to \infty}x_i(k)=x_i$
+	\item[2)] $\lim_{k \to \infty}\norm{x(k)-x}_1=0$
+	\item[3)] $\lim_{k \to \infty}\norm{x(k)-x}_2=0$
+	\item[4)] $\lim_{k \to \infty}\norm{x(k)-x}_{\infty}=0$ 
+\end{description}
+\minisec{Beweis:}
+\underline{$1 \to 2$:} 
+\[
+	\norm{x(k)-x}_1:=\sum^{n}_{i=1}\underset{\stackrel{\text{(wg 1)}}{\to}0}{\underbrace{\abs{x_i(k)-x_i}}} \longrightarrow 0
+\]
+\\
+\underline{$2 \to 3 \to 4$:} Benutze Ungleichungen $(y \in \mathbb{R}^n)$
+\[
+	\norm{y}_{\infty} \leq \norm{y}_2 \leq \norm{y}_1 \leq n \cdot \norm{y}_{\infty}
+\]
+also 
+\begin{gather*}
+	\lim_{k \to \infty}\norm{x(k)-x}_1=0 \\
+	\Rightarrow \lim_{k \to \infty}\norm{x(k)-x}_2=0 \\
+	\Rightarrow \lim_{k \to \infty}\norm{x(k)-x}_{\infty}=0
+\end{gather*}
+\\
+\underline{$4 \to 1$:} \begin{gather*}
+	\norm{x(k)-x}_{\infty} = \max\{ \abs{x_i(k)-x} \,| i=1,\dots,n \}
+	\Rightarrow \text{für alle $i$: } \abs{x_i(k)-x_i} \leq \norm{x(k)-x}_{\infty}
+\end{gather*}
+Also
+\[
+	\left[ \norm{x(k)-x}_{\infty} \stackrel{k \to \infty}{\longrightarrow}0 \right] \qquad \Rightarrow \qquad \left[ \forall\, i=1,\dots,n \quad \abs{x_i(k)-x_i} \longrightarrow 0 \right]
+\]
+\[
+\Rightarrow 1)
+\] \bewende
+
+\minisec{Bemerkung:} $X$ metrischer Raum $(x_n)_n , (y_n)_n$ Folgen in $X \quad \lim_{n \to \infty}x_n=x \quad \text{und} \quad \lim_{n \to \infty}y_n=y$
+\[
+	\Rightarrow d(x,y)=\lim_{n \to \infty}d(x_n,y_n) \qquad \text{(Blatt 2, Aufgabe 2)}
+\]
+Daraus folgt: \\ Ist $(x_n)_n $ Folge in $X$ und gilt $\lim_{n \to \infty}x_n=x$ sowie $\lim_{n \to \infty}x_n=x'$ dann ist $x=x'$ \\
+Denn \[
+	d(x,x')=\lim_{n \to \infty}\underset{=0}{\underbrace{d(x_n,x_n)}}=0
+\]
+\[
+	\stackrel{(M2)}{\Rightarrow} x=x'
+\] \bewende
+% subsubsection beispiel (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Sei $(X,d)$ metrischer Raum und $(x_n)_n $ Folge in $X$. Dann heißt $(x_n)_n$ {\bfseries Cauchyfolge}, falls gilt:
+\[
+	\forall\, \varepsilon >0 \, \exists \, n_0 \, \forall\, n,m \geq n_0 \, d(x_n,x_m)<\varepsilon 
+\]
+
+\minisec{Bemerkung:} $(X,d)$ metrischer Raum $(x_n)_n $ Folgen in $X$, $\lim_{n \to \infty}x_n=x \in X$. \\
+Dann ist $(x_n)_n$ Cauchyfolge, denn \\
+Sei $\varepsilon >0$. Wähle $n_0$, sodass \[  \forall\, n \geq n_0 \, d(x,x_n)< \frac{\varepsilon}{2} \]
+Falls $n,m \geq n_0$
+\[
+	d(x_n,y_n) \leq \underset{<\frac{\varepsilon}{2}}{\underbrace{d(x_n,x)}} + \underset{<\frac{\varepsilon}{2}}{\underbrace{d(x,y_n)}} < \varepsilon 
+\]
+% subsubsection definition (end)
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$(X,d)$ metrischer Raum. Dann heißt $X$ {\bfseries vollständig}, falls jede Cauchy-Folge $(x_n)_n $ in $X$ gegen ein $x \in X$ konvergiert (Ana I)
+
+\minisec{Bsp:} 
+
+	$(0,1) \subseteq \mathbb{R}$.
+	$x_n = \frac{1}{n}$ Folge in $X$ ist Cauchyfolge. \\
+	$(x_n)_n$ konvergiert \underline{nicht} in $X$, denn der einzig möglicher Grenzwert (0) liegt nicht in $X$.
 
 % subsubsection definition (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$\mathbb{R}^n$, mit der durch die Norm $\norm{.}_p \qquad p=1,2,\infty$ induzierten Metrik ist vollständig
+
+\minisec{Beweis:}
+\underline{$p=\infty$:} Sei $x(k)$ $l^{\infty}$-Cauchyfolge in $\mathbb{R}^n$. Dann gilt für $i=1,\dots,n$:
+\[
+	\abs{x_i(k)-x_i(l)} \leq \norm{x(k)-x(l)}_{\infty}
+\]
+Da $(x(k))_k$ $l^{\infty}$-Cauchyfolge, ist $(x_i(k))_k$ eine Cauchyfolge in $\mathbb{R}$ für alle $1\leq i \leq n$ \\
+Nach dem Cauchy-Kriterium aus Analysis I sind die Folgen $(x_i(k))_k$ Konvergent. $x_i=\lim_{k \to \infty}x_i(k) \in \mathbb{R}$
+\[
+	x := \sum_{i=1}^{n}x_ie_i \in \mathbb{R}^n
+\] 
+Dann gilt 
+\[
+	\norm{x(k)-x}_{\infty} = \max\{ \underset{\to 0}{\underbrace{\abs{x_i(k)-x_i}}} | i=1,\dots,n \} \longrightarrow 0
+\]
+also
+\[
+	\lim_{k \to \infty}\norm{x(k)-x}_{\infty} = 0
+\]
+\\
+\underline{$p=2$:}
+$x(k)$ $l^2$-Cauchyfolge, weil $\norm{x(k)-x(l)}_{\infty} \leq \norm{x(k)-x(l)}_2$ \\
+Ist $(x_k)_k$ eine $l^{\infty}$-Cauchfolge, so gibt es ein $x \in \mathbb{R}^n$ mit 
+\[
+	\lim_{k \to \infty}\norm{x(k)-x}_{\infty}=0
+\]
+\[
+	\Rightarrow \norm{x(k)-x}_2 \leq n \cdot \underset{\to 0}{\underbrace{\norm{x(k)-x}_{\infty}}} \longrightarrow 0
+\] 
+\\
+\underline{$p=1$:} Analog zum Fall $p=1$, benutze $\norm{y}_{\infty} \leq \norm{y}_1 \leq n \cdot \norm{y}_{\infty}$ 
+\bewende	
+% subsubsection satz (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Seien $(X,d_X)$ und $(Y,d_Y)$ metrische Räume und $f:X \to Y$ eine Abbildung sowie $x \in X$.
+\begin{enumerate}[(i)]
+	\item $f$ heißt {\bfseries $\varepsilon$-$\delta$-stetig} (oder {\bfseries stetig}) bei $x$, wenn gilt
+	\[
+		\forall\, \varepsilon >0 \, \exists \, \delta>0 \, \forall\, x' \in X \text{ mit } d_X(x,x')< \delta \text{ gilt: } d_Y(f(x),f(x'))<\varepsilon 
+	\]
+	\item $f$ heißt {\bfseries folgenstetig} in $x$ $:\Leftrightarrow$ Ist $(x_n)_n $ eine Folge in $X$ mit $\lim_{n \to \infty}x_n=x$, so gilt
+	\[
+		\lim_{n \to \infty}f(x_n)=f(x)
+	\]
+\end{enumerate}
+$f$ ist stetig (folgenstetig) auf $X$, wenn $f$ stetig (folgenstetig) bei $x$ ist für alle $x \in X$.
+% subsubsection definition (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$f$ stetig in x $\Leftrightarrow$ $f$ folgenstetig in $x$
+\minisec{Beweis} wie in Analysis I, wird bald nachgeliefert
+
+% subsubsection satz (end)
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$(X,d_X)$ , $(Y,d_Y)$, $(Z,d_Z)$ metrische Räume. 
+\[ f:X \to Y \qquad g:Y \to Z \qquad x \in X \]
+Falls $f$ stetig bei $x$ und stetig bei $f(x)$ so ist $g \circ f$ stetig bei $x$.
+\minisec{Beweis:} Siehe Analysis I 
+% subsubsection satz (end)
 % subsection euklidsche_und_normierte_vektorraume (end)
 
 \end{document}	
