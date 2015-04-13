@@ -10,6 +10,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 	* [Elliptische Kurven und Kryptographie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EKK_SS15/EKK.pdf?raw=true "Elliptische Kurven und Kryptographie") (Phil)
 	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes)
 	* [Numerische Analysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/NumAna_SS15/Num_Ana.pdf?raw=true "Numerische Analysis") (Tobias)
+	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS15/Analysis2.pdf?raw=true "Analysis II.") (Tim)
 * WiSe 2014
 	* [Topologie I.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo1_WS14/topologie_1.pdf?raw=true "Topologie I.") (Jannes)
 	* [Funktionalanalysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/FunkAna_WS14/funktional_analysis.pdf?raw=true "Funktionalanalysis") (Jannes)
@@ -43,7 +44,8 @@ Schon einmal vielen Dank an
 * Gautam (gdbgauda) _Höhere Algebra I._
 * Phil (phist91) _PDGL I., Elementare Zahlentheorie, Elliptische Kurven und Kryptographie_
 * Arne (moregrey) _Differentialformen und Mannigfaltigkeiten, Differentialgeometrie_
-* Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik_
+* Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik, Numerische Analysis_
+* Tim (Tii1) _Analysis II._
 
 für die Beteiligung an diesem Projekt!
 
