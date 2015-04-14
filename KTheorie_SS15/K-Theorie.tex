@@ -211,6 +211,7 @@ und sodass die Einschränkung $\overline{f}\big|_{E_x} \colon E_x \to E'_{f(x)}$
 endlich dimensionalen $K$-Vektorraumbündel über einem topologischen Raum $X$ zusammen mit den Morphismen $(\id_X, \overline{f})$ mit $\VEKT_K(X)$.
 % subsection 22 (end)
 
+\section*{Operationen mit Vektorbündeln}
 \subsection[Definition: Pullback]{Definition} % (fold)
 \label{sub:23}
 Seien $X$ und $Y$ topologische Räume. Sei $f \colon Y \to X$ eine stetige Abbildung und sei $p \colon E \to X$ ein Vektorbündel. Dann heißt
@@ -289,11 +290,50 @@ stetig ist.
 \label{sub:25}
 Sei $F$ ein stetiger Funktor wie in \eqref{eq:24} und sei $X$ ein topologischer Raum. Dann induziert $F$ einen Funktor
 \[
-	F_\times \colon \VEKT_K(X) \times \ldots \times \VEKT_K(X) \times \VEKT_K(X)^\op \times \ldots \times \VEKT_K(X)^\op \longrightarrow \VEKT_K(X)
+	F_X \colon \VEKT_K(X) \times \ldots \times \VEKT_K(X) \times \VEKT_K(X)^\op \times \ldots \times \VEKT_K(X)^\op \longrightarrow \VEKT_K(X)
 \]
 der verträglich ist mit Pullbacks und $F_\pt=F$ erfüllt.
 \minisec{Beweis}
+Sei $m=r+s$. Definiere 
+\(
+	F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} = \coprod_{x \in X} F \enbrace*{E_x^\ssbrace{1}, \ldots , E_x^\ssbrace{m}}   
+\)
+als Menge. Sei $U_i$ eine offene Überdeckung von $X$, so dass lokalen Trivialisierungen 
+\[
+	\varphi_i^\ssbrace{k} \colon (p^\ssbrace{k})^{-1}(U_i) \longrightarrow U_i \times K^{e_k}
+\]
+existieren. $F$ induziert Bijektionen
+\[
+	F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m}} \colon F_{U_i} \enbrace*{(p^\ssbrace{1})^{-1}(U_i), \ldots , (p^\ssbrace{m})^{-1}(U_i)}
+	\longrightarrow U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}   
+\]
+Jetzt gibt es eine eindeutige Topologie auf $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$, so dass die Abbildungen 
+$\psi_i = F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m}}$ Homöomorphismen werden, wobei $U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}$ die 
+Produkttopologie trägt: Eine Menge $V \subset F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$ ist offen, falls sie die Vereinigung von Mengen der Form 
+$\psi_i^{-1}(V_i)$ mit $V_i \subset U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}$ offen ist.
 
+Damit diese Definition konsistent ist, müssen wir folgendes prüfen: Sei $V \subset (U_i \cap U_j) \times F(K^{e_1}, \ldots , K^{e_m})$ offen. Wir haben zu zeigen, dass dann 
+auch $\psi_j \circ \psi_i^{-1}(V)$ offen ist. Aber es gilt $\psi_j \circ \psi_i ^{-1}(x,v)= \enbrace*{x, \psi_{ij}(x)(v)}$ für eine Abbildung
+\[
+	\psi_{ij} \colon U_i  \cap U_j \longrightarrow \End_K \enbrace*{F(K^{e_1}, \ldots , K^{e_m})} 
+\]
+Es gilt $\psi_{ij} = F \enbrace*{\psi_{ij}^\ssbrace{1}, \ldots , \psi_{ij}^\ssbrace{m}}$ für \emph{stetige} Abbildungen 
+$\psi_{ij}^\ssbrace{k} \colon U_i \cap U_j \to \End_K(K^{e_k})$. Da $F$ stetig ist, folgt, dass alle $\psi_{ij}$ stetig sind, folglich auch $\psi_j \circ \psi_i ^{-1}$. Somit
+ist $\psi_j \circ \psi_i ^{-1}(V)$ offen. Es ist damit klar, dass $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \to X$ ein Vektorbündel ist, denn wir haben lokale Trivialisierungen konstruiert. Ferner gilt per Definition für eine stetige Abbildung $f \colon Y \to X$
+\[
+	f^* F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \cong F_Y \enbrace*{f^*E^\ssbrace{1}, \ldots , f^* E^\ssbrace{m}}  \bewende
+\]
+\minisec{Beispiele}
+\begin{itemize}
+	\item $\oplus \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ direkte Summe von Vektorbündeln
+	\item $\otimes \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ Tensorprodukt von Vektorbündeln
+	\item Dualisieren von Vektorräumen ${ }^* \colon \VEKT_K^\op \to \VEKT_K$ ist stetig $\Rightarrow $ duales Vektorbündel
+	\item $\Hom \colon \VEKT_K \times \VEKT_K^\op \to \VEKT_K$, $(V,W) \mapsto \Hom_K(W,V)$ ist stetig $\Rightarrow$ Homomorphismenbündel $\Hom(E,F)$.
+\end{itemize}
+Seien $p \colon E \to X$ und $q \colon F \to X$ zwei $K$-Vektorbündel. Dann ist $E \times F \xrightarrow{(p,q)} X \times X$ auch ein Vektorbündel, wenn $E_X \times F_X$
+die Vektorraumstruktur der äußeren direkten Summe trägt.
+\minisec{Übungsaufgabe}
+Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta^*(E \times F) \cong E \oplus F$ als Vektorbündel über $X$.
 % subsection 25 (end)
 % section 2 (end)
 
