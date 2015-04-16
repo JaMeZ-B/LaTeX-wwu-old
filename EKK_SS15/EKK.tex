@@ -8,20 +8,24 @@
 \input{../!config/PhistScript.tex}							% XeLaTeX-Konfiguration für Skripte
 
 % % % Dokumentspezifische Einstellungen % % %
-\setcounter{tocdepth}{2}				% Tiefe im Inhaltsverzeichnis (1: nur Sections, 2: auch subsections...)
+\setcounter{tocdepth}{3}				% Tiefe im Inhaltsverzeichnis (1: nur Sections, 2: auch subsections...)
 
 \numberwithin{equation}{section}			% Section in Equation-Nummerierung einbeziehen
-\newcounter{countsatz}						% Zähler für Sätze
-\numberwithin{countsatz}{section}			% Section in Satz-Nummerierung einbeziehen
+\newcounter{counter}						% Zähler für Sätze
+% \numberwithin{countsatz}{section}			% Section in Satz-Nummerierung einbeziehen
 
 % ab hier können neue Umgebungen für Sätze definiert und benannt werden!
 % Syntax: \newtheorem{interner Umgebungsname}[Zähler]{Name im Dokument}
 % Möchte man Sätze und Definitionen getrennt durchnummerieren, benötigt man weitere Zähler.
-\newtheorem{satz}[countsatz]{Satz}
+\newtheorem{satz}[counter]{Satz}
+\newtheorem{defn}[counter]{Definition}
+\newtheorem{bem}[counter]{Bemerkung}
+\newtheorem{bsp}[counter]{Beispiel}
 % % % % % % % % % % % % % % % % % % % % % % %
 \newcommand{\PP}{\mathbb{P}}
 \DeclareMathOperator{\li}{li}
 \newcommand{\kon}{\equiv}
+\newcommand{\oh}{\mathcal{O}}
 
 % % % % % % % % % % % % % % % % % % % % % % %
 \begin{document}
@@ -30,6 +34,7 @@
 \tableofcontents
 \newpage											% Inhaltsverzeichnis ausgeben
 \input{content/0.tex}
+\input{content/1.tex}
 
 %\appendix							% Anhang beginnt hier (Nummerierung mit Buchstaben)
 \printindex							% Index ausgeben

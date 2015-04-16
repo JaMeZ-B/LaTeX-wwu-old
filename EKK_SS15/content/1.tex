@@ -1,0 +1,91 @@
+\section{Allgemeines über Kryptographieverfahren}
+\label{sec:para1}
+
+\subsection{Grundlagen aus der elementaren Zahlentheorie und Gruppentheorie}
+\subsubsection{Zahlen, Darstellung von Zahlen}
+	Die Zahlbereiche $\NN \subseteq \ZZ \subseteq \QQ \subseteq \RR \subseteq \CC$ sind aus den Grundvorlesungen bekannt. Bezüglich den Verknüpfungen $+$ und $\cdot$ sind verschiedene Axiome erfüllt, die diese Zahlbereiche zu interessante algebraische Strukturen machen:	
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+	\hline  \textbf{Halbgruppe}		&	\textbf{Gruppe}								&	\textbf{Ring}			&	\textbf{Körper} \\
+	\hline	$(\NN,+), (\NN,\cdot)$ & & & \\
+	\hline $(\ZZ,+),(\ZZ,\cdot)$ & $(\ZZ,+,0) $ & $(\ZZ,+,\cdot)$ & \\
+	\hline $(\QQ,+),(\QQ,\cdot)$ & $(\QQ,+,0),(\QQ \setminus \setnull, \cdot, 1)$ & $(\QQ,+,\cdot)$ & $(\QQ,+,\cdot)$ \\
+	\hline $(\RR,+), (\RR,\cdot)$ & $(\RR,+,0), (\RR\setminus \setnull, \cdot, 1)$ & $(\RR,+,\cdot)$ & $(\RR,+,\cdot)$ \\
+	\hline $(\CC,+),(\CC,\cdot)$ & $(\CC,+,0),(\CC \setminus \setnull, \cdot, 1)$ & $(\CC,+,\cdot)$ & $(\CC,+,\cdot)$ \\
+	\hline
+	\end{tabular} 
+\end{center}
+	Weiter sind $\QQ$ und $\RR$ angeordnete Körper, d.h. es gibt eine Anordnungsrelation $\leq$, die sich mit $+$ und $\cdot$ verträgt. Für $\CC$ ist eine solche Anordnung nicht mehr möglich.
+	
+\begin{defn}[Halbgruppe]
+	Eine Menge $H \neq \emptyset$ mit Verknüpfung $*\colon H \times H \rightarrow H$ heißt \Index{Halbgruppe}, falls $*$ assoziativ ist, d.h. für alle $a,b,c \in H$ gilt $a*(b*c) = (a*b)*c$.
+\end{defn}
+
+\begin{defn}[Gruppe]
+	Eine Halbgruppe $(G,*)$ heißt \Index{Gruppe}, falls es ein neutrales Element $e \in G$ gibt mit $e*g = g*e = g$ für alle $g \in G$, und falls zu jedem $g \in G$ ein inverses Element $h \in G$ existiert mit $h * g = g * h = e$. Wir schreiben auch $g^{-1}, \frac{1}{g}$ oder $-g$ für $h$.
+\end{defn}
+
+\begin{defn}[abelsche Gruppe]
+	Eine Gruppe $(G,*,e)$ heißt \bet{abelsch} bzw. \bet{kommutativ}, falls für alle $a, b \in G$ gilt: $a * b = b*a$. \index{Gruppe!abelsch}
+\end{defn}
+
+\begin{defn}[Ring]
+	Ein \Index{Ring} $(R,+,\cdot)$ \marginnote{Ring mit Eins} ist eine Menge $R \neq \emptyset$ und zwei Verknüpfungen $+$ und $\cdot$ so, dass $(R,+,0)$ eine Gruppe ist, $(R,\cdot,1)$ eine Halbgruppe mit neutralem Element $1$, und so, dass die Distributivgesetze gelten, d.h. $(a+b) \cdot c = a \cdot c + b \cdot c$ und $c \cdot (a+b) = c \cdot a + c \cdot b$.
+\end{defn}
+
+\begin{bem}
+	Die Addition $+$ ist in einem Ring stets kommutativ. Ein Ring heißt kommutativ, wenn die Multiplikation $\cdot$ kommutativ ist. Soll der Nullring $R = \setnull$ mit $1 = 0$ ausgeschlossen werden, fordert man zusätzlich noch $1 \neq 0$ in den Ringaxiomen.
+\end{bem}
+
+\begin{defn}[Einheit, Einheitengruppe]
+	Die in einem Ring $(R,+,\cdot)$ bezüglich $\cdot$ invertierbaren Elemente heißen \bet{Einheiten}. Die Menge der Einheiten in $R$ wird mit $R^*$ bezeichnet, d.h. also $R^* := \{a \in R : \exists b \in R \text{ mit } a \cdot b = b \cdot a = 1\}$. Damit ist $(R^*,\cdot,1)$ also eine Gruppe. \index{Einheit}
+\end{defn}
+
+\begin{defn}[Körper]
+	Ein \Index{Körper} $(K,+,\cdot)$ ist ein kommutativer Ring mit $1 \neq 0$, für den $K^* = K \setminus \setnull$ gilt.
+\end{defn}
+
+Algebraische Strukturen dieser Art können wir auch in Teilmengen von $\ZZ$ auffinden und diese für kryptographische Anwendungen ausnutzen. Darum geht es in §\ref{sec:para1} dieser Vorlesung. Dabei wird klar, dass die Anwendungen auch -- teilweise -- in beliebigen Gruppen, Ringen und Körpern möglich sind. Die Gruppen, die durch elliptische Kurven gegeben sind, haben sich in der Praxis dann als vorteilhaft herausgestellt.
+
+Wenn wir Teilmengen von $\ZZ$ auch praktisch untersuchen möchten, wird die Frage wichtig, wie man ganze Zahlen auf geschickte und kompakte Art darstellen kann. Dafür benutzen wir im Alltag das Dezimalsystem, für Rechenmaschinen ist auch das Binär- und das Hexadezimalsystem nützlich. Dabei werden die Ziffern $0,1,\dots 9$ bzw. $0,1$ bzw. $0,1,\dots, 9, A, \dots, F$ verwendet. Allgemein erhalten wir die $g$-adische Darstellung von $n \in \NN$ so:
+
+\begin{satz}
+\label{satz_g-adisch}
+	Sei $g \in \NN, g \geq 2$ und $n \in \NN$. Dann gibt es ein $k \in \NN_0$ und $c_k, c_{k-1}, \dots, c_0 \in \{0, \dots, g-1\}$ (genannt "Ziffern"), sodass $n = c_k g^k + c_{k-1} g^{k-1} + \dots + c_0 = \sum_{i=0}^k c_i g^i$. Fordern wir $c_k \neq 0$, ist $k$ und die Folge $c_k, \dots, c_1, c_0$ eindeutig bestimmt.
+\end{satz}
+
+\minisec{Beweis}
+	\begin{description}
+	\item[Existenz:] Sei $k \in \NN_0$ so, dass $g^k \leq n < g^{k+1}$ gilt, das heißt wir setzen $k := \floor*{\frac{\log(n)}{\log(g)}}$. Zeige durch Induktion nach $k$ die Existenz: \\
+	$k = 0$: Setze $c_0 := n$. \\
+	$k \rightsquigarrow k+1$: Sei $g^{k+1} \leq n < g^{k+2}$. Setze $n' = n - \floor*{\frac{n}{g^{k+1}}} \cdot g^{k+1}$. Es folgt $0 \leq n' < g^{k+1}$, d.h. auf $n'$ ist die Induktionsvoraussetzung anwendbar. Nach dieser hat $n'$ eine $g$-adische Zifferndarstellung $n' = \sum\limits_{i=0}^{k} c_i g^i$. Wegen $1 \leq  \frac{n}{g^{k+1}} < g$ ist $1 \leq \floor*{\frac{n}{g^{k+1}}} < g$, also setze $c_{k+1} := \floor*{\frac{n}{g^{k+1}}}$. \\
+	$\Rightarrow  n = c_{k+1} g^{k+1} + n' = \sum\limits_{i=0}^{k+1} c_i g^i$.
+	\item[Eindeutigkeit:] Sind $\sum\limits_{i=0}^{k} a_i g^i = m = \sum\limits_{i=0}^{r} b_i g^i$ zwei verschiedene Darstellungen von $m \in \NN$. Ist $r > k$, so sei $a_{k+1} = \dots = a_r := 0$, sonst sei $b_{r+1} = \dots = b_k := 0$, falls $r < k$. Dann sei $l := \max \{i \in \NN_0 : i \leq \max\{k,r\}, a_i \neq b_i \}$ die größte Stelle, an der sich die Darstellungen unterscheiden. \\
+	$\Rightarrow 0 = \sum\limits_{i=0}^l \underbrace{(a_i-b_i)}_{=0 \text{ für } i>l} g^i \Rightarrow \underbrace{|b_l - a_l|}_{\geq 1} g^l = \abs*{\sum\limits_{i=0}^{l-1} (a_i - b_i)g^i}$ \\
+	$\Rightarrow g^l \leq \sum\limits_{i=0}^{l-1} |a_i-b_i| g^i \leq \sum\limits_{i=0}^{l-1} (g-1) g^i = (g-1) \frac{g^l - 1}{g-1} = g^l - 1 \quad \lightning$ \qed
+	\end{description}
+
+
+\begin{defn}[$g$-adische Darstellung]
+	Die Ziffernfolge $c_k, c_{k-1}, \dots c_0$ aus Satz \ref{satz_g-adisch} heißt \bet{$g$-adische Darstellung} von $n$. Die Zahl $c_k$ heißt \Index{Leitziffer}, die Zahl $c_0$ die \Index{Endziffer}. Die Zahl $k+1$ heißt \Index{Stellenzahl} bzw. \textbf{Länge} der $g$-adischen Darstellung. Die Zahl $g$ heißt auch \textbf{Basis} der Darstellung. Eine \bet{$m$-Bit-Zahl} ist eine Zahl $n \in \NN$ der Länge $\leq m$ zur Basis $2$. \index{g-adische Darstellung@$g$-adische Darstellung} \index{n-Bit-Zahl@$n$-Bit-Zahl}
+\end{defn}
+
+\begin{bem}
+	Wir können jede natürliche (und dann auch jede ganze) Zahl $n$ also eindeutig schreiben als Linearkombination endlich vieler Potenzen von $g$.
+\end{bem}
+
+\begin{bsp}
+ \begin{equation}
+ \begin{aligned}
+	 163_{(10)} &= 1 \cdot 10^2 + 6 \cdot 10^1 + 3 \cdot 10^0 \\
+	 43_{(10)}	&= 1 \cdot 2^5 + 0 \cdot 2^4 + 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 101011_{(2)} \\
+	 &= 2 \cdot 16^1 + 11 \cdot 16^0 = 2B_{(16)}
+ \end{aligned}
+ \end{equation}
+\end{bsp}
+
+Die bekannten schriftlichen Additions- und Multiplikationsrechnungen, die unter Beachtung von Überträgen ziffernweise geschehen, können in jeder Basis ausgeführt werden. Es gibt weiter für die Multiplikation großer Zahlen (d.h. mit großer Stellenzahl bis etwa $2 \cdot 10^{10}$) schnelle Algorithmen, die wir hier aber nicht näher behandeln möchten; etwa mit der schnellen Fouriertransformation (FFT) nach Schönhage/Strassen\footnote{siehe \url{http://de.wikipedia.org/wiki/Sch\%C3\%B6nhage-Strassen-Algorithmus}}.
+
+Der Beweis von Satz \ref{satz_g-adisch} zeigt, dass die Länge von $n$ gleich $\floor*{\frac{\log(n)}{\log(g)}}+1$ ist, so viele Ziffern müssen zum Hinschreiben bzw. Eintippen von $n$ angegeben werden. Bei verschiedenen Basen ändert sich hier nur der Faktor $\frac{1}{\log(g)}$. Deswegen sagt man, die Länge sei $\oh(\log(n))$ und meint damit die Aussage: Es existiert eine Konstante $C > 0$, sodass $k + 1 \leq C \cdot \log(n)$. (Landau-Symbolik\footnote{siehe \url{http://de.wikipedia.org/wiki/Landau-Symbole}}, "Groß-O-Notation")
+
+\newpage

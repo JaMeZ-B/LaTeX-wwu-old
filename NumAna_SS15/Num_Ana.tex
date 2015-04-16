@@ -36,6 +36,8 @@
 
 \thispagestyle{empty}
 
+\pagenumbering{arabic}
+
 \setcounter{section}{-1}
 
 \section{Einleitung}
@@ -364,7 +366,199 @@ Dann existiert zu jedem $x\in (a,b)$ ein $\xi_x\in (a,b)$ mit
 f(x)-p(x)= \frac{1}{(n+1)!}f^{(n+1)}(\xi_x)\cdot \underbracket{\prod_{k=0}^{n}(x-x_k) }_{\text{Knotenpolynom}}\tag{$\ast$}
 \]
 
+\bet{Beweis:}\\
+Setze
+\[
+\omega(t):= \prod_{k=0}^{n} (t-x_k)
+\]
+und betrachte die Funktion
+\[
+\phi(t):= f(t)-p(t)-\lambda\omega(t);~ \lambda:= \frac{f(x)-p(x)}{\omega(t)}
+\]
+daraus folgt, dass $t=x$ eine Nullstelle von $\phi(t)$ und $\phi(x_i)=0*\forall i=0\dt{,}n~x_i$ Stützstelle von $p$ ist.
+Dann hat $\phi$ $n+2$ Nullstellen.
+Dann folgt mit dem Satz von Rolle: $\phi'$ hat mindestens $n+1$ Nullstelle, also hat $\phi^{(n+1)}$ min. eine Nullstelle.
+Diese Nullstelle nennen wir $\xi_x$.\\
+Dann gilt:
+\[
+\phi^{(n+1)}(\xi_x)=0
+\]
+und 
+\[
+f^{(n+1)}(\xi_x)-(n+1)! \frac{f(x)-p(x)}{\omega(x)}=0
+\]
+\[
+\Rightarrow f(x)-p(x)=f^{(n+1)}(\xi_x)\frac{1}{(n+1)!}\omega(x)
+\]
+\hfill $\square$
 
+\subsection{Folgerung 5}
+\label{sub:folgerung_5}
+Gelten die Voraussetzungen aus Satz 4.
+So gilt:
+\[
+\norm{f-p}_\infty\le \frac{1}{(n+1)!}\norm{f^{(n+1)}}_\infty\cdot\norm{\omega}_\infty
+\]
+mit $\omega(x)=\prod_{k=0}^{n}(x-x_k)$.\\
+
+\bet{Bemerkung:}\\
+Durch optimale Wahl der Stützstellen kann $\norm{\omega}_\infty$ minimiert werden.
+
+\subsection{Beispiel 6 (Range)}
+\label{sub:beispeil_6}
+Betrachte $f(x)=\frac{1}{1+x^2},~x\in (-5,5)$ und 
+\[
+x_k^{(n)}:= -5+k\cdot h_n,~k=0\dt{,}n \text{ mit } h_n=\frac{10}{n}
+\]
+Dann kann man zeigen, dass Konvergenz von $p^{(n)}$ nur auf einem Teilintervall $x\in (-\tilde{x},\tilde{x}),~x\approx 3.6..$ vorliegt und Divergenz außerhalb.\\
+\uline{Allgemein gilt:}\\
+\begin{enumerate}[1.]
+	\item Ist $f\in C^0(a,b)$ so existiert eine Folge von Stützstellen, so dass $p^{(n)}$ gegen $f$ gleichmäßig konvergiert.
+	\item Zu jeder Folge von Stützstellen gibt es eine Funktion $f$, so dass $p^{(n)} \nrightarrow f$ gleichmäßig.
+\end{enumerate}
+\uline{Frage:}
+Wie wählt man Stützstellen optimal?\\
+Betrachte dazu Interpolation auf dem Referenzintervall $[-1,1]$.\\
+\uline{Idee:}
+$\omega(x)=\prod_{k=0}^{n}(x-x_k)= x^{n+1}+a_nx^n+... \Rightarrow$ $\omega$ ist ein \bet{normiertes Polynom} und $x_0\dt{,}x_n$ sind die Nullstellen dieses Polynoms.\\
+\uline{Minimierungsaufgabe:}
+Suchen $T_{n+1}:= \argmin\limits_{p\in N\Pw_{n+1}}\norm{p}_\infty$.
+
+\subsection{Definition 7 (Tschebyschev-Polynome)}
+\label{sub:def_7}
+Auf $[-1,1]$ sind die \Index{Tschebyschev-Polynome} rekursiv definiert durch
+\[
+T_0(x)=1,~T_1(x)=x,~ T_{n+1}(x)2x T_n(x)-T_{n-1}(x) \tag{$\ast\ast$}
+\]
+Die normierten Tschebyschev-Polynome sind dann:
+\[
+\hat{T}_n(x)= 2^{1-n}T_n(x)
+\]
+
+\subsection{Satz 8}
+\label{sub:satz_8}
+Für $x\in [-1,1]$ gilt
+\[
+T_n(x)= \cos(n \cos^{-1}(x)) \tag{$\ast$}
+\]
+Weiterhin gilt
+\begin{enumerate}[1.]
+	\item $\abs{T_n(x)}\le 1$
+	\item $T_n(\cos\enbrace{\frac{j\pi}{n}})=(-1)^j~ (0\le j\le n)$
+	\item $T_n(\cos\enbrace{\pi\frac{2j-1}{n}})=0~ (0\le j\le n)$
+	\item $T_n\in \Pw_n(-1,1)$
+	\item $\hat{T}_n\in N\Pw_n(-1,1)$, das heißt Koeffizient $1$ vor $x^n$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+Nach Additionstheoremen gilt:
+\[
+\cos(A+B) =\cos(A)\cos(B)-\sin(A)\sin(B)
+\]
+Dann folgt
+\[
+\cos((n+1)\Theta)=\cos(n\Theta)\cos(\Theta)-\sin(n\Theta)\sin(\Theta)
+\]
+\[
+\cos((n-1)\Theta)=\cos(n\Theta)\cos(\Theta)+\sin(n\Theta)\sin(\Theta)
+\]
+Also 
+\[
+\cos((n+1)\Theta)+\cos((n-1)\Theta) = 2\cdot \cos(n\Theta)\cos(\Theta)
+\]
+Wähle $\Theta=\cos^{-1}(x)$:
+\[
+\Rightarrow \cos((n+1)\cos^{-1}(x))-2\cos(n\cos^{-1}(x))\cdot x - \cos((n-1)\cos^{-1}(x))
+\]
+Setze $F_n:= \cos(n\cos^{-1}(x))$, dann erfüllt $F_n$ die Iterationsvorschrift $(\ast\ast)$.\\
+Noch zu zeigen: $F_0(x)=1,~F_1(x)=x$.\\
+Es ist 
+\[
+F_0(x)=\cos (0\cos^{-1}(x))=\cos(0)=1
+\]
+und
+\[
+F_1(x) = \cos(1\cos^{-1}(x))=x
+\]
+Die Eigenschaften 1.-4. folgen aus den Eigenschaften der $\cos$-Funktion.
+5. folgt aus der Iterationsvorschrift induktiv.
+\hfill $\square$
+
+\subsection{Lemma 9}
+\label{sub:lemma_9}
+Sei $p\in \Pw_n$ ein normiertes Polynom auf $[-1,1]$.
+Dann gilt $\norm{p}_\infty=\max\limits_{-1\le x\le 1} \abs{p(x)}\ge 2^{1-n}$ und $\norm{\hat{T}_n}_\infty=2^{1-n}$.\\
+
+\bet{Beweis:}\\
+\uline{Annahme:} 
+Es gibt ein normiertes Polynom $p\in\Pw_n$ mit 
+\[
+\abs{p(x)}< 2^{1-n}~\forall x\in[-1,1]
+\]
+Sei $x_i=\cos\enbrace{\pi\frac{i}{n}}$. 
+Nach Satz 8 (ii) folgt dann
+\[
+(-1)^ip(x_i)\le \abs{p(x_i)}<2^{1-n}=(-1)^i\hat{T}_n(x_i)
+\]
+Daraus folgt
+\[
+(-1)^i\underbracket{(\hat{T}_n(x_i)-p(x_i)}_{\in \Pw_{n-1}}>0~0\le i\le n.
+\]
+Daher wechselt $\hat{T}-p$ $(n-1)$-mal das Vorzeichen aus $[-1,1]$.
+Da beide Polynome normiert sind ist $\hat{T}-p\in \Pw_{n-1}$ und es folgt ein Widerspruch zur Annahme.
+Daraus folgt die Behauptung.
+\hfill $\square$
+
+\subsection{Folgerung 10 (Optimale Wahl der Stützstellen)}
+\label{sub:folgerung_10}
+Mit den Stützstellen $x_k=\cos\enbrace{\pi\frac{2k-1}{2(n+1)}},~k=1\dt{,}n+1$ als die Nullstellen von $T_{n+1}$ gilt, dass das Knotenpolynom $\hat{T}_{n+1}$ ist und es gilt 
+\[
+\norm{\hat{T}_{n+1}}_\infty=\norm{\omega}_\infty=2^{1-(n+1)}
+\]
+
+\section{Dividierte Differenzen}
+\label{sec:dividierte_differenzen}
+Newton-Form des Interpolationsproblems:
+\begin{equation*}
+\begin{aligned}
+	p(x) &= \sum_{k=0}^{n}a_kN_k(x)\\
+	N_k(x) &= \prod_{j=0}^{k-1}(x-x_j),~k=0\dt{,}n
+\end{aligned}
+\end{equation*}
+\uline{Gesucht:}
+Algorithmus zur Berechnung der $a_0\dt{,}a_n$.\\
+\uline{Bemerkung:}
+Setze $p_m(x)=\sum_{k=0}^{m}a_kN_k(x)$ für $m\le n$.
+Dann gilt $p_m(x_j)=f_j~(0\le j\le n)$ und $p_m\in \Pw_m$.\\
+Das heißt $p_m$ ist Interpolationspolynom zu den Daten $(x,f_0)\dt{,}(x_m,f_m)$, dann hängt insbesondere $a_k$ nur von $(x_0,f_0)\dt{,}(x_k,f_k)$ ab.\\
+Schreibweise:
+Für $a_k$ schreibe wir $f[x_0\dt{,}x_k]$.
+
+\subsection{Definition 11 (Dividierte Differenzen)}
+\label{sub:def_11}
+Seien $i_0\dt{,}i_k\in \{0\dt{,}n\}$ paarweise verschieden und sie $P_{i_0\dt{,}i_k}$ das Interpolationspolynom zu $(x_{i_0},f_{i_0})\dt{,}(x_{i_k},f_{i_k})$.
+Mit $f[x_{i_0}\dt{,}x_{i_k}]$ bezeichnen wir den Koeffizienten vor $x^k$ im Polynom $P_{i_0\dt{,}i_k}$.\\
+$f[x_{i_0}\dt{,}x_{i_k}]$ heißen \Index{dividierte Differenzen} der Ordnung $k$.
+
+\subsection{Satz 12}
+\label{sub:satz_12}
+\begin{enumerate}[(i)]
+	\item Die Polynome $P_{i_0\dt{,}i_k}$ genügen der Rekursionsformel
+	\[
+	P_{i_0\dt{,}i_k} = \frac{(x-x_{i_0})P_{i_1\dt{,}i_k}-(x-x_{i_k})P_{i_0\dt{,}i_{k-1}}}{x_{i_k}-x_{i_0}} \tag{1}
+	\]
+	\item Die dividierte Differenzen genügen der Rekursionsformel
+	\[
+	f[x_{i_0}\dt{,}x_{i_k}] = \frac{f[x_{i_1}\dt{,}x_{i_k}]-f[x_{i_0}\dt{,}x_{i_{k-1}}]}{x_{i_k}-x_{i_0}};~ f[x_{i_k}]=f_{i_k} \tag{2}
+	\]
+	\item Die dividierten Differenzen sind unabhängig von der Reihenfolge ihrer Argumente, das heißt ist $x_{j_0}\dt{,}x_{j_k}$ eine Permutation von $x_{i_0}\dt{,}x_{i_k}$, so gilt
+	\[
+	f[x_{j_0}\dt{,}x_{j_k}]= f[x_{i_0}\dt{,}x_{i_k}].
+	\]
+\end{enumerate}
+
+\uline{Bemerkung:}
+Die div. Differenzen kann man in einem Tableau schreiben:
 
 
 

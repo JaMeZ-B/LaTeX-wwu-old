@@ -181,22 +181,24 @@ Sei $X$ ein topologischer Raum. Eine stetige surjektive Abbildung $p \colon E \t
 			& U 
 		\end{tikzcd}
 	\]
-	und die Einschränkung $\varphi_U\big|_{E_x} \colon E_x \to K^n$ für alle $x \in U$ ein Isomorphismus von $K$-Vektorräumen ist. Diese Eigenschaft wird oft als lokale 
-	Trivialität bezeichnet.
+	und die Einschränkung $\varphi_U\big|_{E_x} \colon E_x \to K^n$ für alle $x \in U$ ein Isomorphismus von $K$-Vektorräumen ist. Diese Eigenschaft wird oft als 
+	\Index{lokale Trivialität} bezeichnet.
 \end{enumerate}
 \minisec{Beispiel}
 \begin{itemize}
-	\item Sei $X$ ein beliebiger topologischer Raum. Dann ist $X \times K^n \xrightarrow{\mathrm{pr}_X} X$ das triviale $K$-Vektorbündel über $X$.
-	\item Betrachte $S^n \subset \mathds{R}^{n+1}$. Sei $\Tmap S^n = \set[(x,v) \in S^n \times \mathds{R}^{n+1}]{\skal*{x}{v}=0}$. Definiere $p \colon \Tmap S^n \to S^n$, 
-	$(x,v) \mapsto x$. Damit erhalten wir ein $\mathds{R}$-Vektorbündel über $S^n$. 
+	\item Sei $X$ ein beliebiger topologischer Raum. Dann ist $X \times K^n \xrightarrow{\mathrm{pr}_X} X$ das \Index{triviale Vektorbündel} über $X$.
+	\item Betrachte $S^n \subset \mathds{R}^{n+1}$. Sei $\Tmap S^n = \set[(x,v) \in S^n \times \mathds{R}^{n+1}]{\skal*{x}{v}=0}$. Definiere $p \colon \Tmap S^n \to S^n$ 
+	durch $(x,v) \mapsto x$. Damit erhalten wir ein $\mathds{R}$-Vektorbündel über $S^n$ (Tangentialbündel). 
 	
-	Übung: Zeige lokale Trivialität.
+	\emph{Übung: Zeige lokale Trivialität. Siehe Anhang \ref{sub:lokal_trivial_Sn}}
 \end{itemize}
+\minisec{Bemerkung}
+Die Abbildung $x \mapsto \dim_K (E_x)$ ist stetig, also lokal konstant, das heißt über einem zusammenhängenden Raum hat ein Vektorbündel konstante Faserdimension. 
 % subsection 21 (end)
 
 \subsection[Definition: Vektorraumbündelmorphismus]{Definition} % (fold)
 \label{sub:22}
-Seien $p \colon E \to X$ und $p' \colon E' \to X'$ $K$-Vektorbündel. Ein \bet{Morphismus von Vektorbündeln}\index{Morphismus!von Vektorbündeln} oder 
+Seien $p \colon E \to X$ und $p' \colon E' \to X'$ zwei $K$-Vektorbündel. Ein \bet{Morphismus von Vektorbündeln}\index{Morphismus!von Vektorbündeln} oder 
 \Index{Vektorraumbündelmorphismus} von $E$ nach $E'$ ist ein Paar $(f, \overline{f})$ von stetigen Abbildungen $\overline{f} \colon E \to E'$ und $f \colon X \to X'$, sodass 
 das folgende Diagramm kommutiert
 \[
@@ -208,11 +210,147 @@ das folgende Diagramm kommutiert
 und sodass die Einschränkung $\overline{f}\big|_{E_x} \colon E_x \to E'_{f(x)}$ für jedes $x \in X$ ein $K$-Vektorraumhomomorphismus ist. Wir bezeichnen die Kategorie der 
 endlich dimensionalen $K$-Vektorraumbündel über einem topologischen Raum $X$ zusammen mit den Morphismen $(\id_X, \overline{f})$ mit $\VEKT_K(X)$.
 % subsection 22 (end)
+
+\section*{Operationen mit Vektorbündeln}
+\subsection[Definition: Pullback]{Definition} % (fold)
+\label{sub:23}
+Seien $X$ und $Y$ topologische Räume. Sei $f \colon Y \to X$ eine stetige Abbildung und sei $p \colon E \to X$ ein Vektorbündel. Dann heißt
+\[
+	f^* E := \set[(y,v) \in Y \times E]{f(y)=p(v)\rule{0cm}{0.9em}} 
+\]
+zusammen mit der Abbildung $q \colon f^* E \to Y$, $(y,v) \mapsto y$ der \Index{Pullback} von $p \colon E \to X$ entlang von $f$. Mit $\overline{f}(y,v)=v$ kommutiert das 
+folgende Diagramm
+\[
+	\begin{tikzcd}
+		f^* E \rar["\overline{f}"] \dar["q"'] & E \dar["p"] \\
+		Y \rar["f"] & X
+	\end{tikzcd}
+\]
+% subsection 23 (end)
+
+\subsection[Lemma: Universelle Eigenschaft des Pullbacks]{Lemma} % (fold)
+\label{sub:24}
+\begin{enumerate}[a)]
+	\item $q \colon f^* E \to Y$ ist ein Vektorbündel und $(\overline{f},f)$ ist ein Morphismus von Vektorbündeln.
+	\item $q \colon f^* E \to Y$ ist durch die folgende universelle Eigenschaft eindeutig (bis auf Isomorphie) charakterisiert:
+	
+	Sei $r \colon F \to Z$ ein Vektorbündel, $(\overline{g},g)$ ein Morphismus zwischen $r \colon F \to Z$ und $p \colon E \to X$. Sei weiter $g' \colon Z \to Y$ eine 
+	stetige Abbildung mit $f \circ g' = g$. Dann existiert genau ein $G \colon F \to f^* E$, so dass $(G,g')$ ein Morphismus von Vektorbündeln ist und weiter 
+	$(\overline{f},f) \circ (G,g')= (\overline{g},g)$ gilt.
+	\[
+		\begin{tikzcd}[sep=large]
+			F \drar["\exists! G", dashed] \dar["r"'] \arrow[bend left,"\overline{g}"]{drr} & & \\
+			Z \drar["g'"'] \arrow["g" near end]{drr} & f^* E \rar["\overline{f}"] \dar["q" pos=0.3,crossing over] & E \dar["p"]\\
+			& Y \rar["f"'] & X
+		\end{tikzcd}
+	\]
+\end{enumerate}
+\minisec{Beweis}
+Sei $y\in Y$. Sei $U \subset X$ eine Umgebung von $f(y)$ in $X$, sodass eine lokale Trivialisierung $\varphi_U \colon p ^{-1}(U) \to U \times K^n$ existiert. $V := f^{-1}(U)$ ist
+eine Umgebung von $y$ und 
+\[
+	q ^{-1}(V) = \set[(y,v) \in V \times p ^{-1}(U)]{f(y)=p(v)} 
+\]
+Wir definieren nun 
+\begin{align*}
+	\psi_V \colon \,\,q ^{-1}(V) &\longrightarrow V \times K^n &  (y,v)&\longmapsto \enbrace[\big]{y, \pr_{K^n} \circ \varphi_U(v)} \\
+	K_V \colon V \times K^n &\longrightarrow q ^{-1}(V) &  (y,w) &\longmapsto \enbrace*{y, \varphi_U^{-1} \enbrace*{f(y),w} } 
+\end{align*}
+Dann gilt $\psi_V \circ K_V=\id_{V \times K^n}$ und $K_V \circ \psi_V = \id_{q^{-1}(V)}$. Außerdem kommutiert das Diagramm aus \ref{sub:21}. Also ist $\psi_V$ eine lokale 
+Trivialisierung von $f^*E \to Y$ über $V$.
+Der Beweis von b) ist eine (einfache) Übungsaufgabe\todo{eventuell hinzufügen}.\bewende
+
+\bigskip
+
+\noindent Sei $\mathcal{C}$ eine Kategorie. Hieraus lässt sich eine neue Kategorie $\mathcal{C}^\op$ definieren:
+\[
+	\obj(\mathcal{C}^\op) := \obj(\mathcal{C}) \quad , \quad \Mor_{\mathcal{C}^\op}(c,d) := \Mor_{\mathcal{C}}(d,c)
+\]
+mit der neuen Komposition
+\[
+	\begin{tikzcd}[row sep=0.2em]
+		\bullet \mbox{ :}\hspace{-4em} & \Mor_{\mathcal{C}^\op}(c',c'') \times \Mor_{\mathcal{C}^\op}(c,c') \rar & \Mor_{\mathcal{C}^\op}(c,c') \\
+		& (f,g) \rar[mapsto] & f \bullet g = g \circ f
+	\end{tikzcd}
+\]
+(Kovariante) Funktoren $\mathcal{C}^\op \to \mathcal{D}$ entsprechen dann kontravarianten Funktoren $\mathcal{C}\to \mathcal{D}$. Sei $\VEKT_K = \VEKT_K(\pt)$ die Kategorie der 
+endlichdimensionalen $K$-Vektorräume und linearen Abbildungen. Ein Funktor
+\begin{equation}
+	F \colon \Underbrace{\VEKT_K \times \ldots \times \VEKT_K}{r} \times \Underbrace{\VEKT_K^\op \times \ldots \times \VEKT_K^\op}{s} \longrightarrow \VEKT_K \label{eq:24}\tag{\#}
+\end{equation}
+heißt \bet{stetig}\index{stetiger Funktor}, falls die induzierte Abbildung
+\begin{gather*}
+	\Mor_{\VEKT_K}(V_1,V'_1) \times \ldots \times \Mor_{\VEKT_K}(V_r,V'_r) \times \Mor_{\VEKT_K^\op}(V_{r+1},V'_{r+1}) \times \ldots \times \Mor_{\VEKT_K^\op}(V_{r+s},V'_{r+s}) \\
+	\longrightarrow \enspace\Mor_{\VEKT_K} \enbrace*{F(V_1, \ldots,V_r,V_{r+1}, \ldots , V_{r+s}), F (V'_1, \ldots , V'_r, V'_{r+1}, \ldots , V'_{r+s})} 
+\end{gather*}
+stetig ist.
+% subsection 24 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:25}
+Sei $F$ ein stetiger Funktor wie in \eqref{eq:24} und sei $X$ ein topologischer Raum. Dann induziert $F$ einen Funktor
+\[
+	F_X \colon \VEKT_K(X) \times \ldots \times \VEKT_K(X) \times \VEKT_K(X)^\op \times \ldots \times \VEKT_K(X)^\op \longrightarrow \VEKT_K(X)
+\]
+der verträglich ist mit Pullbacks und $F_\pt=F$ erfüllt.
+\minisec{Beweis}
+Sei $m=r+s$. Definiere 
+\(
+	F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} = \coprod_{x \in X} F \enbrace*{E_x^\ssbrace{1}, \ldots , E_x^\ssbrace{m}}   
+\)
+als Menge. Sei $U_i$ eine offene Überdeckung von $X$, so dass lokalen Trivialisierungen 
+\[
+	\varphi_i^\ssbrace{k} \colon (p^\ssbrace{k})^{-1}(U_i) \longrightarrow U_i \times K^{e_k}
+\]
+existieren. $F$ induziert Bijektionen
+\[
+	F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m}} \colon F_{U_i} \enbrace*{(p^\ssbrace{1})^{-1}(U_i), \ldots , (p^\ssbrace{m})^{-1}(U_i)}
+	\longrightarrow U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}   
+\]
+Jetzt gibt es eine eindeutige Topologie auf $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$, so dass die Abbildungen 
+$\psi_i = F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m}}$ Homöomorphismen werden, wobei $U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}$ die 
+Produkttopologie trägt: Eine Menge $V \subset F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$ ist offen, falls sie die Vereinigung von Mengen der Form 
+$\psi_i^{-1}(V_i)$ mit $V_i \subset U_i \times F \enbrace*{K^{e_1}, \ldots , K^{e_m}}$ offen ist.
+
+Damit diese Definition konsistent ist, müssen wir folgendes prüfen: Sei $V \subset (U_i \cap U_j) \times F(K^{e_1}, \ldots , K^{e_m})$ offen. Wir haben zu zeigen, dass dann 
+auch $\psi_j \circ \psi_i^{-1}(V)$ offen ist. Aber es gilt $\psi_j \circ \psi_i ^{-1}(x,v)= \enbrace*{x, \psi_{ij}(x)(v)}$ für eine Abbildung
+\[
+	\psi_{ij} \colon U_i  \cap U_j \longrightarrow \End_K \enbrace*{F(K^{e_1}, \ldots , K^{e_m})} 
+\]
+Es gilt $\psi_{ij} = F \enbrace*{\psi_{ij}^\ssbrace{1}, \ldots , \psi_{ij}^\ssbrace{m}}$ für \emph{stetige} Abbildungen 
+$\psi_{ij}^\ssbrace{k} \colon U_i \cap U_j \to \End_K(K^{e_k})$. Da $F$ stetig ist, folgt, dass alle $\psi_{ij}$ stetig sind, folglich auch $\psi_j \circ \psi_i ^{-1}$. Somit
+ist $\psi_j \circ \psi_i ^{-1}(V)$ offen. Es ist damit klar, dass $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \to X$ ein Vektorbündel ist, denn wir haben lokale Trivialisierungen konstruiert. Ferner gilt per Definition für eine stetige Abbildung $f \colon Y \to X$
+\[
+	f^* F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \cong F_Y \enbrace*{f^*E^\ssbrace{1}, \ldots , f^* E^\ssbrace{m}}  \bewende
+\]
+\minisec{Beispiele}
+\begin{itemize}
+	\item $\oplus \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ direkte Summe von Vektorbündeln
+	\item $\otimes \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ Tensorprodukt von Vektorbündeln
+	\item Dualisieren von Vektorräumen ${ }^* \colon \VEKT_K^\op \to \VEKT_K$ ist stetig $\Rightarrow $ duales Vektorbündel
+	\item $\Hom \colon \VEKT_K \times \VEKT_K^\op \to \VEKT_K$, $(V,W) \mapsto \Hom_K(W,V)$ ist stetig $\Rightarrow$ Homomorphismenbündel $\Hom(E,F)$.
+\end{itemize}
+Seien $p \colon E \to X$ und $q \colon F \to X$ zwei $K$-Vektorbündel. Dann ist $E \times F \xrightarrow{(p,q)} X \times X$ auch ein Vektorbündel, wenn $E_X \times F_X$
+die Vektorraumstruktur der äußeren direkten Summe trägt.
+\minisec{Übungsaufgabe}
+Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta^*(E \times F) \cong E \oplus F$ als Vektorbündel über $X$.
+% subsection 25 (end)
 % section 2 (end)
+
+
+\cleardoubleoddemptypage
+\appendix
+\section{Anhang}
+
+\subsection{Lokale Trivialität des Tangentialbündels auf $S^n$} % (fold)
+\label{sub:lokal_trivial_Sn}
+\todo[inline]{Übung einfügen}
+% subsection lokal_trivial_Sn (end)
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
+
 \printindex
 \listoffigures
 \todototoc
