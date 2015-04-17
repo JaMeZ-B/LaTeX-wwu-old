@@ -3,7 +3,7 @@
 
 \subsection{Grundlagen aus der elementaren Zahlentheorie und Gruppentheorie}
 \subsubsection{Zahlen, Darstellung von Zahlen}
-	Die Zahlbereiche $\NN \subseteq \ZZ \subseteq \QQ \subseteq \RR \subseteq \CC$ sind aus den Grundvorlesungen bekannt. Bezüglich den Verknüpfungen $+$ und $\cdot$ sind verschiedene Axiome erfüllt, die diese Zahlbereiche zu interessante algebraische Strukturen machen:	
+	Die Zahlbereiche $\NN \subseteq \ZZ \subseteq \QQ \subseteq \RR \subseteq \CC$ sind aus den \marginnote{[2]} Grundvorlesungen bekannt. Bezüglich den Verknüpfungen $+$ und $\cdot$ sind verschiedene Axiome erfüllt, die diese Zahlbereiche zu interessante algebraische Strukturen machen:	
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
 	\hline  \textbf{Halbgruppe}		&	\textbf{Gruppe}								&	\textbf{Ring}			&	\textbf{Körper} \\
@@ -88,4 +88,102 @@ Die bekannten schriftlichen Additions- und Multiplikationsrechnungen, die unter 
 
 Der Beweis von Satz \ref{satz_g-adisch} zeigt, dass die Länge von $n$ gleich $\floor*{\frac{\log(n)}{\log(g)}}+1$ ist, so viele Ziffern müssen zum Hinschreiben bzw. Eintippen von $n$ angegeben werden. Bei verschiedenen Basen ändert sich hier nur der Faktor $\frac{1}{\log(g)}$. Deswegen sagt man, die Länge sei $\oh(\log(n))$ und meint damit die Aussage: Es existiert eine Konstante $C > 0$, sodass $k + 1 \leq C \cdot \log(n)$. (Landau-Symbolik\footnote{siehe \url{http://de.wikipedia.org/wiki/Landau-Symbole}}, "Groß-O-Notation")
 
+Entscheidend für das Studium von $\ZZ$ ist der Grundbegriff der Teilbarkeit.
+\begin{defn}[Teilbarkeit]
+	Für $a,b \in \ZZ$ heißt $a$ \Index{Teiler} von $b$ bzw. $a$ \bet{teilt} $b$, in Zeichen $a \mid b$, falls ein $c \in \ZZ$ existiert mit $ac = b$. Ist $a$ kein Teiler von $b$, schreibt man $a \nmid b$.
+\end{defn}
+
+\begin{bsp}
+	$3 \mid 12$, $4 \mid 0$, $0 \mid 0$, $7 \nmid 12$, $0 \nmid 4$. Es kann $0$ nur die $0$ teilen.
+\end{bsp}
+
+\begin{defn}[Primzahl]
+	Eine natürliche Zahl $p \in \NN$ heißt \Index{Primzahl} bzw. \bet{prim}, wenn sie genau zwei Teiler in $\NN$ besitzt (nämlich $1$ und $p$, $1 \neq p$). Eine natürliche Zahl $n > 1$ heißt \Index{zusammengesetzt}, falls $n$ keine Primzahl ist. 
+\end{defn}
+
+Primzahlen sind die "Bausteine" der natürlichen Zahlen:
+\begin{satz}[Satz von der eindeutigen Primfaktorzerlegung, Hauptsatz der Arithmetik]
+	Jede natürliche Zahl $n > 1$ besitzt genau eine Darstellung
+	\[ n = p_1^{e_1} \cdot p_r^{e_r} = \prod\limits_{i=1}^{r} p_i^{e_i} \]
+	mit $r \in \NN$, Primzahlen $p_1, \dots, p_r$ mit $e_1,\dots,e_r \in \NN$ und $p_1 < p_2 < \dots < p_r$. Diese heißt die \Index{Primfaktorzerlegung} (PFZ) von $n$.
+\end{satz}
+
+\begin{bem}
+	Lässt man die letzte Bedingung weg, ist die Darstellung eindeutig bis auf die Reihenfolge der Primpotenzen. Die Zahl $e_i$ ist dabei die Vielfachheit (auch \Index{Exponent} genannt), mit der $p_i$ als Faktor in $n$ auftritt, d.h. $p_i^{e_i} \mid n$, aber $p^{e_i+1} \nmid n$. Dafür gibt es das Symbol $p^{e_i} \parallel n$, und die Primfaktorzerlegung lässt sich kompakt auch schreiben als $n = \prod\limits_{p} p^{e(p)}$, wobei $e(p) := e$ mit $p^e \parallel n$, falls $p \mid n$, und $e(p) := 0$, falls $p \nmid n$. Weiter ist $\omega(n) := r$ die Anzahl der verschiedenen Primteiler von $n$.
+\end{bem}
+
+\minisec{Beweis}
+	\begin{description}
+		\item[Existenz:] Ist $n$ prim, ist nichts zu zeigen, und ist $n$ nicht prim, gibt es $k, l \in \NN \setminus \{1\}$ mit $n = kl$. Da $\min\{k,l\} > 1$, folgt $\max \{k,l\} < n$. Nach Induktionsvoraussetzung sind also $k,l$ Produkte von Potenzen von Primzahlen, also auch $n = kl$.
+		\item[Eindeutigkeit:] Sei $n > 1$ minimal mit zwei verschiedenen Zerlegungen $n = \prod\limits_{i=1}^{r} p_i^{e_i} = \prod\limits_{i=1}^{s} q_i^{f_i}$, die $p_i, q_i$ prim und angeordnet. Da $p_1 \neq q_i$ für alle $i$ gilt (sonst hätte $\frac{n}{p_1} < n$ zwei verschiedene Zerlegungen), ist $\ggT(p_1,q_i) = 1$, und mit den Zerlegungen folgt $p_1 \mid q_1^{f_1 - 1}$ aus Lemma \ref{lemma_21}. Die Fortsetzung des Verfahrens zeigt schließlich $p_1 \mid q_s$, was wegen $\ggT(p_1,q_s) = 1$ ein Widerspruch ist. \qed
+		(Beachte: Zum Beweis von Lemma \ref{lemma_21} wurde nie die Eindeutigkeit der Primfaktorzerlegung benutzt.)
+	\end{description}
+
+Die Eindeutigkeit der Primfaktorzerlegung zeigt, dass auch diese eine Möglichkeit zur Darstellung natürlicher Zahlen ist. Diese ist jedoch unpraktisch, weil das folgende Problem im Allgemeinen schwer zu lösen ist, worauf einige kryptographische Verfahren (insb. RSA) beruhen.
+
+\begin{defn}[Faktorisierungsproblem]
+	Zu einer natürlichen zusammengesetzten Zahl $n > 1$ bestimme man einen nichttrivialen Teiler $t$ mit $1 < t < n$.
+\end{defn}
+
+Klar: Ist das Faktorisierungsproblem rechnerisch leicht zu machen, kann auch (durch Iteration) die Primfaktorzerlegung von $n$ leicht bestimmt werden. In der Praxis, wenn $n$ nicht gerade schon von einer speziellen Form ist, können Teiler großer Zahlen $n$ jedoch nur sehr schwer aufgefunden werden.
+\begin{itemize}
+	\item Das derzeit schnellste algorithmische Verfahren zur Faktorisierung (auf einem klassischen Computer) ist das \Index{Zahlkörpersieb} mit einer Laufzeit von nur $\oh(\exp(C (\log n)^{1/3} (\log \log n)^{2/3}))$, d.h. es handelt sich um so genanntes \bet{subexponential schnelles Verfahren}, weil $(\log n)^B \ll \exp(C(\log n)^{1/3} (\log \log n)^{2/3}) \ll \exp(D \log n) = n^D$.
+	\item Peter Shor\footnote{\url{http://de.wikipedia.org/wiki/Peter_Shor}} entdeckte um 1994, dass das Faktorisierungsproblem auf einem Quantencomputer mit einer Laufzeit von (meist) nur $\oh((\log n)^3)$ sehr (d.h. polynomiell) schnell gelöst werden kann, was die Sicherheit gängiger Kryptoverfahren wie RSA untergräbt. Allerdings ist die Konstruktion solcher Quantencomputer (physikalisch) extrem schwierig, diverse Forschergruppen arbeiten daran. Am 2.1.2014 meldete die Washington Post unter Berufung auf Dokumente von Edward Snowden\footnote{\url{http://de.wikipedia.org/wiki/Edward_Snowden}}, dass die NSA an der Entwicklung eines kryptographisch mützlichen Quantencomputers arbeitet\footnote{\href{http://www.washingtonpost.com/world/national-security/nsa-seeks-to-build-quantum-computer-that-could-crack-most-types-of-encryption/2014/01/02/8fff297e-7195-11e3-8def-a33011492df2_story.html}{Link zum Artikel}}.
+	Zum Begriff Quantencomputer siehe \href{http://de.wikipedia.org/wiki/Quantencomputer}{Wikipedia}.
+\end{itemize} 
+
+Im Folgenden besprechen wir noch den ggT zweier natürlicher Zahlen, der sich in vielerlei Hinsicht als wichtig und nützlich erweist:
+\begin{defn}
+	Seien $a,b \in \ZZ$. Der \bet{größte gemeinsame Teiler} (ggT) von $a$ und $b$ in $\NN$ ist die Zahl $d := \max\{t \in \NN : t \mid a \wedge t \mid b\}$. Notation: $\ggT(a,b) := d$. Ist $\ggT(a,b) = 1$, heißen $a$ und $b$ \Index{teilerfremd}. \index{größter gemeinsamer Teiler}
+\end{defn}
+Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und $b = \prod_p p^{f(p)}$ vorliegen, kann ihr ggT leicht bestimmt werden als $\ggT(a,b) = \prod_p p^{\min(e(p),f(p))}$, z.B. $\ggT(2^3 \cdot 3^6 \cdot 5^4, 2^4 \cdot 3^5) = 2^3 \cdot 3^5$. Wegen des Faktorisierungsproblems kann dies aber so nicht praktisch umgesetzt werden. Stattdessen benutzt man den (polynomiell) schnellen euklidischen Algorithmus, vgl. Übungsaufgabe.
+
+\begin{satz}[Teilen mit Rest]
+	Zu $a \in \ZZ, b \in \NN$ existieren eindeutigen $q,r \in \ZZ, 0 \leq r < b$ mit $a = qb + r$, nämlich $q = \floor*{\frac{a}{b}} = \max\{m \in \ZZ : m \leq \frac{a}{b}\}$ und $r = a-qb$. Dabei heißt $r$ der \bet{kleinste nichtnegative Rest}. Statt $0 \leq r < b$ kann auch $r \in \ZZ$, $\abs{r} < \frac{b}{2}$, erfüllt werden; $r$ heißt dann der \bet{absolut kleinste Rest} (bei Division durch $b$). \index{Divison mit Rest} \index{kleinster nichtnegativer Rest} \index{absolut kleinster Rest}
+\end{satz}
+
+\begin{satz}[Euklidischer Algorithmus]
+\label{satz_ea}
+	Seien $a,b \in \NN$. Durch fortgesetztes Teilen mit Rest erhalten wir als letzten Rest $\neq 0$ den $\ggT(a,b)$, sowie $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$ (siehe Schema). \index{Euklidischer Algorithmus}
+\end{satz}
+
+\minisec{Beschreibung des Rechenverfahrens}
+	Rechnen sukzessive mit $r_{-1} := a, r_0 :=b$:
+	\begin{equation}
+	\begin{aligned}
+		r_{-1} &= q_0 r_0 + r_1 \\
+		r_0 &= q_1 r_1 + r_2 \\
+		r_1 &= q_2 r_2 + r_3 \\
+		&\vdots
+	\end{aligned}
+	\end{equation}
+	Das Verfahren wird fortgeführt, bis erstmals ein Rest $r_{m+1} = 0$ auftritt, was wegen $r_0 > r_1 > r_2 > \dots$ nach höchstens $b + 1$ vielen Schritten der Fall sein wird. Sind die Quotienten $q_0, \dots, q_m$ bekannt, können mit den Rekursionen \[
+	\begin{array}{c}
+		c_{-2} = 0, c_{-1} = 1 \text{ und } c_k = q_k c_{k-1} + c_{k-2}, k=0,1,2, \dots, n \\
+		d_{-2} = 1, d_{-1} = 0 \text{ und } d_k = q_k d_{k-1} + d_{k-2}, k=0,1,2, \dots, n
+	\end{array} \]
+	die \bet{Bézout-Elemente} als $x = (-1)^{n-1}, y=(-1)^n c_{n-1}$ berechnet werden.
+	
+	Wir behaupten also: \begin{enumerate}[(1)]
+		\item Es ist $\ggT(a,b) = r_n$.
+		\item $\ggT(a,b) = \underbrace{(-1)^{n-1} d_{n-1}}_{x} a + \underbrace{(-1)^n c_{n-1}}_{y} b$
+	\end{enumerate}
+
+\minisec{Beweis}
+	\begin{description}
+		\item[zu (1)]: Da $r_n \mid r_{n-1}, r_n \mid r_{n-2}, \dots, r_n \mid r_0 = b, r_n \mid r_{-1} = a$, ist $r_n$ ein Teiler von $a$ und $b$ (Teilen mit Rest von unten nach oben). Ist $d$ irgendein Teiler $\geq 1$ von $a$ und $b$, folgt $d \mid r_1 = a -q_0 b \Rightarrow d \mid r_2 = r_0 - q_1 r_1 \Rightarrow d \mid r_3 = \dots$, also auch $r_n$, sodass $d \leq r_n$ folgt (Teilen mit Rest von oben nach unten). Somit ist $r_n = \ggT(a,b)$.
+		\item[zu (2)]: Induktiv kann $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$ gezeigt werden. Daher genügt zu zeigen: $c_n = \frac{a}{\ggT(a,b)}, d_n = \frac{b}{\ggT(a,b)}$. \marginnote{Details siehe EZT-Skript Lorenz} \\
+		\textcolor{gray}{Mit den $\frac{c_k}{d_k}$ wird die Kettenbruchentwicklung von $\frac{a}{b}$ berechnet und diese bricht bei $\frac{c_n}{d_n} = \frac{a}{b}$ ab. Da bei der Kettenbruchentwicklung alle Brüche $\frac{c_k}{d_k}$ gekürzt sind wegen $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$, folgt dies.} 
+	\end{description}
+	
+Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz ganzer Zahlen $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$. Die Zahlen $x$ und $y$ heißen auch \Index{Bézout-Elemente} von $a$ und $b$. Deren Existenz ist auch in der Theorie immer wieder wichtig, z.B. hierfür:
+
+\begin{lemma}
+\label{lemma_21}
+	Seien $a,b,c \in \ZZ$ und $b,c \neq 0$. Gilt $c \mid ab$ und $\ggT(b,c) = 1$, dann ist $c \mid a$.
+\end{lemma}
+
+\minisec{Beweis}
+	Aus den Voraussetzungen und $c \mid ac$ folgt, dass $c \mid \ggT(ab,ac) = |a| \cdot \ggT(b,c) = |a|$, also $c \mid a$. Zur ersten Gleichheit: Nach Satz \ref{satz_ea} existieren $x,y \in \ZZ$ mit $\ggT(b,c) = xb + yc$. \\
+	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. Ist $t$ irgendein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
 \newpage
