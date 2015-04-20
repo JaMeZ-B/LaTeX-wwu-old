@@ -385,4 +385,137 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 		\end{center}
 		Daher ist $v^2 + w^2 \kon 0,1,4,2,5 \modu 8$, also $u^2+v^2+w^2 \kon 0,1,4,2,5, \quad 1,2,5,3,6, \quad 4,5,0,6,1 \modu 8$, aber nie $\kon 7 \modu 8$. Es kann keine Lösungen modulo $8$ geben, also auch keine in $\ZZ$.
 	\end{itemize}
+
+\subsubsection{Gruppen}
+\label{subsub:1.1.3}
+	Die Gruppen $(\ZZ_m,+,0)$ und $(\ZZ_m^*,\cdot)$ sind endliche abelsche Gruppen.\marginnote{[4]} Wir untersuchen ein paar ihrer allgemeinen Eigenschaften und führen dabei ein paar Grundbegriffe ein.
 	
+\begin{defn}[Gruppenordnung]
+	Die \Index{Ordnung} einer endlichen Gruppe $G$ ist die Anzahl ihrer Elemente, kurz $\ord(G) := \#G$.
+\end{defn}
+
+\begin{defn}[Untergruppe]
+	Eine Teilmenge $H$ einer Gruppe $G$ mit Verknüpfung $*$ heißt \Index{Untergruppe}, falls auch $(H,*)$ eine Gruppe ist.
+\end{defn}
+
+\begin{satz}[Satz von Lagrange]
+\label{satz_lagrange}
+	Ist $(G,*)$ eine endliche Gruppe, so ist die Ordnung einer Untergruppe $H$ stets ein Teiler von $\ord(G)$. \index{Satz von Lagrange}
+\end{satz}
+
+\minisec{Beweis}
+	Die \Index{Linksnebenklassen} $a*H := \{ a * h : h \in H\}$ für $a \in G$ sind paarweise disjunkt, das heißt es gilt stets $a * H = b * H$ oder $a * H \cap b * H = \emptyset$. \\
+	(Denn: ist $c \in a * H \cap b * H$, so ist $c = a * g = b * h$ für $g,h \in H$, also $a = b * (h * g^{-1})$, somit $a*H = \{a * m : m \in H\} = \{b * h * g^{-1} * m : m \in H\} = \{b * n : n \in H\} = b * H$.) \\
+	Also ist $G$ die disjunkte Vereinigung endlich vieler Linksnebenklassen $a_1 * H, \dots, a_r * H$. Da $\#(a*H) = \#H$ für alle $a \in G$ gilt, folgt mit $\ord(G) = r \cdot \ord(H)$ die Behauptung. \qed
+	
+\begin{defn}[Erzeugnis, zyklisch]
+	Sei $(G,+)$ eine abelsche Gruppe und $a \in G$. Für $k \in \ZZ$ definieren wir $ka := \underbrace{a + \dots + a}_{k\text{-mal}}$, falls $k > 0$, $k \cdot 0 := 0$ und $k \cdot a := -(-k)\cdot a$, falls $k < 0$. Dann ist $\sprod{a} := \{ka : k \in \ZZ\}$ eine Untergruppe von $G$.\marginnote{klar!} Wir nennen $\sprod{a}$ die von $a$ \bet{erzeugte Untergruppe} bzw. das \Index{Erzeugnis} von $a$ und $a$ einen \Index{Erzeuger}. Ist $\sprod{a}$ eine endliche Untergruppe, heißt ihre Ordnung die \Index{Ordnung} von $a$, kurz $\ord(a) := \#\sprod{a}$. Eine Gruppe $G$ mit Erzeuger $a$, das heißt $G = \sprod{a}$, heißt \Index{zyklisch}.
+\end{defn}
+
+Schreibt man die Gruppe multiplikativ mit Verknüpfung "$\cdot$", so setzt man $a^k := \underbrace{a \cdots a}_{k\text{-mal}}$, falls $k > 0$, $a^0 := 1$, $a^k := \enbrace*{a^{(-k)}}^{-1}$, falls $k < 0$, und $\sprod{a} := \{a^k : k \in \ZZ\}$. Ansonsten ist bis auf Schreibweise die Begrifflichkeit und Theorie zu Erzeugern und Ordnungen dieselbe. \\
+Nach dem Satz von Lagrange gilt für jede endliche Gruppe $G$ und $a \in G$ stets $\ord(a) \mid \ord(G)$.
+
+\begin{bsp}
+	$\ZZ/m\ZZ = \{0,1, \dots, m-1\}$ ist "die" zyklische Gruppe mit $\ord(G) = m$. Ist $m = p$ prim, können außer $\setnull$ und $\ZZ/p\ZZ$ keine weiteren Untergruppen existieren.
+\end{bsp}
+
+\begin{lemma}
+\label{lemma_1.1.3.6}
+	Sei $(G,+)$ eine Gruppe, $a \in G$. Es ist $\ord(a)$ die kleinste natürliche Zahl $m$ mit $ma = 0$. \\
+	Es gilt: $ka = 0 \Leftrightarrow \ord(a) \mid k$. \\
+	(Bei multiplikativer Schreibweise: $\ord(a) = \min\{m \in \NN : a^m = 1\}$ und $a^k = 1 \Leftrightarrow \ord(a) \mid k$.)
+\end{lemma}
+
+\minisec{Beweis}
+	Der erste Teil ist klar. Zum zweiten Teil:
+	\begin{description}
+		\item["$\Rightarrow$":] Falls $k \in \NN$ mit $ka = 0$ ist, nehme Division von $k$ durch $\ord(a)$ vor: $k = q \cdot \ord(a) + r$ mit $0 \leq r < \ord(a)$. Wegen $0 = ka = q \cdot \underbrace{\ord(a) \cdot a}_{=0} + ra$ folgt $ra = 0$, wegen der Minimalität von $\ord(a)$ also $r=0$, also $\ord(a) \mid k$.
+		\item["$\Leftarrow$":] Für $k = m \cdot \ord(a)$ folgt $ka = m \cdot (\ord(a) \cdot a) = 0$. \qed
+	\end{description}
+	
+\begin{folg}
+	$\ord(G) \cdot a = 0$ bzw. multiplikativ: $a^{\ord(G)} = 1$, da $\ord(a) \mid \ord(G)$ nach Lemma \ref{lemma_1.1.3.6}
+\end{folg}
+
+\begin{folg}[Kleiner Satz von Fermat]
+	Da $\ord((\ZZ/m\ZZ)^*) = \varphi(m)$, ist $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$. Für $p$ prim: $a^{p-1} \kon 1 \modu p$ für $p \nmid a$. \index{Kleiner Satz von Fermat}
+\end{folg}
+
+\begin{bem}[Satz von Euler-Fermat]
+	Die Kongruenz $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$, heißt auch \Index{Satz von Euler-Fermat}. Als Ordnung eines $a \in \ZZ_m^*$ (Notation: $\ord_m(a)$) kommt also nur ein Teiler von $\varphi(m)$ in Frage.
+\end{bem}
+
+\begin{bsp}
+	Wir haben $\varphi(15) = \varphi(3) \cdot \varphi(5)$ = $2 \cdot 4 = 8$. Die möglichen Ordnungen von Zahlen $a \mod 15$ mit $\ggT(a,15)=1$  sind also $0,1,2,4,8$.\\
+	Wegen $4^2 = 16 \kon 1 \modu 15$ ist zum Beispiel $\ord_{15}(4) = 2$. Bei anderen Zahlen muss man unter Umständen Potenzen mit größeren Exponenten ausrechnen, um die Ordnung zu bestimmen.
+\end{bsp}
+
+Generell stellt sich in Anwendungen die Frage, wie man leicht und schnell (modulare) Potenzen $a^k \modu m$ mit großem $k$ berechnen kann. Der Satz von Euler-Fermat erlaubt bereits eine Reduktion von $k \modu \varphi(m)$: Ist\linebreak
+$k = q \cdot \varphi(m) + r$ mit $0 \leq r < \varphi(m)$, folgt
+\[ a^k = a^{\varphi(m) \cdot q + r} = \enbrace*{a^{\varphi(m)}}^q \cdot a^r \kon 1^q \cdot a^r = a^r \modu m.\]
+Ist aber auch $\varphi(m)$ bzw. $r$ groß, hilft man sich mit folgender Methode des schnellen Potenzierens weiter:
+
+\begin{lemma}[Methode des schnellen Potenzierens]
+	Gegeben sei eine Gruppe $(G,\cdot)$, zu berechnen ist für $r \in \NN, a \in G$ die Potenz $a^r$ in der Gruppe $G$. \begin{description}
+		\item[1. Schritt:] Mit höchstens $d := \floor*{\frac{\log r}{\log 2}}$ vielen Verknüpfungen in $G$ berechne durch sukzessives Quadrieren $a^2,$\linebreak
+		$\enbrace*{a^2}^2 = a^4, \dots, a^{2^d}$.
+		\item[2. Schritt:] Schreibe $r$ als Binärzahl: $r = \sum_{i=0}^d c_i \cdot 2^i$ mit $c_i \in \{0,1\}$.
+		\item[3. Schritt:] Berechne $a^r = a^{c_0} \cdot a^{2c_1} \cdot a^{2^2 c_2} \cdots a^{2^d c_d} = \enbrace*{a^{c_0}} \cdot \enbrace*{a^2}^{c_1} \cdot \enbrace*{a^{2^2}}^{c_2} \cdots \enbrace*{a^{2^d}}^{c_d}$ mit maximal $d$ weiteren Verknüpfungen in $G$. \index{schnelles Potenzieren}
+		\end{description}
+\end{lemma}
+
+Somit reichen höchstens $2d = \oh(\log r)$ viele Anwendungen der Gruppenverknüpfung "$\cdot$". Bei additiver Schreibweise einer Gruppe $(G,+)$ geht das Verfahren zur Berechnung von $r \cdot a$ analog. Man nennt es dann auch das \Index{dual and add}-Verfahren.
+
+\begin{bsp}
+	$5^{12} = 5^{2^2+2^3} = 5^{2^2} \cdot 5^{2^3}$. Modulo $11$ rechnen wir:
+	\[5^2 \kon  \modu 11, 5^{2^2} \kon 3^2 \kon -2 \modu 11, 5^{2^3} \kon (-2)^2 \kon 4 \modu 11, \]
+	also $5^{12} \kon (-2) \cdot 4 \kon 3 \modu 11$. Das geht schneller als $5^{12}$ von Hand auszurechnen und durch $11$ zu teilen.
+\end{bsp}
+
+\begin{anw}[Lösen quadratischer Kongruenzen]
+	Im Fall $p \kon 3 \modu 4$ prim können wir Lösungen quadratischer Kongruenzen modulo $p$ bestimmen: Sei $p = 4k+3$ prim und $a$ mit $p \nmid a$ ein quadratischer Rest modulo $p$, d.h. es existiert ein $b \in \ZZ$ mit $a \kon b^2 \modu p$, und wir möchten $\pm b \modu p$ ausrechnen können. Nach dem kleinen Fermat folgt $b^{4k+2} = b^{p-1} \kon 1 \modu p$. Es folgt $\enbrace*{a^{k+1}}^2 \kon \enbrace*{b^2}^{2(k+1)} = b^{(4k+2)+2} \kon 1 \cdot b^2 \kon a \modu p$, d.h. die Lösungen von $b^2 \kon a \modu p$ sind $b = \pm a^{k+1} \modu p$. Da $a^{k+1} \not\kon -a^{k+1} \modu p \Leftrightarrow 2a^{k+1} \not\kon 0 \modu p$, gibt es genau zwei Lösungen modulo $p$, die wir etwa im Restsystem $\{0,1,\dots,p-1\}$ angeben können und mit $\pm a^{k+1} \modu p$ berechnen können, zum Beispiel mit dem schnellen Potenzieren.
+\end{anw}
+
+\begin{anw}
+\label{anw_1.1.3.14}
+	Sei nun $n$ eine zusammengesetze Zahl, etwa $n = pq$ mit $p \kon q \kon 3 \modu 4$ prim, etwa $p = 4k+3$, $q = 4l+3$ mit $k,l \in \NN_0$, und sei $p \neq q$. Sei $a \modu n$ ein quadratischer Rest modulo $n$. Gesucht seien die Lösungen der Kongruenz $a \kon x^2 \modu n$. Nach dem chinesischen Restsatz gilt $x^2 \kon a \modu n \Leftrightarrow x^2 \kon a \modu p$ und $x^2 \kon a \modu q$, und die jeweiligen Lösungen $\pm a^{k+1} \modu p$ und $\pm a^{l+1} \modu q$ kann man zusammensetzen zu (maximal) vier Lösungen modulo $n$. Es sind genau vier Lösungen, die explizit wie folgt bestimmt werden können: \\
+	Sind $r,s \in \ZZ$ gegeben mit $rp + sq = 1$, d.h. die Bézout-Elemente von $p$ und $q$, und ist $\pm b$ Lösung von $x^2 \kon a \modu p$ sowie $\pm c$ Lösung von $x^2 \kon a \modu q$, so liefert die Formel des chinesischen Restsatzes
+	\[ x = \pm b\cdot s \cdot q \pm c \cdot r \cdot p \]
+	genau vier Lösungen von $x^2 \kon a \modu pq$. Diese müssen paarweise inkongruent modulo $pq$ sein, da wir laut chinesischem Restsatz den Ringisomorphismus $\ZZ_{pq} \simeq \ZZ_p \times \ZZ_q$ haben und die vier verschiedenen Lösungspaare $(b,c), (-b,c), (b,-c), (-b,-c)$ deswegen genau vier Restklassen in $\ZZ_{pq}$ entsprechen.
+\end{anw}
+
+\begin{bsp}
+	Betrachte $p = 11$, $q = 19$, d.h. $k = 2, l = 4$. Wähle $a = 47$. \\
+	Die Lösungen von $x^2 \kon 47 \kon 3 \modu 11$ sind $\pm 3^3 \kon \pm 5 \modu 11$, die Lösungen von $x^2 \kon 47 \kon 9 \modu 19$ sind $\pm 3 \modu 19$. \\
+	Bézout-Elemente bestimmen: Das Inverse von $19 \kon 8 \modu 11$ ist $7$, das von $11 \modu 19$ ist $7$. \\
+	$\Rightarrow s = r = 7$ und $x \kon \mp 5 \cdot 7 \cdot 19 \pm 3 \cdot 7 \cdot 11 \modu (11 \cdot 19)$ ergibt $x \in \{\pm 16, \pm 60\}$.\\
+	Probe: $16^2 \kon 47 \modu (11 \cdot 19), 60^2 \kon 47 \modu (11 \cdot 19)$. \checkmark
+\end{bsp}
+
+Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $11$ und modulo $19$ sein muss. Würde man $a$ zufällig wählen, wäre das nicht unbedingt der Fall. Dann ist $x^2 \kon a \modu n$ ohnehin unlösbar, falls $a$ kein quadratischer Rest modulo $11 \cdot 19$ ist.
+
+\begin{anw}[Faires Münzwurfknobeln]
+	Zwei Spieler, Alice (A) und Bob (B), möchten etwas ausknobeln (zum Beispiel, wer beim Fernschach beginnen soll und dann einen Vorteil hat, etc.), allerdings sprechen sie sich am Telefon oder mailen sich, und können sich daher nicht sehen. A wirft eine Münze, und B denkt vorher "Kopf" oder "Zahl", verrät das aber nicht (Würde A die Wahl von B vorher kennen, so würde B das mitgeteilte Ergebnis des Münzwurfs unter Umständen anzweifeln). A teilt B das Ergebnis mit, und B verkündet, wer gewonnen hat: A, wenn ihr Münzwurfergebnis mit der Wahl von B übereinstimmt, ansonsten gewinnt B. Sei B's geheime Wahl "Zahl". \\
+	Teilt A mit, dass sie "Zahl" geworfen hat, akzeptieren A und B den Spielausgang, weil dann A gewinnt und B ihr dies verkündet. Falls A jedoch mitteilt, dass sie "Kopf" geworfen hat, teilt B mit, dass A verloren habe, was A natürlich nicht akzeptieren würde.\\
+	Problem: Wie kann bei Ergebnis "Kopf" Spieler B seine Mitspielerin A überzeugen, dass er \underline{vor} dem Münzwurf die Wahl "Zahl" getroffen hat? \\
+	Unsere Antwort: Wenn B dann eine Zahl $n = pq$ faktorisieren könnte, deren Primteiler $p,q$ ansonsten nur A kennt.
+\end{anw}
+
+\begin{erl}
+	Das Verfahren funktioniert wie folgt:
+	\begin{description}
+		\item[Schritt 1:] A wählt Primzahlen $p,q \kon 3 \modu 4$, $p \neq q$, berechnet $n = pq$ und schickt $n$ an B.
+		\item[Schritt 2:] B wählt $1 \leq b \leq n-1$ zufällig und behält $b$ geheim, er berechnet $a \kon b^2 \modu n$ und schickt $a$ an A.
+		\item[Schritt 3:] A berechnet die vier Lösungen von $x^2 \kon a \modu n$ (vgl. \ref{anw_1.1.3.14}), die vier Lösungen seien $\pm b, \pm c \in \ZZ$, (mit $b$ von B), die Lösungen $\pm c$ sind andere, die B nicht kennt.
+	\end{description}
+	Soweit die Vorbereitung, dann der eigentliche Münzwurf:
+	\begin{description}
+		\item[Schritt 4:] A wählt eine der vier Lösungen zufällig aus (etwa durch Münzwurf!), das heißt entweder $\pm b$ oder $\pm c$, und schickt B das Ergebnis. A kann nicht wissen, dass B die Zahl $b$ gewählt hat. Die Vereinbarung ist nun: \\
+		Schickt A eine der Zahlen $\pm b$, gewinnt A. Schickt A eine der Zahlen $\pm c$, gewinnt B, und das verkündet B.
+		\item[Schritt 5:] Es erfolgt die Verifikation, dass A wirklich verloren hat im 2. Fall, dazu muss A sich davon überzeugen, dass B vorher wirklich $\pm b$ gewählt hat. Das kann B nun beweisen, indem er ihr die Primfaktoren von $n$ nennt: \\
+		Er berechnet $b+c \modu n$ und $d := \ggT(b+c,n)$ mit dem euklidischen Algorithmus. Dann ist $d = p$ oder $d = q$. (Denn aus $b^2 \kon a \kon c^2 \modu pq$ folgt: $pq \mid (b-c)(b+c) = b^2-c^2$, und da $b \not\kon c \modu p, b \not\kon c \modu q$ folgt $q \mid b+c$ oder $p \mid b+c$, und $d \neq n$, weil sonst $b \kon -c \modu n$ wäre $\lightning$.) \\
+		Also kann B, weil er $c$ kennt, die von A gewählten Primfaktoren bestimmen und A mitteilen und auf diese Art A überzeugen. Das konnte B nur, weil er vorher auch wirklich nicht die von A genannte Lösung $\pm b$ hatte. Damit ist das Spiel fair.
+	\end{description}
+\end{erl}
+
+In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, möglichst zufälliger Primzahlen $p,q$ gebraucht. Man kennt in der Praxis schnelle Tests (den Miller-Rabin-Test), um zu entscheiden, ob eine große Zahl $n$ (mit evtl. hunderten von Stellen in Dezimaldarstellung) zusammengesetzt ist oder (sehr wahrscheinlich) prim. Daher erzeugt man solange Zufallszahlen, bis der Primzahltest "anschlägt".
