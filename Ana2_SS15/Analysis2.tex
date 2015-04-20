@@ -146,10 +146,10 @@ Sei $(V,\skal{}{})$ ein euklidscher Vektorraum. Für $v \in V$ setzte $\norm{v}=
 		& = \norm{v}^2+ 2t \underbrace{\skal{v}{w}}_{\in \mathbb{R}} + t^2 \norm{w}^2 
 	\end{align*} 
 	aus S3 folgt $f(t)\geq 0$. f ist Polynom
-	\begin{gather*}
-		f'(t)=0 \Leftrightarrow t_0 = - \frac{\skal{v}{w}}{\norm{w}^2} \\
-		f''(t)=2 \norm{w}^2 > 0
-	\end{gather*}
+	\begin{align*}
+		&f'(t)=0 \Leftrightarrow t_0 = - \frac{\skal{v}{w}}{\norm{w}^2} \\
+		&f''(t)=2 \norm{w}^2 > 0
+	\end{align*}
  $\Rightarrow$ $f$ nimmt bei $t_0$ globales Minimum an
  \begin{gather*}
  	0 \leq f(t_0)=\norm{v}^2 - \frac{2 \skal{v}{w}^2}{\norm{w}^2} + \frac{\skal{v}{w}^2}{\norm{w}^4} \norm{w}^2 = \norm{v}^2 - \frac{\skal{v}{w}^2}{\norm{w}^2} \\
@@ -619,5 +619,194 @@ $(X,D)$ metrischer Raum $Y \subseteq X, x \in X$
 \end{align*}
 \end{enumerate}
 % subsubsection definition (end)
+
+\minisec{Warnung:}
+Offenheit ist eine Eigenschaft von \underline{Teilmengen} metrischer Räum, nicht der Mengen selber. '$Y$ offen' sinnlos ! '$Y$ offen in $X$' sinnvoll! Analog für Abgeschlossen
+ \\
+$X = \mathbb{R}^2$ \\
+\begin{align*}
+	&Z = \{ (x,y) \in \mathbb{R}^2\, |\, y=0 \} \\
+	&Y = \{ (x,y) \in \mathbb{R}^2 \, | \, y=0,0<x<1 \} \\
+	&Y \text{ offen in } Z \\
+	&Y \text{ nicht offen in } X \\
+	\end{align*}
 % subsection topologische_grundbegriffe (end)
+\subsubsection{Beispiel} % (fold)
+\label{ssub:beispiel}
+$X$ metrischer Raum, $ x \in X$,$\varepsilon>0$. Dann ist $B_{\varepsilon}^X(x)$ offen in $X$
+
+\minisec{Beweis:}
+zu zeigen: für jedes $y \in B_{\varepsilon}(x) \exists\, \delta >0: \, B_{\delta }(y) \subseteq B_{\varepsilon}(x)$
+\[
+	d(x,y)<\varepsilon \Rightarrow  \exists\, \delta>0: \, d(x,y)+\delta <\varepsilon
+\] \\
+Beh: $B_{\delta }(y) \subseteq B_{\varepsilon}(x)$ \\
+Das ist wahr, denn
+\[
+	z \in B_{\delta}(y) \Rightarrow d(y,z)<\delta 
+\] \\
+Ferner: 
+\[
+	d(z,x) \leq d(z,y)+d(y,x)<\delta + d(y,x)<\varepsilon, \text{d.h.} z \in B_{\varepsilon}(x)
+\]
+% subsubsection beispiel (end)
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Es sei $(X,d)$ metrischer Raum. \\
+Dann gilt:
+\begin{enumerate}
+	\item $\varnothing$ und $X$ sind offen in $X$
+	\item Falls $U_0,U_1$ offen in $X$ sind, so auch $U_0 \cap U_1$
+	\item Falls $(U_i)_{i \in I}$ eine durch $I$ induzierte Familie von Teilmengen von $X$ ist, so ist $\bigcup\limits_{i \in I}U_i$ offen in $X$ \\
+		'beliebige Vereinigungen offener Mengen sind offen'
+	\item $\varnothing,X$ sind abgeschlossen in $X$
+	\item $A_0,A_1$ abgeschlossen in $X$, dann ist $A_0 \cup A_1$ abgeschlossen in $X$
+	\item $(A_i)_{i \in I}$, $A_i$ abgeschlossen in $X$, so ist $\bigcap\limits_{i \in I}A_i$ abgeschlossen in $X$
+\end{enumerate}
+\minisec{Beweis:}
+\begin{enumerate}
+	\item $\varnothing \subseteq X$ offen trivial \\
+		$X \subseteq  X$ offen trivial
+	\item Sei $x \in U_0 \cap U_1$ Dann existieren Bälle
+	\begin{align*}
+		B_{\varepsilon_1}^X(x) \subseteq U_1 \qquad B_{\varepsilon_0}^X(x) \subseteq U_0
+	\end{align*}
+Wähle nun $\varepsilon= \min \{ \varepsilon_0, \varepsilon_1 \} > 0$
+\begin{align*}
+	& \Rightarrow B_{\varepsilon}(x) \subseteq U_0 \cap U_1 \\
+	& \Rightarrow x \text{ innerer Punkt von } U_0 \cap U_1
+\end{align*}
+	\item Sei $x \in \bigcup\limits_{i \in I}U_i \subseteq X$
+	\[
+		\Rightarrow \exists\,i \in I:\, x \in U_i, \text{ weil } U_i \subseteq X \text{ offen, gibt es } \varepsilon>0: \, B_{\varepsilon}(x) \in U_i.
+	\]
+Aber \[
+	U_i \subseteq \bigcup\limits_{i \in I}U_i, \text{ daher: } B_{\varepsilon}(x) \subseteq \bigcup\limits_{i \in I}U_i
+	\]
+	\item \begin{align*}
+		&\varnothing = X \setminus \underset{\text{offen nach 1)}}{\underbrace{X}} \qquad \Rightarrow \varnothing \text{ abgeschlossen in } X \\
+		&X = X \setminus \underset{\text{offen}}{\underbrace{\varnothing}} \qquad \Rightarrow X \subseteq X \text{ abgeschlossen}
+	\end{align*}
+	\item \[
+		X \setminus(A_0 \cup A_1)= \underset{\text{offen in $X$}}{\underbrace{\underset{\text{offen in $X$}}{\underbrace{(X \setminus A_0)}}\cap \underset{\text{offen in $X$}}{\underbrace{(X \setminus A_1)}}}}
+	\]
+	\[
+		\Rightarrow A_0 \cup A_1 \subseteq X \text{ abgeschlossen}
+	\]
+	\item \[
+		X \setminus \bigcap\limits_{i \in I}A_i = \underset{\text{offen nach 3)}}{\underbrace{\bigcup\limits_{i \in I}\underset{\text{offen in $X$}}{\underbrace{X \setminus A_i}}}}
+	\]
+	\[
+		\Rightarrow \bigcap\limits_{i \in I}A_i \text{ abgeschlossen in } X
+	\]
+\end{enumerate}
+% subsubsection satz (end)
+\minisec{Bemerkung:}
+Beliebige Durchschnitte offener Mengen sind i.A. nicht offen 
+\minisec{\underline{Beispiel}:}
+\[
+	U_n = (-\frac{1}{n},\frac{1}{n}) \text{ ist offen in } \mathbb{R}
+\]
+\[
+	\bigcap\limits_{n \in \mathbb{N}}U_n = \{0\} \text{ ist nicht offen in } \mathbb{R}
+\]
+
+\subsection{Satz} % (fold)
+\label{sub:Satz}
+$X$ metrischer Raum, $Y \subseteq X$. Dann sind Äquivalent:
+\begin{enumerate}
+	\item $Y \subseteq X$ abgeschlossen in $X$
+	\item Für jede Folge $(y_n)$ mit $y_n \subseteq Y$, welche in $X$ konvergiert, gilt
+	\[
+		\lim_{n \to \infty}y_n \in Y
+	\]
+	\end{enumerate}
+\minisec{Beweis:}
+\minisec{Vorbemerkung:} $y \in X$ ist genau dann ein Berührpunkt von $Y \subseteq X$, wenn es eine Folge $(y_n)_n$ gibt mit $(y_n) \in Y$ und $\lim_{n \to \infty}y_n = y$
+\minisec{Beweis der Vorbemerkung:}
+$"\Leftarrow"$: ist $\lim_{n \to \infty}y_n=y \qquad y_n \in Y$
+\begin{align*}
+	& \Rightarrow \forall\, \varepsilon>0 \,\exists\,n: \, d(y,y_n)<\varepsilon \\
+	&\Rightarrow \forall\, \varepsilon>0 \, y_n \in B_{\varepsilon}(y) \cap Y \neq \varnothing \\
+	&\Rightarrow y \text{ ist Berührpunkt von } Y
+\end{align*}
+$"\Rightarrow"$:
+\begin{align*}
+	&y \text{ Berührpunkt von } Y \\
+	&\Rightarrow  \forall\, \varepsilon > 0 \, \exists\, y' \in Y: \, d(y,y')<\varepsilon
+\end{align*}
+Wähle für $n \in \mathbb{N}$ ein $y_n \in Y$ mit $d(y,y_n)<\frac{1}{n}$
+\[
+	\Rightarrow \lim_{n \to \infty}\underset{\in y}{\underbrace{y_n}}=y
+\] \bewende
+\minisec{Beweis des Satzes:}
+Sei 1) nicht erfüllt. Dann:
+\begin{align*}
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow}  Y \subseteq X \text{ nicht abgeschlossen in } X \\
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} X \setminus Y \text{ nicht offen in } X \\
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, y \text{ kein innerer Punkt von } X \setminus Y \\
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, \forall\, \varepsilon>0 \qquad B_{\varepsilon}(y) \subsetneq X \setminus Y
+	 \\
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, \forall\, \varepsilon>0 \qquad B_{\varepsilon}(y) \cap Y \neq \varnothing
+	 \\
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, y \text{ ist Berührpunkt von } Y \\
+	& \stackrel{\text{Vorbem.}}{\Leftrightarrow} \exists\, \text{ Folge } y_n \text{ in } Y, y_n \to y \notin  Y
+\end{align*}
+und dazu ist Äquvivalent, dass 2) nicht erfüllt ist.
+\bewende
+% subsection Satz (end)
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$(X,d_X)$,$(Y,d_Y)$ metrischer Räume, $f: X \to Y$ Abbildung. Dann sind Äquivalent:
+\begin{enumerate}
+	\item $f$ ist folgenstetig.
+	\item Für jede abgeschlossene Teilmenge $A \subseteq Y$ ist $f^{-1}(A) \subseteq X$ abgeschlossen.
+	\item Für jede offene Teilmenge $U \in Y$ ist $f^{-1}(U)$ offen in $X$
+	\item $f$ ist $\varepsilon$-$\delta$-stetig
+\end{enumerate}
+\minisec{Beweis:}
+$\underline{1 \Rightarrow 2}$: Sei $f$ folgenstetig, $A \subseteq Y$ abgeschlossen. \\
+zu zeigen: (wegen I.4.7) ist $x_n \in f^{-1}(A)$ und $x_n \to x$, so gilt $x \in f^{-1}(A)$ \\
+\begin{align*}
+	&x_n \to x \Rightarrow \underset{\in A}{\underbrace{f(x_n)}} \to \underset{\in y}{\underbrace{f(x)}} \qquad \text{($f$ ist folgenstetig)} \\
+	&A \subseteq Y \text{ abgeschlossen } \Rightarrow  f(x) \in A \\
+ 	&\Rightarrow x \in f^{-1}(A) 
+\end{align*}
+$\underline{2 \Rightarrow 3}$:
+\begin{align*}
+	&U \subseteq Y \text{ offen } \Rightarrow Y \setminus U \subseteq Y \text{ abgeschlossen} \\
+	&\stackrel{2)}{\Rightarrow} f^{-1}(Y \setminus U) \subseteq  X \text{ abgeschlossen.} \\
+	&f^{-1}(Y \setminus U) = X \setminus f^{-1}(U) \Rightarrow f^{-1}(U) \subseteq  X \text{ offen}
+\end{align*}
+$\underline{3 \Rightarrow 4}$:
+Sei $x \in X$, $\varepsilon>0$ 
+\begin{align*}
+	&\Rightarrow B_{\varepsilon}^Y(f(x)) \subseteq Y \text{ offen in } Y \\
+	&\stackrel{3)}{\Rightarrow} f^{-1}(B_{\varepsilon}^Y(f(x))) \subseteq X \text{ offen} \\
+	&\stackrel{\text{def. offen}}{\Rightarrow} \exists\, \delta >0 \, B_{\delta}^X(x) \subseteq f^{-1}(B_{\varepsilon}^Y(f(x)))
+\end{align*}
+Das heißt: ist $x' \in X$ mit $d(x,x')<\delta$
+\[
+	\Rightarrow d(f(x),f(x'))<\varepsilon
+\]
+$\underline{4 \Rightarrow 1}$:
+Sei $f$ $\varepsilon$-$\delta$-stetig und $(x_n)_n$ Folge in $x$. $x_n \to x \in X$. Dann gilt $f(x_n) \to f(x)$, denn: \\
+Sei $\varepsilon>0$
+\begin{align*}
+	&\Rightarrow \exists\,\delta >0: x' \in X \, d(x,x')< \delta \\
+	&\Rightarrow d(f(x),f(x'))<\varepsilon \Rightarrow \text{weil } x_n \to x: \, \exists\,n_0: \, \forall\, n \geq n_0: \, d(x,x_n)<\delta \\
+	&\Rightarrow \exists\,n_0: \, \forall\, n \geq n_0: \, d(f(x),f(x_n))<\varepsilon \text{ d.h. } f(x_n) \to f(x)
+\end{align*}
+% subsubsection satz (end)
+\subsubsection{Beispiel:} % (fold)
+\label{ssub:beispiel}
+$(V,\norm{.})$ normierter Vektorraum
+\[
+	\norm{.}: V \to \mathbb{R} \text{ stetig, denn } \norm{x}-\norm{y} \leq \norm{x-y}
+\]
+Also sind die Mengen (für $x \in V$, $r \geq 0$)
+\[
+	\{y \in V \, | \, \norm{x-y}\leq r \} \subseteq V \text{ und } \{y \in V \,|\, \norm{x-y}=r \} \subseteq V
+\] abgeschlossen.
+% subsubsection beispiel (end)
 \end{document}	
