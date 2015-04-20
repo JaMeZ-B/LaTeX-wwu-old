@@ -202,7 +202,7 @@ Seien $p \colon E \to X$ und $p' \colon E' \to X'$ zwei $K$-Vektorbündel. Ein \
 \Index{Vektorraumbündelmorphismus} von $E$ nach $E'$ ist ein Paar $(f, \overline{f})$ von stetigen Abbildungen $\overline{f} \colon E \to E'$ und $f \colon X \to X'$, sodass 
 das folgende Diagramm kommutiert
 \[
-	\begin{tikzcd}
+	\begin{tikzcd}[sep=large]
 		E \rar["\overline{f}"] \dar["p"'] & E' \dar["p'"] \\
 		X \rar["f"] & X'
 	\end{tikzcd}
@@ -287,7 +287,7 @@ heißt \bet{stetig}\index{stetiger Funktor}, falls die induzierte Abbildung
 stetig ist (dies klappt nur für Kategorien, für die eine Topologie auf den Morphismen existiert!).
 % subsection 24 (end)
 
-\subsection{Lemma} % (fold)
+\subsection[Lemma: Induzierter Funktor eines stetigen Funktors]{Lemma} % (fold)
 \label{sub:25}
 Sei $F$ ein stetiger Funktor wie in \eqref{eq:24} und sei $X$ ein topologischer Raum. Dann induziert $F$ einen Funktor
 \[
@@ -345,7 +345,43 @@ Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta
 
 \subsection{Lokale Trivialität des Tangentialbündels auf $S^n$} % (fold)
 \label{sub:lokal_trivial_Sn}
-\todo[inline]{Übung einfügen}
+Sei $S^n \subset \mathds{R}^{n+1}$ die $n$-Sphäre und sei 
+\[
+	\Tmap S^n = \set[(x,v) \in S^n \times \mathds{R}^{n+1}]{\skal*{x}{v}=0} 
+\]
+Wir definieren $p \colon \Tmap S^n \to S^n$ durch $p(x,v)=x$. Wir zeigen, dass $p \colon \Tmap S^n \to S^n$ lokal trivial ist.
+\minisec{Beweis}
+Sei $x_0 \in S^n$ gegeben. Sei $U := \set[x \in S^n]{\skal*{x}{x_0}>0}$. Da $\skal*{x_0}{x_0}=1$ ist, ist $x_0 \in U$. Weiter ist $U$ offen in $S^n$, also eine offene 
+Umgebung von $x_0$. Sei $H \subset \mathds{R}^{n+1}$ die Hyperebene gegeben durch $H = \set[v \in \mathds{R}^{n+1}]{\skal*{x}{v}=0}$. Da dies ein $n$-dimensionaler 
+Vektorraum ist, finden wir einen Isomorphismus $\kappa \colon H \to \mathds{R}^n$. Sei $\Tmap S^n \big|_U=p^{-1}(U)$. Wegen $\skal*{x_0}{x_0}=1$ liegt $v- \skal*{x_0}{v} x_0$
+in $H$ für alle $v \in \mathds{R}^{n+1}$. Also können wir definieren:
+\[
+	\varphi \colon \Tmap S^n\big|_{U} \to U \times \mathds{R}^n \quad , \quad (x,v) \mapsto \enbrace[\big]{x, \kappa(v - \skal*{x_0}{v} x_0)} 
+\]
+Außerdem definieren wir $\psi \colon U \times \mathds{R}^n \to \Tmap S^n \big|_U$ durch
+\[
+	\psi(x,w) = \enbrace*{x , \kappa^{-1}(w) - \frac{\skal*{x}{\kappa^{-1}(w)}}{\skal*{x}{x_0}} x_0 } 
+\]
+Dies ist wohldefiniert, da für $x \in U$ der Nenner stets ungleich $0$ ist und weiter
+\[
+	\skal*{x}{\kappa^{-1}(w) - \frac{\skal*{x}{\kappa ^{-1}(w)}}{\skal*{x}{x_0}} x_0} = \skal*{x}{\kappa^{-1}(w)} - \frac{\skal*{x}{\kappa ^{-1}(w)}}{\skal*{x}{x_0}} 
+	\skal*{x}{x_0} = 0
+\]
+gilt. Weiter sind beide Abbildungen offensichtlich stetig. Für die Komposition gilt
+\begin{align*}
+	(\psi \circ \varphi)(x,v) = \enbrace*{x, v - \skal*{x_0}{v} x_0 - \frac{\skal*{x}{v- \skal*{x_0}{v} x_0}}{\skal*{x}{x_0}}x_0 }
+	= \enbrace*{x, v - \skal*{x_0}{v} x_0 + \skal*{x_0}{v}x_0} = (x,v)  
+\end{align*}
+Dabei haben wir benutzt, dass $\skal*{x}{v}=0$ gilt. Umgekehrt gilt
+\begin{align*}
+	(\varphi \circ \psi)(x,w) &= \enbrace*{x , \kappa \enbrace*{\kappa^{-1}(w) - \frac{\skal*{x}{\kappa^{-1}(w)}}{\skal*{x}{x_0}}x_0 - \skal*{x_0}{\kappa^{-1}(w) - 
+	\frac{\skal*{x}{\kappa^{-1}(w)}}{\skal*{x}{x_0}}x_0} x_0 } } \\
+	&= \enbrace*{x , \kappa \enbrace*{\kappa^{-1}(w) - \frac{\skal*{x}{\kappa^{-1}(w)}}{\skal*{x}{x_0}}x_0 - 
+	\skal*{x_0}{\kappa^{-1}(w)} x_0 + \frac{\skal*{x}{\kappa^{-1}(w)}}{\skal*{x}{x_0}} x_0 }}\\
+	&= \enbrace[\Big]{x , \kappa \enbrace*{\kappa^{-1}(w) - \skal*{x_0}{\kappa^{-1}(w)} x_0} } = (x,w)
+\end{align*}
+da wieder $\skal*{x_0}{\kappa ^{-1}(w)}=0$, weil $\kappa ^{-1}(w) \in H$ ist. Damit ist $\varphi$ ein Homöomorphismus. Es ist außerdem klar, dass $\varphi$ eingeschränkt auf 
+die Fasern eine lineare Abbildung ist. Damit ist das Tangentialbündel $\Tmap S^n$ lokal trivial. \bewende
 % subsection lokal_trivial_Sn (end)
 
 \cleardoubleoddemptypage
