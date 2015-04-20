@@ -61,7 +61,7 @@
 \usetikzlibrary{quotes}
 \usepackage{pgfplots}
 \usepgfplotslibrary{colormaps}
-\pgfplotsset{compat=1.10}
+\pgfplotsset{compat=1.12}
 
 
 
@@ -88,7 +88,7 @@
 %-- 
 \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
 \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
-\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen
+\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen bzw zusätzliche Kapselung
 \newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
 
 \def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
@@ -101,7 +101,7 @@
 %-- Alles was mit Schrift und XeTeX zu tun hat
 \ifxetexorluatex
     % XeLaTeX or LuaTeX
-	% \usepackage{eulervm}
+	\usepackage{eulervm}
 	\usepackage[no-math]{fontspec}
     \usepackage{polyglossia} % moderner babel-ersatz
     \setmainlanguage[spelling=new,babelshorthands=true]{german}
@@ -256,8 +256,6 @@
 \DeclareMathOperator{\resolv}{R} %Resolventenmenge
 \DeclareMathOperator{\idx}{ind} %Fredholm Index
 \DeclareMathOperator{\Fred}{Fred} %menge der Fredholm-Operatoren
-\DeclareMathOperator{\Landau}{\mathcal{O}} %großes Landau-Symbol
-\DeclareMathOperator{\landau}{\scriptstyle \mathcal{O}} %kleines Landau-Symbol
 
 \newcommand{\tr}{\mathrm{tr}}
 \newcommand{\w}{\mathrm{w}}
@@ -363,36 +361,6 @@
 %--Differential
 \newcommand{\diff}[2]{\ensuremath{\frac{{\partial #1}}{{\partial #2}} }}
 \newcommand{\diffd}[2]{\ensuremath{\frac{\mathd #1}{\mathd #2} }}
-
-%--Diagonale Linien für Matrizen
-\newcommand\tikzmark[1]{%
-  \tikzexternaldisable\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {};\tikzexternalenable}
-
-\newcommand\MyLine[3][]{%
-  \tikzexternaldisable\begin{tikzpicture}[overlay,remember picture]
-    \draw[#1] (#2.south) -- (#3.north);
-  \end{tikzpicture}\tikzexternalenable}
-  
-%--Jordankasten
-\newcommand{\Jord}{ \tikzexternaldisable \begin{BMAT}{|ccc|}{|ccc|} %
-				0 & & \\ %
-				1\tikzmark{z} &  \diagdown & \\ %
-				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  0 %
-			\end{BMAT} \tikzexternalenable}
-			
-%--Jordankasten mit Lambda
-\newcommand{\JordLa}[1][\empty]{%
-	\tikzexternaldisable\ifthenelse{\equal{#1}{\empty}}
-		{\begin{BMAT}{|ccc|}{|ccc|} %
-				\lambda & & \\ %
-				1\tikzmark{z} &  \diagdown & \\ %
-				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda  %
-			\end{BMAT}}
-		{\begin{BMAT}{|ccc|}{|ccc|} %
-				\lambda_{#1}  & & \\ %
-				1\tikzmark{z} &  \diagdown & \\ %
-				& \tikzmark{u}1 \MyLine[thick]{z}{u} &  \lambda_{#1}  %
-			\end{BMAT}}\tikzexternalenable}
 
 %--Inhaltsverzeichnis
 \usepackage[tocindentauto]{tocstyle}
