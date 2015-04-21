@@ -4565,13 +4565,9 @@ Mit $\Gamma(M,\mathcal{H})$ bezeichnen wir die Menge aller stetigen Schnitte $s\
 	$H_n(M;R) \to \Gamma(M,\mathcal{H})$, $v \mapsto s_v$.
 	\item Es gibt immer den Nullschnitt in $\Gamma(M,\mathcal{H})$, $x \mapsto 0\in H_n(M,M\setminus \set{x};R)$.
 	\item Ist $M$ zusammenhängend, so ist $\Gamma(M,\mathcal{H})\not=0$ genau dann, wenn $M$ $R$-orientierbar ist.
+	\item Für $M$ zusammenhängend gilt: $M$ ist $R$-orientierbar $\iff H_n(M;R) \cong R$. 
 \end{enumerate}
 % subsection 1611 (end)
-
-\subsection[Bemerkung über Orientierbarkeit einer zusammenhängenden Mannigfaltigkeit]{Bemerkung} % (fold)
-\label{sub:1612}
-Für $M$ zusammenhängend gilt: $M$ ist $R$-orientierbar $\iff H_n(M;R) \cong R$. 
-% subsection 1612 (end)
 
 \subsection[Beispiel: Für $R=\mathds{F}_2$ ist $\pi\colon \mathcal{H} \to M$ eine $2$-fache Überlagerung]{Beispiel} % (fold)
 \label{sub:1613}
@@ -4583,22 +4579,76 @@ Insbesondere ist jede $n$-Mannigfaltigkeit $\mathds{F}_2$-orientierbar.
 \label{sub:1614}
 Sei $M$ eine $n$-Mannigfaltigkeit und $A \subseteq M$ kompakt. Dann gilt
 \begin{enumerate}[a)]
-	\item Zu jedem $s \in \Gamma(M,\mathcal{H})$ gibt es ein eindeutiges $v_A \in H_n(M, M \setminus A;R)$ mit $v_A|_x=s(x)$ für alle $x \in A$.
-	\item Für $i>n$ ist $H_i(M,M \setminus A;R)=0$.
+	\item \label{enum:16:1} Zu jedem $s \in \Gamma(M,\mathcal{H})$ gibt es ein eindeutiges $v_A \in H_n(M, M \setminus A;R)$ mit $v_A|_x=s(x)$ für alle $x \in A$.
+	\item \label{enum:16:2}Für $i>n$ ist $H_i(M,M \setminus A;R)=0$.
 \end{enumerate}
-\minisec{Beweisskizze}
-\todo[inline]{Beweis hinzufügen aus Notizen}
-\begin{description}
-	\item[Schritt 1:] Mit der MV-Folge (siehe \ref{sub:1615}) folgt: Sind die Aussagen a)  und b) für $A_1, A_2$ und $A_1 \cap A_2$ richtig, so auch für $A_1 \cup A_2$.
-	\item[Schritt 2:] Das Lemma ist richtig, wenn $A$ eine abgeschlossene konvexe Teilmenge von $\mathds{R}^n$ ist. Dazu benutze wir den Isomorphismus
-	\(
-		H_n(\mathds{R}^n,\mathds{R}^n \setminus A ;R) \xrightarrow{\quad } H_n(\mathds{R}^n,\mathds{R}^n \setminus \set{x};R)
-	\)
-	(für jedes $x \in A$). Mit Schritt 1 folgt die Aussage für $M =\mathds{R}^n$ und $A$ endliche Vereinigung von abgeschlossen konvexen Teilmengen.
-	\item[Schritt 3:] Das Lemma gilt für $M=\mathds{R}^n$ und $A$ beliebig.
-\end{description}
-Für den allgemeinen Fall schreibt an $A=A_1 \cup \ldots \cup A_n$, sodass jedes $A_i$ in einer Kartenumgebung von $M$ enthalten ist. Mit Schritt 1 und 3 folgt dann die 
-Aussage für $A$. \bewende
+\minisec{Beweis}
+Wir beweisen die Aussage in vier Schritten:
+\begin{enumerate}[label=\textbf{Schritt \arabic*:},wide=0cm]
+	\item Seien $A_1,A_2 \subseteq M$ kompakt. Wir zeigen: Gelten \ref{enum:16:1} und \ref{enum:16:2} für $A_1$, $A_2$ und $A_1 \cap A_2$, so auch für $A_1 \cup A_2$.
+	Mit der Mayer-Vietoris-Sequenz aus \ref{sub:1615} folgt aus 
+	\[
+		H_i(M,M \setminus A_1;R) = H_i(M,M \setminus A_2;R) = H_{i+1}(M,M \setminus A_1 \cap A_2;R) = 0
+	\]
+	direkt $H_i(M, M \setminus A_1 \cup A_2;R)=0$. Daher gilt \ref{enum:16:2} für $A_1 \cup A_2$.
+	Seien $v_1 \in H_n(M,M \setminus A_1;R)$ und $v_2 \in H_n(M,M \setminus A_2;R)$ mit $v_1\big|_x= s(x)$ für alle $x \in A_1$ und $v_2\big|_x=s(x)$ für alle $x \in A_2$.
+	Dann gilt 
+	\[
+		(v_1|_{A_1 \cap A_2})\big|_x = s(x) = (v_2|_{A_1\cap A_2})\big|_x
+	\]
+	für alle $x \in A_1 \cap A_2$. Da $A_1 \cap A_2$ die Eindeutigkeitsaussage aus \ref{enum:16:1} erfüllt, folgt $v_1\big|_{A_1 \cap A_2} = v_2\big|_{A_1 \cap A_2}$.
+	Betrachte nun die Mayer-Vietoris-Folge
+	\[
+		\begin{tikzcd}[font=\small,column sep=1.5em, row sep=0.1em]
+			 H_{n+1}(M,M \setminus A_1 \cap A_2) \rar["\partial"] & H_n(M,M \setminus A_1 \cup A_2) \rar & 
+			{\displaystyle\bigoplus_{H_n(M,M \setminus A_2)}^{H_n(M,M\setminus A_1)}}
+			\rar & H_n(M,M\setminus A_1 \cap A_2) \\
+			0 \ar[draw=none]{u}[sloped,auto=false]{=} & & (v_1,v_2) \arrow[draw=none]{u}[sloped,auto=false]{\in} & v_1|_{A_1 \cap A_2} = v_2|_{A_1 \cap A_2}
+			\arrow[draw=none]{u}[sloped,auto=false]{\in}
+		\end{tikzcd}
+		\marginnote{"$R$" aus Platzgründen weggelassen}
+	\]
+	Daher gibt es ein eindeutiges $v \in H_n(M,M \setminus A_1 \cup A_2;R)$ mit $v|_{A_1} =v_1$ und $v|_{A_2}=v_2$. Für $x \in A_1$ folgt $v|_{x}=v_1|_x=s(x)$ und für 
+	$x \in A_2$ folgt genauso $v|_x = v_2|_x =s(x)$. Ist nun $v' \in H_n(M,M \setminus A_1 \cup A_2;R)$ eine weitere Homologieklasse mit $v'|_x=s(x)$ für alle 
+	$x \in A_1 \cup A_2$, so folgt $v'|_{A_1}=v_1$ und $v'|_{A_2}=v_2$ aus der Eindeutigkeit von $v_1$ und $v_2$. Daher gilt auch $v=v'$.
+	\item Das Lemma ist richtig, wenn $A$ eine abgeschlossene konvexe Teilmenge von $M=\mathds{R}^n$ ist. Dann ist 
+	$(\mathds{R}^n, \mathds{R}^n \setminus A) \to (\mathds{R}^n, \mathds{R}^n \setminus \set{x})$ eine Homotopieäquivalenz von Paaren und daher 
+	$H_n(\mathds{R}^n, \mathds{R}^n \setminus A;R) \to H_n(\mathds{R}^n,\mathds{R}^n \setminus \set{x};R)$ ein Isomorphismus. Folglich gibt es 
+	$v \in H_n(\mathds{R}^n,\mathds{R}^n \setminus A;R)$ mit $v|_x=s(x)$. Da $s|_A$ und $s_v$ beides Schnitte der Überlagerung $\pi ^{-1}(A) \to A$ sind, folgt mit der
+	Eindeutigkeit im Hebungssatz für alle $y \in A$
+	\[
+		v\big|_y = s_v(y) = s(y)
+	\]
+	Ist $v' \in H_n(\mathds{R}^n, \mathds{R}^n \setminus A;R)$ eine zweite Homologieklasse mit $v'|_x=s(x)$, so folgt $v=v'$, da $v'|_x =s(x)=v|_x$ ist und $w \mapsto w|_x$
+	ein Isomorphismus $H_n(\mathds{R}^n,\mathds{R}^n \setminus A;R) \to H_n(\mathds{R}^n, \mathds{R}^n\setminus \set{x};R )$ ist. Offenbar ist 
+	$\mathds{R}^n \setminus A \simeq S^{n-1}$ und daher $H_i(\mathds{R}^n \setminus A;R)=0$ für alle $i >n$.
+	\item Das Lemma gilt für $M=\mathds{R}^n$ und eine beliebige kompakte Teilmenge $A \subseteq M$: Ist $A$ die Vereinigung von endlichen vielen konvexen und kompakten 
+	Teilmengen von $\mathds{R}^n$, so folgt die Behauptung für $A$ aus Schritt 1 und 2. Für ein beliebiges kompaktes $A \subseteq \mathds{R}^n$ folgt die Existenzaussage in 
+	\ref{enum:16:1} aus Schritt 2. Wähle dazu $B \subseteq \mathds{R}^n$ konvex und kompakt mit $A \subseteq B$. Nach Schritt 2 gibt es 
+	$v \in H_n(\mathds{R}^n, \mathds{R}^n \setminus B;R)$ mit $v|_x=s(x)$ für alle $x \in B$. Für $v|_A \in H_n(\mathds{R}^n,\mathds{R}^n \setminus A;R)$ gilt dann 
+	$(v|_A)\big|_x = v|_x=s(x)$ für alle $x \in A$.
+	
+	Sei nun $v \in H_d(\mathds{R}^n,\mathds{R}^n \setminus A;R)$ mit $d \ge n$. Falls $d=n$ ist, so sei $v|_x=0$ für alle $x \in A$. Wir müssen zeigen: $v=0$. Sei 
+	$z \in C_d(\mathds{R}^n;R)$ ein Repräsentant von $v$. Insbesondere ist $\partial z \in C_{d-1}(\mathds{R}^n \setminus A;R)$. $\partial z$ ist eine 
+	$R$-Linearkombination von endlich vielen singulären $d-1$-Simplizes in $\mathds{R}^n \setminus A$. Da jeder dieser singulären $d-1$-Simplizes ein kompaktes Bild in 
+	$\mathds{R}^n \setminus A$ hat, finden wir endlich viele Bälle $B_i \subseteq \mathds{R}^n$ mit
+	
+	\begin{enumerate*}[(1),itemjoin={,\hspace{1em}},itemjoin*={{\hspace{1ex}und\hspace{1ex}}}]
+		\item $\forall i : B_i \cap A \not= \emptyset$
+		\item $A \subseteq B_1 \cup \ldots \cup B_n$
+		\item $\partial z \in C_{d-1}\enbrace[\big]{\mathds{R}^n \setminus (B_1 \cup \ldots \cup B_n);R}$
+	\end{enumerate*}
+	
+	Es folgt, dass $z$ auch eine Homologieklasse $v' \in H_d \enbrace[\big]{\mathds{R}^n,\mathds{R}^n \setminus (B_1 \cup \ldots \cup B_n);R}$ repräsentiert mit $v'|_A=v$.
+	Ist $d>n$, so folgt $v'=0$ und daher auch $v=v'|_A=0$. Ist $d=n$, so wählen wir $x_i \in B_i \cap A$. Da $v'|_{x_i}=v|_{x_i}= 0$ ist, folgt $v'|_{B_i}=0$, weil die 
+	Einschränkungsabbildung $w \mapsto w|_{x_i}$ einen Isomorphismus 
+	$H_n(\mathds{R}^n, \mathds{R}^n \setminus B_i;R) \to H_n(\mathds{R}^n,\mathds{R}^n \setminus \set{x_i};R )$ definiert. Daher gilt $v'|_y=0$ für alle 
+	$y \in B_1 \cup \ldots \cup B_n$. Es folgt $v'=0$ und damit auch $v=v'|_A=0$.
+	\item Für den allgemeinen Fall schreibt man $A=A_1 \cup \ldots \cup A_n$, sodass jedes $A_i$ kompakt ist und in einem Kartengebiet $U_i$ von $M$ enthalten ist. Da wir 
+	Ausschneidungsisomorphismen $H_*(U_i,U_i\setminus A;R) \to H_*(M,M \setminus A;R)$ erhalten und $U_i \cong \mathds{R}^n$ ist, gilt die Behauptung nach Schritt 3 für 
+	jedes $A_i$. Mit Schritt 1 folgt die Behauptung auch für $A$. \bewende
+\end{enumerate}
+
 % subsection 1614 (end)
 
 \subsection[Bemerkung: Existenz einer Mayer-Vietoris-Folge für $A,B \subseteq X$ abgeschlossen]{Bemerkung} % (fold)
