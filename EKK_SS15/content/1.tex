@@ -519,3 +519,113 @@ Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $1
 \end{erl}
 
 In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, möglichst zufälliger Primzahlen $p,q$ gebraucht. Man kennt in der Praxis schnelle Tests (den Miller-Rabin-Test), um zu entscheiden, ob eine große Zahl $n$ (mit evtl. hunderten von Stellen in Dezimaldarstellung) zusammengesetzt ist oder (sehr wahrscheinlich) prim. Daher erzeugt man solange Zufallszahlen, bis der Primzahltest "anschlägt".
+
+\newpage
+\subsection{Public-Key-Kryptographie}
+\label{sub:1.2}
+	\Index{Public-Key-Kryptographie} bezeichnet man auch als asymmetrische Kryptographie.\marginnote{[5]} Bei diesem Kommunikationsverfahren hat jeder Nutzer einen \bet{öffentlichen Schlüssel}, den jeder einsehen kann, und einen \bet{privaten Schlüssel}, den jeder Nuter geheim hält. Möchte Nutzer B eine Nachricht an Nutzer A senden, benutzt er zur Verschlüsselung den öffentlichen Schlüssel von A, die Entschlüsselung gelingt aber nur A mit dem privaten Schlüssel. \index{öffentlicher Schlüssel} \index{privater Schlüssel} \\
+	Ein solches Szenario (auch \Index{Protokoll} genannt) ist das RSA-Verfahren, das wir in Abschnitt \ref{subsub:1.2.1} behandeln. Die Verfahren in \ref{subsub:1.2.2} und \ref{subsub:1.2.3} sind Kryptographie-Verfahren, die mit allgemeinen Gruppen machbar sind (RSA arbeitet $(\ZZ_n^*,\cdot)$).
+	
+\subsubsection{RSA-Verfahren}
+\label{subsub:1.2.1}
+	Das \Index{RSA-Verfahren} ist benannt nach einer Arbeit von Rivest\footnote{\url{http://de.wikipedia.org/wiki/Ronald_L._Rivest}}, Shamir\footnote{\url{http://de.wikipedia.org/wiki/Adi_Shamir}} und Adleman\footnote{\url{http://de.wikipedia.org/wiki/Leonard_Adleman}} aus dem Jahr 1978. Seine Sicherheit beruht auf der Schwierigkeit des Faktorisierungsproblems und wird bis heute zur sicheren Kommunikation benutzt. \\
+	Die Methode verlangt auch die Möglichkeit, große Primzahlen zu erzeugen, die möglichst zufällig gewählt sein sollen, ähnlich wie beim Münzwurfproblem. $n = pq$ muss so groß sein, dass alle bekannten Faktorisierungsverfahren zu langsam wären.
+	
+\begin{anw}[Durchführung des RSA-Verfahrens]
+	Die beiden Protagonisten heißen wieder Nutzer Alice (A) und Bob (B). Sie kommunizieren über einen unsicheren Kanal miteinander.
+	\begin{description}
+		\item[Schritt 1:] Jeder Nutzer, z.B. (A), wählt zwei große Primzahlen $p \neq q$, etwa gleich groß mit ähnlicher Stellenanzahl, und berechnet $n = pq$ sowie $\varphi(n) = (p-1)(q-1)$. Dann wählt (A) eine Zahl $e$ mit $1<e<\varphi(n)$ und berechnet $1 < d < \varphi(n)$ als Inverses von $e \mod \varphi(n)$, das heißt $de \kon 1 \modu \varphi(n)$, unter Zuhilfenahme des euklidischen Algorithmus.
+		\item[Schritt 2:] Bob möchte Alice seinen Geheimtext (als eine Zahl $x$ kodiert) schicken. Er besorgt sich die Daten $n,e$ vom Server und verschlüsselt $x$ zu $x^e \modu n$. Dann schickt er ihr das Ergebnis $v \kon x^e \modu (n)$ zwischen $1$ und $n$.
+		\item[Schritt 3:] Alice entschlüsselt den geheimen Text $v$ durch Berechnen von $v^d \modu n$, sie erhält $x$, weil für ein $k \in \ZZ$ gilt: $ed = 1 + k \cdot \varphi(n)$, also folgt mit Euler-Fermat, falls $\ggT(x,n) = 1$:
+		\[ v^d \kon (x^e)^d \kon x^{1+k\cdot \varphi(n)} \kon x \cdot \underbrace{\enbrace*{x^{\varphi(n)}}^k}_{\kon 1 \modu n} \kon x \modu n\]
+	\end{description}
+\end{anw}
+
+\begin{bem}
+	Die nötigen Berechnungen sind: schnelles modulares Potenzieren modulo $n$, d.h. Berechnungen in der multiplikativen Gruppe $(\ZZ_n^*,\cdot)$, Berechnen von $d$ mit dem euklidischen Algorithmus und Erzeugen großer Primzahlen $p,q$.
+\end{bem}
+
+\begin{bem}
+	Ein Unbefugter, der die Daten $n,e,v$ dieser Kommunikation abfängt, ist nicht in der Lage, $x$ ohne Kenntnis von $d,p,q,\varphi(n)$ zu berechnen. Dazu müsste man $n$ faktorisieren.
+\end{bem}
+
+\begin{bem}
+	Wie sicher das Verfahren ist, hängt davon ab, wie groß die verwendeten Schlüssel sind. Aktuell ist eine Verschlüsselung, bei der $p,q$ eine Bitlänge von mindestens $512$ haben sollten, besonders sicher: $2048$ Bit. Empfehlung der Bundesnetzargentur bis Ende 2020: mindestens $1976$ Bit. Gegen einen Angriff mit einem Quantencomputer hat man allerdings keine Chance.
+\end{bem}
+
+\begin{bem}
+	Auch in den seltenen Fällen $p \mid x$ oder $q \mid x$, das heißt $\ggT(x,n) > 1$, arbeitet das Verfahren korrekt (ohne Beweis).
+\end{bem}
+
+\begin{bem}
+	Das Verfahren kann auch ohne Schlüsselserver benutzt werden. B kann A erst mitteilen, dass er ihr eine Nachricht schicken will. Dann erst erledigt A Schritt 1 und teilt ihm die Daten $n,e$ mit. Der Rest geht dann wie oben.
+\end{bem}
+
+\begin{bem}[Zur Geschichte von RSA]
+	RSA wurde 1983 als Patent angemeldet, welches 2000 erlosch. Bis Ende der 90er Jahre verbot die US-Regierung Firmen, Software mit starker Verschlüsselung zu exportieren (z.B. T-Shirts mit aufgedruckter RSA-Anleitung\dots). Weiter sollten per Gesetzesvorlage Anbieter elektronischer Kommunikationsdienste dazu verpflichtet werden, Behörden die Möglichkeit zum Zugriff zu verschaffen; das Gesetz scheiterte am Widerstand von Industrie und Bürgerrechtlern. Es motivierte Phil Zimmermann\footnote{\url{http://de.wikipedia.org/wiki/Phil_Zimmermann}} dazu, den Standard \Index{PGP} (pretty good privacy) zu entwickeln, mit dem bis heute E-Mails und anderes für Jedermann sicher verschlüsselt werden können (speziell mit RSA; öffentliche Schlüsselserver dafür gibt es im Internet, z.B. auf \href{http://pgp.mit.edu}{pgp.mit.edu}). Zimmermannn stellte sein Programm 1991 kostenlos zur Verfügung. Es wurde ein Verfahren gegen ihn eröffnet, das sich über drei Jahre lang hinzog (Vorwurf: er exportierte Verschlüsselungstechnologie, die wie Waffentechnologie einzustufen sei). Der Fall wurde fallengelassen, heute ist die Benutzung und Export in den USA straffrei. Bis heute zählt PGP als sicherste und empfehlenswerteste Verschlüsselung privater Kommunikation.
+\end{bem}
+
+\begin{anw}[Kodierung von Textnachrichten]
+	Wir beschreiben hier ein Verfahren, das die Machbarkeit der Kodierung "Text $\rightarrow$ Zahl" demonstrieren soll. Wenn man es so anwenden möchte, sind aber größere Blöcke erforderlich, damit nicht durch Häufigkeitsanalysen der Blöcke Rückschlüsse auf die Geheimnachricht möglich werden. \\
+	Die Buchstaben A, \dots, Z des Alphabets werden mit $0, \dots, 25$ identifiziert, das Leerzeichen mit $26$. Klartexte werden zu Blöcken aus je drei Zahlen zusammengefasst, also z.B.
+	\begin{center}
+		\texttt{KLARTEXT\_} \quad $\Rightarrow \quad 10,11,0 | 17,19,4 | 23,19,26$
+	\end{center}
+	Jedem Block $x_1,x_2,x_3$ ordnen wir die Zahl $x = x_1 \cdot 27^2 + x_2 \cdot 27 + x_3$ (im 27er System) zu, also
+	\begin{center}
+		\texttt{KLARTEXT\_} \quad $\Rightarrow 7587 | 12910 | 17306$,
+	\end{center}
+	welche beim RSA-Verfahren gemäß $x^e \kon v \modu n$ verschlüsselt wird. Jeder Wert $v$ wird im 29er-System umgewandelt gemäß $v = v_1 \cdot 29^2 + v_2 \cdot 29 + v_3$ zu einem Block $v_1,v_2,v_3 \in \{0, \cdot, 28\}$, der wieder als Text geschrieben werden kann (mit zusätzlichen Zeichen für $27$ und $28$, z.B. "."=$27$, ","=$28$). \\
+	Ist $n$ zwischen $27^3$ und $29^3$, werden Ver- und Entschlüsselung eindeutig (ohne Beweis) $\rightsquigarrow$ für größere $n$ werden größere Blöcke nötig!
+\end{anw}
+
+\subsubsection{Diffie-Hellman-Verfahren}
+\label{subsub:1.2.2}
+
+\setcounter{counter}{8}
+\begin{defn}[Das Problem des diskreten Logarithmus (DL-Problem)]
+	Gegeben sei eine abelsche Gruppe. Wir beschreiben das Problem multiplikativ und additiv: \index{diskreter Logarithmus}
+	\begin{description}
+		\item[In $(G,\cdot,1)$:] Sei $x \in G$, $n = \ord(x), y \in \sprod{x} = \{x^l : l \in \ZZ\}$. Bestimme $k \modu n$ mit $y = x^k$.
+		\item[In $(G,+,0)$:] Sei $x \in G, n \ord(x), y \in \sprod{x} = \{lx : l \in \ZZ\}$. Bestimme $k \modu n$ mit $y = kx$.		
+	\end{description}
+\end{defn}
+
+\begin{bem}
+	Ist eine Gruppe $G$ gegeben, in der das DL-Problem schwer ist, kann dies für ein Kryptoverfahren genutzt werden.\begin{itemize}
+		\item Im Fall $G = (\ZZ_m^*,\cdot,1)$ ist das DL-Problem ähnlich schwer wie das Faktorisierungsproblem. Auch dafür konnte Short 1994 zeigen, dass es auf einem Quantencomputer schnell lösbar ist.
+		\item Im Fall, dass $G = (E(k),+,\oh)$ die Gruppe einer (kryptographisch) geeigneten elliptischen Kurve ist, ist das DL-Verfahren quasi unlösbar. Die besten bekannten Algorithmen sind langsamer als die für das DL-Problem für $\ZZ_m^*$. Darauf beruht die als höher angesehene Sicherheit bei der Kryptographie mit elliptischen Kurven. Algorithmen auf Quantencomputern, die das DL-Problem für elliptische Kurven schnell lösen könnten, sind derzeit unbekannt.
+	\end{itemize}
+\end{bem}
+
+\begin{anw}[Diffie-Hellman-Schlüsselaustausch]
+	Hier vereinbaren Alice (A) und Bob (B) durch einen öffentlichen Kanal einen gemeinsamen geheimen Schlüssel, die sie dann für ein symmetrisches Kryptoverfahren nutzen können. Gegeben sei eine Gruppe $G$ und $x \in G$, sowie $n \in \NN$. Diese Daten seien öffentlich bekannt.\index{Diffie-Hellman} \\
+	Das Verfahren in $(G,\cdot,1)$:
+	\begin{description}
+		\item[Schritt 1:] Alice denkt sich eine Zahl $a \in \{1,\dots,n-1\}$ und schickt $x^a \in G$ an Bob.\\
+		Bob denkt sich eine Zahl $b \in \{1,\dots,n-1\}$ und schickt $x^b \in G$ an Alice.
+		\item[Schritt 2:] Alice berechnet mit $a$ das Gruppenelement $(x^b)^a$. \\
+		Bob berechnet mit $b$ das Gruppenelement $(x^a)^b$. \\
+		Danach besitzen beide den gemeinsamen geheimen Schlüssel $(x^b)^a = x^{ab} = x^{ba}$.
+	\end{description}
+	Das Verfahren in $(G,+,0)$:
+	\begin{description}
+		\item[Schritt 1:] Alice denkt sich eine Zahl $a \in \{1,\dots,n-1\}$ und schickt $ax \in G$ an Bob.\\
+		Bob denkt sich eine Zahl $b \in \{1,\dots,n-1\}$ und schickt $bx \in G$ an Alice.
+		\item[Schritt 2:] Alice berechnet mit $a$ das Gruppenelement $a\cdot(bx)$. \\
+		Bob berechnet mit $b$ das Gruppenelement $b\cdot(ax)$. \\
+		Danach besitzen beide den gemeinsamen geheimen Schlüssel $a\cdot(bx) = abx = b\cdot(ax)$.
+	\end{description}
+\end{anw}
+
+\begin{bem}[Diffie-Hellman-Problem, DH-Problem]
+	Ein Unbefugter, der die Daten $x^a, x^b$ bzw. $ax,bx$ abhört, kann die geheimen Schlüssel berechnen, wenn er das DL-Problem lösen kann. Es genügt aber schon, dafür das folgende, eventuell leichtere Problem zu lösen: \\
+	Berechne zu $x^a, x^b \in \sprod{x} \subseteq G$ in $(G,\cdot,1)$ das Element $x^{ab} \in \sprod{x}$. \\
+	Es ist aber davon auszugehen, dass auch DH ein schweres Problem ist. \\
+	(Bemerkung: DL lösbar $\Rightarrow$ DH lösbar ist klar, "$\Leftarrow$" ist unbekannt.)
+\end{bem}
+
+\begin{bem}
+	Weiter ist beim Schlüsselaustausch entscheidend, dass sich Alice und Bob sicher sein können, wirklich mit dem angegebenen Teilnehmer zu kommunizieren: Ein Unbefugter könnte versuchen, sich erst als Alice auszugeben, und so mit Bob einen Schlüssel $x^{eb}$ auszutauschen und dies Ebenso mit Alice tun ($x^{ea}$). Gelingt dies, braucht der Unbefugte nur die verschlüsselten Nachrichten zwischen Alice und Bob abzufangen: \\
+	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. Er kann so die gesamte geheime Kommunikation abhören. Man nennt dies eine \index{man-in-the-middle-Attacke}.
+\end{bem}
