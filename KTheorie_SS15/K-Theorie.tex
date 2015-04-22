@@ -311,7 +311,7 @@ existieren. $F$ induziert Bijektionen
 Jetzt gibt es eine eindeutige Topologie auf $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$, so dass die eben definierten Abbildungen 
 $\psi_i = F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m}}$ Homöomorphismen werden, wobei $U_i \times F \enbrace*{K^{\ell_1}, \ldots , K^{\ell_m}}$ 
 die Produkttopologie trägt: Eine Menge $V \subset F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$ ist offen, falls sie die Vereinigung von Mengen der Form 
-$\psi_i^{-1}(V_i)$ mit $V_i \subset U_i \times F \enbrace*{K^{\ell_1}, \ldots , K^{\ell_m}}$ offen ist und $\psi_j \circ \psi_i ^{-1}(V)$ offen ist.
+$\psi_i^{-1}(V_i)$ mit $V_i \subset U_i \times F \enbrace*{K^{\ell_1}, \ldots , K^{\ell_m}}$ offen ist.
 
 Damit diese Definition konsistent ist, müssen wir folgendes prüfen: Sei $V \subset (U_i \cap U_j) \times F(K^{\ell_1}, \ldots , K^{\ell_m})$ offen. Wir haben zu zeigen, dass 
 dann auch $\psi_j \circ \psi_i^{-1}(V)$ offen ist. Aber es gilt $\psi_j \circ \psi_i ^{-1}(x,v)= \enbrace[\big]{x, \psi_{ij}(x)(v)}$ für eine Abbildung
@@ -336,6 +336,147 @@ die Vektorraumstruktur der äußeren direkten Summe trägt.
 \minisec{Übungsaufgabe}
 Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta^*(E \times F) \cong E \oplus F$ als Vektorbündel über $X$.
 % subsection 25 (end)
+\section*{Homotopieinvarianz von Pullbacks}
+\minisec{Erinnerung}
+Ein topologischer Raum heißt \bet{normal}\index{normaler topologischer Raum}, falls sich zwei disjunkte abgeschlossene Mengen durch offene Mengen trennen lassen. 
+\minisec{Bemerkung}
+Jeder kompakte Hausdorffraum ist normal. \emph{Übungsaufgabe}\todo{In den Anhang?}
+
+\subsection{Satz (Fortsetzungssatz von Tietze)} % (fold)
+\label{sub:26}
+Sei $X$ ein normaler Raum, $A \subset X$ abgeschlossen und $V$ ein endlich dimensionaler $K$-Vektorraum. Zu jeder stetigen Abbildung $f \colon A \to V$ existiert eine 
+stetige Abbildung $F \colon X \to V$ mit $F|_A=f$.
+\minisec{Beweis}
+
+\minisec{Definition}
+Sei $p \colon E \to X$ ein $K$-Vektorbündel über einem topologischen Raum $X$. Ein \Index{Schnitt} von $E$ ist eine stetige Abbildung $s \colon X \to E$ mit 
+$p \circ s = \id_X$. Das heißt $s(x) \in E_x$. Jedes Vektorbündel hat einen Schnitt, nämlich den trivialen Schnitt $s(x)=0 \in E_x$.
+% subsection 26 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:27}
+Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colon E \to X$ und $p' \colon E' \to X$ zwei $K$-Vektorbündel. Dann gilt:
+\begin{enumerate}[a)]
+	\item Jeder Schnitt $s \colon A \to E|_A$ lässt sich zu einem Schnitt $\overline{s} \colon X \to E$ fortsetzen.
+	\item Sei $\iota \colon A \hookrightarrow X$ die Inklusion und $E|_A := \iota^* E$, sowie $E'|_A := \iota^* E'$. Sei weiter $f \colon E|_A \to E'|_A$ ein Morphismus von 
+	Vektorbündeln. Dann existiert ein Morphismus $\hat{f} \colon E \to E'$, der $f$ fortsetzt. Ist $f$ ein Isomorphismus, dann existiert eine offene Menge $U \supset A$, 
+	sodass $\hat{f}|_U \colon E|_U \to E'|_U$ ein Isomorphismus von Vektorbündeln ist.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Wähle eine endliche Überdeckung $(U_i)_{i=1,\ldots ,N}$ von $X$, sodass lokale Trivialisierungen $\varphi_i \colon E|_{U_i} \to U_i \times K^n$ existieren. Nach 
+	dem Fortsetzungssatz lässt sich 
+	\[
+		\pr_{K^n} \circ \varphi_i \circ s\big|_{U_i \cap A} \colon U_i \cap A \longrightarrow K^n 
+	\]
+	zu einer stetigen Abbildung auf $U_i$ fortsetzen, also auch $s|_{U_i \cap A}$ selbst. Sei $\overline{s}_i$ eine solche Fortsetzung. Sei $\psi_i \colon X \to [0,1]$ eine 
+	Partition der Eins\footnote{siehe \url{https://de.wikipedia.org/wiki/Zerlegung_der_Eins}}, die der Überdeckung $(U_i)_{i=1,\ldots ,N}$ untergeordnet ist. Sei
+	\[
+		\overline{s} = \sum_{i=1}^{N} \psi_i \cdot \overline{s}_i \colon X \longrightarrow E 
+	\]
+	Dann gilt $\overline{s}|_A = \enbrace*{\sum_{i=1}^{N} \psi_i} \cdot s|_A= s|_A$.
+	\item Die Morphismen $E \xrightarrow{f} E'$ entsprechen den Schnitten des Vektorbündels $\Hom(E,E') \to X$ wie folgt: Jedem $f$ lässt sich ein Schnitt
+	\[
+		s_f(x)(v) := f(v)
+	\]
+	zuordnen. Jedem Schnitt $s \colon X \to \Hom(E,E')$ entspricht ein Morphismus $f_s(v)=s \enbrace*{p(v)}(v) \in E'_{p(v)}$. Somit folgt der erste Teil aus a).
+	
+	Sei $\pi \colon \Hom(E,E') \to X$ die Bündelabbildung. Sei weiter
+	\[
+		\Iso(E,E') = \set[g \in \Hom(E,E')]{g \colon E_{\pi(g)} \to E'_{\pi(g)} \text{ ist ein Isomorphismus}} 
+	\]
+	Dann ist $\Iso(E,E') \to X$ ein lokal triviales Bündel, allerdings \emph{kein} Vektorbündel. Sind $E$ und $E'$ $n$-dimensional, ist die Faser von $\Iso(E,E')$ homöomorph
+	zu $\GL_n(K)$. Da $\GL_n(K) \subset M_n(K)$ offen ist und $\Iso(E,E')$ lokal trivial ist, folgt, dass $\Iso(E,E') \subset \Hom(E,E')$ offen ist.\footnote{da lokal 
+	homöomorph zu$U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
+	$U = {s_{\hat{f}}}\mkern-0.5mu^{-1} \enbrace*{\Iso(E,E')}$ für $s_{\hat{f}} \colon X \to \Hom(E,E')$. Dann ist $U$ offen und $s_{\hat{f}}|_U$ entspricht einem 
+	Isomorphismus $\hat{f} \colon E|_U \to E'|_U$. \bewende
+\end{enumerate}
+% subsection 27 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:28}
+Seien $a,b \in \mathds{R}$ mit $a <b$ und $X$ ein topologischer Raum. Sei weiter $p \colon E \to X \times [a,b]$ ein $K$-Vektorbündel. Es geben $c \in (a,b)$, so dass 
+$E|_{X \times [a,c]}$ und $E|_{X \times [c,b]}$ trivialisierbar sind. Dann ist auch $E$ trivialisierbar.
+\minisec{Beweis}
+Sei ohne Beschränkung der Allgemeinheit $X$ zusammenhängend. Seien 
+\begin{align*}
+	\varphi_a \colon X \times [a,c] \times K^n &\xrightarrow{\minwidthbox{\cong}{2em}} E\big|_{X \times [a,c]} \\ 
+	\varphi_b \colon X \times [c,b] \times K^n &\xrightarrow{\minwidthbox{\cong}{2em}} E\big|_{X \times [c,b]}
+\end{align*}
+entsprechende Trivialisierungen. Sei außerdem
+\[
+	h := \enbrace*{\varphi_b\big|_{X \times \set{c} \times K^n }} ^{-1} \circ  \enbrace*{\varphi_a\big|_{X \times \set{c} \times K^n}} \colon X \times \set{c} \times K^n    
+\]
+$h$ hat die Form $h(x,v)= (x , g(x) \cdot v)$ für eine stetige Abbildung $g \colon X \to \GL_n(K)$. Sei jetzt 
+\[
+	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \quad (x,t,v') \longmapsto (x,t,g(x)v')
+\]
+Dann gilt $\varphi_a|_{X \times \set{c} \times K^n} = \varphi_b \circ w |_{X \times \set{c} \times K^n }$. Daher können wir diese beiden Abbildungen zu einem Isomorphismus 
+von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen. \bewende 
+% subsection 28 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:29}
+Sei $X$ ein kompakter Raum. Sei $p \colon E \to X \times I$ ein $K$-Vektorbündel. Dann gibt es eine endliche offene Überdeckung $\set{U_i}_{i=1}^N$ von $X$, so dass 
+$E|_{E_i \times I}$ trivialisierbar ist.
+\minisec{Beweis}
+Sei $x \in X$ und $t \in I$. Dann existieren offene Umgebungen $U(t) \subset X$ und $I(t) \subset I$, sodass $E|_{U(t) \times I(t)}$ trivialisierbar ist. Da $I$ kompakt ist,
+existiert eine endliche Folge $0=t_0 < t_1 < \ldots < t_N =1$ zusammen mit offenen Umgebungen $U_i$ von $x$, so dass $E|_{U_i \times [t_{i-1}, t_i]}$ trivialisierbar ist. 
+Sei nun $U := \bigcap_{i=1}^N U_i$. Nach Lemma \ref{sub:28} ist $E|_{U \times I}$ trivialisierbar. Da $X \times I$ kompakt ist, wird es von endlichen vielen solcher Mengen
+überdeckt. \bewende
+% subsection 29 (end)
+
+\subsection{Theorem} % (fold)
+\label{sub:210}
+Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbündel. Sei $E_1 = E|_{X \times \set{1}}$.
+\begin{enumerate}[a)]
+	\item Es gibt einen Isomorphismus von Vektorbündeln über $X \times I$
+	\[
+		\begin{tikzcd}
+			\varphi \colon E \rar["\cong"]  & E_1 \times I 
+		\end{tikzcd}
+	\]
+	mit $\varphi|_{p ^{-1}(X \times \set{1})} =\id_{E_1}$
+	\item Sei $(X,A)$ ein Ko-Raumpaar, $h \colon X \times I \to Y$ eine stetige Abbildung und $p' \colon E' \to Y$ ein $K$-Vektorbündel mit $E \cong h^* E'$. Falls jetzt
+	$h_t(a)=h_0(a)$ für alle $a \in A$, dann lässt sich der Isomorphismus aus a) so wählen, dass er den durch $h$ induzierten Isomorphismus 
+	$E|_{A \times I} \to E_1|_{A} \times I$ fortsetzt.
+\end{enumerate}
+\minisec{Beweis}
+Nach Lemma \ref{sub:29} können wir eine Überdeckung von $X \times I$ durch offene Mengen der Form $U_i \times I$ mit $i \in \set{1,\ldots ,N}$ finden, so dass 
+$E|_{U_i \times I}$ trivialisierbar ist. Seien $h_i \colon U_i \times I \times K^n \xrightarrow{\cong} E|_{U_i \times I}$ Trivialisierungen. Seien 
+$\eta_i \colon X \to [0,1]$  stetige Funktionen mit folgenden Eigenschaften:
+
+\begin{enumerate*}[(i),itemjoin={,\hspace{2em}}]
+	\item $\supp(\eta_i) \subset U_i$
+	\item $\max_{i=1,\ldots ,N} \eta_i(x)=1$ für alle $x \in X$
+\end{enumerate*}
+
+\noindent Sei $r_i \colon X \times I \to X \times I$ gegeben durch $r_i(x,t)=(x, \max(\eta_i(x),t))$. Ein Punkt $(x,t)$ wird durch $r_i$ entlang der $I$-Achse nach $1$ verschoben. Der 
+Wert der Verschiebung wird durch $\eta_i$ festgelegt.
+\missingfigure{Schöne Quadrate $X \times I$}
+Nun konstruieren wir einen Morphismus von $K$-Vektorbündeln $(u_i,r_i)$ über $r_i$ wie folgt: 
+\[
+	u_i \enbrace*{h_i(x,t,v)} = h_i \enbrace*{r_i(x,t),v}  
+\]
+für $(x,t,v) \in U_i \times I \times K^n$. Wir setzen $u_i=\id$ außerhalb des Bildes von $h_i$. Wegen 
+$r_i|_{X \times I\setminus{U_i} \times I} =\id_{X \times I \setminus U_i \times I}$ ist dies stetig. Außerdem kommutiert
+\[
+	\begin{tikzcd}
+		E \rar["u_i"] \dar["p"]& R \dar["p"]\\
+		X\times I \rar["r_i"] & X \times I
+	\end{tikzcd}
+\]
+und $u_i$ ist auf den Fasern linear. Sei $r :=r_N \circ r_{N-1} \circ \ldots \circ r_1$. Wegen (ii) gilt $r(x,t)=(x,1)$. Sei $u := u_N \circ \ldots \circ u_2 \circ u_1$.
+Dann ist $(u,r)$ ein Morphismus von Vektorbündeln. 
+Außerdem haben wir 
+\[
+	\begin{tikzcd}[row sep=small]
+		E \rar \drar & E \\
+		& E_1 \uar[hook]
+	\end{tikzcd}
+\]
+Setze jetzt $\varphi \colon E \to E_1 \times I$, $v \mapsto \enbrace*{u(v), \pr_I \circ p(v)} $. Dann ist $(\varphi, \id_{X \times I})$ ein Isomorphismus von Vektorbündeln mit $\varphi|_{X \times \set{1}} =\id$. \bewende
+% subsection 210 (end)
 % section 2 (end)
 
 

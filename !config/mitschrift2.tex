@@ -101,7 +101,7 @@
 %-- Alles was mit Schrift und XeTeX zu tun hat
 \ifxetexorluatex
     % XeLaTeX or LuaTeX
-	\usepackage[euler-digits,euler-hat-accent]{eulervm}
+	\usepackage[euler-digits]{eulervm}
 	\usepackage[no-math]{fontspec}
     \usepackage{polyglossia} % moderner babel-ersatz
     \setmainlanguage[spelling=new,babelshorthands=true]{german}
@@ -111,13 +111,12 @@
 	% \newcommand\grqq{"}
 	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.2}, Ligatures=Common} %
 	\setmainfont{texgyrepagella}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
-	% \setmainfont{Palatino Linotype}
     % \setmainfont[BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
-	\setsansfont[Scale=MatchLowercase]{Source Sans Pro}
+	% \setsansfont{SourceSansPro}[Scale=MatchLowercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Semibold,ItalicFont=*-LightIt,BoldItalicFont=*-SemiboldIt]
 	% \newfontfamily{\geometric}{texgyreheros}[Scale=MatchLowercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
-	\setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
+	\setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
 	% \addtokomafont{disposition}{\geometric}
-	\setmonofont[Scale=0.9]{Source Code Pro}
+	\setmonofont{SourceCodePro}[Scale=0.9,Extension=.otf,UprightFont=*-Regular, BoldFont=*-Semibold, ItalicFont=*-Light]
 	\usepackage{xltxtra}
 	\usepackage{fontawesome}
 	\usepackage{microtype}
@@ -134,7 +133,7 @@
 
 
 %--Mixed
-\usepackage[shortlabels]{enumitem}
+\usepackage[shortlabels,inline]{enumitem}
 \ifxetexorluatex\setlist[itemize,1]{label=\faCaretRight}\fi
 \setlist[enumerate]{font=\bfseries}
 \usepackage[german=quotes]{csquotes}
@@ -181,10 +180,12 @@
 \usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
 
 \ifxetexorluatex
-\newcommand{\hrefsym}[2]{\href{#1}{\texttt{#2\,\faExternalLink}}}
+\newcommand{\appendLink}[1]{#1\,\faExternalLink}
+\newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
 \newcommand{\hrefsymmail}[2]{\href{#1}{\texttt{\faEnvelope\,#2}}}
 \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
 \fi
+\providecommand{\appendLink}{ }
 \providecommand{\hrefsym}{\href}
 \providecommand{\hrefsymmail}{\hrefsym}
 
@@ -209,6 +210,7 @@
 \DeclareMathOperator{\Vol}{Vol} %Volumen
 \DeclareMathOperator{\dom}{dom} %Domain
 \DeclareMathOperator{\Hom}{Hom} %Homomorphismen
+\DeclareMathOperator{\Iso}{Iso} %Isomorphismen
 \DeclareMathOperator{\bild}{Bild} %Bild
 \DeclareMathOperator{\Kern}{Kern}
 \DeclareMathOperator{\ev}{ev} %Auswertungsabbildung
