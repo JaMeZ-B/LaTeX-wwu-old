@@ -724,7 +724,7 @@ $X$ metrischer Raum, $Y \subseteq X$. Dann sind Äquivalent:
 \minisec{Beweis:}
 \minisec{Vorbemerkung:} $y \in X$ ist genau dann ein Berührpunkt von $Y \subseteq X$, wenn es eine Folge $(y_n)_n$ gibt mit $(y_n) \in Y$ und $\lim_{n \to \infty}y_n = y$
 \minisec{Beweis der Vorbemerkung:}
-$"\Leftarrow"$: ist $\lim_{n \to \infty}y_n=y \qquad y_n \in Y$
+$"\Leftarrow"$: Ist $\lim_{n \to \infty}y_n=y \qquad y_n \in Y$
 \begin{align*}
 	& \Rightarrow \forall\, \varepsilon>0 \,\exists\,n: \, d(y,y_n)<\varepsilon \\
 	&\Rightarrow \forall\, \varepsilon>0 \, y_n \in B_{\varepsilon}(y) \cap Y \neq \varnothing \\
@@ -745,7 +745,8 @@ Sei 1) nicht erfüllt. Dann:
 	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow}  Y \subseteq X \text{ nicht abgeschlossen in } X \\
 	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} X \setminus Y \text{ nicht offen in } X \\
 	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, y \text{ kein innerer Punkt von } X \setminus Y \\
-	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, \forall\, \varepsilon>0 \qquad B_{\varepsilon}(y) \subsetneq X \setminus Y
+	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, \forall\, \varepsilon>0 \qquad B_{\varepsilon}(y) \not\subseteq X
+	 \setminus Y
 	 \\
 	& \stackrel{\hphantom{\text{Vorbem.}}}{\Leftrightarrow} \exists\,y \in X \setminus Y, \, \forall\, \varepsilon>0 \qquad B_{\varepsilon}(y) \cap Y \neq \varnothing
 	 \\
@@ -798,7 +799,7 @@ Sei $\varepsilon>0$
 	&\Rightarrow \exists\,n_0: \, \forall\, n \geq n_0: \, d(f(x),f(x_n))<\varepsilon \text{ d.h. } f(x_n) \to f(x)
 \end{align*}
 % subsubsection satz (end)
-\subsubsection{Beispiel:} % (fold)
+\subsubsection{Beispiel} % (fold)
 \label{ssub:beispiel}
 $(V,\norm{.})$ normierter Vektorraum
 \[
@@ -809,4 +810,188 @@ Also sind die Mengen (für $x \in V$, $r \geq 0$)
 	\{y \in V \, | \, \norm{x-y}\leq r \} \subseteq V \text{ und } \{y \in V \,|\, \norm{x-y}=r \} \subseteq V
 \] abgeschlossen.
 % subsubsection beispiel (end)
+\subsection{Kompaktheit} % (fold)
+\label{sub:kompaktheit}
+
+\minisec{Erinnerung: Satz von Bolzano-Weierstraß}
+'Jede beschränkte Folge in $\mathbb{R}$ besitzt eine konvergente Teilfolge'
+\begin{itemize}
+	\item $\rightarrow $ Cauchy-Konvergenzkriterium
+	\item $\rightarrow $ Satz vom Minimum und Maximum (Wenn $f:A \to B$ stetig, dann gilt: $f$ nimmt Minimum und Maximum an)
+	\item $\to$ Mittelwertsatz der Differentialrechnung
+	\item $\to$ \underline{Satz:} $f:[a,b] \to \mathbb{R}$ stetig $\Rightarrow$ f ist gleichmäßig stetig. \\
+		  $\Rightarrow$ stetige Funktionen sind Riemann-integrierbar
+\end{itemize}
+\subsubsection{Satz von Bolzano-Weierstraß im $\mathbb{R}^n$} % (fold)
+\label{ssub:satz_von_bolzano_weierstrass_im_mathbb_r_n}
+Jede beschränkte Folge in $\mathbb{R}^n$ besitzt eine konvergente Teilfolge.
+ 
+\minisec{Beweis:}
+Sei $(x(k))_k$ Folge in $\mathbb{R}^n$, $\norm{x(k)}_2 \leq C \quad  \forall\, k$. \\
+$x_i(k) \quad  i=1,\dots,n$ Komponenten
+\[
+	\Rightarrow \underset{\text{Folge in } \mathbb{R}}{\underbrace{\abs{x_i(k)}}} \leq \norm{x(k)}^2 \leq C
+\]
+Nach Bolzano-Weierstraß gibt es eine Teilfolge $(x(k_l))_l$ von $x(k)$, so dass $x_1(k_l)$ (in $\mathbb{R}$) Konvergiert
+Nenne \[
+	x(1,l)=x(k_l)
+\]
+\[
+\begin{matrix}
+	\text{1. Komponente} & \text{2. Komponente} & \text{$n$-te Komponente} \\
+	x(k_1=x(1,1) & x(2,1) & x(n,1) \\
+	x(k_2)=x(1,2) & x(2,2) & x(n,2) \\
+	\vdots & \vdots & \vdots 
+\end{matrix}
+\]
+\[
+	\begin{matrix}
+		\text{Teilfolge} & (x(1,k))_k & (x_1(1,k)_k) \text{ Konvergiert} \\
+		\text{Teilfolge} & (x(2,k))_k & (x_2(2,k)_k) \text{ Konvergiert} \\
+		\vdots & \vdots & \vdots \\
+		\text{Teilfolge} & (x(n,k))_k & (x_n(n,k)_k) \text{ Konvergiert}
+	\end{matrix}
+\]
+\begin{align*}
+	&\Rightarrow \text{Alle Komponentenfolgen von } (x(n,k))_k \text{ konvergieren} \\
+	&\Rightarrow (x(n,k))_k \text{ ist Konvergent}
+\end{align*}
+\bewende
+% subsubsection satz_von_bolzano_weierstrass_im_mathbb_r_n (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Ein metrischer Raum $X$ heißt {\bfseries folgenkompakt}, falls für jede Folge $(x_n)_n$ in $X$ eine konvergente Teilfolge hat. \\
+Eine Teilmenge $Y \subseteq Y$ eines metrischen Raumes heißt folgenkompakt, falls jede Folge in $(y_n)_n$ in $Y$ eine (in $Y$!) konvergente Teilfolge besitzt.
+\[
+	( \Leftrightarrow Y \text{ mit der von $X$ eingeschränkten Metrik, ist Folgenkompakt} )
+\]
+% subsubsection definition (end)
+\subsubsection{Beispiel:} % (fold)
+\label{ssub:beispiel}
+\begin{enumerate}
+	\item $[a,b]$ folgenkompakt
+	\item $X= \{ x \in \mathbb{R}^n \,|\, \norm{x}_2 \leq C \}$ ist folgenkompakt: $(x_k)_k$ Folge in $X$
+	\[
+		\stackrel{I.5.1}{\Rightarrow } \exists\, \text{ TF } x_k \to x \in \mathbb{R}^n
+	\]
+	aber $X \subseteq \mathbb{R}^n$ ist abgeschlossen, also $x \in X$
+	\item $(0,1)$,$(0,1]$ nicht folgenkompakt (Betrachte Folge ($\frac{1}{n})_n$)
+	\item $\mathbb{R}$ nicht folgenkompakt (Die Folge $(n)_n$ hat keine Konvergente TF)
+	\item $\mathbb{Q} \cap [0,1] \subseteq \mathbb{R}$ nicht folgenkompakt.
+	\[
+		\text{Ist } x \in [0,1], \text{ so gibt es eine Folge } x_n \in [0,1] \cap \mathbb{Q} \text{ mit } x_n \to x
+	\]
+	Dann hat $x_n$ keine in $[0,1] \cap \mathbb{Q}$ konvergente Teilfolge (falls $x$ irrational)
+\end{enumerate}
+% subsubsection beispiel (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$X$ metrischer Raum
+\begin{enumerate}
+	\item Ist $X$ folgenkompakt, so ist $X$ vollständig
+	\item $X$ folgenkompakt, $Y \subseteq X$ abgeschlossen $\Rightarrow$ $Y$ folgenkompakt
+	\item $Y \subseteq X$, $Y$ folgenkompakt $\Rightarrow$ $Y \subseteq X$ abgeschlossen
+\end{enumerate}
+
+\minisec{Beweis:}
+\begin{enumerate}
+	\item Sei $(x_n)_n$ Cauchyfolge in $X$
+	\[
+		X \text{ folgenkompakt } \Rightarrow \text{ es gibt konvergente Teilfolge } x_{n_k} \to x \in X 
+	\]
+	\minisec{Beh.} $x_n \to x$ \\
+	Denn \[
+		d(x,x_n) \leq d(x,x_{n_k})+d(x_{n_k},x_n)
+	\] Sei $\varepsilon>0$ Wähle $n_0 \quad \forall\, n,m \geq n_0: \, d(x_n,x_m)< \frac{\varepsilon}{2}$ \\
+	Wähle $k: \quad n_k \geq n_0 $
+	\[
+		\text{für } n \geq n_k \quad d(x,x_n) \leq \underset{< \frac{\varepsilon}{2}}{\underbrace{d(x,x_{n_k})}} + 
+		\underset{< \frac{\varepsilon}{2}}{\underbrace{d(x_{n_k},x)}} y \varepsilon
+	\]
+	\item Sei $(y_n)_n$ Folge in $Y \subseteq X$
+	\[
+		X \text{ folgenkompakt } \Rightarrow \exists\, \text{ TF } y_{n_k} \text{, welche gegen ein $x \in X$ konvergiert}
+	\]
+	Weil $Y \subseteq X$ abgeschlossen, gilt
+	\[
+		x = \lim_{k \to \infty}y_{n_k} \in Y \qquad \Rightarrow \qquad (y_{n_k})_k \text{ ist in $Y$ konvergent}
+	\]
+	$\Rightarrow Y$ folgenkompakt
+	\item \underline{zu zeigen:} Ist $(y_n)_k$ Folge in $Y$. $y_n \to x \in X \Rightarrow x \in Y$ \\
+	$(y_n)$ ist Cauchyfolge. \\
+	 Nach 1) ist $Y$ vollständig, dh $\exists\, z \in y: \quad y_n \in z $
+	\[
+		\Rightarrow x=z \text{, daher } x \in Y
+	\]
+\end{enumerate}
+% subsubsection satz (end)
+\subsubsection{Satz von Heine-Borel} % (fold)
+\label{ssub:satz}
+Eine Teilmenge $X \subseteq \mathbb{R}^n$ ist folgenkompakt $\Leftrightarrow$ $X$ ist beschränkt und abgeschlossen in $\mathbb{R}^n$
+
+\minisec{Beweis:}
+\underline{'$\Rightarrow$'}: Sei $X$ folgenkompakt. Dann folgt aus I.5.4 3): $X \subseteq \mathbb{R}^n$ abgeschlossen \\
+Wäre $X$ nicht beschränkt, dann gäbe es zu jedem $n \in \mathbb{N}$ ein $x_n \in X$ mit $\norm{x}_2 \geq n$ \\
+Die Folge $(x_n)$ kann dann keine konvergente Teilfolge enthalten, also kann $X$ nicht folgenkompakt sein! \\
+\\
+\underline{'$\Leftarrow$'}: Sei $X \subseteq \mathbb{R}^n$ beschränkt und abgeschlossen \\
+Sei $(x_n)_n$  Folge in $X$. \\
+Die Folge $(x_n)_n$ ist beschränkt. 
+\[
+	\stackrel{I.5.1}{\Rightarrow} \text{ es gibt konvergente Teilfolge } x_{n_k} \to x \in \mathbb{R}^n
+\]
+Weil $X$ abgeschlossen in $\mathbb{R}^n$, ist $x \in X$
+\[
+	\Rightarrow X \text{ folgenkompakt}
+\]
+\bewende
+
+\minisec{Beispiele:}
+\begin{itemize}
+	\item $D^n = \{ x \in \mathbb{R}^n \, | \, \norm{x} \leq 1 \} \subseteq \mathbb{R}^n$ \qquad \underline{abgeschlossene Einheitskugel}
+	\item $S^{n-1}= \{ x \in \mathbb{R}^n \, | \, \norm{x}_2=1 \} \subseteq \mathbb{R}^n$ \qquad \underline{Einheitssphäre}
+\end{itemize}
+$\Rightarrow$ $D^n$,$S^{n-1}$ folgenkompakt, denn $D^n$,$S^{n-1}$ beschränkt und:
+\[
+	f: \mathbb{R}^n \to \mathbb{R} \qquad f(x)=\norm{x}_2 \qquad f \text{ stetig}
+\]
+\[
+	D^n = f^{-1}(\underset{\text{abg. in $\mathbb{R}$}}{\underbrace{[0,1]}}) \qquad S^{n-1}=f^{-1}(\underset{\text{abg. in $\mathbb{R}$}}{\underbrace{\{1\}}})
+\]
+$\Rightarrow$ $D^n$,$S^{n-1}$ abgeschlossen
+% subsubsection satz (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$X$,$Y$ metrische Räume, $f: X \to Y$ stetig. Sei $X$ folgenkompakt 
+\[
+	\Rightarrow f(X) \subseteq Y \text{ ist folgenkompakt}
+\]
+\minisec{Beweis:}
+Sei $y_n$ Folge in $f(X)$ \\
+\[ \forall\, n \, \exists\, x_n \in X \text{ mit } f(x_n)=y_n \] 
+$(x_n)_n$ Folge in $X$
+\[
+	X \text{ folgenkompakt } \Rightarrow  \exists\, \text{ konvergente Teilfolge } x_{n_k} \to x \in X
+\]
+\[
+	f \text{ stetig } \Rightarrow y_{n_k} = f(x_{n_k}) \to f(x) \in f(X)
+\]
+Damit folgt die Behauptung
+\bewende
+
+% subsubsection satz (end)
+\subsubsection{Satz vom Minimum und Maximum} % (fold)
+\label{ssub:satz_vom_minimum_und_maximum}
+$X$ folgenkompakt, $f: X \to \mathbb{R}$ stetig.
+\[
+	\Rightarrow \exists\, x_{\text{min}},x_{\text{max}} \in X: \, \forall\, x \in X: \qquad  f(x_{\text{min}}) \leq f(x) \leq x_{\text{max}}
+\]
+\minisec{Beweis:}
+$f(X) \subseteq \mathbb{R}$ ist folgenkompakt (Satz I.5.6) \\
+Nach I.5.5 ist $f(X) \subseteq \mathbb{R}$ abgeschlossen und beschränkt \\
+% subsubsection satz_vom_minimum_und_maximum (end)
+% subsection kompaktheit (end)
+
 \end{document}	
