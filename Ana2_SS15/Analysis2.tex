@@ -1006,5 +1006,154 @@ Wähle nun $x_{\text{min}},x_{\text{max}} \in X$ mit
 	f(x_{\text{min}})=c \,,\,f(x_{\text{max}})=C
 \] \bewende
 % subsubsection satz_vom_minimum_und_maximum (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Je zwei Normen auf $\mathbb{R}^n$ sind äquivalent
+
+\minisec{Beweis:}
+Da die Äquivalenz von Normen die Äquivalenzrelation ist, genügt es zu zeigen, dass jede Norm auf $\mathbb{R}^n$ zur $l^2$-Norm äquivalent ist. \\
+Sei $\norm{.}:\mathbb{R}^n \to  \mathbb{R}$ diese Norm. \\
+zu zeigen: $\exists\, c,C>0 \forall\, x \in \mathbb{R}^n: \qquad c \norm{x}_2 \leq \norm{x} \leq C \norm{x}_2$ \\
+Sei \[
+	x = \sum^{n}_{i=1}x_ie_i \qquad , x_i \in \mathbb{R}
+\]
+Dann gilt:
+\[
+	\norm{x}= \norm{\sum^{n}_{i=1}x_ie_i} \leq \sum^{n}_{i=1}\norm{x_ie_i} = \sum^{n}_{i=1}\abs{x_i} \, \norm{e_i} 
+	\leq \underset{\norm{x}_2}{\underbrace{\left(\sum^{n}_{i=1}\abs{x_i}^2  \right)^{\frac{1}{2}}}} \cdot
+	 \underset{=:C >0}{\underbrace{\left(\sum^{n}_{i=1}\norm{e_i}^2  \right)^{\frac{1}{2}}}} = C \norm{x}_2
+\]
+Weiter ist 
+\begin{align*}
+	\norm{.}:\mathbb{R}^n &\to  \mathbb{R} \\
+	x &\mapsto \norm{x}
+\end{align*}
+ist stetig, denn $(\norm{x}-\norm{y}) \leq \norm{x-y} \leq C \norm{x-y}_2$ \\
+Nach dem Satz vom Minimum und Maximum gibt es $x_{\text{min}} \in S^{n-1}$ mit: 
+\[
+	\forall\, x \in S^{n-1}: \norm{x} \geq \norm{x_{min}} =: c>0 \text{ (da $x_{\text{min}}\neq 0$)}
+\]
+Sei $y \in \mathbb{R}^n$ beliebig aber $y \neq 0$. Dann folgt:
+\[
+	\norm{y}= \norm{\underset{\in \mathbb{R}}{\underbrace{\norm{y}_2}} \underset{\in S^{n-1}}{\underbrace{\frac{y}{\norm{y}_2}}}} = \norm{y}_2 \cdot
+	 \norm{\frac{y}{\norm{y}_2}} \geq \norm{y}_2 \cdot \norm{x_{\text{min}}} = c \cdot \norm{y}_2
+	\]
+	\bewende
+% subsubsection satz (end)
+
+
+\subsubsection{Erinnerung/Definition} % (fold)
+\label{ssub:erinnerung_definition}
+
+% subsubsection erinnerung_definition (end)
+$X$ metrischer Raum, $f:X \to \mathbb{R}$ heißt {\bfseries gleichmäßig stetig}, wenn gilt:
+\[
+	\forall\, \varepsilon>0 \exists\, \delta >0 \,: \forall\, x,x' \in X: \, \norm{x-x'}<\delta \Rightarrow \norm{f(x)-f(x')}<\varepsilon
+\]
+\minisec{Behauptung:}
+$X$ folgenkompakt, $f:X \to \mathbb{R}$ stetig $\Rightarrow $ $f$ ist gleichmäßig stetig
+\begin{gather*}
+	X \stackrel{f}{\to} \mathbb{R} \text{ stetig, } \varepsilon>0 \\
+	x \in X: \qquad U_x = \{x' \in X \,|\,\abs{f(x')-f(x)}< \frac{\varepsilon}{2} \} = f^{-1}((f(x)-\frac{\varepsilon}{2},f(x)+\frac{\varepsilon}{2})) 
+	\stackrel{\text{offen, $f$ stetig}}{\subseteq } X
+\end{gather*}
+\underline{Beispiel:} $f(x)=\frac{1}{x}$ \\
+Um zu beweisen, dass $f$ glm stetig ist, brauchen wir:
+\[
+	\exists\, \delta >0 \,\forall\, y \in X \text{ gibt es } x \in X: \qquad B_{\delta}(y)\subseteq U_x 
+\]
+Denn 
+\begin{align*}
+	d(y,y')<\delta &\Rightarrow y' \in B_{\delta}(y) \subseteq U_x \\
+					& \Rightarrow  \abs{f(y')-f(y)} \leq \underset{<\frac{\varepsilon}{2}}{\underbrace{\abs{f(y')-f(x)}}} +
+					 \underset{<\frac{\varepsilon}{2}}{\underbrace{\abs{f(x)-f(y)}}} < \varepsilon
+\end{align*}
+ \subsubsection{Definition} % (fold)
+ \label{ssub:definition}
+ $X$ metrischer Raum, Eine {\bfseries offene Überdeckung} von $X$ ist eine Familie $U=(U_i)_{i \in I}$, $U_i \subseteq X$ offen für alle $i \in I$ und es gilt:
+ \[
+ 	\bigcup\limits_{i \in I}U_i = X
+ \]
+ \minisec{Beispiel:}
+ \begin{align*}
+ 	&f:X \to \mathbb{R} \text{ stetig, } x \in X, \,\varepsilon>0 \\
+	&U_x = \{ x' \in X \,|\,\abs{f(x)-f(x')}< \frac{\varepsilon}{2} \} \subseteq X \\
+	&(U_x)_{x \in X} = U \text{ offene Überdeckung von }X
+ \end{align*}
+ % subsubsection definition (end)
+ \subsubsection{Satz Lebesgue-Lemma} % (fold)
+ \label{ssub:satz_lebesgue_lemma}
+ Sei $X$ ein folgenkompakter, metrischer Raum und $U=(U_i)_{i \in I}$ offene Überdeckung von $X$. Dann existiert $\delta >0$, so dass gilt:
+ \[
+ 	\forall\, x \in X \, \exists\,i \in I: \qquad B_{\delta}(x)\subseteq U_i
+ \]
+ Ein solches $\delta$ heißt {\bfseries Lebesgue Zahl} der Überdeckung von $U$
+ % subsubsection satz_lebesgue_lemma (end)
+ 
+ \subsubsection{Korollar} % (fold)
+ \label{ssub:korollar}
+ $X$ folgenkompakt
+ \[
+ 	f:X \to \mathbb{R} \text{ stetig } \Rightarrow f \text{ gleichmäßig stetig} 
+ \]
+ \minisec{Beweis:} s.o
+ % subsubsection korollar (end)
+ \minisec{Beweis I.5.11:}
+ Durch Wiederspruch: \\
+ \underline{Annahme:} $X$ folgenkompakt, $U=(U_i)_{i \in I}$ offene Überdeckung, welche keine Lebesgue-Zahl hat \\
+ $\Rightarrow \forall\, \delta >0 \exists\, x \in X:$ $B_{\delta}(x)$ ist in keiner der Mengen $U_i$ enthalten \\
+ $\forall\, n \in \mathbb{N} \, \exists\, x_n \in X:$ $B_{\frac{1}{n}}(x_n)$ ist in keinem $U_i, i \in I$ enthalten. \\
+ Da $X$ folgenkompakt ist, gibt es eine konvergente Teilfolge $(x_{n_k})_k$ so dass $B_{\frac{1}{n_k}}(x_{n_k})$ in keinem $U_i$ enthalten ist.
+ \begin{align*}
+ 	x = \lim_{k \to \infty}x_{n_k} \in X & \Rightarrow \exists\,i_0 \in I \qquad ,x \in U_{i_0} \subseteq X \text{ offen}
+	& \exists\,\varepsilon>0 \qquad B_{\varepsilon}(x) \subseteq U_{i_0}
+ \end{align*}  
+ Das ist ein Widerspruch, denn \\
+ Wähle h so, dass $\frac{1}{n_k}< \varepsilon$ und $d(x,x_{n_k}) < \frac{\varepsilon}{2}$ \\
+ $\Rightarrow B_{\frac{1}{n_k}}(x_{n_k}) \subseteq B_{\varepsilon}(x)=U_{i_0}$
+ \[
+ 	d(y,x_{n_k})<\frac{1}{n_k} \Rightarrow d(y,x) \leq d(y,x_{n_k})+d(x_{n_k},x) < \frac{1}{n_k}+\frac{\varepsilon}{2} < \frac{\varepsilon}{2}+ \frac{\varepsilon}{2} = \varepsilon \,  \lightning
+ \]
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$X$ metrischer Raum, $U=(U_i)_{i \in I}$ eine offene Überdeckung. Eine {\bfseries Teilüberdeckung von U} ist eine offene Überdeckung $V=(V_j)_{j \in J}$ von $X$, so dass gilt: 
+\[
+	\forall\, j \in J \,\exists\,i \in I: V_j = U_i
+\]
+% subsubsection definition (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Ein metrischer Raum heißt {\bfseries überdeckungskompakt} (oder {\bfseries Kompakt}) falls {\bfseries jede} offene Überdeckung $U=(U_i)_{i \in I}$ eine endliche Teilüberdeckung $V=(V_j)_{j \in J}$ besitzt. (d.h die Indexmenge J ist endlich)
+% subsubsection definition (end)
+\subsubsection{Satz von Heine-Borel} % (fold)
+\label{ssub:satz_von_heine_borel}
+$X$ metrischer Raum. Dann sind äquivalent:
+\begin{enumerate}
+	\item $X$ folgenkompakt
+	\item $X$ ist überdeckungskompakt
+\end{enumerate}
+
+\subsubsection{Lemma} % (fold)
+\label{ssub:lemma}
+$X$ folgenkompakter metrischer Raum. \\
+Dann ist $X$ {\bfseries total beschränkt}, d.h. $\forall\, \varepsilon>0$ gibt es endlich viele $x_1,\dots,x_r \in X$, so dass:
+\[
+	\bigcup\limits_{i=1}^r B_{\varepsilon}(x_i)=X
+\]
+\minisec{Beweis:} siehe nächste Vorlesung
+\newpage
+% subsubsection lemma (end)
+Beweis, dass folgenkompakte $X$ überdeckungskompakt sind, Lemma 5.16 voraussetzend.
+\minisec{Beweis:}
+$X$ folgenkompakt, $U=(U_i)_{i \in I}$ offene Überdeckung von $X$ \\
+\underline{zu zeigen:} Es gibt endliche Teilüberdeckung $V=(V_j)_{j \in J}$ \\
+Sei $\delta>0$ eine Lebesgue-Zahl von $U$ (existiert nach I.5.11)
+\[
+	5.16 \Rightarrow \exists\, x_1, \dots, x_r \in X \qquad \bigcup\limits_{j=1}^r B_{\delta}(x_j)=X
+\]
+\[
+	\Rightarrow \forall\, j=1,\dots,n \, \exists\, i,j \in I: \qquad B_{\delta}(x_j) \subseteq U_{ij}
+\]
 % subsection kompaktheit (end)
 \end{document}	
