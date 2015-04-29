@@ -4,6 +4,7 @@
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/reine/u/topos/lehre/SS2015/KTheorie-Hopf/Hopf.html}
 
 \newcommand{\prof}{Dr.\ Ulrich Penning}
+\publishers{\scalebox{14}{$K$}}
 \input{../!config/mitschrift_headings.tex}
 
 \begin{document}
@@ -438,7 +439,7 @@ Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbün
 	\]
 	mit $\varphi|_{p ^{-1}(X \times \set{1})} =\id_{E_1}$
 	\item Sei $(X,A)$ ein Ko-Raumpaar, $h \colon X \times I \to Y$ eine stetige Abbildung und $p' \colon E' \to Y$ ein $K$-Vektorbündel mit $E \cong h^* E'$. Falls jetzt
-	$h_t(a)=h_0(a)$ für alle $a \in A$, dann lässt sich der Isomorphismus aus a) so wählen, dass er den durch $h$ induzierten Isomorphismus 
+	$h_t(a)=h_0(a)$ für alle $a \in A$ und $t \in I$, dann lässt sich der Isomorphismus aus a) so wählen, dass er den durch $h$ induzierten Isomorphismus 
 	$E|_{A \times I} \to E_1|_{A} \times I$ fortsetzt.
 \end{enumerate}
 \minisec{Beweis}
@@ -476,9 +477,164 @@ Außerdem haben wir
 	\end{tikzcd}
 \]
 Setze jetzt $\varphi \colon E \to E_1 \times I$, $v \mapsto \enbrace*{u(v), \pr_I \circ p(v)} $. Dann ist $(\varphi, \id_{X \times I})$ ein Isomorphismus von Vektorbündeln 
-mit $\varphi|_{X \times \set{1}} =\id$. \bewende 
+mit $\varphi|_{X \times \set{1}} =\id$. 
+
+Für b) sei $V_j \subset Y$ eine offene Überdeckung von $Y$, sodass $E'|_{\overline{V}_j}$ trivialisierbar ist. Sei $B_j = h ^{-1}(\overline{V}_j) \subset X \times I$. Es 
+gilt 
+\[
+	B_j \cap (A \times I) = h_1 ^{-1}(\overline{V}_j) \cap A \times I
+\]
+da $h$ auf $A$ unabhängig ist von $t \in I$. Nach Konstruktion ist $E|_{A_j \times I}$ trivialisierbar. Nach Lemma \ref{sub:27} b) finden wir eine offene Umgebung 
+$U_j \times I$ mit $X \supset U_j \supset A_j$, so dass $E|_{U_j \times I}$ trivialisierbar ist. Wir ergänzen die Mengen $U_j \times I$ um trivialisierende offene Umgebungen 
+$U_i \times I$ mit $U_i \times A = \emptyset$, so dass $\bigcup_{i\in I} U_i \times I = X \times I$. Jetzt verwenden wir die Konstruktion aus a) für diese Überdeckung. Der 
+entsprechende Isomorphismus $\varphi \colon E \to E_1 \times I$ stimmt auf $A_j \times I$ mit dem von $h$ induzierten Isomorphismus überein. \bewende 
 % subsection 210 (end)
 % section 2 (end)
+\newpage
+
+\section{Topologische $K$-Theorie} % (fold)
+\label{sec:3}
+Wir haben im letzten Kapitel folgenden kontravarianten, homotopieinvarianten Funktor kennengelernt
+\[
+	\begin{tikzcd}[row sep=0.4em, column sep=large,cramped]
+		\TOP \rar & \MONOIDE \\
+		X \rar[mapsto] & \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}} \\
+		(f \colon X \to Y) \rar[mapsto] & \enbrace*{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
+	\end{tikzcd}
+\]
+mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element.
+
+\minisec{Grothendieck-Konstruktion}
+Sei $(M,+)$ ein kommutativer Monoid. Betrachte $\Gr(M)= \nicefrac{M \times M}{\sim}$ mit der Äquivalenzrelation
+\[
+	(x,y) \sim (x',y') :\iff \exists c \in M \text{ mit } x+y' +c = x' +y +c
+\]
+Die Idee dahinter: $[x,y]$\enquote{$=$}$x-y$. Dann ist 
+\[
+	\begin{tikzcd}[row sep=tiny]
+		+ \colon \Gr(M) \times \Gr(M) \rar & \Gr(M) \\
+		\quad \enbrace*{[x,y] , [x',y']} \rar[mapsto] & \benbrace*{x+x',y+y'}  
+	\end{tikzcd}
+\]
+wohldefiniert. Mit dieser Operation ist $\Gr(M)$ eine abelsche Gruppe (das Inverse zu $[x,y]$ ist $[y,x]$, denn $[x+y,x+y]=[0,0]$) und $M \to \Gr(M)$, $x  \mapsto [x,0]$ ist
+ein Monoidhomomorphismus.
+\minisec{Beispiel}
+$\Gr(\mathds{N}_0,+)= (\mathds{Z},+)$.
+\minisec{Universelle Eigenschaft}
+Zu jedem Monoidhomomorphismus $\varphi \colon M \to A$ in eine abelsche Gruppe $A$ existiert genau ein Gruppenhomomorphismus $\psi \colon \Gr(M) \to A$, sodass das Diagramm
+\[
+	\begin{tikzcd}
+		M \dar\rar["\varphi"] & A \\
+		\Gr(M) \urar["\exists ! \psi"', dashed]
+	\end{tikzcd}
+\]
+kommutiert. Der Beweis ist eine Übungsaufgabe. \bigskip \\
+Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$ (vorläufige Definition).
+\minisec{Frage}
+Was ist $K^n(X)$ für $n\not=0$? Was ist $K^n(X,A)$?
+
+\subsection{Definition} % (fold)
+\label{sub:31}
+Sei $(X,A)$ ein Ko-Raumpaar.
+\begin{enumerate}[(i)]
+	\item Ein \Index{Tripel} $(E_1,f,E_0)$ über $(X,A)$ besteht aus endlichdimensionalen $\mathds{C}$-Vektorbündeln $p_i \colon E_i \to X$ und einem Isomorphismus
+	$f \colon E_1|_A \to E_2|_A$.
+	\item Ein \Index{Morphismus von Tripeln} $(E_1,f,E_2)$ und $(E_1',f',E_2')$ besteht aus einem Paar $(g_1,g_0)$ von Vektorbündelmorphismen $g_i \colon E_i \to E_i'$,
+	sodass das folgende Diagramm kommutiert
+	\[
+		\begin{tikzcd}[column sep=large]
+			E_1|_A \rar["g_1|_A"] \dar["f"]& E_1'|_A \dar["f'"]\\
+			E_0|_A \rar["g_0|_A"] & E_0'|_A
+		\end{tikzcd}
+	\] 
+	\item Tripel der Form $(E,\id_E,E)$ heißen \bet{elementar}\index{Tripel!elementares}.
+	\item $(E_1,f,E_0)$ und $(E_1',f',E_0')$ heißen \Index{stabil isomorph}, falls 
+	\[
+		\enbrace*{E_1 \oplus E, f \oplus \id_E, E_0 \oplus E} \cong \enbrace*{E_1' \oplus E', f' \oplus \id_{E'}, E_0' \oplus E' } 
+	\]
+	Stabile Isomorphie ist eine Äquivalenzrelation (Übung). 
+\end{enumerate}
+% subsection 31 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:32}
+Sei $(X,A)$ ein Ko-Raumpaar. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
+\[
+	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
+\]
+Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}} $
+% subsection 32 (end)
+\subsection*{Bemerkung}
+$\benbrace*{E_1,f,E_0}_{\stiso}=\benbrace*{0,\id,0}_\stiso $ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
+$E_1  \oplus E|_A \xrightarrow{f \oplus \id} E_0 \oplus E|_A $ zu einem Isomorphismus über ganz $X$ ausdehnen lässt.
+\minisec{Beweis}
+Für \enquote{$\Rightarrow$} folgt aus der Definition $(E_1 \oplus E, f \oplus \id, e_0 \oplus E) \cong \enbrace*{E', \id_{E'},E'}$. $\id_{E'}$ ist ein Isomorphismus auf ganz
+$X$, also lässt sich $f \oplus \id$ zu einem Isomorphismus auf ganz $X$ ausdehnen.
+\[
+	\begin{tikzcd}[sep=large]
+		E_1 \oplus E|_A \rar["\varphi_1|_A","\cong"'] \dar["f \oplus \id"']& E'|_A \dar["\id_{E'}","\cong"'] \\
+		E_0 \oplus E|_A \rar["\cong","\varphi_0|_A"'] & E'|_A
+	\end{tikzcd}
+\]
+Für die Rückrichtung betrachten wir $\varphi \colon E_1 \oplus E \xrightarrow{\minwidthbox{\cong}{2em}} E_0 \oplus E$, sodass $\varphi|_A = f \oplus \id$. Dann folgt
+\[
+	\enbrace*{E_1 \oplus E, f \oplus \id, E_0 \oplus E} \cong \enbrace*{E_ß \oplus E, \id_{E_0 \oplus E} ,E_0 \oplus E}  
+\]
+\[
+	\begin{tikzcd}
+		E_1 \oplus E|_A  \dar["f \oplus \id"] \rar["\varphi|_A"]& E_0 \oplus E|_A \dar["\id"] \\
+		E_0 \oplus E|_A \rar["\id"]& E_0 \oplus E|_A
+	\end{tikzcd} \bewende
+\]
+\subsection{Lemma} % (fold)
+\label{sub:33}
+Sei $(X,A)$ ein Ko-Raumpaar. Seien $p \colon E \to X$ und $p' \colon E' \to X$ $K$-Vektorbündel und $f \colon E'|_A \to E|_A$ ein Isomorphismus. Sei $f' \colon E' \to E$ ein
+Isomorphismus von $K$-Vektorbündeln und sei $h \colon A \times I \to \Iso(E'|_A,E|_A)$ eine stetige Abbildung, so dass $h_t$ ein Schnitt ist für alle $t \in I$ und so dass
+$h_0=f'|_A$, $h_1=f$ gilt. Dann existiert ein Isomorphismus $F \colon E' \to E$ mit $F|_A=f$ und eine Homotopie $H \colon X \times I \to \Iso(E',E)$ mit $H_0=f'$, $H_1=F$ und
+$H|_{A\times I}=h$.
+\minisec{Beweis}
+Die Abbildungen $h$ und $f'$ liefern eine stetige Abbildung 
+\[
+	\begin{tikzcd}
+		\tilde{h} \colon A \times I \cup X \times \set{0} \rar & \Iso \enbrace*{\pr_X^* E'|_{A \times I \cup X \times \set{0} },\pr_X^* E|_{A \times I \times X \times 
+		\set{0}}} 
+	\end{tikzcd}
+\]
+Wir müssen diese Abbildung so zu einer auf $X \times I$ ausdehnen, dass wir einen Schnitt bekommen. Betrachte \marginnote{$r$ aus Kofaserungseigenschaft}
+\[
+	\begin{tikzcd}
+		A \times I \cup X \times \set{0} \rar["\id"] \dar[hook]& A \times I \cup X \times \set{0} \rar["\iota",hook] & X \times I\\  
+		X \times I \urar[dashed,"r"]
+	\end{tikzcd}
+\]
+Sei $r_X = \pr_X \circ \iota \circ r$ und $r_I = \pr_I \circ \iota \circ r$. Sei weiter 
+\[
+	\begin{tikzcd}[row sep=tiny]
+		K \colon (X \times I) \times I \rar &  X \times I \\
+		(x,t,s) \rar[mapsto] & \enbrace*{r_X(x,st), s r_I(x,t) + (1-s)t} 
+	\end{tikzcd}
+\]
+Dann gilt $K_0(x,t)=(x,t)$ und $K_1(x,t)= \iota \circ r(x,t)$, also ist $\iota \circ r$ homotop zu $\id_{X \times I}$. Folglich ist
+\[
+	\begin{tikzcd}
+		E \times I \rar["\cong"] &(\iota \circ r)^*(E \times I) \cong r^* \enbrace*{\iota^*(E \times I)} \rar["\overline{r}"] & \iota^*(E \times I) \cong E|_A \times I \cup E 
+		\times \set{0} 
+	\end{tikzcd}
+\]
+Ebenso $\overline{r}' \colon E' \times I E'|_A \times I \cup E' \times \set{0}$. $(\overline{r},r)$ und $(\overline{r}',r)$ sind Morphismen von Vektorbündeln.
+Wir erhalten nun das folgende Diagramm, wobei die diagonale Abbildung rechts oben von $\tilde{h}$ induziert ist und somit ein Isomorphismus ist
+\[
+	\begin{tikzcd}[] % row sep=2.3em, column sep=2.8em
+		E' \times I \ar[dd] \ar[rr,"\overline{r}'"] \ar[dr,"\overline{H}",dashed]& & E'|_A \times I \cup E' \times \set{0} \ar[dd] \drar["\cong"'] \\
+		& E \times I \ar[rr,"\overline{r}", crossing over,pos=0.3] & & E|_A \times I \cup E \times \set{0} \ar[dd] \\
+		X \times I \ar[rr,"r",pos=0.3] \ar[dr,"\id"] & & A \times I \cup X \times \set{0} \ar[dr,"\id"] \\
+		& X \times I \ar[from=uu,crossing over] \ar[rr,"r"']& & A \times I \cup X \times \set{0} 
+	\end{tikzcd}
+\]
+Die Existenz von $\overline{H}$ folgt aus der universellen Eigenschaft des Pullbacks. Es gilt nun $H=\pr_E \circ \overline{H} \colon E' \times I \to E$ und wir erhalten
+eine Abbildung $X \times I \to \Iso(E' \times I, E \times I)$. $F := H|_{E' \times \set{1}} \colon E' \to E$ ist nun die gesuchte Abbildung. \bewende
+% subsection 3.3 (end)
+% section 3 (end)
 
 
 \cleardoubleoddemptypage
