@@ -1,0 +1,149 @@
+\section{Elliptische Kurven}
+\label{sec:para2}
+\nextlecture
+\subsection{Grundlagen aus der Algebra}
+\subsubsection{Polynome}
+	Sei $k$ ein beliebiger Körper. \marginnote{[7]}
+	
+\begin{defn}[Polynom]
+	Ein \Index{Polynom} über $k$ in den $n$ Variablen $x_1,\dots,x_n$ ist ein Ausdruck der Form
+	\[ f(x_1,\dots,x_n) = \sum\limits_{\nu_1,\dots,\nu_n \geq 0} \alpha_{\nu_1, \dots, \nu_n} x_1^{\nu_1} \cdots x_n^{\nu_n} \]
+	mit Koeffizienten $\alpha_{\nu_1,\dots,\nu_n} \in k$, von denen nur endlich viele $\neq 0$ sind. Hat man es mit mehreren Variablen ($n \geq 2$) zu tun, kann man auch kurz
+	\[ f(\underline{x}) = \sum_{\uline{\nu} \in \NN_0^n} \alpha_{\uline{\nu}} x_1^{\nu_1} \cdots x_n^{\nu_n} \]
+	schreiben, wenn man die Tupelschreibweise $\uline{\nu} \in \NN_0^n$ bzw. $\uline{x} = (x_1, \dots x_n)$ einführt, wobei man für das Monom $x_1^{\nu_1} \cdots x_n^{\nu_n}$ auch kurz $\uline{x}^{\uline{\nu}}$ schreiben kann, wenn klar ist, dass $n \geq 2$ viele Variablen vorliegen. \\
+	Die Menge aller Polynome über $k$ in $n$ Variablen wird kurz mit $k[x_1,\dots,x_n]$ oder noch kürzer mit $k[\uline{x}]$ bezeichnet. Wir schreiben dann auch kurz $f \in k[\uline{x}]$, wenn $f(\uline{x})$ ein Polynom ist.
+\end{defn}
+
+\begin{bem}
+	Durch eine Addition und Multiplikation definiert durch
+	\begin{equation}
+	\begin{aligned}
+		\sum_{\uline{\nu}} \alpha_{\uline{\nu}} \uline{x}^{\uline{\nu}} + \sum_{\uline{\nu}} \beta_{\uline{\nu}} \uline{x}^{\uline{\nu}} &:= \sum_{\uline{\nu}} (\alpha_{\uline{\nu}} + \beta_{\uline{\nu}}) \uline{x}^{\uline{\nu}} \\
+		\enbrace*{\sum_{\uline{\nu}} \alpha_{\uline{\nu}} \uline{x}^{\uline{\nu}}} \cdot \enbrace*{\sum_{\uline{\mu}} \beta_{\uline{\mu}} \uline{x}^{\uline{\mu}}} &:= \sum_{\uline{\nu},\uline{\mu}} \alpha_{\uline{\nu}} \beta_{\uline{\mu}} \uline{x}^{\uline{\nu} + \uline{\mu}}
+	\end{aligned}
+	\end{equation}
+	wird $k[\uline{x}]$ zu einem kommutativen Ring mit Eins; das Nullpolynom $0 := \sum_{\uline{\nu}} 0 \uline{x}^{\uline{\nu}}$ ist dabei das Nullelement, das Polynom $1 := 1 \cdot \uline{x}^{\uline{0}} + \sum_{\uline{\nu} \neq 0} 0 \uline{x}^{\uline{\nu}}$ ist das Einselement. \marginnote{"Einspolynom"} \\
+	Der Ring $(k[\uline{x}],+,\cdot)$ heißt \Index{Polynomring} über $k$.
+\end{bem}
+
+\begin{defn}[Formale Ableitung]
+	Für $f(\uline{x}) = \sum_{\uline{\nu}} \alpha_{\uline{\nu}} \uline{x}^{\uline{\nu}} \in k[\uline{x}]$ und $1 \leq j \leq n$ heißt
+	\[ \frac{\der f}{\der x_j}(\uline{x}) := \sum_{\uline{\nu}, \nu_j > 0} \alpha_{\uline{\nu}} v_j x_1^{\nu_1} \cdots x_j^{\nu_j-1} \cdots x_n^{\nu_n} \in k[\uline{x}] \]
+	die \Index{formale Ableitung} von $f$ nach $x_j$.
+\end{defn}
+
+\begin{satz}[Produktregel, Kettenregel]
+	Für alle $f,g \in k[\uline{x}]$ und $\gamma \in k$ gelten die Ableitungsregeln
+	\[ \frac{\der(\gamma f)}{\der x_j} = \gamma \frac{\der f}{\der x_j} \hspace{2cm} \frac{\der(f+g)}{\der x_j} = \frac{\der f}{\der x_j} + \frac{\der g}{\der x_j} \hspace{2cm} \frac{\der(fg)}{\der x_j} = f \frac{\der g}{\der x_j} + g \frac{\der f}{\der x_j} \]
+	und für $f \in k[x_1, \dots,x_m], g_1,\dots, g_m \in k[x_1,\dots, x_n]$
+	\[ \frac{\der f(g_1,\dots, g_m)}{\der x_j}(\uline{x}) = \frac{\der f}{\der x_1} (g_1,\dots,g_m) \frac{dg_1}{dx_j}(\uline{x}) + \dots + \frac{\der f}{\der x_m} (g_1,\dots,g_m) \frac{\der g_m}{\der x_j}(\uline{x}). \]
+\end{satz}
+
+Polynome in einer Variablen $f \in k[x]$ der Form $f(x) = \sum_{\nu = 0}^{k} \alpha_\nu x^\nu$ sind aus den Grundvorlesungen bekannt.
+\begin{defn}[Grad]
+	Ist $f \neq 0$, so heißt $\deg(f) := \min\{j \in \NN_0 : a_j \neq 0\}$ der Grad von $f$. Für $f \in k[\uline{x}]$ in $n$ Variablen ist $\deg(f) := \min\{\nu_1 + \dots + \nu_n : a_{\uline{\nu}} \neq 0\}$ der \Index{Grad} von $f$. Neu ist bei uns, dass wir uns hier vor allem mit $n = 2$ oder $n = 3$ Variablen beschäftigen werden, wo wir dann auch $f(x,y)$ oder $f(x,y,z)$ schreiben möchten, zum Beispiel $f(x,y) = \alpha_{(2,0)} x^2 + \alpha_{(1,1)} xy + \alpha_{(0,1)}y$. Wir werden dann für die Koeffizienten einfachere Notationen wählen.
+\end{defn}
+
+\begin{bem}
+	Bleiben wir zunächst beim Polynomring $k[x]$ in einer Variablen $x$. Sei $f \in k[x]$. Wie im Ring $\ZZ$ können wir Teilbarkeit in $k[x]$ studieren und Divisionen mit Rest durchführen (Polynomdivision), daher kann man wie in $\ZZ$ zum Beispiel den ggT von Polynomen mit dem euklidischen Algorithmus ausrechnen. Dies ist aus den Grundvorlesungen bekannt, wir erinnern hier nur an folgendes:
+\end{bem}
+
+\begin{defn}[Nullstelle]
+	Gegeben sei die Einsetzabbildung
+	\begin{equation}
+	\begin{aligned}
+		k &\longrightarrow k \\
+		c &\longmapsto f(c) := \sum_{\nu = 0}^{k} \alpha_\nu c^\nu
+	\end{aligned}
+	\end{equation}
+	Ein Element $c \in k$ heißt \Index{Nullstelle} von $f$, falls $f(c) = 0$ in $k$ ist.
+\end{defn}
+
+\begin{bem}
+	$c \in k$ ist genau dann Nullstelle, wenn $(x-c)$ ein Teiler von $f$ im Polynomring $k[x]$ ist, d.h. falls ein $g \in k[x]$ existiert mit $(x-c) \cdot g = f$.
+\end{bem}
+
+\begin{defn}[Ordnung einer Nullstelle]
+	Ist $c$ eine Nullstelle von $f \neq 0$, so gibt es ein maximales $k \geq 1$, sodass $(x-c)^k$ ein Teiler von $f$ ist. Die Zahl $k$ heißt \bet{Ordnung der Nullstelle} $c$. Ist $f(c) \neq 0$, definiert man diese "Nullstellen"ordnung als $0$. \index{Ordnung!Nullstelle}
+\end{defn}
+
+\begin{defn}[irreduzibel, prim]
+	Ein Polynom $f \in k[x]$ vom Grad $\geq 1$ heißt \Index{irreduzibel} (oder \bet{prim}), falls gilt: Ist $f = u \cdot v$ mit $u,v \in k[x]$, dann ist $\deg(u) = 0$ oder $\deg(v) = 0$, das heißt $f$ kann nicht als Produkt zweier Polynome vom Grad $\geq 1$ geschrieben werden. (vgl. den Begriff "Primzahl" bei $\ZZ$; der Satz von der eindeutigen Zerlegung in irreduzible Polynome heißt der \Index{Satz von Gauß}.)
+\end{defn}
+
+Wenn wir $\ZZ$ als Vorbild für den Polynomring $k[x]$ nehmen, möchten wir auch das "Modulorechnen" auf $k[x]$ übertragen, um neue Strukturen zu erhalten. Unsere Moduln sind dann Polynome:
+\begin{defn}[Kongruenz, Restklassenring (Polynome)]
+	Sei $f \in k[x]$. Dann heißen $a \in k[x]$ und $b \in k[x]$ \bet{kongruent modulo $f$},\index{Kongruenz!Polynome} wenn $f \mid (b-a)$, das heißt falls ein $g \in k[x]$ existiert mit $b = a + fg$.\marginnote{"$\kon$" nur für $\ZZ$} Die Restklassen modulo $f$ sind Teilmengen von $k[x]$ der Gestalt $a + f \cdot k[x] := \{a + fg : g \in k[x]\}$ mit $a \in k[x]$. Das Polynom $a \in k[x]$ heißt ein \Index{Repräsentant} der Restklasse. Ist der Modul $f \in k[x]$ klar, möchten wir dafür auch kurz wieder $\uline{\uline{a}}$ schreiben.\marginnote{doppelt unterstreichen!} \\
+	Die Menge der Restklassen modulo $f$ bezeichnen wir mit
+	\[ k[x] / (f) := \{a + f\cdot k[x] : a \in k[x]\} = \{\uline{\uline{a}} : a \in k[x]\} \]
+	und nennen diese den \bet{Restklassenring modulo $f$}, weil diese bezüglich der Definition $\uline{\uline{a}} + \uline{\uline{b}} := \uline{\uline{a+b}}$ (analog für Multiplikation) für Polynome $a,b \in k[x]$ wieder zu einem kommutativen Ring mit $\uline{\uline{1}}$ als Eins wird. \index{Restklasse!Polynom}
+\end{defn}
+
+Doch die einfache Frage, wie viele Elemente der Restklassenring hat, hängt unter anderem vom Körper $k$ ab. Im Fall $k = \FF_p$ beantworten wir diese. Klar ist wegen der Teilbarkeit mit Rest im Ring $k[x]$ (d.h. sind $b,f \in k[x]$ und $f \neq 0$, so existieren eindeutige $g,r \in k[x]$ mit $r = 0$ oder $\deg(r) < \deg(f)$,\marginnote{Polynomdivision} sodass $b = f\cdot g + r$ gilt):
+\begin{bem}
+\label{bem_7.12}
+	Für jede Restklasse $\uline{\uline{a}} = a + f \cdot k[x] \in k[x]/(f)$ gibt es genau einen Vertreter $b \in \uline{\uline{a}} = a + f\cdot k[x]$, das heißt $\uline{\uline{b}} = \uline{\uline{a}}$ bzw. $b + f \cdot k[x] = a + f \cdot k[x]$, mit $b = 0$ oder $\deg(b) < \deg(f)$.
+\end{bem}
+
+\subsubsection{Endliche Körper}
+\label{subsub:2.1.2}
+	Sei nun $k = \FF_p$ mit $p$ prim.
+
+\begin{satz}
+	Sei $f \in \FF_p[x]$ irreduzibel mit $r := \deg(f)$. Dann ist $\FF_p[x]/(f)$ ein Körper mit $p^r$ Elementen.
+\end{satz}
+
+\minisec{Beweis}
+	Dass $\FF_p[x]/(f)$ ein Körper ist, ist klar (Inverse findet man mit dem euklidischen Algorithmus). $\FF_p[x]$ hat $p^r$ Elemente, denn jede Restklasse hat genau einen Vertreter
+	\[ b = \underbrace{\alpha_0 + \dots + a_{r-1} x^{r-1}}_{p \text{ Möglichkeiten für jedes } \alpha_j} \qed\]
+	
+\begin{bem}
+	Für jedes $r \in \NN$ gibt es (mindestens) ein irreduzibles Polynom $f \in \FF_p[x]$ mit $\deg(f) = r$.
+\end{bem}
+
+\begin{bem}
+	Es gibt im Wesentlichen (das heißt bis auf Isomorphie) genau einen endlichen Körper mit $p^r$ Elementen, das heißt welches irreduzible $f$ mit $\deg(f) = r$ wir als Modul nehmen, ist für seine Konstruktion (bis auf Isomorphie!) egal. Wir bezeichnen diesen Körper mit $\FF_{p^r}$.
+\end{bem}
+
+\begin{bem}
+	Jeder Körper mit endlich vielen Elementen ist einer dieser Körper $\FF_{p^r}$ mit $p$ prim und $r \geq 1$. (ohne Beweis, vgl. Vorlesung "Einführung in die Algebra")
+\end{bem}
+
+\begin{bem}
+	Wegen Bemerkung \ref{bem_7.12} ist nach Wahl eines irreduziblen Polynom $f \in \FF_p[x], \deg(f) = r$ also
+	\[\FF_{p^r} = \{ (\alpha_{r-1} x^{r-1} + \dots + \alpha_1 x + \alpha_0) + f \cdot \FF_p[x] : \alpha_i \in \FF_p\},\]
+	die Restklassenvertreter $\alpha_{r-1} x^{r-1} + \dots + \alpha_1 x + \alpha_0$ lassen sich auch durch Koeffizienten-$r$-Tupel $(\alpha_{r-1}, \alpha_{r-2}, \dots, \alpha_1, \alpha_0) \in \FF_{p^r}$ darstellen. Will man mit ihnen stellvertretend für die Polynomrestklassen in $\FF_{p^r}$ rechnen, muss man also erst mit den zugehörigen Polynomen über $\FF_p$ rechnen und modulo $f$ reduzieren.
+\end{bem}
+
+\begin{bsp}
+	Sei $p = 2, r=3$, wir möchten $\FF_8$ konstruieren.\marginnote{Unterstreichungen weggelassen!} Das Polynom $f(x) = x^3 + x + 1$ ist irreduzibel über $\FF_2 = \{0,1\}$, also ist 
+	\[ \FF_8 = \FF_2[x]/(f) = \{ (0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)\}, \]
+	und man rechnet zum Beispiel $(0,1,0) \cdot (1,1,1) = (1,0,1)$, weil
+	\[ (0x^2 + 1x + 0) \cdot (x^2 + x + 1) = x^3 + x^2 + x = 1 \cdot (x^3 + x + 1) + (x^2 + 1) \]
+	in $\FF_2[x]$ gilt (Division mit Rest durch $f$). \begin{itemize}
+	\item Bei Wahl des irreduziblen Polynoms $f(x) = x^3 + x^2 + 1$ ergeben sich zwar andere Rechenregeln für die Vektorenmultiplikation, man erhält aber die selbe "Struktur" bei $+,\cdot$ mit entsprechenden Elementen. Stellen Sie als Übung mal die Multiplikations- und Additionstabellen auf, der Einfachheit halber auch erst mal von $\FF_4$.
+	\item Streng genommen müsste man zum Beispiel $\uline{\uline{(\uline{1}, \uline{0}, \uline{1})}} = \uline{\uline{x^2 + \uline{1}}}$ für die Elemente von $\FF_8$ schreiben, um die Reduktion modulo $f$ zu verdeutlichen.
+	\end{itemize}
+\end{bsp}
+
+\begin{bsp}
+	Rechnen in $\FF_{5^3} = \FF_{125}$: Haben wir diesen Körper mit dem irreduziblen Polynom $f = x^3 + x + 1 \in \FF_5[x]$ vom Grad $3$ konstruiert,\marginnote{irreduzibel, da keine Nullstelle und Grad 3!} so rechnen wir in $\FF_{5^3}$ zum Beispiel
+	\begin{equation}
+	\begin{aligned}
+		(1,2,4) \cdot (-1,3,0) &= (x^2 + 2x - 1)(-x^2 + 3x) = -x^4 + 3x^3 - 2x^3 + 6x + x^2 -3x \\
+		&= -x^4 + x^3 + x^2 + 3x = (x^3+x+1) \cdot (-x+1) + 2x^2+3x+1 = (2,3,1) \modu f
+	\end{aligned}
+	\end{equation}
+\end{bsp}
+
+\begin{bem}
+	Es ist $\Char(\FF_{p^r}) = p$, denn es gilt $\uline{1} + \uline{1} + \dots + \uline{1} = \uline{p \cdot 1} = \uline{0}$, und $p$ ist minimal mit dieser Eigenschaft, da prim.
+\end{bem}
+
+\begin{defn}[algebraisch abgeschlossen]
+	Ein Körper $k$ ist \Index{algebraisch abgeschlossen}, wenn sich jedes Polynom $f \in k[x], \deg(f) > 0$, als Produkt von linearen Polynomen schreiben lässt, das heißt wenn $f(x) = d(x-c_1) \cdots (x-c_m)$ mit $d,c_i \in k$ gilt.
+\end{defn}
+
+\begin{bem}
+	Man kann jeden Körper $k$ in einen algebraisch abgeschlossenen Körper einbetten. Ein bezüglich "$\subseteq$" minimaler heißt algebraischer Abschluss von $k$, dieser ist eindeutig und wird mit $\overline{k}$ bezeichnet. So ist etwa $\overline{\RR} = \CC$. Der algebraische Abschluss $\overline{\FF_p}$ enthält jeden der Körper $\FF_{p^r}, r \geq 1$, und umgekehrt ist jedes Element von $\overline{\FF_p}$ schon in einem dieser Körper $\FF_{p^r}, r \geq 1$, enthalten. (ohne Beweis)
+\end{bem}
