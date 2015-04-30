@@ -589,8 +589,8 @@ $(X,D)$ metrischer Raum $Y \subseteq X, x \in X$
 	\]
 	(Äquivalent: $\forall\, \varepsilon > 0 \qquad B_{\varepsilon }(x)\cap \neq \emptyset$ )
 	\begin{align*}
-		\overset{\circ}{Y}&= \{ x \in X \,|\, x \text{ innerer Punkt von } Y \} \\
-		\bar{Y} &= \{ x \in X \,|\, x \text{ ist Berührpunkt von } Y \} 
+		\mathring{Y}&= \{ x \in X \,|\, x \text{ innerer Punkt von } Y \} \\
+		\overline{Y} &= \{ x \in X \,|\, x \text{ ist Berührpunkt von } Y \} 
 	\end{align*}
 \end{enumerate}
 % subsubsection definition (end)
@@ -1141,8 +1141,73 @@ Dann ist $X$ {\bfseries total beschränkt}, d.h. $\forall\, \varepsilon>0$ gibt 
 \[
 	\bigcup\limits_{i=1}^r B_{\varepsilon}(x_i)=X
 \]
-\minisec{Beweis:} siehe nächste Vorlesung
-\newpage
+\minisec{Beweis:} Wir zeigen: 
+\[
+	X \text{ nicht total beschränkt } \Rightarrow X \text{ nicht folgenkompakt}
+\]
+Sei $X$ also nicht total beschränkt. $\Rightarrow \exists\,>0 \text{, so dass gilt:}$
+\begin{align*}
+		&\text{Sind } x_1,\dots,x_r \in X \text{ beliebig} \\
+		&\Rightarrow \bigcup\limits_{i=1}^rB_{\varepsilon}(x_i) \neq X \\
+		&\Rightarrow X \setminus \bigcup\limits_{i=1}^rB_{\varepsilon}(x_i) \neq \emptyset
+\end{align*}
+Wähle $x_1 \in X \Rightarrow X \setminus B_{\varepsilon}(x_1) \neq \emptyset$ \\
+Wähle $x_2 \in X \setminus B_{\varepsilon(x_1)} \Rightarrow X \setminus (B_{\varepsilon}(x_1)\cup(B_{\varepsilon}(x_2))) \neq \emptyset$ \\
+Wähle $x_3$ \dots \\
+Wähle $x_r \in X \setminus \bigcup\limits_{i=1}^{r-1}B_{\varepsilon}(x_i)$
+\begin{align*}
+	&\Rightarrow (X_r)_r \text{ Folge in }X \\
+	&\text{Für } n \neq m \text{ gilt } d(x_n,x_m) \geq \varepsilon \\
+	&\text{Dann ist } n>m \text{ ,so ist nach Konstruktion } x_n \notin B_{\varepsilon}(x_m)
+ \end{align*}
+ Keine Teilfolge von $(x_r)_r$ kann eine Cauchyfolge sein
+ \[
+ 	\Rightarrow  (x_r)_r \text{ hat keine Konvergente Teilfolge} \]
+	\[
+		X \text{ nicht folgenkompakt}
+	\]
+\bewende
+
+Wir zeigen nun:
+\[
+	\text{Überdeckungskompakt } \Rightarrow \text{ folgenkompakt}
+\]
+Durch Widerspruch: Sei $X$ überdeckungskompakt, und $(x_n)_n$ Folge in $X$, welche keine konvergente Teilfolge hat. \\
+\underline{Beobachte:}
+$(x_n)_n$ hat keine Konvergente Teilfolge
+\[
+	\Rightarrow \forall\, x \in X \,\exists\, \varepsilon>0 \text{ ,so dass }x_n \in B_{\varepsilon}(x) \text{ nur für endlich viele $n$ gilt}
+\]
+\[
+	\Rightarrow \forall\, x \in X \,\exists\, \varepsilon_x>0 \text{ ,so dass }x_n \in B_{\varepsilon}(x) \text{ nur für unendliche viele $n \in \mathbb{N}$ golt.}
+\]
+Dann ist:
+\[
+	U = (B_{\varepsilon_x}(x))_{x \in X} 
+\]
+eine offene Überdeckung von $X$ \\
+Weil $X$ Überdeckungskompakt ist, gibt es endliche Teilüberdeckung
+\[
+	\Rightarrow  \exists\,y_1,\dots,y_r \in X \text{ mit:}
+\]
+\[
+	X = B_{\varepsilon_{y_1}}(y_1) \cup \dots \cup B_{\varepsilon_{y_r}}(y_r)
+\]
+\bewende
+\minisec{Bemerkung:}
+$X$ metrischer Raum. Man kann zeigen, dass folgendes äquvivalent ist:
+\begin{enumerate}
+	\item $X$ kompakt
+	\item $X$ ist vollständig und total beschränkt
+	\item $X$ hat folgende Eigenschaft:
+	\[
+		\text{Sind }   A_1  \supseteq A_2 \supseteq A_3 \supseteq \dots \text{ abgeschlossene Teilmengen von $X$ und }A_n \neq 0 \, \forall\, n
+		\]
+		\[
+			\bigcap\limits_{n=1}^{\infty}A_n \neq \emptyset
+		\]
+\end{enumerate}
+ohne Beweis \\
 % subsubsection lemma (end)
 Beweis, dass folgenkompakte $X$ überdeckungskompakt sind, Lemma 5.16 voraussetzend.
 \minisec{Beweis:}
@@ -1155,5 +1220,128 @@ Sei $\delta>0$ eine Lebesgue-Zahl von $U$ (existiert nach I.5.11)
 \[
 	\Rightarrow \forall\, j=1,\dots,n \, \exists\, i,j \in I: \qquad B_{\delta}(x_j) \subseteq U_{ij}
 \]
-% subsection kompaktheit (end)
+\[
+	\Rightarrow X = U_{i_1} \cup \cdots \cup U_{i_1}
+\]
+\bewende
+\newpage
+\section{Differentialrechnung im $\mathbb{R}^n$} % (fold)
+\label{sec:differentialrechnung_im_mathbb_r_n}
+
+\subsection{Die Definition} % (fold)
+\label{sub:die_definition}
+\underline{Ziel}: $U \subseteq  \mathbb{R}^n$ offen, $f: U \to \mathbb{R}^m$ \\
+Wann heißt $f$ differenzierbar? \\
+Was ist die Ableitung von $f$? 
+\subsubsection{Notation} % (fold)
+\label{ssub:notation}
+$U \subseteq \mathbb{R}^n, \, x \in \mathbb{R}^n$.
+\[
+	x+U = \{ x+y \,|\,y \in U\} \subseteq \mathbb{R}^n
+\]
+Analysis I: $n=m=1$, $U \subseteq \mathbb{R}$ offen, $f: U \to \mathbb{R} \, x \in U$. $f$ diffbar $:\Leftrightarrow$ der Grenzwert
+\[
+	f'(x)= \lim_{h \to \infty} \frac{1}{h}(f(x+h)-f(x)) \in \mathbb{R}
+\]
+existiert. \\
+\underline{Verallgemeinerung}: $\mathbb{R} \supseteq U \stackrel{f}{\to} \mathbb{R}^m$ ohne Problem. \\
+n>1 problematisch, denn man kann nicht durch Elemente $h \in \mathbb{R}^n$ dividieren. \\
+\underline{Umformulierung}:(aus AnaI) \\
+$U \subseteq \mathbb{R}$ offen, $x \in U$, $f: U \to \mathbb{R}$ 
+\[
+	A: -x+U \to \mathbb{R}  \qquad (-x+U=\{h \in \mathbb{R}\,|\,h+x \in U)
+\]
+definiert durch:
+\[
+	A(h):= \begin{cases}
+		\frac{1}{n}f(x+h)-f(x), &\text{ falls }h \neq =0\\
+		f(x), &\text{ falls }h=0
+		\end{cases}
+\]
+$\Rightarrow A \text{ stetig bei }0$
+\[
+	\forall\, h \in -x+U \qquad f(x+h)=f(x)+A(h)h
+\]
+Umgekehrt: Nimm an, es gibt Funktion $A:-x+U \to \mathbb{R}$ ,so dass 
+\begin{enumerate}
+	\item $A$ stetig bei $0$
+	\item $f(x+h)=f(x)+A(h)h$
+\end{enumerate}
+$\Rightarrow f$ differenzierbar bei $x$, und $f'(x)=A(0)$
+\minisec{Beweis:}
+\[
+	\frac{1}{h}(f(x+h)-f(x))=\frac{1}{h}(f(x)+A(h)h-f(x))= \frac{1}{h}A(h)h = A(h) \stackrel{h \to 0}{\longrightarrow} A(0)
+\]
+% subsubsection notation (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$U \subseteq \mathbb{R}^n$ offen, $f:U \to \mathbb{R}^m$ $x \in U$. f heißt {\bfseries differenzierbar} bei $x$, falls eine Funktion $A: -x+U \to \text{Mat}_{m,n}(\mathbb{R})$ existiert, so dass gilt:
+\begin{enumerate}
+	\item $A$ stetig bei 0
+	\item $\forall\, h \in -x+U:$
+	\[
+		\underset{\in \mathbb{R}^m}{\underbrace{f(x+h)}} = \underset{\in \mathbb{R}^m}{\underbrace{f(x)}} + \underset{\in \mathbb{R}^m}{\underbrace{\underset{
+		\in \text{Mat}_m,n(\mathbb{R})}{\underbrace{A(h)}}
+		\underset{\in \mathbb{R}^n}{\underbrace{h}}}}
+	\]
+\end{enumerate}
+Die Matrix $A(0) \in \text{Mat}_{m,n}(\mathbb{R})$ heißt {\bfseries Ableitung} von $f$ in $x$ und wird mit
+\[
+	Df(x) \in \text{Mat}_{m,n}(\mathbb{R})
+\]
+bezeichnet \\
+\underline{Alternative Bezeichnung}:
+'total differenzierbar' \\
+\[
+	Df(x)=\text{'Totales Diferential'}
+\]
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$U \subseteq \mathbb{R}^n$ offen, $x \in U$,$f: U \to \mathbb{R}^m$ sei differenzierbar. Sei $v \in \mathbb{R}^n$ \\
+setze $g_v(t)=f(x+tv)$ mit 
+\[
+	g_v:\{t \in \mathbb{R} \,|\,x+tv \in U \} \to \mathbb{R}^m
+\]
+Dann gilt:
+\[
+	Df(x)v = \lim_{t \to 0} \frac{1}{t}(g_v(t)-g_v(0))
+\]
+\minisec{Beweis:}
+Schreibe $f(x+h)=f(x)+A(h)h$. $A$ stetig bei $0$ und $A(0)=Df(x)$
+\begin{align*}
+	\Rightarrow \frac{1}{t}(g_v(t)-g_v(0))&= \frac{1}{t}(f(x+tv)-f(x))  \\
+	&= \frac{1}{t}(f(x)+A(tv)tv-f(x)) \\
+	&= \frac{1}{t}A(tv)tv \\
+	&= \frac{1}{t}tA(tv)v = A(tv)v \longrightarrow A(0)v = Df(x)v \\
+\end{align*}
+\[
+	t \mapsto A(tv)v \text{ ist stetig bei $0$}
+\] \bewende
+\minisec{Bemerkung:}
+In Def II1.2 ist $A(h)$ {\bfseries nicht} eindeutig durch $f$ bestimmt. Aber $A(0)$ ist eindeutig bestimmt, nach II.1.3
+% subsubsection satz (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$U,x,f,v$ wie in Satz II.1.3. Dann heißt $Df(x)v$ die {\bfseries Richtungsableitung} von $f$ in Richtung $v$.
+\[
+	D_vf(x)=Df(x)v
+\] 
+\minisec{Bemerkung:}
+Ist $f$ diffbar bei $x$, so ist $v \mapsto g'_v(0)=D_vf(x)$ linear.
+\minisec{Beispiel:}
+\[
+	f(x)=\skal{x}{x}=\norm{x}_2^2
+\]
+\[
+	f(x+h)=\skal{x}{x}+\skal{h}{h}+2\skal{x}{h}=f(x)+\skal{h}{h}+2\skal{x}{h}
+\]
+$A(h) \in \text{Mat}_{n,m}(\mathbb{R})$
+\[
+	A(h)h= \skal{h}{h}+2 \skal{x}{h}   
+\]
+% subsubsection definition (end)
+% subsubsection definition (end)
+% subsection die_definition (end)
+% section differentialrechnung_im_mathbb_r_n (end)
+
 \end{document}	
