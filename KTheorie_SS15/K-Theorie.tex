@@ -506,15 +506,15 @@ Sei $X$ ein kompakter Raum und $h \colon X \times I \to Y$ eine Homotopie. Sei $
 \label{sec:3}
 Wir haben im letzten Kapitel folgenden kontravarianten, homotopieinvarianten Funktor kennengelernt
 \[
-	\begin{tikzcd}[row sep=0.4em, column sep=large,cramped]
+	\begin{tikzcd}[row sep=0.1em, column sep=large,cramped]
 		\TOP \rar & \MONOIDE \\
 		X \rar[mapsto] & \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}} \\
 		(f \colon X \to Y) \rar[mapsto] & \enbrace*{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
 	\end{tikzcd}
 \]
-mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element.
+mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren:
 
-\minisec{Grothendieck-Konstruktion}
+\subsection*{Grothendieck-Konstruktion}
 Sei $(M,+)$ ein kommutativer Monoid. Betrachte $\Gr(M)= \nicefrac{M \times M}{\sim}$ mit der Äquivalenzrelation
 \[
 	(x,y) \sim (x',y') :\iff \exists c \in M \text{ mit } x+y' +c = x' +y +c
@@ -523,7 +523,7 @@ Die Idee dahinter: $[x,y]$\enquote{$=$}$x-y$. Dann ist
 \[
 	\begin{tikzcd}[row sep=tiny]
 		+ \colon \Gr(M) \times \Gr(M) \rar & \Gr(M) \\
-		\quad \enbrace*{[x,y] , [x',y']} \rar[mapsto] & \benbrace*{x+x',y+y'}  
+		\quad \enbrace[\big]{[x,y] , [x',y']} \rar[mapsto] & \benbrace*{x+x',y+y'}  
 	\end{tikzcd}
 \]
 wohldefiniert. Mit dieser Operation ist $\Gr(M)$ eine abelsche Gruppe (das Inverse zu $[x,y]$ ist $[y,x]$, denn $[x+y,x+y]=[0,0]$) und $M \to \Gr(M)$, $x  \mapsto [x,0]$ ist
@@ -538,18 +538,17 @@ Zu jedem Monoidhomomorphismus $\varphi \colon M \to A$ in eine abelsche Gruppe $
 		\Gr(M) \urar["\exists ! \psi"', dashed]
 	\end{tikzcd}
 \]
-kommutiert. Der Beweis ist eine Übungsaufgabe. \bigskip \\
-Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$ (vorläufige Definition).
-\minisec{Frage}
-Was ist $K^n(X)$ für $n\not=0$? Was ist $K^n(X,A)$?
+kommutiert. \emph{Der Beweis ist eine Übungsaufgabe.} \bigskip \\
+Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$, aber es stellen sich weiterhin die Fragen: Was ist $K^n(X)$ für 
+$n\not=0$? Was ist $K^n(X,A)$?
 
 \subsection[Definition: Tripel, Morphismus von Tripeln und stabile Isomorphie]{Definition} % (fold)
 \label{sub:31}
 Sei $(X,A)$ ein Ko-Raumpaar.
 \begin{enumerate}[(i)]
 	\item Ein \Index{Tripel} $(E_1,f,E_0)$ über $(X,A)$ besteht aus endlichdimensionalen $\mathds{C}$-Vektorbündeln $p_i \colon E_i \to X$ und einem Isomorphismus
-	$f \colon E_1|_A \to E_2|_A$.
-	\item Ein \Index{Morphismus von Tripeln} $(E_1,f,E_2)$ und $(E_1',f',E_2')$ besteht aus einem Paar $(g_1,g_0)$ von Vektorbündelmorphismen $g_i \colon E_i \to E_i'$,
+	$f \colon E_1|_A \to E_0|_A$.
+	\item Ein \Index{Morphismus von Tripeln} $(E_1,f,E_0)$ und $(E_1',f',E_0')$ besteht aus einem Paar $(g_1,g_0)$ von Vektorbündelmorphismen $g_i \colon E_i \to E_i'$,
 	sodass das folgende Diagramm kommutiert
 	\[
 		\begin{tikzcd}[column sep=large]
@@ -558,17 +557,18 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 		\end{tikzcd}
 	\] 
 	\item Tripel der Form $(E,\id_E,E)$ heißen \bet{elementar}\index{Tripel!elementares}.
-	\item $(E_1,f,E_0)$ und $(E_1',f',E_0')$ heißen \Index{stabil isomorph}, falls 
+	\item $(E_1,f,E_0)$ und $(E_1',f',E_0')$ heißen \Index{stabil isomorph}, falls Vektorbündel $E \to X$ und $E' \to X$ existieren, so dass
 	\[
 		\enbrace*{E_1 \oplus E, f \oplus \id_E, E_0 \oplus E} \cong \enbrace*{E_1' \oplus E', f' \oplus \id_{E'}, E_0' \oplus E' } 
 	\]
+	also falls sie isomorph werden nach Addition elementarer Tripel.
 	Stabile Isomorphie ist eine Äquivalenzrelation (Übung). 
 \end{enumerate}
 % subsection 31 (end)
 
 \subsection[Definition von $K^{-n}(X,A)$]{Definition} % (fold)
 \label{sub:32}
-Sei $(X,A)$ ein Ko-Raumpaar. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
+Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
 \[
 	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
 \]
@@ -644,6 +644,59 @@ Wir erhalten nun das folgende Diagramm, wobei die diagonale Abbildung rechts obe
 Die Existenz von $\overline{H}$ folgt aus der universellen Eigenschaft des Pullbacks. Es gilt nun $H=\pr_E \circ \overline{H} \colon E' \times I \to E$ und wir erhalten
 eine Abbildung $X \times I \to \Iso(E' \times I, E \times I)$. $F := H|_{E' \times \set{1}} \colon E' \to E$ ist nun die gesuchte Abbildung. \bewende
 % subsection 3.3 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:34}
+Sei $(X,A)$ ein Ko-Raumpaar.
+\begin{enumerate}[(i)]
+	\item Seien $(E_0,f,E_1)$ und $(E_1,g,E_2)$ Tripel über $(X,A)$. Dann sind die beiden Tripel 
+	\[
+		(E_0,g \circ f, E_2) \quad  \text{ und } \quad \enbrace*{E_0 \oplus E_1, f \oplus g, e_1 \oplus E_2} 
+	\]
+	stabil isomorph.
+	\item Seien $(E_0,f,E_1)$ und $(E_0,g,E_1)$ Tripel über $(X,A)$. Sei $h \colon A \times I \to \Iso \enbrace*{E_0|_A,E_1|_A} $ eine Homotopie zwischen $f$ und $g$, sodass 
+	$h_t \colon A \to \Iso \enbrace*{E_0|_A,E_1|_A}$ ein Schnitt ist für alle $t \in I$. Dann sind die beiden Tripel stabil isomorph.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[(i)]
+	\item Wir haben das folgende kommutative Diagramm:
+	\[
+		\begin{tikzcd}[ampersand replacement=\&,row sep=4.5em,column sep=5.2em]
+			E_1 \oplus E_0\big|_A \ar[rrr,"{\begin{pmatrix} \id & f \\ 0 & \id \end{pmatrix}}","\text{(1)}"'] \ar[d,"{\begin{pmatrix} \id & 0 \\ 0 & g \circ f \end{pmatrix}}"'] 
+			\& \& \& E_1 \oplus E_0\big|_A \ar[d,"{\begin{pmatrix} g & 0 \\ 0 & f \end{pmatrix}}"] \\
+			E_1 \oplus E_2\big|_A \& E_2 \oplus E_1\big|_A \lar["{\begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix}}"',"\text{(2)}"]
+			\& E_2 \oplus E_1\big|_A \lar["{\begin{pmatrix} \id & g \\ 0 & \id \end{pmatrix}}"',"\text{(3)}"]
+			\& E_2 \oplus E_1\big|_A \lar["{\begin{pmatrix} \id & 0 \\ - g^{-1} & \id \end{pmatrix}}"',"\text{(4)}"]
+		\end{tikzcd}
+	\]
+	Die Kommutativität ergibt sich wie folgt
+	\begin{align*}
+		&\begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot \begin{pmatrix} \id & g \\ 0 & \id \end{pmatrix} \cdot \begin{pmatrix} \id & 0 \\ - g^{-1} & \id \end{pmatrix}
+		\cdot \begin{pmatrix} \id & 0 \\ 0 & g \circ f \end{pmatrix} \cdot \begin{pmatrix} \id & f \\ 0 & \id \end{pmatrix} \\
+		 &= \begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot \begin{pmatrix}
+		 	0 & g \\ - g^{-1} & \id
+		 \end{pmatrix} \cdot 
+		 \begin{pmatrix}
+		 	g & g \circ f \\ 0 & f
+		 \end{pmatrix} = \begin{pmatrix}
+		 	g ^{-1} & -\id \\ 0 & g
+		 \end{pmatrix} \cdot 
+		 \begin{pmatrix}
+		 	g & g \circ f \\ 0 & f
+		 \end{pmatrix} = \begin{pmatrix}\id & 0 \\ 0 & g \circ f \end{pmatrix}
+	\end{align*}
+\end{enumerate}
+% subsection 34 (end)
+
+Diagramm für später:
+\[
+	\begin{tikzcd}[sep=large]
+		g^+ E_0\big|_A \ar[rr] \ar[dd] \ar[dr,dashed,"g^* f"] & & E_0\big|_B \drar["f"] \ar[dd]\\
+		& g^* E_1\big|_A \ar[rr,crossing over] & & E_1\big|_B \ar[dd]\\
+		A \ar[rr,"g|_A",pos=0.3] \ar[dr,"\id"']& & B \ar[dr,"\id"]\\
+		& A \ar[from=uu,crossing over] \ar[rr,"g|_A"]& & B
+	\end{tikzcd}
+\]
 % section 3 (end)
 
 
@@ -691,6 +744,13 @@ Dabei haben wir benutzt, dass $\skal*{x}{v}=0$ gilt. Umgekehrt gilt
 da wieder $\skal*{x_0}{\kappa ^{-1}(w)}=0$, weil $\kappa ^{-1}(w) \in H$ ist. Damit ist $\varphi$ ein Homöomorphismus. Es ist außerdem klar, dass $\varphi$ eingeschränkt auf 
 die Fasern eine lineare Abbildung ist. Damit ist das Tangentialbündel $\Tmap S^n$ lokal trivial. \bewende
 % subsection lokal_trivial_Sn (end)
+
+
+
+
+
+
+
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
