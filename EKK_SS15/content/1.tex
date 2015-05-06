@@ -1,5 +1,6 @@
 \section{Allgemeines über Kryptographieverfahren}
 \label{sec:para1}
+\nextlecture
 
 \subsection{Grundlagen aus der elementaren Zahlentheorie und Gruppentheorie}
 \subsubsection{Zahlen, Darstellung von Zahlen}
@@ -186,9 +187,10 @@ Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz 
 \minisec{Beweis}
 	Aus den Voraussetzungen und $c \mid ac$ folgt, dass $c \mid \ggT(ab,ac) = |a| \cdot \ggT(b,c) = |a|$, also $c \mid a$. Zur ersten Gleichheit: Nach Satz \ref{satz_ea} existieren $x,y \in \ZZ$ mit $\ggT(b,c) = xb + yc$. \\
 	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. Ist $t$ irgendein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
-	
+
+\nextlecture	
 \subsubsection{Kongruenzenrechnen und die modulare Brille}
-	Wir behandeln nun, wie man mit Teilmengen von $\ZZ$ und neuen Definitionen von "$+$" und "$\cdot$" zu neuen algebraischen Strukturen (Gruppe, Ringe, Körper) kommt. Dazu ist das Kongruenzenrechnen modulo $m$ wesentlich.
+	Wir behandeln nun,\marginnote{[3]} wie man mit Teilmengen von $\ZZ$ und neuen Definitionen von "$+$" und "$\cdot$" zu neuen algebraischen Strukturen (Gruppe, Ringe, Körper) kommt. Dazu ist das Kongruenzenrechnen modulo $m$ wesentlich.
 	
 \begin{defn}[Kongruenz, Modul]
 	Sei $m \in \NN$. Dann heißen $a \in \ZZ$ und $b \in \ZZ$ \bet{kongruent modulo $m$}, wenn $m \mid (b-a)$. Wir schreiben dann $a \kon b \modu m$ oder $a \kon b \ (m)$. Die Zahl $m$ heißt der \Index{Modul} der Kongruenz. \index{Kongruenz}
@@ -386,6 +388,7 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 		Daher ist $v^2 + w^2 \kon 0,1,4,2,5 \modu 8$, also $u^2+v^2+w^2 \kon 0,1,4,2,5, \quad 1,2,5,3,6, \quad 4,5,0,6,1 \modu 8$, aber nie $\kon 7 \modu 8$. Es kann keine Lösungen modulo $8$ geben, also auch keine in $\ZZ$.
 	\end{itemize}
 
+\nextlecture
 \subsubsection{Gruppen}
 \label{subsub:1.1.3}
 	Die Gruppen $(\ZZ_m,+,0)$ und $(\ZZ_m^*,\cdot)$ sind endliche abelsche Gruppen.\marginnote{[4]} Wir untersuchen ein paar ihrer allgemeinen Eigenschaften und führen dabei ein paar Grundbegriffe ein.
@@ -519,8 +522,9 @@ Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $1
 \end{erl}
 
 In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, möglichst zufälliger Primzahlen $p,q$ gebraucht. Man kennt in der Praxis schnelle Tests (den Miller-Rabin-Test), um zu entscheiden, ob eine große Zahl $n$ (mit evtl. hunderten von Stellen in Dezimaldarstellung) zusammengesetzt ist oder (sehr wahrscheinlich) prim. Daher erzeugt man solange Zufallszahlen, bis der Primzahltest "anschlägt".
-
+\nextlecture
 \newpage
+
 \subsection{Public-Key-Kryptographie}
 \label{sub:1.2}
 	\Index{Public-Key-Kryptographie} bezeichnet man auch als asymmetrische Kryptographie.\marginnote{[5]} Bei diesem Kommunikationsverfahren hat jeder Nutzer einen \bet{öffentlichen Schlüssel}, den jeder einsehen kann, und einen \bet{privaten Schlüssel}, den jeder Nuter geheim hält. Möchte Nutzer B eine Nachricht an Nutzer A senden, benutzt er zur Verschlüsselung den öffentlichen Schlüssel von A, die Entschlüsselung gelingt aber nur A mit dem privaten Schlüssel. \index{öffentlicher Schlüssel} \index{privater Schlüssel} \\
@@ -582,7 +586,6 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \subsubsection{Diffie-Hellman-Verfahren}
 \label{subsub:1.2.2}
 
-\setcounter{counter}{8}
 \begin{defn}[Das Problem des diskreten Logarithmus (DL-Problem)]
 	Gegeben sei eine abelsche Gruppe. Wir beschreiben das Problem multiplikativ und additiv: \index{diskreter Logarithmus}
 	\begin{description}
@@ -629,3 +632,91 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 	Weiter ist beim Schlüsselaustausch entscheidend, dass sich Alice und Bob sicher sein können, wirklich mit dem angegebenen Teilnehmer zu kommunizieren: Ein Unbefugter könnte versuchen, sich erst als Alice auszugeben, und so mit Bob einen Schlüssel $x^{eb}$ auszutauschen und dies Ebenso mit Alice tun ($x^{ea}$). Gelingt dies, braucht der Unbefugte nur die verschlüsselten Nachrichten zwischen Alice und Bob abzufangen: \\
 	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. Er kann so die gesamte geheime Kommunikation abhören. Man nennt dies eine \index{man-in-the-middle-Attacke}.
 \end{bem}
+
+\nextlecture
+\subsubsection{ElGamal-Verschlüsselung}
+\label{subsub:1.2.3}
+	Allen Teilnehmern bekannt sei eine abelsche Gruppe $(G,+)$ \marginnote{[6]} und ein Gruppenelement $x \in G$ von (großer) Ordnung $n = \ord(x)$. Jeder Nutzer wählt eine Zufallszahl $d \in \{1, \dots, n-1\}$ als privaten Schlüssel und erzeugt einen öffentlichen Schlüssel $dx$.
+	
+\begin{anw}[ElGamal-Verschlüsselung]
+	Alice möchte eine geheime Botschaft $m \in G$ an Bob schicken. Die \Index{ElGamal-Verschlüsselung}\footnote{\url{http://de.wikipedia.org/wiki/Taher_Elgamal}} geht wie folgt: 
+	\begin{description}
+		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1, \dots, n-1\}$ und berechnet $\tilde{a} \cdot x$. Alice besorgt sich Bobs öffentlichen Schlüssel $bx$ und berechnet $R = \tilde{a} \cdot (bx) + m$.
+		\item[Schritt 2:] Alice schickt $\tilde{a}x$ und $R$ an Bob.
+		\item[Schritt 3:] Bob berechnet $b \cdot (\tilde{a}x) = \tilde{a} \cdot (bx)$ und die Nachricht durch $R - b\cdot(\tilde{a}x) = m$.
+	\end{description}
+\end{anw}
+
+\begin{bem}
+	Ein Unbefugter, der die Daten $G, x, n, bx, \tilde{a}x$ kennt und $R$ abgehört hat, kann $m$ genau dann berechnen, wenn er ein Diffie-Hellman-Problem lösen kann (d.h. das Element $\tilde{a}b \cdot x \in G$ berechnen kann).
+\end{bem}
+
+\begin{bem}
+	Alice könnte $\tilde{a} = a$ wählen. Für die Sicherheit dieses Verfahrens ist es aber wichtig, dass sie bei jeder ihrer Nachrichten ein neues $\tilde{a}$ wählt: Sonst könnte ein Unbefugter, der die Übertragungen $\tilde{a}x, R_1 = \tilde{a}(bx) + m_1$ und $\tilde{a}x, R_2 = \tilde{a}(bx) + m_2$ abhört und schon die Nachricht $m_1$ kennt, über $R_2 - R_1 + m_1 = (m_2 - m_1) + m_1 = m_2$ auch $m_2$ berechnen.
+\end{bem}
+
+\newpage
+\subsection{Digitale Unterschriften}
+\subsubsection{DSA-Signatur}
+\label{sub:1.3}
+\label{subsub:1.3.1}
+	Gegeben sei wieder eine abelsche Gruppe $(G,+), x \in G$ mit $n = \ord(x)$ groß. Alice will eine Nachricht $m$ an Bob digital unterschreiben. Wieder hat sie einen geheimen Schlüssel $a \in \{1, \dots, n-1\}$ und einen öffentlichen Schlüssel $ax \in G$.
+	
+\begin{defn}[Hashfunktion]
+	Sei $\mathcal{M}$ die Menge aller möglichen Nachrichten (etwa beliebig lange Folgen von $0$ und $1$), und gegeben sei eine Funktion $h \colon \mathcal{M} \rightarrow \{0,1,\dots,n-1\}$, deren Werte $h(m)$ für $m \in \mathcal{M}$ leicht zu berechnen sind und die die folgenden beiden Eigenschaften hat:
+	\begin{enumerate}[(i)]
+		\item Es ist praktisch unmöglich, Urbilder unter $h$ zu berechnen, d.h. zu $d \in \{0,1,\dots,n-1\}$ ein $m \in \mathcal{M}$ zu finden mit $h(m) = d$.
+		\item $h$ ist \Index{kollisionsresistent}, das bedeutet, dass es praktisch unmöglich ist, zwei verschiedene Elemente $m, m' \in \mathcal{M}$ mit $h(m) = h(m')$ zu finden. Eine solche Funktion heißt \Index{Hashfunktion}.
+	\end{enumerate}
+\end{defn}
+
+\begin{bsp}
+	Sei $p$ prim mit $2^{1023} < p \leq 2^{1024} - 1$ und $g$ ein Erzeuger der multiplikativen Gruppe $\ZZ_p^*$, d.h. $\sprod{g} = \ZZ_p^*$. Dann ist nach heutigem Wissen die Funktion
+	\begin{equation}
+	\begin{aligned}
+		h\colon \ZZ_p^* &\longrightarrow \ZZ_p^* \\
+		z &\longmapsto g^z \modu p
+	\end{aligned}
+	\end{equation}
+	eine Hashfunktion. Das ab \ref{anw_6.7} beschriebene Verfahren kann dann mit $G = \ZZ_p^*, x = g$ durchgeführt werden (in der Praxis nimmt man für $p$ eine \Index{Sophie-Germain-Primzahl}\footnote{\url{http://de.wikipedia.org/wiki/Sophie_Germain}}, d.h. $p$ prim mit $\frac{p-1}{2}$ auch prim, denn dann ist etwa jedes zweite Element ein Erzeuger. Daher ist leicht ein Erzeuger findbar.
+\end{bsp}
+
+\begin{bem}
+	Öffentlich zugänglich seien die Daten $(G,+), x \in G, n = \ord(x), h$ und $ax \in G$ sowie eine Bijektion $\Psi\colon \sprod{x} \rightarrow \{0,1,\dots,n-1\}$, deren Werte effektiv berechenbar seien (in der Praxis reicht eine Funktion, deren Urbildmenge $\Psi^{-1}(k)$ von jedem $k \in \{0,\dots,n-1\}$ klein ist).
+\end{bem}
+
+\begin{anw}[DSA-Verfahren]
+	Nun das \Index{DSA-Verfahren} zur Signatur, wie Alice ihre Nachricht $m$ unterschreiben kann:
+	\begin{description}
+		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1,\dots,n-1\}$ mit $\ggT(\tilde{a},n) = 1$ und berechnet das Gruppenelement $\tilde{a}x \in G$.
+		\item[Schritt 2:] Alice berechnet das Inverse $\tilde{a}^{-1}$ in $\ZZ_n$ (euklidischer Algorithmus) sowie $s := \tilde{a}^{-1} (h(m)-\Psi(\tilde{a}x)\cdot a)$ in $\ZZ_n$.
+		\item[Schritt 3:] Alice schickt die Nachricht $m$ und ihre Unterschrift $\tilde{a}x,s$ an Bob.
+		\item[Schritt 4:] Bob berechnet $\Psi(\tilde{a}x) \cdot ax + s \tilde{a}x$ sowie den Hashwert $h(m)$. Bob akzeptiert die Unterschrift als echt, wenn $\Psi(\tilde{a}x) ax + s \tilde{a}x = h(m) \cdot x$ in $G$ ist, was nur stimmt, wenn $\Psi(\tilde{a}x)a + s\tilde{a} \kon h(m) \modu m$ gewählt ist, da ja $n = \ord(x)$ in $G$ gilt.
+	\end{description}
+\end{anw}
+
+\begin{bem}
+	Kann hier ein Unbefugter die Unterschrift von Alice fälschen? Dazu müsste er $s,k,x$ finden mit $\Psi(kx) ax + skx = h(m)x$ für ein beliebiges $k$ anstelle $\tilde{a}$. Er würde $kx$ berechnen und $s$ passend wählen, wofür ein DL-Problem in $\sprod{x} \subseteq G$ zu lösen wäre, denn $a$ kennt er nicht.
+\end{bem}
+
+\begin{bem}
+	Auch hier ist für die Sicherheit des Verfahrens nötig, dass Alice für jede Unterschrift ein neues $\tilde{a}$ wählt: erzeugt Alice zwei Unterschriften $(\tilde{a}x,s_1)$ für $m_1$ und $(\tilde{a}x,s_2)$ für $m_2$, ist $s_2 - s_1 \kon \tilde{a}^{-1}(h(m_2)-h(m_1)) \modu n$. Wenn $h(m_2) - h(m_1)$ invertierbar in $\ZZ_n$ ist, kann der Unbefugte $\tilde{a} \modu n$ berechnen. Wegen $\Psi(\tilde{a}x)a \kon h(m_1) - s_1 \tilde{a} \modu n$ ist dann auch $a$ berechenbar, falls $\Psi(r_1)$ invertierbar in $\ZZ_n$ ist.
+\end{bem}
+
+\begin{bem}
+	Wozu eine Hashfunktion $h$? \begin{itemize}
+		\item Könnte man leicht Urbilder unter $h$ berechnen, ist das Unterschriftenfälschen einfach: Der Unbefugte wählt $j \in \ZZ$ beliebig und berechnet $r = jx - ax, s = \Psi(r)$ und bestimmt $m$ (nicht von Alice!) mit $h(m) \kon \Psi(r)j \modu n$. Dann ist $r,s$ eine für Bob verifizierbare Unterschrift der falschen Nachricht $m$, denn es gilt
+		\[\Psi(r)ax + \underbrace{\Psi(r)}_{s} \underbrace{(jx-ax)}_{r} = \Psi(r)jx = h(m) x\]
+		\item Wäre $h$ nicht kollisionsresistent und ein Auffinden von $m' \in \mathcal{M}$ mit $h(m) = h(m')$ leicht, kann man Alice' Unterschrift unter $m'$ fälschen, wenn man eine gültige Unterschrift $\tilde{a}x,s$ für $m$ hat, da
+		\[ \Psi(\tilde{a}x) ax + s \tilde{a}x = h(m) \cdot x = h(m') x \]
+	\end{itemize}
+\end{bem}
+
+\begin{bem}
+	Bob muss sicher sein, dass Alice' öffentlicher Schlüssel $ax$ auch wirklich von Alice stammt und nicht von einem Unbefugten gefälscht wurde. Man löst das Problem, indem sich jeder Nutzer bei einer Certification Authority (CA) registrieren lässt. Bob würde von dieser eine "beglaubigte Kopie" von Alice' öffentlichen Schlüssel erhalten; Einzelheiten vgl. Fachliteratur.
+\end{bem}
+
+\begin{mot}
+	Eine auf Koblitz und Miller zurückgehende Idee ist nun, dass für die ElGamal-Verfahren eine beliebige zyklische Gruppe $\sprod{x}$ verwendbar ist, wie etwa die, die von Punkten auf elliptischen Kurven erzeugt werden. Da für (geeignete) elliptische Kurven das DL-Problem bzw. DH-Problem schwieriger für $\ZZ_m^*$ ist, gilt diese Art von Verschlüsselungstechnik heute als besonders sicher und wird vielfältig industriell angewendet. Wir werden die Mathematik elliptischer Kurven im folgenden Abschnitt der Vorlesung näher kennenlernen.
+\end{mot}
+\newpage
