@@ -389,7 +389,7 @@ Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colo
 	\]
 	Dann ist $\Iso(E,E') \to X$ ein lokal triviales Bündel, allerdings \emph{kein} Vektorbündel. Sind $E$ und $E'$ $n$-dimensional, ist die Faser von $\Iso(E,E')$ homöomorph
 	zu $\GL_n(K)$. Da $\GL_n(K) \subset M_n(K)$ offen ist und $\Iso(E,E')$ lokal trivial ist, folgt, dass $\Iso(E,E') \subset \Hom(E,E')$ offen ist.\footnote{da lokal 
-	homöomorph zu$U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
+	homöomorph zu $U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
 	$U = {s_{\hat{f}}}\mkern-0.5mu^{-1} \enbrace*{\Iso(E,E')}$ für $s_{\hat{f}} \colon X \to \Hom(E,E')$. Dann ist $U$ offen und $s_{\hat{f}}|_U$ entspricht einem 
 	Isomorphismus $\hat{f} \colon E|_U \to E'|_U$. \bewende
 \end{enumerate}
@@ -572,10 +572,11 @@ Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge de
 \[
 	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
 \]
-Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}} $
+\emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$}
+
 % subsection 32 (end)
 \subsection*{Bemerkung}
-$\benbrace*{E_1,f,E_0}_{\stiso}=\benbrace*{0,\id,0}_\stiso $ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
+Es gilt $\benbrace*{E_1,f,E_0}_{\stiso}=\benbrace*{0,\id,0}_\stiso $ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
 $E_1  \oplus E|_A \xrightarrow{f \oplus \id} E_0 \oplus E|_A $ zu einem Isomorphismus über ganz $X$ ausdehnen lässt.
 \minisec{Beweis}
 Für \enquote{$\Rightarrow$} folgt aus der Definition $(E_1 \oplus E, f \oplus \id, e_0 \oplus E) \cong \enbrace*{E', \id_{E'},E'}$. $\id_{E'}$ ist ein Isomorphismus auf ganz
@@ -642,8 +643,11 @@ Wir erhalten nun das folgende Diagramm, wobei die diagonale Abbildung rechts obe
 	\end{tikzcd}
 \]
 Die Existenz von $\overline{H}$ folgt aus der universellen Eigenschaft des Pullbacks. Es gilt nun $H=\pr_E \circ \overline{H} \colon E' \times I \to E$ und wir erhalten
-eine Abbildung $X \times I \to \Iso(E' \times I, E \times I)$. $F := H|_{E' \times \set{1}} \colon E' \to E$ ist nun die gesuchte Abbildung. \bewende
+eine Abbildung $X \times I \to \Iso(E' \times I, E \times I)$. $F := H|_{E' \times \set{1}} \colon E' \to E$ ist nun die gesuchte Abbildung. \bewende \bigskip
 % subsection 3.3 (end)
+
+Wir haben noch nicht geklärt, was inverse Elemente in $K^0(X,A)$ ist. Kandidat für inverses Element in $K^0(X,A)$ zu $(E_0,f,E_1)$ ist $(E_1, f ^{-1},E_0)$. Wir müssen
+prüfen $(E_0,f,E_1) \oplus (E_1,f ^{-1}, E_0)= (E_0 \oplus E_1, f \oplus  f ^{-1},E_1 \oplus E_0)$. Dazu folgendes Lemma:
 
 \subsection{Lemma} % (fold)
 \label{sub:34}
@@ -659,7 +663,7 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 \end{enumerate}
 \minisec{Beweis}
 \begin{enumerate}[(i)]
-	\item Wir haben das folgende kommutative Diagramm:
+	\item Wir haben das folgende kommutative Diagramm von Vektorbündeln:
 	\[
 		\begin{tikzcd}[ampersand replacement=\&,row sep=4.5em,column sep=5.2em]
 			E_1 \oplus E_0\big|_A \ar[rrr,"{\begin{pmatrix} \id & f \\ 0 & \id \end{pmatrix}}","\text{(1)}"'] \ar[d,"{\begin{pmatrix} \id & 0 \\ 0 & g \circ f \end{pmatrix}}"'] 
@@ -685,18 +689,171 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 		 	g & g \circ f \\ 0 & f
 		 \end{pmatrix} = \begin{pmatrix}\id & 0 \\ 0 & g \circ f \end{pmatrix}
 	\end{align*}
+	Wir können $f,g,g ^{-1}$ zu Morphismen über $X$ fortsetzen. Dann sind die auf $X$ erweiterter Versionen der Morphismen (1)--(4) Isomorphismen über $X$.
+	\begin{align*}
+		\benbrace*{E_0 , g \circ f, E_2}_\st =
+		\benbrace*{E_1 \oplus  E_0, \id \oplus g \circ f, E_1 \oplus E_1}_{\st} &= \benbrace*{E_1 \oplus E_0, \begin{psmallmatrix}
+			g & 0 \\ 0 &f
+		\end{psmallmatrix}, E_2 \oplus E_1}_{\st}  \\ 
+		&= \benbrace*{E_0 \oplus E_1, \begin{psmallmatrix}
+			f & 0 \\ 0 &g
+		\end{psmallmatrix}, E_1 \oplus E_2}_{\st} 
+	\end{align*}
+	\item Betrachte das Tripel $(E_0, \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0)$. Nach (i) ist es stabil isomorph zu $(E_0, g ^{-1}\circ f,E_0)$. Nach Voraussetzung ist
+	$g ^{-1} \circ f$ homotop zu $\id_{E_=}$ durch Isomorphismen. Also folgt aus Lemma \ref{sub:33}, dass sich $g ^{-1} \circ f$ zu einem Isomorphismus über $X$ fortsetzen 
+	lässt. Aus der Bemerkung folgt 
+	\begin{align*}
+		\benbrace*{E_0, g ^{-1} \circ f,E_0}_\st = \benbrace*{0,\id,0}_\st 
+	\end{align*}
+	Außerdem gilt nach (i) auch $\benbrace*{E_1 \oplus E_0, g ^{-1} \oplus g, E_0 \oplus E_1}_\st = \benbrace*{0,\id,0}$. Weiter ist
+	\begin{align*}
+		\benbrace*{E_0,f,E_1}_\st &= \benbrace*{E_0 \oplus E_1 \oplus E_0, f \oplus g ^{-1} \oplus g, E_1 \oplus E_0 \oplus E_1}_\st \\  
+		&= \Underbrace{\benbrace*{E_0 \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0}_\st }{=\benbrace{0,\id,0}} + \benbrace*{E_0,g,E_1}_\st \bewende 
+	\end{align*}
 \end{enumerate}
 % subsection 34 (end)
 
-Diagramm für später:
+\subsection{Korollar} % (fold)
+\label{sub:35}
+\minisec{Beweis}
+Es genügt zu zeigen, dass $K^0(X,A)$ eine abelsche Gruppe ist. Sei $\benbrace*{E_0, f,E_1}_\st\in K^0(X,A)$. Dann gilt nach Lemma \ref{sub:34}
+\begin{align*}
+	\benbrace*{E_0,f,E_1}_\st + \benbrace*{E_1,f ^{-1},E_0}_\st = \benbrace*{E_0 \oplus E_1, f \oplus f ^{-1}, E_1 \oplus E_0}_\st = \benbrace*{E_0, f ^{-1} \circ f,E_0}_\st
+	= \benbrace*{0,\id,0}_\st \bewende  
+\end{align*}
+Die Zuordnung $(X,A) \mapsto K^{-n}(X,A)$ ist ein kontravarianter Funktor: Sei $g \colon (X,A) \to (Y,B)$ eine stetige Abbildung von Ko-Raumpaaren, dann ist
 \[
-	\begin{tikzcd}[sep=large]
-		g^+ E_0\big|_A \ar[rr] \ar[dd] \ar[dr,dashed,"g^* f"] & & E_0\big|_B \drar["f"] \ar[dd]\\
+	g^* \colon K^{-n}(Y,B) \to K^{-n}(X,A)
+\]
+definiert durch $g^* \benbrace*{E_0,f,E_1}_\st = \benbrace*{g^* E_0, g^* f, g^* E_1}_\st$. Hierbei ist $g^* f$ der von der universellen Eigenschaft des Pullbacks induzierte 
+Morphismus:
+\[
+	\begin{tikzcd}[]
+		g^* E_0\big|_A \ar[rr] \ar[dd] \ar[dr,dashed,"g^* f","\cong"'] & & E_0\big|_B \drar["f","\cong"'] \ar[dd]\\
 		& g^* E_1\big|_A \ar[rr,crossing over] & & E_1\big|_B \ar[dd]\\
 		A \ar[rr,"g|_A",pos=0.3] \ar[dr,"\id"']& & B \ar[dr,"\id"]\\
 		& A \ar[from=uu,crossing over] \ar[rr,"g|_A"]& & B
 	\end{tikzcd}
 \]
+% subsection 35 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:36}
+Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.
+\minisec{Beweis}
+Es genügt wieder, den Fall $n=0$ zu betrachten. Seien $g_0,g_1 \colon (X,A) \to (Y,B)$ und sei $h \colon (X \times,A \times I) \to (Y,B)$ eine Homotopie zwischen $g_0$ und 
+$g_1$. Sei $(E_0,F,E_1)$ ein Tripel über $(Y,B)$. Nach Theorem \ref{sub:210} a) existieren Isomorphismen
+\[
+	\begin{tikzcd}[column sep=large, row sep=0.5em]
+		h^* E_0 \rar["\psi^\ssbrace{0}","\cong"'] & g_1^*(E_0) \times I \\
+		h^* E_1 \rar["\psi^\ssbrace{1}","\cong"'] & g_1^*(E_1) \times I
+	\end{tikzcd}
+\]
+die über $X \times \set{1}$ die Identität sind. Betrachte 
+\[
+	\enbrace*{\psi^\ssbrace{1}\big|_{A \times I}} \circ \enbrace*{h^* f} \circ \enbrace*{\psi^\ssbrace{0}\big|_{A \times I}} ^{-1} \colon g^*_1 E_0\big|_A \times I  
+	\xrightarrow{\cong} g_1^*E_1\big|_A \times I   
+\]
+Dies entspricht einer Homotopie $\tilde{h} \colon A \times I \to \Iso \enbrace*{g_1^*E_0\big|_A, g_1^* E_1\big|_A}$. Sei $\tilde{f} = \enbrace*{\psi^\ssbrace{1}\big|_{A \times \set{0}}} \circ \enbrace*{h^*_0 f} \circ \enbrace*{\psi^\ssbrace{0}\big|_{A \times \set{0}}} ^{-1} $. Dann haben wir das kommutative Diagramm
+\[
+	\begin{tikzcd}[sep=large]
+		g_0^* E_0\big|_A \rar["g_0^*f","\cong"'] \dar["\psi^\ssbrace{0}|_{A \times \set{0}}"',"\cong"] & g_0^*E_1\big|_A \dar["\psi^\ssbrace{1}|_{A \times \set{0} }","\cong"'] \\
+		g^*_1 E_0\big|_A \rar["\cong"',"\tilde{f}"] & g_1^* E_1\big|_A
+	\end{tikzcd}
+\]
+Es folgt damit
+\begin{align*}
+	\benbrace[\big]{g_0^* E_0, g^*_0 f , g^*_0 E_1}_\st = \benbrace*{g_1^* E_0, \tilde{f}, g_1^* E_1}_\st \stackrel{\mbox{\scriptsize \ref{sub:34} ii)}}{=}
+	\benbrace[\big]{g_1^* E_0, g_1^* f, g_1^* E_1}_\st \bewende 
+\end{align*}
+% subsection 36 (end)
+
+\subsection*{Ausschneidung}
+Sei $(X,A)$ ein Ko-Raumpaar und $U \subset A$, sodass $\overline{U} \subset \mathring{A}$, dann ist die induzierte Abbildung 
+$K^{-n}(X,A) \to K^{-n}(X \setminus U, A \setminus U)$ ein Isomorphismus.
+
+\subsection{Lemma} % (fold)
+\label{sub:37}
+Sei folgendes Diagramm ein Pushout-Diagramm von kompakten Hausdorffräumen
+\[
+	\begin{tikzcd}
+		X_0 \rar[hook,"i_1"] \dar["i_2"]& X_1 \dar["j_1"] \\
+		X_2 \rar[hook,"j_2"] & X
+	\end{tikzcd}
+\]
+Seien $p_i \colon E_i \to X_i$ für $i \in \set{1,2}$ $K$-Vektorbündel und $f \colon i_1^* E_1 \xrightarrow{\cong} i_2^* E_2 $ ein Isomorphismus von $K$-Vektorbündeln über 
+$X_0$. Dann ist \todo{Hier vlt mal \texttt{xfrac} benutzen?}
+\[
+	E = \nicefrac{E_1 \coprod E_2}{\sim} \xrightarrow{\minwidthbox{p}{2em}} \nicefrac{X_1 \coprod X_2 }{\sim}=X
+\]
+mit $v_1 \sim f(v_1)$ für alle $v_1 \in E_1$ mit $p_1(v_1) \in X_0$ ein $K$-Vektorbündel über $X$.
+\minisec{Beweis}
+\emph{Übung!}
+% subsection 37 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:38}
+Sei $(X,A)$ ein Ko-Raumpaar. Sei $p \colon E \to A$ ein $K$-Vektorbündel und $\iota \colon A \hookrightarrow X$ die Inklusion. Dann existieren Vektorbündel $q \colon F \to X$
+und $q' \colon F' \to A$, so dass $\iota^* F \cong E \oplus F'$.
+\minisec{Beweisidee}
+Finde $F' \xrightarrow{q'} A $, sodass $E \oplus F'$ trivialisierbar ist. Setze $F = X \times K^N$.
+\[
+	\begin{tikzcd}[row sep=0.1em]
+		E\big|_{U_i} \rar & U_i \times K^n \\
+		E \rar & X \times \Underbrace{K^n \oplus \ldots \oplus K^n}{\text{$k$ Kopien}}
+	\end{tikzcd}
+\]
+% subsection 38 (end)
+
+\subsection{Theorem} % (fold)
+\label{sub:39}
+\[
+	\begin{tikzcd}
+		X_0 \rar[hook,"i_1"] \dar["i_2"]& X_1 \dar["j_1"] \\
+		X_2 \rar[hook,"j_2"] & X
+	\end{tikzcd}
+\]
+Für das obige Pushout-Diagramm von kompakten Hausdorffräumen gilt
+\begin{enumerate}[a)]
+	\item Ist $i_1$ eine Kofaserung, dann auch $j_2$.
+	\item Die Abbildungen $j_1^* \colon K^{-n}(X,X_2) \to K^{-n}(X_1,X_0)$ für $n \ge 0$ ist ein Isomorphismus.
+\end{enumerate}
+\minisec{Beweis}
+\begin{enumerate}[a)]
+	\item Da $i_1$ eine Kofaserung ist, gibt es die folgende Homotopieerweiterungseigenschaft
+	\[
+		\begin{tikzcd}
+			X_1 \times \set{0} \cup X_0 \times I \rar \dar[hook] & Z \\
+			X_1 \times I \urar[dashed,"\exists"] 
+		\end{tikzcd}
+	\]
+	Sei jetzt $X \times \set{0} \cup X_2 \times I \xrightarrow{f} Z$ gegeben ($f$ stetig). Wir haben 
+	\[
+		\begin{tikzcd}
+			X_1 \times \set{0} \cup X_0 \times I \rar["{j_1 \cup (j_2 \times \id)}"] \dar[hook] & X \times \set{0} \cup X_2 \times I \rar["f"] & Z \\
+			X_1 \times I \ar[ur, dashed,"h_1"] & & 
+		\end{tikzcd}
+	\]
+	Betrachte das Pushout-Diagramm
+	\[
+		\begin{tikzcd}
+			X_0 \times I \rar[hook,"i_1 \times \id"] \dar["i_2 \times \id"] & X_1 \times I \dar["j_1 \times \id"] \ar[ddr, bend left,"h_1"] \\
+			X_2 \times I \rar[hook] \ar[drr, bend right,"f|_{X_2 \times I}"] & X \times I \drar[dashed,"h"] \\
+			& & Z
+		\end{tikzcd}
+	\]
+	Also existiert $h$, sodass
+	\[
+		\begin{tikzcd}
+			X \times \set{0} \cup X_2 \times I \rar["f"] \dar[hook]& Z \\
+			X \times I \urar["h"'] 
+		\end{tikzcd}
+	\]
+	Damit ist Teil a) gezeigt.
+\end{enumerate}
+
+
+% subsection 39 (end)
 % section 3 (end)
 
 
