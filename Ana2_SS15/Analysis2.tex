@@ -1032,7 +1032,7 @@ Weiter ist
 ist stetig, denn $(\norm{x}-\norm{y}) \leq \norm{x-y} \leq C \norm{x-y}_2$ \\
 Nach dem Satz vom Minimum und Maximum gibt es $x_{\text{min}} \in S^{n-1}$ mit: 
 \[
-	\forall\, x \in S^{n-1}: \norm{x} \geq \norm{x_{min}} =: c>0 \text{ (da $x_{\text{min}}\neq 0$)}
+	\forall\, x \in S^{n-1}: \norm{x} \geq \norm{x_\text{min}} =: c>0 \text{ (da $x_{\text{min}}\neq 0$)}
 \]
 Sei $y \in \mathbb{R}^n$ beliebig aber $y \neq 0$. Dann folgt:
 \[
@@ -1529,6 +1529,237 @@ betrachtet mit
 	\diff{}{x_i}f(x)=2x_i
 \]
 % subsubsection definition (end)
+
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$U \subseteq \mathbb{R}^n$ offen, $x \in U$ und $f:U \to \mathbb{R}^n$. Falls die partiellen Ableitungen $D_1f, \dots , D_nf$ auf ganz $U$ existieren, und stetig 
+sind (also Funktionen $D_if: U \to \mathbb{R}^m$) dann ist $f$ differenzierbar in $x$
+
+\minisec{Beweis:}
+Weil $f$ genau dann differenzierbar ist, wenn alle $f_1 , \dots , f_n: U \to \mathbb{R} $ differenzierbar sind, genügt es den Fall $m=1$ zu betrachten.
+\begin{align*}
+	f(x+h) - f(x) &= f(x_1+h_1, \dots ,x_n+h_n) - f(x_1, \dots, x_n) \\
+	&= \sum^{n}_{i=1} \left( f(x_1+h_1, \dots,x_i+h_i,x_{i+1} ,\dots,x_n) - f(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_{i} ,\dots,x_n) \right)
+\end{align*}
+Nach dem Mittelwertsatz gibt es $\theta_1, \dots , \theta_n \in (0,1)$, so dass
+\begin{gather*}
+	f(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_i+h_i,x_{i+1} ,\dots,x_n) - f(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_i,x_{i+1} ,\dots,x_n) \\
+	= D_if(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_{i}+\theta_ih_i,x_{i+1} ,\dots,x_n)h_i 
+\end{gather*}
+% subsubsection satz (end)
+\[
+	\Rightarrow f(x+h)-f(x)= \sum^{n}_{i=1}D_if(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_{i}+\theta_ih_i,x_{i+1} ,\dots,x_n)h_i 
+\]
+Setze $A(h) \in \text{Mat}_{n,m}(\mathbb{R})$ mit
+\[
+	A(h):= D_if(x_1+h_1, \dots,x_{i-1}+h_{i-1},x_{i}+\theta_ih_i,x_{i+1} ,\dots,x_n)
+\]
+\[
+	\Rightarrow f(x+h)=f(x)-A(h)h
+\]
+Weil $D_if$ stetig bei $x$ ist, gilt
+\[
+	A(h) \stackrel{h \to 0}{\longrightarrow} A(0)
+\]
+\bewende \\
+Wir haben gesehen: 
+\[
+	f \text{ diffbar } \Rightarrow f \text{ partiell diffbar}
+\]
+\[
+	f \text{ stetig partiell diffbar } \Rightarrow f \text{ diffbar}
+\]
 % section differentialrechnung_im_mathbb_r_n (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$f: U \to \mathbb{R}^m$ heißt {\bfseries stetig differenzierbar}, falls $f$ differenzierbar ist und falls $Df: U \to \text{Mat}_{n,m}(\mathbb{R})$ stetig ist.
+% subsubsection definition (end)
+
+\subsubsection{Kettenregel} % (fold)
+\label{ssub:kettenregel}
+$U \subseteq \mathbb{R}^n$ offen, $V \subseteq \mathbb{R}^m$ offen, $f:U \to V \mathbb{R}^m$, $g: V \to \mathbb{R}^p$, $x \in U$, $y=f(x) \in V$. Falls $f$ 
+differenzierbar ist, dann ist $g \circ f: U \to \mathbb{R}^p$ differenzierbar, und es gilt:
+\[
+	D(g \circ f)(x) = Dg(f(x))Df(x)
+\]
+
+\minisec{Beweis:} Sei $A:\, -x+U \to \text{Mat}_{n,m}(\mathbb{R})$ und $f(x+h)=f(x)+A(h)\cdot h $ für alle $h$. $A$ stetig in $0$ \\
+$B:\, -y+V \to \text{Mat}_{p,m}(\mathbb{R})$ und $g(y+k)=g(y)+B(k)\cdot k$ für alle $k \in -y+V$. $B$ stetig in $0$
+\[
+	\Rightarrow g \circ f(x+h)= g( \underset{=y}{\underbrace{f(x)}}+ \underset{=k}{\underbrace{A(h)h}}) = g(f(x))+B(A(h)h)A(h)h =: g(f(x))+C(h)h
+\]
+wobei 
+\[
+	C(h):= \underset{\text{Mat}_{p,n}(\mathbb{R})}{\underbrace{ \underset{\in \text{Mat}_{p,m}(\mathbb{R})}{\underbrace{B(A(h)h)}} \underset{ \, \, \in
+	 \text{Mat}_{n,m}(\mathbb{R})}{\underbrace{A(h)}} }}
+\]
+\begin{align*}
+	C(0)&=B(A(0)0)A(0)\\
+	&= B(0)A(0) \\
+	&= Dg(y)Df(x) \\
+	&= Dg(f(x))Df(x)
+\end{align*}
+Außerden ist die Funktion 
+\begin{align*}
+	C: \,-x+U &\to \text{Mat}_{p,n}(\mathbb{R}) \\
+	h &\mapsto C(h)
+\end{align*}	
+stetig. \bewende
+% subsubsection kettenregel (end)
+
+\minisec{Formulierung der Kettenregel mit partiellen Ableitungen:}
+$f,g$ wie in II.1.14 
+\[
+	f= \begin{pmatrix}
+		f_1 \\
+		\vdots \\
+		f_m
+	\end{pmatrix} \qquad g= \begin{pmatrix}
+		g_1 \\
+		\vdots \\
+		g_p
+	\end{pmatrix}
+\]
+Dann gilt:
+\[
+	Dg(f(x))= \begin{pmatrix}
+		D_1g_1(f(x)) & \dots & D_mg_1(f(x)) \\
+		\vdots & & \vdots \\
+		D_1g_p(f(x)) & \dots & D_mg_p(f(x))
+	\end{pmatrix}
+\]
+\[
+	Df(x)= \begin{pmatrix}
+		D_1f_1(x) & \dots & D_nf_1(x) \\
+		\vdots & & \vdots \\
+		D_1f_m(x) & \dots & D_nf_m(x)
+	\end{pmatrix}
+\]
+\[
+	\Rightarrow D(g \circ f)(x)= 
+	\begin{pmatrix}
+			D_1g_1 & \dots & D_mg_1 \\
+			\vdots & & \vdots \\
+			D_1g_p & \dots & D_mg_p
+		\end{pmatrix} \cdot \begin{pmatrix}
+		D_1f_1(x) & \dots & D_nf_1(x) \\
+		\vdots & & \vdots \\
+		D_1f_m(x) & \dots & D_nf_m(x)
+	\end{pmatrix}
+\]
+Der $(k,l)$-te Eintrag von $D(g \circ f)(x)$ ist 
+\[
+	\sum^{m}_{j=1}D_jg_k(f(x))D_lf_g(x)=D_lg_k(f(x)) = \sum^{m}_{j=1}\diff{g_k}{y_g}(f(x))\diff{f_g}{x_l}(x)
+\]
+
+\minisec{Beispiele für Kettenregel:}
+$U \subseteq \mathbb{R}^n$ offen, $f: U \to \mathbb{R}$, $g: U \to \mathbb{R} \setminus \set{0}$ seien differenzierbar.
+\begin{align*}
+	\begin{pmatrix}
+		f \\ g 
+	\end{pmatrix} : U &\to  \mathbb{R} \times ( \mathbb{R} \setminus \set{0})  \\
+	x &\mapsto \begin{pmatrix}
+		f(x) \\ g(x)
+	\end{pmatrix}
+\end{align*}
+ist differenzierbar, und
+\[
+	D(\begin{pmatrix}
+		f \\ g
+	\end{pmatrix}) = \begin{pmatrix}
+		D_1f(x) & \dots & D_nf(x) \\
+		D_1g(x) & \dots & D_ng(x)
+	\end{pmatrix}
+\]
+Die Funktion 
+\begin{align*}
+	q: \mathbb{R} \times ( \mathbb{R} \setminus \set{0}) &\to  \mathbb{R} \\
+	(y,z) &\mapsto \frac{y}{z} 
+\end{align*}
+ist differenzierbar mit
+\[
+	Dq(y,z)= \begin{pmatrix}
+		\frac{1}{z} & -\frac{y}{z^2}
+	\end{pmatrix}
+\]
+\begin{align*}
+	\Rightarrow q \circ \begin{pmatrix}
+		f \\ g
+	\end{pmatrix} : U &\to \mathbb{R} \\
+	x &\mapsto \frac{f(x)}{g(x)}
+\end{align*} ist differenzierbar.
+\begin{align*}
+	D\left(q \circ \begin{pmatrix}
+		f \\ g
+	\end{pmatrix}\right)&= Dq\left(\begin{pmatrix}
+		f(x) \\ g(x)
+	\end{pmatrix}\right) D \left(\begin{pmatrix}
+		f \\ g
+	\end{pmatrix}\right)(x) \\ &= \begin{pmatrix}
+		\frac{1}{g(x)} & -\frac{f(x)}{g(x)^2}
+	\end{pmatrix} \cdot \begin{pmatrix}
+		D_1f(x) & \dots & D_nf(x) \\
+		D_1g(x) & \dots & D_ng(x)
+	\end{pmatrix} \\
+	&= \left( \frac{D_1f(x)}{g(x)} - \frac{f(x)D_1g(x)}{g(x)^2}, \dots, \frac{D_nf(x)}{g(x)} - \frac{f(x)D_nf(x)}{g(x)^2}  \right)\\
+	&= \left( \frac{D_1f(x)g(x)-f(x)D_1g(x)}{g(x)^2}, \dots , \frac{D_nf(x)g(x)-f(x)D_ng(x)}{g(x)^2}  \right)
+\end{align*}
+Analog erhält man durch Betrachtung der Funktion $\mu : \mathbb{R}^2 \to  \mathbb{R}$ mit $\mu(y,z)=yz$, die {\bfseries Produktregel}
+
+\minisec{Beispiel:}
+$A \in \text{Mat}_{m,n}(\mathbb{R})$, $F: \mathbb{R}^n \to \mathbb{R}^m$, $F(x)=A \cdot x$
+\[
+	\Rightarrow F \text{ ist differenzierbar und es gilt } DF(x)=A
+\]
+\minisec{Beweis:} 
+\[
+	F(x+h)=A(x+h)=Ax+Ah=F(x)+Ah
+\] \bewende \\
+$U \subseteq \mathbb{R}^p$ offen, $f: U \to \mathbb{R}^n$ differenzierbar. \\
+$\stackrel{\text{Kettenregel}}{\Rightarrow}$ $F \circ f: U \to \mathbb{R}^m$ ist differenzierbar, und 
+\[
+	D(f \circ f)(x)= DF(f(x))Df(x) = A \cdot Df(x)
+\]
+wobei
+\[
+	F \circ f(x)=A \cdot f(x)
+\]
+Das heißt Differenzieren vertauscht mit linearen Abbildungen.
+
+\minisec{Beispiel:}
+$A= \begin{pmatrix}
+	a_1 & a_2
+\end{pmatrix} \in \text{Mat}_{1,2}(\mathbb{R})$
+\[
+	f: U \to \mathbb{R}^2 \qquad f(x)= \begin{pmatrix}
+		f_1(x) \\ f_2(x)
+	\end{pmatrix}
+\]
+\[
+	Af=a_1f_1(x)+a_2f_2(x)
+\]
+\[
+	\Rightarrow D(Af)(x)= A Df(x) = (a_1D_1f_1(x) + a_2D_1f_2(x), \dots, a_1D_nf_1 + a_2D_nf_2(x)) = a_1Df_1 + a_2Df_2(x) 
+\]
+Dieses ist die Summenregel
+\minisec{Bemerkung:}
+$X,Y$ endliche-dimensionale $\mathbb{R}$-VR. Dann gibt es Normen auf $X$ und $Y$. \\
+(z.B $(v_1, \dots , v_n)$ Basis von $X$ und $x = \sum^{n}_{i=1}x_iv_i \in X \,\,,x_i \in \mathbb{R}$ wobei $\norm{x}:= \sum^{n}_{i=1}\abs{x_i}$) \\
+Je zwei Normen auf $X$ sind äquivalent (weil $\dim X < \infty$). \\
+Also gibt es die Begriffe 'Konvergente Folge','Stetigkeit','offene Mengen', etc, unabhängig von der Wahl der Norm.
+
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$X,Y$ endlich-dimensionale $\mathbb{R}$-VR, $U \subseteq X$ offen, $x \in U$,$f: U \to Y$ heißt {\bfseries differenzierbar} bei $x$, falls gilt: \\
+es gibt eine Abbildung $A: \,-x+U \to \text{Hom}(X,Y)$, so dass gilt:
+\begin{enumerate}
+	\item $f(x+h)=f(x)+\underset{\in \text{Hom}(X,Y)}{\underbrace{A(h)}}(h) \in Y$ für alle $h \in -x+U$
+	\item $A$ stetig bei $0$ (Diese Aussage ist wohldefiniert, weil $\text{Hom}(X,Y)$ ein endlich-dimensionaler $\mathbb{R}$-VR ist)
+	\[
+		A(0)=Df(x)
+	\]
+\end{enumerate}
+
+% subsubsection definition (end)
 
 \end{document}	
