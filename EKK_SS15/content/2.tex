@@ -147,3 +147,239 @@ Doch die einfache Frage, wie viele Elemente der Restklassenring hat, hängt unte
 \begin{bem}
 	Man kann jeden Körper $k$ in einen algebraisch abgeschlossenen Körper einbetten. Ein bezüglich "$\subseteq$" minimaler heißt algebraischer Abschluss von $k$, dieser ist eindeutig und wird mit $\overline{k}$ bezeichnet. So ist etwa $\overline{\RR} = \CC$. Der algebraische Abschluss $\overline{\FF_p}$ enthält jeden der Körper $\FF_{p^r}, r \geq 1$, und umgekehrt ist jedes Element von $\overline{\FF_p}$ schon in einem dieser Körper $\FF_{p^r}, r \geq 1$, enthalten. (ohne Beweis)
 \end{bem}
+
+\nextlecture
+\subsection{Der affine Raum, affine Kurven und der projektive Raum}
+	Wir stellen den zweidimensionalen affinen und projektiven Raum vor,\marginnote{[8]} das heißt die wohlbekannte affine Ebene $k^2 = k \times k$ und ihre Ergänzung zur projektiven Ebene $\PP^2(k)$ durch "unendlich ferne Punkte". Kurven im Affinen, wie zum Beispiel elliptische Kurven werden dann in der projektiven Ebene intergriert, weil es rechentechnisch einfacher und mathematisch natürlicher ist.
+	
+\subsubsection{Der affine und projektive Raum}
+	Sei $k$ ein beliebiger Körper. Wir stellen uns meistens $\RR$ vor, weil wir über geometrische Objekte nachdenken möchten; $k$ ist in den Anwendungen aber meist ein endlicher Körper.
+
+\begin{defn}[zweidimensionaler affiner Raum]
+	Den zweidimensionalen $k$-Vektorraum $k^2 = k \times k$ schreiben wir auch als $\aff^2(k) := \{(x_1,x_2) : x_1,x_2 \in k\}$ und nennen ihn den \bet{zweidimensionalen affinen Raum} über $k$ bzw. \bet{affine Ebene} über $k$. \index{affiner Raum}
+\end{defn}
+
+\begin{defn}[Gerade]
+	Eine \Index{Gerade} in $\aff^2(k)$ ist eine Teilmenge der Form
+	\[ g(a,b,c) := \{(x,y) \in \aff^2(k) : ax + by + c = 0\} \subseteq \aff^2(k) \]
+	für ein Tripel $(a,b,c) \in k^3$ mit $a,b \neq 0$.
+\end{defn}
+
+\begin{bem}
+	Zwei verschiedene Geraden in $\aff^2(k)$ schneiden sich in genau einem Punkt, es sei denn, sie sind parallel, das heißt dann haben sie keinen gemeinsamen Punkt in $\aff^2(k)$. Soweit nichts Neues.
+\end{bem}
+
+\begin{bem}
+	Die Ausnahme, dass in der "Ebene" $k \times k$ Geraden parallel sein können, möchten wir uns beim Rechnen gerne ersparen. Wir ergänzen die Ebene um "unendlich ferne Punkte" und erklären, dass sich zwei parallele Geraden in genau so einem Punkt schneiden. Durch diese Ergänzung wird die affine Ebene zur \bet{projektiven Ebene}. Wie kann das sinnvoll so umgesetzt werden, dass alle Punkte Koordinaten bekommen, mit denen man wie üblich rechnen kann, sodass bei der Schnittpunktberechnung auch die unendlich fernen Punkte erhalten werden können?
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\foreach \x in {0,1,2,3} {
+				\draw (-.2,\x) -- (3.2,\x);
+				\draw (\x,-.2) -- (\x,3.2);
+			}
+			\draw[color=blue,very thick] (.5,.2) -- (1.5,.2) -- (1.5,1.2) -- (1,1.9) -- (.5,1.2) -- (.5,.2);
+			
+			\draw [ultra thick,->] (4,1.5) -- (6,1.5);
+		\end{tikzpicture} \hspace{.3cm}
+		\begin{tikzpicture}[scale=1.2]
+			\draw (-.2,0) -- (3.2,0);
+			\draw (.1,.8) -- (2.9,.8);
+			\draw (.4,1.4) -- (2.6,1.4);
+			\draw (.7,1.9) -- (2.3,1.9);
+			
+			\draw (-.1,-.1) -- (.9,2.1);
+			\draw (.95,-.1) -- (1.3,2.1);
+			\draw (2.05,-.1) -- (1.7,2.1);
+			\draw (3.1,-.1) -- (2.1,2.1);
+			
+			\draw [color=blue, very thick] (.55,.15) -- (.78,.9) -- (1.177,1.3) -- (1.5,.9) -- (1.48,.15) -- (.55,.15);
+			\draw [thick,->] (1.1,2.0) -- (1.3,2.5);
+			\draw [thick,->] (1.9,2.0) -- (1.7,2.5);
+			\draw (1.5,2.55) node[above]{$\infty$};
+		\end{tikzpicture}
+		\caption{Ergänzung des zweidimensionalen affinen Raums zur projektiven Ebene.}
+	\end{figure}
+\end{bem}
+
+Zwei Parallelen $g(a,1,c)$ und $g(a,1,d)$ sollen sich dann schneiden, auch rechnerisch. Wir lösen das so, dass in unserer neuen "Ebene" eine dritte "Koordinate" $z$ hinzukommt, welche bei diesen Parallelen also $=0$ sein müsste, wie folgt:
+
+\begin{defn}[projektive Ebene]
+	Die \Index{projektive Ebene} über $k$ ist die Menge
+	\[ \PP^2(k) = \{ [y_1 : y_2 : y_3] : y_i \in k \text{ nicht alle } 0\}\]
+	mit der Vereinbarung, dass $[y_1 : y_2 : y_3] = [z_1 : z_2 : z_3]$ genau dann gilt, wenn es ein $\lambda \in k \setminus \setnull$ gibt mit $y_1 = \lambda z_1, y_2 = \lambda z_2$ und $y_3 = \lambda z_3$.
+\end{defn}
+
+\begin{defn}[projektive Ebene (formal)]
+	$\PP^2(k)$ ist die Menge der Äquivalenzklassen in $k^3$ bezüglich der Äquivalenzrelation
+	\[ (y_1,y_2,y_3) \sim (z_1,z_2,z_3) \quad :\Leftrightarrow \quad \exists \lambda \in k \setminus \setnull : y_i = \lambda z_i, i = 1, 2, 3 \]
+	das heißt $\PP^2(k) := (k^3 \setminus \{(0,0,0)\} / \sim$. \\
+	Wir schreiben $[y_1 : y_2 : y_3]$ für die Äquivalenzklasse, die von $(y_1,y_2,y_3)$ repräsentiert wird und nennen sie einen \bet{projektiven Punkt}. $y_1,y_2,y_3$ nennen wir \bet{projektive Koordinaten} von $[y_1: y_2 : y_3]$.
+\end{defn}
+
+\begin{bem}
+	Ist $y_3 \neq 0$, gilt $[y_1 : y_2 : y_3] = \benbrace*{\frac{y_1}{y_3} : \frac{y_2}{y_3} : 1}$, das heißt die dritte (oder jede andere Koordinate $\neq 0$) kann dann auf $1$ gebracht ("normiert") werden.
+\end{bem}
+
+Einem projektiven Punkt $[x:y:z]$ entspricht in unserem Modell in $k^3$ die Ursprungsgerade $\{(\lambda x, \lambda y, \lambda z) : \lambda \in k\}$. Diese Punkte sind entweder $[x:y:1]$ oder $[x:y:0]$ mit $x,y \in k$ (nicht $[0:0:0]$!). \\
+Zum Beispiel durch die Abbildung
+\begin{equation}
+\begin{aligned}
+	\iota\colon \aff^2(k) &\longrightarrow \PP^2(k) \\
+	(x,y) &\longmapsto [x:y:1]
+\end{aligned}
+\end{equation}
+kann die affine Ebene in die projektive eingebettet werden (d.h. $\iota$ ist injektiv).
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw [thick] (.2,-.2) -- (-1,1);
+		\draw [thick] (0,-.3) -- (0,1);
+		\draw [thick] (-.2,-.2) -- (1,1);
+		
+		\draw [fill=white] (-1.5,.8) -- (1.5,.8) -- (1.7,1.2) -- (-1.3,1.2) -- (-1.5,.8);
+		
+		\draw (-1,1) node[fill,circle,inner sep=1pt]{};
+		\draw (0,1) node[fill,circle,inner sep=1pt]{};
+		\draw (1,1) node[fill,circle,inner sep=1pt]{};
+		\draw (0,0) node[fill,circle,inner sep=1pt]{};
+		
+		\draw [thick, ->] (-1,1) -- (-2,2);
+		\draw [thick, ->] (0,1) -- (0,2.2);
+		\draw [thick, ->] (1,1) -- (2,2);
+		
+		\draw (1.7,1) node[align=left,label={right:$\iota(\aff^2(k))$}] {};
+		\draw (.1,0) node[right,align=left] {$\leftarrow$ Ursprung};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{bem}
+	Aber $\PP^2(k)$ enthält zusätzlich noch die projektiven Punkte $[x:y:0]$ mit $x,y \in k$ (nicht $x=y=0$). Offenbar ist $\{[x:y:0] : x,y \in k, \text{ nicht } x = y = 0\}$ eine Gerade in $\PP^2(k)$, die wir \Index{unendlich ferne Gerade} $g_\infty$ nennen möchten, denn mit $j \colon k \rightarrow g_\infty, x \mapsto [x:1:0]$ lässt sich $k$ darin einbetten (das heißt $j$ ist injektiv), wobei auffällt, dass $g_\infty \setminus \im(j)$ aus genau den weiteren Punkt $\oh := [1:0:0]$ besteht, das heißt $g_\infty \setminus \im(j) = \{\oh\}$.
+\end{bem}
+
+\begin{bem}
+	Somit: $\PP^2(k) = \iota(\aff^2(k)) \sqcup \underbrace{\textcolor{green}{j(k)} \sqcup \textcolor{red}{\{\oh\}}}_{=g_\infty}$ \marginnote{disjunkte Vereinigung}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8]
+	\draw (-1.5,-.5) -- (-2,-1) -- (3,-1) -- (5,1) -- (3.5,1);
+	\draw [dashed] (3.5,1) -- (0,1) -- (-1.5,-.5);
+	\draw (-3,-.5) -- (2,-.5) -- (4,1.5) -- (-1,1.5) -- (-3,-.5);
+	
+	
+	\draw [very thick] (0,-1.5) -- (0,-1);
+	\draw [thick, dashed] (0,-1) -- (0,-.7);
+	\draw [thick, dashed] (0,-.5) -- (0,.5);
+	\draw [very thick, ->] (0,0.5) -- (0,2.5) node[above] {$z$};
+	\draw [thick, dashed] (0,0) -- (2.5,0);
+	\draw [very thick, ->] (2.5,0) -- (5,0) node[right] {$x$};
+	\draw [thick, dashed] (0,0) -- (1.5,1.5);
+	\draw [very thick, ->] (1.5,1.5) -- (2,2) node[anchor=south west] {$y$};
+	
+	\draw [color=green, thick, dashed] (-.5,.5) -- (3,.5);
+	\draw [color=green, thick] (3,.5) -- (4.5,.5);
+	
+	\draw (1,0) node[fill,circle,inner sep=1pt,color=red]{};
+	\draw (1,0) node[color=red,anchor=south west]{$\oh$};
+	
+	\draw (0,1) node[fill,circle,inner sep=1pt]{};
+	\draw (0,1) node [left,align=right] {$[0;0;1]$};
+	
+	\draw (5,1.2) node[anchor=north west,align=left] {$g_\infty = \textcolor{green}{j(k)} \sqcup \textcolor{red}{\{\oh\}}$};
+\end{tikzpicture}
+\hspace{1.5cm}
+\begin{tikzpicture}[scale=1.2]
+	\draw [very thick, color=green] (-.2,1) -- (2.2,1) node[right]{$j(k)$};
+	\draw [very thick,->] (-.2,0) -- (2.5,0) node [right] {$x$};
+	\draw [very thick,->] (0,-.2) -- (0,2) node [right] {$y$};
+	
+	\draw (-.1,-.2) -- (.8,1.6);
+	\draw (-.2,-.1818) -- (1.4,1.2727);
+	\draw (-.2,-.1333) -- (1.8,1.2);
+	
+	\draw (-.2,2.5) node[right,align=left]{Ansicht auf $x$-$y$-Ebene};
+\end{tikzpicture}	
+\end{figure}
+\end{bem}
+
+Die in $\aff^2(k)$ parallelen Geraden $g(a,1,c) = \{(x,y) \in k^2 : ax + y + c = 0\} = \{(x,-ax-c) : x \in k\}$ und $g(a,1,d)$ müssen die projektiven Punkte $[x:-ax-c:1]$ und $[x:-ax-d:1]$ enthalten. \\
+Das klappt, wenn die Gleichung $ax + y \{c,d\} = 0$ zu $ax + y + \{c,d\}z = 0$ ergänzt wird. Sie schneiden sich dann im unendlich fernen Punkt $[1 : -a : 0] = \benbrace*{-\frac{1}{a} : 1 : 0}$, welcher die gemeinsame Steigung $-a$ angibt bzw. die gemeinsame "Richtung" $(1,-a)$. Die gemeinsame Richtung $(1,-a)$ wird zum gemeinsamen Schnittpunkt $\benbrace*{-\frac{1}{a} : 1 : 0}$ erklärt.
+
+\begin{defn}[projektive Gerade]
+	Eine \Index{projektive Gerade} ist eine Teilmenge von $\PP^2(k)$ der Form
+	\[ g(a,b,c) = \{ [x:y:z] : ax+by+cz = 0\} \text{ für } (a,b,c) \in k^3 \setminus \setnull \]
+	Man sagt, die "projektive" Gleichung $ax+by+cz = 0$ ist "durch Homogenisierung" aus $ax+by+c = 0$ entstanden: Durch die Ergänzung mit $z$ haben nun alle Summanden $ax,by,cz$ denselben Grad $1$ als Polynom aus $k[x,y,z]$. Dieses Prinzip werden wir für allgemeinere Kurven für den Übergang vom Affinen ins Projektive übernehmen. Projektive Geraden werden uns in der Form von Tangenten dann wiederbegegnen.
+\end{defn}
+
+\minisec{Beispiel und Bemerkung}
+	Die projektiven Geraden $g(a,1,c),g(a,1,d)$ schneiden sich in $\penbrace*{-\frac{1}{a}:1:0} \in g_\infty$. Durch je zwei verschiedene Punkte des $\PP^2(k)$ führt genau eine projektive Gerade.
+	
+\subsubsection{Affine Kurven}
+\label{subsub:2.2.2}
+	Doch zunächst möchten wir im affinen Raum allgemeinere Kurven untersuchen. Dazu benutzen wir Polynome zu ihrer Beschreibung.
+	
+\begin{defn}[affine Kurve]
+	Sei $f \in k[x,y]$ ein Polynom über $k$ in zwei Variablen $x$ und $y$. Wir bezeichnen die Menge der Nullstellen von $f$ in $k \times k = \aff^2(k)$ als
+	\[ \cc_f(k) := \{(u,v) \in \aff^2(k) : f(u,v) = 0\}\]
+	Jede solche Nullstellenmenge $\cc_f(k)$ nennen wir eine \Index{affine Kurve}. Ist klar, welches Polynom $f$ vorliegt, schreiben wir auch kurz $\cc(k)$ für $\cc_f(k)$. Geraden sind spezielle affine Kurven (zu linearen Polynomen $f(x,y,z) = ax+by+c$).
+\end{defn}
+
+\begin{bem}
+	Für uns ist interessant, Kurven über verschiedenen Körpern $k$ zu studieren. Der Fall eines endlichen Körpers ist für Anwendungen interessant, weil dann alle Kurven aus nur endlich vielen Punkten bestehen können.
+\end{bem}
+
+\begin{bsp}
+	Sei $k = \RR$ und $f(x,y) = y-x^3-x$. Die Nullstellenmenge $\cc_f(k)$ besteht dann aus allen Punkten $(x,y) \in k^2$, welche die Gleichung $y = x^3 + x$ erfüllen. Das reelle Schaubild sieht so aus:
+	\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=.7]
+		\draw [->] (-3,0) -- (3,0) node[above] {$x$};
+		\draw [->] (0,-3) -- (0,3) node[right] {$y$};
+		\draw [domain=-1.2:1.2,smooth,variable=\x,blue] plot ({\x},{\x*\x*\x + \x});
+	\end{tikzpicture}
+	\caption{Die Menge $\{(x,y) \in \RR^2 : y = x^3 + x\}$.}
+	\end{figure}
+	Für $k = \FF_5$ können nur wenige Punkte auf der "Kurve" liegen: Die Tabelle
+	\begin{center}
+	\begin{tabular}{c|c|c|c|c|c}
+	$a$ & $0$ & $1$ & $2$ & $3$ & $4$ \\ 
+	\hline $a^3$ & $0$ & $1$ & $3$ & $-3$ & $-1$ \\ 
+	\hline $a^3+a$ & $0$ & $2$ & $0$ & 0 & $3$
+	\end{tabular} 
+	\end{center}
+	zeigt, dass $\cc_f(\FF_5) = \{ (0,0), (1,2), (2,0), (3,0), (4,3)\}$ ist, und mit $f_0(x,y) = y^2 - x^3 - x$ haben wir $\cc_{f_0}(\FF_5) = \{(0,0),(2,0),(3,0)\}$. \\
+	Ist $\tilde{k} \subseteq k$ ein Teilkörper von $k$ (wie zum Beispiell $\QQ \subseteq \RR$), so folgt auch stets $\cc_f(\tilde{k}) \subseteq \cc_f(k)$. Unsere Kurvenpunkte in $\aff(\FF_5)$ finden wir deswegen zum Beispiel in $\aff(\FF_{25})$ wieder.
+\end{bsp}
+
+\begin{defn}[Tangente]
+	Eine (affine) \Index{Tangente} an eine affine Kurve $\cc_f(k)$ im Punkt $(a,b) \in \cc_f(k)$ ist die Gerade
+	\[ t_f(a,b) = \{ (u,v) : \frac{\der f}{\der x} (a,b)x + \frac{\der f}{\der y}(a,b)y + d = 0\},\]
+	falls diese existiert (wir brauchen, dass $\frac{\der f}{\der x}(a,b), \frac{\der f}{\der y}(a,b)$ nicht beide $=0$). Dabei ist $d \in k$ so gewählt, dass $(a,b) \in t_f(a,b)$ gilt.
+\end{defn}
+
+\begin{bem}
+	Es ist nicht klar, ob Tangenten stets eindeutig existieren. Affine Kurven können sich selbst schneiden oder scharfe "Spitzen" haben. Siehe z.B. Abbildung~\ref{fig:bsp} in Abschnitt~\ref{sec:para0}.
+\end{bem}
+
+\begin{defn}[singulärer Punkt]
+	Die affine Kurve $\cc_f(k)$ heißt \bet{singulär im Punkt} $(a,b) \in \cc_f(k)$, falls $\frac{\der f}{\der x}(a,b) = \frac{\der f}{\der y}(a,b) = 0$ gilt. \index{singulär}
+\end{defn}
+
+\begin{bem}
+	Affine Kurven, die in keinem Punkt singulär sind, haben überall eine wohldefinierte Tangente.
+\end{bem}
+
+\begin{bem}
+	Es kann vorkommen, dass $\cc_f(k)$ gar keine singulären Punkte enthält, wohl aber über einem Erweiterungskörper von $k$, wie etwa $\overline{k}$, dem algebraischen Abschluss über $k$.
+\end{bem}
+
+\begin{bsp}
+	Für $f(x,y) = y^2 - x^4 - 2x^2 - 1$ hat $\cc_f(\RR)$ keine singulären Punkte: Es ist $\frac{\der f}{\der x}(a,b) = -4a^3 - 4a = -4a(a^2+1), \frac{\der f}{\der y}(a,b) = 2b$. Allerdings sind $(i,0),(-i,0) \in \CC$ singuläre Punkte in $\cc_f(\CC)$, wo $\CC = \overline{\RR}$.
+\end{bsp}
+
+\begin{bsp}
+	Sei $f(x,y) = y^2 - x^3 - x$ und $k = \FF_p$. Die Ableitungen sind $\frac{\der f}{\der x} (x,y) = -3x^2-1, \frac{\der f}{\der y}(x,y) = 2y$, das heißt die singulären Punkte $(a,b)$ sind die mit $b^2 = a^3 + a$, $-3a^2 = 1, 2b=0$.\begin{itemize}
+		\item Für $p \neq 2$ ist $2b = 0$ nur für $b = 0$ richtig, dann ist $0 = a(a^2+1)$ und $3a^2 = -1$. Es folgt $0 = a(3a^2 + 3) = 2a$ und wegen $p \neq 2$ folgt $a = 0$ im Widerspruch zu $3^2=-1$. Also existieren keine singulären Punkte für $p \neq 2$.
+		\item Für $p = 2$ ist $\cc_f(\FF_2) = \{(0,0),(1,0)\}$. Es ist $\frac{\der f}{\der x} (1,0) = 0 = \frac{\der f}{\der y}(1,0)$, das heißt $(1,0)$ ist singulärer Punkt.
+	\end{itemize}
+\end{bsp}
