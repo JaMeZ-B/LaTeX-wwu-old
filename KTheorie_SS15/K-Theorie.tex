@@ -544,7 +544,7 @@ $n\not=0$? Was ist $K^n(X,A)$?
 
 \subsection[Definition: Tripel, Morphismus von Tripeln und stabile Isomorphie]{Definition} % (fold)
 \label{sub:31}
-Sei $(X,A)$ ein Ko-Raumpaar.
+Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}.
 \begin{enumerate}[(i)]
 	\item Ein \Index{Tripel} $(E_1,f,E_0)$ über $(X,A)$ besteht aus endlichdimensionalen $\mathds{C}$-Vektorbündeln $p_i \colon E_i \to X$ und einem Isomorphismus
 	$f \colon E_1|_A \to E_0|_A$.
@@ -824,14 +824,14 @@ Für das obige Pushout-Diagramm von kompakten Hausdorffräumen gilt
 	\[
 		\begin{tikzcd}
 			X_1 \times \set{0} \cup X_0 \times I \rar \dar[hook] & Z \\
-			X_1 \times I \urar[dashed,"\exists"] 
+			X_1 \times I \urar[dashed,"\exists"'] 
 		\end{tikzcd}
 	\]
 	Sei jetzt $X \times \set{0} \cup X_2 \times I \xrightarrow{f} Z$ gegeben ($f$ stetig). Wir haben 
 	\[
-		\begin{tikzcd}
+		\begin{tikzcd}[column sep=huge]
 			X_1 \times \set{0} \cup X_0 \times I \rar["{j_1 \cup (j_2 \times \id)}"] \dar[hook] & X \times \set{0} \cup X_2 \times I \rar["f"] & Z \\
-			X_1 \times I \ar[ur, dashed,"h_1"] & & 
+			X_1 \times I \ar[ur, dashed,"h_1"'] & & 
 		\end{tikzcd}
 	\]
 	Betrachte das Pushout-Diagramm
@@ -850,10 +850,62 @@ Für das obige Pushout-Diagramm von kompakten Hausdorffräumen gilt
 		\end{tikzcd}
 	\]
 	Damit ist Teil a) gezeigt.
+	\item Wir zeigen die Behauptung zunächst für $n=0$:
+	\begin{description}[wide=0cm]
+		\item[Injektivität:] Sei $(E_0, f,E_1)$ ein Tripel über $(X,X_2)$ mit $j_1^* \benbrace*{E_0,f,E_1}_\st =0$. Also existiert ein Vektorbündel $q \colon F \to X_1$, sodass
+		sich der Isomorphismus
+		\[
+			(j_1^* E_0 \oplus F)\big|_{X_0} \xrightarrow{j_1^* f \oplus \id} (j_1^* E_1 \oplus F) \big|_{X_0}
+		\]
+		zu einem Isomorphismus über $X_1$ fortsetzen lässt. Nach Lemma \ref{sub:38} existieren Vektorbündel $q' \colon F' \to X$ und $\tilde{F} \to X_1$, sodass 
+		$j_1^* F' \cong F \oplus \tilde{F}$ gilt. Es gilt
+		\[
+			\benbrace*{j_1^* E_0, j_1^* f , j_1^*E_1}_\st = \benbrace[\big]{j_1^* (E_0 \oplus F'), \Underbrace{j_1^*(f \oplus \id_{F'})}{\mathclap{\text{lässt sich zu Iso über 
+			$X_1$ ausdehnen}}}, j_1^*(E_1 \oplus F')} 
+		\]
+		Wir können daher ohne Beschränkung der Allgemeinheit annehmen, dass sich $j_1^* f$ zu einem Isomorphismus über $X_1$ fortsetzen lässt. Das Vektorbündel $E_0$ ist 
+		isomorph zur Verklebung von $j_1^* E_0 \to X_1$ und $j_2^* E_0 \to X_2$ mittels der Identität $i_2^* j_2^* E_0 \xrightarrow{\cong} i_1^* j_1^* E_0$ wie in Lemma 
+		\ref{sub:37} beschrieben. Ähnliches gilt für $E_1 \to X$. Wir haben also Isomorphismen 
+		\[
+			j_1^* E_0 \xrightarrow[\cong]{\minwidthbox{j_1^* f }{2em}} j_1^* E_1 \quad \text{ und } \quad j_2^* E_0 = E_0\big|_{X_2} \xrightarrow[\cong]{\minwidthbox{f}{2em}}  E_1\big|_{X_2} = j_2^* E_1
+		\]
+		die kompatibel mit der Äquivalenzrelation in der Verklebung sind. Sie induzieren daher einen Isomorphismus $E_0 \xrightarrow{\cong} E_1$ über $X_1$, der $f$ fortsetzt.
+		Es folgt $\benbrace*{E_0,f,E_1}_\st=0$.
+		\item[Surjektivität:] Sei $(E_0,f,E_1)$ ein Tripel über $(X_1,X_0)$. Nach Lemma \ref{sub:38} existieren Vektorbündel $q \colon F \to X_1$ und $p_1' \colon E_1' \to X$
+		mit einem Isomorphismus $\psi \colon E_1 \oplus  F \xrightarrow{\cong} j_1^* E_1'$. Sei $\alpha \colon (E_0 \oplus  F)\big|_{X_0} \to j_1^*E_1'\big|_{X_0}$ gegeben 
+		durch
+		\[
+			(E_0 \oplus F) \big|_{X_0} \xrightarrow[\cong]{\minwidthbox{f \oplus  \id}{2em}} (E_1 \oplus F) \big|_{X_0} \xrightarrow[\cong]{\minwidthbox{\psi}{2em}} 
+		\]
+		Definiere nun $p_0' \colon E_0' \to X$ durch Verkleben von $E_0 \oplus F \to X_1$ und $E_1' \big|_{X_2} \to X_2$ entlang $\alpha$ wie in Lemma \ref{sub:37}. Sei 
+		$f' \colon E_0'\big|_{X_2} \to E_1'\big|_{X_2}$ gegeben durch die Identität. Jetzt gilt
+		\begin{align*}
+			j_1^* \benbrace[\big]{E_0',f',E_1'}_\st = \benbrace[\big]{E_0 \oplus F, \psi \circ (f \oplus \id), j_1^* E_1'}_\st 
+			&= \benbrace[\big]{E_0 \oplus F, f \oplus  \id, E_1 \oplus F}_\st \\
+			&= \benbrace[\big]{E_0,f,E_1}_\st + \Underbrace{\benbrace[\big]{F,\id,F}_\st }{=0}
+		\end{align*}
+	\end{description} 
+	Für den Fall $n>0$ lässt sich der Beweis auf den Fall $n=0$ zurückführen, denn 
+	\[
+		(X_1,X_0) \times (I^n,\partial I^n) = \enbrace*{X_1 \times I^n, X_1 \times \partial I^n \cup X_0 \times I^n},
+	\]
+	$X_0 \times I^n \cup X_1 \times \partial I^n \hookrightarrow X_1 \times I^n$ ist eine Kofaserung und das folgende Diagramm ist ein Pushout-Diagramm
+	\[
+		\begin{tikzcd}
+			X_0 \times I^n \cup X_1 \times \partial I^n \rar[hook] \dar & X_1 \times I^n \dar \\
+			X_2 \times I^n \cup X \times \partial I^n \rar[hook] & X \times I^n
+		\end{tikzcd}
+	\]
+	Damit ist das Theorem bewiesen. \bewende
 \end{enumerate}
-
-
 % subsection 39 (end)
+
+\subsection{Korollar} % (fold)
+\label{sub:310}
+Sie $(X,A)$ ein Ko-Raumpaar und $U \subseteq A$, sodass $\overline{U} \subset \mathring{A}$, dann ist $K^{-n}(X,A) \to K^{-n}(X \setminus U, A \setminus U)$ ein Isomorphismus.
+\minisec{Beweis}
+Setze $X_0 = A \setminus U$, $X_1 = X \setminus U$ und $X_2=A$ in Theorem \ref{sub:39}. Dann ist der Pushout gleich $X$. \bewende
+% subsection 310 (end)
 % section 3 (end)
 
 
