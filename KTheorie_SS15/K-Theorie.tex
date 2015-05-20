@@ -906,6 +906,197 @@ Sie $(X,A)$ ein Ko-Raumpaar und $U \subseteq A$, sodass $\overline{U} \subset \m
 \minisec{Beweis}
 Setze $X_0 = A \setminus U$, $X_1 = X \setminus U$ und $X_2=A$ in Theorem \ref{sub:39}. Dann ist der Pushout gleich $X$. \bewende
 % subsection 310 (end)
+
+\section*{Produkte in $K$-Theorie und Kettenkomplexe von Vektorbündeln}
+Klassen in $K^0(X)$ sind $[E_1,E_0]$ \enquote{$=$} $E_1 -E_0$, die Produkte könnten wir wie folgt definieren: 
+\[
+	[E_1,E_0] \cdot [E_1',E_0'] = \benbrace[\big]{(E_1\otimes E_1') \oplus (E_0 \otimes E_0'), (E_1 \otimes E_0')\oplus (E_0 \otimes E_1')} 
+\]
+Damit kann man aber nur schwer rechnen. Stattdessen wollen wir ein Produkt über Kettenkomplexe definieren.
+\[
+	\benbrace*{E_1,f,E_0}  \leadsto \begin{tikzcd}
+		\cdots \rar & 0 \rar & E_1 \rar["\tilde{f}"] & E_0 \rar & 0 
+	\end{tikzcd}
+\]
+wobei $\tilde{f}$ die Fortsetzung von $f$ über $X$ ist
+
+\subsection*{Definition}
+Ein Kettenkomplex von $K$-Vektorbündeln über einem Ko-Raumpaar $(X,A)$ ist ein Paar $(C_n,c_n)_{n \in \mathds{N}}$, wobei die $C_i$ endlichdimensionale Vektorbündel sind und 
+die $c_i \colon C_n \to C_{n-1}$ Morphismen von $K$-Vektorbündeln mit folgenden Eigenschaften sind:
+\begin{itemize}
+	\item $\exists N \ge 0$ mit $C_n=0$ für $n >N$,
+	\item $c_{n-1} \circ c_n =0$,
+	\item für alle $x \in A$ ist der Kettenkomplex von Vektorräumen
+	\[
+		\begin{tikzcd}
+			0 \rar & (C_n)\big|_{X} \rar["c_n|_X"] & C_{n-1}\big|_X \rar & \cdots \rar & C_1\big|_X \rar["c_1|_X"] & C_0\big|_X \rar & 0
+		\end{tikzcd}
+	\]
+	exakt.
+\end{itemize}
+Eine Kettenabbildung zwischen $(C_*,c_*)$ und $(D_*,d_*)$ über $(X,A)$ ist eine Folge von Morphismen $f_k \colon C_k \to D_k$, so dass folgendes Diagramm kommutiert
+\[
+	\begin{tikzcd}
+		\cdots \rar & C_k \rar["c_k"] \dar["f_k"] & C_{k-1} \rar \dar["f_{k-1}"]& \cdots \\
+		\cdots \rar & D_k \rar["d_k"] & D_{k-1} \rar & \cdots
+	\end{tikzcd}
+\]
+Zwei Kettenkomplexe $(C_*^i, c_*^i)$ über $(X,A)$ für $i \in \set{0,1}$ heißen \Index{homotop}, falls es einen Kettenkomplex $(C_*,c_*)$ über $(X\times I, A \times I)$ gibt,
+sodass $(C_*,c_*)\big|_{X \times \set{i} } \cong (C_*^i,c_*^i)$. Wir schreiben $(C_*^0,c_*^0) \simeq (C_+^1, c_*^1)$.
+
+\todo[inline]{Ab hier fehlen noch diverse Diagramme}
+\subsection*{Definition}
+Sei $K(X,A)^c$ der Quotient der freien abelschen Gruppe erzeugt von den Isomorphie-Klassen von Kettenkomplexen von $\mathds{C}$-Vektorbündeln über $(X,A)$ bezüglich der 
+folgenden Relationen:
+\begin{enumerate}[a)]
+	\item Wenn $C_* \simeq D_*$ gilt, dann folgt $[C_*] = [D_*]$
+	\item Wenn $\begin{tikzcd}[cramped,sep=small]
+		0 \rar & C_* \rar & D_* \rar & E_* \rar & 0
+	\end{tikzcd}$ eine kurze exakte Folge von Kettenkomplexen ist (faserweise exakt), dann gilt
+	\[
+		[C_*] - [D_*] + [E_*] = 0
+	\]
+	\item \(
+		\big[ \begin{tikzcd}[cramped,sep=small]
+			\cdots \rar & 0 \rar & E \rar["\id"] & E \rar & 0 \rar & \cdots
+		\end{tikzcd}\big]
+	\) \todo{Hier fehlt noch eine Aussage \ldots}
+\end{enumerate}
+\minisec{Bemerkung}
+Aus b) folgt $[C_*] = [D_*]$ für isomorphe Kettenkomplexe und 
+\[
+	\benbrace*{C_* \oplus  D_*, c_* \oplus d_*} = [C_*,c_*] + [D_*,d_*] 
+\]
+Wir haben einen Gruppenhomomorphismus $a \colon K^0(X,A) \to K(X,A)^c$, 
+% $[E_1,f,E_0]_\st \mapsto  \benbrace*{\begin{tikzcd}[cramped,sep=small] \cdots \rar & 0 \rar & E_1 \rar["\tilde{f}"] & E_0 \rar & 0 \end{tikzcd}} $,
+wobei $\tilde{f}$ eine Fortsetzung von $f$ auf $X$ ist. Dies ist unabhängig von der Wahl der Fortsetzung. Seien $\tilde{f}_0, \tilde{f}_1$. Dann sei 
+$h_t = t \tilde{f}_1 + (1-t) \tilde{f}_0$. Es gilt $h_t|_A =f$ und 
+\[
+	\begin{tikzcd}[sep=5.5em]
+		\cdots \rar & 0  \rar & E_1 \times I \rar["{(v,t) \mapsto (h_t(v),t)}"] & E_0 \times I \rar & 0
+	\end{tikzcd}
+\]
+ist ein Kettenkomplex über $(X \times I, A \times I)$ und somit eine Homotopie zwischen 
+$\begin{tikzcd}[cramped,sep=small]0 \rar & E_1 \rar["\tilde{f}_0"] & E_0 \rar & 0\end{tikzcd}$ und 
+% $\begin{tikzcd}[cramped,sep=small]
+% 	0 \rar & E_1 \rar["\tilde{f}_1"] & E_0 \rar 0
+% \end{tikzcd}$
+
+\subsection{Definition 3.1.2} % (fold)
+\label{sub:def_312}
+Eine \Index{Kettenkontraktion} über $A$ ist eine Familie von Bündelabbildungen $\gamma_n \colon C_n|_A \to C_{n+1}|_{A}$, sodass 
+$\gamma_{n-1} \circ (c_n|_A) + (c_{n+1}|_A) \circ \gamma_n = \id_{C_n|_A}$ 
+% \[
+% 	\begin{tikzcd}
+% 		\cdots \rar & C_{n+1}\big|_{A} \rar["c_{n+1}"] & C_n\big|_A  \dar[dashed,"\id"] \dlar[$\gamma_n$] \rar["c_n"] & C_{n-1}\big|_A \rar \dlar["\gamma_{n-1}"] \cdots \\
+% 		\cdots \rar & C_{n+1}\big|_A \rar[c_{n+1}] & C_n\big|_A \rar & C_{n-1}\big|_A \rar \cdots
+% 	\end{tikzcd}
+% \]
+% subsection def_312 (end)
+
+\subsection{Lemma 3.1.3} % (fold)
+\label{sub:lemma_3_1_3}
+Sei $(C_*,c_*)$ ein Kettenkomplex über dem Ko-Raumpaar $(X,A)$. Dann existiert eine Kettenkontraktion über $A$.
+\minisec{Beweis}
+\emph{Übung.}
+% subsection lemma_3_1_3 (end)
+
+\subsection{Lemma 3.1.4} % (fold)
+\label{sub:lemma_3_1_4}
+Die Abbildung $b \colon K(X,A)^c \to K^0(X,A)$ mit $b([C_+,c_*]) = \enbrace*{C_{\mathrm{odd}}, c_n|_A + \gamma_*, C_{\mathrm{even}}}$ mit 
+$C_{\mathrm{odd}} = \bigoplus_{k \in \mathds{N}_0} C_{2k+1}$ und $C_{\mathrm{even}} = \bigoplus_{k \in \mathds{N}_0} C_{2k}$, wobei $\gamma_*$ eine Kettenkontraktion über 
+$A$ ist, ist wohldefiniert.
+\minisec{Beweis}
+Sei $\gamma_n' \colon C_n|_A \to C_{n+1}|_A$ eine weitere Kettenkontraktion über $A$. Betrachte 
+$\delta_n = (\gamma_{n+1}' - \gamma_{n+1}) \circ \gamma_n \colon C_n|_A \to C_{n+2}|_A$ und
+\begin{align*}
+	&f \colon C_{\mathrm{even}}\big|_A \xrightarrow{\id + \delta_*} C_{\mathrm{even}}\big|_A \qquad  \text{ und} \\
+	& g  \colon C_{\mathrm{odd}}\big|_A \xrightarrow{c_*|_A + \gamma_*} C_{\mathrm{even}}\big|_A \xrightarrow{\minwidthbox{f}{2em}} C_{\mathrm{even}}\big|_A \xrightarrow{c_*|_A + \gamma_*'}
+	C_{\mathrm{odd}}\big|_A    
+\end{align*}
+Behauptung: $g$ ist ein Isomorphismus.
+\missingfigure{Diagramm mit Vektorschreibweise}
+Der Teil von $g$, der $C_{2n+1}|_A \to C_{2n-1}|_A$ abbildet, ist gegeben durch $c_{2n+1}|_A \circ c_{2n}|_A=0$. Der Teil von $g$, der $C_{2n+1}|_A \to C_{2n+1}|_A$ abbildet 
+ist gegeben durch die Identität, also ist $g$ eine \enquote{Dreiecksmatrix mit Identitäten auf der Diagonalen} und somit ein Isomorphismus. Insgesamt folgt, dass
+$c_*|_A + \gamma_*$ injektiv ist und $c_*|_A + \gamma_*'$ surjektiv. Aus Symmetriegründen sind beide Isomorphismen.
+
+Betrachte jetzt $h_t = (\id + t \cdot \delta) \circ (c_+|_A + \gamma_*) \colon C_{\mathrm{odd}}|_A \to C_{\mathrm{even}}|_A$. Dies ist eine Homotopie durch Isomorphismen. 
+Aufgrund der Homotopieinvarianz von $K^0(X,A)$ gilt:
+\[
+	\benbrace*{C_{\mathrm{odd}}, (c_*|_A + \gamma_*), C_\mathrm{even}}_\st  = \benbrace*{C_{\mathrm{odd}}, f \circ (c_*|_A + \gamma_*), C_\mathrm{even}}_\st
+\] 
+Auch die Kettenabbildung $g$ ist von der Form $g = \id + \varepsilon$, wobei $\varepsilon$ der Teil oberhalb der Diagonalen ist. Mit dem gleichen Trick wie eben erhalten wir
+mit $\tilde{h}_t= (c_*|_A + \gamma_*') ^{-1} \circ (\id + t \varepsilon)$
+\[
+	\benbrace[\big]{C_\mathrm{odd}, \Underbrace{(c_*|_A + \gamma_*') ^{-1}\circ g}{=f \circ (c_*|_A + \gamma_*)}, C_\mathrm{even}}_\st = \benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*') ^{-1}, C_\mathrm{even}}_\st  
+\]
+Also insbesondere für $\gamma_*' = \gamma_*$:
+\[
+	\benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*), C_\mathrm{even}}_\st = \benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*) ^{-1}, C_\mathrm{even}}  
+\]
+Aus den letzten drei Formeln\todo{sternchen oder sowas einfügen} folgt 
+\[
+	\benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*), C_\mathrm{even}} = \benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*')^{-1}, C_\mathrm{even}}  
+	= \benbrace*{C_\mathrm{odd}, (c_*|_A + \gamma_*'), C_\mathrm{even}} 
+\]
+Kompatibilität mit den Relationen:
+\begin{itemize}
+	\item $C_* \simeq D_* \Rightarrow b([C_*]) = b([D_*])$ aus der Homotopieinvarianz von $K^0(X,A)$.
+	\item $b \enbrace*{\benbrace*{\cdot \to 0 \to E \xrightarrow{\id} E \to 0 \to \cdots } } = \benbrace*{E,\id,E}_\st = 0$
+	\item Sei $0 \to C_* \xrightarrow{i_*} D_* \xrightarrow{p_*} E_0 \to 0$ eine kurze exakte Sequenz von Kettenkomplexen. Jede kurze exakte Sequenz von Vektorbündeln 
+	spaltet (Übung!).
+	Also existieren Morphismen $t_n \colon E_n \to D_n$ mit $p_n \circ t_n = \id_{E_n}$. Problem: $t_n$ ist keine Kettenabbildung! Wähle eine Kettenkontraktion $\varepsilon$
+	über $A$ für $E_*$. Setze
+	\[
+		s_n = d_{n+1}|_A \circ t_{n+1}|_A \circ \varepsilon_n + e_n|_A \circ \varepsilon_{n-1} \circ e_n |_A
+	\]
+	Dies ist ein Spalt von $p_n$ über $A$. $i_n +s_n \colon C_n|_A \oplus E_n|_A \to D_n|_A$ ist homotop durch Isomorphismen zu $i_n + t_n$ via
+	\[
+		h_r = r \enbrace*{d_{n+1}\big|_A \circ t_{n+1}\big|_A - t_n\big|_A \circ e_{n+1}\big|_A} \circ \varepsilon_n + (t_n - i_n) \big|_A
+	\]
+	Da $i_n,t_n$ auf ganz $X$ definiert sind, lässt sich $i_n+ s_n$ zu einem Isomorphismus $\varphi_n$ über $X$ fortsetzen. Setze 
+	$\delta_n = (i_n +s_n) \circ (\gamma_n \oplus \varepsilon_n) \circ (i_n +s_n)^{-1}$. Dies ist eine Kettenkontraktion von $D_*$ über $A$. Es folgt
+	\begin{align*}
+		\benbrace[\big]{C_\mathrm{odd}\oplus E_\mathrm{odd}, (c_*|_A + \gamma_*) \oplus (e_*|_A + \varepsilon_*), C_\mathrm{even} \oplus E_{\mathrm{even}}}_\st
+		= \benbrace[\big]{D_\mathrm{odd}, d_*|_A + \delta_*, D_\mathrm{even}}_\st \bewende  
+	\end{align*}
+\end{itemize}
+% subsection lemma_3_1_4 (end)
+
+\subsection{Lemma 3.1.5} % (fold)
+\label{sub:lemma_3_1_5}
+Seien $(E_*,e_*)$ und $(E_*,e_*')$ Kettenkomplexe über $(X,A)$ mit $e_i|_A = e_i'|_A$. Dann gilt $\benbrace*{E_*,e_*} = \benbrace*{E_*,e_*'} \in K(X,A)^c$.
+% subsection lemma_3_1_5 (end)
+
+\subsection{Lemma 3.1.6} % (fold)
+\label{sub:lemma_3_1_6}
+Die Abbildungen $a$ und $b$ sind invers zueinander.
+\minisec{Beweis}
+$b \circ a= \id_{K^0(X,A)}$ ist klar. Es bleibt zu zeigen, dass $a$ surjektiv ist $\iff$ Jeder Kettenkomplex der Länge $l \ge 2$ ist äquivalent zu einem Kettenkomplex der
+Länge $l=1$. Es gilt
+\begin{align*}
+	&\benbrace*{0 \to C_n \xrightarrow{c_n} C_{n-1} \to C_{n-2} \to \ldots \to C_0 \to 0 } \\
+	= &\benbrace*{0 \to C_n \xrightarrow{c_n \oplus 0} C_{n-1} \oplus C_n \xrightarrow{c_{n-1} \oplus \id} C_{n-2} \oplus C_n \to C_{n-3} \to \ldots \to C_0 \to 0 } 
+\end{align*}
+\begin{itemize}
+	\item $(c_n \oplus 0)|_A$ ist ein Monomorphismus und homotop zu $(0 \oplus \id)|_A$ durch Monomorphismen. Jetzt lässt sich $(0 \oplus \id)|_A$ zu einem Monomorphismus 
+	über $X$ ausdehnen. Eine Variante von Lemma \ref{sub:33} zeigt, dass sich dann auch $(c_n \oplus 0)|_A$ zu einem Monomorphismus $\tau \colon c_N \to C_{n-1} \oplus C_n$
+	auf $X$ ausdehnen lässt.
+	\[
+		\Rightarrow C_{n-1} \oplus C_n \cong \tau (C_n) \oplus  Q
+	\]
+	Der Kettenkomplex 
+	\[
+		\begin{tikzcd}[sep=6em]
+			0 \rar & C_n \rar["\tau"] & \tau(C_n) \oplus \mathds{Q} \rar["(c_{n-1} \oplus \id)|_Q \circ \pr_Q"] & C_{n-2} \oplus C_n \rar & \cdots
+		\end{tikzcd}
+	\]
+	stimmt über $A$ mit dem obigen überein, liefert also dieselbe Klasse. Aber
+	\[
+		\benbrace*{0\to C_n \xrightarrow{\tau} \tau(C_n) \to 0  \to \cdots } =0 \bewende 
+	\]
+\end{itemize}
+% subsection lemma_3_1_6 (end)
 % section 3 (end)
 
 
