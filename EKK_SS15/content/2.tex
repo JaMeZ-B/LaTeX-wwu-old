@@ -582,6 +582,7 @@ Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmul
 \end{bsp}
 
 \begin{defn}[Resultante]
+\label{def_10.5}
 	Seien $f,g \in k[X]$ Polynome vom Grad $m = \deg(f), n=\deg(g)$, etwa gegeben durch
 	\begin{equation}
 	\begin{aligned}
@@ -721,6 +722,7 @@ Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmul
 \end{bem}
 
 \begin{bem}
+\label{bem_11.5}
 	Welche Punkte liegen auf $E(k)$, die nicht affin sind? Ist $P = [r:s:0] \in \PP^2(k) \setminus \aff^2(k)$ ein solcher Punkt, dann ergibt Einsetzen in \eqref{eq_lang-weier} dann $r^3 = 0$, dann muss $s \neq 0$ sein, das heißt $P = [0:s:0] = [0:1:0]$. Diesen unendlich fernen Punkt, der allen elliptischen Kurven gemeinsam ist, nennen wir $\oh := [0:1:0]$. \marginnote{lies: "Oh"} Dieser Punkt ist nie singulär, da $\frac{\der F}{\der Z} (0,1,0) = 1 \neq 0$. Somit genügt es, für ein Polynom $F$ der Form \eqref{eq_lang-weier} die Nichtsingularität auf $\cc_F(k) \cap \iota(\aff^2(k))$, also im Affinen, zu testen.
 \end{bem}
 
@@ -739,6 +741,7 @@ Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmul
 \end{bem}
 
 \begin{satz}[Vereinfachte Weierstraßgleichungen]
+\label{satz_11.8}
 	Sei $E_F(k)$ eine elliptische Kurve mit $F$ in der langen Weierstraßform \eqref{eq_lang-weier}. \begin{enumerate}[(i)]
 		\item Falls $\Char(k) \neq 2$, ist die Abbildung
 		\begin{equation}
@@ -820,3 +823,121 @@ Wir definieren zwei wichtige Kennzahlen projektiver Kurven wie folgt:
 \end{satz}
 
 Mit der angegebenen Formel für $\Delta$ ist dies auch rechnerisch leicht zu testen -- wichtig, um elliptische Kurven für die Anwendungen zu konstruieren. Dieses Diskriminantenkriterium zeigen wir im nächsten Abschnitt.
+\nextlecture
+\subsubsection{Das Diskriminantenkriterium}
+\begin{defn}[Diskriminante]
+	Sei $\cc_F(k)$ die projektive ebene Kurve zum langen Weierstraßpolynom \marginnote{[12]}
+	\[ F(X,Y,Z) = Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z - a_4 XZ^2 - a_6Z^3. \]
+	Dann heißt die Zahl
+	\[ \Delta = \Delta(\cc_F(k)) = -b_2^2 b_8 - 8b_4^3 - 27b_6^2 + 9b_2b_4b_6 \]
+	mit $b_2 = a_1^2 + 4a_2, b_4 = 2a_4+a_1a_3, b_6 = a_3^2+4a_6$ und $b_8 = a_1^2 a_6 + 4a_2a_6-a_1a_3a_4 + a_2a_3^2 - a_4^2$ die \Index{Diskriminante} der Kurve $\cc_F(k)$.
+\end{defn}
+
+\begin{bem}
+	Im Fall einer Kurve $\cc_F(k)$ in einer kurzen Weierstraßform $f(x,y) = y^2-x^3-ax-b$ haben wir $\Delta(\cc_F(k)) = -8 \cdot (2a)^3 - 27 \cdot (4b)^2 = -16 \cdot (4a^3 + 27b^2)$, da $a_1 = 0, a_3 = 0, a_2 = 0, a_4 = a, a_6 = b$, also $b_2 = 0, b_4 = 2a, b_6 = 4b, b_8 = -a^2$. (vgl. Übungsaufgabe 3 auf Blatt 4).
+\end{bem}
+
+Wir zeigen das Diskriminantenkriterium:
+\begin{satz}[Diskriminantenkriterium]
+\label{satz_12.3}
+	Sei die Kurve $\cc_F(k)$ gegeben durch das lange Weierstraßpolynom $F$. Dann ist $\cc_F(k)$ nicht-singulär genau dann, wenn $\Delta(\cc_F(k)) \neq 0$ ist.
+\end{satz}
+
+\begin{bem}
+	\begin{itemize}
+		\item Bei diesem Kriterium, wenn $\Delta \neq 0$, erhalten wir, dass $\cc_F(\overline{k})$ über dem algebraischen Abschluss $\overline{k}$ keine singulären Punkte enthält (insbesondere auch über $k$, aber über $\overline{k}$ ist eben noch stärker). Deswegen haben wir uns bei unserer Definition von "nicht-singuläre Kurve" auf $\overline{k}$ bezogen, was wegen Satz~\ref{satz_12.3} also mathematisch leichter wird. Für $\Char(k) \neq 2$ kann es aber nicht sein, dass $\cc_F$ über $k$ keine singulären Punkte hat und über $\overline{k}$ hingegen schon.
+		\item Das Kriterium ist in der Praxis nützlich, da eine Kurve in Weierstraßform (die vielleicht per Zufallsgenerator für die Koeffizienten erzeugt worden ist), damit leicht auf Nicht-Singularität durch Berechnung der einfachen Formel für $\Delta$ getestet/überprüft werden kann.
+		\item Der Beweis unterscheidet wesentlich die Fälle $\Char(k) = 2, \Char(k) = 3$ und sonst.
+	\end{itemize}
+\end{bem}
+
+\begin{bew}
+	Die Kurve $\cc_F(k)$ ist nicht-singulär genau dann, wenn ihre affine Kurve $\cc_F(k)$ mit $f(x,y) = y^2 + a_1xy + a_3y - x^3 - a_2x^2 - a_4 x - a_6$ nicht-singulär ist. Wir zeigen den Satz deswegen im Affinen (der einzige nicht-affine Punkt $\oh = [0:1:0]$ der Kurve ist immer regulär, vgl. Bemerkung~\ref{bem_11.5}). Nun enthält $\cc_F(\overline{k})$ einen singulären Punkt $(r,s)$ genau dann, wenn
+	\[ f(r,s) = 0 \qquad \underbrace{\frac{\der f}{\der x} (r,s)}_{a_1 s - 3r^2 - 2a_2r - a_4} = 0 \qquad \underbrace{\frac{\der f}{\der y} (r,s)}_{=2s + a_1 r + a_3} = 0 \]
+	gilt. Wir unterscheiden weiter mehrere Fälle nach dem Wert der Charakteristik von $k$.
+\end{bew}
+
+\begin{bew}[1. Fall: $\Char(k)= 2$ und $a_1 = 0$]
+	\begin{description}
+		\item["$\Leftarrow$":] Dann ist hier $b_2 = b_4 = 0, b_6 = a_3^2, \Delta = -27a_3^4 = a_3^4$. Weiter gilt $\frac{\der f}{\der y} = a_3$, sodass, falls ein singulärer Punkt existiert, dann $a_3 = 0$ und $\Delta = 0$ folgt.
+		\item["$\Rightarrow$":] Ist $\Delta = 0$, folgt $\frac{\der f}{\der y} = 0$. Nun existieren $r,s \in \overline{k}$ mit $r^2 + a_4=0, s^2 + a_3s = r^3 + a_2r^2 + a_4r + a_6$, also ist $(r,s) \in \aff^2(\overline{k})$ singulärer Punkt auf $\cc_f(\overline{k})$.
+	\end{description}
+\end{bew}
+
+\begin{bew}[2. Fall: $\Char(k) = 2$ und $a_1 \neq 0$]
+	In Charakteristik $2$ gilt:
+	\begin{equation}
+	\begin{aligned}
+		\Delta &= -a_4^4 (a_1^2 a_6 - a_1 a_3 a_4 + a_2 a_3^2 - a_4^2) - 27a_3^4 + a_1^3 a_3^3 \\
+		&= a_1^6 a_6 + a_1^5 a_3a_4 + a_1^4a_2a_3^2 + a_1^4a_4^2 + a_1^3 a_3^3 +a_3^4.
+	\end{aligned}
+	\end{equation}
+	\begin{description}
+		\item["$\Leftarrow$":] Hat $\cc_f(\overline{k})$ einen singulären Punkt $(r,s)$, so ist $f(r,s) = 0$, das heißt $a_1 s + r^2 + a_4 = 0$ und $a_1 r + a_3 = 0$. Da $a_1 \neq 0$, folgt $r = \frac{a_3}{a_1}$ und $s = \frac{a_3^2+a_1^2a_4}{a_1^3}$. Durch einsetzen in $f(r,s)$ folgt $0 = f(r,s) = \Delta a_1^{-6}$, also $\Delta = 0$.		
+		\item["$\Rightarrow$":] Ist $\Delta = 0$, definieren wir $r,s$ wie oben, dann ist $f(r,s) = \Delta a_1^{-6}$, also $f(r,s) = 0$, womit ein singulärer Punkt konstruiert ist.
+	\end{description}
+\end{bew}
+
+\begin{bew}[3. Fall: $\Char(k)=3$]
+	Via Rechnen in Charakteristik $3$ folgt $\Delta = -b_2^2 b_8 - 8b_4^3$. Betrachte die Abbildung $\Phi\colon \cc_F(k) \rightarrow \cc_{H_1}(k)$ aus Satz~\ref{satz_11.8}(i), die die lange Weierstraßform $F$ auf die kurze Form $H_1$ bringt. Es ist $\Delta(\cc_{H_1}(k)) = \Delta(\cc_F(k))$ durch Nachrechnen, somit genügt es ohne Einschränkung, das Diskriminantenkriterium für die kurze Form $H_1$ zu zeigen.
+\end{bew}
+
+\begin{bew}[Fortsetzung 3. Fall]
+	Die Kurve $\cc_{H_1}(\overline{k})$ enthält genau dann einen singulären Punkt, wenn es $r,s \in \overline{k}$ gibt mit
+	\[ s^2 - r^3 - \frac{1}{4} b_2 r^2 - \frac{1}{2}b_4 r - \frac{1}{4} b_6 = 0, \qquad 3r^2 + \frac{1}{2} b_2r + \frac{1}{2} b_4 = 0,  \qquad 2s = 0, \]
+	das heißt falls $r$ eine doppelte Nullstelle des Polynoms $\sigma(x) := x^3 + \frac{1}{4} b_2 x^2 + \frac{1}{2} b_4x \frac{1}{4} b_6$ ist, sprich $\sigma(r) = 0 = \sigma'(r)$ ist. \\
+	Über $\overline{k}$ zerfällt $\sigma$ in drei Linearfaktoren $\sigma(x) = (x-\alpha_1)(x-\alpha_2)(x-\alpha_3)$ mit $\alpha_i \in \overline{k}$. Nun hat ein Polynom $\sigma$ genau dann eine doppelte Nullstelle, falls seine Diskriminante $\disc(\sigma) := (\alpha_1 - \alpha_2)^2 (\alpha_1 - \alpha_3)^2 (\alpha_2 - \alpha_3)^2$ verschwindet, vgl. Bemerkung~\ref{bem_12.14}.
+\end{bew}
+
+\begin{bew}[Fortsetzung]
+	Somit ist im dritten Fall zu zeigen: $\Delta = 0 \Leftrightarrow \disc(\sigma)=0$. \\
+	Wegen $\disc(x^3 + ux^2 + vx + w) = u^2v^2 - 4u^3w - 4v^3 - 27w^2 + 18uvw$, vgl. Korollar~\ref{kor_12.16}, erhalten wir mit $u = \frac{b_2}{4}, v = \frac{b_4}{2}, w= \frac{b_6}{4}$ dann in Charakteristik $3$, dass $\disc(\sigma) = \frac{1}{64} b_2^2 b_4^2 - \frac{1}{64} b_2^3 b_6 - \frac{1}{2} b_4^3$. Wegen $4 b_8 = b_2 b_6 - b_4^2$ erhalten wir $\disc(\sigma) = \frac{1}{16} (-b_2^2b_8 - 8b_4^3) = \frac{1}{16} \Delta$. Aus dieser Formel folgt die Behauptung im dritten Fall.
+\end{bew}
+
+\begin{bew}[4. Fall: $\Char(k) > 3$ oder $\Char(k) = 0$]
+	Mit der Bijektion $\Psi \circ \Phi \colon \cc_F(k) \rightarrow \cc_{H_2}(k)$ zum kurzen Weierstraßpolynom $H_2$ (Satz~\ref{satz_11.8}(ii)) bzw. $h_2(x,y) = y^2 - x^3 + 27c_4x + 54c_6$ mit $c_4 = b_2^2 - 24b_4, c_6 = -b_2^3 + 36b_2 b_4 - 216 b_6$, folgt durch Untersuchung der Ableitungen wieder $\cc_F(k)$ nicht-singulär genau dann, wenn $\cc_{H_2}(k)$ nicht-singulär. Wir berechnen $\Delta(\cc_{H_2}(k)) = 2^6 3^9 \cdot (c_4^3-c_6^2) = \dots = 2^{12} 3^{12} \Delta(\cc_F(k))$, also genügt es, die Behauptung für $\cc_{H_2}(k)$ zu zeigen. Wie im dritten Fall haben wir:
+	\[ \cc_{H_2}(\overline{k}) \text{ enthält singulären Punkt } \quad \Leftrightarrow \quad \sigma(x) = x^3 \underbrace{- 27c_4}_{v} x \underbrace{- 54 c_6}_{w} \text{ hat doppelte Nullstelle } \quad \Leftrightarrow \quad \disc(\sigma)=0 \]
+	Wegen der Formel in Korollar~\ref{kor_12.16} für $\disc(\sigma)$ folgt mit $u = 0, v = -27c_4, w= - 54c_6$:
+	\[ \disc(\sigma) = 0 \quad \Leftrightarrow \quad 4 \cdot 27^3 c_4^3 - 27 \cdot 54^2 c_6^2 = 0 \quad \Leftrightarrow \quad c_4^3 - c_6^2 = 0. \]
+	Daraus folgt die Behauptung. \qed
+\end{bew}
+
+Theoretische Ergänzungen zu unserer Definition von $\Delta(\cc_F(k))$:
+\begin{defn}[Diskriminante eines Polynoms]
+	Die \bet{Diskriminante eines Polynoms} $\sigma \in k[x], n := \deg(\sigma) \geq 1$, ist \index{Diskriminante!eines Polynoms}
+	\[ \disc(\sigma) := \prod_{1 \leq i < j \leq n} (\alpha_i - \alpha_j)^2 = (-1)^{\frac{n(n-1)}{2}} \prod_{i \neq j} (\alpha_i - \alpha_j) \in \overline{k},\]
+	falls $\alpha_1, \dots, \alpha_n \in \overline{k}$ die Nullstellen von $\sigma \in \overline{k}$ bezeichnen.
+\end{defn}
+
+\begin{bem}
+	Man vergleiche dies mit der Diskriminante $\disc(\sigma) = p^2-4q$ eines quadratischen Polynoms $\sigma(x) = x^2+px+q \in k[x]$, wir haben $\alpha_{1,2} = -\frac{p}{2} \pm \sqrt{\frac{p^2}{4} - q} = -\frac{p}{2} \pm \frac{1}{2} \sqrt{p^2 -4q}$, also genau $(\alpha_1 - \alpha_2)^2 = \disc(\sigma)$. Ist dies $=0$, ist $\alpha_1 = \alpha_2$ eine doppelte Nullstelle von $\sigma$.
+\end{bem}
+
+\begin{bem}
+\label{bem_12.14}
+	$\disc(\sigma)$ verschwindet genau dann, wenn $\sigma$ über $\overline{k}$ eine doppelte Nullstelle hat. Dies folgt unmittelbar aus der Definition von $\sigma$.
+\end{bem}
+
+\begin{bem}
+\label{bem_12.15}
+	\begin{itemize}
+		\item Ist $\sigma \in k[x], n = \deg(\sigma) \geq 1$, ein normiertes Polynom, kann die Beziehung $\disc(\sigma) = (-1)^{n(n-1)/2} \cdot \Res(\sigma, \sigma')$ mit der in Definition~\ref{def_10.5} behandelten Resultante gezeigt werden.
+		\item Aus dieser wichtigen Formel folgt wegen unserer Definition für die Resultante, dass stets $\disc(\sigma) = k$ gilt.
+	\end{itemize}
+\end{bem}
+
+\begin{kor}
+\label{kor_12.16}
+	Es gilt $\disc(x^3+ux^2+vx+w) = u^2v^2 - 4wu^3 - 4v^3 - 27w^2 + 18uvw$. 
+\end{kor}
+
+\minisec{Beweis}
+	Für $\sigma(x) = x^3 + ux^2 + vx + w$ und $\sigma'(x) = 3x^2+2ux+v$ ist nach Defintion~\ref{def_10.5}: \marginnote{Genaue Rechnung im Skript!}
+	\[ M(\sigma,\sigma') = \begin{pmatrix}
+	w & 0 & v & 0 & 0 \\ 
+	v & w & 2u & v & 0 \\ 
+	u & v & 3 & 2u & v \\ 
+	1 & u & 0 & 3 & 2u \\ 
+	0 & 1 & 0 & 0 & 3
+	\end{pmatrix} \]
+	Durch Berechnung von $\Res(\sigma) = \det(M(\sigma,\sigma'))$ und $(-1)^{3 \cdot (3-1)/2} = -1$ folgt die Behauptung. \qed
