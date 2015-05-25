@@ -1913,8 +1913,361 @@ $U \subseteq \mathbb{R}^n$ offen, $f: U \to \mathbb{R}^m$. Dann heißt $f$ {\bfs
  \[
  	Hf(x)^T \stackrel{\text{Satz von Schwarz}}{=} Hf(x)
  \] 
- % subsubsection definition (end)
-% subsection differentiation_unter_dem_integral (end)
+ Ferner gilt: sind $v,w \in \mathbb{R}^n$, so ist
+ \[
+ 	D_vD_wf(x)= \skal{Hf(x)v}{w}=\skal{v}{Hf(x)w}
+ \]
+ \minisec{Beweis:} \[
+ 	v= \sum^{n}_{i=1}V_ie_i \qquad w=\sum^{n}_{i=1}w_ie_i \qquad v_i,w_i \in \mathbb{R}
+ \]
+\begin{align*}
+	\Rightarrow D_vD_wf(x)&= \sum^{n}_{i=1}v_iD_iD_wf(x) \\ &= \sum^{n}_{i=1}\sum^{n}_{j=1}v_iw_jD_iD_j(x) \\ &= \sum^{n}_{i=1}\sum^{n}_{j=1}v_iw_j(Hf(x))_{ji} \\
+	&= \sum^{n}_{i=1}w_j(Hf(x)v)_j = \skal{Hf(x)v}{w}= \skal{v}{Hf(x)w}
+\end{align*}
+Die Identität
+\[
+	\skal{Hf(x)v}{w}=\skal{v}{Hf(x)w} 
+\] folgt daraus, dass $Hf(x)$ symmetrisch ist, denn
+\[
+	\skal{Av}{w}=\skal{v}{A^Tw} \qquad A \in \Mat_{n,n}(\mathbb{R})
+\]
+\subsection{Taylorentwicklung} % (fold)
+\label{sub:taylorentwicklung}
+Der eindimensionale Fall \\
+$(a,b) \subseteq \mathbb{R} \qquad f:(a,b) \to \mathbb{R}$
+$f$ sei $m$-mal stetig differenzierbar, $p \in (a,b), h \in \mathbb{R}$ mit $p+h \in (a,b)$
+
+\subsubsection{Lemma/Definition} % (fold)
+\label{ssub:lemma_definition}
+Sei $f:(a,b) \to \mathbb{R}$ $m$-mal stetig differenzierbar, $p \in (a,b)$. Dann gibt es genau ein Polynom $T_p^mf(h)$, so dass gilt
+\begin{enumerate}[(i)]
+	\item Der Graph von $T^m_pf$ ist $m$-mal stetig differenzierbar
+	\item Es gilt
+	\[
+		\left( \diffd{}{h} \right)^k T_p^mf(0)= f^{(k)}(p) \qquad \forall\, k=0,\dots,m
+	\]
+\end{enumerate}
+Dieses Polynom heißt $m$-tes {\bfseries Taylorpolynom} von $f$ bei $p$.
+\minisec{Beweis:} Setze
+\[
+	T_p^mf(h)=\sum_{k=0}^{m}\frac{1}{k!}f^{(k)}(p)h^k
+\]
+Dann gilt $(i)$ und $(ii)$ $\Rightarrow$ Existenz
+\underline{Eindeutigkeit}: Sei $q(h)$ ein Polynom mit $(i)$ und $(ii)$
+\[
+	q(h)= \sum_{k=0}^{m}c_kh^k \qquad c_k \in \mathbb{R}
+\]
+\[
+	\begin{array}{ccc}
+	q(0)=c_0 & \Rightarrow & c_0=f^{(0)}(p) \\
+	q'(0)=c_1 & \Rightarrow & c_1=f^{(1)}(p) \\
+	q''(0)=2c_2 & \Rightarrow & c_2=\frac{1}{2}f^{(2)}(p) \\
+	\vdots & & \vdots \\
+	q^{(l)}(0)=c_l & \Rightarrow & c_l=\frac{1}{l!}f^{(l)}(p) \\
+	\end{array}
+\] 
+mit
+\[
+	q^(l)(h)= \sum_{k=l}^{m}c_kk(k-1) \cdot \dots \cdot (k-l)h^{k-l}
+\]
+\[
+	\Rightarrow q(h)=\sum_{k=0}^{m}\frac{1}{k!}f^{(k)}(p)h^k
+\] \bewende
+\subsubsection{Taylorscher Satz} % (fold)
+\label{taylor}
+Sei $f:(a,b) \to \mathbb{R}$ $(m+1)$-mal stetig differenzierbar, $p,p+h \in (a,b)$. \\
+Dann gilt
+\[
+	f(p+h)= \underset{= T^m_pf(h)}{\underbrace{\sum_{k=0}^{m}\frac{1}{k!}f^{(k)}(p)h^k}} 
+	+ \underset{\text{Restglied}}{\underbrace{\frac{1}{m!}h^{m+1}\int_{0}^{1}(1-t)^mf^{(m+1)}(p+th) \,\mathrm{d}t}}
+\]
+\minisec{Beweis:} Induktion über $m$:
+\begin{description}
+	\item[$m=0$:] Hauptsatz
+	\item[$m \mapsto m+1$:] siehe Übung A3B1. partielle Integration
+	\[
+	 (1-t)^m= - \frac{1}{m+1}\diffd{}{t}(1-t)^{m+1}
+	\] 
+\end{description}\bewende \\
+Schreibe Restglied in einfacher Form
+\subsubsection{Mittelwertsatz der Integralrechnung} % (fold)
+\label{ssub:mittelwertsatz_der_integralrechnung}
+Sei $[a,b] \subseteq \mathbb{R}$ und $f,g:[a,b] \to \mathbb{R}$ stetig. $g(x)\geq 0 \forall\, x \in [a,b]$. \\
+Dann gilt
+\[
+	\exists\, \xi \in [a,b] \text{ mit } \int_{a}^{b}f(t)g(t) \,\mathrm{d}t = f(\xi)\int_{a}^{b}g(t) \,\mathrm{d}t
+\]
+\minisec{Beweis:}Aus dem Satz vom Minimum und Maximum folgt: $\exists\, x_{\min}.x_{\max} \in [a,b] \,\, \forall\, x \in [a,b]$ mit
+\[
+	f(x_{\min}):=c \leq f(x) \leq C =: f(x_{\max}) 
+\]
+\[
+	cg(x) \leq f(x)g(x)\leq C g(x), \qquad g(x) \leq 0
+\]
+Dann folgt
+\[
+	c \int_{a}^{b}g(t) \,\mathrm{d}t \leq \int_{a}^{b}f(t)g(t) \,\mathrm{d}t \leq C \int_{a}^{b}g(t) \,\mathrm{d}t
+\]
+Wir definieren uns eine Hilfsfunktion 
+\[
+	F(x):=f(x)\int_{a}^{b}g(t) \,\mathrm{d}t
+\] Dann ist $F$ stetig und es gilt
+\[
+	F(x_{\min})=c \int_{a}^{b}g(t) \,\mathrm{d}t \qquad, \qquad F(x_{\max})= C \int_{a}^{b}g(t) \,\mathrm{d}t 
+\]
+\[
+	\Rightarrow F(x_{\min}) \leq \int_{a}^{b}f(t)g(t) \,\mathrm{d}t \leq F(x_{\max})
+\]
+Benutze nun den Zwischenwertsatz und erhalte
+\[
+	\exists\, \xi \in [x_{\min},x_{\max}] \text{ mit } F(\xi)= \int_{a}^{b}f(t)g(t) \,\mathrm{d}t
+\]
+\bewende
+
+\subsubsection{Lagrange-Darstellung des Restgliedes} % (fold)
+\label{ssub:lagrange_darstellung_des_restgliedes}
+Seien $a,b,p,p+h \in \mathbb{R}$ und $f:[a,b]  \to \mathbb{R}$ wie in \ref{taylor}. 
+Dann gilt
+\[
+	\exists\,\xi \in [0,1] \text{ mit } f(p+h)=T^m_pf(h)+ \frac{h^{(m+1)}}{(m+1)!}f^{(m+1)}(p+\xi h)
+\]
+\minisec{Beweis:} zu Zeigen ist:
+\[
+	\exists\,\xi \in [0,1] \text{ mit } \frac{1}{m!}h^{m+1} \int_{0}^{1}(1-t)^mf^{(m+1)(p+th)} \,\mathrm{d}t = \frac{1}{(m+1)!}f^{(m+1)}(p+th)
+\]
+Aus \ref{ssub:mittelwertsatz_der_integralrechnung} folgt
+\begin{align*}
+	\exists\,\xi \in [0,1] \text{ mit } \int_{0}^{1}(1-t)^m f^{(m+1)}(p+th) \,\mathrm{d}t 
+	&= f^{(m+1)}(p+\xi h) \underset{\frac{1}{m+1}}{\underbrace{\int_{0}^{1}(1-t)^m \,\mathrm{d}t}} \\
+	&= \frac{1}{m+1}f^{(m+1)}(p+\xi h)
+\end{align*}
+$\Rightarrow$ Vorfaktoren einsetzen
+\bewende
+
+Taylorpolynom
+\[
+	f(p+h)=\sum_{k=0}^{m}\frac{1}{k!}f^{(k)}(p)h^k + \frac{1}{(m+1)!}f^{(m+1)}(p+ \xi h)h^{(m+1)}
+\]
+\subsubsection{Bemerkung} % (fold)
+\label{ssub:bemerkung}
+Ist $f$ beliebig oft stetig differenzierbar, so heißt die Reihe
+\[
+	\sum^{\infty}_{k=0}\frac{1}{k!}f^{(k)}(p)h^k
+\]
+{\bfseries Taylorreihe} von $f$ bei p und ist eine Potenzreihe.
+\begin{itemize}
+	\item Die Taylorreihe von $f$ muss nicht konvergieren, und selbst wenn sie konvergiert braucht die Grenzfunktion nicht gleich $f$ zu sein.
+	\minisec{Gegenbeispiel:}
+	\[
+		f:\mathbb{R}\to \mathbb{R}, \qquad f(x) = \begin{cases}
+			e^{-\frac{1}{x^2}}, &\text{ falls }x \neq 0\\ 0, &\text{ falls }x=0 \end{cases}
+	\] 
+	$\Rightarrow $ $f$ beliebig oft stetig differenzierbar $f^{(k)}(0)=0 \forall\, k$
+	$\Rightarrow $ Taylorreihe ist $0 \neq f$
+	\item Ist $\sum_{k=0}^{\infty}a_kx^k$ eine Potenzreihe mit Konvergenzradius $R>0$, und $f(x)= \sum_{k=0}^{\infty}a_kx^k$. Dann gilt
+	\[
+		T_0^mf(h)=\sum_{k=0}^{m}a_kh^k \qquad \text{(Übungsaufgabe)}
+	\]
+\end{itemize}
+Der mehrdimensionale Fall: \\
+$ U \subseteq \mathbb{R}^n$ offen, $f:U \subseteq \mathbb{R}$ $(m+1)$-mal stetig differenzierbar, $x \in U$
+% subsubsection bemerkung (end)
+% subsubsection lagrange_darstellung_des_restgliedes (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$U \subseteq \mathbb{R}^n$, $x \in U$. Dann heißt $U$ {\bfseries sternförmig }bezüglich $x$, falls gilt:
+\[
+	y \in U,\,t \in [0,1] \Rightarrow (1-t)x+ty \in U
+\]
+Nun sei $p \in U \subseteq \mathbb{R}^n$ offen, $U$ steinförmig bzgl. $p$. Sei $f: U \to \mathbb{R}$ $(m+1)$-mal stetig differenzierbar. $v \in \mathbb{R}^n$ mit $p+v \in U$. Setze $g(t):=f(p+tv)$ mit
+\[
+	g: \set[t \in \mathbb{R}]{p+tv \in U} \to \mathbb{R}
+\]
+Dann gilt
+\[
+	g(1)= \sum_{k=0}^{m}\frac{1}{k!}g^{(k)}(0)+ \frac{1}{(m+1)!}g^{(m+1)}(\xi)
+\]
+\[
+	\Rightarrow g^{(k)}(0)=\underset{k \text{-mal}}{\underbrace{D_v \dots D_vf(p)}}
+\]
+\minisec{Beweis:} 
+mit Indutkion:
+\begin{description}
+	\item[$k=0$:] klar
+	\item[$k-1 \mapsto k$] 
+	\[
+		g^{(k)}(t)=\diffd{}{t}g^{(k-1)}(t)= \diffd{}{t}(\underset{(k-1) \text{-mal}}{\underbrace{D_v \dots D_v}} f(x+tv))
+		= \underset{k \text{-mal}}{\underbrace{D_v \dots D_v}} f(x+tv)
+	\] 
+\end{description}
+\subsubsection{Taylorentwicklung in $\mathbb{R}^n$} % (fold)
+\label{ssub:taylorentwicklung_in_rn}
+Sei $U \subseteq \mathbb{R}^n$ sternförmig bzgl. $x \in U$, $ U \subseteq \mathbb{R}^n$ offen. $ f: U \to \mathbb{R} $ $(m+1)$-mal stetig differenzierbar und $v \in \mathbb{R}^n$,$x+v \in U$. \\
+Dann gilt
+\[
+	\exists\,\xi \in [0,1] \text{ mit } f(x+v)
+	=\sum_{k=0}^{m}\frac{1}{k!} \underset{k \text{-mal}}{\underbrace{D_v \dots D_vf(x)}}+ \frac{1}{(m+1)!}\underset{(m+1)
+	 \text{-mal}}{\underbrace{D_v \dots D_v}}f(x+ \xi v)
+\]
+Interessanter Spezialfall $m=1$:
+\begin{align*}
+	f(x+v)&=f(x)+ D_vf(x)+ \frac{1}{2}D_vD_vf(x+\xi v) \\
+	&= f(x) + Df(x) \cdot v + \frac{1}{2} \skal{Hf(x+ \xi v)v}{v}
+\end{align*}
+Dies ist die Taylorformel für $m=1$
+% subsubsection taylorentwicklung_in_rn (end)
 % subsubsection definition (end)
+\subsection{Extremwertprobleme} % (fold)
+\label{sub:extremwertprobleme}
+$ U \subseteq \mathbb{R}^n$ offen , $ f: U \to \mathbb{R} $ differenzierbar
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Falls $f$ bei $x \in U$ ein lokales Minimum oder Maximum hat, so gilt $Df(x)=0$. \\
+Lokales Minimum bei $x$ bedeutet:
+\[
+	\exists\, \text{Umgebung }x \in V \subseteq U \text{, so dass} \forall\, y \in V: f(y) \geq f(x)
+\]
+(lokales Maximum analog mit $f(y)\leq f(x)$)
+\minisec{Beweis:} 
+Betrachte Funktion $g_v(t)=f(x+tv)$ ($x$ lokales Mininum/Maximum, $v \in \mathbb{R}^n$). \\
+$g_v$ ist definiert auf einer offenen Umgebung $I \subseteq \mathbb{R}$ von $0$. $g_v$ ist differenzierbar (Kettenregel).
+\\ $g_v$ hat lokales Minimum oder Maximum bei $0$
+\[
+	g_v(0)=0 \text{ (Analysis I)}
+\]
+aber $g_v(0)=D_vf(x)=Df(x)\cdot v$
+\[
+	\Rightarrow Df(x)=0
+\] \bewende
+
+% subsubsection satz (end)
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$ f: U \to \mathbb{R} $  differenzierbar und $x \in U$. $x$ heißt {\bfseries kritischer Punkt} von $f$ genau dann, wenn \[
+	Df(x)=0
+\] 
+Sei $f$ von nun an $2$-mal stetig differenzierbar. Sei $x \in U$ kritischer Punkt von $f$. \\
+Wähle $r > 0$ mit 
+\[
+	\underset{\text{sternförmig}}{\underbrace{B_r(x)}}\subseteq U
+\]
+Dann gilt für alle $v \in U$ mit $\norm{v}<r$
+\[
+	f(x+v)=f(x)+\frac{1}{2}\skal{Hf(x+\xi v)v}{v} \text{ mit }\xi \in [0,1])
+\]
+\minisec{Bespiele für $\mathbb{R}^2 \to \mathbb{R}$:}
+\begin{enumerate}
+	\item $f_0(x,y)=x^2+y^2$
+	\item $f_1(x,y)=x^2-y^2$
+	\item $f_2(x,y)=-x^2-y^2$
+\end{enumerate}
+Alle drei haben den kritischen Punkt $(0,0)$ und es gilt
+\[
+	Hf_0= \begin{pmatrix}
+		2 & 0 \\ 0 & 2 
+	\end{pmatrix} ,\qquad Hf_1=\begin{pmatrix}
+		2 & 0 \\ 0 & -2
+	\end{pmatrix} ,\qquad Hf_2=\begin{pmatrix}
+		-2 & 0 \\ 0 & -2
+	\end{pmatrix}
+\] $f_0$ hat lokales Maximum in $0$. \\
+Graph von $f_0$ ist Parabolloid. Niveaulinien sind Kreise. $f_2$ analog und $f_2 = -f_0$. \\
+$f_1$ hat kein lokales Minimum/Maximum
+\minisec{Exkurs über symmetrische Matrizen:}
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$A \in \Mat_{n,n}(\mathbb{R})$, $\lambda \in \mathbb{R}$ heißt {\bfseries Eigenwert} von $A$ genau dann, wenn
+\[
+	\exists\,x \in \mathbb{R}^n, x \neq 0 \text{ und } Ax=\lambda x
+\]
+Die {\bfseries Eigenvektoren} zum Eigenwert $\lambda$ sind die $x \in \mathbb{R}^n$ mit $Ax=\lambda x$
+\[
+	\Eig(A,\lambda)= \set[x \in \mathbb{R}^n]{Ax=\lambda x}
+\]
+Das {\bfseries Charakteristische Polynom} ist definiert durch
+\[
+	\chi_A(t)=\det(A-t \cdot I_n)
+\]
+und ist ein Polynom vom Grad $n$. \\
+Die Eigenwerte von $A$ sind die Nullstellen des charakteristischen Polynoms. Das heißt es gibt höchstens $n$ verschiedene Eigenwerte.
+% subsubsection definition (end)
+% subsubsection definition (end)
+\subsubsection{Spektralsatz für symmetrische Matrizen} % (fold)
+\label{ssub:spektralsatz_fur_symmetrische_matrizen}
+Sei $A \in \Mat_{n,n}(\mathbb{R})$ symmetrisch. Dann gibt es eine Orthogonalbasis von $\mathbb{R}^n$, welche nur aus Eigenvektoren von $A$  besteht. \\
+Mit anderen Worten: \\
+Es gibt $\lambda_1 \leq \dots \lambda_n \in \mathbb{R}$ und $v_1,\dots,v_n \in \mathbb{R}^n$ mit
+\[
+	\skal{v_i}{v_j}= \delta_{ij}, \qquad Av_i=\lambda_iv_i
+\]
+\minisec{Bemerkung:}
+$B= (v_1, \dots, v_n)$ Basis
+\[
+	M_B^B(A)= \begin{pmatrix}
+	\lambda & \dots & 0 \\ \vdots & & \vdots \\ 0 &\dots& \lambda_n
+	\end{pmatrix}
+\] Für den Beweis siehe Lineare Algebra
+% subsubsection spektralsatz_fur_symmetrische_matrizen (end)
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Sei $A \in S(n)$, $\lambda_1 \leq \dots \leq \lambda_n$ seien Eigenwerte von $A$. \\
+Dann gilt
+\begin{enumerate}
+	\item $\forall\, x \in \mathbb{R}^n:\, \lambda_1 \norm{x}^2 \leq \skal{Ax}{x} \leq \lambda_n \norm{x}^2$
+	\item $\set[\skal{Ax}{x}]{\norm{x}=1}=[\lambda_1,\lambda_n]$
+\end{enumerate}
+\minisec{Beweis:} 
+\begin{enumerate}
+	\item $(v_1,\dots,v_n)$ Orthogonalbasis aus Eigenvektoren mit $Av_i=\lambda_iv_i$. $x \in \mathbb{R}^n$ mit $x = \sum^{n}_{i=1}x_iv_i$. \\
+	Dann gilt
+	\begin{align*}
+		\skal{Ax}{x}&= \sum^{n}_{i,j=1} \skal{Ax_iv_i}{x_jv_j} \\
+		&= \sum^{n}_{i,j=1} x_ix_j \skal{Av_i}{v_j} \\
+		&= \sum^{n}_{i,j=1} x_ix_j\lambda_i \skal{v_i}{v_j} \\
+		&= \sum^{n}_{i,j=1} \lambda_ix_i^2 \leq \lambda_n \sum^{n}_{i=1}x_i^2 = \lambda_n \norm{x}^2 \\
+		&\geq \lambda_1 \sum^{n}_{i=1}x_i^2 = \lambda_1 \norm{x}^2
+	\end{align*}
+	\item Betrachte
+	\[
+		f(t)=(A(\cos(t)v_n+\sin(t)v_1),(\cos(t)v_1+\sin(t)v_n))
+	\] Dann ist $f$ stetig und $\norm{\cos(t)v_n+\sin(t)v_1}=1$
+	\[
+		f(0)=\skal{Av_1}{v_n}= \lambda_n \skal{v_n}{v_n}= \lambda_n
+	\]
+	\[
+		f(\frac{\pi}{2})= \skal{Av_1}{v_1}=\lambda_1
+	\]
+	Mit Zwischenwertsatz gilt
+	\[
+		[\lambda_1,\lambda_n] \subseteq f\left(\left[0,\frac{\pi}{2}\right]\right)  
+	\]
+\end{enumerate}
+\bewende
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+Seien $ U \subseteq \mathbb{R}^n$ offen , $ x \in U $, $ f: U \to \mathbb{R} $ zweimal stetig differenzierbar. Sei $x$ ein kritischer Punkt von $f$.
+\begin{enumerate}
+	\item Falls alle Eigenwerte von $Hf(x)$ positiv sind, so hat $f$ ein lokales Minimum bei $x$ (positiv definit)
+	\item Falls $Hf(x)$ negativ definit, so hat $f$ ein lokales Maximum bei $x$
+	\item Falls $f$ einen positiven Eigenwert hat, so hat $f$ bei $x$ kein lokales Minimum
+	\item Falls $f$ einen negativen Eigenwert hat, so hat $f$ bei $x$ kein lokales Maximum
+	\item In allen anderen Fällen kann durch Betrachtung von $Hf(x)$ keine Entscheidung getroffen werden.
+\end{enumerate}
+\minisec{Beweis:} 
+$1) \Rightarrow 2$, $3 \Rightarrow 4$ gehe zu $-f$ über
+\begin{description}
+	\item[3)] Sei $\norm{v}=1$, $Hf(x)v=\lambda v, \, \lambda >0$, $t \in [-1,1]$. \\ 
+		$\Rightarrow \exists\,\xi \in [0,1]$ mit  
+	\begin{align*}
+		f(x+tv)&=f(x)+ \frac{1}{2} \skal{Hf(x+t \xi)tv}{tv} \\
+		&= f(x) + \underset{= \frac{t^2}{2}\lambda}{\underbrace{\frac{t^2}{2} \skal{Hf(x)v}{v}}} 
+		+ \frac{t^2}{2} \underset{\text{klein, falls $\abs{t}$ klein}}{\underbrace{\skal{(Hf(x+\xi t)- t f(x))v}{v}}} \\
+		&> f(x) \text{ für kleine $t$}	
+	\end{align*}
+	\item[1)] selbe Idee
+\end{description}
+% subsubsection satz (end)
+% subsubsection satz (end)
+% subsection extremwertprobleme (end)
 
 \end{document}	
