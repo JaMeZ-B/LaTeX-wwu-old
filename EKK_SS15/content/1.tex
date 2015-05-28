@@ -61,7 +61,7 @@ Wenn wir Teilmengen von $\ZZ$ auch praktisch untersuchen möchten, wird die Frag
 	$k = 0$: Setze $c_0 := n$. \\
 	$k \rightsquigarrow k+1$: Sei $g^{k+1} \leq n < g^{k+2}$. Setze $n' = n - \floor*{\frac{n}{g^{k+1}}} \cdot g^{k+1}$. Es folgt $0 \leq n' < g^{k+1}$, d.h. auf $n'$ ist die Induktionsvoraussetzung anwendbar. Nach dieser hat $n'$ eine $g$-adische Zifferndarstellung $n' = \sum\limits_{i=0}^{k} c_i g^i$. Wegen $1 \leq  \frac{n}{g^{k+1}} < g$ ist $1 \leq \floor*{\frac{n}{g^{k+1}}} < g$, also setze $c_{k+1} := \floor*{\frac{n}{g^{k+1}}}$. \\
 	$\Rightarrow  n = c_{k+1} g^{k+1} + n' = \sum\limits_{i=0}^{k+1} c_i g^i$.
-	\item[Eindeutigkeit:] Sind $\sum\limits_{i=0}^{k} a_i g^i = m = \sum\limits_{i=0}^{r} b_i g^i$ zwei verschiedene Darstellungen von $m \in \NN$. Ist $r > k$, so sei $a_{k+1} = \dots = a_r := 0$, sonst sei $b_{r+1} = \dots = b_k := 0$, falls $r < k$. Dann sei $l := \max \{i \in \NN_0 : i \leq \max\{k,r\}, a_i \neq b_i \}$ die größte Stelle, an der sich die Darstellungen unterscheiden. \\
+	\item[Eindeutigkeit:] Sind $\sum\limits_{i=0}^{k} a_i g^i = m = \sum\limits_{i=0}^{r} b_i g^i$ zwei verschiedene Darstellungen von $m \in \NN$. Ist $r > k$, so sei $a_{k+1} = \dots = a_r := 0$, sonst sei $b_{r+1} = \dots = b_k := 0$, falls $r < k$. Dann sei $l := \max \{i \in \NN_0 : \linebreak i \leq \max\{k,r\}, a_i \neq b_i \}$ die größte Stelle, an der sich die Darstellungen unterscheiden. \\
 	$\Rightarrow 0 = \sum\limits_{i=0}^l \underbrace{(a_i-b_i)}_{=0 \text{ für } i>l} g^i \Rightarrow \underbrace{|b_l - a_l|}_{\geq 1} g^l = \abs*{\sum\limits_{i=0}^{l-1} (a_i - b_i)g^i}$ \\
 	$\Rightarrow g^l \leq \sum\limits_{i=0}^{l-1} |a_i-b_i| g^i \leq \sum\limits_{i=0}^{l-1} (g-1) g^i = (g-1) \frac{g^l - 1}{g-1} = g^l - 1 \quad \lightning$ \qed
 	\end{description}
@@ -116,8 +116,7 @@ Primzahlen sind die "Bausteine" der natürlichen Zahlen:
 \minisec{Beweis}
 	\begin{description}
 		\item[Existenz:] Ist $n$ prim, ist nichts zu zeigen, und ist $n$ nicht prim, gibt es $k, l \in \NN \setminus \{1\}$ mit $n = kl$. Da $\min\{k,l\} > 1$, folgt $\max \{k,l\} < n$. Nach Induktionsvoraussetzung sind also $k,l$ Produkte von Potenzen von Primzahlen, also auch $n = kl$.
-		\item[Eindeutigkeit:] Sei $n > 1$ minimal mit zwei verschiedenen Zerlegungen $n = \prod\limits_{i=1}^{r} p_i^{e_i} = \prod\limits_{i=1}^{s} q_i^{f_i}$, die $p_i, q_i$ prim und angeordnet. Da $p_1 \neq q_i$ für alle $i$ gilt (sonst hätte $\frac{n}{p_1} < n$ zwei verschiedene Zerlegungen), ist $\ggT(p_1,q_i) = 1$, und mit den Zerlegungen folgt $p_1 \mid q_1^{f_1 - 1}$ aus Lemma \ref{lemma_21}. Die Fortsetzung des Verfahrens zeigt schließlich $p_1 \mid q_s$, was wegen $\ggT(p_1,q_s) = 1$ ein Widerspruch ist. \qed
-		(Beachte: Zum Beweis von Lemma \ref{lemma_21} wurde nie die Eindeutigkeit der Primfaktorzerlegung benutzt.)
+		\item[Eindeutigkeit:] Sei $n > 1$ minimal mit zwei verschiedenen Zerlegungen $n = \prod\limits_{i=1}^{r} p_i^{e_i} = \prod\limits_{i=1}^{s} q_i^{f_i}$, die $p_i, q_i$ prim und angeordnet. Da $p_1 \neq q_i$ für alle $i$ gilt (sonst hätte $\frac{n}{p_1} < n$ zwei verschiedene Zerlegungen), ist\linebreak $\ggT(p_1,q_i) = 1$, und mit den Zerlegungen folgt $p_1 \mid q_1^{f_1 - 1}$ aus Lemma \ref{lemma_21}. Die Fortsetzung des Verfahrens zeigt schließlich $p_1 \mid q_s$, was wegen $\ggT(p_1,q_s) = 1$ ein Widerspruch ist. (Beachte: Im Beweis von Lemma \ref{lemma_21} wird nie die Eindeutigkeit der Primfaktorzerlegung benutzt.) \qed
 	\end{description}
 
 Die Eindeutigkeit der Primfaktorzerlegung zeigt, dass auch diese eine Möglichkeit zur Darstellung natürlicher Zahlen ist. Diese ist jedoch unpraktisch, weil das folgende Problem im Allgemeinen schwer zu lösen ist, worauf einige kryptographische Verfahren (insb. RSA) beruhen.
@@ -140,7 +139,7 @@ Im Folgenden besprechen wir noch den ggT zweier natürlicher Zahlen, der sich in
 Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und $b = \prod_p p^{f(p)}$ vorliegen, kann ihr ggT leicht bestimmt werden als $\ggT(a,b) = \prod_p p^{\min(e(p),f(p))}$, z.B. $\ggT(2^3 \cdot 3^6 \cdot 5^4, 2^4 \cdot 3^5) = 2^3 \cdot 3^5$. Wegen des Faktorisierungsproblems kann dies aber so nicht praktisch umgesetzt werden. Stattdessen benutzt man den (polynomiell) schnellen euklidischen Algorithmus, vgl. Übungsaufgabe.
 
 \begin{satz}[Teilen mit Rest]
-	Zu $a \in \ZZ, b \in \NN$ existieren eindeutigen $q,r \in \ZZ, 0 \leq r < b$ mit $a = qb + r$, nämlich $q = \floor*{\frac{a}{b}} = \max\{m \in \ZZ : m \leq \frac{a}{b}\}$ und $r = a-qb$. Dabei heißt $r$ der \bet{kleinste nichtnegative Rest}. Statt $0 \leq r < b$ kann auch $r \in \ZZ$, $\abs{r} < \frac{b}{2}$, erfüllt werden; $r$ heißt dann der \bet{absolut kleinste Rest} (bei Division durch $b$). \index{Divison mit Rest} \index{kleinster nichtnegativer Rest} \index{absolut kleinster Rest}
+	Zu $a \in \ZZ, b \in \NN$ existieren eindeutigen $q,r \in \ZZ, 0 \leq r < b$ mit $a = qb + r$, nämlich $q = \floor*{\frac{a}{b}} = \max\{m \in \ZZ : \linebreak m \leq \frac{a}{b}\}$ und $r = a-qb$. Dabei heißt $r$ der \bet{kleinste nichtnegative Rest}. Statt $0 \leq r < b$ kann auch $r \in \ZZ$, $\abs{r} < \frac{b}{2}$, erfüllt werden; $r$ heißt dann der \bet{absolut kleinste Rest} (bei Division durch $b$). \index{Divison mit Rest} \index{kleinster nichtnegativer Rest} \index{absolut kleinster Rest}
 \end{satz}
 
 \begin{satz}[Euklidischer Algorithmus]
@@ -163,7 +162,7 @@ Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und 
 		c_{-2} = 0, c_{-1} = 1 \text{ und } c_k = q_k c_{k-1} + c_{k-2}, k=0,1,2, \dots, n \\
 		d_{-2} = 1, d_{-1} = 0 \text{ und } d_k = q_k d_{k-1} + d_{k-2}, k=0,1,2, \dots, n
 	\end{array} \]
-	die \bet{Bézout-Elemente} als $x = (-1)^{n-1}, y=(-1)^n c_{n-1}$ berechnet werden.
+	die \bet{Bézout-Elemente} als $x = (-1)^{n-1} d_{n-1}, y=(-1)^n c_{n-1}$ berechnet werden.
 	
 	Wir behaupten also: \begin{enumerate}[(1)]
 		\item Es ist $\ggT(a,b) = r_n$.
@@ -172,7 +171,7 @@ Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und 
 
 \minisec{Beweis}
 	\begin{description}
-		\item[zu (1)]: Da $r_n \mid r_{n-1}, r_n \mid r_{n-2}, \dots, r_n \mid r_0 = b, r_n \mid r_{-1} = a$, ist $r_n$ ein Teiler von $a$ und $b$ (Teilen mit Rest von unten nach oben). Ist $d$ irgendein Teiler $\geq 1$ von $a$ und $b$, folgt $d \mid r_1 = a -q_0 b \Rightarrow d \mid r_2 = r_0 - q_1 r_1 \Rightarrow d \mid r_3 = \dots$, also auch $r_n$, sodass $d \leq r_n$ folgt (Teilen mit Rest von oben nach unten). Somit ist $r_n = \ggT(a,b)$.
+		\item[zu (1)]: Da $r_n \mid r_{n-1}, r_n \mid r_{n-2}, \dots, r_n \mid r_0 = b, r_n \mid r_{-1} = a$, ist $r_n$ ein Teiler von $a$ und $b$ (Teilen mit Rest von unten nach oben). Ist $d$ irgendein Teiler $\geq 1$ von $a$ und $b$, folgt $d \mid r_1 = a -q_0 b \Rightarrow d \mid r_2 = r_0 - q_1 r_1 \linebreak \Rightarrow d \mid r_3 = \dots$, also auch $r_n$, sodass $d \leq r_n$ folgt (Teilen mit Rest von oben nach unten). Somit ist $r_n = \ggT(a,b)$.
 		\item[zu (2)]: Induktiv kann $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$ gezeigt werden. Daher genügt zu zeigen: $c_n = \frac{a}{\ggT(a,b)}, d_n = \frac{b}{\ggT(a,b)}$. \marginnote{Details siehe EZT-Skript Lorenz} \\
 		\textcolor{gray}{Mit den $\frac{c_k}{d_k}$ wird die Kettenbruchentwicklung von $\frac{a}{b}$ berechnet und diese bricht bei $\frac{c_n}{d_n} = \frac{a}{b}$ ab. Da bei der Kettenbruchentwicklung alle Brüche $\frac{c_k}{d_k}$ gekürzt sind wegen $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$, folgt dies.} 
 	\end{description}
@@ -186,7 +185,7 @@ Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz 
 
 \minisec{Beweis}
 	Aus den Voraussetzungen und $c \mid ac$ folgt, dass $c \mid \ggT(ab,ac) = |a| \cdot \ggT(b,c) = |a|$, also $c \mid a$. Zur ersten Gleichheit: Nach Satz \ref{satz_ea} existieren $x,y \in \ZZ$ mit $\ggT(b,c) = xb + yc$. \\
-	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. Ist $t$ irgendein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
+	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. Ist $t$ ein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
 
 \nextlecture	
 \subsubsection{Kongruenzenrechnen und die modulare Brille}
@@ -213,11 +212,11 @@ Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz 
 \end{defn}
 
 \begin{folg}
-	Die Restklassen modulo $m$ sind Teilmengen von $\ZZ$ der Gestalt $x + m\ZZ := \{x + ma : a \in \ZZ\}$. Die Restklasse $x + m\ZZ$ heißt auch die Restklasse von $x$ modulo $m$. Davon gibt es $m$ Stück; wird in jeder Restklasse ein Element $x_i$, $i = 1, \dots, m$ ausgewählt, können die $m$ Restklassen mit $x_1 + m\ZZ, x_2 + m\ZZ, \dots, x_m + m\ZZ$ angegeben werden; die Menge $\{x_1,\dots,x_m\}$ heißt dann \bet{vollständiges Restsystem} modulo $m$. Sind $y_1, \dots, y_m \in \ZZ$ so, dass $y_i \not\kon y_j \modu m$ für alle $i \neq j$, $1 \leq i,j \leq m$, gilt (d.h. die $y_i$ sind paarweise inkongruent modulo $m$), dann ist $\{y_1, \dots, y_m\}$ ein vollständiges Restsystem modulo $m$. Die Zahl $x$ heißt \Index{Repräsentant} der Restklasse $x + m\ZZ$, und $x + m\ZZ = z + m\ZZ \Leftrightarrow x \kon z \modu m$, weil laut Definition in der Restklasse von $x \mod m$ genau alle zu $x$ kongruenten Zahlen liegen. \index{Restsystem!vollständig}
+	Die Restklassen modulo $m$ sind Teilmengen von $\ZZ$ der Gestalt $x + m\ZZ := \{x + ma : a \in \ZZ\}$. Die Restklasse $x + m\ZZ$ heißt auch die Restklasse von $x$ modulo $m$. Davon gibt es $m$ Stück; wird in jeder Restklasse ein Element $x_i$,\linebreak $i = 1, \dots, m$ ausgewählt, können die $m$ Restklassen mit $x_1 + m\ZZ, x_2 + m\ZZ, \dots, x_m + m\ZZ$ angegeben werden; die Menge $\{x_1,\dots,x_m\}$ heißt dann \bet{vollständiges Restsystem} modulo $m$. Sind $y_1, \dots, y_m \in \ZZ$ so, dass $y_i \not\kon y_j \modu m$ für alle $i \neq j$, $1 \leq i,j \leq m$, gilt (d.h. die $y_i$ sind paarweise inkongruent modulo $m$), dann ist $\{y_1, \dots, y_m\}$ ein vollständiges Restsystem modulo $m$. Die Zahl $x$ heißt \Index{Repräsentant} der Restklasse $x + m\ZZ$, und $x + m\ZZ = z + m\ZZ \Leftrightarrow x \kon z \modu m$, weil laut Definition in der Restklasse von $x \mod m$ genau alle zu $x$ kongruenten Zahlen liegen. \index{Restsystem!vollständig}
 \end{folg}
 
 \begin{bsp}
-	$\{0,1,2\}$ ist vollständiges Restsystem modulo $3$, und vollständige Restsysteme modulo $8$ sind etwa $\{1,\dots,8\}$ und $\{3,6,9,12,15,18,21,24\} = \{3a : 1 \leq a \leq 8\}$, da $12 \kon 4 \modu 8, 15 \kon 7 \modu 8, 18 \kon 2 \modu 8, 21 \kon 5 \modu 8, 24 \kon 0 \modu 8$. Die Menge $\{2a : 1 \leq a \leq 8\}$ ist kein vollständiges Restsystem modulo $8$. Die Reste $0,1,\dots,m-1$ könnte man auch als "Standardrepräsentanten" modulo $m$ bezeichnen, da sie immer ein vollständiges Restsystem modulo $m$ bilden.
+	$\{0,1,2\}$ ist vollständiges Restsystem modulo $3$, und vollständige Restsysteme modulo $8$ sind etwa $\{1,\dots,8\}$ und $\{3,6,9,12,15,18,21,24\} = \{3a : 1 \leq a \leq 8\}$, da $12 \kon 4 \modu 8, 15 \kon 7 \modu 8, 18 \kon 2 \modu 8,\linebreak 21 \kon 5 \modu 8, 24 \kon 0 \modu 8$. Die Menge $\{2a : 1 \leq a \leq 8\}$ ist kein vollständiges Restsystem modulo $8$. Die Reste $0,1,\dots,m-1$ könnte man auch als "Standardrepräsentanten" modulo $m$ bezeichnen, da sie immer ein vollständiges Restsystem modulo $m$ bilden.
 \end{bsp}
 
 \begin{folg}
@@ -528,7 +527,7 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \subsection{Public-Key-Kryptographie}
 \label{sub:1.2}
 	\Index{Public-Key-Kryptographie} bezeichnet man auch als asymmetrische Kryptographie.\marginnote{[5]} Bei diesem Kommunikationsverfahren hat jeder Nutzer einen \bet{öffentlichen Schlüssel}, den jeder einsehen kann, und einen \bet{privaten Schlüssel}, den jeder Nuter geheim hält. Möchte Nutzer B eine Nachricht an Nutzer A senden, benutzt er zur Verschlüsselung den öffentlichen Schlüssel von A, die Entschlüsselung gelingt aber nur A mit dem privaten Schlüssel. \index{offentlicher Schlüssel@öffentlicher Schlüssel} \index{privater Schlüssel} \\
-	Ein solches Szenario (auch \Index{Protokoll} genannt) ist das RSA-Verfahren, das wir in Abschnitt \ref{subsub:1.2.1} behandeln. Die Verfahren in \ref{subsub:1.2.2} und \ref{subsub:1.2.3} sind Kryptographie-Verfahren, die mit allgemeinen Gruppen machbar sind (RSA arbeitet $(\ZZ_n^*,\cdot)$).
+	Ein solches Szenario (auch \Index{Protokoll} genannt) ist das RSA-Verfahren, das wir in Abschnitt \ref{subsub:1.2.1} behandeln. Die Verfahren in \ref{subsub:1.2.2} und \ref{subsub:1.2.3} sind Kryptographie-Verfahren, die mit allgemeinen Gruppen machbar sind (RSA arbeitet in $(\ZZ_n^*,\cdot)$).
 	
 \subsubsection{RSA-Verfahren}
 \label{subsub:1.2.1}
@@ -630,7 +629,7 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 
 \begin{bem}
 	Weiter ist beim Schlüsselaustausch entscheidend, dass sich Alice und Bob sicher sein können, wirklich mit dem angegebenen Teilnehmer zu kommunizieren: Ein Unbefugter könnte versuchen, sich erst als Alice auszugeben, und so mit Bob einen Schlüssel $x^{eb}$ auszutauschen und dies Ebenso mit Alice tun ($x^{ea}$). Gelingt dies, braucht der Unbefugte nur die verschlüsselten Nachrichten zwischen Alice und Bob abzufangen: \\
-	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. Er kann so die gesamte geheime Kommunikation abhören. Man nennt dies eine \index{man-in-the-middle-Attacke}.
+	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. Er kann so die gesamte geheime Kommunikation abhören. Man nennt dies eine \Index{man-in-the-middle-Attacke}.
 \end{bem}
 
 \nextlecture
@@ -686,7 +685,8 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{anw}[DSA-Verfahren]
-	Nun das \Index{DSA-Verfahren} zur Signatur, wie Alice ihre Nachricht $m$ unterschreiben kann:
+\label{anw_6.7}
+	Nun das \Index{DSA-Verfahren} zur Signatur, wie Alice ihre Nachricht $m$ unterschreiben kann: \marginnote{Beschreibung für eine additive Gruppe $G$!}
 	\begin{description}
 		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1,\dots,n-1\}$ mit $\ggT(\tilde{a},n) = 1$ und berechnet das Gruppenelement $\tilde{a}x \in G$.
 		\item[Schritt 2:] Alice berechnet das Inverse $\tilde{a}^{-1}$ in $\ZZ_n$ (euklidischer Algorithmus) sowie $s := \tilde{a}^{-1} (h(m)-\Psi(\tilde{a}x)\cdot a)$ in $\ZZ_n$.
