@@ -546,6 +546,7 @@ Somit können wir projektive Kurven definieren:
 
 Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmultiplizität $\geq 2$ haben, sofern der Grad der Kurve auch $\geq 2$ ist.
 \begin{satz}
+\label{satz_9.22}
 	Sei $P \in \PP^2(k)$ ein nicht-singulärer Punkt auf $\cc_F$, wobei $\deg(F) \geq 2$ sei, und $T = T_P(\cc_F)$ die Tangente an $\cc_F$ im Punkt $P$. Dann ist $m(P;T,\cc_F) \geq 2$.
 \end{satz}
 
@@ -682,6 +683,11 @@ Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmul
 	Wir im Beweis von Satz~\ref{satz_10.1} von Bézout erhalten wir ein Polynom $R(x) \in k[x]$ vom Grad $=d_1d_2$. Es hat $d_1d_2-1$ viele Nullstellen $x_1, \dots, x_{d_1 d_2-1}$ laut Voraussetzung, ist also durch $(x-x_1) \cdots (x-x_{d_1d_2-1})$ teilbar, der Quotient ist vom Grad $1$, also $=r \cdot (x-a) \in k[x]$ mit einer (weiteren) Nullstelle $a \in k$.\\
 	Somit haben $f_1(a,y), f_2(a,y) \in k[y]$ einen gemeinsamen Faktor vom Grad $\geq 1$. Dieser Grad ist $1$ (denn wäre er $\geq 2$, würde er über $\overline{k}$ in mindestens zwei Linearfaktoren zerfallen, die dann zu zwei weiteren Schnittpunkten mit gleicher $x$-Koordinate $a$ führen würden, sodass es $\geq (d_1d_2-1)+2 > d_1d_2$ viele Schnittpunkte geben müsste -- im Widerspruch zu Satz~\ref{satz_10.1}). Also gibt es nur noch genau einen weiteren Schnittpunkt $(a,y)$ von $\cc_{F_1}$ und $\cc_{F_2}$. \qed
 	
+\begin{bsp}
+\label{bsp_10.16}
+	Sei $k$ ein beliebiger Körper, $F_1,F_2 \in k[X,Y,Z]$ homogen, $\deg(\ggT(F_1,F_2)) = 0$, und sei $\deg(F_1) = 1, \deg(F_2) = 3$. Dann ist $\sum_{P \in \cc_{F_1} \cap \cc_{F_2}} m(P;\cc_{F_1},\cc_{F_2}) \in \{0,1,3\}$.
+\end{bsp}
+	
 \nextlecture
 \newpage
 \subsection{Elliptische Kurven}
@@ -742,7 +748,7 @@ Wir zeigen nun, dass wir bei Tangenten in einem Kurvenpunkt immer die Schnittmul
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.3]{img/oh.png}
+		\includegraphics[scale=1]{img/bem_11_7.pdf}
 		\caption{$y^2 = x^3 - 3x + s$ für \textcolor{Green4}{$s = 5$}, \ \textcolor{yellow}{$s=3$}, \ \textcolor{Orange2}{$s=2$}, \ \textcolor{red}{$s=1$}, \ \textcolor{Magenta1}{$s=0$}, \ \textcolor{green}{$s=-1$}, \ \textcolor{cyan}{$s=-1.999$}, \ \textcolor{RoyalBlue3}{$s=-5$}}
 	\end{figure}
 	Das Bild ist perspektivisch so verzerrt, dass der unendlich ferne Punkt $\oh$, der für die Richtung der $y$-Achse steht, am Horizont erscheint.
@@ -949,3 +955,165 @@ Theoretische Ergänzungen zu unserer Definition von $\Delta(\cc_F(k))$:
 	0 & 1 & 0 & 0 & 3
 	\end{pmatrix} \]
 	Durch Berechnung von $\Res(\sigma) = \det(M(\sigma,\sigma'))$ und $(-1)^{3 \cdot (3-1)/2} = -1$ folgt die Behauptung. \qed
+	
+\nextlecture
+\subsubsection{Die Gruppenstruktur elliptischer Kurven}
+	Sei $E(k)$ eine elliptische Kurve über einem Körper $k$. \marginnote{[13]}
+	
+\begin{satz}
+\label{satz_13.1}
+	\begin{enumerate}[(a)]
+		\item Seien $P,Q \in E(k), P \neq Q$, und $G=G(P,Q) \subseteq \PP^2(k)$ die projektive Gerade, die $P$ und $Q$ verbindet. Dann hat $G$ noch einen dritten Schnittpunkt mit $E(k)$ gemäß Vielfachheiten gezählt (das heißt, eventuell $P$ bzw. $Q$ selbst, falls $m(P;G,E(k)) = 2$ bzw. $m(Q;G,E(k)) = 2$).
+		\item Sei $G$ die Tangente an $E(k)$ im Punkt $P \in E(k)$. Dann hat $G$ noch einen dritten Schnittpunkt mit $E(k)$ gemäß der Vielfachheiten gezählt (das heißt, eventuell $P$ selbst, falls $m(P;G,E(k)) = 3$).
+	\end{enumerate}
+\end{satz}
+
+\begin{bew}
+	Als Ergänzung zum Satz von Bézout haben wir Satz~\ref{satz_10.15} kennen gelernt, der im Spezialfall $\deg(F_1) = 1,\linebreak \deg(F_2) = 3$ dann $\sum_{P \in \cc_{F_1} \cap \cc_{F_2}} m(P;\cc_{F_1},\cc_{F_2}) \in \{0,1,3\}$ liefert (siehe Beispiel~\ref{bsp_10.16}). Also gilt auch hier: \linebreak $\sum_{R \in G \cap E(k)} m(R;G,E(k)) \in \{0,1,3\}$.
+	\begin{description}
+		\item[zu (a):] Ist $G = G(P,Q)$, folgt $2 \leq  \#(G \cap E(k)) \leq \sum_{R \in G \cap E(k)} m(R;G,E(k)) \in \{0,1,3\}$. Das geht nur, wenn die Vielfachensumme $3$ ist, also existiert ein $R \in G \cap E(k)$ \begin{itemize}
+			\item mit $R \notin \{P,Q\}$, falls $m(P;G,E(k)) = 1 = m(Q;G,E(k))$,
+			\item oder mit $R = P$, falls $m(P;G,E(k)) = 2$
+			\item oder mit $R = Q$, falls $m(Q;G,E(k)) = 2$.
+		\end{itemize} 
+		\item[zu (b):] Ist $G$ die Tangente an $E(k)$ in $P \in E(k)$, ist $m(P;G,E(k)) \geq 2$ nach Satz~\ref{satz_9.22}. Es folgt wie im Beweis zu (a) wieder, dass die Vielfachensumme $3$ ist, also die Existenz eines $R \in G \cap E(k)$ mit $R \neq P$, falls $m(P;G,E(k)) = 2$ und $R = P$, falls $m(P;G,E(k)) = 3$ gilt. \qed
+	\end{description}
+\end{bew}
+
+\begin{bsp}
+	Betrachte die elliptische Kurve $E(k)$ zur (kurzen) Weierstraßgleichung $y^2 = x^3 - 3x + 3$. Jede Gerade, die $E(k)$ in zwei Punkten schneidet, schneidet $E(k)$ in einem dritten Punkt, gemäß Vielfachheit gezählt. Der dritte Schnittpunkt kann auch $\oh \in g_\infty$ sein. \todo{Bild texen!}
+	\newpage
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=1]{img/bsp_13_3.pdf}
+		\caption{Die ellptische Kurve zu $y^2 = x^3 - 3x + 3$.}
+	\end{figure}
+\end{bsp}
+
+Wir möchten auf $E(k)$ eine Verknüpfung "$+$" erklären, also eine Punkteaddition $P + Q$, bei der wiederum ein Punkt auf der elliptischen Kurve herauskommt. Den dritten Schnittpunkt, den die Gerade $G(P,Q)$ durch zwei Punkte $P$ und $Q$ auf $E(k)$ mit $E(k)$ hat laut Satz~\ref{satz_13.1}, bezeichnen wir mit $P * Q$.
+
+\begin{defn}[dritter Schnittpunkt]
+	Für $P,Q \in E(k)$, $P \neq Q$ definieren wir also:
+	\[ P * Q := \begin{cases}
+		R \in (G(P,Q) \cap E(k)) \setminus \{P,Q\}, & \text{falls } m(P;G,E(k)) = 1 = m(Q;G,E(k)) \\
+		P, & \text{falls } m(P;G,E(k)) = 2 \\
+		Q, & \text{falls } m(Q;G,E(k)) = 2,
+	\end{cases} \]
+	sowie
+	\[ P * P := \begin{cases}
+		R \in (T_P(E(k)) \cap E(k)) \setminus \{P\}, & \text{falls } m(P;T_p(E(k)),E(k)) = 2 \\
+		P, & \text{falls } m(P;T_P(E(k)),E(k)) = 3 \text{ (d.h. falls } P \text{ Wendepunkt)}
+	\end{cases} \]
+\end{defn}
+
+\begin{bem}
+	\begin{itemize}
+		\item Der unendlich ferne Punkt $\oh \in E(k)$ erfüllt $\oh * \oh = \oh$, da er ein Wendepunkt ist.
+		\item Weiter ist offensichtlich $P * Q = Q * P$ aufgrund der Definition.
+		\item Es gilt: $R = P * Q \Rightarrow P = Q * R \Rightarrow Q = R * P$, das heißt $P * (P * Q) = Q$ für alle $P,Q \in E(k)$. \hfill [\#]
+		\item Damit gilt auch $P * Q = P * R \Leftrightarrow Q = R$, denn $P * Q = P * R \Rightarrow P*(P*Q)=P*(P*R) \Rightarrow Q=R$.
+	\end{itemize}
+\end{bem}
+
+\begin{bem}
+	Man beachte, dass für $P = [a:b:1] \in \PP^2(k) \cap \iota(\aff^2(k))$ die Gerade $G(P,Q) = G(c,0,-a) = \{ [x:y:z] \in \PP^2(k) : x - az = 0\}$ im Affinen eine Parallele zur $y$-Achse darstellt (Gleichung $x = a$). Für eine elliptische Kurve, die durch eine kurze Weierstraßform gegeben und (für $\Char(k) \neq 2$) symmetrisch zur $x$-Achse ist, wird typischerweise $P * \oh \neq P$ sein. Wegen $(\oh * \oh) * P = \oh * P$ einerseits, da $\oh * \oh = \oh$, und $\oh * (\oh * P) = P$ andererseits wegen [\#], kann die Verknüpfung $*$ also nicht assoziativ sein. Stattdessen setzen wir unsere Verknüpfung "$+$" wie folgt:
+\end{bem}
+
+\begin{defn}[Punkteaddition auf elliptischen Kurven]
+	Für $P,Q \in E(k)$ definieren wir
+	\[P + Q := \oh *(P * Q). \]
+	Ist $E(k)$ in kurzer Weierstraßform und (für $\Char(k) \neq 2$) symmetrisch zur $x$-Achse, erhält man $P+Q$, indem man den dritten Schnittpunkt $P*Q$ von $G(P,Q)$ mit $E(k)$ dann noch an der $x$-Achse spiegelt, das heißt das Negative des $y$-Wertes nimmt.
+\end{defn}
+
+\begin{bem}
+\label{bem_13.8}
+	\begin{itemize}
+		\item Es gilt $\oh + P = \oh * (\oh * P) = P$ nach [\#], das heißt $\oh$ ist neutrales Element bezüglich $+$.
+		\item Es gilt $-P = \oh * P$, da $P + (\oh * P) = \oh * (P * (\oh * P)) = (P * (\oh * P)) * \oh = (P * (P * \oh)) * \oh = \oh$ nach [\#].
+	\end{itemize}
+\end{bem}
+Es ist nicht auf Anhieb zu sehen, dass hier mit "$+$" eine elliptische Kurve $E(k)$ zu einer Gruppe $(E(k),+)$ wird, sprich, ob das Assoziativgesetz gilt.
+
+\begin{lemma}
+\label{lemma_13.9}
+	Liegen drei Punkte $P,Q,R \in E(k)$ einer elliptischen Kurve auf einer projektiven Gerade $G$, so gilt $(P+Q) + R = \oh$ und umgekehrt. Dabei müssen $P,Q,R$ nicht notwendig verschieden sein.
+\end{lemma}
+
+\minisec{Beweis}
+	Da $R = P *Q$ nach Voraussetzung, folgt $-R = \oh * R = \oh * (P * Q) = P+Q$. Umgekehrt gilt das ebenso. \qed
+	
+\begin{satz}[Elliptische Kurve mit Punktaddition ist abelsche Gruppe, Poincaré, 1901]
+	Sei $k$ ein beliebiger Körper und $E(k)$ eine elliptische Kurve. Die Verknüpfung $+ \colon (P,Q) \mapsto P +Q$ macht $E(k)$ zu einer abelschen Gruppe $(E(k),+)$ mit neutralem Element $\oh$, das heißt:
+	\begin{enumerate}[(i)]
+		\item $P+\oh = P$ für alle $P \in E(k)$.
+		\item Für alle $P \in E(k)$ existiert ein $Q \in E(k)$ mit $P+Q = \oh$; setze $-P := Q$.
+		\item $P + Q = Q + P$ für alle $P,Q \in E(k)$.
+		\item $(P+Q) + R = P+(Q+R)$ für alle $P,Q,R \in E(k)$.
+	\end{enumerate}
+\end{satz}
+
+\minisec{Beweis}
+	\begin{enumerate}[(i)]
+		\item Siehe Bemerkung~\ref{bem_13.8}.
+		\item Für $P \in E(k)$ setze $Q := \oh * P$, siehe Bemerkung~\ref{bem_13.8}.
+		\item Klar aufgrund der Definition von $P+Q$.
+		\item Beweis folgt im nächsten Vorlesungsteil. \qed
+	\end{enumerate}
+	
+\begin{bem}
+	\begin{itemize}
+		\item Anstelle von $\oh$ könnte man prinzipiell jeden Punkt $Q \in E(k)$ zum neutralen Element von $+$ machen, indem man $U \oplus V := U + V - Q$ setzt: Dann ist $U \oplus Q = U + Q - Q = U, U \oplus(-U+2Q) = U-U+2Q-Q = Q$ und $(U \oplus V) \oplus W = U + V + W - 2Q = U \oplus (V \oplus W)$. Die Eigenschaft von Lemma~\ref{lemma_13.9} gilt immer noch, wenn für $Q$ ein Wendepunkt genommen wird. Nun kann eine elliptische Kurve bis zu neun Wendepunkte haben, vergleiche Übungsaufgabe 4 (a) auf Blatt 5.
+		\item Die Wahl von $\oh := [0:1:0]$ als Wendepunkt von $E(k)$, das heißt mit $\oh * \oh = \oh$, hat den Vorteil, dass die explizite Formel für $+$ rechnerisch einfacher wird, weil dann die Gleichung von $E(k)$ in einfacher (langer oder kurzer) Weierstraßform vorliegt. Diese Formel wird in Satz~\ref{satz_13.13} bzw. Satz~\ref{satz_13.14} angegeben.
+		\item Invertieren, das heißt Berechnen von $-P = P * \oh$, ist dann bei kurzer Weierstraßform in $\Char(k) \neq 2$ und $\Char(k) \neq 3$ besonders leicht: Man spiegelt $P$ an der $x$-Achse und erhält $-P$, das heißt ist $P = [a:b:c]$, gilt $-P = [a:-b:c]$. Schnittpunkte von $E(k)$ mit der $x$-Achse sind dann selbstinvers, das heißt für $P = [a:0:c] \in E(k)$ gilt $-P = P$.
+	\end{itemize}
+\end{bem}
+
+\begin{bsp}
+	Betrachte $E(\RR)$ mit der Gleichung $y^2 = x^3 + 17$ bzw. $Y^2Z = X^3 + 17Z^3$. Dann liegen $P = [-1:4:1]$ und $Q = [-2:3:1]$ auf der Kurve. Ihre Verbindungsgerade ist $G(P,Q) = \{ [x:y:z] \in \PP^2(\RR) : x-y+5z = 0\}$. Um $P+Q$ zu berechnen, bestimmen wir den dritten Schnittpunkt $P*Q$ von $G(P,Q)$ und $E(\RR)$ wie folgt: Setze $y = x + 5$ ein und erhalte $(x+5)^2 = x^3 + 17 \Leftrightarrow x^3 - x^2 - 10x - 8 = 0$. Da $x = -1, x = -2$ Nullstelle der linken Seite sind, führt Polynomdivision durch $(x+1)(x+2)$ zu $x^3-x^2-10x-8 = (x+1)(x+2)(x-4)$. Der Punkt $P * Q$ hat also die $x$-Koordinate $4$; da er auf $G$ liegt, folgt $P*Q = [4:9:1]$. Es folgt $P + Q = [4:-9:1]$.
+\end{bsp}
+
+Ist $E(k)$ gegeben durch das lange Weierstraßpolynom
+\[ F(X,Y,Z) = Y^2Z + a_1 XYZ + a_3 YZ^2 - X^3 - a_2X^2Z - a_4 XZ^2 - a_6 Z^3 \]
+bzw. $f(x,y) = y^2 + a_1xy + a_3y - x^3 - a_2x^2 - a_4x - a_6$, so möchten wir die Addition "$+$" für die Krypto-Anwendungen in einer expliziten Formel beschreiben:
+
+\begin{satz}[Punkteaddition bei langer Weierstraßform]
+\label{satz_13.13}
+	Sei $E(k)$ gegeben durch das lange Weierstraßpolynom $F$. Dann gilt: \begin{enumerate}[(a)]
+		\item $P = (u,v) \in E(k) \cap \aff^2(k) \Rightarrow -P = (u,-v-a_1u-a_3)$
+		\item Sei $P = (u,v), Q = (r,s) \in E(k) \cap \aff^2(k)$. \begin{itemize}
+			\item Ist $u = r$ und $v + s + a_1 u + a_3 = 0$, gilt $P + Q = \oh$.
+			\item Sonst ist \marginnote{Beweis wäre langweiliges Nachrechnen\dots}
+			\[ P + Q = (\underbrace{\lambda^2 + a_1 \lambda - a_2 - u - r}_{=:x_3}, -(\lambda + a_1) x_3 - \mu - a_3), \] wobei
+			\[ \lambda = \frac{s-v}{r-u}, \quad \mu = \frac{vr - su}{r-u}, \quad \text{ falls } r \neq u, \]
+			und
+			\[ \lambda = \frac{3u^2 + 2a_2 u +a_4 - a_1 v}{2v + a_1u + a_3}, \quad  \mu = \frac{-u^3 + a_4 u + 2a_6 - a_3v}{2v + a_1u + a_3}, \quad \text{ falls } r = u. \]
+		\end{itemize}
+	\end{enumerate}
+\end{satz}
+
+Wir geben den Beweis für die Formel bei kurzer Weierstraßform, wo er leicht zu machen ist:
+\begin{satz}[Punkteaddition bei kurzer Weierstraßform]
+\label{satz_13.14}
+	Ist $E(k)$ gegeben durch $f(x,y) = y^2 - x^3 - ax - b$, so gilt:
+	\begin{enumerate}[(a)]
+		\item Für $P = (u,v) \in E(k)$ gilt $-P = (u,-v)$.
+		\item Für $P = (u,v), Q = (r,s)$ mit $P \neq -Q$ ist
+		\[ P + Q = (\underbrace{\lambda^2 - u - r}_{=:x}, \lambda(u-x) - v), \]
+		wobei
+		\[ \lambda = \begin{cases}
+			\frac{s-v}{r-u}, & \text{falls } P \neq Q \\
+			\frac{3u^2+a}{2v}, & \text{falls } P = Q.
+		\end{cases} \]
+	\end{enumerate}
+\end{satz}
+
+\minisec{Beweis}
+	(a) ist klar. Zu (b): Sei $P \neq \pm Q$. Haben $g(P,Q) = \{ (u+t,v + \lambda t) : t \in \RR\}$ mit $\lambda := \frac{s-v}{r-u}$, sowie $f(u+t, v+ \lambda t) = (v + \lambda t)^2 - (u+t)^3 - a(u+t) - b$ mit den Nullstellen $t = 0, t = r-u$. Eine weitere Nullstelle ist $t = x-u$. Die Nullstellensumme $0 + r-u + x - u = r + x - 2u$ ergibt den Koeffizienten vor $t^2$ des Polynoms, nämlich $\lambda^2 - 3u$; es folgt $x = \lambda^2 - u - r$. Die $y$-Koordinate des Punkts auf $g(P,Q)$ ist dann $v + \lambda(x - u)$, für $P+Q$ dann das Negative. \\
+	Ist $Q = P, P \neq -P$ (das heißt $v \neq 0$), nimmt man die Tangente an $E(k)$ im Punkt $P$, also
+	\begin{equation}
+	\begin{aligned}
+		t_P(E(k)) &= \{(x,y) : (-3u^2 - a)x + 2vy + v^2 - 2au - 3b = 0\} \\
+		&= \{ (u+t, v+ \lambda t) : t \in \RR\}
+	\end{aligned}
+	\end{equation}
+	mit der Steigung $\lambda := \frac{3u^2 + a}{2v}$. Der Rest der Rechnung geht wie eben; es folgt $x = \lambda^2$ (da $u=r$) und der angegebene $y$-Wert für $P+P$. \qed
