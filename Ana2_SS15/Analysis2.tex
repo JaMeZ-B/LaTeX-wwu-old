@@ -2209,7 +2209,7 @@ $B= (v_1, \dots, v_n)$ Basis
 \] Für den Beweis siehe Lineare Algebra
 % subsubsection spektralsatz_fur_symmetrische_matrizen (end)
 \subsubsection{Satz} % (fold)
-\label{ssub:satz}
+\label{satz5.5}
 Sei $A \in S(n)$, $\lambda_1 \leq \dots \leq \lambda_n$ seien Eigenwerte von $A$. \\
 Dann gilt
 \begin{enumerate}
@@ -2249,8 +2249,8 @@ Seien $ U \subseteq \mathbb{R}^n$ offen , $ x \in U $, $ f: U \to \mathbb{R} $ z
 \begin{enumerate}
 	\item Falls alle Eigenwerte von $Hf(x)$ positiv sind, so hat $f$ ein lokales Minimum bei $x$ (positiv definit)
 	\item Falls $Hf(x)$ negativ definit, so hat $f$ ein lokales Maximum bei $x$
-	\item Falls $f$ einen positiven Eigenwert hat, so hat $f$ bei $x$ kein lokales Minimum
-	\item Falls $f$ einen negativen Eigenwert hat, so hat $f$ bei $x$ kein lokales Maximum
+	\item Falls $f$ einen positiven Eigenwert hat, so hat $f$ bei $x$ kein lokales Maximum	
+	\item Falls $f$ einen negativen Eigenwert hat, so hat $f$ bei $x$ kein lokales Minimum
 	\item In allen anderen Fällen kann durch Betrachtung von $Hf(x)$ keine Entscheidung getroffen werden.
 \end{enumerate}
 \minisec{Beweis:} 
@@ -2264,10 +2264,149 @@ $1) \Rightarrow 2$, $3 \Rightarrow 4$ gehe zu $-f$ über
 		+ \frac{t^2}{2} \underset{\text{klein, falls $\abs{t}$ klein}}{\underbrace{\skal{(Hf(x+\xi t)- t f(x))v}{v}}} \\
 		&> f(x) \text{ für kleine $t$}	
 	\end{align*}
-	\item[1)] selbe Idee
+	\item[1)] selbe Idee: \\
+	Taylorentwicklung, $v \in \mathbb{R}^n$, so dass $x+tv \in U \,\, \forall\, t \in [-1,1]$. \\
+	Dann existiert ein $\theta \in [0,1]$ mit
+	\begin{align*}
+		f(x+v) &=f(x)+ \underset{=0}{\underbrace{Df(x)v}} + \frac{1}{2} \skal{Hf(x+\theta v)}{v} \\
+		&= f(x)+ \frac{1}{2}\skal{Hf(x)v}{v}+ \frac{1}{2}\skal{(Hf(x+\theta v)-Hf(x))v}{v} 
+	\end{align*}
+Seien $0 < \lambda_1 \leq \dots \leq \lambda_n$ die Eigenwerte von $Hf(x)$
+\[
+	\stackrel{\ref{satz5.5}}{\Rightarrow} \skal{Hf(x)v}{v} \geq \lambda_1 \cdot \norm{v}^2
+\]
+Da $f \in C^2$ ist, ist $x \mapsto Hf(x)$ stetig und damit folgt
+\[
+	\exists\,\delta >0, \text{ so dass } \norm{Hf(x+ \theta v)-Hf(x)} < \frac{\lambda_1}{2} \text{ für } \norm{v}<\delta \text{ und } \norm{\theta}\leq 1
+\] 
+$\Rightarrow $ für $\norm{v}< \delta $ gilt also:
+\begin{align*}
+	f(x+v)&= f(x)+ \frac{1}{2} \skal{Hf(x)v}{v}+ \frac{1}{2} \skal{Hf(x+ \theta v)}{v} \\
+	&\geq f(x)+ \frac{1}{2} \lambda_1 \norm{v}^2 - \frac{1}{2} \underset{\leq \frac{\lambda_1}{2}}{\underbrace{\norm{Hf(x+ \theta v)-Hf(x)}}} \norm{v}^2 \\
+	&\geq f(x)+ \frac{1}{4} \lambda_1 \norm{v}^2 \\
+	&> f(x)
+\end{align*}
+\[
+	\Rightarrow f(x+v)>f(x), \text{ falls } \norm{v} < \delta \text{ und } v \neq 0
+\]
+$\Rightarrow $ $f$ hat lokales Minimum. \bewende
 \end{description}
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Definiere 
+\[
+	S(n):= \set[A \in \Mat_{n,n}(\mathbb{R})]{A^T=A}
+\]
+\begin{itemize}
+	\item $A \in S(n)$ heißt {\bfseries positiv definit}, falls für alle $v \in \mathbb{R}^n$,$v \neq 0$ gilt:
+	\[
+		\skal{Av}{v}>0
+	\]
+	\item $A \in S(n)$ heißt {\bfseries negativ definit}, falls für alle $v \in \mathbb{R}^n$,$v \neq 0$ gilt:
+	\[
+		\skal{Av}{v}<0
+	\]
+\end{itemize}
+\minisec{Bemerkung:} Es gilt
+\begin{itemize}
+	\item $A$ positiv definit $\Leftrightarrow$ alle Eigenwerte sind positiv
+	\item $A$ negativ definit $\Leftrightarrow$ alle Eigenwerte sind negativ
+\end{itemize}
+\underline{Denn}: Sind $\lambda_1 \leq \dots \leq \lambda_n$ die Eigenwerte von $A$, so gilt:
+\[
+	\lambda_1 \norm{v}^2 \leq  \skal{Av}{v} \leq \lambda_n \norm{v}^2
+\]
+und falls $Av_1  \lambda_1 v_1$ und $Av_n=\lambda_n v_n$, gilt $\norm{v_1}=\norm{v_n}=1$
+% subsubsection definition (end)
+\newpage
 % subsubsection satz (end)
 % subsubsection satz (end)
 % subsection extremwertprobleme (end)
+\section{Der Umkehrsatz und seine geometrischen Konsequenzen} % (fold)
+\label{sec:der_umk}
+\subsection{Umkehrbare differenzierbare Abbildungen} % (fold)
+\label{sub:umkehrbare_differenzierbare_abbildungen}
+\underline{Analysis I}:
+Ist $I \subseteq \mathbb{R}$ ein offenes Intervall, $f: I \to \mathbb{R}$ stetig differenzierbar und $f'(x)\neq 0$ für alle $x \in I$. \\
+Dann folgt, dass $f(I) \subseteq \mathbb{R}$ ein offenes Intervall ist. \\
+Ist $f : I \to f(I)$ bijektiv, so ist die Umkehrfunktion $g: f(I) \to I$ stetig differenzierbar, und es gilt $g'(f(x))= \frac{1}{f'(x)}$
 
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$ U \subseteq \mathbb{R}^n$,$V \subseteq \mathbb{R}^m$ offen. Ein Diffeomorphismus $f: U \to V$ ist eine $C^1$-Abbildung, für die gilt, dass $f:U \to V$ bijektiv ist und die Umkehrabbilung $g:V \to U$ auch eine $C^1$-Abbildung ist.
+% subsubsection definition (end)
+\subsubsection{Lemma} % (fold)
+\label{ssub:lemma}
+$ U \subseteq \mathbb{R}^n$,$V \subseteq \mathbb{R}^m$ offen. $f: U \to V$ Diffeomorphismus mit Umkehrabbildung $g: V \to U$. \\
+Dann gilt:
+\begin{enumerate}
+	\item $m=n$
+	\item $\forall\, x \in U$ ist $Df(x) \in \Mat_{n,n}(\mathbb{R})$ invertierbar
+	\item $Dg(f(x))=(D(f(x)))^{-1} \in \Mat_{n,n}(\mathbb{R})$
+\end{enumerate}
+\minisec{Beweis:} Es gilt
+\[
+	\forall\, x \in U: \,g(f(x))=x \qquad \Rightarrow \qquad g \circ f = \id_U
+\]
+\[
+	\forall\, y \in V: \,f(g(y))=y \qquad \Rightarrow \qquad f \circ g = \id_V
+\]
+Dann folgt aus der Kettenregel
+\begin{align*}
+	Dg(f(x))Df(x)=D \id(x) &= 1_n \\
+	\text{und }Df(g(y))Dg(y)= D \id(y) &= 1_m
+\end{align*}
+Setze nun $y:=f(x)$ ($\Leftrightarrow g(y)=x$) \\
+\[
+\Rightarrow Df(x)Dg(f(x))= 1_m \qquad \stackrel{\text{LA.I}}{\Rightarrow} \qquad m=n
+\]
+Außerdem ist dann $Df(x)$ invertierbar und $(Df(x))^{-1}=Dg(f(x))$
+\bewende
+% subsubsection lemma (end)
+\subsubsection{Lemma} % (fold)
+\label{ssub:lemma}
+Definiere
+\[
+	\GL_n(\mathbb{R}):= \set[A \in \Mat_{n,n}(\mathbb{R})]{A \text{ invertierbar}}
+\]
+Dann gilt
+\begin{enumerate}
+	\item $\GL_n(\mathbb{R}) \subseteq \Mat_{n,n}(\mathbb{R})$ ist offen
+	\item Die Funktion \begin{align*}
+		F: \GL_n(\mathbb{R}) &\to \Mat_{n,n}(\mathbb{R}) \\
+		A &\to A^{-1} 
+	\end{align*}
+ist beliebig oft stetig differenzierbar
+\end{enumerate}
+\minisec{Beweis:} \begin{enumerate}
+	\item B3A5
+	\item B6A4
+\end{enumerate}
+% subsubsection lemma (end)
+\subsubsection{Satz} % (fold)
+\label{ssub:satz}
+$ U \subseteq \mathbb{R}^n$ offen. $ f: U \to \mathbb{R}^n $ stetig differenzierbar. \\
+Es gelte
+\begin{enumerate}
+	\item $Df(x)$ ist invertierbar für alle $x \in U$
+	\item $f(U) \subseteq \mathbb{R}^n$ ist offen
+	\item $f:U \to f(U)$ bijektiv
+	\item Die Umkehrfunktione $g:f(U) \to U$ ist stetig
+\end{enumerate}
+Dann ist $g$ stetig differenzierbar (also ist $f$  Differomorphismus)
+\minisec{Beweis:} $x \in U$,$y=f(x)$. Sei $A: \,-x+U \to \Mat_{n,n}(\mathbb{R})$ stetig bei $0$ und $f(x+h)=f(x)+A(h)h$ für alle $h$ (Dies existert, da $f$ differenzierbar bei $x$). \\
+Sei $k$ mit $y+k \in f(U)$. Setze $h:= -x+g(y+k)$ ($\Leftrightarrow x+h=g(y+k)$) und $h \neq g(y+k)-g(y)$. \\
+Da $A(0)=Df(x)$ invertierbar und $h \mapsto A(h)$ stetig bei $0$ ist und $\GL_n(\mathbb{R}) \subseteq \Mat_{n,n}(\mathbb{R})$ offen, ist $A(h)$ invertierbar für kleine $h$. \\
+Setze nun $B(h):=(A(h))^{-1}$. Dann ist $B$ stetig bei $0$ (,weil $A \mapsto A^{-1}$ stetig ist)
+\begin{align*}
+	\Rightarrow g(y+k)&= g(y)+h \\
+	&= g(y)+ \underset{1_n}{\underbrace{B(h)A(h)}}h \\
+	&= g(y) + B(h)(\underset{=k}{\underbrace{f(x+h)-f(x)}}) \\
+	&= g(y) + B(h)k \\
+	&= g(y) + \underset{\substack{B(0) \\ \text{($B$ stetig bei $0$)}}}{\underbrace{B(\underset{\stackrel{k \to 0}{\longrightarrow}-x+g(y)}{\underbrace{-x+g(y+k)}})}}k
+\end{align*} 
+\bewende
+% subsubsection satz (end)
+% subsection umkehrbare_differenzierbare_abbildungen (end)
+% section der_umk (end)
 \end{document}	
