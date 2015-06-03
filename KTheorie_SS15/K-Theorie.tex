@@ -1087,16 +1087,169 @@ Länge $l=1$. Es gilt
 	\]
 	Der Kettenkomplex 
 	\[
-		\begin{tikzcd}[sep=6em]
-			0 \rar & C_n \rar["\tau"] & \tau(C_n) \oplus \mathds{Q} \rar["(c_{n-1} \oplus \id)|_Q \circ \pr_Q"] & C_{n-2} \oplus C_n \rar & \cdots
-		\end{tikzcd}
+		0 \to C_n \xrightarrow{\tau} \tau(C_n) \oplus Q \xrightarrow{(c_{n-1} \oplus \id)|_Q \circ \pr_Q} C_{n-2} \oplus C_n \to \ldots \to C_0 \to 0  
 	\]
 	stimmt über $A$ mit dem obigen überein, liefert also dieselbe Klasse. Aber
-	\[
-		\benbrace*{0\to C_n \xrightarrow{\tau} \tau(C_n) \to 0  \to \cdots } =0 \bewende 
-	\]
+	\begin{align*}
+		\Underbrace{\benbrace*{0\to C_n \xrightarrow{\tau} \tau(C_n) \to 0  \to \cdots }}{= \benbrace*{0 \to C_n \xrightarrow{\id} C_n \to 0 \to \ldots \to 0 }=0 } + 
+		\Underbrace{\benbrace*{0 \to Q \xrightarrow{C_{n-1}'} C_{n-2} \oplus C_n \to \ldots \to C_0 \to 0 } }{\text{Länge um 1 verringert}} \bewende
+	\end{align*}
 \end{itemize}
 % subsection lemma_3_1_6 (end)
+
+Sei $(C_.,c_.)$ ein Kettenkomplex über dem Ko-Raumpaar $(X,A)$ und $(C_.',c_.')$ ein weiterer über $(X',A')$. Das \Index{äußere Tensorprodukt} von zwei Vektorbündeln $E \to X$,
+$F \to X'$ ist definiert durch 
+\[
+	E \boxtimes F := \pi_X^* E \otimes \pi_{X'}^* F
+\]
+wobei $\pi_X \colon X \times X' \to X$, $\pi_{X'} \colon X \times X' \to X'$ die Projektionen sind. Es gilt also $(E \boxtimes F)_{x,x'} = E_x \times F_{x'}$.
+Das \Index{Tensorprodukt} von $(C_.,c_.)$ und $(C_.',c_.')$ ist definiert durch 
+\[
+	(C \boxtimes C')_n := \bigoplus_{i+j=n} C_i \boxtimes C_j'
+\]
+mit dem Differential $c_n''$, das auf $C_i \boxtimes C_j'$ gegeben ist durch 
+\[
+	c_n'' \big|_{C_i \boxtimes C_j'} = c_i \boxtimes \id + (-1)^i \id{} \boxtimes c_j'
+\]
+Damit ist $\enbrace*{(C \boxtimes C')_., c_.''} $ ein Kettenkomplex über $(X,A) \times (X',A')$. Somit erhalten wir 
+\[	  
+	\begin{tikzcd}
+		K^{-n}(X,A) \times K^{-m}(X',A') \dar["a \times a","\cong"'] \rar["*"] & K^{-(n+m) \enbrace*{(X,A) \times (X',A')} } \dar["a","\cong"'] \\
+		K \enbrace*{(X,A) \times (I, \partial I)^n}^c \times K \enbrace*{(X',A') \times (I, \partial I)^m}^c \rar &
+		K^{-(n+m)} \enbrace*{(X,A) \times (X',A') \times (I,\partial I)^{n+m}}    
+	\end{tikzcd}
+\]
+Für $X=X'$ und $A \subset X, B \subset X$ sei 
+$\Delta \colon (X,A \cup B) \to (X,A) \times (X,B)= (X\times X, X \times B \cup A \times X) \supset (A \cup B) \times (A \cup B)$. Dies induziert 
+$K^{-n(n+m)} \enbrace*{(X,A) \times (X,B)} \to K^{-(n+m)}(X, A \cup B) $. Wir definieren
+\[
+	\cdot := \Delta^* \circ * \colon K^{-n}(X,A) \times K^{-m}(X,B) \xrightarrow{*} K^{-(n+m)} \enbrace*{(X,A) \times (X,B)}\xrightarrow{\Delta^*} K^{-(n+m)}(X,A \cup B)   
+\]
+\begin{itemize}
+	\item Insbesondere ist $K^*(X) = \bigoplus_{n=0}^\infty K^{-n}(X)$ ein graduiert kommutativer Ring mit $1$, das heißt es gilt für $x \in K^i(X)$ und $y \in K^j(X)$
+	\[
+		x \cdot y = (-1)^{i \cdot j} y \cdot x
+	\]
+	\item Für $f \colon X \to Y$ erhalten wir einen Ringhomomorphismus $f^* \colon K^*(Y) \to K^*(X)$.
+	\item Für $A \subset B \subset X$ ist $K^*(B,A)$ ein Modul über $K^*(X)$.
+\end{itemize}
+
+\subsection*{Lemma}
+Für $a,a' \in K^0(X)$, $b,b' \in K^0(Y)$ ist 
+\[
+	(a \cdot a') * (b \cdot b') = (a * b) \cdot (a' * b')
+\]
+\minisec{Beweis}
+\emph{Richtiges Diagramm hinschreiben.}
+
+\newpage
+\section*{3.2 Bott-Periodizität -- eine Beweisskizze}
+Welche $K$-Gruppen können wir berechnen? 
+\begin{itemize}
+	\item $K^0(\pt) = \Gr(\mathds{N}) \cong \mathds{Z} $
+	\item $K^{-1}(\pt) = K^0(I,\partial I) = 0$
+	\item Tripel $(E_1,f,E_0)$ über $(I,\partial I)$ mit $f \colon E_1|_{\partial I} \xrightarrow{\cong} E_0|_{\partial I}$. Ohne Beschränkung der Allgemeinheit sei 
+	$E_i \cong \mathds{C}^n \times I$. Da $\GL_n(\mathds{C})$ wegzusammenhängend ist, gibt es eine Erweiterung von $f$ zu einem Isomorphismus über $I$. 
+	\[
+		f_0 \colon \mathds{C}^n \times \set{0} \xrightarrow{\cong} \mathds{C}^n \times \set{0} \\
+		f_1 \colon \mathds{C}^n \times \set{1} \xrightarrow{\cong} \mathds{C}^n \times \set{1}     
+	\]
+	$f$ entspricht also zwei Elementen von $\GL_n(\mathds{C})$. $g \colon \mathds{C}^n \times I \xrightarrow{\cong}  \mathds{C}^n \times I \leadsto I \to \GL_n(\mathds{C})$ 
+\end{itemize}
+Übung $KO ^{-1}(\pt)$ ?
+
+Was ist $K^0(S^1)$? 
+\[
+	\begin{tikzcd}[row sep=0.4em] 
+		& \benbrace*{S^1 \times \mathds{C},0}_\st \rar[mapsto] & \benbrace*{\mathds{C},0}_\st = 1  \\
+		0=K^0(I,\partial I) \cong K^0(S^1,\pt) \rar & K^0(S^1) \rar & K^0(\pt) \cong \mathds{Z}
+	\end{tikzcd}
+\]
+Aus der unteren Zeile folgt $ K^0(S^1)$ ist Untergruppe von $\mathds{Z}$. Aus der oberen folgt dann weiter $K^0(S^1)\cong \mathds{Z}$.
+
+Gibt es eine nichttriviale Klasse in $K^0(S^2)$? Wir haben einen Homöomorphismus 
+\[
+	S^2 \cong \mathds{C}P^1 = \set[V \subset \mathds{C}^2]{V \text{ ist eindimensionaler Untervektorraum}} 
+\]
+Betrachte $H= \set[(v,V) \in \mathds{C}^2 \times \mathds{C}P^1]{v \in V} $. Dies ist ein eindimensionales Vektorbündel über $\mathds{C}P^1$. Was ist 
+$[H,0]_\st \in K^0(\mathds{C}P^1)$? Welche Gestalt haben Vektorbündel über $X \times S^2$? Sei $S^2= D_+ \cup D_-$ die Zerlegung in die \enquote{obere} und die 
+\enquote{untere} Halbsphäre. Sei $E \to X \times S^2$ ein Vektorbündel. Sei $z_0 \in S^1= D_+ \cap D_- \subset S^2$ ein Basispunkt von $S^2$. Sei 
+$F= \iota^* E$ mit $\iota \colon X \to X \times S^2$ gegeben durch $x \mapsto(x,z_0)$. Wegen $D_+ \cong D_- \simeq \set{\pt}$ ist $\pr_X^\pm \colon X \times D_{\pm} \to X$
+eine Homotopieäquivalenz mit Homotopieinversem $\iota_{pm} \colon X \to X \times D_\pm$, $x \mapsto (x,z_0)$. Daher ist $E|_{X \times D_\pm} \cong \iota_\pm^*F$.
+
+Dann ist $E$ isomorph zur Verklebung von $\iota_+^*F$ und $\iota_-^* F$ entlang eines Isomorphismus, der gegeben ist durch eine stetige Abbildung $S^1 \to \textsc{Iso}(F)$, 
+wobei $\textsc{Iso}(F)$ der Raum aller Vektorbündelisomorphismen $F \to F$ ist. Wir schreiben $E \cong \set{F,f}$. Die Isomorphieklasse von $\set{F,f}$ hängt nur noch der 
+Homotopieklasse von $f$ ab.
+\missingfigure{Diagramm}
+
+\minisec{Beispiel}
+Übergangsabbildung von $H$: Identifiziere $\mathds{C}P^1$ mit $\mathds{C} \cup \set{\infty} \cong S^2 $ mit Hilfe der Abbildung 
+$\mathds{C} \cup \set{\infty} 7to \mathds{C}P^1 $, definiert duch $z \mapsto \benbrace*{z:1}, \infty \mapsto \benbrace*{1:0}$. Die Umkehrabbildung ist gegeben durch
+\[
+	\benbrace*{z_1,z_2} \mapsto \begin{cases}
+		z_1/z_2, &\text{ falls }z_2 \not=0\\
+		\infty , & \text{ sonst}
+	\end{cases}
+\]
+Nun ist
+\begin{align*}
+	H &= \set[(z,v) \in (\mathds{C} \cup \set{\infty}) \times \mathds{C}^2]{v= \lambda(z,1), \text{ falls } z \not= \infty \text{ oder } v=(\lambda,0) \text{ falls } 
+	z=\infty} \\
+	D_+ &= \set[z \in (\mathds{C} \cup \set{\infty})]{\abs*{z} \le 1 } \\
+	D_- &= \set[z \in (\mathds{C} \cup \set{\infty})]{ \abs*{z} \ge 1 \text{ oder } z= \infty }  
+\end{align*}
+Trivialisierungen:
+\[
+	\begin{tikzcd}
+		H\big|_{D_+} \rar["\cong"] & D_+ \times \mathds{C} \\
+		(z, (v_1,v_2)) \rar[mapsto] & (z,v_2) \\
+		(z,(wz,w)) & (z,w) \lar[mapsto]
+	\end{tikzcd}
+	, 
+	\begin{tikzcd}
+		H\big|_{D_-} \rar["\cong"] & D_- \times \mathds{C} \\
+		(z, (v_1,v_2)) \rar[mapsto] & (z,v_1) \\
+		(z,(w,w/z)) & (z,w) \lar[mapsto]
+	\end{tikzcd}
+\]
+Wir setzen $F=S^1  \times \mathds{C}$ und $f \colon S^1 \to \textsc{Iso}(S^2 \times \mathds{C})$, $z \mapsto \enbrace*{w \mapsto wz}$, in jeder Faser Multiplikation 
+mit $z$. Es ist nun $H= \set{\mathds{C}, w \mapsto w \cdot z} = \set{\mathds{C},z} $.
+
+Weitere Beispiele
+\[
+	H^{\otimes K} = \set{\mathds{C}, w \mapsto w \cdot z^k} \quad , \quad H \oplus H = \set{\mathds{C} \oplus \mathds{C}, z \mapsto \begin{pmatrix}
+		z & 0 \\ 0 & z \end{pmatrix}} 
+\]
+Da $\GL_2(\mathds{C})$ wegzusammenhängend ist, gibt es einen Pfad zwischen $\begin{psmallmatrix}1 & 0 \\ 0 & 1 \end{psmallmatrix}$ und
+$\begin{psmallmatrix} 0& 1 \\ -1 & 0 \end{psmallmatrix}$. Betrachte 
+\todo[inline]{hier fehlt noch was}
+% \[
+% 	\begin{tikzcd}
+% 		S^1 \times I \rar & \GL_n(\mathds{C})
+% 		(z,t) \rar[mapsto] &\begin{pmatrix} z & 0 \\ 0 & 1 \end{pmatrix} \gamma_t \cdot
+% 	\end{tikzcd}
+% \]
+Hieraus erhalten wir
+\[
+	H^{\otimes 2} \oplus \Underbrace{(\mathds{C} \times S^2)}{\cong \set{C \oplus \mathds{C}, \begin{pmatrix}
+		z^2 & 0 \\ 0 & 1
+	\end{pmatrix}}} \cong \Underbrace{H \oplus  H}{ \cong \set{\mathds{C} \oplus  \mathds{C}, \begin{pmatrix}
+		z & 0 \\
+		0 & z
+	\end{pmatrix}}  }
+\]
+In $K$-Theorie
+\[
+	\benbrace*{H,0} \cdot \benbrace*{H,0} + \benbrace*{\mathds{C},0}    = \benbrace*{H^{\otimes 2} \oplus \mathds{C},0}_\st 
+	= \benbrace*{H \oplus H,0}_\st = 2 \cdot \benbrace*{H,0} 
+\]
+in $K^0(S^2)$ gilt die Relation $\benbrace*{H,0}^2 - 2 \benbrace*{H,0} + \benbrace*{\mathds{C},0}= 0 $
+\[
+	(x-1)^2 = X^2 - 2x +1 = 0
+\]
+
+\subsection*{Theorem Bott '58}
+$\mu \colon K^1(X) \otimes \nicefrac{\mathds{Z}[H]}{(H-1)^2} \to K^0(X) \otimes  K^0(S^2) \to K^0(X \times S^2)$ ist ein Ringisomorphismus . Insbesondere $K^0(S^2) \cong \nicefrac{\mathds{Z}[H]}{(H-1)^2}$
 % section 3 (end)
 
 

@@ -4,7 +4,8 @@
 
 \subsection{Grundlagen aus der elementaren Zahlentheorie und Gruppentheorie}
 \subsubsection{Zahlen, Darstellung von Zahlen}
-	Die Zahlbereiche $\NN \subseteq \ZZ \subseteq \QQ \subseteq \RR \subseteq \CC$ sind aus den \marginnote{[2]} Grundvorlesungen bekannt. Bezüglich den Verknüpfungen $+$ und $\cdot$ sind verschiedene Axiome erfüllt, die diese Zahlbereiche zu interessante algebraische Strukturen machen:	
+	Die Zahlbereiche $\NN \subseteq \ZZ \subseteq \QQ \subseteq \RR \subseteq \CC$ sind aus den \marginnote{[2]} Grundvorlesungen bekannt. 
+	Bezüglich den Verknüpfungen $+$ und $\cdot$ sind verschiedene Axiome erfüllt, die diese Zahlbereiche zu interessante algebraische Strukturen machen:	
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
 	\hline  \textbf{Halbgruppe}		&	\textbf{Gruppe}								&	\textbf{Ring}			&	\textbf{Körper} \\
@@ -16,14 +17,16 @@
 	\hline
 	\end{tabular} 
 \end{center}
-	Weiter sind $\QQ$ und $\RR$ angeordnete Körper, d.h. es gibt eine Anordnungsrelation $\leq$, die sich mit $+$ und $\cdot$ verträgt. Für $\CC$ ist eine solche Anordnung nicht mehr möglich.
+	Weiter sind $\QQ$ und $\RR$ angeordnete Körper, d.h. es gibt eine Anordnungsrelation $\leq$, die sich mit $+$ und $\cdot$ verträgt. 
+	Für $\CC$ ist eine solche Anordnung nicht mehr möglich.
 	
 \begin{defn}[Halbgruppe]
 	Eine Menge $H \neq \emptyset$ mit Verknüpfung $*\colon H \times H \rightarrow H$ heißt \Index{Halbgruppe}, falls $*$ assoziativ ist, d.h. für alle $a,b,c \in H$ gilt $a*(b*c) = (a*b)*c$.
 \end{defn}
 
 \begin{defn}[Gruppe]
-	Eine Halbgruppe $(G,*)$ heißt \Index{Gruppe}, falls es ein neutrales Element $e \in G$ gibt mit $e*g = g*e = g$ für alle $g \in G$, und falls zu jedem $g \in G$ ein inverses Element $h \in G$ existiert mit $h * g = g * h = e$. Wir schreiben auch $g^{-1}, \frac{1}{g}$ oder $-g$ für $h$.
+	Eine Halbgruppe $(G,*)$ heißt \Index{Gruppe}, falls es ein neutrales Element $e \in G$ gibt mit $e*g = g*e = g$ für alle $g \in G$, und falls zu jedem $g \in G$ ein inverses Element $h \in G$ existiert mit $h * g = g * h = e$. 
+	Wir schreiben auch $g^{-1}, \frac{1}{g}$ oder $-g$ für $h$.
 \end{defn}
 
 \begin{defn}[abelsche Gruppe]
@@ -35,40 +38,64 @@
 \end{defn}
 
 \begin{bem}
-	Die Addition $+$ ist in einem Ring stets kommutativ. Ein Ring heißt kommutativ, wenn die Multiplikation $\cdot$ kommutativ ist. Soll der Nullring $R = \setnull$ mit $1 = 0$ ausgeschlossen werden, fordert man zusätzlich noch $1 \neq 0$ in den Ringaxiomen.
+	Die Addition $+$ ist in einem Ring stets kommutativ. 
+	Ein Ring heißt kommutativ, wenn die Multiplikation $\cdot$ kommutativ ist. 
+	Soll der Nullring $R = \setnull$ mit $1 = 0$ ausgeschlossen werden, fordert man zusätzlich noch $1 \neq 0$ in den Ringaxiomen.
 \end{bem}
 
 \begin{defn}[Einheit, Einheitengruppe]
-	Die in einem Ring $(R,+,\cdot)$ bezüglich $\cdot$ invertierbaren Elemente heißen \bet{Einheiten}. Die Menge der Einheiten in $R$ wird mit $R^*$ bezeichnet, d.h. also $R^* := \{a \in R : \exists b \in R \text{ mit } a \cdot b = b \cdot a = 1\}$. Damit ist $(R^*,\cdot,1)$ also eine Gruppe. \index{Einheit}
+	Die in einem Ring $(R,+,\cdot)$ bezüglich $\cdot$ invertierbaren Elemente heißen \bet{Einheiten}. 
+	Die Menge der Einheiten in $R$ wird mit $R^*$ bezeichnet, d.h. also $R^* := \{a \in R : \exists b \in R \text{ mit } a \cdot b = b \cdot a = 1\}$. 
+	Damit ist $(R^*,\cdot,1)$ also eine Gruppe. \index{Einheit}
 \end{defn}
 
 \begin{defn}[Körper]
 	Ein \Index{Körper} $(K,+,\cdot)$ ist ein kommutativer Ring mit $1 \neq 0$, für den $K^* = K \setminus \setnull$ gilt.
 \end{defn}
 
-Algebraische Strukturen dieser Art können wir auch in Teilmengen von $\ZZ$ auffinden und diese für kryptographische Anwendungen ausnutzen. Darum geht es in §\ref{sec:para1} dieser Vorlesung. Dabei wird klar, dass die Anwendungen auch -- teilweise -- in beliebigen Gruppen, Ringen und Körpern möglich sind. Die Gruppen, die durch elliptische Kurven gegeben sind, haben sich in der Praxis dann als vorteilhaft herausgestellt.
+Algebraische Strukturen dieser Art können wir auch in Teilmengen von $\ZZ$ auffinden und diese für kryptographische Anwendungen ausnutzen. 
+Darum geht es in §\ref{sec:para1} dieser Vorlesung. 
+Dabei wird klar, dass die Anwendungen auch -- teilweise -- in beliebigen Gruppen, Ringen und Körpern möglich sind. 
+Die Gruppen, die durch elliptische Kurven gegeben sind, haben sich in der Praxis dann als vorteilhaft herausgestellt.
 
-Wenn wir Teilmengen von $\ZZ$ auch praktisch untersuchen möchten, wird die Frage wichtig, wie man ganze Zahlen auf geschickte und kompakte Art darstellen kann. Dafür benutzen wir im Alltag das Dezimalsystem, für Rechenmaschinen ist auch das Binär- und das Hexadezimalsystem nützlich. Dabei werden die Ziffern $0,1,\dots 9$ bzw. $0,1$ bzw. $0,1,\dots, 9, A, \dots, F$ verwendet. Allgemein erhalten wir die $g$-adische Darstellung von $n \in \NN$ so:
+Wenn wir Teilmengen von $\ZZ$ auch praktisch untersuchen möchten, wird die Frage wichtig, wie man ganze Zahlen auf geschickte und kompakte Art darstellen kann. 
+Dafür benutzen wir im Alltag das Dezimalsystem, für Rechenmaschinen ist auch das Binär- und das Hexadezimalsystem nützlich. 
+Dabei werden die Ziffern $0,1,\dots 9$ bzw. $0,1$ bzw. $0,1,\dots, 9, A, \dots, F$ verwendet. 
+Allgemein erhalten wir die $g$-adische Darstellung von $n \in \NN$ so:
 
 \begin{satz}
 \label{satz_g-adisch}
-	Sei $g \in \NN, g \geq 2$ und $n \in \NN$. Dann gibt es ein $k \in \NN_0$ und $c_k, c_{k-1}, \dots, c_0 \in \{0, \dots, g-1\}$ (genannt "Ziffern"), sodass $n = c_k g^k + c_{k-1} g^{k-1} + \dots + c_0 = \sum_{i=0}^k c_i g^i$. Fordern wir $c_k \neq 0$, ist $k$ und die Folge $c_k, \dots, c_1, c_0$ eindeutig bestimmt.
+	Sei $g \in \NN, g \geq 2$ und $n \in \NN$. 
+	Dann gibt es ein $k \in \NN_0$ und $c_k, c_{k-1}, \dots, c_0 \in \{0, \dots, g-1\}$ (genannt "Ziffern"), sodass $n = c_k g^k + c_{k-1} g^{k-1} + \dots + c_0 = \sum_{i=0}^k c_i g^i$. 
+	Fordern wir $c_k \neq 0$, ist $k$ und die Folge $c_k, \dots, c_1, c_0$ eindeutig bestimmt.
 \end{satz}
 
 \minisec{Beweis}
 	\begin{description}
-	\item[Existenz:] Sei $k \in \NN_0$ so, dass $g^k \leq n < g^{k+1}$ gilt, das heißt wir setzen $k := \floor*{\frac{\log(n)}{\log(g)}}$. Zeige durch Induktion nach $k$ die Existenz: \\
+	\item[Existenz:] Sei $k \in \NN_0$ so, dass $g^k \leq n < g^{k+1}$ gilt, das heißt wir setzen $k := \floor*{\frac{\log(n)}{\log(g)}}$. 
+	Zeige durch Induktion nach $k$ die Existenz: \\
 	$k = 0$: Setze $c_0 := n$. \\
-	$k \rightsquigarrow k+1$: Sei $g^{k+1} \leq n < g^{k+2}$. Setze $n' = n - \floor*{\frac{n}{g^{k+1}}} \cdot g^{k+1}$. Es folgt $0 \leq n' < g^{k+1}$, d.h. auf $n'$ ist die Induktionsvoraussetzung anwendbar. Nach dieser hat $n'$ eine $g$-adische Zifferndarstellung $n' = \sum\limits_{i=0}^{k} c_i g^i$. Wegen $1 \leq  \frac{n}{g^{k+1}} < g$ ist $1 \leq \floor*{\frac{n}{g^{k+1}}} < g$, also setze $c_{k+1} := \floor*{\frac{n}{g^{k+1}}}$. \\
+	$k \rightsquigarrow k+1$: Sei $g^{k+1} \leq n < g^{k+2}$. 
+	Setze $n' = n - \floor*{\frac{n}{g^{k+1}}} \cdot g^{k+1}$. 
+	Es folgt $0 \leq n' < g^{k+1}$, d.h. auf $n'$ ist die Induktionsvoraussetzung anwendbar. 
+	Nach dieser hat $n'$ eine $g$-adische Zifferndarstellung $n' = \sum\limits_{i=0}^{k} c_i g^i$. 
+	Wegen $1 \leq  \frac{n}{g^{k+1}} < g$ ist $1 \leq \floor*{\frac{n}{g^{k+1}}} < g$, also setze $c_{k+1} := \floor*{\frac{n}{g^{k+1}}}$. \\
 	$\Rightarrow  n = c_{k+1} g^{k+1} + n' = \sum\limits_{i=0}^{k+1} c_i g^i$.
-	\item[Eindeutigkeit:] Sind $\sum\limits_{i=0}^{k} a_i g^i = m = \sum\limits_{i=0}^{r} b_i g^i$ zwei verschiedene Darstellungen von $m \in \NN$. Ist $r > k$, so sei $a_{k+1} = \dots = a_r := 0$, sonst sei $b_{r+1} = \dots = b_k := 0$, falls $r < k$. Dann sei $l := \max \{i \in \NN_0 : i \leq \max\{k,r\}, a_i \neq b_i \}$ die größte Stelle, an der sich die Darstellungen unterscheiden. \\
+	\item[Eindeutigkeit:] Sind $\sum\limits_{i=0}^{k} a_i g^i = m = \sum\limits_{i=0}^{r} b_i g^i$ zwei verschiedene Darstellungen von $m \in \NN$. 
+	Ist $r > k$, so sei $a_{k+1} = \dots = a_r := 0$, sonst sei $b_{r+1} = \dots = b_k := 0$, falls $r < k$. 
+	Dann sei $l := \max \{i \in \NN_0 : \linebreak i \leq \max\{k,r\}, a_i \neq b_i \}$ die größte Stelle, an der sich die Darstellungen unterscheiden. \\
 	$\Rightarrow 0 = \sum\limits_{i=0}^l \underbrace{(a_i-b_i)}_{=0 \text{ für } i>l} g^i \Rightarrow \underbrace{|b_l - a_l|}_{\geq 1} g^l = \abs*{\sum\limits_{i=0}^{l-1} (a_i - b_i)g^i}$ \\
 	$\Rightarrow g^l \leq \sum\limits_{i=0}^{l-1} |a_i-b_i| g^i \leq \sum\limits_{i=0}^{l-1} (g-1) g^i = (g-1) \frac{g^l - 1}{g-1} = g^l - 1 \quad \lightning$ \qed
 	\end{description}
 
 
 \begin{defn}[$g$-adische Darstellung]
-	Die Ziffernfolge $c_k, c_{k-1}, \dots c_0$ aus Satz \ref{satz_g-adisch} heißt \bet{$g$-adische Darstellung} von $n$. Die Zahl $c_k$ heißt \Index{Leitziffer}, die Zahl $c_0$ die \Index{Endziffer}. Die Zahl $k+1$ heißt \Index{Stellenzahl} bzw. \textbf{Länge} der $g$-adischen Darstellung. Die Zahl $g$ heißt auch \textbf{Basis} der Darstellung. Eine \bet{$m$-Bit-Zahl} ist eine Zahl $n \in \NN$ der Länge $\leq m$ zur Basis $2$. \index{g-adische Darstellung@$g$-adische Darstellung} \index{n-Bit-Zahl@$n$-Bit-Zahl}
+	Die Ziffernfolge $c_k, c_{k-1}, \dots c_0$ aus Satz \ref{satz_g-adisch} heißt \bet{$g$-adische Darstellung} von $n$. 
+	Die Zahl $c_k$ heißt \Index{Leitziffer}, die Zahl $c_0$ die \Index{Endziffer}. 
+	Die Zahl $k+1$ heißt \Index{Stellenzahl} bzw. \textbf{Länge} der $g$-adischen Darstellung. 
+	Die Zahl $g$ heißt auch \textbf{Basis} der Darstellung. 
+	Eine \bet{$m$-Bit-Zahl} ist eine Zahl $n \in \NN$ der Länge $\leq m$ zur Basis $2$. 
+	\index{g-adische Darstellung@$g$-adische Darstellung} \index{n-Bit-Zahl@$n$-Bit-Zahl}
 \end{defn}
 
 \begin{bem}
@@ -85,21 +112,28 @@ Wenn wir Teilmengen von $\ZZ$ auch praktisch untersuchen möchten, wird die Frag
  \end{equation}
 \end{bsp}
 
-Die bekannten schriftlichen Additions- und Multiplikationsrechnungen, die unter Beachtung von Überträgen ziffernweise geschehen, können in jeder Basis ausgeführt werden. Es gibt weiter für die Multiplikation großer Zahlen (d.h. mit großer Stellenzahl bis etwa $2 \cdot 10^{10}$) schnelle Algorithmen, die wir hier aber nicht näher behandeln möchten; etwa mit der schnellen Fouriertransformation (FFT) nach Schönhage/Strassen\footnote{siehe \url{http://de.wikipedia.org/wiki/Sch\%C3\%B6nhage-Strassen-Algorithmus}}.
+Die bekannten schriftlichen Additions- und Multiplikationsrechnungen, die unter Beachtung von Überträgen ziffernweise geschehen, können in jeder Basis ausgeführt werden. 
+Es gibt weiter für die Multiplikation großer Zahlen (d.h. mit großer Stellenzahl bis etwa $2 \cdot 10^{10}$) schnelle Algorithmen, die wir hier aber nicht näher behandeln möchten; etwa mit der schnellen Fouriertransformation (FFT) nach Schönhage/Strassen\footnote{siehe \url{http://de.wikipedia.org/wiki/Sch\%C3\%B6nhage-Strassen-Algorithmus}}.
 
-Der Beweis von Satz \ref{satz_g-adisch} zeigt, dass die Länge von $n$ gleich $\floor*{\frac{\log(n)}{\log(g)}}+1$ ist, so viele Ziffern müssen zum Hinschreiben bzw. Eintippen von $n$ angegeben werden. Bei verschiedenen Basen ändert sich hier nur der Faktor $\frac{1}{\log(g)}$. Deswegen sagt man, die Länge sei $\oh(\log(n))$ und meint damit die Aussage: Es existiert eine Konstante $C > 0$, sodass $k + 1 \leq C \cdot \log(n)$. (Landau-Symbolik\footnote{siehe \url{http://de.wikipedia.org/wiki/Landau-Symbole}}, "Groß-O-Notation")
+Der Beweis von Satz \ref{satz_g-adisch} zeigt, dass die Länge von $n$ gleich $\floor*{\frac{\log(n)}{\log(g)}}+1$ ist, so viele Ziffern müssen zum Hinschreiben bzw. Eintippen von $n$ angegeben werden. 
+Bei verschiedenen Basen ändert sich hier nur der Faktor $\frac{1}{\log(g)}$. 
+Deswegen sagt man, die Länge sei $\oh(\log(n))$ und meint damit die Aussage: Es existiert eine Konstante $C > 0$, sodass $k + 1 \leq C \cdot \log(n)$. 
+(Landau-Symbolik\footnote{siehe \url{http://de.wikipedia.org/wiki/Landau-Symbole}}, "Groß-O-Notation")
 
 Entscheidend für das Studium von $\ZZ$ ist der Grundbegriff der Teilbarkeit.
 \begin{defn}[Teilbarkeit]
-	Für $a,b \in \ZZ$ heißt $a$ \Index{Teiler} von $b$ bzw. $a$ \bet{teilt} $b$, in Zeichen $a \mid b$, falls ein $c \in \ZZ$ existiert mit $ac = b$. Ist $a$ kein Teiler von $b$, schreibt man $a \nmid b$.
+	Für $a,b \in \ZZ$ heißt $a$ \Index{Teiler} von $b$ bzw. $a$ \bet{teilt} $b$, in Zeichen $a \mid b$, falls ein $c \in \ZZ$ existiert mit $ac = b$. 
+	Ist $a$ kein Teiler von $b$, schreibt man $a \nmid b$.
 \end{defn}
 
 \begin{bsp}
-	$3 \mid 12$, $4 \mid 0$, $0 \mid 0$, $7 \nmid 12$, $0 \nmid 4$. Es kann $0$ nur die $0$ teilen.
+	$3 \mid 12$, $4 \mid 0$, $0 \mid 0$, $7 \nmid 12$, $0 \nmid 4$. 
+	Es kann $0$ nur die $0$ teilen.
 \end{bsp}
 
 \begin{defn}[Primzahl]
-	Eine natürliche Zahl $p \in \NN$ heißt \Index{Primzahl} bzw. \bet{prim}, wenn sie genau zwei Teiler in $\NN$ besitzt (nämlich $1$ und $p$, $1 \neq p$). Eine natürliche Zahl $n > 1$ heißt \Index{zusammengesetzt}, falls $n$ keine Primzahl ist. 
+	Eine natürliche Zahl $p \in \NN$ heißt \Index{Primzahl} bzw. \bet{prim}, wenn sie genau zwei Teiler in $\NN$ besitzt (nämlich $1$ und $p$, $1 \neq p$). 
+	Eine natürliche Zahl $n > 1$ heißt \Index{zusammengesetzt}, falls $n$ keine Primzahl ist. 
 \end{defn}
 
 Primzahlen sind die "Bausteine" der natürlichen Zahlen:
@@ -110,42 +144,64 @@ Primzahlen sind die "Bausteine" der natürlichen Zahlen:
 \end{satz}
 
 \begin{bem}
-	Lässt man die letzte Bedingung weg, ist die Darstellung eindeutig bis auf die Reihenfolge der Primpotenzen. Die Zahl $e_i$ ist dabei die Vielfachheit (auch \Index{Exponent} genannt), mit der $p_i$ als Faktor in $n$ auftritt, d.h. $p_i^{e_i} \mid n$, aber $p^{e_i+1} \nmid n$. Dafür gibt es das Symbol $p^{e_i} \parallel n$, und die Primfaktorzerlegung lässt sich kompakt auch schreiben als $n = \prod\limits_{p} p^{e(p)}$, wobei $e(p) := e$ mit $p^e \parallel n$, falls $p \mid n$, und $e(p) := 0$, falls $p \nmid n$. Weiter ist $\omega(n) := r$ die Anzahl der verschiedenen Primteiler von $n$.
+	Lässt man die letzte Bedingung weg, ist die Darstellung eindeutig bis auf die Reihenfolge der Primpotenzen. 
+	Die Zahl $e_i$ ist dabei die Vielfachheit (auch \Index{Exponent} genannt), mit der $p_i$ als Faktor in $n$ auftritt, d.h. $p_i^{e_i} \mid n$, aber $p^{e_i+1} \nmid n$. 
+	Dafür gibt es das Symbol $p^{e_i} \parallel n$, und die Primfaktorzerlegung lässt sich kompakt auch schreiben als $n = \prod\limits_{p} p^{e(p)}$, wobei $e(p) := e$ mit $p^e \parallel n$, falls $p \mid n$, und $e(p) := 0$, falls $p \nmid n$. 
+	Weiter ist $\omega(n) := r$ die Anzahl der verschiedenen Primteiler von $n$.
 \end{bem}
 
 \minisec{Beweis}
 	\begin{description}
-		\item[Existenz:] Ist $n$ prim, ist nichts zu zeigen, und ist $n$ nicht prim, gibt es $k, l \in \NN \setminus \{1\}$ mit $n = kl$. Da $\min\{k,l\} > 1$, folgt $\max \{k,l\} < n$. Nach Induktionsvoraussetzung sind also $k,l$ Produkte von Potenzen von Primzahlen, also auch $n = kl$.
-		\item[Eindeutigkeit:] Sei $n > 1$ minimal mit zwei verschiedenen Zerlegungen $n = \prod\limits_{i=1}^{r} p_i^{e_i} = \prod\limits_{i=1}^{s} q_i^{f_i}$, die $p_i, q_i$ prim und angeordnet. Da $p_1 \neq q_i$ für alle $i$ gilt (sonst hätte $\frac{n}{p_1} < n$ zwei verschiedene Zerlegungen), ist $\ggT(p_1,q_i) = 1$, und mit den Zerlegungen folgt $p_1 \mid q_1^{f_1 - 1}$ aus Lemma \ref{lemma_21}. Die Fortsetzung des Verfahrens zeigt schließlich $p_1 \mid q_s$, was wegen $\ggT(p_1,q_s) = 1$ ein Widerspruch ist. \qed
-		(Beachte: Zum Beweis von Lemma \ref{lemma_21} wurde nie die Eindeutigkeit der Primfaktorzerlegung benutzt.)
+		\item[Existenz:] Ist $n$ prim, ist nichts zu zeigen, und ist $n$ nicht prim, gibt es $k, l \in \NN \setminus \{1\}$ mit $n = kl$. 
+		Da $\min\{k,l\} > 1$, folgt $\max \{k,l\} < n$. 
+		Nach Induktionsvoraussetzung sind also $k,l$ Produkte von Potenzen von Primzahlen, also auch $n = kl$.
+		\item[Eindeutigkeit:] Sei $n > 1$ minimal mit zwei verschiedenen Zerlegungen $n = \prod\limits_{i=1}^{r} p_i^{e_i} = \prod\limits_{i=1}^{s} q_i^{f_i}$, die $p_i, q_i$ prim und angeordnet. 
+		Da $p_1 \neq q_i$ für alle $i$ gilt (sonst hätte $\frac{n}{p_1} < n$ zwei verschiedene Zerlegungen), ist\linebreak $\ggT(p_1,q_i) = 1$, und mit den Zerlegungen folgt $p_1 \mid q_1^{f_1 - 1}$ aus Lemma \ref{lemma_21}. 
+		Die Fortsetzung des Verfahrens zeigt schließlich $p_1 \mid q_s$, was wegen $\ggT(p_1,q_s) = 1$ ein Widerspruch ist. 
+		(Beachte: Im Beweis von Lemma \ref{lemma_21} wird nie die Eindeutigkeit der Primfaktorzerlegung benutzt.) \qed
 	\end{description}
 
-Die Eindeutigkeit der Primfaktorzerlegung zeigt, dass auch diese eine Möglichkeit zur Darstellung natürlicher Zahlen ist. Diese ist jedoch unpraktisch, weil das folgende Problem im Allgemeinen schwer zu lösen ist, worauf einige kryptographische Verfahren (insb. RSA) beruhen.
+Die Eindeutigkeit der Primfaktorzerlegung zeigt, dass auch diese eine Möglichkeit zur Darstellung natürlicher Zahlen ist. 
+Diese ist jedoch unpraktisch, weil das folgende Problem im Allgemeinen schwer zu lösen ist, worauf einige kryptographische Verfahren (insb. RSA) beruhen.
 
 \begin{defn}[Faktorisierungsproblem]
 	Zu einer natürlichen zusammengesetzten Zahl $n > 1$ bestimme man einen nichttrivialen Teiler $t$ mit $1 < t < n$.
 \end{defn}
 
-Klar: Ist das Faktorisierungsproblem rechnerisch leicht zu machen, kann auch (durch Iteration) die Primfaktorzerlegung von $n$ leicht bestimmt werden. In der Praxis, wenn $n$ nicht gerade schon von einer speziellen Form ist, können Teiler großer Zahlen $n$ jedoch nur sehr schwer aufgefunden werden.
+Klar: Ist das Faktorisierungsproblem rechnerisch leicht zu machen, kann auch (durch Iteration) die Primfaktorzerlegung von $n$ leicht bestimmt werden. 
+In der Praxis, wenn $n$ nicht gerade schon von einer speziellen Form ist, können Teiler großer Zahlen $n$ jedoch nur sehr schwer aufgefunden werden.
 \begin{itemize}
 	\item Das derzeit schnellste algorithmische Verfahren zur Faktorisierung (auf einem klassischen Computer) ist das \Index{Zahlkörpersieb} mit einer Laufzeit von nur $\oh(\exp(C (\log n)^{1/3} (\log \log n)^{2/3}))$, d.h. es handelt sich um so genanntes \bet{subexponential schnelles Verfahren}, weil $(\log n)^B \ll \exp(C(\log n)^{1/3} (\log \log n)^{2/3}) \ll \exp(D \log n) = n^D$.
-	\item Peter Shor\footnote{\url{http://de.wikipedia.org/wiki/Peter_Shor}} entdeckte um 1994, dass das Faktorisierungsproblem auf einem Quantencomputer mit einer Laufzeit von (meist) nur $\oh((\log n)^3)$ sehr (d.h. polynomiell) schnell gelöst werden kann, was die Sicherheit gängiger Kryptoverfahren wie RSA untergräbt. Allerdings ist die Konstruktion solcher Quantencomputer (physikalisch) extrem schwierig, diverse Forschergruppen arbeiten daran. Am 2.1.2014 meldete die Washington Post unter Berufung auf Dokumente von Edward Snowden\footnote{\url{http://de.wikipedia.org/wiki/Edward_Snowden}}, dass die NSA an der Entwicklung eines kryptographisch mützlichen Quantencomputers arbeitet\footnote{\href{http://www.washingtonpost.com/world/national-security/nsa-seeks-to-build-quantum-computer-that-could-crack-most-types-of-encryption/2014/01/02/8fff297e-7195-11e3-8def-a33011492df2_story.html}{Link zum Artikel}}.
+	\item Peter Shor\footnote{\url{http://de.wikipedia.org/wiki/Peter_Shor}} entdeckte um 1994, dass das Faktorisierungsproblem auf einem Quantencomputer mit einer Laufzeit von (meist) nur $\oh((\log n)^3)$ sehr (d.h. polynomiell) schnell gelöst werden kann, was die Sicherheit gängiger Kryptoverfahren wie RSA untergräbt. 
+	Allerdings ist die Konstruktion solcher Quantencomputer (physikalisch) extrem schwierig, diverse Forschergruppen arbeiten daran. 
+	Am 2.1.2014 meldete die Washington Post unter Berufung auf Dokumente von Edward Snowden\footnote{\url{http://de.wikipedia.org/wiki/Edward_Snowden}}, dass die NSA an der Entwicklung eines kryptographisch mützlichen Quantencomputers arbeitet\footnote{\href{http://www.washingtonpost.com/world/national-security/nsa-seeks-to-build-quantum-computer-that-could-crack-most-types-of-encryption/2014/01/02/8fff297e-7195-11e3-8def-a33011492df2_story.html}{Link zum Artikel}}.
 	Zum Begriff Quantencomputer siehe \href{http://de.wikipedia.org/wiki/Quantencomputer}{Wikipedia}.
 \end{itemize} 
 
 Im Folgenden besprechen wir noch den ggT zweier natürlicher Zahlen, der sich in vielerlei Hinsicht als wichtig und nützlich erweist:
 \begin{defn}
-	Seien $a,b \in \ZZ$. Der \bet{größte gemeinsame Teiler} (ggT) von $a$ und $b$ in $\NN$ ist die Zahl $d := \max\{t \in \NN : t \mid a \wedge t \mid b\}$. Notation: $\ggT(a,b) := d$. Ist $\ggT(a,b) = 1$, heißen $a$ und $b$ \Index{teilerfremd}. \index{größter gemeinsamer Teiler}
+	Seien $a,b \in \ZZ$. 
+	Der \bet{größte gemeinsame Teiler} (ggT) von $a$ und $b$ in $\NN$ ist die Zahl $d := \max\{t \in \NN : t \mid a \wedge t \mid b\}$. 
+	Notation: $\ggT(a,b) := d$. 
+	Ist $\ggT(a,b) = 1$, heißen $a$ und $b$ \Index{teilerfremd}. 
+	\index{größter gemeinsamer Teiler}
 \end{defn}
-Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und $b = \prod_p p^{f(p)}$ vorliegen, kann ihr ggT leicht bestimmt werden als $\ggT(a,b) = \prod_p p^{\min(e(p),f(p))}$, z.B. $\ggT(2^3 \cdot 3^6 \cdot 5^4, 2^4 \cdot 3^5) = 2^3 \cdot 3^5$. Wegen des Faktorisierungsproblems kann dies aber so nicht praktisch umgesetzt werden. Stattdessen benutzt man den (polynomiell) schnellen euklidischen Algorithmus, vgl. Übungsaufgabe.
+Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und $b = \prod_p p^{f(p)}$ vorliegen, kann ihr ggT leicht bestimmt werden als $\ggT(a,b) = \prod_p p^{\min(e(p),f(p))}$, z.B. $\ggT(2^3 \cdot 3^6 \cdot 5^4, 2^4 \cdot 3^5) = 2^3 \cdot 3^5$. 
+Wegen des Faktorisierungsproblems kann dies aber so nicht praktisch umgesetzt werden. 
+Stattdessen benutzt man den (polynomiell) schnellen euklidischen Algorithmus, vgl. Übungsaufgabe.
 
 \begin{satz}[Teilen mit Rest]
-	Zu $a \in \ZZ, b \in \NN$ existieren eindeutigen $q,r \in \ZZ, 0 \leq r < b$ mit $a = qb + r$, nämlich $q = \floor*{\frac{a}{b}} = \max\{m \in \ZZ : m \leq \frac{a}{b}\}$ und $r = a-qb$. Dabei heißt $r$ der \bet{kleinste nichtnegative Rest}. Statt $0 \leq r < b$ kann auch $r \in \ZZ$, $\abs{r} < \frac{b}{2}$, erfüllt werden; $r$ heißt dann der \bet{absolut kleinste Rest} (bei Division durch $b$). \index{Divison mit Rest} \index{kleinster nichtnegativer Rest} \index{absolut kleinster Rest}
+	Zu $a \in \ZZ, b \in \NN$ existieren eindeutigen $q,r \in \ZZ, 0 \leq r < b$ mit $a = qb + r$, nämlich $q = \floor*{\frac{a}{b}} = \max\{m \in \ZZ : \linebreak m \leq \frac{a}{b}\}$ und $r = a-qb$. 
+	Dabei heißt $r$ der \bet{kleinste nichtnegative Rest}. 
+	Statt $0 \leq r < b$ kann auch $r \in \ZZ$, $\abs{r} < \frac{b}{2}$, erfüllt werden; $r$ heißt dann der \bet{absolut kleinste Rest} (bei Division durch $b$). 
+	\index{Divison mit Rest} \index{kleinster nichtnegativer Rest} \index{absolut kleinster Rest}
 \end{satz}
 
 \begin{satz}[Euklidischer Algorithmus]
 \label{satz_ea}
-	Seien $a,b \in \NN$. Durch fortgesetztes Teilen mit Rest erhalten wir als letzten Rest $\neq 0$ den $\ggT(a,b)$, sowie $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$ (siehe Schema). \index{Euklidischer Algorithmus}
+	Seien $a,b \in \NN$. 
+	Durch fortgesetztes Teilen mit Rest erhalten wir als letzten Rest $\neq 0$ den $\ggT(a,b)$, sowie $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$ (siehe Schema). 
+	\index{Euklidischer Algorithmus}
 \end{satz}
 
 \minisec{Beschreibung des Rechenverfahrens}
@@ -158,12 +214,15 @@ Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und 
 		&\vdots
 	\end{aligned}
 	\end{equation}
-	Das Verfahren wird fortgeführt, bis erstmals ein Rest $r_{m+1} = 0$ auftritt, was wegen $r_0 > r_1 > r_2 > \dots$ nach höchstens $b + 1$ vielen Schritten der Fall sein wird. Sind die Quotienten $q_0, \dots, q_m$ bekannt, können mit den Rekursionen \[
+	Das Verfahren wird fortgeführt, bis erstmals ein Rest $r_{m+1} = 0$ auftritt, was wegen $r_0 > r_1 > r_2 > \dots$ nach höchstens $b + 1$ vielen Schritten der Fall sein wird. 
+	Sind die Quotienten $q_0, \dots, q_m$ bekannt, können mit den Rekursionen
+	\[
 	\begin{array}{c}
 		c_{-2} = 0, c_{-1} = 1 \text{ und } c_k = q_k c_{k-1} + c_{k-2}, k=0,1,2, \dots, n \\
 		d_{-2} = 1, d_{-1} = 0 \text{ und } d_k = q_k d_{k-1} + d_{k-2}, k=0,1,2, \dots, n
-	\end{array} \]
-	die \bet{Bézout-Elemente} als $x = (-1)^{n-1}, y=(-1)^n c_{n-1}$ berechnet werden.
+	\end{array}
+	\]
+	die \bet{Bézout-Elemente} als $x = (-1)^{n-1} d_{n-1}, y=(-1)^n c_{n-1}$ berechnet werden.
 	
 	Wir behaupten also: \begin{enumerate}[(1)]
 		\item Es ist $\ggT(a,b) = r_n$.
@@ -172,28 +231,43 @@ Haben wir für $a$ und $b$ die Primfaktorzerlegungen $a = \prod_p p^{e(p)}$ und 
 
 \minisec{Beweis}
 	\begin{description}
-		\item[zu (1)]: Da $r_n \mid r_{n-1}, r_n \mid r_{n-2}, \dots, r_n \mid r_0 = b, r_n \mid r_{-1} = a$, ist $r_n$ ein Teiler von $a$ und $b$ (Teilen mit Rest von unten nach oben). Ist $d$ irgendein Teiler $\geq 1$ von $a$ und $b$, folgt $d \mid r_1 = a -q_0 b \Rightarrow d \mid r_2 = r_0 - q_1 r_1 \Rightarrow d \mid r_3 = \dots$, also auch $r_n$, sodass $d \leq r_n$ folgt (Teilen mit Rest von oben nach unten). Somit ist $r_n = \ggT(a,b)$.
-		\item[zu (2)]: Induktiv kann $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$ gezeigt werden. Daher genügt zu zeigen: $c_n = \frac{a}{\ggT(a,b)}, d_n = \frac{b}{\ggT(a,b)}$. \marginnote{Details siehe EZT-Skript Lorenz} \\
-		\textcolor{gray}{Mit den $\frac{c_k}{d_k}$ wird die Kettenbruchentwicklung von $\frac{a}{b}$ berechnet und diese bricht bei $\frac{c_n}{d_n} = \frac{a}{b}$ ab. Da bei der Kettenbruchentwicklung alle Brüche $\frac{c_k}{d_k}$ gekürzt sind wegen $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$, folgt dies.} 
+		\item[zu (1)]: Da $r_n \mid r_{n-1}, r_n \mid r_{n-2}, \dots, r_n \mid r_0 = b, r_n \mid r_{-1} = a$, ist $r_n$ ein Teiler von $a$ und $b$ (Teilen mit Rest von unten nach oben). 
+		Ist $d$ irgendein Teiler $\geq 1$ von $a$ und $b$, folgt $d \mid r_1 = a -q_0 b \Rightarrow d \mid r_2 = r_0 - q_1 r_1 \linebreak \Rightarrow d \mid r_3 = \dots$, also auch $r_n$, sodass $d \leq r_n$ folgt (Teilen mit Rest von oben nach unten). 
+		Somit ist $r_n = \ggT(a,b)$.
+		\item[zu (2)]: Induktiv kann $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$ gezeigt werden. 
+		Daher genügt zu zeigen: $c_n = \frac{a}{\ggT(a,b)}, d_n = \frac{b}{\ggT(a,b)}$. 
+		\marginnote{Details siehe EZT-Skript Lorenz} \\
+		\textcolor{gray}{Mit den $\frac{c_k}{d_k}$ wird die Kettenbruchentwicklung von $\frac{a}{b}$ berechnet und diese bricht bei $\frac{c_n}{d_n} = \frac{a}{b}$ ab. 
+		Da bei der Kettenbruchentwicklung alle Brüche $\frac{c_k}{d_k}$ gekürzt sind wegen $c_{k-1} d_k - c_k d_{k-1} = (-1)^k$, folgt dies.} 
 	\end{description}
 	
-Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz ganzer Zahlen $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$. Die Zahlen $x$ und $y$ heißen auch \Index{Bézout-Elemente} von $a$ und $b$. Deren Existenz ist auch in der Theorie immer wieder wichtig, z.B. hierfür:
+Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz ganzer Zahlen $x,y \in \ZZ$ mit $\ggT(a,b) = xa + yb$. 
+Die Zahlen $x$ und $y$ heißen auch \Index{Bézout-Elemente} von $a$ und $b$. 
+Deren Existenz ist auch in der Theorie immer wieder wichtig, z.B. hierfür:
 
 \begin{lemma}
 \label{lemma_21}
-	Seien $a,b,c \in \ZZ$ und $b,c \neq 0$. Gilt $c \mid ab$ und $\ggT(b,c) = 1$, dann ist $c \mid a$.
+	Seien $a,b,c \in \ZZ$ und $b,c \neq 0$. 
+	Gilt $c \mid ab$ und $\ggT(b,c) = 1$, dann ist $c \mid a$.
 \end{lemma}
 
 \minisec{Beweis}
-	Aus den Voraussetzungen und $c \mid ac$ folgt, dass $c \mid \ggT(ab,ac) = |a| \cdot \ggT(b,c) = |a|$, also $c \mid a$. Zur ersten Gleichheit: Nach Satz \ref{satz_ea} existieren $x,y \in \ZZ$ mit $\ggT(b,c) = xb + yc$. \\
-	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. Ist $t$ irgendein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
+	Aus den Voraussetzungen und $c \mid ac$ folgt, dass $c \mid \ggT(ab,ac) = |a| \cdot \ggT(b,c) = |a|$, also $c \mid a$. 
+	Zur ersten Gleichheit: Nach Satz \ref{satz_ea} existieren $x,y \in \ZZ$ mit $\ggT(b,c) = xb + yc$. \\
+	$|a| \cdot \ggT(b,c)$ teilt $|a|\cdot b$ und $|a| \cdot c$, also auch $ba$ und $ca$, d.h. die rechte Seite ist ein gemeinsamer Teiler von $ba$ und $ca$. 
+	Ist $t$ ein solcher, so teilt $t$ auch $\sgn(a) \cdot(xba + yca) = xb \cdot |a| + yc \cdot |a| = |a| \cdot (xb + yc) = |a| \ggT(b,c)$. \qed
 
 \nextlecture	
 \subsubsection{Kongruenzenrechnen und die modulare Brille}
-	Wir behandeln nun,\marginnote{[3]} wie man mit Teilmengen von $\ZZ$ und neuen Definitionen von "$+$" und "$\cdot$" zu neuen algebraischen Strukturen (Gruppe, Ringe, Körper) kommt. Dazu ist das Kongruenzenrechnen modulo $m$ wesentlich.
+	Wir behandeln nun,\marginnote{[3]} wie man mit Teilmengen von $\ZZ$ und neuen Definitionen von "$+$" und "$\cdot$" zu neuen algebraischen Strukturen (Gruppe, Ringe, Körper) kommt. 
+	Dazu ist das Kongruenzenrechnen modulo $m$ wesentlich.
 	
 \begin{defn}[Kongruenz, Modul]
-	Sei $m \in \NN$. Dann heißen $a \in \ZZ$ und $b \in \ZZ$ \bet{kongruent modulo $m$}, wenn $m \mid (b-a)$. Wir schreiben dann $a \kon b \modu m$ oder $a \kon b \ (m)$. Die Zahl $m$ heißt der \Index{Modul} der Kongruenz. \index{Kongruenz}
+	Sei $m \in \NN$. 
+	Dann heißen $a \in \ZZ$ und $b \in \ZZ$ \bet{kongruent modulo $m$}, wenn $m \mid (b-a)$. 
+	Wir schreiben dann $a \kon b \modu m$ oder $a \kon b \ (m)$. 
+	Die Zahl $m$ heißt der \Index{Modul} der Kongruenz. 
+	\index{Kongruenz}
 \end{defn}
 
 \begin{folg}
@@ -209,15 +283,24 @@ Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz 
 \end{folg}
 
 \begin{defn}[Restklasse]
-	Die Äquivalenzklassen von $\kon$ modulo $m$ heißen \bet{Restklassen} modulo $m$. (auch: Kongruenzklassen modulo $m$). \index{Restklasse}
+	Die Äquivalenzklassen von $\kon$ modulo $m$ heißen \bet{Restklassen} modulo $m$. 
+	(auch: Kongruenzklassen modulo $m$). 
+	\index{Restklasse}
 \end{defn}
 
 \begin{folg}
-	Die Restklassen modulo $m$ sind Teilmengen von $\ZZ$ der Gestalt $x + m\ZZ := \{x + ma : a \in \ZZ\}$. Die Restklasse $x + m\ZZ$ heißt auch die Restklasse von $x$ modulo $m$. Davon gibt es $m$ Stück; wird in jeder Restklasse ein Element $x_i$, $i = 1, \dots, m$ ausgewählt, können die $m$ Restklassen mit $x_1 + m\ZZ, x_2 + m\ZZ, \dots, x_m + m\ZZ$ angegeben werden; die Menge $\{x_1,\dots,x_m\}$ heißt dann \bet{vollständiges Restsystem} modulo $m$. Sind $y_1, \dots, y_m \in \ZZ$ so, dass $y_i \not\kon y_j \modu m$ für alle $i \neq j$, $1 \leq i,j \leq m$, gilt (d.h. die $y_i$ sind paarweise inkongruent modulo $m$), dann ist $\{y_1, \dots, y_m\}$ ein vollständiges Restsystem modulo $m$. Die Zahl $x$ heißt \Index{Repräsentant} der Restklasse $x + m\ZZ$, und $x + m\ZZ = z + m\ZZ \Leftrightarrow x \kon z \modu m$, weil laut Definition in der Restklasse von $x \mod m$ genau alle zu $x$ kongruenten Zahlen liegen. \index{Restsystem!vollständig}
+	Die Restklassen modulo $m$ sind Teilmengen von $\ZZ$ der Gestalt $x + m\ZZ := \{x + ma : a \in \ZZ\}$. 
+	Die Restklasse $x + m\ZZ$ heißt auch die Restklasse von $x$ modulo $m$. 
+	Davon gibt es $m$ Stück; wird in jeder Restklasse ein Element $x_i$,\linebreak $i = 1, \dots, m$ ausgewählt, können die $m$ Restklassen mit $x_1 + m\ZZ, x_2 + m\ZZ, \dots, x_m + m\ZZ$ angegeben werden; die Menge $\{x_1,\dots,x_m\}$ heißt dann \bet{vollständiges Restsystem} modulo $m$. 
+	Sind $y_1, \dots, y_m \in \ZZ$ so, dass $y_i \not\kon y_j \modu m$ für alle $i \neq j$, $1 \leq i,j \leq m$, gilt (d.h. die $y_i$ sind paarweise inkongruent modulo $m$), dann ist $\{y_1, \dots, y_m\}$ ein vollständiges Restsystem modulo $m$. 
+	Die Zahl $x$ heißt \Index{Repräsentant} der Restklasse $x + m\ZZ$, und $x + m\ZZ = z + m\ZZ \Leftrightarrow x \kon z \modu m$, weil laut Definition in der Restklasse von $x \mod m$ genau alle zu $x$ kongruenten Zahlen liegen. 
+	\index{Restsystem!vollständig}
 \end{folg}
 
 \begin{bsp}
-	$\{0,1,2\}$ ist vollständiges Restsystem modulo $3$, und vollständige Restsysteme modulo $8$ sind etwa $\{1,\dots,8\}$ und $\{3,6,9,12,15,18,21,24\} = \{3a : 1 \leq a \leq 8\}$, da $12 \kon 4 \modu 8, 15 \kon 7 \modu 8, 18 \kon 2 \modu 8, 21 \kon 5 \modu 8, 24 \kon 0 \modu 8$. Die Menge $\{2a : 1 \leq a \leq 8\}$ ist kein vollständiges Restsystem modulo $8$. Die Reste $0,1,\dots,m-1$ könnte man auch als "Standardrepräsentanten" modulo $m$ bezeichnen, da sie immer ein vollständiges Restsystem modulo $m$ bilden.
+	$\{0,1,2\}$ ist vollständiges Restsystem modulo $3$, und vollständige Restsysteme modulo $8$ sind etwa $\{1,\dots,8\}$ und $\{3,6,9,12,15,18,21,24\} = \{3a : 1 \leq a \leq 8\}$, da $12 \kon 4 \modu 8, 15 \kon 7 \modu 8, 18 \kon 2 \modu 8,\linebreak 21 \kon 5 \modu 8, 24 \kon 0 \modu 8$. 
+	Die Menge $\{2a : 1 \leq a \leq 8\}$ ist kein vollständiges Restsystem modulo $8$. 
+	Die Reste $0,1,\dots,m-1$ könnte man auch als "Standardrepräsentanten" modulo $m$ bezeichnen, da sie immer ein vollständiges Restsystem modulo $m$ bilden.
 \end{bsp}
 
 \begin{folg}
@@ -226,7 +309,8 @@ Der Satz vom Euklidischen Algorithmus sichert uns konstruktiv also die Existenz 
 
 Das nützliche an den Restklassen modulo $m$ ist, dass wir nun durch folgende naheliegende Definitionen von $\oplus$ und $\odot$ mit ihnen neue algebraische Strukturen gewinnen können:
 \begin{defn}[Addition und Multiplikation auf $\ZZ_m$]
-	Ist der Modul $m$ klar, schreiben wir auch $\uline{x} := x+m\ZZ$ für die Restklasse von $x$ modulo $m$. Wir definieren für $x,y \in \ZZ$ dann
+	Ist der Modul $m$ klar, schreiben wir auch $\uline{x} := x+m\ZZ$ für die Restklasse von $x$ modulo $m$. 
+	Wir definieren für $x,y \in \ZZ$ dann
 	\begin{equation}
 	\begin{aligned}
 		\uline{x} \oplus \uline{y} &:= \uline{x+y} \\
@@ -237,31 +321,43 @@ Das nützliche an den Restklassen modulo $m$ ist, dass wir nun durch folgende na
 \end{defn}
 
 \begin{folg}
-	Wir addieren bzw. multiplizieren zwei Restklassen, indem wir Repräsentanten $x,y$ auswählen und diese addieren bzw. multiplizieren. Das ist nur sinnvoll, wenn bei unterschiedlicher Repräsentantenwahl dieselbe Restklasse als Ergebnis herauskommt. Man sagt, die Definition von $\oplus$ und $\odot$ ist wohldefiniert, da repräsentantenunabhängig. Dies ist klar: $\uline{x_1} = \uline{x_2}$ und $\uline{y_1} = \uline{y_2} \Rightarrow x_1 \kon x_2 \modu m$ und $y_1 \kon y_2 \modu m \Rightarrow x_1 + y_1 \kon x_2 +y_2 \modu m \Rightarrow \uline{x_1+y_1} = \uline{x_2 + y_2}$, also erhalten wir so dieselbe Restklasse für $\uline{x_1} \oplus \uline{y_1}$ und $\uline{x_2} \oplus \uline{y_2}$, wenn $\uline{x_1} = \uline{x_2}$ und $\uline{y_1} = \uline{y_2}$ (analog für die Multiplikation). Damit kann $(\ZZ_m,\oplus)$ oder $(\ZZ/m,\odot)$ auf algebraische Strukturen hin untersucht werden. Wir schreiben ab jetzt auch $+$ für $\oplus$ und $\cdot$ für $\odot$.
+	Wir addieren bzw. multiplizieren zwei Restklassen, indem wir Repräsentanten $x,y$ auswählen und diese addieren bzw. multiplizieren. 
+	Das ist nur sinnvoll, wenn bei unterschiedlicher Repräsentantenwahl dieselbe Restklasse als Ergebnis herauskommt. 
+	Man sagt, die Definition von $\oplus$ und $\odot$ ist wohldefiniert, da repräsentantenunabhängig. 
+	Dies ist klar: $\uline{x_1} = \uline{x_2}$ und $\uline{y_1} = \uline{y_2} \Rightarrow x_1 \kon x_2 \modu m$ und $y_1 \kon y_2 \modu m \Rightarrow x_1 + y_1 \kon x_2 +y_2 \modu m \Rightarrow \uline{x_1+y_1} = \uline{x_2 + y_2}$, also erhalten wir so dieselbe Restklasse für $\uline{x_1} \oplus \uline{y_1}$ und $\uline{x_2} \oplus \uline{y_2}$, wenn $\uline{x_1} = \uline{x_2}$ und $\uline{y_1} = \uline{y_2}$ (analog für die Multiplikation). 
+	Damit kann $(\ZZ_m,\oplus)$ oder $(\ZZ/m,\odot)$ auf algebraische Strukturen hin untersucht werden. 
+	Wir schreiben ab jetzt auch $+$ für $\oplus$ und $\cdot$ für $\odot$.
 \end{folg}
 
 \begin{folg}
-	$(\ZZ_m,+)$ ist eine abelsche Gruppe mit neutralem Element $\uline{0} = 0 + m\ZZ$, denn Kommutativität und Assoziativität gelten wie in $\ZZ$, und $\uline{0} + \uline{x} = \uline{0+x} = \uline{x}$ gilt für alle $x \in \ZZ$, sowie $\uline{x} + \uline{-x} = \uline{x-x} = \uline{0}$, sodass $-\uline{x} = \uline{-x} = \uline{m-x}$ für alle $x \in \ZZ$ gilt. Ebenso gilt, dass $(\ZZ_m,+,\cdot)$ ein kommutativer Ring mit $1$ ist.
+	$(\ZZ_m,+)$ ist eine abelsche Gruppe mit neutralem Element $\uline{0} = 0 + m\ZZ$, denn Kommutativität und Assoziativität gelten wie in $\ZZ$, und $\uline{0} + \uline{x} = \uline{0+x} = \uline{x}$ gilt für alle $x \in \ZZ$, sowie $\uline{x} + \uline{-x} = \uline{x-x} = \uline{0}$, sodass $-\uline{x} = \uline{-x} = \uline{m-x}$ für alle $x \in \ZZ$ gilt. 
+	Ebenso gilt, dass $(\ZZ_m,+,\cdot)$ ein kommutativer Ring mit $1$ ist.
 \end{folg}
 
-Das Beispiel $\uline{2} \cdot \uline{0} = \uline{0}, \uline{2} \cdot \uline{1} = \uline{2}, \uline{2} \cdot \uline{2} = \uline{0}$ modulo $4$ zeigt, dass es Restklassen ohne Inversen bezüglich $\cdot$ geben kann. Der folgende Satz gibt an, welche Restklassen invertierbar sind, d.h. im Ring $\ZZ_m$ eine Einheit sind:
+Das Beispiel $\uline{2} \cdot \uline{0} = \uline{0}, \uline{2} \cdot \uline{1} = \uline{2}, \uline{2} \cdot \uline{2} = \uline{0}$ modulo $4$ zeigt, dass es Restklassen ohne Inversen bezüglich $\cdot$ geben kann. 
+Der folgende Satz gibt an, welche Restklassen invertierbar sind, d.h. im Ring $\ZZ_m$ eine Einheit sind:
 
 \begin{satz}[Einheiten in $\ZZ_m$]
-	Zu $\uline{x} \in \ZZ_m$ existiert genau dann ein multiplikatives Inverses, d.h. ein $\uline{y} \in \ZZ_m$ mit $\uline{x} \cdot \uline{y} = \uline{1} \Leftrightarrow x \cdot y \kon 1 \modu m$, falls $\ggT(x,m) = 1$. Wir schreiben dann $\uline{x}^{-1}$ oder $\uline{x}^*$ für $\uline{y}$, die Bezeichnungen $\uline{\frac{1}{x}}$ oder $1/\uline{x}$ sind didaktisch ungeschickt.
+	Zu $\uline{x} \in \ZZ_m$ existiert genau dann ein multiplikatives Inverses, d.h. ein $\uline{y} \in \ZZ_m$ mit $\uline{x} \cdot \uline{y} = \uline{1} \Leftrightarrow x \cdot y \kon 1 \modu m$, falls $\ggT(x,m) = 1$. 
+	Wir schreiben dann $\uline{x}^{-1}$ oder $\uline{x}^*$ für $\uline{y}$, die Bezeichnungen $\uline{\frac{1}{x}}$ oder $1/\uline{x}$ sind didaktisch ungeschickt.
 \end{satz}
 
 \minisec{Beweis}
 	\begin{description}
-		\item["$\Rightarrow$":] Sei $\uline{y} \in \ZZ_m$ mit $\uline{x} \cdot \uline{y} = 1$, d.h. $xy \kon 1 \modu m$, also existiert $k \in \ZZ$ mit $1 - xy = km \Rightarrow xy + km = 1$. Wäre $d = \ggT(x,m) > 1$, so folgt $d \mid xy + km = 1 \lightning$.
-		\item["$\Leftarrow$":] Sei $\ggT(x,m) = 1$. Nach Satz \ref{satz_ea} existiert $y,k \in \ZZ$ mit $1 = yx + km$, also folgt $\uline{x} \cdot \uline{y} = 1$. \qed
+		\item["$\Rightarrow$":] Sei $\uline{y} \in \ZZ_m$ mit $\uline{x} \cdot \uline{y} = 1$, d.h. $xy \kon 1 \modu m$, also existiert $k \in \ZZ$ mit $1 - xy = km \Rightarrow xy + km = 1$. 
+		Wäre $d = \ggT(x,m) > 1$, so folgt $d \mid xy + km = 1 \lightning$.
+		\item["$\Leftarrow$":] Sei $\ggT(x,m) = 1$. 
+		Nach Satz \ref{satz_ea} existiert $y,k \in \ZZ$ mit $1 = yx + km$, also folgt $\uline{x} \cdot \uline{y} = 1$. \qed
 	\end{description}
 
 Fazit: Mit dem euklidischen Algorithmus können wir also Inverse schnell explizit berechnen.
 
 \begin{defn}[Prime Reste, Eulersche $\varphi$-Funktion]
-	$\uline{x} = x + m\ZZ$ heißt \bet{prime} oder \bet{reduzierte Restklasse} modulo $m$, falls $\ggT(x,m) = 1$ gilt. Diese sind genau die Einheiten in $(\ZZ_m,+,\cdot)$, d.h.
+	$\uline{x} = x + m\ZZ$ heißt \bet{prime} oder \bet{reduzierte Restklasse} modulo $m$, falls $\ggT(x,m) = 1$ gilt. 
+	Diese sind genau die Einheiten in $(\ZZ_m,+,\cdot)$, d.h.
 	\[ \ZZ_m^* = \{\uline{x} \in \ZZ_m : \ggT(x,m) = 1\} \]
-	Die Anzahl der Einheiten sei $\varphi(m) := \# \ZZ_m^* = \# \{a \in \NN : a \leq m, \ggT(a,m) = 1\}$, die so erklärte Funktion $\varphi\colon \NN \rightarrow \NN$ heißt \Index{Eulersche $\varphi$-Funktion}. Jedes Repräsentantensystem $\{x_1, \dots, x_{\varphi(m)}\}$ von $\ZZ_m^*$ heißt \bet{reduziertes} oder \bet{primes Restsystem} modulo $m$.´\index{Restsystem!reduziert, prim} \index{Restklasse!reduziert, prim}
+	Die Anzahl der Einheiten sei $\varphi(m) := \# \ZZ_m^* = \# \{a \in \NN : a \leq m, \ggT(a,m) = 1\}$, die so erklärte Funktion $\varphi\colon \NN \rightarrow \NN$ heißt \Index{Eulersche $\varphi$-Funktion}. 
+	Jedes Repräsentantensystem $\{x_1, \dots, x_{\varphi(m)}\}$ von $\ZZ_m^*$ heißt \bet{reduziertes} oder \bet{primes Restsystem} modulo $m$.´\index{Restsystem!reduziert, prim} \index{Restklasse!reduziert, prim}
 \end{defn}
 
 \begin{satz}[Multiplikativität von $\varphi$]
@@ -270,36 +366,46 @@ Fazit: Mit dem euklidischen Algorithmus können wir also Inverse schnell explizi
 \end{satz}
 
 \minisec{Beweis}
-	Unter den Zahlen $1,2, \dots, p^k$ sind genau die Vielfachen von $p$ zu $p^k$ nicht teilerfremd, d.h. $p, 2p, \dots, p^{k-1} \cdot p$, was $p^{k-1}$-viele Zahlen sind. Zur Multiplikativität siehe Zusatz \ref{zusatz_1.1.2.18}.
+	Unter den Zahlen $1,2, \dots, p^k$ sind genau die Vielfachen von $p$ zu $p^k$ nicht teilerfremd, d.h. $p, 2p, \dots, p^{k-1} \cdot p$, was $p^{k-1}$-viele Zahlen sind. 
+	Zur Multiplikativität siehe Zusatz \ref{zusatz_1.1.2.18}.
 	
 Ist $n = \prod_{p \mid n} p^{e(p)}$ die Primfaktorzerlegung von $n$, folgt aus Satz \ref{satz_1.1.2.12}:
 \[ \varphi(n) = \prod_{p \mid n} \enbrace*{p^{e(p)} - p^{e(p)-1}} = \prod_{p \mid n} p^{e(p)} \cdot \enbrace*{1-\frac{1}{p}} = n \cdot \prod_{p \mid n} \enbrace*{1-\frac{1}{p}} \]
 
 \begin{folg}
-	$(\ZZ_m^*,\cdot)$ ist eine Gruppe, die multiplikative Gruppe von $\ZZ_m$, und die Gruppe $(\ZZ_m,+)$ heißt additive Gruppe von $\ZZ_m$. Im Fall $\ZZ_m^* = \ZZ_m \setminus \setnull$ ist $(\ZZ_m,+,\cdot)$ ein Körper; dies ist genau dann richtig, wenn $m = p$ Primzahl ist, weil genau dann alle $1,2, \dots, m-1$ zu $m$ teilerfremd sind. Wir bezeichnen für $p$ prim diesen Körper mit $p$ Elementen mit $\FF_p$. \marginnote{Weitere endliche Körper später} Der Körper $\FF_p$ hat die Eigenschaft, dass $p \cdot a := \sum_{i=1}^{p} a = 0$ in $\FF_p$ für alle $a \in \FF_p$ gilt. Wir sagen, er hat die Charakteristik $p$.
+	$(\ZZ_m^*,\cdot)$ ist eine Gruppe, die multiplikative Gruppe von $\ZZ_m$, und die Gruppe $(\ZZ_m,+)$ heißt additive Gruppe von $\ZZ_m$. 
+	Im Fall $\ZZ_m^* = \ZZ_m \setminus \setnull$ ist $(\ZZ_m,+,\cdot)$ ein Körper; dies ist genau dann richtig, wenn $m = p$ Primzahl ist, weil genau dann alle $1,2, \dots, m-1$ zu $m$ teilerfremd sind. 
+	Wir bezeichnen für $p$ prim diesen Körper mit $p$ Elementen mit $\FF_p$. 
+	\marginnote{Weitere endliche Körper später} Der Körper $\FF_p$ hat die Eigenschaft, dass $p \cdot a := \sum_{i=1}^{p} a = 0$ in $\FF_p$ für alle $a \in \FF_p$ gilt. 
+	Wir sagen, er hat die Charakteristik $p$.
 \end{folg}
 
 \begin{defn}[Charakteristik]
-	Sei $k$ ein Körper. Er hat die \Index{Charakteristik} $0$, falls für alle $m \in \NN$ gilt: $m \cdot 1 := \underbrace{1 + \dots + 1}_{m\text{-mal}} \neq 0$. \\
-	Falls es ein $m \in \NN$ mit $m \cdot 1 = 0$ gibt, so heißt das kleinste solche $m \in \NN$ die Charakteristik von $k$. Wir schreiben kurz $\Char(k) = 0$ bzw. $\Char(k) = m$. \\
+	Sei $k$ ein Körper. 
+	Er hat die \Index{Charakteristik} $0$, falls für alle $m \in \NN$ gilt: $m \cdot 1 := \underbrace{1 + \dots + 1}_{m\text{-mal}} \neq 0$. \\
+	Falls es ein $m \in \NN$ mit $m \cdot 1 = 0$ gibt, so heißt das kleinste solche $m \in \NN$ die Charakteristik von $k$. 
+	Wir schreiben kurz $\Char(k) = 0$ bzw. $\Char(k) = m$. \\
 	Zum Beispiel ist $\Char(\QQ) = \Char(\RR) = \Char(\CC) = 0$ und $\Char(\FF_p) = p$.
 \end{defn}
 
 \minisec{Bemerkung}
-	Die Charakteristik eines Körpers $k$ ist entweder $0$ oder eine Primzahl, denn sonst wäre $0 = (m\cdot n) \cdot 1 = m \cdot (n \cdot 1) = (m \cdot 1) \cdot (n \cdot 1) \Rightarrow m \cdot 1 = 0$ oder $n \cdot 1 = 0$, da $k^* = k \setminus \setnull$. Widerspruch zu $m\cdot n$ minimal.
+	Die Charakteristik eines Körpers $k$ ist entweder $0$ oder eine Primzahl, denn sonst wäre $0 = (m\cdot n) \cdot 1 = m \cdot (n \cdot 1) = (m \cdot 1) \cdot (n \cdot 1) \Rightarrow m \cdot 1 = 0$ oder $n \cdot 1 = 0$, da $k^* = k \setminus \setnull$. 
+	Widerspruch zu $m\cdot n$ minimal.
 
 Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie auf "kleinere" Zahlringe zurückführt:
 
 \begin{satz}[Chinesischer Restsatz für Zahlringe]
 \label{satz_1.1.2.15}
-	Sei $m > 1$ eine natürliche Zahl und $m = m_1 \cdot m_2 \cdot \dots \cdot m_r$ eine Zerlegung von $m$ in paarweise teilerfremde Zahlen $m_i > 1$. Dann ist die Abbildung
+	Sei $m > 1$ eine natürliche Zahl und $m = m_1 \cdot m_2 \cdot \dots \cdot m_r$ eine Zerlegung von $m$ in paarweise teilerfremde Zahlen $m_i > 1$. 
+	Dann ist die Abbildung
 	\begin{equation}
 	\begin{aligned}
 		F\colon \ZZ/m\ZZ &\longrightarrow (\ZZ/m_1\ZZ) \times \dots \times (\ZZ/m_r \ZZ) \\
 		x + m\ZZ &\longmapsto (x + m_1\ZZ, \dots x + m_r \ZZ)
 	\end{aligned}
 	\end{equation}
-	ein Isomorphismus von Ringen. \index{Chinesischer Restsatz}
+	ein Isomorphismus von Ringen. 
+	\index{Chinesischer Restsatz}
 \end{satz}
 
 \begin{satz}[Chinesischer Restsatz für simultane Kongruenzen]
@@ -337,7 +443,8 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 		\[ x \kon x_0 = \underbrace{a_1 M_1^* M_1}_{\kon 0 \modu m_i} + \dots + \underbrace{a_i M_i^* M_i}_{\kon a_i \cdot 1 \modu m_i} + \dots + \underbrace{a_r M_r^* M_r}_{\kon 0 \modu m_i} \kon a_i \modu m_i \]
 		\item[Eindeutigkeit modulo $m_1 \cdots m_r$:] Ist $y \in \ZZ$ eine weitere Lösung des Kongruenzensystems, so gilt für alle $j \neq i$: $y \kon a_j \modu m_j$, also $\underbrace{M_j^* \cdot M_j}_{\kon 1 \modu m_j} \cdot y \kon a_j \modu m_j$ und $M_i M_i^* a_i \kon 0 \modu m_j$ (Division durch $m_j$), und somit
 		\[ y \kon a_j \modu m_j \kon \sum_{j=1}^{k} M_j M_j^* a_j \modu m_j \kon x_0 \modu m_j \text{ für alle } j=1,\dots,r. \]
-		Damit folgt, dass $m_j$ Teiler von $y-x_0$ ist. Da die $m_1, \dots, m_r$ alle paarweise teilerfremd sind, folgt daraus $y \kon x_0 \modu m_1 \cdots m_r$, vgl. \ref{folg_1.1.2.2} (5). \qed
+		Damit folgt, dass $m_j$ Teiler von $y-x_0$ ist. 
+		Da die $m_1, \dots, m_r$ alle paarweise teilerfremd sind, folgt daraus $y \kon x_0 \modu m_1 \cdots m_r$, vgl. \ref{folg_1.1.2.2} (5). \qed
 	\end{description}
 	
 \minisec{Beispiel zum chinesischen Restsatz}
@@ -350,7 +457,10 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 	\end{equation}
 	hat die Lösung $x \kon 2 \cdot 1 \cdot 8 + 3 \cdot (-1) \cdot 7 = -5 \kon 51 \modu 56$, denn $1 \kon 8^{-1} \modu 7$ und $-1 \kon 7^{-1} \modu 8$.
 	
-	Beispiel-Textaufgabe dazu: Gegeben seien zwei Tüten mit gleich vielen Bonbons. Beim gleichmäßigen Aufteilen der einen Tüte an sieben Kinder bleiben zwei Bonbons übrig. Beim Aufteilen der anderen auf acht Kinder bleiben drei Bonbons übrig. Wie viele Bonbons waren in einer Tüte? \\
+	Beispiel-Textaufgabe dazu: Gegeben seien zwei Tüten mit gleich vielen Bonbons. 
+	Beim gleichmäßigen Aufteilen der einen Tüte an sieben Kinder bleiben zwei Bonbons übrig. 
+	Beim Aufteilen der anderen auf acht Kinder bleiben drei Bonbons übrig. 
+	Wie viele Bonbons waren in einer Tüte? \\
 	Lösung: Möglich sind 51, 107, 163, \dots Stück. 
 	
 \minisec{Beispiele zum Rechnen mit Kongruenzen}
@@ -366,7 +476,8 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 			\Leftrightarrow \quad (x-1)^2 &\kon -2 \kon 5 \modu 7
 		\end{aligned}
 		\end{equation}
-		Da nun wegen $0^2 \kon 0 \modu 7, 1^2 \kon 1 \modu 7, 2^2 \kon 4 \modu 7, 3^2 \kon 2 \modu 7$ die Zahl $5$ kein Quadrat modulo $7$ ist, hat die Kongruenz keine Lösung. \marginnote{man spricht auch von quadratischen Resten modulo $7$} \\
+		Da nun wegen $0^2 \kon 0 \modu 7, 1^2 \kon 1 \modu 7, 2^2 \kon 4 \modu 7, 3^2 \kon 2 \modu 7$ die Zahl $5$ kein Quadrat modulo $7$ ist, hat die Kongruenz keine Lösung.
+		 \marginnote{man spricht auch von quadratischen Resten modulo $7$} \\
 		Die Kongruenz $(x-1)^2 \kon 4 \modu 7$ hat die beiden Lösungen $x \kon 3 \modu 7$ und $x \kon -1 \modu 7$.
 		\item Die Kongruenz $(x-3) \cdot 4 \kon 1 \modu 33$ ist schreibbar als System:
 		\begin{equation}
@@ -375,17 +486,21 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 			(x-3) \cdot 4 &\kon 1 \modu 11
 		\end{aligned}
 		\end{equation}
-		Die beiden einzelnen Kongruenzen haben die Lösungen $x \kon 1 \modu 3$ sowie $x \kon 6 \modu 11$. Mittels chinesischem Restsatz erhält man eine Lösung der Ausgangskongruenz modulo $33$: \\
+		Die beiden einzelnen Kongruenzen haben die Lösungen $x \kon 1 \modu 3$ sowie $x \kon 6 \modu 11$. 
+		Mittels chinesischem Restsatz erhält man eine Lösung der Ausgangskongruenz modulo $33$: \\
 		$x \kon 1 \cdot 2 \cdot 11 + 6 \cdot 4 \cdot 3 = 22 + 6 \cdot 12 = 94 \kon -5 \kon 28 \modu 33$
 		\item Bei manchen zahlentheoretischen Aufgaben, wie z.B. die Frage, ob es ganzzahlige Lösungen zu bestimmten Gleichungen geben kann, ist die "modulare Brille" ein nützliches Hilfsmittel. Hier ein Beispiel, wo wir die modulare Brille modulo $8$ aufsetzen, um mehr zu sehen: \\
-		Betrachte die Gleichung $8x + 7 = u^2 + v^2 + w^2$ in $u,v,w,x \in \NN_0$. Sie ist unlösbar, denn modulo $8$ erhalten wir $7 \kon u^2 + v^2 + w^2 \modu 8$. Alle quadratischen Reste modulo $8$ sind $0, 1$ und $4$:
+		Betrachte die Gleichung $8x + 7 = u^2 + v^2 + w^2$ in $u,v,w,x \in \NN_0$. 
+		Sie ist unlösbar, denn modulo $8$ erhalten wir $7 \kon u^2 + v^2 + w^2 \modu 8$. 
+		Alle quadratischen Reste modulo $8$ sind $0, 1$ und $4$:
 		\begin{center}
 			\begin{tabular}{c||c|c|c|c|c}
 			$z$ & $0$ & $\pm 1$ & $\pm 2$ & $\pm 3$ & $4$ \\ 
 			\hline $z^2$ & $0$ & $1$ & $4$ & $1$ & $0$ \\ 
 			\end{tabular} 
 		\end{center}
-		Daher ist $v^2 + w^2 \kon 0,1,4,2,5 \modu 8$, also $u^2+v^2+w^2 \kon 0,1,4,2,5, \quad 1,2,5,3,6, \quad 4,5,0,6,1 \modu 8$, aber nie $\kon 7 \modu 8$. Es kann keine Lösungen modulo $8$ geben, also auch keine in $\ZZ$.
+		Daher ist $v^2 + w^2 \kon 0,1,4,2,5 \modu 8$, also $u^2+v^2+w^2 \kon 0,1,4,2,5, \quad 1,2,5,3,6, \quad 4,5,0,6,1 \modu 8$, aber nie $\kon 7 \modu 8$. 
+		Es kann keine Lösungen modulo $8$ geben, also auch keine in $\ZZ$.
 	\end{itemize}
 
 \nextlecture
@@ -403,36 +518,47 @@ Die Struktur der Zahlringe $(\ZZ_m,+,\cdot)$ versteht man besser, indem man sie 
 
 \begin{satz}[Satz von Lagrange]
 \label{satz_lagrange}
-	Ist $(G,*)$ eine endliche Gruppe, so ist die Ordnung einer Untergruppe $H$ stets ein Teiler von $\ord(G)$. \index{Satz von Lagrange}
+	Ist $(G,*)$ eine endliche Gruppe, so ist die Ordnung einer Untergruppe $H$ stets ein Teiler von $\ord(G)$. 
+	\index{Satz von Lagrange}
 \end{satz}
 
 \minisec{Beweis}
 	Die \Index{Linksnebenklassen} $a*H := \{ a * h : h \in H\}$ für $a \in G$ sind paarweise disjunkt, das heißt es gilt stets $a * H = b * H$ oder $a * H \cap b * H = \emptyset$. \\
 	(Denn: ist $c \in a * H \cap b * H$, so ist $c = a * g = b * h$ für $g,h \in H$, also $a = b * (h * g^{-1})$, somit $a*H = \{a * m : m \in H\} = \{b * h * g^{-1} * m : m \in H\} = \{b * n : n \in H\} = b * H$.) \\
-	Also ist $G$ die disjunkte Vereinigung endlich vieler Linksnebenklassen $a_1 * H, \dots, a_r * H$. Da $\#(a*H) = \#H$ für alle $a \in G$ gilt, folgt mit $\ord(G) = r \cdot \ord(H)$ die Behauptung. \qed
+	Also ist $G$ die disjunkte Vereinigung endlich vieler Linksnebenklassen $a_1 * H, \dots, a_r * H$. 
+	Da $\#(a*H) = \#H$ für alle $a \in G$ gilt, folgt mit $\ord(G) = r \cdot \ord(H)$ die Behauptung. \qed
 	
 \begin{defn}[Erzeugnis, zyklisch]
-	Sei $(G,+)$ eine abelsche Gruppe und $a \in G$. Für $k \in \ZZ$ definieren wir $ka := \underbrace{a + \dots + a}_{k\text{-mal}}$, falls $k > 0$, $k \cdot 0 := 0$ und $k \cdot a := -(-k)\cdot a$, falls $k < 0$. Dann ist $\sprod{a} := \{ka : k \in \ZZ\}$ eine Untergruppe von $G$.\marginnote{klar!} Wir nennen $\sprod{a}$ die von $a$ \bet{erzeugte Untergruppe} bzw. das \Index{Erzeugnis} von $a$ und $a$ einen \Index{Erzeuger}. Ist $\sprod{a}$ eine endliche Untergruppe, heißt ihre Ordnung die \Index{Ordnung} von $a$, kurz $\ord(a) := \#\sprod{a}$. Eine Gruppe $G$ mit Erzeuger $a$, das heißt $G = \sprod{a}$, heißt \Index{zyklisch}.
+	Sei $(G,+)$ eine abelsche Gruppe und $a \in G$. 
+	Für $k \in \ZZ$ definieren wir $ka := \underbrace{a + \dots + a}_{k\text{-mal}}$, falls $k > 0$, $k \cdot 0 := 0$ und $k \cdot a := -(-k)\cdot a$, falls $k < 0$. 
+	Dann ist $\sprod{a} := \{ka : k \in \ZZ\}$ eine Untergruppe von $G$.\marginnote{klar!} Wir nennen $\sprod{a}$ die von $a$ \bet{erzeugte Untergruppe} bzw. das \Index{Erzeugnis} von $a$ und $a$ einen \Index{Erzeuger}. 
+	Ist $\sprod{a}$ eine endliche Untergruppe, heißt ihre Ordnung die \Index{Ordnung} von $a$, kurz $\ord(a) := \#\sprod{a}$. 
+	Eine Gruppe $G$ mit Erzeuger $a$, das heißt $G = \sprod{a}$, heißt \Index{zyklisch}.
 \end{defn}
 
-Schreibt man die Gruppe multiplikativ mit Verknüpfung "$\cdot$", so setzt man $a^k := \underbrace{a \cdots a}_{k\text{-mal}}$, falls $k > 0$, $a^0 := 1$, $a^k := \enbrace*{a^{(-k)}}^{-1}$, falls $k < 0$, und $\sprod{a} := \{a^k : k \in \ZZ\}$. Ansonsten ist bis auf Schreibweise die Begrifflichkeit und Theorie zu Erzeugern und Ordnungen dieselbe. \\
+Schreibt man die Gruppe multiplikativ mit Verknüpfung "$\cdot$", so setzt man $a^k := \underbrace{a \cdots a}_{k\text{-mal}}$, falls $k > 0$, $a^0 := 1$, $a^k := \enbrace*{a^{(-k)}}^{-1}$, falls $k < 0$, und $\sprod{a} := \{a^k : k \in \ZZ\}$. 
+Ansonsten ist bis auf Schreibweise die Begrifflichkeit und Theorie zu Erzeugern und Ordnungen dieselbe. \\
 Nach dem Satz von Lagrange gilt für jede endliche Gruppe $G$ und $a \in G$ stets $\ord(a) \mid \ord(G)$.
 
 \begin{bsp}
-	$\ZZ/m\ZZ = \{0,1, \dots, m-1\}$ ist "die" zyklische Gruppe mit $\ord(G) = m$. Ist $m = p$ prim, können außer $\setnull$ und $\ZZ/p\ZZ$ keine weiteren Untergruppen existieren.
+	$\ZZ/m\ZZ = \{0,1, \dots, m-1\}$ ist "die" zyklische Gruppe mit $\ord(G) = m$. 
+	Ist $m = p$ prim, können außer $\setnull$ und $\ZZ/p\ZZ$ keine weiteren Untergruppen existieren.
 \end{bsp}
 
 \begin{lemma}
 \label{lemma_1.1.3.6}
-	Sei $(G,+)$ eine Gruppe, $a \in G$. Es ist $\ord(a)$ die kleinste natürliche Zahl $m$ mit $ma = 0$. \\
+	Sei $(G,+)$ eine Gruppe, $a \in G$. 
+	Es ist $\ord(a)$ die kleinste natürliche Zahl $m$ mit $ma = 0$. \\
 	Es gilt: $ka = 0 \Leftrightarrow \ord(a) \mid k$. \\
 	(Bei multiplikativer Schreibweise: $\ord(a) = \min\{m \in \NN : a^m = 1\}$ und $a^k = 1 \Leftrightarrow \ord(a) \mid k$.)
 \end{lemma}
 
 \minisec{Beweis}
-	Der erste Teil ist klar. Zum zweiten Teil:
+	Der erste Teil ist klar. 
+	Zum zweiten Teil:
 	\begin{description}
-		\item["$\Rightarrow$":] Falls $k \in \NN$ mit $ka = 0$ ist, nehme Division von $k$ durch $\ord(a)$ vor: $k = q \cdot \ord(a) + r$ mit $0 \leq r < \ord(a)$. Wegen $0 = ka = q \cdot \underbrace{\ord(a) \cdot a}_{=0} + ra$ folgt $ra = 0$, wegen der Minimalität von $\ord(a)$ also $r=0$, also $\ord(a) \mid k$.
+		\item["$\Rightarrow$":] Falls $k \in \NN$ mit $ka = 0$ ist, nehme Division von $k$ durch $\ord(a)$ vor: $k = q \cdot \ord(a) + r$ mit $0 \leq r < \ord(a)$. 
+		Wegen $0 = ka = q \cdot \underbrace{\ord(a) \cdot a}_{=0} + ra$ folgt $ra = 0$, wegen der Minimalität von $\ord(a)$ also $r=0$, also $\ord(a) \mid k$.
 		\item["$\Leftarrow$":] Für $k = m \cdot \ord(a)$ folgt $ka = m \cdot (\ord(a) \cdot a) = 0$. \qed
 	\end{description}
 	
@@ -441,65 +567,91 @@ Nach dem Satz von Lagrange gilt für jede endliche Gruppe $G$ und $a \in G$ stet
 \end{folg}
 
 \begin{folg}[Kleiner Satz von Fermat]
-	Da $\ord((\ZZ/m\ZZ)^*) = \varphi(m)$, ist $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$. Für $p$ prim: $a^{p-1} \kon 1 \modu p$ für $p \nmid a$. \index{Kleiner Satz von Fermat}
+	Da $\ord((\ZZ/m\ZZ)^*) = \varphi(m)$, ist $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$. 
+	Für $p$ prim: $a^{p-1} \kon 1 \modu p$ für $p \nmid a$. 
+	\index{Kleiner Satz von Fermat}
 \end{folg}
 
 \begin{bem}[Satz von Euler-Fermat]
-	Die Kongruenz $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$, heißt auch \Index{Satz von Euler-Fermat}. Als Ordnung eines $a \in \ZZ_m^*$ (Notation: $\ord_m(a)$) kommt also nur ein Teiler von $\varphi(m)$ in Frage.
+	Die Kongruenz $a^{\varphi(m)} \kon 1 \modu m$, falls $\ggT(a,m)=1$, heißt auch \Index{Satz von Euler-Fermat}. 
+	Als Ordnung eines $a \in \ZZ_m^*$ (Notation: $\ord_m(a)$) kommt also nur ein Teiler von $\varphi(m)$ in Frage.
 \end{bem}
 
 \begin{bsp}
-	Wir haben $\varphi(15) = \varphi(3) \cdot \varphi(5)$ = $2 \cdot 4 = 8$. Die möglichen Ordnungen von Zahlen $a \mod 15$ mit $\ggT(a,15)=1$  sind also $0,1,2,4,8$.\\
-	Wegen $4^2 = 16 \kon 1 \modu 15$ ist zum Beispiel $\ord_{15}(4) = 2$. Bei anderen Zahlen muss man unter Umständen Potenzen mit größeren Exponenten ausrechnen, um die Ordnung zu bestimmen.
+	Wir haben $\varphi(15) = \varphi(3) \cdot \varphi(5)$ = $2 \cdot 4 = 8$. 
+	Die möglichen Ordnungen von Zahlen $a \mod 15$ mit $\ggT(a,15)=1$  sind also $0,1,2,4,8$.\\
+	Wegen $4^2 = 16 \kon 1 \modu 15$ ist zum Beispiel $\ord_{15}(4) = 2$. 
+	Bei anderen Zahlen muss man unter Umständen Potenzen mit größeren Exponenten ausrechnen, um die Ordnung zu bestimmen.
 \end{bsp}
 
-Generell stellt sich in Anwendungen die Frage, wie man leicht und schnell (modulare) Potenzen $a^k \modu m$ mit großem $k$ berechnen kann. Der Satz von Euler-Fermat erlaubt bereits eine Reduktion von $k \modu \varphi(m)$: Ist\linebreak
+Generell stellt sich in Anwendungen die Frage, wie man leicht und schnell (modulare) Potenzen $a^k \modu m$ mit großem $k$ berechnen kann. 
+Der Satz von Euler-Fermat erlaubt bereits eine Reduktion von $k \modu \varphi(m)$: Ist\linebreak
 $k = q \cdot \varphi(m) + r$ mit $0 \leq r < \varphi(m)$, folgt
 \[ a^k = a^{\varphi(m) \cdot q + r} = \enbrace*{a^{\varphi(m)}}^q \cdot a^r \kon 1^q \cdot a^r = a^r \modu m.\]
 Ist aber auch $\varphi(m)$ bzw. $r$ groß, hilft man sich mit folgender Methode des schnellen Potenzierens weiter:
 
 \begin{lemma}[Methode des schnellen Potenzierens]
-	Gegeben sei eine Gruppe $(G,\cdot)$, zu berechnen ist für $r \in \NN, a \in G$ die Potenz $a^r$ in der Gruppe $G$. \begin{description}
+	Gegeben sei eine Gruppe $(G,\cdot)$, zu berechnen ist für $r \in \NN, a \in G$ die Potenz $a^r$ in der Gruppe $G$. 
+	\begin{description}
 		\item[1. Schritt:] Mit höchstens $d := \floor*{\frac{\log r}{\log 2}}$ vielen Verknüpfungen in $G$ berechne durch sukzessives Quadrieren $a^2,$\linebreak
 		$\enbrace*{a^2}^2 = a^4, \dots, a^{2^d}$.
 		\item[2. Schritt:] Schreibe $r$ als Binärzahl: $r = \sum_{i=0}^d c_i \cdot 2^i$ mit $c_i \in \{0,1\}$.
-		\item[3. Schritt:] Berechne $a^r = a^{c_0} \cdot a^{2c_1} \cdot a^{2^2 c_2} \cdots a^{2^d c_d} = \enbrace*{a^{c_0}} \cdot \enbrace*{a^2}^{c_1} \cdot \enbrace*{a^{2^2}}^{c_2} \cdots \enbrace*{a^{2^d}}^{c_d}$ mit maximal $d$ weiteren Verknüpfungen in $G$. \index{schnelles Potenzieren}
+		\item[3. Schritt:] Berechne $a^r = a^{c_0} \cdot a^{2c_1} \cdot a^{2^2 c_2} \cdots a^{2^d c_d} = \enbrace*{a^{c_0}} \cdot \enbrace*{a^2}^{c_1} \cdot \enbrace*{a^{2^2}}^{c_2} \cdots \enbrace*{a^{2^d}}^{c_d}$ mit maximal $d$ weiteren Verknüpfungen in $G$. 
+		\index{schnelles Potenzieren}
 		\end{description}
 \end{lemma}
 
-Somit reichen höchstens $2d = \oh(\log r)$ viele Anwendungen der Gruppenverknüpfung "$\cdot$". Bei additiver Schreibweise einer Gruppe $(G,+)$ geht das Verfahren zur Berechnung von $r \cdot a$ analog. Man nennt es dann auch das \Index{dual and add}-Verfahren.
+Somit reichen höchstens $2d = \oh(\log r)$ viele Anwendungen der Gruppenverknüpfung "$\cdot$". 
+Bei additiver Schreibweise einer Gruppe $(G,+)$ geht das Verfahren zur Berechnung von $r \cdot a$ analog. 
+Man nennt es dann auch das \Index{dual and add}-Verfahren.
 
 \begin{bsp}
 	$5^{12} = 5^{2^2+2^3} = 5^{2^2} \cdot 5^{2^3}$. Modulo $11$ rechnen wir:
 	\[5^2 \kon  \modu 11, 5^{2^2} \kon 3^2 \kon -2 \modu 11, 5^{2^3} \kon (-2)^2 \kon 4 \modu 11, \]
-	also $5^{12} \kon (-2) \cdot 4 \kon 3 \modu 11$. Das geht schneller als $5^{12}$ von Hand auszurechnen und durch $11$ zu teilen.
+	also $5^{12} \kon (-2) \cdot 4 \kon 3 \modu 11$. 
+	Das geht schneller als $5^{12}$ von Hand auszurechnen und durch $11$ zu teilen.
 \end{bsp}
 
 \begin{anw}[Lösen quadratischer Kongruenzen]
-	Im Fall $p \kon 3 \modu 4$ prim können wir Lösungen quadratischer Kongruenzen modulo $p$ bestimmen: Sei $p = 4k+3$ prim und $a$ mit $p \nmid a$ ein quadratischer Rest modulo $p$, d.h. es existiert ein $b \in \ZZ$ mit $a \kon b^2 \modu p$, und wir möchten $\pm b \modu p$ ausrechnen können. Nach dem kleinen Fermat folgt $b^{4k+2} = b^{p-1} \kon 1 \modu p$. Es folgt $\enbrace*{a^{k+1}}^2 \kon \enbrace*{b^2}^{2(k+1)} = b^{(4k+2)+2} \kon 1 \cdot b^2 \kon a \modu p$, d.h. die Lösungen von $b^2 \kon a \modu p$ sind $b = \pm a^{k+1} \modu p$. Da $a^{k+1} \not\kon -a^{k+1} \modu p \Leftrightarrow 2a^{k+1} \not\kon 0 \modu p$, gibt es genau zwei Lösungen modulo $p$, die wir etwa im Restsystem $\{0,1,\dots,p-1\}$ angeben können und mit $\pm a^{k+1} \modu p$ berechnen können, zum Beispiel mit dem schnellen Potenzieren.
+	Im Fall $p \kon 3 \modu 4$ prim können wir Lösungen quadratischer Kongruenzen modulo $p$ bestimmen: Sei $p = 4k+3$ prim und $a$ mit $p \nmid a$ ein quadratischer Rest modulo $p$, d.h. es existiert ein $b \in \ZZ$ mit $a \kon b^2 \modu p$, und wir möchten $\pm b \modu p$ ausrechnen können. 
+	Nach dem kleinen Fermat folgt $b^{4k+2} = b^{p-1} \kon 1 \modu p$. 
+	Es folgt $\enbrace*{a^{k+1}}^2 \kon \enbrace*{b^2}^{2(k+1)} = b^{(4k+2)+2} \kon 1 \cdot b^2 \kon a \modu p$, d.h. die Lösungen von $b^2 \kon a \modu p$ sind $b = \pm a^{k+1} \modu p$. 
+	Da $a^{k+1} \not\kon -a^{k+1} \modu p \Leftrightarrow 2a^{k+1} \not\kon 0 \modu p$, gibt es genau zwei Lösungen modulo $p$, die wir etwa im Restsystem $\{0,1,\dots,p-1\}$ angeben können und mit $\pm a^{k+1} \modu p$ berechnen können, zum Beispiel mit dem schnellen Potenzieren.
 \end{anw}
 
 \begin{anw}
 \label{anw_1.1.3.14}
-	Sei nun $n$ eine zusammengesetze Zahl, etwa $n = pq$ mit $p \kon q \kon 3 \modu 4$ prim, etwa $p = 4k+3$, $q = 4l+3$ mit $k,l \in \NN_0$, und sei $p \neq q$. Sei $a \modu n$ ein quadratischer Rest modulo $n$. Gesucht seien die Lösungen der Kongruenz $a \kon x^2 \modu n$. Nach dem chinesischen Restsatz gilt $x^2 \kon a \modu n \Leftrightarrow x^2 \kon a \modu p$ und $x^2 \kon a \modu q$, und die jeweiligen Lösungen $\pm a^{k+1} \modu p$ und $\pm a^{l+1} \modu q$ kann man zusammensetzen zu (maximal) vier Lösungen modulo $n$. Es sind genau vier Lösungen, die explizit wie folgt bestimmt werden können: \\
+	Sei nun $n$ eine zusammengesetze Zahl, etwa $n = pq$ mit $p \kon q \kon 3 \modu 4$ prim, etwa $p = 4k+3$, $q = 4l+3$ mit $k,l \in \NN_0$, und sei $p \neq q$. 
+	Sei $a \modu n$ ein quadratischer Rest modulo $n$. 
+	Gesucht seien die Lösungen der Kongruenz $a \kon x^2 \modu n$. 
+	Nach dem chinesischen Restsatz gilt $x^2 \kon a \modu n \Leftrightarrow x^2 \kon a \modu p$ und $x^2 \kon a \modu q$, und die jeweiligen Lösungen $\pm a^{k+1} \modu p$ und $\pm a^{l+1} \modu q$ kann man zusammensetzen zu (maximal) vier Lösungen modulo $n$. 
+	Es sind genau vier Lösungen, die explizit wie folgt bestimmt werden können: \\
 	Sind $r,s \in \ZZ$ gegeben mit $rp + sq = 1$, d.h. die Bézout-Elemente von $p$ und $q$, und ist $\pm b$ Lösung von $x^2 \kon a \modu p$ sowie $\pm c$ Lösung von $x^2 \kon a \modu q$, so liefert die Formel des chinesischen Restsatzes
 	\[ x = \pm b\cdot s \cdot q \pm c \cdot r \cdot p \]
-	genau vier Lösungen von $x^2 \kon a \modu pq$. Diese müssen paarweise inkongruent modulo $pq$ sein, da wir laut chinesischem Restsatz den Ringisomorphismus $\ZZ_{pq} \simeq \ZZ_p \times \ZZ_q$ haben und die vier verschiedenen Lösungspaare $(b,c), (-b,c), (b,-c), (-b,-c)$ deswegen genau vier Restklassen in $\ZZ_{pq}$ entsprechen.
+	genau vier Lösungen von $x^2 \kon a \modu pq$. 
+	Diese müssen paarweise inkongruent modulo $pq$ sein, da wir laut chinesischem Restsatz den Ringisomorphismus $\ZZ_{pq} \simeq \ZZ_p \times \ZZ_q$ haben und die vier verschiedenen Lösungspaare $(b,c), (-b,c), (b,-c), (-b,-c)$ deswegen genau vier Restklassen in $\ZZ_{pq}$ entsprechen.
 \end{anw}
 
 \begin{bsp}
-	Betrachte $p = 11$, $q = 19$, d.h. $k = 2, l = 4$. Wähle $a = 47$. \\
+	Betrachte $p = 11$, $q = 19$, d.h. $k = 2, l = 4$. 
+	Wähle $a = 47$. \\
 	Die Lösungen von $x^2 \kon 47 \kon 3 \modu 11$ sind $\pm 3^3 \kon \pm 5 \modu 11$, die Lösungen von $x^2 \kon 47 \kon 9 \modu 19$ sind $\pm 3 \modu 19$. \\
 	Bézout-Elemente bestimmen: Das Inverse von $19 \kon 8 \modu 11$ ist $7$, das von $11 \modu 19$ ist $7$. \\
 	$\Rightarrow s = r = 7$ und $x \kon \mp 5 \cdot 7 \cdot 19 \pm 3 \cdot 7 \cdot 11 \modu (11 \cdot 19)$ ergibt $x \in \{\pm 16, \pm 60\}$.\\
 	Probe: $16^2 \kon 47 \modu (11 \cdot 19), 60^2 \kon 47 \modu (11 \cdot 19)$. \checkmark
 \end{bsp}
 
-Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $11$ und modulo $19$ sein muss. Würde man $a$ zufällig wählen, wäre das nicht unbedingt der Fall. Dann ist $x^2 \kon a \modu n$ ohnehin unlösbar, falls $a$ kein quadratischer Rest modulo $11 \cdot 19$ ist.
+Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $11$ und modulo $19$ sein muss. 
+Würde man $a$ zufällig wählen, wäre das nicht unbedingt der Fall. 
+Dann ist $x^2 \kon a \modu n$ ohnehin unlösbar, falls $a$ kein quadratischer Rest modulo $11 \cdot 19$ ist.
 
 \begin{anw}[Faires Münzwurfknobeln]
-	Zwei Spieler, Alice (A) und Bob (B), möchten etwas ausknobeln (zum Beispiel, wer beim Fernschach beginnen soll und dann einen Vorteil hat, etc.), allerdings sprechen sie sich am Telefon oder mailen sich, und können sich daher nicht sehen. A wirft eine Münze, und B denkt vorher "Kopf" oder "Zahl", verrät das aber nicht (Würde A die Wahl von B vorher kennen, so würde B das mitgeteilte Ergebnis des Münzwurfs unter Umständen anzweifeln). A teilt B das Ergebnis mit, und B verkündet, wer gewonnen hat: A, wenn ihr Münzwurfergebnis mit der Wahl von B übereinstimmt, ansonsten gewinnt B. Sei B's geheime Wahl "Zahl". \\
-	Teilt A mit, dass sie "Zahl" geworfen hat, akzeptieren A und B den Spielausgang, weil dann A gewinnt und B ihr dies verkündet. Falls A jedoch mitteilt, dass sie "Kopf" geworfen hat, teilt B mit, dass A verloren habe, was A natürlich nicht akzeptieren würde.\\
+	Zwei Spieler, Alice (A) und Bob (B), möchten etwas ausknobeln (zum Beispiel, wer beim Fernschach beginnen soll und dann einen Vorteil hat, etc.), allerdings sprechen sie sich am Telefon oder mailen sich, und können sich daher nicht sehen. 
+	A wirft eine Münze, und B denkt vorher "Kopf" oder "Zahl", verrät das aber nicht (Würde A die Wahl von B vorher kennen, so würde B das mitgeteilte Ergebnis des Münzwurfs unter Umständen anzweifeln). 
+	A teilt B das Ergebnis mit, und B verkündet, wer gewonnen hat: A, wenn ihr Münzwurfergebnis mit der Wahl von B übereinstimmt, ansonsten gewinnt B. 
+	Sei B's geheime Wahl "Zahl". \\
+	Teilt A mit, dass sie "Zahl" geworfen hat, akzeptieren A und B den Spielausgang, weil dann A gewinnt und B ihr dies verkündet. 
+	Falls A jedoch mitteilt, dass sie "Kopf" geworfen hat, teilt B mit, dass A verloren habe, was A natürlich nicht akzeptieren würde.\\
 	Problem: Wie kann bei Ergebnis "Kopf" Spieler B seine Mitspielerin A überzeugen, dass er \underline{vor} dem Münzwurf die Wahl "Zahl" getroffen hat? \\
 	Unsere Antwort: Wenn B dann eine Zahl $n = pq$ faktorisieren könnte, deren Primteiler $p,q$ ansonsten nur A kennt.
 \end{anw}
@@ -513,33 +665,51 @@ Man beachte, dass wir hier benötigen, dass $a$ ein quadratischer Rest modulo $1
 	\end{description}
 	Soweit die Vorbereitung, dann der eigentliche Münzwurf:
 	\begin{description}
-		\item[Schritt 4:] A wählt eine der vier Lösungen zufällig aus (etwa durch Münzwurf!), das heißt entweder $\pm b$ oder $\pm c$, und schickt B das Ergebnis. A kann nicht wissen, dass B die Zahl $b$ gewählt hat. Die Vereinbarung ist nun: \\
+		\item[Schritt 4:] A wählt eine der vier Lösungen zufällig aus (etwa durch Münzwurf!), das heißt entweder $\pm b$ oder $\pm c$, und schickt B das Ergebnis. 
+		A kann nicht wissen, dass B die Zahl $b$ gewählt hat. 
+		Die Vereinbarung ist nun: \\
 		Schickt A eine der Zahlen $\pm b$, gewinnt A. Schickt A eine der Zahlen $\pm c$, gewinnt B, und das verkündet B.
-		\item[Schritt 5:] Es erfolgt die Verifikation, dass A wirklich verloren hat im 2. Fall, dazu muss A sich davon überzeugen, dass B vorher wirklich $\pm b$ gewählt hat. Das kann B nun beweisen, indem er ihr die Primfaktoren von $n$ nennt: \\
-		Er berechnet $b+c \modu n$ und $d := \ggT(b+c,n)$ mit dem euklidischen Algorithmus. Dann ist $d = p$ oder $d = q$. (Denn aus $b^2 \kon a \kon c^2 \modu pq$ folgt: $pq \mid (b-c)(b+c) = b^2-c^2$, und da $b \not\kon c \modu p, b \not\kon c \modu q$ folgt $q \mid b+c$ oder $p \mid b+c$, und $d \neq n$, weil sonst $b \kon -c \modu n$ wäre $\lightning$.) \\
-		Also kann B, weil er $c$ kennt, die von A gewählten Primfaktoren bestimmen und A mitteilen und auf diese Art A überzeugen. Das konnte B nur, weil er vorher auch wirklich nicht die von A genannte Lösung $\pm b$ hatte. Damit ist das Spiel fair.
+		\item[Schritt 5:] Es erfolgt die Verifikation, dass A wirklich verloren hat im 2. Fall, dazu muss A sich davon überzeugen, dass B vorher wirklich $\pm b$ gewählt hat. 
+		Das kann B nun beweisen, indem er ihr die Primfaktoren von $n$ nennt: \\
+		Er berechnet $b+c \modu n$ und $d := \ggT(b+c,n)$ mit dem euklidischen Algorithmus. 
+		Dann ist $d = p$ oder $d = q$. 
+		(Denn aus $b^2 \kon a \kon c^2 \modu pq$ folgt: $pq \mid (b-c)(b+c) = b^2-c^2$, und da $b \not\kon c \modu p, b \not\kon c \modu q$ folgt $q \mid b+c$ oder $p \mid b+c$, und $d \neq n$, weil sonst $b \kon -c \modu n$ wäre $\lightning$.) \\
+		Also kann B, weil er $c$ kennt, die von A gewählten Primfaktoren bestimmen und A mitteilen und auf diese Art A überzeugen. 
+		Das konnte B nur, weil er vorher auch wirklich nicht die von A genannte Lösung $\pm b$ hatte. 
+		Damit ist das Spiel fair.
 	\end{description}
 \end{erl}
 
-In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, möglichst zufälliger Primzahlen $p,q$ gebraucht. Man kennt in der Praxis schnelle Tests (den Miller-Rabin-Test), um zu entscheiden, ob eine große Zahl $n$ (mit evtl. hunderten von Stellen in Dezimaldarstellung) zusammengesetzt ist oder (sehr wahrscheinlich) prim. Daher erzeugt man solange Zufallszahlen, bis der Primzahltest "anschlägt".
+In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, möglichst zufälliger Primzahlen $p,q$ gebraucht. 
+Man kennt in der Praxis schnelle Tests (den Miller-Rabin-Test), um zu entscheiden, ob eine große Zahl $n$ (mit evtl. hunderten von Stellen in Dezimaldarstellung) zusammengesetzt ist oder (sehr wahrscheinlich) prim. 
+Daher erzeugt man solange Zufallszahlen, bis der Primzahltest "anschlägt".
 \nextlecture
 \newpage
 
 \subsection{Public-Key-Kryptographie}
 \label{sub:1.2}
-	\Index{Public-Key-Kryptographie} bezeichnet man auch als asymmetrische Kryptographie.\marginnote{[5]} Bei diesem Kommunikationsverfahren hat jeder Nutzer einen \bet{öffentlichen Schlüssel}, den jeder einsehen kann, und einen \bet{privaten Schlüssel}, den jeder Nuter geheim hält. Möchte Nutzer B eine Nachricht an Nutzer A senden, benutzt er zur Verschlüsselung den öffentlichen Schlüssel von A, die Entschlüsselung gelingt aber nur A mit dem privaten Schlüssel. \index{offentlicher Schlüssel@öffentlicher Schlüssel} \index{privater Schlüssel} \\
-	Ein solches Szenario (auch \Index{Protokoll} genannt) ist das RSA-Verfahren, das wir in Abschnitt \ref{subsub:1.2.1} behandeln. Die Verfahren in \ref{subsub:1.2.2} und \ref{subsub:1.2.3} sind Kryptographie-Verfahren, die mit allgemeinen Gruppen machbar sind (RSA arbeitet $(\ZZ_n^*,\cdot)$).
+	\Index{Public-Key-Kryptographie} bezeichnet man auch als asymmetrische Kryptographie.\marginnote{[5]} Bei diesem Kommunikationsverfahren hat jeder Nutzer einen \bet{öffentlichen Schlüssel}, den jeder einsehen kann, und einen \bet{privaten Schlüssel}, den jeder Nuter geheim hält. 
+	Möchte Nutzer B eine Nachricht an Nutzer A senden, benutzt er zur Verschlüsselung den öffentlichen Schlüssel von A, die Entschlüsselung gelingt aber nur A mit dem privaten Schlüssel. 
+	\index{offentlicher Schlüssel@öffentlicher Schlüssel} \index{privater Schlüssel} \\
+	Ein solches Szenario (auch \Index{Protokoll} genannt) ist das RSA-Verfahren, das wir in Abschnitt \ref{subsub:1.2.1} behandeln. 
+	Die Verfahren in \ref{subsub:1.2.2} und \ref{subsub:1.2.3} sind Kryptographie-Verfahren, die mit allgemeinen Gruppen machbar sind (RSA arbeitet in $(\ZZ_n^*,\cdot)$).
 	
 \subsubsection{RSA-Verfahren}
 \label{subsub:1.2.1}
-	Das \Index{RSA-Verfahren} ist benannt nach einer Arbeit von Rivest\footnote{\url{http://de.wikipedia.org/wiki/Ronald_L._Rivest}}, Shamir\footnote{\url{http://de.wikipedia.org/wiki/Adi_Shamir}} und Adleman\footnote{\url{http://de.wikipedia.org/wiki/Leonard_Adleman}} aus dem Jahr 1978. Seine Sicherheit beruht auf der Schwierigkeit des Faktorisierungsproblems und wird bis heute zur sicheren Kommunikation benutzt. \\
-	Die Methode verlangt auch die Möglichkeit, große Primzahlen zu erzeugen, die möglichst zufällig gewählt sein sollen, ähnlich wie beim Münzwurfproblem. $n = pq$ muss so groß sein, dass alle bekannten Faktorisierungsverfahren zu langsam wären.
+	Das \Index{RSA-Verfahren} ist benannt nach einer Arbeit von Rivest\footnote{\url{http://de.wikipedia.org/wiki/Ronald_L._Rivest}}, Shamir\footnote{\url{http://de.wikipedia.org/wiki/Adi_Shamir}} und Adleman\footnote{\url{http://de.wikipedia.org/wiki/Leonard_Adleman}} aus dem Jahr 1978. 
+	Seine Sicherheit beruht auf der Schwierigkeit des Faktorisierungsproblems und wird bis heute zur sicheren Kommunikation benutzt. \\
+	Die Methode verlangt auch die Möglichkeit, große Primzahlen zu erzeugen, die möglichst zufällig gewählt sein sollen, ähnlich wie beim Münzwurfproblem. 
+	$n = pq$ muss so groß sein, dass alle bekannten Faktorisierungsverfahren zu langsam wären.
 	
 \begin{anw}[Durchführung des RSA-Verfahrens]
-	Die beiden Protagonisten heißen wieder Nutzer Alice (A) und Bob (B). Sie kommunizieren über einen unsicheren Kanal miteinander.
+	Die beiden Protagonisten heißen wieder Nutzer Alice (A) und Bob (B). 
+	Sie kommunizieren über einen unsicheren Kanal miteinander.
 	\begin{description}
-		\item[Schritt 1:] Jeder Nutzer, z.B. (A), wählt zwei große Primzahlen $p \neq q$, etwa gleich groß mit ähnlicher Stellenanzahl, und berechnet $n = pq$ sowie $\varphi(n) = (p-1)(q-1)$. Dann wählt (A) eine Zahl $e$ mit $1<e<\varphi(n)$ und berechnet $1 < d < \varphi(n)$ als Inverses von $e \mod \varphi(n)$, das heißt $de \kon 1 \modu \varphi(n)$, unter Zuhilfenahme des euklidischen Algorithmus.
-		\item[Schritt 2:] Bob möchte Alice seinen Geheimtext (als eine Zahl $x$ kodiert) schicken. Er besorgt sich die Daten $n,e$ vom Server und verschlüsselt $x$ zu $x^e \modu n$. Dann schickt er ihr das Ergebnis $v \kon x^e \modu (n)$ zwischen $1$ und $n$.
+		\item[Schritt 1:] Jeder Nutzer, z.B. (A), wählt zwei große Primzahlen $p \neq q$, etwa gleich groß mit ähnlicher Stellenanzahl, und berechnet $n = pq$ sowie $\varphi(n) = (p-1)(q-1)$. 
+		Dann wählt (A) eine Zahl $e$ mit $1<e<\varphi(n)$ und berechnet $1 < d < \varphi(n)$ als Inverses von $e \mod \varphi(n)$, das heißt $de \kon 1 \modu \varphi(n)$, unter Zuhilfenahme des euklidischen Algorithmus.
+		\item[Schritt 2:] Bob möchte Alice seinen Geheimtext (als eine Zahl $x$ kodiert) schicken. 
+		Er besorgt sich die Daten $n,e$ vom Server und verschlüsselt $x$ zu $x^e \modu n$. 
+		Dann schickt er ihr das Ergebnis $v \kon x^e \modu (n)$ zwischen $1$ und $n$.
 		\item[Schritt 3:] Alice entschlüsselt den geheimen Text $v$ durch Berechnen von $v^d \modu n$, sie erhält $x$, weil für ein $k \in \ZZ$ gilt: $ed = 1 + k \cdot \varphi(n)$, also folgt mit Euler-Fermat, falls $\ggT(x,n) = 1$:
 		\[ v^d \kon (x^e)^d \kon x^{1+k\cdot \varphi(n)} \kon x \cdot \underbrace{\enbrace*{x^{\varphi(n)}}^k}_{\kon 1 \modu n} \kon x \modu n\]
 	\end{description}
@@ -550,11 +720,15 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{bem}
-	Ein Unbefugter, der die Daten $n,e,v$ dieser Kommunikation abfängt, ist nicht in der Lage, $x$ ohne Kenntnis von $d,p,q,\varphi(n)$ zu berechnen. Dazu müsste man $n$ faktorisieren.
+	Ein Unbefugter, der die Daten $n,e,v$ dieser Kommunikation abfängt, ist nicht in der Lage, $x$ ohne Kenntnis von $d,p,q,\varphi(n)$ zu berechnen. 
+	Dazu müsste man $n$ faktorisieren.
 \end{bem}
 
 \begin{bem}
-	Wie sicher das Verfahren ist, hängt davon ab, wie groß die verwendeten Schlüssel sind. Aktuell ist eine Verschlüsselung, bei der $p,q$ eine Bitlänge von mindestens $512$ haben sollten, besonders sicher: $2048$ Bit. Empfehlung der Bundesnetzargentur bis Ende 2020: mindestens $1976$ Bit. Gegen einen Angriff mit einem Quantencomputer hat man allerdings keine Chance.
+	Wie sicher das Verfahren ist, hängt davon ab, wie groß die verwendeten Schlüssel sind. 
+	Aktuell ist eine Verschlüsselung, bei der $p,q$ eine Bitlänge von mindestens $512$ haben sollten, besonders sicher: $2048$ Bit. 
+	Empfehlung der Bundesnetzargentur bis Ende 2020: mindestens $1976$ Bit. 
+	Gegen einen Angriff mit einem Quantencomputer hat man allerdings keine Chance.
 \end{bem}
 
 \begin{bem}
@@ -562,16 +736,28 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{bem}
-	Das Verfahren kann auch ohne Schlüsselserver benutzt werden. B kann A erst mitteilen, dass er ihr eine Nachricht schicken will. Dann erst erledigt A Schritt 1 und teilt ihm die Daten $n,e$ mit. Der Rest geht dann wie oben.
+	Das Verfahren kann auch ohne Schlüsselserver benutzt werden. 
+	B kann A erst mitteilen, dass er ihr eine Nachricht schicken will. 
+	Dann erst erledigt A Schritt 1 und teilt ihm die Daten $n,e$ mit. 
+	Der Rest geht dann wie oben.
 \end{bem}
 
 \begin{bem}[Zur Geschichte von RSA]
-	RSA wurde 1983 als Patent angemeldet, welches 2000 erlosch. Bis Ende der 90er Jahre verbot die US-Regierung Firmen, Software mit starker Verschlüsselung zu exportieren (z.B. T-Shirts mit aufgedruckter RSA-Anleitung\dots). Weiter sollten per Gesetzesvorlage Anbieter elektronischer Kommunikationsdienste dazu verpflichtet werden, Behörden die Möglichkeit zum Zugriff zu verschaffen; das Gesetz scheiterte am Widerstand von Industrie und Bürgerrechtlern. Es motivierte Phil Zimmermann\footnote{\url{http://de.wikipedia.org/wiki/Phil_Zimmermann}} dazu, den Standard \Index{PGP} (pretty good privacy) zu entwickeln, mit dem bis heute E-Mails und anderes für Jedermann sicher verschlüsselt werden können (speziell mit RSA; öffentliche Schlüsselserver dafür gibt es im Internet, z.B. auf \href{http://pgp.mit.edu}{pgp.mit.edu}). Zimmermannn stellte sein Programm 1991 kostenlos zur Verfügung. Es wurde ein Verfahren gegen ihn eröffnet, das sich über drei Jahre lang hinzog (Vorwurf: er exportierte Verschlüsselungstechnologie, die wie Waffentechnologie einzustufen sei). Der Fall wurde fallengelassen, heute ist die Benutzung und Export in den USA straffrei. Bis heute zählt PGP als sicherste und empfehlenswerteste Verschlüsselung privater Kommunikation.
+	RSA wurde 1983 als Patent angemeldet, welches 2000 erlosch. 
+	Bis Ende der 90er Jahre verbot die US-Regierung Firmen, Software mit starker Verschlüsselung zu exportieren (z.B. T-Shirts mit aufgedruckter RSA-Anleitung\dots). 
+	Weiter sollten per Gesetzesvorlage Anbieter elektronischer Kommunikationsdienste dazu verpflichtet werden, Behörden die Möglichkeit zum Zugriff zu verschaffen; das Gesetz scheiterte am Widerstand von Industrie und Bürgerrechtlern. 
+	Es motivierte Phil Zimmermann\footnote{\url{http://de.wikipedia.org/wiki/Phil_Zimmermann}} dazu, den Standard \Index{PGP} (pretty good privacy) zu entwickeln, mit dem bis heute E-Mails und anderes für Jedermann sicher verschlüsselt werden können (speziell mit RSA; öffentliche Schlüsselserver dafür gibt es im Internet, z.B. auf \href{http://pgp.mit.edu}{pgp.mit.edu}). 
+	Zimmermannn stellte sein Programm 1991 kostenlos zur Verfügung. 
+	Es wurde ein Verfahren gegen ihn eröffnet, das sich über drei Jahre lang hinzog (Vorwurf: er exportierte Verschlüsselungstechnologie, die wie Waffentechnologie einzustufen sei).
+	Der Fall wurde fallengelassen, heute ist die Benutzung und Export in den USA straffrei. 
+	Bis heute zählt PGP als sicherste und empfehlenswerteste Verschlüsselung privater Kommunikation.
 \end{bem}
 
 \begin{anw}[Kodierung von Textnachrichten]
-	Wir beschreiben hier ein Verfahren, das die Machbarkeit der Kodierung "Text $\rightarrow$ Zahl" demonstrieren soll. Wenn man es so anwenden möchte, sind aber größere Blöcke erforderlich, damit nicht durch Häufigkeitsanalysen der Blöcke Rückschlüsse auf die Geheimnachricht möglich werden. \\
-	Die Buchstaben A, \dots, Z des Alphabets werden mit $0, \dots, 25$ identifiziert, das Leerzeichen mit $26$. Klartexte werden zu Blöcken aus je drei Zahlen zusammengefasst, also z.B.
+	Wir beschreiben hier ein Verfahren, das die Machbarkeit der Kodierung "Text $\rightarrow$ Zahl" demonstrieren soll. 
+	Wenn man es so anwenden möchte, sind aber größere Blöcke erforderlich, damit nicht durch Häufigkeitsanalysen der Blöcke Rückschlüsse auf die Geheimnachricht möglich werden. \\
+	Die Buchstaben A, \dots, Z des Alphabets werden mit $0, \dots, 25$ identifiziert, das Leerzeichen mit $26$. 
+	Klartexte werden zu Blöcken aus je drei Zahlen zusammengefasst, also z.B.
 	\begin{center}
 		\texttt{KLARTEXT\_} \quad $\Rightarrow \quad 10,11,0 | 17,19,4 | 23,19,26$
 	\end{center}
@@ -579,7 +765,8 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 	\begin{center}
 		\texttt{KLARTEXT\_} \quad $\Rightarrow 7587 | 12910 | 17306$,
 	\end{center}
-	welche beim RSA-Verfahren gemäß $x^e \kon v \modu n$ verschlüsselt wird. Jeder Wert $v$ wird im 29er-System umgewandelt gemäß $v = v_1 \cdot 29^2 + v_2 \cdot 29 + v_3$ zu einem Block $v_1,v_2,v_3 \in \{0, \cdot, 28\}$, der wieder als Text geschrieben werden kann (mit zusätzlichen Zeichen für $27$ und $28$, z.B. "."=$27$, ","=$28$). \\
+	welche beim RSA-Verfahren gemäß $x^e \kon v \modu n$ verschlüsselt wird. 
+	Jeder Wert $v$ wird im 29er-System umgewandelt gemäß $v = v_1 \cdot 29^2 + v_2 \cdot 29 + v_3$ zu einem Block $v_1,v_2,v_3 \in \{0, \cdot, 28\}$, der wieder als Text geschrieben werden kann (mit zusätzlichen Zeichen für $27$ und $28$, z.B. "."=$27$, ","=$28$). \\
 	Ist $n$ zwischen $27^3$ und $29^3$, werden Ver- und Entschlüsselung eindeutig (ohne Beweis) $\rightsquigarrow$ für größere $n$ werden größere Blöcke nötig!
 \end{anw}
 
@@ -587,7 +774,8 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \label{subsub:1.2.2}
 
 \begin{defn}[Das Problem des diskreten Logarithmus (DL-Problem)]
-	Gegeben sei eine abelsche Gruppe. Wir beschreiben das Problem multiplikativ und additiv: \index{diskreter Logarithmus}
+	Gegeben sei eine abelsche Gruppe. 
+	Wir beschreiben das Problem multiplikativ und additiv: \index{diskreter Logarithmus}
 	\begin{description}
 		\item[In $(G,\cdot,1)$:] Sei $x \in G$, $n = \ord(x), y \in \sprod{x} = \{x^l : l \in \ZZ\}$. Bestimme $k \modu n$ mit $y = x^k$.
 		\item[In $(G,+,0)$:] Sei $x \in G, n \ord(x), y \in \sprod{x} = \{lx : l \in \ZZ\}$. Bestimme $k \modu n$ mit $y = kx$.		
@@ -596,13 +784,19 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 
 \begin{bem}
 	Ist eine Gruppe $G$ gegeben, in der das DL-Problem schwer ist, kann dies für ein Kryptoverfahren genutzt werden.\begin{itemize}
-		\item Im Fall $G = (\ZZ_m^*,\cdot,1)$ ist das DL-Problem ähnlich schwer wie das Faktorisierungsproblem. Auch dafür konnte Short 1994 zeigen, dass es auf einem Quantencomputer schnell lösbar ist.
-		\item Im Fall, dass $G = (E(k),+,\oh)$ die Gruppe einer (kryptographisch) geeigneten elliptischen Kurve ist, ist das DL-Verfahren quasi unlösbar. Die besten bekannten Algorithmen sind langsamer als die für das DL-Problem für $\ZZ_m^*$. Darauf beruht die als höher angesehene Sicherheit bei der Kryptographie mit elliptischen Kurven. Algorithmen auf Quantencomputern, die das DL-Problem für elliptische Kurven schnell lösen könnten, sind derzeit unbekannt.
+		\item Im Fall $G = (\ZZ_m^*,\cdot,1)$ ist das DL-Problem ähnlich schwer wie das Faktorisierungsproblem. 
+		Auch dafür konnte Short 1994 zeigen, dass es auf einem Quantencomputer schnell lösbar ist.
+		\item Im Fall, dass $G = (E(k),+,\oh)$ die Gruppe einer (kryptographisch) geeigneten elliptischen Kurve ist, ist das DL-Verfahren quasi unlösbar. 
+		Die besten bekannten Algorithmen sind langsamer als die für das DL-Problem für $\ZZ_m^*$. 
+		Darauf beruht die als höher angesehene Sicherheit bei der Kryptographie mit elliptischen Kurven. 
+		Algorithmen auf Quantencomputern, die das DL-Problem für elliptische Kurven schnell lösen könnten, sind derzeit unbekannt.
 	\end{itemize}
 \end{bem}
 
 \begin{anw}[Diffie-Hellman-Schlüsselaustausch]
-	Hier vereinbaren Alice (A) und Bob (B) durch einen öffentlichen Kanal einen gemeinsamen geheimen Schlüssel, die sie dann für ein symmetrisches Kryptoverfahren nutzen können. Gegeben sei eine Gruppe $G$ und $x \in G$, sowie $n \in \NN$. Diese Daten seien öffentlich bekannt.\index{Diffie-Hellman} \\
+	Hier vereinbaren Alice (A) und Bob (B) durch einen öffentlichen Kanal einen gemeinsamen geheimen Schlüssel, die sie dann für ein symmetrisches Kryptoverfahren nutzen können. 
+	Gegeben sei eine Gruppe $G$ und $x \in G$, sowie $n \in \NN$. 
+	Diese Daten seien öffentlich bekannt.\index{Diffie-Hellman} \\
 	Das Verfahren in $(G,\cdot,1)$:
 	\begin{description}
 		\item[Schritt 1:] Alice denkt sich eine Zahl $a \in \{1,\dots,n-1\}$ und schickt $x^a \in G$ an Bob.\\
@@ -622,26 +816,33 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{anw}
 
 \begin{bem}[Diffie-Hellman-Problem, DH-Problem]
-	Ein Unbefugter, der die Daten $x^a, x^b$ bzw. $ax,bx$ abhört, kann die geheimen Schlüssel berechnen, wenn er das DL-Problem lösen kann. Es genügt aber schon, dafür das folgende, eventuell leichtere Problem zu lösen: \\
+	Ein Unbefugter, der die Daten $x^a, x^b$ bzw. $ax,bx$ abhört, kann die geheimen Schlüssel berechnen, wenn er das DL-Problem lösen kann. 
+	Es genügt aber schon, dafür das folgende, eventuell leichtere Problem zu lösen: \\
 	Berechne zu $x^a, x^b \in \sprod{x} \subseteq G$ in $(G,\cdot,1)$ das Element $x^{ab} \in \sprod{x}$. \\
 	Es ist aber davon auszugehen, dass auch DH ein schweres Problem ist. \\
 	(Bemerkung: DL lösbar $\Rightarrow$ DH lösbar ist klar, "$\Leftarrow$" ist unbekannt.)
 \end{bem}
 
 \begin{bem}
-	Weiter ist beim Schlüsselaustausch entscheidend, dass sich Alice und Bob sicher sein können, wirklich mit dem angegebenen Teilnehmer zu kommunizieren: Ein Unbefugter könnte versuchen, sich erst als Alice auszugeben, und so mit Bob einen Schlüssel $x^{eb}$ auszutauschen und dies Ebenso mit Alice tun ($x^{ea}$). Gelingt dies, braucht der Unbefugte nur die verschlüsselten Nachrichten zwischen Alice und Bob abzufangen: \\
-	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. Er kann so die gesamte geheime Kommunikation abhören. Man nennt dies eine \index{man-in-the-middle-Attacke}.
+	Weiter ist beim Schlüsselaustausch entscheidend, dass sich Alice und Bob sicher sein können, wirklich mit dem angegebenen Teilnehmer zu kommunizieren: Ein Unbefugter könnte versuchen, sich erst als Alice auszugeben, und so mit Bob einen Schlüssel $x^{eb}$ auszutauschen und dies Ebenso mit Alice tun ($x^{ea}$). 
+	Gelingt dies, braucht der Unbefugte nur die verschlüsselten Nachrichten zwischen Alice und Bob abzufangen: \\
+	Die Nachrichten von Alice an Bob dekodiert er mit dem Alice-Schlüssel $x^{ea}$, schickt sie mit dem Bob-Schlüssel $x^{eb}$ kodiert an Bob weiter, und umgekehrt. 
+	Er kann so die gesamte geheime Kommunikation abhören. 
+	Man nennt dies eine \Index{man-in-the-middle-Attacke}.
 \end{bem}
 
 \nextlecture
 \subsubsection{ElGamal-Verschlüsselung}
 \label{subsub:1.2.3}
-	Allen Teilnehmern bekannt sei eine abelsche Gruppe $(G,+)$ \marginnote{[6]} und ein Gruppenelement $x \in G$ von (großer) Ordnung $n = \ord(x)$. Jeder Nutzer wählt eine Zufallszahl $d \in \{1, \dots, n-1\}$ als privaten Schlüssel und erzeugt einen öffentlichen Schlüssel $dx$.
+	Allen Teilnehmern bekannt sei eine abelsche Gruppe $(G,+)$ \marginnote{[6]} und ein Gruppenelement $x \in G$ von (großer) Ordnung $n = \ord(x)$. 
+	Jeder Nutzer wählt eine Zufallszahl $d \in \{1, \dots, n-1\}$ als privaten Schlüssel und erzeugt einen öffentlichen Schlüssel $dx$.
 	
 \begin{anw}[ElGamal-Verschlüsselung]
-	Alice möchte eine geheime Botschaft $m \in G$ an Bob schicken. Die \Index{ElGamal-Verschlüsselung}\footnote{\url{http://de.wikipedia.org/wiki/Taher_Elgamal}} geht wie folgt: 
+	Alice möchte eine geheime Botschaft $m \in G$ an Bob schicken. 
+	Die \Index{ElGamal-Verschlüsselung}\footnote{\url{http://de.wikipedia.org/wiki/Taher_Elgamal}} geht wie folgt: 
 	\begin{description}
-		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1, \dots, n-1\}$ und berechnet $\tilde{a} \cdot x$. Alice besorgt sich Bobs öffentlichen Schlüssel $bx$ und berechnet $R = \tilde{a} \cdot (bx) + m$.
+		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1, \dots, n-1\}$ und berechnet $\tilde{a} \cdot x$. 
+		Alice besorgt sich Bobs öffentlichen Schlüssel $bx$ und berechnet $R = \tilde{a} \cdot (bx) + m$.
 		\item[Schritt 2:] Alice schickt $\tilde{a}x$ und $R$ an Bob.
 		\item[Schritt 3:] Bob berechnet $b \cdot (\tilde{a}x) = \tilde{a} \cdot (bx)$ und die Nachricht durch $R - b\cdot(\tilde{a}x) = m$.
 	\end{description}
@@ -652,7 +853,8 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{bem}
-	Alice könnte $\tilde{a} = a$ wählen. Für die Sicherheit dieses Verfahrens ist es aber wichtig, dass sie bei jeder ihrer Nachrichten ein neues $\tilde{a}$ wählt: Sonst könnte ein Unbefugter, der die Übertragungen $\tilde{a}x, R_1 = \tilde{a}(bx) + m_1$ und $\tilde{a}x, R_2 = \tilde{a}(bx) + m_2$ abhört und schon die Nachricht $m_1$ kennt, über $R_2 - R_1 + m_1 = (m_2 - m_1) + m_1 = m_2$ auch $m_2$ berechnen.
+	Alice könnte $\tilde{a} = a$ wählen. 
+	Für die Sicherheit dieses Verfahrens ist es aber wichtig, dass sie bei jeder ihrer Nachrichten ein neues $\tilde{a}$ wählt: Sonst könnte ein Unbefugter, der die Übertragungen $\tilde{a}x, R_1 = \tilde{a}(bx) + m_1$ und $\tilde{a}x, R_2 = \tilde{a}(bx) + m_2$ abhört und schon die Nachricht $m_1$ kennt, über $R_2 - R_1 + m_1 = (m_2 - m_1) + m_1 = m_2$ auch $m_2$ berechnen.
 \end{bem}
 
 \newpage
@@ -660,25 +862,31 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \subsubsection{DSA-Signatur}
 \label{sub:1.3}
 \label{subsub:1.3.1}
-	Gegeben sei wieder eine abelsche Gruppe $(G,+), x \in G$ mit $n = \ord(x)$ groß. Alice will eine Nachricht $m$ an Bob digital unterschreiben. Wieder hat sie einen geheimen Schlüssel $a \in \{1, \dots, n-1\}$ und einen öffentlichen Schlüssel $ax \in G$.
+	Gegeben sei wieder eine abelsche Gruppe $(G,+), x \in G$ mit $n = \ord(x)$ groß. 
+	Alice will eine Nachricht $m$ an Bob digital unterschreiben. 
+	Wieder hat sie einen geheimen Schlüssel $a \in \{1, \dots, n-1\}$ und einen öffentlichen Schlüssel $ax \in G$.
 	
 \begin{defn}[Hashfunktion]
 	Sei $\mathcal{M}$ die Menge aller möglichen Nachrichten (etwa beliebig lange Folgen von $0$ und $1$), und gegeben sei eine Funktion $h \colon \mathcal{M} \rightarrow \{0,1,\dots,n-1\}$, deren Werte $h(m)$ für $m \in \mathcal{M}$ leicht zu berechnen sind und die die folgenden beiden Eigenschaften hat:
 	\begin{enumerate}[(i)]
 		\item Es ist praktisch unmöglich, Urbilder unter $h$ zu berechnen, d.h. zu $d \in \{0,1,\dots,n-1\}$ ein $m \in \mathcal{M}$ zu finden mit $h(m) = d$.
-		\item $h$ ist \Index{kollisionsresistent}, das bedeutet, dass es praktisch unmöglich ist, zwei verschiedene Elemente $m, m' \in \mathcal{M}$ mit $h(m) = h(m')$ zu finden. Eine solche Funktion heißt \Index{Hashfunktion}.
+		\item $h$ ist \Index{kollisionsresistent}, das bedeutet, dass es praktisch unmöglich ist, zwei verschiedene Elemente $m, m' \in \mathcal{M}$ mit $h(m) = h(m')$ zu finden. 
+		Eine solche Funktion heißt \Index{Hashfunktion}.
 	\end{enumerate}
 \end{defn}
 
 \begin{bsp}
-	Sei $p$ prim mit $2^{1023} < p \leq 2^{1024} - 1$ und $g$ ein Erzeuger der multiplikativen Gruppe $\ZZ_p^*$, d.h. $\sprod{g} = \ZZ_p^*$. Dann ist nach heutigem Wissen die Funktion
+	Sei $p$ prim mit $2^{1023} < p \leq 2^{1024} - 1$ und $g$ ein Erzeuger der multiplikativen Gruppe $\ZZ_p^*$, d.h. $\sprod{g} = \ZZ_p^*$. 
+	Dann ist nach heutigem Wissen die Funktion
 	\begin{equation}
 	\begin{aligned}
 		h\colon \ZZ_p^* &\longrightarrow \ZZ_p^* \\
 		z &\longmapsto g^z \modu p
 	\end{aligned}
 	\end{equation}
-	eine Hashfunktion. Das ab \ref{anw_6.7} beschriebene Verfahren kann dann mit $G = \ZZ_p^*, x = g$ durchgeführt werden (in der Praxis nimmt man für $p$ eine \Index{Sophie-Germain-Primzahl}\footnote{\url{http://de.wikipedia.org/wiki/Sophie_Germain}}, d.h. $p$ prim mit $\frac{p-1}{2}$ auch prim, denn dann ist etwa jedes zweite Element ein Erzeuger. Daher ist leicht ein Erzeuger findbar.
+	eine Hashfunktion. 
+	Das ab \ref{anw_6.7} beschriebene Verfahren kann dann mit $G = \ZZ_p^*, x = g$ durchgeführt werden (in der Praxis nimmt man für $p$ eine \Index{Sophie-Germain-Primzahl}\footnote{\url{http://de.wikipedia.org/wiki/Sophie_Germain}}, d.h. $p$ prim mit $\frac{p-1}{2}$ auch prim, denn dann ist etwa jedes zweite Element ein Erzeuger. 
+	Daher ist leicht ein Erzeuger findbar.
 \end{bsp}
 
 \begin{bem}
@@ -686,26 +894,32 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{anw}[DSA-Verfahren]
-	Nun das \Index{DSA-Verfahren} zur Signatur, wie Alice ihre Nachricht $m$ unterschreiben kann:
+\label{anw_6.7}
+	Nun das \Index{DSA-Verfahren} zur Signatur, wie Alice ihre Nachricht $m$ unterschreiben kann: \marginnote{Beschreibung für eine additive Gruppe $G$!}
 	\begin{description}
 		\item[Schritt 1:] Alice wählt eine Zufallszahl $\tilde{a} \in \{1,\dots,n-1\}$ mit $\ggT(\tilde{a},n) = 1$ und berechnet das Gruppenelement $\tilde{a}x \in G$.
 		\item[Schritt 2:] Alice berechnet das Inverse $\tilde{a}^{-1}$ in $\ZZ_n$ (euklidischer Algorithmus) sowie $s := \tilde{a}^{-1} (h(m)-\Psi(\tilde{a}x)\cdot a)$ in $\ZZ_n$.
 		\item[Schritt 3:] Alice schickt die Nachricht $m$ und ihre Unterschrift $\tilde{a}x,s$ an Bob.
-		\item[Schritt 4:] Bob berechnet $\Psi(\tilde{a}x) \cdot ax + s \tilde{a}x$ sowie den Hashwert $h(m)$. Bob akzeptiert die Unterschrift als echt, wenn $\Psi(\tilde{a}x) ax + s \tilde{a}x = h(m) \cdot x$ in $G$ ist, was nur stimmt, wenn $\Psi(\tilde{a}x)a + s\tilde{a} \kon h(m) \modu m$ gewählt ist, da ja $n = \ord(x)$ in $G$ gilt.
+		\item[Schritt 4:] Bob berechnet $\Psi(\tilde{a}x) \cdot ax + s \tilde{a}x$ sowie den Hashwert $h(m)$. 
+		Bob akzeptiert die Unterschrift als echt, wenn $\Psi(\tilde{a}x) ax + s \tilde{a}x = h(m) \cdot x$ in $G$ ist, was nur stimmt, wenn $\Psi(\tilde{a}x)a + s\tilde{a} \kon h(m) \modu m$ gewählt ist, da ja $n = \ord(x)$ in $G$ gilt.
 	\end{description}
 \end{anw}
 
 \begin{bem}
-	Kann hier ein Unbefugter die Unterschrift von Alice fälschen? Dazu müsste er $s,k,x$ finden mit $\Psi(kx) ax + skx = h(m)x$ für ein beliebiges $k$ anstelle $\tilde{a}$. Er würde $kx$ berechnen und $s$ passend wählen, wofür ein DL-Problem in $\sprod{x} \subseteq G$ zu lösen wäre, denn $a$ kennt er nicht.
+	Kann hier ein Unbefugter die Unterschrift von Alice fälschen? Dazu müsste er $s,k,x$ finden mit $\Psi(kx) ax + skx = h(m)x$ für ein beliebiges $k$ anstelle $\tilde{a}$. 
+	Er würde $kx$ berechnen und $s$ passend wählen, wofür ein DL-Problem in $\sprod{x} \subseteq G$ zu lösen wäre, denn $a$ kennt er nicht.
 \end{bem}
 
 \begin{bem}
-	Auch hier ist für die Sicherheit des Verfahrens nötig, dass Alice für jede Unterschrift ein neues $\tilde{a}$ wählt: erzeugt Alice zwei Unterschriften $(\tilde{a}x,s_1)$ für $m_1$ und $(\tilde{a}x,s_2)$ für $m_2$, ist $s_2 - s_1 \kon \tilde{a}^{-1}(h(m_2)-h(m_1)) \modu n$. Wenn $h(m_2) - h(m_1)$ invertierbar in $\ZZ_n$ ist, kann der Unbefugte $\tilde{a} \modu n$ berechnen. Wegen $\Psi(\tilde{a}x)a \kon h(m_1) - s_1 \tilde{a} \modu n$ ist dann auch $a$ berechenbar, falls $\Psi(r_1)$ invertierbar in $\ZZ_n$ ist.
+	Auch hier ist für die Sicherheit des Verfahrens nötig, dass Alice für jede Unterschrift ein neues $\tilde{a}$ wählt: erzeugt Alice zwei Unterschriften $(\tilde{a}x,s_1)$ für $m_1$ und $(\tilde{a}x,s_2)$ für $m_2$, ist $s_2 - s_1 \kon \tilde{a}^{-1}(h(m_2)-h(m_1)) \modu n$. 
+	Wenn $h(m_2) - h(m_1)$ invertierbar in $\ZZ_n$ ist, kann der Unbefugte $\tilde{a} \modu n$ berechnen. 
+	Wegen $\Psi(\tilde{a}x)a \kon h(m_1) - s_1 \tilde{a} \modu n$ ist dann auch $a$ berechenbar, falls $\Psi(r_1)$ invertierbar in $\ZZ_n$ ist.
 \end{bem}
 
 \begin{bem}
 	Wozu eine Hashfunktion $h$? \begin{itemize}
-		\item Könnte man leicht Urbilder unter $h$ berechnen, ist das Unterschriftenfälschen einfach: Der Unbefugte wählt $j \in \ZZ$ beliebig und berechnet $r = jx - ax, s = \Psi(r)$ und bestimmt $m$ (nicht von Alice!) mit $h(m) \kon \Psi(r)j \modu n$. Dann ist $r,s$ eine für Bob verifizierbare Unterschrift der falschen Nachricht $m$, denn es gilt
+		\item Könnte man leicht Urbilder unter $h$ berechnen, ist das Unterschriftenfälschen einfach: Der Unbefugte wählt $j \in \ZZ$ beliebig und berechnet $r = jx - ax, s = \Psi(r)$ und bestimmt $m$ (nicht von Alice!) mit $h(m) \kon \Psi(r)j \modu n$. 
+		Dann ist $r,s$ eine für Bob verifizierbare Unterschrift der falschen Nachricht $m$, denn es gilt
 		\[\Psi(r)ax + \underbrace{\Psi(r)}_{s} \underbrace{(jx-ax)}_{r} = \Psi(r)jx = h(m) x\]
 		\item Wäre $h$ nicht kollisionsresistent und ein Auffinden von $m' \in \mathcal{M}$ mit $h(m) = h(m')$ leicht, kann man Alice' Unterschrift unter $m'$ fälschen, wenn man eine gültige Unterschrift $\tilde{a}x,s$ für $m$ hat, da
 		\[ \Psi(\tilde{a}x) ax + s \tilde{a}x = h(m) \cdot x = h(m') x \]
@@ -713,10 +927,14 @@ In der praktischen Umsetzung wird noch ein Verfahren zur Erzeugung großer, mög
 \end{bem}
 
 \begin{bem}
-	Bob muss sicher sein, dass Alice' öffentlicher Schlüssel $ax$ auch wirklich von Alice stammt und nicht von einem Unbefugten gefälscht wurde. Man löst das Problem, indem sich jeder Nutzer bei einer Certification Authority (CA) registrieren lässt. Bob würde von dieser eine "beglaubigte Kopie" von Alice' öffentlichen Schlüssel erhalten; Einzelheiten vgl. Fachliteratur.
+	Bob muss sicher sein, dass Alice' öffentlicher Schlüssel $ax$ auch wirklich von Alice stammt und nicht von einem Unbefugten gefälscht wurde. 
+	Man löst das Problem, indem sich jeder Nutzer bei einer Certification Authority (CA) registrieren lässt. 
+	Bob würde von dieser eine "beglaubigte Kopie" von Alice' öffentlichen Schlüssel erhalten; Einzelheiten vgl. Fachliteratur.
 \end{bem}
 
 \begin{mot}
-	Eine auf Koblitz und Miller zurückgehende Idee ist nun, dass für die ElGamal-Verfahren eine beliebige zyklische Gruppe $\sprod{x}$ verwendbar ist, wie etwa die, die von Punkten auf elliptischen Kurven erzeugt werden. Da für (geeignete) elliptische Kurven das DL-Problem bzw. DH-Problem schwieriger für $\ZZ_m^*$ ist, gilt diese Art von Verschlüsselungstechnik heute als besonders sicher und wird vielfältig industriell angewendet. Wir werden die Mathematik elliptischer Kurven im folgenden Abschnitt der Vorlesung näher kennenlernen.
+	Eine auf Koblitz und Miller zurückgehende Idee ist nun, dass für die ElGamal-Verfahren eine beliebige zyklische Gruppe $\sprod{x}$ verwendbar ist, wie etwa die, die von Punkten auf elliptischen Kurven erzeugt werden. 
+	Da für (geeignete) elliptische Kurven das DL-Problem bzw. DH-Problem schwieriger für $\ZZ_m^*$ ist, gilt diese Art von Verschlüsselungstechnik heute als besonders sicher und wird vielfältig industriell angewendet. 
+	Wir werden die Mathematik elliptischer Kurven im folgenden Abschnitt der Vorlesung näher kennenlernen.
 \end{mot}
 \newpage
