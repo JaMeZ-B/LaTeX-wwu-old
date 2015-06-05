@@ -536,7 +536,7 @@ Somit können wir projektive Kurven definieren:
 
 \begin{lemma}
 	Sei $F(X,Y,Z) = \sum_{\uline{v} \geq 0} \alpha_{\uline{v}} X^{v_1} Y^{v_2} Z^{v_3}$ homogen vom Grad $d$ und $f(x,y) = \sum_{\substack{v_1,v_2 \\ v_1 + v_2 \leq d}} \alpha_{v_1,v_2,d-v_1-v_2}x^{v_1} y^{v_2} = F(x,y,1)$, das heißt $F = F_f$. 
-	Weiter sei $P \in \cc_F(k)$ mit $P = i(\QQ) \in \iota(\aff^2(k))$. 
+	Weiter sei $P \in \cc_F(k)$ mit $P = i(Q) \in \iota(\aff^2(k))$. 
 	Dann gilt: $\cc_F(k)$ singulär in $P \Leftrightarrow \cc_F(k)$ singulär in $Q$.
 \end{lemma}
 
@@ -1171,7 +1171,7 @@ Theoretische Ergänzungen zu unserer Definition von $\Delta(\cc_F(k))$:
 \begin{bsp}
 	Betrachte die elliptische Kurve $E(k)$ zur (kurzen) Weierstraßgleichung $y^2 = x^3 - 3x + 3$. 
 	Jede Gerade, die $E(k)$ in zwei Punkten schneidet, schneidet $E(k)$ in einem dritten Punkt, gemäß Vielfachheit gezählt. 
-	Der dritte Schnittpunkt kann auch $\oh \in g_\infty$ sein. \todo{Bild texen!}
+	Der dritte Schnittpunkt kann auch $\oh \in g_\infty$ sein.
 	\newpage
 	\begin{figure}[h]
 		\centering
@@ -1457,4 +1457,152 @@ Als Beweishilfsmitten benötigen wir den \Index{Neunpunktesatz}.
 		\item Algebraiker betrachten zu beliebigen algebraischen Varietäten die so genannte Divisorklassengruppe, welche eine abelsche Gruppe laut Definition ist, sowie eine Abbildung von $E(k)$ auf ihre Divisorklassengruppe.
 		Diese ist ein Isomorphismus nach dem tiefen Satz von Riemann-Roch, das heißt die Gruppenstruktur überträgt sich, insbesondere also die Assoziativität der Verknüpfung "$+$".
 	\end{itemize}
+\end{bem}
+
+\nextlecture
+\subsubsection{Schnelle Arithmetik auf elliptischen Kurven}
+	Die Gruppenoperation "$+$"\marginnote{[15]} auf einer elliptischen Kurven $E(k)$ soll rechnerisch praktisch mit den expliziten Formeln aus~Satz \ref{satz_13.13} und \ref{satz_13.14} auf dem Computer umgesetzt werden. 
+
+\begin{bem}
+	Ein Blick auf die expliziten Formeln zeigt:
+	\begin{itemize}
+		\item Bei kurzer Weierstraßform $y^2 = x^3 + ax + b$ spielt der Koeffizient $b$ keine Rolle.
+		Also ist es rechnerisch günstig, Kurven mit kleinem $a$ und großem $b$ zu benutzen.
+		\item Für Kurven mit $\Char(k) = 2$ ergeben sich mit Satz~\ref{satz_13.13} Formeln für "$+$", die sich besonders gut für Hardwareimplementierungen eignen.
+		\item Sowohl bei der Addition "$+$" als auch bei der Punkteverdopplung $P \mapsto 2P$ (affin) wir eine Division in $k$ benötigt.
+		Das ist zum Beispiel für $k = \RR$ unpässlich bzw. zu ungenau.
+		Das Problem lässt sich mit projektiven Koordinaten beheben:
+		Ist $P = \enbrace*{\frac{x}{r},\frac{y}{s}} \in \PP^2(k)$ mit $r,s \in k \setminus \setnull$, ist $P = [xs:yr:rs]$ ohne Division berechenbar, aber es müssen mehr Multiplikationen durchgeführt werden.
+		Durch die Einführung einer Variante von projektiven Koordinaten -- den so genannten \bet{Jakobinischen Koordinaten} --  kann man im Vergleich dazu Multiplikationen einsparen, was den Rechenaufwand vermindert.
+		Wir besprechen dies in diesem Abschnitt zur schnellen Punkteaddition.
+		\index{Jakobinische Koordinaten}
+	\end{itemize}
+\end{bem}
+
+\begin{defn}[Verallgemeinerte projektive Koordinaten]
+	Sei $k$ ein Körper und $c,d \in \NN$, dann definieren wir die Relation $\sim$ auf $k^3\setminus \setnull$ durch
+	\[
+		(x,y,z) \sim (x',y',z')	\quad :\Leftrightarrow \quad \exists \sigma \in k \setminus \setnull : x = \sigma^c z', y = \sigma^d z', z=\sigma z'
+	\]
+\end{defn}
+
+\begin{bem}
+	\begin{itemize}
+		\item $\sim$ ist eine Äquivalenzrelation auf $k^3 \setminus \setnull$, ihre Äquivalenzklassen bezeichnen wir mit
+		\[
+			(x:y:z) := \{ (x',y',z') \in k^3 \setminus \setnull : (x',y',z') \sim (x,y,z) \}
+		\]
+		\item Im Fall $c=d=1$ erhalten wir unsere bisherige Definition für einen projektiven Punkt $[x:y:z]$ zurück.
+		Auch hier nennen wir $(x:y:z)$ einen projektiven Punkt.
+	\end{itemize}
+\end{bem}
+
+\begin{bem}
+	\begin{itemize}
+		\item Wenn $z \neq 0$, gilt durch Normierung $\enbrace*{\frac{x}{z^c}, \frac{y}{z^d},1} \sim (x,y,z)$, vermöge $\sigma = \frac{1}{z}$, damit kann man in der Menge
+		\[
+			\PP_{(c,d)}^2(k) := \{ (x:y:z) : (x,y,z) \in k^3 \setminus \setnull \}
+		\]
+		die Punkte mit $z \neq 0$ wieder mit $\aff^2(k)$ identifizieren.
+		\item Die Punkte mit $z = 0$ bilden wieder die unendlich ferne Gerade.
+		\item Die projektive Form der Weierstraßgleichung erhält man durch Einsetzen von $\frac{x}{z^c}$ und $\frac{y}{z^d}$ in die Gleichung und Entfernung der Nenner durch Multiplikation:
+		\[
+			y^2 - x^3 - ax - b = 0 \Rightarrow \enbrace*{\frac{y}{z^d}}^2 - \enbrace*{\frac{x}{z^c}}^3 - a \cdot \frac{x}{z^c} - b = 0 \Rightarrow y^2 - x^{3-3c+2d} - axz^{2d-c} - bz^{2d} = 0,
+		\]
+		falls etwa $2d = 3c$, was offenbar im Allgemeinen nicht mehr homogen sein muss.
+		\item In der Krpytographie verwendet man folgende projektive Darstellungen:
+			\begin{itemize}
+				\item Standard-projektive Koordinaten: $c=d=1$
+				\item \Index{Jakobinische Koordinaten}: $c=2, d=3$
+				\item \Index{Chudnovski-Koordinaten}: ein jakobinischer Punkt wird als $(x:y:z:z^2:z^3)$ dargestellt.
+			\end{itemize}
+	\end{itemize}
+\end{bem}
+
+\begin{anw}[Schnelle Punkteaddition mit Jakobinischen Koordinaten]
+	Sei $E(k)\colon y^2 = x^3 + ax + b$ gegeben mit $4a^3 + 27b^2 \neq 0$.
+	Anhand der affinen Version für die explizite Punkteverdopplung zeigen wir nun, dass man Rechenaufwand sparen kann, wenn man mit Jakobinischen Koordinaten $c=2, d=3$ arbeitet.
+	Ist $P = (u,v)$, $P \neq -P$, so ist
+	\[
+		2P = P+P =  (\underbrace{\lambda^2 - 2u}_{=:x}, \underbrace{\lambda(u-x) - v}_{=:y}),
+	\]
+	wobei $\lambda := \frac{3u^2+a}{2v}$, die affine Version der expliziten Formel in Standard-Darstellung.
+	Für die Koordinaten $x,y$ von $2P = (x:y:1) = [x:y:1]$ bei $P=[u:v:z]$ erhält man durch Einsetzen von $\frac{u}{z^2}$ für $u$ und $\frac{v}{z^3}$ für $v$ dann
+	\[
+		x = \enbrace*{\frac{3 \cdot \enbrace*{ \frac{u}{z^2} }^2 + a}{2 \cdot \frac{v}{z^3}}}^2 - 2 \cdot \frac{u}{z^2} = \frac{\enbrace*{3 \cdot \frac{u^2}{z^4} + a}^2 z^6}{4v^2} - 2 \cdot \frac{u}{z^2} = \frac{(3u^2 + az^4)^2-8uv^2}{4v^2z^2}
+	\]
+	und
+	\[
+		y = \frac{3 \cdot \enbrace*{ \frac{u}{z^2}}^2 + a}{2 \cdot \frac{v}{z^3}} \cdot \enbrace*{\frac{u}{z^2} - x} - \frac{v}{z^3} = \frac{3u^2 + az^4}{2vz} \cdot \enbrace*{\frac{u}{z^2} - x} - \frac{v}{z^3}.
+	\]
+	Setzen wir nun $\sigma := 2vz$, wird damit $x_0 = \sigma^2 x, y_0 = \sigma^3 y, z_0 = \sigma$ und somit
+	\[
+		x_0 = (3u^2+az^4)^2 - 8uv^2, z_0 = 2vz
+	\]
+	und
+	\begin{equation}
+	\begin{aligned}
+		y_0 &= \frac{3u^2+az^4}{2vz} \cdot 8v^3z^3 \cdot \enbrace*{\frac{u}{z^2} - x} - \frac{v}{z^3} \cdot 8v^3z^3 \\
+		&= (3u^2 + az^4) \cdot 4v^2 \cdot(u-z^2x) - 8v^4 \\
+		&= (3u^2 + az^4) \cdot (4uv^2 - x_0) - 8v^4
+	\end{aligned}
+	\end{equation}
+\end{anw}
+
+\begin{bem}
+	Eine Umsetzung der Berechnung von $(x_0:y_0:z_0) = 2P = (x:y:1)$ ist somit wie folgt möglich:
+	\[
+		A := v^2 \qquad B:= 4u \cdot A \qquad C:=8A^2 \qquad D:=3u^2+a\cdot (z^2)^2
+	\]
+	\[
+		x_0 := D^2 - 2B \qquad y_0 := D \cdot(B-x_0) -C \qquad z_0 := 2v \cdot z
+	\]
+	Das sind insgesamt sechs Quadrierungen und vier Multiplikationen im Basiskörper $k$, es sind keine Divisionen nötig!
+	(Die Skalaren Vielfachen mit $2,3,4,8$ zählen wie Additionen: $2 \cdot s = s+s$ usw.) \\
+	Analog gewinnt man die folgenden effizienten, expliziten Formeln zur Punkteaddition $P+Q$ mit $P=(u,v), Q=(r,s)$ in jakobinischen Koordinaten:
+	\begin{equation}
+	\begin{aligned}
+		x_0 &= (sz^3 - v)^2 - (rz^2-u)^2(u+rz^2) \\
+		y_0 &= (sz^3 - v)(u(rz^2-u)^2-x_0)-v(rz^2-u)^3 \\
+		z_0 &= (rz^2-u)z
+	\end{aligned}
+	\end{equation}
+	Als Rechenverfahren dient dann:
+	\[
+		A:= z^2 \qquad B:= z\cdot A \qquad C:= r \cdot A \qquad D:= s \cdot B \qquad E:= C-u
+	\]
+	\[
+		F:= D-v \qquad G:= E^2 \qquad H:=G \cdot E \qquad T:= u \cdot G
+	\]
+	\[
+		x_0 := F^2 - (H+2I) \qquad y_0 := F \cdot (I-x_0)-v \cdot H \qquad z_0 := z \cdot E
+	\]
+\end{bem}
+
+\begin{bem}
+	Das sind insgesamt drei Quadrierungen und acht Produkte in $k$, keine Divisionen!
+	Aufstellung des Rechenaufwands für eine elliptische Kurve $y^2 = x^3 - 3x + b$:
+	\begin{center}
+		\begin{tabular}{c|c|c}
+		& Punkteverdopplung $2P = P+P$ & Punkteaddition $P+Q$ \\ 
+		\hline affin & 1 Div., 2 Mul., 2 Quad. & 1 Div., 2 Mul., 1 Quad. \\ 
+		standard-projektiv & 7 Mul., 3 Quad. & 12 Mul., 2 Quad. \\ 
+		jakobinische Koordinaten & 4 Mul., 4 Quad. & 12 Mul., 2 Quad. \\ 
+		Chudnovski-Koordinaten & 5 Mul., 4 Quad. & 11 Mul., 3 Quad. 
+		\end{tabular} 
+	\end{center}
+\end{bem}
+
+\begin{bem}
+	Fazit: Arbeitet man mit jakobinischen Koordinaten, können bei der Punkteverdopplung Multiplikationen eingespart werden, was dann am Computer zu einem schnelleren Verfahren bei der Berechnung von $2 \cdot P$ bzw. $m \cdot P$ führt.
+\end{bem}
+
+\begin{bem}
+	Zur Erinnerung: Wie bei der schnellen Potenzierung zur Berechnung von $x^m$ kann bei additiver Schreibweise einer Gruppe die Berechnung von $m \cdot P$ analog durchgeführt werden, was man "schnelle Vervielfachung nennen könnte, engl. \Index{dual and add}-algorithm.
+	Schritte des Verfahrens:
+	\begin{enumerate}[1)]
+		\item Sei $d = \floor*{\frac{\log m}{\log 2}}$, berechne durch sukzessives Verdoppeln $P, 2P, 4P, 8P, \dots, 2^d P$.
+		\item Schreibe $m$ als Binärzahl: $m = \sum_{i=0}^d c_i 2^i, c_i \in \{0,1\}$.
+		\item Berechne $mP = (c_0 P) + (c_1 \cdot 2P) + (c_2 \cdot 4P) + \dots + (c_d \cdot 2^dP)$ mit maximal $d$ weiteren Additionen von Punkten auf $E(k)$.
+	\end{enumerate}
 \end{bem}
