@@ -2384,14 +2384,14 @@ ist beliebig oft stetig differenzierbar
 \end{enumerate}
 % subsubsection lemma (end)
 \subsubsection{Satz} % (fold)
-\label{ssub:satz}
+\label{satz14}
 $ U \subseteq \mathbb{R}^n$ offen. $ f: U \to \mathbb{R}^n $ stetig differenzierbar. \\
 Es gelte
 \begin{enumerate}
 	\item $Df(x)$ ist invertierbar für alle $x \in U$
 	\item $f(U) \subseteq \mathbb{R}^n$ ist offen
 	\item $f:U \to f(U)$ bijektiv
-	\item Die Umkehrfunktione $g:f(U) \to U$ ist stetig
+	\item Die Umkehrfunktion $g:f(U) \to U$ ist stetig
 \end{enumerate}
 Dann ist $g$ stetig differenzierbar (also ist $f$  Differomorphismus)
 \minisec{Beweis:} $x \in U$,$y=f(x)$. Sei $A: \,-x+U \to \Mat_{n,n}(\mathbb{R})$ stetig bei $0$ und $f(x+h)=f(x)+A(h)h$ für alle $h$ (Dies existert, da $f$ differenzierbar bei $x$). \\
@@ -2406,7 +2406,178 @@ Setze nun $B(h):=(A(h))^{-1}$. Dann ist $B$ stetig bei $0$ (,weil $A \mapsto A^{
 	&= g(y) + \underset{\substack{B(0) \\ \text{($B$ stetig bei $0$)}}}{\underbrace{B(\underset{\stackrel{k \to 0}{\longrightarrow}-x+g(y)}{\underbrace{-x+g(y+k)}})}}k
 \end{align*} 
 \bewende
-% subsubsection satz (end)
-% subsection umkehrbare_differenzierbare_abbildungen (end)
-% section der_umk (end)
+\minisec{Bemerkung:}
+\begin{enumerate}
+	\item Wir werden zeigen, dass $1 \& 2$ $\Rightarrow$ $3 \& 4$
+	\item Man kann zeigen, dass in der Situation von $(1.4)$ gilt: \\
+	Ist $f$ sogar eine $C^k$-Abbildung. $(k \geq 2)$, dann ist auch $g$ eine $C^k$-Abbildung. (ohne Beweis)
+\end{enumerate}
+\subsubsection{Beispiel} % (fold)
+\label{ssub:beispiel}
+
+% subsubsection beispiel (end)
+Sei $f: \mathbb{R}^2 \to \mathbb{R}^2$ mit
+\[
+	f \begin{pmatrix}
+x \\ y		
+	\end{pmatrix} = e^x \begin{pmatrix}
+		\cos(y) \\ \sin(y)
+	\end{pmatrix}
+\] Dies entspricht der komplexen Exponentialfunktion
+\[
+	x,y \in \mathbb{R} \qquad e^{x+iy}= e^x(\cos(y)+i \sin(y))
+\]
+$f$ ist differenzierbar mit
+	\[
+		Df \begin{pmatrix}
+			x \\ y
+		\end{pmatrix} = e^x \begin{pmatrix}
+			\cos(y) & -\sin(y) \\ \sin(y) & \cos(y)
+		\end{pmatrix}
+	\]
+	\[
+		\det Df \begin{pmatrix}
+			x \\ y
+		\end{pmatrix} = e^{2x} \neq 0
+	\]
+	\[
+		f( \mathbb{R}^2) = \mathbb{R}^2 \setminus \{0\}
+	\]
+	\[
+		\norm{f \begin{pmatrix}
+			x \\ y
+		\end{pmatrix}}_2 = e^x ,\qquad f \begin{pmatrix}
+			x \\ y + 2 \pi
+		\end{pmatrix} = f \begin{pmatrix}
+			x \\ y
+		\end{pmatrix}
+	\]
+$f$ ist nicht injektiv
+Sei \[
+	U = \set[ \begin{pmatrix}
+		x \\ y
+	\end{pmatrix} \in \mathbb{R}^2]{0 < y < 2 \pi}
+\]
+\[
+	f: U \to f(U) \text{ ist bijektiv}
+\]
+\[
+	f(U) = \mathbb{R}^2 \setminus \set[\begin{pmatrix}
+		x \\ 0 
+	\end{pmatrix}]{x > 0}
+\] $f$ ist nicht injektiv, aber es gilt jeder Punkt in $\mathbb{R}^2$ hat offene Umgebung $V \subseteq \mathbb{R}^2$ 
+\[
+	f : V \to f(V) \text{ ist bijektiv}
+\]
+
+\subsubsection{Der Umkehrsatz} % (fold)
+\label{ssub:der_umkehrsatz}
+Sei $ U \subseteq \mathbb{R}^n$ offen , $ f: U \to \mathbb{R}^n $ eine $C^1$-Abbildung. \\
+\underline{Annahme}: Für alle $x \in U$ ist $Df(x) \in \Mat_{n,n}(\mathbb{R})$ invertierbar. \\
+Dann gilt:
+\begin{enumerate}[(i)]
+	\item Für alle $V \subseteq U$ offen ist $f(V) \subseteq \mathbb{R}^n$ offen.
+	\item Zu jedem $x \in U$ existiert eine offene Umgebung $V \subseteq U$ von $x$, so dass
+	\[
+		f  \Big|_{V}^{}: V \to f(V)
+	\]
+	bijektiv ist, und die Umkehrabbildung $g:f(V) \to V$ ist stetig differenzierbar.
+\end{enumerate}
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Eine Abbildung $f$, welche die Voraussetzungen von \ref{ssub:der_umkehrsatz} erfüllt, heißt \Index{lokaler Diffeomorphismus}
+
+\subsubsection{Korollar} % (fold)
+\label{ssub:korollar}
+$ U \subseteq \mathbb{R}^n$ offen , $ f: U \to \mathbb{R} $ in $C^1$, $Df(x)$ invertierbar für alle $x \in U$, $f$ injektiv.
+Dann gilt: \\
+$f(U)$ ist offen in $\mathbb{R}^n$ und $f$ ist ein Diffeomorphismus. \\
+(Verschärfung von \ref{satz14})
+\minisec{Beweis:} $f(U)$ ist offen (folgt aus \ref{ssub:der_umkehrsatz}) \\
+Nach \ref{ssub:der_umkehrsatz} bleibt zu zeigen, dass die Umkehrabbildung $g: f(U) \to U$ stetig ist. Zunächst eine Bemerkung:
+\minisec{Allgemeine Bemerkung:} $X$ metrischer Raum, $U \subseteq X$ offen, $V \subseteq U$. Dann gilt: 
+\[
+	V \text{ ist offen in $X$} \,\, \Leftrightarrow \,\, V \text{ ist offen in $U$}
+\] \\
+\\
+\underline{zu Zeigen}: $g$ stetig
+$g:f(U) \to U$. Sei $V \subseteq U$ offen. $g^{-1}(V)=f(V)$, weil $g=f^{-1}$
+\begin{align*}
+	& \stackrel{\text{(Bem)}}{\Rightarrow } V \subseteq \mathbb{R}^n \text{ offen in } \mathbb{R}^n \\
+	& \stackrel{\ref{ssub:der_umkehrsatz}}{\Rightarrow} f(V) \text{ offen in } \mathbb{R}^n \\
+	& \stackrel{\text{(Bem)}}{\Rightarrow }f(V)=g^{-1}(V) \text{ offen in }f(U) \\
+\end{align*}
+Damit folgt, dass das Urbild jeder offenen Teilmenge in $U$ unter $g$ ist offen in $f(U)$ und damit ist $g:f(U) \to U$ stetig
+\bewende
+\subsection{Beweis des Umkehrsatzes} % (fold)
+\label{sub:beweis_des_umkehrsatzes}
+\minisec{Vorbereitungen:}
+\subsubsection{Schrankensatz} % (fold)
+\label{ssub:schrankensatz}
+Sei $ U \subseteq \mathbb{R}^n$ offen und \Index{Konvex},(d.h $x,y \in U$,$t \in [0,1]$, dann ist $(1-t)x+ty \in U$). \\
+Sei $ f: U \to \mathbb{R}^m $ eine $C^1$-Abbildung, und es gebe $L \geq 0$, so dass gilt:
+\[
+	\norm{Df(x)}\leq L \qquad \text{für alle }x \in U
+\] 
+$\Rightarrow$ $f$ ist $L$-Lipschitzstetig, d.h $\norm{f(x)-f(y)}\leq L \norm{x-y}, \,\, \forall\, x,y \in U$
+\minisec{Beweis:} Seien $x,y \in U$. Nach dem Hauptsatz der Differentialrechnung und Integralrechnung gilt dann
+\[
+	f(y) = f(x)+ \int_{0}^{1} Df(\underset{=(1-t)x+ty \in U}{\underbrace{x+t(y-x)}})(y-x) \,\mathrm{d}t
+\]
+Dann folgt
+\begin{align*}
+	\norm{f(y)-f(x)}&= \norm{\int_{0}^{1}Df(x+t(y-x))(y-x) \,\mathrm{d}t} \\
+	&\leq \int_{0}^{1}\norm{Df(x+t(y-x))(y-x)} \,\mathrm{d}dt \\
+	&\leq \int_{0}^{1} \underset{\leq L}{\underbrace{\norm{Df(x+t(y-x))}}}\norm{y-x} \,\mathrm{d}t \\
+	& \leq L \norm{y-x}
+\end{align*} \bewende
+% subsubsection schrankensatz (end)
+\subsubsection{Banach'scher Fixpunktsatz} % (fold)
+\label{ssub:banach_scher_fixpunktsatz}
+Sei $X \neq \emptyset$ ein vollständiger metrischer Raum und $f: X \to X$ eine Abbildung. Sei $f$ $q$-Lipschitzstetig mit $q<1$ (,d.h \,$d(f(x),f(y))\leq q d(x,y),\,q <1$). \\
+Dann besitzt $f$ genau einen \Index{Fixpunkt} $x \in X$, dh $f(x)=x$ 
+\minisec{Beweis:} \underline{Eindeutigkeit}: Seien $x,y \in X$ mit $f(x)=x$ und $f(y)=y$. Dann gilt
+\[
+	d(x,y)=d(f(x),f(y))\leq q d(x,y)
+\]
+Also gilt \[
+	\underset{>0}{\underbrace{(1-q)}} \underset{\geq 0}{\underbrace{d(x,y)}} \leq 0
+\]
+Dann muss aber $d(x,y)=0$ gelten und damit $x=y$, weil $d(.,.)$ eine Metrik ist. \\
+\underline{Existenz}: Setze $f^n:X \to X$ mit $n \in \mathbb{N}_0$ und
+\[
+	f^0 := \id \,,\, f^1 := f \,,\,f^n:= f \circ f^{n-1}
+\]
+Sei $x_0 \in X$ beliebig, $x_n := f^n(x)$.\\
+\underline{Behauptung}: $(x_n)_n$ konvergiert gegen ein $x_{\infty}$ mit $f(x_{\infty})=x_{\infty}$. \\
+Wir zeigen, dass $(x_n)_n$ eine Cauchyfolge ist: \\
+\begin{align*}
+	d(x_n,x_{n+1}) &= d(f(x_{n-1})-f(x_n)) \\
+	&\leq q d(x_{n-1},x_n) \\
+	&\leq \dots \leq q^nd(x_0,x_1) 
+\end{align*} 
+Dann folgt mit der Dreiecksungleichung
+\begin{align*}
+	d(x_n,x_{n+m}) &\leq d(x_n,x_{n+1})+d(x_{n+1},x_{n+2})+ \dots + d(x_{n-1+m},x_{n+m}) \\
+	&= \sum_{k=0}^{m-1}d(x_{n+k},x_{n+k+1}) \\
+	& \leq \sum_{k=0}^{m-1}q^kd(x_n,x_{n+1}) \\
+	&\leq \sum_{k=0}^{m-1}q^kq^nd(x_0,x_1) \\
+	&\leq q^n d(x_0,x_1)\sum_{k=0}^{\infty}q^k \\
+	&= q^n d(x_0,x_1) \frac{1}{1-q} \stackrel{n \to \infty}{\longrightarrow} 0 
+\end{align*}
+Damit ist $(x_n)_n$ eine Cauchy-Folge. Weil $X$ vollständig ist, konvergiert dann $x_n \to x_{\infty} \in X$. \\
+Nun gilt: \begin{align*}
+	d(x_{\infty},f(x_{\infty})) &\stackrel{\hphantom{f \text{ stetig}}}{=} d (\lim_{n \to \infty}x_n, f( \lim_{n \to \infty}x_n)) \\
+	&\stackrel{f \text{ stetig}}{=} d(\lim_{n \to \infty}x_n, \lim_{n \to \infty}f(x_n)) \\
+	&\stackrel{d \text{ stetig}}{=} \lim_{n \to \infty}\underset{\leq q^n d(x_0,x_1)}{\underbrace{d(x_n,f(x_n))}}=0
+\end{align*}
+Darauf folgt dann insgesamt $f(x_{\infty})=x_{\infty}$ \bewende
+% subsubsection banach_scher_fixpunktsatz (end)
+\subsubsection{Lemma} % (fold)
+\label{ssub:lemma}
+Wenn $T \in \Mat_{n,n}(\mathbb{R})$ mit $\norm{T}\leq 1$ Dann ist $1-T$ ist invertierbar.
+\minisec{Beweis:} 
+Wir zeigen: $\forall\, y \in \mathbb{R}^n \exists\,! \,x \in \mathbb{R}^n$, so dass $(1-T)x=y \Leftrightarrow  x=y+Tx$
+% subsubsection lemma (end)
+% subsection beweis_des_umkehrsatzes (end)
 \end{document}	
