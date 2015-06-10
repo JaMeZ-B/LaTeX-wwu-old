@@ -1175,7 +1175,7 @@ Betrachte $H= \set[(v,V) \in \mathds{C}^2 \times \mathds{C}P^1]{v \in V} $. Dies
 $[H,0]_\st \in K^0(\mathds{C}P^1)$? Welche Gestalt haben Vektorbündel über $X \times S^2$? Sei $S^2= D_+ \cup D_-$ die Zerlegung in die \enquote{obere} und die 
 \enquote{untere} Halbsphäre. Sei $E \to X \times S^2$ ein Vektorbündel. Sei $z_0 \in S^1= D_+ \cap D_- \subset S^2$ ein Basispunkt von $S^2$. Sei 
 $F= \iota^* E$ mit $\iota \colon X \to X \times S^2$ gegeben durch $x \mapsto(x,z_0)$. Wegen $D_+ \cong D_- \simeq \set{\pt}$ ist $\pr_X^\pm \colon X \times D_{\pm} \to X$
-eine Homotopieäquivalenz mit Homotopieinversem $\iota_{pm} \colon X \to X \times D_\pm$, $x \mapsto (x,z_0)$. Daher ist $E|_{X \times D_\pm} \cong \iota_\pm^*F$.
+eine Homotopieäquivalenz mit Homotopieinversem $\iota_{\pm} \colon X \to X \times D_\pm$, $x \mapsto (x,z_0)$. Daher ist $E|_{X \times D_\pm} \cong \iota_\pm^*F$.
 
 Dann ist $E$ isomorph zur Verklebung von $\iota_+^*F$ und $\iota_-^* F$ entlang eines Isomorphismus, der gegeben ist durch eine stetige Abbildung $S^1 \to \textsc{Iso}(F)$, 
 wobei $\textsc{Iso}(F)$ der Raum aller Vektorbündelisomorphismen $F \to F$ ist. Wir schreiben $E \cong \set{F,f}$. Die Isomorphieklasse von $\set{F,f}$ hängt nur noch der 
@@ -1184,7 +1184,7 @@ Homotopieklasse von $f$ ab.
 
 \minisec{Beispiel}
 Übergangsabbildung von $H$: Identifiziere $\mathds{C}P^1$ mit $\mathds{C} \cup \set{\infty} \cong S^2 $ mit Hilfe der Abbildung 
-$\mathds{C} \cup \set{\infty} 7to \mathds{C}P^1 $, definiert duch $z \mapsto \benbrace*{z:1}, \infty \mapsto \benbrace*{1:0}$. Die Umkehrabbildung ist gegeben durch
+$\mathds{C} \cup \set{\infty} \to \mathds{C}P^1 $, definiert duch $z \mapsto \benbrace*{z:1}, \infty \mapsto \benbrace*{1:0}$. Die Umkehrabbildung ist gegeben durch
 \[
 	\benbrace*{z_1,z_2} \mapsto \begin{cases}
 		z_1/z_2, &\text{ falls }z_2 \not=0\\
@@ -1213,7 +1213,7 @@ Trivialisierungen:
 	\end{tikzcd}
 \]
 Wir setzen $F=S^1  \times \mathds{C}$ und $f \colon S^1 \to \textsc{Iso}(S^2 \times \mathds{C})$, $z \mapsto \enbrace*{w \mapsto wz}$, in jeder Faser Multiplikation 
-mit $z$. Es ist nun $H= \set{\mathds{C}, w \mapsto w \cdot z} = \set{\mathds{C},z} $.
+mit $z$. Es ist nun $H= \set{\mathds{C}, w \mapsto w \cdot z} = \set{\mathds{C},z} $ und $H^* \cong \set{\mathds{C},z ^{-1}}$.
 
 Weitere Beispiele
 \[
@@ -1249,7 +1249,124 @@ in $K^0(S^2)$ gilt die Relation $\benbrace*{H,0}^2 - 2 \benbrace*{H,0} + \benbra
 \]
 
 \subsection*{Theorem Bott '58}
-$\mu \colon K^1(X) \otimes \nicefrac{\mathds{Z}[H]}{(H-1)^2} \to K^0(X) \otimes  K^0(S^2) \to K^0(X \times S^2)$ ist ein Ringisomorphismus . Insbesondere $K^0(S^2) \cong \nicefrac{\mathds{Z}[H]}{(H-1)^2}$
+\[
+	\begin{tikzcd}
+		\mu \colon K^1(X) \otimes \nicefrac{\mathds{Z}[H]}{(H-1)^2} \rar & K^0(X) \otimes  K^0(S^2) \rar & K^0(X \times S^2) \\
+		\benbrace{E,0}_\st \otimes H^m \ar[rr,mapsto] & & \benbrace[\big]{\Underbrace{\pr_X E \otimes (\pr_{S^2}^* H)^{\otimes m}}{\set{E,z^m} },0}_\st
+	\end{tikzcd}
+\]
+ist ein Ringisomorphismus . Insbesondere $K^0(S^2) \cong \nicefrac{\mathds{Z}[H]}{(H-1)^2}$
+\minisec{Beweis}
+\begin{enumerate}[1.]
+	\item Satz: Jedes Vektorbündel $\set{F,f}$ über $X \times S^2$ ist isomorph zu $\set{F,l}$, wobei $l= \sum_{i=-N}^{N} a_i \cdot z^i$ und $a_i \colon F \to F$ ein 
+	Morphismus von Vektorbündeln ist, das heißt die Übergangsfunktion ist gegeben durch ein Laurent-Polynom. Sind $l_0$ und $l_1$ homotope Übergangsfunktionen, dann sind sie 
+	auch homotop durch Laurent-polynomiale Übergangsfunktionen.
+	
+	Idee hierzu: Wir können stetige Funktionen $g \colon X \times S^1 \to \mathds{C}$ durch Laurent-Polynome approximieren. 
+	\(
+		g(x,z) = \sum_{n \in \mathds{Z}} a_n(x) z^n
+	\)
+	für 
+	\[
+		a_n(x) = \frac{1}{2 \pi } \int_0^{2 \pi} g(x, e^{i \theta}) e^{- i \theta n} \mathd \theta 
+	\]
+	Genauso können wir Funktionen $\tilde{g} \colon X \times S^1 \to M_n \mathds{C}$ approximieren. Wähle ein Skalarprodukt in den Fasern von $F$ (hermitesche Metrik).
+	Der Raum der Vektorbündelendomorphismen $\END(F \times S^1)$ ist normiert via
+	\[
+		\norm{\alpha} = \sup_{\substack{\norm{v}=1 \\ v \in F \times S^1 }} \norm{\alpha(v)} 
+	\]
+	$\Iso(F \times S^1) \subset \END(F \times S^1)$ ist offen. Fasse $f$ als Schnitt $f \colon X \times S^1 \to \Iso(F \times S^1) \subset \End(F \times S^1)$. Wähle 
+	trivialisierende Überdeckung $U_i$ mit Partition der Eins $\set{\varphi_i}_i$
+	\[
+		f \big|_{U_i} \colon U_i \times S^1 \longrightarrow \End \enbrace*{F\big|_{U_i} \times S^1} \cong M_n \mathds{C} \times U_i \times S^1 
+	\]
+	Approximiere durch $l_i$ und setze $l= \sum_{i} \varphi_i l_i$. $l$ liegt beliebig nahe bei $f$ in Norm. Da $\Iso$ offen ist, folgt dass $f$ und $l$ homotop durch
+	Isos. \bewende
+	\item (Linearisierungstrick): Schreibe $\set{F,l}= \set{F, z^{-m} \cdot q}$ für ein \enquote{Polynom} $q$ und ein $m \in \mathds{N}$.
+	
+	Satz: Sei $q$ eine polynomiale Übergangsfunktion vom Grad $\le n$, dann gilt 
+	\[
+		\mengenA{\Underbrace{n \cdot F}{F \oplus \ldots \oplus F},1} \oplus \set{F,q} \cong \set{(n+1) \cdot F, L^n q} 
+	\]
+	wobei $L^n q$ eine Übergangsfunktion ist, die nur noch $z^0$ und $z^1$ enthält, das heißt $L^n q(x,z) = a(x) + b(x) \cdot z$.
+	
+	Idee hierzu: $q= \sum_{i=1}^{n} a_i z^i$. Übergansfunktion der linken Seite ist gegeben durch eine Matrix
+	\[
+		\begin{pmatrix}
+			1 & & & 0 \\
+			 & 1 & &  \\
+			 & & \ddots &  \\
+			 0 & & & q
+		\end{pmatrix}
+	\]
+	Zeilen- und Spaltenoperationen bringen dies auf die Form
+	\[
+		\begin{pmatrix}
+			1 & -z  & & &\\
+			& 1 & -z & &  \\
+			& & \ddots & \ddots & \\
+			& & & 1 & -z \\
+			a_n & a_{n-1} & \cdots & a_1 & a_0
+		\end{pmatrix} = A
+	\]
+	Zeilen- und Spaltenoperationen erhalten die Determinante, also ist $A$ invertierbar für alle $(x,z) \in X \times S^1$. Damit ist $A$ eine gültige Übergangsfunktion.
+	Es ist $A = a + b \cdot z= L^n q$. Jede Zeilen- und Spaltenoperation ist homotop zur Identität, daher ist $L^n q$ homotop zu $1 \oplus q$
+	\[
+		\Rightarrow \set{(n+1) \cdot F,1 \oplus q} \cong \set{(n+1)\cdot F, L^n q} \bewende  
+	\]
+	\item (Aufspaltung von $F$): Wir haben bereits: $\set{(n+1) \cdot F, q} \cong \set{(n+1) \cdot F, a+ b \cdot z}$. Betrachte nun die Homotopie 
+	\[
+		q_t(x,z)=  (1 + tz) \enbrace*{b(x) \frac{z+t}{1+ tz} + a(x)} = \enbrace*{b(x) + t a(x)} z + t b(x) + a(x) 
+	\]
+	Der mittlere Teil ist gleich $L^n q$ für $t=0$, invertierbar für $0 \le t <1$. Weiter ist $z \mapsto \frac{z+t}{1+ tz}$ ein Homöomorphismus $S^1 \to S^1$.
+	Wähle nun $t_0 <1$, sodass $b(x) + t_0 a(x)$ invertierbar ist. Dies funktioniert, denn $b(x) + a(x)$ ist invertierbar. Damit erhalten wir 
+	\[
+		\set{(n+1) \cdot F, L^n q} \cong \set{(n+1) \cdot f, z+c}  
+	\]
+	mit $c(x)= \enbrace*{t_0 b(x) + a(x)}\enbrace*{b(x) + t_0 a(x)}^{-1}$, $b+ t_0 \cdot a \colon F \xrightarrow{\cong} F$. Insbesondere ist 
+	$z+ c(x) \colon F_x \times \set{z}  \xrightarrow{\cong} F_x \times \set{z}$ ein Isomorphismus, also hat $z + c(x)$ niemals Eigenwert $0$, woraus folg, dass $c(x)$ keine
+	Eigenwerte auf $S^1$ hat.
+	
+	Lemma: Sei $c \colon F \to F$ ein Morphismus von Vektorbündeln, so dass $c(x) \colon F_x \to F_x$ keine Eigenwerte auf $S^1$ hat. Dann existieren eindeutige 
+	Untervektorbündel $F_+$ und $F_-$, sodass 
+	\begin{enumerate}[a)]
+		\item $F \cong F_+ \oplus F_-$
+		\item $c(F_\pm) \subset F_\pm$
+		\item Die Eigenwerte von $c|_{F_+}$ liegen außerhalb von $S^1$, von $c|_{F_-}$ innerhalb von $S^1$
+	\end{enumerate}
+	
+	Korollar: $\set{F,  z+c} \cong \set{F_+,1} \oplus \set{F_-,z}$. Beweis: 
+	\[
+		\set{F, z+c} \cong \set{F_+, z+ c_+} \oplus \set{F_-, z+ c_-} 
+	\]
+	mit $c_\pm = c|_{F_\pm}$. Die Eigenwerte von $z+ c_+$ liegen außerhalb von $S^1$, $tz + c_+$ liefert eine Homotopie zu $\set{F_+, c_+} \cong \set{F_+,1}$.
+	Die Eigenwerte von $c_-$ liegen innerhalb von $S^1$. Dann liefert $z + t c_-$ eine Homotopie durch Isomorphismen zu $z$, das heißt $\set{F_-, z + c_-} \cong\set{F_-,z}$.
+	\bewende
+\end{enumerate}
+Setze alles zusammen für die Surjektivität von $\mu$. $\mu$ ist ein Gruppenhomomorphismus, also müssen wir nur zeigen, dass 
+$K^0(X \times S^2)\ni \benbrace*{\set{F,f},0 }_\st $ im Bild liegt. Es gilt nun
+\begin{align*}
+	\benbrace*{\set{F,f},0 }_\st \stackrel{1}{=} \benbrace*{\set{F, z^{-m} q},0 }_\st &= \benbrace*{\set{F,q} \oplus H^{-m},0 }_\st \\
+	&\stackrel{2}{=} \benbrace*{\set{(n+1) F, L^n q} \oplus H^{-m},0 }_\st -  \benbrace*{\set{n F,1} \otimes H^{-m}, 0 }_\st \\
+	&\stackrel{3}{=} \benbrace*{ \set{\enbrace*{(n+1)F}_+,1} \otimes H{-m},0 }_\st + \benbrace*{ \set{\enbrace*{(n+1)F}_-,z }\otimes H{-m},0 }_\st \\
+	&\quad - \benbrace*{\set{n F,1} \otimes H^{-m},0 }_\st   \\
+	&=  \benbrace*{\pr_X^* \enbrace*{(n+1)F}_+ \otimes H^{-m},0 }_\st + \benbrace*{\pr_X^* \enbrace*{(n+1)F}_- \otimes H^{1-m},0 }_\st  \\
+	&\quad - \benbrace*{\pr_x^*(n F) \otimes H^{-m},0}_\st 
+\end{align*}
+liegt im Bild von $\mu$.
+
+Für Injektivität betrachte die Abbildung 
+\[
+	\begin{tikzcd}[row sep=0.0em]
+		\nu \colon K^0(X \times S^2) \rar & K^0(X)\otimes \nicefrac{\mathds{Z}[H]}{(H-1)^2} \\
+		\benbrace*{\set{F,f},0 }_\st \rar[mapsto] & \benbrace*{ \enbrace*{(n+1)F}_- ,0 }_\st \otimes (H-1) + \benbrace*{F ,0}_\st \otimes H^{-m} 
+	\end{tikzcd}
+\]
+Prüfe, dass dies wohldefiniert ist! $\nicefrac{\mathds{Z}[H]}{(H-1)^2}$ wird erzeugt von $1, H ^{-1}$. Dann gilt
+\begin{align*}
+	\nu \circ \mu \enbrace*{ \benbrace*{F,0}_\st \otimes H^{-m}} = \nu \enbrace*{ \benbrace*{\set{F,z^{-m}},0 }_\st } = \Underbrace{\benbrace*{F_-,0}_\st}{=0}  \otimes (H-1)
+	+ \benbrace*{F,0}_\st \otimes H^{-m} 
+\end{align*}
 % section 3 (end)
 
 
