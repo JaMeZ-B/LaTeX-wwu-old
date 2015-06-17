@@ -1367,6 +1367,193 @@ Prüfe, dass dies wohldefiniert ist! $\nicefrac{\mathds{Z}[H]}{(H-1)^2}$ wird er
 	\nu \circ \mu \enbrace*{ \benbrace*{F,0}_\st \otimes H^{-m}} = \nu \enbrace*{ \benbrace*{\set{F,z^{-m}},0 }_\st } = \Underbrace{\benbrace*{F_-,0}_\st}{=0}  \otimes (H-1)
 	+ \benbrace*{F,0}_\st \otimes H^{-m} 
 \end{align*}
+
+\section*{Konsequenzen aus der Bott-Periodizität}
+
+\subsection*{Definition} % (fold)
+\label{sub:definition}
+Sei $X$ ein kompakter Hausdorffraum mit Basispunkt $x_0$. Setze
+\[
+	\tilde{K}^{-n} (X) = K^{-n}(X,\pt)
+\]
+$\tilde{}$ heißt reduzierte $K$-Theorie von $(X,x_0)$. Theorem 3.21 impliziert
+\begin{itemize}
+	\item $\tilde{K}^0(S^2) \cong \mathds{Z} =  \langle \beta_2 := 1 - [H,0]_\st\rangle$ mit $\beta_2^2=0$
+	\item allgemeiner $\tilde{K}^0(S^{2n}) = \langle \beta_{2m}\rangle$ mit $\beta_{2m}^2=0$, wobei $\beta_{2m}$ aus $\beta_{2m-2}$ durch äußere Multiplikation mit $\beta_2$
+	entsteht:
+	\[ 
+		\begin{tikzcd}[]
+			\tilde{K}^0(S^{2m-2}) \otimes \tilde{K}(S^2) \rar["\cong"] & K^0(D^{2m}, S^{2m-1}) \otimes K^0(D^2,S^1) \dar \\
+			& K^0 \enbrace*{(D^{2m-2, S^{2m-3}}) \times (D^2,S^1)} \dar["\cong"] \\
+			& K^0 \enbrace*{D^{2m}, S^{2m-1}} \cong \tilde{K}^0(S^{2m}) 
+		\end{tikzcd} 
+	\]
+	Sei $j \colon K^0(S^2,\pt) \cong K^0(D^2,S^1) \cong K^0(I^2, \partial I^2) \cong K^{-2}(\pt)$, $\beta_2 \mapsto \hat{\beta}_2= j(\beta_2)$
+\end{itemize}
+% subsection definition (end)
+
+
+\subsection*{Theorem} % (fold)
+\label{sub:theorem}
+Sei $(X,A)$ ein Ko-Raumpaar. Dann ist 
+\[
+	\begin{tikzcd}
+		K^{-n}(X,A) \rar["\hat{\beta}_2"] & K^{-n-2}(X,A)
+	\end{tikzcd}
+\]
+ein Isomorphismus.
+\minisec{Beweis}
+Es genügt $n=0$ zu betrachten. Sei $A=\emptyset$. Die exakte Sequenz
+\[
+	\begin{tikzcd}
+		0 \rar & K(S^2,\pt) \rar & K^0(S^2) \rar & K^0(\pt) \rar & 0
+	\end{tikzcd}
+\]
+spaltet, also spaltet auch
+\[
+	\begin{tikzcd}
+		0 \rar & K^0(X) \otimes K^0(S^2,\pt) \rar & K^0(X) \otimes K^0(S^2) \rar & K^0(X) \otimes K^0(\pt) \rar & 0
+	\end{tikzcd}
+\]
+Betrachte
+\[
+	\begin{tikzcd}
+		0 \rar & K^0(X) \otimes K^0(S^2,\pt) \dar["\cong"] \rar & K^0(X) \otimes K^0(S^2) \rar \dar["\cong\text{ 3.21}",] & K^0(X) \otimes K^0(\pt) \rar \dar & 0 \\
+		0 \rar & K^0(X \times (S^2,\pt)) \rar & K^0(X \times S^2) \rar & K^0(X) \rar & 0
+	\end{tikzcd}
+\]
+Für $A \not= \emptyset$ gilt $K^{-n}$ gilt $K^{-n}(X,A) \cong \tilde{K}^{-n}(\nicefrac{X}{A})$ nach Theorem 3.9 b). Angewandt auf den Pushout
+\[
+	\begin{tikzcd}
+		A \rar[hook] \dar & X \dar \\
+		* \rar & \nicefrac{X}{A}
+	\end{tikzcd}
+\]
+Daher genügt es den Fall $A=*$ zu betrachten. Dieser folgt analog zu dem unreduzierten Fall.
+
+\subsection*{Definition}
+Für $n>0$ und ein Ko-Raumpaar $(X,A)$ definieren wir
+\[
+	K^n(X,A) := K^{-n}(X,A)
+\]
+und die Randabbildung in der exakten Paarfolge über das nachfolgende Diagramm
+\[
+	\begin{tikzcd}
+		K^0(A) \dar["\cong"] \rar["\partial'"] & K^1(X,A) \dar["="]\\
+		K^{-2}(A) \rar["\partial"] &K^{-1}(X,A)
+	\end{tikzcd}
+\]
+Die Paarsequenzfolge reduziert dann auf die .....-Folge
+\[
+	\begin{tikzcd}
+		K^0(X,A) \rar & K^0(X) \rar & K^0(A) \dar\\
+		K^1(A) \uar & K^1(X) \lar & K^1(X,A) \lar 
+	\end{tikzcd}
+\]
+% subsection theorem (end)
+
+\section*{Die $K$-Theorie von $\mathds{C}P^n$}
+
+\subsection*{Theorem 3.2.5} % (fold)
+\label{sub:theorem}
+Sei $X$ ein endlicher \CW-Komplex mit $n$ Zellen. Dann ist $K^*(X) = K^0(X) \oplus K^1(X)$ eine endlich erzeugte Gruppe mit höchstens $n$ Erzeugern. Haben alle Zellen gerade
+Dimension, dann ist $K^1(X)=0$ und $K^0(X)$ ist frei abelsch mit genau einem Erzeuger für jede Zelle.
+\minisec{Beweis}
+Per Induktion über die Anzahl der Zellen. Für $X=\pt$ ist die Aussage richtig. Es entstehe $X$ aus $A$ durch Anheften einer $k$-Zelle für ein $k \in \mathds{N}_0$. Nach dem
+Theorem 3.9 b) angewandt auf das Pushout
+\[
+	\begin{tikzcd}
+		A \rar[hook] \dar & X \dar\\
+		\pt \rar & \nicefrac{X}{A}
+	\end{tikzcd}
+\]
+gilt $K^*(X,A) \cong K^*(\nicefrac{X}{A})$. Folglich ist $\tilde{K}^n(\nicefrac{X}{A}) \to \tilde{K}^n(X) \to \tilde{K}^n(A)$ exakt. Wir haben 
+\[
+	\tilde{K}^n(\nicefrac{X}{A}) \cong \tilde{K}^n(S^k) \cong K(S^k,\pt) \cong K(I^k,\partial I^k) = K^{n+k}(\pt) = \begin{cases}
+		\mathds{Z}, &\text{ falls }n+k \text{ gerade}\\
+		0 ,&\text{ sonst}
+	\end{cases}
+\]
+Also ist $\tilde{K}^n(\nicefrac{X}{A})$ entweder $0$ oder $\mathds{Z}$, also erhalten wir aus der Exaktheit, dass man maximal einen Erzeuger mehr braucht, um $\tilde{K}(X)$
+zu erzeugen, als man braucht um $\tilde{K}^n(A)$ zu erzeugen.
+
+Zur zweiten Aussage: Beweis durch Induktion nach Anzahl der Zellen (wie oben). Aussage ist korrekt für $X=\pt$. Sei $A$ ein \CW-Komplex, der nur aus geraden dimensionalen 
+Zellen besteht und $X$ entstehe aus $A$ durch das Anheften einer $2k$-Zelle. Wir betrachten $K^1(\nicefrac{X}{A}) \to \tilde{K}^1(X) \to \tilde{K}^1(A)$. Mit 
+Induktionsannahme folgt $\tilde{K}^1(A)=0$. Weiterhin gilt $\tilde{K}^1(\nicefrac{X}{A}) \cong \tilde{K}^1(S^{2k})=0$, also folgt $\tilde{K}^1(X)=0$ und auch $K^1(X)=0$.
+Damit reduziert sich die 6-Term folge auf eine kurze exakte Sequenz
+\[
+	\begin{tikzcd}
+		0 \rar & \tilde{K}^0(\nicefrac{X}{A}) \rar & K^0(X) \rar & K^0(A) \rar & 0
+	\end{tikzcd}
+\]
+Es gilt $\tilde{K}^0(\nicefrac{X}{A}) \cong \tilde{K}(S^{2k}) \cong \mathds{Z}$ und mit Induktionsannahme ist $k^0(A)$ eine freie abelsche Gruppe vom Rang 
+$\# \text{Zellen von $A$}$. Also folgt $\tilde{K}^0(X) = \tilde{K}^0(A) \oplus \mathds{Z}$ und damit $K^0(X)\cong K^0(A) \oplus \mathds{Z}$. Also ist 
+\[
+	K^0(X) \cong K^0(A) \oplus \mathds{Z} \cong \mathds{Z}^{\#\text{ Zellen in $A$}} \oplus \mathds{Z} = \mathds{Z}^{\#\text{Zellen von $X$}}
+\]
+% subsection theorem (end)
+
+\subsection*{Korollar} % (fold)
+\label{sub:korollar}
+$K^0(\mathds{C}P^n) = \mathds{Z}^{n+1}$, $K^1(\mathds{C}P^n)=0$.
+
+\bigskip
+
+Zur RIngstruktur auf $K^*(\mathds{C}P^n)$. Sei
+\[
+	L_n = \set[(v,V) \in \mathds{C}^{n+1} \otimes \mathds{C}P^n]{v \in V} 
+\]
+das kanonische .....Bündel über $\mathds{C}P^n$. Für $n=1$ gilt $L_1=H$ mit $H$ wie oben. Sei $\mathds{C}P^{n-1} \xhookrightarrow{p}\mathds{C}P^n$ die Inklusion. Dann gilt
+$L_{n-1} \cong p^* L_n$.
+% subsection korollar (end)
+
+\subsection*{Satz} % (fold)
+\label{sub:satz}
+\[
+	K^0(\mathds{C}P^n) \cong \nicefrac{\mathds{Z}[L]}{(L-1)^{n+1}}
+\]
+als Ring, induziert durch $[L_n,0]_\st \mapsfrom L$
+\minisec{Beweis}
+Für $n=1$ ist die Aussage richtig (siehe Satz 3.2.1). Wir betrachten $(\mathds{C}P^n, \mathds{C}P^{n-1})$ und die zugehörigen Sequenz aus der 6-Term Sequenz
+\[
+	\begin{tikzcd}
+		0 \rar & K^0(\mathds{C}P^n, \mathds{C}P^{n-1}) \rar & K^0(\mathds{C}P^n) \rar["\rho^*"] & K^0(\mathds{C}P^{n-1}) \rar & 0
+	\end{tikzcd}
+\]
+Wir zeigen: $(a_n)\cdot (L_n-1)^n$ erzeugt den Kern von $\rho^*$. Anmerkung: Hieraus folgt der Satz , wenn wir annehmen, dass 
+$K^0(\mathds{C}P^{n-1}) \cong \nicefrac{\mathds{Z}[L]}{(L-1)^n}$, denn dann ist
+\[
+	\set{1, (L_n-1), (L_n-1)^2, \ldots , (L_n-1)^n} 
+\]
+eine additive Basis von $K^0(\mathds{C}P^n)$.
+
+$\mathds{C}P^n \cong$ Quotient von $\nicefrac{S^{2n+1}}{S^1}$, wobei $S^1$ durch Multiplikation wirkt. Statt $S^{2n+1} \subseteq \mathds{C}^{n+1}$ können wir auch den Rand
+von $D_0^2 \times D_1^2 \times \ldots \times D_n^2 \subseteq C^{n+1}$ betrachten, wobei $D_i \subseteq \mathds{C}$ die Einheitssphäre ist.
+\[
+	\partial \enbrace*{D_0^2 \times D_1^2 \times \ldots \times D_n^2} = \bigcup_i D_0^2 \times \ldots \times \partial D_i^2 \times D_{i+1}^2 \times \ldots \times D_n^2 
+\]
+Den Quotient von $D_0^2 \times \ldots \times \partial D_i^2 \times D_{i+1}^2 \times \ldots \times D_n^2 $ bezüglich der $S^1$-Operation bezeichnen wir mit 
+$C_i \subseteq \mathds{C}P^n$. $C_i$ ist homöomorph zu $D_0^2 \times \ldots \times \hat{D}_i^2 \times D_{i+1}^2 \times \ldots \times D_n^2 $ und es gilt
+\[
+	C_i \cap C_j = \partial C_i \cap \partial C_j
+\]
+Betrachte $C_0 = D_1^2 \times \ldots \times D_n^2$ und $\partial C_0 = \bigcup_i \partial_i C_0$ mit 
+\[
+	\partial_i C_0 = D_1^1 \times \ldots \times \partial D_i^2 \times \ldots \times D_n^2 \subseteq C_i
+\]
+Die Inklusionen $(D_i^2,\partial D_i^2) \hookrightarrow (C_0,\partial_i C_0) \subseteq (\mathds{C}P^n,C_i)$ Wir erhalten 
+\[
+	\begin{tikzcd}
+			K^0(D^2_0,\partial D_0^2) \otimes  \ldots \otimes K^0(D_n^2,\partial D_n^2) \rar 
+			& K^0 \enbrace*{ (D_1^2,\partial D_1^2) \times \ldots \times (D_n^2, \partial D_n^2)} \\
+			K^0(C_0,\partial_1 C_0) \otimes \ldots \otimes K^0(C_0,\partial_n C_0) \rar \uar["\cong"] & K^0(C_0,\partial C_0) \uar["\cong"] \\
+			K^0(\mathds{C}P^n,C_1) \otimes \ldots \otimes K^0(\mathds{C}P^n,C_n) \rar \dar & K^0(\mathds{C}P^n, C_1 \cup \ldots \cup C_n) \cong 
+			K^0(\mathds{C}P^n,\mathds{C}P^{n-1}) \dar \uar\\
+			K(\mathds{C}P^n) \otimes \ldots \otimes K(\mathds{C}P^n) \rar & K^0(\mathds{C}P^n)
+	\end{tikzcd}
+\]
+\todo[inline]{das brauche ich aus den Notizen…}
+% subsection satz (end)
 % section 3 (end)
 
 
