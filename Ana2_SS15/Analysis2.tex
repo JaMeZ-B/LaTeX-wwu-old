@@ -456,7 +456,9 @@ $\alpha, \mu$ analog.
  \]
  ist stetig. \\
  Denn, $(x_n)_n $ Folge in $X$, $x_n \to x \in X$ \\ 
- $$\Rightarrow f(x_n) \to f(x) \text{ und } g(x_n) \to g(x) \qquad (f,g \text{ stetig})$$
+ \[
+ 	\Rightarrow f(x_n) \to f(x) \text{ und } g(x_n) \to g(x) \qquad (f,g \text{ stetig})
+ \]
  \[
  	\stackrel{\text{Tatsache}}{\Rightarrow } (f,g)(x_n)=(f(x_n),g(x_n)) \to (f(x),g(x)) \in \mathbb{R}^2 \\
  \]
@@ -1220,7 +1222,9 @@ Wähle $x_r \in X \setminus \bigcup\limits_{i=1}^{r-1}B_{\varepsilon}(x_i)$
 	&\Rightarrow (X_r)_r \text{ Folge in }X 
 \end{align*}	
 	Für $n \neq m$ gilt: 
-	$$d(x_n,x_m) \geq \varepsilon $$
+	\[
+		d(x_n,x_m) \geq \varepsilon
+	\]
 	Dann ist $n>m$ \,,so ist nach Konstruktion  $x_n \notin B_{\varepsilon}(x_m)$ und 
 	dann kann keine Teilfolge von $(x_r)_r$ eine Cauchyfolge sein.
  \[
@@ -1888,7 +1892,9 @@ Sei $g:\tilde U \to \mathbb{R}$ mit $g(s,t)=f(x+sv+tw)$. Dann ist $g$ stetig und
 	D_1D_2g(s,t) &= D_vD_wf(x+sv+tw)
 \end{align*}
 existieren und sind stetig. \\
-Nach Schritt 1 existiert $D_2D_1g$ in $0$, und $$D_wD_vg(x)= D_2D_1g(0,0)=D_1D_2g(0,0)=D_vD_wf(x)$$
+Nach Schritt 1 existiert $D_2D_1g$ in $0$, und \[
+	D_wD_vg(x)= D_2D_1g(0,0)=D_1D_2g(0,0)=D_vD_wf(x)
+\]
 \bewende
 % subsubsection satz_von_schwarz (end)
 \subsubsection{Definition} % (fold)
@@ -2577,7 +2583,254 @@ Darauf folgt dann insgesamt $f(x_{\infty})=x_{\infty}$ \bewende
 \label{ssub:lemma}
 Wenn $T \in \Mat_{n,n}(\mathbb{R})$ mit $\norm{T}\leq 1$ Dann ist $1-T$ ist invertierbar.
 \minisec{Beweis:} 
-Wir zeigen: $\forall\, y \in \mathbb{R}^n \exists\,! \,x \in \mathbb{R}^n$, so dass $(1-T)x=y \Leftrightarrow  x=y+Tx$
-% subsubsection lemma (end)
+Wir zeigen: $\forall\, y \in \mathbb{R}^n \exists\,! \,x \in \mathbb{R}^n$, so dass $(1-T)x=y \Leftrightarrow  x=y+Tx$ \\
+\begin{align*}
+	F_y: \mathbb{R}^n &\to \mathbb{R}^n \\
+	x &\mapsto y+Tx 
+\end{align*}
+Dann gilt
+\[
+	\norm{F_y(x_0)-F_y(x_1)} = \norm{T(x_0-x_1)} \leq \norm{T} \norm{x_0-x_1}
+\]
+Dann folgt mit dem Banachschen Fixpunktsatz genau einen Fixpunkt. \bewende
+\subsubsection{Beweis des Umkehrsatzes, Teil $1$ (Spezialfall und Hauptarbeit)} % (fold)
+\label{ssub:beweis_des_umkehrsatzes_teil_1_spezialfall_und_hauptarbeit}
+Sei $ U \subseteq \mathbb{R}^n$ offen, $0 \in U$. Sei $f: U \to \mathbb{R}^n$ eine $C^1$-Funktion. $Df(x)$ invertierbar für alle $x \in U$ und $f(0)=0$, $Df(0)=1_n$
+$\Rightarrow $ $\exists\, V \subseteq U$ offen, $0 \in V$ und $f(V) \subseteq \mathbb{R}^n$ offen, $f:V \to f(V)$ bijektiv und die Umkehrabbildung $g: f(V) \to V$ ist stetig differenzierbar
+\minisec{Beweis:} Wir müssen die Gleichung $f(x)=y$ für kleine $y$ lösen.
+$\Leftrightarrow$ $x = y + x - f(x)$ \\
+Setze $h_y(x):= y + x - f(x)$ \\
+Fixpunkte von $h_y(x)$ sind Lösungen von $f(x)=y$. Suche einen abgeschlossenen Ball $\overline{B}_r(0) \subseteq U$, sodass für genügend kleine $y$
+\begin{enumerate}
+	\item $h_y: \overline{B}_r(0) \to \overline{B}_r(0)$
+	\item $h_y$ ist $\frac{1}{2}$-Lipschitz-stetig.
+\end{enumerate}
+Wähle $r>0$ so, dass $\overline{B}_r(0) \subseteq U$ und für alle $x$ mit $\norm{x}\leq r$ gelte $\norm{1_n - Df(x)} \leq \frac{1}{2}$
+(das geht, weil $Df(0)=1_n$ und $x \mapsto Df(x)$ stetig) \\
+Sei nun $\norm{y} \leq \frac{1}{2}r$ und $\norm{x} \leq r$. Dann gilt
+\begin{align*}
+	\norm{h_y(x)} = \norm{y + x - f(x)} &\leq \norm{y} + \norm{x-f(x)} \\
+	&\leq \norm{y}+ \norm{(x-f(x))-(0-f(0))} \\
+	&\stackrel{*}{\leq} \norm{y} + \frac{1}{2} \norm{x-0} \\
+	&= \norm{y}+ \frac{1}{2} \norm{x} \\
+	\leq r,
+\end{align*}
+wobei sich $(*)$ mit dem Schrankensatz ($D(x-f(x))\leq \frac{1}{2}$, $\norm{x}\leq r$) \\
+$\Rightarrow$ für $\norm{y} \leq \frac{1}{2}r$ gilt $h_y(\overline{B}_r(0))\subseteq \overline{B}_r(0)$. \\
+Es gilt sogar für $\norm{y}\leq \frac{r}{2}$, dass $h_y(\overline{B}_r(0)) \subseteq B_r(0)$ (offener Ball). \\
+Sei nun $\norm{y}\leq \frac{r}{2}$, $x,z \in \overline{B}_r(0)$
+\begin{align*}
+	\norm{h_y(x)-h_y(z)} &= \norm{y+x-f(x)-y-z+f(z)} \\
+	&= \norm{(x-f(x))-(z-f(z))} \\
+	&\leq \frac{1}{2}\norm{x-z}
+\end{align*}   
+$\Rightarrow$ Für $\norm{y}\leq \frac{r}{2}$ ist $h_y: \overline{B}_r(0) \to \overline{B}_r(0)$ Lipschitzstetig mit $L=\frac{1}{2}$. \\
+Aus dem Banachschen Fixpunktsatz folgt:
+\[
+	\text{Es gibt genau ein } x \in \underset{\text{vollständig}}{\underbrace{\overline{B}_r(0)}} \text{ mit } h_y(x)=x \qquad \Leftrightarrow \qquad f(x)=y \qquad (\norm{y} \leq \frac{r}{2})
+\]
+Wir haben jetzt gezeigt:
+\[
+	\text{Falls }\norm{y}\leq \frac{r}{2}\text{, so gibt es genau ein }x \in B_r(0) \text{ mit } f(x)=y
+\]
+Setze $V:= \set[x \in U]{\norm{x}<r,\norm{f(x)}<\frac{r}{2}} \subseteq U$ offen, $0 \in V$. \\
+(und $V \stackrel{f}{\longrightarrow} B_{\frac{1}{2}}(0)$ ist bijektiv). 
+\[
+	h_0(x)+f(x)=x-f(x)+f(x) = x
+\]
+Sei nun $x,z \in B_r(0)$ 
+\begin{align*}
+	\norm{x-z} &= \norm{h_0(x)+f(x)- h_0(z)-f(z)} \\
+	&\leq \norm{h_0(x)-h_0(z)}+ \norm{f(x)-f(z)} \\
+	&\leq \frac{1}{2} \norm{x-z} + \norm{f(x)-f(z)}
+\end{align*}
+\[
+\Rightarrow \norm{x-z} \leq 2 \norm{f(x)-f(z)}.	
+\]
+Daraus folgt nun:
+\[
+	u,v \in B_{\frac{1}{2}}(0) \qquad g(u),g(v) \in V 
+\]
+und
+\[
+	\norm{g(u)-g(v)} \leq 2 \norm{f(g(u))-f(g(v))} = 2 \norm{u-v}
+\]
+$\Rightarrow$ $g: B_{\frac{1}{2}} \to V$ ist $2$-Lipschitz stetig, also \underline{stetig}! \\
+Dann ist nach \ref{satz14} $g$ differenzierbar und
+\[
+	Dg(u)= \underset{\text{stetig}}{\underbrace{( \underset{\text{stetig}}{\underbrace{ Df( \underset{\text{stetig}}{\underbrace{g(u)}} )}} )^{-1}}}
+\]
+Damit ist $g$ in $C^1$. \bewende
+% subsubsection beweis_des_umkehrsatzes_teil_1_spezialfall_und_hauptarbeit (end)
+\subsubsection{Beweis des Umkehrsatzes, Teil $2$} % (fold)
+\label{ssub:beweis_des_umkehrsatzes_teil_2}
+$U,f$ wie im Umkehrsatz, $x_0 \in U$. Betrachte Komposition
+\[
+	f:= -x_0+U \, \xrightarrow{a_1}\, U \, \xrightarrow{f} \, \mathbb{R}^n \, \xrightarrow{a_2} \, \mathbb{R}^n \, \xrightarrow{a_3} \, \mathbb{R}^n
+\]
+\begin{align*}
+	\left. \begin{array}{rcl}
+		a_1(x) & = & x+x_0 \\
+		a_2(y) & = & y - f(x_0) \\
+		a_3(y) & = & Df(x_0)^{-1}y
+	\end{array} \right\} \text{Diffeomorphismen}
+\end{align*}
+\begin{align*}
+	\tilde f(0)=0, \qquad D \tilde f(0) &= D_{a_3}(0)D_{a_2}(f(x_0))Df(x_0)D_{a_1}(0) \\
+	&= (Df(x_0))^{-1} 1_n Df(x_0) 1_n  \\
+	&= 1_n
+\end{align*}
+$\Rightarrow$ aus der Behauptung folgt: $\exists\,V \subseteq -x_0+U$, sodass $ \tilde f: V \to \tilde f(V)$ ein Diffeomorphismus ist. \\
+\[
+	\Rightarrow a_1(V) \subseteq U \text{ offen}
+\]
+\[
+	a_1(V) \xrightarrow{a_1^{-1}} V \xrightarrow{\tilde f} \tilde f(V) \xrightarrow{(a_3 \circ a_2)^{-1}} (a_3 \circ a_2)^{-1}( \tilde f(V)) \subseteq \mathbb{R}^n \text{ offen}
+\]
+$\Rightarrow$ Teil $2$ des Umkehrsatzes. \\
+Aus Teil $2$ folgt: Ist $x_0 \subseteq U$, so ist $f(x_0) \in f(U) \subseteq \mathbb{R}^n$ ein innerer Punkt von $f(U)$. \\
+$\Rightarrow$ jeder Punkt von $f(U)$ ist ein innerer Punkt von $f(U)$. \\
+$\Rightarrow$ $f(U) \subseteq \mathbb{R}^n$ offen. \\
+$V \subseteq U$ offen $\Rightarrow$ $V \subseteq \mathbb{R}^n$ offen $\Rightarrow$ $f  \big|_{V}^{}(V) \subseteq \mathbb{R}^n$ offen, d.h $f(V) \subseteq \mathbb{R}^n$ offen. \bewende
+\minisec{Satz über implizite Funktionen:}
+\begin{description}
+	\item[Situation:] $f: \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^k$ 
+	\item[Frage:] Kann man die Gleichung $f(x,y)=z_0$ nach $x$ auflösen, bzw. gibt es eine Funktion $h:\mathbb{R}^n \to \mathbb{R}^k$ mit $f(x,h(x))=z_0$?
+	\item[Notation:] \begin{itemize}
+		\item $ U \subseteq \mathbb{R}^n$, $V \subseteq \mathbb{R}^k$ offen. 
+		\item $ f: U \times V \to \mathbb{R}^m $ stetig differenzierbar.
+		\item Schreibe 
+		\begin{align*}
+			D_1f(x,y)= \begin{pmatrix}
+				\diff{f_1}{x_1}& \dots & \diff{f_1}{x_n} \\
+				\vdots & & \vdots \\
+				\diff{f_m}{x_1} & \dots & \diff{f_m}{x_n} 
+			\end{pmatrix} , 
+			D_2f(x,y)= \begin{pmatrix}
+				\diff{f_1}{y_1}& \dots & \diff{f_1}{y_n} \\
+				\vdots & & \vdots \\
+				\diff{f_m}{y_1} & \dots & \diff{f_m}{y_n} 
+			\end{pmatrix}
+		\end{align*}  
+		\end{itemize}
+\end{description}
+\subsubsection{Satz über implizite Funktionen} % (fold)
+\label{implfunkt}
+ Seien $U \subseteq R^n$, $V \subseteq R^k$ offen, $f:U \times V \to \mathbb{R}^k$ eine $C^1$-Funktion, $(x_0,y_0) \in U \times V$ und $z_0 = f(x_0,y_0)$. \\
+ \underline{Annahme}: $D_2f(x_0,y_0) \in \Mat_{k,k}(\mathbb{R})$ sei invertierbar. \\
+ Dann gibt es $x_0 \in U_0 \subseteq U$ offen, $y_0 \in V_0 \subseteq V$ offen und eine $C^1$-Funktion $h: U_0 \to V_0$, sodass gilt:
+ \begin{itemize}
+ 	\item $h(x_0)=y_0$
+	\item $f(x,h(x))=z_0 \qquad \forall\, x \in U_0$.
+ \end{itemize}
+ Wenn $f(x,y)=z_0$ für $x \in U_0$, $y \in V_0$ gilt, dann ist $y=h(x)$.
+\minisec{Bemerkung:}Die Gleichung $f(x,y)=z_0$ lässt sich lokal nach $x$ auflösen. \\
+\\
+Warum die Voraussetzung, dass $D_2f$ invertierbar ist? \\
+Differenzieren der Identität $f(x,h(x))=z_0$ nach $x$ ergibt
+\[
+	\underset{\in \Mat_{k,n}(\mathbb{R})}{\underbrace{D_1f(x,h(x))}}+ \underset{\in \Mat_{k,k}(\mathbb{R})}{\underbrace{D_2f(x,h(x))}}\underset{\in \Mat_{k,n}(\mathbb{R})}{\underbrace{Dh(x)}} = 0 
+\]
+\[
+	\Leftrightarrow Dh(x) = - (D_2f(x,h(x)))^{-1}D_1f(x,h(x))
+\]
+Insbesondere 
+\[
+	Dh(x_0)= -(D_2f(x_0,y_0))^{-1} D_1f(x_0,y_0)
+\]
+Wenn die lineare Gleichung
+\[
+	D_1f(x_0,y_0)+D_2f(x_0,y_0)Dh(x_0)=0
+\]
+nach $Dh(x_0)$ aufgelöst werden kann, dann auch lokal $f(x,h(x))=z_0$
+\minisec{Beweis von \ref{implfunkt}:} 
+Da $D_2f$ stetig, $D_2f(x_0,y_0)$ invertierbar ist $D_2f(x,y)$ invertierbar falls $(x,y)$ nahe bei $(x_0,y_0)$. O.B.d.A gilt $D_2f(x,y)$ invertierbar, für alle $x \in U$, $y \in V$. (Verkleinerung von $U$ und $V$). \\
+Definiere Hilfsfunktion $g: U \times V \to \mathbb{R}^n \times \mathbb{R}^k$ mit $g(x,y)=(x,f(x,y))$ und wobei
+\[
+	Dg(x,y)= \begin{pmatrix}
+	 1_n & 0  \\
+	 D_1f(x,y) & D_2f(x,y) \\
+	 	\end{pmatrix}
+\] 
+\[
+	\det Dg(x,y) = \det D_2f(x,y) \neq 0
+\]
+\[
+	\Rightarrow Dg(x,y) \text{ ist invertierbar}
+\]
+Dann folgt mit dem Umkehrsatz:
+\[
+	\exists\, \text{offene Umgebung }x_0 \in U_1 \subseteq U, y_0 \in V_1 \subseteq V \text{, sodass} g: U_1 \times V_1 \to g(U_1 \times V_1) \text{ Diffeomorphismus}
+\]
+Wähle $U_0$ mit $x_0 \in U_0 \subseteq U_1$ so, dass $U_0 \times \set[z_0]{} \subseteq g(U_1 \times V_1)$ (geht, da $g(x_0,y_0)=(x_0,z_0)$).
+Sei \begin{align*}
+	\pr_{\mathbb{R}^k}: \mathbb{R}^k \times \mathbb{R}^k &\to \mathbb{R}^k \\
+	(x,y) \mapsto y \\
+	\text{und } \pr_{\mathbb{R}^n}: \mathbb{R}^n \times \mathbb{R}^k &\to \mathbb{R}^n \\
+	(x,y) \mapsto x
+\end{align*}  
+Setze nun $h:U_0 \to V_1$ mit $h(x):= \pr_{\mathbb{R}^k}(g^{-1}(x,z_0)) \in V_1$. Dann ist $h$ in $C^1$, da $g^{-1}$ in $C^k$ ist und $\pr_{\mathbb{R}^k}$ in $C^{\infty}$. \\
+\[
+	h(x_0)= \pr_{\mathbb{R}^k}(g^{-1}(x_0,z_0)) = \pr_{\mathbb{R}^k}(x_0,y_0)=y_0
+\]
+\begin{align*}
+	f(x,h(x)) &= f(x, \pr_{\mathbb{R}^k}(g^{-1}(x,z_0))) \\
+	&= f(\pr_{\mathbb{R}^n}(g^{-1}(x,z_0)),\pr_{\mathbb{R}^k}(g^{-1}(x,z_0))) \\
+	&= f(g^{-1}(x,z_0)) \\
+	&= (\pr_{\mathbb{R}^k} \circ g)(g^{-1}(x,z_0)) \\
+	&= \pr_{\mathbb{R}^k}(x,z_0) \\
+	&= z_0
+\end{align*}
+\underline{Eindeutigkeitsaussage}:
+Setze $V_0=V_1$. \\
+Falls $x \in U_0$, $y \in V_0$, $f(x,y)=z_0$
+\[
+	\Rightarrow g(x,y)= (x,z_0) \in U_0 \times \set[z_0]{} \subseteq g(U_1 \times V_0)
+\]
+\[
+	\Rightarrow (x,y)= g^{-1}(x,z_0)
+\]
+\[
+	\Rightarrow y = \pr_{\mathbb{R}^k}(g^{-1}(x,z_0))=h(x)
+\] \bewende
+\subsubsection{Beispiel} % (fold)
+\label{ssub:beispiel}
+\minisec{Nullstellen von Polynomen:}
+$f: \mathbb{R}^k \times \mathbb{R} \to \mathbb{R}$ mit $f(x,y):= y^n + \sum_{l=0}^{n-1}x_{n-1}y^l$ für festes $x$ ist dann $f_x(y)=f(x,y)$ ein Polynom. \\
+Sei $(x_0,y_0)$ so, dass $f(x_0,y_0)=0$ ($f_{x_0}(y_0)=0$) \\
+Wenn $h$ wie in \ref{implfunkt}, so ist $h(x)$ eine Nullstelle von $f_x$.
+\[
+	D_2f(x,y)=ny^{n-1}+ \sum_{l=1}^{n-1}x_{n-l}ly^{l-1}=f'_x(y)
+\]
+$\Rightarrow$ Falls $f_{x_0}(y_0)=0$ und $f'_{x_0}(y_0) \neq 0$, so gibt es eine Funktion $h:U \to \mathbb{R}$
+\begin{align*}
+	f(x,h(x))=0 = f_x(h(x)), \qquad h(x_0)=y_0
+\end{align*}
+$\Rightarrow$ Falls $f'_{x_0}(y_0)\neq 0$ ($*$), so hängen die Nullstellen von $f_x$ differenzierbar von x ab. \\
+\[
+	(*) \Leftrightarrow y_0 \text{ einfacher Nullstelle von }f_{x_0}
+\]
+\minisec{$n=2$:} \[
+	f(x_1,x_2,y)=y^2 + x_1y + x_2
+\]
+\[
+	y = - \frac{x_1}{2} \pm \sqrt{\frac{x_1^2}{4}-x_2} \text{ ist differenzierbar, falls } \frac{x_1^2}{4}-x_2 > 0
+\]
+% subsubsection beispiel (end)
+\hphantom{p}
+\minisec{Geometrische Version des Satzes über implizite Funktionen}
+\hphantom{p}
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+$ U \subseteq \mathbb{R}^n$ offen, $f: U \to \mathbb{R}^k$ in $C^1$. \\
+\begin{itemize}
+	\item $x \in U$ heißt \Index{regulärer Punkt}, von f, falls $Df(x) \in \Mat_{k,m}(\mathbb{R})$ den Rang $k$ hat (d.h $Df(x)$ stellt eine surjektive lineare Abbildung von $\mathbb{R}^n \to \mathbb{R}^k$ dar.)
+	\item $x \in U$ heißt \Index{singulärer} (oder \Index{kritischer Punkt}) von $f$, falls $x$ kein regulärer Punkt von $f$ ist. (d.h Rang $Df(x) < k$)
+	\item $y \in \mathbb{R}^k$ heißt \Index{regulärer Wert} von $f$, falls jedes $x \in U$ mit $f(x)=y$ ein regulärer Punkt ist.
+\end{itemize} 
+% subsubsection definition (end)
+ % subsubsection satz_uber_implizite_funktionen (end)
+% subsubsection beweis_des_umkehrsatzes_teil_2 (end)
+
 % subsection beweis_des_umkehrsatzes (end)
 \end{document}	
