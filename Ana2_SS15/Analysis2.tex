@@ -2692,7 +2692,9 @@ Aus Teil $2$ folgt: Ist $x_0 \subseteq U$, so ist $f(x_0) \in f(U) \subseteq \ma
 $\Rightarrow$ jeder Punkt von $f(U)$ ist ein innerer Punkt von $f(U)$. \\
 $\Rightarrow$ $f(U) \subseteq \mathbb{R}^n$ offen. \\
 $V \subseteq U$ offen $\Rightarrow$ $V \subseteq \mathbb{R}^n$ offen $\Rightarrow$ $f  \big|_{V}^{}(V) \subseteq \mathbb{R}^n$ offen, d.h $f(V) \subseteq \mathbb{R}^n$ offen. \bewende
+\hphantom{k}
 \minisec{Satz über implizite Funktionen:}
+\hphantom{k}
 \begin{description}
 	\item[Situation:] $f: \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^k$ 
 	\item[Frage:] Kann man die Gleichung $f(x,y)=z_0$ nach $x$ auflösen, bzw. gibt es eine Funktion $h:\mathbb{R}^n \to \mathbb{R}^k$ mit $f(x,h(x))=z_0$?
@@ -2762,7 +2764,7 @@ Dann folgt mit dem Umkehrsatz:
 \[
 	\exists\, \text{offene Umgebung }x_0 \in U_1 \subseteq U, y_0 \in V_1 \subseteq V \text{, sodass} g: U_1 \times V_1 \to g(U_1 \times V_1) \text{ Diffeomorphismus}
 \]
-Wähle $U_0$ mit $x_0 \in U_0 \subseteq U_1$ so, dass $U_0 \times \set[z_0]{} \subseteq g(U_1 \times V_1)$ (geht, da $g(x_0,y_0)=(x_0,z_0)$).
+Wähle $U_0$ mit $x_0 \in U_0 \subseteq U_1$ so, dass $U_0 \times \set{z_0} \subseteq g(U_1 \times V_1)$ (geht, da $g(x_0,y_0)=(x_0,z_0)$).
 Sei \begin{align*}
 	\pr_{\mathbb{R}^k}: \mathbb{R}^k \times \mathbb{R}^k &\to \mathbb{R}^k \\
 	(x,y) \mapsto y \\
@@ -2785,7 +2787,7 @@ Setze nun $h:U_0 \to V_1$ mit $h(x):= \pr_{\mathbb{R}^k}(g^{-1}(x,z_0)) \in V_1$
 Setze $V_0=V_1$. \\
 Falls $x \in U_0$, $y \in V_0$, $f(x,y)=z_0$
 \[
-	\Rightarrow g(x,y)= (x,z_0) \in U_0 \times \set[z_0]{} \subseteq g(U_1 \times V_0)
+	\Rightarrow g(x,y)= (x,z_0) \in U_0 \times \set{z_0} \subseteq g(U_1 \times V_0)
 \]
 \[
 	\Rightarrow (x,y)= g^{-1}(x,z_0)
@@ -2822,13 +2824,110 @@ $\Rightarrow$ Falls $f'_{x_0}(y_0)\neq 0$ ($*$), so hängen die Nullstellen von 
 \hphantom{p}
 \subsubsection{Definition} % (fold)
 \label{ssub:definition}
-$ U \subseteq \mathbb{R}^n$ offen, $f: U \to \mathbb{R}^k$ in $C^1$. \\
+$ U \subseteq \mathbb{R}^m$ offen, $f: U \to \mathbb{R}^k$ in $C^1$. \\
 \begin{itemize}
-	\item $x \in U$ heißt \Index{regulärer Punkt}, von f, falls $Df(x) \in \Mat_{k,m}(\mathbb{R})$ den Rang $k$ hat (d.h $Df(x)$ stellt eine surjektive lineare Abbildung von $\mathbb{R}^n \to \mathbb{R}^k$ dar.)
+	\item $x \in U$ heißt \Index{regulärer Punkt}, von f, falls $Df(x) \in \Mat_{k,m}(\mathbb{R})$ den Rang $k$ hat (d.h $Df(x)$ stellt eine surjektive lineare Abbildung von $\mathbb{R}^m \to \mathbb{R}^k$ dar.)
 	\item $x \in U$ heißt \Index{singulärer} (oder \Index{kritischer Punkt}) von $f$, falls $x$ kein regulärer Punkt von $f$ ist. (d.h Rang $Df(x) < k$)
 	\item $y \in \mathbb{R}^k$ heißt \Index{regulärer Wert} von $f$, falls jedes $x \in U$ mit $f(x)=y$ ein regulärer Punkt ist.
 \end{itemize} 
+\minisec{Bemerkung:}
+\begin{enumerate}
+	\item Falls $k=1$, so ist $x \in U$ ein kritischer Punkt von $f$ genau dann, wenn $Df(x)=0 \in \Mat_{1,m}(\mathbb{R})$. \\
+	(Setze Definition von 'kritischer Punkt' wie zuvor)
+	\item Falls $f^{-1}(y)=\emptyset$ ($\Leftrightarrow y \not\in f(U)$), so ist $y$ ein regulärer Wert von $f$.
+	\item Falls $k > m$, so ist $y \in \mathbb{R}^k$ ein regulärer Wert von $f$ genau dann, wenn $y \not \in f(U)$.
+	\item Falls $k=m$, so ist $x \in U$ ein regulärer Punkt von $f$ genau dann, wenn $Df(x) \in \Mat_{m,m}(\mathbb{R})$ und $T$ invertierbar ist.
+\end{enumerate}
 % subsubsection definition (end)
+\subsubsection{Satz} % (fold)
+\label{satz210}
+Sei $ U \subseteq \mathbb{R}^m$ offen, $ f: U \to \mathbb{R}^k $ eine $C^1$-Abbildung und $y_0 \in \mathbb{R}^k$ sei ein regulärer Wert von $f$.
+\[
+	M:=f^{-1}(y) \subseteq U
+\]  
+Dann existiert zu jedem $x_0 \in M$ eine offene Umgebung $x_0 \in U_0 \in U$ und ein Diffeomorphismus $h: U_0 \to h(U_0)\in \mathbb{R}^m$ offen, sodass 
+\[
+	h(M \cap U_0)= \set{0} \times \mathbb{R}^{m-k} \subseteq \mathbb{R}^m
+\]
+\minisec{Beispiel:}
+\begin{align*}
+	f: \mathbb{R}^n &\to \mathbb{R} \\
+	x &\mapsto \skal{x}{x} = \norm{x}_2^2 
+\end{align*}
+Dann gilt
+\[
+	Df(x)v = 2 \skal{x}{v}
+\]
+$\Rightarrow$ Jedes $x \in \mathbb{R}^n$, $x \neq 0$ ist regulärer Punkt von $f$. \\
+$\Rightarrow $ Jedes $y \in \mathbb{R}$, $y \neq 0$ ist regulärer Wert.
+\[
+	f^{-1}(1)= \set[x \in \mathbb{R}^n]{\norm{y}_2=1} = S^{n-1}
+\]
+\minisec{Beweis von \ref{satz210}:}
+Sei $x_0 \in M$ (d.h $f(x_0)=y_0$). $Df(x_0): \mathbb{R}^m \to \mathbb{R}^k$ surjektiv. \\
+Wähle Basis $(v_1, \dots, v_m)$ von $\mathbb{R}^m$ so, dass $Df(x_0)v_i=e_i$ für $i<k$ und $Df(x_0)v_j=0$ für $j>k$. \\
+Erklärung : $\dim(\ker Df(x_0))=m-k$ (Dimensionsformel) \\
+\begin{itemize}
+	\item Sei $(v_{k+1}, \dots, v_m)$ Basis von $\ker Df(x_0)$
+	\item Weil $Df(x_0)$ surjektiv ist, gibt es $v_1, \dots, v_k$ mit $Df(x_0)v_i=e_i$ für $i=1,\dots,k$
+	\item Dann ist $(v_1, \dots, v_m)$ eine Basis von $\mathbb{R}^m$ (weil linear unabhängig)
+\end{itemize}
+Sei $p: \mathbb{R}^m \to \set{0} \times \mathbb{R}^{m-k} \subseteq \mathbb{R}^m$ mit $p(x)=\spn\{ e_{k+1}, \dots, e_m \}$ die lineare Abbildung. \\
+Dann gilt
+\[
+	p(v_i)= \begin{cases}
+		0, &\text{ falls }i \leq k\\
+		e_i, &\text{ falls }i >k
+	\end{cases}
+\]
+Setze nun $h: U \to \mathbb{R}^k \times \mathbb{R}^{m-k}$ mit $h(x):=(f(x)-y_0,p(x))$. Dann ist $h$ in $C^1$. \\
+\underline{Behauptung}: $Dh(x_0) \in \Mat_{m,m}(\mathbb{R})$ ist invertierbar. \\
+Dies gilt denn 
+\[
+	Dh(x_0)v_i= (Df(x_0)v_i,p(v_i)) = \begin{cases}
+		(e_i,0), &\text{ falls } i \leq k\\
+		(0,e_i), &\text{ falls } i > k\\
+	\end{cases}
+\]
+Also ist $Dh(x_0)$ invertierbar. \\
+Weil $x \mapsto Dh(x)$ stetig ist, gibt es Umgebung $x_0 \in U_1 \subseteq U$, sodass $Dh(x)$ invertierbar ist $\forall\, x \in U_1$.
+Mit dem Umkehrsatz folgt dann
+\[
+	\exists\,x_0 \in U_0 \off U_1 \subseteq U: \qquad h:U_0 \to h(U_0) \text{ ist Diffeomorphismus} 
+\]
+Es gilt 
+\[
+	h(U_0 \cap M)= h(U_0) \cap \set{0} \times \mathbb{R}^{m-k}
+\]
+\[
+	x \in U_0 \cap M \qquad \Rightarrow \qquad f(x)=y_0 \qquad \Rightarrow \qquad h(x)=(f(x)-y_0,p(x))=(0,p(x)) \in \set{0} \times \mathbb{R}^{m-k}
+\]
+\[
+	h(x) \in \set{0} \times \mathbb{R}^{m-k} \qquad \Rightarrow \qquad h(x)-y_0=0 \qquad \Rightarrow \qquad x \in U_0 \cap M
+\] \bewende
+\hphantom{k} \\
+Man kann zeigen:
+\[
+	\text{Ist } A \subseteq \mathbb{R}^n \text{ abgeschlossen, so gibt es eine $C^{\infty}$-Funktion } f:\mathbb{R}^n \to \mathbb{R} \text{ mit } f^{-1}(0)=A
+\]
+\subsubsection{Definition} % (fold)
+\label{ssub:definition}
+Eine Teilmenge $M \subseteq \mathbb{R}^{n+k}$ heißt \Index{$n$-dimensionale Untermannigfaltigkeit} von $\mathbb{R}^{n+1}$, falls gilt: \\
+zu jedem $x_0 \in M$ existiert eine offene Umgebung $x_0 \in U \subseteq R^{n+k}$ und ein Diffeomorphismus $h U \to h(U) \subseteq \mathbb{R}{n+k}$ mit $h(U \cap M)= \set{0} \times \mathbb{R}^n \subseteq \mathbb{R}^{n+k}$. \\
+Ein solches Paar $(U,h)$ heißt \Index{Karte} von M. \\
+Eine Familie $(U_i,h_i)_{i \in I}$ von Karten heißt \Index{Atlas} von M, falls $\bigcup\limits_{i \in I}U_i \cap M=M$
+% subsubsection definition (end)
+\subsubsection{Beispiele} % (fold)
+\label{ssub:beispiele}
+\begin{enumerate}
+	\item $U \subseteq \mathbb{R}^m$, $f: U \to \mathbb{R}^k $ eine $C^1$-Abbildung. \\
+	$y_0 \in \mathbb{R}^k$ regulärer Wert, dann ist $f^{-1}(y_0) \subseteq \mathbb{R}^m$ ist eine Untermannigfaltigkeit der Dimension $m-k$. \\
+	\underline{z.B}: $S^{n-1}= \set[x \in \mathbb{R}^n]{\norm{x}_2=1}$ ist eine $(n-1)-dimensionale$ Untermannigfaltigkeit. \\
+	\[
+		\text{Eine offene Teilmenge $U \subseteq \mathbb{R}^n$ ist eine $n$-dimensionale Untermannigfaltigkeit von $\mathbb{R}^n$ (!!)}
+	\]
+\end{enumerate}
+% subsubsection beispiele (end)
  % subsubsection satz_uber_implizite_funktionen (end)
 % subsubsection beweis_des_umkehrsatzes_teil_2 (end)
 
