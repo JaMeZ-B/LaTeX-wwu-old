@@ -1354,7 +1354,6 @@ $K^0(X \times S^2)\ni \benbrace*{\set{F,f},0 }_\st $ im Bild liegt. Es gilt nun
 	&\quad - \benbrace*{\pr_x^*(n F) \otimes H^{-m},0}_\st 
 \end{align*}
 liegt im Bild von $\mu$.
-
 Für Injektivität betrachte die Abbildung 
 \[
 	\begin{tikzcd}[row sep=0.0em]
@@ -1555,11 +1554,200 @@ Die Inklusionen $(D_i^2,\partial D_i^2) \hookrightarrow (C_0,\partial_i C_0) \su
 \todo[inline]{das brauche ich aus den Notizen…}
 % subsection satz (end)
 % section 3 (end)
+\newpage
+
+\section{Die Hopf-Invariante} % (fold)
+\label{sec:die_hopf_invariante}
+Zur Erinnerung: Wir wollen den folgenden Satz beweisen:
+\todo[inline]{Wenn alles mit \texttt{thmtools} umgebaut ist, kann hier restate benutzt werden}
+\minisec{Satz}
+Folgenden Aussage sind äquivalent:
+\begin{enumerate}[(i)]
+	\item $\mathds{R}^n$ hat die Struktur einer reellen Divisionsalgebra.
+	\item Entweder ist $n=1$ oder $n\ge 2$ ist gerade und es gibt eine stetige Abbildung $f \colon S^{2n-1} \to S^n$ mit \Index{Hopf-Invariante} $1$.
+	\item $n \in \set{1,2,4,8}$
+\end{enumerate}
+Ziel heute: Definition der Hopf-Invariante sowie (i)$\Rightarrow $(ii).
+
+
+\subsection{Definition} % (fold)
+\label{sub:41}
+Ein $H$-Raum ist ein punktierter topologischer Raum $(X,e)$ mit Basispunkt $e \in X$ zusammen mit einer stetigen Abbildung $\mu \colon X \times X \to X$, so dass 
+\begin{enumerate}[(i)]
+	\item $\mu(e,e)=e$
+	\item Die Abbildung $X \to X$, $x \mapsto \mu(x,e)$ und $X \to X$, $x \mapsto \mu(e,x)$ sind beide homotop zur Identität auf $X$.
+\end{enumerate}
+% subsection 41 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:42}
+Falls $\mathds{R}^n$ die Struktur einer reellen Divisionsalgebra hat, dann existiert eine stetige Abbildung $\mu \colon S^{n-1} \times S^{n-1} \to S^{n-1}$, sodass 
+$(S^{n-1},e,\mu)$ ein $H$-Raum ist.
+\minisec{Beweis}
+Sei $e \in \mathds{R}^n$ die Eins der Divisionsalgebra. Dann gilt $\norm{e}\not=0$. Wir können ohne Beschränkung der Allgemeinheit $\norm{e}=1 $ annehmen. Wenn dies nicht 
+gilt, dann definieren wir eine neue Divisionsalgebrastruktur auf $\mathds{R}^n$ durch 
+\[
+	x * y := x \bullet y \cdot \norm{e} 
+\]
+mit Einselement $\frac{e}{\norm{e}} =: e'$. Ohne Beschränkung der Allgemeinheit ist also $e \in S^{n-1} \subset \mathds{R}^n$. Sei 
+$\mu \colon S^{n-1} \times S^{n-1} \to S^{n-1}$ gegeben durch 
+\[
+	\mu(x,y) = \frac{x * y}{\norm{x * y} } 
+\]
+Dies ist wohldefiniert, da $x * y\not=0$ für $x,y \not=0$. Außerdem gilt $\mu(x,e)=x$, $\mu(e,x)=x$, \bewende
+% subsection 42 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:43}
+Seien $k,l >0$. Dann gilt
+\[
+	K^0 \enbrace*{S^{2l} \times S^{2k}} \cong K^0(S^{2l}) \otimes K^0(S^{2k}) \cong \nicefrac{\mathds{Z}[\alpha,\beta]}{(\alpha^2,\beta^2)}
+\]
+\minisec{Beweis}
+Wir haben $\tilde{K}^0(S^{2l}) \cong \mathds{Z} = \langle \alpha \rangle$ mit $\alpha^2=0$. Die kurze exakte Sequenz 
+\[
+	\begin{tikzcd}
+		0 \rar & K^0(S^{2l},\pt) \rar & K^0(S^{2l}) \rar & K^0(\pt)\cong \mathds{Z} \rar & 0
+	\end{tikzcd}
+\]
+spaltet durch einen Ringhomomorphismus $\mathds{Z} \cong K^0(\pt) \to K^0(S^{2l})$. Hieraus lesen wir die Ringstruktur von $K^0(S^{2l})$ ab: 
+$K^0(S^{2l})\cong \mathds{Z} + \mathds{Z} \cdot \alpha $ mit $\alpha^2=0$. Das heißt 
+\[
+	K^0(S^{2l}) \cong \nicefrac{\mathds{Z}[\alpha]}{(\alpha^2)}
+\]
+und somit $K^0{S^{2l}} \otimes K^0(S^{2k}) \cong \nicefrac{\mathds{Z}[\alpha,\beta]}{(\alpha^2,\beta^2)}$. Aus Bott-Periodizität folgt 
+\begin{align*}
+	K^0(S^{2k},\pt) = \tilde{K}^0(S^{2k}) \cong \tilde{K}^0(S^{2k-2}) \otimes \tilde{K}^0(S^2) \\
+	K^0(X) \otimes K^0(S^2,\pt) \cong K^0(X \times (S^2,\pt))
+\end{align*}
+Zusammen folgt durch Induktion, dass 
+\[
+	K^0(X) \otimes  K^0(S^{2k},\pt ) \cong K^0 \enbrace*{X \times (S^{2k},\pt)} 
+\]
+Jetzt betrachten wir
+\[
+	\begin{tikzcd}
+		0 \rar & K^0(X) \otimes  K^0(S^{2k},\pt)\dar["\cong"] \rar & K^0(X) \otimes K^0(S{2k}) \dar["(1)"] \rar & K^0(X) \otimes K^0(\pt) \dar["\cong"] \rar & 0 \\
+		0 \rar & K^0 \enbrace*{X \times (S^{2k},\pt)} \rar & K^0(X \times S^{2k}) \rar & K^0(X \times \pt) \rar & 0 
+	\end{tikzcd}
+\]
+$(1)$ ist auch ein Isomorphismus. Die Aussage folgt für $X=S^{2l}$. \bewende
+% subsection 43 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:44}
+Falls $S^{n-1}$ ein $H$-Raum ist, dann ist entweder $n=1$ oder $n\ge 2$ gerade.
+\minisec{Beweis}
+Wir zeigen: Für $k>0$ kann $S^{2k}$ kein $H$-Raum sein. Angenommen wir haben $H$-Raum-Struktur $\mu \colon S^{2k} \times S^{2k} \to S^{2k}$ mit Eins $e$. 
+\[
+	\begin{tikzcd}
+		\mu^* \colon \nicefrac{\mathds{Z}[\gamma]}{(\gamma^2)} \rar & \nicefrac{\mathds{Z}[\alpha,\beta]}{(\alpha^2,\beta^2)} \\
+		K^0(S^{2k}) \rar & K^0(S^{2k} \times S^{2k})
+	\end{tikzcd}
+\]
+\todo{$\cong$ ins Diagramm einfügen}
+Jetzt betrachte
+\[
+	\begin{tikzcd}[row sep=0cm]
+		S^{2k} \rar["i"] & S^{2k} \times S^{2k} \rar["\mu"] & S^{2k} \\
+		x \rar[mapsto] & (x,e)
+	\end{tikzcd}
+\]
+Dies ist homotop zur Identität, das heißt $i^* \circ \mu^* = \id_{K^0(S^{2k})}$. Betrachte
+\[
+	\begin{tikzcd}
+		K^0(S^{2k} \times S^{2k}) \rar["i^*"] & K^0(S^{2k}\times \pt) \\
+		K^0(S^{2k}) \otimes K^0(S^{2k}) \uar["*"] \rar & K^0(S^{2k}) \otimes K^0(\pt) \uar \\
+		\nicefrac{\mathds{Z}[\alpha,\beta]}{(\alpha^2,\beta^2)} \rar["i^*"] & \nicefrac{\mathds{Z}[\gamma]}{(\gamma^2)} \\
+		\alpha \rar[mapsto] & \gamma \\
+		\beta \rar[mapsto] & 0
+	\end{tikzcd}
+\]
+Seien $r,s,t \in \mathds{Z}$, so dass $\mu^*(\gamma)= r \alpha + s \beta+ t \alpha \beta$. Dann gilt $r \gamma = i^* \circ \mu^*(\gamma)=\gamma$. Also ist $r=1$. Analog folgt
+$s=1$.
+\[
+	\Rightarrow 0 = \mu^*(\gamma^2) = \enbrace*{\mu^*(\gamma)}^2 = 2 \alpha \beta \not=0  
+\]
+Widerspruch! \bewende
+
+Eine $H$-Raum-Struktur $\mu \colon S^{n-1} \times S^{n-1} \to S^{n-1}$ liefert eine stetige Abbildung $f \colon S^{2n-1} \to S^n$ definiert wir folgt: Wir haben 
+$S^{2n-1} \cong \partial (D^n \times D^n) = \partial D^n \times D^n \cup D^n \times \partial D^n$ und  $S^n \cong D^n_+ \coprod D^n_n /\sim$ durch Verklebung
+entlang von $S^{n-1} = \partial D^n_+ = \partial D^n_-$. $f$ ist definiert durch
+\[
+	\begin{tikzcd}[ampersand replacement=\&,row sep=0cm]
+		f \colon \partial D^n \times D^n \cup D^n \times \partial D^n \rar \& \nicefrac{D^n_+ \coprod D^n_-}{\sim} \\
+		(x,y) \rar[mapsto] \&  {\begin{cases}
+			\norm{y} \cdot \mu \enbrace*{x, \frac{y}{\norm{y} } }  , &\text{ falls } (x,x) \in \partial D^n  \times D^n\\
+			\norm{x} \cdot \mu \enbrace*{\frac{x}{\norm{x} },y }  , &\text{ falls } (x,y) \in D^n \times \partial D^n
+		\end{cases}}
+	\end{tikzcd}
+\]
+$f$ ist wohldefiniert und stetig. Ab jetzt nehmen wir $n=2k$ an. Sei $f \colon S^{4k-1} \to S^{2k}$ eine stetige Abbildung. $f$ ist die Anklebeabbildung einer $4k$-Zelle
+$D^{4k}$ an $S^{2k}$. Sei $C_f$ durch das Pushout-Diagramm
+\[
+	\begin{tikzcd}
+		S^{4k-1} \rar[hook] \dar["f"] & D^{4k} \dar\\
+		S^{2k} \rar[hook] &C_f
+	\end{tikzcd}
+\]
+Es gilt $\nicefrac{C_f}{S^{2k}} \cong S^{4k}$. Damit folgt
+\[
+	K^0(C_f,S^{2k}) \cong K^0(D^{4k}, S^{4k-1}) \cong \tilde{K}^0(S^{4k})
+\]
+Wegen $\tilde{K}^1(S^{4k}) \cong \tilde{K}^1(S^{2k}) =0$ erhalten wir aus der exakten Tripelsequenz für $C_f \supset S^{2k} \supset \pt$ die kurze exakte Sequenz
+\[
+	\begin{tikzcd}
+		0 \rar & \tilde{K}^0(S^{4k}) \rar & \tilde{K}^0(C_f) \rar & \tilde{K}^0(S^{2k}) \rar & 0
+	\end{tikzcd}
+\]
+Sei $\alpha \in \tilde{K}^0(C_f)$ das Bild des Generator von $\tilde{K}^0(S^{4k})$ in $\tilde{K}^0(C_f)$. Sei $\beta \in \tilde{K}^0(C_f)$ ein Element, welches auf den
+Generator von $\tilde{K}^0(S^{2k})$ abbildet. Dann ist das Bild von $\beta^2$ in $\tilde{K}^0(S^{2k})$ gleich $0$. Also ist $\beta^2= h_f \cdot \alpha$ für ein 
+$h_f \in \mathds{Z}$.
+% subsection 44 (end)
+
+\subsection{Lemma} % (fold)
+\label{sub:45}
+$h_f$ ist unabhängig von der Wahl von $\beta$.
+\minisec{Beweis}
+Sei $\beta'$ ein weiteres Element. Dann gilt $\beta' = \beta + m \cdot \alpha$ für ein $m \in \mathds{Z}$. Es gilt dann
+\[
+	(\beta')^2 = \beta^2 + 2m \beta \alpha
+\]
+Das Bild von $\alpha \beta$ in $\tilde{K}^0(S^{2k})$ ist $0$. Damit ist $\alpha \beta= r \cdot \alpha$ für ein $r \in \mathds{Z}$. Es folgt
+\[
+	r \alpha \beta = \alpha \beta^2 = h_f \cdot \alpha^2=0
+\]
+da $\alpha^2=0$ ist.  Damit ist $\alpha \beta=0$, da $\alpha \beta \in \im (\mathds{Z}= \tilde{K}^0(S^{4k}) \hookrightarrow \tilde{K}^0(C_f))$. Also gilt 
+$(\beta')^2=\beta^2$. \bewende
+% subsection 45 (end)
+
+\subsection{Definition} % (fold)
+\label{sub:46}
+Das Element $h_f \in \mathds{Z}$ heißt die \Index{Hopf-Invariante} von $f$.
+% subsection 46 (end)
+
+\subsection{Satz} % (fold)
+\label{sub:47}
+Sei $f\colon S^{4k} \to S^{2k}$ die stetige Abbildung assoziiert zu einer $H$-Raum-Struktur auf $S^{2k-1}$. Dann gilt $h_f \in \set{\pm 1}$.
+\minisec{Beweis}
+
+% subsection 47 (end)
+% section die_hopf_invariante (end)
+
+
+
 
 
 \cleardoubleoddemptypage
 \appendix
 \section{Anhang}
+
+
+
+
+
+
+
 
 \subsection{Lokale Trivialität des Tangentialbündels auf $S^n$} % (fold)
 \label{sub:lokal_trivial_Sn}
