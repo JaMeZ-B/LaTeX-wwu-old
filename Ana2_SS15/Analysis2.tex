@@ -3156,7 +3156,151 @@ Dann gilt
 	\[
 		G(t)=G(0)
 	\]
+	\item Setze $y(t)= \exp ( -tA)X(t)$ mit $y(0)= \exp(0)X(0)= x_0$. \\
+	Dann gilt
+	\begin{align*}
+		\dot y(t) &\stackrel{1)}{=}-A\exp(-tA)X(t)+\exp(-tA)AX(t) \\
+		&\stackrel{2)}{=}-A \exp(-tA)X(t)+ A \exp(-tA)X(t) \\
+		&\stackrel{\hphantom{3)}}{=}0 
+	\end{align*}
+	Dann folgt
+	\[
+		y(t)= x_0 \qquad \forall\, t
+	\]
+	\[
+		\stackrel{3)}{\Rightarrow} X(t)=\exp(tA)x_0 \qquad \forall\, t
+	\]
+	\item \begin{align*}
+		\diffd{}{t}(\exp(tA)\exp(tB)) &\stackrel{1)}{=} A \exp(tA)\exp(tB)+ \exp(tA)B\exp(tB) \\
+		& \stackrel{2)}{=}(A+B) \exp(tA)\exp(tB)
+	\end{align*}
+	$\Rightarrow$ Die Funktion $X:\mathbb{R} \to \Mat_{n,n}(\mathbb{C})$ mit $X(t)=\exp(tA)\exp(tB)$ erfüllt die Differentialgleichung
+	\[
+		\dot X(t)=(A+B)X(t) \qquad und \qquad X(0)=\ind_n
+	\]
+	\[
+		\stackrel{4)}{\Rightarrow} X(t)=\exp(t(A+B)) \qquad t=1
+	\]\bewende
+	\item Setze $X(t)=B \exp(tA)B^{-1}$ und $X(0)=B \ind_n B^{-1}= \ind_n$. \\
+	Dann gilt
+	\begin{align*}
+		BA \exp(tA)B^{-1} &= BAB^{-1} \underset{X(t)}{\underbrace{B \exp(tA)B^{-1}}} \\
+		&= (BAB^{-1})X(t)
+	\end{align*}
+	\[
+		\Rightarrow X(t)=\exp(tBAB^{-1})
+	\] \bewende
 \end{enumerate}
+Betrachte das Anfangswertproblem
+\begin{align*}
+	\dot x(t)&=A x(t) \\
+	\dot x(0)&=x_0
+\end{align*}
+$x$ ist eine Funktion $\mathbb{R} \xrightarrow{x} \mathbb{C}^n$ und $A \in \Mat_{n,n}(\mathbb{C})$
+
+\subsubsection{Korollar} % (fold)
+\label{ssub:korollar}
+Zu jedem $x_0 \in \mathbb{C}^n$ gibt es genau eine Lösung von obigen Anfangswertproblem, nämlich
+\[
+	X(t)=\exp(tA)x_0
+\]
+\minisec{Beweis:} \[
+	\diffd{}{t}(\exp(tA)x_0)= A\exp(tA)x_0
+\]
+\[
+	\exp(0A)x_0 = \ind_n x_0 = x_0
+\]
+	$\Rightarrow$ $x(t):= \exp(tA)x_0$ löst das Anfangswertproblem. \\
+\underline{Eindeutigkeit}: Sei $x \mathbb{R} \to \mathbb{C}^n$ eine Lösung des AWP. Dann gilt
+\begin{align*}
+	\diffd{}{t}\exp(-tA)x(t) &= -A \exp(-tA)x(t)+ \exp(-tA) \dot x(t) \\
+	&= -A \exp(-tA)x(t)+ \exp(-tA)Ax(t) \\
+	&= 0
+\end{align*}
+\[
+	\Rightarrow \exp(-tA)x(t)= \underset{=\ind_n}{\underbrace{\exp(0A)}}\underset{x_0}{\underbrace{x(0)}}=x_0
+\]
+\[
+	\Rightarrow x(t)= \exp(tA)x_0
+	\]
+\minisec{Bemerkung:}Sei $A \in \Mat_{n,n}(\mathbb{C})$ fest. Dann gilt
+
+	 $x,y: \mathbb{R} \to \mathbb{C}^n$ \qquad $\dot x(t)=Ax(t)$, $\dot y(t)=Ay(t)$. Wenn $a \in \mathbb{C}$, dann gilt
+	\[
+		\diffd{}{t}(x(t)+ay(t))=A(x(t)+ay(t))
+	\]
+	$\Rightarrow$ Jede Linearkombination von Lösungen von $Ax(t)= \dot x(t)$ ist wieder eine Lösung. \\
+	\[
+		\set[x: \mathbb{R} \to \mathbb{C}^n]{\dot x(t)=Ax(t)}
+	\] ist Vektorraum der Dimension $n$.
+	\begin{align*}
+		\set[x: \mathbb{R} \to \mathbb{C}]{\dot x(t)=Ax(t)} &\to \mathbb{C}^n \\
+		x &\mapsto x(0)
+	\end{align*}
+	ist linear und bijektiv. \\
+	Die Funktion
+	\[
+		x_i(t):= \exp(tA)e_i \qquad i=1,\dots,n
+	\]
+	bilden eine Basis des Lösungsraumes.
+$\Rightarrow$ Die $i$-te Spalte von $\exp(tA)$ ist die Lösung des Anfangswertproblems
+\[
+	\dot = Ax, \qquad x(0)=e_i
+\]
+\subsubsection{Inhomogene Differentialgleichung} % (fold)
+\label{ssub:inhomogene_differentialgleichung}
+
+% subsubsection inhomogene_differentialgleichung (end)
+$A \in \Mat_{n,n}(\mathbb{C})$, $x_0 \in \mathbb{C}^n$, $b: \mathbb{R} \to \mathbb{C}^n$ stetig. Dann heißt
+\begin{align*}
+	\dot x(t)&= Ax(t)+b(t) \\
+	x(0)&=x_0
+\end{align*}
+\Index{inhomogene Differentialgleichung}
+\underline{Ansatz}: Suche $x$ in der Form 
+\[
+	x(t)=\exp(tA)c(t)
+\] mit $c: \mathbb{R} \to \Mat_{n,n}(\mathbb{C})$ in $C^1$.
+\[
+	\exp(0)c(0)=c(0)\stackrel{!}{=}x_0
+\]
+Dann gilt
+\begin{align*}
+	\diffd{}{t}(\exp(tA)c(t)) &= A(\exp(tA)c(t))+\underset{\stackrel{!}{=}b(t)}{\underbrace{\exp(tA)\dot c(t)}}
+\end{align*}
+\[
+	\Rightarrow \dot c(t)= \exp(-tA)b(t)
+\]
+\[
+	c(t)=x_0+ \int_{0}^{t}\exp(-sA)b(s) \,\mathrm{d}s
+\]
+Dann folgt
+\[
+	\Rightarrow x(t)= \exp(tA)\left( x_0 + \int_{0}^{t}\exp(-sA)b(s) \,\mathrm{d}s \right)
+\]
+ist eine Lösung von
+	\begin{align*}
+		\dot x(t)&= Ax(t)+b(t) \\
+		x(0)&=x_0
+	\end{align*}
+\[
+	x(t)= \underset{\substack{\text{löst die} \\ \text{inhomogene} \\ \text{Gleichung}}}{\underbrace{\exp(tA)x_0}} 
+	+ \underset{\substack{\text{Variation} \\ \text{ der Konstanten}}}{\underbrace{\int_{0}^{t}\exp((t-s)A)b(s) \,\mathrm{d}s}}
+\]
+Wie berechnent man $\exp(tA)$?
+\subsubsection{Beispiele} % (fold)
+\label{ssub:beispiele}
+% subsubsection beispiele (end)
+\begin{enumerate}
+	\item \[
+		A = \begin{pmatrix}
+			hier fehlt was
+		\end{pmatrix}
+	\]
+\end{enumerate}
+
+
+% subsubsection korollar (end)
 % subsection lineare_differentialgleichungen_mit_konstanten_koeffizienten (end)
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
