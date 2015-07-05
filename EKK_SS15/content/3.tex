@@ -1,0 +1,238 @@
+\section{Elliptische Kurven über verschiedenen Körpern}
+\label{sec:para3}
+\nextlecture
+\subsection{Elliptische Kurven über $\QQ$}
+\label{sub:3.1}
+
+\begin{mot}
+	Betrachte die elliptische Kurve $E(k)$ jetzt über $k = \QQ$. \marginnote{[16]}
+	Wie findet man möglichst viele rationale Punkte (d.h. $P=(x,y) \in \aff^2(\QQ)$) auf der Kurve $E(\QQ)$?
+	Die expliziten Formeln zeigen:
+	\begin{itemize}
+		\item Ist $P$ ein rationaler Punkt auf $E(k)$, so auch $2P, 3P, 4P, \dots$
+		\item Sind $P,Q$ zwei rationale Punkte, so auch $P+Q, P+(P+Q) = 2P + Q, 2P + 2Q,$ usw.
+	\end{itemize}
+	Können so unendlich viele rationale Punkte auf $E(k)$ konstruiert werden?
+	Das hängt von der Ordnung des Punktes $P$ in der Gruppe $(E(k),+)$ ab, d.h. von $\ord(P) = \min\{m \in \NN : mP = \oh\}$, falls diese existiert.
+	Das ist ziemlich unklar, wie auch Beispiele zeigen:
+\end{mot}
+
+\begin{bsp}
+\label{bsp_16.2}
+	Sei $E(\QQ) \colon y^2 = x^3 + 17$.
+	Dann ist $\Delta(E) = -16 \cdot 27 \cdot 17^2 \neq 0$.
+	Zwei Punkte sind $P = (-2,3)$ und $Q = (-1,4)$.
+	Es ist
+	\begin{equation}
+	\begin{aligned}
+		P + Q &= (4,-9) \\
+		2P + Q &= (2,5) \\
+		3P + Q &= \enbrace*{\frac{1}{4}, - \frac{33}{8}} \\
+		4P + Q &= \enbrace*{\frac{106}{9}, \frac{1097}{27}} \\
+		5P + Q &= \enbrace*{-\frac{2228}{961},-\frac{63465}{29791}}\\
+		6P + Q &= \enbrace*{\frac{76271}{289},-\frac{21063928}{4913}} \\
+		&\vdots
+	\end{aligned}
+	\end{equation}
+	Offenbar werden die Ergebnisse immer komplizierter; unendlich viele rationale Punkte können auf $E(\QQ)$ wohl derart konstruiert werden, d.h. vermutlich hat $P$ keine (endliche) Ordnung.
+\end{bsp}
+
+\begin{bsp}
+\label{bsp_16.3}
+	Sei $E(\QQ)\colon y^2 = x^3+x$.
+	Der einzige affine rationale Punkt auf $(0,0)$.
+	Dies kann direkt gezeigt werden unter Verwendung, dass die Gleichung $u^4+v^4 = w^2$ nur ganzzahlige Lösungen mit $u=0$ oder $v=0$ hat (was auch schon nicht so schnell zu zeigen ist).
+	Es kann dennoch gesagt werden, dass durch $P, 2P = \oh, 3P = P, 4P = \oh, \dots$ alle rationalen Punkte auf $E(\QQ)$ konstruiert werden können.
+\end{bsp}
+
+\begin{bsp}
+\label{bsp_16.4}
+	Sei $E(\QQ)\colon y^2 = x^3 - 4x^2 + 16$.
+	Dann ist $\Delta(E) = -16 \cdot (4 \cdot (-4)^3 + 27 \cdot 16^2) \neq 0$.
+	Eine kurze Suche liefert die vier rationalen Punkte
+	\[
+		P_1 = (0,4) \qquad P_2 = (4,4) \qquad P_3 = (0,-4) = -P_1 \qquad P_4 = (4,-4) = -P_2
+	\]
+	Können hier wie in Beispiel~\ref{bsp_16.2} beliebig viele rationale Punkte konstruiert werden?
+	Hier ist die Gerade durch $P_1$ und $P_2$ die Tangente an $E(k)$ in $P_1$, weil $4^2 = x^3 - 4x^2 + 16 \Leftrightarrow 0 = x^2(x-4)$ ist und $x = 0$ doppelte Nullstelle.
+	Damit ist $-P_1 = P_1 + P_2 = P_3$, also kann so kein weiterer rationaler Punkt konstruiert werden.
+	Auch mit anderen Paaren $P_i$ und $P_j$ der vier Punkte passiert dies.
+	Vermutlich gibt es außer den vier angegebenen rationalen Punkten keine weiteren auf $E(\QQ)$.
+	Wir haben:
+	\begin{equation}
+	\begin{aligned}
+		P_1 &= (0,4) \\
+		2P_1 &= -P_2 = P_4 \\
+		3P_1 &= P_1 + P_4 = P_1 - P_2 = P_2 \\
+		4P_1 &= P_1 + P_2 = P_3 \\
+		5P_1 &= P_3 + P_1 = (P_1 + P_2) + P_1) = 2P_1 + P_2 = -P_2 + P_2 = \oh,
+	\end{aligned}
+	\end{equation} 
+	d.h. $\ord(P_1) = 5$.
+	Somit ist $\sprod*{P_1} = \{\oh, P_1, P_2, P_3, P_4\} \simeq \ZZ_5$.
+\end{bsp}
+
+Die Beispiele legen folgenden Satz nahe:
+\begin{satz}[Satz von Mordell (1922)]
+\label{satz_mordell} \label{satz_16.5}
+	Sei $E(\QQ)$ eine elliptische Kurve über $\QQ$.
+	Dann gibt es eine endliche Liste von Punkten $P_1,\dots,P_s \in E(\QQ)$, sodass alle (rationalen) Punkte auf $E(\QQ)$ von diesen erzeugt werden, d.h. für alle $P \in E(\QQ)$ existieren Zahlen $m_1,\dots,m_s \in \NN_0$ mit
+	\[
+		P = m_1 P_1 + \dots + m_s P_s
+	\]
+	Mit anderen Worten: Die Gruppe $(E(\QQ),+)$ ist endlich erzeugt.
+	Dabei können die Erzeuger endliche Ordnung haben oder nicht.
+	Natürlich sind die Erzeuger nicht unbedingt eindeutig bestimmt.
+\end{satz}
+
+\begin{bem}
+	\begin{itemize}
+		\item In Beispiel~\ref{bsp_16.3} haben wir einen endlichen Erzeuger $P_1 = (0,0), \ord(P_1) = 2$.
+		\item In Beispiel~\ref{bsp_16.4} haben wir eventuell einen endlichen Erzeuger $P_1 = (0,4), \ord(P_1)=5$.
+		\item In Beispiel~\ref{bsp_16.2} haben wir eventuell einen unendlichen Erzeuger $P_1 = (-2,3)$, welcher eventuell nicht der einzige ist. Die von $P_1$ erzeugte Untergruppe $\ZZ \cdot P_1 := \{m P_1 : m \in \ZZ\} \subseteq E(\QQ)$ ist isomorph zu $\ZZ$ vermöge $m \cdot P_1 \mapsto m$.
+	\end{itemize}
+\end{bem}
+
+\begin{defn}[Torsionsgruppe]
+	Wir können in der Formuliereung von Satz~\ref{satz_16.5} die Unterscheidung zwischen Punkten mit und ohne endliche Ordnung vornehmen.
+	Die Teilmenge $T := \{P \in E(\QQ) : \ord(P) \in \NN\}$ aller Punkte von $E(\QQ)$ mit endlicher Ordnung ist offenbar eine Untergruppe, die \Index{Torsionsgruppe} von $E(\QQ)$ heißt.
+	Somit hat der Satz von Mordell auch die folgende Formulierung:
+\end{defn}
+
+\begin{satz}[Satz von Mordell, Gruppenstruktur]
+	Es gibt ein $r = r(E) \in \NN_0$ mit $E(\QQ) \simeq \ZZ^r \times T$. \marginnote{$\ZZ^r$ mit komponentenweiser Addition}
+	\index{Satz von Mordell}
+\end{satz}
+
+\begin{defn}[Rang]
+\label{def_16.9}
+	Die Zahl $r(E)$ heißt \Index{Rang} von $E(\QQ)$.
+\end{defn}
+
+\begin{bem}
+	Die Torsionsgruppe $T$ ist stets endlich, wie aus dem 	\href{https://de.wikipedia.org/wiki/Hauptsatz_\%C3\%BCber_endlich_erzeugte_abelsche_Gruppen}{Struktursatz über endlich erzeugte abelsche Gruppen} gefolgert werden kann.
+	Allerdings bleiben Größe von $T$ und Lage der Torsionspunkte $P \in T$ damit unbekannt.
+	Weiter kann aber $\#E(\QQ) = \infty \Leftrightarrow r(E) > 0$ gefolgert werden.
+\end{bem}
+
+\begin{bsp}
+	\begin{itemize}
+		\item Für $E(\QQ) \colon y^2 = x^3 - 4$ ist $E(\QQ) \simeq \ZZ^1$, wobei z.B. $P_1 = (2,2)$ Erzeuger ist.
+		\item Im Beispiel~\ref{bsp_16.3} und \ref{bsp_16.4} ist $\Rg E(\QQ) = 0.$ (ohne Beweis)
+	\end{itemize}
+\end{bsp}
+
+\begin{bem}
+	Der Rang elliptischer Kurven ist bislang schlecht verstanden.
+	Offen, d.h. bislang unbewiesen, ist z.B. die \Index{Rangvermutung}:
+	\[
+		\limsup_{E(\QQ)} r(E) = \infty
+	\]
+	D.h. man vermutet, dass es zu jedem $C \in \RR$ eine elliptische Kurve mit $\Rg E(\QQ) > C$ gibt.
+	Der aktuelle Weltrekord (2006, von N. Elkies\footnote{\url{https://de.wikipedia.org/wiki/Noam\_Elkies}}) ist eine elliptische Kurve vom Rang $\geq 28$ (da $28$ "unabhängige" Punkte unendlicher Ordnung auf ihre gefunden wurden), die Kurve lautet $y^2 + xy + y = x^3 - x^2 - ax + b$ mit
+	\footnotesize
+	\begin{equation}
+	\begin{aligned}
+		a &= 20.067.762.415.575.526.585.033.208.209.338.542.750.930.230.312.178.985.502 \\
+		b &= 34.481.611.795.030.556.467.032.985.690.390.720.374.855.944.359.319.180.361.266.008.296.291.939.448.732.243.729
+	\end{aligned}
+	\end{equation}
+	\normalsize
+	Die Torsionsgruppe ist deutlich besser verstanden:
+\end{bem}
+
+\begin{satz}[Satz von Nagell-Lutz (Nagell 1935, Lutz 1937)]
+	(T. Nagell\footnote{\url{https://de.wikipedia.org/wiki/Trygve_Nagell}}, E. Lutz\footnote{\url{https://de.wikipedia.org/wiki/\%C3\%89lizabeth_Lutz}}) \\
+	Sei $E(\QQ)$ eine elliptische Kurve mit Gleichung $y^2 = x^3 + ax^2 + bx + c$, $a,b,c \in \ZZ$, und seien $P_1,\dots,P_s$ alle Torsionspunkte, d.h. $T = \{P_1,\dots,P_s\}$.
+	Schreibe die $P_i = (x_i,y_i) \in \QQ^2$.
+	Dann sind alle $x_i,y_i \in \ZZ$, und für $y_i \neq 0$ gilt $y_i^2 \mid \Delta(E)$. \index{Satz von Nagell-Lutz}
+\end{satz}
+
+\begin{satz}[Satz von Mazur (1977)]
+	(B. Mazur\footnote{\url{https://de.wikipedia.org/wiki/Barry_Mazur}}) \\
+	Sei $E(\QQ)$ eine elliptische Kurve mit Gleichung $y^2 = x^3 + ax^2 + bx + c, a,b,c \in \ZZ$, mit Torsionsuntergruppe $T$.
+	Dann ist $T \simeq \ZZ_n$ mit $n \leq 12, n \neq 11$ oder $T \simeq \ZZ_2 \times \ZZ_n$ mit $n \in \{2,4,6,8\}$.
+	Andere Torsionsuntergruppen kann es nicht geben, und alle genannten kommen vor. \index{Satz von Mazur}
+\end{satz}
+
+Das sind beachtliche, tiefe Sätze.
+In Beispiel~\ref{bsp_16.4} ist $T \simeq \ZZ_5$, und man kann sehen, dass der Nagell-Lutz-Satz hier korrekt ist: $4^2 \mid \Delta(E)$. \\
+Für $a,b,c \in \ZZ$ kann es höchstens endlich viele Punkte mit ganzzahligen Koordinaten geben:
+
+\begin{satz}[Satz von Siegel (1926)]
+	(C. L. Siegel\footnote{\url{https://de.wikipedia.org/wiki/Carl_Ludwig_Siegel}}) \\
+	Sei $E(\QQ)\colon y^2 = x^3 + ax^2 + bc + c$ mit $a,b,c \in \ZZ$ eine elliptische Kurve.
+	Dann gibt es nur endlich viele Kurvenpunkte $(x,y) \in E(\QQ) \cap \ZZ^2$. \index{Satz von Siegel}
+\end{satz}
+
+\begin{bem}
+	In Beispiel~\ref{bsp_16.2} haben genau die Punkte $\oh, (-2,\pm -3), (-1,\pm 4), (2,\pm 5), (4,\pm 9), (8, \pm 23), (43,\pm 282), (52, \pm 375), (5324, \pm 378661)$ auf der elliptischen Kurve $E(\QQ)$ ganzzahlige Koordinaten.
+\end{bem}
+
+\begin{bem}
+	Elliptische Kurve über $\QQ$ sind nicht-singuläre algebraische Kurven vom Geschlecht $1$. Mordell\footnote{\url{https://de.wikipedia.org/wiki/Louis_Mordell}} vermutete, dass jede über $\QQ$ definierte nicht-singuläre algebraische Kurve vom Geschlecht $\geq 2$ höchstens endlich viele Punkte enthält.
+	Diese Vermutung wurde 1983 von Faltings\footnote{\url{https://de.wikipedia.org/wiki/Gerd_Faltings}} für beliebige Körper bewiesen, wofür er 1986 auf der ICM in Berkeley mit der Fields-Medaille ausgezeichnet wurde.
+\end{bem}
+
+\newpage
+\subsection{Elliptische Kurven über $\CC$}
+\label{sub:3.2}
+\begin{bem}
+	Elliptische Kurven über $\CC$ können einerseits über die Weierstraßgleichung dargestellt werden und zum anderen über ihre \Index{Legendre-Normalform} mit einer Gleichung der Form $y^2 = x(x-1)(x-\lambda)$, vgl. Übungsblatt 6, Aufgabe 2(a).
+	Wir besprechen hier kurz die dritte Darstellung mittels elliptischer Funktionen.
+	Wir möchten hier nur erläutern, warum eine elliptische Kurve über $\CC$ in diesem Sinne ein Torus ist.
+	
+	Gegeben sei $\tau \in \CC \setminus \RR$. Betrachte das Gitter $\Lambda := \{ a + \tau \cdot b : a,b \in \ZZ\} \subseteq \CC$.	
+\end{bem}
+
+\begin{defn}[Elliptische Funktion]
+	Eine Funktion $f\colon \CC \setminus \pol \rightarrow \CC$ der Form $f(z) := \frac{f(z)}{g(z)}$, $g,h$ holomorph, $h \neq 0$, heißt \Index{elliptische Funktion}, falls $f(z+w) = f(z)$ für alle $z \in \CC$ und $\omega \in \Lambda$ (sofern $f(z), f(z+\omega)$ definiert ist, wobei $\pol = \{z : h(z) = 0\}$ die Menge der Polstellen von $f$ ist), d.h. wenn $f$ (doppelt-)periodische Funktion zu $\Lambda$ ist.
+	Der Körper der elliptischen Funktionen über $\Lambda$ sei $\CC(\Lambda)$. \todo{Zeichnungen einfügen!}
+\end{defn}
+
+Eine elliptische Funktion ohne Polstellen (oder ohne Nullstellen) ist konstant (vgl. Satz von Liouville aus der Funktionentheorie).
+
+\begin{defn}[Weierstraß-$\wp$-Funktion, Eisensteinreihe]
+	Zu $\Lambda$ definiere
+	\begin{equation}
+	\begin{aligned}
+		\wp \colon \CC \setminus \Lambda &\Longrightarrow \CC \\
+		z &\longmapsto \frac{1}{z^2} + \sum_{\omega \in \Lambda \setminus \setnull} \enbrace*{\frac{1}{(z-\omega)^2} - \frac{1}{\omega^2}}
+	\end{aligned}
+	\end{equation}
+	und $G_{2k}(\Lambda) := \sum_{\omega \in \Lambda \setminus \setnull} \frac{1}{\omega^{2k}} \in \CC$. Dann heißt $\wp$ die \Index{Weierstraß-$\wp$-Funktion} und $G_{2k}$ heißt \Index{Eisensteinreihe} vom Gewicht $2k \in \RR_{>2}$.
+\end{defn}
+
+\begin{satz}
+	Sei $\Lambda$ ein Gitter.
+	\begin{enumerate}[(a)]
+		\item Die Eisenstein-Reihe $G_{2k}(\Lambda)$ konvergiert absolut für $k > 1$.
+		\item Die Reihe der Funktion $\wp$ konvergiert absolut und gleichmäßig auf jeder kompakten Teilmenge von $\CC \setminus \Lambda$.
+		Sie definiert eine elliptische Funktion mit zweifachem Pol in jedem Gitterpunkt $\omega \in \Lambda$.
+	\end{enumerate}
+\end{satz}
+
+Es gilt somit $\wp'(z) = -2 \sum_{\omega \in \Lambda \setminus \setnull} \frac{1}{(z-\omega)^3}$ für $z \in \CC \setminus \Lambda$. 
+Die Funktionen $\wp$ und $\wp'$ liefern den "Prototyp" elliptischer Funktionen:
+Man kann zeigen, dass jede elliptische Funktion $f$ schreibbar ist als
+\[
+	f(z) = \frac{P_1(\wp(z))}{Q_1(\wp(z))} + \wp'(z) \cdot \frac{P_2(\wp(z))}{Q_2(\wp(z))}, P_i, Q_i \in \CC[Z].
+\]
+
+\begin{satz}
+	Es gilt $(\wp'(z))^2 = 4(\wp(z))^3 - g_2 \cdot \wp(z) - g_3$, d.h. $(\wp(z),\wp'(z)) \in E(\CC)$ mit Gleichung $y^2 = 4x^3 - g_2 x - g_3$, wobei $g_2 := 60 G_4, g_3 := 140 G_6$.
+	Da $\Delta(E) = g_2^3 - 27g_3^2 \neq 0$, handelt es sich bei $E(\CC)$ um eine elliptische Kurve.
+\end{satz}
+
+Wir haben so die Abbildung
+\begin{equation}
+\begin{aligned}
+	\varphi \colon \CC / \Lambda &\longrightarrow \PP^2(\CC) \\
+	z+\Lambda &\longmapsto [\wp(z) : \wp'(z) : 1],
+\end{aligned}
+\end{equation}
+wobei $\varphi(0 + \Lambda) = [0:1:0] = \oh$.
+Das Bild von $\varphi$ ist genau die genannte elliptische Kurve $E(\CC)$.
+Die Abbildung $\varphi \colon \CC/\Lambda \rightarrow E(\CC)$ ist bijektiv und überträgt die Addition "$+$" auf $\CC/\Lambda$, gegeben durch $(x+\Lambda) + (y+\Lambda) := (x+y) + \Lambda$, auf $E(\CC)$, welche sich als unsere bisher studierte Addition $+$ auf $E(\CC)$ erweist.
+Der Torus $\CC/\Lambda$ wird so mit der elliptischen Kurve $E(\CC)$ identifiziert.
+Umgekehrt ist auch jede elliptische Kurve $(E(\CC),+)$ beschreibbar als Torus $(\CC/\Lambda,+)$.
