@@ -8,6 +8,7 @@
 \input{../!config/mitschrift_headings.tex}
 
 \begin{document}
+\hyphenation{Di-vi-sions-al-ge-bra}
 \pagenumbering{Roman}
 \maketitle
 \begin{abstract}
@@ -20,36 +21,39 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\setcounter{section}{-1}
-\section{Einführung} % (fold)
+% \setcounter{section}{-1}
+\section*{Einführung} % (fold)
 \label{sec:0}
 
-\subsection[Definition: Reelle Divisionsalgebra]{Definition} % (fold)
-\label{sub:01}
+
+\begin{definition*}[{name=[Definition: Reelle Divisionsalgebra]},label=sub:01,numbered=no]
 Eine $\mathds{R}$-Algebra $\mathcal{A}$ mit $1$, die nicht notwendigerweise assoziativ ist, heißt \Index{reelle Divisionsalgebra}, falls jedes Element $a\not= 0$ invertierbar 
-ist.
-\minisec{Beispiele}
+ist.	
+\end{definition*}
+
+\begin{beispiel}
 Die reellen Zahlen $\mathds{R}$, die komplexen Zahlen $\mathds{C}$, die Quaternionen\footnote{siehe auch \url{https://de.wikipedia.org/wiki/Quaternion}} $\mathds{H}$ und die sogenannten Cayley-Zahlen\footnote{auch Oktonionen oder reelle Okataven; siehe  \url{http://de.wikipedia.org/wiki/Oktave_(Mathematik)}} $\mathds{O}$. Dabei ist
 $\mathds{O} \cong \mathds{H} \oplus \mathds{H}$, wobei die Multiplikation wie folgt definiert ist:
 \[
 	(a,b) \cdot (d,c) = (ac - d^* b, da + bc^*) 
 \]
 Dabei ist $d= x + iy + jz + kw$ und $d^* = x -iy -jz - kw$.
-% subsection 11 (end)
+\end{beispiel}
 
-\subsection{Theorem 1.1 (Adams)} % (fold)
-\label{sub:02}
+\noindent Wir wollen in dieser Vorlesung das folgende Theorem über Divisionsalgebren beweisen:
+\begin{theorem*}[name={Adams}]
 Folgende Aussagen sind äquivalent:
 \begin{enumerate}[(i)]
 	\item $\mathds{R}^n$ besitzt die Struktur einer reellen Divisionsalgebra.
-	\item Entweder ist $n=1$ oder $n \ge 2$ ist gerade und es gibt eine stetige Abbildung $f \colon S^{2n-1} \to S^n$ mit der sogenannten \Index{Hopf-Invariante} $1$.
+	\item Entweder ist $n=1$ oder $n \ge 2$ ist gerade und es gibt eine stetige Abbildung $f \colon S^{2n-1} \to S^n$ mit \Index{Hopf-Invariante} $1$.
 	\item Es gilt $n \in \set{1,2,4,8}$.
 \end{enumerate}
+\end{theorem*}
+
 % subsection 11 (end)
 
-\subsection{Geplanter Verlauf der Vorlesung} % (fold)
-\label{sub:inhalt}
-Wir werden diesen Satz mit Hilfe der sogenannten $K$-Theorie beweisen. Dazu müssen wir aber einiges an Vorarbeit leisten:
+\subsection*{Geplanter Verlauf der Vorlesung} % (fold)
+Wir werden diesen Satz mit Hilfe der sogenannten $K$-Theorie beweisen. Dazu müssen wir aber einiges an Vorarbeit leisten. Der geplante Verlauf ist deswegen wie folgt:
 \begin{enumerate}[1.]
 	\item Verallgemeinerte Kohomologietheorien
 	\item Vektorbündel
@@ -68,26 +72,27 @@ Wir werden diesen Satz mit Hilfe der sogenannten $K$-Theorie beweisen. Dazu müs
 \section{Kohomologietheorien} % (fold)
 \label{sec:1}
 
-\subsection[Definition: Kontravarianter Funktor]{Definition} % (fold)
-\label{sub:11}
+\begin{definition}[{name=[Kontravarianter Funktor]}]
 Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien. Ein \Index{kontravarianter Funktor} $F \colon \mathcal{C} \to \mathcal{D}$ 
 \begin{itemize}
-	\item ordnet jedem Objekt $c \in \mathrm{Obj}(\mathcal{C})$ ein Objekt $F(c) \in \mathrm{Obj}(\mathcal{D})$ zu
-	\item ordnet jedem Morphismus $f \colon c \to c'$ in $\mathrm{Mor}_{\mathcal{C}}(c,c')$ einen Morphismus $F(f) \colon F(c') \to F(c)$ zu 
+	\item ordnet jedem Objekt $c \in \mathrm{Obj}(\mathcal{C})$ ein Objekt $F(c) \in \mathrm{Obj}(\mathcal{D})$ zu,
+	\item ordnet jedem Morphismus $f \colon c \to c'$ in $\mathrm{Mor}_{\mathcal{C}}(c,c')$ einen Morphismus $F(f) \colon F(c') \to F(c)$ zu,
 \end{itemize}
 sodass folgende Eigenschaften gelten:
 \begin{itemize}
 	\item Für $f \colon c \to c'$ und $g \colon c' \to c''$ gilt $F(g \circ f) = F(f) \circ F(g)$
 	\item $F(\id_c) = \id_{F(c)}$
 \end{itemize}
-\minisec{Beispiel (Dualraumfunktor)}
+\end{definition}
+
+\begin{beispiel}[name=Dualraumfunktor]
 Sei $K$ ein Körper. Sei $\VEKT_K$ die Kategorie der endlich dimensionalen $K$-Vektorräume und linearen Abbildungen. Sei 
 ${ }^* \colon \VEKT_K \to \VEKT_K$ gegeben durch $V \mapsto \Hom_K(V,K)=V^*$. Für $f \colon V \to W$ sei $f^* \colon W^* \to V^*$, 
-$\varphi \mapsto \varphi \circ f$. Dies ist ein kontravarianter Funktor. Insbesondere ist $(f \circ g)^* = g^* \circ f^*$.
-% subsection 11 (end)
+$\varphi \mapsto \varphi \circ f$. Dies ist ein kontravarianter Funktor. Insbesondere ist $(f \circ g)^* = g^* \circ f^*$.	
+\end{beispiel}
 
-\subsection[Definition: Verallgemeinerte Kohomologietheorie]{Definition} % (fold)
-\label{sub:12}
+
+\begin{definition}[{name=[Verallgemeinerte Kohomologietheorie]}]
 Sei $\TOP^2$ die Kategorie der Raumpaare $(X,A)$. Sei $V \colon \TOP^2 \to \TOP^2$ der Funktor $(X,A) \mapsto(A,\emptyset)$. Sei $R$ ein kommutativer Ring mit $1$. Eine 
 \Index{verallgemeinerte Kohomologietheorie} $h^* = (h^n, \partial^n)_{n \in \mathds{Z}}$ mit Werten in $R$-Moduln ist ein kontravarianter Funktor 
 $h^* \colon \TOP^2 \to \textsc{Gr}\text{-}R\text{-}\MOD$ zusammen mit einer natürlichen Transformation 
@@ -96,32 +101,37 @@ $h^* \colon \TOP^2 \to \textsc{Gr}\text{-}R\text{-}\MOD$ zusammen mit einer nat�
 \]
 so dass die folgenden Eigenschaften gelten:
 \begin{enumerate}[a)]
-	\item \Index{Homotopieinvarianz}: Seien $f,g \colon (X,A) \to (Y,B)$ homotope Abbildungen von Raumpaaren. Dann gilt für alle $n \in \mathds{Z}$: 
+	\item \Index{Homotopieinvarianz}: Es seien $f,g \colon (X,A) \to (Y,B)$ homotope Abbildungen von Raumpaaren. Dann gilt für alle $n \in \mathds{Z}$: 
 	\[
 		h^n(f)= h^n(g)
 	\]
-	\item \Index{Lange exakte Paarsequenz}: Sei $(X,A)$ ein Raumpaar. Seien $(A,\emptyset) \xhookrightarrow{i}(X,\emptyset)$ und $j \colon (X,\emptyset) \to (X,A)$ die 
-	kanonischen Inklusionen. Dann ist die Folge 
+	\item \Index{Lange exakte Paarsequenz}: Sei $(X,A)$ ein Raumpaar. Seien $i \colon (A,\emptyset) \hookrightarrow (X,\emptyset)$ und 
+	$j \colon (X,\emptyset) \hookrightarrow (X,A)$ die kanonischen Inklusionen. Dann ist die Folge 
 	\[
 		\begin{tikzcd}
 			\cdots \rar["\partial^{n-1}"] & h^n(X,A;R) \rar["h^{n}(j)"] & h^n (X,\emptyset;R) \rar["h^n(i)"] & h^n(A, \emptyset;R) \rar["\partial^n"] & h^{n+1}(X,A;R) \rar & 
 			\cdots
 		\end{tikzcd}
 	\]
+	exakt.
 	\item \Index{Ausschneidung}: Sei $(X,A)$ ein Raumpaar, $U \subset A$, sodass $\overline{U} \subseteq \mathring{A}$. Dann ist die von der Inklusion 
 	$\iota \colon (X \setminus U, A \setminus U) \hookrightarrow (X,A)$ induzierte Abbildung $h^n(\iota) \colon h^n(X,A;R) \to h^n(X \setminus U, A \setminus U;R)$ ein Isomorphismus.
-\end{enumerate}
-\minisec{Bemerkungen}
+\end{enumerate}	
+\end{definition}
+
+\begin{bemerkung}
+\mbox{ }
 \begin{enumerate}[(i)]
 	\item Wir schreiben kurz $h^n(X,A)$ für $h^n(X,A;\mathds{Z})$ und $f^*$ für $h^n(f)$, falls sich der Grad aus dem Kontext ergibt. 
 	\item $h^n(\set{\mathrm{pt}}) =: h^n$ heißen \Index{Koeffizienten der Kohomologietheorie}.
-	\item Einige Kohomologietheorien besitzen ein \Index{externes Produkt}, das heißt eine natürliche Transformation\todo{Diagramm hinzufügen}
+	\item Einige Kohomologietheorien besitzen ein \Index{externes Produkt}, das heißt eine natürliche Transformation
 	\[
 		h^n(X,A;R) \times h^m(Y,B;R) \longrightarrow h^{n+m} \enbrace[\big]{(X,A) \times (Y,B);R} 
 	\]
 	die bilinear und assoziativ ist. 
 	Dabei ist $(X,A) \times (Y,B) = \enbrace[\big]{X \times Y, (A \times Y) \cup (X \times B)}$.
 	
+	Sei $\Delta \colon (X,A) \to (X,A) \times (X,A)$ die Diagonalabbildung.
 	Falls ein externes Produkt für $h^*$ existiert, dann ist $h^*(X,A;R) = \bigoplus_{n \in \mathds{Z}} h^n(X,A;R)$ ein \Index{graduierter Ring} mit der Multiplikation 
 	\[
 		\begin{tikzcd}[row sep=large, column sep=small]
@@ -130,14 +140,16 @@ so dass die folgenden Eigenschaften gelten:
 		\end{tikzcd}
 	\]
 \end{enumerate}
-% subsection 12 (end)
+\end{bemerkung}
 
-\subsection[Definition: Ko-Raumpaar und Kofaserung]{Definition} % (fold)
-\label{sub:13}
+\noindent Wir betrachten im Folgenden Kohomologietheorien, die auf einer Unterkategorie $\TOP^2_{\mathrm{Kof}}$ von $\TOP^2$ definiert sind:
+
+
+\begin{definition}[{name=[Ko-Raumpaar und Kofaserung]},label=def_koraumpaar]
 Ein Raumpaar $(X,A)$ heißt \Index{Ko-Raumpaar}, falls
 \begin{itemize}
-	\item $X$ ein kompakter Hausdorffraum ist
-	\item $A \subset X$ abgeschlossen ist
+	\item $X$ ein kompakter Hausdorffraum ist,
+	\item $A \subset X$ abgeschlossen ist,
 	\item die Inklusion $A \hookrightarrow X$ eine \Index{Kofaserung} ist, das heißt für jede stetige Abbildung\marginnote{Homotopieerweiterungseigenschaft} 
 	$f \colon A \times I \cup X \times \set{0} \to Y$ existiert 
 	$H \colon X \times I \to Y$, sodass das folgende Diagramm kommutiert:
@@ -148,14 +160,18 @@ Ein Raumpaar $(X,A)$ heißt \Index{Ko-Raumpaar}, falls
 		\end{tikzcd}
 	\] 
 \end{itemize}
-Mit $\TOP^2_{\mathrm{Kof}} \subseteq \TOP^2$ bezeichnen wir die Kategorie der Ko-Raumpaare und stetigen Abbildungen.
-\minisec{Beispiel}
+Mit $\TOP^2_{\mathrm{Kof}} \subseteq \TOP^2$ bezeichnen wir die Kategorie der Ko-Raumpaare und stetigen Abbildungen.	
+\end{definition}
+
+\begin{beispiel}
+\mbox{ }
 \begin{itemize}
 	\item Sei $X$ ein kompakter \CW-Komplex, $A \subset X$ ein Unterkomplex. Dann ist $\iota \colon A \hookrightarrow X$ eine Kofaserung.
 	\item $X$ eine kompakte Mannigfaltigkeit, $A$ eine abgeschlossene Untermannigfaltigkeit.
-\end{itemize}
-\minisec{Bemerkung}
-Falls $(X, \set{x_0})$ ein Objekt in $\TOP^2_{\mathrm{Kof}}$ ist, dann heißt $X$ \Index{wohlpunktiert}.
+	\item Falls $(X, \set{x_0})$ ein Objekt in $\TOP^2_{\mathrm{Kof}}$ ist, dann heißt $X$ \Index{wohlpunktiert}.\todo{Revision}
+\end{itemize}	
+\end{beispiel}
+
 \minisec{Beispiel}
 $X= [-1,1] \times [-1,1]$, $x_0=(0,0)$, $Y=X$. Sei $\gamma \colon I \to X$ ein Pfad mit $\gamma(0)= (0,0)=x_0$. Wir erhalten eine Abbildung 
 $f \colon \set{x_0} \times I \cup  X \times \set{0} \to X $
@@ -544,7 +560,7 @@ $n\not=0$? Was ist $K^n(X,A)$?
 
 \subsection[Definition: Tripel, Morphismus von Tripeln und stabile Isomorphie]{Definition} % (fold)
 \label{sub:31}
-Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}.
+Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}.
 \begin{enumerate}[(i)]
 	\item Ein \Index{Tripel} $(E_1,f,E_0)$ über $(X,A)$ besteht aus endlichdimensionalen $\mathds{C}$-Vektorbündeln $p_i \colon E_i \to X$ und einem Isomorphismus
 	$f \colon E_1|_A \to E_0|_A$.
@@ -568,7 +584,7 @@ Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}.
 
 \subsection[Definition von $K^{-n}(X,A)$]{Definition} % (fold)
 \label{sub:32}
-Sei $(X,A)$ ein \hyperref[sub:13]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
+Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
 \[
 	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
 \]

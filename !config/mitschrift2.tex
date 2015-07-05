@@ -1,5 +1,5 @@
 \RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
-\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage]{scrartcl}
+\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage,draft]{scrartcl}
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
@@ -24,6 +24,7 @@
 \usepackage[usenames, table, x11names]{xcolor}
 \definecolor{dark_gray}{gray}{0.45}
 \definecolor{light_gray}{gray}{0.6}
+\usepackage[final]{graphicx}
 
 %--Zum Zeichnen
 %-- muss vor polyglossia bzw. babel geladen werden
@@ -114,19 +115,21 @@
     % \setmainfont[BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
 	% \setsansfont{SourceSansPro}[Scale=MatchLowercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Semibold,ItalicFont=*-LightIt,BoldItalicFont=*-SemiboldIt]
 	% \newfontfamily{\geometric}{texgyreheros}[Scale=MatchLowercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
-	\setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+	% \setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+	% \usepackage{biolinum}
+	\setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
 	% \addtokomafont{disposition}{\geometric}
 	\setmonofont{SourceCodePro}[Scale=0.9,Extension=.otf,UprightFont=*-Regular, BoldFont=*-Semibold, ItalicFont=*-Light]
 	\usepackage{xltxtra}
 	\usepackage{fontawesome}
-	\usepackage{microtype}
+	\usepackage[final]{microtype}
 \else
     % default: pdfLaTeX
     \usepackage[ngerman]{babel}
     \usepackage[T1]{fontenc}
     \usepackage[utf8]{inputenc}
 	\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
-    \usepackage[babel=true, tracking=true]{microtype}
+    \usepackage[babel=true, tracking=true,final]{microtype}
 	\usepackage{lmodern}
 	\renewcommand{\familydefault}{\sfdefault} 
 \fi
@@ -154,8 +157,8 @@
 \setlength{\ULdepth}{1.8pt}
 
 %--Indexverarbeitung
-\newcommand{\bet}[1]{\textbf{#1}}
-\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
+\newcommand{\bet}[1]{\emph{#1}}
+\newcommand{\Index}[1]{\bet{#1}\index{#1}}
 \makeindex
 \setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetexorluatex \faHandUp\fi \par \bigskip}
 \renewcommand{\indexpagestyle}{scrheadings}
@@ -177,7 +180,7 @@
 \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
 
 %--Konfiguration von Hyperref pdfstartview=FitH, 
-\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,final]{hyperref}
 
 \ifxetexorluatex
 \newcommand{\appendLink}[1]{#1\,\faExternalLink}
@@ -314,6 +317,81 @@
 
 %--Beweisende
 \newcommand{\bewende}{\ifmmode \tag*{$\square$} \else \hfill $\square$ \fi}
+
+
+% -- theorem packages
+\usepackage{amsthm}
+\usepackage{thmtools}
+\renewcommand{\listtheoremname}{Übersicht aller Aussagen}
+
+% -- Theoreme als PDF-Lesezeichen
+\usepackage{bookmark}
+\bookmarksetup{open,numbered}
+\makeatletter
+\newcommand*{\theorembookmark}{%
+  \bookmark[
+    dest=\@currentHref,
+    rellevel=1,
+    keeplevel,
+  ]{%
+    \thmt@thmname\space\csname the\thmt@envname\endcsname
+    \ifx\thmt@shortoptarg\@empty
+    \else
+      \space(\thmt@shortoptarg)%
+    \fi
+  }%
+}   
+\makeatother
+
+% -- Definition der einzelnen Umgebungen
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries\large,
+	notefont=\normalfont\sffamily\large\scshape,
+	bodyfont=\normalfont,
+	headformat=\NUMBER\ \NAME\NOTE,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark]%
+{mainstyle}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries\large,
+	notefont=\normalfont\sffamily\large\scshape,
+	bodyfont=\normalfont,
+	headformat=\NUMBER\NAME\NOTE,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark]%
+{mainstyle_unnumbered}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily\large\scshape,
+	bodyfont=\normalfont,
+	headformat=swapnumber,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark,
+	qed=\qedsymbol]%
+{mainstyleB}
+\declaretheorem[name=Definition,parent=section,style=mainstyle]{definition}
+\declaretheorem[name=Definition,numbered=no,style=mainstyle_unnumbered]{definition*}
+\declaretheorem[name=Theorem,sharenumber=definition,style=mainstyle]{theorem}
+\declaretheorem[name=Theorem,numbered=no,style=mainstyle_unnumbered]{theorem*}
+\declaretheorem[name=Proposition,sharenumber=definition,style=mainstyle]{proposition}
+\declaretheorem[name=Lemma,sharenumber=definition,style=mainstyle]{lemma}
+\declaretheorem[name=Satz,sharenumber=definition,style=mainstyle]{satz}
+\declaretheorem[name=Korollar,sharenumber=definition,style=mainstyle]{korollar}
+\declaretheorem[name=Korollar,sharenumber=definition,style=mainstyleB]{korollarB}
+
+
+% -- Beweise
+\declaretheoremstyle[headfont=\sffamily\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt,qed=\qedsymbol]{beweise}
+\declaretheoremstyle[headfont=\sffamily\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt]{bemerkungen}
+\declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
+\declaretheorem[name=Bemerkung,numbered=no,style=bemerkungen]{bemerkung}
+\declaretheorem[name=Beispiel,numbered=no,style=bemerkungen]{beispiel}
 
 %--Volumen
 \newcommand{\vol}[1]{\ensuremath{\Vol_{#1}}}
