@@ -1,23 +1,10 @@
 \RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
-\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage,draft]{scrartcl}
+\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage]{scrartcl}
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 \usepackage{etoolbox}
 \usepackage{letltxmacro}
 \usepackage{ifthen}
-
-%-- Compiler-abhaengige IFs
-\usepackage{ifxetex,ifluatex}
-\newif\ifxetexorluatex
-\ifxetex
-  \xetexorluatextrue
-\else
-  \ifluatex
-    \xetexorluatextrue
-  \else
-    \xetexorluatexfalse
-  \fi
-\fi
 
 %--Farbdefinitionen
 %-- muss vor tikz geladen werden
@@ -38,15 +25,10 @@
 \usetikzlibrary{angles}
 
 %-- Konfiguration von tikzexternalize
-\tikzexternalize[prefix=tikz/, up to date check=diff]
+\tikzexternalize[prefix=tikz/,up to date check=diff]
 
-\ifxetexorluatex
-\tikzset{external/system call={xelatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
-    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
-\else
-\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape 
-    -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
-\fi
+\tikzset{external/system call={xelatex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode --shell-escape -jobname "\image" "\texsource"}}
+
 
 %-- tikzexternalize fuer tikzcd deaktivieren, da inkompatibel
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
@@ -73,7 +55,7 @@
 \usetagform{brackets}
 \usepackage{wasysym} % zusätzliche Symbole
 \usepackage{amssymb} % zusätzliche Symbole
-\usepackage{latexsym} % zusätzliche Symbole
+% \usepackage{latexsym} % zusätzliche Symbole
 \usepackage{stmaryrd} % für Blitz
 \usepackage{nicefrac} % schräge Brüche
 \usepackage{cancel} % Befehle zum Durchstreichen
@@ -100,44 +82,32 @@
 \newcommand{\Underbrace}[2]{{\underbrace{#1}_{#2}}}
 
 %-- Alles was mit Schrift und XeTeX zu tun hat
-\ifxetexorluatex
-    % XeLaTeX or LuaTeX
-	\usepackage[euler-digits]{eulervm}
-	\usepackage[no-math]{fontspec}
-    \usepackage{polyglossia} % moderner babel-ersatz
-    \setmainlanguage[spelling=new,babelshorthands=true]{german}
-	\shorthandoff{"}
-	\setotherlanguage{english}
-	% \newcommand\glqq{"}
-	% \newcommand\grqq{"}
-	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.2}, Ligatures=Common} %
-	\setmainfont{texgyrepagella}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
-    % \setmainfont[BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
-	% \setsansfont{SourceSansPro}[Scale=MatchLowercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Semibold,ItalicFont=*-LightIt,BoldItalicFont=*-SemiboldIt]
-	% \newfontfamily{\geometric}{texgyreheros}[Scale=MatchLowercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
-	% \setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
-	% \usepackage{biolinum}
-	\setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
-	% \addtokomafont{disposition}{\geometric}
-	\setmonofont{SourceCodePro}[Scale=0.9,Extension=.otf,UprightFont=*-Regular, BoldFont=*-Semibold, ItalicFont=*-Light]
-	\usepackage{xltxtra}
-	\usepackage{fontawesome}
-	\usepackage[final]{microtype}
-\else
-    % default: pdfLaTeX
-    \usepackage[ngerman]{babel}
-    \usepackage[T1]{fontenc}
-    \usepackage[utf8]{inputenc}
-	\usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
-    \usepackage[babel=true, tracking=true,final]{microtype}
-	\usepackage{lmodern}
-	\renewcommand{\familydefault}{\sfdefault} 
-\fi
+\usepackage[euler-digits]{eulervm}
+\usepackage[no-math]{fontspec}
+\usepackage{polyglossia} % moderner babel-ersatz
+\setmainlanguage[spelling=new,babelshorthands=true]{german}
+\shorthandoff{"}
+\setotherlanguage{english}
+% \newcommand\glqq{"}
+% \newcommand\grqq{"}
+\defaultfontfeatures{Mapping=tex-text, WordSpace={1.2}, Ligatures={Required,Common,Contextual}} %
+\setmainfont{texgyrepagella}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic,ItalicFeatures={Style=Historic}]
+% \setmainfont[BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
+% \setsansfont{SourceSansPro}[Scale=MatchLowercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Semibold,ItalicFont=*-LightIt,BoldItalicFont=*-SemiboldIt]
+% \newfontfamily{\geometric}{texgyreheros}[Scale=MatchLowercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
+% \setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+% \usepackage{biolinum}
+\setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
+% \addtokomafont{disposition}{\geometric}
+\setmonofont{SourceCodePro}[Scale=0.9,Extension=.otf,UprightFont=*-Regular, BoldFont=*-Semibold, ItalicFont=*-Light]
+\usepackage{xltxtra}
+\usepackage{fontawesome}
+\usepackage[final]{microtype}
 
 
 %--Mixed
 \usepackage[shortlabels,inline]{enumitem}
-\ifxetexorluatex\setlist[itemize,1]{label=\faCaretRight}\fi
+\setlist[itemize,1]{label=\faCaretRight}
 \setlist[enumerate]{font=\bfseries}
 \usepackage[german=quotes]{csquotes}
 \usepackage{makeidx}
@@ -182,15 +152,12 @@
 %--Konfiguration von Hyperref pdfstartview=FitH, 
 \usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,final]{hyperref}
 
-\ifxetexorluatex
+
 \newcommand{\appendLink}[1]{#1\,\faExternalLink}
 \newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
 \newcommand{\hrefsymmail}[2]{\href{#1}{\texttt{\faEnvelope\,#2}}}
 \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
-\fi
-\providecommand{\appendLink}{ }
-\providecommand{\hrefsym}{\href}
-\providecommand{\hrefsymmail}{\hrefsym}
+
 
 
 % -- QR-Codes
