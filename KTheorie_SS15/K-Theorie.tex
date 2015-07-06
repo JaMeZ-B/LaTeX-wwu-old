@@ -247,7 +247,7 @@ endlich dimensionalen $K$-Vektorraumbündel über einem topologischen Raum $X$ z
 \end{definition}
 
 
-\subsection*{Operationen mit Vektorbündeln}
+\section*{Operationen mit Vektorbündeln}
 
 \begin{definition}[{name=[Pullback eines Vektorbündels]}]
 Seien $X$ und $Y$ topologische Räume. Sei $f \colon Y \to X$ eine stetige Abbildung und sei $p \colon E \to X$ ein Vektorbündel. Dann heißt
@@ -327,14 +327,15 @@ heißt \bet{stetig}\index{stetiger Funktor}, falls die induzierte Abbildung
 stetig ist. Dies klappt nur für Kategorien, für die eine Topologie auf den Morphismen existiert, was auf lineare Abbildungen aber natürlich zutrifft.
 % subsection 24 (end)
 
-\subsection[Lemma: Induzierter Funktor eines stetigen Funktors]{Lemma} % (fold)
-\label{sub:25}
+
+\begin{lemma}[{name=[Induzierter Funktor eines stetigen Funktors]}]
 Sei $F$ ein stetiger Funktor wie in \eqref{eq:24} und sei $X$ ein topologischer Raum. Dann induziert $F$ einen Funktor
 \[
 	F_X \colon \Underbrace{\VEKT_K(X) \times \ldots \times \VEKT_K(X)}{r} \times \Underbrace{\VEKT_K(X)^\op \times \ldots \times \VEKT_K(X)^\op}{s} \longrightarrow \VEKT_K(X)
 \]
-der verträglich ist mit Pullbacks und $F_\pt=F$ erfüllt. \todo{Rev 2}
-\minisec{Beweis}
+der verträglich ist mit Pullbacks und $F_\pt=F$ erfüllt. \todo{Rev 2}	
+\end{lemma}
+\begin{beweis}
 Sei $m=r+s$. Definiere 
 \(
 	F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} = \coprod_{x \in X} F \enbrace*{E_x^\ssbrace{1}, \ldots , E_x^\ssbrace{m}}   
@@ -353,7 +354,7 @@ $\psi_i = F_{U_i} \enbrace*{\varphi_i^\ssbrace{1}, \ldots , \varphi_i^\ssbrace{m
 die Produkttopologie trägt: Eine Menge $V \subset F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}}$ ist offen, falls sie die Vereinigung von Mengen der Form 
 $\psi_i^{-1}(V_i)$ mit $V_i \subset U_i \times F \enbrace*{K^{\ell_1}, \ldots , K^{\ell_m}}$ offen ist.
 
-Damit diese Definition konsistent ist, müssen wir folgendes prüfen: Sei $V \subset (U_i \cap U_j) \times F(K^{\ell_1}, \ldots , K^{\ell_m})$ offen. Wir haben zu zeigen, dass 
+Damit diese Definition konsistent ist, müssen wir folgendes überprüfen: Sei $V \subset (U_i \cap U_j) \times F(K^{\ell_1}, \ldots , K^{\ell_m})$ offen. Wir haben zu zeigen, dass 
 dann auch $\psi_j \circ \psi_i^{-1}(V)$ offen ist. Aber es gilt $\psi_j \circ \psi_i ^{-1}(x,v)= \enbrace[\big]{x, \psi_{ij}(x)(v)}$ für eine Abbildung
 \[
 	\psi_{ij} \colon U_i  \cap U_j \longrightarrow \End_K \enbrace*{F(K^{\ell_1}, \ldots , K^{\ell_m})} 
@@ -362,49 +363,63 @@ Es gilt $\psi_{ij} = F \enbrace[\big]{\psi_{ij}^\ssbrace{1}, \ldots , \psi_{ij}^
 $\psi_{ij}^\ssbrace{k} \colon U_i \cap U_j \to \End_K(K^{e_k})$. Da $F$ stetig ist, folgt, dass alle $\psi_{ij}$ stetig sind und folglich auch $\psi_j \circ \psi_i ^{-1}$. 
 Somit ist $\psi_j \circ \psi_i ^{-1}(V)$ offen. Es ist damit klar, dass $F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \to X$ ein Vektorbündel ist, denn wir haben lokale Trivialisierungen konstruiert. Ferner gilt per Definition für eine stetige Abbildung $f \colon Y \to X$
 \[
-	f^* F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \cong F_Y \enbrace*{f^*E^\ssbrace{1}, \ldots , f^* E^\ssbrace{m}}  \bewende
-\]
-\minisec{Beispiele}
+	f^* F_X \enbrace*{E^\ssbrace{1}, \ldots , E^\ssbrace{m}} \cong F_Y \enbrace*{f^*E^\ssbrace{1}, \ldots , f^* E^\ssbrace{m}} \qedhere
+\]	
+\end{beweis}
+
+\begin{beispiel}
+\leavevmode
 \begin{itemize}
 	\item $\oplus \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ direkte Summe von Vektorbündeln
 	\item $\otimes \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ Tensorprodukt von Vektorbündeln
 	\item Dualisieren von Vektorräumen ${ }^* \colon \VEKT_K^\op \to \VEKT_K$ ist stetig $\Rightarrow $ duales Vektorbündel
 	\item $\Hom \colon \VEKT_K \times \VEKT_K^\op \to \VEKT_K$, $(V,W) \mapsto \Hom_K(W,V)$ ist stetig $\Rightarrow$ Homomorphismenbündel $\Hom(E,F)$.
-\end{itemize}
-Seien $p \colon E \to X$ und $q \colon F \to X$ zwei $K$-Vektorbündel. Dann ist $E \times F \xrightarrow{(p,q)} X \times X$ auch ein Vektorbündel, wenn $E_X \times F_X$
-die Vektorraumstruktur der äußeren direkten Summe trägt.
-\minisec{Übungsaufgabe}
-Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta^*(E \times F) \cong E \oplus F$ als Vektorbündel über $X$.
-% subsection 25 (end)
-\section*{Homotopieinvarianz von Pullbacks}
-\minisec{Erinnerung}
-Ein topologischer Raum heißt \bet{normal}\index{normaler topologischer Raum}, falls sich zwei disjunkte abgeschlossene Mengen durch offene Mengen trennen lassen. 
-\minisec{Bemerkung}
-Jeder kompakte Hausdorffraum ist normal. \emph{Übungsaufgabe}\todo{In den Anhang?}
+\end{itemize}	
+\end{beispiel}
 
-\subsection{Satz (Fortsetzungssatz von Tietze)} % (fold)
-\label{sub:26}
+\noindent Seien $p \colon E \to X$ und $q \colon F \to X$ zwei $K$-Vektorbündel. Dann ist $E \times F \xrightarrow{(p,q)} X \times X$ auch ein Vektorbündel, wenn 
+$E_X \times F_X$ die Vektorraumstruktur der äußeren direkten Summe trägt.
+
+\begin{uebung}
+Sei $\Delta  \colon X \to X \times X$ die Diagonalabbildung. Zeige, dass $\Delta^*(E \times F) \cong E \oplus F$ als Vektorbündel über $X$.	
+\end{uebung}
+
+
+
+\section*{Homotopieinvarianz von Pullbacks}
+\begin{erinnerung}
+Ein topologischer Raum heißt \bet{normal}\index{normaler topologischer Raum}, falls sich zwei disjunkte abgeschlossene Mengen durch offene Mengen trennen lassen. 	
+\end{erinnerung}
+
+\begin{bemerkung}
+Jeder kompakte Hausdorffraum ist normal. \emph{Übungsaufgabe}\todo{In den Anhang?}	
+\end{bemerkung}
+
+\begin{satz}[{name={Fortsetzungssatz von Tietze}}]
 Sei $X$ ein normaler Raum, $A \subset X$ abgeschlossen und $V$ ein endlich dimensionaler $K$-Vektorraum. Zu jeder stetigen Abbildung $f \colon A \to V$ existiert eine 
 stetige Abbildung $F \colon X \to V$ mit $F|_A=f$.
-\todo[inline]{kommt der Beweis noch?}
+\todo[inline]{kommt der Beweis noch?}	
+\end{satz}
 
-\subsection*{Definition}
+\begin{definition*}[{name=[Schnitt]}]
 Sei $p \colon E \to X$ ein $K$-Vektorbündel über einem topologischen Raum $X$. Ein \Index{Schnitt} von $E$ ist eine stetige Abbildung $s \colon X \to E$ mit 
-$p \circ s = \id_X$. Das heißt $s(x) \in E_x$. Jedes Vektorbündel hat einen Schnitt, nämlich den trivialen Schnitt $s(x)=0 \in E_x$.
-% subsection 26 (end)
+$p \circ s = \id_X$. Das heißt $s(x) \in E_x$. Jedes Vektorbündel hat einen Schnitt, nämlich den trivialen Schnitt $s(x)=0 \in E_x$.	
+\end{definition*}
 
-\subsection[Lemma über Fortsetzungen von Schnitten auf abgeschlossenen Teilmengen]{Lemma} % (fold)
-\label{sub:27}
+\begin{lemma}[{name=[Fortsetzungen von Schnitten auf abgeschlossenen Teilmengen]},label=schnitte_Hd_Raum]
 Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colon E \to X$ und $p' \colon E' \to X$ zwei $K$-Vektorbündel. Dann gilt:
 \begin{enumerate}[a)]
 	\item Jeder Schnitt $s \colon A \to E|_A$ lässt sich zu einem Schnitt $\overline{s} \colon X \to E$ fortsetzen.
 	\item Sei $\iota \colon A \hookrightarrow X$ die Inklusion und $E|_A := \iota^* E$, sowie $E'|_A := \iota^* E'$. Sei weiter $f \colon E|_A \to E'|_A$ ein Morphismus von 
 	Vektorbündeln. Dann existiert ein Morphismus $\hat{f} \colon E \to E'$, der $f$ fortsetzt. Ist $f$ ein Isomorphismus, dann existiert eine offene Menge $U \supset A$, 
 	sodass $\hat{f}|_U \colon E|_U \to E'|_U$ ein Isomorphismus von Vektorbündeln ist.
-\end{enumerate}
-\minisec{Beweis}
+\end{enumerate}	
+\end{lemma}
+
+\begin{beweis}
+\leavevmode
 \begin{enumerate}[a)]
-	\item Wir wählen eine endliche Überdeckung $(U_i)_{i=1,\ldots ,N}$ von $X$, sodass lokale Trivialisierungen $\varphi_i \colon E|_{U_i} \to U_i \times K^n$ existieren. Nach 
+	\item Wir wählen eine endliche Überdeckung $(U_i)_{i=1,\ldots ,N}$ von $X$, sodass lokale Trivialisierungen $\varphi_i\colon E|_{U_i}\to U_i\times K^n$ existieren. Nach 
 	dem Fortsetzungssatz lässt sich 
 	\[
 		\pr_{K^n} \circ \varphi_i \circ s\big|_{U_i \cap A} \colon U_i \cap A \longrightarrow K^n 
@@ -429,15 +444,17 @@ Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colo
 	zu $\GL_n(K)$. Da $\GL_n(K) \subset M_n(K)$ offen ist und $\Iso(E,E')$ lokal trivial ist, folgt, dass $\Iso(E,E') \subset \Hom(E,E')$ offen ist.\footnote{da lokal 
 	homöomorph zu $U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
 	$U = {s_{\hat{f}}}\mkern-0.5mu^{-1} \enbrace*{\Iso(E,E')}$ für $s_{\hat{f}} \colon X \to \Hom(E,E')$. Dann ist $U$ offen und $s_{\hat{f}}|_U$ entspricht einem 
-	Isomorphismus $\hat{f} \colon E|_U \to E'|_U$. \bewende
-\end{enumerate}
-% subsection 27 (end)
+	Isomorphismus $\hat{f} \colon E|_U \to E'|_U$. \qedhere
+\end{enumerate}	
+\end{beweis}
 
-\subsection[{Lemma: Trivialisierbarkeit von $E \to X \times [a,b]$, wenn $E|_{X \times [a,c]}$, $E|_{X \times [c,b]}$ trivialisierbar}]{Lemma} % (fold)
-\label{sub:28}
+
+\begin{lemma}[{name=[{Trivialisierbarkeit von $E \to X \times [a,b]$, wenn $E|_{X \times [a,c]}$, $E|_{X \times [c,b]}$ trivialisierbar}]},label=trivialisierbarkeit_verkleben]
 Seien $a,b \in \mathds{R}$ mit $a <b$ und $X$ ein topologischer Raum. Sei weiter $p \colon E \to X \times [a,b]$ ein $K$-Vektorbündel. Es geben $c \in (a,b)$, so dass 
-$E|_{X \times [a,c]}$ und $E|_{X \times [c,b]}$ trivialisierbar sind. Dann ist auch $E$ trivialisierbar.
-\minisec{Beweis}
+$E|_{X \times [a,c]}$ und $E|_{X \times [c,b]}$ trivialisierbar sind. Dann ist auch $E$ trivialisierbar.	
+\end{lemma}
+
+\begin{beweis}
 Sei ohne Beschränkung der Allgemeinheit $X$ zusammenhängend. Seien 
 \begin{align*}
 	\varphi_a \colon X \times [a,c] \times K^n &\xrightarrow{\minwidthbox{\cong}{2em}} E\big|_{X \times [a,c]} \\ 
@@ -452,22 +469,23 @@ $h$ hat die Form $h(x,v)= (x , g(x) \cdot v)$ für eine stetige Abbildung $g \co
 	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \quad (x,t,v') \longmapsto (x,t,g(x)v')
 \]
 Dann gilt $\varphi_a|_{X \times \set{c} \times K^n} = \varphi_b \circ w |_{X \times \set{c} \times K^n }$. Daher können wir diese beiden Abbildungen zu einem Isomorphismus 
-von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen. \bewende 
-% subsection 28 (end)
+von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen.	
+\end{beweis}
 
-\subsection[Lemma: Endliche Überdeckung $\set{U_i}_{i=1}^N$, sodass Trivialisierbarkeit auf $U_i$ gilt]{Lemma} % (fold)
-\label{sub:29}
+\begin{lemma}[{name=[{Endliche Überdeckung $\set{U_i}_{i=1}^N$, sodass Trivialisierbarkeit auf $U_i$ gilt}]},label=trivialisierbarkeit_ueberdeckung]
 Sei $X$ ein kompakter Raum. Sei $p \colon E \to X \times I$ ein $K$-Vektorbündel. Dann gibt es eine endliche offene Überdeckung $\set{U_i}_{i=1}^N$ von $X$, so dass 
-$E|_{U_i \times I}$ trivialisierbar ist.
-\minisec{Beweis}
+$E|_{U_i \times I}$ trivialisierbar ist.	
+\end{lemma}
+
+\begin{beweis}
 Sei $x \in X$ und $t \in I$. Dann existieren offene Umgebungen $U(t) \subset X$ und $I(t) \subset I$, sodass $E|_{U(t) \times I(t)}$ trivialisierbar ist. Da $I$ kompakt ist,
 existiert eine endliche Folge $0=t_0 < t_1 < \ldots < t_N =1$ zusammen mit offenen Umgebungen $U_i$ von $x$, so dass $E|_{U_i \times [t_{i-1}, t_i]}$ trivialisierbar ist. 
-Sei nun $U := \bigcap_{i=1}^N U_i$. Nach Lemma \ref{sub:28} ist $E|_{U \times I}$ trivialisierbar. Da $X \times I$ kompakt ist, wird es von endlichen vielen solcher Mengen
-überdeckt. \bewende
-% subsection 29 (end)
+Sei nun $U := \bigcap_{i=1}^N U_i$. Nach Lemma \ref{trivialisierbarkeit_verkleben} ist $E|_{U \times I}$ trivialisierbar. Da $X \times I$ kompakt ist, wird es von endlichen 
+vielen solcher Mengen überdeckt. 	
+\end{beweis}
 
-\subsection[Theorem: Isomorphismus von Vektorbündeln $E$ und $E|_{X \times \set{1}} \times I$ für $X$ kompakt]{Theorem} % (fold)
-\label{sub:210}
+
+\begin{theorem}[{name=[{Isomorphismus von Vektorbündeln $E$ und $E|_{X \times \set{1}} \times I$ für $X$ kompakt}]},label=iso_vektb_intervall]
 Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbündel. Sei $E_1 = E|_{X \times \set{1}}$.
 \begin{enumerate}[a)]
 	\item Es gibt einen Isomorphismus von Vektorbündeln über $X \times I$
@@ -480,10 +498,12 @@ Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbün
 	\item Sei $(X,A)$ ein Ko-Raumpaar, $h \colon X \times I \to Y$ eine stetige Abbildung und $p' \colon E' \to Y$ ein $K$-Vektorbündel mit $E \cong h^* E'$. Falls jetzt
 	$h_t(a)=h_0(a)$ für alle $a \in A$ und $t \in I$, dann lässt sich der Isomorphismus aus a) so wählen, dass er den durch $h$ induzierten Isomorphismus 
 	$E|_{A \times I} \to E_1|_{A} \times I$ fortsetzt.
-\end{enumerate}
-\minisec{Beweis}
-Nach Lemma \ref{sub:29} können wir eine Überdeckung von $X \times I$ durch offene Mengen der Form $U_i \times I$ mit $i \in \set{1,\ldots ,N}$ finden, so dass 
-$E|_{U_i \times I}$ trivialisierbar ist. Seien $h_i \colon U_i \times I \times K^n \xrightarrow{\cong} E|_{U_i \times I}$ Trivialisierungen. Seien 
+\end{enumerate}	
+\end{theorem}
+
+\begin{beweis}
+Nach Lemma \ref{trivialisierbarkeit_ueberdeckung} können wir eine Überdeckung von $X \times I$ durch offene Mengen der Form $U_i \times I$ mit $i \in \set{1,\ldots ,N}$ 
+finden, so dass $E|_{U_i \times I}$ trivialisierbar ist. Seien $h_i \colon U_i \times I \times K^n \xrightarrow{\cong} E|_{U_i \times I}$ Trivialisierungen. Seien 
 $\eta_i \colon X \to [0,1]$  stetige Funktionen mit folgenden Eigenschaften:
 
 \begin{enumerate*}[(i),itemjoin={,\hspace{2em}}]
@@ -523,20 +543,21 @@ gilt
 \[
 	B_j \cap (A \times I) = h_1 ^{-1}(\overline{V}_j) \cap A \times I
 \]
-da $h$ auf $A$ unabhängig ist von $t \in I$. Nach Konstruktion ist $E|_{A_j \times I}$ trivialisierbar. Nach Lemma \ref{sub:27} b) finden wir eine offene Umgebung 
+da $h$ auf $A$ unabhängig ist von $t \in I$. Nach Konstruktion ist $E|_{A_j \times I}$ trivialisierbar. Nach Lemma \ref{schnitte_Hd_Raum} b) finden wir eine offene Umgebung 
 $U_j \times I$ mit $X \supset U_j \supset A_j$, so dass $E|_{U_j \times I}$ trivialisierbar ist. Wir ergänzen die Mengen $U_j \times I$ um trivialisierende offene Umgebungen 
 $U_i \times I$ mit $U_i \times A = \emptyset$, so dass $\bigcup_{i\in I} U_i \times I = X \times I$. Jetzt verwenden wir die Konstruktion aus a) für diese Überdeckung. Der 
-entsprechende Isomorphismus $\varphi \colon E \to E_1 \times I$ stimmt auf $A_j \times I$ mit dem von $h$ induzierten Isomorphismus überein. \bewende 
+entsprechende Isomorphismus $\varphi \colon E \to E_1 \times I$ stimmt auf $A_j \times I$ mit dem von $h$ induzierten Isomorphismus überein. 	
+\end{beweis}
 % subsection 210 (end)
 
-\subsection[Korollar: Homotopieinvarianz von Pullbacks]{Korollar} % (fold)
-\label{sub:211}
+\begin{korollarB}[{name=[Homotopieinvarianz von Pullbacks]}]
 Sei $X$ ein kompakter Raum und $h \colon X \times I \to Y$ eine Homotopie. Sei $p \colon E \to Y$ ein $K$-Vektorbündel. Dann gilt
 \begin{enumerate}[a)]
 	\item $h_0^* E \cong h_1^* E$ als Vektorbündel über $X$, das heißt Pullbacks sind homotopieinvariant bis auf Isomorphie.
-	\item Falls $(X,A)$ ein Ko-Raumpaar ist und $h$ stationär auf $A$ ist, dann kann der Isomorphismus so gewählt werden, dass er über $A$ die Identität ist.
-\end{enumerate}
-% subsection 211 (end)
+	\item Falls $(X,A)$ ein Ko-Raumpaar ist und $h$ stationär auf $A$ ist, dann kann der Isomorphismus so gewählt werden, dass er über $A$ die Identität ist.\qedhere
+\end{enumerate}	
+\end{korollarB}
+
 % section 2 (end)
 \newpage
 
@@ -780,7 +801,7 @@ Morphismus:
 Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.
 \minisec{Beweis}
 Es genügt wieder, den Fall $n=0$ zu betrachten. Seien $g_0,g_1 \colon (X,A) \to (Y,B)$ und sei $h \colon (X \times,A \times I) \to (Y,B)$ eine Homotopie zwischen $g_0$ und 
-$g_1$. Sei $(E_0,F,E_1)$ ein Tripel über $(Y,B)$. Nach Theorem \ref{sub:210} a) existieren Isomorphismen
+$g_1$. Sei $(E_0,F,E_1)$ ein Tripel über $(Y,B)$. Nach Theorem \ref{iso_vektb_intervall} a) existieren Isomorphismen
 \[
 	\begin{tikzcd}[column sep=large, row sep=0.5em]
 		h^* E_0 \rar["\psi^\ssbrace{0}","\cong"'] & g_1^*(E_0) \times I \\
@@ -1492,7 +1513,7 @@ Die Paarsequenzfolge reduziert dann auf die .....-Folge
 \section*{Die $K$-Theorie von $\mathds{C}P^n$}
 
 \subsection*{Theorem 3.2.5} % (fold)
-\label{sub:theorem}
+\label{sub:theorem325}
 Sei $X$ ein endlicher \CW-Komplex mit $n$ Zellen. Dann ist $K^*(X) = K^0(X) \oplus K^1(X)$ eine endlich erzeugte Gruppe mit höchstens $n$ Erzeugern. Haben alle Zellen gerade
 Dimension, dann ist $K^1(X)=0$ und $K^0(X)$ ist frei abelsch mit genau einem Erzeuger für jede Zelle.
 \minisec{Beweis}
