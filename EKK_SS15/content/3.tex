@@ -236,3 +236,225 @@ Das Bild von $\varphi$ ist genau die genannte elliptische Kurve $E(\CC)$.
 Die Abbildung $\varphi \colon \CC/\Lambda \rightarrow E(\CC)$ ist bijektiv und überträgt die Addition "$+$" auf $\CC/\Lambda$, gegeben durch $(x+\Lambda) + (y+\Lambda) := (x+y) + \Lambda$, auf $E(\CC)$, welche sich als unsere bisher studierte Addition $+$ auf $E(\CC)$ erweist.
 Der Torus $\CC/\Lambda$ wird so mit der elliptischen Kurve $E(\CC)$ identifiziert.
 Umgekehrt ist auch jede elliptische Kurve $(E(\CC),+)$ beschreibbar als Torus $(\CC/\Lambda,+)$.
+
+\nextlecture
+\newpage
+\subsection{Elliptische Kurven über $\FF_p$ und $\FF_{p^r}$}
+\label{sub:3.3}
+\begin{bem}
+	Elliptische Kurven über endlichen Körpern werden vielfältig eingesetzt, zum einen in der Kryptographie, zum anderen auch in technischen Systemen mit wenig Ressourcen (eingebettete Systeme), z.B. Steuergeräte in Automobilen (elektronische Wegfahrsperren, Tuning-Schutz, Car-To-Car-Kommunikation, etc.).
+	Manche Hardware-Implementationen arbeiten über $\FF_{2^r}$ der Charakteristik $2$, bei denen die technische Umsetzung damit günstig ist.
+\end{bem}
+
+\subsubsection{Punkte zählen, der Frobenius}
+\label{subsub:3.3.1}
+\begin{bem}
+	Wir studieren zunächst elliptische Kurven über $\FF_p$, wo $p$ prim, mit der "modularen Brille" modulo $p$.
+	Das Verhalten dieser Kurven kann ganz anders sein als über $\QQ$:
+	Die elliptische Kurve $E(\QQ)\colon y^2 = x^3 + x$ aus Beispiel~\ref{bsp_16.3} etwa enthält den einzigen rationalen Punkt $(0,0)$, über $\FF_p$ hat sie aber viele Punkte:
+	Sei $\NN_p := \#E(\FF_p)$ von $y^2 = x^3 + x$, d.h. $N_p$, die Anzahl der Punkte der elliptischen Kurve $E(\FF_p)$, ist die Anzahl der Lösungen von $y^2 = x^3 + x$ modulo $p$.
+\end{bem}
+
+\begin{defn}[Defekt]
+	Numerische Daten ergeben folgende Tabelle:
+	\begin{center}
+		\begin{tabular}{c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+		$p$ & 2 & 3 & 5 & 7 & 11 & 13 & 17 & 19 & 23 & 29 & 31 & 37 & 41 & 43 & 47 & \dots \\ 
+		\hline $N_p-1$ & 2 & 3 & 3 & 7 & 11 & 19 & 15 & 19 & 23 & 19 & 31 & 35 & 31 & 43 & 47 & \dots
+		\end{tabular} 
+	\end{center}
+	Offenbar gilt $p = N_p-1$, falls $p \kon 3 \modu 4$.
+	Für $p \kon 1 \modu 4$ sieht der so genannte \Index{Defekt} $a_p := p+1 - N_p$ so aus:
+	\begin{center}
+		\begin{tabular}{c||c|c|c|c|c|c|c|c|c|c|c}
+		$p$ & 5 & 13 & 17 & 29 & 37 & 41 & 53 & 61 & 73 & 89 & \dots \\ 
+		\hline $a_p / 2$ & 1 & -3 & 1 & 5 & 1 & 5 & -7 & 5 & -3 & 5 & \dots 
+		\end{tabular} 
+	\end{center}
+	Beobachtung: $p-\enbrace*{\frac{ap}{2}}^2$ ist stets eine Quadratzahl!
+\end{defn}
+
+Wir halten fest:
+\begin{satz}
+\label{satz_17.4}
+	Für $E(\FF_p)\colon y^2 = x^3+x$ gilt:
+	\begin{enumerate}[(a)]
+		\item Ist $p \kon 3 \modu 4$, gilt $N_p = p+1$.
+		\item Ist $p \kon 1 \modu 4$, ist $N_p = p+1 \pm 2A$, wobei $p = A^2 + B^2$ mit $2 \nmid A$.
+		Dabei gilt "$+$", falls $A \kon 1 \modu 4$ und "$-$", falls $A \kon 3 \modu 4$.
+	\end{enumerate}
+\end{satz}
+
+Zum Beweis benutzen wir:
+\begin{satz}
+	Für $p > 2$ und $E(\FF_p) \colon y^2 = x^3 + ax + b$ mit $a,b \in \FF_p$ gilt
+	\[
+		N_p := \#E(\FF_p) = p+1+\sum_{x \in \FF_p} \leg{x^3+ax+b}{\FF_p},
+	\]
+	wobei
+	\[
+		\leg{u}{\FF_p} := \begin{dcases}
+			+1, & \text{wenn } u \not\kon 0 \modu p \text{ ein quadratischer Rest } \modu p\text{, d.h. } \exists w \in \ZZ : u \kon w^2 \modu p \\
+			-1, & \text{wenn } u \not\kon 0 \modu p \text{ kein quadratischer Rest } \modu p\text{, d.h. } \forall w \in \ZZ : u \not\kon w^2 \modu p \\
+			0, & \text{wenn } u \kon 0 \modu p\text{, d.h. } p \mid u
+		\end{dcases}
+	\]
+	das verallgemeinerte \Index{Legendre-Symbol} ist.
+\end{satz}
+
+\minisec{Beweis}
+	Vgl. Übungsblatt 7, Aufgabe 4(a). \qed
+	
+\begin{bew}[zu Satz~\ref{satz_17.4}(a)]
+	Für $p \kon 3 \modu 4$ ist $\leg{-1}{\FF_p} = (-1)^\frac{p-1}{2} = -1$ nach dem 1. Ergänzungssatz für das Legendre-Symbol,\marginnote{Für die Rechenregeln zum Legendre- Symbol siehe EZT-Skript!} also $\leg{(-x)^3+(-x)}{\FF_p} = -\leg{x^3+x}{\FF_p}$ für das $x \not\kon 0 \modu p$ nach den Rechenregeln für das Legendre-Symbol, sodass
+	\[
+		0 = \sum_{x \not\kon 0 \modu p} \enbrace*{ \leg{x^3+x}{\FF_p} + \leg{(-x)^3+(-x)}{\FF_p}} = 2 \sum_{x \not\kon 0 \modu p} \leg{x^3 + x}{\FF_p}
+	\]
+	folgt, denn mit $x$ durchläuft auch $-x$ alle Restklassen $\not\kon 0 \modu p$.
+	Also ist $\NN_p = p+1$. \qed
+\end{bew}
+
+\begin{bem}
+	Für den Defekt $a_p = p+1-N_p$ gilt somit $a_p = - \sum_{x \in \FF_p} \leg{x^3+ax+b}{\FF_p}$.
+	Im Absolutbetrag kann $a_p$ nicht allzu groß werden, d.h. $N_p = \#E(\FF_p)$ kann nicht allzu stark von $p$ abweichen:
+\end{bem}
+
+\begin{satz}[Satz von Hasse (1933)]
+	(H. Hasse\footnote{\url{https://de.wikipedia.org/wiki/Helmut_Hasse}}) \\
+	Für den Defekt $a_p$ einer elliptischen Kurve $E(\FF_p)$ gilt $|a_p| \leq 2 \sqrt{p}$.
+	Der Satz gilt auch für $E(\FF_{p^r}), r \geq 1$: Es ist $|p^r + 1 - N_{p^r}| \leq 2 \sqrt{p^r}$.
+	\index{Satz von Hasse}
+\end{satz}
+
+\begin{bem}
+	Diese Abschätzung für $|a_p|$ wurde 1920 von E. Artin\footnote{\url{https://de.wikipedia.org/wiki/Emil_Artin}} vermutet.
+	Eine Verallgemeinerung zeigte A. Weil\footnote{\url{https://de.wikipedia.org/wiki/Andr\%C3\%A9_Weil}} in den 1940ern, und stark verallgemeinert wurde sie von P. Deligne\footnote{\url{https://de.wikipedia.org/wiki/Pierre_Deligne}} in den 1970ern, wofür er 1978 mit der Fields-Medaille ausgezeichnet wurde.
+\end{bem}
+
+\begin{bem}
+	Im Beispiel $y^2 = x^3 + x$ mit $p \kon 1 \modu 4$ folgt aus Satz~\ref{satz_17.4}(b) die Hasseschranke, da
+	\[
+		|a_p| = |p+1-N_p| = |p+1-p-1 \mp 2A| = |\mp 2A| = |\mp 2 \sqrt{p-B^2}| \leq 2 \sqrt{p}.
+	\]
+\end{bem}
+
+\begin{bem}
+	Fragen über die Größen von $N_p$ führen zu offenen Problemen, z.B. die schwache Vermutung von Birch\footnote{\url{https://de.wikipedia.org/wiki/Bryan_Birch}} und Swinnerton-Dyer\footnote{\url{https://de.wikipedia.org/wiki/Peter_Swinnerton-Dyer}} (1963, 1965):
+	Für $E(\QQ)$ mit Koeffizienten aus $\ZZ$ sollte
+	\[
+		\prod_{p \leq x} \frac{N_p}{p} \sim C_E(\log x)^{r(E)}
+	\]
+	gelten, wobei $C_E$ eine Konstante $> 0$ ist, die nur von $E(\QQ)$ abhängig ist.
+	Die Aussage $f(x) \sim g(x)$ für zwei Funktionen $f,g\colon \RR_{>0} \rightarrow \RR_{>0}$ bedeutet, dass $\lim\limits_{x \rightarrow \infty} \frac{f(x)}{g(x)}=1$, d.h. $f$ und $g$ sind asymptotisch gleich.
+	Die Zahl $r(E)$ ist der Rang von $E(\QQ)$.
+	Numerische Untersuchungen stützen diese Vermutung bislang.
+	Sie bedeutet:
+	Ist die Anzahl $N_p$ der Punkte auf $E(\FF_p)$ bei Reduktion modulo $p$ signifikant größer als der Erwartungswert, so sollte der Rang $r(E)$ positiv sein.
+	Sie stellt damit ein numerisch leicht testbares Kriterium für $r(E) > 0$ dar.
+\end{bem}
+
+\begin{bsp}
+	Weitere numerische Beobachtungen in anderen Beispielen: \\
+	Für $E \colon y^2 = x^3 + 17$ gilt $a_p = 0$ genau für $p \kon 2 \modu 3$, also auch $a_p = 0$ für "die Hälfte" aller Primzahlen.
+	Das kommt für "wenige" elliptische Kurven mit Koeffizienten aus $\ZZ$ so heraus.
+	Für die Kurve $E \colon y^2 = x^3 - 4x^2 + 16$ etwa haben wir $a_p=0$ nur selten:
+	Die einzigen $p < 2000$ mit $a_p = 0$ sind
+	\[
+		p = 2, 19, 29, 199, 569, 809, 1289, 1439, \dots
+	\]
+	Welcher der Fälle eintritt, hängt davon ab, ob die elliptische Kurve \Index{komplexe Multiplikation} (CM) hat.
+\end{bsp}
+
+\begin{defn}[komplexe Multiplikation (CM)]
+	Eine elliptische Kurve $E(k)$ hat \Index{komplexe Multiplikation} (CM), falls sie neben den üblichen Endomorphismen $\Psi_m \colon E(k) \rightarrow E(k), P \mapsto m \cdot P$ mit $m \in \ZZ$ noch weitere hat.
+\end{defn}
+
+Elliptische Kurven mit CM haben viele spezielle Eigenschaften, z.B.:
+\begin{itemize}
+	\item Elliptische Kurven mit CM haben "ebensoviele" $p$ mit $a_p = 0$ wie $p$ mit $a_p \neq 0$.
+	\item Elliptische Kurven ohne CM haben nur "wenige" $p$ mit $a_p = 0$.
+\end{itemize}
+Dennoch konnte N. Elkies 1987 zeigen, dass jede elliptische Kurve $a_p=0$ für unendlich viele $p$ hat.
+
+\begin{bem}
+	Beim Übergang von $E(\QQ)$ mit Koeffizienten in $\ZZ$ zu $E(\FF_p)$ zu einer Primzahl $P$ reduzieren wir modulo $p$.
+	Nicht immer kommt dabei wieder eine elliptische Kurve heraus, nämlich dann nicht, wenn $\Delta(E(\FF_p)) = 0$ in $\FF_p$ gilt, d.h. $p \mid \Delta(E(\QQ))$ in $\ZZ$.
+	Wir sprechen dann von \bet{schlechter Reduktion} (\Index{bad prime}), ansonsten von \bet{guter Reduktion} (\Index{good prime}). \index{gute Reduktion} \index{schlechte Reduktion}
+	Die schlechte Reduktion kommt nur für alle Primteiler von $\Delta(E(\QQ)) \in \ZZ$ vor, also nur für endlich viele Primzahlen $p$.
+	In diesen Ausnahmefällen verhält sich die kubische Kurve, die durch Reduktion der Gleichung von $E(\QQ)$ modulo $p$ gegeben ist, oft anders; "$+$" gibt es dann nicht.
+	Im Beispiel $E(\QQ) \colon y^2 = x^3-4x^2+16$ gilt etwa $N_p \kon 4 \modu 5$ für alle Primzahlen $p$ außer $p = 2$ und $p=11$.
+	Tatsächlich sind $p=2$ und $p=11$ hier die Primzahlen mit schlechter Reduktion, da $\Delta(E(\QQ)) 0 -2^{12} \cdot 11$ ist.
+\end{bem}
+
+\begin{defn}[Spur des Frobenius]
+	Für eine elliptische Kurve $E(\FF_{p^r}), r \geq 1$, wird der Defekt $a_{p^r} = p^r + 1 - N_{p^r}$ auch die \Index{Spur des Frobenius} genannt.
+\end{defn}
+
+\begin{defn}[Frobeniusendomorphismus]
+	Der \Index{Frobeniusendomorphismus} (kurz: Frobenius\footnote{\url{https://de.wikipedia.org/wiki/Ferdinand_Georg_Frobenius}}) einer elliptischen Kurve $E(\FF_{p^r})$ ist der durch die Abbildung
+	\begin{equation}
+	\begin{aligned}
+		\phi \colon \PP^2(\overline{\FF_{p^r}}) &\longrightarrow \PP^2(\overline{\FF_{p^r}}) \\
+		[x:y:z] &\longmapsto \benbrace*{x^{p^r} : y^{p^r} : z^{p^r}}
+	\end{aligned}
+	\end{equation}
+	vermittelte Gruppenhomomorphiusmus $\Phi\colon E(\overline{\FF_{p^r}}) \rightarrow E(\overline{\FF_{p^r}})$.
+\end{defn}
+
+\minisec{Beweisskizze}
+	\begin{itemize}
+		\item $\phi$ ist wirklich eine Abbildung $\PP^2(\overline{\FF_{p^r}})$ in sich.
+		\item Ist $E(\FF_{p^r})$ gegeben durch $F(X,Y,Z) = 0$, folgt auch $F(X^{p^r},Y^{p^r},Z^{p^r}) = 0$, weil in $\overline{\FF_{p^r}}$ die Gleichung $(c+d)^{p^r} = c^{p^r} + d^{p^r}$ für $c,d \in \overline{\FF_{p^r}}$ richtig ist.
+		Damit ist durch $\Phi$ eine Abbildung von $E(\overline{\FF_{p^r}})$ in sich definiert.
+		\item Die Verträglichkeit der Gruppenaddition auf $E(\overline{\FF_{p^r}})$ mit $\Phi$, d.h. die Eigenschaft $\Phi(P_1+P_2) = \Phi(P_1) + \Phi(P_2)$, kann man nachrechnen. \qed
+	\end{itemize}
+	
+\begin{bem}
+	Der Frobenius $\Phi$ lässt sich auf allgemeinere Strukturen (genauer: dem Tatemodul) übertragen; dieser lässt eine Matrixdarstellung zu, wobei die Spur dieser Matrix genau $a_{p^r}$ ergibt, daher der Name.
+	Dieser Zusammenhang liefert weitere Möglichkeiten, den Defekt $a_{p^r}$ zu bestimmen.
+\end{bem}
+
+\begin{anw}[Text in eine elliptische Kurve einbetten]
+	Bei der Umsetzung des ElGamal-Verschlüsselungsverfahrens für eine elliptische Kurvengruppe $(G,+) = (E(\FF_{p^r}),+)$, vergleiche Abschnitt~\ref{subsub:1.2.3}, ist es erforderlich, dass sich die Kommunizierenden Alice und Bob darauf einigen, wie man Klartext in eine Folge von Punkten auf der elliptischen Kurve $E(\FF_{p^r})$ übersetzt und wieder zurückerhält.
+	Hier ein beispielhaftes Verfahren, wie dies praktisch durchgeführt werden kann:
+\end{anw}
+
+\begin{anw}[Schritt 1]
+	Man legt ein Alphabet mit $N$ Buchstaben (identifiziert mit $0,1,\dots,N-1$) fest.
+	Der Klartext (z.B. ein Wort) habe die Blocklänge $l$.
+	Die Zuordnung 
+	\[
+		w= (a_0 \ a_1 \ \dots \ a_l) \mapsto a_0 N^{l-1} + a_1 N^{l-2} + \dots + a_{l-2} N + a_{l-1} = x_w
+	\]
+	liefert eine Bijektion zwischen den möglichen Klartextblöcken $w$ und den Zahlen $0 \leq xw < N^l$.
+	Eine Zahl $x_w$ soll $x$-Koordinate eines Kurvenpunkts werden.
+\end{anw}
+
+
+\begin{anw}[Schritt 2]
+	Für eine gegebene elliptische Kurve $E(\FF_{p^r})$ gibt es aber nicht zu jedem $x \in \FF_{p^r}$ einen Kurvenpunkt $(x_0,y_0) \in E(\FF_{p^r})$.
+	Für ein $k \in \NN$ kann man aber die nächste $x$-Koordinate eines Kurvenpunkts $(x_1,y_1) \in E(\FF_{p^r})$ mit $x_0 \leq x_1 \leq x_0+k$ schnell ermitteln; die Wahrscheinlichkeit, dass dies scheitert, d.h. dass ein solches $x_1$ nicht existiert, beträgt schätzungsweise nur etwa $\leg{1}{2}^k$
+	(z.B. für $k = 50$ weniger als $10^{-15}$). \\
+	Wähle so ein geeignetes $k$ fest und eine elliptische Kurve $E(\FF_{p^r})$ mit $p^r > k \cdot N^l$, d.h. es gibt wohl Kurvenpunkte mit genügend großen $x$-Koordinaten.
+\end{anw}
+
+\begin{anw}[Schritt 3]
+	Zu $x_w \in \{0,\dots,N^l-1\}$ bestimme $P_w \in E(\FF_{p^r})$ mit $x$-Koordinate $\geq kx_w$, etwa $P_w = (kx_w + j, y)$ mit $j \geq 0$ minimal.
+\end{anw}
+
+\begin{bem}
+	Wir beobachten: Hat das Verfahren funktioniert, ist dabei $j < k$, sodass durch Berechnung von $x_w = \floor*{\frac{x}{k}}$ für $P_w=(x,y) \in E(\FF_{p^r})$ der Klartext $w$ aus $P_w$ wieder zurückgewonnen werden kann.
+\end{bem}
+
+\begin{bsp}
+	Für das Alphabet $\{A,B,\dots,Z\} = \{0,1,\dots,25\}$ ist $N = 26$, wähle z.B. $l = 2, k=10$.
+	Dann erfüllt $p=6833$ die Bedingung $p > kN^2 = 6760$.
+	Ist dazu $E(\FF_p)$ gegeben durch $E(\FF_p)\colon y^2 = x^3 + 5984x + 1180$, kann z.B. der Text "\texttt{KRYPTO}" wie folgt in eine Liste von drei Punkten auf $E(\FF_p)$ umgesetzt werden:
+	\begin{center}
+		\begin{tabular}{c||c|c|c}
+		$w$ & \texttt{KR} & \texttt{YP} & \texttt{TO} \\ 
+		\hline $x_w$ & $(10,17)_{26} = 277$ & $(24,15)_{26} = 639$ & $(19,14)_{26} = 508$ \\ 
+		\hline $P_w$ & $(2771,353)$ & $(6390,2797)$ & $(5080,238)$
+		\end{tabular} 
+	\end{center}
+\end{bsp}
