@@ -242,7 +242,7 @@ Umgekehrt ist auch jede elliptische Kurve $(E(\CC),+)$ beschreibbar als Torus $(
 \subsection{Elliptische Kurven über $\FF_p$ und $\FF_{p^r}$}
 \label{sub:3.3}
 \begin{bem}
-	Elliptische Kurven über endlichen Körpern werden vielfältig eingesetzt, zum einen in der Kryptographie, zum anderen auch in technischen Systemen mit wenig Ressourcen (eingebettete Systeme), z.B. Steuergeräte in Automobilen (elektronische Wegfahrsperren, Tuning-Schutz, Car-To-Car-Kommunikation, etc.).
+	Elliptische Kurven über endlichen Körpern werden vielfältig eingesetzt, \marginnote{[17]} zum einen in der Kryptographie, zum anderen auch in technischen Systemen mit wenig Ressourcen (eingebettete Systeme), z.B. Steuergeräte in Automobilen (elektronische Wegfahrsperren, Tuning-Schutz, Car-To-Car-Kommunikation, etc.).
 	Manche Hardware-Implementationen arbeiten über $\FF_{2^r}$ der Charakteristik $2$, bei denen die technische Umsetzung damit günstig ist.
 \end{bem}
 
@@ -458,3 +458,115 @@ Dennoch konnte N. Elkies 1987 zeigen, dass jede elliptische Kurve $a_p=0$ für u
 		\end{tabular} 
 	\end{center}
 \end{bsp}
+
+\nextlecture
+\subsubsection{Modularitätsmuster und der große Fermatsche Satz}
+\label{subsub:3.3.2}
+\begin{bem}
+	Für elliptische Kurven mit Koeffizienten in $\ZZ$ wurde ein Modularitätsmuster gefunden,\marginnote{[18]} welches sehr unterwartet und ungewöhnlich ist, dass es kaum vorstellbar ist, dass dieses überhaupt gefunden werden konnte.
+	Es handelt sich (in voller Allgemeinheit) um die \Index{Taniyama-Shimura-Vermutung}\footnote{\url{https://de.wikipedia.org/wiki/Yutaka_Taniyama} \\ \url{https://de.wikipedia.org/wiki/Gor\%C5\%8D_Shimura}} von 1957, welche von A. Wiles und anderen 1995 komplett bewiesen wurde und als Baustein des Beweises des großen Fermatschen Satzes diente.
+\end{bem}
+
+\begin{bsp}
+	Im Spezialfall der Kurve $E\colon y^2 = x^3 - 4x^2 + 16$ z.B. lautet diese Vermutung, dass folgendes "Modularitätsmuster" für die Defekte $a_p$ gilt: \\
+	Man betrachte die Potenzreihe $\Theta(T) \in \ZZ[T]$, welche durch Ausmultiplizieren des unendlichen Produkts
+	\[
+		\Theta(T) := T \cdot \prod_{k=1}^{\infty} ((1-T^k)(1-T^{11k}))^2 = T \cdot ((1-T)(1-T^{11}))^2 \cdot ((1-T^2)(1-T^{22}))^2 \cdot ((1-T^3)(1-T^{33}))^2 \cdots
+	\]
+	entsteht.
+	Sie beginnt mit
+	\[
+		\Theta(T) = T - 2T^2 - T^3 + 2T^4 + T^5 + 2T^6 - 2T^7 - 2T^9 - 2T^{10} + T^{11} - 2T^{12} + 4T^{13} + 4T^{14} - T^{15} - 4T^{16} - 2T^{17} \dots
+	\]
+	Im Vergleich die Defekte von $E$:
+	\[
+		a_2 = 0, a_3 = -1, a_5 = 1, a_7 = -2, a_{11} = 1, a_{13} = 4, a_{17} = -2, \dots
+	\]
+	d.h. bis auf $a_2$ ist $a_p$ genau der Koeffizient vor $T^p$ in $\Theta(T)$, $p \geq 3$ prim.
+\end{bsp}
+
+\begin{bem}
+	Ein derartiges Muster vermuteten Taniyama und Shimura für jede elliptische Kurve mit Koeffizienten in $\ZZ$, genauer:
+	jede elliptische Kurve ist "modular".
+\end{bem}
+	
+\begin{bem}
+	Der große Satz von Fermat besagt, dass die Gleichung $A^n + B^n = C^n$ für $n \geq 3$ keine Lösungen in $\ZZ \setminus \setnull$ besitzt.
+	Fermat formulierte diese Aussage im 17. Jahrhundert und ihr Beweis galt bis 1995 als eines der größten ungelösten Probleme der Mathematik.
+	Die Bemühungen vieler Mathematiker um diese Vermutung brachten die Mathematik, speziell die algebraische Zahlentheorie, bis heute weit voran.
+	Die Lösung durch A. Wiles stellte 1995 eine riesigen Durchbruch dar.
+\end{bem}
+
+\begin{bem}
+	Bis 1980 wurden Lösungsversuche durch Faktorisierungstechniken vorgenommen.
+	Im Jahr 1986 schlug G. Frey\footnote{\url{https://de.wikipedia.org/wiki/Gerhard_Frey_(Mathematiker)}} eine Verbindung zwischen Fermats großem Satz und elliptischen Kurven vor, auf der die weiteren Erfolge beruhten: \\
+	Zu einer angenommenen, nichttrivialen Lösung $A,B,C$ des großen Fermat-Satzes zu einem primen Exponenten $n=p$ betrachtet man die zugehörige elliptische Kurve
+	\[
+		E_{A,B} \colon y^2 = x(x+A^p)(x-B^p),
+	\]
+	ihre Diskriminante ist $\Delta(E_{A,B}) = 16(ABC)^{2p}$, was unwahrscheinlich erscheint.
+	Die Idee ist zu zeigen, dass eine solche Kurve nicht modular sein kann, d.h. der Taniyama-Shimura-Vermutung widerspricht.
+	Im Jahr 1986 konnte dies gezeigt werden von K. Ribet\footnote{\url{https://de.wikipedia.org/wiki/Kenneth_Alan_Ribet}}.
+	Davon inspiriert verbrachte A. Wiles die nächsten sechs Jahre damit, die Taniyama-Shimura-Vermutung zumindest für so genannte semistabile elliptische Kurven zu zeigen, was ihm gelang.
+	Da Frey-Kurven $E_{A,B}$ seminstabil sind, reichte dies zum Beweis des großen Fermatschen Satzes aus.
+\end{bem}
+
+\begin{bem}
+	Mittlerweile wurde die (volle) Taniyama-Shimura-Vermutung bewiesen durch C. Breuil, B. Conrad, F. Diamond und R. Taylor (2001) und heißt heute \Index{Modularitätssatz}.
+	Heute wird der Modularitätssatz als Spezialfall der allgemeineren \Index{Serre-Vermutung über Galoisdarstellungen} angesehen, welche aufbauen auf den Arbeiten von A. Wiles inzwischen (im Jahr 2006) von C. Khare, J.-P. Wintenberger und M. Kisin bewiesen wurde.
+\end{bem}
+
+\subsubsection{Der Schoof-Algorithmus}
+\label{subsub:3.3.3}
+\begin{bem}
+	Für die Kryptographie-Anwendungen ist ein praktischer Weg, die Anzahl $N_{p^r} = \#E(\FF_{p^r})$ der Punkte auf einer elliptischen Kurve über einem endlichen Körper $\FF_{p^r}$ zu bestimmen, von Bedeutung.
+	Dies leistet der Schoof-Algorithmus\footnote{\url{https://de.wikipedia.org/wiki/Ren\%C3\%A9_Schoof}}, den wir jetzt besprechen.
+\end{bem}
+
+\begin{anw}
+	Sei $p > 2$ und $E(\FF_{p^r})$ gegeben durch $y^2 = x^3 + ax + b$ mit $a,b \in \FF_{p^r}$.
+	Der Algorithmus bestimmt $t := a_{p^r} = p^r + 1 - \#E(\FF_{p^r})$ nur modulo der ersten Primzahlen $p_1 = 2, p_2 = 3, p_3 = 5, \dots$, bis damit $a_{p^r}$ bestimmt werden kann.
+\end{anw}
+
+\begin{bem}
+	Für die ersten $s$ Primzahlen $p_1,\dots,p_s$ vermittelt der chinesische Restsatz durch die Restklassenabbildung $\ZZ \rightarrow \ZZ_{p_1} \times \dots \times \ZZ_{p_s}$ eine Bijektion $\ZZ_{p_1 \cdots p_s} \rightarrow \ZZ_{p_1} \times \dots \times \ZZ_{p_s}$. \\
+	Gilt $|t| < \frac{1}{2} p_1 \cdots p_s$, ist $t \modu p_1 \cdots p_s$ durch die Restklassen $(t \modu p_1, \dots, t \modu p_s)$ eindeutig bestimmt.
+	Da nach dem Satz von Hasse $|t| < 2 \sqrt{p^r}$ gilt, genügt es, $r$ mit $p_1 \cdots p_s > 4 \sqrt{p^r}$ zu wählen.
+	Die Bestimmung von $t \modu p_1, \dots, t \modu p_s$ reicht dann also zur Bestimmung von $t$ laut chinesischem Restsatz.
+\end{bem}
+
+\begin{anw}[Schritt 1: Bestimmung von $t$ modulo $2$]
+	Da $t \kon \#E(\FF_{p^r}) \modu 2$, muss die Parität von $\#E(\FF_{p^r})$ bestimmt werden, d.h. ob $\#E(\FF_{p^r})$ gerade oder ungerade ist.
+	\begin{itemize}
+		\item Für festes $x \in \FF_{p^r}$ mit $x^3 + ax + b \neq 0$ in $\FF_{p^r}$ hat $y^2 = x^3 + ax + b$ keine oder zwei Lösungen $y$, d.h. die Anzahl der Lösungen $(x,y)$ mit $y \neq 0$ ist gerade und zählen modulo $2$ daher nicht.
+		\item Es bleiben $\oh$ und die $(x_0,0) \in E(\FF_{p^r})$ zu zählen.
+		Über $\overline{\FF_{p^r}}$ faktorisiert $x^3 + ax + b$ zu $x^3 + ax + b = (x-x_0)(x-x_1)(x-x_2)$ mit $x_1, x_2 \overline{\FF_{p^r}}$.
+		Da $E$ nicht-singulär, sind $x_0,x_1,x_2$ paarweise verschieden.
+		Wegen $x_0+x_1+x_2 = 0$ (Koeffizient von $x^2$), folgt entweder
+		\begin{enumerate}[a)]
+			\item $x_1,x_2 \in F_{p^r}$, oder
+			\item $x_1,x_2 \in \overline{\FF_{p^r}} \setminus \FF_{p^r}$.
+		\end{enumerate}
+		\item Im Fall a) gibt es drei Punkte $(x_i,0) \in E(\FF_{p^r})$, im Fall b) nur einen Punkt, sodass $t \kon \#E(\FF_{p^r}) \kon 0 \modu 2$ folgt (wegen $\oh$), sofern $(x_0,0) \in E(\FF_{p^r})$ existieren.
+		Gibt es keine solchen Punkte, folgt (wegen $\oh$) dann $t \kon \#E(\FF_{p^r}) \kon 1 \modu 2$.
+		\item Ob $(x_0,0) \in E(\FF_{p^r})$ existieren, kann durch Überprüfen von $x-x_0 \mid x^3 + ax + b$ für alle $x_0 \in \FF_{p^r}$ getestet werden; wegen $x^{p^r} - x = \prod\limits_{x_0 \in \FF_{p^r}} (x-x_0)$ also effektiv durch Überprüfen von $\ggT(x^3 + ax + b, x^{p^r} - x) = 1$ im Polynomring $\FF_{p^r}[x]$ mit dem euklidischen Algorithmus.
+	\end{itemize}
+\end{anw}
+
+\begin{anw}[Schritt 2: Bestimmung von $t \modu p_i > 3$]
+	Dies ist deutlich schwieriger, hier nur die Grundidee:
+	\begin{itemize}
+		\item Der Frobenius $\Phi$ genügt der Gleichung $\Phi^2(P) - t \cdot \Phi(P) + p^r \cdot P = \oh$ für alle $P \in E(\overline{\FF_{p^r}})$, da $t$ die "Spur" des Frobenius ist (ohne Beweis). \\
+		Zu bestimmen ist eine Zahl $\tau \in \{0, \dots, p-1\}$, die dieser Gleichung an Stelle $t$ für jeden Punkt $P \in E[p_i] := \{P \in E(\overline{\FF_{p^r}}) : \ord(P) \mid p_i\}$ genügt. \\
+		(Denn für so ein $\tau$ muss $(t-\tau) \Phi(P) = \oh$ für jedes $P \in E[p_i] \setminus \oh$ sein.
+		Da $\Phi(P) \in E[p_i] \setminus \oh$ ist, ist $\ord(\Phi(P)) = p_i$ in $E[p_i]$, es folgt $p_i = \ord(\Phi(P)) \mid t-\tau$, also $t \kon \tau \modu p_i$.
+		\item Die Bestimmung von $\tau$ mit $\Phi^2(P) - \tau \Phi(P) + p^r \cdot P = \oh$ für alle $P \in E[p_i]$ kann mittels der expliziten Formeln in eine Polynomgleichung übersetzt werden, für die der Reihe nach für $\tau = 0,1,\dots,p_i-1$ getestet wird, ob sie gilt, bis man auf die Lösung stößt.
+	\end{itemize}
+\end{anw}
+
+\begin{bem}
+	Der Schoof-Algorithmus hat eine Laufzeit von nur $\oh(\log^8(p^r))$, ein naiver Algorithmus zur Bestimmung von $\#E(\FF_{p^r})$ hat eine Laufzeit von $\oh(p^{r/4 + \varepsilon})$.
+	Damit kann $\#E(\FF_{p^r})$ mit dem Schoof-Algorithmus effektiv und schnell bestimmt werden, wenn $p^r$ groß ist.
+	Mithilfe von $\#E(\FF_{p^r}) \in \NN$ kann dann entschieden werden, ob die (meist zufällig gewählte) elliptische Kurve kryptographisch geeignet ist oder nicht.
+	Das behandeln wir im nächsten Abschnitt.
+\end{bem}
