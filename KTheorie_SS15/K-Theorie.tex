@@ -328,7 +328,7 @@ stetig ist. Dies klappt nur für Kategorien, für die eine Topologie auf den Mor
 % subsection 24 (end)
 
 
-\begin{lemma}[{name=[Induzierter Funktor eines stetigen Funktors]}]
+\begin{lemma}[{name=[Induzierter Funktor eines stetigen Funktors]},label=ind_funk_vektorbuendel]
 Sei $F$ ein stetiger Funktor wie in \eqref{eq:24} und sei $X$ ein topologischer Raum. Dann induziert $F$ einen Funktor
 \[
 	F_X \colon \Underbrace{\VEKT_K(X) \times \ldots \times \VEKT_K(X)}{r} \times \Underbrace{\VEKT_K(X)^\op \times \ldots \times \VEKT_K(X)^\op}{s} \longrightarrow \VEKT_K(X)
@@ -1783,8 +1783,159 @@ Das Element $h_f \in \mathds{Z}$ heißt die \Index{Hopf-Invariante} von $f$.
 \label{sub:47}
 Sei $f\colon S^{4k} \to S^{2k}$ die stetige Abbildung assoziiert zu einer $H$-Raum-Struktur auf $S^{2k-1}$. Dann gilt $h_f \in \set{\pm 1}$.
 \minisec{Beweis}
+\todo[inline]{Hier fehlt noch ganz viel}
+
 
 % subsection 47 (end)
+
+\subsection*{Die äußere Algebra}
+Sei $V$ ein $n$-dimensionaler $\mathds{C}$-Vektorraum.
+\[
+	T(V) = \bigoplus_{n=0}^\infty V^{\otimes n}
+\]
+mit $V^{\otimes 0}=\mathds{C}$ ist die \Index{Tensoralgebra} von $V$ mit Multiplikation induziert vom Tensorprodukt und Einselement 
+$1\in \mathds{C}=V^{\otimes 0} \subset T(V)$. $T(V)$ ist $\mathds{N}$-graduiert. Sei $I \subset T(V)$ das (graduierte) zweiseitige Ideal erzeugt von 
+$v \times v \in V^{\otimes 2} \subset T(V)$ für alle $v \in V$. Das heißt in $\nicefrac{T(V)}{I}$ gilt
+\begin{equation*}
+	\benbrace*{v_1 \otimes \ldots \otimes v_r} = \benbrace*{v_1 \otimes  \ldots \otimes v_r + w_1 \otimes  \ldots \otimes w_k \otimes a \otimes a \otimes w_{k+3} \otimes 
+	\ldots \otimes w_r} \label{eq_auss_al} \tag{\#}
+\end{equation*}
+Dann heißt $\Lambda^* V:= \nicefrac{T(V)}{I}$ die \Index{äußere Algebra} von $V$. Elemente in $\Lambda^*V$ schreibt man auch 
+$v_1 \wedge \ldots \wedge v_r = \benbrace*{v_1 \otimes \ldots \otimes v_r}$. Aus \eqref{eq_auss_al} folgt: 
+\[
+	v_1 \wedge \ldots \wedge v_i \wedge v_{i+1} \wedge \ldots \wedge v_r = - v_1 \wedge \ldots \wedge v_{i+1} \wedge v_i \wedge \ldots \wedge v_r
+\]
+$\Lambda^* V = \bigoplus_{n=0}^\infty \Lambda^n V$ ist graduiert über die Länge der Tensoren.
+\begin{beispiel}
+\leavevmode
+\begin{itemize}
+	\item Ist $V=\mathds{C}$, so ist $T(V) = \bigoplus_{n=0}^\infty \mathds{C}$ und $\Lambda^*(V) \cong \mathds{C} \oplus \mathds{C}$.
+	\item Ist $V=\mathds{C}^2$, so erhalten wir $\Lambda^* V \cong \mathds{C} \oplus \mathds{C}^2 \oplus \mathds{C}$, wobei das letze 
+	$\mathds{C} = \Span \set{e_1 \wedge e_2} $ ist.
+	\item Allgemeiner gilt für $V=\mathds{C}^r$
+	\[
+		\Lambda^* V \cong \mathds{C} \otimes C^r \oplus \ldots \oplus C^{\binom{r}{i}} \oplus \ldots \oplus \underset{\Lambda^r V}{\mathds{C}} \oplus 0 \ldots 
+	\]
+\end{itemize}
+\end{beispiel}
+
+Der Dualraum $(\Lambda^n V)^*$ ist kanonisch isomorph zum Vektorraum der antisymmetrischen $n$-Formen auf $V$, also Abbildungen $\varphi \colon V \times \ldots \times V \to C$, die multilinear und antisymmetrisch sind.
+
+Die Zuordnungen $V \mapsto \Lambda^n V$ und $V \mapsto\Lambda^* V$ lassen sich zu stetigen Funktoren $\VEKT_\mathds{C} \to \VEKT_\mathds{C}$ beziehungsweise
+$\VEKT_\mathds{C} \to \mathrm{Gr-}\VEKT_\mathds{C}$ erweitern. Nach \autoref{ind_funk_vektorbuendel} existieren Funktoren
+\[
+	\Lambda^n \colon \VEKT_\mathds{C}(X) \longrightarrow \VEKT_\mathds{C}(X) \qquad \Lambda^* \colon \VEKT_\mathds{C}(X) \longrightarrow \mathrm{Gr-}\VEKT_\mathds{C}(X)
+\]
+Eigenschaften dieser Funktoren: 
+\begin{enumerate}[a)]
+	\item $\Lambda^n(E_1 \oplus E_2) \cong \bigoplus_{i+j=n} \Lambda^i(E_1) \otimes \Lambda^j(E_2)$
+	\item $\Lambda^0(E) \cong X \times \mathds{C}$, $\Lambda^1(E) \cong E$
+	\item $\Lambda^n(E)=0$ für $n > \dim E$.
+\end{enumerate}
+\[
+	\Lambda^n(E_1 \oplus E_2) = \benbrace*{\Lambda^*(E_1 \oplus E_2)}_n = \enbrace*{\Lambda^*(E_1) \otimes \Lambda^*(E_2)}_n= (*,*)  
+\]
+
+\subsection*{Elementarsymmetrische Polynome}
+Sei $p \in \mathds{Z} \benbrace*{x_1, \ldots ,x_n}$ ein Polynom in Variablen $x_1, \ldots ,x_n$. Die Permutationsgruppe $\Sigma_n$ von $\set{1,\ldots ,n}$ wirkt auf $\mathds{Z}[x_1,\ldots ,x_n]$ durch
+\[
+	(\tau \cdot p)(x_1,\ldots ,x_n)=p \enbrace*{x_{\tau ^{-1}(1)}, \ldots , x_{\tau ^{-1}(n)}}  \quad , \quad \tau_1 \cdot (\tau_2 \cdot p) = (\tau_1 \cdot \tau_2) \cdot p
+\]
+Ein Polynom $p$ heißt $\Sigma_n$-invariant, falls $\tau \cdot p=p$ für alle $\tau \in \Sigma$ gilt.
+\begin{beispiel}
+\leavevmode
+\begin{itemize}
+	\item $\sigma_1(x_1,\ldots ,x_n)=x_1 +x_2 + \ldots + x_n$ ist $\Sigma_n$-invariant.
+	\item $\sigma_2(x_1,x_2,x_3) = x_1 x_2 + x_1 x_3+ x_2 x_3$ ist $\Sigma_3$-invariant.
+	\item $\sigma_r(x_1, \ldots ,x_n) = \sum_{1 \le i_1< \ldots < i_r \le n} x_{i_1} x_{i_2} \cdots x_{i_k}$ ist $\Sigma_n$-invariant. Diese Polynome heißen 
+	\emph{elementarsymmetrische Polynome}
+\end{itemize}
+\end{beispiel}
+
+Sei $q(x_1,\ldots ,x_n;t) = \prod_{i=1}^n (1+ t x_i)$. Es ist $(1+t x_1)(1+ t x_2)= 1+ t(x_1 + x_2) + t^2 x_1 x_2$. Dann ist $\sigma_r(x_1,\ldots ,x_n)$ der Koeffizient
+von $q(x_1, \ldots ,x_n;t)$ vor $t^r$.
+\begin{satz}
+Ein Polynom $p \in \mathds{Z} \benbrace*{x_1,\ldots ,x_n}$ ist $\Sigma_n$-invariant genau dann, wenn es von der Form 
+\[
+	p(x_1, \ldots ,x_n) = s \enbrace*{ \sigma_1(x_1, \ldots ,x_n), \sigma_2(x_1, \ldots ,x_n) , \ldots ,  \sigma_n(x_1,\ldots ,x_n)} 
+\]
+für ein $s \in \mathds{Z} \benbrace*{x_1, \ldots ,x_n} $ ist.
+\end{satz}
+
+Sei $E \to X$ ein $\mathds{C}$-Vektorbündel. Betrachte 
+\[
+	\Lambda_t(E) := \sum_{i=0}^{n} \benbrace*{\Lambda^i(E),0}_\st  \cdot t^i = \sum_{i=0}^{n} \Lambda^i(E) t^i \in K^0(X)[t]
+\]
+Dann gilt $\Lambda_t(E_1 \oplus E_2) = \Lambda_t(E_1) \cdot \Lambda_t(E_2)$ wegen Eigenschaft a) von $\Lambda^n(E)$. Falls $E \cong L_1 \oplus L_2 \oplus \ldots \oplus L_n$ 
+für eindimensionale $\mathds{C}$-Vektorbündel $L_i \to X$. Dann gilt
+\[
+	\Lambda_t(E) = \prod_{i=1}^n \Lambda_t(L_i) = \prod_{i=1}^n (1+ L_i t)
+\]
+Durch Koeffizientenvergleich bekommen wir 
+\[
+	\Lambda^i(E) \cong \sigma_i \enbrace*{L_1, \ldots , L_n} 
+\]
+für dieses $E$. Wir wollen $\psi^m \enbrace*{L_1 \oplus  \ldots  \oplus  L_n} = L_1^m + \ldots + L_n^m $. Das Polynom $p_m(x_1,\ldots,x_n)= x_1^m + \ldots + x_n^m$ ist 
+$\Sigma_n$-invariant, das heißt es gibt $s_m(x_1,\ldots ,x_n)$ sodass $p_m= s_m(\sigma_1, \ldots ,\sigma_n)$. Jetzt definieren wir 
+\[
+	\psi^m(E) = s_m \enbrace*{\Lambda^1(E), \ldots, \Lambda^n(E)} 
+\]
+\begin{satz}[name=Spaltungsprinzip]
+Sei $X$ ein kompakter Hausdorffraum. Sei $E \to X$ ein endlichdimensionales $\mathds{C}$-Vektorbündel. Dann gibt es einen kompakten Hausdorffraum $F(E)$ zusammen mit einer
+stetigen Abbildung $p \colon F(E) \to X$, sodass $p^* \colon K^0(X) \to K^0 \enbrace*{F(E)}$ injektiv ist und $p^*E$ in eine SUmme von eindimensionalen 
+$\mathds{C}$-Vektorbündeln zerfällt.
+\end{satz}
+
+\begin{beweis}[name=Existenz Adams Operation, 4.8]
+\leavevmode
+\begin{itemize}
+	\item  Natürlichkeit folgt aus Funktorialität von $\Lambda^n$.
+\end{itemize}
+Seien $E_1, E_2$ $\mathds{C}$-Vektorraumbündel über $X$. Zu zeigen: $\psi^m(E_1 \oplus 	E_2) = \psi^m(E_1) + \psi^m(E_2)$. Sei $p_1 \colon F(E_1) \to X$ aus dem 
+Spaltungsprinzip. Betrachte $p_2 \colon F(p_1^*E_2) \to F(E_1)$. Dann gilt $p_1^* E_1 \cong L^m_1 \oplus  \ldots \oplus L^m_r$ und
+\[
+	p_2^* p_1^* E_2 \cong L_1^{(2)} \oplus  \ldots \oplus L_s^{(2)}
+\]
+Es folgt \todo{hier ist noch ein Fehler im Code, deswegen auskommentiert}
+% \begin{align*}
+% 	p_2^* p_^* \psi^m \enbrace*{E_1 \oplus E_2} = \psi^m \enbrace*{p_2^* p_1^* \enbrace*{E_1 \oplus E_2}}
+% 	&= \psi^m \enbrace*{p_2^* L_1^{(1)} \oplus \oplus p_2^* L_r^{(1)} \oplus L_1^{(2)} \oplus \ldots   \oplus L_s^{(2)}} \\
+% 	&= \psi^m \enbrace*{p_2^* L_1^{(1)} \oplus  \ldots \oplus p_2^* L_r^{(1)}} + \psi^m \enbrace*{L_1^{2} \oplus  \ldots \oplus L_s^{(2)}} \\
+% 	&= \psi^m \enbrace*{p_2^* p_1^* E_1} + \psi^m (p_2^* p_1^* E_2) \\
+% 	&=  p_2^* p_1^* \enbrace*{\psi^m \enbrace*{E_1} + \psi^m(E_2) }
+% \end{align*}
+Also gilt $\psi^m \enbrace*{E_1 \oplus E_2} = \psi^m(E_1) + \psi^m(E_2)$. Jetzt definiere $\psi^m(E_1 - E_2) = \psi^m(E_1) - \psi^m(E_2)$. Die Multiplikativität geht analog.
+Außerdem gilt
+\begin{align*}
+	\psi^m \enbrace*{\psi^l \enbrace*{L_1 \oplus L_r} } = L_1^{ml} \oplus \ldots \oplus L_r^{ml} = \psi^{ml} \enbrace*{L_1 \oplus \ldots \ldots L_r}  
+\end{align*}
+und
+\[
+	\psi^p \enbrace*{L_1 \oplus \ldots \oplus L_r} = L_1^p \oplus \ldots \oplus L_r^p = \enbrace*{L_1 \oplus \ldots \oplus L_r}^p \mod p \qedhere 
+\]
+\end{beweis}
+
+\minisec{Idee des Beweises vom Spaltungsprinzip}
+Betrachte das zu $E$ assoziierte projektive Bündel. Sei $s_0 \colon X \to E $ der Nullschnitt von $q \colon E \to X$.
+\[
+	P(E) := \nicefrac{E \setminus s_0(X)}{\sim} \qquad v \sim w \text{ falls } q(v)=q(w), v=\lambda w \text{ für ein } \lambda \in \mathds{C}^*
+\]
+$q' \colon P(E) \to X$, $q(w)= q'([w])$.
+Sei $L= \set[{(v,[w] \in E \times P(E))}]{v=\lambda w \text{ für ein }\lambda \in \mathds{C}^*}$. Dann ist $L \to P(E)$ ein eindimensionales Vektorbündel über $P(E)$ und wir
+haben eine kurze exakte Sequenz von Vektorbündeln
+\[
+	\begin{tikzcd}
+		0 \rar & L \rar & (q')^* E \rar & Q \rar & 0
+	\end{tikzcd}
+\]
+Es folgt nun $(q')^* E \cong L \oplus Q$. Es bleibt zu zeigen: $(q')^* \colon K^0(X) \to K^0(P(E))$ ist injektiv. Dies braucht den Thom-Isomorphismus oder das
+Leray-Hirsch-Theorem.
+
+$E=X \times \mathds{C}^{n+1}$ $\Rightarrow $ $P(E)=X \times \mathds{C}P^n$ und 
+\[
+	K^0(X) \otimes K^0(\mathds{C}P^n) \xrightarrow{\cong} K^0(X \times \mathds{C}P^n) 
+\]
+
 % section die_hopf_invariante (end)
 
 
