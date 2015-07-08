@@ -1,0 +1,222 @@
+\section{Sichere Kryptographie mit elliptischen Kurven}
+\label{sec:para4}
+\nextlecture
+\subsection{Bekannte Angriffe auf das DL-Problem: Überblick}
+\label{sub:4.1}
+\begin{bem}
+	Die Sicherheit des ElGamal- und ECDSA-Verfahrens beruht hier auf der Schwierigkeit des DL-Problems auf elliptischen Kurven. \marginnote{[19]}
+	Allerdings gibt es bestimmte Arten elliptischer Kurven, bei denen das DL-Problem algorithmisch schnell lösbar ist, sodass sich diese Kurven als kryptographisch schwach bzw. ungeeignet erweisen.
+	Auch die Wahl eines Punktes $P$ mit großer Ordnung ist wichtig.
+\end{bem}
+
+\subsubsection{BSGS und Silver-Pohlig-Hellman}
+\label{subsub:4.1.1}
+	Diese beiden Methoden eignen sich zur Lösung des DL-PRoblems in einer beliebigen abelschen Gruppe $G$.
+	
+\begin{defn}[DL-Problem in $G$]
+	Gegeben sei $P \in G$ mit $\ord(P) = n \in \NN$, sowie $Q \in \sprod{P}$. Gesucht ist $k \in \{0,\dots,n-1\}$ mit $kP = Q$.
+\end{defn}
+
+\begin{defn}[BSGS -- Baby Steps Giant Steps]
+	Dieses Verfahren kommt in Frage, wenn $P$ kleine Ordnung $n$ hat.
+	Dann kann das DL-Problem wie folgt gelöst werden; der Algorithmus hat einen Zeit- und Platzbedarf der Größenordnung $\oh(\sqrt{n})$: \index{BSGS (Baby Steps Giant Steps)}
+\end{defn}
+
+\begin{bem}
+	Vorüberlegung: Sei $m = \ceil*{\sqrt{n}} = \min \{ l \in \NN : l \geq \sqrt{n}\}$, schreibe $k = qm + r, r \in \{0,1,\dots,m-1\}$ (Division mit Rest). \\
+	Ziel: Bestimme $q, r$. \\
+	Da $Q = kP = qmP + rP$, folgt $\underbrace{Q - rP}_{\text{"Baby step"}} = \underbrace{qmP}_{\text{"Giant step"}}$.
+\end{bem}
+
+\begin{bem}
+	Idee: Berechne alle möglichen Werte von "Baby step" und nach und nach die möglichen Werte von "Giant step".
+	Trifft man auf eine Übereinstimmung, sind $r$ und $m$ gefunden.
+\end{bem}
+
+\begin{anw}[Schritt 1]
+	Berechne die Liste der "Baby steps" $B = \{(Q-rP,r) : 0 \leq r \leq m \}$.
+\end{anw}
+
+\begin{anw}[Schritt 2]
+	\begin{itemize}
+		\item Ist für eines der $r$ die Gleichung $Q - rP = \oh$ erfüllt, ist $k = r$.
+		\item Sonst teste für den ersten "Giant step" $R = mp$, ob $R$ in $B$ schon vorkommt.
+		Falls ja: $k = m + r$.
+		\item Teste so alle "Giant steps" $2R, 3R, 4R, \dots, (m-1)R$, ob diese in $B$ vorkommt.
+		Wenn ja, gibt die zweite Komponente $r$ mit $k = qm+r$.
+	\end{itemize}
+\end{anw}
+
+\begin{defn}[Silver-Pohlig-Hellman-Verfahren]
+	Dieses Verfahren löst das DL-Problem in einer abelschen Gruppe $G$, wenn die Ordnung $n = \ord(P)$ aus nur kleinen Primfaktoren $p_i$ zusammengesetzt ist, d.h. \Index{glatt} ist. \index{Silver-Pohlig-Hellman}
+\end{defn}
+
+\begin{defn}[$B$-glatt]
+	Sei $B \in \RR_{>0}$.
+	Dann heißt $m \in \NN$ \bet{$B$-glatt}, falls für alle $p \mid n$ gilt: $p \leq B$.
+	\index{B-glatt@$B$-glatt}
+\end{defn}
+
+\begin{bem}
+	Die Bestimmung von $k$ in $\sprod{P}$ wird auf Untergruppen von $\sprod{P}$ der Ordnungen $p_i \mid n$ zurückgeführt.
+	Sei $\ord(P) = n = \prod_{i=1}^{t} p_i^{\lambda_i}$ mit $p_1, \dots, p_t$ paarweise verschieden und prim, $\lambda_i \in \NN$.
+	Der Algorithmus hat dann eine Laufzeit von $\oh \enbrace*{\sum_{i=1}^{t} (\lambda_i(\log n + \sqrt{p_i}))}$.
+\end{bem}
+
+\begin{bem}
+	Vorüberlegung:
+	\begin{itemize}
+		\item Zur Bestimmung von $k$ mit $kP = Q \in \sprod{P}$ berechnen wir alle Restklassen $k \modu p_1^{\lambda_1}, k \modu p_2^{\lambda_2}, \dots, k \modu p_t^{\lambda_t}$.
+		Denn laut chinesischem Restsatz ist $\ZZ/n\ZZ \simeq \ZZ/p_1^{\lambda_1} \ZZ \times \dots \times \ZZ / p_t^{\lambda_t} \ZZ$, sodass damit dann auch die Restklasse von $k \modu n$ bestimmt werden kann.
+		\item Betrachte daher jedes $p = p_i, \lambda = \lambda_i$ mit $1 \leq  i \leq t$. \\
+		Gesucht: $z \in \{0, \dots, p^\lambda - 1\}$ mit $z \kon k \modu p^\lambda$. \\
+		Schreibe $z = z_0 + z_1 p + \dots + z_{\lambda-1} p^{\lambda-1}$, die $z_i \in \{0, \dots, p-1\}$, in der $p$-adischen Entwicklung; bestimme die $z_0, \dots, z_{\lambda-1}$.
+	\end{itemize}
+\end{bem}
+
+\begin{anw}[Schritt 1]
+	Sei $R := \frac{n}{p} \cdot P$, dann ist $\frac{n}{p}Q = \frac{n}{p}kP = kR$ und $pR = \oh$.
+	Also ist $kR = zR = z_0 R$, d.h. $z_0 R = \frac{n}{p} \cdot Q$.
+	Somit muss man in der Untergruppe $\sprod{R}$ der (kleinen) Ordnung $p$ ein DL-Problem lösen, um $z_0$ zu bestimmen -- etwa mit BSGS.
+\end{anw}
+
+\begin{anw}[Schritt 2]
+	Seien $z_0, \dots, z_{j-1}$ schon (rekursiv) bestimmt, wo $j \leq \lambda-1$ ist.
+	Berechne dann $Q_j := \frac{n}{p^{j+1}} (Q - (z_0 + z_1p + \dots + z_{j-1} p^{j-1}) P)$. Da $nP = \oh$, ist $\frac{n}{p^{j+1}} \cdot p^\lambda P = \oh$; da $z \kon k \modu p^\lambda$, ist $k = z + sp^\lambda, s \in \ZZ$, also $\frac{n}{p^{j+1}} Q = \frac{n}{p^{j+1}} k P = \frac{n}{p^{j+1}} zP + \underbrace{\frac{n}{p^{j+1}} \cdot sp^\lambda P}_{=\oh} = \frac{n}{p^{j+1}} zP$ und somit $Q_j = \frac{n}{p^{j+1}} (z_j p^j + \dots + z_{\lambda - 1} p^{\lambda-1}) P = \frac{n}{P} z_j P = z_j R$. \\
+	Zur Berechnung von $z_j$ ist wieder ein DL-Problem in der Untergruppe $\sprod{R}$ der Ordnung $p$ zu lösen -- etwa mit BSGS.
+\end{anw}
+
+\begin{bem}
+	Ist die Gruppenordnung glatt, ist der Algorithmus also sehr schnell.
+\end{bem}
+
+\subsubsection{Pollard-$\rho$ und Pollard-$\lambda$}
+\label{subsub:4.1.2}
+\begin{bem}
+	Der \bet{Pollard-$\rho$-Algorithmus} ist von der Laufzeit her vergleichbar mit BSGS, ist aber speicherplatztechnisch günstiger und lässt sich gut parallelisieren.
+	Mit $m$ Prozessoren wird der Algorithmus so um den Faktor $m$ schneller. \index{Pollard-$\rho$}
+\end{bem}
+
+\begin{bem}
+	Der \bet{Pollard-$\lambda$-Algorithmus} ist ähnlich, im Allgemeinen aber eher langsamer als Pollard-$\rho$.
+	Er liefert gute Ergebnisse, wenn der diskrete Logarithmus in einem hinreichend kleinen Intervall liegt.
+	Auch Pollard-$\lambda$ ist gut parallelisierbar.
+	(Die genauen Verfahren können in der Fachliteratur nachgeschlagen werden.) \index{Pollard-$\lambda$}
+\end{bem}
+
+\subsubsection{MOV und SSSA}
+\label{subsub:4.1.3}
+\begin{bem}
+	Beim \Index{MOV-Verfahren} (Autoren: Menezes, Okamoto, Vanstone) wird das DL-Problem für eine elliptische Kurve $E(\FF_{p^r})$ auf das in der Gruppe $(\FF_{p^{rl}}^*,\cdot)$ für ein $l \geq 1$ zurückgeführt.
+	Es ist also speziell nur für elliptische Kurven konstruiert, nicht für allgemeine abelsche Gruppen.
+	Zeigt sich hier, dass $l \geq 1$ so wählbar ist, dass das DL-Problem in $(\FF_{p^{rl}}^*,\cdot)$ leicht, d.h. schnell, zu lösen ist, ist die elliptische Kurve kryptographisch ungeeignet, etwa wenn $n = \ord(P)$ Teiler von $p^{rl} - 1$ ist.
+\end{bem}
+
+\begin{bem}
+	Generell lässt sich das DL-Problem in $(\FF_{p^{rl}}^*,\cdot)$ in subexponentieller Zeit schnell lösen (mit so genannten Indexkalkül-Methoden), sodass Kurven, für die das DL-Problem auf ein schnelles in einem $(\FF_{p^{rl}}^*,\cdot)$ zurückgeführt werden kann, als kryptographisch schwach bzw. ungeeignet angesehen werden.
+	Das ist etwa bei supersingulären elliptischen Kurven der Fall, bei denen die Gruppenstruktur recht gut bekannt ist.
+\end{bem}
+
+\begin{defn}[supersingulär]
+	Eine elliptische Kurve $E(\FF_{p^r})$ heißt \Index{supersingulär}, falls $ p =\Char(\FF_{p^r})$ die Spur des Frobenius teilt, d.h. $p \mid p^r +1 - \#E(\FF_{p^r})$.
+\end{defn}
+
+\begin{bem}
+	\begin{itemize}
+		\item Um zu testen, ob eine Kurve supersingulär und damit kryptographisch ungeeignet ist, muss die Gruppenordnung $\#E(\FF_{p^r})$ der elliptischen Kurve bestimmt werden -- typischerweise mit dem Schoof-Algorithmus.
+		\item Der Begriff supersingulär hat nichts mit singulären Punkten zu tun:
+		elliptische Kurven sind per Definition nicht-singulär.
+	\end{itemize}
+\end{bem}
+
+\begin{bsp}
+\label{bsp_19.21}
+	Die Kurve $E(\FF_2)\colon y^2 + y = x^3 + x + 1$ ist supersingulär, da $E(\FF_2) = \{ \oh \}$.
+\end{bsp}
+
+\begin{bem}
+	Supersingularität bleibt bei Übergang zu einem Erweiterungkörper erhalten:
+	Ist $E(\FF_{p^r})$ supersingulär, dann auch $E(\FF_{p^{rl}})$ für alle $l \geq 1$. (ohne Beweis)
+\end{bem}
+
+\begin{satz}[Erstes Kriterium für Supersingularität]
+	Sei $p \geq 3$, $E(\FF_p) \colon y^2 = x^3 + ax^2 + bx + c =: h(x)$ elliptische Kurve.
+	Dann ist $E(\FF_{p})$ genau dann supersingulär, wenn der Koeffizient vor $T^{p-1}$ ind $h(T)^{\frac{p-1}{2}} \in \FF_p[T]$ gleich $0$ ist.
+\end{satz}
+
+\begin{satz}[Zweites Kriterium für Supersingularität]
+	Sei $p = 2$, $E(\FF_{2^r}) \colon y^2 + a_1 xy + y = x^3 + a_2 x^2 + a_4 x + a_6$.
+	Dann ist $E(\FF_{2^r})$ genau dann supersingulär, wenn $a_1 = 0$. (ohne Beweis)
+\end{satz}
+
+\begin{bsp}
+	Siehe Beispiel~\ref{bsp_19.21}, und $E(\FF_p) \colon y^2 = x^3 + x$ ist für $p \kon 3 \modu 4$ supersingulär, denn: \\
+	$(T^3 + T)^{(p-1)/2} = \sum_{j=1}^{(p-1)/2} \binom{(p-1)/2}{j} T^{3j} T^{(p-1)/2-j}$ mit $\frac{p-1}{2} + 2j = p-1 \Leftrightarrow 2j = \frac{p-1}{2}$, d.h. wenn $2 \mid \frac{p-1}{2} \Leftrightarrow p \kon 1 \modu 4$ \\
+	$\Rightarrow$ Koeffizient vor $T^{p-1}$ ist $\binom{(p-1)/2}{(p-1)/4} \neq 0$ in $\FF_p$. Für $p \kon 3 \modu 4$ kommt $T^{p-1}$ nicht vor, also Koeffizient ist $0$.
+\end{bsp}
+
+\begin{bem}
+	Der MOV-Algorithmus nutzt bei einer supersingulären Kurve $E(\FF_{p^r})$ aus, dass $t = p^r + 1 - \#E(\FF_{p^r})$ nur einen der Werte $t \in \{0, \pm \sqrt{p^r}, \pm \sqrt{2p^r}, \pm \sqrt{3p^r}, \pm 2 \sqrt{p^r}\}$ annehmen kann.
+\end{bem}
+
+\begin{bem}
+	Beim \Index{SSSA-Verfahren} (Autoren: Satoh, Smart, Semaev, Araki) handelt es sich um einen schnellen Algorithmus zur Lösung des DL-Problems auf anormalen elliptischen Kurven, welche deswegen kryptographisch ungeeignet sind.
+	Die Grundidee ist, die elliptische Kurve über $\FF_p$ als eine über $\QQ_p$ zu betrachten, dem Körper der $p$-adischen Zahlen, und die Logarithmen auf eine Division in $\ZZ_p$ zurückzuführen (was leicht ist).
+\end{bem}
+
+\begin{defn}[anormal]
+	Eine elliptische Kurve $E(\FF_p)$ heißt \Index{anormal}, wenn $\#E(\FF_p) = p$ ist.
+	Dies lässt sich wieder durch Bestimmung von $\#E(\FF_p)$ mit dem Schoof-Algorithmus leicht überprüfen.
+	Der SSSA-Algorithmus kann auf Kurven über $\FF_{p^r}$ übertragen werden.
+	Er hat polynomielle Laufzeit.
+\end{defn}
+
+\subsubsection{Fazit: geeignete elliptische Kurven und Vergleich mit anderen Public-Key-Verfahren}
+\begin{bem}
+	Eine elliptische Kurve $E(\FF_{p}): y^2 = x^3 + ax + b$ mit vorgegebener Bitzahl für $p$ ist leicht zu finden -- mit Zufallszahlengenerator und Primzahltest, was auch für große Zahlen mit mehreren hundert Dezimalstellen schnell machtbar ist; dafür kennt man ganz gute Algorithmen.
+\end{bem}
+
+\begin{bem}
+	Man wählt so lange die Parameter $p,a,b$ neu, bis die Diskriminante $4a^3+27b^2$ nicht durch $p$ teilbar ist und somit eine elliptische Kurve vorliegt.
+	Ziemlich sicher liegt dann eine kryptographisch geeignete Kurve vor.
+	Das testet man nach Berechnen der Gruppenordnung $\#E(\FF_p)$ mit dem Schoof-Algorithmus:
+\end{bem}
+
+\begin{bem}
+	\begin{itemize}
+		\item Ist $\#E(\FF_p)$ glatt, d.h. hat $\#E(\FF_p)$ nur kleine Primteiler, ist die Kurve ungeeignet wegen Silver-Pohlig-Hellman.
+		\item Ist $\#E(\FF_p) = p+1$, d.h. die Kurve ist supersingulär, dann ist die Kurve ungeeignet (MOV).
+		\item Ist $\#E(\FF_p) = p$, d.h. die Kurve anormal, ist die Kurve ungeeignet (SSSA).
+	\end{itemize}
+	Ob die Kurve supersingulär oder anormal ist, kann man meist leicht daran erkennen durch Wahl von Punkten $P \in E(\FF_p)$ und dem Test, ob $(p+1)P = \oh$ bzw. $pP = \oh$ gilt.
+\end{bem}
+
+\begin{bem}
+	Die Wahl eines Punktes $P$ mit nicht zu kleiner Ordnung $n$ muss dann gewährleistet werden.
+	Speziell darf $n$ kein Teiler von $p^{rl} - 1$ sein, wenn das DL-Problem in $(\FF_{p^{rl}}^*,\cdot)$ leicht zu lösen ist, und $n$ darf auch kein Vielfaches von $p$ sein (wegen SSSA).
+	Auch sollte $n$ nicht glatt sein; man wählt in der Praxis meist Punkte $P$, für die $n = \ord(P)$ eine hinreichend große Primzahl ist; für sie sollte etwa $n > 2^{160}$ gelten.
+\end{bem}
+
+\begin{bem}
+	Die für allgemeine elliptische Kurven, die in diesem sinne als kryptographisch sicher gelten, bekannten Implementationen des DL-Problems sind alle von exponentieller Komplexität.
+	Ein Kryptographieverfahren wie ElGamal bzw. DSA gilt dann als kryptographisch sicher.
+\end{bem}
+
+\begin{bem}
+	Für konventionelle Kryptoverfahren (RSA und ElGamal/DSA auf $(\FF_{p^r}^*,\cdot)$) gibt es subexponentielle Verfahren zur Lösung des DL-Problems. Dieser Vergleich schlägt sich in der Wahl der Schlüssellängen ($=$ Bitzahl der Größe des endlichen Körpers) nieder:
+	Die Schlüssellänge eines elliptischen Kurven-Systems wächst etwas schneller als die dritte Wurzel der Schlüssellänge eines konventionellen Krypto-Systems mit ähnlicher kryptographischer Sicherheit: \todo{Grafik einfügen!}
+\end{bem}
+
+\begin{bem}
+	\begin{itemize}
+		\item Man geht davon aus, dass Kurven $E(\FF_p)$ mit $p \approx 2^{173}$. wo $\#E(\FF_p)$ einen Primteiler $\geq 2^{160}$ hat, die gleiche Sicherheit wie ein RSA-System mit $1024$ Bit bietet (für $4096$ Bit beim RSA nur etwa $313$ bei EC-System!).
+		\item Durch die geringere Schlüssellänge bei Verfahren mit elliptischen Kurven kann man diese leicht auf Smart-Cards ohne Koprozessor implementieren.
+		Solche Smart-Cards sind wesentlich billiger als Chip-Karten mit Koprozessor.
+	\end{itemize}
+\end{bem}
+
+\begin{bem}
+	Bedenken der elliptischen Kurven-Kryptographie:
+	Die Nichteignung supersingulärer und anormaler Kurven kam schnell und überraschend.
+	Es ist unklar, ob noch weitere ungeeignete Kurvenfamilien existieren und mit einem schnellen DL-Algorithmus angreifbar sind.
+\end{bem}
