@@ -220,3 +220,110 @@
 	Die Nichteignung supersingulärer und anormaler Kurven kam schnell und überraschend.
 	Es ist unklar, ob noch weitere ungeeignete Kurvenfamilien existieren und mit einem schnellen DL-Algorithmus angreifbar sind.
 \end{bem}
+
+\nextlecture
+\newpage
+\subsection{ElGamal für elliptische Kurven}
+\label{sub:4.2}
+\begin{bem}
+	Erinnerung an das allgemeine ElGamal-Verschlüsselungsverfahren für eine beliebige abelsche Gruppe $G$ aus Abschnitt~\ref{subsub:1.2.3}: \marginnote{[20]} \\
+	Alice möchte eine geheime Botschaft $m \in G$ an Bob schicken. \index{ElGamal-Verschlüsselung}
+\end{bem}
+
+\begin{anw}[ElGamal-Verfahren]
+	Das Verfahren geht wie folgt:
+	\begin{enumerate}[(1)]
+		\item Alice wählt eine Zufallszahl $\tilde{a} \in \{1,\dots,n-1\}$ und berechnet $\tilde{a}x$.
+			Alice besorgt sich Bobs öffentlichen Schlüssel $bx$ und berechnet $R = \tilde{a}(bx)+m$.
+		\item Alice schickt $\tilde{a} x$ und $R$ an Bob.
+		\item Bob berechnet $b(\tilde{a}x) = \tilde{a}(bx)$ und die Nachricht durch $R-b(\tilde{a}x) = m$.
+	\end{enumerate}
+\end{anw}
+
+\begin{anw}[ElGamal mit elliptischen Kurven]
+	Ist nun $G$ die abelsche Gruppe einer kryptographisch geeigneten elliptischen Kurve, kann dieses Verfahren als sicher angesehen werden.
+	Eine Umsetzung ist wie folgt möglich:
+	\begin{enumerate}[(i)]
+		\item Man wählt eine kryptographisch geeignete elliptische Kurve $E(\FF_p)\colon y^2 = x^3 + ax + b$, d.h. eine Primzahl $p$ und natürliche Zahlen $0 \leq a,b < p$ (und prüft die Sicherheit gemäß Abschnitt~\ref{sub:4.1}, sodass das DL-Problem schwer ist), sowie ein $P \in E(\FF_p)$ mit großer Ordnung als Basispunkt.
+		\item A und B einigen sich, wie man Klartext als einen Punkt auf der elliptischen Kurve kodiert und wieder zurückerhält (etwa wie ab \ref{anw_17.18} beschrieben).
+		\item Jeder Teilnehmer wählt eine Zahl $k \in \NN$ als privaten Schlüssel und gibt $Q = kP \in E(\FF_p)$ als öffentlichen Schlüssel bekannt: \\
+		Alice: $a \in \NN$ (geheim) und $aP$ (öffentlich) \\
+		Bob: $b \in \NN$ (geheim) und $bP$ (öffentlich) \\
+		Danach kann das ElGamal-Verfahren wie oben beschrieben durchgeführt werden.
+	\end{enumerate}
+\end{anw}
+
+\begin{bsp}
+	Man lege das Alphabet $\Sigma = \{A,B,\dots,Z\}$ zugrunde und nehme die elliptische Kurve $E(\FF_p)\colon y^2 ? x^3 + Ax + B$ mit $p = 6833, A = 5984, B=1180$ und den Basispunkt $P = (1,2631)$.
+	\begin{itemize}
+		\item Teilnehmer Bob wählt den geheimen Schlüssel $b = 2465 \in \NN$ und macht $Q = 2465\cdot P = (4748,2021)$ öffentlich.
+		\item Teilnehmerin Alice schickt den geheimen Text "\texttt{INSTITUT}" etwa in der folgenden Form (Streckungsfaktor $10$, $\tilde{a}$ = Zufallszahl) an Bob:
+		\begin{center}
+				\begin{tabular}{c|c|c|c|c}
+				Text & \texttt{IN} & \texttt{ST} & \texttt{IT} & \texttt{UT} \\ 
+				\hline $w$ & $(8,13)_{(26)} = 221$ & $(18,19)_{(26)} = 487 $ & $(8,19)_{(26)} = 227 $ & $(20,19)_{(26)} = 539 $ \\ 
+				& $\rightsquigarrow 2210$ & $\rightsquigarrow 4870$ & $\rightsquigarrow 2270$ & $\rightsquigarrow 5390$ \\
+				$M_w$ & $(2211,556)$ & $(4872,3315)$ & $(2270,2994)$ & $(5392,959)$ \\ 
+				$\tilde{a}$ & $6794$ & $3035$ & $3508$ & $2765$ \\ 
+				$\tilde{a}P$ & $(687,171)$ & $(1211,2731)$ & $(2714,2389)$ & $(6818,2527)$ \\ 
+				$\tilde{a}Q + M_w$ & $(3327,5675)$ & $(2260,17)$ & $(357,1247)$ & $(1333,6617)$
+				\end{tabular} 
+		\end{center}
+		Die Folge der Punktepaare $(\tilde{a}P,\tilde{a}Q + M_w)$ wird von Alice an Bob verschickt.
+		Bob entschlüsselt mit $\tilde{a}Q + M_w - b \tilde{a}P = M_w$, da $Q = bP$, die $x$-Koordinate von $M_w \in E(\FF_p)$ ergibt dann mit $\floor*{\frac{x}{10}} = w$ den Textblock.
+	\end{itemize}
+\end{bsp}
+
+\newpage
+\subsection{ECDSA-Signaturen}
+\label{sub:4.3}
+\begin{bem}
+	Das \Index{ECDSA-Verfahren} ist das DSA-Verfahren (elektronische Unterschrift) auf elliptischen Kurven.
+	Alice möchte dabei ein Dokument $m \in \mathcal{M}$ an Bob schicken und signieren.
+\end{bem}
+
+\begin{anw}[ECDSA-Verfahren -- Schritt 1]
+	Zuerst müssen sich die Teilnehmer Alice und Bob darauf einigen, auf welcher elliptischen Kurve gearbeitet werden soll.
+	\begin{itemize}
+		\item Gewählt werden ein Grundkörper $\FF_p$ (aber auch $\FF_{2^r}$ möglich) mit $p > 3$ prim, $A,B \in \FF_p$ für die elliptische Kurve $E(\FF_p)\colon y^2 = x^3 + Ax + B$ (im Fall $\FF_{2^r}$ nimmt man die Gleichung $y^2 + xy = x^3 + Ax^2 + B$), sodass $E(\FF_p)$ eine kryptographisch geeignete elliptische Kurve ist.
+		\item Gewählt wird ein Basispunkt $P = (x,y) \in E(\FF_p)$ mit $n := \ord(P) \in \NN$. Verlangt wird außerdem, dass $n$ prim ist mit $n > 2^{160}$ und $n > 4\sqrt{p}$.
+		Weiter soll $n$ kein Teiler von $p-1, p^2-1, \dots, p^{30}-1$ sein und $n \neq p$ gelten.
+	\end{itemize}
+\end{anw}
+
+\begin{bem}
+	\begin{itemize}
+		\item Die Bedingung $n > 2^{160}$ sorgt dafür, dass das DL-Problem in $\sprod{P}$ nicht mit Pollard-$\rho$ angreifbar ist.
+		Ist $n$ kein Teiler von $p^k-1, k \leq 30$, kann man den MOV-Algorithmus nicht einsetzen.
+		Wegen $n \neq P$ greift auch der SSSA-Algorithmus nicht.
+		\item Es reicht, die Bedingungen an $P$ zu erfüllen; die Kurve ist dann "von selbst" kryptographisch geeignet: Letztlich arbeitet man mit der Untergruppe $\sprod{P} \subseteq E(\FF_p)$.
+		\item Dass die Kurve zufällig erzeugt wird per Zufallsgenerator für $p,A,B, P=(x,y)$, sorgt für zusätzliche Sicherheit; die zufällige Erzeugung sollte in der Praxis idealerweise überprüfbar sein, um auszuschließen, dass kryptographisch schwache Kurven durch Betrüger eingeschleust werden.
+	\end{itemize}
+\end{bem}
+
+\begin{anw}[weitere Schritte]
+	\begin{enumerate}[(1)]
+		\setcounter{enumi}{1}
+		\item Alice wählt eine Zufallszahl $a \in \{0,\dots,n-1\}$ als privaten Schlüssel, der Punkt $aP \in E(\FF_p)$ gibt sie als öffentlichen Schlüssel bekannt.
+		Für ihr zu unterschreibendes Dokument $m \in \mathcal{M}$ berechnet sie $h(m) \in \{0,1\}^N$ für eine vorher festgelegte geeignete Hashfunktion; der Bitstring $(a_0,a_1,\dots,a_{N-1}$ wird dann als $H(m) = \sum_{i=0}^{N-1} a_i 2^{N-1-i} \leq 2^N-1$ interpretiert.
+		\item Alice wählt eine Zufallszahl $\tilde{a} \in \{1,\dots,n-1\}$ ($\tilde{a} \neq 0$) und berechnet den Punkt $\tilde{a}P = (u,v)$ sowie den Rest $\Psi(\tilde{a}P) \kon u \modu n$. \\
+		(Die Funktion $\Psi\colon \sprod{P} \rightarrow \{0,1,\dots,n-1\}$ ist zwar nicht bijektiv, die Urbildmenge eines $u$ ist aber klein genug, sodass unwahrscheinlich ist, dass $\Psi(R) = \Psi(kP)$ gilt, ohne dass $R = kP$ gilt.
+		Das reicht in der Praxis.)
+		\item Alice berechnet $\tilde{a}^{-1} \modu n$ und die Restklasse $s = \tilde{a}^{-1} (H(m) - \Psi(\tilde{a}P)a) \modu n$.
+		Falls $s \kon 0 \modu n$, muss ein neues $\tilde{a}$ gewählt werden. Also zurück zu Schritt 3, da Bob bei der Prüfung der Unterschrift $s$ invertieren wird.
+		\item Alice schickt das Dokument $m \in \mathcal{M}$ zusammen mit ihrer Unterschrift $(\Psi(\tilde{a}P),s)$ an Bob.
+	\end{enumerate}
+\end{anw}
+
+\begin{anw}[Verifikation]
+	Bob überprüft die Unterschrift wie folgt:
+	\begin{enumerate}[(1)]
+		\item Er testet, ob $\Psi(\tilde{a}P), s \in \{0,1,\dots,n-1\}$.
+		\item Er berechnet $H(m) \in \NN, s^{-1} \modu n$ und den Punkt $R := s^{-1} (H(m)P - \Psi(\tilde{a}P) \cdot aP) \in E(\FF_p)$.
+		\item Für $R = \oh$ ist die Unterschrift ungültig. Für $R = (x,y) \in E(\FF_p) \setminus \{\oh\}$ ist die Unterschrift gültig, wenn $x = \Psi(\tilde{a}P)$ ist, sonst nicht.
+	\end{enumerate}
+\end{anw}
+
+\begin{bem}[Korrektheit der Verifikation]
+	Denn wenn die Unterschrift von Alice stammt, ist $s = \tilde{a}^{-1}(H(m)-\Psi(\tilde{a}P)a) \modu n$, also gilt $s^{-1} \tilde{a}^{-1}(H(m) - \Psi(\tilde{a}P)a) \kon 1 \modu n$, d.h. $s^{-1}(H(m)-\Psi(\tilde{a}P)a) \kon \tilde{a} \modu n$ und somit $R = s^{-1}(H(m)P - \Psi(\tilde{a}P)aP) = s^{-1}(H(m)-\Psi(\tilde{a}P)a)P = \tilde{a} P$, sodass die $x$-Koordinaten der Punkte $R$ und $\tilde{a}P$ übereinstimmen müssen.
+\end{bem}
