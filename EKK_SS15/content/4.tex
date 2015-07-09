@@ -327,3 +327,104 @@
 \begin{bem}[Korrektheit der Verifikation]
 	Denn wenn die Unterschrift von Alice stammt, ist $s = \tilde{a}^{-1}(H(m)-\Psi(\tilde{a}P)a) \modu n$, also gilt $s^{-1} \tilde{a}^{-1}(H(m) - \Psi(\tilde{a}P)a) \kon 1 \modu n$, d.h. $s^{-1}(H(m)-\Psi(\tilde{a}P)a) \kon \tilde{a} \modu n$ und somit $R = s^{-1}(H(m)P - \Psi(\tilde{a}P)aP) = s^{-1}(H(m)-\Psi(\tilde{a}P)a)P = \tilde{a} P$, sodass die $x$-Koordinaten der Punkte $R$ und $\tilde{a}P$ übereinstimmen müssen.
 \end{bem}
+
+\nextlecture
+\newpage
+\subsection{Patente, Standards und Schlussbemerkungen}
+\label{sub:4.4}
+\subsubsection{Verwendung elliptischer Kurven}
+\label{subsub:4.4.1}
+\begin{bem}
+	Die sehr praktische Nutzbarkeit elliptischer Kurven ist mittlerweile sehr vielseitig. \marginnote{[21]}
+	Elliptische Kurven können außer für kryptographische Anwendungen auch für Pseudo-Zufallsgeneratoren oder das Faktorisierungsproblem eingesetzt werden.
+	Kryptographie-Anwendungen gehören aber zu ihrem Haupteinsatzgebiet.
+	Man bezeichnet die Kryptographie-Anwendungen elliptischer Kurven zusammenfassen mit \Index{ECC} (= elliptic curve cryptography").
+\end{bem}
+
+\begin{bem}
+	Die in Österreich gängigen Bürgerkarten (e-Card oder Bankomat-Karte) verwenden schon seit 2004/2005 ECC.
+	Die meisten Reisepässe europäischer Staaten verwenden ECC zumindest als Zugriffsschutz für den Chip, manche Länder (u.a. Deutschland und Schweiz) auch, um die gespeicherten Daten mit "Passive Authentification" zu schützen.
+	Auch die deutsche Gesundheitskarte hat auf ihrem Soeicherchip ECC implementiert.
+\end{bem}
+
+\begin{bem}
+	Die Firma Sony benutzt ECDSA zur digitalen Signierung von Software für die Playstation 3.
+\end{bem}
+
+\subsubsection{Patente}
+\label{subsub:4.4.2}
+\begin{bem}
+	Die allgemeine Idee zu ECC wurde nicht patentiert, d.h. ECC selbst ist prinzipiell patentfrei (im Gegensatz zu RSA oder DH).
+	Es gibt aber eine Reihe von Patenten zu effizienten Implementationen.
+	Daher sind Implementierungen mit Patentproblemen konfrontiert.
+\end{bem}
+
+\begin{bem}
+	Die kanadische Firma \href{http://www.certicom.com}{Certicom} besitzt über 350 Patente, die für ECC oder Public-Key-Kryptographie benötigt werden.
+	Davon wurden 26 von der NSA im Wert von 25 Millionen US-Dollar lizenziert, um ECC-Verfahren zu Zwecken der nationalen Sicherheit zu implementieren; davon Kurven über $\FF_p$ für Primzahlen $p$ mit 256, 384 und 512 Bit.
+	Angeblich sind einige dieser Lizenzen abgelaufen, weil die NSA die Lizenzbeträge dafür nicht mehr bezahlt hat.
+\end{bem}
+
+\begin{bem}
+	Die patent-bedingte Unsicherheit bzgl. der ECC ist mit ein Grund dafür, dass die ECC nicht in jederlei Hinsicht als empfehlenswert akzeptiert wird.
+\end{bem}
+
+\begin{bem}
+	Auf der Konferenz "ECC 2015" September 2015 in Bordeaux wird (wieder) über Standards der ECC diskutiert werden.
+\end{bem}
+
+\begin{bem}
+	Patentstreit Certicom gegen Sony 2007: Certicom klagte Sony wegen der Verwendung zweier ihrer US-Patente zur ECC an.
+	Die Anklage wurde 2009 abgewiesen.
+\end{bem}
+
+\begin{bem}
+	Die Firma Certicom wurde 2009 von RIM (Research in Motion, heute Blackberry) zum Preis von 130 Millionen US-Dollar als Tochterfirma übernommen.
+\end{bem}
+
+\subsubsection{Standards und Sicherheit}
+\label{subsub:4.4.3}
+\begin{bem}
+	Eine elliptische Kurve wird zur Benutzung für gewöhnlich nicht jedes mal neu erzeugt: Die Berechnung von $\#E(\FF_p)$ ist zeitaufwendig und kompliziert zu implementieren.
+	Daher werden Kurvenparameter geeigneter elliptischer Kurven zur praktischen Verwendung von verschiedenen Organisationen veröffentlicht ("Standardkurven", "benannte Kurven"), z.B. von der NIST (US National Institute of Standards and Technology) oder SECG (Standards for Efficient Cryptography Group).
+\end{bem}
+
+\begin{bem}
+	Man kann Kurven selbst zur Nutzung erzeugen, wenn unter anderem die in Abschnitt~\ref{sub:4.1} genannten Kriterien für die kryptographische Eignung nachprüfbar erfüllt sind.
+	Diese Liste ist nicht vollständig; die Kriterien sollten dem aktuellen Stand der Forschung angepasst sein.
+	Auch Patentfragen werden dann wichtig.
+\end{bem}
+
+\begin{bem}
+	Verschiedene Organisationen geben Sicherheitsstandards für den Gebrauch der ECC heraus.
+	In Deutschland gibt etwa das BSI (Bundesamt für Sicherheit in der Informationstechnik) technische Vorgaben und Empfehlungen zur ECC-Implementierung auf der Basis des ISO/IEC 15946-Standards heraus.
+	So halten sich z.B. deutsche Banken an diese Vorgaben.
+\end{bem}
+
+\begin{bem}
+	Im Jahr 2013 meldete die New York Times auf Grundlage eines Snowden-Dokuments, dass der vom NIST als Standard gesetzte ECC-Algorithmus "Dual\_EC\_DRBG" zur Erzeugung von Pseudo-Zufallszahlen eine von der NSA eingeschleuste Schwäche im Algorithmus und der empfohlenen elliptischen Kurve besitzen würde.
+	Die Firma RSA-Security gab daraufhin die Empfehlung, darauf basierende Algorithmen nicht weiter zu verwenden.
+	Das NIST hat die Empfehlung des Algorithmus inzwischen zurückgezogen.
+	Kryptographie-Experten äußerten aufgrund dieser "NSA Hintertür" auch Bedenken gegenüber mancher der vom NIST empfohlenen elliptischen Kurve und rieten wieder zur Nutzung EC-freier Kryptographie\footnote{vgl. Artikel \url{http://www.heise.de/security/artikel/Nach-Snowden-Wenig-Schlaf-fuer-Kryptoforscher-2392236.html}}. Pikant ist, dass Certicom bereits 2006 eine Patentanmeldung eingereicht hatte, in der die Hintertür beschrieben wurde\footnote{\href{http://www.spiegel.de/netzwelt/web/kryptografie-hintertueren-die-nsa-generalschluessel-fuers-internet-a-922588.html}{http://www.spiegel.de/netzwelt/web/kryptografie-hintertueren-die-nsa-generalschluessel-fuers-internet-a-922588.html} \\ \href{http://www.heise.de/security/meldung/Konkurrenz-fuer-die-NIST-Bernsteins-Elliptische-Kurven-auf-dem-Weg-zum-Standard-2560881.html}{http://www.heise.de/security/meldung/Konkurrenz-fuer-die-NIST-Bernsteins-Elliptische-Kurven-auf-dem-Weg-zum-Standard-2560881.html}}.
+\end{bem}
+
+\subsubsection{Mögliche und bekannte Angriffe auf ECC}
+\label{subsub:4.4.4}
+\begin{bem}
+	Das DL-Problem auf elliptischen Kurven ist mittlerweile auch gegenüber einem Angriff mit einem Quantencomputer nicht mehr resistent:
+	der Shor-Algorithmus konnte auf elliptische Kurven-Gruppen übertragen werden\footnote{\url{http://arxiv.org/abs/quant-ph/0301141}}.
+	Ein solcher Angriff braucht nur etwa halb so lange wie der klassische Shor-Algorithmus zur Lösung des Faktorisierungsproblems bei einem RSA-Verfahren mit vergleichbarer Sicherheit.
+	Auch der Speicheraufwand eines Quantencomputers (Anzahl benötigter Qubits) ist dabei um (grob) den Faktor $1/3$ geringer.
+	Bei Aufkommen von Quantencomputern werden die ECC-Verfahren daher Jahre vor den entsprechenden RSA-Verfahren geknackt sein.
+	An Kryptographie-Alternativen wird derzeit geforscht ("post-quantum-cryptology").
+\end{bem}
+
+\begin{bem}
+	Mai 2011 veröffentlichten Brumley und Tuveri eine Arbeit zu einem erfolgreichen Timing-Angriff auf ECDSA in Form eines "Seitenkanalangriffs":
+	Weil Ver- und Entschlüsseln mit verschiedenen Schlüsseln unterschiedlich viel Zeit in Anspruch nimmt, konnte durch Abhören der verschlüsselten Kommunikation (über einen "Seitenkanal") auf die privaten Schlüssel geschlossen werden.
+\end{bem}
+
+\begin{bem}
+	Im Jahr 2010 gelang es einer Hackergruppe, den private key bei der von Sony für die Playstation 3 benutzten ECDSA zu erbeuten und damit das Sicherheitssystem fast vollständig zu unterwandern.
+	Dies war aber vor allem auf Implementierungsfehler von Sony zurückzuführen und beruhte nicht auf etwaige Sicherheitslücken des verwendeten ECC-Systems.
+\end{bem}
