@@ -8,7 +8,7 @@ In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster 
 
 * SoSe 2015
 	* [Elliptische Kurven und Kryptographie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EKK_SS15/EKK.pdf?raw=true "Elliptische Kurven und Kryptographie") (Phil)
-	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes; momentan sehr unvollständig…)
+	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes; momentan noch sehr unvollständig…)
 	* [Numerische Analysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/NumAna_SS15/Num_Ana.pdf?raw=true "Numerische Analysis") (Tobias)
 	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS15/Analysis2.pdf?raw=true "Analysis II.") (Tim)
 * WiSe 2014
@@ -52,24 +52,17 @@ für die Beteiligung an diesem Projekt!
 #### Todo-Liste
 Hier eine (sehr unvollständige) Liste, was noch zu tun ist:
 
-* Allgemein
-	* Synchronisation mit Sciebo einrichten
 * Höhere Algebra
 	* Ausführlichere Beweise zu 2.45 und 2.48
 	* Einträge im Inhaltsverzeichnis vervollständigen
-* Grundlagen der Analysis, Topologie, Geometrie
-	* Dateigröße verringern … 7,2MB sind zu viel. Dazu müssen der Torus und die 3D-Glockenfunktion kleiner werden, jeweils >3MB
 * Differentialformen und Mannigfaltigkeiten
 	* Zeichnungen texen
 * Partielle Differentialgleichungen I
 	* Großteil der handschriftlichen Zeichnungen des Dozenten fehlen
 
 #### Hinweise (technische und rechtliche)
-Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Dazu müssen die Schriftarten _Source Sans Pro_, _Ubuntu_, _Linux Libertine_ und _Consolas_ installiert sein. Erstere
-ist eine OpenSource-Schriftart von Adobe und [HIER](http://sourceforge.net/projects/sourcesans.adobe/files/ "Source Sans Pro") frei verfügbar, _Ubuntu_ ist [HIER](https://www.google.com/fonts/specimen/Ubuntu "Ubuntu auf GoogleFonts") frei verfügbar und _Linux Libertine_ ist [HIER](http://www.linuxlibertine.org/index.php?id=91&L=1 "linuxlibertine.org") frei verfügbar.
- Die letzte ist zumindest unter Windows und OS X vorinstalliert.  
-Wenn die Schriften nicht verfügbar sind, dann müssen entweder die entsprechenden Befehle in `mitschrift.tex` modifiziert werden oder 
-man verwendet den Standardtreiber `pdfLaTeX`.
+Die TeX-Dateien sind für den Einsatz mit `XeLaTeX` optimiert! Die ältere Variante `mitschrift.tex` ist aber so aufgebaut, dass sie auch mit `pdfLaTeX` kompiliert werden kann. `mitschrift2.tex` nutzt ein spezielles Kommando, dass die Editoren dazu bewegt, automatisch `XeLaTeX` für diese Datei zu benutzen. Alle benutzten Schriftarten sind Bestandteil einer üblichen LaTeX-Installation. Sollten die Dateien Fehler produzieren, ist in 98% der Fälle die LaTeX-Installation nicht auf dem aktuellsten Stand oder in irgend einer Form zerschossen! Dies gilt insbesondere, wenn man LaTeX über die Paketverwaltung von Linux installiert, denn dort stehen meist nur völlig veraltete Versionen bereit.
+
 
 Die Präambel darf natürlich gerne weiterverwendet werden (GPLv2-Lizenz, siehe `LICENSE`), eine Namensnennung ist nicht nötig … aber ich freue mich natürlich drüber :)
 
