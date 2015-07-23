@@ -393,7 +393,7 @@ Ein topologischer Raum heißt \bet{normal}\index{normaler topologischer Raum}, f
 Ein wichtiger Satz über normale Räume ist der folgende:
 \end{erinnerung}
 
-\begin{satz}[{name={Fortsetzungssatz von Tietze}}]
+\begin{satz}[{name={Fortsetzungssatz von Tietze}},label=fort_tietze]
 Sei $X$ ein normaler Raum, $A \subset X$ abgeschlossen und $V$ ein endlich dimensionaler $K$-Vektorraum. Zu jeder stetigen Abbildung $f \colon A \to V$ existiert eine 
 stetige Abbildung $F \colon X \to V$ mit $F|_A=f$.
 \end{satz}
@@ -409,12 +409,12 @@ $p \circ s = \id_X$, das heißt $s(x) \in E_x$. Jedes Vektorbündel hat einen Sc
 \end{definition*}
 
 \begin{lemma}[{name=[Fortsetzungen von Schnitten auf abgeschlossenen Teilmengen]},label=schnitte_Hd_Raum]
-Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colon E \to X$ und $p' \colon E' \to X$ zwei $K$-Vektorbündel. Dann gilt:
+Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colon E \to X$ und $p' \colon E' \to X$ zwei $K$-Vektorbündel über $X$. Dann gilt:
 \begin{enumerate}[a)]
 	\item Jeder Schnitt $s \colon A \to E|_A$ lässt sich zu einem Schnitt $\overline{s} \colon X \to E$ fortsetzen.
 	\item Sei $\iota \colon A \hookrightarrow X$ die Inklusion und $E|_A := \iota^* E$, sowie $E'|_A := \iota^* E'$. Sei weiter $f \colon E|_A \to E'|_A$ ein Morphismus von 
 	Vektorbündeln. Dann existiert ein Morphismus $\hat{f} \colon E \to E'$, der $f$ fortsetzt. Ist $f$ ein Isomorphismus, dann existiert eine offene Menge $U \supset A$, 
-	sodass $\hat{f}|_U \colon E|_U \to E'|_U$ ein Isomorphismus von Vektorbündeln ist. \todo{Revision}
+	sodass $\hat{f}|_U \colon E|_U \to E'|_U$ ein Isomorphismus von Vektorbündeln ist.
 \end{enumerate}	
 \end{lemma}
 
@@ -422,56 +422,61 @@ Sei $X$ ein kompakter Hausdorffraum, $A \subset X$ abgeschlossen. Seien $p \colo
 \leavevmode
 \begin{enumerate}[a)]
 	\item Wir wählen eine endliche Überdeckung $(U_i)_{i=1,\ldots ,N}$ von $X$, sodass lokale Trivialisierungen $\varphi_i\colon E|_{U_i}\to U_i\times K^n$ existieren. Nach 
-	dem Fortsetzungssatz lässt sich 
+	dem Fortsetzungssatz \ref{fort_tietze} lässt sich 
 	\[
 		\pr_{K^n} \circ \varphi_i \circ s\big|_{U_i \cap A} \colon U_i \cap A \longrightarrow K^n 
 	\]
 	zu einer stetigen Abbildung auf $U_i$ fortsetzen, also auch $s|_{U_i \cap A}$ selbst. Sei $\overline{s}_i$ eine solche Fortsetzung. Sei $\psi_i \colon X \to [0,1]$ eine 
-	Partition der Eins\footnote{siehe \url{https://de.wikipedia.org/wiki/Zerlegung_der_Eins}}, die der Überdeckung $(U_i)_{i=1,\ldots ,N}$ untergeordnet ist. Sei
+	Partition der Eins\footnote{siehe \url{https://de.wikipedia.org/wiki/Zerlegung_der_Eins}}\index{Partition der Eins}, die der Überdeckung $(U_i)_{i=1,\ldots ,N}$ 
+	untergeordnet ist. Sei
 	\[
 		\overline{s} = \sum_{i=1}^{N} \psi_i \cdot \overline{s}_i \colon X \longrightarrow E 
 	\]
 	Dann gilt $\overline{s}|_A = \enbrace*{\sum_{i=1}^{N} \psi_i} \cdot s|_A= s|_A$.
-	\item Die Morphismen $E \xrightarrow{f} E'$ entsprechen den Schnitten des Vektorbündels $\Hom(E,E') \to X$ wie folgt: Jedem $f$ lässt sich ein Schnitt
+	\item Die Morphismen $f \colon E \to E'$ entsprechen den Schnitten des Vektorbündels $\Hom(E,E') \to X$ wie folgt: Jedem $f$ lässt sich ein Schnitt
 	\[
 		s_f(x)(v) := f(v)
 	\]
-	zuordnen. Jedem Schnitt $s \colon X \to \Hom(E,E')$ entspricht ein Morphismus $f_s(v)=s \enbrace*{p(v)}(v) \in E'_{p(v)}$. Somit folgt der erste Teil aus a).
+	für $x \in X$ und $v \in E_x$ zuordnen. Jedem Schnitt $s \colon X \to \Hom(E,E')$ entspricht ein Morphismus $f_s(v)=s \enbrace[\big]{p(v)}(v) \in E'_{p(v)}$. Somit 
+	folgt der erste Teil der Aussage aus a).
 	
-	Sei $\pi \colon \Hom(E,E') \to X$ die Bündelabbildung. Sei weiter
+	Sei nun $\pi \colon \Hom(E,E') \to X$ die Bündelabbildung. Sei weiter
 	\[
-		\Iso(E,E') = \set[g \in \Hom(E,E')]{g \colon E_{\pi(g)} \to E'_{\pi(g)} \text{ ist ein Isomorphismus}} 
+		\Iso(E,E') = \mengenB[\big]{g \in \Hom(E,E')}{g \colon E_{\pi(g)} \to E'_{\pi(g)} \text{ ist ein Isomorphismus}} \subset \Hom(E,E')
 	\]
-	Dann ist $\Iso(E,E') \to X$ ein lokal triviales Bündel, allerdings \emph{kein} Vektorbündel. Sind $E$ und $E'$ $n$-dimensional, ist die Faser von $\Iso(E,E')$ homöomorph
-	zu $\GL_n(K)$. Da $\GL_n(K) \subset M_n(K)$ offen ist und $\Iso(E,E')$ lokal trivial ist, folgt, dass $\Iso(E,E') \subset \Hom(E,E')$ offen ist.\footnote{da lokal 
-	homöomorph zu $U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
-	$U = {s_{\hat{f}}}\mkern-0.5mu^{-1} \enbrace*{\Iso(E,E')}$ für $s_{\hat{f}} \colon X \to \Hom(E,E')$. Dann ist $U$ offen und $s_{\hat{f}}|_U$ entspricht einem 
+	Dann ist $\Iso(E,E') \to X$ ein lokal triviales Bündel, allerdings \emph{kein} Vektorbündel. Sind $E$ und $E'$ $n$-dimensional, ist die Faser von $\Iso(E,E')$ an jedem 
+	Punkt homöomorph zu $\GL_n(K)$. Da $\GL_n(K) \subset M_n(K)$ offen ist und $\Iso(E,E')$ lokal trivial ist, folgt, dass $\Iso(E,E') \subset \Hom(E,E')$ offen 
+	ist.\footnote{da lokal homöomorph zu $U \times \GL_n(K) \hookrightarrow U \times M_n(K)$} Sei $\hat{f}$ eine Fortsetzung von $f$. Setze 
+	$U = {s_{\hat{f}}}\mkern-0.5mu^{-1} \enbrace[\big]{\Iso(E,E')}$ für $s_{\hat{f}} \colon X \to \Hom(E,E')$. Dann ist $U$ offen und $s_{\hat{f}}|_U$ entspricht einem 
 	Isomorphismus $\hat{f} \colon E|_U \to E'|_U$. \qedhere
 \end{enumerate}	
 \end{beweis}
 
 
-\begin{lemma}[{name=[{Trivialisierbarkeit von $E \to X \times [a,b]$, wenn $E|_{X \times [a,c]}$, $E|_{X \times [c,b]}$ trivialisierbar}]},label=trivialisierbarkeit_verkleben]
-Seien $a,b \in \mathds{R}$ mit $a <b$ und $X$ ein topologischer Raum. Sei weiter $p \colon E \to X \times [a,b]$ ein $K$-Vektorbündel. Es geben $c \in (a,b)$, so dass 
-$E|_{X \times [a,c]}$ und $E|_{X \times [c,b]}$ trivialisierbar sind. Dann ist auch $E$ trivialisierbar.	
+\begin{lemma}[{name=[{Trivialisierbarkeit von $E \to X \times [a,b]$, wenn $E|_{X \times [a,c]}$, $E|_{X \times [c,b]}$ % 
+trivialisierbar}]},label=trivialisierbarkeit_verkleben]
+Seien $a,b \in \mathds{R}$ mit $a <b$ und $X$ ein topologischer Raum. Sei weiter $p \colon E \to X \times [a,b]$ ein $K$-Vektorbündel. Es gebe außerdem ein $c \in (a,b)$, 
+so dass $E|_{X \times [a,c]}$ und $E|_{X \times [c,b]}$ trivialisierbar sind. Dann ist auch $E$ trivialisierbar.	
 \end{lemma}
 
 \begin{beweis}
-Sei ohne Beschränkung der Allgemeinheit $X$ zusammenhängend. Seien 
+Wir können den Beweis für jede Komponente von $X$ einzeln führen und daher ohne Beschränkung der Allgemeinheit annehmen, dass $X$ zusammenhängend ist. Seien 
 \begin{align*}
 	\varphi_a \colon X \times [a,c] \times K^n &\xrightarrow{\minwidthbox{\cong}{2em}} E\big|_{X \times [a,c]} \\ 
 	\varphi_b \colon X \times [c,b] \times K^n &\xrightarrow{\minwidthbox{\cong}{2em}} E\big|_{X \times [c,b]}
 \end{align*}
 entsprechende Trivialisierungen. Sei außerdem
 \[
-	h := \enbrace*{\varphi_b\big|_{X \times \set{c} \times K^n }} ^{-1} \circ  \enbrace*{\varphi_a\big|_{X \times \set{c} \times K^n}} \colon X \times \set{c} \times K^n    
+	h := \enbrace*{\varphi_b\big|_{X \times \set{c} \times K^n }} ^{-1} \circ  \enbrace*{\varphi_a\big|_{X \times \set{c} \times K^n}} \colon X \times \set{c} \times K^n 
+	\longrightarrow X \times \set{c} \times K^n    
 \]
-$h$ hat die Form $h(x,v)= (x , g(x) \cdot v)$ für eine stetige Abbildung $g \colon X \to \GL_n(K)$. Sei jetzt 
+Dann ist $h$ ein Isomorphismus eines trivialen $K$-Vektorbündels über $X$.
+Dieser hat die Form $h(x,v)= (x , g(x) \cdot v)$ für eine stetige Abbildung $g \colon X \to \GL_n(K)$. Sei jetzt 
 \[
-	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \quad (x,t,v') \longmapsto (x,t,g(x)v')
+	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \quad (x,t,v') \longmapsto \enbrace*{x,t,g(x)\cdot v'}
 \]
-Dann gilt $\varphi_a|_{X \times \set{c} \times K^n} = \varphi_b \circ w |_{X \times \set{c} \times K^n }$. Daher können wir diese beiden Abbildungen zu einem Isomorphismus 
-von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen.	
+Dann gilt $\varphi_a|_{X \times \set{c} \times K^n} = \varphi_b \circ w |_{X \times \set{c} \times K^n }$ und $w$ ist ein Isomorphismus. Daher können wir diese beiden 
+Abbildungen zu einem Isomorphismus von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen.	 \todo{Revision}
 \end{beweis}
 
 \begin{lemma}[{name=[{Endliche Überdeckung $\set{U_i}_{i=1}^N$, sodass Trivialisierbarkeit auf $U_i$ gilt}]},label=trivialisierbarkeit_ueberdeckung]
