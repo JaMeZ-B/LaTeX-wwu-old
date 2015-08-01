@@ -471,12 +471,12 @@ entsprechende Trivialisierungen. Sei außerdem
 	\longrightarrow X \times \set{c} \times K^n    
 \]
 Dann ist $h$ ein Isomorphismus eines trivialen $K$-Vektorbündels über $X$.
-Dieser hat die Form $h(x,v)= (x , g(x) \cdot v)$ für eine stetige Abbildung $g \colon X \to \GL_n(K)$. Sei jetzt 
+Dieser hat die Form $h(x,v)= \enbrace[\big]{x , g(x) \cdot v}$ für eine stetige Abbildung $g \colon X \to \GL_n(K)$. Sei jetzt 
 \[
-	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \quad (x,t,v') \longmapsto \enbrace*{x,t,g(x)\cdot v'}
+	w \colon X \times [c,b] \times K^n \longrightarrow X \times [c,b] \times K^n \quad , \qquad (x,t,v') \longmapsto \enbrace[\big]{x,t,g(x)\cdot v'}
 \]
 Dann gilt $\varphi_a|_{X \times \set{c} \times K^n} = \varphi_b \circ w |_{X \times \set{c} \times K^n }$ und $w$ ist ein Isomorphismus. Daher können wir diese beiden 
-Abbildungen zu einem Isomorphismus von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen.	 \todo{Revision}
+Abbildungen zu einem Isomorphismus von Vektorbündeln $X \times [a,b] \times K^n \to E$ zusammensetzen.
 \end{beweis}
 
 \begin{lemma}[{name=[{Endliche Überdeckung $\set{U_i}_{i=1}^N$, sodass Trivialisierbarkeit auf $U_i$ gilt}]},label=trivialisierbarkeit_ueberdeckung]
@@ -485,15 +485,15 @@ $E|_{U_i \times I}$ trivialisierbar ist.
 \end{lemma}
 
 \begin{beweis}
-Sei $x \in X$ und $t \in I$. Dann existieren offene Umgebungen $U(t) \subset X$ und $I(t) \subset I$, sodass $E|_{U(t) \times I(t)}$ trivialisierbar ist. Da $I$ kompakt ist,
-existiert eine endliche Folge $0=t_0 < t_1 < \ldots < t_N =1$ zusammen mit offenen Umgebungen $U_i$ von $x$, so dass $E|_{U_i \times [t_{i-1}, t_i]}$ trivialisierbar ist. 
-Sei nun $U := \bigcap_{i=1}^N U_i$. Nach Lemma \ref{trivialisierbarkeit_verkleben} ist $E|_{U \times I}$ trivialisierbar. Da $X \times I$ kompakt ist, wird es von endlichen 
-vielen solcher Mengen überdeckt. 	
+Sei $x \in X$ und $t \in I$. Dann existieren offene Umgebungen $x \in U(t) \subset X$ und $I(t) \subset I$, sodass $E|_{U(t) \times I(t)}$ trivialisierbar ist. Da $I$ 
+kompakt ist, existiert eine endliche Folge $0=t_0 < t_1 < \ldots < t_n =1$ zusammen mit offenen Umgebungen $U_i$ von $x$, so dass $E|_{U_i \times [t_{i-1}, t_i]}$ 
+trivialisierbar ist. Sei nun $U := \bigcap_{i=1}^n U_i$. Nach \autoref{trivialisierbarkeit_verkleben} ist $E|_{U \times I}$ trivialisierbar. Da $X \times I$ kompakt ist, 
+wird es von endlichen vielen solcher Mengen überdeckt. 	
 \end{beweis}
 
 
 \begin{theorem}[{name=[{Isomorphismus von Vektorbündeln $E$ und $E|_{X \times \set{1}} \times I$ für $X$ kompakt}]},label=iso_vektb_intervall]
-Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbündel. Sei $E_1 = E|_{X \times \set{1}}$.
+Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbündel. Sei weiter $E_1 = E|_{X \times \set{1}}$.
 \begin{enumerate}[a)]
 	\item Es gibt einen Isomorphismus von Vektorbündeln über $X \times I$
 	\[
@@ -502,7 +502,7 @@ Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbün
 		\end{tikzcd}
 	\]
 	mit $\varphi|_{p ^{-1}(X \times \set{1})} =\id_{E_1}$
-	\item Sei $(X,A)$ ein Ko-Raumpaar, $h \colon X \times I \to Y$ eine stetige Abbildung und $p' \colon E' \to Y$ ein $K$-Vektorbündel mit $E \cong h^* E'$. Falls jetzt
+	\item Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}, $h \colon X \times I \to Y$ eine stetige Abbildung und $p' \colon E' \to Y$ ein $K$-Vektorbündel mit $E \cong h^* E'$. Falls jetzt
 	$h_t(a)=h_0(a)$ für alle $a \in A$ und $t \in I$, dann lässt sich der Isomorphismus aus a) so wählen, dass er den durch $h$ induzierten Isomorphismus 
 	$E|_{A \times I} \to E_1|_{A} \times I$ fortsetzt.
 \end{enumerate}	
@@ -510,52 +510,77 @@ Sei $X$ ein kompakter Raum und sei $p \colon E\to X \times I$ ein $K$-Vektorbün
 
 \begin{beweis}
 Nach Lemma \ref{trivialisierbarkeit_ueberdeckung} können wir eine Überdeckung von $X \times I$ durch offene Mengen der Form $U_i \times I$ mit $i \in \set{1,\ldots ,N}$ 
-finden, so dass $E|_{U_i \times I}$ trivialisierbar ist. Seien $h_i \colon U_i \times I \times K^n \xrightarrow{\cong} E|_{U_i \times I}$ Trivialisierungen. Seien 
-$\eta_i \colon X \to [0,1]$  stetige Funktionen mit folgenden Eigenschaften:
-
-\begin{enumerate*}[(i),itemjoin={,\hspace{2em}}]
-	\item $\supp(\eta_i) \subset U_i$
-	\item $\max_{i=1,\ldots ,N} \eta_i(x)=1$ für alle $x \in X$
-\end{enumerate*}
-
-\noindent Sei $r_i \colon X \times I \to X \times I$ gegeben durch $r_i(x,t)=(x, \max(\eta_i(x),t))$. Ein Punkt $(x,t)$ wird durch $r_i$ entlang der $I$-Achse nach $1$ verschoben. Der 
+finden, so dass $E|_{U_i \times I}$ trivialisierbar ist. Seien $h_i \colon U_i \times I \times K^n \to E|_{U_i \times I}$ die entsprechenden Trivialisierungen und seien 
+$\eta_i \colon X \to [0,1]$ stetige Funktionen mit folgenden Eigenschaften:
+\[
+	\supp(\eta_i) \subset U_i \qquad \text{ und } \qquad \max_{i=1,\ldots ,N} \eta_i(x)=1 \text{ für alle } x \in X
+\]
+Sei $r_i \colon X \times I \to X \times I$ gegeben durch $r_i(x,t)= \enbrace[\big]{x, \max(\eta_i(x),t)}$. Ein Punkt $(x,t)$ wird durch $r_i$ entlang der $I$-Achse nach $1$ verschoben. Der 
 Wert der Verschiebung wird durch $\eta_i$ festgelegt.
-\missingfigure{Schöne Quadrate $X \times I$}
+\[
+	\begin{tikzpicture}[my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=5pt}}]
+		\draw[thick] (0,0) node[below]{$0$} rectangle (2,2);
+		\draw[|-|] (0,1.6) -- (0,0.5);
+		\draw[my brace,] (0,1.6) -- (0,0.5) node[midway, left=8pt]{$U_i$};
+		\foreach \x in {0.3,0.65,...,1.8}{
+			\draw[gray] (\x,0.2) -- (\x,1.8);
+		}
+		\node[below] at (2,0) {$1$};
+		
+		\draw[thick,-to] (2.5,1) -- (4,1) node[midway,above]{$r_i$};
+		
+		
+		\node[below] at (7,0) {$1$};
+		\draw[|-|] (5,1.6) -- (5,0.5);
+		\draw[my brace,] (5,1.6) -- (5,0.5) node[midway, left=8pt]{$U_i$};
+		\foreach \x in {5.3,5.65,...,6.8}{
+			\draw[gray] (\x,0.2) -- (\x,0.5) .. controls +(90:0.2) and +(270:0.2) .. (7,1.05) .. controls +(90:0.2) and +(270:0.2) .. (\x,1.6) -- (\x,1.8);
+		}
+		\draw[gray,->] (5.5,1.05) -- ++(0.7,0);
+		\draw[thick] (5.,0) node[below]{$0$} rectangle (7,2);
+	\end{tikzpicture}
+\]
 Nun konstruieren wir einen Morphismus von $K$-Vektorbündeln $(u_i,r_i)$ über $r_i$ wie folgt: 
 \[
-	u_i \enbrace[\big]{h_i(x,t,v)} = h_i \enbrace[\big]{r_i(x,t),v}  
+	u_i \enbrace[\big]{h_i(x,t,v)} := h_i \enbrace[\big]{r_i(x,t),v}  
 \]
 für $(x,t,v) \in U_i \times I \times K^n$. Wir setzen $u_i=\id$ außerhalb des Bildes von $h_i$. Wegen 
 $r_i|_{X \times I\setminus{U_i} \times I} =\id_{X \times I \setminus U_i \times I}$ ist dies stetig. Außerdem kommutiert
 \[
 	\begin{tikzcd}
-		E \rar["u_i"] \dar["p"]& R \dar["p"]\\
+		E \rar["u_i"] \dar["p"]& E \dar["p"]\\
 		X\times I \rar["r_i"] & X \times I
 	\end{tikzcd}
 \]
-und $u_i$ ist auf den Fasern linear. Sei $r :=r_N \circ r_{N-1} \circ \ldots \circ r_1$. Wegen (ii) gilt $r(x,t)=(x,1)$. Sei $u := u_N \circ \ldots \circ u_2 \circ u_1$.
-Dann ist $(u,r)$ ein Morphismus von Vektorbündeln. 
-Außerdem haben wir 
+und $u_i$ ist auf den Fasern linear. Sei $r :=r_N \circ r_{N-1} \circ \ldots \circ r_1$. Nach Konstruktion gilt $r(x,t)=(x,1)$ für alle $x \in X$. 
+Sei $u := u_N \circ \ldots \circ u_2 \circ u_1$.Dann ist $(u,r)$ ein Morphismus von Vektorbündeln und es gilt $(u,r)|_{X \times \set{1}}=\id_{E_1}$. Außerdem haben wir 
 \[
-	\begin{tikzcd}[row sep=small]
-		E \rar \drar & E \\
+	\begin{tikzcd}
+		E \rar["\enbrace*{u,r} "] \drar & E \\
 		& E_1 \uar[hook]
 	\end{tikzcd}
+	\qquad \text{ und }\qquad 
+	\begin{tikzcd}
+		E \rar["u"] \dar["p"'] & E_1 \dar["p_1"] \\
+		X \times I \rar["r"] & X \times \set{1} 
+	\end{tikzcd}
 \]
-Setze jetzt $\varphi \colon E \to E_1 \times I$, $v \mapsto \enbrace*{u(v), \pr_I \circ p(v)} $. Dann ist $(\varphi, \id_{X \times I})$ ein Isomorphismus von Vektorbündeln 
-mit $\varphi|_{X \times \set{1}} =\id$. 
+Setze jetzt $\varphi \colon E \to E_1 \times I$, $v \mapsto \enbrace[\big]{u(v), \pr_I \circ p(v)} $. Dann ist $(\varphi, \id_{X \times I})$ ein Isomorphismus von 
+Vektorbündeln mit $\varphi|_{E \times \set{1}} =\id$. Damit ist a) gezeigt.
 
-Für b) sei $V_j \subset Y$ eine offene Überdeckung von $Y$, sodass $E'|_{\overline{V}_j}$ trivialisierbar ist. Sei $B_j = h ^{-1}(\overline{V}_j) \subset X \times I$. Es 
-gilt 
+Für b) sei $V_j \subset Y$ eine offene Überdeckung von $Y$, sodass $E'|_{\overline{V}_j}$ trivialisierbar ist. Sei nun $B_j = h ^{-1}(\overline{V}_j) \subset X \times I$. 
+Es gilt dann
 \[
-	B_j \cap (A \times I) = h_1 ^{-1}(\overline{V}_j) \cap A \times I
+	B_j \cap (A \times I) = \enbrace[\big]{\Underbrace{h_1 ^{-1}(\overline{V}_j) \cap A}{=A_j}} \times I
 \]
-da $h$ auf $A$ unabhängig ist von $t \in I$. Nach Konstruktion ist $E|_{A_j \times I}$ trivialisierbar. Nach Lemma \ref{schnitte_Hd_Raum} b) finden wir eine offene Umgebung 
+da $h$ auf $A$ unabhängig ist von $t \in I$. Nach Konstruktion ist $E|_{A_j \times I}$ trivialisierbar. Nach \autoref{schnitte_Hd_Raum} b) finden wir eine offene Umgebung 
 $U_j \times I$ mit $X \supset U_j \supset A_j$, so dass $E|_{U_j \times I}$ trivialisierbar ist. Wir ergänzen die Mengen $U_j \times I$ um trivialisierende offene Umgebungen 
-$U_i \times I$ mit $U_i \times A = \emptyset$, so dass $\bigcup_{i\in I} U_i \times I = X \times I$. Jetzt verwenden wir die Konstruktion aus a) für diese Überdeckung. Der 
+$U_i \times I$ mit $U_i \cap A = \emptyset$, so dass $\bigcup_{i} U_i \times I = X \times I$. Jetzt verwenden wir die Konstruktion aus a) für diese Überdeckung. Der 
 entsprechende Isomorphismus $\varphi \colon E \to E_1 \times I$ stimmt auf $A_j \times I$ mit dem von $h$ induzierten Isomorphismus überein. 	
 \end{beweis}
 % subsection 210 (end)
+
+Das folgende Korollar ist von entscheidender Bedeutung für die Definition von topologischer $K$-Theorie, die wir im nächsten Abschnitt erarbeiten wollen.
 
 \begin{korollarB}[{name=[Homotopieinvarianz von Pullbacks]}]
 Sei $X$ ein kompakter Raum und $h \colon X \times I \to Y$ eine Homotopie. Sei $p \colon E \to Y$ ein $K$-Vektorbündel. Dann gilt
@@ -578,7 +603,7 @@ Wir haben im letzten Kapitel folgenden kontravarianten, homotopieinvarianten Fun
 		(f \colon X \to Y) \rar[mapsto] & \enbrace*{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
 	\end{tikzcd}
 \]
-mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren:
+mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren: \todo{Revision}
 
 \subsection*{Grothendieck-Konstruktion}
 Sei $(M,+)$ ein kommutativer Monoid. Betrachte $\Gr(M)= \nicefrac{M \times M}{\sim}$ mit der Äquivalenzrelation
