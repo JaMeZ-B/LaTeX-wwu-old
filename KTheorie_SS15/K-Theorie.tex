@@ -196,7 +196,7 @@ $H \colon X \times I \to Y$ erweitern lässt.
 
 \section{Vektorbündel} % (fold)
 \label{sec:2}
-Wir betrachten nur reelle und komplexe Vektorbündel, sei also $K \in \set{\mathds{R},\mathds{C}}$.
+Wir betrachten nur reelle und komplexe Vektorbündel, es sei also $K \in \set{\mathds{R},\mathds{C}}$.
 
 \begin{definition}[{name=[$K$-Vektorbündel]},label=def_vektbuendel]
 Sei $X$ ein topologischer Raum. Eine stetige surjektive Abbildung $p \colon E \to X$ heißt $K$-\Index{Vektorbündel}, falls gilt: 
@@ -220,6 +220,7 @@ Sei $X$ ein topologischer Raum. Eine stetige surjektive Abbildung $p \colon E \t
 \leavevmode
 \begin{itemize}
 	\item Sei $X$ ein beliebiger topologischer Raum. Dann ist $X \times K^n \xrightarrow{\mathrm{pr}_X} X$ das \Index{triviale Vektorbündel} über $X$.
+	Für jeden topologischen Raum existiert also ein Vektorbündel.
 	\item Betrachte $S^n \subset \mathds{R}^{n+1}$. Sei $\Tmap S^n = \set[(x,v) \in S^n \times \mathds{R}^{n+1}]{\skal*{x}{v}=0}$. Definiere $p \colon \Tmap S^n \to S^n$ 
 	durch $(x,v) \mapsto x$. Damit erhalten wir ein $\mathds{R}$-Vektorbündel über $S^n$, das \Index{Tangentialbündel}. 
 	
@@ -256,7 +257,7 @@ Seien $X$ und $Y$ topologische Räume. Sei $f \colon Y \to X$ eine stetige Abbil
 \]
 zusammen mit der Abbildung $q \colon f^* E \to Y$, $(y,v) \mapsto y$ der \Index{Pullback}\marginnote{Der Pullback lässt sich auch allgemein auf kategorieller Ebene 
 definieren} von $p \colon E \to X$ entlang von $f$. Mit $\overline{f}(y,v)=v$ kommutiert das 
-folgende Diagramm
+folgende Diagramm:
 \[
 	\begin{tikzcd}[sep=large]
 		f^* E \rar["\overline{f}"] \dar["q"'] & E \dar["p"] \\
@@ -264,7 +265,6 @@ folgende Diagramm
 	\end{tikzcd}
 \]	
 \end{definition}
-
 % subsection 23 (end)
 
 
@@ -374,7 +374,8 @@ Somit ist $\psi_j \circ \psi_i ^{-1}(V)$ offen. Es ist damit klar, dass $F_X \en
 	\item $\oplus \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ direkte Summe von Vektorbündeln\index{Vektorbündel!direkte Summe}. 
 	\item $\otimes \colon \VEKT_K \times \VEKT_K \to \VEKT_K$ ist stetig $\Rightarrow $ Tensorprodukt von Vektorbündeln\index{Vektorbündel!Tensorprodukt}. 
 	\item Dualisieren von Vektorräumen ${ }^* \colon \VEKT_K^\op \to \VEKT_K$ ist stetig $\Rightarrow $ duales Vektorbündel
-	\item $\Hom \colon \VEKT_K \times \VEKT_K^\op \to \VEKT_K$, $(V,W) \mapsto \Hom_K(W,V)$ ist stetig $\Rightarrow$ Homomorphismenbündel\index{Homomorphismenbündel}.
+	\item Der Funktor $\Hom \colon \VEKT_K \times \VEKT_K^\op \to \VEKT_K$, $(V,W) \mapsto \Hom_K(W,V)$ ist stetig $\Rightarrow$ 
+	Homomorphismenbündel\index{Homomorphismenbündel}.
 \end{itemize}	
 \end{beispiel}
 
@@ -600,17 +601,17 @@ Wir haben im letzten Kapitel folgenden kontravarianten, homotopieinvarianten Fun
 	\begin{tikzcd}[row sep=0.1em, column sep=large,cramped]
 		\TOP \rar & \MONOIDE \\
 		X \rar[mapsto] & \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}} \\
-		(f \colon X \to Y) \rar[mapsto] & \enbrace*{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
+		(f \colon X \to Y) \rar[mapsto] & \enbrace[\big]{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
 	\end{tikzcd}
 \]
-mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren: \todo{Revision}
+mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren: 
 
 \subsection*{Grothendieck-Konstruktion}
 Sei $(M,+)$ ein kommutativer Monoid. Betrachte $\Gr(M)= \nicefrac{M \times M}{\sim}$ mit der Äquivalenzrelation
 \[
 	(x,y) \sim (x',y') :\iff \exists c \in M \text{ mit } x+y' +c = x' +y +c
 \]
-Die Idee dahinter: $[x,y]$\enquote{$=$}$x-y$. Dann ist 
+Die Idee dahinter: $[x,y]$\enquote{$=$}$x-y$, also die erste Koordinate ist der \enquote{positive} und die zweite der \enquote{negative} Teil. Dann ist 
 \[
 	\begin{tikzcd}[row sep=tiny]
 		+ \colon \Gr(M) \times \Gr(M) \rar & \Gr(M) \\
@@ -619,8 +620,9 @@ Die Idee dahinter: $[x,y]$\enquote{$=$}$x-y$. Dann ist
 \]
 wohldefiniert. Mit dieser Operation ist $\Gr(M)$ eine abelsche Gruppe (das Inverse zu $[x,y]$ ist $[y,x]$, denn $[x+y,x+y]=[0,0]$) und $M \to \Gr(M)$, $x  \mapsto [x,0]$ ist
 ein Monoidhomomorphismus.
-\minisec{Beispiel}
+\begin{beispiel}
 $\Gr(\mathds{N}_0,+)= (\mathds{Z},+)$.
+\end{beispiel}
 \minisec{Universelle Eigenschaft}
 Zu jedem Monoidhomomorphismus $\varphi \colon M \to A$ in eine abelsche Gruppe $A$ existiert genau ein Gruppenhomomorphismus $\psi \colon \Gr(M) \to A$, sodass das Diagramm
 \[
@@ -630,11 +632,10 @@ Zu jedem Monoidhomomorphismus $\varphi \colon M \to A$ in eine abelsche Gruppe $
 	\end{tikzcd}
 \]
 kommutiert. \emph{Der Beweis ist eine Übungsaufgabe.} \bigskip \\
-Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$, aber es stellen sich weiterhin die Fragen: Was ist $K^n(X)$ für 
-$n\not=0$? Was ist $K^n(X,A)$?
+Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$, aber es stellen sich weiterhin die Fragen auf dem Weg zu 
+einer Kohomologie-Theorie: Was ist $K^n(X)$ für $n\not=0$? Was ist $K^n(X,A)$?
 
-\subsection[Definition: Tripel, Morphismus von Tripeln und stabile Isomorphie]{Definition} % (fold)
-\label{sub:31}
+\begin{definition}[{name=[Tripel, Morphismus von Tripeln und stabile Isomorphie]}, label=sub:31]
 Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}.
 \begin{enumerate}[(i)]
 	\item Ein \Index{Tripel} $(E_1,f,E_0)$ über $(X,A)$ besteht aus endlichdimensionalen $\mathds{C}$-Vektorbündeln $p_i \colon E_i \to X$ und einem Isomorphismus
@@ -653,23 +654,26 @@ Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}.
 		\enbrace*{E_1 \oplus E, f \oplus \id_E, E_0 \oplus E} \cong \enbrace*{E_1' \oplus E', f' \oplus \id_{E'}, E_0' \oplus E' } 
 	\]
 	also falls sie isomorph werden nach Addition elementarer Tripel.
-	Stabile Isomorphie ist eine Äquivalenzrelation (Übung). 
+	Stabile Isomorphie ist eine Äquivalenzrelation (Übung). \todo{Revision}
 \end{enumerate}
+\end{definition}
 % subsection 31 (end)
 
-\subsection[Definition von $K^{-n}(X,A)$]{Definition} % (fold)
-\label{sub:32}
+
+\begin{definition}[{name=[$K^{-n}(X,A)$]},label=sub:32]
 Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
 \[
 	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
 \]
-\emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$}
-
+\end{definition}
+\noindent \emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$}
 % subsection 32 (end)
-\subsection*{Bemerkung}
+
+\begin{bemerkung}
 Es gilt $\benbrace*{E_1,f,E_0}_{\stiso}=\benbrace*{0,\id,0}_\stiso $ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
 $E_1  \oplus E|_A \xrightarrow{f \oplus \id} E_0 \oplus E|_A $ zu einem Isomorphismus über ganz $X$ ausdehnen lässt.
-\minisec{Beweis}
+\end{bemerkung}
+\begin{beweis}
 Für \enquote{$\Rightarrow$} folgt aus der Definition $(E_1 \oplus E, f \oplus \id, e_0 \oplus E) \cong \enbrace*{E', \id_{E'},E'}$. $\id_{E'}$ ist ein Isomorphismus auf ganz
 $X$, also lässt sich $f \oplus \id$ zu einem Isomorphismus auf ganz $X$ ausdehnen.
 \[
@@ -686,8 +690,10 @@ Für die Rückrichtung betrachten wir $\varphi \colon E_1 \oplus E \xrightarrow{
 	\begin{tikzcd}
 		E_1 \oplus E|_A  \dar["f \oplus \id"] \rar["\varphi|_A"]& E_0 \oplus E|_A \dar["\id"] \\
 		E_0 \oplus E|_A \rar["\id"]& E_0 \oplus E|_A
-	\end{tikzcd} \bewende
-\]
+	\end{tikzcd} \qedhere
+\]	
+\end{beweis}
+
 \subsection[Lemma über die Existenz eines Bündelisomorphismus und einer Homotopie]{Lemma} % (fold)
 \label{sub:33}
 Sei $(X,A)$ ein Ko-Raumpaar. Seien $p \colon E \to X$ und $p' \colon E' \to X$ $K$-Vektorbündel und $f \colon E'|_A \to E|_A$ ein Isomorphismus. Sei $f' \colon E' \to E$ ein
