@@ -604,7 +604,7 @@ Wir haben im letzten Kapitel folgenden kontravarianten, homotopieinvarianten Fun
 		(f \colon X \to Y) \rar[mapsto] & \enbrace[\big]{f^* \colon \nicefrac{\VEKT_K(Y)}{\sim_{\mathrm{Iso}}} \to \nicefrac{\VEKT_K(X)}{\sim_{\mathrm{Iso}}}} 
 	\end{tikzcd}
 \]
-mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren: 
+mit der Monoid-Operation $[E]_{\Iso} + [F]_{\Iso} = [E \oplus F]_{\Iso}$ und dem Nullvektorbündel als neutralem Element. Daraus wollen wir eine Gruppe konstruieren. Ein kanonischer Ansatz dazu ist die folgende Konstruktion: 
 
 \subsection*{Grothendieck-Konstruktion}
 Sei $(M,+)$ ein kommutativer Monoid. Betrachte $\Gr(M)= \nicefrac{M \times M}{\sim}$ mit der Äquivalenzrelation
@@ -627,13 +627,14 @@ $\Gr(\mathds{N}_0,+)= (\mathds{Z},+)$.
 Zu jedem Monoidhomomorphismus $\varphi \colon M \to A$ in eine abelsche Gruppe $A$ existiert genau ein Gruppenhomomorphismus $\psi \colon \Gr(M) \to A$, sodass das Diagramm
 \[
 	\begin{tikzcd}
-		M \dar\rar["\varphi"] & A \\
+		M \dar[hook] \rar["\varphi"] & A \\
 		\Gr(M) \urar["\exists ! \psi"', dashed]
 	\end{tikzcd}
 \]
-kommutiert. \emph{Der Beweis ist eine Übungsaufgabe.} \bigskip \\
+kommutiert. \emph{Der Beweis ist eine Übungsaufgabe. Für die Existenz betrachte $\psi \enbrace*{[x,y]} = \varphi(x) - \varphi(y)$. Die Eindeutigkeit folgt dann ganz 
+einfach.} \bigskip \\
 Wir bekommen jetzt eine abelsche Gruppe $K^0(X) := \Gr \enbrace*{\nicefrac{\VEKT_{\mathds{C}}(X)}{\sim_{\Iso}}}$, aber es stellen sich weiterhin die Fragen auf dem Weg zu 
-einer Kohomologie-Theorie: Was ist $K^n(X)$ für $n\not=0$? Was ist $K^n(X,A)$?
+einer Kohomologie-Theorie: Was ist $K^n(X)$ für $n\not=0$? Was ist $K^n(X,A)$, also was machen wir mit (Ko-)Raumpaaren?
 
 \begin{definition}[{name=[Tripel, Morphismus von Tripeln und stabile Isomorphie]}, label=sub:31]
 Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}.
@@ -654,45 +655,57 @@ Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}.
 		\enbrace*{E_1 \oplus E, f \oplus \id_E, E_0 \oplus E} \cong \enbrace*{E_1' \oplus E', f' \oplus \id_{E'}, E_0' \oplus E' } 
 	\]
 	also falls sie isomorph werden nach Addition elementarer Tripel.
-	Stabile Isomorphie ist eine Äquivalenzrelation (Übung). \todo{Revision}
 \end{enumerate}
 \end{definition}
+\begin{bemerkung}
+\begin{itemize}
+	\item Stabile Isomorphie ist eine Äquivalenzrelation.\hfill \emph{(einfache Übung)}
+	\item Stabile Isomorphieklassen von Tripeln lassen sich addieren, das heißt
+	\[
+		\benbrace[\big]{E_1,f,E_0}_\st + \benbrace[\big]{E_1',f',E_0'}_\st := \benbrace[\big]{E_1 \oplus E_1', f \oplus f', E_0 \oplus E_0'}_\st  
+	\]
+	ist wohldefiniert. Das Tripel $\benbrace*{0,\id,0}_\st$ ist ein neutrales Element hierfür.
+	\item Es gilt $\benbrace*{E_1,f,E_0}_\st=\benbrace*{0,\id,0}_\st$ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
+	der Isomorphismus $f \oplus \id \colon E_1  \oplus E|_A \to E_0 \oplus E|_A $ zu einem Isomorphismus über ganz $X$ ausdehnen lässt.
+\end{itemize}
+\end{bemerkung}
+\begin{beweis}
+Für die erste Implikation folgt aus der Definition $(E_1 \oplus E, f \oplus \id, e_0 \oplus E) \cong \enbrace*{E', \id_{E'},E'}$. Sei $\varphi=(\varphi_1,\varphi_0)$ dieser 
+Isomorphismus. Dann kommutiert das folgende Diagramm
+\[
+	\begin{tikzcd}[column sep=large]
+		(E_1 \oplus E)|_A \rar["\varphi_1|_A","\cong"'] \dar["f \oplus \id"']& E'|_A \dar["\id_{E^\prime}\!|_A","\cong"'] \\
+		(E_0 \oplus E)|_A \rar["\cong","\varphi_0|_A"'] & E'|_A
+	\end{tikzcd}
+\]
+Der Isomorphismus $\varphi_0 ^{-1} \circ \varphi_1 \colon E_1 \oplus E \to E_0 \oplus E$ ist auf ganz $X$ definiert und erfüllt 
+$\varphi_0 ^{-1} \circ \varphi_1 |_A = f \oplus \id$, ist also eine Fortsetzung wie gewünscht.
+% $\id_{E'}$ ist ein Isomorphismus auf ganz $X$, also lässt sich $f \oplus \id$ zu einem Isomorphismus auf ganz $X$ ausdehnen.
+
+Für die Rückrichtung betrachten wir $\psi \colon E_1 \oplus E \xrightarrow{\minwidthbox{\raisebox{0pt}[0pt][0pt]{$\cong$}}{2em}} E_0 \oplus E$ mit $\psi|_A = f \oplus \id$. Dann kommutiert
+\[
+	\begin{tikzcd}[column sep=large]
+		(E_1 \oplus E)|_A  \dar["f \oplus \id"] \rar["\psi|_A","\cong"']& (E_0 \oplus E)|_A \dar["\id"] \\
+		(E_0 \oplus E)|_A \rar["\id","\cong"']& (E_0 \oplus E)|_A
+	\end{tikzcd} 
+\]	
+also ist $(\psi,\id) \colon \enbrace*{E_1 \oplus E, f \oplus \id, E_0 \oplus E} \to \enbrace*{E_0 \oplus E, \id ,E_0 \oplus E}$ die gesuchte stabile Isomorphie.
+\end{beweis}
 % subsection 31 (end)
 
 
 \begin{definition}[{name=[$K^{-n}(X,A)$]},label=sub:32]
-Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}. Dann ist $K^0(X,A)$ die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. Für $n>0$ definieren wir 
-\[
-	K^{-n}(X,A) := K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} 
-\]
+Sei $(X,A)$ ein \hyperref[def_koraumpaar]{Ko-Raumpaar}. Wir definieren $K^0(X,A)$ als die Menge der stabilen Isomorphieklassen von Tripeln über $(X,A)$. 
+$K^0(X,A)$ heißt auch \emph{$0$-te $K$-Gruppe} von $(X,A)$. Für $n>0$ definieren wir \index{K-Gruppe@$K$-Gruppe}
+\begin{align*}
+	K^{-n}(X,A) &:= K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^n} \\
+	\text{und } \quad K^{-n}(X)\hphantom{,A} &:= K^{-n}(X,\emptyset)
+\end{align*}
 \end{definition}
-\noindent \emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$}
+\noindent \emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$} \todo{Revision}
 % subsection 32 (end)
 
-\begin{bemerkung}
-Es gilt $\benbrace*{E_1,f,E_0}_{\stiso}=\benbrace*{0,\id,0}_\stiso $ genau dann, wenn ein Vektorbündel $E \to X$ existiert, so dass sich 
-$E_1  \oplus E|_A \xrightarrow{f \oplus \id} E_0 \oplus E|_A $ zu einem Isomorphismus über ganz $X$ ausdehnen lässt.
-\end{bemerkung}
-\begin{beweis}
-Für \enquote{$\Rightarrow$} folgt aus der Definition $(E_1 \oplus E, f \oplus \id, e_0 \oplus E) \cong \enbrace*{E', \id_{E'},E'}$. $\id_{E'}$ ist ein Isomorphismus auf ganz
-$X$, also lässt sich $f \oplus \id$ zu einem Isomorphismus auf ganz $X$ ausdehnen.
-\[
-	\begin{tikzcd}[sep=large]
-		E_1 \oplus E|_A \rar["\varphi_1|_A","\cong"'] \dar["f \oplus \id"']& E'|_A \dar["\id_{E'}","\cong"'] \\
-		E_0 \oplus E|_A \rar["\cong","\varphi_0|_A"'] & E'|_A
-	\end{tikzcd}
-\]
-Für die Rückrichtung betrachten wir $\varphi \colon E_1 \oplus E \xrightarrow{\minwidthbox{\cong}{2em}} E_0 \oplus E$, sodass $\varphi|_A = f \oplus \id$. Dann folgt
-\[
-	\enbrace*{E_1 \oplus E, f \oplus \id, E_0 \oplus E} \cong \enbrace*{E_ß \oplus E, \id_{E_0 \oplus E} ,E_0 \oplus E}  
-\]
-\[
-	\begin{tikzcd}
-		E_1 \oplus E|_A  \dar["f \oplus \id"] \rar["\varphi|_A"]& E_0 \oplus E|_A \dar["\id"] \\
-		E_0 \oplus E|_A \rar["\id"]& E_0 \oplus E|_A
-	\end{tikzcd} \qedhere
-\]	
-\end{beweis}
+
 
 \subsection[Lemma über die Existenz eines Bündelisomorphismus und einer Homotopie]{Lemma} % (fold)
 \label{sub:33}
