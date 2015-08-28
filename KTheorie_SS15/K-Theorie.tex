@@ -702,28 +702,31 @@ $K^0(X,A)$ heißt auch \emph{$0$-te $K$-Gruppe} von $(X,A)$. Für $n>0$ definier
 	\text{und } \quad K^{-n}(X)\hphantom{,A} &:= K^{-n}(X,\emptyset)
 \end{align*}
 \end{definition}
-\noindent \emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$.} \todo{Revision}
+\noindent \emph{Übung: $K^0(X,\emptyset)$ ist isomorph zu $\Gr \enbrace*{\nicefrac{\VEKT_\mathds{C}(X)}{\sim_{\Iso}}}$.} 
+
+Wir wissen bisher nur, dass $K^0(X,A)$ ein Monoid ist bezüglich der Addition von Tripeln. Um zu sehen, dass dies tatsächlich eine Gruppenstruktur liefert, brauchen wir zwei 
+Lemmata: 
 % subsection 32 (end)
 
 
-
-
 \begin{lemma}[label=sub:33,{name=[Existenz eines Bündelisomorphismus und einer Homotopie]}]
-Sei $(X,A)$ ein Ko-Raumpaar. Seien $p \colon E \to X$ und $p' \colon E' \to X$ $K$-Vektorbündel und $f \colon E'|_A \to E|_A$ ein Isomorphismus, $(E,f,E')$ also ein Tripel. 
-Sei weiter $f' \colon E' \to E$ ein Isomorphismus von $K$-Vektorbündeln und $h \colon A \times I \to \Iso(E'|_A,E|_A)$ eine stetige Abbildung, so dass $h_t$ ein Schnitt ist 
-für alle $t \in I$ und so dass $h_0=f'|_A$, $h_1=f$ gilt. 
+Sei $(X,A)$ ein Ko-Raumpaar.\marginnote{Morphismen entsprechen Schnitten von Morphismenbündeln, siehe Beweis von \autoref{schnitte_Hd_Raum}}
+Seien $p \colon E \to X$ und $p' \colon E' \to X$ zwei $K$-Vektorbündel und $f \colon E'|_A \to E|_A$ ein Isomorphismus, $(E',f,E)$ also ein Tripel. 
+Sei weiter $f' \colon E' \to E$ ein Isomorphismus von $K$-Vektorbündeln und $h \colon A \times I \to \Iso(E'\times I|_{A\times I},E\times I|_{A\times I})$ eine stetige 
+Abbildung, so dass $h_t$ ein Schnitt ist für alle $t \in I$ und $h_0=f'|_A$, sowie $h_1=f$ gilt.\todo[inline]{Ich sehe nicht ein, wie bei dieser Definition von $h$, $h_1=f$ bzw. $h_0=f'|_A$ gelten kann, da in deren Definitionen das Einheitsintervall doch gar nicht vorkommt \ldots}
 
-Dann existiert ein Isomorphismus $F \colon E' \to E$ mit $F|_A=f$ und eine Homotopie $H \colon X \times I \to \Iso(E',E)$ mit $H_0=f'$, $H_1=F$ und $H|_{A\times I}=h$.	
+Dann existiert ein Isomorphismus $F \colon E' \to E$ mit $F|_A=f$ und eine Homotopie $H \colon X \times I \to \Iso(E' \times I,E\times I)$ mit $H_0=f'$, $H_1=F$ und $H|_{A\times I}=h$.	
 \end{lemma}
 \begin{beweis}
+Unser Ziel ist es $h$ zu einer Homotopie $H$ auf ganz $X \times I$ zu erweitern und dann $F = H_1$ zu setzen.
 Die Abbildungen $h$ und $f'$ liefern eine stetige Abbildung 
 \[
 	\begin{tikzcd}
-		\tilde{h} \colon A \times I \cup X \times \set{0} \rar & \Iso \enbrace*{\pr_X^* E'|_{A \times I \cup X \times \set{0} },\pr_X^* E|_{A \times I \times X \times 
+		\tilde{h} \colon A \times I \cup X \times \set{0} \rar & \Iso \enbrace*{\enbrace*{\pr_X^* E'}|_{A \times I \cup X \times \set{0} },\enbrace*{\pr_X^* E}|_{A \times I \times X \times 
 		\set{0}}} 
 	\end{tikzcd}
 \]
-Wir müssen diese Abbildung so zu einer auf $X \times I$ ausdehnen, dass wir einen Schnitt bekommen. Betrachte \marginnote{$r$ aus Kofaserungseigenschaft}
+Wir müssen $\tilde{h}$ zu einem Schnitt $X \times I \to \Iso(E'\times I, E \times I)$ ausdehnen, dass wir einen Schnitt bekommen. Betrachte \marginnote{$r$ aus Kofaserungseigenschaft}
 \[
 	\begin{tikzcd}
 		A \times I \cup X \times \set{0} \rar["\id"] \dar[hook]& A \times I \cup X \times \set{0} \rar["\iota",hook] & X \times I\\  
@@ -759,22 +762,23 @@ eine Abbildung $X \times I \to \Iso(E' \times I, E \times I)$. $F := H|_{E' \tim
 \end{beweis}
 % subsection 3.3 (end)
 
-Wir haben noch nicht geklärt, was inverse Elemente in $K^0(X,A)$ ist. Kandidat für inverses Element in $K^0(X,A)$ zu $(E_0,f,E_1)$ ist $(E_1, f ^{-1},E_0)$. Wir müssen
-prüfen $(E_0,f,E_1) \oplus (E_1,f ^{-1}, E_0)= (E_0 \oplus E_1, f \oplus  f ^{-1},E_1 \oplus E_0)$. Dazu folgendes Lemma:
+Wir können nur klären, was inverse Elemente in $K^0(X,A)$ sind. Kandidat für das inverse Element in $K^0(X,A)$ zu $(E_0,f,E_1)$ ist $(E_1, f ^{-1},E_0)$. Wir müssen
+prüfen, dass $(E_0,f,E_1) \oplus (E_1,f ^{-1}, E_0)= (E_0 \oplus E_1, f \oplus  f ^{-1},E_1 \oplus E_0)$ ist. Dazu folgendes Lemma:
 
-\subsection{Lemma} % (fold)
-\label{sub:34}
+\begin{lemma}[label=sub:34]
 Sei $(X,A)$ ein Ko-Raumpaar.
 \begin{enumerate}[(i)]
 	\item Seien $(E_0,f,E_1)$ und $(E_1,g,E_2)$ Tripel über $(X,A)$. Dann sind die beiden Tripel 
 	\[
-		(E_0,g \circ f, E_2) \quad  \text{ und } \quad \enbrace*{E_0 \oplus E_1, f \oplus g, e_1 \oplus E_2} 
+		(E_0,g \circ f, E_2) \quad  \text{ und } \quad \enbrace*{E_0 \oplus E_1, f \oplus g, E_1 \oplus E_2} 
 	\]
 	stabil isomorph.
 	\item Seien $(E_0,f,E_1)$ und $(E_0,g,E_1)$ Tripel über $(X,A)$. Sei $h \colon A \times I \to \Iso \enbrace*{E_0|_A,E_1|_A} $ eine Homotopie zwischen $f$ und $g$, sodass 
 	$h_t \colon A \to \Iso \enbrace*{E_0|_A,E_1|_A}$ ein Schnitt ist für alle $t \in I$. Dann sind die beiden Tripel stabil isomorph.
 \end{enumerate}
-\minisec{Beweis}
+\end{lemma}
+\begin{beweis}
+\mbox{ }
 \begin{enumerate}[(i)]
 	\item Wir haben das folgende kommutative Diagramm von Vektorbündeln:
 	\[
@@ -786,34 +790,38 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 			\& E_2 \oplus E_1\big|_A \lar["{\begin{pmatrix} \id & 0 \\ - g^{-1} & \id \end{pmatrix}}"',"\text{(4)}"]
 		\end{tikzcd}
 	\]
-	Die Kommutativität ergibt sich wie folgt
+	Die Kommutativität ergibt sich dabei wie folgt
 	\begin{align*}
-		&\begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot \begin{pmatrix} \id & g \\ 0 & \id \end{pmatrix} \cdot \begin{pmatrix} \id & 0 \\ - g^{-1} & \id \end{pmatrix}
-		\cdot \begin{pmatrix} \id & 0 \\ 0 & g \circ f \end{pmatrix} \cdot \begin{pmatrix} \id & f \\ 0 & \id \end{pmatrix} \\
-		 &= \begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot \begin{pmatrix}
-		 	0 & g \\ - g^{-1} & \id
-		 \end{pmatrix} \cdot 
-		 \begin{pmatrix}
-		 	g & g \circ f \\ 0 & f
-		 \end{pmatrix} = \begin{pmatrix}
-		 	g ^{-1} & -\id \\ 0 & g
-		 \end{pmatrix} \cdot 
-		 \begin{pmatrix}
-		 	g & g \circ f \\ 0 & f
-		 \end{pmatrix} = \begin{pmatrix}\id & 0 \\ 0 & g \circ f \end{pmatrix}
+		&\begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot 
+		\begin{pmatrix} \id & g \\ 0 & \id \end{pmatrix} \cdot 
+		\begin{pmatrix} \id & 0 \\ - g^{-1} & \id \end{pmatrix} \cdot 
+		\begin{pmatrix} g & 0 \\ 0 & f \end{pmatrix} \cdot 
+		\begin{pmatrix} \id & f \\ 0 & \id \end{pmatrix} \\
+		&= \begin{pmatrix} 0 & -\id \\ \id & 0 \end{pmatrix} \cdot 
+		\begin{pmatrix}	0 & g \\ - g^{-1} & \id \end{pmatrix} \cdot 
+		\begin{pmatrix} g & g \circ f \\ 0 & f \end{pmatrix} = 
+		\begin{pmatrix}	g ^{-1} & -\id \\ 0 & g \end{pmatrix} \cdot 
+		\begin{pmatrix} g & g \circ f \\ 0 & f \end{pmatrix} = 
+		\begin{pmatrix}\id & 0 \\ 0 & g \circ f \end{pmatrix}
 	\end{align*}
-	Wir können $f,g,g ^{-1}$ zu Morphismen über $X$ fortsetzen. Dann sind die auf $X$ erweiterter Versionen der Morphismen (1)--(4) Isomorphismen über $X$.
+	Wir können $f$,$g$ und $g^{-1}$ zu Morphismen über $X$ fortsetzen (nach \autoref{schnitte_Hd_Raum}). Die Fortsetzungen sind im Allgemeinen aber keine Isomorphismen.
+	Dennoch sind die auf $X$ erweiterten Versionen der Morphismen (1) -- (4) Isomorphismen über $X$. Dabei ist zum Beispiel das Inverse zu $\begin{psmallmatrix}
+		\id & f \\ 0 &\id
+	\end{psmallmatrix}$ gegeben durch $\begin{psmallmatrix}
+		\id & -f \\ 0 & \id
+	\end{psmallmatrix}$. Dass die beiden Tripel stabil isomorph sind, ergibt sich nun wie folgt:
 	\begin{align*}
-		\benbrace*{E_0 , g \circ f, E_2}_\st =
-		\benbrace*{E_1 \oplus  E_0, \id \oplus g \circ f, E_1 \oplus E_1}_{\st} &= \benbrace*{E_1 \oplus E_0, \begin{psmallmatrix}
+		\benbrace[\big]{E_0 , g \circ f, E_2}_\st =
+		\benbrace[\big]{E_1 \oplus  E_0, \id \oplus g \circ f, E_1 \oplus E_2}_{\st} &= \benbrace*{E_1 \oplus E_0, \begin{psmallmatrix}
 			g & 0 \\ 0 &f
 		\end{psmallmatrix}, E_2 \oplus E_1}_{\st}  \\ 
 		&= \benbrace*{E_0 \oplus E_1, \begin{psmallmatrix}
 			f & 0 \\ 0 &g
 		\end{psmallmatrix}, E_1 \oplus E_2}_{\st} 
 	\end{align*}
+	\todo{Revision}
 	\item Betrachte das Tripel $(E_0, \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0)$. Nach (i) ist es stabil isomorph zu $(E_0, g ^{-1}\circ f,E_0)$. Nach Voraussetzung ist
-	$g ^{-1} \circ f$ homotop zu $\id_{E_=}$ durch Isomorphismen. Also folgt aus Lemma \ref{sub:33}, dass sich $g ^{-1} \circ f$ zu einem Isomorphismus über $X$ fortsetzen 
+	$g ^{-1} \circ f$ homotop zu $\id_{E_0}$ durch Isomorphismen. Also folgt aus Lemma \ref{sub:33}, dass sich $g ^{-1} \circ f$ zu einem Isomorphismus über $X$ fortsetzen 
 	lässt. Aus der Bemerkung folgt 
 	\begin{align*}
 		\benbrace*{E_0, g ^{-1} \circ f,E_0}_\st = \benbrace*{0,\id,0}_\st 
@@ -821,9 +829,10 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 	Außerdem gilt nach (i) auch $\benbrace*{E_1 \oplus E_0, g ^{-1} \oplus g, E_0 \oplus E_1}_\st = \benbrace*{0,\id,0}$. Weiter ist
 	\begin{align*}
 		\benbrace*{E_0,f,E_1}_\st &= \benbrace*{E_0 \oplus E_1 \oplus E_0, f \oplus g ^{-1} \oplus g, E_1 \oplus E_0 \oplus E_1}_\st \\  
-		&= \Underbrace{\benbrace*{E_0 \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0}_\st }{=\benbrace{0,\id,0}} + \benbrace*{E_0,g,E_1}_\st \bewende 
+		&= \Underbrace{\benbrace*{E_0 \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0}_\st }{=\benbrace{0,\id,0}} + \benbrace*{E_0,g,E_1}_\st \qedhere
 	\end{align*}
 \end{enumerate}
+\end{beweis}
 % subsection 34 (end)
 
 \subsection{Korollar} % (fold)
