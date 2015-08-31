@@ -862,72 +862,85 @@ Morphismus:
 \]	
 
 \begin{lemma}[label=sub:36]
-Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.\todo{Revision}
+Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.
 \end{lemma}
 \begin{beweis}
-Es genügt wieder, den Fall $n=0$ zu betrachten. Seien $g_0,g_1 \colon (X,A) \to (Y,B)$ und sei $h \colon (X \times,A \times I) \to (Y,B)$ eine Homotopie zwischen $g_0$ und 
-$g_1$. Sei $(E_0,F,E_1)$ ein Tripel über $(Y,B)$. Nach Theorem \ref{iso_vektb_intervall} a) existieren Isomorphismen
+Es genügt wieder, den Fall $n=0$ zu betrachten. Seien $g_0,g_1 \colon (X,A) \to (Y,B)$ stetige Abbildungen und $h \colon (X \times I,A \times I) \to (Y,B)$ eine Homotopie 
+zwischen $g_0$ und $g_1$. Sei $(E_0,f,E_1)$ ein Tripel über $(Y,B)$. Nach \autoref{iso_vektb_intervall} a) existieren Isomorphismen
 \[
-	\begin{tikzcd}[column sep=large, row sep=0.5em]
+	\begin{tikzcd}[column sep=4em, row sep=0.5em]
 		h^* E_0 \rar["\psi^\ssbrace{0}","\cong"'] & g_1^*(E_0) \times I \\
 		h^* E_1 \rar["\psi^\ssbrace{1}","\cong"'] & g_1^*(E_1) \times I
 	\end{tikzcd}
 \]
-die über $X \times \set{1}$ die Identität sind. Betrachte 
+die über $X \times \set{1}$ die Identität sind. Betrachte nun die Abbildung
 \[
-	\enbrace*{\psi^\ssbrace{1}\big|_{A \times I}} \circ \enbrace*{h^* f} \circ \enbrace*{\psi^\ssbrace{0}\big|_{A \times I}} ^{-1} \colon g^*_1 E_0\big|_A \times I  
-	\xrightarrow{\cong} g_1^*E_1\big|_A \times I   
+	\enbrace*{\psi^\ssbrace{1}|_{A \times I}} \circ \enbrace*{h^* f} \circ \enbrace*{\psi^\ssbrace{0}|_{A \times I}} ^{-1} \colon g^*_1 E_0|_A \times I  
+	\xrightarrow{\minwidthbox{\cong}{3em}} g_1^*E_1\big|_A \times I   
 \]
-Dies entspricht einer Homotopie $\tilde{h} \colon A \times I \to \Iso \enbrace*{g_1^*E_0\big|_A, g_1^* E_1\big|_A}$. Sei $\tilde{f} = \enbrace*{\psi^\ssbrace{1}\big|_{A \times \set{0}}} \circ \enbrace*{h^*_0 f} \circ \enbrace*{\psi^\ssbrace{0}\big|_{A \times \set{0}}} ^{-1} $. Dann haben wir das kommutative Diagramm
+Dies entspricht einer Homotopie $\tilde{h} \colon A \times I \to \Iso \enbrace[\big]{g_1^*E_0|_A \times I, g_1^* E_1|_A \times I}$. 
+Sei nun
+\[
+	\tilde{f} = \enbrace*{\psi^\ssbrace{1}|_{A \times \set{0}}} \circ \enbrace*{h^*_0 f} \circ \enbrace*{\psi^\ssbrace{0}|_{A \times \set{0}}} ^{-1}
+\]  
+Dann erhalten wir das kommutative Diagramm
 \[
 	\begin{tikzcd}[sep=large]
-		g_0^* E_0\big|_A \rar["g_0^*f","\cong"'] \dar["\psi^\ssbrace{0}|_{A \times \set{0}}"',"\cong"] & g_0^*E_1\big|_A \dar["\psi^\ssbrace{1}|_{A \times \set{0} }","\cong"'] \\
-		g^*_1 E_0\big|_A \rar["\cong"',"\tilde{f}"] & g_1^* E_1\big|_A
+		g_0^* E_0|_A \rar["g_0^*f","\cong"'] \dar["\psi^\ssbrace{0}|_{A \times \set{0}}"',"\cong"] & g_0^*E_1|_A \dar["\psi^\ssbrace{1}|_{A \times \set{0} }","\cong"'] \\
+		g^*_1 E_0|_A \rar["\cong"',"\tilde{f}"] & g_1^* E_1|_A
 	\end{tikzcd}
 \]
 Es folgt damit
-\begin{align*}
-	\benbrace[\big]{g_0^* E_0, g^*_0 f , g^*_0 E_1}_\st = \benbrace*{g_1^* E_0, \tilde{f}, g_1^* E_1}_\st \stackrel{\mbox{\scriptsize \ref{sub:34} ii)}}{=}
+\[
+	\benbrace[\big]{g_0^* E_0, g^*_0 f , g^*_0 E_1}_\st = \benbrace[\big]{g_1^* E_0, \tilde{f}, g_1^* E_1}_\st \stackrel{\mbox{\scriptsize \ref{sub:34} ii)}}{=}
 	\benbrace[\big]{g_1^* E_0, g_1^* f, g_1^* E_1}_\st \qedhere
-\end{align*}	
+\]	
 \end{beweis}
 % subsection 36 (end)
 
 \subsection*{Ausschneidung}
-Sei $(X,A)$ ein Ko-Raumpaar und $U \subset A$, sodass $\overline{U} \subset \mathring{A}$, dann ist die induzierte Abbildung 
+Wir erinnern uns an das Ausschneide-Axiom:
+
+Sei $(X,A)$ ein Ko-Raumpaar und $U \subset A$ eine Teilmenge mit $\overline{U} \subset \mathring{A}$. Dann ist die induzierte Abbildung 
 $K^{-n}(X,A) \to K^{-n}(X \setminus U, A \setminus U)$ ein Isomorphismus.
 
-\subsection{Lemma} % (fold)
-\label{sub:37}
+Wir wollen das Ausschneide-Axiom nun für die $K$-Theorie beweisen.
+
+\begin{lemma}[label=sub:37]
 Sei folgendes Diagramm ein Pushout-Diagramm von kompakten Hausdorffräumen
 \[
 	\begin{tikzcd}
-		X_0 \rar[hook,"i_1"] \dar["i_2"]& X_1 \dar["j_1"] \\
+		X_0 \rar[hook,"\iota_1"] \dar["\iota_2"]& X_1 \dar["j_1"] \\
 		X_2 \rar[hook,"j_2"] & X
 	\end{tikzcd}
 \]
-Seien $p_i \colon E_i \to X_i$ für $i \in \set{1,2}$ $K$-Vektorbündel und $f \colon i_1^* E_1 \xrightarrow{\cong} i_2^* E_2 $ ein Isomorphismus von $K$-Vektorbündeln über 
-$X_0$. Dann ist \todo{Hier vlt mal \texttt{xfrac} benutzen?}
+Seien $p_i \colon E_i \to X_i$ für $i \in \set{1,2}$ $K$-Vektorbündel und $f \colon \iota_1^* E_1 \xrightarrow{\cong} \iota_2^* E_2 $ ein Isomorphismus von $K$-Vektorbündeln 
+über $X_0$. Dann ist
 \[
-	E = \nicefrac{E_1 \coprod E_2}{\sim} \xrightarrow{\minwidthbox{p}{2em}} \nicefrac{X_1 \coprod X_2 }{\sim}=X
+	E = \Faktor{E_1 \coprod E_2}{\sim} \xrightarrow{\minwidthbox{p}{3em}} \Faktor{X_1 \coprod X_2 }{\sim}=X
 \]
-mit $v_1 \sim f(v_1)$ für alle $v_1 \in E_1$ mit $p_1(v_1) \in X_0$ ein $K$-Vektorbündel über $X$.
-\minisec{Beweis}
-\emph{Übung!}
+mit $v_1 \sim f(v_1)$ für alle $v_1 \in E_1$ mit $p_1(v_1) \in X_0$ ein $K$-Vektorbündel über $X$.	
+\end{lemma}
+\begin{beweis}
+\emph{Übung!}	\todo{Revision}
+\end{beweis}
 % subsection 37 (end)
 
-\subsection{Lemma} % (fold)
-\label{sub:38}
+\begin{lemma}[label=sub:38]
 Sei $(X,A)$ ein Ko-Raumpaar. Sei $p \colon E \to A$ ein $K$-Vektorbündel und $\iota \colon A \hookrightarrow X$ die Inklusion. Dann existieren Vektorbündel $q \colon F \to X$
-und $q' \colon F' \to A$, so dass $\iota^* F \cong E \oplus F'$.
-\minisec{Beweisidee}
-Finde $F' \xrightarrow{q'} A $, sodass $E \oplus F'$ trivialisierbar ist. Setze $F = X \times K^N$.
+und $q' \colon F' \to A$, so dass $\iota^* F \cong E \oplus F'$.	
+\end{lemma}
+\begin{beweis}[name=Idee]
+Finde $q' \colon F' \to A $, sodass $E \oplus F'$ trivialisierbar ist. Setze $F = X \times K^N$.
 \[
 	\begin{tikzcd}[row sep=0.1em]
 		E\big|_{U_i} \rar & U_i \times K^n \\
 		E \rar & X \times \Underbrace{K^n \oplus \ldots \oplus K^n}{\text{$k$ Kopien}}
 	\end{tikzcd}
 \]
+\end{beweis}
+
+
 % subsection 38 (end)
 
 \subsection{Theorem} % (fold)
