@@ -819,30 +819,33 @@ Sei $(X,A)$ ein Ko-Raumpaar.
 			f & 0 \\ 0 &g
 		\end{psmallmatrix}, E_1 \oplus E_2}_{\st} 
 	\end{align*}
-	\todo{Revision}
 	\item Betrachte das Tripel $(E_0, \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0)$. Nach (i) ist es stabil isomorph zu $(E_0, g ^{-1}\circ f,E_0)$. Nach Voraussetzung ist
-	$g ^{-1} \circ f$ homotop zu $\id_{E_0}$ durch Isomorphismen. Also folgt aus Lemma \ref{sub:33}, dass sich $g ^{-1} \circ f$ zu einem Isomorphismus über $X$ fortsetzen 
+	$g ^{-1} \circ f$ homotop zu $\id_{E_0}$ durch Isomorphismen. Also folgt aus \autoref{sub:33}, dass sich $g ^{-1} \circ f$ zu einem Isomorphismus über $X$ fortsetzen 
 	lässt. Aus der Bemerkung folgt 
 	\begin{align*}
 		\benbrace*{E_0, g ^{-1} \circ f,E_0}_\st = \benbrace*{0,\id,0}_\st 
 	\end{align*}
-	Außerdem gilt nach (i) auch $\benbrace*{E_1 \oplus E_0, g ^{-1} \oplus g, E_0 \oplus E_1}_\st = \benbrace*{0,\id,0}$. Weiter ist
+	Außerdem gilt nach (i) auch $\benbrace*{E_1 \oplus E_0, g ^{-1} \oplus g, E_0 \oplus E_1}_\st = \benbrace*{0,\id,0}_\st$. Weiter ist
 	\begin{align*}
-		\benbrace*{E_0,f,E_1}_\st &= \benbrace*{E_0 \oplus E_1 \oplus E_0, f \oplus g ^{-1} \oplus g, E_1 \oplus E_0 \oplus E_1}_\st \\  
-		&= \Underbrace{\benbrace*{E_0 \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0}_\st }{=\benbrace{0,\id,0}} + \benbrace*{E_0,g,E_1}_\st \qedhere
+		\benbrace[\big]{E_0,f,E_1}_\st &= \benbrace*{E_0 \oplus E_1 \oplus E_0, f \oplus g ^{-1} \oplus g, E_1 \oplus E_0 \oplus E_1}_\st \\  
+		&= \Underbrace{\benbrace*{E_0 \oplus E_1, f \oplus g ^{-1}, E_1 \oplus E_0}_\st }{=\benbrace{0,\id,0}} + \benbrace[\big]{E_0,g,E_1}_\st \qedhere
 	\end{align*}
 \end{enumerate}
 \end{beweis}
 % subsection 34 (end)
 
-\subsection{Korollar} % (fold)
-\label{sub:35}
-\minisec{Beweis}
-Es genügt zu zeigen, dass $K^0(X,A)$ eine abelsche Gruppe ist. Sei $\benbrace*{E_0, f,E_1}_\st\in K^0(X,A)$. Dann gilt nach Lemma \ref{sub:34}
+
+\begin{korollar}[label=sub:35]
+Sei $(X,A)$ ein Ko-Raumpaar. Dann ist $K^{-n}(X,A)$ für $n \ge 0$ eine abelsche Gruppe.
+\end{korollar}
+\begin{beweis}
+Es genügt zu zeigen, dass $K^0(X,A)$ eine abelsche Gruppe ist (siehe \autoref{sub:32}). Sei $\benbrace*{E_0, f,E_1}_\st\in K^0(X,A)$. Dann gilt nach \autoref{sub:34}
 \begin{align*}
 	\benbrace*{E_0,f,E_1}_\st + \benbrace*{E_1,f ^{-1},E_0}_\st = \benbrace*{E_0 \oplus E_1, f \oplus f ^{-1}, E_1 \oplus E_0}_\st = \benbrace*{E_0, f ^{-1} \circ f,E_0}_\st
-	= \benbrace*{0,\id,0}_\st \bewende  
+	= \benbrace*{0,\id,0}_\st 
 \end{align*}
+Damit ist die Existenz von Inversen bewiesen. Diese Gruppe ist nach Definition abelsch.
+\end{beweis}
 Die Zuordnung $(X,A) \mapsto K^{-n}(X,A)$ ist ein kontravarianter Funktor: Sei $g \colon (X,A) \to (Y,B)$ eine stetige Abbildung von Ko-Raumpaaren, dann ist
 \[
 	g^* \colon K^{-n}(Y,B) \to K^{-n}(X,A)
@@ -850,19 +853,18 @@ Die Zuordnung $(X,A) \mapsto K^{-n}(X,A)$ ist ein kontravarianter Funktor: Sei $
 definiert durch $g^* \benbrace*{E_0,f,E_1}_\st = \benbrace*{g^* E_0, g^* f, g^* E_1}_\st$. Hierbei ist $g^* f$ der von der universellen Eigenschaft des Pullbacks induzierte 
 Morphismus:
 \[
-	\begin{tikzcd}[]
-		g^* E_0\big|_A \ar[rr] \ar[dd] \ar[dr,dashed,"g^* f","\cong"'] & & E_0\big|_B \drar["f","\cong"'] \ar[dd]\\
+	\begin{tikzcd}[thick]
+		g^* E_0\big|_A \ar[rr] \ar[dd] \ar[dr,dashed,"g^* f","\cong"',Firebrick3] & & E_0\big|_B \drar["f","\cong"'] \ar[dd]\\
 		& g^* E_1\big|_A \ar[rr,crossing over] & & E_1\big|_B \ar[dd]\\
 		A \ar[rr,"g|_A",pos=0.3] \ar[dr,"\id"']& & B \ar[dr,"\id"]\\
 		& A \ar[from=uu,crossing over] \ar[rr,"g|_A"]& & B
 	\end{tikzcd}
-\]
-% subsection 35 (end)
+\]	
 
-\subsection{Lemma} % (fold)
-\label{sub:36}
-Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.
-\minisec{Beweis}
+\begin{lemma}[label=sub:36]
+Der Funktor $(X,A) \mapsto K^{-n}(X,A)$ ist homotopieinvariant.\todo{Revision}
+\end{lemma}
+\begin{beweis}
 Es genügt wieder, den Fall $n=0$ zu betrachten. Seien $g_0,g_1 \colon (X,A) \to (Y,B)$ und sei $h \colon (X \times,A \times I) \to (Y,B)$ eine Homotopie zwischen $g_0$ und 
 $g_1$. Sei $(E_0,F,E_1)$ ein Tripel über $(Y,B)$. Nach Theorem \ref{iso_vektb_intervall} a) existieren Isomorphismen
 \[
@@ -886,8 +888,9 @@ Dies entspricht einer Homotopie $\tilde{h} \colon A \times I \to \Iso \enbrace*{
 Es folgt damit
 \begin{align*}
 	\benbrace[\big]{g_0^* E_0, g^*_0 f , g^*_0 E_1}_\st = \benbrace*{g_1^* E_0, \tilde{f}, g_1^* E_1}_\st \stackrel{\mbox{\scriptsize \ref{sub:34} ii)}}{=}
-	\benbrace[\big]{g_1^* E_0, g_1^* f, g_1^* E_1}_\st \bewende 
-\end{align*}
+	\benbrace[\big]{g_1^* E_0, g_1^* f, g_1^* E_1}_\st \qedhere
+\end{align*}	
+\end{beweis}
 % subsection 36 (end)
 
 \subsection*{Ausschneidung}
