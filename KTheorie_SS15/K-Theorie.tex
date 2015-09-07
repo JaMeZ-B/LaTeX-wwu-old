@@ -900,10 +900,10 @@ Es folgt damit
 
 \subsection*{Ausschneidung}
 Wir erinnern uns an das Ausschneide-Axiom:
-
+\begin{quote}
 Sei $(X,A)$ ein Ko-Raumpaar und $U \subset A$ eine Teilmenge mit $\overline{U} \subset \mathring{A}$. Dann ist die induzierte Abbildung 
-$K^{-n}(X,A) \to K^{-n}(X \setminus U, A \setminus U)$ ein Isomorphismus.
-
+$K^{-n}(X,A) \to K^{-n}(X \setminus U, A \setminus U)$ ein Isomorphismus.	
+\end{quote}
 Wir wollen das Ausschneide-Axiom nun für die $K$-Theorie beweisen.
 
 \begin{lemma}[label=sub:37]
@@ -922,7 +922,7 @@ Seien $p_i \colon E_i \to X_i$ für $i \in \set{1,2}$ $K$-Vektorbündel und $f \
 mit $v_1 \sim f(v_1)$ für alle $v_1 \in E_1$ mit $p_1(v_1) \in X_0$ ein $K$-Vektorbündel über $X$.	
 \end{lemma}
 \begin{beweis}
-\emph{Übung!}	\todo{Revision}
+\emph{Übung!}
 \end{beweis}
 % subsection 37 (end)
 
@@ -930,14 +930,67 @@ mit $v_1 \sim f(v_1)$ für alle $v_1 \in E_1$ mit $p_1(v_1) \in X_0$ ein $K$-Vek
 Sei $(X,A)$ ein Ko-Raumpaar. Sei $p \colon E \to A$ ein $K$-Vektorbündel und $\iota \colon A \hookrightarrow X$ die Inklusion. Dann existieren Vektorbündel $q \colon F \to X$
 und $q' \colon F' \to A$, so dass $\iota^* F \cong E \oplus F'$.	
 \end{lemma}
-\begin{beweis}[name=Idee]
-Finde $q' \colon F' \to A $, sodass $E \oplus F'$ trivialisierbar ist. Setze $F = X \times K^N$.
+\begin{beweis}
+Es genügt ein Vektorbündel $q' \colon F' \to A $ zu finden, sodass $E \oplus F'$ trivialisierbar ist. 
+Denn dann können wir $F = X \times K^n$ für ein geeignetes $n \in \mathds{N}$ setzen.
+% \[
+% 	\begin{tikzcd}[row sep=0.1em]
+% 		E\big|_{U_i} \rar & U_i \times K^n \\
+% 		E \rar & X \times \Underbrace{K^n \oplus \ldots \oplus K^n}{\text{$k$ Kopien}}
+% 	\end{tikzcd}
+% \]
+
+Dazu können wir ohne Beschränkung der Allgemeinheit annehmen, dass $X$ zusammenhängend ist, da wir den Beweis sonst komponentenweise durchführen können. Sei 
+$\set{U_i}_{i=I}$, $I=\set{1,\ldots,N}$ eine endliche offene Überdeckung von $X$, sodass lokale Trivialisierungen $\varphi_i \colon E|_{U_i} \to U_i \times K^n$ existieren. 
+Wähle außerdem eine der Überdeckung untergeordnete Partition der Eins $\rho_i \colon X \to [0,1]$. Sei nun $\psi_i \colon E \to K^n$ für $i \in I$ definiert durch
 \[
-	\begin{tikzcd}[row sep=0.1em]
-		E\big|_{U_i} \rar & U_i \times K^n \\
-		E \rar & X \times \Underbrace{K^n \oplus \ldots \oplus K^n}{\text{$k$ Kopien}}
-	\end{tikzcd}
+	\psi_i(v) = \begin{cases}
+		\rho_i \enbrace[\big]{p(v)} \cdot \enbrace*{\pr_{K^n}^\ssbrace{i} \circ \varphi_i}(v) &\text{ falls }p(v) \in U_i\\
+		0 &\text{ sonst}
+	\end{cases}
 \]
+Dies ist eine stetige Abbildung, da $\rho_i$ außerhalb von $U_i$ verschwindet. Jetzt betrachte
+\[
+	\psi \colon E \longrightarrow X \times \Underbrace{K^n \oplus \ldots \oplus K^n}{N \text{ Summanden}} \quad , \qquad v \longmapsto 
+	\enbrace[\big]{p(v), \enbrace[\big]{\psi_1(v), \ldots , \psi_N(v)} } 
+\]
+Dies ist ein Morphismus von $K$-Vektorbündeln, der die Fasern von $E$ injektiv nach $K^{nN}$ abbildet, da für jedes $v$ mindestens ein $\rho_i \enbrace*{p(v)}$ ungleich $0$
+ist. Sei $\skal*{\cdot}{\cdot}$ das Standardskalarprodukt auf $K^{nN}$ und $\varphi \colon E \to K^{nN}$ gegeben durch $\varphi= \pr_{K^{nN}} \circ \psi$. Sei weiter
+\[
+	F = \set[(x,w) \in X \times K^{nN}]{\skal*{w}{\varphi(v)}=0 \text{ für alle } v \in E_x} 
+\]
+und $q \colon F \to X$ gegeben durch $q(x,w)=x$. Dann ist $F_x = q ^{-1}(x)$ das orthogonale Komplement der Faser $E_x$ von $E$ über $x$. Insbesondere ist 
+$x \mapsto \dim(F_x)$ konstant, da dies auch für $x \mapsto \dim(E_x)$ gilt. Wir wollen sehen, dass $F$ ein $K$-Vektorbündel über $X$ ist. Es bleibt dazu die lokale 
+Trivialität von $F$ zu zeigen.
+
+Sei $p \colon X \to \mathrm{Mat}_{nN}(K)$ dadurch definiert, dass $p(x)$ die (eindeutige) orthogonale Projektion auf $F_x$ ist. Dann ist $p$ stetig. Dies lässt sich wie 
+folgt sehen: Sei $x' \in U_i \subset X$ beliebig. Dann liefern $f_k(x)=(\varphi \circ \varphi_i ^{-1})(x,e_k)$ für $k \in \set{1, \ldots ,n}$ stetige Abbildungen 
+$U_i \to K^{nN}$, sodass $\set{f_1(x), \ldots , f_n(x)}$ für alle $x \in U_i$ eine Basis von $\varphi(E_x)$ ist (wegen der Injektivität von $\varphi|_{E_x}$). Wenden wir das
+Gram-Schmidtsche Orthonormalisierungsverfahren auf die $f_i$ an, erhalten wir neue stetige Abbildungen $\hat{f}_i \colon U_i \to K^{nN}$, sodass 
+$\mengenA[\big]{\hat{f}_1(x), \ldots , \hat{f}_n(x)}$ eine Orthonormalbasis von $\varphi(E_x)$ ist. Es gilt dann
+\[
+	p\big|_{U_i}(x) = 1 - \sum_{k=1}^{n} \skal*{\hat{f}_k(x)}{\cdot } \hat{f}_k(x)
+\]
+Somit ist $p$ stetig in $x'$. Sei jetzt $x_0 \in X$ und $p_0=p(x_0)$. Betrachte die stetige Abbildung
+\[
+	\tilde{\varphi}_0 \colon F \longrightarrow X \times F_{x_0} \quad , \qquad (x,w) \longmapsto (x,p_0 w)
+\]
+sowie
+\[
+	\tilde{\psi}_0 \colon X \times F_{x_0} \longrightarrow F \quad ,\qquad (x,w') \longmapsto (x,p(x) w')
+\] 
+Die Komposition $\tilde{\varphi_0} \circ \tilde{\psi}_0$ erfüllt $\tilde{\varphi_0} \circ \tilde{\psi}_0(x,w) = \enbrace*{x,\tilde{p}(x) w}$ für eine stetige Abbildung 
+$\tilde{p} \colon X \to \Hom_K(F_{x_0}, F_{x_0})$ mit $\tilde{p}(x_0)=\id_{F_{x_0}}$. Da die invertierbaren Elemente offen in $\Hom_K(F_{x_0},F_{x_0})$ sind, muss es eine 
+offene Umgebung $x_0 \in U \subset X$ geben, sodass $\tilde{p}|_U$ invertierbar an jedem Punkt ist. Somit ist $\enbrace{\tilde{\varphi}_0 \circ \tilde{\psi}_0}|_U$ ein 
+Isomorphismus des trivialen Vektorbündels $U \times F_{x_0}$ und $\tilde{\varphi}_0|_U \colon F|_U \to U \times F_{x_0}$ bildet jede Faser $F_x$ surjektiv und damit aus 
+Dimensionsgründen auch injektiv auf $F_{x_0}$ ab. Dann ist $\tilde{\varphi}_0|_U$ aber eine lokale Trivialisierung von $F$ über $U$ ($\tilde{\varphi}_0$ ist nicht 
+notwendigerweise ein Isomorphismus über ganz $X$).
+
+Es bleibt noch zu zeigen, dass $E \oplus F \cong X \times K^{nN}$ ist. Dieser Isomorphismus ist gegeben durch 
+\[
+	E \oplus F \longrightarrow X \times K^{nN} \quad , \qquad (v,w) \longmapsto \psi(v) + w
+\]
+Das Inverse hierzu bildet $(x,w') \in X \times K^{nN}$ auf $\enbrace*{\psi ^{-1} \enbrace*{ (1- p(x)) w'}, p(x)w'}$ ab. \todo{Revision}
 \end{beweis}
 
 
