@@ -1103,10 +1103,109 @@ Isomorphismus.
 \end{korollar}
 \begin{beweis}
 Setze $X_0 = A \setminus U$, $X_1 = X \setminus U$ und $X_2=A$ in \autoref{sub:39}. Dann ist der Pushout gleich $X$ und die Aussage folgt direkt aus dem Theorem. 
-\todo{Revision}
 \end{beweis}
 % subsection 310 (end)
+\newpage
+\section*{Exakte Tripelsequenz in $K$-Theorie}
+\begin{definition}
+Ein Tripel $(X,B,A)$ von kompakten Hausdorff-Räumen heißt \Index{Ko-Raumtripel}, falls $A \subset B$ und $B \subset X$ Kofaserungen sind. 
+\end{definition}
+Wir wollen nun eine exakte Tripelsequenz in $K$-Theorie konstruieren:
+\[
+	\begin{tikzcd}[row sep=0.5em]
+		\ldots \rar & K^{-n}(X,B) \rar["i^*"] & K^{-n}(X,A) \rar["j^*"] & K^{-n}(B,A) \rar["\delta^{-n}",Firebrick3] & K^{-n+1}(X,B) \rar & \ldots \\
+		\ldots \rar & K^0(X,B) \rar["i^*"] & K^0(X,A) \rar["j^*"] & K^0(B,A)
+	\end{tikzcd}
+\]
+Als Randabbildung brauchen wir also einen natürlichen Homomorphismus abelsche Gruppen $\delta^{-n} \colon K^{-n}(B,A) \to K^{-n+1}(X,B)$. Wir definieren zunächst
+$\delta^{-1} \colon K^{-1}(B,A) \to K^0(X,B)$ wie folgt
+\[
+	\begin{tikzcd}
+		K^{-1}(B,A) = K^0 \enbrace[\big]{B \times I, B \times \set{0} \cup A \times I \cup B \times \set{1}} \rar["\delta^{-1}",dashed] & K^0(X,B) 
+		\dar["\textbf{(2)}","\pr^*_X"'] \\
+		K^0 \enbrace[\big]{X \times \set{0} \cup B \times I, X \times \set{0} \cup A \times I \cup B \times \set{1}} \uar["\textbf{(1)}"] \rar  &
+		K^0 \enbrace[\big]{X \times \set{0} \cup B  \times I, A \times I \cup B \times \set{1}}   
+	\end{tikzcd}
+\]
+Die untere Abbildung ist dabei durch die Inklusion induziert. Weiter ist $\pr_X \colon X \times \set{0} \cup B \times I \to X$ die Einschränkung der entsprechenden 
+Projektion. Wir wollen nun sehen, dass $(1)$ und $(2)$ Isomorphismen sind:
+\begin{enumerate}[(1)]
+	\item ist Ausschneidung mit $U = (X \setminus B) \times \set{0}$ und damit ein Isomorphismus.
+	\item Wir zeigen, dass $\pr_X \colon \enbrace*{X \times \set{0} \cup B \times I, A \times I \cup B \times \set{1}} \to (X,B)$ eine Homotopieäquivalenz von Raumpaaren ist:
+\end{enumerate}
+\begin{beweis}
+Da $B \hookrightarrow X$ eine Kofaserung ist, erhalten wir eine Abbildung $h$, sodass folgendes Diagramm kommutiert.
+\[
+	\begin{tikzcd}
+		X \times \set{0} \cup B \times I \dar[hook] \rar["\id"] & X \times \set{0} \cup B \times I \\
+		X \times I \urar["h"',dashed] 
+	\end{tikzcd}
+\]
+Setze nun $h_i := h|_{X \times	\set{i}}$. Dann ist $h_0 \colon X \cong X \times \set{0} \to X \times \set{0} \cup B \times I$ die Inklusion und 
+$h_1 \colon X \to X \times \set{0} \cup B \times I$ bildet $B \subset X$ auf $B  \times \set{1}$ ab. Außerdem ist $h(A \times I) \subset A \times I$.
+Somit liefert $h_1$ eine stetige Abbildung $h_1 \colon (X,B) \to \enbrace*{X \times \set{0} \cup B \times I, A \times I  \cup B \times \set{1}}$. Damit ist dann 
+$\pr_X \circ h_1 \colon (X,B) \to (X,B)$ homotop durch Abbildungen von Raumpaaren zu $\pr_X \circ h_0= \id$.
 
+Sei nun $H \colon \enbrace*{X \times \set{0} \cup B \times I} \times I \to X \times \set{0} \cup B \times I$ gegeben durch
+\[
+	\begin{tikzcd}[row sep=0.2em]
+		\enbrace[\big]{(x,0),s} \rar[mapsto] & h(x,s) & \text{ auf } X \times \set{0} \times I \\
+		\enbrace[\big]{(b,t),s} \rar[mapsto] & h \enbrace[\big]{b, (1-s)t +s} & \text{auf } B \times I \times I 
+	\end{tikzcd}
+\]
+Dies ist stetig und es gilt $H \enbrace*{ \enbrace*{A \times I \cup B \times \set{1}} \times I } \subset A \times I \cup B \times \set{1}$. Außerdem ist
+\begin{align*}
+	H \enbrace[\big]{(x,t),0} &= h(x,t) = \id_{X \times \set{0} \cup B \times I } \\
+	\text{und } \quad H \enbrace[\big]{(x,t),1} &= h(x,1) = h_1 \enbrace[\big]{\pr_X(x,t)}  
+\end{align*}
+Also ist $H$ eine Homotopie zwischen $h_1 \circ \pr_X$ und der Identität als Abbildung von Raumpaaren.
+\end{beweis}
+$\delta^{-n}$ für $n>1$ ist folgendermaßen definiert: Wir betrachten das Tripel
+\[
+	\enbrace[\big]{X \times I^{n-1}, B \times I^{n-1} \cup X \times \partial I^{n-1}, A \times I^{n-1} \cup X \times \partial I^{n-1}} 
+\]
+Ausschneidung liefert nun einen Isomorphismus
+\[
+	K^{-1} \enbrace[\big]{B \times I^{n-1} \cup X \times \partial I^{n-1}, A \times I^{n-1} \cup X \times \partial I^{n-1}} 
+	\cong K^{-1} \enbrace*{B \times I^{n-1}, A \times I^{n-1} \cup B \times \partial I^{n-1}} = K^{-n}(B,A) 
+\]
+Damit können wir $\delta^{-n}$ nun definieren:
+\[
+	\begin{tikzcd}[column sep=2.9em]
+		K^{-n}(B,A) \rar[dashed,"\delta^{-n}",Firebrick3] & K^{-n+1}(X,B) \dar[equal]\\
+		K^{-1} \enbrace*{B \times I^{n-1} \cup X \times \partial I^{n-1}, A \times I^{n-1} \cup X \times \partial I^{n-1}} \rar["\delta^{-1}"] \uar["\cong"] &
+		K^0 \enbrace*{X \times I^{n-1}, B \times I^{n-1} \cup X \times \partial I^{n-1}}  
+	\end{tikzcd}
+\]
+\begin{theorem}
+Sei $(X,B,A)$ ein Ko-Raumtripel. Dann ist die Folge
+\[
+	\begin{tikzcd}
+		\ldots \rar & K^{-n}(X,B) \rar["i^*"] & K^{-n}(X,A) \rar["j^*"] & K^{-n}(B,A) \rar["\delta^{-n}"] & K^{-n+1}(X,B) \rar & \ldots 
+	\end{tikzcd}
+\]
+exakt, wobei $i \colon (X,A) \to (X,B)$ und $j \colon (B,A) \to (X,A)$ die Inklusionen sind.
+\end{theorem}
+\begin{beweis}
+Wir zeigen zunächst die Exaktheit bei $K^0(X,A)$ und folgern die Exaktheit von allen anderen Stellen hieraus.
+\begin{itemize}
+	\item Zu zeigen: $\ker j^* = \im i^*$. Sei $\benbrace*{E_0,f,E_1}_\st \in K^0(X,B)$. Dann ist 
+	\[
+		j^* \circ i^* \benbrace[\big]{E_0,f,E_1}_\st = \benbrace[\big]{E_0|_B,f|_A,E_1|_B}_\st
+	\]
+	$f|_B$ setzt sich zu einem Isomorphismus $f$ über $B$ fort und somit folgt $j^* \circ i^* =0$. Damit ist $\im i^* \subset \ker j^*$ gezeigt.
+	
+	Sei jetzt $\benbrace*{E_0,f,E_1}_\st \in \ker j^*$. Dann existiert ein Vektorbündel $F \to B$, sodass sich 
+	$f \oplus \id_F \colon (j^* E_0 \oplus F)|_A \to (j^* E_1 \oplus F)|_A$ zu einem Isomorphismus über $B$ fortsetzen lässt. Sei $g$ dieser Isomorphismus. Nach 
+	\autoref{sub:38} können wir annehmen, dass $F =j^* F'$ für ein Vektorbündel $F' \to X$ ist. Dann gilt aber
+	\[
+		\benbrace[\big]{E_0,f,E_1}_\st = \benbrace[\big]{E_0 \oplus F',f \oplus \id_{F'}}_\st = i^* \benbrace[\big]{E_0 \oplus F', g, E_1 \oplus F'}_\st 
+	\]
+	Damit ist auch $\ker j^* \subset \im i^*$.\todo{Revision}
+	\item 
+\end{itemize}
+\end{beweis}
+\newpage
 \section*{Produkte in $K$-Theorie und Kettenkomplexe von Vektorbündeln}
 Klassen in $K^0(X)$ sind $[E_1,E_0]$ \enquote{$=$} $E_1 -E_0$, die Produkte könnten wir wie folgt definieren: 
 \[
