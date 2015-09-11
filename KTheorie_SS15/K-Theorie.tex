@@ -1201,8 +1201,59 @@ Wir zeigen zunächst die Exaktheit bei $K^0(X,A)$ und folgern die Exaktheit von 
 	\[
 		\benbrace[\big]{E_0,f,E_1}_\st = \benbrace[\big]{E_0 \oplus F',f \oplus \id_{F'}}_\st = i^* \benbrace[\big]{E_0 \oplus F', g, E_1 \oplus F'}_\st 
 	\]
-	Damit ist auch $\ker j^* \subset \im i^*$.\todo{Revision}
-	\item 
+	Damit ist auch $\ker j^* \subset \im i^*$.
+	\item Für die Exaktheit bei $K^0(X,B)$ betrachte das folgende Diagramm
+	\[
+		\begin{tikzcd}[column sep=large,row sep=huge]
+			K^0 \enbrace[\big]{X \times \set{0} \cup B \times I, X \times \set{0} \cup A \times I \cup B \times \set{1}} \rar["i_1^*","\cong"'] \dar["i_2^*"] 
+			\drar[phantom,"\circled{\text{1}}"]
+			& K^{-1}(B,A) \dar["\delta ^{-1}"] \\
+			K^0 \enbrace[\big]{X \times \set{0} \cup B \times I, A \times I \cup B \times \set{1}} \dar["i_3^*"] \drar[phantom,"\circled{\text{2}}"]
+			& K^0(X,B) \lar["\pr_X^*"',"\cong"] \dar["i^*"] \\
+			K^0 \enbrace[\big]{X \times \set{0} \cup A \times I \cup B \times \set{1}, A \times I \cup B \times \set{1}} \rar["i_4^*","\cong"'] & K^0(X,A)
+		\end{tikzcd}
+	\]
+	Dabei kommutiert \circled{1} nach Definition von $\delta ^{-1}$ und \circled{2}, da $\pr_x \circ i_3 \circ i_4 = i$ ist. $i_4^*$ ist ein Isomorphismus wegen 
+	Ausschneidung und Homotopieinvarianz:
+	\[
+		(X,A)\simeq \enbrace[\big]{X \times \set{0}  \cup A \times [0,1/2], A \times [0,1/2]} \xhookrightarrow{\minwidthbox{ }{1em}} 
+		\enbrace[\big]{X \times \set{0} \cup A \times I \cup B \times \set{1}, A \times I \cup B \times \set{1}}
+	\]
+	$i_1^*$ und $\pr_X^*$ sind Isomorphismen wie oben erklärt. Die Exaktheit der rechten Seite bei $K^0(X,B)$ folgt nur aus der Exaktheit der linken Seiten an der 
+	entsprechenden Stelle. Aber hier steht der Ausschnitt aus der exakten Folge des Tripels 
+	\[
+		\enbrace[\big]{X \times \set{0} \cup B \times I, X \times \set{0} \cup A \times I \cup B \times \set{1}, A \times I \cup B \times \set{1}} 
+	\]
+	an der Stelle, an der keine Randabbildung auftritt. Somit folgt die Exaktheit aus dem, was wir bereits gezeigt haben.
+	\item Die Exaktheit bei $K ^{-1}(B,A)$ lässt sich ebenfalls durch Verschieben der exakten Sequenz zeigen:
+	\[
+		\begin{tikzcd}[column sep=large,row sep=large]
+			K^{-1} \enbrace[\big]{X \times \set{0} \cup A \times I \cup B \times \set{1}, A \times I \cup B \times \set{1}} \rar["\cong"] \dar["\delta^{-1}"] 
+			\drar[phantom,"\circled{\text{3}}"]
+			&  K ^{-1}(X,A) \dar["j^*"] \\
+			K^0 \enbrace[\big]{X \times \set{0} \cup B \times I, X \times \set{0} \cup A \times I \cup B \times \set{1}} \rar["i_1^*"] \dar["i_1^*"] 
+			\drar[phantom,"\circled{\text{4}}"]
+			& K ^{-1}(B,A) \dar["\delta^{-1}"]\\
+			K^0 \enbrace[\big]{X \times \set{0} \cup B \times I, A \times I \cup B \times \set{1}} & K^0 (X,B) \lar["\cong","\pr_X^*"']  
+		\end{tikzcd}
+	\]
+	\circled{4} kommutiert wieder nach Definition von $\delta ^{-1}$. Dass das Diagramm bei \circled{3} kommutiert, ist eine (mühsame!) Übungsaufgabe.
+	\item Die Exaktheit für $n\ge 1$ folgt aus folgenden Überlegungen: Betrachte das Ko-Raumtripel
+	\[
+		\enbrace[\big]{X \times I^n, B \times I^n \cup X \times \partial I^n, A \times I^n \cup X \times \partial I^n} 
+	\]
+	und das kommutative Diagramm
+	\[
+		\begin{tikzcd}[row sep=large]
+			K^0 \enbrace[\big]{(X,A) \times (I,\partial I)^{n+1}} \rar[equal] \dar["j^*"] & K^{-(n+1)}(X,A) \dar["j^*"] \\
+			K^0 \enbrace[\big]{ \enbrace*{B \times I^n \cup X \times \partial I^n, A \times I^n \cup X \times \partial I^n} \times (I,\partial I)} 
+			\dar["\delta^{-1}"] \rar["\cong"] \drar[phantom,"\circled{\text{5}}"] & K^{-(n+1)}(B,A) \dar["\delta^{-(n+1)}"] \\
+			K^0 \enbrace[\big]{(X,B) \times (I,\partial I)^n} \rar[equal] \dar["i^*"] & K^{-n}(X,B) \dar["i^*"]\\
+			K^0 \enbrace[\big]{ (X,A) \times (I,\partial I)^n} \rar[equal] \dar["j^*"] & K^{-n}(X,A) \dar["j^*"] \\
+			K^0 \enbrace[\big]{B \times I^n \cup X \times \partial I^n, A \times I^n \cup X \times \partial I^n} \rar["\cong"] & K^{-n}(B,A)
+		\end{tikzcd}
+	\]
+	\circled{5} kommutiert nach Definition von $\delta^{-(n+1)}$. Die linke Spalte des Diagramms ist exakt, also auch die rechte Spalte. \qedhere \todo{Revision}
 \end{itemize}
 \end{beweis}
 \newpage
