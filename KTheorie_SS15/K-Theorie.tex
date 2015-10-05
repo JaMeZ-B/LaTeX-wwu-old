@@ -1121,7 +1121,7 @@ Setze $X_0 = A \setminus U$, $X_1 = X \setminus U$ und $X_2=A$ in \autoref{sub:3
 % subsection 310 (end)
 \newpage
 \section*{Exakte Tripelsequenz in $K$-Theorie}
-\begin{definition}
+\begin{definition}[{name=[Ko-Raumtripel]}]
 Ein Tripel $(X,B,A)$ von kompakten Hausdorff-Räumen heißt \Index{Ko-Raumtripel}, falls $A \subset B$ und $B \subset X$ Kofaserungen sind. 
 \end{definition}
 Wir wollen nun eine exakte Tripelsequenz in $K$-Theorie konstruieren:
@@ -1191,7 +1191,7 @@ Damit können wir $\delta^{-n}$ nun definieren:
 		K^0 \enbrace*{X \times I^{n-1}, B \times I^{n-1} \cup X \times \partial I^{n-1}}  
 	\end{tikzcd}
 \]
-\begin{theorem}
+\begin{theorem}[{name=[Exakte Tripelsequenz]}]
 Sei $(X,B,A)$ ein Ko-Raumtripel. Dann ist die Folge
 \[
 	\begin{tikzcd}
@@ -1274,62 +1274,68 @@ Wir zeigen zunächst die Exaktheit bei $K^0(X,A)$ und folgern die Exaktheit von 
 \section*{Produkte in $K$-Theorie und Kettenkomplexe von Vektorbündeln}
 Klassen in $K^0(X)$ sind $[E_1,E_0]$ \enquote{$=$} $E_1 -E_0$, die Produkte könnten wir wie folgt definieren: 
 \[
-	[E_1,E_0] \cdot [E_1',E_0'] = \benbrace[\big]{(E_1\otimes E_1') \oplus (E_0 \otimes E_0'), (E_1 \otimes E_0')\oplus (E_0 \otimes E_1')} 
+	\benbrace[\big]{E_1,E_0} \cdot \benbrace[\big]{E_1',E_0'} = \benbrace[\big]{(E_1\otimes E_1') \oplus (E_0 \otimes E_0'), (E_1 \otimes E_0')\oplus (E_0 \otimes E_1')} 
 \]
 Damit kann man aber nur schwer rechnen. Stattdessen wollen wir ein Produkt über Kettenkomplexe definieren.
 \[
-	\benbrace*{E_1,f,E_0}  \leadsto \begin{tikzcd}
+	\benbrace[\big]{E_1,f,E_0}  \leadsto \begin{tikzcd}
 		\cdots \rar & 0 \rar & E_1 \rar["\tilde{f}"] & E_0 \rar & 0 
 	\end{tikzcd}
 \]
 wobei $\tilde{f}$ die Fortsetzung von $f$ über $X$ ist
 
 \subsection*{Definition}
-Ein Kettenkomplex von $K$-Vektorbündeln über einem Ko-Raumpaar $(X,A)$ ist ein Paar $(C_n,c_n)_{n \in \mathds{N}}$, wobei die $C_i$ endlichdimensionale Vektorbündel sind und 
-die $c_i \colon C_n \to C_{n-1}$ Morphismen von $K$-Vektorbündeln mit folgenden Eigenschaften sind:
+\begin{definition}
+\mbox{ }
 \begin{itemize}
-	\item $\exists N \ge 0$ mit $C_n=0$ für $n >N$,
-	\item $c_{n-1} \circ c_n =0$,
-	\item für alle $x \in A$ ist der Kettenkomplex von Vektorräumen
+	\item Ein \Index{Kettenkomplex von $K$-Vektorbündeln} über einem Ko-Raumpaar $(X,A)$ ist gegeben durch ein Paar $(C_n,c_n)_{n \in \mathds{N}}$, wobei die $C_i$ 
+	endlichdimensionale Vektorbündel sind und die $c_i \colon C_n \to C_{n-1}$ Morphismen von $K$-Vektorbündeln mit den folgenden Eigenschaften sind:
+	\begin{enumerate}[a)]
+		\item $\exists N \ge 0$ mit $C_n=0$ für $n >N$,
+		\item $c_{n-1} \circ c_n =0$,
+		\item für alle $x \in A$ ist der Kettenkomplex von Vektorräumen
+		\[
+			\begin{tikzcd}
+				0 \rar & C_n|_{x} \rar["c_n|_x"] & C_{n-1}|_x \rar & \cdots \rar & C_1|_x \rar["c_1|_x"] & C_0|_x \rar & 0
+			\end{tikzcd}
+		\]
+		exakt.
+	\end{enumerate}
+	\item Eine \Index{Kettenabbildung} zwischen $(C_*,c_*)$ und $(D_*,d_*)$ über $(X,A)$ ist eine Folge von Morphismen $f_k \colon C_k \to D_k$, so dass folgendes Diagramm 
+	kommutiert
 	\[
 		\begin{tikzcd}
-			0 \rar & (C_n)\big|_{X} \rar["c_n|_X"] & C_{n-1}\big|_X \rar & \cdots \rar & C_1\big|_X \rar["c_1|_X"] & C_0\big|_X \rar & 0
+			\cdots \rar & C_k \rar["c_k"] \dar["f_k"] & C_{k-1} \rar \dar["f_{k-1}"]& \cdots \\
+			\cdots \rar & D_k \rar["d_k"] & D_{k-1} \rar & \cdots
 		\end{tikzcd}
 	\]
-	exakt.
+	\item Zwei Kettenkomplexe $(C_*^i, c_*^i)$ über $(X,A)$ für $i \in \set{0,1}$ heißen \Index{homotop}, falls es einen Kettenkomplex $(C_*,c_*)$ über 
+	$(X\times I, A \times I)$ gibt, sodass $(C_*,c_*)\big|_{X \times \set{i} } \cong (C_*^i,c_*^i)$. Wir schreiben hierfür auch $(C_*^0,c_*^0) \simeq (C_+^1, c_*^1)$.
+	\item Sei $K(X,A)^c$ der Quotient der freien abelschen Gruppe erzeugt von den Isomorphie-Klassen von Kettenkomplexen von $\mathds{C}$-Vektorbündeln über $(X,A)$ 
+	bezüglich der folgenden Relationen (wir lassen die Differentiale in der Notation weg):
+	\begin{enumerate}[a)]
+		\item Wenn $C_* \simeq D_*$ gilt, dann folgt $[C_*] = [D_*]$
+		\item Wenn $\begin{tikzcd}[cramped,sep=small]
+			0 \rar & C_* \rar & D_* \rar & E_* \rar & 0
+		\end{tikzcd}$ eine kurze exakte Folge von Kettenkomplexen ist (faserweise exakt), dann gilt
+		\[
+			[C_*] - [D_*] + [E_*] = 0
+		\]
+		\item \(
+			\big[ \begin{tikzcd}[cramped,sep=small]
+				\cdots \rar & 0 \rar & E \rar["\id"] & E \rar & 0 \rar & \cdots
+			\end{tikzcd}\big] =0
+		\) 
+	\end{enumerate}
 \end{itemize}
-Eine Kettenabbildung zwischen $(C_*,c_*)$ und $(D_*,d_*)$ über $(X,A)$ ist eine Folge von Morphismen $f_k \colon C_k \to D_k$, so dass folgendes Diagramm kommutiert
-\[
-	\begin{tikzcd}
-		\cdots \rar & C_k \rar["c_k"] \dar["f_k"] & C_{k-1} \rar \dar["f_{k-1}"]& \cdots \\
-		\cdots \rar & D_k \rar["d_k"] & D_{k-1} \rar & \cdots
-	\end{tikzcd}
-\]
-Zwei Kettenkomplexe $(C_*^i, c_*^i)$ über $(X,A)$ für $i \in \set{0,1}$ heißen \Index{homotop}, falls es einen Kettenkomplex $(C_*,c_*)$ über $(X\times I, A \times I)$ gibt,
-sodass $(C_*,c_*)\big|_{X \times \set{i} } \cong (C_*^i,c_*^i)$. Wir schreiben $(C_*^0,c_*^0) \simeq (C_+^1, c_*^1)$.
-
+\end{definition}
 \todo[inline]{Ab hier fehlen noch diverse Diagramme}
-\subsection*{Definition}
-Sei $K(X,A)^c$ der Quotient der freien abelschen Gruppe erzeugt von den Isomorphie-Klassen von Kettenkomplexen von $\mathds{C}$-Vektorbündeln über $(X,A)$ bezüglich der 
-folgenden Relationen:
-\begin{enumerate}[a)]
-	\item Wenn $C_* \simeq D_*$ gilt, dann folgt $[C_*] = [D_*]$
-	\item Wenn $\begin{tikzcd}[cramped,sep=small]
-		0 \rar & C_* \rar & D_* \rar & E_* \rar & 0
-	\end{tikzcd}$ eine kurze exakte Folge von Kettenkomplexen ist (faserweise exakt), dann gilt
-	\[
-		[C_*] - [D_*] + [E_*] = 0
-	\]
-	\item \(
-		\big[ \begin{tikzcd}[cramped,sep=small]
-			\cdots \rar & 0 \rar & E \rar["\id"] & E \rar & 0 \rar & \cdots
-		\end{tikzcd}\big]
-	\) \todo{Hier fehlt noch eine Aussage \ldots}
-\end{enumerate}
+
+
 \minisec{Bemerkung}
 Aus b) folgt $[C_*] = [D_*]$ für isomorphe Kettenkomplexe und 
 \[
-	\benbrace*{C_* \oplus  D_*, c_* \oplus d_*} = [C_*,c_*] + [D_*,d_*] 
+	\benbrace[\big]{C_* \oplus  D_*, c_* \oplus d_*} = \benbrace[\big]{C_*,c_*} + \benbrace[\big]{D_*,d_*}
 \]
 Wir haben einen Gruppenhomomorphismus $a \colon K^0(X,A) \to K(X,A)^c$, 
 % $[E_1,f,E_0]_\st \mapsto  \benbrace*{\begin{tikzcd}[cramped,sep=small] \cdots \rar & 0 \rar & E_1 \rar["\tilde{f}"] & E_0 \rar & 0 \end{tikzcd}} $,
