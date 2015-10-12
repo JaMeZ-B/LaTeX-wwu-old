@@ -1,0 +1,375 @@
+%!TEX root = ../Topo2_WS15/topologie_2.tex
+% \RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
+\documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage,draft]{scrartcl}
+\usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
+\usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
+\usepackage{etoolbox}
+\usepackage{letltxmacro}
+\usepackage{ifthen}
+
+%--Farbdefinitionen
+%-- muss vor tikz geladen werden
+\usepackage[usenames, table, x11names]{xcolor}
+\definecolor{dark_gray}{gray}{0.45}
+\definecolor{light_gray}{gray}{0.6}
+\usepackage[final]{graphicx}
+
+%--Zum Zeichnen
+%-- muss vor polyglossia bzw. babel geladen werden
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{external}
+\tikzset{>=latex}
+\usetikzlibrary{shapes,arrows,intersections}
+\usetikzlibrary{calc,3d}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings, decorations.pathmorphing}
+\usetikzlibrary{angles}
+
+%-- Konfiguration von tikzexternalize
+\tikzexternalize[prefix=tikz/,up to date check=diff]
+\pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
+\tikzset{external/system call={xelatex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode --shell-escape -jobname "\image" "\texsource"}}
+
+
+%-- tikzexternalize fuer tikzcd deaktivieren, da inkompatibel
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
+
+%-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
+\tikzset{
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colormaps}
+% \pgfplotsset{compat=1.12}
+
+
+
+%-- Mathesymbole etc.
+\usepackage{mathtools} % beinhaltet amsmath
+\mathtoolsset{showonlyrefs, centercolon}
+\newtagform{brackets}[\textbf]{[}{]}
+\usetagform{brackets}
+\usepackage{wasysym} % zusätzliche Symbole
+\usepackage{amssymb} % zusätzliche Symbole
+\usepackage{stmaryrd} % für Blitz
+\usepackage{nicefrac} % schräge Brüche
+\usepackage{faktor}
+\newcommand{\Faktor}[1]{\faktor[\textstyle]{#1}}
+\usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
+\usepackage{mathrsfs} % das X wurde benötigt
+
+%-- einzelne Symbole aus dem mathx-package
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathSymbol{\bigplus}{1}{mathx}{"90}
+
+%-- 
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen bzw zusätzliche Kapselung
+\newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
+
+\def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+%-- Underbrace als Befehl in LaTeX-Syntax (und ohne Spacingprobleme mit nachfolgenden Operatoren...)
+\newcommand{\Underbrace}[2]{{\underbrace{#1}_{#2}}}
+
+%-- Alles was mit Schrift und XeTeX zu tun hat
+\usepackage[euler-digits]{eulervm}
+\usepackage[no-math]{fontspec}
+\usepackage{polyglossia} % moderner babel-ersatz
+\setmainlanguage[spelling=new,babelshorthands=true]{german}
+\shorthandoff{"}
+\setotherlanguage{english}
+% \newcommand\glqq{"}
+% \newcommand\grqq{"}
+\defaultfontfeatures{Mapping=tex-text, WordSpace={1.2}, Ligatures={Required,Common,Contextual}} %
+
+%-- Alle hier aufgeführten Schriftarten sind in jeder TeXlive-Installation vorhanden!!
+%-- Hauptschriftart festlegen
+% \setmainfont{texgyrepagella}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic,ItalicFeatures={Style=Historic}]
+\setmainfont{TeXGyrePagellaX}[Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic,ItalicFeatures={Style=Historic},Ligatures={Required,Common,Contextual,Historic}]
+% \setmainfont[BoldFont={* Bold}, ItalicFont={* Light Italic},SmallCapsFont={Linux Libertine O}, SmallCapsFeatures={Letters=SmallCaps}]{Source Sans Pro}
+
+
+%-- Serifenlose Schriftart festlegen
+% \setsansfont{Roboto}[Scale=MatchUppercase,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-RegularItalic,BoldItalicFont=*-MediumItalic]
+% \setsansfont{RobotoSlab}[Scale=MatchUppercase,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Thin,SmallCapsFont=*-Regular]
+% \setsansfont{FiraSans}[Scale=MatchUppercase,Extension=.otf, UprightFont=*-Regular, BoldFont=*-SemiBold, ItalicFont=*-RegularItalic, BoldItalicFont=*-MediumItalic]
+% \setsansfont{SourceSansPro}[Scale=MatchUppercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Semibold,ItalicFont=*-LightIt,BoldItalicFont=*-SemiboldIt]
+% \setsansfont{texgyreadventor}[Scale=MatchUppercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+% \setsansfont{Kurier}[Scale=MatchUppercase, Extension=.otf, UprightFont=*Medium-Regular, BoldFont=*Heavy-Regular, ItalicFont=*Medium-Italic,BoldItalicFont=*Heavy-Italic]
+% \setsansfont{Iwona}[Scale=MatchUppercase, Extension=.otf, UprightFont=*Medium-Regular, BoldFont=*Heavy-Regular, ItalicFont=*Medium-Italic,BoldItalicFont=*Heavy-Italic]
+% \setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
+% \setsansfont{texgyrebonum}[Scale=MatchUppercase,Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\setsansfont{texgyreadventor}[Scale=MatchUppercase,Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+
+
+
+% \newfontfamily{\geometric}{texgyreheros}[Scale=MatchLowercase, Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic]
+% \addtokomafont{disposition}{\geometric}
+\setmonofont{SourceCodePro}[Scale=0.9,Extension=.otf,UprightFont=*-Regular, BoldFont=*-Semibold, ItalicFont=*-Light]
+\usepackage{xltxtra}
+\usepackage{fontawesome}
+\usepackage[final]{microtype}
+
+
+%--Mixed
+\usepackage[shortlabels,inline]{enumitem}
+\setlist[itemize,1]{label=\faCaretRight}
+\setlist[enumerate]{font=\bfseries}
+\usepackage[german=quotes]{csquotes}
+\usepackage{makeidx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[margin=10pt, font=small, labelfont={sf, bf}, format=plain, indention=1em]{caption}
+\captionsetup[wrapfigure]{name=Abb. }
+\usepackage{stackrel}
+
+\flushbottom
+
+
+%--Unterstreichung
+\usepackage[normalem]{ulem}
+\setlength{\ULdepth}{1.8pt}
+
+%--Indexverarbeitung
+\newcommand{\bet}[1]{\emph{#1}}
+\newcommand{\Index}[1]{\bet{#1}\index{#1}}
+\makeindex
+\setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \faHandUp \par \bigskip}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+
+%--Marginnote & todonotes
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\ }
+\usepackage[fulladjust]{marginnote}
+\renewcommand*{\marginfont}{\color{dark_gray} \itshape \footnotesize}
+\usepackage[textsize=small]{todonotes}
+\usepackage{ragged2e}
+\renewcommand*{\raggedleftmarginnote}{\RaggedLeft}
+\renewcommand*{\raggedrightmarginnote}{\RaggedRight}
+
+%--Todonotes mit tikz/externalize kompatibel machen
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
+
+%--Konfiguration von Hyperref pdfstartview=FitH, 
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,final]{hyperref}
+
+
+\newcommand{\appendLink}[1]{#1\,\faExternalLink}
+\newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
+\newcommand{\hrefsymmail}[2]{\href{#1}{\texttt{\faEnvelopeO\,#2}}}
+\renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
+
+
+
+% -- QR-Codes
+\usepackage{qrcode} %-- hinter hyperref laden!
+
+%--Römische Zahlen
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
+
+%%--Abkürzungen etc.
+\newcommand{\light}{\text{\Large $\lightning$}}
+
+%-- Definitionen von weiteren Mathe-Befehlen
+\DeclareMathOperator{\re}{Re} %Realteil
+\DeclareMathOperator{\im}{Im} %Imaginaerteil
+\DeclareMathOperator{\id}{id} %identische Abbildung
+\DeclareMathOperator{\conj}{conj} %Konjugation
+\DeclareMathOperator{\sgn}{sgn} %Signum
+\DeclareMathOperator{\End}{End} %Endomorphismen
+\DeclareMathOperator{\Hom}{Hom} %Homomorphismen
+\DeclareMathOperator{\Iso}{Iso} %Isomorphismen
+
+\DeclareMathOperator{\grad}{grad} %Gradient
+\DeclareMathOperator{\dive}{div} %Gradient
+\DeclareMathOperator{\rot}{rot} %Rotation
+
+
+\DeclareMathOperator{\Char}{char} %Charakteristik
+\DeclareMathOperator{\Aut}{Aut} %Automorphismen
+
+
+
+\newcommand{\D}{\ensuremath{\mathrm{D}\mkern-1.5mu}}
+\newcommand{\mathd}{\ensuremath{\mathrm{d}\mkern-1.0mu}}
+\newcommand{\Tmap}{\ensuremath{\mathrm{T}\mkern-0.85mu}}
+\newcommand{\opL}{\ensuremath{\mathrm{L}\mkern-0.6mu}}
+
+
+\DeclareMathOperator{\supp}{supp} %Träger
+
+
+
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\w}{\mathrm{w}}
+\newcommand{\sa}{\mathrm{s.a.}}
+\newcommand{\so}{\mathrm{s.o.}}
+\newcommand{\weakT}[1]{\ensuremath{\mathcal{T}_{#1}^{\mkern+1.0mu\text{\raisebox{0.4ex}{$\mathrm{w}$}}}}}
+\newcommand{\weakTstar}[1]{\ensuremath{\mathcal{T}_{#1}^{\mkern+1.0mu\text{\raisebox{0.4ex}{$\mathrm{w}$}}^*}}}
+\newcommand{\finSub}{\subset\mkern-0.7mu \subset}
+\newcommand{\rand}[1]{\ensuremath{\partial^{\scriptscriptstyle #1}}}
+
+
+% -- Kategorien
+\newcommand{\TOP}{\textsc{Top}}
+\newcommand{\HTOP}{\textsc{HTop}}
+\newcommand{\VR}{\textsc{VR}}
+\newcommand{\MOD}{\textsc{Mod}}
+\newcommand{\MONOIDE}{\textsc{Monoide}}
+\newcommand{\MENGEN}{\textsc{Mengen}}
+\newcommand{\MAN}{\textsc{Man}}
+\newcommand{\GRUPPEN}{\textsc{Gruppen}}
+\newcommand{\ABELGRUPPEN}{\textsc{Abel.Gruppen}}
+\newcommand{\KAT}{\textsc{Kat}}
+\newcommand{\FUN}{\textsc{Fun}}
+\newcommand{\SIMP}{\textsc{Simp}}
+\newcommand{\VEKT}{\textsc{Vekt}}
+
+\DeclareMathOperator{\cell}{cell}
+\DeclarePairedDelimiter{\homologieklasse}{\llbracket}{\rrbracket}
+
+
+% -- theorem packages
+\usepackage{amsthm}
+\usepackage{thmtools,thm-restate}
+\renewcommand{\listtheoremname}{Übersicht aller Aussagen}
+
+% -- Theoreme als PDF-Lesezeichen
+\usepackage{bookmark}
+\bookmarksetup{open,numbered}
+\makeatletter
+\newcommand*{\theorembookmark}{%
+  \bookmark[
+    dest=\@currentHref,
+    rellevel=1,
+    keeplevel,
+  ]{%
+    \thmt@thmname\space\csname the\thmt@envname\endcsname
+    \ifx\thmt@shortoptarg\@empty
+    \else
+      \space(\thmt@shortoptarg)%
+    \fi
+  }%
+}   
+\makeatother
+
+% -- Definition der einzelnen Umgebungen
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily\scshape,
+	bodyfont=\normalfont,
+	headformat=\NUMBER\ \NAME\NOTE,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark]%
+{mainstyle}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily\scshape,
+	bodyfont=\normalfont,
+	headformat=\NUMBER\NAME\NOTE,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark]%
+{mainstyle_unnumbered}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily\scshape,
+	bodyfont=\normalfont,
+	headformat=swapnumber,
+	headpunct=.,
+	postheadspace=1em,
+	spaceabove=15pt,spacebelow=10pt,
+	postheadhook=\theorembookmark,
+	qed=\qedsymbol]%
+{mainstyleB}
+\declaretheorem[name=Definition,parent=section,style=mainstyle]{definition}
+\declaretheorem[name=Definition,numbered=no,style=mainstyle_unnumbered]{definition*}
+\declaretheorem[name=Theorem,sharenumber=definition,style=mainstyle]{theorem}
+\declaretheorem[name=Theorem,numbered=no,style=mainstyle_unnumbered]{theorem*}
+\declaretheorem[name=Proposition,sharenumber=definition,style=mainstyle]{proposition}
+\declaretheorem[name=Lemma,sharenumber=definition,style=mainstyle]{lemma}
+\declaretheorem[name=Satz,sharenumber=definition,style=mainstyle]{satz}
+\declaretheorem[name=Korollar,sharenumber=definition,style=mainstyle]{korollar}
+\declaretheorem[name=Korollar,sharenumber=definition,style=mainstyleB]{korollarB}
+
+
+% -- Beweise
+\declaretheoremstyle[headfont=\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt,qed=\qedsymbol]{beweise}
+\declaretheoremstyle[headfont=\sffamily\bfseries,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=10pt,spaceabove=10pt]{bemerkungen}
+\declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
+\declaretheorem[name=Bemerkung,numbered=no,style=bemerkungen]{bemerkung}
+\declaretheorem[name=Beispiel,numbered=no,style=bemerkungen]{beispiel}
+\declaretheorem[name=Übung,numbered=no,style=bemerkungen]{uebung}
+\declaretheorem[name=Erinnerung,numbered=no,style=bemerkungen]{erinnerung}
+
+
+%--Skalarprodukt
+\DeclarePairedDelimiterX\sprod[2]{\langle}{\rangle}{#1\,\delimsize\vert\,#2}
+\DeclarePairedDelimiterX\skal[2]{\langle}{\rangle}{#1\,,\,#2}
+
+%--Betrag, Gaußklammer
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+%--Norm
+\DeclarePairedDelimiter\doppelstrich{\Vert}{\Vert}
+\newcommand{\norm}[2][\relax]{
+\ifx#1\relax \ensuremath{\doppelstrich*{#2}}
+\else \ensuremath{\doppelstrich*{#2}_{#1}}
+\fi}
+
+
+%--Umklammern
+\DeclarePairedDelimiter\enbrace{(}{)}
+\DeclarePairedDelimiter\benbrace{[}{]}
+\DeclarePairedDelimiter\lenbrace{<}{>}
+\newcommand{\ssbrace}[1]{{\scriptscriptstyle\enbrace{#1}}}
+
+%--Mengen
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\providecommand\given{} % to make it exist
+\DeclarePairedDelimiterX\set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+
+%--Befehl für eine Box mit Mindestweite
+\DeclareRobustCommand{\minwidthbox}[2]{%
+  \ifmmode
+    \expandafter\mathmakebox
+  \else
+    \expandafter\makebox
+  \fi
+  [\ifdim#2<\width\width\else#2\fi]{#1}%
+}
+
+%--Befehl zum Einkreisen
+\newcommand*\circled[1]{\tikzexternaldisable\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}\tikzexternalenable}
+
+
+%--Differential
+\newcommand{\diff}[2]{\ensuremath{\frac{{\partial #1}}{{\partial #2}} }}
+\newcommand{\diffd}[2]{\ensuremath{\frac{\mathd #1}{\mathd #2} }}
+
+%--Inhaltsverzeichnis
+\usepackage[tocindentauto]{tocstyle}
+\usetocstyle{KOMAlike}	
+\shorthandon{"}
+		
+%--Punkte (als letztes laden)
+\usepackage{ellipsis}
