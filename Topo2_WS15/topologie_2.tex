@@ -21,28 +21,144 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+\section{Kohomologie} % (fold)
+\label{sec:1}
 
-\section{Vektorbündel} % (fold)
-\label{sec:2}
-Wir betrachten nur reelle und komplexe Vektorbündel, es sei also $K \in \set{\mathds{R},\mathds{C}}$.
+\begin{definition}
+	Sei $R$ ein Ring. Ein \bet{$R$-Kokettenkomplex}\index{Kokettenkomplex} $(C^*,d^*)$ ist eine Folge von $R$-Moduln $(C^n)_{n \in \mathds{N}}$ zusammen mit $R$-linearen Abbildungen 
+	$d^n \colon C^n \to C^{n+1}$, sodass $d^{n+1} \circ d^n =0$. Der \bet{$n$-te Kohomologiemodul}\index{Kohomologiemodul} von $(C^*,d^*)$ ist definiert als 
+	\[
+		H^n(C^*,d^*) = \frac{\ker d^n \colon C^n \to C^{n+1}}{\im d^{n-1} \colon C^{n-1} \to C^n} 
+	\]
+	Kokettenabbildungen, Kokettenhomotopien, induzierte Abbildungen, \ldots \todo{hinzufügen}
+\end{definition}
 
-\begin{definition}[{name=[$K$-Vektorbündel]},label=def_vektbuendel]
-Sei $X$ ein topologischer Raum. Eine stetige surjektive Abbildung $p \colon E \to X$ heißt $K$-\Index{Vektorbündel}, falls gilt: 
-\begin{enumerate}[a)]
-	\item $ E_x := p^{-1}(\set{x})$ ist ein $K$-Vektorraum für alle $x \in X$. $E_x$ heißt die \Index{Faser} von $E$ über $x$. 
-	\item Für alle Punkte $x \in X$ gibt es eine Umgebung $U$, ein $n \in \mathds{N}$ und einen Homöomorphismus $\varphi_U \colon p^{-1}(U) \to U \times K^n$, sodass das 
-	folgende 
-	Diagramm kommutiert
+\begin{bemerkung} \leavevmode
+	\begin{enumerate}[i)]
+		\item Sei $(C_*,d_*)$ ein $R$-Kettenkomplex und $V$ ein $R$-Modul. Dann erhalten wir einen $R$"=Kokettenkomplex $(C^*,d^*)$ durch 
+		\[
+			C^n := \Hom_R(C_n,V) 
+		\]
+		und $d^n \colon C^n \to C^{n+1}$ definiert durch $\alpha \mapsto \alpha \circ d_{n+1}$. $(C^*,d^*)$ heißt der $V$-duale Kettenkomplex zu $(C_*,d_*)$.
+		\item Benutzen wir $\mathds{Z}$ statt $\mathds{N}$ als Indexmenge, so können wir durch $(C^n,d^n) \leadsto (C_n := C^{-n}, d_n := d^{-n})$ jeden Kokettenkomplex einem 
+		Kettenkomplex zuordnen. Dieser Prozess ist offensichtlich umkehrbar.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{beispiel}
+	Sei $(C_*,d_*)= \big(\begin{tikzcd}[cramped] \mathds{Z} & \mathds{Z} \lar["\cdot 2","d_1"'] & 0 \lar & \ldots \lar \end{tikzcd}\big)$ Dann ist
+	\[
+		H_k(C_*,d_*) = \begin{cases}
+			\nicefrac{\mathds{Z}}{2 \mathds{Z}}, &\text{ falls } k =0\\
+			0 , & \text{ sonst} 
+		\end{cases}
+	\]
+	Der $\mathds{Z}$-duale Kokettenkomplex ist
 	\[
 		\begin{tikzcd}
-			p^{-1}(U) \arrow["\varphi_U"]{rr} \drar["p"'] & & U \times K^n  \dlar["\mathrm{pr}_U"] \\
-			& U 
+			 \Hom_{\mathds{Z}}(\mathds{Z},\mathds{Z}) \rar["d^1"] \dar["\cong" description] & \Hom_{\mathds{Z}}(\mathds{Z},\mathds{Z}) \rar \dar["\cong" description] 
+			& 0 \rar & \ldots \\
+			\mathds{Z} \rar["\cdot 2"] & \mathds{Z}
 		\end{tikzcd}
 	\]
-	und die Einschränkung $\varphi_U |_{E_x} \colon E_x \to K^n$ für alle $x \in U$ ein Isomorphismus von $K$"=Vektorräumen ist. Diese Eigenschaft wird oft als 
-	\Index{lokale Trivialität} bezeichnet.
-\end{enumerate}
+	Damit ist die Kohomologie $H^k(C^*,d^*)$ isomorph zu $\sfrac{\mathds{Z}}{2 \mathds{Z}}$ für $k=1$ und $0$ in jedem anderen Fall.
+	Es gilt also nicht immer $H^*(\Hom(C_*;R),d^*) =  \Hom \enbrace{H_*(C_*,d_*),R}$.
+\end{beispiel}
+
+\begin{definition}
+	Sei $(X,A)$ ein Paar von topologischen Räumen und $V$ eine abelsche Gruppe. Der \Index{singuläre Kokettenkomplex} von $(X,A)$ mit Koeffizienten in $V$ ist definiert durch
+	\[
+		C^*_\sing(X,A;V) := \Hom_\mathds{Z} \enbrace[\big]{C_*^\sing(X,A),V}
+	\]
+	und $d^*_\sing(\alpha) := - (-1)^{\abs{\alpha}} \alpha \circ d_*^\sing$. Dabei ist $\abs{\alpha}=n$ für $\alpha \in C^n_\sing(X,A;R)$. Die 
+	Kohomologie von $\enbrace*{C^*_\sing(X,A;V), d^*_\sing}$ heißt die \Index{singuläre Kohomologie} von $(X,A)$ mit Koeffizienten in $R$.
 \end{definition}
+
+\begin{bemerkung}
+	Sei $R$ ein kommutativer Ring und $V$ ein $R$-Modul. Dann ist
+	\[
+		\enbrace*{C^*_\sing(X,A;V), d^*_\sing}
+	\]
+	isomorph zum $V$-dualen $R$-Kokettenkomplex des $R$-Kettenkomplexes $\enbrace*{C^\sing_*(X,A;R), d^\sing_*}$.
+\end{bemerkung}
+
+
+\begin{definition}
+	Sei $f \colon (X,A) \to (Y,B)$ eine stetige Abbildung von Paaren. Dann erhalten wir eine Kokettenabbildung $f^* \colon C^*_\sing(Y,B;V) \to C^*_\sing(X,A;V)$ durch
+	\[
+		f^*(\alpha) := \alpha \circ f_*
+	\]
+\end{definition}
+
+\begin{bemerkung}
+	Ist $g \colon (Y,B) \to (Z,C)$ eine weitere Abbildung von Paaren, so gilt $(g \circ f)^* = f^* \circ g^*$.
+\end{bemerkung}
+
+\begin{definition}
+	Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien. Ein \Index{kontravarianter Funktor}  $F \colon \mathcal{C} \to \mathcal{D}$ ordnet jedem Objekt $C$ in $\mathcal{C}$ ein Objekt
+	$D$ in $\mathcal{D}$ zu und jedem Morphismus $f \colon C \to C'$ einem Morphismus $F(f) \colon F(C') \to F(C)$ in $\mathcal{D}$ zu. Dabei muss gelten:
+	\begin{enumerate}[i)]
+		\item $F(\id_C)= \id_{F(C)}$
+		\item Für $C \xrightarrow{f} C' \xrightarrow{f'}C''$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
+	\end{enumerate}
+	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor 
+	$\mathcal{C}^\op \to \mathcal{D}^\op$.
+\end{definition}
+
+\begin{beispiel}
+	\begin{enumerate}[i)]
+		\item $\id \colon \mathcal{C} \to \mathcal{C}^\op$ ist kontravariant.
+		\item Sei $V$ eine abelsche Gruppe. Wir erhalten einen kontravarianten Funktor
+		\[
+			\Hom(-,V) \colon \mathds{Z}\text{-}\MOD  \longrightarrow \mathds{Z}\text{-}\MOD
+		\]
+		\item Sei $V$ eine abelsche Gruppe. Dann sind 
+		\begin{align}
+			C_\sing^*(-,V) &\colon \TOP^2 \longrightarrow \mathds{Z}\text{-}\textsc{Kokettenkomplexe}  \\
+			H^*_\sing \enbrace*{C_\sing^*(_,V),d_\sing^*} &\colon \TOP^2 \longrightarrow \textsc{Gr}\text{-}\mathds{Z}\text{-}\MOD   
+		\end{align}
+		kontravariante Funktoren.
+	\end{enumerate}
+\end{beispiel}
+
+\begin{satz}
+	Singuläre Kohomologie hat die folgenden Eigenschaften:
+	\begin{enumerate}[i)]
+		\item \textbf{Dimensionsaxiom:} $H^n_\sing(\set{\pt};V) = V$, falls $n=0$ ist und sonst $0$.\index{Dimensionsaxiom} 
+		\item \textbf{Paarfolge:} Es gibt eine natürliche Transformation $\partial^*\colon H^*(A;V) \to H^{*+1}(X,A;V)$ sodass für jedes Paar\index{Paarfolge} 
+		\[
+			\begin{tikzcd}
+				0 \rar & H^0(X,A;V) \rar & H^0(X,V) \rar & H^0(A;V) \rar["\partial"] & H^1(X,A;V) \rar & \ldots 
+			\end{tikzcd}
+		\]
+		eine lange exakte Folge ist. $\partial$ bezeichnet man auch als \Index{verbindende Abbildung}.
+		\item \textbf{Ausschneidung:} Sei $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. Dann induziert die Inklusion \index{Ausschneidung}
+		$i \colon (X \setminus L, A \setminus L) \hookrightarrow (X,A)$ einen Isomorphismus $i^* \colon H^*(X,A;V) \to H^*(X \setminus L, A \setminus L;V)$.
+		\item \textbf{Homotopieinvarianz:} Sind $f,g \colon (X,A) \to (Y,B)$ homotope Abbildungen von Paaren, so gilt $f^* = g^*$ für die induzierten Abbildungen in singulärer 
+		Kohomologie.\index{Homotopieinvarianz}
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Für singuläre Homologie haben wir die entsprechenden Aussagen schon bewiesen. In allen vier Fällen folgt die Aussage für Kohomologie aus schon bewiesenen Aussagen über 
+	den singulären Kettenkomplex.
+	
+	Wir führen dies an dieser Stelle nur für iv) aus. Seien $f, g \colon X \to Y$ homotop. Dann gibt es eine Kettenhomotopie $H \colon C^\sing_*(X) \to C^\sing_{*+1}(Y)$ zwischen den 
+	auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also \todo{nochmal durchgucken}
+	\[
+		d_{n+1} \circ H + H \circ d_n = f_* - g_*
+	\]
+	$H$ induziert $H^\# \colon C^*_\sing(Y;V) \to C_\sing^*(X;V)$ mit $H^\#(\alpha) := (-1)^{\abs{\alpha}} \alpha \circ H$. Es gilt nun
+	\begin{align}
+		\enbrace*{d^{n-1} \circ H^\# + H^\# \circ d^n}(\alpha) &= d^{n-1} \circ H^\#(\alpha) + H^\# \circ d^n (\alpha)\\
+		&= d^{n-1} \enbrace*{(-1)^n(\alpha \circ H)} - (-1)^n
+		H^\# \enbrace*{\alpha \circ d^{n+1}} \\
+		&= (-1)^n \enbrace*{(-1)^{n} \alpha \circ H  \circ d_n - (-1)^{n+1} \alpha \circ d_{n+1} \circ H} \\
+		&= \alpha \circ H \circ d_n + \alpha \circ d_{n+1} \circ H \\
+		&= \alpha \enbrace*{f_* - g_*} = f^*(\alpha) - g^*(\alpha) \qedhere
+	\end{align}
+\end{beweis}
+% section 1 (end)
+
 
 
 
