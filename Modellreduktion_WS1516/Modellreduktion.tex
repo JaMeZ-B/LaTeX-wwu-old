@@ -1,0 +1,153 @@
+\input{../!config/Tazdr/extra_files/Praeambel.tex}
+
+\newcommand{\vorlesung}{Modellreduktion und partielle Differentialgleichungen}
+\newcommand{\Prof}{Dr. Smetana}
+\newcommand{\subt}{Mitschrift der Tafelnotizen}
+
+\input{../!config/Tazdr/extra_files/headings.tex}
+
+
+\numberwithin{equation}{section}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\cleardoubleoddemptypage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+	Hierbei handelt es sich um eine \subt von \textbf{\Prof}, WWU Münster, aus der Vorlesung \textbf{\vorlesung} im Wintersemester 2015/16. 
+	Dies ist kein Skript der Vorlesung und keine eigene Arbeit des Autors.\\
+	\vspace{2cm}
+	Für Fehler in der Mitschrift wird keine Haftung übernommen. 
+	Hinweise auf Fehler sind gerne gesehen, hierfür kann man mich in der Uni ansprechen oder alternativ eine e-Mail an: \textit{tobias.wedemeier@gmx.de}\\
+	Auch ist eine Mitarbeit über Github möglich.\\
+	\vspace{2cm}
+	Wenn Teile aus der Vorlesung selber fehlen, können diese gerne an meine e-Mail versandt werden. 
+	Ich werde diese dann einarbeiten.\\
+\end{center}
+\vspace*{\fill}
+\cleardoubleoddemptypage
+
+\pagenumbering{Roman}
+
+\tableofcontents
+\cleardoubleoddemptypage %sorgt dafür, dass alles folgende erst auf der nächsten freien "rechten" Seite steht
+
+
+\section{Einletung und Motivation}
+
+\subsection{Parameterabhängige PDGL}
+\label{sub:para_pdgl}
+Sei $\Omega\subseteq \R^d$ ein polygonales Gebiet. Zu einem Parametervektor $\mu \in P\subseteq \R^d$ aus einer Menge von 'erlaubten' Parametern ist eine Funktion, z.B. 'Temperatur'
+\[
+u(\mu): \Omega\to \R
+\]
+gesucht, so dass $-\nabla(\kappa(\mu)\nabla u(\mu)) = q(\mu)$ in $\Omega$, wobei $u(\mu) = 0$ auf $\partial\Omega$, mit $\kappa(\mu):\Omega\to \R$ dem 'Wärmeleitkoeffizient' und $q(\mu)$ eine 'Wärmequelle', z.B. $q(\mu)=1$.
+%grafik 1
+Weiter kann eine Augabe erwünscht sein, z.B.
+\[
+s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x,\mu)\dint x,
+\]
+die mittlere Temperatur auf $\Omega_s$.
+%grafik 2
+%sub end
+
+\subsection{Definition (schwache Formulierung in Hilberträumen)}
+\label{sub:def_hilbert}
+Sei $X$ ein reeller Hilbertraum.
+Zu $\mu\in P$ ist gesucht ein $u(\mu)\in X$ und eine Ausgabe $s(\mu)\in \R$, so dass
+\[
+b(u(\mu),v;\mu) = f(v;\mu), ~ s(\mu) = l(u(\mu);\mu)~\forall v\in X
+\]
+für eine Bilinearform $b(\cdot,\cdot;\mu): X\times X \to \R$ und linearen Funktionalen $f(\cdot;\mu),l(\cdot;\mu):X\to \R$.
+
+Die schwache Formulierung für Beispiel 1.1 lautet:
+\[
+X:= H_0^1(\Omega)= \enbrace{f\in L^2(\Omega)~:+\difff{ }{x_1}f\in L^2(\Omega),~f|_{\partial \Omega = 0}}
+\]
+Dann kann man die Bilinearform über
+\[
+b(u(\mu),v;\mu) := \int\limits_{\Omega} \kappa(\mu)\nabla u(\mu)\nabla v \dint x; f(v;\mu) := \int\lim\limits_{\Omega} q(\mu) v \dint x
+\]
+ausdrücken und 
+\[
+s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x;\mu)\dint x =: l(u(\mu);\mu)
+\]
+ABER: Für sehr wenige PDGL's können wir die Lösung analytisch bestimmen.
+Daher sind wir an einer numerische Approximation interessiert.
+Ein weit verbreitetes Diskretisierungsverfahren ist die Finite Elemente Methode.
+Diese Methode basiert auf obiger schwacher Formulierung.
+%sub end
+
+\subsection{Definition (hochdimensionales, diskretes Modell)}
+\label{sub:def_hochdim}
+Sei $X_h\subseteq X$ mit $\dim(X_h) =N_h < \infty$.
+Der Index $h$ bezeichnet hier die Gitterweite.
+Zu $\mu\in P$ ist gesucht ein $u_h(\mu)\in X_h$ und eine Ausgabe $s_h(\mu)\in \R$, so dass
+\begin{align}
+b(u_h(\mu),v_h;\mu) = f(v_h;\mu), ~ s_h(\mu)= l_h(v_h(\mu);\mu)~\forall v_h\in X_h.
+\end{align}
+Anwendungen für die Standarddiskretisierungsverfahren sehr teuer oder zu teuer sind:
+\minisec{many-query context}
+\begin{itemize}
+	\item Parameterstudien
+	\item Design
+	\item Parameteridentifikation / inverse Probleme
+	\item Optimierung
+	\item Statistische Analyse
+\end{itemize}
+\minisec{schnelle Simulationsantwort}
+\begin{itemize}
+	\item Echtzeit-Steuerung technischer Geräte
+	\item interaktive Benutzeroberflächen
+\end{itemize}
+%sub end
+
+\subsection{Parameterabhängige Lösungsmenge}
+\label{sub:para_menge}
+Sei $\mu :=\{u(\mu)~:~\mu\in P\}\subseteq P$ für $P\in \R^p$ ist die durch $\mu$ parametrisierte Lösungsmenge.
+$X$ ist die im Allgemeinen unendlichdimensional.
+%grafik
+$\Rightarrow$ Motivation für die Suche nach einem 'niedrigdimensionalen' Teilraum $X_N\subseteq X$ zur Approximation von $M$ und einer Approximation $u_N(\mu) \approx u(\mu),~ u_N\in X_N$.
+Eine Möglichkeit eine reduzierte Basis zu generieren besteht darin geschickt Parameterwerte $\mu_1\dt{,}\mu_N\in P$ zu wählen und den Raum als $X_N := \spann\{u(\mu_1)\dt{,}u(\mu_N)\}$ zu definieren.
+Eine Lösung $u(\mu_i)$ für einen Parameterwert $\mu\in P$ wird auch \bet{Snapshot} genannt.
+
+\subsection{Beispiel}
+\label{sub:beispiel_1}
+Gesucht ist $u(\cdot;\mu) \in C^2([0,1])$ mit $(1+\mu)u'' = 1$ auf $(0,1)$ und $u(0)=u(1)=1$ für den Parameter $\mu\in P:= [0,1]\subseteq \R$.
+\bet{Snapshots:}\\
+$\mu_1 = 0 \Rightarrow u_1 := u(\cdot;\mu_1) = \frac{1}{2} x^2- \frac{1}{2}x +1$, $\mu_2 = 0 \Rightarrow u_2 := u(\cdot;\mu_2) = \frac{1}{4} x^2- \frac{1}{4}x +1$ und $X_N := \spann\{u_1,u_2\}$.
+Dann ist die reduzierte Lösung $u_N(\mu)\in X_N$ gegeben durch
+\[
+u_N(\mu) = \alpha_1(\mu)u_1 +\alpha_2(\mu) u_2,
+\]
+mit $\alpha_1 = \frac{2}{\mu+1}-1$ und $\alpha_2 = 2-\frac{2}{\mu-1}$.
+Diese erfüllt folgende Fehleraussage und ist somit exakt:
+\[
+\norm{u_N(\mu)-u(\mu)}_\infty = \sup\limits_{\lambda\in[0,1]} \abs{U_N(x;\mu)-u(x;\mu)} = 0
+\]
+Da $\alpha_1 + \alpha_2 = 1$ und $0\le \alpha_1,\alpha_2\le 1$ ist $M$ die Menge der Konvexkombinationen von $u_1$ und $u_2$.
+%sub end
+
+\subsection{Definition (reduziertes Modell)}
+\label{sub:reduziertes_modell}
+Sei $X_N\subseteq X$ ein reduzierter Basisraum mit $\dim(X_N)<\infty$.
+Zu $\mu\in P$ ist gesucht ein $u_N(\mu)\in X_N$ und eine Ausgabe $s_N(\mu)\in \R$, so dass
+\begin{align}
+b(u_N(\mu),v_N;\mu) = f(v_N;\mu),~ s_N(\mu) = l_N(u_N(\mu);\mu) ~ \forall v_N\in X_N
+\end{align}
+
+%sec end
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+
+
+\printindex
+\listoffigures
+\end{document}
