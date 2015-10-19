@@ -7,7 +7,7 @@
 \usepackage{etex} % sehr technisch, ermöglicht LaTeX mehr Speicher zu belegen
 \usepackage[T1]{fontenc} % auch sehr technisch; ist wichtig, um die Schriftarten richtig zu behandeln
 \usepackage{textcomp} %verhindert ein paar Fehler bei den Fonts
-\usepackage{amsmath} % Packet der American Mathematical Society, das viele Mathematik-Umgebungen und -Befehle definiert
+\usepackage{mathtools} % Packet der American Mathematical Society, das viele Mathematik-Umgebungen und -Befehle definiert
 \usepackage{amssymb} %zusätzliche Symbole
 \usepackage{latexsym} % nochmal zusätzliche Symbole
 \usepackage{stmaryrd} % nochmal mehr zusätzliche Symbole, u.a. Blitz für Widerspruchsbeweise ;)
@@ -18,15 +18,19 @@
 \usepackage{makeidx}% ermöglicht das automatische Anlegen eines Index 
 \usepackage{extarrows}
 \usepackage{bbold}
-\usepackage{mathtools}
+\usepackage[hyphens]{url}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+
 %\usepackage{MnSymbol}
 \flushbottom
 \usepackage[normalem]{ulem}
 \setlength{\ULdepth}{1.8pt}
 
 %--Indexverarbeitung
-\newcommand{\bet}[1]{\uline{\textbf{#1}}} %Betonung von Text
-\newcommand{\Index}[1]{\uline{\textbf{#1}}\index{#1}} % Befehl, der gleichzeitg das Argument hervorhebt und in den Index mitaufnimmt
+\newcommand{\bet}[1]{\textbf{#1}} %Betonung von Text
+\newcommand{\Index}[1]{\textbf{#1}\index{#1}} % Befehl, der gleichzeitg das Argument hervorhebt und in den Index mitaufnimmt
 \makeindex % startet das automatische Sammeln der Index-Einträge
 % Ein kleiner Text am Anfang des Index
 \setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar!} \par \bigskip}
@@ -56,8 +60,7 @@
 \renewcommand{\familydefault}{\sfdefault} %Standardschriftart auf die serifenlose Schriftart setzen
 
 %--Hyperref; aktiviert Hyperlinks in der erzeugten PDF-Datei und definiert deren Aussehen
-\usepackage[colorlinks, pdfpagelabels, pdfstartview=FitH, bookmarksopen=true, bookmarksnumbered=true,linkcolor=black,urlcolor=SkyBlue2, plainpages=false, hypertexnames=false, citecolor=black, hypertexnames=true]{hyperref}
-
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Tobias Wedemeier}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false]{hyperref}
 %--Römische Zahlen
 \newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1{}}}
 
@@ -90,7 +93,11 @@
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\acl}{acl}
 \DeclareMathOperator{\cov}{cov}
-
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Tol}{TOL}
+\DeclareMathOperator{\RK}{RK}
+\DeclareMathOperator{\divv}{div}
+\DeclareMathOperator{\tr}{tr}
 %--Skalarprodukt (cooler Befehl, den ich im Internet gefunden habe; benutzt TeX-Befehle)
 \makeatletter
 \newcommand{\sprod}[2]{\ensuremath{%
@@ -101,10 +108,9 @@
 \makeatother
 
 %--Norm (auch aus dem Internet, wird auch auf der Beispielseite verwandt)
-\newcommand{\norm}[2][\relax]{
-\ifx#1\relax \ensuremath{\left\Vert#2\right\Vert}
-\else \ensuremath{\left\Vert#2\right\Vert_{#1}}
-\fi}
+\newcommand{\norm}[1]{
+	\ensuremath{\left\Vert#1\right\Vert}
+}
 
 
 %--selbstgeschriebenen Befehle
@@ -116,6 +122,7 @@
 
 %--Mengen
 \newcommand{\penbrace}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\cenbrace}[1]{\ensuremath{\left[#1\right]}}
 
 %--Differential
 \newcommand{\diff}[2]{\ensuremath{\frac{\partial #1}{\partial #2} }}
@@ -145,6 +152,7 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\C}{\mathds{C}}
+\newcommand{\A}{\mathcal{A}}
 \newcommand{\mc}[1]{\mathcal{#1}}
 \newcommand{\Pfs}[1][\relax]{\ensuremath{
 	\ifx#1\relax \Pw-\text{f.s.}
@@ -159,4 +167,13 @@
 
 
 \newcommand{\sect}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
-\newcommand{\ssect}[1]{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+\newcommand{\ssect}[2]{ \subsubsection*{#1 #2}\addcontentsline{toc}{subsection}{#1}}
+
+
+
+
+
+
+
+
+
