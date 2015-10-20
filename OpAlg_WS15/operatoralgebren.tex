@@ -13,6 +13,9 @@
 \maketitle
 \begin{abstract}
 \input{../!config/vorwort.tex}
+\section*{Anmerkung}
+Innerhalb dieser Mitschrift wird man öfter den Ausdruck \enquote{Warum?} finden. Dies sind vom Dozenten bewusst weggelassene Details, die zu verstärktem Mitdenken beim Lesen 
+animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sachverhalte. Nur an wenigen Stellen habe ich die fehlenden Details hinzugefügt.
 \end{abstract}
 
 \tableofcontents
@@ -31,7 +34,7 @@
 	enthält. 
 \end{definition}
 
-\begin{definition}
+\begin{definition}[{name=[Menge der invertierbaren Elemente und Spektrum]}]
 	Für eine unitale $\mathds{C}$-Algebra $A$ setzen wir 
 	\begin{align}
 		\Inv(A) &:= \set{a \in A  \text{ invertierbar} } \\
@@ -47,13 +50,13 @@
 	\]
 \end{bemerkung}
 \begin{beweis}
-	$(1-ba)^{-1} = 1- b(1- ab)^{-1} a$.
+	Durch simplex Nachrechnen verifiziert man, dass $(1-ba)^{-1} = 1+ b(1- ab)^{-1} a$ gilt.
 \end{beweis}
 
 \begin{satz}
 	Sei $A$ eine unitale $\mathds{C}$-Algebra und $a \in A$ mit $\sigma(a)\not= \emptyset$. Sei weiter $p \in \mathds{C}[Z]$ ein Polynom. Dann gilt 
 	\[
-		\sigma\enbrace*{p(a) }= p \enbrace*{\sigma(a)}
+		\sigma\enbrace[\big]{p(a) }= p \enbrace[\big]{\sigma(a)}
 	\]
 \end{satz}
 \begin{beweis}
@@ -64,14 +67,14 @@
 	\]
 	Damit gilt: $p(a) -\mu$ ist genau dann invertierbar, wenn $a -\lambda_1, \ldots , a-\lambda_n $ invertierbar sind. Also 
 	\begin{align}
-		\mu \in \sigma \enbrace*{p(a)} &\iff \lambda_i \in \sigma(a) \text{ ist für ein } i \in \set{1,\ldots ,n} \\
+		\mu \in \sigma \enbrace[\big]{p(a)} &\iff \lambda_i \in \sigma(a) \text{ ist für ein } i \in \set{1,\ldots ,n} \\
 		&\iff p(\lambda) -\mu =0 \text{ für ein } \lambda \in \sigma(a) \\
 		&\iff p(\lambda)=\mu \text{ für ein } \lambda \in \sigma(a)   
 	\end{align}
 	Somit folgt dann $\sigma \enbrace*{p(a)} = p \enbrace*{\sigma(a)}$.
 \end{beweis}
 
-\begin{satz}[label=satz16_neumann]
+\begin{satz}[label=satz15_neumann]
 	Sei $A$ eine unitale Banachalgebra und $a \in A$. Falls $\norm{a}<1$, so ist $1-a$ invertierbar und 
 	\[
 		(1-a)^{-1} = \sum_{n=0}^{\infty} a^n \tag*{(\Index{Neumannsche Reihe})}
@@ -85,13 +88,61 @@
 	Die Summe ist also ein Rechtsinverses. Genauso folgt, dass es auch ein Linksinverses ist.
 \end{beweis}
 
-\begin{korollar}
+\begin{korollar}[{name=[Invertierbare Elemente bilden offene Menge]}]
 	Für eine unitale Banachalgebra $A$ gilt $\Inv(A) \subset A$ offen.
 \end{korollar}
 \begin{beweis}
 	Falls $a \in \Inv(A)$ und $\norm{b-a} < \norm{a^{-1}}^{-1}$, so gilt $\norm{b a^{-1} -1} \le \norm{b-a} \norm{a^{-1}}<1$, also ist 
-	$-\enbrace*{1- \enbrace*{ba^{-1} -1}} = ba^{-1}$ invertierbar nach \autoref{satz16_neumann} und damit auch $b \in \Inv(A)$, denn $b$ ist ein Linksinverses für 
+	$-\enbrace*{1- \enbrace*{ba^{-1} -1}} = ba^{-1}$ invertierbar nach \autoref{satz15_neumann} und damit auch $b \in \Inv(A)$, denn $b$ ist ein Linksinverses für 
 	$a^{-1}(ba^{-1})^{-1} \in \Inv(A)$.
+\end{beweis}
+
+\begin{definition}[{name=[Spektralradius]}]
+	Sei $A$ eine unitale Banachalgebra. Für $a \in A$ definieren wir den \Index{Spektralradius} durch
+	\[
+		r(a) := \sup_{\lambda \in \sigma(a)} \abs{\lambda} 
+	\] 
+\end{definition}
+
+\begin{proposition}[{name=[Spektrum ist kompakt und Spektralradius durch Norm beschränkt]}]
+	Seien $A,a$ wie oben. Dann ist $\sigma(a)$ kompakt und $r(a) \le \norm{a}$.
+\end{proposition}
+\begin{beweis}
+	Angenommen $\abs{\lambda} > \norm{a}$, dann gilt $\norm{\lambda^{-1} \cdot a} < 1$, also ist $1- \lambda^{-1} \cdot a$ invertierbar nach \autoref{satz15_neumann} und 
+	$\lambda -a \in \Inv(A)$. Damit ist $\lambda \notin \sigma(a)$. Damit folgt, dass $r(a) \le \norm{a}$ ist. 	
+	Es ist $\mathds{C} \setminus \sigma(a) \subset \mathds{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ kompakt sein.
+\end{beweis}
+
+\begin{satz}[{name=[In unitalen Banachalgebren sind die Spektren nie leer]}]
+	Sei $A$ eine unitale Banachalgebra. Für jedes $a \in A$ ist $\sigma(a)$ nichtleer. 
+\end{satz}
+\begin{beweis}
+	Falls $\abs{\lambda}> \norm{a}$, so existiert $\enbrace*{1- \lambda^{-1} a}^{-1}$, also $(\lambda-a)^{-1}$ und es gilt
+	\begin{align}
+		(\lambda-a)^{-1} = \lambda^{-1} \enbrace*{1- \lambda^{-1} a}^{-1} = \lambda^{-1} \enbrace*{\sum_{n=0}^{\infty} \lambda^{-n}a^n}
+	\end{align}
+	Es folgt 
+	\[
+		\norm{(\lambda-a)^{-1}} \le \abs*{\lambda^{-1}} \cdot \Underbrace{\sum_{n=0}^{\infty} \enbrace*{\abs*{\lambda^{-1}} \cdot \norm{a}}^n}{\le 2 
+		\text{ , falls } \abs{\lambda}> 2 \norm{a}} \xrightarrow{\abs{\lambda} \to \infty} 0 \label{19:eq:1} \tag{$*$}
+	\]
+	Sei nun $\lambda_0 \in \mathds{C}\setminus \sigma(a)$ und $\abs{\lambda-\lambda_0}< \norm{(a- \lambda_0)^{-1}}^{-1}$. Dann gilt 
+	\[
+		\norm{(\lambda-\lambda_0)(a - \lambda_0)^{-1}} \le \norm{\lambda-\lambda_0} \norm{(a-\lambda_0)^{-1}} <1   
+	\]
+	also $\enbrace*{1- (\lambda-\lambda_0)(a-\lambda_0)^{-1}}^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n (a-\lambda_0)^n$ und 
+	\begin{align}
+		-\sum_{n=0}^{\infty} (\lambda-\lambda_0)^n(a-\lambda_0)^{-(n+1)} &= (a- \lambda_0)^{-1} \enbrace*{(\lambda-\lambda_0)(a-\lambda_0)^{-1}-1}^{-1} \\
+		&= \enbrace[\Big]{(\lambda-\lambda_0) \Underbrace{(a-\lambda_0)(a-\lambda_0)^{-1}}{=1}-(a- \lambda_0)}^{-1} = (\lambda-a)^{-1}
+	\end{align}
+	Für ein stetiges Funktional $\varphi \in A^*$ erhalten wir 
+	\[
+		\varphi\enbrace*{(\lambda-a)^{-1}} = \sum_{n=0}^{\infty} - \varphi \enbrace*{(a-\lambda_0)^{-(n+1)}} \cdot (\lambda-\lambda_0)^n
+	\]
+	falls $\abs{\lambda-\lambda_0} < \norm{(a- \lambda_0)^{-1}}^{-1}$. Daher ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \emph{holomorph} auf 
+	$\mathds{C}\setminus \sigma(a)$. Falls $\sigma(a)= \emptyset$, so ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \emph{ganz}. Wegen \eqref{19:eq:1} und dem Satz
+	von Liouville\footnote{siehe \url{https://de.wikipedia.org/wiki/Satz_von_Liouville_\%28Funktionentheorie\%29}} ist dann $\varphi \enbrace*{(\lambda-a)^{-1}}=0$ für alle 
+	$\lambda\in \mathds{C}$. Aber $\varphi \in A^*$ war beliebig, und wegen Hahn-Banach gilt $(\lambda-a)^{-1}=0$. Dies ist ein Widerspruch.
 \end{beweis}
 % section 1 (end)
 
