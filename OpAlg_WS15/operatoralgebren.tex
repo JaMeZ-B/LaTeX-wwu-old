@@ -1,0 +1,111 @@
+%!TEX TS-program = xelatex
+\input{../!config/mitschrift3.tex}
+\newcommand{\fach}{Operatoralgebren}
+\newcommand{\semester}{WiSe 2015}
+\newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/operatoralgebren.html}
+
+\newcommand{\prof}{Prof.\ Dr.\ Wilhelm Winter}
+% \publishers{\scalebox{14}{$K$}}
+\input{../!config/mitschrift_headings.tex}
+
+\begin{document}
+\pagenumbering{Roman}
+\maketitle
+\begin{abstract}
+\input{../!config/vorwort.tex}
+\end{abstract}
+
+\tableofcontents
+\cleardoubleoddemptypage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\section{Spektraltheorie in Banachalgebren} % (fold)
+\label{sec:1}
+
+\begin{definition}[{name=[Banachalgebra]}]
+	Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra. Es gilt also stets $\norm{a b} \le \norm{a} \cdot \norm{b}$
+	Wir betrachten in dieser Vorlesung fast ausschließlich Algebren über $\mathds{C}$. Eine Banachalgebra heißt \Index{unital}, falls sie ein Einselement $1$ mit $\norm{1} =1$ 
+	enthält. 
+\end{definition}
+
+\begin{definition}
+	Für eine unitale $\mathds{C}$-Algebra $A$ setzen wir 
+	\begin{align}
+		\Inv(A) &:= \set{a \in A  \text{ invertierbar} } \\
+		\sigma(a) &:=\sigma_A(a) := \set[\big]{\lambda \in \mathds{C} \given \lambda \cdot 1 - a \notin \Inv(A)}
+	\end{align}
+	$\sigma(a)$ heißt \Index{Spektrum} von $a$. 
+\end{definition}
+
+\begin{bemerkung}
+	Sei $A$ wie oben und $a,b \in A$. Dann gilt
+	\[
+		1 -ab \in \Inv(A) \iff 1 -ba \in \Inv(A)
+	\]
+\end{bemerkung}
+\begin{beweis}
+	$(1-ba)^{-1} = 1- b(1- ab)^{-1} a$.
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine unitale $\mathds{C}$-Algebra und $a \in A$ mit $\sigma(a)\not= \emptyset$. Sei weiter $p \in \mathds{C}[Z]$ ein Polynom. Dann gilt 
+	\[
+		\sigma\enbrace*{p(a) }= p \enbrace*{\sigma(a)}
+	\]
+\end{satz}
+\begin{beweis}
+	Die Aussage ist trivial, falls $p$ konstant ist. Sei also $p$ nicht konstant. Zu $\mu \in \mathds{C}$ existieren $\lambda_0, \ldots , \lambda_n \in \mathds{C}$ mit 
+	$\lambda_0 \not= 0$ und $p(z) -\mu = \lambda_0 \cdot (z- \lambda_1) \cdot  \ldots \cdot (z- \lambda_n)$, also
+	\[
+		p(a) - \mu = \lambda_0 \cdot (a-\lambda_1) \cdot  \ldots \cdot (a- \lambda_n)
+	\]
+	Damit gilt: $p(a) -\mu$ ist genau dann invertierbar, wenn $a -\lambda_1, \ldots , a-\lambda_n $ invertierbar sind. Also 
+	\begin{align}
+		\mu \in \sigma \enbrace*{p(a)} &\iff \lambda_i \in \sigma(a) \text{ ist für ein } i \in \set{1,\ldots ,n} \\
+		&\iff p(\lambda) -\mu =0 \text{ für ein } \lambda \in \sigma(a) \\
+		&\iff p(\lambda)=\mu \text{ für ein } \lambda \in \sigma(a)   
+	\end{align}
+	Somit folgt dann $\sigma \enbrace*{p(a)} = p \enbrace*{\sigma(a)}$.
+\end{beweis}
+
+\begin{satz}[label=satz16_neumann]
+	Sei $A$ eine unitale Banachalgebra und $a \in A$. Falls $\norm{a}<1$, so ist $1-a$ invertierbar und 
+	\[
+		(1-a)^{-1} = \sum_{n=0}^{\infty} a^n \tag*{(\Index{Neumannsche Reihe})}
+	\]
+\end{satz}
+\begin{beweis}
+	Die Folge der Partialsummen $\enbrace[\big]{\sum_{n=0}^{k} a^n}_{k \in \mathds{N}} \subset A$ ist eine Cauchyfolge (warum?), sodass die unendliche Summe existiert. Es gilt dann
+	\begin{align}
+		(1-a) \enbrace*{\sum_{n=0}^{\infty} a^n} \xleftarrow{k \to \infty}(1-a) \enbrace*{\sum_{n=0}^{k} a^n} = 1-a^{k+1} \xrightarrow{k \to \infty} 1
+	\end{align}
+	Die Summe ist also ein Rechtsinverses. Genauso folgt, dass es auch ein Linksinverses ist.
+\end{beweis}
+
+\begin{korollar}
+	Für eine unitale Banachalgebra $A$ gilt $\Inv(A) \subset A$ offen.
+\end{korollar}
+\begin{beweis}
+	Falls $a \in \Inv(A)$ und $\norm{b-a} < \norm{a^{-1}}^{-1}$, so gilt $\norm{b a^{-1} -1} \le \norm{b-a} \norm{a^{-1}}<1$, also ist 
+	$-\enbrace*{1- \enbrace*{ba^{-1} -1}} = ba^{-1}$ invertierbar nach \autoref{satz16_neumann} und damit auch $b \in \Inv(A)$, denn $b$ ist ein Linksinverses für 
+	$a^{-1}(ba^{-1})^{-1} \in \Inv(A)$.
+\end{beweis}
+% section 1 (end)
+
+
+
+
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+
+\printindex
+\listoffigures
+\todototoc
+\listoftodos[To-do's und andere Baustellen]
+\end{document}
