@@ -2,7 +2,7 @@
 \input{../!config/mitschrift3.tex}
 \newcommand{\fach}{Topologie \RM{2}.}
 \newcommand{\semester}{WiSe 2015}
-\newcommand{\homepage}{https://wwwmath.uni-muenster.de/reine/u/topos/lehre/SS2015/KTheorie-Hopf/Hopf.html}
+\newcommand{\homepage}{https://wwwmath.uni-muenster.de/das/ist/kein/echter/Link.html}
 
 \newcommand{\prof}{Prof.\ Dr.\ Arthur Bartels}
 % \publishers{\scalebox{14}{$K$}}
@@ -24,12 +24,13 @@
 \section{Kohomologie} % (fold)
 \label{sec:1}
 
-\begin{definition}
+\begin{definition}[{name=[Kokettenkomplex und Kohomologie]}]
 	Sei $R$ ein Ring. Ein \bet{$R$-Kokettenkomplex}\index{Kokettenkomplex} $(C^*,d^*)$ ist eine Folge von $R$-Moduln $(C^n)_{n \in \mathds{N}}$ zusammen mit $R$-linearen Abbildungen 
 	$d^n \colon C^n \to C^{n+1}$, sodass $d^{n+1} \circ d^n =0$. Der \bet{$n$-te Kohomologiemodul}\index{Kohomologiemodul} von $(C^*,d^*)$ ist definiert als 
 	\[
 		H^n(C^*,d^*) = \frac{\ker d^n \colon C^n \to C^{n+1}}{\im d^{n-1} \colon C^{n-1} \to C^n} 
 	\]
+	\todo[inline]{Revision}
 	Kokettenabbildungen, Kokettenhomotopien, induzierte Abbildungen, \ldots \todo{hinzufügen}
 \end{definition}
 
@@ -65,7 +66,7 @@
 	Es gilt also nicht immer $H^*(\Hom(C_*;R),d^*) =  \Hom \enbrace{H_*(C_*,d_*),R}$.
 \end{beispiel}
 
-\begin{definition}
+\begin{definition}[{name=[singulärer Kokettenkomplex]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen und $V$ eine abelsche Gruppe. Der \Index{singuläre Kokettenkomplex} von $(X,A)$ mit Koeffizienten in $V$ ist definiert durch
 	\[
 		C^*_\sing(X,A;V) := \Hom_\mathds{Z} \enbrace[\big]{C_*^\sing(X,A),V}
@@ -83,7 +84,7 @@
 \end{bemerkung}
 
 
-\begin{definition}
+\begin{definition}[{name=[induzierte Abbildung]}]
 	Sei $f \colon (X,A) \to (Y,B)$ eine stetige Abbildung von Paaren. Dann erhalten wir eine Kokettenabbildung $f^* \colon C^*_\sing(Y,B;V) \to C^*_\sing(X,A;V)$ durch
 	\[
 		f^*(\alpha) := \alpha \circ f_*
@@ -94,7 +95,7 @@
 	Ist $g \colon (Y,B) \to (Z,C)$ eine weitere Abbildung von Paaren, so gilt $(g \circ f)^* = f^* \circ g^*$.
 \end{bemerkung}
 
-\begin{definition}
+\begin{definition}[{name=[kontravarianter Funktor]}]
 	Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien. Ein \Index{kontravarianter Funktor}  $F \colon \mathcal{C} \to \mathcal{D}$ ordnet jedem Objekt $C$ in $\mathcal{C}$ ein Objekt
 	$D$ in $\mathcal{D}$ zu und jedem Morphismus $f \colon C \to C'$ einem Morphismus $F(f) \colon F(C') \to F(C)$ in $\mathcal{D}$ zu. Dabei muss gelten:
 	\begin{enumerate}[i)]
@@ -102,7 +103,7 @@
 		\item Für $C \xrightarrow{f} C' \xrightarrow{f'}C''$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
 	\end{enumerate}
 	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor 
-	$\mathcal{C}^\op \to \mathcal{D}^\op$.
+	$\mathcal{C} \to \mathcal{D}^\op$.
 \end{definition}
 
 \begin{beispiel}
@@ -121,7 +122,7 @@
 	\end{enumerate}
 \end{beispiel}
 
-\begin{satz}
+\begin{satz}[{name=[Eigenschaften singulärer Kohomologie]}]
 	Singuläre Kohomologie hat die folgenden Eigenschaften:
 	\begin{enumerate}[i)]
 		\item \textbf{Dimensionsaxiom:} $H^n_\sing(\set{\pt};V) = V$, falls $n=0$ ist und sonst $0$.\index{Dimensionsaxiom} 
@@ -157,8 +158,165 @@
 		&= \alpha \enbrace*{f_* - g_*} = f^*(\alpha) - g^*(\alpha) \qedhere
 	\end{align}
 \end{beweis}
-% section 1 (end)
 
+\begin{bemerkung}
+	Sei $(X,A)$ ein Paar von topologischen Räumen. Der Verbindungshomomorphismus $\partial \colon H^n(A;V) \to H^{n+1}(X,A;V)$ kann wie folgt beschrieben werden: Sei 
+	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$ zu $\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist 
+	\[
+		\partial \benbrace{\alpha} = \benbrace*{d^n \hat{\alpha}} \in H^{n+1}(X,A;V)
+	\]
+\end{bemerkung}
+
+\begin{beispiel}
+	Die Gruppe $H^0(X;V)$ ist die Gruppe aller Abbildungen $\xi \colon X \to V$, die konstant auf Wegzusammenhangskomponenten ist. Die Gruppe $H^0(X,A;V)$ besteht aus allen 
+	solchen Abbildungen, die zusätzlich auf $A$ trivial sind.
+\end{beispiel}
+
+\begin{definition}[{name=[Produkt von $R$-Moduln]}]
+	Seien $(V_i)_{i \in I}$ $R$-Moduln. Mit $V := \prod_{i \in I} V_i$ bezeichnen wir das \Index{Produkt} der $V_i$. Element in $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit 
+	$v_i \in V_i$. Die $R$-Modulstruktur ist erklärt durch
+	\begin{align}
+		(v_i)_{i \in I}+ (w_i)_{i \in I} &:= (v_i + w_i)_{i \in I} \\
+		r \cdot (v_i)_{i \in I} &:= (r \cdot v_i)_{i \in I}
+	\end{align}
+	Für jedes $i_0 \in I$ erhalten wir $\pi_{i_0} \colon V \to V_{i_0}$, $(v_i)_{i \in I} \mapsto v_{i_0}$
+\end{definition}
+
+\begin{bemerkung}[name={Universelle Eigenschaft des Produktes}]
+	Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $(f_i \colon W \to V_i)_{i \in I}$ von $R$-linearen Abbildungen eine eindeutige 
+	$R$-lineare Abbildung $f \colon W \to \prod_{i \in I}V_i$ mit $f_i= \pi_i \circ f$. Diese ist gegeben durch
+	$f(w) := \enbrace*{f_i(w)}_{i \in I}$.
+\end{bemerkung}
+
+\begin{bemerkung}
+	Ist $I$ endlich, so gilt
+	\[
+		\bigoplus_{i \in I} V_i = \prod_{i \in I} V_i
+	\]
+\end{bemerkung}
+
+\begin{bemerkung}
+	Es seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Seien $j_{i_0} \colon V_{i_0} \to \bigoplus_{i \in I}V_i$ die Inklusionen $v_{i_0} \mapsto (v_i)_{i \in I}$
+	mit $v_i =v_{i_0}$ für $i=i_0$ und $0$ sonst. Dann erhalten wir einen Isomorphismus
+	\mapdef{\Hom_R \enbrace[\big]{\bigoplus_i V_i,W}}{\prod_{i \in I} \Hom_R(V_i,W)}{f}{(f \circ j_i)_{i \in I}}{\cong}
+\end{bemerkung}
+
+\begin{satz}
+	Sei $X= \coprod_{i \in I} X_i$ die Summe von topologischen Räumen $X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \to X$ einen Isomorphismus 
+	\[
+		\begin{tikzcd}[row sep=0em]
+			H^* \enbrace*{X,V} \rar & \prod_{i \in I} H^*(X_i,V) \\
+			\xi \rar[mapsto] & \enbrace[\big]{(j_i)^*(\xi)}_{i \in I}
+		\end{tikzcd}
+	\]
+\end{satz}
+\begin{beweis}
+	Die $(j_i)_{i \in I}$ induzieren einen Isomorphismus von Kettenkomplexen $\varphi \colon \bigoplus_{i \in I}C_*(X_i) \to C_*(X)$,  
+	$(a_i)_{i \in I} \mapsto \sum_{i \in I} (j_i)_* (a_i)$. Wegen 
+	\[
+		\Hom \enbrace*{\bigoplus\nolimits_{i \in I} C_*(X_i),V} = \prod_{i \in I} \Hom \enbrace*{C_*(X_i),V}
+	\]
+	erhalten wir einen Isomorphismus von Kokettenkomplexen
+	\[
+		\begin{tikzcd}[row sep=0em]
+			C^*(X,V) \rar["\cong"] & \prod_{i \in I} C^*(X_i,V) \\
+			\alpha \rar[mapsto] & \enbrace[\big]{j_i^*(\alpha)}_{i \in I}
+		\end{tikzcd}
+	\]
+	Dieser induziert den behaupteten Isomorphismus in Kohomologie.  
+\end{beweis}
+
+\begin{definition}[{name=[reduzierte Kohomologie]}]
+	Die reduzierte Kohomologie von $X$, $\tilde{H}^*(X;V)$ ist definiert als der Kokern von $p^* \colon H^* \enbrace*{\set{\pt};V} \to H^*(X;V)$.
+\end{definition}
+
+\begin{bemerkung}[{name=[Zusammenhang zwischen reduzierter und regulärer Homologie]}]
+	Für reduzierte Kohomologie gilt
+	\[
+		H^n(X;V) \cong \begin{cases}
+			\tilde{H}^n(X;V), &\text{ falls } n \not= 0\\
+			\tilde{H}^0(X;V) \oplus V , &\text{ falls } n=0 
+		\end{cases}
+	\]
+\end{bemerkung}
+
+\begin{beispiel}[{name=[Kohomologie der Sphäre]}]
+	Die reduzierte Kohomologie der Sphäre ist gegeben durch
+	\[
+		\tilde{H}^l (S^n;V) \cong H^l \enbrace*{D^n,S^{n-1};V} \cong \begin{cases}
+			V, &\text{ falls } l=n\\
+			0, &\text{ sonst}  
+		\end{cases}
+	\]
+\end{beispiel}
+% section 1 (end)
+\newpage
+
+\section{Die Paarung zwischen Kohomologie und Homologie} % (fold)
+\label{sec:2}
+
+\begin{definition}[{name=[Paarung]}]
+	Sei $V$ ein $\mathds{Z}$-Modul, $(X,A)$ ein Paar von topologischen Räumen. Wir definieren die \Index{Paarung}
+	\[
+		\begin{tikzcd}[row sep=0cm]
+			H^n(X,A;V) \times H_n(X,A) \rar & V \\
+			(\xi, x) \rar[mapsto] & \xi(x)
+		\end{tikzcd}
+	\]
+	wie folgt: Wähle $\alpha \in C^n_\sing(X,A;V)$ mit $\benbrace*{\alpha}=\xi$ und $a \in C^\sing_n(X,A)$ mit $\benbrace*{a}=x$. Dann setze $\xi(x) := \alpha(a)$.
+\end{definition}
+
+\begin{bemerkung}
+	Sei $\beta \in C^{n-1}_\sing(X,A;V)$ und $b \in C^\sing_{n+1}(X,A)$. Dann 
+	\begin{align}
+		\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) + \Underbrace{\alpha \enbrace*{d_{n+1}(b)}}{=0 \text{ da } d^n \alpha=0 } + \Underbrace{d^{n-1}(\beta) \enbrace*{a + d_{n+1}(b)}}{\pm \beta \enbrace*{d_n(a + d_{n+1}(b))}} 
+	\end{align}
+\end{bemerkung}
+
+\begin{bemerkung}
+	Für $r \in \mathds{Z}$, $x,x' \in H_n(X,A)$, $\xi,\xi' \in H^n(X,A;V)$ gilt
+	\begin{align}
+		(r \cdot \xi)(x) &= r \cdot \xi(x) = \xi(r \cdot x) \\
+		(\xi +\xi')(x) &= \xi(x) + \xi'(x) \\
+		\xi(x+x')&= \xi(x) + \xi(x')
+	\end{align}
+\end{bemerkung}
+
+\begin{bemerkung}
+	Wir können $(\xi,x)\mapsto \xi(x)$ auch als interpretieren als Homomorphismus
+	\[
+		f \colon H^n(X,A;V) \longrightarrow \Hom_\mathds{Z} \enbrace[\big]{H_n(X,A),V}
+	\]
+	mit $f(\xi)= \enbrace*{x \mapsto \xi(x)}$.
+\end{bemerkung}
+
+\begin{satz}
+	Für die eben definierte Abbildung $f \colon H^n(X,A;V) \to \Hom_\mathds{Z} \enbrace[\big]{H_n(X,A),V}$ gilt
+	\begin{enumerate}[(i)]
+		\item $f$ ist surjektiv
+		\item Ist $V$ ein $\mathds{Q}$-Vektorraum, so ist $f$ auch injektiv.
+	\end{enumerate}
+\end{satz}
+
+\begin{lemma}
+	Sei $C$ eine Untergruppe der freien abelschen Gruppe $\mathds{Z}[S]$. Dann gibt es $T \subseteq S$ und eine $T$-Folge $(n_t)_{t \in T}$ von positiven Zahlen $n_t$, so dass $C$
+	das Bild der injektiven Abbildung $M \colon \mathds{Z}[T] \to \mathds{Z}[S]$, $\sum z_t t \mapsto \sum z_t m_t \cdot t$. Insbesondere ist $C$ frei.
+\end{lemma}
+\begin{beweis}
+	Sei $\mathcal{M}$ die Menge aller Tripel $(T,R,m)$ mit 
+	\begin{itemize}
+		\item $T \subseteq R \subseteq S$
+		\item $m=(m_t)_{t \in T}$ ist eine $T$-Folge von positiven Zahlen
+		\item das Bild von $M \colon \mathds{Z}[T] \to \mathds{Z}[S]$, $t \mapsto m_t \cdot t$ ist $C \cap \mathds{Z}[R]$.
+	\end{itemize}
+	Wir definieren eine partielle Ordnung auf $\mathcal{M}$ durch
+	\[
+		(T,R,m) \le (T',R',m') :\iff T \subseteq T', R \subseteq R', m'|_{T}=m
+	\]
+	Es ist $\mathcal{M} \not= \emptyset$, da $(\emptyset,\emptyset, \cdot ) \in \mathcal{M}$. Jede aufsteigende Ketten in $\mathcal{M}$ hat eine obere Schranke. Nach Zorns Lemma 
+	existiert ein maximales Element $(T,R,m) \in \mathcal{M}$. Es bleibt zu zeigen: $R=S$.
+\end{beweis}
+% section 2 (end)
 
 
 
