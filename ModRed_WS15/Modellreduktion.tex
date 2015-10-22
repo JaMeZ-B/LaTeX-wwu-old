@@ -45,7 +45,7 @@ Sei $\Omega\subseteq \R^d$ ein polygonales Gebiet. Zu einem Parametervektor $\mu
 \[
 u(\mu): \Omega\to \R
 \]
-gesucht, so dass $-\nabla(\kappa(\mu)\nabla u(\mu)) = q(\mu)$ in $\Omega$, wobei $u(\mu) = 0$ auf $\partial\Omega$, mit $\kappa(\mu):\Omega\to \R$ dem 'Wärmeleitkoeffizient' und $q(\mu)$ eine 'Wärmequelle', z.B. $q(\mu)=1$.
+gesucht, so dass $-\nabla\big(\kappa(\mu)\nabla u(\mu)\big) = q(\mu)$ in $\Omega$, wobei $u(\mu) = 0$ auf $\partial\Omega$, mit $\kappa(\mu):\Omega\to \R$ dem 'Wärmeleitkoeffizient' und $q(\mu)$ eine 'Wärmequelle', z.B. $q(\mu)=1$.
 %grafik 1
 Weiter kann eine Augabe erwünscht sein, z.B.
 \[
@@ -60,7 +60,7 @@ die mittlere Temperatur auf $\Omega_s$.
 Sei $X$ ein reeller Hilbertraum.
 Zu $\mu\in P$ ist gesucht ein $u(\mu)\in X$ und eine Ausgabe $s(\mu)\in \R$, so dass
 \[
-b(u(\mu),v;\mu) = f(v;\mu), ~ s(\mu) = l(u(\mu);\mu)~\forall v\in X
+b\big(u(\mu),v;\mu\big) = f(v;\mu), ~ s(\mu) = l\big(u(\mu);\mu\big)~\forall v\in X
 \]
 für eine Bilinearform $b(\cdot,\cdot;\mu): X\times X \to \R$ und linearen Funktionalen $f(\cdot;\mu),l(\cdot;\mu):X\to \R$.
 
@@ -70,11 +70,11 @@ X:= H_0^1(\Omega)= \enbrace{f\in L^2(\Omega)~:+\difff{ }{x_1}f\in L^2(\Omega),~f
 \]
 Dann kann man die Bilinearform über
 \[
-b(u(\mu),v;\mu) := \int\limits_{\Omega} \kappa(\mu)\nabla u(\mu)\nabla v \dint x; f(v;\mu) := \int\lim\limits_{\Omega} q(\mu) v \dint x
+b\big(u(\mu),v;\mu\big) := \int\limits_{\Omega} \kappa(\mu)\nabla u(\mu)\nabla v \dint x; f(v;\mu) := \int\lim\limits_{\Omega} q(\mu) v \dint x
 \]
 ausdrücken und 
 \[
-s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x;\mu)\dint x =: l(u(\mu);\mu)
+s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x;\mu)\dint x =: l\big(u(\mu);\mu\big)
 \]
 ABER: Für sehr wenige PDGL's können wir die Lösung analytisch bestimmen.
 Daher sind wir an einer numerische Approximation interessiert.
@@ -88,7 +88,7 @@ Sei $X_h\subseteq X$ mit $\dim(X_h) =N_h < \infty$.
 Der Index $h$ bezeichnet hier die Gitterweite.
 Zu $\mu\in P$ ist gesucht ein $u_h(\mu)\in X_h$ und eine Ausgabe $s_h(\mu)\in \R$, so dass
 \begin{align}
-b(u_h(\mu),v_h;\mu) = f(v_h;\mu), ~ s_h(\mu)= l_h(v_h(\mu);\mu)~\forall v_h\in X_h.
+b\big(u_h(\mu),v_h;\mu\big) = f(v_h;\mu), ~ s_h(\mu)= l_h\big(v_h(\mu);\mu\big)~\forall v_h\in X_h.
 \end{align}
 Anwendungen für die Standarddiskretisierungsverfahren sehr teuer oder zu teuer sind:
 \minisec{many-query context}
@@ -117,7 +117,7 @@ Eine Lösung $u(\mu_i)$ für einen Parameterwert $\mu\in P$ wird auch \bet{Snaps
 
 \subsection{Beispiel}
 \label{sub:beispiel_1}
-Gesucht ist $u(\cdot;\mu) \in C^2([0,1])$ mit $(1+\mu)u'' = 1$ auf $(0,1)$ und $u(0)=u(1)=1$ für den Parameter $\mu\in P:= [0,1]\subseteq \R$.
+Gesucht ist $u(\cdot;\mu) \in C^2([0,1])$ mit $(1+\mu)u'' = 1$ auf $(0,1)$ und $u(0)=u(1)=1$ für den Parameter $\mu\in P:= [0,1]\subseteq \R$.\\
 \bet{Snapshots:}\\
 $\mu_1 = 0 \Rightarrow u_1 := u(\cdot;\mu_1) = \frac{1}{2} x^2- \frac{1}{2}x +1$, $\mu_2 = 0 \Rightarrow u_2 := u(\cdot;\mu_2) = \frac{1}{4} x^2- \frac{1}{4}x +1$ und $X_N := \spann\{u_1,u_2\}$.
 Dann ist die reduzierte Lösung $u_N(\mu)\in X_N$ gegeben durch
@@ -137,10 +137,179 @@ Da $\alpha_1 + \alpha_2 = 1$ und $0\le \alpha_1,\alpha_2\le 1$ ist $M$ die Menge
 Sei $X_N\subseteq X$ ein reduzierter Basisraum mit $\dim(X_N)<\infty$.
 Zu $\mu\in P$ ist gesucht ein $u_N(\mu)\in X_N$ und eine Ausgabe $s_N(\mu)\in \R$, so dass
 \begin{align}
-b(u_N(\mu),v_N;\mu) = f(v_N;\mu),~ s_N(\mu) = l_N(u_N(\mu);\mu) ~ \forall v_N\in X_N
+b\big(u_N(\mu),v_N;\mu\big) = f(v_N;\mu),~ s_N(\mu) = l_N\big(u_N(\mu);\mu\big) ~ \forall v_N\in X_N
 \end{align}
+%sub end
+
+\subsection{Bermerkung (Begrifflichkeit)}
+\label{sub:bem_begrifflichkeit}
+Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
+\begin{enumerate}[1)]
+	\item Eine partielle DGL ist ein \bet{analytisches Modell}, welches die analytische Lösung $u(\mu)\in X$ in einem (typischerweise) $\infty$-dimensionalen Funktionenraum charakterisiert ist.
+	\item Ein \bet{hochdimensionales, diskretes Modell} ist ein Berechnungsverfahren zur Bestimmung einer Näherung $u_h(\mu)\in X_h$, wobei $X_h$ ein hochdimensionaler Funktionenraum ist.
+	Beispiele sind \bet{Finite Elemente} oder \bet{Finite Volumenräume} und typischerweise hat $X_h$ eine Dimension von mindestens $10^5$.
+	\item Ein \bet{reduziertes Modell} ist ein Berechnungsverfahren zur Bestimmung einer Näherung $u_N(\mu)\in X_N$ in einem sehr problemangepassten und daher niedrigdimensionalen Raum von typischerweise $\dim X_N < 100$.
+	\item \bet{Modellreduktion} beschäftigt sich mit Modellen der Erzeugung von reduzierten Modellen aus hochdimensionalen, diskreten (oder auch analytischen) Modellen und Untersuchungen ihrer Eigenschaften.
+\end{enumerate}
+
+\subsection{Organisation der Vorlesung}
+\label{sub:org}
+\begin{itemize}
+	\item[Zentrale Fragen:]
+	\item \bet{Reduzierte Basis:} Wie kann ein möglichst kompakter Teilraum konstruiert werden?
+	\item \bet{Reduziertes Modell:} Existenz von reduzierten Lösungen $u_N(\mu)$?
+	Wie kann eine reduzierte Lösung $u_N(\mu)$ berechnet werden?
+	\item \bet{Effizienz:} Wie kann $u_N(\mu)$ schnell berechnet werden?
+	\item \bet{Stabilität:} Wie kann die Stabilität des reduzierten Modells für wachsendes $N$ garantiert werden?
+	\item\bet{Approximationsgüte:} Warum können wir erwarten, dass eine relativ kleine Anzahl von Basisfunktionen ausreicht?
+	\item \bet{Fehlerschätzer:} Kann der Fehler des reduzierten zum vollen Modell beschränkt werden?
+	\item \bet{Effektivität:} Kann garantiert werden, dass der Fehlerschätzer den Fehler nicht beliebig überschätzt?
+\end{itemize}
+
+\minisec{Vorläufige Gliederung (bis Weihnachten)}
+\begin{enumerate}[1)]
+	\item Einleitung / Moitavtion
+	\item Grundlagen:
+	\begin{itemize}
+		\item Kurze Einführung in lineare Funktionalanalysis
+		\item Kurze Einführung in Finite Elemente
+	\end{itemize}
+	\item Reduzierte Basis Methoden für lineare, koerzive Probleme
+	\begin{itemize}
+		\item Reduzierte Basis Verfahren
+		\item Offline-/ Online-Zerlegung
+		\item Fehlerschätzer
+		\item Basisgenerierung
+	\end{itemize}
+\end{enumerate}
+%sub end
 
 %sec end
+
+\section{Grundlagen}
+
+\subsection{Lineare Funktionalanalysis in Hilberträumen}
+
+\subsubsection{Lineare Operatoren}
+
+\ssect{2.1 Definition}{(Hilbertraum)}
+Sei $X$ ein reeller Vektorraum mit $(\cdot,\cdot):X\times X\to \R$ ein Skalarprodukt und induzierter Norm $\norm{x}:= \sqrt{(x,x)}$.
+falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum} (HR).
+
+\ssect{2.2 Beispiele}{(Hilbertraum)}
+\begin{enumerate}[(1)]
+	\item $X:= \R^d$ mit $(x,y) := \sum_{i=1}^{d} x_i y_i$ ist ein HR.
+	\item $X:= L^2(\Omega)$ mit $(x,y) := \int_{\Omega} f(x)g(x)\dint x $ ist ein HR.
+	\item $X:=C^0([0,1])$ mit $(f,g) := \int_{0}^{1} f(x) g(x) \dint x$ ist kein HR.
+\end{enumerate}
+
+\ssect{2.3 Lemma}{ }
+Seien $X$ und $Y$ reelle vektorräume.
+Ist die Abbildung $T:X\to Y$ linear und $x_0\in X$, so sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $T$ ist stetig.
+	\item $T$ ist stetig in $x_0$.
+	\item $\sup\lim\limits_{\norm{x}_X \le 1} \norm{Tx}_Y < \infty$.
+	\item $\exists$ Konstante (mit $\norm{Tx}_Y \le c\norm{x}_X ~\forall x\in X$)
+\end{enumerate}
+
+\ssect{2.4 Definition}{(Lineare Operatoren)}
+Seinen $X$ und $Y$ reelle Vektorräume.
+Wir definieren
+\[
+L(X;Y) := \enbrace{T:X\to Y~;~ T \text{ ist linear und stetig}}.
+\]
+Abbildungen in $L(X;Y)$ nennen wir \bet{lineare Operatoren}.
+Nach Lemma 2.3 (3) ist für jeden Operator $T\in L(X;Y)$ die \bet{Operatornorm} von $T$ definiert durch
+\[
+\norm{T}_{L(X;Y)} := \sup\limits_{\norm{x}_X\le 1} \norm{Tx}_Y < \infty,
+\]
+oder in kurz $\norm{T}$.
+Es ist $L(X) := L(X;X)$.
+
+\ssect{2.5 Definition}{(Spezielle lineare Operatoren)}
+\begin{enumerate}[(1)]
+	\item $X' := L(X;\R)$ ist der \bet{Dualraum} von $X$.
+	Die Elemente von $X'$ nennen wir auch \bet{lineare Funktionale}.
+	\item Die Menge der kompakten (linearen) Operatoren von $X$ nach $Y$ ist definiert durch
+	\[
+	K(X;Y) := \enbrace{T\in L(X;Y)~;~ T(\overline{B_1(0)}) \text{ kompakt}}.
+	\]
+	\item Eine lineare Abbildung $P:X\to X$ heißt (lineare) \bet{Projektion}, falls $P^2=P$.
+	\item Für $T\in L(X;Y)$ ist $\ker(T) := \enbrace{x\in X~;~ Tx = 0}$ der \bet{Nullraum} oder \bet{Kern} von $T$.
+	Aus der Stetigkeit von $T$ folgt, dass $\ker(T)$ ein abgeschlossener Unterraum ist.
+	Der \bet{Bildraum} von $T$ ist $\bild(T) := \enbrace{Tx\in Y~;~x\in X}$.
+	\item Ist $T\in L(X;Y)$ bijektiv, so ist $T^{-1}\in L(Y;X)$.
+	Dann heißt $T$ (linear, stetiger) \bet{Isomorphismus}.
+	\item $T\in L(X;Y)$ heißt \bet{Isometrie}, falls
+	\[
+	\norm{Tx}_Y = \norm{x}_X ~\forall x\in X
+	\]
+\end{enumerate}
+
+\ssect{2.6 Beispiel}{ }
+Sei $g\in L^2(\Omega)$.
+Dann ist nach der Hölderungleichung durch 
+\[
+T_g f := \int_{\Omega} f(x) g(x)\dint x
+\]
+ein Funktional $T_g\in  L^2(\Omega)'$ definiert.
+
+\ssect{2.7 Satz}{(Projektionssatz)}
+Sei $X$ ein Hilbertraum und $A\subseteq X$ nicht leer, abgeschlossen und konvex.
+Dann gibt es genau eine Abbildung $P:X\to A$ mit
+\[
+\norm{x-Px}_X = \dist(x,A) = \inf\lim\limits_{y\in A} \norm{x-y}_X ~\forall x\in X.
+\]
+Die Abbildung $P:X\to A$ heißt orthogonale Projektion von $X$ auf $A$.
+
+\bet{Beweis:} [Alt, Satz 2.2, S.96]
+
+\ssect{2.8 Folgerung}{ }
+Ist $A\subseteq X$ nicht-leer, abgeschlossen und Unterraum, so ist $P$ linear und $Px\in A$ charakterisiert durch $(x-Px,a)_X = 0~\forall a\in A$.
+Falls $\dim(A) = n<\infty$ und $\enbrace{\varphi_i}_{i=1}^h$ Orthonormalbasis von $A$, gilt
+\[
+Px = \sum_{i=1}^{n} (x, \varphi_i)_X\varphi_i.
+\]
+
+\ssect{2.9 Satz}{(Riesz'scher darstellungssatz)}
+Ist $X$ Hilbertraum, so ist $J:X\to X'$ definiert durch
+\[
+J(v)(w) := (v,w)_X ~\forall v,w\in X 
+\]
+eine stetige, lineare, bijektive Isometrie.
+Insbesondere existiert zu $l\in X'$ ein eindeutiger \bet{Riesz Repräasentant} $V_l := J^{-1}(l)\in X$ mit $l(.) = (v_l,.)_X$.
+
+\bet{Beweis:}\\
+C-S-Ungleichung: $\abs{J(v)(w)}\le \norm{v}_X\norm{w}_X$.
+Dann folgt: $ J(v)\in X'$ mit 
+\[
+\norm{J(v)}_{X'} = \sup\limits_{w\in X\backslash\{0\}} \frac{\abs{J(v)(w)}}{\norm{w}_X} = \sup\limits_{w\in X\backslash\{0\}} \frac{\abs{(v,w)_X}}{\norm{w}_X} \le \norm{v}_X \Rightarrow J \text{ stetig}.
+\]
+Da $\abs{J(v)(v)} = \norm{v}_X^2$ folgt:
+\[
+\sup\limits_{w\in X\backslash\{0\}} \frac{\abs{J(v)(w)}}{\norm{w}_X} \ge \frac{\abs{J(v)(v)}}{\norm{v}_X} = \frac{\norm{v}_x^2}{\norm{v}_X} = \norm{v}_X.
+\]
+Also ist $J$ eine Isometrie und insbesondere ist $J$ injektiv.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \cleardoubleoddemptypage
