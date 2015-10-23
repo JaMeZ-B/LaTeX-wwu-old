@@ -23,13 +23,13 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
+\setcounter{footnote}{0}
 
 \section{Spektraltheorie in Banachalgebren} % (fold)
 \label{sec:1}
 
 \begin{definition}[{name=[Banachalgebra]}]
-	Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra. Es gilt also stets $\norm{a b} \le \norm{a} \cdot \norm{b}$
+	Eine \Index{Banachalgebra} ist eine vollständige normierte Algebra. Für die Multiplikation gilt also $\norm{a b} \le \norm{a} \cdot \norm{b}$
 	Wir betrachten in dieser Vorlesung fast ausschließlich Algebren über $\mathds{C}$. Eine Banachalgebra heißt \Index{unital}, falls sie ein Einselement $1$ mit $\norm{1} =1$ 
 	enthält. 
 \end{definition}
@@ -40,7 +40,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\Inv(A) &:= \set{a \in A  \text{ invertierbar} } \\
 		\sigma(a) &:=\sigma_A(a) := \set[\big]{\lambda \in \mathds{C} \given \lambda \cdot 1 - a \notin \Inv(A)}
 	\end{align}
-	$\sigma(a)$ heißt \Index{Spektrum} von $a$. 
+	$\sigma(a)$ heißt \Index{Spektrum} von $a$. \todo{Revision}
 \end{definition}
 
 \begin{bemerkung}
@@ -53,7 +53,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Durch simplex Nachrechnen verifiziert man, dass $(1-ba)^{-1} = 1+ b(1- ab)^{-1} a$ gilt.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz14_poly]
 	Sei $A$ eine unitale $\mathds{C}$-Algebra und $a \in A$ mit $\sigma(a)\not= \emptyset$. Sei weiter $p \in \mathds{C}[Z]$ ein Polynom. Dann gilt 
 	\[
 		\sigma\enbrace[\big]{p(a) }= p \enbrace[\big]{\sigma(a)}
@@ -88,7 +88,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Die Summe ist also ein Rechtsinverses. Genauso folgt, dass es auch ein Linksinverses ist.
 \end{beweis}
 
-\begin{korollar}[{name=[Invertierbare Elemente bilden offene Menge]}]
+\begin{korollar}[{name=[Invertierbare Elemente bilden offene Menge]},label=inv_offen]
 	Für eine unitale Banachalgebra $A$ gilt $\Inv(A) \subset A$ offen.
 \end{korollar}
 \begin{beweis}
@@ -104,7 +104,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\] 
 \end{definition}
 
-\begin{proposition}[{name=[Spektrum ist kompakt und Spektralradius durch Norm beschränkt]}]
+\begin{proposition}[{name=[Spektrum ist kompakt und Spektralradius durch Norm beschränkt]},label=spec_kompakt]
 	Seien $A,a$ wie oben. Dann ist $\sigma(a)$ kompakt und $r(a) \le \norm{a}$.
 \end{proposition}
 \begin{beweis}
@@ -113,7 +113,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Es ist $\mathds{C} \setminus \sigma(a) \subset \mathds{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ kompakt sein.
 \end{beweis}
 
-\begin{satz}[{name=[In unitalen Banachalgebren sind die Spektren nie leer]}]
+\begin{satz}[{name=[In unitalen Banachalgebren sind die Spektren nie leer]},label=spec_nichtleer]
 	Sei $A$ eine unitale Banachalgebra. Für jedes $a \in A$ ist $\sigma(a)$ nichtleer. 
 \end{satz}
 \begin{beweis}
@@ -143,6 +143,96 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	$\mathds{C}\setminus \sigma(a)$. Falls $\sigma(a)= \emptyset$, so ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \emph{ganz}. Wegen \eqref{19:eq:1} und dem Satz
 	von Liouville\footnote{siehe \url{https://de.wikipedia.org/wiki/Satz_von_Liouville_\%28Funktionentheorie\%29}} ist dann $\varphi \enbrace*{(\lambda-a)^{-1}}=0$ für alle 
 	$\lambda\in \mathds{C}$. Aber $\varphi \in A^*$ war beliebig, und wegen Hahn-Banach gilt $(\lambda-a)^{-1}=0$. Dies ist ein Widerspruch.
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine unitale Banachalgebra. Für $a \in A$ gilt dann 
+	\[
+		r(a)=\lim_{n \to \infty}\norm{a^n}^{\frac{1}{n}}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei $\varphi \in A^*$ ein stetiges Funktional. Wir haben im Beweis von \autoref{spec_nichtleer} gesehen, dass die Zuordnung 
+	$\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ analytisch ist für $\lambda \notin \sigma(a)$. Insbesondere gilt dies für $\abs{\lambda}> r(a)$. Dann ist auch
+	$\lambda \mapsto \varphi \enbrace*{(\lambda^{-1}-a)^{-1}}$ analytisch für $0< \abs{\lambda}< \sfrac{1}{r(a)}$, ebenso 
+	$\lambda \mapsto \varphi \enbrace*{(1- \lambda \cdot a)^{-1}}$. Die Singularität bei $0$ ist hebbar, also definiert $f(\lambda) := \varphi \enbrace*{(1-\lambda \cdot a)^{-1}}$
+	eine analytische Funktion für $\abs{\lambda} < \sfrac{1}{r(a)}$. Dann existiert eine Folge $(\alpha_n)_{n \in N} \subset \mathds{C}$ mit 
+	$f(\lambda) = \sum_{n=0}^{\infty} \alpha_n \cdot \lambda^n$ für $\abs{\lambda}<r(a)$. Die Konvergenz ist absolut und gleichmäßig, also gilt insbesondere 
+	$\abs{\alpha_n \cdot \lambda^n} \xrightarrow{n \to \infty}0$. Falls $\abs{\lambda} < \sfrac{1}{\norm{a}} \le \sfrac{1}{r(a)}$ 
+	ist, so gilt
+	\[
+		f(\lambda) = \varphi \enbrace*{(1- \lambda \cdot a)^{-1}} \stackrel{\mbox{\scriptsize\ref{satz15_neumann}}}{=} \varphi \enbrace*{\sum_{n=0}^{\infty} (\lambda a)^n} = 
+		\sum_{n=0}^{\infty} \varphi \enbrace[\big]{(\lambda a)^n} = \sum_{n=0}^{\infty} \varphi(a^n) \cdot \lambda^n
+	\]
+	also $\alpha_n = \varphi(a^n)$ für $n \in N$. Es gilt $\varphi(a^n) \cdot \lambda^n \xrightarrow{n \to \infty} 0$. Aber $\varphi \in A^*$ war beliebig, also ist für jedes 
+	$\varphi \in A^*$ die Folge $\enbrace*{\varphi(\lambda^n a^n)}_\mathds{N} = \enbrace*{\varphi(a^n) \cdot \lambda^n}_{n \in \mathds{N}}$ beschränkt für 
+	$\abs{\lambda}<\sfrac{1}{r(a)}$.
+
+	Nach dem Prinzip der gleichmäßigen Beschränktheit ist dann $(\lambda^n a^n)_{n \in \mathds{N}}$ beschränkt für jedes $\lambda$ mit $\abs{\lambda}< \sfrac{1}{r(a)}$. Damit 
+	existiert für $0 < \abs{\lambda}< \sfrac{1}{r(a)}$ ein $M \ge 0$ mit $\norm{\lambda^n a^n} \le M$, $n \in \mathds{N}$, also 
+	\[
+		\norm{a^n}^{1/n}\le\frac{M^{\sfrac{1}{n}}}{\abs{\lambda}} \xrightarrow{n \to \infty} \frac{1}{\abs{\lambda}} 
+	\]
+	Es folgt $\limsup_n \norm{a^n}^{\sfrac{1}{n}} \le r(a)$. Falls $\lambda \in \sigma(a)$, so gilt nach \autoref{satz14_poly} $\lambda^n \in \sigma(a^n)$ und wegen 
+	\autoref{spec_kompakt} $\abs{\lambda^n} \le \norm{a^n}$, also $\abs{\lambda} \le \norm{a^n}^{\sfrac{1}{n}}$ und es folgt insgesamt
+	\begin{align}
+		r(a) \le \inf_n \norm{a^n}^{\sfrac{1}{n}} \le \liminf_n \norm{a^n}^{\sfrac{1}{n}} \le \limsup_n \norm{a^n}^{\sfrac{1}{n}} \le r(a)
+	\end{align}
+	und damit $\lim_n \norm{a^n}^{\sfrac{1}{n}} = r(a)$.
+\end{beweis}
+
+\begin{proposition}[label=prop1.11_einfach]
+	Sei $A$ eine abelsche unitale Banachalgebra. Falls $A$ einfach\footnote{besitzt keine nichttrivialen Ideale} ist, so ist $A \cong \mathds{C}$. 
+\end{proposition}
+\begin{beweis}
+	Sei $a \in A$, $\alpha \in \sigma(a)$. Dann ist $J := \overline{(a-\alpha \cdot 1)\cdot A} \lhd A$ ein abgeschlossenes Ideal. Für jedes $b \in A$ ist $(a-\alpha)b$ nicht 
+	invertierbar. Damit folgt dann $\norm{(a-\alpha)b - 1}\ge 1$ für jedes $b \in A$. Damit ist auch $\dist\enbrace*{(a-\alpha \cdot 1)\cdot A,1}\ge 1$. Also ist $1 \notin J$ und 
+	damit $j \not= A$. Da $A$ einfach ist, folgt $J=\set{0}$, also muss $a-\alpha \cdot 1=0$ und weiter $a \in \mathds{C} \cdot 1$ gelten. Damit ist 
+	$A = \mathds{C} \cdot 1 \cong \mathds{C}$.
+\end{beweis}
+
+\begin{definition}[{name=[Charakter]}]
+	Sei $A$ eine abelsche unitale Banachalgebra. Eine lineare, multiplikative, nicht verschwindende Abbildung $\chi \colon A \to \mathds{C}$ heißt \Index{Charakter} auf $A$.  
+	Es gilt dann $\chi(1)=1$. Wir setzen $\Omega(A) := \set{\chi \given \chi \text{ Charakter auf }A}$ (\Index{Charakterspektrum} oder einfach nur \Index{Spektrum} von $A$).
+	
+	Die \Index{Geldfanddarstellung} ist definiert als 
+	$a \mapsto \hat{a} \colon \Omega(A) \to \mathds{C}, \chi \mapsto \chi(a)$.
+\end{definition}
+
+\begin{satz}
+	Sei $A$ eine abelsche unitale Banachalgebra. Dann gilt
+	\begin{enumerate}[(i)]
+		\item Jeder Charakter auf $A$ ist stetig mit Norm $1$.
+		\item Die Abbildung $\chi \mapsto \ker \chi$ definiert eine Bijektion zwischen 
+		\[
+			\Omega(A) \to J_{\max} := \set[\big]{J \given J \lneqq A \text{ ist maximales Ideal} }
+		\]
+		\todo{symbol austauschen}
+	\end{enumerate}
+\end{satz}
+\begin{beweis}\leavevmode
+	\begin{enumerate}[(i)]
+		\item Sei $a \in A$ mit $\norm{a}<1$ und $\chi(a)=1$. Setze $b= \sum_{n=1}^{\infty} a^n$, dann ist $1 + b = \sum_{n=0}^{\infty} a^n = (1-a)^{-1}$. Also ist
+		$1 = (1+b)(1-a) = 1 + b -a -ab$ und damit $ab+a=b$. Es folgt $\chi(a)\chi(b) + \chi(a)= \chi(b)$. Dies ist ein Widerspruch. Also muss $\norm{\chi}\le 1$ sein. Mit 
+		$\chi(1)=1$ folgt $\norm{\chi}=1$.
+		\item Für jedes $\chi \in \Omega(A)$ ist $\ker \chi \lhd A$ ein Ideal. Weiter ist der Kern abgeschlossen in $A$, da $\chi$ stetig ist. Wir zeigen, dass $\ker \chi$ maximal 
+		ist. $\ker \chi \not= A$, denn $\chi \not= 0$. Falls $c \in A \setminus \ker \chi$, so gilt 
+		\(
+			\chi(c)^{-1} \cdot c-1 \in \ker \chi
+		\).
+		Also ist $\ker \chi + \mathds{C} \cdot c = \ker \chi + \mathds{C} \cdot 1=A$, da $a- \chi(a) \cdot 1 \in \ker \chi$ und damit 
+		$a= \enbrace*{a- \chi(a) \cdot 1}+ \chi(a) \cdot 1 \in \ker \chi + \mathds{C} \cdot 1$. Damit ist der Kern von $\chi$ maximal.
+		
+		Zur Injektivität: Es seien $\chi_1, \chi_2 \in \Omega(A)$ mit $\ker \chi_1 = \ker \chi_2$. Dann gilt für $a \in A$
+		\begin{align}
+			\chi_1(a) - \chi_2(a) = \chi_1 \enbrace[\Big]{\Underbrace{a - \chi_2(a) \cdot 1}{\in \ker \chi_2=\ker \chi_1}} = 0
+		\end{align}
+		Also ist $\chi_1=\chi_2$. Für die Surjektivität betrachten wir ein maximales, nichttriviales Ideal $J \lneqq A$. Dann ist $\dist \enbrace*{J,1}=1$, denn 
+		\todo{Einsen auseinanderhalten} 
+		$\mathring{B}_A(1,1) \subset \Inv(A)$ nach \autoref{satz15_neumann}. Dann ist $1 \notin \overline{J} \lhd A$. Da $J$ maximal ist, folgt $J=\overline{J}$. Damit ist 
+		$\sfrac{A}{J}$ eine einfache, abelsche, unitale Banachalgebra. Mit \autoref{prop1.11_einfach} folgt $\sfrac{A}{J} \cong \mathds{C}$. Damit ist 
+		$\chi \colon A \to \sfrac{A}{J} \cong \mathds{C}$ ein Charakter mit $\ker \chi= J$. \qedhere
+	\end{enumerate}
 \end{beweis}
 % section 1 (end)
 
