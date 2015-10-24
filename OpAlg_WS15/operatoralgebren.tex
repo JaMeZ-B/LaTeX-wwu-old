@@ -111,42 +111,45 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \begin{beweis}
 	Angenommen $\abs{\lambda} > \norm{a}$, dann gilt $\norm{\lambda^{-1} a} < 1$, also ist $\ind- \lambda^{-1} a$ invertierbar nach \autoref{satz15_neumann} und 
 	damit auch $\lambda -a \iff \lambda \notin \sigma(a)$. Insgesamt folgt, dass $r(a) \le \norm{a}$ ist. 	
-	Es ist $\mathbb{C} \setminus \sigma(a) \subset \mathbb{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ nach Heine-Borel kompakt sein. \todo{Revision}
+	Es ist $\mathbb{C} \setminus \sigma(a) \subset \mathbb{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ nach Heine-Borel kompakt sein.
 \end{beweis}
 
 \begin{satz}[{name=[In unitalen Banachalgebren sind die Spektren nie leer]},label=spec_nichtleer]
 	Sei $A$ eine unitale Banachalgebra. Für jedes $a \in A$ ist $\sigma(a)$ nichtleer. 
 \end{satz}
 \begin{beweis}
-	Falls $\abs{\lambda}> \norm{a}$, so existiert $\enbrace*{1- \lambda^{-1} a}^{-1}$, also $(\lambda-a)^{-1}$ und es gilt
+	Falls $\abs{\lambda}> \norm{a}$, so existiert $\enbrace*{\ind- \lambda^{-1} a}^{-1}$ und $(\lambda-a)^{-1}$ mit der gleichen Begründung wie eben. Es gilt dann
 	\begin{align}
-		(\lambda-a)^{-1} = \lambda^{-1} \enbrace*{1- \lambda^{-1} a}^{-1} = \lambda^{-1} \enbrace*{\sum_{n=0}^{\infty} \lambda^{-n}a^n}
+		(\lambda-a)^{-1} = \lambda^{-1} \enbrace*{1- \lambda^{-1} a}^{-1} \stackrel{\mbox{\scriptsize\ref{satz15_neumann}}}{=} \lambda^{-1} \enbrace*{\sum_{n=0}^{\infty} 
+		\lambda^{-n}a^n}
 	\end{align}
-	Es folgt 
+	und weiter
 	\[
-		\norm{(\lambda-a)^{-1}} \le \abs*{\lambda^{-1}} \cdot \Underbrace{\sum_{n=0}^{\infty} \enbrace*{\abs*{\lambda^{-1}} \cdot \norm{a}}^n}{\le 2 
-		\text{ , falls } \abs{\lambda}> 2 \norm{a}} \xrightarrow{\abs{\lambda} \to \infty} 0 \label{19:eq:1} \tag{$*$}
+		\norm{(\lambda-a)^{-1}} \le \abs*{\lambda^{-1}} \cdot \sum_{n=0}^{\infty} \enbrace*{\abs*{\lambda^{-1}} \cdot \norm{a}}^n  \xrightarrow{\abs{\lambda} \to \infty} 0 
+		\label{19:eq:1} \tag{$*$}
 	\]
-	Sei nun $\lambda_0 \in \mathbb{C}\setminus \sigma(a)$ und $\abs{\lambda-\lambda_0}< \norm{(a- \lambda_0)^{-1}}^{-1}$. Dann gilt 
+	da man die Summe als geometrische Reihe mit $2$ abschätzen kann, falls $\abs{\lambda}> 2 \cdot \norm{a}$ ist.
+	Sei nun $\lambda_0 \in \mathbb{C}\setminus \sigma(a)$ und $\abs{\lambda-\lambda_0}< \doppelstrich{(a- \lambda_0)^{-1}}^{-1}$. Dann gilt 
 	\[
-		\norm{(\lambda-\lambda_0)(a - \lambda_0)^{-1}} \le \norm{\lambda-\lambda_0} \norm{(a-\lambda_0)^{-1}} <1   
+		\norm{(\lambda-\lambda_0)(a - \lambda_0)^{-1}} \le \abs{\lambda-\lambda_0} \cdot \norm{(a-\lambda_0)^{-1}} <1   
 	\]
-	also $\enbrace*{1- (\lambda-\lambda_0)(a-\lambda_0)^{-1}}^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n (a-\lambda_0)^n$ und 
+	Also ist wieder nach \autoref{satz15_neumann} $\enbrace*{\ind- (\lambda-\lambda_0)(a-\lambda_0)^{-1}}^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n (a-\lambda_0)^n$ und 
 	\begin{align}
-		-\sum_{n=0}^{\infty} (\lambda-\lambda_0)^n(a-\lambda_0)^{-(n+1)} &= (a- \lambda_0)^{-1} \enbrace*{(\lambda-\lambda_0)(a-\lambda_0)^{-1}-1}^{-1} \\
-		&= \enbrace[\Big]{(\lambda-\lambda_0) \Underbrace{(a-\lambda_0)(a-\lambda_0)^{-1}}{=1}-(a- \lambda_0)}^{-1} = (\lambda-a)^{-1}
+		-\sum_{n=0}^{\infty} (\lambda-\lambda_0)^n(a-\lambda_0)^{-(n+1)} &= (a- \lambda_0)^{-1} \enbrace*{(\lambda-\lambda_0)(a-\lambda_0)^{-1}-\ind}^{-1} \\
+		&= \enbrace[\Big]{(\lambda-\lambda_0) \Underbrace{(a-\lambda_0)^{-1}(a-\lambda_0)}{=\ind}-(a- \lambda_0)}^{-1} = (\lambda-a)^{-1}
 	\end{align}
 	Für ein stetiges Funktional $\varphi \in A^*$ erhalten wir 
 	\[
 		\varphi\enbrace*{(\lambda-a)^{-1}} = \sum_{n=0}^{\infty} - \varphi \enbrace*{(a-\lambda_0)^{-(n+1)}} \cdot (\lambda-\lambda_0)^n
 	\]
-	falls $\abs{\lambda-\lambda_0} < \norm{(a- \lambda_0)^{-1}}^{-1}$. Daher ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \emph{holomorph} auf 
-	$\mathbb{C}\setminus \sigma(a)$. Falls $\sigma(a)= \emptyset$, so ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \emph{ganz}. Wegen \eqref{19:eq:1} und dem Satz
-	von Liouville\footnote{siehe \url{https://de.wikipedia.org/wiki/Satz_von_Liouville_\%28Funktionentheorie\%29}} ist dann $\varphi \enbrace*{(\lambda-a)^{-1}}=0$ für alle 
-	$\lambda\in \mathbb{C}$. Aber $\varphi \in A^*$ war beliebig, und wegen Hahn-Banach gilt $(\lambda-a)^{-1}=0$. Dies ist ein Widerspruch.
+	falls $\abs{\lambda-\lambda_0} < \doppelstrich{(a- \lambda_0)^{-1}}^{-1}$. Daher ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \Index{holomorph} auf 
+	$\mathbb{C}\setminus \sigma(a)$. Falls $\sigma(a)= \emptyset$, so ist $\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ \bet{ganz}\index{ganze Funktion}, d.h. holomorph 
+	auf ganz $\mathbb{C}$. Wegen \eqref{19:eq:1} und dem Satz von Liouville\footnote{siehe \url{https://de.wikipedia.org/wiki/Satz_von_Liouville_\%28Funktionentheorie\%29}} ist 
+	dann $\varphi \enbrace*{(\lambda-a)^{-1}}=0$ für alle $\lambda\in \mathbb{C}$. Aber $\varphi \in A^*$ war beliebig, und wegen Hahn-Banach gilt $(\lambda-a)^{-1}=0$. Dies 
+	ist ein Widerspruch. \todo{Revision}
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[Formel für den Spektralradius]}]
 	Sei $A$ eine unitale Banachalgebra. Für $a \in A$ gilt dann 
 	\[
 		r(a)=\lim_{n \to \infty}\norm{a^n}^{\frac{1}{n}}
@@ -156,7 +159,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Sei $\varphi \in A^*$ ein stetiges Funktional. Wir haben im Beweis von \autoref{spec_nichtleer} gesehen, dass die Zuordnung 
 	$\lambda \mapsto \varphi \enbrace*{(\lambda-a)^{-1}}$ analytisch ist für $\lambda \notin \sigma(a)$. Insbesondere gilt dies für $\abs{\lambda}> r(a)$. Dann ist auch
 	$\lambda \mapsto \varphi \enbrace*{(\lambda^{-1}-a)^{-1}}$ analytisch für $0< \abs{\lambda}< \sfrac{1}{r(a)}$, ebenso 
-	$\lambda \mapsto \varphi \enbrace*{(1- \lambda \cdot a)^{-1}}$. Die Singularität bei $0$ ist hebbar, also definiert $f(\lambda) := \varphi \enbrace*{(1-\lambda \cdot a)^{-1}}$
+	$\lambda \mapsto \varphi \enbrace*{(\ind- \lambda \cdot a)^{-1}}$. Die Singularität bei $0$ ist hebbar, also definiert $f(\lambda) := \varphi \enbrace*{(\ind-\lambda \cdot a)^{-1}}$
 	eine analytische Funktion für $\abs{\lambda} < \sfrac{1}{r(a)}$. Dann existiert eine Folge $(\alpha_n)_{n \in N} \subset \mathbb{C}$ mit 
 	$f(\lambda) = \sum_{n=0}^{\infty} \alpha_n \cdot \lambda^n$ für $\abs{\lambda}<r(a)$. Die Konvergenz ist absolut und gleichmäßig, also gilt insbesondere 
 	$\abs{\alpha_n \cdot \lambda^n} \xrightarrow{n \to \infty}0$. Falls $\abs{\lambda} < \sfrac{1}{\norm{a}} \le \sfrac{1}{r(a)}$ 
@@ -172,7 +175,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Nach dem Prinzip der gleichmäßigen Beschränktheit ist dann $(\lambda^n a^n)_{n \in \mathbb{N}}$ beschränkt für jedes $\lambda$ mit $\abs{\lambda}< \sfrac{1}{r(a)}$. Damit 
 	existiert für $0 < \abs{\lambda}< \sfrac{1}{r(a)}$ ein $M \ge 0$ mit $\norm{\lambda^n a^n} \le M$, $n \in \mathbb{N}$, also 
 	\[
-		\norm{a^n}^{1/n}\le\frac{M^{\sfrac{1}{n}}}{\abs{\lambda}} \xrightarrow{n \to \infty} \frac{1}{\abs{\lambda}} 
+		\norm{a^n}^{\sfrac{1}{n}}\le\frac{M^{\sfrac{1}{n}}}{\abs{\lambda}} \xrightarrow{n \to \infty} \frac{1}{\abs{\lambda}} 
 	\]
 	Es folgt $\limsup_n \norm{a^n}^{\sfrac{1}{n}} \le r(a)$. Falls $\lambda \in \sigma(a)$, so gilt nach \autoref{satz14_poly} $\lambda^n \in \sigma(a^n)$ und wegen 
 	\autoref{spec_kompakt} $\abs{\lambda^n} \le \norm{a^n}$, also $\abs{\lambda} \le \norm{a^n}^{\sfrac{1}{n}}$ und es folgt insgesamt
@@ -182,7 +185,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	und damit $\lim_n \norm{a^n}^{\sfrac{1}{n}} = r(a)$.
 \end{beweis}
 
-\begin{proposition}[label=prop1.11_einfach]
+\begin{proposition}[label=prop1.11_einfach,{name=[Einfache abelsche unitale Banachalgebra]}]
 	Sei $A$ eine abelsche unitale Banachalgebra. Falls $A$ einfach\footnote{besitzt keine nichttrivialen Ideale} ist, so ist $A \cong \mathbb{C}$. 
 \end{proposition}
 \begin{beweis}
@@ -197,7 +200,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Es gilt dann $\chi(1)=1$. Wir setzen $\Omega(A) := \set{\chi \given \chi \text{ Charakter auf }A}$ (\Index{Charakterspektrum} oder einfach nur \Index{Spektrum} von $A$).
 	
 	Die \Index{Geldfanddarstellung} ist definiert als 
-	$a \mapsto \hat{a} \colon \Omega(A) \to \mathbb{C}, \chi \mapsto \chi(a)$.
+	$a \mapsto \hat{a} \colon \Omega(A) \to \mathbb{C}, \chi \mapsto \chi(a)$.\todo{entfernen, wenn ordentlich definiert}
 \end{definition}
 
 \begin{satz}
@@ -206,7 +209,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\item Jeder Charakter auf $A$ ist stetig mit Norm $1$.
 		\item Die Abbildung $\chi \mapsto \ker \chi$ definiert eine Bijektion zwischen 
 		\[
-			\Omega(A) \to J_{\max} := \set[\big]{J \given J \subsetneq A \text{ ist maximales Ideal} }
+			\Omega(A) \to J_{\max} := \set[\big]{J \given J \subsetneq A \text{ ist ein maximales Ideal} }
 		\]
 	\end{enumerate}
 \end{satz}
