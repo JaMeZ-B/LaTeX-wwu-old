@@ -1,5 +1,5 @@
 %!TEX root = ../Topo2_WS15/topologie_2.tex
-% \RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
+\RequirePackage{fix-cm} 
 \documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=5mm, titlepage,draft]{scrartcl}
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
 \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
@@ -63,6 +63,7 @@
 \newcommand{\Faktor}[1]{\faktor[\textstyle]{#1}}
 \usepackage{xfrac}
 \usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
+\usepackage[bb=px]{mathalfa}
 
 %-- einzelne Symbole aus dem mathx-package
 % \DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
@@ -71,10 +72,13 @@
 % \DeclareMathSymbol{\bigplus}{1}{mathx}{"90}
 
 %-- 
-% \DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
-% \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
-\newcommand{\mathds}[1]{\mathbb{#1}} % Um Kompatibilitaet mit frueheren Benutzung von dsfont herzustellen bzw zusätzliche Kapselung
-% \newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
+\usepackage{silence}
+\WarningFilter{latexfont}{Size substitutions with differences}
+\WarningFilter{latexfont}{Font shape `U/bbold/m/n' in size}
+
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\newcommand{\ind}{\mathbbold{1}} % charakteristische-Funktion-Eins
 
 \def\mathul#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}} %farbiges Untersteichen im Mathe-Modus
 \renewcommand{\le}{\leqslant}
