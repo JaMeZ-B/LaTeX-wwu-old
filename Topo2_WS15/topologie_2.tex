@@ -270,7 +270,7 @@
 \begin{bemerkung}
 	Sei $\beta \in C^{n-1}_\sing(X,A;V)$ und $b \in C^\sing_{n+1}(X,A)$. Dann 
 	\begin{align}
-		\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) + \Underbrace{\alpha \enbrace*{d_{n+1}(b)}}{=0 \text{ da } d^n \alpha=0 } + \Underbrace{d^{n-1}(\beta) \enbrace*{a + d_{n+1}(b)}}{\pm \beta \enbrace*{d_n(a + d_{n+1}(b))}} 
+		\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) + \Underbrace{\alpha \enbrace[\big]{d_{n+1}(b)}}{=0 \text{ da } d^n \alpha=0 } + \Underbrace{d^{n-1}(\beta) \enbrace*{a + d_{n+1}(b)}}{\pm \beta \enbrace[\big]{d_n(a + d_{n+1}(b))}} 
 	\end{align}
 \end{bemerkung}
 
@@ -291,7 +291,7 @@
 	mit $f(\xi)= \enbrace*{x \mapsto \xi(x)}$.
 \end{bemerkung}
 
-\begin{satz}
+\begin{satz}[label=eig_kohomo_to_hom_homo]
 	Für die eben definierte Abbildung $f \colon H^n(X,A;V) \to \Hom_\mathbb{Z} \enbrace[\big]{H_n(X,A),V}$ gilt
 	\begin{enumerate}[(i)]
 		\item $f$ ist surjektiv
@@ -299,25 +299,149 @@
 	\end{enumerate}
 \end{satz}
 
-\begin{lemma}
-	Sei $C$ eine Untergruppe der freien abelschen Gruppe $\mathbb{Z}[S]$. Dann gibt es $T \subseteq S$ und eine $T$-Folge $(n_t)_{t \in T}$ von positiven Zahlen $n_t$, so dass $C$
-	das Bild der injektiven Abbildung $M \colon \mathbb{Z}[T] \to \mathbb{Z}[S]$, $\sum z_t t \mapsto \sum z_t m_t \cdot t$. Insbesondere ist $C$ frei.
+Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussagen:
+
+\begin{lemma}[label=lem:untergrp_frei]
+	Untergruppen freier abelscher Gruppen sind frei.
+	% Sei $C$ eine Untergruppe der freien abelschen Gruppe $\mathbb{Z}[S]$. Dann gibt es $T \subseteq S$ und eine $T$-Folge $(n_t)_{t \in T}$ von positiven Zahlen $n_t$, so dass $C$
+	% das Bild der injektiven Abbildung $M \colon \mathbb{Z}[T] \to \mathbb{Z}[S]$, $\sum z_t t \mapsto \sum z_t m_t \cdot t$ ist. Insbesondere ist $C$ frei.
 \end{lemma}
 \begin{beweis}
-	Sei $\mathcal{M}$ die Menge aller Tripel $(T,R,m)$ mit 
+	Sei $C$ eine Untergruppe von $\mathbb{Z}[S]$. Sei $\mathcal{M}$ die Menge der Tripel $(T,R,\varphi)$ mit
 	\begin{itemize}
-		\item $T \subseteq R \subseteq S$
-		\item $m=(m_t)_{t \in T}$ ist eine $T$-Folge von positiven Zahlen
-		\item das Bild von $M \colon \mathbb{Z}[T] \to \mathbb{Z}[S]$, $t \mapsto m_t \cdot t$ ist $C \cap \mathbb{Z}[R]$.
+		\item $T \subseteq R \subseteq S$.
+		\item $\varphi \colon \mathbb{Z}[T] \to \mathbb{Z}[R] \cap C$ ein Isomorphismus.
 	\end{itemize}
 	Wir definieren eine partielle Ordnung auf $\mathcal{M}$ durch
 	\[
-		(T,R,m) \le (T',R',m') :\iff T \subseteq T', R \subseteq R', m'|_{T}=m
+		(T,R,\varphi) \le (T',R',\varphi') :\iff T \subseteq T', R \subseteq R', \varphi'|_{T}=\varphi
 	\]
-	Es ist $\mathcal{M} \not= \emptyset$, da $(\emptyset,\emptyset, \cdot ) \in \mathcal{M}$. Jede aufsteigende Ketten in $\mathcal{M}$ hat eine obere Schranke. Nach Zorns Lemma 
-	existiert ein maximales Element $(T,R,m) \in \mathcal{M}$. Es bleibt zu zeigen: $R=S$.
+	Das Lemma von Zorn liefert uns die Existenz eines maximalen Elements $(T,R,\varphi) \in \mathcal{M}$. Zu zeigen bleibt $R=S$. Angenommen es existiert ein $s \in S \setminus R$.
+	Ist $C \cap \mathbb{Z}[R \cup \set{s}] = C \cap \mathbb{Z}[R]$, so ist $(T,R,\varphi) \lneqq (T,R \cup \set{s},\varphi) \in \mathcal{M}$ im Widerspruch zur Maximalität von 
+	$(T,R,\varphi)$. Sei also $\mathbb{Z}[R] \cap C \subsetneq \mathbb{Z}[R \cup \set{s}] \cap C$. Betrachte die kurze exakte Sequenz \todo{Diagramm vervollständigen}
+	\[
+		\begin{tikzcd}
+			\mathbb{Z}[R] \cap C \rar[hook] \dar[hook,"i_0"]& \mathbb{Z}[R \cup \set{s}] \cap C \rar[two heads] \dar[hook,"i_1"] & \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} 
+			\dar["i_2"] \\
+			\mathbb{Z}[R] \rar[hook] & \mathbb{Z}\benbrace*{R \cup \set{s}} \rar[two heads,"p"] & \mathbb{Z}\benbrace*{\set{s}}
+		\end{tikzcd}
+	\]
+	Nun ist $\mathbb{Z}[R] \cap C  = (\mathbb{Z}[R]) \cap \enbrace*{\mathbb{Z}[R \cup \set{s}] \cap C}$. Damit muss dann die von $i_0$ und $i_1$ induzierte Abbildung 
+	$i_2 \colon \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} \to \mathbb{Z}[\set{s}]$ injektiv sein. Es folgt, dass $\im i_2 = \mathbb{Z}\benbrace*{\set{m \cdot s}}$
+	ist für ein $m >0$. Sei $c \in \mathbb{Z}[R \cup \set{s}] \cap C$ ein Urbild von $m \cdot s$ unter $p \circ i_1$. Nun können wir $\varphi$ durch $s \mapsto c$ zu
+	$\varphi^+ \colon \mathbb{Z}\benbrace*{T \cup \set{s}} \to \mathbb{Z}\benbrace*{R \cup \set{s}} \cap C$. Es folgt, dass $\varphi^+$ ein Isomorphismus ist im Widerspruch zur 
+	Maximalität von $(T,R,\varphi)$.
+	% Sei $\mathcal{M}$ die Menge aller Tripel $(T,R,m)$ mit
+	% \begin{itemize}
+	% 	\item $T \subseteq R \subseteq S$
+	% 	\item $m=(m_t)_{t \in T}$ ist eine $T$-Folge von positiven Zahlen
+	% 	\item das Bild von $M \colon \mathbb{Z}[T] \to \mathbb{Z}[S]$, $t \mapsto m_t \cdot t$ ist $C \cap \mathbb{Z}[R]$.
+	% \end{itemize}
+	% Wir definieren eine partielle Ordnung auf $\mathcal{M}$ durch
+	% \[
+	% 	(T,R,m) \le (T',R',m') :\iff T \subseteq T', R \subseteq R', m'|_{T}=m
+	% \]
+	% Es ist $\mathcal{M} \not= \emptyset$, da $(\emptyset,\emptyset, \cdot ) \in \mathcal{M}$. Jede aufsteigende Ketten in $\mathcal{M}$ hat eine obere Schranke. Nach Zorns Lemma
+	% existiert ein maximales Element $(T,R,m) \in \mathcal{M}$. Es bleibt zu zeigen: $R=S$.
 \end{beweis}
+
+\begin{lemma}[label=lem:abel_qvek]
+	Sei $A_0$ eine Untergruppe der abelschen Gruppe $A$, $V$ ein $\mathbb{Q}$-Vektorraum und $\beta_0 \colon A_0 \to V$ ein Gruppenhomomorphismus. Dann gibt es eine Fortsetzung 
+	$\beta \colon A \to V$ von $\beta_0$ zu einem Gruppenhomomorphismus.  
+\end{lemma}
+\begin{beweis}
+	Die Inklusion $i \colon A_0 \to A$ induziert einen injektiven\footnote{nach Übungsaufgabe} $\mathbb{Q}$-Vektorraum-Homomorphismus 
+	\[
+		\mathbb{Q}\otimes i \colon \mathbb{Q} \otimes A_0 \longrightarrow \mathbb{Q} \otimes A , \qquad q \otimes a_0 \mapsto q \otimes i(a_0)
+	\]
+	Nun können wir die $\mathbb{Q}$-lineare Abbildung $q \otimes a_0 \mapsto q \cdot \beta_0(a_0) \in V$ von $\mathbb{Q} \otimes A_0$ zu 
+	$\overline{\beta} \colon \mathbb{Q} \otimes A \to V$ fortsetzen. Dann ist $a \mapsto \overline{\beta}(1 \otimes a)$ die gesuchte Fortsetzung von $\beta_0$.
+\end{beweis}
+
+\begin{beweis}[name={von \autoref{eig_kohomo_to_hom_homo}}] \leavevmode
+	\begin{enumerate}[(i)]
+		\item Sei $\varphi \colon H_n(X,A) \to V$ gegeben. Sei $p \colon\ker d_n \twoheadrightarrow H_n(X,A)$ die Projektion. Betrachte die kurze exakte Folge 
+	\[
+		\begin{tikzcd}
+			\ker  d_n \rar[hook,"i"] & C_n^\sing(X,A) \rar["d_n",two heads] & \im d_n
+		\end{tikzcd}
+	\]
+	Als Untermodul des freien Moduls $C_{n-1}^\sing(X,A)$ ist nach \autoref{lem:untergrp_frei} $\im d_n$ frei, insbesondere spaltet die kurze exakte Sequenz, insbesondere ist
+	$C^\sing_n(X,A) \cong \ker d_n \oplus \im d_n$. Daher können wir $\varphi \circ p \colon \ker d_n \to V$ zu $\alpha \colon C_n^\sing(X,A) \to V$ fortsetzen. Genauer: Sei 
+	$s \colon \im d_n \to C_n^\sing(X,A)$ ein Spalt. Dann können wir $\alpha \colon C_n^\sing(X,A) \to V$ definieren durch 
+	\[
+		\alpha(a) := \varphi \circ p \enbrace*{a - s \enbrace[\big]{d_n(a)}}
+	\]
+	Es folgt $d_n \circ \alpha =0$ und $f \enbrace*{[\alpha]}=\varphi$.
+	\item Sei $\alpha \in C^n_\sing(X,A;V)$ mit $d^n(\alpha)=0$. Sei $\benbrace*{\alpha} \in \ker f$, also $\alpha(a)=0$ für alle $a \in \ker d_n$.  Dann faktorisiert $\alpha$ über
+	$\im d_n \subseteq C_{n-1}(X,A)$: $\alpha$ induziert $\beta_0 \colon \im d_n \to V$ mit $\alpha = \beta_0 \circ d_n$. Ist $V$ ein $\mathbb{Q}$-Vektorraum, so können wir 
+	$\beta_0$ nach \autoref{lem:abel_qvek} zu $\beta \colon C_{n-1}(X,A) \to V$ fortsetzen. Es folgt 
+	$\benbrace*{\alpha}= \benbrace*{\beta \circ d_n} = \pm \enbrace*{d^{n+1} \beta}=0$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{korollarB}
+	Es gilt $H^n(X,A;\mathbb{Q}) \cong \Hom \enbrace*{H_n(X,A);\mathbb{Q}}$
+\end{korollarB}
+
+\begin{bemerkung}
+	Es gilt sogar $H^n \enbrace*{X,A;\mathbb{Q}} \cong \Hom_\mathbb{Q} \enbrace*{H_n(X,A;\mathbb{Q}),\mathbb{Q}}$.
+\end{bemerkung}
+\newpage
 % section 2 (end)
+
+\section{Produkte auf Kohomologie} % (fold)
+\label{sec:3}
+
+\begin{definition}
+	Sei $\sigma \colon \abs{\Delta^n}  \to X$ ein singulärer Simplex in $X$. Für $0 \le p \le n$ definieren wir
+	\[
+		\sigma|_{\benbrace*{0,\ldots ,p}} \colon \abs{\Delta^p} \to X \quad , \quad \sigma|_{\benbrace{p,\ldots ,n}} \colon \abs{\Delta^{n-p} \to X}  
+	\]
+	durch $\sigma|_{\benbrace*{0,\ldots ,p}}(t_0, \ldots ,p) = \sigma \enbrace*{t_0, \ldots , t_p, 0, \ldots ,0}$ und 
+	$\sigma|_{p,\ldots ,n}(t_{p}, \ldots ,t_n)= \sigma(0,\ldots ,0,t_{p}, \ldots , t_n)$
+\end{definition}
+
+\begin{bemerkung}
+	Wir schreiben auch $\sigma|_{\benbrace*{0,\ldots , \not i, \ldots ,n}}$ für die $i$-te Seite von $\sigma$.
+\end{bemerkung}
+
+\begin{definition}
+	Sei $R$ ein Ring und $A,B \subseteq X$. Wir definieren das \Index{$\cup$-Produkt} auf dem singulären Kokettenkomplex 
+	\[
+		\cup \colon C^p_\sing \enbrace*{X,A;R} \otimes C^q_\sing(X,B;R) \longrightarrow C^{p+q}_\sing \enbrace*{X,A \cup B;R}
+	\]
+	durch $(\alpha \cup \beta)(\sigma) :=  (-1)^{p \cdot q} \cdot \alpha\enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{p, \ldots , p+q}}}$.
+\end{definition}
+
+\noindent\todo[inline]{Zeichnung für $n=2$ einfügen}
+
+\begin{lemma}\leavevmode
+	\begin{enumerate}[1)]
+		\item $d^{p+q}(\alpha \cup \beta) = d^p(\alpha) \cup \beta + (-1)^p \cdot \alpha \cup d^q(\beta)$
+		\item Das $\cup$-Produkt ist assoziativ.
+		\item Für $f \colon X \to X'$ mit $f(A) \subseteq A'$, $f(B) \subseteq B'$ gilt $f^*(\alpha \cup \beta)= f^*(\alpha) \cup f^*(\beta)$ für $\alpha \in C^p_\sing(X',A';R)$, 
+		$\beta \in C^q_\sing(X',B';R)$.
+		\item Sei $1_X \in C_\sing^0(X;R)$ mit $1_X(\sigma)=1_R$ für alle $\sigma \colon \abs{\Delta^0} \to X$. Dann gilt $1_X \cup \alpha = \alpha = \alpha\cup 1_X$.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	Übung bzw. Notizen auf Homepage \todo{\TeX{}en wenn Zeit}
+\end{beweis}
+
+\begin{definition}
+	Die vom $\cup$-Produkt auf dem singulären Kokettenkomplex induzierte Abbildung in Kohomologie 
+	\[
+		\cup \colon H^p(X,A;R) \otimes H^q(X,B;R) \longrightarrow H^{p+q}(X,A;R)
+	\]
+	ist das $\cup$-Produkt in Kohomologie. $\benbrace*{\alpha} \cup \benbrace*{\beta} = \benbrace*{\alpha \cup \beta}$.
+\end{definition}
+
+
+% section 3 (end)
+
+
+
 
 
 
