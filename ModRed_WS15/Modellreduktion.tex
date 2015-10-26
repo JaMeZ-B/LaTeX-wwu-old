@@ -204,7 +204,7 @@ falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum
 \end{enumerate}
 
 \ssect{2.3 Lemma}{ }
-Seien $X$ und $Y$ reelle vektorräume.
+Seien $X$ und $Y$ reelle Vektorräume.
 Ist die Abbildung $T:X\to Y$ linear und $x_0\in X$, so sind äquivalent:
 \begin{enumerate}[(1)]
 	\item $T$ ist stetig.
@@ -272,13 +272,13 @@ Falls $\dim(A) = n<\infty$ und $\enbrace{\varphi_i}_{i=1}^h$ Orthonormalbasis vo
 Px = \sum_{i=1}^{n} (x, \varphi_i)_X\varphi_i.
 \]
 
-\ssect{2.9 Satz}{(Riesz'scher darstellungssatz)}
+\ssect{2.9 Satz}{(Riesz'scher Darstellungssatz)}
 Ist $X$ Hilbertraum, so ist $J:X\to X'$ definiert durch
 \[
 J(v)(w) := (v,w)_X ~\forall v,w\in X 
 \]
 eine stetige, lineare, bijektive Isometrie.
-Insbesondere existiert zu $l\in X'$ ein eindeutiger \bet{Riesz Repräasentant} $V_l := J^{-1}(l)\in X$ mit $l(.) = (v_l,.)_X$.
+Insbesondere existiert zu $l\in X'$ ein eindeutiger \bet{Riesz Repräasentant} $V_l := J^{-1}(l)\in X$ mit $l(.) = (v_l,.)_X$.\\
 
 \bet{Beweis:}\\
 C-S-Ungleichung: $\abs{J(v)(w)}\le \norm{v}_X\norm{w}_X$.
@@ -290,16 +290,190 @@ Da $\abs{J(v)(v)} = \norm{v}_X^2$ folgt:
 \[
 \sup\limits_{w\in X\backslash\{0\}} \frac{\abs{J(v)(w)}}{\norm{w}_X} \ge \frac{\abs{J(v)(v)}}{\norm{v}_X} = \frac{\norm{v}_x^2}{\norm{v}_X} = \norm{v}_X.
 \]
-Also ist $J$ eine Isometrie und insbesondere ist $J$ injektiv.
+Also ist $J$ eine Isometrie und insbesondere ist $J$ injektiv.\\
+Zeige $J$ surjektiv: Sei $l\in X',~l\neq 0$, Kern$(l)$ ist abgeschlossener Teilraum, also existiert $P:X\to \ker(l)$ orthogonale Projektion nach Satz 2.7.
+Sei $v_0\in X$mit $l(v_O)=1$. 
+Setze $v_1:=v_o-Pv_0\Rightarrow l(v_1) =l(v_0) =1$ und $v_1\neq 0$.
+Mit Folgerung 2.8:
+\[
+\Rightarrow (w,v)_X =0~ \forall x\in\ker(l) \Rightarrow v_1 \perp \ker(l). 
+\]
+Für $v\in X$ gilt
+\[
+v\underbracket{v-l(v)}_{\in \ker(l)}\cdot v_1 + l(v)\cdot v_1
+\]
+und $v-l(v)v_1\in \ker(l)$ wegen
+\[
+l(v-l(v)v_1) = l(v) -l(v)l(v_1) =0.
+\]
+Also ist
+\begin{align*}
+(v_1,v)_X &= (\underbracket{v_1,v-l(v)v_1}_{=0,\text{ da }\ker(l) \perp v_1})_X + (v_1,l(v)v_1)_X\\
+&= l(v) \norm{v_1}_X^2\\
+&\Rightarrow l(v) = \enbrace{\frac{v_1}{\norm{v_1}_X^2},v}_X = J\enbrace{\frac{v_1}{\norm{v_1}_X^2}}(v).\\
+&\Rightarrow l\in \bild(J) \Rightarrow J\text{ bijektiv.}\\
+\end{align*}
+\hfill $\square$
 
+\ssect{2.10 Folgerung / Beispiel:}{ }
+Mit Hilfe des Rieszschen Darstellungssatz können wir damit $L^2(\Omega)$' - den Dualraum von $L^2(\Omega)$ - charakterisieren.
+Wie in 2.6 definieren wir für $g\in L^2(\Omega)$ das Funktional
+\[
+T_g f := \int_{\Omega} f(x)g(x)\dint x.
+\]
 
+\ssect{Definition 2.11}{(Bilinearformen)}
+Seien $X_1,X_2$ Hilberträume, $b:X_1\times X_2 \to \R$ eine Bilinearform.
+\begin{enumerate}[(1)]
+	\item Falls 
+	\[
+	\gamma:= \sup\lim\limits_{u\in X_1\backslash\{0\}} \sup\lim\limits_{v\in X_2\backslash\{0\}} \frac{b(u,v)}{\norm{u}_{X_1}\norm{v}_{X_2}} < \infty
+ 	\]
+ 	so ist $b$ stetig mit Stetigkeitskonstante $\gamma$.
+ 	\item Falls $X=X_1=X_2$, definieren 
+ 	\[
+ 	b_s(u,v) = \frac{1}{2} b(u,v)+b(v,u),~b_a = \frac{1}{2} b(u,v)-b(v,u) ~\forall u,v\in X
+ 	\]
+ 	den symmetrischen bzw. antisymmetrischen ANteil von $b = b_s +b_a$.
+ 	\item Falls $X=X_1=X_2$, $b$ stetig und 
+ 	\[
+ 	\alpha := \inf\limits_{u\in X\backslash\{0\}} \frac{b(u,u)}{\norm{u}_X^2} > 0
+ 	\]
+ 	heißt $b$ Koerziv mit Stetigkeitskonstante $\alpha$.
+\end{enumerate}
 
+\ssect{2.12 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item $\alpha \in\R$ ist wohldefiniert, denn mit Stetigkeit folgt
+	\[
+	\frac{b(u,u)}{\norm{u}_X^2} \ge -\gamma \frac{\norm{u}_X\norm{u}_X}{\norm{u}_X^2} = -\gamma.
+	\]
+	\item $b$ ist koerziv bzgl. $\alpha \Leftrightarrow b_s$ ist koerziv bzgl. $\alpha$.
+\end{enumerate}
 
+\ssect{2.13 Satz}{(Operatoren und Bilinearformen)}
+Seien $X_1,X_2$ Hilberträume.
+\begin{enumerate}[(1)]
+	\item Zu $B\in L(X_1,X_2)$ existiert eine eindeutig definierte stetige Bilinearform $b:X_1\times X_2\to \R$ mit 
+	\begin{align}
+	b(u,v) = (Bu,v)_{X_2} ~\forall u\in X_1,v\in X_2.
+	\end{align}
+	\item Zu $b:X_1\times X_2 \to \R$ stetige Bilinearform existiert eindeutiges $B\in L(X_1,X_2)$ welches (2.1) erfüllt.
+\end{enumerate}
 
+\bet{Beweis:}\\
+\begin{enumerate}[(1)]
+	\item $b$ definiert durch (2.1) ist bilinear wegen Bilinearität von $(.,.)$ und Linearität von $B$.
+	Stetigkeit:
+	\[
+	b(u,v) = (Bu,v)_{X_2} \stackrel{\text{C.S.}}{\le} \norm{B}\norm{u}_{X_1}\norm{v}_{X_2}
+	\]
+	daraus folgt $\gamma \le \norm{B} < \infty$.
+	\item Sei $u\in X_1$ fest.
+	Dann ist $b(u,.):X_2\to\R$ linear und stetig:
+	\[
+	\sup\limits_{v\in X_2\backslash\{0\}} \frac{b(u,v)}{\norm{v}_{X_2}} \le \sup\limits_{v\in X_2\backslash\{0\}} \frac{\norm{u}_{X_1\norm{v}_{X_2}}}{\norm{v}_{X_2}}\cdot \gamma = \gamma \norm{u}_{X_1} < \infty.
+	\]
+	Daraus folgt $b(u,.)\in X_2'$ und es existiert nach Satz 2.9 ein eindeutiger Riesz-Repräsentant $v_u\in X_2$ mit $b(u,.) = (v_u,.)$.
+	Definiere $B:X_1\to X_2$ durch $Bu := v_u\in X_2$.
+	Hiermit (2.1) und Eindeutigkeit klar.
+	Linearität damit klar.\\
+	Stetigkeit:
+	\begin{align*}
+	\norm{bu}^2 &= (Bu,Bu) = (v_u,Bu)_{X_2} = b(u,Bu) \le \gamma \norm{u}_{X_1}\norm{Bu}_{X_2}\\
+	&\Rightarrow \norm{Bu}_{X_2} \le \gamma \norm{u}_{X_1} \Rightarrow \sup\limits_{u\in X_1\backslash\{0\}} \frac{\norm{Bu}_{X_2}}{\norm{u}_{X_1}} \le \gamma.
+	\end{align*}
+\end{enumerate}
+\hfill $\square$\\
 
+\ssect{2.14 Satz}{von Lax-Milgram}
+Sei $x$ HR, $b:X\times X\to\R$ koerzive, stetige Bilinearform mit Koerzivitätskonstante $\alpha$.
+Dann existiert ein eindeutiger Operator $B\in L(X)$ mit
+\[
+b(u,v) = (Bu,v)~\forall u,v\in X.
+\]
+Ferner gil: $B$ ist bijektiv, $B^{-1}\in L(X)$ mit
+\[
+\norm{B} \le \gamma \text{ und } \norm{B^{-1}}\le \frac{1}{\alpha}.
+\]
 
+\subsubsection{Sobolevräume}
 
+\ssect{2.15 Bemerkung}{(Motivation Sobolevräume)}
+Wie in 1.1 motiviert, eignet sich die sogenannte Schwache Formulierung (s. 1.2) einer PDgl besonders gut um Existenz und Eindeutigkeit von Lösungen zu untersuchen.
+Die dazu geeigneten Räume sind die \bet{Sobolevräume}.
 
+\ssect{2.16 Definition}{($L_{log}^p(\Omega)$)}
+Sei $\Omega\subset \R^d$ ein Gebiet.
+Dann ist der Raum $L_{log}^p(\Omega)$ definiter durch 
+\[
+L_{log}^p(\Omega) := \penbrace{u\in L^p(K) ~|~ \forall K\subset \Omega,~ K\text{ kompakt}}.
+\]
+
+\ssect{2.17 Definition}{(schwache Ableitung)}
+Sei $\alpha = (\alpha_1\dt{,}\alpha_d)\in \N^d$ ein Multiindex.
+Eine Funktion $u\in L_{log}^1(\Omega)$ besitzt eine schwache Ableitung $u_\alpha \in L_{log}^1(\Omega)$, wenn für alle Testfunktionen $\varphi\in C_0^\infty(\Omega)$ gilt
+\[
+\int_{\Omega} u D^\alpha \varphi = (-1)^{\abs{\alpha}} \cdot \int_{\Omega} u^{(\alpha)} \varphi,
+\]
+mit $D^\alpha = D_1^{\alpha_1}\cdots D_d^{\alpha_d},~\abs{\alpha} = \alpha_1 \dt{+} \alpha_d$.
+Wir schreiben dann auch $u^{(\alpha)} = D^\alpha u$ für die schwache Ableitung.
+
+\ssect{2.18 Lemma}{}
+Falls $u\in C^{\abs{\alpha}(\bar{\Omega})}$ und $\abs{\alpha}\ge 1$, gilt: $D^\alpha= u^{(\alpha)}$, d.h. klassische und schwache Ableitung stimmen überein.
+
+\ssect{2.19 Beispiel}{}
+Sei $\Omega =(-1,1)$ und $u(x) =\abs{x}$.
+Dann ist $u'(x) = -1 (x\le 0), 1 (x> 0)$ die schwache Ableitung von $u$.\\
+
+\bet{Beweis:}\\
+Esgilt füt beliebige $\varphi\in C_0^\infty(\Omega)$:
+\begin{align*}
+Foto
+\end{align*}
+
+\ssect{2.20 Beispiel}{}
+Im Gegensatz zu $\abs{x}$ ist $v(x)= -1 (x\le 0) 1 (x>0)$ auf $\Omega = (-1,1)$ nicht schwach differenzierbar.
+
+\ssect{2.21 Definition}{(Sobolevräume)}
+Seinen $m\in \N_0,~p\in [1,\infty]$ und $u\in L_{log}^p(\Omega)$.
+Wir nehmen an, dass alle schwachen partiellen Ableitungen $D^\alpha u$ existieren für $\abs{\alpha} \le m$.
+Dann definieren wir die \bet{Sobolevnormen} $\norm{u}_{H^{m,p}(\Omega)}$, durch
+\[
+\norm{u}_{H^{m,p}(\Omega)} = \enbrace{\sum_{\abs{\alpha}\le m} \norm{D^\alpha u}_{L^p(\Omega)}^p}^{\frac{1}{p}}\text{ falls } 1\le p< \infty
+\]
+und für $p=\infty$ als 
+\[
+\norm{u}_{H^{m,p}(\Omega)} := \max\lim\limits_{\abs{\alpha}\le m} \norm{D^\alpha u}_{L^\infty (\Omega)}.
+\]
+Schließlich definieren wir die \bet{Sobolevräume} $H^{m,p}(\Omega)$ durch
+\[
+H^{m,p}(\Omega) := \penbrace{u\in L_{log}^p(\Omega) ~|~ \norm{u}_{H^{m,p}(\Omega)}< \infty}.
+\]
+
+\ssect{2.22 Bemerkung}{}
+Anstelle von $H^{m,p}(\Omega)$ werden die Sobolevräume in der Literatur auch oft mit $W^{m,p}(\Omega)$ bezeichnet.
+
+\ssect{2.23 Beispiel}{}
+Seien $\Omega = B_{\frac{1}{2}}(0)\subset \R^2$ und $u(x) = \ln \abs{\ln \abs{x}},~x\in \Omega$.
+Dann gilt: $u\in H^{1,2}(\Omega)$, aber $u\notin C^0(\Omega)$.
+D.h. Funktionen in $H^{1,p}(\Omega)$ sind in mehreren Raumdimensionen nicht notwendigerweise stetig.
+
+\ssect{2.24 Satz}{(Vollständigkeit von Sobolevräumen)}
+Sei $\Omega\subset \R^d$ ein Gebiet.
+Damm ist $H^{m,p}(\Omega)$ $1\le p\le \infty,~m\in \N_0$ mit der in 2.21 definierten Norm ein Banachraum,$H^{m,p}(\Omega)$ ist ein Hilbertraum mit dem Skalarprodukt
+\[
+(u,v)_{H^{m,p}(\Omega)} := \sum_{\abs{\alpha}\le m} (D^\alpha u, D^\alpha v)_{L^2(\Omega)}.
+\]
+Da wir uns mit Randwertproblemen befassen wollen, ist es notwendig zu klären in welchem Sinne wir bei Sobolevräumen von Randwerten reden können.
+Da die Funktionen zunächst nur bis auf Nullmengen definiert sind und der Rand eines Gebietes eine Nullmenge darstellt, auf der man $L^p$-Funktionen beliebig abändern kann.
+In der folgenden Definition klären wir zunächst was wir unter Nullrandwerten im schwachen Sinne verstehen wollen.
+
+\ssect{2.25 Definition}{(schwache Nullrandwerte)}
+Für $1\le p\le \infty$ und $m\in \N$ definieren wir die Sobolevräume mit Nullrandwerten $H_0^{m,p}(\Omega)$ durch
+\[
+H_0^{m,p}(\Omega) := \overline{C_0^m(\Omega)}^{\norm{.}_{H^{m,p}(\Omega)}}.
+\]
 
 
 
