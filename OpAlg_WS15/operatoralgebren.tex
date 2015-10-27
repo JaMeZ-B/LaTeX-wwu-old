@@ -198,12 +198,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \begin{definition}[{name=[Charakter]}]
 	Sei $A$ eine abelsche unitale Banachalgebra. Eine lineare, multiplikative, nicht verschwindende Abbildung $\chi \colon A \to \mathbb{C}$ heißt \Index{Charakter} auf $A$.  
 	Es gilt dann $\chi(1)=1$. Wir setzen $\Omega(A) := \set{\chi \given \chi \text{ Charakter auf }A}$ (\Index{Charakterspektrum} oder einfach nur \Index{Spektrum} von $A$).
-	
-	Die \Index{Geldfanddarstellung} ist definiert als 
-	$a \mapsto \hat{a} \colon \Omega(A) \to \mathbb{C}, \chi \mapsto \chi(a)$.\todo{entfernen, wenn ordentlich definiert}
 \end{definition}
 
-\begin{satz}
+\begin{satz}[label=satz:1.13]
 	Sei $A$ eine abelsche unitale Banachalgebra. Dann gilt
 	\begin{enumerate}[(i)]
 		\item Jeder Charakter auf $A$ ist stetig mit Norm $1$.
@@ -237,7 +234,131 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		$\chi \colon A \to \sfrac{A}{J} \cong \mathbb{C}$ ein Charakter mit $\ker \chi= J$. \qedhere
 	\end{enumerate}
 \end{beweis}
+
+\begin{satz}[label=satz:1.14]
+	Sei $A$ eine abelsche unitale Banachalgebra. Für $a \in A$ gilt $\sigma(a)=\set{\chi(a) \given \chi \in \Omega(A)}$.
+\end{satz}
+\begin{beweis}
+	Für $\lambda \in \sigma(a)$ ist $J := (a -\lambda)A \lhd A$ ein echtes Ideal, da $(a-\lambda)$ nicht invertierbar ist. Nach dem Lemma von Zorn ist $J$ in einem maximalen echten 
+	Ideal enthalten. Nach \autoref{satz:1.13} ist $J \subset \ker \chi$ für ein $\chi \in \Omega(A)$. Dann ist $\chi(a- \lambda)=0$ für einen Charakter $\chi$ und somit auch 
+	$\chi(a)=\lambda$. Es gilt also $\sigma(a) \subseteq \set{\chi(a) \given \chi \in \Omega(A)}$.
+	
+	Für $\chi \in \Omega(A)$ gilt $a- \chi(a) \cdot \ind \in \ker \chi$. Damit kann $a- \chi(a) \cdot \ind$ nicht invertierbar sein. Also ist $\chi(a) \in \sigma(a)$ und es folgt 
+	die zweite Inklusion.
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine abelsche unitale Banachalgebra. Dann ist $\Omega(A)$ ein kompakter Hausdorffraum bezüglich der $\w^*$-Topologie.
+\end{satz}
+\begin{beweis}
+	Es ist $\Omega(A) \subset B^1(A^*)$, wobei die Einheitskugel ein kompakt und Hausdorffsch ist (bezüglich der $\w^*$-Topologie) nach Banach-Alaoglu und da der Raum lokalkonvex 
+	ist. Sei $\chi_\gamma \xrightarrow{\raisebox{-3pt}{$\w^*$}}\chi$ ein Netz. $\chi_\gamma$ ist multiplikativ für jedes $\gamma$ und $\chi_\gamma(\ind)=1$. Damit gelten diese Eigenschaften auch für 
+	$\chi$.
+\end{beweis}
+
+\begin{definition}[{name=[Charakterspektrum und Gelfandtransformation]}]
+	Sei $A$ eine abelsche unitale Banachalgebra. $\Omega(A)$ mit der $\w^*$-Topologie heißt \bet{Spektrum}\index{Spektrum!Charakterspektrum} von $A$. Für $a \in A$ definieren wir
+	die \Index{Gelfandtransformation} $\hat{a} \colon \Omega(A) \to \mathbb{C}$ durch $\hat{a}(\chi)=\chi(a)$. 
+\end{definition}
+
+\begin{satz}
+	Sei $A$ eine abelsche unitale Banachalgebra. Dann ist $\hat{\hspace{1ex}} \colon A \to C \enbrace*{\Omega(A)}$, $a \mapsto \hat{a}$ ein normvermindernder Homomorphismus und 
+	$r(a) = \norm{\hat{a}}_{\infty}$ für $a \in A$. Weiter gilt $\sigma(a)= \hat{a}\enbrace*{\Omega(A)}$.
+\end{satz}
+\begin{beweis}
+	$\hat{a} \colon \Omega(A) \to \mathbb{C}$ ist stetig nach Definition der $\w^*$-Topologie: Für $U \subset \mathbb{C}$ offen ist
+	\[
+		\hat{a}^{-1}(U) = \set[\big]{\chi \in \Omega(A) \given  \hat{a}(\chi) \in U} = \set[\big]{\chi \in \Omega(A) \given \chi(a) \in U} = 
+		\set[\big]{\chi \in A^* \given \chi(a) \in U} \cap \Omega(A)
+	\]
+	Die linke Menge des Schnitts ist gleich
+	\[
+		\smashoperator[r]{\bigcup_{(\mu,\varepsilon), B(\mu,\varepsilon) \subset U}} \,\,\set[\big]{\varphi \in A^* \given \abs{\varphi(a)-\mu}<\varepsilon }
+	\]
+	und somit offen in $A^*$. Damit ist $\hat{a}^{-1}(U)$ offen in der Relativtopologie. Wir haben
+	\begin{align}
+		\sigma(a) \StackText{\ref{satz:1.14}}{=} \set*{\chi(a) \given \chi \in \Omega(A)}  = \set*{\hat{a}(\chi) \given \chi \in \Omega(A)} = \hat{a} 
+		\enbrace*{\Omega(A)}
+	\end{align}
+	Also 
+	\[
+		\norm{a} \StackText{\ref{spec_kompakt}}{\le} r(a) = \sup_{\lambda \in \sigma(a)} \abs{\lambda} = \sup_{\chi \in \Omega(A)} \abs{\hat{a}(\chi)} 
+		= \norm{\hat{a}}_{\infty}.
+	\]
+\end{beweis}
 % section 1 (end)
+\newpage
+
+\section{$C^*$-Algebren und Funktionalkalkül} % (fold)
+\label{sec:2}
+
+\begin{definition}[{name=[Involutive Banachalgebra]}]
+	Eine Banachalgebra heißt \Index{involutiv}, falls eine antilineare Abbildung ${}^* \colon A \to A$ existiert mit
+	\[
+		a^{**}=a \qquad \quad (ab)^*= b^* a^* \qquad \quad \norm{a^*} = \norm{a}  
+	\] 
+\end{definition}
+
+\begin{definition}[{name=[$C^*$-Algebra]}]
+	Eine \bet{$C^*$-Algebra}\index{C-Algebra@$C^*$-Algebra} ist eine involutive Banachalgebra mit $\norm{a^*a}= \norm{a}^2$ für $a \in A$.
+\end{definition}
+
+\begin{definition}
+	Sei $A$ ein $C^*$-Algebra. $a \in A$ heißt 
+	\[
+		\begin{cases}
+			\text{ selbstadjungiert }  &\text{ falls } a=a^*\\
+			\text{ normal }  &\text{ falls }  aa^*=a^*a \\
+			\text{ unitär }  &\text{ falls }  aa^*=a^*a=\ind \\
+			\text{ Projektion }  &\text{ falls }   a=a^*=a^2 \\
+			\text{ Isometrie }  &\text{ falls } a^*a= \ind  
+		\end{cases}
+	\]
+	Wo die Existenz eines Einselements nötig ist, fordern wir noch, dass $A$ unital ist.
+\end{definition}
+
+\begin{definition}
+	Es seien $A,B$ zwei $C^*$-Algebren. Eine Abbildung $\pi \colon A \to B$ heißt ${}^*$"=Homomorphismus, falls $\pi$ linear, multiplikativ und ${}^*$-erhaltend ist. $\pi$ heißt
+	${}^*$-Einbettung, falls $\pi$ zusätzlich isometrisch ist. 
+\end{definition}
+
+\begin{bemerkung}
+	Falls $A$ eine (involutive) Banachalgebra ist, so ist $A \oplus \mathbb{C}$ mit offensichtlichen Vektorraumoperationen und 
+	$(a,\lambda) \cdot (b,\mu) = \enbrace*{ab + \mu a + \lambda b, \lambda \mu}$ sowie $(a,\lambda)^* = (a^*,\lambda)$ im involutiven Fall,  Norm definiert wir durch
+	$\norm{(a,\lambda)}:= \norm{a}_{A} + \abs{\lambda}$ eine unitale (involutive) Banachalgebra mit $\ind=(0,1)$. $A \oplus \mathbb{C}$ ist jedoch keine $C^*$-Algebra, auch wenn
+	$A$ eine $C^*$-Algebra ist.
+\end{bemerkung}
+
+\begin{satz}
+	Sei $A$ eine $C^*$-Algebra. Dann existiert eine unitale $C^*$-Algebra $A^\sim$ mit einer isometrischen ${}^*$-Einbettung $\iota \colon A \hookrightarrow A^\sim$, sodass
+	$\iota(A) \lhd A^\sim$ ein Ideal ist mit 
+	\[
+		\Faktor{A^\sim}{\iota(A)} \cong \begin{cases}
+			0, &\text{ falls }A \text{ unital} \\
+			\mathbb{C} , &\text{ sonst }  
+		\end{cases}
+	\]
+\end{satz}
+\begin{beweis}
+	Für $a \in A$ definieren wir $\iota(a) \in \mathcal{B}(A)$, wobei $\mathcal{B}(A)$ die beschränkten Operatoren auf $A$ aufgefasst als Banachraum sind, durch
+	$\iota(a)(b)=ab$. Definiere $A^\sim := \iota(A) + \mathbb{C} \cdot \ind_{\mathcal{B}(A)} \subset \mathcal{B}(A)$. Dann ist $A^\sim$ eine unitale Algebra mit Involution
+	\[
+		\enbrace*{\iota(a)+\lambda \cdot \ind_{\mathcal{B}(A)}}^* := \iota(a^*) + \overline{\lambda} \cdot \ind_{\mathcal{B}(A)}
+	\]
+	Dass $\iota(A) \lhd A^\sim$ ein Ideal ist, ist klar. $A^\sim$ ist normiert mittels der Operatornorm. Für $0 \neq a \in A$ gilt  
+	\begin{align}
+		\norm{a}_A = \frac{1}{\norm{a}_A}\norm{aa*}_A = \norm{a \enbrace*{\frac{1}{\norm{a^+} } \cdot a^*}}_A &\le \norm{\iota(a) \enbrace*{\frac{1}{\norm{a^*}}a^* }}_A \\
+		&\le \sup_{\norm{b}_A \le 1} \norm{\iota(a)(b)}_A = \norm{\iota(a)}_{\mathcal{B}(A)} \\
+		&= \sup_{\norm{b}_A \le 1} \norm{ab}_A \\
+		&\le \norm{a}_A   
+	\end{align}
+	Also ist $\iota$ isometrisch.
+\end{beweis}
+
+
+
+
+% section 2 (end)
 
 
 
