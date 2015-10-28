@@ -27,12 +27,19 @@
 
 \begin{definition}[{name=[Kokettenkomplex und Kohomologie]}]
 	Sei $R$ ein Ring. Ein \bet{$R$-Kokettenkomplex}\index{Kokettenkomplex} $(C^*,d^*)$ ist eine Folge von $R$-Moduln $(C^n)_{n \in \mathbb{N}}$ zusammen mit $R$-linearen Abbildungen 
-	$d^n \colon C^n \to C^{n+1}$, sodass $d^{n+1} \circ d^n =0$. Der \bet{$n$-te Kohomologiemodul}\index{Kohomologiemodul} von $(C^*,d^*)$ ist definiert als 
+	$d^n \colon C^n \to C^{n+1}$, sodass $d^{n+1} \circ d^n =0$ gilt. Der \bet{$n$-te Kohomologiemodul}\index{Kohomologiemodul} von $(C^*,d^*)$ ist definiert als 
 	\[
 		H^n(C^*,d^*) = \frac{\ker d^n \colon C^n \to C^{n+1}}{\im d^{n-1} \colon C^{n-1} \to C^n} 
 	\]
-	\todo[inline]{Revision}
-	Kokettenabbildungen, Kokettenhomotopien, induzierte Abbildungen, \ldots \todo{hinzufügen}
+	Sei $(D^*,d^{*})$ ein weiterer Kokettenkomplex.
+	Eine \Index{Kokettenabbildung} ist eine Folge von $R$-linearen Abbildungen $f^n\colon C^n\to D^n$, sodass $ d^n_D \circ f^n = f^{n+1}\circ d^n_C$ für alle $n$ gilt. Ist 
+	auch $g^n \colon C^n \to D^n$ eine Kokettenabbildung, so nennen wir eine $R$-lineare Abbildung $h^n \colon C^n \to D^{n-1}$ mit
+	\[
+		f^n - g^n  = h^{n+1} \circ d_C^n + d_D^{n-1} \circ h^n 
+	\]
+	eine \Index{Kokettenhomotopie} zwischen $f$ und $g$. Zu jeder Kokettenabbildung $f^n\colon C^n\to D^n$ gibt es eine 
+	\bet{induzierte Abbildung}\index{induzierte Abbildung!Kohomologie} auf Kohomologie genau wie bei Homologie.
+	
 \end{definition}
 
 \begin{bemerkung} \leavevmode
@@ -41,52 +48,55 @@
 		\[
 			C^n := \Hom_R(C_n,V) 
 		\]
-		und $d^n \colon C^n \to C^{n+1}$ definiert durch $\alpha \mapsto \alpha \circ d_{n+1}$. $(C^*,d^*)$ heißt der $V$-duale Kettenkomplex zu $(C_*,d_*)$.
+		und $d^n \colon C^n \to C^{n+1}$ definiert durch $\alpha \mapsto \alpha \circ d_{n+1}$. Dieser Kokettenkomplex $(C^*,d^*)$ heißt der 
+		\bet{$V$-duale}\index{Kokettenkomplex!$V$-dualer Kokettenkomplex} Kokettenkomplex zu $(C_*,d_*)$. 
 		\item Benutzen wir $\mathbb{Z}$ statt $\mathbb{N}$ als Indexmenge, so können wir durch $(C^n,d^n) \leadsto (C_n := C^{-n}, d_n := d^{-n})$ jeden Kokettenkomplex einem 
 		Kettenkomplex zuordnen. Dieser Prozess ist offensichtlich umkehrbar.
 	\end{enumerate}
 \end{bemerkung}
 
-\begin{beispiel}
-	Sei $(C_*,d_*)= \big(\begin{tikzcd}[cramped] \mathbb{Z} & \mathbb{Z} \lar["\cdot 2","d_1"'] & 0 \lar & \ldots \lar \end{tikzcd}\big)$ Dann ist
+\begin{beispiel}[{name=[Kohomologie ist nicht Dualisieren von Homologie]}]
+	Es sei $(C_*,d_*)= \big(\begin{tikzcd}[cramped] \mathbb{Z} & \mathbb{Z} \lar["\cdot 2","d_1"'] & 0 \lar & \ldots \lar \end{tikzcd}\big)$ ein Kettenkomplex. 
+	Dann ist
 	\[
 		H_k(C_*,d_*) = \begin{cases}
 			\nicefrac{\mathbb{Z}}{2 \mathbb{Z}}, &\text{ falls } k =0\\
 			0 , & \text{ sonst} 
 		\end{cases}
 	\]
-	Der $\mathbb{Z}$-duale Kokettenkomplex ist
+	Der $\mathbb{Z}$-duale Kokettenkomplex hat dann folgende Gestalt
 	\[
 		\begin{tikzcd}
-			 \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar["d^1"] \dar["\cong" description] & \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar \dar["\cong" description] 
+			 \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar["d^0"] \dar["\cong" description] & \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar \dar["\cong" description] 
 			& 0 \rar & \ldots \\
 			\mathbb{Z} \rar["\cdot 2"] & \mathbb{Z}
 		\end{tikzcd}
 	\]
-	Damit ist die Kohomologie $H^k(C^*,d^*)$ isomorph zu $\sfrac{\mathbb{Z}}{2 \mathbb{Z}}$ für $k=1$ und $0$ in jedem anderen Fall.
-	Es gilt also nicht immer $H^*(\Hom(C_*;R),d^*) =  \Hom \enbrace{H_*(C_*,d_*),R}$.
+	Damit ist die Kohomologie $H^k(C^*,d^*)=0$ für $k \neq 1$ und isomorph zu $\sfrac{\mathbb{Z}}{2 \mathbb{Z}}$ für $k=1$.
+	Es gilt also nicht immer $H^*(\Hom(C_*;R),d^*) =  \Hom \enbrace{H_*(C_*,d_*),R}$. 
 \end{beispiel}
 
 \begin{definition}[{name=[singulärer Kokettenkomplex]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen und $V$ eine abelsche Gruppe. Der \Index{singuläre Kokettenkomplex} von $(X,A)$ mit Koeffizienten in $V$ ist definiert durch
 	\[
-		C^*_\sing(X,A;V) := \Hom_\mathbb{Z} \enbrace[\big]{C_*^\sing(X,A),V}
+		C_\sing^*(X,A;V) := \Hom_\mathbb{Z} \enbrace[\big]{C_*^\sing(X,A),V}
 	\]
-	und $d^*_\sing(\alpha) := - (-1)^{\abs{\alpha}} \alpha \circ d_*^\sing$. Dabei ist $\abs{\alpha}=n$ für $\alpha \in C^n_\sing(X,A;R)$. Die 
-	Kohomologie von $\enbrace*{C^*_\sing(X,A;V), d^*_\sing}$ heißt die \Index{singuläre Kohomologie} von $(X,A)$ mit Koeffizienten in $R$.
+	und $d^*_\sing(\alpha) := - (-1)^{\abs{\alpha}} \cdot \alpha \circ d_{*+1}^\sing$. Dabei ist $\abs{\alpha}=n$ für $\alpha \in C^n_\sing(X,A;R)$. Die 
+	Kohomologie von $\enbrace[\big]{C^*_\sing(X,A;V), d^*_\sing}$ heißt die \Index{singuläre Kohomologie} von $(X,A)$ mit Koeffizienten in $R$.
 \end{definition}
 
 \begin{bemerkung}
 	Sei $R$ ein kommutativer Ring und $V$ ein $R$-Modul. Dann ist
-	\[
+	\(
 		\enbrace*{C^*_\sing(X,A;V), d^*_\sing}
-	\]
+	\)
 	isomorph zum $V$-dualen $R$-Kokettenkomplex des $R$-Kettenkomplexes $\enbrace*{C^\sing_*(X,A;R), d^\sing_*}$.
 \end{bemerkung}
 
 
-\begin{definition}[{name=[induzierte Abbildung]}]
+\begin{definition}[{name=[induzierte Abbildung auf Kokettenkomplexen]}]
 	Sei $f \colon (X,A) \to (Y,B)$ eine stetige Abbildung von Paaren. Dann erhalten wir eine Kokettenabbildung $f^* \colon C^*_\sing(Y,B;V) \to C^*_\sing(X,A;V)$ durch
+	\index{induzierte Abbildung!singuläre Kokettenkomplexe}
 	\[
 		f^*(\alpha) := \alpha \circ f_*
 	\]
@@ -99,16 +109,16 @@
 \begin{definition}[{name=[kontravarianter Funktor]}]
 	Seien $\mathcal{C}$ und $\mathcal{D}$ Kategorien. Ein \Index{kontravarianter Funktor}  $F \colon \mathcal{C} \to \mathcal{D}$ ordnet jedem Objekt $C$ in $\mathcal{C}$ ein Objekt
 	$D$ in $\mathcal{D}$ zu und jedem Morphismus $f \colon C \to C'$ einem Morphismus $F(f) \colon F(C') \to F(C)$ in $\mathcal{D}$ zu. Dabei muss gelten:
-	\begin{enumerate}[i)]
+	\begin{enumerate}[i),noitemsep]
 		\item $F(\id_C)= \id_{F(C)}$
-		\item Für $C \xrightarrow{f} C' \xrightarrow{f'}C''$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
+		\item Für $\begin{tikzcd}[cramped] C \rar["f"] & C' \rar["f'"] & C'' \end{tikzcd}$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
 	\end{enumerate}
 	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor 
 	$\mathcal{C} \to \mathcal{D}^\op$.
 \end{definition}
 
-\begin{beispiel}
-	\begin{enumerate}[i)]
+\begin{beispiel} Es gibt zahlreiche Beispiele für kontravariante Funktoren:
+	\begin{enumerate}[i),itemsep=0pt]
 		\item $\id \colon \mathcal{C} \to \mathcal{C}^\op$ ist kontravariant.
 		\item Sei $V$ eine abelsche Gruppe. Wir erhalten einen kontravarianten Funktor
 		\[
@@ -117,7 +127,7 @@
 		\item Sei $V$ eine abelsche Gruppe. Dann sind 
 		\begin{align}
 			C_\sing^*(-,V) &\colon \TOP^2 \longrightarrow \mathbb{Z}\text{-}\textsc{Kokettenkomplexe}  \\
-			H^*_\sing \enbrace*{C_\sing^*(-,V),d_\sing^*} &\colon \TOP^2 \longrightarrow \textsc{Gr}\text{-}\mathbb{Z}\text{-}\MOD   
+			H^*_\sing \enbrace[\big]{C_\sing^*(-,V),d_\sing^*} &\colon \TOP^2 \longrightarrow \textsc{Gr}\text{-}\mathbb{Z}\text{-}\MOD   
 		\end{align}
 		kontravariante Funktoren.
 	\end{enumerate}
@@ -125,7 +135,7 @@
 
 \begin{satz}[{name=[Eigenschaften singulärer Kohomologie]}]
 	Singuläre Kohomologie hat die folgenden Eigenschaften:
-	\begin{enumerate}[i)]
+	\begin{enumerate}[i),itemsep=1.5pt]
 		\item \textbf{Dimensionsaxiom:} $H^n_\sing(\set{\pt};V) = V$, falls $n=0$ ist und sonst $0$.\index{Dimensionsaxiom} 
 		\item \textbf{Paarfolge:} Es gibt eine natürliche Transformation $\partial^*\colon H^*(A;V) \to H^{*+1}(X,A;V)$ sodass für jedes Paar\index{Paarfolge} 
 		\[
@@ -142,27 +152,27 @@
 \end{satz}
 \begin{beweis}
 	Für singuläre Homologie haben wir die entsprechenden Aussagen schon bewiesen. In allen vier Fällen folgt die Aussage für Kohomologie aus schon bewiesenen Aussagen über 
-	den singulären Kettenkomplex.
+	den singulären Kettenkomplex.\todo{Andere Teile aus Übungen übernehmen}
 	
 	Wir führen dies an dieser Stelle nur für iv) aus. Seien $f, g \colon X \to Y$ homotop. Dann gibt es eine Kettenhomotopie $H \colon C^\sing_*(X) \to C^\sing_{*+1}(Y)$ zwischen den 
-	auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also \todo{nochmal durchgucken}
+	auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also
 	\[
 		d_{n+1} \circ H + H \circ d_n = f_* - g_*
 	\]
-	$H$ induziert $H^\# \colon C^*_\sing(Y;V) \to C_\sing^*(X;V)$ mit $H^\#(\alpha) := (-1)^{\abs{\alpha}} \alpha \circ H$. Es gilt nun
+	$H$ induziert $H^\# \colon C^*_\sing(Y;V) \to C_\sing^{*-1}(X;V)$ mit $H^\#(\alpha) := (-1)^{\abs{\alpha}} \cdot \alpha \circ H$. Es gilt nun für $\alpha \in C_\sing^n(Y;V)$
 	\begin{align}
 		\enbrace*{d^{n-1} \circ H^\# + H^\# \circ d^n}(\alpha) &= d^{n-1} \circ H^\#(\alpha) + H^\# \circ d^n (\alpha)\\
-		&= d^{n-1} \enbrace*{(-1)^n(\alpha \circ H)} - (-1)^n
-		H^\# \enbrace*{\alpha \circ d^{n+1}} \\
-		&= (-1)^n \enbrace*{(-1)^{n} \alpha \circ H  \circ d_n - (-1)^{n+1} \alpha \circ d_{n+1} \circ H} \\
+		&= d^{n-1} \enbrace[\big]{(-1)^n \cdot (\alpha \circ H)} - (-1)^n \cdot H^\# \enbrace*{\alpha \circ d_{n+1}} \\
+		&= (-1)^n \cdot \enbrace*{(-1)^{n} \alpha \circ H  \circ d_n - (-1)^{n+1} \alpha \circ d_{n+1} \circ H} \\
 		&= \alpha \circ H \circ d_n + \alpha \circ d_{n+1} \circ H \\
-		&= \alpha \enbrace*{f_* - g_*} = f^*(\alpha) - g^*(\alpha) \qedhere
+		&= \alpha \enbrace*{f_* - g_*} = f^*(\alpha) - g^*(\alpha) 
 	\end{align}
+	Damit ist $f^* - g^* =0$ in Kohomologie, da die linke Seite für $\alpha \in \ker d^n$ im Bild von $d^{n-1}$ liegt. \todo{Revision}
 \end{beweis}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Angabe des Verbindungshomomorphismus]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen. Der Verbindungshomomorphismus $\partial \colon H^n(A;V) \to H^{n+1}(X,A;V)$ kann wie folgt beschrieben werden: Sei 
-	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$ zu $\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist 
+	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$ zu $\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist \marginnote{Da muss ich nochmal drüber nachdenken…}
 	\[
 		\partial \benbrace{\alpha} = \benbrace*{d^n \hat{\alpha}} \in H^{n+1}(X,A;V)
 	\]
