@@ -6,6 +6,9 @@ This repository stores some lecture notes made during lectures at the University
 
 In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster in Quellcode und PDF zur Verfügung. Aktuell umfasst dies die Vorlesungen
 
+* WiSe 2015
+	* [CAT(0) kubische Komplexe](	https://github.com/JaMeZ-B/latex-wwu/raw/master/CAT0_WS15/CAT0.pdf?raw=true)
+
 * SoSe 2015
 	* [Elliptische Kurven und Kryptographie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EKK_SS15/EKK.pdf?raw=true "Elliptische Kurven und Kryptographie") (Phil)
 	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes; momentan noch sehr unvollständig…)
@@ -42,7 +45,7 @@ Zeichnungen fehlt noch eine ganze Menge.
 Schon einmal vielen Dank an
 
 * Gautam (gdbgauda) _Höhere Algebra I._
-* Phil (phist91) _PDGL I., Elementare Zahlentheorie, Elliptische Kurven und Kryptographie_
+* Phil (phist91) _PDGL I., Elementare Zahlentheorie, Elliptische Kurven und Kryptographie, CAT(0) kubische Komplexe_
 * Arne (moregrey) _Differentialformen und Mannigfaltigkeiten, Differentialgeometrie_
 * Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik, Numerische Analysis_
 * Tim (Tii1) _Analysis II._
