@@ -46,6 +46,8 @@
 		\item Ein geodätischer Raum heißt \Index{eindeutig geodätisch}, wenn genau eine solche Geodäte existiert.
 	\end{enumerate}
 \end{definition}
+
+Sofern nichts anderes gesagt wird, ist $[0,d(x,y)]$ der Definitionsbereich einer Geodäte $\alpha\colon x \geo y$.
 \newpage
 \begin{beispiel}
 \label{bsp:1.4}
@@ -426,6 +428,9 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 	\end{description}
 \end{beweis}
 
+\vspace*{.5cm}
+
+\begin{minipage}{0.6\textwidth}
 \begin{erinnerung}[Orthogonale Projektion]
 \label{erin:1.15}
 	Gegeben sei ein reeller Hilbertraum $\EE^d$ und $U \subseteq \EE^d$ ein Unterraum.
@@ -441,8 +446,21 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 	\]
 	und $v- \pi_U(v) \perp U$.
 \end{erinnerung}
+\end{minipage} \hspace{.5cm}
+\begin{minipage}{0.35\textwidth}
+	\begin{tikzpicture}[scale=2,>=Latex]
+		\draw [->] (-.2,0) -- (2,0);
+		\draw [->] (0,-.2) -- (0,2);
+		
+		\draw [thick] (-.2,-.1) -- (1.5,.75) node[anchor=south west]{$U$};
+		\draw [thick,dashed] (.5,1.5) node[right]{$v$} -- (1,.5) node[anchor=north west,color=red]{$\pi_U(v)$};
+		\draw (.5,1.5) node[fill,circle,inner sep=1.5pt]{};
+		\draw (1,.5) node[fill,circle,inner sep=1.5pt,color=red]{};
+	\end{tikzpicture}
+\end{minipage}
 
 \begin{satz}[Projektion auf konvexe Teilmengen]
+\label{satz:1.16}
 	Sei $X$ ein $\CAT$-Raum und $C \subseteq X$ konvex und vollständig mit der induzierten Metrik.
 	Dann gilt:
 	\begin{enumerate}[(i)]
@@ -452,6 +470,18 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 		\]
 		Die Abbildung $\pi_C \colon X \rightarrow C$ heißt die \textbf{(orthogonale) Projektion} auf $C$. \index{orthogonale Projektion}
 		\item Ist $y \in [X, \pi_C(x)] = \im(\gamma \colon x \geo \pi_C(x))$, so ist $\pi_C(y) = \pi_C(x)$.
+		\begin{figure}[h]
+			\centering
+		\begin{tikzpicture}[scale=.5]
+			\draw [thick] (0.5,0.5) circle (1.58113883);
+			\draw [thick] (1,2) node[fill,circle,inner sep=1.5pt]{} -- (1.5,3) node[fill,circle,inner sep=1.5pt]{} -- (2,4) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw (0.5,0.5) node{$C$};
+			\draw (1,2) node[right]{$\pi_C(x) = \pi_C(y)$};
+			\draw (1.5,3) node[right]{$y$};
+			\draw (2,4) node[right]{$x$};
+		\end{tikzpicture}
+		\end{figure}
 		\item Für alle $x,y \in X$ gilt
 		\[
 			d(\pi_C(x),\pi_C(y)) \leq d(x,y),
@@ -459,7 +489,7 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 		das heißt $\pi_C$ ist $1$-Lipschitz. \index{Lipschitz}
 	\end{enumerate}
 \end{satz}
-\newpage
+
 \begin{beweis}
 	\mbox{}\\[-.85cm]
 	\begin{enumerate}[(i)]
@@ -480,7 +510,7 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 		
 		\begin{figure}[h]
 			\centering
-			\begin{tikzpicture}[scale=1.5]
+			\begin{tikzpicture}[scale=1]
 				\draw (0,0) node[fill,circle,inner sep=1.5pt]{};
 				\draw (2,-1) node[fill,circle,inner sep=1.5pt]{};
 				\draw (2,2) node[fill,circle,inner sep=1.5pt]{};
@@ -493,7 +523,7 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 				\draw (M) node[fill,circle,inner sep=1.5pt]{};
 				\draw (M) node[right]{$m$};
 			\end{tikzpicture} \hspace{1cm}
-			\begin{tikzpicture}[scale=1.5]
+			\begin{tikzpicture}[scale=1]
 				\draw (0,0) node[fill,circle,inner sep=1.5pt]{};
 				\draw (2,-1) node[fill,circle,inner sep=1.5pt]{};
 				\draw (2,2) node[fill,circle,inner sep=1.5pt]{};
@@ -541,8 +571,104 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 			\stack{}{=} &4\cdot (2D\delta + \delta^2)
 		\end{align*}
 		Somit folgt $d(y_n,y_m) \leq 2 \cdot \sqrt{2D\delta + \delta^2} = \varepsilon$ für $n,m \geq N$.
-		Also ist $(y_n)_n$ eine Cauchy-Folge und wir setzen $\pi_C(x) := \lim_{n \rightarrow \infty} y_n$. \qedhere
+		Also ist $(y_n)_n$ eine Cauchy-Folge und wir setzen $\pi_C(x) := \lim_{n \rightarrow \infty} y_n$.
+		\item Es ist $\im(\gamma\colon x \geo \pi_C(x)) = \{y \in X : d(x,y) + d(y,\pi_C(x)) = d(x,\pi_C(x))\}$. \marginnote{28.10.15 \\ \ [3]}
+		Angenommen, $\pi_C(y) \neq \pi_C(x)$.
+		Dann ist insbesondere
+		\begin{equation}
+			d(y,\pi_C(y)) < d(y,\pi_C(x)) \label{eq:1.16.3}
+		\end{equation}
+		und mit der Dreiecksungleichung folgt
+		\begin{align*}
+			d(x,\pi_C(y)) &\stack{}{\leq} d(x,y) + d(y,\pi_C(y)) \\
+			&\stack{\eqref{eq:1.16.3}}{<} d(x,y) + d(y,\pi_C(x)) \\
+			&\stack{}{=} d(x,\pi_C(x)),
+		\end{align*}
+		was ein Widerspruch zur Minimalität von $\pi_C(x)$ ist.
+		\item Übungsaufgabe. \qedhere
 	\end{enumerate}
+\end{beweis}
+
+Unser nächstes Ziel ist es zu zeigen, das $\CAT$-Räume kontrahierbar sind.
+
+\begin{definition}[Homotopie]
+\label{def:1.17}
+	Seien $\phi_0,\phi_1 \colon X \rightarrow Y$ stetige Abbildungen zwischen topologischen Räumen $X$ und $Y$.
+	\begin{enumerate}[(i)]
+		\item Die Abbildungen $\phi_0, \phi_1$ heißen \textbf{homotop}, wenn es eine stetige Abbildung $H \colon X \times [0,1] \rightarrow Y$ gibt mit $H(x,0) = \phi_0(x)$ und $H(x,1) = \phi_1(x)$ für alle $x \in X$. $H$ heißt \Index{Homotopie} zwischen $\phi_0$ und $\phi_1$. Wir schreiben $\phi_0 \simeq \phi_1$.
+		\item Ist $A \subseteq X$ eine Teilmenge mit $\phi_0(a) = \phi_1(a)$ für alle $a \in A$, so heißen $\phi_0$ und $\phi_1$ \textbf{homotop relativ zu} $A$, wenn es eine Homotopie $H$ zwischen $\phi_0$ und $\phi_1$ gibt mit $H(a,t) = \phi_0(a)$ für alle $t \in [0,1]$ und $a \in A$. Wir schreiben $\phi_0 \simeq \phi_1 \rel A$.
+		\item Ein topologischer Raum $X \neq \emptyset$ heißt \Index{kontrahierbar}, wenn die Identität $\id_X$ und die konstante Abbildung $\phi_p\colon x \mapsto p, p \in X$, homotop sind.
+	\end{enumerate}
+\end{definition}
+
+\begin{bemerkung}
+\label{bem:1.18}
+	Ist $X$ ein kontrahierbarer Raum, so ist die Fundamentalgruppe $\pi_1(X,\{x_0\}), x_0 \in X$ trivial.
+\end{bemerkung}
+
+\begin{satz}
+\label{satz:1.19}
+	Sei $X$ ein $\CAT$-Raum und $\emptyset \neq C \subseteq X$ konvex und vollständig.
+	Dann gilt $\id_X \simeq \pi_C \rel C$.
+	Insbesondere erhalten wir für $C = \{p\}, p \in X$, dass $\id_X \simeq \phi_p \rel \{p\}$, und folglich ist der Raum $X$ kontrahierbar.
+\end{satz}
+
+\begin{beweis}
+	Wir brauchen folgendes Resultat (Übungsaufgabe):
+	
+	\vspace*{.5cm}
+	
+	{\leftskip3em
+	Seien $\alpha\colon x \geo y, \beta\colon x' \geo y'$ zwei Geodäten.
+	Dann gilt für alle $t \in [0,1]$:
+	\begin{equation}
+		d(\alpha(t\cdot d(x,y)), \beta(t \cdot d(x',y'))) \leq (1-t) \cdot d(x,x') + t \cdot d(y,y'). \label{eq:1.19.1}
+	\end{equation} }
+	
+	Wir definieren
+	\begin{align*}
+		H\colon X \times [0,1] &\longrightarrow X \\
+		(x,t) &\longmapsto \gamma_x(t \cdot d(x,\pi_C(x)),
+	\end{align*}
+	wobei $\gamma_x\colon x \geo \pi_C(x)$. Es gilt $H(x,0) = \gamma_x(0) = x$ und $H(x,1) = \gamma_x(d(x,\pi_C(x))) = \pi_C(x)$, somit ist $H(\cdot,0) = \id_X$ und $H(\cdot,1) = \pi_C$.
+	
+	Sei weiter $c \in C$. Dann gilt $H(c,t) = c$, da $\gamma_C\colon c \geo \pi_C(c)$ und $c = \pi_C(c)$.
+	
+	Es bleibt zu zeigen, dass $H$ stetig ist.
+	Wir wissen, dass Abbildungen zwischen metrischen Räumen genau dann stetig sind, wenn sie folgenstetig sind.
+	Sei $(x,t) \in X \times [0,1]$ beliebig und weiter $(x_n,t_m) \in X \times [0,1]$ eine Folge mit $\lim_{n,m} (x_n,t_m) = (x,t)$. Zu zeigen ist:
+	\begin{align*}
+		\lim\limits_{n,m} H(x_n,t_m) &= H(x,t) \\
+		\stack{\text{Def}}{\Leftrightarrow} \lim\limits_{n,m} \gamma_{x_n}(t_m \cdot d(x_n,\pi_C(x_n))) &= \gamma_x(t \cdot d(x,\pi_C(x))),
+	\end{align*}
+	wobei $\gamma_{x_n}\colon x_n \geo \pi_C(x_n)$.
+	
+	Sei $\varepsilon > 0$ gegeben. Wähle $N_1 \in \NN$ so groß, dass mit \autoref{satz:1.16}(iii) gilt:
+	\begin{equation} \def\arraystretch{1.8}
+		\left. \begin{array}{r}
+			\displaystyle d(x_n,x) < \frac{\varepsilon}{2} \\
+			\displaystyle d(\pi_C(x_n),\pi_C(x)) < \frac{\varepsilon}{2}
+		\end{array} \right\} \forall n \geq N_1 \label{eq:1.19.2}
+	\end{equation}
+	
+	Wir haben:
+	\begin{align}
+		&d(H(x,t),H(x_n,t)) \\
+		\stack{}{=} &d(\gamma_x(t\cdot d(x,\pi_C(x))),\gamma_{x_n}(t\cdot d(x_n,\pi_C(x_n)))) \\
+		\stack{\Delta\text{-Ungl.}}{\leq} &d(\gamma_x(t\cdot d(x,\pi_C(x))), \alpha_{x_n}(t \cdot d(x_n,\pi_C(x)))) + d(\alpha_{x_n}(t\cdot d(x_n,\pi_C(x))),\gamma_{x_n}(t \cdot d(x_n,\pi_C(x_n)))) \\
+		\stack{\eqref{eq:1.19.1}}{\leq} &(1-t)\cdot d(x,x_n) + t \cdot \Underbrace{d(\pi_C(x),\pi_C(x))}{=0} + (1-t) \Underbrace{\cdot d(x_n,x_n)}{=0}  + t \cdot d(\pi_C(x),\pi_C(x_n)) \\
+		\stack{\eqref{eq:1.19.2}}{\leq} &(1-t) \cdot \frac{\varepsilon}{2} + t \cdot \frac{\varepsilon}{2} = \frac{\varepsilon}{2} \quad \forall t \in [0,1], n \geq N_1 \label{eq:1.19.3}
+	\end{align}
+	Wähle $N_2 \in \NN$ groß genug mit
+	\begin{equation}
+		d(H(x_n,t_m),H(x_n,t)) < \frac{\varepsilon}{2} \quad \forall m \geq N_2. \label{eq:1.19.4}
+	\end{equation}
+	Damit erhalten wir
+	\begin{align*}
+		&d(H(x_n,t_m),H(x,t)) \\
+		\stack{\Delta\text{-Ungl.}}{\leq} &d(H(x_n,t_m),H(x_n,t)) + d(H(x_n,t),H(x,t)) \\
+		\stack{\eqref{eq:1.19.3},\eqref{eq:1.19.4}}{\leq} &\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \quad \forall n,m \geq \max(N_1,N_2). \qedhere
+	\end{align*}
 \end{beweis}
 
 \cleardoubleoddemptypage
