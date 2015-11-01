@@ -7,11 +7,13 @@ This repository stores some lecture notes made during lectures at the University
 In diesem Repository stellen wir Mitschriften zu Vorlesungen an de WWU Münster in Quellcode und PDF zur Verfügung. Aktuell umfasst dies die Vorlesungen
 
 * WiSe 2015
-	* [CAT(0) kubische Komplexe](	https://github.com/JaMeZ-B/latex-wwu/raw/master/CAT0_WS15/CAT0.pdf?raw=true)
-
+	* [CAT(0) kubische Komplexe](https://github.com/JaMeZ-B/latex-wwu/raw/master/CAT0_WS15/CAT0.pdf?raw=true "CAT(0) kubische Komplexe") (Phil)
+	* [Topologie II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Topo2_WS15/topologie_2.pdf?raw=true "Topologie II.") (Jannes)
+	* [Operatoralgebren](https://github.com/JaMeZ-B/latex-wwu/raw/master/OpAlg_WS15/operatoralgebren.pdf?raw=true "Operatoralgebren") (Jannes)
+	* [Modellreduktion](https://github.com/JaMeZ-B/latex-wwu/raw/master/ModRed_WS15/Modellreduktion.pdf?raw=true "Modellreduktion") (Tobias)
 * SoSe 2015
 	* [Elliptische Kurven und Kryptographie](https://github.com/JaMeZ-B/latex-wwu/raw/master/EKK_SS15/EKK.pdf?raw=true "Elliptische Kurven und Kryptographie") (Phil)
-	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes; momentan noch sehr unvollständig…)
+	* [K-Theorie](https://github.com/JaMeZ-B/latex-wwu/raw/master/KTheorie_SS15/K-Theorie.pdf?raw=true "K-Theorie und die Hopf-Invariante") (Jannes; momentan noch etwas unvollständig…)
 	* [Numerische Analysis](https://github.com/JaMeZ-B/latex-wwu/raw/master/NumAna_SS15/Num_Ana.pdf?raw=true "Numerische Analysis") (Tobias)
 	* [Analysis II.](https://github.com/JaMeZ-B/latex-wwu/raw/master/Ana2_SS15/Analysis2.pdf?raw=true "Analysis II.") (Tim)
 * WiSe 2014
@@ -44,11 +46,11 @@ Ich lade jeden herzlich ein, sich mittels Forks und Pull-Requests an der Entwick
 Zeichnungen fehlt noch eine ganze Menge.
 Schon einmal vielen Dank an
 
-* Gautam (gdbgauda) _Höhere Algebra I._
 * Phil (phist91) _PDGL I., Elementare Zahlentheorie, Elliptische Kurven und Kryptographie, CAT(0) kubische Komplexe_
 * Arne (moregrey) _Differentialformen und Mannigfaltigkeiten, Differentialgeometrie_
-* Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik, Numerische Analysis_
+* Tobias (Tazdr) _Einführung in die Algebra, Finanzmathematik, Numerische Analysis, Modellreduktion_
 * Tim (Tii1) _Analysis II._
+* Gautam (gdbgauda) _Höhere Algebra I._
 
 für die Beteiligung an diesem Projekt!
 
