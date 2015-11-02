@@ -416,7 +416,7 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 	Wir schreiben auch $\sigma|_{\benbrace*{0,\ldots , i\hspace{-3.5pt}/, \ldots ,n}}$ für die $i$-te Seite von $\sigma$.
 \end{bemerkung}
 
-\begin{definition}
+\begin{definition}[label=sec3:def_cup,{name=[$\cup$-Produkt]}]
 	Sei $R$ ein Ring und $A,B \subseteq X$. Wir definieren das \bet{Cup-Produkt} ($\cup$-Produkt)\index{Cup-Produkt, $\cup$-Produkt} auf dem singulären Kokettenkomplex 
 	\[
 		\cup \colon C^p_\sing \enbrace*{X,A;R} \otimes C^q_\sing(X,B;R) \longrightarrow C^{p+q}_\sing \enbrace*{X,A \cup B;R}
@@ -452,7 +452,7 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 \begin{definition}
 	Seien $(X,A)$ und $(Y,B)$ zwei Paare von topologischen Räumen. Seien $p_X \colon X \times Y \to X$ und $p_Y$ die Projektionen. Das $\times$-Produkt 
 	\[
-		H^p(X,A;R) \otimes H^q(Y,B;R) \longrightarrow H^{p+q}(X \times Y,A \times Y \cup X \times B ;R)
+		\times \colon H^p(X,A;R) \otimes H^q(Y,B;R) \longrightarrow H^{p+q}(X \times Y,A \times Y \cup X \times B ;R)
 	\]
 	ist definiert durch $\xi \times \zeta := p_X^*(\xi) \cup p_Y^*(\zeta)$.
 \end{definition}
@@ -477,7 +477,7 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 	und $1_B$ analog. Dann ist $\benbrace*{1_A} \cup \benbrace*{1_B} = \benbrace*{1_{A \cap B}}$.
 \end{beispiel}
 
-\begin{lemma}[{name={1}}]
+\begin{lemma}[label=sec3:lem1]
 	Sei $(X,A)$ ein Paar von topologischen Räumen und $Y$ ein weiterer topologischer Raum. Seien $\partial \colon H^p(A;R) \to H^{p+1}(X,A;R)$ und 
 	$\partial^{\times} \colon H^{p+q}(A \times Y;R) \to H^{p+q+1}(X\times Y,A \times Y;R)$ die Verbindungshomomorphismen in den Paarfolgen. Dann gilt für $\xi \in H^p(A;R)$
 	und $\zeta \in H^q(X;R)$
@@ -502,7 +502,7 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 	\end{align}
 \end{beweis}
 
-\begin{lemma}[{name={2}}]
+\begin{lemma}[label=sec3:lem2]
 	Sei $\xi \in H^1 \enbrace*{D^1,\partial D^1;R}$ ein Erzeuger. Dann ist für jeden Raum $X$ die Abbildung 
 	\[
 		H^p(X;R) \longrightarrow H^{p+1} \enbrace*{D^1 \times X, \partial D^1 \times X;R} \quad , \qquad \eta \longmapsto \xi \times \eta
@@ -533,16 +533,142 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 			\ldots \rar & H^p \enbrace*{D^1\times X, \partial D^1\times X; R}\rar["0"] & H^p \enbrace*{D^1 \times X;R}\rar & H^p \enbrace*{\partial D^1 \times X;R}\rar & \ldots 
 		\end{tikzcd}
 	\]
-	in kurze exakte Folge 
+	in eine kurze exakte Folge 
 	\[
 		\begin{tikzcd}
 			0 \rar & H^p \enbrace*{D^1\times X;R} \rar & H^p \enbrace*{\partial D^1 \times X;R} \rar & H^{p+1} \enbrace*{D^1 \times X,\partial D^1 \times X;R} \rar & 0
 		\end{tikzcd}
 	\]
 	zerfällt.
-	Die ersten zwei $\times$-Produkte sind Isomorphismen. Nach Lemma 1 kommutiert das Diagramm und damit ist auch das dritte $\times$-Produkt ein Isomorphismus.
+	Die ersten zwei $\times$-Produkte sind Isomorphismen. Dies folgt für das erste aus $H^0(D^1)\cong R$ und der Betrachtung des Erzeugers $1_R \in R$. Für das zweite $\times$-Produkt betrachte \todo{Diagramm vervollständigen}
+	\[
+		\begin{tikzcd}
+			H^0(\set*{-1}) \otimes H^p(X) \dar["(p_{-1})^* \otimes \id"] & \\
+			H^0(\partial D^1) \otimes H^p(X) \rar["\times"] & H^p(\partial D^1 \times X) \dar["(i_{+1} \times \id_X)^*"] \\
+			H^1(D^1,\partial D^1) \otimes H^p(X) & \mbox{ }
+		\end{tikzcd}
+	\]
+	
+	Nach \autoref{sec3:lem1} kommutiert das Diagramm und damit ist auch das dritte $\times$-Produkt ein Isomorphismus.
 \end{beweis}
+
+\begin{proposition}[label=sec3:prop_Hp-1]
+	Sei $X$ ein topologischer Raum. Dann ist $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^{p-1}(X;R)$.
+\end{proposition}
+\begin{beweis}
+	Die Paarfolge zu $(S^1 \times X, \set*{\pt} \times X)$ zerfällt in kurze exakte Folgen
+	\[
+		\begin{tikzcd}
+			H^p(S^1 \times X, \set*{\pt} \times X;r) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R}
+		\end{tikzcd}
+	\]
+	Die Surjektivität folgt, da $\pi(\lambda,x) = (\pt,x)$ einen Spalt induziert. Damit folgt $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^p(S^1 \times X, \set*{\pt} \times X;R)$.
+	Die Behauptung folgt mittels Ausschneidung:
+	\[
+		H^p \enbrace*{S^1 \times X, \set*{\pt} \times X;R} \cong H^p \enbrace*{D^1 \times X, \partial D^1 \times X;R} \StackText{\ref{sec3:lem2}}{\cong} H^{p-1}(X;R) \qedhere
+	\]
+\end{beweis}
+
+\begin{bemerkung}
+	Sei $\xi \in H^1(S^1;R)$ ein Erzeuger und $\pi_X \colon S^1 \times X \to X$ die Projektion. Dann ist der Isomorphismus aus \autoref{sec3:prop_Hp-1} gegeben durch
+	\[
+		H^p \enbrace*{X;R} \oplus H^{p-1}(X;R) \longrightarrow H^p(S^1 \times X;R) \quad , \quad (\eta_1,\eta_2) \longmapsto \enbrace[\big]{\pi_X^*(\eta_1) + \xi\times \eta_2}
+	\]
+\end{bemerkung}
 % section 3 (end)
+\newpage
+
+\section{Kommutativität von $\cup$} % (fold)
+\label{sec:4}
+
+\begin{definition}[{name=[graduierte Algebra]}]
+	Eine \Index{graduierte Algebra} ist ein graduierter Modul $A^* = \bigoplus_p A^p$ zusammen mit einer $R$-Algebrastruktur, für die das Produkt mit der Graduierung verträglich 
+	ist: Für $a \in A^p$ und $b \in A^q$ ist $a \cdot b \in A^{p+q}$. Sie heißt \Index{graduiert-kommutativ}, falls gilt 
+	\[
+		a \cdot b =  (-1)^{p \cdot q} \cdot b \cdot a
+	\]
+	für alle $a \in A^p$ und $b \in A^q$.
+\end{definition}
+
+\begin{bemerkung}
+	Das $\cup$-Produkt auf $C^*_\sing(X;R)$ ist \emph{nicht} graduiert kommutativ. (siehe \ref{sec3:def_cup})
+\end{bemerkung}
+
+\begin{lemma}
+	Für $\sigma \colon \abs{\Delta^p} \to X$ sei $\overline{\sigma} \colon \abs{\Delta^n} \to X$ definiert durch 
+	\[
+		\overline{\sigma}(t_0, \ldots , t_p ) := (-1)^{\frac{p(p+1)}{2}} \sigma(t_p, \ldots ,t_0)
+	\]
+	Sei $\Sp \colon C_p(X,A;R) \to C_p(X,A;R)$ definiert durch $\Sp(\sigma) := \overline{\sigma}$. Sei $\Sp^* \colon C^p(X,A;R) \to C^p(X,A;R)$ definiert durch 
+	$\Sp^*(\alpha) := \alpha \circ \Sp$. Es gilt
+	\begin{enumerate}[a)]
+		\item $\Sp$ ist eine Kettenabbildung, $\Sp^*$ ist eine Kokettenabbildung
+		\item Ist $R$ kommutativ, so gilt $\beta \cup \alpha = (-1)^{p \cdot q}\Sp^*\enbrace*{\Sp^*(\alpha) \cup \Sp^*(\beta)}$
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}[a)]
+		\item Sei $\sigma \colon \abs{\Delta^p} \to X$ ein singulärer Simplex. Dann gilt
+		\begin{align}
+			\Sp(d_p \sigma) = \Sp\enbrace*{\sum_{i=0}^{p} (-1)^i \sigma|_{\benbrace*{0, \ldots , i\hspace{-3.5pt}/, \ldots ,p}}} 
+			&= \sum_{i=0}^{p} (-1)^i \Sp \enbrace*{\sigma|_{\benbrace*{0, \ldots , i\hspace{-3.5pt}/, \ldots , p}}} \\
+			&= \sum_{i=0}^{p} (-1)^i (-1)^{\frac{p(p-1)}{2}} \enbrace*{\sigma|_{\benbrace*{p, \ldots , i\hspace{-3.5pt}/, \ldots , 0}}}
+		\end{align}
+		wobei $i\hspace{-3.5pt}/$ an der $p-i$-ten Stellen von vorn steht. Weiter ist
+		\begin{align}
+			d_p \enbrace[\big]{\Sp(\sigma)} = d_p \enbrace*{(-1)^{\frac{p(p+1)}{2}} \sigma|_{\benbrace*{p, \ldots ,0}}} &= (-1)^{\frac{p(p+1)}{2}} \sum_{i=0}^{p} (-1)^i 
+			\sigma|_{\benbrace*{p, \ldots , \cancel{p-i}, \ldots ,0}} \\ 
+			&= (-1)^{\frac{p(p+1)}{2}} \sum_{i=0}^{p} (-1)^{p-i} \sigma|_{\benbrace*{p, \ldots ,i\hspace{-3.5pt}/, \ldots ,0}}
+		\end{align}
+		Nun ist $\frac{p(p-1)}{2} \equiv \frac{p(p+1)}{2} + p =   $ \todo{fertig machen} und es folgt die Gleichheit.
+		\item Für $\sigma \colon \abs{\Delta^n} \to X$ gilt 
+		\begin{align}
+			\enbrace*{\Sp^* \enbrace*{\Sp^*(\alpha) \cup \Sp^*(\beta)}}(\sigma) &= (-1)^{\frac{n(n+1)}{2}} \cdot \enbrace*{\Sp^*(\alpha) \cup \Sp^*(\beta)} 
+			\enbrace*{\sigma|_{\benbrace*{n, \ldots ,0}}} \\
+			&= (-1)^{\frac{n(n+1)}{2}} (-1)^{p \cdot q} \Sp^*(\alpha) \enbrace*{\sigma_{\benbrace*{n, \ldots , n-p}}} \cdot \Sp^*(\beta) 
+			\enbrace*{\sigma|_{\benbrace*{n-p, \ldots ,0}}} \\
+			&= (-1)^{\frac{n(n+1)}{2}} (-1)^{p \cdot q} (-1)^{\frac{p(p+1)}{2}} (-1)^{\frac{q(q+1)}{2}} \alpha \enbrace*{\sigma|_{\benbrace*{q, \ldots ,n}}}
+			\beta \enbrace*{\sigma|_{0, \ldots ,q}} \\
+			&= (-1)^{\frac{n(n+1)}{2}} (-1)^{p \cdot q} (-1)^{\frac{p(p+1)}{2}} (-1)^{\frac{q(q+1)}{2}} \beta \enbrace*{\sigma|_{0, \ldots ,q}} 
+			\alpha \enbrace*{\sigma|_{\benbrace*{q, \ldots ,n}}} \\
+			&\stackrel{!}{=} (-1)^{p \cdot q} \enbrace*{\beta \cup \alpha}(\sigma) = \cancel{(-1)^{p \cdot q}} \cancel{(-1)^{p \cdot q}} \beta \enbrace*{\sigma|_{0, \ldots ,q}} 
+			\alpha \enbrace*{\sigma|_{\benbrace*{q, \ldots ,n}}}
+		\end{align}
+		Weiter gilt nun
+		\begin{align}
+			\frac{n(n+1)}{2} + \frac{p(p+1)}{2} + \frac{q(q+1)}{2} &= (1+ \ldots + n) + (1+ \ldots + p) + (1+ \ldots + q)\\ 
+			&\equiv \enbrace*{(p+1) + \ldots + n} + (1+ \ldots + q)\\
+			&= (n+1) q = (p+q+1) q = pq + q^2 + q \equiv p \cdot q
+		\end{align}
+		da $q^2 \equiv q$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{lemma}
+	$\Sp \colon C_*(X,A) \to C_*(X,A)$ ist kettenhomotop zur Identität.
+\end{lemma}
+
+\begin{satz}
+	Das $\cup$-Produkt in Kohomologie ist graduiert kommutativ.
+\end{satz}
+\begin{beweis}
+	Seien $\xi \in H^p(X,A;R)$, $\eta \in H^q(X,B;R)$. Wähle $\alpha \in C^p(X,A;R)$, $\beta \in C^q(X,B;R)$ mit $\xi= [\alpha]$ und $\eta= [\beta]$. Dann ist 
+	\begin{align}
+		\xi \cup \eta = \benbrace*{\alpha \cup \beta} = (-1)^{pq} \cdot \benbrace*{\Sp^* \enbrace*{\Sp^*(\beta) \cup \Sp^*(\alpha)}} &= (-1)^{pq} \cdot 
+		\enbrace*{\Sp^*(\beta) \cup \Sp^*(\alpha)} \\
+		&= (-1)^{pq} \cdot \benbrace*{\Sp^*(\beta)} \cup \benbrace*{\Sp^*(\alpha)}\\ 
+		&= (-1)^{pq} \cdot [\beta] \cup [\alpha] = (-1)^{pq} \cdot \eta \cup \xi \qedhere
+	\end{align}
+\end{beweis}
+
+\begin{proposition}
+	Sei $\tau_* \colon C_*^\sing \to C_*^\sing$ eine natürliche Transformation durch Kettenabbildungen. Induziert $\tau$ die Identität auf $H_0(\set*{\pt})$, so ist $\tau_*$
+	kettenhomotop zur Identität, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_*^\sing$ mit
+	\[
+		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \id - \tau_*
+	\]
+\end{proposition}
+% section 4 (end)
 
 
 
