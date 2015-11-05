@@ -540,6 +540,8 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 				\draw (M) node[fill,circle,inner sep=1.5pt]{};
 				\draw (M) node[anchor=north west]{$\ol{m}$};
 			\end{tikzpicture}
+			\caption{Zu einem Parallelogramm ergänztes Vergleichsdreieck.}
+			\label{abb:erg_parallel}
 		\end{figure}
 		
 		Es ist $d(y_n,m) = d(y_m,m) = \frac{1}{2} d(y_n,y_m)$.
@@ -730,6 +732,228 @@ Unser nächstes Ziel ist es zu zeigen, das $\CAT$-Räume kontrahierbar sind.
 		\stack{\Delta\text{-Ungl.}}{\leq} &d(H(x_n,t_m),H(x_n,t)) + d(H(x_n,t),H(x,t)) \\
 		\stack{\eqref{eq:1.19.3},\eqref{eq:1.19.4}}{\leq} &\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \quad \forall n,m \geq \max(N_1,N_2). \qedhere
 	\end{align*}
+\end{beweis}
+\newpage
+\begin{definition}[Durchmesser, Radius]
+\label{def:1.20}
+	Sei $(X,d)$ ein metrischer Raum und $A \subseteq X$ beschränkt. \marginnote{04.11.15 \\ \ [4]}
+	Der \Index{Durchmesser} von $A$ ist gegeben durch
+	\[
+		\diam(A) := \sup\{ d(x,y) : x,y \in A\}.
+	\]
+	Für $x \in X$ definiere nun $\rad(x,A) := \sup\{d(x,a) : a \in A\}$. Dann ist der \Index{Radius} von $A$ definiert durch
+	\[
+		\rad(A) := \inf\{ \rad(x,A) : x \in A\}.
+	\]
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:1.21}
+	Sei $X := \RR^2$ und $A:= \{(2,2),(2,-2)\}$. Für $x := (1,0)$ und $x' := (2,0) = c_A$ ist $\rad(x,A) = \sqrt{5}$ und $\rad(x',A) = 2 = \rad(A)$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+			\draw [thick,->] (0,-2.1) -- (0,2.1);
+			\draw [thick,->] (-.2,0) -- (3,0);
+			\draw (1,0) node[fill,circle,inner sep=1.5pt]{};
+			\draw (2,2) node[fill,circle,inner sep=1.5pt]{};
+			\draw (2,-2) node[fill,circle,inner sep=1.5pt]{};
+			\draw (2,0) node[fill,circle,inner sep=1.5pt,color=red]{};
+			
+			\draw (1,0) node[below]{$x$};
+			\draw (2,0) node[below,color=red]{$x' = c_A$};
+			\draw (2,-2) node[right]{$(2,-2)$};
+			\draw (2,2) node[right]{$(2,2)$};
+		\end{tikzpicture}
+	\end{figure}	
+\end{beispiel}
+
+Der Begriff des Radius ist also mit der Idee eines \textbf{\enquote{Zentrums}} ($c_A \in A$) von $A$ verbunden, welches zwar nicht in $A$ liegen muss, aber die Mitte von $A$ gut beschreibt. Im Allgemeinen muss ein Zentrum nicht existieren, aber bei $\CAT$-Räumen kann man es konstruieren. \label{Zentrum}
+
+\begin{satz}
+\label{satz:1.22}
+	Sei $X$ ein vollständiger $\CAT$-Raum und $\emptyset \neq A \subseteq X$ beschränkt.
+	Dann gibt es einen eindeutigen Punkt $c_A \in X$, das \Index{Zentrum} von A, sodass $A \subseteq \ol{B_{\rad(A)}(c_A)}$ gilt.
+\end{satz}
+
+\begin{beweis}
+	Seien $q,r \in X$ beliebig und $m \in X$ mit $d(q,m) = d(m,r) = \frac{d(q,r)}{2}$.
+	Sei weiter $a \in X$ beliebig. Wir betrachten $\Delta(a,r,q)$ und $\ol{\Delta}(\ol{a},\ol{r},\ol{q})$ und ergänzen $\ol{\Delta}$ zu einem Parallelogramm (vgl. Abb. \ref{abb:erg_parallel} auf S. \pageref{abb:erg_parallel}). Die Parallelogrammgleichung in $\EE^2$ besagt:
+	\begin{align*}
+		(2 \cdot d_2(\ol{a},\ol{m}))^2 + (d_2(\ol{r},\ol{q}))^2 &= 2 \cdot d_2(\ol{a},\ol{r})^2 + 2 \cdot d_2 (\ol{a},\ol{q})^2 \\
+		\Rightarrow \qquad d_2(\ol{a},\ol{m}) &= \frac{1}{2} d_2(\ol{a},\ol{r})^2 + \frac{1}{2} d_2(\ol{a},\ol{q})^2 - \frac{1}{4} d_2 (\ol{r},\ol{q})^2.
+	\end{align*}
+	\newpage
+	Es gilt also
+	\begin{align*}
+		d(a,m)^2 &\stack{\CAT}{\leq} d_2(\ol{a},\ol{m}) \\
+		&\stack{}{=} \frac{1}{2} d_2(\ol{a},\ol{r})^2 + \frac{1}{2} d_2(\ol{a},\ol{q})^2 - \frac{1}{4} d_2 (\ol{r},\ol{q})^2 \\
+		&\stack{}{=} \frac{1}{2} d_2(a,r)^2 + \frac{1}{2} d_2(a,q)^2 - \frac{1}{4} d_2 (r,q)^2 \\
+		\xRightarrow{\sup} \quad \rad(m,A)^2 &\stack{}{\leq} \frac{1}{2} \rad(r,A)^2 + \frac{1}{2} \rad(q,A)^2 - \frac{1}{4} d(r,q)^2.
+	\end{align*}
+	Mit $\rad(A) \leq \rad(m,A)$ erhalten wir
+	\begin{align}
+		\rad(A)^2 &\leq \frac{1}{2} \rad(r,A)^2 + \frac{1}{2} \rad(q,A)^2 - \frac{1}{4} d(r,q)^2 \\
+		\Rightarrow \qquad \frac{1}{4} d(r,q)^2 &\leq \frac{1}{2} (\rad(r,A)^2 + \rad(q,A)^2) - \rad(A)^2 \\
+		\Rightarrow \qquad d(r,q) &\leq \sqrt{2 \cdot (\rad(r,A)^2 + \rad(q,A)^2) - 4 \rad(A)^2} \label{eq:1.22.1}
+	\end{align}
+	
+	Zur Eindeutigkeit: Angenommen, $z_1,z_2$ sind zwei Zentren von $A$, d.h. $\rad(z_1,A) = \rad(z_2,A) = \rad(A)$. Mit \eqref{eq:1.22.1} folgt
+	\[
+		d(z_1,z_2) \leq \sqrt{2 \cdot (\rad(A)^2 + \rad(A)^2) - 4\rad(A)^2} = 0 \quad \Rightarrow \quad z_1 = z_2
+	\]
+	
+	Zur Existenz: Sei $x_n \in X$ eine Folge mit $\rad(x_n,A) \rightarrow \rad(A)$. Ziel ist zu zeigen, dass $(x_n)_n$ eine Cauchy-Folge ist.
+	Da $X$ vollständig ist, konvergiert diese und das Zentrum von $A$ ist $\lim_{n\rightarrow \infty} x_n$.
+	
+	Sei $\varepsilon > 0$.
+	Sei weiter $\delta > 0$ die positive Lösung von 
+	\begin{equation}
+		\delta^2 + 2 \cdot \rad(A) - \delta - \frac{\varepsilon}{4} = 0. \label{eq:1.22.3}
+	\end{equation}
+	Wähle $N \in \NN$ groß genug mit
+	\begin{equation}
+		\rad(x_n,A) < \rad(A) + \delta \quad \forall n \geq N. \label{eq:1.22.2}
+	\end{equation}
+	Wir betrachten \eqref{eq:1.22.1} quadriert und für $r = x_n$ und $q = x_m$.
+	
+	\begin{align*}
+		d(x_n,x_m)^2 &\stack{}{\leq} 2 \cdot (\rad(x_n,A)^2 + \rad(x_m,A)^2) - 4 \cdot \rad(A)^2 \\
+		&\stack{\eqref{eq:1.22.2}}{\leq} 2 \cdot (2 \cdot (\rad(A) + \delta)^2)-4 \cdot \rad(A)^2 \quad \forall n,m \geq N \\
+		&\stack{}{=} 8 \cdot \rad(A) \delta + 4 \delta^2 \quad \forall n,m \geq N \\
+		\Rightarrow \quad d(x_n,x_m) &\stack{}{\leq} 2 \cdot \sqrt{2 \cdot \rad(A) \delta + \delta^2} \stack{\eqref{eq:1.22.3}}{=} \varepsilon \quad \forall n,m \geq N \qedhere
+	\end{align*}
+\end{beweis}
+\newpage
+\begin{definition}[Isometrie]
+\label{def:1.23}
+	Eine Abbildung $f \colon X \rightarrow Y$ von metrischen Räumen $(X,d_X)$, $(Y,d_Y)$ heißt \textbf{isometrische Einbettung}, wenn für alle $u,v \in X$ gilt:
+	\[
+		d_Y(f(u),f(v)) = d_X(u,v).
+	\]
+	Wenn $f$ zusätzlich surjektiv ist, heißt $f$ \Index{Isometrie} und $X$ und $Y$ zueinander isometrisch. Wir definieren die \Index{Isometriegruppe} von $X$:
+	\[
+		\Isom(X) = \{f \colon X \rightarrow X : f \text{ ist Isometrie}\}.
+	\]
+\end{definition}
+
+\begin{bemerkung}
+\label{bem:1.24}
+	Seien $(X,d_X), (Y,d_Y)$ metrische Räume und $f \colon X \rightarrow Y$ isometrische Einbettungen. Dann gilt:
+	\begin{enumerate}[(i)]
+		\item $f$ ist injektiv.
+		\item Ist $(x_n)_n$ eine Cauchy-Folge in $X$, so ist $(f(x_n))_n$ eine Cauchy-Folge in $Y$.
+		\item Sind $X$ und $Y$ isometrisch, so sind sie als topologische Räume homöomorph.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{definition}[Isometrische Gruppenwirkung]
+\label{def:1.25}
+	Sei $X$ ein metrischer Raum und $G$ eine Gruppe.
+	Eine \textbf{isometrische Wirkung} von $G$ auf $X$ ist ein Gruppenhomomorphismus $\Phi \colon G \rightarrow \Isom(X)$. \index{Gruppenwirkung!isometrisch}
+	Die \textbf{Fixpunktmenge} von $\Phi$ ist wie folgt definiert: \index{Fixpunkt}
+	\[
+		\Fix_\Phi(G) := \{x \in X : \Phi(g)(x) = x \ \forall g \in G\}
+	\]
+\end{definition}
+
+\begin{lemma}
+\label{lemma:1.26}
+	Sei $X$ ein $\CAT$-Raum und $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung.
+	Dann ist $\Fix_\Phi(G)$ abgeschlossen. \marginnote{Beweis: ÜA!}
+	Wenn $\Fix_\Phi(G) \neq \emptyset$, dann ist $\Fix_\Phi(G)$ konvex. \index{konvex}
+\end{lemma}
+
+\begin{satz}[\textsc{Bruhat-Tits}-Fixpunkttheorem, BTFT]
+\label{satz:1.27} \label{BTFT}
+	Sei $X$ ein vollständiger $\CAT$-Raum, sei $G$ eine Gruppe und $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung. \index{Bruhat-Tits-Fixpunktsatz} \index{Fixpunkt}
+	Sei weiter $\emptyset \neq A \subseteq X$ beschränkt mit $\Phi(g)(A) = A$ für alle $g \in G$.
+	Dann ist $c_A \in \Fix_\Phi(G)$.
+\end{satz}
+
+\begin{beweis}
+	Sei $g \in G$ beliebig.
+	Es gilt:
+	\begin{align*}
+		\rad(A) &\stack{}{=} \rad(c_A,A) \stack{\text{Def}}{=} \sup_{a \in A}\{ d(c_A,A)\} \\
+		&\stack{\Phi(g) \text{ isom.}}{=} \sup_{a \in A} \{d(\Phi(g)(c_A),\Phi(g)(a))\} \\
+		&\stack{\Phi(g)(A)=A}{=} \sup_{a \in A} \{d(\Phi(g)(c_A),a)\} \stack{\text{Def}}{=} \rad(\Phi(g)(c_A),A) \\
+		\xRightarrow{c_A \text{ eind.}} c_A &\stack{}{=} \Phi(g)(c_A) \quad \xRightarrow{g \text{ bel.}} c_A \in \Fix_\Phi(G) \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{korollar}
+\label{kor:1.28}
+	Sei $X$ ein vollständiger $\CAT$-Raum, sei $G$ eine Gruppe und $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung.
+	Sei weiter $x \in X$ mit $G(x) := \{\Phi(g)(x) : g \in G\} \subseteq X$ beschränkt.
+	Dann ist $\Fix_\Phi(G) \neq \emptyset$.
+\end{korollar}
+
+\begin{beweis}
+	Betrachte $A := G(x)$.
+	Dann ist $\Phi(g)(A) = A$ für alle $g \in G$. Mit \autoref{BTFT} folgt $\Fix_\Phi(G) \neq \emptyset$.
+\end{beweis}
+
+\begin{bemerkung}
+\label{bem:1.29}
+	Jede isometrische Wirkung von einer endlichen Gruppe auf einen vollständigen $\CAT$-Raum hat einen Fixpunkt.
+\end{bemerkung}
+
+\begin{korollar}
+\label{kor:1.30}
+	Sei $X$ ein vollständiger $\CAT$-Raum, $G$ eine Gruppe und $\Phi \colon G \rightarrow \Isom(X)$ eine isometrische Wirkung, welche folgende Bedingungen erfüllt:
+	\begin{enumerate}[(i)]
+		\item $G$ wirkt \textbf{eigentlich} (\textit{proper}) auf $X$, das heißt für alle $x \in X$ existiert ein $\varepsilon > 0$, sodass gilt:	\index{Gruppenwirkung!eigentlich}
+		\[
+			\#\{g \in G : \Phi(g)(B_\varepsilon(x)) \cap B_\varepsilon(x) \neq \emptyset\} < \infty.
+		\]
+		\item $G$ wirkt \textbf{kokompakt} auf $X$, das heißt es existiert eine kompakte Teilmenge $K \subseteq X$, sodass \index{Gruppenwirkung!kokompakt}
+		\[
+			\bigcup\limits_{g \in G} \Phi(g)(K) = X.
+		\]
+		Dann enthält $G$ nur endlich viele verschiedene Kongukationsklassen von endlichen Untergruppen.
+		Genauer: Definiert man auf der Menge $\UGend := \{U \leq G \text{ endlich}\}$ die Äquivalenzrelation \index{Kongukationsklasse}
+		\[
+			U \sim V \quad :\Leftrightarrow \quad \exists g \in G : U = gVg^{-1},
+		\]
+		so gilt
+		\[
+			\# \faktor{\UGend}{\sim} < \infty.
+		\]
+	\end{enumerate}
+\end{korollar}
+
+\begin{beweis}
+	Sei $K$ eine kompakte Teilmenge mit
+	\[
+		\bigcup_{g \in G} \Phi(g)(K) = X.
+	\]
+	Wähle eine endliche Überdeckung $B_{\varepsilon_i}(x_i), 1 \leq i \leq n$, von $K$ so, dass die Teilmengen
+	\[
+		\Gamma_i \subseteq G \text{ mit } \Gamma_i = \{g \in G : \Phi(g)(B_{\varepsilon_i}(x_i)) \cap B_{\varepsilon_i}(x_i) \neq \emptyset \}
+	\]
+	endlich sind.
+	Dann ist $\Sigma := \bigcup_{i = 1}^n$ endlich.
+	
+	Sei nun $x \in X$ beliebig.
+	Wir betrachten die Stabilisatorgruppe $G_x := \{g \in G : \Phi(g)(x) = x\}$ von $x$.
+	\newpage
+	\begin{itemize}
+		\item Wir haben in \autoref{kor:1.28} bzw. \autoref{bem:1.29} gesehen, dass jede endliche Untergruppe von $G$ in einem $G_x$ für geeignetes $x \in X$ enthalten ist.
+		Genauer:
+		Ist $U \subseteq G$ endlich und $\Phi \colon G \rightarrow \Isom(X)$, so ist $\Fix_{\Phi \big|_U}(U) \neq \emptyset$. Für $x \in \Fix_{\Phi \big|_U}(U)$ ist $U \subseteq G_x$.
+		\item Wir werden zunächst zeigen, dass es nur endlich viele Konjugationsklassen von Untergruppen von $G$ vom Typ $G_x$ gibt.
+		Da $X = \bigcup_{g \in G} \Phi(g)(K)$, existiert ein $g \in G$ mit 
+		\[
+			\Phi(g)(x) \in K = \bigcup_{i=1}^n B_{\varepsilon_i}(x_i).
+		\]
+		Also ist $\Phi(g)(x)$ in mindestens einen der $B_{\varepsilon_i}(x_i)$ enthalten und somit $G_{\Phi(g)(x)} \subseteq \Gamma_i \subseteq \Sigma$. Es gibt also nur endlich viele solche $G_{\Phi(g)(x)}$ mit $\Phi(g)(x) \in K$.
+		
+		Nun gilt aber weiter $g G_x g^{-1} = G_{\Phi(g)(x)}$, das heißt jedes beliebige $G_x$ ist konjugiert zu einer von endlich vielen $G_{\Phi(g)(x)}$.
+		Also gibt es nur endlich viele Konjugationsklassen von Gruppen $G_x$.
+		Da jedes $G_x$ endlich ist, hat es selbst nur endlich viele Konjugationsklassen von Untergruppen.
+		Da jede endliche Untergruppe von $G$ automatisch eine Untergruppe eines $G_x$ ist, kann es damit auch nur endlich viele Konjugationsklassen von endlichen Untergruppen von $G$ geben. \qedhere
+	\end{itemize}
 \end{beweis}
 
 \cleardoubleoddemptypage
