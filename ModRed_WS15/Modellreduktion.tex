@@ -475,6 +475,283 @@ Für $1\le p\le \infty$ und $m\in \N$ definieren wir die Sobolevräume mit Nullr
 H_0^{m,p}(\Omega) := \overline{C_0^m(\Omega)}^{\norm{.}_{H^{m,p}(\Omega)}}.
 \]
 
+\ssect{2.26 Satz}{}
+Für $1\le p<\infty$ ist $H_0^{m,p}(\Omega)$ ein abgeschlossener Teilraum von $H^{m,p}(\Omega)$ und damit ein Banachraum.\\
+
+Dass aus der Definition von $H_0^{m,p}(\Omega)$ tatsächlich folgt, dass solche Funktionen Randwerte besitzen, drückt der folgende Satz aus.
+
+\ssect{2.27 Satz}{(Spursatz)}
+Sei $\Omega\subset \R^d$ ein Lipschitz-Gebiet und $1\le p<\infty$.
+Dann gibt es einen linearen \bet{Spuroperator} $\tau: H^{1,p}(\Omega) \to L^p(\partial\Omega)$, so dass für $u\in H^{m,p}(\Omega)\cap C^\infty(\bar{\Omega})$ gilt:
+\[
+\tau u = u|_{\partial\Omega}.
+\]
+Insbesondere gilt für $u\in H_0^{1,p}(\Omega): \tau u = 0$.\\
+
+\bet{Beweis:}\\
+Im Buch von Alt oder von Evans.
+
+\ssect{2.28 Satz}{(2. Soblev'scher Einbettungssatz)}
+Sei $1\le p<\infty$, dann gilt:
+\[
+H^{1,p}((a,b)) \hookrightarrow C^0([a,b]),
+\]
+d.h. dass (möglicherweise nach Änderung von Funktionswerten auf einer Nullmenge) Funktionen in $H^{1,p}((a,b))$ stetig sind.
+
+Sei nun $\Omega\subset \R^d$ ein Gebiet und $1\le p<\infty$. 
+Dann gilt 
+\[
+H_0^{2,p}(\Omega) \hookrightarrow C^0(\Omega), \text{ falls } 2-\frac{d}{p} > 0.
+\]
+Ist $\Omega$ ein Lipschitz-Gebiet, so gilt diese Aussage auch für Sobolevräume ohne Nullrandwerte.\\
+
+\bet{Beweis:}\\
+Im Buch von Alt.
+
+\ssect{2.29 Satz}{(Poincaré-Friedrichs Ungleichung)}
+Sei $\Omega\subset \R^d$ ein Gebiet mit Durchmesser $D:=\diam(\Omega)$ und $1\le p <\infty$.
+Dann gibt es eine Konstante $c_p\le 2D$, so dass für alle $v\in H_0^{1,p}(\Omega)$ gilt:
+\[
+\norm{v}_{L^p(\Omega)}  \le c_p \norm{\nabla v}_{L^p(\Omega)}.
+\]
+
+\bet{Beweis:}\\
+Siehe Buch von Dzink.
+
+\subsubsection{Schwache Formulierung elliptischer Randwertprobleme}
+Wir betrachten zunächst die stationäre Wärmeleitgleichung.
+Sei $\Omega\subset \R^d$ ein Gebiet mit glattem Rand und seinen $q\in C^0(\Omega)$ und $\kappa\in C^1(\Omega)$ mir $\kappa\ge \kappa_1>0$, $\kappa_1\in \R$ Konstante.
+Gesucht ist eine Funktion $u\in C^2(\Omega)\cap C^0(\bar{\Omega})$, die sogenannte klassische Lösung, so dass
+\begin{align}
+\begin{split}
+-\nabla (\kappa \nabla u) &= q \text{ in } \Omega,\\
+u &= 0 \text{ auf } \partial\Omega. 
+\end{split}
+\end{align}
+
+Mit Hilfe von schwachen Ableitungen und den Sobolevräumen können wir nun den klassischen Lösungsbegriff verallgemeinern:
+
+\ssect{2.30 Defintion}{(schwache Formulierung der stationären Wärmeleitgleichnung)}
+Seien $\Omega\subset \R^d$ ein Lipschitz-Gebiet, $q\in L^2(\Omega)$ und $\kappa \in L^\infty(\Omega)$ mit $0< \kappa_1 \le \kappa$ für eine Konstante $\kappa_1\in \R$ gegeben.
+Dann heißt $u\in H_0^{1,p}(\Omega)$ schwache Lösung des Randwertproblems der stationären Wärmeleitgleichung (2.2), falls für alle Testfunktionen $v\in H_0^{1}(\Omega)$ gilt 
+\[
+\int_{\Omega} \kappa(x) \nabla u(x) \nabla v(x) \dint x = \int_{\Omega} q(x) v(x) \dint x.
+\]
+
+\ssect{2.31 Satz}{(Existenz und EIndeutigkeit von Lösungen)}
+Unter den Voraussetzungen von Def. 2.30 gibt es genau eine schwache Lösung $u\in H_0^{1}(\Omega)$ des Randwertproblems der stationären Wärmeleitgleichung.\\
+
+\bet{Beweis:}\\
+Zunächst wird durch $l(v) := \int_{\Omega} q(x) v(x) \dint x$ ein lineares Funktional in $(H_0^{1}(\Omega))'$ definiert, denn
+\[
+\norm{l(v)}_{(H_0^1(\Omega))'} = \sup\limits_{v\in (H_0^1(\Omega))\backslash \{0\}} \frac{(q,v)_{L^2(\Omega)}}{\norm{v}_{H^1(\Omega)}} \le \norm{q}_{L^2(\Omega)}  \infty.
+\]
+Ferner wird wegen der Poincaré-Friedrichs Ungleichung durch
+\[
+(w,v)_{H_0^1(\Omega)} := \int_{\Omega} \nabla w(x) \nabla v(x)\dint x
+\]
+ein Skalarprodukt auf dem Hilbertraum $H_0^1(\Omega)$ definiert.
+Daher existiert nach dem Riesz'schen Darstellungsatz 2.9 ein eindeutiger Riesz-Repräsentant $w_l$ mit $l(.) = (w_l,.)_{H_0^1(\Omega)}$.
+
+Um den Beweis zu schließen, müssen wir noch nachweisen, dassdie Bilinearform $b:H_0^1(\Omega)\times H_0^1(\Omega) \to \R$ definiert durch
+\[
+b(w,v) := \int_{\Omega} \kappa(x) \nabla w(x) \nabla v(x) \dint x
+\]
+die Voraussetzungen des Satzes von Lax-Milgram erfüllt.
+Wir müssen also zeigen, dass die Bilinearform $b$ stetig und koerziv ist.\\
+\bet{Stetigkeit:}
+\[
+b(w,v) \le \norm{\kappa}_{L^\infty(\Omega)} \norm{w}_{H_0^1(\Omega)} \norm{v}_{H_0^1(\Omega)}.
+\]
+\bet{Koerzivität:}
+\[
+b(w,v) = \ge \kappa_1 \norm{w}_{H_0^1(\Omega)}^2.
+\]
+Damit existiert ein bijektiver Operator $B\in L(H_0^1(\Omega))$ mit $b(u,v)= (Bu,v)_{H_0^1(\Omega)}$ und wir definieren die eindeutige Lösung $u\in H_0^^(\Omega)$ des Randwertproblems als $u := B^{-1}w_l$, wobei $w_l$ der eindeutige Riesz-Repräsentant mit $l(.)= (w_l,.)_{H_0^1(\Omega)}$ war.
+\hfill $\square$
+
+\ssect{2.32 Bemerkung}{}
+Mit der gleichen Beweistechnik lassen sich auch allgemeinere PDgl'en behandeln, wie zum Beispiel das Randwertproblem in Divergenzform
+\begin{align*}
+-\nabla (A(x)\nabla u) +b(x)\nabla u + c(x) u &= q \text{ in } \Omega,\\
+u &= 0 \text{ auf } \partial\Omega.
+\end{align*}
+
+$A(x) \in C^1(\Omega,\R^{d\times d}),~b(x)\in C^0(\Omega,\R^d),~c(x)\in C^1(\Omega)$, wobei die Koeffizienten gewisse Anforderungen erfüllen müssen damit die Koerzivität der entsprechenden Bilinearform nachgewiesen werden können.
+
+\ssect{2.33 Bemerkung}{(Reduktion auf Nullrandwerte)}
+Zur Betrachtung von allgemeinen Dirichletrandwerten, kann man wie folgt vorgehen.
+Seien $g_D\in H^1(\Omega)$ und $q\in L^2(\Omega),~\kappa\in L^\infty(\Omega),~\kappa\ge \kappa_1 >0$. 
+Dann ist $u\in H^1(\Omega)$ schwache Lösung von $-\nabla(\kappa(x)\nabla u(x)) = q$ in $\Omega$ und $u=g$ auf $\partial\Omega$.
+Wenn gilt $\tilde{u}:= u-g_D \in H_0^1(\Omega)$ und für alle $v\in H_0^1(\Omega)$ gilt (2.3).
+Dabei ist zu bemerken, dass mit der Definition von $\tilde{u}$ (2.3) äquivalent ist zu $\int_{\Omega} \kappa(x)\nabla \tilde{u} \nabla v(x)\dint x = \int_\Omega q(x) v(x)\dint x - \int_\Omega \nabla g_D(x) \nabla v(x) \dint x$.
+Die Existenz und Eindeutigkeit einer Lösung folgt dann daraus, dass durch $l(v) := \int_\Omega q(x) v(x)\dint x - \int_\Omega \nabla g_D(x) \nabla v(x) \dint x$ ein lin. Funktional in $(H_0^1(\Omega))'$ definiert wird.
+
+\ssect{2.34 Definition}{(schwache Formulierung)}
+Seien $X$ reeller Hilbertraum, $b:X\times X\to \R$ eine stetige und koerzive Bilinearform mit Stetigkeitskonstante $\gamma$ und Koerzivitätskonstante $\alpha$ und $l\in X'$.
+Dann bezeichnen wir mit $u\in X$ die eindeutige Lösung des Problems
+\begin{align}
+b(u,v) = l(v) ~\forall v\in X.
+\end{align}
+
+\subsubsection{Regularität}
+Zur Motivation betrachte in einer Raumdimension die Dgl. $u''(x) = q(x)$ mit einer stetigen Funktion $q(x)$.
+Dann folgt mit dem Hauptsatz der Differential- und Integralrechnung, dass bereits $u\in C^2$ gelten muss.
+
+\ssect{2.35 Satz}{($H^2$-Regularität)}
+Sei $\Omega$ ein Gebiet mit glattem Rand (es gelte $\partial\Omega$ ist in $C^2$) oder ein konvexes Lipschitz-Gebiet.
+Ferner seien $q\in L^2(\Omega)$ und $\kappa\in C^1(\bar{\Omega})$.
+Dann gilt für die eindeutige schwache Lösung $u\in H_0^1(\Omega)$ der stationären Wärmeleitungsgleichung (2.2) dass $u\in H^2(\Omega)$ und dass eine Konstante $c>0$ existiert, so dass die folgende Abschätzung gilt:
+\[
+\norm{u}_{H^2(\Omega)} \le c\norm{q}_{L^2(\Omega)}
+\]
+
+\bet{Beweis:}\\
+Für glatten Rand: Buch von Evans.
+
+\ssect{2.36 Bemerkung}{}
+Betrachtet man nicht konvexe Lipschitz-Gebiete, so kann man im Allgemeinen keine Lösung $u\in H^2(\Omega)$ erwarten.
+
+\subsection{Ritz-Galerkin Verfahren und absrtrakte Fehlerabschätzungen}
+In diesem Abschnitt wollen wir uns mit der Approximation der Lösung der schwachen Formulierung von (2.4) befassen.
+
+\ssect{2.37 Definition}{(Ritz-Galerkin Verfahren)}
+Seien $X,b$ wie in Definition 2.34 und $X_m\subset X$ mit $\dim (X_m) = m$ ein Unterraum.
+Dann ist die \bet{Ritz-Galerkin Approximation´} $u_m\in X_m$ definiert durch
+\[
+b(u_m,v_m)=l(v_m)~\forall v_m\in X_m.
+\]
+
+\ssect{2.38 Bemerkung}{}
+Die Existenz und Eindeutigkeit von $u_m$ folgt unmittelbar aus dem Satz von Lax-Milgram 2.14, da der Unterraum $X_m$ wieder ein Hilbertraum mit dem aus $X$ geerbten Skalarprodukt ist.
+
+\ssect{2.39 Satz}{(Abstrakte Fehlerabschätzung/Lemma von Céa)}
+Seien $X,X_m,b,u$ und $u_m$ wie in den Definitionen 2.34 und 2.37 definiert. 
+Dann gilt die abstrakte Fehlerabschätzung
+\[
+\norm{u-u_m}_X \le \frac{\gamma}{\alpha} \inf\limits_{v_m\in X_m} \norm{u-v_m}_X.
+\]
+
+Außerdem gilt die Galerkin-Orthogonalität
+\[
+b(u-u_m,v_m)=0~\forall v_m\in X_m.
+\]
+
+\bet{Beweis:}\\
+Wir zeigen zunächst die Galerkin-Orthogonalität:
+Dazu sei $v_m\in X_m$ und es folgt mit $X_m\subset X$:
+\[
+b(u-u_m,v_m) = b(u,v_m)-b(u_m,v_m) = l(v_m)-l(v_m)= 0.
+\]
+Mit der Stetigkeit und Koerzivität von $b$ folgt weiter
+\begin{align*}
+\alpha \norm{u-u_m}_X^2 &\le b(u-u_m,u-u_m) = b(u-u_m,u-v_m)\\
+&\le \gamma\norm{u-u_m}_X\norm{u-v_m}_X\\
+&\Rightarrow \norm{u-u_m}_X \le \frac{\gamma}{\alpha} \norm{u-v_m}_X
+\end{align*}
+Gehe auf beiden Seiten der Ungleichung zum Infimum über, dann folgt die Behauptung.
+\hfill $\square$
+
+\ssect{2.40 Bemerkung}{}
+Die abstrakte Fehlerabschätzung zeigt, dass der Fehler zwischen Ritz-Galerkin Approximationen und exakter Lösung abgeschätzt werden kann durch die Bestapproximation in dem Teilraum $X_m$.
+Die weitere numerische Analyse beruht somit allein auf der Approximationstheorie.
+Insbesondere bestimmt im wesentlichen der Teilraum $X_m$ die Approximationsgüte.
+
+\ssect{2.41 Beispiel}{(mögliche Wahl von Teilräumen)}
+Betrachten wir konkret die Stationäre Wärmeleitungsgleichung (2.2) oder allgemeiner ein elliptisches Problem in Divergenzform mit $X=H^1_0(\Omega)$ auf einem Gebiet $\Omega\subset \R^d$, so sind neben den Finiten Elemente Verfahren, die wir im nächsten Abschnitt betrachten wollen,vor allem folgende Wahlen von Teilräumen gebräuchlich:
+\begin{itemize}
+	\item Polynomräume $X_M := \Pw^{k(m)}(\Omega)\cap \penbrace{v_m\in C^0(\bar{\Omega})~|+v_m=0\text{ auf }\partial\Omega}$, wobei $\Pw^{k(m)}(\Omega)$ der Raum der Polynome mit Grad $\le k(m)$ über $\Omega$ ist.
+	Die zugehörigen Verfahren nennt man \bet{Spektralverfahren}.
+	\item $X_m := \spann \penbrace{u_i\in X~|~Lu_i=\lambda u_i,~i=1\dt{,}m}$ wobei $u_i$ die $i$-te Eigenfunktion des zugrundeliegenden Differentialoperators $L$ ist.
+	\item $X_m := \spann \penbrace{u_i\in X~|~ \Delta u_i =\lambda u_i,~i=1\dt{,}m}$, wobei $u_i$ die $i$-te Eigenfunktion des Laplaceoperators $\Delta$ ist.
+\end{itemize}
+
+\ssect{2.42 Folgerung}{(Matrix-Vektor von Ritz-Galerkin Verfahren)}
+Seien $X,X_m,b,u$ un d$u_m$ wie in den Definitionen 2.34 und 2.37 definiert und sei zudem $X_m$ endlichdimensional, mit Dimension $m := \dim X_m$.
+Ist dann $\Phi := \penbrace{\varphi_1\dt{,}\varphi_m}$ eine Basis von $X_m$ so folgt mit der Darstellung $u_m = \sum_{i=1}^{m}U_i\varphi_i$ aus der Definition von $u_m$
+\[
+b\enbrace{\sum_{i=1}^{m}U_i\varphi_i,\varphi_j} = l(\varphi_j),~j=1\dt{,}m.
+\]
+Durch Ausnutzen der Linearität von $b$ im 1. Argument folgt weiter:
+\[
+\sum_{i=1}^{m} b(\varphi_i,\varphi_j)u_i = l(\varphi_j),~j=1\dt{,}m.
+\]
+Definieren wir also die Matrix $\bet{S}\in \R^{m\times m}$ durch $\bet{S}_{ji} := b(\varphi_i,\varphi_j),~i,j=1\dt{,}m$ und die Vektoren $\bet{u},\bet{l}\in \R^m$ durch $\bet{u}_i:= U_i,~\bet{l}_i := l(\varphi_i),~i=1\dt{,}m$, so ist $u_m$ genau dann Lösung des Ritz-Galerkin Verfahren, wenn $u$ das folgende lineare Gleichungssystem löst: $\bet{Su}=\bet{l}$.
+
+\subsection{Finite Elemente Verfahren}
+Finite Elemente Verfahren sind Spezialfälle von Ritz-Galerkin Verfahren für eine bestimmte Klasse von Teilräumen $X_h\subset X$, wobei $X_h$ der \bet{Finite Elemente Raum} ist.
+Die Konstruktion von $x_h$ im Falle von Finite Elemente (FE) Verfahren beruht auf einer Zerlegung des Gebietes $\Omega$ in nicht überlappende Teilgebiete, die selbst wiederum einfache geometrische Objekte sind.
+Die einfachste Klasse von Finiten Elementen sind Lagrange Elemente, auf welche wir uns in dieser Vorlesung beschränken werden.
+Ferner betrachten wir nur Teilräume $X_h$ welche auf einer simplizialen Zerlegung des Gebietes $\Omega$ beruhen.
+In zwei Raumdimensionen besteht das Rechengitter aus Dreiecken, in drei Raumdimensionen aus Tetraedern.
+Eingeschränkt auf einen Simplex wird eine Funktion aus $X_h$, dann ein Polynom mit Grad $\le k,~k\in \N$ sein.
+Für andere FE siehe z.B. das Buch von Brenner und Scott.
+
+\ssect{2.43 Definition}{(Simplex)}
+Seinen $s\in \penbrace{1\dt{,}d}$ und $a_0\dt{,}a_s\in \R^d$ Punkte, so dass $(a_j-a_0)_{j=1\dt{,}s}$ linear unabhängig sind.
+Dann heißt 
+\[
+T:= \penbrace{x\in \R^d~|~ x=\sum_{i=0}^{s}\lambda_ia_i,~0\le \lambda_i,~\sum_{i=0}^{s}\lambda_i=1}
+\]
+nicht-degeneriertes $s$-dimensionaler Simplex im $\R^d$.
+Die Punkte $a_0\dt{,}a_s$ heißen Ecken des Simplex.
+Ist $r\in \{0\dt{,}s\}$ und $\tilde{a}_0\dt{,}\tilde{a}_r\in \{a_0\dt{,}a_s\}$, so heißt
+\[
+\tilde{T}:= \penbrace{x\in \R^d~|~ x=\sum_{i=0}^{s}\lambda_i\tilde{a}_i,~0\le \lambda_i,~\sum_{i=0}^{s}\lambda_i=1}
+\]
+$r$-dimensionales Seitensimplex von $T$.
+Die nulldimensionalen Seitensimplexe heißen Ecken, die eindimensionalen Kanten.
+Wir bezeichnen mit $T_0$ den Simplex zu den Punkten $a_0=e_0=(0\dt{,}0),a_i = e_i,~i=1\dt{,}d$, $T_0$ heißt $d$-dimensionaler Einheitssimplex.
+Der \bet{Durchmesser} von $T$ ist gegeben durch $h(T):= \diam (T) = \max_{i,j=1\dt{,}s}\abs{a_i-a_j}$. 
+Mit 
+\[
+\rho(T):= 2\sup\{R~|~B_R(x_0)\subset T\}
+\]
+bezeichnen wir den \bet{Inkugeldurchmesser} von $T$ und mit 
+\[
+\delta(T):= \frac{h(T)}{\rho(T)}
+\]
+den Quotienten aus $h$ und $\rho$.
+
+\ssect{2.44 Definition}{(Baryzentrische Koordinaten)}
+Die baryzentrsichen Koordinaten $\lambda_0\dt{,}\lambda_s\in [0,1]$ eines Punktes $x\in T$ des $s$-dim. Simplex $T$ sind die Lösung des linearen Gleichungssystems
+\[
+x= \sum_{i=0}^{s}\lambda_i a_i,~ \sum_{i=0}^{s} \lambda_i =1.
+\]
+Der Schwerpunkt $x_s$ von $T$ ist definiert durch $x_s := \frac{1}{s+1}\sum_{i=0}^{s}a_i$ und hat die baryzentrischen Koordinaten $\lambda_i :=\frac{1}{s+1}$.
+Für die Eckpunkte $a_k$ von $T$ sind die baryzentrischen Koordinaten gegeben durch $\lambda_k=1,~\lambda_i =0,~i\neq k$.
+Die baryzentrischen Koordinaten sind eindeutig bestimmt.
+
+\ssect{2.45 Lemma}{(Referenzabbildung)} 
+Jedes $s$-dimensionale Simplex $T$ im $\R^s$ ist affin äquivalent zum Einheitssimplex $T_0$ der gleichen Dimension.
+Die eindeutige affine Abbildung $F:T_0\to T, ~ F(x) =Ax+b,~A\in \R^{s\times s},~b\in \R^s, ~\det A \neq 0$ mit $F(e_j)= a_j,~j=0\dt{,}
+s$ heißt \bet{Referenzabbildung}.
+$F$ ist invertierbar und es gelten die Abschätzungen
+\[
+\norm{\nabla F} = \norm{A}\le \frac{h(T)}{\rho(T_0)},~\norm{\nabla(F^{-1})}= \norm{A^{-1}}\le \frac{h(T_0)}{\rho(T)}
+\]
+sowie
+\[
+c\cdot \rho(T)^s \le \abs{\det (\nabla F)}= \abs{\det A} =\frac{\abs{T}}{\abs{T_0}}\le C\cdot h(T)^s,~c,C>0.
+\]
+
+\bet{Beweis:}\\
+Im Buch von Dzink.
+
+\ssect{2.46 Definition}{(Zulässige Triangulierung)}
+Sei $\Omega\subset\R^d$ ein Gebiet und 
+\[
+\mathbb{T}_h := \penbrace{T_j~|~j=1\dt{,}m,~T_j\text{ ist $d$-dim. Simplex im }\R^d}.
+\]
+$\mathbb{T}_h$ heißt zulässige Triangulierung der Feinheit $h$ und Gute $\rho$ von $\Omega$, falls gilt:
+\[
+\bar{\Omega} = \bigcup\limits_{j=1}^{m} T_j,~\partial\Omega = \bigcup\limits_{j=1}^{m} \tilde{T}_j,
+\]
+wobei $\tilde{T}_j$ Flächen der Simplexe $T_j$ sind.
+Für je zwei $T_1,T_2\in \mathbb{T}_h$ mit $S:=T_1\cap T_2$ gilt $S=\emptyset$ oder $S$ ist $(d-k)$-dim. Seitensimplex von $T_1$ und $T_2$ für ein $k\in \{1\dt{,}d\}$.
+Mit $h:=\max_{j=1\dt{,}m}h(T_j)$ und $\rho := \min_{j=1\dt{,}m}\rho(T_j)$.
+
+
 
 
 
