@@ -86,7 +86,7 @@
 	Kohomologie von $\enbrace[\big]{C^*_\sing(X,A;V), d^*_\sing}$ heißt die \Index{singuläre Kohomologie} von $(X,A)$ mit Koeffizienten in $R$.
 \end{definition}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Isomorphie des singulären Kettenkomplexes]}]
 	Sei $R$ ein kommutativer Ring und $V$ ein $R$-Modul. Dann ist der singuläre Kokettenkomplex
 	\(
 		\enbrace*{C^*_\sing(X,A;V), d^*_\sing}
@@ -104,7 +104,7 @@
 	\]
 \end{definition}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Induzierte Abbildung einer Komposition]}]
 	Ist $g \colon (Y,B) \to (Z,C)$ eine weitere Abbildung von Paaren, so gilt $(g \circ f)^* = f^* \circ g^*$.
 \end{bemerkung}
 
@@ -116,7 +116,7 @@
 		\item Für $\begin{tikzcd}[cramped] C \rar["f"] & C' \rar["f'"] & C'' \end{tikzcd}$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
 	\end{enumerate}
 	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor 
-	$\mathcal{C} \to \mathcal{D}^\op$.
+	$\mathcal{C}^\op \to \mathcal{D}$.
 \end{definition}
 
 \begin{beispiel}[{name=[kontravariante Funktoren]}] Es gibt zahlreiche Beispiele für kontravariante Funktoren:
@@ -142,7 +142,7 @@
 		\item \textbf{Paarfolge:} Es gibt eine natürliche Transformation $\partial^*\colon H^*(A;V) \to H^{*+1}(X,A;V)$ sodass für jedes Paar\index{Paarfolge} 
 		\[
 			\begin{tikzcd}
-				0 \rar & H^0(X,A;V) \rar & H^0(X,V) \rar & H^0(A;V) \rar["\partial"] & H^1(X,A;V) \rar & \ldots 
+				0 \rar & H^0(X,A;V) \rar & H^0(X;V) \rar & H^0(A;V) \rar["\partial"] & H^1(X,A;V) \rar & \ldots 
 			\end{tikzcd}
 		\]
 		eine lange exakte Folge ist. $\partial$ bezeichnet man auch als \Index{verbindende Abbildung}.
@@ -156,8 +156,8 @@
 	Für singuläre Homologie haben wir die entsprechenden Aussagen schon bewiesen. In allen vier Fällen folgt die Aussage für Kohomologie aus schon bewiesenen Aussagen über 
 	den singulären Kettenkomplex.\todo{Andere Teile aus Übungen übernehmen}
 	
-	Wir führen dies an dieser Stelle nur für iv) aus. Seien $f, g \colon X \to Y$ homotop. Dann gibt es eine Kettenhomotopie $H \colon C^\sing_*(X) \to C^\sing_{*+1}(Y)$ zwischen den 
-	auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also
+	Wir führen dies an dieser Stelle nur für iv) aus, die anderen Punkte wurden teilweise in den Übungen bewiesen. Seien $f, g \colon X \to Y$ homotop. Dann gibt es eine 
+	Kettenhomotopie $H \colon C^\sing_*(X) \to C^\sing_{*+1}(Y)$ zwischen den auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also
 	\[
 		d_{n+1} \circ H + H \circ d_n = f_* - g_*
 	\]
@@ -169,19 +169,20 @@
 		&= \alpha \circ H \circ d_n + \alpha \circ d_{n+1} \circ H \\
 		&= \alpha \enbrace*{f_* - g_*} = f^*(\alpha) - g^*(\alpha) 
 	\end{align}
-	Damit ist $f^* - g^* =0$ in Kohomologie, da die linke Seite für $\alpha \in \ker d^n$ im Bild von $d^{n-1}$ liegt. \todo{Revision 1}
+	Damit ist $f^* - g^* =0$ in Kohomologie, da die linke Seite für $\alpha \in \ker d^n$ im Bild von $d^{n-1}$ liegt.
 \end{beweis}
 
 \begin{bemerkung}[{name=[Angabe des Verbindungshomomorphismus]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen. Der Verbindungshomomorphismus $\partial \colon H^n(A;V) \to H^{n+1}(X,A;V)$ kann wie folgt beschrieben werden: Sei 
-	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$ zu $\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist \marginnote{Da muss ich nochmal drüber nachdenken…}
+	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$  durch $\hat{\alpha}(\sigma)=0$ für $\sigma \colon \abs{\Delta^n} \to X$, $\im \sigma \nsubseteq A$ zu 
+	$\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist 
 	\[
-		\partial \benbrace{\alpha} = \benbrace*{d^n \hat{\alpha}} \in H^{n+1}(X,A;V)
+		\partial \benbrace{\alpha} = \benbrace*{d^n \hat{\alpha}} = \benbrace*{\hat{\alpha} \circ d_{n+1}} \in H^{n+1}(X,A;V)
 	\]
 \end{bemerkung}
 
-\begin{beispiel}
-	Die Gruppe $H^0(X;V)$ ist die Gruppe aller Abbildungen $\xi \colon X \to V$, die konstant auf Wegzusammenhangskomponenten ist. Die Gruppe $H^0(X,A;V)$ besteht aus allen 
+\begin{beispiel}[{name=[$0$-te Kohomologie]}]
+	Die Gruppe $H^0(X;V)$ ist die Gruppe aller Abbildungen $\xi \colon X \to V$, die konstant auf Wegzusammenhangskomponenten sind. Die Gruppe $H^0(X,A;V)$ besteht aus allen 
 	solchen Abbildungen, die zusätzlich auf $A$ trivial sind.
 \end{beispiel}
 
@@ -192,59 +193,57 @@
 		(v_i)_{i \in I}+ (w_i)_{i \in I} &\coloneqq (v_i + w_i)_{i \in I} \\
 		r \cdot (v_i)_{i \in I} & \coloneqq (r \cdot v_i)_{i \in I}
 	\end{align}
-	Für jedes $i_0 \in I$ erhalten wir $\pi_{i_0} \colon V \to V_{i_0}$, $(v_i)_{i \in I} \mapsto v_{i_0}$
+	Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $\pi_{i_0} \colon V \to V_{i_0}$, $(v_i)_{i \in I} \mapsto v_{i_0}$
 \end{definition}
 
 \begin{bemerkung}[name={Universelle Eigenschaft des Produktes}]
-	Seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $(f_i \colon W \to V_i)_{i \in I}$ von $R$-linearen Abbildungen eine eindeutige 
+	Seien $V_i$ für $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $(f_i\colon W \to V_i)_{i \in I}$ von $R$-linearen Abbildungen eine eindeutige 
 	$R$-lineare Abbildung $f \colon W \to \prod_{i \in I}V_i$ mit $f_i= \pi_i \circ f$. Diese ist gegeben durch
 	$f(w) \coloneqq \enbrace*{f_i(w)}_{i \in I}$.
 \end{bemerkung}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[endliche Produkte]}]
 	Ist $I$ endlich, so gilt
-	\[
-		\bigoplus_{i \in I} V_i = \prod_{i \in I} V_i
-	\]
+	\(
+		\bigoplus_{i \in I} V_i = \prod_{i \in I} V_i.
+	\)
 \end{bemerkung}
 
-\begin{bemerkung}
-	Es seien $V_i$, $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Seien $j_{i_0} \colon V_{i_0} \to \bigoplus_{i \in I}V_i$ die Inklusionen $v_{i_0} \mapsto (v_i)_{i \in I}$
-	mit $v_i =v_{i_0}$ für $i=i_0$ und $0$ sonst. Dann erhalten wir einen Isomorphismus
+\begin{bemerkung}[{name=[{Eigenschaften von $\Hom(-,W)$ mit Produkten}]}]
+	Es seien $V_i$ für $i \in I$ $R$-Moduln und $W$ ein weiterer $R$-Modul. Seien $j_{i_0} \colon V_{i_0} \to\bigoplus_{i \in I}V_i$ die Inklusionen $v_{i_0}\mapsto (v_i)_{i \in I}$
+	mit $v_i =v_{i_0}$ für $i=i_0$ und $0$ sonst. Dann erhalten wir einen Isomorphismus 
 	\mapdef{\Hom_R \enbrace[\big]{\bigoplus_i V_i,W}}{\prod_{i \in I} \Hom_R(V_i,W)}{f}{(f \circ j_i)_{i \in I}}{\cong}
 \end{bemerkung}
 
-\begin{satz}
+\begin{satz}[{name=[Kohomologie und Summe von topologischen Räumen]}]
 	Sei $X= \coprod_{i \in I} X_i$ die Summe von topologischen Räumen $X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \to X$ einen Isomorphismus 
-	\[
-		\begin{tikzcd}[row sep=0em]
-			H^* \enbrace*{X,V} \rar & \prod_{i \in I} H^*(X_i,V) \\
-			\xi \rar[mapsto] & \enbrace[\big]{(j_i)^*(\xi)}_{i \in I}
-		\end{tikzcd}
-	\]
+	\mapdef{H^* \enbrace*{X,V}}{\prod_{i \in I} H^*(X_i,V)}{\xi}{\enbrace[\big]{(j_i)^*(\xi)}_{i \in I}}{\cong}
+	% \[
+	% 	\begin{tikzcd}[row sep=0em]
+	% 		H^* \enbrace*{X,V} \rar & \prod_{i \in I} H^*(X_i,V) \\
+	% 		\xi \rar[mapsto] & \enbrace[\big]{(j_i)^*(\xi)}_{i \in I}
+	% 	\end{tikzcd}
+	%
+	% \]
 \end{satz}
 \begin{beweis}
-	Die $(j_i)_{i \in I}$ induzieren einen Isomorphismus von Kettenkomplexen $\varphi \colon \bigoplus_{i \in I}C_*(X_i) \to C_*(X)$,  
+	Die $(j_i)_{i \in I}$ induzieren einen Isomorphismus von Kettenkomplexen $\varphi \colon \bigoplus_{i \in I}C_*(X_i) \to C_*(X)$ mittels 
 	$(a_i)_{i \in I} \mapsto \sum_{i \in I} (j_i)_* (a_i)$. Wegen 
 	\[
-		\Hom \enbrace*{\bigoplus\nolimits_{i \in I} C_*(X_i),V} = \prod_{i \in I} \Hom \enbrace*{C_*(X_i),V}
+		\Hom \enbrace*{\bigoplus\nolimits_{i \in I} C_*(X_i),V} \cong \prod_{i \in I} \Hom \enbrace*{C_*(X_i),V}
 	\]
 	erhalten wir einen Isomorphismus von Kokettenkomplexen
-	\[
-		\begin{tikzcd}[row sep=0em]
-			C^*(X,V) \rar["\cong"] & \prod_{i \in I} C^*(X_i,V) \\
-			\alpha \rar[mapsto] & \enbrace[\big]{j_i^*(\alpha)}_{i \in I}
-		\end{tikzcd}
-	\]
+	\mapdef{C^* (X;V)}{\prod_{i \in I} C^*(X_i;V)}{\alpha}{\enbrace[\big]{j_i^*(\alpha)}_{i \in I}}{\cong}
 	Dieser induziert den behaupteten Isomorphismus in Kohomologie.  
 \end{beweis}
 
 \begin{definition}[{name=[reduzierte Kohomologie]}]
-	Die reduzierte Kohomologie von $X$, $\tilde{H}^*(X;V)$ ist definiert als der Kokern von $p^* \colon H^* \enbrace*{\set{\pt};V} \to H^*(X;V)$.
+	Die reduzierte Kohomologie von $X$, $\tilde{H}^*(X;V)$ ist definiert als der Kokern von $p^* \colon H^* \enbrace*{\set{\pt};V} \to H^*(X;V)$, also als der Quotient
+	$\sfrac{H^*(X;V)}{\im p^*}$.
 \end{definition}
 
 \begin{bemerkung}[{name=[Zusammenhang zwischen reduzierter und regulärer Homologie]}]
-	Für reduzierte Kohomologie gilt
+	Für reduzierte Kohomologie gilt analog zu reduzierter Homologie
 	\[
 		H^n(X;V) \cong \begin{cases}
 			\tilde{H}^n(X;V), &\text{ falls } n \not= 0\\
@@ -254,7 +253,7 @@
 \end{bemerkung}
 
 \begin{beispiel}[{name=[Kohomologie der Sphäre]}]
-	Die reduzierte Kohomologie der Sphäre ist gegeben durch
+	Viele Berechnungen für Homologiegruppen lassen sich problemlos auf Kohomologie übertragen. Zum Beispiel ist die reduzierte Kohomologie der Sphäre gegeben durch
 	\[
 		\tilde{H}^l (S^n;V) \cong H^l \enbrace*{D^n,S^{n-1};V} \cong \begin{cases}
 			V, &\text{ falls } l=n\\
