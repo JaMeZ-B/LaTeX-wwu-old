@@ -956,4 +956,292 @@ Der Begriff des Radius ist also mit der Idee eines \textbf{\enquote{Zentrums}} (
 	\end{itemize}
 \end{beweis}
 
+Viele Sätze, die wir über $\CAT$-Räume bewiesen haben, hatten als Voraussetzung die Vollständigkeit.\marginnote{06.11.15 \\ \ [5]}
+Der Vorteil in diesem Vorgehen ist, dass wir einen $\CAT$-Raum immer als eine dichte Teilmenge eines vollständigen $\CAT$-Raumes realisieren können.
+Weiter lässt sich jede Isometrie von $\CAT$-Räumen eindeutig zu einer Isometrie eines vollständigen $\CAT$-Raumes erweitern, indem wir sie auf der Vervollständigung fortsetzen.
+Um zu beweisen, dass die Vervollständigung eines $\CAT$-Raumes wieder $\CAT$ ist, brauchen wir viel Vorarbeit.
+
+\begin{erinnerung}[Metrische Vervollständigung]
+\label{erin:1.31}
+	Sei $(X,d)$ ein metrischer Raum.
+	Dann existiert ein vollständiger metrischer Raum $(\widehat{X},\widehat{d})$ und eine isometrische Einbettung $\phi\colon X \hookrightarrow \widehat{X}$ mit $\ol{\phi(X)} = \widehat{X}$, das heißt $\phi(X)$ liegt dicht in $\widehat{X}$.
+	Das Paar $(\widehat{X},\widehat{d})$ ist bis auf Isometrie eindeutig bestimmt und heißt \textbf{metrische Vervollständigung} von $X$. \index{Vervollständigung}
+\end{erinnerung}
+
+\begin{beweis}[Skizze]
+	Sei $\CF(X) := \{ (x_n)_n \text{ Cauchy-Folge in } X\}$. Definiere die Äquivalenzrelation
+	\[
+		(x_n)_n \sim (y_n)_n \quad :\Leftrightarrow \quad (d(x_n,y_n))_n \text{ ist Nullfolge}
+	\]
+	und setze
+	\[
+		\widehat{X} := \faktor{\CF(X)}{\sim} \qquad \widehat{d}([(x_n)_n],[(y_n)_n]) := \lim\limits_{n \rightarrow \infty} d(x_n,y_n)
+	\]
+	und definiere $\phi \colon X \hookrightarrow \widehat{X}$ durch $x \mapsto [(x)_n]$. \qedhere
+\end{beweis}
+
+\begin{erinnerung}
+\label{erin:1.32}
+	Seien $(X,d_X)$ und $(Y,d_Y)$ metrische Räume und $f \colon X \rightarrow Y$ eine Lipschitz-Abbildung. \index{Lipschitz}
+	Dann existiert eine eindeutige Fortsetzung $\widehat{f}\colon \widehat{X} \rightarrow \widehat{Y}$ mit $\widehat{f}\big|_X = f$.
+\end{erinnerung}
+
+\begin{definition}[Mittelpunkt]
+\label{def:1.33}
+	Ein metrischer Raum $(X,d)$ hat \textbf{Mittelpunkte}, wenn für alle $u,v \in X$ stets ein $m \in X$ existiert mit $d(u,m) = d(m,v) = \frac{1}{2}d(u,v)$. \index{Mittelpunkt}
+\end{definition}
+
+Man beachte, dass Mittelpunkte nicht eindeutig sein müssen. Zum Beispiel haben $u := (1,0)$ und $v:= (0,1)$ in $(\RR^2,d_1)$ die beiden Mittelpunkte $m_1 = (0,0)$ und $m_2 = (1,1)$.
+
+\begin{beispiel}
+\label{bsp:1.34}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item $(\QQ_2,d_2)$ hat Mittelpunkte.
+		\item Jeder geodätische Raum hat Mittelpunkte: Für alle $u,v \in X$ existiert eine Geodäte $\gamma\colon [0,d(u,v)] \rightarrow X$ von $u$ nach $v$. Dann ist $\gamma\enbrace*{\frac{1}{2} d(u,v)}$ Mittelpunkt von $u$ und $v$.
+		\item $\CAT$-Räume haben eindeutige Mittelpunkte, das heißt es existiert eine wohldefinierte Mittelpunktabbildung $(u,v) \mapsto m(u,v)$.
+	\end{enumerate}
+\end{beispiel}
+
+\begin{lemma}
+\label{lemma:1.35}
+	Ein vollständiger metrischer Raum, der Mittelpunkte hat, ist geodätisch. \marginnote{Beweis: Übung.}
+\end{lemma}
+
+\begin{definition}[Ungefährer Mittelpunkt, Vierpunktbedingung]
+\label{def:1.36}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item Ein metrischer Raum $X$ hat \textbf{ungefähre Mittelpunkte}, wenn es zu allen $u,v \in X$ und $\varepsilon > 0$ ein $m \in X$ gibt mit $d(u,m), d(u,v) \leq \frac{1}{2} d(u,v) + \varepsilon$. \label{Mittelpunkt!ungefähr}
+		\item Ein metrischer Raum $X$ erfüllt die \textbf{CAT(0)-Vierpunktbedingung}, wenn es zu allen $x_1,y_1,x_2,y_2 in X$ stets $\ol{x_1}, \ol{x_2}, \ol{y_1}, \ol{y_2} \in \EE^2$ gibt mit: \index{CAT(0)-Raum@$\CAT$-Raum!Vierpunktbedingung}
+		\[
+			d(x_1,y_1) = d_2(\ol{x_1},\ol{y_1}), \quad
+			d(x_2,y_2) = d_2(\ol{x_2},\ol{y_2}), \quad
+			d(x_1,x_2) = d_2(\ol{x_1},\ol{x_2}), \quad
+			d(y_1,y_2) = d_2(\ol{y_1},\ol{y_2}).
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw (0,2) node{$\mathbf{X}$};
+		\draw [thick] (0,0) node[anchor=north east]{$y_2$}
+			to [bend angle=20, bend right] (1,2) node[anchor=south east]{$x_1$}
+			to [bend angle=20, bend right] (4,2) node[anchor=south west]{$y_1$}
+			to [bend angle=20, bend right] (5,0) node[anchor=north west]{$x_2$}
+			to [bend angle=20, bend right] cycle;
+		\draw [thick, dashed] (0,0) -- (4,2);
+		\draw [thick, dashed] (1,2) -- (5,0);
+		
+		\draw (0,0) node[fill,circle,inner sep=1.5pt]{};
+		\draw (1,2) node[fill,circle,inner sep=1.5pt]{};
+		\draw (5,0) node[fill,circle,inner sep=1.5pt]{};
+		\draw (4,2) node[fill,circle,inner sep=1.5pt]{};
+	\end{tikzpicture}
+	\hspace{1.5cm}
+	\begin{tikzpicture}
+		\draw (0,2) node{$\mathbf{\EE^2}$};
+		\draw [thick] (0,0) node[anchor=north east]{$\ol{y_2}$}
+		to (1,2) node[anchor=south east]{$\ol{x_1}$}
+		to (4,2) node[anchor=south west]{$\ol{y_1}$}
+		to (5,0) node[anchor=north west]{$\ol{x_2}$}
+		to cycle;
+		\draw [thick, dashed] (0,0) -- (4,2);
+		\draw [thick, dashed] (1,2) -- (5,0);
+		
+		\draw (0,0) node[fill,circle,inner sep=1.5pt]{};
+		\draw (1,2) node[fill,circle,inner sep=1.5pt]{};
+		\draw (5,0) node[fill,circle,inner sep=1.5pt]{};
+		\draw (4,2) node[fill,circle,inner sep=1.5pt]{};
+	\end{tikzpicture}
+\end{figure}
+	
+Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakterisieren kann.
+
+\begin{lemma}
+\label{lemma:1.37}
+	Ein geodätischer Raum ist genau dann $\CAT$, wenn für jedes geodätische Dreieck $\Delta(x,y,z,\alpha,\beta,\gamma)$ mit Vergleichsdreieck \marginnote{Beweis: Übung.} $\ol{\Delta}(\ol{x},\ol{y},\ol{z},\ol{\alpha},\ol{\beta},\ol{\gamma})$ in $\EE^2$ gilt: $d(x,\beta(s)) \leq d_2(\ol{x},\ol{\beta}(s))$ für alle $s \in [0,d(y,z)]$.
+\end{lemma}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=1]
+	\draw (0,1) node[fill,circle,inner sep=1pt]{}
+	to [bend angle=20, bend left] (3,0) node[fill,circle,inner sep=1pt]{} 
+	to [bend angle=20, bend left] coordinate[pos=.66] (M) (2,3) node[fill,circle,inner sep=1pt]{}
+	to [bend angle=20, bend left] cycle;
+	\draw (0,1) node[below]{$x$};
+	\draw (3,0) node[right]{$y$};
+	\draw (2,3) node[above]{$z$};
+	\draw (M) node[fill,circle,inner sep=1pt,color=red]{};
+	\draw (M) node[right,color=red]{$\beta(s)$};
+	\draw[color=red, dashed] (0,1) -- (M);
+	\draw (0,3) node[right]{$\mathbf{X}$};
+	\end{tikzpicture} \hspace{2cm}
+	\begin{tikzpicture}[scale=1]
+	\draw (0,1) node[fill,circle,inner sep=1pt]{}
+	to (3,0) node[fill,circle,inner sep=1pt]{} 
+	to coordinate[pos=.66] (M) (2,3) node[fill,circle,inner sep=1pt]{}
+	to cycle;
+	\draw (0,1) node[below]{$\ol{x}$};
+	\draw (3,0) node[right]{$\ol{y}$};
+	\draw (2,3) node[above]{$\ol{z}$};
+	\draw (M) node[fill,circle,inner sep=1pt,color=red]{};
+	\draw (M) node[right,color=red,xshift=-.2]{$\ol{\beta}(s)$};
+	\draw[color=red, dashed] (0,1) -- (M);
+	\draw (0,3) node[right]{$\mathbf{\EE^2}$};
+	\end{tikzpicture}	
+\end{figure}
+
+\begin{theorem}
+\label{thm:1.38}
+	Ein vollständiger metrischer Raum ist $\CAT$ genau dann, wenn er er ungefähre Mittelpunkte hat und die $\CAT$-Vierpunktbedingung erfüllt.
+\end{theorem}	
+
+\begin{beweis}
+	\mbox{} \\[-.8cm]
+	\begin{description}
+		\item[\bewhin] Angenommen, $X$ ist $\CAT$.
+		Dann hat $X$ Mittelpunkte, also auch ungefähre Mittelpunkte.
+		Seien $x_1,y_1,x_2,y_2 \in X$.
+		Betrachte die euklidischen Vergleichsdreiecke zu $\Delta(x_1,x_2,y_2)$ und $\Delta(x_1,x_2,y_2)$. Das resultierende Viereck ist entweder konvex oder nicht.
+	\begin{description}
+		\item[1. Fall:] Das Viereck ist konvex.
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+			\draw (0,2) node{$\mathbf{X}$};
+			\draw [thick] (0,0) node[anchor=north east]{$y_2$}
+			to [bend angle=20, bend left] (3,0) node[anchor=north west]{$x_2$}
+			to [bend angle=20, bend left] (4,2) node[anchor=south west]{$y_1$}
+			to [bend angle=20, bend left] (1,2) node[anchor=south east]{$x_1$}
+			to [bend angle=20, bend left] cycle;
+			
+			\draw [dashed, thick] (0,0) -- (4,2);
+			\draw [dashed, thick] (1,2) -- (3,0);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1,2) node[fill,circle,inner sep=1pt]{};
+			\draw (4,2) node[fill,circle,inner sep=1pt]{};
+			
+			\draw (2,1) node[fill,circle,inner sep=1pt,color=red]{};
+			\draw (2,1) node[below,color=red]{$m$};
+			\end{tikzpicture} \hspace{1.5cm}
+			\begin{tikzpicture}
+			\draw (0,2) node{$\mathbf{\EE^2}$};
+			\draw [thick] (0,0) node[anchor=north east]{$\ol{y_2}$}
+			to (3,0) node[anchor=north west]{$\ol{x_2}$}
+			to (4,2) node[anchor=south west]{$\ol{y_1}$}
+			to (1,2) node[anchor=south east]{$\ol{x_1}$}
+			to cycle;
+			
+			\draw [dashed, thick] (0,0) -- (4,2);
+			\draw [dashed, thick] (1,2) -- (3,0);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1,2) node[fill,circle,inner sep=1pt]{};
+			\draw (4,2) node[fill,circle,inner sep=1pt]{};
+			
+			\draw (2,1) node[fill,circle,inner sep=1pt,color=red]{};
+			\draw (2,1) node[below,color=red]{$\ol{m}$};
+			\end{tikzpicture}
+		\end{figure} 
+		
+		Da $X$ $\CAT$ ist, gilt $d(y_2,m) \leq d_2(\ol{y_2},\ol{m})$ sowie $d(y_1,m) \leq d_2(\ol{y_1},\ol{m})$.
+		Da $\ol{m}$ auf der Geodäte zwischen $\ol{y_1}$ und $\ol{y_2}$ liegt, erhalten wir insgesamt:
+		\begin{align*}
+			d(y_1,y_2) &\stack{\Delta\text{-Ungl.}}{=} d(y_1,m) + d(m,y_2) \\
+			&\stack{}{\leq} d_2(\ol{y_1},\ol{m}) + d_2(\ol{m},\ol{y_2}) = d_2(\ol{y_1},\ol{y_2})
+		\end{align*}
+		\item[2. Fall:] Das Viereck ist nicht konvex.
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+			\draw (0,2) node{$\mathbf{X}$};
+			\draw [thick] (0,0) node[anchor=north east]{$y_2$}
+			to [bend angle=20, bend left] (3,0) node[anchor=north west]{$x_2$}
+			to [bend angle=20, bend left] (4,2) node[anchor=south west]{$y_1$}
+			to [bend angle=20, bend left] (1,2) node[anchor=south east]{$x_1$}
+			to [bend angle=20, bend left] cycle;
+			
+			\draw [dashed, thick] (0,0) -- (4,2);
+			\draw [dashed, thick] (1,2) -- (3,0);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1,2) node[fill,circle,inner sep=1pt]{};
+			\draw (4,2) node[fill,circle,inner sep=1pt]{};
+			
+			\draw (2,1) node[fill,circle,inner sep=1pt,color=red]{};
+			\draw (2,1) node[below,color=red]{$m$};
+			\end{tikzpicture} \hspace{1.5cm}
+			\begin{tikzpicture}
+			\draw (0,2) node{$\mathbf{\EE^2}$};
+			\draw [thick] (0,0) node[anchor=north east]{$\ol{y_2}$}
+			to (1.5,1) node[anchor=north west]{$\ol{x_2}$}
+			to (3,1) node[anchor=south west]{$\ol{y_1}$}
+			to (1,2) node[anchor=south east]{$\ol{x_1}$}
+			to cycle;
+			
+			\draw [dashed, thick] (1,2) -- (1.5,1);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1.5,1) node[fill,circle,inner sep=1pt]{};
+			\draw (3,1) node[fill,circle,inner sep=1pt]{};
+			\draw (1,2) node[fill,circle,inner sep=1pt]{};
+			
+			\draw (1.25,1.5) node[fill,circle,inner sep=1pt,color=red]{};
+			\draw (1.25,1.5) node[right,color=red]{$\ol{m}$};
+			\end{tikzpicture}
+		\end{figure}
+		
+		Betrachte dann folgendes Dreieck in $\EE^2$ mit
+		\[
+			\begin{array}{cc}
+				d_2(\ol{x_2},\ol{y_2}) = d_2(\ol{\ol{x_2}},\ol{\ol{y_2}}), &
+				d_2(\ol{x_2},\ol{y_1}) = d_2(\ol{\ol{x_2}},\ol{\ol{y_1}}), \\
+				d_2(\ol{x_1},\ol{y_1}) = d_2(\ol{\ol{x_1}},\ol{\ol{y_1}}), &
+				d_2(\ol{x_1},\ol{y_2}) = d_2(\ol{\ol{x_1}},\ol{\ol{y_2}}).			
+			\end{array}
+		\]
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+			\draw [thick] (0,0) node[anchor=north east]{$\ol{\ol{y_2}}$}
+			to (2,0) node[anchor=north]{$\ol{\ol{x_2}}$}
+			to (4,0) node[anchor=north west]{$\ol{\ol{y_1}}$}
+			to (2,2) node[anchor=south]{$\ol{\ol{x_1}}$}
+			to cycle;
+			
+			\draw [dashed, thick] (2,0) -- (2,2);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (2,0) node[fill,circle,inner sep=1pt]{};
+			\draw (4,0) node[fill,circle,inner sep=1pt]{};
+			\draw (2,2) node[fill,circle,inner sep=1pt]{};
+			\end{tikzpicture}
+		\end{figure}
+		
+		Es gilt
+		\[
+			d_2(\ol{\ol{x_1}},\ol{\ol{x_2}}) \geq d_2(\ol{x_1},\ol{x_2}) = d_2(x_1,x_2)
+		\]
+		sowie
+		\begin{align*}
+			d_2(\ol{\ol{y_1}},\ol{\ol{y_2}}) &\stack{}{=} d_2(\ol{\ol{y_1}},\ol{\ol{x_2}}) + d_2(\ol{\ol{x_2}},\ol{\ol{y_2}}) \\
+			&\stack{}{=} d_2(\ol{\ol{y_1}},\ol{\ol{x_2}}) + d_2(\ol{x_2},\ol{y_2}) \\
+			&\stack{}{=} d(y_1,x_2) + d(x_2,y_2) \\
+			&\stack{\Delta\text{-Ungl.}}{\geq} d(y_1,y_2).
+		\end{align*}
+	\end{description}
+	\item[\bewrueck] ...
+	\end{description}
+\end{beweis}
 \cleardoubleoddemptypage
