@@ -277,12 +277,12 @@
 
 \begin{bemerkung}[{name=[Grundlegende Eigenschaften der Paarung]}]
 	\leavevmode
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item Sei $\beta \in C^{n-1}_\sing(X,A;V)$ und $b \in C^\sing_{n+1}(X,A)$. Für $\alpha \in \ker d^n$, $a \in\ker d_n$ folgt 
-		\begin{align}
-			\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) \pm \Underbrace{\alpha \enbrace[\big]{d_{n+1}(b)}}{=0 } 
-			+ \Underbrace{d^{n-1}(\beta) \enbrace[\big]{a + d_{n+1}(b)}}{=0} 
-		\end{align}
+		\[
+			\enbrace*{\alpha + d^{n-1}(\beta)}\enbrace[\big]{a + d_{n+1}(b)} = \alpha(a) \pm \Underbrace{\alpha \enbrace[\big]{d_{n+1}(b)}}{=0 } 
+			+ \Underbrace{d^{n-1}(\beta) \enbrace[\big]{a + d_{n+1}(b)}}{=0}
+		\]
 		Damit folgt, dass die Paarung wohldefiniert ist.
 		\item Für $r \in \mathbb{Z}$, $x,x' \in H_n(X,A)$, $\xi,\xi' \in H^n(X,A;V)$ gelten folgende Regeln
 		\[
@@ -294,24 +294,24 @@
 \end{bemerkung}
 
 
-\begin{satz}[label=eig_kohomo_to_hom_homo]
+\begin{satz}[label=eig_kohomo_to_hom_homo,{name=[Paarung von Kohomologie in Homomorphismen über Homologie ist surjektiv]}]
 	Für die eben definierte Abbildung $f \colon H^n(X,A;V) \to \Hom_\mathbb{Z} \enbrace[\big]{H_n(X,A),V}$ gilt
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $f$ ist surjektiv
-		\item Ist $V$ ein $\mathbb{Q}$-Vektorraum, so ist $f$ auch injektiv. \todo{Revision 2}
+		\item Ist $V$ ein $\mathbb{Q}$-Vektorraum, so ist $f$ auch injektiv.
 	\end{enumerate}
 \end{satz}
 
 \noindent Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussagen:
 
-\begin{lemma}[label=lem:untergrp_frei]
+\begin{lemma}[label=lem:untergrp_frei,{name=[Untergruppen freier abelscher Gruppen sind frei]}]
 	Untergruppen freier abelscher Gruppen sind frei.
 	% Sei $C$ eine Untergruppe der freien abelschen Gruppe $\mathbb{Z}[S]$. Dann gibt es $T \subseteq S$ und eine $T$-Folge $(n_t)_{t \in T}$ von positiven Zahlen $n_t$, so dass $C$
 	% das Bild der injektiven Abbildung $M \colon \mathbb{Z}[T] \to \mathbb{Z}[S]$, $\sum z_t t \mapsto \sum z_t m_t \cdot t$ ist. Insbesondere ist $C$ frei.
 \end{lemma}
 \begin{beweis}
 	Sei $C$ eine Untergruppe von $\mathbb{Z}[S]$. Sei $\mathcal{M}$ die Menge der Tripel $(T,R,\varphi)$ mit
-	\begin{itemize}[itemsep=0pt]
+	\begin{itemize}[itemsep=0pt,topsep=1ex]
 		\item $T \subseteq R \subseteq S$.
 		\item $\varphi \colon \mathbb{Z}[T] \to \mathbb{Z}[R] \cap C$ ein Isomorphismus.
 	\end{itemize}
@@ -319,20 +319,33 @@
 	\[
 		(T,R,\varphi) \le (T',R',\varphi') :\iff T \subseteq T', R \subseteq R', \varphi'|_{T}=\varphi
 	\]
-	Das Lemma von Zorn liefert uns die Existenz eines maximalen Elements $(T,R,\varphi) \in \mathcal{M}$. Zu zeigen bleibt $R=S$. Angenommen es existiert ein $s \in S \setminus R$.
-	Ist $C \cap \mathbb{Z}[R \cup \set{s}] = C \cap \mathbb{Z}[R]$, so ist $(T,R,\varphi) \lneqq (T,R \cup \set{s},\varphi) \in \mathcal{M}$ im Widerspruch zur Maximalität von 
-	$(T,R,\varphi)$. Sei also $\mathbb{Z}[R] \cap C \subsetneq \mathbb{Z}[R \cup \set{s}] \cap C$. Betrachte die kurze exakte Sequenz \todo{Diagramm vervollständigen}
-	\[
-		\begin{tikzcd}
-			\mathbb{Z}[R] \cap C \rar[hook] \dar[hook,"i_0"]& \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C \rar[two heads] \dar[hook,"i_1"] 
-			& \sfrac{\mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C}{\mathbb{Z}[R] \cap C} \dar["i_2"] \\
-			\mathbb{Z}[R] \rar[hook] & \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \rar[two heads,"p"] & \mathbb{Z}\benbrace[\big]{\set{s}}
+	$\mathcal{M}$ ist nicht leer ($T=R=\emptyset$) und jede aufsteigende Kette besitzt eine obere Schranke (Vereinigung der Kette) in $\mathcal{M}$.
+	Das Lemma von Zorn liefert uns nun die Existenz eines maximalen Elements $(T,R,\varphi) \in \mathcal{M}$. Zu zeigen bleibt $R=S$. 
+	
+	Angenommen es existiert ein $s \in S \setminus R$.
+	Ist $C \cap \mathbb{Z} \benbrace[\big]{R \cup \set{s}} = C \cap \mathbb{Z}[R]$, so ist $(T,R,\varphi) \lneqq (T,R \cup \set{s},\varphi) \in \mathcal{M}$ im Widerspruch zur 
+	Maximalität von $(T,R,\varphi)$. Sei also $\mathbb{Z}[R] \cap C \subsetneq \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C$. Betrachte nun das Diagramm in Abbildung 
+	\ref{diag:frei_untergrp}
+	
+	\begin{figure}[t]
+		\centering{
+		\begin{tikzcd}[row sep=large]
+			\mathbb{Z}[T] \dar["\varphi","\cong"'] \rar[hook] & \mathbb{Z} \benbrace[\big]{T \cup \set*{s}} \dar["\varphi^+"] \rar[two heads] 
+			& \mathbb{Z}\benbrace[\big]{\set*{s}} {\color{dark_gray} \ni s} \dar["\cong"] 
+			\ar[dd,dark_gray,controls={+(-17:1.5) and +(20:1.5)},mapsto,start anchor=east, end anchor=east] \\
+			\mathbb{Z}[R] \cap C \rar[hook,"j"] \dar[hook,"i_0"]& \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C \rar[two heads,"p"] \dar[hook,"i_1"] 
+			& \faktor{\mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C}{\mathbb{Z}[R] \cap C} \dar["i_2"] \\
+			\mathbb{Z}[R] \rar[hook,"j'"] & \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \rar[two heads,"p'"] & \mathbb{Z}\benbrace[\big]{\set{s}}{\color{dark_gray} \ni m \cdot s} 
 		\end{tikzcd}
-	\]
-	Nun ist $\mathbb{Z}[R] \cap C  = (\mathbb{Z}[R]) \cap \enbrace*{\mathbb{Z}[R \cup \set{s}] \cap C}$. Damit muss dann die von $i_0$ und $i_1$ induzierte Abbildung 
-	$i_2 \colon \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} \to \mathbb{Z}[\set{s}]$ injektiv sein. Es folgt, dass $\im i_2 = \mathbb{Z}\benbrace*{\set{m \cdot s}}$
+		\caption{Diagramm zum Beweis von \autoref{lem:untergrp_frei} \label{diag:frei_untergrp}}
+		}
+	\end{figure}
+	
+	Nun ist $\mathbb{Z}[R] \cap C  = \mathbb{Z}[R] \cap \enbrace[\big]{\mathbb{Z}[R \cup \set{s}] \cap C}$ und damit muss auch der von $i_0$ und $i_1$ induzierte Homomorphismus 
+	$i_2 \colon \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} \to \mathbb{Z}[\set{s}]$ injektiv sein. Es folgt, dass 
+	$\im i_2 = m \cdot \mathbb{Z}\benbrace*{\set{s}}$
 	ist für ein $m >0$. Sei $c \in \mathbb{Z}[R \cup \set{s}] \cap C$ ein Urbild von $m \cdot s$ unter $p \circ i_1$. Nun können wir $\varphi$ durch $s \mapsto c$ zu
-	$\varphi^+ \colon \mathbb{Z}\benbrace*{T \cup \set{s}} \to \mathbb{Z}\benbrace*{R \cup \set{s}} \cap C$. Es folgt, dass $\varphi^+$ ein Isomorphismus ist im Widerspruch zur 
+	$\varphi^+ \colon \mathbb{Z}\benbrace*{T \cup \set{s}} \to \mathbb{Z}\benbrace*{R \cup \set{s}} \cap C$ fortsetzen. Es folgt, dass $\varphi^+$ ein Isomorphismus ist im Widerspruch zur 
 	Maximalität von $(T,R,\varphi)$.
 	% Sei $\mathcal{M}$ die Menge aller Tripel $(T,R,m)$ mit
 	% \begin{itemize}
@@ -348,12 +361,12 @@
 	% existiert ein maximales Element $(T,R,m) \in \mathcal{M}$. Es bleibt zu zeigen: $R=S$.
 \end{beweis}
 
-\begin{lemma}[label=lem:abel_qvek]
+\begin{lemma}[label=lem:abel_qvek,{name=[{Fortsetzungen für rationale Vektorräume}]}]
 	Sei $A_0$ eine Untergruppe der abelschen Gruppe $A$, $V$ ein $\mathbb{Q}$-Vektorraum und $\beta_0 \colon A_0 \to V$ ein Gruppenhomomorphismus. Dann gibt es eine Fortsetzung 
 	$\beta \colon A \to V$ von $\beta_0$ zu einem Gruppenhomomorphismus.  
 \end{lemma}
 \begin{beweis}
-	Die Inklusion $i \colon A_0 \to A$ induziert einen injektiven\footnote{nach Übungsaufgabe} $\mathbb{Q}$-Vektorraum-Homomorphismus 
+	Die Inklusion $i \colon A_0 \to A$ induziert nach Aufgabe 1 vom ersten Übungsblatt einen injektiven $\mathbb{Q}$-Vektorraum-Homomorphismus 
 	\[
 		\mathbb{Q}\otimes i \colon \mathbb{Q} \otimes A_0 \longrightarrow \mathbb{Q} \otimes A , \qquad q \otimes a_0 \mapsto q \otimes i(a_0)
 	\]
@@ -369,26 +382,32 @@
 			\ker  d_n \rar[hook,"i"] & C_n^\sing(X,A) \rar["d_n",two heads] & \im d_n
 		\end{tikzcd}
 	\]
-	Als Untermodul des freien Moduls $C_{n-1}^\sing(X,A)$ ist nach \autoref{lem:untergrp_frei} $\im d_n$ frei, insbesondere spaltet die kurze exakte Sequenz, insbesondere ist
+	Als Untermodul des freien Moduls $C_{n-1}^\sing(X,A)$ ist $\im d_n$ nach \autoref{lem:untergrp_frei} frei, insbesondere spaltet die kurze exakte Sequenz und es gilt
 	$C^\sing_n(X,A) \cong \ker d_n \oplus \im d_n$. Daher können wir $\varphi \circ p \colon \ker d_n \to V$ zu $\alpha \colon C_n^\sing(X,A) \to V$ fortsetzen. Genauer: Sei 
 	$s \colon \im d_n \to C_n^\sing(X,A)$ ein Spalt. Dann können wir $\alpha \colon C_n^\sing(X,A) \to V$ definieren durch 
-	\[
+	\(
 		\alpha(a) \coloneqq \varphi \circ p \enbrace*{a - s \enbrace[\big]{d_n(a)}}
-	\]
-	Es folgt $d_n \circ \alpha =0$ und $f \enbrace*{[\alpha]}=\varphi$.
-	\item Sei $\alpha \in C^n_\sing(X,A;V)$ mit $d^n(\alpha)=0$. Sei $\benbrace*{\alpha} \in \ker f$, also $\alpha(a)=0$ für alle $a \in \ker d_n$.  Dann faktorisiert $\alpha$ über
-	$\im d_n \subseteq C_{n-1}(X,A)$: $\alpha$ induziert $\beta_0 \colon \im d_n \to V$ mit $\alpha = \beta_0 \circ d_n$. Ist $V$ ein $\mathbb{Q}$-Vektorraum, so können wir 
-	$\beta_0$ nach \autoref{lem:abel_qvek} zu $\beta \colon C_{n-1}(X,A) \to V$ fortsetzen. Es folgt 
-	$\benbrace*{\alpha}= \benbrace*{\beta \circ d_n} = \pm \enbrace*{d^{n+1} \beta}=0$. \qedhere
+	\).
+	Es folgt 
+	\begin{align}
+		d^n (\alpha)(a)= \alpha \circ d_{n+1}(a)= \varphi \circ p \enbrace*{d_{n+1}(a) - d_{n+1} \enbrace[\big]{s \enbrace*{d_n a}}} =0
+	\end{align}
+	und damit $[\alpha] \in H^n(X,A;V)$ sowie $f \enbrace*{[\alpha]}=\varphi$, womit die Surjektivität gezeigt ist.
+	\item Sei $\alpha \in C^n_\sing(X,A;V)$ mit $d^n(\alpha)=0$. Sei $\benbrace*{\alpha}\in\ker f$, also $\alpha(a)=0$ für alle $a \in \ker d_n$. Dann faktorisiert $\alpha$ über
+	$\im d_n \subseteq C_{n-1}(X,A)$, denn $\alpha$ liegt im Kern von $d^n$ und induziert $\beta_0 \colon \im d_n \to V$ mit $\alpha = \beta_0 \circ d_n$ durch Einschränkung 
+	auf den Summanden $\im d_n$. 
+	
+	Ist $V$ ein $\mathbb{Q}$-Vektorraum, so können wir $\beta_0$ nach \autoref{lem:abel_qvek} zu $\beta \colon C_{n-1}(X,A) \to V$ fortsetzen. Es folgt 
+	$\alpha= \beta \circ d_n = \pm \enbrace*{d^{n-1} \beta}=0$ und damit $\benbrace*{\alpha}=0$ in $H^n(X,A;V)$. \qedhere
 	\end{enumerate}
 \end{beweis}
 
 \begin{korollarB}
-	Es gilt $H^n(X,A;\mathbb{Q}) \cong \Hom \enbrace*{H_n(X,A);\mathbb{Q}}$
+	Für den Sonderfall der $\mathbb{Q}$-Vektorräume gilt $H^n(X,A;\mathbb{Q}) \cong \Hom_{\mathbb{Z}}\enbrace[\big]{H_n(X,A);\mathbb{Q}}$.
 \end{korollarB}
 
 \begin{bemerkung}
-	Es gilt sogar $H^n \enbrace*{X,A;\mathbb{Q}} \cong \Hom_\mathbb{Q} \enbrace*{H_n(X,A;\mathbb{Q}),\mathbb{Q}}$.
+	Es gilt sogar $H^n \enbrace*{X,A;\mathbb{Q}} \cong \Hom_\mathbb{Q} \enbrace[\big]{H_n(X,A;\mathbb{Q}),\mathbb{Q}}$.
 \end{bemerkung}
 \newpage
 % section 2 (end)
