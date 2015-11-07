@@ -154,7 +154,7 @@
 \end{satz}
 \begin{beweis}
 	Für singuläre Homologie haben wir die entsprechenden Aussagen schon bewiesen. In allen vier Fällen folgt die Aussage für Kohomologie aus schon bewiesenen Aussagen über 
-	den singulären Kettenkomplex.\todo{Andere Teile aus Übungen übernehmen}
+	den singulären Kettenkomplex.
 	
 	Wir führen dies an dieser Stelle nur für iv) aus, die anderen Punkte wurden teilweise in den Übungen bewiesen. Seien $f, g \colon X \to Y$ homotop. Dann gibt es eine 
 	Kettenhomotopie $H \colon C^\sing_*(X) \to C^\sing_{*+1}(Y)$ zwischen den auf dem singulären Kettenkomplex induzierten Abbildungen $f_*$ und $g_*$. Es gilt also
@@ -268,49 +268,41 @@
 \label{sec:2}
 
 \begin{definition}[{name=[Paarung]}]
-	Sei $V$ ein $\mathbb{Z}$-Modul, $(X,A)$ ein Paar von topologischen Räumen. Wir definieren die \Index{Paarung}\todo{Revision 2}
+	Sei $V$ ein $\mathbb{Z}$-Modul, $(X,A)$ ein Paar von topologischen Räumen. Wir definieren die \Index{Paarung} zwischen Kohomologie und Homologie 
 	\[
-		\begin{tikzcd}[row sep=0cm]
-			H^n(X,A;V) \times H_n(X,A) \rar & V \\
-			(\xi, x) \rar[mapsto] & \xi(x)
-		\end{tikzcd}
+		H^n(X,A;V) \times H_n(X,A) \longrightarrow V \quad , \quad (\xi,x) \longmapsto \xi(x)
 	\]
 	wie folgt: Wähle $\alpha \in C^n_\sing(X,A;V)$ mit $\benbrace*{\alpha}=\xi$ und $a \in C^\sing_n(X,A)$ mit $\benbrace*{a}=x$. Dann setze $\xi(x) \coloneqq \alpha(a)$.
 \end{definition}
 
-\begin{bemerkung}
-	Sei $\beta \in C^{n-1}_\sing(X,A;V)$ und $b \in C^\sing_{n+1}(X,A)$. Dann 
-	\begin{align}
-		\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) + \Underbrace{\alpha \enbrace[\big]{d_{n+1}(b)}}{=0 \text{ da } d^n \alpha=0 } + \Underbrace{d^{n-1}(\beta) \enbrace*{a + d_{n+1}(b)}}{\pm \beta \enbrace[\big]{d_n(a + d_{n+1}(b))}} 
-	\end{align}
+\begin{bemerkung}[{name=[Grundlegende Eigenschaften der Paarung]}]
+	\leavevmode
+	\begin{itemize}
+		\item Sei $\beta \in C^{n-1}_\sing(X,A;V)$ und $b \in C^\sing_{n+1}(X,A)$. Für $\alpha \in \ker d^n$, $a \in\ker d_n$ folgt 
+		\begin{align}
+			\enbrace*{\alpha + d^{n-1}(\beta)}(a + d_{n+1}(b)) = \alpha(a) \pm \Underbrace{\alpha \enbrace[\big]{d_{n+1}(b)}}{=0 } 
+			+ \Underbrace{d^{n-1}(\beta) \enbrace[\big]{a + d_{n+1}(b)}}{=0} 
+		\end{align}
+		Damit folgt, dass die Paarung wohldefiniert ist.
+		\item Für $r \in \mathbb{Z}$, $x,x' \in H_n(X,A)$, $\xi,\xi' \in H^n(X,A;V)$ gelten folgende Regeln
+		\[
+			(r \cdot \xi)(x) = r \cdot \xi(x) = \xi(r \cdot x) \qquad (\xi +\xi')(x) = \xi(x) + \xi'(x) \qquad \xi(x+x')= \xi(x) + \xi(x')
+		\]
+		\item 	Wir können $(\xi,x)\mapsto \xi(x)$ auch als interpretieren als Homomorphismus
+		\mapdef{f \colon H^n(X,A;V)}{\Hom_\mathbb{Z} \enbrace[\big]{H_n(X,A),V}}{\xi}{\enbrace[\big]{x \mapsto \xi(x)}}{}
+		\end{itemize}
 \end{bemerkung}
 
-\begin{bemerkung}
-	Für $r \in \mathbb{Z}$, $x,x' \in H_n(X,A)$, $\xi,\xi' \in H^n(X,A;V)$ gilt
-	\begin{align}
-		(r \cdot \xi)(x) &= r \cdot \xi(x) = \xi(r \cdot x) \\
-		(\xi +\xi')(x) &= \xi(x) + \xi'(x) \\
-		\xi(x+x')&= \xi(x) + \xi(x')
-	\end{align}
-\end{bemerkung}
-
-\begin{bemerkung}
-	Wir können $(\xi,x)\mapsto \xi(x)$ auch als interpretieren als Homomorphismus
-	\[
-		f \colon H^n(X,A;V) \longrightarrow \Hom_\mathbb{Z} \enbrace[\big]{H_n(X,A),V}
-	\]
-	mit $f(\xi)= \enbrace*{x \mapsto \xi(x)}$.
-\end{bemerkung}
 
 \begin{satz}[label=eig_kohomo_to_hom_homo]
 	Für die eben definierte Abbildung $f \colon H^n(X,A;V) \to \Hom_\mathbb{Z} \enbrace[\big]{H_n(X,A),V}$ gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item $f$ ist surjektiv
-		\item Ist $V$ ein $\mathbb{Q}$-Vektorraum, so ist $f$ auch injektiv.
+		\item Ist $V$ ein $\mathbb{Q}$-Vektorraum, so ist $f$ auch injektiv. \todo{Revision 2}
 	\end{enumerate}
 \end{satz}
 
-Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussagen:
+\noindent Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussagen:
 
 \begin{lemma}[label=lem:untergrp_frei]
 	Untergruppen freier abelscher Gruppen sind frei.
@@ -319,7 +311,7 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 \end{lemma}
 \begin{beweis}
 	Sei $C$ eine Untergruppe von $\mathbb{Z}[S]$. Sei $\mathcal{M}$ die Menge der Tripel $(T,R,\varphi)$ mit
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item $T \subseteq R \subseteq S$.
 		\item $\varphi \colon \mathbb{Z}[T] \to \mathbb{Z}[R] \cap C$ ein Isomorphismus.
 	\end{itemize}
@@ -332,9 +324,9 @@ Um den Satz beweisen zu können, benötigen wir zunächst zwei technische Aussag
 	$(T,R,\varphi)$. Sei also $\mathbb{Z}[R] \cap C \subsetneq \mathbb{Z}[R \cup \set{s}] \cap C$. Betrachte die kurze exakte Sequenz \todo{Diagramm vervollständigen}
 	\[
 		\begin{tikzcd}
-			\mathbb{Z}[R] \cap C \rar[hook] \dar[hook,"i_0"]& \mathbb{Z}[R \cup \set{s}] \cap C \rar[two heads] \dar[hook,"i_1"] & \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} 
-			\dar["i_2"] \\
-			\mathbb{Z}[R] \rar[hook] & \mathbb{Z}\benbrace*{R \cup \set{s}} \rar[two heads,"p"] & \mathbb{Z}\benbrace*{\set{s}}
+			\mathbb{Z}[R] \cap C \rar[hook] \dar[hook,"i_0"]& \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C \rar[two heads] \dar[hook,"i_1"] 
+			& \sfrac{\mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C}{\mathbb{Z}[R] \cap C} \dar["i_2"] \\
+			\mathbb{Z}[R] \rar[hook] & \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \rar[two heads,"p"] & \mathbb{Z}\benbrace[\big]{\set{s}}
 		\end{tikzcd}
 	\]
 	Nun ist $\mathbb{Z}[R] \cap C  = (\mathbb{Z}[R]) \cap \enbrace*{\mathbb{Z}[R \cup \set{s}] \cap C}$. Damit muss dann die von $i_0$ und $i_1$ induzierte Abbildung 
