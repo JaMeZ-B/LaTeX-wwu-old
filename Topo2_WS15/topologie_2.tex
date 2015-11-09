@@ -771,6 +771,14 @@
 	die Antwort auf die erste Frage \enquote{Nein}.
 \end{beispiel}
 
+% \begin{wrapfigure}{r}{3cm}
+% 	\centering{
+% 	\begin{tikzcd}
+% 		\mbox{ } & M \dar[two heads,"f"] \\
+% 		P \rar["\varphi"] \urar["\hat{\varphi}",dashed] & N
+% 	\end{tikzcd}
+% 	}
+% \end{wrapfigure}
 \begin{definition}
 	Ein $R$-Modul $P$ heißt \bet{projektiv}\index{projektiver Modul}, falls es zu jeder surjektiven, $R$-linearen Abbildung $f \colon M \to N$ und jeder $R$-linearen Abbildung
 	$\varphi \colon P \to N$ eine $R$-lineare Abbildung $\hat{\varphi} \colon P \to M$ gibt mit $\varphi= f \circ \hat{\varphi}$. Anders ausgedrückt kommutiert folgendes Diagramm:
@@ -780,7 +788,6 @@
 			P \rar["\varphi"] \urar["\hat{\varphi}",dashed] & N
 		\end{tikzcd}
 	\]
-	\todo{mit \texttt{wrapfig}}
 \end{definition}
 
 \begin{beispiel}[{name=[Freie Moduln sind projektiv]}]
@@ -859,8 +866,6 @@
 	Die \Index{Einhängung} $\Sigma C_*$ von $C_*$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $C_{n-1}$ ist und dessen $n$-te Randabbildung $-d_{n-1}^C$ ist.
 \end{definition}
 
- ist eine kurze exakte Sequenz von Kettenkomplexen. Das Schlangenlemma liefert dann eine lange exakte Sequenz, deren Verbindungshomomorphismus $f_*$ entspricht.
-
 \begin{lemma}
 	$f$ induziert genau dann einen Isomorphismus in Homologie, wenn $\Keg(f_*)$ azyklisch ist.
 \end{lemma}
@@ -880,15 +885,21 @@
 \begin{beweis}
 	Sei $\begin{psmallmatrix} \alpha_n & \beta_{n-1} \\ \gamma_n & \delta_{n-1} \end{psmallmatrix}$ eine Kettenkontraktion für $\Keg(f)$. Es folgt 
 	\begin{align}
-		f_n \gamma_n + d^D_{n+1} \alpha_n + \alpha_{n-1} d_n^D &= \id_{D_n} \\
-		d^D_{n+1} \beta_{n-1} + f_n \delta_{n-1} + d_{n-1} f_{n-1} - \beta_{n-2} d_{n-1}^C &= 0 \\
-		- d^C_n \gamma_n +  + \gamma_n d_n^D &= 0 \\
-		- d_n^C \delta_{n-1} + \gamma_{n-1} f_{n-1} - \delta_{n-2} d^C_{n-1} &= \id_{C_{n-1}} 
+		f_n \circ \gamma_n + d^D_{n+1} \circ \alpha_n + \alpha_{n-1} \circ d_n^D &= \id_{D_n} \tag*{(1)} \\
+		d^D_{n+1} \circ \beta_{n-1} + f_n \circ \delta_{n-1} + d_{n-1} \circ f_{n-1} - \beta_{n-2} \circ d_{n-1}^C &= 0 \tag*{(2)}\\
+		- d^C_n \circ \gamma_n + \gamma_n \circ d_n^D &= 0 \tag*{(3)} \\
+		- d_n^C \circ \delta_{n-1} + \gamma_{n-1} \circ f_{n-1} - \delta_{n-2} \circ d^C_{n-1} &= \id_{C_{n-1}} \tag*{(4)}
 	\end{align}
-	\todo[inline]{besser lesbar machen, Nummern einfügen}
+	Daraus folgt
+	\begin{align}
+		&\gamma \text{ ist eine Kettenabbildung} \tag*{(1')} \label{sec5:1-} \\
+		&\id_D \simeq f \circ g \text{ via } \alpha \tag*{(3')} \label{sec5:3-}\\
+		& \gamma \circ f \simeq \id_C \text{ via }  \delta \tag*{(4')} \label{sec5:4-}
+	\end{align}
 	Es folgt, dass $\gamma$ eine Kettenabbildung ist, $\id_D \simeq f \circ g$ via $\alpha$ und $\gamma \circ f \simeq \id_C$ via $\delta$. Damit ist $f$ eine 
 	Kettenhomotopieäquivalenz mit Kettenhomotopieinversem $\gamma$. 
-	Gelten umgekehrt (1'), (3') und (4'), so setzt man $\hat{\delta} := \delta + \gamma \circ f - \delta \gamma f$ und $\beta := \alpha f \gamma + \alpha^2 f + f \delta^2$ und 
+	Gelten umgekehrt \ref{sec5:1-}, \ref{sec5:3-} und \ref{sec5:4-}, so setzt man $\hat{\delta} := \delta + \gamma \circ f - \delta \gamma f$ und 
+	$\beta := \alpha f \gamma + \alpha^2 f + f \delta^2$ und 
 	\[
 		S := \begin{pmatrix}
 			\alpha & \beta \\
