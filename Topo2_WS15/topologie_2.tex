@@ -402,7 +402,7 @@
 	\end{enumerate}
 \end{beweis}
 
-\begin{korollarB}
+\begin{korollarB}[{name=[{Kohomologie mit rationalen Vektorräumen}]}]
 	Für den Sonderfall der $\mathbb{Q}$-Vektorräume gilt $H^n(X,A;\mathbb{Q}) \cong \Hom_{\mathbb{Z}}\enbrace[\big]{H_n(X,A);\mathbb{Q}}$.
 \end{korollarB}
 
@@ -431,7 +431,7 @@
 \begin{definition}[label=sec3:def_cup,{name=[$\cup$-Produkt]}]
 	Sei $R$ ein Ring und $A,B \subseteq X$. Wir definieren das \bet{Cup-Produkt} ($\cup$-Produkt)\index{Cup-Produkt, $\cup$-Produkt} auf dem singulären Kokettenkomplex 
 	\[
-		\cup \colon C^p_\sing \enbrace*{X,A;R} \otimes C^q_\sing(X,B;R) \longrightarrow C^{p+q}_\sing \enbrace*{X,A \cup B;R}
+		\cup \colon C^p_\sing \enbrace*{X,A;R} \otimes C^q_\sing(X;R) \longrightarrow C^{p+q}_\sing \enbrace*{X,A;R}
 	\]
 	durch $(\alpha \cup \beta)(\sigma) \coloneqq  (-1)^{p \cdot q} \cdot \alpha\enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{p, \ldots , p+q}}}$.
 \end{definition}
@@ -746,17 +746,22 @@
 \section{Azyklische Kettenkomplexe} % (fold)
 \label{sec:5}
 
-Frage: Sei $f  \colon C_* \to D_*$ eine Kettenabbildung, die einen Isomorphismus in Homologie induziert. Ist dann $f$ schon eine Kettenhomotopieäquivalenz?
+\begin{frage}
+	Sei $f  \colon C_* \to D_*$ eine Kettenabbildung, die einen Isomorphismus in Homologie induziert. Ist dann $f$ schon eine Kettenhomotopieäquivalenz?\todo{Revision 5}
+\end{frage}
+% Frage: Sei $f  \colon C_* \to D_*$ eine Kettenabbildung, die einen Isomorphismus in Homologie induziert. Ist dann $f$ schon eine Kettenhomotopieäquivalenz?
 
-Frage: Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Dann haben wir schon gesehen, dass die Inklusion $i \colon C_*^\mathcal{U}(X;R) \to C_*^\sing(X;R)$ einen Isomorphismus in 
-Homologie induziert. Ist $i$ eine Kettenhomotopieäquivalenz?
+\begin{frage}
+	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Dann haben wir schon gesehen, dass die Inklusion $i \colon C_*^\mathcal{U}(X;R) \to C_*^\sing(X;R)$ einen Isomorphismus in 
+	Homologie induziert. Ist $i$ eine Kettenhomotopieäquivalenz?
+\end{frage}
 
 \begin{definition}[{name=[azyklischer Kettenkomplex]}]
 	Ein $R$-Kettenkomplex heißt \bet{azyklisch}\index{azyklischer Kettenkomplex}, falls seine Homologiegruppen trivial sind, also falls der Kettenkomplex eine lange exakte Folge 
 	ist.
 \end{definition}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[Beispiel eines azyklischen Kettenkomplex]}]
 	\[
 		\begin{tikzcd}
 			0 \rar & \mathbb{Z} \rar["\cdot 2"] & \mathbb{Z} \rar & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
@@ -765,6 +770,138 @@ Homologie induziert. Ist $i$ eine Kettenhomotopieäquivalenz?
 	ist ein azyklischer Kettenkomplex, der nicht kettenkontraktibel ist, da es keine nicht trivialen Abbildungen $\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \to \mathbb{Z}$ gibt. Damit ist 
 	die Antwort auf die erste Frage \enquote{Nein}.
 \end{beispiel}
+
+\begin{definition}
+	Ein $R$-Modul $P$ heißt \bet{projektiv}\index{projektiver Modul}, falls es zu jeder surjektiven, $R$-linearen Abbildung $f \colon M \to N$ und jeder $R$-linearen Abbildung
+	$\varphi \colon P \to N$ eine $R$-lineare Abbildung $\hat{\varphi} \colon P \to M$ gibt mit $\varphi= f \circ \hat{\varphi}$. Anders ausgedrückt kommutiert folgendes Diagramm:
+	\[
+		\begin{tikzcd}
+			\mbox{ } & M \dar[two heads,"f"] \\
+			P \rar["\varphi"] \urar["\hat{\varphi}",dashed] & N
+		\end{tikzcd}
+	\]
+	\todo{mit \texttt{wrapfig}}
+\end{definition}
+
+\begin{beispiel}[{name=[Freie Moduln sind projektiv]}]
+	Freie Moduln sind projektiv.
+\end{beispiel}
+
+\begin{satz}[{name=[Projektive Moduln als direkte Summanden in freien Moduln]}]
+	Für einen $R$-Modul $P$ sind äquivalent:
+	\begin{enumerate}[i),itemsep=0pt]
+		\item $P$ ist projektiv
+		\item $P$ ist ein direkter Summand in einem freien $R$-Modul.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Zur ersten Implikation:
+	\[
+		\begin{tikzcd}
+			\mbox{}&  R[S] \dar[two heads,"p"] \\
+			P \rar["\id"] \urar[dashed,"i"]& P
+		\end{tikzcd}
+	\]
+	Mit $R[S] \cong P \oplus \ker p$ folgt nun die gewünschte Aussage. Die umgekehrte Implikation ergibt sich wie folgt:
+	\[
+		\begin{tikzcd}[sep=large]
+			R[S] \rar["\hat{\psi}"] \dar[two heads,"p"',xshift=-3pt]  \drar["\psi=\varphi \circ p",sloped,pos=0.16] & M \dar[two heads] \\
+			P \rar["\varphi"] \uar[hook,"i"',xshift=3pt] & N
+		\end{tikzcd}
+	\]
+	$\hat{\varphi} := \hat{\psi} \circ i$, dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$.
+\end{beweis}
+
+\begin{satz}
+	Sei $C_*$ ein azyklischer $R$-Kettenkomplex. Sind alle Kettenmoduln $C_n$ projektiv, so ist $C_*$ kettenkontrahierbar.
+\end{satz}
+\begin{beweis}
+	Wir konstruieren induktiv $s_n \colon C_n \to C_{n+1}$, sodass $d_{n+1} \circ s_n + s_{n-1} \circ d_n = \id_{C_n}$ gilt. 	
+	Für $n=0$ gehen wir wie folgt vor: Da $C_*$ azyklisch ist, ist $d_1 \colon C_1 \to C_0$ surjektiv und es gibt $s_0 \colon C_0 \to C_1$ mit $d_1 \circ s_0 = \id_{C_0}$, weil 
+	$C_0$ projektiv ist.
+	
+	Zum Induktionsschritt $(n-1) \mapsto n$: Da $C_+$ azyklisch ist, ist $d_{n+1} \colon C_{n+1} \to \im d_{n+1}=\ker d_n$ surjektiv. Wegen
+	\begin{align}
+		d_n \enbrace*{\id_{C_n} - s_{n-1} \circ d_n} &= d_n - \Underbrace{d_n \circ s_{n-1}}{=\id_{C_{n-1}} - s_{n-2} \circ d_{n-1}} \circ d_n \\
+		&= d_n - \enbrace*{- s_{n-2} \circ d_{n-1} + \id_{C_{n-1}}} \circ d_n =0
+	\end{align}
+	liegt das Bild von $\id_{C_n} - s_{n-1} \circ d_n$ im Kern von $d_n$. Da $C_n$ projektiv ist, gibt es $s_n \colon C_n \to C_{n+1}$ mit 
+	$d_{n+1} \circ s_n = \id_{C_n} - s_{n-1} \circ d_n$.
+	
+	\[
+		\begin{tikzcd}[column sep=2.5cm,row sep=large]
+			\mbox{ } & C_{n+1} \dar["d_{n+1}",two heads] \\
+			C_n \urar["s_n", dashed] \rar["\id_{C_n} - s_{n-1} \circ d_n"'] & \im d_{n+1} = \ker d_n
+		\end{tikzcd}
+	\]
+\end{beweis}
+
+\begin{satz}[label=satz:5:kettenhomotopie]
+	Sei $f \colon C_* \to D_*$ eine Kettenabbildung. Seien alle Kettenmoduln von $C_*$ und $D_*$ projektiv. Dann sind äquivalent: 
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $f$ ist eine Kettenhomotopieäquivalenz
+		\item $f$ induziert einen Isomorphismus in Homologie.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Die Implikation (i) $\Rightarrow$ (ii) ist klar (siehe Topologie \RM{1}.) Die zweite Implikation besprechen wir später.\todo{Verweis hinzufügen, wenn da}
+\end{beweis}
+
+\begin{definition}[{name=[Kegel und Einhängung]}]
+	Sei $f \colon C_* \to D_*$ eine Kettenabbildung. Der \Index{Kegel} $\Keg(f)_*$ von $f$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $D_n \oplus C_{n-1}$ ist und dessen 
+	$n$-te Randabbildung gegeben ist durch
+	\[
+		d^{\Keg(f)}_n := \begin{pmatrix}
+			d^D_n & f\\
+			0 & -d^C_{n-1}
+		\end{pmatrix}
+	\]
+	Die \Index{Einhängung} $\Sigma C_*$ von $C_*$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $C_{n-1}$ ist und dessen $n$-te Randabbildung $-d_{n-1}^C$ ist.
+\end{definition}
+
+ ist eine kurze exakte Sequenz von Kettenkomplexen. Das Schlangenlemma liefert dann eine lange exakte Sequenz, deren Verbindungshomomorphismus $f_*$ entspricht.
+
+\begin{lemma}
+	$f$ induziert genau dann einen Isomorphismus in Homologie, wenn $\Keg(f_*)$ azyklisch ist.
+\end{lemma}
+\begin{beweis}
+	Betrachte die lange exakte Folge zur kurzen exakten Folge von Kettenkomplexen
+	\[
+		\begin{tikzcd}[cramped]
+			0 \rar & D_* \rar["i"] & \Keg(f)_* \rar["p"] & \Sigma C_* \rar & 0
+		\end{tikzcd}
+	\]
+	Der Verbindungshomomorphismus $H_{n+1}(\Sigma C_*) \to H_n(D_*)$ entspricht unter $H_{n+1}(\Sigma C_*) \cong H_n(C_*)$ genau der von $f$ induzierten Abbildung.
+\end{beweis}
+
+\begin{lemma}
+	$f$ ist genau dann eine Kettenhomotopieäquivalenz, wenn $\Keg(f)_*$ kettenkontraktibel ist.
+\end{lemma}
+\begin{beweis}
+	Sei $\begin{psmallmatrix} \alpha_n & \beta_{n-1} \\ \gamma_n & \delta_{n-1} \end{psmallmatrix}$ eine Kettenkontraktion für $\Keg(f)$. Es folgt 
+	\begin{align}
+		f_n \gamma_n + d^D_{n+1} \alpha_n + \alpha_{n-1} d_n^D &= \id_{D_n} \\
+		d^D_{n+1} \beta_{n-1} + f_n \delta_{n-1} + d_{n-1} f_{n-1} - \beta_{n-2} d_{n-1}^C &= 0 \\
+		- d^C_n \gamma_n +  + \gamma_n d_n^D &= 0 \\
+		- d_n^C \delta_{n-1} + \gamma_{n-1} f_{n-1} - \delta_{n-2} d^C_{n-1} &= \id_{C_{n-1}} 
+	\end{align}
+	\todo[inline]{besser lesbar machen, Nummern einfügen}
+	Es folgt, dass $\gamma$ eine Kettenabbildung ist, $\id_D \simeq f \circ g$ via $\alpha$ und $\gamma \circ f \simeq \id_C$ via $\delta$. Damit ist $f$ eine 
+	Kettenhomotopieäquivalenz mit Kettenhomotopieinversem $\gamma$. 
+	Gelten umgekehrt (1'), (3') und (4'), so setzt man $\hat{\delta} := \delta + \gamma \circ f - \delta \gamma f$ und $\beta := \alpha f \gamma + \alpha^2 f + f \delta^2$ und 
+	\[
+		S := \begin{pmatrix}
+			\alpha & \beta \\
+			\gamma & \hat{\delta}
+		\end{pmatrix}
+	\]
+	eine Kettenkontraktion für $\Keg(f)$.
+\end{beweis}
+
+\begin{beweis}[von \autoref{satz:5:kettenhomotopie} zweite Implikation]
+	Ist $H_n(f)$ ein Isomorphismus, so ist $\Keg(f)$ azyklisch. Die direkte Summen von projektiven Moduln ist wieder projektiv sind, sind die Kettenabbildungen von $\Keg(f)$
+	projektiv, falls die von $C_*$ und $D_*$ projektiv sind. Daher ist $\Keg(f)$ kettenkontraktibel und $f$ eine Kettenhomotopieäquivalenz.
+\end{beweis}
 % section 5 (end)
 
 
