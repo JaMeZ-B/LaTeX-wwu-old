@@ -35,7 +35,7 @@
 
 \tableofcontents
 \cleardoubleoddemptypage %sorgt dafür, dass alles folgende erst auf der nächsten freien "rechten" Seite steht
-
+\pagenumbering{arabic}
 
 \section{Einletung und Motivation}
 
@@ -516,7 +516,7 @@ Dann gibt es eine Konstante $c_p\le 2D$, so dass für alle $v\in H_0^{1,p}(\Omeg
 \]
 
 \bet{Beweis:}\\
-Siehe Buch von Dzink.
+Siehe Buch von Dziuk.
 
 \subsubsection{Schwache Formulierung elliptischer Randwertprobleme}
 Wir betrachten zunächst die stationäre Wärmeleitgleichung.
@@ -736,7 +736,7 @@ c\cdot \rho(T)^s \le \abs{\det (\nabla F)}= \abs{\det A} =\frac{\abs{T}}{\abs{T_
 \]
 
 \bet{Beweis:}\\
-Im Buch von Dzink.
+Im Buch von Dziuk.
 
 \ssect{2.46 Definition}{(Zulässige Triangulierung)}
 Sei $\Omega\subset\R^d$ ein Gebiet und 
@@ -749,7 +749,266 @@ $\mathbb{T}_h$ heißt zulässige Triangulierung der Feinheit $h$ und Gute $\rho$
 \]
 wobei $\tilde{T}_j$ Flächen der Simplexe $T_j$ sind.
 Für je zwei $T_1,T_2\in \mathbb{T}_h$ mit $S:=T_1\cap T_2$ gilt $S=\emptyset$ oder $S$ ist $(d-k)$-dim. Seitensimplex von $T_1$ und $T_2$ für ein $k\in \{1\dt{,}d\}$.
-Mit $h:=\max_{j=1\dt{,}m}h(T_j)$ und $\rho := \min_{j=1\dt{,}m}\rho(T_j)$.
+Mit $h:=\max_{j=1\dt{,}m}h(T_j)$ und $\rho := \min_{j=1\dt{,}m}\rho(T_j)$.\\
+
+Zur Definition von Finite Elemente Räumen basierend auf einer Triangulierung $\mathbb{T}_h$ müssen wir nun lediglich lokale Funktionenräume auf dem Simplexen $T\in\mathbb{T}_h$ angeben und festlegen wie solche lokalen Funktionen global zusammengesetzt werden.
+Ein Tripel bestehend aus einem geometrischen Objekt $T$, einer lokalen Basis $\Phi$ und lokalen Freiheitsgraden $\delta$, wollen wir um folgenden \bet{Element} nennen.
+
+\ssect{2.47 Definition}{(lineares simpliziales Lagrange Element)}
+Sei $T\subset\R^d$ ein $d$-dim. Simplex.
+Sei $\delta := \penbrace{a_k~|~k=0\dt{,}d}$ die Menge der Ecken von $T$.
+Dann ist durch Angabe von Werten in den Punkten $a_k\in \delta$ eindeutig eine lineare Funktion $p\in \Pw^1(T)$ definiert.
+Durch $\Phi := \penbrace{\varphi_i~|~\varphi_i(a_k)=\delta_{ik}~i,k=1\dt{,}d}$ ist eine modale Basis von $\Pw^1(T)$ gegeben.
+Wir nennen das Tripel $(T,\Phi,\delta)$ \bet{lineres simpliziales Lagrange Element}.
+Die Basisfunktionen $\varphi_i\in\Phi$ werden \bet{Formfunktionen} oder im Englischen \bet{Shapefunctions} genannt und $\delta$ ist die Menge der \bet{modalen Variablen}.
+Zur Wohldefiniertheit kann man im Buch von Dziuk nachschauen.
+
+\ssect{2.48 Beispiel}{(lineares Lagrange Element für $d=2$)}
+Wir betrachten das Einheitsdreieck $T_0$ mit Eckpunkten $a_0^0=(0,0),a_1^0=(1,0),a_2^0=(0,1)$.
+Die Formfunktionen sind dann gegeben durch
+\[
+\varphi_0^0(x,y)= 1-x-y,~\varphi_1^0(x,y) = x,~\varphi_2^0(x,y) = y.
+\]
+Sind $p(a_0^0),p(a_1^0),p(a_2^0)$ Funktionswerte einer linearen Funktion $p\in\Pw^1(T_0)$, so ist $p$ gegeben durch
+\[
+p(x,y) = \sum_{i=0}^{2} p(a_i^0)\varphi_i^0(x,y).
+\]
+Für ein beliebiges Dreieck $T\subset\R^2$ erhält man das Lagrange Element mit Hilfe der Referenzabbildung $F:T_0\to T$ aus Lemma 2.45.
+
+\ssect{2.49 Bemerkung}{}
+Das Beispiel 2.48 zeigt, dass es ausreicht ein Finites Element auf einer Referenzgeometrie zu definieren.
+Durch die Referenzabbildung erhält man dann die entsprechende Klasse von Elementen auf beliebigen Geometrien im Raum.\\
+
+Ein Finites Element legt lediglich ein lokalen Funktionenraum auf einen Simplex $T$ fest, um zu einem Unterraum von $H^1_0(\Omega)$ zu gelangen, müssen wir zusätzlich festlegen auf welche Weise die lokalen Funktionen global zusammengesetzt werden.
+
+\ssect{2.50 Definition}{(linearer Finite Elemente Raum $S_h^1$)}
+\begin{enumerate}[(1)]
+\item Sei $\Omega\subset\R^d$ und $\mathbb{T}_h$ eine zulässige Triangulierung von $\Omega$.
+Wir definieren den Raum der \bet{linearen Finite Elemente} auf simplizialen Gittern $S_h^1$ durch
+\[
+S_h^1 := \penbrace{v_h\in C^0(\Omega)~|~v_h|_T\in \Pw^1(\Omega),~T\in\mathbb{T}_h}.
+\]
+\item Sind $\bar{a}_j,~j=1\dt{,}N_h$ die Ecken der Triangulierung $\mathbb{T}_h$, so idt eine Funktion $v_h\in S_h^1$ durch die Vorgabe von Funktionswerten in den Ecken $v_h(\bar{a}_j)$ eindeutig definiert.
+Insbesondere gilt $\dim(S_h^1)= \mathcal{N}_h$.
+Eine Basis von $S_h^1$ ist durch die Funktionen
+\[
+\bar{\varphi}_i\in S_h^1,~\bar{\varphi}_i(\bar{a}_j)=\delta_{ij},~i,j=1\dt{,}\mathcal{N}
+\]
+gegeben.
+Diese Basis heißt \bet{Knotenbasis} oder \bet{modale Basis}.
+\item Ist $(T_0,\Phi,\delta)$ das lineare Lagrange Element auf dem Einheitssimplex $T_0$ und $v_h\in S_h^1$ gegeben durch
+\[
+v_h(x):=\sum_{i=1}^{\mathcal{N}_h}v_n(\bar{a}_i)\bar{\varphi}_i(x),
+\]
+so gilt für beliebige Simplexe $T\in \mathbb{T}_h$ mit Ecken $a_0\dt{,}a_d$
+\[
+v_h|_T(x) = \sum_{i=1}^{d}v_h(a_i)\varphi_i^0(T^{-1}(x)),
+\]
+wobei $F:T_0\to T$ die referenzabbildung und $\varphi_i^0\in \Phi$ die Formfunktionen von $T_0$ sind.
+\end{enumerate}
+
+\ssect{2.51 Definition}{(lineares Finite Elemente Verfahren)}
+Sei $\Omega\subset\R^d$ und $\mathbb{T}_h$ zuläassige Triangulierungvon $\Omega$.
+Seien $X:=H_0^1(\Omega)$ und $X_h:= S_{h,0}^1:=S_h^1\cap \penbrace{v\in C^1(\Omega)~|~v=0 \text{ auf }\partial\Omega}$.
+Weiter seien eine stetige und koerzive Bilinearform $b:X\times X\to \R$ und ein $l\in X'$ gegeben.
+Dann ist $X_h\subset X$ ein teilraum und $u_h\in X_h$ heißt Lösung des \bet{linearen Finite Elemente Verfarhens} für das Problem aus 2.34, falls gilt:
+\[
+b(u_h,v_h)= l(v_h) ~\forall v_h\in X_h.
+\]
+
+\ssect{2.52 Satz}{(A priori Fehlerabschätzung)}
+Sei $\Omega\subset\R^d,~d\le 3$ ein Lipschitz-Gebiet und $\mathbb{T}_h$ eine zulässige Triangulierung von $\Omega$ mit $\sigma(T)\le \sigma<\infty,~\sigma\in \R,~\forall T\in \mathbb{T}_h$.
+Seien $X,X_h,b,u_h$ wie in Definition 2.51 und $u\in X$ wie in Definition 2.34.
+Liegt nun $u\in H_2(\Omega)$ so gibt es eine Konstante $c>0,c\in \R$, die nur von $d,\sigma,\Omega$ abhängt, so dass gilt:
+\begin{align}
+\norm{u-u_h}_{H^1(\Omega)}\le ch\abs{u}_{H^2(\Omega)},
+\end{align}
+wobei $\abs{u}_{H^2(\Omega)}:= \norm{D^2u}_{L^2(\Omega)}$.\\
+
+\bet{Beweis:}\\
+Für Poissonproblem siehe Buch von Dziuk.
+
+\ssect{2.53 Bemerkung}{(a priori $\leftrightarrow$ a posteriori Fehlerabschätzung)}
+Satz 2.52 macht eine Aussage über die Konvergenz des linearen FE Verfahrens.
+Da auf der rechten Seite der Ungleichung (2.4) aber der Term $\abs{u}_{H^2(\Omega)}$ auftaucht, ist (2.4) nicht geeignet um den tatsächlichen Wert des Approximationsfehlers abzuschätzen.
+Zu diesem Zweck leitet man A posteriori Fehlerabschätzungen her, bei denen der Fehler ausschließlich durch berechenbare Größen abgeschätzt wird.
+Für eine Übersicht über A posteriori Fehlerabschätzungen für FE Verfahren verweisen wir auf das Buch von Verfürth.
+
+\ssect{2.54 Bemerkung}{}
+Betrachten wir Definition 2.51 des linearen FE Verfahrens, so stellen wir zunächst fest, dass wir in der schwachen Formulierung exakte Integrale bestimmen müssen, was im Allgemeinen nicht realisierbar ist.
+in der Praxis verwendet man Quadraturformeln.
+Ferner schränkt uns Definition 2.51 auf polygonal berandete Gebiete ein.
+Um auch Gebiete mit glattem Rand behandeln zu können , kann man z.B. eine Gebietsapproximation durchführen bei dem alle Ecken auf dem Rand des polygonal berandeten approximierenden Gebiets $\partial\Omega_h$ auch auf $\partial\Omega$ liegen.
+Hier ist dann $X_h$ nicht Teilraum von $X$ und das Lemma von Céa nicht anwendbar.
+Allerdings kann man in beiden Fällen unter gewissen Voraussetzungen zeigen, dass die zusätzlichen Approximationsfehler die Konvergenzordnung des FE Verfahrens nicht beeinflussen.
+Für weitere Details siehe z.B. das Buch von Dziuk oder Brenner und Scott.
+
+\section{Reduzierte Basis Methoden für lineare, koerzive Probleme}
+
+\subsection{Parameterabhängigkeit}
+
+\ssect{3.1 Definition}{(parametrische Formen)}
+Sei $\mathcal{P}\subset \R^d$ eine beschränkte Parametermenge.
+Dann nennen wir 
+\begin{enumerate}[(1)]
+	\item $f:X\times \mathcal{P}\to \R$ eine parametrische stetige Linearform oder ein parametrisches stetiges lineares Funktional, falls $\forall \mu\in\mathcal{P}: f(.,\mu)\in X$.
+	\item Wir nennen $b:X_1\times X_2\times \mathcal{P}\to \R$ eine parametrische stetige koerzive Bilinearform, falls $\forall \mu\in \mathcal{P}: b(.,.,\mu):X_1\times X_2\to \R$ bilinear stetig und koerziv ist. Wir bezeichnen die Stetigkeitskonstante mit $\gamma(\mu)$ und die Koerzivitätskonstante mit $\alpha(\mu)$.
+\end{enumerate}
+
+\ssect{3.2 Bemerkung}{}
+Eine parametrische stetige Bi-/Linearform ist nicht unbedingt stetig bzgl. $\mu$.
+Betrachte dazu das Beispiel $X=\R,\mathcal{P}=[0,1],f:X\times \mathcal{P}\to\R$ mit
+\[
+f(x,\mu):=\left\{\begin{array}{l}x,\text{ falls }\mu<\frac{1}{2}\\ \frac{1}{2}x,\text{ sonst.}  \end{array}\right.
+\]
+
+\ssect{3.3 Defintion}{(Parametrische Beschränktheit, Stetigkeit)}
+\begin{enumerate}[(1)]
+	\item Wir nennen eine parametrische stetige Linearform $f$ beschränkt bzw. Bilinearform$b$ \bet{gleichmäßig beschränkt} bzgl. $\mu$, falls $\gamma_0,\gamma_1\in\R^+$ existieren so dass
+	\[
+	\sup\limits_{\mu\in\mathcal{P}}\norm{f(.,\mu)}_X\le \gamma_0 \text{ bzw. } \sup\limits_{\mu\in\mathcal{P}}\gamma(\mu)\le \gamma_1.
+	\]
+	\item Wir nennen $b$ \bet{glm. koerziv} bzgl. $\mu$, falls ein $\alpha_0>0$ existiert so dass
+	\[
+	\inf\limits_{\mu \in \mathcal{P}} \alpha(\mu)\ge \alpha_0>0.
+	\]
+	\item Wir nennen $f$ bzw. $b$ Lipschitz-stetig bzgl. $\mu$, falls ein $L_f\in \R^+$ bzw. ein $L_b\in \R^+$ existiert, so dass für alle $\mu_1,\mu_2\in\mathcal{P}$ gilt
+	\[
+	\abs{f(u,\mu_1)-f(u,\mu_2)}\le L_f\norm{u}_X\norm{\mu_1-\mu_2} ~\forall  u\in X,
+	\]
+	bzw.
+	\[
+	\abs{b(u,v,\mu_1)-b(u,v,\mu_2)}\le L_b\norm{u}_{X_1}\norm{v}_{X_2}\norm{\mu_1-\mu_2}~\forall u\in X_1,v\in X_2.
+	\]
+\end{enumerate}
+
+\ssect{3.4 Lemma}{(Energienorm)}
+Sei $X$ HR, $b:X\times X\times \mathcal{P}\to \R$ parametrische , koerzive, stetige Bilinearform.
+Dann ist für $\mu\in\mathcal{P}$ durch
+\[
+(((u,v)))_\mu := b_s(u,v;\mu)
+\]
+ein Skalarprodukt auf $X$ und durch
+\[
+|||u|||_\mu := \sqrt{(((u,u)))_\mu}
+\]
+die \bet{Energienorm} definiert.
+Diese ist äquivalent zur $X$-Norm und es gilt
+\[
+\sqrt{\alpha(mu)}\norm{u}_X \le |||u|||_\mu \le \sqrt{\gamma(\mu)}\norm{u}_X ~\forall u\in X.
+\]
+
+\bet{Beweis:}\\
+Skalarprodukt klar wegen Bilinearität, Stetigkeit und Koerzivität.
+Normäquivalenz folgt aus Stetigkeit und Koerzivtät von $b_s$:
+\[
+\alpha(\mu)\norm{v}_X^2\le b_s(v,v;\mu) \le \gamma(\mu) \norm{v}_X^2.
+\]
+
+\ssect{3.5 Definition}{(Parametrische schwache Formulierung; Parametrisches Variationsproblem ($P(\mu)$)}
+Sei $X$ HR, $\mathcal{P}\subset \R^p$ beschränkt, $b: x\times X\times \mathcal{P}\to \R$ parametrische, stetige, koerzive Bilinearform, $f,l:X\times \mathcal{P}\to \R$ parametrische stetige Linearform.
+Zu $\mu \in\mathcal{P}$ bezeichnet $u(\mu)\in X$ die eindeutige Lösung des parametrischen Variationsproblems
+\begin{align}
+b(u(\mu),v;\mu) = f(v,\mu) ~\forall v\in X,
+\end{align}
+mit Ausgabe $s(\mu)=l(u(\mu),\mu)$.
+
+\ssect{3.6 Bemerkung}{}
+Existenz und Eindeutigkeit der Lösung $u(\mu)$ folgen mit dem Satz von Lax Milgram.
+
+\ssect{3.7 Definition}{(schwache Formulierung der parametrischen, stationären Wärmeleitungsgleichung)}
+Seien $\Omega\subset\R^d$ Lipschitz-Gebiet, $\mathcal{P}\subset \R^p$ beschränkt, $q(\mu)\in L^2(\Omega)$ und $\kappa(\mu)\in L^\infty(\Omega)$ mit $0<\kappa_1\le \kappa(\mu)$ für alle $\mu\in\mathcal{P}$ und Konstante $\kappa_1\in \R^+$.
+Dann heißt $u(\mu)\in H_0^{1}(\Omega)$ schwache Formulierung des RWP der parametrischen, stationären WLG aus 1.1, falls gilt
+\[
+\int_{\Omega} \kappa(x;\mu)\nabla u(x;\mu) \nabla v(x)\dint x = \int_{\Omega} q(x,\mu)v(x)\dint x~\forall v\in H_0^1(\Omega).
+\]
+
+\ssect{3.8 Folgerung}{(Existenz und Eindeutigkeit von Lösungen)}
+Unter den Voraussetzungen von Definition 3.7 gibt es für jedes $\mu\in\mathcal{P}$ genau eine schwache Lösung $u(\mu)\in H_0^1(\Omega)$ des RWP der parametrischen, stationären WLG aus 1.1.\\
+
+\bet{Beweis:}\\
+Analog zum Beweis von Satz 2.31.
+
+\ssect{3.9 Definition}{((lineares) FE Verfahren für parametrsiche Variationsprobleme ($P_h(\mu)$)}
+Sei $X$ HR, $\mathcal{P}\in \R^p$ beschränkt, $b:X\times X\times \mathcal{P}\to \R$ parametrische, stetige, koerzive Bilinearform, $f,l:X\times \mathcal{P}\to \R$ parametrische, stetige Linearform.
+Sei ferner $\mathbb{T}_h$ eine zulässige Triangulierung des Rechengebietes $\Omega\subset \R^d$ und $X_h\subset X$ eine zugehöriger (linearer) Finite Elemente Raum, wobei $X_h$ Unterraum von $X$.
+Zu $\mu\in\mathcal{P}$ heißt $u_h(\mu)\in X_h$ Lösung des (linearen) FE Verfahrens für das parametrische Variationsproblem, falls gilt
+\[
+b(u_h(\mu),v_h;\mu) = f(v_h;\mu) ~\forall v_h\in X_h,~ s_h(\mu)= l(u_h(\mu);\mu).
+\]
+
+\ssect{3.10 Bemerkung}{}
+Das Verfahren aus Definition 3.9 ist nach Bemerkung 1.6 ein "hochdimensionales, diskretes" Modell.
+
+\subsection{Reduzierte Basisverfahren}
+
+\ssect{3.11 Definition}{(Reduzierte Basis, Reduzierte Basis Räume)}
+Sei $S_N := \penbrace{\mu^1\dt{,}\mu^N}\subset \mathcal{P}$ eine Menge von Parametern mit (oBdA) linear unabhängigen Lösungen $\penbrace{u(\mu^i)}_{i=1}^N$ von $(P_h(\mu))$.
+Dann ist $X_N := \spann\penbrace{u(\mu^i)}_{i=1}^N$ ein $N$-dimensionaler \bet{Lagrange Reduzierte Basis-Raum}.
+Eine Basis $\Phi_N :=\penbrace{\phi_1\dt{,}\phi_N}\subset X_h$ eines Reduzierte Basis-Raumes ist eine Reduzierte Basis (RB).
+
+\ssect{3.12 Bemerkung}{}
+Es existieren weitere Arten von RB-Räumen.
+Im weiteren Verlauf der Vorlesung werden wir z.B. noch \bet{POD-Räume} kennenlernen.
+Auch die POD-Räume werden aus sogenannten Snapshots, d.h. Lösungen $u_h(\mu^i),~1\le i\le k$ mit $k\gg N$, erzeugt.
+
+\ssect{3.13 Definition}{(RB-Modell $(P_N(\mu))$, symmetrischer Fall)}
+Sei ein Problem $P(\mu)$ und ein diskretes Modell $(P_h(\mu))$ gegeben und zusätzlich gelte $b$ symmetrisch und $f=l$ ("compliant").
+Sei $X_h\subset X$ ein RB-Raum.
+Zu $\mu \in \mathcal{P}$ ist die RB-Lösung $u_N(\mu)\in X_N$ und die RB-Ausgabe $s_N(\mu)\in \R$ gesucht, so dass
+\[
+b(u_N(\mu),v;\mu) = f(v;\mu) ~\forall v\in X_N
+\]
+und 
+\[
+s_N(\mu) = l(u_N(\mu);\mu).
+\]
+
+\ssect{3.14 Bemerkung}{}
+Falls $b$ nicht symmetrisch oder $f\neq l$ ist obiges immer noch sinnvoll, aber es bestehen bessere Möglichkeiten $s_N(\mu)$ mittels eines dualen Problems zu bestimmen.
+
+\ssect{3.15 Bemerkung}{}
+Da $X_N\subset X_h\subset X$, $X_N$ Teilraum von $X_h$, ist das RB-Modell ein Ritz-Galerkin Verfahren.
+
+\ssect{3.16 Folgerung}{(Existenz, Eindeutigkeit, Stabilität, Wohlgestelltheit)}
+ZU $\mu\in\mathcal{P}$ existiert eine eindeutige RB-Lösung $u_N(\mu)\in X_N$ und RB-Ausgabe $S_N(\mu)$ von $(P_N(\mu))$.
+Diese sind beschränkt durch $\norm{u_N(\mu)}_X \le \frac{1}{\alpha(\mu)} \norm{f(.;\mu)}_{X}$ und $\abs{s_N(\mu)}\le \frac{1}{\alpha(\mu)}\norm{f(.;\mu)}_{X'}\norm{l(.;\mu)}_{X'}.$\\
+
+\bet{Beweis:}\\
+Existenz und Eindeutigkeit von $u_N(\mu)$ folgt mit dem Satz von Lax-Milgram, wobei
+\[
+\alpha_N(\mu) := \inf\limits_{u\in X_N} \frac{b(u,u:\mu)}{\norm{u}_X^2} \ge \inf\limits_{u\in X} \frac{b(u,u:\mu)}{\norm{u}_X^2} = \alpha(\mu) > 0.
+\]
+Dann ist auch $s_N(\mu) = l(u_N(\mu);\mu)$ eindeutig und die Stabilität folgt mit
+\[
+\norm{u_N(\mu)}_X = \norm{B^{-1}(\mu) v_f(\mu)}_X \le \norm{B^{-1}(\mu)}_X \norm{v_f(\mu)}_X \le \frac{1}{\alpha(\mu)}\norm{f(.;\mu)}_X.
+\]
+Hierbei ist $B(\mu)$ der eindeutige invertierbare Operator aus dem Satz von Lax-Milgram und $v_f(\mu)$ der Riesz-Repräsentant von $f(.;\mu)\in X_N'$.
+\[
+\abs{s_N(\mu)} = \abs{l(u_N(\mu);\mu)} \le \norm{l(.;\mu)}_{X'}\norm{u_N(\mu)}_X \le \frac{1}{\alpha(\mu)} \norm{f(.;\mu)}_{X'}\norm{l(.;\mu)}_{X'}
+\]
+\hfill $\square$
+
+\ssect{3.17 Folgerung}{(Galerkin-Projektion, Galerkin-Orthogonalität)}
+Zu $\mu\in\mathcal{P},X_h,X_N$ HR mit Energieskalarprodukt $(((.,.)))_\mu,P_\mu:X_h\to X_N$ die orthogonale Projektion aus Satz 2.7, $u_h(\mu),u_N(\mu)$ Lösungen von $(P_h(\mu))$ bzw.$(P_N(\mu))$ und der Fehler $e_N(\mu) = u_h(\mu)-u_N(\mu)$.
+Dann gilt
+\begin{enumerate}[(1)]
+	\item $u_N(\mu) = P_\mu(u_h(\mu))$ "Galerkin-Projektion"
+	\item $(((e_N(\mu),v_N)))_\mu = 0 ~\forall v_N\in X_N$ "Galerkin-Orthogonalität"
+\end{enumerate}
+
+\bet{Beweis:}\\
+Lemma 3.4 impliziert $(X_h, (((.,.)))_\mu)$ HR und $X_N = \spann\{\Phi_i \}_{i=1}^N$ endlichdimensional, also abgeschlossen ist. 
+Daher ist $P_\mu$ nach Satz 2.7 wohldefiniert.\\
+Mit Folgerung 2.8 folgt
+\begin{align*}
+&(((P_\mu(u_h(\mu)-u_h(\mu),\Phi_i)))_\mu = 0,~i=1\dt{,}N\\
+\Leftrightarrow &b(P_\mu(u_h(\mu))-u_h(\mu),\Phi_i; \mu) = 0,~i=1\dt{,}N\\
+\Leftrightarrow &b(P_\mu(u_h(\mu)),\Phi_i; \mu) = b(u_h(\mu),\Phi_i;\mu),~i=1\dt{,}N\\
+\Leftrightarrow &b(P_\mu(u_h(\mu)),\Phi_i; \mu) = f(\Phi_i;\mu),~i=1\dt{,}N\\
+\end{align*}
+Da $u_N(\mu)$ eindeutig folgt $P_\mu(u_n(\mu)) = u_N(\mu)$ daraus folgt (1). (2) folgt entweder aus 2.8 oder Satz 2.39.
+
 
 
 
