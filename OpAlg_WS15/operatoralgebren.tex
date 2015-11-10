@@ -43,7 +43,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	$\sigma(a)$ heißt \Index{Spektrum} von $a$. 
 \end{definition}
 
-\begin{bemerkung}[{name=[Invertierbarkeit von $1 -ab$]}]
+\begin{bemerkung}[{name=[Invertierbarkeit von $1 -ab$]},label=bem:13]
 	Sei $A$ wie oben und $a,b \in A$. Dann gilt
 	\[
 		\ind -ab \in \Inv(A) \iff \ind -ba \in \Inv(A)
@@ -633,11 +633,169 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 		g \enbrace*{f(a)} = g \enbrace*{\beta^{-1}(f)}= \beta^{-1}(g \circ f) = (g \circ f) (a)
 	\]
 	Für $g\in C \enbrace*{\sigma_{C^*(a,\ind)}(a)}$ approximieren wir $g$ gleichmäßig auf $\sigma_{C^*(a,\ind)}(a)$ durch $^*$-Polynome und benutzen die Stetigkeit von $\beta^{-1}$.
-	Es bleibt zu zeigen, dass $\sigma_{C^*(a,\ind)}(a)= \sigma_A(a)$ ist.
+	Es bleibt zu zeigen, dass $\sigma_{C^*(a,\ind)}(a)= \sigma_A(a)$ ist. Offensichtlich gilt $\Inv \enbrace*{C^*(a,\ind_A)} \subseteq  \Inv(A)$ und somit
+	$\sigma_A(a) \subseteq \sigma_{C^*(a,\ind_A)}(a)$. Um zu zeigen, dass auch die andere Inklusion gilt, sei $b \in C^*(a,\ind_A)$ mit $\norm*{b}\le 1$ und $b \in \Inv(A)$.
+	Wir zeigen, dass $b$ normal ist: Es sind $b,b^* \in C^*(a,\ind_A)$ und  $C^*(b,b^{-1})$ ist abelsch, da $(b^{-1})^* = (b^*)^{-1}$ und 
+	\[
+		b(b^*)^{-1} = b(b^*)^{-1} b^{-1} b = b \enbrace*{bb^*}^{-1} b = b(b^*b)^{-1}b = (b^*)^{-1}b
+	\]
+	$\norm*{b^*b} \le 1$ und $\ind - b^*b$ ist selbstadjungiert und $0<\chi(b^*b) \le 1$ für $\chi \in \Omega \enbrace*{C^*(b,b^{-1})}$. Damit ist
+	\[
+		\sigma_{C^*(b,b^{-1})} \enbrace*{\ind - b^*b} \StackText{\ref{satz:117}}{=} \set*{\chi \enbrace*{\ind - b^*b} \given \chi \in \Omega \enbrace*{C^*(b,b^{-1})}} \subseteq 
+		[0,1)
+	\]
+	Da das Spektrum $\sigma_{C^*(b,b^{-1})}(b)$ kompakt ist, folgt $1 > r(\ind - b^*b)= \norm*{\ind -b^*b}$. Es foglt
+	\[
+		(b^*b)^{-1} = \sum_{n=0}^{\infty} (\ind-b^*b)^n \in C^*(b,\ind)
+	\]
+	Damit folgt $b^{-1}=(b^*b)^{-1}b^* \in C^*(b,\ind) \subseteq C^*(a,\ind)$.
+	
+	Wenn $b \in C^*(a,\ind)$ invertierbar in $A$ ist, so ist $b^{-1} \in C^*(a,\ind)$, womit die andere Inklusion $\sigma_{C^*(a,\ind)}(a) \subseteq \sigma_A(a)$ folgt.
 \end{beweis}
 
+\begin{korollar}[label=korr:220]
+	Sei $A \subseteq B$ eine $C^*$-Algebra und $a \in A$. Dann gilt
+	\[
+		\sigma_A(a) \cup \set*{0} = \sigma_B(a) \cup \set*{0}
+	\]
+	\begin{enumerate}[1)]
+		\item Wenn $A$ und $B$ unital sind und $\ind_A=\ind_B$ ist, dann gilt sogar $\sigma_A(a) = \sigma_B(a)$.
+		\item Wenn $A$ nicht unital ist und $B$ unital ist, so ist $0 \in \sigma_A(a) = \sigma_B(a)$. 
+		\item Wenn beide unital sind, die Einselemente aber nicht übereinstimmen, so gilt $\sigma_A(a) \cup \set*{0} = \sigma_B(a)$.
+	\end{enumerate}
+\end{korollar}
+\begin{beweis} \leavevmode
+	\begin{enumerate}[1)]
+		\item Wenn $b$ normal ist, gehen wir genau wie im vorigen Beweis vor. Andernfalls betrachten wir $b^*b \in \Inv(B)$. Dann gilt
+		\[
+			(b^*b)^{-1} b^* = b^{-1} \in A
+		\]
+		\item Betrachte $A^\simm \cong C^*(a,\ind_B) \subseteq B$. Dann gilt
+		\[
+			\sigma_A(a) := \sigma_{A^\simm}(a) \StackText{1)}{=}\sigma_B(a)
+		\]
+		\item Wenn $\ind_A \neq \ind_B$, so gilt für $a \in \Inv(B)$ auch $a^{-1}\in A$. Dann folgt aber $\ind_B = a^{-1}a\in A$. Dies ist ein Widerspruch, also muss 
+		$0 \in \sigma_B(a)$ gelten. Wenn $\lambda \neq 0$, dann gilt $\lambda \ind_A - a \in \Inv(A)$ genau dann, wenn $\lambda \ind_B -a \in \Inv(B)$. Dies sieht man wie folgt:
+		\begin{align}
+			\enbrace*{\lambda \ind_B- a}^{-1} = \enbrace*{\lambda \ind_A -a}^{-1} + \lambda^{-1}\enbrace*{\ind_B-\ind_A}
+		\end{align}
+		Damit ist $\sigma_A(a) \setminus \set*{0} = \sigma_B(a) \setminus \set*{0}$. \qedhere
+	\end{enumerate}
+\end{beweis}
 % section 2 (end)
+\newpage
 
+\section{Positivität} % (fold)
+\label{sec:3}
+
+\begin{definition}[{name=[Positivität]}]
+	Sei $A$ eine $C^*$-Algebra. Ein Element $a \in A$ heißt \Index{positiv} ($a \ge 0$), wenn $a=a^*$ und $\sigma(a) \subseteq [0,\infty)$. Mit $A_+$ bezeichnen wir die Menge der 
+	positiven Elemente. Wenn $b,c \in A_{\sa}$ sind, dann  \todo{Revision 3}
+	\[
+		b \le c :\iff c-b \ge 0
+	\]
+\end{definition}
+
+\begin{bemerkung}
+	\begin{enumerate}[(i)]
+		\item Für $a \in A \subseteq B$ gilt $a \ge 0$ in $A$ genau dann, wenn $a \ge 0$ in $B$ gilt (nach \autoref{korr:220}).
+		\item Für $a \in A = C_=(X)$ ist $a \ge 0$ genau dann, wenn $a(x) \ge 0$ für alle $x \in X$ gilt (nach \autoref{bem217}).
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{proposition}[label=prop:33]
+	Sei $A$ eine $C^*$-Algebra und $a \in A_+$. Dann gibt es ein eindeutiges $b \in  A_+$, sodass $b^2=a$. Wir schreiben $a^{\sfrac{1}{2}}$ für dieses Element $b$.
+\end{proposition}
+\begin{beweis}
+	Ein solches $b \in C^*(a) \subseteq A$ existiert nach dem Funktionalkalkül, da $C^*(a) \cong C_0 \enbrace*{\sigma(a) \setminus \set*{0}}$ via $a \mapsto \id_{\sigma(a)} \ge 0$.
+	Sei $c \in A_+$ ein weiteres Element mit $c^2=a$. Dann gilt $ca=c^3=ac$. Damit ist $C^*(a,c)$ abelsch. Sei $\Omega := \Omega \enbrace*{C^*(a,c)}$. Sei 
+	$\Phi \colon C^*(a,c) \to C_0(\Omega)$ die Gelfandtransformation. Dann sind $\Phi(b)$ und $\Phi(c)$ Quadratwurzeln von $\Phi(a)$. Anders ausgedrückt gilt für alle 
+	$\omega \in \Omega$
+	\[
+		\Phi(b)(\omega)^2 = \Phi(a)(\omega) = \Phi(c)(\omega)^2
+	\]
+	Damit folgt $\Phi(b)(\omega)=\Phi(c)(\omega)$ für alle $\omega$ und somit $\Phi(b)=\Phi(c)$, also $b=c$.
+\end{beweis}
+
+\begin{proposition}[label=prop:34]
+	Sei $a$ eine unitale $C^*$-Algebra, $a \in A_{\sa}$, $t \in \mathbb{R}_+ = [0,\infty)$. Dann gilt
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item Aus $\norm*{a-t}\le t$ folgt $a \ge 0$
+		\item Aus $a \ge 0$ und $\norm*{a}\le t$ folgt $\norm*{a-t}\le t$
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	Wir können annehmen, dass $A=C^*(a,\ind)=C \enbrace*{\sigma(a)}$ gilt.
+	\begin{enumerate}[(i)]
+		\item Es gilt $\sup_{x \in \sigma(a)} \abs*{x-t} = \norm*{a-t} \le t$, woraus $\abs*{x-t} \le t $ für alle $x \in \sigma(a)\subseteq \mathbb{R}$ folgt. Damit folgt
+		$x \ge 0$ für alle $x \in \sigma(a)$, also $a \ge 0$.
+		\item Aus $\norm*{a}\le t$ und $a \ge 0$ folgt $0 \le x \le t$ für alle $x \in \sigma(a)$. Subtrahieren mit $t$ liefert $-t \le x-t \le 0$ für alle $x$, also 
+		$\abs*{x-t}\le t $. Damit folgt wieder $\norm*{a-t}\le t$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{korollar}[label=korr:35]
+	Sei $A$ eine $C^*$-Algebra. Dann ist $A_+$ ein Kegel, das heißt für $a,b \in A_+$ und $\lambda, \mu \in \mathbb{R}_+$ gilt $\lambda \cdot a + \mu \cdot b \in A_+$
+\end{korollar}
+\begin{beweis}
+	Wir dürfen annehmen, dass $A$ unital ist. Dass $\lambda a \ge 0$ und $\mu b  \ge 0$ gilt, ist klar. Wir müssen also nur zeigen, dass aus $a,b\in A_+$ $a+b\in A_+$ folgt. Es gilt
+	\begin{align}
+		\norm*{a- \norm*{a}\cdot \ind_A} \le \norm*{a} \quad \text{ und } \quad \norm*{b- \norm*{b} \cdot \ind_A} 
+	\end{align}
+	nach voriger \autoref{prop:34}(ii). Damit folgt weiter
+	\[
+		\norm*{a+b - \enbrace*{\norm*{a} + \norm*{b}}} \le \norm*{a - \norm*{a}} + \norm*{b - \norm*{b}} \le \norm*{a} + \norm*{b}
+	\]
+	Also ist $a+b \ge 0$ nach \autoref{prop:34}(i). 
+\end{beweis}
+
+\begin{satz}[label=satz:36]
+	Sei $A$ eine $C^*$-Algebra und $a \in A$. Dann gilt $a^*a \ge 0$.
+\end{satz}
+\begin{beweis}
+	Definiere Funktionen $f,g,h \colon \mathbb{R} \to \mathbb{R}$ durch
+	\missingfigure{Graphen der Funktionen}
+	Es gilt $a^*a \in A_{\sa}$, $a^*a = f(a^*a)- g(a^*a)$ und $f(a^*a) g(a^*a)=0$. Für $c=a g(a^*a)$ ergibt sich
+	\begin{align}
+		-c^*c = -g(a^*a) a^*a g(a^*a) = -g(a^*a) \enbrace[\big]{f(a^*a) - g(a^*a)} g(a^*a) = g(a^*a)^3 \in A_+
+	\end{align}
+	Nach \autoref{bem:13} gilt $\sigma(-cc^*) \setminus \set*{0} = \sigma(-c^*c) \setminus \set*{0}$, also $-cc^* \in A_+$. Schreibe nun $c=d + i e$ mit $d,e \in A_\sa$. Dann gilt
+	\begin{align}
+		c^*c+cc^* = 2d^2+ 2e^2
+	\end{align}
+	Also ist $c^*c= 2d^2+2e^2- cc^* \ge 0$. Damit ist $\sigma(c^*c) \subseteq \mathbb{R}_+ \cap \mathbb{R}_- = \set*{0}$. Also ist $\norm*{c}^2= \norm*{c^*c}= r(c^*c)=0$. Damit ist
+	$g(a^*a)^3=0$ und $g(a^*a)=0$ and $a^*a=f(a^*a)\ge 0$.
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine $C^*$-Algebra. Dann gilt
+	\begin{enumerate}[(i)]
+		\item $A_+ = \set*{a^*a \given a \in A}$
+		\item $A = \Span A_+$
+		\item $A_+$ ist ein abgeschlossener Kegel in $A$
+		\item $\le$ ist eine partielle Ordnung auf $A_\sa$
+		\item Für $a,b \in A_\sa$ mit $a \le b$ gilt $cac* \le cbc^*$.
+		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$
+		\item Wenn $A$ unital ist und $a \in A_+ \cap \Inv(A)$, dann folgt aus $a \le b$ stets $b \in \Inv(A)$ und $0 \le b^{-1} \le a^{-1}$.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Folgt aus \autoref{satz:36} und \autoref{prop:33}.
+		\item Wenn $a \in A$ ist, dann können wir $a=b+ic$ mit $b,c \in A_\sa$ schreiben. Definiere $b_+ := f(b)$, $b_- := g(b)$, $c_+ := f(c)$, $c_- := g(c)$. Diese liegen alle in 
+		$A_+$. Dann gilt $b=b_+ - b_-$, $c=c_+ -c_-$ und $a= b_+ -b_- + i (c_+ -c_-) \in \Span A_+$.
+		\item Kegel ist klar. Zur Abgeschlossenheit: Sei $a \in \overline{A}^{\norm*{\cdot }}$. Dann gilt $a=a*$, da $A_\sa$ abgeschlossen ist. Für jedes $\varepsilon>0$ gibt es
+		$b \in A_+$ mit $\norm*{b-a} < \varepsilon$. Dann gilt
+		\begin{align}
+			\norm*{(a+\varepsilon-b) - \varepsilon} \le \varepsilon
+		\end{align}
+		$a+ \varepsilon-b \ge 0$ nach \autoref{prop:34}. Dann ist $a+\varepsilon= a+ \varepsilon -b +b \ge 0$ nach \autoref{korr:35}. Es folgt 
+		$\sigma(a+\varepsilon) \subseteq [0,\infty)$ und damit $\sigma(a) \subseteq [\varepsilon,\infty)$. Lassen wir $\varepsilon$ gegen $0$ gehen, so folgt 
+		$\sigma(a) \subseteq [0,\infty)$. Es folgt $a \ge 0$ und damit $\overline{A_+} =A_+$.
+	\end{enumerate}
+\end{beweis}
+% section 3 (end)
 
 
 
