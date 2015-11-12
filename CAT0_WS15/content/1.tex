@@ -770,11 +770,11 @@ Unser nächstes Ziel ist es zu zeigen, das $\CAT$-Räume kontrahierbar sind.
 
 Der Begriff des Radius ist also mit der Idee eines \textbf{\enquote{Zentrums}} ($c_A \in A$) von $A$ verbunden, welches zwar nicht in $A$ liegen muss, aber die Mitte von $A$ gut beschreibt. Im Allgemeinen muss ein Zentrum nicht existieren, aber bei $\CAT$-Räumen kann man es konstruieren. \label{Zentrum}
 
-\begin{satz}
-\label{satz:1.22}
+\begin{theorem}
+\label{thm:1.22}
 	Sei $X$ ein vollständiger $\CAT$-Raum und $\emptyset \neq A \subseteq X$ beschränkt.
 	Dann gibt es einen eindeutigen Punkt $c_A \in X$, das \Index{Zentrum} von A, sodass $A \subseteq \ol{B_{\rad(A)}(c_A)}$ gilt.
-\end{satz}
+\end{theorem}
 
 \begin{beweis}
 	Seien $q,r \in X$ beliebig und $m \in X$ mit $d(q,m) = d(m,r) = \frac{d(q,r)}{2}$.
@@ -1241,7 +1241,7 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 			&\stack{\Delta\text{-Ungl.}}{\geq} d(y_1,y_2).
 		\end{align*}
 	\end{description}
-	\item[\bewrueck] Nun sei $X$ vollständig, $X$ habe ungefähre Mittelpunkte und erfülle die $\CAT$-Vierpunktbedingung.
+	\item[\bewrueck] Nun sei $X$ vollständig, habe ungefähre Mittelpunkte und erfülle die $\CAT$-Vierpunktbedingung. \marginnote{11.11.15 \\ \ [6]}
 	Zuerst zeigen wir, dass $X$ geodätisch ist.
 	Nach \autoref{lemma:1.35} reicht es zu zeigen, dass $X$ Mittelpunkte hat.
 	Seien $u,v \in X$ beliebig.
@@ -1250,6 +1250,204 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 	Sei $(m_r)_{r \in \NN}$ eine Folge von ungefähren Mittelpunkten mit Fehlerterm $\varepsilon_r := \frac{1}{r}$.
 	Unser Ziel ist es zu zeigen, dass $(m_r)_{r}$ eine Cauchy-Folge ist.
 	Der Grenzwert $m := \lim_{r \rightarrow \infty} m_r$ ist dann ein Mittelpunkt, denn:
+	\begin{align*}
+		d(u,m_r) &\leq \frac{1}{2} d(u,v) + \varepsilon_r \\
+		\xRightarrow{\lim} \quad \lim\limits_{r \rightarrow \infty} d(u,m_r) &\leq \frac{1}{2} d(u,v) \\
+		\xRightarrow{d \text{ stetig}} \quad d(u,m) &\leq \frac{1}{2} d(u,v).
+	\end{align*}
+
+	Ebenso erhalten wir $d(v,m) \leq \frac{1}{2} d(u,v)$ und insgesamt $d(u,m) + d(m,v) \leq d(u,v)$. Es gilt aber auch die Dreiecksungleichung $d(u,m) + d(m,v) \geq d(u,v)$. Folglich erhalten wir Gleichheit
+	\[
+		\Underbrace{d(u,m)}{\leq \frac{1}{2} d(u,v)} + \Underbrace{d(m,v)}{\leq \frac{1}{2} d(u,v)} = d(u,v)
+	\]
+	und damit $d(u,m) = d(m,v) = \frac{1}{2} d(u,v)$.
+	
+	Sei nun $\varepsilon > 0$ und $\delta > 0$ die positive Lösung von $-\varepsilon^2 + 4d^2 + 8r\delta = 0$.
+	Wir definieren $d(u,v) =: 2r$. 
+	Da $(\varepsilon_r)_{r \in \NN}$ eine Nullfolge ist, existiert ein $N \in \NN$, sodass gilt:
+	\begin{equation}
+		\left. \begin{array}{r}
+			d(u,m_r) \\
+			d(v,m_r) \\
+			d(u,m_s) \\
+			d(v,m_s)		
+		\end{array} \right\} \leq r+ \delta \quad \forall r,s \neq N \label{eq:1.38.1}
+	\end{equation}
+	Betrachte das $4$-Tupel $(u,m_r,v,m_s)$ und die Vergleichspunkte $(\ol{u},\ol{m_r},\ol{v},\ol{m_s})$ in $\EE^2$. Sei $\ol{M}$ der Mittelpunkt von $\ol{u}$ und $\ol{v}$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1.5,>=Latex]
+			\draw (0,.8) node{$\mathbf{X}$};
+			\draw [thick] (0,0) node[left]{$u$}
+			to [bend angle=20, bend left] (2,-1) node[below]{$m_s$}
+			to [bend angle=20, bend left] (3,0) node[right]{$v$}
+			to [bend angle=20, bend left] (1,1) node[above]{$m_r$}
+			to [bend angle=20, bend left] cycle;
+			
+			\draw (0,0) -- (3,0);
+			\draw (2,-1) -- (1,1);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1,1) node[fill,circle,inner sep=1pt]{};
+			\draw (2,-1) node[fill,circle,inner sep=1pt]{};
+		\end{tikzpicture} \hspace{1cm}
+		\begin{tikzpicture}[scale=1.5,>=Latex]
+			\draw (0,.8) node{$\mathbf{\EE^2}$};
+			\draw [thick] (0,0) node[left]{$\ol{u}$}
+			to (2,-1) node[below]{$\ol{m_s}$}
+			to (3,0) node[right]{$\ol{v}$}
+			to (1,1) node[above]{$\ol{m_r}$}
+			to cycle;
+			
+			\draw (0,0) to coordinate[pos=.45] (M) (3,0);
+			\draw (2,-1) -- (1,1);
+			
+			\draw (M) node[below,color=red]{$\ol{M}$};
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw (1,1) node[fill,circle,inner sep=1pt]{};
+			\draw (2,-1) node[fill,circle,inner sep=1pt]{};
+			\draw (M) node[fill,circle,inner sep=1pt,red]{};
+		\end{tikzpicture}
+	\end{figure}
+	Nach Voraussetzung erfüllt $X$ die $\CAT$-Vierpunktbedingung, also gilt
+	\begin{equation}
+		\left. \begin{array}{rcl}
+			d(u,v) & \leq & d_2(\ol{u},\ol{v}) \\
+			d(m_r,m_s) & \leq & d_2(\ol{m_r},\ol{m_s})
+		\end{array} \right\} \label{eq:1.38.2}
+	\end{equation}
+	Aus der Parallelogrammgleichung für $\EE^2$ kann man folgern (siehe Beweis zu \autoref{thm:1.22}):
+	\begin{equation}
+		d_2(\ol{m_r},\ol{M})^2 = \frac{1}{2} d_2 (\ol{u}, \ol{m_r})^2 + \frac{1}{2} d_2 (\ol{m_r},\ol{v})^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2 \label{eq:1.38.3}
+	\end{equation}
+	Analoges erhalten wir für $d_2(\ol{m_s},\ol{M})^2$.
+	Nun erhalten wir
+	\begin{align*}
+		d(m_r,m_s) &\stack{\eqref{eq:1.38.2}}{\leq} d_2(\ol{m_r},\ol{m_s}) \\
+		&\stack{\Delta-\text{Ungl.}}{\leq} d_2(\ol{m_r},\ol{M}) + d_2(\ol{M},\ol{m_s}) \\
+		&\stack{\eqref{eq:1.38.3}}{=} \sqrt{\frac{1}{2} d_2(\ol{u},\ol{m_r})^2 + \frac{1}{2} d_2(\ol{m_r},\ol{v})^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2}
+		+ \sqrt{\frac{1}{2} d_2(\ol{u},\ol{m_s})^2 + \frac{1}{2} d_2(\ol{m_s},\ol{v})^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2} \\
+		&\stack{}{=} \sqrt{\frac{1}{2} d(u,m_r)^2 + \frac{1}{2} d(m_r,v)^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2}
+		+ \sqrt{\frac{1}{2} d(u,m_s)^2 + \frac{1}{2} d(m_s,v)^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2} \\
+		&\stack{\eqref{eq:1.38.1}}{\leq} 2 \cdot \sqrt{(r+\delta)^2 - \frac{1}{4} d_2(\ol{u},\ol{v})^2} \qquad \forall r,s \geq N \\
+		&\stack{\eqref{eq:1.38.2}}{\leq} 2 \cdot \sqrt{(r+\delta)^2 - \frac{1}{4} d(u,v)^2} \qquad \forall r,s \geq N \\
+		&\stack{}{=} 2 \cdot \sqrt{r^2 + 2r \delta + \delta^2 - r^2} = \varepsilon \qquad \forall r,s \geq N
+	\end{align*}
+	Somit ist $(m_r)_r$ eine Cauchy-Folge.
+	
+	Sei $\Delta(x,y,z,\alpha,\beta,\gamma)$ ein geodätisches Dreieck in $X$.
+	Wir betrachten die Bedingung aus \autoref{lemma:1.37}. Sei $p := \beta(s) \in \im(\beta \colon y \geo z)$ beliebig.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1]
+		\draw (0,1) node[fill,circle,inner sep=1pt]{}
+		to [bend angle=20, bend left] (3,0) node[fill,circle,inner sep=1pt]{} 
+		to [bend angle=20, bend left] coordinate[pos=.66] (M) (2,3) node[fill,circle,inner sep=1pt]{}
+		to [bend angle=20, bend left] cycle;
+		\draw (0,1) node[below]{$x$};
+		\draw (3,0) node[right]{$y$};
+		\draw (2,3) node[above]{$z$};
+		\draw (M) node[fill,circle,inner sep=1pt,color=red]{};
+		\draw (M) node[right,color=red]{$p$};
+		\draw[color=red, dashed] (0,1) -- (M);
+		\draw (0,3) node[right]{$\mathbf{X}$};
+		\end{tikzpicture} \hspace{2cm}
+		\begin{tikzpicture}[scale=1]
+		\draw (0,1) node[fill,circle,inner sep=1pt]{}
+		to (3,0) node[fill,circle,inner sep=1pt]{} 
+		to (3,2) node[fill,circle,inner sep=1pt,color=red]{} 
+		to (2,3) node[fill,circle,inner sep=1pt]{}
+		to cycle;
+		\draw (0,1) node[below]{$\ol{x}$};
+		\draw (3,0) node[right]{$\ol{y}$};
+		\draw (2,3) node[above]{$\ol{z}$};
+		\draw (3,2) node[right,color=red,xshift=-.2]{$\ol{p}$};
+		\draw[color=red, dashed] (0,1) -- (3,2);
+		\draw (0,3) node[right]{$\mathbf{\EE^2}$};
+		\draw [dashed] (2,3) -- (3,0);
+		\end{tikzpicture}	
+	\end{figure}
+	Zu den Punkten $(x,y,p,z)$ betrachten wir die Vergleichspunkte $(\ol{x},\ol{y},\ol{p},\ol{z})$. Es gilt
+	\begin{equation}
+		d(x,p) \leq d_2(\ol{x},\ol{p}) \quad \text{und} \quad d(z,y) \leq d_2(\ol{z},\ol{y}) \label{eq:1.38.4}
+	\end{equation}
+	Wir zeigen, dass $(\ol{x},\ol{y},\ol{p},\ol{z})$ ein Vergleichsdreieck ist, also dass $\ol{p}$ auf der Geodäte $\ol{\beta}\colon \ol{y} \geo \ol{z}$ liegt. Es gilt
+	\[
+		d_2(\ol{y},\ol{z}) \stack{\eqref{eq:1.38.4}}{\geq} d(y,z) = d(y,p) + d(p,z) = d_2(\ol{y},\ol{p}) + d_2(\ol{p},\ol{z})
+	\]
+	und
+	\[
+		d_2(\ol{y},\ol{z} \stack{\Delta-\text{Ungl.}}{\leq} d_2(\ol{y},\ol{p}) + d_2(\ol{p},\ol{z}).
+	\]
+	Folglich liegt $\ol{p}$ auf der Geodäte $\ol{\beta}$, das heißt wir haben ein Vergleichsdreieck. \qedhere
 	\end{description}
+\end{beweis}
+
+\begin{theorem}
+\label{thm:1.39}
+	Die metrische Vervollständigung eines $\CAT$-Raumes ist ein $\CAT$-Raum.
+\end{theorem}
+
+\begin{beweis}
+	Sei $X$ ein $\CAT$-Raum mit Vervollständigung $\widehat{X}$.
+	Wir zeigen, dass die Bedingung aus \autoref{thm:1.38} erfüllt sind.
+	Zuerst zeugen wir, dass $\widehat{X}$ ungefähre Mittelpunkte hat.
+	Seien $p,q \in \widehat{X}, \varepsilon >0$. Wähle $p',q' \in X$ mit
+	\begin{equation}
+		d(p,p') < \frac{\varepsilon}{2} \quad \text{und} \quad d(q,q') < \frac{\varepsilon}{2} \label{eq:1.39.1}
+	\end{equation}
+	und $m' \in X$ als Mittelpunkt von $p'$ und $q'$. Sei $r = d(p,q)$ und $r' = d(p',q')$.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1.5,>=Latex]
+			\draw [<->,thick] (0,2) node[left]{$p$} -- (4,2) node[right]{$q$};
+			\draw [<->,thick] (0.5,0) node[anchor=north east]{$p'$} -- (2,0) node[anchor=north]{$m'$};
+			\draw [<->,thick] (2,0) -- (3.5,0) node[anchor=north west]{$q'$};
+			\draw [<->,thick] (0.5,0) -- (0,2);
+			\draw [<->,thick] (3.5,0) -- (4,2);
+			
+			\draw (0.5,0) node[fill,circle,inner sep=2pt]{};
+			\draw (2,0) node[fill,circle,inner sep=2pt]{};
+			\draw (3.5,0) node[fill,circle,inner sep=2pt]{};
+			\draw (0,2) node[fill,circle,inner sep=2pt]{};
+			\draw (4,2) node[fill,circle,inner sep=2pt]{};
+			
+			\draw (1.25,0) node[above]{$\dfrac{r'}{2}$};
+			\draw (2.75,0) node[above]{$\dfrac{r'}{2}$};
+			\draw (0.25,1) node[right]{$\dfrac{\varepsilon}{2}$};
+			\draw (3.75,1) node[left]{$\dfrac{\varepsilon}{2}$};
+			\draw (2,2) node[below]{$r$};
+		\end{tikzpicture}
+	\end{figure}
+	
+	Wir erhalten mit $r' = d(p',q') \leq d(p',p) + d(p,q) + d(q,q') \leq \varepsilon + r$:
+	\begin{align*}
+		d(p,m') &\stack{\Delta\text{-Ungl.}}{\leq} d(p,p') + d(p',m') \\
+		&\stack{\eqref{eq:1.39.1}}{\leq} \frac{\varepsilon}{2} + \frac{r'}{2} \\
+		&\stack{}{\leq} \frac{\varepsilon}{2} + \frac{\varepsilon}{2} + \frac{r}{2} = \frac{r}{2} + \varepsilon.
+	\end{align*}
+	
+	und ebenso $d(q,m') \leq \frac{r}{2} + \varepsilon$, das heißt $\widehat{X}$ hat ungefähre Mittelpunkte.
+	
+	Sei jetzt $(x_1,y_1,x_2,y_2) \in \widehat{X}^4$. Wähle Folgen in $X$ mit
+	\[
+		x_1(n) \rightarrow x_1 \qquad y_1(n) \rightarrow y_1 \qquad x_2(n) \rightarrow x_2 \qquad y_2(n) \rightarrow y_2
+	\]
+	und $\CAT$-Vierpunkt-Vergleichspunkte $\ol{x_1(n)}, \ol{y_1(n)}, \ol{x_2(n)}, \ol{y_2(n)}$ in $\EE^2$. Ohne Einschränkung sei $\ol{x_1(n)} = 0$ für alle $n \in \NN$. Die Folge $(\ol{x_1(n)}, \ol{y_1(n)}, \ol{x_2(n)}, \ol{y_2(n)})$ hat einen Häufungspunkt in $(\EE^2)^4$, weil sie beschränkt ist. Wir dürfen ohne Einschränkung annehmen, dass wir Konvergenz haben, das heißt
+	\[
+		\lim\limits_{n \rightarrow \infty} (\ol{x_1(n)}, \ol{y_1(n)}, \ol{x_2(n)}, \ol{y_2(n)}) = (0,\ol{y_1},\ol{x_1},\ol{x_2}).
+	\]
+	Dann folgt:
+	\begin{align*}
+		d(x_i,y_j) &\stack{}{=} d\enbrace*{\lim\limits_{n} x_i(n), \lim\limits_n y_j(n)} \\
+		&\stack{d\text{ stetig}}{=} \lim\limits_{n} d(x_i(n),y_j(n)) \\
+		&\stack{}{=} \lim\limits_{n} d_2(\ol{x_i(n)},\ol{y_j(n)}) \\
+		&\stack{d_2\text{ stetig}}{=} d_2(\ol{x_i},\ol{y_j})
+	\end{align*}
+	Ebenso haben wir $d(x_1,x_2) \leq d_2(\ol{x_1},\ol{x_2})$ und $d(y_1,y_2) \leq d_2(\ol{y_1},\ol{y_2})$. \qedhere
 \end{beweis}
 \cleardoubleoddemptypage
