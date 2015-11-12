@@ -425,7 +425,7 @@
 \end{definition}
 
 \begin{bemerkung}
-	Wir schreiben auch $\sigma|_{\benbrace*{0,\ldots , i\hspace{-3.5pt}/, \ldots ,n}}$ für die $i$-te Seite von $\sigma$.
+	Wir schreiben auch $\sigma|_{\benbrace*{0,\ldots , \slashedi, \ldots ,n}}$ für die $i$-te Seite von $\sigma$.
 \end{bemerkung}
 
 \begin{definition}[label=sec3:def_cup,{name=[$\cup$-Produkt]}]
@@ -851,7 +851,7 @@
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	Die Implikation (i) $\Rightarrow$ (ii) ist klar (siehe Topologie \RM{1}.) Die zweite Implikation besprechen wir später.\todo{Verweis hinzufügen, wenn da}
+	Die Implikation (i) $\Rightarrow$ (ii) ist klar (siehe Topologie \RM{1}.) Die zweite Implikation besprechen wir später (siehe Seite~\pageref{bew:satz5}).
 \end{beweis}
 
 \begin{definition}[{name=[Kegel und Einhängung]}]
@@ -909,11 +909,113 @@
 	eine Kettenkontraktion für $\Keg(f)$.
 \end{beweis}
 
-\begin{beweis}[von \autoref{satz:5:kettenhomotopie} zweite Implikation]
+\begin{beweis}[von \autoref{satz:5:kettenhomotopie} zweite Implikation,label=bew:satz5]
 	Ist $H_n(f)$ ein Isomorphismus, so ist $\Keg(f)$ azyklisch. Die direkte Summen von projektiven Moduln ist wieder projektiv sind, sind die Kettenabbildungen von $\Keg(f)$
 	projektiv, falls die von $C_*$ und $D_*$ projektiv sind. Daher ist $\Keg(f)$ kettenkontraktibel und $f$ eine Kettenhomotopieäquivalenz.
 \end{beweis}
+
+\begin{korollarB}
+	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Dann ist die Inklusion $C^{\mathcal{U}}_*(X,A) \to C_*(X,A)$ eine Kettenhomotopieäquivalenz.
+\end{korollarB}
+
+\begin{korollar}
+	Singuläre Kohomologie erfüllt das Ausschneidungsaxiom.
+\end{korollar}
+\begin{beweis}
+	Für eine offene Überdeckung $\mathcal{U}$ von $X$ sei $C^*_{\mathcal{U}}(X,A;V) := \Hom \enbrace*{C_*^{\mathcal{U}}(X,A),V}$. Da die Inklusion $i \colon C^{\mathcal{U}}_*(X,A) \to C_*(X;A)$ 
+	eine Kettenhomotopieäquivalenz ist, ist auch $i^* \colon C^*(X,A;V) \to C^*_{\mathcal{U}}(X,A;V)$ eine Kokettenhomotopieäquivalenz. Nun genauso wie für Homologie.
+\end{beweis}
 % section 5 (end)
+\newpage
+
+\section{Das $\cap$-Produkt und die Poincaré-Dualitätsabbildung} % (fold)
+\label{sec:6}
+
+\begin{definition}[{name=[Cap-Produkt]}]
+	Sei $X$ ein topologischer Raum und $R$ ein kommutativer Ring. Wir definieren das \bet{Cap-Produkt} ($\cap$-Produkt)\index{Cap-Produkt, $\cap$-Produkt}
+	\[
+		\cap \colon C^p(X;R) \otimes_R C_{p+q}(X;R) \longrightarrow C_q(X;R)
+	\]
+	durch $\alpha \cap \sigma := (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} \sigma|_{\benbrace*{0,\ldots ,p}}$ für $\alpha \in C^p(X;R)$ und 
+	$\sigma \colon \abs{\Delta^{p+q}}\to X$.
+\end{definition}
+
+\begin{lemma}[{name=[Produktregel für das Cap-Produkt]}]
+	Es gilt $d_q(\alpha \cap \sigma) = d^p \alpha \cap \sigma + (-1)^p \alpha \cap d_{p+q} \sigma$
+\end{lemma}
+\begin{beweis}
+	Sei $n := p+q$. Dann gilt
+	\begin{align}
+		d_q(\alpha \cap \sigma) &= (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} d_q \sigma|_{\benbrace*{0,\ldots ,p}} \\
+		&= \sum_{i=0}^{q} (-1)^{pq+i}  \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} \sigma|_{\benbrace*{0, \ldots ,\slashedi,\ldots ,q}} 
+	\end{align}
+	Weiter ist 
+	\begin{align}
+		d^p(\alpha) \cap \sigma &= (-1)^{(p+1)(q-1)} \cdot (d^p \alpha) \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,q-1}} \\
+		&= \Underbrace{(-1)^{pq+p+q+1+1+p}}{=(-1)^{pq+q}} \cdot \alpha \enbrace*{ d_{p-1} \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}} \\
+		&= \sum_{i=q-1}^{n} (-1)^{pq+q+i+(q+1)} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots ,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}
+	\end{align}
+	und
+	\begin{align}
+		\alpha \cap d_{p+q}(\sigma) &= \sum_{i=0}^{n} (-1)^i \alpha \cap \sigma |_{\benbrace*{0, \ldots , \slashedi,\ldots ,n}} \\
+		&= \sum_{i=0}^{q-1} (-1)^{i+p(q-1)} \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots , \slashedi,\ldots ,q}}\\
+		&\hspace{1em}+ \sum_{i=q}^{n} (-1)^{i+p(q-1)} \alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}
+	\end{align}
+	Die Vorzeichen werden schon passen \ldots 
+\end{beweis}
+
+\begin{lemma}
+	Sei $A \subseteq X$. Das $\cap$-Produkt auf $C^*$ induziert folgende $\cap$-Produkte in $H^*$
+	\[
+		\begin{tikzcd}[row sep=0em]
+			\minwidthbox{H^p(X;R) \otimes_R H_n(X;R)}{4.2cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
+			\minwidthbox{H^p(X,A;R) \otimes_R H_n(X,A;R)}{4.2cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
+			\minwidthbox{\hfill H^p(X;R) \otimes_R H_n(X,A;R)}{4.2cm} \rar & \minwidthbox{H_q(X,A;R)}{2cm}
+		\end{tikzcd}
+	\]
+\end{lemma}
+\begin{beweis}
+	Genauso wie beim $\cup$-Produkt.
+\end{beweis}
+
+\begin{bemerkung} \leavevmode
+	\begin{itemize}
+		\item Sind $A,B \subseteq X$ offen, so erhalten wir auch ein $\cap$-Produkt
+		\[
+			H^p(X,A;R) \otimes_R H_n(X,A\cup B;R) \longrightarrow H_q(X,B;R)
+		\]
+		\item Sei $\epsilon \colon H_0(X;R) \to R$ die \Index{Augmentation}, also $\epsilon \enbrace*{\sum_{i}r_i \sigma_i} = \sum_i r_i$. Dann ist 
+		\[
+			\epsilon \enbrace*{\xi \cap x} = \xi(x)
+		\]
+		für $\xi \in H^p(X;R)$ und $x \in H_p(X;R)$.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{lemma}
+	Für $f \colon X \to Y$ stetig gilt $\xi \cap f_*(x) = f_* \enbrace*{f^* \xi \cap x}$ für $\xi \in H^p(X;R)$ und $x \in H_{p+q}(X;R)$.
+\end{lemma}
+
+\begin{lemma}
+	Für $\xi \in H^p(X;R)$ und $\eta \in H^q(X;R)$, $x \in H_{p+q+r}(X;R)$ gilt 
+	\[
+		\enbrace*{\xi \cup \eta} \cap x = \xi \cap \enbrace*{\eta \cap x}
+	\]
+\end{lemma}
+\begin{beweis}
+	Sei $\alpha \in C^p(X)$, $\beta \in C^q(X)$ und $\sigma \colon \abs{\Delta^{p+q+r}}\to X$ ist
+	\begin{align}
+		\enbrace*{\alpha \cup \beta} \cap \sigma &= (-1)^{(p+q)r} \cdot (\alpha \cup \beta)\enbrace*{\sigma|_{\benbrace*{r,\ldots ,n}}}   \sigma|_{\benbrace*{0,\ldots ,r}} \\
+		&= (-1)^{pr+qr+pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots ,r+p}}} \beta \enbrace*{\sigma|_{\benbrace*{r+q,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,r}}
+	\end{align}
+	Für die andere Seite der Formel gilt
+	\begin{align}
+		\alpha \cap (\beta \cap \sigma) &= (-1)^{q(r+p)} \cdot \alpha \cap \enbrace[\Big]{\beta \enbrace*{\sigma|_{\benbrace*{r+q,\ldots ,n}}} \sigma|_{0,\ldots ,r+p}} \\
+		&= (-1)^{qr+qp+rp} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots,r+p}}} \beta \enbrace*{\sigma|_{\benbrace*{r+p,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,r}}
+	\end{align}
+	Damit folgt die Gleichheit.
+\end{beweis}
+% section 6 (end)
 
 
 
