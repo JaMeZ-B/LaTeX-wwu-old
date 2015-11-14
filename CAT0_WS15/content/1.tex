@@ -133,7 +133,10 @@ Ist $v = \gamma(s)$ für ein $s$, so heißt $\ol{v} = \ol{\gamma}(s)$ \Index{Ver
 \label{def:1.7}
 	\mbox{} \\[-1.4cm]
 	\begin{enumerate}[(i)]
-		\item Ein Dreieck $\Delta$ in $(X,d)$ hat die \textbf{CAT(0)-Eigenschaft}, wenn für alle $n,m$ auf den Seiten von $\Delta$ und ihre Vergleichspunkte $\ol{n},\ol{m}$ auf den Seiten von $\ol{\Delta}$. \index{CAT(0)-Raum@$\CAT$-Raum}
+		\item Ein Dreieck $\Delta$ in $(X,d)$ hat die \textbf{CAT(0)-Eigenschaft}, wenn für alle $n,m$ auf den Seiten von $\Delta$ und ihre Vergleichspunkte $\ol{n},\ol{m}$ auf den Seiten von $\ol{\Delta}$ gilt: \index{CAT(0)-Raum@$\CAT$-Raum}
+		\[
+			d(n,m) \leq d_2(\ol{n},\ol{m})
+		\]
 		\item Ein metrischer Raum $(X,d)$ ist ein \textbf{CAT(0)-Raum}, wenn $(X,d)$ geodätisch ist und alle seine Dreiecke die $\CAT$-Eigenschaft erfüllen.
 		\item Ein metrischer Raum $(X,d)$ heißt \textbf{lokal CAT(0)}, wenn für alle $x \in X$ ein $r_x > 0$ existiert, sodass
 		\[
@@ -238,7 +241,7 @@ Ist $v = \gamma(s)$ für ein $s$, so heißt $\ol{v} = \ol{\gamma}(s)$ \Index{Ver
 	Seien $p$ und $p'$ zwei Punkte auf $\gamma$ und $\gamma'$ mit $d(x,p) = d(x,p')$.
 	Das Vergleichsdreieck $\ol{\Delta}$ zum Dreieck
 	\[
-		\Delta = \Delta\enbrace*{x,p,y\gamma \big|_{[0,d(x,p)]}, \gamma \big|_{[d(x,p),d(x,y)]},\gamma'}
+		\Delta = \Delta\enbrace*{x,p,y,\gamma \big|_{[0,d(x,p)]}, \gamma \big|_{[d(x,p),d(x,y)]},\gamma'}
 	\]
 	ist degeneriert:
 	\begin{figure}[h]
@@ -469,7 +472,7 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 			d(x,\pi_C(x)) = \inf_{p \in C} d(x,p) =: d(x,C).
 		\]
 		Die Abbildung $\pi_C \colon X \rightarrow C$ heißt die \textbf{(orthogonale) Projektion} auf $C$. \index{orthogonale Projektion}
-		\item Ist $y \in [X, \pi_C(x)] = \im(\gamma \colon x \geo \pi_C(x))$, so ist $\pi_C(y) = \pi_C(x)$.
+		\item Ist $y \in [x, \pi_C(x)] = \im(\gamma \colon x \geo \pi_C(x))$, so ist $\pi_C(y) = \pi_C(x)$.
 		\begin{figure}[h]
 			\centering
 		\begin{tikzpicture}[scale=.5]
@@ -494,7 +497,7 @@ Für den Beweis brauchen wir eine metrische Charakterisierung von Prähilberträ
 	\mbox{}\\[-.85cm]
 	\begin{enumerate}[(i)]
 		\item Sei $(y_n)_{n \in \NN} \subseteq C$ eine Folge mit $d(x,y_n) \rightarrow d(x,C) =: D$.
-		Zeil ist es zu zeigen, dass $(y_n)_n$ eine Cauchy-Folge ist.
+		Ziel ist es zu zeigen, dass $(y_n)_n$ eine Cauchy-Folge ist.
 		Da $C$ vollständig ist, ist die Folge $(y_n)_n$ konvergent in $C$ und wir können $\pi_C(x) := \lim\limits_{n \rightarrow \infty} y_n$ definieren.
 		
 		Zur Eindeutigkeit von $\pi_C(x)$: Angenommen, es existiert ein $\pi_C(x') \in C$ mit $\pi_C(x)' \neq \pi_C(x)$ und $d(x,\pi_C(x)') = d(x,C)$. Betrachte die Folge
@@ -875,7 +878,7 @@ Der Begriff des Radius ist also mit der Idee eines \textbf{\enquote{Zentrums}} (
 	Sei $g \in G$ beliebig.
 	Es gilt:
 	\begin{align*}
-		\rad(A) &\stack{}{=} \rad(c_A,A) \stack{\text{Def}}{=} \sup_{a \in A}\{ d(c_A,A)\} \\
+		\rad(A) &\stack{}{=} \rad(c_A,A) \stack{\text{Def}}{=} \sup_{a \in A}\{ d(c_A,a)\} \\
 		&\stack{\Phi(g) \text{ isom.}}{=} \sup_{a \in A} \{d(\Phi(g)(c_A),\Phi(g)(a))\} \\
 		&\stack{\Phi(g)(A)=A}{=} \sup_{a \in A} \{d(\Phi(g)(c_A),a)\} \stack{\text{Def}}{=} \rad(\Phi(g)(c_A),A) \\
 		\xRightarrow{c_A \text{ eind.}} c_A &\stack{}{=} \Phi(g)(c_A) \quad \xRightarrow{g \text{ bel.}} c_A \in \Fix_\Phi(G) \qedhere
@@ -933,7 +936,7 @@ Der Begriff des Radius ist also mit der Idee eines \textbf{\enquote{Zentrums}} (
 		\Gamma_i \subseteq G \text{ mit } \Gamma_i = \{g \in G : \Phi(g)(B_{\varepsilon_i}(x_i)) \cap B_{\varepsilon_i}(x_i) \neq \emptyset \}
 	\]
 	endlich sind.
-	Dann ist $\Sigma := \bigcup_{i = 1}^n$ endlich.
+	Dann ist $\Sigma := \bigcup_{i = 1}^n \Gamma_i$ endlich.
 	
 	Sei nun $x \in X$ beliebig.
 	Wir betrachten die Stabilisatorgruppe $G_x := \{g \in G : \Phi(g)(x) = x\}$ von $x$.
@@ -1017,8 +1020,8 @@ Man beachte, dass Mittelpunkte nicht eindeutig sein müssen. Zum Beispiel haben 
 		\[
 			d(x_1,y_1) = d_2(\ol{x_1},\ol{y_1}), \quad
 			d(x_2,y_2) = d_2(\ol{x_2},\ol{y_2}), \quad
-			d(x_1,x_2) = d_2(\ol{x_1},\ol{x_2}), \quad
-			d(y_1,y_2) = d_2(\ol{y_1},\ol{y_2}).
+			d(x_1,x_2) \leq d_2(\ol{x_1},\ol{x_2}), \quad
+			d(y_1,y_2) \leq d_2(\ol{y_1},\ol{y_2}).
 		\]
 	\end{enumerate}
 \end{definition}
@@ -1097,7 +1100,7 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 
 \begin{theorem}
 \label{thm:1.38}
-	Ein vollständiger metrischer Raum ist $\CAT$ genau dann, wenn er er ungefähre Mittelpunkte hat und die $\CAT$-Vierpunktbedingung erfüllt.
+	Ein vollständiger metrischer Raum ist $\CAT$ genau dann, wenn er ungefähre Mittelpunkte hat und die $\CAT$-Vierpunktbedingung erfüllt.
 \end{theorem}	
 
 \begin{beweis}
@@ -1152,6 +1155,8 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 			\end{tikzpicture}
 		\end{figure} 
 		
+		Definiere $\ol{m}$ als Schnittpunkt der beiden Diagonalen in $\EE^2$ und sei $t$ so, dass $\ol{\alpha}(t) = \ol{m}$ für $\ol{\alpha}\colon \ol{x_1} \geo \ol{x_2}$. Setze dann $m := \alpha(t)$.
+		
 		Da $X$ $\CAT$ ist, gilt $d(y_2,m) \leq d_2(\ol{y_2},\ol{m})$ sowie $d(y_1,m) \leq d_2(\ol{y_1},\ol{m})$.
 		Da $\ol{m}$ auf der Geodäte zwischen $\ol{y_1}$ und $\ol{y_2}$ liegt, erhalten wir insgesamt:
 		\begin{align*}
@@ -1164,26 +1169,23 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 			\centering
 			\begin{tikzpicture}
 			\draw (0,2) node{$\mathbf{X}$};
-			\draw [thick] (0,0) node[anchor=north east]{$y_2$}
-			to [bend angle=20, bend left] (3,0) node[anchor=north west]{$x_2$}
-			to [bend angle=20, bend left] (4,2) node[anchor=south west]{$y_1$}
-			to [bend angle=20, bend left] (1,2) node[anchor=south east]{$x_1$}
+			\draw [thick] (0.5,0.5) node[anchor=north east]{$y_2$}
+			to [bend angle=20, bend left] coordinate[pos=.5] (X) (3,1) node[anchor=north west]{$y_1$}
+			to [bend angle=20, bend left] (1,2) node[anchor=south west]{$x_1$}
 			to [bend angle=20, bend left] cycle;
 			
-			\draw [dashed, thick] (0,0) -- (4,2);
-			\draw [dashed, thick] (1,2) -- (3,0);
+			\draw [dashed, thick] (X) -- (1,2);
+			\draw (X) node[below]{$x_2$};
 			
-			\draw (0,0) node[fill,circle,inner sep=1pt]{};
-			\draw (3,0) node[fill,circle,inner sep=1pt]{};
+			
+			\draw (0.5,0.5) node[fill,circle,inner sep=1pt]{};
+			\draw (X) node[fill,circle,inner sep=1pt]{};
 			\draw (1,2) node[fill,circle,inner sep=1pt]{};
-			\draw (4,2) node[fill,circle,inner sep=1pt]{};
-			
-			\draw (2,1) node[fill,circle,inner sep=1pt,color=red]{};
-			\draw (2,1) node[below,color=red]{$m$};
+			\draw (3,1) node[fill,circle,inner sep=1pt]{};	
 			\end{tikzpicture} \hspace{1.5cm}
 			\begin{tikzpicture}
 			\draw (0,2) node{$\mathbf{\EE^2}$};
-			\draw [thick] (0,0) node[anchor=north east]{$\ol{y_2}$}
+			\draw [thick] (0.5,0.5) node[anchor=north east]{$\ol{y_2}$}
 			to (1.5,1) node[anchor=north west]{$\ol{x_2}$}
 			to (3,1) node[anchor=south west]{$\ol{y_1}$}
 			to (1,2) node[anchor=south east]{$\ol{x_1}$}
@@ -1191,13 +1193,10 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 			
 			\draw [dashed, thick] (1,2) -- (1.5,1);
 			
-			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (0.5,0.5) node[fill,circle,inner sep=1pt]{};
 			\draw (1.5,1) node[fill,circle,inner sep=1pt]{};
 			\draw (3,1) node[fill,circle,inner sep=1pt]{};
 			\draw (1,2) node[fill,circle,inner sep=1pt]{};
-			
-			\draw (1.25,1.5) node[fill,circle,inner sep=1pt,color=red]{};
-			\draw (1.25,1.5) node[right,color=red]{$\ol{m}$};
 			\end{tikzpicture}
 		\end{figure}
 		
@@ -1271,7 +1270,7 @@ Wir werden sehen, dass man $\CAT$-Räume über die Vierpunktbedingung charakteri
 			d(v,m_r) \\
 			d(u,m_s) \\
 			d(v,m_s)		
-		\end{array} \right\} \leq r+ \delta \quad \forall r,s \neq N \label{eq:1.38.1}
+		\end{array} \right\} \leq r+ \delta \quad \forall r,s \geq N \label{eq:1.38.1}
 	\end{equation}
 	Betrachte das $4$-Tupel $(u,m_r,v,m_s)$ und die Vergleichspunkte $(\ol{u},\ol{m_r},\ol{v},\ol{m_s})$ in $\EE^2$. Sei $\ol{M}$ der Mittelpunkt von $\ol{u}$ und $\ol{v}$.
 	\begin{figure}[h]
