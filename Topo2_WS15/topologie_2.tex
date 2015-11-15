@@ -1,4 +1,5 @@
 %!TEX TS-program = xelatex
+%!TEX TS-options = -shell-escape
 \input{../!config/mitschrift3.tex}
 \newcommand{\fach}{Topologie \RM{2}.}
 \newcommand{\semester}{WiSe 2015}
@@ -115,8 +116,7 @@
 		\item $F(\id_C)= \id_{F(C)}$
 		\item Für $\begin{tikzcd}[cramped] C \rar["f"] & C' \rar["f'"] & C'' \end{tikzcd}$ gilt $F(f' \circ f) = F(f) \circ F(f')$. 
 	\end{enumerate}
-	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor 
-	$\mathcal{C}^\op \to \mathcal{D}$.
+	Kürzer ist ein \emph{kontravarianter} Funktor $F \colon \mathcal{C} \to \mathcal{D}$ das selbe wie ein \emph{kovarianter} Funktor $\mathcal{C}^\op \to \mathcal{D}$.
 \end{definition}
 
 \begin{beispiel}[{name=[kontravariante Funktoren]}] Es gibt zahlreiche Beispiele für kontravariante Funktoren:
@@ -325,8 +325,7 @@
 	Angenommen es existiert ein $s \in S \setminus R$.
 	Ist $C \cap \mathbb{Z} \benbrace[\big]{R \cup \set{s}} = C \cap \mathbb{Z}[R]$, so ist $(T,R,\varphi) \lneqq (T,R \cup \set{s},\varphi) \in \mathcal{M}$ im Widerspruch zur 
 	Maximalität von $(T,R,\varphi)$. Sei also $\mathbb{Z}[R] \cap C \subsetneq \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C$. Betrachte nun das Diagramm in Abbildung 
-	\ref{diag:frei_untergrp}
-	
+	\ref{diag:frei_untergrp}.
 	\begin{figure}[t]
 		\centering{
 		\begin{tikzcd}[row sep=large]
@@ -335,17 +334,16 @@
 			\ar[dd,dark_gray,controls={+(-17:1.5) and +(20:1.5)},mapsto,start anchor=east, end anchor=east] \\
 			\mathbb{Z}[R] \cap C \rar[hook,"j"] \dar[hook,"i_0"]& \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C \rar[two heads,"p"] \dar[hook,"i_1"] 
 			& \faktor{\mathbb{Z}\benbrace[\big]{R \cup \set{s}} \cap C}{\mathbb{Z}[R] \cap C} \dar["i_2"] \\
-			\mathbb{Z}[R] \rar[hook,"j'"] & \mathbb{Z}\benbrace[\big]{R \cup \set{s}} \rar[two heads,"p'"] & \mathbb{Z}\benbrace[\big]{\set{s}}{\color{dark_gray} \ni m \cdot s} 
+			\mathbb{Z}[R] \rar[hook,"j'"] & \mathbb{Z}\benbrace[\big]{R \cup\set{s}} \rar[two heads,"p'"] & \mathbb{Z}\benbrace[\big]{\set{s}}{\color{dark_gray} \ni m \cdot s} 
 		\end{tikzcd}
 		\caption{Diagramm zum Beweis von \autoref{lem:untergrp_frei} \label{diag:frei_untergrp}}
 		}
 	\end{figure}
-	
-	Nun ist $\mathbb{Z}[R] \cap C  = \mathbb{Z}[R] \cap \enbrace[\big]{\mathbb{Z}[R \cup \set{s}] \cap C}$ und damit muss auch der von $i_0$ und $i_1$ induzierte Homomorphismus 
+	Es ist $\mathbb{Z}[R] \cap C  = \mathbb{Z}[R] \cap \enbrace[\big]{\mathbb{Z}[R \cup \set{s}] \cap C}$ und damit muss auch der von $i_0$ und $i_1$ induzierte Homomorphismus 
 	$i_2 \colon \sfrac{\mathbb{Z}[R \cup \set{s}] \cap C}{\mathbb{Z}[R] \cap C} \to \mathbb{Z}[\set{s}]$ injektiv sein. Es folgt, dass 
 	$\im i_2 = m \cdot \mathbb{Z}\benbrace*{\set{s}}$
 	ist für ein $m >0$. Sei $c \in \mathbb{Z}[R \cup \set{s}] \cap C$ ein Urbild von $m \cdot s$ unter $p \circ i_1$. Nun können wir $\varphi$ durch $s \mapsto c$ zu
-	$\varphi^+ \colon \mathbb{Z}\benbrace*{T \cup \set{s}} \to \mathbb{Z}\benbrace*{R \cup \set{s}} \cap C$ fortsetzen. Es folgt, dass $\varphi^+$ ein Isomorphismus ist im Widerspruch zur 
+	$\varphi^+ \colon \mathbb{Z}\benbrace*{T \cup\set{s}} \to \mathbb{Z}\benbrace*{R \cup \set{s}}\cap C$ fortsetzen. Es folgt, dass $\varphi^+$ ein Isomorphismus ist im Widerspruch zur 
 	Maximalität von $(T,R,\varphi)$.
 	% Sei $\mathcal{M}$ die Menge aller Tripel $(T,R,m)$ mit
 	% \begin{itemize}
@@ -416,35 +414,59 @@
 \label{sec:3}
 
 \begin{definition}[{name=[Einschränkung von singulären Simplizes]}]
-	Sei $\sigma \colon \abs{\Delta^n}  \to X$ ein singulärer Simplex in $X$. Für $0 \le p \le n$ definieren wir \todo{Revision 3}
+	Sei $\sigma \colon \abs{\Delta^n}  \to X$ ein singulärer Simplex in $X$. Für $0 \le p \le n$ definieren wir 
 	\[
 		\sigma|_{\benbrace*{0,\ldots ,p}} \colon \abs{\Delta^p} \longrightarrow X \quad , \qquad \sigma|_{\benbrace{p,\ldots ,n}} \colon \abs{\Delta^{n-p}} \longrightarrow X  
 	\]
-	durch $\sigma|_{\benbrace*{0,\ldots ,p}}(t_0, \ldots ,t_p) = \sigma \enbrace*{t_0, \ldots , t_p, 0, \ldots ,0}$ und 
-	$\sigma|_{p,\ldots ,n}(t_{p}, \ldots ,t_n)= \sigma(0,\ldots ,0,t_{p}, \ldots , t_n)$
+	durch $\sigma|_{\benbrace*{0,\ldots ,p}}(t_0, \ldots ,t_p) = \sigma \enbrace*{t_0, \ldots , t_p, 0, \ldots ,0}$ und $\sigma|_{p,\ldots ,n}(t_{p}, \ldots ,t_n)= \sigma(0,\ldots ,0,t_{p}, \ldots , t_n)$.
 \end{definition}
 
-\begin{bemerkung}
+\begin{figure}[h]
+	\centering{
+	\begin{tikzpicture}[scale=1.4]
+		\draw[fill=DodgerBlue3,fill opacity=0.4] (0,0) -- ++(1,0) -- ++ (120:1) -- cycle;
+		\draw[thick] (0,0) node[below left]{$0$} -- ++(1,0) node[below right]{$2$} -- ++ (120:1) node[above]{$1$} -- cycle;
+		\draw[thick] (3,0) node[below left]{$0$} -- ++(1,0) node[below right]{$2$} -- ++ (120:1) node[above]{$1$} -- cycle;
+		\draw[fill=Firebrick3,fill opacity=0.4] (6,0) -- ++(1,0) -- ++ (120:1) -- cycle;
+		\draw[thick] (6,0) node[below left]{$0$} -- ++(1,0) node[below right]{$2$} -- ++ (120:1) node[above]{$1$} -- cycle;
+		
+		% linker Simplex
+		\draw[DodgerBlue3,dashed,ultra thick] (0,0) -- ++(1,0) -- ++ (120:1) node[midway,right]{$\sigma|_{\benbrace*{0,1,2}}$} -- cycle;
+		\draw[fill,Firebrick3] (0,0) circle[radius=0.05] node[above left]{$\sigma|_{\benbrace*{0}}$};
+		
+		% mittlerer  Simplex
+		\draw[DodgerBlue3,dashed,ultra thick] (4,0) -- ++ (120:1) node[midway,right]{$\sigma|_{\benbrace*{1,2}}$};
+		\draw[fill,Firebrick3, dashed,ultra thick] (3,0) -- ++ (60:1) node[midway, left]{$\sigma|_{\benbrace*{0,1}}$};
+		
+		% rechter Simplex
+		\draw[Firebrick3,dashed,ultra thick] (6,0) -- ++(1,0) -- ++ (120:1) -- (6,0) node[midway,left]{$\sigma|_{\benbrace*{0,1,2}}$};
+		\draw[fill,DodgerBlue3] (7,0) circle[radius=0.05] node[above right]{$\sigma|_{\benbrace*{2}}$};
+	\end{tikzpicture}
+	\caption{Einschränkung von singulären Simplizes am Beispiel des $2$-Simplex.}
+	}
+\end{figure}
+
+\begin{bemerkung}[{name=[Schreibweise für Einschränkung auf eine Seite]}]
 	Wir schreiben auch $\sigma|_{\benbrace*{0,\ldots , \slashedi, \ldots ,n}}$ für die $i$-te Seite von $\sigma$.
 \end{bemerkung}
 
-\begin{definition}[label=sec3:def_cup,{name=[$\cup$-Produkt]}]
-	Sei $R$ ein Ring und $A,B \subseteq X$. Wir definieren das \bet{Cup-Produkt} ($\cup$-Produkt)\index{Cup-Produkt, $\cup$-Produkt} auf dem singulären Kokettenkomplex 
+\begin{definition}[label=sec3:def_cup,{name=[Cup-Produkt]}]
+	Sei $R$ ein Ring und $X$ ein topologischer Raum. 
+	Wir definieren das \bet{Cup-Produkt} ($\cupp$"~Produkt)\index{Cup-Produkt, $\cupp$-Produkt} auf dem singulären Kokettenkomplex von $X$
 	\[
-		\cup \colon C^p_\sing \enbrace*{X,A;R} \otimes C^q_\sing(X;R) \longrightarrow C^{p+q}_\sing \enbrace*{X,A;R}
+		\cupp \colon C^p_\sing \enbrace*{X;R} \otimes C^q_\sing(X;R) \longrightarrow C^{p+q}_\sing \enbrace*{X;R}
 	\]
-	durch $(\alpha \cup \beta)(\sigma) \coloneqq  (-1)^{p \cdot q} \cdot \alpha\enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{p, \ldots , p+q}}}$.
+	durch $(\alpha \cupp \beta)(\sigma) \coloneqq  (-1)^{p \cdot q} \cdot \alpha\enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{p, \ldots , p+q}}}$ für $\sigma \colon \abs{\Delta^{p+q}} \to X$. \todo{Revision 3}
 \end{definition}
 
-\noindent\todo[inline]{Zeichnung für $n=2$ einfügen}
-
-\begin{lemma}\leavevmode
+\begin{lemma}[{name=[Eigenschaften des Cup-Produktes]}]
+	Das $\cupp$-Produkt hat folgende Eigenschaften:
 	\begin{enumerate}[1)]
-		\item $d^{p+q}(\alpha \cup \beta) = d^p(\alpha) \cup \beta + (-1)^p \cdot \alpha \cup d^q(\beta)$
-		\item Das $\cup$-Produkt ist assoziativ.
-		\item Für $f \colon X \to X'$ mit $f(A) \subseteq A'$, $f(B) \subseteq B'$ gilt $f^*(\alpha \cup \beta)= f^*(\alpha) \cup f^*(\beta)$ für $\alpha \in C^p_\sing(X',A';R)$, 
+		\item $d^{p+q}(\alpha \cupp \beta) = d^p(\alpha) \cupp \beta + (-1)^p \cdot \alpha \cupp d^q(\beta)$
+		\item Das $\cupp$-Produkt ist assoziativ.
+		\item Für $f \colon X \to X'$ mit $f(A) \subseteq A'$, $f(B) \subseteq B'$ gilt $f^*(\alpha \cupp \beta)= f^*(\alpha) \cupp f^*(\beta)$ für $\alpha \in C^p_\sing(X',A';R)$, 
 		$\beta \in C^q_\sing(X',B';R)$.
-		\item Sei $1_X \in C_\sing^0(X;R)$ mit $1_X(\sigma)=1_R$ für alle $\sigma \colon \abs{\Delta^0} \to X$. Dann gilt $1_X \cup \alpha = \alpha = \alpha\cup 1_X$.
+		\item Sei $1_X \in C_\sing^0(X;R)$ mit $1_X(\sigma)=1_R$ für alle $\sigma \colon \abs{\Delta^0} \to X$. Dann gilt $1_X \cupp \alpha = \alpha = \alpha\cupp 1_X$.
 	\end{enumerate}
 \end{lemma}
 \begin{beweis}
@@ -452,7 +474,7 @@
 \end{beweis}
 
 \begin{definition}
-	Die vom $\bigcup$-Produkt auf dem singulären Kokettenkomplex induzierte Abbildung in Kohomologie 
+	Die vom $\cup$-Produkt auf dem singulären Kokettenkomplex induzierte Abbildung in Kohomologie 
 	\[
 		\cup \colon H^p(X,A;R) \otimes H^q(X,B;R) \longrightarrow H^{p+q}(X,A \cup B;R)
 	\]
@@ -590,7 +612,7 @@
 % section 3 (end)
 \newpage
 
-\section{Kommutativität des $\cup$-Produktes} % (fold)
+\section{Kommutativität des Cup-Produktes} % (fold)
 \label{sec:4}
 
 \begin{definition}[{name=[graduierte Algebra]}]
@@ -909,7 +931,7 @@
 	eine Kettenkontraktion für $\Keg(f)$.
 \end{beweis}
 
-\begin{beweis}[von \autoref{satz:5:kettenhomotopie} zweite Implikation,label=bew:satz5]
+\begin{beweis}[name={von \autoref{satz:5:kettenhomotopie} zweite Implikation},label=bew:satz5]
 	Ist $H_n(f)$ ein Isomorphismus, so ist $\Keg(f)$ azyklisch. Die direkte Summen von projektiven Moduln ist wieder projektiv sind, sind die Kettenabbildungen von $\Keg(f)$
 	projektiv, falls die von $C_*$ und $D_*$ projektiv sind. Daher ist $\Keg(f)$ kettenkontraktibel und $f$ eine Kettenhomotopieäquivalenz.
 \end{beweis}
@@ -928,11 +950,11 @@
 % section 5 (end)
 \newpage
 
-\section{Das $\cap$-Produkt und die Poincaré-Dualitätsabbildung} % (fold)
+\section{Das Cap-Produkt und die Poincaré-Dualitätsabbildung} % (fold)
 \label{sec:6}
 
 \begin{definition}[{name=[Cap-Produkt]}]
-	Sei $X$ ein topologischer Raum und $R$ ein kommutativer Ring. Wir definieren das \bet{Cap-Produkt} ($\cap$-Produkt)\index{Cap-Produkt, $\cap$-Produkt}
+	Sei $X$ ein topologischer Raum und $R$ ein kommutativer Ring. Wir definieren das \bet{Cap-Produkt} ($\cap$-Produkt)\index{Cap-Produkt, $\cap$-Produkt}\todo{Revision 6}
 	\[
 		\cap \colon C^p(X;R) \otimes_R C_{p+q}(X;R) \longrightarrow C_q(X;R)
 	\]
