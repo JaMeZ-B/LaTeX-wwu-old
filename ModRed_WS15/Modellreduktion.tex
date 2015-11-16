@@ -1009,6 +1009,267 @@ Mit Folgerung 2.8 folgt
 \end{align*}
 Da $u_N(\mu)$ eindeutig folgt $P_\mu(u_n(\mu)) = u_N(\mu)$ daraus folgt (1). (2) folgt entweder aus 2.8 oder Satz 2.39.
 
+\ssect{3.18 Folgerung}{}
+Sei $\mu\in\mathcal{P},u_h(\mu),u_N(\mu)$ Lösungen von $(P_h(\mu))$ bzw. $(P_N(\mu))$.
+Falls $u_h(\mu)\in X_N \Rightarrow u_N(\mu) = u_h(\mu)$.\\
+
+\bet{Beweis:}\\
+Da $u_h(\mu),u_N(\mu)\in X_N \Rightarrow e_N(\mu) := u_h(\mu) - u_N(\mu)\in X_h$ und $(((e_N(\mu),v_N)))_\mu = 0 ~\forall v_N\in X_N$ nach Folgerung 3.17 (2).
+Damit gilt $(((e_N(\mu),l_N(\mu))))_\mu = 0 \Rightarrow e_N(\mu) = 0 \Rightarrow u_N(\mu) = u_h(\mu)$.
+\hfill $\square$
+
+\ssect{3.19 Satz}{(abstrakte Fehlerabschätzung; Relation zur Bestapproximation)}
+Sei $\mu \in \mathcal{P}$ und $ u_h(\mu),s_h(\mu)$ bzw. $u_N(\mu),s_N(\mu)$ Lösungen von $(P_h(\mu))$ bzw. $(P_N(\mu))$.
+Dann gilt:
+\begin{enumerate}[(1)]
+	\item Der Fehler der ($\mu$-abhängigen Energienorm) erfüllt
+	\[
+	|||u_h(\mu)-u_N(\mu)|||_\mu = \inf\limits_{v\in X_N} |||u_(\mu)-v|||_\mu.
+	\]
+	\item Der Fehler in der ($\mu$-unabhängigen) $X$-Norm erfüllt
+	\[
+	\norm{u_h(\mu)-u_N(\mu)}_X \le \sqrt{\frac{\gamma(\mu)}{\alpha(\mu)}} \inf\limits_{v\in X_N} \norm{u(\mu)-v}_X.
+	\]
+	mit $\gamma(\mu),\alpha(\mu)$ Stetigkeits- bzw. Koerzivitätskonstante.
+	\item Für den Ausgabefehler gilt (wegen $f=l$)
+	\[
+	0\le s_h(\mu)-s_N(\mu) = |||u_h(\mu)-u_N(\mu)|||_\mu^2 = \inf\limits_{v\in X_N} |||u_h(\mu)-v|||\mu^2 \le \gamma(\mu) \inf\limits_{v\in X_N} \norm{u_h(\mu)-v}_X^2.
+	\]
+\end{enumerate}
+
+\bet{Beweis:}\\
+\begin{enumerate}[(1)]
+	\item Nach Folgerung 3.17 ist $u_N(\mu)$ orthogonale Projektion, also Bestapproximation
+	\[
+	|||u_h(\mu)-u_N(\mu)|||_\mu \bgl{3.17(1)} |||u_h(\mu)-P_\mu(u_N(\mu))|||_\mu \bgl{2.7} = \inf\limits_{v\in X_h} |||u_h(\mu)-v|||_\mu.
+	\]
+	\item Mit der Normäquivalenz 3.4 folgt 
+	\[
+	\sqrt{\alpha_h(\mu)}\norm{u_h(\mu)-u_N(\mu)}_X \stackrel{3.4}{\le} |||u_h(\mu)-u_N(\mu)|||_\mu \bgl{(1)} \inf\limits_{v\in X_N} |||u_h(\mu)-v|||_\mu \stackrel{3.4}{\le} \sqrt{\gamma_h(\mu)} \inf\limits_{v\in X_h} \norm{u_h(\mu)-v}_X,
+	\]
+	wobei $\alpha_h(\mu) := \inf_{v\in X_h} \frac{b(v,v;\mu)}{\norm{v}_X^2}$ und $\gamma_h(\mu):= \sup_{u,v\in X_h} \frac{b(u,v;\mu)}{\norm{u}_X\norm{v}_X}$.
+	Wie in Beweis von Folgerung 3.16 folgt $\alpha_h(\mu)\ge \alpha(\mu)$ und $\gamma_h(\mu)\le \gamma(\mu)~\forall \mu\in \mathcal{P}$ und damit die Behauptung.
+	\item
+	\[
+	s_h(\mu)-s_N(\mu) \bgl{Def} l(u_h(\mu);\mu)-l(u_N(\mu);\mu) \bgl{l=f} f(u_h(\mu))-f(u_N(\mu)) \bgl{(P_h(\mu)} b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu) = b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu)- b(u_h(\mu)-u_N(\mu),u_N(\mu);\mu) = b(u_h(\mu)-u_N(\mu),u_h(\mu)-u_N(\mu);\mu)
+	\]
+	Damit folgt
+	\[
+	s_h(\mu)-s_N(\mu) = |||u_h(\mu)-u_N(\mu)|||_\mu^2 \bgl{(1)} \inf\limits_{v\in X_h} |||u_h(\mu)-v|||_\mu^2 \stackrel{3.4}{\le} \gamma(\mu)\inf\limits_{v\in X_N} \norm{u_h(\mu)-v}_X^2
+	\]
+	Insbesondere gilt auch $s_h(\mu)-s_N(\mu) = |||u_h(\mu)-u_N(\mu)|||_\mu^2 \ge 0$.
+\end{enumerate}
+\hfill $\square$
+
+\ssect{3.20 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item $s_N(\mu)$ ist also untere Schranke für $s_h(\mu)$.
+	\item Der Ausgabefehler ist im Allgemeinen sehr klein, da das Quadrat des RB-Fehlers eingeht.
+	\item Mit dem Lemmavon Céa (Satz 2.39) erhalten wir für nicht notwendigerweise symmetrische Bilinearformen $\norm{u_h(\mu)-u_N(\mu)}_X \le \frac{\gamma(\mu)}{\alpha(\mu)} \inf_{v\in X_N} \norm{u_h(\mu)-v}_X$.
+	Damit ist Satz 3.19 eine Verschärfung für symmetrische Bilinearformen.
+\end{enumerate}
+
+\ssect{3.21 Korollar}{(Monotoner Fehlerabfall in der Energienorm)}
+Sei $(X_N)_{N=1}^{N_{\max}}$ Folge von RB-Räumen mit $X_N\subseteq X_{N'}$ für $N\le N'\le N_{\max}$ ("Hierarchische Räume") und $e_N(\mu)= u_h(\mu)-u_N(\mu)$ für $\mu\in \mathcal{P}$.
+Dann ist die Folge $(|||e_N(\mu)|||)_{N=1}^{N_{\max}}$ monoton fallend.\\
+
+\bet{Beweis:}\\
+\[
+|||e_N(\mu)|||\mu = \inf\limits_{v\in X_N} |||u_h(\mu)-v|||_\mu \ge  \inf\limits_{v\in X_{N'}} |||u_h(\mu)-v|||_\mu = |||e_{N'}(\mu)|||_\mu.
+\]
+\hfill $\square$
+
+\ssect{3.22 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item "Worst Case" ist eine Stagnation des Fehlers (unrealistisch, da jeder neue Basisvektor orthogonal zu $e_N(\mu)$ sein müsste).
+	In der Praxis ist bei geschickter Basiswahl exponentielle Konvergenz zu beobachten.
+	\item Monotonie gilt nicht notwendigerweise für andere Normen trotz Normenäquivalenz:
+	\[
+	c|||e_N(\mu)|||_\mu \le \norm{e_N(\mu)} \le C |||e_N(\mu)|||_\mu
+	\]
+	mit $c,C$ Konstanten unabhängig von $N$.
+	Fehlernorm $\norm{e_N(\mu)}$ kann gelegentlich anwachsen, bleibt aber in einem "Korridor" um $|||e_N(\mu)|||_\mu$.\\
+	"Beweis":
+	\[
+	\norm{e_{N'}(\mu)} \le C|||e_{N'}(\mu)|||_\mu \le C|||e_N(\mu)|||_\mu \le \frac{C}{c} \norm{e_N(\mu)}
+	\]
+\end{enumerate}
+
+\ssect{3.23 Folgerung}{(Fehlerabschätzung für den Fehler zwischen exakter Lösung und RB-Lösung)}
+Sei $\mu\in\mathcal{P}$ und $u_(\mu),s(\mu),u_h(\mu),s_h(\mu)$ bzw. $u_N(\mu),s_N(\mu)$ Lösung von $(P(\mu)),(P_h(\mu))$ bzw. $(P_N(\mu))$, wobei $X_h$ linearer Finite Elemente Raum.
+Zusätzlich gelte $b$ symmetrisch und $f=l$ ("compliant").
+Liegt nun $u\in H^2(\Omega)$, so gibt es eine Konstante $c>0$ die nur von $d,\sigma$ und $\Omega$ abhängt, so dass gilt:
+\begin{enumerate}
+	\item Der Fehler in der ($\mu$-unabhängigen) $X$-Norm erfüllt
+	\[
+	\norm{u(\mu)-u_h(\mu)}_X \le \sqrt{\frac{\gamma(\mu)}{\alpha(\mu)}} \enbrace{ch\abs{u(\mu)}_{H^2(\Omega)} + \inf\limits_{v\in X_N} \norm{u_h(\mu)-v}_X}
+	\]
+	\item Für den Ausgabefehler gilt:
+	\[
+	0 \le s(\mu)-s_N(\mu) \le \gamma(\mu) \enbrace{c^2h^2\abs{u(\mu)}_{H^2(\Omega)} + \inf\limits_{v\in X_N} \norm{u_h(\mu)-v}_X^2}
+	\]
+	Beweis: Analog zum Beweis von Satz 3.19 unter Verwendung von Satz 2.52.
+\end{enumerate}
+
+\ssect{3.24 Bemerkung}{}
+Den Fehleranteil $\norm{u(\mu)-u_h(\mu)}_X$ nennt man \bet{Diskretisierungsfehler} und den Anteil $\norm{u_h(\mu)-u_N(\mu)}$ nennt man \bet{Modellfehler}.
+Um eine gute Approximation der exakten Lösung $u(\mu)$ und der Ausgabe $s(\mu)$ zu erhalten, müssen beide Fehleranteile klein sein.
+
+\ssect{3.25 Satz}{(Lipschitzstetigkeit)}
+Falls $b$ und $f$ gleichmäßig beschränkt und Lipschitz-stetig bzgl. $\mu$ und $b$ gleichmäßig koerziv bzgl. $\mu$, so sind auch die Lösungen $u_N(\mu)$ und $s_N(\mu)$ von $(P_N(\mu))$ Lipschitz-stetig bzgl. $\mu$.
+
+\ssect{3.26 Satz}{(Gleichungssytem und numersische Stabilität)}
+Sei $\Phi_N = \penbrace{\phi_1\dt{,}\phi_N}$ eine reduzierte Basis von $X_N$.
+Für $\mu\in\mathcal{P}$ definieren wir $\mathbb{B}_N(\mu) \in\R^{N\times N}$ und $\mathbb{F}_N(\mu)\in \R^N$ durch 
+\[
+(\mathbb{B}_N(\mu))_{nm} := b(\phi_m,\phi_n;\mu),~ (\mathbb{F}_N(\mu)_n := f(\phi_n;\mu)
+\]
+und
+\[
+\mathbb{U}_N(\mu) = (U_1^N(\mu)\dt{,}U_N^N(\mu))\in \R^N
+\]
+als Lösung von 
+\begin{align}
+\mathbb{B}_N(\mu)\mathbb{U}_N(\mu) = \mathbb{F}_N(\mu).
+\end{align}
+\begin{enumerate}[(1)]
+	\item Dann ist $u_N(\mu)= \sum_{n=1}^{N} U_n^N(\mu)\phi_n$ und $s_N(\mu) = \mathbb{F}_N^T(\mu)\mathbb{U}_N(\mu)$ Lösung von $(P_N(\mu))$.
+	\item Falls $\Phi_N$ orthogonal, so ist die Kondition von (3.2) unabhängig von beschränkt durch
+	\[
+	\cond_2(\mathbb{B}_N(\mu)) = \norm{\mathbb{B}_N(\mu)}_2 \norm{\mathbb{B}_N^{-1}(\mu)}_2\le \frac{\gamma(\mu)}{\alpha(\mu)}.
+	\]
+\end{enumerate}
+
+\bet{Beweis:}\\
+(1) klar.\\
+(2): Wegen Symmetrie con $\mathbb{B}_N(\mu)$ ist 
+\begin{align}
+\cond_2(\mathbb{B}_N(\mu)) = \frac{\abs{\lambda_{\max}}}{\abs{\lambda_{\min}}}
+\end{align}
+mit betragsmäßig größten/kleinstem Eigenwert $\lambda_{\max},\lambda_{\min}$ von $\mathbb{B}_N(\mu)$.
+Sei $\mathbb{U}_{\max} = (U_n)_{n=1}^N\in \R^N$ Eigenvektor zu $\lambda_{\max}$ und $u_{\max} := \sum_{n=1}^{N} U_n\phi_n$.
+Dann gilt
+\begin{align*}
+\lambda_{\max} \norm{\mathbb{U}_{\max}}_2^2 &= \lambda_{\max} \mathbb{U}_{\max}^T\cdot\mathbb{U}_{\max} = \mathbb{U}_{\max}^T \mathbb{B}_N(\mu) \mathbb{U}_{\max}\\
+&= \sum_{n,m=1}^N U_nU_m b(\phi_n,\phi_m;\mu) = b(\sum_{n=1}^{N} U_n\phi_n,\sum_{m=1}^{N} U_m\phi_m;\mu) \\
+&= b(u_{\max},u_{\max};\mu)
+\end{align*}
+Aus der Orthogonalität folgt
+\[
+\norm{u_{\max}}_X^2 = 
+\]
+
+\ssect{3.27 Bemerkung}{}
+Im Gegensatz zu großen aber dünn besetzten Matrizen bei FEM ist (3.2) klein aber voll besetzt, weil $\phi_i$ im Allgemeinen keinen disjunkten Träger haben.
+
+\ssect{3.28 Folgerung}{}
+Sei $\bar{\varphi}_i,~i=1\dt{,}\mathcal{N}_h$ die Knotenbasis von $X_h$ wie in Def. 2.50 definiert.
+Für $\mu\in \mathcal{P}$ definieren wir $\mathbb{B}_h(\mu)\in \R^{\mathcal{N}_h\times \mathcal{N}_h}$ und $\mathbb{F}_h(\mu)\in \R^{\mathcal{N}_h}$ durch
+\begin{align}
+(\mathbb{B}_h(\mu))_{ij} := b(\bar{\varphi}_j,\bar{\varphi}_j;\mu),~ (\mathbb{F}_h(\mu))_i := f(\bar{\varphi}_i;\mu),~1\le i,j\le \mathcal{N}_h.
+\end{align}
+Indem wir dnun die RB-Basisfunktionen in der Knotenbasis darstellen
+\begin{align}
+\Phi_n = \sum_{i=1}^{\mathcal{N}_h} \phi_h^i\bar{\varphi}_i,~n=1\dt{,}N
+\end{align}
+können wir eine Transformationsmatrix $\mathbb{V}\in \R^{\mathcal{N}_h\times N}$ definieren deren Spalten die Koeffizienten der RB-Basisfunktionen in (3.5) enthalten:
+\begin{align}
+\mathbb{V}_{in} := \phi_n^i,~1\le i\le \mathcal{N}_h,~1\le n\le N.
+\end{align}
+Dann gilt für $\mathbb{B}_N(\mu)$ und $\mathbb{F}_N(\mu)$ aus Satz 3.25:
+\[
+\mathbb{B}_N(\mu)= \mathbb{V}^T\mathbb{B}_h(\mu)\mathbb{V} \text{ und } \mathbb{F}_N(\mu) = \mathbb{V}^T\mathbb{F}_h(\mu).
+\]
+
+\bet{Beweis:}\\
+\begin{align*}
+(\mathbb{V}^T\mathbb{B}_h(\mu)\mathbb{V})_{mn} &= \sum_{r,s=1}^{\mathcal{N}_h} (\mathbb{V}^T)_{mr} (\mathbb{B}_h(\mu))_rs (\mathbb{V}_{sn})\\
+&= \sum_{r,s=1}^{\mathcal{N}_h} \phi_m^r b(\bar{\varphi}_s,\bar{\varphi}_r;\mu) \phi_n^s\\
+&= b\enbrace{\sum_{s=1}^{\mathcal{N}_h}\phi_n^s \bar{\varphi}_s,\sum_{r=1}^{\mathcal{N}_h}\phi_m^r \bar{\varphi}_r;\mu}\\
+&= b(\phi_n,\phi_m;\mu) = (\mathbb{B}_N(\mu))_{mn}.
+\end{align*}
+\hfill $\square$
+
+\subsection{Offline/Online Zerlegung des RB-Modells}
+
+\ssect{3.29 Bemerkung}{(Komplexitätsbetrachtungen)}
+Da $\mathbb{B}_h(\mu)$ aus (3.4) dünn besetzt ist, erfordert die Berechnung von $u_h(\mu)$ $ \mathcal{O}(\mathcal{N}_h^2)$ Rechenschritte.
+Da $\mathbb{B}_N(\mu)$ vollbesetzt ist das lineare Gleichungssystem (LGS) (3.2) in $\mathcal{O}(N^3)$ Rechenschritten lösbar.
+Daher ist nur für $N\ll \mathcal{N}_h$ da RB-Modell ein Gewinn.
+Genauere Betrachtung der Berechnung einer reduzierten Lösung $u_N(\mu)$:
+\begin{enumerate}[(1)]
+	\item $N$ Snapshots, also $N$ Lösungen $u_h(\mu)$ von $(P_h(\mu))$ berechnen: $\mathcal{O}(N\mathcal{N}_h^2)$. ('Offline')
+	\item $N^2$ Auswertungen von $b(\phi_m,\phi_n;\mu)$: $\mathcal{O}(N^2\mathcal{N}_h)$.
+	\item $N$ Auswertungen von $f(\phi_n;\mu)$: $\mathcal{O}(N\mathcal{N}_h)$.
+	\item Die Lösung des LGS (3.2): $\mathcal{O}(N^3)$. ('Online')
+\end{enumerate}
+Damit lohnt sich das RB-Modell für ein einzelnes $\mu\in\mathcal{P}$ oder wenige $\mu\in\mathcal{P}$ \uline{nicht}.
+Wenn wir $(P_N(\mu))$ aber für viele verschiedene Parameter $\mu\in\mathcal{P}$ lösen müssen, wie zum Beispiel in einem \textit{many-query} Kontext lohnt sich das RB-Modell, wenn man eine sogenannte \bet{Offline/Online Zerlegung} durchführt.
+
+In der einmalig durchgeführten \bet{Offline-Phase} werden \uline{$\mu$-unabhängige, hochdimensionale} Größen in $\mathcal{O}(\mathcal{N}_h^m),m\in \N$ Rechenschritten, typischerweise teuer vorberechnet.
+In der \uline{vielfach} durchgeführten \bet{Online-Phase} werden die Offline-Daten kombiniert um \uline{$\mu$-abhängige} Größen wie das reduzierte LGS (3.2) zu assemblieren.
+Die RB-Lösung $u_N(\mu)$ und $s_N(\mu)$ können dann schnell berechnet werden, wobei die Anzahl der Rechenschritte idealerweise $\mathcal{O}(N^k),k\in \N$ ist, d.h. unabhängig von $\mathcal{N}_h$.
+
+Vor diesem Hintergrund können wir Schritt 1 klar der Offline-Phase und Schritt 4 der Online-Phase zu ordnen.
+Schritt 2 und 3 lassen sich direkt keiner der beiden Phasen klar zu ordnen, da sie sowohl teure als auch Parameter-abhängige Operationen benötigen.
+Um eine klare Trennung auch von Schritt 2 und 3 zu erreichen benötigen wir eine spezielle Struktur der Bilinearform $b(.,.;\mu)$ und Linearform $f(.;\mu)$.
+ 
+\ssect{3.30 Definition}{}
+Seinen $X,X_1,X_2$ HR, $\mathcal{P}$ beschränkte Parametermenge.
+\begin{enumerate}[(1)]
+	\item Eine Funktion $v:\mathcal{P}\to X$ nennen wir \bet{affin parametrisch}, falls Funktionen $v^q\in X$ und Koeffizientenfunktionen $\theta_v^q: \mathcal{P}\to \R$ für $q=1\dt{,}Q_v$ existieren, so dass
+	\[
+	v(x;\mu) := \sum_{q=1}^{Q_v} \theta_v^q(\mu)v^q(x).
+	\]
+	\item Eine parametrische stetige Linearform $f:X\times \mathcal{P}\to \R$ bzw. stetige Bilinearform $b:X_1\times X_2\times \mathcal{P}\to \R$ ist \bet{affin parametrisch}, falls $f^q\in X'$ und $\theta_f^q:\mathcal{P}\to \R$ für $q=1\dt{,} Q_f$ bzw. $b^q:X_1\times X_2 \to \R$ und $\theta_B^q: \mathcal{P}\to \R$ für $q=1\dt{,}Q_b$ existieren, so dass
+	\begin{align*}
+	f(v;\mu) &= \sum_{q=1}^{Q_f} \theta_f^q(\mu) f^q(v)~\forall v\in X \text{ bzw.}\\
+	b(u,v;\mu) &= \sum_{q=1}^{Q_b} \theta_b^q(\mu) b^q(u,v)~\forall u\in X_1,v\in X_2.
+	\end{align*}
+\end{enumerate}
+
+\ssect{3.31 Folgerung}{(Offline/Online-Zerlegung von $(P_N(\mu))$)}
+Sei $(P_N(\mu))$ gegeben und $b,f$ affin parametrisch. Dann erlaubt $(P_N(\mu))$ die folgende Offline/Online-Zerlegung:
+\begin{itemize}
+	\item[Offline-Phase:]
+	Nach Berechnung einer reduzierten Basis $\Phi_N := \penbrace{\phi_1\dt{,}\phi_N}$ assemblieren wir die parameterunabhägige Matrizen und Vektoren $\mathbb{B}_N^q\in \R^{N\times N}$ und $\mathbb{F}_N^q\in \R^N$, definiert durch
+	\[
+	(\mathbb{B}_N^q)_{nm} := b^q(\phi_m,\phi_n),~1\le m,n \le N,~1\le q\le Q_b,
+	\]
+	\[
+	(\mathbb{F}_N^q)_n := f^q(\phi_n),~1\le n\le N,~1\le q\le Q_f.
+	\]
+	\item[Online-Phase]
+	Für einen gegebenen Parametervektor $\mu\in\mathcal{P}$ werten wir die parameterabhängigen Koeffizientenfunktionen $\theta_b^q(\mu),\theta_f^q(\mu)$ für $1\le q\le Q_b,Q_f$ aus und assemblieren die Matrix und den Vektor
+	\[
+	\mathbb{B}_N(\mu) := \sum_{q=1}^{Q_b} \theta_b^q(\mu) \mathbb{B}_N^q \text{ bzw. } \mathbb{F}_N(\mu) := \sum_{q=1}^{Q_f} \theta_f^q(\mu) \mathbb{F}_N^q,
+	\]
+	welche mit der Matrix und dem Vektor aus dem LGS (3.2) aus Satz 3.26 übereinstimmen.
+	Dieses LGS kann dann nach $u_N(\mu)$ und $s_N(\mu)$ gelöst werden.
+\end{itemize}
+
+\ssect{3.32 Bemerkung}{}
+Die Matrizen $\mathbb{B}_N^q\in \R^{N\times N}$ und die Vektoren $\mathbb{F}_N^q\in \R^N$ können mit dem in Folgerung 3.28 beschriebenen Verfahren einfach aus den entsprechenden FE-Matrizen und den FE-Vektoren mit der in (3.6) definierten Transformationsmatrix assembliert werden.
+
+\ssect{3.33 Bemerkung}{(Rechenaufwand/Laufzeit)}
+\begin{enumerate}[(1)]
+	\item Für die Berechnung der Snapshots und der anschließenden Assemblierung von $\mathbb{B}_N^q,\mathbb{F}_N^q$ benötigen wir $\mathcal{O}(N\mathcal{N}_h^2 + N^2\mathcal{N}_hQ_b + N\mathcal{N}_hQ_f)$ Rechenschritte.
+	In der Online-Phase kann dann die Assemblierung und das Lösen von LGS (3.2) in $\mathcal{O}(N^2Q_b + NQ_f + N^3)$ Rechenschritten erfolgen.
+	Insbesondere hängt die Komplexität der Online-Phase nicht von $\mathcal{N}_h$ ab.
+	\item Die Offline/Online Zerlegung lässt sich auch in einem Laufzeitdiagramm veranschaulichen. $t_{hoch},t_{offline},t_{online}$ bezeichnen die Laufzeit dür eine Lösung des hochdimensionalen, diskreten Problems $(P_h(\mu))$, die Offline- und die Online-Phase von $(P_N(\mu))$.
+	Wir nehmen an, dass diese Zeiten für unterschiedliche Parameter jeweils dieselben sind und erhalten dadurch einen linearen Zusammenhang zwischen der gesamten benötigten Laufzeit und der Anzahl $k$ von Berechnungen der Lösungen $u_h(\mu),u_N(\mu)$.
+	Die Gesamtlaufzeit für $k$ hochdimensionale Lösungen ist $t_h(k) = k\cdot t_{hoch}$, während das reduzierte Modell eine Laufzeit von $t_N(k) = t_{offline} + k\cdot t_{online}$ benötigt.
+	Wie bereits in 3.29 erwähnt lohnt sich ein RB-Modell bei mehr als $k* := \frac{t_{offline}}{t_{hoch}-t_{online}}$ benötigten Approximationen von $u(\mu)$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
 
 
 
