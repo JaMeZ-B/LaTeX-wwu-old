@@ -109,23 +109,31 @@
 	\setotherlanguage{english}
 	% \newcommand\glqq{"}
 	% \newcommand\grqq{"}
-	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.4},Ligatures={Required,Common,Contextual}} %
-	\setmainfont{SourceSansPro}[%
+	\defaultfontfeatures{Mapping=tex-text, WordSpace={1.2},Ligatures={Required,Common,Contextual}} %
+	\setmainfont{FiraSans}[%
 		Extension=.otf,
-		UprightFont=*-Regular,
-		BoldFont=*-Semibold,
-		ItalicFont=*-LightIt,
-		BoldItalicFont=*-SemiboldIt,
-		SmallCapsFont={LinLibertine_R.otf},
-		SmallCapsFeatures={Letters=SmallCaps}]
-	\setsansfont{Kurier}[Scale=MatchUppercase, Extension=.otf, UprightFont=*Medium-Regular, BoldFont=*Heavy-Regular, ItalicFont=*Medium-Italic,BoldItalicFont=*Heavy-Italic]
-	% \setsansfont{FiraSans}[%
-% 		Extension=.otf,
-% 		UprightFont=*-Regular,
-% 		BoldFont=*-Medium,
-% 		ItalicFont=*-RegularItalic,
-% 		BoldItalicFont=*-MediumItalic]
+		UprightFont=*-Book,
+		BoldFont=*-Bold,
+		ItalicFont=*-LightItalic,
+		BoldItalicFont=*-MediumItalic]
+	% \setmainfont{SourceSansPro}[%
+	% 	Extension=.otf,
+	% 	UprightFont=*-Regular,
+	% 	BoldFont=*-Semibold,
+	% 	ItalicFont=*-LightIt,
+	% 	BoldItalicFont=*-SemiboldIt,
+	% 	SmallCapsFont={LinLibertine_R.otf},
+	% 	SmallCapsFeatures={Letters=SmallCaps}]
+	% \setsansfont{Kurier}[Scale=MatchUppercase, Extension=.otf, UprightFont=*Medium-Regular, BoldFont=*Heavy-Regular, ItalicFont=*Medium-Italic,BoldItalicFont=*Heavy-Italic]
+	\setsansfont{FiraSans}[%
+		Extension=.otf,
+		UprightFont=*-Book,
+		BoldFont=*-Bold,
+		ItalicFont=*-LightItalic,
+		BoldItalicFont=*-MediumItalic]
 	\setmonofont{FiraMono-Regular.otf}[Scale=MatchLowercase, ItalicFont={*}]
+	% \newfontfamily\bold[<font features>]{<name of font>}
+	% \renewcommand{\familydefault}{\sfdefault} 
 	\usepackage{xltxtra}
 	\usepackage{microtype}
 \else
@@ -143,6 +151,8 @@
 
 %--Mixed
 \usepackage[shortlabels,inline]{enumitem}
+\setlist[enumerate]{font=\bfseries\small}
+\setlist[description]{font=\normalfont\bfseries\small}
 % \usepackage[neverdecrease]{paralist}
 \usepackage[german=quotes]{csquotes}
 \usepackage{makeidx}
@@ -162,11 +172,18 @@
 \setlength{\ULdepth}{1.8pt}
 
 %--Indexverarbeitung
-\newcommand{\bet}[1]{\textbf{#1}}
-\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
+\newcommand{\bet}[1]{\textbf{\emph{#1}}}
+\newcommand{\Index}[1]{\textbf{\emph{#1}}\index{#1}}
 \makeindex
 \setindexpreamble{{\noindent \itshape Die \emph{Seitenzahlen} sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar} \ifxetexorluatex \faHandUp\fi \par \bigskip}
 \renewcommand{\indexpagestyle}{scrheadings}
+
+%--Titel abändern
+\RedeclareSectionCommand[%
+	beforeskip=-10pt plus -2pt minus -1pt,%
+	afterskip=2pt plus 1pt minus 1pt,%
+	font={\normalsize}%
+]{subsection}
 
 
 %--Marginnote & todonotes
