@@ -1,3 +1,4 @@
+%!TEX root = ../Topo1_WS14/topologie_1.tex
 \RequirePackage[thinlines]{easybmat} %-- muss aufgrund eines Bugs vor etex und tikz geladen werden
 \documentclass[a4paper, twoside, headsepline, index=totoc,toc=listof, fontsize=10pt, cleardoublepage=empty, headinclude, DIV=12, BCOR=10mm, titlepage]{scrartcl}
 \usepackage{scrtime} % KOMA, Uhrzeit ermoeglicht
@@ -132,10 +133,11 @@
 		ItalicFont=*-LightItalic,
 		BoldItalicFont=*-MediumItalic]
 	\setmonofont{FiraMono-Regular.otf}[Scale=MatchLowercase, ItalicFont={*}]
-	% \newfontfamily\bold[<font features>]{<name of font>}
+	\newfontfamily\medium[BoldFont=FiraSans-Medium.otf]{FiraSans-Medium.otf}
 	% \renewcommand{\familydefault}{\sfdefault} 
 	\usepackage{xltxtra}
 	\usepackage{microtype}
+	\linespread{1.05}
 \else
     % default: pdfLaTeX
     \usepackage[ngerman]{babel}
@@ -145,14 +147,16 @@
     \usepackage[babel=true, tracking=true]{microtype}
 	\usepackage{lmodern}
 	\renewcommand{\familydefault}{\sfdefault} 
+	\providecommand{\medium}{\bfseries}
 \fi
 
 \usepackage{fontawesome}
 
 %--Mixed
 \usepackage[shortlabels,inline]{enumitem}
-\setlist[enumerate]{font=\bfseries\small}
-\setlist[description]{font=\normalfont\bfseries\small}
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[enumerate]{font=\medium}
+\setlist[description]{font=\normalfont\medium}
 % \usepackage[neverdecrease]{paralist}
 \usepackage[german=quotes]{csquotes}
 \usepackage{makeidx}
@@ -181,10 +185,20 @@
 %--Titel abändern
 \RedeclareSectionCommand[%
 	beforeskip=-10pt plus -2pt minus -1pt,%
-	afterskip=2pt plus 1pt minus 1pt,%
+	afterskip=-1em plus -2pt minus -1pt,%
 	font={\normalsize}%
 ]{subsection}
-
+\RedeclareSectionCommand[%
+	beforeskip=-10pt plus -2pt minus -1pt,%
+	afterskip=-1em plus -2pt minus -1pt,%
+	font={\normalsize}%
+]{subsubsection}
+\RedeclareSectionCommand[%
+	beforeskip=3.25ex plus 1ex minus .2ex,%
+	afterskip=-1em plus -2pt minus -1pt,%
+	font={\normalfont\medium\small\scshape}%
+]{paragraph}
+\renewcommand{\minisec}[1]{\paragraph{#1:}}
 
 %--Marginnote & todonotes
 \deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\ }

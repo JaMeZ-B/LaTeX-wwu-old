@@ -1,3 +1,4 @@
+%!TEX TS-program = xelatex
 \input{../!config/mitschrift.tex}
 \newcommand{\fach}{Grundlagen der Analysis, Topologie, Geometrie}
 \newcommand{\shortFach}{Analysis, Topologie, Geometrie}
@@ -64,8 +65,7 @@ Auf $\mathds{R}^n$ gibt es verschiedene Normen und damit auch verschiedene Metri
 		S^1 := \set[z \in \mathds{C}]{\abs*{z} = 1 } 
 	\)
 	wird durch $d(z,z') := \min \set[\abs*{\theta} ]{\theta \in \mathds{R} : z = e^{i \theta} \cdot z'} $ eine Metrik definiert.
-	\item Ist $X$ ein metrischer Raum und $A$ eine Teilmenge von $X$, so wird $A$ durch die Einschränkung der Metrik auf $A$ zu einem metrischen Raum. Wir sagen dann $A$ 
-	ist ein Unterraum von $X$.
+	\item Ist $X$ ein metrischer Raum und $A$ eine Teilmenge von $X$, so wird $A$ durch die Einschränkung der Metrik auf $A$ zu einem metrischen Raum. Wir sagen dann $A$ ist ein Unterraum von $X$.
 	\item Sei $X$ eine beliebige Menge. Durch
 	\[
 		d(x,y) := \begin{cases}
@@ -361,7 +361,7 @@ Die übliche Topologie auf $\mathds{R}^n = \prod_{i =1}^n \mathds{R}$ stimmt mit
 	\end{tikzpicture}
 	\caption[Der Torus $T^2$]{Der Torus $T^2$, \hrefsym{http://tex.stackexchange.com/questions/348/how-to-draw-a-torus}{Quelle}}}
 \end{figure}
-$T^n := \underbrace{S^1 \times \ldots \times S^1}_{n} = \prod_{i=1}^n S^1$ heißt der $n$-Torus. Der $n$-Torus ist eine $n$-Mannigfaltigkeit.
+$T^n := \underbrace{S^1 \times \ldots \times S^1}_{n} = \prod_{i=1}^n S^1$ heißt der $n$-Torus. Der $n$-Torus ist eine (glatte) $n$-Mannigfaltigkeit.
 
 
 % subsection 27 (end)
@@ -523,8 +523,8 @@ $x_\lambda \in X$ für $\lambda \in \Lambda $. Für $x \in X$ sagen wir $(x_\lam
 \]
 Wir schreiben dann $x_\lambda \xrightarrow{\lambda  \to \infty} x$ oder $x_\lambda \longrightarrow x$.
 \minisec{Beispiel}
-Sei $X$ ein topologischer Raum und $x \in X$.\marginnote{Dies ist die hauptsächliche Anwendung von Netzen!}
-Dann ist $\Lambda := \set[U]{U \text{ ist offene Umgebung von }x} $ gerichtet bezüglich
+Es sei $X$ ein topologischer Raum und $x \in X$ ein Punkt.\marginnote{Dies ist die hauptsächliche Anwendung von Netzen!}
+Dann ist die Menge $\Lambda := \set[U]{U \text{ ist offene Umgebung von }x} $ gerichtet bezüglich
 \[
 	U \le V :\Leftrightarrow V \subseteq U
 \]
@@ -1461,21 +1461,19 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 		[\omega * c_{\omega(1)}] = [\omega]
 	\]
 \end{enumerate}
-\minisec{Beweis (nur a)}\marginnote{die anderen Beweise funktionieren ähnlich}
-\begin{minipage}[t]{0.6\textwidth}
-	Sei $\varphi : [0,1] \to [0,1]$ gegeben wie in Abbildung \ref{fig:98} gezeichnet.
-	Dann gilt 
-	\begin{align*}
-		\enbrace[\Big]{\omega * \enbrace[\big]{\omega' * \omega''} }(s) = \enbrace[\Big]{\enbrace[\big]{\omega * \omega'} * \omega''} (\varphi(s))  
-	\end{align*}
-	Die gesuchte Homotopie mit festen Endpunkten wird durch
-	\[
-		H(s,t) := \enbrace[\Big]{ \enbrace[\big]{\omega * \omega'} * \omega'' } \enbrace[\big]{(1-t)s + t \varphi(s)}  
-	\]
-	definiert. \bewende
-\end{minipage}
-\begin{minipage}[t]{0.5\textwidth}
-	\captionsetup{type=figure, skip=4pt, name=Abb.}
+
+\minisec{Beweis (nur a)}
+Sei $\varphi : [0,1] \to [0,1]$ gegeben wie in Abbildung \ref{fig:98} gezeichnet. \marginnote{die anderen Beweise funktionieren ähnlich}
+Dann gilt 
+\begin{align*}
+	\enbrace[\Big]{\omega * \enbrace[\big]{\omega' * \omega''} }(s) = \enbrace[\Big]{\enbrace[\big]{\omega * \omega'} * \omega''} (\varphi(s))
+\end{align*}
+Die gesuchte Homotopie mit festen Endpunkten wird durch
+\[
+	H(s,t) := \enbrace[\Big]{ \enbrace[\big]{\omega * \omega'} * \omega'' } \enbrace[\big]{(1-t)s + t \varphi(s)}
+\]
+definiert. \bewende
+\begin{figure}[ht]
 	\centering{
 	\begin{tikzpicture}[scale=2.4]
 		\coordinate (a) at (0.5,0.25);
@@ -1492,7 +1490,7 @@ Seien $\omega$ und $\omega'$ Wege in $X$ mit $\omega(1)= \omega'(0)$. Dann ist d
 	\caption{Funktion $\varphi$ aus dem Beweis zu \ref{sub:98}}
 	\label{fig:98}
 	}
-\end{minipage}
+\end{figure}
 % subsection 98 (end)
 
 \subsection[Korollar: Gruppenstruktur auf der Menge der Homotopieklassen von Schleifen]{Korollar} % (fold)
@@ -2047,8 +2045,8 @@ ein Gruppenhomomorphismus $\varphi : \pi_1(G \backslash X, \overline{x}_0 ) \to 
 
 \subsection[Bemerkung: $S^n$ ist wegzusammenhängend, für $n \ge 2$ sogar einfach]{Bemerkung} % (fold)
 \label{sub:12.5}
-Für $n \ge 1$ ist $S^n$ wegzusammenhängend. \hfill  (einfache Übung) \\
-Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übung) \medskip \\
+Für $n \ge 1$ ist $S^n$ wegzusammenhängend. \hfill  (einfache Übung)\\
+Für $n \ge 2$ ist $S^n$ einfach zusammenhängend. \hfill (weniger einfache Übung)\medskip\\
 Nach Satz \ref{sub:12.4} ist daher $\pi_1(\mathds{R}P^n, x_0) = \nicefrac{\mathds{Z}}{2}$ für $n \ge 2$. Es folgt $\mathds{R}P^n \not\cong S^n$ für $n \ge 2$. 
 (Andererseits ist $\mathds{R}P^1 \cong S^1$.)
 % subsection 12.5 (end)
@@ -2104,7 +2102,7 @@ Sei $\hat{X} \xrightarrow{p} X $ eine normale Überlagerung, wobei $\hat{X}$ weg
 \[
 	q' : \Delta(p)\backslash \hat{X} \to X \quad , \quad q' \enbrace[\big]{\Delta(p) x} = p(x)
 \]
-ein Homöomorphismus. \\
+ein Homöomorphismus.
 Wenn zusätzlich $\hat{X}$ einfach zusammenhängend und wegzusammenhängend ist, dann gilt $\pi_1(X, x_0) \cong \Delta(p)$ für einen beliebigen Basispunkt $x_0 \in X$.
 \minisec{Beweis}
 Wir haben in Bemerkung \ref{sub:12.8} schon gesehen, dass $q'$ eine Überlagerung ist. Unabhängig davon ob $p$ normal ist. Ist $p$ normal, so ist $q'$ bijektive 
@@ -2202,9 +2200,11 @@ Dann sind äquivalent:
 Sei $X$ wegzusammenhängend, lokal wegzusammenhängend und lokal einfach zusammenhängend. Dann gibt es eine wegzusammenhängende und einfach zusammenhängende  Überlagerung 
 $\tilde{X} \xrightarrow{p} X $.
 \minisec{Konstruktionsskizze}
-Sei $x_0 \in X$. Sei $P = \set[{\omega : [0,1] \to X \text{ Weg}}]{\omega(0)=x_0} $. Sei $\tilde{X}:= \nicefrac{P}{\text{Homotopie mit festen Endpunkten}}$. Dann induziert
-$\omega \mapsto \omega(1)$ eine wohldefinierte Abbildung $p : \tilde{X} \to X$. Sei $\omega \in P$ und $V$ eine wegzusammenhängende, einfach zusammenhängende Umgebung
-von $\omega(1)$ in $X$. Setze 
+Sei $x_0 \in X$. Sei $P = \set[{\omega : [0,1] \to X \text{ Weg}}]{\omega(0)=x_0} $. Sei 
+\[
+	\tilde{X}:= \nicefrac{P}{\text{Homotopie mit festen Endpunkten}}
+\] 
+Dann induziert $\omega \mapsto \omega(1)$ eine wohldefinierte Abbildung $p : \tilde{X} \to X$. Sei $\omega \in P$ und $V$ eine wegzusammenhängende, einfach zusammenhängende Umgebung von $\omega(1)$ in $X$. Setze 
 \[
 	U(V,\omega) = \set[{[\omega * \eta]}]{\rule{0cm}{1em} \eta : [0,1] \to V \text{ Weg mit } \eta(0)= \omega(1)} 
 \]
@@ -2878,7 +2878,7 @@ Insbesondere hängt $\Rg_x f$ nicht von der Wahl von Karten ab.
 	&= \D \enbrace*{\hat{h}_1 \circ  h_1 ^{-1}}_{h_1\enbrace[\big]{f(x)}} \circ  \D \enbrace*{h_1 \circ f \circ h_0 ^{-1}}_{h_0(x)} \circ \D \enbrace*{h_0 \circ \hat{h}_0 ^{-1}}_{\hat{h}_0(x)}   
 \end{align*}
 Da $\hat{h}_1 \circ h_1 ^{-1}$ und $h_0 \circ \hat{h}_0 ^{-1}$ Diffeomorphismen (um $h_1\enbrace[\big]{f(x)}$ bzw. $\hat{h}_0 (x)$) sind, sind 
-$\D \enbrace*{\hat{h}_1 \circ  h_1 ^{-1}}_{h_1\enbrace*{f(x)}}$ und $\D \enbrace*{h_0 \circ \hat{h}_0 ^{-1}}_{\hat{h}_0(x)}$ invertierbar. Es folgt die Behauptung. \bewende
+$\D \enbrace[\big]{\hat{h}_1 \circ  h_1 ^{-1}}_{h_1\enbrace*{f(x)}}$ und $\D \enbrace[\big]{h_0 \circ \hat{h}_0 ^{-1}}_{\hat{h}_0(x)}$ invertierbar. Es folgt die Behauptung. \bewende
 % subsection 164 (end)
 
 \subsection[Definition: reguläre Werte]{Definition} % (fold)
@@ -3374,7 +3374,7 @@ Sei $v \in \mathds{R}^n$. Unter $\mathds{R}^n = T_x U$ ist $v=[\omega_v]$ mit $\
 \subsection[Proposition: Vektorraumstruktur von $T_x M$, Linearität der Tangentialabbildung]{Proposition} % (fold)
 \label{sub:1813}
 \begin{enumerate}[a)]
-	\item Sei $M$ eine $C^\infty$"=Mannigfaltigkeit und $x \in M$. Dann gilt es eine eindeutige $\mathds{R}$-Vektorraumstruktur auf $T_x M$ mit folgender
+	\item Sei $M$ eine $C^\infty$"=Mannigfaltigkeit und $x \in M$. Dann gilt es eine eindeutige $\mathds{R}$"=Vektorraumstruktur auf $T_x M$ mit folgender
 	Eigenschaft:
 	
 	Ist $V \subseteq \mathds{R}^k$ offen, $\varphi : V \to M$ glatt mit $\varphi(y)=x$, so ist 
