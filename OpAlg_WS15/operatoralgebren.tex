@@ -705,7 +705,7 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 	\end{enumerate}
 \end{bemerkung}
 
-\begin{proposition}[label=prop:33]
+\begin{proposition}[label=prop:33,{name=[Existenz von Quadratwurzeln]}]
 	Sei $A$ eine $C^*$-Algebra und $a \in A_+$. Dann gibt es ein eindeutiges $b \in  A_+$, sodass $b^2=a$. Wir schreiben $a^{\sfrac{1}{2}}$ für dieses Element $b$.
 \end{proposition}
 \begin{beweis}
@@ -736,7 +736,7 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 	\end{enumerate}
 \end{beweis}
 
-\begin{korollar}[label=korr:35]
+\begin{korollar}[label=korr:35,{name=[Die positiven Elemente bilden einen Kegel]}]
 	Sei $A$ eine $C^*$-Algebra. Dann ist $A_+$ ein Kegel, das heißt für $a,b \in A_+$ und $\lambda, \mu \in \mathbb{R}_+$ gilt $\lambda \cdot a + \mu \cdot b \in A_+$
 \end{korollar}
 \begin{beweis}
@@ -779,7 +779,7 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 	$g(a^*a)^3=0$ und $g(a^*a)=0$ and $a^*a=f(a^*a)\ge 0$.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:27]
 	Sei $A$ eine $C^*$-Algebra. Dann gilt
 	\begin{enumerate}[(i)]
 		\item $A_+ = \set*{a^*a \given a \in A}$
@@ -897,21 +897,130 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 	$a = \lim_\lambda e_\lambda a$ für jedes $a \in A$.
 \end{definition}
 
-\begin{satz}
+\begin{satz}[{name=[Existenz von approximativen Einsen]},label=satz:313]
 	Jede $C^*$-Algebra $A$ besitzt eine approximative Eins.
 \end{satz}
 \begin{beweis}
-	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. Dann ist 
-	$(e_\lambda)_\Lambda \subset A_+^1$ ein aufsteigendes Netz (aufsteigend bezüglich \enquote{$\le$}, gerichtet nach \autoref{lem:311}). Sei nun $a \in \Lambda$ und 
-	$\varepsilon>0$. Sei $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. Setze $f := \Phi(a) = \id_\Omega$
-	und $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$ kompakt. Nach Urysohn existiert ein $g \colon \Omega \to [0,1]$ stetig mit kompaktem Träger 
-	und $g(\omega)=1$ für $\omega \in K$. Wähle $\delta>0$ mit $\delta<1$ und $1-\delta< \varepsilon$. Dann gilt 
+	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. 
+	Dann ist $(e_\lambda)_\Lambda \subset A_+^1$ ein aufsteigendes Netz (aufsteigend bezüglich \enquote{$\le$}, gerichtet nach \autoref{lem:311}). 
+	Sei nun $a \in \Lambda$ und $1 \ge \varepsilon>0$. Sei $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. 
+	Setze $f := \Phi(a) = \id_\Omega$ und $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$ kompakt. 
+	Nach Urysohn existiert ein $g \colon \Omega \to [0,1]$ stetig mit kompaktem Träger und $g(\omega)=1$ für $\omega \in K$. 
+	Wähle $\delta>0$ mit $\delta<1$ und $1-\delta< \varepsilon$. Dann gilt 
 	\[
 		\norm*{f- \delta \cdot g \cdot f}_\infty = \norm{(1-\delta g) f}_\infty \le \varepsilon
 	\]
-	Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon$.
+	Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon^2 \le \varepsilon$. 
+	Falls nun $\lambda \in \Lambda$ mit $\lambda \ge \overline{\lambda}$, so gilt $0 \le a^*(\ind-e_\lambda)a \le a^*(1- e_{\overline{\lambda}})a$ nach \autoref{satz:27}(v). 
+	Dann folgt 
+	\begin{align}
+		\norm*{a- e_\lambda a}^2 = \norm*{(\ind-e_\lambda)^{\sfrac{1}{2}} (\ind - e_\lambda)^{\sfrac{1}{2}} a}^2 \le \norm*{(\ind- e_\lambda)^{\sfrac{1}{2}}a}^2
+		 &= \norm*{a^* (\ind -e_\lambda)^{\sfrac{1}{2}}(\ind-e_\lambda)^{\sfrac{1}{2}}a} \\
+		 &\le \norm*{a^* (\ind-e_{\overline{\lambda}})a} \le \varepsilon
+	\end{align}
+	Damit folgt $a = \lim_\lambda e_\lambda a$ für $a \in \Lambda$. Da $A= \Span \Lambda$ gilt, sind wir fertig.
+\end{beweis}
+
+\begin{proposition}
+	Sei $A$ eine separable $C^*$-Algebra -- das heißt A besitzt eine abzählbare dichte Teilmenge -- dann besitzt $A$ eine abzählbare idempotente approximative Eins $(e_n)_\mathbb{N}$, das heißt es gilt $e_n e_{n+1}=e_n$.
+\end{proposition}
+\begin{beweis}
+	\emph{Übung!}
 \end{beweis}
 % section 3 (end)
+\newpage
+
+\section{Ideale, Quotienten und Limiten} % (fold)
+\label{sec:4}
+
+\begin{proposition}[{name=[aus abgeschlossenem Ideal eine $C^*$-Unteralgebra bauen]},label=prop:41]
+	Sei $L$ ein abgeschlossenes Linksideal in einer $C^*$-Algebra $A$. 
+	Dann existiert ein aufsteigendes Netz $(e_\lambda)_\Lambda \subset L \cap A_+^1$ mit $a =\lim_\lambda a e_\lambda$ für $a \in L$. 
+	$L \cap L^* \subset A$ ist eine $C^*$-Unteralgebra.
+\end{proposition}
+\begin{beweis}
+	Sei $B := L \cap L^*$, dann ist $B \subset A$ eine $C^*$-Unteralgebra:
+	\begin{itemize}[itemsep=1pt]
+		\item $L^* \subset A$ abgeschlossen, da $^*$ isometrisch ist. Damit ist auch $L \cap L^*$ abgeschlossen in $A$
+		\item $L \cap L^* \subset$ ist ein Untervektorraum.
+		\item $L^* \subset A$ ist ein Rechtsideal: $l^* a = (a^*l)^* \in L^*$. Damit ist $L \cap L^*$ eine Unteralgebra: 
+		\[
+			a,b \in L \cap L^* \Rightarrow \Underbracket{a}{\in L^*} \, \Underbracket{b}{\in L} \in L \cap L^*
+		\]
+		\item $L \cap L* = (L \cap L^*)^*$ ist klar.
+	\end{itemize}
+	Mit Satz \autoref{satz:313} folgt, dass $B$ eine approximative Eins $(e_\lambda)_\Lambda$ besitzt. 
+	Für $a \in L$ ist $a^*a \in B$ und damit 
+	\[
+		\lim_\lambda \norm*{a-a e_\lambda}  = \lim_\lambda \norm[\big]{(\ind-e_\lambda)a^* a(\ind-e_\lambda)}^{\sfrac{1}{2}} =0 \qedhere
+	\]
+\end{beweis}
+
+\begin{satz}[{name=[Quotientennorm durch approximative Eins]},label=satz:42]
+	Sei $A$ eine $C^*$-Algebra und $J \lhd A$ ein (abgeschlossenes, zweiseitiges) Ideal. 
+	Dann ist $J \subset A$ eine $C^*$-Algebra. 
+	Falls $(e_\lambda)_\Lambda \subset J$ eine approximative Eins ist, so gilt für $a \in A$ 
+	\[
+		\norm*{a+J}_{\sfrac{A}{J}} = \lim_\lambda \norm*{a-a e_\lambda} = \lim_\lambda \norm*{a- e_\lambda a}
+	\]
+	wobei $\norm*{a +J}_{\sfrac{A}{J}} = \inf_{b \in J} \norm*{a+b}$ die Quotientennorm bezeichnet. 
+\end{satz}
+\begin{beweis}
+	Nach \autoref{prop:41} existiert $(u_\gamma)_\Gamma \subset J \cap A_+^1$ mit $a= \lim_\gamma a u_\gamma$ für $a \in J$. Dann gilt
+	\[
+		a^* = \lim_\gamma (a u_\gamma)^* =\lim_\gamma u_\gamma a^* \in J
+	\]
+	für $a \in J$, also $J=J^*$. Mit \autoref{prop:41} folgt dann wiederum, dass $J=J\cap J^*$ eine $C^*$-Unteralgebra von $A$ ist. 
+	Sei $(e_\lambda)_\Lambda \subset J$ eine beliebige approximative Eins für $J$. 
+	Gegeben $a \in A$ und $\varepsilon>0$, so wähle $b \in J$ mit $\norm*{a+b} \le \norm*{a+ J}_{\sfrac{A}{J}} + \frac{\varepsilon}{2}$. 
+	Wähle dann $\lambda_0 \in \Lambda$ mit $\norm*{b- \varepsilon_\lambda b} \le \frac{\varepsilon}{2}$ für alle $\lambda \ge \lambda_0$.
+	Für $\lambda \ge \lambda_0$ gilt dann 
+	\begin{align}
+		\norm*{a+J}_{\sfrac{A}{J}} \le \norm*{a- e_\lambda a} \le \norm*{(\ind-e_\lambda)(a+b)} + \norm*{(\ind-e_\lambda)b} 
+		&\le \norm*{a+b} + \norm*{(\ind -e_\lambda) b} \\
+		&\le \norm*{a+J}_{\sfrac{A}{J}}+ \sfrac{\varepsilon}{2} + \sfrac{\varepsilon}{2}  
+	\end{align}
+	Damit folgt $\norm*{a-e_\lambda a} \xrightarrow{\minwidthbox{\lambda}{1em}} \norm*{a+J}_{\sfrac{A}{J}}$. 
+	$\norm*{a- a e_\lambda } \xrightarrow{\minwidthbox{\lambda}{1em}} \norm*{a+J}_{\sfrac{A}{J}}$ folgt ebenso.
+\end{beweis}
+
+\begin{bemerkung}
+	Für Ideale $J \lhd A$ und $I \lhd J$ gilt $I \lhd A$.
+\end{bemerkung}
+\begin{beweis}
+	Es sei $a \in A$ und $b \in I$. Dann gilt
+	\[
+		ab= \Underbracket{a b^{\sfrac{1}{2}}}{\in J} b^{\sfrac{1}{2}} \in I \qedhere
+	\]
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine $C^*$-Algebra und $J \lhd A$ ein Ideal. Dann ist $\sfrac{A}{J}$ eine $C^*$-Algebra (mit induzierten Operationen und der Quotientennorm). 
+\end{satz}
+\begin{beweis}
+	Fixiere eine approximative Eins $(e_\lambda)_\Lambda$ für $J$. Sei $a \in A$ und $b \in J$. Dann gilt
+	\begin{align}
+		\norm*{a+J}^2_{\sfrac{A}{J}} \StackText{\ref{satz:42}}{=} \lim_\lambda \norm*{a-a e_\lambda}^2 &= \lim_\lambda \norm*{(\ind-e_\lambda)a^*a(\ind-e_\lambda)} \\
+		&\le \sup_\lambda \norm[\big]{(\ind- e_\lambda)(a^*a +b)(\ind- e_\lambda)} + \Underbracket{\lim_\lambda \norm[\big]{(\ind-e_\lambda)b(\ind-e_\lambda)}}{=0} \\
+		&\le \norm*{a^*a+b}
+	\end{align}
+	Wir erhalten 
+	\begin{align}
+		\norm*{a+J}_{\sfrac{A}{J}}^2 \le \inf_{b \in J} \norm*{a^* a+b} = \norm*{a^*a +J}_{\sfrac{A}{J}} \le \norm*{a^* +J}_{\sfrac{A}{J}} \cdot \norm*{a+J}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}
+	\end{align}
+	Also ist $\norm*{(a^* +J)(a+J)}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}$.
+\end{beweis}
+
+\begin{proposition}
+	Seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein injektiver $^*$-Homomorphismus. Dann ist $\pi$ bereits isometrisch.
+\end{proposition}
+\begin{beweis}
+	Zu zeigen: $\norm*{\pi(a^*a)}=\norm*{\pi(a)}^2= \norm*{a}^2= \norm*{a^*a}$ für $a \in A$. 
+	Wir dürfen also annehmen, dass $A= C^*(a^*a)$ und $B=\overline{\pi(A)}$ abelsch sind. 
+	Ersetze $\pi$ durch $\pi^\simm \colon A^\simm  \to B^\sim$, falls $A$ nicht unital ist.
+	Wir dürfen also auch $A$ und $B$ als unital annehmen.
+\end{beweis}
+% section 4 (end)
 
 
 
