@@ -1041,7 +1041,7 @@ Ab jetzt: $R$ kommutativ!
 
 \begin{erinnerungA}
 	Sei $M$ eine $R$-orientierbare zusammenhängende geschlossene $n$-Mannigfaltigkeit. 
-	Dann ist $H_n(M;R) \cong R$. 
+	Dann ist $H_n(M;R) \cong R$.\footnote{das sieht man zB. mit der Paarfolge}
 	Ein Erzeuger von $H_n(M;R)$ heißt \Index{Fundamentalklasse}.
 	Jeder solcher hat die Eigenschaft, dass $\mu|_x \in H_n(M,M \setminus \set*{x};R) \cong R$ ein Erzeuger ist. 
 	Die Wahl einer solchen Fundamentalklasse entspricht genau der Wahl einer $R$-Orientierung für $M$.
@@ -1174,6 +1174,169 @@ Ab jetzt: $R$ kommutativ!
 	\]
 	immer surjektiv ist, gibt es $\xi \in H^n \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R}$ mit $\xi(\mu_B)=1$. 
 	Also $\epsilon(\xi \capp \mu_B)=1$. Folglich ist $\xi \capp \mu_B$ ein Erzeuger von $H^0(\mathbb{R}^n;R)$ und $\capp \mu_B$ ein Isomorphismus.
+\end{beweis}
+
+\begin{definition}[{name=[gerichtete Menge]}]
+	Eine \Index{gerichtete Menge} ist eine Menge $\Lambda$ zusammen mit einer partiellen Ordnung \enquote{$\le$}, sodass es für alle $\lambda,\lambda' \in \Lambda$ ein $\mu \in \Lambda$ mit $\lambda \le \mu $ und $\lambda' \le \mu$.
+\end{definition}
+
+\begin{beispiel}
+	Es gibt zahlreiche Beispiele für gerichtete Mengen
+	\begin{itemize}[itemsep=0pt] 
+		\item $(N,\le)$, $(\mathbb{Z},\le)$, $(\mathbb{Q},\le)$ und $(\mathbb{R},\le)$ mit der üblichen Ordnung
+		\item $\mathcal{K}(X)= \set*{K \subseteq X \given K \text{ kompakt}}$ mit \enquote{$\subseteq$}
+	\end{itemize}
+\end{beispiel}
+
+\begin{bemerkung}
+	Wir können jede gerichtete Menge $(\Lambda,\le)$ als eine kleine Kategorie auffassen: 
+	Die Menge der Objekte ist $\Lambda$ und es gibt genau dann einen Morphismus $i_\lambda^{\lambda'} \colon \lambda \to \lambda'$, falls $\lambda \le \lambda'$ ist. 
+	Andernfalls gibt es keine Morphismen.
+\end{bemerkung}
+
+\begin{definition}[{name=[Kolimes]}]
+	Sei $(\Lambda,\le)$ eine gerichtete Menge und $F \colon (\Lambda,\le) \to R\text{-}\MOD$ ein Funktor. Der \Index{Kolimes} von $F$ ist definiert als 
+	\[
+		\colim_\Lambda F := \Faktor{\coprod_{\lambda \in \Lambda}F(\lambda)}{v \sim F \enbrace{i_\lambda^{\lambda'}}(v), v \in F(\lambda), \lambda \le \lambda'}
+	\]
+	Für $\lambda \in \Lambda$ sei $s_{\lambda_0} \colon F(\lambda) \to \colim_\Lambda F$ die Komposition von der Inklusion $F(\lambda_0) \to \coprod_{\lambda \in \Lambda}F(\lambda)$ mit der Projektion $\coprod_{\lambda \in \Lambda}F(\lambda) \twoheadrightarrow \colim_\Lambda F$. Durch
+	\begin{align}
+		r \cdot s_\lambda(v) &\coloneqq s_\lambda(r \cdot v) \quad \text{ und} \\
+		s_\lambda(v) + s_{\lambda'}(v') &\coloneqq s_\mu \enbrace*{F(i_\lambda^{\mu})(v) + F(i_{\lambda'}^\mu)(v')} 
+	\end{align}
+	für $\lambda,\lambda' \le \mu$ erhalten wir eine $R$-Modulstruktur auf $\colim_\Lambda F$. Die Abbildungen sind dann $R$-linear.
+\end{definition}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{itemize}
+		\item Nicht jede kleine Kategorie gehört zu einer gerichteten Menge:
+		\begin{enumerate}[(i)]
+			\item Die von der Gruppe $\sfrac{\mathbb{Z}}{2}$ erzeugte Kategorie mit einem Objekt und den Gruppenelementen als Morphismen.
+			\item \todo{Kategorie mit zwei Objekten und keinen nichttrivialen Morphismen}
+		\end{enumerate}
+		\item Der Kolimes über gerichtete Mengen ist eine Spezialfall des Kolimes über kleine Kategorien aus den Übungen. 
+		Insbesondere hat der Kolimes über gerichtete Mengen einen universelle Eigenschaft, die ihn charakterisiert.
+		\item Sei $v_\lambda \in F(\lambda)$. Dann gilt
+		\[
+			s_\lambda(v_\lambda) =0 \in \colim_\Lambda F \iff \exists \lambda' : \lambda \le \lambda', F(i_\lambda^{\lambda'})(v_\lambda)=0 \in F(\lambda')
+		\]
+	\end{itemize}
+\end{bemerkung}
+
+\begin{definition}[{name=[kofinal]}]
+	Sei $(\Lambda,\le)$ eine gerichtete Menge. $\Lambda_0 \subseteq \Lambda$ heißt \Index{kofinal}, falls es zu jedem $\lambda \in \Lambda$ ein $\lambda_0 \in \Lambda_0$ gibt mit $\lambda\le \lambda_0$. 
+\end{definition}
+
+\begin{lemma}
+	Sei $\Lambda_0 \subseteq \Lambda$ kofinal. Dann ist die kanonische Abbildung (induziert von der Inklusion $\coprod_{\lambda_0} F(\lambda_0) \hookrightarrow \coprod_{\lambda} F(\lambda)$)
+	\[
+		c \colon \colim_{\lambda_0 \in \Lambda_0} F(\lambda_0) \longrightarrow \colim_{\lambda \in \Lambda} F(\lambda)
+	\]
+	ein Isomorphismus.
+\end{lemma}
+\begin{beweis}
+	Surjektivität: Sei $v \in \colim_\Lambda F(\lambda)$. Wähle $\lambda \in \Lambda$, $v_\lambda \in F(\lambda)$ mit $s_\lambda(v_\lambda)=v$. 
+	Da $\Lambda_0 \subseteq \Lambda$ kofinal ist, gibt es $\lambda_0 \in \Lambda_0$ mit $\lambda \le \lambda_0$. 
+	Dann ist
+	\[
+		v = s_{\lambda_0} \enbrace*{F(i_\lambda^{\lambda_0})(v_\lambda)} \in \im c
+	\]
+	Injektivität: Sei $v \in \ker c$. Sei also $\lambda_0 \in \Lambda_0$, $v_{\lambda_0} \in F(\lambda_0)$ mit $v=s_{\lambda_0}(v_{\lambda_0})$. 
+	Da $v \in \ker c$ ist, gibt es $\lambda \in \Lambda$ mit $\lambda_0 \le \lambda$ und $F(i_{\lambda_0}^{\lambda})(v_{\lambda_0}) =0$. 
+	Da $\Lambda_0 \subseteq \Lambda$ kofinal ist, gibt es $\lambda_0' \in \Lambda_0$ mit $\lambda \le \lambda_0$. 
+	Es folgt 
+	\begin{align}
+		F(i_{\lambda_0}^{\lambda_0'})(v_{\lambda_0}) = F (i_\lambda^{\lambda_0'} \circ i_{\lambda_0}^\lambda)(v_{\lambda_0}) = F(i_{\lambda}^{\lambda_0'}) \enbrace[\Big]{\Underbrace{F(i_{\lambda_0}^\lambda)(v_{\lambda_0})}{=0}} = 0
+	\end{align}
+	Es folgt $v=0$.
+\end{beweis}
+
+\begin{korollar}
+	Gibt es $\lambda_\infty \in \Lambda$ mit $\lambda \le \lambda_\infty$ für alle $\lambda \in \Lambda$, so ist $\colim_\Lambda F = F(\lambda_\infty)$
+\end{korollar}
+\begin{beweis}
+	$\set*{\lambda_\infty} \subseteq \Lambda$ ist kofinal.
+\end{beweis}
+
+\begin{beispiel}\leavevmode
+	\begin{itemize}
+		\item Sei $\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}$ die Menge aller endlichen Teilmengen der Menge $S$. 
+		Bezüglich $\subseteq$ ist $\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}$ gerichtet.
+		Sei $F \colon \enbrace*{\mathcal{P}\mkern-2.5mu_{\mathrm{endl}},\subseteq} \to R\text{-}\MOD$ definiert durch $F(S_0)=R[S_0]$ für $S_0 \subseteq S$ endlich. 
+		Dann ist $\colim_{\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}} F \cong R[S]$ mit $s_{s_0} \colon R[S_0]\to R(S)$ die von $S_0 \subseteq S$ induzierte Abbildung.
+		\item Sei $F \colon \mathbb{N} \to \mathbb{Z}\text{-}\MOD$ definiert durch $F(n)=\mathbb{Z}$ für alle $n$ und $F(i_n^{n'}) \colon \mathbb{Z} \to \mathbb{Z}$ ist Multiplikation mit $2^{n'-n}$.
+		\[
+			\begin{tikzcd}
+				\mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] &\mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] & \ldots 
+			\end{tikzcd}
+		\]
+		Dann ist
+		\[
+			\colim F = \Faktor{\coprod_{n \in \mathbb{N}} \mathbb{Z}}{\sim} = \Faktor{\mathbb{N}\times \mathbb{Z}}{\scriptstyle(n,z) \sim (n',2^{n'-n} z), n < n'} \longrightarrow \mathbb{Z}\benbrace*{\sfrac{1}{2}} = \set*{\sfrac{a}{2^n}\given a \in \mathbb{Z}, n \in \mathbb{N} }
+		\]
+		\item Ist $F$ konstant, also $F(i_\lambda^{\lambda'})=\id_{F(\lambda)}$ für alle $\lambda \le \lambda'$, so ist 
+		\(
+			\colim_\Lambda F \cong F(\lambda)
+		\)
+		für jedes $\lambda \in \Lambda$.
+		\item Sei $F(n) := R \benbrace[\big]{\set*{n,n+1,n+2,\ldots }}$ und $F(i_n^{n'}) \colon R \benbrace[\big]{\set*{n,n+1,\ldots }} \to R \benbrace[\big]{\set*{n',n'+1,\ldots }}$ definiert durch 
+		\[
+			\sum_{k=n}^{\infty} r_k \cdot k \longmapsto \sum_{k=n'}^{\infty} r_k \cdot k
+		\]
+		Dann ist $\colim_\mathbb{N} F = 0$, denn für jedes $v \in F(n)$ gibt es $n'> n$ mit $F(i_n^{n'})(v)=0$.
+	\end{itemize}
+\end{beispiel}
+
+\begin{bemerkung}
+	Sei $\FUN\enbrace*{(\Lambda,\le), R\text{-}\MOD}$ die Kategorie, deren Objekte Funktoren $F \colon (\Lambda,\le) \to R \text{-}\MOD$ sind und deren Morphismen natürliche Transformationen $\tau \colon F \to G$ sind. Dann ist
+	\[
+		\colim_\Lambda \colon \FUN\enbrace*{(\Lambda,\le), R\text{-}\MOD} \longrightarrow R\text{-}\MOD
+	\]
+	ein Funktor: Ist $\tau \colon F \to G$ eine natürliche Transformation, so induziert $\coprod_{\lambda \in \Lambda}\tau_\lambda \colon \coprod_{\lambda \in \Lambda} F(\lambda) \to \coprod_{\lambda \in \Lambda} G(\lambda)$ eine $R$-lineare Abbildung $\tau_* =\colim_\Lambda \tau \colon \colim_\Lambda F \to \colim_\Lambda G$
+\end{bemerkung}
+
+\begin{definition}
+	Eine Folge 
+	\( \begin{tikzcd}[cramped]
+		F \rar["\tau"] & F' \rar["\tau'"] & F''
+	\end{tikzcd} \) 
+	heißt \Index{exakt}, wenn 
+	\( \begin{tikzcd}[cramped]
+		F(\lambda)\rar["\tau_\lambda"] & F'(\lambda) \rar["\tau_\lambda'"] & F''(\lambda)
+	\end{tikzcd} \) 
+	exakt ist.
+\end{definition}
+
+\begin{satz}[name={Exaktheit gerichteter Kolimiten}]
+	Sei $(\Lambda,\le)$ eine gerichtete Menge. Ist 
+	\[
+		\begin{tikzcd}
+			0 \rar & F \rar["\tau"] & F' \rar["\tau'"] & F'' \rar & 0
+		\end{tikzcd}
+	\]
+	exakt in $\FUN \enbrace*{(\Lambda,\le), R\text{-}\MOD}$ so ist auch folgende Sequenz exakt
+	\[
+		\begin{tikzcd}[sep=large]
+			0 \rar & \colim_\Lambda F \rar["\colim_\Lambda \tau"] & \colim_\Lambda F' \rar["\colim_\Lambda \tau'"] & \colim_\Lambda F'' \rar & 0
+		\end{tikzcd}
+	\]
+\end{satz}
+\begin{beweis}
+	Seien $s_\lambda, s'_\lambda, s''_\lambda$ die Strukturabbildungen. 
+	Wir zeigen nur $\colim_\Lambda \tau$ ist injektiv. 
+	Sei $v \in \ker (\colim_\Lambda \tau)$.
+	Wähle $v_\lambda \in F(\lambda)$ mit $s_\lambda(v_\lambda)=v$.
+	Dann ist $\tau_*(v)=s_\lambda'\enbrace[\big]{\tau_\lambda \enbrace*{v_\lambda}}$.
+	Da $\tau_*(v)=0$ ist, gibt es $\mu \ge \lambda$ mit 
+	\[
+		F'(i_\lambda^\mu) \enbrace*{s_\lambda'\enbrace[\big]{\tau_\lambda \enbrace*{v_\lambda}}}=0
+	\]
+	Da $\tau$ eine natürliche Transformation ist, ist 
+	\begin{align}
+		0=F'(i_\lambda^\mu) \enbrace[\big]{ \tau_\lambda(v_\lambda)} = \tau_\mu \enbrace*{F(i_\lambda^\mu)(v_\lambda)}
+	\end{align}
+	Da $\tau_\mu$ injektiv ist, ist $F(i_\lambda^\mu)(v_\lambda)=0$. Damit ist $v=s_\lambda(v_\lambda)=0$.
 \end{beweis}
 % section 7 (end)
 
