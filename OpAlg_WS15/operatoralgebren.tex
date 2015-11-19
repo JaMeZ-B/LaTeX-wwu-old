@@ -431,14 +431,14 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item Für eine Projektion $0 \neq p  \in A$ gilt $\norm*{p} =1$.
 		\item Ist $\ind \in A$ und $u \in A$ unitär, dann ist $\norm*{u}=1$ und $\sigma(u) \subset \mathbb{T}$.
-		\item Für $a \in A_{\sa}$ ist $r(a)= \norm*{a}$ und $\sigma(a) \subset \mathbb{R}$.
+		\item \label{210:3} Für $a \in A_{\sa}$ ist $r(a)= \norm*{a}$ und $\sigma(a) \subset \mathbb{R}$.
 		\item Für $a \in A$ beliebig gilt $\norm*{a} = \norm*{a^* a}^{\sfrac{1}{2}}= r(a^* a)^{\sfrac{1}{2}}$.
 	\end{enumerate}
 \end{proposition}
 \begin{beweis}
 	\leavevmode
 	\begin{enumerate}[(i),itemsep=0pt]
-		\item Es gilt $\norm*{p} = \norm*{p^*p}= \norm*{p}^2$ und somit muss $\norm*{p}=1$ gelten. \todo{Revision 2}
+		\item Es gilt $\norm*{p} = \norm*{p^*p}= \norm*{p}^2$ und somit muss $\norm*{p}=1$ gelten.
 		\item Es gilt $\norm*{u}^2= \norm*{u^* u}= \norm*{\ind}=1$, also $\norm*{u}=1=\norm*{u^*}$. Wenn $\lambda \in \sigma(u)$, dann gilt $\lambda \neq 0$ und es gilt
 		$\lambda^{-1} \in \sigma(u^*)$. Da die Spektralradien von $u$ und $u^*$ kleiner gleich $1$ sind, muss $\abs{\lambda},\abs{\lambda^{-1}}\le 1$ gelten, also $\abs{\lambda}=1$
 		und damit $\lambda \in \mathbb{T}$.
@@ -448,52 +448,54 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\]
 		Weiter existiert\footnote{$(ia)^0 = \ind_{A^\simm}$ falls $A$ nicht unital} $e^{ia} := \sum_{n=0}^{\infty} \frac{1}{n!}(ia)^n \in A^\simm$ und ist unitär mit 
 		\(
-			\enbrace*{e^{ia}}^* = e^{(ia)^*} = e^{-ia} = \enbrace*{e^{ia}}^{-1}
+			\enbrace{e^{ia}}^* = e^{(ia)^*} = e^{-ia} = \enbrace{e^{ia}}^{-1}
 		\), 
 		also ist $\sigma(e^{ia}) \subset \mathbb{T}$ nach (ii). Falls $\lambda \in \sigma(a)$, dann setze $b := \sum_{n=1}^{\infty} \frac{1}{n!} i^n (a-\lambda)^{n-1}$. Dann gilt
 		\[
 			(a-\lambda) b e^{i \lambda} = \enbrace[\big]{e^{i(a-\lambda)}- \ind}e^{i \lambda} = e^{i a} - e^{i \lambda}
 		\]
 		Also ist $e^{i \lambda} \in \sigma(e^{ia}) \subset \mathbb{T}$ und somit $\lambda \in \mathbb{R}$.
-		\item Folgt aus (iii). \qedhere
+		\item Folgt direkt aus \ref{210:3}. \qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{korollar}[label=kor:211]
+\begin{korollar}[label=kor:211,{name=[*-Homomorphismen sind kontraktiv]}]
 	Es seien $A$ und $B$ zwei $C^*$-Algebren und $\pi \colon A \to B$ ein ${}^*$-Homomorphismus. Dann ist $\pi$ kontraktiv.
 	Die Aussage bleibt richtig, falls $A$ nur eine involutive Banachalgebra ist. 
 \end{korollar}
 \begin{beweis}
-	Wir dürfen $\pi$ als unital annehmen (betrachte sonst $\pi^{\hspace{-0.5pt}+}\colon A^{\hspace{-0.8pt}+} \to B^{\hspace{-0.5pt}\sim}$). Für $d \in A$ gilt 
-	$\sigma_B \enbrace[\big]{\pi(d)} \subset \sigma_A(d)$, alos $r_B \enbrace[\big]{\pi(d)} \le r_A(d)$. Für $a \in A$ gilt
+	Wir dürfen $\pi$ als unital annehmen (betrachte sonst $\pi^{\hspace{-0.5pt}+}\colon A^{\hspace{-0.9pt}+} \to B^{\hspace{-0.5pt}\sim}$). 
+	Für $d \in A$ gilt $\sigma_B \enbrace[\big]{\pi(d)} \subset \sigma_A(d)$, also $r_B \enbrace[\big]{\pi(d)} \le r_A(d)$. 
+	Für $a \in A$ gilt nach \autoref{prop:210} \ref{210:3}
 	\[
 		\norm*{\pi(a)}^2 = \norm*{\pi(a)^* \pi(a)} = \norm*{\pi(a^*a)} = r_B \enbrace[\big]{\pi(a^*a)} \le r_A(a^*a) = \norm*{a}^2 \qedhere
 	\]
 \end{beweis}
 
-\begin{korollar}
+\begin{korollar}[{name=[höchstens eine $C^*$-Norm]}]
 	Auf einer ${}^*$-Algebra gibt es höchstens eine $C^*$-Norm.
 \end{korollar}
 \begin{beweis}
-	Sei $A$ eine ${}^*$-Algebra mit $C^*$-Normen $\norm*{\cdot}_1$ und $\norm*{\cdot}_2$. Wir bezeichnen die $C^*$-Algebren entsprechend mit $A_1$ und $A_2$. Sei 
-	$\pi_1 \colon A_1 \to A_2$ und $\pi_2 \colon A_2 \to A_1$ die Identitäten. Dann gilt
+	Sei $A$ eine ${}^*$-Algebra mit $C^*$-Normen $\norm*{\cdot}_1$ und $\norm*{\cdot}_2$. 
+	Wir bezeichnen die $C^*$-Algebren entsprechend mit $A_1$ und $A_2$. 
+	Es seien $\pi_1 \colon A_1 \to A_2$ und $\pi_2 \colon A_2 \to A_1$ die Identitäten. Dann gilt
 	\[
 		\norm*{a}_1 = \norm*{\pi_2(a)}_1 \le \norm*{a}_2 = \norm*{\pi_1(a)}_2 \le \norm*{a}_1 \qedhere
 	\]
 \end{beweis}
 
-\begin{korollar}[label=kor:213]
+\begin{korollar}[label=kor:213,{name=[Charaktere sind *-Homomorphismen]}]
 	Sei $A$ eine $C^*$-Algebra und $\chi$ ein Charakter auf $A$. Dann gilt $\chi(a^*) = \overline{\chi(a)}$ für $a \in A$, das heißt $\chi$ ist ein ${}^*$-Homomorphismus.
 \end{korollar}
 \begin{beweis}
 	Sei $a \in A$, dann ist $a=\frac{1}{2}(a+a^*) + i \cdot \frac{1}{2i}(a-a^*) =: b + i \cdot c$ und $b,c$ sind selbstadjungiert. Es gilt 
 	\[
-		\chi(b) \StackText{\ref{satz:29}}{\in} \sigma(b) \StackText{\ref{prop:210}(iii)}{\subset} \mathbb{R} \quad \text{ und } \quad \chi(c) \in \sigma(c) \subset \mathbb{R} 
+		\chi(b) \StackText{\ref{satz:29}}{\in} \sigma(b) \StackText{\ref{prop:210}\ref{210:3}}{\subset} \mathbb{R} \quad \text{ und } \quad \chi(c) \in \sigma(c) \subset \mathbb{R} 
 	\]
 	Damit folgt $\chi(a^*) = \chi(b - i \cdot c) = \chi(b) - i \cdot \chi(c) = \overline{\chi(b) + i \cdot \chi(c)} = \overline{\chi(a)}$.
 \end{beweis}
 
-Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise unitale $C^*$-Algebren:
+Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} für nicht notwendigerweise unitale $C^*$-Algebren ableiten: \todo{Revision 2}
 
 \begin{korollar}
 	Sei $A$ eine abelsche $C^*$-Algebra. Dann gilt
@@ -751,7 +753,7 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 	Also ist $a+b \ge 0$ nach \autoref{prop:34}(i). 
 \end{beweis}
 
-\begin{satz}[label=satz:36]
+\begin{satz}[label=satz:36,{name=[$a^*a$ ist positiv]}]
 	Sei $A$ eine $C^*$-Algebra und $a \in A$. Dann gilt $a^*a \ge 0$.
 \end{satz}
 \begin{beweis}
@@ -761,8 +763,8 @@ Wir erhalten eine Version von \autoref{satz:1.13} für nicht notwendigerweise un
 		\begin{tikzpicture}[scale=0.5]
 			\draw[->,thick] (-3,0) -- (3,0);
 			\draw[->,thick] (0,-3) -- (0,3);
-			\draw[Firebrick2,very thick,dashed] (-3,0) -- (0,0) -- (3,3) node[below]{$f$};
-			\draw[SeaGreen4,very thick,dashed] (-3,-3) -- (0,0) -- (2.8,0) node[below left]{$g$};
+			\draw[Firebrick2,ultra thick,dashed] (-3,0) -- (0,0) -- (3,3) node[below]{$f$};
+			\draw[SeaGreen4,ultra thick,dashed] (-3,-3) -- (0,0) -- (2.8,0) node[below left]{$g$};
 		\end{tikzpicture}
 		\caption{Zerlegen der Identität in zwei Funktionen $f$ und $g$} \label{fig:id_zerlegen}
 		}
