@@ -1005,7 +1005,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\]
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:44]
 	Sei $A$ eine $C^*$-Algebra und $J \lhd A$ ein Ideal. Dann ist $\sfrac{A}{J}$ eine $C^*$-Algebra (mit induzierten Operationen und der Quotientennorm). 
 \end{satz}
 \begin{beweis}
@@ -1022,7 +1022,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $\norm*{(a^* +J)(a+J)}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}$.
 \end{beweis}
 
-\begin{proposition}
+\begin{proposition}[label=prop:45]
 	Seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein injektiver $^*$-Homomorphismus. Dann ist $\pi$ bereits isometrisch.
 \end{proposition}
 \begin{beweis}
@@ -1030,7 +1030,135 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Wir dürfen also annehmen, dass $A= C^*(a^*a)$ und $B=\overline{\pi(A)}$ abelsch sind. 
 	Ersetze $\pi$ durch $\pi^\simm \colon A^\simm  \to B^\sim$, falls $A$ nicht unital ist.
 	Wir dürfen also auch $A$ und $B$ als unital annehmen.
+	$\pi$ induziert eine stetige Abbildung $\pi^* \colon \Omega(B) \to \Omega(A)$ durch $\chi \mapsto \chi \circ \pi$, also ist $\pi^* \enbrace*{\Omega(B)} \subset \Omega(A)$ kompakt und insbesondere auch abgeschlossen.
+	Falls $\pi^*$ nicht surjektiv wäre, so gäbe es ein $0 \neq f \in C \enbrace*{\Omega(A)}_+ \cong A_+$ mit $f|_{\pi^*(\Omega(B))} =0$. Dann gilt
+	\begin{align}
+		0=f \enbrace*{\pi^*(\chi)} = \chi \circ \pi(f) \marginnote{Gelfand"=Isomorphismus in der Notation unterdrückt}
+	\end{align}
+	für alle $\chi \in \Omega(B)$. 
+	Also ist $\pi(f)=0$, woraus mit der Injektivität wieder $f=0$ folgt. 
+	Dies ist ein Widerspruch und somit ist $\pi$ surjektiv.
+	Für $a \in A$ gilt 
+	\[
+		\norm*{a}_A = \sup_{\rho \in \Omega(A)} \abs*{\rho(a)}= \sup_{\chi \in \Omega(B)} \abs*{\chi \circ \pi(a)} = \norm*{\pi(a)}_B
+	\]
+	Also ist $\pi$ isometrisch.
 \end{beweis}
+
+\begin{satz}
+	Seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein $^*$-Homomorphismus. Dann ist $\pi(A) \subset B$ eine $C^*$-Unteralgebra.
+\end{satz}
+\begin{beweis}
+	Betrachte die $C^*$-Algebra $\sfrac{A}{\ker \pi}$ (siehe \ref{satz:44}) und den wohldefinierten $^*$-Homomorphismus
+	\mapdef{\dot{\pi}\colon\sfrac{A}{\ker \pi_n}}{B}{a + \ker \pi}{\pi(a)}{}
+	$\dot{\pi}$ ist injektiv, also isometrisch nach \autoref{prop:45}.
+	Damit ist $\pi(A)$ vollständig und $\pi(A) \subset B$ abgeschlossen.
+	Also ist $\pi(A)$ eine $C^*$-Unteralgebra.
+\end{beweis}
+
+\begin{proposition}
+	Sei $A$ eine $C^*$-Algebra, $B \subset A$ eine $C^*$-Unteralgebra und $J \lhd A$ ein Ideal. Dann ist $B+J \subset A$ eine $C^*$-Unteralgebra.
+\end{proposition}
+\begin{beweis}
+	\emph{Übung!}
+\end{beweis}
+
+\begin{definition}[{name=[hereditär]}]
+	Eine $C^*$-Unteralgebra $B \subset A$ heißt \Index{hereditär}, $B \subher A$, falls gilt
+	\[
+		a \in A_+, b \in B_+, a \le b \Longrightarrow a \in B
+	\]
+\end{definition}
+
+\begin{satz}[label=satz:49]
+	Für eine $C^*$-Algebra $A$ definiert
+	\[
+		\begin{array}{rcl}
+			\set[\big]{L \subset A \given L \text{ ist abg.Linksideal} } &\xrightarrow{\minwidthbox{ }{2em}} & \set[\big]{B \subher A} \\[0.5ex]
+			\textstyle L &\xmapsto{\minwidthbox{\mbox{ }}{2em}} & \textstyle L \cap L^* \\[0.5ex]
+			\textstyle \set*{a \in A \given a^*a \in B} &\reflectbox{\ensuremath{\xmapsto{\minwidthbox{\mbox{ }}{2em}}}} & \textstyle B 
+		\end{array}
+	\]
+	eine natürliche Bijektion.
+\end{satz}
+\begin{beweis}
+	Sei $B \subher A$. Dann ist $L_B := \set*{a \in A \given a^*a \in B} \subset A$ ein abgeschlossenes Linksideal: Wenn $a,b \in L_B$, dann gilt
+	\begin{align}
+		(a^*+b^*)(a+b) \le (a^*+b^*)(a+b)+ (a-b)^*(a-b) = 2a^*a + 2b^*b \in B
+	\end{align}
+	also $(a^*+b^*)(a+b) \in B$ und somit $a+b \in L_B$. 
+	Für $a \in A$ und $b \in L_B$ gilt
+	\begin{align}
+		(ab)^* ab = b^*a^* ab \le b^* \enbrace*{\norm*{a^*a}\cdot \ind_{A^\simm}} b = \norm*{a^*a} b^*b \in B
+	\end{align}
+	Da $B$ hereditär ist, folgt $(ab)^*ab \in B$ und somit $ab \in L_B$. 
+	Also ist $L_B$ wirklich ein Linksideal und $L_B \subset A$ ist abgeschlossen.
+	
+	Mit \autoref{prop:41} folgt, dass $L_B \cap L_B^* \subset A$ eine $C^*$-Algebra ist. Es gilt
+	\[
+		0 \le b \in L_B \cap L_B^* \Longrightarrow 0 \le b^{\sfrac{1}{2}} \in L_B \cap L_B^*
+	\]  
+	Also ist $b \in B$ und $L_B \cap L_B^* \subset B$. 
+	Weiter ist klar, dass $B \subset L_B \cap L_B^*$, also gilt insgesamt $B=L_B \cap L_B^*$ und die erste Verknüpfung entspricht der Identität auf der rechten Seite. 
+	Die andere ist eine Übung (mit approximativer Eins für $L\cap L^*$).
+\end{beweis}
+
+\begin{satz}
+	Sei $B \subset A$ eine $C^*$-Unteralgebra. Dann gilt: 
+	\[
+		B \subher \iff bac \in B \text{ für alle } b,c \in B, a \in A 
+	\]
+\end{satz}
+\begin{beweis}
+	Für die erste Implikation sei $B = L \cap L^*$ für ein abgeschlossenes Linksideal $L$ nach \autoref{satz:49}. 
+	Für $b,c \in B$ und $a \in A$ gilt $bac \in L$ und
+	\[
+		(bac)^* = c^*a^*b^* \in L
+	\]
+	Also ist $bac \in L \cap L^*=B$. 
+	Für die zweite Implikation seien $a \in A_+$, $b \in B_+$ mit $0 \le a \le b$.
+	Sei weiter $(e_\lambda)_\Lambda \subset B$ eine approximative Eins für $B$.
+	Dann gilt $e_\lambda a e_\lambda \in B$ für $\lambda \in \Lambda$ nach Vorraussetzung.
+	Wir haben nun 
+	\[
+		0 \le (\ind-e_\lambda)a(\ind - e_\lambda) \le (\ind -e_\lambda) b (\ind -e_\lambda) \grenzw{\lambda} 0
+	\]
+	Damit gilt auch $a^{\sfrac{1}{2}}(\ind -e_\lambda) \grenzw{\lambda} 0$ und  es folgt $B \ni e_\lambda a e_\lambda \to a \in B$.
+\end{beweis}
+
+\begin{korollarB}
+	Sei $J \lhd A$ ein Ideal, dann gilt $J \subher A$.
+\end{korollarB}
+
+\begin{korollar}
+	Sei $A$ eine $C^*$-Algebra, $a \in A_+$ ein positives Element. 
+	Dann gilt $\overline{aAa} \subher A$. 
+	Falls $A$ separabel ist und $B \subher A$, so gilt $B=\overline{hAh}$ für ein $h \in A_+$.
+\end{korollar}
+\begin{beweis}
+	\emph{Übung!}
+\end{beweis}
+
+\begin{satz}
+	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
+	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\underrightarrow{\lim}(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
+	\begin{itemize}
+		\item Es existieren $^*$-Homomorphismen $\varphi_{n,\infty} \colon A_n \to \underrightarrow{\lim}(A_n,\varphi_n)$ mit $\varphi_{n,\infty} = \varphi_{n+1,\infty} \circ \varphi_{n}$.
+		\item Falls $\psi_n \colon A_n \to B$ für $n \in \mathbb{N}$ $^*$-Homomorphismen sind mit $\psi_n = \psi_{n+1} \circ \varphi_n$, so existiert ein eindeutig bestimmter $^*$-Homomorphismus $\psi \colon \underrightarrow{\lim}(A_n,\varphi_n) \to B$ mit $\psi_n = \psi \circ \varphi_{n,\infty}$ für $n \in \mathbb{N}$.
+	\end{itemize}
+	Kürzer:
+	\[
+		\begin{tikzcd}[column sep=large,row sep=huge,arrows={sloped,pos=.37}]
+			& & & & & \underrightarrow{\lim}(A_n,\varphi_n) \ar[dd,"\exists!",dashed,sloped=false,pos=.5] \\
+			A_0 \rar \ar[urrrrr,"\varphi_{0,\infty}",gray,end anchor={[yshift=.7ex]}] \ar[drrrrr,"\psi_0"',gray,end anchor={[yshift=.7ex,xshift=-.1ex]south west}] & \ldots  \rar 
+			& A_n \rar \ar[urrr,"\varphi_{n,\infty}",end anchor={[yshift=.4ex]}] \ar[drrr,"\psi_n"',end anchor={[yshift=-.2ex,xshift=.5ex]}] 
+			& A_{n+1} \rar \ar[urr,"\varphi_{n+1,\infty}"',end anchor={[yshift=-.1ex,xshift=-.2ex]}] \ar[drr,"\psi_{n+1}",end anchor={[yshift=0.5ex]}] 
+			& \ldots \\
+			& & & & & B
+		\end{tikzcd}
+	\]
+	\todo[inline]{Pfeile hübscher machen}
+\end{satz}
 % section 4 (end)
 
 
