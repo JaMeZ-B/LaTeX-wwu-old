@@ -495,11 +495,11 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Damit folgt $\chi(a^*) = \chi(b - i \cdot c) = \chi(b) - i \cdot \chi(c) = \overline{\chi(b) + i \cdot \chi(c)} = \overline{\chi(a)}$.
 \end{beweis}
 
-Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} für nicht notwendigerweise unitale $C^*$-Algebren ableiten: \todo{Revision 2}
+Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} für nicht notwendigerweise unitale $C^*$-Algebren ableiten: 
 
-\begin{korollar}
+\begin{korollar}[{name=[Stetigkeit von Charakteren und Zusammenhang mit maximalen Idealen]}]
 	Sei $A$ eine abelsche $C^*$-Algebra. Dann gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item Jeder Charakter $\chi \colon A \to \mathbb{C}$ ist stetig mit Norm $\le 1$.
 		\item Die Abbildung $\chi \mapsto \ker \chi$ definiert eine Bijektion 
 		\[
@@ -509,12 +509,12 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{korollar}
 \begin{beweis}
 	\leavevmode
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item folgt aus \autoref{kor:211} und \autoref{kor:213} oder auch aus \autoref{satz:1.13} und \autoref{satz:26}.
-		\item Wir zeigen nur die Surjektivität: Sie $J \subsetneq A$ ein abgeschlossenes, maximales Ideal. Dann ist $J \subsetneq A^\simm$ ein abgeschlossenes Ideal. 
+		\item Wir zeigen nur die Surjektivität: Sie $J \subsetneq A$ ein abgeschlossenes, maximales Ideal. Dann ist $J \subsetneq A^\simm$ ein abgeschlossenes Ideal und es gilt
 		\begin{align}
-			J \subset A \cap \bigcap_{\substack{I \lhd A^\simm \text{ max} \\ J \subset I} } \hspace{-3pt} I  
-			\StackText{\ref{satz:1.13}}{=} A \cap \bigcap_{\substack{\chi \in \Omega(A^\simm) \\ J \subset \ker \chi}} \ker \chi 
+			J \subset A \cap \bigcap_{\substack{I \lhd A^\simm \text{ max} \\ J \subset I} } \hspace{-1ex} I  
+			\StackText{\ref{satz:1.13}}{=} A \cap \bigcap_{\substack{\chi \in \Omega(A^\simm) \\ J \subset \ker \chi}} \hspace{-1ex}\ker \chi 
 			&\StackText{\ref{satz:29}}{=} A \cap \ker \chi_\infty \cap \bigcap_{\substack{\chi \in \Omega(A) \\ J \subset \ker \chi^\simm}} \ker \chi^\simm  
 		\end{align}
 		Damit ist $J$ enthalten im Schnitt über alle Kerne der $\chi \in \Omega(A)$, wobei $J \subset \ker \chi$. Damit ist $J \subset \ker \chi$ für ein $\chi \in \Omega(A)$ und
@@ -522,12 +522,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\end{enumerate}
 \end{beweis}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[für C*-Algebren]}]
+	Wir haben nun schon einiges über $C^*$-Algebren gelernt, es dabei aber total versäumt konkrete Beispiele anzugeben. Dies holen wir nun nach:
 	\begin{enumerate}[(i)]
 		\item Sei $\mathcal{H}$ ein Hilbertraum. Dann ist $\mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra mit Operatornorm und Adjunktion: Für $T \in \mathcal{B}(\mathcal{H})$ gilt
-		\[
+		\(
 			\norm*{T} = \sup \set[\big]{\abs*{\skal*{\eta}{T \xi}} \given \norm*{\xi}, \norm*{\eta} \le 1}
-		\]
+		\)
 		also
 		\begin{align}
 			\norm*{T^* T} = \sup \set[\big]{\abs*{\skal*{\eta}{T^* T \xi}} \given \norm*{\xi}, \norm*{\eta} \le 1} &\ge \sup \set[\big]{ \abs*{\skal*{T \eta}{T \eta}} \given 
@@ -542,8 +543,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{beispiel}
 
 \begin{satz}[name={Gelfand},label=satz16:gelfand]
-	Sei $A \neq 0$ eine abelsche $C^*$-Algebra. Dann ist $\widehat{\hspace{5pt}} \colon A \to C_0 \enbrace*{\Omega(A)}$\marginnote{$C_0 \enbrace*{\Omega(A)} = C \enbrace*{\Omega(A)}$, 
-	falls $A$ unital} ein isometrischer ${}^*$-Isomorphismus.
+	Sei $A \neq 0$ eine abelsche $C^*$-Algebra.\marginnote{$C_0 \enbrace*{\Omega(A)} = C \enbrace*{\Omega(A)}$, falls $A$ unital nach \autoref{satz:1.15}} 
+	Dann ist die Gelfandtransformation $\widehat{\hspace{5pt}} \colon A \to C_0 \enbrace*{\Omega(A)}$ ein isometrischer ${}^*$-Isomorphismus.
 \end{satz}
 \begin{beweis}
 	Betrachte das folgende Diagramm
@@ -552,7 +553,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 			\color{dark_gray} a \rar[mapsto,dark_gray] \dar[phantom,"\in",sloped,dark_gray] & \color{dark_gray} \enbrace[\big]{\chi \mapsto \chi(a)} \dar[phantom,"\in",sloped,dark_gray] \\
 			A \dar[hook,"\iota"] \rar["\widehat{\hspace{1ex}}"] 
 			& \set[\big]{f \in C \enbrace[\big]{\Omega(A) \cup\set*{\chi_\infty}}\given f(\chi_\infty)=0} \cong C_0\enbrace*{\Omega(A)} \dar[hook] \\
-			A^\simm \rar["\widehat{\hspace{1ex}}"] & C \enbrace[\big]{\Omega(A^\simm)} = C \enbrace[\Big]{ \set[\big]{\chi^\simm \given \chi \in \Omega(A)} \cup \set*{\chi_\infty}} 
+			A^\simm \rar["\widehat{\hspace{1ex}}"] & C \enbrace[\big]{\Omega(A^\simm)} = C \enbrace[\big]{ \set[\big]{\chi^\simm \given \chi \in \Omega(A)} \cup \set*{\chi_\infty}} 
 			\StackText{\ref{satz:29}}{\cong} C \enbrace[\big]{\Omega(A) \cup \set*{\chi_\infty}} 
 		\end{tikzcd}
 	\]
@@ -561,18 +562,19 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\norm*{a}^2 = \norm*{a^*a} \StackText{\ref{prop:210}}{=} r(a^*a) \StackText{\ref{satz:117}}{=} \norm[\big]{\widehat{a^*a}}_\infty = \norm*{\widehat{a^*} \widehat{a}}_\infty
 		= \norm[\big]{\overline{\widehat{a}} \,\widehat{a}}_\infty = \norm[\big]{\abs{\widehat{a}}^2 }_\infty = \norm*{\widehat{a}}^2_\infty
 	\]
-	Damit ist $a \mapsto \widehat{a}$ isometrisch. Damit folgt, dass $C := \set*{\widehat{a} \given a \in A} \subset C_0 \enbrace*{\Omega(A)}$ abgeschlossen ist. Außerdem ist 
-	$C$ eine
-	${}^*$-Unteralgebra, also insbesondere invariant unter komplexer Konjugation. Weiter trennt $C$ die Punkte von $\Omega(A)$ und zu jedem $\chi \in \Omega(A)$ existiert ein 
-	$a \in A$ mit $\widehat{a}(\chi)= \chi(a) \neq 0$, das heißt $\ev_\chi(C) \neq \set*{0}$ für alle $\chi \in \Omega(A)$. Mit Stone-Weierstraß folgt, dass 
-	$C \subset C_0 \enbrace*{\Omega(A)}$ dicht ist. Da $C$ abgeschlossen ist, folgt also $C=C_0 \enbrace*{\Omega(A)}$.
+	Damit ist $a \mapsto \widehat{a}$ isometrisch. 
+	Damit folgt, dass $C := \set*{\widehat{a} \given a \in A} \subset C_0 \enbrace*{\Omega(A)}$ abgeschlossen ist. 
+	Außerdem ist $C$ eine ${}^*$-Unteralgebra, also insbesondere invariant unter komplexer Konjugation. 
+	Weiter trennt $C$ die Punkte von $\Omega(A)$ und zu jedem $\chi \in \Omega(A)$ existiert ein $a \in A$ mit $\widehat{a}(\chi)= \chi(a) \neq 0$, das heißt $\ev_\chi(C) \neq \set*{0}$ für alle $\chi \in \Omega(A)$. 
+	Mit Stone-Weierstraß folgt, dass $C \subset C_0 \enbrace*{\Omega(A)}$ dicht ist. 
+	Da $C$ abgeschlossen ist, folgt also $C=C_0 \enbrace*{\Omega(A)}$.
 \end{beweis}
 
-\begin{bemerkung}[label=bem217]
+\begin{bemerkung}[label=bem217,{name=[Spektrum von $f \in C(X)$ für $X$ kompakt]}]
 	Sei $X$ ein kompakter Hausdorffraum und $f \in C(X)$, dann ist $\sigma_{C(X)}(f)=f(X)$.
 \end{bemerkung}
 \begin{beweis}
-	Sei $\delta \colon X \to \Omega\enbrace*{C(X)}$ definiert durch $x \mapsto \enbrace*{f \mapsto f(x)}$ ist ein Homöomorphismus wegen $C(X) \cong C \enbrace[\big]{\Omega(C(X))}$. 
+	Die Abbildung $\delta \colon X \to \Omega\enbrace*{C(X)}$ definiert durch $x \mapsto \enbrace*{f \mapsto f(x)}$ ist ein Homöomorphismus wegen $C(X) \cong C \enbrace[\big]{\Omega(C(X))}$. 
 	Es gilt
 	\begin{align}
 		\sigma_{C(X)}(f) \StackText{\ref{satz:117}}{=} \widehat{f} \enbrace[\big]{\Omega(C(X))} = \set*{\widehat{f}(\chi) \given \chi \in \Omega \enbrace[\big]{C(X)}} 
@@ -581,24 +583,31 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\end{align}
 \end{beweis}
 
-\begin{definition}
-	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$. Dann bezeichnet $C^*(S) \subset A$ die kleinste $C^*$-Unteralgebra von $A$, die $S$ enthält; also
+\begin{definition}[{name=[erzeuge C*-Algebra]}]
+	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$. 
+	Dann bezeichnet $C^*(S) \subset A$ die kleinste $C^*$-Unteralgebra von $A$, die $S$ enthält; also \todo{Revision 2}
 	\[
-		C^*(S) = \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ S \subset B}}} \enspace B
+		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ S \subset B}}} \enspace B
 	\]
 \end{definition}
 
 \begin{satz}[Funktionalkalkül]
-	Sei $A$ eine $C^*$-Algebra und $a \in A$ normal. Dann existiert ein eindeutig bestimmter ${}^*$-Isomorphismus $C^*(a) \cong C_0 \enbrace[\big]{\sigma(a)\setminus \set*{0}}$ 
-	durch $a \mapsto \id_{\sigma(a)\setminus \set*{0}}$.
-	Falls $A$ unital ist, so existiert ein eindeutig bestimmter unitaler ${}^*$-Isomorphismus $C^*(a,\ind) \cong C \enbrace*{\sigma(a)}$ durch $a \mapsto \id_{\sigma(a)}$.
-	
-	Für $f \in C_0\enbrace*{\sigma_A(a) \setminus \set*{0}}$ (bzw. $f \in C \enbrace*{\sigma_A(a)}$) bezeichnen wir mit $f(a) \in A$ das Urbild von $f$ unter diesem Isomorphismus.
-	Es gilt $f(a) \in C^*(a,\ind_{A^\simm}) \subset A^\simm$, falls $f(0)\neq 0$. Weiter gilt 
+	Sei $A$ eine $C^*$-Algebra und $a \in A$ normal. 
+	Dann existiert ein eindeutig bestimmter ${}^*$-Isomorphismus 
 	\[
-		\sigma_A \enbrace[\big]{f(a)} = f \enbrace[\big]{\sigma_A(a)}
+		C^*(a) \cong C_0 \enbrace[\big]{\sigma(a)\setminus \set*{0}} \qquad \text{ mit }\quad  a \longmapsto \id_{\sigma(a)\setminus \set*{0}}
 	\]
-	Für $g \in C \enbrace*{f(\sigma_A(a))}$ gilt dann $g \enbrace*{f(a)}= (g \circ f)(a)$.
+	Falls $A$ unital ist, so existiert ein eindeutig bestimmter unitaler ${}^*$-Isomorphismus 
+	\[
+		C^*(a,\ind) \cong C \enbrace[\big]{\sigma(a)} \qquad \text{ mit }\quad  a \longmapsto \id_{\sigma(a)}
+	\]
+	Für $f \in C_0\enbrace*{\sigma(a) \setminus \set*{0}}$ bzw. $f \in C \enbrace*{\sigma(a)}$ bezeichnen wir mit $f(a) \in A$ das Urbild von $f$ unter diesem Isomorphismus.
+	Es gilt $f(a) \in C^*(a,\ind_{A^\simm}) \subset A^\simm$, falls $f(0)\neq 0$. 
+	Weiter gilt 
+	\[
+		\sigma \enbrace[\big]{f(a)} = f \enbrace[\big]{\sigma(a)}
+	\]
+	Für $g \in C \enbrace[\big]{f(\sigma(a))}$ gilt dann $g \enbrace[\big]{f(a)}= (g \circ f)(a)$.
 \end{satz}
 \begin{beweis}
 	Sei zunächst $A$ unital. Da $a \in A$ normal ist, ist $C^*(a,\ind) = \overline{^* \Alg(a,\ind)} \subset A$ abelsch. Die Abbildung
