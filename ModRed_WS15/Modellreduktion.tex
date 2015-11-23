@@ -1262,6 +1262,276 @@ Die Matrizen $\mathbb{B}_N^q\in \R^{N\times N}$ und die Vektoren $\mathbb{F}_N^q
 	Wie bereits in 3.29 erwähnt lohnt sich ein RB-Modell bei mehr als $k* := \frac{t_{offline}}{t_{hoch}-t_{online}}$ benötigten Approximationen von $u(\mu)$.
 \end{enumerate}
 
+\subsection{A posteriori Fehlerschätzer}
+
+\subsubsection{A posteriori Fehlerschranken und Effektivität}
+
+\ssect{3.34 Lemma}{(Fehler-Residuum Beziehung)}
+Für $\mu \in \mathcal{P}$ definieren wir mittels der RB-Lösung $u_N(\mu)$ das Residuum $r(.;\mu)\in X_h'$ durch
+\begin{align}
+r(v;\mu) := f(v;\mu)- b(u_N(\mu),v;\mu) \forall v\in X_h
+\end{align}
+und den zugehörigen Riesz-Repräsentanten $R(\mu)\in X_h$ als Lösung von
+\begin{align}
+(R(\mu),v)_X = r(v;\mu) ~\forall v\in X_h.
+\end{align}
+Dann erfüllt der Fehler $e_N(\mu) := u_h(\mu)-u_N(\mu)$
+\begin{align}
+b(e_N(\mu),v;\mu) = r(v;\mu) ~\forall v\in X_h.
+\end{align}
+
+\bet{Beweis:}\\
+\begin{align*}
+b(e_N(\mu),v;\mu) &= b(u_h(\mu)-u_N(\mu),v;\mu)\\
+&= b(u_h(\mu),v;\mu) - b(u_N(\mu),v;\mu)\\
+&= f(v;\mu) - b(u_N(\mu),v;\mu) = r(v;\mu)
+\end{align*}
+\hfill $\square$
+
+\ssect{3.35 Satz}{(A posteriori Fehlerschätzer)}
+Für $\mu\in\mathcal{P}$ seinen $u_h(\mu),s_h(\mu)$ Lösungen von $(P_h(\mu))$ und $u_N(\mu),s_N(\mu)$ Lösungen von $(P_N(\mu))$.
+Ferner sei $\alpha_{LB}(\mu) > 0$ eine berechenbare untere Schranke für die Koerzivitätskonstante $\alpha_h(\mu)$ von $b(.,.;\mu)$ und $R(\mu)$ der Riesz-Repräsentant des Residuums aus Lemma 3.34.
+Dann erfüllen die A posteriori Fehlerschätzer , definiert durch 
+\begin{align}
+\Delta_N^{en}(\mu) := \frac{\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}} \text{ und } \Delta_N^s(\mu) := \frac{\norm{R(\mu)}_X^2}{\alpha_{LB}(\mu)},
+\end{align}
+die folgenden Ungleichungen
+\begin{align}
+|||u_h(\mu)-u_N(\mu)|||_\mu = |||e_N(\mu)|||_\mu \le \Delta_N^{en}(\mu)\\
+s_h(\mu)-s_N(\mu) \le \Delta_N^s(\mu).
+\end{align}
+
+\bet{Beweis:}\\
+Testen von Gleichung (3.9) mit $e_N(\mu)$ ergibt:
+\begin{align*}
+|||e_N(\mu)|||_\mu &\bgl{Def} b(e_N(\mu),e_N(\mu);\mu) \bgl{(3.9)} r(e_N(\mu);\mu)\\
+&\bgl{(3.8)} (R(\mu),e_N(\mu))_X \stackrel{C.S}{\le} \norm{R(\mu)}_X\norm{e_N(\mu)}_X\\
+&\bgl{3.4} \frac{1}{\sqrt{\alpha_h(\mu)}} \norm{R(\mu)}_X |||e_N(\mu)|||_\mu \le \frac{1}{\sqrt{\alpha_{LB}(\mu)}} \norm{R(\mu)}_X |||e_N(\mu)|||_\mu\\
+&\Rightarrow |||e_N(\mu)|||_\mu \le \Delta_N^{en}(\mu) \Rightarrow (3.11)
+\end{align*}
+Aus Satz 3.19 folgt
+\[
+s_h(\mu) -s_N(\mu) = |||e_n(\mu)|||_\mu^2 \le (\Delta_N^{en}(\mu))^2 = \Delta_N^s(\mu).
+\]
+\hfill $\square$
+
+\ssect{3.36 Folgerung}{}
+Durch $\hat{s}_N(\mu) := s_N(\mu) + \Delta_N^s(\mu)$ ist eine obere Schranke für $s_h(\mu)$ gegeben, das heißt es gilt
+\[
+s_h(mu) \le \hat{s}_N(\mu).
+\]
+
+\bet{Beweis:}\\
+Folgt direkt aus (3.12).
+
+\ssect{3.37 Bemerkung}{}
+Das Beschränken des Fehlers durch das Residuum ist eine Standardtechnik zum Herleiten von A posteriori Fehlerschätzern für FEM.
+Da in diesem Fall dein Schätzer für den Fehler $|||u(\mu)-u_h(\mu)|||_\mu$ gesucht wird, ist $X$ unendlich-dimensional und die Norm $\norm{r(.;\mu)}_{X'}$ kann nicht berechnet werden.
+Im Fall von RB Methoden ist $\norm{r(.;\mu)}_{X_h'}$ mit Hilfe des Riesz-Repräsentanten berechenbar.
+
+\ssect{3.38 Bemerkung}{}
+Da $\Delta_N^{en}(\mu)$ und $\Delta_N^s(\mu)$ unter den Voraussetzungen von Satz 3.35 obere Schranken für die Fehler sind, werden sie auch als \uline{rigorose} Fehlerschranken bezeichnet.
+Bei A posteriori Fehlerschätzern für FEM treten häufig Konstanten in den Abschätzungen auf, welche nicht entsprechend nach oben/unten durch berechenbare Konstanten beschränkt werden können, so dass in diesen Fällen die A posteriori Fehlerschätzer den Fehler auch unterschätzen können;
+sie also keine rigorose Fehlerschranken zu sein brauchen.
+Mit Hilfe des Fehlerschätzers können wir die Dimension des RB-Raumes so bestimmen, dass der Approximationsfehler kleiner als eine vorgegebene Toleranz ist.
+Um ein möglichest effizientes Verfahren zu erhalten ist es daher wünschenswert, dass der Quotient $\frac{\Delta_N^{en}(\mu}{|||e_N(\mu)|||_\mu}$ möglichst nahe an 1 ist.
+Er ist $\ge 1$ wegen Satz 3.35.
+Diesen Quotienten werden wir im Folgenden weiter untersuchen.
+
+\ssect{3.39 Satz}{(Effektivitäten der Fehlerschätzer)}
+Wir definieren die Effektivitäten $\eta_N^{en}(\mu)$ und $\eta_N^s(\mu)$ der Fehlerschätzer $\Delta_N^{en}(\mu)$ und $\Delta_N^s(\mu)$, definiert in (3.10), durch
+\begin{align}
+\eta_N^{en}(\mu) := \frac{\Delta_N^{en}(\mu)}{|||u_h(\mu)-u_N(\mu)|||_\mu} \text{ und } \eta_N^s(\mu) :=\frac{\Delta_N^s(\mu)}{s_h(\mu)-s_N(\mu)}.
+\end{align}
+Unter den Voraussetzungen von Satz 3.35 gilt dann
+\begin{align}
+&\eta_N^{en}(\mu) \le \sqrt{\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}} \text{ und }\\
+&\eta_N^s(\mu)\le \frac{\gamma(\mu)}{\alpha_{LB}(\mu)}.
+\end{align}
+
+\bet{Beweis:}\\
+Zunächst folgt aus der Definition de Riesz-Repräsentanten und des Residuums in Lemma 3.34:
+\begin{align*}
+\norm{R(\mu)}_X^2 = (R(\mu),R(\mu))_X \bgl{(3.8)} r(R(\mu);\mu)\\
+&\bgl{(3.9)} b(e_N(\mu),R(\mu);\mu \stackrel{C.S}{\le} |||e_N(\mu)|||_\mu |||R(\mu)|||_\mu\\
+&\stackrel{3.4}{\le} |||e_N(\mu)|||_\mu \sqrt{\gamma(\mu)}\norm{R(\mu)}_X.
+\end{align*}
+\begin{align}
+\Rightarrow \norm{R(\mu)}_X \le |||e_N(\mu)|||_\mu \sqrt{\gamma(\mu)}
+\end{align}
+\begin{align*}
+\eta_N^{en}(\mu) &= \frac{\Delta_N^{en}(\mu)}{|||e_N(\mu)|||_\mu} \bgl{Def} \frac{\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}|||e_N(\mu)|||_\mu}\\
+&\stackrel{(3.16)}{\le} \sqrt{\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}} \frac{|||e_N(\mu)|||_\mu}{|||e_N(\mu)|||_\mu}\\
+&\Rightarrow (3.14)
+\end{align*}
+Aus Satz 3.19 folgt dann:
+\begin{align*}
+\eta_N^s(\mu)\bgl{Def} \frac{\Delta_N^s(\mu)}{s_h(\mu)s_N(\mu)} \bgl{Def/3.19} \frac{(\Delta_N^{en}(\mu))^2}{|||e_N(\mu)|||_\mu^2} \stackrel{(3.14)}{\le} \frac{\gamma(\mu)}{\alpha_{LB}(\mu)} \Rightarrow (3.15).
+\end{align*}
+
+\ssect{3.40 Folgerung}{}
+Falls $u_h(\mu) = u_N(\mu)$ dann gilt automatisch $\Delta_N^{en}(\mu) = \Delta_N^s(\mu) = 0$.\\
+
+\bet{Beweis:}\\
+Folgt direkt aus Satz 3.39, kann aber auch unabhängig davon wie folgt eingesehen werden:
+Da $0=b(0,v;\mu) = b(e_N(\mu),v;\mu) \bgl{(3.9)} r(v;\mu) \bgl{(3.8)} (R(\mu),v)_X$ für alle $v\in X$ gilt, folgt $\norm{R(\mu)}_X=0$ und damit $\Delta_N^{en}(\mu) = \Delta_N^s(\mu) = 0$.
+
+\ssect{3.41 Bemerkung}{}
+Folgerung 3.40 ist insbesondere dann relevant, wenn für einen Fehlerschätzer Schranken für die Effektivität (noch) nicht verfügbar sind.
+
+\ssect{3.42 Folgerung}{(Fehlerschätzer für die $X$-Norm)}
+Unter den Voraussetzungen von Satz 3.35 gilt für den Fehlerschätzer $\Delta_N(\mu) := \frac{\norm{R(\mu)}_X}{\alpha_{LB}(\mu)}$, dass 
+\[
+\norm{u_h(\mu)-u_N(\mu)}_X \le \Delta_N(\mu).
+\] 
+Ferner gilt für die Effektivität des Fehlerschätzers $\eta_N(\mu) := \frac{\Delta_N(\mu)}{\norm{u_h(\mu)-u_N(\mu)}_X}$ die folgende Schranke
+\[
+\eta_N(\mu) \le \frac{\gamma(\mu)}{\alpha_{LB}(\mu)}.
+\]
+
+\bet{Beweis:}\\
+Analog zu den Beweisen von Satz 3.35/3.39 unter Verwendung von Lemma 3.4.
+\hfill $\square$\\
+
+Zusätzlich zu absoluten Fehlerschätzern wollen wir schließlich noch relative Fehlerschätzer herleiten und die zugehörigen Effektivitäten untersuchen.
+
+\ssect{3.34 Satz}{(Relative Fehlerschätzer)}
+Wir definieren die relativen Fehlerschätzer 
+\[
+\Delta_N^{en,rel}(\mu) := 2\frac{\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}}\cdot \frac{1}{|||u_N(\mu)|||_\mu}
+\]
+für den relativen Fehler in der Energienorm,
+\[
+\Delta_N^{rel}(\mu) := 2\frac{\norm{R(\mu)}_X}{\alpha_{LB}(\mu)}\cdot \frac{1}{||u_N(\mu)||_X}
+\]
+für den relativen Fehler in der $X$-Norm und 
+\[
+\Delta_N^{s,rel}(\mu) := \frac{\norm{R(\mu)}_X^2}{\alpha_{LB}(\mu)s_N(\mu)}
+\]
+für den relativen Ausgabefehler.
+Dann gilt unter den Voraussetzungen von Satz 3.35 und falls $\Delta_N^{en,rel}(\mu)\le 1, \Delta_N^{rel}(\mu)\le 1$
+\begin{align}
+\frac{|||u_h(\mu)-u_N(\mu)|||_\mu}{|||u_h(\mu)|||_\mu} &\le \Delta_N^{en,rel}(\mu),\\
+\frac{||u_h(\mu)-u_N(\mu)||_X}{||u_h(\mu)||_X} &\le \Delta_N^{rel}(\mu),\\
+\frac{s_h(\mu)-s_N(\mu)}{s_h(\mu)} &\le \Delta_N^{s,rel}(\mu).
+\end{align}
+
+\bet{Beweis:}\\
+Falls $\Delta_N^{en,rel}(\mu)\le 1$, so gilt
+\begin{align}
+\abs{\frac{|||u_h(\mu)|||_\mu-|||u_N(\mu)|||_\mu}{|||u_N(\mu)|||_\mu}} \le \frac{|||u_h(\mu)-u_N(\mu)|||_\mu}{|||u_N(\mu)|||_\mu} \stackrel{(3.11)}{\le} \frac{\norm{R(\mu)}_X}{\alpha_{LB}(\mu)|||u_N(\mu)|||_\mu} = \frac{\Delta_N^{en,rel}(\mu)}{2} \le \frac{1}{2}.
+\end{align}
+Aus (3.20) folgt:
+\[
+|||u_N(\mu)|||_\mu - |||u_h(\mu)|||_\mu \le \frac{1}{2} |||u_N(\mu)|||_\mu
+\]
+\begin{align}
+\Rightarrow \frac{1}{2} |||u_N(\mu)|||_\mu \le |||u_h(\mu)|||\mu.
+\end{align}
+Damit gilt:
+\begin{align*}
+\frac{|||e_N(\mu)|||_\mu}{|||u_h(\mu)|||_\mu} \stackrel{(3.11)}{\le} \frac{\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}|||u_h(\mu)|||_\mu} \stackrel{(3.21)}{\le} \frac{\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}|||u_N(\mu)|||_\mu}\cdot 2 = \Delta_N^{en,rel}(\mu).
+\end{align*}
+Daraus folgt (3.17).
+Und (3.18) folgt analog zu (3.17).
+Schließlich gilt 
+\begin{align*}
+\frac{s_h(\mu)-s_N(\mu)}{s_h(\mu)} \stackrel{(3.12)}{\le} \frac{\Delta_N^{s}(\mu)}{s_h(\mu)} \stackrel{3.19}{\le} \frac{\Delta_N^s(\mu)}{s_N(\mu)} = \Delta_N^{s,rel}(\mu).
+\end{align*}
+\hfill $\square$
+
+\ssect{3.44 Satz}{(Effektivitäten der relativen Fehlerschätzer)}
+Wir definieren die Effektivitäten der relativen Fehlerschätzer $\eta_N^{en,rel}(\mu),\eta_N^{rel}(\mu),\eta_N^{s,rel}(\mu)$ wie folgt:
+\begin{align*}
+\eta_N^{en,rel}(\mu) := \frac{\Delta_N^{en,rel}(\mu)}{|||e_N(\mu)|||_\mu / |||u_h(\mu)|||_\mu},~ \eta_N^{rel}(\mu) := \frac{\Delta_N^{rel}(\mu)}{||e_N(\mu)||_X / ||u_h(\mu)||_X},~ \eta_N^{s,rel}(\mu) := \frac{\Delta_N^{s,rel}(\mu)}{(s_h(\mu)-s_N(\mu)/ s_h(\mu)}.
+\end{align*}
+Dann gilt unter den Voraussetzungen von Satz 3.35, falls $\Delta_N^{en,rel}(\mu)\le 1,\Delta_N^{rel}(\mu)\le 1,\Delta_N^{s,rel}(\mu)\le 1$:
+\begin{align*}
+\Delta_N^{en,rel}(\mu) \le 3\sqrt{\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}} \tag{3.21b},
+\end{align*}
+\begin{align}
+\Delta_N^{rel}(\mu) &\le 3\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}\\
+\eta_N^{s,rel}(\mu) &\le 2\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}.
+\end{align}
+
+\bet{Beweis:}\\
+Wie in Beweis von Satz 3.43 impliziert $\Delta_N^{en,rel}(\mu)\le 1$ dass
+\[
+\abs{\frac{|||u_h(\mu)|||_\mu-|||u_N(\mu)|||_\mu}{|||u_N(\mu)|||_\mu}}  \le \frac{1}{2}.
+\]
+Damit gilt $|||u_h(\mu)|||_\mu-|||u_N(\mu)|||_\mu \le \frac{1}{2} |||u_N(\mu)|||_\mu$ und damit
+\begin{align}
+|||u_h(\mu)|||_\mu \le \frac{3}{2} |||u_N(\mu)|||_\mu.
+\end{align}
+Damit folgt:
+\begin{align*}
+\eta_N^{en,rel}(\mu) &\bgl{Def} \frac{2\norm{R(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}|||u_h(\mu)|||_\mu} \frac{|||u_h(\mu)|||_\mu}{|||e_N(\mu)|||_\mu}\\
+&\stackrel{(3.16)}{\le} 2\frac{\sqrt{\gamma(\mu)}\norm{e_N(\mu)}_X}{\sqrt{\alpha_{LB}(\mu)}|||u_h(\mu)|||_\mu} \frac{|||u_h(\mu)|||_\mu}{|||e_N(\mu)|||_\mu} \stackrel{(3.24)}{\le} 3 \sqrt{\frac{\gamma(\mu)}{\alpha_{LB}(\mu)}} \Rightarrow (3.21b).
+\end{align*}
+(3.22) folgt analog zu (3.21b).
+Schließlich gilt
+\begin{align*}
+\eta_N^{s,rel}(\mu) = \frac{\Delta_N^s(\mu) / s_N(\mu)}{(s_h(\mu)-s_N(\mu)) / s_h(\mu)} = \eta_N^s(\mu) \frac{s_h(\mu)}{s_N(\mu)} \stackrel{(3.15)}{\le} \frac{\gamma(\mu)}{\alpha_{LB}(\mu)} \frac{s_h(\mu)}{s_N(\mu)}.
+\end{align*}
+Der letzte Faktor ist beschränkt, da
+\[
+\frac{s_h(\mu)}{s_N(\mu)} = 1 + \frac{s_h(\mu)-s_N(\mu)}{s_N(\mu)} \stackrel{(3.19)}{\le} 1 + \Delta_N^{s,rel}(\mu) \le 2 \Rightarrow (3.23).
+\]
+\hfill $\square$
+
+\ssect{3.45 Bemerkung}{}
+Durch "Tauschen" des Skalarprodukts/der Norm auf $X_h$ können die Fehlerschätzer und Effektivitäten verbessert werden, ohne die Ausgabe des reduzierten Modells oder die reduzierte Lösung zu verändern.
+Wähle $\bar{\mu}\in\mathcal{P}$ fest und betrachte auf $X_h$ das Skalarprodukt $(((.,.)))_{\bar{\mu}}$ mit induzierter Norm $|||.|||_{\bar{\mu}}$.
+Wegen Lemma 3.4 Normäquivalenz folgt aus der Stetigkeit und Koerzivität der Bilinearform $b$ auf $X_h$ bzgl. der $X$-Norm die Stetigkeit und Koerzivität auf $X_h$ bzgl. der $|||.|||_{\bar{\mu}}$-Norm und umgekehrt.
+Gleiches gilt für die Stetigkeit von $l$ und $f$.
+Dann gilt $\alpha_h(\bar{\mu}) := \inf_{v\in X_h} \frac{b(v,v;\bar{\mu})}{|||v|||_{\bar{\mu}}^2} = 1$ und $\gamma_h(\bar{\mu}) := \sup_{u,v\in X_h} \frac{b(u,v;\bar{\mu})}{|||u|||_{\bar{\mu}}|||v|||_{\bar{\mu}}}  = \sup_{u,v\in X_h} \frac{(((u,v)))_{\bar{\mu}}}{|||u|||_{\bar{\mu}}|||v|||_{\bar{\mu}}} \le 1$.
+Für einen Fehlerschätzer welcher auf der $|||.|||_{\bar{\mu}}$-Norm des Riesz-Repräsentanten $R(\mu)$ basiert gilt also $\eta(\bar{\mu})=1$.
+Er ist in diesem Sinne optimal.
+Nimmt man an, dass $\alpha_h(\mu)$ und $\gamma_h(\mu)$ stetig von Parameter $\mu$ abhängen, kann man erwarten auch in einer Umgebung von $\bar{\mu}$ sehr effektive Fehlerschätzer zu erhalten.
+
+\subsubsection{Offline/Online-Zerlegung des Fehlerschätzers}
+Damit wir in der Online-Phase verifizeren können, dass der Approximationsfehler unter einer vorgegeben Toleranz liegt, ist es wichtig, dass wir auch den Fehlerschätzer Offline/Online zerlegen können.
+Die Erkenntnis, dass sich die affine Parameterabhängigkeit der Bilinearform $b$ und der Linearform $f$ auf das Residuum und die Norm des Riesz-Repräsentanten überträgt ist hierbei von zentraler Bedeutung.
+Mit Lemma 3.34 und der afiinen Parameterabhängigkeit von $b$ und $f$ folgt:
+\begin{align*}
+(R(\mu),v) &= r(v;\mu) = f(v;\mu) - b(u_N(\mu),v;\mu)\\
+&= \sum_{q=1}^{Q_f} \theta_f^q(\mu)f^q(v)- \sum_{q=1}^{Q_b}\sum_{n=1}^{N} \theta_b^q(\mu)U_n^N(\mu)b^q(\phi_n,v).
+\end{align*}
+Nach dem Riesz'schen Darstellungssatz 2.9 existieren $R_f^q\in X-h$ mit 
+\begin{align}
+(R_f^q,v)_X = f^q(v) ~\forall v\in X_h,~1\le q\le Q_f
+\end{align}
+und $R_b^{q,n}\in X_h$ mit
+\begin{align}
+(R_b^{q,n},v)_X = b^q(\phi_n,v) ~\forall v\in X_h,~1\le q\le Q_b,~1\le n\le N.
+\end{align}
+Daher können wir weiter umformen:
+\begin{align*}
+(R(\mu),v)_X &= \sum_{q=1}^{Q_f} \theta_f^q(\mu)(R_f^q,v)_X - \sum_{q=1}^{Q_b}\sum_{n=1}^{N} \theta_b^q(\mu)U_n^N(\mu)(R_b^{q,n},v)_X\\
+&= \enbrace{\sum_{q=1}^{Q_f} \theta_f^q(\mu)R_f^q - \sum_{q=1}^{Q_b}\sum_{n=1}^{N} \theta_b^q(\mu)U_n^N(\mu)R_b^{q,n},v}_X ~\forall v\in X_h\\
+&\Rightarrow R(\mu) =  \sum_{q=1}^{Q_f} \theta_f^q(\mu)R_f^q - \sum_{q=1}^{Q_b}\sum_{n=1}^{N} \theta_b^q(\mu)U_n^N(\mu) R_b^{q,n}.
+\end{align*}
+Wir fassen dieses Resultat im folgenden Lemma zusammen.
+
+\ssect{3.46 Lemma}{(Affine Parameterabhängigkeit von $R(\mu)$}
+Seien $b,f$ affin parametrisch und $R_f^q,R_b^{q,n}\in X_h$ definiert wie in (3.25)/(3.26) .
+Sei $Q_R:= Q_f+N\cdot Q_b$ und $R_R^q$ für $1\le q\le Q_R$ eine Aufzählung von $R_f^q,R_b^{q,n}$:
+\begin{align*}
+(R_R^1\dt{,}R_R^{Q_R}) := (R_f^1\dt{,}R_f^{Q_f},R_b^{1,1}\dt{,}R_b^{Q_b,1},R_b^{1,2}\dt{,}R_b^{Q_b,2}\dt{,}R_b^{1,N}\dt{,}R_b^{N,Q_b}).
+\end{align*}
+Für $\mu\in\mathcal{P}$ sei $u_N(\mu) = \sum_{n=1}^{N} U_n^N(\mu) \phi_n$ die Lösung von $(P_N(\mu))$.
+Dann definieren wir $\theta_R^q: \mathcal{P}\to \R,~1\le q\le Q_R$ durch
+\begin{align*}
+(\theta_R^1(\mu)\dt{,}\theta_R^{Q_R}(\mu)) := (\theta_f^1(\mu)\dt{,}\theta_f^{Q_f}(\mu), -\theta_b^1(\mu)U_1^N(\mu)\dt{,} -Q_b^{Q_b}(\mu)\dt{,} -\theta_b^{Q_b}(\mu)U_N^N(\mu)).
+\end{align*}
+Dann ist der Riesz-Repräsentant $R(\mu)\in X_h$ des Residuums affin parametrisch:
+\begin{align*}
+R(\mu) = \sum_{q=1}^{Q_R} \theta_R^q(\mu)R_R^q.
+\end{align*}
+
+
+
+
 
 
 
