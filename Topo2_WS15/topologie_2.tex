@@ -552,7 +552,7 @@
 	und $1_B$ analog. Dann ist $\benbrace*{1_A} \cupp \benbrace*{1_B} = \benbrace*{1_{A \cap B}}$.
 \end{beispiel}
 
-\begin{lemma}[label=sec3:lem1]
+\begin{lemma}[label=sec3:lem1,{name=[Randabbildungen und Kreuz-Produkt]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen und $Y$ ein weiterer topologischer Raum. Seien $\partial \colon H^p(A;R) \to H^{p+1}(X,A;R)$ und 
 	$\partial^{\times} \colon H^{p+q}(A \times Y;R) \to H^{p+q+1}(X\times Y,A \times Y;R)$ die Verbindungshomomorphismen in den Paarfolgen. Dann gilt für $\xi \in H^p(A;R)$
 	und $\zeta \in H^q(X;R)$
@@ -1173,7 +1173,7 @@ Ab jetzt: $R$ kommutativ!
 \label{sec:7}
 
 \begin{bemerkung}
-	Am Beweis der Poincaré-Dualtität hindern uns momentan noch folgende Probleme, die wir in diesem Kapitel \enquote{umschiffen} wollen
+	Am Beweis der Poincaré-Dualtität hindern uns momentan noch folgende Probleme, die wir in diesem Kapitel \enquote{umschiffen} wollen \todo{Revision 7}
 	\begin{itemize}
 		\item Es ist für $n>0$ $H^{n-*}(\mathbb{R}^n) \cong H_*(\mathbb{R}^n)$
 		\item Es gibt keine Fundamentalklasse in $H_n(\mathbb{R}^n)$.
@@ -1346,6 +1346,7 @@ Ab jetzt: $R$ kommutativ!
 	exakt ist.
 \end{definition}
 
+
 \begin{satz}[name={Exaktheit gerichteter Kolimiten}]
 	Sei $(\Lambda,\le)$ eine gerichtete Menge. Ist 
 	\[
@@ -1376,6 +1377,129 @@ Ab jetzt: $R$ kommutativ!
 	\end{align}
 	Da $\tau_\mu$ injektiv ist, ist $F(i_\lambda^\mu)(v_\lambda)=0$. Damit ist $v=s_\lambda(v_\lambda)=0$.
 \end{beweis}
+
+\begin{bemerkung}
+	Für eine natürliche Transformation $\tau \colon F \to F'$ in $\FUN \enbrace*{(\Lambda,\le),R \text{-}\MOD}$ können wir $\ker \tau$ und $\coker \tau \in \FUN \enbrace*{(\Lambda,\le), R \text{-}\MOD}$ erklären durch $\ker \tau (\lambda) = \ker \tau_\lambda$ und $\coker (\tau)(\lambda) = \coker \tau_\lambda$.
+	Mit der Exaktheit vom $\colim_\Lambda$ folgt insbesondere
+	\[
+		\colim_\Lambda \ker \tau = \ker \colim_\Lambda \tau \qquad \colim_\Lambda \coker \tau = \coker \colim_\Lambda \tau
+	\]
+\end{bemerkung}
+
+\begin{korollar}
+	Sei $(\Lambda,\le)$ gerichtet und $C_*$ ein Funktor von $(\Lambda,\le)$ in die Kategorie der Kettenkomplexe und Kettenabbildungen. 
+	Dann ist $H_*(\colim_\Lambda C_*) = \colim_\Lambda H_*(C_*(\lambda))$. 
+	Die gleiche Aussage gilt für Kokettenkomplexe.
+\end{korollar}
+\begin{beweis}
+	Sei $d^{C_1}_n \colon C_n(\lambda) \to C_{n-1}(\lambda)$ die Randabbildung. 
+	Wir fassen $d_n$ als natürliche Transformation $C_n \to C_{n-1}$ in $\FUN \enbrace*{(\Lambda,\le)R \text{-}\MOD}$ auf. 
+	Da $(\Lambda,\le)$ gerichtet ist und daher $\colim_\Lambda$ exakt ist, folgen
+	\[
+		\ker \enbrace*{\colim_\Lambda d_n^C} \cong \colim_\Lambda \enbrace*{\ker d_n^{C_\lambda}}
+	\]
+	und 
+	\[
+		\Underbrace{\coker \enbrace*{\colim_\Lambda d_{n+1}^C \colon \colim_\Lambda C_{n+1}(\lambda) \to \colim_\Lambda \ker d_n^{C_\lambda}}}{H_*(\coker C_\lambda)}
+		\cong \colim_\Lambda \enbrace[\Big]{ \Underbrace{\coker d_{n+1}^{C_\lambda} \colon C_{n+1}(\lambda) \to \ker d_n^{C_\lambda}}{\cong H_*(C(\lambda))}} \qedhere
+	\]
+\end{beweis}
+
+\begin{definition}
+	Sei $X$ ein topologischer Raum. Dann definieren wir die \bet{singuläre Kohomologie von $X$ mit kompaktem Träger}\index{Kohomologie mit kompaktem Träger} durch
+	\[
+		H^*_c(X) := \colim_{K \in \mathcal{K}(X)} H^*(X,X \setminus K)
+	\]
+\end{definition}
+
+\begin{beispiel}
+	Es gilt 
+	\(
+		H^*_c(\mathbb{R}^n) \cong \begin{cases}
+			R &\text{ falls }*=n\\
+			0 &\text{ sonst }
+		\end{cases}
+	\)
+\end{beispiel}
+\begin{beweis}
+	Die Menge $\mathcal{B}$ der kompakten Bälle $B_r(0) \subset \mathbb{R}^n$ ist kofinal in der gerichteten Menge aller kompakten Unterräume von $\mathbb{R}^n$.
+	Daher ist 
+	\[
+		H^*_c(\mathbb{R}^n) = \colim_{K \in \mathcal{K}(\mathbb{R}^n)} H^* \enbrace*{\mathbb{R}^n , \mathbb{R}^n \setminus K} 
+		\cong \colim_{B \in \mathcal{B}} H^* \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B} \cong \begin{cases}
+			R &\text{ falls }*=n\\
+			0 &\text{ sonst }
+		\end{cases} \qedhere
+	\]
+\end{beweis}
+
+\begin{beispiel}
+	Ist $X$ kompakt, so ist $H^*_c(X)= H^*(X)$, denn für $X$ kompakt ist $X \in \mathcal{K}(X)$ ein maximal, also $\colim_{K \in \mathcal{K}(X)} H^*(X,X \setminus K) = H^*(X,X\setminus X) = H^*(X)$.
+\end{beispiel}
+
+\begin{definition}
+	Setze $C_c^*(X) := \colim_{\mathcal{K}(X)} C^*(X,X\setminus K)$
+\end{definition}
+
+\begin{korollarB}
+	Es gilt $H^*_c(X) = H^*( C^*_c(X))$, da $\colim$ mit $H^*$ vertauscht.
+\end{korollarB}
+
+\begin{lemma}
+	$C^*_c(X)$ lässt sich mit dem Unterkomplex von $C^*(X)$ identifizieren, der aus allen $\alpha \colon C*(X) \to R$ besteht, für die es $K \subseteq X$ kompakt gibt mit $\alpha(\sigma)=0$ für $\sigma \colon \abs*{\Delta^n} \to X\setminus K$.
+\end{lemma}
+\begin{beweis}
+	Für $K \subseteq L$ ist $C^*(X,X\setminus K)\to C^*(X,X\setminus L)$ injektiv.
+	Nachdem wir jedes $C^*(X,X\setminus K)$ mit einem Unterraum von $C^*(X)$ identifizieren, wird der Kolimes über $\mathcal{K}(X)$ einfach zur Vereinigung dieser Unterräume.
+\end{beweis}
+
+\begin{bemerkung}
+	Sei $M $ eine $n$-dimensionale Mannigfaltigkeit mit einer $R$-Orientierung. Für $K \subseteq M$ kompakt sei $\mu_K \in H_n(M,M \setminus K;R)$ die durch die $R$-Orientierung bestimmte (Orientierungs)-Klasse.
+	Für $K \subseteq L$, $L$ auch kompakt ist dann $\mu_L|_K = \mu_K$.
+	Daher kommutiert
+	\[
+		\begin{tikzcd}
+			H^k(M,M \setminus K;R)\dar \rar["\capp\mu_K"] &  H_{n-k}(M;R) \dar[equal] \\
+			H^k(M,M \setminus L;R) \rar["\capp\mu_L"] & H_{n-k}(M;R)
+		\end{tikzcd}
+	\]
+	Daher induzieren die $\capp$-Produkte mit den $\mu_K$ eine Abbildung 
+	\[
+		\PD_M \colon H^k_c(M;R) \longrightarrow H_{n-k}(M;R)
+	\]
+\end{bemerkung}
+
+\begin{definition}
+	$\PD_M$ heißt die \Index{Poincaré-Dualitäts-Abbildung} für $M$. 
+\end{definition}
+
+\begin{bemerkung}
+	Ist $M$ kompakt, so ist $\PD_M= {\capp \mu}$, wobei $\mu$ die durch die Orientierung bestimmte Fundamentalklasse von $M$ ist.
+\end{bemerkung}
+
+\begin{lemma}
+	Für $M=\mathbb{R}^n$ ist die Poincaré-Dualitäts-Abbildung ein Isomorphismus. 
+\end{lemma}
+\begin{beweis}
+	Ist $B \subset \mathbb{R}^n$ ein kompakter Ball, so ist ${\capp\mu_B} \colon H^k(\mathbb{R}^n,\mathbb{R}^n \setminus B,R) \to H_{n-k}(\mathbb{R}^n)$ ein Isomorphismus.
+	Da die Menge der kompakten Bälle $\mathcal{B}$ kofinal in allen kompakten Teilmengen ist, ist auch
+	\(
+		\PD_M = \colim_{\mathcal{B}} {\capp \mu_B}
+	\)
+	ein Isomorphismus.
+\end{beweis}
+
+\begin{bemerkung}
+	Für nicht kompakte orientierte Mannigfaltigkeiten lässt sich die Fundamentalklasse in lokal endlicher Homologie definieren: 
+	\[
+		C^\lf_{n}(M) = \set*{\sum_{\sigma\in S_n(M)} r_\sigma \cdot \sigma \given \begin{array}{l}
+			\text{für jedes $K \subseteq M$ kompakt gibt es nur endlich viele $\sigma \colon \abs*{\Delta^n} \to M$} \\
+			\text{mit $r_\sigma\neq 0$ und $\sigma(\abs*{\Delta^n}) \cap K \neq \emptyset$} 
+		\end{array}
+		  }
+	\]
+\end{bemerkung}
+
 % section 7 (end)
 
 
