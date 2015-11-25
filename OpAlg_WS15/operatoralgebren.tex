@@ -1141,25 +1141,162 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 
 \begin{satz}
 	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
-	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\underrightarrow{\lim}(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
+	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\Dlim(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
 	\begin{itemize}
-		\item Es existieren $^*$-Homomorphismen $\varphi_{n,\infty} \colon A_n \to \underrightarrow{\lim}(A_n,\varphi_n)$ mit $\varphi_{n,\infty} = \varphi_{n+1,\infty} \circ \varphi_{n}$.
-		\item Falls $\psi_n \colon A_n \to B$ für $n \in \mathbb{N}$ $^*$-Homomorphismen sind mit $\psi_n = \psi_{n+1} \circ \varphi_n$, so existiert ein eindeutig bestimmter $^*$-Homomorphismus $\psi \colon \underrightarrow{\lim}(A_n,\varphi_n) \to B$ mit $\psi_n = \psi \circ \varphi_{n,\infty}$ für $n \in \mathbb{N}$.
+		\item Es existieren $^*$-Homomorphismen $\varphi_{n,\infty} \colon A_n \to \Dlim(A_n,\varphi_n)$ mit $\varphi_{n,\infty} = \varphi_{n+1,\infty} \circ \varphi_{n}$.
+		\item Falls $\psi_n \colon A_n \to B$ für $n \in \mathbb{N}$ $^*$-Homomorphismen sind mit $\psi_n = \psi_{n+1} \circ \varphi_n$, so existiert ein eindeutig bestimmter $^*$-Homomorphismus $\psi \colon \Dlim(A_n,\varphi_n) \to B$ mit $\psi_n = \psi \circ \varphi_{n,\infty}$ für $n \in \mathbb{N}$.
 	\end{itemize}
 	Kürzer:
-	\[
+	\begin{equation}
 		\begin{tikzcd}[column sep=large,row sep=huge,arrows={sloped,pos=.37}]
-			& & & & & \underrightarrow{\lim}(A_n,\varphi_n) \ar[dd,"\exists!",dashed,sloped=false,pos=.5] \\
-			A_0 \rar \ar[urrrrr,"\varphi_{0,\infty}",gray,end anchor={[yshift=.7ex]}] \ar[drrrrr,"\psi_0"',gray,end anchor={[yshift=.7ex,xshift=-.1ex]south west}] & \ldots  \rar 
-			& A_n \rar \ar[urrr,"\varphi_{n,\infty}",end anchor={[yshift=.4ex]}] \ar[drrr,"\psi_n"',end anchor={[yshift=-.2ex,xshift=.5ex]}] 
-			& A_{n+1} \rar \ar[urr,"\varphi_{n+1,\infty}"',end anchor={[yshift=-.1ex,xshift=-.2ex]}] \ar[drr,"\psi_{n+1}",end anchor={[yshift=0.5ex]}] 
+			& & & & \displaystyle \Dlim(A_n,\varphi_n) \ar[dd,"\exists! \psi",dashed,sloped=false,pos=.5, bend left] \\
+			A_0 \rar  & \ldots  \rar %\ar[urrrr,"\varphi_{0,\infty}",gray] \ar[drrrr,"\psi_0"',gray]
+			& A_n \rar \ar[urr,"\varphi_{n,\infty}"] \ar[drr,"\psi_n"',end anchor={[yshift=-0.3ex]}] 
+			& A_{n+1} \rar \ar[ur,"\varphi_{n+1,\infty}"'] \ar[dr,"\psi_{n+1}",end anchor={[yshift=0.3ex]}] 
 			& \ldots \\
-			& & & & & B
-		\end{tikzcd}
-	\]
-	\todo[inline]{Pfeile hübscher machen}
+			& & & &  B
+		\end{tikzcd} \label{eq:413} \tag{$*$}
+	\end{equation}
 \end{satz}
+\begin{beweis}
+	Die Menge
+	\[
+		\prod_\mathbb{N} A_n := \set*{(a_n)_\mathbb{N} \given a_n \in A_n, \sup_n \norm*{a_n} < \infty}
+	\]
+	ist eine $C^*$-Algebra mit komponentenweisen Operationen und Supremumsnorm: Sie ist Banachalgebra nach Blatt 1, Aufgabe 1 c) und $\norm*{\cdot}_\infty$ ist offensichtlich eine $C^*$-Norm.
+	Es ist nun
+	\[
+		\bigoplus_\mathbb{N} A_n := \set*{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?}
+	\]
+	Sei $q \colon \prod_\mathbb{N} A_n \to \sfrac{\prod_\mathbb{N} A_n}{\bigoplus_\mathbb{N} A_n}$ die Quotientenabbildung.
+	Sei 
+	\[
+		C := \set*{(a_n)_\mathbb{N} \given (a_n)_\mathbb{N} \in \prod\nolimits_\mathbb{N} A_n, \exists n_0 \in \mathbb{N} \text{ mit } a_{n+1}= \varphi_n(a_n), n \ge n_0}
+	\]
+	$C \subset \prod_\mathbb{N} A_n$ ist eine $^*$-Unteralgebra und $\overline{C} \subset \prod_\mathbb{N} A_n$ ist $C^*$-Unteralgebra.
+	Wir definieren 
+	\[
+		\Dlim(A_n,\varphi_n) := q \enbrace*{\overline{C}} \subset \faktor{\prod\nolimits_\mathbb{N} A_n}{\bigoplus\nolimits_\mathbb{N} A_n}
+	\]
+	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch $\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi(a))}$ und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$.
+	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
+	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ und $\psi$ ist normvermindernd, setzt sich also eindeutig auf $q(\overline{C})$ fest.
+	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
+\end{beweis}
+
+\begin{beispiel}
+	Beispiele für den gerichteten Limes
+	\begin{enumerate}[(i)]
+		\item Betrachte
+		\[
+			\begin{tikzcd}
+				M_1 \rar & \ldots  \rar & M_n \rar["\varphi_n"] & M_{n+1} \rar & \ldots \rar & \displaystyle\Dlim (M_n,\varphi_n) \cong \mathcal{K} \enbrace*{\ell^2(\mathbb{N})}
+			\end{tikzcd}
+		\]
+		wobei die $\varphi_n$ eine Matrix rechts unten mit Nullen auffüllt. Es gilt
+		\[
+			\overline{\bigcup_\mathbb{N} \mathcal{B} \enbrace[\big]{\Span \set*{\eta_0, \ldots , \eta_n}}} \subset \mathcal{B} \enbrace*{\ell^2(\mathbb{N})}
+		\]
+		\item Betrachte
+		\[
+			\begin{tikzcd}
+				M_2 \rar & \ldots  \rar & M_{2^n} \rar["\varphi_n"] & M_{2^{n+1}} \rar & \ldots \rar & \displaystyle\Dlim (M_{2^n},\varphi_n) =: M_{2^\infty}
+			\end{tikzcd}
+		\]
+		wobei die verbindenden Abbildungen die Matrizen zweimal auf der Diagonalen platzieren. Erzeuger/Vernichter Fermionen, CAR-Algebra.
+	\end{enumerate}
+\end{beispiel}
 % section 4 (end)
+\newpage
+
+\section{Zustände, die GNS-Konstruktion} % (fold)
+\label{sec:5}
+
+\begin{definition}[{name=[positives Funktional]}]
+	Sei $A$ eine $C^*$-Algebra. 
+	Eine Abbildung $\varphi \colon A \to \mathbb{C}$ heißt \Index{positives Funktional}, falls $\varphi$ linear ist und $\varphi(A_+) \subset \mathbb{R}_+$ gilt. 
+	$\varphi$ heißt \Index{Zustand}, falls außerdem $\norm*{\varphi}= 1$ gilt. 
+	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$. 
+\end{definition}
+
+\begin{proposition}
+	Sei $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. Dann ist
+	\mapdef{A \times A}{\mathbb{C}}{(a,b)}{\varphi(a^*b)}{}
+	eine positive Sesquilinearform\index{Sesquilinearform}. 
+	Insbesondere gilt die Cauchy-Schwarz-Ungleichung 
+	\[
+		\abs*{\varphi(a^*b)} \le \varphi(a^*a)^{\sfrac{1}{2}}\varphi(b^*b)^{\sfrac{1}{2}}
+	\]
+\end{proposition}
+\begin{beweis}
+	Klar.
+\end{beweis}
+
+\begin{satz}
+	Sei $\varphi$ ein positives Funktional auf $A$. Dann gilt 
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $\varphi$ ist beschränkt,
+		\item $\varphi(a^*)=\overline{}{\varphi(a)}$ für $a \in A$ und
+		\item $\abs*{\varphi(a)}^2 \le \norm*{\varphi} \varphi(a^*a)$ für $a \in A$
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Falls $\varphi$ unbeschränkt ist, so existiert $(a_n)_\mathbb{N} \subset A_+^1$ mit $\varphi(a_n) >2^n$ für $n \in \mathbb{N}$.
+		Setze $h := \sum_{n \in \mathbb{N}} \frac{1}{2^n} \cdot a_n \subset A_+$.
+		Dann gilt für alle $k \in \mathbb{N}$
+		\begin{align}
+			\varphi(h) \ge \varphi \enbrace*{\sum_{n=0}^{k} \frac{1}{2^n} \cdot a_n} > k+1,
+		\end{align}
+		was ein Widerspruch ist.
+		\item Es sei $a=b-c+ i \cdot d - e \cdot e$ mit $b,c,d,e \in A_+$. Dann gilt
+		\begin{align}
+			\varphi(a^*) = \varphi \enbrace*{b-c- i \cdot d + i \cdot e} &= \varphi(b) - \varphi(c) - i \cdot \varphi(d) + i \cdot \varphi(e) \\
+			&= \overline{\varphi(b) - \varphi(c) + i \cdot \varphi(d) - i \cdot \varphi(e)} = \overline{\varphi(a)}
+		\end{align}
+		\item Sei $(e_\lambda)_\Lambda$ eine approximative Eins. Dann gilt 
+		\[
+			\abs*{\varphi(a)}^2 = \lim_\lambda \abs*{\varphi(e_\lambda \cdot a)}^2  \StackText{C.S.}{\le}\lim_\lambda \varphi(e_\lambda^2) \varphi(a^*a) \le \norm*{\varphi} \varphi(a^*a) \qedhere
+		\]
+	\end{enumerate}
+\end{beweis}
+
+\begin{satz}
+	Sei $A$ eine $C^*$-Algebra und $\varphi \in A^*$ ein (beschränktes) Funktional. Dann sind äquivalent:
+	\begin{enumerate}[(i)]
+		\item $\varphi$ ist positiv.
+		\item $\norm*{\varphi} = \lim_\lambda\varphi(e_\lambda)$ für jede approximative Eins $(e_\lambda)_\Lambda$ in $A$.
+		\item $\norm*{\varphi} = \lim_\lambda\varphi(e_\lambda)$ für \emph{eine} approximative Eins $(e_\lambda)_\Lambda$ in $A$.
+	\end{enumerate}
+	Falls $A$ unital ist, so ist $\varphi$ genau dann positiv, wenn $\varphi(1)=\norm*{\varphi}$ ist.
+\end{satz}
+\begin{beweis}
+	Für die Implikation (i)$\Rightarrow$(ii) sei $\varphi$ positiv und $(e_\lambda)_\Lambda$ eine approximative Eins. 
+	Dann ist $\enbrace*{\varphi(e_\lambda)}_\Lambda \subset \benbrace*{0,\norm*{\varphi}}$ ein aufsteigendes Netz, also existiert der Limes und es gilt $\lim_\lambda \varphi(e_\lambda) \le \norm*{\varphi}$. 
+	Sei $a \in A^1$. Dann gilt
+	\[
+		\abs*{\varphi(a)}^2 \grenzwl{\lambda} \abs*{\varphi(e_\lambda a)}^2 \le \varphi(e_\lambda^2) \varphi(a^*a) \le \varphi(e_\lambda) \varphi(a^*a)
+		\le \lim_\lambda \varphi(e_\lambda) \cdot \norm*{\varphi}
+	\]
+	Damit folgt $\norm*{\varphi}^2 \le \lim_\lambda \varphi(e_\lambda) \cdot \norm*{\varphi} \le \norm*{\varphi}^2$, also $\norm*{\varphi}=\lim_\lambda \varphi(e_\lambda)$.
+	
+	Die Implikation (ii)$\Rightarrow$(iii) ist trivial. 
+	Für (iii)$\Rightarrow$(i) sei $(e_\lambda)_\Lambda$ die approximative Eins mit $\norm*{\varphi}= \lim_\lambda \varphi(e_\lambda)$.
+	Behauptung: $\varphi(A_\sa) \subset \mathbb{R}$. Sei $a \in A_\sa^1$ mit $\varphi(a) = \alpha + i \cdot \beta$, $\alpha,\beta \in \mathbb{R}$. 
+	Wir dürfen $\beta \le 0$ annehmen. Sei $n \in \mathbb{N}$. Dann gilt 
+	\begin{align}
+		\norm*{(a- i \cdot n \cdot e_\lambda)}^2 \StackText{$C^*$}{=}\ldots \le 1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}
+	\end{align}
+	Also ist 
+	\begin{align}
+		\alpha^2 + \beta^2 - 2 n \norm*{\varphi} \beta + n^2 \norm*{\varphi}^2=\ldots =\abs*{\varphi(a)- i \cdot n \cdot \norm*{\varphi}} &\grenzwl{\lambda}\abs*{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \\
+		&\le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot e_\lambda a - a e_\lambda} \\
+		&\grenzw{\lambda} \le \norm*{\varphi}^2 (1+ n^2)
+	\end{align}
+	Damit folgt $\norm*{\varphi}\neq 0$ oder $\beta=0$. Insgesamt also $\beta=0$ und damit $\varphi(A_\sa) \subset \mathbb{R}$
+\end{beweis}
+% section 5 (end)
 
 
 
