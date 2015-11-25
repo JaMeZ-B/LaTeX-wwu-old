@@ -26,8 +26,8 @@ Sei $X$ ein vollständiger metrischer Raum. Wir suchen nun eine \enquote{schwach
 	X \text{ lokal } \CAT \quad + \quad \text{???} \qquad \Leftrightarrow \qquad X \text{ ist } \CAT
 \]
 
-\begin{satz}
-\label{satz:2.1}
+\begin{satz}[\textsc{Cartan-Hadamard}]
+\label{satz:2.1} \label{satz:cartan-hadamard}
 	Sei $X$ ein vollständiger zusammenhängender lokaler $\CAT$-Raum.
 	Sei $\widetilde{X}$ seine universelle Überlagerung.
 	Dann ist $\widetilde{X}$ ein $\CAT$-Raum.
@@ -45,9 +45,318 @@ Sei $X$ ein vollständiger metrischer Raum. Wir suchen nun eine \enquote{schwach
 Um diesen Satz zu beweisen, brauchen wir viel Vorarbeit.
 
 
+\begin{no-erinnerung}[{siehe \cite[Kap. 3]{Kramer}}]
+	Seien $E,B$ topologische Räume. \marginnote{18.11.15 \\ \ [7]}
+	Sei weiter $p \colon E \twoheadrightarrow B$ eine stetige surjektive Abbildung.
+	Wir nennen $p$ eine \Index{Überlagerung} von $B$, wenn jeder Punkt $b \in B$ eine offene Umgebung $U_b \subseteq B$ von $b$ besitzt mit folgender Eigenschaft:
+	
+	Es gibt eine Indexmenge $I \neq \emptyset$ mit
+	\[
+		p^{-1} (U_b) = \bigsqcup \{V_i : i \in I \}, V_i \subseteq E \text{ offen}, V_i \cap V_j = \emptyset, i \neq j
+	\]
+	und $p \big|_{V_i} \rightarrow U_b$ ist ein Homöomorphismus.
+\end{no-erinnerung}
 
+\todo{Bild einfügen!}
+Ein triviales Beispiel einer Überlagerung ist die Identität $\id_B$. Ein weiteres, wichtiges Beispiel ist $E := \RR, B = \Ss^1 = \{(x,y) \in \RR^2 : x^2 + y^2 = 1 \}$ und
+\begin{align*}
+	p\colon E &\longrightarrow B \\
+	t &\longmapsto (\cos(2\pi t),\sin(2\pi t))
+\end{align*}
+Das ist eine Überlagerung, denn für $b = (\cos(\alpha),\sin(\alpha)) \in \Ss^1$ und $U_b = \Ss^{-1} \setminus \{-b\}$ ist $p^{-1}(U_b) = \bigcup\penbrace*{ \enbrace*{k+r-\frac{1}{2},k+r+\frac{1}{2}} : k \in \ZZ}$.
+\todo{Bild einfügen!}
 
+$p \colon \RR \rightarrow \Ss^1$ ist eine Überlagerung mit $\pi_1(E,\{e\}) = \pi_2(\RR,\{x_0\}) \simeq \{0\}$ und $\RR$ ist wegzusammenhängend.
 
+\begin{no-def}
+	Eine Überlagerung $p \colon E \rightarrow B$ heißt \textbf{universelle Überlagerung}, wenn $E$ einfach zusammenhängend ist. \index{Überlagerung!universell} \text{zusammenhängend!einfach}
+\end{no-def}
 
+Die Frage ist nun, welche Räume die universelle Überlagerung besitzen.
+
+\begin{no-satz}[ohne Beweis]
+	Jeder zusammenhängende topologische Raum $X$, welcher lokal wegzusammenhängend ist und semilokal einfach zusammenhängend ist, hat eine universelle Überlagerung. \index{zusammenhängend!lokal wegzusammenhängenhand} \index{zusammenhängend!semilokal einfach}
+\end{no-satz}
+
+$X$ heißt genau dann \textbf{semilokal einfach zusammenhängend}, wenn für alle $x \in X$ eine offene Umgebung $U_x$ von $x$ existiert, sodass $\id_*\colon \pi_1(U_x,x) \rightarrow \pi_1(X,x)$ trivial ist.
+
+\begin{no-bem}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item Wenn $X$ lokal $\CAT$ ist, dann ist $X$ semilokal einfach zusammenhängend:
+		Denn für $x \in X$ existiert ein $\varepsilon > 0$ sodass $B_\varepsilon(x) \CAT$ ist.
+		$\CAT$-Räume sind kontrahierbar, folglich ist $\pi_1(B_\varepsilon(x),x) \simeq \setzero$ und damit ist $\id_*\colon \pi_1(B_\varepsilon(x),x) \rightarrow \pi_1(X,x)$ trivial.
+		\item Jeder zusammenhängende lokale $\CAT$-Raum hat also eine universelle Überlagerung.
+	\end{enumerate}
+\end{no-bem}
+
+\begin{beweis}[\autoref{kor:2.2}]
+	\mbox{} \\[-.9cm]
+	\begin{description}
+		\item[\bewrueck] Ist $X$ ein $\CAT$-Raum, dann ist $B_\varepsilon(x)$ für alle $\varepsilon > 0, x \in X$ konvex (Übung). Also ist $B_\varepsilon(x)$ $\CAT$.
+		
+		In \autoref{satz:1.19} haben wir bewiesen, dass $X$ kontrahierbar ist, folglich ist $\pi_1(X,\{x\}) \simeq \{0\}$.
+		Da $X$ wegzusammenhängend ist, folgt insgesamt, dass $X$ einfach zusammenhängend ist.
+		\item[\bewhin] Die Identität $\id_X$ ist die universelle Überlagerung, da $X$ nach Annahme zusammenhängend ist. Nach \autoref{satz:cartan-hadamard} ist $X$ dann $\CAT$. \qedhere
+	\end{description}
+\end{beweis}
+
+Der Satz von \textsc{Cartan} und \textsc{Hadamard} liefert uns also:
+\begin{itemize}
+	\item eine lokal $\rightarrow$ global-Aussage (\autoref{kor:2.2})
+	\item eine Möglichkeit, viele $\CAT$-Räume zu erhalten
+	\item ein Werkzeug, um zu zeigen, dass die universelle Überlagerung kontrahierbar ist.
+\end{itemize}
+
+Für den Beweis machen wir zuerst ein paar Vorüberlegungen: Wir haben $p \colon \tilde{X} \twoheadrightarrow X$, wobei $X$ ein vollständiger metrischer zusammenhängender lokaler $\CAT$-Raum ist. Wir werden eine Metrik auf $\tilde{X}$ definieren, sodass $p$ eine \textbf{lokale Isometrie} ist, d.h. für $\tilde{x} \in \tilde{X}$ existiert ein $\varepsilon > 0$, sodass $p \colon B_\varepsilon(\tilde{x}) \rightarrow B_\varepsilon(p(\tilde{x}))$ eine Isometrie ist.
+
+\section{Längenräume}
+\label{sec:2.1}
+	Betrachte $\Ss^1 \subseteq \EE^2$. Die induzierte Metrik von $\EE^2$ auf $\Ss^1$ ist keine \enquote{gute} Metrik, um Geometrie zu machen. Besser ist folgende Metrik:
+	\begin{align*}
+		d_L(x,y) &= \text{Bogenlänge zwischen} x \text{ und } y \\
+		&= \arccos(\sprod{x,y})
+	\end{align*}
+	Als allgemeines Konzept betrachten wir also Wege von $x$ nach $y$.
+	
+\begin{definition}[Weg, Länge, rektifizierbar]
+\label{def:2.3}
+	Sei $(X,d)$ ein metrischer Raum und $c\colon [a,b] \rightarrow X$ eine stetige Abbildung.
+	Die Abbildung $c$ heißt \Index{Weg} von $c(a)$ nach $c(b)$.
+	Wir definieren die \Index{Länge} von $c$ folgendermaßen:
+	\[
+		\ell(c) = \sup \penbrace*{ \sum\limits_{i=1}^{n} d(c(t_{i-1}),c(t_i)) : a=t_0 < t_1 < \dots t_n = b, n\in \NN} \in [0,\infty].
+	\]
+	Falls $\ell(c) < \infty$, heißt $c$ \Index{rektifizierbar}. \todo{Grafik einfügen.}
+\end{definition}
+
+\begin{bemerkung}
+\label{bem:2.4}
+	Es gibt Wege, die nicht rektifizierbar sind.
+	Wir betrachten das folgende Beispiel:
+	
+	\begin{align*}
+		c \colon [-1,0] &\longrightarrow \RR \\
+		-\frac{1}{n} &\longmapsto \sum_{i=1}^{n} (-1)^{n+1} \cdot \frac{1}{n} \\
+		0 &\longmapsto \ln(2)
+	\end{align*}
+	und stetig linear fortgesetzt auf $\benbrace*{-\frac{1}{n}, -\frac{1}{n+1}}$. \todo{Grafik einfügen.}
+
+	Betrachte $t_n = -\frac{1}{n}$. Damit erhalten wir
+	\[
+		\ell(c) \geq \ell \enbrace*{c \big|_{\benbrace*{-1,-\frac{1}{n+1}}}} \geq \sum\limits_{i=1}^{n} d_2(c(t_i),c(t_{i+1})) = \sum\limits_{i=1}^{n} \frac{1}{n+1} \xrightarrow{n \rightarrow \infty} \infty
+	\]
+\end{bemerkung}
+
+\begin{definition}
+\label{def:2.5}
+	Sei $(X,d)$ ein metrischer Raum und $c_1 \colon [a_1,b_1] \rightarrow X$, $c_2 \colon [a_2,b_2] \rightarrow X$ zwei Wege mit $c_1(b_1) = c_2(a_2)$.
+	\begin{enumerate}[(i)]
+		\item Der \textbf{zusammengesetzte Weg} $c_1 * c_2$ von $c_1(a_1)$ nach $c_2(b_2)$ ist definiert wie folgt: \index{Weg!zusammengesetzt}
+		\begin{align*}
+			c_1 * c_2\colon [a_1,b_1+b_2-a_2] &\longrightarrow X \\
+			t &\longmapsto \begin{dcases}
+				c_1(t), & t \in [a_1,b_1] \\
+				c_2(t+a_2-b_1), & t \in [b_1,b_1+b_2-a_2]
+			\end{dcases}
+		\end{align*}
+		\item Der \textbf{inverse Weg} von $c_1$ ist definiert wie folgt: \index{Weg!invers}
+		\begin{align*}
+			\ol{c_1}\colon [a_1,b_1] &\longrightarrow X \\
+			t &\longmapsto c_1(a_1+b_1-t)
+		\end{align*}
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+\label{prop:2.6}
+	Sei $(X,d)$ ein metrischer Raum und $c\colon [a,b] \rightarrow X$ ein Weg.
+	Dann gilt:
+	\begin{enumerate}[(i)]
+		\item $\ell(c) \geq d(c(a),c(b))$ und $\ell(c) = 0$ genau dann, wenn $c$ konstant ist.
+		\item Sei $\varphi\colon [a',b'] \twoheadrightarrow [a,b]$ eine schwach monotone surjektive stetige Funktion.
+		Dann gilt $\ell(c) = \ell(c\circ \varphi)$.
+		\item Additivität: Seien $c_1 \colon [a_1,b_1] \rightarrow X$ und $c_2 \colon [a_2,b_2] \rightarrow X$ zwei Wege in $X$ mit $c_1(b_1) = c_2(a_2)$.
+		Dann gilt $\ell(c_1 * c_2) = \ell(c_1) + \ell(c_2)$.
+		\item $\ell(\ol{c}) = \ell(c)$
+		\item Wenn $\ell(c) < \infty$, dann ist
+		\begin{align*}
+			\lambda_c \colon [a,b] &\longrightarrow [0,\ell(c)] \\
+			t &\longmapsto \ell\enbrace*{c \big|_{[a,t]}}
+		\end{align*}
+		eine stetige schwach monotone surjektive Funktion.
+		\item Parametrisierung nah der Bogenlänge: Wenn $\ell(c) < \infty$, dann existiert ein eindeutiger Weg $\tilde{c} \colon [0,\ell(c)] \rightarrow X$ mit $\tilde{c} \circ \lambda_c = c$ und $\ell\enbrace*{\tilde{c} \big|_{[0,t]}} = t$.
+		\item Sei $(c_n \colon [a,b] \rightarrow X)_{n \in \NN}$ eine Folge von Wegen, die gleichmäßig gegen einen Weg $c \colon [a,b] \rightarrow X$ konvergiert.
+		Wenn $\ell(c) < \infty$, dann gilt:
+		Für alle $\varepsilon > 0$ existiert ein $N(\varepsilon)$ mit $\ell(c) \leq \ell(c_n) + \varepsilon$ für alle $n \geq N(\varepsilon)$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{beweis}
+	(i) bis (iv) und (vi) sind Übungsaufgaben.
+	\begin{enumerate}[(i)]
+		\setcounter{enumi}{4}
+		\item Zuerst zeigen wir, dass $\lambda_c$ schwach monoton ist.
+		Seien $t, t' \in [a,b]$ mit $t \leq t'$.
+		Dann ist
+		\[
+			c \big|_{[a,t']} = c \big|_{[a,t]} * c\big|_{[t,t']}.
+		\]
+		Mit (ii) erhalten wir:
+		\begin{align*}
+			\ell\enbrace*{c \big|_{[a,t']}} &= \ell \enbrace*{c \big|_{[a,t]}} + \ell \enbrace*{c\big|_{[t,t']}} \\
+			\Rightarrow \quad \Underbrace{\ell\enbrace*{c \big|_{[a,t]}}}{\lambda_c(t)} &\leq \Underbrace{\ell\enbrace*{c \big|\big|_{[a,t']}}}{\lambda_c(t')}
+		\end{align*}
+		Zur Stetigkeit:
+		Wir zeigen, dass $\lambda_c$ gleichmäßig stetig ist.
+		Sei $\varepsilon > 0$.
+		Da $[a,b]$ kompakt ist, ist der Weg $c$ gleichmäßig stetig.
+		Also existiert ein $\delta > 0$, sodass für alle $t, t' \in [a,b]$ mit $d(t,t') < \delta$ gilt:
+		\[
+			d(c(t),c(t')) < \frac{\varepsilon}{4}.
+		\]
+		Für $\frac{\varepsilon}{4}$ existiert $a = t_0 < t_1 < \dots < t_{n+1} = b$ mit
+		\begin{equation}
+			\sum\limits_{i=0}^{n} d(c(t_i),c(t_{i+1})) + \frac{\varepsilon}{4} > \ell(c). \label{eq:2.6.a}
+		\end{equation}
+		Weiter können wir annehmen, dass gilt (ansonsten wähle feinere Unterteilung):
+		\begin{equation}
+			d(t_i,t_{i+1}) < \delta \text{ für alle } i \in \{0,\dots,n\} \label{eq:2.6.b}
+		\end{equation}
+		Wir erhalten
+		\begin{equation}
+			\ell(c) \stack{(ii)}{=} \sum\limits_{i=0}^{n} \ell\enbrace*{ c\big|_{[t_i,t_{i+1}]}} \stack{(i)}{\geq} \sum\limits_{i=0}^n d(c(t_i),c(t_{i+1})) \stack{\eqref{eq:2.6.a}}{>} \ell(c) - \frac{\varepsilon}{4}.
+		\end{equation}
+		Folglich:
+		\[
+			\abs*{\ell\enbrace*{c\big|_{[t_i,t_{i+1}]}} - d(c(t_i),c(t_{i+1}))} < \frac{\varepsilon}{4}.
+		\]
+		Da $d(c(t_i),c(t_{i+1})) < \frac{\varepsilon}{4}$, erhalten wir
+		\[
+			\ell\enbrace*{(c \big|\big|_{[t_i,t_{i+1}]}} < \frac{\varepsilon}{4} + \frac{\varepsilon}{4} = \frac{\varepsilon}{2}.
+		\]
+		Insgesamt erhalten wir, dass für alle $t,t' \in [a,b]$ mit $d(t,t') < \delta$ gilt:
+		\[
+			\abs{\lambda_c(t)-\lambda_c(t')} = \ell\enbrace*{c \big|_{[t,t']}} \leq \ell\enbrace*{c\big|_{[t_j,t_{j+2}]}} < 2 \cdot \frac{\varepsilon}{2} = \varepsilon
+		\]
+		für ein $j \in \{0, \dots, n-1\}$.
+		
+		Zur Surjektivität:
+		Es gilt $\lambda_c(a) = 0$ und $\lambda_c(b) = \ell(c)$.
+		Die Abbildung $\lambda_c$ ist stetig und $[a,b]$ ist zusammenhängend.
+		Folglich ist $\lambda_c([a,b])$ zusammenhängend und wir erhalten $\lambda_c([a,b]) = [0,\ell(c)]$. \setcounter{enumi}{6}
+		\item Sei $\varepsilon >0$. \marginnote{20.11.15 \\ \ [8]}
+		Wähle $t_i \in [a,b], a = t_0 < t_1 < \dots < t_{k+1} = b$ mit
+		\begin{equation}
+			\ell(c) \leq \sum\limits_{i=0}^{k} d(c(t_i),c(t_{i+1})) + \frac{\varepsilon}{2} \label{eq:2.6.1}
+		\end{equation}
+		Da $(c_n)_{n \in \NN}$ gleichmäßig gegen $c$ konvergiert, existiert ein $N \in \NN$, sodass gilt:
+		\begin{equation}
+			d(c(t),c_n(t)) < \frac{\varepsilon}{4 \cdot (k+1)} \text{ für alle } N \neq n, t \in [a,b]. \label{eq:2.6.2}
+		\end{equation}
+		Wir erhalten:
+		\begin{equation}
+			\ell(c) \stack{\leq}{\eqref{eq:2.6.1}} \sum\limits_{i=0}^{k} d(c(t_i),c(t_{i+1})) + \frac{\varepsilon}{2}
+		\end{equation}
+		Nebenrechnung:
+		\begin{align*}
+			d(c(t_i),c(t_{i+1})) &\stack{\leq}{\Delta\text{-Ungl.}} d(c(t_i),c_n(t_i)) + d(c_n(t_i),c_n(t_{i+1})) + d(c_n(t_{i+1}),c(t_{i+1})) \\
+			&\stack{\leq}{\eqref{eq:2.6.2}} \frac{\varepsilon}{2 \cdot (k+1)} + d(c_n(t_i),c_n(t_{i+1})) \quad \forall n \geq N
+		\end{align*}
+		Also:
+		\[
+			\ell(c) \leq (k+1) \cdot \frac{\varepsilon}{2 \cdot (k+1)} + \sum\limits_{i=0}^{k} d(c_n(t_i),c_n(t_{i+1})) + \frac{\varepsilon}{2} \leq \ell(c_n) + \varepsilon \quad \forall n \geq N \qedhere
+		\]
+	\end{enumerate}
+\end{beweis}
+
+\begin{definition}
+\label{def:2.7}
+	Sei $(X,d)$ ein metrischer Raum.
+	$d$ heißt \Index{Längenmetrik}, falls für alle $x,y \in X$ gilt:
+	\[
+		d(x,y) = \inf \{ \ell(c) : c \text{ ist ein rektifizierbarer Weg von } x \text{ nach } y \}
+	\]
+	Falls $d$ eine Längenmetrik ist, heißt $(X,d)$ ein \Index{Längenraum}.
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:2.8}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item Jeder geodätische Raum $X$ ist ein Längenraum.
+		Genauer:
+		Seien $x,y \in X$ beliebig.
+		Sei weiter $\gamma\colon [0,d(x,y)] \rightarrow X$ eine Geodäte zwischen $x$ und $y$.
+		Sei $\varepsilon > 0$ beliebig.
+		Wähle $0 = t_0 < t_1 < \dots < t_{n+1} = d(x,y)$ mit
+		\begin{align*}
+			\ell(\gamma) &\stack{}{\leq} \sum\limits_{i=0}^{n} d(\gamma(t_i),\gamma(t_{i+1})) + \varepsilon \\
+			&\stack{\gamma\text{ isom.}}{=} \sum\limits_{i=0}^{n} d_2(t_i,t_{i+1}) + \varepsilon \\
+			&\stack{}{=} d(x,y) + \varepsilon
+		\end{align*}
+		Für $\varepsilon = \frac{1}{n}$ erhalten wir für $n \rightarrow \infty$: $\ell(\gamma) \leq d(x,y)$. Mit $\ell(\gamma) \geq d(\gamma(0),\gamma(d(x,y))) = d(x,y)$ (\autoref{prop:2.6}(i)) folgt Gleichheit.
+		\item Im Allgemeinen ist ein Längenraum nicht geodätisch.
+		Zum Beispiel ist $(\RR^2 \setminus \setzero,d_2)$ ein Längenraum, aber zwischen $(-1,0)$ und $(1,0)$ existiert keine Geodäte.
+	\end{enumerate}
+\end{beispiel}
+
+Sei $(X,d)$ ein metrischer Raum.
+Dann induziert $d$ eine Längenmetrik $d_L$ auf $X$ und zwar wie folgt:
+
+\begin{definition}
+\label{def:2.9}
+	Sei $(X,d)$ ein metrischer Raum.
+	Wir definieren
+	\begin{align*}
+		d_L \colon X \times X &\longrightarrow \RR \cup \{\infty\} \\
+		(x,y) &\longmapsto \inf\{ \ell(c) : c \text{ ist ein rektifizierbarer Weg von } x \text{ nach } y\}
+	\end{align*}	
+	Falls kein rektifizierbarer Weg von $x$ nach $y$ existiert, dann setzen wir $d_L(x,y) = \infty$.
+	Es gilt (folgt direkt mit \autoref{prop:2.6}):
+	\begin{enumerate}[(i)]
+		\item $d_L$ ist eine Metrik auf $X$ (Konvention: $a + \infty = \infty$ für alle $a \in [0,\infty]$)
+		\item $d_L(x,y) \geq d(x,y)$ für alle $x,y \in X$
+	\end{enumerate}
+	Wir nennen $d_L$ die zu $d$ \textbf{assoziierte Längenmetrik}. \index{Längenmetrik!assoziiert}
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:2.10}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item $(\QQ,d_2)$: $d_{2_L}(x,y) = \infty$ für alle $x,y \in \QQ$ mit $x \neq y$
+		\item $(\Ss^1,d_2)$: $d_{2_L}(x,y) = \arccos(\sprod{x,y})$
+	\end{enumerate}
+\end{beispiel}
+
+\begin{proposition}
+\label{prop:2.11}
+	Sei $(X,d)$ ein metrischer Raum.
+	\begin{enumerate}[(i)]
+		\item Sei $c \colon [a,b] \Rightarrow X$ ein rektifizierbarer Weg in $(X,d)$, dann ist $c$ auch ein rektifiziertbarer Weg in $(X,d_L)$ und $\ell^d(c) = \ell^{d_2}(c)$.
+		\item Es gilt: $(d_L)_L = d_L$.
+	\end{enumerate}	
+\end{proposition}
+
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{enumerate}[(i)]
+		\item Wir zeigen zuerst, dass $c \colon [a,b] \rightarrow (X,d_2)$ stetig ist.
+		Sei $t \in [a,b]$ beliebig.
+		Sei weiter $(t_n)_{n \in \NN}$ eine Folge in $[a,b]$ mit $\lim\limits_{n \rightarrow \infty} t_n = t$. Wir müssen zeigen, dass gilt: $\lim\limits_{n \rightarrow \infty} c(t_n) = c(t)$.
+		Sei $\varepsilon > 0$.
+		\[
+			d_L(c(t),c(t_n)) \leq \ell\enbrace*{c \big|_{[t,t_n]}} = \abs{\lambda_c(t_n) - \lambda_c(t)}
+		\]
+		Da $\lambda_c$ stetig ist, existiert $N(\varepsilon)$ mit $\abs{\lambda_c(t_n) - \lambda_c(t)} < \varepsilon$ für alle $n \geq N(\varepsilon)$. Da $d_L(x,y) \geq d(x,y)$ für alle $x,y \in X$ gilt, folgt $\ell^{d_L}(c) \geq \ell^d(c)$. Weiter haben wir:
+		\begin{align*}
+			\ell^{d_L}(c) &\stack{\text{Def}}{=} \sup \penbrace*{\sum\limits_{i=0}^{n} d_L(c(t_i),c(t_{i+1})) : a=t_0 < \dots < t_{n+1} = b, n\in \NN} \\
+			&\stack{}{\leq} \sup \penbrace*{\sum\limits_{i=0}^{n} \ell^d \enbrace*{c\big|_{[t_i,t_{i+1}]} : a=t_0 < \dots < t_{n+1} = b, n\in \NN}} \\
+			&\stack{\text{Def}}{=} \ell^d(c).
+		\end{align*}
+		\item folgt sofort aus (i). \qedhere
+	\end{enumerate}
+\end{beweis}
 
 \cleardoubleoddemptypage
