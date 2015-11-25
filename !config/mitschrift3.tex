@@ -220,6 +220,12 @@
 \newcommand{\raisem@th}[3]{\raisebox{#1}{$#2#3$}}
 \makeatother
 
+\makeatletter
+\newcommand{\killDescendersM}[1]{\mathpalette{\killD@scendersM{#1}}}
+\newcommand{\killD@scendersM}[2]{\raisebox{0pt}[\height][0pt]{$#2#1$}}
+\makeatother
+
+
 \newcommand{\sing}{{\raisemath{1.1pt}{\scriptscriptstyle\mathrm{sing}}}}
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\op}{\mathrm{op}}
@@ -257,6 +263,16 @@
 \DeclareMathOperator{\her}{her}
 \newcommand{\subher}{\subset_{\her}}
 \newcommand{\grenzw}[1]{\xrightarrow{\minwidthbox{#1}{1.4em}}}
+\newcommand{\grenzwl}[1]{\xleftarrow{\minwidthbox{#1}{1.4em}}}
+\newcommand{\MyTo}[1]{\tikzexternaldisable\mathbin{\tikz[baseline] \draw[-to,line width=.4pt] (0ex,0.83ex) -- (#1,0.83ex);}\tikzexternalenable}
+\newcommand{\dlim}{%
+    \mathchoice
+      {\lim\limits_{\MyTo{3.3ex}}}% \displaystyle
+      {\lim\limits_{\MyTo{2.8ex}}}% \textstyle
+      {\lim\limits_{\MyTo{2.3ex}}}% \scriptstyle
+      {\lim\limits_{\MyTo{2.3ex}}}% \scriptscriptstyle
+}
+\newcommand{\Dlim}{\killDescendersM{\dlim}}
 
 
 % -- Kategorien
