@@ -1501,9 +1501,111 @@ Ab jetzt: $R$ kommutativ!
 		  }
 	\]
 \end{bemerkung}
-
 % section 7 (end)
+\newpage
 
+\section{Poincaré-Dualität} % (fold)
+\label{sec:8}
+
+\begin{lemma}
+	Seien $U,V \subseteq X$ offen. ei $C^*(X,U+V)$ der Unterkomplex von $C^*(X)$, der aus allen $\varphi \colon C_*(X)\to R$ besteht mit $\varphi(\sigma)=0$ für $\sigma \colon \abs*{\Delta^n}\to X$ mit $\im (\sigma) \subseteq U$ \emph{oder} $\im (\sigma) \subseteq V$. 
+	Dann induziert die Inklusion $C^*(X, U\cup V) \to C^*(X,U+v)$ einen Isomorphismus in Kohomologie.
+\end{lemma}
+\begin{beweis}
+	Sei $C^*(U+V) := C_*^{\set*{U,V}}(U \cup V)$. 
+	Die Inklusion $C_*(U +V)\to C_*(U \cup V)$ ist nach dem Satz über kleine Simplizes eine Kettenhomotopieäquivalenz.
+	Sei $C^*(U+V)= \Hom \enbrace*{C_*(U+V),R}$ der zu $C_*(U+V)$ duale Kokettenkomplex. 
+	Dann ist auch $C^*(U \cup V) \to C^*(U+V)$ eine Kokettenhomotopieäquivalenz.
+	Betrachte nun
+	\[
+		\begin{tikzcd}
+			0 \rar & C^*(X,U\cup V) \dar  \rar & C^*(X)\dar[equal] \rar & C^*(U \cup V) \dar \rar & 0 \\
+			0 \rar & C^*(X,U+V) \rar & C^*(X) \rar & C^*(U+V) \rar & 0
+		\end{tikzcd}
+	\]
+	Die zweite und dritte Abbildung induzieren jeweils Isomorphismen in Kohomologie. 
+	Da das Diagramm kommutiert erhalten wir eine lange exakte Leiter mit den langen exakten Folgen in Kohomologie.
+	Das 5er-Lemma impliziert nun, dass auch die erste Abbildungen einen Isomorphismus in Kohomologie induziert.
+\end{beweis}
+
+\begin{satz}
+	Seien $U,V \subseteq X$ offen. Dann gibt es eine lange exakte Mayer-Vietoris-Folge 
+	\[
+		\begin{tikzcd}[sep=1.6em]
+			\ldots \rar & H^n(X,U+V) \rar & H^n(X,U) \oplus H^n(X,V) \rar & H^n(X,U\cap V) \rar["\partial"] & H^{n+1}(x,U\cup V) \rar & \ldots 
+		\end{tikzcd}
+	\]
+	Der Verbindungshomomorphismus $\partial$ kann wie folgt beschrieben werden: Sei $\alpha \in C^n(X,U \cap V)$ mit $d^n(\alpha)=0$.
+	Dann lässt sich $\alpha$ schreiben als $\alpha= \alpha_U + \alpha_V$ mit $\alpha_U \in C^*(X,U)$ und $\alpha_V \in C^n(X,V)$ und es ist $\partial [\alpha] = \benbrace*{d^n \alpha_U}= \benbrace*{d^n \alpha_V}$
+\end{satz}
+\begin{beweis}
+	Benutze die kurze exakte Folge von Kokettenkomplexen: 
+	\[
+		\begin{tikzcd}
+			0 \rar & C^*(X,U + V) \rar & C^*(X,U) \oplus C^*(X,V) \rar & C^*(X, U \cup V) \rar & 0
+		\end{tikzcd}
+	\]
+	wobei die erste Abbildung $\alpha \mapsto (\alpha,\alpha)$ und die zweite $(\alpha,\beta) \mapsto \alpha-\beta$ ist. 
+	
+	
+	Es ist $\alpha+\beta=0$ in $C^*(X,U \cap V) \subseteq C^*(X)$ für $\alpha \in C^*(X;u) \subseteq C^*(X)$, $\beta \in C^*(X,V) \subseteq C^*(X)$. Also ist
+	$\alpha(\sigma)= - \beta(\sigma)$ für alle $\sigma \subseteq X$.
+	
+	Die zugehörigen lange exakte Folge ist die gesuchte Mayer-Vietoris-Folge. 
+\end{beweis}
+
+\begin{satz}
+	Seien $U,V \subseteq X$ offen. Sei $X$ lokalkompakt und Hausdorffsch. 
+	Dann gibt e seine lange exakte Mayer-Vietoris-Folge 
+	\[
+		\begin{tikzcd}
+			\ldots \rar & H^n_c(U\cap V) \rar & H^n_c(U) \oplus H^n_c(V) \rar & H^n_c(U \cup V) \rar["\partial"] & H^{n+1}_c(U\cap V) \rar & \ldots 
+		\end{tikzcd}
+	\]
+\end{satz}
+\begin{beweis}
+	Seien $K \subseteq U$, $L \subseteq V$ kompakt. Es ist 
+	\begin{align}
+		(X\setminus K) \cup (X\setminus L) &= X \setminus (K \cap L) \\
+		(X \setminus K) \cap (X \setminus L) &= X \setminus (K \cup L)
+	\end{align}
+	Wir erhalten eine lange exakte Folge 
+	\[
+		\begin{tikzcd}[sep=1.9em]
+			\ldots \rar & H^n \enbrace*{X,x \setminus (K \cap L)} \rar & H^n \enbrace*{X,X \setminus K} \oplus H^n(X,X \setminus L) \rar & H^n \enbrace*{X,X \setminus (K \cup L)} \rar & \ldots 
+		\end{tikzcd}
+	\]
+	Mit Ausschneidung ergibt sich eine lange exakte Folge 
+	\[
+		\begin{tikzcd}[sep=small,font=\small]
+			\ldots  \rar & H^n \enbrace*{U \cap V, U  \cap V  \setminus K \cap L} \rar & H^k(U,U \setminus K) \oplus H^k(C,V \setminus L) \rar & H^k(U \cup V, U \cup V \setminus K \cup L) \rar & \ldots 
+		\end{tikzcd}
+	\]
+	Sei $\mathcal{K}$ die gerichtete Menge der kompakten Unterräume von $U$, $\mathcal{L}$ die von $V$.
+	Sei $\Lambda = \mathcal{K} \times \mathcal{L}$ das Produkt der gerichteten Mengen $\mathcal{K}$ und $\mathcal{L}$.
+	Da $\colim_\Lambda$ exakt ist, erhalten wir auch im Kolimes eine lange exakte Folge. Dies ist die gesuchte lange exakte Folge. 
+	(Da $X$ lokalkompakt und Hausdorffsch ist, ist jeder kompakter Teilraum $M$ von $U \cup V$ die Vereinigung von $M=K \cup L$ mit $(K,L) \in \Lambda$.)
+\end{beweis}
+
+\begin{erinnerung}
+	Seien $U,V \subseteq X$ offen. Dann ist $H_*(U \cup V) = H_* \enbrace*{C_*(U+V)}$ und es gibt eine lange exakte Folge 
+	\[
+		\begin{tikzcd}
+			\ldots  \rar & H_n(U \cap V) \rar & H_n(U) \oplus H_n(C) \rar & H_n(U \cup V) \rar["\partial"]& \ldots 
+		\end{tikzcd}
+	\]
+	Der Verbindungshomomorphismus kann wie folgt beschrieben werden: Sei $x \in C_n(U + V)$ mit $d_n x =0$.
+	Dann ist $x=x_U - x_V$ mit $x_U \in C_n(U)$, $x_V \in C_n(V)$ und es ist $\partial[x] = \benbrace*{d_n x_U} = \benbrace*{d_n x_V}$.
+\end{erinnerung}
+\begin{beweis}
+	Benutze 
+	\[
+		\begin{tikzcd}
+			0 \rar & C_*(U \cap V) \rar & C_*(U) \oplus C_*(V) \rar & C_*(U+V) \rar & 0
+		\end{tikzcd}
+	\]
+\end{beweis}
+% section 8 (end)
 
 
 
