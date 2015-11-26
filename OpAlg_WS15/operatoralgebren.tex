@@ -186,7 +186,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{beweis}
 
 \begin{proposition}[label=prop1.11_einfach,{name=[Einfache abelsche unitale Banachalgebra]}]
-	Sei $A$ eine abelsche unitale Banachalgebra. Falls $A$ einfach\footnote{besitzt keine nichttrivialen Ideale} ist, so ist $A \cong \mathbb{C}$.\index{einfach} 
+	Sei $A$ eine abelsche unitale Banachalgebra. Falls $A$ einfach\marginnote{einfach = besitzt keine nichttrivialen Ideale} ist, so ist $A \cong \mathbb{C}$.\index{einfach} 
 \end{proposition}
 \begin{beweis}
 	Sei $a \in A$, $\alpha \in \sigma(a)$. Dann ist $J := \overline{(a-\alpha \cdot \ind)\cdot A} \lhd A$ ein abgeschlossenes Ideal. Für jedes $b \in A$ ist $(a-\alpha)b$ nicht 
@@ -198,46 +198,53 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \begin{definition}[{name=[Charakter]}]
 	Sei $A$ eine abelsche unitale Banachalgebra. Eine lineare, multiplikative, nicht verschwindende Abbildung $\chi \colon A \to \mathbb{C}$ heißt \Index{Charakter} auf $A$.  
 	Es gilt dann $\chi(\ind)=1$. Wir setzen $\Omega(A) := \set[\big]{\chi \given \chi \text{ Charakter auf }A}$ (\Index{Charakterspektrum} oder einfach nur \Index{Spektrum} von 
-	$A$). \todo{Revision 1}
+	$A$). 
 \end{definition}
 
 \begin{satz}[label=satz:1.13,{name=[Stetigkeit von Charakteren, Zusammenhang mit maximalen Idealen]}]
 	Sei $A$ eine abelsche unitale Banachalgebra. Dann gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item Jeder Charakter auf $A$ ist stetig mit Norm $1$.
-		\item Die Abbildung $\chi \mapsto \ker \chi$ definiert eine Bijektion  
-		\[
-			\Omega(A) \longrightarrow J_{\max} := \set[\big]{J \given J \subsetneq A \text{ ist ein maximales Ideal} }
-		\]
+		\item $\chi \mapsto \ker \chi$ definiert eine Bijektion  
+		\(
+			\Omega(A) \to J_{\max} := \set[\big]{J \given J \subsetneq A \text{ ist maximales Ideal} }
+		\)
 	\end{enumerate}
 \end{satz}
-\begin{beweis}\leavevmode
+\begin{beweis} \leavevmode
 	\begin{enumerate}[(i)]
-		\item Sei $a \in A$ mit $\norm{a}<1$ und $\chi(a)=1$. Setze $b= \sum_{n=1}^{\infty} a^n$, dann ist $1 + b = \sum_{n=0}^{\infty} a^n = (1-a)^{-1}$. Also ist
-		$1 = (1+b)(1-a) = 1 + b -a -ab$ und damit $ab+a=b$. Es folgt $\chi(a)\chi(b) + \chi(a)= \chi(b)$. Dies ist ein Widerspruch. Also muss $\norm{\chi}\le 1$ sein. Mit 
-		$\chi(1)=1$ folgt $\norm{\chi}=1$.
-		\item Für jedes $\chi \in \Omega(A)$ ist $\ker \chi \lhd A$ ein Ideal. Weiter ist der Kern abgeschlossen in $A$, da $\chi$ stetig ist. Wir zeigen, dass $\ker \chi$ maximal 
-		ist. $\ker \chi \not= A$, denn $\chi \not= 0$. Falls $c \in A \setminus \ker \chi$, so gilt 
+		\item Sei $a \in A$ mit $\norm{a}<1$ und $\chi(a)=1$. 
+		Setze $b= \sum_{n=1}^{\infty} a^n$, dann ist $\ind + b = \sum_{n=0}^{\infty} a^n = (\ind-a)^{-1}$. 
+		Also ist $\ind = (\ind+b)(\ind-a) = \ind + b -a -ab$ und damit $ab+a=b$. 
+		Es folgt $\chi(a)\chi(b) + \chi(a)= \chi(b)$. Dies ist ein Widerspruch. Also muss $\norm{\chi}\le 1$ sein. 
+		Mit $\chi(\ind)=1$ folgt $\norm{\chi}=1$. 
+		\item Für jedes $\chi \in \Omega(A)$ ist $\ker \chi \lhd A$ ein Ideal. 
+		Weiter ist der Kern abgeschlossen in $A$, da $\chi$ stetig ist. 
+		Wir zeigen, dass $\ker \chi$ maximal ist. 
+		Es ist $\ker \chi \not= A$, denn es gilt $\chi \not= 0$. 
+		Falls $c \in A \setminus \ker \chi$, so gilt 
 		\(
-			\chi(c)^{-1} \cdot c-1 \in \ker \chi
+			\chi(c)^{-1} \cdot c-\ind \in \ker \chi
 		\).
-		Also ist $\ker \chi + \mathbb{C} \cdot c = \ker \chi + \mathbb{C} \cdot 1=A$, da $a- \chi(a) \cdot 1 \in \ker \chi$ und damit 
-		$a= \enbrace*{a- \chi(a) \cdot 1}+ \chi(a) \cdot 1 \in \ker \chi + \mathbb{C} \cdot 1$. Damit ist der Kern von $\chi$ maximal.
+		Also ist $\ker \chi + \mathbb{C} \cdot c = \ker \chi + \mathbb{C} \cdot \ind=A$, da für $a \in A$ gilt $a- \chi(a) \cdot \ind \in \ker \chi$ und damit 
+		$a= \enbrace*{a- \chi(a) \cdot \ind}+ \chi(a) \cdot \ind \in \ker \chi + \mathbb{C} \cdot \ind$. 
+		Damit ist der Kern von $\chi$ maximal.
 		
-		Zur Injektivität: Es seien $\chi_1, \chi_2 \in \Omega(A)$ mit $\ker \chi_1 = \ker \chi_2$. Dann gilt für $a \in A$
+		Zur Injektivität: Es seien $\chi_1, \chi_2 \in \Omega(A)$ Charaktere mit $\ker \chi_1 = \ker \chi_2$. Dann gilt für $a \in A$
 		\begin{align}
 			\chi_1(a) - \chi_2(a) = \chi_1 \enbrace[\Big]{\Underbrace{a - \chi_2(a) \cdot \ind}{\in \ker \chi_2=\ker \chi_1}} = 0
 		\end{align}
-		Also ist $\chi_1=\chi_2$. Für die Surjektivität betrachten wir ein maximales, nichttriviales Ideal $J \subsetneq A$. Dann ist $\dist \enbrace*{J,1}=1$, denn 
-		\todo{Einsen auseinanderhalten} 
-		$\mathring{B}_A(1,1) \subset \Inv(A)$ nach \autoref{satz15_neumann}. Dann ist $\ind \notin \overline{J} \lhd A$. Da $J$ maximal ist, folgt $J=\overline{J}$. Damit ist 
-		$\sfrac{A}{J}$ eine einfache, abelsche, unitale Banachalgebra. Mit \autoref{prop1.11_einfach} folgt $\sfrac{A}{J} \cong \mathbb{C}$. Damit ist 
+		Also ist $\chi_1=\chi_2$. Für die Surjektivität betrachten wir ein maximales, nichttriviales Ideal $J \subsetneq A$. 
+		Dann ist $\dist \enbrace*{J,\ind}=1$, denn für den offenen Ball mit Radius $1$ um $\ind$ gilt $\mathring{B}_A(\ind,1) \subset \Inv(A)$ nach \autoref{satz15_neumann}. 
+		Dann ist $\ind \notin \overline{J} \lhd A$. 
+		Da $J$ maximal ist, folgt $J=\overline{J}$ und damit ist 
+		$\sfrac{A}{J}$ eine einfache, abelsche, unitale Banachalgebra und mit \autoref{prop1.11_einfach} folgt $\sfrac{A}{J} \cong \mathbb{C}$. Also ist 
 		$\chi \colon A \to \sfrac{A}{J} \cong \mathbb{C}$ ein Charakter mit $\ker \chi= J$. \qedhere
 	\end{enumerate}
 \end{beweis}
 
 \begin{satz}[label=satz:1.14,{name=[Spektrum entspricht Menge der $\chi(a)$]}]
-	Sei $A$ eine abelsche unitale Banachalgebra. Für $a \in A$ gilt $\sigma(a)=\set[\big]{\chi(a) \given \chi \in \Omega(A)}$.
+	Sei $A$ eine abelsche unitale Banachalgebra. Für $a \in A$ gilt $\sigma(a)=\set[\big]{\chi(a) \given \chi \in \Omega(A)}$. \todo{Revision 1}
 \end{satz}
 \begin{beweis}
 	Für $\lambda \in \sigma(a)$ ist $J := (a -\lambda)A \lhd A$ ein echtes Ideal, da $(a-\lambda)$ nicht invertierbar ist. Nach dem Lemma von Zorn ist $J$ in einem maximalen echten 
@@ -587,7 +594,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$. 
 	Dann bezeichnet $C^*(S) \subset A$ die kleinste $C^*$-Unteralgebra von $A$, die $S$ enthält; also \todo{Revision 2}
 	\[
-		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ S \subset B}}} \enspace B
+		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ \text{mit } S \subset B}}} \enspace B
 	\]
 \end{definition}
 
@@ -703,13 +710,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 
 \begin{definition}[{name=[Positivität]}]
 	Sei $A$ eine $C^*$-Algebra. Ein Element $a \in A$ heißt \Index{positiv} ($a \ge 0$), wenn $a=a^*$ und $\sigma(a) \subseteq [0,\infty)$ ist. Mit $A_+$ bezeichnen wir die 
-	Menge der positiven Elemente. Wenn $b,c \in A_{\sa}$ sind, dann definieren wir \todo{Revision 3}
+	Menge der positiven Elemente. Wenn $b,c \in A_{\sa}$ sind, dann definieren wir 
 	\[
 		b \le c \enspace :\Longleftrightarrow \enspace c-b \ge 0
 	\]
 \end{definition}
 
-\begin{bemerkung} \leavevmode
+\begin{bemerkung}[{name=[positive Elemente in Unteralgebren und in $C_0(X)$]}] \leavevmode
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item Für $a \in A \subseteq B$ gilt $a \ge 0$ in $A$ genau dann, wenn $a \ge 0$ in $B$ gilt (nach \autoref{korr:220}).
 		\item Für $a \in A = C_0(X)$ ist $a \ge 0$ genau dann, wenn $a(x) \ge 0$ für alle $x \in X$ gilt (nach \ref{bem217}).
@@ -721,9 +728,10 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{proposition}
 \begin{beweis}
 	Ein solches $b \in C^*(a) \subseteq A$ existiert nach dem Funktionalkalkül, da $C^*(a) \cong C_0 \enbrace*{\sigma(a) \setminus \set*{0}}$ via $a \mapsto \id_{\sigma(a)} \ge 0$.
-	Sei $c \in A_+$ ein weiteres Element mit $c^2=a$. Dann gilt $ca=c^3=ac$. Damit ist $C^*(a,c)$ abelsch. Sei $\Omega := \Omega \enbrace*{C^*(a,c)}$. Sei 
-	$\Phi \colon C^*(a,c) \to C_0(\Omega)$ die Gelfandtransformation. Dann sind $\Phi(b)$ und $\Phi(c)$ Quadratwurzeln von $\Phi(a)$. Anders ausgedrückt gilt für alle 
-	$\omega \in \Omega$
+	Sei $c \in A_+$ ein weiteres Element mit $c^2=a$. Dann gilt $ca=c^3=ac$ und damit ist $C^*(a,c)$ abelsch. 
+	Sei $\Omega := \Omega \enbrace*{C^*(a,c)}$ das Charakterspektrum und $\Phi \colon C^*(a,c) \to C_0(\Omega)$ die Gelfandtransformation. 
+	Dann sind $\Phi(b)$ und $\Phi(c)$ Quadratwurzeln von $\Phi(a)$. 
+	Anders ausgedrückt gilt für alle $\omega \in \Omega$
 	\[
 		\Phi(b)(\omega)^2 = \Phi(a)(\omega) = \Phi(c)(\omega)^2
 	\]
@@ -734,7 +742,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $a$ eine unitale $C^*$-Algebra, $a \in A_{\sa}$, $t \in \mathbb{R}_+ = [0,\infty)$. Dann gilt
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item Aus $\norm*{a-t}\le t$ folgt $a \ge 0$
-		\item Aus $a \ge 0$ und $\norm*{a}\le t$ folgt $\norm*{a-t}\le t$
+		\item Aus $a \ge 0$ und $\norm*{a}\le t$ folgt $\norm*{a-t}\le t$ \todo{Revision 3}
 	\end{enumerate}
 \end{proposition}
 \begin{beweis}
@@ -797,7 +805,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\item $A = \Span A_+$
 		\item $A_+$ ist ein abgeschlossener Kegel in $A$
 		\item $\le$ ist eine partielle Ordnung auf $A_\sa$
-		\item Für $a,b \in A_\sa$ mit $a \le b$ gilt $cac* \le cbc^*$.
+		\item Für $a,b \in A_\sa$ mit $a \le b$ gilt $c a c^* \le c b c^*$.
 		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$
 		\item Wenn $A$ unital ist und $a \in A_+ \cap \Inv(A)$, dann folgt aus $a \le b$ stets $b \in \Inv(A)$ und $0 \le b^{-1} \le a^{-1}$.
 	\end{enumerate}
@@ -886,7 +894,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{bemerkung}
 
 \begin{lemma}[label=lem:311]
-	Sei $A$ eine $C^*$-Algebra. Die Menge $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ ist gerichtet bezüglich \enquote{$\le$}.
+	Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
 \end{lemma}
 \begin{beweis}
 	Gegeben $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}}^{-1} \in A_+$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1} \in A_+$. Dann gilt 
@@ -912,7 +920,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Jede $C^*$-Algebra $A$ besitzt eine approximative Eins.
 \end{satz}
 \begin{beweis}
-	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. 
+	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie in \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. 
 	Dann ist $(e_\lambda)_\Lambda \subset A_+^1$ ein aufsteigendes Netz (aufsteigend bezüglich \enquote{$\le$}, gerichtet nach \autoref{lem:311}). 
 	Sei nun $a \in \Lambda$ und $1 \ge \varepsilon>0$. Sei $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. 
 	Setze $f := \Phi(a) = \id_\Omega$ und $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$ kompakt. 
@@ -1106,7 +1114,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{satz}
 	Sei $B \subset A$ eine $C^*$-Unteralgebra. Dann gilt: 
 	\[
-		B \subher \iff bac \in B \text{ für alle } b,c \in B, a \in A 
+		B \subher A \iff bac \in B \text{ für alle } b,c \in B, a \in A 
 	\]
 \end{satz}
 \begin{beweis}
