@@ -1220,11 +1220,11 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \section{Zustände, die GNS-Konstruktion} % (fold)
 \label{sec:5}
 
-\begin{definition}[{name=[positives Funktional]}]
+\begin{definition}[{name=[positive Funktionale und Zustände]}]
 	Sei $A$ eine $C^*$-Algebra. 
 	Eine Abbildung $\varphi \colon A \to \mathbb{C}$ heißt \Index{positives Funktional}, falls $\varphi$ linear ist und $\varphi(A_+) \subset \mathbb{R}_+$ gilt. 
 	$\varphi$ heißt \Index{Zustand}, falls außerdem $\norm*{\varphi}= 1$ gilt. 
-	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$. 
+	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$. \todo{Revision 5}
 \end{definition}
 
 \begin{proposition}
@@ -1270,7 +1270,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\end{enumerate}
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:54]
 	Sei $A$ eine $C^*$-Algebra und $\varphi \in A^*$ ein (beschränktes) Funktional. Dann sind äquivalent:
 	\begin{enumerate}[(i)]
 		\item $\varphi$ ist positiv.
@@ -1302,8 +1302,128 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		&\le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot e_\lambda a - a e_\lambda} \\
 		&\grenzw{\lambda} \le \norm*{\varphi}^2 (1+ n^2)
 	\end{align}
-	Damit folgt $\norm*{\varphi}\neq 0$ oder $\beta=0$. Insgesamt also $\beta=0$ und damit $\varphi(A_\sa) \subset \mathbb{R}$
+	Damit folgt $\norm*{\varphi}\neq 0$ oder $\beta=0$. Insgesamt also $\beta=0$ und damit $\varphi(A_\sa) \subset \mathbb{R}$.
+	Sei $a \in A_+^1$. Dann gilt $e_\lambda-a \in A_\sa$ und $\norm*{e_\lambda-a} \le 1$ (denn $- \ind_{A^\simm}\le e_\lambda-a \le \ind_{A^\simm}$).
+	Also ist $\varphi(e_\lambda-a) \le \abs*{\varphi(e_\lambda-a)} \le \norm*{\varphi} \cdot \norm*{e_\lambda-a} \le \norm*{\varphi}$.
+	Dan gilt aber
+	\begin{align}
+		\norm*{\varphi}- \varphi(a) = \lim_{\lambda} \varphi(e_\lambda) - \varphi(a) = \lim_\lambda \varphi \enbrace*{e_\lambda-a} \le \norm*{\varphi}
+	\end{align}
+	Also ist $\varphi(a) \ge 0$ und wir sind fertig.
 \end{beweis}
+
+\begin{satz}[{name=[Existenz von Zuständen zu gegebenen normalen Elementen]}]
+	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A$ normal.
+	Dann existiert ein Zustand $\varphi$ auf $A$ mit $\norm*{a}=\abs*{\varphi(a)}$.
+\end{satz}
+\begin{beweis}
+	Die $C^*$-Algebra $B := C^*(a, \ind)\subset A^\simm$ ist abelsch, da $a$ normal ist. 
+	Insbesondere existiert ein Charakter $\varphi_2$ auf $B$ mit $\abs*{\varphi_2(a)}=\norm*{a}$.
+	Nach Hahn-Banach können wir $\varphi_2$ stetig und linear zu $\varphi_1$ auf $A^\simm$ fortsetzen mit $\norm*{\varphi_1} = \norm*{\varphi_2}$.
+	Weiter gilt $\varphi(\ind)= \varphi_2(\ind)=1$ und damit ist $\varphi_1$ ein stetiges lineares Funktional auf $A^\simm$ mit 
+	\[
+		\norm*{\varphi_1} = \norm*{\varphi_2}\StackText{\ref{satz:54}}{=} \varphi_2(\ind) = \varphi_1(\ind)
+	\]
+	Mit \autoref{satz:54} folgt dann auch, dass $\varphi_1$ positiv ist. $\varphi := \varphi_1|_A$ ist also positiv mit $\norm*{a}= \abs*{\varphi(a)}$ wie gewünscht.
+	Weiter ist $\norm*{\varphi} \le \norm*{\varphi_1} \le 1$ und außerdem $\norm*{a} = \abs*{\varphi(a)} \le \norm*{\varphi} \cdot \norm*{a} \Rightarrow \norm*{\varphi} \ge 1$.
+	Also ist $\varphi$ auch ein Zustand.
+\end{beweis}
+
+\begin{proposition}
+	Sei $\varphi$ ein positives stetiges Funktional auf $A$. 
+	\begin{enumerate}[(i)]
+		\item Für alle $a \in A$ gilt $\varphi(a^*a)=0 \iff \varphi(ba)=0$ für alle $b \in A$.
+		\item Für alle $a,b \in A$ gilt: $\varphi(b^*a^*ab) \le \norm*{a^*a}\varphi(b^*b)$.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Die nicht triviale Implikation folgt mit Cauchy-Schwarz.
+		\item Benutze $b^*a^*ab \le b^* \enbrace*{\norm*{a^*a} \cdot \ind_{A^\simm}}b = \norm*{a^*a} \cdot b^*b$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{satz}[label=satz:57]
+	Sei $B \subset A$ eine $C^*$-Unteralgebra und $\varphi$ ein positives Funktional auf $B$. 
+	Dann besitzt $\varphi$ eine positive Fortsetzung $\overline{\varphi}$ auf $A$ mit $\norm*{\overline{\varphi}} = \norm*{\varphi}$.
+\end{satz}
+\begin{beweis}
+	Definiere $\varphi^+ \colon B^+ \to \mathbb{C}$ durch $\varphi^+ \enbrace*{(b,\mu)} := \varphi(b) + \mu \cdot \norm*{\varphi}$.
+	Für $(b,\mu) \in B^+$ erhalten wir 
+	\begin{align}
+		\abs*{\varphi^+ \enbrace*{(b,\mu)}} = \abs*{\varphi(b) + \mu \cdot \norm*{\varphi}} = \abs[\Big]{\lim_\lambda \varphi \enbrace*{b e_\lambda} + \mu \cdot \lim_\lambda \varphi(e_\lambda) } &= \abs[\Big]{\lim_\lambda \varphi \enbrace*{(b+ \mu \cdot \ind_{B^+})e_\lambda}} \\
+		&\le \norm*{\varphi} \cdot  \norm*{b+ \mu \cdot \ind_{B^+}}_{B^+} \\
+		&= \norm*{\varphi} \cdot \norm*{(b,\mu)}
+	\end{align}
+	wobei $(e_\lambda)_\Lambda$ eine approximative Eins für $B$ ist. 
+	Damit ist $\norm*{\varphi^+} \le \norm*{\varphi} \le \norm*{\varphi^+}$ und es folgt $\norm*{\varphi^+}=\norm*{\varphi}=\varphi^+(\ind_{B^+})$.
+	Mit \autoref{satz:54} folgt, dass $\varphi^+$ positiv ist.
+	
+	Die Einbettung $\iota \colon B \hookrightarrow A \hookrightarrow A^\simm$ setzt sich zu einem unitalen $^*$-Homomorphismus $\iota^+ \colon B^+ \to A^\simm$ fort mittels
+	\[
+		\enbrace*{\iota^+ \enbrace*{b,\mu}} := \iota(b) + \mu \cdot \ind_{A^\simm}
+	\]
+	Definiere nun $\hat{\varphi} \colon \iota^+(B^+) \to \mathbb{C}$ durch $\hat{\varphi} \enbrace*{\iota^+(b,\mu)} := \varphi^+(b,\mu)$. 
+	Dies ist wohldefiniert, denn nur der Fall $B\ni \ind_B= \ind_A \in A$ ist zu überprüfen.
+	Dann ist $\hat{\varphi}$ positiv, denn $\varphi^+$ ist positiv und $\enbrace*{\iota^+(B^+)}_+ = \iota^+(B^+_+) $ (Übung).
+	Nach Hahn-Banach existiert eine stetige lineare Fortsetzung $\hat{\hat{\varphi}} \colon A^\simm  \to \mathbb{C}$ von $\hat{\varphi}$ mit $\norm*{\hat{\hat{\varphi}}}=\norm*{\hat{\varphi}}=\hat{\varphi}(\ind_{A^\simm})= \hat{\hat{\varphi}}(\ind_{A^\simm})$ und es folgt wieder mit \autoref{satz:54}, dass $\hat{\hat{\varphi}}$ positiv ist.
+	Dann ist wieder $\overline{\varphi} := \hat{\hat{\varphi}}|_A$ die gesuchte positive Fortsetzung. 
+\end{beweis}
+
+\begin{satz}[{name=[Eindeutigkeit der Fortsetzung im hereditären Fall]}]
+	Sei $B \subher A$ eine hereditäre $C^*$-Unteralgebra und $\varphi$ ein positives Funktional auf $B$. 
+	Dann besitzt $\varphi$ eine eindeutige positive lineare Fortsetzung $\overline{\varphi}$ auf $A$ mit $\norm*{\overline{\varphi}}=\norm*{\varphi}$.
+	Falls $(e_\lambda)_\Lambda \subset B$ eine approximative Eins für $B$ ist, so gilt $\overline{\varphi}(a) = \lim_\lambda \varphi(e_\lambda a e_\lambda)$ für $a \in A$.
+\end{satz}
+\begin{beweis}
+	Eine Fortsetzung $\overline{\varphi}$ existiert nach \autoref{satz:57}. 
+	Sei nun $\psi \colon A \to \mathbb{C}$ irgendeine positive lineare Fortsetzung von $\varphi$ mit $\norm*{\psi}=\norm*{\varphi}$.
+	Sei $\psi^\simm \colon A^\simm \to \mathbb{C}$ eine (die) positive lineare Fortsetzung von $\psi$ mit $\norm*{\psi}=\norm*{\psi^\simm}$ nach \autoref{satz:57}.
+	Wir haben $\lim_\lambda \varphi(e_\lambda)=\norm*{\varphi} = \norm*{\psi^\simm} = \psi^\simm(\ind_{A^\simm})$, also ist 
+	\[
+		\lim_\lambda \psi^\simm(\ind_{A^\simm} -e_\lambda)=0
+	\]
+	Für  $a \in A$ ergibt sich 
+	\begin{align}
+		\abs*{\psi(a)- \varphi(e_\lambda a e_\lambda)} &\le \abs*{\psi^\simm(a)- \psi^\simm(e_\lambda a)} + \abs*{ \psi^\simm \enbrace*{e_\lambda a - e_\lambda a e_\lambda}}\\
+		&\StackText{CS}{\le} \psi^\simm \enbrace*{(\ind-e_\lambda)^2}^{\sfrac{1}{2}} \cdot \psi^\simm \enbrace*{a^*a}^{\sfrac{1}{2}} + \psi^\simm(a^* e_\lambda^2 a)^{\sfrac{1}{2}} \cdot \psi^\simm \enbrace*{(\ind-e_\lambda)^2}^{\sfrac{1}{2}} \\
+		&\le \Underbracket{\psi^\simm (1-e_\lambda)^{\sfrac{1}{2}}}{\to 0}\cdot  \psi^\simm (a^*a)^{\sfrac{1}{2}} + \psi^\simm (a^*e_\lambda^2 a) \cdot  \Underbracket{\psi^\simm(\ind-e_\lambda)^{\sfrac{1}{2}}}{\to 0}
+	\end{align}
+	Damit folgt $\psi(a) = \lim_\lambda \varphi(e_\lambda a e_\lambda)$.
+\end{beweis}
+
+\begin{beispiel}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Folgende Abbildung ist ein Zustand aber kein Charakter:
+		\mapdef{C([0,1])}{\mathbb{C}}{f}{\int f \,\mathd \lambda}{}
+		\item Die normalisierte Spurabbildung
+		\mapdef{M_n}{\mathbb{C}}{x}{\tr x}{}
+		bezeichnet man als \Index{Spurzustand} ($\tau \colon A \to \mathbb{C}$ Zustand mit $\tau(a^*a)=\tau(aa^*)$, $a \in A$)
+		\item Sei 
+		$\begin{tikzcd}[cramped]
+			A_0 \rar & A_1 \rar & \ldots \rar & A =\Dlim A_i
+		\end{tikzcd}$
+		ein unitales induktives System von $C^*$-Algebren.
+		Falls jedes $A_i$ einen Spurzustand besitzt, so auch $A$
+		\[
+			A \hookrightarrow \Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}
+		\]
+		Für $a=\benbrace*{(a_i)_\mathbb{N}}$ definieren wir $\tau(a) := \lim_\omega \tau_i(a_i)$, wobei $\omega \in \beta \mathbb{N} \setminus \mathbb{N}$ ein freier Ultrafilter.
+		Dann ist $\tau$ wohldefiniert, unital, positiv, linear und erfüllt die Spurbedingung.  
+		
+		Alternativ: 
+		\[
+			\begin{tikzcd}
+				& (a_i)_\mathbb{N} \rar[mapsto] & \enbrace*{\tau_i(a_i)}_\mathbb{N} \\
+				&\prod_\mathbb{N} A_i \rar \dar & \ell^\infty(\mathbb{N}) \dar \\
+				A \rar[hook] &\Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)} \rar & \Faktor{\ell^\infty(\mathbb{N})}{c_0(\mathbb{N})} \rar["\chi"] & \mathbb{C}
+			\end{tikzcd}
+		\]
+		Rechts unten ist eine $C^*$-Algebra; wähle einen Charakter $\chi$. Also stehen die freien Ultrafilter in 1zu1-Zusammenhang zu $\beta \mathbb{N} \setminus \mathbb{N}$.
+	\end{enumerate}
+\end{beispiel}
 % section 5 (end)
 
 
