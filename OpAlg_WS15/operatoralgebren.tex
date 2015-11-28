@@ -594,15 +594,15 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{beweis}
 
 \begin{definition}[{name=[erzeuge C*-Algebra]}]
-	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$. 
+	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$.\index{C-Algebra@$C^*$-Algebra!erzeugte $C^*$-Algebra}
 	Dann bezeichnet $C^*(S) \subset A$ die kleinste $C^*$-Unteralgebra von $A$, die $S$ enthält; also
 	\[
 		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ \text{mit } S \subset B}}} \enspace B
 	\]
 \end{definition}
 
-\begin{satz}[Funktionalkalkül]
-	Sei $A$ eine $C^*$-Algebra und $a \in A$ normal. 
+\begin{satz}[name={Funktionalkalkül},label=funkkal]
+	Sei $A$ eine $C^*$-Algebra und $a \in A$ normal.\index{Funktionalkalkül}
 	Dann existiert ein eindeutig bestimmter ${}^*$-Isomorphismus 
 	\[
 		C^*(a) \cong C_0 \enbrace[\big]{\sigma(a)\setminus \set*{0}} \qquad \text{ mit }\quad  a \longmapsto \id_{\sigma(a)\setminus \set*{0}}
@@ -639,7 +639,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\sigma_{C^*(a,\ind)} \enbrace[\big]{f(a)} = \sigma_{C^*(a,\ind)} \enbrace*{\beta^{-1}(f)} = \sigma_{\beta \enbrace*{C^*(a,\ind)}}(f) = \sigma_{C \enbrace[\big]{\sigma_{C^*(a,\ind)}(a)}} (f) \StackText{\ref{bem217}}{=} f \enbrace*{\sigma_{C^*(a,\ind)}(a)}
 	\]
-	Falls $A$ nicht unital ist, so haben wir\todo{hübsch machen bzw. leserlich} \todo{Revision 2}
+	Falls $A$ nicht unital ist, so haben wir
 	\[
 		\begin{tikzcd}[ampersand replacement=\&]
 			C^*(a,\ind_{A^\simm}) \rar["\StackText{\ref{satz16:gelfand}}{\cong}"] \& C \enbrace[\big]{\Omega \enbrace*{C^*(a,\ind_{A^\simm})}} \rar["\StackText{s.o.}{\cong}"]
@@ -649,64 +649,77 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 				C_0 \enbrace[\big]{\Omega \enbrace*{C^*(a)}} \StackText{\ref{satz:29}}{=} \\
 				C_0 \enbrace[\big]{\Omega \enbrace*{C^*(a,\ind_{A^\simm})} \setminus \set*{\chi_\infty}}
 			\end{array}
-			  \rar[two heads] \uar[phantom,"\subset", sloped]
+			  \rar["\cong"] \uar[phantom,"\subset", sloped]
 			\& \begin{array}{c}
-				C_0 \enbrace*{\sigma_{C^*(a,\ind_{A})(a) \setminus \set*{0}}} = \\
+				C_0 \enbrace*{\sigma_{C^*(a,\ind_{A^\simm})}(a) \setminus \set*{0}} = \\
 				\set*{f \in C \enbrace*{\sigma_{C^*(a,\ind_{A^\simm})}(a)} \given f(0)=0}
 			\end{array}  \uar[phantom,"\subset", sloped]\\
-			a \rar[mapsto] \uar[phantom,"\in", sloped] \& \widehat{a} \rar[mapsto] \& \id_{\sigma_{C^*(a,\ind_{A^\simm})}(a)} \uar[phantom,"\in", sloped]
+			a \rar[mapsto] \uar[phantom,"\in", sloped] \& \widehat{a} \rar[mapsto] \uar[phantom,"\in", sloped]\& \id_{\sigma_{C^*(a,\ind_{A^\simm})}(a)} \uar[phantom,"\in", sloped]
 		\end{tikzcd}
 	\]
 	Der Funktionalkalkül $\beta^{-1}$ ist ein ${}^*$-Homomorphismus, daher gilt für ${}^*$-Polynome $g$, dass 
 	\[
-		g \enbrace*{f(a)} = g \enbrace*{\beta^{-1}(f)}= \beta^{-1}(g \circ f) = (g \circ f) (a)
+		g \enbrace[\big]{f(a)} = g \enbrace*{\beta^{-1}(f)}= \beta^{-1}(g \circ f) = (g \circ f) (a)
 	\]
-	Für $g\in C \enbrace*{\sigma_{C^*(a,\ind)}(a)}$ approximieren wir $g$ gleichmäßig auf $\sigma_{C^*(a,\ind)}(a)$ durch $^*$-Polynome und benutzen die Stetigkeit von $\beta^{-1}$.
-	Es bleibt zu zeigen, dass $\sigma_{C^*(a,\ind)}(a)= \sigma_A(a)$ ist. Offensichtlich gilt $\Inv \enbrace*{C^*(a,\ind_A)} \subseteq  \Inv(A)$ und somit
-	$\sigma_A(a) \subseteq \sigma_{C^*(a,\ind_A)}(a)$. Um zu zeigen, dass auch die andere Inklusion gilt, sei $b \in C^*(a,\ind_A)$ mit $\norm*{b}\le 1$ und $b \in \Inv(A)$.
-	Wir zeigen, dass $b$ normal ist: Es sind $b,b^* \in C^*(a,\ind_A)$ und  $C^*(b,b^{-1})$ ist abelsch, da $(b^{-1})^* = (b^*)^{-1}$ und 
+	Für eine beliebige Funktion $g\in C \enbrace*{\sigma_{C^*(a,\ind)}(a)}$ approximieren wir $g$ gleichmäßig auf $\sigma_{C^*(a,\ind)}(a)$ durch $^*$-Polynome und benutzen die Stetigkeit von $\beta^{-1}$.
+	
+	Es bleibt zu zeigen, dass $\sigma_{C^*(a,\ind)}(a)= \sigma_A(a)$ ist (der unitale Fall genügt). 
+	Offensichtlich gilt $\Inv \enbrace*{C^*(a,\ind_A)} \subseteq  \Inv(A)$ und somit $\sigma_A(a) \subseteq \sigma_{C^*(a,\ind_A)}(a)$. 
+	Um zu zeigen, dass auch die andere Inklusion gilt, sei $b \in C^*(a,\ind_A)$ mit $\norm*{b}\le 1$ und $b \in \Inv(A)$.
+	Dann ist $b$ normal, denn $b$ und $b^*$ sind in $C^*(a,\ind_A)$ und diese Algebra ist abelsch.
+	$C^*(b,b^{-1})$ ist auch abelsch, da $(b^{-1})^* = (b^*)^{-1}$ und  
 	\[
-		b(b^*)^{-1} = b(b^*)^{-1} b^{-1} b = b \enbrace*{bb^*}^{-1} b = b(b^*b)^{-1}b = (b^*)^{-1}b
+		b(b^*)^{-1} = b(b^*)^{-1} b^{-1} b = b \enbrace*{bb^*}^{-1} b = b(b^*b)^{-1}b = b b^{-1} (b^*)^{-1}b=(b^*)^{-1}b
 	\]
-	$\norm*{b^*b} \le 1$ und $\ind - b^*b$ ist selbstadjungiert und $0<\chi(b^*b) \le 1$ für $\chi \in \Omega \enbrace*{C^*(b,b^{-1})}$. Damit ist
+	Weiter ist $\norm*{b^*b} \le 1$ nach der $C^*$-Gleichung und $\ind - b^*b$ ist selbstadjungiert. 
+	Ferner gilt $0<\chi(b^*b) \le 1$ für alle Charaktere $\chi \in \Omega \enbrace*{C^*(b,b^{-1})}$. 
+	Damit ist
 	\[
 		\sigma_{C^*(b,b^{-1})} \enbrace*{\ind - b^*b} \StackText{\ref{satz:117}}{=} \set*{\chi \enbrace*{\ind - b^*b} \given \chi \in \Omega \enbrace*{C^*(b,b^{-1})}} \subseteq 
 		[0,1)
 	\]
-	Da das Spektrum $\sigma_{C^*(b,b^{-1})}(b)$ kompakt ist, folgt $1 > r(\ind - b^*b)= \norm*{\ind -b^*b}$. Es foglt
+	Da das Spektrum $\sigma_{C^*(b,b^{-1})}(\ind-b^*b)$ kompakt ist, folgt $1 > r(\ind - b^*b)= \norm*{\ind -b^*b}$. Damit existiert die Neumannsche Reihe
 	\[
 		(b^*b)^{-1} = \sum_{n=0}^{\infty} (\ind-b^*b)^n \in C^*(b,\ind)
 	\]
-	Damit folgt $b^{-1}=(b^*b)^{-1}b^* \in C^*(b,\ind) \subseteq C^*(a,\ind)$.
-	
-	Wenn $b \in C^*(a,\ind)$ invertierbar in $A$ ist, so ist $b^{-1} \in C^*(a,\ind)$, womit die andere Inklusion $\sigma_{C^*(a,\ind)}(a) \subseteq \sigma_A(a)$ folgt.
+	und es folgt $b^{-1}=(b^*b)^{-1}b^* \in C^*(b,\ind) \subseteq C^*(a,\ind)$.
+	Wenn $b \in C^*(a,\ind)$ invertierbar in $A$ ist, so ist also tatsächlich auch $b^{-1} \in C^*(a,\ind)$, womit die andere Inklusion $\sigma_{C^*(a,\ind)}(a) \subseteq \sigma_A(a)$ folgt. 
+	Ebenso folgt $\sigma_{C^*(a,\ind)} \enbrace[\big]{f(a)}=\sigma_A \enbrace[\big]{f(a)}$ für $f \in C \enbrace[\big]{\sigma(a)}$.
 \end{beweis}
 
-\begin{korollar}[label=korr:220]
-	Sei $A \subseteq B$ eine $C^*$-Algebra und $a \in A$. Dann gilt
+\begin{korollar}[label=korr:220,{name=[Spektrum in C*-Unteralgebren]}]
+	Es seien $A \subseteq B$  $C^*$-Algebren und $a \in A$. Dann gilt
 	\[
 		\sigma_A(a) \cup \set*{0} = \sigma_B(a) \cup \set*{0}
 	\]
-	\begin{enumerate}[1)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item Wenn $A$ und $B$ unital sind und $\ind_A=\ind_B$ ist, dann gilt $\sigma_A(a) = \sigma_B(a)$.
 		\item Wenn $A$ nicht unital ist und $B$ unital ist, so ist $0 \in \sigma_A(a) = \sigma_B(a)$. 
 		\item Wenn beide unital sind, die Einselemente aber nicht übereinstimmen, so gilt $\sigma_A(a) \cup \set*{0} = \sigma_B(a)$.
 	\end{enumerate}
 \end{korollar}
 \begin{beweis} \leavevmode
-	\begin{enumerate}[1)]
-		\item Wenn $b$ normal ist, gehen wir genau wie im vorigen Beweis vor. Andernfalls betrachten wir $b^*b \in \Inv(B)$. Dann gilt
+	\begin{enumerate}[(i)]
+		\item Es gilt wieder $\Inv(A) \subset \Inv(B)$, also $\sigma_B(a) \subset \sigma_A(a)$.
+		Für $b \in A \cap \Inv(B)$ normal gilt dann $b \in \Inv(A)$ wie im Beweis von \autoref{funkkal}. Damit folgt
+		\[
+			\sigma_A(a) \subset \sigma_B(a) \Longrightarrow \sigma_A(a) = \sigma_B(a)
+		\]
+		Falls $b$ nicht normal ist, betrachten wir $b^*b \in \Inv(B)$. Dann gilt
 		\[
 			(b^*b)^{-1} b^* = b^{-1} \in A
 		\]
-		\item Betrachte $A^\simm \cong C^*(a,\ind_B) \subseteq B$. Dann gilt
+		\item Betrachte $A^\simm \cong C^*(a,\ind_B) \subset B$ (algebraisch klar, als $C^*$-Algebren nach \autoref{kor:211}). Dann gilt
 		\[
-			\sigma_A(a) := \sigma_{A^\simm}(a) \StackText{1)}{=}\sigma_B(a)
+			\overline{\sigma}_A(a) := \sigma_{A^\simm}(a) \StackText{(i)}{=}\sigma_B(a)
 		\]
-		\item Wenn $\ind_A \neq \ind_B$, so gilt für $a \in \Inv(B)$ auch $a^{-1}\in A$. Dann folgt aber $\ind_B = a^{-1}a\in A$. Dies ist ein Widerspruch, also muss 
-		$0 \in \sigma_B(a)$ gelten. Wenn $\lambda \neq 0$, dann gilt $\lambda \ind_A - a \in \Inv(A)$ genau dann, wenn $\lambda \ind_B -a \in \Inv(B)$. Dies sieht man wie folgt:
+		\item Wenn $\ind_A \neq \ind_B$, so gilt für $a \in \Inv(B)$ auch $a^{-1}\in A$. 
+		Dann folgt aber $\ind_B = a^{-1}a\in A$ (Beweis \ref{funkkal}). 
+		Dies ist ein Widerspruch, also muss $0 \in \sigma_B(a)$ gelten. 
+		Wenn $\lambda \neq 0$, dann gilt $\lambda \cdot \ind_A - a \in \Inv(A)$ genau dann, wenn $\lambda \cdot \ind_B -a \in \Inv(B)$. 
+		Dies sieht man wie folgt:
 		\begin{align}
-			\enbrace*{\lambda \ind_B- a}^{-1} = \enbrace*{\lambda \ind_A -a}^{-1} + \lambda^{-1}\enbrace*{\ind_B-\ind_A}
+			\enbrace*{\lambda \cdot \ind_B- a}^{-1} = \enbrace*{\lambda \cdot \ind_A -a}^{-1} + \lambda^{-1}\enbrace*{\ind_B-\ind_A}
 		\end{align}
 		Damit ist $\sigma_A(a) \setminus \set*{0} = \sigma_B(a) \setminus \set*{0}$. \qedhere
 	\end{enumerate}
