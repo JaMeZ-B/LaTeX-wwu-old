@@ -1606,8 +1606,84 @@ Ab jetzt: $R$ kommutativ!
 	\[
 		\begin{tikzcd}
 			0 \rar & C_*(U \cap V) \rar & C_*(U) \oplus C_*(V) \rar & C_*(U+V) \rar & 0
+		\end{tikzcd} \qedhere
+	\]
+\end{beweis}
+
+\begin{proposition}
+	Seien $U,V$ offene Teilmengen einer $R$-orientierten $n$-Mannigfaltigkeit $M$. 
+	Dann bilden die Poincaré-Dualitätsabbildungen zusammen mit der Mayer-Vietorisfolge ein kommutatives Diagramm
+	\[
+		\begin{tikzcd}
+			\ldots \rar & H^k_c(U \cap V) \rar \dar["\PD_{U \cap V}"] & H^k_c(U) \oplus H^k_c(V) \dar["\PD_{U} \oplus \PD_{V}"] \rar & H^k_c(U \cup V) \rar["\partial"] \dar["\PD_{U \cup V}"]& \ldots \dar \\
+			\ldots \rar & H_{n-k}(U \cap V) \rar & H_{n-kk}(U) \oplus H_{n-kk}(V) \rar & H_{n-k}(U \cup V) \rar & \ldots 
 		\end{tikzcd}
 	\]
+\end{proposition}
+\begin{beweis}
+	Ohne Einschränkungen sei $M=U \cup V$. 
+	Die Kommutativität der ersten beiden folgt aus der Natürlichkeit des $\capp$-Produktes.
+	Da $\partial \colon H^k_c(M) \to H_c^{k+1}(U \cap V)$ der Kolimes der 
+	\[
+		H^k(M,M \setminus (K \cup L)) \grenzw{\partial} H^{k+1}(M,M \setminus (K \cap L)) 
+	\]
+	für $K \subseteq U, L \subseteq V$ kompakt ist, genügt es für die Kommutativität des dritten Quadrats die Kommutativität von folgendem Diagramm nachzurechnen.
+	\[
+		\begin{tikzcd}[row sep=large,column sep=1.6em]
+			H^k \enbrace[\big]{M , (M \setminus K) \cap (M \setminus L)} \rar["\partial"] \dar[equal] & H^{k+1} \enbrace[\big]{M,(M \setminus K) \cup (M \setminus L)} \dar[equal]\\
+			H^k \enbrace[\big]{M , M \setminus (K \cup L)} \dar["\capp \mu_{K \cup L}"] \rar["\partial"] & H^{k+1} \enbrace[\big]{M, M \setminus (K \cap L)} \rar["\cong"] & H^{k+1} \enbrace[\big]{U \cap V, U \cap V \setminus (K \cap L)} \dar["\capp \mu_{K \cap L}"] \\
+			H_{n-k}(M) \ar[rr,"\partial"] & & H_{n-k-1}(U \cap V)
+		\end{tikzcd}
+	\]
+	Sei $\alpha \in C^{k} \enbrace*{M,M \setminus (K \cup L)}$ mit $d^k\alpha=0$, $\alpha=\alpha_K-\alpha_L$ mit $\alpha_K \in C^k \enbrace*{M,M \setminus K}$ und $\alpha_L \in C^k(M,M \setminus L)$.
+	Dann ist $\partial [\alpha]= \benbrace*{d^k \alpha_K} = \benbrace*{d^k \alpha_L}$.\marginnote{$U \cup V = U \setminus L  \cup V \setminus K \cup U \cap V$}
+	Wegen Ausschneidung finden wir $x_K \in C_n(V\setminus K)$, $x_L \in C_n(U \setminus L)$ und $x_\cap C_n(U \cap V)$ mit $\mu_{K \cup L} = \benbrace*{x_\cap +x_K+x_L}$.
+	Es ist dann auch $\mu_{K \cap L} = \benbrace*{x_\cap}$ und daher ist das Bild von $\partial[\alpha]$ in $H_{n-k-1}(U \cap V)$ gegeben durch $\benbrace*{d^k \alpha_K \capp x_\cap}$.
+	Es ist andererseits 
+	\begin{align}
+		[\alpha] \cap \mu_{K \cup L} &= \benbrace[\big]{(\alpha_K -\alpha_L) \capp (x_\cap + x_K+x_L)} \\
+		&= \benbrace[\Big]{\alpha_K \capp x_\cap  + \Underbracket{\alpha_K \capp x_K}{=0} + \alpha_K \capp x_L - \alpha_L \capp x_\cap - \alpha_L \capp x_K - \Underbracket{\alpha_L \capp x_L}{=0}} \\
+		&= \benbrace[\Big]{\Underbracket{\alpha_K \capp x_L}{\in C_k(U)} + \enbrace[\big]{\Underbracket{\alpha_K \capp x_\cap - \alpha_L \capp x_\cap}{\in C_K(U \cap V)}} - \Underbracket{\alpha_L \capp x_K}{\in C_k(V)}} 
+	\end{align}
+	Damit haben wir 
+	\(
+		\partial \enbrace*{[\alpha] \capp \mu_{K \cup L}} = \benbrace[\big]{d_{n-k} \enbrace*{\alpha_K \capp x_L}} = \benbrace[\Big]{\Underbracket{d^k \alpha_K \capp x_L}{=+d^k \alpha_L \capp x_L=0} + (-1)^k \alpha_K \capp d_n x_L}
+	\).
+	Mit $d_n x_L = - d_n x_K - d_n x_\cap$ folgt 
+	\begin{align}
+		\partial \enbrace*{[\alpha]\capp \mu_{K \cup L}} &= (-1)^{k+1} \benbrace[\Big]{\Underbracket{\alpha_K \capp d_n x_K}{=0} + \alpha_K \capp d_n x_\cap} \\
+		&= (-1)^{k+1} \benbrace[\big]{\alpha_K \capp d_n x_\cap}
+	\end{align}
+	Wegen $d_{n-k}(\alpha_K \capp x_\cap)= d^k \alpha_K \capp x_\cap + (-1)^k \alpha_K \capp d_n x_\cap$ folgt $\benbrace*{\alpha_K \capp d_n x_\cap} = (-1)^{k+1} \benbrace*{d^k \alpha_K  \cap x_{\cap}}$.
+	Also ist $\partial \enbrace*{[\alpha] \capp \mu_{K \cup L}} = \benbrace*{d^k  \alpha_K \capp x_\cap}$.
+\end{beweis}
+
+\begin{satz}
+	Sei $M$ eine $R$-orientierbare $n$-Mannigfaltigkeit. 
+	Dann ist $\PD_M \colon H^k_c(M) \to H_{n-k}(M)$ ein Isomorphismus.
+	Insbesondere ist, falls $M$ sogar geschlossen ist, $\capp \mu_M \colon H^k(M) \to H_{n-k}(M)$ ein Isomorphismus.
+\end{satz}
+\begin{beweis}
+	Für $U \cong \mathbb{R}^n$ haben wir die Behauptung schon bewiesen.\todo{Referenz}
+	Da offene konvexe Unterräume im $\mathbb{R}^n$ homöomorph zum $\mathbb{R}^n$ sind, ist die Behauptung auch für solche richtig.
+	Schnitte offener konvexer Teilräume des $\mathbb{R}^n$ wieder offen und konvex sind, folgt mit den Mayer-Vietoris-Folgen die Behauptung für endliche Vereinigungen offener und konvexer Unterräume des $\mathbb{R}^n$.
+	Mit \autoref{lem:abzUeber} folgt die Behauptung auch für abzählbare Vereinigungen von offenen konvexen Unterräumen im $\mathbb{R}^n$.
+	Da jeder offene Unterraum des $\mathbb{R}^n$ die abzählbare Vereinigung offener konvexer Unterräume ist, folgt die Behauptung für beliebige Kartengebiete\footnote{$U \subseteq M$ mit $\varphi \colon U \grenzw{\cong} V \subseteq \mathbb{R}^n$ und $V \subseteq \mathbb{R}^n$ offen} in Mannigfaltigkeiten.
+	Mit der Mayer-Vietoris-Folge folgt die Behauptung für endliche Vereinigungen von Kartengebieten in Mannigfaltigkeiten und mit \autoref{lem:abzUeber} für abzählbare Vereinigungen von Kartengebieten.
+	Da jede Mannigfaltigkeit die abzählbare Vereinigung von Kartengebieten ist, folgt die Behauptung.
+\end{beweis}
+
+\begin{lemma}[label=lem:abzUeber]
+	Sei $M$ eine $R$-orientierte $n$-Mannigfaltigkeit. 
+	Seien $U_1 \subseteq U_2 \subseteq \ldots \subseteq M$ offen mit $M= \bigcup_{i=1}^\infty U_i$.
+	Sind alle $\PD_{U_i}$ Isomorphismen, so ist auch $\PD_M$ ein Isomorphismus.
+\end{lemma}
+\begin{beweis}
+	Jeder singuläre Simplex in $M$ liegt schon in einem $U_i$. 
+	Das heißt $C_*(M)=\colim_{i \in \mathbb{N}} C_*(U_i)$ und $H_*(M)= \colim_{i \in \mathbb{N}} H_*(U_i)$.
+	Ebenso liegt jede kompakte Teilmenge von $M$ schon in einem $U_i$.
+	Daher ist $H^*_c(M) = \colim_{i \in \mathbb{N}} H^*_c(U_i)$. 
+	Nun ist $\PD_M = \colim_{i \in \mathbb{N}} \PD_{U_i}$ ein Isomorphismus.
 \end{beweis}
 % section 8 (end)
 
