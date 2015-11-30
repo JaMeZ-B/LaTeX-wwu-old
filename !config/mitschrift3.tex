@@ -174,8 +174,33 @@
 \LetLtxMacro{\oldmissingfigure}{\missingfigure}
 \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
 
+
+% -- BibLaTeX 
+\usepackage[%
+	backend=biber,
+	sortlocale=auto,
+	natbib,
+	hyperref,
+	backref,
+	style=alphabetic
+	]%
+{biblatex}
+\renewcommand*{\mkbibnamelast}[1]{%
+  \ifmknamesc{\textsc{#1}}{#1}}
+
+\renewcommand*{\mkbibnameprefix}[1]{%
+  \ifboolexpr{ test {\ifmknamesc} and test {\ifuseprefix} }
+    {\textsc{#1}}
+    {#1}}
+
+\def\ifmknamesc{%
+  \ifboolexpr{ test {\ifcurrentname{labelname}}
+               or test {\ifcurrentname{author}}
+               or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}
+\addbibresource{../!config/quellen.bib}
+
 %--Konfiguration von Hyperref pdfstartview=FitH, 
-\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,final]{hyperref}
+\usepackage[hidelinks, pdfpagelabels,  bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,final,backref=false]{hyperref}
 
 
 \newcommand{\appendLink}[1]{#1\,\faExternalLink}
