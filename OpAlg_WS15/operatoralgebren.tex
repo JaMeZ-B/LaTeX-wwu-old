@@ -1334,7 +1334,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $\varphi(a) \ge 0$ und wir sind fertig.
 \end{beweis}
 
-\begin{satz}[{name=[Existenz von Zuständen zu gegebenen normalen Elementen]}]
+\begin{satz}[{name=[Existenz von Zuständen zu gegebenen normalen Elementen]},label=satz:55]
 	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A$ normal.
 	Dann existiert ein Zustand $\varphi$ auf $A$ mit $\norm*{a}=\abs*{\varphi(a)}$.
 \end{satz}
@@ -1351,7 +1351,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $\varphi$ auch ein Zustand.
 \end{beweis}
 
-\begin{proposition}
+\begin{proposition}[label=prop:56]
 	Sei $\varphi$ ein positives stetiges Funktional auf $A$. 
 	\begin{enumerate}[(i)]
 		\item Für alle $a \in A$ gilt $\varphi(a^*a)=0 \iff \varphi(ba)=0$ für alle $b \in A$.
@@ -1424,13 +1424,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\mapdef{M_n}{\mathbb{C}}{x}{\tr x}{}
 		bezeichnet man als \Index{Spurzustand} ($\tau \colon A \to \mathbb{C}$ Zustand mit $\tau(a^*a)=\tau(aa^*)$, $a \in A$)
 		\item Sei 
-		$\begin{tikzcd}[cramped]
+		$\begin{tikzcd}[cramped,sep=small]
 			A_0 \rar & A_1 \rar & \ldots \rar & A =\Dlim\, A_i
 		\end{tikzcd}$
 		ein unitales induktives System von $C^*$-Algebren.
 		Falls jedes $A_i$ einen Spurzustand besitzt, so auch $A$
 		\[
-			A \hookrightarrow \Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}
+			A \xhookrightarrow{\minwidthbox{}{1.4em}} \Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}
 		\]
 		Für $a=\benbrace*{(a_i)_\mathbb{N}}$ definieren wir $\tau(a) := \lim_\omega \tau_i(a_i)$, wobei $\omega \in \beta \mathbb{N} \setminus \mathbb{N}$ ein freier Ultrafilter.
 		Dann ist $\tau$ wohldefiniert, unital, positiv, linear und erfüllt die Spurbedingung.  
@@ -1446,6 +1446,86 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		Rechts unten ist eine $C^*$-Algebra; wähle einen Charakter $\chi$. Also stehen die freien Ultrafilter in 1zu1-Zusammenhang zu $\beta \mathbb{N} \setminus \mathbb{N}$.
 	\end{enumerate}
 \end{beispiel}
+
+\begin{definition}[{name=[Darstellung]}]
+	Sei $A$ eine $C^*$-Algebra. 
+	Eine \Index{Darstellung} von $A$ ist ein Paar $(\mathcal{H},\pi)$, wobei $\mathcal{H}$ ein Hilbertraum ist und $\pi$ ein $^*$-Homomorphismus $A \to \mathcal{B}(\mathcal{H})$.
+	\begin{itemize}[itemsep=0pt]
+		\item $(\mathcal{H},\pi)$ heißt \bet{treu}\index{Darstellung!treu}, falls $\pi$ injektiv ist.
+		\item $(\mathcal{H},\pi,\xi)$ heißt \bet{zyklisch}\index{Darstellung!zyklisch}, falls $(\mathcal{H},\pi)$ eine Darstellung ist und $\xi \in \mathcal{H}$ ein Vektor mit $\overline{\pi(a) \xi}=\mathcal{H}$.
+		\item $(\mathcal{H},\pi)$ heißt \bet{algebraisch irreduzibel}\index{Darstellung!algebraisch irreduzibel}, falls gilt: 
+		Für einen Untervektorraum $\mathcal{H}_0 \subset \mathcal{H}$ mit $\pi(A)\mathcal{H}_0 \subset \mathcal{H}_0$ ist $\mathcal{H}_0=\set{0}$ oder $\mathcal{H}_0=\mathcal{H}$.
+		\item $(\mathcal{H},\pi)$ heißt \bet{(topologisch) irreduzibel}\index{Darstellung!irreduzibel (topologisch)}, falls gilt: 
+		Für einen abgeschlossenen Untervektorraum $\mathcal{H}_0 \subset \mathcal{H}$ mit $\pi(A)\mathcal{H}_0 \subset \mathcal{H}_0$ ist $\mathcal{H}_0=\set{0}$ oder $\mathcal{H}_0=\mathcal{H}$.
+		\item $(\mathcal{H},\pi)$ heißt \bet{nicht degeneriert}\index{Darstellung!nicht degeneriert}, falls $\overline{\pi(A)\mathcal{H}}=\mathcal{H}$. Äquivalent: $\pi(A)\xi = \set{0} \Rightarrow \xi=0$.
+	\end{itemize}
+\end{definition}
+
+\begin{satz}[{name={GNS-Konstruktion}}]
+	Sei $A$ eine $C^*$-Algebra und $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. 
+	Setze 
+	\[
+		N_\varphi := \set*{a \in A \given \varphi(a^*a)=0}\StackText{\ref{prop:56}(ii)}{=}\set*{a \in A \given \varphi(ba)=0 \text{ für alle }b \in A}
+	\]
+	Dann ist $N_\varphi \subset A$ ein abgeschlossenes Linksideal. 
+	Definiere eine Abbildung
+	\mapdef{\Faktor{A}{N_\varphi} \times \Faktor{A}{N_\varphi}}{\mathbb{C}}{(a+N_\varphi,b+N_\varphi)}{\skal*{a+N_\varphi}{b+N_\varphi}:= \varphi(a^*b)}{}
+	$\skal*{\cdot}{\cdot}$ ist dann ein wohldefiniertes Skalarprodukt auf $\sfrac{A}{N_\varphi}$:
+	\begin{description}
+		\item[Wohldefiniertheit:] Sei $a+N_\varphi=c+N_\varphi$ und $b+N_\varphi=d+N_\varphi$. 
+		Dann gilt $a-c \in N_\varphi$ und $b-d \in N_\varphi$. Damit folgt dann
+		\begin{align}
+			\abs*{\varphi(a^*b)-\varphi(c^*d)} \le \abs*{\varphi(a^*b)-\varphi(c^*b)} + \abs*{\varphi(c^*b)- \varphi(c^*d)} &= \abs*{\varphi \enbrace[\big]{(a^*-c^*)b}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}} \\
+			&= \abs[\Big]{\overline{\varphi \enbrace[\big]{b^*(a-c)}}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}} =0
+		\end{align}
+		\item[sesquilinear:] klar.
+		\item[antisymmetrisch:] Es ist $\varphi(a^*b)=\overline{\varphi(b^*a)}$.
+		\item[positiv definit:] Es gilt
+		\begin{align}
+			\skal*{a+N_\varphi}{a+N_\varphi}= 0 \iff \varphi(a^*a)=0 \iff a \in N_\varphi \iff a+ N_\varphi = N_\varphi =0 \in \Faktor{A}{N_\varphi}
+		\end{align}
+	\end{description}
+	Insgesamt ist $\sfrac{A}{N_\varphi}$ also ein Prä-Hilbertraum mit $\skal*{\cdot}{\cdot}$.
+	Sei $\mathcal{H}_\varphi := \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ die Hilbertraumvervollständigung.
+	Definiere $\dot{\pi} \colon A \to \mathcal{B}(\sfrac{A}{N_\varphi})$ durch $\dot{\pi}(a)(b+N_\varphi) := ab + N_\varphi$ für $a,b \in A$.
+	Dann ist $\dot{\pi}$ ein wohldefinierter kontraktiver Homomorphismus von Algebren:
+	Da $N_\varphi$ ein Linksideal ist, ist $\dot{\pi}(a)$ linear auf $\sfrac{A}{N_\varphi}$. Weiter ist $\dot{\pi}$ linear und multiplikativ: $A \to \mathcal{L}(\sfrac{A}{N_\varphi})$
+	\begin{align}
+		\norm*{\dot{\pi}(a)(b+N_\varphi)}^2_{\sfrac{A}{N_\varphi}} = \skal*{ab+N_\varphi}{ab+N_\varphi} = \varphi \enbrace*{b^*a^*ab} &\le \norm*{a}_A^2 \cdot \varphi(b^*b) \\
+		&= \norm*{a}_A^2 \cdot \norm*{b+N_\varphi}^2_{\sfrac{A}{N_\varphi}}
+	\end{align}
+	Damit gilt $\norm*{\dot{\pi}(a)(b+N_\varphi)}_{\sfrac{A}{N_\varphi}} \le \norm*{a}_A \cdot \norm*{b+N_\varphi}_{\sfrac{A}{N_\varphi}}$, also $\norm*{\dot{\pi}(a)}_{\mathcal{B}(\sfrac{A}{N_\varphi})} \le \norm*{a}_A$.
+	Insgesamt ist $\dot{\pi}\colon A \to \mathcal{B}(\sfrac{A}{N_\varphi})$ also ein kontraktiver Homomorphismus.
+	Für jedes $a \in A$ ist $\norm*{\dot{\pi}(a)}$ beschränkt durch $\norm*{a}$, daher besitzt $\dot{\pi}(a)$ eine eindeutig bestimmte Fortsetzung $\pi_\varphi(a) \in \mathcal{B}\enbrace{\mathcal{H}_\varphi}$ mit $\norm*{\pi_\varphi(a)} = \norm*{\dot{\pi}(a)}\le \norm*{a}$.
+	$\pi_\varphi \colon A \to \mathcal{B}(\mathcal{H}_\varphi)$ ist ein kontraktiver $^*$-Homomorphismus (Übung).
+	
+	$(\mathcal{H}_\varphi,\pi_\varphi)$ ist die \Index{GNS-Darstellung} von $\varphi$.
+	$(\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi)$ ist zyklisch mit $\xi_\varphi = \lim_\lambda e_\lambda+N_\varphi$, wobei $(e_\lambda)_\lambda$ eine approximative Eins von $A$ ist (Übung).
+\end{satz}
+
+\begin{satz}[{name=[Existenz treuer Darstellungen]}]
+	Jede $C^*$-Algebra $A$ besitzt eine treue Darstellung.
+	Falls $A$ separabel ist, so existiert eine treue Darstellung auf einem separablen Hilbertraum.
+\end{satz}
+\begin{beweis}
+	Wir definieren die universelle Darstellung $(\mathcal{H}_u,\pi_u)$ durch 
+	\[
+		\mathcal{H}_u := \bigoplus_{\varphi \in S(A)} \mathcal{H}_\varphi = \set*{(\eta_\varphi)_{\varphi \in S(A)} \given \eta_\varphi \in \mathcal{H}_\varphi, \sum_{\varphi \in S(A)} \skal*{\eta_\varphi}{\eta_\varphi} <\infty}
+	\]
+	und $\pi_u \colon A \to \mathcal{B}(\mathcal{H}_u)$ mit $\pi_u (a) \enbrace*{(\eta_\varphi)_\varphi} := \enbrace*{\pi_\varphi(a) \eta_\varphi}_\varphi$ für $a \in A$.
+	Sei $0 \neq a \in A^1$. Dann existiert nach \autoref{satz:55} ein $\overline{\varphi} \in S(A)$ mit $\overline{\varphi}(a^*a)=\norm*{a}^2$.
+	Es gilt
+	\begin{align}
+		\norm*{a}^2 = \overline{\varphi}(a^*a) &= \overline{\varphi} \enbrace*{ (a^*a)^{\sfrac{1}{2}} (a^*a)^{\sfrac{1}{2}}}\\ 
+		&= \skal*{(a^*a)^{\sfrac{1}{2}}+N_{\overline{\varphi}}}{(a^*a)^{\sfrac{1}{2}}+N_{\overline{\varphi}}}_{\mathcal{H}_{\overline{\varphi}}} \\
+		&= \skal*{\pi_{\overline{\varphi}}\enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}} + N_{\overline{\varphi}}}}{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}_{\mathcal{H}_{\overline{\varphi}}} \\
+		&= \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}^2_{\mathcal{H}_{\overline{\varphi}}} \\
+		&\le \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}}}^2_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \\
+		&= \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{2}{4}}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} = \norm*{\pi_{\overline{\varphi}} \enbrace*{a^*a}^{\sfrac{1}{2}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}\\ 
+		&= \norm*{\pi_{\overline{\varphi}}(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \le \norm*{\pi_u(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}
+	\end{align}
+	Damit ist $\pi_u$ injektiv, also treu.
+\end{beweis}
 % section 5 (end)
 
 
