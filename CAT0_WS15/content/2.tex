@@ -359,4 +359,129 @@ Dann induziert $d$ eine Längenmetrik $d_L$ auf $X$ und zwar wie folgt:
 	\end{enumerate}
 \end{beweis}
 
+Im Allgemeinen muss ein Längenraum nicht geodätisch sein.
+Zum Beispiel ist $(\RR^2 \setminus \setzero, d_2)$ ein (nicht vollständiger) Längenraum, aber nicht geodätisch.
+
+\begin{definition}[lokal kompakt]
+	Ein metrischer Raum $(X,d)$ heißt \Index{lokal kompakt}, wenn für alle $x \in X$ ein $r > 0$ existiert, sodass $\ol{B_r(x)}$ kompakt ist.
+\end{definition}
+
+\begin{theorem}[\textsc{Hopf-Rinow}]
+	Sei $(X,d)$ ein Längenraum.
+	Wenn $X$ vollständig und lokal kompakt ist, dann gilt: \index{Hopf-Rinow}
+	\begin{enumerate}[(i)]
+		\item Für jedes $x \in X$ und $r > 0$ ist $\ol{B_r(x)}$ kompakt.
+		\item $(X,d)$ ist geodätisch.
+	\end{enumerate}
+\end{theorem}
+
+\begin{beweis}[zu (i)]
+		Sei $x \in X$ beliebig.
+		Wir definieren:
+		\[
+			\{r \in \RR_{\geq 0} : \ol{B_r(x)} \text{ ist kompakt} \}
+		\]
+		Wir müssen zeigen, dass gilt: $\Sigma = \RR_{\geq 0}$.
+		Dafür zeigen wir $\Sigma \neq \emptyset$ sowie $\Sigma$ offen und abgeschlossen.
+		Da $\RR_{\geq 0}$ zusammenhängend ist, folgt dann $\Sigma = \RR_{\geq 0}$.
+		\begin{enumerate}[{[1]}]
+			\item $\Sigma \neq \emptyset$, da $0 \in \Sigma$.
+			\item Falls $r \in \Sigma$, dann ist auch $[0,r] \subseteq \Sigma$.
+			Genauer:
+			Sei $r' \in [0,r]$ beliebig, dann ist $\ol{B_{r'}(x)} \subseteq \ol{B_r(x)}$ als abgeschlossene Teilmenge in einem kompakten Raum kompakt.
+			Folglich: $r' \in \Sigma$
+		\end{enumerate}
+		
+		Zur Offenheit von $\Sigma$:
+		Sei $r \in \Sigma$ beliebig.
+		Wir müssen zeigen, dass eine offene Umgebung $U_r$ von $r$ existiert mit $U_r \subseteq \Sigma$.
+		\begin{description}
+			\item[1. Fall:]  $r = 0$.
+			Da $X$ lokal kompakt ist, existiert ein $r' \in \RR_{>0}$ mit $\ol{B_{r'}(x)}$ kompakt.
+			Mit \textbf{[2]} folgt $[0,r'] \subseteq \Sigma$, also $U_0 := [0,r'] \subseteq \Sigma$.
+			\item[2. Fall:] $r \in \Sigma \cap \RR_{>0}$.
+			Es gilt also, dass $\ol{B_r(x)}$ kompakt ist.
+			Sei $x_i \in X$ beliebig.
+			Da $X$ lokal kompakt ist, existiert ein $r_i > 0$ mit $\ol{B_{r_i}(x_i)}$ kompakt.
+			Wir betrachten die offene Überdeckung von $\ol{B_r(x)}$:
+			\[
+				\ol{B_r(x)} \subseteq \bigcup_{x_i \in X} B_{r_i}(x_i)
+			\]
+			Da $\ol{B_r(x)}$ kompakt ist, existieren $x_1,\dots,x_n \in X$ mit
+			\[
+				\ol{B_r(x)} \subseteq \bigcup_{i=1}^n B_{r_i}(x_i).
+			\]
+			Betrachte $A := \ol{B_r(x)}$ kompakt und $B := X \setminus \bigcup_{i=1}^n B_{r_i}(x_i)$ abgeschlossen.
+			Es gilt $A \cap B = \emptyset$. Dann existiert ein $\delta >0$ mit
+			\begin{equation}
+				\inf\{ d(a,b) : a\in A, b \in B\} > 2 \delta. \label{eq:2.13.!}
+			\end{equation}
+			Folglich ist
+			\[
+				\ol{B_{r+\delta}(x)} \subseteq \bigcup_{i=1}^n \ol{B_{r_i}(x_i)}
+			\]
+			und damit ist $\ol{B_{r+\delta}(x)}$ kompakt.
+			Es folgt $U_r := (\delta-r,r+\delta) \cap [0,r+\delta) \subseteq \Sigma$.
+			
+			zu \eqref{eq:2.13.!}: Angenommen, $\inf\{d(a,b) : a \in A, b \in B\} = 0$. Dann existieren Folgen $(a_n)_{n \in \NN} \subseteq A, (b_n)_{n \in \NN} \subseteq B$ mit $\lim\limits_{n \rightarrow \infty} d(a_n,b_n) = 0$.
+			Da $A$ kompakt ist, existiert eine konvergente Teilfolge $(a_{n_k})$ mit $\lim\limits_{k \rightarrow \infty} a_{n_k} = a$.
+			Wir erhalten
+			\[
+				0 = \lim\limits_{k \rightarrow \infty} d(a_{n_k},b_{n_k}) = \lim\limits_{k \rightarrow \infty} d(a,b_{n_k}).
+			\]
+			Also gilt $b_{n_k} \rightarrow a$.
+			Da $B$ abschlossen ist, liegt $a \in B$. Widerspruch zu $A \cap B = \emptyset$.
+		\end{description}
+		Zur Abgeschlossenheit von $\Sigma$:
+		Wir benutzen das folgende Kriterium für einen metrischen Raum $Y$:
+		\[
+			A \subseteq Y \text{ abg.} \quad \Leftrightarrow \quad \text{für alle Folgen } (y_n)_n \subseteq A, \text{ die in } Y \text{ konvergieren, gilt } \lim\limits_{n \rightarrow \infty} y_n \in A.
+		\]
+		In unserem Fall reicht es zu zeigen, dass für $r \in \RR_{> 0}$ mit $[0,r) \subseteq \Sigma$ auch $r \in \Sigma$ ist.
+		Sei also $r \in \RR_{> 0}$ mit $[0,r) \subseteq \Sigma$ beliebig.
+		Wir müssen zeigen, dass $\ol{B_r(x)}$ kompakt ist.
+		In metrischen Räumen sind die Begriffe Folgenkompaktheit und Kompaktheit äquivalent.
+		Sei also $(x_n)_n$ eine Folge in $\ol{B_r(x)}$.
+		Wir müssen zeigen, dass $(x_n)_n$ eine konvergente Teilfolge hat.
+		
+		Wir können annehmen, dass $\lim\limits_{n \rightarrow \infty} d(x_n,x) = r$ ist. 
+		Andernfalls können wir eine Teilfolge $(x_{n_k})$ von $(x_n)$ finden, sodass $x_{n_k} \in \ol{B_{r'}(x)}$ für ein $r' \in [0,r)$.
+		Da $\ol{B_{r'}(x)}$ kompakt ist, existiert eine Teilfolge $(x_{n_{k_l}})$, die konvergent ist.
+		Wir konstruieren eine Hilfsfolge:
+		
+		Seien $n,m \in \NN$ beliebig.
+		Betrachte $c_n\colon [a,b] \rightarrow X$ mit $c(a) = x$, $c(b) = x_n$ und $\ell(c_n) < r - \frac{1}{2+2m}$. Sei $y_n^m \in \im(c_n)$ beliebig mit $d(x_n,y_n^m) < \frac{1}{m+1}$. Dann gilt
+		\begin{align*}
+			d(x,y_n^m) &< r - \frac{1}{2+2m} \\
+			d(x_n,y_n^m) &< \frac{1}{m+1}
+		\end{align*}
+		Für festes $m$ liegt $(y_n^m)_n$ in der kompakten Menge $\ol{B_{r-\frac{1}{2+2m}}(x)}$.
+		Das heißt, für festes $m$ hat $(y_n^m)_n$ eine konvergente Teilfolge. Benutze Diagonaltrick:
+		\begin{center}
+			Sei $(y_{n^1_k}^1)_k$ eine konvergente Teilfolge von $(y_n^1)_{n \in \NN}$. \\
+			Sei $(y_{n^2_k}^2)_k$ eine konvergente Teilfolge von $(y_{n^1_k}^2)_k$. \\
+			$\vdots$
+		\end{center}
+		Definiere $n_k := n_k^k$ für jedes $k \in \NN$.
+		Dann ist $(y_{n_k}^m)_k$ eine konvergente Folge für alle $m \in \NN$.
+		\begin{description}
+			\item[Beh:]  $(x_{n_k})$ konvergiert:
+			\item[Bew:] Wir zeigen, dass $(x_{n_k})$ eine Cauchy-Folge ist.
+			Da $\ol{B_r(x)}$ eine abgeschlossene Teilmenge in einem vollständigen Raum ist, ist $\ol{B_r(x)}$ vollständig.
+			Damit liegt dann $\lim\limits_{k \rightarrow \infty} x_{n_k} \in \ol{B_r(x)}$.
+			Sei $\varepsilon > 0$.
+			Sei weiter $m \in \NN$ mit $2 \cdot \frac{1}{m+1} < \frac{\varepsilon}{2}$ beliebig.
+			\begin{align*}
+				d(x_{n_k},x_{n_l}) &\stack{\Delta\text{-Ungl.}}{\leq} d(x_{n_k},y_{n_k}^m) + d(y_{n_k}^m,y_{n_l}^m) + d(y_{n_l}^m,x_{n_l}) \\
+				&\stack{}{<} 2 \cdot \frac{1}{m+1} + d(y_{n_k}^m, y_{n_l}^m)
+			\end{align*}
+			Da $(y_{n_k}^m)$ für alle $m$ konvergent ist, existiert $N \in \NN$ mit $d(y_{n_k}^m,y_{n_l}^m) < \frac{\varepsilon}{2}$ für alle $k,l > N$. Wir erhalten
+			\[
+				d(x_{n_k},x_{n_l}) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+			\]
+			für alle $k,l > N$. \qedhere
+		\end{description}
+\end{beweis}
+
+Um die Aussage (ii) zu beweisen, brauchen wir ein Resultat von \textsc{Arzelà} und \textsc{Ascoli}.
 \cleardoubleoddemptypage
