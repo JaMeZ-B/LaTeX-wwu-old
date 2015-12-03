@@ -363,10 +363,13 @@ Im Allgemeinen muss ein Längenraum nicht geodätisch sein.
 Zum Beispiel ist $(\RR^2 \setminus \setzero, d_2)$ ein (nicht vollständiger) Längenraum, aber nicht geodätisch.
 
 \begin{definition}[lokal kompakt]
+\label{def:2.12}
 	Ein metrischer Raum $(X,d)$ heißt \Index{lokal kompakt}, wenn für alle $x \in X$ ein $r > 0$ existiert, sodass $\ol{B_r(x)}$ kompakt ist.
 \end{definition}
 
 \begin{theorem}[\textsc{Hopf-Rinow}]
+\label{thm:2.13}
+\label{hopf-rinow}
 	Sei $(X,d)$ ein Längenraum.
 	Wenn $X$ vollständig und lokal kompakt ist, dann gilt: \index{Hopf-Rinow}
 	\begin{enumerate}[(i)]
@@ -483,5 +486,195 @@ Zum Beispiel ist $(\RR^2 \setminus \setzero, d_2)$ ein (nicht vollständiger) L�
 		\end{description}
 \end{beweis}
 
-Um die Aussage (ii) zu beweisen, brauchen wir ein Resultat von \textsc{Arzelà} und \textsc{Ascoli}.
+Um die Aussage (ii) zu beweisen, brauchen wir ein Resultat von \textsc{Arzelà} und \textsc{Ascoli}. \marginnote{25.11. \\ \ [9]}
+
+\begin{definition}[gleichstetig]
+\label{def:2.14}
+	Seien $X$ und $Y$ metrische Räume.
+	Eine Folge von Abbildungen $(f_n\colon X \rightarrow Y)_{n \in \NN}$ heißt \Index{gleichstetig}, wenn gilt:
+	\[
+		\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x,x' \in X, n \in \NN : d_X(x,x') < \delta \Rightarrow d_Y(f_n(x),f_n(x')) < \varepsilon
+	\]
+\end{definition}
+
+\begin{lemma}[\textsc{Arzelà-Ascoli}]
+\label{lemma:2.15}
+\label{arzela-ascoli}
+	Sei $X$ ein separabler metrischer Raum und $Y$ ein kompakter metrischer Raum. \index{Arzelà-Ascoli}
+	Dann hat jede gleichstetige Folge von Funktionen $(f_n\colon X \rightarrow Y)_{n \in \NN}$ eine konvergente Teilfolge $(f_{n_k})_k$, die gleichmäßig auf kompakte Teilmengen von $X$ gegen die stetige Funktion $f := \lim\limits_{k \rightarrow \infty} f_{n_k}$ konvergiert.
+\end{lemma}
+
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{itemize}
+		\item Da $X$ separabel ist, existiert eine abzählbare dichte Teilmenge $Q$ von $X$.
+		Wähle so ein $Q = \{q_j : j \in \NN\}$.
+		\item Für jedes $q_j \in Q$ betrachten wir die Folge $(f_n(q_j))_{n \in \NN}$.
+		\item Es ist $(f_n(q_j))_n$ eine Folge in $Y$ kompakt und besitzt daher eine konvergente Teilfolge.
+		\item Wir wählen eine Teilfolge $(n_k^1)_{k \in \NN}$, sodass $(f_{n_k^1}(q_1))_{k \in \NN}$ konvergiert, dann induktiv eine Teilfolge $(n_k^j)_k$ von $(n_k^{j-1})$, sodass $(f_{n_k^j}(q_j))_{k \in \NN}$ konvergiert.
+		Mittels Diagonaltrick ist dann $(f_{n_k^k}(q_j))_k$ konvergent für jedes $j \in \NN$.
+		\item Wir definieren 
+		\begin{align*}
+			f \colon Q &\longrightarrow Y \\
+			q_j &\longmapsto \lim\limits_{k \rightarrow \infty} f_{n_k^k}(q_j)
+		\end{align*}
+		und zeigen, dass $f$ gleichmäßig stetig ist:
+		
+		Sei $\varepsilon>0$ beliebig.
+		Da $(f_n\colon X \rightarrow Y)_{n \in \NN}$ gleichstetig ist, existiert ein $\delta > 0$, sodass für alle $n \in \NN$ gilt:
+		\[
+			d(f_n(x),f_n(x')) \leq \varepsilon \text{ für alle } x,x' \in X \text{ mit } d(x,x') < \delta,
+		\]
+		also insbesondere
+		\[
+			d(f_{n_k^k}(q),f_{n_k^k}(q')) \leq \varepsilon \text{ für alle } q,q' \in Q \text{ mit } d(q,q') < \delta.
+		\]
+		Somit folgt für $k \rightarrow \infty$ und mit $d$ stetig:
+		\begin{align*}
+			\lim\limits_{k \rightarrow \infty} d(f_{n_k^k}(q),f_{n_k^k}(q')) &\leq \varepsilon \text{ für alle } q,q' \in Q \text{ mit } d(q,q') < \delta \\
+			\Rightarrow d(f(q),f(q')) &\leq \varepsilon \text{ für alle } q,q' \in Q \text{ mit } d(q,q') < \delta \
+		\end{align*}
+		Folglich ist $f \colon Q \rightarrow Y$ gleichmäßig stetig.
+		\item Gleichmäßig stetige Funktionen lassen sich stetig fortsetzen:
+		\begin{align*}
+			f \colon X &\longrightarrow Y \\
+			x &\longmapsto \lim\limits_{i \rightarrow \infty} f(q_i), \text{ wobei } q_i \in Q \text{ mit } \lim\limits_{i \rightarrow \infty} q_i = x
+		\end{align*}
+		\begin{itemize}
+			\item Da $f$ gleichmäßig stetig ist, ist $(f(q_i))_{i \in \NN}$ eine Cauchy-Folge.
+			\item Cauchy-Folgen sind beschränkt, das heißt es existiert ein $r > 0$ und $y \in Y$ mit $f(q_i) \in \ol{B_r(y)} \subseteq Y$.
+			\item $\ol{B_r(y)}$ ist als abgeschlossene Teilmenge in einem kompakten Raum wieder kompakt, also insbesondere folgenkompakt.
+			Folglich existiert eine konvergente Teilfolge $(f(q_{i_k}))_{k \in \NN}$.
+			Sei $\tilde{y} = \lim\limits_{k \rightarrow \infty} f(q_{i_k})$.
+			Da $(f(q_i))$ eine Cauchy-Folge ist, gilt $\lim\limits_{i \rightarrow \infty} f(q_i) = \tilde{y}$.
+		\end{itemize}
+		\item Sei nun $K \subseteq X$ kompakt.
+		Wir müssen nun zeigen, dass $(f_{n_k^k}\colon K \rightarrow Y)_{k \in \NN}$ gleichmäßig gegen $f \colon K \rightarrow Y$ konvergiert.
+		Sei $\varepsilon > 0$.
+		Gesucht ist $N \in \NN$, sodass für alle $n_k^k > N$ und $x \in K$ gilt:
+		\[
+			d(f_{n_k^k}(x),f(x)) < \varepsilon.
+		\]
+		\item Da $(f_{n_k^k} \colon X \rightarrow Y)_k$ gleichstetig ist, existiert für $\frac{\varepsilon}{3}$ ein $\delta > 0$, sodass für alle $n_k^k$ gilt:
+		\begin{align}
+			d(f_{n_k^k}(x),f_{n_k^k}(x')) &\leq \frac{\varepsilon}{3} \text{ für alle } x,x' \in K \text{ mit } d(x,x') < \delta \label{eq:2.15.1} \\
+			\xRightarrow{\lim} d(f(x),f(x')) &\leq \frac{\varepsilon}{3} \text{ für alle } x,x' \in K \text{ mit } d(x,x') < \delta \label{eq:2.15.2}
+		\end{align}
+		\item Weiter betrachten wir die offene Überdeckung
+		\begin{equation}
+			K \subseteq \bigcup_{q_j \in Q} B_\delta (q_j) \quad \xrightarrow{K \text{ kompakt}} \quad K \subseteq \bigcup_{j=1}^l B_\delta (q_j) \label{eq:2.15.3}
+		\end{equation}
+		\item Wähle $N \in \NN$, sodass
+		\begin{equation}
+			d(f_{n_k^k}(q_j),f(q_j)) \leq \frac{\varepsilon}{3} \text{ für alle } n_k^k \geq N \text{ und alle } j \in \{1, \dots, l\} \label{eq:2.15.4}
+		\end{equation}
+	\end{itemize}
+	Insgesamt erhalten wir:
+	\begin{align*}
+		d(f(x),f_{n_k^k}(x)) &\stack{\eqref{eq:2.15.3}}{\leq} d(f(x),f(q_j)) + d(f(q_j),f_{n_k^k}(q_j)) + d(f_{n_k^k}(q_j),f_{n_k^k}(x)) \\
+		&\stack{}{\leq} \Underbrace{\frac{\varepsilon}{3}}{\eqref{eq:2.15.2}} + \Underbrace{\frac{\varepsilon}{3}}{\eqref{eq:2.15.4}} + \Underbrace{\frac{\varepsilon}{3}}{\eqref{eq:2.15.1}} = \varepsilon \text{ für alle } n_k^k \geq N \text{ und alle } x \in K.
+	\end{align*}
+\end{beweis}
+
+\begin{beweis}[\autoref{thm:2.13}(ii)]
+	Seien $x,y \in X, x\neq y$ beliebig.
+	Da $X$ ein Längenraum ist, existieren Wege
+	\begin{align*}
+		c_n\colon [a_n,b_n] &\longrightarrow X \\
+		a_n &\longmapsto x \\
+		b_n &\longmapsto y
+	\end{align*}
+	mit $\ell(c_n) \leq d(x,y) + \frac{1}{n}$ und betrachten die Folge $(c_n'\colon [0,1] \rightarrow X)_{n \in \NN}$.
+	\begin{itemize}
+		\item Die Folge $(c_n')_n$ ist gleichstetig, denn:
+		Sei $\varepsilon > 0$.
+		Wir definieren $\delta := \frac{\varepsilon}{d(x,y)+1}$. Es gilt $\ell(c_n') = \ell(c_n) = d(x,y) + \frac{1}{n} \Leftrightarrow 1 \leq \frac{d(x,y)+1}{\ell(c_n')}$, und für $t,t' \in [0,1]$ mit $d(t,t') < \delta$ folgt damit:
+		\begin{align*}
+			d(c_n'(t),c_n'(t')) &\stack{}{\leq} \ell \enbrace*{c_n' \big|_{[t,t']}} \\
+			&\stack{}{\leq} \frac{\ell \enbrace*{c_n' \big|_{[t,t']}}}{\ell(c_n')} \cdot (d(x,y) + 1) \\
+			&\stack{}{=} d(t,t') \cdot (d(x,y) + 1) \\
+			&\stack{}{<} \delta \cdot (d(x,y) + 1) \\
+			&\stack{}{=} \varepsilon.
+		\end{align*}
+		\item Weiter gilt $\im(c_n') \subseteq \ol{B_{d(x,y)+1}(x)}$.
+		Nach \autoref{thm:2.13}(i) ist $\ol{B_{d(x,y)+1}(x)}$.
+		\item Insgesamt haben wir $(c_n'\colon [0,1] \rightarrow \ol{B_{d(x,y)+1}(x)})_n$ gleichstetig mit $[0,1]$ separabel und $\ol{B_{d(x,y)+1}(x)}$ kompakt.
+		Nach \autoref{lemma:2.15} existiert also eine konvergente Teilfolge $(c_{n_k}')_{k \in \NN}$, die gleichmäßig gegen den Weg $c'\colon [0,1] \rightarrow X$ von $x$ nach $y$ konvergiert.
+		\item Für $\frac{1}{k}$ existiert nach \autoref{prop:2.6} ein $n \in \NN$, sodass mit $\ell(c_{n_k}') \leq  d(x,y) + \frac{1}{n_k}$ gilt:
+		\begin{align*}
+			d(x,y) \leq \ell(c') &\leq \ell(c_{n_k}') + \frac{1}{k} \text{ für alle } n_k \geq N \\
+			&\leq d(x,y) + \frac{1}{n_k} + \frac{1}{k} \text{ für alle } n_k \geq N \\
+			\xRightarrow{\lim} \quad d(x,y) &\leq \ell(c') \leq d(x,y) \\
+			\Rightarrow \quad \ell(c') = d(x,y)
+		\end{align*}
+		Dann ist $\tilde{c}' \colon [0,d(x,y)] \rightarrow X$ aus \autoref{prop:2.6} eine Geodäte von $x$ nach $y$. \qedhere
+	\end{itemize}
+\end{beweis}
+
+\begin{korollar}
+\label{kor:2.16}
+	Sei $X$ ein Längenraum.
+	Dann gilt:
+	\begin{center}
+		$X$ vollständig und lokal kompakt \quad $\Leftrightarrow$ \quad $\ol{B_r(x)}$ ist kompakt für alle $x \in X$ und alle $r \in \RR_{>0}$.
+	\end{center}
+\end{korollar}
+
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{description}
+		\item[\bewhin] \autoref{thm:2.13}.
+		\item[\bewrueck] Dass $X$ lokal kompakt ist, ist klar.
+		
+		Sei $(x_i)_{i \in \NN}$ eine Cauchy-Folge in $X$.
+		Cauchy-Folgen sind beschränkt, folglich existiert ein $x \in X$ und $r > 0$ mit $x_i \in \ol{B_r(x)}$ für alle $i \in \NN$.
+		Nach Voraussetzung ist $\ol{B_r(x)}$ kompakt, also existiert eine konvergente Teilfolge $(x_{i_n})_n$ mit $x_{i_n} \xrightarrow{n \rightarrow \infty} x'$.
+		Da $(x_i)_i$ eine Cauchy-Folge ist, gilt $\lim\limits_{i \rightarrow \infty} x_i = x'$. \qedhere
+	\end{description}
+\end{beweis}
+
+\begin{definition}[Stetige Abhängigkeit von Endpunkten]
+\label{def:2.17}
+	Sei $X$ ein eindeutig geodätischer Raum. \index{Stetige Abhängigkeit von Endpunkten}
+	Die Geodäten in $X$ \textbf{hängen stetig von ihren Endpunkten ab}, wenn folgendes gilt:
+	
+	Seien $x,y \in X$ beliebig und $c\colon [0,d(x,y)] \rightarrow X$ die Geodäte von $x$ nach $y$.
+	Seien weiter $(x_n)_n, (y_n)_n$ konvergente Folgen in $X$ mit $\lim\limits_{n \rightarrow \infty} x_n = x, \lim\limits_{n \rightarrow \infty} y_n = y$ und $c_n \colon [0,d(x_n,y_n)] \rightarrow X$ die Geodäte von $x_n$ nach $y_n$.
+	Dann konvergiert die Folge von Wegen
+	\[
+		\left( \begin{array}{rcccl}
+			c_n'\colon [0,1] & \longrightarrow & [0,d(x_n,y_n)] & \longrightarrow & X \\
+			t & \longmapsto & t \cdot d(x_n,y_n) & \longmapsto & c_n(t \cdot d(x_n,y_n))
+		\end{array} \right)
+	\]
+	gleichmäßig gegen
+	\[
+		\begin{array}{rcccl}
+			c'\colon [0,1] & \longrightarrow & [0,d(x,y)] & \longrightarrow & X \\
+			t & \longmapsto & t \cdot d(x,y) & \longmapsto & c(t \cdot d(x,y)).
+		\end{array}
+	\]	
+\end{definition}
+
+\begin{satz}
+\label{satz:2.18}
+	Sei $X$ ein $\CAT$-Raum.
+	Dann hängen die Geodäten stetig von ihren Endpunkten ab.
+\end{satz}
+
+\begin{beweis}
+	Seien $x,y \in X$ beliebig.
+	Seien weiter $(x_n)_n, (y_n)_n$ konvergente Folgen in $X$ mit $\lim\limits_{n \rightarrow \infty} x_n = x, \lim\limits_{n \rightarrow \infty} y_n = y$.
+	Weiter seien $c \colon x \geo y$, $c_n\colon x_n \geo y_n$, $\gamma_n \colon x_n \geo y$ Geodäten.
+	Sei $\varepsilon > 0$.
+	Wähle $N \in \NN$, sodass $d(x,x_n), d(y,y_n) < \frac{\varepsilon}{2}$ für alle $n \geq \NN$.
+	\begin{align*}
+		d(c'(t),c_n'(t)) &\stack{\Delta\text{-Ungl.}}{\leq} d(c'(t),\gamma_n'(t)) + d(\gamma_n'(t),c_n'(t)) \\
+		&\stack{d\text{ konv.}}{\leq} (1-t) \cdot d(c'(0),\gamma_n'(0)) + t \cdot d(\gamma_n'(1),c_n'(1)) \\
+		&\stack{}{\leq} d(x,x_n) + d(y,y_n) = \varepsilon \text{ für alle } n \geq N. \qedhere
+	\end{align*}
+\end{beweis}
+	
+
+
 \cleardoubleoddemptypage
