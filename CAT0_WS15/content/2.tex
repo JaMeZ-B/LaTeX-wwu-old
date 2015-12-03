@@ -675,6 +675,92 @@ Um die Aussage (ii) zu beweisen, brauchen wir ein Resultat von \textsc{Arzelà} 
 	\end{align*}
 \end{beweis}
 	
+\begin{definition}[Linear umparametrisierte Geodäte]
+\label{def:2.19}
+	Sei $(X,d)$ ein metrischer Raum und $\gamma \colon x \geo y$ eine Geodäte sowie $x,y \in X$. \marginnote{02.12. \\ \ [10]}
+	Wir definieren
+	\begin{align*}
+		\gamma'\colon [0,1] &\longrightarrow X \\
+		t &\longmapsto \gamma(t \cdot d(x,y)).
+	\end{align*}
+	Der stetige Weg $\gamma'$ heißt \textbf{linear umparametrisierte Geodäte}. \index{Geodäte!linear umparametrisiert}
+\end{definition}
+
+\begin{korollar}
+\label{kor:2.20}
+	Sei $X$ ein kompakter metrischer Raum und $(c_n\colon [0,1] \rightarrow X)_{n \in \NN}$ eine Folge von linear umparametrisierten Geodäten. \marginnote{Beweis: Übung!}
+	Dann existiert eine linear umparametrisierte Geodäte $c \colon [0,1] \rightarrow X$ und eine Teilfolge $(c_{n_k})_k$, sodass $(c_{n_k})_k$ gleichmäßig gegen $c$ konvergiert.	
+\end{korollar}
+
+\begin{satz}
+\label{satz:2.21}
+	Sei $X$ ein eindeutig geodätischer Raum, in dem alle abgeschlossenen Bälle kompakt sind.
+	Dann hängen die Geodäten in $X$ stetig von ihren Endpunkten ab.
+\end{satz}
+
+\begin{beweis}
+	Seien $x,y \in X$ beliebig.
+	Seien weiter $(x_n)_n$, $(y_n)_n$ Folgen in $X$ mit $\lim\limits_{n \rightarrow \infty} x_n = x$ und $\lim\limits_{n \rightarrow \infty} y_n = y$.
+	Seien weiter $(c_n\colon [0,1] \rightarrow X)_n$ linear umparametrisierte Geodäten von $x_n$ nach $y_n$.
+	Sei weiter $c \colon [0,1] \rightarrow X$ die linear umparametrisierte Geodäte von $x$ nach $y$.
+	Wir müssen zeigen, dass $(c_n)_n$ gleichmäßig gegen $c$ konvergiert.
+	
+	Wir zeigen zuerst, dass $(c_n)_n$ punktweise gegen $c$ konvergiert.
+	Wähle $R > 0$, sodass $\im(c_n) \subseteq \ol{B_R(x)}$ für alle $n \in \NN$ gilt.
+	
+	Angenommen, $(c_n)_n$ konvergiere nicht punktweise gegen $c$.
+	Dann existiert ein $\varepsilon > 0$ und $t_0 \in (0,1)$ und eine Teilfolge $(c_{n_k})_k$, sodass gilt:
+	\begin{equation}
+		d(c_{n_k}(t_0),c(t_0)) \geq \varepsilon \text{ für alle } k \in \NN. \label{eq:2.21.1}
+	\end{equation}
+	Nach \autoref{kor:2.20} existiert eine Teilfolge $(c_{n_{k_i}})_i$ von $(c_{n_k}\colon [0,1] \rightarrow \ol{B_R(x)})_k$, die gleichmäßig gegen eine linear umparametrisierte Geodäte $c'\colon [0,1] \rightarrow X$ konvergiert.
+	Es gilt $c_{n_{k_i}}(0) \xrightarrow{i \rightarrow \infty} x = c'(0)$ sowie $c_{n_{k_i}}(1) \xrightarrow{i \rightarrow \infty} y = c'(1)$. Weiter gilt
+	\[
+		\lim\limits_{i \rightarrow \infty} d(c_{n_{k_i}}(t_0),c(t_0)) \stack{\eqref{eq:2.21.1}}{\geq} \text{ für alle } i \in \NN
+	\]
+	und wegen $d$ stetig
+	\[
+		d(c'(t_0),c(t_0)) \geq \varepsilon,
+	\]
+	was ein Widerspruch zur Eindeutigkeit der Geodäten ist.
+	
+	Als Übung zeige man nun: Wenn $(c_n)_n$ punktweise gegen $c$ konvergiert, dann auch gleichmäßig (für beliebige metrische Räume). \qedhere
+\end{beweis}
+
+
+\begin{bemerkung}
+\label{bem:2.22}
+	Konstruktionsskizze von einem vollständigen eindeutig geodätischen Raum, in dem die Geodäten nicht stetig von ihren Endpunkten abhängen: \todo{Spaßige Konstruktion einfügen!}
+\end{bemerkung}
+
+\section{Längenmetrik auf Überlagerungsräumen}
+\label{sec:2.2}
+
+\begin{definition}[Induzierte Pseudometrik]
+\label{def:2.23}
+	Sei $X$ ein Längenraum, $\tilde{X}$ ein topologischer Raum und $p \colon \tilde{X} \rightarrow X$ ein \textbf{lokaler Homöomorphismus}, das heißt für jeden Punkt $\tilde{x} \in \tilde{X}$ existiert eine offene Umgebung $\tilde{U}_{\tilde{x}} \subseteq \tilde{X}$ von $\tilde{x}$, sodass $U := p(\tilde{U}_{\tilde{x}}) \subseteq X$ eine offene Menge ist und $p \big|_{\tilde{U}_{\tilde{x}}}\colon \tilde{U}_{\tilde{x}} \rightarrow U$ ein Homöomorphismus ist. \index{Homöomorphismus!lokal}
+	
+	Sei $c \colon [a,b] \rightarrow \tilde{X}$ ein Weg.
+	Wir definieren $\ell(c) := \ell(p \circ c)$.
+	Für $\tilde{x}, \tilde{y} \in \tilde{X}$ setze
+	\[
+		\tilde{d}(\tilde{x},\tilde{y}) := \inf \{ \ell(c) : c \text{ ist ein rektifizierbarer Weg von } \tilde{x} \text{ nach } \tilde{y}\}.
+	\]
+	$\tilde{d}$ heißt die \textbf{von $p$ induzierte Pseudometrik auf $\tilde{X}$}. \index{Metrik!induzierte Pseudometrik}
+\end{definition}
+
+\begin{satz}
+\label{satz:2.24}
+	Sei $X$ ein Längenraum, $\tilde{X}$ ein Hausdorff-Raum.
+	Sei weiter $p \colon \tilde{X} \rightarrow X$ ein lokaler Homöomorphismus und $\tilde{d}$ die von $p$ induzierte Pseudometrik auf $\tilde{X}$.
+	Dann gilt:
+	\begin{enumerate}[(i)]
+		\item $\tilde{d}$ ist eine Metrik auf $\tilde{X}$.
+		\item $p$ ist eine \textbf{lokale Isometrie}, das heißt für jedes $\tilde{x} \in \tilde{X}$ existiert ein $\varepsilon > 0$, sodass $p \colon B_\varepsilon(\tilde{x}) \rightarrow B_\varepsilon(p(\tilde{x}))$ eine Isometrie ist. \index{Isometrie!lokal}
+		\item $\tilde{d}$ ist eine Längenmetrik.
+		\item Die Eigenschaften (ii) und (iii) legen $\tilde{d}$ eindeutig fest.
+	\end{enumerate}
+\end{satz}
 
 
 \cleardoubleoddemptypage
