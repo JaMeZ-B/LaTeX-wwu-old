@@ -27,7 +27,7 @@
 \label{sec:1}
 
 \begin{definition}[{name=[Kokettenkomplex und Kohomologie]}]
-	Sei $R$ ein Ring. Ein \bet{$R$-Kokettenkomplex}\index{Kokettenkomplex} $(C^*,d^*)$ ist eine Folge von $R$-Moduln $(C^n)_{n \in \mathbb{N}}$ zusammen mit $R$-linearen Abbildungen 
+	Sei $R$ ein Ring. Ein \bet{$R$-Kokettenkomplex}\index{Kokettenkomplex} $(C^*,d^*)$ ist eine Folge von $R$-Moduln $(C^n)_{n}$ zusammen mit $R$-linearen Abbildungen 
 	$d^n \colon C^n \to C^{n+1}$, sodass $d^{n+1} \circ d^n =0$ gilt. Der \bet{$n$-te Kohomologiemodul}\index{Kohomologiemodul} von $(C^*,d^*)$ ist definiert als 
 	\[
 		H^n(C^*,d^*) = \frac{\ker d^n \colon C^n \to C^{n+1}}{\im d^{n-1} \colon C^{n-1} \to C^n} 
@@ -1680,13 +1680,111 @@ Ab jetzt: $R$ kommutativ!
 \end{lemma}
 \begin{beweis}
 	Jeder singuläre Simplex in $M$ liegt schon in einem $U_i$. 
-	Das heißt $C_*(M)=\colim_{i \in \mathbb{N}} C_*(U_i)$ und $H_*(M)= \colim_{i \in \mathbb{N}} H_*(U_i)$.
+	Das heißt $C_*(M)=\colim_{\mathbb{N}} C_*(U_i)$ und $H_*(M)= \colim_{i \in \mathbb{N}} H_*(U_i)$.
 	Ebenso liegt jede kompakte Teilmenge von $M$ schon in einem $U_i$.
 	Daher ist $H^*_c(M) = \colim_{i \in \mathbb{N}} H^*_c(U_i)$. 
 	Nun ist $\PD_M = \colim_{i \in \mathbb{N}} \PD_{U_i}$ ein Isomorphismus.
 \end{beweis}
 % section 8 (end)
+\newpage
 
+\section{Mannigfaltigkeiten mit Rand} % (fold)
+\label{sec:9}
+
+\begin{definition}[{name=[Mannigfaltigkeit mit Rand]}]
+	Eine \bet{$n$-Mannigfaltigkeit mit Rand}\index{Mannigfaltigkeit mit Rand} $M$ ist ein topologischer Hausdorffraum, der das zweite Abzählbarkeitsaxiom erfüllt und folgende lokale Eigenschaft hat: 
+	Zu jedem Punkt $x \in M$ gibt es eine Umgebung $U \subseteq M$, die homöomorph ist zu einer offenen Teilmenge in $\mathbb{R}^{n-1} \times [0,\infty)$ ist.
+	Die Punkte $x$, für die $U$ homöomorph zu einer offenen Teilmenge des $\mathbb{R}^n$ gewählt werden kann, heißen \Index{innere Punkte}; alle anderen \Index{Randpunkte}.
+	Wir schreiben $\mathring{M} \subseteq M$ für die inneren Punkte und $\partial M := M \setminus \mathring{M}$.  \todo{Revision 9}
+\end{definition}
+
+\begin{bemerkung}[{name=[Der Rand ist eine $(n-1)$-Mannigfaltigkeit]}]
+	$\mathring{M}$ ist eine $n$-Mannigfaltigkeit und $\partial M$ ist eine $(n-1)$-Mannigfaltigkeit.
+\end{bemerkung}
+
+\begin{beispiel}[{name=[Mannigfaltigkeit mit Rand]}]
+	Sei $D^n = \set*{x \in \mathbb{R}^n \given \norm*{x}\le 1}$. Dann ist $\partial D^n = S^{n-1}$.
+	Für $M \times D^n$ ist $\partial (M \times D^n) = M \times S^{n-1}$, wenn $M$ eine Mannigfaltigkeit ohne Rand ist.
+\end{beispiel}
+
+\begin{frage}
+	Welche geschlossenen $n$-Mannigfaltigkeiten sind Rand einer kompakten $(n+1)$"=Mannigfaltigkeit?
+\end{frage}
+
+\begin{satz}[name={Kragensatz},label=kragensatz]
+	Sei $M$ eine kompakte Mannigfaltigkeit mit Rand $\partial M$. 
+	Dann gibt es eine offene Umgebung $U \subseteq M$ von $\partial M$ und einem Homöomorphismus $\varphi \colon \partial M \times [0,1) \to U$ mit ${\varphi(x,0)=x}$.
+\end{satz}
+\begin{beweis}[name={Skizze}]
+	Sei $M' := M \cup_{\partial M} (\partial M \times [0,1])$.
+	Es genügt einen Homöomorphismus $M \cong M'$ mit $x \mapsto (x,0)$ für $x \in \partial M$ zu finden. 
+	Da $M$ kompakt ist, gibt es $\varphi_1, \ldots , \varphi_l \colon \partial M \to [0,1]$, sodass die $\varphi_i^{-1}\enbrace*{(0,1]}$ eine offene Überdeckung von $\partial M$ bilden und jedes $V_i$ in einer zu $\mathbb{R}^{n-1} \times [0,\infty)$ homöomorphen offenen Menge in $M$ liegt. 
+	Nach Normalisierung können wir annehmen, dass $\varphi_1 + \ldots + \varphi_l =1$ ist.
+	Für $0 \le k \le l$ sei $\psi_k := \varphi_1 + \ldots \varphi_k$ und 
+	\[
+		M_k := M \cup \set[\big]{(x,t) \given x \in \partial M, t \le \psi_k(x)}
+	\]
+	Nun zeigt man $M_{k-1} \cong M_k$ für $k=1,\ldots ,l$.
+\end{beweis}
+
+\begin{bemerkung}[{name=[Orientierung einer Manngifaltigkeit mit Rand]}]
+	Sei $M$ eine Mannigfaltigkeit mit Rand. 
+	Eine $R$-Orientierung von $M$ ist eine $R$-Orientierung von $\mathring{M}$.
+	Zu einer $R$-Orientierung $\set*{\mu_x}_{x \in \mathring{M}}$ gibt es, falls $M$ kompakt ist, eine eindeutige Orientierungsklasse $\mu \in H_n(M, \partial M)$ mit $\mu|_x = \mu_x$ für alle $x \in \mathring{M}$.
+\end{bemerkung}
+
+\begin{lemma}[{name=[Orientierbarkeit des Randes]}]
+	Sei $M$ eine $R$-orientierbare kompakte Mannigfaltigkeit mit Rand.
+	Dann ist auch $\partial M$ $R$-orientierbar.
+\end{lemma}
+\begin{beweis}
+	Sei $N$ eine Zusammehangskomponente von $\partial M$.
+	Mit $M$ ist nach dem \hyperref[kragensatz]{Kragensatz} auch $N \times [0,1]$ orientierbar.
+	Nun betrachte einen Teil der Paarfolge zu $\enbrace*{N \times [0,1], \partial (N \times [0,1])}$
+	\[
+		\begin{tikzcd}[sep=1.8em]
+			\underset{=H_n(N)=0}{H_n(N \times [0,1])} \rar & \underset{\neq 0}{H_n \enbrace[\big]{N \times [0,1], N \times \set*{0,1}}} \rar & \underset{= H_{n-1}(N) \oplus H_{n-1}(N) \neq 0}{H_{n-1} \enbrace[\big]{N \times \set*{0,1}}} \rar & H_{n-1} \enbrace*{N \times [0,1]}
+		\end{tikzcd}
+	\]
+	Damit ist $H_n(N)\neq 0$ und $N$ ist $R$-orientierbar.
+\end{beweis}
+\begin{satz}[{name={Poincaré-Dualität für Mannigfaltigkeiten mit Rand}}]
+	Sei $M$ eine kompakte $R$"=orientierbare $n$-Mannigfaltigkeit, deren Rand $\partial M$ die Vereinigung von zwei $(n-1)$-Mannigfaltigkeiten $\partial_0 M$ und $\partial_1 M$ entlang ihres gemeinsamen Randes 
+	\[
+		\partial \enbrace*{\partial_0 M } = \partial \enbrace*{\partial_1 M} = \partial_0 M \cap \partial_1 M
+	\]
+	ist.
+	Sei $\mu \in H_n(M, \partial M)$ eine Orientierungsklasse für $M$. 
+	Dann erhalten wir einen Isomorphismus 
+	\[
+		\capp \mu \colon H^k \enbrace*{M, \partial_0 M} \grenzw{\cong} H_{n-k} \enbrace*{M, \partial_1 M}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei zunächst $\partial_1 M = \emptyset$, also $\partial _0 M = \partial M$.
+	Betrachte 
+	\[
+		\begin{tikzcd}[column sep=3em, row sep=2.8em]
+			\displaystyle H_c^k \enbrace*{M \setminus\partial M} = \smashoperator[r]{\colim_{K \subseteq M \setminus \partial M,\text{ kpt.} }}\,\, H^k(M, M \setminus K) \dar["\PD_{M \setminus \partial M}","\cong"']  \rar["\cong","(\star)"'] & H^k(M, \partial M) \dar["\capp \mu"] \\
+			H_{n-k}\enbrace*{M\setminus \partial M}\rar["\cong","\text{Kragensatz}"'] & H_{n-k}(M)
+		\end{tikzcd}
+	\]
+	zu $(\star)$: Wähle einen Kragen $\partial M \subseteq U \overset{\varphi}{\cong} \partial M \times [0,1)$ und setze $K_\varepsilon := M \setminus \varphi \enbrace*{\partial M \times [0,\varepsilon)}$.
+	Dann sind die $K_\varepsilon$ in der gerichteten Menge aller kompakten Teilmengen von $M \setminus \partial M$ kofinal, also 
+	\[
+		\colim_{K \subseteq M \setminus \partial M,\text{ kpt.} } H^k(M, M \setminus K) = \colim_{\varepsilon\to 0} H^k(M,M \setminus K_\varepsilon) \cong H^k(M, \partial M) 
+	\]
+	Für $\partial_1 M \neq \emptyset$ benutzen wir die Paar- sowie die Tripelfolge:
+	\[
+		\begin{tikzcd}
+			\ldots \rar & H^k(M, \partial M) \rar \ar[dd,"\capp \mu","\cong"'] & H^k(M,\partial_0 M) \rar \ar[dd,"\capp \mu","\cong"']& H^k(\partial M,\partial_0 M) \rar  \dar[phantom,sloped,"\cong"]& \ldots  \\
+			& & & H^k \enbrace*{\partial_1 M, \partial \partial_1 M} \dar["\PD_{\partial_1 M}","\cong"'] \\
+			\ldots \rar & H_{n-k}(M) \rar & H_{n-k}(M,\partial_1 M) \rar & H_{n-k-1}(\partial_1 M) \rar & \ldots 
+		\end{tikzcd}
+	\]
+	wobei der Isomorphismus oben rechts durch Ausschneidung und Kragensatz zustande kommt.
+\end{beweis}
+% section 9 (end)
 
 
 
