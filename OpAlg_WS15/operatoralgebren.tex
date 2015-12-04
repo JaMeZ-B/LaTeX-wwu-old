@@ -482,7 +482,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\]
 \end{beweis}
 
-\begin{korollar}[{name=[höchstens eine $C^*$-Norm]}]
+\begin{korollar}[{name=[höchstens eine $C^*$-Norm]},label=korr:212]
 	Auf einer ${}^*$-Algebra gibt es höchstens eine $C^*$-Norm.
 \end{korollar}
 \begin{beweis}
@@ -1267,7 +1267,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Klar.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:53]
 	Sei $\varphi$ ein positives Funktional auf $A$. Dann gilt 
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\varphi$ ist beschränkt,
@@ -1530,7 +1530,123 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		&= \norm*{\pi_{\overline{\varphi}}(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \le \norm*{\pi_u(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}
 	\end{align}
 	Damit ist $\pi_u$ injektiv, also treu.
+	Falls $A$ separabel ist, so wählen wir eine abzählbare dichte Teilmenge $\set*{a_0,a_1,\ldots } \subset A^1$ und Zustände $\varphi_0, \varphi_1,\ldots \in S(A)$ mit $\varphi_i(a_i^*a_i) = \norm*{a_i^*a_i}= \norm*{a_i}^2$. 
+	Für $a \in A^1$ existiert dann ein $i \in \mathbb{N}$ mit $\varphi_i(a^*a) \ge \sfrac{1}{2} \norm*{a}^2$.
+	Dann ist 
+	\[
+		\norm*{\pi_{\varphi_i}(a)} \ge \norm*{\pi_{\varphi_i}(a) \lim_\lambda \enbrace*{e_\lambda + N_{\varphi_i}}}_{\mathcal{H}_{\varphi_i}}
+		= \varphi_i \enbrace*{a^*a}^{\sfrac{1}{2}} \ge \frac{1}{\sqrt{2}} \norm*{a}
+	\]
+	Wir definieren $\mathcal{H}_{\sep} := \bigoplus_{\mathbb{N}} \mathcal{H}_{\varphi_i}$ und $\pi_{\sep} \colon A \to \mathcal{B}(\mathcal{H}_{\sep})$ durch 
+	\[
+		\pi_{\sep}(a) \enbrace[\big]{(\eta_i)_{i \in \mathbb{N}}} := \enbrace[\big]{\pi_{\varphi_i}(a)(\eta_i)}_{i \in \mathbb{N}}
+	\]
+	Mit obiger Ungleichung folgt $\norm*{\pi_{\sep}(a)} \ge \sfrac{1}{\sqrt{2}} \norm*{a}$ und damit ist $\pi_{\sep}$ treu.
 \end{beweis}
+
+\begin{korollar}[{name=[Matrizen über einer C^*-Algebra]}]
+	Sei $A$ eine $C^*$-Algebra und $n\ge 1$ eine natürliche Zahl.
+	Dann ist $M_n(A)$ eine $C^*$-Algebra mit Operationen 
+	\[
+		(a_{ij}) \cdot (b_{ij}) = \enbrace*{\sum_{k=1}^{n} a_{ik} b_{kj}}_{ij} \quad \text{ und } \quad (a_{ij})^*_{ij} = (a_{ji}^*)_{ij}
+	\]
+	Wegen \autoref{korr:212} ist die $C^*$-Norm auf $M_n(A)$ eindeutig.
+\end{korollar}
+\begin{beweis}
+	Sei $(\mathcal{H}_u,\pi_u)$ die universelle Darstellung von $A$.
+	Definiere 
+	\[
+		\pi_u^\ssbrace{n} \colon M_n(A) \longrightarrow M_n \enbrace[\big]{ \mathcal{B} \enbrace*{\mathcal{H}_u}} \longrightarrow \mathcal{B} \enbrace*{\mathcal{H}_u^{\oplus n}}
+	\]
+	durch $(a_{ij})_{ij} \longmapsto \enbrace[\big]{\pi_u(a_{ij})}_{ij} \longmapsto \pi_u^\ssbrace{n} \enbrace[\big]{(a_{ij})_{ij}}$, wobei 
+	\[
+		\pi_u^n \enbrace[\big]{(a_{ij})_{ij}} \begin{pmatrix}
+			j_1 \\ \vdots \\ j_n
+		\end{pmatrix} = \enbrace*{\sum_{j} \pi_u(a_{ij}) j_i}
+	\]
+	Damit ist $\pi_u^\ssbrace{n}$ ein $^*$-Homomorphismus: $\pi_u^\ssbrace{n}$ ist injektiv, da $\pi_u$ injektiv ist (genauer?).
+	Nun definiert 
+	\[
+		\norm*{(a_{ij})_{ij}}_{M_n(A)} := \norm*{\pi_u^\ssbrace{n} \enbrace[\big]{(a_{ij})_{ij}}}_{\mathcal{B} (\mathcal{H}_u^{\oplus n})} 
+	\]
+	eine $^*$-Algebra Norm, welche die $C^*$-Bedingung erfüllt.
+	Weiter gilt für $i,j =1,\ldots n$
+	\begin{align}
+		\norm*{a_{ij}}_A =  \norm*{\pi_u(a_{ij})}_{\mathcal{B}(\mathcal{H}_u)} \le \norm*{\pi_u^\ssbrace{n} \enbrace[\big]{(a_{kl})_{kl}}}_{\mathcal{B} (\mathcal{H}_u^{\oplus n})}
+		= \norm*{(a_{kl})_{kl}}_{M_n(A)} &\le \sum_{k,l} \norm*{\pi_u(a_{kl})}_{\mathcal{B}(\mathcal{H}_u)} \\
+		&= \sum_{k,l} \norm*{a_{kl}}_A
+	\end{align}
+	Mit der Vollständigkeit von $A$ folgt, dass $M_n(A)$ vollständig ist bezüglich $\norm*{\cdot}_{M_n(A)}$.
+\end{beweis}
+
+\begin{korollar}[{name=[selbstadjungiert und positiv mittels Zuständen]}]
+	Sie $A$ eine $C^*$-Algebra und $a \in A$.
+	Dann gilt
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $a \in A_{\sa}$ genau dann, wenn $\varphi(a) \in \mathbb{R}$ für jeden Zustand $\varphi \in S(A)$.
+		\item $a \in A_+$ genau dann, wenn $\varphi(a) \ge 0$ ist für jeden Zustand $\varphi \in S(A)$.
+	\end{enumerate}
+\end{korollar}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Die erste Implikation folgt mit \autoref{satz:53} (ii).
+		Für die umgekehrte Implikation betrachte $i(a-a^*) \in A_{\sa}$. Dann gilt für $\varphi \in S(A)$
+		\begin{align}
+			\varphi \enbrace*{i \cdot (a- a^*)} = i \enbrace*{\varphi(a) - \varphi(a^*)} = i \cdot  \enbrace*{\varphi(a) - \overline{\varphi(a)}} =0
+		\end{align}
+		Mit \autoref{satz:55} folgt $i \cdot (a-a^*)=0$ und damit $a=a*$.
+		\item Hier ist die erste Implikation trivial. 
+		Für die umgekehrte Implikation sei $(\mathcal{H}_u,\pi_u)$ die universelle Darstellung von $A$. 
+		Für $\xi \in \mathcal{H}_u$ ist $\varphi_\xi \colon A \to \mathbb{C}$, $b \mapsto \skal*{\xi}{\pi_u(b)\xi}$ ein positives Funktional, also $\skal*{\xi}{\pi_u(a)\xi}=  \varphi_\xi(a)\ge 0$ für $\xi \in \mathcal{H}_u$.
+		Sei $\lambda<0$ und $\xi\in \mathcal{H}_u$.
+		Dann gilt 
+		\begin{align}
+			\norm[\big]{\enbrace*{\pi_u(a)-\lambda} \xi}^2_{\mathcal{H}_u} = \skal[\big]{\enbrace*{\pi_u(a)-\lambda}\xi}{ \enbrace*{\pi_u(a)-\lambda}\xi} &= \norm*{\pi_u(a)\xi}^2 + \abs*{\lambda}^2 \norm*{\xi} - 2\lambda \cdot \skal*{\xi}{\pi_u(a)\xi} \\[-.5em]
+			&\ge \abs*{\lambda}^2 \cdot \norm*{\xi} 
+		\end{align}
+		Damit folgt $\ker \enbrace*{\pi_u(a)-\lambda}= \set*{0}$ und $\enbrace*{\pi_u(a)-\lambda}(\mathcal{H}_u) \subset \mathcal{H}_u$ ist abgeschlossen.
+		Also ist 
+		\[
+			\im \enbrace*{\pi_u(a)-\lambda} = \enbrace[\big]{\ker \enbrace*{\pi_u(a)-\lambda}^*}^\bot = \enbrace[\big]{\ker \enbrace*{\pi_u(a)-\lambda}}^\bot = \mathcal{H}_u
+		\]
+		und folglich ist $\pi_u(a)-\lambda$ surjektiv und somit auch invertierbar,  $\lambda$ also kein Element des Spektrums von $\pi_u(a)$. 
+		Da $\pi_u$ isometrisch ist, ist $\lambda$ auch kein Element von $\sigma(a)$, also $a \ge 0$.\qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{beispiel}[{name=[Toeplitz-Algebra]}]
+	Sei $\mathcal{H}= \ell^2(\mathbb{N})$ mit der Standard-Orthonormalbasis $(\eta_i)_{i \in \mathbb{N}}$.
+	Definiere den unilateralen Shift\index{unilateraler Shift} $v \in \mathcal{B}(\mathcal{H})$ durch $v(\eta_i) := \eta_{i+1}$.
+	Dann ist $v^* \in \mathcal{B}(\mathcal{H})$ gegeben durch 
+	\[
+		v^*(\eta_i) = \begin{cases}
+			\eta_{i-1} &\text{ falls }i\ge 1\\
+			0 &\text{ sonst }
+		\end{cases}
+	\]
+	Es gilt $v^*v=\ind_{\mathcal{B}(\mathcal{H})}(= \id)$ und $\ind -vv^* = p_{\eta_0}=e_{00} \in \mathcal{K} = \mathcal{K} \enbrace*{\ell^2(\mathbb{N})}$.
+	Sei $\mathcal{T} := C^*(v) \subset \mathcal{B} \enbrace*{\ell^2(\mathbb{N})}$ die \Index{Toeplitz-Algebra} und $J := \langle \ind - vv^* \rangle \lhd \mathcal{T}$ das von $\ind-vv^*$ in $\mathcal{T}$ erzeugte (abgeschlossene zweiseitige) Ideal.
+	Dann gilt $J=\mathcal{K}$: Offensichtlich ist $J \subset \mathcal{K}$, denn $\ind -vv^* \in J$.\marginnote{$e_{ij}(\eta_k) =\delta_{jk} \eta_i$}
+	Für $e_{ij} \in \mathcal{K}$ gilt $e_{ij} = v^i(\ind-vv^*)(v^*)^j \in J$ (Überprüfen auf Basiselementen).
+	Damit ist
+	\[
+		\mathcal{K}=\overline{\Span \set*{e_{ij}}} \subset J
+	\]
+	Für die Quotientenabbildung $\pi \colon \mathcal{T} \to \sfrac{\mathcal{T}}{J}$ gilt $\sfrac{\mathcal{T}}{J} = C^* \enbrace[\big]{\pi(v)}$ und $\pi(\ind - vv^*)=0$, also ist 
+	\[
+		\pi(v)^* \pi(v)= \ind_{\sfrac{\mathcal{T}}{J}} =  \pi(v)\pi(v^*)
+	\]
+	und damit ist $\pi(v) \in \sfrac{\mathcal{T}}{J}$ unitär.
+	Man zeigt $\sigma \enbrace[\big]{\pi(v)} = \mathbb{T}$ und man erhält $\sfrac{\mathcal{T}}{J} \cong C(\mathbb{T})$.
+	Wir haben eine kurze exakte Sequenz von $C^*$-Algebren
+	\[
+		\begin{tikzcd}
+			0 \rar & \mathcal{K} \rar & \mathcal{T} \rar & C(\mathbb{T}) \rar & 0
+		\end{tikzcd}
+	\]
+	Für jede unitale $C^*$-Algebra $A$ mit einer Isometrie $w$ ($w^*w=\ind$) existiert ein $^*$-Homomorphismus $\varphi\colon\mathcal{T}\to A$ mit $\varphi(v)=w$ (Satz von Coburn).
+\end{beispiel}
 % section 5 (end)
 
 
