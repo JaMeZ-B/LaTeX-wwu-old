@@ -1042,7 +1042,7 @@
 	Genauso wie beim $\cup$-Produkt.
 \end{beweis}
 
-\begin{bemerkung} \leavevmode
+\begin{bemerkung}[label=bem_augmentation_cap] \leavevmode
 	\begin{itemize}
 		\item Sind $A,B \subseteq X$ offen, so erhalten wir auch ein $\capp$-Produkt
 		\[
@@ -1178,18 +1178,18 @@ Ab jetzt: $R$ kommutativ!
 \section{Kohomologie mit kompaktem Träger} % (fold)
 \label{sec:7}
 
-\begin{bemerkung}
-	Am Beweis der Poincaré-Dualtität hindern uns momentan noch folgende Probleme, die wir in diesem Kapitel \enquote{umschiffen} wollen \todo{Revision 7}
-	\begin{itemize}
-		\item Es ist für $n>0$ $H^{n-*}(\mathbb{R}^n) \cong H_*(\mathbb{R}^n)$
+\begin{bemerkung}[{name=[Probleme beim Beweis der Poincaré-Dualität]}]
+	Am Beweis der Poincaré-Dualtität hindern uns momentan noch folgende Probleme, die wir in diesem Kapitel durch eine Abwandlung von Kohomologie \enquote{umschiffen} wollen: 
+	\begin{itemize}[itemsep=0pt]
+		\item Für $n>0$ ist  $H^{n-*}(\mathbb{R}^n) \ncong H_*(\mathbb{R}^n)$
 		\item Es gibt keine Fundamentalklasse in $H_n(\mathbb{R}^n)$.
 	\end{itemize}
 \end{bemerkung}
 
-\begin{erinnerungA}
-	Sei $M$ eine (nicht notwendig kompakte) Mannigfaltigkeit und $K \subseteq M$ kompakt. Sei $n := \dim M$. Es gilt
+\begin{erinnerungA}[{name=[Orientierungsklassen für kompakte Teilmengen]}]
+	Sei $M$ eine (nicht notwendig kompakte) $n$-Mannigfaltigkeit und $K \subseteq M$ eine kompakte Teilmenge. Dann gilt nach Lemma 16.13 aus Topologie \RM{1}.:
 	\begin{enumerate}[(i)]
-		\item Ist $(\mu_x)_{x \in M}$ eine $R$-Orientierung von $M$, so gibt es eine eindeutige Klasse $\mu_K \in H_n(M,M \setminus K;R)$ mit 
+		\item Ist $(\mu_x)_{x \in M}$ eine $R$-Orientierung von $M$, so gibt es eine eindeutige Orientierungsklasse $\mu_K \in H_n(M,M \setminus K;R)$ mit 
 		\[
 			\mu_K\big|_x = \mu_x \in H_n(M,M \setminus \set*{x};R)
 		\]
@@ -1198,13 +1198,12 @@ Ab jetzt: $R$ kommutativ!
 	\end{enumerate}
 \end{erinnerungA}
 
-\begin{beispiel}
-	Sei $B=B_R(x_0)$ ein kompakter Ball in $\mathbb{R}^n$. 
-	Dann ist $H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R) \cong R$ und jeder Erzeuger $\mu_B \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R)$ ist eine Fundamentalklasse über $B$.
-	$\mu_B|_x \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set*{x};R)$ ist ein Erzeuger für $x \in B$.
+\begin{beispiel}[{name=[Fundamentalklasse eines kompakten Balls]}]
+	Sei $B=B_r(x_0)$ ein kompakter Ball im $\mathbb{R}^n$. 
+	Dann ist $H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R) \cong R$ und jeder Erzeuger $\mu_B \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R)$ ist eine Fundamentalklasse über $B$, also ist jede Einschränkung $\mu_B|_x \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set*{x};R)$ ein Erzeuger für $x \in B$.
 \end{beispiel}
 
-\begin{lemma}
+\begin{lemma}[{name=[Isomorphismus von Kohomologie und Homologie für kompakte Bälle]}]
 	Sei $B \subseteq \mathbb{R}^n$ ein kompakter Ball und $\mu_B \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R)$ ein Erzeuger. Dann ist 
 	\[
 		\capp \mu_B \colon H^k \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R} \longrightarrow H_{n-k}(\mathbb{R}^n;R)
@@ -1214,36 +1213,37 @@ Ab jetzt: $R$ kommutativ!
 \begin{beweis}
 	Es genügt $k=n$ zu betrachten, denn andernfalls sind beide Moduln trivial. Da die Auswertungsabbildung 
 	\[
-		H^n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R) \longrightarrow \Hom_R \enbrace*{H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R),R}
+		H^n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R) \longrightarrow \Hom_R \enbrace[\big]{H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R),R}
 	\]
-	immer surjektiv ist, gibt es $\xi \in H^n \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R}$ mit $\xi(\mu_B)=1$. 
-	Also $\epsilon(\xi \capp \mu_B)=1$. Folglich ist $\xi \capp \mu_B$ ein Erzeuger von $H^0(\mathbb{R}^n;R)$ und $\capp \mu_B$ ein Isomorphismus.
+	immer surjektiv ist nach \autoref{eig_kohomo_to_hom_homo}, gibt es $\xi \in H^n \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R}$ mit $\xi(\mu_B)=1$. 
+	Also ist $\epsilon(\xi \capp \mu_B)=1$ (siehe \ref{bem_augmentation_cap}). 
+	Folglich ist $\xi \capp \mu_B$ ein Erzeuger von $H^0(\mathbb{R}^n;R)$ und $\capp \mu_B$ ein Isomorphismus.
 \end{beweis}
 
 \begin{definition}[{name=[gerichtete Menge]}]
-	Eine \Index{gerichtete Menge} ist eine Menge $\Lambda$ zusammen mit einer partiellen Ordnung \enquote{$\le$}, sodass es für alle $\lambda,\lambda' \in \Lambda$ ein $\mu \in \Lambda$ mit $\lambda \le \mu $ und $\lambda' \le \mu$.
+	Eine \Index{gerichtete Menge} ist eine Menge $\Lambda$ zusammen mit einer partiellen Ordnung \enquote{$\le$}, sodass es für alle $\lambda,\lambda' \in \Lambda$ ein $\mu \in \Lambda$ existiert mit $\lambda \le \mu $ und $\lambda' \le \mu$.
 \end{definition}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[für gerichtete Mengen]}]
 	Es gibt zahlreiche Beispiele für gerichtete Mengen
 	\begin{itemize}[itemsep=0pt] 
-		\item $(N,\le)$, $(\mathbb{Z},\le)$, $(\mathbb{Q},\le)$ und $(\mathbb{R},\le)$ mit der üblichen Ordnung
-		\item $\mathcal{K}(X)= \set*{K \subseteq X \given K \text{ kompakt}}$ mit \enquote{$\subseteq$}
+		\item $(N,\le)$, $(\mathbb{Z},\le)$, $(\mathbb{Q},\le)$ und $(\mathbb{R},\le)$ mit der üblichen Ordnung.
+		\item Sei $X$ ein topologischer Raum. Dann ist $\mathcal{K}(X)= \set*{K \subseteq X \given K \text{ kompakt}}$ gerichtet durch \enquote{$\subseteq$}.
 	\end{itemize}
 \end{beispiel}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Gerichtete Mengen als kleine Kategorie]}]
 	Wir können jede gerichtete Menge $(\Lambda,\le)$ als eine kleine Kategorie auffassen: 
 	Die Menge der Objekte ist $\Lambda$ und es gibt genau dann einen Morphismus $i_\lambda^{\lambda'} \colon \lambda \to \lambda'$, falls $\lambda \le \lambda'$ ist. 
 	Andernfalls gibt es keine Morphismen.
 \end{bemerkung}
 
 \begin{definition}[{name=[Kolimes]}]
-	Sei $(\Lambda,\le)$ eine gerichtete Menge und $F \colon (\Lambda,\le) \to R\text{-}\MOD$ ein Funktor. Der \Index{Kolimes} von $F$ ist definiert als 
+	Sei $(\Lambda,\le)$ eine gerichtete Menge und $F \colon (\Lambda,\le) \to R\text{-}\MOD$ ein Funktor. Der \Index{Kolimes} von $F$ ist dann definiert als 
 	\[
-		\colim_\Lambda F := \Faktor{\coprod_{\lambda \in \Lambda}F(\lambda)}{v \sim F \enbrace{i_\lambda^{\lambda'}}(v), v \in F(\lambda), \lambda \le \lambda'}
+		\colim_\Lambda F \coloneqq \faktor{\coprod_{\lambda \in \Lambda}F(\lambda)}{ \begin{array}{l}  \scriptstyle v \sim F \enbrace{i_\lambda^{\lambda'}}(v), \\[-3pt]  \scriptstyle\text{für } v \in F(\lambda), \lambda \le \lambda' \end{array}}
 	\]
-	Für $\lambda \in \Lambda$ sei $s_{\lambda_0} \colon F(\lambda) \to \colim_\Lambda F$ die Komposition von der Inklusion $F(\lambda_0) \to \coprod_{\lambda \in \Lambda}F(\lambda)$ mit der Projektion $\coprod_{\lambda \in \Lambda}F(\lambda) \twoheadrightarrow \colim_\Lambda F$. Durch
+	Für $\lambda_0 \in \Lambda$ sei $s_{\lambda_0} \colon F(\lambda) \to \colim_\Lambda F$ die Komposition von der Inklusion $F(\lambda_0) \hookrightarrow \coprod_{\lambda \in \Lambda}F(\lambda)$ mit der Projektion $\coprod_{\lambda \in \Lambda}F(\lambda) \twoheadrightarrow \colim_\Lambda F$. Durch
 	\begin{align}
 		r \cdot s_\lambda(v) &\coloneqq s_\lambda(r \cdot v) \quad \text{ und} \\
 		s_\lambda(v) + s_{\lambda'}(v') &\coloneqq s_\mu \enbrace*{F(i_\lambda^{\mu})(v) + F(i_{\lambda'}^\mu)(v')} 
@@ -1257,19 +1257,21 @@ Ab jetzt: $R$ kommutativ!
 		\item Nicht jede kleine Kategorie gehört zu einer gerichteten Menge:
 		\begin{enumerate}[(i)]
 			\item Die von der Gruppe $\sfrac{\mathbb{Z}}{2}$ erzeugte Kategorie mit einem Objekt und den Gruppenelementen als Morphismen.
-			\item \todo{Kategorie mit zwei Objekten und keinen nichttrivialen Morphismen}
+			\item Die Kategorie bestehen aus zwei Objekten und keinem Morphismus, der nicht eine Identität ist.
 		\end{enumerate}
 		\item Der Kolimes über gerichtete Mengen ist eine Spezialfall des Kolimes über kleine Kategorien aus den Übungen. 
 		Insbesondere hat der Kolimes über gerichtete Mengen einen universelle Eigenschaft, die ihn charakterisiert.
 		\item Sei $v_\lambda \in F(\lambda)$. Dann gilt
-		\[
+		\(
 			s_\lambda(v_\lambda) =0 \in \colim_\Lambda F \iff \exists \lambda' : \lambda \le \lambda', F(i_\lambda^{\lambda'})(v_\lambda)=0 \in F(\lambda')
-		\]
+		\).
+		\item Sei $\FUN \enbrace*{(\Lambda,\le),R\text{-}\MOD}$ die Kategorie der Funktoren und natürlichen Transformationen von $(\Lambda,\le)$ nach.
+		Die Definition des Kolimes ist natürlich und definiert damit einen Funktor $\colim_\Lambda \colon \FUN \enbrace*{(\Lambda,\le),R\text{-}\MOD} \to R\text{-}\MOD$.
 	\end{itemize}
 \end{bemerkung}
 
 \begin{definition}[{name=[kofinal]}]
-	Sei $(\Lambda,\le)$ eine gerichtete Menge. $\Lambda_0 \subseteq \Lambda$ heißt \Index{kofinal}, falls es zu jedem $\lambda \in \Lambda$ ein $\lambda_0 \in \Lambda_0$ gibt mit $\lambda\le \lambda_0$. 
+	Sei $(\Lambda,\le)$ eine gerichtete Menge. $\Lambda_0 \subseteq \Lambda$ heißt \Index{kofinal}, falls es zu jedem $\lambda \in \Lambda$ ein $\lambda_0 \in \Lambda_0$ gibt mit $\lambda\le \lambda_0$.\todo{Revision 7}
 \end{definition}
 
 \begin{lemma}
