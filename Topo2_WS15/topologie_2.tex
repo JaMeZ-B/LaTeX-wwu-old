@@ -1029,7 +1029,7 @@
 \end{beweis}
 
 \begin{lemma}
-	Sei $A \subseteq X$. Das $\capp$-Produkt auf $C^*$ induziert folgende $\cap$-Produkte in $H^*$
+	Sei $A \subseteq X$. Das $\capp$-Produkt auf $C^*$ induziert folgende $\capp$-Produkte in $H^*$
 	\[
 		\begin{tikzcd}[row sep=0em]
 			\minwidthbox{H^p(X;R) \otimes_R H_n(X;R)}{4.2cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
@@ -1039,7 +1039,7 @@
 	\]
 \end{lemma}
 \begin{beweis}
-	Genauso wie beim $\cup$-Produkt.
+	Genauso wie beim $\cupp$-Produkt.
 \end{beweis}
 
 \begin{bemerkung}[label=bem_augmentation_cap] \leavevmode
@@ -1057,7 +1057,7 @@
 \end{bemerkung}
 
 \begin{lemma}
-	Für $f \colon X \to Y$ stetig gilt $\xi \capp f_*(x) = f_* \enbrace*{f^* \xi \capp x}$ für $\xi \in H^p(X;R)$ und $x \in H_{p+q}(X;R)$.
+	Für $f \colon X \to Y$ stetig gilt $\xi \capp f_*(x) = f_* \enbrace*{f^* \xi \capp x}$ für $\xi \in H^p(Y;R)$ und $x \in H_{p+q}(X;R)$.
 \end{lemma}
 
 \begin{lemma}
@@ -1238,8 +1238,8 @@ Ab jetzt: $R$ kommutativ!
 	Andernfalls gibt es keine Morphismen.
 \end{bemerkung}
 
-\begin{definition}[{name=[Kolimes]}]
-	Sei $(\Lambda,\le)$ eine gerichtete Menge und $F \colon (\Lambda,\le) \to R\text{-}\MOD$ ein Funktor. Der \Index{Kolimes} von $F$ ist dann definiert als 
+\begin{definition}[{name=[gerichteter Kolimes]}]
+	Sei $(\Lambda,\le)$ eine gerichtete Menge und $F \colon (\Lambda,\le) \to R\text{-}\MOD$ ein Funktor. Der \bet{gerichtete Kolimes}\index{gerichteter Kolimes} von $F$ ist dann definiert als 
 	\[
 		\colim_\Lambda F \coloneqq \faktor{\coprod_{\lambda \in \Lambda}F(\lambda)}{ \begin{array}{l}  \scriptstyle v \sim F \enbrace{i_\lambda^{\lambda'}}(v), \\[-3pt]  \scriptstyle\text{für } v \in F(\lambda), \lambda \le \lambda' \end{array}}
 	\]
@@ -1257,7 +1257,7 @@ Ab jetzt: $R$ kommutativ!
 		\item Nicht jede kleine Kategorie gehört zu einer gerichteten Menge:
 		\begin{enumerate}[(i)]
 			\item Die von der Gruppe $\sfrac{\mathbb{Z}}{2}$ erzeugte Kategorie mit einem Objekt und den Gruppenelementen als Morphismen.
-			\item Die Kategorie bestehen aus zwei Objekten und keinem Morphismus, der nicht eine Identität ist.
+			\item Die Kategorie bestehend aus zwei Objekten und keinem Morphismus, der nicht eine Identität ist.
 		\end{enumerate}
 		\item Der Kolimes über gerichtete Mengen ist eine Spezialfall des Kolimes über kleine Kategorien aus den Übungen. 
 		Insbesondere hat der Kolimes über gerichtete Mengen einen universelle Eigenschaft, die ihn charakterisiert.
@@ -1265,16 +1265,14 @@ Ab jetzt: $R$ kommutativ!
 		\(
 			s_\lambda(v_\lambda) =0 \in \colim_\Lambda F \iff \exists \lambda' : \lambda \le \lambda', F(i_\lambda^{\lambda'})(v_\lambda)=0 \in F(\lambda')
 		\).
-		\item Sei $\FUN \enbrace*{(\Lambda,\le),R\text{-}\MOD}$ die Kategorie der Funktoren und natürlichen Transformationen von $(\Lambda,\le)$ nach.
-		Die Definition des Kolimes ist natürlich und definiert damit einen Funktor $\colim_\Lambda \colon \FUN \enbrace*{(\Lambda,\le),R\text{-}\MOD} \to R\text{-}\MOD$.
 	\end{itemize}
 \end{bemerkung}
 
 \begin{definition}[{name=[kofinal]}]
-	Sei $(\Lambda,\le)$ eine gerichtete Menge. $\Lambda_0 \subseteq \Lambda$ heißt \Index{kofinal}, falls es zu jedem $\lambda \in \Lambda$ ein $\lambda_0 \in \Lambda_0$ gibt mit $\lambda\le \lambda_0$.\todo{Revision 7}
+	Sei $(\Lambda,\le)$ eine gerichtete Menge. $\Lambda_0 \subseteq \Lambda$ heißt \Index{kofinal}, falls es zu jedem $\lambda \in \Lambda$ ein $\lambda_0 \in \Lambda_0$ gibt mit $\lambda\le \lambda_0$.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}[{name=[Isomorphismus zum Kolimes einer kofinalen Teilmenge]}]
 	Sei $\Lambda_0 \subseteq \Lambda$ kofinal. Dann ist die kanonische Abbildung (induziert von der Inklusion $\coprod_{\lambda_0} F(\lambda_0) \hookrightarrow \coprod_{\lambda} F(\lambda)$)
 	\[
 		c \colon \colim_{\lambda_0 \in \Lambda_0} F(\lambda_0) \longrightarrow \colim_{\lambda \in \Lambda} F(\lambda)
@@ -1288,40 +1286,38 @@ Ab jetzt: $R$ kommutativ!
 	\[
 		v = s_{\lambda_0} \enbrace*{F(i_\lambda^{\lambda_0})(v_\lambda)} \in \im c
 	\]
-	Injektivität: Sei $v \in \ker c$. Sei also $\lambda_0 \in \Lambda_0$, $v_{\lambda_0} \in F(\lambda_0)$ mit $v=s_{\lambda_0}(v_{\lambda_0})$. 
+	Injektivität: Sei $v \in \ker c$. Dann existieren $\lambda_0 \in \Lambda_0$, $v_{\lambda_0} \in F(\lambda_0)$ mit $v=s_{\lambda_0}(v_{\lambda_0})$. 
 	Da $v \in \ker c$ ist, gibt es $\lambda \in \Lambda$ mit $\lambda_0 \le \lambda$ und $F(i_{\lambda_0}^{\lambda})(v_{\lambda_0}) =0$. 
 	Da $\Lambda_0 \subseteq \Lambda$ kofinal ist, gibt es $\lambda_0' \in \Lambda_0$ mit $\lambda \le \lambda_0$. 
 	Es folgt 
 	\begin{align}
 		F(i_{\lambda_0}^{\lambda_0'})(v_{\lambda_0}) = F (i_\lambda^{\lambda_0'} \circ i_{\lambda_0}^\lambda)(v_{\lambda_0}) = F(i_{\lambda}^{\lambda_0'}) \enbrace[\Big]{\Underbrace{F(i_{\lambda_0}^\lambda)(v_{\lambda_0})}{=0}} = 0
 	\end{align}
-	Es folgt $v=0$.
+	Es folgt $v=0$ und damit die Behauptung.
 \end{beweis}
 
-\begin{korollar}
-	Gibt es $\lambda_\infty \in \Lambda$ mit $\lambda \le \lambda_\infty$ für alle $\lambda \in \Lambda$, so ist $\colim_\Lambda F = F(\lambda_\infty)$
-\end{korollar}
-\begin{beweis}
-	$\set*{\lambda_\infty} \subseteq \Lambda$ ist kofinal.
-\end{beweis}
+\begin{korollarB}
+	Gibt es $\lambda_\infty \in \Lambda$ mit $\lambda \le \lambda_\infty$ für alle $\lambda \in \Lambda$, so ist $\colim_\Lambda F = F(\lambda_\infty)$.
+\end{korollarB}
 
-\begin{beispiel}\leavevmode
+\begin{beispiel}[{name=[Kolimiten]}]\leavevmode
 	\begin{itemize}
 		\item Sei $\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}$ die Menge aller endlichen Teilmengen der Menge $S$. 
 		Bezüglich $\subseteq$ ist $\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}$ gerichtet.
 		Sei $F \colon \enbrace*{\mathcal{P}\mkern-2.5mu_{\mathrm{endl}},\subseteq} \to R\text{-}\MOD$ definiert durch $F(S_0)=R[S_0]$ für $S_0 \subseteq S$ endlich. 
-		Dann ist $\colim_{\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}} F \cong R[S]$ mit $s_{s_0} \colon R[S_0]\to R(S)$ die von $S_0 \subseteq S$ induzierte Abbildung.
-		\item Sei $F \colon \mathbb{N} \to \mathbb{Z}\text{-}\MOD$ definiert durch $F(n)=\mathbb{Z}$ für alle $n$ und $F(i_n^{n'}) \colon \mathbb{Z} \to \mathbb{Z}$ ist Multiplikation mit $2^{n'-n}$.
+		Dann ist $\colim_{\mathcal{P}\mkern-2.5mu_{\mathrm{endl}}} F \cong R[S]$ und $s_{S_0} \colon R[S_0]\to R(S)$ ist die von $S_0 \subseteq S$ induzierte Abbildung.
+		\item Sei $F \colon \mathbb{N} \to \mathbb{Z}\text{-}\MOD$ definiert durch $F(n)=\mathbb{Z}$ für alle $n$ und $F(i_n^{n'}) \colon \mathbb{Z} \to \mathbb{Z}$ ist Multiplikation mit $2^{n'-n}$. 
+		Es ergibt sich also folgendes Bild:
 		\[
 			\begin{tikzcd}
 				\mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] &\mathbb{Z} \rar["2"] & \mathbb{Z} \rar["2"] & \ldots 
 			\end{tikzcd}
 		\]
-		Dann ist
+		Dann liefert $(n,z) \mapsto \frac{z}{2^n}$ eine Abbildung
 		\[
-			\colim F = \Faktor{\coprod_{n \in \mathbb{N}} \mathbb{Z}}{\sim} = \Faktor{\mathbb{N}\times \mathbb{Z}}{\scriptstyle(n,z) \sim (n',2^{n'-n} z), n < n'} \longrightarrow \mathbb{Z}\benbrace*{\sfrac{1}{2}} = \set*{\sfrac{a}{2^n}\given a \in \mathbb{Z}, n \in \mathbb{N} }
+			\colim F = \Faktor{\coprod_{\mathbb{N}} \mathbb{Z}}{\sim} = \Faktor{\mathbb{N}\times \mathbb{Z}}{\scriptstyle(n,z) \sim (n',2^{n'-n} z), n < n'} \grenzw{} \mathbb{Z}\benbrace*{\sfrac{1}{2}} = \set*{\sfrac{a}{2^n}\given a \in \mathbb{Z}, n \in \mathbb{N} }
 		\]
-		\item Ist $F$ konstant, also $F(i_\lambda^{\lambda'})=\id_{F(\lambda)}$ für alle $\lambda \le \lambda'$, so ist 
+		\item Ist $F$ konstant -- also $F(i_\lambda^{\lambda'})=\id_{F(\lambda)}$ für alle $\lambda \le \lambda'$ -- so ist 
 		\(
 			\colim_\Lambda F \cong F(\lambda)
 		\)
@@ -1334,7 +1330,7 @@ Ab jetzt: $R$ kommutativ!
 	\end{itemize}
 \end{beispiel}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[gerichteter Limes als Funktor]}]
 	Sei $\FUN\enbrace*{(\Lambda,\le), R\text{-}\MOD}$ die Kategorie, deren Objekte Funktoren $F \colon (\Lambda,\le) \to R \text{-}\MOD$ sind und deren Morphismen natürliche Transformationen $\tau \colon F \to G$ sind. Dann ist
 	\[
 		\colim_\Lambda \colon \FUN\enbrace*{(\Lambda,\le), R\text{-}\MOD} \longrightarrow R\text{-}\MOD
@@ -1342,12 +1338,12 @@ Ab jetzt: $R$ kommutativ!
 	ein Funktor: Ist $\tau \colon F \to G$ eine natürliche Transformation, so induziert $\coprod_{\lambda \in \Lambda}\tau_\lambda \colon \coprod_{\lambda \in \Lambda} F(\lambda) \to \coprod_{\lambda \in \Lambda} G(\lambda)$ eine $R$-lineare Abbildung $\tau_* =\colim_\Lambda \tau \colon \colim_\Lambda F \to \colim_\Lambda G$
 \end{bemerkung}
 
-\begin{definition}
+\begin{definition}[{name=[Exaktheit in der Funktorkategorie]}]
 	Eine Folge 
 	\( \begin{tikzcd}[cramped]
 		F \rar["\tau"] & F' \rar["\tau'"] & F''
 	\end{tikzcd} \) 
-	heißt \Index{exakt}, wenn 
+	in der Funktorkategorie $\FUN$ heißt \Index{exakt}, wenn 
 	\( \begin{tikzcd}[cramped]
 		F(\lambda)\rar["\tau_\lambda"] & F'(\lambda) \rar["\tau_\lambda'"] & F''(\lambda)
 	\end{tikzcd} \) 
@@ -1371,26 +1367,25 @@ Ab jetzt: $R$ kommutativ!
 \end{satz}
 \begin{beweis}
 	Seien $s_\lambda, s'_\lambda, s''_\lambda$ die Strukturabbildungen. 
-	Wir zeigen nur $\colim_\Lambda \tau$ ist injektiv. 
-	Sei $v \in \ker (\colim_\Lambda \tau)$.
-	Wähle $v_\lambda \in F(\lambda)$ mit $s_\lambda(v_\lambda)=v$.
+	Wir zeigen nur, dass $\tau_* =\colim_\Lambda \tau$ injektiv ist. 
+	Für $v \in \ker (\tau_*)$ wähle $v_\lambda \in F(\lambda)$ mit $s_\lambda(v_\lambda)=v$.
 	Dann ist $\tau_*(v)=s_\lambda'\enbrace[\big]{\tau_\lambda \enbrace*{v_\lambda}}$.
 	Da $\tau_*(v)=0$ ist, gibt es $\mu \ge \lambda$ mit 
 	\[
-		F'(i_\lambda^\mu) \enbrace*{s_\lambda'\enbrace[\big]{\tau_\lambda \enbrace*{v_\lambda}}}=0
+		F'(i_\lambda^\mu) \enbrace[\Big]{s_\lambda'\enbrace[\big]{\tau_\lambda \enbrace*{v_\lambda}}}=0
 	\]
 	Da $\tau$ eine natürliche Transformation ist, ist 
 	\begin{align}
 		0=F'(i_\lambda^\mu) \enbrace[\big]{ \tau_\lambda(v_\lambda)} = \tau_\mu \enbrace*{F(i_\lambda^\mu)(v_\lambda)}
 	\end{align}
-	Da $\tau_\mu$ injektiv ist, ist $F(i_\lambda^\mu)(v_\lambda)=0$. Damit ist $v=s_\lambda(v_\lambda)=0$.
+	Da $\tau_\mu$ injektiv ist, folgt also $F(i_\lambda^\mu)(v_\lambda)=0$ und damit ist $v=s_\lambda(v_\lambda)=0$.
 \end{beweis}
 
-\begin{bemerkung}
-	Für eine natürliche Transformation $\tau \colon F \to F'$ in $\FUN \enbrace*{(\Lambda,\le),R \text{-}\MOD}$ können wir $\ker \tau$ und $\coker \tau \in \FUN \enbrace*{(\Lambda,\le), R \text{-}\MOD}$ erklären durch $\ker \tau (\lambda) = \ker \tau_\lambda$ und $\coker (\tau)(\lambda) = \coker \tau_\lambda$.
-	Mit der Exaktheit vom $\colim_\Lambda$ folgt insbesondere
+\begin{bemerkung}[{name=[gerichteter Kolimes von Kern und Kokern]}]
+	Für eine natürliche Transformation $\tau \colon F \to F'$ in $\FUN \enbrace*{(\Lambda,\le),R \text{-}\MOD}$ können wir $\ker \tau$ und $\coker \tau \in \FUN \enbrace*{(\Lambda,\le), R \text{-}\MOD}$ erklären durch $\ker \tau (\lambda) = \ker \tau_\lambda$ und $\coker \tau(\lambda) = \coker \tau_\lambda$.
+	Mit der Exaktheit vom $\colim_\Lambda$ folgt insbesondere\todo{Revision 7}
 	\[
-		\colim_\Lambda \ker \tau = \ker \colim_\Lambda \tau \qquad \colim_\Lambda \coker \tau = \coker \colim_\Lambda \tau
+		\colim_\Lambda \ker \tau = \ker \colim_\Lambda \tau \qquad \text{und} \qquad \colim_\Lambda \coker \tau = \coker \colim_\Lambda \tau
 	\]
 \end{bemerkung}
 
@@ -1400,7 +1395,7 @@ Ab jetzt: $R$ kommutativ!
 	Die gleiche Aussage gilt für Kokettenkomplexe.
 \end{korollar}
 \begin{beweis}
-	Sei $d^{C_1}_n \colon C_n(\lambda) \to C_{n-1}(\lambda)$ die Randabbildung. 
+	Sei $d^{C_*}_n \colon C_n(\lambda) \to C_{n-1}(\lambda)$ die Randabbildung. 
 	Wir fassen $d_n$ als natürliche Transformation $C_n \to C_{n-1}$ in $\FUN \enbrace*{(\Lambda,\le)R \text{-}\MOD}$ auf. 
 	Da $(\Lambda,\le)$ gerichtet ist und daher $\colim_\Lambda$ exakt ist, folgen
 	\[
