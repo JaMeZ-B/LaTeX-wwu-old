@@ -722,7 +722,7 @@
 	$\Sp \colon C_*(X,A) \to C_*(X,A)$ ist kettenhomotop zur Identität. 
 \end{lemma}
 \begin{beweis}
-	Folgt offensichtlich aus \autoref{prop:H0_kettenhomotop}.\todo{muss eventuell noch angepasst werden}
+	Folgt offensichtlich aus \autoref{prop:H0_kettenhomotop}.\todo[inline]{muss eventuell noch angepasst werden}
 \end{beweis}
 
 \begin{satz}[{name=[Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ]}]
@@ -1203,7 +1203,7 @@ Ab jetzt: $R$ kommutativ!
 	Dann ist $H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R) \cong R$ und jeder Erzeuger $\mu_B \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R)$ ist eine Fundamentalklasse über $B$, also ist jede Einschränkung $\mu_B|_x \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set*{x};R)$ ein Erzeuger für $x \in B$.
 \end{beispiel}
 
-\begin{lemma}[{name=[Isomorphismus von Kohomologie und Homologie für kompakte Bälle]}]
+\begin{lemma}[{name=[Isomorphismus von Kohomologie und Homologie für kompakte Bälle]},label=Rn_kompakteBaelle]
 	Sei $B \subseteq \mathbb{R}^n$ ein kompakter Ball und $\mu_B \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus B;R)$ ein Erzeuger. Dann ist 
 	\[
 		\capp \mu_B \colon H^k \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R} \longrightarrow H_{n-k}(\mathbb{R}^n;R)
@@ -1389,47 +1389,41 @@ Ab jetzt: $R$ kommutativ!
 	\]
 \end{bemerkung}
 
-\begin{korollar}
+\begin{korollar}[{name=[Homologie vertauscht mit Kolimiten]}]
 	Sei $(\Lambda,\le)$ gerichtet und $C_*$ ein Funktor von $(\Lambda,\le)$ in die Kategorie der Kettenkomplexe und Kettenabbildungen. 
-	Dann ist $H_*(\colim_\Lambda C_*) = \colim_\Lambda H_*(C_*(\lambda))$. 
+	Dann ist $H_*(\colim_\Lambda C_*) = \colim_\Lambda H_*(C_*)$. 
 	Die gleiche Aussage gilt für Kokettenkomplexe.
 \end{korollar}
 \begin{beweis}
-	Sei $d^{C_*}_n \colon C_n(\lambda) \to C_{n-1}(\lambda)$ die Randabbildung. 
-	Wir fassen $d_n$ als natürliche Transformation $C_n \to C_{n-1}$ in $\FUN \enbrace*{(\Lambda,\le)R \text{-}\MOD}$ auf. 
+	Sei $d^{\lambda}_n \colon C_n(\lambda) \to C_{n-1}(\lambda)$ die Randabbildung von $C_*(\lambda)$.
+	Wir fassen $d_n$ als natürliche Transformation $C_n \to C_{n-1}$ in $\FUN \enbrace*{(\Lambda,\le),R\text{-}\MOD}$ auf. 
 	Da $(\Lambda,\le)$ gerichtet ist und daher $\colim_\Lambda$ exakt ist, folgen
 	\[
-		\ker \enbrace*{\colim_\Lambda d_n^C} \cong \colim_\Lambda \enbrace*{\ker d_n^{C_\lambda}}
+		\ker \enbrace*{d_* \colon \colim_{\Lambda} C_n \to \colim_\Lambda C_{n-1}} \cong \colim_\Lambda \enbrace*{\ker d_n \colon C_n \to C_{n-1} }
 	\]
 	und 
 	\[
-		\Underbrace{\coker \enbrace*{\colim_\Lambda d_{n+1}^C \colon \colim_\Lambda C_{n+1}(\lambda) \to \colim_\Lambda \ker d_n^{C_\lambda}}}{H_*(\coker C_\lambda)}
-		\cong \colim_\Lambda \enbrace[\Big]{ \Underbrace{\coker d_{n+1}^{C_\lambda} \colon C_{n+1}(\lambda) \to \ker d_n^{C_\lambda}}{\cong H_*(C(\lambda))}} \qedhere
+		\Underbrace{\coker \enbrace*{ d_{*} \colon \colim_\Lambda C_{n+1} \to \colim_\Lambda \ker d_n}}{ \cong H_n(\colim C_*)}
+		\cong \colim_\Lambda \enbrace[\Big]{ \Underbrace{\coker d_{n+1} \colon C_{n+1} \to \ker d_n}{\cong H_n(C_*)}} \qedhere
 	\]
 \end{beweis}
 
-\begin{definition}
+\begin{definition}[{name=[singuläre Kohomologie mit kompaktem Träger]}]
 	Sei $X$ ein topologischer Raum. Dann definieren wir die \bet{singuläre Kohomologie von $X$ mit kompaktem Träger}\index{Kohomologie mit kompaktem Träger} durch
 	\[
-		H^*_c(X) := \colim_{K \in \mathcal{K}(X)} H^*(X,X \setminus K)
+		H^*_c(X;R) := \colim_{K \in \mathcal{K}(X)} H^*(X,X \setminus K;R)
 	\]
 \end{definition}
 
-\begin{beispiel}
-	Es gilt 
-	\(
-		H^*_c(\mathbb{R}^n) \cong \begin{cases}
-			R &\text{ falls }*=n\\
-			0 &\text{ sonst }
-		\end{cases}
-	\)
+\begin{beispiel}[{name=[Kohomologie mit kompaktem Träger des des euklidischen Raumes]}]
+	Es gilt $H^k_c(\mathbb{R}^n;R) \cong \mathbb{R}$ für $k=0$ und $H^k_c(\mathbb{R}^n;R)=0$ sonst. 
 \end{beispiel}
 \begin{beweis}
 	Die Menge $\mathcal{B}$ der kompakten Bälle $B_r(0) \subset \mathbb{R}^n$ ist kofinal in der gerichteten Menge aller kompakten Unterräume von $\mathbb{R}^n$.
-	Daher ist 
+	Daher ist nach \autoref{Rn_kompakteBaelle}
 	\[
-		H^*_c(\mathbb{R}^n) = \colim_{K \in \mathcal{K}(\mathbb{R}^n)} H^* \enbrace*{\mathbb{R}^n , \mathbb{R}^n \setminus K} 
-		\cong \colim_{B \in \mathcal{B}} H^* \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B} \cong \begin{cases}
+		H^*_c(\mathbb{R}^n;R) = \colim_{K \in \mathcal{K}(\mathbb{R}^n)} H^* \enbrace*{\mathbb{R}^n , \mathbb{R}^n \setminus K;R} 
+		\cong \colim_{B \in \mathcal{B}} H^* \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus B;R} \cong \begin{cases}
 			R &\text{ falls }*=n\\
 			0 &\text{ sonst }
 		\end{cases} \qedhere
