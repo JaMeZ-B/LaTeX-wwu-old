@@ -980,7 +980,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \label{sec:4}
 
 \begin{proposition}[{name=[aus abgeschlossenem Ideal eine $C^*$-Unteralgebra bauen]},label=prop:41]
-	Sei $L$ ein abgeschlossenes Linksideal in einer $C^*$-Algebra $A$. 
+	Sei $L$ ein abgeschlossenes Linksideal in einer $C^*$-Algebra $A$. \todo{Revision 4}
 	Dann existiert ein aufsteigendes Netz $(e_\lambda)_\Lambda \subset L \cap A_+^1$ mit $a =\lim_\lambda a e_\lambda$ für $a \in L$. 
 	$L \cap L^* \subset A$ ist eine $C^*$-Unteralgebra.
 \end{proposition}
@@ -1579,7 +1579,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Mit der Vollständigkeit von $A$ folgt, dass $M_n(A)$ vollständig ist bezüglich $\norm*{\cdot}_{M_n(A)}$.
 \end{beweis}
 
-\begin{korollar}[{name=[selbstadjungiert und positiv mittels Zuständen]}]
+\begin{korollar}[{name=[selbstadjungiert und positiv mittels Zuständen]},label=korr:514]
 	Sie $A$ eine $C^*$-Algebra und $a \in A$.
 	Dann gilt
 	\begin{enumerate}[(i),itemsep=0pt]
@@ -1647,7 +1647,114 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\]
 	Für jede unitale $C^*$-Algebra $A$ mit einer Isometrie $w$ ($w^*w=\ind$) existiert ein $^*$-Homomorphismus $\varphi\colon\mathcal{T}\to A$ mit $\varphi(v)=w$ (Satz von Coburn).
 \end{beispiel}
+
+\begin{beispiel}
+	Sei $\mathcal{H}= L^2([0,1])$.
+	Definiere $v_1,v_2 \in \mathcal{B}(\mathcal{H})$ durch\todo{$c_2=2$ ??}
+	\[
+		v_1(f)(t) := \begin{cases}
+			c_2 \cdot f(2t) &\text{ falls }t \in [0,\sfrac{1}{2}]\\
+			0 &\text{ falls } t \in (\sfrac{1}{2},1]
+		\end{cases}
+		\qquad \text{ und } \qquad 
+		v_2(f)(t) := \begin{cases}
+			c_2 \cdot f(2t-1) &\text{ falls }t \in [\sfrac{1}{2},1]\\
+			0 &\text{ falls } t \in [0,\sfrac{1}{2})
+		\end{cases} 
+	\]
+	\missingfigure{Bildchen vom Zusammenquetschen}
+	Es ist $v_1^* v_2=\ind$ und $v_1v_1^* + v_2v_2^*=\ind$.
+	$\Oc_2 := C^*(v_1,v_2) \subset \mathcal{B}(\mathcal{H})$ ist eine \Index{Cuntz-Algebra}. Ähnlich lassen sich $\Oc_n$ und $\Oc_\infty$ definieren.
+	$\Oc_2$ besitzt keinen Spurzustand und ist einfach (d.h. es gibt keine nichttrivialen abgeschlossenen zweiseitigen Ideale).
+	
+	Sei $A$ eine unitale $C^*$-Algebra mit $s_1,s_2 \in A$ und $s_1^*s_1 = s_2^*s_2=\ind = s_1s_1^* + s_2s_2^*$.
+	Dann existiert ein $^*$-Homomorphismus $\pi \colon \Oc_2 \to A$ mit $\pi(v_i)=s_i$ für $i=1,2$.
+\end{beispiel}
 % section 5 (end)
+\newpage
+
+\section{von-Neumann-Algebren und der Bikommutantensatz} % (fold)
+\label{sec:6}
+
+\begin{erinnerungA}[{name=[starke Operatortopologie]}]
+	Die \Index{starke Operatortopologie} $\mathcal{T}_\so$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen $p_\xi \colon \mathcal{B}(\mathcal{H}) \to \mathbb{R}_+$, $x \mapsto \norm*{x \xi}_\mathcal{H}$ für $\xi \in \mathcal{H}$ erzeugt wird.\todo{Revision 6}
+	Das heißt $\mathcal{T}_\so$ ist die gröbste Topologie, sodass Addition, skalare Multiplikation und alle Halbnormen $p_\xi$ stetig sind.
+	\enquote{Typische} offene Mengen sind der Form
+	\[
+		U_{x,\xi,\varepsilon} := \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(x-y)\xi}<\varepsilon}
+	\]
+	wobei $x \in \mathcal{B}(\mathcal{H})$, $\xi \in \mathcal{H}$ und $\varepsilon>0$. 
+	Die $U_{x,\xi,\varepsilon}$ bilden eine Subbasis für $\mathcal{T}_\so$.
+	Für ein Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})$ und $x \in \mathcal{B}(\mathcal{H})$ gilt
+	\begin{align}
+		x_\lambda \grenzw{\so} x &\iff \norm*{(x_\lambda-x)\xi}_{\mathcal{H}} \grenzw{ }0 \text{ für jedes } \xi \in \mathcal{H} \\
+		&\iff x_\lambda \xi \grenzw{} x \xi \text{ für jedes } \xi \in \mathcal{H} 
+	\end{align}
+	$\mathcal{T}_\so$ ist schwächer als $\mathcal{T}_{\norm*{\cdot}}$, d.h. $\enbrace*{\mathcal{B}(\mathcal{H}), \mathcal{T}_{\norm*{\cdot}}} \grenzw{\raisemath{-2pt}{\id}} \enbrace*{\mathcal{B}(\mathcal{H}), \mathcal{T}_\so}$ ist stetig.
+	Äquivalent dazu: Wenn $A \subset \mathcal{B}(\mathcal{H})$ $\so$-abgeschlossen ist, so ist $A$ auch $\norm*{\cdot}$-abgeschlossen. Alternativ: Wenn $x_\lambda\to x$ in der Normtopologie, dann auch in der starken Operatortopologie.
+	
+	Die Norm $\norm*{\cdot}$, die Multiplikation und Involution sind nicht stetig bezüglich der starken Operatortopologie:
+	Sei dazu $\mathcal{H}=\ell^2(\mathbb{N})$ mit Standardorthonormalbasis $(\eta_k)_\mathbb{N}$ und Matrixeinheiten $e_{ij}$.\marginnote{$e_{ij} \eta_k= \delta_{jk} \cdot \eta_i$}
+	Dann gilt $e_{0,n}\xrightarrow[n \to \infty]{\raisemath{-2pt}{\so}} 0$ aber $1=\norm*{e_{0,n}}\, \cancel{\to}\, 0$ und $e_{0,n}^* = e_{n,0} \not\xrightarrow{\raisemath{-2pt}{\so}} 0$.
+	Dass die Multiplikation nicht stetig ist, ist etwas subtiler (Übung).
+\end{erinnerungA}
+
+\begin{satz}
+	Sei $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ ein monotones und beschränktes Netz.
+	Dann existiert ein $x \in \mathcal{B}(\mathcal{H})$ mit $x_\lambda \grenzw{\so} x$.
+	Falls $(x_\lambda)_\Lambda$ ein aufsteigendes Netz von orthogonalen Projektionen ist, so ist $x$ die (orthogonale) Projektion auf $\overline{\bigcup_{\Lambda} x_\lambda \mathcal{H}}$.
+	Falls $(x_\lambda)_\Lambda$ ein absteigendes Netz aus Projektionen ist, so ist $x$ die Projektion auf $\bigcap_\Lambda\overline{x_\lambda \mathcal{H}}$.
+\end{satz}
+\begin{beweis}
+	Vergleiche Funktionalanalysis Satz 7.32. Idee: 
+	$\skal*{x_\lambda \xi}{\cdot} \in \mathcal{H}^*\cong \mathcal{H}$ ist schwach konvergent gegen ein $\eta:= x \xi$ (Polarisierung, Monotonie).
+	$x_\lambda \grenzw{\mathrm{wo}} x$ ($\skal*{\eta}{x_\lambda \xi} \to \skal*{\eta}{x \xi}$, $\xi,\eta \in \mathcal{H}$). Mit Beschränktheit folgt $x_\lambda \grenzw{\so} x$.
+	
+	Es seien nun die $x_\lambda$ Projektionen und $x_\lambda \grenzw{\so} x$. 
+	Dann folgt $x^2=x$ mittels 
+	\[
+		\skal*{\eta}{x \xi} = \lim \skal*{\eta}{s_\lambda \xi} = \lim \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
+	\]
+	Also ist $x=x^*x=x^2$. Rest Übung!
+\end{beweis}
+
+\begin{bemerkung}
+	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$.
+	Dies ist äquivalent zu $0\le x$ in unserem Sinne: 
+	Aus $x=y^*y$ folgt 
+	\[
+		\skal*{\xi}{x \xi} = \skal*{\xi}{y^*y \xi} = \skal*{y \xi}{y \xi} \ge 0
+	\]
+	für $\xi \in \mathcal{H}$. 
+	Die Gegenrichtung zeigt man wie im Beweis von \autoref{korr:514}.
+\end{bemerkung}
+
+\begin{definition}[{name=[von-Neumann-Algebra]}]
+	Eine \Index{von-Neumann-Algebra} auf dem Hilbertraum $\mathcal{H}$ ist eine in der starken Operatortopologie abgeschlossene $^*$-Unteralgebra von $\mathcal{B}(\mathcal{H})$.
+\end{definition}
+
+\begin{definition}[{name=[Kommutante und Bikommutante]}]
+	Sei $B$ eine Algebra und $S \subset B$ eine Teilmenge.
+	\[
+		S' := \set*{b \in B \given bs=sb, s \in S}
+	\]
+	heißt \Index{Kommutante} von $S$ in $B$. 
+	$S'' := (S')'$ heißt \Index{Bikommutante}.
+	$S',S''$ sind Unteralgebren.
+	Falls $B$ eine $^*$-Algebra und $S=S^*$ ist, so sind $S'$ und $S''$ auch $^*$-Unteralgebren.
+	Falls $A \subset \mathcal{B}(\mathcal{H})$ eine $^*$-Unteralgebra ist, so ist $A' \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra.
+\end{definition}
+\begin{beweis}
+	Wir zeigen nun, dass $A'$ abgeschlossen ist in der starken Operatortopologie.
+	Sei dazu $(x_\lambda) \subset A'$ mit $x_\lambda \grenzw{\raisemath{-2pt}{\so}} x$, $a \in A$ sowie $\xi,\eta \in \mathcal{H}$.
+	Dann gilt
+	\begin{align}
+		\skal*{\eta}{a x \xi} = \skal*{\eta}{ a \lim x_\lambda \xi} =\lim \skal*{\eta}{a x_\lambda \xi} = \lim \skal*{\eta}{x_\lambda a \xi} = \skal*{\eta}{x a \xi}
+	\end{align}
+	Also ist $a x= x a$.
+\end{beweis}
+
+% section 6 (end)
 
 
 
