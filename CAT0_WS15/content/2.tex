@@ -762,5 +762,123 @@ Um die Aussage (ii) zu beweisen, brauchen wir ein Resultat von \textsc{Arzelà} 
 	\end{enumerate}
 \end{satz}
 
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{enumerate}[(i)]
+		\item Es ist nur zu zeigen, dass $\tilde{d}$ keine Pseudometrik ist. \marginnote{04.12. \\ \ [11]}
+		Seien $\tilde{x},\tilde{y} \in \tilde{X}$ beliebig und verschieden.
+		Da $\tilde{X}$ ein Hausdorff-Raum ist, existieren offene Umgebungen $\tilde{U}_{\tilde{x}}, \tilde{U}_{\tilde{y}}$ von $\tilde{x}$ bzw. $\tilde{y}$ in $\tilde{X}$ mit $\tilde{U}_{\tilde{x}} \cap \tilde{U}_{\tilde{y}} = \emptyset$.
+		Wir können $\tilde{U}_{\tilde{x}}$ so klein wählen, dass $p \big|_{\tilde{U}_{\tilde{x}}} \rightarrow U$ ein Homöomorphismus auf eine offene Teilmenge $U$ von $X$ ist.
+		
+		Sei nun $c$ ein beliebiger Weg von $\tilde{x}$ nach $\tilde{y}$.
+		Dann gilt $\im(p \circ c) \nsubseteq U$, denn andernfalls wäre $\im(p^{-1} \big|_{\tilde{U}_{\tilde{x}}} \circ p \circ c) = \im(c) \subseteq \tilde{U}_{\tilde{x}}$ und damit $c(1) = \tilde{y} \in \tilde{U}_{\tilde{x}}$, was ein Widerspruch ist.
+		
+		Sei $r > 0$ so gewählt, dass $B_r(x) = B_r(p(\tilde{x})) \subseteq U$.
+		Wir betrachten:
+		\[
+			p\colon p \big|_{\tilde{U}_{\tilde{x}}}^{-1} (B_r(x)) \rightarrow B_r(x)
+		\]
+		Da $\im(p \circ c) \nsubseteq B_r(x)$, existiert ein $t \in [0,1]$ mit $p \circ c(t) \notin B_r(x)$ und somit ein $s \in [0,1]$, sodass $p \circ c(s) \in \partial B_r(x)$.
+		Damit folgt
+		\[
+			\ell(c) = \ell(p \circ c) \geq d(p \circ c (s), p \circ c(0)) = r.
+		\]
+		Da $c$ ein beliebiger Weg war, folgt $\tilde{d}(\tilde{x},\tilde{y}) \geq r$.
+		\item Sei $\tilde{x} \in \tilde{X}$ beliebig.
+		Da $p$ ein lokaler Homöomorphismus ist, existiert eine offene Umgebung $\tilde{U}_{\tilde{x}}$ von $\tilde{x}$ in $\tilde{X}$ und eine offene Umgebung $U \subseteq X$, sodass $p \big|_{\tilde{U}_{\tilde{x}}} \colon \tilde{U}_{\tilde{x}} \rightarrow U$ ein Homöomorphismus ist.
+		Sei $s \colon U \rightarrow \tilde{U}_{\tilde{x}}$ die Inverse von $p \big|_{\tilde{U}_{\tilde{x}}}$.
+		Wähle $r > 0$, sodass $B_{2r}(p(\tilde{x})) \subseteq U$ gilt, und zeige, dass
+		\[
+			s' := s \big|_{B_r(p(\tilde{x}))} \colon B_r(p(\tilde{x})) \rightarrow B_r(\tilde{x})
+		\]
+		eine Isometrie ist.
+		\begin{description}
+			\item[surjektiv:] Sei $y \in B_r(\tilde{x})$ beliebig.
+			Zu zeigen ist $p(y) \in B_r(p(\tilde{x}))$.
+			\[
+				d(p(y),p(\tilde{x})) \stack{\text{Def.}}{\leq} \tilde{d}(y,\tilde{x}) < r \quad \Rightarrow p(y) \in B_r(p(\tilde{x})).
+			\] 
+			Weiter gilt $s'(p(y)) = y$, da $s$ die Inverse $p\big|_{\tilde{U}_{\tilde{x}}}$ ist.
+			\item[isom. Einbettung:] Seien nun $a,b \in B_r(p(\tilde{x}))$ beliebig.
+			Wir müssen zeigen, dass $\tilde{d}(s'(a),s'(b)) = d(a,b)$ gilt.
+			Nach Definition von $\tilde{d}$ gilt $\tilde{d}(s'(a),s'(b)) \geq d(a,b)$.
+			
+			Sei $\varepsilon \in (0,r)$ beliebig.
+			Da $X$ ein Längenraum ist, existiert ein Weg
+			\begin{align*}
+				c_\varepsilon\colon [0,\ell(c_\varepsilon)] &\longrightarrow B_{2r}(p(\tilde{x})) \\
+				0 &\longmapsto a \\
+				\ell(c_\varepsilon) &\longmapsto b
+			\end{align*}
+			mit $\ell(c_\varepsilon) \leq d(a,b) + \varepsilon$.
+			Wir betrachten den Weg
+			\begin{align*}
+				s \circ c_\varepsilon\colon [0,\ell_\varepsilon] &\longrightarrow B_{2r}(\tilde{x}) \\
+				0 &\longmapsto s'(a) \\
+				\ell(c_\varepsilon) &\longmapsto s'(b)
+			\end{align*}
+			Damit gilt $\tilde{d}(s'(a),s'(b)) \leq \ell(c_\varepsilon) \leq d(a,b) + \varepsilon$ und es folgt für $s \rightarrow 0$: $\tilde{d}(s'(a),s'(b)) \leq d(a,b)$.
+		\end{description}
+		\item Da $p$ eine lokale Isometrie ist, ist die Länge von einem Weg in $(\tilde{X},\tilde{d})$ dieselbe wie die Länge von dem Weg unter $p$.
+		\item Sei $d'$ eine andere Längenmetrik auf $\tilde{X}$, sodass $p \colon (\tilde{X},d') \rightarrow (X,d)$ eine lokale Isometrie ist.
+		Dann ist $\id\colon (\tilde{X},d') \rightarrow (\tilde{X},\tilde{d})$ eine lokale Isometrie, denn:
+		
+		Sei $\tilde{x} \in \tilde{X}$ beliebig.
+		Da $p$ eine lokale Isometrie ist, existiert ein $\varepsilon_1 > 0$, sodass $p \colon (B_{\varepsilon_1}(\tilde{x}),d') \rightarrow B_{\varepsilon_1}(p(\tilde{x}))$ eine Isometrie ist, und ein $\varepsilon_2 > 0$, sodass $p \colon (B_{\varepsilon_2}(\tilde{x}),\tilde{d}) \rightarrow B_{\varepsilon_2}(p(\tilde{x}))$ eine Isometrie ist.
+		Sie nun $\varepsilon := \min\{\varepsilon_1,\varepsilon_2\}$.
+		Dann ist $\id_{B_\varepsilon(\tilde{x})} = p^{-1} \circ \id_{B_\varepsilon(p(\tilde{x}))} \circ p$.
+		\[
+		\begin{tikzcd}[column sep=large, row sep=huge]
+			(B_\varepsilon(\tilde{x}),d') \arrow{r}{\id} \arrow[d,"\simeq","p"'] & (B_\varepsilon(\tilde{x}),\tilde{d}) \\
+			(B_\varepsilon(p(\tilde{x})),d) \arrow[r,"\id","\simeq"'] & (B_\varepsilon(p(\tilde{x})),d) \arrow[u,"\simeq","p^{-1}"']
+		\end{tikzcd}
+		\]
+		Für einen beliebigen Weg $c \colon [a,b] \rightarrow \tilde{X}$ gilt somit $\ell^{d'}(c) = \ell^{\tilde{d}}(c)$.
+		Da $d'$ und $\tilde{d}$ beide Längenmetriken sind, stimmen sie überein. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{bemerkung}
+\label{bem:2.25}
+	Jede Überlagerung $p\colon \tilde{X} \rightarrow X$ ist ein lokaler Homöomorphismus, und falls $X$ hausdorffsch ist, dann ist $\tilde{X}$ ein Hausdorff-Raum.
+	Man kann also die Konstruktion aus \autoref{satz:2.24} insbesondere auf Überlagerungen anwenden.
+\end{bemerkung}
+
+Wie erkennen wir Überlagerungen?
+
+\begin{definition}[Lokal eindeutig geodätisch]
+\label{def:2.26}
+	Sei $X$ ein metrischer Raum.
+	$X$ heißt \textbf{lokal eindeutig geodätisch}, wenn für alle $x \in X$ ein $r > 0$ existiert, sodass für beliebige $y,z \in B_r(x)$ eine eindeutige Geodäte $\gamma \colon y \geo z$ existiert und $\im(\gamma) \subseteq B_r(x)$ gilt. \index{geodätischer Raum!lokal eindeutig}
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:2.27}
+	Sei $X$ ein lokaler $\CAT$-Raum.
+	Dann ist $X$ lokal eindeutig geodätisch.
+\end{beispiel}
+
+\begin{satz}
+\label{satz:2.28}
+	Sei $p\colon \tilde{X} \rightarrow X$ eine Abbildung zwischen Längenräumen mit folgenden Eigenschaften:
+	\begin{enumerate}[(i)]
+		\item $X$ ist wegzusammenhängend.
+		\item $p$ ist ein lokaler Homöomorphismus.
+		\item Für jeden Weg $c \colon [a,b] \rightarrow \tilde{X}$ gilt $\ell_{\tilde{X}}(c) \leq \ell_X (p \circ c)$.
+		\item $X$ ist lokal eindeutig geodätisch.
+		\item Für $x \in X$ beliebig hängen die Geodäten in einem eundeutig geodätischen Ball um $x$ von ihren Endpunkten ab.
+		\item $\tilde{X}$ ist vollständig.
+	\end{enumerate}
+	Dann ist $p \colon \tilde{X} \rightarrow X$ eine Überlagerung.
+\end{satz}
+
+\begin{beweis}
+	Wir zeigen zuerst, dass wir rektifizierbare Wege $c \colon [0,1] \rightarrow X$ eindeutig liften können. Das heißt:
+	
+	Sei $c \colon [0,1] \rightarrow X$ ein rektifizierbarer Weg und $\tilde{x} \in \tilde{X}$ mit $p(\tilde{x}) = c(0)$.
+	Dann existiert ein eindeutiger Weg $\tilde{c} \colon [0,1] \rightarrow \tilde{X}$ mit $p \circ \tilde{c} = c$ -- der \Index{Lift} von $c$.
+	
+	
+\end{beweis}
 
 \cleardoubleoddemptypage
