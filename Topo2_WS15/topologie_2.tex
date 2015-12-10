@@ -1874,8 +1874,8 @@ Ab jetzt: $R$ kommutativ!
 	Wähle eine Orthonormalbasis von $V_-$ bezüglich $-\varphi$ und eine Orthonormalbasis bezüglich $\varphi$.
 \end{beweis}
 
-\begin{lemma}
-	Die Signatur von $V$ ist genau dann $0$, wenn es $L \le V$ gibt mit $\varphi|_{L \times L}=0$ und $\dim L = \frac{1}{2} \dim V$.
+\begin{lemma}[label=sig_null]
+	Die Signatur von $\varphi$ ist genau dann $0$, wenn es $L \le V$ gibt mit $\varphi|_{L \times L}=0$ und $\dim L = \frac{1}{2} \dim V$.
 \end{lemma}
 \begin{beweis}
 	Sei $\sig(\varphi)=0$. Dann wählen wir eine Basis $v_1,\ldots ,v_l,w_1,\ldots ,w_l$ wie im Korollar\todo{oder doch Lemma?}.
@@ -1912,11 +1912,120 @@ Ab jetzt: $R$ kommutativ!
 	Sei $W$ eine kompakte orientierte Mannigfaltigkeit mit Rand.
 	Falls $\dim W = 4k+1$ ist, so gilt $\sig(\partial W)=0$.
 \end{satz}
+\begin{beweis}
+	Sei $L :=  \im \enbrace[\big]{i^* \colon H^{2k}(W;\mathbb{R}) \hookrightarrow H^{2k}(\partial W;\mathbb{R})}$. Es gilt
+	\begin{enumerate}[a)]
+		\item $(i^* \xi \cupp i^* \eta) (\mu_{\partial W}) = \enbrace*{i^*(\xi \cupp \eta)}(\mu_{\partial W})= (\xi \cupp \eta) \enbrace*{i_* \mu_{\partial W}} =0$, da $\mu_{\partial W}=\partial (\mu_{W,\partial W})$, wobei $\mu_{W,\partial W} \in H^{4k+1}(W,\partial W)$ die Orientierungsklasse von $W$ relativ zu $\partial W$ ist.
+		\item Zu zeigen: $\dim L = \frac{1}{2} \dim H^{2k}(\partial W;\mathbb{R})$.
+		
+		Betrachte 
+		\[
+			\begin{tikzcd}[sep=large]
+				\ldots  \rar & H^{2k}(W) \dar["\capp \mu_{W,\partial W}","\cong"'] \rar["i^*"] & H^{2k}(\partial W)  \dar["\capp \mu_{\partial W}","\cong"']\rar["\partial"] & H^{2k+1}(W,\partial W) \rar \dar["\capp \mu_{W,\partial W}","\cong"']& \ldots \\
+				\ldots \rar & H_{2k+1} \rar["\partial"] & H_{2k}(\partial W) \rar & H_{2k}(W) \rar & \ldots 
+			\end{tikzcd}
+		\]
+		Die Kommutativität benutzt wieder $\partial (\mu_{W,\partial W})=\mu_{\partial W}$.
+		Es gilt
+		\[
+			\dim \im i^* = \dim \ker i_* = \dim \ker \enbrace[\big]{\Hom(i_*,\mathbb{R})} = \dim \ker i^*
+		\]
+		Da $\dim H^{2k}(\partial W) = \dim \ker i^* + \dim \im i^*$, folgt $\dim \im i^* = \frac{1}{2} \dim H^{2k}(\partial W)$. 
+	\end{enumerate}
+	Mit dem \autoref{sig_null} folgt die Behauptung.
+\end{beweis}
 
 \begin{korollarB}
 	$\mathbb{CP}^{2k}$ ist nicht Rand einer orientierten kompakten Mannigfaltigkeit.
 \end{korollarB}
+
+\begin{ausblick}
+	Nach dem Satz von \textsc{Freedman}\footnote{\url{https://de.wikipedia.org/wiki/Michael_Freedman}} werden einfach zusammenhängende geschlossene orientierte $4$-Mannigfaltigkeiten bis auf Homöomorphismus durch die ganzzahlige Schnittform auf $H^2(M;\mathbb{Z})$ und eine $\sfrac{\mathbb{Z}}{2 \mathbb{Z}}$-wertige Invariante klassifiziert.
+	Jede ganzzahlige reguläre Schnittform wird realisiert.
+\end{ausblick}
 % section 10 (end)
+\newpage
+
+\section{Projektive Auflösungen} % (fold)
+\label{sec:11}
+
+\begin{definition}[{name=[projektive Auflösung]}]
+	Sei $M$ ein $R$-Modul.
+	Eine \Index{projektive Auflösung} von $M$ ist eine lange exakte Folge 
+	\[
+		\begin{tikzcd}
+			0 & M \lar & P_0 \lar["\epsilon"'] & P_1 \lar["d_0"'] & P_2 \lar["d_1"'] & \ldots \lar
+		\end{tikzcd}
+	\]
+	wobei die $P_i$ projektive $R$-Moduln sind.
+	Wir schreiben oft $(P_*,\epsilon)$ für eine solche Auflösung, wobei $P_*$ ein Kettenkomplex projektiver Moduln ist, $H_k(P_*)=0$ für $k>0$ und $H_0(P_*)\cong M$ via $\epsilon$ ist.\todo{Revision 11}
+\end{definition}
+
+\begin{satz}[{name=[Existenz projektiver Auflösungen]}]
+	Sei $M$ ein $R$-Modul. Dann gilt
+	\begin{enumerate}[a)]
+		\item $M$ besitzt eine projektive Auflösung.
+		\item Sind $(P_*,\epsilon)$ und $(P_*',\epsilon')$ zwei projektive Auflösungen, so gibt es eine Kettenhomotopieäquivalenz $f \colon P_* \to P_*'$ mit $H_0(f)= (\epsilon') ^{-1} \circ \epsilon$.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	\begin{enumerate}[a)]
+		\item Die $P_n$ werden induktiv definiert. 
+		Sei 
+		$\begin{tikzcd}[cramped,sep=1.5em]
+			0 & M \lar & P_0 \lar["\epsilon"'] & P_1 \lar["d_0"'] & P_2 \lar["d_1"'] & \ldots \lar & P_n \lar["d_n"']
+		\end{tikzcd}$
+		bereits definiert und $S$ ein Erzeugendensystem von $\ker d_n$.
+		Wir setzen $P_{n+1} := R[S]$ und definieren $d_{n+1} \colon P_{n+1} \to P_n$ als die Fortsetzung der Inklusion $S \subseteq P_n$ zu einer $R$-linearen Abbildung $R[S]\to P_n$.
+		\item Folgt aus folgender Proposition.\todo{ref}\qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{proposition}
+	Seien $A_*$ und $P_*$ zwei Kettenkomplexe mit 
+	\begin{itemize}
+		\item Die Kettenmoduln von $P_*$ sind projektiv.
+		\item $H_*(A_*)=0$ für $*\ge 1$.
+	\end{itemize}
+	Dann definiert $f \mapsto H_0(f)$ einen Isomorphismus zwischen Kettenhomotopieklassen von Kettenabbildungen $f \colon P_* \to A_*$ und $R$-linearen Abbildungen $\varphi \colon H_0(P_*) \to H_0(A_*)$.
+\end{proposition}
+\begin{beweis}
+	Sei $\varphi \colon H_0(P_*) \to H_0(A_*)$ gegeben. 
+	Wir konstruieren $f_n \colon P_n \to A_n$ induktiv: 
+	Seien entsprechende Abbildungen $f_0,\ldots ,f_n$ bereits konstruiert, sodass folgendes Diagramm kommutiert
+	\[
+		\begin{tikzcd}[sep=large]
+			H_0(P_*) \dar["\varphi"] & P_0 \lar[two heads]  \dar["f_0"]& P_1 \lar  \dar["f_1"]& \ldots \lar & P_n \lar["d_n"']\dar["f_n"] & P_{n+1} \lar["d_{n+1}"'] \dar[dashed,"f_{n+1}"] \\
+			H_0(A_*) & A_0 \lar[two heads] & A_1 \lar["d_1'"'] & \ldots \lar & A_n \lar["d_n'"'] & A_{n+1} \lar["d_{n+1}'"']
+		\end{tikzcd}
+	\]
+	Wir erhalten 
+	\[
+		\begin{tikzcd}[row sep=large, column sep=huge]
+			\mbox{ } & A_{n+1} \dar[two heads,"d_{n+1}'"]\\
+			P_{n+1} \ar[ur,dashed] \rar["f_n \circ d_{n+1}"] & \ker d_{n}'
+		\end{tikzcd}
+	\]
+	Da $P_{n+1}$ projektiv ist, gibt es $f_{n+1} \colon P_{n+1} \to A_{n+1}$ mit $d_{n+1}' \circ f_{n+1} = f_n \circ d_{n+1}$.
+	
+	Für die Injektivität seien $f,g \colon P_* \to A_*$ Kettenabbildung mit $H_0(f) = H_0(g)$. 
+	Wir konstruieren eine Kettenhomotopie $s_n \colon P_n \to A_{n+1}$ induktiv. Seien $s_0, \ldots ,s_{n-1}$ schon konstruiert mit $f_i -g_i= s_{i-1} d_i + d_{i+1} s_i$ für $i=0, \ldots , n$.
+	\[
+		\begin{tikzcd}[row sep=large, column sep=3.15em]
+			H_0(P_*) \dar["0"] & P_0 \lar \dar["f_0-g_0"] \drar[sloped,pos=.4,"s_0"] & P_1 \lar \dar["f_1-g_1"] \drar[sloped,pos=.4,"s_1"] & P_2 \lar \dar["f_2 - g_2"] & \ldots \lar & P_{n-1} \lar\dar["f_{n-1}- g_{n-1}"'] \drar[sloped,pos=.3,"s_{n-1}"] & P_n \lar \dar["f_n - g_n"]  \drar[dashed,sloped,pos=.4,"s_n"] & P_{n+1} \lar \\
+			H_0(A_*) & A_0 \lar & A_1 \lar & A_2 \lar & \ldots \lar & A_{n-1} \lar & A_n \lar & A_{n+1} \lar 
+		\end{tikzcd}
+	\]
+	Wir erhalten
+	\[
+		\begin{tikzcd}[row sep=large, column sep=7.5em]
+			\mbox{} &  A_{n+1} \dar["d_{n+1}"] \\
+			P_n \rar["(f_n-g_n)- s_{n-1} d_n"'] \urar[dashed] &\ker d_n
+		\end{tikzcd}
+	\]
+	Da $P_n$ projektiv ist, gibt es $s_n \colon P_n \to A_{n+1}$ mit $d'_{n+1} \circ s_n = (f_n -g_n) - s_{n-1} \circ d_n$.
+\end{beweis}
+% section 11 (end)
 
 
 
