@@ -2025,7 +2025,197 @@ Ab jetzt: $R$ kommutativ!
 	\]
 	Da $P_n$ projektiv ist, gibt es $s_n \colon P_n \to A_{n+1}$ mit $d'_{n+1} \circ s_n = (f_n -g_n) - s_{n-1} \circ d_n$.
 \end{beweis}
+
+\begin{definition}[{name=[projektive Dimension]}]
+	Sei $R$ ein Ring.
+	Die \Index{projektive Dimension} von $R$ ist das kleinste $n$, sodass jeder $R$-Modul eine projektive Auflösung der Länge $n$ hat, also eine Auflösung der Form
+	\[
+		\begin{tikzcd}
+			M & P_0 \lar & P_1 \lar & P_2 \lar & \ldots \lar & P_n \lar & 0 \lar
+		\end{tikzcd}
+	\] 
+	Gibt es kein solches $n$, so sagen wir die projektive Dimension von $R$ ist $\infty$.
+\end{definition}
+
+\begin{beispiel}[{name=[Körper haben projektive Dimension $0$]}]
+	Ist $R=K$ ein Körper, so ist jeder $K$-Modul, also jeder $K$-Vektorraum, frei.
+	Daher ist die projektive Dimension $0$.
+\end{beispiel}
+
+\begin{satz}[{name=[projektive Dimension von Hauptidealringen]}]
+	Für Hauptidealringe ist die projektive Dimension immer $\le 1$.
+\end{satz}
+\begin{beweis}
+	Ist $M$ ein $R$-Modul, so gibt es einen freien $R$-Modul $P_0$ mit einer surjektiven Abbildung $\epsilon \colon P_0 \to M$.
+	Ist $R$ ein Hauptidealring, so ist $P_1 := \ker \epsilon$ als Untermodul eines freien Moduls wieder frei\todo{Referenz} und wir erhalten wir eine projektive Auflösung
+	\(
+		\begin{tikzcd}[cramped,sep=small]
+			M & P_0 \lar & P_1 \lar
+		\end{tikzcd}
+	\)
+	der Länge $1$.
+\end{beweis}
+
+\begin{lemma}
+	Sei 
+	\[
+		\begin{tikzcd}
+			0 \rar & M \rar["f"] & M' \rar["f'"] & M'' \rar & 0
+		\end{tikzcd}
+	\]
+	eine kurze exakte Sequenz von $R$-Moduln. Dan gilt
+	\begin{enumerate}[a)]
+		\item Sind $\epsilon \colon P \to M$, $\epsilon'' \colon P'' \to M''$ surjektiv, wobei $P''$ projektiv, so gibt es $\epsilon' \colon P \oplus P'' \to M'$ surjektiv, sodass folgendes Diagramm kommutiert:
+		\[
+			\begin{tikzcd}
+				0 \rar & P \rar[hook] \dar["\epsilon"] & P \oplus P'' \rar[two heads] \dar["\epsilon'"] & P'' \rar  \dar["\epsilon''"] & 0 \\
+				0 \rar & M \rar["f"] & M' \rar["f'"] & M'' \rar & 0
+			\end{tikzcd}
+		\]
+		\item Es gibt projektive Auflösungen $(P_*,\epsilon)$, $(P_*',\epsilon')$ und $(P_*'',\epsilon'')$ von $M$, $M'$ und $M''$ und eine kurze exakte Folge von Kettenkomplexen
+		\[
+			\begin{tikzcd}
+				0 \rar & P_* \rar["F"] & P_*' \rar["F'"] & P_*'' \rar & 0
+			\end{tikzcd}
+		\]
+		sodass folgendes Diagramm kommutiert:
+		\[
+			\begin{tikzcd}[sep=large]
+				H_=(P_*) \rar["H_0(F)"] \dar["\epsilon","\cong"'] & H_0(P_*') \dar["\epsilon'","\cong"'] \rar["H_0(F')"] & H_0(P_*'') \dar["\epsilon''","\cong"'] \\
+				M \rar & M' \rar & M''
+			\end{tikzcd}
+		\]
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}[a)]
+		\item Da $f' \colon M' \to M''$ surjektiv und $P''$ projektiv ist, gibt es $\hat{\epsilon}'' \colon P'' \to M'$ mit $\epsilon'' = f' \circ \hat{\epsilon}''$.
+		Nun können wir $\epsilon' \colon P \oplus P'' \to M'$ durch $\epsilon' (p,p'') := f \enbrace*{\epsilon(p)} + \hat{\epsilon}''(p'')$ definieren.
+		Noch zu zeigen: $\epsilon'$ ist surjektiv. 
+		Sei $v' \in M'$. Da $\epsilon''$ surjektiv ist, gibt es $x'' \in P''$ mit $\epsilon''(x'')=f'(v')$. Dann gilt
+		\[
+			f'\enbrace*{v' - \hat{\epsilon}''(x'')} = f'(v') - \Underbracket{f' \enbrace*{\hat{\epsilon}''(x'')}}{=\epsilon''(x'')} = 0
+		\]
+		Daher gibt es $v \in M$ mit $f(v)=v' - \hat{\epsilon}''(x'')$.
+		Sei nun $x \in P$ nut $\epsilon(x)=v$.
+		Dann ist $\epsilon'(x,x'')=v'$.
+		\item Wähle projektive Auflösungen $(P_*,\epsilon)$ von $M$ und $(P_*'',\epsilon'')$ von $M''$.
+		Sei $P_n' := P_n \oplus P_n''$.
+		Durch induktive Anwendung von a) erhalten wir Abbildungen $\epsilon' \colon P_0' \to M'$, $d_i' \colon P_i' \to P_{i-1}'$, sodass $\begin{tikzcd}[cramped,sep=small]
+			P_* \rar & P_*' \rar & P_*''
+		\end{tikzcd}$ eine kurze exakte Sequenz von Kettenkomplexen ist und das Diagramm aus der Behauptung kommutiert.\qedhere
+	\end{enumerate}
+\end{beweis}
+\newpage
 % section 11 (end)
+
+\section{$\Tor$ und $\Ext$} % (fold)
+\label{sec:12}
+
+\todo[inline]{Revision 12}
+\begin{frage}
+	Sei $V$ ein $\mathbb{Z}$-Modul und $V''$ ein $R$-Modul. Ist $H_*(X;V) \cong H_*(X) \otimes V$? 
+	\[
+		H* \enbrace*{V' \otimes_R C_*(X;R)}= H_*(X;V') \cong V' \otimes_R H_*(X;R)
+	\]
+	Sei $W$ ein $R$-Modul. Gilt dann
+	\[
+		H^*(X;V) \cong \Hom_\mathbb{Z}(H_*(X),V) \qquad H^*(X;W) \cong \Hom_R \enbrace*{H_*(X;R),W}
+	\]
+	Genauso für Kettenkomplexe: Sei $C_*$ ein $\mathbb{Z}$-Kettenkomplex ud $C_*'$ ein $R$-Kettenkomplex. Gilt dann
+	\[
+		H_* \enbrace*{V \otimes_\mathbb{Z} C_*} \cong V \otimes _\mathbb{Z} H_*(C_*) \qquad H_* \enbrace*{V' \otimes_R C_*'} \cong V' \otimes_R H_*(C_*)
+	\]
+	und wie sieht es hiermit aus:
+	\[
+		H^* \enbrace[\big]{\Hom_\mathbb{Z}(C_*,V)} \cong \Hom_\mathbb{Z} \enbrace[\big]{H_*(C_*),V} \qquad H^*\enbrace[\big]{\Hom_R(C_*',W)} \cong \Hom_R \enbrace[\big]{H_*(C_*'),W}
+	\]
+\end{frage}
+
+\begin{konvention}
+	Moduln sind -- wie gewohnt -- immer Linksmoduln, außer wir sprechen explizit von Rechtsmoduln
+\end{konvention}
+
+\begin{definition}
+	Seien $R$ und $S$ Ringe.
+	Ein Funktor $F\colon \Mod{R} \to \Mod{S}$ heißt \bet{$\mathbb{Z}$-linear}\index{Funktor!$\mathbb{Z}$-linearer}, wenn für $f,g \colon M \to M'$ gilt $F(f + g)= F(f) + F(g)$.
+	
+	Ein solcher Funktor heißt \bet{exakt}\index{Funktor!exakter}, wenn er kurze exakte Folgen von $R$-Moduln auf kurze exakte Folgen von $S$-Moduln abbildet.
+\end{definition}
+
+\begin{bemerkung}
+	Sei $C_*$ ein $R$-Kettenkomplex.
+	Ist $F \colon \Mod{R} \to \Mod{S}$ exakt, so gilt
+	\[
+		\begin{array}{ll}
+			H_* \enbrace*{F(C_*)} = F_* \enbrace*{H_*(C_*)} & \text{ falls $F$ kovariant ist} \\
+			H^* \enbrace*{F(C_*)} = F \enbrace*{H_*(C_*)} & \text{ falls $F$ kontravariant ist} 
+		\end{array}
+	\]
+\end{bemerkung}
+
+\begin{beispiel}
+	\begin{enumerate}[(i)]
+		\item Sei $V$ ein $R$-Rechtsmodul.
+		Dann erhalten wir einen $\mathbb{Z}$-linearen Funktor 
+		\[
+			V \otimes_R \colon \Mod{R} \to \Mod{\mathbb{Z}}
+		\]
+		\item Sei $W$ ein $R$-Modul. 
+		Dann erhalten wir einen $\mathbb{Z}$-linearen Funktor 
+		\[
+			\Hom_R(-,W) \colon \Mod{R} \to \Mod{\mathbb{Z}}
+		\]
+		\item Für $R=\mathbb{Z}$ und $V= \sfrac{\mathbb{Z}}{2 \mathbb{Z}}$ sind weder $\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \otimes $ noch $\Hom_\mathbb{Z} \enbrace*{-, \sfrac{\mathbb{Z}}{2 \mathbb{Z}}}$ exakt:
+		\[
+			\begin{tikzcd}
+				0 \rar & \mathbb{Z} \rar["\cdot 2"] & \mathbb{Z} \rar & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
+			\end{tikzcd}
+		\]
+		wird nach Tensorieren zu 
+		\[
+			\begin{tikzcd}
+				\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar["0"] & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar["\cong"] & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
+			\end{tikzcd}
+		\]
+		und nach Anwenden von $\Hom(-,\sfrac{\mathbb{Z}}{2 \mathbb{Z}})$ zu
+		\[
+			\begin{tikzcd}
+				\sfrac{\mathbb{Z}}{2 \mathbb{Z}}  & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \lar["0"']  & \sfrac{\mathbb{Z}}{2 \mathbb{Z}}\lar["\cong"']  & 0 \lar
+			\end{tikzcd}
+		\]
+	\end{enumerate}
+\end{beispiel}
+
+\begin{lemma}
+	Sei $V$ ein $R$-Rechtsmodul und $W$ ein $R$-Modul.
+	Sei $\begin{tikzcd}[cramped,sep=small]
+		0 \rar& M \rar &M' \rar & M'' \rar & 0
+	\end{tikzcd}$ 
+	eine kurze exakte Folge von $R$-Moduln.
+	Dann sind folgende Sequenzen exakt:
+	\begin{enumerate}[(i)]
+		\item \( \begin{tikzcd}[cramped,sep=2.3em]
+					V \otimes_R M \rar & V \otimes_R M' \rar & V \otimes_R M'' \rar & 0
+				\end{tikzcd} \)
+		\item $\begin{tikzcd}[cramped,sep=small]
+			\Hom_R(M,W)  & \Hom_R(M',W) \lar & \Hom_R(M'',W) \lar & 0 \lar
+		\end{tikzcd}$
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\emph{Übungsaufgabe 2 von Blatt 5.}
+\end{beweis}
+
+\begin{lemma}
+	Sei $V$ ein $R$-Rechtsmodul, $W$ und $M$  $R$-Moduln.
+	Sei $\epsilon \colon P_* \to M$ eine projektive Auflösung.
+	Dann sind die (Ko)"=Kettenkomplexe $V \otimes_R P_*$ und $\Hom_R(P_*,W)$ bis auf (Ko)"=Kettenhomotopieäquivalenz unabhängig von der Wahl der Auflösung $P_*$ und es gilt
+	\[
+		H_0(V \otimes_R P_*) = V \otimes_R M \qquad \text{ und } \qquad H^0 \enbrace[\big]{\Hom_R(P_*,W)} = \Hom_R(M,W)
+	\]
+\end{lemma}
+% section 12 (end)
 
 
 
