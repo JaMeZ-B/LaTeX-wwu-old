@@ -601,7 +601,7 @@
 	Sei weiter $p \colon D^1 \to \set*{-1}$ die Projektion. 
 	Dann gilt $p^* \circ i_-^* \circ j^* = \id_{H^0(D^1;R)}$. 
 	Insbesondere spaltet die Sequenz und bleibt exakt nach Anwenden des Funktors ${-}\otimes H^p(X;R)$. 
-	Genauso überlegt man sich, dass die Paarfolge\todo{Warum da oben die Nullabbildung steht, ist mir noch nicht klar}
+	Genauso überlegt man sich, dass die Paarfolge\todo{Warum da gleich die Nullabbildung steht, ist mir noch nicht klar}
 	\[
 		\begin{tikzcd}
 			\ldots \rar & H^p \enbrace*{D^1\times X, \partial D^1\times X; R}\rar["0"] & H^p \enbrace*{D^1 \times X;R}\rar & H^p \enbrace*{\partial D^1 \times X;R}\rar & \ldots 
@@ -676,7 +676,7 @@
 	Dann erhalten wir eine induzierte Abbildung $\Sp^* \colon C^p(X,A;R) \to C^p(X,A;R)$ definiert durch $\Sp^*(\alpha) := \alpha \circ \Sp$. Es gilt
 	\begin{enumerate}[a)]
 		\item $\Sp$ ist eine Kettenabbildung und $\Sp^*$ ist eine Kokettenabbildung
-		\item Ist $R$ kommutativ, so gilt $\beta \cupp \alpha = (-1)^{p \cdot q}\Sp^*\enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)}$
+		\item Ist $R$ kommutativ, so gilt $\beta \cupp \alpha = (-1)^{p \cdot q}\cdot \Sp^*\enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)}$
 	\end{enumerate}
 \end{lemma}
 \begin{beweis}
@@ -722,14 +722,15 @@
 	$\Sp \colon C_*(X,A) \to C_*(X,A)$ ist kettenhomotop zur Identität. 
 \end{lemma}
 \begin{beweis}
-	Folgt offensichtlich aus \autoref{prop:H0_kettenhomotop}.\todo[inline]{muss eventuell noch angepasst werden}
+	$\Sp$ ist eine natürliche Transformation mit $\Sp_0 =\id \colon C_0(X) \to C_0(X)$.
+	Nach \autoref{prop:H0_kettenhomotop} ist $\Sp$ damit kettenhomotop zur Identität.
 \end{beweis}
 
 \begin{satz}[{name=[Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ]}]
-	Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ. \todo{Revision 4}
+	Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ. 
 \end{satz}
 \begin{beweis}
-	Seien $\xi \in H^p(X,A;R)$, $\eta \in H^q(X,B;R)$. Wähle $\alpha \in C^p(X,A;R)$, $\beta \in C^q(X,B;R)$ mit $\xi= [\alpha]$ und $\eta= [\beta]$. Dann ist 
+	Seien $\xi \in H^p(X,A;R)$, $\eta \in H^q(X,B;R)$. Wähle $\alpha \in C^p(X,A;R)$, $\beta \in C^q(X,B;R)$ mit $\xi= [\alpha]$ und $\eta= [\beta]$. Dann ist, da mit $\Sp$ auch $\Sp^*$ kokettenhomotop zur Identität ist.
 	\begin{align}
 		\xi \cupp \eta = \benbrace*{\alpha \cupp \beta} = (-1)^{pq} \cdot \benbrace*{\Sp^* \enbrace[\big]{\Sp^*(\beta) \cupp \Sp^*(\alpha)}} &= (-1)^{pq} \cdot 
 		\benbrace[\big]{\Sp^*(\beta) \cupp \Sp^*(\alpha)} \\
@@ -740,9 +741,9 @@
 
 \begin{proposition}[label=prop:H0_kettenhomotop]
 	Sei $\tau_* \colon C_*^\sing \to C_*^\sing$ eine natürliche Transformation durch Kettenabbildungen. Induziert $\tau$ die triviale Abbildung auf $H_0(\set*{\pt})$, so ist 
-	$\tau_*$ kettenhomotop zur Identität, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit
+	$\tau_*$ kettenhomotop zur Identität, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit \todo{Revision 4}
 	\[
-		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \tau_*
+		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \id -\tau_* 
 	\]
 \end{proposition}
 \begin{beweis}
@@ -1526,8 +1527,8 @@ Ab jetzt: $R$ kommutativ!
 \begin{satz}
 	Seien $U,V \subseteq X$ offen. Dann gibt es eine lange exakte Mayer-Vietoris-Folge 
 	\[
-		\begin{tikzcd}[sep=1.6em]
-			\ldots \rar & H^n(X,U+V) \rar & H^n(X,U) \oplus H^n(X,V) \rar & H^n(X,U\cap V) \rar["\partial"] & H^{n+1}(x,U\cup V) \rar & \ldots 
+		\begin{tikzcd}[sep=1.55em]
+			\ldots \rar & H^n(X,U+V) \rar & H^n(X,U) \oplus H^n(X,V) \rar & H^n(X,U\cap V) \rar["\partial"] & H^{n+1}(X,U\cup V) \rar & \ldots 
 		\end{tikzcd}
 	\]
 	Der Verbindungshomomorphismus $\partial$ kann wie folgt beschrieben werden: Sei $\alpha \in C^n(X,U \cap V)$ mit $d^n(\alpha)=0$.
@@ -1963,13 +1964,13 @@ Ab jetzt: $R$ kommutativ!
 
 \begin{satz}[{name=[Existenz projektiver Auflösungen]}]
 	Sei $M$ ein $R$-Modul. Dann gilt
-	\begin{enumerate}[a)]
+	\begin{enumerate}[a),itemsep=0pt]
 		\item $M$ besitzt eine projektive Auflösung.
 		\item Sind $(P_*,\epsilon)$ und $(P_*',\epsilon')$ zwei projektive Auflösungen, so gibt es eine Kettenhomotopieäquivalenz $f \colon P_* \to P_*'$ mit $H_0(f)= (\epsilon') ^{-1} \circ \epsilon$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	\begin{enumerate}[a)]
+	\begin{enumerate}[a),itemsep=0pt]
 		\item Die $P_n$ werden induktiv definiert. 
 		Sei 
 		$\begin{tikzcd}[cramped,sep=1.5em]
@@ -1977,13 +1978,13 @@ Ab jetzt: $R$ kommutativ!
 		\end{tikzcd}$
 		bereits definiert und $S$ ein Erzeugendensystem von $\ker d_n$.
 		Wir setzen $P_{n+1} := R[S]$ und definieren $d_{n+1} \colon P_{n+1} \to P_n$ als die Fortsetzung der Inklusion $S \subseteq P_n$ zu einer $R$-linearen Abbildung $R[S]\to P_n$.
-		\item Folgt aus folgender Proposition.\todo{ref}\qedhere
+		\item Folgt aus der folgenden \autoref{prop:113}.\qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{proposition}
+\begin{proposition}[label=prop:113]
 	Seien $A_*$ und $P_*$ zwei Kettenkomplexe mit 
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item Die Kettenmoduln von $P_*$ sind projektiv.
 		\item $H_*(A_*)=0$ für $*\ge 1$.
 	\end{itemize}
@@ -2012,7 +2013,7 @@ Ab jetzt: $R$ kommutativ!
 	Wir konstruieren eine Kettenhomotopie $s_n \colon P_n \to A_{n+1}$ induktiv. Seien $s_0, \ldots ,s_{n-1}$ schon konstruiert mit $f_i -g_i= s_{i-1} d_i + d_{i+1} s_i$ für $i=0, \ldots , n$.
 	\[
 		\begin{tikzcd}[row sep=large, column sep=3.15em]
-			H_0(P_*) \dar["0"] & P_0 \lar \dar["f_0-g_0"] \drar[sloped,pos=.4,"s_0"] & P_1 \lar \dar["f_1-g_1"] \drar[sloped,pos=.4,"s_1"] & P_2 \lar \dar["f_2 - g_2"] & \ldots \lar & P_{n-1} \lar\dar["f_{n-1}- g_{n-1}"'] \drar[sloped,pos=.3,"s_{n-1}"] & P_n \lar \dar["f_n - g_n"]  \drar[dashed,sloped,pos=.4,"s_n"] & P_{n+1} \lar \\
+			H_0(P_*) \dar["0"] & P_0 \lar \dar["f_0-g_0"'] \drar[sloped,pos=.4,"s_0"] & P_1 \lar \dar[pos=.7,"f_1-g_1"] \drar[sloped,pos=.4,"s_1"] & P_2 \lar \dar["f_2 - g_2"] & \ldots \lar & P_{n-1} \lar\dar["f_{n-1}- g_{n-1}"'] \drar[sloped,pos=.3,"s_{n-1}"] & P_n \lar \dar[pos=.7,"f_n - g_n"]  \drar[dashed,sloped,pos=.4,"s_n"] & P_{n+1} \lar \\
 			H_0(A_*) & A_0 \lar & A_1 \lar & A_2 \lar & \ldots \lar & A_{n-1} \lar & A_n \lar & A_{n+1} \lar 
 		\end{tikzcd}
 	\]
