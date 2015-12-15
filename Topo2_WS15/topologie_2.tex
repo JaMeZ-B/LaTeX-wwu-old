@@ -723,7 +723,7 @@
 \end{lemma}
 \begin{beweis}
 	$\Sp$ ist eine natürliche Transformation mit $\Sp_0 =\id \colon C_0(X) \to C_0(X)$.
-	Nach \autoref{prop:H0_kettenhomotop} ist $\Sp$ damit kettenhomotop zur Identität.
+	Nach \autoref{prop:H0_kettenhomotop} bzw. \autoref{korr:H0_kettenhomotop} ist $\Sp$ damit kettenhomotop zur Identität.
 \end{beweis}
 
 \begin{satz}[{name=[Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ]}]
@@ -739,38 +739,45 @@
 	\end{align}
 \end{beweis}
 
-\begin{proposition}[label=prop:H0_kettenhomotop]
+\begin{proposition}[label=prop:H0_kettenhomotop,{name=[Nullkettenhomotopie von natürlichen Transformationen $C_*^\sing \to C_*^\sing$]}]
 	Sei $\tau_* \colon C_*^\sing \to C_*^\sing$ eine natürliche Transformation durch Kettenabbildungen. Induziert $\tau$ die triviale Abbildung auf $H_0(\set*{\pt})$, so ist 
-	$\tau_*$ kettenhomotop zur Identität, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit \todo{Revision 4}
+	$\tau_*$ kettenhomotop zur Nullabbildung, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit 
 	\[
-		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \id -\tau_* 
+		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \tau_* 
 	\]
 \end{proposition}
 \begin{beweis}
-	Da $\tau$ auf $H_0(\pt)$ trivial ist, ist $\tau \enbrace*{\id_{\abs*{\Delta^0}}}=0$. Es folgt für $\sigma \colon \abs{\Delta^0} \to X$
+	Da $\tau$ auf $H_0(\set{\pt})$ trivial ist, ist $\tau \enbrace*{\id_{\abs*{\Delta^0}}}=0$. Es folgt für $\sigma \colon \abs{\Delta^0} \to X$
 	\[
 		\tau(\sigma) = \tau \enbrace*{\sigma_* \enbrace*{\id_{\abs*{\Delta^0}}}} = \sigma_* \enbrace*{\tau \enbrace*{\id_{\abs*{\Delta^0}}}} = 0
 	\]
 	Es folgt, dass $\tau_0 \colon C_0(X) \to C_0(X)$ trivial ist. Wir setzen $\eta_0 = 0$ und und definieren $\eta_1, \eta_2, \ldots $ induktiv: Seien $\eta_1, \ldots,\eta_{k-1}$
 	schon konstruiert mit $d^\sing_{l+1} \circ \eta_l + \eta_{l-1} \circ d^\sing_{l}=\tau_l$ für $l=0, \ldots , k-1$. Es folgt
 	\begin{align}
-		d_k^\sing \circ \enbrace*{\tau_k -  \eta_{k-1} \circ d_k^\sing } &= d^\sing_k \circ \tau_k - \Underbrace{d^\sing_k \circ \eta_{k-1}}{ } \circ d^\sing_k \\
+		d_k^\sing \enbrace*{\tau_k -  \eta_{k-1} \circ d_k^\sing } &= d^\sing_k \circ \tau_k - d^\sing_k \circ \eta_{k-1} \circ d^\sing_k \\
 		&= \tau_{k-1} \circ d_k^\sing -  \enbrace*{\tau_{k-1} - \eta_{k-2} \circ d_{k-1}^\sing} \circ d_k^\sing =0
 	\end{align}
-	Betrachte $\id_{\abs*{\Delta^k}} \in C_k^\sing( \abs{\Delta^k})$. Da $H_k \enbrace*{\abs{\Delta^k}} =0$ und 
+	Setze nun $\id_{\abs*{\Delta^k}} \in C_k^\sing( \abs{\Delta^k})$ in die Formel ein. 
+	Da $\abs*{\Delta^k}$ kontrahierbar ist, gilt $H_k \enbrace*{\abs{\Delta^k}} =0$. Außerdem gilt
 	\[
 		d_k^\sing \enbrace[\Big]{\tau_k \enbrace*{\id_{\abs*{\Delta^k} }} - \eta_{k-1} \enbrace*{d_k^\sing \enbrace*{\id_{\abs*{\Delta^k} }}}} =0
 	\]
-	gibt es $a_k \in C_{k+1} \enbrace*{\abs{\Delta^k} }$ wobei $d_{k+1}^\sing(a_k)$ das Innere der Klammer ist. Für $\sigma \colon \abs{\Delta^k} \to X$ setzen wir nun
-	$\eta_k(\sigma) := \sigma_*(a_k)$.
+	und somit gibt es ein $a_k \in C_{k+1} \enbrace*{\abs{\Delta^k} }$, sodass $d_{k+1}^\sing(a_k)$ das Innere der Klammer ist. 
+	Für einen singulären Simplex $\sigma \colon \abs{\Delta^k} \to X$ setzen wir nun $\eta_k(\sigma) := \sigma_*(a_k)$.
+	Dann gilt 
+	\[
+		\enbrace*{d_{k+1}^\sing \circ \eta_k + \eta_{k-1} \circ d_k^\sing - \tau_k}(\sigma) = \sigma_* \enbrace[\big]{d_{k+1}^\sing \circ \eta_k + \eta_{k-1} \circ d_k^\sing - \tau_k} (\id_{\abs*{\Delta^k}}) =0 
+	\]
+	nach Konstruktion.
+	Damit ist $d_{k+1}^\sing \circ \eta_k + \eta_{k-1} \circ d_k^\sing = \tau_k$ wie gewünscht und $\eta_*$ ist die gesuchte Kettenhomotopie.
 \end{beweis}
 
-\begin{korollar}
-	Seien $\tau, \tau'$ zwei natürliche Transformationen $C_*^\sing \to C_*^\sing$ durch Kettenabbildungen mit $H_0(\tau) = H_0(\tau')$ für $X= \set*{\pt}$, so sind $\tau$ und 
-	$\tau'$ kettenhomotop.
+\begin{korollar}[label=korr:H0_kettenhomotop,{name=[Kettenhomotopie von natürlichen Transformationen $C_*^\sing \to C_*^\sing$]}]
+	Seien $\tau, \tau'$ zwei natürliche Transformationen $C_*^\sing \to C_*^\sing$ durch Kettenabbildungen, sodass $H_0(\tau) = H_0(\tau')$ für $X= \set*{\pt}$ gilt. 
+	Dann sind $\tau$ und $\tau'$ kettenhomotop.
 \end{korollar}
 \begin{beweis}
-	Betrachte $\tau-\tau'$ und wende \autoref{prop:H0_kettenhomotop} an.
+	Betrachte $\tau-\tau'$ und wende \autoref{prop:H0_kettenhomotop} an. \todo{Revision 4}
 \end{beweis}
 
 \begin{definition}
