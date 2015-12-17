@@ -2124,7 +2124,7 @@ Ab jetzt: $R$ kommutativ!
 \begin{frage}
 	Sei $V$ ein $\mathbb{Z}$-Modul und $V''$ ein $R$-Modul. Ist $H_*(X;V) \cong H_*(X) \otimes V$? 
 	\[
-		H* \enbrace*{V' \otimes_R C_*(X;R)}= H_*(X;V') \cong V' \otimes_R H_*(X;R)
+		H_* \enbrace*{V' \otimes_R C_*(X;R)}= H_*(X;V') \cong V' \otimes_R H_*(X;R)
 	\]
 	Sei $W$ ein $R$-Modul. Gilt dann
 	\[
@@ -2206,7 +2206,7 @@ Ab jetzt: $R$ kommutativ!
 		\item \( \begin{tikzcd}[cramped,sep=2.3em]
 					V \otimes_R M \rar & V \otimes_R M' \rar & V \otimes_R M'' \rar & 0
 				\end{tikzcd} \)
-		\item $\begin{tikzcd}[cramped,sep=small]
+		\item $\begin{tikzcd}[cramped,sep=1.8em]
 			\Hom_R(M,W)  & \Hom_R(M',W) \lar & \Hom_R(M'',W) \lar & 0 \lar
 		\end{tikzcd}$
 	\end{enumerate}
@@ -2223,6 +2223,180 @@ Ab jetzt: $R$ kommutativ!
 		H_0(V \otimes_R P_*) = V \otimes_R M \qquad \text{ und } \qquad H^0 \enbrace[\big]{\Hom_R(P_*,W)} = \Hom_R(M,W)
 	\]
 \end{lemma}
+
+\noindent\todo[inline]{Hier fehlt noch was \ldots insbesondere kann sich die Nummerierung noch ändern}
+
+\begin{definition}[{name=[$\Tor$ und $\Ext$]}]
+	Wir setzen
+	\[
+		\Tor_n^R(V,M) := H_n(V \otimes_R P_*) \qquad \text{ und } \qquad \Ext_R^n(M,W) := H^n \enbrace*{\Hom_R(P_*,W)} 
+	\]
+\end{definition}
+
+\begin{bemerkung}
+	Es gilt $\Tor_0^R(V,M) = V \otimes_R M$ und $\Ext_R^0(M,W)=\Hom_R(M,W)$.
+	Unter einigen zusätzlichen Annahmen, haben wir folgende einfache Schlussfolgerungen für $\Tor$ und $\Ext$:
+	\begin{enumerate}[(i)]
+		\item Ist $M$ projektiv, so ist $\Tor_n^R(V,M)=0$ und $\Ext_R^n(M,W)=0$ für $n>0$.
+		\item Ist $K$ ein Körper, so ist $\Tor_n^K(V,M)=0$ und $\Ext_K^n(M,W)=0$ für $n>0$.
+		\item Ist $R$ ein Hauptidealring, so ist $\Tor_n^R(V,M)=0$ und $\Ext_R^n(M,W)=0$ für $n>1$.
+	\end{enumerate}
+	$\Tor^R_n$ und $\Ext_R^n$ sind Funktoren in $V,M$ für $\Tor$ (kovariant) und $M$ (kontravariant), $W$ (kovariant) für $\Ext$.
+\end{bemerkung}
+
+\begin{satz}
+	Sei 
+	\(
+		\begin{tikzcd}[cramped]
+			0 \rar & M \rar & M' \rar & M'' \rar & 0
+		\end{tikzcd}
+	\)
+	eine kurze exakte Folge von $R$-Moduln.
+	Dann gibt es lange exakte Folgen \todo{Verbindungsho\-momorphismen hinzufügen}
+	\begin{enumerate}[(i)]
+		\item \[
+			\begin{tikzcd}
+				\ldots \rar & \Tor^R_n(V,M) \rar & \Tor^R_n(V,M') \rar & \Tor_n^R(V,M'') & \\
+				&\Tor^R_{n-1}(V,M) \rar & \ldots \rar & \Tor_1^R(V,M'') \\
+				&V \otimes_R M \rar & V \otimes_R M' \rar & V \otimes_R M'' \rar & 0 
+			\end{tikzcd}
+		\]
+		\item \[
+			\begin{tikzcd}
+				\ldots & \Ext_R^n(M,W) \lar & \Ext^n_R(M',W) \lar & \Ext_R^n(M'',W) \lar \\
+				&\Ext_R^{n-1}(M,W) & \lar \ldots \\
+				&\Hom_R(M,W) & \Hom_R(M',W) \lar & \Hom_R(M'',W) \lar & 0 \lar
+			\end{tikzcd}
+		\]
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Wir können Auflösungen $(P_*,\epsilon)$, $(P_*',\epsilon')$ und $(P_*'',\epsilon'')$ von $M$, $M'$ und $M''$ wählen, sodass wir eine kurze exakte Folge
+	\(
+		\begin{tikzcd}[cramped,sep=small]
+			0 \rar & P_* \rar & P_*' \rar & P_*'' \rar & 0
+		\end{tikzcd}
+	\)
+	erhalten, für die folgendes Diagramm kommutiert: 
+	\[
+		\begin{tikzcd}
+			P_* \rar \dar["\epsilon"] & P_*' \dar["\epsilon'"] \rar & P_*'' \dar["\epsilon''"] \\
+			M \rar & M' \rar & M''
+		\end{tikzcd}
+	\]
+	Da $P_n''$ projektiv ist, spaltet 
+	\(
+		\begin{tikzcd}[cramped,sep=small]
+			0 \rar & P_n \rar & P_n' \rar & P_n'' \rar & 0
+		\end{tikzcd}
+	\)
+	für jedes $n$ und
+	\[
+		\begin{tikzcd}
+			0 \rar & V \otimes_R P_* \rar & V \otimes_R P_*' \rar & V \otimes_R P_*'' \rar &0
+		\end{tikzcd}
+	\]
+	sowie
+	\[
+		\begin{tikzcd}
+			0 & \Hom_R(P_*,W) \lar & \Hom_R(P_*',W) \lar & \Hom_R(P_*'',W) \lar & 0 \lar
+		\end{tikzcd}
+	\]
+	sind immer noch kurz exakt. 
+	Die lange exakte Folge in (i) und (ii) sind die zugehörigen langen exakten Folgen in Homologie bzw. Kohomologie.
+\end{beweis}
+
+\begin{bemerkung}
+	Es gibt natürliche Isomorphismen für $\Tor$:
+	\[
+		\bigoplus_{i \in I} \Tor_n^R(V_i,M) \cong \Tor_n^R \enbrace*{\bigoplus_{i \in I} V_i, M} \qquad \text{ und } \qquad 
+		\bigoplus_{i \in I} \Tor_n^R(V,M_i) \cong \Tor_n^R \enbrace*{V, \bigoplus_{i \in I} M} 
+	\]
+	und für $\Ext$:
+	\[
+		\Ext_R^n \enbrace*{\bigoplus_{i \in I} M,W} \cong \prod_{i \in I} \Ext_R^n(M_i,W) \qquad \text{ und } \qquad \Ext_R^n \enbrace*{M, \prod_{i \in I} W_i} \cong \prod_{i \in I} \Ext_R^n(M,W_i) 
+	\]
+\end{bemerkung}
+
+\begin{bemerkung}
+	Sei $R$ ein Hauptidealring. 
+	Seien $a,b \in R\setminus \set*{0}$ und $d$ ein größter gemeinsamer Teiler von $a$ und $b$.
+	Sei $M$ ein $R$-Modul.
+	Dann gilt 
+	\begin{multicols}{2}
+		\begin{enumerate}[(i)]
+			\item $\sfrac{R}{(a)} \otimes_R \sfrac{R}{(b)} \cong \sfrac{R}{(d)}$
+			\item $\Hom_R \enbrace*{\sfrac{R}{(a)},\sfrac{R}{(b)}} \cong \sfrac{R}{(d)}$
+			\item $\Tor_1^R \enbrace*{\sfrac{R}{(a)}, \sfrac{R}{(b)}} \cong \sfrac{R}{(d)}$
+			\item $\Ext^1_R \enbrace*{\sfrac{R}{(a)}, \sfrac{R}{(b)}} \cong \sfrac{R}{(d)}$
+			\item $M \otimes_R R \cong R \otimes_R M \cong M$
+			\item $\Hom_R(R,M) \cong M$
+			\item $\Tor^R_1(R,M) \cong \Tor_1^R(M,R)=0$
+			\item $\Ext^1_R(R,M) =0$
+			\item $\Hom_R \enbrace*{\sfrac{R}{(a)},R}=0$
+			\item $\Ext_R^1 \enbrace*{\sfrac{R}{(a)},R}=0$
+		\end{enumerate}
+	\end{multicols}
+\end{bemerkung}
+
+\begin{bemerkung}
+	Sei $(P_*,\epsilon)$ ein projektive Auflösung von $V$ durch projektive $R$-Rechtsmoduln.
+	Dann gilt 
+	\[
+		\Tor_n^R(V,M) \cong H_n(P_* \otimes M)
+	\]
+	Beweis kommt später noch.\todo{Referenz wenn soweit}
+\end{bemerkung}
+
+\begin{korollarB}
+	Für $R$ kommutativ gilt: $\Tor_n^R(V,M) \cong \Tor_n^R(M,V)$.
+\end{korollarB}
+
+\begin{definition}
+	Ein $R$-Modul $I$ heißt \bet{injektiv}\index{injektiver Modul}, falls es zu jedem $j \colon M \hookrightarrow N$ und $f \colon M \to I$ ein $\hat{f} \colon N \to I$ gibt mit $f = \hat{f} \circ j$, also
+	\[
+		\begin{tikzcd}
+			\mbox{ } & N \dlar[dashed,"\hat{f}"'] \\
+			I & M \lar["f"'] \uar["j"',hook]
+		\end{tikzcd}
+	\]
+\end{definition}
+
+\begin{bemerkung}
+	Jede kurze exakte Folge \[
+		\begin{tikzcd}
+			0 \rar & M \rar & M' \rar & M'' \rar & 0
+		\end{tikzcd}
+	\]
+	mit $M$ injektiv spaltet.
+\end{bemerkung}
+
+\begin{satz}[{name=[Existenz von injektiven Moduln]}]
+	Sei $M$ ein $R$-Modul.
+	Dann gibt es einen injektiven $R$-Modul $I$ mit einer injektiven Abbildung $M \hookrightarrow I$.
+\end{satz}
+
+\begin{definition}
+	Eine injektive Auflösung einer $R$-Moduls $M$ ist eine lange exakte Folge 
+	\[
+		\begin{tikzcd}
+			0 \rar & M \rar[hook] & I_0 \rar["\partial_0"] & I_1 \rar["\partial_1"] & \ldots 
+		\end{tikzcd}
+	\]
+	mit $I_i$ injektiv.
+\end{definition}
+
+\begin{korollarB}
+	Zu jedem $M$ gibt es eine injektive Auflösung.
+\end{korollarB}
+
+\begin{bemerkung}
+	Sei $(I_*,j)$ eine injektive Auflösung von $W$. 
+	Dann gilt
+	\[
+		\Ext_R^n(M,W) \cong H^n \enbrace*{\Hom_R(M,I_*)}
+	\]
+\end{bemerkung}
 % section 12 (end)
 
 
