@@ -877,8 +877,114 @@ Wie erkennen wir Überlagerungen?
 	
 	Sei $c \colon [0,1] \rightarrow X$ ein rektifizierbarer Weg und $\tilde{x} \in \tilde{X}$ mit $p(\tilde{x}) = c(0)$.
 	Dann existiert ein eindeutiger Weg $\tilde{c} \colon [0,1] \rightarrow \tilde{X}$ mit $p \circ \tilde{c} = c$ -- der \Index{Lift} von $c$.
+
+	\textit{Zur Eindeutigkeit:} Übungsaufgabe.
 	
+	\textit{Zur Existenz:} Sei $c \colon [0,1] \rightarrow X$ ein rektifizierbarer Weg und $\tilde{x} \in \tilde{X}$ mit $p(\tilde{x}) = c(0)$.
+	Wir definieren $S:= \{t \in [0,1] : \text{es existiert ein Lift } \tilde{c} \text{ von } c\big|_{[0,t]}\}$ und zeigen, dass $S$ offen, abgeschlossen und nichtleer ist.
+	Dann folgt $S = [0,1]$, da $[0,1]$ zusammenhängend ist.
 	
+	\begin{itemize}
+		\item $S \neq \emptyset$, da $0 \in S$ ($\tilde{c}\colon \{0\} \rightarrow \tilde{X}, 0 \mapsto \tilde{x}$)
+		\item $S$ ist offen:
+		Sei $t \in S$ beliebig, das heißt es existiert ein Lift $\tilde{c} \big|_{[0,t]}$ von $c \big|_{[0,t]}$.
+		Betrachte $\tilde{c}(t) \in \tilde{X}$.
+		Da $p$ ein lokaler Homöomorphismus ist, existiert eine offene Teilmenge $\tilde{U}_{\tilde{c}(t)} \subseteq \tilde{X}$, sodass $p \colon \tilde{U}_{\tilde{c}(t)} \rightarrow U \subseteq X$ ein Homöomorphismus ist.
+		Da $U$ offen ist, existiert ein $\varepsilon > 0$, sodass $B_\varepsilon(p \circ \tilde{c}(t)) \subseteq U$.
+		Sei $\tilde{U}_{\tilde{c}(t)}' := p^{-1}(B_\varepsilon(p \circ \tilde{c}(t)))$ und $s \colon B_\varepsilon(p \circ \tilde{c}(t)) \rightarrow \tilde{U}_{\tilde{c}(t)}'$.
+		Wir definieren:
+		\begin{align*}
+			\tilde{c} \colon [0,t+\varepsilon) &\longrightarrow \tilde{X} \\
+			t' &\longmapsto \begin{cases}
+				\tilde{c}(t'), & t' \in [0,t] \\
+				s \circ c(t'), & t' \in [t,t+\varepsilon).
+			\end{cases}
+		\end{align*}
+		$\tilde{c}$ ist stetig und ein Lift von $c \big|_{[0,t+\varepsilon)}$, also ist $[0,t + \varepsilon) \subseteq S$ und $S$ damit offen. \todo{Bild einfügen!}
+		\item $S$ ist abgeschlossen:
+		Wir nehmen an, dass $[0,a) \subseteq S$.
+		Zu zeigen ist dann $a \in S$.
+		Sei $t_n \in [0,a)$ eine beliebige Folge mit $t_n \rightarrow a$.
+		Seien $y_n := \tilde{c}(t_n) \in \tilde{X}$.
+		Da $\tilde{X}$ ein Längenraum ist, gilt o.B.d.A. für $t_n \leq t_m$
+		\[
+			\tilde{d}(y_n,y_m) \leq \ell_{\tilde{X}} \enbrace*{\tilde{c}\big|_{[t_n,t_m]}} \stack{\text{(iii)}}{\leq} \ell_X \enbrace*{c \big|_{[t_n,t_m]}} \in \RR,
+		\]
+		da $c$ ein rektifizierbarer Weg ist.
+		Wir haben eine konvergente Folge in $\RR$:
+		\[
+			\lim\limits_{n \rightarrow \infty} \ell_X \enbrace*{c \big|_{[0,t_n]}} = \ell_X.
+		\]
+		Damit erhalten wir
+		\[
+			\tilde{d}(y_n,y_m) \leq \ell_X\enbrace*{c \big|_{[t_n,t_m]}} = \ell_X \enbrace*{c \big|_{[0,t_m]}} - \ell_X \enbrace*{c \big|_{[0,t_n]}}.
+		\]
+		Somit ist $\tilde{d}(y_n,y_m)$ eine Nullfolge in $(y_n)_{n \in \NN}$ eine Cauchy-Folge.
+		Da $\tilde{X}$ vollständig ist, existiert ein $y \in \tilde{X}$ mit $\lim\limits_{n \rightarrow \infty} y_n = y$.
+		Wir definieren
+		\begin{align*}
+			\tilde{c}\colon [0,a] &\longrightarrow \tilde{X} \\
+			t &\longmapsto \begin{cases}
+				\tilde{c}(t), & t \in [0,a) \\
+				y, & t = a.
+			\end{cases}
+		\end{align*}
+		$\tilde{c}$ ist stetig, denn:
+		Sei $t_n \in [0,a)$ eine beliebige Folge, die gegen $a$ konvergiert.
+		Dann erhalten wir
+		\[
+			\lim\limits_{n \rightarrow \infty} \tilde{c}(t_n) = \lim\limits_{n \rightarrow \infty} y_n = y = \tilde{c}(a) = \tilde{c}\enbrace*{\lim\limits_{n \rightarrow} t_n}
+		\]
+		und $\tilde{c}$ ist ein Lift von $c \big|_{[0,a]}$, denn:
+		\[
+			p \circ \tilde{c}(a) = p(y) = p \enbrace*{\lim\limits_{n \rightarrow \infty} y_n} = \lim\limits_{n \rightarrow \infty} p(y_n) = \lim\limits_{n \rightarrow \infty} p \circ \tilde{c}(t_n) = \lim\limits_{n \rightarrow \infty} c(t_n) = c \enbrace*{\lim\limits_{n \rightarrow \infty} t_n} = c(a).
+		\]
+		\item Nun können wir zeigen, dass $p$ surjektiv ist:
+		Sei $x \in X$ und $y \in \tilde{X}$ beliebig.
+		Da $X$ wegzusammenhängend ist, existiert ein rektifizierbarer Weg $c$ von $p(y)$ nach $x$.
+		Sei $\tilde{c}$ der Lift von $c$, das heißt $p \circ \tilde{c} = c$ und insbesondere $p \circ \tilde{c}(1) = c(1) = x$.
+		Dann ist $\tilde{c}(1)$ ein Urbild von $x$ unter $p$.
+		\item Jetzt müssen wir zeigen, dass jeder Punkt $x \in X$ eine Umgebung $U$ hat, sodass $p^{-1}(U)$ in eine disjunkte Vereinigung von offenen Mengen, die homöomorph zu $U$ sind, zerfällt.
+		Sei also $x \in X$ beliebig.
+		Nach (iv) und (v) existiert ein $r > 0$, sodass $B_r(x)$ eindeutig geodätisch ist und die Geodäten in $B_r(x)$ stetig von ihren Endpunkten abhängen.
+		Sei $y \in p^{-1}(x)$ beliebig.
+		Wir definieren
+		\begin{align*}
+			s_y \colon B_r(x) &\longrightarrow \tilde{X} \\
+			x' &\longmapsto \tilde{c}_{x'}(1),
+		\end{align*}
+		wobei $\tilde{c}_{x'}$ der Lift der linear umparametrisierten Geodäte $c_{x'} \colon [0,1] \rightarrow X, x \geo x'$ mit $\tilde{c}_{x'}(0) = y$.
+		\item Nun ist $s_y \colon B_r(x) \rightarrow s_y(B_r(x))$ ein Homöomorphismus und $s_y(B_r(x))$ ist offen:
+		Mit Hilfe von (v) zeigt man, dass $s_y$ eine Inverse zu $p$ ist.
+		Wir zeigen die Stetigkeit von $s_y$ in $z \in B_r(x)$ beliebig.
+		Betrachte die linear umparametrisierte eindeutige Geodäte $c_z \colon [0,1] \rightarrow B_r(x), x \geo z$ und den eindeutigen Lift $\tilde{c}_z \colon [0,1] \rightarrow \tilde{X}$ mit $\tilde{c}_z(0) = y$. \todo{Bild einfügen}
+		Da $\tilde{c}_z$ stetig ist und $[0,1]$ kompakt, ist das Bild von $\tilde{c}_z$ kompakt.
+		Weiter ist $p$ ein lokaler Homöomorphismus.
+		Folglich existieren endlich viele Bälle $\tilde{B}_1, \dots, \tilde{B}_k$ in $\tilde{X}$ mit $\tilde{c}_z([0,1]) \subseteq \tilde{B}_1 \cup \dots \cup \tilde{B}_k$ und sodass
+		\[
+			p \big|_{\tilde{B}_i} \colon \tilde{B}_i \longrightarrow p(\tilde{B}_i) =: B_i
+		\]
+		ein Homöomorphismus auf die offene Menge $B_i$ ist.
+		Da $p \circ \tilde{c}_z = c_z$ ist, gilt $c_z([0,1]) \subseteq B_1 \cup \dots \cup B_k$. \todo{Bild einfügen}
+		O.B.d.A. sei $c_z \enbrace*{\benbrace*{\frac{l-1}{n},\frac{l}{n}}} \subseteq B_l$ für $l \in \{1,\dots,k\}$.
+		Sei $s^l$ die lokale Inverse von $p \big|_{\tilde{B}_l}$.
+		Es gilt also $s^l \colon B_l \rightarrow \tilde{B}_l$ und $s^l \circ p \big|_{\tilde{B}_l} = \id_{\tilde{B}_l}$ sowie $p \big|_{\tilde{B}_l} \circ s^l = \id_{B_l}$.
+		Wir erhalten $s^l(c_z(t)) = s_y(c_z(t))$ für $t \in \benbrace*{\frac{l-1}{n},\frac{l}{n}}$. \todo{Bild einfügen}
+		
+		Da die Geodäten in $B_r(x)$ stetig von ihren Endpunkten abhängen, existiert ein $\delta > 0$, sodass für alle $z' \in B_\delta(z) \subseteq B_r(x)$ gilt:
+		\[
+			c_{z'} \enbrace*{\benbrace*{\frac{l-1}{n},\frac{l}{n}}} \subseteq B_l \text{ für } l \in \{1,\dots,k\}.
+		\]
+		Wir definieren:
+		\begin{align*}
+			\tilde{s}\colon B_\delta(z) \times [0,1] &\longrightarrow \tilde{X} \\
+			(z',t) &\longmapsto s^l(c_{z'}(t)) \text{ für } t \in \benbrace*{\frac{l-1}{n},\frac{l}{n}}.
+		\end{align*}
+		$\tilde{s}$ ist wohldefiniert und stetig und es gilt $s_y \big|_{B_\delta(z)} = \tilde{s} \big|_{B_\delta(z) \times \{1\}}$.
+		Folglich ist $s_y$ stetig in $z$. \qedhere	
+	\end{itemize}
 \end{beweis}
 
+\section{Die Exponentialabbildung}
+\label{sec:2.3}
 \cleardoubleoddemptypage
