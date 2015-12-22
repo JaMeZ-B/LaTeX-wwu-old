@@ -2364,11 +2364,11 @@ Ab jetzt: $R$ kommutativ!
 \end{definition}
 
 \begin{bemerkung}
-	Jede kurze exakte Folge \[
-		\begin{tikzcd}
+	Jede kurze exakte Folge \(
+		\begin{tikzcd}[cramped,sep=small]
 			0 \rar & M \rar & M' \rar & M'' \rar & 0
 		\end{tikzcd}
-	\]
+	\)
 	mit $M$ injektiv spaltet.
 \end{bemerkung}
 
@@ -2398,8 +2398,124 @@ Ab jetzt: $R$ kommutativ!
 		\Ext_R^n(M,W) \cong H^n \enbrace*{\Hom_R(M,I_*)}
 	\]
 \end{bemerkung}
+\newpage
 % section 12 (end)
 
+\section{Das Tensorprodukt und $\Hom$ als Kettenkomplexe} % (fold)
+\label{sec:das_tensorprodukt_und_hom_als_kettenkomplexe}
+
+\begin{definition}
+	Sei $R$ ein Ring, $C_*$ ein Kettenkomplex von $R$-Rechtsmoduln und $D_*$ ein Kettenkomplex von $R$-Linksmoduln.
+	Dann definieren wir den $\mathbb{Z}$-Kettenkomplex $(C \otimes_R D)_*$ durch 
+	\[
+		(C \otimes_R D)_n := \bigoplus_{p+q=n} C_p \otimes_R D_q
+	\]
+	mit Randabbildung definiert durch
+	\(
+		\partial^{C \otimes D} (c \otimes d) := \partial^C(c) \otimes d + (-1)^{\abs*{c}} c \otimes \partial^D(d)
+	\).
+\end{definition}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{itemize}[itemsep=0pt]
+		\item Sind $C$ und $D$ $\mathbb{N}$-graduiert, so ist $C \otimes_R D$ auch $\mathbb{N}$-graduiert. 
+		\item Ist $R$ kommutativ, so ist $C \otimes_R D$ ein $R$-Kettenkomplex.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{definition}
+	Sei $C_*$ ein $R$-Kettenkomplex und $\tilde{D}^*$ ein $R$-Kokettenkomplex.
+	Wir definieren den $\mathbb{Z}$-Kokettenkomplex $\Hom_R(C,\tilde{D})^*$ durch 
+	\[
+		\enbrace*{\Hom_R(C,\tilde{D})}^n := \bigoplus_{p+q=n} \Hom_R \enbrace*{C_p, \tilde{D}^q}
+	\]
+	und die Randabbildung durch
+	\(
+		\partial f = \partial^{\tilde{D}} \circ f - (-1)^{\abs*{f}} f \circ \partial^C
+	\).
+\end{definition}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{itemize}[itemsep=0pt]
+		\item Sind $C$ und $\tilde{D}$ $\mathbb{N}$-graduiert, so ist  $\Hom_R(C,\tilde{D})$ auch $\mathbb{N}$-graduiert.
+		\item Ist $R$ kommutativ, so ist $\Hom_R(C,\tilde{D})$ ein $R$-Kokettenkomplex.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{lemma}[label=projaufl:iso:hom]
+	Sei $C_*$ ein $R$-Kettenkomplex ($\mathbb{N}$-graduiert), dessen Kettenmodule projektiv sind.
+	Sei $V$ ein $R$-Rechtsmodul und $(P_*,\epsilon)$ eine projektive Auflösung von $V$ durch $R$-Rechtsmoduln.
+	Dann induziert $\epsilon \otimes \id \colon P_* \otimes_R C_* \to V \otimes_R C_*$ einen Isomorphismus in Homologie.
+\end{lemma}
+\begin{beweis}
+	Sei $v \in (P \otimes C)_n$.
+	Dann schreiben wir $v=\sum_{i=0}^{n} v_i$ mit $v_i \in P_i \otimes C_{n-i}$
+	Die $v_i$ sind durch $v$ eindeutig bestimmt.
+	Es ist
+	\[
+		\partial^{P \otimes C}(v)= \sum_{i=0}^{n-1} \Underbracket{(-1)^i \id \otimes \partial^C(v_i) + (\partial^P \otimes \id)(v_{i+1})}{\in P_i \otimes C_{n-1-i}}
+	\]
+	die eindeutige Darstellung von $\partial^{P \otimes C}(v)$.
+	\begin{figure}[bt]
+		\centering{
+		\begin{tikzcd}[row sep=2.5em]
+			\vdots \dar & \vdots \dar & \vdots \dar & \vdots \dar \\
+			V \otimes C_2 \dar["\id \otimes \partial^C"'] & P_0 \otimes C_2 \lar["\epsilon \otimes \id"']\dar & P_1 \otimes C_2\lar\dar & P_2 \otimes C_2 \lar \dar & \cdots \lar\\
+			V \otimes C_1 \dar["\id \otimes \partial^C"'] & P_0 \otimes C_1 \lar["\epsilon \otimes \id"']\dar & P_1 \otimes C_1\lar\dar & P_2 \otimes C_1 \lar\dar & \cdots \lar\\
+			V \otimes C_0 & P_0 \otimes C_0 \lar["\epsilon \otimes \id"']& P_1 \otimes C_0\lar & P_2 \otimes C_0 \lar & \cdots \lar
+		\end{tikzcd}
+		\caption{Diagramm zum Beweis von \cref{projaufl:iso:hom}\label{fig:tensor:ketten}}
+		}
+	\end{figure}%
+	Insbesondere gilt: 
+	\begin{equation}
+		\partial^{P \otimes C}v =0 \iff (-1)^{i+1} (\id \otimes \partial^C)(v_i)= (\partial^P \otimes \id)(v_{i+1}) \label{eq:13:1}\tag{\#}
+	\end{equation}
+	Da die $C_i$ projektiv sind, ist $\otimes_R C_i$ exakt und für jedes $i$ ist 
+	\begin{equation}
+		\begin{tikzcd}[sep=large]
+			V \otimes_R C_i & P_0 \otimes_R C_i \lar["\epsilon \otimes \id"'] & P_1 \otimes C_i \lar["\partial^P \otimes \id"'] & \ldots \lar["\partial^P \otimes \id"']
+		\end{tikzcd}
+		\label{eq:13:2}\tag{\S}
+	\end{equation}
+	exakt.
+	Sei $x \in H_n(V \otimes C_*)$.
+	Sei $a \in V \otimes C_n$ mit $\id \otimes \partial^C(a)=0$ und $x=[a]$.
+	Wähle $v_0 \in P_0 \otimes C_n$ mit $\epsilon \otimes \id(v_0)=a$.
+	Behauptung: Es gibt $v_i \in P_i \otimes C_{n-i}$ mit 
+	\(
+		\partial^{P \otimes C} \enbrace[\big]{\sum_{i=0}^{n} v_i } = 0
+	\).
+	Wir beweisen dies per Induktion: Seien $v_0, \ldots ,v_j$ bereits konstruiert mit \eqref{eq:13:1} für $i<j$.
+	Dann ist $(\partial^P \otimes \id)(\id \otimes \partial^C)(v_j) = \pm \enbrace*{\partial^P \otimes \id} \enbrace*{\partial^P \otimes \id}(v_{j-1})=0$.
+	Wegen \eqref{eq:13:2} gibt es $v_{j+1} \in P_{j+1} \otimes C_{n-j-1}$ mit 
+	\[
+		\enbrace*{\partial^P \otimes \id}(v_{j+1}) = \enbrace*{\id \otimes \partial^C}(v_j)
+	\]
+	Damit ist die Behauptung bewiesen.
+	Es folgt $(\epsilon \otimes \id)_* \enbrace*{\benbrace*{\sum_{i=0} v_i}} = [a]$.
+	Daher ist $\enbrace*{\epsilon \otimes \id}_*$ surjektiv. 
+	Die Injektivität erhält man genauso.
+\end{beweis}
+
+\begin{lemma}
+	Sei $C_*$ ein $R$-Kettenkomplex ($\mathbb{N}$-graduiert), dessen Kettenmodule projektiv sind.
+	Sei $(I^*,j)$ eine injektive Auflösung des $R$-Moduls $W$.
+	Dann induziert $j$ einen Isomorphismus 
+	\[
+		H^*\enbrace*{\Hom_R(C_*,W)} \to H^* \enbrace*{\Hom_R(C_*,I^*)}
+	\]
+\end{lemma}
+
+\begin{bemerkung}
+	Für den Isomorphismus $H_*(P \otimes_R C_*) \to H_*(V \otimes_R C_*)$ war es wichtig, dass die Homologie von $\enbrace*{P_* \otimes C_i,\partial^P \otimes \id}$ in Grad $0$ konzentriert ist und damit genau $V \otimes C_i$ ist (dies entspricht den Spalten in \cref{fig:tensor:ketten}).
+	Umgekehrt ist die Homologie von $\enbrace*{P_p \otimes C_*, \id \otimes \partial^C}$ isomorph zu $P_p \otimes H_*(C_*)$.
+	Wir erhalten also Komplexe $\enbrace*{P_* \otimes H_n(C_*), \partial^P \otimes \id}$ deren Homologie genau $\Tor^R_* \enbrace*{V, H_n(C_*)}$ ist.
+	Dies stellt einen Zusammehang zwischen $H_*(V \otimes C_*)$ und $\Tor_*^R \enbrace*{V, H_*(C_*)}$ her.
+\end{bemerkung}
+% section das_tensorprodukt_und_hom_als_kettenkomplexe (end)
 
 
 
