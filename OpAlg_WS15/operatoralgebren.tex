@@ -801,7 +801,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $A$ eine $C^*$-Algebra und $a \in A$. Dann gilt $a^*a \ge 0$.
 \end{satz}
 \begin{beweis}
-	Definiere Funktionen $f,g \colon \mathbb{R} \to \mathbb{R}$ wie in Abbildung~\ref{fig:id_zerlegen} und $h \colon \mathbb{R} \to \mathbb{R}$ durch $h(t)=t^{\sfrac{1}{3}}$.
+	Definiere Funktionen $f,g \colon \mathbb{R} \to \mathbb{R}$ wie in \cref{fig:id_zerlegen} und $h \colon \mathbb{R} \to \mathbb{R}$ durch $h(t)=t^{\sfrac{1}{3}}$.
 	\begin{figure}[t]
 		\centering{
 		\begin{tikzpicture}[scale=0.5]
@@ -2043,6 +2043,143 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		f(x) =\solim f_n(x)
 	\]
 \end{satz}
+\begin{beweis}[name={Skizze}]
+	Für $\xi,\eta \in \mathcal{H}$ können wir mit Hilfe von
+	\(
+		\mu_{\xi,\eta}(U) := \skal*{\xi}{\chi_U(x)(\eta)}
+	\)
+	für $U$ offen bzw. abgeschlossen ein Integral auf Treppenfunktionen definieren.
+	Hieraus erhält man ein Integral $\Phi_{\xi,\eta}$ auf $\mathbb{B}_b(\sigma(x))$:
+	\begin{itemize}
+		\item entweder mit $L^1$-Approximation wie in Analysis \RM{3}.
+		\item oder als Regelintegral zunächst für stetige Funktionen, also $C(\sigma(x))$, dann für $\mathbb{B}_b(\sigma(x))$ mit dem Rieszschen Darstellungssatz.
+	\end{itemize}
+	Damit hat man nun $\Phi_{\xi,\eta} \colon \mathbb{B}_b(\sigma(x)) \to \mathbb{C}$ linear und stetig.
+	Für $f \in \mathbb{B}_b(\sigma(x))$ und $\eta \in \mathcal{H}$ definiert $\xi \mapsto \Phi_{\xi,\eta}(f) \in \mathbb{C}$ ein konjugiert lineare stetiges Funktional $\varphi_{f,\eta}$ auf $\mathcal{H}$.
+	Mittels $\skal*{\xi}{\cdot }$ lässt sich dann schließen, dass man $\varphi_{f,\eta}$ als Element von $\mathcal{H}$ auffassen kann, d.h. $\varphi_{f,\eta}(\xi) = \skal*{\xi}{\varphi_{f,\eta}}$.
+	Die Abbildung $\eta \mapsto \varphi_{f,\eta}$ ist linear und stetig, definiert also einen Operator $f(x) \in \mathcal{B}(\mathcal{H})$.
+	Auf Vektoren in $\mathcal{H}$ rechnet man nach, dass $f \mapsto f(x)$ ein isometrischer $^*$-Homomorphismus $\mathbb{B}_b(\sigma(x)) \to \mathcal{B}{\mathcal{H}}$ ist und $f(x) \in A''= \overline{A}^{\so}$ (Bikommutantensatz).
+	Weiter gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
+\end{beweis}
+
+\begin{erinnerungA}
+	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von 
+	\[
+		p_{\eta,\xi}(x) := \abs*{\skal*{\eta}{x \xi}} 
+	\]
+	für $\eta,\xi \in \mathcal{H}$ erzeugt wird.
+	Die Mengen $U_{x,\eta,\xi,\varepsilon} := \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \abs*{\skal*{\eta}{(x-y)\xi}} < \varepsilon}$ bilden eine Subbasis von $\TWeakOp$.
+	Die Abbildungen
+	\[
+		\begin{tikzcd}
+			\enbrace*{\mathcal{B}(\mathcal{H}),\Top{\norm*{\cdot}}} \rar["\id"] & \enbrace*{\mathcal{B}(\mathcal{H}),\Top{\so}} \rar["\id"] & \enbrace*{\mathcal{B}(\mathcal{H}), \TWeakOp}
+		\end{tikzcd}
+	\]
+	sind stetig, denn $\norm*{(x-y)\xi} \le \norm*{x-y} \cdot \norm*{\xi}$ und $\abs*{ \skal*{\eta}{(x-y)\xi}} \le \norm*{\eta} - \norm*{(x-y) \xi}$.
+	Die Involution ist $\wo$-stetig:
+	\begin{align}
+		x_\lambda \grenzw{\wo} x &\iff \abs*{\skal*{\eta}{(x_\lambda-x)\xi}} \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		&\iff \abs*{\skal*{(x_\lambda-x)^* \eta}{\xi}}   \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		&\iff \abs*{\skal*{\xi}{x_\lambda^* -x^* \eta}} \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		&\iff x_\lambda^* \grenzw{\wo} x^* 
+	\end{align}
+	Multiplikation ist nicht $\wo$-stetig: Sei $S$ der Shift. Dann gilt
+	\(
+		S^n,{S^*}^n \grenzw{\wo} 0 \text{ aber } {S^*}^n S^n=\ind
+	\).
+\end{erinnerungA}
+
+\begin{satz}
+	$\mathcal{B}(\mathcal{H})^1$ ist $\wo$-kompakt.
+\end{satz}
+\begin{beweis}[name={Skizze}]
+	% $\id \colon \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakStar} \to \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakOp}$ ist stetig.
+	Nehme $\mathcal{H}=\ell^2(\mathbb{N})$ an und setze $X= \overline{\Span\set*{e_{ij} \given i,i=1,2,\ldots }}^{\norm*{\cdot}_1}$.
+	$x \mapsto \Tr(\abs*{x})$ ist auf $\Span (e_{ij})$ definiert und ist Norm.
+	$X$ ist ein abgeschlossenes Ideal in $\mathcal{B}(\mathcal{H})$. 
+	$x \mapsto  \enbrace*{y \mapsto \Tr(xy)}$ liefert eine Abbildung $\mathcal{B}(\mathcal{H}) \to X^*$ (tatsächlich ein Isomorphismus).
+	Sei $\TWeakStar$ die zurückgezogene Topologie auf $\mathcal{B}(\mathcal{H})$.
+	Man überprüft: $x_\lambda \grenzw{\w^*}x \Rightarrow x_\lambda\grenzw{\wo}x$ und damit ist
+	\[
+		\id \colon \enbrace*{\mathcal{B}(\mathcal{H}), \TWeakStar} \longrightarrow \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakOp}
+	\]
+	stetig.
+	Aber $\mathcal{B}(\mathcal{H})^1$ ist $\w^*$ kompakt nach Banach-Alaoglu. 
+	Damit ist $\mathcal{B}(\mathcal{H})^1$ $\wo$-kompakt und die Abbildung ist ein Homöomorphismus.
+\end{beweis}
+
+\begin{satz}
+	Sei $\ind_{\mathcal{B}(\mathcal{H})} \in A \subset \mathcal{B}(\mathcal{H})$ eine $^*$-Algebra. Dann gilt
+	\begin{enumerate}[(i)]
+		\item $\overline{A}^\wo = A''$
+		\item $A$ ist eine von-Neumann-Algebra genau dann, wenn $A= \overline{A}^\wo$.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Zur ersten Aussage: Es gilt $A'' \StackText{\ref{lem:66}}{=}\overline{A}^\so \subset \overline{A}^\wo$. 
+	Sei nun $(x_\lambda)_\Lambda \subset A$ ein Netz mit $x_\lambda \grenzw{\wo} x$.
+	Falls $y \in A'$, so gilt für $\eta,\xi \in \mathcal{H}$
+	\begin{align}
+		\skal*{\eta}{(x y)\xi} = \lim_\lambda \skal*{\eta}{x_\lambda y \xi	} =\lim_\lambda \skal*{\eta}{y x_\lambda \xi} = \lim_\lambda \skal*{y^* \eta}{ x_\lambda \xi} 
+		&= \skal*{y^* \eta}{x \xi} = \skal*{\eta}{(yx) \xi}
+	\end{align}
+	Es folgt $xy=yx$ und somit ist $x \in A''$, also $\overline{A}^\wo \subseteq A''$.
+	
+	Die zweite Aussage folgt aus (i) und dem Bikommutantensatz.
+\end{beweis}
+
+\begin{lemma}
+	Für ein lineare Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt: 
+	Wenn $\varphi$ $\wo$-steig ist, dann ist $\varphi$ auch $\so$-stetig und auch stetig in der Normtopologie.
+\end{lemma}
+\begin{beweis}
+	Man nehme sich einfach ein passendes Netz. 
+	Die Umgekehrung der zweiten Implikation gilt im Allgemeinen nicht. 
+	Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz.\todo{Nummerierung checken}
+\end{beweis}
+
+\begin{satz}
+	Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ sind äquivalent:
+	\begin{enumerate}[(i)]
+		\item $\varphi$ ist $\wo$-stetig.
+		\item $\varphi$ ist $\so$-stetig.
+		\item $\varphi(\cdot)=\sum_{i=1}^{n} \skal*{\eta_i}{\cdot \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Die Implikation (i)$\Rightarrow$(ii) haben wir bereits gesehen.
+	(iii)$\Rightarrow$(i) ist auch klar und wir müssen nur (ii) $\Rightarrow$(iii) zeigen:
+	Sei $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann $\so$-offen.
+	Dann existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass 
+	\[
+		U_{0,\xi_i,\alpha}= \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(y-0)\xi_i}< \alpha}  \subset S_\varphi
+	\]
+	Das heißt für $x \in \mathcal{B}(\mathcal{H})$ gilt: Falls $\norm*{x \xi_i}<\alpha$ für $i=1,\ldots ,n$, so ist $\abs*{\varphi(x)}<1$.
+	Nach Skalierung der $\xi_i$ gilt für $x \in \mathcal{B}(\mathcal{H})$:
+	\(
+		\norm*{x \xi_i} < 1 \Rightarrow \abs*{\varphi(x)}<1 
+	\).
+	Es folgt 
+	\[
+		\abs*{\varphi(x)} \le \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}}
+	\]
+	Setze nun 
+	\[
+		\mathcal{H}_0 := \set*{\begin{pmatrix}
+			x \xi_1 \\ \vdots \\ x \xi_n
+		\end{pmatrix} \given x \in \mathcal{B}(\mathcal{H})} \subset \mathcal{H}^{\oplus n}
+	\]
+	Dann ist $\psi \colon \mathcal{H}_0 \to \mathbb{C}$, $\begin{psmallmatrix}
+		x \xi_1 \\ \cdot \\ x \xi_n
+	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear.
+	$\psi$ setzt sich also fort zu $\overline{\psi} \colon \overline{\mathcal{H}_0} \to \mathbb{C}$.
+	Mit Riesz folg die Existenz von $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
+	\[
+		\varphi(x) = \overline{\psi} \begin{pmatrix}
+			x \xi_1 \\ \vdots \\ x \xi_n
+		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta}{x \xi_i} \qedhere
+	\]
+\end{beweis}
 % section 6 (end)
 
 
