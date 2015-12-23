@@ -1141,4 +1141,132 @@ Dieses Lemma beweisen zu einem späteren Zeitpunkt (siehe \pageref{bew_tech_lemm
 		Ferner gilt $\lim\limits_{n \rightarrow \infty} c_n = c$. \qedhere
 	\end{enumerate}
 \end{beweis}	
+
+\begin{satz}
+\label{satz:2.33}
+	Sei $(X,d)$ ein vollständiger zusammenhängender lokaler $\CAT$-Raum. \marginnote{16.12. \\ \ [13]}
+	Dann ist $\exp\colon (\tilde{X}_{x_0},d) \rightarrow (X,d_X)$ die universelle Überlagerung.
+\end{satz}
+
+\begin{beweis}
+	Wir zeigen zuerst, dass $\tilde{X}_{x_0}$ wegzusammenhängend ist.
+	Seien $c_1,c_2 \in \tilde{X}_{x_0}$ beliebig.
+	Wir betrachten
+	\begin{align*}
+		H \big|_{\{c_1\} \times [0,1]} \colon [0,1] &\longrightarrow \tilde{X}_{x_0} \\
+		s &\longmapsto [c_{1_s} \colon t \mapsto c_1(st)].
+	\end{align*}
+	Es gilt $H \big|_{\{c_1\} \times [0,1]}(0) = c_{x_0}$ und $H \big|_{\{c_1\} \times [0,1]}(1) = c_1$.
+	Folglich ist $H\big|_{\{c_1\} \times [0,1]}$ ein Weg von $c_{x_0}$ nach $c_1$.
+	Dann ist
+	\[
+		\ol{H \big|_{\{c_1\} \times [0,1]}} * H \big|_{\{c_2\} \times [0,1]}
+	\] 
+	ein Weg von $c_1$ nach $c_2$.
+	
+	Weiter haben wir in \autoref{satz:2.31} bewiesen, dass $\tilde{X}_{x_0}$ zusammenziehbar ist.
+	Insgesamt ist also $\tilde{X}_{x_0}$ einfach zusammenhängend.
+	Wenn also $\exp$ eine Überlagerung ist, handelt es sich um die universelle Überlagerung.
+	\begin{itemize}
+		\item Wir ersetzen nun die Metriken auf $X$ und $\tilde{X}_{x_0}$ durch die induzierten Längenmetriken $\tilde{d}$ auf $\tilde{X}_{x_0}$ und $\tilde{d_X}$ auf $X$.
+		Da $X$ lokal geodätisch ist, ändert sich die Topologie auf $X$ nicht, und da $\exp$ eine lokale Isometrie ist, auch nicht auf $\tilde{X}_{x_0}$.
+		Das bedeutet:
+		\[
+			\exp\colon (\tilde{X}_{x_0},d) \rightarrow (X,d_X) \text{ ist Überlagerung } \Leftrightarrow \Exp\colon (\tilde{X}_{x_0},\tilde{d}) \rightarrow \tilde{d_x} \text{ ist Überlagerung.}
+		\]
+		\item Da die Metriken lokal nicht verändert werden, bleibt $\Exp$ eine lokale Isometrie.
+		Nach \autoref{satz:2.24} ist $\tilde{d} =: d_{\exp}$ die von $\exp$ induzierte Längenmetrik.
+		Die Bedingungen von \autoref{satz:2.28} sind für $\Exp\colon (\tilde{X}_{x_0},d_{\exp}) \rightarrow (X,\tilde{d_X})$ erfüllt:
+		\begin{enumerate}[(i)]
+			\item gilt, da $X$ lokal wegzusammenhängend und zusammenhängend
+			\item gilt, da $\Exp$ lokale Isometrie ist.
+			\item gilt, da $d_{\exp}$ die von $\exp$ induzierte Längenmetrik ist.
+			\item gilt, da $X$ lokal $\CAT$ ist.
+			\item gilt, da $X$ lokal $\CAT$ ist (\autoref{satz:2.18}).
+			\item gilt, da $X$ vollständig ist (\autoref{satz:2.31}).
+		\end{enumerate}
+		Damit ist $\Exp$ eine Überlagerung. \qedhere
+	\end{itemize}
+\end{beweis}
+
+\begin{bemerkung}
+\label{bem:2.34}
+	Da $\Exp$ eine lokale Isometrie ist, ist $(\tilde{X}_{x_0},d_{\exp})$ lokal $\CAT$.
+\end{bemerkung}
+
+Unser Ziel ist es, nun zu zeigen, dass $(\tilde{X}_{x_0},d_{\exp})$ global $\CAT$ ist.
+Wir zeigen:
+\begin{enumerate}[(1)]
+	\item Für je zwei Punkte $c_1,c_2 \in \tilde{X}_{x_0}$ existiert eine eindeutige linear umparametrisierte lokale Geodäte von $c_1$ nach $c_2$ und diese hängen stetig von ihren Endpunkten ab.
+	\item Jede linear umparametrisierte lokale Geodäte in $\tilde{X}_{x_0}$ ist schon eine globale Geodäte.
+\end{enumerate}
+Folglich ist $(\tilde{X}_{x_0},d_{\exp})$ eindeutig geodätisch, lokal $\CAT$ und die Geodäten hängen stetig von ihren Endpunkten ab.
+Daraus folgt, dass $(\tilde{X}_{x_0},d_{\exp})$ global $\CAT$ ist.
+Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit Hilfe von Winkeln in metrischen Räumen.
+
+\begin{korollar}
+\label{kor:2.35}
+	Sei $(X,d_X)$ ein metrischer Raum, der lokal $\CAT$ und lokal vollständig ist und $c \colon [0,1] \rightarrow X$ eine linear umparametrisierte Geodäte von $x \in X$ nach $y \in X$.
+	Sei weiter $\varepsilon > 0$ so, wie in \autoref{lemma:2.32}.
+	Sei nun $\ol{y} \in B_\varepsilon(y)$ beliebig und $c_{x \ol{y}}$ die eindeutige linear umparametrisierte Geodäte von $x$ nach $\ol{y}$.
+	Dann gilt: \todo{Bild einfügen}
+	\[
+		\ell(c_{x \ol{y}}) \leq \ell(c) + d_X(y,\ol{y}).
+	\]
+\end{korollar}
+
+\begin{beweis}
+	Wähle $t > 0$ so, dass $c\big|_{[0,t]}$ und $c_{x \ol{y}} \big|_{[0,t]}$ linear umparametrisierte Geodäten sind.
+	Es gilt:
+	\begin{align}
+		t \cdot \ell(c_{x \ol{y}}) &= d_X(c_{x \ol{y}}(0),c_{x \ol{y}}(t)) \label{eq:2.35.1} \\
+		t \cdot \ell(c) &= d_X(c(0),c(t)) \label{eq:2.35.2}
+	\end{align}
+	Wir haben:
+	\begin{align*}
+		t \cdot \ell(c_{x \ol{y}}) &\stack{\eqref{eq:2.35.1}}{=} d_X(\Underbrace{c_{x \ol{y}}(0)}{=c(0)},c_{x \ol{y}}(t)) \\
+		&\stack{\Delta\text{-Ungl}}{\leq} d_X(c(0),c(t)) + d_X(c(t),c_{x \ol{y}}(t)) \\
+		&\stack{\eqref{eq:2.35.2}}{=} t \cdot \ell(c) + d_X(c(t),c_{x \ol{y}}(t)) \\
+		&\stack{\ref{lemma:2.32}}{\leq} t \cdot \ell(c) + t \cdot d_X(y,\ol{y}) \qquad (\Phi \text{ ist konvex}) \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{bemerkung}[{\cite[§ 12]{Munkres}}]
+\label{bem:2.36}
+	Seien $E,B,Y$ lokal wegzusammenhängende und wegzusammenhängende topologische Räume.
+	\begin{enumerate}[(i)]
+		\item Sei $p \colon E \rightarrow B$ eine universelle Überlagerung.
+		Sei $r \colon Y \rightarrow B$ eine weitere Überlagerung.
+		Sei weiter $b_0 \in B$ beliebig und $e_0 \in E$ mit $p(e_0) = b_0$ und $y_0 \in Y$ mit $r(y_0) = b_0$.
+		Dann existiert eine Überlagerung $q \colon E \rightarrow Y$, sodass $r \circ q = p$ und $q(e_0) = y_0$ gilt.
+		\item Seien $p\colon E \rightarrow B, r\colon Y \rightarrow B$ zwei universelle Überlagerungen und $e_0,y_0,b_0$ wie in (i).
+		Dann existiert ein Homöomorphismus $q \colon E \rightarrow Y$, sodass $r \circ q = p$ und $q(e_0) = y_0$ gilt.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{bemerkung}
+\label{bem:2.37}
+	Sei $(X,d_X)$ ein vollständiger zusammenhängender lokaler $\CAT$-Raum.
+	Sei $x_0 \in X$ beliebig.
+	Sei weiter $p \in (\tilde{X}_{x_0},d_{\exp})$ beliebig.
+	Wir haben in \autoref{satz:2.33} bewiesen, dass $(\tilde{X}_{x_0},d_{\exp}), (\tilde{X}_{p(1)},d_{\exp})$ universelle Überlagerungen sind.
+	Es existiert also ein Homöomorphismus $\alpha \colon \tilde{X}_{x_0} \rightarrow \tilde{X}_{p(1)}$, sodass $\Exp_{x_1} \circ \alpha = \Exp_{x_0}$ und $\alpha(p) = c_{p(1)}$ für $b_0 = p(1)$ gilt.
+	\[
+		\begin{tikzcd}
+			\tilde{X}_{x_0} \arrow{rr}{\alpha} \arrow{rd}[swap]{\Exp_{x_0}} & & \tilde{X}_{p(1)} \arrow{ld}{\Exp_{x_1}} \\
+			& X & 
+		\end{tikzcd}
+	\]	
+	Weiter ist $\alpha$ eine lokale Isometrie, da $\Exp_{x_0}$ und $\Exp_{x_1}$ lokale Isometrien sind.
+\end{bemerkung}
+
+\begin{lemma}
+\label{lemma:2.38}
+	Sei $(X,d_X)$ ein vollständiger zusammenhängender lokaler $\CAT$-Raum.
+	Sei weiter $x_0 \in X$ beliebig.
+	Seien nun $p,q \in (\tilde{X}_{x_0},d_{\exp})$ beliebig.
+	Dann existiert genau eine linear umparametrisierte lokale Geodäte zwischen $p$ und $q$.
+\end{lemma}
+
+%PDF-Seite 29
 \cleardoubleoddemptypage
