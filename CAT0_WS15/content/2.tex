@@ -987,4 +987,158 @@ Wie erkennen wir Überlagerungen?
 
 \section{Die Exponentialabbildung}
 \label{sec:2.3}
+	Sei $X$ ein metrischer Raum und $x_0 \in X$ beliebig. \marginnote{09.12. \\ \ [12]}
+	Wir werden nun einen Raum $\tilde{X}_{x_0}$ und eine Abbildung $\exp\colon \tilde{X}_{x_0} \rightarrow X$ konstruieren, die für \enquote{schöne} Basisräume die universelle Überlagerung werden wird.
+	
+\begin{definition}[Exponentialabbildung]
+\label{def:2.29}
+	Sei $(X,d_X)$ ein metrischer Raum und $x_0 \in X$ beliebig.
+	Wir definieren die Menge
+	\begin{align*}
+		\tilde{X}_{x_0} := &\{c \colon [0,1] \rightarrow X \text{ linear umparametrisierte lokale Geodäte mit } c(0) = x_0\} \\
+		\cup &\{c_{x_0} \colon [0,1] \rightarrow X : c_{x_0}(t) = x_0 \text{ für alle } t \in [0,1]\}
+	\end{align*}
+	Weiter definieren wir auf der Menge $\tilde{X}_{x_0}$ eine Metrik durch
+	\[
+		d(c_1,c_2) := \sup \{ d_X(c_1(t),c_2(t)) : t \in [0,1]\}
+	\]
+	für $c_1,c_2 \in \tilde{X}_{x_0}$ und definieren die \Index{Exponentialabbildung} wie folgt:
+	\begin{align*}
+		\exp\colon \tilde{X}_{x_0} &\longrightarrow X \\
+		c &\longmapsto c(1).
+	\end{align*}
+\end{definition}	
+	
+\begin{bemerkung}
+\label{bem:2.30}
+	Die Abbildung $\exp\colon (\tilde{X}_{x_0},d) \rightarrow  (X,d_X)$ ist $1$-Lipschitz.
+	Genauer:
+	Seien $c_1,c_2 \in \tilde{X}_{x_0}$ beliebig.
+	Dann haben wir
+	\begin{align*}
+		d_X(\exp(c_1),\exp(c_2)) &\stack{\text{Def.}}{=} d_X(c_1(1),c_2(1)) \\
+		&\stack{}{\leq} \sup_{t \in [0,1]} d_X(c_1(t),c_2(t)) \\
+		&\stack{\text{Def.}}{=} d(c_1,c_2).
+	\end{align*}
+\end{bemerkung}
+
+\begin{satz}
+\label{satz:2.31}
+	Sei $(X,d_X)$ ein metrischer Raum, der lokal $\CAT$ und lokal vollständig ist, das heißt für jedes $x \in X$ existiert ein $r > 0$, sodass $B_r(x) \CAT$ und $\ol{B_r(x)}$ vollständig ist.
+	Dann gilt:
+	\begin{enumerate}[(i)]
+		\item $\tilde{X}_{x_0}$ ist zusammenziehbar.
+		\item $\exp\colon \tilde{X}_{x_0} \rightarrow X$ ist eine lokale Isometrie.
+		\item Wenn $X$ vollständig ist, dann ist $\tilde{X}_{x_0}$ vollständig.
+	\end{enumerate}
+\end{satz}
+
+\begin{beweis}
+	Wir zeigen zuerst nur (i).
+	Für (ii) und (iii) brauchen wir ein technisches Lemma.
+	
+	Wir zeigen, dass die Abbildung
+	\begin{align*}
+		H\colon \tilde{X}_{x_0} \times [0,1] &\longrightarrow \tilde{X}_{x_0} \\
+		(c,s) &\longmapsto [c_s \colon t \mapsto c(s \cdot t)]
+	\end{align*}
+	eine Homotopie von $f\colon \tilde{X}_{x_0} \rightarrow \tilde{X}_{x_0}, c \mapsto c_{x_0}$ und $\id\colon \tilde{X}_{c_0} \rightarrow \tilde{X}_{c_0}$ ist.
+	\begin{itemize}
+		\item $H$ ist wohldefiniert.
+		Für $c \in \tilde{X}_{x_0}$ beliebig haben wir
+		\begin{align*}
+			H(c,0) &= [c_0 \colon t \mapsto c(0 \cdot t) = c(0) = x_0] = f(c) \\
+			H(c,1) &= [c_1 \colon t \mapsto c(1 \cdot t) = c(t)] = \id(c)
+		\end{align*}
+		\item Wir zeigen Folgenstetigkeit:
+		Sei $(c_n,s_n) \in \tilde{X}_{x_0} \times [0,1]$ für $n \in \NN$ eine konvergente Folge mit $c_n \rightarrow c$, $s_n \rightarrow s$.
+		Zu zeigen ist $\lim\limits_{n \rightarrow \infty} H(c_n,s_n) = H(c,s)$, also $\lim\limits_{n \rightarrow \infty} c_{n_{s_n}} = c_s$.
+		Es gilt:
+		\begin{align*}
+			d(c_{n_{s_n}},c_s) &\stack{\text{Def.}}{=} \sup_{t \in [0,1]} d_X(c_n(s_n \cdot t),c(st)) \\
+			&\stack{\Delta\text{-Ungl.}}{\leq} \sup_{t \in [0,1]} d_X(c_n(s_n \cdot t),c(s_n \cdot t)) + \sup_{t \in [0,1]} d_X(c(s_n \cdot t),c(st)) \\
+			&\stack{}{\leq} d(c_n,c) + \sup_{t \in [0,1]} d_X(c(s_n \cdot t), c(st)) \\
+			&\stack{}{\leq} d(c_n,c) + \sup_{t \in [0,1]} \lambda \cdot \abs{s_n t - st} \text{ für ein } \lambda \geq 0, \text{ da } c \text{ lin. ump. Geodäte und } [0,1] \text{ kompakt} \\
+			&\stack{}{\leq} d(c_n,c) + \lambda \cdot \abs{s_n-s} \xrightarrow{n \rightarrow \infty} 0
+		\end{align*}
+	\end{itemize}
+	Damit haben wir gezeigt, dass die Folge $(c_{n_{s_n}})_n$ gegen $c_s$ konvergiert. \qedhere
+\end{beweis}
+
+Der Beweis von (ii) und (iii) ist wesentlich aufwändiger.
+Wir müssen zuerst verstehen, wie eine Umgebung einer gegebenen linear umparametrisierten Geodäte aussieht, und welche Beziehung es zwischen den Geodäten in solch einer Umgebung und ihren Endpunkten gibt.
+
+\begin{lemma}
+\label{lemma:2.32}
+	Sei $(X,d_X)$ ein metrischer Raum, der lokal $\CAT$ und lokal vollständig ist und $c \colon [0,1] \rightarrow X$ eine linear umparametrisierte lokale Geodäte von $x \in X$ nach $y \in X$.
+	Dann existiert ein $\varepsilon > 0$, sodass für alle $\ol{x} \in B_\varepsilon(x)$ und $\ol{y} \in B_\varepsilon(y)$ eine eindeutige linear umparametrisierte lokale Geodäte $c_{\ol{x},\ol{y}} \colon [0,1] \rightarrow X$ existiert mit $c_{\ol{x},\ol{y}}(0) = \ol{x}$ und $c_{\ol{x},\ol{y}}(1) = \ol{y}$ sowie
+	\[
+		\sup_{t \in [0,1]} d_X(c_{\ol{x},\ol{y}}(t),c(t)) < \varepsilon.
+	\]
+	\todo{Bild einfügen.}
+	Weiter gilt, dass für je zwei linear umparametrisierte Geodäten $c_1,c_2 \colon [0,1] \rightarrow X$ mit $\sup_{t \in [0,1]} d_X(c_1(t),c(t)) < \varepsilon$ und $\sup_{t \in [0,1]} d_X(c_2(t),c(t)) < \varepsilon$ die Funktion
+	\begin{align*}
+		\Phi\colon [0,1] &\longrightarrow \RR_{\geq 0} \\
+		t &\longmapsto d_X(c_1(t),c_2(t))
+	\end{align*}
+	konvex ist, das heißt für alle $s,t,\lambda \in [0,1]$ gilt
+	\[
+		\Phi(\lambda s + (1-\lambda)t) \leq \lambda \Phi(s) + (1-\lambda)\Phi(t).
+	\]
+	Insbesondere gilt also $\Phi(t) \leq t \cdot \Phi(1)$ für alle $t \in [0,1]$.
+\end{lemma}
+
+Dieses Lemma beweisen zu einem späteren Zeitpunkt (siehe \pageref{bew_tech_lemma}). \todo{Referenz einfügen}
+
+\begin{beweis}[Fortsetzung von \autoref{satz:2.31}]
+	\mbox{} \\[-.9cm]
+	\begin{enumerate}[(i)]
+		\setcounter{enumi}{1}
+		\item Sei $c \in \tilde{X}_{x_0}$ beliebig und $\varepsilon > 0$ so, wie in \autoref{lemma:2.32}.
+		Dann ist $\exp\colon B_\varepsilon(c) \rightarrow B_\varepsilon(c(1))$ eine Isometrie:
+		\begin{itemize}
+			\item $\exp$ ist surjektiv:
+			Sei $\ol{y} \in B_\varepsilon(c(1))$ beliebig.
+			Nach \autoref{lemma:2.32} existiert eine linear umparametrisierte Geodäte $c_{x_0 \ol{y}}\colon [0,1] \rightarrow X, x_0 \geo \ol{y}$ mit $d(c_{x_0 \ol{y}},c) = \sup_{t \in [0,1]} d_X(c_{x_0 \ol{y}}(t),c(t)) < \varepsilon$.
+			Somit ist $c_{x_0 \ol{y}} \in B_\varepsilon(c)$.
+			Ferner gilt $\exp(c_{x_0 \ol{y}}) = c_{x_0 \ol{y}}(1) = \ol{y}$. \todo{Bild einfügen}
+			\item $\exp$ ist isometrische Einbettung:
+			Seien $c_1,c_2 \in B_\varepsilon(c)$ beliebig.
+			Aus \autoref{lemma:2.32} wissen wir, dass für alle $t \in [0,1]$ gilt:
+			\begin{align}
+				\Phi(t) &\leq t \cdot \Phi(1) \\
+				d_X(c_1(t),c_2(t)) &\leq t \cdot d_X(c_1(1),c_2(t)) \leq d_X(c_1(1),c_2(t)) \label{eq:2.31.1}
+			\end{align}
+			Wir erhalten
+			\[
+				d_X(\exp(c_1),\exp(c_2)) \stack{\text{Def.}}{=} d_X(c_1(1),c_2(1))  \stack{\eqref{eq:2.31.1}}{=} \sup_{t \in [0,1]} d_X(c_1(t),c_2(t)) \stack{\text{Def.}}{=} d(c_1,c_2).
+			\]
+			Somit ist $\exp$ eine Isometrie auf $B_\varepsilon(c)$.
+		\end{itemize}
+		\item Sei $(c_n)_{n \in \NN}$ eine Cauchy-Folge in $\tilde{X}_{x_0}$.
+		Dann ist $(c_n(t))_{n \in \NN}$ für jedes $t \in [0,1]$ eine Cauchy-Folge in $X$ und da $X$ vollständig ist, konvergiert diese.
+		Wir definieren:
+		\begin{align*}
+			c \colon [0,1] &\longrightarrow X \\
+			t &\longmapsto \lim\limits_{n \rightarrow \infty} c_n(t) =: c(t).
+		\end{align*}
+		Es gilt $c(0) = x_0$.
+		Wir müssen zeigen, dass $c \in \tilde{X}_{x_0}$, das heißt $c$ ist eine linear umparametrisierte lokale Geodäte.
+		
+		Sei $t \in [0,1]$ beliebig.
+		Wähle  $r > 0$ so, dass $B_r(c(t)) \CAT$ ist.
+		Da $c_n(t) \rightarrow c(t)$ konvergiert, existiert ein $N \in \NN$, sodass gilt
+		\[
+			c_n(t) \in B_{\frac{r}{2}}(c(t)) \qquad \text{für alle } n \geq N.
+		\]
+		Wir finden ein $\varepsilon > 0$, sodass für $I := [t- \varepsilon, t+ \varepsilon]$ und $n \geq N$ gilt:
+		\[
+			c_n(I) \subseteq \Underbrace{B_r(c(t))}{\CAT} \quad \text{und} \quad c(I) \subseteq B_r(c(t)).
+		\]
+		Folglich sind die $c_n \big|_I$ linear umparametrisierte Geodäten (vgl. Übungsaufgabe).
+		Da die linear umparametrisierten Geodäten $c_n \big|_I$ stetig von ihren Endpunkten abhängen, konvergiert $c_n \big|_I$ gleichmäßig gegen die eindeutige linear umparametrisierte Geodäte $\gamma \colon c(t-\varepsilon) \geo c(t+\varepsilon)$.
+		Es gilt aber auch $\gamma = c \big|_I$ und damit ist $c \big|_I$ eine linear umparametrisierte Geodäte und damit haben wir gezeigt, dass $c$ eine linear umparametrisierte lokale Geodäte ist.
+		Ferner gilt $\lim\limits_{n \rightarrow \infty} c_n = c$. \qedhere
+	\end{enumerate}
+\end{beweis}	
 \cleardoubleoddemptypage
