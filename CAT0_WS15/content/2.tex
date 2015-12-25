@@ -1202,7 +1202,7 @@ Wir zeigen:
 \end{enumerate}
 Folglich ist $(\tilde{X}_{x_0},d_{\exp})$ eindeutig geodätisch, lokal $\CAT$ und die Geodäten hängen stetig von ihren Endpunkten ab.
 Daraus folgt, dass $(\tilde{X}_{x_0},d_{\exp})$ global $\CAT$ ist.
-Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit Hilfe von Winkeln in metrischen Räumen.
+Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit Hilfe von Winkeln in metrischen Räumen, siehe Abschnitt~\ref{sec:2.4}.
 
 \begin{korollar}
 \label{kor:2.35}
@@ -1268,5 +1268,163 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 	Dann existiert genau eine linear umparametrisierte lokale Geodäte zwischen $p$ und $q$.
 \end{lemma}
 
-%PDF-Seite 29
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{description}
+		\item[1. Fall:] \begin{align*}
+			p = c_{x_0}\colon [0,1] &\longrightarrow X \\
+			t &\longmapsto x_0
+		\end{align*} 
+		Zur Existenz: Wir definieren
+		\begin{align*}
+			C_{pq}\colon [0,1] &\longrightarrow \tilde{X}_{x_0} \\
+			s &\longmapsto [q_s \colon t \mapsto q(st)]
+		\end{align*}
+		\begin{itemize}
+			\item $C_{pq}$ ist stetig, da $C_{pq} = H \big|_{\{q\} \times [0,1]}$, siehe \autoref{satz:2.31}.
+			\item Es gilt $C_{pq}(0) = c_{x_0}$ und $C_{pq} = q$.
+			\item Weiter gilt $\Exp \circ C_{pq} = q$, wobei $\Exp$ eine lokale Isometrie und $q$ eine linear umparametrisierte Geodäte ist.
+			Folglich ist $C_{pq}$ eine linear umparametrisierte lokale Geodäte von $c_{x_0}$ nach $q.$
+		\end{itemize}
+		
+		Zur Eindeutigkeit: Sei $\gamma\colon [0,1] \rightarrow \tilde{X}_{x_0}$ eine linear umparametrisierte lokale Geodäte von $c_{x_0}$ nach $q$.
+		Da $\Exp$ eine lokale Isometrie ist, ist $\Exp \circ \gamma \colon [0,1] \rightarrow X$ eine linear umparametrisierte lokale Geodäte von $\Exp \colon \gamma(0) = \Exp(c_{x_0}) = c_{x_0}(1) = x_0$ nach $\Exp \circ \gamma(1) = \Exp(q) = q(1)$.
+		Aber $q$ ist auch eine linear umparametrisierte lokale Geodäte von $x_0$ nach $q(1)$.
+		Aus der in \autoref{lemma:2.32} formulierten Eindeutigkeit folgt somit $\Exp \circ \gamma = q$, und damit
+		\begin{align*}
+			\Exp \circ \gamma(s) &= q(s) \text{ für alle } s \in [0,1] \\
+			\Leftrightarrow \gamma(s)(1) &= q(s) \text{ für alle } s \in [0,1]
+		\end{align*}
+		Sei $s \in [0,1]$ beliebig.
+		Wir wissen, dass $\gamma(s) \colon [0,1] \rightarrow X$ und $ q_s\colon [0,1] \rightarrow X, t \mapsto q(st)$ zwei linear umparametrisierte lokale Geodäten von $x_0$ nach $q(s)$ sind.
+		Mit \autoref{lemma:2.32} folgt somit wieder $\gamma(s) = q_s$.
+		Insgesamt erhalten wir $\gamma = C_{pq}$.
+		\item[allgemein:] Seien $p,q \in \tilde{X}_{x_0}$ beliebig.
+		Wir betrachten die universelle Überlagerung $\Exp_{p(1)} \colon \tilde{X}_{p(1)} \rightarrow X$.
+		Nach \autoref{bem:2.37} existiert ein Homöomorphismus $\alpha \colon \tilde{X}_{x_0} \rightarrow \tilde{X}_{p(1)}$ mit $\alpha^{-1}(c_{p(1)}) = p$, der eine lokale Isometrie ist und sodass das dort angegebene Diagramm kommutiert.
+		Wir haben im 1. Fall gesehen, dass es eine eindeutige linear umparametrisierte lokale Geodäte existiert:
+		\begin{align*}
+			C_{c_p(1)\alpha(q)} \colon [0,1] &\longrightarrow \tilde{X}_{p(1)} \\
+			0 &\longmapsto c_{p(1)} \\
+			1 &\longmapsto \alpha(q)
+		\end{align*}
+		Zur Existenz:
+		Wir zeigen, dass $\alpha^{-1} \circ C_{c_p(1)\alpha(q)}\colon [0,1] \rightarrow \tilde{X}_{x_0}$ eine linear umparametrisierte lokale Geodäte von $p$ nach $q$ ist.
+		\begin{itemize}
+			\item $\alpha \circ C_{c_p(1)\alpha(q)}$ ist eine linear umparametrisierte lokale Geodäte, da dies für $C_{c_p(1)\alpha(q)}$ der Fall ist und $\alpha$ eine lokale Isometrie ist.
+			\item Weiter gilt $\alpha^{-1} \circ C_{c_p(1)\alpha(q)}(0) = \alpha^{-1}(C_{p(1)}) = p$ und $\alpha^{-1} \circ C_{c_p(1)\alpha(q)}(1) = \alpha^{-1}(\alpha(q)) = q$.
+		\end{itemize}
+		
+		Zur Eindeutigkeit:
+		Sei $\gamma \colon [0,1] \rightarrow \tilde{X}_{x_0}$ eine weitere linear umparametrisierte lokale Geodäte von $p$ nach $q$.
+		Dann ist $\alpha \circ \gamma \colon [0,1] \rightarrow \tilde{X}_{p(1)}$ eine linear umparametrisierte lokale Geodäte von $\alpha \circ \gamma(0) = \alpha(p) = c_{x_0}$ nach $\alpha \circ \gamma(1) = \alpha(q)$.
+		Aus der Eindeutigkeit im 1. Fall folgt $\alpha \circ \gamma = C_{c_p(1)\alpha(q)}$ und damit $\gamma = \alpha^{-1} \circ C_{c_p(1)\alpha(q)}$. \qedhere
+	\end{description}
+\end{beweis}
+
+\begin{lemma}
+\label{lemma:2.39}
+	Die linear umparametrisierten lokalen Geodäten in $\tilde{X}_{x_0}$ hängen stetig von ihren Endpunkten ab. \marginnote{Beweis: ÜA}
+\end{lemma}
+
+\begin{lemma}
+\label{lemma:2.40}
+	Sei $C_{pq}\colon [0,1] \rightarrow (\tilde{X}_{x_0},d_{\exp})$ die eindeutige linear umparametrisierte lokale Geodäte von $p$ nach $q$, $p,q \in \tilde{X}_{x_0}$.
+	Dann ist $C_{pq}$ eine linear umparametrisierte globale Geodäte.
+\end{lemma}
+
+\begin{beweis}
+	Nach \autoref{prop:2.6}(iv) genügt zu zeigen, dass $\ell(C_{pq}) = d_{\exp}(p,q)$ gilt.
+	
+	Es gilt $\ell(C_{pq}) \geq d_{\exp}(p,q)$ (vgl. Aufgabe 4.2). \todo{Referenz einbauen}. Es bleibt zu zeigen:
+	\[
+		\ell(C_{pq}) \leq d_{\exp}(p,q) = \inf\{ \ell(\gamma) : \gamma \text{ ist ein rektifizierbarer Weg von } p \text{ nach } q\}.
+	\]
+	Sei also $\gamma$ ein beliebiger rektifizierbarer Weg von $p$ nach $q$.
+	Wir müssen also zeigen, dass $\ell(C_{pq}) \leq \ell(\gamma)$ gilt.
+	Das zeigen wir mit dem Zusammenhangsargument:
+	Wir definieren
+	\[
+		S := \{ t_0 \in [0,1] : \text{Für alle } t \leq t_0 \text{ gilt } \ell(C_{\gamma(0)\gamma(t)}) \leq \ell(\gamma \big|_{[0,t]})\},
+	\]
+	wobei $C_{\gamma(0)\gamma(t)}$ die eindeutige linear umparametrisierte lokale Geodäte von $\gamma(0)$ nach $\gamma(t)$ bezeichnet.
+	\begin{itemize}
+		\item Es ist $S \neq \emptyset$, da $0 \in S$.
+		\item $S$ ist offen:
+		Sei $t_0 \in S$ beliebig.
+		\begin{description}
+			\item [1. Fall:] $t_0 = 0$.
+			Da $\tilde{X}_{x_0}$ lokal $\CAT$ ist, existiert ein $\varepsilon > 0$, sodass $B_\varepsilon(\gamma(0)) = B_\varepsilon(p) \CAT$ ist.
+			Dann existiert ein $\eta > 0$, sodass $\im(C_{\gamma(0)\gamma(\eta)}) \subseteq B_\varepsilon(\gamma(0))$.
+			Da $B_\varepsilon(\gamma(0))$ ein $\CAT$-Raum ist, ist die linear umparametrisierte lokale Geodäte $C_{\gamma(0)\gamma(\eta)}$ eine linear umparametrisierte globale Geodäte und es gilt
+			\[
+				\ell(C_{\gamma(0)\gamma(\eta)}) = d_{\exp}(\gamma(0),\gamma(\eta)) \leq \ell(\gamma \big|_{[0,\eta]}).
+			\]
+			Somit ist $[0,\eta] \subseteq \delta$.
+			\item[2. Fall:] $t_0 > 0$.
+			Wähle $\varepsilon > 0$ so, wie in \autoref{lemma:2.32} für die linear umparametrisierte lokale Geodäte $\Exp \circ C_{\gamma(0)\gamma(t_0)}$.
+			Weiter wähle $\eta > 0$, sodass für alle $t' \in (t_0-\eta, t_0 + \eta)$ gilt, dass $\Exp \circ \gamma(t') \in B_\varepsilon(\Exp \circ \gamma(t_0))$ ist und $\Exp \colon B_\eta(\gamma(0)) \rightarrow B_\eta(\Exp\circ \gamma(t_0))$ eine Isometrie ist. \todo{Bild einfügen}
+			
+			Dann gilt für alle $t' \in (t_0 - \eta, t_0 + \eta)$:
+			\begin{align*}
+				\ell(C_{\gamma(0)\gamma(t')}) &\stack{}{=} \ell(\Exp \circ C_{\gamma(0)\gamma(t')} \\
+				&\stack{\text{Bem. \ref{bem:2.35}}}{\leq} \ell(\Exp \circ C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t')) \\
+				&\stack{}{=} \ell(C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t')) \\
+				&\stack{t_0 \in S}{\leq} \ell(\gamma \big|_{[0,t_0]}) + d_{\exp}(\gamma(t_0),\gamma(t')) \\
+				&\stack{}{\leq} \ell(\gamma \big|_{[0,t_0]}) + \ell(\gamma \big|_{[t_0,t']}) \\
+				&\stack{\text{Aufg. 4.2}}{=} \ell(\gamma \big|_{[0,t']})
+			\end{align*}
+			Also ist $[0,t_0 + \eta) \subseteq S$ und $S$ ist offen.
+		\end{description}
+		\item $S$ ist abgeschlossen:
+		Es reicht zu zeigen: $[0,t_0) \subseteq S \Rightarrow t_0 \in S$.
+		
+		Wir wissen nach \autoref{prop:2.6}(v), dass die Funktion
+		\begin{align}
+			\lambda_\gamma\colon [0,1] &\longrightarrow [0,\ell(\gamma)] \label{eq:2.40.1}\\
+			t &\longmapsto \ell(\gamma \big|_{[0,t]})
+		\end{align}
+		stetig ist.
+		Sei $(t_n)_n$ eine Folge in $S$ mit $t_n \rightarrow t_0$ beliebig.
+		Da die linear umparametrisierten lokalen Geodäten nach \autoref{lemma:2.39} stetig von ihren Endpunkten abhängen, konvergiert $C_{\gamma(0)\gamma(t_n)}$ gleichmäßig gegen $C_{\gamma(0)\gamma(t_0)}$.
+		Nach \autoref{prop:2.6}(vii) existiert somit für alle $\varepsilon > 0$ ein $N \in \NN$, sodass
+		\begin{equation}
+			\ell(C_{\gamma(0)\gamma(t_0)}) \leq \ell(C_{\gamma(0)\gamma(t_n)}) + \varepsilon \label{eq:2.40.2}
+		\end{equation}
+		für alle $n \geq N$.
+		Wähle $\varepsilon > 0$ so, wie in \autoref{lemma:2.32} für die linear umparametrisierte lokale Geodäte $\Exp \circ C_{\gamma(0)\gamma(t_0)}$.
+		Sei $N \geq \NN$ so groß, dass $\Exp \circ \gamma(t_n) \in B_\varepsilon(\Exp \circ \gamma(t_0))$ für alle $n \geq N$.
+		Nach \autoref{bem:2.35} gilt o.B.d.A.
+		\begin{align}
+			\ell(C_{\gamma(0)\gamma(t_n)}) = \ell(\Exp \circ C_{\gamma(0)\gamma(t_n)}) &\leq \ell(\Exp \circ C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t_n)) \\
+			&= \ell(C_{\gamma(0)\gamma(t_0)}) + d_{\exp}(\gamma(t_0),\gamma(t_n)), \label{eq:2.40.3}
+		\end{align}
+		da $\Exp$ eine Isometrie auf $B_\varepsilon(\gamma(0))$ ist.
+		
+		Nun können wir zeigen, dass gilt:
+		\[
+			\lim\limits_{n \rightarrow \infty} \ell(C_{\gamma(0)\gamma(t_n)}) = \ell(C_{\gamma(0)\gamma(t_0)}).
+		\]
+		Sei $\eta > 0$ beliebig.
+		Dann existiert nach \eqref{eq:2.40.2} ein $N \in \NN$, sodass gilt:
+		\[
+			\ell(C_{\gamma(0)\gamma(t_0)}) - \ell(C_{\gamma(0)\gamma(t_n)}) < \eta \quad \text{für alle } n \geq N.
+		\]
+		Weiter existiert nach \eqref{eq:2.40.3} ein $M \in \NN$, sodass gilt:
+		\[
+			\ell(C_{\gamma(0)\gamma(t_n)}) - \ell(C_{\gamma(0)\gamma(t_0)}) < \eta \quad \text{für alle } n \geq M.
+		\]		
+		Folglich gilt $\abs{\ell(C_{\gamma(0)\gamma(t_0)}) - \ell(C_{\gamma(0)\gamma(t_n)})} < \eta$ für alle $n \geq \max\{N,M\}$, und wir erhalten insgesamt:
+		\begin{align*}
+			\ell(C_{\gamma(0)\gamma(t_n)}) &\stack{t_n \in S}{\leq} \ell(\gamma \big|_{[0,t_n]}) \\
+			\xRightarrow{n \rightarrow \infty} \quad \ell(C_{\gamma(0)\gamma(t_0)}) &\stack{}{\leq} \ell(\gamma \big|_{[0,t_0]})
+		\end{align*}
+		Also ist $t_0 \in S$.
+	\end{itemize}
+	Insgesamt folgt $S = [0,1]$ und damit $\ell(C_{pq}) \leq \ell(\gamma)$. \qedhere
+\end{beweis}
+
+\section{Winkel in metrischen Räumen}
+\label{sec:2.4}
+
 \cleardoubleoddemptypage
