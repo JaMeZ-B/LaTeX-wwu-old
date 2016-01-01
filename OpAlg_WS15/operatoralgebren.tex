@@ -106,7 +106,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{definition}
 
 \begin{proposition}[{name=[Spektrum ist kompakt und Spektralradius durch Norm beschränkt]},label=spec_kompakt]
-	Seien $a \in A$ wie oben. Dann ist das Spektrum $\sigma(a)$ kompakt und $r(a) \le \norm{a}$.
+	Sei $a \in A$ wie oben. Dann ist das Spektrum $\sigma(a)$ kompakt und $r(a) \le \norm{a}$.
 \end{proposition}
 \begin{beweis}
 	Angenommen $\abs{\lambda} > \norm{a}$, dann gilt $\norm{\lambda^{-1} a} < 1$, also ist $\ind- \lambda^{-1} a$ invertierbar nach \autoref{satz15_neumann} und 
@@ -813,29 +813,31 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\caption{Zerlegen der Identität in zwei Funktionen $f$ und $g$, sodass $\id=f-g$} \label{fig:id_zerlegen}
 		}
 	\end{figure}
-	Es gilt $a^*a \in A_{\sa}$, $a^*a = f(a^*a)- g(a^*a)$ und $f(a^*a) \cdot g(a^*a)=0$. \todo{Revision 3}
+	Es gilt $a^*a \in A_{\sa}$, $a^*a = f(a^*a)- g(a^*a)$ und $f(a^*a) \cdot g(a^*a)=0$. 
 	Für $c=a \,g(a^*a)$ ergibt sich
 	\begin{align}
 		-c^*c = -g(a^*a) a^*a g(a^*a) = -g(a^*a) \enbrace[\big]{f(a^*a) - g(a^*a)} g(a^*a) = g(a^*a)^3 \in A_+
 	\end{align}
-	Nach \autoref{bem:13} gilt $\sigma(-cc^*) \setminus \set*{0} = \sigma(-c^*c) \setminus \set*{0}$, also $-cc^* \in A_+$. Schreibe nun $c=d + i e$ mit $d,e \in A_\sa$. Dann gilt
+	Nach \autoref{bem:13} gilt $\sigma(-cc^*) \setminus \set*{0} = \sigma(-c^*c) \setminus \set*{0}$, also $-cc^* \in A_+$. 
+	Schreibe nun $c=d + i e$ mit $d,e \in A_\sa$. Dann gilt
 	\begin{align}
 		c^*c+cc^* = 2d^2+ 2e^2
 	\end{align}
-	Also ist $c^*c= 2d^2+2e^2- cc^* \ge 0$. Damit ist $\sigma(c^*c) \subseteq \mathbb{R}_+ \cap \mathbb{R}_- = \set*{0}$. Also ist $\norm*{c}^2= \norm*{c^*c}= r(c^*c)=0$. Damit ist
-	$g(a^*a)^3=0$ und $g(a^*a)=0$ and $a^*a=f(a^*a)\ge 0$.
+	Also ist $c^*c= 2d^2+2e^2- cc^* \ge 0$. Damit ist $\sigma(c^*c) \subseteq \mathbb{R}_+ \cap \mathbb{R}_- = \set*{0}$. 
+	Also ist $\norm*{c}^2= \norm*{c^*c}= r(c^*c)=0$. 
+	Insgesamt ist $g(a^*a)^3=0$, also $g(a^*a)=h \enbrace*{g(a^*a)^3}=0$ und $a^*a=f(a^*a)\ge 0$.
 \end{beweis}
 
-\begin{satz}[label=satz:27]
+\begin{satz}[label=satz:37,{name=[Eigenschaften positiver Elemente]}]
 	Sei $A$ eine $C^*$-Algebra. Dann gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=2pt]
 		\item $A_+ = \set*{a^*a \given a \in A}$
 		\item $A = \Span A_+$
 		\item $A_+$ ist ein abgeschlossener Kegel in $A$
 		\item $\le$ ist eine partielle Ordnung auf $A_\sa$
-		\item Für $a,b \in A_\sa$ mit $a \le b$ gilt $c a c^* \le c b c^*$.
+		\item Für $a,b \in A_\sa$ und $c \in A$ mit $a \le b$ gilt $c a c^* \le c b c^*$
 		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$
-		\item Wenn $A$ unital ist und $a \in A_+ \cap \Inv(A)$, dann folgt aus $a \le b$ stets $b \in \Inv(A)$ und $0 \le b^{-1} \le a^{-1}$.
+		\item Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
@@ -844,35 +846,43 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\item Folgt aus \autoref{satz:36} und \autoref{prop:33}.
 		\item Wenn $a \in A$ ist, dann können wir $a=b+ic$ mit $b,c \in A_\sa$ schreiben. Definiere $b_+ := f(b)$, $b_- := g(b)$, $c_+ := f(c)$, $c_- := g(c)$. Diese liegen alle in 
 		$A_+$. Dann gilt $b=b_+ - b_-$, $c=c_+ -c_-$ und $a= b_+ -b_- + i (c_+ -c_-) \in \Span A_+$.
-		\item Kegel ist klar. Zur Abgeschlossenheit: Sei $a \in \overline{A}^{\norm*{\cdot }}$. Dann gilt $a=a^*$, da $A_\sa$ abgeschlossen ist. Für jedes $\varepsilon>0$ gibt es
-		$b \in A_+$ mit $\norm*{b-a} < \varepsilon$. Dann gilt
+		\item Die Kegeleigenschaft ist klar nach \autoref{korr:35}. 
+		Zur Abgeschlossenheit: Sei $a \in \overline{A_+}$. 
+		Dann gilt $a=a^*$, da $A_\sa$ abgeschlossen ist.
+		Für jedes $\varepsilon>0$ gibt es $b \in A_+$ mit $\norm*{b-a} < \varepsilon$. Dann gilt
 		\begin{align}
 			\norm*{(a+\varepsilon-b) - \varepsilon} \le \varepsilon
 		\end{align}
-		$a+ \varepsilon-b \ge 0$ nach \autoref{prop:34}. Dann ist $a+\varepsilon= a+ \varepsilon -b +b \ge 0$ nach \autoref{korr:35}. Es folgt 
-		$\sigma(a+\varepsilon) \subseteq [0,\infty)$ und damit $\sigma(a) \subseteq [\varepsilon,\infty)$. Lassen wir $\varepsilon$ gegen $0$ gehen, so folgt 
-		$\sigma(a) \subseteq [0,\infty)$. Es folgt $a \ge 0$ und damit $\overline{A_+} =A_+$.
-		\item Es gilt offensichtlich $a \le a$. Aus $a \le b$ und $b \le a$ folgt $\sigma(b-a) \subset \mathbb{R}_+$ und $\sigma(a-b) \subset \mathbb{R}_+$. Damit folgt 
-		$\sigma(a-b)=\sigma(b-a)=\set*{0}$. Da $a-b$ selbstadjungiert ist, folgt $a-b=0$.
-		Gilt $a \le b$ und $b \le c$, so ist 
-		\[
-			c-a = c-b+b-a \StackText{\ref{korr:35}}{\ge} 0 \Longrightarrow c \ge a
-		\]
+		und somit $a+ \varepsilon-b \ge 0$ nach \autoref{prop:34}. 
+		Dann ist $a+\varepsilon= a+ \varepsilon -b +b \ge 0$ nach \autoref{korr:35} und es folgt $\sigma(a+\varepsilon) \subseteq [0,\infty)$. 
+		Damit ist $\sigma(a) \subseteq [\varepsilon,\infty)$. 
+		Lassen wir $\varepsilon$ gegen $0$ gehen, so folgt $\sigma(a) \subseteq [0,\infty)$. Insgesamt folgt $a \ge 0$ und damit $\overline{A_+} =A_+$.
+		\item \begin{description}[font=\normalfont]
+			\item[Reflexivität:] Es gilt offensichtlich $a \le a$.
+			\item[Antisymmetrie:] Aus $a \le b$ und $b \le a$ folgt $\sigma(b-a) \subset \mathbb{R}_+$ sowie $\sigma(a-b) \subset \mathbb{R}_+$ und damit folgt $\sigma(a-b)=\sigma(b-a)=\set*{0}$. 
+			Da $a-b$ selbstadjungiert ist, folgt aus \autoref{prop:210} $a-b=0$.
+			\item[Transitivität:] Gilt $a \le b$ und $b \le c$, so ist 
+			\(
+				c-a = c-b+b-a \StackText{\ref{korr:35}}{\ge} 0 \Longrightarrow c \ge a
+			\).
+		\end{description}
 		\item Es gilt 
 		\(
 			c^*bc- c^*ac = c^*(b-a) c = c^*(b-a)^{\sfrac{1}{2}} (b-a)^{\sfrac{1}{2}} c = d^* d \ge 0
-		\).
-		\item Sei $0 \le a \le b$. Wir haben $\norm*{b} \cdot \ind_{A^\simm} \ge b$ nach Gelfand (für $C^*(b,\ind_{A^\simm})$). Damit ist $a \le \norm*{b} \cdot \ind_{A^\simm}$. 
-		Gelfand für $C^*(a,\ind_{A^\simm})$ liefert $\norm*{b} \cdot \ind_{A^\simm} \ge \norm*{a} \cdot \ind_{A^\simm}$. Damit muss $\norm*{b} \ge \norm*{a}$ sein.
-		\item \emph{Übungsaufgabe 1 b) von Blatt 5!} \qedhere
+		\) mit $d := (b-a)^{\sfrac{1}{2}} c$.
+		\item Sei $0 \le a \le b$. Wir haben $\norm*{b} \cdot \ind_{A^\simm} \ge b$ nach Gelfand für $C^*(b,\ind_{A^\simm})$. 
+		Damit ist $a \le \norm*{b} \cdot \ind_{A^\simm}$. 
+		Gelfand für $C^*(a,\ind_{A^\simm})$ liefert $\norm*{b} \cdot \ind_{A^\simm} \ge \norm*{a} \cdot \ind_{A^\simm}$. 
+		Damit muss dann bereits $\norm*{b} \ge \norm*{a}$ sein.
+		\item \emph{Übungsaufgabe 1 b) von Blatt 5!}\todo{vlt noch \TeX{}en} \qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{satz}
-	Sei $A$ eine $C^*$-Algebra. Für $0 \le a \le b$ gilt $a^{\sfrac{1}{2}} \le b^{\sfrac{1}{2}}$.
+\begin{satz}[{name=[Die Wurzel ist monoton]}]
+	Sei $A$ eine $C^*$-Algebra. Für $0 \le a \le b \in A$ gilt $a^{\sfrac{1}{2}} \le b^{\sfrac{1}{2}}$.
 \end{satz}
 \begin{beweis}
-	Seien $t >0$ und $c,d \in A_\sa^\simm$ mit 
+	Es seien eine reelle Zahl $t >0$ und $c,d \in A_\sa^\simm$ gegeben mit 
 	\[
 		\enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} + a^{\sfrac{1}{2}}} \enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}} = c + i d
 	\]
@@ -880,20 +890,21 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\begin{align}
 		c &=\frac{1}{2} \cdot \enbrace*{\enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} + a^{\sfrac{1}{2}}}\enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} -a^{\sfrac{1}{2}}} 
 		+ \enbrace*{t \cdot \ind + b^{\sfrac{1}{2}}-a^{\sfrac{1}{2}}} \enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} + a^{\sfrac{1}{2}}} } \\
-		&= t^2 \cdot \ind + 2 t \Underbrace{b^{\sfrac{1}{2}}}{\ge 0} + \Underbrace{b -a}{\ge 0} \ge t^2 \cdot \ind
+		&= t^2 \cdot \ind + 2 t \cdot \Underbrace{b^{\sfrac{1}{2}}}{\ge 0} + \Underbrace{b -a}{\ge 0} \ge t^2 \cdot \ind
 	\end{align}
-	Da $t\neq 0$ ist, folgt $c \in \Inv(A^\simm) \cap A_+$. Da $c^{-\sfrac{1}{2}}d c^{-\sfrac{1}{2}}$ positiv ist, ist das Spektrum von 
+	Da $t\neq 0$ ist, folgt $c \in \Inv(A^\simm) \cap A_+$ nach \autoref{satz:37}(vii). Da $c^{-\sfrac{1}{2}}d c^{-\sfrac{1}{2}}$ positiv ist, ist das Spektrum von 
 	$\ind + i \cdot c^{-\sfrac{1}{2}}d c^{-\sfrac{1}{2}}$ in $1+ i \cdot \mathbb{R}$ enthalten. Weiter gilt
 	\[
 		\ind + i \cdot c^{\sfrac{1}{2}}d c^{\sfrac{1}{2}} = c^{-\sfrac{1}{2}}(c + i \cdot d) c^{-\sfrac{1}{2}} \in \Inv(A^\simm)
 	\]
-	Damit folgt, dass $c+ i \cdot d$ invertierbar ist und damit $\enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}}$ linksinvertierbar. Dieses Element ist aber 
-	selbstadjungiert und muss damit dann auch rechtsinvertierbar, also invertierbar sein. Damit folgt, dass $-t \notin \sigma \enbrace*{b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}}$.
-	Damit ist $\sigma \enbrace*{b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}} \subset \mathbb{R}_+$ und $b^{\sfrac{1}{2}} \ge a^{\sfrac{1}{2}}$.
+	Also ist $c+ i \cdot d$ invertierbar und damit $\enbrace*{t \cdot \ind + b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}}$ linksinvertierbar. 
+	Dieses Element ist aber selbstadjungiert und muss damit dann auch rechtsinvertierbar, also invertierbar sein. 
+	Damit folgt nun $-t \notin \sigma \enbrace*{b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}}$ und somit ist $\sigma \enbrace*{b^{\sfrac{1}{2}} - a^{\sfrac{1}{2}}} \subset \mathbb{R}_+$ und $b^{\sfrac{1}{2}} \ge a^{\sfrac{1}{2}}$.
 \end{beweis}
 
-\begin{beispiel}
-	Im Allgemeinen folgt aus $0 \le a \le b$ \emph{nicht} $a^2 \le b^2$. Betrachte dafür $A=M_2$ und die Elemente
+\begin{beispiel}[{name=[Das Quadrat ist nicht monoton]}]
+	Im Allgemeinen folgt aus $0 \le a \le b$ \emph{nicht} $a^2 \le b^2$. 
+	Betrachte dafür die $C^*$-Algebra $A=M_2$ und die beiden Projektionen
 	\[
 		p =\begin{pmatrix}
 			1 & 0 \\
@@ -917,26 +928,29 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Die Matrix hat einen negativen Eigenwert, da die Determinante $-1$ ist.
 \end{beispiel}
 
-\begin{bemerkung}
-	Falls für alle $a,b \in A$ mit $0 \le a \le b$ gilt, dass $a^2 \le b^2$, so ist $A$ abelsch.
+\begin{bemerkung}[{name=[{wenn Quadrat monoton, dann $A$ abelsch}]}]
+	Falls für alle $a,b \in A$ mit $0 \le a \le b$ schon $a^2 \le b^2$ gilt, so ist $A$ bereits abelsch.
 \end{bemerkung}
 
-\begin{lemma}[label=lem:311]
+\begin{lemma}[label=lem:311,{name=[gerichtete Menge in einer $C^*$-Algebra]}]
 	Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
 \end{lemma}
 \begin{beweis}
-	Gegeben $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}}^{-1} \in A_+$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1} \in A_+$. Dann gilt 
+	Für $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}-a}^{-1}$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1}$. 
+	Durch Betrachtung der von-Neumann-Reihe sieht man sofort, dass $a'$ und $b'$ positiv sind.
+	Dann gilt 
 	\[
 		c := (a' +b') \enbrace*{\ind_{A^\simm} + a' +b'}^{-1} \in \Lambda
 	\]
-	 nach Gelfand. Es ist 
+	 nach Gelfand. Es ist nun
 	 \begin{align}
-	 	a=a(\ind-a)^{-1} \enbrace*{(\ind-a)^{-1}}^{-1} &= a (\ind -a)^{-1} \enbrace*{\ind + a (\ind -a)^{-1}}^{-1} = a' (\ind+a')^{-1} \\
-		&= \enbrace*{\ind +a'-\ind} \enbrace*{\ind +a'}^{-1} = \ind - (\ind +a')^{-1} \\
-		\intertext{Da $0\le \ind +a' \le 1 + a' +b'$ jeweils invertierbar, also $(1+ a'+b')^{-1} \le (1+a')^{-1}$}
-		&\le \ind - (\ind +a' +b')^{-1} = \ldots = (a'+b')(\ind +a' +b')^{-1}
+	 	a=a(\ind-a)^{-1} \enbrace*{(\ind-a)^{-1}}^{-1} &\StackText{\ref{bem:13}}{=} a (\ind -a)^{-1} \enbrace*{\ind + a (\ind -a)^{-1}}^{-1} = a' (\ind+a')^{-1} \\
+		&= \enbrace[\big]{(\ind +a')-\ind} \enbrace*{\ind +a'}^{-1} = \ind - (\ind +a')^{-1} \\
+		\intertext{Da $0\le \ind +a' \le \ind + a' +b'$ jeweils invertierbar sind, ist $(\ind+ a'+b')^{-1} \le (\ind+a')^{-1}$ nach \autoref{satz:37}}
+		&\le \ind - (\ind +a' +b')^{-1}\StackText{\ref{bem:13}}{=} \ind - \enbrace*{\ind + (a'+b')(\ind +a' +b')^{-1}} \\
+		&= (a'+b')(\ind +a' +b')^{-1}
 	 \end{align}
-	 $a \le c$ und $b \le c$ ebenso.
+	 Damit ist $a \le c$. Die Relation $b \le c$ folgt ebenso.
 \end{beweis}
 
 \begin{definition}[{name=[approximative Eins]}]
@@ -951,14 +965,15 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie in \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. 
 	Dann ist $(e_\lambda)_\Lambda \subset A_+^1$ ein aufsteigendes Netz (aufsteigend bezüglich \enquote{$\le$}, gerichtet nach \autoref{lem:311}). 
 	Sei nun $a \in \Lambda$ und $1 \ge \varepsilon>0$. Sei $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. 
-	Setze $f := \Phi(a) = \id_\Omega$ und $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$ kompakt. 
+	Betrachte $f := \Phi(a) = \id_\Omega$ und die kompakte Menge $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$. 
 	Nach Urysohn existiert ein $g \colon \Omega \to [0,1]$ stetig mit kompaktem Träger und $g(\omega)=1$ für $\omega \in K$. 
 	Wähle $\delta>0$ mit $\delta<1$ und $1-\delta< \varepsilon$. Dann gilt 
 	\[
-		\norm*{f- \delta \cdot g \cdot f}_\infty = \norm{(1-\delta g) f}_\infty \le \varepsilon
+		\norm*{f- \delta \cdot g f}_\infty = \norm*{(\ind-\delta \cdot g) f}_\infty \le \varepsilon
 	\]
-	Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon^2 \le \varepsilon$. 
-	Falls nun $\lambda \in \Lambda$ mit $\lambda \ge \overline{\lambda}$, so gilt $0 \le a^*(\ind-e_\lambda)a \le a^*(1- e_{\overline{\lambda}})a$ nach \autoref{satz:27}(v). 
+	\todo[inline]{ich meine man sollte $\delta$ so wählen, dass hier $\sfrac{\varepsilon}{\norm{a}}$ steht, sonst kommt das später nicht wirklich hin}
+	\noindent Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon$. 
+	Falls nun $\lambda \in \Lambda$ ist mit $\lambda \ge \overline{\lambda}$, so gilt $0 \le a(\ind-e_\lambda)a \le a(\ind- e_{\overline{\lambda}})a$ nach \autoref{satz:37}(v), da $0 \le \ind - e_\lambda \le \ind -e_{\overline{\lambda}}$.
 	Dann folgt 
 	\begin{align}
 		\norm*{a- e_\lambda a}^2 = \norm*{(\ind-e_\lambda)^{\sfrac{1}{2}} (\ind - e_\lambda)^{\sfrac{1}{2}} a}^2 \le \norm*{(\ind- e_\lambda)^{\sfrac{1}{2}}a}^2
@@ -968,11 +983,11 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Damit folgt $a = \lim_\lambda e_\lambda a$ für $a \in \Lambda$. Da $A= \Span \Lambda$ gilt, sind wir fertig.
 \end{beweis}
 
-\begin{proposition}
+\begin{proposition}[{name=[approximative Einsen in separablen C*-Algbren]}]
 	Sei $A$ eine separable $C^*$-Algebra -- das heißt A besitzt eine abzählbare dichte Teilmenge -- dann besitzt $A$ eine abzählbare idempotente approximative Eins $(e_n)_\mathbb{N}$, das heißt es gilt $e_n e_{n+1}=e_n$.
 \end{proposition}
 \begin{beweis}
-	\emph{Übung!}
+	\emph{Übung! (Blatt 5 Aufgaben 3 und 4)}
 \end{beweis}
 % section 3 (end)
 \newpage
