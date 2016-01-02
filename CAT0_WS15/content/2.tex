@@ -1,6 +1,6 @@
 \chapter{Der Satz von \textsc{Cartan-Hadamard}} % (fold)
 \label{cha:2}
-
+\vspace*{-.5em}
 Sei $X$ ein $\CAT$-Raum. Wir haben gesehen, dass $\CAT$-Räume viele \enquote{schöne} Eigenschaften haben.
 
 \begin{enumerate}[(i)]
@@ -43,28 +43,69 @@ Sei $X$ ein vollständiger metrischer Raum. Wir suchen nun eine \enquote{schwach
 \end{korollar}
 
 Um diesen Satz zu beweisen, brauchen wir viel Vorarbeit.
-
-
-\begin{no-erinnerung}[{siehe \cite[Kap. 3]{Kramer}}]
-	Seien $E,B$ topologische Räume. \marginnote{18.11.15 \\ \ [7]}
-	Sei weiter $p \colon E \twoheadrightarrow B$ eine stetige surjektive Abbildung.
-	Wir nennen $p$ eine \Index{Überlagerung} von $B$, wenn jeder Punkt $b \in B$ eine offene Umgebung $U_b \subseteq B$ von $b$ besitzt mit folgender Eigenschaft:
-	
-	Es gibt eine Indexmenge $I \neq \emptyset$ mit
-	\[
+\newpage
+\begin{minipage}{0.6\textwidth}
+	\begin{no-erinnerung}[{siehe \cite[Kap. 3]{Kramer}}]
+		Seien $E,B$ topologische Räume. \marginnote{18.11.15 \\ \ [7]}
+		Sei weiter $p \colon E \twoheadrightarrow B$ eine stetige surjektive Abbildung.
+		Wir nennen $p$ eine \Index{Überlagerung} von $B$, wenn jeder Punkt $b \in B$ eine offene Umgebung $U_b \subseteq B$ von $b$ besitzt mit folgender Eigenschaft:
+		
+		Es gibt eine Indexmenge $I \neq \emptyset$ mit
+		\[
 		p^{-1} (U_b) = \bigsqcup \{V_i : i \in I \}, V_i \subseteq E \text{ offen}, V_i \cap V_j = \emptyset, i \neq j
-	\]
-	und $p \big|_{V_i} \rightarrow U_b$ ist ein Homöomorphismus.
-\end{no-erinnerung}
+		\]
+		und $p \big|_{V_i} \rightarrow U_b$ ist ein Homöomorphismus.
+	\end{no-erinnerung}
+\end{minipage}
+~ \begin{minipage}{.35\textwidth}
+	\centering
+	\begin{tikzpicture}[scale=.8,>=Latex]
+	\draw (0,0) ellipse (2cm and 1cm);
+	\draw [schraffiert=teal] (-.5,0) circle (.7cm);
+	\draw (0.1,.25) node[right]{$U_b$};
+	\draw (-.5,0) node[fill,circle,inner sep=1pt]{};
+	\draw (-.5,0) node[anchor=north west]{$b$};
+	\draw (1.7,-.9) node{$\mathbf{B}$};
+	
+	\draw [schraffiert=teal] (-.5,3) ellipse (1cm and .3cm);
+	\draw [schraffiert=teal] (-.5,4) ellipse (1cm and .3cm);
+	\draw [schraffiert=teal] (-.5,5) ellipse (1cm and .3cm);
+	\draw (.6,3) node[right]{$V_1$};
+	\draw (.6,4) node[right]{$V_2$};
+	\draw (.6,5) node[right]{$V_3$};
+	\draw (1.7,3.5) node{$\mathbf{E}$};
+	
+	\draw [->,ultra thick] (-1.3,2.7) -- (-1.3,1);
+	\draw (-1.5,1.9) node[left]{$p$};
+	\end{tikzpicture}
+\end{minipage}
+\vspace*{1em}
 
-\todo{Bild einfügen!}
 Ein triviales Beispiel einer Überlagerung ist die Identität $\id_B$. Ein weiteres, wichtiges Beispiel ist $E := \RR, B = \Ss^1 = \{(x,y) \in \RR^2 : x^2 + y^2 = 1 \}$ und
 \begin{align*}
 	p\colon E &\longrightarrow B \\
 	t &\longmapsto (\cos(2\pi t),\sin(2\pi t))
 \end{align*}
 Das ist eine Überlagerung, denn für $b = (\cos(\alpha),\sin(\alpha)) \in \Ss^1$ und $U_b = \Ss^{-1} \setminus \{-b\}$ ist $p^{-1}(U_b) = \bigcup\penbrace*{ \enbrace*{k+r-\frac{1}{2},k+r+\frac{1}{2}} : k \in \ZZ}$.
-\todo{Bild einfügen!}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=1,>=Latex]
+		\draw [very thick,->] (-1.6,0) -- (1.8,0);
+		\draw [very thick,->] (0,-1.6) -- (0,1.8);
+		
+		\draw [thick, color=teal] (0,0) circle (1.414214cm);
+		\draw (1,1) node[fill,circle,inner sep=1pt]{};
+		\draw (-1,-1) node[fill,circle,inner sep=1pt]{};
+		\draw (0,0) -- (1,1);
+		\draw (.5,.2) node{$\alpha$};
+		
+		\draw [color=teal] (-1,1) node[anchor=south east]{$U_b$};
+		\draw (-1,-1) node[anchor=north east]{$-b$};
+		\draw (1,1) node[anchor=south west]{$b=(\cos \alpha,\sin \alpha)$};
+	\end{tikzpicture}
+\end{figure}
+
 
 $p \colon \RR \rightarrow \Ss^1$ ist eine Überlagerung mit $\pi_1(E,\{e\}) = \pi_2(\RR,\{x_0\}) \simeq \{0\}$ und $\RR$ ist wegzusammenhängend.
 
@@ -127,21 +168,76 @@ Für den Beweis machen wir zuerst ein paar Vorüberlegungen: Wir haben $p \colon
 	\[
 		\ell(c) = \sup \penbrace*{ \sum\limits_{i=1}^{n} d(c(t_{i-1}),c(t_i)) : a=t_0 < t_1 < \dots t_n = b, n\in \NN} \in [0,\infty].
 	\]
-	Falls $\ell(c) < \infty$, heißt $c$ \Index{rektifizierbar}. \todo{Grafik einfügen.}
+	Falls $\ell(c) < \infty$, heißt $c$ \Index{rektifizierbar}.
 \end{definition}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=1.5,>=Latex]
+		\draw [very thick,->] (-1.2,0) -- (1.4,0);
+		\draw [very thick,->] (0,-1.2) -- (0,1.4);	
+		\draw [thick] ([shift=(135:1)]0,0) arc (135:30:1);
+		\draw [->,thick, color=teal] ([shift=(-225:1)]0,0) arc (-225:30:1);
+		\draw [color=teal] (.707107,-.707107) node[anchor=north west]{$c([a,b])$};
+		
+		\coordinate (P1) at (-.707107,.707107);
+		\coordinate (P2) at (-.866025,-.5);
+		\coordinate (P3) at (.5,-.866025);
+		\coordinate (P4) at (.866025,.5);
+		
+		\draw (P1) node[fill,circle,inner sep=1pt]{};
+		\draw (P2) node[fill,circle,inner sep=1pt]{};
+		\draw (P3) node[fill,circle,inner sep=1pt]{};
+		\draw (P4) node[fill,circle,inner sep=1pt]{};
+		
+		\draw (P1) node[left]{$c(t_0) = x$};
+		\draw (P2) node[left]{$c(t_1)$};
+		\draw (P3) node[below]{$c(t_2)$};
+		\draw (P4) node[right]{$c(t_3) = y$};
+		
+		\draw [thick,color=red] (P1) -- (P2) -- (P3) -- (P4);
+	\end{tikzpicture}
+	
+	$\ell(c) \geq d(c(t_0),c(t_1)) + d(c(t_1),c(t_2)) + d(c(t_2),c(t_3))$
+\end{figure}
 
 \begin{bemerkung}
 \label{bem:2.4}
-	Es gibt Wege, die nicht rektifizierbar sind.
-	Wir betrachten das folgende Beispiel:
-	
-	\begin{align*}
+	\begin{minipage}{.45\textwidth}
+		Es gibt Wege, die nicht rektifizierbar sind.
+		Wir betrachten das folgende Beispiel:
+		
+		\begin{align*}
 		c \colon [-1,0] &\longrightarrow \RR \\
 		-\frac{1}{n} &\longmapsto \sum_{i=1}^{n} (-1)^{n+1} \cdot \frac{1}{n} \\
 		0 &\longmapsto \ln(2)
-	\end{align*}
-	und stetig linear fortgesetzt auf $\benbrace*{-\frac{1}{n}, -\frac{1}{n+1}}$. \todo{Grafik einfügen.}
-
+		\end{align*}
+		und stetig linear fortgesetzt auf $\benbrace*{-\frac{1}{n}, -\frac{1}{n+1}}$.
+	\end{minipage}
+	~ \begin{minipage}{0.45\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=2,>=Latex]
+		\coordinate (P1) at (-1,1);
+		\coordinate (P2) at (-.5,.5);
+		\coordinate (P3) at (-.333333,.866666);
+		\coordinate (P4) at (-.25,.583333);
+		\coordinate (P5) at (-.2,.783333);
+		\coordinate (P6) at (-.166666,.616666);
+		\coordinate (P7) at (-.142857,.759524);
+		
+		\draw [->,very thick] (-1.2,0) -- (.4,0);
+		\draw [->,very thick] (0,-.2) -- (0,1.4);
+		\draw (-1,.1) -- (-1,-.1) node[below]{$-1$};
+		\draw (-.5,.1) -- (-.5,-.1) node[below]{$-\frac{1}{2}$};
+		\draw (-.1,.5) -- (.1,.5);
+		\draw (-.1,1) -- (.1,1) node[right]{$1$};
+		\draw [color=red] (.2,.693147) node[right]{$\ln(2)$};
+		
+		\draw [thick,dashed,color=red] (-1.1,.693147) -- (.2,.693147);
+		\draw [thick] (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- (P7);			
+		\end{tikzpicture}
+	\end{minipage}
+	
 	Betrachte $t_n = -\frac{1}{n}$. Damit erhalten wir
 	\[
 		\ell(c) \geq \ell \enbrace*{c \big|_{\benbrace*{-1,-\frac{1}{n+1}}}} \geq \sum\limits_{i=1}^{n} d_2(c(t_i),c(t_{i+1})) = \sum\limits_{i=1}^{n} \frac{1}{n+1} \xrightarrow{n \rightarrow \infty} \infty
@@ -1427,4 +1523,168 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 \section{Winkel in metrischen Räumen}
 \label{sec:2.4}
 
+\begin{definition}[Dreieck, Winkel]
+\label{def:2.41}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item Sei $(X,d_X)$ ein metrischer Raum. \marginnote{18.12. \\ \ [14]}
+		Ein \Index{Dreieck} in $X$ ist gegeben durch ein $3$-Tupel von Punkten aus $X$.
+		
+		Sei $(x,y,z)$ ein Dreieck in $X$.
+		Ein \Index{Vergleichsdreieck} in $\EE^2$ zu $\Delta = (x,y,z) \in X^3$ ist ein Dreieck $(\ol{x},\ol{y},\ol{z})$ in $\EE^2$, sodass gilt:
+		\[
+			d_X(x,y) = d_2(\ol{x},\ol{y}) \qquad d_X(y,z) = d_2(\ol{y},\ol{z}) \qquad d_X(x,z) = d_2(\ol{x},\ol{z}).
+		\]
+		Das Vergleichsdreieck $(\ol{x},\ol{y},\ol{z})$ in $\EE^2$ ist eindeutig bis auf Isometrie und wir schreiben dafür $\ol{\Delta} = (\ol{x},\ol{y},\ol{z})$.
+		Weiter bezeichnen wir mit $\angle_{\ol{x}}(\ol{y},\ol{z}) \in [0,\pi]$ den \Index{Winkel} in $\ol{\Delta}$ in $\ol{x}$.
+		\item Seien $c_1,c_2$ zwei Geodäten in $(X,d_X)$ mit $c_1(0) = c_2(0) =:p$.
+		Wir definieren
+		\begin{align*}
+			\angle(c_1,c_2) :&= \limsup_{t,t' \rightarrow 0} \angle_{\ol{p}} (\ol{c_1(t)},\ol{c_2(t)}) \\
+			&= \lim\limits_{n \rightarrow \infty} \sup \penbrace*{ \angle_{\ol{p}}(\ol{c_1(t)},\ol{c_2(t)}) : t,t' \in \enbrace*{0,\frac{1}{n}}}.
+		\end{align*}
+		$\angle(c_1,c_2)$ heißt der \Index{Winkel} zwischen $c_1$ und $c_2$.
+	\end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:2.42}
+	Seien $c_1,c_2$ zwei Geodäten in $X$ mit $c_1(0) = c_2(0) =: p$, sodass $\ol{c_1} * c_2$ eine Geodäte in $X$ ist.
+	Dann ist $\angle(c_1,c_2) = \pi$. \todo{Bild einfügen}
+\end{beispiel}
+
+\begin{proposition}
+\label{prop:2.43}
+	Sei $(X,d_X)$ ein metrischer Raum und $c_1,c_2,c_3$ Geodäten in $X$ mit $c_1(0) = c_2(0) = c_3(0)$. \marginnote{Beweis: ÜA}
+	Dann gilt:
+	\[
+		\angle(c_1,c_3) \leq \angle(c_1,c_2) + \angle(c_2,c_3)
+	\]
+\end{proposition}
+
+\begin{lemma}[\textsc{Alexandrov}s Lemma]
+\label{lemma:2.44}
+	Wir betrachten zwei Dreiecke in $\EE^2$ mit gemeinsamer Seite und $\gamma + \gamma' \geq \pi$. \todo{Bild einfügen.}
+	
+	Dann gilt:
+	\begin{enumerate}[(i)]
+		\item $d_2(B,A) + d_2(A,B') \geq d_2(B,C) + d_2(C,B')$
+		\item Bewege $C$ ein wenig, sodass $\gamma + \gamma' = \pi$ und die Seitenlängen des Vierecks $A,B,C,B'$ gleich bleiben (rechtes Dreieck).
+		Dann gilt:
+		\[
+			\ol{\alpha} \geq \alpha + \alpha' \quad \ol{\beta} \geq \beta \quad \ol{\beta'} \geq \beta' \quad d_2(A,\ol{C}) \geq d(A,C).
+		\]
+	\end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+\label{lemma:2.45}
+	Sei $X$ ein geodätischer Raum. \marginnote{Beweis: ÜA}
+	Der Raum $X$ ist genau dann $\CAT$, wenn für alle geodätischen Dreiecke $\Delta(x,y,z,\alpha,\beta,\gamma)$ gilt: \todo{Bild einfügen}
+	\[
+		d\enbrace*{x,\underbrace{\beta \enbrace*{\frac{d(z,y)}{2}}}_{=:m}} \leq d_2\enbrace*{\ol{x}, \underbrace{\ol{\beta} \enbrace*{\frac{d_2(\ol{z},\ol{y}}{2}}}_{=:\ol{m}}}
+	\]
+\end{lemma}
+
+\begin{satz}[Winkelbedingung für $\CAT$-Räume]
+\label{satz:2.46}
+	Sei $(X,d_X)$ ein geodätischer Raum.
+	Dann sind äquivalent:
+	\begin{enumerate}
+		\item $X$ ist $\CAT$.
+		\item Für jedes geodätische Dreieck $\Delta(x,y,z,\alpha,\beta,\gamma)$ in $X$ und Vergleichsdreieck $\ol{Delta}(\ol{x},\ol{y},\ol{z})$ gilt $\angle(\alpha,\gamma) \leq \angle_{\ol{x}}(\ol{y},\ol{z})$.
+	\end{enumerate}
+\end{satz}
+
+\begin{beweis}
+	\mbox{} \\[-.9cm]
+	\begin{description}
+		\item[(i) $\Rightarrow$ (ii):] Sei $\Delta(x,y,z,\alpha,\beta,\gamma)$ ein beliebiges geodätisches Dreieck.
+		Da $X$ $\CAT$ ist, gilt für $t \in [0,d(x,z)], t' \in [0,d(x,y)]$ beliebig: \todo{Bild einfügen}
+		\[
+			d(\alpha(t),\gamma(t')) \leq d_2(\ol{\alpha(t)},\ol{\gamma(t')}).
+		\]
+		Folglich gilt $\angle_{\ol{x}}(\ol{\ol{\alpha(t)}},\ol{\ol{\gamma(t')}}) \leq \angle_{\ol{x}}(\ol{y},\ol{z})$ und damit
+		\begin{align*}
+			\angle(\alpha,\gamma) :&= \limsup\limits_{t,t' \rightarrow \infty} \angle_{\ol{x}}(\ol{\ol{\alpha(t)}},\ol{\ol{\gamma(t')}}) \\
+			&\leq \limsup\limits_{t,t' \rightarrow \infty} \angle_{\ol{x}}(\ol{z},\ol{y}) \\
+			&= \angle_{\ol{x}} (\ol{z},\ol{y})
+		\end{align*}
+		\item[(ii) $\Rightarrow$ (i):] Sei $\Delta(x,y,z,\alpha,\beta,\gamma)$ ein beliebiges geodätisches Dreieck in $X$.
+		Wir zeigen, dass dann mit $m := \beta\enbrace*{\frac{d(z,y)}{2}}$ und Vergleichspunkt $\ol{m} := \ol{\beta}\enbrace*{\frac{d(\ol{z},\ol{y})}{2}}$ gilt:
+		\[
+			d(x,m) \leq d_2(\ol{x},\ol{m}).
+		\]
+		Dann folgt mit \autoref{lemma:2.45}, dass $X$ $\CAT$ ist.
+		
+		Wähle eine Geodäte zwischen $x$ und $m$ und betrachte das grüne und rote schraffierte Dreieck: \todo{Bild einfügen}
+		
+		Wir haben zwei Möglichkeiten für die Lage von $\ol{\ol{m}}$ für die Vergleichsdreiecke $\ol{\Delta}(\ol{x},\ol{\ol{m}},\ol{\ol{z}})$ und $\ol{\Delta}(\ol{x},\ol{\ol{y}},\ol{\ol{m}})$: \todo{Bild einfügen}
+		
+		Für die Dreiecke $\Delta(x,m,z)$ und $\Delta(x,y,m)$ gilt (i).
+		Wir haben also
+		\[
+			\angle(\beta\big|\_,\ol{\alpha}) \leq \angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{z}}) \qquad \qquad \angle(\ol{\alpha},\ol{\beta}\big|\_) \leq \angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{y}}),
+		\]
+		wobei $\ol{\alpha},\ol{\beta}$ hier die inversen Geodäten bezeichnen.
+		Wir erhalten:
+		\begin{align*}
+			&\angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{z}}) + \angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{y}}) \\
+			\stack{}{\geq} &\angle(\beta\big|\_,\ol{\alpha}) + \angle(\ol{\alpha},\ol{\beta}\big|\_) \\
+			&\stack{\ref{prop:2.43}}{\geq} \angle(\beta\big|\_,\ol{\beta}\big|\_) \stack{\ref{bsp:2.42}}{=} \pi.
+		\end{align*}
+		Also: \todo{Bild einfügen}
+		
+		Mit \autoref{lemma:2.44} folgt:
+		\[
+			d(x,m) = d_2(\ol{x},\ol{\ol{m}}) \leq d_2(\ol{x},\ol{m}). \qedhere
+		\]
+	\end{description}
+\end{beweis}
+
+\begin{satz}
+\label{satz:2.47}
+	Sei $Y$ ein lokaler $\CAT$-Raum.
+	Weiter sei $Y$ eindeutig geodätisch und die Geodäten hängen stetig von ihren Endpunkten ab.
+	Dann ist $Y$ ein $\CAT$-Raum.
+\end{satz}
+
+\begin{beweis}
+	Wir zeigen die Winkelbedingung für $\CAT$-Räume.
+	Seien $p,q_0,q_1 \in Y$ paarweise verschiedene Punkte und $\Delta(p,q_0,q_1)$ das geodätische Dreieck.
+	Sei \todo{Bild einfügen}
+	\[
+		\begin{array}{l}
+			q\colon [0,1] \rightarrow Y \text{ die linear umparametrisierte Geodäte von } q_0 \text{ nach } q_1, \\
+			\beta\colon [0,1] \rightarrow Y \text{ die linear umparametrisierte Geodäte von } p \text{ nach } q_0 \text{ und} \\
+			\gamma\colon [0,1] \rightarrow Y \text{ die linear umparametrisierte Geodäte von } p \text{ nach } q_1.
+		\end{array}
+	\]
+	Zu zeigen ist:
+	\[
+		\alpha := \angle(\beta,\gamma) \leq \angle_{\ol{p}}(\ol{q_0},\ol{q_1}).
+	\]
+	Für $s \in [0,1]$ sei $c_s \colon [0,1] \rightarrow Y$ die linear umparametrisierte Geodäte von $p$ zu $q(s)$.
+	Wir definieren
+	\begin{align*}
+		c\colon [0,1] \times [0,1] &\longrightarrow Y \\
+		(s,t) &\longmapsto c_s(t)
+	\end{align*}
+	\begin{itemize}
+		\item $c$ ist stetig, da die Geodäten in $Y$ stetig von ihren Endpunkten abhängen.
+		\item $\im(c) \subseteq Y$ ist kompakt und $Y$ ist lokal $\CAT$, somit ist
+		\[
+			\im(c) \subseteq B_{\varepsilon_1}(p_1) \cup \dots \cup B_{\varepsilon_n}(p_n)
+		\]
+		mit $B_{\varepsilon_i}(p_i)$ $\CAT$.
+		\item Wähle Unterteilungen
+		\[
+			\begin{array}{c}
+				0  = s_0 < s_1 < \dots < s_k = 1 \\
+				0 = t_0 < t_1 < \dots < t_l = 1
+			\end{array}
+		\]
+		mit $c([s_i,s_{i+1}] \times [t_j,t_{j+1}]) \subseteq B_{\varepsilon_m}(p_m)$ für $m \in \{1,\dots,n\}$. \todo{Beweis zu Ende machen (mit Bildern)}
+	\end{itemize}
+\end{beweis}
 \cleardoubleoddemptypage
