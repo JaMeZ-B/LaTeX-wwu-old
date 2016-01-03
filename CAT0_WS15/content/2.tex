@@ -156,7 +156,7 @@ Für den Beweis machen wir zuerst ein paar Vorüberlegungen: Wir haben $p \colon
 	Betrachte $\Ss^1 \subseteq \EE^2$. Die induzierte Metrik von $\EE^2$ auf $\Ss^1$ ist keine \enquote{gute} Metrik, um Geometrie zu machen. Besser ist folgende Metrik:
 	\begin{align*}
 		d_L(x,y) &= \text{Bogenlänge zwischen} x \text{ und } y \\
-		&= \arccos(\sprod{x,y})
+		&= \cos(\sprod{x,y})
 	\end{align*}
 	Als allgemeines Konzept betrachten wir also Wege von $x$ nach $y$.
 	
@@ -971,8 +971,38 @@ Wie erkennen wir Überlagerungen?
 \begin{beweis}
 	Wir zeigen zuerst, dass wir rektifizierbare Wege $c \colon [0,1] \rightarrow X$ eindeutig liften können. Das heißt:
 	
-	Sei $c \colon [0,1] \rightarrow X$ ein rektifizierbarer Weg und $\tilde{x} \in \tilde{X}$ mit $p(\tilde{x}) = c(0)$.
-	Dann existiert ein eindeutiger Weg $\tilde{c} \colon [0,1] \rightarrow \tilde{X}$ mit $p \circ \tilde{c} = c$ -- der \Index{Lift} von $c$.
+	\begin{minipage}{.35\textwidth}
+		Sei $c \colon [0,1] \rightarrow X$ ein rektifizierbarer Weg und $\tilde{x} \in \tilde{X}$ mit $p(\tilde{x}) = c(0)$.
+		
+		Dann existiert ein eindeutiger Weg $\tilde{c} \colon [0,1] \rightarrow \tilde{X}$ mit $p \circ \tilde{c} = c$ -- der \Index{Lift} von $c$.
+	\end{minipage} ~
+	\begin{minipage}{.6\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+		\draw (0,0) node{$[0,1]$};
+		\draw (4,0) ellipse (2cm and .7cm);
+		\draw (6.1,0) node[right]{$\mathbf{X}$};
+		\draw (4,3) ellipse (2cm and .7cm);
+		\draw (6.1,3) node[right]{$\mathbf{\tilde{X}}$};
+		
+		\draw [thick,->] (4,2.2) -- (4,0.8);
+		\draw (4.1,1.5) node[right]{$p$};
+		
+		\draw [thick,->] (.5,0) -- (1.9,0);
+		\draw [color=red,thick,dashed,->] (0,.3) -- (2.5,2.5);
+		\draw [color=red](1,1.5) node[left]{$\exists! \tilde{c}$};	
+		
+		\draw [thick,->] ([shift=(0:.33)]2.5,1.5) arc (0:340:.33);
+		
+		\draw [color=teal,thick] (3,3) node[below]{$\tilde{x}$} to[bend angle=20,bend left] (4,3) to[bend angle=20,bend right] (5,3) node[below]{$\tilde{c}(1)$};
+		\draw [color=teal] (3,3) node[fill,circle,inner sep=1pt]{};
+		\draw [color=teal] (5,3) node[fill,circle,inner sep=1pt]{};
+		
+		\draw [color=teal,thick] (3,0) node[below]{$c(0)$} to[bend angle=20,bend left] (4,0) to[bend angle=20,bend right] (5,0) node[below]{$c(1)$};
+		\draw [color=teal] (3,0) node[fill,circle,inner sep=1pt]{};
+		\draw [color=teal] (5,0) node[fill,circle,inner sep=1pt]{};
+		\end{tikzpicture}
+	\end{minipage}
 
 	\textit{Zur Eindeutigkeit:} Übungsaufgabe.
 	
@@ -996,7 +1026,38 @@ Wie erkennen wir Überlagerungen?
 				s \circ c(t'), & t' \in [t,t+\varepsilon).
 			\end{cases}
 		\end{align*}
-		$\tilde{c}$ ist stetig und ein Lift von $c \big|_{[0,t+\varepsilon)}$, also ist $[0,t + \varepsilon) \subseteq S$ und $S$ damit offen. \todo{Bild einfügen!}
+		$\tilde{c}$ ist stetig und ein Lift von $c \big|_{[0,t+\varepsilon)}$, also ist $[0,t + \varepsilon) \subseteq S$ und $S$ damit offen.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=1.5,>=Latex]
+				\draw (0,0) node{$[0,1]$};
+				\draw (4,0) ellipse (2cm and .7cm);
+				\draw (6.1,0) node[right]{$\mathbf{X}$};
+				\draw (4,3) ellipse (2cm and .7cm);
+				\draw (6.1,3) node[right]{$\mathbf{\tilde{X}}$};
+				
+				\draw [thick,->] (4.5,2.2) -- (4.5,0.8);
+				\draw (4.6,1.5) node[right]{$p$};
+				\draw [thick,->] (3.5,.8) -- (3.5,2.2);
+				\draw (3.9,1.5) node[left]{$s$};
+				
+				\draw [thick,->] (.5,0) -- (1.9,0);
+				\draw [color=red,thick,dashed,->] (0,.3) -- (2.5,2.5);
+				
+				\draw [color=teal,thick] (3,3) node[below]{$\tilde{x}$} to[bend angle=20,bend left] (4,3) node[below]{$\tilde{c}(t)$} to[bend angle=20,bend right] (5,3) node[below]{$\tilde{c}(1)$};
+				\draw [color=teal] (3,3) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (4,3) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (5,3) node[fill,circle,inner sep=1pt]{};
+				\draw [dashed] (4,3) circle (.4);
+				
+				\draw [color=teal,thick] (3,0) node[below]{$c(0)$} to[bend angle=20,bend left] (4,0) node[below]{$c(t)$} to[bend angle=20,bend right] (5,0) node[below]{$c(1)$};
+				\draw [color=teal] (3,0) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (4,0) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (5,0) node[fill,circle,inner sep=1pt]{};
+				\draw [dashed] (4,0) circle (.4);
+				\draw (3.5,-.55) node[right]{$B_\varepsilon(p \circ \tilde{c}(t))$};
+			\end{tikzpicture}
+		\end{figure}
 		\item $S$ ist abgeschlossen:
 		Wir nehmen an, dass $[0,a) \subseteq S$.
 		Zu zeigen ist dann $a \in S$.
@@ -1050,10 +1111,37 @@ Wie erkennen wir Überlagerungen?
 			x' &\longmapsto \tilde{c}_{x'}(1),
 		\end{align*}
 		wobei $\tilde{c}_{x'}$ der Lift der linear umparametrisierten Geodäte $c_{x'} \colon [0,1] \rightarrow X, x \geo x'$ mit $\tilde{c}_{x'}(0) = y$.
-		\item Nun ist $s_y \colon B_r(x) \rightarrow s_y(B_r(x))$ ein Homöomorphismus und $s_y(B_r(x))$ ist offen:
-		Mit Hilfe von (v) zeigt man, dass $s_y$ eine Inverse zu $p$ ist.
-		Wir zeigen die Stetigkeit von $s_y$ in $z \in B_r(x)$ beliebig.
-		Betrachte die linear umparametrisierte eindeutige Geodäte $c_z \colon [0,1] \rightarrow B_r(x), x \geo z$ und den eindeutigen Lift $\tilde{c}_z \colon [0,1] \rightarrow \tilde{X}$ mit $\tilde{c}_z(0) = y$. \todo{Bild einfügen}
+		\item \mbox{} 
+		
+		\vspace*{-1em}
+		\begin{minipage}{.6\textwidth}
+			Nun ist $s_y \colon B_r(x) \rightarrow s_y(B_r(x))$ ein Homöomorphismus und $s_y(B_r(x))$ ist offen:
+			Mit Hilfe von (v) zeigt man, dass $s_y$ eine Inverse zu $p$ ist.
+			Wir zeigen die Stetigkeit von $s_y$ in $z \in B_r(x)$ beliebig.
+			Betrachte die linear umparametrisierte eindeutige Geodäte $c_z \colon [0,1] \rightarrow B_r(x), x \geo z$ und den eindeutigen Lift $\tilde{c}_z \colon [0,1] \rightarrow \tilde{X}$ mit $\tilde{c}_z(0) = y$.
+			\vspace{2cm}
+		\end{minipage} \hfill
+		\begin{minipage}{.3\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=1,>=Latex]
+			\draw (4,0) ellipse (2cm and .7cm);
+			\draw (6.1,0) node[right]{$\mathbf{X}$};
+			\draw (4,3) ellipse (2cm and .7cm);
+			\draw (6.1,3) node[right]{$\mathbf{\tilde{X}}$};
+			
+			\draw [thick,->] (4,2.2) -- (4,0.8);
+			\draw (4.1,1.5) node[right]{$p$};
+			
+			\draw [color=teal,thick] (3,3) node[below]{$y$} to[bend angle=20,bend left] (4,3)  to[bend angle=20,bend right] (5,3) node[below]{$\tilde{c}_z(1)$};
+			\draw [color=teal] (3,3) node[fill,circle,inner sep=1pt]{};
+			\draw [color=teal] (5,3) node[fill,circle,inner sep=1pt]{};
+			
+			\draw [color=teal,thick] (3,0) node[below]{$x$} to[bend angle=20,bend left] (4,0) node[above]{$c_z$} to[bend angle=20,bend right] (5,0) node[below]{$z$};
+			\draw [color=teal] (3,0) node[fill,circle,inner sep=1pt]{};
+			\draw [color=teal] (5,0) node[fill,circle,inner sep=1pt]{};
+			\end{tikzpicture}
+		\end{minipage}
+		
 		Da $\tilde{c}_z$ stetig ist und $[0,1]$ kompakt, ist das Bild von $\tilde{c}_z$ kompakt.
 		Weiter ist $p$ ein lokaler Homöomorphismus.
 		Folglich existieren endlich viele Bälle $\tilde{B}_1, \dots, \tilde{B}_k$ in $\tilde{X}$ mit $\tilde{c}_z([0,1]) \subseteq \tilde{B}_1 \cup \dots \cup \tilde{B}_k$ und sodass
@@ -1061,11 +1149,99 @@ Wie erkennen wir Überlagerungen?
 			p \big|_{\tilde{B}_i} \colon \tilde{B}_i \longrightarrow p(\tilde{B}_i) =: B_i
 		\]
 		ein Homöomorphismus auf die offene Menge $B_i$ ist.
-		Da $p \circ \tilde{c}_z = c_z$ ist, gilt $c_z([0,1]) \subseteq B_1 \cup \dots \cup B_k$. \todo{Bild einfügen}
+		Da $p \circ \tilde{c}_z = c_z$ ist, gilt $c_z([0,1]) \subseteq B_1 \cup \dots \cup B_k$. 
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=1,>=Latex]
+				\draw (0,4) ellipse (3cm and 1cm);
+				\draw (3.2,4) node{$\mathbf{\tilde{X}}$};
+				\draw (0,0) ellipse (3cm and 1cm);
+				\draw (3.2,0) node{$\mathbf{X}$};
+		
+				\draw [thick,->] (3.2,3.7) -- (3.2,0.3);
+				\draw (3.3,2) node[right]{$p$};
+				
+				\draw [color=teal,thick] (-2,4) node[below]{$y$} 
+				to[bend angle=30,bend left] coordinate[pos=.5] (A1) (0,4) 
+				to[bend angle=20,bend right] coordinate[pos=.5] (A2) (2,4)  node[below]{$\tilde{c}_z(1)$};
+				
+				\draw [color=teal] (-2,4) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (2,4) node[fill,circle,inner sep=1pt]{};
+				
+				\draw [dashed] (-2,4) circle (.6);
+				\draw [dashed] (A1) circle (.6);
+				\draw [dashed] (0,4) circle (.6);
+				\draw [dashed] (A2) circle (.6);
+				\draw [dashed] (2,4) circle (.6);
+				
+				\draw [color=teal,thick] (-2,0) node[below]{$x$} 
+				to[bend angle=30,bend left] coordinate[pos=.5] (B1)  (0,0) 
+				to[bend angle=20,bend right] coordinate[pos=.5] (B2) (2,0) node[below]{$z$};
+				
+				\draw [color=teal] (-2,0) node[fill,circle,inner sep=1pt]{};
+				\draw [color=teal] (2,0) node[fill,circle,inner sep=1pt]{};
+				
+				\draw [dashed] (-2,0) circle (.6);
+				\draw [dashed] (B1) circle (.6);
+				\draw [dashed] (0,0) circle (.6);
+				\draw [dashed] (B2) circle (.6);
+				\draw [dashed] (2,0) circle (.6);
+				
+				\draw [<->] (-2,.6) -- (-2,3.4);
+				\draw [<->] (-1,.9) -- (-1,3.7);
+				\draw [<->] (0,.6) -- (0,3.4);
+				\draw [<->] (1,.4) -- (1,3.2);
+				\draw [<->] (2,.6) -- (2,3.4);
+			\end{tikzpicture}
+		\end{figure}
+		
 		O.B.d.A. sei $c_z \enbrace*{\benbrace*{\frac{l-1}{n},\frac{l}{n}}} \subseteq B_l$ für $l \in \{1,\dots,k\}$.
 		Sei $s^l$ die lokale Inverse von $p \big|_{\tilde{B}_l}$.
 		Es gilt also $s^l \colon B_l \rightarrow \tilde{B}_l$ und $s^l \circ p \big|_{\tilde{B}_l} = \id_{\tilde{B}_l}$ sowie $p \big|_{\tilde{B}_l} \circ s^l = \id_{B_l}$.
-		Wir erhalten $s^l(c_z(t)) = s_y(c_z(t))$ für $t \in \benbrace*{\frac{l-1}{n},\frac{l}{n}}$. \todo{Bild einfügen}
+		Wir erhalten $s^l(c_z(t)) = s_y(c_z(t))$ für $t \in \benbrace*{\frac{l-1}{n},\frac{l}{n}}$.
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=.8,>=Latex]
+				\draw (0,0) ellipse (3 and 2);
+				\draw (-1.5,0) node[below]{$x$} to [bend angle=20, bend left] (1.4,0.2) node[right]{$z'$};
+				\draw (-1.5,0) to [bend angle=20, bend left] coordinate[pos=.25] (CZT) (1.5,-.5) node[right]{$z$};
+				\draw (-1.5,0) node[fill,circle,inner sep=1pt]{};
+				\draw (1.4,0.2) node[fill,circle,inner sep=1pt]{};
+				\draw (1.5,-.5) node[fill,circle,inner sep=1pt]{};
+				\draw [color=red] (CZT) node[fill,circle,inner sep=1pt]{};
+				\draw [color=red] (CZT) node[below]{$c_z(t)$};
+				\draw (1,.3) node[above]{$c_{z'}$};
+				\draw (1,-.25) node[below]{$c_z$};
+				\draw [color=teal] (-1.2,0) circle (1.5);
+				\draw [color=teal] (1.2,0) circle (1.5);
+				\draw [color=teal] (-1,-1.2) node{$B_1$};
+				\draw [color=teal] (1,-1.2) node{$B_2$};
+				
+				\draw (0,6) ellipse (3 and 2);
+				\draw (-2,5.5) node[below]{$y$} to [bend angle=20, bend left] coordinate[pos=.5] (P) (0,6) to [bend angle=20, bend right] (2,6) node[below]{$\tilde{c}_z(t)$};
+				\draw (-2,5.5) node[fill,circle,inner sep=1pt]{};
+				\draw (2,6) node[fill,circle,inner sep=1pt]{};
+				\draw [color=red] (P) node[fill,circle,inner sep=1pt]{};
+				\draw [color=red] (P) node[anchor=south east]{$s^1(c_z(t))$};
+				\draw (.5,5.8) node[below]{$\tilde{c}_z$};
+				\draw [color=teal] (-1.2,6) circle (1.5);
+				\draw [color=teal] (1.2,6) circle (1.5);
+				\draw [color=teal] (-1,4.8) node{$\tilde{B}_1$};
+				\draw [color=teal] (1,4.8) node{$\tilde{B}_2$};	
+				
+				\draw [->] (-1.5,2) -- (-1.5,4);
+				\draw (-1.6,3) node[left]{$s^1$};
+				\draw [->] (-1,4) -- (-1,2);
+				\draw (-.9,3) node[right]{$p$};
+				
+				\draw [->] (1,2) -- (1,4);
+				\draw (.9,3) node[left]{$s^2$};
+				\draw [->] (1.5,4) -- (1.5,2);
+				\draw (1.6,3) node[right]{$p$};				
+			\end{tikzpicture}
+		\end{figure}
 		
 		Da die Geodäten in $B_r(x)$ stetig von ihren Endpunkten abhängen, existiert ein $\delta > 0$, sodass für alle $z' \in B_\delta(z) \subseteq B_r(x)$ gilt:
 		\[
@@ -1631,7 +1807,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 		\begin{align*}
 			&\angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{z}}) + \angle_{\ol{\ol{m}}}(\ol{x},\ol{\ol{y}}) \\
 			\stack{}{\geq} &\angle(\beta\big|\_,\ol{\alpha}) + \angle(\ol{\alpha},\ol{\beta}\big|\_) \\
-			&\stack{\ref{prop:2.43}}{\geq} \angle(\beta\big|\_,\ol{\beta}\big|\_) \stack{\ref{bsp:2.42}}{=} \pi.
+			\stack{\ref{prop:2.43}}{\geq} &\angle(\beta\big|\_,\ol{\beta}\big|\_) \stack{\ref{bsp:2.42}}{=} \pi.
 		\end{align*}
 		Also: \todo{Bild einfügen}
 		
