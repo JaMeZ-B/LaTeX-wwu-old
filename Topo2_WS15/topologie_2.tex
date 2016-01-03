@@ -591,7 +591,7 @@
 		\end{tikzcd}
 	\]
 	Behauptung: Beide Spalten sind kurz exakt. \todo{Revision 3}
-	Betrachte dazu folgenden Ausschnitt aus der Paarsequenz:
+	Betrachte dazu folgenden Ausschnitt aus der Paarsequenz des Paares $(D^1, \partial D^1)$:
 	\[
 		\begin{tikzcd}[cramped]
 			\Underbracket{H^0(D^1,\partial D^1;R)}{\StackText{\ref{0teKoho}}{=}0} \rar & H^0(D^1;R) \rar["j^*"] & H^0(\partial D^1;R) \rar & H^1(D^1,\partial D^1;R) \rar & 0
@@ -780,20 +780,29 @@
 	Betrachte $\tau-\tau'$ und wende \autoref{prop:H0_kettenhomotop} an. \todo{Revision 4}
 \end{beweis}
 
-\begin{definition}
+\begin{definition}[{name=[Äußere Algebra]}]
 	Sei $R$ ein kommutativer Ring. Die \Index{freie graduiert kommutative Algebra}\footnote{$a^2=0$ falls $a$ ungerade} in Erzeugern $a_1, \ldots, a_k$ von Grad $\abs*{a_1}, \ldots , \abs*{a_k}$ über $R$ ist die 
 	graduiert kommutative Algebra $\Lambda_R \benbrace*{a_1,\ldots,a_k}$, deren Elemente von Grad $N$ formale Linearkombinationen der Form 
 	\[
 		\smashoperator[r]{\sum_{\substack{i_1, \ldots ,i_n \ge 0 \\ i_1 \abs*{a_1} + \ldots + i_n \abs*{a_n} = N , i_j \in \set*{0,1} \text{ für } \abs*{a_j} \text{ ungerade}}}} 
 		\enspace r_{i_1, \ldots ,i_n} \cdot a_1^{i_1} \cdot a_2^{i_2} \cdots a_n^{i_n}
 	\]
+	sind.
 	Das Produkt ist das eindeutige $R$-lineare assoziative graduiert kommutative Produkt mit $a_\lambda^j \cdot a_{\lambda'}^{j'} = a_\lambda^j a_{\lambda'}^{j'}$ für 
 	$\lambda< \lambda'$ und $a_\lambda^j \cdot a_\lambda^{j'} = a_\lambda^{j+j'}$ für $\abs*{a_\lambda}$ ungerade.
 \end{definition}
 
 \begin{beispiel}
 	Sind alle $\abs*{a_i}$ gerade, so ist $\Lambda_R \benbrace*{a_1,\ldots,a_n}$ der Polynomring über $R$ in den Variablen $a_1, \ldots ,a_n$.
-	Sind alle $\abs*{a_i}$ ungerade, so ist $\Lambda_R \benbrace*{a_1, \ldots a_n}$ die äußere Algebra in den Variablen $a_1, \ldots , a_n$.
+	Sind alle $\abs*{a_i}$ ungerade, so ist $\Lambda_R \benbrace*{a_1, \ldots a_n}$ die \Index{äußere Algebra} in den Variablen $a_1, \ldots , a_n$.
+	
+	\emph{Definition der äußeren Algbra aus \cite[Ex. 3.15]{Hatcher}:}
+	Die \Index{äußere Algebra} $\Lambda_R \benbrace*{a_1,a_2,\ldots }$ über einem kommutativen Ring $R$ ist der freie $R$-Modul, dessen Basis aus endlichen Produkten $a_{i_1} \cdots a_{i_k}$ mit $i_1 < \ldots < i_k$ besteht, versehen mit der Multiplikation, die durch die Forderungen 
+	\[
+		a_i a_j= -a_j a_i \quad \text{ und } \quad  a_i^2=0
+	\]
+	eindeutig bestimmt ist. 
+	Das leere Produkt der $a_i$ liefert ein Einselement.
 \end{beispiel}
 
 \begin{satz}
@@ -830,29 +839,21 @@
 \end{frage}
 
 \begin{definition}[{name=[azyklischer Kettenkomplex]}]
-	Ein $R$-Kettenkomplex heißt \bet{azyklisch}\index{azyklischer Kettenkomplex}, falls seine Homologiegruppen trivial sind, also falls der Kettenkomplex eine lange exakte Folge ist. \todo{Revision 5}
+	Ein $R$-Kettenkomplex heißt \bet{azyklisch}\index{azyklischer Kettenkomplex}, falls seine Homologiegruppen trivial sind, also falls der Kettenkomplex eine lange exakte Folge ist.
 \end{definition}
 
 \begin{beispiel}[{name=[Beispiel eines azyklischen Kettenkomplex]}]
 	Unser altbekanntes Beispiel
 	\[
 		\begin{tikzcd}
-			0 \rar & \mathbb{Z} \rar["\cdot 2"] & \mathbb{Z} \rar & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
+			0 \rar & \mathbb{Z} \rar["\cdot 2",hook] & \mathbb{Z} \rar[two heads] & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
 		\end{tikzcd}
 	\]
 	ist ein azyklischer Kettenkomplex, der nicht kettenkontraktibel ist, da es keine nicht trivialen Abbildungen $\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \to \mathbb{Z}$ gibt. Damit ist 
 	die Antwort auf die erste Frage \enquote{Nein}.
 \end{beispiel}
 
-% \begin{wrapfigure}{r}{3cm}
-% 	\centering{
-% 	\begin{tikzcd}
-% 		\mbox{ } & M \dar[two heads,"f"] \\
-% 		P \rar["\varphi"] \urar["\hat{\varphi}",dashed] & N
-% 	\end{tikzcd}
-% 	}
-% \end{wrapfigure}
-\begin{definition}[{name=[projektiver Modul]}]
+\begin{definition}[{name=[projektiver Modul]},label=def_projektiv]
 	Ein $R$-Modul $P$ heißt \bet{projektiv}\index{projektiver Modul}, falls es zu jeder surjektiven, $R$-linearen Abbildung $f \colon M \to N$ und jeder $R$-linearen Abbildung
 	$\varphi \colon P \to N$ eine $R$-lineare Abbildung $\hat{\varphi} \colon P \to M$ gibt mit $\varphi= f \circ \hat{\varphi}$. Anders ausgedrückt kommutiert folgendes Diagramm:
 	\[
@@ -864,7 +865,7 @@
 \end{definition}
 
 \begin{beispiel}[{name=[Freie Moduln sind projektiv]}]
-	Freie Moduln sind projektiv.
+	Freie Moduln sind projektiv, wie man durch Anwendung der universellen Eigenschaft eines freien Moduls sehr einfach sieht (wurde auch in Topologie \RM{1} bewiesen). 
 \end{beispiel}
 
 \begin{satz}[{name=[Projektive Moduln als direkte Summanden in freien Moduln]}]
@@ -878,18 +879,23 @@
 	Zur ersten Implikation:
 	\[
 		\begin{tikzcd}
-			\mbox{}&  R[S] \dar[two heads,"p"] \\
+			\mbox{}&  R[P] \dar[two heads,"p"] \\
 			P \rar["\id"] \urar[dashed,"i"]& P
 		\end{tikzcd}
 	\]
-	Mit $R[S] \cong P \oplus \ker p$ folgt nun die gewünschte Aussage. Die umgekehrte Implikation ergibt sich wie folgt:
+	Mit $R[S] \cong P \oplus \ker p$ folgt nun die gewünschte Aussage.
+	Die zweite Implikation ergibt sich wie folgt: Nach Vorraussetzung gibt es $i \colon P \to F$ und $p \colon F \to p$, wobei $F$ frei ist und $p \circ i = \id_P$ gilt.
+	Seien nun $M$, $N$, $f$ und $\varphi$ wie in \autoref{def_projektiv}.
+	Wir erhalten folgendes Diagramm
 	\[
-		\begin{tikzcd}[sep=large]
-			R[S] \rar["\hat{\psi}"] \dar[two heads,"p"',xshift=-3pt]  \drar["\psi=\varphi \circ p",sloped,pos=0.16] & M \dar[two heads] \\
+		\begin{tikzcd}[sep=huge]
+			F \rar["\hat{\psi}"] \dar[two heads,"p"',xshift=-3pt]  \drar["\psi=\varphi \circ p",sloped,pos=0.16] & M \dar[two heads,"f"] \\
 			P \rar["\varphi"] \uar[hook,"i"',xshift=3pt] & N
 		\end{tikzcd}
 	\]
-	$\hat{\varphi} := \hat{\psi} \circ i$, dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$.
+	Da $F$ frei und insbesondere projektiv ist, existiert ein Homomorphismus $\hat{\psi}$ mit $f \circ \hat{\psi}=\psi$.
+	Wir setzen nun $\hat{\varphi} := \hat{\psi} \circ i$. 
+	Dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$ und $P$ ist projektiv. \todo{Revision 5}
 \end{beweis}
 
 \begin{satz}
@@ -2043,7 +2049,7 @@ Ab jetzt: $R$ kommutativ!
 			M & P_0 \lar & P_1 \lar & P_2 \lar & \ldots \lar & P_n \lar & 0 \lar
 		\end{tikzcd}
 	\] 
-	Gibt es kein solches $n$, so sagen wir die projektive Dimension von $R$ ist $\infty$.
+	Gibt es kein solches $n \in \mathbb{N}$, so sagen wir die projektive Dimension von $R$ ist $\infty$.
 \end{definition}
 
 \begin{beispiel}[{name=[Körper haben projektive Dimension $0$]}]
@@ -2090,7 +2096,7 @@ Ab jetzt: $R$ kommutativ!
 		sodass folgendes Diagramm kommutiert:
 		\[
 			\begin{tikzcd}[sep=large]
-				H_=(P_*) \rar["H_0(F)"] \dar["\epsilon","\cong"'] & H_0(P_*') \dar["\epsilon'","\cong"'] \rar["H_0(F')"] & H_0(P_*'') \dar["\epsilon''","\cong"'] \\
+				H_0(P_*) \rar["H_0(F)"] \dar["\epsilon","\cong"'] & H_0(P_*') \dar["\epsilon'","\cong"'] \rar["H_0(F')"] & H_0(P_*'') \dar["\epsilon''","\cong"'] \\
 				M \rar & M' \rar & M''
 			\end{tikzcd}
 		\]
@@ -2118,7 +2124,7 @@ Ab jetzt: $R$ kommutativ!
 \newpage
 % section 11 (end)
 
-\section{$\Tor$ und $\Ext$} % (fold)
+\section[Tor und Ext]{$\Tor$ und $\Ext$} % (fold)
 \label{sec:12}
 
 \todo[inline]{Revision 12}
@@ -2141,24 +2147,24 @@ Ab jetzt: $R$ kommutativ!
 	\]
 \end{frage}
 
-\begin{konvention}
+\begin{konvention}[{name=[Links- und Rechtsmoduln]}]
 	Moduln sind -- wie gewohnt -- immer Linksmoduln, außer wir sprechen explizit von Rechtsmoduln
 \end{konvention}
 
-\begin{definition}
+\begin{definition}[{name=[{lineare und exakte Funktoren}]}]
 	Seien $R$ und $S$ Ringe.
 	Ein Funktor $F\colon \Mod{R} \to \Mod{S}$ heißt \bet{$\mathbb{Z}$-linear}\index{Funktor!$\mathbb{Z}$-linearer}, wenn für $f,g \colon M \to M'$ gilt $F(f + g)= F(f) + F(g)$.
 	
 	Ein solcher Funktor heißt \bet{exakt}\index{Funktor!exakter}, wenn er kurze exakte Folgen von $R$-Moduln auf kurze exakte Folgen von $S$-Moduln abbildet.
 \end{definition}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[exakte Funktoren und (Ko-)Homologie]}]
 	Sei $C_*$ ein $R$-Kettenkomplex.
 	Ist $F \colon \Mod{R} \to \Mod{S}$ exakt, so gilt
 	\[
 		\begin{array}{ll}
-			H_* \enbrace*{F(C_*)} = F_* \enbrace*{H_*(C_*)} & \text{ falls $F$ kovariant ist} \\
-			H^* \enbrace*{F(C_*)} = F \enbrace*{H_*(C_*)} & \text{ falls $F$ kontravariant ist} 
+			H_* \enbrace[\big]{F(C_*)} = F_* \enbrace[\big]{H_*(C_*)} & \text{ falls $F$ kovariant ist} \\
+			H^* \enbrace[\big]{F(C_*)} = F \enbrace[\big]{H_*(C_*)} & \text{ falls $F$ kontravariant ist} 
 		\end{array}
 	\]
 \end{bemerkung}
