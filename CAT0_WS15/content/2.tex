@@ -1347,7 +1347,35 @@ Wir müssen zuerst verstehen, wie eine Umgebung einer gegebenen linear umparamet
 	\[
 		\sup_{t \in [0,1]} d_X(c_{\ol{x},\ol{y}}(t),c(t)) < \varepsilon.
 	\]
-	\todo{Bild einfügen.}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+%			\draw [gray,very thin,step=1] (0,0) grid (5,5);
+			
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw [color=teal] (.5,1) node[fill,circle,inner sep=1pt]{};
+			\draw (5,0) node[fill,circle,inner sep=1pt]{};
+			\draw [color=teal] (4,.5) node[fill,circle,inner sep=1pt]{};
+			
+			\draw [dashed] (0,0) circle (1.5);
+			\draw [dashed] (5,0) circle (1.5);
+			\draw (1,-1) node[left]{$B_\varepsilon(x)$};
+			\draw (4,-1) node[right]{$B_\varepsilon(y)$};
+			
+			\draw [thick] (0,0) node[below]{$x$} to [bend angle=30,bend left] coordinate[pos=.8] (P1) (2.5,.5) to [bend angle=15, bend right] (5,0) node[below]{$y$};
+			%\draw [thick,color=teal] (.5,1) node[left]{$\ol{x}$} to [bend angle=30,bend left] coordinate[pos=.8] (P2) (2.25,1.2) to [bend angle=15, bend right] (4,.5) node[right]{$\ol{y}$};
+			\draw [thick,color=teal] (.5,1) node[left]{$\ol{x}$} to [bend angle=30,bend left] coordinate[pos=.4] (P2) (4,.5) node[right]{$\ol{y}$};
+			
+			\draw [<->,thick,color=red] (P1) node[below]{$c_{\ol{x},\ol{y}}(t)$} -- (P2) node[above]{$c(t)$};
+			\draw [color=red] (P1) node[fill,circle,inner sep=1pt]{};
+			\draw [color=red] (P2) node[fill,circle,inner sep=1pt]{};
+			\draw [color=red] (2,1) node[right]{$<\varepsilon$};
+			
+			
+		\end{tikzpicture}
+	\end{figure}
+	
 	Weiter gilt, dass für je zwei linear umparametrisierte Geodäten $c_1,c_2 \colon [0,1] \rightarrow X$ mit $\sup_{t \in [0,1]} d_X(c_1(t),c(t)) < \varepsilon$ und $\sup_{t \in [0,1]} d_X(c_2(t),c(t)) < \varepsilon$ die Funktion
 	\begin{align*}
 		\Phi\colon [0,1] &\longrightarrow \RR_{\geq 0} \\
@@ -1373,7 +1401,33 @@ Dieses Lemma beweisen zu einem späteren Zeitpunkt (siehe \pageref{bew_tech_lemm
 			Sei $\ol{y} \in B_\varepsilon(c(1))$ beliebig.
 			Nach \autoref{lemma:2.32} existiert eine linear umparametrisierte Geodäte $c_{x_0 \ol{y}}\colon [0,1] \rightarrow X, x_0 \geo \ol{y}$ mit $d(c_{x_0 \ol{y}},c) = \sup_{t \in [0,1]} d_X(c_{x_0 \ol{y}}(t),c(t)) < \varepsilon$.
 			Somit ist $c_{x_0 \ol{y}} \in B_\varepsilon(c)$.
-			Ferner gilt $\exp(c_{x_0 \ol{y}}) = c_{x_0 \ol{y}}(1) = \ol{y}$. \todo{Bild einfügen}
+			Ferner gilt $\exp(c_{x_0 \ol{y}}) = c_{x_0 \ol{y}}(1) = \ol{y}$.
+			\begin{figure}[h]
+				\centering
+				\begin{tikzpicture}[scale=1,>=Latex]
+					\draw (0,0) ellipse (2 and 1.5);
+					\draw (6,0) ellipse (2 and 1.5);
+					\draw [->,thick] (2.2,0) -- (3.8,0);
+					\draw (3,0) node[above]{$\exp$};
+					\draw (-2,1.5) node{$\mathbf{\tilde{X}_{x_0}}$};
+					\draw (8,1.5) node{$\mathbf{X}$};
+					
+					\draw (1,0) node[fill,circle,inner sep=1]{};
+					\draw [dashed] (1,0) node[below]{$c$} circle (.9);
+					\draw (0.5,-1) node[left]{$B_\varepsilon(c)$};
+					
+					\draw (5,-.5) node[fill,circle,inner sep=1]{};
+					\draw [dashed,color=teal] (7,-.25) node[fill,circle,inner sep=1]{} circle (.75);
+					\draw (7,.25) node[fill,circle,inner sep=1]{};
+					
+					\draw (5,-.5) node[below]{$\ol{x} = \textcolor{teal}{x_0}$} to [bend angle=30,bend left] (7,.25) node[right]{$\ol{y}$};
+					\draw [color=teal] (5,-.5) to [bend angle=20, bend left] (7,-.25) node[right]{$c(1)$};
+					\draw [color=teal] (6,-.15) node[below]{$c$};
+					\draw (5.5,0) node[anchor=south east]{$c_{\ol{x},\ol{y}}$};					
+				\end{tikzpicture}
+			\end{figure}
+			
+			
 			\item $\exp$ ist isometrische Einbettung:
 			Seien $c_1,c_2 \in B_\varepsilon(c)$ beliebig.
 			Aus \autoref{lemma:2.32} wissen wir, dass für alle $t \in [0,1]$ gilt:
@@ -1476,16 +1530,33 @@ Folglich ist $(\tilde{X}_{x_0},d_{\exp})$ eindeutig geodätisch, lokal $\CAT$ un
 Daraus folgt, dass $(\tilde{X}_{x_0},d_{\exp})$ global $\CAT$ ist.
 Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit Hilfe von Winkeln in metrischen Räumen, siehe Abschnitt~\ref{sec:2.4}.
 
-\begin{korollar}
-\label{kor:2.35}
-	Sei $(X,d_X)$ ein metrischer Raum, der lokal $\CAT$ und lokal vollständig ist und $c \colon [0,1] \rightarrow X$ eine linear umparametrisierte Geodäte von $x \in X$ nach $y \in X$.
-	Sei weiter $\varepsilon > 0$ so, wie in \autoref{lemma:2.32}.
-	Sei nun $\ol{y} \in B_\varepsilon(y)$ beliebig und $c_{x \ol{y}}$ die eindeutige linear umparametrisierte Geodäte von $x$ nach $\ol{y}$.
-	Dann gilt: \todo{Bild einfügen}
-	\[
+	\begin{minipage}{0.65\textwidth}
+		\begin{korollar}
+		\label{kor:2.35}
+		Sei $(X,d_X)$ ein metrischer Raum, der lokal $\CAT$ und lokal vollständig ist und $c \colon [0,1] \rightarrow X$ eine linear umparametrisierte Geodäte von $x \in X$ nach $y \in X$.
+		Sei weiter $\varepsilon > 0$ so, wie in \autoref{lemma:2.32}.
+		Sei nun $\ol{y} \in B_\varepsilon(y)$ beliebig und $c_{x \ol{y}}$ die eindeutige linear umparametrisierte Geodäte von $x$ nach $\ol{y}$.
+		Dann gilt:
+		\[
 		\ell(c_{x \ol{y}}) \leq \ell(c) + d_X(y,\ol{y}).
-	\]
-\end{korollar}
+		\]
+		\end{korollar}
+	\end{minipage} \hfill
+	\begin{minipage}{.3\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=1,>=Latex]
+			\draw (5,-.5) node[fill,circle,inner sep=1]{};
+			\draw [color=teal] (7,-.25) node[fill,circle,inner sep=1]{} ;
+			\draw [dashed] (7,.25) node[fill,circle,inner sep=1]{} circle (.75);
+			
+			\draw (5,-.5) node[below]{$x$} to [bend angle=30,bend left] (7,.25) node[right]{$y$};
+			\draw [color=teal] (5,-.5) to [bend angle=20, bend left] (7,-.25) node[right]{$\ol{y}$};
+			\draw [color=teal] (6,-.15) node[below]{$c_{x,\ol{y}}$};
+			\draw (5.5,0) node[anchor=south east]{$c$};					
+			\end{tikzpicture}
+	\end{minipage}
+
+\vspace{1em}
 
 \begin{beweis}
 	Wähle $t > 0$ so, dass $c\big|_{[0,t]}$ und $c_{x \ol{y}} \big|_{[0,t]}$ linear umparametrisierte Geodäten sind.
@@ -1635,7 +1706,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 			Somit ist $[0,\eta] \subseteq \delta$.
 			\item[2. Fall:] $t_0 > 0$.
 			Wähle $\varepsilon > 0$ so, wie in \autoref{lemma:2.32} für die linear umparametrisierte lokale Geodäte $\Exp \circ C_{\gamma(0)\gamma(t_0)}$.
-			Weiter wähle $\eta > 0$, sodass für alle $t' \in (t_0-\eta, t_0 + \eta)$ gilt, dass $\Exp \circ \gamma(t') \in B_\varepsilon(\Exp \circ \gamma(t_0))$ ist und $\Exp \colon B_\eta(\gamma(0)) \rightarrow B_\eta(\Exp\circ \gamma(t_0))$ eine Isometrie ist. \todo{Bild einfügen}
+			Weiter wähle $\eta > 0$, sodass für alle $t' \in (t_0-\eta, t_0 + \eta)$ gilt, dass $\Exp \circ \gamma(t') \in B_\varepsilon(\Exp \circ \gamma(t_0))$ ist und $\Exp \colon B_\eta(\gamma(0)) \rightarrow B_\eta(\Exp\circ \gamma(t_0))$ eine Isometrie ist.
 			
 			Dann gilt für alle $t' \in (t_0 - \eta, t_0 + \eta)$:
 			\begin{align*}
@@ -1726,7 +1797,33 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 \begin{beispiel}
 \label{bsp:2.42}
 	Seien $c_1,c_2$ zwei Geodäten in $X$ mit $c_1(0) = c_2(0) =: p$, sodass $\ol{c_1} * c_2$ eine Geodäte in $X$ ist.
-	Dann ist $\angle(c_1,c_2) = \pi$. \todo{Bild einfügen}
+	Dann ist $\angle(c_1,c_2) = \pi$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+			\draw [->,thick,color=blue] (0,0) to[bend angle=20,bend right] coordinate[pos=.6] (C1) (-2,-1) node[below]{$c_1$};
+			\draw [->,thick,color=red] (0,0) to[bend angle=30,bend right] coordinate[pos=.6] (C2) (3,.5) node[above]{$c_2$};
+			\draw (0,0) node[fill,circle,inner sep=1pt]{};
+			\draw (C1) node[fill,circle,inner sep=1pt]{};
+			\draw (C2) node[fill,circle,inner sep=1pt]{};	
+			\draw (0,0) node[below]{$p$};
+			\draw (C1) node[anchor=south east]{$c_1(t')$};
+			\draw (C2) node[below]{$c_2(t'')$};
+			\draw (-2,1) node[right]{$\mathbf{(X,d_X)}$};
+			
+			
+			\draw [thick,color=blue] (6.5,0) node[below,color=black]{$\ol{c_1(t')}$} -- (8,0) node[below,color=black]{$\ol{p}$};
+			\draw [thick,color=red] (8,0) -- (10,0) node[below,color=black]{$c_2(t'')$};
+			\draw (6.5,0) node[fill,circle,inner sep=1pt]{};
+			\draw (8,0) node[fill,circle,inner sep=1pt]{};
+			\draw (10,0) node[fill,circle,inner sep=1pt]{};
+			\draw ([shift=(180:0.4)]8,0) arc (180:0:.4);
+			\draw (10,1) node[left]{$\mathbf{\EE^2}$};
+			\draw (11,-1.1) node[left]{$\angle_{\ol{p}}(c_1(t'),c_2(t'')) = \pi$};
+			\draw [->] (9.5,-.8) -- (8.1,.1);
+		\end{tikzpicture}
+	\end{figure}
+	
 \end{beispiel}
 
 \begin{proposition}
@@ -1740,7 +1837,41 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 
 \begin{lemma}[\textsc{Alexandrov}s Lemma]
 \label{lemma:2.44}
-	Wir betrachten zwei Dreiecke in $\EE^2$ mit gemeinsamer Seite und $\gamma + \gamma' \geq \pi$. \todo{Bild einfügen.}
+	Wir betrachten zwei Dreiecke in $\EE^2$ mit gemeinsamer Seite und $\gamma + \gamma' \geq \pi$. 
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1.5,>=Latex]
+			\draw [thick] (0,1.5) coordinate (A) node[above]{$A$} 
+				-- (0,0) coordinate (C) node[below]{$C$}
+				-- (2,0) coordinate (B') node[right]{$B'$}
+				-- (A) -- (-1.5,-1) coordinate (B) node[left]{$B$} -- (C);
+			\draw pic["$\gamma$",draw=black,angle eccentricity=.5,angle radius=.8cm]{angle=B'--C--A};
+			\draw pic["$\gamma'$",draw=black,angle eccentricity=.3,angle radius=.8cm]{angle=A--C--B};
+			\draw pic["$\beta$",draw=black,angle eccentricity=.8,angle radius=1.5cm]{angle=C--B--A};
+			\draw pic["$\alpha$",draw=black,angle eccentricity=.7,angle radius=1.2cm]{angle=B--A--C};
+			\draw pic["$\alpha'$",draw=black,angle eccentricity=.7,angle radius=1.2cm]{angle=C--A--B'};
+			\draw pic["$\beta'$",draw=black,angle eccentricity=.7,angle radius=1.2cm]{angle=A--B'--C};
+			\draw (C) node[fill,circle,inner sep=1pt]{};	
+			\draw (B') node[fill,circle,inner sep=1pt]{};
+			\draw (A) node[fill,circle,inner sep=1pt]{};
+			\draw (B) node[fill,circle,inner sep=1pt]{};
+		\end{tikzpicture}
+		\hfill
+		\begin{tikzpicture}[scale=1.5,>=Latex]
+			\draw [thick] (0,1.5) coordinate (A) node[above]{$A$}
+				-- (0,0) coordinate (C) node[below]{$\ol{C}$}
+				-- (1.5,0) coordinate (B') node[right]{$B'$}
+				-- (A) -- (-2,0) coordinate (B) node[left]{$\ol{B}$} -- (C);
+			\draw pic["$\ol{\beta'}$",draw=black,angle eccentricity=.7, angle radius=1.2cm]{angle=A--B'--C};
+			\draw pic["$\ol{\alpha}$",draw=black,angle eccentricity=.5, angle radius=.8cm]{angle=B--A--B'};
+			\draw pic["$\ol{\beta}$",draw=black,angle eccentricity=.7, angle radius=1.2cm]{angle=B'--B--A};	
+			\draw (C) node[fill,circle,inner sep=1pt]{};	
+			\draw (B') node[fill,circle,inner sep=1pt]{};
+			\draw (A) node[fill,circle,inner sep=1pt]{};
+			\draw (B) node[fill,circle,inner sep=1pt]{};
+		\end{tikzpicture}
+	\end{figure}
 	
 	Dann gilt:
 	\begin{enumerate}[(i)]
@@ -1748,7 +1879,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 		\item Bewege $C$ ein wenig, sodass $\gamma + \gamma' = \pi$ und die Seitenlängen des Vierecks $A,B,C,B'$ gleich bleiben (rechtes Dreieck).
 		Dann gilt:
 		\[
-			\ol{\alpha} \geq \alpha + \alpha' \quad \ol{\beta} \geq \beta \quad \ol{\beta'} \geq \beta' \quad d_2(A,\ol{C}) \geq d(A,C).
+			\ol{\alpha} \geq \alpha + \alpha', \qquad \ol{\beta} \geq \beta, \qquad \ol{\beta'} \geq \beta', \qquad d_2(A,\ol{C}) \geq d(A,C).
 		\]
 	\end{enumerate}
 \end{lemma}
@@ -1758,7 +1889,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 	Sei $X$ ein geodätischer Raum. \marginnote{Beweis: ÜA}
 	Der Raum $X$ ist genau dann $\CAT$, wenn für alle geodätischen Dreiecke $\Delta(x,y,z,\alpha,\beta,\gamma)$ gilt: \todo{Bild einfügen}
 	\[
-		d\enbrace*{x,\underbrace{\beta \enbrace*{\frac{d(z,y)}{2}}}_{=:m}} \leq d_2\enbrace*{\ol{x}, \underbrace{\ol{\beta} \enbrace*{\frac{d_2(\ol{z},\ol{y}}{2}}}_{=:\ol{m}}}
+		d\enbrace[\Bigg]{x,\underbrace{\beta \enbrace*{\frac{d(z,y)}{2}}}_{=:m}} \leq d_2\enbrace[\Bigg]{\ol{x}, \underbrace{\ol{\beta} \enbrace*{\frac{d_2(\ol{z},\ol{y}}{2}}}_{=:\ol{m}}}
 	\]
 \end{lemma}
 
