@@ -108,8 +108,8 @@ Anwendungen für die Standarddiskretisierungsverfahren sehr teuer oder zu teuer 
 
 \subsection{Parameterabhängige Lösungsmenge}
 \label{sub:para_menge}
-Sei $\mu :=\{u(\mu)~:~\mu\in P\}\subseteq P$ für $P\in \R^p$ ist die durch $\mu$ parametrisierte Lösungsmenge.
-$X$ ist die im Allgemeinen unendlichdimensional.
+Sei $X :=\{u(\mu)~:~\mu\in P\}\subseteq P$ für $P\in \R^p$ ist die durch $\mu$ parametrisierte Lösungsmenge.
+$X$ ist im Allgemeinen unendlichdimensional.
 %grafik
 $\Rightarrow$ Motivation für die Suche nach einem 'niedrigdimensionalen' Teilraum $X_N\subseteq X$ zur Approximation von $M$ und einer Approximation $u_N(\mu) \approx u(\mu),~ u_N\in X_N$.
 Eine Möglichkeit eine reduzierte Basis zu generieren besteht darin geschickt Parameterwerte $\mu_1\dt{,}\mu_N\in P$ zu wählen und den Raum als $X_N := \spann\{u(\mu_1)\dt{,}u(\mu_N)\}$ zu definieren.
@@ -119,7 +119,7 @@ Eine Lösung $u(\mu_i)$ für einen Parameterwert $\mu\in P$ wird auch \bet{Snaps
 \label{sub:beispiel_1}
 Gesucht ist $u(\cdot;\mu) \in C^2([0,1])$ mit $(1+\mu)u'' = 1$ auf $(0,1)$ und $u(0)=u(1)=1$ für den Parameter $\mu\in P:= [0,1]\subseteq \R$.\\
 \bet{Snapshots:}\\
-$\mu_1 = 0 \Rightarrow u_1 := u(\cdot;\mu_1) = \frac{1}{2} x^2- \frac{1}{2}x +1$, $\mu_2 = 0 \Rightarrow u_2 := u(\cdot;\mu_2) = \frac{1}{4} x^2- \frac{1}{4}x +1$ und $X_N := \spann\{u_1,u_2\}$.
+$\mu_1 = 0 \Rightarrow u_1 := u(\cdot;\mu_1) = \frac{1}{2} x^2- \frac{1}{2}x +1$, $\mu_2 = 1 \Rightarrow u_2 := u(\cdot;\mu_2) = \frac{1}{4} x^2- \frac{1}{4}x +1$ und $X_N := \spann\{u_1,u_2\}$.
 Dann ist die reduzierte Lösung $u_N(\mu)\in X_N$ gegeben durch
 \[
 u_N(\mu) = \alpha_1(\mu)u_1 +\alpha_2(\mu) u_2,
@@ -127,7 +127,7 @@ u_N(\mu) = \alpha_1(\mu)u_1 +\alpha_2(\mu) u_2,
 mit $\alpha_1 = \frac{2}{\mu+1}-1$ und $\alpha_2 = 2-\frac{2}{\mu-1}$.
 Diese erfüllt folgende Fehleraussage und ist somit exakt:
 \[
-\norm{u_N(\mu)-u(\mu)}_\infty = \sup\limits_{\lambda\in[0,1]} \abs{U_N(x;\mu)-u(x;\mu)} = 0
+\norm{u_N(\mu)-u(\mu)}_\infty = \sup\limits_{\mu\in[0,1]} \abs{u_N(x;\mu)-u(x;\mu)} = 0
 \]
 Da $\alpha_1 + \alpha_2 = 1$ und $0\le \alpha_1,\alpha_2\le 1$ ist $M$ die Menge der Konvexkombinationen von $u_1$ und $u_2$.
 %sub end
@@ -193,8 +193,7 @@ Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
 \subsubsection{Lineare Operatoren}
 
 \ssect{2.1 Definition}{(Hilbertraum)}
-Sei $X$ ein reeller Vektorraum mit $(\cdot,\cdot):X\times X\to \R$ ein Skalarprodukt und induzierter Norm $\norm{x}:= \sqrt{(x,x)}$.
-falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum} (HR).
+Sei $X$ ein reeller Vektorraum mit $(\cdot,\cdot):X\times X\to \R$ ein Skalarprodukt und induzierter Norm $\norm{x}:= \sqrt{(x,x)}$, falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum} (HR).
 
 \ssect{2.2 Beispiele}{(Hilbertraum)}
 \begin{enumerate}[(1)]
@@ -292,8 +291,8 @@ Da $\abs{J(v)(v)} = \norm{v}_X^2$ folgt:
 \]
 Also ist $J$ eine Isometrie und insbesondere ist $J$ injektiv.\\
 Zeige $J$ surjektiv: Sei $l\in X',~l\neq 0$, Kern$(l)$ ist abgeschlossener Teilraum, also existiert $P:X\to \ker(l)$ orthogonale Projektion nach Satz 2.7.
-Sei $v_0\in X$mit $l(v_O)=1$. 
-Setze $v_1:=v_o-Pv_0\Rightarrow l(v_1) =l(v_0) =1$ und $v_1\neq 0$.
+Sei $v_0\in X$mit $l(v_0)=1$. 
+Setze $v_1:=v_0-Pv_0\Rightarrow l(v_1) =l(v_0) =1$ und $v_1\neq 0$.
 Mit Folgerung 2.8:
 \[
 \Rightarrow (w,v)_X =0~ \forall x\in\ker(l) \Rightarrow v_1 \perp \ker(l). 
@@ -327,14 +326,14 @@ Seien $X_1,X_2$ Hilberträume, $b:X_1\times X_2 \to \R$ eine Bilinearform.
 \begin{enumerate}[(1)]
 	\item Falls 
 	\[
-	\gamma:= \sup\lim\limits_{u\in X_1\backslash\{0\}} \sup\lim\limits_{v\in X_2\backslash\{0\}} \frac{b(u,v)}{\norm{u}_{X_1}\norm{v}_{X_2}} < \infty
+	\gamma:= \sup\lim\ablim{u\in X_1\backslash\{0\}} \qquad\sup\lim\ablim{v\in X_2\backslash\{0\}}\qquad \frac{b(u,v)}{\norm{u}_{X_1}\norm{v}_{X_2}} < \infty
  	\]
  	so ist $b$ stetig mit Stetigkeitskonstante $\gamma$.
  	\item Falls $X=X_1=X_2$, definieren 
  	\[
  	b_s(u,v) = \frac{1}{2} b(u,v)+b(v,u),~b_a = \frac{1}{2} b(u,v)-b(v,u) ~\forall u,v\in X
  	\]
- 	den symmetrischen bzw. antisymmetrischen ANteil von $b = b_s +b_a$.
+ 	den symmetrischen bzw. antisymmetrischen Anteil von $b = b_s +b_a$.
  	\item Falls $X=X_1=X_2$, $b$ stetig und 
  	\[
  	\alpha := \inf\limits_{u\in X\backslash\{0\}} \frac{b(u,u)}{\norm{u}_X^2} > 0
@@ -392,7 +391,7 @@ Dann existiert ein eindeutiger Operator $B\in L(X)$ mit
 \[
 b(u,v) = (Bu,v)~\forall u,v\in X.
 \]
-Ferner gil: $B$ ist bijektiv, $B^{-1}\in L(X)$ mit
+Ferner gilt: $B$ ist bijektiv, $B^{-1}\in L(X)$ mit
 \[
 \norm{B} \le \gamma \text{ und } \norm{B^{-1}}\le \frac{1}{\alpha}.
 \]
@@ -405,7 +404,7 @@ Die dazu geeigneten Räume sind die \bet{Sobolevräume}.
 
 \ssect{2.16 Definition}{($L_{log}^p(\Omega)$)}
 Sei $\Omega\subset \R^d$ ein Gebiet.
-Dann ist der Raum $L_{log}^p(\Omega)$ definiter durch 
+Dann ist der Raum $L_{log}^p(\Omega)$ definiert durch 
 \[
 L_{log}^p(\Omega) := \penbrace{u\in L^p(K) ~|~ \forall K\subset \Omega,~ K\text{ kompakt}}.
 \]
@@ -427,7 +426,7 @@ Sei $\Omega =(-1,1)$ und $u(x) =\abs{x}$.
 Dann ist $u'(x) = -1 (x\le 0), 1 (x> 0)$ die schwache Ableitung von $u$.\\
 
 \bet{Beweis:}\\
-Esgilt füt beliebige $\varphi\in C_0^\infty(\Omega)$:
+Es gilt für beliebige $\varphi\in C_0^\infty(\Omega)$:
 \begin{align*}
 Foto
 \end{align*}
@@ -436,7 +435,7 @@ Foto
 Im Gegensatz zu $\abs{x}$ ist $v(x)= -1 (x\le 0) 1 (x>0)$ auf $\Omega = (-1,1)$ nicht schwach differenzierbar.
 
 \ssect{2.21 Definition}{(Sobolevräume)}
-Seinen $m\in \N_0,~p\in [1,\infty]$ und $u\in L_{log}^p(\Omega)$.
+Seien $m\in \N_0,~p\in [1,\infty]$ und $u\in L_{log}^p(\Omega)$.
 Wir nehmen an, dass alle schwachen partiellen Ableitungen $D^\alpha u$ existieren für $\abs{\alpha} \le m$.
 Dann definieren wir die \bet{Sobolevnormen} $\norm{u}_{H^{m,p}(\Omega)}$, durch
 \[
@@ -461,7 +460,7 @@ D.h. Funktionen in $H^{1,p}(\Omega)$ sind in mehreren Raumdimensionen nicht notw
 
 \ssect{2.24 Satz}{(Vollständigkeit von Sobolevräumen)}
 Sei $\Omega\subset \R^d$ ein Gebiet.
-Damm ist $H^{m,p}(\Omega)$ $1\le p\le \infty,~m\in \N_0$ mit der in 2.21 definierten Norm ein Banachraum,$H^{m,p}(\Omega)$ ist ein Hilbertraum mit dem Skalarprodukt
+Dann ist $H^{m,p}(\Omega)$ $1\le p\le \infty,~m\in \N_0$ mit der in 2.21 definierten Norm ein Banachraum,$H^{m,p}(\Omega)$ ist ein Hilbertraum mit dem Skalarprodukt
 \[
 (u,v)_{H^{m,p}(\Omega)} := \sum_{\abs{\alpha}\le m} (D^\alpha u, D^\alpha v)_{L^2(\Omega)}.
 \]
@@ -520,7 +519,7 @@ Siehe Buch von Dziuk.
 
 \subsubsection{Schwache Formulierung elliptischer Randwertprobleme}
 Wir betrachten zunächst die stationäre Wärmeleitgleichung.
-Sei $\Omega\subset \R^d$ ein Gebiet mit glattem Rand und seinen $q\in C^0(\Omega)$ und $\kappa\in C^1(\Omega)$ mir $\kappa\ge \kappa_1>0$, $\kappa_1\in \R$ Konstante.
+Sei $\Omega\subset \R^d$ ein Gebiet mit glattem Rand und seien $q\in C^0(\Omega)$ und $\kappa\in C^1(\Omega)$ mit $\kappa\ge \kappa_1>0$, $\kappa_1\in \R$ Konstante.
 Gesucht ist eine Funktion $u\in C^2(\Omega)\cap C^0(\bar{\Omega})$, die sogenannte klassische Lösung, so dass
 \begin{align}
 \begin{split}
@@ -538,7 +537,7 @@ Dann heißt $u\in H_0^{1,p}(\Omega)$ schwache Lösung des Randwertproblems der s
 \int_{\Omega} \kappa(x) \nabla u(x) \nabla v(x) \dint x = \int_{\Omega} q(x) v(x) \dint x.
 \]
 
-\ssect{2.31 Satz}{(Existenz und EIndeutigkeit von Lösungen)}
+\ssect{2.31 Satz}{(Existenz und Eindeutigkeit von Lösungen)}
 Unter den Voraussetzungen von Def. 2.30 gibt es genau eine schwache Lösung $u\in H_0^{1}(\Omega)$ des Randwertproblems der stationären Wärmeleitgleichung.\\
 
 \bet{Beweis:}\\
@@ -553,7 +552,7 @@ Ferner wird wegen der Poincaré-Friedrichs Ungleichung durch
 ein Skalarprodukt auf dem Hilbertraum $H_0^1(\Omega)$ definiert.
 Daher existiert nach dem Riesz'schen Darstellungsatz 2.9 ein eindeutiger Riesz-Repräsentant $w_l$ mit $l(.) = (w_l,.)_{H_0^1(\Omega)}$.
 
-Um den Beweis zu schließen, müssen wir noch nachweisen, dassdie Bilinearform $b:H_0^1(\Omega)\times H_0^1(\Omega) \to \R$ definiert durch
+Um den Beweis zu schließen, müssen wir noch nachweisen, dass die Bilinearform $b:H_0^1(\Omega)\times H_0^1(\Omega) \to \R$ definiert durch
 \[
 b(w,v) := \int_{\Omega} \kappa(x) \nabla w(x) \nabla v(x) \dint x
 \]
@@ -584,7 +583,10 @@ Zur Betrachtung von allgemeinen Dirichletrandwerten, kann man wie folgt vorgehen
 Seien $g_D\in H^1(\Omega)$ und $q\in L^2(\Omega),~\kappa\in L^\infty(\Omega),~\kappa\ge \kappa_1 >0$. 
 Dann ist $u\in H^1(\Omega)$ schwache Lösung von $-\nabla(\kappa(x)\nabla u(x)) = q$ in $\Omega$ und $u=g$ auf $\partial\Omega$.
 Wenn gilt $\tilde{u}:= u-g_D \in H_0^1(\Omega)$ und für alle $v\in H_0^1(\Omega)$ gilt (2.3).
-Dabei ist zu bemerken, dass mit der Definition von $\tilde{u}$ (2.3) äquivalent ist zu $\int_{\Omega} \kappa(x)\nabla \tilde{u} \nabla v(x)\dint x = \int_\Omega q(x) v(x)\dint x - \int_\Omega \nabla g_D(x) \nabla v(x) \dint x$.
+Dabei ist zu bemerken, dass mit der Definition von $\tilde{u}$ (2.3) äquivalent ist zu 
+\[
+\int_{\Omega} \kappa(x)\nabla \tilde{u} \nabla v(x)\dint x = \int_\Omega q(x) v(x)\dint x - \int_\Omega \nabla g_D(x) \nabla v(x) \dint x.
+\]
 Die Existenz und Eindeutigkeit einer Lösung folgt dann daraus, dass durch $l(v) := \int_\Omega q(x) v(x)\dint x - \int_\Omega \nabla g_D(x) \nabla v(x) \dint x$ ein lin. Funktional in $(H_0^1(\Omega))'$ definiert wird.
 
 \ssect{2.34 Definition}{(schwache Formulierung)}
@@ -612,12 +614,12 @@ Für glatten Rand: Buch von Evans.
 \ssect{2.36 Bemerkung}{}
 Betrachtet man nicht konvexe Lipschitz-Gebiete, so kann man im Allgemeinen keine Lösung $u\in H^2(\Omega)$ erwarten.
 
-\subsection{Ritz-Galerkin Verfahren und absrtrakte Fehlerabschätzungen}
+\subsection{Ritz-Galerkin Verfahren und abstrakte Fehlerabschätzungen}
 In diesem Abschnitt wollen wir uns mit der Approximation der Lösung der schwachen Formulierung von (2.4) befassen.
 
 \ssect{2.37 Definition}{(Ritz-Galerkin Verfahren)}
 Seien $X,b$ wie in Definition 2.34 und $X_m\subset X$ mit $\dim (X_m) = m$ ein Unterraum.
-Dann ist die \bet{Ritz-Galerkin Approximation´} $u_m\in X_m$ definiert durch
+Dann ist die \bet{Ritz-Galerkin Approximation} $u_m\in X_m$ definiert durch
 \[
 b(u_m,v_m)=l(v_m)~\forall v_m\in X_m.
 \]
@@ -674,7 +676,7 @@ b\enbrace{\sum_{i=1}^{m}U_i\varphi_i,\varphi_j} = l(\varphi_j),~j=1\dt{,}m.
 \]
 Durch Ausnutzen der Linearität von $b$ im 1. Argument folgt weiter:
 \[
-\sum_{i=1}^{m} b(\varphi_i,\varphi_j)u_i = l(\varphi_j),~j=1\dt{,}m.
+\sum_{i=1}^{m} b(\varphi_i,\varphi_j)U_i = l(\varphi_j),~j=1\dt{,}m.
 \]
 Definieren wir also die Matrix $\bet{S}\in \R^{m\times m}$ durch $\bet{S}_{ji} := b(\varphi_i,\varphi_j),~i,j=1\dt{,}m$ und die Vektoren $\bet{u},\bet{l}\in \R^m$ durch $\bet{u}_i:= U_i,~\bet{l}_i := l(\varphi_i),~i=1\dt{,}m$, so ist $u_m$ genau dann Lösung des Ritz-Galerkin Verfahren, wenn $u$ das folgende lineare Gleichungssystem löst: $\bet{Su}=\bet{l}$.
 
@@ -688,7 +690,7 @@ Eingeschränkt auf einen Simplex wird eine Funktion aus $X_h$, dann ein Polynom 
 Für andere FE siehe z.B. das Buch von Brenner und Scott.
 
 \ssect{2.43 Definition}{(Simplex)}
-Seinen $s\in \penbrace{1\dt{,}d}$ und $a_0\dt{,}a_s\in \R^d$ Punkte, so dass $(a_j-a_0)_{j=1\dt{,}s}$ linear unabhängig sind.
+Seien $s\in \penbrace{1\dt{,}d}$ und $a_0\dt{,}a_s\in \R^d$ Punkte, so dass $(a_j-a_0)_{j=1\dt{,}s}$ linear unabhängig sind.
 Dann heißt 
 \[
 T:= \penbrace{x\in \R^d~|~ x=\sum_{i=0}^{s}\lambda_ia_i,~0\le \lambda_i,~\sum_{i=0}^{s}\lambda_i=1}
@@ -714,7 +716,7 @@ bezeichnen wir den \bet{Inkugeldurchmesser} von $T$ und mit
 den Quotienten aus $h$ und $\rho$.
 
 \ssect{2.44 Definition}{(Baryzentrische Koordinaten)}
-Die baryzentrsichen Koordinaten $\lambda_0\dt{,}\lambda_s\in [0,1]$ eines Punktes $x\in T$ des $s$-dim. Simplex $T$ sind die Lösung des linearen Gleichungssystems
+Die baryzentrischen Koordinaten $\lambda_0\dt{,}\lambda_s\in [0,1]$ eines Punktes $x\in T$ des $s$-dim. Simplex $T$ sind die Lösung des linearen Gleichungssystems
 \[
 x= \sum_{i=0}^{s}\lambda_i a_i,~ \sum_{i=0}^{s} \lambda_i =1.
 \]
@@ -788,7 +790,7 @@ Wir definieren den Raum der \bet{linearen Finite Elemente} auf simplizialen Gitt
 \[
 S_h^1 := \penbrace{v_h\in C^0(\Omega)~|~v_h|_T\in \Pw^1(\Omega),~T\in\mathbb{T}_h}.
 \]
-\item Sind $\bar{a}_j,~j=1\dt{,}N_h$ die Ecken der Triangulierung $\mathbb{T}_h$, so idt eine Funktion $v_h\in S_h^1$ durch die Vorgabe von Funktionswerten in den Ecken $v_h(\bar{a}_j)$ eindeutig definiert.
+\item Sind $\bar{a}_j,~j=1\dt{,}N_h$ die Ecken der Triangulierung $\mathbb{T}_h$, so ist eine Funktion $v_h\in S_h^1$ durch die Vorgabe von Funktionswerten in den Ecken $v_h(\bar{a}_j)$ eindeutig definiert.
 Insbesondere gilt $\dim(S_h^1)= \mathcal{N}_h$.
 Eine Basis von $S_h^1$ ist durch die Funktionen
 \[
@@ -804,14 +806,14 @@ so gilt für beliebige Simplexe $T\in \mathbb{T}_h$ mit Ecken $a_0\dt{,}a_d$
 \[
 v_h|_T(x) = \sum_{i=1}^{d}v_h(a_i)\varphi_i^0(T^{-1}(x)),
 \]
-wobei $F:T_0\to T$ die referenzabbildung und $\varphi_i^0\in \Phi$ die Formfunktionen von $T_0$ sind.
+wobei $F:T_0\to T$ die Referenzabbildung und $\varphi_i^0\in \Phi$ die Formfunktionen von $T_0$ sind.
 \end{enumerate}
 
 \ssect{2.51 Definition}{(lineares Finite Elemente Verfahren)}
-Sei $\Omega\subset\R^d$ und $\mathbb{T}_h$ zuläassige Triangulierungvon $\Omega$.
+Sei $\Omega\subset\R^d$ und $\mathbb{T}_h$ zulässige Triangulierung von $\Omega$.
 Seien $X:=H_0^1(\Omega)$ und $X_h:= S_{h,0}^1:=S_h^1\cap \penbrace{v\in C^1(\Omega)~|~v=0 \text{ auf }\partial\Omega}$.
 Weiter seien eine stetige und koerzive Bilinearform $b:X\times X\to \R$ und ein $l\in X'$ gegeben.
-Dann ist $X_h\subset X$ ein teilraum und $u_h\in X_h$ heißt Lösung des \bet{linearen Finite Elemente Verfarhens} für das Problem aus 2.34, falls gilt:
+Dann ist $X_h\subset X$ ein Teilraum und $u_h\in X_h$ heißt Lösung des \bet{linearen Finite Elemente Verfahrens} für das Problem aus 2.34, falls gilt:
 \[
 b(u_h,v_h)= l(v_h) ~\forall v_h\in X_h.
 \]
@@ -842,7 +844,7 @@ Um auch Gebiete mit glattem Rand behandeln zu können , kann man z.B. eine Gebie
 Hier ist dann $X_h$ nicht Teilraum von $X$ und das Lemma von Céa nicht anwendbar.
 Allerdings kann man in beiden Fällen unter gewissen Voraussetzungen zeigen, dass die zusätzlichen Approximationsfehler die Konvergenzordnung des FE Verfahrens nicht beeinflussen.
 Für weitere Details siehe z.B. das Buch von Dziuk oder Brenner und Scott.
-
+\newpage
 \section{Reduzierte Basis Methoden für lineare, koerzive Probleme}
 
 \subsection{Parameterabhängigkeit}
@@ -864,7 +866,7 @@ f(x,\mu):=\left\{\begin{array}{l}x,\text{ falls }\mu<\frac{1}{2}\\ \frac{1}{2}x,
 
 \ssect{3.3 Defintion}{(Parametrische Beschränktheit, Stetigkeit)}
 \begin{enumerate}[(1)]
-	\item Wir nennen eine parametrische stetige Linearform $f$ beschränkt bzw. Bilinearform$b$ \bet{gleichmäßig beschränkt} bzgl. $\mu$, falls $\gamma_0,\gamma_1\in\R^+$ existieren so dass
+	\item Wir nennen eine parametrische stetige Linearform $f$ beschränkt bzw. Bilinearform $b$ \bet{gleichmäßig beschränkt} bzgl. $\mu$, falls $\gamma_0,\gamma_1\in\R^+$ existieren so dass
 	\[
 	\sup\limits_{\mu\in\mathcal{P}}\norm{f(.,\mu)}_X\le \gamma_0 \text{ bzw. } \sup\limits_{\mu\in\mathcal{P}}\gamma(\mu)\le \gamma_1.
 	\]
@@ -895,7 +897,7 @@ ein Skalarprodukt auf $X$ und durch
 die \bet{Energienorm} definiert.
 Diese ist äquivalent zur $X$-Norm und es gilt
 \[
-\sqrt{\alpha(mu)}\norm{u}_X \le |||u|||_\mu \le \sqrt{\gamma(\mu)}\norm{u}_X ~\forall u\in X.
+\sqrt{\alpha(\mu)}\norm{u}_X \le |||u|||_\mu \le \sqrt{\gamma(\mu)}\norm{u}_X ~\forall u\in X.
 \]
 
 \bet{Beweis:}\\
@@ -905,7 +907,7 @@ Normäquivalenz folgt aus Stetigkeit und Koerzivtät von $b_s$:
 \alpha(\mu)\norm{v}_X^2\le b_s(v,v;\mu) \le \gamma(\mu) \norm{v}_X^2.
 \]
 
-\ssect{3.5 Definition}{(Parametrische schwache Formulierung; Parametrisches Variationsproblem ($P(\mu)$)}
+\ssect{3.5 Definition}{(Parametrische schwache Formulierung; Parametrisches Variationsproblem ($P(\mu)$))}
 Sei $X$ HR, $\mathcal{P}\subset \R^p$ beschränkt, $b: x\times X\times \mathcal{P}\to \R$ parametrische, stetige, koerzive Bilinearform, $f,l:X\times \mathcal{P}\to \R$ parametrische stetige Linearform.
 Zu $\mu \in\mathcal{P}$ bezeichnet $u(\mu)\in X$ die eindeutige Lösung des parametrischen Variationsproblems
 \begin{align}
@@ -929,7 +931,7 @@ Unter den Voraussetzungen von Definition 3.7 gibt es für jedes $\mu\in\mathcal{
 \bet{Beweis:}\\
 Analog zum Beweis von Satz 2.31.
 
-\ssect{3.9 Definition}{((lineares) FE Verfahren für parametrsiche Variationsprobleme ($P_h(\mu)$)}
+\ssect{3.9 Definition}{((lineares) FE Verfahren für parametrsiche Variationsprobleme ($P_h(\mu)$))}
 Sei $X$ HR, $\mathcal{P}\in \R^p$ beschränkt, $b:X\times X\times \mathcal{P}\to \R$ parametrische, stetige, koerzive Bilinearform, $f,l:X\times \mathcal{P}\to \R$ parametrische, stetige Linearform.
 Sei ferner $\mathbb{T}_h$ eine zulässige Triangulierung des Rechengebietes $\Omega\subset \R^d$ und $X_h\subset X$ eine zugehöriger (linearer) Finite Elemente Raum, wobei $X_h$ Unterraum von $X$.
 Zu $\mu\in\mathcal{P}$ heißt $u_h(\mu)\in X_h$ Lösung des (linearen) FE Verfahrens für das parametrische Variationsproblem, falls gilt
@@ -938,7 +940,7 @@ b(u_h(\mu),v_h;\mu) = f(v_h;\mu) ~\forall v_h\in X_h,~ s_h(\mu)= l(u_h(\mu);\mu)
 \]
 
 \ssect{3.10 Bemerkung}{}
-Das Verfahren aus Definition 3.9 ist nach Bemerkung 1.6 ein "hochdimensionales, diskretes" Modell.
+Das Verfahren aus Definition 3.9 ist nach Bemerkung 1.6 ein 'hochdimensionales, diskretes' Modell.
 
 \subsection{Reduzierte Basisverfahren}
 
@@ -971,7 +973,7 @@ Falls $b$ nicht symmetrisch oder $f\neq l$ ist obiges immer noch sinnvoll, aber 
 Da $X_N\subset X_h\subset X$, $X_N$ Teilraum von $X_h$, ist das RB-Modell ein Ritz-Galerkin Verfahren.
 
 \ssect{3.16 Folgerung}{(Existenz, Eindeutigkeit, Stabilität, Wohlgestelltheit)}
-ZU $\mu\in\mathcal{P}$ existiert eine eindeutige RB-Lösung $u_N(\mu)\in X_N$ und RB-Ausgabe $S_N(\mu)$ von $(P_N(\mu))$.
+Zu $\mu\in\mathcal{P}$ existiert eine eindeutige RB-Lösung $u_N(\mu)\in X_N$ und RB-Ausgabe $S_N(\mu)$ von $(P_N(\mu))$.
 Diese sind beschränkt durch $\norm{u_N(\mu)}_X \le \frac{1}{\alpha(\mu)} \norm{f(.;\mu)}_{X}$ und $\abs{s_N(\mu)}\le \frac{1}{\alpha(\mu)}\norm{f(.;\mu)}_{X'}\norm{l(.;\mu)}_{X'}.$\\
 
 \bet{Beweis:}\\
@@ -1024,7 +1026,7 @@ Dann gilt:
 \begin{enumerate}[(1)]
 	\item Der Fehler der ($\mu$-abhängigen Energienorm) erfüllt
 	\[
-	|||u_h(\mu)-u_N(\mu)|||_\mu = \inf\limits_{v\in X_N} |||u_(\mu)-v|||_\mu.
+	|||u_h(\mu)-u_N(\mu)|||_\mu = \inf\limits_{v\in X_N} |||u_h(\mu)-v|||_\mu.
 	\]
 	\item Der Fehler in der ($\mu$-unabhängigen) $X$-Norm erfüllt
 	\[
@@ -1050,9 +1052,12 @@ Dann gilt:
 	wobei $\alpha_h(\mu) := \inf_{v\in X_h} \frac{b(v,v;\mu)}{\norm{v}_X^2}$ und $\gamma_h(\mu):= \sup_{u,v\in X_h} \frac{b(u,v;\mu)}{\norm{u}_X\norm{v}_X}$.
 	Wie in Beweis von Folgerung 3.16 folgt $\alpha_h(\mu)\ge \alpha(\mu)$ und $\gamma_h(\mu)\le \gamma(\mu)~\forall \mu\in \mathcal{P}$ und damit die Behauptung.
 	\item
-	\[
-	s_h(\mu)-s_N(\mu) \bgl{Def} l(u_h(\mu);\mu)-l(u_N(\mu);\mu) \bgl{l=f} f(u_h(\mu))-f(u_N(\mu)) \bgl{(P_h(\mu)} b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu) = b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu)- b(u_h(\mu)-u_N(\mu),u_N(\mu);\mu) = b(u_h(\mu)-u_N(\mu),u_h(\mu)-u_N(\mu);\mu)
-	\]
+	\begin{align*}
+	s_h(\mu)-s_N(\mu) &\bgl{Def} l(u_h(\mu);\mu)-l(u_N(\mu);\mu) \bgl{l=f} f(u_h(\mu))-f(u_N(\mu))\\
+	&\bgl{(P_h(\mu)} b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu)\\
+	&= b(u_h(\mu),u_h(\mu)-u_N(\mu);\mu)- b(u_h(\mu)-u_N(\mu),u_N(\mu);\mu)\\
+	&= b(u_h(\mu)-u_N(\mu),u_h(\mu)-u_N(\mu);\mu)
+	\end{align*}
 	Damit folgt
 	\[
 	s_h(\mu)-s_N(\mu) = |||u_h(\mu)-u_N(\mu)|||_\mu^2 \bgl{(1)} \inf\limits_{v\in X_h} |||u_h(\mu)-v|||_\mu^2 \stackrel{3.4}{\le} \gamma(\mu)\inf\limits_{v\in X_N} \norm{u_h(\mu)-v}_X^2
@@ -1065,7 +1070,7 @@ Dann gilt:
 \begin{enumerate}[(1)]
 	\item $s_N(\mu)$ ist also untere Schranke für $s_h(\mu)$.
 	\item Der Ausgabefehler ist im Allgemeinen sehr klein, da das Quadrat des RB-Fehlers eingeht.
-	\item Mit dem Lemmavon Céa (Satz 2.39) erhalten wir für nicht notwendigerweise symmetrische Bilinearformen $\norm{u_h(\mu)-u_N(\mu)}_X \le \frac{\gamma(\mu)}{\alpha(\mu)} \inf_{v\in X_N} \norm{u_h(\mu)-v}_X$.
+	\item Mit dem Lemma von Céa (Satz 2.39) erhalten wir für nicht notwendigerweise symmetrische Bilinearformen $\norm{u_h(\mu)-u_N(\mu)}_X \le \frac{\gamma(\mu)}{\alpha(\mu)} \inf_{v\in X_N} \norm{u_h(\mu)-v}_X$.
 	Damit ist Satz 3.19 eine Verschärfung für symmetrische Bilinearformen.
 \end{enumerate}
 
@@ -1081,14 +1086,14 @@ Dann ist die Folge $(|||e_N(\mu)|||)_{N=1}^{N_{\max}}$ monoton fallend.\\
 
 \ssect{3.22 Bemerkung}{}
 \begin{enumerate}[(1)]
-	\item "Worst Case" ist eine Stagnation des Fehlers (unrealistisch, da jeder neue Basisvektor orthogonal zu $e_N(\mu)$ sein müsste).
+	\item 'Worst Case'~ist eine Stagnation des Fehlers (unrealistisch, da jeder neue Basisvektor orthogonal zu $e_N(\mu)$ sein müsste).
 	In der Praxis ist bei geschickter Basiswahl exponentielle Konvergenz zu beobachten.
 	\item Monotonie gilt nicht notwendigerweise für andere Normen trotz Normenäquivalenz:
 	\[
 	c|||e_N(\mu)|||_\mu \le \norm{e_N(\mu)} \le C |||e_N(\mu)|||_\mu
 	\]
 	mit $c,C$ Konstanten unabhängig von $N$.
-	Fehlernorm $\norm{e_N(\mu)}$ kann gelegentlich anwachsen, bleibt aber in einem "Korridor" um $|||e_N(\mu)|||_\mu$.\\
+	Fehlernorm $\norm{e_N(\mu)}$ kann gelegentlich anwachsen, bleibt aber in einem 'Korridor'~um $|||e_N(\mu)|||_\mu$.\\
 	"Beweis":
 	\[
 	\norm{e_{N'}(\mu)} \le C|||e_{N'}(\mu)|||_\mu \le C|||e_N(\mu)|||_\mu \le \frac{C}{c} \norm{e_N(\mu)}
@@ -1096,7 +1101,7 @@ Dann ist die Folge $(|||e_N(\mu)|||)_{N=1}^{N_{\max}}$ monoton fallend.\\
 \end{enumerate}
 
 \ssect{3.23 Folgerung}{(Fehlerabschätzung für den Fehler zwischen exakter Lösung und RB-Lösung)}
-Sei $\mu\in\mathcal{P}$ und $u_(\mu),s(\mu),u_h(\mu),s_h(\mu)$ bzw. $u_N(\mu),s_N(\mu)$ Lösung von $(P(\mu)),(P_h(\mu))$ bzw. $(P_N(\mu))$, wobei $X_h$ linearer Finite Elemente Raum.
+Sei $\mu\in\mathcal{P}$ und $u(\mu),s(\mu),u_h(\mu),s_h(\mu)$ bzw. $u_N(\mu),s_N(\mu)$ Lösung von $(P(\mu)),(P_h(\mu))$ bzw. $(P_N(\mu))$, wobei $X_h$ linearer Finite Elemente Raum.
 Zusätzlich gelte $b$ symmetrisch und $f=l$ ("compliant").
 Liegt nun $u\in H^2(\Omega)$, so gibt es eine Konstante $c>0$ die nur von $d,\sigma$ und $\Omega$ abhängt, so dass gilt:
 \begin{enumerate}
@@ -1529,12 +1534,949 @@ Dann ist der Riesz-Repräsentant $R(\mu)\in X_h$ des Residuums affin parametrisc
 R(\mu) = \sum_{q=1}^{Q_R} \theta_R^q(\mu)R_R^q.
 \end{align*}
 
+\ssect{3.47 Lemma}{}
+Sei $g\in X_h'$ und $\bar{\varphi}_i,~1=1\dt{,}N_h$ die Knotenbasis von $X_h$ wie in Def 2.50 definiert.
+Dann definieren wir die (Skalarprodukt-)Matrix $\mathbb{X}_h\in\R^{N_h\times N_h}$ durch
+\[
+(\mathbb{X})_{ij} := (\bar{\varphi}_j,\bar{\varphi}_i)_X,~1\le i,j\le N_h.
+\]
+Indem wir den Riesz-Repräsentanten $v_g\in X_h$ zu $g\in X_h'$ in der Knotenbasis darstellen:
+\[
+v_g = \sum_{i=1}^{N_h} V_g^i \bar{\varphi}_i
+\]
+erhalten wir den Koeffizientenvektor $\mathbb{V}_g= (V_g^1\dt{,}V_g^{N_h})\in \R^{N_h}$ und damit $v_g$ durch Lösen des linearen Gleichungssystems
+\[
+\mathbb{X}_h\mathbb{V}_g = \mathbb{G},\text{ wobei } \mathbb{G} := (g(\bar{\varphi}_1)\dt{,}g(\bar{\varphi}_{N_h})\in \R^{N_h}.
+\]
 
+\bet{Beweis:}\\
+Betrachte dazu eine beliebige Testfunktion $w = \sum_{i=1}^{N_h} W_i\bar{\varphi}_i\in X_h$ mit Koeffizientenvektor $\mathbb{W} = (W_1\dt{,}W_{N_h})$.
+Dann gilt:
+\begin{align*}
+g(w) &= \sum_{i=1}^{N_h} W_i g(\bar{\varphi}_i) = \mathbb{W}^T \mathbb{G} = \mathbb{W}^T\mathbb{X}_h\mathbb{V}_g\\
+&= \enbrace{\sum_{i=1}^{N_h} V_g^i \bar{\varphi}_i,\sum_{j=1}^{N_h} W_j \bar{\varphi}_j}_X = (v_g,w)_X.
+\end{align*}
+\hfill $\square$\\
 
+Da $R(\mu)$ affin parametrisch ist, können wir die Berechnung der entsprechenden Norm in eine Offline- und eine Online-Phase zerlegen.
 
+\ssect{3.48 Satz}{(Offline/Online-Zerlegung von $\norm{R(\mu)}$)}
+\bet{Offline-Phase:}
+Nach der Offline-Phase des RB-Modells wie in Folgerung 3.31 beschrieben, assemblieren wir die Matrix $\mathbb{K}\in \R^{Q_R\times Q_R}$ definiert durch
+\[
+\mathbb{K}_{ij} := (R_R^j,R_R^i)_X,~1\le i,j\le Q_R
+\]
+unter der Verwendung der Matrix $\mathbb{X}_h$.\\
+\bet{Online-Phase:}
+Für gegebenes $\mu$ und berechnete RB-Lösung $u_N(\mu)$ bestimmen wir den Koeffizientenvektor $\hat{\theta}_R(\mu) := (\theta_R^1(\mu)\dt{,}\theta_R^{Q_R}(\mu))^T\in \R^{Q_R}$ und erhalten
+\[
+\norm{R(\mu)}_X = \sqrt{\hat{\theta}_R(\mu)^T\mathbb{K}\hat{\theta}_R(\mu)}.
+\]
 
+\bet{Beweis:}\\
+\begin{align*}
+\norm{R(\mu)}_X^2 &= \enbrace{\sum_{q=1}^{Q_R}\theta_R^q(\mu)R_R^q,\sum_{q'=1}^{Q_R}\theta_R^{q'}(\mu)R_R^{q'} }_X = \hat{\theta}_R^T(\mu)\mathbb{K}\hat{\theta}_R(\mu).
+\end{align*}
+Ferner benötigen wir für die relativen Fehlerschätzer die Norm von $u_N(\mu)$.
 
+\ssect{3.49 Satz}{(Offline/Online Zerlegung der Norm von $U_N(\mu)$)}
+\bet{Offline-Phase:}
+Im Fall von $\Delta_N^{rel}(\mu)$ assemblieren wir nach der in Folgerung 3.31 beschriebenen Offline-Phase des RB-Modells die reduzierte (Skalarprodukt-)Matrix $\mathbb{X}_N\in \R^{N\times N}$ definiert durch
+\[
+(\mathbb{X}_N)_{nm} := (\phi_m,\phi_n)_X.
+\]
+\bet{Online-Phase:}
+Für gegebenes $\mu$ und wie in Folgerung 3.31 beschrieben berechnetes $u_N(\mu) = \sum_{n=1}^{N} U_n^N(\mu)\phi_n$ mit Koeffizientenvektor $\mathbb{U}_N(\mu) = (U_1^N(\mu)\dt{,}U_N^N(\mu))$ berechnen wir $\norm{u_N(\mu)}_X = \sqrt{\mathbb{U}_N^T(\mu)\mathbb{X}_N\mathbb{U}_N(\mu)}$ für $\Delta_N^{rel}(\mu)$ oder $|||u_N(\mu)|||_\mu = \sqrt{\mathbb{U}_N^T(\mu)\mathbb{B}_N(\mu)\mathbb{U}_N(\mu)}$ für $\Delta_N^{en,rel}(\mu)$, wobei $\mathbb{B}_N(\mu)$ definiert wie in Satz 3.26.\\
 
+\bet{Beweis:}\\
+\begin{align*}
+|||u_N(\mu)|||_\mu^2 = b(u_N(\mu),u_N(\mu);\mu) = \sum_{n,m=1}^{N} U_n^N(\mu)U_m^N(\mu) b(\phi_n(\mu),\phi_m(\mu);\mu) = \mathbb{U}_N^T(\mu) \mathbb{B}_N(\mu) \mathbb{U}_N(\mu).
+\end{align*}
+Wie in Folgerung 3.28 können wir mit Hilfe der Transformationsmatrix $\mathbb{V}\in \R^{N_h\times N}$, definiert durch
+\[
+\mathbb{V}_{in} := \phi_n^i,~1\le i\le N_h,~1\le n\le N,
+\]
+$\mathbb{X}_N = \mathbb{V}^T\mathbb{X}_N\mathbb{V}$ folgern.
+Der Beweis für $\norm{u_N(\mu)}_X$ geht dann analog.
+
+Schließlich benötigen wir noch eine untere Schranke für die Koerzivitätskonstante $\alpha_{LB}(\mu)$.
+Falls $b$ gleichmäßig koerziv bzgl. $\mu$ mit $\inf_{\mu\in\mathcal{P}}\alpha_h(\mu)\ge \alpha_0$ und $\alpha_0$ analytisch bestimmbar oder berechenbar, kann $\alpha_0$ gewählt werden.
+Für manche Randwertprobleme können wir sogar $\alpha(\mu)$ analytisch bestimmen und dann $\alpha_{LB}(\mu) = \alpha(\mu)$ wählen.
+
+Im allgemeinen Fall lässt sich unter bestimmten Voraussetzungen die sogenannte \bet{Min-Theta-Methode} anwenden.
+
+\ssect{3.50 Satz}{(Min-Theta-Methode zur Berechnung von $\alpha_{LB}(\mu)$)}
+Sei $b$ koerziv und affin parametrisch mit $b^q(v,v)\ge 0 ~\forall v\in X_h$ und $\theta_b^q(\mu)>0~\forall\mu\in\mathcal{P},~q=1\dt{,}Q_b$.
+Sei $\mu\in\mathcal{P}$ fest und $\alpha_h(\mu)$ bekannt.
+Dann gilt
+\[
+0<\alpha_{LB}(\mu) \le \alpha_h(\mu)~\forall\mu\in\mathcal{P}
+\]
+mit der unteren Schranke 
+\[
+\alpha_{LB}(\mu) := \alpha_h(\bar{\mu}) \cdot \min\limits_{q=1\dt{,}Q_b} \frac{\theta_b^q(\mu}{\theta_b^q(\bar{\mu})}.
+\]
+
+\bet{Beweis:}\\
+Da $\alpha_h(\mu)> 0$ und $0< c(\mu) := \min\limits_{q=1\dt{,}Q_b} \frac{\theta_b^q(\mu}{\theta_b^q(\bar{\mu})}$, gilt
+\[
+0 < \alpha_h(\mu) c(\mu) = \alpha_{LB}(\mu).
+\]
+Für alle $v\in X_h$ gilt dann:
+\begin{align*}
+b(v,v;\mu)&= \sum_{q=1}^{Q_b} \theta_b^q(\mu)b^q(v,v) = \sum_{q=1}^{Q_b} \frac{\theta_b^q(\mu)}{\theta_b^q(\bar{\mu})} \theta_b^q(\bar{\mu})b^q(v,v)\\
+&\ge \sum_{q=1}^{Q_b} \enbrace{\min\limits_{q=1\dt{,}Q_b} \frac{\theta_b^q(\mu}{\theta_b^q(\bar{\mu})}} \theta_b^q(\bar{\mu})b^q(v,v)\\
+&= c(\mu) b(v,v;\bar{\mu}) \ge c(\mu) \alpha_h(\bar{\mu})\norm{v}_X^2 = \alpha_{LB}(\mu) \norm{v}_X^2.
+\end{align*}
+Also insbesondere:
+\[
+\alpha_h(\mu) := \min\limits_{v\in X_h} \frac{b(v,v;\mu)}{\norm{v}_X^2}\ge \alpha_{LB}(\mu).
+\]
+\hfill $\square$\\
+
+Fpr die Min-Theta-Methode benötigen wir eine Auswertung von $\alpha_h(\mu)$ für $\mu=\bar{\mu}$ in der Offline-Phase.
+Dazu ist es im Allgemeinen notwendig ein hochdimensionales Eigenwertproblem zu lösen.
+
+\ssect{3.51 Satz}{(Berechnung von $\alpha_h(\mu)$ für das hochdimensionale, diskrete Modell)}
+Sei $\mathbb{B}_h(\mu)$ definiert wie in (3.4) und $\mathbb{X}_h$ definiert wie in Lemma 3.47.
+Dann ist
+\begin{align}
+\alpha_h(\mu) = \lambda_{\min} (\mathbb{X}_h^{-1}\mathbb{B}_h(\mu)),
+\end{align}
+wobei $\lambda_{\min}$ der kleinste Eigenwert der Matrix $\mathbb{X}_N^{-1}\mathbb{B}(\mu)$ bezeichnet.
+
+\bet{Beweis:}\\
+Da $\mathbb{X}_h$ symmetrisch und positiv definit, lässt sich $\mathbb{X}_h$ mittels Cholesky-Zerlegung als $\mathbb{X}_h = \mathbb{LL}^T$ darstellen.
+Mittels Substitution erhalten wir ($y\neq 0$):
+\begin{align*}
+\alpha_h(\mu) &= \inf\limits_{y\in X_h} \frac{b(y,y;\mu)}{\norm{y}_X^2} =\inf\limits_{\mathbb{Y}\in \R^{N_h}}\frac{\mathbb{Y}^T\mathbb{B}_h(\mu)\mathbb{Y}}{\mathbb{Y}^T\mathbb{X}_h\mathbb{Y}}\\
+\text{mit }\mathbb{W}:=\mathbb{L}^T\mathbb{Y} &= \inf\limits_{\mathbb{W}}\in \R^{N_h} \frac{(\mathbb{L}^{-T}\mathbb{W})^T\mathbb{B}_h(\mu)(\mathbb{L}^{-T}\mathbb{W})}{(\mathbb{L}^{-T}\mathbb{W})^T\mathbb{L}\mathbb{L}^T(\mathbb{L}^{-T}\mathbb{W})} = \inf\limits_{\mathbb{W}}\in \R^{N_h} \frac{\mathbb{W}^T\mathbb{L}^{-1}\mathbb{B}_h(\mu)\mathbb{L}^{-T}\mathbb{W}}{\mathbb{W}^T\mathbb{W}}.
+\end{align*}
+Damit minimiert $\alpha_h(\mu)$ den Rayleigh-Quotienten zur symmetrischen Matrix $\tilde{\mathbb{B}}_h(\mu) := \mathbb{L}^{-1}\mathbb{B}_h(\mu)\mathbb{L}^{-T}.$
+
+\bet{Satz von Courand-Fischer (Minimum-Maximums Prinzip)}\\
+Ist $A\in \R^{n\times n}$ symmetrisch mit aufsteigend sortierten Eigenwerten $\lambda_1\dt{\le}\lambda_n$ und bezeichnet $X_i$ die Menge der $i$-dimensionalen Untervektorräume von $\R^n,~i=1\dt{,}n$, dann hat der $i$-te Eigenwert von $A$ die Darstellung:
+\[
+\lambda_i = \min\limits_{X\in X_i}\max\limits_{x\in X,x\neq 0} \frac{(x,Ax)_2}{(x,x)} = \max\limits_{X\in X_{n-i+1}}\min_{x\in X,x\neq 0} \frac{(x,Ax)_2}{(x,x)_2}. 
+\]
+
+Nach diesem Prinzip ist $\alpha_h(\mu)$ damit der kleinste Eigenwert von $\tilde{\mathbb{B}}_h(\mu)$.
+Da die Matrizen $\tilde{\mathbb{B}}_h(\mu)$ und $\mathbb{X}_h^{-1}\mathbb{B}_h(\mu)$ ähnlich sind, wegen
+\[
+\mathbb{L}^T(\mathbb{X}_h^{-1}\mathbb{B}_h(\mu))\mathbb{L}^{-T} = \mathbb{L}^T\mathbb{L}^{-T}\mathbb{L}^{-1}\mathbb{B}_h(\mu)\mathbb{L}^{-T} = \tilde{\mathbb{B}_h(\mu)}
+\]
+und daher identische Eigenwerte haben, folgt damit die Behauptung.
+
+\ssect{3.52 Bemerkung}{}
+Da insbesondere die großen Matrizen $\mathbb{X}_h$ nicht invertiert werden sollte, verwendet man in der Praxis entweder einen Eigenwertlöser, welcher nur mittels Matrix-Vektor Produkten operiert:
+Sobald das Produkt $\mathbb{Y} = \mathbb{X}_h^{-1}\mathbb{B}_h(\mu)\mathbb{W}$ berechnet werden muss, löst man stattdessen  $\mathbb{X}_h\mathbb{Y} = \mathbb{B}_h(\mu)\mathbb{W}$. 
+Alternativ können auch Löser für generalisierte Eigenwertprobleme der Form $\mathbb{B}_h(\mu)\mathbb{Y} = \lambda\mathbb{X}\mathbb{Y}$ verwendet werden.
+
+\ssect{5.53 Bemerkung}{}
+Auch im kontinuierlichen Fall kann man ein Eigenwertproblem betrachten und lösen um $\alpha(\mu)$ zu bestimmen.
+Siehe dazu das Buch von Haardonk.
+
+\ssect{3.54 Bemerkung}{}
+Für Probleme in denen man die Min-Theta-Methode nicht anwenden kann, kann man stattdessen die \bet{Successive Constraint Methode} verwenden, siehe Buch von Huynh, Rozza, Sen und Patera.
+
+\ssect{3.55 Bemerkung}{}
+Damit können wir die Offline/Online Zerlegung des Fehlers wie folgt zusammenfassen:
+\bet{Offline:}\\
+Berechnung des Riesz-Repräsentanten und Assemblierung der Matrix $\mathbb{K}$ aus Satz 3.48 in 
+\[
+\mathcal{O}((Q_f+NQ_b)N_h^2+(Q_f+NQ_b)^2N_h) \text{ Rechenschritten.}
+\]
+Für relativen Fehlerschätzer möglicherweise Assemblierung von $X_N$ aus Satz 3.49.
+Falls die Min-Theta Methode verwendet wird, muss noch $\alpha_h(\bar{\mu})$ in $\mathcal{O}(N_h\sigma)$ mit $\sigma\ge 2$ einmalig berechnet werden, wie in Satz 3.51 beschrieben.\\
+
+\bet{Online:}\\
+Wie in Satz 3.48 beschrieben bestimmen wir $\norm{R(\mu)}_X$ in $\mathcal{O}((Q_f+NQ_b)^2)$ Rechenschritten.
+Für den rel. Fehlerschätzer berechnen wir zusätzlich entweder $|||u_N(\mu)|||_\mu$ in $\mathcal{O}(N^2)$ Rechenschritten oder $\norm{u_N(\mu)}_X$ in $\mathcal{O}(N^2)$ Rechenschritten.
+Schließlich können wir für die Min-Theta Methode $\alpha_{LB}(\mu)$ in $\mathcal{O}(Q_b)$ Rechenschritten bestimmen.
+
+Die Online Phase zur Bestimmung des Fehlerschätzers ist damit unabhängig von $N_h$.
+Da die reduzierte Lösung in $\mathcal{O}(N^3)$ Rechenschritten berechnet werden kann, ist für große $Q_b$ die Berechnung des Fehlerschätzers aber möglicherweise der Teil, der Online Phase, welcher die meiste zeit benötigt.
+
+\ssect{3.56 Bemerkung}{(Relevanz des Fehlerschätzers)}
+Fehlerschätzer werden in den RB Methoden sowohl in der Online Phase zur 'Certification' der Approximation, als auch in der Offline Phase zur Basisgenerierung eingesetzt, wie wir im nächsten Kapitel sehen werden.
+\newpage
+
+\section{Basiskonstruktion}
+
+\bet{Ziel:}\\
+\begin{enumerate}[(1)]
+	\item Bestimmung eines 'möglichst guten' RB-Raumes $X_N = \spann\{u_h(\mu)\}\subset X_h$ mit Basis $\phi_N$, welche $M:=\penbrace{u_h(\mu)~|~\mu\in\mathcal{P}}$ global approximiert.
+	\item Optimales $X_N$: formalisierbar durch Minimierung eines Funktionals, z.B. minimiere den maximalen Energiefehler:
+	\begin{align}
+	\min\limits_{Y\subset X_h,\dim Y = N} \enbrace{\max\limits_{\mu\in\mathcal{P}} |||u_h(\mu)-u_N(\mu)|||_\mu}
+	\end{align}
+	oder Minimierung der mittleren Projektionsfehlers
+	\begin{align}
+	\min\limits_{Y\subset X_h,\dim Y = N} \int_P \norm{u_h(\mu)-P_Yu_h(\mu)}_X^2 \dint \mu,
+	\end{align}
+	wobei $P_Y$ die orthogonale Projektion auf $Y$ bezeichnet.
+	\item Gute Basis $\phi_N$: orthogonal für numerische Stabilität; Hierachie, so dass Basisvektoren nach Relevanz geordnet sind, d.h.
+	\[
+	X_N:= \spann\{\varphi_1\dt{,}\varphi_{N'}\} \text{ Sequenz von optimalen Räumen,}
+	\]
+	für $1\le N' \le N$, damit $N'$ Variation einer Fehlerkontrolle erlaubt.
+\end{enumerate}
+Was wir formal unter einem optimalen Unterraum verstehen wollen, können wir mit Hilfe der sogenannten Kolmogorov-$n$-Weite beschreiben.
+
+\ssect{4.1 Definition}{(Kolmogorov-$n$-Weite, optimaler Unterraum)}
+Sei $A$ eine kompakte Teilmenge in einem HR $X$.
+Zu einem abgeschlossenen Unterraum $X_n\subset X$ mit $\dim X_n = n$ nennen wir
+\begin{align*}
+E(X_n,A) &= \sup\limits_v\in X \inf\limits_{w\in X_n} \norm{v-w}_X\\
+&= \sup\limits_{v\in A} \norm{v-P_{X_n}v}_X
+\end{align*}
+Abstand von $X_n$ zu $A$.
+Für $n\in \N$ nennen wir 
+\begin{align}
+d_n(A,X) := \inf\limits_{X_n\subset X, \dim X_n = n} E(X_n,A)
+\end{align}
+die \bet{Kolmogorov-$n$-Weite} der Menge $A$.
+Ein Unterraum $X_n\subset X$ mit $\dim X_n = n$, welcher die Kolmogorov-$n$-Weite minimiert heißt optimaler Unterraum für $d_n(A,X)$.
+
+\ssect{4.2 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item Die Kolmogorov-n-Weite ist also ein Maß für die Bestapproximation durch lineare Unterräume.
+	\item Es gilt trivialerweise $d_0(A,X)= \sup\limits\norm{v}_X$ und falls $n_0:=\dim span(A) <\infty$, so gilt $d_n(A,X)=0 \forall n\ge n_0$.
+	\item Für $A=M\subset X_h$ mit $u_h(\mu)$ Lösung von $(P_h(\mu))$ und $u_N(\mu)$ Lösung von $(P_N(\mu))$ gilt also
+	\begin{align*}
+	\norm{u_N(\mu)-u_h(\mu)}_X &\le \sqrt{\frac{\gamma(\mu)}{\alpha(\mu)}} \inf\limits_{v\in X_N} \norm{u_N(\mu)-v}\\
+	&\le E(X_n,M) \sup\limits_{\mu\in P} \sqrt{\frac{\gamma(\mu)}{\alpha(\mu)}}.
+	\end{align*}
+	Falls also $E(X_n,M)$ und $\frac{\gamma(\mu)}{\alpha(\mu)}$ beschränkt, so ist der RB-Fehler klein.
+	\item Präzise Werte für $d_n$ sind selten bekannt.
+	Für endliche Mengen der Einheitskugeln können aber exakte Werte der Schranken für $d_n$ angegeben werden [Pinkus, 85].
+	\item \bet{Beispiel:} $A:=\penbrace{v\in X~|~\norm{v}\le 1}$ erfüllt $d_n(A,x)=1$ für alle $n\le \dim X$ und $d_n(A,X)=0$ für $n\ge \dim X$.
+	\item \bet{Beispiel:} $A:=[-1,1]^m\subset X:=\R^m$ erfüllt $d_n(A,X)=\sqrt{m-n}$ für alle $n\le m$ und $d_n(A,X) = 0$ für $n\ge m$.
+	Da die am Anfang des Kapitels genannten Optimierungsprobleme sehr komplex sind, treffen wir Vereinfachungen:
+	\begin{enumerate}[(i)]
+		\item \bet{Diskretisierung des Parameterraums:}\\
+		Wähle endliche TM $S_{\train}:=\{\mu^i\}_{i=1}^{n_{\train}} \subset P$ von Trainingsparametern, welche Trainingssnapshots $M_{\train} := \penbrace{u_h(\mu)~|~\mu\in S_{\train}}\subset M$ definieren.
+		\item Schränke Optimierungsproblem auf $S_{\train}$ ein.
+		Problem (4.2) wird dann in 
+		\begin{align}
+		\min\limits_{Y\subset X_h, \dim Y = N} \frac{1}{n_{\train}} \sum_{i=1}^{n_{\train}} \norm{u_h(\mu_i)-P_Y u_h(\mu_i)}^2_X
+		\end{align}
+		überführt.
+	\end{enumerate}
+\end{enumerate}
+Wir werden in Abschnitt 4.2 sehen, dass die sogenannten POD-Räume Optimierungsproblem (4.4) lösen.
+Zunächst beschäftigen wir uns jedoch mit dem Greedy-Algorithmus, welcher auf einer weiteren Approximation des Optimierungsproblems
+\begin{align}
+\min\limits_{Y\subset X_h, \dim Y = N} \max\limits_{\mu\in S_{\train}} |||u_h(\mu)-u_N(\mu)|||_\mu
+\end{align}
+beruht.
+
+\subsection{Greedy-Algorithmus}
+Da die Optimierung in (4.5) über die Unterräume immer noch ein sehr komplexes Optimierungsproblem ist, geht man stattdessen iterativ vor:
+
+Wir konstruieren einen Approximationsraum, indem wir iterativ neue Basisfunktionen hinzufügen.
+Hierbei wird die neue Basisfunktion gerade so gewählt, dass sie den Ausdruck
+\[
+\max\limits_{\mu\in S_{\train}} |||u_h(\mu)-u_N(\mu)|||_\mu
+\]
+minimiert.
+Dies ist das Grundprinzip des \bet{Greedy-Algorithmus}, welcher Schrittweise sowohl die Sample-Menge $S_N$ als auch die Basis $\Phi_N$ erweitert.
+Ein wichtiger Bestandteil ist ein Fehlerindikator $\Delta(Y,\mu)\in \R^+$, welcher den zu erwartenden Approximationsfehler für den Parameter $\mu$ schätzt, wenn man $Y=X_N$ als den Approximationsraum wählt.
+Schließlich st $N_{\max}$ eine vorgegebene maximale Dimension des Raumes $X_N$.
+
+\ssect{4.3 Definition}{(Greedy-Algorithmus)}
+Sei $S_{\train}\subset P$ eine gegebene Trainingsmenge von Parametern und $\varepsilon_{tol}>0$ eine gegebene Fehlertoleranz.
+Setze $X_0:={0}, S_0 := \emptyset, \Phi_0:= \emptyset$ und definiere iterativ:
+\begin{lstlisting}
+for n in range(1,N_max):
+	Finde 
+	%* $\mu^{(n)} := \argmax\limits_{\mu\in S_{\train}} \Delta(X_{n-1},\mu) $\\
+	$S_n := S_{n-1} \cup \{\mu^{(n)}\}$
+	$\phi_n = u_h(\mu^{(n)})$
+	$\Phi_n := \Phi_{n-1} \cup\{\phi_n\}$
+	$X_n:= \spann \{\Phi_n\}$ &*
+	if %* $\max\limits_{\mu\in S_{\train}} \Delta(X_n,\mu) \le \varepsilon_{tol}$ &*:
+		break
+N:= n
+return %* $S_N,\Phi_N$ &*
+\end{lstlisting}
+
+\ssect{4.4 Bemerkung}{}
+Angenommen $N_{\max} = |S_{\train}|$. Wenn für alle $\mu \in P$ und Unterräume $Y\subset X_n$ gilt, dass
+\begin{align}
+u_h(\mu)\in Y \Rightarrow \Delta(Y,\mu) = 0,
+\end{align}
+dann endet der Greedy-Algorithmus nach höchstens $N\le |S_{\train}|$.
+Dies liegt daran, dass (4.6) sicher stellt, dass kein Parameterwert in $S_{\train}$ zweimal gewählt wird.
+
+\ssect{4.5 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item Der Greedy-Alg. erzeugt eine hierachische Basis.
+	\item $\Phi_N$ erzeugt vom Greedy-Alg. ist eine Lagrange-RB Basis zur Samplemenge $S_N$, im Allgemeinen also nicht orthogonal.
+	Um ein numerisch möglichst stabiles Verfahren zu erhalten, orthonomalisiert man die Basis mit Gram-Schmidt.
+\end{enumerate}
+
+\ssect{4.6 Bemerkung}{(Wahl des Fehlerindikators)}
+Es gibt verschiedene Möglichkeiten für die Wahl des Fehlerindikators $\Delta(Y,\mu)$ im Greedy-Alg.
+\begin{enumerate}[(1)]
+	\item \bet{Projektionsfehler:} In manchen Fällen ist es sinnvoll im Greedy-Alg. den Bestapproximationsfehler zu verwenden:
+	\[
+	\Delta(Y,\mu) := \inf\limits_{v\in Y} |||u_h(\mu)-v|||_\mu = |||u_h(\mu)-P_Y u_h(\mu)|||_\mu.
+	\]
+	Dieser Fehlerindikator ist teuer, da seine Auswertung Operationen erfordert, welche mit $N_h$ skalieren.
+	Daher kann $S_{\train}$ im Allgemeinen nur relativ klein gewählt werden.
+	Ferner müssen alle Snapshots $u_h(\mu)$ verfügbar sein, was aus Speichergründen zusätzlich die Größe von $S_{\train}$ begrenzt.
+	Der Vorteil dieser Fehlerindikatoren ist allerdings, dass weder ein RB Modell, noch ein a posteriori Fehlerschätzer für die Basisergänzung notwendig sind, was insbesondere für komplexe Probleme von Relevanz ist.
+	Ferner schleißen wir aus dem Céa-Lemma, dass der so konstruierte RB-Raum gute Approximationseigenschaften hat.
+	Wir bezeichnen diese Version des Greedy-Alg. als 'strong greedy'.
+	\item \bet{RB-Fehler zwischen $u_h(\mu)$ und $u_N(\mu)$:} Falls wir ein RB-Modell, aber kein Fehlerschätzer zur Verfügung haben, können wir als Fehlerindikator
+	\[
+	\Delta(Y,\mu) = \ener{u_h(\mu)-u_N(\mu)}
+	\]
+	verwenden.
+	Auch dieser Fehlerindikator ist teuer zu berechnen und benötigt alle Snapshots $u_h(\mu)$, was beides die Größe der Trainingsmenge $S_{\train}$ limitiert.
+	Der Vorteil dieses Indikators ist, dass wir das Fehlermaß aus dem Optimierungsproblem in (4.5) betrachten.
+	\item \bet{A posteriori Fehlerschätzer:} Falls ein Fehlerschätzer zur Verfügung steht verwendet man im Allgemeinen
+	\[
+	\Delta(Y,\mu) = \Delta_N^{en}(\mu)
+	\]
+	oder ein (relativen) Fehlerschätzer (für eine andere Norm). 
+	Da Aufgrund der Offline/Online Zerlegung die Auswertung von $\Delta(Y,\mu) = \Delta_N^{en}(\mu)$ sehr billig ist und wir während dieses Greedy-Alg. nur $N$-mal das hochdimensionale diskrete Modell $(P_h(\mu))$ lösen müssen, kann $S_{\train}$ sehr groß gewählt werden.
+	Daher erwarten wir unter gewissen Voraussetzungen an den Fehlerschätzer $\Delta_N^{en}(\mu)$, dass wir mit diesem Fehlerindikator die Lösung des Optimierungsproblems, über den konstanten Parameterraum $P$, (4.1) besser approximieren können.
+	Diese Version des Greedy-Alg. bezeichnen wir mit 'weak greedy'.
+\end{enumerate}
+Alle drei Fehlerindikatoren erfüllen (4.6).
+Dies gilt trivialerweise für den Projektionsfehler, folgt aus der Reproduzierbarkeit von Lösungen in Folgerung 3.18 für den RB-Fehler und schließlich aus Folgerung 3.40 für den Fehlerschätzer.
+
+\ssect{4.7 Bemerkung}{}
+Alternativ kann man auch Fehlerindikatoren für die Ausgabe wie $\abs{s_h(\mu)-s_N(\mu)}$ oder $\Delta_N^s(\mu)$ im Greedy-Alg. verwenden.
+Diese werden häufig auch als 'goal-oriented error indicators' bezeichnet.
+Letztere führen im Allgemeinen zu einem RB-Raum von niedriger Dimension, als die Indikatoren in Bemerkung 4.6, welcher $s_h(\mu)$, aber nicht notwendigerweise $u_h(\mu)$, gut approximiert.
+Im Gegensatz dazu resultieren die Indikatoren aus Bemerkung 4.6 in einer größeren Basis, welche sowohl $u_h(\mu)$, als auch $s_h(\mu)$ gut approximiert.
+
+\subsubsection{Konvergenzraten des Greedy-Algorithmus}
+Bis vor einigen Jahren wurde der Greedy-Alg. als heuristischer Algorithmus angesehen, welcher in der Praxis in vielen Fällen zwar ausgezeichnet funktioniert, dem aber die theoretische Grundlage fehlt.
+Dann wurden aber sehr nützliche exponentielle [Buffer, Meday, Pattera et al] und dann für algebraische Konvergenz [Biniv, Cohen et al] in HR und schließlich in [DeVore, Petrova et al] für Banachräume.
+
+\ssect{4.8 Satz}{(Konvergenzraten für Greedy-Alg.[BCDDPW,11])}
+Sei $M_e := \penbrace{u(\mu)~|~\mu\in P}$, $P$ kompakt und der Fehlerindikator $\Delta(Y,\mu)$ so gewählt, dass für ein geeignetes $\tau\in (0,1]$ gilt:
+\begin{align}
+\ener{u(\mu^{(n+1)})-P_{X_n} u(\mu^{(n+1)})} \ge \tau \cdot \max\limits_{u\in M_e} \ener{u-P_{X_n}u}.
+\end{align} 
+Sei ferner $\sigma_n := \max\limits_{u\in M_e} \ener{u-P_{X_n}u}$.
+Dann gilt:
+\begin{enumerate}[(i)]
+	\item \bet{Algebraische Konvergenz:}\\
+	Falls $d_n(M_e,X)\le M n^{-\beta}$ für Konstanten $M,\beta\in \R^+$ unabhängig von $\tau$ und für alle $n\in \N$ und $d_0(M_e,X)\le M$, dann gilt:
+	\[
+	\sigma_n \le C\cdot Mn^{-\beta}
+	\]
+	mit geeigneter (berechenbarer) Konstante $C>0$.
+	\item \bet{Exponentielle Konvergenz:}\\
+	Falls $d_n(M_e,X) \le M e^{-an^\beta}$ für $n\ge 0$ und für Konstanten $M,\beta, a\in \R^+$, dann gilt:
+	\[
+	\sigma_n\le C\cdot Me^{-cn^\rho}, +n\ge 0
+	\]
+	mit $\rho := \frac{\beta}{\beta+1}$ mit geeignetem (berechenbaren) Konstanten $c,C>0$.
+\end{enumerate}
+
+\bet{Beweis:} siehe Paper.
+
+\ssect{4.9 Bemerkung}{}
+\begin{enumerate}[(1)]
+	\item Lässt sich $M_e$ gut durch einen linearen Unterraum approximieren, so liefert der Greedy-Alg. einen Approximationsraum, welcher nur leicht schlechter ist, als der optimale Unterraum.
+	\item In der Praxis verwenden wir im Greedy-Alg. die Menge $M:=\penbrace{u_h(\mu)~|~ \mu \in P}$.
+	In [BCDPW,11] wurde gezeigt, dass sich in diesem Fall die Konvergenzraten für kleine Diskretisierungsfehler nicht verschlechtern.
+\end{enumerate}
+
+\ssect{4.10}{(strong/weak greedy)}
+Für $\tau = 1$ heißt der Algorithmus strong greedy und für $\tau <1$ weak greedy.
+Für $\Delta(Y,\mu)= \Delta_n^{en}(\mu)$ gilt (4.7) im Diskreten; wegen
+\begin{align*}
+\ener{u_h(\mu^{(n+1)}).P_{X_h} u_h(\mu^{(n+1)})} &= \inf\limits_{v\in X_h} \ener{u_h(\mu^{(n+1)})-v}\\
+&\bgl{3.17/3.19} \ener{u_h(\mu^{(n+1)})-u_n(\mu^{(n+1)})} \bgl{3.39} \frac{\Delta_n^{en}(\mu^{(n+1)})}{\eta_n^{en}(\mu^{(n+1)})}\\
+&\bgl{Def Greedy} \frac{1}{\eta_n^{en}(\mu^{(n+1)})}\cdot \max\limits_{\mu\in P} \Delta_n^{en}(\mu)\\
+&\stackrel{3.35}{\ge} \frac{1}{\eta_n^{en}(\mu^{(n+1)})}\cdot \max\limits_{\mu\in P} \ener{u_h(\mu)-u_n(\mu)}\\
+&\ge \frac{1}{\eta_n^{en}(\mu^{(n+1)})}\cdot \max\limits_{\mu\in P} \ener{u_h(\mu)-P_{X_h} u_h(\mu)}\\
+&\stackrel{3.39}{\ge} \sqrt{\frac{\alpha_{LB}(\mu^{(n+1)})}{\gamma(\mu^{(n+1)})}} \cdot \max\limits_{\mu\in P} \ener{u_h(\mu)-P_{X_h} u_h(\mu)}.
+\end{align*}
+Für glm. beschränkte und koerzive Bilinearformen $b(.,.;\mu)$ erhalten wir dann einen weak greedy, mit $\tau = \sqrt{\frac{\alpha_0}{\gamma_0}}\in (0,1)$, wobei $\alpha_0,\gamma_0$ definiert in Definition 3.3.
+
+\subsubsection{Praktische Realisierung}
+
+\ssect{4.11 Bemerkung}{(Wahl von $S_{\train}$)}
+Für niedrig dimensionale Parameterräume, d.h. $\abs{P}\le 5$, wird $S_{\train}$ häufig zufällig gewählt.
+
+\ssect{4.12 Bemerkung}{(Overfitting)}
+Die Folge von Fehlern $e_n := \max_{\mu\in S_{\train}}\Delta(X_n,\mu)$, welche durch den Greedy-Alg. produziert wird, kann sehr stark von $S_{\train}$ abhängen.
+Wir können aufgrund von möglichem 'Overfitting' nicht notwendigerweise vom Approximationsverhalten des RB-Modells auf $S_{\train}$ auf das Approximationsverhalten auf $P$ schließen; es kann sogar 
+\[
+\sup\limits_{\mu\in P} \Delta(X_n,\mu) \gg e_n
+\]
+gelten.
+Daher solte die Approximationsgüte des RB-Modells immer auf einer unabhängigen Testmenge $S_{test}\subset P$ validiert werden.
+
+\ssect{4.13 Bemerkung}{(adaptive Verfeinerung der Trainingsmenge)}
+Um sowohl eine große Trainingsmenge(hoher Rechenaufwand), als auch eine zu klein/schlecht gewählte Trainingsmenge (Overfitting) zu vermeiden, bietet es sich an die Trainingsmenge adaptiv zu verfeinern (siehe [Haasdonk, Dihlmann, Ohlberger, 2012]). 
+Hierbei wird die Trainingsmenge einem Gitter zu geordnet, wobei die Punkte der Trainingsmenge entweder als die Knoten [HO, 07] oder zufällig innerhalb der Gitterelemente gewählt werden [Efftang, Patera, 10].
+Wie bei adaptiven FEM wird dann ein (lokaler) Fehlerschätzer auf den Gitterelementen ausgewertet und die Elemente mit dem größten Fehler zur Verfeinerung markiert.
+Durch Verfeinerung der markierten Elemente werden neue Punkte zur Trainingsmenge hinzugenommen.
+Auf diese Weise kann die Trainingsmenge an das betrachtete Problem angepasst und 'schwierige' Bereiche der Parametermenge, z.B. kleine Werte der Diffusionskonstanten, können identifiziert werden.
+So kann die Trainingsmenge entsprechend verfeinert werden.
+Außerdem besteht die Möglichkeit Overfitting vorzubeugen.
+
+\ssect{4.14 Bemerkung}{(Zerlegung des Parameterraums)}
+Im Greedy-Alg. aus Definition 4.3 wählt man im Allgemeinen $N_{\max}$ sehr groß, so dass die gewünschte Toleranz erreicht werden kann.
+Es wäre wünschenswert, wenn man sowohl $N_{\max}$ und damit die Online-Laufzeit, als auch die Toleranz kontrollieren könnte.
+Dies kann mit einer Zerlegung des Parameterraums, dem sogenannten hp-RB-Ansatz [Eftang, Petera, 10] erreicht werden.
+Zunächst wird der Parameterraum adaptiv in Teilgebiete zerlegt (h-Adaptivität).
+Anschließend werden für jedes Teilgebiet lokale reduzierte Basen generiert.
+Falls auf einem Teilgebiet nicht die Toleranz und $N\le N_{\max}$ erreicht werden kann, wird dieses Teilgebiet erneut verfeinert/zerlegt und es werden neue lokale Basen generiert (p-Adaptivität).
+In der Online Phase muss dann lediglich für einen Parameterwert $\mu$ das zugehörige Teilgebiet und (lokale) RB-Modell identifiziert werden.
+Die da durch erzielte Kontrolle über Genauigkeit und Online-Laufzeit führt allerdings zu einer teureren und speicherintensiven Offline Phase.
+
+\subsection{Proper Orthogonal Decomposition (POD)}
+\subsubsection{Exkurs Spektraltheorie/Motivation}
+
+\ssect{4.15 Lemma}{(Adjungierter Operator im HR-Sinne)}
+Seien $X,Y$ HR.
+Zu $A\in L(X,Y)$ existiert ein eindeutiger Operator $A\adj\in L(Y,X)$ mit
+\[
+(Ax,y)_Y = (x,A*y)_X ~\forall x\in X,y\in Y,
+\]
+der sogenannte \bet{adjungierte Operator}.\\
+
+\bet{Beweis:}\\
+Für jedes feste $y\in Y$ ist $x\mapsto (Ax,y)_Y$ stetig und linear.
+Nach dem Riesz'schen Darstellungssatz existiert ein eindeutiges $z\in X$ mit $(Ax,y)_Y= (x,z)_X~\forall x\in X$.
+Setze nun $A\adj y=z$.
+Die Linearität ist klar und die Stetigkeit von $A*$ folgt aus der Stetigkeit von $A$, wegen
+\begin{align*}
+\norm{A\adj y}_X &= \norm{z}_X = \sup\limits_{x\in X\backslash\{0\}} \frac{(Ax,y)_Y}{\norm{x}_X}\\
+&\stackrel{C.S.}{\le} \norm{y}_Y \sup\limits_{x\in X\backslash\{0\}} \frac{\norm{Ax}_X}{\norm{x}_X} = \norm{y}_Y\norm{A}.
+\end{align*}
+Eindeutigkeit folgt aus der Eindeutigkeit des Riesz-Repräsentanten.
+
+\ssect{4.16 Definition}{(selbstadjungiert)}
+Sei $A\in L(X)$, $A$ heißt \bet{selbstadjungiert}, falls $A=A\adj$.
+
+\ssect{4.17 Beispiele}{}
+\begin{enumerate}[(a)]
+	\item Sei $X=\R^n$.
+	Wird $A\in L(X)$ durch die Matrix $(a_{ij})_{ij}$ dargestellt, so wird $A\adj$ durch $(a_{ji})_{ij}$ dargestellt.
+	Definition 4.16 ist also eine Verallgemeinerung des Begriffes der selbstadjungierten (symmetrischen) Matrix aus der Linearen Algebra.
+	\item Sei $X=L^2((0,1)), u\in L^2((0,1)^2)$ und $A_u\in L(X)$ der Integraloperator
+	\[
+	(A_u,v)(x) = \int_0^1 u(x,\mu)v(\mu)\dint \mu.
+	\]
+	Dann ist $A_u\adj = A_{u\adj}$ mit $u\adj(x,\mu)=u(\mu,x)$.
+	Dies kann als kontinuierliches Analogon von (a) aufgefasst werden.
+	\item $A\adj A$ und $AA\adj$ sind stets selbstadjungiert.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\begin{enumerate}[(b)]
+	\item 
+	\begin{align*}
+	(A_uv,w)_X &= \int_{0}^{1} (A_uv)(x)v(x)\dint x = \int_0^1\int_0^1 u(x,\mu)v(\mu)w(x)\dint\mu\dint x\\
+	&= \int_0^1 v(\mu) \int_0^1 u(x,\mu)w(x)\dint x\dint \mu = \int_0^1 v(\mu)(A_u\adj w)(\mu)\dint \mu.
+	\end{align*}
+	\item
+	\[
+	(A\adj A v,w)_X = (Av,Aw)_Y = (v,A\adj A w)_X, ~AA\adj \text{ analog.}
+	\]
+	\hfill $\square$
+\end{enumerate}
+
+\bet{Erinnerung:}\\
+\uline{Ziel:} Approximiere $u(x,\mu)$ durch $\sum_{n=1}^{N}U_n^N(\mu)\phi_n(x),~X_N=\spann\{\phi_1\dt{,}\phi_N\}$.
+Als Minimierer von 
+\[
+\min\limits_{Y\subset X,\dim Y =N} \int_0^1\int_0^1\abs{u(x,\mu)-\sum_{n=1}^{N}U_n^N(\mu)\phi_n(x)}^2\dint x\dint \mu.
+\]
+Ein solches Problem wurde erstmals von Schmidt 1907 betrachtet.
+Zur Lösung nutzte er aus, dass der Integraloperator $A_u$ aus 4.17 (b) kompakt ist (s. Alt, Satz 8.15, S.353f) und damit auch die Operatoren $A_u\adj A_u$ und $A_uA_u\adj$ kompakt sind, denn:
+
+\ssect{4.18 Satz}{}
+Seien $X,Y,Z$ Banachräume.
+Sind $T\in L(X,Y)$ und $S\in L(Y,Z)$ und ist $T$ oder $S$ kompakt, so ist $ST$ kompakt.\\
+
+\bet{Beweis:}\\
+Ein Operator $T\in L(X,Y)$ ist genau dann kompakt, wenn für jede beschränkte Folge $(x_n)_\N\subset X$, die Folge $(T(x_n))_\N\subset Y$ eine konvergente Teilfolge enthält.
+Sei also $(x_n)_\N$ eine beschränkte Folge, sei ferner zunächst $S$ kompakt.
+Da $T\in L(X,Y)$ ist auch $(Tx_n)_\N$ beschränkt und $(STx_n)_\N$ besitzt eine konvergente Teilfolge.
+Ist $S$ stetig, $T$ kompakt und damit $(Tx_n)_\N$ konvergent,so ist auch $(STx_n)_\N$ konvergent.
+\hfill $\square$
+
+\ssect{4.19 Satz}{(Hilbert-Schmidt Theorem)}
+Sei $X$ reeller, seperabler HR und $A\in K(X)$ selbstadjungiert.
+Dann existiert eine vollständige Orthonormalbasis $\{\psi_k\}_{k=1}^{\infty}$ von $X$, so dass
+\[
+A\psi_k = \lambda_k\psi_k
+\]
+und $\lambda_k\to 0,k\to \infty$.\\
+
+\bet{Beweis:} Werner, Theorem VI 3.2, S. 209f.
+\hfill $\square$\\
+
+Da $A_u\adj A$ (und analog $A_uA_u\adj$) nicht negativ, weil $(A_u\adj A_u v)_X\ge 0 ~\forall v\in L^2((0,1))$, erhalten wir das folgende Resultat:
+
+\ssect{4.20 Satz}{}
+Sei $A_u$ wie in 4.17 (b) definiert.
+Der Operator $R_u := A_uA_u\adj$ mit
+\[
+R_u v = \int_0^1 (v,u(\mu))_{L^2((0,1))} u(\mu)\dint \mu
+\]
+ist nicht negativ, selbstadjungiert und kompakt.
+Ferner existiert eine vollständige Orthonormalbasis $\{\phi_k\}_{k=1}^\infty$ für $L^2((0,1))$ und eine Folge $\{\lambda_k\}_{k=1}^\infty$ nicht-negativer reeller Zahlen, so dass
+\[
+R_u\phi_k= \lambda_k\phi_k,~\lambda_1\ge \lambda_2\dt{\ge}0
+\]
+und $\lambda_k\to 0$ für $k\to \infty$.\\
+
+\bet{Beweis:}\\
+Folgt aus Satz 4.19.
+\hfill $\square$\\
+
+Definiere nun
+\[
+\psi_k(\mu):= (A_u\adj\phi_k)(\mu) = \int_0^1 u(x,\mu)\phi_k(x)\dint x,
+\]
+mit $\phi_k$ aus Satz 4.20.
+Es lässt sich zeigen, dass $\{\phi_k\}_{k=1}^\infty$ Eigenfunktionen von $A_u\adj A_u$.
+Die sogenannte 'Hilbert-Schmidt Zerlegung' von $u(x,\mu)$ ist dann gegeben durch:
+\[
+u(x,\mu) = \sum_{k=1}^{\infty} \psi_k(\mu)\phi_k(x) \text{ fast überall.}
+\]
+Schmidt zeigte weiterhin, dass
+\begin{align*}
+&\min \penbrace{\int_0^1\int_0^1 \abs{u(x,\mu)-\sum_{n=1}^{N}U_n^N(\mu)\phi_n(x)}^2\dint x\dint \mu~|~ U_n^N(\mu),\phi_n(x)\in L^2((0,1))}\\
+&= \int_0^1\int_0^1 \abs{u(x,\mu)-\sum_{n=1}^{N}\psi_n(\mu)\phi_n(x)}^2\dint x\dint \mu = \sum_{k=N+1}^{\infty} \lambda_k.
+\end{align*}
+
+\subsubsection{Kontinuierliche POD}
+\ssect{4.21 Satz}{(POD Basis)}
+Sei $X$ ein HR mit $H_0^1(\Omega)\subset X\subset H^1(\Omega), P=[a_i,b_i]^p,i=1\dt{,}p$, wir definieren den Operator
+\[
+Rv := \int_P (v,u(\mu))_X u(\mu)\dint \mu \text{ für } v\in X,u(\mu)\in X.
+\]
+Ferner nehmen wir an, dass die betrachtete parameterabhängige Differentialgleichung erlaubt zu zeigen, dass $R$ kompakt (dazu reicht z.B. dass $u(\mu)$ stetig von $\mu$ abhängt).
+Dann existiert eine vollständige Orthonormalbasis $\{\varphi_i\}_{i=1}^\infty$ von $X$ und eine Folge $\{\lambda_i\}_{i=1}^\infty$ nicht-negativer reeller Zahlen, so dass
+\begin{align}
+R\varphi_i = \lambda_i\varphi_i, \lambda_1\ge \lambda_2\dt{\ge} 0 \text{ und } \lambda_i \xrightarrow{i\to \infty} 0.
+\end{align}
+Sei $N'$, so dass $\lambda_{N'}>0$.
+Für $1\le N\le N'$ definieren wir $\Phi_N:=\penbrace{\varphi_1\dt{,}\varphi_N}$ als POD-Basis und $X_N:= \spann\penbrace{\varphi_1\dt{,}\varphi_N}$ als POD-Raum.\\
+
+\bet{Beweis:}\\
+Wie oben zeigt man, dass $R$ nicht-negativ und selbstadjungiert. 
+Aufgrund der angenommenen Kompaktheit folgt die Aussage, dann aus dem Hilbert-Schmidt Theorem.
+\hfill $\square$\\
+
+Es lässt sich nun zeigen, dass der POD-Raum den mittleren Projektionsfehler minimiert, also Minimierer des Minimierungsproblems (4.2) ist.
+
+\ssect{4.22 Satz}{(Optimalität der POD-Basis)}
+Für $l\in\N$ definieren wir die Abbildung $J: \underbracket{X\dt{\times} X}_{l-\text{mal}}\to \R$ durch
+\begin{align}
+J(\phi_1\dt{,}\phi_l) = \int_P \norm{u(\mu)-\sum_{i=1}^{l} (u(\mu),\phi_i)_X \phi_i}_X^2\dint \mu.
+\end{align}
+Seien $\{\lambda_i\}_{i=1}^\infty$ und $\{\phi_i\}_{i=1}^\infty$ die Eigenwerte und Eigenfunktionen von $R$.
+Dann lösen für alle $l\in \N$ die ersten $L$ Eigenfunktionen $\phi_1\dt{,}\phi_L\in X$ das Minimierungsproblem
+\begin{align}
+\min J(\psi_1\dt{,}\psi_l) \text{ so dass } (\psi_j,\psi_i) = \delta_{ij},~1\le i,j\le l.
+\end{align}
+Ferner gilt:
+\begin{align}
+J(\phi_1\dt{,}\phi_l) = \sum_{i=l+1}^{\infty} \lambda_i \text{ für jedes } l\in \N.
+\end{align}
+
+\bet{Beweis:}\\
+Der Beweis zu Teil 1 der Aussage beruht darauf, dass das Eigenwert-Problem (4.8) die notwendige Optimalitätsbedingung erster Ordnung (nOb1) für (4.10) ist.
+Den Beweis findet man zum Beispiel in [Holmes,L,B, 1996].
+Für (4.11):
+Da $\{\phi_i\}_{i=1}^\infty$ Orthonormalbasis (ONB) von $X$ gilt
+\[
+u(\mu) = \sum_{i=1}^{\infty} (u(\mu),\phi_i)_X\phi_i. \qquad(\text{s. Alt, Satz 7.7})
+\]
+Damit folgt:
+\begin{align*}
+\int_P \norm{u(\mu)-\sum_{i=1}^{\infty} (u(\mu),\phi_i)_X\phi_i }_X^2\dint \mu &= \int_P \norm{\sum_{i=1}^{\infty}(u(\mu),\phi_i)\phi_i - \sum_{i=1}^{\infty} (u(\mu),\phi_i)_X\phi_i }_X^2\dint \mu\\
+&= \int_P \norm{\sum_{i=l+1}^{\infty} (u(\mu),\phi_i)_X\phi_i }_X^2\dint \mu\\
+&= \int_P \sum_{i,j=l+1}^{\infty} (u(\mu),\phi_i)_X (u(\mu),\phi_j)_X \underbracket{(\phi_i,\phi_j)_X}_{\text{ONB, }=\delta_{ij}}\dint \mu\\
+&= \int_P \sum_{i=l+1}^{\infty} (u(\mu),\phi_i)_X^2\dint \mu \\
+&= \int_P \sum_{i=l+1}^{\infty} ((u(\mu),\phi_i)_X u(\mu),\phi_i)_X \dint \mu = \sum_{i=l+1}^{\infty} (R\phi_i,\phi_i)_X \\
+&= \sum_{i=l+1}^{\infty} (\lambda_i\phi_i,\phi_i)_X = \sum_{i=l+1}^{\infty} \lambda_i.
+\end{align*}
+\hfill $\square$
+
+\ssect{4.23 Folgerung}{}
+Seien $\{\lambda_i\}_{i=1}^\infty$ und $\{\phi_i\}_{i=1}^\infty$ die Eigenwerte und Eigenfunktionen von $R$.
+Dann gilt:
+\begin{enumerate}[(1)]
+	\item $(R\phi_i,\phi_i)_X = \int_P (u(\mu),\phi_i)_X (u(\mu),\phi_j)_X \dint\mu = \delta_{ij}\lambda_i$ für alle $i,j\in \N$, dass heißt die POD-Koeffizienten sind unkorreliert.
+	\item Sei $\{X_i\}_{i=1}^\infty$ beliebige Orthonormalbasis von $X$.
+	Für jedes $l\in \N$ gilt
+	\[
+	\sum_{i=1}^{l} \int_P \abs{(u(\mu),\phi_i)_X}^2\dint\mu \ge \sum_{i=1}^{l} \int_P \abs{(u(\mu),X_i)_X}^2\dint\mu.
+	\]
+	Daher erfassen die ersten $l$ POD-Basisfunktionen mehr Energie als die ersten $l$ Funktionen jeder anderen Basis von $X$.
+\end{enumerate}
+
+\bet{Beweis:}\\
+\begin{enumerate}[(1)]
+	\item Zunächst gilt: 
+	\[
+	(R\phi_i,\phi_j)_X = \enbrace{\int_P (u(\mu),\phi_i)_X u(\mu) \dint\mu,\phi_j}_X = \int_P (u(\mu),\phi_i)_X (u(\mu),\phi_j)_X \dint\mu.
+	\]
+	Außerdem gilt:
+	\[
+	(R\phi_i,\phi_j)_X = (\lambda_i\phi_i,\phi_j)_X = \lambda_i \delta_{ij}.
+	\]
+	\item siehe [Holmes,LB,1996].
+\end{enumerate}
+
+\subsubsection{POD im Diskreten Setting}
+
+\ssect{4.24 Satz}{(POD Basis)}
+Sei $X_N$ HR von Dimension $N$ und $\{u_i^N\}_{i=1}^n\subset X_N$.
+Dann definieren wir den empirischen Korrelationsoperator
+\[
+R_N: X_N\to X_N \text{ durch } R_N u^N := \frac{1}{n} \sum_{i=1}^{n} (u_i,v)_{X_N} u_i ,~ v\in X_N.
+\]
+Es ist $R_N\in K(X_N)$ und es existieren orthonormale Funktionen $\{\phi_i\}_{i=1}^{n'}, n'\le n$ und reelle Zahlen $\{\lambda_i\}_{i=1}^{n'}$ mit $\lambda_1\ge \lambda_2\dt{\ge} \lambda_{n'}> 0$, so dass
+\[
+R_N\phi_i = \lambda_i\phi_i,~i=1\dt{,} n'.
+\]
+Für $1\le M\le n'$ definieren wir die POD Basis $\Phi_M := \{\phi_1\dt{,}\phi_M\}$ und den POD-Raum $X_M:= \spann\{\phi_1\dt{,}\phi_M\}$.\\
+
+\bet{Beweis:}\\
+Analog zu oben zeigt man, dass $R_N$ linear, beschränkt, selbstadjungiert und nicht-negativ.
+Da $R_N$ endlich dimensionales Bild hat, ist $R_N$ ferner kompakt.
+Damit folgt aus dem Hilbert-Schmidt Theorem die Behauptung, wobei das Orthonormalsystem aus den $\phi_i$ nicht unendlich sein kann, da $R_N$ endliches Bild hat.
+
+\ssect{4.25 Beispiel}{(POD-Basis zur Modellreduktion parameter abhängiger PDgl)}
+Betrachte dazu den HR $X_n$, die Snapshotmenge $M_{\train} = \penbrace{ u_h/\mu_i~|~ \mu_i\in S_{\train}}$ und $R_nv = \frac{1}{n_{\train}} \sum_{i=1}^{n_{\train}} (u_h(\mu_i),v)_{\R} u_h(\mu_i)$. \marginnote{Weiß nicht ob das korrekt ist.}
+Die POD-Basis wird dann über das entsprechende Eigenwertproblem wie in Satz 4.24 bestimmt.
+
+\ssect{4.26 Beispiel}{(POD in der statistischen Datenanalyse)}
+Die Projektion auf den POD-Raum wird in der statistischen Datenanalyse auch Hotoling-Transformation, Prinicpal Component Analysis (PCA) oder Karkunev-Loewe Transformation genannt.
+\marginnote{Keine Ahnung ob die Namen so geschrieben werden..}
+Hierbei betrachtet man einen Datensatz,welcher als Menge von $n$ Punkten in $N$-dimensionalen Raum veranschaulicht werden kann, dass heißt $X_N=\R^N$ und
+\[
+R_Nv = \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,v)_{\R^N}} u_j^N \text{ für } v\in \R^N.
+\]
+
+\ssect{4.27 Bemerkung}{(Eigenschaften der POD-Basis)}
+\begin{enumerate}[(1)]
+	\item $\{\phi_i\}_{i=1}^N$ ist orthonormale Basis, aber nicht eindeutig.
+	\item Die POD-Basen sind  hierachisch, dass heißt $X_{N'}\subset X_N$ für $N'\le N$.
+	\item Die POD hängt nicht von der Reihenfolge der Daten ab (im Gegensatz zu einer Basis welche aus einer Gram-Schmidt Orthogonalisierung hervorgeht).
+	\item Maximierung der Varianz: $\phi_1$ ist die Richtung höchster Varianz von $\{u_i^N\}_{i=1}^n$, $\phi_2$ ist die Richtung höchster Varianz von $\{ P_{X_1} u_i^N\}_{i=1}^n$, usw.
+	\item Die Koordinaten der Daten bzgl. der POD-Basis sind unkorreliert.
+	Wir wollen nun exemplarisch für $X_N=\R^N$ die Optimalität der POD-Basis nachweisen, dass heißt wir wollen zeigen, dass die POD-Basis das folgende nichtlineare Optimierungsproblem löst:
+	\begin{align}
+	\min\limits_{\psi_1\dt{,}\psi_l\in\R^N} \frac{1}{n} \sum_{j=1}^n \norm{u_j^N - \sum_{i=1}^l (u_j^N,\psi_i)_{\R^N}\psi_i}_{\R^N}^2,
+	\end{align}
+	so dass $(\psi_i,\psi_j)_{\R^N} = \delta_{ij}$ für $1\le i,j\le l$.
+	Dazu benötigen wir einige Definitionen und Resultate aus der nichtlinearen Optimierung.
+	Problem (4.12) ist ein Optimierungsproblem der folgenden allgemeinen Form:
+	\[
+	\min J(x) \text{, so dass } g(x) = 0, \tag*{(Op)}
+	\]
+	wobei $J:\R^N\to \R$ das Zielfunktional und $g:\R^k\to \R^m,~m\le k$ der Nebenbedingung.
+\end{enumerate}
+
+\ssect{4.28 Definition}{(zulässige Lösung)}
+Ein Punkt $x\in\R^n$ heißt zulässig, falls $g(x)=0$ gilt.
+Die Menge zulässiger Lösungen ist definiert als
+\[
+E(Op) = \penbrace{x\in \R^n~|~g(x)=0}.
+\]
+
+\ssect{4.29 Definition}{(lokale Lösung)}
+Der Punkt $\bar{x}$ heißt \bet{lokale Lösung} von (Op), falls $\bar{x}\in E(Op)$ gilt und $J(\bar{x})\le J(x) ~\forall U(\bar{x})\cap E(Op)$, wobei $U(\bar{x})\subset \R^N$ offene nichtleere Umgebung von $\bar{x}$.
+
+\ssect{4.30 Definition}{(regulärer Punkt)}
+Ein Punkt $\bar{x}\in E(Op)$ heißt \bet{regulärer Punkt} bzgl. der Nebenbedingung $g(x)=0$, falls die Gradienten $\{\nabla g(\bar{x})\}_{i=1}^n\subset \R^N$ linear unabhängig sind.
+
+\ssect{4.31 Satz}{(Notwendige Optimalitätsbedingung 1. Ordnung)}
+Seien $J$ und $g$ stetig differenzierbar.
+Sei ferner $\bar{x}$ eine lokale Lösung von (Op) und ein regulärer Punkt für $g(x)=0$.
+Dann existiert ein eindeutiger Lagrange-Multiplikator $\bar{\lambda}=(\lambda_1\dt{,}\lambda_m)\in \R^m$, welcher
+\begin{align}
+\nabla J(\bar{x}) + \sum_{i=1}^m \lambda_i \nabla g(\bar{x}) = \nabla J(\bar{x}) + \nabla g(\bar{x})^T \bar{\lambda} =0 
+\end{align}
+löst.\\
+
+\bet{Beweis:} [Nocedal, Wright,2006]
+\hfill $\square$\\
+Nun haben wir alle Hilfsmittel zusammen um den folgenden Satz zu zeigen:
+
+\ssect{4.32 Satz}{}
+Sei $U = [u_1^N\dt{,}u_n^N]\in \R^N$ und $\Phi_N=\{\phi_1\dt{,}\phi_N\}$ POD-Basis definiert in 4.24.
+Dann löst die POD-Basis das folgende Optimierungsproblem:
+\begin{align*}
+\max\limits_{\psi_1\dt{,}\psi_l\in \R^N} \frac{1}{n} \sum_{i=1}^l \sum_{j=1}^n \abs{(u_j^N,\psi_i)_{\R^N}}^2 \text{ s.d. } (\psi_i,\psi_j)_{\R^N} = \delta_{ij} ~\forall 1\le i,j\le l. \tag*{$(Op^l)$}
+\end{align*}
+Ferner gilt 
+\[
+\argmax (Op^l) = \sum_{i=1}^l \lambda_i,
+\]
+wobei $\lambda_i$ die Eigenwerte aus Satz 4.24 sind.
+
+\bet{Beweis:}\\
+Zunächst betrachten wir das Optimierungsproblem für $l=1$
+\begin{align*}
+\max\limits_{\psi\in \R^N} \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\psi)_{\R^N}}^2 \text{ s.d. } \norm{\psi}^2_{\R^N} = 1. \tag*{$(Op^1)$}
+\end{align*}
+Um die Lösung von $(Op^1)$ zu bestimmen, betrachten wir die notwendige Optimalitätsbedingung 1. Ordnung (nOB1).
+Dazu führen wir zunächst die Funktion $g:\R^N \to \R$ ein, welche durch $g(\psi) = 1- \norm{\psi}^2_{\R^N}$ für $\psi\in \R^N$ definiert ist.
+Die Nebenbedingung in $(Op^1)$ kann dann als $g(\Psi)=0$ formuliert werden:
+\[
+\nabla g(\psi) = 2 \psi^T \text{ ist linear unabhängig, falls } \psi \neq 0.
+\]
+Aufgrund der Nebenbedingung $\norm{\psi}_{\R^N}^2=1$ gilt für eine Lösung von $(Op^1)$, dass $\psi\neq 0$.
+Damit ist jede Lösung von $(Op^1)$ ein regulärer Punkt.
+Sei $\mathcal{L}:\R^N\times \R \to \R$ das Lagrange-Funktional zu $(Op^1)$, das heißt
+\[
+\mathcal{L}(\psi,\lambda) := \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\psi)_{\R^N}}^2 + \lambda (1-\norm{\psi}_{\R^N}^2),
+\]
+für $(\psi,\lambda)\in\R^N\times\R$.
+Angenommen $\psi\in\R^N$ ist eine Lösung von $(Op^1)$.
+Da $\psi$ regulärer Punkt existiert nach Satz 4.31 ein eindeutiger Lagrange-Multiplikator $\lambda\in\R$, welcher die nOB1 erfüllt:
+\[
+\nabla \mathcal{L}(\psi,\lambda) \bgl{!} 0 \text{ in } \R^N\times \R.
+\]
+Wir berechnen den Gradienten von $\mathcal{L}$ bezüglich $\psi$:
+\begin{align*}
+\diff{\mathcal{L}}{\psi_i} (\psi,\lambda) &= \diff{}{\psi_i} \enbrace{ \frac{1}{n} \sum_{j=1}^n \abs{\sum_{k=1}^N (u_{kj}\psi_k)}^2 + \lambda \enbrace{1- \sum_{k=1}^N \psi_k^2 } }\\
+&= 2 \cdot \frac{1}{n} \sum_{j=1}^n \enbrace{\sum_{k=1}^N u_{kj}\psi_k}u_{ij} - 2\lambda\psi_i\\
+&= \frac{2}{n} \sum_{n=1}^N \enbrace{ \underbracket{\sum_{j=1}^n u_{ij}u_{jk}^T\psi_k}_{=(uu^T)_{ik}}} - 2 \lambda\psi_i.
+\end{align*}
+Daher folgt:
+\begin{align}
+\nabla_\psi \mathcal{L}(\psi,\lambda) = 2 \enbrace{\frac{1}{n} uu^T\psi - \lambda \psi} = 2 (R_N\psi-\lambda\psi) \bgl{!} 0 \text{ in } \R^N\times \R.
+\end{align}
+Gleichung (4.14) ergibt das folgende Eigenwertproblem
+\begin{align}
+\frac{1}{n} uu^T\psi = \lambda \psi \text{ in } \R^N, 
+\end{align}
+welches gerade mit dem Eigenwertproblem aus Satz 4.24 übereinstimmt.
+Aus $\diff{\mathcal{L}}{\lambda} (\mathcal{L},\lambda) \bgl{!} 0$ in $\R$ schließen wir die Nebenbedingung
+\begin{align*}
+\norm{\psi}=1. \tag*{(4.15b)}
+\end{align*}
+Der erste POD-Vektor $\phi$, definiert in Satz 4.24 löst damit (4.15).
+Ferner gilt:
+\begin{align*}
+\frac{1}{n} \sum_{j=1}^n \abs{ (u_j^N,\phi_1)_{\R^N}}^2 &= \enbrace{\frac{1}{n} \sum_{j=1}^n (u_j^N,\phi_1)_{\R^N} u_j^N,\phi_1}_{\R^N}\\
+&= (R_N\phi_1,\phi_1) = \lambda_1 \norm{\phi_1}^2_{\R^N} = \lambda_1.
+\end{align*}
+Schließlich zeigen wir, dass $\phi_1$ $(Op^1)$ löst.
+Sei dazu $\xi\in R^N$ ein beliebiger Vektor mit $\norm{\xi}_{\R^N}=1$.
+Da die Eigenvektoren $\{\phi_i\}_{i=1}^N$ von (4.15) eine ONB für $\R^N$ sind, gilt
+\[
+\xi = \sum_{i=1}^{N} (\xi,\phi_i)_{\R^N}\phi_i.
+\]
+Es folgt:
+\begin{align*}
+\frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\xi)_{\R^N}}^2 &= \frac{1}{n} \sum_{j=1}^n \abs{\enbrace{u_j^N, \sum_{i=1}^N(\xi,\phi_i)_{\R^N}\phi_i}_{\R^N}}^2\\
+&= \frac{1}{n} \sum_{j=1}^n \sum_{i,k=1}^N (u_j^N,(\xi,\phi_i)\phi_i)(u_j^N,(\xi,\phi_k)\phi_k)\\
+&= \frac{1}{n} \sum_{j=1}^n \sum_{i,k=1}^N \bigg( (u_j^N,\phi_i)(u_j^N,\phi_k)(\xi,\phi_i)(\xi,\phi_k)\bigg)\\
+&= \sum_{i,k=1}^N \enbrace{ \enbrace{ \underbracket{\frac{1}{n} \sum_{j=1}^n (u_j^N,\phi_i)u_j^N}_{=R_N\phi_i},\phi_k}(\xi,\phi_i)(\xi,\phi_k)}\\
+&= \sum_{i,k=1}^N  (\underbracket{\lambda_i\phi_i,\phi_k}_{=\lambda_i\delta_{ik}})(\xi,\phi_k)(\xi,\phi_k)\\
+&= \sum_{i=1}^N \lambda_i \abs{(\xi,\phi_i)}^2\\
+&\le \lambda_1 \sum_{i=1}^N \abs{(\xi,\phi_i)}^2 = \lambda_1 \norm{\xi}^2 =\lambda_1\\
+&= \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\phi_1)_{\R^N}}^2.
+\end{align*}
+Damit löst $\phi_1~(Op^1)$ und $\argmax (Op^1) = \lambda$.
+
+Suchen wir nach einem zweiten Vektor, welcher orthogonal auf $\phi_1$ steht, normiert ist und die Daten $\{u_i^N\}_{i=1}^n$ so gut wie möglich beschreibt, so müssen wir das folgende Optimierungsproblem lösen:
+\[
+\max\limits_{\psi\in\R^N} \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\psi)}^2, \text{ so dass } \norm{\psi}=1 \text{ und } (\psi,\phi_1)= 0,
+\]
+wobei $\norm{.} = \norm{.}_{\R^N}$ und $(.,.)=(.,.)_{\R^N}$.
+Die Definition der POD-Basis zeigt, dass $\phi_2$ eine Lösung von $(Op^2)$ ist und $\argmax (Op^2)=\lambda_2$ gilt.
+Im Detail löst $\phi_2$ die nOB1 (4.15) und für 
+\[
+\tilde{\psi}\sum_{i=2}^N (\tilde{\psi},\phi_i)\phi_i \in \spann\{\phi_1\}^\perp
+\]
+gilt:
+\[
+\frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,\tilde{\psi})}^2 \le \lambda_2 = \frac{1}{n} \sum_{j=1}^n \abs{(u_J^N,\phi_2)}^2.
+\]
+Schließlich zeigen wir mittels vollständiger Induktion, dass die in 4.24 definierte POD-Basis das Optimierungsproblem $(Op^l)$ löst.
+Für allgemeine $l$ betrachten wir dazu das Lagrange-Funktional: $\mathcal{L}:\underbracket{\R^N\dt{\times}\R^N}_{l-\text{mal}}\times \R^l\times \R^l \to \R$ definiert durch
+\[
+\mathcal{L}(\psi_1\dt{,}\psi_l,\Lambda) = \frac{1}{n} \sum_{i=1}^l\sum_{j=1}^n \abs{(u_j^N,\psi_i)}^2 + \sum_{i,j=1}^{l} \lambda_{ij}(\delta_{ij} -  (\psi_i,\psi_j)),
+\]
+für $\psi_1\dt{,}\psi_l\in \R^N$ und $\Lambda=((\lambda_{ij}))\in \R^{l\times l}$.
+Die nOB1 für $(Op^l)$ lauten dann
+\begin{align}
+\diff{\mathcal{L}}{\psi_k}(\psi_1\dt{,}\psi_l,\Lambda)\delta\psi_k = 0 ~\forall \delta\psi_k\in\R^N,~k\in \{1\dt{,}l\}.
+\end{align}
+Aus 
+\begin{align*}
+\diff{\mathcal{L}}{\psi_k}(\psi_1\dt{,}\psi_l,\Lambda)\delta\psi_k &= 2\cdot\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k)(u_j^N,\delta\psi_k) - \sum_{i=1}^l \delta_{ik}(\psi_i,\psi_k) - \sum_{i=1}^l \lambda_{ki} (\delta\psi_k,\psi_i)\\
+&= 2\cdot\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k)(u_j^N,\delta\psi_k) - \sum_{i=1}^l (\lambda_{ik}+\lambda_{ki})(\psi_i,\delta\psi_k)\\
+&= \enbrace{2\cdot\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k)u_j^N - \sum_{i=1}^l (\lambda_{ik}+\lambda_{ki})\psi_i,\delta\psi_k}
+\end{align*}
+und (4.16) schließen wir
+\begin{align}
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k)u_j^N = \frac{1}{2} \sum_{i=1}^l (\lambda_{ik}+\lambda_{ki})\psi_i \text{ in } \R^N ~\forall k\in\{1\dt{,}l\},
+\end{align}
+oder bzw.
+\begin{align}
+\frac{1}{n} UU^T \psi_k = \frac{1}{2} \sum_{i=1}^l (\lambda_{ik}+\lambda_{ki})\psi_i \text{ in } \R^N \forall k\in\{1\dt{,}l\}.
+\end{align}
+Wir zeigen nun mittels vollständiger Induktion, dass das Eigenwert-Problem aus 4.24 gerade den nOB1 für $(Op^l)$ entspricht.
+Für $l=1$ gilt: $k=1$. 
+Dann folgt aus (4.17):
+\[
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_1) u_j^N = \lambda_1\psi_1 \text{ in } \R^N \text{ mit } \lambda_1 =\lambda_{11}.
+\]
+Wir nehmen nun an, dass für $l\ge 1$ die nOB1 durch
+\begin{align}
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k) u_j^N = \lambda_k\psi_k \text{ in } \R^N ~\forall k\in\{1\dt{,}l\}
+\end{align}
+gegeben sind.
+Wir wollen nun zeigen, dass die nOB1 für $l+1$ durch
+\begin{align}
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k) u_j^N = \lambda_k\psi_k \text{ in } \R^N ~\forall k\in\{1\dt{,}l+1\}
+\end{align}
+gegeben sind.
+Aus (4.17) schließen wir
+\begin{align}
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_{l+1}) u_j^N = \frac{1}{2} \sum_{i=1}^{l+1} (\lambda_{i,l+1}+\lambda_{l+1,i})\psi_i \text{ in } \R^N.
+\end{align}
+Da $\{\psi_i\}_{i=1}^{l+1}$ POD-Basis (orthonormal als Lösung von (4.19)) und da $R_N$ selbstadjungiert folgt
+\begin{align*}
+0 &= \lambda_j(\psi_{l+1},\psi_j) = (\psi_{l+1},R_N\psi_j) = (R_N\psi_{l+1},\psi_j)\\
+&= \frac{1}{2} \sum_{i=1}^{l+1} (\lambda_{i,l+1}+\lambda_{l+1,i}) (\psi_i,\psi_j) = \frac{1}{2} (\lambda_{j,l+1}+\lambda_{l+1,j}).
+\end{align*}
+Damit folgt
+\begin{align}
+\lambda_{i,l+1} = \lambda_{l+1,i} \text{ für jedes } i\in\penbrace{1\dt{,}l}.
+\end{align}
+Einsetzen von (4.22) in (4.21) ergibt
+\begin{align*}
+\frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_{l+1}) u_j^N &= \frac{1}{2} \sum_{i=1}^{l} \underbracket{(\lambda_{i,l+1}+\lambda_{l+1,i})}_{=0}\psi_i + \lambda_{l+1,l+1}\psi_{l+1}\\
+&= \lambda_{l+1,l+1}\psi_{l+1}.
+\end{align*}
+Mit $\lambda_{l+1}=\lambda_{l+1,l+1}$ folgt dann (4.20).
+Zusammengefasst sind die nOB1 für $(Op^l)$ durch das Eigenwert-Problem
+\begin{align}
+R_N\psi_i = \lambda_i\psi_i \text{ für } i=1\dt{,}l
+\end{align}
+gegeben.
+Die in 4.24 definierte POD-Basis $\Phi_l=\penbrace{\phi_1\dt{,}\phi_l}$ löst (4.23).
+Der Beweis das $\{\phi_i\}_{i=1}^l$ eine Lösung von $(Op^l)$ ist und das $\argmax (Op^l)=\sum_{i=1}^l \lambda_i$ mit den Eigenwerten aus Satz 4.24 gilt, folgt analog zum Beweis für $(Op^1)$.
+\hfill $\square$
+
+\ssect{4.33 Folgerung}{(Optimalität der OPD-Basis)}
+Seien die Voraussetzungen von Satz 4.32 erfüllt und gilt $\rg(U)=d$, wobei $U=[u_1^N\dt{,}u_n^N]$.
+Sei $\hat{\Psi}_d=[\psi_1\dt{,}\psi_d]\in \R^{N,d}$ Matrix mit paarweise orthonormalen Spalten und die Darstellung der Spalten von $U$ in der Basis $\{\psi_i\}_{i=1}^d$ sei gegeben durch
+\[
+U=\hat{\Psi}_d\cdot C_d,\text{ wobei } (C_d)_{ij} := (\psi_i,u_j^N)~1\le i\le d,~1\le j\le n.
+\]
+Dann gilt für jedes $l\in \{1\dt{,}d\}$:
+\begin{align}
+\norm{U-\hat{\Phi}_lB_l}_F \le \norm{U-\hat{Psi}_lC_l}_F,
+\end{align}
+wobei $\hat{\Phi}_l =[\phi_1\dt{,}\phi_d]$ mit $\phi_i$ POD-Basis aus 4.24 und $(B_l)_{ij}=(\phi_i,u_j^N)$.
+Hierbei bezeichnet $\norm{.}_F$ in (4.24) die \bet{Frobeniusnorm}, welche durch
+\[
+\norm{A}_F = \sqrt{\sum_{i=1}^{N}\sum_{j=1}^{n}\abs{A_ij}^2}= \sqrt{\spur(A^TA)} \text{ für } A\in \R^{N\times n}
+\]
+gegeben ist.
+Ferner bezeichnet die Matrix $\hat{\Psi}_d$ die $l\le d$ ersten Spalten von $\hat{\Psi}$, $B_l$ die ersten $l$-Zeilen von $B$ und analog für $\hat{\Phi}_l$ und $C_l$.\\
+
+\bet{Beweis:}\\
+Da die Spalten von $\hat{\Psi}_d$ orthonormal sind, folgt 
+\begin{align*}
+\norm{u-\hat{\Psi}_lC_l}_F^2 &= \norm{\hat{\Psi}_d(C_d-C_l^0)}_F^2\\
+&\bgl{\Psi^T\Psi=\id} \norm{C_d-C_l^0}_F^2\\
+&= \sum_{i=l+1}^d \sum_{j=1}^n \abs{(C_l)_{ij}}^2,
+\end{align*}
+wobei $C_l^0\in \R^{d\times n}$ aus $C\in \R^{d\times n}$ durch Ersetzen der letzten $d-l$ Reihen durch $0$ hervor geht.
+Da wegen
+\begin{align*}
+\frac{1}{n} uu^Tv &= R_Nv = R_N \enbrace{\sum_{i=1}^{N}(v,\phi_i)\phi_i}\\
+&= \sum_{i=1}^{N} (v,\phi_i)R_N\phi_i = \sum_{i=1}^N \lambda_i(v,\phi_i)\phi_i\\
+&= \sum_{i=1}^d \lambda_i(v,\phi_i)\phi_i,
+\end{align*}
+folgt, dass $u_j^N\in \bild(R_N)=\spann \{\phi_i\}_{i=1}^d$.
+Daher gilt $U=\hat{\Phi}_dB_d$ und damit
+\begin{align}
+\begin{split}
+\frac{1}{n} \norm{U-\hat{\Phi}_lB_l}_F^2 &= \frac{1}{n} \norm{\hat{\Phi}_D(B_d-B_L^0)}_F^2 = \norm{B_d-B_L^0}_F^2\\
+&= \frac{1}{n} \sum_{i=l+1}^d \sum_{j=1}^n \abs{(B_d)_{ij}}^2 = \frac{1}{n} \sum_{i=l+1}^d \sum_{j=1}^n \abs{(u_j^N,\phi_i)}^2\\
+&= \frac{1}{n} \sum_{i=l+1}^d \sum_{j=1}^n \bigg((u_j^N,\phi_i)u_j^N,\phi_i\bigg)\\
+&= \sum_{i=l+1}^d (R_N\phi_i,\phi_i) = \sum_{i=l+1}^d \lambda_i.
+\end{split}
+\end{align}
+Damit gilt:
+\[
+\frac{1}{n} \norm{U}_F^2 = \frac{1}{n} \norm{\hat{\Psi}_dC_d}_F^2 = \frac{1}{n} \norm{C_d}_F^2 = \frac{1}{n} \sum_{i=1}^d \sum_{j=1}^n \abs{(C_d)_{ij}}^2
+\]
+und
+\[
+\frac{1}{n} \norm{U}_F^2 = \frac{1}{n} \norm{\hat{\Phi}_dB_d}_F^2 = \frac{1}{n} \norm{B_d}_F^2 = \frac{1}{n} \sum_{i=1}^d \sum_{j=1}^n \abs{(B_d)_{ij}}^2 = \sum_{i=1}^d \lambda_i.
+\]
+Da die Vektoren $\phi_1\dt{,}\phi_l$ aus Satz 4.32 des Optimierungsproblems $(Op^l)$ lösen, folgt:
+\begin{align*}
+\frac{1}{n} \norm{U - \hat{\Phi}_lB_l}_F^2 &= \sum_{i=l+1}^{d} \lambda_i = \sum_{i=1}^{d} \lambda_i -\sum_{i=1}^{l} \lambda_i \bgl{(4.13)} \frac{1}{n} \norm{U}_F^2 - \frac{1}{n} \sum_{i=1}^{l}\sum_{j=1}^n \abs{(u_j^N,\phi_i)}^2\\
+&\stackrel{\phi_i \text{ lösen }(Op^l)}{\le} \frac{1}{n} \norm{U}_F^2 - \frac{1}{n} \sum_{i=1}^{l}\sum_{j=1}^n \abs{(u_j^N,\psi_i)}^2\\
+&= \frac{1}{n} \sum_{i=1}^{d}\sum_{j=1}^n \abs{(C_d)_{ij}}^2 -  \frac{1}{n} \sum_{i=1}^{l}\sum_{j=1}^n \abs{(C_d)_{ij}}^2\\
+&= \frac{1}{n} \sum_{i=l+1}^{l}\sum_{j=1}^n \abs{(C_d)_{ij}}^2 = \frac{1}{n} \norm{U-\hat{\Psi}_lC_l}_F^2.\\
+\end{align*}
+\hfill $\square$
+
+\ssect{4.34 Bemerkung}{}
+Folgerung 4.33 liefert direkt, dass
+\[
+\frac{1}{n} \sum_{j=1}^n \norm{u_j^N - \sum_{k=1}^{l} (u_j^N,\phi_k)\phi_k }^2 \le \frac{1}{n} \sum_{j=1}^n \norm{u_j^N - \sum_{k=1}^{l} (u_j^N,\psi_k)\psi_k }^2
+\]
+für jede andere Menge $\{\psi_i\}_{i=1}^l$ paarweise orthonormaler Vektoren.
+Damit folgt aus Folgerung 4.33, dass die in 4.24 definierte POD-Basis auch das folgende Optimierungsproblem löst:
+\[
+\min\limits_{\psi_1\dt{,}\psi_l\in\R^N} \frac{1}{n} \sum_{j=1}^n \norm{u_j^N - \sum_{k=1}^{l} (u_j^N,\psi_k)\psi_k }^2, \text{ so dass } (\psi_i,\psi_j) = \delta_{ij} \text{ für } 1\le i,j \le l.
+\]
+Die nOB1 sind identisch mit denen von $(Op^l)$.
+
+\ssect{4.35 Satz}{(Berechnung der POD-Basis über die Gram-Matrix)}
+Sei $X_N$ HR von Dimension $N$ und $\{u_i^N\}_{i=1}^n\subset X_N$.
+Die Matrix $\mathbb{K}\in \R^{n\times n}$ definiert durch
+\begin{align}
+\mathbb{K}_{ij} := (u_i^N,u_j^N)
+\end{align}
+heißt \bet{Gram-Matrix}.
+Dann sind äquivalent:
+\begin{enumerate}[(1)]
+	\item $\phi\in X_N$ ist Eigenvektor zu $R_N$ aus Satz 4.24 zum Eigenwert $\lambda>0$ mit Norm1 und einer Darstellung
+	\[
+	\phi = \sum_{i=1}^n a_i u_i^N \text{ mit } a\in \ker (\mathbb{K})^{\perp}.
+	\]
+	\item $a=(a_1\dt{,}a_n)\in \R^n$ ist Eigenvektor von $\frac{1}{n} \mathbb{K}$ zu $\lambda>0$, mit Norm $\frac{1}{\sqrt{n\lambda}}$.
+\end{enumerate}
+
+\bet{Beweis:} [Haasdonk, Satz 5.7, S.53f].
+\hfill $\square$
+
+\ssect{4.36 Bemerkung}{}
+Die POD kann daher entweder als teures EW-Problem für$R_N$ in $X_N$ (Komplexität $\mathcal{O}(N^3)$) oder, meist günstiger, als EW-Problem für $\mathbb{K}$ (Komplexität $\mathcal{O}(n^3)$) ermittelt werden.
+Letzteres wir auch \bet{'Method of snapshots'} genannt.
+
+\ssect{4.37 Lemma}{(Berechnung der POD-Basis mittels der Singulärwertzerlegung für $X_N=\R^N$)}
+Sei $X_N0\R^N, [u_1^N\dt{,}u_n^N] =U \in \R^{N\times n}$ Snapshot-Matrix mit Rang $d$ und $U=\Psi DV^T$ eine Singulärwertzerlegung mit $\Psi\in \R^{N\times d}$ mit orthonormalen Spalten, $D=\diag(\sigma_1\dt{,}\sigma_d)\in \R^{d\times d}$ und $V\in \R^{n\times d}$ mit orthonormalen Spalten.
+Falls $\sigma_1>\sigma_2\dt{>}0$ echt fallend, so ist $\Psi=\Phi$ bis auf Vorzeichen.\\
+
+\bet{Beweis:}\\
+Sei $\Psi=[\psi_1\dt{,}\psi_d]$, $\psi_i$ Eigenvektor von $R_N$ wegen
+\[
+R_N\psi_i = \frac{1}{n} UU^T \psi_i = \frac{1}{n} \Psi D \underbracket{V^TV}_{=\id}D \underbracket{\Psi^T\psi_i}_{e_i} = \frac{1}{n} \Psi DD e_i = \frac{1}{n} \sigma_i^2\psi_i.
+\]
+Die Eigenwerte $\frac{1}{n}\sigma_i^2$ sind monoton fallend, also identisch sortiert wie Spektralzerlegung von $R_N$, das heißt $\frac{1}{n} \sigma_i^2 = \lambda_i$ und $\psi_i=\phi_i$ oder $\psi_i=-\phi_i$.
 
 
 
@@ -1554,10 +2496,5 @@ R(\mu) = \sum_{q=1}^{Q_R} \theta_R^q(\mu)R_R^q.
 
 
 \cleardoubleoddemptypage
-\pagenumbering{Alph}
-\setcounter{page}{1}
 
-
-\printindex
-\listoffigures
-\end{document}
+\end{document} 
