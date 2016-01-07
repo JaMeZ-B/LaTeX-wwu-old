@@ -577,7 +577,7 @@
 	\end{align}
 \end{beweis}
 
-\begin{lemma}[label=sec3:lem2]
+\begin{lemma}[label=sec3:lem2,{name=[Isomorphismus für das Produkt mit $D^1$]}]
 	Sei $\xi \in H^1 \enbrace*{D^1,\partial D^1;R}$ ein Erzeuger. Dann ist für jeden Raum $X$ die Abbildung 
 	\mapdef{H^p(X;R)}{H^{p+1} \enbrace*{D^1 \times X, \partial D^1 \times X;R}}{\eta}{\xi \times \eta}{}
 	ein Isomorphismus.
@@ -590,7 +590,7 @@
 			H^1(D^1,\partial D^1;R) \otimes H^p(X;R) \rar["\times"] & H^{p+1} (D^1 \times X,\partial D^1 \times X;R)
 		\end{tikzcd}
 	\]
-	Behauptung: Beide Spalten sind kurz exakt. \todo{Revision 3}
+	Behauptung: Beide Spalten sind kurz exakt.
 	Betrachte dazu folgenden Ausschnitt aus der Paarsequenz des Paares $(D^1, \partial D^1)$:
 	\[
 		\begin{tikzcd}[cramped]
@@ -601,20 +601,27 @@
 	Sei weiter $p \colon D^1 \to \set*{-1}$ die Projektion. 
 	Dann gilt $p^* \circ i_-^* \circ j^* = \id_{H^0(D^1;R)}$. 
 	Insbesondere spaltet die Sequenz und bleibt exakt nach Anwenden des Funktors ${-}\otimes H^p(X;R)$. 
-	Genauso überlegt man sich, dass die Paarfolge\todo{Warum da gleich die Nullabbildung steht, ist mir noch nicht klar}
+	Genauso überlegt man sich, dass die Paarfolge
 	\[
 		\begin{tikzcd}
-			\ldots \rar & H^p \enbrace*{D^1\times X, \partial D^1\times X; R}\rar["0"] & H^p \enbrace*{D^1 \times X;R}\rar & H^p \enbrace*{\partial D^1 \times X;R}\rar & \ldots 
+			\ldots \rar & H^p \enbrace*{D^1\times X, \partial D^1\times X; R}\rar["j^*"] & H^p \enbrace*{D^1 \times X;R}\rar["i^*"] & H^p \enbrace*{\partial D^1 \times X;R}\rar & \ldots 
 		\end{tikzcd}
 	\]
 	in eine kurze exakte Folge 
 	\[
 		\begin{tikzcd}
-			0 \rar & H^p \enbrace*{D^1\times X;R} \rar & H^p \enbrace*{\partial D^1 \times X;R} \rar & H^{p+1} \enbrace*{D^1 \times X,\partial D^1 \times X;R} \rar & 0
+			0 \rar & H^p \enbrace*{D^1\times X;R} \rar["i^*"] & H^p \enbrace*{\partial D^1 \times X;R} \rar["\partial"] \lar[bend left,"s^*"'] & H^{p+1} \enbrace*{D^1 \times X,\partial D^1 \times X;R} \rar & 0
 		\end{tikzcd}
 	\]
-	zerfällt.
-	Die ersten zwei $\times$-Produkte sind Isomorphismen. Dies folgt für das erste aus $H^0(D^1)\cong R$ und der Betrachtung des Erzeugers $1_R \in R$. Für das zweite $\times$-Produkt betrachte \todo{Diagramm vervollständigen}
+	zerfällt: Sei dazu $s \colon D^1 \times X \to \partial D^1 \times X$ gegeben durch $(t,x) \mapsto (0,x)$ und $i \colon \partial D^1 \times X \hookrightarrow D^1 \times X$ die Inklusion.
+	Dann ist $i \circ s$ homotop zu $\id_{D^1 \times X}$, also $s^* \circ i^*=\id$ in Kohomologie und mit der Exaktheit folgt $j^*=0$. $s^*$ ist die gesuchte Spaltung.\todo{Revision 3}
+	
+	Die ersten zwei $\times$-Produkte sind Isomorphismen. 
+	Dies folgt für das erste aus $H^0(D^1;R)\cong R$ und der Betrachtung des Erzeugers $1_R \in R$, denn für diesen gilt $p_{D^1}^*(1_R)=1_{D^1\times X}$ und somit
+	\[
+		p_{D^1}^*(1_R) \cupp p_{X}^*(\eta) = p_{X}^*(\eta)
+	\]
+	Für das zweite $\times$-Produkt betrachte \todo{Diagramm vervollständigen}
 	\[
 		\begin{tikzcd}
 			H^0(\set*{-1}) \otimes H^p(X) \dar["(p_{-1})^* \otimes \id"] & \\
@@ -622,7 +629,6 @@
 			H^1(D^1,\partial D^1) \otimes H^p(X) & \mbox{ }
 		\end{tikzcd}
 	\]
-	
 	Nach \autoref{sec3:lem1} kommutiert das Diagramm und damit ist auch das dritte $\times$-Produkt ein Isomorphismus.
 \end{beweis}
 
@@ -792,7 +798,7 @@
 	$\lambda< \lambda'$ und $a_\lambda^j \cdot a_\lambda^{j'} = a_\lambda^{j+j'}$ für $\abs*{a_\lambda}$ ungerade.
 \end{definition}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[Polynomring und äußere Algebra]}]
 	Sind alle $\abs*{a_i}$ gerade, so ist $\Lambda_R \benbrace*{a_1,\ldots,a_n}$ der Polynomring über $R$ in den Variablen $a_1, \ldots ,a_n$.
 	Sind alle $\abs*{a_i}$ ungerade, so ist $\Lambda_R \benbrace*{a_1, \ldots a_n}$ die \Index{äußere Algebra} in den Variablen $a_1, \ldots , a_n$.
 	
@@ -805,7 +811,7 @@
 	Das leere Produkt der $a_i$ liefert ein Einselement.
 \end{beispiel}
 
-\begin{satz}
+\begin{satz}[{name=[Kohomologie des Torus]}]
 	Sei $R$ ein kommutativer Ring. Sei $\xi \in H^1 \enbrace*{S^1;R}$ ein Erzeuger. Sei $p_i \colon T^n = (S^1)^n \to S^1$ die Projektion auf die $i$-te Koordinate. Sei 
 	$\xi_i := (p_i)^*(\xi) \in H^1(T^n;R)$. Dann ist 
 	\[
@@ -814,11 +820,12 @@
 	als graduiert kommutative Ringe.
 \end{satz}
 \begin{beweis}
-	Per Induktion nach $n$. Für $n=0$ ist die Aussage klar. Für den Induktionsschritt erinnern wir uns daran, dass $\xi \times {-} \colon H^p(T^{n-1};R) \to H^p(T^n;R)$ ein 
+	Per Induktion nach $n$. Für $n=0$ ist nichts zu zeigen. 
+	Für den Induktionsschritt erinnern wir uns daran, dass $\xi \times {-} \colon H^p(T^{n-1};R) \to H^p(T^n;R)$ ein 
 	Isomorphismus ist. Damit folgt die Behauptung.
 \end{beweis}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[Kohomologieklassen des Torus]}]
 	$\xi_1 \cdots \xi_n$ ein Erzeuger ein Erzeuger von $H^n(T^n;R)$.
 \end{beispiel}
 % section 4 (end)
@@ -1799,7 +1806,7 @@ Ab jetzt: $R$ kommutativ!
 \begin{definition}[{name=[Schnittform]}]
 	Sei $M$ eine $R$-orientierte geschlossene $n$-Mannigfaltigkeit mit Fundamentalklasse $\mu_M \in H_n(M;R)$.
 	Die Abbildung
-	\mapdef{\sprod*{\enspace}{\enspace}_R \colon H^k(M) \otimes H^{n-k}(M)}{R}{\xi \otimes \eta}{(\xi \cupp \eta(\mu_M))}{}
+	\mapdef{\sprod*{\enspace}{\enspace}_R \colon H^k(M) \otimes H^{n-k}(M)}{R}{\xi \otimes \eta}{(\xi \cupp \eta)(\mu_M)}{}
 	heißt die \Index{Schnittform} von $M$. \todo{Revision 10}
 \end{definition}
 
@@ -1837,7 +1844,7 @@ Ab jetzt: $R$ kommutativ!
 	\end{align}
 	Ihre Komposition bildet $\xi \in H^k(M;K)$ auf die Abbildung
 	\[
-		\eta \longmapsto \xi \enbrace*{\eta \capp \mu} = \epsilon \enbrace[\big]{\xi \capp (\eta \capp \mu)} = \epsilon \enbrace[\big]{(\xi \cupp \eta) \capp \mu} = (\xi \cupp \eta)(\mu) = \sprod*{\xi}{\eta}_K
+		\eta \longmapsto \xi \enbrace*{\eta \capp \mu} \StackText{\ref{bem_augmentation_cap}}{=} \epsilon \enbrace[\big]{\xi \capp (\eta \capp \mu)} = \epsilon \enbrace[\big]{(\xi \cupp \eta) \capp \mu} = (\xi \cupp \eta)(\mu) = \sprod*{\xi}{\eta}_K
 	\]
 	ab und es folgt die Behauptung.
 \end{beweis}
