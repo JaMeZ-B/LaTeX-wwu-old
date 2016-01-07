@@ -614,7 +614,7 @@
 		\end{tikzcd}
 	\]
 	zerfällt: Sei dazu $s \colon D^1 \times X \to \partial D^1 \times X$ gegeben durch $(t,x) \mapsto (0,x)$ und $i \colon \partial D^1 \times X \hookrightarrow D^1 \times X$ die Inklusion.
-	Dann ist $i \circ s$ homotop zu $\id_{D^1 \times X}$, also $s^* \circ i^*=\id$ in Kohomologie und mit der Exaktheit folgt $j^*=0$. $s^*$ ist die gesuchte Spaltung.\todo{Revision 3}
+	Dann ist $i \circ s$ homotop zu $\id_{D^1 \times X}$, also $s^* \circ i^*=\id$ in Kohomologie und mit der Exaktheit folgt $j^*=0$. Die gesuchte Spaltung ist $s^*$.\todo{Revision 3}
 	
 	Die ersten zwei $\times$-Produkte sind Isomorphismen. 
 	Dies folgt für das erste aus $H^0(D^1;R)\cong R$ und der Betrachtung des Erzeugers $1_R \in R$, denn für diesen gilt $p_{D^1}^*(1_R)=1_{D^1\times X}$ und somit
@@ -639,11 +639,11 @@
 	Die Paarfolge zu $(S^1 \times X, \set*{\pt} \times X)$ zerfällt in kurze exakte Folgen
 	\[
 		\begin{tikzcd}
-			H^p(S^1 \times X, \set*{\pt} \times X;r) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R}
+			H^p(S^1 \times X, \set*{\pt} \times X;R) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R}
 		\end{tikzcd}
 	\]
 	Die Surjektivität folgt, da $\pi(\lambda,x) = (\pt,x)$ einen Spalt induziert. Damit folgt $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^p(S^1 \times X, \set*{\pt} \times X;R)$.
-	Die Behauptung folgt mittels Ausschneidung:
+	Die Behauptung folgt mittels Ausschneidung und Homotopieinvarianz:
 	\[
 		H^p \enbrace*{S^1 \times X, \set*{\pt} \times X;R} \cong H^p \enbrace*{D^1 \times X, \partial D^1 \times X;R} \StackText{\ref{sec3:lem2}}{\cong} H^{p-1}(X;R) \qedhere
 	\]
@@ -2261,7 +2261,7 @@ Ab jetzt: $R$ kommutativ!
 \begin{satz}
 	Sei 
 	\(
-		\begin{tikzcd}[cramped]
+		\begin{tikzcd}[cramped,sep=small]
 			0 \rar & M \rar & M' \rar & M'' \rar & 0
 		\end{tikzcd}
 	\)
@@ -2417,6 +2417,7 @@ Ab jetzt: $R$ kommutativ!
 \section{Das Tensorprodukt und $\Hom$ als Kettenkomplexe} % (fold)
 \label{sec:das_tensorprodukt_und_hom_als_kettenkomplexe}
 
+\todo[inline]{Revision 13}
 \begin{definition}
 	Sei $R$ ein Ring, $C_*$ ein Kettenkomplex von $R$-Rechtsmoduln und $D_*$ ein Kettenkomplex von $R$-Linksmoduln.
 	Dann definieren wir den $\mathbb{Z}$-Kettenkomplex $(C \otimes_R D)_*$ durch 
@@ -2526,12 +2527,93 @@ Ab jetzt: $R$ kommutativ!
 	Für den Isomorphismus $H_*(P \otimes_R C_*) \to H_*(V \otimes_R C_*)$ war es wichtig, dass die Homologie von $\enbrace*{P_* \otimes C_i,\partial^P \otimes \id}$ in Grad $0$ konzentriert ist und damit genau $V \otimes C_i$ ist (dies entspricht den Spalten in \cref{fig:tensor:ketten}).
 	Umgekehrt ist die Homologie von $\enbrace*{P_p \otimes C_*, \id \otimes \partial^C}$ isomorph zu $P_p \otimes H_*(C_*)$.
 	Wir erhalten also Komplexe $\enbrace*{P_* \otimes H_n(C_*), \partial^P \otimes \id}$ deren Homologie genau $\Tor^R_* \enbrace*{V, H_n(C_*)}$ ist.
-	Dies stellt einen Zusammehang zwischen $H_*(V \otimes C_*)$ und $\Tor_*^R \enbrace*{V, H_*(C_*)}$ her.
+	Dies stellt einen Zusammenhang zwischen $H_*(V \otimes C_*)$ und $\Tor_*^R \enbrace*{V, H_*(C_*)}$ her.
 \end{bemerkung}
+
+\begin{definition}[{name=[Doppelkomplex und Totalkomplex]}]
+	Ein \bet{$R$-Doppelkomplex}\index{Doppelkomplex} $C_{**}$ ist eine Folge von $R$-Moduln $C_{p,q}$ zusammen mit $R$-linearen Abbildungen $\partial^h \colon C_{p,q} \to C_{p-1,q}$ und $\partial^v \colon C_{p,q} \to C_{p,q-1}$, für die gelten:\marginnote{\emph{v}ertikal, \emph{h}orizontal}
+	\[
+		\partial^h \circ \partial^h =0 \qquad \partial^v \circ \partial^v=0 \qquad \partial^v \circ \partial^h + \partial^h \circ \partial^v =0
+	\]
+	Der \Index{Totalkomplex} von $\enbrace*{C_{*,*}, \partial^v,\partial^h}$ ist der Kettenkomplex $T(C_{**})$ mit $T(C_{**})_n := \bigoplus_{p+q=n} C_{p,q}$ und $\partial^T := \partial^v + \partial^h$.
+\end{definition}
+
+\begin{beispiel}[{name=[Tensorprodukt als Totalkomplex]}]
+	Das Tensorprodukt von Kettenkomplexen $C_*$ und $D_*$ ist der Totalkomplex eines Doppelkomplexes, dessen $(p,q)$-ter Modul $C_p \otimes_R D_q$ ist mit $\partial^v = \partial^C \otimes \id$, $\partial^h = \pm \id \otimes \partial^D$.
+\end{beispiel}
+
+\begin{definition}[{name=[Filtrierung]}]
+	Sei $C_*$ ein Kettenkomplex. Eine \Index{Filtrierung} auf $C_*$ ist eine Folge 
+	\[
+		0 = F_0 C_* \subseteq F_1 C_*  \subseteq F_2 C_* \subseteq \ldots \subseteq F_n C_* \subseteq \ldots \subseteq C_*
+	\] 
+	von  Unterkettenkomplexen mit $\bigcup_{p} F_p C_* = C_*$.
+\end{definition}
+
+\begin{beispiel}[{name=[Filtrierungen]}]
+	\leavevmode
+	\begin{itemize}
+		\item Ist $X$ ein CW-Komplex, so erhalten wir eine Filtrierung auf dem singulären Kettenkomplex mit $F_p \enbrace*{C^\sing_*(X;R)} := C_*^\sing \enbrace*{X^\ssbrace{p};R}$.
+		\item Sei $C_{**}$ ein Doppelkomplex. 
+		Dann erhalten wir zwei Filtrierungen $F^v$ und $F^h$ auf $T(C_{**})$ mit 
+		\[
+			F^v_p \enbrace[\big]{T(C_{**})} = T \enbrace[\big]{C_{*\le p,*}} \qquad F^h_p \enbrace[\big]{T(C_{**})} := T \enbrace[\big]{C_{*,*\le p}}
+		\]
+	\end{itemize}
+\end{beispiel}
+
+\begin{bemerkung}
+	Sei $(C_{**},\partial^v,\partial^h)$ ein Doppelkomplex.
+	Sei $E^0_{**}= C_{**}$.
+	$\partial^v$ ist eine Randabbildung auf jedem $C_{p*}$.
+	Wir setzen $E^1_{p*} := H_*\enbrace*{E^0_{p*},\partial^v}$.
+	$\partial^h$ induziert eine Randabbildung $\overline{\partial^h}$ auf jedem $E^1_{*q}$. Wir setzen also
+	\[
+		E^2_{*,q} := H_* \enbrace*{E^1_{*,q},\overline{\partial^h}}
+	\]
+	Wir erhalten weitere Randabbildungen $d^2_{p,q} \colon E^2_{p,q} \to E^2_{p-2,q+1}$ wie folgt: Sei $z \in E^2_{p,q}$, also $z=[x]$ mit $x \in E^0_{p,q}$ und 
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $\partial^v x =0$
+		\item Es existiert ein $x' \in E^0_{p-1,q+1}$ mit $\partial^v x' = \partial^h x$
+	\end{enumerate}
+	Setze nun $d^2_{p,q}(z) := \benbrace*{\partial^h x'} \in E^2_{p-2,q+1}$.
+\end{bemerkung}
+\newpage
 % section das_tensorprodukt_und_hom_als_kettenkomplexe (end)
 
+\section{Spektralfolgen} % (fold)
+\label{sec:14}
 
+\begin{definition}[{name=[homologische Spektralfolge]}]
+	Eine \Index{homologische Spektralfolge} (im 1ten Quadranten) von $R$-Moduln besteht aus folgenden Daten:
+	\begin{enumerate}[1.]
+		\item Eine Folge von $R$-Moduln $E^r_{p,q}$ für $r,p,q\ge 0$
+		\item $R$-lineare Abbildungen $d^r_{p,q} \colon E_{p,q}^r \to E^r_{p-r,q+r-1}$ mit $d^r_{p-r,q+r-1} \circ d^r_{p,q}=0$
+		\item Isomorphismen zwischen $E^{r+1}_{p,q}$ und der Homologie von $E^r_{*,*}$ bezüglich $d^r_{*,*}$, genauer:
+		\[
+			E^{r+1}_{p,q} \cong \frac{\ker d^r_{p,q} \colon E^r_{p,q} \to E^r_{p-r,q+r-1}}{\im d^r_{p+r,q-r+1} \colon E^r_{p+r,q-r+1} \to E^r_{p,q}}
+		\]
+		$E^r_{*,*}$ heißt die \bet{$r$-Seite}\index{Spektralfolge!Seite} der Spektralfolge.
+	\end{enumerate}
+\end{definition}
 
+\begin{bemerkung}
+	\leavevmode
+	\begin{itemize}
+		\item Spektralfolgen bilden eine Kategorie, in der ein Morphismen 
+		\[
+			f = \enbrace*{f^r_{p,q}} \colon \enbrace*{E^r_{p,q},d^r_{p,q}} \longrightarrow \enbrace*{{E'}^r_{p,q},{d'}^r_{p,q}}
+		\]
+		aus einer Folge von $R$-linearen Abbildungen $f^r_{p,q} \colon E^r_{p,q} \to {E'}^r_{p,q}$ besteht, sodass $d^r_{p,q} \circ f^r_{p,q} = f^r_{p-r,q+r-1} \circ d^r_{p,q}$ und $f^{r+1}_{p,q} = H_* \enbrace*{f^r_{p,q}}$ für alle $r,p,q\ge 0$.
+		\item Für $r > \max{p,q+1}$ sind $d^r_{p,q}$ und $d^r_{p+r,q-r+1}$ trivial und daher gilt 
+		\[
+			E^r_{p,q} \cong E^{r+1}_{p,q} \cong E^{r+2}_{p,q} \cong \ldots
+		\]
+		Wir schreiben oft $E^\infty_{p,q}$ für diesen stabilen Wert von $E^r_{p,q}$.
+	\end{itemize}
+\end{bemerkung}
+
+% section 14 (end)
 
 
 \cleardoubleoddemptypage
