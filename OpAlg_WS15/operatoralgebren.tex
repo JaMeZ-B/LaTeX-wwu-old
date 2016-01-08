@@ -996,9 +996,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \label{sec:4}
 
 \begin{proposition}[{name=[aus abgeschlossenem Ideal eine $C^*$-Unteralgebra bauen]},label=prop:41]
-	Sei $L$ ein abgeschlossenes Linksideal in einer $C^*$-Algebra $A$.
-	Dann existiert ein aufsteigendes Netz $(e_\lambda)_\Lambda \subset L \cap A_+^1$ mit $a =\lim_\lambda a e_\lambda$ für $a \in L$. 
-	$L \cap L^* \subset A$ ist eine $C^*$-Unteralgebra.
+	Sei $L$ ein abgeschlossenes Linksideal in der $C^*$-Algebra $A$.
+	Dann existiert ein aufsteigendes Netz $(e_\lambda)_\Lambda \subset L \cap A_+^1$ mit $a =\lim_\lambda a e_\lambda$ für $a \in L$ und $L \cap L^* \subset A$ ist eine $C^*$-Unteralgebra.
 \end{proposition}
 \begin{beweis}
 	Sei $B := L \cap L^*$, dann ist $B \subset A$ eine $C^*$-Unteralgebra:
@@ -1104,24 +1103,24 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\mapdef{\dot{\pi}\colon\sfrac{A}{\ker \pi_n}}{B}{a + \ker \pi}{\pi(a)}{}
 	$\dot{\pi}$ ist injektiv, also isometrisch nach \autoref{prop:45}.
 	Damit ist $\pi(A)$ vollständig und $\pi(A) \subset B$ abgeschlossen.
-	Also ist $\pi(A)$ eine $C^*$-Unteralgebra von $B$.\todo{Revision 4}
+	Also ist $\pi(A)$ eine $C^*$-Unteralgebra von $B$.
 \end{beweis}
 
-\begin{proposition}
+\begin{proposition}[{name=[Summe von C*-Unteralgebra mit Ideal]}]
 	Sei $A$ eine $C^*$-Algebra, $B \subset A$ eine $C^*$-Unteralgebra und $J \lhd A$ ein Ideal. Dann ist $B+J \subset A$ eine $C^*$-Unteralgebra.
 \end{proposition}
 \begin{beweis}
-	\emph{Übung!}
+	\emph{Übung! (Blatt 7, Aufgabe 1)}
 \end{beweis}
 
-\begin{definition}[{name=[hereditär]}]
+\begin{definition}[{name=[hereditäre C*-Unteralgebra]}]
 	Eine $C^*$-Unteralgebra $B \subset A$ heißt \Index{hereditär}, $B \subher A$, falls gilt
 	\[
-		a \in A_+, b \in B_+, a \le b \Longrightarrow a \in B
+		a \in A_+, b \in B_+, \enspace a \le b \Longrightarrow a \in B
 	\]
 \end{definition}
 
-\begin{satz}[label=satz:49]
+\begin{satz}[label=satz:49,{name=[Bijektion abgeschlossene Linksideale und hereditäre C*-Algebren]}]
 	Für eine $C^*$-Algebra $A$ definiert
 	\[
 		\begin{array}{rcl}
@@ -1137,24 +1136,43 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\begin{align}
 		(a^*+b^*)(a+b) \le (a^*+b^*)(a+b)+ (a-b)^*(a-b) = 2a^*a + 2b^*b \in B
 	\end{align}
-	also $(a^*+b^*)(a+b) \in B$ und somit $a+b \in L_B$. 
+	also $(a^*+b^*)(a+b) \in B$, da $B$ hereditär ist, und somit $a+b \in L_B$. 
 	Für $a \in A$ und $b \in L_B$ gilt
 	\begin{align}
 		(ab)^* ab = b^*a^* ab \le b^* \enbrace*{\norm*{a^*a}\cdot \ind_{A^\simm}} b = \norm*{a^*a} b^*b \in B
 	\end{align}
 	Da $B$ hereditär ist, folgt $(ab)^*ab \in B$ und somit $ab \in L_B$. 
-	Also ist $L_B$ wirklich ein Linksideal und $L_B \subset A$ ist abgeschlossen.
+	Also ist $L_B$ wirklich ein Linksideal und $L_B \subset A$ ist abgeschlossen, da $L_B$ das Urbild von $B$ unter $a \mapsto a^*a$ ist.
 	
 	Mit \autoref{prop:41} folgt, dass $L_B \cap L_B^* \subset A$ eine $C^*$-Algebra ist. Es gilt
 	\[
 		0 \le b \in L_B \cap L_B^* \Longrightarrow 0 \le b^{\sfrac{1}{2}} \in L_B \cap L_B^*
 	\]  
-	Also ist $b \in B$ und $L_B \cap L_B^* \subset B$. 
-	Weiter ist klar, dass $B \subset L_B \cap L_B^*$, also gilt insgesamt $B=L_B \cap L_B^*$ und die erste Verknüpfung entspricht der Identität auf der rechten Seite. 
-	Die andere ist eine Übung (mit approximativer Eins für $L\cap L^*$).
+	Also ist $b \in B$ und somit $L_B \cap L_B^* \subset B$. 
+	Weiter ist klar, dass $B \subset L_B \cap L_B^*$ ist, also insgesamt $B=L_B \cap L_B^*$ gilt. 
+	Die Verknüpfung $B \mapsto L_B \mapsto L_B \cap L_B^* $ entspricht also der Identität.
+	
+	Für die zweite Verknüpfung verifizieren wir zunächst, dass $L \cap L^*$ eine hereditäre $C^*$-Unteralgebra ist: 
+	Nach \autoref{prop:41} müssen wir dafür nur noch zeigen, dass $L \cap L^*$ hereditär ist.
+	Sei dazu $a \in A_+$ und $0 \le a \le b$ für ein $b \in L \cap L^*$. 
+	Sei $(e_\lambda)_\Lambda$ ein Netz wie in \autoref{prop:41}. Es gilt
+	\(
+		0 \le (\ind-e_\lambda)a(\ind - e_\lambda) \le (\ind -e_\lambda) b (\ind -e_\lambda)
+	\)
+	für alle $\lambda \in \Lambda$. Damit erhalten wir
+	\[
+		\norm[\big]{a^{\sfrac{1}{2}}(\ind -e_\lambda)}^2= \norm[\big]{(\ind-e_\lambda)a(\ind -e_\lambda)} \le \norm[\big]{(\ind-e_\lambda)b(\ind -e_\lambda)} \le \norm[\big]{b(\ind -e_\lambda)}
+	\]
+	Damit ist $a^{\sfrac{1}{2}}=\lim_\lambda a^{\sfrac{1}{2}} e_\lambda$ und damit $a^{\sfrac{1}{2}} \in L$, da $L$ ein Linksideal ist. 
+	Dann ist aber auch $a \in L$. Es bleibt nun $L= L_{L \cap L^*}$ zu zeigen.
+	$L \subseteq L_{L \cap L^*}$ folgt sofort, da $L$ ein Linksideal und $L^*$ ein Rechtsideal ist.
+	Sei nun $a \in L_{L \cap L^*}$ positiv, also $a \in A$ mit $a^*a \in L \cap L^*$.
+	Dann gilt $a^2=a^*a \in L \cap L^*$ und somit $a \in L \cap L^* \subset L$, da $L \cap L^*$ eine $C^*$-Algebra ist.
+	Wir haben nun $\enbrace*{L_{L \cap L^*}}_+ \subseteq L_+$ und es folgt $L_{L \cap L^*} \subseteq L$.
+	Also entspricht auch $L \mapsto L \cap L \mapsto L_{L \cap L^*}$ der Identität.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[Charakterisierung hereditär]}]
 	Sei $B \subset A$ eine $C^*$-Unteralgebra. Dann gilt: 
 	\[
 		B \subher A \iff bac \in B \text{ für alle } b,c \in B, a \in A 
@@ -1166,28 +1184,29 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		(bac)^* = c^*a^*b^* \in L
 	\]
-	Also ist $bac \in L \cap L^*=B$. 
+	Also ist $bac \in L \cap L^*=B$ wie gewünscht. 
 	Für die zweite Implikation seien $a \in A_+$, $b \in B_+$ mit $0 \le a \le b$.
 	Sei weiter $(e_\lambda)_\Lambda \subset B$ eine approximative Eins für $B$.
 	Dann gilt $e_\lambda a e_\lambda \in B$ für $\lambda \in \Lambda$ nach Vorraussetzung.
-	Wir haben nun 
+	Wir haben nun wie im vorigen Beweis
 	\[
 		0 \le (\ind-e_\lambda)a(\ind - e_\lambda) \le (\ind -e_\lambda) b (\ind -e_\lambda) \grenzw{\lambda} 0
 	\]
-	Damit gilt auch $a^{\sfrac{1}{2}}(\ind -e_\lambda) \grenzw{\lambda} 0$ und  es folgt $B \ni e_\lambda a e_\lambda \to a \in B$.
+	Wie eben gilt auch $a^{\sfrac{1}{2}}(\ind -e_\lambda) \grenzw{\lambda} 0$ und  es folgt $B \ni e_\lambda a e_\lambda \to a \in B$.
+	Also ist $B$ hereditär.
 \end{beweis}
 
-\begin{korollarB}
-	Sei $J \lhd A$ ein Ideal, dann gilt $J \subher A$.
+\begin{korollarB}[{name=[Ideale sind hereditär]}]
+	Sei $J \lhd A$ ein Ideal, dann gilt $J \subher A$. 
 \end{korollarB}
 
-\begin{korollar}
+\begin{korollar}[{name=[hereditäre Unteralgebren der Form $\overline{aAa}$]}]
 	Sei $A$ eine $C^*$-Algebra, $a \in A_+$ ein positives Element. 
 	Dann gilt $\overline{aAa} \subher A$. 
 	Falls $A$ separabel ist und $B \subher A$, so gilt $B=\overline{hAh}$ für ein $h \in A_+$.
 \end{korollar}
 \begin{beweis}
-	\emph{Übung!}
+	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}\todo{Revision 4}
 \end{beweis}
 
 \begin{satz}
