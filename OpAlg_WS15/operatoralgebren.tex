@@ -548,7 +548,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\item Insbesondere ist $M_n := M_n(\mathbb{C}) = \mathcal{B}(\mathbb{C}^n)$ eine $C^*$-Algebra für $n \in \mathbb{N}$.
 		\item Jede abgeschlossene ${}^*$-Unteralgebra von $\mathcal{B}(\mathcal{H})$ ist eine $C^*$-Algebra, zum Beispiel $\mathcal{K}(\mathcal{H})$.
 		\item Sei $X$ ein lokalkompakter Hausdorffraum. Dann ist $C_0(X)$ eine $C^*$-Algebra mit punktweisen Operationen, Involution $f^*= \overline{f}$ und der Supremumsnorm.
-		Tatsächlich ist \emph{jede} abelsche $C^*$-Algebra von dieser Form: 
+		Tatsächlich ist jede abelsche $C^*$-Algebra von dieser Form: 
 	\end{enumerate}
 \end{beispiel}
 
@@ -1618,7 +1618,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		Sei $\lambda<0$ und $\xi\in \mathcal{H}_u$.
 		Dann gilt 
 		\begin{align}
-			\norm[\big]{\enbrace*{\pi_u(a)-\lambda} \xi}^2_{\mathcal{H}_u} = \skal[\big]{\enbrace*{\pi_u(a)-\lambda}\xi}{ \enbrace*{\pi_u(a)-\lambda}\xi} &= \norm*{\pi_u(a)\xi}^2 + \abs*{\lambda}^2 \norm*{\xi} \Underbracket{- 2\lambda \cdot \skal*{\xi}{\pi_u(a)\xi}}{\ge 0} \\[-.5em]
+			\norm[\big]{\enbrace*{\pi_u(a)-\lambda} \xi}^2_{\mathcal{H}_u} = \skal[\big]{\enbrace*{\pi_u(a)-\lambda}\xi}{ \enbrace*{\pi_u(a)-\lambda}\xi} &= \norm*{\pi_u(a)\xi}^2 + \abs*{\lambda}^2 \norm*{\xi} - 2\lambda \cdot \skal*{\xi}{\pi_u(a)\xi} \\[-.5em]
 			&\ge \abs*{\lambda}^2 \cdot \norm*{\xi} 
 		\end{align}
 		Damit folgt $\ker \enbrace*{\pi_u(a)-\lambda}= \set*{0}$ und $\enbrace*{\pi_u(a)-\lambda}(\mathcal{H}_u) \subset \mathcal{H}_u$ ist abgeschlossen.
@@ -1692,7 +1692,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \section{von-Neumann-Algebren und der Bikommutantensatz} % (fold)
 \label{sec:6}
 
-\begin{erinnerungA}[{name=[starke Operatortopologie]}]
+\begin{erinnerungA}[{name=[starke Operatortopologie]},label=erinnerung:61]
 	Die \Index{starke Operatortopologie} $\mathcal{T}_\so$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen $p_\xi \colon \mathcal{B}(\mathcal{H}) \to \mathbb{R}_+$, $x \mapsto \norm*{x \xi}_\mathcal{H}$ für $\xi \in \mathcal{H}$ erzeugt wird.\todo{Revision 6}
 	Das heißt $\mathcal{T}_\so$ ist die gröbste Topologie, sodass Addition, skalare Multiplikation und alle Halbnormen $p_\xi$ stetig sind.
 	\enquote{Typische} offene Mengen sind der Form
@@ -1729,7 +1729,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Es seien nun die $x_\lambda$ Projektionen und $x_\lambda \grenzw{\so} x$. 
 	Dann folgt $x^2=x$ mittels 
 	\[
-		\skal*{\eta}{x \xi} = \lim \skal*{\eta}{x_\lambda \xi} = \lim \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
+		\skal*{\eta}{x \xi} = \lim \skal*{\eta}{s_\lambda \xi} = \lim \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
 	\]
 	Also ist $x=x^*x=x^2$. Rest Übung!
 \end{beweis}
@@ -2154,7 +2154,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz.\todo{Nummerierung checken}
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:619]
 	Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ sind äquivalent:
 	\begin{enumerate}[(i)]
 		\item $\varphi$ ist $\wo$-stetig.
@@ -2195,6 +2195,99 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 			x \xi_1 \\ \vdots \\ x \xi_n
 		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta}{x \xi_i} \qedhere
 	\]
+\end{beweis}
+
+\todo[inline]{Nummerierung fixen}
+\begin{proposition}[{name=[konvexe Menge stark abgeschlossen]},label=prop:620]
+	Sei $C \subset \mathcal{B}(\mathcal{H})$ konvex.
+	Dann ist $C$ $\so$-abgeschlossen genau dann, wenn $C$ $\wo$-abgeschlossen ist.
+\end{proposition}
+\begin{beweis}[Idee]
+	Wenn $C$ $\wo$-abgeschlossen ist, dann ist $C$ auch $\so$-abgeschlossen, da die schwache Topologie in der starken enthalten ist.
+	Für die andere Implikation sei $x \in \overline{C}^\wo$. Zu zeigen ist nun, dass $x \in \overline{C}^\so$ ist. 
+	Es existiert ein Netz $(x_\lambda)_\Lambda \subset C$ mit $x_\lambda \grenzw{\wo}x$.
+	Für jedes $\wo$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt $\varphi(x_\lambda) \to \varphi(x)$.
+	Mit \autoref{satz:619} folgt, dass für jedes $\so$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ auch $\varphi(x_\lambda) \to \varphi(x)$ gilt.
+	Falls $x \notin \overline{C}^\so$, so folgt mit dem Lemma von Zorn (bzw. mit Hahn-Banach für lokalkonvexe Räume), dass $\overline{\varphi} \in \mathcal{B}(\mathcal{H})^*$ $\so$-stetig existiert mit $\dist(\overline{\varphi}(x),\overline{\varphi}(C))>0$.
+	Dies ist ein Widerspruch.
+\end{beweis}
+
+\begin{proposition}[label=prop:621,{name=[Involution stark stetig auf einer Teilmenge]}]
+	Die Involution ist $\so$-stetig auf $\set*{x \in \mathcal{B}(\mathcal{H}) \given x \text{ normal} }$.
+\end{proposition}
+\begin{beweis}
+	Für $x,y \in \mathcal{B}(\mathcal{H})$ normal und $\xi \in \mathcal{H}$ gilt 
+	\begin{align}
+		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
+		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal*{\xi}{(y-x)y^* \xi} + \Underbracket{\skal*{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\
+		&\le \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
+	\end{align}
+	Falls nun $x_\lambda \grenzw{\so} y$ in $\mathcal{B}(\mathcal{H})$, so gilt 
+	\[
+		\norm*{(x_\lambda^* -y^*)\xi} \le \Underbracket{\norm*{x_\lambda \xi}^2 - \norm*{y \xi}^2}{\to 0} + \Underbracket{\norm*{(y-x_\lambda)y^* \xi} \cdot \norm*{\xi}}{\to 0} \qedhere
+	\]
+\end{beweis}
+
+\begin{definition}[label=def:622,{name=[{stark stetige Funktion}]}]
+	Eine stetige Funktion $f \colon \mathbb{R} \to \mathbb{C}$ heißt \Index{stark stetig}, falls für jeden Hilbertraum $\mathcal{H}$ und jedes Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ mit $x_\lambda \grenzw{\so} x \in \mathcal{B}(\mathcal{H})_\sa$ gilt $f(x_\lambda) \grenzw{\so}f(x)$.
+\end{definition}
+
+\begin{proposition}[label=prop:623]
+	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.
+\end{proposition}
+\begin{beweis}
+	Sei $S := \set*{f \colon \mathbb{R}\to \mathbb{C} \given f \text{ stark stetig}}$ und $S_b := S \cap C_b(\mathbb{R})$.
+	Dann sind $S$ und $S_b$ Vektorräume. 
+	Wegen $\norm*{ab \xi - a_0 b_0 \xi} \le \norm*{a} \cdot \norm*{(b-b_0)\xi} + \norm*{(a-a_0)b_0\xi}$ haben wir für $f \in S_b$, $g \in S$ und $x_\lambda \grenzw{\so}x$ in $\mathcal{B}(\mathcal{H})_\sa$
+	\[
+		\norm*{f(x_\lambda) g(x_\lambda) \xi - f(x) g(x)\xi} \le \norm*{f}_\infty \cdot \norm*{\enbrace[\big]{g(x_\lambda)- g(x)}\xi} + \norm*{ \enbrace[\big]{f(x_\lambda)- f(x)} g(x) \xi}
+		\grenzw{} 0
+	\]
+	Damit ist $f \cdot g \in S$, das heißt $S_b \cdot S \subset S$ und $S_b \cdot S_b \subset S_b$.
+	Weiter gilt: $S_b$ ist selbstadjungiert, also $S_b^*=S_b$ (nach \autoref{prop:621}, denn $f(x)$ für $x$ selbstadjungiert ist normal und $f(x) \mapsto f(x)^*$ ist $\so$-stetig) und $S_b$ ist $\norm*{\cdot}_\infty$-abgeschlossen.
+	Insbesondere ist $S_b \subset C_b(\mathbb{R})$ eine $C^*$-Unteralgebra.
+	Ebenso $S_b \cap C_0(\mathbb{R}) =: S_0 \subset C_0(\mathbb{R})$.
+	Die Funktionen $t \mapsto f(t):= \frac{1}{1+t^2}$ und $t \mapsto g(t) := \frac{t}{1+t^2}$ sind in $C_0(\mathbb{R})$ mit $\norm*{f}_\infty, \norm*{g}_\infty\le 1$.
+	Behauptung: $f$ und $g$ sind in $S_0$ enthalten.
+	
+	Für $x,y \in \mathcal{B}(\mathcal{H})_\sa$ gilt $g(x)-g(y)= \ldots = (1+x^2)^{-1}(x-y+x(y-x)y)(1+y^2)^{-1}$. 
+	Für $\xi \in \mathcal{H}$ gilt dann weiter 
+	\[
+		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le 1 \cdot \norm*{(x-y)(1+y^2)^{-1} \xi} + 1 \cdot \norm*{(y-x) y(1+y^2)^{-1} \xi}
+	\]
+	Damit ist $g \in S_0$.
+	Weiter ist $(t \mapsto t) \in S$, also $\enbrace*{t \mapsto t \cdot g(t)} \in S$ und $\enbrace*{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
+	Damit ist die Behauptung gezeigt.
+	
+	Nach Stone-Weierstraß ist $^*\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält eine strikt positive Funktion.
+	Damit folgt $S_0=C_0(\mathbb{R})$.
+	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$ und dann ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
+	\[
+		\enbrace[\big]{t \longmapsto h(t) \cdot f(t) + t \cdot h(t) \cdot g(t)=h(t)} \in S_b \qedhere
+	\]
+\end{beweis}
+
+\begin{satz}[label=satz:624,name={Kaplansky's Dichtesatz}]
+	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.
+	Dann gilt
+	\begin{enumerate}[(i)]
+		\item $\overline{A_\sa}^\so = \overline{A_\sa}^\wo= B_\sa$
+		\item $\overline{A_\sa^1}^\so= \overline{A^1_\sa}^\wo = B^1_\sa$
+		\item $\overline{A_+^1}^\so = \overline{A_+^1}^\wo= B_+^1$
+		\item $\overline{A^1}^\so = \overline{A^1}^\wo = B^1$
+		\item $\overline{\mathcal{U}(A)}^\so = \mathcal{U}(B)$ falls $\ind_{\mathcal{B}(\mathcal{H})} \in A$
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Die starken und schwachen Abschlüsse stimmen überein nach \autoref{prop:620}.
+	\begin{enumerate}[(i)]
+		\item Falls $a \in B_\sa$, so existiert $(a_\lambda)_\Lambda \subset A$ mit $a_\lambda \grenzw{\wo}a$.
+		 Dann gilt aber auch $a_\lambda^* \grenzw{\wo}a^*=a$ (nach \autoref{erinnerung:61}) und damit 
+		 \[
+		 	A_\sa \ni\frac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
+		 \]
+		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$\marginnote{auf Vektoren überprüfen}
+	\end{enumerate}
 \end{beweis}
 % section 6 (end)
 
