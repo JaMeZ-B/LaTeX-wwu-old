@@ -310,7 +310,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\] 
 \end{definition}
 
-\begin{definition}[{name=[$C^*$-Algebra]}]
+\begin{definition}[{name=[$C^*$-Algebra]},label=def:22]
 	Eine \bet{$C^*$-Algebra}\index{C-Algebra@$C^*$-Algebra} ist eine involutive Banachalgebra mit $\norm{a^*a}= \norm{a}^2$ für $a \in A$.
 \end{definition}
 
@@ -1053,10 +1053,10 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Es sei $a \in A$ und $b \in I_+$. Dann gilt
 	\(
 		ab= \Underbracket{a b^{\sfrac{1}{2}}}{\in J} b^{\sfrac{1}{2}} \in I
-	\). \todo{Revision 4}
+	\).
 \end{beweis}
 
-\begin{satz}[label=satz:44]
+\begin{satz}[label=satz:44,{name=[Quotient einer C*-Algebra]}]
 	Sei $A$ eine $C^*$-Algebra und $J \lhd A$ ein Ideal. Dann ist $\sfrac{A}{J}$ eine $C^*$-Algebra (mit induzierten Operationen und der Quotientennorm). 
 \end{satz}
 \begin{beweis}
@@ -1070,33 +1070,33 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\begin{align}
 		\norm*{a+J}_{\sfrac{A}{J}}^2 \le \inf_{b \in J} \norm*{a^* a+b} = \norm*{a^*a +J}_{\sfrac{A}{J}} \le \norm*{a^* +J}_{\sfrac{A}{J}} \cdot \norm*{a+J}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}
 	\end{align}
-	Also ist $\norm*{(a^* +J)(a+J)}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}$.
+	Damit ist $\norm*{(a^* +J)(a+J)}_{\sfrac{A}{J}} = \norm*{a+J}^2_{\sfrac{A}{J}}$ und somit ist die \hyperref[def:22]{$C^*$-Gleichung} erfüllt.
+	Dass $\sfrac{A}{J}$ ein Banachraum ist, haben wir bereits in Funktionalanalysis, Proposition 2.16 gesehen. 
 \end{beweis}
 
-\begin{proposition}[label=prop:45]
-	Seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein injektiver $^*$-Homomorphismus. Dann ist $\pi$ bereits isometrisch.
+\begin{proposition}[label=prop:45,{name=[injektive *-Homomorphismen sind isometrisch]}]
+	Es seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein injektiver $^*$-Homomorphismus. Dann ist $\pi$ bereits isometrisch.
 \end{proposition}
 \begin{beweis}
 	Zu zeigen: $\norm*{\pi(a^*a)}=\norm*{\pi(a)}^2= \norm*{a}^2= \norm*{a^*a}$ für $a \in A$. 
-	Wir dürfen also annehmen, dass $A= C^*(a^*a)$ und $B=\overline{\pi(A)}$ abelsch sind. 
-	Ersetze $\pi$ durch $\pi^\simm \colon A^\simm  \to B^\sim$, falls $A$ nicht unital ist.
+	Wir dürfen also annehmen, dass $A= C^*(a^*a)$ und $B=\overline{\pi(A)}$ abelsch sind.\marginnote{$a^*a$ normal $\Rightarrow C^*(a^*a)$ abelsch} 
+	Weiter können wir $\pi$ durch $\pi^\simm \colon A^\simm  \to B^\sim$ ersetzen, falls $A$ nicht unital ist.
 	Wir dürfen also auch $A$ und $B$ als unital annehmen.
-	$\pi$ induziert eine stetige Abbildung $\pi^* \colon \Omega(B) \to \Omega(A)$ durch $\chi \mapsto \chi \circ \pi$, also ist $\pi^* \enbrace*{\Omega(B)} \subset \Omega(A)$ kompakt und insbesondere auch abgeschlossen.
-	Falls $\pi^*$ nicht surjektiv wäre, so gäbe es ein $0 \neq f \in C \enbrace*{\Omega(A)}_+ \cong A_+$ mit $f|_{\pi^*(\Omega(B))} =0$. Dann gilt
+	$\pi$ induziert eine stetige Abbildung $\pi^* \colon \Omega(B) \to \Omega(A)$ durch $\chi \mapsto \chi \circ \pi$, also ist $\pi^* \enbrace*{\Omega(B)} \subset \Omega(A)$ kompakt nach \autoref{satz:1.15} und insbesondere auch abgeschlossen.
+	Falls $\pi^*$ nicht surjektiv wäre, so gäbe es ein $0 \neq f \in C \enbrace*{\Omega(A)}_+ \cong A_+$ mit $f|_{\pi^*(\Omega(B))} =0$. Dann gilt \marginnote{Gelfand"=Isomorphismus in der Notation unterdrückt}
 	\begin{align}
-		0=f \enbrace*{\pi^*(\chi)} = \chi \circ \pi(f) \marginnote{Gelfand"=Isomorphismus in der Notation unterdrückt}
+		0=f \enbrace[\big]{\pi^*(\chi)} = \chi \circ \pi(f) 
 	\end{align}
-	für alle $\chi \in \Omega(B)$. 
+	für alle Charaktere $\chi \in \Omega(B)$. 
 	Also ist $\pi(f)=0$, woraus mit der Injektivität wieder $f=0$ folgt. 
-	Dies ist ein Widerspruch und somit ist $\pi$ surjektiv.
-	Für $a \in A$ gilt 
+	Dies ist ein Widerspruch und somit ist $\pi^*$ surjektiv.
+	Für $a \in A$ gilt dann
 	\[
-		\norm*{a}_A = \sup_{\rho \in \Omega(A)} \abs*{\rho(a)}= \sup_{\chi \in \Omega(B)} \abs*{\chi \circ \pi(a)} = \norm*{\pi(a)}_B
+		\norm*{a}_A \stackrel[\text{Isom.}]{\text{Gelfand-}}{=} \sup_{\rho \in \Omega(A)} \abs*{\rho(a)}= \sup_{\chi \in \Omega(B)} \abs[\big]{\chi \circ \pi(a)} = \norm*{\pi(a)}_B \qedhere
 	\]
-	Also ist $\pi$ isometrisch.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[Bild ist $C^*$-Unteralgebra]}]
 	Seien $A,B$ $C^*$-Algebren, $\pi \colon A \to B$ ein $^*$-Homomorphismus. Dann ist $\pi(A) \subset B$ eine $C^*$-Unteralgebra.
 \end{satz}
 \begin{beweis}
@@ -1104,7 +1104,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\mapdef{\dot{\pi}\colon\sfrac{A}{\ker \pi_n}}{B}{a + \ker \pi}{\pi(a)}{}
 	$\dot{\pi}$ ist injektiv, also isometrisch nach \autoref{prop:45}.
 	Damit ist $\pi(A)$ vollständig und $\pi(A) \subset B$ abgeschlossen.
-	Also ist $\pi(A)$ eine $C^*$-Unteralgebra.
+	Also ist $\pi(A)$ eine $C^*$-Unteralgebra von $B$.\todo{Revision 4}
 \end{beweis}
 
 \begin{proposition}
