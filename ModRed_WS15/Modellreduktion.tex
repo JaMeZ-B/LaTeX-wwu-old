@@ -2171,7 +2171,7 @@ R_Nv = \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,v)_{\R^N}} u_j^N \text{ für } v\in 
 	\item $\{\phi_i\}_{i=1}^N$ ist orthonormale Basis, aber nicht eindeutig.
 	\item Die POD-Basen sind  hierachisch, dass heißt $X_{N'}\subset X_N$ für $N'\le N$.
 	\item Die POD hängt nicht von der Reihenfolge der Daten ab (im Gegensatz zu einer Basis welche aus einer Gram-Schmidt Orthogonalisierung hervorgeht).
-	\item Maximierung der Varianz: $\phi_1$ ist die Richtung höchster Varianz von $\{u_i^N\}_{i=1}^n$, $\phi_2$ ist die Richtung höchster Varianz von $\{ P_{X_1} u_i^N\}_{i=1}^n$, usw.
+	\item Maximierung der Varianz: $\phi_1$ ist die Richtung höchster Varianz von $\{u_i^N\}_{i=1}^n$, $\phi_2$ ist die Richtung höchster Varianz von $\{ P_{X_1^c} u_i^N\}_{i=1}^n$, usw.
 	\item Die Koordinaten der Daten bzgl. der POD-Basis sind unkorreliert.
 	Wir wollen nun exemplarisch für $X_N=\R^N$ die Optimalität der POD-Basis nachweisen, dass heißt wir wollen zeigen, dass die POD-Basis das folgende nichtlineare Optimierungsproblem löst:
 	\begin{align}
@@ -2479,12 +2479,115 @@ R_N\psi_i = \frac{1}{n} UU^T \psi_i = \frac{1}{n} \Psi D \underbracket{V^TV}_{=\
 Die Eigenwerte $\frac{1}{n}\sigma_i^2$ sind monoton fallend, also identisch sortiert wie Spektralzerlegung von $R_N$, das heißt $\frac{1}{n} \sigma_i^2 = \lambda_i$ und $\psi_i=\phi_i$ oder $\psi_i=-\phi_i$.
 
 
+\section{approximationstheorie}
 
 
+im letzten Kapitel haben wir gesehen, dass der Greedy-Algorithmus quasi-optimale rB-räume erzeugt, indem Sinne, dass die konstruierten Räume entweder zur gleichen oder einer leicht schlechteren Konvergenzrate, wie die optimalen Räume im Sinne von Kolmogorov, führen.
+Ferner konnten wir zeigen, dass die POD-Räume den Projektionsfehler minimieren und in diesemm Sinne optimal sind.
 
+Es ist zu beachten, dass wir aus der (Quasi-)Optimalität der RB-Räume \uline{nicht} schließen können, dass die RB-Räume tatsächlich zu einer schnellen Konvergenz der RB-Approximation führen.
+Tatsächlich kann die Konvergenzrate der optimalen Räume unter gewissen Umständen sehr schlecht sein.
+\marginnote{Zum Beispiel, wenn der Rand parametrisiert wird.}
+In diesem Kapitel wollen wir der Frage nach gehen unter welchen Umständen wir eine schnelle und idealerweise eine exponentielle Konvergenz der RB-Räume erwarten können.
 
+\ssect{5.1 Bemerkung}{(Von welchen Faktoren hängt die Approximationsgüte der RB-Approximation ab?)}
+Unter anderem beeinflussen die folgenden Faktoren die Approximationsgüte des RB-Raums:
+\begin{enumerate}[(1)]
+	\item \bet{Differenzierbarkeit und Regularität} der Lösungsabbildung $\gamma: P\to X,~\mu\mapsto u(\mu)$ bzgl. der Parameter.
+	Von besonderer Bedeutung ist der Fall,wenn $\gamma$ analytisch ist.
+	\item \bet{Parametrische Komplexität}, welche hier durch $Q_b$ und $Q_f$, also die Anzahl der Summanden in der affin parametrischen Darstellung von $b$ unf $f$ charakterisiert ist.
+	Die parametrische Komplexität ist insbesondere dann kritisch, wenn $Q_b,Q_f$ sehr groß oder gar unendlich sind.
+	Im letzterem Fall kann eine Approximation mit endlich vielen Summanden bestimmt werden (s. Kapitel 6). 
+	Für lineare, elliptische Probleme mit einer regulären Lösungsabbildung führt ein schneller Abfall der $\mu$-abhängigen Koeffizienten $\theta_b(\mu)$ und $\theta_f(\mu)$ oder die Existenz einiger weniger dominanter Terme zu einer schnellen Konvergenz der RB-Approximation.
+	\item \bet{Art des betrachteten Problems:} Für $P=1$für nicht lineare Probleme wie die Navier-Stokes Gleichungen kann es schwierig sein schnell konvergierende RB-Räume zu konstruieren, während dies für elliptische Probleme für moderates $P$ im Allgemeinen gut möglich ist.
+	Probleme mit hochdimensionalen Parameterräumen stellen dagegen selbst für elliptische PDgl's eine Herausforderung dar.
+	Schließlich wird im Allgemeinen die Approximationsgüte von RB-Räumen deutlich schlechter, wenn man von elliptischen oder parabolischen zu rein hyperbolischen Problemen übergeht. 
+\end{enumerate}
 
+\ssect{Satz 5.2}{(Globale Exponentielle Konvergenz im Spezialfall [Maday, Patera, Turicini, 2002])}
+Seien $P=[\mu_{\min}\dt{,}\mu_{\max}] \subset \R^+$ mit $\mu_{\min} = \frac{1}{\sqrt{\mu_r}},\mu_{\max}= \sqrt{\mu_r},\mu_r\in\R^+$ mit $1\le \mu_r < \infty$,
+\[
+b(u,v;\mu) = \mu b^1(u,v) + b^2(u,v) \text{ mit } b^q(u,v) = \int_{\Omega} \nabla u\nabla v ~\forall u,v\in X,~ 1\le q\le 2
+\]
+und $f$ nicht parametrisch mit $\ln \mu_r > \frac{1}{2e}$ und $N_{krit} := 1+ \lceil 2e \ln \mu_r \rceil$.
+Zu $N\in\N, N\ge 2$, seien $\mu_{\min} = \mu_1 \dt{<} \mu_N=\mu_{\max}$ gegeben durch
+\[
+\mu_i := e^{\{\ln \mu_{\min} + (i-1)\frac{\ln \mu_r}{N-1}\}}
+\]
+und sind daher logarithmisch äquidistant, dass heißt
+\[
+\ln(\mu_{i+1}-\mu_i) = \frac{\ln(\mu_{\max})-\ln(\mu_{\min})}{N-1}.
+\]
+Schließlich sei $X_N := \spann\penbrace{ u_h(\mu_i)}_{i=1}^N$ der zugehörige Lagrange RB-Raum.
+Dann gilt:
+\[
+\frac{\ener{u_h(\mu)-u_N(\mu)}}{\ener{u_h(\mu)}} \le e^{\frac{N-1}{N_{krit}-1}} ~\forall \mu\in P,~N\ge N_{krit}.
+\]
 
+\bet{Beweis:}
+siehe [Patera, Rozza, 2007]
+\hfill $\square$
+
+\subsection{Reguläre Lösungsabbildungen}
+
+\ssect{5.3 Satz}{(Lipschitz-Stetigkeit)}
+Seien die Bilinearform $b(.,.;\mu)$ und die Linearform $f(.;\mu)$ Lipschitz-stetig bzgl. $\mu$ und $b$ glm. koerziv bzgl. $\mu$.
+Außerdem seien $b$ und $f$ glm. beschränkt bzgl. $\mu$ (s. Def 3.3).
+Dann ist die Lösung $u(\mu)$ von $P(\mu)$ definiert in Definition 3.5 Lipschitz-stetig bzgl. $\mu$, dass heißt es existiert ein $L_u>0$, so dass:
+\begin{align}
+\norm{u(\mu_1)-u(\mu_2)}_X \le L_u \norm{\mu_1-\mu_2}_2~\forall \mu_1,\mu_2\in P.
+\end{align}
+
+\bet{Beweis:}\\
+Nach Definition 3.5 lösen $u(\mu_1)$ und $u(\mu_2)$
+\[
+b(u(\mu_1),v;\mu_1) = f(v;\mu_1)~\forall v\in X; b(u(\mu_2),v;\mu_2) = f(v;\mu_2)~\forall v\in X.
+\]
+Subtraktion der beiden Gleichungen und Addition von Null ergibt:
+\[
+b(u(\mu_1),v;\mu_1) - b(u(\mu_2),v;\mu_1) + b(u(\mu_2),v;\mu_1) -b(u(\mu_2),v;\mu_2) = f(v;\mu_1) -f(v;\mu_2).
+\]
+Wegen der Lipschitz-Stetigkeit von $b$ und $f$ erhalten wir:
+\begin{align*}
+b(u(\mu_1)-u(\mu_2),v;\mu_1) &= f(v;\mu_1) -f(v;\mu_2) - b(u(\mu_2),v;\mu_1) +  b(u(\mu_2),v;\mu_2)\\
+&\le L_f \norm{v}_X \norm{\mu_1-\mu_2}_2 +L_b \norm{u(\mu_2)}_X \norm{v}_X \norm{\mu_1-\mu_2}_2.
+\end{align*}
+Teste mit $v = u(\mu_1)-u(\mu_2)$ ergibt:
+\[
+\alpha(\mu_1) \norm{u(\mu_1)-u(\mu_2)}_X \le L_f \norm{\mu_1-\mu_2}_2 +L_b \norm{u(\mu_2)}_X \norm{\mu_1-\mu_2}_2.
+\]
+Das Ausnutzen der A priori Abschätzung $\norm{u(\mu_2)}_X \le \frac{\norm{f(,;\mu_2)}_X}{\alpha(\mu_2)}$ ergibt schließlich:
+\[
+\norm{u(\mu_1)-u(\mu_2)}_X \le \enbrace{\frac{l_f}{\alpha(\mu_1)} + \frac{L_b \norm{f(.;\mu_2)}_{X'}}{\alpha(\mu_1)\alpha(\mu_2)}} \norm{\mu_1-\mu_2}_2.
+\]
+Wegen der glm. Beschränktheit und glm. Koerzivität folgt mit $L_u = \frac{L_f}{\alpha_0} + \frac{L_b \gamma_0}{\alpha_0^2}$ die Behauptung.
+\hfill $\square$
+
+\ssect{5.4 Bemerkung}{}
+Die Aussage aus Satz 5.3 giltanalog für $u_h(\mu)$ als Lösung von $(P_h(\mu))$ und wie bereits in Satz 3.25 bemerkt für $u_N(\mu)$ als Lösung von $(P_N(\mu))$.
+
+\ssect{5.5 Bemerkung}{}
+Sind $b$ und $f$ affin parametrisch,so folgt die Lipschitz-Stetigkeit von $b$ und $f$ bzgl. $\mu$ aus der Lipschitz-Stetigkeit der Funktionen $\theta_b(\mu)$ und $\theta_f(\mu)$.
+
+\ssect{5.6 Definition}{(Fréchet-Ableitung)}
+Seien $X,Y$ Banachräume und sei $f:X\to Y$ eine Funktion.
+Dann ist $f$ \bet{Fréchet-differenzierbar} im Punkt $x_0\in X$ genau dann, wenn eine stetige lineare Abbildung $A:X\to Y$ existiert, so dass
+\[
+f(x_0+h)-f(x_0) = Ah + o(\norm{h}),~h\to 0.
+\]
+Wenn diese Abbildung existiert, nennen wir sie \bet{Fréchet-Ableitung} von $f$ in $x_0$ und bezeichnen sie mit $f'(x_0) =: A$.
+
+\ssect{5.7 Definition}{(Partielle Ableitung)}
+Seien $X,Y,Z$ Banachräume.
+Wir betrachten eine Funktion $f:X\times Y\to Z, (x,y)\mapsto f(x,y)$, wenn wir $y_0\in Y$ festhalten, ist $F(.) := f(.,y_0):X\to Z$ eine funktion in einer Variablen $x\in X$
+Die partielle Ableitung von $f$ nach $x$ ist dann analog zu den partiellen Ableitungen von Funtionen im $\R^n$ definiert:
+\[
+\diff{f}{x} (x_0,y_0) \equiv F'(x_0).
+\]
+Analog kann man $x_0\in X$ festhalten und mit Hilfe von $G(.):= f(x_0,.):Y\to Z$ die partielle Ableitng von $f$ nach $y$ definieren:
+\[
+\diff{f}{y} (x_0,y_0) \equiv G'(y_0).
+\]
 
 
 
