@@ -1206,22 +1206,22 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Falls $A$ separabel ist und $B \subher A$, so gilt $B=\overline{hAh}$ für ein $h \in A_+$.
 \end{korollar}
 \begin{beweis}
-	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}\todo{Revision 4}
+	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[Limes von C*-Algebren]}]
 	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
 	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\Dlim(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
 	\begin{itemize}
 		\item Es existieren $^*$-Homomorphismen $\varphi_{n,\infty} \colon A_n \to \Dlim(A_n,\varphi_n)$ mit $\varphi_{n,\infty} = \varphi_{n+1,\infty} \circ \varphi_{n}$.
 		\item Falls $\psi_n \colon A_n \to B$ für $n \in \mathbb{N}$ $^*$-Homomorphismen sind mit $\psi_n = \psi_{n+1} \circ \varphi_n$, so existiert ein eindeutig bestimmter $^*$-Homomorphismus $\psi \colon \Dlim(A_n,\varphi_n) \to B$ mit $\psi_n = \psi \circ \varphi_{n,\infty}$ für $n \in \mathbb{N}$.
 	\end{itemize}
-	Kürzer:
+	Kürzer: Folgendes Diagramm kommutiert
 	\begin{equation}
-		\begin{tikzcd}[column sep=large,row sep=huge,arrows={sloped,pos=.37}]
+		\begin{tikzcd}[column sep=4em,row sep=5.5em,arrows={sloped,pos=.37}]
 			& & & & \displaystyle \Dlim(A_n,\varphi_n) \ar[dd,"\exists! \psi",dashed,sloped=false,pos=.5, bend left] \\
-			A_0 \rar  & \ldots  \rar %\ar[urrrr,"\varphi_{0,\infty}",gray] \ar[drrrr,"\psi_0"',gray]
-			& A_n \rar \ar[urr,"\varphi_{n,\infty}"] \ar[drr,"\psi_n"',end anchor={[yshift=-0.3ex]}] 
+			A_0 \rar["\varphi_0",pos=.5]  & \ldots  \rar["\varphi_{n-1}",pos=.5] %\ar[urrrr,"\varphi_{0,\infty}",gray] \ar[drrrr,"\psi_0"',gray]
+			& A_n \rar["\varphi_n",pos=.5] \ar[urr,"\varphi_{n,\infty}"] \ar[drr,"\psi_n"',end anchor={[yshift=-0.3ex]}] 
 			& A_{n+1} \rar \ar[ur,"\varphi_{n+1,\infty}"'] \ar[dr,"\psi_{n+1}",end anchor={[yshift=0.3ex]}] 
 			& \ldots \\
 			& & & &  B
@@ -1233,28 +1233,31 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\textstyle\prod_\mathbb{N} A_n := \set*{(a_n)_\mathbb{N} \given a_n \in A_n, \sup_n \norm*{a_n} < \infty}
 	\]
-	ist eine $C^*$-Algebra mit komponentenweisen Operationen und Supremumsnorm: Sie ist Banachalgebra nach Blatt 1, Aufgabe 1 c) und $\norm*{\cdot}_\infty$ ist offensichtlich eine $C^*$-Norm.
+	ist eine $C^*$-Algebra mit komponentenweisen Operationen und Supremumsnorm, denn sie ist eine Banachalgebra nach Blatt 1, Aufgabe 1 c) und $\norm*{\cdot}_\infty$ ist offensichtlich eine $C^*$-Norm.
 	Es ist nun
 	\[
-		\textstyle\bigoplus_\mathbb{N} A_n := \set*{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?}
+		\textstyle\bigoplus_\mathbb{N} A_n := \set[\big]{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?}
 	\]
-	Sei $q \colon \prod_\mathbb{N} A_n \to \sfrac{\prod_\mathbb{N} A_n}{\bigoplus_\mathbb{N} A_n}$ die Quotientenabbildung.
-	Sei 
+	Sei $q \colon \prod_\mathbb{N} A_n \to \sfrac{\prod_\mathbb{N} A_n}{\bigoplus_\mathbb{N} A_n}$ die Quotientenabbildung und weiter
 	\[
-		\textstyle C := \set*{(a_n)_\mathbb{N} \given (a_n)_\mathbb{N} \in \prod\nolimits_\mathbb{N} A_n, \exists n_0 \in \mathbb{N} \text{ mit } a_{n+1}= \varphi_n(a_n), n \ge n_0}
+		\textstyle C := \set[\big]{(a_n)_\mathbb{N} \in \prod\nolimits_\mathbb{N} A_n \given  \exists n_0 \in \mathbb{N} \text{ mit } a_{n+1}= \varphi_n(a_n) \text{ für } n \ge n_0}
 	\]
-	$C \subset \prod_\mathbb{N} A_n$ ist eine $^*$-Unteralgebra und $\overline{C} \subset \prod_\mathbb{N} A_n$ ist $C^*$-Unteralgebra.
+	$C \subset \prod_\mathbb{N} A_n$ ist eine $^*$-Unteralgebra und folglich ist $\overline{C} \subset \prod_\mathbb{N} A_n$ eine $C^*$-Unteralgebra.
 	Wir definieren 
 	\[
 		\Dlim(A_n,\varphi_n) := q \enbrace*{\overline{C}} \subset \Faktor{\prod\nolimits_\mathbb{N} A_n}{\bigoplus\nolimits_\mathbb{N} A_n}
 	\]
-	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch $\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi(a))}$ und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$.
+	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
+	\[
+		\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi_n(a)),\ldots } 
+	\]
+	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. \todo{der folgende Absatz könnte noch ausführlicher sein}
 	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
-	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ und $\psi$ ist normvermindernd, setzt sich also eindeutig auf $q(\overline{C})$ fest.
+	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ ist dicht und $\psi$ ist normvermindernd auf $q(C)$, setzt sich also eindeutig auf $q(\overline{C})$ fort.
 	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
 \end{beweis}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[gerichtete Limites von $C^*$-Algebren]}]
 	Beispiele für den gerichteten Limes
 	\begin{enumerate}[(i)]
 		\item Betrachte
@@ -1265,15 +1268,22 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\]
 		wobei die $\varphi_n$ eine Matrix rechts unten mit Nullen auffüllt. Es gilt
 		\[
-			\overline{\bigcup_\mathbb{N} \mathcal{B} \enbrace[\big]{\Span \set*{\eta_0, \ldots , \eta_n}}} \subset \mathcal{B} \enbrace*{\ell^2(\mathbb{N})}
+			\mathcal{K} \enbrace*{\ell^2(\mathbb{N})} = \overline{\bigcup_\mathbb{N} \Underbrace{\mathcal{B} \enbrace[\big]{\Underbrace{\Span \set*{\eta_0, \ldots , \eta_n}}{\cong \mathbb{C}^{n+1}}}}{\cong M_{n+1}}} \subset \mathcal{B} \enbrace*{\ell^2(\mathbb{N})}
 		\]
-		\item Betrachte
+		nach Korollar 8.11 aus Funktionalanalysis.
+		\item Betrachtet man den folgenden Limes
 		\[
 			\begin{tikzcd}
 				M_2 \rar & \ldots  \rar & M_{2^n} \rar["\varphi_n"] & M_{2^{n+1}} \rar & \ldots \rar & \displaystyle\Dlim (M_{2^n},\varphi_n) =: M_{2^\infty}
 			\end{tikzcd}
 		\]
-		wobei die verbindenden Abbildungen die Matrizen zweimal auf der Diagonalen platzieren. Erzeuger/Vernichter Fermionen, CAR-Algebra.
+		wobei die verbindenden Abbildungen die Matrizen zweimal auf der Diagonalen platzieren, also $X \mapsto \begin{psmallmatrix}
+			X & 0 \\
+			0 & X 
+		\end{psmallmatrix}$, so erhält man die sogenannte \Index{CAR-Algebra} $M_{2^\infty}$. 
+		Wikipedia zum Namen:
+		
+		\blockquote[\url{https://de.wikipedia.org/wiki/CAR-Algebra}]{Es handelt sich um eine $C^*$-Algebra, die eng mit den in der Quantenmechanik untersuchten kanonischen Antivertauschungsrelationen (engl. \textbf{c}anonical \textbf{a}nticommutation \textbf{r}elation, daher der Name CAR) verbunden ist und daher auch Fermionenalgebra genannt wird.}
 	\end{enumerate}
 \end{beispiel}
 % section 4 (end)
