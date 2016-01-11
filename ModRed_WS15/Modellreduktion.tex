@@ -2564,7 +2564,7 @@ Wegen der glm. Beschränktheit und glm. Koerzivität folgt mit $L_u = \frac{L_f}
 \hfill $\square$
 
 \ssect{5.4 Bemerkung}{}
-Die Aussage aus Satz 5.3 giltanalog für $u_h(\mu)$ als Lösung von $(P_h(\mu))$ und wie bereits in Satz 3.25 bemerkt für $u_N(\mu)$ als Lösung von $(P_N(\mu))$.
+Die Aussage aus Satz 5.3 gilt analog für $u_h(\mu)$ als Lösung von $(P_h(\mu))$ und wie bereits in Satz 3.25 bemerkt für $u_N(\mu)$ als Lösung von $(P_N(\mu))$.
 
 \ssect{5.5 Bemerkung}{}
 Sind $b$ und $f$ affin parametrisch,so folgt die Lipschitz-Stetigkeit von $b$ und $f$ bzgl. $\mu$ aus der Lipschitz-Stetigkeit der Funktionen $\theta_b(\mu)$ und $\theta_f(\mu)$.
@@ -2579,7 +2579,7 @@ Wenn diese Abbildung existiert, nennen wir sie \bet{Fréchet-Ableitung} von $f$ 
 
 \ssect{5.7 Definition}{(Partielle Ableitung)}
 Seien $X,Y,Z$ Banachräume.
-Wir betrachten eine Funktion $f:X\times Y\to Z, (x,y)\mapsto f(x,y)$, wenn wir $y_0\in Y$ festhalten, ist $F(.) := f(.,y_0):X\to Z$ eine funktion in einer Variablen $x\in X$
+Wir betrachten eine Funktion $f:X\times Y\to Z, (x,y)\mapsto f(x,y)$, wenn wir $y_0\in Y$ festhalten, ist $F(.) := f(.,y_0):X\to Z$ eine Funktion in einer Variablen $x\in X$
 Die partielle Ableitung von $f$ nach $x$ ist dann analog zu den partiellen Ableitungen von Funtionen im $\R^n$ definiert:
 \[
 \diff{f}{x} (x_0,y_0) \equiv F'(x_0).
@@ -2589,7 +2589,126 @@ Analog kann man $x_0\in X$ festhalten und mit Hilfe von $G(.):= f(x_0,.):Y\to Z$
 \diff{f}{y} (x_0,y_0) \equiv G'(y_0).
 \]
 
+\ssect{5.8 Bemerkung}{(Höhere Ableitungen)}
+Höhere Ableitungen werden durch iterative Anwendung der obigen Definitionen definiert.
+ 
+\ssect{5.9 Satz}{}
+Seien $b:X\times X\times P\to \R$ und $f:X\times P\to \R$ $k$-mal stetig differenzierbar nach $\mu$.
+Seien ferner $b(.,.;\mu)$ koerziv und stetig für alle $\mu\in P$ und $f.;\mu$ stetig für alle $\mu\in P$.
+Dann ist die Lösungsabbildung $\gamma$ $k$-mal stetig differenzierbar.\\
 
+\bet{Beweisidee:} Lax-Milgram, Satz über implizite Funktionen für Banachräume (siehe z.B. [Garlet, 2013], [Riuzicka, 2004]).
+\hfill $\square$
+
+\ssect{5.10 Satz}{exponentielle Konvergenz der RB Approximation für die parametrische, stationäre WLG}
+Wir betrachten die parametrische, stationäre WLG mit den Voraussetzungen aus Definition 3.7 und den folgenden zusätzlichen Annahmen:
+\begin{enumerate}[(i)]
+	\item $P = \prod_{i=1}^{p} P_i$ mit $P_i  =[\mu_i^{\min}\dt{,}\mu_i^{\max}]\subset \R$.
+	\item $\kappa(x;\mu)$ und $q(x;\mu)$ sind unendlich oft stetig differenzierbar bzgl. $\mu$ und es gilt:
+	Für alle $\mu\in P$ und für alle $i=1\dt{,}p$ existiert ein $0<\gamma_i<+\infty$, so dass
+	\[
+	\norm{\frac{1}{\kappa(.;\mu)} \frac{\partial^m \kappa(.;\mu)}{\partial \mu_i^m}}_{L^\infty(\Omega)} \le \gamma_i^m \cdot m!
+	\]
+	und
+	\[
+	\frac{1}{1+\norm{q(.;\mu)}_{L^2(\Omega)}} \norm{\frac{\partial^m q(.;\mu)}{\partial \mu_i^m} }_{L^2(\Omega)} \le \gamma_i^m\cdot m!.
+	\]	 
+\end{enumerate}
+ Dann gilt die folgende Abschätzung:
+\[
+d_n(M,X_n) \le C\cdot \sum_{j=1}^{p} e^{-r_jm_j},
+\]
+mit $r_j,m_j >0$ und Konstante $C>0$.\\
+
+\bet{Beweis:} [Quarterone, Manzoni, Megri, 2015].
+\hfill $\square$
+
+\subsection{Exponentielle Konvergenz im Falle geringer parametrischer Komplexität}
+
+\ssect{5.11 Satz}{(Exponentielle Konvergenz im Falle dominanter Terme in der affinen Darstellung der Bilinearform [Lassik, Manzoni, Quarteroni, Rozza, 2013])}
+Seien $b(u,v;\mu) = \theta_b^1(\mu)b^1(u,v) + \theta_b^2(\mu)b^2(u,v)$ und $f(v;\mu) = \sum_{q=1}^{Q_f} \theta_f^q(\mu)f^q(v)$ und seien $\mathbb{B}_h^q\in \R^{N_h\times N_h},q=1,2,~\mathbb{F}_h^q\in \R^{N_h},q01\dt{,}Q_f$ definiert durch
+\[
+(\mathbb{B}_h^q)_{ij} := b^q(\bar{\varphi}_j,\bar{\varphi}_i),~(\mathbb{F}_h^q)_i := f^q(\bar{\varphi}_i),~1\le i,j\le N_h,
+\]
+wobei $\bar{\varphi}_i,1\le i\le N_h$ die Knotenbasis aus Definition 2.50.
+Wir nehmen an, dass
+\begin{enumerate}[(i)]
+	\item $\mathbb{B}_h^1$ ist invertierbar.
+	\item $\rho\enbrace{\frac{\theta_b^2(\mu)}{\theta_b^1(\mu)}(\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2}<1$ für alle $\mu\in P$, wobei $\rho$ der Spektralradius ist.
+	\item $\exists \varepsilon>0: \abs{\frac{\theta_b^2(\mu)}{\theta_b^1(\mu)}} \le \frac{1-\varepsilon}{\norm{(\mathbb{B}_h^1)^{-1}\mathbb{B}^2_h}_{\mathbb{X}_h,\mathbb{X}_h^{-1}}}$, wobei $(\mathbb{X}_h,\mathbb{X}_h^{-1})$ Matrixnorm, definiert durch
+	\[
+	\norm{\mathbb{B}}_{\mathbb{X}_h,\mathbb{X}_h^{-1}} := \sup\limits_{\mathbb{V}\in \R^{N_h}} \frac{\norm{\mathbb{B}\mathbb{V}}_{\mathbb{X}_h^{-1}}}{\norm{\mathbb{V}}_{\mathbb{X}_h}},	
+	\]
+	mit $\norm{\mathbb{V}}_{\mathbb{X}_h}=\sqrt{V^T\mathbb{X}_hV}$ und die $(\mathbb{X}_h,\mathbb{X}_h^{-1})$-Norm die $L(X_h,X_h^{-1})$-Norm realisiert.
+\end{enumerate}
+Dann gilt die folgende Abschätzung:
+\[
+d_n(M,X_n) \le C\cdot e^{-an} \text{ für } C,a>0.
+\]
+
+\bet{Beweis:}\\
+Sei $\mathbb{U}_h(\mu)\in \R^{N_h}$ Lösung des LGS
+\[
+\mathbb{B}_h(\mu) \mathbb{U}_h(\mu) = \mathbb{F}_h(\mu),
+\]
+wobei $\mathbb{B}_h(\mu),\mathbb{F}_h(\mu)$ definiert in Folgerung 3.28.
+Dann gilt:
+\[
+\mathbb{U}_h(\mu) = \enbrace{I + \frac{\theta_b^2(\mu)}{\theta_b^1(\mu)}(\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2}^{-1} (\theta_b^1(\mu)\mathbb{B}_h^1)^{-1} \enbrace{\sum_{q=1}^{Q_f}\theta_f^q(\mu)\mathbb{F}_h^q}.
+\]
+Ausnutzen von Annahme (ii) und der Neumannreihe: $\sum_{k=0}^{\infty} \mathbb{B}^k = (I-\mathbb{B})^{-1}$ liefert:
+\[
+\mathbb{U}_h(\mu) = \sum_{k=0}^{\infty} \sum_{q=1}^{Q_f} \frac{(-1)^k (\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} \bigg((\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2\bigg)^k (\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q.
+\]
+Nun führen wir die Basisvektoren
+\[
+\mathbb{A}_{k,q} = \bigg((\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2\bigg)^k (\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q
+\]
+ein und schreiben
+\begin{align}
+\mathbb{U}_h(\mu) = \sum_{k=0}^{\infty} \sum_{q=1}^{Q_f} \frac{(-1)^k (\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} \mathbb{A}_{k,q}.
+\end{align}
+Ferner bezeichnen wir mit 
+\[
+X_n^{\mathbb{A}} := \spann \penbrace{\mathbb{A}_{k,q} ~|~k=0\dt{,}m-1,~q=1\dt{,}Q_f} \subset \R^{N_h}
+\]
+den $n$-dimensionalen Unterraum, welcher durch die ersten $n$ Basisvektoren aufgespannt wird, wobei $n=Q_f\cdot m$.
+
+Dann gilt:
+\begin{align*}
+d_n(M,X_h) &= \inf\limits_{X_n\subset X_h, \dim X_n=n} \sup\limits_{\mu\in P} \inf\limits_{\mathbb{V}\in \R^{N_h}} \norm{\mathbb{U}_h(\mu)- \mathbb{V}}_{\mathbb{X}_h}\\
+&\le \sup\limits_{\mu\in P} \inf\limits_{\mathbb{V}_n\in X_n^{\mathbb{A}}}  \norm{\mathbb{U}_h(\mu)- \mathbb{V}_n}_{\mathbb{X}_h}\\
+&\le \sup\limits_{\mu\in P} \norm{\mathbb{U}_h(\mu)- \sum_{k=0}^{m-1} \sum_{q=1}^{Q_f} \frac{(-1)^k (\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} \mathbb{A}_{k,q} }_{\mathbb{X}_h}\\
+&= \sup\limits_{\mu\in P} \norm{\sum_{k=m}^{\infty} \sum_{q=1}^{Q_f} \frac{(-1)^k (\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} \mathbb{A}_{k,q} }_{\mathbb{X}_h}\\
+&\le \sup\limits_{\mu\in P} \sum_{k=m}^{\infty} \sum_{q=1}^{Q_f} \abs{ \frac{(\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} } \norm{\mathbb{A}_{k,q}}_{\mathbb{X}_h}\\
+&= \sup\limits_{\mu\in P} \sum_{k=m}^{\infty} \sum_{q=1}^{Q_f} \abs{ \frac{(\theta_b^2(\mu))^k \theta_f^q(\mu)}{(\theta_b^1(\mu))^{k+1}} } \norm{ \bigg((\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2\bigg)^k (\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q }_{\mathbb{X}_h}\\
+&\le Q_f \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)}} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} }  \cdot \sum_{k=m}^{\infty} \abs{ \frac{(\theta_b^2(\mu))^k}{(\theta_b^1(\mu))^k} } \norm{(\mathbb{B}_h^1)^{-1}\mathbb{B}_h^2}^k_{\mathbb{X}_h,\mathbb{X}_h^{-1}}\\
+&\stackrel{(ii)}{\le} Q_f \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)}} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} }  \cdot \sum_{k=m}^{\infty} (1-\varepsilon)^{k-m+m}\\
+&\stackrel{l=k-m}{=} Q_f \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)}} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} }  \cdot (1-\varepsilon)^m \sum_{l=0}^{\infty} (1-\varepsilon)^l\\
+&= Q_f \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)}} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} }  \cdot (1-\varepsilon)^m \frac{1}{1-(1-\varepsilon)}\\
+&= \frac{Q_f}{\varepsilon} \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)}} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} }  \cdot \exp \enbrace{\frac{\ln (1-\varepsilon)n}{Q_f}}
+\end{align*}
+Indem wir $a = -\frac{\ln (1-\varepsilon)n}{Q_f}$ und $C = \frac{Q_f}{\varepsilon} \sup\limits_{\mu,q} \penbrace{ \abs{ \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)} \norm{(\mathbb{B}_h^1)^{-1} \mathbb{F}_h^q}_{\mathbb{X}_h} } }$ wählen, folgt die Behauptung.
+\hfill $\square$
+
+\ssect{5.12 Bemerkung}{}
+Gilt $b^2(u,v)=0$ und damit $\mathbb{B}_h^2 =0$ in Satz 5.11, so erhalten wir die folgende Darstellung für $\mathbb{U}_h(\mu)$:
+\[
+\mathbb{U}_h(\mu) = \sum_{q=1}^{Q_f} \frac{\theta_f^q(\mu)}{\theta_b^1(\mu)} \mathbb{A}_{0,q}.
+\]
+Der Greedy-Algorithmus würde dann eine Basis mit $N \approx Q_f$ konstruieren.
+Wir erhalten schließlich noch die allgemeine Aussage:
+
+\ssect{5.13 Satz}{}
+Sei $u(\mu)$ eine Lösung von $(P(\mu)), M_e := \penbrace{u(\mu)~|~\mu\in P}$ und $b$ affin parametrisch.
+Dann gilt:
+\[
+d_n(M_e,X) \le C\cdot e^{-cn^{\frac{1}{Q_b}}},
+\]
+mit Konstanten $c,C>0$.\\
+
+\bet{Beweis:} [Ohlberger, Rave, 2015].
+\hfill $\square$
 
 
 
