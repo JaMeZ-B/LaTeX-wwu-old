@@ -1289,35 +1289,38 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 % section 4 (end)
 \newpage
 
-\section{Zustände, die GNS-Konstruktion} % (fold)
+\section{Zustände und die GNS-Konstruktion} % (fold)
 \label{sec:5}
 
 \begin{definition}[{name=[positive Funktionale und Zustände]}]
 	Sei $A$ eine $C^*$-Algebra. 
 	Eine Abbildung $\varphi \colon A \to \mathbb{C}$ heißt \Index{positives Funktional}, falls $\varphi$ linear ist und $\varphi(A_+) \subset \mathbb{R}_+$ gilt. 
 	$\varphi$ heißt \Index{Zustand}, falls außerdem $\norm*{\varphi}= 1$ gilt. 
-	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$. \todo{Revision 5}
+	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$.
 \end{definition}
 
-\begin{proposition}
-	Sei $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. Dann ist
-	\mapdef{A \times A}{\mathbb{C}}{(a,b)}{\varphi(a^*b)}{}
-	eine positive Sesquilinearform\index{Sesquilinearform}. 
+\begin{proposition}[{name=[positive Sesquilinearformen aus positiven Funktionalen]}]
+	Sei $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. Dann ist $(a,b) \mapsto \varphi(a^*b)$ eine positiv semidefinite Sesquilinearform\index{Sesquilinearform} auf $A$.
+	% \mapdef{A \times A}{\mathbb{C}}{(a,b)}{\varphi(a^*b)}{}
+	% eine positive Sesquilinearform\index{Sesquilinearform}.
 	Insbesondere gilt die Cauchy-Schwarz-Ungleichung 
 	\[
-		\abs*{\varphi(a^*b)} \le \varphi(a^*a)^{\sfrac{1}{2}}\varphi(b^*b)^{\sfrac{1}{2}}
+		\abs[\big]{\varphi(a^*b)} \le \varphi(a^*a)^{\sfrac{1}{2}}\varphi(b^*b)^{\sfrac{1}{2}}
 	\]
 \end{proposition}
 \begin{beweis}
-	Klar.
+	Das einzige, was man sich kurz überlegen muss, ist die Eigenschaft von $(a,b) \mapsto \varphi(a^*b)$ hermitesch zu sein: Dies folge mit (ii) aus folgendem \autoref{satz:53}
+	\[
+		\overline{\varphi (a^* b)} = \varphi \enbrace[\big]{(a^*b)^*} = \varphi(b^*a) \mathrel{\reflectbox{\ensuremath{\longmapsto}}} (b,a) \qedhere
+	\]
 \end{beweis}
 
-\begin{satz}[label=satz:53]
+\begin{satz}[label=satz:53,{name=[Eigenschaften positiver Funktionale]}]
 	Sei $\varphi$ ein positives Funktional auf $A$. Dann gilt 
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\varphi$ ist beschränkt,
-		\item $\varphi(a^*)=\overline{}{\varphi(a)}$ für $a \in A$ und
-		\item $\abs*{\varphi(a)}^2 \le \norm*{\varphi} \varphi(a^*a)$ für $a \in A$
+		\item $\varphi(a^*)=\overline{\varphi(a)}$ für $a \in A$ und
+		\item $\abs*{\varphi(a)}^2 \le \norm*{\varphi} \cdot \varphi(a^*a)$ für $a \in A$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
@@ -1330,19 +1333,19 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 			\varphi(h) \ge \varphi \enbrace*{\sum_{n=0}^{k} \frac{1}{2^n} \cdot a_n} > k+1,
 		\end{align}
 		was ein Widerspruch ist.
-		\item Es sei $a=b-c+ i \cdot d - e \cdot e$ mit $b,c,d,e \in A_+$. Dann gilt
+		\item Es sei $a=b-c+ i \cdot d - i \cdot e$ mit $b,c,d,e \in A_+$. Dann gilt
 		\begin{align}
 			\varphi(a^*) = \varphi \enbrace*{b-c- i \cdot d + i \cdot e} &= \varphi(b) - \varphi(c) - i \cdot \varphi(d) + i \cdot \varphi(e) \\
 			&= \overline{\varphi(b) - \varphi(c) + i \cdot \varphi(d) - i \cdot \varphi(e)} = \overline{\varphi(a)}
 		\end{align}
 		\item Sei $(e_\lambda)_\Lambda$ eine approximative Eins. Dann gilt 
 		\[
-			\abs*{\varphi(a)}^2 = \lim_\lambda \abs*{\varphi(e_\lambda \cdot a)}^2  \StackText{C.S.}{\le}\lim_\lambda \varphi(e_\lambda^2) \varphi(a^*a) \le \norm*{\varphi} \varphi(a^*a) \qedhere
+			\abs*{\varphi(a)}^2 = \lim_\lambda \abs*{\varphi(e_\lambda \cdot a)}^2  \StackText{C.S.}{\le}\lim_\lambda \varphi(e_\lambda^2) \cdot \varphi(a^*a) \StackText{\ref{satz:54}}{\le} \norm*{\varphi} \cdot \varphi(a^*a) \qedhere
 		\]
 	\end{enumerate}
 \end{beweis}
 
-\begin{satz}[label=satz:54]
+\begin{satz}[label=satz:54,{name=[Äquivalenzen zur Positivität von Funktionalen]}]
 	Sei $A$ eine $C^*$-Algebra und $\varphi \in A^*$ ein (beschränktes) Funktional. Dann sind äquivalent:
 	\begin{enumerate}[(i)]
 		\item $\varphi$ ist positiv.
@@ -1353,31 +1356,55 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{satz}
 \begin{beweis}
 	Für die Implikation (i)$\Rightarrow$(ii) sei $\varphi$ positiv und $(e_\lambda)_\Lambda$ eine approximative Eins. 
-	Dann ist $\enbrace*{\varphi(e_\lambda)}_\Lambda \subset \benbrace*{0,\norm*{\varphi}}$ ein aufsteigendes Netz, also existiert der Limes und es gilt $\lim_\lambda \varphi(e_\lambda) \le \norm*{\varphi}$. 
+	Dann ist $\enbrace*{\varphi(e_\lambda)}_\Lambda \subset \benbrace*{0,\norm*{\varphi}}$ ein aufsteigendes Netz, da $\varphi$ positiv und linear ist, also existiert der Limes und es gilt $\lim_\lambda \varphi(e_\lambda) \le \norm*{\varphi}$. 
 	Sei $a \in A^1$. Dann gilt
 	\[
-		\abs*{\varphi(a)}^2 \grenzwl{\lambda} \abs*{\varphi(e_\lambda a)}^2 \le \varphi(e_\lambda^2) \varphi(a^*a) \le \varphi(e_\lambda) \varphi(a^*a)
-		\le \lim_\lambda \varphi(e_\lambda) \cdot \norm*{\varphi}
+		\abs*{\varphi(a)}^2 \grenzwl{\lambda\to\infty} \abs*{\varphi(e_\lambda a)}^2 \StackText{C.S.}{\le} \varphi \enbrace*{e_\lambda^2} \cdot \varphi(a^*a) \stackrel{e_\lambda^2 \le e_\lambda}{\le} \varphi(e_\lambda) \cdot \varphi(a^*a) \le \lim_\lambda \varphi(e_\lambda) \cdot \norm*{\varphi}
 	\]
 	Damit folgt $\norm*{\varphi}^2 \le \lim_\lambda \varphi(e_\lambda) \cdot \norm*{\varphi} \le \norm*{\varphi}^2$, also $\norm*{\varphi}=\lim_\lambda \varphi(e_\lambda)$.
 	
 	Die Implikation (ii)$\Rightarrow$(iii) ist trivial. 
 	Für (iii)$\Rightarrow$(i) sei $(e_\lambda)_\Lambda$ die approximative Eins mit $\norm*{\varphi}= \lim_\lambda \varphi(e_\lambda)$.
 	Behauptung: $\varphi(A_\sa) \subset \mathbb{R}$. Sei $a \in A_\sa^1$ mit $\varphi(a) = \alpha + i \cdot \beta$, $\alpha,\beta \in \mathbb{R}$. 
-	Wir dürfen $\beta \le 0$ annehmen. Sei $n \in \mathbb{N}$. Dann gilt 
+	Wir dürfen $\beta \le 0$ annehmen (betrachte sonst $a^*$). 
+	Sei $n \in \mathbb{N}$. Dann gilt 
 	\begin{align}
-		\norm*{(a- i \cdot n \cdot e_\lambda)}^2 \StackText{$C^*$}{=}\ldots \le 1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}
+		\norm*{a- i \cdot n \cdot e_\lambda}^2 = \norm[\big]{(a+ i \cdot n \cdot e_\lambda)(a- i \cdot n \cdot e_\lambda)} &= \norm*{a^2 +n^2 \cdot e_\lambda^2 + i \cdot n \cdot \enbrace*{e_\lambda a - a e_\lambda}} \\
+		&\le 1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}
 	\end{align}
-	Also ist 
-	\begin{align}
-		\alpha^2 + \beta^2 - 2 n \norm*{\varphi} \beta + n^2 \norm*{\varphi}^2=\ldots =\abs*{\varphi(a)- i \cdot n \cdot \norm*{\varphi}} &\grenzwl{\lambda}\abs*{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \\
-		&\le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot e_\lambda a - a e_\lambda} \\
-		&\grenzw{\lambda} \le \norm*{\varphi}^2 (1+ n^2)
-	\end{align}
-	Damit folgt $\norm*{\varphi}\neq 0$ oder $\beta=0$. Insgesamt also $\beta=0$ und damit $\varphi(A_\sa) \subset \mathbb{R}$.
+	Erweitern mit $\norm*{\varphi}^2$ liefert
+	\[
+		\begin{array}{rlccl}
+			&& \mbox{}\hspace{-2em}\mathclap{\abs[\big]{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}}}\hspace{2cm}\mbox{} && \\
+			&\hspace{4em}\rotatebox{270}{\ensuremath{\grenzw{\rotatebox{90}{\ensuremath{\lambda}}}}} &&  \rotatebox{270}{\ensuremath{\grenzw{\rotatebox{90}{\ensuremath{\lambda}}}}}& \\
+			&\abs[\big]{\varphi(a)- i \cdot n \cdot \norm*{\varphi}}^2 && \norm*{\varphi}^2 (1+ n^2) & \\
+			=&\abs[\big]{\alpha+ i \cdot \beta - i \cdot n \cdot \norm*{\varphi}}^2 &&& \\
+			=&\alpha^2 + \beta^2 - 2 \cdot n \cdot \norm*{\varphi} \cdot \beta + n^2 \norm*{\varphi}^2 &&&
+		\end{array}
+	\]
+	% \begin{alignat}{4}
+	% 	&& \abs[\big]{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \le &\norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}} && \\
+	% 	 \ArrowBetweenLines[{\rotatebox{270}{\ensuremath{\grenzw{\rotatebox{90}{\ensuremath{\lambda}}}}}}] &&& &&\ArrowBetweenLines*[{\rotatebox{270}{\ensuremath{\grenzw{\rotatebox{90}{\ensuremath{\lambda}}}}}}]\\
+	% 	\abs[\big]{\varphi(a)- i \cdot n \cdot \norm*{\varphi}}^2 &&& \norm*{\varphi}^2 (1+ n^2)
+	% \end{alignat}
+	% \begin{align}
+	% 	&\abs[\big]{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot \norm*{e_\lambda a - a e_\lambda}} \grenzw{\lambda}  \norm*{\varphi}^2 (1+ n^2) \\
+	% 	\abs[\big]{\varphi(a)- i \cdot n \cdot \norm*{\varphi}}^2 & \grenzwl{\lambda} \\
+	% 	=\abs[\big]{\alpha+ i \cdot \beta - i \cdot n \cdot \norm*{\varphi}}^2 & =\alpha^2 + \beta^2 - 2 n \norm*{\varphi} \beta + n^2 \norm*{\varphi}^2
+	% \end{align}
+	% \begin{align}
+	% 	\alpha^2 + \beta^2 - 2 n \norm*{\varphi} \beta + n^2 \norm*{\varphi}^2=\ldots =\abs*{\varphi(a)- i \cdot n \cdot \norm*{\varphi}} &\grenzwl{\lambda}\abs*{\varphi(a- i \cdot n \cdot e_\lambda)}^2 \\
+	% 	&\le \norm*{\varphi}^2 \enbrace*{1+ n^2 + n \cdot e_\lambda a - a e_\lambda} \\
+	% 	&\grenzw{\lambda}  \norm*{\varphi}^2 (1+ n^2)
+	% \end{align}
+	Wir erhalten 
+	\[
+		- 2 \cdot n \cdot \norm*{\varphi} \cdot \beta \le \norm*{\varphi}^2 - \alpha^2 -\beta^2
+	\]
+	Damit folgt $\norm*{\varphi}= 0$ oder $\beta\ge 0$. Insgesamt also in jedem Fall $\varphi(A_\sa) \subset \mathbb{R}$.
 	Sei $a \in A_+^1$. Dann gilt $e_\lambda-a \in A_\sa$ und $\norm*{e_\lambda-a} \le 1$ (denn $- \ind_{A^\simm}\le e_\lambda-a \le \ind_{A^\simm}$).
 	Also ist $\varphi(e_\lambda-a) \le \abs*{\varphi(e_\lambda-a)} \le \norm*{\varphi} \cdot \norm*{e_\lambda-a} \le \norm*{\varphi}$.
-	Dan gilt aber
+	Dann gilt aber
 	\begin{align}
 		\norm*{\varphi}- \varphi(a) = \lim_{\lambda} \varphi(e_\lambda) - \varphi(a) = \lim_\lambda \varphi \enbrace*{e_\lambda-a} \le \norm*{\varphi}
 	\end{align}
@@ -1391,8 +1418,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{beweis}
 	Die $C^*$-Algebra $B := C^*(a, \ind)\subset A^\simm$ ist abelsch, da $a$ normal ist. 
 	Insbesondere existiert ein Charakter $\varphi_2$ auf $B$ mit $\abs*{\varphi_2(a)}=\norm*{a}$.
-	Nach Hahn-Banach können wir $\varphi_2$ stetig und linear zu $\varphi_1$ auf $A^\simm$ fortsetzen mit $\norm*{\varphi_1} = \norm*{\varphi_2}$.
-	Weiter gilt $\varphi(\ind)= \varphi_2(\ind)=1$ und damit ist $\varphi_1$ ein stetiges lineares Funktional auf $A^\simm$ mit 
+	Nach Hahn-Banach können wir $\varphi_2$ stetig und linear zu $\varphi_1$ auf $A^\simm$ fortsetzen mit $\norm*{\varphi_1} = \norm*{\varphi_2}=1$.
+	Weiter gilt $\varphi_1(\ind)= \varphi_2(\ind)=1$ und damit ist $\varphi_1$ ein stetiges lineares Funktional auf $A^\simm$ mit 
 	\[
 		\norm*{\varphi_1} = \norm*{\varphi_2}\StackText{\ref{satz:54}}{=} \varphi_2(\ind) = \varphi_1(\ind)
 	\]
@@ -1401,18 +1428,18 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $\varphi$ auch ein Zustand.
 \end{beweis}
 
-\begin{proposition}[label=prop:56]
+\begin{proposition}[label=prop:56,{name=[{positive Funktionale und Elemente der Form $a^*a$}]}]
 	Sei $\varphi$ ein positives stetiges Funktional auf $A$. 
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item Für alle $a \in A$ gilt $\varphi(a^*a)=0 \iff \varphi(ba)=0$ für alle $b \in A$.
 		\item Für alle $a,b \in A$ gilt: $\varphi(b^*a^*ab) \le \norm*{a^*a}\varphi(b^*b)$.
 	\end{enumerate}
 \end{proposition}
 \begin{beweis}
 	\leavevmode
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item Die nicht triviale Implikation folgt mit Cauchy-Schwarz.
-		\item Benutze $b^*a^*ab \le b^* \enbrace*{\norm*{a^*a} \cdot \ind_{A^\simm}}b = \norm*{a^*a} \cdot b^*b$. \qedhere
+		\item Benutze $b^*a^*ab \le b^* \enbrace*{\norm*{a^*a} \cdot \ind_{A^\simm}}b = \norm*{a^*a} \cdot b^*b$. \todo{Revision 5} \qedhere
 	\end{enumerate}
 \end{beweis}
 
