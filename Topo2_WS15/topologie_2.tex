@@ -2613,8 +2613,134 @@ Ab jetzt: $R$ kommutativ!
 	\end{itemize}
 \end{bemerkung}
 
+\begin{definition}[{name=[konvergente Spektralfolge]}]
+	Wir sagen eine Spektralfolge $\enbrace*{R^r_{p,q},d^r_{p,q}}$ \bet{konvergiert}\index{Spektralfolge!konvergente} gegen den graduierten $R$-Modul $A_*$, falls es eine Filtrierung $F_s A_*$ von $A_*$ gibt mit
+	\[
+		0 = F_{-1}A_n \subseteq F_0 A_n \subseteq \ldots \subseteq F_n A_n = A_n
+	\]
+	und $E^\infty_{p,q} \cong \sfrac{F_p A_{p+q}}{F_{p-1}A_{p+q}}$.
+	Kurz schreiben wir $E_{p,q}^r \Rightarrow A_{p+q}$ (oder $E^2_{p,q}\Rightarrow A_{p+q}$).
+\end{definition}
+
+\begin{satz}[{name={Abbildungslemma}},label=abb.lemma]
+	Sei $f \colon E^r_{p,q} \to {E'}^r_{p,q}$ eine Abbildung von Spektralfolgen. 
+	Gibt es $r_0$, sodass $f^{r_0}_{p,q}$ für alle $p,q \ge 0$ ein Isomorphismus ist, so ist $f^r_{p,q}$ für alle $r\ge r_0$ ein Isomorphismus.
+	Insbesondere ist $f^\infty_{p,q} \colon E^\infty_{p,q} \to {E'}^\infty_{p,q}$ ein Isomorphismus.
+\end{satz}
+\begin{beweis}
+	Folgt direkt aus der Definition.
+\end{beweis}
+
+\begin{bemerkung}[{name=[kollabierende Spektralfolge]}]
+	Eine Spektralfolge \bet{kollabiert}\index{Spektralfolge!kollabierende} bei $E^r$, falls es auf der $r$-Seite $E^r_{p,q}$ genau eine Spalte $E^r_{p_0,*}$ oder eine Zeile $E^r_{*,q_0}$ gibt, sodass alle Moduln $E^r_{p,q}$ außerhalb dieser Spalte bzw. Zeile trivial sind.
+	Gilt $E^r_{p,q}\Rightarrow A_{p+q}$, so folgt 
+	\[
+		A_n \cong E^r_{p_0,n-p_0} \quad \text{ bzw. } \quad A_n \cong E^r_{n-q_0,q_0}
+	\]
+\end{bemerkung}
+
+\begin{lemma}
+	Sei $E^r_{p,q}$ eine Spektralfolge, die gegen $A_n$ konvergiert. 
+	\begin{enumerate}[(i)]
+		\item Angenommen $E^2_{p,q}=0$ für $p\ge 2$ (Zwei Spalten).
+		Dann gibt es eine kurze exakte Folge 
+		\[
+			\begin{tikzcd}
+				0 \rar & E^2_{1,n-1} \rar & A_n \rar & E^2_{0,n} \rar & 0
+			\end{tikzcd}
+		\]
+		\item Angenommen $E^2_{p,q}=0$ für $g \ge 2$ (Zwei Zeilen). Dann gibt es eine lange exakte Folge
+		\[
+			\begin{tikzcd}
+				\ldots \rar & A_{p+1} \rar & E^2_{p+1,0} \rar["d^2_{p+1,0}"] & E^2_{p-1,1} \rar & A_p \rar & E^2_{p,0} \rar & \ldots 
+			\end{tikzcd}
+		\] 
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	Sei $F_s A_n \subseteq A_n$ die zur Konvergenz gehörige Filtrierung. 
+	Dann ist $\sfrac{F_n A_n}{F_{n-1 A_n}} \cong E^\infty_{n,0} \cong E^2_{n,0}$, $\sfrac{F_{n-1} A_n}{F_{n-2} A_n} \cong E^\infty_{n-1,1} \cong E^2_{n-1,1}$ und 
+	$\sfrac{F_{n-2 A_n}}{F_{n-3}A_n} \cong  \sfrac{F_{n-3} A_n}{F_{n-4} A_n} \cong \ldots \cong 0$.
+	Insbesondere ist $0 = F_{-1} A_n = \ldots = F_{n-2}A-n \subseteq F_{n-1} A_n \subseteq A_n$.
+	Damit ergibt sich
+	\[
+		\begin{tikzcd}[row sep=5pt]
+			0 \rar & F_{n-1} A_n \rar \dar[phantom,"\cong", sloped] & F_n A_n \rar\dar[phantom,"\cong", sloped] & \sfrac{F_n A_n}{F_{n-1} A_n} \rar\dar[phantom,"\cong", sloped] &0  \\
+			& E^2_{n-1,1} & A_n & E_{n,0}^2
+		\end{tikzcd}
+	\]
+	(ii) verbleibt als Übung.
+\end{beweis}
+
+\begin{satz}[name={Vergleichssatz}]
+	Sei $f \colon E^r_{p,q} \to {E'}^r_{p,q}$ eine Abbildung von Spektralfolgen.
+	Seien $E^2_{p,q} \Rightarrow A_{p+q}$ und ${E'}^2_{p,q} \Rightarrow A'_{p,q}$ mit zugehörigen Filtrierungen $F_s A_n \subseteq A_n$ und $F_s' A'_n \subseteq A'_n$.
+	Sei $H \colon A_n \to A_n'$ mit $h \enbrace*{F_s A_n} \subseteq F_s' A'_n$.
+	Angenommen $f \colon E^\infty_{p,q} \to {E'}^\infty_{p,q}$ stimmt mit der von $h$ induzierten Abbildung 
+	\[
+		\begin{tikzcd}[row sep=small]
+			\sfrac{F_p A_{p+q}}{F_{p-1} A_p+q} \rar["h"] \dar[phantom,"\cong", sloped] &\sfrac{F'_p A'_{p+q}}{F'_{p-1} A'_{p+q}} \dar[phantom,"\cong", sloped] \\
+			E^\infty_{p,q} \rar["f"] & {E'}^\infty_{p,q}
+		\end{tikzcd}
+	\]
+	überein. Gibt es ein $r_0$ mit $f^{r_0}_{p,q} \colon E^{r_0}_{p,q} \to {E'}^{r_0}_{p,q}$ ist ein Isomorphismus für alle $p,q$, so ist auch $h \colon A_n \to A'_n$ ein Isomorphismus.
+\end{satz}
+\begin{beweis}
+	Das \hyperref[abb.lemma]{Abbildungslemma} impliziert, dass auch $f \colon E^\infty_{p,q} \to {E'}^\infty_{p,q}$ ein Isomorphismus ist.
+	Folglich induziert $h$ Isomorphismen $\sfrac{F_p A_{p+q}}{F_{p-1}A_{p+q}} \to \sfrac{F'_p A'_{p+q}}{F'_{p-1} A'_{p+q}}$.
+	Nun benutzen wir
+	\[
+		\begin{tikzcd}
+			0 \rar & F_s A_n \rar \dar & F_{s+1} A_n \rar \dar & \sfrac{F_{s+1} A_n}{F_s A_n} \rar \dar & 0 \\
+			0 \rar & F'_s A'_n \rar  & F'_{s+1} A'_n \rar & \sfrac{F'_{s+1} A'_n}{F'_s A'_n} \rar  & 0 
+		\end{tikzcd}
+	\]
+	um per Induktion über $s=-1,0,1,2, \ldots ,n$ zu zeigen, dass $h\big|_{F_s A_n} \colon F_s A_n \to F'_s A'_n$ ein Isomorphismus ist.
+\end{beweis}
+
+\begin{definition}[{name=[kohomologische Spektralfolge]}]
+	Eine \Index{kohomologische Spektralfolge} (im 1. Quadranten) von $R$-Moduln besteht aus folgenden Daten:
+	\begin{enumerate}[1.]
+		\item Einer Folge von $R$-Moduln $E^{p,q}_r$ für $r,p,q\ge0$, 
+		\item $R$-linearen Abbildungen $d^{p,q}_r \colon E^{p,q}_r \to E_r^{p+r,q-r+1}$ mit $d^{p+r,q-r+1}_r \circ d^{p,q}_r =0$ und
+		\item Isomorphismen zwischen $E^{p,q}_r$ und der Kohomologie von $E_r^{*,*}$ bezüglich $d_r^{*,*}$, also 
+		\[
+			E^{p,q}_r \cong \frac{\ker d_r^{p,q}}{\im d^{p-r,q+r-1}_r} 
+		\]
+	\end{enumerate}
+\end{definition}
+\newpage
 % section 14 (end)
 
+\section{Die Spektralfolge zu einem filtrierten Kettenkomplex} % (fold)
+\label{sec:15}
+
+\todo[inline]{Revision 15}
+\begin{satz}
+	Sei $C_*$ ein Kettenkomplex mit einer Filtrierung von Kettenkomplexen $F_s C_* \subseteq C_*$, sodass
+	\[
+		0 = F_{-1}C_n \subseteq F_0 C_n \subseteq \ldots \subseteq F_n C_n = C_n
+	\]
+	Dann bestimmt die Filtrierung eine Spektralfolge $\enbrace*{E^r_{p,q},d^r_{p,q}}$ mit $E_{p,q}^0 = \sfrac{F_p C_{p+q}}{F_{p-1} C_{p+q}}$ und $E^2_{p,q} \Rightarrow H_{p+q}(C_*)$.
+\end{satz}
+
+Wir erhalten folgende Kette von $R$-Moduln zwischen $F_{p-q} C_n \subseteq F_p C_n$:
+\begin{align}
+	F_{p-1} C_n \subseteq d \enbrace*{F0 C_{n+1}} \cap F_p C_n + F_{p-1} C_n &\subseteq d \enbrace*{F_1 C_{n+1}}\cap F_p C_n + F_{p-1} C_n \\
+	&\subseteq \ldots \\
+	&\subseteq \Underbracket{d \enbrace*{F_{n+1} C_{n+1}}}{=\im d} \cap F_p C_n + F_{p-1} C_n \\
+	&\subseteq \Underbracket{d^{-1} \enbrace*{F_{-1} C_{n-1}}}{=\ker d} \cap F_p C_n + F_{p-1} C_n \\
+	&\subseteq d^{-1}\enbrace*{F_0 C_{n-1}}\cap F_p C_n + F_{p-1} C_n \\
+	&\subseteq \ldots  \\
+	&\subseteq d^{-1} \enbrace*{F_{n-2}C_{n-1}} \cap F_p C_n + F_{p-1} C_n \subseteq F_p C_n
+\end{align}
+Wir setzen 
+\[
+	E^r_{p,q} := \frac{d^{-1}\enbrace*{F_{p-r} C_{p+q-1}} \cap F_p C_{p+q} + F_{p-1}C_{p+q}}{d \enbrace*{F_{p+r-1} C_{p+q+1}} \cap F_p C_{p+q} + F_{p-1} C_{p+q}}
+	\subseteq \sfrac{F_p C_{p+q}}{F_{p-1} C_{p+q}} 
+\]
+
+% section 15 (end)
 
 \cleardoubleoddemptypage
 \appendix
