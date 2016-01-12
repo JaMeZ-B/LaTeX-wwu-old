@@ -1542,7 +1542,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\end{itemize}
 \end{definition}
 
-\begin{satz}[{name={GNS-Konstruktion}}]
+\begin{satz}[{name={GNS-Konstruktion}},label=gns]
 	Sei $A$ eine $C^*$-Algebra und $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. 
 	Wir setzen 
 	\[
@@ -1583,7 +1583,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Da $\dot{\pi}$ stetig fortgesetzt wird, gilt dann auch $\pi(a^*)=\pi(a)^*$.
 	
 	$(\mathcal{H}_\varphi,\pi_\varphi)$ ist die \Index{GNS-Darstellung}\footnote{nach \href{https://de.wikipedia.org/wiki/Israel_Moissejewitsch_Gelfand}{\textsc{\textbf{\emph{G}}elfand}}, \href{https://de.wikipedia.org/wiki/Mark_Neumark}{\textsc{\textbf{\emph{N}}aimark}}, \href{https://de.wikipedia.org/wiki/Irving_Segal}{\textsc{\textbf{\emph{S}}egal}}} von $\varphi$.
-	$(\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi)$ ist zyklisch mit $\xi_\varphi = \lim_\lambda e_\lambda+N_\varphi$, wobei $(e_\lambda)_\lambda$ eine approximative Eins von $A$ ist. \emph{Übungsaufgabe 2 von Blatt 8, siehe \cref{sub:gns__zyklisch}}
+	$(\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi)$ ist zyklisch mit $\xi_\varphi = \lim_\lambda e_\lambda+N_\varphi$, wobei $(e_\lambda)_\lambda$ eine approximative Eins von $A$ ist. \emph{Übungsaufgabe 2 von Blatt 8, siehe \cref{sub:gns_zyklisch}}
 \end{satz}
 
 \begin{satz}[{name=[Existenz treuer Darstellungen]}]
@@ -2060,7 +2060,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Es folgt $ e h = e = h e$ und genauso $h e = h =eh$, also $h=e$ und damit die Eindeutigkeit. Rest ähnlich.
 \end{beweis}
 
-\begin{korollar}
+\begin{korollar}[label=korr:613]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra.
 	\begin{enumerate}[(i)]
 		\item $A$ hat reellen Rang\index{reeller Rang} $0$, das heißt $A_\sa=\overline{\set*{\xi a \in A_\sa \given \sigma(a) \text{ ist endlich}}}$.
@@ -2289,7 +2289,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Für $x,y \in \mathcal{B}(\mathcal{H})$ normal und $\xi \in \mathcal{H}$ gilt 
 	\begin{align}
 		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
-		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal*{\xi}{(y-x)y^* \xi} + \Underbracket{\skal*{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\
+		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal*{\xi}{(y-x)y^* \xi} + \Underbracket{\skal*{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\[-.8ex]
 		&\le \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
 	\end{align}
 	Falls nun $x_\lambda \grenzw{\so} y$ in $\mathcal{B}(\mathcal{H})$, so gilt 
@@ -2340,7 +2340,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 \begin{satz}[label=satz:624,name={Kaplansky's Dichtesatz}]
 	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.\marginnote{Dass $B$ vN-Algebra ist in Aufgabe 1 von Blatt 10 gezeigt}
 	Dann gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=2pt]
 		\item $\overline{A_\sa}^\so = \overline{A_\sa}^\wo= B_\sa$
 		\item $\overline{A_\sa^1}^\so= \overline{A^1_\sa}^\wo = B^1_\sa$
 		\item $\overline{A_+^1}^\so = \overline{A_+^1}^\wo= B_+^1$
@@ -2357,10 +2357,147 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		 	A_\sa \ni\frac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
 		 \]
 		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$\marginnote{auf Vektoren überprüfen}
+		 \item Sei $a \in B^1_\sa$. Nach (i) existiert ein Netz $(a_\lambda)_\Lambda \subset A_\sa$ mit $a_\lambda \grenzw{\so}a$.
+		 Sei $f \in C_b(\mathbb{R})$ gegeben durch \cref{fig:624}.
+		 \begin{figure}[t]
+		 	\centering{
+			\begin{tikzpicture}
+				\draw[] (-2,0) -- (2,0);
+				\draw (0,-1.2)-- (0,1.2);
+				\draw (-.1,-1) node[left]{$-1$} -- ++(.2,0);
+				\draw (-.1,1) node[left]{$1$} -- ++(.2,0);
+				\draw (-1,-.1) node[below]{$-1$} -- ++ (0,.2);
+				\draw (1,-.1) node[below]{$1$} -- ++ (0,.2);
+				\draw[Firebrick2,very thick] (-2,-1) -- (-1,-1) -- (1,1) -- (2,1) node[below left]{$f$};
+			\end{tikzpicture}
+			\hspace{2cm}
+			\begin{tikzpicture}
+				\draw[] (-2,0) -- (2,0);
+				\draw (0,-1.2)-- (0,1.2);
+				\draw (-.1,-1) node[left]{$-1$} -- ++(.2,0);
+				\draw (-.1,1) node[left]{$1$} -- ++(.2,0);
+				\draw (-1,-.1) node[below]{$-1$} -- ++ (0,.2);
+				\draw (1,-.1) node[below]{$1$} -- ++ (0,.2);
+				\draw[Firebrick2,very thick] (-2,0) -- (0,0) -- (1,1) -- (2,1) node[below left]{$g$};
+			\end{tikzpicture}
+			\caption{Funktionen im Beweis von \autoref{satz:624}\label{fig:624}}}
+		 \end{figure}
+		 $f$ ist stark stetig nach \autoref{prop:623}.
+		 Also ist $A_\sa^1 \ni  f(a_\lambda) \grenzw{\so} f(a)=a$ und damit $a \in \overline{A^1_\sa}^\so$.
+		 Wir haben also $B^1_\sa \subseteq \overline{A^1_\sa}^\so$ gezeigt. Die andere Inklusion ist klar.
+		 \item Wie (ii) mit $g$ anstatt $f$.
+		 \item Sei $a \in B^1$.
+		 Dann ist $\begin{psmallmatrix*}[l] 0 & a \\ a^* & 0 \end{psmallmatrix*} \in M_2(B)_\sa \subset \mathcal{B} \enbrace*{\mathcal{H}^{\oplus 2}}$. 
+		 Es gilt $\overline{M_2(A)}^\so=M_2(B)$ und nach (iii) existiert $(b_\lambda)_\Lambda \subset M_2(A)^1_\sa$ mit 
+		 \(
+		 	\begin{psmallmatrix}
+		 		b_{\lambda,1,1} & b_{\lambda,1,2} \\
+				b_{\lambda,2,1} & b_{\lambda,2,2}
+		 	\end{psmallmatrix}
+			=b_\lambda \grenzw{\so} \begin{psmallmatrix*}[l]
+				0 & a \\
+				a^* & 0
+			\end{psmallmatrix*}
+		 \).
+		 Dann gilt
+		 \[
+		 	\begin{pmatrix}
+		 		1 &0 \\
+				0 & 0
+		 	\end{pmatrix} 
+			\begin{pmatrix}
+		 		b_{\lambda,1,1} & b_{\lambda,1,2} \\
+				b_{\lambda,2,1} & b_{\lambda,2,2}
+			\end{pmatrix}
+			\begin{pmatrix}
+				0 & 0 \\
+				1 & 0
+			\end{pmatrix} =
+			\begin{pmatrix}
+				0 & b_{\lambda,1,2} \\
+				0 & 0
+			\end{pmatrix}
+		 \]
+		 Also ist $b_{\lambda,1,2} \in A^1$, wir erhalten $b_{\lambda,1,2} \grenzw{\so} a$ und damit $a \in \overline{A^1}^\so$.
+		 Wir haben somit die Inklusion $B^1 \subseteq \overline{A^1}^\so$ gezeigt; die andere ist wieder klar.
+		 \item Nach \autoref{korr:613} (ii) gilt $\mathcal{U}(B) = \overline{\set*{e^{i \pi h} \given h \in B^1_\sa}}^{\norm*{\cdot}}$.
+		 Zu $u \in \mathcal{U}(B)$ und $\varepsilon>0$ existiert ein $h \in B^1_\sa=\overline{A^1_\sa}^\so$ mit $\norm*{e^{i \pi h}-u}<\varepsilon$.
+		 Aber $\enbrace*{t \mapsto e^{i \pi t}} \in C_b(\mathbb{R})$ ist stark stetig nach \autoref{prop:623} und somit ist $e^{i \pi h} \in \overline{\mathcal{U}(A)}^\so$.
+		 Damit haben wir
+		 \[
+		 	\mathcal{U}(B) \subset \overline{\overline{\mathcal{U}(A)}^\so}^{\norm*{\cdot}} = \overline{\mathcal{U}(A)}^\so
+		 \]
+		 Die umgekehrte Inklusion ist wieder klar. \qedhere
 	\end{enumerate}
 \end{beweis}
+\newpage
 % section 6 (end)
 
+\section{Reine Zustände und irreduzible Darstellungen} % (fold)
+\label{sec:7}
+
+\begin{proposition}
+	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$ ein Zustand und $\rho \in A^*$ ein weiteres positives Funktional.
+	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit 
+	\[
+		\rho(a) = \skal[\big]{\xi_\varphi}{\pi_\varphi(a)h \xi_\varphi}
+	\]
+	wo $\enbrace*{\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi}$ die GNS-Darstellung zu $\varphi$ ist.
+\end{proposition}
+\begin{beweis}
+	Wir erinnern uns an die GNS-Konstruktion: $N_\varphi := \set*{a \in A \given \varphi(a^*a)=0}$ und $\mathcal{H}_\varphi = \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ (vergleiche \autoref{gns}).
+	Definiere auf $\sfrac{A}{N_\varphi}$ eine hermitesche Sesquilinearform $\sigma$ durch 
+	\[
+		\sigma \enbrace*{a + N_\varphi, b+ N_\varphi} := \rho(a^* b)
+	\]
+	$\sigma$ ist wohldefiniert, da $0 \le \rho \le \varphi$ ($N_\varphi \subset N_\rho$).
+	Es gilt für $a,b \in A$
+	\[
+		\sigma \enbrace*{a+ N_\varphi, b+N_\varphi} = \rho(a^*b) \le \rho(a^*a)^{\sfrac{1}{2}} \rho(b^*b)^{\sfrac{1}{2}} \le \varphi(a^*a)^{\sfrac{1}{2}} \varphi(b^*b)^{\sfrac{1}{2}} 
+		= \norm*{a + N_\varphi} \cdot \norm*{b+ N_\varphi}
+	\]
+	Damit ist $\norm*{\sigma}\le 1$ und $\sigma$ lässt sich stetig auf $\mathcal{H}_\varphi$ fortsetzen.
+	Für $\xi \in \mathcal{H}_\varphi$ ist $\eta \mapsto \sigma(\xi,\eta)$ eine stetige Linearform auf $\mathcal{H}_\varphi$.
+	Nach Riesz existiert genau ein Vektor $h \xi\in \mathcal{H}_\varphi$ mit $\sigma(\xi,\eta) = \skal*{h \xi}{\eta}$.
+	$\xi \mapsto h \xi$ ist linear und beschränkt. 
+	Also existiert genau ein $h \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $h \xi= h \xi$.
+	Es gilt 
+	\[
+		\overline{\sigma(\xi,\xi)}=\sigma(\xi,\xi)= \skal*{h \xi}{\xi} \in \mathbb{R}
+	\]
+	Damit ist $h=h^*$ nach Polarisierung.
+	Weiter gilt $\norm*{h} \le \norm*{\sigma} \le 1$.
+	Für $a \in A$ gilt 
+	\[
+		\skal*{a + N_\varphi}{h \enbrace*{a+ N_\varphi}}= \sigma(a^*a)=\rho(a^*a)\ge 0
+	\]
+	Also ist $\skal*{\xi}{h \xi} \ge 0$ für $\xi \in \mathcal{H}_\varphi$, also ist $h \ge 0$ (siehe \autoref{korr:514}) und damit $0 \le h \le \ind$.
+	Für $a,b,c \in A$ gilt 
+	\begin{align}
+		\skal[\big]{a + N_\varphi}{\pi_\varphi(c)h (b+N_\varphi)} = \skal[\big]{c^*a + N_\varphi}{h(b+N_\varphi)} = \rho \enbrace*{a^*cb} &= \skal[\big]{a + N_\varphi}{h(cb+N_\varphi)} \\
+		&= \skal[\big]{a+ N_\varphi}{h \pi_\varphi(c)(b+ N_\varphi)}
+	\end{align}
+	Damit ist $\pi_\varphi(c) h = h \pi_\varphi(c)$, also ist $h \in \pi_\varphi(A)'$.
+	Sei nun $(e_\lambda)_\Lambda \subset A^1_+$ eine approximative Eins. Dann ist $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi \in \mathcal{H}_\varphi$ und es gilt
+	\begin{align}
+		\rho(a)= \lim_{\lambda,\lambda'} \rho \enbrace*{e_\lambda a e_{\lambda'}}= \lim_{\lambda,\lambda'} \skal*{e_\lambda + N_\varphi}{h(a e_{\lambda'}+ N_\varphi)}
+		&= \lim_{\lambda,\lambda'} \skal*{e_\lambda+ N_\varphi}{h \pi_\varphi(a) (e_{\lambda'} + N_\varphi)} \\
+		&= \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}
+	\end{align}
+	Zur Eindeutigkeit: Sei $d \in \enbrace*{\pi_\varphi(A)'}^1_+$ mit $\rho(a)= \skal*{\xi_\varphi}{\pi_\varphi(a)d \xi_\varphi}$ für alle $a \in A$.
+	Dann gilt für $a,b \in A$, da $\xi_\varphi$ zyklisch ist
+	\begin{align}
+		\skal*{a+ N_\varphi}{d(b+N_\varphi)} = \skal*{\pi_\varphi(a) \xi_\varphi}{d \pi_\varphi(b) \xi_\varphi} = \skal*{\xi_\varphi}{\pi_\varphi(a^*b)d \xi_\varphi} 
+		&= \rho(a^*b) \\ &= \skal*{a+ N_\varphi}{h(b+N_\varphi)}
+	\end{align}
+	Also ist $d=h$.
+\end{beweis}
+
+\begin{satz}
+	Sei $(\mathcal{H},\pi)$ eine nicht degenerierte Darstellung einer $C^*$-Algebra $A$.
+	Dann ist $(\mathcal{H},\pi)$ eine direkte Summe von irreduziblen Darstellungen.
+\end{satz}
+% section 7 (end)
 
 
 \cleardoubleoddemptypage
@@ -2374,7 +2511,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 
 
 \subsection{GNS-Konstruktion ist zyklisch} % (fold)
-\label{sub:gns__zyklisch}
+\label{sub:gns_zyklisch}
 \todo[inline]{Aus Notizen übernehmen}
 % subsection gns_konstruktion_ist_zyklisch (end)
 
