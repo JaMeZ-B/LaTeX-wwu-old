@@ -1524,7 +1524,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 				A \rar[hook] &\Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)} \rar & \Faktor{\ell^\infty(\mathbb{N})}{c_0(\mathbb{N})} \rar["\chi"] & \mathbb{C}
 			\end{tikzcd}
 		\]
-		Die Menge rechts unten ist eine abelsche, unitale $C^*$-Algebra. Wähle einen Charakter $\chi$. Man sieht auch, dass die freien Ultrafilter in 1-zu-1-Zusammenhang zu $\beta \mathbb{N} \setminus \mathbb{N}$ stehen.\todo{Revision 5}
+		Die Menge rechts unten ist eine abelsche, unitale $C^*$-Algebra. Wähle einen Charakter $\chi$. Man sieht auch, dass die freien Ultrafilter in 1-zu-1-Zusammenhang zu $\beta \mathbb{N} \setminus \mathbb{N}$ stehen.
 	\end{enumerate}
 \end{beispiel}
 
@@ -1544,7 +1544,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 
 \begin{satz}[{name={GNS-Konstruktion}}]
 	Sei $A$ eine $C^*$-Algebra und $\varphi \colon A \to \mathbb{C}$ ein positives Funktional. 
-	Setze 
+	Wir setzen 
 	\[
 		N_\varphi := \set*{a \in A \given \varphi(a^*a)=0}\StackText{\ref{prop:56}(i)}{=}\set*{a \in A \given \varphi(ba)=0 \text{ für alle }b \in A}
 	\]
@@ -1552,36 +1552,38 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Definiere eine Abbildung
 	\mapdef{\Faktor{A}{N_\varphi} \times \Faktor{A}{N_\varphi}}{\mathbb{C}}{(a+N_\varphi,b+N_\varphi)}{\skal*{a+N_\varphi}{b+N_\varphi}:= \varphi(a^*b)}{}
 	$\skal*{\cdot}{\cdot}$ ist dann ein wohldefiniertes Skalarprodukt auf $\sfrac{A}{N_\varphi}$:
-	\begin{description}
-		\item[Wohldefiniertheit:] Sei $a+N_\varphi=c+N_\varphi$ und $b+N_\varphi=d+N_\varphi$. 
-		Dann gilt $a-c \in N_\varphi$ und $b-d \in N_\varphi$. Damit folgt dann
-		\begin{align}
-			\abs*{\varphi(a^*b)-\varphi(c^*d)} \le \abs*{\varphi(a^*b)-\varphi(c^*b)} + \abs*{\varphi(c^*b)- \varphi(c^*d)} &= \abs*{\varphi \enbrace[\big]{(a^*-c^*)b}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}} \\
-			&= \abs[\Big]{\overline{\varphi \enbrace[\big]{b^*(a-c)}}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}} =0
-		\end{align}
-		\item[sesquilinear:] klar.
-		\item[antisymmetrisch:] Es ist $\varphi(a^*b)=\overline{\varphi(b^*a)}$.
-		\item[positiv definit:] Es gilt
-		\begin{align}
-			\skal*{a+N_\varphi}{a+N_\varphi}= 0 \iff \varphi(a^*a)=0 \iff a \in N_\varphi \iff a+ N_\varphi = N_\varphi =0 \in \Faktor{A}{N_\varphi}
-		\end{align}
-	\end{description}
-	Insgesamt ist $\sfrac{A}{N_\varphi}$ also ein Prä-Hilbertraum mit $\skal*{\cdot}{\cdot}$.
-	Sei $\mathcal{H}_\varphi := \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ die Hilbertraumvervollständigung.
-	Definiere $\dot{\pi} \colon A \to \mathcal{B}(\sfrac{A}{N_\varphi})$ durch $\dot{\pi}(a)(b+N_\varphi) := ab + N_\varphi$ für $a,b \in A$.
-	Dann ist $\dot{\pi}$ ein wohldefinierter kontraktiver Homomorphismus von Algebren:
-	Da $N_\varphi$ ein Linksideal ist, ist $\dot{\pi}(a)$ linear auf $\sfrac{A}{N_\varphi}$. Weiter ist $\dot{\pi}$ linear und multiplikativ: $A \to \mathcal{L}(\sfrac{A}{N_\varphi})$
+	Für die Wohldefiniertheit seien $a+N_\varphi=c+N_\varphi$ und $b+N_\varphi=d+N_\varphi$.
+	Dann gilt $a-c \in N_\varphi$ und $b-d \in N_\varphi$. Damit folgt dann
 	\begin{align}
-		\norm*{\dot{\pi}(a)(b+N_\varphi)}^2_{\sfrac{A}{N_\varphi}} = \skal*{ab+N_\varphi}{ab+N_\varphi} = \varphi \enbrace*{b^*a^*ab} &\le \norm*{a}_A^2 \cdot \varphi(b^*b) \\
+		\abs[\big]{\varphi(a^*b)-\varphi(c^*d)} \le \abs[\big]{\varphi(a^*b)-\varphi(c^*b)} + \abs[\big]{\varphi(c^*b)- \varphi(c^*d)} &= \abs*{\varphi \enbrace[\big]{(a^*-c^*)b}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}} \\[-1em]
+		&\StackTextClap{\ref{satz:53}}{=} \abs[\Big]{\overline{\varphi \enbrace[\big]{b^*(a-c)}}} + \abs*{\varphi \enbrace[\big]{c^*(b-d)}}\\ &=0
+	\end{align}
+	Dass $\skal*{\cdot}{\cdot}$ sesquilinear ist, ist klar.
+	Die Antisymmetrie folgt mit $\varphi(a^*b)=\overline{\varphi(b^*a)}$ (nach \autoref{satz:53}). 
+	Die positive Definitheit rechnet man einfach wie folgt nach:
+	\[
+		\skal*{a+N_\varphi}{a+N_\varphi}= 0 \iff \varphi(a^*a)=0 \iff a \in N_\varphi \iff a+ N_\varphi = N_\varphi =0 \in \Faktor{A}{N_\varphi}
+	\]
+	Insgesamt ist $\sfrac{A}{N_\varphi}$ also ein Prä-Hilbertraum mit $\skal*{\cdot}{\cdot}$.
+	Sei $\mathcal{H}_\varphi := \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ die Hilbertraumvervollständigung und definiere $\dot{\pi} \colon A \to \mathcal{B}(\sfrac{A}{N_\varphi})$ durch $\dot{\pi}(a)(b+N_\varphi) := ab + N_\varphi$ für $a,b \in A$.
+	Dann ist $\dot{\pi}$ ein wohldefinierter kontraktiver Homomorphismus von Algebren:
+	Da $N_\varphi$ ein Linksideal ist, ist $\dot{\pi}(a)$ linear auf $\sfrac{A}{N_\varphi}$. Weiter ist $\dot{\pi}$ linear und multiplikativ als Abbildung $A \to \mathcal{L}(\sfrac{A}{N_\varphi})$. Kontraktivität:
+	\begin{align}
+		\norm[\big]{\dot{\pi}(a)(b+N_\varphi)}^2_{\sfrac{A}{N_\varphi}} = \skal*{ab+N_\varphi}{ab+N_\varphi} = \varphi \enbrace*{b^*a^*ab} &\StackTextClap{\ref{prop:56}(ii)}{\le} \norm*{a}_A^2 \cdot \varphi(b^*b) \\
 		&= \norm*{a}_A^2 \cdot \norm*{b+N_\varphi}^2_{\sfrac{A}{N_\varphi}}
 	\end{align}
 	Damit gilt $\norm*{\dot{\pi}(a)(b+N_\varphi)}_{\sfrac{A}{N_\varphi}} \le \norm*{a}_A \cdot \norm*{b+N_\varphi}_{\sfrac{A}{N_\varphi}}$, also $\norm*{\dot{\pi}(a)}_{\mathcal{B}(\sfrac{A}{N_\varphi})} \le \norm*{a}_A$.
 	Insgesamt ist $\dot{\pi}\colon A \to \mathcal{B}(\sfrac{A}{N_\varphi})$ also ein kontraktiver Homomorphismus.
 	Für jedes $a \in A$ ist $\norm*{\dot{\pi}(a)}$ beschränkt durch $\norm*{a}$, daher besitzt $\dot{\pi}(a)$ eine eindeutig bestimmte Fortsetzung $\pi_\varphi(a) \in \mathcal{B}\enbrace{\mathcal{H}_\varphi}$ mit $\norm*{\pi_\varphi(a)} = \norm*{\dot{\pi}(a)}\le \norm*{a}$.
-	$\pi_\varphi \colon A \to \mathcal{B}(\mathcal{H}_\varphi)$ ist ein kontraktiver $^*$-Homomorphismus (Übung).
+	Wir zeigen nun, dass $\pi_\varphi \colon A \to \mathcal{B}(\mathcal{H}_\varphi)$ ein kontraktiver $^*$-Homomorphismus ist.
+	Dazu zeigen zunächst $\dot{\pi}(a^*)=\dot{\pi}(a)^*$. Für $[b],[c] \in \sfrac{A}{N_\varphi}$ gilt
+	\[
+		\skal*{[c]}{\dot{\pi}(a) [b]} = \varphi(c^*ab) = \varphi \enbrace*{(a^*c)^*b} = \skal*{\benbrace*{a^*c}}{[b]}= \skal*{\dot{\pi}(a^*)[c]}{[b]}
+	\]
+	Da $\dot{\pi}$ stetig fortgesetzt wird, gilt dann auch $\pi(a^*)=\pi(a)^*$.
 	
-	$(\mathcal{H}_\varphi,\pi_\varphi)$ ist die \Index{GNS-Darstellung} von $\varphi$.
-	$(\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi)$ ist zyklisch mit $\xi_\varphi = \lim_\lambda e_\lambda+N_\varphi$, wobei $(e_\lambda)_\lambda$ eine approximative Eins von $A$ ist (Übung).
+	$(\mathcal{H}_\varphi,\pi_\varphi)$ ist die \Index{GNS-Darstellung}\footnote{nach \href{https://de.wikipedia.org/wiki/Israel_Moissejewitsch_Gelfand}{\textsc{\textbf{\emph{G}}elfand}}, \href{https://de.wikipedia.org/wiki/Mark_Neumark}{\textsc{\textbf{\emph{N}}aimark}}, \href{https://de.wikipedia.org/wiki/Irving_Segal}{\textsc{\textbf{\emph{S}}egal}}} von $\varphi$.
+	$(\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi)$ ist zyklisch mit $\xi_\varphi = \lim_\lambda e_\lambda+N_\varphi$, wobei $(e_\lambda)_\lambda$ eine approximative Eins von $A$ ist. \emph{Übungsaufgabe 2 von Blatt 8, siehe \cref{sub:gns__zyklisch}}
 \end{satz}
 
 \begin{satz}[{name=[Existenz treuer Darstellungen]}]
@@ -1591,33 +1593,34 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{beweis}
 	Wir definieren die universelle Darstellung $(\mathcal{H}_u,\pi_u)$ durch 
 	\[
-		\mathcal{H}_u := \bigoplus_{\varphi \in S(A)} \mathcal{H}_\varphi = \set*{(\eta_\varphi)_{\varphi \in S(A)} \given \eta_\varphi \in \mathcal{H}_\varphi, \sum_{\varphi \in S(A)} \skal*{\eta_\varphi}{\eta_\varphi} <\infty}
+		\mathcal{H}_u := \bigoplus_{\varphi \in S(A)} \!\!\!\mathcal{H}_\varphi = \set*{(\eta_\varphi)_{\varphi \in S(A)} \given \eta_\varphi \in \mathcal{H}_\varphi, \sum\nolimits_{\varphi} \skal*{\eta_\varphi}{\eta_\varphi} <\infty}
 	\]
-	und $\pi_u \colon A \to \mathcal{B}(\mathcal{H}_u)$ mit $\pi_u (a) \enbrace*{(\eta_\varphi)_\varphi} := \enbrace*{\pi_\varphi(a) \eta_\varphi}_\varphi$ für $a \in A$.
-	Sei $0 \neq a \in A^1$. Dann existiert nach \autoref{satz:55} ein $\overline{\varphi} \in S(A)$ mit $\overline{\varphi}(a^*a)=\norm*{a}^2$.
-	Es gilt
+	und $\pi_u \colon A \to \mathcal{B}(\mathcal{H}_u)$ mit $\pi_u (a) \enbrace[\big]{(\eta_\varphi)_\varphi} := \enbrace[\big]{\pi_\varphi(a) \eta_\varphi}_\varphi$ für $a \in A$.
+	Sei $0 \neq a \in A^1$. Dann existiert nach \autoref{satz:55} ein $\overline{\varphi} \in S(A)$ mit $\overline{\varphi}(a^*a)=\norm*{a^*a}=\norm*{a}^2$.
+	Es gilt nun
 	\begin{align}
 		\norm*{a}^2 = \overline{\varphi}(a^*a) &= \overline{\varphi} \enbrace*{ (a^*a)^{\sfrac{1}{2}} (a^*a)^{\sfrac{1}{2}}}\\ 
 		&= \skal*{(a^*a)^{\sfrac{1}{2}}+N_{\overline{\varphi}}}{(a^*a)^{\sfrac{1}{2}}+N_{\overline{\varphi}}}_{\mathcal{H}_{\overline{\varphi}}} \\
-		&= \skal*{\pi_{\overline{\varphi}}\enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}} + N_{\overline{\varphi}}}}{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}_{\mathcal{H}_{\overline{\varphi}}} \\
-		&= \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}} \enbrace*{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}^2_{\mathcal{H}_{\overline{\varphi}}} \\
-		&\le \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{1}{4}}}}^2_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \\
-		&= \norm*{\pi_{\overline{\varphi}} \enbrace*{(a^*a)^{\sfrac{2}{4}}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} = \norm*{\pi_{\overline{\varphi}} \enbrace*{a^*a}^{\sfrac{1}{2}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}\\ 
-		&= \norm*{\pi_{\overline{\varphi}}(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \le \norm*{\pi_u(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}
+		&= \skal*{\pi_{\overline{\varphi}}\enbrace[\big]{(a^*a)^{\sfrac{1}{4}}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}} + N_{\overline{\varphi}}}}{\pi_{\overline{\varphi}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}_{\mathcal{H}_{\overline{\varphi}}} \\
+		&= \norm*{\pi_{\overline{\varphi}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}}+N_{\overline{\varphi}}}}^2_{\mathcal{H}_{\overline{\varphi}}} \\
+		&\le \norm*{\pi_{\overline{\varphi}} \enbrace[\big]{(a^*a)^{\sfrac{1}{4}}}}^2_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})}  \cdot \norm*{(a^*a)^{\sfrac{1}{4}}+ N_{\overline{\varphi}}}_{\mathcal{H}_{\overline{\varphi}}}^2\\
+		&= \norm*{\pi_{\overline{\varphi}} \enbrace[\big]{(a^*a)^{\sfrac{2}{4}}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \cdot \abs*{\overline{\varphi}\enbrace[\big]{(a^*a)^{\sfrac{1}{2}}}} \\
+		&\StackTextClap{\ref{satz:53}}{\le} \norm*{\pi_{\overline{\varphi}} \enbrace*{a^*a}^{\sfrac{1}{2}}}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \cdot \Underbracket{\norm*{\overline{\varphi}}^{\sfrac{1}{2}}}{=1} \cdot \overline{\varphi}(a^*a)^{\sfrac{1}{2}}\\ 
+		&= \norm*{\pi_{\overline{\varphi}}(a)}_{\mathcal{B}(\mathcal{H}_{\overline{\varphi}})} \cdot \norm*{a}\le \norm*{\pi_u(a)}_{\mathcal{B}(\mathcal{H}_{u})}\cdot \norm*{a}
 	\end{align}
-	Damit ist $\pi_u$ injektiv, also treu.
+	Damit ist $\pi_u$ injektiv also treu.\todo{Revision 5}
 	Falls $A$ separabel ist, so wählen wir eine abzählbare dichte Teilmenge $\set*{a_0,a_1,\ldots } \subset A^1$ und Zustände $\varphi_0, \varphi_1,\ldots \in S(A)$ mit $\varphi_i(a_i^*a_i) = \norm*{a_i^*a_i}= \norm*{a_i}^2$. 
-	Für $a \in A^1$ existiert dann ein $i \in \mathbb{N}$ mit $\varphi_i(a^*a) \ge \sfrac{1}{2} \norm*{a}^2$.
+	Für $a \in A^1$ existiert dann ein $i \in \mathbb{N}$ mit $\varphi_i(a^*a) \ge \frac{1}{2} \norm*{a}^2$.
 	Dann ist 
 	\[
-		\norm*{\pi_{\varphi_i}(a)} \ge \norm*{\pi_{\varphi_i}(a) \lim_\lambda \enbrace*{e_\lambda + N_{\varphi_i}}}_{\mathcal{H}_{\varphi_i}}
-		= \varphi_i \enbrace*{a^*a}^{\sfrac{1}{2}} \ge \frac{1}{\sqrt{2}} \norm*{a}
+		\norm*{\pi_{\varphi_i}(a)} \ge \norm[\big]{\pi_{\varphi_i}(a) \lim\nolimits_\lambda \enbrace*{e_\lambda + N_{\varphi_i}}}_{\mathcal{H}_{\varphi_i}}\hspace{-1ex}
+		= \varphi_i \enbrace*{a^*a}^{\sfrac{1}{2}} \ge \frac{1}{\sqrt{2}}\cdot \norm*{a}
 	\]
 	Wir definieren $\mathcal{H}_{\sep} := \bigoplus_{\mathbb{N}} \mathcal{H}_{\varphi_i}$ und $\pi_{\sep} \colon A \to \mathcal{B}(\mathcal{H}_{\sep})$ durch 
 	\[
 		\pi_{\sep}(a) \enbrace[\big]{(\eta_i)_{i \in \mathbb{N}}} := \enbrace[\big]{\pi_{\varphi_i}(a)(\eta_i)}_{i \in \mathbb{N}}
 	\]
-	Mit obiger Ungleichung folgt $\norm*{\pi_{\sep}(a)} \ge \sfrac{1}{\sqrt{2}} \norm*{a}$ und damit ist $\pi_{\sep}$ treu.
+	Mit obiger Ungleichung folgt $\norm*{\pi_{\sep}(a)} \ge \sfrac{1}{\sqrt{2}} \norm*{a}$ und damit ist $\pi_{\sep}$ treu.\todo{Hier verstehe ich nicht warum}
 \end{beweis}
 
 \begin{korollar}[{name=[Matrizen über einer C^*-Algebra]}]
@@ -1753,45 +1756,52 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \label{sec:6}
 
 \begin{erinnerungA}[{name=[starke Operatortopologie]},label=erinnerung:61]
-	Die \Index{starke Operatortopologie} $\mathcal{T}_\so$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen $p_\xi \colon \mathcal{B}(\mathcal{H}) \to \mathbb{R}_+$, $x \mapsto \norm*{x \xi}_\mathcal{H}$ für $\xi \in \mathcal{H}$ erzeugt wird.\todo{Revision 6}
-	Das heißt $\mathcal{T}_\so$ ist die gröbste Topologie, sodass Addition, skalare Multiplikation und alle Halbnormen $p_\xi$ stetig sind.
+	Die \Index{starke Operatortopologie} $\Tso$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen $p_\xi \colon \mathcal{B}(\mathcal{H}) \to \mathbb{R}_+$, $x \mapsto \norm*{x \xi}_\mathcal{H}$ für $\xi \in \mathcal{H}$ erzeugt wird.
+	Das heißt $\Tso$ ist die gröbste Topologie, sodass Addition, skalare Multiplikation und alle Halbnormen $p_\xi$ stetig sind.
 	\enquote{Typische} offene Mengen sind der Form
 	\[
 		U_{x,\xi,\varepsilon} := \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(x-y)\xi}<\varepsilon}
 	\]
 	wobei $x \in \mathcal{B}(\mathcal{H})$, $\xi \in \mathcal{H}$ und $\varepsilon>0$. 
 	Die $U_{x,\xi,\varepsilon}$ bilden eine Subbasis für $\mathcal{T}_\so$.
-	Für ein Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})$ und $x \in \mathcal{B}(\mathcal{H})$ gilt\marginnote{Damit ist $\mathcal{T}_\so$ die Topologie der punktweisen Konvergenz für Operatoren}
+	Für ein Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})$ und $x \in \mathcal{B}(\mathcal{H})$ gilt\marginnote{Damit ist $\Tso$ die Topologie der punktweisen Konvergenz}
 	\begin{align}
-		x_\lambda \grenzw{\so} x &\iff \norm*{(x_\lambda-x)\xi}_{\mathcal{H}} \grenzw{ }0 \text{ für jedes } \xi \in \mathcal{H} \\
-		&\iff x_\lambda \xi \grenzw{} x \xi \text{ für jedes } \xi \in \mathcal{H} 
+		x_\lambda \grenzw{\so} x &\iff \norm*{(x_\lambda-x)\xi}_{\mathcal{H}} \grenzw{ }0 \quad \text{ für jedes } \xi \in \mathcal{H} \\
+		&\iff x_\lambda \xi \grenzw{} x \xi \qquad \text{ für jedes } \xi \in \mathcal{H} 
 	\end{align}
-	$\mathcal{T}_\so$ ist schwächer als $\mathcal{T}_{\norm*{\cdot}}$, d.h. $\enbrace*{\mathcal{B}(\mathcal{H}), \mathcal{T}_{\norm*{\cdot}}} \grenzw{\raisemath{-2pt}{\id}} \enbrace*{\mathcal{B}(\mathcal{H}), \mathcal{T}_\so}$ ist stetig.
+	$\Tso$ ist schwächer als $\Top{\norm*{\cdot}}$, das heißt $\enbrace*{\mathcal{B}(\mathcal{H}), \Top{\norm*{\cdot}}} \grenzw{\raisemath{-2pt}{\id}} \enbrace*{\mathcal{B}(\mathcal{H}), \Tso}$ ist stetig.
 	Äquivalent dazu: Wenn $A \subset \mathcal{B}(\mathcal{H})$ $\so$-abgeschlossen ist, so ist $A$ auch $\norm*{\cdot}$-abgeschlossen. Alternativ: Wenn $x_\lambda\to x$ in der Normtopologie, dann auch in der starken Operatortopologie.
 	
 	Die Norm $\norm*{\cdot}$, die Multiplikation und Involution sind nicht stetig bezüglich der starken Operatortopologie:
-	Sei dazu $\mathcal{H}=\ell^2(\mathbb{N})$ mit Standardorthonormalbasis $(\eta_k)_\mathbb{N}$ und Matrixeinheiten $e_{ij}$.\marginnote{$e_{ij} \eta_k= \delta_{jk} \cdot \eta_i$}
-	Dann gilt $e_{0,n}\xrightarrow[n \to \infty]{\raisemath{-2pt}{\so}} 0$ aber $1=\norm*{e_{0,n}}\, \cancel{\to}\, 0$ und $e_{0,n}^* = e_{n,0} \not\xrightarrow{\raisemath{-2pt}{\so}} 0$.
-	Dass die Multiplikation nicht stetig ist, ist etwas subtiler (Übung).
+	Sei dazu $\mathcal{H}=\ell^2(\mathbb{N})$ mit Standardorthonormalbasis $(\eta_k)_\mathbb{N}$ und Matrixeinheiten\index{Matrixeinheiten}\marginnote{$e_{ij} \eta_k= \delta_{jk} \cdot \eta_i$} $e_{ij}$.
+	Dann gilt $e_{0,n}\grenzw{\raisemath{-2pt}{\so}} 0$ aber weder $1=\norm*{e_{0,n}}$ noch $e_{0,n}^* = e_{n,0}$ konvergieren gegen $0$ für $n \to \infty$.
+	Dass die Multiplikation nicht stetig ist, ist etwas subtiler (Übungsaufgabe 5 von Blatt 9).
 \end{erinnerungA}
 
-\begin{satz}[label=satz:62]
-	Sei $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ ein monotones und beschränktes Netz.
-	Dann existiert ein $x \in \mathcal{B}(\mathcal{H})$ mit $x_\lambda \grenzw{\so} x$.
+\begin{satz}[label=satz:62,{name=[monotone Netze selbstadjungierter Operatoren]}]
+	Sei $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ ein monotones und beschränktes Netz selbstadjungierter Operatoren.
+	Dann existiert ein $x \in \mathcal{B}(\mathcal{H})$ mit 
+	\[
+		x_\lambda \grenzw{\so} x
+	\]
 	Falls $(x_\lambda)_\Lambda$ ein aufsteigendes Netz von orthogonalen Projektionen ist, so ist $x$ die (orthogonale) Projektion auf $\overline{\bigcup_{\Lambda} x_\lambda \mathcal{H}}$.
-	Falls $(x_\lambda)_\Lambda$ ein absteigendes Netz aus Projektionen ist, so ist $x$ die Projektion auf $\bigcap_\Lambda\overline{x_\lambda \mathcal{H}}$.
+	Falls $(x_\lambda)_\Lambda$ ein absteigendes Netz aus Projektionen ist, so ist $x$ die Projektion auf $\bigcap_\Lambda\overline{x_\lambda \mathcal{H}}$.\todo{Revision 6}
 \end{satz}
 \begin{beweis}
-	Vergleiche Funktionalanalysis Satz 7.32. Idee: 
-	$\skal*{x_\lambda \xi}{\cdot} \in \mathcal{H}^*\cong \mathcal{H}$ ist schwach konvergent gegen ein $\eta:= x \xi$ (Polarisierung, Monotonie).
-	$x_\lambda \grenzw{\mathrm{wo}} x$ ($\skal*{\eta}{x_\lambda \xi} \to \skal*{\eta}{x \xi}$, $\xi,\eta \in \mathcal{H}$). Mit Beschränktheit folgt $x_\lambda \grenzw{\so} x$.
-	
-	Es seien nun die $x_\lambda$ Projektionen und $x_\lambda \grenzw{\so} x$. 
-	Dann folgt $x^2=x$ mittels 
+	Der erste Teil wurde schon in Funktionalanalysis Satz 7.32 bewiesen. 
+	Hier noch einmal kurz die Idee: 
+	Mittels Polarisierung und der Monotonie sieht man, dass $\skal*{x_\lambda \xi}{\cdot} \in \mathcal{H}^*\cong \mathcal{H}$ schwach gegen ein $\eta:= x \xi$ konvergiert.
+	Also
+	\[
+		x_\lambda \grenzw{\mathrm{wo}} x
+	\]
+	da $\skal*{\eta}{x_\lambda \xi} \to \skal*{\eta}{x \xi}$ für $\xi,\eta \in \mathcal{H}$. 
+	Mit Beschränktheit folgt dann $x_\lambda \grenzw{\so} x$.
+	In dem Fall, dass die $x_\lambda$ Projektionen sind, folgt $x^2=x$ mittels 
 	\[
 		\skal*{\eta}{x \xi} = \lim \skal*{\eta}{s_\lambda \xi} = \lim \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
 	\]
-	Also ist $x=x^*x=x^2$. Rest Übung!
+	Also ist $x=x^*x=x^2$. \emph{Rest Übung!}\todo{hinzufügen wenn soweit}
 \end{beweis}
 
 \begin{bemerkung}
