@@ -1799,12 +1799,12 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Mit Beschränktheit folgt dann $x_\lambda \grenzw{\so} x$.
 	In dem Fall, dass die $x_\lambda$ Projektionen sind, folgt $x^2=x$ mittels 
 	\[
-		\skal*{\eta}{x \xi} = \lim \skal*{\eta}{s_\lambda \xi} = \lim \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
+		\skal*{\eta}{x \xi} = \lim_\lambda \skal*{\eta}{x_\lambda \xi} = \lim_\lambda \skal*{x_\lambda \eta}{x_\lambda \xi} = \skal*{x \eta}{x \xi} = \skal*{\eta}{x^* x \xi}
 	\]
-	Also ist $x=x^*x=x^2$. \emph{Rest Übung!}\todo{hinzufügen wenn soweit}
+	Also ist $x=x^*x=x^2$. \emph{Der Rest ist Übungsaufgabe 4 von Blatt 9, siehe \cref{sub:mon_proj}}
 \end{beweis}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]}]
 	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$.
 	Dies ist äquivalent zu $0\le x$ in unserem Sinne: 
 	Aus $x=y^*y$ folgt 
@@ -2515,6 +2515,31 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 \todo[inline]{Aus Notizen übernehmen}
 % subsection gns_konstruktion_ist_zyklisch (end)
 
+\subsection{Monotones Netz von Projektionen} % (fold)
+\label{sub:mon_proj}
+Sei $(p_\lambda)_\Lambda$ ein aufsteigendes/absteigendes Netz von Projektionen. 
+Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ und $r$ die Projektion auf $\bigcap_\lambda p_\lambda(\mathcal{H})$. Dann gilt
+\begin{enumerate}[(i),itemsep=0pt]
+	\item Falls $(p_\lambda)_\Lambda$ aufsteigend ist, dann gilt $p_\lambda \grenzw{\so} q$.
+	\item Falls $(p_\lambda)_\Lambda$ absteigend ist, dann gilt $p_\lambda \grenzw{\so} r$.
+\end{enumerate}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Wir müssen zeigen, dass $p_\lambda \xi\to q \xi$ für alle $\xi \in \mathcal{H}$.
+		Für Projektionen gilt\todo{nachgucken, ob wir das schonmal gezeigt haben}
+		\[
+			p_\lambda \le p_\mu \iff p_\lambda(\mathcal{H}) \subset p_\mu(\mathcal{H})
+		\]
+		Jedes $\xi \in \mathcal{H}$ lässt sich eindeutig schreiben als $\xi=\xi_1 + \xi_2$ mit $\xi_1 \in \overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ und $\xi_2 \in \bigcap_\lambda p_\lambda(\mathcal{H})^\bot$.
+		Wähle eine Folge $(x_n)_\mathbb{N} \to \xi_1$.\todo{fertig machen}
+		\begin{align}
+			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} = \lim_{n\to \infty} \norm*{p_\lambda x_n - \xi_1}
+			= \lim_{n \to \infty} \norm*{x_n - \xi_1} =0
+		\end{align}
+	\end{enumerate}
+\end{beweis}
+% subsection mon_proj (end)
 
 
 \printindex
