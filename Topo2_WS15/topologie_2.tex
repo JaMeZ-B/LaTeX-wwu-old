@@ -1751,7 +1751,7 @@ Ab jetzt: $R$ kommutativ!
 	Dann ist auch $\partial M$ $R$-orientierbar.
 \end{lemma}
 \begin{beweis}
-	Sei $N$ eine Zusammehangskomponente von $\partial M$.
+	Sei $N$ eine Zusammenhangskomponente von $\partial M$.
 	Mit $M$ ist nach dem \hyperref[kragensatz]{Kragensatz} auch $N \times [0,1]$ orientierbar.
 	Nun betrachte einen Teil der Paarfolge zu $\enbrace*{N \times [0,1], \partial (N \times [0,1])}$
 	\[
@@ -2724,9 +2724,9 @@ Ab jetzt: $R$ kommutativ!
 	Dann bestimmt die Filtrierung eine Spektralfolge $\enbrace*{E^r_{p,q},d^r_{p,q}}$ mit $E_{p,q}^0 = \sfrac{F_p C_{p+q}}{F_{p-1} C_{p+q}}$ und $E^2_{p,q} \Rightarrow H_{p+q}(C_*)$.
 \end{satz}
 
-Wir erhalten folgende Kette von $R$-Moduln zwischen $F_{p-q} C_n \subseteq F_p C_n$:
+Wir erhalten folgende Kette von $R$-Moduln zwischen $F_{p-q} C_n \subseteq F_p C_n$:\todo{eventuell könnte man die $C$s weglassen, um das ganze übersichtlicher zu machen}
 \begin{align}
-	F_{p-1} C_n \subseteq d \enbrace*{F0 C_{n+1}} \cap F_p C_n + F_{p-1} C_n &\subseteq d \enbrace*{F_1 C_{n+1}}\cap F_p C_n + F_{p-1} C_n \\
+	F_{p-1} C_n \subseteq d \enbrace*{F_0 C_{n+1}} \cap F_p C_n + F_{p-1} C_n &\subseteq d \enbrace*{F_1 C_{n+1}}\cap F_p C_n + F_{p-1} C_n \\
 	&\subseteq \ldots \\
 	&\subseteq \Underbracket{d \enbrace*{F_{n+1} C_{n+1}}}{=\im d} \cap F_p C_n + F_{p-1} C_n \\
 	&\subseteq \Underbracket{d^{-1} \enbrace*{F_{-1} C_{n-1}}}{=\ker d} \cap F_p C_n + F_{p-1} C_n \\
@@ -2737,9 +2737,77 @@ Wir erhalten folgende Kette von $R$-Moduln zwischen $F_{p-q} C_n \subseteq F_p C
 Wir setzen 
 \[
 	E^r_{p,q} := \frac{d^{-1}\enbrace*{F_{p-r} C_{p+q-1}} \cap F_p C_{p+q} + F_{p-1}C_{p+q}}{d \enbrace*{F_{p+r-1} C_{p+q+1}} \cap F_p C_{p+q} + F_{p-1} C_{p+q}}
-	\subseteq \sfrac{F_p C_{p+q}}{F_{p-1} C_{p+q}} 
+	%\subseteq \sfrac{F_p C_{p+q}}{F_{p-1} C_{p+q}} 
+\]
+Die Filtrierung $F_s C_*$ auf $C_*$ induziert eine Filtrierung auf $H_n(C_*)$ mit 
+\[
+	F_s H_n(C_*) := \im \enbrace*{H_n(F_s C_*) \to H_n(C_*)}
 \]
 
+\begin{lemma}
+	Für $r>p,q+1$ ist $E^r_{p,q} \cong E^{r+1}_{p,q} \cong \ldots \cong \sfrac{F_p H_{p+q}(C_*)}{F_{p-1} H_{p+q}(C_*)}$.
+\end{lemma}
+\begin{beweis}
+	Für $r>p,q+1$ ist $E^r_{p,q} = \frac{\ker d \cap F_p C_{p+q} + F_{p-1}C_{p+q}}{\im d \cap F_p C_{p+q} + F_{p-1} C_{p+q}}$.
+	Es ist $F_p H_{p+q}(C_*) = \frac{\ker d \cap F_p C_{p+q}}{\im d  \cap F_p C_{p+q}}$ und es folgt
+	\[
+		\frac{F_p H_{p+q}(C_*)}{F_{p-1} H_{p+q}(C_*)} \cong \frac{\ker d \cap F_p C_{p+q}}{ \im d \cap F_p C_{p+q} + \ker d \cap F_{p-1}C_{p+q}} 
+	\]
+	Es ist weiter $\ker d \cap F_p C_{p+q} \subseteq \ker d \cap F_p C_{p+q} + F_{p-1} C_{p+q}$ und somit erhalten wir 
+	\[
+		\ker d \cap F_p C_{p+q} \longrightarrow \frac{\ker d \cap F_p C_{p+q} + F_{p-1}C_{p+q}}{\im d \cap F_p C_{p+q} + F_{p-1} C_{p+q}}
+	\]
+	Diese Abbildung ist surjektiv und ihr Kern ist $\enbrace*{\ker d \cap F_p C_{p+q}} \cap \enbrace*{\im d \cap F_p C_{p+q} + F_{p-1} C_{p+q}}$.
+	Wir müssen jetzt nur noch zeigen, dass 
+	\[
+		\im d \cap F_p C_{p+q} + \ker d \cap F_{p-1}C_{p+q}=\enbrace*{\ker d \cap F_p C_{p+q}} \cap \enbrace*{\im d \cap F_p C_{p+q} + F_{p-1} C_{p+q}}
+	\]
+	% dies dasselbe ist wie $\im d \cap F_p C_{p+q} + \ker d \cap F_{p-1}C_{p+q}$.
+	% Dies ist dasselbe wie $\im d \cap F_p C_{p+q} + \ker d \cap F_{p-1}C_{p+q}$ und es folgt.
+	Die Inklusion \enquote{$\subset$} ist dabei sofort klar. Für die umgekehrte sei $x$ in der rechten Menge.
+	Dann ist $x=x' + x''$ mit $x' \in \im d \cap F_p C_{p+q}$, $x'' \in F_{p-1} C_{p+q}$ und $x \in \ker d \cap F_p C_{p+q}$.
+	Es folgt $x''=x-x' \in \ker d \cap F_{p-1} C_{p+q}$ und somit ist $x$ auch in der linken Menge enthalten.
+\end{beweis}
+
+Wir definieren nun die Randabbildung 
+\[
+	\begin{tikzcd}
+		E^r_{p,q} \rar["d^r"] \dar[equal]& E^r_{p-r,q+r-1} \dar[equal] \\
+		\frac{d^{-1} \enbrace*{F_{p-r}C_{p+q-1}} \cap F_p C_{p+q}+ F_{p-1}C_{p+q}}{d \enbrace*{F_{p+r-1}C_{p+q+1} }\cap F_p C_{p+q} + F_{p-1 C_{p+q}}} & 
+		\frac{d^{-1} \enbrace*{F_{p-2r}C_{p+q-2}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1}C_{p+q-1}}{d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1} C_{p+q-1} }
+	\end{tikzcd}
+\]
+% \[
+% 	d^r \colon E^r_{p,q} =\frac{d^{-1} \enbrace*{F_{p-r}C_{p+q-1}} \cap F_p C_{p+q}+ F_{p-1}C_{p+q}}{d \enbrace*{F_{p+r-1}C_{p+q+1} }\cap F_p C_{p+q} + F_{p-1 C_{p+q}}}
+% 	\longrightarrow E^r_{p-r,q+r-1} = \frac{d^{-1} \enbrace*{F_{p-2r}C_{p+q-2}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1}C_{p+q-1}}{d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1} C_{p+q-1} }
+% \]
+wie folgt: Sie $x \in E^r_{p,q}$. 
+Wähle $a \in d^{-1} \enbrace*{F_{p-r}C_{p+q-1}} \cap F_p C_{p+q}$ mit $\benbrace*{a}= x$.
+Dann gilt
+\[
+	d(a) \in F_{p-r} C_{p+q-1} \cap \ker d \subseteq d^{-1} \enbrace*{F_{p-2r}C_{p+q-2}} \cap F_{p-r} C_{p+q-1}
+\]
+Wir setzen $d^r x := \benbrace*{d a} \in E^r_{p-r,q+r-1}$. 
+Wir müssen zeigen, dass dies unabhängig von der Wahl von $a$ ist.
+Sei $b \in d^{-1} \enbrace*{F_{p-r}C_{p+q-1}} \cap F_p C_{p+q}$ mit $[a]=[b] \in E^r_{p,q}$, also $a-b \in d \enbrace*{F_{p+r-1} C_{p+q+1}} \cap F_p C_{p+q} + F_{p-1} C_{p+q}$.
+Das heißt $a-b = dc + c'$ mit $c \in F_{p+r-1} C_{p+q+1}$, $c' \in F_{p-1} C_{p+q}$ und $d c \in F_p C_{p+q}$.
+Dann $d(a-b) = d c' \in d(F_{p-1} C_{p+q})$, da $da -db \in F_{p-r} C_{p+q-1}$.
+Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
+
+\begin{lemma}
+	Es gilt
+	\[
+		E^{r+1}_{p,q} \cong \frac{\ker d^r_{p,q} \colon E^r_{p,q} \to E^r_{p-r,w+r-1}}{\im d^r_{p+r,q-r+1} \colon E^r_{p+r,q-r+1} \to E^r_{p,q}} 
+	\]
+\end{lemma}
+\begin{beweis}
+	Sei $x \in \ker d^r_{p,q}$, also $x=[a]$ mit $a \in d^{-1} \enbrace*{F_{p-r} C_{p+q-1}} \cap F_p C_{p+q}$ und $d a \in d \enbrace*{F_{p-1} C_{p+q}}\cap F_{p-r}C_{p+q-1} + F_{p-r-1} C_{p+q-1}$.
+	Sei $da = dx + c'$ mit $c \in F_{p-1}C_{p+q}$, $d c \in  F_{p-r} C_{p+q-1}$ und $c' \in F_{p-r-1} C_{p+q-1}$.
+	Dann $\tilde{a} := a-c \in d^{-1} \enbrace*{F_{p-r} C_{p+q-1}} \cap F_p C_{p+q}$ und $a-\tilde{a}=c \in F_{p-1} C_{p+q}$, insbesondere $[a]=\benbrace*{\tilde{a}} \in E^r_{p,q}$ mit $\tilde{a} \in d^{-1}(F_{p-r} C_{p+q-1}) \cap F_p C_{p+q}$ und $d \tilde{a} = da - dx = c' \in F_{p-r-1} C_{p+q-1}$.
+	Wir erhalten $y := \benbrace*{\tilde{a}} \in E^{r+1}_{p,q}$.
+
+	Behauptung: $x \mapsto y$ ist wohldefiniert und liefert den gesuchten Isomorphismus.
+\end{beweis}
 % section 15 (end)
 
 \cleardoubleoddemptypage
