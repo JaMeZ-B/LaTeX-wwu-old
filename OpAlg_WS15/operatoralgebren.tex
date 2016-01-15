@@ -2436,7 +2436,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 \section{Reine Zustände und irreduzible Darstellungen} % (fold)
 \label{sec:7}
 
-\begin{proposition}
+\begin{proposition}[label=prop:71]
 	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$ ein Zustand und $\rho \in A^*$ ein weiteres positives Funktional.
 	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit 
 	\[
@@ -2493,10 +2493,118 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Also ist $d=h$.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[Darstellung als direkte Summe]}]
 	Sei $(\mathcal{H},\pi)$ eine nicht degenerierte Darstellung einer $C^*$-Algebra $A$.
-	Dann ist $(\mathcal{H},\pi)$ eine direkte Summe von irreduziblen Darstellungen.
+	Dann ist $(\mathcal{H},\pi)$ eine direkte Summe von zyklischer Darstellungen.
 \end{satz}
+\begin{beweis}
+	Sei $\mathcal{S} := \set[\big]{S \subset \mathcal{H}\setminus \set{0} \given {\overline{\pi(A) \xi}} \perp {\overline{\pi(A)\eta}} \text{ für alle }\xi \neq \eta \in S }$.
+	$\mathcal{S}$ ist partiell geordnet bezüglich Inklusion und abgeschlossen bezüglich Vereinigungen von aufsteigenden Teilmengen.
+	Nach Zorns Lemma besitzt $\mathcal{S}$ ein maximales Element $\tilde{S}$.
+	Sei $\eta \in \enbrace[\big]{\bigcup_{\xi \in \tilde{S}} \overline{\pi(a)\xi}}^\bot$, dann gilt für $a,b \in A$, $\xi \in \tilde{S}$.
+	\[
+		\skal[\big]{\pi(a) \eta}{\pi(b)\xi} = \skal[\big]{\eta}{ \pi(a^*b)\xi} =0
+	\]
+	Dann ist $\overline{\pi(A)\eta} \perp \overline{\pi(A)\xi}$ für alle $\xi \in \tilde{S}$.
+	Da $\tilde{S}$ maximal ist, muss $\eta \in \tilde{S}$ oder $\eta=0$ sein.
+	Falls $\eta \in \tilde{S}$, so gilt $\overline{\pi(A)\eta}\perp \overline{\pi(A)\eta}$, was ein Widerspruch ist, denn $(\mathcal{H},\pi)$ ist nicht degeneriert ($\Rightarrow  \pi(e_\lambda)\grenzw{\so}\ind_{\mathcal{B}(\mathcal{H})}$).
+	Also ist $\eta=0$ und damit
+	\[
+		\mathcal{H}= \overline{\bigcup_{\xi \in \tilde{S}} \pi(A)\xi} = \bigoplus_{\xi \in \tilde{S}} \overline{\pi(A)\xi}
+	\]
+	und $\pi(\cdot )\big|_{\overline{\pi(A)\xi}}$ ist zyklisch, denn $\xi \in \overline{\pi(A)\xi}$.
+\end{beweis}
+
+\begin{satz}[{name=[Eigenschaften irreduzibler Darstellungen]},label=satz:73]
+	Sei $(\mathcal{H},\pi)$ eine Darstellung einer $C^*$-Algebra $A$ mit $\pi \neq 0$. Dann gilt
+	\begin{enumerate}[(i)]
+		\item $(\mathcal{H},\pi)$ ist irreduzibel $\iff \pi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$.
+		\item $(\mathcal{H},\pi)$ ist irreduzibel $\Longrightarrow$ jedes $0 \neq \xi \in \mathcal{H}$ ist zyklisch, also $\overline{\pi(A)\xi}=\mathcal{H}$.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Für die Rückrichtung sei $(\mathcal{H},\pi)$ irreduzibel. 
+		Dann existiert $\tilde{\mathcal{H}} \subset \mathcal{H}$ abgeschlossen mit $\set*{0} \neq \tilde{\mathcal{H}}\neq \mathcal{H}$ und $\pi(A)\tilde{\mathcal{H}} \subset \tilde{\mathcal{H}}$.
+		Setze $p := p_{\tilde{\mathcal{H}}}$, dann gilt $0 \neq p \neq \ind_{\mathcal{B}(\mathcal{H})}$ und 
+		\[
+			p \pi(a)=\enbrace*{\pi(a)p}^* =\enbrace*{p \pi(a)p}^*=p \pi(a) p=\pi(a)p 
+		\]
+		für $a \in A_\sa$. 
+		Also ist $p	\in (A_\sa)'$ und somit $p \in A'$.
+		Damit ist $p= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$ für ein $\lambda \in \mathbb{C}$.
+		Da $p$ ein Projektion ist, folgt $\lambda \in \set*{0,1}$ und somit ist $p=0$ oder $p=\ind_{\mathcal{B}(\mathcal{H})}$, was ein Widerspruch ist.
+		
+		Für die andere Implikation stellen wir fest, dass $\pi(A)' \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra ist.
+		Falls $\pi(A)' \neq \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$, so existiert $h \in \pi(A)'$ selbstadjungiert, sodass $\sigma(h)$ mehr als einen Punkt enthält.
+		Ohne Einschränkungen sei $h \in \enbrace*{\pi(A)'}^1_+$ und $\set*{0,1} \in \sigma(h)$.\marginnote{Funktionalkalkül}
+		$p :=\chi_{(\sfrac{1}{2},1]}(h) \in \pi(A)'$ ist eine Projektion mit $0\neq p \neq \ind_{\mathcal{B}(\mathcal{H})}$.
+		Dann ist $\overline{p \mathcal{H}}$ ein $\pi(A)$-invarianter Unterraum und damit ist $(\mathcal{H},\pi)$ nicht irreduzibel.
+		\item Sei $(\mathcal{H},\pi)$ irreduzibel.
+		Dann ist $\overline{\pi(A)\xi}=\set*{0}$ oder $\overline{\pi(A)\xi}=\mathcal{H}$ für $\xi \in \mathcal{H}$, da die Darstellung irreduzibel ist.
+		Da $\pi\neq 0$ ist, existiert ein $\eta \in \mathcal{H}$ mit $\pi(A)\eta \neq \set*{0}$.
+		Also ist $\overline{\pi(A)\eta}=\mathcal{H}$.
+		Dann folgt $\overline{\pi_n(A)\xi} \neq \set*{0}$ und damit $\overline{\pi(A)\xi}=\mathcal{H}$, also ist $\xi$ zyklisch.\qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{definition}[{name=[reiner Zustand]}]
+	Sei $A$ eine $C^*$-Algebra.
+	Ein Zustand $\varphi \in S(A)$ heißt \bet{rein}\index{Zustand!reiner}, falls gilt: Für jedes $\rho \in A^*$ positiv mit $\rho \le \varphi$ existiert $\lambda \in [0,1]$ mit $\rho= \lambda \cdot \varphi$.
+	Wir schreiben $PS(A) := \set*{\text{ reine Zustände auf }A}$
+\end{definition}
+
+\begin{satz}[{name=[Charakterisierung reiner Zustände]},label=satz:75]
+	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$. Dann gilt
+	\[
+		\varphi \text{ ist rein } \iff (\mathcal{H}_\varphi, \pi_\varphi) \text{ ist irreduzibel}  
+	\]
+\end{satz}
+\begin{beweis}
+	Sei $\varphi$ rein und $0 \le h \le \ind_{\mathcal{B}(\mathcal{H})} \in \pi_\varphi(A)'$.
+	Dann definiert 
+	\mapdef{\rho \colon A}{\mathbb{C}}{a}{\skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}}{}
+	% $\rho \colon A \to \mathbb{C}$ gegeben durch $a \mapsto \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}$
+	ein positives Funktional auf $A$.\footnote{mit $h \pi(b^*b) = h^{\sfrac{1}{2}}h^{\sfrac{1}{2}} \pi(b^*b) = h^{\sfrac{1}{2}} \pi(b^*b) h^{\sfrac{1}{2}} \ge 0$} 
+	Es gilt $\rho \le \varphi$.\footnote{mit $h \pi(b^*b)= \pi(b^*)h \pi(b)\le \pi(b^*)\pi(b)$}
+	$\varphi$ ist rein, also existiert $\lambda \in [0,1]$ mit $\rho =\lambda \cdot \varphi$.
+	Für $a,b \in A$ erhalten wir:
+	\begin{align}
+		\skal*{a +N_\varphi}{h (b+ N_\varphi)} = \skal*{\pi(a) \xi_\varphi}{h \pi(b)\xi_\varphi} &= \skal*{\xi_\varphi}{h \pi(a^*b)\xi_\varphi} \\
+		&= \rho(a^*b) =\lambda \cdot \varphi(a^*b) \\
+		&= \lambda \cdot \skal*{a+ N_\varphi}{b + N_\varphi} \\
+		&= \skal*{a + N_\varphi}{\lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}(b+ N_\varphi)}
+	\end{align}
+	Also ist $\skal*{\xi}{h \eta}= \skal*{\xi}{\lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}(\eta)}$ für $\xi,\eta \in \mathcal{H}_\varphi$ und damit $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$.
+	Also ist $\pi_\varphi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$ und mit \autoref{satz:73} (i) folgt, dass $(\mathcal{H}_\varphi,\pi_\varphi)$ irreduzibel ist.
+	
+	Für die andere Implikation sei $(\mathcal{H}_\varphi,\pi_\varphi)$ irreduzibel und $\rho \in A^*$ positiv mit $\rho \le \varphi$.
+	Nach \autoref{prop:71} existiert $0 \le h \le \ind \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $\rho(a) = \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}$ für $a \in A$.
+	Nach \autoref{satz:73} (i) gilt $\pi_\varphi(A)'=\mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})}$, also $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$ für ein $\lambda \in [0,1]$ und $\rho(a)= \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}= \lambda \cdot \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi}= \lambda \cdot \varphi(a)$.
+\end{beweis}
+
+\begin{satz}[{name=[{Reine Zustände von $C_0(X)$}]}]
+	Sei $X$ ein lokalkompakter Hausdorffraum.
+	Dann gilt $PS\enbrace*{C_0(X)}=\Omega \enbrace*{C_0(X)}$.
+\end{satz}
+\begin{beweis}
+	Sei $\varphi \in PS \enbrace*{C_0(X)}$ ein reiner Zustand.
+	Dann gilt
+	\[
+		\pi_\varphi \enbrace*{C_0(X)} \subset \Underbracket{\pi_\varphi \enbrace*{C_0(X)}'}{\stackrel{\mbox{\tiny\ref{satz:73},\ref{satz:75}}}{=} \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}} \subset \mathcal{B}(\mathcal{H}_\varphi)
+	\]
+	und $\mathcal{B}(\mathcal{H}_\varphi) \subset \enbrace*{\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}}' \subset \pi_\varphi \enbrace*{C_0(X)}'=\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})}$.
+	Also ist $\mathcal{B}(\mathcal{H}_\varphi)= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})} \cong \mathbb{C}$.
+	Für $a,b \in C_0(X)$ gilt 
+	\begin{align}
+		\varphi(ab) = \skal*{\xi_\varphi}{\pi_\varphi(ab)\xi_\varphi} = \pi_\varphi(a) \skal*{\xi_\varphi}{\pi_\varphi(b) \xi_\varphi} 
+		&= \pi_\varphi(a) \Underbracket{\skal*{\xi_\varphi}{\xi_\varphi}}{=1} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
+		&= \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
+		&= \varphi(a) \cdot \varphi(b)
+	\end{align}
+	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$.
+\end{beweis}
 % section 7 (end)
 
 
