@@ -1750,10 +1750,10 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 			0 \rar & \mathcal{K} \rar[hook] & \mathcal{T} \rar[two heads] & C(\mathbb{T}) \rar & 0
 		\end{tikzcd}
 	\]
-	Für jede unitale $C^*$-Algebra $A$ mit einer Isometrie $w$, das heißt $w^*w=\ind$, existiert ein $^*$"=Homomorphismus $\varphi\colon\mathcal{T}\to A$ mit $\varphi(v)=w$, dies besagt der \emph{Satz von Coburn}.\todo{Revision 5}
+	Für jede unitale $C^*$-Algebra $A$ mit einer Isometrie $w$, das heißt $w^*w=\ind$, existiert ein $^*$"=Homomorphismus $\varphi\colon\mathcal{T}\to A$ mit $\varphi(v)=w$, dies besagt der \emph{Satz von Coburn}.
 \end{beispiel}
 
-\begin{beispiel}
+\begin{beispiel}[{name=[Cuntz-Algebren]}]
 	Sei $\mathcal{H}= L^2([0,1])$.
 	Definiere $v_1,v_2 \in \mathcal{B}(\mathcal{H})$ durch
 	\[
@@ -1767,23 +1767,53 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 			0 &\text{ falls } t \in [0,\sfrac{1}{2})
 		\end{cases} 
 	\]
-	\tikzexternaldisable
+	Wie man sich leicht überlegt, ist $v_i^* v_i=\ind$ und $v_1v_1^* + v_2v_2^*=\ind$. 
+	Die von $v_1$ und $v_2$ erzeugte $C^*$-Algebra  
 	\[
+		\mathcal{O}_2 := C^*(v_1,v_2) \subset \mathcal{B}(\mathcal{H}) 
+	\]
+	ist eine \href{https://de.wikipedia.org/wiki/Cuntz-Algebra}{\Index{Cuntz-Algebra}}. Ähnlich lassen sich $\mathcal{O}_n$ und $\mathcal{O}_\infty$ definieren.
+	$\mathcal{O}_2$ besitzt keinen Spurzustand und ist einfach (d.h. es gibt keine nichttrivialen abgeschlossenen zweiseitigen Ideale).
+	Ist nun $A$ eine beliebige unitale $C^*$-Algebra mit $s_1,s_2 \in A$, sodass $s_1^*s_1 = s_2^*s_2=\ind = s_1s_1^* + s_2s_2^*$.
+	Dann existiert ein $^*$-Homomorphismus $\pi \colon \mathcal{O}_2 \to A$ mit $\pi(v_i)=s_i$ für $i=1,2$.
+	\begin{figure}[bht]
+		\centering{
 		\begin{tikzpicture}
-			\begin{axis}
-				
+			\begin{axis}[
+				xtick distance=0.5,
+				% ytick distance=0.5,
+				minor x tick num=4,
+				% minor y tick num=4,
+				xticklabel style={/pgf/number format/frac},
+				declare function={f(\x)= sin(deg(2*pi*\x)) + 2 * \x + 3;}, %2*(\x)-0.5*(\x)^2
+				width=8cm,
+			]
+				\addplot[
+					Firebrick2,
+					domain=0:1,
+					samples=200,
+					very thick,
+				]
+				{f(x)} node[pos=0.65,below]{$f$};
+				\addplot[
+					DodgerBlue3,
+					domain=0:0.5,
+					samples=200,
+					very thick,
+				]
+				{sqrt(2)*f(2*x)} node[pos=0.5,above right]{$v_1(f)$};
+				\addplot[
+					SeaGreen4,
+					domain=0.5:1,
+					samples=200,
+					very thick,
+				]
+				{(sqrt(2))*f(2*x-1)} node[pos=0.5,above right]{$v_2(f)$};
 			\end{axis}
 		\end{tikzpicture}
-	\]
-	\missingfigure{Bildchen vom Zusammenquetschen}
-	Es ist $v_i^* v_i=\ind$ und $v_1v_1^* + v_2v_2^*=\ind$.
-	\[
-		\Oc_2 := C^*(v_1,v_2) \subset \mathcal{B}(\mathcal{H}) 
-	\]
-	ist eine \href{https://de.wikipedia.org/wiki/Cuntz-Algebra}{\Index{Cuntz-Algebra}}. Ähnlich lassen sich $\Oc_n$ und $\Oc_\infty$ definieren.
-	$\Oc_2$ besitzt keinen Spurzustand und ist einfach (d.h. es gibt keine nichttrivialen abgeschlossenen zweiseitigen Ideale).
-	Sei $A$ eine unitale $C^*$-Algebra mit $s_1,s_2 \in A$ und $s_1^*s_1 = s_2^*s_2=\ind = s_1s_1^* + s_2s_2^*$.
-	Dann existiert ein $^*$-Homomorphismus $\pi \colon \Oc_2 \to A$ mit $\pi(v_i)=s_i$ für $i=1,2$.
+		\caption{Wirkung von $v_1$ und $v_2$ in der Cuntz-Algebra $\mathcal{O}_2$ über $\mathcal{H}=L^2([0,1])$}
+		}
+	\end{figure}
 \end{beispiel}
 % section 5 (end)
 \newpage
