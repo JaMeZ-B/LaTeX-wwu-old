@@ -2710,9 +2710,142 @@ mit Konstanten $c,C>0$.\\
 \bet{Beweis:} [Ohlberger, Rave, 2015].
 \hfill $\square$
 
+\section{Empirische Interpolation}
 
+\subsection{Die empirische Interpolationsmethode}
+Unterkapitel 3.3 zeigt, dass affin parametrische (Bi-)Linearformen unabdingbar für eine Offlin-/Onlinezerlegung des RB-Modells sind.
+Gesucht ist daher ein Approximationsverfahren für parametrische Funktionen $g:\Omega\times P\to \R$ der Form
+\begin{align}
+g(x;\mu) \approx I_m[(g(.;\mu))](x) = \sum_{m=1}^M \theta_g^m(\mu)z_m(x),
+\end{align}
+mit Skalarenfunktionen $\theta_g^m(\mu)$ und einer sogenannten 'kollateralen Reduzierten Basis' $Z_m=\{z_m\}_{m=1}^M$.
+Da wir in Unterkapitel 3.3 und in Kapitel 5 gesehen haben, dass die Anzahl der Summanden in der affin parametrischen Darstellung sowohl den Rechenaufwand in der Offline-/Online-Phase, als auch das Konvergenzverhalten der RB-Approximation beeinflussen kann.
+Daher ist es wichtig eine Approximation zu finden, für die $M$ in (6.1) möglichst klein ist.
+Daher sind zum Beispiel Chebyshev oder Legendre Polynome \marginnote{Polynome schlecht für komplexe Gebiete.} als kollaterale Basis nur bedingt geeignet.
 
+Stattdessen wählen wir wieder einen 'Snapshot basierten Ansatz', dass heißt $Z_M\subset \spann \penbrace{g(.;\mu)~|~\mu\in S_{\train}\subset P}$.
+Die in [Barrault, Meday, Nguyen, Patera, 2004] eingeführte \bet{Empirische Interpolationmethode} ist eine Möglichkeit eine solche Approximation zu bestimmen.
 
+\ssect{6.1 Definition}{(Empirische Interpolationsmethode)}
+Sei $G_{\train} := \penbrace{g(.;\mu)~|~\mu\in S_{\train}} \subset G := \penbrace{g(.;\mu)~|~\mu\in P}\subset C^0(\bar{\Omega})$ mit $S_{\train}\subset P$ Menge zu interpolierender Funktionen und sei $\varepsilon$ eine vorgegebene Toleranz und $M_{\max}$ eine vorgegebene Anzahl von Iterationsschritten.
+Für $M\le M_{\max},M\le \dim (\spann (G_{\train}))$ definieren wir rekursiv die \bet{Interpolationspunktmenge} $T_M := \{t^1\dt{,}t^M\}\subset \bar{\Omega}$ und die kollaterale Reduzierte Basis $Z_M := \{z_1\dt{,}z_M\}\subset \spann (G_{\train})$ wie folgt:
+
+Initialisiere:
+$M=0;~e_0=\varepsilon + 1;~ I_0[g(.;\mu)](x) \equiv 0;~ \mu^1 = \argmax_{\mu\in S_{\train}} \norm{g(.;\mu)}_{C^0(\bar{\Omega})};~ T_0=\emptyset;~Z_0=\emptyset$.
+
+\texttt{while} $M<M_{\max}$ \texttt{and} $e_M > \varepsilon$:
+
+\qquad $M \leftarrow M+1$\\
+\qquad $r_M(x) = g(x;\mu^M) - I_{M-1}[g(.;\mu)](x)$\\
+\qquad $t^M = \argmax_{x\in \bar{\Omega}} \abs{r_M(x)}$\\
+\qquad $T_M = T_{M-1} \cup \{t^M\}$\\
+\qquad $z_M(x) = r_M(x) / r_M(t^M)$\\
+\qquad $Z_M = Z_{M-1} \cup \{z_M\}$\\
+\qquad $e_M = \max_{\mu\in S_{\train}} \norm{g(.;\mu)}_{C^0(\bar{\Omega})}$\\
+\qquad $\mu^{M+1} = \argmax_{\mu\in S_{\train}} \norm{g(.;\mu)}_{C^0(\bar{\Omega})}$\\
+\texttt{end}\\
+
+Hierbei bestimmen wir die Koeffizienten $\sigma_j^{M-1}(\mu^M)$ von $I_{M-1}[g(.;\mu^M)] := \sum_{j=1}^{M-1} \sigma_j^{M-1}(\mu^M) z_j$ durch lösen des LGS
+\begin{align}
+\sum_{j=1}^{M-1} \sigma_j^{M-1}(\mu^M) z_j(t^i) = g(t^i;\mu^M),~ 1\le i\le M-1.
+\end{align}
+Für allgemeine $\mu\in P$ definieren wir
+\begin{align}
+I_M[g(.;\mu)]:= \sum_{j=1}^{M} \sigma_j^{M}(\mu) z_j,
+\end{align}
+wobei
+\begin{align}
+\sum_{j=1}^{M} \sigma_j^{M}(\mu) z_j = g(t^i;\mu),~ 1\le i \le M.
+\end{align}
+Schließlich definieren wir die Matrix $\mathbb{B}^M\in \R^{M\times M}$ durch
+\begin{align}
+B_{ij}^M = z_j(t^i),~ 1\le i,j \le M.
+\end{align}
+Wir zeigen nun, dass die Konstruktion der Interpolationspunkte $\{t^i\}_{i=1}^M$ wohldefiniert ist und das $\{z_m\}_{m=1}^M$ linear unabhängig sind.
+Dazu benötigen wir das folgende Resultat:
+
+\ssect{6.2 Lemma}{}
+Unter der Annahme, dass für $W_{M-1} := \spann \{z_1\dt{,}z_{M-1}\} ~ \dim (W_{M-1}) = M-1$ gilt und $\mathbb{B}^{M-1}$ invertierbar ist, gilt 
+\[
+I_{M-1}[v] = v ~\forall v\in W_{M-1},
+\]
+wobei 
+\[
+I_{M-1}[v] = \sum_{j=1}^{M-1} \sigma_j^{M-1} z_j,
+\]
+und $\sigma_j^{M-1}$ Lösung von $\sum_{j=1}^{M-1} \sigma_j^{M-1} z_j(t^i) = v(t^i),~1\le i\le M-1$.
+Mit anderen Worten ist die Interpolation also exakt für alle $v\in W_{M-1}$.\\
+
+\bet{Beweis:}\\
+Da nach der Annahme $Z_{M-1} = \penbrace{z_1\dt{,}z_{M-1}}$ Basis von $W_{M-1}$ läst sich jedes $v\in W_{M-1}$ darstellen als
+\[
+v(x) = \sum_{j=1}^{M-1} \gamma_j^{M-1} z_j(x),
+\]
+mit entsprechenden Koeffizienten $\gamma_j^{M-1}\in \R$.
+
+Insbesondere gilt in den Interpolationspunkten $t^1\dt{,}t^{M-1}$:
+\[
+v(t^i) = \sum_{j=1}^{M-1} \gamma_j^{M-1} z_j(t^i),~ 1\le i \le M-1.
+\]
+Da $B_{ij}^{M-1} = z_j(t^i)$, folgt aus der Invertierbarkeit von $\mathbb{B}^{M-1}$, dass $\sigma_j^{M-1}=\gamma_j^{M-1}$ für $j=1\dt{,}M-1$ und daher $I_{M-1}[v]=v$.
+\hfill $\square$
+
+\ssect{6.3 Satz}{}
+Sei $M_{\max}< \dim(\spann (G_{\train}))$.
+Dann gilt für jedes $M\le M_{\max}$, dass $W_M:=\spann\penbrace{z_1\dt{,}z_M}$ die Dimension $M$ hat.
+Ferner ist die Matrix $\mathbb{B}^M$ eine untere Dreiecksmatrix mit 1 auf der Diagonalen und daher invertierbar.
+Schließlich sind die Interpolationspunkte $t^1\dt{,}t^M$ paarweise disjunkt.\\
+
+\bet{Beweis:}\\
+Durch vollständige Induktion:\\
+Es gilt offensichtlich, dass $W_1=\spann\{z_1\}$ Dimension 1 hat und dass $\mathbb{B}^1=1$ invertierbar ist.
+
+Wir nehmen an, dass $W_{M-1} = \spann\{z_1\dt{,}z_{M-1}\}$ die Dimension $M-1$ hat und die Matrix $\mathbb{B}^{M-1}$ invertierbar ist.
+Es ist dann zu zeigen, dass
+\begin{enumerate}[(i)]
+	\item $\dim W_M = M$ mit $W_M:=\spann\penbrace{z_1\dt{,}z_M}$,
+	\item $\mathbb{B}^M$ ist invertierbar.\\
+	(Die Aussage über die Disjunktheit der Interpolationspunkte folgt dann direkt.)
+\end{enumerate}
+
+\bet{Beweis (i):}
+\begin{align*}
+e_{M-1} &= \max\limits_{\mu\in S_{\train}} \norm{g(.;\mu) - I_M[g(.;\mu)]}_{C^0(\bar{\Omega})}\\
+&\ge \max\limits_{\mu\in S_{\train}} \inf\limits_{v\in W_{M-1}} \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})}\\
+&\ge \inf\limits_{W \subset C^0(\bar{\Omega}), \dim W = M_{\max}} \max\limits_{\mu\in S_{\train}} \inf\limits_{v\in W} \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})}\\
+&= d_{M_{\max}} ( G_{\train}, C^0(\bar{\Omega})) > 0,
+\end{align*}
+da $M_{\max} < \dim (\spann (G_{\train}))$ vorausgesetzt ist.
+Falls nun $\dim W_M\neq M$ gilt, so folgt $g(.;\mu^M)\in W_{M-1}$ und damit nach Lemma 6.2, dass $e_{M-1} = 0~\lightning$.
+Dies zeigt, dass $\dim W_M=M$ und
+\begin{align*}
+\norm{r_M}_{C^0(\bar{\Omega})} &= \norm{g(.;\mu^M) - I_{M-1}[g(.;\mu^M)]}_{C^0(\bar{\Omega})}\\
+&= \max\limits_{\mu\in S_{\train}} \norm{g(.;\mu) - I_{M-1}[g(.;\mu)]}_{C^0(\bar{\Omega})}\\
+&= e_{M-1} > 0.
+\end{align*}
+
+\bet{Beweis (ii):} Es gilt:
+\[
+B_{ij} = z_j(t^i) = \frac{r_j(t^i)}{r_j(t^j)} = \frac{g(t^i; \mu^j) - \sum_{l=1}^{j-1} \sigma_l^{j-1} z_l(t^i) }{r_j(t^j)}.
+\]
+Damit folgt:
+\begin{enumerate}[(1)]
+	\item $B_{ij}^M = 1$ für $i=j$.
+	\item $B_{ij}^M = 0$ für $i<j$, da nach Konstruktion
+	\[
+	g(t^i; \mu^j) = \sum_{l=1}^{j-1} \sigma_l^{j-1} z_l(t^i) \text{ für } 1\le i\le j-1.
+	\]
+	\item $\abs{B_{ij}^M}\le 1$, da $t^j= \argmax_{x\in \bar{\Omega}} \abs{r_j(x)}$.
+\end{enumerate}
+Daher ist $\mathbb{B}^M$ untere Dreiecksmatrix mit 1 auf der Diagonalen und daher invertierbar.
+Dies zeigt auch, dass $t^M \neq t^i$ für $i=1\dt{,}M-1$.
+Denn angenommen, dass $t^M = t^i$ für ein $i\in \penbrace{1\dt{,}M-1}$, dann folgt aus der Definition von $t^M$:
+\begin{align*}
+\max\limits_{x\in \bar{\Omega}} \abs{r_M(x)} &= \abs{r_M(t^M)} = \abs{r_M(t^i)}\\
+&= \abs{g(t^i;\mu^M) - \sum_{j=1}^{M-1} \sigma_j^{M-1}(\mu^M) z_j(t^i)}\\
+&= 0 ~\lightning.
+\end{align*}
+\hfill $\square$
 
 
 
