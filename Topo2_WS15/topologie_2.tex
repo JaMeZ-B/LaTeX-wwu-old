@@ -2771,7 +2771,7 @@ Die Filtrierung $F_s C_*$ auf $C_*$ induziert eine Filtrierung auf $H_n(C_*)$ mi
 
 Wir definieren nun die Randabbildung 
 \[
-	\begin{tikzcd}
+	\begin{tikzcd}[row sep=7pt]
 		E^r_{p,q} \rar["d^r"] \dar[equal]& E^r_{p-r,q+r-1} \dar[equal] \\
 		\frac{d^{-1} \enbrace*{F_{p-r}C_{p+q-1}} \cap F_p C_{p+q}+ F_{p-1}C_{p+q}}{d \enbrace*{F_{p+r-1}C_{p+q+1} }\cap F_p C_{p+q} + F_{p-1 C_{p+q}}} & 
 		\frac{d^{-1} \enbrace*{F_{p-2r}C_{p+q-2}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1}C_{p+q-1}}{d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1} C_{p+q-1} }
@@ -2807,8 +2807,111 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	Wir erhalten $y := \benbrace*{\tilde{a}} \in E^{r+1}_{p,q}$.
 
 	Behauptung: $x \mapsto y$ ist wohldefiniert und liefert den gesuchten Isomorphismus.
+	Sei also $\tilde{b} \in d^{-1}\enbrace*{F_{p-r-1}C_{p+q-1}}\cap F_pC_{p+q}$ mit $x=\benbrace*{\tilde{a}}=\benbrace*{\tilde{b}}$\todo{darauf soll $x$ doch abgebildet werden \ldots }
+	Also 
+	\[
+		\tilde{a}- \tilde{b} \in d \enbrace*{F_{p+r-1} C_{p+q+1}}\cap F_p C_{p+q} + F_{p-1} C_{p+q} \subseteq d \enbrace*{F_{p+r} C_{p+q-1}}\cap F_p C_{p+q} + F_{p-1} C_{p+q}
+	\]
+	Damit ist $\benbrace*{\tilde{a}} = \benbrace*{\tilde{b}} \in E^{r+1}_{p,q}$.
+	Damit ist die Abbildung -- ohne den Quotienten -- wohldefiniert.
+	
+	Sei nun $x \in \im d^r_{p+r,q-r+1}$, also $x= d^r z$ mit $z \in E^r{p+r,q-r+1}$.
+	Sei $z=\benbrace*{b}$ mit $b \in d^{-1} \enbrace*{F_p C_{p+q}} \cap F_{p+r} C_{p+q+1}$.
+	Dann ist $x = d^r z = \benbrace*{d b} \in E^r_{p,q}$.
+	Es ist $d^2(d b) =0$ und $d b \in F_p C_{p+q}$, da $b \in d^{-1}(F_p C_{p+q})$, also $db \in d^{-1} \enbrace*{F_{p-r-1} C_{p+q-1}} \cap F_p C_{p+q}$.
+	Also $x \mapsto \benbrace*{db} \in E^{r+1}_{p,q}$ unter der eben definierten Abbildung.
+	Zu zeigen: $db \in D \enbrace*{F_{p+r} C_{p+q+1}}\cap F_p C_{p+q} + F_{p-1} C_{p+q}$.
+	Da $b \in F_{p+r} C_{p+q+1}$ folgt $db \in d \enbrace*{F_{p+r} C_{p+q+1}}$ und da $b \in d^{-1}(F_p C_{p+q})$ folgt $db \in F_p C_{p+q}$.
+	Damit ist die Abbildung insgesamt wohldefiniert.
+	
+	Zur Injektivität: Sei $x= \benbrace*{\tilde{a}} \in \ker d^r$, also $\tilde{a} \in d^{-1} \enbrace*{F_{p-r-1} C_{p+q-1}} \cap F_p C_{p+q}$ mit $\benbrace*{\tilde{a}}=0 \in E^{r+1}_{p,q}$, also $\tilde{a} \in d \enbrace*{F_{p+r} C_{p+q+1}} \cap F_p C_{p+q} + F_{p-1} C_{p+q}$.
+	Seien $c \in F_{p+r}C_{p+q+1}$, $c' \in F_{p-1}C_{p+q}$ mit $d c \in F_{p} C_{p+q}$ und $\tilde{a} = d c + c'$.
+	Also $x= \benbrace*{\tilde{a}}= \benbrace*{d c}$.
+	Da $x \in d^{-1} \enbrace*{F_p C_{p+q}} \cap F_{p+r} C_{p+q+1}$, ist dann $\benbrace*{d c}=d^r([c])$. 
+	Also ist $x \in \im d^r_{p+r,q-r+1}$.
+	
+	Zur Surjektivität: Sei $y \in E^{r+1}_{p,q}$ und $\tilde{a} \in d^{-1} \enbrace*{F_{p-r-1} C_{p+q-1}}\cap F_p C_{p+q}$ mit $y = \benbrace*{\tilde{a}} \in E^{r+1}_{p,q}$.
+	Dann ist auch $\tilde{a} \in d^{-1} \enbrace*{F_{p-r} C_{p+q-1}} \cap F_p C_{p+q}$ und $x := \benbrace*{\tilde{a}} \in E^r_{p,q}$ ist ein Urbild für $y$ unter der Abbildung.
+	Es bleibt zu zeigen, dass $x =\benbrace*{\tilde{a}} \in E^r_{p,q}$ im Kern von $d^r_{p,q}$ liegt:
+	\[
+		d^r_{p,q} x = \benbrace*{d \tilde{a}} \in E^r_{p-r,q+r-1}
+	\]
+	Zu zeigen: $\benbrace*{d \tilde{a}} =0 \in E^r_{p-r,q+r-1}$, also $d \tilde{a} \in d \enbrace*{F_{p-r} C_{p+q}} \cap F_{p-r} C_{p+q-1} + F_{p-r-1} C_{p+q-1}$.
+	Da $\tilde{a} \in d^{-1} \enbrace*{F_{p-r-1} C_{p+q-1}}\cap F_p C_{p+q} \subseteq d^{-1} F_{p-r-1} C_{p+q-1}$ ist $d\tilde{a} \in F_{p-r-1} C_{p+q-1}$. 
 \end{beweis}
+
+\begin{proposition}
+	Sei $(C_{*,*},d^v,d^h)$ ein Doppelkomplex.
+	Seien nun $F^v_s T(C_{*,*}) := T \enbrace*{C_{*\le s,*}}$ und $F^h_s T(C_{*,*}) := T \enbrace*{C_{*,*\le s}}$ die vertikale und die horizontale Filtrierung des Totalkomplexes von $C_{*,*}$.
+	Dann gilt für die zugehörige Spektralfolgen $^v E^r_{p,q}$ und $^h E^r_{p,q}$ folgendes:
+	\begin{enumerate}[a)]
+		\item $^v E^1_{p,q} = H_q \enbrace*{C_{p,*},d^v}$, $^v d^1$ wird von $d^h$ induziert.
+		\item $^h E^1_{p,q} = H_p \enbrace*{C_{*,q},d^h}$, $^h d^1$ wird von $d^v$ induziert.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	\ldots 
+\end{beweis}
+
+\begin{korollar}
+	Sei $\enbrace*{C_{*,*},d^v,d^h}$ ein Doppelkomplex, dessen Zeilen (oder Spalten) exakt sind.
+	Dann ist $H_* \enbrace*{T(C_{*,*})}=0$
+\end{korollar}
+\begin{beweis}
+	Sind die Zeilen exakt, so ist $^vE^1_{p,q}=0$ für alle $p,q$ und damit $E^\infty_{p,q}=0$.
+	Da die $^v E^r_{p,q} \Rightarrow H_{p+q} \enbrace*{T(C_{*,*})}$ folgt $H_{p,+q} \enbrace*{T(C_{*,*})}=0$.
+	Für Spalten folgt die Aussage genauso mittels der horizontalen Spektralfolge.
+\end{beweis}
+\newpage
 % section 15 (end)
+
+\section{Künnethformeln} % (fold)
+\label{sec:16}
+
+\begin{proposition}
+	Sei $R$ ein Ring, $C_*$ ein Kettenkomplex von $R$-Rechtsmoduln und $D_*$ ein Kettenkomplex von $R$-Linksmoduln.
+	\begin{enumerate}[a)]
+		\item Sind die Kettenmoduln von $C_*$ projektiv, so gibt es eine Spektralfolge mit 
+		\[
+			E^2_{p,q} = H_p \enbrace[\big]{C_* \otimes_R H_q(D_*)} 
+		\]
+		die gegen $H_* \enbrace*{C_* \otimes_R D_{*}}$ konvergiert.
+		\item Sind die Kettenmoduln von $D_*$ projektiv, so gibt es eine Spektralfolge mit 
+		\[
+			E^2_{p,q} = H_p \enbrace[\big]{H_q(C_*) \otimes_R D_*} 
+		\]
+		die gegen $H_* \enbrace*{C_* \otimes_R D_*}$ konvergiert.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Wir benutzen die vertikale Spektralfolge des Doppelkomplexes $C_* \otimes_R D_*$.
+		Dann ist $E^1_{p,q}= H_q \enbrace*{C_p \otimes D_*, \id \otimes \partial^D}$ und $d^1$ wird von $\partial^C \otimes \id$ induziert.
+		Da $C_p$ projektiv ist und daher $C_p \otimes_R -$ ein exakter Funktor ist, ist die kanonische Abbildung 
+		\[
+			C_p \otimes_R H_q \enbrace*{D_*,\partial^D} \longrightarrow H_q \enbrace*{C_p \otimes_R D_*, \id \otimes \partial^D} 
+		\]
+		ein Isomorphismus. Also 
+		\[
+			E^2_{p,q} \cong H_p \enbrace*{C_* \otimes_R H_q(D_*), \partial^C \otimes \id} \cong H_p \enbrace*{C_* \otimes_R H_q(D_*)}
+		\]
+		\item analog. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{satz}[{name={Zerlegungssatz}}]
+	Sei $C_*$ ein Kettenkomplex über einem Hauptidealring.
+	Seien die Kettenmodule von $C_*$ frei.
+	Dann gibt es Kettenkomplexe $C_*^{[i]}$, $i \in \mathbb{N}$ mit 
+	\begin{itemize}
+		\item $C_*^{[i]}=0$ für $* \in \set*{i,i+1}$
+		\item $H_i \enbrace*{C_*^{[i]}} = H_i(C_*)$
+		\item $H_{i+1} \enbrace*{C_*^{[i]}}=0$ (insbesondere ist $\partial_{i+1}^{[i]} \colon C^{[i]}_{i+1} \to C_i^{[i]}$ injektiv)
+	\end{itemize}
+	und einen Isomorphismus von Kettenkomplexen $C_* \cong \bigoplus_{i \in \mathbb{N}} C_*^{[i]}$.
+\end{satz}
+% section 16 (end)
 
 \cleardoubleoddemptypage
 \appendix
