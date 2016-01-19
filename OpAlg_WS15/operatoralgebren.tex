@@ -2669,8 +2669,111 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		&= \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
 		&= \varphi(a) \cdot \varphi(b)
 	\end{align}
-	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$.
+	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$. 
+	Sei nun umgekehrt $\chi \in \Omega(C_0(X))$ und $\rho \in C_0(X)^*$ positiv mit $\rho \le \chi$.
+	Für $a \in C_0(X)$ gilt dann
+	\[
+		\abs*{\rho(a)} \StackText{\ref{satz:53}}{\le} \norm*{\rho}^{\sfrac{1}{2}} \rho(a^*a)^{\sfrac{1}{2}} \le \chi(a^* a)^{\sfrac{1}{2}} \le \abs*{\chi(a)} 
+	\]
+	Also ist $\ker \chi \subset \ker \rho$.
+	$\rho$ induziert nun ein Funktional $\tilde{\rho}$ auf $\sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C}$
+	\[
+		\begin{tikzcd}[column sep=.6em]
+			C_0(X) \ar[rr,"\rho"] \drar["\chi"]& & \mathbb{C} \\
+			& \sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C} \urar["\tilde{\rho}"]
+		\end{tikzcd}
+	\]
+	Also ist $\rho = \tilde{\rho} \circ \chi$.
+	Damit ist $\rho(. ) = \lambda \cdot \chi(.)$ für ein $\lambda \in \mathbb{C}$.
+	Für $a \in C_0(X)$ mit $\chi(a)=1$ gilt $0\le\rho(a^*a)= \lambda \cdot \chi(a^*a)=\lambda$ und außerdem $\rho(a^*a) \le \chi(a^*a)=1$, womit $0 \le \lambda\le 1$ ist.
+	Daraus folgt, dass $\chi$ rein ist.
 \end{beweis}
+
+\begin{definition}[{name=[Seiten und Extrempunkte]}]
+	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum, das heißt $X$ ist ein topologischer Vektorraum und die Topologie ist durch eine punkte trennende Familie $(p_\lambda)_\Lambda$ von Halbnormen induziert.\footnote{zum Beispiel: $x \mapsto \norm*{x \xi}$ für die starke Operatortopologie, $x \mapsto \abs*{\skal*{\eta}{x \xi}} $ für die schwache Operatortopologie}
+	Sei $C \subset X$ eine nichtleere, (kompakte,) konvexe Teilmenge und sei $F \subset C$ eine nichtleere konvexe Teilmenge.
+	$F$ heißt \Index{Seite} von $C$, falls gilt:  
+	Für $x \in F$, $y,z \in C$, $t \in (0,1)$ mit $x= t \cdot y +(1-t) \cdot z$ gilt bereits $y,z \in F$.
+	$x \in C$ heißt \Index{Extrempunkt} von $C$, falls $\set*{x}$ eine Seite von $C$ ist.
+	Wir schreiben 
+	\[
+		\partial_e C := \set[\big]{\text{Extrempunkte von } C}
+	\]
+\end{definition}
+
+\begin{proposition}[{name=[grundlegen Eigenschaften von Seiten]},label=prop:78]
+	Seien $X,C$ wie oben.
+	\begin{enumerate}[(i)]
+		\item $C$ ist eine Seite von $C$.
+		\item Eine nichtleerer Durchschnitt von Seiten ist wieder eine Seite.
+		\item Für eine Seite $F$ von $C$ gilt $\partial_e F \subset \partial_e C$.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	Klar.
+\end{beweis}
+
+\begin{lemma}[label=lem:79]
+	Seien $X$ und $C$ wie oben und $\varphi \colon X \to \mathbb{C}$ ein stetige lineares Funktional.
+	Setze $M :=\sup_{x \in C} \re \varphi(x)$.
+	Dann ist $F:= \set*{x \in C \given \varphi(x)=M}$ eine kompakte Seite von $C$.
+\end{lemma}
+\begin{beweis}
+	Da $C$ kompakt ist, existiert ein $x_0 \in C$, sodass $\re \varphi(x_0)=M$, also ist $F \neq \emptyset$.
+	Offensichtlich ist $F$ konvex.
+	Da $\varphi$ stetig ist, ist $F \subset C$ abgeschlossen 
+	Sei nun $x \in F$, $y,z \in C$ und $t \in (0,1)$ mit $x= t y +(1-t)z$.
+	Falls $y$ oder $z$ nicht in $F$ liegt, so gilt $\re \varphi(y) <M$ oder $\re \varphi(z)<M$.
+	Damit ist 
+	\[
+		M = \re \varphi(x) = t \cdot \re \varphi(y) + (1-t) \cdot \re \varphi(z) <M
+	\]
+	Dies ist ein Widerspruch, also müssen $y,z$ in $F$ liegen und damit ist $F$ eine Seite. 
+\end{beweis}
+
+\begin{satz}[{name={Krein-Milman}}]
+	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum und $C \subset X$ eine nichtleere, kompakte, konvexe Teilmenge.
+	Dann gilt 
+	\[
+		C=\overline{\conv(\partial_e C)}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei $\Lambda := \set*{\text{kompakte Seiten von }C}$.
+	Dann ist $C \in \Lambda$, das heißt $\Lambda \neq \emptyset$.
+	$\Lambda$ ist partiell geordnet bezüglich $\supset$.
+	Sei $\Gamma \subset \Lambda$ eine totalgeordnete Teilmenge, dann gilt unter der Annahme $\bigcap_{\gamma \in \Gamma} \gamma =\emptyset$
+	\[
+		C= C \setminus \bigcap_{\gamma \in \Gamma} \gamma = \bigcup_{\gamma \in \Gamma} \Underbracket{C \setminus \gamma}{\text{offen in }C}\StackText{C \text{ kpt.} }{=\joinrel=} 
+		\bigcup_{i=1}^n C \setminus \gamma_i \StackText{totalgeord.}{=\joinrel=\joinrel=} C \setminus \gamma_0 \neq C
+	\]
+	Damit ist $\bigcap_{\gamma \in \Gamma} \gamma \neq \emptyset$ eine kompakte Seite von $C$ und $\Gamma$ besitzt eine untere Schranke in $\Lambda$.
+	Also ist $\Lambda$ induktiv geordnet und mit dem Lemma von Zorn folgt die Existenz eines minimalen Elements $F_0$.
+	Behauptung: $F_0= \set*{x_0}$ für ein $x_0 \in C$.
+	Angenommen es gäbe $x_0 \neq y_0 \in F_0$. 
+	Dann existiert $\varphi \colon X \to \mathbb{C}$ stetig und linear mit $\re \varphi(x_0) \neq \re \varphi(y_0)$ (Hahn-Banach für lokalkonvexe Vektorräume).
+	Dann ist 
+	\[
+		F_1 :=  \set*{x \in F_0 \given \re \varphi(x)=M=\sup_{x \in F_0} \re \varphi(x)}
+	\]
+	eine kompakte Seite von $F_0$ nach \autoref{lem:79} und \autoref{prop:78}.
+	Es gilt $F_1 \subset F_0$, also folgt wegen der Minimalität $F_0=F_1$.
+	Dies ist ein Widerspruch und somit kann $F_0$ nur genau ein Element $x_0 \in \partial_e C$ besitzen.
+	
+	Angenommen es gibt ein $z \in C \setminus \overline{\conv(\partial_e C)}$.
+	Dann existiert (wieder nach Hahn-Banach) ein stetiges lineares $\psi \colon X \to \mathbb{C}$ mit 
+	\[
+		\sup_{y \in \overline{\conv(\partial_e C)}} \re \enbrace*{\psi(y)} \le \re \psi(z)
+	\]
+	Setze $M' := \sup_{x \in C} \re \psi(x)$ und $F':= \set*{x \in C \given \re \psi(x) =M'}$.
+	Dann ist $F'$ eine kompakte Seite von $C$ nach \autoref{lem:79}.
+	Wie oben sieht man, dass $F'$ einen Extrempunkt $y_0$ besitzt, der dann auch ein Extrempunkt von $C$ ist, also $y_0 \in \partial_e C$.
+	\[
+		M' = \re \psi(y_0) \le \sup_{y \in \overline{\conv(\partial_e C)}} \re \psi(y) < \re \psi(z) \le M'
+	\]
+	Dies ist ein Widerspruch und damit folgt die Behauptung.
+\end{beweis}
+
 % section 7 (end)
 
 
