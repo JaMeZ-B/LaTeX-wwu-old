@@ -499,7 +499,7 @@
 	Das $\cupp$-Produkt kann wie folgt aus dem $\times$-Produkt zurückgewonnen werden: 
 	Sei $\Delta \colon X \to X \times X$ die Diagonalabbildung $\Delta(x) := (x,x)$, dann gilt für $\xi \in H^p(X;R)$, $\zeta \in H^q(X;R)$
 	\[
-		\xi \cup \zeta = \Delta^*(\xi \times \zeta)
+		\xi \cupp \zeta = \Delta^*(\xi \times \zeta)
 	\]
 \end{bemerkung}
 
@@ -515,7 +515,7 @@
 				H^p(X;R) \otimes_R H^q(X,A;R) \rar & \minwidthbox{H^{p+q}(X,A;R)}{2cm} 
 			\end{tikzcd}
 		\]
-		\item Seien $A \subseteq X$ und $Y \subseteq Y$ Unterräume.
+		\item Seien $A \subseteq X$ und $B \subseteq Y$ Unterräume.
 		Dann erhalten wir relative $\times$-Produkte
 		\[
 			\begin{tikzcd}[row sep=0em]
@@ -529,7 +529,7 @@
 				H^p(X,A;R) \otimes_R H^q(X,B;R) \rar & H^{p+q}(X,A \cup B;R)
 			\end{tikzcd}
 		\]
-		konstruieren. Siehe Aufgabe 3 von Blatt 4.
+		konstruieren. \emph{Siehe Aufgabe 3 von Blatt 4.}
 		\item Sind $A \subseteq X$ und $B \subseteq Y$ offen, so erhält man ein relatives $\times$-Produkt
 		\[
 			\begin{tikzcd}
@@ -570,9 +570,9 @@
 	\begin{align}
 		\partial^\times(\xi \times \zeta)= \partial^\times \enbrace*{p_A^* \xi \cupp p_Y^* \zeta} = \partial^\times \benbrace[\big]{p_A^* \alpha \cupp p_Y^* \beta} &= 
 		\enbrace[\Big]{d^{p+q} \enbrace[\big]{p^*_X (\hat{\alpha}) \cupp p^*_Y(\beta)}} \\
-		\intertext{da $p^*_X(\hat{\alpha}) \cup p_Y^*(\beta)$ eine Fortsetzung von $p_Y^* (\alpha) \cup p_Y^*(\beta)$ ist. Weiter gilt}
-		&= \benbrace[\big]{p_X^* \enbrace*{d^p(\hat{\alpha})} \cupp p_Y^*(\beta) \pm p_X^*(\hat{\alpha}) \cupp p_Y^* \enbrace*{d^q \beta}} \\
-		&= p_X^* \benbrace[\big]{d^p(\hat{\alpha})} \cup p_Y^* \benbrace*{\beta} = \benbrace[\big]{d^p(\hat{\alpha})} \times \benbrace*{\beta} \\ 
+		\shortintertext{da $p^*_X(\hat{\alpha}) \cupp p_Y^*(\beta)$ eine Fortsetzung von $p_A^* (\alpha) \cupp p_Y^*(\beta)$ ist. Weiter gilt}
+		&= \benbrace[\big]{p_X^* \enbrace*{d^p\hat{\alpha}} \cupp p_Y^*(\beta) \pm p_X^*(\hat{\alpha}) \cupp p_Y^* \enbrace*{d^q \beta}} \\
+		&= p_X^* \benbrace[\big]{d^p(\hat{\alpha})} \cupp p_Y^* \benbrace*{\beta} = \benbrace[\big]{d^p(\hat{\alpha})} \times \benbrace*{\beta} \\ 
 		&= \partial \xi \times \zeta \qedhere
 	\end{align}
 \end{beweis}
@@ -586,7 +586,7 @@
 	\[
 		\begin{tikzcd}
 			H^0(D^1;R) \otimes H^p(X;R) \dar \rar["\times"] & H^p(D^1 \times X;R) \dar\\
-			H^0(\partial D^1;R)  \otimes H^p(X;R) \rar["\times"] \dar & H^p(\partial D^1 \times X;R) \dar \\
+			H^0(\partial D^1;R)  \otimes H^p(X;R) \rar["\times"] \dar & H^p(\partial D^1 \times X;R) \dar["\partial"] \\
 			H^1(D^1,\partial D^1;R) \otimes H^p(X;R) \rar["\times"] & H^{p+1} (D^1 \times X,\partial D^1 \times X;R)
 		\end{tikzcd}
 	\]
@@ -599,7 +599,7 @@
 	\]
 	Seien $j \colon \partial D^1 \hookrightarrow D^1$ und $i_\pm \colon \set*{\pm 1} \hookrightarrow \partial D^1$ die Inklusionen. 
 	Sei weiter $p \colon D^1 \to \set*{-1}$ die Projektion. 
-	Dann gilt $p^* \circ i_-^* \circ j^* = \id_{H^0(D^1;R)}$. 
+	Dann gilt ${p^*} \circ {i_-^*} \circ {j^*} = \id_{H^0(D^1;R)}$. 
 	Insbesondere spaltet die Sequenz und bleibt exakt nach Anwenden des Funktors ${-}\otimes H^p(X;R)$. 
 	Genauso überlegt man sich, dass die Paarfolge
 	\[
@@ -613,33 +613,35 @@
 			0 \rar & H^p \enbrace*{D^1\times X;R} \rar["i^*"] & H^p \enbrace*{\partial D^1 \times X;R} \rar["\partial"] \lar[bend left,"s^*"'] & H^{p+1} \enbrace*{D^1 \times X,\partial D^1 \times X;R} \rar & 0
 		\end{tikzcd}
 	\]
-	zerfällt: Sei dazu $s \colon D^1 \times X \to \partial D^1 \times X$ gegeben durch $(t,x) \mapsto (0,x)$ und $i \colon \partial D^1 \times X \hookrightarrow D^1 \times X$ die Inklusion.
-	Dann ist $i \circ s$ homotop zu $\id_{D^1 \times X}$, also $s^* \circ i^*=\id$ in Kohomologie und mit der Exaktheit folgt $j^*=0$. Die gesuchte Spaltung ist $s^*$.\todo{Revision 3}
+	zerfällt: Sei dazu $s \colon D^1 \times X \to \partial D^1 \times X$ gegeben durch $(t,x) \mapsto (1,x)$ und $i \colon \partial D^1 \times X \hookrightarrow D^1 \times X$ die Inklusion.
+	Dann ist $i \circ s$ homotop zu $\id_{D^1 \times X}$, also $s^* \circ i^*=\id$ in Kohomologie und mit der Exaktheit folgt $j^*=0$. Die gesuchte Spaltung ist $s^*$.
 	
 	Die ersten zwei $\times$-Produkte sind Isomorphismen. 
 	Dies folgt für das erste aus $H^0(D^1;R)\cong R$ und der Betrachtung des Erzeugers $1_R \in R$, denn für diesen gilt $p_{D^1}^*(1_R)=1_{D^1\times X}$ und somit
 	\[
 		p_{D^1}^*(1_R) \cupp p_{X}^*(\eta) = p_{X}^*(\eta)
 	\]
-	Für das zweite $\times$-Produkt betrachte \todo{Diagramm vervollständigen}
+	Für das zweite $\times$-Produkt betrachte folgendes Diagramm
 	\[
-		\begin{tikzcd}
-			H^0(\set*{-1}) \otimes H^p(X) \dar["(p_{-1})^* \otimes \id"] & \\
-			H^0(\partial D^1) \otimes H^p(X) \rar["\times"] & H^p(\partial D^1 \times X) \dar["(i_{+1} \times \id_X)^*"] \\
-			H^1(D^1,\partial D^1) \otimes H^p(X) & \mbox{ }
-		\end{tikzcd}
+		\begin{tikzcd}[row sep=large]
+			H^0(\set*{-1}) \otimes H^p(X) \dar["{(p_{-1})^*} \otimes \id"] \rar["\times","\cong"']& H^p(\set*{-1} \times X)  \dar["(p_{-1} \times \id_X)^*"] \\
+			H^0(\partial D^1) \otimes H^p(X) \rar["\times"] \dar["{(i_{+1})^*} \otimes \id"] & H^p(\partial D^1 \times X) \dar["(i_{+1} \times \id_X)^*"] \\
+			H^0(\set*{+1}) \otimes H^p(X) \rar["\times","\cong"'] & H^p \enbrace*{\set*{+1} \times X}
+		\end{tikzcd}\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
 	\]
-	Nach \autoref{sec3:lem1} kommutiert das Diagramm und damit ist auch das dritte $\times$-Produkt ein Isomorphismus.
+	Nach \autoref{sec3:lem1} kommutiert das erste Diagramm und damit ist auch das dritte $\times$-Produkt darin ein Isomorphismus, wie wir es zeigen wollten.
+	
+	\emph{\textcite[Ex. 3.11]{Hatcher} formuliert den Beweis dieser Aussage noch etwas anders, vielleicht hilft der Vergleich dem einen oder anderen.}
 \end{beweis}
 
-\begin{proposition}[label=sec3:prop_Hp-1]
+\begin{proposition}[label=sec3:prop_Hp-1,{name=[{Kohomologie des Produkts mit $S^1$}]}]
 	Sei $X$ ein topologischer Raum. Dann ist $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^{p-1}(X;R)$.
 \end{proposition}
 \begin{beweis}
 	Die Paarfolge zu $(S^1 \times X, \set*{\pt} \times X)$ zerfällt in kurze exakte Folgen
 	\[
 		\begin{tikzcd}
-			H^p(S^1 \times X, \set*{\pt} \times X;R) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R}
+			H^p(S^1 \times X, \set*{\pt} \times X;R) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R} \lar[bend left,"\pi^*"]
 		\end{tikzcd}
 	\]
 	Die Surjektivität folgt, da $\pi(\lambda,x) = (\pt,x)$ einen Spalt induziert. Damit folgt $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^p(S^1 \times X, \set*{\pt} \times X;R)$.
@@ -649,7 +651,7 @@
 	\]
 \end{beweis}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[{Angabe der Abbildung in \ref{sec3:prop_Hp-1}}]}]
 	Sei $\xi \in H^1(S^1;R)$ ein Erzeuger und $\pi_X \colon S^1 \times X \to X$ die Projektion. Dann ist der Isomorphismus aus \autoref{sec3:prop_Hp-1} gegeben durch
 	\[
 		H^p \enbrace*{X;R} \oplus H^{p-1}(X;R) \longrightarrow H^p(S^1 \times X;R) \quad , \quad (\eta_1,\eta_2) \longmapsto \enbrace[\big]{\pi_X^*(\eta_1) + \xi\times \eta_2}
