@@ -2847,6 +2847,119 @@ Denn angenommen, dass $t^M = t^i$ für ein $i\in \penbrace{1\dt{,}M-1}$, dann fo
 \end{align*}
 \hfill $\square$
 
+\subsection{Praktische Implementierung}
+Da die Berechnung von $t^M$ in der in Definition 6.1 definierten Empirischen Interpolationsmethode (EIM) sehr teuer ist, bestimmt man im Allgemeinen nicht das Maximum von $\abs{r_M(x)}$ über $\bar{\Omega}$, sondern über eine endliche Teilmenge $\Omega_h := \{x^k\}_{k=1}^{N_h}$.
+Im Kontext von Finiten Elementen können die $x^k$ zum Beispiel Quadraturpunkte oder die Ecken des Gitters sein.
+Die Kosten zur Berechnung des Maximums von $\abs{r_M(x)}$ skalieren dann linear in der Anzahl der Punkte $x^k$.
+In diesem Setting können wir auch eine algebraische Version der EIM angeben.
+
+Dazu führen wir zunächst die Abbildung $\mathbb{G}:P\to \R^{N_h}$ ein, welche wie folgt definiert ist
+\[
+(\mathbb{G}(\mu))_{i} := g(x^i;\mu),~i=1\dt{,}N_h,~\mu\in P.
+\]
+Ferner bezeichnen wir mit $\Z\in\R^{N_h\times M}$ die Matrix
+\[
+(\Z)_{ik} := z_k(x^i),~i=1\dt{,}N_h,~k=1\dt{,}M.
+\]
+Deren Spalten die diskreten Repräsentanten der kollateralen Basisfunktionen enthalten.
+
+Schließlich bezeichnen wir mit $J_M:=\{i_1\dt{,}i_M\}$ eine Menge von Interpolationsindizes, so dass $\{t^1\dt{,}t^M\} = \{x^{i_1}\dt{,}x^{i_M}\}$ und führen die Matrix $\mathbb{P} = [e_{i_1}\dt{,}e_{i_M}]\in \R^{N_h\times M}$ ein.
+Hierbei bezeichnen $e_{i_j}$ die Einheitsvektoren, welche in der $i_j$-ten Zeile eine 1 haben.
+Dann gilt zum Beispiel:
+\[
+\Pw^T \mathbb{G}(\mu) = \bigg( g(t^1;\mu)\dt{,} g(t^M;\mu) \bigg)^T
+\]
+und analog für die kollaterale Basen.
+Die diskrete empirische Interpolierende $I_M[\mathbb{G}(\mu)]$ ist dann gegeben durch
+\begin{align}
+I_M[\mathbb{G}(\mu)] = \Z \sigma(\mu),
+\end{align}
+wobei $\sigma(\mu) = (\sigma_1(\mu)\dt{,}\sigma_M(\mu))^T \in \R^M$ Lösung des folgenden linearen Gleichungssystems:
+\begin{align}
+\Pw^T \mathbb{G}(\mu) = (\Pw^T\Z)\sigma(\mu).
+\end{align}
+Die diskrete empirische Interpolierende können wir damit auch wie folgt schreiben:
+\begin{align}
+I_M[\mathbb{G}(\mu)] = \Z (\Pw^T\Z)^{-1} \Pw^T \mathbb{G}(\mu).
+\end{align}
+Der zur \bet{Offline-Phase} der EIM gehörende Algorithmus kann dann wie folgt formuliert werden, wobei $\varepsilon,M_{\max}$ wie in Definition 6.1:\\
+Input: $S_{\train}, \mathbb{G}, \varepsilon, M_{\max}$\\
+Output: $\Z, J_M$\\
+Initialisiere: $M=0, e_0= \varepsilon+1, \mu^1=\argmax_{\mu\in S_{\train}} \norm{\mathbb{G}(\mu)}_{\infty}, \R=\mathbb{G}(\mu^1), \Z=[], J_0=\emptyset, \Pw=[]$\\
+\texttt{while} $M<M_{\max}$ \texttt{and} $e_M>\varepsilon$:
+\qquad $M \leftarrow M+1$\\
+\qquad $i_M = \argmax_{i=1\dt{,}N_h}\abs{\R_i}$\\
+\qquad $\bar{\Z} = \frac{\R}{\R_{i_m}}$, $\Z \leftarrow [\Z,\bar{\Z}_M]$\\
+\qquad $J_M = J_{M-1} \cup \{i_m\}$, $\Pw \leftarrow [\Pw, \bar{e}_{i_m}]$\\
+\qquad $e_M = \max_{\mu\in S_{\train}} \norm{\mathbb{G}(\mu) - \Z(\Pw^T\Z)^{-1}\Pw^T\mathbb{G}(\mu)}_{\infty}$\\
+\qquad $\mu_{M+1} = \argmax_{\mu\in S_{\train}} \norm{\mathbb{G}(\mu) - \Z(\Pw^T\Z)^{-1}\Pw^T\mathbb{G}(\mu)}_{\infty}$\\
+\qquad $\R = \mathbb{G}(\mu^{M+1}) -\Z(\Pw^T\Z)^{-1}\Pw^T\mathbb{G}(\mu^{M+1})$\\
+\texttt{end}
+
+\ssect{6.4 Bemerkung}{}
+Zur Lösung des LGS (6.7) werden $\mathbb{O}(M^2)$ Rechenschritte benötigt, da $\mathbb{B}^M = \Pw^T\Z$ eine untere Dreiecksmatrix ist.
+Der obige Algorithmus erfordert in jeder Iteration die Auswertung von $\mathbb{G}(\mu)$ für alle $\mu\in S_{\train}$.
+Ist diese Auswertung teuer kann es Sinn ergeben vor dem Beginn der \texttt{while}-Schleife einmal die Matrix
+\[
+\mathbb{S} = [\mathbb{G}(\mu^1)\dt{,}\mathbb{G}(\mu^{n_{\train}})] \in \R^{N_h\times n_{\train}}
+\]
+zu assemblieren und zu speichern.
+Dies ist je nach verfügbarem Speicher allerdings nur für moderate $N_h$ und $N_{\train}$ möglich.
+
+Schließlich verfahren wir in der \bet{Online-Phase} für die EIM wie folgt:
+
+Input: $\mu, \mathbb{B} = (\Pw^T\Z), T_M$\\
+Output: $\sigma(\mu)$\\
+\begin{itemize}
+	\item Werte $g(.;\mu)$ in den Interpolationspunkten aus und assembliere dadurch
+	\[
+	(g(t^1;\mu)\dt{,}g(t^M;\mu))^T = \mathbb{B}\sigma(\mu).
+	\]
+	\item Löse $(g(t^1;\mu)\dt{,}g(t^M;\mu))^T = \mathbb{B}\sigma(\mu)$.
+\end{itemize}
+
+\ssect{6.5 Bemerkung}{}
+Da $(\Pw^T\Z)$ eine untere Dreiecksmatrix ist benötigen wir in der Online-Phase $\mathbb{O}(M^2)$ Rechenschritte.
+Insbesondere ist die Komplexität unabhängig von $N_h$.
+
+\ssect{6.6 Bemerkung}{}
+ALternativ kann $Z_M$ in einem ersten Schritt mittels POD bestimmt werden.
+Die Interpolationspunkte werden anschließend so bestimmt, dass sie das Residuum maximieren.
+Da die Basisfunktionen POD-Basisfunktionen sind und nicht iterativ gleich dem skalierten Residuum gewählt werden, sind sie zwar orthonormal, der Rechenaufwand zur Bestimmung der Koeffizienten $\sigma(\mu)$ beträgt aber $\mathbb{O}(M^3)$.
+Diesen Ansatz findet man in der Literatur unter 'Discret Empirial Interpolation Method' [Chaturantabut, Sorensen, 2010].
+
+\subsection{Fehlerabschätzungen}
+Für analytische Untersuchungen führen wir die nodale Basis $\xi_M \subset \spann(Z_M)$ ein, wobei $\xi_m(t^i) =\delta_{im},~1\le i,m\le M$.
+Die Existenz und Eindeutigkeit dieser nodalen Basis sichert das folgende Lemma.
+
+\ssect{6.7 Lemma}{}
+Für jedes $M$-Tupel $(a_i)_{i=1\dt{,}M}$ reeller Zahlen existiert genau ein Element $w\in W_M$, so dass $w(t^i)=a_i$ für alle $i=1\dt{,}M$.\\
+
+\bet{Beweis:}\\
+Folgt direkt aus der Invertierbarkeit von $\mathbb{B}^M$.
+\hfill $\square$\\
+
+Darauf basierend erhalten wir die folgende A priori Fehlerabschätzung für die EIM.
+
+\ssect{6.8 Satz}{(A priori Fehlerabschätzung)}
+Sei $I_M:C^0(\bar{\Omega}) \to W_M = \spann\{\xi_i\}_{i=1}^M \subset C^0(\bar{\Omega})$ Interpolationsoperator zu den Punkten $\{t^i\}_{i=1}^M\subset \bar{\Omega}$ und $\{\xi_i\}_{i=1}^M$ nodale Basis, dass heißt $\xi_i(t^j)=\delta_{ij}, ~1\le i,j\le M,~I_M[g(.;\mu)] = \sum_{i=1}^{M} g(t^i;\mu)\xi_i$.
+Dann ist 
+\[
+\Lambda_M := \max\limits_{x\in\bar{\Omega}} \sum_{i=1}^M \abs{\xi_i(x)}
+\]
+die \bet{Lebesgue-Konstante} der Interpolation.
+Es gilt:
+\begin{enumerate}[(1)]
+	\item 
+	\[
+	\norm{g(.;\mu) - I_M[g(.;\mu)]}_{C^0(\bar{\Omega})} \le (1-\Lambda_M) \inf\limits_{w\in W_M} \norm{g(.;\mu) - w}_{C^0(\bar{\Omega})}
+	\]
+	für $g(.;\mu)\in C^0(\bar{\Omega})$.
+	\item Für die Lebesgue-Konstante gilt die Abschätzung
+	\[
+	\Lambda_M \le 2^M -1.
+	\]
+\end{enumerate}
 
 
 
