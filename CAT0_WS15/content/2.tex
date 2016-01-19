@@ -2311,4 +2311,213 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 		Anschließend ist Fall 1 benutzbar. \qedhere
 	\end{description}
 \end{beweis}
+
+\begin{definition}[konvex]
+\label{def:2.48}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(i)]
+		\item Sei $I \subseteq \RR$ ein Intervall.
+		Eine Funktion $\Phi\colon I \rightarrow \RR$ heißt \Index{konvex}, wenn für alle $t,s \in I$ und $\lambda \in [0,1]$ gilt: \marginnote{13.01. \\ \ [15]}
+		\[
+			\Phi(\lambda s + (1-\lambda)t) \leq \lambda \Phi(s) + (1-\lambda)\Phi(t).
+		\]
+		\item Sei $X$ ein geodätischer Raum.
+		Eine Funktion $f \colon X \rightarrow \RR$ heißt \Index{konvex}, wenn für alle linear umparametrisierten Geodäten $c \colon [0,1] \rightarrow X$ die Funktion
+		\begin{align*}
+			\Phi \colon [0,1] &\longrightarrow \RR \\
+			t &\longmapsto f(c(t))
+		\end{align*}
+		konvex ist.
+	\end{enumerate}
+\end{definition}
+\newpage
+\begin{lemma}
+\label{lemma:2.49}
+	Sei $X$ ein geodätischer Raum und $f \colon X \rightarrow \RR$ eine Funktion.
+	Die Funktion $f$ ist genau dann konvex, wenn für alle linear umparametrisierten Geodäten $c \colon [0,1] \rightarrow X$ und $\lambda \in [0,1]$ gilt:
+	\[
+		f(c(\lambda)) \leq (1-\lambda) f(c(0)) + \lambda f(c(1)).
+	\]
+\end{lemma}
+
+\begin{beispiel}
+\label{bsp:2.50}
+	Sei $(X,d)$ ein $\CAT$-Raum.
+	Dann ist $d\colon X \times X \rightarrow \RR_{\geq 0}$ konvex, denn:
+	
+	Sei $c \colon [0,1] \rightarrow X \times X$ eine linear umparametrisierte Geodäte.
+	Dann sind $\pi_1 \circ c \colon [0,1] \rightarrow X$  und $\pi_2 \circ c \colon [0,1] \rightarrow X$ linear umparametrisierte Geodäten, wobei $\pi_1$ bzw. $\pi_2$ Projektionen auf die erste bzw. zweite Komponente sind.
+	Sei $\lambda \in [0,1]$ beliebig.
+	Wir haben:
+	\begin{align*}
+		d(c(\lambda)) &\stack{}{=} d(\pi_1 \circ c(\lambda), \pi_2 \circ c(\lambda)) \\
+		&\stack{\ref{aufg:1.2}}{\leq} (1-\lambda) \cdot d(\pi_1 \circ c(0),\pi_2 \circ c(0)) + \lambda \cdot d(\pi_1 \circ c(1), \pi_2 \circ c(1)) \\
+		&\stack{}{=} (1-\lambda) \cdot d(c(0)) + \lambda \cdot d(c(1))
+	\end{align*}
+	Mit \autoref{lemma:2.49} folgt, dass $d \colon X \times X \rightarrow \RR_{\geq 0}$ konvex ist.
+\end{beispiel}
+
+\begin{definition}[lokal konvex]
+\label{def:2.51}
+	Sei $I \subseteq \RR$ ein Intervall.
+	Eine Funktion $\Phi \colon I \rightarrow \RR$ heißt \textbf{lokal konvex}, wenn für alle $\lambda \in I$ ein $\varepsilon_\lambda > 0$ existiert, sodass $\Phi \big|_{B_{\varepsilon_\lambda}(\lambda)} \colon B_{\varepsilon_\lambda}(\lambda) \cap I \rightarrow \RR$ konvex ist. \index{konvex!lokal}
+\end{definition}
+
+\begin{lemma}
+\label{lemma:2.52}
+	Sei $\Phi\colon [0,1] \rightarrow \RR$ eine lokal konvexe Funktion.
+	Dann ist $\Phi$ konvex.
+\end{lemma}
+
+Es folgt nun der Beweis von \autoref{lemma:2.32}.
+
+\begin{beweis}
+\label{bew:tech_lemma}
+	Da $X$ lokal $\CAT$ und lokal vollständig ist, existiert für jedes $x \in X$ ein $r_x > 0$, sodass $B_{r_x}(x) \CAT$ ist und $\ol{B_{r_x}(x)}$ vollständig ist.
+	Wir betrachten nun die offene Überdeckung
+	\[
+		c([0,1]) \subseteq \bigcup_{t \in [0,1]} B_{\frac{r_{c(t)}}{2}}(c(t)).
+	\]
+	Weiter ist $[0,1]$ kompakt und $c \colon [0,1] \rightarrow X$ ist stetig.
+	Folglich ist $c([0,1])$ kompakt.
+	Es existieren also $t_1, \dots, t_n \in [0,1]$ mit
+	\begin{equation}
+		c([0,1]) \subseteq B_{\frac{r_{c(t_1)}}{2}}(c(t_1)) \cup \dots \cup B_{\frac{r_{c(t_n)}}{2}}(c(t_n)). \label{eq:bew_tl_1}
+	\end{equation}
+	Wir definieren nun
+	\[
+		\varepsilon := \frac{\min\{r_c(t_1), \dots r_c(t_n)\}}{4}.
+	\]
+	Für alle $t \in [0,1]$ gilt nun, dass $B_{2\varepsilon}(c(t)) \CAT$ und $\ol{B_{2\varepsilon}(c(t))}$ vollständig ist, denn:
+	
+	Sei $t \in [0,1]$ belieibg.
+	Dann existiert nach \eqref{eq:bew_tl_1} ein $i \in \{1, \dots, n\}$ mit $c(t) \in B_{\frac{r_c(t_i)}{2}}(c(t_i))$.
+	Wir zeigen $B_{2\varepsilon}(c(t)) \subseteq B_{r_c(t_i)}(c(t_i))$.
+	
+	Sei also $x \in B_{2\varepsilon}(c(t))$ beliebig.
+	Es gilt:
+	\begin{align*}
+		d(x,c(t_i)) &\stack{\Delta\text{-Ungl.}}{\leq} d(x,c(t)) + d(c(t),c(t_i)) \\
+		&\stack{}{<} 2\varepsilon + \frac{r_{c(t_i)}}{2} \\
+		&\stack{}{\leq} 2 \cdot \frac{r_c(t_i)}{4} + \frac{r_{c(t_i)}}{2} = r_{c(t_i)}
+	\end{align*}
+	Folglich ist $x \in B_{r_{c(t_i)}} (c(t_i))$.
+	
+	Zur Konvexitätsaussage und Eindeutigkeit von $c_{\ol{x},\ol{y}}$:
+	Seien $c_1,c_2 \colon [0,1] \rightarrow X$ linear umparametrisierte lokale Geodäten mit $\sup_{t \in [0,1]} d(c_i(t),c(t)) < \varepsilon$ für $i = 1,2$.
+	Wir betrachten nun die Funktion
+	\begin{align*}
+		\Phi\colon [0,1] &\longrightarrow \RR_{\geq 0} \\
+		t &\longmapsto d(c_1(t),c_2(t)).
+	\end{align*}
+	$\Phi$ ist konvex:
+	Sei $t \in [0,1]$ beliebig.
+	Es existiert $\varepsilon_1', \varepsilon_2' > 0$, sodass
+	\begin{align*}
+		c_1 \colon [t- \varepsilon_1', t+ \varepsilon_1'] &\longrightarrow B_{2\varepsilon}(c(t)) \\
+		c_2 \colon [t-\varepsilon_2', t+\varepsilon_2'] &\longrightarrow B_{2\varepsilon}(c(t)),
+	\end{align*}
+	und $B_{2\varepsilon}(c(t))$ ist $\CAT$.
+	Wir definieren $\varepsilon' := \min\{ \varepsilon_1',\varepsilon_2'\}$.
+	Nach \autoref{aufg:2.1} sind lokale Geodäten in $\CAT$-Räumen schon globale Geodäten.
+	Folglich sind  $c_1 \big|_{[t-\varepsilon',t+\varepsilon']}$ und $c_2 \big|_{[t-\varepsilon',t+\varepsilon']}$ linear umparametrisierte Geodäten.
+	Nach \autoref{bsp:2.50} ist
+	\[
+	d \big|_{B_{2\varepsilon}(c(t))} \colon B_{2\varepsilon}(c(t)) \times B_{2\varepsilon}(c(t)) \rightarrow \RR_{\geq 0}
+	\]
+	eine konvexe Funktion. Folglich ist $\Phi \colon [t- \varepsilon',t+\varepsilon'] \rightarrow \RR_{\geq 0}$ konvex.
+	Mit \autoref{lemma:2.52} folgt, dass $\Phi$ global konvex ist.
+	
+	Damit können wir nur die Eindeutigkeit zeigen:
+	Seien $\ol{x} \in B_\varepsilon(x), \ol{y} \in B_\varepsilon(y)$ beliebig und $c_{\ol{x},\ol{y}}, c_{\ol{x},\ol{y}}' \colon [0,1] \rightarrow X$ linear umparametrisierte Geodäten von $\ol{x}$ nach $\ol{y}$ mit der Eigenschaft
+	\begin{align*}
+		\sup_{t\in [0,1]} d(c_{\ol{x},\ol{y}}, c(t)) &\stack{}{<} \varepsilon \\
+		\sup_{t \in [0,1]} d(c_{\ol{x},\ol{y}}',c(t)) &\stack{}{<} \varepsilon.
+	\end{align*}
+	Wir wissen, dass die Funktion
+	\begin{align*}
+		\Phi\colon [0,1] &\longrightarrow \RR_{\geq 0} \\
+		t &\longmapsto d(c_{\ol{x},\ol{y}}(t),c_{\ol{x},\ol{y}}'(t))
+	\end{align*}
+	konvex ist. \newpage
+	Insbesondere gilt für $\lambda \in [0,1]$ beliebig:
+	\begin{align*}
+		\Phi(\lambda) &\leq (1-\lambda) \Phi(0) + \lambda \cdot \Phi(1) \\
+		d(c_{\ol{x},\ol{y}}(\lambda),c_{\ol{x},\ol{y}}'(\lambda)) &\leq (1-\lambda) \cdot d(c_{\ol{x},\ol{y}}(0),c_{\ol{x},\ol{y}}'(0)) + \lambda \cdot d(c_{\ol{x},\ol{y}}(1),c_{\ol{x},\ol{y}}'(1)) \\
+		&\leq (1-\lambda) \cdot d(\ol{x},\ol{x}) + \lambda \cdot d(\ol{y},\ol{y}) = 0
+	\end{align*}
+	Folglich erhalten wir $c_{\ol{x},\ol{y}}(\lambda) = c_{\ol{x},\ol{y}}'(\lambda)$, also $c_{\ol{x},\ol{y}} = c_{\ol{x},\ol{y}}'$.
+					
+	Zur Existenz von $c_{\ol{x},\ol{y}}$:
+	Wir definieren für $A \in (0,1]$ die \textbf{Eigenschaft P(A)}:
+	Für alle $a,b \in [0,1]$ mit $0 < b-a \leq A$ und alle $\ol{p} \in B_\varepsilon(c(a)), \ol{q} \in B_\varepsilon(c(b))$ existiert eine linear umparametrisierte lokale Geodäte $c_{\ol{p},\ol{q}} \colon [a,b] \rightarrow X$ von $\ol{p}$ nach $\ol{q}$ mit
+	\[
+		\sup_{t \in [a,b]} d(c_{\ol{p},\ol{q}}(t),c(t)) < \varepsilon.
+	\]
+	Wir zeigen:
+	\begin{enumerate}[(1)]
+		\item Es existiert ein $A \in (0,1]$, sodass die Eigenschaft $P(A)$ wahr ist.
+		\item Ist $P(A)$ wahr, dann auch $P(\frac{3A}{2})$.
+	\end{enumerate}
+	Dadurch folgt die Existenz von $c_{\ol{x},\ol{y}}$.
+	
+	\begin{enumerate}[(1)]
+		\item F+r $A = \frac{\varepsilon}{\ell(c)}$ gilt $P(A)$, denn:
+		Seien $a,b \in [0,1]$ mit $0 < b-a \leq \frac{\varepsilon}{\ell(c)}$ beliebig.
+		Dann ist
+		\[
+			d(c(a),c(b)) \leq \ell(c \big|_{[a,b]}) \stack{\CAT}{=} \ell(c) \cdot \abs{b-a} \leq \varepsilon,
+		\]
+		also ist $c\big|_{[a,b]}$ linear umparametrisierte Geodäte.
+		Sei weiter $\ol{p} \in B_\varepsilon(c(a)), \ol{q} \in B_\varepsilon(c(b))$ beliebig.
+		Dann gilt $\ol{p}, \ol{q} \in B_{2\varepsilon}(c(a))$.
+		Da $B_{2\varepsilon}(c(a)) \CAT$ ist, existiert eine linear umparametrisierte Geodäte $c_{\ol{p},\ol{q}}$ von $\ol{p}, \ol{q}$.
+		\item Seien $a,b \in [0,1]$ mit $0 < b-a \leq \frac{3}{2}A$ beliebig.
+		Teile das Intervall $[a,b]$ in drei gleich große Intervalle auf: \todo{Zeichnung einfügen}
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=2,>=Latex]
+				\draw (0.3,0) node[above]{$0$} -- (1,0) node[above]{$a$} -- (2,0) node[above]{$a_1$} -- (3,0) node[above]{$b_1$} -- (4,0) node[above]{$b$} -- (4.5,0) node[above]{$1$};
+				\draw [draw=none] (.3,0) node[fill,circle,inner sep=1pt]{}
+				-- (1,0) node[fill,circle,inner sep=1pt]{}
+				-- (2,0) node[fill,circle,inner sep=1pt]{}
+				-- (3,0) node[fill,circle,inner sep=1pt]{}
+				-- (4,0) node[fill,circle,inner sep=1pt]{}
+				-- (4.5,0) node[fill,circle,inner sep=1pt]{};
+			\end{tikzpicture}
+		\end{figure}
+		
+		Sei weiter $\ol{p} \in B_\varepsilon(c(a))$ und $\ol{q} \in B_\varepsilon(c(b))$ beliebig.
+		Wir definieren induktiv Folgen $p_n$ und $q_n$ in $X$:
+		Setze $p_0 := c(a_1), q_0 := c(b_1)$.
+		Seien $p_{n-1}, q_{n-1}$ bereits konstruiert.
+		Da $P(A)$ gilt, existieren linear umparametrisierte lokale Geodäten $c_n \colon [a, b_1] \rightarrow X$ von $\ol{p}$ zu $q_{n-1}$ und $c_n' \colon [a_1,b] \rightarrow X$ von $p_{n-1}$ zu $\ol{q}$.
+		Setze dann $p_n := c_n(a_1)$ und $q_n := c_n'(b_1)$. Es gilt (ohne Beweis -- nachrechnen):
+		\begin{enumerate}[(i)]
+			\item $(p_n)_{n \in \NN}, (q_n)_{n \in \NN}$ sind Cauchy-Folgen.
+			\item $p_n \in \ol{B_\varepsilon(p_0)}, q_n \in \ol{B_\varepsilon(q_0)}$ sind vollständig für alle $n \in \NN$.
+			Folglich sind $(p_n)_n, (q_n)_n$ konvergente Folgen.
+			\item Für $t \in [a,b_1]$ $(c_n(t))_n$ eine Cauchy-Folge in $\ol{B_\varepsilon(c_(t))}$.
+			Folglich ist $(c_n(t))_n$ eine konvergente Folge.
+			\item Für $t \in [a_1,b]$ ist $(c_n'(t))_n$ eine Cauchy-Folge in $\ol{B_\varepsilon(c(t))}$.
+			Folglich ist $(c_n'(t))_n$ eine konvergent Folge.
+		\end{enumerate}
+		Wir definieren
+		\begin{align*}
+			\alpha \colon [a,b_1] &\longrightarrow X \\
+			t &\longmapsto \lim\limits_{n \rightarrow \infty} c_n(t)
+		\end{align*}
+		und
+		\begin{align*}
+			\beta \colon [a_1,b] &\longrightarrow X \\
+			t &\longmapsto \lim\limits_{n \rightarrow \infty} c_n'(t).
+		\end{align*}
+		Die Konvergenz $c_n \rightarrow \alpha$ und $c_n' \rightarrow \beta$ ist gleichmäßig und $\alpha$ und $\beta$ sind linear umparametrisierte lokale Geodäten.
+		Weiter gilt $\alpha \big|_{[a_1,b_1]} = \beta \big|_{[a_1,b_1]}$.
+		Die Komposition $\alpha\big|_{[a,a_2]} * \beta \big|_{[a_1,b]}$ ist die gesuchte linear umparametrisierte lokale Geodäte $c_{\ol{p},\ol{q}}$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+
 \cleardoubleoddemptypage
