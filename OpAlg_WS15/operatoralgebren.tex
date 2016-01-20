@@ -2832,16 +2832,28 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 	\leavevmode
 	\begin{enumerate}[(i)]
 		\item Wir müssen zeigen, dass $p_\lambda \xi\to q \xi$ für alle $\xi \in \mathcal{H}$.
-		Für Projektionen gilt\todo{nachgucken, ob wir das schonmal gezeigt haben}
+		Für Projektionen gilt\todo{Beweis davon könnte man von Thanh übernehmen}
 		\[
 			p_\lambda \le p_\mu \iff p_\lambda(\mathcal{H}) \subset p_\mu(\mathcal{H})
 		\]
 		Jedes $\xi \in \mathcal{H}$ lässt sich eindeutig schreiben als $\xi=\xi_1 + \xi_2$ mit $\xi_1 \in \overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ und $\xi_2 \in \bigcap_\lambda p_\lambda(\mathcal{H})^\bot$.
-		Wähle eine Folge $(x_n)_\mathbb{N} \to \xi_1$.\todo{fertig machen}
+		Wähle eine Folge $(x_n)_\mathbb{N} \to \xi_1$.
+		Sei nun $\varepsilon>0$. Wähle $n_0 \in \mathbb{N}$ mit $\norm*{\xi_1-x_n}< \sfrac{\varepsilon}{2}$ für $n\ge n_0$ und passend dazu $\lambda_0 \in \Lambda$ mit $x_{n_0} \in p_{\lambda_0}\enbrace{\mathcal{H}}$.
+		Dann ist $x_{n_0} \in p_\lambda \enbrace*{\mathcal{H}}$ für $\lambda\ge \lambda_0$ und es gilt
 		\begin{align}
-			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} = \lim_{n\to \infty} \norm*{p_\lambda x_n - \xi_1}
-			= \lim_{n \to \infty} \norm*{x_n - \xi_1} =0
+			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} &= \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0} + x_{n_0}} - \xi_1} \\
+			&\le \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0}}} + \norm*{x_{n_0} - \xi_1} \\
+			&\le \Underbracket{\norm*{p_\lambda}}{=1} \cdot \norm*{\xi_1 - x_{n_0}} + \norm*{x_{n_0} - \xi_1} \\
+			&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
 		\end{align}
+		Damit ist $p_\lambda \grenzw{\so} q$ gezeigt.
+		\item Da $p_\lambda$ ein Projektion ist, ist $\ind - p_\lambda$ die Projektion auf $p_\lambda(\mathcal{H})^\bot$.
+		Weiter ist dann $(\ind - p_\lambda)_\Lambda$ ein aufsteigendes Netz von Projektionen und nach (i) konvergiert dies stark gegen die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})^\bot}$.
+		Damit konvergiert dann aber auch $p_\lambda$ stark gegen die Projektion auf
+		\[
+			\overline{\bigcup_\lambda p_\lambda(\mathcal{H})^\bot}^\bot = \bigcap_\lambda p_\lambda(\mathcal{H})
+		\]
+		Also gilt $p_\lambda \grenzw{\so} r$ wie gewünscht.\qedhere
 	\end{enumerate}
 \end{beweis}
 % subsection mon_proj (end)
