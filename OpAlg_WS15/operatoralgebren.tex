@@ -1851,7 +1851,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		x_\lambda \grenzw{\so} x
 	\]
 	Falls $(x_\lambda)_\Lambda$ ein aufsteigendes Netz von orthogonalen Projektionen ist, so ist $x$ die (orthogonale) Projektion auf $\overline{\bigcup_{\Lambda} x_\lambda \mathcal{H}}$.
-	Falls $(x_\lambda)_\Lambda$ ein absteigendes Netz aus Projektionen ist, so ist $x$ die Projektion auf $\bigcap_\Lambda\overline{x_\lambda \mathcal{H}}$.\todo{Revision 6}
+	Falls $(x_\lambda)_\Lambda$ ein absteigendes Netz aus Projektionen ist, so ist $x$ die Projektion auf $\bigcap_\Lambda\overline{x_\lambda \mathcal{H}}$.
 \end{satz}
 \begin{beweis}
 	Der erste Teil wurde schon in Funktionalanalysis Satz 7.32 bewiesen. 
@@ -1871,9 +1871,9 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{beweis}
 
 \begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]}]
-	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$.
+	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$ (und $x \in \mathcal{B}(\mathcal{H})_\sa$).
 	Dies ist äquivalent zu $0\le x$ in unserem Sinne: 
-	Aus $x=y^*y$ folgt 
+	Ist $x$ positiv in unserem Sinne, so haben wir $x=y^*y$ und es folgt
 	\[
 		\skal*{\xi}{x \xi} = \skal*{\xi}{y^*y \xi} = \skal*{y \xi}{y \xi} \ge 0
 	\]
@@ -1888,27 +1888,28 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{definitionP}[{name=[Kommutante und Bikommutante]},label=def:65]
 	Sei $B$ eine Algebra und $S \subset B$ eine Teilmenge.
 	\[
-		S' := \set*{b \in B \given bs=sb, s \in S}
+		S' := \set[\big]{b \in B \given bs=sb, s \in S}
 	\]
 	heißt \Index{Kommutante} von $S$ in $B$. 
 	$S'' := (S')'$ heißt \Index{Bikommutante}.
-	$S',S''$ sind Unteralgebren.
+	Sowohl $S'$ als auch $S''$ sind Unteralgebren.
 	Falls $B$ eine $^*$-Algebra und $S=S^*$ ist, so sind $S'$ und $S''$ auch $^*$-Unteralgebren.
 	Falls $A \subset \mathcal{B}(\mathcal{H})$ eine $^*$-Unteralgebra ist, so ist $A' \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra.
 \end{definitionP}
 \begin{beweis}
 	Wir zeigen nun, dass $A'$ abgeschlossen ist in der starken Operatortopologie.
-	Sei dazu $(x_\lambda) \subset A'$ mit $x_\lambda \grenzw{\raisemath{-2pt}{\so}} x$, $a \in A$ sowie $\xi,\eta \in \mathcal{H}$.
+	Sei dazu $(x_\lambda) \subset A'$ ein Netz mit $x_\lambda \grenzw{\raisemath{-2pt}{\so}} x$, $a \in A$ beliebig sowie $\xi,\eta \in \mathcal{H}$.
 	Dann gilt
 	\begin{align}
-		\skal*{\eta}{a x \xi} = \skal*{\eta}{ a \lim x_\lambda \xi} =\lim \skal*{\eta}{a x_\lambda \xi} = \lim \skal*{\eta}{x_\lambda a \xi} = \skal*{\eta}{x a \xi}
+		\skal*{\eta}{a x \xi} = \skal*{\eta}{ a \lim\nolimits_\lambda x_\lambda \xi} =\lim\nolimits_\lambda \skal*{\eta}{a x_\lambda \xi} = \lim\nolimits_\lambda \skal*{\eta}{x_\lambda a \xi} = \skal*{\eta}{x a \xi}
 	\end{align}
 	Also ist $a x= x a$.
+	Alle weiteren Behauptungen sind trivial.\todo{Revision 6}
 \end{beweis}
 
 \begin{lemma}[label=lem:66]
 	Sei $\mathcal{H}$ ein Hilbertraum und $\ind_{\mathcal{B}(\mathcal{H})} \in  A \subset \mathcal{B}(\mathcal{H})$ eine unitale $^*$-Unteralgebra.
-	Dann ist $A$ $\so$-dicht in $A''$.
+	Dann ist $A$ $\so$-dicht in der Bikommutante $A''$.
 \end{lemma}
 \begin{beweis}
 	Sei $x \in A''$. Zu zeigen: Jede $\so$-offene Umgebung $U$ von $x$ mit $x \in U= \bigcap_{i=1}^n U_{x,\xi_i,\varepsilon}$ für $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ besitzt nichtleeren Schnitt mit $A$.
@@ -2214,7 +2215,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Weiter gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
 \end{beweis}
 
-\begin{erinnerungA}
+\begin{erinnerungA}[{name=[schwache Operatortopologie]}]
 	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von 
 	\[
 		p_{\eta,\xi}(x) := \abs*{\skal*{\eta}{x \xi}} 
@@ -2241,7 +2242,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\).
 \end{erinnerungA}
 
-\begin{satz}
+\begin{satz}[{name=[Einheitskugel der beschränkten Operatoren ist wo-kompakt]}]
 	$\mathcal{B}(\mathcal{H})^1$ ist $\wo$-kompakt.
 \end{satz}
 \begin{beweis}[name={Skizze}]
@@ -2291,7 +2292,7 @@ Für ein lineare Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt:
 Die Umkehrung der zweiten Implikation gilt im Allgemeinen nicht. 
 Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 
-\begin{satz}[label=satz:619]
+\begin{satz}[label=satz:619,{name=[für Funktionale ist wo-stetig äquivalent zu so-stetig]}]
 	Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ sind äquivalent:
 	\begin{enumerate}[(i)]
 		\item $\varphi$ ist $\wo$-stetig.
@@ -2669,8 +2670,111 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		&= \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
 		&= \varphi(a) \cdot \varphi(b)
 	\end{align}
-	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$.
+	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$. 
+	Sei nun umgekehrt $\chi \in \Omega(C_0(X))$ und $\rho \in C_0(X)^*$ positiv mit $\rho \le \chi$.
+	Für $a \in C_0(X)$ gilt dann
+	\[
+		\abs*{\rho(a)} \StackText{\ref{satz:53}}{\le} \norm*{\rho}^{\sfrac{1}{2}} \rho(a^*a)^{\sfrac{1}{2}} \le \chi(a^* a)^{\sfrac{1}{2}} \le \abs*{\chi(a)} 
+	\]
+	Also ist $\ker \chi \subset \ker \rho$.
+	$\rho$ induziert nun ein Funktional $\tilde{\rho}$ auf $\sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C}$
+	\[
+		\begin{tikzcd}[column sep=.6em]
+			C_0(X) \ar[rr,"\rho"] \drar["\chi"]& & \mathbb{C} \\
+			& \sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C} \urar["\tilde{\rho}"]
+		\end{tikzcd}
+	\]
+	Also ist $\rho = \tilde{\rho} \circ \chi$.
+	Damit ist $\rho(. ) = \lambda \cdot \chi(.)$ für ein $\lambda \in \mathbb{C}$.
+	Für $a \in C_0(X)$ mit $\chi(a)=1$ gilt $0\le\rho(a^*a)= \lambda \cdot \chi(a^*a)=\lambda$ und außerdem $\rho(a^*a) \le \chi(a^*a)=1$, womit $0 \le \lambda\le 1$ ist.
+	Daraus folgt, dass $\chi$ rein ist.
 \end{beweis}
+
+\begin{definition}[{name=[Seiten und Extrempunkte]}]
+	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum, das heißt $X$ ist ein topologischer Vektorraum und die Topologie ist durch eine punkte trennende Familie $(p_\lambda)_\Lambda$ von Halbnormen induziert.\footnote{zum Beispiel: $x \mapsto \norm*{x \xi}$ für die starke Operatortopologie, $x \mapsto \abs*{\skal*{\eta}{x \xi}} $ für die schwache Operatortopologie}
+	Sei $C \subset X$ eine nichtleere, (kompakte,) konvexe Teilmenge und sei $F \subset C$ eine nichtleere konvexe Teilmenge.
+	$F$ heißt \Index{Seite} von $C$, falls gilt:  
+	Für $x \in F$, $y,z \in C$, $t \in (0,1)$ mit $x= t \cdot y +(1-t) \cdot z$ gilt bereits $y,z \in F$.
+	$x \in C$ heißt \Index{Extrempunkt} von $C$, falls $\set*{x}$ eine Seite von $C$ ist.
+	Wir schreiben 
+	\[
+		\partial_e C := \set[\big]{\text{Extrempunkte von } C}
+	\]
+\end{definition}
+
+\begin{proposition}[{name=[grundlegen Eigenschaften von Seiten]},label=prop:78]
+	Seien $X,C$ wie oben.
+	\begin{enumerate}[(i)]
+		\item $C$ ist eine Seite von $C$.
+		\item Eine nichtleerer Durchschnitt von Seiten ist wieder eine Seite.
+		\item Für eine Seite $F$ von $C$ gilt $\partial_e F \subset \partial_e C$.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	Klar.
+\end{beweis}
+
+\begin{lemma}[label=lem:79]
+	Seien $X$ und $C$ wie oben und $\varphi \colon X \to \mathbb{C}$ ein stetige lineares Funktional.
+	Setze $M :=\sup_{x \in C} \re \varphi(x)$.
+	Dann ist $F:= \set*{x \in C \given \varphi(x)=M}$ eine kompakte Seite von $C$.
+\end{lemma}
+\begin{beweis}
+	Da $C$ kompakt ist, existiert ein $x_0 \in C$, sodass $\re \varphi(x_0)=M$, also ist $F \neq \emptyset$.
+	Offensichtlich ist $F$ konvex.
+	Da $\varphi$ stetig ist, ist $F \subset C$ abgeschlossen 
+	Sei nun $x \in F$, $y,z \in C$ und $t \in (0,1)$ mit $x= t y +(1-t)z$.
+	Falls $y$ oder $z$ nicht in $F$ liegt, so gilt $\re \varphi(y) <M$ oder $\re \varphi(z)<M$.
+	Damit ist 
+	\[
+		M = \re \varphi(x) = t \cdot \re \varphi(y) + (1-t) \cdot \re \varphi(z) <M
+	\]
+	Dies ist ein Widerspruch, also müssen $y,z$ in $F$ liegen und damit ist $F$ eine Seite. 
+\end{beweis}
+
+\begin{satz}[{name={Krein-Milman}}]
+	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum und $C \subset X$ eine nichtleere, kompakte, konvexe Teilmenge.
+	Dann gilt 
+	\[
+		C=\overline{\conv(\partial_e C)}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei $\Lambda := \set*{\text{kompakte Seiten von }C}$.
+	Dann ist $C \in \Lambda$, das heißt $\Lambda \neq \emptyset$.
+	$\Lambda$ ist partiell geordnet bezüglich $\supset$.
+	Sei $\Gamma \subset \Lambda$ eine totalgeordnete Teilmenge, dann gilt unter der Annahme $\bigcap_{\gamma \in \Gamma} \gamma =\emptyset$
+	\[
+		C= C \setminus \bigcap_{\gamma \in \Gamma} \gamma = \bigcup_{\gamma \in \Gamma} \Underbracket{C \setminus \gamma}{\text{offen in }C}\StackText{C \text{ kpt.} }{=\joinrel=} 
+		\bigcup_{i=1}^n C \setminus \gamma_i \StackText{totalgeord.}{=\joinrel=\joinrel=} C \setminus \gamma_0 \neq C
+	\]
+	Damit ist $\bigcap_{\gamma \in \Gamma} \gamma \neq \emptyset$ eine kompakte Seite von $C$ und $\Gamma$ besitzt eine untere Schranke in $\Lambda$.
+	Also ist $\Lambda$ induktiv geordnet und mit dem Lemma von Zorn folgt die Existenz eines minimalen Elements $F_0$.
+	Behauptung: $F_0= \set*{x_0}$ für ein $x_0 \in C$.
+	Angenommen es gäbe $x_0 \neq y_0 \in F_0$. 
+	Dann existiert $\varphi \colon X \to \mathbb{C}$ stetig und linear mit $\re \varphi(x_0) \neq \re \varphi(y_0)$ (Hahn-Banach für lokalkonvexe Vektorräume).
+	Dann ist 
+	\[
+		F_1 :=  \set*{x \in F_0 \given \re \varphi(x)=M=\sup_{x \in F_0} \re \varphi(x)}
+	\]
+	eine kompakte Seite von $F_0$ nach \autoref{lem:79} und \autoref{prop:78}.
+	Es gilt $F_1 \subset F_0$, also folgt wegen der Minimalität $F_0=F_1$.
+	Dies ist ein Widerspruch und somit kann $F_0$ nur genau ein Element $x_0 \in \partial_e C$ besitzen.
+	
+	Angenommen es gibt ein $z \in C \setminus \overline{\conv(\partial_e C)}$.
+	Dann existiert (wieder nach Hahn-Banach) ein stetiges lineares $\psi \colon X \to \mathbb{C}$ mit 
+	\[
+		\sup_{y \in \overline{\conv(\partial_e C)}} \re \enbrace*{\psi(y)} \le \re \psi(z)
+	\]
+	Setze $M' := \sup_{x \in C} \re \psi(x)$ und $F':= \set*{x \in C \given \re \psi(x) =M'}$.
+	Dann ist $F'$ eine kompakte Seite von $C$ nach \autoref{lem:79}.
+	Wie oben sieht man, dass $F'$ einen Extrempunkt $y_0$ besitzt, der dann auch ein Extrempunkt von $C$ ist, also $y_0 \in \partial_e C$.
+	\[
+		M' = \re \psi(y_0) \le \sup_{y \in \overline{\conv(\partial_e C)}} \re \psi(y) < \re \psi(z) \le M'
+	\]
+	Dies ist ein Widerspruch und damit folgt die Behauptung.
+\end{beweis}
+
 % section 7 (end)
 
 
@@ -2729,16 +2833,28 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 	\leavevmode
 	\begin{enumerate}[(i)]
 		\item Wir müssen zeigen, dass $p_\lambda \xi\to q \xi$ für alle $\xi \in \mathcal{H}$.
-		Für Projektionen gilt\todo{nachgucken, ob wir das schonmal gezeigt haben}
+		Für Projektionen gilt\todo{Beweis davon könnte man von Thanh übernehmen}
 		\[
 			p_\lambda \le p_\mu \iff p_\lambda(\mathcal{H}) \subset p_\mu(\mathcal{H})
 		\]
 		Jedes $\xi \in \mathcal{H}$ lässt sich eindeutig schreiben als $\xi=\xi_1 + \xi_2$ mit $\xi_1 \in \overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ und $\xi_2 \in \bigcap_\lambda p_\lambda(\mathcal{H})^\bot$.
-		Wähle eine Folge $(x_n)_\mathbb{N} \to \xi_1$.\todo{fertig machen}
+		Wähle eine Folge $(x_n)_\mathbb{N} \to \xi_1$.
+		Sei nun $\varepsilon>0$. Wähle $n_0 \in \mathbb{N}$ mit $\norm*{\xi_1-x_n}< \sfrac{\varepsilon}{2}$ für $n\ge n_0$ und passend dazu $\lambda_0 \in \Lambda$ mit $x_{n_0} \in p_{\lambda_0}\enbrace{\mathcal{H}}$.
+		Dann ist $x_{n_0} \in p_\lambda \enbrace*{\mathcal{H}}$ für $\lambda\ge \lambda_0$ und es gilt
 		\begin{align}
-			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} = \lim_{n\to \infty} \norm*{p_\lambda x_n - \xi_1}
-			= \lim_{n \to \infty} \norm*{x_n - \xi_1} =0
+			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} &= \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0} + x_{n_0}} - \xi_1} \\
+			&\le \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0}}} + \norm*{x_{n_0} - \xi_1} \\
+			&\le \Underbracket{\norm*{p_\lambda}}{=1} \cdot \norm*{\xi_1 - x_{n_0}} + \norm*{x_{n_0} - \xi_1} \\
+			&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
 		\end{align}
+		Damit ist $p_\lambda \grenzw{\so} q$ gezeigt.
+		\item Da $p_\lambda$ ein Projektion ist, ist $\ind - p_\lambda$ die Projektion auf $p_\lambda(\mathcal{H})^\bot$.
+		Weiter ist dann $(\ind - p_\lambda)_\Lambda$ ein aufsteigendes Netz von Projektionen und nach (i) konvergiert dies stark gegen die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})^\bot}$.
+		Damit konvergiert dann aber auch $p_\lambda$ stark gegen die Projektion auf
+		\[
+			\overline{\bigcup_\lambda p_\lambda(\mathcal{H})^\bot}^\bot = \bigcap_\lambda p_\lambda(\mathcal{H})
+		\]
+		Also gilt $p_\lambda \grenzw{\so} r$ wie gewünscht.\qedhere
 	\end{enumerate}
 \end{beweis}
 % subsection mon_proj (end)
