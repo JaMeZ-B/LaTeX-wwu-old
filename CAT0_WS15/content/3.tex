@@ -1,2 +1,341 @@
 \chapter{Gruppenwirkungen auf kubischen Komplexen} % (fold)
 \label{cha:3}
+
+\subsection*{Motivation}
+\begin{enumerate}[(i)]
+	\item Spezieller Fall des Satzes von \textsc{Cartan-Hadamard}: \marginnote{15.01. \\ \ [16]}
+	
+	Sei $X$ ein vollständiger einfach-zusammenhängender lokaler $\CAT$-Raum.
+	Dann ist $X$ $\CAT$. Also:
+	
+	\[
+		\left. \begin{array}{l}
+			\text{lokale Eigenschaft: lokal } \CAT \\
+			\text{globale Eigenschaft: einfach zusammenhängend}
+		\end{array} \right\} \quad \Rightarrow \quad \text{global } \CAT
+	\]
+	Frage: Wie kann man die lokale $\CAT$-Eigenschaft testen?
+	
+	Für eine spezielle Klasse von Räumen -- kubische Komplexe -- kann man diese lokale Eigenschaft in eine kombinatorische Eigenschaft übersetzen und somit leichter testen ($\Rightarrow$ \textsc{Gromov}'s Link Condition).
+	\item Fragestellung: Wann besitzt die simpliziale Wirkung einer endlich erzeugten Gruppe $G$ auf einen $\CAT$ kubischen Komplex einen Fixpunkt?
+	
+	Für $\CAT$ kubische Komplexe werden wir eine Methode sehen, um diese Fragestellung anzugehen.
+\end{enumerate}
+
+\section{Kubische Komplexe}
+\label{sec:3.1}
+	Grobe Idee: Wir bauen einen topologischen Raum aus Würfeln.\\
+	Als Konvention legen wir fest: $[0,1]^0 = \{0\}$.
+	
+\begin{definition}[Würfel, Seite]
+\label{def:3.1}
+	Sei $W:= [0,1]^n \subseteq (\RR^n,d_2)$ ein \Index{Würfel}.
+	Eine \Index{Seite} $S \subseteq W$ ist gegeben durch
+	\[
+		S = S_1 \times \dots \times S_n \text{ mit } S_i \in \{ \{0\}, \{1\}, [0,1]\}.
+	\]
+	Die eingeschränkte euklidische Metrik auf $W$ bezeichnen wir mit $d_W$.
+	Weiter definieren wir die \Index{Dimension} von $W$ wie folgt:
+	\[
+		\dim(W) := \dim(\sprod{W}) \text{ mit } \sprod{W} \text{ als } \RR-\text{Vektorraum}.
+	\]
+\end{definition}	
+\newpage
+\begin{beispiel}
+\label{bsp:3.2}
+	\mbox{} \\[-1cm]
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=2,>=Latex]
+			\draw [gray,thick,->] (-.1,0) -- (1.2,0);
+			\draw [gray,thick,->] (0,-.1) -- (0,1.2);
+			\draw [schraffiert=teal,thick] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+			
+			\draw [color=red,very thick] (0,1) -- (1,1);
+			\draw [color=red] (1,0) node[fill,circle,inner sep=1.5pt]{};
+			\draw [color=red] (1,1) node[right]{$[0,1] \times \{1\}$};
+			\draw [color=red] (1,0) node[below]{$\{1\} \times \{0\}$};
+		\end{tikzpicture}
+		\caption{Zwei Seiten des Würfels $W = [0,1]^2$.}
+	\end{figure}
+\end{beispiel}
+
+\begin{definition}[Verklebung, kubischer Komplex]
+\label{def:3.3}
+	Seien $W_1,W_2$ zwei Würfel und $S_1 \subseteq W_1$ und $S_2 \subseteq W_2$ Seiten.
+	Eine Isometrie $\varphi \colon S_1 \rightarrow S_2$ heißt \Index{Verklebung} von $W_1$ und $W_2$.
+	Sei nun $\mathcal{W}$ eine Familie von Würfeln und $\mathcal{V}$ eine Familie von Verklebungen von Würfeln aus $\mathcal{W}$ mit folgenden Eigenschaften:
+	\begin{enumerate}[(i)]
+		\item Kein Würfel ist mit sich selbst verklebt.
+		\item Je zwei Würfel aus $\mathcal{W}$ sind höchstens einmal miteinander verklebt.
+	\end{enumerate}
+	Sei $\sim$ die durch
+	\[
+		x \sim y \quad :\Leftrightarrow \quad \text{es existiert ein } \varphi \in \mathcal{V} \text{ mit } x \in \dom(\varphi) \text{ und } \varphi(x) = y
+	\]
+	erzeugte Äquivalenzrelation auf $\bigcup_{W \in \mathcal{W}} W$. Die Menge
+	\[
+		X := \faktor{\enbrace*{ \bigcup_{W \in \mathcal{W}} W}}{\sim}
+	\]
+	heißt kubischer Komplex definiert durch $(\mathcal{W},\mathcal{V})$.
+	Die Dimension von $X$ ist definiert durch
+	\[
+		\dim(X) := \sup\{ \dim(W) : W \in \mathcal{W}\}.
+	\]
+\end{definition}
+
+\begin{beispiel}
+\label{bsp:3.4}
+	\mbox{} \\[-1.4cm]
+	\begin{align*}
+		\mathcal{W} := \ &\{W_1 = [0,1]^2, W_2 = [0,1]^2, W_3 = [0,1]\} \\
+		\mathcal{V} := \ &\{\varphi_1 \colon \{0\} \times \{0\} \subseteq W_1 \rightarrow \{1\} \times \{1\} \subseteq W_2, \varphi_2 \colon [0,1] \times \{1\} \subseteq W_2 \rightarrow [0,1] = W_3\}
+	\end{align*}
+\end{beispiel}
+\newpage
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=1.5,>=Latex]
+		\draw [thick,schraffiert=teal] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+		\draw [thick,schraffiert=teal] (2,0) -- (3,0) -- (3,1) -- (2,1) -- cycle;
+		\draw [very thick,color=red] (4,0) -- (5,0);
+		\draw [very thick,color=red] (2,1) -- (3,1);
+		
+		\draw (.5,0) node[below]{$W_1$};
+		\draw (2.5,0) node[below]{$W_2$};
+		\draw (4.5,0) node[below]{$W_3$};
+		
+		\draw [color=Green4,->] (0,0) .. controls (-1,1) and (1,2.5) ..   (3,1);
+		\draw [color=Green4,->] (2.5,1) to[out=90,in=90] (4.5,0);
+		
+		\draw [color=RoyalBlue2] (0,0) node[fill,circle,inner sep=2pt]{};
+		\draw [color=RoyalBlue2] (3,1) node[fill,circle,inner sep=2pt]{};
+		\draw [color=Green4] (4,1) node[right]{$\varphi_2$};
+		\draw [color=Green4] (1,1.6) node[above]{$\varphi_1$};
+	\end{tikzpicture} \hspace{1.5cm}
+	\begin{tikzpicture}[scale=1.5,>=Latex]
+		\draw (0,1.8) node[right]{$\mathbf{X}$};
+		\draw [thick,schraffiert=teal] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+		\draw [thick,schraffiert=teal] (1,1) -- (2,1) -- (2,2) -- (1,2) -- cycle;
+		\draw [very thick,red] (0,1) -- (1,1);
+		\draw [color=RoyalBlue2] (1,1) node[fill,circle,inner sep=2pt]{};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{definition}
+\label{def:3.5}
+	Seien $x,y \in X$ beliebig.
+	Ein Weg $c$ von $x$ nach $y$ in $X$ ist definiert als eine endliche Folge $c=(x_0,\dots,x_m), x_i \in X$ mit $x_0 = x$, $x_m = y$ und folgender Eigenschaft:
+	Für alle $i \in \{0,\dots,m-1\}$ existiert ein Würfel $W_i \in \mathcal{W}$ mit $x_i,x_{i+1} \in W_i$.
+	
+	Weiter definieren wir die Länge von $c$ als
+	\[
+		\ell(c) = \ell((x_0,\dots,x_m)) = \sum\limits_{i=0}^{m-1} d_{W_i} (x_i,x_{i+1}).
+	\]
+	$X$ heißt \textbf{wegzusammenhängend}, wenn es für je zwei Elemente aus $X$ ein solcher Weg existiert. \index{zusammenhängend!wegzusammenhängend}
+	
+	Nun definieren wir auf $X$ wegzusammenhängend eine Metrik:
+	\begin{align*}
+		d_X \colon X \times X &\longrightarrow \RR_{\geq 0} \\
+		(x,y) &\longmapsto \inf\{ \ell(c) : c \text{ ist ein Weg von } x \text{ nach } y\}
+	\end{align*}
+\end{definition}
+
+Ab jetzt betrachten wir eine wegzusammenhängenden kubischen Komplex immer mit der Metrik $d_X$.
+
+\begin{beispiel}
+\label{bsp:3.6}
+	$c=(x,x_1,x_2,y)$ ist ein Weg von $x$ nach $y$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+			\draw [thick] (.5,3) node[fill,circle,inner sep=1.5pt]{}
+			-- (1.5,2.5) node[fill,circle,inner sep=1.5pt]{}
+			-- (2.4,3.5) node[fill,circle,inner sep=1.5pt]{}
+			-- (1.5,2.5)
+			to[pos=.6] coordinate (X) (2,1.5) node[fill,circle,inner sep=1.5pt,color=RoyalBlue2]{}
+			-- (1,1) node[fill,circle,inner sep=1.5pt]{}
+			-- (2,1.5)
+			-- (3.5,1) node[fill,circle,inner sep=1.5pt,color=RoyalBlue2]{}
+			-- (3,0) node[fill,circle,inner sep=1.5pt]{}
+			-- (3.5,1)
+			to[pos=.6] coordinate (Y) (4.5,.25) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [very thick,color=RoyalBlue2] (X) -- (2,1.5) -- (3.5,1) -- (Y);
+			\draw [color=RoyalBlue2] (X) node[left]{$x$};
+			\draw [color=RoyalBlue2] (2,1.5) node[anchor=south west]{$x_1$};
+			\draw [color=RoyalBlue2] (3.5,1) node[above]{$x_2$};
+			\draw [color=RoyalBlue2] (Y) node[anchor=south west]{$y$};
+			\draw (X) node[fill,circle,inner sep=1.5pt,color=RoyalBlue2]{};
+			\draw (Y) node[fill,circle,inner sep=1.5pt,color=RoyalBlue2]{};
+		\end{tikzpicture}
+	\end{figure}
+\end{beispiel}
+
+\subsection{Simpliziale Bäume}
+\label{subsec:3.1.1}
+
+Erinnerung:
+Sei $\Gamma = (V,E)$ ein ungerichteter Graph.
+$\Gamma$ heißt \textbf{(simplizialer) Baum}, wenn $\Gamma$ wegzusammenhängend ist und $\Gamma$ keine Kreise hat. \index{Baum}
+
+Bäume haben eine natürliche Struktur als $1$-dimensionale kubische Komplexe.
+Wir betrachten nun Bäume mit dieser kubischen Struktur.
+
+\begin{satz}
+\label{satz:3.7}
+	Bäume sind $\CAT$-Räume. \todo{Referenz auf Übungsaufgabe}
+\end{satz}
+
+
+%
+%
+%
+%
+
+Fragestellung:
+Sei $G$ eine endlich erzeugte Gruppe und $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung auf einem Baum. \marginnote{20.01. \\ \ [17]}
+Hat $\Phi$ einen globalen Fixpunkt, das heißt existiert ein $x \in X$, sodass für alle $g \in G$ gilt: $\Phi(g)(x)=x$?
+
+Wir betrachten simpliziale Wirkungen, das heißt
+\[
+	\Phi(G) \subseteq \SIsom(X) := \{f\colon X \rightarrow X : f \text{ ist Isometrie und } f(\text{Ecke}) = \text{ Ecke' für alle Ecken in } X\}
+\]
+Dies ist tatsächlich eine Einschränkung: Für $X=\RR$ ist $f\colon X \rightarrow X, x \mapsto x + \frac{1}{2}$ eine Isometrie, aber keine simpliziale Isometrie.
+
+Wir schränken das Bild von $\Phi$ noch ein wenig ein:
+Wir betrachten nur simpliziale Isometrien ohne Inversionen.
+Eine simpliziale Isometrie $f \colon X \rightarrow X$ hat eine Inversion, wenn folgendes passiert: \todo{Zeichnung einfügen}
+
+Eine Methode, um die Frage zu beantworten, ist das Theorem von \textsc{Helly} für simpliziale Bäume.
+
+\begin{no-satz}[\textsc{Helly}, 1923]
+	Sei $\mathcal{S} := \{S_1, \dots, S_l : S_i \subseteq \RR^d, S_i \neq \emptyset, S_i \text{ ist abgeschlossen und konvex für } i = 1, \dots, l\}$ eine endliche Familie.
+	Wenn sich jeweils $(d+1)$ Elemente aus $\mathcal{S}$ nichttrivial schneiden, dann ist $\cap \mathcal{S}$ nichtleer.
+\end{no-satz}
+
+\begin{no-bem}
+	$d+1$ ist eine minimale Schranke, denn zum Beispiel im $\RR^2$ ist $S_1 \cap S_2, S_2 \cap S_3, S_1 \cap S_3 \neq \emptyset$ und $S_1 \cap S_2 \cap S_3 = \emptyset$ möglich.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=.75,>=Latex]
+			\draw [->,very thick] (-1,0) -- (4.5,0);
+			\draw [->,very thick] (0,-1) -- (0,3.5);
+			
+			\draw (-.8,2) -- (4,2) node[right]{$S_3$};
+			\draw (-1,2.5) -- (2.5,-1) node[right]{$S_2$};
+			\draw (-.5,-1) -- (3.5,3) node[right]{$S_1$};
+		\end{tikzpicture}
+	\end{figure}
+\end{no-bem}
+
+Gibt es eine Verallgemeinerung des Theorems für $\CAT$-Räume?
+Ja, zum Beispiel für Bäume:
+
+\begin{no-satz}[\textsc{Helly}s Theorem für Bäume]
+	Sei $X$ ein Baum und $\mathcal{S} = \{S_1,\dots,S_l\}$ eine endliche Familie von Teilbäumen.
+	Wenn sich jeweils zwei Elemente aus $\mathcal{S}$ nichttrivial schneiden, dann ist $\cap \mathcal{S}$ nicht leer. \todo{Referenz auf ÜA}
+\end{no-satz}
+
+\begin{satz}
+\label{satz:3.8}
+	Sei $G = \sprod{g_1,\dots,g_k}$ eine endlich erzeugte Gruppe.
+	Sei $X$ ein Baum und $\Phi\colon G \rightarrow \SIsom(X)$ eine simpliziale Wirkung ohne Inversionen.
+	Wenn $\Fix_\Phi(\sprod{g_i}) \neq \emptyset$ und $\Fix_\Phi(\sprod{g_i}) \cap \Fix_\Phi(\sprod{g_j}) \neq \emptyset$ für alle $i,j \in \{1,\dots,k\}$, dann gilt $\Fix_\Phi(G) \neq \emptyset$.
+\end{satz}
+
+\begin{satz}[Verallgemeinerung]
+\label{satz:3.9}
+	Sei $G = \sprod{g_1,\dots,g_k}$ eine endlich erzeugte Gruppe und $X$ ein Baum.
+	Sei $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung.
+	Wenn $\Fix_\Phi(\sprod{g_i}) \neq \emptyset$ und $\Fix_\Phi(\sprod{g_i}) \cap \Fix_\Phi(\sprod{g_j}) \neq \emptyset$ für alle $i,j \in \{1,\dots,k\}$, dann ist $\Fix_\Phi(G) \neq \emptyset$.
+\end{satz}
+
+\begin{beispiel}
+\label{bsp:3.10}
+	Für $n \geq 3$ sei $F_n = \sprod{x_1, \dots, x_n}$ die freie Gruppe vom Rang $n$ und $\Aut(F_n)$ der Automorphismengruppe von $F_n$.
+	Wir definieren Rechtnielsenautomorphismen für $i,j \in \{1, \dots, n\}, i \neq j$.
+	\begin{align*}
+		\rho_{i,j} \colon F_n &\longrightarrow F_n \\
+		x_k &\longmapsto \begin{cases}
+			x_ix_j, & \text{falls } k=i \\
+			x_k, & \text{falls } k \neq i
+		\end{cases}
+	\end{align*}
+	Weiter definieren wir
+	\begin{align*}
+		(x_i,x_j)\colon F_n &\longrightarrow F_n \\
+			s_k &\longmapsto \begin{cases}
+				x_j, & \text{falls } k=i \\
+				x_i, & \text{falls } k=j \\
+				x_k, & \text{sonst}
+			\end{cases}
+	\end{align*}
+	und
+	\begin{align*}
+		e_i \colon F_n &\longrightarrow F_n \\
+		x_k &\longmapsto \begin{cases}
+			x_i^{-1}, & \text{falls } k = i \\
+			x_k, &\text{falls } k \neq i.
+		\end{cases}
+	\end{align*}
+	Es gilt $\rho_{i,j}, (x_i,x_j), e_i \in \Aut(F_n)$, und es ist
+	\[
+		\Aut(F_n) = \sprod{Y := \{ (x_1,x_2)e_1e_2, (x_2,x_3)e_1, (x_i,x_{i+1}), e_2\rho_{1,2},e_n : i = 3, \dots n-1\}}
+	\]
+	Es ist $\ord(\alpha) = 2$ für $\alpha \in Y$ und $\abs{\sprod{\alpha,\beta}} < \infty$ für $\alpha,\beta \in Y$.
+	
+	Sei nun $X$ ein Baum und $\Phi\colon \Aut(F_n) \rightarrow \Isom(X)$ eine isometrische Wirkung.
+	Dann ist $\Fix_\Phi(\Aut(F_n)) \neq \emptyset$, denn:
+	\begin{itemize}
+		\item Nach \textsc{Bruhat-Tits} (\autoref{BTFT}) ist $\Fix_\Phi(\sprod{\alpha}) \neq \emptyset$, da Bäume $\CAT$ und vollständig sind.
+		\item Ebenso ist $\Fix_\Phi(\sprod{\alpha}) \cap \Fix_\Phi(\sprod{\beta}) \neq \emptyset$ für $\alpha, \beta \in Y$ beliebig.
+		\item Mit \autoref{satz:3.9} folgt somit $\Fix_\Phi(\Aut(F_n)) \neq \emptyset$.
+	\end{itemize}
+\end{beispiel}
+
+\begin{definition}
+\label{def:3.11}
+	Sei  $\mathcal{X}$ eine Klasse von metrischen Räumen.
+	Eine Gruppe $G$ hat die Eigenschaft $\text{F}\mathcal{X}$, wenn jede isometrische Wirkung auf jedem Element aus $\mathcal{X}$ einen globalen Fixpunkt hat.
+\end{definition}
+
+\begin{beispiel}[\textsc{Bogopolski}, 1973]
+\label{bsp:3.12}
+	Sei $\mathcal{A}$ die Klasse der Bäume.
+	Für $n \geq 3$ hat $\Aut(F_n)$ die Eigenschaft $\text{F}\mathcal{A}$. 
+\end{beispiel}
+
+Frage:
+Sei $G \leq \Aut(F_n), n \geq 3$ eine Untergruppe mit $[\Aut(F_n) : G] < \infty$. Hat $G$ die Eigenschaft $\text{F}\mathcal{A}$? Für $n = 3$ lautet die Antwort nein, für $n \geq 4$ ist die Frage bislang ungeklärt.
+
+(Anwendung)
+
+\begin{no-satz}
+	Sei $G$ eine endlich erzeugte Gruppe.
+	Wenn $G$ die Eigenschaft $\text{F}\mathcal{A}$ hat, dann ist $G$ kein nichttriviales amalgamiertes Produkt.
+\end{no-satz}
+
+\subsection{\textsc{Helly}s Theorem für CAT(0) kubische Komplexe}
+\label{subsec:3.1.2}
+
+\begin{definition}
+\label{def:3.13}
+	Sei $X$ ein kubischer Komplex definiert durch $(\mathcal{W},\mathcal{V})$.
+	Eine Teilmenge $Y \subseteq X$ heißt \textbf{kubischer Unterkomplex}, wenn es eine Teilfamilie $\mathcal{W'} \subseteq \mathcal{W}$ existiert, sodass
+	\[
+		Y = \bigsqcup_{W \in \mathcal{W}'} W \diagup \sim.
+	\]
+\end{definition}
+
+\begin{bemerkung}
+\label{bem:3.14}
+	Wir setzen nicht voraus, dass kubische Unterkomplexe wegzusammenhängend sind.
+\end{bemerkung}
+
+\begin{theorem}[\textsc{Helly}s Theorem für $\CAT$ kubische Komplexe]
+\label{thm:3.15}
+	Sei $X$ ein $\CAT$ kubischer Komplex und $\mathcal{S}$ eine endliche Familie von nichtleeren konvexen kubischen Unterkomplexen.
+	Wenn der Schnitt von jeweils zwei Elementen aus $\mathcal{S}$ nicht leer ist, dann ist $\cap \mathcal{S}$ nicht leer.
+\end{theorem}
