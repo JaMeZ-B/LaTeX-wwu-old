@@ -1541,7 +1541,7 @@ Ab jetzt: $R$ kommutativ!
 
 \begin{lemma}
 	Seien $U,V \subseteq X$ offen. ei $C^*(X,U+V)$ der Unterkomplex von $C^*(X)$, der aus allen $\varphi \colon C_*(X)\to R$ besteht mit $\varphi(\sigma)=0$ für $\sigma \colon \abs*{\Delta^n}\to X$ mit $\im (\sigma) \subseteq U$ \emph{oder} $\im (\sigma) \subseteq V$. 
-	Dann induziert die Inklusion $C^*(X, U\cup V) \to C^*(X,U+v)$ einen Isomorphismus in Kohomologie.
+	Dann induziert die Inklusion $C^*(X, U\cup V) \to C^*(X,U+V)$ einen Isomorphismus in Kohomologie.
 \end{lemma}
 \begin{beweis}
 	Sei $C^*(U+V) := C_*^{\set*{U,V}}(U \cup V)$. 
@@ -2884,7 +2884,7 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 \label{sec:16}
 
 \begin{proposition}
-	Sei $R$ ein Ring, $C_*$ ein Kettenkomplex von $R$-Rechtsmoduln und $D_*$ ein Kettenkomplex von $R$-Linksmoduln.
+	Sei $R$ ein Ring, $C_*$ ein Kettenkomplex von $R$-Rechtsmoduln und $D_*$ ein Kettenkomplex von $R$-Linksmoduln.\todo{Revision 16}
 	\begin{enumerate}[a)]
 		\item Sind die Kettenmoduln von $C_*$ projektiv, so gibt es eine Spektralfolge mit 
 		\[
@@ -2915,17 +2915,155 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	\end{enumerate}
 \end{beweis}
 
-\begin{satz}[{name={Zerlegungssatz}}]
+\begin{satz}[{name={Zerlegungssatz}},label=zerlegungssatz]
 	Sei $C_*$ ein Kettenkomplex über einem Hauptidealring.
 	Seien die Kettenmodule von $C_*$ frei.
-	Dann gibt es Kettenkomplexe $C_*^{[i]}$, $i \in \mathbb{N}$ mit 
-	\begin{itemize}
-		\item $C_*^{[i]}=0$ für $* \in \set*{i,i+1}$
-		\item $H_i \enbrace*{C_*^{[i]}} = H_i(C_*)$
-		\item $H_{i+1} \enbrace*{C_*^{[i]}}=0$ (insbesondere ist $\partial_{i+1}^{[i]} \colon C^{[i]}_{i+1} \to C_i^{[i]}$ injektiv)
-	\end{itemize}
-	und einen Isomorphismus von Kettenkomplexen $C_* \cong \bigoplus_{i \in \mathbb{N}} C_*^{[i]}$.
+	Dann gibt es Kettenkomplexe $C_*^\ssbbrace{i}$,$i \in \mathbb{N}$ mit 
+	\begin{enumerate}[(i)]
+		\item \label{enum:zerlegungssatz:1}$C_*^\ssbbrace{i}=0$ für $* \notin \set*{i,i+1}$
+		\item \label{enum:zerlegungssatz:2}$H_i \enbrace*{C_*^\ssbbrace{i}} = H_i(C_*)$
+		\item \label{enum:zerlegungssatz:3}$H_{i+1} \enbrace*{C_*^\ssbbrace{i}}=0$ (insbesondere ist $\partial_{i+1}^\ssbbrace{i} \colon C^\ssbbrace{i}_{i+1} \to C_i^\ssbbrace{i}$ injektiv)
+	\end{enumerate}
+	und einen Isomorphismus von Kettenkomplexen $C_* \cong \bigoplus_{i \in \mathbb{N}} C_*^\ssbbrace{i}$.
 \end{satz}
+\begin{beweis}
+	Wir setzen 
+	\[
+		C_*^\ssbbrace{0} = \begin{cases}
+			C_0 &\text{ falls }*=0\\
+			\partial(C_1) &\text{ falls }*=1 \\
+			0 &\text{ sonst} 
+		\end{cases}
+	\]
+	und definieren die Randabbildung $\partial^\ssbbrace{0} \colon \partial(C_1) \to C_0$ also die Inklusionsabbildung.
+	Es gelten offenbar \cref{enum:zerlegungssatz:1,enum:zerlegungssatz:2,enum:zerlegungssatz:3} für $C_*^\ssbbrace{0}$ und da $R$ ein Hauptidealring ist, ist auch $\partial(C_1)= C_1^\ssbbrace{0}$ ein freier $R$-Modul.
+	Es folgt auch, dass $\partial \colon C_1 \twoheadrightarrow \partial(C_1)$ spaltet.
+	Wir erhalten einen Isomorphismus $C_1 \cong \im \partial \oplus \ker \partial_1$.
+	Sei 
+	\[
+		\tilde{C}_* = \begin{cases}
+			C_* &\text{ falls }*\ge 2\\
+			\ker \partial_1 &\text{ falls } *=1 \\
+			0 &\text{ falls } *=0 
+		\end{cases}
+		\qquad \text{ und } \qquad 
+		\begin{cases}
+			\partial_* &\text{ falls }*\ge 3\\
+			\partial_2 \colon C_2 \to \ker \partial_1 &\text{ falls } *=2 \\
+			0 &\text{ sonst} 
+		\end{cases} 
+	\]
+	Wir erhalten einen Isomorphismus von Kettenkomplexen $C_* \cong C_*^\ssbbrace{0} \oplus \tilde{C}_*$.
+	Da $\tilde{C}_0=0$ können wir nun induktiv die $C_*^\ssbbrace{i}$ für $i >0$ konstruieren.
+\end{beweis}
+
+\begin{satz}[label=satz:hom_tensor]
+	Seien $C_*$ und $D_*$ Kettenkomplexe über einem Hauptidealring $R$, deren Kettenmodule frei sind.
+	Dann gibt es Isomorphismen
+	\[
+		H_n \enbrace*{C_* \otimes D_*} \cong \smashoperator[r]{\bigoplus_{p+q=n}}\enspace H_p(C_*) \otimes H_q(D_*) \oplus \smashoperator[r]{\bigoplus_{p+q=n-1}}\enspace \Tor_1^2 \enbrace*{H_p(C_*),H_q(D_*)}
+	\]
+\end{satz}
+\begin{beweis}
+	Nach dem \hyperref[zerlegungssatz]{Zerlegungssatz (\ref*{zerlegungssatz})} können wir annehmen, dass es $p$ und $q$ gibt mit $C_*=0$ für $*\neq p,p+1$ und $D_*=0$ für $* \neq q,q+1$ und dass die Randabbildungen $\partial^C_{p+1} \colon C_{p+1} \to C_p$ und $\partial^D_{q+1} \colon D_{q+1} \to D_q$ injektiv sind.
+	Wir benutzen die Spektralfolge bezüglich der vertikalen Filtrierung $F_s \enbrace*{C_* \otimes D_*} = C_{*\le s} \otimes D_*$.
+	\[
+		E^0,d^0
+		\begin{tikzcd}[row sep=large]
+			C_{p} \otimes D_{q+1} \dar["\id \otimes \partial^D"] & C_{p+q} \otimes D_{q+1} \dar["\id \otimes \partial^D"] \\
+			C_p \otimes D_q & C_{p+1} \otimes D_q
+		\end{tikzcd}
+		\qquad 
+		E^1,d^1
+		\begin{tikzcd}[row sep=large]
+			0 & 0 \\
+			C_p \otimes H_q(D_*) & C_{p+1} \otimes H_q(D_*) \lar["\partial^C \otimes \id_{H_q(D_*)}"',"=d^1"]
+		\end{tikzcd}
+	\]
+	\todo[inline]{vlt als figure}
+	Nun ist $\begin{tikzcd}[cramped,sep=small] H_p(C_*) & C_p \lar[two heads] & C_{p+1} \lar[hook] \end{tikzcd}$ eine freie Auflösung von $H_p(C_*)$, also gilt
+	\[
+		E^2_{p,q} = \sfrac{C_p \otimes H_p(D_*)}{\im d^1} = H_p \enbrace*{C_*} \otimes H_q(D_*) \quad \text{und} \quad 
+		E_2(p+1,q) = \ker d^1 = \Tor_1^R \enbrace*{H_p(C_*), H_q(D_*)}
+	\]
+	Es folgt $E^\infty=E^2$.
+	Bild für $E^\infty=E^2$:
+	\[
+		\begin{tikzcd}
+			0 & 0 \\
+			H_p(C_*) \otimes H_q(D_*) & \Tor_1^R \enbrace*{H_p(C_*) \otimes H_q(D_*)}
+		\end{tikzcd}
+	\]
+	Da auf der $E^\infty$-Seite auf jeder Antidiagonalen höchstens ein nichttrivialer Eintrag ist, folgt mit der Konvergenz der Spektralfolge 
+	\begin{align}
+		H_{p+q}(C_* \otimes D_*) &\cong H_p(C_*) \otimes H_q(D_*) \\
+		H_{p+q+1}(C_* \otimes D_*) &= \Tor_1^R \enbrace[\big]{H_p(C_*) \otimes H_q(D_*)} \\
+		H_n(C_* \otimes D_*)&= 0 \qquad \text{ für } n \notin \set*{p+q,p+q+1} \qedhere
+	\end{align}
+\end{beweis}
+
+\begin{bemerkung}
+	Der Isomorphismus in \autoref{satz:hom_tensor} ist nicht natürlich in $C_*$ und $D_*$.
+	Es gibt aber eine natürliche kurze exakte Folge 
+	\[
+		\begin{tikzcd}
+			\bigoplus_{p+q=n} H_p (C_*) \otimes H_q (D_*) \rar["\alpha"] & H_n(C_* \otimes D_*) \rar & \bigoplus_{p+q=n-1} \Tor_1^R \enbrace[\big]{H_p(C_*), H_q(D_*)}
+		\end{tikzcd}
+	\]
+	Diese Folge spaltet, aber es gibt keinen natürlichen Spalt.
+	Die Abbildung $\alpha$ ist gegeben durch $\alpha \enbrace*{[a] \otimes [b]} = \benbrace*{a \otimes b}$.
+\end{bemerkung}
+
+\begin{satz}{name={Eilenberg-Zilber}}
+	Sei $R$ ein kommutativer Ring, $X,Y$ topologische Räume.
+	Dann induziert 
+	\[
+		\enbrace*{\sigma \colon \abs*{\Delta^n} \to X \times Y } \longmapsto \sum_{p=0}^{n} (\pr_X \circ \sigma)\big|_{\benbrace*{0,\ldots ,p}} \otimes (\pr_Y \circ \sigma)\big|_{p,\ldots ,n}
+	\]
+	eine Kettenhomotopieäquivalenz, die \Index{Alexander-Whitney-Abbildung} 
+	\[
+		\AW_* \colon C^\sing_*(X \times Y;R) \longrightarrow C_*^\sing(X;R) \otimes_R C_*^\sing(Y;R)
+	\]
+\end{satz}
+
+\begin{korollar}
+	Sei $R$ ein Hauptidealring, $X,Y$ topologische Räume.
+	Dann gilt
+	\[
+		H_n(X \times Y;R) \cong \bigoplus_{p+q=n} H_p(X;R) \otimes_R H_q(Y;R) \oplus \bigoplus_{p+q=n-1} \Tor_1^R \enbrace*{H_p(X;R),H_q(Y;R)}
+	\]
+\end{korollar}
+
+\begin{proposition}
+	Sei $R$ ein kommutativer Ring.
+	Dann gibt es eine in $X$ und $Y$ natürliche Kettenabbildung 
+	\(
+		m \colon C_*(X;R) \otimes_R C_*(Y;R) \longrightarrow C_*(X \times Y;R)
+	\)
+	mit 
+	\[
+		m \enbrace*{ \enbrace*{\sigma \colon \abs*{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs*{\Delta^0} \to Y}}= \enbrace*{\sigma \times \tau \colon \abs*{\Delta^0} \to X \times Y}
+	\]
+\end{proposition}
+\begin{beweis}
+	Wir benutzen die \emph{Methode der azyklischen Modelle} und konstruieren 
+	\[
+		m_n \colon \bigoplus_{p+q=n} C_p(X;R) \otimes_R C_q(Y;R) \longrightarrow C_n(X \times Y;R) 
+	\]
+	induktiv für $n=0,1,\ldots $.
+	Für $n=0$ ist $m_0$ schon durch die Behauptung festgelegt.
+	Sei also $m_k$ für $k<n$ bereits konstruiert mit $\partial_k \circ m_k = m_{k-1} \circ \partial_k$ für $k<n$.
+	Für $p+q=n$ betrachte $\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}} \in Cp(\abs*{\Delta^p};R) \otimes_R C_q \enbrace*{\abs*{\Delta^q};R}$.
+	Dann liegt $m_{n-1} \enbrace*{\partial \enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}}}}$ im Kern von $\partial$ auf $C_{n-1} \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q};R}$.
+	Wegen $H_*(\abs*{\Delta^p} \times \abs*{\Delta^q})=0$ gibt es $v_{p,q} \in C_n \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q}}$ mit 
+	\[
+		\partial_k(v_{p,q}) = m_{n-1} \enbrace*{\partial \enbrace*{\id_{\abs*{\Delta^p} } \otimes \id_{\abs*{\Delta^q}}}}. 
+	\]
+	Nun definieren wir $m_n$ durch 
+	\[
+		m_n \enbrace*{ \enbrace*{\sigma \colon \abs*{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs*{\Delta^0} \to Y}} := (\sigma\times \tau)_* \enbrace*{v_{p,q}} \qedhere
+	\]
+\end{beweis}
 % section 16 (end)
 
 \cleardoubleoddemptypage
