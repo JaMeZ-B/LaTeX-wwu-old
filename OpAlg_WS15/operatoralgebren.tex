@@ -1473,7 +1473,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Dann ist $\overline{\varphi} := \hat{\hat{\varphi}}|_A$ die gesuchte positive Fortsetzung. 
 \end{beweis}
 
-\begin{satz}[{name=[Eindeutigkeit der Fortsetzung im hereditären Fall]}]
+\begin{satz}[{name=[Eindeutigkeit der Fortsetzung im hereditären Fall]},label=satz:58]
 	Sei $B \subher A$ eine hereditäre $C^*$-Unteralgebra und $\varphi$ ein positives Funktional auf $B$. 
 	Dann besitzt $\varphi$ eine \emph{eindeutige} positive lineare Fortsetzung $\overline{\varphi}$ auf $A$ mit $\norm*{\overline{\varphi}}=\norm*{\varphi}$.
 	Falls $(e_\lambda)_\Lambda \subset B$ eine approximative Eins für $B$ ist, so gilt $\overline{\varphi}(a) = \lim_\lambda \varphi(e_\lambda a e_\lambda)$ für $a \in A$.
@@ -2508,7 +2508,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 
 \section{Reine Zustände und irreduzible Darstellungen} % (fold)
 \label{sec:7}
-
+\todo[inline]{Revision 7}
 \begin{proposition}[label=prop:71]
 	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$ ein Zustand und $\rho \in A^*$ ein weiteres positives Funktional.
 	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit 
@@ -2710,7 +2710,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 
 \begin{proposition}[{name=[grundlegen Eigenschaften von Seiten]},label=prop:78]
 	Seien $X,C$ wie oben.
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item $C$ ist eine Seite von $C$.
 		\item Eine nichtleerer Durchschnitt von Seiten ist wieder eine Seite.
 		\item Für eine Seite $F$ von $C$ gilt $\partial_e F \subset \partial_e C$.
@@ -2738,7 +2738,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Dies ist ein Widerspruch, also müssen $y,z$ in $F$ liegen und damit ist $F$ eine Seite. 
 \end{beweis}
 
-\begin{satz}[{name={Krein-Milman}}]
+\begin{satz}[{name={Krein-Milman}},label=satz:krein_milman]
 	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum und $C \subset X$ eine nichtleere, kompakte, konvexe Teilmenge.
 	Dann gilt 
 	\[
@@ -2781,7 +2781,111 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Dies ist ein Widerspruch und damit folgt die Behauptung.
 \end{beweis}
 
+\begin{satz}[label=satz:711]
+	Sei $A$ eine $C^*$-Algebra und $S:= \set*{\varphi \in A^* \given \varphi \text{ ist positiv}, \norm*{\varphi}\le 1}$.
+	Dann ist $S$ konvex und $\w^*$-kompakt. 
+	Weiter gilt $\partial_e S = PS(A) \cup \set*{0}$ und $S= \overline{\conv(\partial_e S)}^{\raisemath{-.4ex}{\w^*}}$.
+	Falls $A$ unital ist, so gilt $\partial_e \enbrace*{S(A)} =PS(A)$ und $S(A) = \overline{\conv \enbrace*{PS(A)}}^{\raisemath{-.4ex}{\w^*}}$. 
+\end{satz}
+\begin{beweis}
+	Es ist $S \subset B^1(A^*)$ abgeschlossen, wobei $B^1(A^*)$ nach Banach-Alaoglu $\w^*$-kompakt ist.
+	Also ist $S$ auch $\w^*$-kompakt. 
+	Offensichtlich ist $S$ außerdem konvex.
+	Wir zeigen nun, dass für die Extrempunkte von $S$ gilt: $\partial_e S = PS(A) \cup \set*{0}$:
+	\begin{itemize}
+		\item Es gilt $0 \in \partial_e S$:
+		Falls $0=t \cdot \varphi + (1-t) \cdot \psi$ mit $\varphi,\psi \in S$ und $t \in (0,1)$, so gilt
+		\[
+			\varphi\big|_{A_+} = \psi\big|_{A+}=0 \enspace\Longrightarrow \enspace \varphi=\psi=0
+		\]
+		\item Es gilt $PS(A) \subset \partial_e S$: Sei $\rho \in PS(A)$ und es gelte $\rho = t \cdot \varphi + (1-t) \cdot \psi$ mit $\varphi,\psi \in S$ und $t \in (0,1)$.
+		Dann gilt $t \cdot \varphi, (1-t) \cdot pis	 \le \rho$, also folgt 
+		\[
+			t \cdot \varphi = \lambda_\varphi \cdot \rho \text{ und } (1-t) \cdot \psi = \lambda_\psi \cdot \rho 
+		\]
+		für geeignete Skalare $\lambda_\varphi, \lambda_\psi \in [0,1]$.
+		Es gilt $1= \norm*{\rho} \le t \cdot \norm*{\varphi} + (1-t) \cdot \norm*{\psi} \le 1$, also ist $\norm*{\varphi}=\norm*{\psi}=1$.
+		Damit folgt weiter $t=\lambda_\varphi$ und $(1-t)=\lambda_\psi$ und somit ist $\varphi=\rho=\psi$, also $\rho \in \partial_e S$.
+		\item Es gilt $\partial_e S \setminus \set*{0} \subset PS(A)$: Für $0\neq\tau \in \partial_e S$ ist $0<\norm*{\tau}\le1$.
+		Es gilt dann
+		\[
+			\tau= \norm*{\tau} \cdot \Underbracket{\frac{1}{\norm*{\tau}} \cdot \tau}{\in S} + \enbrace[\big]{1- \norm*{\tau}} \cdot 0 
+		\]
+		Falls $\norm*{\tau}<1$, so ist $\norm*{\tau} \in (0,1)$ und $\tau=0$, was ein Widerspruch ist. Es folgt also $\tau \in S(A)$.
+		Sei nun $0\neq \rho \le \tau$ ein positives Funktional auf $A$.
+		Dann gilt $1- \norm*{\rho} = \lim_\lambda \tau(e_\lambda) - \rho(e_\lambda)= \norm*{\tau- \rho}$, wobei $(e_\lambda)_\Lambda \subset A$ eine approximative Eins ist.
+		Es folgt
+		\[
+			\tau = \norm*{\rho} \cdot \Underbracket{\frac{1}{\norm*{\rho}} \cdot \rho}{\in S} + \enbrace[\big]{1- \norm*{\rho}} \cdot \Underbracket{\frac{1}{\norm*{\tau - \rho}} \cdot (\tau - \rho)}{\in S}  
+		\]
+		Da $\tau \in \partial_e S$ ist, folgt $\tau = \sfrac{1}{\norm*{\rho}} \cdot \rho$ und somit $\norm*{\rho} \cdot \tau =\rho$, also ist $\tau \in PS(A)$.
+	\end{itemize}
+	Nach dem \hyperref[satz:krein_milman]{Satz von Krein-Milman (\ref*{satz:krein_milman})} ist $S= \overline{\conv(\partial_e S)}^{\raisemath{-.4ex}{\w^*}}$.
+	Sei nun $A$ unital.
+	Dann ist $S(A)$ nichtleer, konvex und $\w^*$-kompakt, denn aus $A$ unital folgt $\norm*{\varphi}=\varphi(1)$.
+	Mit \hyperref[satz:krein_milman]{Krein-Milman} folgt also
+	\[
+		S(A) = \overline{\conv \enbrace[\big]{\partial_e \enbrace*{S(A)}}}^{\w^*}
+	\]
+	Aber $S(A) \subset S$ ist eine Seite, also gilt 
+	\[
+		PS(A) =S(A) \cap \partial_e S \StackText{\ref{prop:78}(iii)}{=\joinrel=} \partial_e \enbrace*{S(A)} \qedhere
+	\]
+\end{beweis}
+
+\begin{satz}[label=satz:712]
+	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A_+$.
+	Dann existiert $\rho \in PS(A)$ mit $\rho(a)=\norm*{a}$.
+\end{satz}
+\begin{beweis}
+	Die folgende Menge mit $S$ wie in \autoref{satz:711} ist $\w^*$-abgeschlossen und konvex:
+	\[
+		F := \set[\big]{\varphi \in S \given \varphi(a)=\norm*{a}}
+	\]
+	$F$ ist nichtleer nach \autoref{satz:55} und kompakt nach Banach-Alaoglu.
+	Mit \hyperref[satz:krein_milman]{Krein-Milman} folgt, dass $F$ einen Extrempunkt $\rho$ besitzt.
+	Wie in \autoref{lem:79} zeigt man, dass $F$ eine Seite von $S$ ist.
+	Nach \autoref{prop:78} ist $\rho$ ein Extrempunkt von $S$.
+	Da $\rho\neq0$ ist, folgt also $\rho \in PS(A)$.
+\end{beweis}
+
+\begin{korollar}[label=korr:713]
+	Sei A eine $C^*$-Algebra und $a \in A$.
+	Dann existiert eine irreduzible Darstellung $(\mathcal{H},\pi)$ von $A$ mit $\norm*{a}= \norm*{\pi(a)}$.
+\end{korollar}
+\begin{beweis}
+	Ohne Einschränkungen ist $a \neq 0$.
+	Nach \autoref{satz:712} existiert ein reiner Zustand $\rho \in PS(A)$ mit $\rho(a^*a)=\norm*{a^*a}=\norm*{a}^2$.
+	Die GNS-Darstellung $(\mathcal{H}_\rho,\pi_\rho)$ ist irreduzibel nach \autoref{satz:75}.
+	Es gilt
+	\[
+		\norm*{a}^2 = \rho(a^*a) = \skal*{\xi_\rho, \pi_\rho(a^*a)\xi_\rho} = \norm*{\pi_\rho(a) \xi_\rho}^2 \le \norm*{\pi_\rho(a)}^2 \le \norm*{a}^2 \qedhere
+	\]
+\end{beweis}
+
+\begin{korollar}[label=korr:714]
+	Sei $B \subset A$ eine $C^*$-Unteralgebra und $\rho \in PS(B)$.
+	Dann existiert eine Fortsetzung $\rho' \in PS(A)$.
+	Falls $B\subher A$, so ist $\rho'$ eindeutig bestimmt. 
+\end{korollar}
+\begin{beweis}
+	Die Menge $F:= \set*{\varphi \in S(A^\simm) \given \varphi|_{B}=\rho}$ ist nichtleer nach \autoref{satz:57} und es ist $F \subset S(A^\simm)$ $\w^*$-abgeschlossen, also $\w^*$-kompakt.
+	Weiter ist $F$ auch wieder konvex.
+	$F$ ist eine Seite von $S = \set*{\varphi \colon A^\simm \to \mathbb{C}\given \text{ positiv, linear, } \norm*{\varphi}\le 1}$ (Übung).
+	Mit \hyperref[satz:krein_milman]{Krein-Milman} und \autoref{prop:78} folgt, dass ein $\rho'' \in \partial_e F \subset\partial_e F \setminus\set*{0}=PS(A^\simm)$ existiert.
+	Setze nun $\rho' := \rho''|_{A} \in PS(A)$.(Übung)
+	Eindeutigkeit: \autoref{satz:58}.
+\end{beweis}
 % section 7 (end)
+
+
+
+
+
+
+
+
+
 
 
 \cleardoubleoddemptypage
