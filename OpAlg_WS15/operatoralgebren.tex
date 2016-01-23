@@ -597,7 +597,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $S \subset A$ Teilmenge einer $C^*$-Algebra $A$.\index{C-Algebra@$C^*$-Algebra!erzeugte $C^*$-Algebra}
 	Dann bezeichnet $C^*(S) \subset A$ die kleinste $C^*$-Unteralgebra von $A$, die $S$ enthält; also
 	\[
-		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ Unteralg.}\\ \text{mit } S \subset B}}} \enspace B
+		C^*(S) := \smashoperator[r]{\bigcap_{\substack{B \subset A \text{ $C^*$-Unteralg.}\\ \text{mit } S \subset B}}} \enspace B
 	\]
 \end{definition}
 
@@ -1989,24 +1989,25 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		(ea)(\xi) = e \enbrace*{a \xi} = \enbrace[\big]{\so\text{-}\lim\nolimits_\lambda e_\lambda} (a \xi) = \enbrace[\big]{\so\text{-}\lim\nolimits_\lambda (e_\lambda a)}(\xi) = \enbrace[\big]{\norm{\cdot}\text{-}\lim\nolimits_\lambda (e_\lambda a)}(\xi) = a(\xi)
 	\]
-	Damit ist $e\,a =a$ für alle $a$ und damit auch $e\,a^*= a^*$. Also ist $a\,e =a$ und $e$ somit ein Einselement.
+	Damit ist $e\,a =a$ für alle $a$ und damit auch $e\,a^*= a^*$. Also ist $a\,e =a$ und $e$ somit eine Eins.
 \end{beweis}
 
 \begin{proposition}[{name=[von-Neumann-Algebra als unitale von-Neumann-Algebra auffassen]}]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra mit Einselement $e$.
-	Dann ist $A$ aufgefasst als Unteralgebra $A_e$ von $\mathcal{B}(e \mathcal{H})$ eine unitale von-Neumann-Algebra ($\ind_{A_e}= \ind_{\mathcal{B}(e \mathcal{H})}$) und es gilt $A_e = (A_e)''$.\todo{Revision 6}
+	Dann ist $A$ aufgefasst als Unteralgebra $A_e$ von $\mathcal{B}(e \mathcal{H})$ eine unitale von-Neumann-Algebra ($\ind_{A_e}= \ind_{\mathcal{B}(e \mathcal{H})}$) und es gilt $A_e = (A_e)''$.
 \end{proposition}
 \begin{beweis}
 	Es gilt $e=e^2 \in \mathcal{B}(\mathcal{H})_\sa$, das heißt $e$ ist eine orthogonale Projektion.
 	Weiter ist $e \mathcal{H} \subset \mathcal{H}$ abgeschlossen, denn $e \xi_\lambda \to \xi \in \mathcal{H}$ impliziert
 	\[
-		\enbrace*{\ind_{\mathcal{B}(\mathcal{H})} - e} \xi = \enbrace*{\ind_{\mathcal{B}(\mathcal{H})}- e} \enbrace*{\lim_\lambda e \xi_\lambda} = \lim_\lambda \enbrace*{(\ind_{\mathcal{B}(\mathcal{H})}-e) e \xi_\lambda} = 0
+		\enbrace*{\ind_{\mathcal{B}(\mathcal{H})} - e} \xi = \enbrace*{\ind_{\mathcal{B}(\mathcal{H})}- e} \enbrace[\big]{\lim\nolimits_\lambda e \xi_\lambda} = \lim\nolimits_\lambda \enbrace*{(\ind_{\mathcal{B}(\mathcal{H})}-e) e \xi_\lambda} = 0
 	\]
+	Also ist $e\xi=\xi \in e \mathcal{H}$.
 	Damit folgt, dass $e \mathcal{H} \subset \mathcal{H}$ ein Unterhilbertraum ist. Wir haben\marginnote{$\kappa$ ist $^*$-linear und kontraktiv, aber nicht multiplikativ}
 	\[
 		\begin{tikzcd}[row sep=0pt]
 			\mathcal{B}(e \mathcal{H}) \rar[hook,"\iota"] & \mathcal{B}(\mathcal{H}) \rar["\kappa"] & \mathcal{B}(e \mathcal{H}) \\
-			& x \rar[mapsto] & e \cdot x\big|_{e \mathcal{H}}
+			& x \rar[mapsto] & e \, x|_{e \mathcal{H}}
 		\end{tikzcd}
 	\]
 	Dabei gilt $\kappa \circ \iota = \id_{\mathcal{B}(e\mathcal{H})}$ und $\kappa|_A \colon A \to \kappa(A) =: A_e$ ist ein $^*$-Isomorphismus.
@@ -2016,11 +2017,11 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\iota(x_\lambda) (\xi) = \iota(x_\lambda) \enbrace[\big]{e \xi + (\ind -e) \xi} = \iota(x_\lambda)(e \xi) \grenzw{} \iota(x)(e \xi) = \iota(x) \enbrace[\big]{e \xi + (\ind -e) \xi} = \iota(x) (\xi)
 	\]
-	Also gilt $\iota(x_\lambda) \grenzw{\raisemath{-3pt}{\so}} \iota(x)$ und damit $\iota(x) \in A$, da $(\iota(x_\lambda)) \subset A$.
-	Damit folgt weiter $x = \kappa \circ \iota(x) \in  A_e$ und $\ind_{\mathcal{B}(e \mathcal{H})} = \kappa(e) \in A_e$. Mit \autoref{korr:67} folgt $A_e= (A_e)''$.
+	Also gilt $\iota(x_\lambda) \grenzw{\raisemath{-3pt}{\so}} \iota(x)$ und damit ist $\iota(x) \in A$, da $A$ $\so$-abgeschlossen ist.
+	Damit folgt weiter $x = \kappa \circ \iota(x) \in  A_e$ und $\ind_{\mathcal{B}(e \mathcal{H})} = \kappa(e) \in A_e$. Nach \autoref{korr:67} gilt außerdem $A_e= (A_e)''$.
 \end{beweis}
 
-\begin{definitionP}[label=def:610]
+\begin{definitionP}[label=def:610,{name=[Bildprojektion]}]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra und $x \in A$.
 	Wir definieren die \Index{Bildprojektion} $[x]$ als orthogonale Projektion auf $\overline{\im x} = \overline{x \mathcal{H}} \subset \mathcal{H}$. 
 	Es gilt
@@ -2029,25 +2030,23 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\]
 \end{definitionP}
 \begin{beweis}
-	Da $x^* \xi=0 \Rightarrow xx^* \xi=0 \Rightarrow \skal*{\xi}{xx^*\xi}=0 \Rightarrow x^* \xi=0$ gilt, folgt
+	Mit den Implikationen $x^* \xi=0 \Rightarrow xx^* \xi=0 \Rightarrow \skal*{\xi}{xx^*\xi}=0 \Rightarrow \skal*{x^* \xi}{x^*\xi}=0 \Rightarrow x^* \xi=0$ folgt
 	\[
 		\overline{\im x} = \enbrace*{\ker x^*}^\bot = \enbrace[\big]{\ker (xx^*)}^\bot = \overline{\im xx^*}
 	\]
 	Damit ist $[x]=[xx^*]$. 
-	Die Folge $\enbrace[\big]{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}_{n \in \mathbb{N}} \subset A_+^1$ ist monoton aufsteigend und beschränkt nach Funktionalkalkül, konvergiert also nach \autoref{satz:62} stark gegen ein $e \in A_\sa$.
-	Für $\xi \in \mathcal{H}$ gilt
+	Die Folge $\enbrace[\big]{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}_{n \in \mathbb{N}} \subset A_+^1$\marginnote{$xx^*$ ist positiv} ist monoton aufsteigend und beschränkt nach Funktionalkalkül, konvergiert also nach \autoref{satz:62} stark gegen ein $e \in A_\sa$.
+	Für $\xi \in \mathcal{H}$ gilt dann
 	\begin{align}
-		e xx^* \xi = \lim_n \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^* xx^* \xi &= \lim_n \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^* \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*} \xi \\
-		&= \lim_n xx^* \xi = xx^* \xi
+		e xx^* \xi = \lim_n \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^* xx^* \xi = \lim_n \Underbracket{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}{\text{beschränkt} } \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*} \xi 
+		&= \lim_n xx^* \xi \\[-.8em] &= xx^* \xi
 	\end{align}
-	Also ist $exx^* = xx^*$ und damit auch $xx^*e=(e xx^*)^* = (xx^*)^* = xx^*$.
-	Weiter ist dann $e[xx^*] = [xx^*] = [xx^*]e$.
+	Also ist $exx^* = xx^*$ und damit auch $xx^*e=(e xx^*)^* = (xx^*)^* = xx^*$, es folgt also $e[xx^*] = [xx^*] = [xx^*]e$.
 	Andererseits gilt für $\xi \in \mathcal{H}$
 	\begin{align}
-		e \xi = \lim_n \enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^* \xi \in \overline{\im xx^*}= [xx^*] \mathcal{H}
+		e \xi = \lim_n \enspace\Underbracket{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}{\mathclap{\text{kommutiert da in $C^*(xx^*)$}}}\enspace \xi \in \overline{\im xx^*}= [xx^*] \mathcal{H}
 	\end{align}
-	Damit ist $[xx^*]e \xi = e \xi$, also $[xx^*]e=e= e$ und weiter $ [xx^*]=e$. 
-	Insgesamt ist $[xx^*]=e \in A$.
+	Damit ist $[xx^*]e \xi = e \xi$, also $[xx^*]e=e$, woraus insgesamt $[xx^*]=e \in A$ folgt.\todo{Revision 6}
 \end{beweis}
 
 \begin{satz}[{name={Polarzerlegung}}]
@@ -2186,7 +2185,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{bemerkung}
 	\leavevmode
 	\begin{enumerate}[a)]
-		\item Aus (i) folgt insbesondere, dass $A= \overline{\Span \set*{p \in A \text{Projektion} }}$.
+		\item Aus (i) folgt insbesondere, dass $A= \overline{\Span \set*{p \in A \given p\text{ ist Projektion}}}$.
 		\item Die Gleichung in (i) gilt entsprechend auch für normale Elemente.
 		\item Mit dem Borel-Funktionalkalkül, \autoref{satz:615}, folgt, dass die Gleichung in (ii) auch ohne Normabschluss gilt.
 	\end{enumerate}
