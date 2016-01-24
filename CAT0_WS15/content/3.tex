@@ -171,7 +171,7 @@ Ab jetzt betrachten wir eine wegzusammenhängenden kubischen Komplex immer mit d
 		\end{tikzpicture}
 	\end{figure}
 \end{beispiel}
-
+\newpage
 \subsection{Simpliziale Bäume}
 \label{subsec:3.1.1}
 
@@ -184,14 +184,8 @@ Wir betrachten nun Bäume mit dieser kubischen Struktur.
 
 \begin{satz}
 \label{satz:3.7}
-	Bäume sind $\CAT$-Räume. \todo{Referenz auf Übungsaufgabe}
+	Bäume sind vollständige $\CAT$-Räume. (\autoref{aufg:7.3})
 \end{satz}
-
-
-%
-%
-%
-%
 
 Fragestellung:
 Sei $G$ eine endlich erzeugte Gruppe und $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung auf einem Baum. \marginnote{20.01. \\ \ [17]}
@@ -201,11 +195,25 @@ Wir betrachten simpliziale Wirkungen, das heißt
 \[
 	\Phi(G) \subseteq \SIsom(X) := \{f\colon X \rightarrow X : f \text{ ist Isometrie und } f(\text{Ecke}) = \text{ Ecke' für alle Ecken in } X\}
 \]
-Dies ist tatsächlich eine Einschränkung: Für $X=\RR$ ist $f\colon X \rightarrow X, x \mapsto x + \frac{1}{2}$ eine Isometrie, aber keine simpliziale Isometrie.
+Dies ist tatsächlich eine Einschränkung: Für den Baum $X=\RR$ ist $f\colon X \rightarrow X, x \mapsto x + \frac{1}{2}$ eine Isometrie, aber keine simpliziale Isometrie.
 
 Wir schränken das Bild von $\Phi$ noch ein wenig ein:
 Wir betrachten nur simpliziale Isometrien ohne Inversionen.
-Eine simpliziale Isometrie $f \colon X \rightarrow X$ hat eine Inversion, wenn folgendes passiert: \todo{Zeichnung einfügen}
+Eine simpliziale Isometrie $f \colon X \rightarrow X$ hat eine Inversion, wenn folgendes passiert: \begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=1.5,>=Latex]
+		\draw [ultra thick] (0,0) node[below]{$v_1$} -- (1.7,0) node[below]{$v_2$};
+		\draw (0,0) node[fill,circle,inner sep=2pt]{};
+		\draw (1.7,0) node[fill,circle,inner sep=2pt]{};
+		
+		\draw [->,thick] (2.2,0) to [bend angle=30,bend left] coordinate[pos=.5] (A) (3.8,0);
+		\draw (A) node[above]{$f$};
+		
+		\draw [ultra thick] (4.3,0) node[below]{$v_2$} -- (6,0) node[below]{$v_1$};
+		\draw (4.3,0) node[fill,circle,inner sep=2pt]{};
+		\draw (6,0) node[fill,circle,inner sep=2pt]{};
+	\end{tikzpicture}
+\end{figure}
 
 Eine Methode, um die Frage zu beantworten, ist das Theorem von \textsc{Helly} für simpliziale Bäume.
 
@@ -219,7 +227,7 @@ Eine Methode, um die Frage zu beantworten, ist das Theorem von \textsc{Helly} f�
 	
 	\begin{figure}[h]
 		\centering
-		\begin{tikzpicture}[scale=.75,>=Latex]
+		\begin{tikzpicture}[scale=.5,>=Latex]
 			\draw [->,very thick] (-1,0) -- (4.5,0);
 			\draw [->,very thick] (0,-1) -- (0,3.5);
 			
@@ -235,7 +243,7 @@ Ja, zum Beispiel für Bäume:
 
 \begin{no-satz}[\textsc{Helly}s Theorem für Bäume]
 	Sei $X$ ein Baum und $\mathcal{S} = \{S_1,\dots,S_l\}$ eine endliche Familie von Teilbäumen.
-	Wenn sich jeweils zwei Elemente aus $\mathcal{S}$ nichttrivial schneiden, dann ist $\cap \mathcal{S}$ nicht leer. \todo{Referenz auf ÜA}
+	Wenn sich jeweils zwei Elemente aus $\mathcal{S}$ nichttrivial schneiden, dann ist $\cap \mathcal{S}$ nicht leer. (\autoref{aufg:7.2})
 \end{no-satz}
 
 \begin{satz}
@@ -245,17 +253,23 @@ Ja, zum Beispiel für Bäume:
 	Wenn $\Fix_\Phi(\sprod{g_i}) \neq \emptyset$ und $\Fix_\Phi(\sprod{g_i}) \cap \Fix_\Phi(\sprod{g_j}) \neq \emptyset$ für alle $i,j \in \{1,\dots,k\}$, dann gilt $\Fix_\Phi(G) \neq \emptyset$.
 \end{satz}
 
+\begin{beweis}
+	$\Fix_\Phi(\sprod{g_i}) \subseteq X$ ist ein Teilbaum von $X$.
+	Mit \textsc{Helly}s Theorem für Bäume folgt $\emptyset \neq \cap \Fix_\Phi(\sprod{g_i}) = \Fix_\Phi(\sprod{g_1,\dots,g_k}) = \Fix_\Phi(G)$. \qedhere
+\end{beweis}
+
 \begin{satz}[Verallgemeinerung]
 \label{satz:3.9}
 	Sei $G = \sprod{g_1,\dots,g_k}$ eine endlich erzeugte Gruppe und $X$ ein Baum.
 	Sei $\Phi\colon G \rightarrow \Isom(X)$ eine isometrische Wirkung.
-	Wenn $\Fix_\Phi(\sprod{g_i}) \neq \emptyset$ und $\Fix_\Phi(\sprod{g_i}) \cap \Fix_\Phi(\sprod{g_j}) \neq \emptyset$ für alle $i,j \in \{1,\dots,k\}$, dann ist $\Fix_\Phi(G) \neq \emptyset$.
+	Wenn $\Fix_\Phi(\sprod{g_i}) \neq \emptyset$ und $\Fix_\Phi(\sprod{g_i}) \cap \Fix_\Phi(\sprod{g_j}) \neq \emptyset$ für alle $i,j \in \{1,\dots,k\}$, dann ist $\Fix_\Phi(G) \neq \emptyset$. \autoref{aufg:7.2}
 \end{satz}
 
 \begin{beispiel}
 \label{bsp:3.10}
-	Für $n \geq 3$ sei $F_n = \sprod{x_1, \dots, x_n}$ die freie Gruppe vom Rang $n$ und $\Aut(F_n)$ der Automorphismengruppe von $F_n$.
-	Wir definieren Rechtnielsenautomorphismen für $i,j \in \{1, \dots, n\}, i \neq j$.
+	Für $n \geq 3$ sei $F_n = \sprod{x_1, \dots, x_n}$ die freie Gruppe vom Rang $n$ und $\Aut(F_n)$ der Automorphismengruppe von $F_n$. \index{Automorphismus}
+	Für zwei Automorphismen $\alpha, \beta \in \Aut(F_n)$ ist $\alpha \beta := \beta \circ \alpha$.
+	Wir definieren Rechtsnielsenautomorphismen für $i,j \in \{1, \dots, n\}, i \neq j$.
 	\begin{align*}
 		\rho_{i,j} \colon F_n &\longrightarrow F_n \\
 		x_k &\longmapsto \begin{cases}
@@ -263,7 +277,7 @@ Ja, zum Beispiel für Bäume:
 			x_k, & \text{falls } k \neq i
 		\end{cases}
 	\end{align*}
-	Weiter definieren wir
+	Weiter definieren wir die Involution
 	\begin{align*}
 		(x_i,x_j)\colon F_n &\longrightarrow F_n \\
 			s_k &\longmapsto \begin{cases}
@@ -282,7 +296,7 @@ Ja, zum Beispiel für Bäume:
 	\end{align*}
 	Es gilt $\rho_{i,j}, (x_i,x_j), e_i \in \Aut(F_n)$, und es ist
 	\[
-		\Aut(F_n) = \sprod{Y := \{ (x_1,x_2)e_1e_2, (x_2,x_3)e_1, (x_i,x_{i+1}), e_2\rho_{1,2},e_n : i = 3, \dots n-1\}}
+		\Aut(F_n) = \sprod{\Underbrace{(x_1,x_2)e_1e_2, (x_2,x_3)e_1, (x_i,x_{i+1}), e_2\rho_{1,2},e_n : i = 3, \dots n-1}{=:Y}}
 	\]
 	Es ist $\ord(\alpha) = 2$ für $\alpha \in Y$ und $\abs{\sprod{\alpha,\beta}} < \infty$ für $\alpha,\beta \in Y$.
 	
@@ -295,27 +309,37 @@ Ja, zum Beispiel für Bäume:
 	\end{itemize}
 \end{beispiel}
 
-\begin{definition}
+\begin{definition}[Eigenschaft $\prF{X}$]
 \label{def:3.11}
-	Sei  $\mathcal{X}$ eine Klasse von metrischen Räumen.
-	Eine Gruppe $G$ hat die Eigenschaft $\text{F}\mathcal{X}$, wenn jede isometrische Wirkung auf jedem Element aus $\mathcal{X}$ einen globalen Fixpunkt hat.
+	Sei  $\mathcal{X}$ eine Klasse von metrischen Räumen. \index{Eigenschaft $\prF{X}$}
+	Eine Gruppe $G$ hat die Eigenschaft $\prF{X}$, wenn jede isometrische Wirkung auf jedem Raum aus $\mathcal{X}$ einen globalen Fixpunkt hat.
 \end{definition}
 
 \begin{beispiel}[\textsc{Bogopolski}, 1973]
 \label{bsp:3.12}
 	Sei $\mathcal{A}$ die Klasse der Bäume.
-	Für $n \geq 3$ hat $\Aut(F_n)$ die Eigenschaft $\text{F}\mathcal{A}$. 
+	Für $n \geq 3$ hat $\Aut(F_n)$ die Eigenschaft $\prF{A}$. 
 \end{beispiel}
 
 Frage:
-Sei $G \leq \Aut(F_n), n \geq 3$ eine Untergruppe mit $[\Aut(F_n) : G] < \infty$. Hat $G$ die Eigenschaft $\text{F}\mathcal{A}$? Für $n = 3$ lautet die Antwort nein, für $n \geq 4$ ist die Frage bislang ungeklärt.
+Sei $G \leq \Aut(F_n), n \geq 3$ eine Untergruppe mit $[\Aut(F_n) : G] < \infty$.
+Hat $G$ die Eigenschaft $\text{F}\mathcal{A}$?
+Für $n = 3$ lautet die Antwort nein, für $n \geq 4$ ist die Frage bislang ungeklärt.
 
-(Anwendung)
+Eine Anwendung der Eigenschaft $\prF{A}$ ist die Strukturtheorie:
+Sei $G$ eine endlich erzeugte Gruppe.
+Kann man $G$ in \enquote{einfache} Bestandteile zerlegen?
+\begin{itemize}
+	\item Zum Beispiel in ein kartesisches Produkt $G \simeq G_1 \times G_2$.
+	\item Zum Beispiel in ein amalgamiertes Produkt $G \simeq G_1 *_H G_2$.
+\end{itemize}
 
-\begin{no-satz}
+\begin{no-satz}[\textsc{Serre}]
 	Sei $G$ eine endlich erzeugte Gruppe.
 	Wenn $G$ die Eigenschaft $\text{F}\mathcal{A}$ hat, dann ist $G$ kein nichttriviales amalgamiertes Produkt.
 \end{no-satz}
+
+Im Seminar im Sommersemester 2016 werden wir sehen, dass $\Aut(F_n)$ für $n \geq 3$ kein nichttriviales amalgamiertes Produkt ist.
 
 \subsection{\textsc{Helly}s Theorem für CAT(0) kubische Komplexe}
 \label{subsec:3.1.2}
@@ -327,11 +351,27 @@ Sei $G \leq \Aut(F_n), n \geq 3$ eine Untergruppe mit $[\Aut(F_n) : G] < \infty$
 	\[
 		Y = \bigsqcup_{W \in \mathcal{W}'} W \diagup \sim.
 	\]
+	Dabei ist $\sim$ erzeugt durch
+	\[
+		x \sim y \quad :\Leftrightarrow \quad \text{es existiert ein } \varphi \colon S_1 \rightarrow S_2 \in \mathcal{V} \text{ mit } S_1,S_2 \text{ sind Seiten von } W_1,W_2 \in \mathcal{W'} \text{ und } \varphi(x) = y
+	\]
 \end{definition}
 
 \begin{bemerkung}
 \label{bem:3.14}
 	Wir setzen nicht voraus, dass kubische Unterkomplexe wegzusammenhängend sind.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+			\draw (0,2.5) node[right]{$\mathbf{X}$};
+			\draw [very thick] (2,0) -- (1,0) -- (1,1) -- (0,1) -- (0,2) -- (1,2) -- (1,1) -- (2,1) -- (2,2) -- (1,2) -- (1.5,2.5) -- (2.5,2.5) -- (2,2);
+			\draw [thick] (2.5,2.5) -- (2.5,1.5) -- (2,1) -- (2,0) -- (3,0);
+			
+			\draw (6,2.5) node[right]{$\mathbf{Y}$};
+			\draw [very thick] (6,1) -- (7,1) -- (7,2) -- (6,2) -- cycle;
+			\draw [very thick] (8,0) -- (9,0);
+		\end{tikzpicture}
+	\end{figure}
 \end{bemerkung}
 
 \begin{theorem}[\textsc{Helly}s Theorem für $\CAT$ kubische Komplexe]
