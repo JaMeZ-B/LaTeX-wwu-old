@@ -2044,28 +2044,29 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $exx^* = xx^*$ und damit auch $xx^*e=(e xx^*)^* = (xx^*)^* = xx^*$, es folgt also $e[xx^*] = [xx^*] = [xx^*]e$.
 	Andererseits gilt für $\xi \in \mathcal{H}$
 	\begin{align}
-		e \xi = \lim_n \enspace\Underbracket{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}{\mathclap{\text{kommutiert da in $C^*(xx^*)$}}}\enspace \xi \in \overline{\im xx^*}= [xx^*] \mathcal{H}
+		e \xi = \lim_n \enspace\Underbracket{\enbrace*{\sfrac{1}{n} \cdot \ind + xx^*}^{-1} xx^*}{\mathclap{\text{kommutiert da in $C^*(xx^*,\ind)$}}}\enspace \xi \in \overline{\im xx^*}= [xx^*] \mathcal{H}
 	\end{align}
-	Damit ist $[xx^*]e \xi = e \xi$, also $[xx^*]e=e$, woraus insgesamt $[xx^*]=e \in A$ folgt.\todo{Revision 6}
+	Damit ist $[xx^*]e \xi = e \xi$, also $[xx^*]e=e$, woraus insgesamt $[xx^*]=e \in A$ folgt.
 \end{beweis}
 
-\begin{satz}[{name={Polarzerlegung}}]
+\begin{satz}[{name={Polarzerlegung}},label=satz:611]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra und $x \in A$.
 	Dann existiert genau eine partielle Isometrie\index{partielle Isometrie} $u \in A$ mit $u^*u=[\abs*{x}]$ und $x=u \cdot \abs*{x}$, wobei $\abs*{x}=\enbrace*{x^*x}^{\sfrac{1}{2}}$.
 \end{satz}
 \begin{beweis}
-	Setze $u_n := x\enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}}^{-1} \subset A^1$.\footnote{Benutze für die Normabschätzung $u_n^* u_n \le 1$}
+	Setze $u_n := x\enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}}^{-1} \subset A^1$.\footnote{Für die Normabschätzung siehe \cref{sub:normabschatzung_im_beweis_der_polarzerlegung}}
 	Nach \autoref{def:610} ist $[\abs*{x}]=[x^*x]= [x^*]$ und $[x^*]x^*=x^*$, also folgt $x=x[x^*]=x [\abs*{x}]$.
-	Wegen $\abs*{x} = [\abs*{x}] \abs*{x}= \abs*{x} [\abs*{x} ]$ erhalten wir  $u_n [\abs*{x}]= u_n$ für $n \in \mathbb{N}$.
+	Wegen $\abs*{x} = [\abs*{x}]\, \abs*{x}= \abs*{x}\, [\abs*{x}]$ kommutiert $\benbrace*{\abs*{x}}$ mit $\enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}}$ und damit auch mit dem Inversen.
+	Zusammen mit $x=x \benbrace*{\abs*{x}}$ folgt dann $u_n= u_n[\abs*{x}]$ für $n \in \mathbb{N}$.
 	Weiter gilt $u_n \abs*{x} \grenzw{n \to \infty} x$ in Norm, denn 
 	\begin{align}
-		\norm*{x-u_n \abs*{x}} \le \Underbrace{\norm[\big]{x- u_n \enbrace*{\sfrac{1}{n}\cdot \ind + \abs*{x} }}}{=0} + \Underbrace{\norm[\big]{ u_n \enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}} - u_n \abs*{x}}}{= \norm*{u_n \cdot \sfrac{1}{n} \abs*{x}} \grenzw{n \to \infty} 0}
+		\norm*{x-u_n \abs*{x}} \le \Underbrace{\norm[\big]{x- u_n \enbrace[\big]{\sfrac{1}{n}\cdot \ind + \abs*{x} }}}{=0} + \Underbrace{\norm[\big]{ u_n \enbrace[\big]{\sfrac{1}{n} \cdot \ind + \abs*{x}} - u_n \abs*{x}}}{= \norm*{u_n \cdot \sfrac{1}{n}}}\le \frac{1}{n}  \grenzw{n \to \infty} 0
 	\end{align}
 	Wegen $x^*x= \abs*{x}^2$ haben wir für $n,m \in \mathbb{N}$
 	\begin{align}
-		\enbrace*{u_n^*- u_m^*} (u_n - u_m) = \enbrace*{ \enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}}^{-1} - \enbrace*{\sfrac{1}{n} \cdot \ind + \abs*{x}}^{-1}}^2 \abs*{x}^2 
+		\enbrace*{u_n^*- u_m^*} (u_n - u_m) = \enbrace*{ \enbrace[\big]{\sfrac{1}{n} \cdot \ind + \abs*{x}}^{-1} - \enbrace[\big]{\sfrac{1}{m} \cdot \ind + \abs*{x}}^{-1}}^2 \,\abs*{x}^2 
 	\end{align}
-	Für $\xi \in \abs*{x}^2 \mathcal{H}$ sehen wir genau wie in \autoref{def:610}, dass
+	Für $\xi \in \abs*{x}^2 \mathcal{H}$ sehen wir genau wie in \autoref{def:610}, dass\todo{Revision 6}
 	\begin{align}
 		\enbrace*{u_n^*- u_m^*} (u_n - u_m) \xi \grenzw{n,m \to \infty} 0
 	\end{align}
@@ -2968,6 +2969,17 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 \end{beweis}
 % subsection mon_proj (end)
 
+\subsection{Normabschätzung im Beweis der Polarzerlegung, \ref{satz:611}} % (fold)
+\label{sub:normabschatzung_im_beweis_der_polarzerlegung}
+Für $x \in A \subset \mathcal{B}(\mathcal{H})$ setzen wir $u_n := x\enbrace[\big]{\sfrac{1}{n}\cdot \ind+ \abs*{x}}^{-1}$.
+Dann ist
+\[
+	u_n^* u_n = \enbrace[\big]{\sfrac{1}{n}\cdot \ind + \abs*{x}}^{-1} x^* x \enbrace[\big]{\sfrac{1}{n}\cdot \ind + \abs*{x}}^{-1}
+\]
+Weiter ist $\enbrace*{\sfrac{1}{n}\cdot \ind + \abs*{x}}^2 = \sfrac{1}{n^2} \cdot \ind + \sfrac{2}{n} \cdot \abs*{x} + x^*x$ und damit offensichtlich $x^*x \le \enbrace*{\sfrac{1}{n}\cdot \ind + \abs*{x}}^2$.
+Eine Anwendung von \autoref{satz:37}(v) mit $c=\enbrace[\big]{\sfrac{1}{n}\cdot \ind+ \abs*{x}}^{-1}$ liefert dann $u^*_n u_n \le \ind$.
+Insgesamt folgt also mit der $C^*$-Gleichung $u_n \in A^1$ für $n \in \mathbb{N}$.
+% subsection normabschatzung_im_beweis_der_polarzerlegung_ref (end)
 
 \printindex
 \listoffigures
