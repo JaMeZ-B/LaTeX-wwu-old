@@ -2255,7 +2255,7 @@ Ab jetzt: $R$ kommutativ!
 
 \noindent\todo[inline]{Hier fehlt noch was \ldots insbesondere kann sich die Nummerierung noch ändern}
 
-\begin{definition}[{name=[$\Tor$ und $\Ext$]}]
+\begin{definition}[{name=[Tor und Ext]}]
 	Wir setzen
 	\[
 		\Tor_n^R(V,M) := H_n(V \otimes_R P_*) \qquad \text{ und } \qquad \Ext_R^n(M,W) := H^n \enbrace*{\Hom_R(P_*,W)} 
@@ -3014,11 +3014,11 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	Die Abbildung $\alpha$ ist gegeben durch $\alpha \enbrace*{[a] \otimes [b]} = \benbrace*{a \otimes b}$.
 \end{bemerkung}
 
-\begin{satz}{name={Eilenberg-Zilber}}
+\begin{satz}[{name={Eilenberg-Zilber}},label=eilenbergzilber]
 	Sei $R$ ein kommutativer Ring, $X,Y$ topologische Räume.
 	Dann induziert 
 	\[
-		\enbrace*{\sigma \colon \abs*{\Delta^n} \to X \times Y } \longmapsto \sum_{p=0}^{n} (\pr_X \circ \sigma)\big|_{\benbrace*{0,\ldots ,p}} \otimes (\pr_Y \circ \sigma)\big|_{p,\ldots ,n}
+		\enbrace[\big]{\sigma \colon \abs*{\Delta^n} \to X \times Y } \longmapsto \sum_{p=0}^{n} (\pr_X \circ \sigma)\big|_{\benbrace*{0,\ldots ,p}} \otimes (\pr_Y \circ \sigma)\big|_{p,\ldots ,n}
 	\]
 	eine Kettenhomotopieäquivalenz, die \Index{Alexander-Whitney-Abbildung} 
 	\[
@@ -3034,37 +3034,158 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	\]
 \end{korollar}
 
-\begin{proposition}
+\begin{proposition}[{name={Existenz}}]
 	Sei $R$ ein kommutativer Ring.
 	Dann gibt es eine in $X$ und $Y$ natürliche Kettenabbildung 
 	\(
-		m \colon C_*(X;R) \otimes_R C_*(Y;R) \longrightarrow C_*(X \times Y;R)
+		m \colon C^\sing_*(X;R) \otimes_R C^\sing_*(Y;R) \longrightarrow C^\sing_*(X \times Y;R)
 	\)
 	mit 
 	\[
-		m \enbrace*{ \enbrace*{\sigma \colon \abs*{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs*{\Delta^0} \to Y}}= \enbrace*{\sigma \times \tau \colon \abs*{\Delta^0} \to X \times Y}
+		m \enbrace*{ \enbrace*{\sigma \colon \abs{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs{\Delta^0} \to Y}}= \enbrace[\big]{\sigma \times \tau \colon \abs{\Delta^0} \to X \times Y}
 	\]
 \end{proposition}
 \begin{beweis}
 	Wir benutzen die \emph{Methode der azyklischen Modelle} und konstruieren 
 	\[
-		m_n \colon \bigoplus_{p+q=n} C_p(X;R) \otimes_R C_q(Y;R) \longrightarrow C_n(X \times Y;R) 
+		m_n \colon \bigoplus_{p+q=n} C^\sing_p(X;R) \otimes_R C^\sing_q(Y;R) \longrightarrow C^\sing_n(X \times Y;R) 
 	\]
 	induktiv für $n=0,1,\ldots $.
 	Für $n=0$ ist $m_0$ schon durch die Behauptung festgelegt.
 	Sei also $m_k$ für $k<n$ bereits konstruiert mit $\partial_k \circ m_k = m_{k-1} \circ \partial_k$ für $k<n$.
-	Für $p+q=n$ betrachte $\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}} \in Cp(\abs*{\Delta^p};R) \otimes_R C_q \enbrace*{\abs*{\Delta^q};R}$.
-	Dann liegt $m_{n-1} \enbrace*{\partial \enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}}}}$ im Kern von $\partial$ auf $C_{n-1} \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q};R}$.
-	Wegen $H_*(\abs*{\Delta^p} \times \abs*{\Delta^q})=0$ gibt es $v_{p,q} \in C_n \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q}}$ mit 
+	Für $p+q=n$ betrachte $\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}} \in C^\sing_p(\abs*{\Delta^p};R) \otimes_R C_q \enbrace*{\abs*{\Delta^q};R}$.
+	Dann liegt $m_{n-1} \enbrace*{\partial \enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q}}}}$ im Kern von $\partial$ auf $C^\sing_{n-1} \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q};R}$.
+	Wegen $H_*(\abs*{\Delta^p} \times \abs*{\Delta^q})=0$ gibt es $v_{p,q} \in C^\sing_n \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q}}$ mit 
 	\[
 		\partial_k(v_{p,q}) = m_{n-1} \enbrace*{\partial \enbrace*{\id_{\abs*{\Delta^p} } \otimes \id_{\abs*{\Delta^q}}}}. 
 	\]
 	Nun definieren wir $m_n$ durch 
 	\[
-		m_n \enbrace*{ \enbrace*{\sigma \colon \abs*{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs*{\Delta^0} \to Y}} := (\sigma\times \tau)_* \enbrace*{v_{p,q}} \qedhere
+		m_n \enbrace*{ \enbrace*{\sigma \colon \abs{\Delta^0} \to X } \otimes \enbrace*{\tau \colon \abs{\Delta^0} \to Y}} := (\sigma\times \tau)_* \enbrace*{v_{p,q}} \qedhere
 	\]
 \end{beweis}
+
+\begin{proposition}[name={Eindeutigkeit},label=prop:16:eind]
+	Zwei natürliche Kettenabbildungen 
+	\[
+		m,m' \colon C^\sing_* (X;R) \otimes_R C^\sing_* \enbrace*{Y;R} \longrightarrow C_*^\sing \enbrace*{X \times Y;R}
+	\]
+	sind genau dann kettenhomotop, wenn sie die gleiche Abbildung
+	\begin{equation}
+		H_0 \enbrace*{\abs{\Delta^0};R } \otimes_R H_0 \enbrace*{\abs{\Delta^0};R} \longrightarrow H_0 \enbrace*{\abs{\Delta^0} \times \abs{\Delta^0};R} \label{eq:16:H0}\tag{\dag}
+	\end{equation} 
+	induzieren.
+	Die gleiche Aussage gilt für in $X$ und $Y$ natürliche Kettenabbildungen 
+	\begin{align}
+		C_*(X;R) \otimes_R C_*(Y;R) &\longrightarrow  C_*(X;R) \otimes_R C_*(Y;R) \\
+		C_*(X \times Y;R) &\longrightarrow C_* (X \times Y;R) \\
+		C_*(X \times Y;R) &\longrightarrow C_*(X;R) \otimes_R C_*(Y;R)
+	\end{align}
+\end{proposition}
+\begin{beweis}
+	Wir benutzten wieder die Methode der azyklischen Modelle und konstruieren 
+	\[
+		h_n \colon \bigoplus_{p+q=n} C^\sing_p(X;R) \otimes_R C^\sing_q(Y;R) \longrightarrow C_{n+1}^\sing(X \times Y;R)
+	\]
+	mit 
+	\begin{equation}
+		\partial \circ h_n + h_{n+1} \circ \partial=m_n -m_n' \label{eq:16:rand} \tag{\#}
+	\end{equation}
+	induktiv. Für $n=0$ ist 
+	\begin{equation}
+		m_n \enbrace*{\sigma \colon \abs*{\Delta^0} \to X \otimes \tau \colon \abs*{\Delta^0} \to Y  } = m_n' \enbrace*{\sigma \colon \abs*{\Delta^0} \to X \otimes \tau \colon \abs*{\Delta^0} \to Y  } \label{eq:16:mn}\tag{\ddag}
+	\end{equation}
+	denn \eqref{eq:16:H0} impliziert dies für $X=\abs*{\Delta^0}, Y=\abs*{\Delta^0}$ wegen
+	\begin{align}
+		m_n \enbrace*{\sigma \colon \abs*{\Delta^0} \to X \otimes \tau \colon \abs*{\Delta^0} \to Y} &= (\sigma,\tau)_* \enbrace*{m_n \enbrace*{\id_{\abs*{\Delta^0} } \otimes \id_{\abs*{\Delta^0} }}}\\
+		m_n' \enbrace*{\sigma \colon \abs*{\Delta^0} \to X \otimes \tau \colon \abs*{\Delta^0} \to Y} &= (\sigma,\tau)_* \enbrace*{m_n' \enbrace*{\id_{\abs*{\Delta^0} } \otimes \id_{\abs*{\Delta^0} }}}
+	\end{align}
+	folgt dann \eqref{eq:16:mn} für beliebige $X$ und $Y$.
+	Wir können also $h_0 \equiv 0$ setzen.
+	Sei $h_k$ für $k < n$ mit \eqref{eq:16:rand} schon konstruiert.
+	Für $p+q=n$ betrachten wir wieder $\id_{\abs*{\Delta^0}} \otimes \id_{\abs*{\Delta^0}} \in C_p \enbrace*{\abs*{\Delta^p};R} \otimes_R C_P \enbrace*{\abs*{\Delta^q};R }$.
+	Es ist 
+	\begin{align}
+		\partial \enbrace*{m_n -m'_n - h_{n-1} \circ \partial} &= m_{n-1} \circ \partial -m_{n-1}' \circ \partial - \Underbracket{\partial \circ h_{n-1}}{= - h_{n-2} \partial + m_{n-1} - m_{n-1}'} \circ \partial \\
+		&= m_{n-1} \circ \partial - m_{n-1}' \circ \partial + h_{n-2} \circ \partial^2 - m_{n-1} \circ \partial + m_{n-1}' \circ \partial =0
+	\end{align}
+	Insbesondere ist $\enbrace*{m_n -m_n' - h_{n-1} \circ \partial} \enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q} }} \in \ker \partial$.
+	Da $H_n \enbrace*{C_* \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q};R} }$ trivial ist, finden wir $v_{n+1} \in C_{n+1} \enbrace*{\abs*{\Delta^p} \times \abs*{\Delta^q};R}$ mit 
+	\[
+		\partial v_{n+1} = \enbrace*{m_n -m_n' - h_{n-1} \circ \partial} \enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q} }}
+	\]
+	Nun definieren wir $h_n$ durch
+	\[
+		h_n \enbrace*{\enbrace*{\tau \colon \abs*{\Delta^p} \to X } \otimes  \enbrace*{\sigma \colon \abs*{\Delta^q} \to Y}} := (\tau \times \sigma)_* \enbrace*{v_{n+1}}
+	\]
+	Dann ist
+	\begin{align}
+		\partial \circ h_n(\tau \otimes \sigma) = \partial \enbrace[\big]{(\tau \times \sigma)_*(v_{n+1})} &= \enbrace*{\tau \times \sigma}_* \enbrace*{\partial v_{n+1}}\\
+		&=(\tau \times \sigma)_* \enbrace*{m_n -m'_n - h_{n-1} \circ \partial}\enbrace*{\id_{\abs*{\Delta^p}} \otimes \id_{\abs*{\Delta^q} }} \\
+		&= \enbrace*{m_n - m'_n - h_{n-1} \circ \partial} \enbrace*{\tau \otimes \sigma}
+	\end{align}
+	Also gilt \eqref{eq:16:rand} wie gewünscht.
+\end{beweis}
+\begin{beweis}[{name={von Eilenberg-Zilber, \ref{eilenbergzilber}}}]
+	Sei $m$ wie oben.
+	Dann sind nach \autoref{prop:16:eind} $\AW \circ m$ und $m \circ \AW$ kettenhomotop zur Identität.
+\end{beweis}
 % section 16 (end)
+\newpage
+
+\section{Universelle Koeffizienten-Theoreme} % (fold)
+\label{sec:17}
+\todo[inline]{Revision 17}
+\begin{satz}
+	Sei $R$ ein Ring, $V$ ein $R$-Rechtsmodul und $C_*$ ein Kettenkomplex von projektiven $R$-Linksmoduln.
+	Dann gibt es eine Spektralfolge $E^2_{p,q}= \Tor_p^R\enbrace[\big]{V, H_q(C_*)} \Rightarrow H_{p+q}(V \otimes C_*)$.
+\end{satz}
+\begin{beweis}
+	Sei $(P_*, \epsilon)$ eine projektive Auflösung von $V$.
+	Wir betrachten den Doppelkomplex $P_* \otimes_R C_*$.
+	Wir benutzen zunächst die horizontale Spektralfolge um -- nochmal -- zu zeigen, dass $\epsilon \otimes \id \colon P_* \otimes_R C_* \to V \otimes_R C_*$ einen Isomorphismus in Homologie induziert.
+	Es ist 
+	\[
+		^h E^1_{p,q} =H_p \enbrace*{P_* \otimes C_q} \StackText{projektiv}{=\joinrel=\joinrel=}H_p(P_*) \otimes C_q = \begin{cases}
+			V \otimes_R C_q  &\text{ falls }p=0\\
+			0 &\text{ sonst}
+		\end{cases}
+	\]
+	Die horizontale Spektralfolge kollabiert also bei $E^2$ und es folgt 
+	\[
+		H_n \enbrace*{P_* \otimes_R C_*} \cong E_{0,n}^2 \cong H_n \enbrace*{V \otimes_E C_*}
+	\]
+	(Indem man die durch $\epsilon \otimes \id$ induzierte Abbildung auf Spektralfolgen betrachtet, sieht man, dass $\epsilon \otimes \id$ den Isomorphismus induziert.)
+	Für die vertikale Spektralfolge folgt nun $^v E^2_{p,q} \Rightarrow H_{p+q}(P_* \otimes_R C_*) \cong H_{p+q}(V \otimes C_*)$.
+	Weiter ist wegen der Projektivität von $P_p$
+	\[
+		^v E^1_{p,q} = H_q \enbrace*{P_p \otimes C_*} \cong P_p \otimes H_q(C_*)
+	\]
+	und daher $^v E^2_{p,q}=H_p \enbrace*{P_* \otimes_R H_q(C_*)}= \Tor_p^R \enbrace*{V, H_q(C_*)}$.
+\end{beweis}
+
+\begin{satz}
+	Sei $R$ ein Hauptidealring, $V$ ein $R$-Modul und $C_*$ ein $R$-Kettenkomplex von freien $R$-Moduln.
+	Dann gibt es eine eine kurze exakte Folge
+	\[
+		\begin{tikzcd}
+			0 \rar & V \otimes_R H_n(C_*) \rar & H_n(V \otimes_R C_*) \rar & \Tor_1^R \enbrace*{V, H_{n-1}(C_*)} \rar & 0
+		\end{tikzcd}
+	\]
+	Diese Folge ist natürlich in $V$ und $C_*$.
+	Sie spaltet, aber der Spalt ist nur natürlich in $V$.
+\end{satz}
+\begin{beweis}
+	Da $R$ ein Hauptidealring ist, ist $\Tor^R_p \enbrace*{V, H_q(C_*)}=0$ für $p \ge 2$.
+	Die Spektralsequenz hat also nur zwei Spalten und wir erhalten die gesuchte exakte Folge.
+	Um einen Spalt zu konstruieren benutzen wir den Zerlegungssatz und schreiben 
+	\[
+		C_* \cong \bigoplus C_*^\ssbbrace{i}
+	\]
+	wobei jedes $C_*^\ssbbrace{i}$ nur eine nicht-triviale Homologiegruppe hat.
+	Dann spaltet die obige Sequenz für jedes $C_*^\ssbbrace{i}$ (auf triviale Weise!) und damit auch für $C_*$.
+\end{beweis}
+% section 17 (end)
 
 \cleardoubleoddemptypage
 \appendix
