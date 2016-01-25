@@ -2961,6 +2961,141 @@ Es gilt:
 	\]
 \end{enumerate}
 
+\bet{Beweis:}
+\begin{enumerate}
+	\item Sei $g(.;\mu[(1)])\in C^0(\bar{\Omega}),x\in \bar{\Omega}$ und $v\in W_M$.
+	Dann gilt
+	\begin{align*}
+	\abs{g(x;\mu) - I_M[g(.;\mu)](x)} &\le \abs{g(x;\mu) - v(x)} + \abs{v(x) - I_M[g(.;\mu)](x)}\\
+	&\bgl{6.2} \abs{g(x;\mu) - v(x)} + \abs{I_M[v](x) - I_M[g(.;\mu)](x)}\\
+	&= \abs{g(x;\mu) - v(x)} + \abs{\sum_{j=1}^M(v(t^j)-g(t^j;\mu)) \xi_j(x)}\\
+	&\le \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})} + \max\limits_{x\in \bar{\Omega}} \sum_{j=1}^M \abs{\xi_j(x)} \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})}\\
+	&= \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})} + \Lambda_M \norm{g(.;\mu) - v}_{C^0(\bar{\Omega})}
+	\end{align*}
+	\item Zunächst bemerken wir,dass aus $z_m(x) = \sum_{j=1}^M z_m(t^j)\xi_j(x)$ die Darstellung
+	\[
+	z_m(x) = \sum_{j=1}^M \mathbb{B}_{jm}^M \xi_j(x)
+	\]
+	folgt.
+	Da $\mathbb{B}_{mm}^M=1$, folgt
+	\begin{align*}
+	\abs{\xi_m(x)} &= \abs{z_m(x) - \underbracket{\sum_{j=1}^{m-1} \mathbb{B}_{jm}^M\xi_j(x)}_{=0} - \sum_{j=m+1}^{M} \mathbb{B}_{jm}^M\xi_j(x)}\\
+	&= \abs{z_m(x) - \sum_{j=m+1}^{M} \mathbb{B}_{jm}^M\xi_j(x)}\\
+	&\le 1 + \sum_{j=m+1}^M \abs{\xi_j(x)},~ 1\le m\le M-1.
+	\end{align*}
+	Da $\abs{\xi_M(x)}=\abs{z_M(x)}\le 1$ gilt zum Beispiel
+	\[
+	\abs{\xi_{M-1}(x)} \le 1+1;~ \abs{\xi_{M-2}(x)}\le 1+1+2;~ \abs{\xi_{M-3}(x)}\le 1+1+2+4
+	\]
+	und damit
+	\[
+	\abs{\xi_{M+1-m}(x)} \le 2^{m-1},~ 1\le m\le M.
+	\]
+	Daher gilt
+	\begin{align*}
+	\sum_{m=1}^M \abs{\xi_m(x)} &= \sum_{m=1}^M \abs{\xi_{M+1-m}(x)} \le \sum_{m=1}^M 2^{m-1}\\
+	&= \sum_{m=0}^{M-1} 2^m = 2^M-1 ~ \text{(geometrische Reihe)}
+	\end{align*}
+	\hfill $\square$
+\end{enumerate}
+
+\ssect{6.9 Bemerkung}{}
+Obige Abschätzung ist sehr pessimistisch; in der Praxis werden meist sehr viel bessere Lebesgue-Konstanten beobachtet.
+Allerdings ist die Schranke scharf, dass heißt es existieren Beispiele mit $\Lambda_M=2^M-1$ (vgl. [Maday, Nguyen, Patera, Pan, 2009]).
+
+Die Abschätzung in 6.8 macht aber eine Aussage über die Stabilität der EI in dem Sinne, dass wir Konvergenz der Approximation für $M\to \infty$ erhalten, falls der Bestapproximationsfehler schneller als $2^M$ fällt, dass für langsame Konvergenzraten die EI aber für große $M$ instabil werden kann.
+
+\ssect{6.10 Satz}{(Exponentielle Konvergenz des Interpolationsfehlers [Maday, Nguyen, Patera, Pan, 2009])}
+Falls eine Folge von endlich dimensionalen Unterräumen $Y_1\subset Y_2\dt{\subset}
+Y_M\dt{\subset} \spann(G)$ mit $\dim Y_M=M$ gibt und eine Konstante $c>0$ und ein $\alpha>\ln(4)$ existiert, so dass gilt
+\[
+\sup\limits_{\mu\in P} \inf\limits_{v\in Y_M} \norm{g(.;\mu) -v}_{C^0(\bar{\Omega})} \le c\cdot e^{-(\alpha-\ln(4))M}.
+\]
+
+\bet{Beweis:} siehe [MNPP, 2009].
+
+\ssect{6.11 Satz}{A posteriori Fehlerabschätzung für die EIM}
+Seien $I_M,I_{M'}:C^0(\bar{\Omega}) \to \spann(G_{\train})$ EI-Operatoren für $M'>M,~ Z_M\subset Z_{M'}:=\{z_i\}_{i=1}^{M'},~T_M\subset T_{M'}:= \{t^i\}_{i=1}^{M'}$.
+Ferner seien für $g(.;\mu)\in G$ die Koeffizienten $\sigma_j^{M'}(\mu)$ von $I_{M'}[g(.;\mu)]= \sum_{j=1}^{M'} \sigma_j^{M'}(\mu)z_j$ Lösung des LGS
+\[
+\sum_{j=1}^{M'} \sigma_j^{M'}(\mu) z_j(t^i)= g(t^i;\mu),~ 1\le i\le M'.
+\]
+Falls $g(.;\mu)\in W_{M'} := \spann \penbrace{z_1\dt{,}z_{M'}}$, so gilt die folgende A posteriori Fehlerabschätzung:
+\begin{align}
+\norm{g(.;\mu) - I_M[g(.;\mu)]}_{C^0(\bar{\Omega})} \le \Delta_M^{M'}(\mu),
+\end{align}
+wobei
+\begin{align}
+\Delta_M^{M'}(\mu):= \sum_{i=M+1}^{M'} \abs{\sigma_i^{M'}(\mu)}.
+\end{align}
+
+\bet{Beweis:}\\
+Nach der Definition der EIM gilt:
+\[
+I_M[g(.;\mu)] = \sum_{i=1}^M \sigma_i^Mz_i \text{ mit } \sum_{i=1}^M \sigma_i^Mz_i(t^j) = g(t^j;\mu),~j = 1\dt{,}M.
+\]
+Da $\mathbb{B}^M$ linke untere Dreiecksmatrix und oberer linker Block von $\mathbb{B}^{M'}$, folgt $\sigma_j^M(\mu) = \sigma_j^{M'}(\mu)$ für $j=1\dt{,}M,~\mu\in P$.
+\begin{align*}
+g(x;\mu) - I_M[g(.;\mu)](x) &= I_{M'}[g(.;\mu)](x) - I_M[g(.;\mu)](x)\\
+&= \sum_{j=1}^{M'} \sigma_j^{M'}z_j - \sum_{j=1}^M \sigma_j^M z_j\\
+&= \sum_{j=M+1}^{M'} \sigma_j^{M'}z_j.
+\end{align*}
+Wegen $\norm{z_j}_{C^0(\bar{\Omega})}=1$ folgt dann die Aussage.
+\hfill $\square$
+
+\ssect{6.12 Bemerkung}{}
+Da im Allgemeinen nicht $g(.;\mu)\in W_{M'}$ gilt, ist $\Delta_M^{M'}(\mu)$ im Allgemeinen keine rigorose obere Schranke für den Interpolationsfehler.
+
+Falls letztere sehr schnell gegen 0 konvergiert für $M\to \infty$, erwarten wir, dass die Effektivität $\Delta_M^{M'}(\mu)/\norm{g(.;\mu) - I_M[g(.;\mu)]}_{C^0(\bar{\Omega})}$ aber zumindest nahe bei 1 liegt.
+In praktischen Anwendungen zeigt es sich, dass eine Wahl von $M'-M\approx 10$ häufig einen verlässlichen Schätzer liefert.
+Eine rigorose, aber sehr teure Fehlerschranke wurde in [Eftang, Grepl, Patera, 2010] hergeleitet.
+
+\subsection{Anwendungen für lineare RB Methoden}
+Wir betrachten wieder das Modellproblem der parametrischen stationären WLG aus Definition3.7 und nehmen zusätzlich an, dass $\kappa(.;\mu),q(.;\mu)\in C^0(\bar{\Omega})$ für alle $\mu\in P$.
+Falls die Datenfunktionen $\kappa(.;\mu)$ und $q(.;\mu)$ nicht affin parametrisch sind, so können wir sie mit empirischen Interpolierenden approximieren.
+\[
+\kappa(x;\mu) \approx I_{M_\kappa}[\kappa(.;\mu)](x) = \sum_{j=1}^{M_\kappa} \sigma_j^\kappa(\mu) z_j^\kappa
+\]
+und
+\[
+q(x;\mu) \approx I_{M_q}[q(.;\mu)](x) = \sum_{j=1}^{M_q} \sigma_j^q(\mu) z_j^q.
+\]
+Die entsprechende Bilinearform und Linearform definieren wir dann wie folgt:
+\begin{align}
+b_M(u,v;\mu) := \int_{\Omega} I_{M_\kappa}[\kappa(.;\mu)] \nabla u \nabla v, ~\forall u,v\in X,\\
+f_M(v;\mu) := \int_{\Omega} I_{M_q}[q(.;\mu)] v, ~\forall v\in X,
+\end{align}
+wobei wir zur Vereinfachung bei $f$ und $b$ den Doppelindex durch $M$ ersetzen.
+
+\ssect{6.13 Definition}{(FEM für parametrische Variationprobleme mit EIM Approximation)}
+Seien die Voraussetzungen aus Definition 3.9 erfüllt.
+Ferner seien $b_M:X\times X\times P\to \R$ und $f_M:X\times P\to \R$ Bilinearform und Linearform, welche aus $b$ und $f$ durch eine Approximation der Datenfunktionen mittels EIM hervorgegangen sind.
+Zusätzlich nehmen wir an, dass $b(.,.;\mu)$ stetig auf $X_h\times X_h$ und koerziv auf $X_h$ für alle $\mu\in P$, das heißt
+\[
+\exists \alpha_h^M(\mu): b_M(v,v;\mu) \ge \alpha_h^M(\mu) \norm{v}_X^2 ~\forall v\in X_h
+\]
+und das $f(.;\mu)$ stetig auf $X_h$.
+Zu $\mu\in P$ heißt $u_h^M(\mu)\in X_h$ Lösung des FEM für das parametrische Variationsproblem mit EIM Approximation, falls gilt:
+\begin{align}
+b_M(u_h^M,v;\mu) = f(v;\mu),~\forall v\in X_h.
+\end{align}
+
+\ssect{6.14 Bemerkung}{}
+Die Koerzivität von $b$ muss sich nicht notwendigerweise auf $b_M$ übertragen, kann aber im diskreten Fall leicht verifiziert werden.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \cleardoubleoddemptypage
