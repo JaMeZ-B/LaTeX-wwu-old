@@ -2178,7 +2178,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\item Die Abbildung $(-1,1] \to \mathbb{T}$, $t \mapsto e^{i \pi t}$ ist bijektiv und stetig; die Umkehrfunktion $f$ ist lediglich stetig auf $\mathbb{T} \setminus \set*{-1}$.
 		Sei nun $u \in A$ unitär. 
 		Dann ist $\sigma(u) \subset \mathbb{T}$ nach \autoref{prop:210} (ii).
-		Falls $-1 \notin \sigma(u) \subset \mathbb{T}$, so ist $h=f(u) \in A_\sa^1$ und $u=e^{i \pi h}$.\todo{Revision 6}
+		Falls $-1 \notin \sigma(u) \subset \mathbb{T}$, so ist $h=f(u) \in A_\sa^1$ und $u=e^{i \pi h}$.
 		
 		Falls $-1$ im Spektrum von $u$ enthalten ist, so betrachten wir eine offene Umgebung $V \subset \mathbb{T}$ von $-1$.
 		Dann ist $p:= \chi_{V\cap \sigma(u)}(u)$ eine Projektion in $A \cap \set*{u}'$ nach \autoref{prop:612}.
@@ -2224,66 +2224,85 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{beweis}[name={Skizze}]
 	Für $\xi,\eta \in \mathcal{H}$ können wir mit Hilfe von
 	\(
-		\mu_{\xi,\eta}(U) := \skal*{\xi}{\chi_U(x)(\eta)}
+		\mu_{\xi,\eta}(U) := \skal[\big]{\xi}{\chi_U(x)(\eta)}
 	\)
-	für $U$ offen bzw. abgeschlossen ein Integral auf Treppenfunktionen definieren.
+	für $U \subset \sigma(a)$ offen bzw. abgeschlossen ein Integral auf Treppenfunktionen definieren.
 	Hieraus erhält man ein Integral $\Phi_{\xi,\eta}$ auf $\mathbb{B}_b(\sigma(x))$:
-	\begin{itemize}
+	\begin{itemize}[itemsep=0pt]
 		\item entweder mit $L^1$-Approximation wie in Analysis \RM{3}.
 		\item oder als Regelintegral zunächst für stetige Funktionen, also $C(\sigma(x))$, dann für $\mathbb{B}_b(\sigma(x))$ mit dem Rieszschen Darstellungssatz.
 	\end{itemize}
 	Damit hat man nun $\Phi_{\xi,\eta} \colon \mathbb{B}_b(\sigma(x)) \to \mathbb{C}$ linear und stetig.
-	Für $f \in \mathbb{B}_b(\sigma(x))$ und $\eta \in \mathcal{H}$ definiert $\xi \mapsto \Phi_{\xi,\eta}(f) \in \mathbb{C}$ ein konjugiert lineare stetiges Funktional $\varphi_{f,\eta}$ auf $\mathcal{H}$.
+	Für $f \in \mathbb{B}_b(\sigma(x))$ und $\eta \in \mathcal{H}$ definiert $\xi \mapsto \Phi_{\xi,\eta}(f) \in \mathbb{C}$ ein konjugiert lineares, stetiges Funktional $\varphi_{f,\eta}$ auf $\mathcal{H}$.
 	Mittels $\skal*{\xi}{\cdot }$ lässt sich dann schließen, dass man $\varphi_{f,\eta}$ als Element von $\mathcal{H}$ auffassen kann, d.h. $\varphi_{f,\eta}(\xi) = \skal*{\xi}{\varphi_{f,\eta}}$.
 	Die Abbildung $\eta \mapsto \varphi_{f,\eta}$ ist linear und stetig, definiert also einen Operator $f(x) \in \mathcal{B}(\mathcal{H})$.
-	Auf Vektoren in $\mathcal{H}$ rechnet man nach, dass $f \mapsto f(x)$ ein isometrischer $^*$-Homomorphismus $\mathbb{B}_b(\sigma(x)) \to \mathcal{B}{\mathcal{H}}$ ist und $f(x) \in A''= \overline{A}^{\so}$ (Bikommutantensatz).
-	Weiter gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
+	Auf Vektoren in $\mathcal{H}$ rechnet man nach, dass $f \mapsto f(x)$ ein isometrischer $^*$-Homomorphismus $\mathbb{B}_b(\sigma(x)) \to \mathcal{B}{\mathcal{H}}$ ist. 
+	Weiter gilt $f(x) \in A''= \overline{A}^{\so}$ nach dem Bikommutantensatz.
+	Außerdem gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
 \end{beweis}
 
 \begin{erinnerungA}[{name=[schwache Operatortopologie]}]
-	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von 
+	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen
 	\[
-		p_{\eta,\xi}(x) := \abs*{\skal*{\eta}{x \xi}} 
+		p_{\eta,\xi}(x) := \abs[\big]{\skal*{\eta}{x \xi}} 
 	\]
 	für $\eta,\xi \in \mathcal{H}$ erzeugt wird.
 	Die Mengen $U_{x,\eta,\xi,\varepsilon} := \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \abs*{\skal*{\eta}{(x-y)\xi}} < \varepsilon}$ bilden eine Subbasis von $\TWeakOp$.
 	Die Abbildungen
 	\[
 		\begin{tikzcd}
-			\enbrace*{\mathcal{B}(\mathcal{H}),\Top{\norm*{\cdot}}} \rar["\id"] & \enbrace*{\mathcal{B}(\mathcal{H}),\Top{\so}} \rar["\id"] & \enbrace*{\mathcal{B}(\mathcal{H}), \TWeakOp}
+			\enbrace[\big]{\mathcal{B}(\mathcal{H}),\Top{\norm*{\cdot}}} \rar["\id"] & \enbrace[\big]{\mathcal{B}(\mathcal{H}),\Top{\so}} \rar["\id"] & \enbrace[\big]{\mathcal{B}(\mathcal{H}), \TWeakOp}
 		\end{tikzcd}
 	\]
-	sind stetig, denn $\norm*{(x-y)\xi} \le \norm*{x-y} \cdot \norm*{\xi}$ und $\abs*{ \skal*{\eta}{(x-y)\xi}} \le \norm*{\eta} - \norm*{(x-y) \xi}$.
-	Die Involution ist $\wo$-stetig:
+	sind stetig, denn $\norm*{(x-y)\xi} \le \norm*{x-y} \cdot \norm*{\xi}$ und $\abs*{ \skal*{\eta}{(x-y)\xi}} \le \norm*{\eta} \cdot \norm*{(x-y) \xi}$.
+	Im Gegensatz zur starken Operatortopologie (vergleiche \autoref{erinnerung:61}) ist die Involution $\wo$-stetig:
 	\begin{align}
-		x_\lambda \grenzw{\wo} x &\iff \abs*{\skal*{\eta}{(x_\lambda-x)\xi}} \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
-		&\iff \abs*{\skal*{(x_\lambda-x)^* \eta}{\xi}}   \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
-		&\iff \abs*{\skal*{\xi}{x_\lambda^* -x^* \eta}} \to 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		x_\lambda \grenzw{\wo} x &\iff \abs[\big]{\skal*{\eta}{(x_\lambda-x)\xi}} \grenzw{} 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		&\iff \abs[\big]{\skal*{(x_\lambda-x)^* \eta}{\xi}}   \grenzw{} 0 \text{ für } \eta,\xi \in \mathcal{H} \\
+		&\iff \abs[\big]{\skal*{\xi}{(x_\lambda^* -x^*) \eta}} \grenzw{} 0 \text{ für } \eta,\xi \in \mathcal{H} \\
 		&\iff x_\lambda^* \grenzw{\wo} x^* 
 	\end{align}
-	Multiplikation ist nicht $\wo$-stetig: Sei $S$ der Shift. Dann gilt
-	\(
-		S^n,{S^*}^n \grenzw{\wo} 0 \text{ aber } {S^*}^n S^n=\ind
-	\).
+	Die Multiplikation ist allerdings auch nicht $\wo$-stetig: Sei dazu $S$ der Shift. Dann gilt einerseits $S^n,{S^*}^n \grenzw{\wo} 0$ aber andererseits ${S^*}^n S^n=\ind$.
 \end{erinnerungA}
 
-\begin{satz}[{name=[Einheitskugel der beschränkten Operatoren ist wo-kompakt]}]
-	$\mathcal{B}(\mathcal{H})^1$ ist $\wo$-kompakt.
+\begin{satz}[{name=[Einheitskugel der beschränkten Operatoren ist schwach kompakt]}]
+	Die Einheitskugel $\mathcal{B}(\mathcal{H})^1$ ist $\wo$-kompakt.
 \end{satz}
 \begin{beweis}[name={Skizze}]
 	% $\id \colon \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakStar} \to \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakOp}$ ist stetig.
-	Nehme $\mathcal{H}=\ell^2(\mathbb{N})$ an und setze $X= \overline{\Span\set*{e_{ij} \given i,i=1,2,\ldots }}^{\norm*{\cdot}_1}$.
-	$x \mapsto \Tr(\abs*{x})$ ist auf $\Span (e_{ij})$ definiert und ist Norm.
-	$X$ ist ein abgeschlossenes Ideal in $\mathcal{B}(\mathcal{H})$. 
-	$x \mapsto  \enbrace*{y \mapsto \Tr(xy)}$ liefert eine Abbildung $\mathcal{B}(\mathcal{H}) \to X^*$ (tatsächlich ein Isomorphismus).
-	Sei $\TWeakStar$ die zurückgezogene Topologie auf $\mathcal{B}(\mathcal{H})$.
-	Man überprüft: $x_\lambda \grenzw{\w^*}x \Rightarrow x_\lambda\grenzw{\wo}x$ und damit ist
+	% Nehme $\mathcal{H}=\ell^2(\mathbb{N})$ an und setze $X= \overline{\Span\set*{e_{ij} \given i,i=1,2,\ldots }}^{\norm*{\cdot}_1}$.
+	% $x \mapsto \Tr(\abs*{x})$ ist auf $\Span (e_{ij})$ definiert und ist Norm.
+	% $X$ ist ein abgeschlossenes Ideal in $\mathcal{B}(\mathcal{H})$.
+	% $x \mapsto  \enbrace*{y \mapsto \Tr(xy)}$ liefert eine Abbildung $\mathcal{B}(\mathcal{H}) \to X^*$ (tatsächlich ein Isomorphismus).
+	% Sei $\TWeakStar$ die zurückgezogene Topologie auf $\mathcal{B}(\mathcal{H})$.
+	% Man überprüft: $x_\lambda \grenzw{\w^*}x \Rightarrow x_\lambda\grenzw{\wo}x$ und damit ist
+	% \[
+	% 	\id \colon \enbrace*{\mathcal{B}(\mathcal{H}), \TWeakStar} \longrightarrow \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakOp}
+	% \]
+	% stetig.
+	% Aber $\mathcal{B}(\mathcal{H})^1$ ist $\w^*$ kompakt nach Banach-Alaoglu.
+	% Damit ist $\mathcal{B}(\mathcal{H})^1$ $\wo$-kompakt und die Abbildung ist ein Homöomorphismus.
+	%
+	% \emph{Variante, wie sie in den Notizen steht:}
+	Fixiere eine Orthonormalbasis $(\xi_\gamma)_\Gamma$ und definiere die \href{https://de.wikipedia.org/wiki/Spurklasseoperator}{\Index{Spurklasse-Operatoren}}
 	\[
-		\id \colon \enbrace*{\mathcal{B}(\mathcal{H}), \TWeakStar} \longrightarrow \enbrace*{\mathcal{B}(\mathcal{H}),\TWeakOp}
+		\mathcal{L}^1(\mathcal{H}) := \set[\big]{x \in \mathcal{B}(\mathcal{H}) \given \norm*{x}_1 := {\textstyle\sum\nolimits_\Gamma} \skal*{\xi_\gamma}{\abs*{x} \xi_\gamma } < \infty} 
 	\]
-	stetig.
-	Aber $\mathcal{B}(\mathcal{H})^1$ ist $\w^*$ kompakt nach Banach-Alaoglu. 
-	Damit ist $\mathcal{B}(\mathcal{H})^1$ $\wo$-kompakt und die Abbildung ist ein Homöomorphismus.
+	Man zeigt, dass $\norm*{\cdot}_1$ eine Norm ist und dass folgendes gilt:
+	\[
+		\mathcal{L}^1(\mathcal{H}) = \overline{\set[\big]{x \in \mathcal{B}(\mathcal{H}) \given x \text{ hat endlichen Rang} }}^{\norm{\cdot }_1}
+	\]
+	Für $y \in \mathcal{B}(\mathcal{H})$ definiert man nun $\varphi_y \in \mathcal{L}^1(\mathcal{H})^*$ durch $x \mapsto \varphi_y(x) := \sum_\Gamma \skal*{\xi_\gamma}{yx \xi_\gamma}$.
+	Man zeigt nun, dass $\varphi \colon \mathcal{B}(\mathcal{H}) \to \mathcal{L}^1(\mathcal{H})^*$, $y \mapsto \varphi_y$ einen isometrischen Isomorphismus definiert. 
+	Sei $\TWeakStar$ die zurückgezogene Topologie auf $\mathcal{B}(\mathcal{H})$.
+	Mit Banach-Alaoglu folgt, dass $\mathcal{B}(\mathcal{H})^1$ $\w^*$-kompakt und hausdorffsch ist.
+	Die Abbildung $\id \colon \enbrace*{\mathcal{B}(\mathcal{H})^1, \TWeakStar} \to \enbrace*{\mathcal{B}(\mathcal{H})^1,\TWeakOp}$ ist stetig, was man wie folgt verifiziert: 
+	\begin{align}
+		y_\lambda \grenzw{\w^*} y \text{ in } \mathcal{B}(\mathcal{H})^1 &\Longrightarrow \sum_{\gamma} \skal*{\xi_\gamma}{(y_\lambda-y)x \xi_\gamma} \grenzw{} 0 \text{ für jedes } x \in \mathcal{L}^1(\mathcal{H}) \\[-.9em]
+		&\StackTextClap{Übung}{\Longrightarrow} \skal*{\xi}{(y_\lambda-y) \eta} \grenzw{} 0 \text{ für alle } \xi,\eta \in \mathcal{H} \\
+		&\Longrightarrow y_\lambda \grenzw{\wo} y 
+	\end{align}
+	Damit ist $\mathcal{B}(\mathcal{H})^1$ auch $\wo$-kompakt.\todo{Revision 6}
 \end{beweis}
 
 \begin{satz}
