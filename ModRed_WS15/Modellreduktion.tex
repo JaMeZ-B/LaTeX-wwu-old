@@ -3083,6 +3083,157 @@ b_M(u_h^M,v;\mu) = f(v;\mu),~\forall v\in X_h.
 \ssect{6.14 Bemerkung}{}
 Die Koerzivität von $b$ muss sich nicht notwendigerweise auf $b_M$ übertragen, kann aber im diskreten Fall leicht verifiziert werden.
 
+\ssect{6.15 Definition}{(RB Modell mit EIM Approximation)}
+Seien die Voraussetzungen von Definition 3.13 und 6.13 erfüllt.
+Zu $\mu\in P$ heißt $u_N^M(\mu)\in X_N$ RB-Lösung des RB Modells mit EIM Approximation, falls gilt:
+\[
+b_M(u_N^M(\mu),v;\mu) = f_M(v;\mu)~\forall v\in X_N.
+\]
+
+\ssect{6.16 Bemerkung}{}
+Ähnlich zu Satz 3.19 und Satz 3.35 erhält man A priori und A posteriori Fehlerabschätzungen, weelche allerdings zusätzliche Terme für die Abschätzung des Interpolationsfehlers enthalten.
+Für Details siehe zum Beispiel [Quateroni, Manzoni, Negri, 2015] und zu A posteriori Fehlerschätzern insbesondere [Tonn, 2011, Kap. 4.5].
+
+\ssect{6.17 Bemerkung}{}
+Falls die Koeffizientenfunktionen keine Punktauswertungen erlauben, kann die Generalized Empirial Interpolation verwendet werden [Maday, Mala, 2013] oder gegebenenfalls zunächst eine Projektion in den Finite Elemente Raum vorgenommen werden.
+
+\newpage
+\section{Lokalisierte Modellreduktion}
+
+\begin{itemize}
+	\item[Ziele:]
+	\item ermögliche topologische Flexibilität in der Online-Phase
+	\item erlaube lokale Änderungen der Geometrie oder der Parametermenge in der Online-Phase (Online-adaptive Modellreduktion)
+	\item reduziere Anzahl der Parameter
+	\item[Ansatz:]
+	\item Zerlege das Rechengebiet in Teilgebiete, wende in den Teilgebieten RB Methoden an und erhalte dadurch eine reduzierte Lösung auf dem globalen Begiet $\Omega$.
+	\item Stichwort: Legos
+\end{itemize}
+
+\subsection{Einführung in Gebietszerlegungsmethoden}
+In diesem Unterkapitel betrachten wir das folgende Modellproblem:
+Finde $u$, so dass
+\begin{align}
+-\Delta u = q \text{ in }\Omega;~\nabla u\cdot n = 0 \text{ auf }\Sigma_N;~ u=0 \text{ auf } \Sigma_D,
+\end{align}
+wobei $q\in L^2(\Omega), \partial \Omega = \bar{\Sigma}_N \cup \bar{\Sigma}_D$ und $n$ äußere Normale auf $\Omega\subset \R^2$.
+Zunächst zerlegen wir $\omega$ in zwei nicht-überlappende Teilgebiete $\Omega_1$ und $\Omega_2$, so dass $\bar{\Omega} = \bar{\Omega}_1 \cup \bar{\Omega}$.
+Das Interface bezeichnen wir mit $\Gamma:= \bar{\Omega}_1 \cap \bar{\Omega}$.
+
+\subsubsection{Das Modellproblem auf zerlegtem Gebiet und die Steklov-Poincaré Interface Gleichung}
+Wir bezeichnen mit $u_i$ die \bet{Restriktion} der Lösung $u$ von (7.1) auf $\Omega_i, i=1,2$ und mit $n_i$ die äußere Normale auf $\partial\Omega_i\cap\Gamma$.
+Dann kann das Modellproblem (7.1) äquivalent auf dem zerlegten Gebiet wie folgt formuliert werden:
+\begin{align}
+\begin{split}
+-\Delta u_1 &= q\text{ in } \Omega_1;~\nabla u_1\cdot n = 0 \text{ auf }\Sigma_N\cap \partial\Omega_1;~ u=0 \text{ auf } \Sigma_D\cap \partial\Omega_1,\\
+-\Delta u_2 &= q\text{ in } \Omega_2;~\nabla u_2\cdot n = 0 \text{ auf }\Sigma_N\cap \partial\Omega_2;~ u=0 \text{ auf } \Sigma_D\cap \partial\Omega_2,\\
+u_1 &= u_2 \text{ auf } \Gamma; ~\nabla u_1 \cdot n_1 = - \nabla u_2\cdot n_2 \text{ auf } \Gamma \text{ 'transmission conditions'}.
+\end{split}
+\end{align}
+Beachte das die Äquivalenz im schwachen Sinne zu verstehen ist ($\to$ 7.1.2).
+Wir können (7.2) weiter zu einem Problem mit einer gesuchten Funktion auf dem Interface $\Gamma$ umformulieren.
+Bezeichne dazu mit $\lambda$ den unbekannten und gesuchten Wert von $u$ auf $\Gamma$.
+Wir betrachten die beiden Probleme
+\begin{align}
+\begin{split}
+-\Delta w_i &= q \text{ in }\Omega_i; ~\nabla w_i\cdot n =0 \text{ auf } \Sigma_N\cap \partial\Omega_i;\\
+w_i &= 0 \text{ auf } \Sigma_D\cap \partial\Omega_i;~ w_i=\lambda \text{ auf } \Gamma,~i=1,2.
+\end{split}
+\end{align}
+Als nächstes zerlegen wir die $w_i$ in Funktionen, welche die Daten, also $q$ repräsentieren und Funktionen, welche die gesuchte Funktion $\lambda=u|_{\Gamma}$ repräsentieren.
+
+Betrachte dazu $w_i=u_i^0 + u_i^q$, wobei  $u_i^0$ und $u_i^q,1=1,2$, als Lösungen der folgenden Probleme definiert sind:
+\begin{align}
+-\Delta u_i^0 &= 0\text{ in } \Omega_i;~\nabla u_i^0 = 0 \text{ auf }\Sigma_N\cap \partial\Omega_i;~ u_i^q=0 \text{ auf } \Sigma_D\cap \partial\Omega_i;~ u_i^0=\lambda \text{ auf } \Gamma
+\end{align}
+und 
+\begin{align}
+-\Delta u_i^q &= 0\text{ in } \Omega_i;~\nabla u_i^q = 0 \text{ auf }\Sigma_N\cap \partial\Omega_i;~ u_i^q=0 \text{ auf } \Sigma_D\cap \partial\Omega_i;~ u_i^q=\lambda \text{ auf } \Gamma,
+\end{align}
+mit $i=1,2$.
+
+Da $u_i^0$ \bet{harmonische Fortsetzung} von $\lambda$ nach $\Omega_i$ bezeichnen wir $u_i^0$ von nun an mit $H_i\lambda$.
+Ferner schreiben wir $R_iq$ für die Repräsentanten der Daten $u_i^q$.
+Indem wir (7.3) mit (7.4) vergleichen stellen wir fest, dass
+\begin{align}
+w_i=u_i \text{ für } i=1,2 \Leftrightarrow \nabla w_1n_1 = -\nabla w_2n_2 \text{ auf } \Gamma.
+\end{align}
+Letztere Bedingung bedeutet, dass die gesuchte Funktion $\lambda=u|\Gamma$ die \bet{Steklov-Poincaré Interface Gleichung} erfüllen muss:
+\begin{align}
+S\lambda = \chi \text{ auf } \Gamma,
+\end{align}
+wobei
+\begin{align}
+\chi := -\nabla R_1qn_1 - \nabla R_2qn_2 = - \sum_{i=1}^2 \nabla R_iqn_i
+\end{align}
+und der \bet{Steklov-Poincaré Operator} $S$ für Funktionen $\eta$ auf $\Gamma$ formal wie folgt definiert ist:
+\begin{align}
+S_{\eta} := \nabla H_1\eta n_1 + \nabla H_2\eta n_2 = \sum_{i=1}^2 \nabla H_i\eta n_i.
+\end{align}
+
+\subsubsection{Schwache Formulierung des Modellproblems auf zerlegtem Gebiet}
+
+\ssect{7.1 Definiton}{}
+Sei $q\in L^2(\Omega),\Omega,\Sigma_N,\Sigma_D$ wie in Bild 7.1 und $\partial \Omega=\bar{\Sigma}_N\cup \bar{\Sigma}_D$.
+Dann heißt $u\in X:=\penbrace{v\in H^1(\Omega)~|~v=0 \text{ auf }\Sigma_D}$ schwache Lösung des Modellproblems (7.1), falls gilt
+\[
+b(u,v)=f(v)~\forall v\in X,
+\]
+mit 
+\[
+b(u,v) := \int_{\Omega} \nabla u\nabla v,~ f(v):= \int_{\Omega} qv ~\forall u,v\in X.
+\]
+Um eine schwache Formulierung des Modellproblems auf zerlegtem Gebiet herleiten zu können benötigen wir zunächst eine adäquate Charakterisierung des Spurraums auf $\Gamma$ mittels Sobolevräumen mit gebrochenem Exponenten.
+
+\ssect{7.2 Definition}{}
+Seien $\Gamma$ und $\Omega_i\subset \R^2$ wie in Bild 7.2, $i=1,2$.
+Für $v\in L^2(\Omega)$ definieren wir die \bet{slobedeckij-Halbnorm} als 
+\[
+[v]_{\frac{1}{2},2,\Gamma} := \enbrace{\int_\Omega \int_\Omega \frac{\abs{v(x)-v(y)}^2}{\norm{x-y}^3}\dint x\dint y}^{\frac{1}{2}},
+\]\marginnote{$H^{\frac{1}{2}}(\Omega)$ nicht immer gleich definiert und auch nicht auf allen Gebieten äquivalent.}
+den Raum $H^{\frac{1}{2}(\Omega)}$ als
+\begin{align}
+H^{\frac{1}{2}}(\Gamma) := \penbrace{v\in L^2(\Gamma)~|~ [v]_{\frac{1}{2},2,\Gamma} < \infty}
+\end{align}
+mit zugehöriger Norm
+\begin{align}
+\norm{v}_{H^{\frac{1}{2}}(\Gamma)} := \enbrace{\norm{v}_{L^2(\Omega)}^2 + [v]_{\frac{1}{2},2,\Gamma}}^{\frac{1}{2}}.
+\end{align}
+Ferner definieren wir durch
+\begin{align}
+(u,v)_{H^{\frac{1}{2}}(\Gamma)} := (u,v)_{L^2(\Omega)} + \int_\Omega \int_\Omega \frac{(u(x)-u(y))(v(x)-v(y))}{\norm{x-y}^3}\dint x\dint y
+\end{align}
+ein Skalarprodukt $H^{\frac{1}{2}}(\Gamma)$.
+
+\ssect{7.3 Satz}{}
+Unter den Voraussetzungen aus Definition 7.2 ist $H^{\frac{1}{2}}(\Gamma)$ mit der in (7.11) definierten Norm und dem in (7.12) definierten Skalarprodukt eine Hilbertraum.\\
+
+\bet{Beweis:} [Adams, 1975], [Grisvard, 2011].
+\hfill $\square$
+
+\ssect{7.4 Spursatz}{}
+Seien $\Gamma, \Omega_i,i=1,2$ wie in Bild 7.2.
+Dann gilt für $\Omega_1$ (und analog für $\Omega_2$):
+\begin{enumerate}[(1)]
+	\item Es existiert eine eindeutige lineare, stetige Abbildung
+	\[
+	\mathcal{T}: H^1(\Omega_1) \to H^{\frac{1}{2}}(\Gamma), \text{ so dass } \mathcal{T}v=v|_\Gamma
+	\]
+	für alle $v\in H^1(\Omega)\cap C^0(\Omega_1)$.
+	Ferner gilt die folgende Abschätzung
+	\begin{align}
+	\norm{\mathcal{T}v}_{H^{\frac{1}{2}}(\Gamma)} \le c_t\cdot \norm{v}_{H^1(\Omega_1)},
+	\end{align}
+	mit der \bet{Spurkonstanten} $c_t>0$.
+	\item Es existiert eine lineare, stetige Abbildung $\mathcal{F}: H^{\frac{1}{2}}(\Gamma)\to H^1(\Omega)$, so dass
+	\begin{align}
+	\mathcal{T}\mathcal{F}\varphi = \varphi ~ \forall \phi\in H^{\frac{1}{2}}(\Gamma).
+	\end{align}
+\end{enumerate}
+
+\bet{Beweis:} [Adams, 1975], [Grisvard, 2011].
+\hfill $\square$
+
 
 
 
