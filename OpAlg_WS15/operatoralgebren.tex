@@ -2262,7 +2262,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		&\iff \abs[\big]{\skal*{\xi}{(x_\lambda^* -x^*) \eta}} \grenzw{} 0 \text{ für } \eta,\xi \in \mathcal{H} \\
 		&\iff x_\lambda^* \grenzw{\wo} x^* 
 	\end{align}
-	Die Multiplikation ist allerdings auch nicht $\wo$-stetig: Sei dazu $S$ der Shift. Dann gilt einerseits $S^n,{S^*}^n \grenzw{\wo} 0$ aber andererseits ${S^*}^n S^n=\ind$.
+	Die Multiplikation ist allerdings auch nicht $\wo$-stetig: Sei dazu $S$ der Shift. Dann gilt einerseits $S^n,{S^*}^n \grenzw{\wo} 0$ aber andererseits ${S^*}^n S^n=\ind$ für alle $n \in \mathbb{N}$.
 \end{erinnerungA}
 
 \begin{satz}[{name=[Einheitskugel der beschränkten Operatoren ist schwach kompakt]}]
@@ -2298,16 +2298,16 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Mit Banach-Alaoglu folgt, dass $\mathcal{B}(\mathcal{H})^1$ $\w^*$-kompakt und hausdorffsch ist.
 	Die Abbildung $\id \colon \enbrace*{\mathcal{B}(\mathcal{H})^1, \TWeakStar} \to \enbrace*{\mathcal{B}(\mathcal{H})^1,\TWeakOp}$ ist stetig, was man wie folgt verifiziert: 
 	\begin{align}
-		y_\lambda \grenzw{\w^*} y \text{ in } \mathcal{B}(\mathcal{H})^1 &\Longrightarrow \sum_{\gamma} \skal*{\xi_\gamma}{(y_\lambda-y)x \xi_\gamma} \grenzw{} 0 \text{ für jedes } x \in \mathcal{L}^1(\mathcal{H}) \\[-.9em]
-		&\StackTextClap{Übung}{\Longrightarrow} \skal*{\xi}{(y_\lambda-y) \eta} \grenzw{} 0 \text{ für alle } \xi,\eta \in \mathcal{H} \\
+		y_\lambda \grenzw{\w^*} y \text{ in } \mathcal{B}(\mathcal{H})^1 &\Longrightarrow \sum_{\gamma} \skal*{\xi_\gamma}{(y_\lambda-y)x \xi_\gamma} \to 0 \text{ für jedes } x \in \mathcal{L}^1(\mathcal{H}) \\[-.9em]
+		&\StackTextClap{Übung}{\Longrightarrow} \skal*{\xi}{(y_\lambda-y) \eta} \to 0 \text{ für alle } \xi,\eta \in \mathcal{H} \\
 		&\Longrightarrow y_\lambda \grenzw{\wo} y 
 	\end{align}
-	Damit ist $\mathcal{B}(\mathcal{H})^1$ auch $\wo$-kompakt.\todo{Revision 6}
+	Damit ist $\mathcal{B}(\mathcal{H})^1$ auch $\wo$-kompakt.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[schwacher Abschluss entspricht der Bikommutante]}]
 	Sei $\ind_{\mathcal{B}(\mathcal{H})} \in A \subset \mathcal{B}(\mathcal{H})$ eine $^*$-Algebra. Dann gilt
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\overline{A}^\wo = A''$
 		\item $A$ ist eine von-Neumann-Algebra genau dann, wenn $A= \overline{A}^\wo$.
 	\end{enumerate}
@@ -2316,16 +2316,15 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Zur ersten Aussage: Es gilt $A'' \StackText{\ref{lem:66}}{=}\overline{A}^\so \subset \overline{A}^\wo$. 
 	Sei nun $(x_\lambda)_\Lambda \subset A$ ein Netz mit $x_\lambda \grenzw{\wo} x$.
 	Falls $y \in A'$, so gilt für $\eta,\xi \in \mathcal{H}$
-	\begin{align}
-		\skal*{\eta}{(x y)\xi} = \lim_\lambda \skal*{\eta}{x_\lambda y \xi	} =\lim_\lambda \skal*{\eta}{y x_\lambda \xi} = \lim_\lambda \skal*{y^* \eta}{ x_\lambda \xi} 
-		&= \skal*{y^* \eta}{x \xi} = \skal*{\eta}{(yx) \xi}
-	\end{align}
+	\[
+		\skal[\big]{\eta}{(x y)\xi} = \lim_\lambda \skal[\big]{\eta}{x_\lambda y \xi} =\lim_\lambda \skal[\big]{\eta}{y x_\lambda \xi} = \lim_\lambda \skal[\big]{y^* \eta}{ x_\lambda \xi} = \skal[\big]{y^* \eta}{x \xi} = \skal[\big]{\eta}{(yx) \xi}
+	\]
 	Es folgt $xy=yx$ und somit ist $x \in A''$, also $\overline{A}^\wo \subseteq A''$.
-	Die zweite Aussage folgt aus (i) und dem Bikommutantensatz.
+	Die zweite Aussage folgt offensichtlich direkt aus (i) und dem Bikommutantensatz.
 \end{beweis}
 
 Wir wollen uns nun noch ein bisschen mehr mit dem Zusammenspiel der verschiedenen Topologien beschäftigen. 
-Für ein lineare Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt: 
+Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt: 
 \[
 	\begin{tikzcd}
 		\varphi \text{ $\wo$-stetig} \rar[Rightarrow] & \varphi \text{ $\so$-stetig}  \rar[Rightarrow] & \varphi \text{ $\norm*{\cdot}$-stetig} \\
@@ -2333,31 +2332,28 @@ Für ein lineare Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt:
 		\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] &\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] & \varphi(x_\lambda)\to \varphi(x) 
 	\end{tikzcd}
 \]
-Die Umkehrung der zweiten Implikation gilt im Allgemeinen nicht. 
+Die Umkehrung der zweiten Implikation in der obersten Zeile gilt im Allgemeinen nicht. 
 Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 
-\begin{satz}[label=satz:619,{name=[für Funktionale ist wo-stetig äquivalent zu so-stetig]}]
+\begin{satz}[label=satz:619,{name=[für Funktionale ist schwach stetig äquivalent zu stark stetig]}]
 	Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ sind äquivalent:
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\varphi$ ist $\wo$-stetig.
 		\item $\varphi$ ist $\so$-stetig.
-		\item $\varphi(\cdot)=\sum_{i=1}^{n} \skal*{\eta_i}{\cdot \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
+		\item $\varphi(.)=\sum_{i=1}^{n} \skal*{\eta_i}{.\, \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	Die Implikation (i)$\Rightarrow$(ii) haben wir bereits gesehen.
-	(iii)$\Rightarrow$(i) ist auch klar und wir müssen nur (ii) $\Rightarrow$(iii) zeigen:
-	Sei $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann $\so$-offen.
-	Dann existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass 
+	Die Implikation (i) $\Rightarrow$ (ii) ist klar, da $\TWeakOp \subset \Tso$ ist.
+	Die Implikation (iii) $\Rightarrow$ (i) ist auch klar nach Definition der schwachen Operatortopologie und wir müssen nur (ii) $\Rightarrow$ (iii) zeigen:
+	Sei also $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann $\so$-offen und es existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass 
 	\[
 		U_{0,\xi_i,\alpha}= \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(y-0)\xi_i}< \alpha}  \subset S_\varphi
 	\]
-	Das heißt für $x \in \mathcal{B}(\mathcal{H})$ gilt: Falls $\norm*{x \xi_i}<\alpha$ für $i=1,\ldots ,n$, so ist $\abs*{\varphi(x)}<1$.
+	Das heißt für $x \in \mathcal{B}(\mathcal{H})$ gilt: Falls $\norm*{x \xi_i}<\alpha$ ist für alle $i$, so ist $\abs*{\varphi(x)}<1$.\todo{Das stimmt so noch nicht, hier muss noch der Schnitt der $U_{0,\xi_i,\alpha}$ vorkommen}
 	Nach Skalierung der $\xi_i$ gilt für $x \in \mathcal{B}(\mathcal{H})$:
-	\(
-		\norm*{x \xi_i} < 1 \Rightarrow \abs*{\varphi(x)}<1 
-	\).
-	Es folgt 
+	Ist $\norm*{x \xi_i} < 1$ für alle $i$, so ist auch $\abs*{\varphi(x)}<1$.
+	Für $x \in \mathcal{B}(\mathcal{H})$ gilt also\todo{die erste Ungleichung sehe ich nicht ein} 
 	\[
 		\abs*{\varphi(x)} \le \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}}
 	\]
@@ -2371,12 +2367,13 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		x \xi_1 \\ \cdot \\ x \xi_n
 	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear.
 	$\psi$ setzt sich also fort zu $\overline{\psi} \colon \overline{\mathcal{H}_0} \to \mathbb{C}$.
-	Mit Riesz folg die Existenz von $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
+	Mit Riesz folg die Existenz eines eindeutigen $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
 	\[
 		\varphi(x) = \overline{\psi} \begin{pmatrix}
 			x \xi_1 \\ \vdots \\ x \xi_n
-		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta}{x \xi_i} \qedhere
+		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}
 	\]
+	wobei $\eta_i$ die Komponenten von $\eta$ sind.\todo{Revision 6}
 \end{beweis}
 
 \begin{proposition}[{name=[konvexe Menge stark abgeschlossen]},label=prop:620]
