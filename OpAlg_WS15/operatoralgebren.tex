@@ -2133,13 +2133,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		= \lim_\lambda \enbrace[\big]{e_\lambda(x)(\xi)} = e \xi
 	\]
 	Es folgt $ e h = e = h e$ und genauso $h e = h =eh$, also $h=e$ und damit die Eindeutigkeit. 
-	Die restlichen Aussagen folgen auf ähnliche Art und Weise.\todo{Revision 6}
+	Die restlichen Aussagen folgen auf ähnliche Art und Weise.
 \end{beweis}
 
-\begin{korollar}[label=korr:613]
+\begin{korollar}[label=korr:613,{name=[selbstadjungierte und unitäre Element in von-Neumann-Algebren]}]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra.
-	\begin{enumerate}[(i)]
-		\item $A$ hat reellen Rang\index{reeller Rang} $0$, das heißt $A_\sa=\overline{\set*{\xi a \in A_\sa \given \sigma(a) \text{ ist endlich}}}$.
+	\begin{enumerate}[(i),itemsep=2pt]
+		\item $A$ hat reellen Rang\index{reeller Rang} $0$, das heißt $A_\sa=\overline{\set*{a \in A_\sa \given \sigma(a) \text{ ist endlich}}}$.
 		\item Für die unitäre Gruppe\index{unitäre Gruppe} gilt $\mathcal{U}(A)= \overline{\set[\big]{e^{i \pi h} \given h \in A_\sa^1}}$.
 	\end{enumerate}
 \end{korollar}
@@ -2147,48 +2147,63 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\leavevmode
 	\begin{enumerate}[(i)]
 		\item Sei $a \in A_\sa$. Ohne Einschränkungen sei $\sigma(a) \subset [0,1]$ (Warum?).
-		Für $N \in \mathbb{N}$ definieren wir eine Zerlegung der Eins von $[0,1]$ wie folgt:
-		% \[
-		% 	\begin{tikzpicture}[scale=2]
-		% 		\draw[] (0,0) -- (1,0);
-		% 		\foreach \x in {0,1,...,10}{
-		% 			\draw ()
-		% 		}
-		% 	\end{tikzpicture}
-		% \]
-		\missingfigure{$\sfrac{1}{N},\sfrac{2}{N}, \sfrac{3}{N},\ldots $ und dann Hüte über zwei Segmente}
-		Es gilt 
+		Für $N \in \mathbb{N}$ definieren wir eine Zerlegung der Eins von $[0,1]$ wie in \cref{fig:613:zerlEins}.
+		\begin{figure}[hbt]
+			\centering{
+			\begin{tikzpicture}[x=7cm,y=2cm]
+				\draw[very thick] (-.1,0) -- (0,0)  -- (1,0) -- (1.1,0);
+				\draw[very thick] (0,-.075) node[below]{$0$} -- ++(0,.15);
+				\draw[very thick] (1,-.075) node[below]{$1$} -- ++(0,.15);
+				\foreach \x in {10,20,...,90}{
+					\draw[thick] (${\x/100}*(1,0) +(0,1)$) -- (${\x/100}*(1,0) + (0.1,0)$); 
+				}
+				\foreach \x in {10,20,...,90,100}{
+					\draw[thick] (${\x/100}*(1,0) -(0.1,0)$) -- (${\x/100}*(1,0) + (0,1)$) node[above]{$f_{\pgfmathparse{int(\x/10)}\pgfmathresult}$}; 
+				}
+				\draw[very thick,Firebrick3]  (0,1) node[above]{$f_0$} -- (0.1,0) -- (1,0);
+				\draw[ultra thick,DodgerBlue3,dashed]  (0,0)  -- (0.3,0) -- (0.4,1) node[above,fill=white]{$f_4$} -- (0.5,0) -- (1,0);
+			\end{tikzpicture}
+			\caption{Zerlegung der Eins auf $[0,1]$ für gegebenes $N \in N$, hier $N=10$}\label{fig:613:zerlEins}
+			}
+		\end{figure}
+		Nach Aufgabe 2 von Blatt 4 gilt für eine Projektion $p$ stets $\sigma(p) \subset \set*{0,1}$.
+		Insbesondere gilt dies für die eben definieren $\chi_U$ für $U \subset \sigma(a)$ offen.
+		Es gilt dann
 		\begin{align}
-			a=\id_{[0,1]}(a)= \sum_{i=1}^N \sfrac{1}{N} f_i(a) = \sum_{i=1}^{N} \sfrac{1}{N} \sum_{j=i}^{N} f_j(a) \ge \Underbracket{\sum_{i=1}^{N} \sfrac{1}{N} \cdot \chi_{(\sfrac{1}{N},1]}(a)}{\text{hat endliches Spektrum}} &\ge \sum_{i=1}^{N} \sfrac{1}{N} \cdot \sum_{j=i+1}^{N} f_j(a) \\
+			\SwapAboveDisplaySkip
+			a=\id_{[0,1]}(a)= \sum_{i=1}^N \frac{i}{N}\cdot  f_i(a) = \sum_{i=1}^{N} \frac{1}{N} \sum_{j=i}^{N} f_j(a) \ge \Overbracket{\sum_{i=1}^{N} \frac{1}{N} \cdot \chi_{(\sfrac{i}{N},1]}(a)}{\text{hat endliches Spektrum}} &\ge \sum_{i=1}^{N} \frac{1}{N} \sum_{j=i+1}^{N} f_j(a) \\
 			&\ge \id_{[0,1]}(a) - \sfrac{1}{N} \cdot \ind 
 		\end{align}
-		\item Die Abbildung $(-1,1] \to \mathbb{T}$, $t \mapsto e^{i \pi t}$ ist bijektiv und stetig; die Umkehrfunktion $f$ ist steig auf $\mathbb{T} \setminus \set*{-1}$.
+		Also lässt sich $a$ durch Elemente mit endlichem Spektrum beliebig approximieren.
+		\item Die Abbildung $(-1,1] \to \mathbb{T}$, $t \mapsto e^{i \pi t}$ ist bijektiv und stetig; die Umkehrfunktion $f$ ist lediglich stetig auf $\mathbb{T} \setminus \set*{-1}$.
 		Sei nun $u \in A$ unitär. 
-		Falls $-1 \notin \sigma(u) \subset \mathbb{T}$, so ist $h=f(u) \in A_\sa^1$ und $u=e^{i \pi h}$.
+		Dann ist $\sigma(u) \subset \mathbb{T}$ nach \autoref{prop:210} (ii).
+		Falls $-1 \notin \sigma(u) \subset \mathbb{T}$, so ist $h=f(u) \in A_\sa^1$ und $u=e^{i \pi h}$.\todo{Revision 6}
 		
 		Falls $-1$ im Spektrum von $u$ enthalten ist, so betrachten wir eine offene Umgebung $V \subset \mathbb{T}$ von $-1$.
 		Dann ist $p:= \chi_{V\cap \sigma(u)}(u)$ eine Projektion in $A \cap \set*{u}'$ nach \autoref{prop:612}.
 		Für diese ist dann $u(\ind-p) \in B := (\ind-p)A(\ind-p)$ unitär.
-		Es gilt $-1 \notin \sigma_B \enbrace*{u(1-p)}$, denn für $f \in C_0(V)$ gilt $f \enbrace*{u(\ind-p)}= f(u)(\ind-p)=0$\marginnote{$f$ mit Polynomen approximieren} und damit folgt $\sigma_B \enbrace*{u(\ind-p)} \subset \mathbb{T}\setminus V$.
+		Es gilt $-1 \notin \sigma_B \enbrace*{u(1-p)}$, denn für $f \in C_0(V)$ gilt $f \enbrace[\big]{u(\ind-p)}= f(u)(\ind-p)=0$\marginnote{$f$ mit Polynomen approximieren} und damit folgt $\sigma_B \enbrace[\big]{u(\ind-p)} \subset \mathbb{T}\setminus V$.
 		Wir im ersten Teil gilt dann
 		\[
 			u(\ind-p)= e^{i \pi h_0} \in B
 		\]
-		für ein $h_0 B_\sa^1$. 
+		für ein $h_0 \in B_\sa^1$. 
 		Ähnlich wie in (i) sieht man, dass 
 		\(
-			\norm*{u(\ind-p) +(-1)p -u} \le \diam V
+			\norm*{\enbrace[\big]{u(\ind-p) -p} -u} \le \diam V
 		\).
 		Weiter gilt, da $h_0$ und $p$ orthogonal zueinander sind
 		\[
-			u(\ind-p)+ \enbrace*{(-1) p} = e^{i \pi(h_0+p)} \qedhere
+			u(\ind-p) - p = e^{i \pi(h_0+p)} 
 		\]
+		\todo{bei dem $e$-Term kommt wieder $u(\ind-p)$ raus meine ich \ldots}\qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Folgerungen aus \autoref{korr:613}]}]
 	\leavevmode
-	\begin{enumerate}[a)]
+	\begin{enumerate}[a),itemsep=0pt]
 		\item Aus (i) folgt insbesondere, dass $A= \overline{\Span \set*{p \in A \given p\text{ ist Projektion}}}$.
 		\item Die Gleichung in (i) gilt entsprechend auch für normale Elemente.
 		\item Mit dem Borel-Funktionalkalkül, \autoref{satz:615}, folgt, dass die Gleichung in (ii) auch ohne Normabschluss gilt.
@@ -2198,7 +2213,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{satz}[label=satz:615,name={Borel Funktionalkalkül}]
 	Sei $A \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra und $a \in A$ normal.
 	Dann existiert ein $^*$-Homomorphismus\marginnote{beschränkte Borel-Funktionen bilden $C^*$-Algebra mit $\norm*{\cdot}_\infty$; $W^*(x)$ erzeugte von-Neumann-Algebra}
-	\mapdef{\mathbb{B}_b \enbrace*{\sigma(x)}}{W^*(x)\subset A}{f}{f(x)}{} 
+	\mapdef{\mathbb{B}_b \enbrace[\big]{\sigma(x)}}{W^*(x)\subset A}{f}{f(x)}{} 
 	welcher den Gelfandhomomorphismus $C(\sigma(x)) \to C^*(x)$ fortsetzt.
 	Für eine aufsteigende beschränkte Folge $(f_n)_\mathbb{N} \subset \mathbb{B}_b(\sigma(x))_\sa$ mit punktweisem Limes $f=\lim_n f_n$ gilt
 	\[
