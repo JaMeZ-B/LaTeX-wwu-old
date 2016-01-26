@@ -2887,12 +2887,114 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Falls $B\subher A$, so ist $\rho'$ eindeutig bestimmt. 
 \end{korollar}
 \begin{beweis}
-	Die Menge $F:= \set*{\varphi \in S(A^\simm) \given \varphi|_{B}=\rho}$ ist nichtleer nach \autoref{satz:57} und es ist $F \subset S(A^\simm)$ $\w^*$-abgeschlossen, also $\w^*$-kompakt.
+	Die Menge $F:= \set*{\varphi \in S(A) \given \varphi|_{B}=\rho}$ ist nichtleer nach \autoref{satz:57} und es ist $F \subset S$ $\w^*$-abgeschlossen, also $\w^*$-kompakt.
 	Weiter ist $F$ auch wieder konvex.
-	$F$ ist eine Seite von $S = \set*{\varphi \colon A^\simm \to \mathbb{C}\given \text{ positiv, linear, } \norm*{\varphi}\le 1}$ (Übung).
+	$F$ ist eine Seite von 
+	\[
+		S = \set*{\varphi \colon A \to \mathbb{C}\given \text{ positiv, linear, } \norm*{\varphi}\le 1} 
+	\]
+	(Übung)
 	Mit \hyperref[satz:krein_milman]{Krein-Milman} und \autoref{prop:78} folgt, dass ein $\rho'' \in \partial_e F \subset\partial_e F \setminus\set*{0}=PS(A^\simm)$ existiert.
 	Setze nun $\rho' := \rho''|_{A} \in PS(A)$.(Übung)
 	Eindeutigkeit: \autoref{satz:58}.
+\end{beweis}
+
+\begin{proposition}[label=prop:715]
+	Sei $\mathcal{H}$ ein Hilbertraum und $\xi_1,\ldots ,\xi_n,\eta_1 ,\ldots \eta_n \in \mathcal{H}$, wobei $\set*{\xi_1, \ldots ,\xi_n}$ ein Orthonormalsystem bildet.
+	Dann existiert ein $x \in \mathcal{B}(\mathcal{H})$ mit $x(\xi_i)=\eta_i$ für $i=1,\ldots,n$ und 
+	\[
+		\norm*{x} \le \sqrt{2n} \cdot \max_{i=1,\ldots ,n} \norm*{\eta_i}
+	\]
+	Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$ existiert, so kann man $x$ selbstadjungiert wählen.
+\end{proposition}
+\begin{beweis}
+	Setze $x := \sum_{i=1}^{n} \ket{\eta_i} \bra{\xi_i}$, wo $\ket{\eta} \bra{\xi} \in \mathcal{B}(\mathcal{H})$ gegeben ist durch
+	\[
+		\ket{\eta} \bra{\xi} (\rho) := \ker{\eta} \bracket*{\xi}{\rho} = \skal*{\xi}{\rho} \cdot \eta
+	\]
+	Dann gilt $x(\xi_i) = \eta_i$ für $i=1,\ldots ,n$.
+	Für $\xi \in \mathcal{H}$ gilt weiter 
+	\begin{align}
+		\norm*{x \xi} = \norm*{\sum_{i=1}^{n} \bracket{\xi_i}{\xi} \eta_i} \le \sum_{i=1}^{n} \abs[\big]{ \bracket{\xi_i}{\xi}} \cdot \norm*{\eta_i}\enspace &\StackTextClap{Hölder}{\le}\enspace \enbrace*{\sum_{i=1}^{n} \abs[\big]{\bracket{\xi_i}{\xi}}^2 \cdot \sum_{i=1}^{n} \norm*{\eta_i}^2}^{\sfrac{1}{2}}\\
+		&\le \norm*{\xi} \cdot \sqrt{n} \cdot \max_i \norm*{\eta_i}
+	\end{align}
+	Es folgt $\norm*{x} \le \sqrt{n} \cdot \max_i \norm*{\eta_i}$.
+	Existiert nun $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i) =\eta_i$, dann gilt
+	\[
+		x = \sum_{i=1}^{n} \ket{\eta_i} \ket{\xi_i} = \sum_{i=1}^{n} \ket{y \xi_i} \bra{\xi_i} = y \Underbracket{\enbrace*{\sum_{i=1}^{n} \ket{\xi_i} \bra{\xi_i}}}{=:p} =y p
+	\]
+	wobei $p$ die Projektion auf $\Span \set*{\xi_1, \ldots ,\xi_n}$ ist. 
+	Dann ist $x' := yp + py - pyp$ selbstadjungiert und es gilt $x' \xi_i = \eta_i + p \eta_i - p \eta_i=\eta_i$.
+	Für die Norm erhalten wir
+	\begin{align}
+		\norm*{x'}^2 = \norm*{yp + py - pyp}^2 = \norm[\big]{ \enbrace*{yp+py-pyp} \enbrace*{yp + py - pyp}}&= \norm[\big]{ypy + py(\ind -p) yp} \\
+		&\le \norm*{ypy} + \norm*{py(\ind-p)yp} \\
+		&= \norm*{xx^*} + \norm*{x^*x} = 2 \cdot \norm*{x}^2 \\
+		&\le 2 n \enbrace[\big]{\max\nolimits_i \norm*{\eta_i}}^2
+	\end{align}
+	Damit erhalten wir insgesamt die gewünschte Abschätzung.
+\end{beweis}
+
+\begin{satz}[{name={Kadisons Transitivitätssatz}}]
+	Sei $A$ eine $C^*$-Algebra und $\pi \colon A \to \mathcal{B}(\mathcal{H})$ eine irreduzible Darstellung.
+	Seien $\xi_1,\ldots ,\xi_n, \eta_1, \ldots , \eta_n \in \mathcal{H}$, wobei $\xi_1,\ldots ,\xi_n$ linear unabhängig sind.
+	Dann existiert ein $x \in A$ mit $\pi(x)(\xi_i) = \eta_i$ für $i=1,\ldots ,n$.
+	\begin{itemize}
+		\item Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ existiert mit $y(\xi_i)=\eta_i$, so kann man auch $x \in A_\sa$ wählen.
+		\item Falls $A$ und $\pi$ unital sind und es ein $u \in \mathcal{U} \enbrace*{\mathcal{B}(\mathcal{H})}$ gibt mit $u(\xi_i)=\eta_i$, so kann man $x$ unitär wählen (tatsächlich sogar $x=e^{i h}$ mit $h \in A_\sa$).
+	\end{itemize}
+\end{satz}
+\begin{beweis}
+	\begin{enumerate}[1.]
+		\item Seien zunächst die $\xi_i$ orthonormal und es existiere ein $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$.
+		Wir dürfen $\max_i \norm*{\eta_i} \le (2n)^{- \sfrac{1}{2}}$ annehmen.
+		Zu $\varepsilon>0$ definiere
+		\[
+			U_\varepsilon := \set*{z \in \mathcal{B}(\mathcal{H}) \given \norm*{z(\xi_i)} < \varepsilon , i=1,\ldots ,n}
+		\]
+		Dann ist $U_\varepsilon$ eine stark-offene Umgebung von $0 \in \mathcal{B}(\mathcal{H})$.
+		
+		Exkurs:\todo{vlt in den Anhang auslagern} Es ist $\pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$: 
+		Da $(\mathcal{H},\pi)$ irreduzibel ist, folgt mit \autoref{satz:73}, dass $\pi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$, also $\pi(A)''=\mathcal{B}(\mathcal{H})$.
+		Falls $\ind_{\mathcal{B}(\mathcal{H})} \in \pi(A)$, so ist $\pi(A)$ $\so$-dicht in $\overline{\pi(A)}^\so = \pi(A)''=\mathcal{B}(\mathcal{H})$.
+		Im nichtunitalen Fall:
+		Betrachte approximative Eins $(e_\lambda)_\Lambda$ für $A$, dann $\pi(e_\lambda) \grenzw{\so} p \in \mathcal{B}(\mathcal{H})$ Projektion und $p \mathcal{H} \subset \mathcal{H}$ ist ein abgeschlossener $\pi(A)$-invarianter Unterraum.
+		Da $\pi$ irreduzibel ist, ist $p \mathcal{H}=\mathcal{H}$ und $p=\ind_{\mathcal{B}(\mathcal{H})}$.
+		Weiter ist $\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so = \enbrace*{\overline{\pi(A)}^\so}'' \supset \pi(A)'' \supset \pi(A)$
+		\[
+			\begin{tikzcd}[sep=small]
+				\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so \rar[equal] & \enbrace*{\overline{\pi(A)}^\so}''  \rar[equal] & \mathcal{B}(\mathcal{H}) \\
+				\mbox{   }\hspace{1em}\pi(A) \uar[phantom,sloped,"\subset","\text{\footnotesize dicht}" yshift=-1em] \rar[phantom,sloped,description,"\subset"] & \pi(A)'' \uar[phantom,sloped,description,"\subset"] \urar[equal]
+			\end{tikzcd}
+		\]
+		
+		Mit Kaplansky folgt, dass 
+		\[
+			\overline{\pi(A_\sa^1)}^\so = \mathcal{B}(\mathcal{H})_\sa^1
+		\]
+		Insbesondere gilt:
+		Zu $w \in \mathcal{B}(\mathcal{H})_\sa$ existiert $w' \in A_\sa$ mit $\pi(w')-w \in U_\varepsilon$ und $\norm*{w'} \le \norm*{w}$.
+		Nach \autoref{prop:715} existiert $v_0 \in \mathcal{B}(\mathcal{H})_\sa$ mit $v_0(\xi_i)=\eta_i$ und $\norm*{v_0} \le \sqrt{2n} \cdot \max_i \norm*{\eta_i} \le 1$.
+		Also existiert ein $x_0 \in A_\sa$ mit $\pi(x_0)=v_0 \in U_{\sfrac{1}{(2 \sqrt{2n})}}$ und $\norm*{x_0} \le 1$.
+		Wir konstruieren nun induktiv $(x_k)_k \subset A_\sa$, $(v_k)_k \subset \mathcal{B}(\mathcal{H})_\sa$ mit 
+		\[
+			\norm*{x_k}, \norm*{v_k} \le 2^{-k} \qquad \pi(x_k) -v_k \in U_{2^{-(k+1)} (2n)^{- \sfrac{1}{2}}} \qquad v_k(\xi_i) = \enbrace*{v_{k-1} - \pi(x_{k-1})}(\xi_i)
+		\]
+		$x_0, v_0$ sind bereits konstruiert.
+		Falls $x_0, \ldots ,x_r, v_0, \ldots ,v_r$ bereits konstruiert sind, so existiert nach \autoref{prop:715} ein $v_{r+1} \in \mathcal{B}(\mathcal{H})_\sa$ mit 
+		$v_{r+1}(\xi_i)= \enbrace*{v_r- \pi(x_r)}(\xi_i)$ für $i=1,\ldots ,n$ und 
+		\[
+			\norm*{v_{r+1}} \le \sqrt{2n} \cdot \max_{i=1,\ldots ,n} \norm*{\enbrace*{v_r - \pi(x_r)}(\xi_i)} \le \sqrt{2n} \cdot 2^{-{r+1}} (2n)^{- \sfrac{1}{2}} = 2^{-{r+1}}
+		\]
+		$\leadsto$ Es existiert $x_{r+1} \in A_\sa$ mit $\pi(x_{r+1}) - v_{r+1} \in U_{2^{-(r+2)} \cdot (2n)^{-\sfrac{1}{2}}}$ und $\norm*{x_{r+1}} \le 2^{-{r+1}}$.
+		Aber dann konvergiert $x := \sum_{r=0}^{\infty} x_r$ in $A_\sa$ und es gilt
+		\begin{align}
+			\eta_i = \pi(x)(\xi_i) 
+			&= \lim_{k \to \infty} \enbrace*{\eta_i - \sum_{r=0}^{k} \pi(x_r) \xi}\\ 
+			&= \lim_{k \to \infty} \enbrace*{ \enbrace*{v_o(\xi_i) - \pi(x_0)(\xi_i)} - \pi(x_1)(\xi_i)} - \cdots - \pi(x_k)(\xi_i) \\
+			&= \lim_{k  \to \infty} v_{k+1}(\xi_i) =0
+		\end{align}
+	\end{enumerate}
 \end{beweis}
 % section 7 (end)
 
