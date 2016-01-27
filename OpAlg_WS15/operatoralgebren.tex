@@ -2326,8 +2326,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 Wir wollen uns nun noch ein bisschen mehr mit dem Zusammenspiel der verschiedenen Topologien beschäftigen. 
 Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt: 
 \[
-	\begin{tikzcd}
-		\varphi \text{ $\wo$-stetig} \rar[Rightarrow] & \varphi \text{ $\so$-stetig}  \rar[Rightarrow] & \varphi \text{ $\norm*{\cdot}$-stetig} \\
+	\begin{tikzcd}[row sep=1.6em]
+		\varphi \text{ $\wo$-stetig} \rar[Rightarrow] & \varphi \text{ $\so$-stetig}  \rar[Rightarrow] & \varphi \text{ $\norm*{\cdot}$-stetig} \\[-1.5em]
 		x_\lambda \grenzw{\wo}x \dar[Rightarrow]& x_\lambda\grenzw{\so}x \lar[Rightarrow]\dar[Rightarrow] & x_\lambda\grenzw{\norm*{\cdot}} x \lar[Rightarrow]\dar[Rightarrow] \\
 		\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] &\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] & \varphi(x_\lambda)\to \varphi(x) 
 	\end{tikzcd}
@@ -2346,35 +2346,39 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 \begin{beweis}
 	Die Implikation (i) $\Rightarrow$ (ii) ist klar, da $\TWeakOp \subset \Tso$ ist.
 	Die Implikation (iii) $\Rightarrow$ (i) ist auch klar nach Definition der schwachen Operatortopologie und wir müssen nur (ii) $\Rightarrow$ (iii) zeigen:
-	Sei also $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann $\so$-offen und es existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass 
+	Sei also $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann eine $\so$-offene Umgebung der Null und es existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass für die entsprechenden Elemente $U_{0,\xi_i,\alpha}$ der Subbasis\footnote{Es gilt $U_{x,\xi_i,\alpha}=\set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(x-y)\xi_i}< \alpha}$, vergleiche \autoref{erinnerung:61}} von $\Tso$ gilt
 	\[
-		U_{0,\xi_i,\alpha}= \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(y-0)\xi_i}< \alpha}  \subset S_\varphi
+		\bigcap_{i=1}^n U_{0,\xi_i,\alpha}  \subset S_\varphi
 	\]
-	Das heißt für $x \in \mathcal{B}(\mathcal{H})$ gilt: Falls $\norm*{x \xi_i}<\alpha$ ist für alle $i$, so ist $\abs*{\varphi(x)}<1$.\todo{Das stimmt so noch nicht, hier muss noch der Schnitt der $U_{0,\xi_i,\alpha}$ vorkommen}
-	Nach Skalierung der $\xi_i$ gilt für $x \in \mathcal{B}(\mathcal{H})$:
-	Ist $\norm*{x \xi_i} < 1$ für alle $i$, so ist auch $\abs*{\varphi(x)}<1$.
-	Für $x \in \mathcal{B}(\mathcal{H})$ gilt also\todo{die erste Ungleichung sehe ich nicht ein} 
+	Wir bezeichnen die dazugehörigen Halbnormen\marginnote{Details hinzugefügt in Anlehnung an \cite[S.~267~f]{Murphy}} mit $p_{i}(x) := \norm*{x \xi_i}$ und setzen $p(x) := \max_{i} p_i(x)$.
+	Für $x \in \mathcal{B}(\mathcal{H})$ beliebig gilt dann: $p(x)<\alpha \Rightarrow \abs*{\varphi(x)}<1$.
+	Wir setzen $M := \sfrac{2}{\alpha}$ und erhalten, falls $p(x)>0$ ist,
+	\(
+		p \enbrace[\big]{\frac{x}{M \cdot p(x)}} = \frac{\alpha}{2} < \alpha 
+	\).
+	Mit obiger Implikation folgt $\abs[\big]{\varphi \enbrace[\big]{\frac{x}{M \cdot p(x)}}} < 1$ und wir erhalten insgesamt für alle $x \in \mathcal{B}(\mathcal{H})$
 	\begin{equation}
-		\abs*{\varphi(x)}  \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}} \label{eq:619}\tag{\dag}
+		\abs*{\varphi(x)} \le M \cdot p(x) = M \cdot \max_i \norm*{x \xi_i}
+	\end{equation}
+	Nach entsprechender Skalierung der $\xi_i$ können wir $M=1$ annehmen und erhalten dann
+	\begin{equation}
+		\abs*{\varphi(x)} \le  \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\mkern-5mu\raisemath{-2.2pt}{\sfrac{1}{2}}} \label{eq:619}\tag{\dag}
 	\end{equation}
 	Setze nun 
 	\[
-		\mathcal{H}_0 := \set*{\begin{pmatrix}
-			x \xi_1 \\ \vdots \\ x \xi_n
-		\end{pmatrix} \given x \in \mathcal{B}(\mathcal{H})} \subset \mathcal{H}^{\oplus n}
+		\mathcal{H}_0 := \set*{\begin{psmallmatrix}
+			x \xi_1 \\ \raisemath{2pt}{\vdots} \\ x \xi_n
+		\end{psmallmatrix} \given x \in \mathcal{B}(\mathcal{H})} \subset \mathcal{H}^{\oplus n}
 	\]
-	Dann ist $\psi \colon \mathcal{H}_0 \to \mathbb{C}$, $\begin{psmallmatrix}
-		x \xi_1 \\ \cdot \\ x \xi_n
-	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear (benutze \eqref{eq:619}).
-	\todo{wie die Stetigkeit folgt ist klar, Wohldefiniertheit nicht unbedingt}
+	und definiere $\psi \colon \mathcal{H}_0 \to \mathbb{C}$ durch $\enbrace[\big]{x \xi_1, \ldots , x \xi_n} \mapsto \varphi(x)$. 
+	Man sieht nun, dass $\psi$ wohldefiniert, linear und stetig ist  mit $\norm*{\psi}\le 1$ (unter Benutzung von \eqref{eq:619}).
 	$\psi$ setzt sich also fort zu $\overline{\psi} \colon \overline{\mathcal{H}_0} \to \mathbb{C}$.
-	Mit Riesz folg die Existenz eines eindeutigen $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
+	Mit Riesz folgt die Existenz eines eindeutigen $\eta= \enbrace*{\eta_1, \ldots ,\eta_n} \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(x) = \skal*{\eta}{x}$, also gilt
 	\[
 		\varphi(x) = \overline{\psi} \begin{pmatrix}
 			x \xi_1 \\ \vdots \\ x \xi_n
-		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}
+		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}\qedhere
 	\]
-	wobei $\eta_i$ die Komponenten von $\eta$ sind.
 \end{beweis}
 
 \begin{proposition}[{name=[konvexe Menge stark g.d.w schwach abgeschlossen]},label=prop:620]
