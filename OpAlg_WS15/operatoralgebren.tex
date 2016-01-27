@@ -2340,7 +2340,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\varphi$ ist $\wo$-stetig.
 		\item $\varphi$ ist $\so$-stetig.
-		\item $\varphi(.)=\sum_{i=1}^{n} \skal*{\eta_i}{.\, \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
+		\item $\varphi(x)=\sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
@@ -2354,9 +2354,9 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Nach Skalierung der $\xi_i$ gilt für $x \in \mathcal{B}(\mathcal{H})$:
 	Ist $\norm*{x \xi_i} < 1$ für alle $i$, so ist auch $\abs*{\varphi(x)}<1$.
 	Für $x \in \mathcal{B}(\mathcal{H})$ gilt also\todo{die erste Ungleichung sehe ich nicht ein} 
-	\[
-		\abs*{\varphi(x)} \le \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}}
-	\]
+	\begin{equation}
+		\abs*{\varphi(x)}  \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}} \label{eq:619}\tag{\dag}
+	\end{equation}
 	Setze nun 
 	\[
 		\mathcal{H}_0 := \set*{\begin{pmatrix}
@@ -2365,7 +2365,8 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\]
 	Dann ist $\psi \colon \mathcal{H}_0 \to \mathbb{C}$, $\begin{psmallmatrix}
 		x \xi_1 \\ \cdot \\ x \xi_n
-	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear.
+	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear (benutze \eqref{eq:619}).
+	\todo{wie die Stetigkeit folgt ist klar, Wohldefiniertheit nicht unbedingt}
 	$\psi$ setzt sich also fort zu $\overline{\psi} \colon \overline{\mathcal{H}_0} \to \mathbb{C}$.
 	Mit Riesz folg die Existenz eines eindeutigen $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
 	\[
@@ -2373,36 +2374,36 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 			x \xi_1 \\ \vdots \\ x \xi_n
 		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}
 	\]
-	wobei $\eta_i$ die Komponenten von $\eta$ sind.\todo{Revision 6}
+	wobei $\eta_i$ die Komponenten von $\eta$ sind.
 \end{beweis}
 
-\begin{proposition}[{name=[konvexe Menge stark abgeschlossen]},label=prop:620]
+\begin{proposition}[{name=[konvexe Menge stark g.d.w schwach abgeschlossen]},label=prop:620]
 	Sei $C \subset \mathcal{B}(\mathcal{H})$ konvex.
 	Dann ist $C$ $\so$-abgeschlossen genau dann, wenn $C$ $\wo$-abgeschlossen ist.
 \end{proposition}
-\begin{beweis}[Idee]
+\begin{beweis}[name={Idee}]
 	Wenn $C$ $\wo$-abgeschlossen ist, dann ist $C$ auch $\so$-abgeschlossen, da die schwache Topologie in der starken enthalten ist.
-	Für die andere Implikation sei $x \in \overline{C}^\wo$. Zu zeigen ist nun, dass $x \in \overline{C}^\so$ ist. 
-	Es existiert ein Netz $(x_\lambda)_\Lambda \subset C$ mit $x_\lambda \grenzw{\wo}x$.
+	Für die andere Implikation sei $x \in \overline{C}^{\raisemath{-1.5pt}{\wo}}$. Zu zeigen ist nun, dass $x$ auch in $\overline{C}^{\raisemath{-1.5pt}{\so}}$ enthalten ist. 
+	Es existiert ein Netz $(x_\lambda)_\Lambda \subset C$, dass schwach gegen $x$ konvergiert.
 	Für jedes $\wo$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt $\varphi(x_\lambda) \to \varphi(x)$.
 	Mit \autoref{satz:619} folgt, dass für jedes $\so$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ auch $\varphi(x_\lambda) \to \varphi(x)$ gilt.
-	Falls $x \notin \overline{C}^\so$, so folgt mit dem Lemma von Zorn (bzw. mit Hahn-Banach für lokalkonvexe Räume), dass $\overline{\varphi} \in \mathcal{B}(\mathcal{H})^*$ $\so$-stetig existiert mit $\dist(\overline{\varphi}(x),\overline{\varphi}(C))>0$.
+	Falls $x \notin \overline{C}^{\raisemath{-1.5pt}{\so}}$, so folgt mit dem Lemma von Zorn (bzw. mit Hahn-Banach für lokalkonvexe Räume), dass $\overline{\varphi} \in \mathcal{B}(\mathcal{H})^*$ $\so$-stetig existiert mit $\dist(\overline{\varphi}(x),\overline{\varphi}(C))>0$.
 	Dies ist ein Widerspruch.
 \end{beweis}
 
-\begin{proposition}[label=prop:621,{name=[Involution stark stetig auf einer Teilmenge]}]
+\begin{proposition}[label=prop:621,{name=[Involution stark stetig auf normalen Elementen]}]
 	Die Involution ist $\so$-stetig auf $\set*{x \in \mathcal{B}(\mathcal{H}) \given x \text{ normal} }$.
 \end{proposition}
 \begin{beweis}
 	Für $x,y \in \mathcal{B}(\mathcal{H})$ normal und $\xi \in \mathcal{H}$ gilt 
 	\begin{align}
-		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
-		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal*{\xi}{(y-x)y^* \xi} + \Underbracket{\skal*{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\[-.8ex]
-		&\le \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
+		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
+		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal[\big]{\xi}{(y-x)y^* \xi} + \Underbracket{\skal[\big]{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\[-1em]
+		&\StackTextClap{C.S.}{\le} \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
 	\end{align}
 	Falls nun $x_\lambda \grenzw{\so} y$ in $\mathcal{B}(\mathcal{H})$, so gilt 
 	\[
-		\norm*{(x_\lambda^* -y^*)\xi} \le \Underbracket{\norm*{x_\lambda \xi}^2 - \norm*{y \xi}^2}{\to 0} + \Underbracket{\norm*{(y-x_\lambda)y^* \xi} \cdot \norm*{\xi}}{\to 0} \qedhere
+		\norm*{(x_\lambda^* -y^*)\xi} \le \Underbracket{\norm*{x_\lambda \xi}^2 - \norm*{y \xi}^2}{\to 0} + \Underbracket{2 \cdot \norm*{(y-x_\lambda)y^* \xi} \cdot \norm*{\xi}}{\to 0} \grenzw{} 0 \qedhere
 	\]
 \end{beweis}
 
@@ -2410,8 +2411,8 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Eine stetige Funktion $f \colon \mathbb{R} \to \mathbb{C}$ heißt \Index{stark stetig}, falls für jeden Hilbertraum $\mathcal{H}$ und jedes Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ mit $x_\lambda \grenzw{\so} x \in \mathcal{B}(\mathcal{H})_\sa$ gilt $f(x_\lambda) \grenzw{\so}f(x)$.
 \end{definition}
 
-\begin{proposition}[label=prop:623]
-	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.
+\begin{proposition}[label=prop:623,{name=[jede beschränkte stetige Funktion ist stark stetig]}]
+	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.\todo{Revision 6}
 \end{proposition}
 \begin{beweis}
 	Sei $S := \set*{f \colon \mathbb{R}\to \mathbb{C} \given f \text{ stark stetig}}$ und $S_b := S \cap C_b(\mathbb{R})$.
@@ -2422,22 +2423,26 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		\grenzw{} 0
 	\]
 	Damit ist $f \cdot g \in S$, das heißt $S_b \cdot S \subset S$ und $S_b \cdot S_b \subset S_b$.
-	Weiter gilt: $S_b$ ist selbstadjungiert, also $S_b^*=S_b$ (nach \autoref{prop:621}, denn $f(x)$ für $x$ selbstadjungiert ist normal und $f(x) \mapsto f(x)^*$ ist $\so$-stetig) und $S_b$ ist $\norm*{\cdot}_\infty$-abgeschlossen.
+	Weiter ist $S_b$ selbstadjungiert, also $S_b^*=S_b$, denn  $f(x)$ für $x$ selbstadjungiert  ist normal und nach \autoref{prop:621} ist $f(x) \mapsto f(x)^*$ $\so$-stetig. 
+	Außerdem ist $S_b$ abgeschlossen unter $\norm*{\cdot}_\infty$.
 	Insbesondere ist $S_b \subset C_b(\mathbb{R})$ eine $C^*$-Unteralgebra.
 	Ebenso $S_b \cap C_0(\mathbb{R}) =: S_0 \subset C_0(\mathbb{R})$.
+	
 	Die Funktionen $t \mapsto f(t):= \frac{1}{1+t^2}$ und $t \mapsto g(t) := \frac{t}{1+t^2}$ sind in $C_0(\mathbb{R})$ mit $\norm*{f}_\infty, \norm*{g}_\infty\le 1$.
 	Behauptung: $f$ und $g$ sind in $S_0$ enthalten.
-	
-	Für $x,y \in \mathcal{B}(\mathcal{H})_\sa$ gilt $g(x)-g(y)= \ldots = (1+x^2)^{-1}(x-y+x(y-x)y)(1+y^2)^{-1}$. 
-	Für $\xi \in \mathcal{H}$ gilt dann weiter 
+	Für $x,y \in \mathcal{B}(\mathcal{H})_\sa$ gilt 
 	\[
-		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le 1 \cdot \norm*{(x-y)(1+y^2)^{-1} \xi} + 1 \cdot \norm*{(y-x) y(1+y^2)^{-1} \xi}
+		g(x)-g(y)= \ldots = (\ind+x^2)^{-1} \enbrace[\big]{x-y+x(y-x)y} (\ind+y^2)^{-1} 
 	\]
-	Damit ist $g \in S_0$.
+	Für $\xi \in \mathcal{H}$ gilt dann weiter, da $\norm*{(\ind+x^2)^{-1}} \le 1$ ist
+	\[
+		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le \norm*{(x-y)(\ind+y^2)^{-1} \xi} + \norm*{x(y-x) y(\ind+y^2)^{-1} \xi}
+	\]
+	Damit ist $g$ auch in $S_0$.
 	Weiter ist $(t \mapsto t) \in S$, also $\enbrace*{t \mapsto t \cdot g(t)} \in S$ und $\enbrace*{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
 	Damit ist die Behauptung gezeigt.
 	
-	Nach Stone-Weierstraß ist $^*\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält eine strikt positive Funktion.
+	Nach Stone-Weierstraß ist $^*\text{-}\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält eine strikt positive Funktion.
 	Damit folgt $S_0=C_0(\mathbb{R})$.
 	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$ und dann ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
 	\[
@@ -2467,7 +2472,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$\marginnote{auf Vektoren überprüfen}
 		 \item Sei $a \in B^1_\sa$. Nach (i) existiert ein Netz $(a_\lambda)_\Lambda \subset A_\sa$ mit $a_\lambda \grenzw{\so}a$.
 		 Sei $f \in C_b(\mathbb{R})$ gegeben durch \cref{fig:624}.
-		 \begin{figure}[t]
+		 \begin{figure}[bht]
 		 	\centering{
 			\begin{tikzpicture}
 				\draw[] (-2,0) -- (2,0);
