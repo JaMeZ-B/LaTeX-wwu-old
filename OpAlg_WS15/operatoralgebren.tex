@@ -2241,7 +2241,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Außerdem gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
 \end{beweis}
 
-\begin{erinnerungA}[{name=[schwache Operatortopologie]}]
+\begin{erinnerungA}[{name=[schwache Operatortopologie]},label=erinnerung:616]
 	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen
 	\[
 		p_{\eta,\xi}(x) := \abs[\big]{\skal*{\eta}{x \xi}} 
@@ -2416,7 +2416,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 \end{definition}
 
 \begin{proposition}[label=prop:623,{name=[jede beschränkte stetige Funktion ist stark stetig]}]
-	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.\todo{Revision 6}
+	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.
 \end{proposition}
 \begin{beweis}
 	Sei $S := \set*{f \colon \mathbb{R}\to \mathbb{C} \given f \text{ stark stetig}}$ und $S_b := S \cap C_b(\mathbb{R})$.
@@ -2442,20 +2442,26 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\[
 		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le \norm*{(x-y)(\ind+y^2)^{-1} \xi} + \norm*{x(y-x) y(\ind+y^2)^{-1} \xi}
 	\]
-	Damit ist $g$ auch in $S_0$.
-	Weiter ist $(t \mapsto t) \in S$, also $\enbrace*{t \mapsto t \cdot g(t)} \in S$ und $\enbrace*{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
+	Damit ist $g$ stark stetig und somit in $S_0$.
+	Weiter ist $(t \mapsto t) \in S$, also $\enbrace[\big]{t \mapsto t \cdot g(t)} \in S$ und $\enbrace[\big]{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
 	Damit ist die Behauptung gezeigt.
 	
-	Nach Stone-Weierstraß ist $^*\text{-}\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält eine strikt positive Funktion.
+	Nach Stone-Weierstraß ist $^*\text{-}\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält mit $f$ eine strikt positive Funktion.
 	Damit folgt $S_0=C_0(\mathbb{R})$.
-	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$ und dann ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
+	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$, also ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
 	\[
-		\enbrace[\big]{t \longmapsto h(t) \cdot f(t) + t \cdot h(t) \cdot g(t)=h(t)} \in S_b \qedhere
+		\enbrace[\big]{t \longmapsto h(t) \cdot f(t) + t \cdot h(t) \cdot g(t)=h(t)} \in S_b
 	\]
+	Also gilt $S_b \subset C_b(\mathbb{R})$ und damit ist die Behauptung gezeigt.
 \end{beweis}
 
-\begin{satz}[label=satz:624,name={Kaplansky's Dichtesatz}]
-	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.\marginnote{Dass $B$ vN-Algebra ist in Aufgabe 1 von Blatt 10 gezeigt}
+Zum krönenden Abschluss dieses Kapitels wollen wir noch den Dichtesatz von Kaplansky beweisen, über den \citeauthor{PedC*} in seinem Buch \citetitle{PedC*} schreibt:
+\begin{quote}
+	\foreignblockquote{english}[{\cite[S. 25]{PedC*}}]{\itshape The density theorem is Kaplansky's great gift to mankind. It can be used every day, and twice on Sundays.}
+\end{quote}
+
+\begin{satz}[label=satz:624,name={Kaplanskys Dichtesatz}]
+	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra\marginnote{$B$ ist vN-Algebra nach Aufgabe 1\newline von Blatt 10} und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.
 	Dann gilt
 	\begin{enumerate}[(i),itemsep=2pt]
 		\item $\overline{A_\sa}^\so = \overline{A_\sa}^\wo= B_\sa$
@@ -2466,20 +2472,20 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	Die starken und schwachen Abschlüsse stimmen überein nach \autoref{prop:620}.
+	Die starken und schwachen Abschlüsse stimmen jeweils überein nach \autoref{prop:620}.
 	\begin{enumerate}[(i)]
 		\item Falls $a \in B_\sa$, so existiert $(a_\lambda)_\Lambda \subset A$ mit $a_\lambda \grenzw{\wo}a$.
-		 Dann gilt aber auch $a_\lambda^* \grenzw{\wo}a^*=a$ (nach \autoref{erinnerung:61}) und damit 
+		 Dann gilt aber auch $a_\lambda^* \grenzw{\wo}a^*=a$ nach \autoref{erinnerung:616} und damit 
 		 \[
-		 	A_\sa \ni\frac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
+		 	A_\sa \ni\sfrac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
 		 \]
-		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$\marginnote{auf Vektoren überprüfen}
+		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$, wobei die zweite Inklusion offensichtlich ist.
 		 \item Sei $a \in B^1_\sa$. Nach (i) existiert ein Netz $(a_\lambda)_\Lambda \subset A_\sa$ mit $a_\lambda \grenzw{\so}a$.
 		 Sei $f \in C_b(\mathbb{R})$ gegeben durch \cref{fig:624}.
 		 \begin{figure}[bht]
 		 	\centering{
 			\begin{tikzpicture}
-				\draw[] (-2,0) -- (2,0);
+				\draw (-2,0) -- (2,0);
 				\draw (0,-1.2)-- (0,1.2);
 				\draw (-.1,-1) node[left]{$-1$} -- ++(.2,0);
 				\draw (-.1,1) node[left]{$1$} -- ++(.2,0);
@@ -2501,11 +2507,11 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		 \end{figure}
 		 $f$ ist stark stetig nach \autoref{prop:623}.
 		 Also ist $A_\sa^1 \ni  f(a_\lambda) \grenzw{\so} f(a)=a$ und damit $a \in \overline{A^1_\sa}^\so$.
-		 Wir haben also $B^1_\sa \subseteq \overline{A^1_\sa}^\so$ gezeigt. Die andere Inklusion ist klar.
-		 \item Wie (ii) mit $g$ anstatt $f$.
+		 Wir haben also $B^1_\sa \subseteq \overline{A^1_\sa}^\so$ gezeigt. Die andere Inklusion ist wieder klar.
+		 \item Wie (ii) mit $g$ anstatt $f$, siehe \cref{fig:624}.
 		 \item Sei $a \in B^1$.
-		 Dann ist $\begin{psmallmatrix*}[l] 0 & a \\ a^* & 0 \end{psmallmatrix*} \in M_2(B)_\sa \subset \mathcal{B} \enbrace*{\mathcal{H}^{\oplus 2}}$. 
-		 Es gilt $\overline{M_2(A)}^\so=M_2(B)$ und nach (iii) existiert $(b_\lambda)_\Lambda \subset M_2(A)^1_\sa$ mit 
+		 Dann ist $\begin{psmallmatrix*}[l] 0 & a \\ a^* & 0 \end{psmallmatrix*} \in M_2(B)_\sa^1 \subset \mathcal{B} \enbrace*{\mathcal{H}^{\oplus 2}}$. 
+		 Es gilt $\overline{M_2(A)}^\so=M_2(B)$ und nach (ii) existiert $(b_\lambda)_\Lambda \subset M_2(A)^1_\sa$ mit 
 		 \(
 		 	\begin{psmallmatrix}
 		 		b_{\lambda,1,1} & b_{\lambda,1,2} \\
@@ -2535,7 +2541,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 				0 & 0
 			\end{pmatrix}
 		 \]
-		 Also ist $b_{\lambda,1,2} \in A^1$, wir erhalten $b_{\lambda,1,2} \grenzw{\so} a$ und damit $a \in \overline{A^1}^\so$.
+		 Also ist $b_{\lambda,1,2} \in A^1$ und wir erhalten $b_{\lambda,1,2} \grenzw{\so} a$, also $a \in \overline{A^1}^\so$.
 		 Wir haben somit die Inklusion $B^1 \subseteq \overline{A^1}^\so$ gezeigt; die andere ist wieder klar.
 		 \item Nach \autoref{korr:613} (ii) gilt $\mathcal{U}(B) = \overline{\set*{e^{i \pi h} \given h \in B^1_\sa}}^{\norm*{\cdot}}$.
 		 Zu $u \in \mathcal{U}(B)$ und $\varepsilon>0$ existiert ein $h \in B^1_\sa=\overline{A^1_\sa}^\so$ mit $\norm*{e^{i \pi h}-u}<\varepsilon$.
@@ -2877,7 +2883,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\]
 \end{beweis}
 
-\begin{satz}[label=satz:712]
+\begin{satz}[label=satz:712,{name=[reiner Zustand der Norm erfüllt]}]
 	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A_+$.
 	Dann existiert $\rho \in PS(A)$ mit $\rho(a)=\norm*{a}$.
 \end{satz}
