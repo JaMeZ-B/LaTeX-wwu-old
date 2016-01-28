@@ -3164,7 +3164,7 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	und daher $^v E^2_{p,q}=H_p \enbrace*{P_* \otimes_R H_q(C_*)}= \Tor_p^R \enbrace*{V, H_q(C_*)}$.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[label=satz:hir_tensorprod_homologie]
 	Sei $R$ ein Hauptidealring, $V$ ein $R$-Modul und $C_*$ ein $R$-Kettenkomplex von freien $R$-Moduln.
 	Dann gibt es eine eine kurze exakte Folge
 	\[
@@ -3184,6 +3184,90 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	\]
 	wobei jedes $C_*^\ssbbrace{i}$ nur eine nicht-triviale Homologiegruppe hat.
 	Dann spaltet die obige Sequenz für jedes $C_*^\ssbbrace{i}$ (auf triviale Weise!) und damit auch für $C_*$.
+\end{beweis}
+
+\begin{satz}
+	Sei $R$ ein Hauptidealring, $V$ ein $R$-Modul und $X$ ein topologischer Raum.
+	Dann gibt es eine kurze exakte Folge 
+	\[
+		\begin{tikzcd}
+			0 \rar & H_n(X;R) \otimes_R V \rar & H_n(X;V) \rar & \Tor_1^R \enbrace*{H_{n-1}(X),V} \rar & 0
+		\end{tikzcd}
+	\] 
+	Diese Folge ist natürlich in $X$ und $V$ und spaltet, aber der Spalt kann nur in $V$ natürlich gewählt werden.
+\end{satz}
+\begin{beweis}
+	Wende \autoref{satz:hir_tensorprod_homologie} auf $C_* := C_*^\sing(X;R)$ an und benutze 
+	\[
+		C_*^\sing(X;V) = C^\sing_*(X;\mathbb{Z}) \otimes_\mathbb{Z} V \cong \enbrace*{C_*^\sing(X;R) \otimes_\mathbb{Z} R} \otimes_R V \cong C_*^\sing(X;R) \otimes_R V \qedhere
+	\]
+\end{beweis}
+
+\begin{satz}[{name={Kohomologische Spektralfolge einer Filtrierung}}]
+	Sei $C^*$ ein Kokettenkomplex.
+	Sei $F^s C^*$ eine (absteigende) Filtrierung auf $C^*$ mit
+	\[
+		C^n =F^0 C^n \supset F^1C^n \supset \ldots \supset F^nC^n \supset F^{n+1} C^n=0
+	\]
+	Dann gibt es eine kohomologische Spektralfolge
+	\(
+		E^{p,q}_r \Rightarrow H^{p+q}(C_*)
+	\)
+	mit 
+	\[
+		E_0^{p,q}= \frac{F^pC^{p+q}}{F^{p-q}C^{p+q}} \qquad E^{p,q}_1 = H^{p+q}\enbrace*{E_0^{p,*}}
+	\]
+\end{satz}
+\begin{beweis}
+	Wie im homologischen Fall.
+	Es ist 
+	\[
+		E^{p,q}_r := \frac{d^{-1} \enbrace*{F^{p+r}C^{p+q+1}} \cap F^pC^{p+q} + F^{p+1}C^{p+q}}{d \enbrace*{F^{p-r+1} C^{p+q-1}} \cap F^p C^{p+q} + F^{p+1}C^{p+q}} 
+	\]
+	und $d^{p+1}_r[a]=[d a]$ für $a \in d^{-1} \enbrace*{F^{p+r}C^{p+q+1}} \cap F^pC^{p+q}$.
+\end{beweis}
+
+\begin{satz}
+	Sei $R$ ein Ring, $C_*$ Kettenkomplex von projektiven $R$-Moduln und $W$ ein $R$-Modul.
+	Dann gibt es eine kohomologische Spektralfolge $\Ext_R^p \enbrace*{H_q(C_*),W} \Rightarrow H^{p+q} \enbrace*{\Hom(C_*,W)}$
+\end{satz}
+\begin{beweis}
+	Sei $I^* \to W$ eine injektive Auflösung von $W$.
+	Betrachte auf $\Hom(C_*,I^*)$ die Filtrierungen 
+	\begin{align}
+		^h F^s \enbrace[\big]{\Hom(C_*,I^*)} &:= \Hom \enbrace*{C_*, I^{*\ge s}} \qquad \text{ und } \\
+		^v F^s \enbrace[\big]{\Hom(C_*,I^*)} &:= \Hom \enbrace*{C_{*\ge s}, I^*}
+	\end{align}
+	sowie die zugehörigen Spektralfolgen $^h E^{p,q}_r$ und $^v E^{p,q}_r$.
+	Es ist $^v E^{p,q}_0 = \Hom \enbrace*{C_p,I^q}$ und $^v d_0^{p,q}$ wird von $\partial^I$ induziert.
+	Also gilt 
+	\[
+		^v E^{p,q}_1 = H^q \enbrace*{\Hom(C_P, I^*)} \StackText{projektiv}{\cong}\Hom \enbrace*{C_p, H^q(I^*)} \cong \begin{cases}
+			\Hom_R(C_p,W) &\text{ falls }q=0\\
+			0 &\text{ sonst}
+		\end{cases}
+	\]
+	und $d_2^{p,q}$ wird von $d_C$ induziert.
+	Daher ist 
+	\[
+		^v E^{p,q}_2 = \begin{cases}
+			H^p \enbrace*{C_*,W} &\text{ falls }q=0\\
+			0 &\text{ sonst}
+		\end{cases}
+	\]
+	und die Spektralfolge kollabiert bei $E^2$.
+	Es folgt 
+	\[
+		H^* \enbrace*{\Hom(C_*,I^*)} \cong H^* \enbrace*{\Hom(C_*,W)}
+	\]
+	Insbesondere folgt $^h E^{p,q}_2 \Rightarrow H^* \enbrace*{\Hom(C_*,W)}$.
+	Es ist $^h E^{p,q}_0 = \Hom \enbrace*{C_p,I^q}$ und $^h d^{p,q}_0$ wird von $d^C$ induziert.
+	Daher ist 
+	\[
+		^h E^{p,q}_1 = H^p \enbrace*{\Hom(C_*,I^q)} \StackText{injektiv}{=\joinrel=} \Hom \enbrace*{H_p(C_*),I^q}
+	\]
+	und $^h d_1^{p,q}$ wird von $\partial^I$ induziert.
+	Also ist $^h E^{p,q}_2 = H^q \enbrace*{\Hom_R \enbrace*{H_p(C_*),I^*}} = \Ext_R^q \enbrace*{H_p(C_*),W}$.
 \end{beweis}
 % section 17 (end)
 
