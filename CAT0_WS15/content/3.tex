@@ -710,12 +710,40 @@ Um dies zu beweisen, müssen wir zuerst Hyperebenen einführen.
 		\[
 			D(x,y) = \# \{ H \subseteq X : H \text{ ist Hyperebene in } X\text{ die } x \text{ und } y \text{ trennt}\}.
 		\]
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=2,>=Latex]
+			
+				\draw [very thick,blue,schraffiert=blue] (1,1.5) -- (2,1.5) -- (2.5,2) -- (1.5,2) -- cycle;
+				\draw [very thick,teal,schraffiert=teal] (1.25,1.25) -- (2.25,1.25) node[anchor=north west]{$H_3$} -- (2.25,2.25) -- (1.25,2.25) -- cycle;
+				\draw [very thick,orange,schraffiert=orange] (1.5,1) -- (2,1.5) -- (2,2.5) -- (1.5,2) -- cycle;
+				\draw [thick,dashed] (1,1) -- (1.5,1.5) -- (1.5,2.5);
+				\draw [thick,dashed] (1.5,1.5) -- (2.5,1.5);
+				\draw (0,1) -- (2,1) -- (2,0) -- (1,0) -- (1,2) -- (1.5,2.5) -- (3.5,2.5) -- (3.5,1.5) -- (2.5,1.5) -- (2,1) -- (2,2) -- (2.5,2.5);
+				\draw (0,1) -- (0,2) -- (2,2);
+				\draw (2.5,1.5) -- (2.5,2.5);
+				
+				\draw [color=red] (1,1) node[fill,circle,inner sep=1.5pt]{};
+				\draw [color=red] (3.5,2.5) node[fill,circle,inner sep=1.5pt]{};
+				\draw [color=red] (1,1) node[anchor=north east]{$x$};
+				\draw [color=red] (3.5,2.5) node[right]{$y$};
+				
+				\draw [very thick,blue] (0,1.5) node[left]{$H_1$} -- (1,1.5);
+				\draw [very thick,orange] (1.5,0) node[below]{$H_2$} -- (1.5,1);
+				\draw [very thick,blue] (2.5,2) -- (3.5,2);
+				\draw [very thick,red] (1,1) -- (1,2) -- (2,2) -- (2.5,2.5) -- (3.5,2.5);
+				
+				\draw [very thick,Magenta3] (3,1.5) node[below]{$H_4$} -- (3,2.5);
+				\draw [color=red] (2.5,0.5) node[right]{$D(x,y) = 4$};
+			\end{tikzpicture}
+		\end{figure}
 \end{lemma}
-
+\newpage
 \begin{definition}[medianer Graph]
 	\label{def:3.22}
 		Sei $\Gamma = (V,E)$ ein Graph.
-		Das Intervall $I(u,v)$ für $u,v \in V$ ist definiert durch \todo{Bild einfügen}
+		Das Intervall $I(u,v)$ für $u,v \in V$ ist definiert durch 
 		\[
 			I(u,v) = \{x \in V : d(u,v) = d(u,x) + d(x,v)\}
 		\]
@@ -725,8 +753,47 @@ Um dies zu beweisen, müssen wir zuerst Hyperebenen einführen.
 		\]
 \end{definition}
 
+\begin{beispiel}
+	\label{bsp:3.23}
+	\mbox{} \\[-1.3cm]
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=1,>=Latex]
+			\foreach \x in {2,...,5}{
+				\draw (\x,1.5) -- (\x,5.5);
+				\draw (1.5,\x) -- (5.5,\x);
+			}
+			\foreach \y in {1.96,2.96,3.96,4.96}
+				\foreach \x in {1.96,2.96,3.96}
+					\draw [color=red] (\x,\y) node [fill,circle,inner sep=2pt]{};
+					
+			\foreach \y in {3.96,4.96}
+				\foreach \x in {2.04,3.04,4.04,5.04}
+					\draw [color=blue] (\x,\y) node [fill,circle,inner sep=2pt]{};		
+
+			\foreach \y in {2.04,3.04,4.04}
+				\foreach \x in {4,5}
+					\draw [color=Green4] (\x,\y) node [fill,circle,inner sep=2pt]{};	
+					
+			\draw [color=Magenta3] (1.95,5.05) node[anchor=south east]{$u$};
+			\draw [color=Magenta3] (5.05,4.05) node[anchor=south west]{$w$};
+			\draw [color=Magenta3] (4.05,1.95) node[anchor=north west]{$v$};
+			
+			\draw [thick,color=Magenta3] (4,4) circle (.35);
+			
+			\draw [color=red] (2,2) node[anchor=north east]{$I(u,v)$};
+			\draw [color=blue] (5,5) node[anchor=south west]{$I(u,w)$};
+			\draw [color=Green4] (5,2) node[anchor=north west]{$I(v,w)$};
+			
+			\draw [color=Magenta3] (7,3) node[right]{$I(u,v) \cap I(v,w) \cap I(u,w)$};
+			\draw [very thick,dashed,Magenta3] (4.3,3.7) -- (6.8,3);
+		\end{tikzpicture}
+
+	\end{figure}
+\end{beispiel}
+
 \begin{satz}
-	\label{satz:3.23}
+	\label{satz:3.24}
 		Sei $X$ ein $\CAT$ kubischer Komplex und $X^{(1)}$ das $1$-Skelett.
 		Dann ist $(X^{(1)},D)$ median.
 \end{satz}
@@ -740,7 +807,7 @@ Um dies zu beweisen, müssen wir zuerst Hyperebenen einführen.
 		z \in I(x,y) \Leftrightarrow \text{ es ex. keine Hyperebene, die } z \text{ und } \{x,y\} \text{ trennt.}
 	\]
 	
-	Beweis des Hilfslemmas:
+	\textit{Beweis des Hilfslemmas:}
 	Wir definieren
 	\[
 		W(x,y) := \{H \subseteq X : H \text{ ist Hyperebene, die } x \text{ und } y \text{ trennt.}\}
@@ -752,32 +819,53 @@ Um dies zu beweisen, müssen wir zuerst Hyperebenen einführen.
 		&\stack{\ref{lemma:3.21}}{\Leftrightarrow} \#W(x,y) = \#W(x,z) + \#W(z,y) \\
 		&\stack{}{\Leftrightarrow} W(x,y) = W(x,z) \sqcup W(z,y) \\
 		&\stack{}{\Leftrightarrow} \text{ es existiert keine Hyperebene, die } z \text{ und } x \text{ trennt und } z \text{ und } y \text{ trennt} \\
-		&\stack{}{\Leftrightarrow} \text{ es ex. keine Hyperebene, die } z \text{ und } \{x,y\} \text{ trennt}
+		&\stack{}{\Leftrightarrow} \text{ es existiert keine Hyperebene, die } z \text{ und } \{x,y\} \text{ trennt}
 	\end{align*}
 	
-	Zurück zum Beweis:
+	Zurück zum eigentlichen Beweis:
 	Seien $x,y,z \in X^{(0)}$ paarweise verschieden.
 	\begin{enumerate}[(i)]
 		\item Zuerst zeigen wir $I(x,y) \cap I(x,z) \cap I(y,z) \neq \emptyset$.
 		Wähle $m \in I(x,y) \cap I(x,z)$ mit $D(x,m)$ maximal.
 		Zu zeigen ist $m \in I(y,z)$.
 		
-		Angenommen, $m \notin I(y,z)$.
-		Nach dem Hilfslemma existiert eine Hyperebene $H$, die $m$ und $\{y,z\}$ trennt.
-		Wähle $H$ mit minimalem Abstand zu $m$. \todo{Bild einfügen}
-		
-		Wähle $w \in H^+$ mit $D(m,w) = 1$.
-		Es gilt $w \in I(x,y)$ und $w \in I(x,z)$.
-		Weiter gilt $D(x,w) = D(x,m) + D(m,w) \geq D(x,m)$.
-		Dies ist ein Widerspruch, da $m$ mit maximalem Abstand gewählt wurde.
+		\begin{minipage}{0.75\textwidth}
+			Angenommen, $m \notin I(y,z)$.
+			Nach dem Hilfslemma existiert eine Hyperebene $H$, die $m$ und $\{y,z\}$ trennt.
+			Wähle $H$ mit minimalem Abstand zu $m$.
+			
+			Wähle $w \in H^+$ mit $D(m,w) = 1$.
+			Es gilt $w \in I(x,y)$ und $w \in I(x,z)$.
+			Weiter gilt $D(x,w) = D(x,m) + D(m,w) \geq D(x,m)$.
+			Dies ist ein Widerspruch, da $m$ mit maximalem Abstand gewählt wurde.
+		\end{minipage}
+		~
+		\begin{minipage}{0.2\textwidth}
+			\begin{flushright}
+				\begin{tikzpicture}[scale=1,>=Latex]
+				\draw (0,.7) -- (0,3.75) node[above]{$H$};
+				\draw (-.5,3.5) node[left]{$H^-$};
+				\draw (.5,3.5) node[right]{$H^+$};
+				
+				\draw [thick] (-.5,2) node[below]{$m$} -- (.5,2) node[below]{$w$};
+				\draw (-.5,2) node[fill,circle,inner sep=1.5pt]{};
+				\draw (.5,2) node[fill,circle,inner sep=1.5pt]{};
+				
+				\draw (1,3) node[fill,circle,inner sep=1.5pt]{};
+				\draw (1,3) node[right]{$y$};
+				\draw (1,1) node[fill,circle,inner sep=1.5pt]{};
+				\draw (1,1) node[right]{$z$};
+			\end{tikzpicture}
+			\end{flushright}
+		\end{minipage}
 		
 		Es ist $w \in I(x,y)$:
-		Ansonsten existiert nach Hilfslemma eine Hyperebene $J$, die $w$ und $\{x,y\}$ trennt. \todo{Bild einfügen}
+		Ansonsten existiert nach Hilfslemma eine Hyperebene $J$, die $w$ und $\{x,y\}$ trennt.
 		Es gilt $m \notin J^+$, denn $m \in I(x,y)$, also $m \in J^-$.
 		Folglich trennt die Hyperebene $J$ $w$ und $m$.
 		Es gilt $D(m,w) = 1$, das heißt $J = H$, aber $H$ trennt $m$ und $y$. Widerspruch.
 		
-		Zur Eindeutigkeit:
+		\item Zur Eindeutigkeit:
 		Wir definieren
 		\[
 			\mathcal{HR} := \{\text{Halbräume, die mindestens zwei Elemente aus } x,y,z \text{ enthalten}.
@@ -795,7 +883,7 @@ Um dies zu beweisen, müssen wir zuerst Hyperebenen einführen.
 		Widerspruch. \qedhere
 	\end{enumerate}
 \end{beweis}
-
+\newpage
 \begin{beweis}[\autoref{thm:3.14}]
 	Wir zeigen per Induktion, dass für $k = 2, \dots, m$ die $k$-elementigen Mengen aus $\mathcal{S}$ sich nichttrivial schneiden.
 	Für $k=2$ ist dies nach Voraussetzung erfüllt.
