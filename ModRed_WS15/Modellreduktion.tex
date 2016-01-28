@@ -8,7 +8,7 @@
 
 
 \numberwithin{equation}{section}
-
+\numberwithin{figure}{section}
 
 \begin{document}
 \maketitle
@@ -3130,6 +3130,45 @@ Dann kann das Modellproblem (7.1) äquivalent auf dem zerlegten Gebiet wie folgt
 u_1 &= u_2 \text{ auf } \Gamma; ~\nabla u_1 \cdot n_1 = - \nabla u_2\cdot n_2 \text{ auf } \Gamma \text{ 'transmission conditions'}.
 \end{split}
 \end{align}
+
+\begin{figure}[ht]
+\begin{minipage}{7.5cm}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\clip(-1.,-1.) rectangle (7.,4.);
+\fill[color=black,fill=black,fill opacity=0.1] (0.,0.) -- (6.,0.) -- (6.,3.) -- (0.,3.) -- cycle;
+\draw [color=black] (0.,0.)-- (6.,0.);
+\draw [color=black] (6.,0.)-- (6.,3.);
+\draw [color=black] (6.,3.)-- (0.,3.);
+\draw [color=black] (0.,3.)-- (0.,0.);
+\draw[color=black] (3.,1.5) node {\Large$\Omega$};
+\draw[color=black] (3.06,-0.16) node[below] {$\Sigma_N$};
+\draw[color=black] (6.38,1.66) node {$\Sigma_D$};
+\draw[color=black] (3.06,3.48) node {$\Sigma_N$};
+\draw[color=black] (-0.26,1.66) node {$\Sigma_D$};
+\end{tikzpicture}
+\caption{Gebiet $\Omega$}
+\end{minipage}
+\begin{minipage}{7.5cm}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\clip(-1.,-1.) rectangle (7.,4.);
+\fill[color=black,fill=black,fill opacity=0.1] (0.,0.) -- (6.,0.) -- (6.,3.) -- (0.,3.) -- cycle;
+\draw [color=black] (0.,0.)-- (6.,0.);
+\draw [color=black] (3.,0.)-- (3.,3.);
+\draw [color=black] (6.,0.)-- (6.,3.);
+\draw [color=black] (6.,3.)-- (0.,3.);
+\draw [color=black] (0.,3.)-- (0.,0.);
+\draw[color=black] (1.5,1.5) node {\Large$\Omega_1$};
+\draw[color=black] (4.5,1.5) node {\Large$\Omega_2$};
+\draw[color=black] (3.3,1.5) node {$\Gamma$};
+\draw[color=black] (3.06,-0.16) node[below] {$\Sigma_N$};
+\draw[color=black] (6.38,1.66) node {$\Sigma_D$};
+\draw[color=black] (3.06,3.48) node {$\Sigma_N$};
+\draw[color=black] (-0.26,1.66) node {$\Sigma_D$};
+\end{tikzpicture}
+\caption{Gebietszerlegung von $\Omega$}
+\end{minipage}
+\end{figure}
+
 Beachte das die Äquivalenz im schwachen Sinne zu verstehen ist ($\to$ 7.1.2).
 Wir können (7.2) weiter zu einem Problem mit einer gesuchten Funktion auf dem Interface $\Gamma$ umformulieren.
 Bezeichne dazu mit $\lambda$ den unbekannten und gesuchten Wert von $u$ auf $\Gamma$.
@@ -3174,7 +3213,7 @@ S_{\eta} := \nabla H_1\eta n_1 + \nabla H_2\eta n_2 = \sum_{i=1}^2 \nabla H_i\et
 \subsubsection{Schwache Formulierung des Modellproblems auf zerlegtem Gebiet}
 
 \ssect{7.1 Definiton}{}
-Sei $q\in L^2(\Omega),\Omega,\Sigma_N,\Sigma_D$ wie in Bild 7.1 und $\partial \Omega=\bar{\Sigma}_N\cup \bar{\Sigma}_D$.
+Sei $q\in L^2(\Omega),\Omega,\Sigma_N,\Sigma_D$ wie in Abbildung 7.1 und $\partial \Omega=\bar{\Sigma}_N\cup \bar{\Sigma}_D$.
 Dann heißt $u\in X:=\penbrace{v\in H^1(\Omega)~|~v=0 \text{ auf }\Sigma_D}$ schwache Lösung des Modellproblems (7.1), falls gilt
 \[
 b(u,v)=f(v)~\forall v\in X,
@@ -3186,7 +3225,7 @@ b(u,v) := \int_{\Omega} \nabla u\nabla v,~ f(v):= \int_{\Omega} qv ~\forall u,v\
 Um eine schwache Formulierung des Modellproblems auf zerlegtem Gebiet herleiten zu können benötigen wir zunächst eine adäquate Charakterisierung des Spurraums auf $\Gamma$ mittels Sobolevräumen mit gebrochenem Exponenten.
 
 \ssect{7.2 Definition}{}
-Seien $\Gamma$ und $\Omega_i\subset \R^2$ wie in Bild 7.2, $i=1,2$.
+Seien $\Gamma$ und $\Omega_i\subset \R^2$ wie in Abbildung 7.2, $i=1,2$.
 Für $v\in L^2(\Omega)$ definieren wir die \bet{slobedeckij-Halbnorm} als 
 \[
 [v]_{\frac{1}{2},2,\Gamma} := \enbrace{\int_\Omega \int_\Omega \frac{\abs{v(x)-v(y)}^2}{\norm{x-y}^3}\dint x\dint y}^{\frac{1}{2}},
@@ -3212,7 +3251,7 @@ Unter den Voraussetzungen aus Definition 7.2 ist $H^{\frac{1}{2}}(\Gamma)$ mit d
 \hfill $\square$
 
 \ssect{7.4 Spursatz}{}
-Seien $\Gamma, \Omega_i,i=1,2$ wie in Bild 7.2.
+Seien $\Gamma, \Omega_i,i=1,2$ wie in Abbildung 7.2.
 Dann gilt für $\Omega_1$ (und analog für $\Omega_2$):
 \begin{enumerate}[(1)]
 	\item Es existiert eine eindeutige lineare, stetige Abbildung
@@ -3235,13 +3274,13 @@ Dann gilt für $\Omega_1$ (und analog für $\Omega_2$):
 \hfill $\square$
 
 \ssect{7.5 Bemerkung}{}
-Betrachtet man auf dem ganzen Rand von $\Omega$ homogene Dirichletrandwerte und gilt wie in Bild 7.2 $\partial\Omega\cap \Gamma \neq \emptyset$, so muss auf $\Gamma$ ein andere Spurraum als $H^{\frac{1}{2}}(\Gamma)$ betrachtet werden.
+Betrachtet man auf dem ganzen Rand von $\Omega$ homogene Dirichletrandwerte und gilt wie in Abbildung 7.2 $\partial\Omega\cap \Gamma \neq \emptyset$, so muss auf $\Gamma$ ein andere Spurraum als $H^{\frac{1}{2}}(\Gamma)$ betrachtet werden.
 Für Details siehe zum Beispiel [Quateroni, Valli 2005].\\
 
 Nun können wir die schwache Formulierung des Modellproblems auf zerlegtem Gebiet herleiten.
 
 \ssect{7.6 Lemma}{}
-Seien $q\in L^2(\Omega),\Omega,\Omega_i,\Sigma_N,\Sigma_D,\Gamma$ wie in Bild 7.2, $\partial\Omega=\bar{\Sigma_D}\cup \bar{\Sigma_N}$ und seien
+Seien $q\in L^2(\Omega),\Omega,\Omega_i,\Sigma_N,\Sigma_D,\Gamma$ wie in Abbildung 7.2, $\partial\Omega=\bar{\Sigma_D}\cup \bar{\Sigma_N}$ und seien
 \[
 b_i(u_i,v_i) := \int_{\Omega_i} \nabla u_i\nabla v_i ~\forall u_i,v_i\in H^1(\Omega_i),
 \]
@@ -3305,7 +3344,7 @@ b(u,v) &= \sum_{i=1}^{2} b_i(u_i,v|_{\Omega_i}) = \sum_{i=1}^{2} b_i(u_i,v|_{\Om
 \hfill $\square$
 
 \ssect{7.7 Bemerkung}{}
-(7.15)\textsubscript{4} ist die schwache formulierung der Neumann-Bedingung (7.2)\textsubscript{8}.
+(7.15)\textsubscript{4} ist die schwache Formulierung der Neumann-Bedingung (7.2)\textsubscript{8}.
 
 Nächstes Ziel: Herleitung der Steklov-Poincaré Interface Gleichung im schwachen Sinne.
 
