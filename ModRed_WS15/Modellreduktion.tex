@@ -3227,13 +3227,108 @@ Dann gilt für $\Omega_1$ (und analog für $\Omega_2$):
 	mit der \bet{Spurkonstanten} $c_t>0$.
 	\item Es existiert eine lineare, stetige Abbildung $\mathcal{F}: H^{\frac{1}{2}}(\Gamma)\to H^1(\Omega)$, so dass
 	\begin{align}
-	\mathcal{T}\mathcal{F}\varphi = \varphi ~ \forall \phi\in H^{\frac{1}{2}}(\Gamma).
+	\mathcal{T}\mathcal{F}\varphi = \varphi ~ \forall \varphi\in H^{\frac{1}{2}}(\Gamma).
 	\end{align}
 \end{enumerate}
 
 \bet{Beweis:} [Adams, 1975], [Grisvard, 2011].
 \hfill $\square$
 
+\ssect{7.5 Bemerkung}{}
+Betrachtet man auf dem ganzen Rand von $\Omega$ homogene Dirichletrandwerte und gilt wie in Bild 7.2 $\partial\Omega\cap \Gamma \neq \emptyset$, so muss auf $\Gamma$ ein andere Spurraum als $H^{\frac{1}{2}}(\Gamma)$ betrachtet werden.
+Für Details siehe zum Beispiel [Quateroni, Valli 2005].\\
+
+Nun können wir die schwache Formulierung des Modellproblems auf zerlegtem Gebiet herleiten.
+
+\ssect{7.6 Lemma}{}
+Seien $q\in L^2(\Omega),\Omega,\Omega_i,\Sigma_N,\Sigma_D,\Gamma$ wie in Bild 7.2, $\partial\Omega=\bar{\Sigma_D}\cup \bar{\Sigma_N}$ und seien
+\[
+b_i(u_i,v_i) := \int_{\Omega_i} \nabla u_i\nabla v_i ~\forall u_i,v_i\in H^1(\Omega_i),
+\]
+\[
+f_i(v_i):= \int_{\Omega_i} q|_{\Omega_i} v_i ~\forall v_i\in H^1(\Omega_i),
+\]
+\[
+X_i:= \penbrace{v_i\in H^1(\Omega_i)~|~v_i=0\text{ auf }\Sigma_D\cap\Omega_i},
+\]
+\[
+X_i^0:=\penbrace{v_i\in H^1(\Omega_i)~|~v_i=0\text{ auf }(\Sigma_D\cap\Omega_i)\cup\Gamma}, ~i=1,2.
+\]
+Dann lässt sich die schwache Formulierung des Modellproblems (7.1) aus Definition 7.1 äquivalent wie folgt formulieren:
+Finde $u_1\in X_1,u_2\in X_2$, so dass
+\begin{align}
+\begin{split}
+b_1(u_1,v_1)=f_1(v_1) ~\forall v_1\in X_1^0\\
+b_2(u_2,v_2)=f_2(v_2) ~\forall v_2\in X_2^0\\
+u_1=u_2 \text{ auf }\Gamma\\
+b_2(u_2,\mathcal{F}_2\eta) = f_2(\mathcal{F}_2\eta) + f_1(\mathcal{F}_1\eta) - b_1(u_1,\mathcal{F}_1\eta) ~\forall\eta\in H^{\frac{1}{2}}(\Gamma),
+\end{split}
+\end{align}
+wobei $\mathcal{F}_i:H^{\frac{1}{2}}(\Gamma)\to X_i$ Fortsetzungsoperatoren wie in Satz 7.4.\\
+
+\bet{Beweis:}\\
+Sei zunächst $u$ die schwache Lösung aus Definition 7.1.
+Wir setzen $u_i:=u|_{\Omega_i},i=1,2$ und folgern zunächst, dass $u_i\in X_i$ wegen $u\in X$.
+Ferner gelten (7.15)\textsubscript{1} und (7.15)\textsubscript{2}, da wir zum Beispiel alle Testfunktionen $v_1\in X_1^0$ durch 0 auf $\Omega_2$ fortsetzen können und dadurch zulässige Testfunktionen in $X$ erhalten (folgt aus Satz 7.4, weil die Spur auf $\Gamma$ Null ist).
+
+Weiterhin liegt für jedes $\eta\in H^{\frac{1}{2}}(\Gamma)$ die Funktion
+\begin{align}
+\mathcal{F}_\eta := \left\{\begin{array}{lc} \mathcal{F}_1\eta & \text{in }\Omega_1,\\ \mathcal{F}_2\eta & \text{in } \Omega_2 \end{array}\right.
+\end{align}
+in $X$, was $b(u,\mathcal{F}_\eta) = f(\mathcal{F}_\eta)$ und weiter (7.15)\textsubscript{4} impliziert.
+
+Für (7.15)\textsubscript{3} zeigen wir zunächst: aus $u_i\in X_i$ und $u_1=u_2$ auf $\Gamma$ folgt $u\in X$.
+Wir wissen: $u_i\in X_i$ und $u\in X$.
+Wie wir sehen werden impliziert die Annahme $u_1\neq u_2$ auf $\Gamma$, dass $u\notin H^1(\Omega)$ und damit einen Widerspruch zu $u\in X$.
+
+Gelte also $u_i\in X_i\subset H^1(\Omega_i)$ und $u_1=u_2$ auf $\Gamma$.
+\begin{align*}
+\int_{\Omega} u D_j \varphi &=  \int_{\Omega_1} u|_{\Omega_1} D_j \varphi + \int_{\Omega_2} u|_{\Omega_2} D_j \varphi\\
+&= \int_{\Omega_1} u_1 D_j \varphi + \int_{\Omega_2} u_2 D_j \varphi\\
+&= - \int_{\Omega_1} D_j u_1 \varphi - \int_{\Omega_2} D_j u_2 \varphi + \int_\Gamma u_1 \varphi (n_1)_j + \int_\Gamma u_2 \varphi (n_2)_j\\
+&= - \int_{\Omega_1} D_j u_1 \varphi - \int_{\Omega_2} D_j u_2 \varphi + \int_\Gamma \underbracket{(u_1-u_2)}_{=0} \varphi (n_1)_j\\
+&= - \int_{\Omega} D_j u \varphi, ~\varphi \in C_0^\infty(\Omega).
+\end{align*}
+Seien nun $u_i,i=1,2$ Lösungen von (7.15). 
+Wir setzen
+\[
+u := \left\{\begin{array}{lc} u_1 & \text{in } \Omega_1,\\ u_2 & \text{in } \Omega_2, \end{array}\right.
+\]
+und folgern aus $u_i\in X_i$ und (7.15)\textsubscript{3}, dass $u\in X$.
+Für beliebiges $v\in X$ gilt: $\eta:= \mathcal{T}_\Gamma v \in H^{\frac{1}{2}}(\Gamma)$. Sei $\mathcal{F}_\eta$ wie in (7.16).
+Da $(v|_{\Omega_i} - \mathcal{F}_i\eta)\in X_i^0$ folgt aus (7.15)\textsubscript{1}, (7.15)\textsubscript{2} und (7.15)\textsubscript{3}, dass
+\begin{align*}
+b(u,v) &= \sum_{i=1}^{2} b_i(u_i,v|_{\Omega_i}) = \sum_{i=1}^{2} b_i(u_i,v|_{\Omega_i} - \mathcal{F}_i\eta) + b_i(u_i,\mathcal{F}_i\eta)\\
+&= \sum_{i=1}^2 f_i(v|_{\Omega_i} - \mathcal{F}_i\eta) + f_i(\mathcal{F}_i\eta)\\
+&= \sum_{i=1}^2 f_i(v|_{\Omega_i}) = f(v) ~\forall v\in X.
+\end{align*}
+\hfill $\square$
+
+\ssect{7.7 Bemerkung}{}
+(7.15)\textsubscript{4} ist die schwache formulierung der Neumann-Bedingung (7.2)\textsubscript{8}.
+
+Nächstes Ziel: Herleitung der Steklov-Poincaré Interface Gleichung im schwachen Sinne.
+
+Dazu starten wir von der schwachen Neumann-Bedingung (7.15)\textsubscript{4}, wobei wir wie oben die $u_i$ zerlegen: $u_i = H_i\lambda + R_i q$, jetzt mit $H_i\lambda\in X_i$ und $R_i q \in X_i^0$, wobei $H_i\lambda, R_i q$ Lösungen von
+\begin{align}
+b_i(H_i\lambda,v_i) = 0~ \forall v_i\in X_i^0;~ H_i\lambda = \lambda \text{ auf } \Gamma,\\
+b_i(R_i q, v_i) = f_i(v_i) ~ \forall v_i\in X_i^0.
+\end{align}
+Einsetzen in (7.15)\textsubscript{4} liefert
+\begin{align}
+\sum_{i=1}^2 b_i(H_i\lambda,\mathcal{F}_i\eta) = \sum_{i=1}^2 \bigg[ f_i(\mathcal{F}_i\eta) - b_i(R_i q,\mathcal{F}_i\eta) \bigg] ~\forall \eta\in H^{\frac{1}{2}}(\Gamma).
+\end{align}
+Da $H_i\lambda$ Lösung von (7.17) gilt
+\begin{align}
+\norm{H_i\lambda}_{H^1(\Omega_i)} \le c\cdot \norm{\lambda}_{H^{\frac{1}{2}}(\Gamma)},
+\end{align}
+(siehe zum Beispiel [Lions, Magenes 1972]) und wir können $\mathcal{F}_i\eta = H_i\eta$ in (7.19) wählen.
+Wir erhalten die Steklov-Poincaré Interface Ungleichung im schwachen Sinne:
+
+Finde $\lambda\in H^{\frac{1}{2}}(\Gamma)$, so dass
+\begin{align}
+\sum_{i=1}^2 b_i(H_i\lambda,H_i\eta) = \sum_{i=1}^2 \bigg[ f_i(H_i\eta) - b_i(R_i q, H_i \eta) \bigg] ~\forall \eta\in H^{\frac{1}{2}}(\Gamma).1
+\end{align}
 
 
 
