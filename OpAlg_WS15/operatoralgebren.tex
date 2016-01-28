@@ -2241,7 +2241,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Außerdem gilt $\id_{\sigma(x)} \mapsto x$ und daher setzt das Borel-Funktionalkalkül den Gelfandhomomorphismus fort.
 \end{beweis}
 
-\begin{erinnerungA}[{name=[schwache Operatortopologie]}]
+\begin{erinnerungA}[{name=[schwache Operatortopologie]},label=erinnerung:616]
 	Die \Index{schwache Operatortopologie} $\TWeakOp$ auf $\mathcal{B}(\mathcal{H})$ ist die lokalkonvexe Topologie, welche von den Halbnormen
 	\[
 		p_{\eta,\xi}(x) := \abs[\big]{\skal*{\eta}{x \xi}} 
@@ -2326,8 +2326,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 Wir wollen uns nun noch ein bisschen mehr mit dem Zusammenspiel der verschiedenen Topologien beschäftigen. 
 Für ein lineares Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt: 
 \[
-	\begin{tikzcd}
-		\varphi \text{ $\wo$-stetig} \rar[Rightarrow] & \varphi \text{ $\so$-stetig}  \rar[Rightarrow] & \varphi \text{ $\norm*{\cdot}$-stetig} \\
+	\begin{tikzcd}[row sep=1.6em]
+		\varphi \text{ $\wo$-stetig} \rar[Rightarrow] & \varphi \text{ $\so$-stetig}  \rar[Rightarrow] & \varphi \text{ $\norm*{\cdot}$-stetig} \\[-1.5em]
 		x_\lambda \grenzw{\wo}x \dar[Rightarrow]& x_\lambda\grenzw{\so}x \lar[Rightarrow]\dar[Rightarrow] & x_\lambda\grenzw{\norm*{\cdot}} x \lar[Rightarrow]\dar[Rightarrow] \\
 		\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] &\varphi(x_\lambda) \to \varphi(x) \rar[Leftrightarrow] & \varphi(x_\lambda)\to \varphi(x) 
 	\end{tikzcd}
@@ -2340,69 +2340,74 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $\varphi$ ist $\wo$-stetig.
 		\item $\varphi$ ist $\so$-stetig.
-		\item $\varphi(.)=\sum_{i=1}^{n} \skal*{\eta_i}{.\, \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
+		\item $\varphi(x)=\sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i} $ für $\eta_1,\xi_1, \ldots , \eta_n, \xi_n \in \mathcal{H}$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
 	Die Implikation (i) $\Rightarrow$ (ii) ist klar, da $\TWeakOp \subset \Tso$ ist.
 	Die Implikation (iii) $\Rightarrow$ (i) ist auch klar nach Definition der schwachen Operatortopologie und wir müssen nur (ii) $\Rightarrow$ (iii) zeigen:
-	Sei also $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann $\so$-offen und es existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass 
+	Sei also $\varphi$ $\so$-stetig. Die Menge $S_\varphi := \set*{x \in \mathcal{B}(\mathcal{H}) \given \abs*{\varphi(x)}<1} \subset \mathcal{B}(\mathcal{H})$ ist dann eine $\so$-offene Umgebung der Null und es existieren $\xi_1, \ldots ,\xi_n \in \mathcal{H}$ und ein $\alpha>0$, sodass für die entsprechenden Elemente $U_{0,\xi_i,\alpha}$ der Subbasis\footnote{Es gilt $U_{x,\xi_i,\alpha}=\set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(x-y)\xi_i}< \alpha}$, vergleiche \autoref{erinnerung:61}} von $\Tso$ gilt
 	\[
-		U_{0,\xi_i,\alpha}= \set[\big]{y \in \mathcal{B}(\mathcal{H}) \given \norm*{(y-0)\xi_i}< \alpha}  \subset S_\varphi
+		\bigcap_{i=1}^n U_{0,\xi_i,\alpha}  \subset S_\varphi
 	\]
-	Das heißt für $x \in \mathcal{B}(\mathcal{H})$ gilt: Falls $\norm*{x \xi_i}<\alpha$ ist für alle $i$, so ist $\abs*{\varphi(x)}<1$.\todo{Das stimmt so noch nicht, hier muss noch der Schnitt der $U_{0,\xi_i,\alpha}$ vorkommen}
-	Nach Skalierung der $\xi_i$ gilt für $x \in \mathcal{B}(\mathcal{H})$:
-	Ist $\norm*{x \xi_i} < 1$ für alle $i$, so ist auch $\abs*{\varphi(x)}<1$.
-	Für $x \in \mathcal{B}(\mathcal{H})$ gilt also\todo{die erste Ungleichung sehe ich nicht ein} 
-	\[
-		\abs*{\varphi(x)} \le \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\sfrac{1}{2}}
-	\]
+	Wir bezeichnen die dazugehörigen Halbnormen\marginnote{Details hinzugefügt in Anlehnung an \cite[S.~267~f]{Murphy}} mit $p_{i}(x) := \norm*{x \xi_i}$ und setzen $p(x) := \max_{i} p_i(x)$.
+	Für $x \in \mathcal{B}(\mathcal{H})$ beliebig gilt dann: $p(x)<\alpha \Rightarrow \abs*{\varphi(x)}<1$.
+	Wir setzen $M := \sfrac{2}{\alpha}$ und erhalten, falls $p(x)>0$ ist,
+	\(
+		p \enbrace[\big]{\frac{x}{M \cdot p(x)}} = \frac{\alpha}{2} < \alpha 
+	\).
+	Mit obiger Implikation folgt $\abs[\big]{\varphi \enbrace[\big]{\frac{x}{M \cdot p(x)}}} < 1$ und wir erhalten insgesamt für alle $x \in \mathcal{B}(\mathcal{H})$
+	\begin{equation}
+		\abs*{\varphi(x)} \le M \cdot p(x) = M \cdot \max_i \norm*{x \xi_i}
+	\end{equation}
+	Nach entsprechender Skalierung der $\xi_i$ können wir $M=1$ annehmen und erhalten dann
+	\begin{equation}
+		\abs*{\varphi(x)} \le  \max_i \norm*{x \xi_i} \le \enbrace*{\sum_{i=1}^{n} \norm*{x \xi_i}^2}^{\mkern-5mu\raisemath{-2.2pt}{\sfrac{1}{2}}} \label{eq:619}\tag{\dag}
+	\end{equation}
 	Setze nun 
 	\[
-		\mathcal{H}_0 := \set*{\begin{pmatrix}
-			x \xi_1 \\ \vdots \\ x \xi_n
-		\end{pmatrix} \given x \in \mathcal{B}(\mathcal{H})} \subset \mathcal{H}^{\oplus n}
+		\mathcal{H}_0 := \set*{\begin{psmallmatrix}
+			x \xi_1 \\ \raisemath{2pt}{\vdots} \\ x \xi_n
+		\end{psmallmatrix} \given x \in \mathcal{B}(\mathcal{H})} \subset \mathcal{H}^{\oplus n}
 	\]
-	Dann ist $\psi \colon \mathcal{H}_0 \to \mathbb{C}$, $\begin{psmallmatrix}
-		x \xi_1 \\ \cdot \\ x \xi_n
-	\end{psmallmatrix} \mapsto \varphi(x)$ wohldefiniert, stetig und linear.
+	und definiere $\psi \colon \mathcal{H}_0 \to \mathbb{C}$ durch $\enbrace[\big]{x \xi_1, \ldots , x \xi_n} \mapsto \varphi(x)$. 
+	Man sieht nun, dass $\psi$ wohldefiniert, linear und stetig ist  mit $\norm*{\psi}\le 1$ (unter Benutzung von \eqref{eq:619}).
 	$\psi$ setzt sich also fort zu $\overline{\psi} \colon \overline{\mathcal{H}_0} \to \mathbb{C}$.
-	Mit Riesz folg die Existenz eines eindeutigen $\eta \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(.) = \skal*{\eta}{.}$, also
+	Mit Riesz folgt die Existenz eines eindeutigen $\eta= \enbrace*{\eta_1, \ldots ,\eta_n} \in \overline{\mathcal{H}_0}$ mit $\overline{\psi}(x) = \skal*{\eta}{x}$, also gilt
 	\[
 		\varphi(x) = \overline{\psi} \begin{pmatrix}
 			x \xi_1 \\ \vdots \\ x \xi_n
-		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}
+		\end{pmatrix} = \sum_{i=1}^{n} \skal*{\eta_i}{x \xi_i}\qedhere
 	\]
-	wobei $\eta_i$ die Komponenten von $\eta$ sind.\todo{Revision 6}
 \end{beweis}
 
-\begin{proposition}[{name=[konvexe Menge stark abgeschlossen]},label=prop:620]
+\begin{proposition}[{name=[konvexe Menge stark g.d.w schwach abgeschlossen]},label=prop:620]
 	Sei $C \subset \mathcal{B}(\mathcal{H})$ konvex.
 	Dann ist $C$ $\so$-abgeschlossen genau dann, wenn $C$ $\wo$-abgeschlossen ist.
 \end{proposition}
-\begin{beweis}[Idee]
+\begin{beweis}[name={Idee}]
 	Wenn $C$ $\wo$-abgeschlossen ist, dann ist $C$ auch $\so$-abgeschlossen, da die schwache Topologie in der starken enthalten ist.
-	Für die andere Implikation sei $x \in \overline{C}^\wo$. Zu zeigen ist nun, dass $x \in \overline{C}^\so$ ist. 
-	Es existiert ein Netz $(x_\lambda)_\Lambda \subset C$ mit $x_\lambda \grenzw{\wo}x$.
+	Für die andere Implikation sei $x \in \overline{C}^{\raisemath{-1.5pt}{\wo}}$. Zu zeigen ist nun, dass $x$ auch in $\overline{C}^{\raisemath{-1.5pt}{\so}}$ enthalten ist. 
+	Es existiert ein Netz $(x_\lambda)_\Lambda \subset C$, dass schwach gegen $x$ konvergiert.
 	Für jedes $\wo$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ gilt $\varphi(x_\lambda) \to \varphi(x)$.
 	Mit \autoref{satz:619} folgt, dass für jedes $\so$-stetige Funktional $\varphi$ auf $\mathcal{B}(\mathcal{H})$ auch $\varphi(x_\lambda) \to \varphi(x)$ gilt.
-	Falls $x \notin \overline{C}^\so$, so folgt mit dem Lemma von Zorn (bzw. mit Hahn-Banach für lokalkonvexe Räume), dass $\overline{\varphi} \in \mathcal{B}(\mathcal{H})^*$ $\so$-stetig existiert mit $\dist(\overline{\varphi}(x),\overline{\varphi}(C))>0$.
+	Falls $x \notin \overline{C}^{\raisemath{-1.5pt}{\so}}$, so folgt mit dem Lemma von Zorn (bzw. mit Hahn-Banach für lokalkonvexe Räume), dass $\overline{\varphi} \in \mathcal{B}(\mathcal{H})^*$ $\so$-stetig existiert mit $\dist(\overline{\varphi}(x),\overline{\varphi}(C))>0$.
 	Dies ist ein Widerspruch.
 \end{beweis}
 
-\begin{proposition}[label=prop:621,{name=[Involution stark stetig auf einer Teilmenge]}]
+\begin{proposition}[label=prop:621,{name=[Involution stark stetig auf normalen Elementen]}]
 	Die Involution ist $\so$-stetig auf $\set*{x \in \mathcal{B}(\mathcal{H}) \given x \text{ normal} }$.
 \end{proposition}
 \begin{beweis}
 	Für $x,y \in \mathcal{B}(\mathcal{H})$ normal und $\xi \in \mathcal{H}$ gilt 
 	\begin{align}
-		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
-		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal*{\xi}{(y-x)y^* \xi} + \Underbracket{\skal*{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\[-.8ex]
-		&\le \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
+		\norm*{(x^*-y^*) \xi}^2 &= \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \skal*{\xi}{yy^* \xi} - \skal*{\xi}{xy^* \xi} - \skal*{\xi}{yx^* \xi} \\
+		&= \norm*{x \xi}^2 - \norm*{y \xi}^2 + \skal[\big]{\xi}{(y-x)y^* \xi} + \Underbracket{\skal[\big]{\xi}{y(y^*-x^*)\xi}}{=\skal*{(y-x)y^* \xi}{\xi}} \\[-1em]
+		&\StackTextClap{C.S.}{\le} \norm*{x \xi}^2 - \norm*{y \xi}^2 + 2 \cdot \norm*{(y-x)y^* \xi} \cdot \norm*{\xi}
 	\end{align}
 	Falls nun $x_\lambda \grenzw{\so} y$ in $\mathcal{B}(\mathcal{H})$, so gilt 
 	\[
-		\norm*{(x_\lambda^* -y^*)\xi} \le \Underbracket{\norm*{x_\lambda \xi}^2 - \norm*{y \xi}^2}{\to 0} + \Underbracket{\norm*{(y-x_\lambda)y^* \xi} \cdot \norm*{\xi}}{\to 0} \qedhere
+		\norm*{(x_\lambda^* -y^*)\xi} \le \Underbracket{\norm*{x_\lambda \xi}^2 - \norm*{y \xi}^2}{\to 0} + \Underbracket{2 \cdot \norm*{(y-x_\lambda)y^* \xi} \cdot \norm*{\xi}}{\to 0} \grenzw{} 0 \qedhere
 	\]
 \end{beweis}
 
@@ -2410,7 +2415,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	Eine stetige Funktion $f \colon \mathbb{R} \to \mathbb{C}$ heißt \Index{stark stetig}, falls für jeden Hilbertraum $\mathcal{H}$ und jedes Netz $(x_\lambda)_\Lambda \subset \mathcal{B}(\mathcal{H})_\sa$ mit $x_\lambda \grenzw{\so} x \in \mathcal{B}(\mathcal{H})_\sa$ gilt $f(x_\lambda) \grenzw{\so}f(x)$.
 \end{definition}
 
-\begin{proposition}[label=prop:623]
+\begin{proposition}[label=prop:623,{name=[jede beschränkte stetige Funktion ist stark stetig]}]
 	Jedes $h \in C_b(\mathbb{R})$ ist stark stetig.
 \end{proposition}
 \begin{beweis}
@@ -2422,31 +2427,41 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		\grenzw{} 0
 	\]
 	Damit ist $f \cdot g \in S$, das heißt $S_b \cdot S \subset S$ und $S_b \cdot S_b \subset S_b$.
-	Weiter gilt: $S_b$ ist selbstadjungiert, also $S_b^*=S_b$ (nach \autoref{prop:621}, denn $f(x)$ für $x$ selbstadjungiert ist normal und $f(x) \mapsto f(x)^*$ ist $\so$-stetig) und $S_b$ ist $\norm*{\cdot}_\infty$-abgeschlossen.
+	Weiter ist $S_b$ selbstadjungiert, also $S_b^*=S_b$, denn  $f(x)$ für $x$ selbstadjungiert  ist normal und nach \autoref{prop:621} ist $f(x) \mapsto f(x)^*$ $\so$-stetig. 
+	Außerdem ist $S_b$ abgeschlossen unter $\norm*{\cdot}_\infty$.
 	Insbesondere ist $S_b \subset C_b(\mathbb{R})$ eine $C^*$-Unteralgebra.
 	Ebenso $S_b \cap C_0(\mathbb{R}) =: S_0 \subset C_0(\mathbb{R})$.
+	
 	Die Funktionen $t \mapsto f(t):= \frac{1}{1+t^2}$ und $t \mapsto g(t) := \frac{t}{1+t^2}$ sind in $C_0(\mathbb{R})$ mit $\norm*{f}_\infty, \norm*{g}_\infty\le 1$.
 	Behauptung: $f$ und $g$ sind in $S_0$ enthalten.
-	
-	Für $x,y \in \mathcal{B}(\mathcal{H})_\sa$ gilt $g(x)-g(y)= \ldots = (1+x^2)^{-1}(x-y+x(y-x)y)(1+y^2)^{-1}$. 
-	Für $\xi \in \mathcal{H}$ gilt dann weiter 
+	Für $x,y \in \mathcal{B}(\mathcal{H})_\sa$ gilt 
 	\[
-		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le 1 \cdot \norm*{(x-y)(1+y^2)^{-1} \xi} + 1 \cdot \norm*{(y-x) y(1+y^2)^{-1} \xi}
+		g(x)-g(y)= \ldots = (\ind+x^2)^{-1} \enbrace[\big]{x-y+x(y-x)y} (\ind+y^2)^{-1} 
 	\]
-	Damit ist $g \in S_0$.
-	Weiter ist $(t \mapsto t) \in S$, also $\enbrace*{t \mapsto t \cdot g(t)} \in S$ und $\enbrace*{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
+	Für $\xi \in \mathcal{H}$ gilt dann weiter, da $\norm*{(\ind+x^2)^{-1}} \le 1$ ist
+	\[
+		\norm*{\enbrace[\big]{g(x)-g(y)}\xi} \le \norm*{(x-y)(\ind+y^2)^{-1} \xi} + \norm*{x(y-x) y(\ind+y^2)^{-1} \xi}
+	\]
+	Damit ist $g$ stark stetig und somit in $S_0$.
+	Weiter ist $(t \mapsto t) \in S$, also $\enbrace[\big]{t \mapsto t \cdot g(t)} \in S$ und $\enbrace[\big]{t \mapsto 1-t \cdot g(t)}=f \in S_0$. 
 	Damit ist die Behauptung gezeigt.
 	
-	Nach Stone-Weierstraß ist $^*\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält eine strikt positive Funktion.
+	Nach Stone-Weierstraß ist $^*\text{-}\Alg(f,g) \subset C_0(\mathbb{R})$ dicht, denn diese Algebra trennt Punkte von $\mathbb{R}$ und enthält mit $f$ eine strikt positive Funktion.
 	Damit folgt $S_0=C_0(\mathbb{R})$.
-	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$ und dann ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
+	Für $h \in C_b(\mathbb{R})$ gilt $hf, hg \in S_0 \subset S_b$, also ist auch $\enbrace*{t \mapsto t \cdot h(t) \cdot g(t)} \in S$ und
 	\[
-		\enbrace[\big]{t \longmapsto h(t) \cdot f(t) + t \cdot h(t) \cdot g(t)=h(t)} \in S_b \qedhere
+		\enbrace[\big]{t \longmapsto h(t) \cdot f(t) + t \cdot h(t) \cdot g(t)=h(t)} \in S_b
 	\]
+	Also gilt $S_b \subset C_b(\mathbb{R})$ und damit ist die Behauptung gezeigt.
 \end{beweis}
 
-\begin{satz}[label=satz:624,name={Kaplansky's Dichtesatz}]
-	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.\marginnote{Dass $B$ vN-Algebra ist in Aufgabe 1 von Blatt 10 gezeigt}
+Zum krönenden Abschluss dieses Kapitels wollen wir noch den Dichtesatz von Kaplansky beweisen, über den \citeauthor{PedC*} in seinem Buch \citetitle{PedC*} schreibt:
+\begin{quote}
+	\foreignblockquote{english}[{\cite[S. 25]{PedC*}}]{\itshape The density theorem is Kaplansky's great gift to mankind. It can be used every day, and twice on Sundays.}
+\end{quote}
+
+\begin{satz}[label=satz:624,name={Kaplanskys Dichtesatz}]
+	Sei $\mathcal{H}$ ein Hilbertraum, $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra\marginnote{$B$ ist vN-Algebra nach Aufgabe 1\newline von Blatt 10} und $B= \overline{A}^\so=\overline{A}^\wo$ die von $A$ in $\mathcal{B}(\mathcal{H})$ erzeugte von-Neumann-Algebra.
 	Dann gilt
 	\begin{enumerate}[(i),itemsep=2pt]
 		\item $\overline{A_\sa}^\so = \overline{A_\sa}^\wo= B_\sa$
@@ -2457,20 +2472,20 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	Die starken und schwachen Abschlüsse stimmen überein nach \autoref{prop:620}.
+	Die starken und schwachen Abschlüsse stimmen jeweils überein nach \autoref{prop:620}.
 	\begin{enumerate}[(i)]
 		\item Falls $a \in B_\sa$, so existiert $(a_\lambda)_\Lambda \subset A$ mit $a_\lambda \grenzw{\wo}a$.
-		 Dann gilt aber auch $a_\lambda^* \grenzw{\wo}a^*=a$ (nach \autoref{erinnerung:61}) und damit 
+		 Dann gilt aber auch $a_\lambda^* \grenzw{\wo}a^*=a$ nach \autoref{erinnerung:616} und damit 
 		 \[
-		 	A_\sa \ni\frac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
+		 	A_\sa \ni\sfrac{1}{2} \enbrace*{a_\lambda + a_\lambda^*} \grenzw{\wo} a
 		 \]
-		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$\marginnote{auf Vektoren überprüfen}
+		 Also ist $B_\sa \subset \overline{A_\sa}^\wo \subset B_\sa$, wobei die zweite Inklusion offensichtlich ist.
 		 \item Sei $a \in B^1_\sa$. Nach (i) existiert ein Netz $(a_\lambda)_\Lambda \subset A_\sa$ mit $a_\lambda \grenzw{\so}a$.
 		 Sei $f \in C_b(\mathbb{R})$ gegeben durch \cref{fig:624}.
-		 \begin{figure}[t]
+		 \begin{figure}[bht]
 		 	\centering{
 			\begin{tikzpicture}
-				\draw[] (-2,0) -- (2,0);
+				\draw (-2,0) -- (2,0);
 				\draw (0,-1.2)-- (0,1.2);
 				\draw (-.1,-1) node[left]{$-1$} -- ++(.2,0);
 				\draw (-.1,1) node[left]{$1$} -- ++(.2,0);
@@ -2492,11 +2507,11 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 		 \end{figure}
 		 $f$ ist stark stetig nach \autoref{prop:623}.
 		 Also ist $A_\sa^1 \ni  f(a_\lambda) \grenzw{\so} f(a)=a$ und damit $a \in \overline{A^1_\sa}^\so$.
-		 Wir haben also $B^1_\sa \subseteq \overline{A^1_\sa}^\so$ gezeigt. Die andere Inklusion ist klar.
-		 \item Wie (ii) mit $g$ anstatt $f$.
+		 Wir haben also $B^1_\sa \subseteq \overline{A^1_\sa}^\so$ gezeigt. Die andere Inklusion ist wieder klar.
+		 \item Wie (ii) mit $g$ anstatt $f$, siehe \cref{fig:624}.
 		 \item Sei $a \in B^1$.
-		 Dann ist $\begin{psmallmatrix*}[l] 0 & a \\ a^* & 0 \end{psmallmatrix*} \in M_2(B)_\sa \subset \mathcal{B} \enbrace*{\mathcal{H}^{\oplus 2}}$. 
-		 Es gilt $\overline{M_2(A)}^\so=M_2(B)$ und nach (iii) existiert $(b_\lambda)_\Lambda \subset M_2(A)^1_\sa$ mit 
+		 Dann ist $\begin{psmallmatrix*}[l] 0 & a \\ a^* & 0 \end{psmallmatrix*} \in M_2(B)_\sa^1 \subset \mathcal{B} \enbrace*{\mathcal{H}^{\oplus 2}}$. 
+		 Es gilt $\overline{M_2(A)}^\so=M_2(B)$ und nach (ii) existiert $(b_\lambda)_\Lambda \subset M_2(A)^1_\sa$ mit 
 		 \(
 		 	\begin{psmallmatrix}
 		 		b_{\lambda,1,1} & b_{\lambda,1,2} \\
@@ -2526,7 +2541,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 				0 & 0
 			\end{pmatrix}
 		 \]
-		 Also ist $b_{\lambda,1,2} \in A^1$, wir erhalten $b_{\lambda,1,2} \grenzw{\so} a$ und damit $a \in \overline{A^1}^\so$.
+		 Also ist $b_{\lambda,1,2} \in A^1$ und wir erhalten $b_{\lambda,1,2} \grenzw{\so} a$, also $a \in \overline{A^1}^\so$.
 		 Wir haben somit die Inklusion $B^1 \subseteq \overline{A^1}^\so$ gezeigt; die andere ist wieder klar.
 		 \item Nach \autoref{korr:613} (ii) gilt $\mathcal{U}(B) = \overline{\set*{e^{i \pi h} \given h \in B^1_\sa}}^{\norm*{\cdot}}$.
 		 Zu $u \in \mathcal{U}(B)$ und $\varepsilon>0$ existiert ein $h \in B^1_\sa=\overline{A^1_\sa}^\so$ mit $\norm*{e^{i \pi h}-u}<\varepsilon$.
@@ -2868,7 +2883,7 @@ Wie wir jetzt sehen werden ist die erste aber tatsächlich eine Äquivalenz:
 	\]
 \end{beweis}
 
-\begin{satz}[label=satz:712]
+\begin{satz}[label=satz:712,{name=[reiner Zustand der Norm erfüllt]}]
 	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A_+$.
 	Dann existiert $\rho \in PS(A)$ mit $\rho(a)=\norm*{a}$.
 \end{satz}
@@ -3126,6 +3141,7 @@ Dann ist $\pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$
 % subsection das_bild_irreduzibler_darstellungen (end)
 
 \printindex
+\printbibliography
 \listoffigures
 \todototoc
 \listoftodos[To-do's und andere Baustellen]
