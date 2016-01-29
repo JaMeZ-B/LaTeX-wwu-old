@@ -2980,8 +2980,8 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\end{itemize}
 \end{satz}
 \begin{beweis}
-	\begin{enumerate}[1.]
-		\item Seien zunächst die $\xi_i$ orthonormal und es existiere ein $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$.
+	\begin{enumerate}[label={Teil \Roman*.},wide,font=\bfseries\scshape]
+		\item \label{enum:kad:1} Seien zunächst die $\xi_i$ orthonormal und es existiere ein $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$.
 		Wir dürfen $\max_i \norm*{\eta_i} \le (2n)^{- \sfrac{1}{2}}$ annehmen.
 		Zu $\varepsilon>0$ definiere
 		\[
@@ -3015,9 +3015,99 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 			&= \lim_{k \to \infty} \enbrace*{ \enbrace*{v_o(\xi_i) - \pi(x_0)(\xi_i)} - \pi(x_1)(\xi_i)} - \cdots - \pi(x_k)(\xi_i) \\
 			&= \lim_{k  \to \infty} v_{k+1}(\xi_i) =0
 		\end{align}
+		\item \label{enum:kad:2} Wir nehmen nun nicht mehr an, dass $y$ wie oben existiert.
+		Wir wissen aus \autoref{prop:715}, dass $\tilde{y} \in \mathcal{B}(\mathcal{H})$ mit $\tilde{y} \xi_i = \eta_i$ für $i=1,\ldots ,n$ existiert.
+		Dann sind $\re \tilde{y}, \im \tilde{y} \in \mathcal{B}(\mathcal{H})_\sa$ und nach \ref{enum:kad:1} existieren $x',x'' \in A_\sa$ mit 
+		\[
+			\pi(x') \xi_i = \enbrace*{\re \tilde{y}} \xi_i \quad \text{ und } \quad \pi(x'') \xi_i = (\im \tilde{y})\xi_i 
+		\]
+		Für $x := x' + i \cdot x''$ gilt $\pi(x) \xi_i = \tilde{y}\xi_i = \eta_i$.
+		\item \label{enum:kad:3}Falls die $\xi_i$ nicht notwendigerweise orthogonal, aber linear unabhängig sind, wähle eine Orthonormalbasis $\set*{\xi_1', \ldots , \xi_n'}$ für $\Span \set*{\xi_1, \ldots ,\xi_n}$.
+		Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y \xi_i = \eta_i$ existiert, so existiert nach \ref{enum:kad:1} ein $x \in A_\sa$ mit $\pi(x)\xi_i' = y \xi_i'$.
+		Aber dann gilt auch $\pi(x)\xi_i = y \xi_i = \eta_i$ für $i=1,\ldots ,n$.
+		Falls kein solches $y$ existiert, wende \ref{enum:kad:2} an.
+		\item \label{enum:kad:4} Seien nun $A$ und $\pi$ unital und es existiere $u \in \mathcal{U}\enbrace*{\mathcal{B}(\mathcal{H})}$ mit $u(\xi_i)=\eta_i$.
+		Wir in \ref{enum:kad:3} reduziert man auf den Fall, dass die $\xi_i$ ein Orthonormalsystem bilden.
+		Sei 
+		\[
+			\mathcal{H}_0 := \Span \set*{\xi_1, \ldots, \xi_n, \eta_i, \ldots ,\eta_n}
+		\]
+		Dann existiert $u' \in \mathcal{U}\enbrace*{\mathcal{B}(\mathcal{H}_0)} \subset \mathcal{B}(\mathcal{H})$ mit $u' \xi_i = \eta_i$.\footnote{komponieren mit der Projektion auf den Span der $\xi_i$; $\set*{\xi_1, \ldots ,\xi_n}$ und $\set*{\eta_1,\ldots ,\eta_n}$ bilden Orthonormalsysteme in $\mathcal{H}_0$ und lassen sich zu Orthonormalbasen auf $\mathcal{H}_0$ ergänzen}
+		Es ist $\mathcal{B}(\mathcal{H}_0) \cong M_m$ und $u' = e^{i h}$ für ein $h \in \mathcal{B}(\mathcal{H}_0)_\sa \subset \mathcal{B}(\mathcal{H})_\sa$.
+		Es existiert nach \ref{enum:kad:1} ein $d \in A_\sa$ mit $\pi(d) \zeta_i = h \zeta_i$, wobei $\zeta_1,\ldots , \zeta_m$ eine Orthonormalbasis für $\mathcal{H}_0$ ist.
+		Dann folgt $\pi(d)|_{\mathcal{H}_0}=h$ und $\pi(e^{id})|_{\mathcal{H}_0}= e^{ih}$.\qedhere
 	\end{enumerate}
 \end{beweis}
+
+\begin{korollar}[{name=[irreduzibel impliziert algebraisch irreduzibel]},label=korr:717]
+	Eine irreduzible Darstellung $(\mathcal{H},\pi)$ einer $C^*$-Algebra $A$ ist algebraisch irreduzibel.
+\end{korollar}
+\begin{beweis}
+	Nach \autoref{satz:716} gilt $\pi(A)\xi=\mathcal{H}$ für jedes $0 \neq \xi \in \mathcal{H}$.
+	Also ist $\pi(A)(\mathcal{H}_0)=\mathcal{H}$ oder $\set*{0}$ für jeden Unterraum $\mathcal{H}_0 \subset \mathcal{H}$.
+\end{beweis}
+
+\begin{definition}[label=def:718,{name=[primitives Ideal]}]
+	Sei $A$ eine $C^*$-Algebra.
+	Ein Ideal $J \lhd A$ heißt \bet{primitiv}\index{primitives Ideal}, falls $J= \ker \pi$ für eine irreduzible Darstellung $\pi$ ist.
+	Wir schreiben $\Prim A  := \set*{J \lhd A \text{ primitiv}}$.
+	Die \Index{Hülle-Kern-Topologie} bzw. \Index{Jacobson-Topologie} auf $\Prim A$ ist gegeben durch:
+	Für $R \subset \Prim A$ sei
+	\[
+		\overline{R} = \hull\enbrace[\big]{\ker(R)} = \set*{J \in \Prim A \given \enbrace*{\bigcap_{J \in R} J} \subset J}
+	\]  
+\end{definition}
+
+\begin{satz}[label=satz:719,{name=[Für $A$ kommutativ ist das Charakterspektrum homöomorph zu den primitiven Idealen]}]
+	Für eine kommutative $C^*$-Algebra $A$ gilt $\Omega(A) \approx \Prim A$.
+\end{satz}
+\begin{beweis}
+	Jeder Charakter $\chi \in \Omega(A)$ ist eine irreduzible Darstellung $\chi \colon A \to \mathbb{C} = \mathcal{B}(\mathbb{C})$.
+	Wir haben also eine Abbildung 
+	\mapdef{\gamma \colon\Omega(A)}{\Prim A}{\chi}{\ker \chi}{}
+	$\gamma$ ist injektiv: 
+	\[
+		\begin{tikzcd}[sep=small]
+			A \ar[rr,"\chi_1"] \ar[ddd,equal] \drar& & \mathbb{C} \ar[ddd,"\cong"]\\
+			& \sfrac{A}{\ker \chi_1} \urar["\cong"'] \dar[equal] \\[-2pt]
+			& \sfrac{A}{\ker \chi_2} \drar["\cong"] \\
+			A \ar[rr,"\chi_2"'] \urar& & \mathbb{C}
+		\end{tikzcd}
+	\]
+	Der Isomorphismus in der rechten Spalte ist Multiplikation mit $C \in \mathbb{C}$. 
+	Man überlegt sich, dass $C=1$ gelten muss, sodass $\chi_1=\chi_2$ folgt.
+	
+	Für die Surjektivität sei $J \in \Prim A$ mit $J= \ker \pi$ für $\pi \colon A \to \mathcal{B}(\mathcal{H})$ irreduzibel.
+	Da $A$ abelsch ist, gilt dann $\pi(A) \subset \pi(A)' = \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})} \cong \mathbb{C}$.
+	Also ist $\pi$ ein Charakter. 
+	
+	Homöomorphismus:
+	\mapdef{\set*{Y \subset \Omega(A) \text{ abg.} }}{J \lhd A}{Y}{C_0 \enbrace*{\Omega(A) \setminus Y} \cong \set*{f \in C_0(\Omega(A)) \given f|_Y=0} = \bigcap_{y \in Y} \set*{f \in C_0(\Omega(A)) \given f(y)=0}}{}
+	Damit kann man die Stetigkeit beweisen.
+\end{beweis}
 % section 7 (end)
+\newpage
+
+\section{Beispiele!} % (fold)
+\label{sec:beispiele}
+\emph{(Mit Ausrufezeichen)}
+
+\begin{satz}
+	Eine endlichdimensionale $C^*$-Algebra $A$ ist von der Form 
+	\[
+		M_{r_1} \oplus \ldots \oplus M_{r_s} \quad r_1,\ldots,r_s \in \mathbb{N}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei zunächst $A$ einfach und $\pi \colon A \to \mathcal{B}(\mathcal{H})$ irreduzibel.
+	Für $0 \neq \xi \in \mathcal{H}$ ist
+	\(
+		\mathcal{H} \StackText{\ref{satz:716}}{=} \pi(A)\xi
+	\)
+	endlichdimensional und es gilt $\pi(A)=\mathcal{B}(\mathcal{H})$ wieder nach \autoref{satz:716}.
+	Da $A$ einfach ist, muss $\pi$ bereits ein Isomorphismus sein und es folgt $\mathcal{B}(\mathcal{H}) \cong \mathcal{B}(\mathbb{C}^r)=M_r$.
+\end{beweis}
+% section beispiele (end)
 
 
 
