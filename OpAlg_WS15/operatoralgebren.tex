@@ -1873,7 +1873,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $x=x^*x=x^2$. \emph{Der Rest ist Übungsaufgabe 4 von Blatt 9, siehe \cref{sub:mon_proj}}
 \end{beweis}
 
-\begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]}]
+\begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]},label=bem:63]
 	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$ (und $x \in \mathcal{B}(\mathcal{H})_\sa$).
 	Dies ist äquivalent zu $0\le x$ in unserem Sinne: 
 	Ist $x$ positiv in unserem Sinne, so haben wir $x=y^*y$ und es folgt
@@ -2563,63 +2563,68 @@ Zum krönenden Abschluss dieses Kapitels wollen wir noch den Dichtesatz von Kapl
 \label{sec:7}
 
 Bevor man in dieses Kapitel abtaucht, ist es empfehlenswert, sich noch einmal an \autoref{def:510} zu erinnern, denn dort wurden die Begriffe \emph{irreduzibel} und \emph{zyklisch} für Darstellungen eingeführt.
-Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cref{sub:gns_zyklisch}, wieder eine wichtige Rolle spielen.\todo{Revision 7}
+Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cref{sub:gns_zyklisch}, wieder eine wichtige Rolle spielen.
 
-\begin{proposition}[label=prop:71]
+\begin{proposition}[label=prop:71,{name=[über positive Funktionale, die kleiner als Zustände sind]}]
 	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$ ein Zustand und $\rho \in A^*$ ein weiteres positives Funktional.
 	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit 
 	\[
 		\rho(a) = \skal[\big]{\xi_\varphi}{\pi_\varphi(a)h \xi_\varphi}
 	\]
-	wo $\enbrace*{\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi}$ die GNS-Darstellung zu $\varphi$ ist.
+	wobei $\enbrace*{\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi}$ die GNS-Darstellung zu $\varphi$ ist.
 \end{proposition}
 \begin{beweis}
-	Wir erinnern uns an die GNS-Konstruktion: $N_\varphi := \set*{a \in A \given \varphi(a^*a)=0}$ und $\mathcal{H}_\varphi = \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ (vergleiche \autoref{gns}).
+	Im Zuge der GNS-Konstruktion, siehe \autoref{gns} haben wir ein Ideal in $A$ definiert durch $N_\varphi = \set*{a \in A \given \varphi(a^*a)=0}$ und dann den Hilbertraum $\mathcal{H}_\varphi = \overline{\sfrac{A}{N_\varphi}}^{\raisemath{-2pt}{\skal*{\cdot}{\cdot}}}$ betrachtet.
 	Definiere auf $\sfrac{A}{N_\varphi}$ eine hermitesche Sesquilinearform $\sigma$ durch 
 	\[
 		\sigma \enbrace*{a + N_\varphi, b+ N_\varphi} := \rho(a^* b)
 	\]
-	$\sigma$ ist wohldefiniert, da $0 \le \rho \le \varphi$ ($N_\varphi \subset N_\rho$).
+	$\sigma$ ist wohldefiniert, da $0 \le \rho \le \varphi$ ist, woraus $N_\varphi \subset N_\rho$ folgt.
 	Es gilt für $a,b \in A$
 	\[
-		\sigma \enbrace*{a+ N_\varphi, b+N_\varphi} = \rho(a^*b) \le \rho(a^*a)^{\sfrac{1}{2}} \rho(b^*b)^{\sfrac{1}{2}} \le \varphi(a^*a)^{\sfrac{1}{2}} \varphi(b^*b)^{\sfrac{1}{2}} 
+		\sigma \enbrace*{a+ N_\varphi, b+N_\varphi} = \rho(a^*b) \StackTextClap{C.S.}{\le} \rho(a^*a)^{\sfrac{1}{2}} \rho(b^*b)^{\sfrac{1}{2}} \le \varphi(a^*a)^{\sfrac{1}{2}} \varphi(b^*b)^{\sfrac{1}{2}} 
 		= \norm*{a + N_\varphi} \cdot \norm*{b+ N_\varphi}
 	\]
 	Damit ist $\norm*{\sigma}\le 1$ und $\sigma$ lässt sich stetig auf $\mathcal{H}_\varphi$ fortsetzen.
 	Für $\xi \in \mathcal{H}_\varphi$ ist $\eta \mapsto \sigma(\xi,\eta)$ eine stetige Linearform auf $\mathcal{H}_\varphi$.
-	Nach Riesz existiert genau ein Vektor $h \xi\in \mathcal{H}_\varphi$ mit $\sigma(\xi,\eta) = \skal*{h \xi}{\eta}$.
-	$\xi \mapsto h \xi$ ist linear und beschränkt. 
-	Also existiert genau ein $h \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $h \xi= h \xi$.
-	Es gilt 
+	Nach Riesz existiert also genau ein Vektor $\xi_\sigma \in \mathcal{H}_\varphi$ mit $\sigma(\xi,\eta) = \skal*{\xi_\sigma}{\eta}$.
+	$\xi \mapsto \xi_\sigma$ ist linear und beschränkt, also existiert genau ein $h \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $h \xi= \xi_\sigma$.
+	Es gilt
 	\[
-		\overline{\sigma(\xi,\xi)}=\sigma(\xi,\xi)= \skal*{h \xi}{\xi} \in \mathbb{R}
+		\skal*{h \xi}{\eta} = \sigma(\xi,\eta) = \overline{\sigma(\eta,\xi)} = \overline{\skal*{h \eta}{\xi}} = \skal*{\xi}{h \eta} = \skal*{h^* \xi}{\eta}
 	\]
-	Damit ist $h=h^*$ nach Polarisierung.
-	Weiter gilt $\norm*{h} \le \norm*{\sigma} \le 1$.
-	Für $a \in A$ gilt 
+	Also ist $h$ selbstadjungiert.
+	% Es gilt
+	% \[
+	% 	\skal*{h^*\xi}{\xi}=\overline{\sigma(\xi,\xi)}=\sigma(\xi,\xi)= \skal*{h \xi}{\xi} \in \mathbb{R}
+	% \]
+	% Damit ist $h=h^*$ nach Polarisierung.
+	Weiter gilt $\norm*{h} \le \norm*{\sigma} \le 1$ und für $a \in A$ haben wir
 	\[
 		\skal*{a + N_\varphi}{h \enbrace*{a+ N_\varphi}}= \sigma(a^*a)=\rho(a^*a)\ge 0
 	\]
-	Also ist $\skal*{\xi}{h \xi} \ge 0$ für $\xi \in \mathcal{H}_\varphi$, also ist $h \ge 0$ (siehe \autoref{korr:514}) und damit $0 \le h \le \ind$.
+	Also ist $\skal*{\xi}{h \xi} \ge 0$ für $\xi \in \mathcal{H}_\varphi$, womit $h \ge 0$ ist nach \autoref{bem:63}. 
+	Damit haben wir $0 \le h \le \ind$.
 	Für $a,b,c \in A$ gilt 
 	\begin{align}
 		\skal[\big]{a + N_\varphi}{\pi_\varphi(c)h (b+N_\varphi)} = \skal[\big]{c^*a + N_\varphi}{h(b+N_\varphi)} = \rho \enbrace*{a^*cb} &= \skal[\big]{a + N_\varphi}{h(cb+N_\varphi)} \\
 		&= \skal[\big]{a+ N_\varphi}{h \pi_\varphi(c)(b+ N_\varphi)}
 	\end{align}
-	Damit ist $\pi_\varphi(c) h = h \pi_\varphi(c)$, also ist $h \in \pi_\varphi(A)'$.
-	Sei nun $(e_\lambda)_\Lambda \subset A^1_+$ eine approximative Eins. Dann ist $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi \in \mathcal{H}_\varphi$ und es gilt
+	Damit ist $\pi_\varphi(c) h = h \pi_\varphi(c)$, also ist $h$ in der Kommutante von $\pi_\varphi(A)$ wie behauptet.
+	Um die behauptete Formel für $\rho$ zu beweisen, betrachten wir eine approximative Eins $(e_\lambda)_\Lambda \subset A^1_+$. 
+	Dann ist $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi \in \mathcal{H}_\varphi$ und es gilt
 	\begin{align}
-		\rho(a)= \lim_{\lambda,\lambda'} \rho \enbrace*{e_\lambda a e_{\lambda'}}= \lim_{\lambda,\lambda'} \skal*{e_\lambda + N_\varphi}{h(a e_{\lambda'}+ N_\varphi)}
-		&= \lim_{\lambda,\lambda'} \skal*{e_\lambda+ N_\varphi}{h \pi_\varphi(a) (e_{\lambda'} + N_\varphi)} \\
-		&= \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}
+		\rho(a)= \lim_{\lambda,\lambda'} \rho \enbrace*{e_\lambda a e_{\lambda'}}= \lim_{\lambda,\lambda'} \skal[\big]{e_\lambda + N_\varphi}{h(a e_{\lambda'}+ N_\varphi)}
+		&= \lim_{\lambda,\lambda'} \skal[\big]{e_\lambda+ N_\varphi}{h\,\pi_\varphi(a) (e_{\lambda'} + N_\varphi)} \\
+		&= \skal[\big]{\xi_\varphi}{h\, \pi_\varphi(a)\,\xi_\varphi}
 	\end{align}
-	Zur Eindeutigkeit: Sei $d \in \enbrace*{\pi_\varphi(A)'}^1_+$ mit $\rho(a)= \skal*{\xi_\varphi}{\pi_\varphi(a)d \xi_\varphi}$ für alle $a \in A$.
-	Dann gilt für $a,b \in A$, da $\xi_\varphi$ zyklisch ist
+	Für die Eindeutig sei $d \in \enbrace*{\pi_\varphi(A)'}^1_+$ mit $\rho(a)= \skal*{\xi_\varphi}{\pi_\varphi(a)d \xi_\varphi}$ für alle $a \in A$.
+	Dann gilt für $a,b \in A$, da $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi$ zyklisch ist
 	\begin{align}
-		\skal*{a+ N_\varphi}{d(b+N_\varphi)} = \skal*{\pi_\varphi(a) \xi_\varphi}{d \pi_\varphi(b) \xi_\varphi} = \skal*{\xi_\varphi}{\pi_\varphi(a^*b)d \xi_\varphi} 
-		&= \rho(a^*b) \\ &= \skal*{a+ N_\varphi}{h(b+N_\varphi)}
+		\skal[\big]{a+ N_\varphi}{d(b+N_\varphi)} = \skal[\big]{\pi_\varphi(a) \xi_\varphi}{d \,\pi_\varphi(b) \xi_\varphi} = \skal[\big]{\xi_\varphi}{\pi_\varphi(a^*b)d \xi_\varphi} 
+		&= \rho(a^*b) \\ &= \skal[\big]{a+ N_\varphi}{h(b+N_\varphi)}
 	\end{align}
-	Also ist $d=h$.
+	Also ist $d=h$, womit die Eindeutigkeit gezeigt ist.
 \end{beweis}
 
 \begin{satz}[{name=[Darstellung als direkte Summe]}]
@@ -2627,7 +2632,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Dann ist $(\mathcal{H},\pi)$ eine direkte Summe zyklischer Darstellungen.
 \end{satz}
 \begin{beweis}
-	Sei $\mathcal{S} := \set[\big]{S \subset \mathcal{H}\setminus \set{0} \given {\overline{\pi(A) \xi}} \perp {\overline{\pi(A)\eta}} \text{ für alle }\xi \neq \eta \in S }$.
+	Sei $\mathcal{S} := \set[\big]{S \subset \mathcal{H}\setminus \set{0} \given {\overline{\pi(A) \xi}} \perp {\overline{\pi(A)\eta}} \text{ für alle }\xi \neq \eta \in S }$.\todo{Revision 7}
 	$\mathcal{S}$ ist partiell geordnet bezüglich Inklusion und abgeschlossen bezüglich Vereinigungen von aufsteigenden Teilmengen.
 	Nach Zorns Lemma besitzt $\mathcal{S}$ ein maximales Element $\tilde{S}$.
 	Sei $\eta \in \enbrace[\big]{\bigcup_{\xi \in \tilde{S}} \overline{\pi(a)\xi}}^\bot$, dann gilt für $a,b \in A$, $\xi \in \tilde{S}$.
