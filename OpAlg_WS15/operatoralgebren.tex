@@ -936,8 +936,9 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
 \end{lemma}
 \begin{beweis}
-	Für $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}-a}^{-1}$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1}$. 
-	Durch Betrachtung der von-Neumann-Reihe sieht man sofort, dass $a'$ und $b'$ positiv sind.
+	\emph{Im \cref{sub:alternativer_beweis_lemma_311} findet man auch den Beweis von \citeauthor{Murphy} mit zusätzlichen Erklärungen, der meiner Meinung nach etwas \enquote{flüssiger} zu lesen ist.}\\
+	Für $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}-a}^{-1}$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1}$.
+	Durch Betrachtung der \hyperref[satz15_neumann]{von-Neumann-Reihe} sieht man sofort, dass $a'$ und $b'$ positiv sind.
 	Dann gilt 
 	\[
 		c := (a' +b') \enbrace*{\ind_{A^\simm} + a' +b'}^{-1} \in \Lambda
@@ -948,7 +949,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		&= \enbrace[\big]{(\ind +a')-\ind} \enbrace*{\ind +a'}^{-1} = \ind - (\ind +a')^{-1} \\
 		\intertext{Da $0\le \ind +a' \le \ind + a' +b'$ jeweils invertierbar sind, ist $(\ind+ a'+b')^{-1} \le (\ind+a')^{-1}$ nach \autoref{satz:37}}
 		&\le \ind - (\ind +a' +b')^{-1}\StackText{\ref{bem:13}}{=} \ind - \enbrace*{\ind + (a'+b')(\ind +a' +b')^{-1}} \\
-		&= (a'+b')(\ind +a' +b')^{-1}
+		&= (a'+b')(\ind +a' +b')^{-1}=c
 	 \end{align}
 	 Damit ist $a \le c$. Die Relation $b \le c$ folgt ebenso.
 \end{beweis}
@@ -3127,8 +3128,41 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 
 \section{Anhang} % (fold)
 \label{sec:anhang}
-Hier findet man einige ausgewählte Beweise, auf die der Vorlesung hingewiesen wurde und die im Rahmen von Übungsaufgaben bearbeitet wurden.
+Hier findet man einige ausgewählte Beweise und Ergänzungen, auf die der Vorlesung hingewiesen wurde und die teilweise im Rahmen von Übungsaufgaben bearbeitet wurden.
 Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch einmal darauf hingewiesen, dass für die Richtigkeit keine Garantie übernommen wird!
+
+
+\subsection{Alternativer Beweis von \autoref{lem:311}} % (fold)
+\label{sub:alternativer_beweis_lemma_311}
+Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
+\begin{beweis}[{\cite[S.~78]{Murphy}}]
+	Wenn $a \in A_+$, dann ist $\ind +a$ invertierbar in $A^\simm$, da $0$ nicht im Spektrum enthalten sein kann.
+	Weiter gilt $a(\ind +a)^{-1} = \ind - (\ind +a)^{-1}$.
+	Wir zeigen nun
+	\[
+		a,b \in A_+ \text{ und } a \le b \implies a(\ind+a)^{-1} \le b (\ind +b)^{-1} 
+	\]
+	Aus $a \le b$ folgt nämlich $\ind +a \le \ind +b$ und damit $(\ind +b)^{-1} \le (\ind +a)^{-1}$ nach \autoref{satz:37} (vii).
+	Daraus erhalten wir die Ungleichung $\ind - (\ind +a)^{-1} \le \ind - \enbrace*{\ind +b}^{-1}$, nach der Gleichung für $a(\ind +a)^{-1}$ oben also die Behauptung.
+	Durch Betrachtung des Gelfandisomorphismus für $C^*(a, \ind)$ sieht man, dass $a(\ind +a)^{-1} \in \Lambda$ ist.
+	
+	Seien nun $a,b \in \Lambda$ beliebig.
+	Dann setzen wir $a' := a \enbrace*{\ind -a}^{-1}$ und $b' := b \enbrace*{\ind -b}^{-1}$. Hier überlegt man sich die Invertierbarkeit und Positivität entweder auch mit Gelfand oder der von-Neumann-Reihe (siehe \ref{satz15_neumann}).
+	Genauso ist auch $\ind + a'$ invertierbar und damit auch $\ind + a' +b'$ (wieder mit \ref{satz:37}). 
+	Dann gilt nach Gelfand
+	\[
+		c := (a' + b') \enbrace*{\ind + a' + b'}^{-1} \in \Lambda
+	\]
+	Da offensichtlich $a' \le a' + b'$ gilt, folgt aus der oben gezeigten Implikation $a'(\ind +a')^{-1} \le c$.
+	Es gilt nun
+	\[
+		a'(\ind +a')^{-1} = a (\ind -a)^{-1} \enbrace*{\ind + a(\ind-a)^{-1}}^{-1} \StackText{\ref{bem:13}}{=} a (\ind -a)^{-1} \enbrace*{(\ind-a)^{-1}}^{-1} = a
+	\]
+	womit wir $a \le c$ gezeigt haben. 
+	Die Relation $b \le c$ folgt genauso, also ist $\Lambda$ gerichtet.
+\end{beweis}
+% subsection alternativer_beweis_autoref_lemma_311 (end)
+
 
 \subsection{Die GNS-Darstellung ist zyklisch} % (fold)
 \label{sub:gns_zyklisch}
