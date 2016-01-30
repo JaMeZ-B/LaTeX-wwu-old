@@ -1754,7 +1754,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 			Dann gilt für alle $t' \in (t_0 - \eta, t_0 + \eta)$:
 			\begin{align*}
 				\ell(C_{\gamma(0)\gamma(t')}) &\stack{}{=} \ell(\Exp \circ C_{\gamma(0)\gamma(t')} \\
-				&\stack{\text{Bem. \ref{bem:2.35}}}{\leq} \ell(\Exp \circ C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t')) \\
+				&\stack{\text{Bem. \ref{kor:2.35}}}{\leq} \ell(\Exp \circ C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t')) \\
 				&\stack{}{=} \ell(C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t')) \\
 				&\stack{t_0 \in S}{\leq} \ell(\gamma \big|_{[0,t_0]}) + d_{\exp}(\gamma(t_0),\gamma(t')) \\
 				&\stack{}{\leq} \ell(\gamma \big|_{[0,t_0]}) + \ell(\gamma \big|_{[t_0,t']}) \\
@@ -1780,7 +1780,7 @@ Um dies zu beweisen, brauchen wir eine Umformulierung der $\CAT$-Eigenschaft mit
 		für alle $n \geq N$.
 		Wähle $\varepsilon > 0$ so, wie in \autoref{lemma:2.32} für die linear umparametrisierte lokale Geodäte $\Exp \circ C_{\gamma(0)\gamma(t_0)}$.
 		Sei $N \geq \NN$ so groß, dass $\Exp \circ \gamma(t_n) \in B_\varepsilon(\Exp \circ \gamma(t_0))$ für alle $n \geq N$.
-		Nach \autoref{bem:2.35} gilt o.B.d.A.
+		Nach \autoref{kor:2.35} gilt o.B.d.A.
 		\begin{align}
 			\ell(C_{\gamma(0)\gamma(t_n)}) = \ell(\Exp \circ C_{\gamma(0)\gamma(t_n)}) &\leq \ell(\Exp \circ C_{\gamma(0)\gamma(t_0)}) + d_X(\Exp \circ \gamma(t_0),\Exp \circ \gamma(t_n)) \\
 			&= \ell(C_{\gamma(0)\gamma(t_0)}) + d_{\exp}(\gamma(t_0),\gamma(t_n)), \label{eq:2.40.3}
@@ -2462,7 +2462,7 @@ Es folgt nun der Beweis von \autoref{lemma:2.32}.
 	Dadurch folgt die Existenz von $c_{\ol{x},\ol{y}}$.
 	
 	\begin{enumerate}[(1)]
-		\item F+r $A = \frac{\varepsilon}{\ell(c)}$ gilt $P(A)$, denn:
+		\item Für $A = \frac{\varepsilon}{\ell(c)}$ gilt $P(A)$, denn:
 		Seien $a,b \in [0,1]$ mit $0 < b-a \leq \frac{\varepsilon}{\ell(c)}$ beliebig.
 		Dann ist
 		\[
@@ -2473,20 +2473,7 @@ Es folgt nun der Beweis von \autoref{lemma:2.32}.
 		Dann gilt $\ol{p}, \ol{q} \in B_{2\varepsilon}(c(a))$.
 		Da $B_{2\varepsilon}(c(a)) \CAT$ ist, existiert eine linear umparametrisierte Geodäte $c_{\ol{p},\ol{q}}$ von $\ol{p}, \ol{q}$.
 		\item Seien $a,b \in [0,1]$ mit $0 < b-a \leq \frac{3}{2}A$ beliebig.
-		Teile das Intervall $[a,b]$ in drei gleich große Intervalle auf: \todo{Zeichnung einfügen}
-		
-		\begin{figure}[h]
-			\centering
-			\begin{tikzpicture}[scale=2,>=Latex]
-				\draw (0.3,0) node[above]{$0$} -- (1,0) node[above]{$a$} -- (2,0) node[above]{$a_1$} -- (3,0) node[above]{$b_1$} -- (4,0) node[above]{$b$} -- (4.5,0) node[above]{$1$};
-				\draw [draw=none] (.3,0) node[fill,circle,inner sep=1pt]{}
-				-- (1,0) node[fill,circle,inner sep=1pt]{}
-				-- (2,0) node[fill,circle,inner sep=1pt]{}
-				-- (3,0) node[fill,circle,inner sep=1pt]{}
-				-- (4,0) node[fill,circle,inner sep=1pt]{}
-				-- (4.5,0) node[fill,circle,inner sep=1pt]{};
-			\end{tikzpicture}
-		\end{figure}
+		Teile das Intervall $[a,b]$ in drei gleich große Intervalle $[a,a_1],[a_1,b_1],[b_1,b]$ auf. 		
 		
 		Sei weiter $\ol{p} \in B_\varepsilon(c(a))$ und $\ol{q} \in B_\varepsilon(c(b))$ beliebig.
 		Wir definieren induktiv Folgen $p_n$ und $q_n$ in $X$:
@@ -2503,6 +2490,95 @@ Es folgt nun der Beweis von \autoref{lemma:2.32}.
 			\item Für $t \in [a_1,b]$ ist $(c_n'(t))_n$ eine Cauchy-Folge in $\ol{B_\varepsilon(c(t))}$.
 			Folglich ist $(c_n'(t))_n$ eine konvergent Folge.
 		\end{enumerate}
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[scale=2,>=Latex]
+			\draw (0,-1.5) node[circle,fill,inner sep=1.5pt]{} to coordinate[pos=.333] (a) coordinate[pos=.8] (a1) (2.1,-1.5);
+			\draw (2.1,-1.5) to coordinate[pos=.3] (b1) coordinate[pos=.85] (b) (4.2,-1.5) node[circle,fill,inner sep=1.5pt]{};
+			
+			\coordinate (x) at (0,-5);
+			\coordinate (y) at (4.2,-5);
+			
+			\draw (x) to[bend angle=10,bend left] coordinate[pos=.333] (ca) coordinate[pos=.8] (p0) (2.1,-5) to [bend angle=10,bend right] coordinate[pos=.3] (q0) coordinate[pos=.85] (cb) (y);
+			
+			\coordinate (pbar) at (0,-2);
+			\coordinate (qbar) at (4.2,-2);
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p1) (q0);
+			\draw [color=red] (p1) node[anchor=north east]{$p_1$};
+			\draw [color=red] (p1) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p0) to coordinate[pos=.4] (q1) (qbar);
+			\draw [color=Green4] (q1) node[anchor=north west]{$q_1$};
+			\draw [color=Green4] (q1) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p2) (q1);
+			\draw [color=red] (p2) node[anchor=north east]{$p_2$};
+			\draw [color=red] (p2) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p1) to coordinate[pos=.4] (q2) (qbar);
+			\draw [color=Green4] (q2) node[anchor=north west]{$q_2$};
+			\draw [color=Green4] (q2) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p3) (q2);
+			\draw [color=red] (p3) node[anchor=north east]{$p_3$};
+			\draw [color=red] (p3) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p2) to coordinate[pos=.4] (q3) (qbar);
+			\draw [color=Green4] (q3) node[anchor=north west]{$q_3$};
+			\draw [color=Green4] (q3) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p4) (q3);
+			\draw [color=red] (p4) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p3) to coordinate[pos=.4] (q4) (qbar);
+			\draw [color=Green4] (q4) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p5) (q4);
+			\draw [color=red] (p5) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p4) to coordinate[pos=.4] (q5) (qbar);
+			\draw [color=Green4] (q5) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=red] (pbar) to coordinate[pos=.6] (p6) (q5);
+			\draw [color=red] (p6) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [color=Green4] (p5) to coordinate[pos=.4] (q6) (qbar);
+			\draw [color=Green4] (q6) node[fill,circle,inner sep=1.5pt]{};
+			
+			\draw [very thick,color=red] (pbar) -- (2.65,-2) node[fill,circle,inner sep=1.5,color=Green4]{};
+			\draw [color=red] (1.365,-2) node[above]{$\mathbf{\alpha}$};
+			
+			\draw [very thick,color=Green4] (4.2,-1.99) -- (1.55,-1.99) node[fill,circle,inner sep=1.5,color=red]{};
+			\draw [color=Green4] (2.94,-2) node[above]{$\mathbf{\beta}$};
+			
+			\foreach \x in {a,a1,b1,b,x,ca,p0,q0,cb,y,pbar,qbar} {
+				\draw (\x) node[fill,circle,inner sep=1.5pt]{};
+			}
+			
+			\draw (0,-1.5) node[above]{$0$};
+			\draw (a) node[above]{$a$};
+			\draw (a1) node[above]{$a_1$};
+			\draw (b1) node[above]{$b_1$};
+			\draw (b) node[above]{$b$};
+			\draw (4.2,-1.5) node[above]{$1$};
+			
+			\draw (x) node[below]{$x$};
+			\draw (ca) node[below]{$c(a)$};
+			\draw (p0) node[below]{$c(a_1) = p_0$};
+			\draw (q0) node[below]{$c(b_1) = q_0$};
+			\draw (cb) node[below]{$c(b)$};
+			\draw (y) node[below]{$y$};
+			
+			\draw (pbar) node[below]{$\ol{p}$};
+			\draw (qbar) node[below]{$\ol{q}$};
+			
+			\draw [color=red] (.5,-2.5) node[anchor=north east]{$c_1$};
+			\draw [color=Green4] (3.75,-2.5) node[anchor=north west]{$c_1'$};
+			\end{tikzpicture}
+		\end{figure}
+		
 		Wir definieren
 		\begin{align*}
 			\alpha \colon [a,b_1] &\longrightarrow X \\
