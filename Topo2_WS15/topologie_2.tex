@@ -3274,7 +3274,138 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	und $^h d_1^{p,q}$ wird von $\partial^I$ induziert.
 	Also ist $^h E^{p,q}_2 = H^q \enbrace*{\Hom_R \enbrace*{H_p(C_*),I^*}} = \Ext_R^q \enbrace*{H_p(C_*),W}$.
 \end{beweis}
+
+\begin{satz}[label=satz:ext_kettenkompl_kef]
+	Sei $R$ ein Hauptidealring, $C_*$ ein Kettenkomplex von projektiven $R$-Moduln und $W$ ein $R$-Modul.
+	Dann gibt es eine kurze exakte Folge
+	\[
+		\begin{tikzcd}
+			0 \rar & \Ext_R^1 \enbrace[\big]{H_{n-1}(C_*),W} \rar & H^n \enbrace[\big]{\Hom_R(C_*,W)} \rar & \Hom_R \enbrace[\big]{H_n(C_*),W} \rar & 0
+		\end{tikzcd}
+	\]
+	Diese Folge ist natürlich in $C_*$ und $W$, sie spaltet, aber der Spalt kann nicht natürlich in $C_*$ gewählt werden.
+\end{satz}
+\begin{beweis}
+	Da $R$ ein Hauptidealring ist, hat jeder $R$-Modul eine projektive Auflösung der Länge $\le 1$.
+	Da $\Ext_R^p \enbrace*{H_q(C_*),W}$ auch durch eine projektive Auflösung von $H_q(C_*)$ berechnet weden kann, folgt $\Ext_R^p \enbrace*{H_q(C_*),W}=0$ für $p \ge 2$.
+	Daher hat die Spektralfolge nur zwei Spalten und wir erhalten eine kurze exakte Folge.
+	Um einen Spalt zu erhalten wenden wir wieder den Zerlegungssatz auf $C_*$ an.
+\end{beweis}
+
+\begin{satz}
+	Sei $R$ ein Hauptidealring, $W$ ein $R$-Modul und $X$ ein topologischer Raum.
+	Dann gibt es eine kurze exakte Folge
+	\[
+		\begin{tikzcd}
+			0 \rar & \Ext_R^1 \enbrace[\big]{H_{n-1}(X;R),W} \rar & H^n(X;W) \rar & \Hom_R \enbrace[\big]{H_n(X;R),W} \rar & 0
+		\end{tikzcd}
+	\]
+	Diese Folge ist natürlich in $X$ und $W$; sie spaltet, aber der Spalt kann nicht natürlich in $X$ gewählt werden.
+\end{satz}
+\begin{beweis}
+	Wir wenden den \autoref{satz:ext_kettenkompl_kef} auf $C_*^\sing(X;R)$ an und benutzen
+	\[
+		C_\sing^*(X;W) = \Hom_\mathbb{Z} \enbrace*{C_*^\sing(X),W} \cong \Hom_R \enbrace*{C_*^\sing(X;R),W} \qedhere
+	\]
+\end{beweis}
 % section 17 (end)
+\newpage
+
+\section{Symmetrie von $\Tor$ und $\Ext$} % (fold)
+\label{sec:18}
+
+\begin{satz}
+	Sei $R$ ein Ring, $V$ ein $R$-Rechtsmodul und $W$ ein $R$-Linksmodul.
+	Sei $(P_*,\epsilon)$ eine projektive Auflösung von $V$ und $(Q_*,\delta)$ eine projektive Auflösung von $W$.
+	Dann gibt es einen natürlichen Isomorphismus $H_* \enbrace*{P_* \otimes_R W} \cong H_* \enbrace*{V \otimes_R Q_*}$.
+\end{satz}
+\begin{beweis}
+	Wir zeigen, dass $\id \otimes \delta \colon P_* \otimes_R Q_* \to P_* \otimes_R W$ und $\epsilon \otimes \id \colon P_* \otimes_R Q_* \to V \otimes_R Q_*$ Isomorphismen auf Homologie induzieren.
+	Dazu benutzen wir die vertikale und die horizontale Spektralfolge des Doppelkomplexes $P_* \otimes_R Q_*$.
+	Es ist 
+	\[
+		^v E^1_{p,q} = H_q \enbrace*{P_p \otimes Q_*} \cong P_p \otimes H_q(Q_*) \cong \begin{cases}
+			P_p \otimes W &\text{ falls }q=0\\
+			0 &\text{ sonst }
+		\end{cases}
+	\]
+	Daher ist $^v E^2_{p,q}\cong \begin{cases}
+		H_p(P_*\otimes W) &\text{ falls }q=0\\
+		0 &\text{ sonst }
+	\end{cases}$
+	Die natürliche Spektralfolge kollabiert bei $E^2$ und $H_n \enbrace*{P_* \otimes_R Q_*} \cong {^v E^2_{n,0}} \cong H_p (P_* \otimes W)$.
+	Genauer induziert $\id \otimes \delta \colon P_* \otimes Q_* \to P_* \otimes W$ auf den $E^1$-Seiten der zwei Spektralfolgen (bezüglichen der vertikalen Filtrierung auf $P_* \otimes Q_*$ und der vertikalen (=trivialen) Filtrierung auf $P_* \otimes W$) einen Isomorphismus und daher auch einen Isomorphismus in Homologie.
+	Genauso zeigt man, dass $\epsilon \otimes \id \colon P_* \otimes_R Q_* \to V \otimes_R Q_*$ einen Isomorphismus der $E^1$-Seiten der horizontalen Spektralfolge induziert und daher auch einen Isomorphismus in Homologie induziert.
+\end{beweis}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Es folgt, dass sich $\Tor_*^R(V,W)$ sowohl durch eine projektive Auflösung von $V$ als auch durch eine projektive Auflösung von $W$ berechnen lässt.
+		\item Ist $R$ kommutativ, so gilt $V \otimes_R W \cong W \otimes_R V$ via $v \otimes w \mapsto w \otimes v$ und es folgt 
+		\[
+			\Tor_*^R(V,W) \cong H_*\enbrace*{V \otimes_R Q_*} \cong H_* \enbrace*{Q_* \otimes_R V} \cong \Tor_*^R(W,V)
+		\]
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{satz}
+	Sei $R$ ein Ring.
+	Seien $V,W$ zwei $R$-Moduln.
+	Sei $(P_*,\epsilon)$ eine projektive Auflösung von $V$ und $(I^*,j)$ eine injektive Auflösung von $W$.
+	Dann gibt es einen natürlichen Isomorphismus 
+	\[
+		H^* \enbrace*{\Hom(P_*,W)} \to H^* \enbrace*{\Hom(V,I^*)}
+	\]
+\end{satz}
+\begin{beweis}
+	Wir betrachten $\Hom(P_*,I^*)$ und zeigen wie vorher mit der kohomologischen Spektralfolge, dass $j_* \colon \Hom \enbrace*{P_*,W} \to \Hom(P_*,I^*)$ und $\epsilon^* \colon \Hom(V,I^*) \to \Hom(P_*,I^*)$ Isomorphismen in Kohomologie induzieren.
+\end{beweis}
+
+\begin{bemerkung}
+	Es folgt, dass sich $\Ext_R^*(V,W)$ sowohl durch eine projektive Auflösung von $V$ als auch eine injektive Auflösung von $W$ definieren lässt.
+\end{bemerkung}
+% section 18 (end)
+\newpage
+
+\section{Orientierungen und Karten} % (fold)
+\label{sec:19}
+
+\emph{And now for something completely different.}
+
+\begin{satz}
+	Sei $M$ eine topologischer $n$-Mannigfaltigkeit und $\mu^{\mathbb{R}^n} = \enbrace*{\mu_\lambda^{\mathbb{R}^n} \in H_n(\mathbb{R}^n, \mathbb{R}^n \setminus \set*{\lambda})}_{\lambda \in \mathbb{R}^n}$ eine Orientierung des $\mathbb{R}^n$.
+	Dann sind äquivalent
+	\begin{enumerate}[(i)]
+		\item $M$ ist orientierbar.
+		\item Es gibt einen Atlas $\set*{h \colon M\supseteq U_h \to V_h \subseteq \mathbb{R}^n}$ für $M$, sodass alle Kartenwechsel 
+		\[
+			h_1 \circ h_0^1 \big|_{h_0(U_0 \cap U_1)} \colon h_0 (U_0 \cap U_1) \longrightarrow h_1(U_0 \cap U_1)
+		\]
+		bezüglich $\mu^{\mathbb{R}^n}$ orientierungserhaltend sind.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	Sei $\mu^M$ eine Orientierung für $M$.
+	Wähle für jedes $x \in M$ eine Karte $h_x \colon U_x \to V_x$ mit $x \in U_x$.
+	Indem wir $h_x$, falls nötig, durch $\Sp \circ h_x$ ersetzen, wobei $\Sp \colon \mathbb{R}^n \to \mathbb{R}^n$ eine orientierungsumkehrender Isomorphismus ist, können wir erreichen, dass alle $h_x$ orientierungserhaltend sind.
+	Dann sind auch die Kartenwechsel zwischen den $h_x$ orientierungserhaltend.
+	
+	Sei nun umgekehrt $\set*{h \colon U_h \to V_h}$ ein Atlas wie in (ii).
+	Für $x \in M$ definieren wir $\mu_x^M \in H_n(M,M \setminus \set*{x})$ wie folgt: 
+	Sei $h  \colon U_h \to V_h$ eine Karte aus dem Atlas mit $x \in U_h$.
+	Wir definieren $\mu_x^M$ als das Bild von $\mu_{h(x)}^{\mathbb{R}^n}$ unter der Komposition der folgenden Isomorphismen:
+	\[
+		\begin{tikzcd}[sep=small]
+			\mu^{\mathbb{R}^n}_{h(x)} \in H_n \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus \set*{h(x)}} & H_n(V,V\setminus \set*{h(x)}) \lar["\cong"'] &
+			H_n(U,U \setminus \set*{x}) \lar["\cong","h_*"'] \rar["\cong"] & H_n(M,M \setminus \set*{x})
+		\end{tikzcd}
+	\]
+	Da die Kartenwechsel orientierungserhaltend sind, hängt $\mu_x^M$ nicht von der Wahl von $h$ ab.
+	Da $\mu^{\mathbb{R}^n}$ eine Orientierung ist, ist auch $\mu^M$ eine Orientierung.
+\end{beweis}
+% section 19 (end)
+
 
 \cleardoubleoddemptypage
 \appendix
