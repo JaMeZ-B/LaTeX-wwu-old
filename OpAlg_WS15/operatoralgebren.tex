@@ -1663,7 +1663,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\end{psmallmatrix}
 		= \enbrace*{\sum\nolimits_{j} \pi_u(a_{ij}) \xi_j}_{i=1,\ldots ,n}
 	\]
-	Damit ist $\pi_u^\ssbrace{n}$ ein $^*$-Homomorphismus; $\pi_u^\ssbrace{n}$ ist injektiv, da $\pi_u$ injektiv ist.\marginnote{Hat jemand mal Lust das alles nachzurechen und mir zu schicken? \emph{\faSmileO}}
+	Damit ist $\pi_u^\ssbrace{n}$ ein $^*$-Homomorphismus; $\pi_u^\ssbrace{n}$ ist injektiv, da $\pi_u$ injektiv ist.\marginnote{Hat jemand mal Lust das alles nachzurechnen und mir zu schicken?}
 	Nun definiert 
 	\[
 		\norm[\big]{(a_{ij})_{ij}}_{M_n(A)} := \norm*{\pi_u^\ssbrace{n} \enbrace[\big]{(a_{ij})_{ij}}}_{\mathcal{B} (\mathcal{H}_u^{\oplus n})} 
@@ -3127,7 +3127,92 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\)
 	endlichdimensional und es gilt $\pi(A)=\mathcal{B}(\mathcal{H})$ wieder nach \autoref{satz:716}.
 	Da $A$ einfach ist, muss $\pi$ bereits ein Isomorphismus sein und es folgt $\mathcal{B}(\mathcal{H}) \cong \mathcal{B}(\mathbb{C}^r)=M_r$.
+	
+	Falls $A$ nicht einfach ist, so enthält $A$ ein Ideal $\set*{0}\neq J \neq A$ mit minimaler Dimension.
+	Dann ist $J$ eine endlichdimensionale $C^*$-Algebra und enthält keine nichttrivialen Ideale, ist also einfach.
+	Mit dem ersten Teil folgt also $J \cong M_{r_1}$ für ein $r_1 \in \mathbb{N}$.
+	$J$ ist insbesondere unital, sodass $J= J \cdot \ind_J = A \cdot \ind_J= \ind_J \cdot A$ gilt und damit 
+	\[
+		A=A \enbrace*{\ind_J+ (\ind_{A^\simm}- \ind_J)} = A  \ind_J + A \enbrace*{\ind_{A^\simm} - \ind_J} = \Underbracket{\ind_J  A \ind_J}{\cong M_{r_1}} \oplus \Underbracket{\enbrace*{\ind_{A^\simm} - \ind_J}A \enbrace*{\ind_{A^\simm} - \ind_J}}{\lhd A}
+	\]
+	Das rechte Ideal hat eine kleinere Dimension als $A$ und damit sind wir fertig.
 \end{beweis}
+
+\begin{beispiel}
+	Für eine $C^*$-Algebra $A$ sei
+	\mapdef{\iota_n^A \colon M_n(A)}{M_{n+1}(A)}{x}{\begin{psmallmatrix}
+		x & 0\\
+		0 & 0
+	\end{psmallmatrix}}
+	Schon gesehen: Für $A=\mathbb{C}$ ist $\Dlim(M_n,\iota_n^\mathbb{C}) \cong \mathcal{K} \enbrace*{\ell^2(\mathbb{N})} = \mathcal{K}$.
+	Für ein beliebiges $A$ schreiben wir
+	\[
+		\mathcal{K} \otimes A := \Dlim (M_n(A),\iota_n^A)
+	\]
+	Die Notation werden wir später rechtfertigen.
+	Es gilt $\mathcal{K} \cong \mathcal{K} \otimes M_r \cong \mathcal{K} \otimes \mathcal{K}$ und $\mathcal{K} \otimes M_r \cong M_r(\mathcal{K})$.
+	Für die primitiven Ideale gilt
+	\[
+		\Prim A\approx \Prim(\mathcal{K} \otimes A)
+	\]
+	Zwei $C^*$-Algebren $A$ und $B$ heißen \Index{stabil isomorph}, falls $\mathcal{K} \otimes A \cong \mathcal{K} \otimes B$. 
+	Tensorieren mit den Kompakten Operatoren liefert \enquote{nichtkommutativen Platz} für direkte Summen von Moduln.
+	Dies liefert eine abelsche Halbgruppe und daraus erhält man mit der Grothendiek-Konstruktion eine abelsche Gruppe. 
+	Das ist die Grundlage der K-Theorie.
+\end{beispiel}
+
+\begin{beispiel}
+	Betrachte $A := C\enbrace*{[0,1],M_2}$ und die Unteralgebren 
+	\begin{align}
+		B &:= \set*{f \in A \given f(1) = \begin{psmallmatrix} \lambda & 0\\ 0 & \lambda \end{psmallmatrix}, \lambda \in \mathbb{C}}\\
+		C &:= \set*{f \in A \given f(1) = \begin{psmallmatrix} \lambda_1 & 0\\ 0 & \lambda_2 \end{psmallmatrix}, \lambda_1, \lambda_2 \in \mathbb{C}} \\
+		D &:= \set*{f \in A \given f(1)= \begin{psmallmatrix} \lambda_1 & 0\\ 0 & \lambda_2 \end{psmallmatrix}, f(0)= \begin{psmallmatrix} \lambda_1 & 0\\ 0 & \lambda_1 \end{psmallmatrix}, \lambda_1, \lambda_2 \in \mathbb{C}}
+	\end{align}
+	Wir können und $\Prim A$ als Charaktere auf $A$ vorstellen und in diesem Fall sogar als Intervall, wobei die Punkte Evaluierungen $\ev_f \colon A \to M_2$ entsprechen.
+	In $\Prim B$ gilt zusätzlich $\ev_1 \colon B \to \mathbb{C} \cdot \ind_{M_2} \cong \mathbb{C}$.
+	Für $\Prim C$ enthält am rechten Rand des Intervalls zwei Punkte, einmal die Auswertung, die $\lambda_1$ ausgibt, und die, die $\lambda_2$ ausgibt.
+	Damit ist $\Prim C$ nicht hausdorffsch, aber immerhin $T_0$.
+	Für $\Prim D$ erhält man einen Kreis, der an einer Stell einen verdoppelten Punkt hat, der nur zu einer Seite hin offen ist.
+\end{beispiel}
+
+\begin{beispiel}
+	Sei $A := \set[\big]{f \in C_0\enbrace*{[0,\infty),\mathcal{K}} \given f(t) \in \iota_{n,\infty}(M_n) \text{ für }t \in [n-1,n)}$.
+	\missingfigure{hier kommt eine etwas esoterische Zeichnung hin \ldots }
+	$\Prim A \approx [0,\in )$ ist hausdorffsch.
+	Für jedes $t_0 \in \Prim A$ existieren eine Umgebung $U$ von $t_0$ und $f \in A$, sodass $f(t)$ eine Projektion von Rang 1 ist für alle $t \in U$.
+	$A$ hat eine \enquote{stetige Spur}.
+	Für $A,B$ mit stetiger Spur und $\Prim A \approx \Prim B$, so gilt 
+	\[
+		\mathcal{K} \otimes A \cong \mathcal{K} \otimes B \iff \Underbracket{H^3(\Prim A)}{\ni \delta(A)}\cong \Underbracket{H^3(\Prim B)}{\ni\delta(B)} 
+	\]
+	Dixmier-Douady-Klasse
+\end{beispiel}
+
+\begin{beispiel}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item $M_r$ ist erzeugt von den Matrixeinheiten $e_{ij} \in M_r$, $i,j=1,\ldots ,r$.
+		Die $e_{ij}$ erfüllen Relationen $R_{M_r}=\set{e_{ij} e_{kl}=\delta_{jk} e_{il}, e_{ij}^*= e_{ji} \given  i,j,k,l \in 1,\ldots ,r}$.
+		Falls $A$ eine weitere $C^*$-Algebra ist mit Elementen  $f_{ij}$, $i,j=1,\ldots,r$, welche die Relationen $R_{M_r}$ erfüllen, so existiert genau ein $^*$-Homomorphismus $\pi \colon M_r \to M$ mit $\pi(e_{ij})=f_{ij}$.
+		Die Erzeuger $e_{ij}$ mit den Relationen $R_{M_r}$ erfüllen also eine universelle Eigenschaft.
+		($M_r$ einfach $\implies \pi$ ist frei, falls $f_{ij}\neq 0$)
+		\item Sei $X=\set*{x_\gamma \given \gamma \in \Gamma}$ eine Menge.
+		Eine Relation mit Erzeugern in $X$ ist ein Ausdruck der Form $p(x_{\gamma_1}, \ldots ,x_{\gamma_n}, x_{\gamma_1}^*, \ldots , x_{\gamma_n}^*)=0$, wo $p$ ein Polynom in $2n$ nichtkommutierenden Variablen ist.
+		
+		(Allgemeiner betrachtet man auch Relationen $[p,\varepsilon]$ der Form $\norm*{p(x_1,\ldots ,x_n,x_1^*,\ldots ,x_n^*)} \le \varepsilon$, $\varepsilon>0$)
+		
+		Eine Darstellung von $(X,R)$ (wo $R$ eine Menge von Relationen ist) ist ein $^*$-Homomorphismus $\pi \colon ^*\text{-}\Alg(X) \to \mathcal{B}(\mathcal{H})$, der jede Relation erfüllt, das heißt 
+		\[
+			\norm*{p\enbrace*{\pi(x_{\gamma_1}) , \ldots , \pi(x_{\gamma_n}), \pi{x_{\gamma_1}}^* ,\ldots , \pi(x_{\gamma_n})^*}} \le \varepsilon
+		\]
+		$(X,R)$ heißt zulässig, falls es für jedes $x_j$ ein $c_\gamma \ge 0$ gibt mit $\norm*{\pi(x_\gamma)} \le c_\gamma$ für jede Darstellung $\pi$.
+		Für zulässige $(X,R)$ definieren wir eine Halbnorm auf $^*$-$\Alg(X)$ durch 
+		\[
+			\norm*{x} := \sup_{\pi \text{ Darst.}} \norm*{\pi(x)}_{\mathcal{B}(\mathcal{H})}
+		\]
+		Definiere $C^*(X\mid R) := \overline{^*\text{-}\Alg(X)}^{\norm*{\cdot}}$ (Vervollständigung bezüglich einer Halbnorm).
+	\end{enumerate}
+\end{beispiel}
 % section beispiele (end)
 
 
