@@ -1212,7 +1212,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}
 \end{beweis}
 
-\begin{satz}[{name=[Limes von C*-Algebren]}]
+\begin{satz}[{name=[Limes von C*-Algebren]},label=satz:ger_lim]
 	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
 	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\Dlim(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
 	\begin{itemize}
@@ -1250,12 +1250,14 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\Dlim(A_n,\varphi_n) := q \enbrace*{\overline{C}} \subset \Faktor{\prod\nolimits_\mathbb{N} A_n}{\bigoplus\nolimits_\mathbb{N} A_n}
 	\]
-	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
+	Der Übergang zum Quotienten ist notwendig, damit $\varphi_{n+1,\infty} \circ \varphi_{n} = \varphi_{n,\infty}$ gilt.
+	Wir definieren nun $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
 	\[
 		\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi_n(a)),\ldots } 
 	\]
-	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. \todo{der folgende Absatz könnte noch ausführlicher sein}
+	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. 
 	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
+	Wie man dies explizit durchführt, wird in \cref{sub:konstruktion_limes} erläutert.
 	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ ist dicht und $\psi$ ist normvermindernd auf $q(C)$, setzt sich also eindeutig auf $q(\overline{C})$ fort.
 	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
 \end{beweis}
@@ -3295,6 +3297,17 @@ Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a
 	Die Relation $b \le c$ folgt genauso, also ist $\Lambda$ gerichtet.
 \end{beweis}
 % subsection alternativer_beweis_autoref_lemma_311 (end)
+
+
+\subsection{Konstruktion der eindeutigen Abbildung für den Limes von $C^*$-Algebren} % (fold)
+\label{sub:konstruktion_limes}
+\emph{Mit der Notation aus \autoref{satz:ger_lim}.}\smallskip\\
+Wir definieren zunächst eine geeignete Abbildung 
+\mapdef{\theta \colon C}{B}{(a_n)_{\mathbb{N}}}{\sum_\mathbb{N} \psi_n \enbrace[\big]{a_n - \varphi_{n-1}(a_{n-1})}}{}
+Diese Abbildung ist wohldefiniert, denn nach Definition von $C$ ist die Summe endlich.
+Weiter gilt offensichtlich $\theta \circ \varphi_n' = \psi_n$.
+Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
+% subsection konstruktion_der_eindeutigen_abbildung_fur_den_limes_von_c_algebren (end)
 
 
 \subsection{Die GNS-Darstellung ist zyklisch} % (fold)
