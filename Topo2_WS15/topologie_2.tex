@@ -6,7 +6,7 @@
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/reine/u/topos/lehre/WS2015-2016/Topologie2/}
 
 \newcommand{\prof}{Prof.\ Dr.\ Arthur Bartels}
-% \publishers{\scalebox{14}{$K$}}
+\publishers{\scalebox{11}{\Huge$H^*$}}
 \input{../!config/mitschrift_headings.tex}
 
 \begin{document}
@@ -2665,7 +2665,7 @@ Ab jetzt: $R$ kommutativ!
 		Dann gibt es eine kurze exakte Folge 
 		\[
 			\begin{tikzcd}
-				0 \rar & E^2_{1,n-1} \rar & A_n \rar & E^2_{0,n} \rar & 0
+				0 \rar & E^2_{0,n} \rar & A_n \rar & E^2_{1,n-1} \rar & 0
 			\end{tikzcd}
 		\]
 		\item Angenommen $E^2_{p,q}=0$ für $g \ge 2$ (Zwei Zeilen). Dann gibt es eine lange exakte Folge
@@ -3396,14 +3396,61 @@ Es folgt $d(a-b) = dc' \in d \enbrace*{F_{p-1} C_{p+q}} \cap F_{p-r} C_{p+q-1}$.
 	Sei $h  \colon U_h \to V_h$ eine Karte aus dem Atlas mit $x \in U_h$.
 	Wir definieren $\mu_x^M$ als das Bild von $\mu_{h(x)}^{\mathbb{R}^n}$ unter der Komposition der folgenden Isomorphismen:
 	\[
-		\begin{tikzcd}[sep=small]
-			\mu^{\mathbb{R}^n}_{h(x)} \in H_n \enbrace*{\mathbb{R}^n,\mathbb{R}^n \setminus \set*{h(x)}} & H_n(V,V\setminus \set*{h(x)}) \lar["\cong"'] &
-			H_n(U,U \setminus \set*{x}) \lar["\cong","h_*"'] \rar["\cong"] & H_n(M,M \setminus \set*{x})
+		\begin{tikzcd}[sep=2.1em]
+			\mu^{\mathbb{R}^n}_{h(x)} \in H_n \enbrace[\big]{\mathbb{R}^n,\mathbb{R}^n \setminus \set*{h(x)}} & H_n(V,V\setminus \set*{h(x)}) \lar["\cong"'] &
+			H_n(U,U \setminus \set*{x}) \lar["\cong","h_*"'] \rar["\cong"] & H_n \enbrace[\big]{M,M \setminus \set*{x}}
 		\end{tikzcd}
 	\]
 	Da die Kartenwechsel orientierungserhaltend sind, hängt $\mu_x^M$ nicht von der Wahl von $h$ ab.
 	Da $\mu^{\mathbb{R}^n}$ eine Orientierung ist, ist auch $\mu^M$ eine Orientierung.
 \end{beweis}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{enumerate}[i)]
+		\item Genauer haben wir gezeigt, dass jede Orientierung von $M$ einen Atlas wie in (ii) mittels $\mu^{\mathbb{R}^n}$ bestimmt und dass jeder Atlas wie in (ii) eine Orientierung von $M$ bestimmt.
+		\item Ob ein Homöomorphismus $f \colon V \to V'$ zwischen offenen Teilmengen des $\mathbb{R}^n$ eine Orientierung $\mu^{\mathbb{R}^n}$ des $\mathbb{R}^n$ erhält oder nicht, ist unabhängig von der Wahl der Orientierung $\mu^{\mathbb{R}^n}$.
+		Erhält $f$ die Orientierung $\mu^{\mathbb{R}^n}$, so erhält $f$ auch die Orientierung $-\mu^{\mathbb{R}^n}$.
+		Es macht also unabhängig von der Wahl einer Orientierung des $\mathbb{R}^n$ Sinn von orientierungserhaltenden Kartenwechseln zu sprechen.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{lemma}
+	Sei $f \colon U \to V$ ein Diffeomorphismus zwischen offenen Teilmengen des $\mathbb{R}^n$.
+	Dann ist $f$ genau dann orientierungserhaltend, wenn für alle $x \in U$ die Determinante des Differentials $\D f_x \colon \mathbb{R}^n \to \mathbb{R}^n$ positiv ist.
+\end{lemma}
+\begin{beweis}
+	Wir müssen zeigen: Für $x \in U$ ist $f_* \colon H_n \enbrace*{U,U\setminus \set*{x}} \to H_n \enbrace*{V,V \setminus \set*{f(x)}}$ gegeben durch Multiplikation mit $\sgn \enbrace*{\det \D f_x}$ bezüglich der durch (eine) Orientierung des $\mathbb{R}^n$ festgelegten Isomorphismen $H_n \enbrace*{U,U \setminus \set*{x}} \cong \mathbb{Z} \cong H_n \enbrace*{V,V\setminus \set*{f(x)}}$.
+	Ohne Beschränkung der Allgemeinheit nehmen wir $x=0=f(x)$ an.
+	Sind $f$ und $g$ homotop im Raum aller stetigen Abbildungen $\varphi \colon U \to \mathbb{R}^n$ mit $\varphi^{-1}(0)=\set*{0}$, so gilt wegen Homotopieinvarianz 
+	$f_*=g_* \colon H_n \enbrace*{U,U \setminus \set*{0}} \to H_n \enbrace*{\mathbb{R}^n,\mathbb{R}^n\setminus \set*{0}} \cong H_n \enbrace*{V,V \setminus \set*{0}}$.
+	
+	Ist $f \in \GL_n(\mathbb{R})$, so ist $f$ in $\GL_n(\mathbb{R})$ homotop zu 
+	\[
+		\begin{cases}
+			\id &\text{ falls }\det f >0\\
+			(x_1,\ldots ,x_n) \xmapsto{\Sp} (-x_1,x_2,\ldots ,x_n) &\text{ falls } \det f < 0
+		\end{cases}
+	\]
+	Aus Topologie \RM{1}. wissen wir, dass $(\Sp)_* = - \id \colon H_{n-1}(S^{n-1}) \to H_{n-1}(S^{n-1})$.
+	Da wir einen natürlichen Isomorphismus $H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set*{0}) \to H_{n-1}(S^{n-1})$ haben, ist die Spiegelung daher orientierungserhaltend.
+	Ist nun $f \colon U \to V$ ein Diffeomorphismus mit $f(0)=0$, so ist 
+	\[
+		(\D f)_0 (v) = \lim_{t \to 0} \frac{f(t \cdot v)}{t} 
+	\]
+	Wir erhalten eine Homotopie $H$ von $\D f_0$ nach $f$ durch 
+	\[
+		H(v,t) := \begin{cases}
+			\D f_0(v) &\text{ falls }t=0\\
+			f(t \cdot v) /t &\text{ falls } t \in (0,1]
+		\end{cases}
+	\]
+	und die Behauptung folgt für beliebige $f$.
+\end{beweis}
+
+\begin{korollarB}
+	Eine $C^\infty$-Mannigfaltigkeit $M$ ist genau dann orientierbar, wenn es einen $C^\infty$-Atlas $\set*{h \colon U \to V}$ für $M$ gibt, sodass die Differentiale der Kartenwechsel in jedem Punkt positive Determinante besitzen.
+\end{korollarB}
 % section 19 (end)
 
 

@@ -5,7 +5,7 @@
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/operatoralgebren.html}
 
 \newcommand{\prof}{Prof.\ Dr.\ Wilhelm Winter}
-\publishers{\scalebox{12}{\Huge$C^*$}}
+\publishers{\scalebox{11}{\Huge$C^*$}}
 \input{../!config/mitschrift_headings.tex}
 
 \begin{document}
@@ -40,7 +40,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\Inv(A) &:= \set{a \in A  \text{ invertierbar} } \\
 		\sigma(a) &:=\sigma_A(a) := \set[\big]{\lambda \in \mathbb{C} \given \lambda \cdot \ind - a \notin \Inv(A)} \marginnote{das Vorzeichen der Differenz spielt für die Definition der Menge keine Rolle}
 	\end{align}
-	$\sigma(a)$ heißt \Index{Spektrum} von $a$. 
+	$\sigma(a)$ heißt \Index{Spektrum} von $a \in A$. 
 \end{definition}
 
 \begin{bemerkung}[{name=[Invertierbarkeit von $1 -ab$]},label=bem:13]
@@ -831,13 +831,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{satz}[label=satz:37,{name=[Eigenschaften positiver Elemente]}]
 	Sei $A$ eine $C^*$-Algebra. Dann gilt
 	\begin{enumerate}[(i),itemsep=2pt]
-		\item $A_+ = \set*{a^*a \given a \in A}$
-		\item $A = \Span A_+$
-		\item $A_+$ ist ein abgeschlossener Kegel in $A$
-		\item $\le$ ist eine partielle Ordnung auf $A_\sa$
-		\item Für $a,b \in A_\sa$ und $c \in A$ mit $a \le b$ gilt $c a c^* \le c b c^*$
-		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$
-		\item Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt
+		\item Es gilt $A_+ = \set*{a^*a \given a \in A}$.
+		\item Es gilt $A = \Span A_+$.
+		\item $A_+$ ist ein abgeschlossener Kegel in $A$.
+		\item $\le$ ist eine partielle Ordnung auf $A_\sa$.
+		\item Für $a,b \in A_\sa$ und $c \in A$ mit $a \le b$ gilt $c a c^* \le c b c^*$.
+		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$.
+		\item Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
@@ -874,7 +874,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		Damit ist $a \le \norm*{b} \cdot \ind_{A^\simm}$. 
 		Gelfand für $C^*(a,\ind_{A^\simm})$ liefert $\norm*{b} \cdot \ind_{A^\simm} \ge \norm*{a} \cdot \ind_{A^\simm}$. 
 		Damit muss dann bereits $\norm*{b} \ge \norm*{a}$ sein.
-		\item \emph{Übungsaufgabe 1 b) von Blatt 5!}\todo{vlt noch \TeX{}en} \qedhere
+		\item \emph{Übungsaufgabe 1 b) von Blatt 5! Siehe \cref{sub:beweis_37_vii}.} \qedhere
 	\end{enumerate}
 \end{beweis}
 
@@ -1212,7 +1212,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}
 \end{beweis}
 
-\begin{satz}[{name=[Limes von C*-Algebren]}]
+\begin{satz}[{name=[Limes von C*-Algebren]},label=satz:ger_lim]
 	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
 	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\Dlim(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
 	\begin{itemize}
@@ -1250,12 +1250,14 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\Dlim(A_n,\varphi_n) := q \enbrace*{\overline{C}} \subset \Faktor{\prod\nolimits_\mathbb{N} A_n}{\bigoplus\nolimits_\mathbb{N} A_n}
 	\]
-	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
+	Der Übergang zum Quotienten ist notwendig, damit $\varphi_{n+1,\infty} \circ \varphi_{n} = \varphi_{n,\infty}$ gilt.
+	Wir definieren nun $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
 	\[
 		\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi_n(a)),\ldots } 
 	\]
-	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. \todo{der folgende Absatz könnte noch ausführlicher sein}
+	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. 
 	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
+	Wie man dies explizit durchführt, wird in \cref{sub:konstruktion_limes} erläutert.
 	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ ist dicht und $\psi$ ist normvermindernd auf $q(C)$, setzt sich also eindeutig auf $q(\overline{C})$ fort.
 	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
 \end{beweis}
@@ -3086,7 +3088,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\[
 		\begin{tikzcd}[sep=small]
 			A \ar[rr,"\chi_1"] \ar[ddd,equal] \drar& & \mathbb{C} \ar[ddd,"\cong"]\\
-			& \sfrac{A}{\ker \chi_1} \urar["\cong"'] \dar[equal] \\[-2pt]
+			& \sfrac{A}{\ker \chi_1} \urar["\cong"'] \dar[equal] \\[-2.3pt]
 			& \sfrac{A}{\ker \chi_2} \drar["\cong"] \\
 			A \ar[rr,"\chi_2"'] \urar& & \mathbb{C}
 		\end{tikzcd}
@@ -3140,14 +3142,14 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 
 \begin{beispiel}
 	Für eine $C^*$-Algebra $A$ sei
-	\mapdef{\iota_n^A \colon M_n(A)}{M_{n+1}(A)}{x}{\begin{psmallmatrix}
-		x & 0\\
+	\mapdef{\iota_n^A \colon M_n(A)}{M_{n+1}(A)}{X}{\begin{psmallmatrix}
+		X & 0\\
 		0 & 0
 	\end{psmallmatrix}}
 	Schon gesehen: Für $A=\mathbb{C}$ ist $\Dlim(M_n,\iota_n^\mathbb{C}) \cong \mathcal{K} \enbrace*{\ell^2(\mathbb{N})} = \mathcal{K}$.
 	Für ein beliebiges $A$ schreiben wir
 	\[
-		\mathcal{K} \otimes A := \Dlim (M_n(A),\iota_n^A)
+		\mathcal{K} \otimes A := \dlim \enbrace[\big]{M_n(A),\iota_n^A}
 	\]
 	Die Notation werden wir später rechtfertigen.
 	Es gilt $\mathcal{K} \cong \mathcal{K} \otimes M_r \cong \mathcal{K} \otimes \mathcal{K}$ und $\mathcal{K} \otimes M_r \cong M_r(\mathcal{K})$.
@@ -3237,6 +3239,34 @@ Hier findet man einige ausgewählte Beweise und Ergänzungen, auf die der Vorles
 Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch einmal darauf hingewiesen, dass für die Richtigkeit keine Garantie übernommen wird!
 
 
+\subsection{Beweis von \autoref{satz:37} (vii)} % (fold)
+\label{sub:beweis_37_vii}
+\emph{Dies war außerdem die Übungsaufgabe 1 b) von Blatt 5.} \smallskip\\
+Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt.
+\begin{beweis}
+	Da $a$ invertierbar ist, ist $0$ nicht im Spektrum von $a$ enthalten.
+	Da $\sigma(a)$ kompakt ist, ist die äquivalent dazu, dass ein $\lambda>0$ existiert mit $\sigma(a) \subset [\lambda,\infty)$.
+	Weiter gilt
+	Wir haben damit folgende Äquivalenzen
+	\[
+		\sigma(a) \subset [\lambda,\infty) \iff \sigma(a-\lambda) \subset [0,\infty) \iff a- \lambda\ge 0 \iff a \ge \lambda
+	\]
+	Da $b\ge a \ge \lambda$, gilt also auch $0 \notin \sigma(b)$ und $b$ ist invertierbar.
+	
+	Das $\sigma(a^{-1}) = \set*{\lambda^{-1} \given \lambda \in  \sigma(a)}$, sind $a^{-1}$ und $b ^{-1}$ wieder positiv.
+	Insbesondere existieren die Quadratwurzeln von den Inversen. 
+	Mit \autoref{satz:37} (v) folgt aus $a \le b$ also 
+	\[
+		\ind=a^{-\sfrac{1}{2}} a a^{- \sfrac{1}{2}} \le a^{-\sfrac{1}{2}} b a^{-\sfrac{1}{2}} =: c
+	\]
+	Nach Gelfand folgt aus $c \ge \ind$, dass $c$ invertierbar ist und $c^{-1} \le \ind$ gilt. Wieder mit \autoref{satz:37} (v) erhalten wir
+	\[
+		c^{-1} = a^{\sfrac{1}{2}}b^{-1}a^{\sfrac{1}{2}} \le \ind \implies b^{-1} \le \enbrace{a^{\sfrac{1}{2}}}^{-1} \enbrace{a^{\sfrac{1}{2}}}^{-1} =a^{-1} \qedhere
+	\]
+\end{beweis}
+% subsection beweis_von_autoref_satz_37_vii (end)
+
+
 \subsection{Alternativer Beweis von \autoref{lem:311}} % (fold)
 \label{sub:alternativer_beweis_lemma_311}
 Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
@@ -3267,6 +3297,17 @@ Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a
 	Die Relation $b \le c$ folgt genauso, also ist $\Lambda$ gerichtet.
 \end{beweis}
 % subsection alternativer_beweis_autoref_lemma_311 (end)
+
+
+\subsection{Konstruktion der eindeutigen Abbildung für den Limes von $C^*$-Algebren} % (fold)
+\label{sub:konstruktion_limes}
+\emph{Mit der Notation aus \autoref{satz:ger_lim}.}\smallskip\\
+Wir definieren zunächst eine geeignete Abbildung 
+\mapdef{\theta \colon C}{B}{(a_n)_{\mathbb{N}}}{\sum_\mathbb{N} \psi_n \enbrace[\big]{a_n - \varphi_{n-1}(a_{n-1})}}{}
+Diese Abbildung ist wohldefiniert, denn nach Definition von $C$ ist die Summe endlich.
+Weiter gilt offensichtlich $\theta \circ \varphi_n' = \psi_n$.
+Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
+% subsection konstruktion_der_eindeutigen_abbildung_fur_den_limes_von_c_algebren (end)
 
 
 \subsection{Die GNS-Darstellung ist zyklisch} % (fold)
