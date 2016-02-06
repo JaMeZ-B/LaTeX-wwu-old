@@ -330,6 +330,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\end{cases}
 	\]
 	Wo die Existenz eines Einselements nötig ist, fordern wir zusätzlich, dass $A$ unital ist.
+	Die Teilmenge der selbstadjungierten Elemente bezeichnen wir mit $A_\sa$, die der unitären mit $\mathcal{U}(A)$.
 \end{definition}
 
 \begin{definition}[{name=[${ }^*$-Homomorphismus]}]
@@ -339,10 +340,10 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{definition}
 
 \begin{bemerkung}[{name=[Direkte Summe von $A$ mit den komplexen Zahlen]}]
-	Falls $A$ eine (involutive) Banachalgebra ist, so ist $A \oplus \mathbb{C}$ mit offensichtlichen Vektorraumoperationen, der naheliegenden Multiplikation
-	$(a,\lambda) \cdot (b,\mu) = \enbrace*{ab + \mu a + \lambda b, \lambda \mu}$ sowie $(a,\lambda)^* = (a^*,\overline{\lambda})$ im involutiven Fall und Norm definiert wir durch
-	$\norm{(a,\lambda)}:= \norm{a}_{A} + \abs{\lambda}$ eine unitale (involutive) Banachalgebra mit $\ind=(0,1)$. $A \oplus \mathbb{C}$ ist jedoch keine $C^*$-Algebra, auch wenn
-	$A$ eine $C^*$-Algebra ist.
+	Falls $A$ eine (involutive) Banachalgebra ist, so ist $A \oplus \mathbb{C}$ mit offensichtlichen Vektorraumoperationen, der absolut naheliegenden Multiplikation $(a,\lambda) \cdot (b,\mu) = \enbrace*{ab + \mu a + \lambda b, \lambda \mu}$ sowie $(a,\lambda)^* = (a^*,\overline{\lambda})$ im involutiven Fall und Norm definiert durch
+	$\norm{(a,\lambda)}:= \norm{a}_{A} + \abs{\lambda}$ eine unitale (involutive) Banachalgebra mit $\ind=(0,1)$. 
+	$A \oplus \mathbb{C}$ ist jedoch keine $C^*$-Algebra, auch wenn $A$ eine $C^*$-Algebra ist.
+	Wir müssen also etwas subtiler vorgehen, um eine \Index{Unitalisierung} zu konstruieren: 
 \end{bemerkung}
 
 \begin{satz}[label=satz:26,{name=[Unitalisierung]}]
@@ -364,8 +365,8 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Dass $\iota(A) \lhd A^\simm$ ein Ideal ist, ist klar. $A^\simm$ ist normiert mittels der Operatornorm. Für $0 \neq a \in A$ gilt  
 	\begin{align}
 		\norm{a}_A = \frac{1}{\norm{a}_A}\norm{aa^*}_A = \norm*{a \enbrace*{\frac{1}{\norm{a^*} } \cdot a^*}}_A &\le \norm*{\iota(a) \enbrace*{\frac{1}{\norm{a^*}}\cdot a^* }}_A \\
-		&\le \sup_{\norm{b}_A \le 1} \norm[\big]{\iota(a)(b)}_A = \norm[\big]{\iota(a)}_{\mathcal{B}(A)} \\
-		&= \sup_{\norm{b}_A \le 1} \norm{ab}_A \\
+		&\le \sup_{\norm{b} \le 1} \norm[\big]{\iota(a)(b)}_A = \norm[\big]{\iota(a)}_{\mathcal{B}(A)} \\
+		&= \sup_{\norm{b} \le 1} \norm{ab}_A \\
 		&\le \norm{a}_A   
 	\end{align}
 	Also ist $\iota$ isometrisch. Es folgt, dass $\iota(A) \subset \mathcal{B}(A)$ abgeschlossen ist, da $A$ vollständig ist. Weiter folgt, dass auch 
@@ -378,8 +379,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		&\le \sup_{b \in A, \norm{b} \le 1} \norm[\big]{a^*ab + \lambda a^* b + \overline{\lambda} a b + \abs{\lambda}^2 b }_A \tag{$*$} \label{eq:26:1}\\
 		&= \norm[\big]{\iota \enbrace*{a^* a + \lambda a^* + \overline{\lambda} a} + \abs{\lambda}^2 \cdot \ind_{\mathcal{B}(A)} }_{\mathcal{B}(A)} \\
 		&= \norm*{ \enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^* \enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}}_{\mathcal{B}(A)} \\
-		&\le \norm*{\enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^*}_{\mathcal{B}(A)} \norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)}   
-		\tag{$**$} \label{eq:26:2}
+		&\le \norm*{\enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^*}_{\mathcal{B}(A)}\cdot\norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)} \tag{$**$} \label{eq:26:2}
 	\end{align}
 	Es folgt, dass 
 	\begin{align}
@@ -387,7 +387,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\le \norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)} 
 	\end{align}
 	Damit folgt, dass \eqref{eq:26:1} und \eqref{eq:26:2} Gleichungen sind und $\norm*{\cdot }_{\mathcal{B}(A)}$ eine $C^*$-Norm auf $A^\simm$ ist. Falls $A$ unital ist, gilt
-	$\iota(\ind_A) = \ind_{\mathcal{B}(A)}$ und somit $\iota(A)=A^\simm$. Ist $A$ nicht unital, so ist $A^\simm \cong \iota(A) \oplus \mathbb{C}$ als Vektorräume und es muss
+	$\iota(\ind_A) = \ind_{\mathcal{B}(A)}$ und somit $\iota(A)=A^\simm$. Ist $A$ nicht unital, so ist $A^\simm \cong \iota(A) \oplus \mathbb{C}$ als Vektorräume(!) und es muss
 	$\sfrac{A^\simm}{\iota(A)}\cong \mathbb{C}$ gelten.
 \end{beweis}
 
@@ -399,8 +399,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 			A  \oplus \mathbb{C} , &\text{ falls } A \text{ unital} 
 		\end{cases}
 	\]
-	mit $\norm*{(a,\lambda)} := \max \set*{\norm*{a}_A, \abs{\lambda}}$. Dann ist in jedem Fall $A^+ \cong A \oplus \mathbb{C}$ als Vektorraum. $A^+$ lässt sich charakterisieren 
-	durch die universelle Eigenschaft:\marginnote{Blatt3 Aufgabe 2}
+	mit $\norm*{(a,\lambda)} := \max \set*{\norm*{a}_A, \abs{\lambda}}$ in letzterem Fall. 
+	Dann ist in jedem Fall $A^+ \cong A \oplus \mathbb{C}$ als Vektorraum. 
+	$A^+$ lässt sich charakterisieren durch die universelle Eigenschaft:\marginnote{Blatt3 Aufgabe 2}
 	\[
 		\begin{tikzcd}
 			\mbox{ } & B \\
@@ -460,7 +461,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\[
 			r(a) = \lim_{n \to \infty} \norm*{a^n}^{\sfrac{1}{n}} = \lim_{n \to \infty} \norm*{a^{2^n}}^{\sfrac{1}{2^n}} = \norm*{a}
 		\]
-		Weiter existiert\footnote{$(ia)^0 = \ind_{A^\simm}$ falls $A$ nicht unital} $e^{ia} := \sum_{n=0}^{\infty} \frac{1}{n!}(ia)^n \in A^\simm$ und ist unitär mit 
+		Weiter existiert\footnote{es ist $(ia)^0 = \ind_{A^\simm}$ falls $A$ nicht unital} $e^{ia} := \sum_{n=0}^{\infty} \frac{1}{n!}(ia)^n \in A^\simm$ und ist unitär mit 
 		\(
 			\enbrace{e^{ia}}^* = e^{(ia)^*} = e^{-ia} = \enbrace{e^{ia}}^{-1}
 		\), 
@@ -1243,7 +1244,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	ist eine $C^*$-Algebra mit komponentenweisen Operationen und Supremumsnorm, denn sie ist eine Banachalgebra nach Blatt 1, Aufgabe 1 c) und $\norm*{\cdot}_\infty$ ist offensichtlich eine $C^*$-Norm.
 	Es ist nun
 	\[
-		\textstyle\bigoplus_\mathbb{N} A_n := \set[\big]{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?}
+		\textstyle\bigoplus_\mathbb{N} A_n := \set[\big]{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?\newline Dies ist tatsächlich die Definition einer direkten Summe von $C^*$-Algebren}
 	\]
 	Sei $q \colon \prod_\mathbb{N} A_n \to \sfrac{\prod_\mathbb{N} A_n}{\bigoplus_\mathbb{N} A_n}$ die Quotientenabbildung und weiter
 	\[
