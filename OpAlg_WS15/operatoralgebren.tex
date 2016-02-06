@@ -5,7 +5,7 @@
 \newcommand{\homepage}{https://wwwmath.uni-muenster.de/u/wilhelm.winter/wwinter/operatoralgebren.html}
 
 \newcommand{\prof}{Prof.\ Dr.\ Wilhelm Winter}
-% \publishers{\scalebox{14}{$K$}}
+\publishers{\scalebox{11}{\Huge$C^*$}}
 \input{../!config/mitschrift_headings.tex}
 
 \begin{document}
@@ -40,10 +40,10 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\Inv(A) &:= \set{a \in A  \text{ invertierbar} } \\
 		\sigma(a) &:=\sigma_A(a) := \set[\big]{\lambda \in \mathbb{C} \given \lambda \cdot \ind - a \notin \Inv(A)} \marginnote{das Vorzeichen der Differenz spielt für die Definition der Menge keine Rolle}
 	\end{align}
-	$\sigma(a)$ heißt \Index{Spektrum} von $a$. 
+	$\sigma(a)$ heißt \Index{Spektrum} von $a \in A$. 
 \end{definition}
 
-\begin{bemerkung}[{name=[Invertierbarkeit von $1 -ab$]},label=bem:13]
+\begin{bemerkung}[{name=[{Invertierbarkeit von $1 -ab$}]},label=bem:13]
 	Sei $A$ wie oben und $a,b \in A$. Dann gilt
 	\[
 		\ind -ab \in \Inv(A) \iff \ind -ba \in \Inv(A)
@@ -54,7 +54,8 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{beweis}
 
 \begin{satz}[label=satz14_poly,{name=[Verträglichkeit des Spektrums mit Polynomen]}]
-	Sei $A$ eine unitale $\mathbb{C}$-Algebra und $a \in A$ mit $\sigma(a)\neq \emptyset$. Sei weiter $p \in \mathbb{C}[Z]$ ein Polynom. Dann gilt 
+	Sei $A$ eine unitale $\mathbb{C}$-Algebra und $a \in A$ mit $\sigma(a)\neq \emptyset$. Sei weiter $p \in \mathbb{C}[Z]$ ein Polynom.\marginnote{weiter gilt $\sigma(a^{-1})= \set*{\lambda^{-1}\given \lambda \in \sigma(a)}$ nach Aufgabe 5 von Blatt 1}
+	Dann gilt 
 	\[
 		\sigma\enbrace[\big]{p(a) }= p \enbrace[\big]{\sigma(a)}
 	\]
@@ -110,8 +111,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{proposition}
 \begin{beweis}
 	Angenommen $\abs{\lambda} > \norm{a}$, dann gilt $\norm{\lambda^{-1} a} < 1$, also ist $\ind- \lambda^{-1} a$ invertierbar nach \autoref{satz15_neumann} und 
-	damit auch $\lambda -a \iff \lambda \notin \sigma(a)$. Insgesamt folgt, dass $r(a) \le \norm{a}$ ist. 	
-	Es ist $\mathbb{C} \setminus \sigma(a) \subset \mathbb{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ nach Heine-Borel kompakt sein.
+	damit auch $\lambda -a $. Also kann $\lambda$ nicht im Spektrum von $a$ enthalten sein. 
+	Es folgt, dass $r(a) \le \norm{a}$ ist. 	
+	Weiter ist $\mathbb{C} \setminus \sigma(a) \subset \mathbb{C}$ offen, da $\Inv(A) \subset A$ offen ist. Damit muss $\sigma(a)$ nach Heine-Borel kompakt sein.
 \end{beweis}
 
 \begin{satz}[{name=[In unitalen Banachalgebren sind die Spektren nie leer]},label=spec_nichtleer]
@@ -133,7 +135,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\[
 		\norm{(\lambda-\lambda_0)(a - \lambda_0)^{-1}} \le \abs{\lambda-\lambda_0} \cdot \norm{(a-\lambda_0)^{-1}} <1   
 	\]
-	Also ist wieder nach \autoref{satz15_neumann} $\enbrace*{\ind- (\lambda-\lambda_0)(a-\lambda_0)^{-1}}^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n (a-\lambda_0)^n$ und 
+	Also ist wieder nach \autoref{satz15_neumann} $\enbrace*{\ind- (\lambda-\lambda_0)(a-\lambda_0)^{-1}}^{-1} = \sum_{n=0}^{\infty} (\lambda-\lambda_0)^n (a-\lambda_0)^{-n}$ und 
 	\begin{align}
 		-\sum_{n=0}^{\infty} (\lambda-\lambda_0)^n(a-\lambda_0)^{-(n+1)} &= (a- \lambda_0)^{-1} \enbrace*{(\lambda-\lambda_0)(a-\lambda_0)^{-1}-\ind}^{-1} \\
 		&= \enbrace[\Big]{(\lambda-\lambda_0) \Underbrace{(a-\lambda_0)^{-1}(a-\lambda_0)}{=\ind}-(a- \lambda_0)}^{-1} = (\lambda-a)^{-1}
@@ -195,7 +197,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	$a-\alpha \cdot \ind=0$ und weiter $a \in \mathbb{C} \cdot \ind$ gelten. Damit ist $A = \mathbb{C} \cdot \ind \cong \mathbb{C}$.
 \end{beweis}
 
-\begin{definition}[{name=[Charakter]}]
+\begin{definition}[{name=[Charakter]},label=def:charakter]
 	Sei $A$ eine abelsche unitale Banachalgebra. Eine lineare, multiplikative, nicht verschwindende Abbildung $\chi \colon A \to \mathbb{C}$ heißt \Index{Charakter} auf $A$.  
 	Es gilt dann $\chi(\ind)=1$. Wir setzen $\Omega(A) := \set[\big]{\chi \given \chi \text{ Charakter auf }A}$ (\Index{Charakterspektrum} oder einfach nur \Index{Spektrum} von 
 	$A$). 
@@ -207,7 +209,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\item Jeder Charakter auf $A$ ist stetig mit Norm $1$.
 		\item $\chi \mapsto \ker \chi$ definiert eine Bijektion  
 		\(
-			\Omega(A) \to J_{\max} := \set[\big]{J \given J \subsetneq A \text{ ist maximales Ideal} }
+			\Omega(A) \to J_{\max} := \set[\big]{J \given J \lhd A \text{ ist maximales Ideal} }
 		\)
 	\end{enumerate}
 \end{satz}
@@ -216,8 +218,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\item Sei $a \in A$ mit $\norm{a}<1$ und $\chi(a)=1$. 
 		Setze $b= \sum_{n=1}^{\infty} a^n$, dann ist $\ind + b = \sum_{n=0}^{\infty} a^n = (\ind-a)^{-1}$. 
 		Also ist $\ind = (\ind+b)(\ind-a) = \ind + b -a -ab$ und damit $ab+a=b$. 
-		Es folgt $\chi(a)\chi(b) + \chi(a)= \chi(b)$. Dies ist ein Widerspruch. Also muss $\norm{\chi}\le 1$ sein. 
-		Mit $\chi(\ind)=1$ folgt $\norm{\chi}=1$. 
+		Es folgt $\chi(a)\chi(b) + \chi(a)= \chi(b)$. 
+		Dies ist ein Widerspruch zu $\chi(a)=1$, also muss $\norm{\chi}\le 1$ sein. 
+		Mit $\chi(\ind)=1$ folgt dann $\norm{\chi}=1$. 
 		\item Für jedes $\chi \in \Omega(A)$ ist $\ker \chi \lhd A$ ein Ideal. 
 		Weiter ist der Kern abgeschlossen in $A$, da $\chi$ stetig ist. 
 		Wir zeigen, dass $\ker \chi$ maximal ist. 
@@ -234,8 +237,8 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\begin{align}
 			\chi_1(a) - \chi_2(a) = \chi_1 \enbrace[\Big]{\Underbrace{a - \chi_2(a) \cdot \ind}{\in \ker \chi_2=\ker \chi_1}} = 0
 		\end{align}
-		Also ist $\chi_1=\chi_2$. Für die Surjektivität betrachten wir ein maximales, nichttriviales Ideal $J \subsetneq A$. 
-		Dann ist $\dist \enbrace*{J,\ind}=1$, denn für den offenen Ball mit Radius $1$ um $\ind$ gilt $\mathring{B}_A(\ind,1) \subset \Inv(A)$ nach \autoref{satz15_neumann}. 
+		Also ist $\chi_1=\chi_2$. Für die Surjektivität betrachten wir ein maximales, nichttriviales Ideal $J \lhd A$. 
+		Dann ist $\dist \enbrace*{J,\ind}=1$, denn für den offenen Ball mit Radius $1$ um $\ind$ gilt $\mathring{B}_A(\ind,1) \subset \Inv(A)$ nach \autoref{satz15_neumann} bzw. wie im Beweis von \autoref{inv_offen}. 
 		Dann ist $\ind \notin \overline{J} \lhd A$. 
 		Da $J$ maximal ist, folgt $J=\overline{J}$ und damit ist 
 		$\sfrac{A}{J}$ eine einfache, abelsche, unitale Banachalgebra und mit \autoref{prop1.11_einfach} folgt $\sfrac{A}{J} \cong \mathbb{C}$. Also ist 
@@ -270,8 +273,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{definition}
 
 \begin{satz}[label=satz:117,{name=[Gelfandtransformation ist normvermindernd]}]
-	Sei $A$ eine abelsche unitale Banachalgebra. Dann ist $\widehat{\hspace{1ex}} \colon A \to C \enbrace*{\Omega(A)}$, $a \mapsto \widehat{a}$ ein normvermindernder Homomorphismus und 
-	$r(a) = \norm{\widehat{a}}_{\infty}$ für $a \in A$. Weiter gilt $\sigma(a)= \widehat{a}\enbrace*{\Omega(A)}$.
+	Sei $A$ eine abelsche unitale Banachalgebra.\marginnote{$a \mapsto \hat{a}$ ist isometrisch gdw. $\norm*{a^2}=\norm*{a}^2$ \newline(Aufgabe 5 von Blatt 1)}
+	Dann ist $\widehat{\hspace{1ex}} \colon A \to C \enbrace*{\Omega(A)}$, $a \mapsto \widehat{a}$ ein normvermindernder Homomorphismus und $r(a) = \norm{\widehat{a}}_{\infty}$ für $a \in A$. 
+	Weiter gilt $\sigma(a)= \widehat{a}\enbrace*{\Omega(A)}$.
 \end{satz}
 \begin{beweis}
 	$\widehat{a} \colon \Omega(A) \to \mathbb{C}$ ist stetig nach Definition der $\w^*$-Topologie, denn die $\w^*$-Topologie ist per Definition die gröbste Topologie auf $A^*$, sodass die Einsetzungshomomorphismen stetig sind.
@@ -293,7 +297,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	\]
 	Also gilt außerdem
 	\[
-		\norm{a} \StackText{\ref{spec_kompakt}}{\le} r(a) = \sup_{\lambda \in \sigma(a)} \abs*{\lambda} \StackText{\ref{satz:1.14}}{=} \sup_{\chi \in \Omega(A)} \abs{\widehat{a}(\chi)} 
+		\norm{a} \StackText{\ref{spec_kompakt}}{\ge} r(a) = \sup_{\lambda \in \sigma(a)} \abs*{\lambda} \StackText{\ref{satz:1.14}}{=} \sup_{\chi \in \Omega(A)} \abs{\widehat{a}(\chi)} 
 		= \norm{\widehat{a}}_{\infty} \qedhere
 	\]
 \end{beweis}
@@ -326,6 +330,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\end{cases}
 	\]
 	Wo die Existenz eines Einselements nötig ist, fordern wir zusätzlich, dass $A$ unital ist.
+	Die Teilmenge der selbstadjungierten Elemente bezeichnen wir mit $A_\sa$, die der unitären mit $\mathcal{U}(A)$.
 \end{definition}
 
 \begin{definition}[{name=[${ }^*$-Homomorphismus]}]
@@ -335,10 +340,10 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 \end{definition}
 
 \begin{bemerkung}[{name=[Direkte Summe von $A$ mit den komplexen Zahlen]}]
-	Falls $A$ eine (involutive) Banachalgebra ist, so ist $A \oplus \mathbb{C}$ mit offensichtlichen Vektorraumoperationen, der naheliegenden Multiplikation
-	$(a,\lambda) \cdot (b,\mu) = \enbrace*{ab + \mu a + \lambda b, \lambda \mu}$ sowie $(a,\lambda)^* = (a^*,\overline{\lambda})$ im involutiven Fall und Norm definiert wir durch
-	$\norm{(a,\lambda)}:= \norm{a}_{A} + \abs{\lambda}$ eine unitale (involutive) Banachalgebra mit $\ind=(0,1)$. $A \oplus \mathbb{C}$ ist jedoch keine $C^*$-Algebra, auch wenn
-	$A$ eine $C^*$-Algebra ist.
+	Falls $A$ eine (involutive) Banachalgebra ist, so ist $A \oplus \mathbb{C}$ mit offensichtlichen Vektorraumoperationen, der absolut naheliegenden Multiplikation $(a,\lambda) \cdot (b,\mu) = \enbrace*{ab + \mu a + \lambda b, \lambda \mu}$ sowie $(a,\lambda)^* = (a^*,\overline{\lambda})$ im involutiven Fall und Norm definiert durch
+	$\norm{(a,\lambda)}:= \norm{a}_{A} + \abs{\lambda}$ eine unitale (involutive) Banachalgebra mit $\ind=(0,1)$. 
+	$A \oplus \mathbb{C}$ ist jedoch keine $C^*$-Algebra, auch wenn $A$ eine $C^*$-Algebra ist.
+	Wir müssen also etwas subtiler vorgehen, um eine \Index{Unitalisierung} zu konstruieren: 
 \end{bemerkung}
 
 \begin{satz}[label=satz:26,{name=[Unitalisierung]}]
@@ -360,8 +365,8 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 	Dass $\iota(A) \lhd A^\simm$ ein Ideal ist, ist klar. $A^\simm$ ist normiert mittels der Operatornorm. Für $0 \neq a \in A$ gilt  
 	\begin{align}
 		\norm{a}_A = \frac{1}{\norm{a}_A}\norm{aa^*}_A = \norm*{a \enbrace*{\frac{1}{\norm{a^*} } \cdot a^*}}_A &\le \norm*{\iota(a) \enbrace*{\frac{1}{\norm{a^*}}\cdot a^* }}_A \\
-		&\le \sup_{\norm{b}_A \le 1} \norm[\big]{\iota(a)(b)}_A = \norm[\big]{\iota(a)}_{\mathcal{B}(A)} \\
-		&= \sup_{\norm{b}_A \le 1} \norm{ab}_A \\
+		&\le \sup_{\norm{b} \le 1} \norm[\big]{\iota(a)(b)}_A = \norm[\big]{\iota(a)}_{\mathcal{B}(A)} \\
+		&= \sup_{\norm{b} \le 1} \norm{ab}_A \\
 		&\le \norm{a}_A   
 	\end{align}
 	Also ist $\iota$ isometrisch. Es folgt, dass $\iota(A) \subset \mathcal{B}(A)$ abgeschlossen ist, da $A$ vollständig ist. Weiter folgt, dass auch 
@@ -374,8 +379,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		&\le \sup_{b \in A, \norm{b} \le 1} \norm[\big]{a^*ab + \lambda a^* b + \overline{\lambda} a b + \abs{\lambda}^2 b }_A \tag{$*$} \label{eq:26:1}\\
 		&= \norm[\big]{\iota \enbrace*{a^* a + \lambda a^* + \overline{\lambda} a} + \abs{\lambda}^2 \cdot \ind_{\mathcal{B}(A)} }_{\mathcal{B}(A)} \\
 		&= \norm*{ \enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^* \enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}}_{\mathcal{B}(A)} \\
-		&\le \norm*{\enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^*}_{\mathcal{B}(A)} \norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)}   
-		\tag{$**$} \label{eq:26:2}
+		&\le \norm*{\enbrace*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}^*}_{\mathcal{B}(A)}\cdot\norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)} \tag{$**$} \label{eq:26:2}
 	\end{align}
 	Es folgt, dass 
 	\begin{align}
@@ -383,7 +387,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\le \norm*{\iota(a) + \lambda \cdot \ind_{\mathcal{B}(A)}}_{\mathcal{B}(A)} 
 	\end{align}
 	Damit folgt, dass \eqref{eq:26:1} und \eqref{eq:26:2} Gleichungen sind und $\norm*{\cdot }_{\mathcal{B}(A)}$ eine $C^*$-Norm auf $A^\simm$ ist. Falls $A$ unital ist, gilt
-	$\iota(\ind_A) = \ind_{\mathcal{B}(A)}$ und somit $\iota(A)=A^\simm$. Ist $A$ nicht unital, so ist $A^\simm \cong \iota(A) \oplus \mathbb{C}$ als Vektorräume und es muss
+	$\iota(\ind_A) = \ind_{\mathcal{B}(A)}$ und somit $\iota(A)=A^\simm$. Ist $A$ nicht unital, so ist $A^\simm \cong \iota(A) \oplus \mathbb{C}$ als Vektorräume(!) und es muss
 	$\sfrac{A^\simm}{\iota(A)}\cong \mathbb{C}$ gelten.
 \end{beweis}
 
@@ -395,8 +399,9 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 			A  \oplus \mathbb{C} , &\text{ falls } A \text{ unital} 
 		\end{cases}
 	\]
-	mit $\norm*{(a,\lambda)} := \max \set*{\norm*{a}_A, \abs{\lambda}}$. Dann ist in jedem Fall $A^+ \cong A \oplus \mathbb{C}$ als Vektorraum. $A^+$ lässt sich charakterisieren 
-	durch die universelle Eigenschaft:\marginnote{Blatt3 Aufgabe 2}
+	mit $\norm*{(a,\lambda)} := \max \set*{\norm*{a}_A, \abs{\lambda}}$ in letzterem Fall. 
+	Dann ist in jedem Fall $A^+ \cong A \oplus \mathbb{C}$ als Vektorraum. 
+	$A^+$ lässt sich charakterisieren durch die universelle Eigenschaft:\marginnote{Blatt3 Aufgabe 2}
 	\[
 		\begin{tikzcd}
 			\mbox{ } & B \\
@@ -456,7 +461,7 @@ animieren sollen. Oftmals sind dies schon aus vorherigen Semestern bekannte Sach
 		\[
 			r(a) = \lim_{n \to \infty} \norm*{a^n}^{\sfrac{1}{n}} = \lim_{n \to \infty} \norm*{a^{2^n}}^{\sfrac{1}{2^n}} = \norm*{a}
 		\]
-		Weiter existiert\footnote{$(ia)^0 = \ind_{A^\simm}$ falls $A$ nicht unital} $e^{ia} := \sum_{n=0}^{\infty} \frac{1}{n!}(ia)^n \in A^\simm$ und ist unitär mit 
+		Weiter existiert\footnote{es ist $(ia)^0 = \ind_{A^\simm}$ falls $A$ nicht unital} $e^{ia} := \sum_{n=0}^{\infty} \frac{1}{n!}(ia)^n \in A^\simm$ und ist unitär mit 
 		\(
 			\enbrace{e^{ia}}^* = e^{(ia)^*} = e^{-ia} = \enbrace{e^{ia}}^{-1}
 		\), 
@@ -560,7 +565,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Betrachte das folgende Diagramm
 	\[
 		\begin{tikzcd}
-			\color{dark_gray} a \rar[mapsto,dark_gray] \dar[phantom,"\in",sloped,dark_gray] & \color{dark_gray} \enbrace[\big]{\chi \mapsto \chi(a)} \dar[phantom,"\in",sloped,dark_gray] \\
+			\color{dark_gray} a \rar[mapsto,dark_gray] \dar[phantom,"\in",sloped,dark_gray] & \color{dark_gray} \enbrace[\big]{\chi \mapsto \chi(a)} \dar[phantom,"\in",sloped,dark_gray] \\[-2pt]
 			A \dar[hook,"\iota"] \rar["\widehat{\hspace{1ex}}"] 
 			& \set[\big]{f \in C \enbrace[\big]{\Omega(A) \cup\set*{\chi_\infty}}\given f(\chi_\infty)=0} \cong C_0\enbrace*{\Omega(A)} \dar[hook] \\
 			A^\simm \rar["\widehat{\hspace{1ex}}"] & C \enbrace[\big]{\Omega(A^\simm)} = C \enbrace[\big]{ \set[\big]{\chi^\simm \given \chi \in \Omega(A)} \cup \set*{\chi_\infty}} 
@@ -831,13 +836,13 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{satz}[label=satz:37,{name=[Eigenschaften positiver Elemente]}]
 	Sei $A$ eine $C^*$-Algebra. Dann gilt
 	\begin{enumerate}[(i),itemsep=2pt]
-		\item $A_+ = \set*{a^*a \given a \in A}$
-		\item $A = \Span A_+$
-		\item $A_+$ ist ein abgeschlossener Kegel in $A$
-		\item $\le$ ist eine partielle Ordnung auf $A_\sa$
-		\item Für $a,b \in A_\sa$ und $c \in A$ mit $a \le b$ gilt $c a c^* \le c b c^*$
-		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$
-		\item Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt
+		\item Es gilt $A_+ = \set*{a^*a \given a \in A}$.
+		\item Es gilt $A = \Span A_+$.
+		\item $A_+$ ist ein abgeschlossener Kegel in $A$.
+		\item $\le$ ist eine partielle Ordnung auf $A_\sa$.
+		\item Für $a,b \in A_\sa$ und $c \in A$ mit $a \le b$ gilt $c a c^* \le c b c^*$.
+		\item Für $0 \le a \le b$ gilt $\norm*{a} \le \norm*{b}$.
+		\item Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
@@ -874,7 +879,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		Damit ist $a \le \norm*{b} \cdot \ind_{A^\simm}$. 
 		Gelfand für $C^*(a,\ind_{A^\simm})$ liefert $\norm*{b} \cdot \ind_{A^\simm} \ge \norm*{a} \cdot \ind_{A^\simm}$. 
 		Damit muss dann bereits $\norm*{b} \ge \norm*{a}$ sein.
-		\item \emph{Übungsaufgabe 1 b) von Blatt 5!}\todo{vlt noch \TeX{}en} \qedhere
+		\item \emph{Übungsaufgabe 1 b) von Blatt 5! Siehe \cref{sub:beweis_37_vii}.} \qedhere
 	\end{enumerate}
 \end{beweis}
 
@@ -936,8 +941,9 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
 \end{lemma}
 \begin{beweis}
-	Für $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}-a}^{-1}$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1}$. 
-	Durch Betrachtung der von-Neumann-Reihe sieht man sofort, dass $a'$ und $b'$ positiv sind.
+	\emph{Im \cref{sub:alternativer_beweis_lemma_311} findet man auch den Beweis von \citeauthor{Murphy} mit zusätzlichen Erklärungen, der meiner Meinung nach etwas \enquote{flüssiger} zu lesen ist.}\\
+	Für $a,b \in \Lambda$ setze $a' := a \enbrace*{\ind_{A^\simm}-a}^{-1}$ und $b' := b \enbrace*{\ind_{A^\simm} -b}^{-1}$.
+	Durch Betrachtung der \hyperref[satz15_neumann]{von-Neumann-Reihe} sieht man sofort, dass $a'$ und $b'$ positiv sind.
 	Dann gilt 
 	\[
 		c := (a' +b') \enbrace*{\ind_{A^\simm} + a' +b'}^{-1} \in \Lambda
@@ -948,7 +954,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		&= \enbrace[\big]{(\ind +a')-\ind} \enbrace*{\ind +a'}^{-1} = \ind - (\ind +a')^{-1} \\
 		\intertext{Da $0\le \ind +a' \le \ind + a' +b'$ jeweils invertierbar sind, ist $(\ind+ a'+b')^{-1} \le (\ind+a')^{-1}$ nach \autoref{satz:37}}
 		&\le \ind - (\ind +a' +b')^{-1}\StackText{\ref{bem:13}}{=} \ind - \enbrace*{\ind + (a'+b')(\ind +a' +b')^{-1}} \\
-		&= (a'+b')(\ind +a' +b')^{-1}
+		&= (a'+b')(\ind +a' +b')^{-1}=c
 	 \end{align}
 	 Damit ist $a \le c$. Die Relation $b \le c$ folgt ebenso.
 \end{beweis}
@@ -964,21 +970,23 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \begin{beweis}
 	Sei $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ wie in \autoref{lem:311} und setze $e_\lambda := \lambda$ für $\lambda \in \Lambda$. 
 	Dann ist $(e_\lambda)_\Lambda \subset A_+^1$ ein aufsteigendes Netz (aufsteigend bezüglich \enquote{$\le$}, gerichtet nach \autoref{lem:311}). 
-	Sei nun $a \in \Lambda$ und $1 \ge \varepsilon>0$. Sei $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. 
+	Wir wollen die geforderte Eigenschaft nun zunächst für $a \in \Lambda$ beweisen.
+	
+	Sei dazu $1 \ge \varepsilon>0$, $\Omega := \sigma(a) \setminus \set*{0} \subset (0,1]$ und $\Phi \colon C^*(a) \to C_0(\Omega)$ der Gelfandisomorphismus. 
 	Betrachte $f := \Phi(a) = \id_\Omega$ und die kompakte Menge $K:= \set*{\omega \in \Omega \given f(\omega)\ge \varepsilon} \subset \Omega$. 
 	Nach Urysohn existiert ein $g \colon \Omega \to [0,1]$ stetig mit kompaktem Träger und $g(\omega)=1$ für $\omega \in K$. 
 	Wähle $\delta>0$ mit $\delta<1$ und $1-\delta< \varepsilon$. Dann gilt 
 	\[
-		\norm[\big]{f- \delta \cdot g f}_\infty = \norm[\big]{(\ind-\delta \cdot g) f}_\infty \le \varepsilon
+		\norm[\big]{f- \delta \cdot g \,f}_\infty = \norm[\big]{(\ind-\delta \cdot g) f}_\infty \le \varepsilon
 	\]
-	\todo[inline]{ich meine man sollte $\delta$ so wählen, dass hier $\sfrac{\varepsilon}{\norm{a}}$ steht, sonst kommt das später nicht wirklich hin}
-	\noindent Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon$. 
+	Mit $\overline{\lambda} := \Phi^{-1}(\delta \cdot g) \in \Lambda$ ergibt sich $\norm*{a- \overline{\lambda} a}_A \le \varepsilon$. 
 	Falls nun $\lambda \in \Lambda$ ist mit $\lambda \ge \overline{\lambda}$, so gilt $0 \le a(\ind-e_\lambda)a \le a(\ind- e_{\overline{\lambda}})a$ nach \autoref{satz:37}(v), da $0 \le \ind - e_\lambda \le \ind -e_{\overline{\lambda}}$.
 	Dann folgt 
 	\begin{align}
 		\norm*{a- e_\lambda a}^2 = \norm*{(\ind-e_\lambda)^{\sfrac{1}{2}} (\ind - e_\lambda)^{\sfrac{1}{2}} a}^2 \le \norm*{(\ind- e_\lambda)^{\sfrac{1}{2}}a}^2
 		 &= \norm*{a^* (\ind -e_\lambda)^{\sfrac{1}{2}}(\ind-e_\lambda)^{\sfrac{1}{2}}a} \\
-		 &\le \norm*{a^* (\ind-e_{\overline{\lambda}})a} \le \varepsilon
+		 &\le \norm*{a^* (\ind-e_{\overline{\lambda}})a} \\
+		 &\le \norm*{(\ind-e_{\overline{\lambda}})a} \le \varepsilon
 	\end{align}
 	Damit folgt $a = \lim_\lambda e_\lambda a$ für $a \in \Lambda$. Da $A= \Span \Lambda$ gilt, sind wir fertig.
 \end{beweis}
@@ -1001,7 +1009,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{proposition}
 \begin{beweis}
 	Sei $B := L \cap L^*$, dann ist $B \subset A$ eine $C^*$-Unteralgebra:
-	\begin{itemize}[itemsep=1pt]
+	\begin{itemize}[itemsep=0pt]
 		\item $L^* \subset A$ abgeschlossen, da $^*$ isometrisch ist. Damit ist auch $L \cap L^*$ abgeschlossen in $A$
 		\item $L \cap L^* \subset$ ist ein Untervektorraum.
 		\item $L^* \subset A$ ist ein Rechtsideal: $l^* a = (a^*l)^* \in L^*$. Damit ist $L \cap L^*$ bereits eine Unteralgebra: 
@@ -1209,7 +1217,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\emph{Übung! (Blatt5, Aufgaben 3 und 4 zusammen mit Blatt 7, Aufgabe 3)}
 \end{beweis}
 
-\begin{satz}[{name=[Limes von C*-Algebren]}]
+\begin{satz}[{name=[Limes von C*-Algebren]},label=satz:ger_lim]
 	Sei $(A_n,\varphi_n)_{n \in \mathbb{N}}$ ein \Index{induktives System von $C^*$-Algebren}, das heißt die $A_n$ sind $C^*$-Algebren und die $\varphi_n \colon A_n \to A_{n+1}$ sind $^*$-Homomorphismen.
 	Dann existiert eine (bis auf Isomorphie) eindeutig bestimmte $C^*$-Algebra $\Dlim(A_n,\varphi_n)$ mit folgender universeller Eigenschaft:
 	\begin{itemize}
@@ -1236,7 +1244,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	ist eine $C^*$-Algebra mit komponentenweisen Operationen und Supremumsnorm, denn sie ist eine Banachalgebra nach Blatt 1, Aufgabe 1 c) und $\norm*{\cdot}_\infty$ ist offensichtlich eine $C^*$-Norm.
 	Es ist nun
 	\[
-		\textstyle\bigoplus_\mathbb{N} A_n := \set[\big]{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?}
+		\textstyle\bigoplus_\mathbb{N} A_n := \set[\big]{(a_n)_\mathbb{N} \given a_n \in A_n , \lim_{n \to \infty} \norm*{a_n}=0} \lhd \prod_\mathbb{N} A_n \marginnote{warum?\newline Dies ist tatsächlich die Definition einer direkten Summe von $C^*$-Algebren}
 	\]
 	Sei $q \colon \prod_\mathbb{N} A_n \to \sfrac{\prod_\mathbb{N} A_n}{\bigoplus_\mathbb{N} A_n}$ die Quotientenabbildung und weiter
 	\[
@@ -1247,12 +1255,14 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\[
 		\Dlim(A_n,\varphi_n) := q \enbrace*{\overline{C}} \subset \Faktor{\prod\nolimits_\mathbb{N} A_n}{\bigoplus\nolimits_\mathbb{N} A_n}
 	\]
-	Wir definieren $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
+	Der Übergang zum Quotienten ist notwendig, damit $\varphi_{n+1,\infty} \circ \varphi_{n} = \varphi_{n,\infty}$ gilt.
+	Wir definieren nun $^*$-Homomorphismen $\varphi_n' \colon A_n \to C$ durch 
 	\[
 		\varphi_n'(a) := \enbrace[\big]{0, \ldots ,0,a,\varphi_n(a), \varphi_{n+1}(\varphi_n(a)),\ldots } 
 	\]
-	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. \todo{der folgende Absatz könnte noch ausführlicher sein}
+	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. 
 	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
+	Wie man dies explizit durchführt, wird in \cref{sub:konstruktion_limes} erläutert.
 	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ ist dicht und $\psi$ ist normvermindernd auf $q(C)$, setzt sich also eindeutig auf $q(\overline{C})$ fort.
 	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
 \end{beweis}
@@ -1513,7 +1523,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\[
 			A \xhookrightarrow{\minwidthbox{}{1.4em}} \Faktor{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}
 		\]
-		Für $a=\benbrace*{(a_i)_\mathbb{N}}\in A \subset \sfrac{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}$ definieren wir $\tau(a) := \lim_\omega \tau_i(a_i)$, wobei $\omega \in \beta \mathbb{N} \setminus \mathbb{N}$ ein freier \href{https://de.wikipedia.org/wiki/Ultrafilter}{Ultrafilter} ist.
+		Für $a=\benbrace*{(a_i)_\mathbb{N}}\in A \subset \sfrac{\prod_\mathbb{N} A_i}{\bigoplus_\mathbb{N}(A_i)}$ definieren wir $\tau(a) := \lim_\omega \tau_i(a_i)$, wobei $\omega \in \beta \mathbb{N} \setminus \mathbb{N}$ ein freier \hrefsymX{https://de.wikipedia.org/wiki/Ultrafilter}{Ultrafilter} ist.
 		Man verifiziert nun leicht, dass $\tau$ wohldefiniert, unital, positiv und linear ist und außerdem die Spurbedingung erfüllt.  
 		
 		Alternativ kann man auch wie folgt vorgehen: Betrachte folgendes Diagramm
@@ -1660,7 +1670,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\end{psmallmatrix}
 		= \enbrace*{\sum\nolimits_{j} \pi_u(a_{ij}) \xi_j}_{i=1,\ldots ,n}
 	\]
-	Damit ist $\pi_u^\ssbrace{n}$ ein $^*$-Homomorphismus; $\pi_u^\ssbrace{n}$ ist injektiv, da $\pi_u$ injektiv ist.\marginnote{Hat jemand mal Lust das alles nachzurechen und mir zu schicken? \emph{\faSmileO}}
+	Damit ist $\pi_u^\ssbrace{n}$ ein $^*$-Homomorphismus; $\pi_u^\ssbrace{n}$ ist injektiv, da $\pi_u$ injektiv ist.\marginnote{Hat jemand mal Lust das alles nachzurechnen und mir zu schicken?}
 	Nun definiert 
 	\[
 		\norm[\big]{(a_{ij})_{ij}}_{M_n(A)} := \norm*{\pi_u^\ssbrace{n} \enbrace[\big]{(a_{ij})_{ij}}}_{\mathcal{B} (\mathcal{H}_u^{\oplus n})} 
@@ -1870,7 +1880,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	Also ist $x=x^*x=x^2$. \emph{Der Rest ist Übungsaufgabe 4 von Blatt 9, siehe \cref{sub:mon_proj}}
 \end{beweis}
 
-\begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]}]
+\begin{bemerkung}[{name=[verschiedene Definitionen von Positivität]},label=bem:63]
 	In Funktionalanalysis hatten wir $0\le x \in \mathcal{B}(\mathcal{H})$ definiert als $\skal*{\xi}{x \xi} \ge 0$ für alle $\xi \in \mathcal{H}$ (und $x \in \mathcal{B}(\mathcal{H})_\sa$).
 	Dies ist äquivalent zu $0\le x$ in unserem Sinne: 
 	Ist $x$ positiv in unserem Sinne, so haben wir $x=y^*y$ und es folgt
@@ -2122,7 +2132,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \end{proposition}
 \begin{beweis}
 	Für eine beliebige aufsteigende approximative Eins $(e_\lambda)_\Lambda \subset C_0(U)$ existiert der starke Limes $e := \solim e_\lambda(x)$ nach \autoref{satz:62}.
-	Wir im Beweis von \autoref{prop:68} zeigt man, dass für $f \in C_0(U)$ und alle $\xi \in \mathcal{H}$ gilt
+	Wie im Beweis von \autoref{prop:68} zeigt man, dass für $f \in C_0(U)$ und alle $\xi \in \mathcal{H}$ gilt
 	\[
 		e f(x) \xi = f(x) \xi \enspace\implies\enspace e f(x) = f(x), f(x) e = f(x)
 	\]
@@ -2163,7 +2173,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 				\draw[very thick,Firebrick3]  (0,1) node[above]{$f_0$} -- (0.1,0) -- (1,0);
 				\draw[ultra thick,DodgerBlue3,dashed]  (0,0)  -- (0.3,0) -- (0.4,1) node[above,fill=white]{$f_4$} -- (0.5,0) -- (1,0);
 			\end{tikzpicture}
-			\caption{Zerlegung der Eins auf $[0,1]$ für gegebenes $N \in N$, hier $N=10$}\label{fig:613:zerlEins}
+			\caption{Zerlegung der Eins auf $[0,1]$ für gegebenes $N \in \mathbb{N}$, hier $N=10$}\label{fig:613:zerlEins}
 			}
 		\end{figure}
 		Nach Aufgabe 2 von Blatt 4 gilt für eine Projektion $p$ stets $\sigma(p) \subset \set*{0,1}$.
@@ -2183,8 +2193,8 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		Falls $-1$ im Spektrum von $u$ enthalten ist, so betrachten wir eine offene Umgebung $V \subset \mathbb{T}$ von $-1$.
 		Dann ist $p:= \chi_{V\cap \sigma(u)}(u)$ eine Projektion in $A \cap \set*{u}'$ nach \autoref{prop:612}.
 		Für diese ist dann $u(\ind-p) \in B := (\ind-p)A(\ind-p)$ unitär.
-		Es gilt $-1 \notin \sigma_B \enbrace*{u(1-p)}$, denn für $f \in C_0(V)$ gilt $f \enbrace[\big]{u(\ind-p)}= f(u)(\ind-p)=0$\marginnote{$f$ mit Polynomen approximieren} und damit folgt $\sigma_B \enbrace[\big]{u(\ind-p)} \subset \mathbb{T}\setminus V$.
-		Wir im ersten Teil gilt dann
+		Es gilt $-1 \notin \sigma_B \enbrace*{u(\ind-p)}$, denn für $f \in C_0(V)$ gilt $f \enbrace[\big]{u(\ind-p)}=0$\marginnote{$f$ mit Polynomen approximieren} und damit folgt $\sigma_B \enbrace[\big]{u(\ind-p)} \subset \mathbb{T}\setminus V$.
+		Wie im ersten Teil gilt dann
 		\[
 			u(\ind-p)= e^{i \pi h_0} \in B
 		\]
@@ -2193,16 +2203,15 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\(
 			\norm*{\enbrace[\big]{u(\ind-p) -p} -u} \le \diam V
 		\).
-		Weiter gilt, da $h_0$ und $p$ orthogonal zueinander sind
+		Weiter gilt, da $h_0$ und $p$ orthogonal zueinander sind\marginnote{die Begründung verstehe ich noch nicht ganz. Wie in der Bemerkung erläutert, ist dieser Beweis aber auch gar nicht wirklich nötig}
 		\[
 			u(\ind-p) - p = e^{i \pi(h_0+p)} 
 		\]
-		\todo{bei dem $e$-Term kommt wieder $u(\ind-p)$ raus meine ich \ldots}
 		Wir können nun $V$ beliebig klein wählen und erhalten somit die Behauptung.\qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{bemerkung}[{name=[Folgerungen aus \autoref{korr:613}]}]
+\begin{bemerkung}[{name=[Folgerungen aus \autoref{korr:613}]},label=bem:614]
 	\leavevmode
 	\begin{enumerate}[a),itemsep=0pt]
 		\item Aus dem Beweis von (i) folgt insbesondere, dass $A= \overline{\Span \set*{p \in A \given p\text{ ist Projektion}}}$.
@@ -2560,74 +2569,79 @@ Zum krönenden Abschluss dieses Kapitels wollen wir noch den Dichtesatz von Kapl
 \label{sec:7}
 
 Bevor man in dieses Kapitel abtaucht, ist es empfehlenswert, sich noch einmal an \autoref{def:510} zu erinnern, denn dort wurden die Begriffe \emph{irreduzibel} und \emph{zyklisch} für Darstellungen eingeführt.
-Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cref{sub:gns_zyklisch}, wieder eine wichtige Rolle spielen.\todo{Revision 7}
+Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cref{sub:gns_zyklisch}, wieder eine wichtige Rolle spielen.
 
-\begin{proposition}[label=prop:71]
+\begin{proposition}[label=prop:71,{name=[über positive Funktionale, die kleiner als Zustände sind]}]
 	Sei $A$ eine $C^*$-Algebra, $\varphi \in S(A)$ ein Zustand und $\rho \in A^*$ ein weiteres positives Funktional.
-	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit 
+	Falls $\varphi-\rho$ positiv ist, so existiert genau ein $0 \le h \le \ind \in \pi_\varphi(A)' \subset \mathcal{B}(\mathcal{H}_\varphi)$ mit\marginnote{Es gilt auch die Umkehrung, wie man sich leicht mit \ref{satz:37} überlegt} 
 	\[
 		\rho(a) = \skal[\big]{\xi_\varphi}{\pi_\varphi(a)h \xi_\varphi}
 	\]
-	wo $\enbrace*{\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi}$ die GNS-Darstellung zu $\varphi$ ist.
+	wobei $\enbrace*{\mathcal{H}_\varphi,\pi_\varphi,\xi_\varphi}$ die GNS-Darstellung zu $\varphi$ ist.
 \end{proposition}
 \begin{beweis}
-	Wir erinnern uns an die GNS-Konstruktion: $N_\varphi := \set*{a \in A \given \varphi(a^*a)=0}$ und $\mathcal{H}_\varphi = \overline{\sfrac{A}{N_\varphi}}^{\skal*{\cdot}{\cdot}}$ (vergleiche \autoref{gns}).
+	Im Zuge der GNS-Konstruktion, siehe \autoref{gns} haben wir ein Ideal in $A$ definiert durch $N_\varphi = \set*{a \in A \given \varphi(a^*a)=0}$ und dann den Hilbertraum $\mathcal{H}_\varphi = \overline{\sfrac{A}{N_\varphi}}^{\raisemath{-2pt}{\skal*{\cdot}{\cdot}}}$ betrachtet.
 	Definiere auf $\sfrac{A}{N_\varphi}$ eine hermitesche Sesquilinearform $\sigma$ durch 
 	\[
 		\sigma \enbrace*{a + N_\varphi, b+ N_\varphi} := \rho(a^* b)
 	\]
-	$\sigma$ ist wohldefiniert, da $0 \le \rho \le \varphi$ ($N_\varphi \subset N_\rho$).
+	$\sigma$ ist wohldefiniert, da $0 \le \rho \le \varphi$ ist, woraus $N_\varphi \subset N_\rho$ folgt.
 	Es gilt für $a,b \in A$
 	\[
-		\sigma \enbrace*{a+ N_\varphi, b+N_\varphi} = \rho(a^*b) \le \rho(a^*a)^{\sfrac{1}{2}} \rho(b^*b)^{\sfrac{1}{2}} \le \varphi(a^*a)^{\sfrac{1}{2}} \varphi(b^*b)^{\sfrac{1}{2}} 
+		\sigma \enbrace*{a+ N_\varphi, b+N_\varphi} = \rho(a^*b) \StackTextClap{C.S.}{\le} \rho(a^*a)^{\sfrac{1}{2}} \rho(b^*b)^{\sfrac{1}{2}} \le \varphi(a^*a)^{\sfrac{1}{2}} \varphi(b^*b)^{\sfrac{1}{2}} 
 		= \norm*{a + N_\varphi} \cdot \norm*{b+ N_\varphi}
 	\]
 	Damit ist $\norm*{\sigma}\le 1$ und $\sigma$ lässt sich stetig auf $\mathcal{H}_\varphi$ fortsetzen.
 	Für $\xi \in \mathcal{H}_\varphi$ ist $\eta \mapsto \sigma(\xi,\eta)$ eine stetige Linearform auf $\mathcal{H}_\varphi$.
-	Nach Riesz existiert genau ein Vektor $h \xi\in \mathcal{H}_\varphi$ mit $\sigma(\xi,\eta) = \skal*{h \xi}{\eta}$.
-	$\xi \mapsto h \xi$ ist linear und beschränkt. 
-	Also existiert genau ein $h \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $h \xi= h \xi$.
-	Es gilt 
+	Nach Riesz existiert also genau ein Vektor $\xi_\sigma \in \mathcal{H}_\varphi$ mit $\sigma(\xi,\eta) = \skal*{\xi_\sigma}{\eta}$.
+	$\xi \mapsto \xi_\sigma$ ist linear und beschränkt, also existiert genau ein $h \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $h \xi= \xi_\sigma$.
+	Es gilt
 	\[
-		\overline{\sigma(\xi,\xi)}=\sigma(\xi,\xi)= \skal*{h \xi}{\xi} \in \mathbb{R}
+		\skal*{h \xi}{\eta} = \sigma(\xi,\eta) = \overline{\sigma(\eta,\xi)} = \overline{\skal*{h \eta}{\xi}} = \skal*{\xi}{h \eta} = \skal*{h^* \xi}{\eta}
 	\]
-	Damit ist $h=h^*$ nach Polarisierung.
-	Weiter gilt $\norm*{h} \le \norm*{\sigma} \le 1$.
-	Für $a \in A$ gilt 
+	Also ist $h$ selbstadjungiert.
+	% Es gilt
+	% \[
+	% 	\skal*{h^*\xi}{\xi}=\overline{\sigma(\xi,\xi)}=\sigma(\xi,\xi)= \skal*{h \xi}{\xi} \in \mathbb{R}
+	% \]
+	% Damit ist $h=h^*$ nach Polarisierung.
+	Weiter gilt $\norm*{h} \le \norm*{\sigma} \le 1$ und für $a \in A$ haben wir
 	\[
 		\skal*{a + N_\varphi}{h \enbrace*{a+ N_\varphi}}= \sigma(a^*a)=\rho(a^*a)\ge 0
 	\]
-	Also ist $\skal*{\xi}{h \xi} \ge 0$ für $\xi \in \mathcal{H}_\varphi$, also ist $h \ge 0$ (siehe \autoref{korr:514}) und damit $0 \le h \le \ind$.
+	Also ist $\skal*{\xi}{h \xi} \ge 0$ für $\xi \in \mathcal{H}_\varphi$, womit $h \ge 0$ ist nach \autoref{bem:63}. 
+	Damit haben wir $0 \le h \le \ind$.
 	Für $a,b,c \in A$ gilt 
 	\begin{align}
 		\skal[\big]{a + N_\varphi}{\pi_\varphi(c)h (b+N_\varphi)} = \skal[\big]{c^*a + N_\varphi}{h(b+N_\varphi)} = \rho \enbrace*{a^*cb} &= \skal[\big]{a + N_\varphi}{h(cb+N_\varphi)} \\
 		&= \skal[\big]{a+ N_\varphi}{h \pi_\varphi(c)(b+ N_\varphi)}
 	\end{align}
-	Damit ist $\pi_\varphi(c) h = h \pi_\varphi(c)$, also ist $h \in \pi_\varphi(A)'$.
-	Sei nun $(e_\lambda)_\Lambda \subset A^1_+$ eine approximative Eins. Dann ist $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi \in \mathcal{H}_\varphi$ und es gilt
+	Damit ist $\pi_\varphi(c) h = h \pi_\varphi(c)$, also ist $h$ in der Kommutante von $\pi_\varphi(A)$ wie behauptet.
+	Um die behauptete Formel für $\rho$ zu beweisen, betrachten wir eine approximative Eins $(e_\lambda)_\Lambda \subset A^1_+$. 
+	Dann ist $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi \in \mathcal{H}_\varphi$ und es gilt
 	\begin{align}
-		\rho(a)= \lim_{\lambda,\lambda'} \rho \enbrace*{e_\lambda a e_{\lambda'}}= \lim_{\lambda,\lambda'} \skal*{e_\lambda + N_\varphi}{h(a e_{\lambda'}+ N_\varphi)}
-		&= \lim_{\lambda,\lambda'} \skal*{e_\lambda+ N_\varphi}{h \pi_\varphi(a) (e_{\lambda'} + N_\varphi)} \\
-		&= \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}
+		\rho(a)= \lim_{\lambda,\lambda'} \rho \enbrace*{e_\lambda a e_{\lambda'}}= \lim_{\lambda,\lambda'} \skal[\big]{e_\lambda + N_\varphi}{h(a e_{\lambda'}+ N_\varphi)}
+		&= \lim_{\lambda,\lambda'} \skal[\big]{e_\lambda+ N_\varphi}{h\,\pi_\varphi(a) (e_{\lambda'} + N_\varphi)} \\
+		&= \skal[\big]{\xi_\varphi}{h\, \pi_\varphi(a)\,\xi_\varphi}
 	\end{align}
-	Zur Eindeutigkeit: Sei $d \in \enbrace*{\pi_\varphi(A)'}^1_+$ mit $\rho(a)= \skal*{\xi_\varphi}{\pi_\varphi(a)d \xi_\varphi}$ für alle $a \in A$.
-	Dann gilt für $a,b \in A$, da $\xi_\varphi$ zyklisch ist
+	Für die Eindeutig sei $d \in \enbrace*{\pi_\varphi(A)'}^1_+$ mit $\rho(a)= \skal*{\xi_\varphi}{\pi_\varphi(a)d \xi_\varphi}$ für alle $a \in A$.
+	Dann gilt für $a,b \in A$, da $\xi_\varphi = \lim_\lambda e_\lambda+ N_\varphi$ zyklisch ist
 	\begin{align}
-		\skal*{a+ N_\varphi}{d(b+N_\varphi)} = \skal*{\pi_\varphi(a) \xi_\varphi}{d \pi_\varphi(b) \xi_\varphi} = \skal*{\xi_\varphi}{\pi_\varphi(a^*b)d \xi_\varphi} 
-		&= \rho(a^*b) \\ &= \skal*{a+ N_\varphi}{h(b+N_\varphi)}
+		\skal[\big]{a+ N_\varphi}{d(b+N_\varphi)} = \skal[\big]{\pi_\varphi(a) \xi_\varphi}{d \,\pi_\varphi(b) \xi_\varphi} = \skal[\big]{\xi_\varphi}{\pi_\varphi(a^*b)d \xi_\varphi} 
+		&= \rho(a^*b) \\ &= \skal[\big]{a+ N_\varphi}{h(b+N_\varphi)}
 	\end{align}
-	Also ist $d=h$.
+	Also ist $d=h$, womit die Eindeutigkeit gezeigt ist.
 \end{beweis}
 
 \begin{satz}[{name=[Darstellung als direkte Summe]}]
-	Sei $(\mathcal{H},\pi)$ eine nicht degenerierte Darstellung einer $C^*$-Algebra $A$.
+	Sei $(\mathcal{H},\pi)$ eine \hyperref[def:510]{nicht degenerierte} Darstellung einer $C^*$-Algebra $A$.
 	Dann ist $(\mathcal{H},\pi)$ eine direkte Summe zyklischer Darstellungen.
 \end{satz}
 \begin{beweis}
 	Sei $\mathcal{S} := \set[\big]{S \subset \mathcal{H}\setminus \set{0} \given {\overline{\pi(A) \xi}} \perp {\overline{\pi(A)\eta}} \text{ für alle }\xi \neq \eta \in S }$.
 	$\mathcal{S}$ ist partiell geordnet bezüglich Inklusion und abgeschlossen bezüglich Vereinigungen von aufsteigenden Teilmengen.
 	Nach Zorns Lemma besitzt $\mathcal{S}$ ein maximales Element $\tilde{S}$.
-	Sei $\eta \in \enbrace[\big]{\bigcup_{\xi \in \tilde{S}} \overline{\pi(a)\xi}}^\bot$, dann gilt für $a,b \in A$, $\xi \in \tilde{S}$.
+	Sei $\eta \in \enbrace[\big]{\bigcup_{\xi \in \tilde{S}} \overline{\pi(a)\xi}}^{\raisemath{-1pt}{\bot}}$, dann gilt für $a,b \in A$, $\xi \in \tilde{S}$.
 	\[
 		\skal[\big]{\pi(a) \eta}{\pi(b)\xi} = \skal[\big]{\eta}{ \pi(a^*b)\xi} =0
 	\]
@@ -2636,42 +2650,45 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Falls $\eta \in \tilde{S}$, so gilt $\overline{\pi(A)\eta}\perp \overline{\pi(A)\eta}$, was ein Widerspruch ist, denn $(\mathcal{H},\pi)$ ist nicht degeneriert ($\Rightarrow  \pi(e_\lambda)\grenzw{\so}\ind_{\mathcal{B}(\mathcal{H})}$).
 	Also ist $\eta=0$ und damit
 	\[
-		\mathcal{H}= \overline{\bigcup_{\xi \in \tilde{S}} \pi(A)\xi} = \bigoplus_{\xi \in \tilde{S}} \overline{\pi(A)\xi}
+		\mathcal{H} = \bigoplus_{\xi \in \tilde{S}} \overline{\pi(A)\xi}
 	\]
-	und $\pi(\cdot )\big|_{\overline{\pi(A)\xi}}$ ist zyklisch, denn $\xi \in \overline{\pi(A)\xi}$.
+	Die eingeschränkten Darstellungen $\pi(\cdot )\big|_{\overline{\pi(A)\xi}}$ haben jeweils $\xi \in \overline{\pi(A)\xi}$ als zyklischen Vektor.
 \end{beweis}
 
 \begin{satz}[{name=[Eigenschaften irreduzibler Darstellungen]},label=satz:73]
 	Sei $(\mathcal{H},\pi)$ eine Darstellung einer $C^*$-Algebra $A$ mit $\pi \neq 0$. Dann gilt
-	\begin{enumerate}[(i)]
-		\item $(\mathcal{H},\pi)$ ist irreduzibel $\iff \pi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$.
+	\begin{enumerate}[(i),itemsep=1pt]
+		\item $(\mathcal{H},\pi)$ ist irreduzibel $\iff \pi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$.\marginnote{$\iff \pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$, siehe \cref{sub:das_bild_irreduzibler_darstellungen}}
 		\item $(\mathcal{H},\pi)$ ist irreduzibel $\implies$ jedes $0 \neq \xi \in \mathcal{H}$ ist zyklisch, also $\overline{\pi(A)\xi}=\mathcal{H}$.
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
 	\leavevmode
 	\begin{enumerate}[(i)]
-		\item Für die Rückrichtung sei $(\mathcal{H},\pi)$ irreduzibel. 
+		\item Für die Rückrichtung nehmen wir an, $(\mathcal{H},\pi)$ sei nicht irreduzibel. 
 		Dann existiert $\tilde{\mathcal{H}} \subset \mathcal{H}$ abgeschlossen mit $\set*{0} \neq \tilde{\mathcal{H}}\neq \mathcal{H}$ und $\pi(A)\tilde{\mathcal{H}} \subset \tilde{\mathcal{H}}$.
 		Setze $p := p_{\tilde{\mathcal{H}}}$, dann gilt $0 \neq p \neq \ind_{\mathcal{B}(\mathcal{H})}$ und 
 		\[
-			p \pi(a)=\enbrace*{\pi(a)p}^* =\enbrace*{p \pi(a)p}^*=p \pi(a) p=\pi(a)p 
+			p \pi(a)=\enbrace[\big]{\pi(a)p}^* =\enbrace[\big]{p \pi(a)p}^*=p \pi(a) p=\pi(a)p 
 		\]
 		für $a \in A_\sa$. 
-		Also ist $p	\in (A_\sa)'$ und somit $p \in A'$.
+		Also ist $p	\in \pi(A_\sa)'$ und somit $p \in \pi(A)'$.
 		Damit ist $p= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$ für ein $\lambda \in \mathbb{C}$.
-		Da $p$ ein Projektion ist, folgt $\lambda \in \set*{0,1}$ und somit ist $p=0$ oder $p=\ind_{\mathcal{B}(\mathcal{H})}$, was ein Widerspruch ist.
+		Da $p$ ein Projektion ist, folgt $\lambda \in \set*{0,1}$ und somit ist $p=0$ oder $p=\ind_{\mathcal{B}(\mathcal{H})}$, was einen Widerspruch darstellt.
 		
-		Für die andere Implikation stellen wir fest, dass $\pi(A)' \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra ist.
-		Falls $\pi(A)' \neq \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$, so existiert $h \in \pi(A)'$ selbstadjungiert, sodass $\sigma(h)$ mehr als einen Punkt enthält.
-		Ohne Einschränkungen sei $h \in \enbrace*{\pi(A)'}^1_+$ und $\set*{0,1} \in \sigma(h)$.\marginnote{Funktionalkalkül}
-		$p :=\chi_{(\sfrac{1}{2},1]}(h) \in \pi(A)'$ ist eine Projektion mit $0\neq p \neq \ind_{\mathcal{B}(\mathcal{H})}$.
-		Dann ist $\overline{p \mathcal{H}}$ ein $\pi(A)$-invarianter Unterraum und damit ist $(\mathcal{H},\pi)$ nicht irreduzibel.
+		Für ein Projektion $p \in \mathcal{B}(\mathcal{H})$ gilt $p \in \pi(A)'$ genau dann, wenn $\overline{p \mathcal{H}} \subset \mathcal{H}$ invariant ist unter $\pi(A)$.
+		Da $\pi(A)'$ eine von-Neumann-Algebra ist, ist sie nach \autoref{bem:614} der Abschluss des Spans ihrer Projektionen.
+		Wenn die Darstellung irreduzibel ist, enthält $\pi(A)'$ also nur die trivialen Projektionen und es folgt $\pi(A)' = \mathbb{C} \cdot \id_{\mathcal{B}(\mathcal{H})}$.
+		% Für die andere Implikation stellen wir fest, dass $\pi(A)' \subset \mathcal{B}(\mathcal{H})$ eine von-Neumann-Algebra ist.
+		% Falls $\pi(A)' \neq \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$, so existiert $h \in \pi(A)'$ selbstadjungiert, sodass $\sigma(h)$ mehr als einen Punkt enthält.
+		% Ohne Einschränkungen sei $h \in \enbrace*{\pi(A)'}^1_+$ und $\set*{0,1} \in \sigma(h)$.\marginnote{Funktionalkalkül}
+		% $p :=\chi_{(\sfrac{1}{2},1]}(h) \in \pi(A)'$ ist eine Projektion mit $0\neq p \neq \ind_{\mathcal{B}(\mathcal{H})}$.
+		% Dann ist $\overline{p \mathcal{H}}$ ein $\pi(A)$-invarianter Unterraum und damit ist $(\mathcal{H},\pi)$ nicht irreduzibel.
 		\item Sei $(\mathcal{H},\pi)$ irreduzibel.
 		Dann ist $\overline{\pi(A)\xi}=\set*{0}$ oder $\overline{\pi(A)\xi}=\mathcal{H}$ für $\xi \in \mathcal{H}$, da die Darstellung irreduzibel ist.
 		Da $\pi\neq 0$ ist, existiert ein $\eta \in \mathcal{H}$ mit $\pi(A)\eta \neq \set*{0}$.
 		Also ist $\overline{\pi(A)\eta}=\mathcal{H}$.
-		Dann folgt $\overline{\pi_n(A)\xi} \neq \set*{0}$ und damit $\overline{\pi(A)\xi}=\mathcal{H}$, also ist $\xi$ zyklisch.\qedhere
+		Damit ist $\pi$ nicht degeneriert und es folgt $\overline{\pi_n(A)\xi} = \mathcal{H}$ für $\xi\neq 0$, also ist $\xi$ zyklisch wie behauptet.\qedhere
 	\end{enumerate}
 \end{beweis}
 
@@ -2690,61 +2707,59 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 \begin{beweis}
 	Sei $\varphi$ rein und $0 \le h \le \ind_{\mathcal{B}(\mathcal{H})} \in \pi_\varphi(A)'$.
 	Dann definiert 
-	\mapdef{\rho \colon A}{\mathbb{C}}{a}{\skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}}{}
-	% $\rho \colon A \to \mathbb{C}$ gegeben durch $a \mapsto \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}$
-	ein positives Funktional auf $A$.\footnote{mit $h \pi(b^*b) = h^{\sfrac{1}{2}}h^{\sfrac{1}{2}} \pi(b^*b) = h^{\sfrac{1}{2}} \pi(b^*b) h^{\sfrac{1}{2}} \ge 0$} 
-	Es gilt $\rho \le \varphi$.\footnote{mit $h \pi(b^*b)= \pi(b^*)h \pi(b)\le \pi(b^*)\pi(b)$}
+	\mapdef{\rho \colon A}{\mathbb{C}}{a}{\skal[\big]{\xi_\varphi}{h\,\pi_\varphi(a)\xi_\varphi}}{}
+	ein positives Funktional auf $A$ mit $\rho \le \varphi$, siehe \autoref{prop:71}.
 	$\varphi$ ist rein, also existiert $\lambda \in [0,1]$ mit $\rho =\lambda \cdot \varphi$.
 	Für $a,b \in A$ erhalten wir:
 	\begin{align}
-		\skal*{a +N_\varphi}{h (b+ N_\varphi)} = \skal*{\pi(a) \xi_\varphi}{h \pi(b)\xi_\varphi} &= \skal*{\xi_\varphi}{h \pi(a^*b)\xi_\varphi} \\
+		\skal*{a +N_\varphi}{h (b+ N_\varphi)} = \skal*{\pi(a) \xi_\varphi}{h\,\pi(b)\xi_\varphi} &= \skal*{\xi_\varphi}{h\,\pi(a^*b)\xi_\varphi} \\
 		&= \rho(a^*b) =\lambda \cdot \varphi(a^*b) \\
 		&= \lambda \cdot \skal*{a+ N_\varphi}{b + N_\varphi} \\
 		&= \skal*{a + N_\varphi}{\lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}(b+ N_\varphi)}
 	\end{align}
-	Also ist $\skal*{\xi}{h \eta}= \skal*{\xi}{\lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}(\eta)}$ für $\xi,\eta \in \mathcal{H}_\varphi$ und damit $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$.
+	Also ist $\skal*{\xi}{h \eta}= \skal*{\xi}{\lambda \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}(\eta)}$ für $\xi,\eta \in \mathcal{H}_\varphi$ und damit $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}$.
 	Also ist $\pi_\varphi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$ und mit \autoref{satz:73} (i) folgt, dass $(\mathcal{H}_\varphi,\pi_\varphi)$ irreduzibel ist.
 	
 	Für die andere Implikation sei $(\mathcal{H}_\varphi,\pi_\varphi)$ irreduzibel und $\rho \in A^*$ positiv mit $\rho \le \varphi$.
-	Nach \autoref{prop:71} existiert $0 \le h \le \ind \in \mathcal{B}(\mathcal{H}_\varphi)$ mit $\rho(a) = \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}$ für $a \in A$.
-	Nach \autoref{satz:73} (i) gilt $\pi_\varphi(A)'=\mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})}$, also $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$ für ein $\lambda \in [0,1]$ und $\rho(a)= \skal*{\xi_\varphi}{h \pi_\varphi(a)\xi_\varphi}= \lambda \cdot \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi}= \lambda \cdot \varphi(a)$.
+	Nach \autoref{prop:71} existiert $0 \le h \le \ind \in \pi_\varphi(A)'$ mit $\rho(a) = \skal*{\xi_\varphi}{h\,\pi_\varphi(a)\xi_\varphi}$ für $a \in A$.
+	Nach \autoref{satz:73}~(i) gilt $\pi_\varphi(A)'=\mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}$, also $h= \lambda \cdot \ind_{\mathcal{B}(\mathcal{H})}$ für ein $\lambda \in [0,1]$ und $\rho(a)= \skal*{\xi_\varphi}{h\,\pi_\varphi(a)\xi_\varphi}= \lambda \cdot \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi}= \lambda \cdot \varphi(a)$.
 \end{beweis}
 
 \begin{satz}[{name=[{Reine Zustände von $C_0(X)$}]}]
 	Sei $X$ ein lokalkompakter Hausdorffraum.
-	Dann gilt $PS\enbrace*{C_0(X)}=\Omega \enbrace*{C_0(X)}$.
+	Dann gilt $PS\enbrace[\big]{C_0(X)}=\Omega \enbrace[\big]{C_0(X)}$.
 \end{satz}
 \begin{beweis}
 	Sei $\varphi \in PS \enbrace*{C_0(X)}$ ein reiner Zustand.
 	Dann gilt
 	\[
-		\pi_\varphi \enbrace*{C_0(X)} \subset \Underbracket{\pi_\varphi \enbrace*{C_0(X)}'}{\stackrel{\mbox{\tiny\ref{satz:73},\ref{satz:75}}}{=} \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}} \subset \mathcal{B}(\mathcal{H}_\varphi)
+		\pi_\varphi \enbrace[\big]{C_0(X)} \subset \pi_\varphi \enbrace[\big]{C_0(X)}' \StackText{\ref{satz:73}, \ref{satz:75}}{=\joinrel=\joinrel=} \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)} \subset \mathcal{B}(\mathcal{H}_\varphi)
 	\]
-	und $\mathcal{B}(\mathcal{H}_\varphi) \subset \enbrace*{\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}}' \subset \pi_\varphi \enbrace*{C_0(X)}'=\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})}$.
-	Also ist $\mathcal{B}(\mathcal{H}_\varphi)= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H_\varphi})} \cong \mathbb{C}$.
+	und $\mathcal{B}(\mathcal{H}_\varphi) \subset \enbrace*{\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}}' \subset \pi_\varphi \enbrace[\big]{C_0(X)}'=\mathbb{C}\cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)}$.
+	Also ist $\mathcal{B}(\mathcal{H}_\varphi)= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H}_\varphi)} \cong \mathbb{C}$.
+	Wir zeigen jetzt, dass $\varphi$ multiplikativ und damit ein \hyperref[def:charakter]{Charakter} ist:
 	Für $a,b \in C_0(X)$ gilt 
 	\begin{align}
-		\varphi(ab) = \skal*{\xi_\varphi}{\pi_\varphi(ab)\xi_\varphi} = \pi_\varphi(a) \skal*{\xi_\varphi}{\pi_\varphi(b) \xi_\varphi} 
+		\varphi(ab) = \skal*{\xi_\varphi}{\pi_\varphi(ab)\xi_\varphi} = \Underbracket{\pi_\varphi(a)}{\in \mathbb{C}}\cdot  \skal*{\xi_\varphi}{\pi_\varphi(b) \xi_\varphi} 
 		&= \pi_\varphi(a) \Underbracket{\skal*{\xi_\varphi}{\xi_\varphi}}{=1} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
 		&= \skal*{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi} \cdot \skal*{\xi_\varphi}{\pi_\varphi(b)\xi_\varphi} \\
 		&= \varphi(a) \cdot \varphi(b)
 	\end{align}
-	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$. 
+	Also ist $\varphi \in \Omega \enbrace*{C_0(X)}$ ein Charakter. 
 	Sei nun umgekehrt $\chi \in \Omega(C_0(X))$ und $\rho \in C_0(X)^*$ positiv mit $\rho \le \chi$.
 	Für $a \in C_0(X)$ gilt dann
 	\[
-		\abs*{\rho(a)} \StackText{\ref{satz:53}}{\le} \norm*{\rho}^{\sfrac{1}{2}} \rho(a^*a)^{\sfrac{1}{2}} \le \chi(a^* a)^{\sfrac{1}{2}} \le \abs*{\chi(a)} 
+		\abs*{\rho(a)} \StackText{\ref{satz:53}}{\le} \norm*{\rho}^{\sfrac{1}{2}} \rho(a^*a)^{\sfrac{1}{2}} \le \chi(a^* a)^{\sfrac{1}{2}}= \enbrace*{\overline{\chi(a)}\cdot  \chi(a)}^{\sfrac{1}{2}} \le \abs*{\chi(a)} 
 	\]
 	Also ist $\ker \chi \subset \ker \rho$.
-	$\rho$ induziert nun ein Funktional $\tilde{\rho}$ auf $\sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C}$
+	$\rho$ induziert nun ein Funktional $\tilde{\rho}$ auf $\sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C}$ mit $\rho = \tilde{\rho} \circ \chi$.
 	\[
-		\begin{tikzcd}[column sep=.6em]
-			C_0(X) \ar[rr,"\rho"] \drar["\chi"]& & \mathbb{C} \\
+		\begin{tikzcd}[column sep=.5em]
+			C_0(X) \ar[rr,"\rho"] \drar["\chi",two heads]& & \mathbb{C} \\
 			& \sfrac{C_0(X)}{\ker \chi} \cong \mathbb{C} \urar["\tilde{\rho}"]
 		\end{tikzcd}
 	\]
-	Also ist $\rho = \tilde{\rho} \circ \chi$.
-	Damit ist $\rho(. ) = \lambda \cdot \chi(.)$ für ein $\lambda \in \mathbb{C}$.
+	Damit ist $\rho = \lambda \cdot \chi$ für ein $\lambda \in \mathbb{C}$.
 	Für $a \in C_0(X)$ mit $\chi(a)=1$ gilt $0\le\rho(a^*a)= \lambda \cdot \chi(a^*a)=\lambda$ und außerdem $\rho(a^*a) \le \chi(a^*a)=1$, womit $0 \le \lambda\le 1$ ist.
 	Daraus folgt, dass $\chi$ rein ist.
 \end{beweis}
@@ -2753,7 +2768,10 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum, das heißt $X$ ist ein topologischer Vektorraum und die Topologie ist durch eine punkte trennende Familie $(p_\lambda)_\Lambda$ von Halbnormen induziert.
 	Sei $C \subset X$ eine nichtleere, (kompakte,) konvexe Teilmenge und sei $F \subset C$ eine nichtleere konvexe Teilmenge.
 	$F$ heißt \Index{Seite} von $C$, falls gilt:  
-	Für $x \in F$, $y,z \in C$, $t \in (0,1)$ mit $x= t \cdot y +(1-t) \cdot z$ gilt bereits $y,z \in F$.
+	Für $x \in F$, $y,z \in C$ und $t \in (0,1)$ gilt 
+	\[
+		x= t \cdot y +(1-t) \cdot z \implies y,z \in F
+	\]
 	$x \in C$ heißt \Index{Extrempunkt} von $C$, falls $\set*{x}$ eine Seite von $C$ ist.
 	Wir schreiben 
 	\[
@@ -2761,7 +2779,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\]
 \end{definition}
 
-\begin{proposition}[{name=[grundlegen Eigenschaften von Seiten]},label=prop:78]
+\begin{proposition}[{name=[grundlegende Eigenschaften von Seiten]},label=prop:78]
 	Seien $X,C$ wie oben.
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $C$ ist eine Seite von $C$.
@@ -2770,7 +2788,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\end{enumerate}
 \end{proposition}
 \begin{beweis}
-	Klar.
+	Alle drei Aussagen ergeben sich direkt aus der Definition.
 \end{beweis}
 
 \begin{lemma}[label=lem:79,{name=[durch Funktional definierte Seite]}]
@@ -2781,18 +2799,18 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 \begin{beweis}
 	Da $C$ kompakt ist, existiert ein $x_0 \in C$, sodass $\re \varphi(x_0)=M$, also ist $F \neq \emptyset$.
 	Offensichtlich ist $F$ konvex.
-	Da $\varphi$ stetig ist, ist $F \subset C$ abgeschlossen 
-	Sei nun $x \in F$, $y,z \in C$ und $t \in (0,1)$ mit $x= t y +(1-t)z$.
+	Da $\varphi$ stetig ist, ist $F \subset C$ abgeschlossen.
+	Seien nun $x \in F$, $y,z \in C$ und $t \in (0,1)$ mit $x= t \cdot y +(1-t) \cdot z$.
 	Falls $y$ oder $z$ nicht in $F$ liegt, so gilt $\re \varphi(y) <M$ oder $\re \varphi(z)<M$.
 	Damit ist 
 	\[
 		M = \re \varphi(x) = t \cdot \re \varphi(y) + (1-t) \cdot \re \varphi(z) <M
 	\]
-	Dies ist ein Widerspruch, also müssen $y,z$ in $F$ liegen und damit ist $F$ eine Seite. 
+	Dies ist ein Widerspruch, also müssen $y$ und $z$ in $F$ liegen und damit ist $F$ eine Seite.
 \end{beweis}
 
-\begin{satz}[{name={Krein-Milman}},label=satz:krein_milman]
-	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum und $C \subset X$ eine nichtleere, kompakte, konvexe Teilmenge.
+\begin{satz}[{name={{Krein-Milman}}},label=satz:krein_milman]
+	Sei $X$ ein hausdorffscher lokalkonvexer Vektorraum\marginnote{nach \href{https://de.wikipedia.org/wiki/Mark_Grigorjewitsch_Krein}{Mark Grigorjewitsch \textsc{Krein}} und \href{https://de.wikipedia.org/wiki/David_Milman}{David \textsc{Milman}}} und $C \subset X$ eine nichtleere, kompakte, konvexe Teilmenge.
 	Dann gilt 
 	\[
 		C=\overline{\conv(\partial_e C)}
@@ -2811,37 +2829,40 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Also ist $\Lambda$ induktiv geordnet und mit dem Lemma von Zorn folgt die Existenz eines minimalen Elements $F_0$.
 	Behauptung: $F_0= \set*{x_0}$ für ein $x_0 \in C$.
 	Angenommen es gäbe $x_0 \neq y_0 \in F_0$. 
-	Dann existiert $\varphi \colon X \to \mathbb{C}$ stetig und linear mit $\re \varphi(x_0) \neq \re \varphi(y_0)$ (Hahn-Banach für lokalkonvexe Vektorräume).
+	Dann existiert $\varphi \colon X \to \mathbb{C}$ stetig und linear mit $\re \varphi(x_0) \neq \re \varphi(y_0)$ (Hahn-Banach für lokalkonvexe Vektorräume\footnote{siehe zum Beispiel \cite[Cor. A.9, S. 271]{Murphy}}).
 	Dann ist 
 	\[
-		F_1 :=  \set*{x \in F_0 \given \re \varphi(x)=M=\sup_{x \in F_0} \re \varphi(x)}
+		F_1 :=  \set*{x \in F_0 \given \re \varphi(x)=M=\sup\nolimits_{x \in F_0} \re \varphi(x)}
 	\]
 	eine kompakte Seite von $F_0$ nach \autoref{lem:79} und \autoref{prop:78}.
-	Es gilt $F_1 \subset F_0$, also folgt wegen der Minimalität $F_0=F_1$.
+	Es gilt $F_1 \subset F_0$, also folgt wegen der Minimalität $F_0=F_1$ und damit $M= \re \varphi(x_0) = \re \varphi(y_0)$.
 	Dies ist ein Widerspruch und somit kann $F_0$ nur genau ein Element $x_0 \in \partial_e C$ besitzen.
 	
 	Angenommen es gibt ein $z \in C \setminus \overline{\conv(\partial_e C)}$.
-	Dann existiert (wieder nach Hahn-Banach) ein stetiges lineares $\psi \colon X \to \mathbb{C}$ mit 
+	Dann existiert (wieder nach Hahn-Banach für lokalkonvexe Räume\footnote{siehe \cite[Th. A.7, S. 270]{Murphy}}) ein stetiges lineares $\psi \colon X \to \mathbb{C}$ mit 
 	\[
-		\sup_{y \in \overline{\conv(\partial_e C)}} \re \enbrace*{\psi(y)} \le \re \psi(z)
+		\sup\set*{\re \psi(y) \given y \in \overline{\conv(\partial_e C)}} < \re \psi(z)
 	\]
 	Setze $M' := \sup_{x \in C} \re \psi(x)$ und $F':= \set*{x \in C \given \re \psi(x) =M'}$.
 	Dann ist $F'$ eine kompakte Seite von $C$ nach \autoref{lem:79}.
 	Wie oben sieht man, dass $F'$ einen Extrempunkt $y_0$ besitzt, der dann auch ein Extrempunkt von $C$ ist, also $y_0 \in \partial_e C$.
 	\[
-		M' = \re \psi(y_0) \le \sup_{y \in \overline{\conv(\partial_e C)}} \re \psi(y) < \re \psi(z) \le M'
+		M' = \re \psi(y_0) \le \sup \set*{\re \psi(y) \given y \in \overline{\conv(\partial_e C)}} < \re \psi(z) \le M'
 	\]
 	Dies ist ein Widerspruch und damit folgt die Behauptung.
 \end{beweis}
 
-\begin{satz}[label=satz:711]
+\begin{satz}[label=satz:711,{name=[reine Zustände sind Extrempunkte]}]
 	Sei $A$ eine $C^*$-Algebra und $S:= \set*{\varphi \in A^* \given \varphi \text{ ist positiv}, \norm*{\varphi}\le 1}$.
 	Dann ist $S$ konvex und $\w^*$-kompakt. 
-	Weiter gilt $\partial_e S = PS(A) \cup \set*{0}$ und $S= \overline{\conv(\partial_e S)}^{\raisemath{-.4ex}{\w^*}}$.
+	Weiter gilt 
+	\[
+		\partial_e S = PS(A) \cup \set*{0} \quad \text{ und } \quad  S= \overline{\conv(\partial_e S)}^{\w^*}
+	\]
 	Falls $A$ unital ist, so gilt $\partial_e \enbrace*{S(A)} =PS(A)$ und $S(A) = \overline{\conv \enbrace*{PS(A)}}^{\raisemath{-.4ex}{\w^*}}$. 
 \end{satz}
 \begin{beweis}
-	Es ist $S \subset B^1(A^*)$ abgeschlossen, wobei $B^1(A^*)$ nach Banach-Alaoglu $\w^*$-kompakt ist.
+	Es ist $S \subset B^1(A^*)$ $\w^*$-abgeschlossen, wobei $B^1(A^*)$ nach Banach-Alaoglu $\w^*$-kompakt ist.
 	Also ist $S$ auch $\w^*$-kompakt. 
 	Offensichtlich ist $S$ außerdem konvex.
 	Wir zeigen nun, dass für die Extrempunkte von $S$ gilt: $\partial_e S = PS(A) \cup \set*{0}$:
@@ -2849,12 +2870,12 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 		\item Es gilt $0 \in \partial_e S$:
 		Falls $0=t \cdot \varphi + (1-t) \cdot \psi$ mit $\varphi,\psi \in S$ und $t \in (0,1)$, so gilt
 		\[
-			\varphi\big|_{A_+} = \psi\big|_{A+}=0 \implies \varphi=\psi=0
+			\varphi\big|_{A_+}\!\! = \psi\big|_{A_+}\!\!=0 \implies \varphi=\psi=0
 		\]
 		\item Es gilt $PS(A) \subset \partial_e S$: Sei $\rho \in PS(A)$ und es gelte $\rho = t \cdot \varphi + (1-t) \cdot \psi$ mit $\varphi,\psi \in S$ und $t \in (0,1)$.
-		Dann gilt $t \cdot \varphi, (1-t) \cdot pis	 \le \rho$, also folgt 
+		Dann gilt $t \cdot \varphi, (1-t) \cdot \psi\le \rho$, also folgt 
 		\[
-			t \cdot \varphi = \lambda_\varphi \cdot \rho \text{ und } (1-t) \cdot \psi = \lambda_\psi \cdot \rho 
+			t \cdot \varphi = \lambda_\varphi \cdot \rho \quad \text{ und }\quad  (1-t) \cdot \psi = \lambda_\psi \cdot \rho 
 		\]
 		für geeignete Skalare $\lambda_\varphi, \lambda_\psi \in [0,1]$.
 		Es gilt $1= \norm*{\rho} \le t \cdot \norm*{\varphi} + (1-t) \cdot \norm*{\psi} \le 1$, also ist $\norm*{\varphi}=\norm*{\psi}=1$.
@@ -2864,7 +2885,8 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 		\[
 			\tau= \norm*{\tau} \cdot \Underbracket{\frac{1}{\norm*{\tau}} \cdot \tau}{\in S} + \enbrace[\big]{1- \norm*{\tau}} \cdot 0 
 		\]
-		Falls $\norm*{\tau}<1$, so ist $\norm*{\tau} \in (0,1)$ und $\tau=0$, was ein Widerspruch ist. Es folgt also $\tau \in S(A)$.
+		Falls $\norm*{\tau}<1$, so ist $\norm*{\tau} \in (0,1)$ und $\tau=0$, da $\tau$ ein Extrempunkt ist.
+		Dies ist ein Widerspruch und es folgt also $\tau \in S(A)$.
 		Sei nun $0\neq \rho \le \tau$ ein positives Funktional auf $A$.
 		Dann gilt $1- \norm*{\rho} = \lim_\lambda \tau(e_\lambda) - \rho(e_\lambda)= \norm*{\tau- \rho}$, wobei $(e_\lambda)_\Lambda \subset A$ eine approximative Eins ist.
 		Es folgt
@@ -2873,9 +2895,9 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 		\]
 		Da $\tau \in \partial_e S$ ist, folgt $\tau = \sfrac{1}{\norm*{\rho}} \cdot \rho$ und somit $\norm*{\rho} \cdot \tau =\rho$, also ist $\tau \in PS(A)$.
 	\end{itemize}
-	Nach dem \hyperref[satz:krein_milman]{Satz von Krein-Milman (\ref*{satz:krein_milman})} ist $S= \overline{\conv(\partial_e S)}^{\raisemath{-.4ex}{\w^*}}$.
+	Nach dem \hyperref[satz:krein_milman]{Satz von Krein-Milman (\ref*{satz:krein_milman})} ist $S= \overline{\conv(\partial_e S)}^{\raisemath{-.4ex}{\w^*}}\!$.
 	Sei nun $A$ unital.
-	Dann ist $S(A)$ nichtleer, konvex und $\w^*$-kompakt, denn aus $A$ unital folgt $\norm*{\varphi}=\varphi(1)$.
+	Dann ist $S(A)$ nichtleer, konvex und $\w^*$-kompakt, denn aus $A$ unital folgt $\norm*{\varphi}=\varphi(\ind)$.
 	Mit \hyperref[satz:krein_milman]{Krein-Milman} folgt also
 	\[
 		S(A) = \overline{\conv \enbrace[\big]{\partial_e \enbrace*{S(A)}}}^{\w^*}
@@ -2886,55 +2908,55 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\]
 \end{beweis}
 
-\begin{satz}[label=satz:712,{name=[reiner Zustand der Norm erfüllt]}]
+\begin{satz}[label=satz:712,{name=[{reiner Zustand der Norm von $a \in A$ realisiert}]}]
 	Sei $A$ eine $C^*$-Algebra und $0\neq a \in A_+$.
 	Dann existiert $\rho \in PS(A)$ mit $\rho(a)=\norm*{a}$.
 \end{satz}
 \begin{beweis}
 	Die folgende Menge mit $S$ wie in \autoref{satz:711} ist $\w^*$-abgeschlossen und konvex:
 	\[
-		F := \set[\big]{\varphi \in S \given \varphi(a)=\norm*{a}}
+		F := \set[\big]{\varphi \in S \given \varphi(a)=\norm*{a}} \subset S
 	\]
-	$F$ ist nichtleer nach \autoref{satz:55} und kompakt nach Banach-Alaoglu.
+	$F$ ist nichtleer nach \autoref{satz:55} und $\w^*$-kompakt nach Banach-Alaoglu.
 	Mit \hyperref[satz:krein_milman]{Krein-Milman} folgt, dass $F$ einen Extrempunkt $\rho$ besitzt.
 	Wie in \autoref{lem:79} zeigt man, dass $F$ eine Seite von $S$ ist.
 	Nach \autoref{prop:78} ist $\rho$ ein Extrempunkt von $S$.
-	Da $\rho\neq0$ ist, folgt also $\rho \in PS(A)$.
+	Da $\rho\neq0$ ist, folgt also $\rho \in PS(A)$ nach \autoref{satz:711}.
 \end{beweis}
 
-\begin{korollar}[label=korr:713]
+\begin{korollar}[label=korr:713,{name=[{irreduzible Darstellung, die die Norm von $a \in A$ erhält}]}]
 	Sei A eine $C^*$-Algebra und $a \in A$.
 	Dann existiert eine irreduzible Darstellung $(\mathcal{H},\pi)$ von $A$ mit $\norm*{a}= \norm*{\pi(a)}$.
 \end{korollar}
 \begin{beweis}
-	Ohne Einschränkungen ist $a \neq 0$.
+	Ohne Einschränkungen sei $a \neq 0$.
 	Nach \autoref{satz:712} existiert ein reiner Zustand $\rho \in PS(A)$ mit $\rho(a^*a)=\norm*{a^*a}=\norm*{a}^2$.
 	Die GNS-Darstellung $(\mathcal{H}_\rho,\pi_\rho)$ ist irreduzibel nach \autoref{satz:75}.
 	Es gilt
 	\[
-		\norm*{a}^2 = \rho(a^*a) = \skal*{\xi_\rho, \pi_\rho(a^*a)\xi_\rho} = \norm*{\pi_\rho(a) \xi_\rho}^2 \le \norm*{\pi_\rho(a)}^2 \le \norm*{a}^2 \qedhere
+		\norm*{a}^2 = \rho(a^*a) = \skal*{\xi_\rho}{\pi_\rho(a^*a)\xi_\rho} = \norm*{\pi_\rho(a) \xi_\rho}^2 \le \norm*{\pi_\rho(a)}^2 \le \norm*{a}^2 \qedhere
 	\]
 \end{beweis}
 
-\begin{korollar}[label=korr:714]
+
+\begin{korollar}[label=korr:714,{name=[Fortsetzung reiner Zustände]}]
 	Sei $B \subset A$ eine $C^*$-Unteralgebra und $\rho \in PS(B)$.
 	Dann existiert eine Fortsetzung $\rho' \in PS(A)$.
 	Falls $B\subher A$, so ist $\rho'$ eindeutig bestimmt. 
 \end{korollar}
 \begin{beweis}
-	Die Menge $F:= \set*{\varphi \in S(A) \given \varphi|_{B}=\rho}$ ist nichtleer nach \autoref{satz:57} und es ist $F \subset S$ $\w^*$-abgeschlossen, also $\w^*$-kompakt.
+	Die Menge $F:= \set*{\varphi \in S(A) \given \varphi|_{B}=\rho}$ ist nichtleer nach \autoref{satz:57} und es ist $F \subset S$ $\w^*$-abgeschlossen, also auch $\w^*$-kompakt (vergleiche \autoref{satz:711}).
 	Weiter ist $F$ auch wieder konvex.
-	$F$ ist eine Seite von 
+	$F$ ist nun eine Seite von 
 	\[
 		S = \set*{\varphi \colon A \to \mathbb{C}\given \text{ positiv, linear, } \norm*{\varphi}\le 1} 
 	\]
-	(Übung)
-	Mit \hyperref[satz:krein_milman]{Krein-Milman} und \autoref{prop:78} folgt, dass ein $\rho'' \in \partial_e F \subset\partial_e F \setminus\set*{0}=PS(A^\simm)$ existiert.
-	Setze nun $\rho' := \rho''|_{A} \in PS(A)$.(Übung)
-	Eindeutigkeit: \autoref{satz:58}.
+	wie in Aufgabe 5 von Blatt 12 gezeigt (siehe \cref{sub:aufg5_12}).
+	Mit \hyperref[satz:krein_milman]{Krein-Milman} und \autoref{prop:78} folgt, dass ein $\rho' \in \partial_e F \subset\partial_e S \setminus\set*{0}=PS(A)$ existiert.
+	Die Eindeutigkeit folgt direkt mit \autoref{satz:58}.
 \end{beweis}
 
-\begin{proposition}[label=prop:715]
+\begin{proposition}[label=prop:715,{name=[schwache Variante des Transitivitätssatzes]}]
 	Sei $\mathcal{H}$ ein Hilbertraum und $\xi_1,\ldots ,\xi_n,\eta_1 ,\ldots \eta_n \in \mathcal{H}$, wobei $\set*{\xi_1, \ldots ,\xi_n}$ ein Orthonormalsystem bildet.
 	Dann existiert ein $x \in \mathcal{B}(\mathcal{H})$ mit $x(\xi_i)=\eta_i$ für $i=1,\ldots,n$ und 
 	\[
@@ -2943,36 +2965,37 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$ existiert, so kann man $x$ selbstadjungiert wählen.
 \end{proposition}
 \begin{beweis}
-	Setze $x := \sum_{i=1}^{n} \ket{\eta_i} \bra{\xi_i}$, wo $\ket{\eta} \bra{\xi} \in \mathcal{B}(\mathcal{H})$ gegeben ist durch
+	Wir benutzen in diesem Beweis die aus Quantenphysik stammende \hrefsymX{https://de.wikipedia.org/wiki/Dirac-Notation}{\emph{Bra-Ket-Notation}}\index{Bra-Ket-Notation}.
+	Setze also $x := \sum_{i=1}^{n} \ket*{\eta_i} \bra*{\xi_i}$, wobei der Operator $\ket*{\eta} \bra*{\xi} \in \mathcal{B}(\mathcal{H})$ gegeben ist durch
 	\[
-		\ket{\eta} \bra{\xi} (\rho) := \ker{\eta} \bracket*{\xi}{\rho} = \skal*{\xi}{\rho} \cdot \eta
+		\enbrace[\Big]{\ket[\big]{\eta} \bra[\big]{\xi}} (\zeta) := \skal*{\xi}{\zeta} \cdot \eta
 	\]
-	Dann gilt $x(\xi_i) = \eta_i$ für $i=1,\ldots ,n$.
+	Dann gilt $x(\xi_i) = \eta_i$ für $i=1,\ldots ,n$, da die $\xi_i$ orthogonal sind.
 	Für $\xi \in \mathcal{H}$ gilt weiter 
 	\begin{align}
-		\norm*{x \xi} = \norm*{\sum_{i=1}^{n} \bracket{\xi_i}{\xi} \eta_i} \le \sum_{i=1}^{n} \abs[\big]{ \bracket{\xi_i}{\xi}} \cdot \norm*{\eta_i}\enspace &\StackTextClap{Hölder}{\le}\enspace \enbrace*{\sum_{i=1}^{n} \abs[\big]{\bracket{\xi_i}{\xi}}^2 \cdot \sum_{i=1}^{n} \norm*{\eta_i}^2}^{\sfrac{1}{2}}\\
+		\norm*{x \xi} = \norm*{\sum_{i=1}^{n} \bracket{\xi_i}{\xi} \eta_i} \le \sum_{i=1}^{n} \abs[\big]{ \bracket{\xi_i}{\xi}} \cdot \norm*{\eta_i}\enspace &\StackTextClap{\href{https://de.wikipedia.org/wiki/Hölder-Ungleichung}{Hölder}}{\le}\enspace \enbrace*{\sum_{i=1}^{n} \abs[\big]{\bracket{\xi_i}{\xi}}^2 \cdot \sum_{i=1}^{n} \norm*{\eta_i}^2}^{\sfrac{1}{2}}\\
 		&\le \norm*{\xi} \cdot \sqrt{n} \cdot \max_i \norm*{\eta_i}
 	\end{align}
-	Es folgt $\norm*{x} \le \sqrt{n} \cdot \max_i \norm*{\eta_i}$.
+	Es folgt $\norm*{x} \le \sqrt{n} \cdot \max_i \norm*{\eta_i}$.\todo{ich bin der Meinung, dass aus jeder Summe ein $n$ stammt, sodass am Ende keine Wurzel mehr auftritt}
 	Existiert nun $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i) =\eta_i$, dann gilt
 	\[
-		x = \sum_{i=1}^{n} \ket{\eta_i} \ket{\xi_i} = \sum_{i=1}^{n} \ket{y \xi_i} \bra{\xi_i} = y \Underbracket{\enbrace*{\sum_{i=1}^{n} \ket{\xi_i} \bra{\xi_i}}}{=:p} =y p
+		x = \sum_{i=1}^{n} \ket{\eta_i} \bra{\xi_i} = \sum_{i=1}^{n} \ket{y \xi_i} \bra{\xi_i} = y \Underbracket{\enbrace*{\sum_{i=1}^{n} \ket{\xi_i} \bra{\xi_i}}}{=:p} =y p
 	\]
 	wobei $p$ die Projektion auf $\Span \set*{\xi_1, \ldots ,\xi_n}$ ist. 
 	Dann ist $x' := yp + py - pyp$ selbstadjungiert und es gilt $x' \xi_i = \eta_i + p \eta_i - p \eta_i=\eta_i$.
 	Für die Norm erhalten wir
 	\begin{align}
 		\norm*{x'}^2 = \norm*{yp + py - pyp}^2 = \norm[\big]{ \enbrace*{yp+py-pyp} \enbrace*{yp + py - pyp}}&= \norm[\big]{ypy + py(\ind -p) yp} \\
-		&\le \norm*{ypy} + \norm*{py(\ind-p)yp} \\
-		&= \norm*{xx^*} + \norm*{x^*x} = 2 \cdot \norm*{x}^2 \\
-		&\le 2 n \enbrace[\big]{\max\nolimits_i \norm*{\eta_i}}^2
+		&\le \norm*{ypy} + \norm*{py(\ind-p)^2yp} \\
+		&\le \norm*{xx^*} + \norm*{x^*x} = 2 \cdot \norm*{x}^2 \\
+		&\le 2 \cdot n \cdot \enbrace[\big]{\max\nolimits_i \norm*{\eta_i}}^2
 	\end{align}
 	Damit erhalten wir insgesamt die gewünschte Abschätzung.
 \end{beweis}
 
 \begin{satz}[{name={Kadisons Transitivitätssatz}},label=satz:716]
 	Sei $A$ eine $C^*$-Algebra und $\pi \colon A \to \mathcal{B}(\mathcal{H})$ eine irreduzible Darstellung.
-	Seien $\xi_1,\ldots ,\xi_n, \eta_1, \ldots , \eta_n \in \mathcal{H}$, wobei $\xi_1,\ldots ,\xi_n$ linear unabhängig sind.
+	Seien $\xi_1,\ldots ,\xi_n, \eta_1, \ldots , \eta_n \in \mathcal{H}$, wobei die $\xi_i$ linear unabhängig sind.
 	Dann existiert ein $x \in A$ mit $\pi(x)(\xi_i) = \eta_i$ für $i=1,\ldots ,n$.
 	\begin{itemize}
 		\item Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ existiert mit $y(\xi_i)=\eta_i$, so kann man auch $x \in A_\sa$ wählen.
@@ -2980,71 +3003,83 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\end{itemize}
 \end{satz}
 \begin{beweis}
-	\begin{enumerate}[label={Teil \Roman*.},wide,font=\bfseries\scshape]
+	Wir zeigen verschiedene Spezialfälle, die wir schrittweise verallgemeinern:
+	\begin{enumerate}[label={Teil \Roman*.},wide,font=\bfseries\scshape,itemsep=2pt]
 		\item \label{enum:kad:1} Seien zunächst die $\xi_i$ orthonormal und es existiere ein $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i)=\eta_i$.
-		Wir dürfen $\max_i \norm*{\eta_i} \le (2n)^{- \sfrac{1}{2}}$ annehmen.
+		Wir dürfen wegen Linearität $\max_i \norm*{\eta_i} \le (2n)^{- \sfrac{1}{2}}$ annehmen.
 		Zu $\varepsilon>0$ definiere
 		\[
-			U_\varepsilon := \set*{z \in \mathcal{B}(\mathcal{H}) \given \norm*{z(\xi_i)} < \varepsilon , i=1,\ldots ,n}
+			U_\varepsilon := \set[\big]{z \in \mathcal{B}(\mathcal{H}) \given \norm*{z(\xi_i)} < \varepsilon , i=1,\ldots ,n}
 		\]
 		Dann ist $U_\varepsilon$ eine stark-offene Umgebung von $0 \in \mathcal{B}(\mathcal{H})$.
 		Es ist $\pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$, wie in einem kleinen Exkurs in \cref{sub:das_bild_irreduzibler_darstellungen} gezeigt.
-		Mit Kaplansky folgt, dass 
+		Mit \hyperref[satz:624]{Kaplansky} folgt, dass 
 		\[
 			\overline{\pi(A_\sa^1)}^\so = \mathcal{B}(\mathcal{H})_\sa^1
 		\]
 		Insbesondere gilt:
 		Zu $w \in \mathcal{B}(\mathcal{H})_\sa$ existiert $w' \in A_\sa$ mit $\pi(w')-w \in U_\varepsilon$ und $\norm*{w'} \le \norm*{w}$.
 		Nach \autoref{prop:715} existiert $v_0 \in \mathcal{B}(\mathcal{H})_\sa$ mit $v_0(\xi_i)=\eta_i$ und $\norm*{v_0} \le \sqrt{2n} \cdot \max_i \norm*{\eta_i} \le 1$.
-		Also existiert ein $x_0 \in A_\sa$ mit $\pi(x_0)=v_0 \in U_{\sfrac{1}{(2 \sqrt{2n})}}$ und $\norm*{x_0} \le 1$.
+		Also existiert ein $x_0 \in A_\sa$ mit $\pi(x_0)-v_0 \in U_{\sfrac{1}{(2 \sqrt{2n})}}$ und $\norm*{x_0} \le 1$.
 		Wir konstruieren nun induktiv $(x_k)_k \subset A_\sa$, $(v_k)_k \subset \mathcal{B}(\mathcal{H})_\sa$ mit 
 		\[
-			\norm*{x_k}, \norm*{v_k} \le 2^{-k} \qquad \pi(x_k) -v_k \in U_{2^{-(k+1)} (2n)^{- \sfrac{1}{2}}} \qquad v_k(\xi_i) = \enbrace*{v_{k-1} - \pi(x_{k-1})}(\xi_i)
+			\norm*{x_k}, \norm*{v_k} \le 2^{-k} \qquad  \pi(x_k) -v_k \in U_{2^{-(k+1)} (2n)^{- \sfrac{1}{2}}} \qquad v_k(\xi_i) = \enbrace[\big]{v_{k-1} - \pi(x_{k-1})}(\xi_i)
 		\]
-		$x_0, v_0$ sind bereits konstruiert.
-		Falls $x_0, \ldots ,x_r, v_0, \ldots ,v_r$ bereits konstruiert sind, so existiert nach \autoref{prop:715} ein $v_{r+1} \in \mathcal{B}(\mathcal{H})_\sa$ mit 
+		$x_0,$ und $v_0$ sind bereits konstruiert.
+		Falls auch $x_0, \ldots ,x_r, v_0, \ldots ,v_r$ bereits konstruiert sind, so existiert nach \autoref{prop:715} ein $v_{r+1} \in \mathcal{B}(\mathcal{H})_\sa$ mit 
 		$v_{r+1}(\xi_i)= \enbrace*{v_r- \pi(x_r)}(\xi_i)$ für $i=1,\ldots ,n$ und 
 		\[
-			\norm*{v_{r+1}} \le \sqrt{2n} \cdot \max_{i=1,\ldots ,n} \norm*{\enbrace*{v_r - \pi(x_r)}(\xi_i)} \le \sqrt{2n} \cdot 2^{-{r+1}} (2n)^{- \sfrac{1}{2}} = 2^{-{r+1}}
+			\norm*{v_{r+1}} \le \sqrt{2n} \cdot \max_{i=1,\ldots ,n} \norm*{\enbrace[\big]{v_r - \pi(x_r)}(\xi_i)} \le \sqrt{2n} \cdot 2^{-(r+1)} (2n)^{- \sfrac{1}{2}} = 2^{-(r+1)}
 		\]
-		$\leadsto$ Es existiert $x_{r+1} \in A_\sa$ mit $\pi(x_{r+1}) - v_{r+1} \in U_{2^{-(r+2)} \cdot (2n)^{-\sfrac{1}{2}}}$ und $\norm*{x_{r+1}} \le 2^{-{r+1}}$.
-		Aber dann konvergiert $x := \sum_{r=0}^{\infty} x_r$ in $A_\sa$ und es gilt
+		Also existiert $x_{r+1} \in A_\sa$ mit $\pi(x_{r+1}) - v_{r+1} \in U_{2^{-(r+2)} \cdot (2n)^{-\sfrac{1}{2}}}$ und $\norm*{x_{r+1}} \le 2^{-(r+1)}$.
+		Dies schließt die Induktion ab.
+		Nach Konstruktion konvergiert $x := \sum_{r=0}^{\infty} x_r$ in $A_\sa$ und es gilt
 		\begin{align}
-			\eta_i = \pi(x)(\xi_i) 
-			&= \lim_{k \to \infty} \enbrace*{\eta_i - \sum_{r=0}^{k} \pi(x_r) \xi}\\ 
-			&= \lim_{k \to \infty} \enbrace*{ \enbrace*{v_o(\xi_i) - \pi(x_0)(\xi_i)} - \pi(x_1)(\xi_i)} - \cdots - \pi(x_k)(\xi_i) \\
+			\eta_i - \pi(x)(\xi_i) 
+			&= \lim_{k \to \infty} \enbrace[\bigg]{\eta_i - \sum_{r=0}^{k} \pi(x_r) \xi}\\ 
+			&= \lim_{k \to \infty} \enbrace[\Bigg]{\Underbracket{\enbrace[\bigg]{ \Underbracket{\enbrace[\big]{v_o(\xi_i) - \pi(x_0)(\xi_i)}}{=v_1(\xi_i)} - \pi(x_1)(\xi_i)}}{=v_2(\xi_i)} - \ldots - \pi(x_k)(\xi_i)} \\[-3pt]
 			&= \lim_{k  \to \infty} v_{k+1}(\xi_i) =0
 		\end{align}
-		\item \label{enum:kad:2} Wir nehmen nun nicht mehr an, dass $y$ wie oben existiert.
+		Damit ist dieser Spezialfall bewiesen.
+		\item \label{enum:kad:2} Wir nehmen nun nicht mehr an, dass $y$ wie oben existiert, behalten die Annahme über die Orthogonalität aber bei.
 		Wir wissen aus \autoref{prop:715}, dass $\tilde{y} \in \mathcal{B}(\mathcal{H})$ mit $\tilde{y} \xi_i = \eta_i$ für $i=1,\ldots ,n$ existiert.
 		Dann sind $\re \tilde{y}, \im \tilde{y} \in \mathcal{B}(\mathcal{H})_\sa$ und nach \ref{enum:kad:1} existieren $x',x'' \in A_\sa$ mit 
 		\[
 			\pi(x') \xi_i = \enbrace*{\re \tilde{y}} \xi_i \quad \text{ und } \quad \pi(x'') \xi_i = (\im \tilde{y})\xi_i 
 		\]
-		Für $x := x' + i \cdot x''$ gilt $\pi(x) \xi_i = \tilde{y}\xi_i = \eta_i$.
+		Für $x := x' + i \cdot x''$ gilt dann $\pi(x) \xi_i = \tilde{y}\xi_i = \eta_i$ für alle $i$.
 		\item \label{enum:kad:3}Falls die $\xi_i$ nicht notwendigerweise orthogonal, aber linear unabhängig sind, wähle eine Orthonormalbasis $\set*{\xi_1', \ldots , \xi_n'}$ für $\Span \set*{\xi_1, \ldots ,\xi_n}$.
 		Falls $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y \xi_i = \eta_i$ existiert, so existiert nach \ref{enum:kad:1} ein $x \in A_\sa$ mit $\pi(x)\xi_i' = y \xi_i'$.
 		Aber dann gilt auch $\pi(x)\xi_i = y \xi_i = \eta_i$ für $i=1,\ldots ,n$.
 		Falls kein solches $y$ existiert, wende \ref{enum:kad:2} an.
 		\item \label{enum:kad:4} Seien nun $A$ und $\pi$ unital und es existiere $u \in \mathcal{U}\enbrace*{\mathcal{B}(\mathcal{H})}$ mit $u(\xi_i)=\eta_i$.
-		Wir in \ref{enum:kad:3} reduziert man auf den Fall, dass die $\xi_i$ ein Orthonormalsystem bilden.
+		Wie in \ref{enum:kad:3} reduziert man das Problem auf den Fall, dass die $\xi_i$ ein Orthonormalsystem bilden.
+		Da $u$ unitär ist, ist dann auch $\set*{\eta_1,\ldots ,\eta_n}$ ein Orthonormalsystem.
 		Sei 
 		\[
-			\mathcal{H}_0 := \Span \set*{\xi_1, \ldots, \xi_n, \eta_i, \ldots ,\eta_n}
+			\mathcal{H}_0 := \Span \set*{\xi_1, \ldots, \xi_n, \eta_1, \ldots ,\eta_n}
 		\]
-		Dann existiert $u' \in \mathcal{U}\enbrace*{\mathcal{B}(\mathcal{H}_0)} \subset \mathcal{B}(\mathcal{H})$ mit $u' \xi_i = \eta_i$.\footnote{komponieren mit der Projektion auf den Span der $\xi_i$; $\set*{\xi_1, \ldots ,\xi_n}$ und $\set*{\eta_1,\ldots ,\eta_n}$ bilden Orthonormalsysteme in $\mathcal{H}_0$ und lassen sich zu Orthonormalbasen auf $\mathcal{H}_0$ ergänzen}
-		Es ist $\mathcal{B}(\mathcal{H}_0) \cong M_m$ und $u' = e^{i h}$ für ein $h \in \mathcal{B}(\mathcal{H}_0)_\sa \subset \mathcal{B}(\mathcal{H})_\sa$.
-		Es existiert nach \ref{enum:kad:1} ein $d \in A_\sa$ mit $\pi(d) \zeta_i = h \zeta_i$, wobei $\zeta_1,\ldots , \zeta_m$ eine Orthonormalbasis für $\mathcal{H}_0$ ist.
-		Dann folgt $\pi(d)|_{\mathcal{H}_0}=h$ und $\pi(e^{id})|_{\mathcal{H}_0}= e^{ih}$.\qedhere
+		Wir können $\set*{\xi_1, \ldots ,\xi_n}$ und $\set*{\eta_1,\ldots ,\eta_n}$ zur Orthonormalbasen $\set{\xi_1, \ldots ,\xi_m}$ bzw. $\set*{\eta_1, \ldots ,\eta_m}$ von $\mathcal{H}_0$ ergänzen.
+		Dann existiert offensichtlich $u' \in \mathcal{U}\enbrace*{\mathcal{B}(\mathcal{H}_0)} \subset \mathcal{B}(\mathcal{H})$ mit $u' \xi_i = \eta_i$.
+		$u'$ ist diagonalisierbar, also existiert eine Orthonormalbasis $\set{\zeta_1,\ldots , \zeta_m}$ von $\mathcal{H}_0$, sodass $u'(\zeta_i) = \lambda_i \cdot \zeta_i$ für $\lambda_i \in \mathbb{T} \subset \mathbb{C}$. 
+		Damit existieren $t_i \in \mathbb{R}$ mit $e^{i t_i}=\lambda_i$ und wir finden $h \in \mathcal{B}(\mathcal{H}_0)_\sa \subset \mathcal{B}(\mathcal{H})_\sa$ mit $u'=e^{i h}$ und $h \zeta_i = t_i \cdot \zeta_i$.
+		Nach \ref{enum:kad:1} existiert ein $d \in A_\sa$ mit $\pi(d) \zeta_i = h \zeta_i$.
+		Setze nun $x := e^{i d} \in A$. 
+		Dann ist $x$ offensichtlich unitär und es gilt
+		\[
+			x \zeta_i= e^{i d} \zeta_i = e^{i t_i} \cdot \zeta_i = \lambda_i \cdot \zeta_i = u' \zeta_i
+		\]
+		Also stimmt $x$ auf $\mathcal{H}_0$ mit $u'$ überein und es folgt $x \xi_i= \eta_i$ wie gewünscht. \qedhere
 	\end{enumerate}
 \end{beweis}
 
 \begin{korollar}[{name=[irreduzibel impliziert algebraisch irreduzibel]},label=korr:717]
-	Eine irreduzible Darstellung $(\mathcal{H},\pi)$ einer $C^*$-Algebra $A$ ist algebraisch irreduzibel.
+	Eine irreduzible Darstellung $(\mathcal{H},\pi)$ einer $C^*$-Algebra $A$ ist \hyperref[def:510]{algebraisch irreduzibel}.
 \end{korollar}
 \begin{beweis}
 	Nach \autoref{satz:716} gilt $\pi(A)\xi=\mathcal{H}$ für jedes $0 \neq \xi \in \mathcal{H}$.
 	Also ist $\pi(A)(\mathcal{H}_0)=\mathcal{H}$ oder $\set*{0}$ für jeden Unterraum $\mathcal{H}_0 \subset \mathcal{H}$.
+	Also gibt es keinen nichtrivialen invarianten Unterraum.
 \end{beweis}
 
 \begin{definition}[label=def:718,{name=[primitives Ideal]}]
@@ -3052,7 +3087,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Ein Ideal $J \lhd A$ heißt \bet{primitiv}\index{primitives Ideal}, falls $J= \ker \pi$ für eine irreduzible Darstellung $\pi$ ist.
 	Wir schreiben $\Prim A  := \set*{J \lhd A \text{ primitiv}}$.
 	Die \Index{Hülle-Kern-Topologie} bzw. \Index{Jacobson-Topologie} auf $\Prim A$ ist gegeben durch:
-	Für $R \subset \Prim A$ sei
+	Für $R \subset \Prim A$ sei\marginnote{siehe \cite[Th.~5.4.6, S.~159]{Murphy} für einen Beweis, dass dies eine eindeutige Topologie definiert}
 	\[
 		\overline{R} = \hull\enbrace[\big]{\ker(R)} = \set*{J \in \Prim A \given \enbrace*{\bigcap_{J \in R} J} \subset J}
 	\]  
@@ -3062,28 +3097,46 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	Für eine kommutative $C^*$-Algebra $A$ gilt $\Omega(A) \approx \Prim A$.
 \end{satz}
 \begin{beweis}
-	Jeder Charakter $\chi \in \Omega(A)$ ist eine irreduzible Darstellung $\chi \colon A \to \mathbb{C} = \mathcal{B}(\mathbb{C})$.
+	Jeder Charakter $\chi \in \Omega(A)$ ist eine irreduzible Darstellung $\chi \colon A \to \mathbb{C} = \mathcal{B}(\mathbb{C})$, da $\mathbb{C}$ keine echten Unterräume besitzt.
 	Wir haben also eine Abbildung 
 	\mapdef{\gamma \colon\Omega(A)}{\Prim A}{\chi}{\ker \chi}{}
-	$\gamma$ ist injektiv: 
+	Für die Injektivität von $\gamma$ seien $\ker \chi_1= \ker \chi_2$ für $\chi_1, \chi_2 \in \Omega(A)$. 
+	Dann kommutiert folgendes Diagramm 
 	\[
 		\begin{tikzcd}[sep=small]
 			A \ar[rr,"\chi_1"] \ar[ddd,equal] \drar& & \mathbb{C} \ar[ddd,"\cong"]\\
-			& \sfrac{A}{\ker \chi_1} \urar["\cong"'] \dar[equal] \\[-2pt]
+			& \sfrac{A}{\ker \chi_1} \urar["\cong"'] \dar[equal] \\[-2.3pt]
 			& \sfrac{A}{\ker \chi_2} \drar["\cong"] \\
 			A \ar[rr,"\chi_2"'] \urar& & \mathbb{C}
 		\end{tikzcd}
 	\]
-	Der Isomorphismus in der rechten Spalte ist Multiplikation mit $C \in \mathbb{C}$. 
-	Man überlegt sich, dass $C=1$ gelten muss, sodass $\chi_1=\chi_2$ folgt.
-	
+	Der Isomorphismus in der rechten Spalte ist durch Multiplikation mit einem $c \in \mathbb{C}$ gegeben.
+	Sei $(e_\lambda)_\Lambda \subset A$ eine approximative Eins, dann gilt $\lim_\lambda \chi_i(e_\lambda) = \norm*{\chi} =1$ und somit muss $c=1$ gelten, woraus direkt $\chi_1=\chi_2$ folgt.	
 	Für die Surjektivität sei $J \in \Prim A$ mit $J= \ker \pi$ für $\pi \colon A \to \mathcal{B}(\mathcal{H})$ irreduzibel.
 	Da $A$ abelsch ist, gilt dann $\pi(A) \subset \pi(A)' = \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})} \cong \mathbb{C}$.
-	Also ist $\pi$ ein Charakter. 
+	Also ist $\pi$ ein Charakter.
 	
-	Homöomorphismus:
-	\mapdef{\set*{Y \subset \Omega(A) \text{ abg.} }}{J \lhd A}{Y}{C_0 \enbrace*{\Omega(A) \setminus Y} \cong \set*{f \in C_0(\Omega(A)) \given f|_Y=0} = \bigcap_{y \in Y} \set*{f \in C_0(\Omega(A)) \given f(y)=0}}{}
-	Damit kann man die Stetigkeit beweisen.
+	Um zu zeigen, dass $\gamma$ ein Homöomorphismus ist, zeigen wir, dass $\gamma$ abgeschlossen ist.
+	Zum einen gilt nach Aufgabe 3 von Blatt 2 $\Omega(A) \approx \Omega \enbrace*{C_0(\Omega(A))}$ und nach Gelfand auch $A \cong C_0(\Omega(A))$.
+	Wir erhalten also folgendes Diagramm
+	\[
+		\begin{tikzcd}[column sep=small]
+			\chi \ar[ddd,mapsto] \ar[rrr,mapsto] \drar[phantom,sloped, description,"\in"] & & & \ker \chi \dlar[phantom,sloped, description,"\in"]\\[-1ex]
+			&\Omega(A) \rar["\gamma"] \dar["\approx"] &[7cm] \Prim A \dar["\approx"] \\
+			&\Omega\enbrace[\big]{C_0(\Omega(A))} \rar & \Prim C_0(\Omega(A)) \\[-1ex]
+			\ev_\chi \ar[rrr,mapsto] \urar[phantom,sloped, description,"\in"] & & & \ker \ev_\chi \ular[phantom,sloped, description,"\in"]
+		\end{tikzcd}
+	\]
+	Es ist $\ker \ev_\chi = \set[\big]{f \in C_0(\Omega(A)) \given f(\chi)=0} =: J_\chi \lhd C_0(\Omega(A))$. 
+	Sei nun $X \subset \Omega(A)$ abgeschlossen und $R$ das Bild von $Y$ in $\Prim C_0(\Omega(A))$.
+	Es gilt dann
+	\[
+		\bigcap_{J \in R} J = \bigcap_{\chi \in X} J_\chi = \Underbracket{\set[\big]{f \in C_0(\Omega(A)) \given f|_X \equiv 0}}{=: J_X \lhd C_0(\Omega(A))} \cong C_0 \enbrace*{\Omega(A) \setminus X}
+	\]
+	Sei nun $J \in \Prim C_0(\Omega(A))$ mit $J_X \subset J$.
+	Nach Aufgabe 4 von Blatt 7 ist $J=J_Y$ für $Y \subset \Omega(A)$ abgeschlossen und es folgt $Y \subset X$. 
+	Da $J_X$ primitiv ist, folgt wegen der oben gezeigten Surjektivität und der Tatsache, dass alle Charaktere in $\Omega\enbrace[\big]{C_0(\Omega(A))}$ Auswertungsabbildungen sind, $\set*{y}=Y \subset X$ und somit ist $J \in R$. 
+	Nach Definition der Jacobson-Topologie ist $R$ also abgeschlossen.
 \end{beweis}
 % section 7 (end)
 \newpage
@@ -3092,10 +3145,10 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 \label{sec:beispiele}
 \emph{(Mit Ausrufezeichen)}
 
-\begin{satz}
+\begin{satz}[{name=[endlich dimensionale C*-Algebren sind direkte Summen von Matrixgruppen]}]
 	Eine endlichdimensionale $C^*$-Algebra $A$ ist von der Form 
 	\[
-		M_{r_1} \oplus \ldots \oplus M_{r_s} \quad r_1,\ldots,r_s \in \mathbb{N}
+		M_{r_1} \oplus \ldots \oplus M_{r_s} \qquad r_1,\ldots,r_s \in \mathbb{N}
 	\]
 \end{satz}
 \begin{beweis}
@@ -3106,7 +3159,168 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 	\)
 	endlichdimensional und es gilt $\pi(A)=\mathcal{B}(\mathcal{H})$ wieder nach \autoref{satz:716}.
 	Da $A$ einfach ist, muss $\pi$ bereits ein Isomorphismus sein und es folgt $\mathcal{B}(\mathcal{H}) \cong \mathcal{B}(\mathbb{C}^r)=M_r$.
+	
+	Falls $A$ nicht einfach ist, so enthält $A$ ein Ideal $\set*{0}\neq J \neq A$ mit minimaler Dimension.
+	Dann ist $J$ eine endlichdimensionale $C^*$-Algebra und enthält keine nichttrivialen Ideale, ist also einfach.
+	Mit dem ersten Teil folgt also $J \cong M_{r_1}$ für ein $r_1 \in \mathbb{N}$.
+	$J$ ist insbesondere unital, sodass $J= J \cdot \ind_J = A \cdot \ind_J= \ind_J \cdot A$ gilt und damit 
+	\[
+		A=A \enbrace[\big]{\ind_J+ (\ind_{A^\simm}- \ind_J)} = A  \ind_J + A \enbrace*{\ind_{A^\simm} - \ind_J} = \Underbracket{\ind_J  A \ind_J}{\cong M_{r_1}} \oplus \Underbracket{\enbrace*{\ind_{A^\simm} - \ind_J}A \enbrace*{\ind_{A^\simm} - \ind_J}}{\lhd A}
+	\]
+	Das rechte Ideal hat eine kleinere Dimension als $A$ und damit sind wir fertig.\todo{Revision 8}
 \end{beweis}
+
+\begin{beispiel}[{name=[stabile Isomorphie und K-Theorie]}]
+	Für eine $C^*$-Algebra $A$ sei
+	\mapdef{\iota_n^A \colon M_n(A)}{M_{n+1}(A)}{X}{\begin{psmallmatrix}
+		X & 0\\
+		0 & 0
+	\end{psmallmatrix}}{}
+	Schon gesehen: Für $A=\mathbb{C}$ ist $\Dlim(M_n,\iota_n^\mathbb{C}) \cong \mathcal{K} \enbrace*{\ell^2(\mathbb{N})} = \mathcal{K}$.
+	Für ein beliebiges $A$ schreiben wir
+	\[
+		\mathcal{K} \otimes A := \dlim \enbrace[\big]{M_n(A),\iota_n^A}
+	\]
+	Die Notation werden wir später rechtfertigen.
+	Es gilt $\mathcal{K} \cong \mathcal{K} \otimes M_r \cong \mathcal{K} \otimes \mathcal{K}$ und $\mathcal{K} \otimes M_r \cong M_r(\mathcal{K})$.
+	Für die primitiven Ideale gilt
+	\[
+		\Prim A\approx \Prim(\mathcal{K} \otimes A)
+	\]
+	Zwei $C^*$-Algebren $A$ und $B$ heißen \Index{stabil isomorph}, falls $\mathcal{K} \otimes A \cong \mathcal{K} \otimes B$. 
+	Tensorieren mit den Kompakten Operatoren liefert \enquote{nichtkommutativen Platz} für direkte Summen von Moduln.
+	Dies liefert eine abelsche Halbgruppe und daraus erhält man mit der Grothendiek-Konstruktion eine abelsche Gruppe. 
+	Das ist die Grundlage der sogenannten K-Theorie.
+\end{beispiel}
+
+\begin{beispiel}[{name=[{Wege in $2 \times 2$-Matrizen}]}]
+	Betrachte $A := C\enbrace*{[0,1],M_2}$ und die Unteralgebren 
+	\begin{align}
+		B &:= \set*{f \in A \given f(1) = \begin{pmatrix} \lambda & 0\\ 0 & \lambda \end{pmatrix}, \lambda \in \mathbb{C}}\\
+		C &:= \set*{f \in A \given f(1) = \begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2 \end{pmatrix}, \lambda_1, \lambda_2 \in \mathbb{C}} \\
+		D &:= \set*{f \in A \given f(1)= \begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2 \end{pmatrix}, f(0)= \begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_1 \end{pmatrix}, \lambda_1, \lambda_2 \in \mathbb{C}}
+	\end{align}
+	Wir können uns $\Prim A$ als die Charaktere auf $A$ vorstellen und in diesem Fall sogar als Intervall, wobei die Punkte Evaluierungen $\ev_f \colon A \to M_2$ entsprechen.
+	In $\Prim B$ gilt zusätzlich $\ev_1 \colon B \to \mathbb{C} \cdot \ind_{M_2} \cong \mathbb{C}$.
+	Für $\Prim C$ enthält am rechten Rand des Intervalls zwei Punkte, einmal die Auswertung, die $\lambda_1$ ausgibt, und die, die $\lambda_2$ ausgibt.
+	Damit ist $\Prim C$ nicht hausdorffsch, aber immerhin $T_0$.
+	Für $\Prim D$ erhält man einen Kreis, der an einer Stell einen verdoppelten Punkt hat, der nur zu einer Seite hin offen ist.
+\end{beispiel}
+
+\begin{beispiel}
+	Sei $A := \set[\big]{f \in C_0\enbrace*{[0,\infty),\mathcal{K}} \given f(t) \in \iota_{n,\infty}(M_n) \text{ für }t \in [n-1,n)}$.
+	\missingfigure{hier kommt eine etwas esoterische Zeichnung hin \ldots }
+	$\Prim A \approx [0,\in )$ ist hausdorffsch.
+	Für jedes $t_0 \in \Prim A$ existieren eine Umgebung $U$ von $t_0$ und $f \in A$, sodass $f(t)$ eine Projektion von Rang 1 ist für alle $t \in U$.
+	$A$ hat eine \enquote{stetige Spur}.
+	Für $A,B$ mit stetiger Spur und $\Prim A \approx \Prim B$, so gilt 
+	\[
+		\mathcal{K} \otimes A \cong \mathcal{K} \otimes B \iff \Underbracket{H^3(\Prim A)}{\ni \delta(A)}\cong \Underbracket{H^3(\Prim B)}{\ni\delta(B)} 
+	\]
+	Die Elemente aus den Kohomologieklassen heißen Dixmier-Douady-Klassen.
+\end{beispiel}
+
+\begin{beispiel}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item $M_r$ ist erzeugt von den Matrixeinheiten $e_{ij} \in M_r$, $i,j=1,\ldots ,r$.
+		Die $e_{ij}$ erfüllen Relationen $R_{M_r}=\set{e_{ij} e_{kl}=\delta_{jk} e_{il}, e_{ij}^*= e_{ji} \given  i,j,k,l \in 1,\ldots ,r}$.
+		Falls $A$ eine weitere $C^*$-Algebra ist mit Elementen  $f_{ij}$, $i,j=1,\ldots,r$, welche die Relationen $R_{M_r}$ erfüllen, so existiert genau ein $^*$-Homomorphismus $\pi \colon M_r \to M$ mit $\pi(e_{ij})=f_{ij}$.
+		Die Erzeuger $e_{ij}$ mit den Relationen $R_{M_r}$ erfüllen also eine universelle Eigenschaft.
+		($M_r$ einfach $\implies \pi$ ist frei, falls $f_{ij}\neq 0$)
+		\item Sei $X=\set*{x_\gamma \given \gamma \in \Gamma}$ eine Menge.
+		Eine Relation mit Erzeugern in $X$ ist ein Ausdruck der Form $p(x_{\gamma_1}, \ldots ,x_{\gamma_n}, x_{\gamma_1}^*, \ldots , x_{\gamma_n}^*)=0$, wo $p$ ein Polynom in $2n$ nichtkommutierenden Variablen ist.
+		Allgemeiner betrachtet man auch Relationen $[p,\varepsilon]$ der Form $\norm*{p(x_1,\ldots ,x_n,x_1^*,\ldots ,x_n^*)} \le \varepsilon$, $\varepsilon>0$.
+		
+		Eine Darstellung von $(X,R)$ (wo $R$ eine Menge von Relationen ist) ist ein $^*$-Homomorphismus $\pi \colon ^*\text{-}\Alg(X) \to \mathcal{B}(\mathcal{H})$, der jede Relation erfüllt, das heißt 
+		\[
+			\norm*{p\enbrace[\big]{\pi(x_{\gamma_1}) , \ldots , \pi(x_{\gamma_n}), \pi{x_{\gamma_1}}^* ,\ldots , \pi(x_{\gamma_n})^*}} \le \varepsilon
+		\]
+		$(X,R)$ heißt zulässig, falls es für jedes $x_j$ ein $c_\gamma \ge 0$ gibt mit $\norm*{\pi(x_\gamma)} \le c_\gamma$ für jede Darstellung $\pi$.
+		Für zulässige $(X,R)$ definieren wir eine Halbnorm auf $^*$-$\Alg(X)$ durch 
+		\[
+			\norm*{x} := \sup_{\pi \text{ Darst.}} \norm*{\pi(x)}_{\mathcal{B}(\mathcal{H})}
+		\]
+		Definiere $C^*(X\mid R) := \overline{^*\text{-}\Alg(X)}^{\norm*{\cdot}}$ (Vervollständigung bezüglich einer Halbnorm).
+		\item Beispiele:
+		\begin{enumerate}[a)]
+			\item $M_r \cong C^* \enbrace*{\set*{e_{ij}} \mid R_{M_r}}$.
+			\item 
+			\begin{align}
+				C^* \enbrace*{\set*{\ind,u} \mid uu^*=\ind, u^*u=\ind, \ind \ind=\ind, \ind u=u, u \ind=u,\ind^*=\ind} \cong C \enbrace*{S^1} = C^*(\id_{S^1})
+			\end{align}
+			\item $A_\theta := C^* \enbrace*{\set*{u,v,1}\mid u,v \text{ unitär},uv=e^{2 \pi i \theta} vu }$ für $\theta \in [0,1]$ bezeichnet man als \Index{Drehungsalgebra}.
+			Für $\theta=0$ erhält man die stetigen Funktionen auf dem Torus.
+			\item Die Relation $x=x^*$ ist nicht zulässig (da die Norm den Wert unendlich haben kann). Dies lässt sich aber durch eine zusätzliche Relation reparieren
+			\item Die Relationen $x=x^*$, $p=p^*$ und $xp-px=i \cdot \ind$ sind auch nicht zulässig, denn sie lassen sich nur mit unbeschränkten Operatoren darstellen.
+			\item Es gilt $C^* \enbrace*{\set*{p,q} \mid p=p^*, p=p^2, f=f^*,f=f^2} \cong \set*{f \in C([0,1],M_2) \given f(0)=\diag(\lambda,\mu), f(1)= \diag(\kappa,0), \lambda,\mu, \kappa \in \mathbb{C}}$
+			\missingfigure{wieder eine abstrakte Zeichnung}
+			\item Sei $G$ eine diskrete Gruppe. 
+			Die volle Gruppen-$C^*$-Algebra ist gegeben durch
+			\[
+				C^*(G) := C^* \enbrace*{X\mid R}\quad  \text{ mit } \quad X=\set*{u_g \given g \in G}  \quad R= \set*{u_g \text{ unitär}, u_g^*=u_{g^{-1}}, u_g u_h = u_{gh}}
+			\]
+			Alternativ kann man auch den Gruppenring betrachten:
+			\[
+				\mathbb{C}[G] := \set[\bigg]{\sum_{g \in G}\alpha_g \cdot g \given \text{ nur endlich viele } \alpha_g\neq 0} = \set[\big]{\alpha \colon G \to C \given \alpha \text{ hat endlichen Träger} }
+			\]
+			mit Faltung, das heißt $(\alpha * \beta)(h) = \sum_{g \in G} \alpha(g) \beta(g^{-1}h)$ und Involution $\alpha^*(g)=\overline{\alpha(g^{-1})}$.
+			Die unitären Darstellungen $\tilde{\pi} \colon G \to \mathcal{B}(\mathcal{H})$ stehen in Bijektion zu den $^*$-Darstellungen $\pi \colon \mathbb{C}[G] \to \mathcal{B}(\mathcal{H})$.
+			Die $C^*$-Norm auf $\mathbb{C}[G]$ ist gegeben durch
+			\[
+				\norm*{x} = \sup_{\substack{\tilde{\pi} \text{ unitäre} \\ \text{Darst.}}} \norm*{\pi(x)}_{\mathcal{B}(\mathcal{H})}
+			\]
+			Es folgt $C^*(G) \cong \overline{\mathbb{C}[G]}^{\norm*{\cdot}}$. $\norm*{\cdot }$ ist tatsächlich eine Norm, denn $\mathbb{C}[G]$ besitzt eine injektive Darstellung:
+		\end{enumerate}
+	\end{enumerate}
+\end{beispiel}
+
+\begin{beispiel}
+	Sei $G$ wieder eine diskrete Gruppe
+	\[
+		\ell^2(G) = \set*{\xi \colon G \to \mathbb{C} \given \norm*{\xi}_2 := \enbrace*{\sum\nolimits_G \abs*{\xi(g)}^2 }^{\sfrac{1}{2}} < \infty}
+	\]
+	Mit der Orthonormalbasis $\set*{\delta_g \given g \in G}$. Dann ist die linksreguläre Darstellung $\tilde{\lambda} \colon G \to \mathcal{B} \enbrace*{\ell^2(G)}$ gegeben durch $\tilde{\lambda}(g)(\delta_h) = \delta_{gh}$, das heißt $\enbrace*{\tilde{\lambda}(g)(\xi)}(h) = \xi \enbrace*{g ^{-1}h}$.
+	$\tilde{\lambda}$ ist eine unitäre Darstellung und mit der Bijektion erhält man eine injektive $^*$-Darstellung $\lambda \colon \mathbb{C}[G] \to \mathcal{B}(\mathcal{H})$.
+	Wir definieren die reduzierte Gruppen-$C^*$-Algebra durch
+	\[
+		C^*_{\red}(G) := C^* \enbrace*{\tilde{\lambda}(G)}= C^* \enbrace*{\lambda \enbrace*{\mathbb{C}[G]}} \subset \mathcal{B} \enbrace*{\ell^2(G)}
+	\]
+	und weiter $L(G) := \overline{C^*_{\red}(G)}^\wo$. Diese wird als Gruppen-von-Neumann-Algebra bezeichnet.
+	Man kann zeigen, dass $C^*(G) \twoheadrightarrow C^*_{\red}(G)$ genau dann ein Isomorphismus ist, wenn $G$ amenabel ist.
+	Die freie Gruppe in $n$ variablen $\mathcal{F}_n$ ist nicht amenabel und man kann zeigen
+	\[
+		C^*_{\red}(\mathcal{F}_n) \not\cong C^*_{\red}(\mathcal{F}_m) \quad m \neq n
+	\]
+	Ein offenes Problem ist die analoge Frage 
+	\[
+		\text{¿ } L(\mathcal{F}_n) \cong L (\mathcal{F}_m) \text{ ?}  
+	\]
+\end{beispiel}
+
+\begin{beispiel}
+	Sei $X$ ein kompakter Hausdorffraum und $\overline{\alpha}$ ein Homöomorphismus $X\to X$.
+	Dann erhält man $\alpha \in \Aut(C(X))$ und man kann durch
+	\[
+		\alpha^n(f) = f \circ \overline{\alpha}^{-n} \qquad n \in \mathbb{Z}
+	\]
+	Sei $\pi \colon C(X) \to \mathcal{B}(\mathcal{H})$ eine treue Darstellung.
+	Setzt man $\tilde{H} := \ell^2(\mathbb{Z},\mathcal{H})$, so erhält man $\tilde{\pi} \colon C(X) \to \mathcal{B}(\tilde{\mathcal{H}})$ durch
+	\[
+		\tilde{\pi}(f) = \begin{pmatrix}
+			\ddots & & && \\
+			& \pi(\alpha^{-1} f) & & &\\
+			& & \pi(f) & &\\
+			& & & \pi(a f) & \\
+			& & & & \ddots
+		\end{pmatrix} \in \mathcal{B}(\tilde{\mathcal{H}})
+ 	\]
+	Sei $u \in \mathcal{B}(\tilde{\mathcal{H}})$ der bilaterale Shift.
+	\[
+		C(X) \rtimes_\alpha \mathbb{Z} := C^* \enbrace*{\tilde{\pi}(C(X)),u} \in \mathcal{B}\enbrace*{\tilde{\mathcal{H}}}
+	\]
+	$C(S^1) \rtimes_{\rot_\theta} \mathbb{Z} \cong A_\theta$.
+\end{beispiel}
 % section beispiele (end)
 
 
@@ -3127,8 +3341,80 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 
 \section{Anhang} % (fold)
 \label{sec:anhang}
-Hier findet man einige ausgewählte Beweise, auf die der Vorlesung hingewiesen wurde und die im Rahmen von Übungsaufgaben bearbeitet wurden.
+Hier findet man einige ausgewählte Beweise und Ergänzungen, auf die der Vorlesung hingewiesen wurde und die teilweise im Rahmen von Übungsaufgaben bearbeitet wurden.
 Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch einmal darauf hingewiesen, dass für die Richtigkeit keine Garantie übernommen wird!
+
+
+\subsection{Beweis von \autoref{satz:37} (vii)} % (fold)
+\label{sub:beweis_37_vii}
+\emph{Dies war außerdem die Übungsaufgabe 1 b) von Blatt 5.} \smallskip\\
+Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt.
+\begin{beweis}
+	Da $a$ invertierbar ist, ist $0$ nicht im Spektrum von $a$ enthalten.
+	Da $\sigma(a)$ kompakt ist, ist die äquivalent dazu, dass ein $\lambda>0$ existiert mit $\sigma(a) \subset [\lambda,\infty)$.
+	Weiter gilt
+	Wir haben damit folgende Äquivalenzen
+	\[
+		\sigma(a) \subset [\lambda,\infty) \iff \sigma(a-\lambda) \subset [0,\infty) \iff a- \lambda\ge 0 \iff a \ge \lambda
+	\]
+	Da $b\ge a \ge \lambda$, gilt also auch $0 \notin \sigma(b)$ und $b$ ist invertierbar.
+	
+	Das $\sigma(a^{-1}) = \set*{\lambda^{-1} \given \lambda \in  \sigma(a)}$, sind $a^{-1}$ und $b ^{-1}$ wieder positiv.
+	Insbesondere existieren die Quadratwurzeln von den Inversen. 
+	Mit \autoref{satz:37} (v) folgt aus $a \le b$ also 
+	\[
+		\ind=a^{-\sfrac{1}{2}} a a^{- \sfrac{1}{2}} \le a^{-\sfrac{1}{2}} b a^{-\sfrac{1}{2}} =: c
+	\]
+	Nach Gelfand folgt aus $c \ge \ind$, dass $c$ invertierbar ist und $c^{-1} \le \ind$ gilt. Wieder mit \autoref{satz:37} (v) erhalten wir
+	\[
+		c^{-1} = a^{\sfrac{1}{2}}b^{-1}a^{\sfrac{1}{2}} \le \ind \implies b^{-1} \le \enbrace{a^{\sfrac{1}{2}}}^{-1} \enbrace{a^{\sfrac{1}{2}}}^{-1} =a^{-1} \qedhere
+	\]
+\end{beweis}
+% subsection beweis_von_autoref_satz_37_vii (end)
+
+
+\subsection{Alternativer Beweis von \autoref{lem:311}} % (fold)
+\label{sub:alternativer_beweis_lemma_311}
+Sei $A$ eine $C^*$-Algebra. Dann ist $\Lambda := \set*{a \in A_+ \given \norm*{a} < 1}$ gerichtet bezüglich \enquote{$\le$}.
+\begin{beweis}[{\cite[S.~78]{Murphy}}]
+	Wenn $a \in A_+$, dann ist $\ind +a$ invertierbar in $A^\simm$, da $0$ nicht im Spektrum enthalten sein kann.
+	Weiter gilt $a(\ind +a)^{-1} = \ind - (\ind +a)^{-1}$.
+	Wir zeigen nun
+	\[
+		a,b \in A_+ \text{ und } a \le b \implies a(\ind+a)^{-1} \le b (\ind +b)^{-1} 
+	\]
+	Aus $a \le b$ folgt nämlich $\ind +a \le \ind +b$ und damit $(\ind +b)^{-1} \le (\ind +a)^{-1}$ nach \autoref{satz:37} (vii).
+	Daraus erhalten wir die Ungleichung $\ind - (\ind +a)^{-1} \le \ind - \enbrace*{\ind +b}^{-1}$, nach der Gleichung für $a(\ind +a)^{-1}$ oben also die Behauptung.
+	Durch Betrachtung des Gelfandisomorphismus für $C^*(a, \ind)$ sieht man, dass $a(\ind +a)^{-1} \in \Lambda$ ist.
+	
+	Seien nun $a,b \in \Lambda$ beliebig.
+	Dann setzen wir $a' := a \enbrace*{\ind -a}^{-1}$ und $b' := b \enbrace*{\ind -b}^{-1}$. Hier überlegt man sich die Invertierbarkeit und Positivität entweder auch mit Gelfand oder der von-Neumann-Reihe (siehe \ref{satz15_neumann}).
+	Genauso ist auch $\ind + a'$ invertierbar und damit auch $\ind + a' +b'$ (wieder mit \ref{satz:37}). 
+	Dann gilt nach Gelfand
+	\[
+		c := (a' + b') \enbrace*{\ind + a' + b'}^{-1} \in \Lambda
+	\]
+	Da offensichtlich $a' \le a' + b'$ gilt, folgt aus der oben gezeigten Implikation $a'(\ind +a')^{-1} \le c$.
+	Es gilt nun
+	\[
+		a'(\ind +a')^{-1} = a (\ind -a)^{-1} \enbrace*{\ind + a(\ind-a)^{-1}}^{-1} \StackText{\ref{bem:13}}{=} a (\ind -a)^{-1} \enbrace*{(\ind-a)^{-1}}^{-1} = a
+	\]
+	womit wir $a \le c$ gezeigt haben. 
+	Die Relation $b \le c$ folgt genauso, also ist $\Lambda$ gerichtet.
+\end{beweis}
+% subsection alternativer_beweis_autoref_lemma_311 (end)
+
+
+\subsection{Konstruktion der eindeutigen Abbildung für den Limes von $C^*$-Algebren} % (fold)
+\label{sub:konstruktion_limes}
+\emph{Mit der Notation aus \autoref{satz:ger_lim}.}\smallskip\\
+Wir definieren zunächst eine geeignete Abbildung 
+\mapdef{\theta \colon C}{B}{(a_n)_{\mathbb{N}}}{\sum_\mathbb{N} \psi_n \enbrace[\big]{a_n - \varphi_{n-1}(a_{n-1})}}{}
+Diese Abbildung ist wohldefiniert, denn nach Definition von $C$ ist die Summe endlich.
+Weiter gilt offensichtlich $\theta \circ \varphi_n' = \psi_n$.
+Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
+% subsection konstruktion_der_eindeutigen_abbildung_fur_den_limes_von_c_algebren (end)
+
 
 \subsection{Die GNS-Darstellung ist zyklisch} % (fold)
 \label{sub:gns_zyklisch}
@@ -3136,7 +3422,7 @@ Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch
 Wir zeigen, dass der Grenzwert $\xi_\varphi = \lim_\lambda e_\lambda + N_\varphi$ für eine beliebige approximative Eins $(e_\lambda)_\Lambda \subset A^1_+$ existiert, eindeutig ist und ein zyklischer Vektor für die GNS-Darstellung ist (vgl. \autoref{gns}).
 Weiter wird gezeigt, dass folgende Identität für $a \in A$ gilt:
 \begin{equation}
-	\varphi(a) = \skal[\big]{\pi_\varphi(a)\xi_\varphi}{\xi_\varphi}
+	\varphi(a) = \skal[\big]{\xi_\varphi}{\pi_\varphi(a)\xi_\varphi}
 	\label{eq:zykl} \tag{\dag}
 \end{equation}
 \begin{beweis}
@@ -3154,9 +3440,10 @@ Weiter wird gezeigt, dass folgende Identität für $a \in A$ gilt:
 	\[
 		\pi_\varphi(A) \xi_\varphi = \lim_\lambda \dot{\pi}_\varphi(a) \enbrace*{e_\lambda +N_\varphi} = \lim_\lambda \enbrace*{a e_\lambda + N_\varphi} = a+ N_\varphi
 	\]
-	Wegen Linearität genügt es nun \eqref{eq:zykl} für positive Elemente $a^*a$ zu zeigen: Da $\xi_\varphi$ zyklisch ist, gilt
+	Wegen Linearität genügt es nun \eqref{eq:zykl} für positive Elemente $a^*a$ zu zeigen:\marginnote{hier ist es wichtig, dass das Skalarprodukt in der zweiten Koordinate linear ist!} 
+	Da $\xi_\varphi$ zyklisch ist, gilt
 	\[
-		\varphi(a^*a) = \skal*{a+ N_\varphi}{a+N_\varphi} = \skal[\big]{\pi_\varphi(a) \xi_\varphi}{\pi_\varphi(a)\xi_\varphi} = \skal[\big]{\pi_\varphi(a^*a)\xi_\varphi}{\xi_\varphi}\qedhere
+		\varphi(a^*a) = \skal*{a+ N_\varphi}{a+N_\varphi} = \skal[\big]{\pi_\varphi(a) \xi_\varphi}{\pi_\varphi(a)\xi_\varphi} = \skal[\big]{\xi_\varphi}{\pi_\varphi(a^*a)\xi_\varphi}\qedhere
 	\]
 \end{beweis} 
 % subsection gns_konstruktion_ist_zyklisch (end)
@@ -3174,7 +3461,7 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 	\leavevmode
 	\begin{enumerate}[(i)]
 		\item Wir müssen zeigen, dass $p_\lambda \xi\to q \xi$ für alle $\xi \in \mathcal{H}$.
-		Für Projektionen gilt\todo{Beweis davon könnte man von Thanh übernehmen}
+		Für Projektionen gilt\todo{Beweis davon könnte man von Thanh oder \citeauthor{Murphy} übernehmen}
 		\[
 			p_\lambda \le p_\mu \iff p_\lambda(\mathcal{H}) \subset p_\mu(\mathcal{H})
 		\]
@@ -3212,24 +3499,64 @@ Eine Anwendung von \autoref{satz:37}(v) mit $c=\enbrace[\big]{\sfrac{1}{n}\cdot 
 Insgesamt folgt also mit der $C^*$-Gleichung $u_n \in A^1$ für $n \in \mathbb{N}$.
 % subsection normabschatzung_im_beweis_der_polarzerlegung_ref (end)
 
+\subsection{Aufgabe 5 von Blatt 12} % (fold)
+\label{sub:aufg5_12}
+\emph{Diese Übungsaufgabe komplettiert \autoref{korr:714}.}\smallskip\\
+Sei $B \subset A$ eine $C^*$-Unteralgebra und $\rho \in PS(B)$ ein reiner Zustand.
+Dann ist $F := \set*{\varphi \in S(A) \given \varphi|_B = \rho}$ eine Seite von $S := \set*{\psi \in A^* \given \psi \text{ positiv}, \norm*{\psi}\le 1}$.
+\begin{beweis}
+	Wie in \autoref{satz:711} erläutert, ist $S$ konvex, $\w^*$-kompakt und nichtleer ($0 \in S$).
+	Es seien nun $\theta \in F$, $\varphi_1, \varphi_2 \in S$ und $t \in (0,1)$ mit\marginnote{da $\norm*{\theta}=1$ und $\norm*{\varphi_i} \le 1$, folgt $\varphi_i \neq 0$}
+	\[
+		\theta = t \cdot \varphi_1 + (1-t) \cdot \varphi_2
+	\]
+	Nach Definition der Operatornorm gilt $\norm*{\varphi_i|_B} \le \norm*{\varphi_i} \le 1$ für $i=1,2$.
+	Einschränken auf $B$ liefert
+	\begin{equation}
+		\rho = \theta\big|_B = t \cdot \varphi_1\big|_B + (1-t) \cdot \varphi_2\big|_B \label{eq:sub:aufg5_12} \tag{\#}
+	\end{equation}
+	Betrachtet man diese Gleichung in der Norm erhält man
+	\[
+		1 = \norm*{\rho} = \norm*{t \cdot \varphi_1\big|_B + (1-t) \cdot \varphi_2\big|_B} \le t \cdot \norm*{\varphi_1\big|_B} + (1-t) \cdot \norm*{\varphi_2\big|_B} \le 1
+	\]
+	Es folgt $\norm*{\varphi_1|_B} = \norm*{\varphi_2|_B}=1$ und damit auch $\norm*{\varphi_1}=\norm*{\varphi_2}=1$. $\varphi_1$ und $\varphi_2$ sind also Zustände.
+	Aus \eqref{eq:sub:aufg5_12} folgt weiter $t \cdot \varphi_1|_B \le \rho$ und $(1-t) \varphi_2|_B \le \rho$.
+	Da $\rho$ ein reiner Zustand ist, existieren $\lambda_1, \lambda_2 \in [0,1]$ mit
+	\[
+		t \cdot \varphi_1\big|_B = \lambda_1 \cdot \rho \quad \text{ und } \quad (1-t) \cdot \varphi_2\big|_B = \lambda_2 \cdot \rho 
+	\]
+	Da $\norm*{\rho}=\norm*{\varphi_1|_B}=\norm*{\varphi_2|_B}=1$ und $t, (1-t) \in (0,1)$, folgt $\varphi_1|_B = \varphi_2|_B=\rho$.
+	Damit sind $\varphi_1$ und $\varphi_2$ bereits in $F$ enthalten und die Behauptung folgt.
+\end{beweis}
+% subsection aufg5_12 (end)
+
+
 \subsection{Das Bild irreduzibler Darstellungen ist stark dicht} % (fold)
 \label{sub:das_bild_irreduzibler_darstellungen}
-\emph{Dies war ein kleiner Exkurs im Beweis von \hyperref[satz:716]{Kadisons Transitivitätssatz, \ref*{satz:716}}.}\smallskip \\
+\emph{Dies war ein kleiner Exkurs im Beweis von \hyperref[satz:716]{Kadisons Transitivitätssatz, \ref*{satz:716}}. 
+Tatsächlich ist die Aussage bezüglich der Dichtheit auch eine weitere Äquivalenz zu \autoref{satz:73} (i).}\smallskip \\
 Sei $(\mathcal{H},\pi)$ eine irreduzible Darstellung einer $C^*$-Algebra $A$.
 Dann ist $\pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$
+\emph{}
 \begin{beweis}
 	Da $(\mathcal{H},\pi)$ irreduzibel ist, folgt mit \autoref{satz:73}, dass $\pi(A)'= \mathbb{C} \cdot \ind_{\mathcal{B}(\mathcal{H})}$, also $\pi(A)''=\mathcal{B}(\mathcal{H})$.
-	Falls $\ind_{\mathcal{B}(\mathcal{H})} \in \pi(A)$, so ist $\pi(A)$ $\so$-dicht in $\overline{\pi(A)}^\so = \pi(A)''=\mathcal{B}(\mathcal{H})$.
-	Im nichtunitalen Fall:
-	Betrachte approximative Eins $(e_\lambda)_\Lambda$ für $A$, dann $\pi(e_\lambda) \grenzw{\so} p \in \mathcal{B}(\mathcal{H})$ Projektion und $p \mathcal{H} \subset \mathcal{H}$ ist ein abgeschlossener $\pi(A)$-invarianter Unterraum.
-	Da $\pi$ irreduzibel ist, ist $p \mathcal{H}=\mathcal{H}$ und $p=\ind_{\mathcal{B}(\mathcal{H})}$.
-	Weiter ist $\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so = \enbrace*{\overline{\pi(A)}^\so}'' \supset \pi(A)'' \supset \pi(A)$
+	Falls $\ind_{\mathcal{B}(\mathcal{H})} \in \pi(A)$, so ist nach \autoref{lem:66}
 	\[
-		\begin{tikzcd}[sep=small]
-			\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so \rar[equal] & \enbrace*{\overline{\pi(A)}^\so}''  \rar[equal] & \mathcal{B}(\mathcal{H}) \\
-			\mbox{ }\hspace{1em}\pi(A) \uar[phantom,sloped,"\subset","\text{\tiny dicht}" yshift=-.7em] \rar[phantom,sloped,description,"\subset"] & \pi(A)'' \uar[phantom,sloped,description,"\subset"] \urar[equal]
-		\end{tikzcd}
+		\overline{\pi(A)}^{\raisemath{-1pt}{\so}}= \pi(A)''=\mathcal{B}(\mathcal{H})
 	\]
+	Im nichtunitalen Fall betrachten wir eine approximative Eins $(e_\lambda)_\Lambda$ für $A$.
+	Dann konvergiert $\pi(e_\lambda)$ gegen eine Projektion $p \in \mathcal{B}(\mathcal{H})$ und $p \mathcal{H} \subset \mathcal{H}$ ist ein abgeschlossener $\pi(A)$-invarianter Unterraum.
+	Da $\pi$ irreduzibel ist, ist $p \mathcal{H}=\mathcal{H}$ und $p=\ind_{\mathcal{B}(\mathcal{H})}$.
+	Weiter ist 
+	\[
+		\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so = \enbrace[\big]{\overline{\pi(A)}^\so}'' \supseteq \pi(A)'' = \mathcal{B}(\mathcal{H}) \qedhere
+	\]
+	% \[
+	% 	\begin{tikzcd}[sep=small]
+	% 		\ind_{\mathcal{B}(\mathcal{H})} \in  \overline{\pi(A)}^\so \rar[equal] & \enbrace*{\overline{\pi(A)}^\so}''  \rar[equal] & \mathcal{B}(\mathcal{H}) \\
+	% 		\mbox{ }\hspace{1em}\pi(A) \uar[phantom,sloped,"\subset","\text{\tiny dicht}" yshift=-.7em] \rar[phantom,sloped,description,"\subset"] & \pi(A)'' \uar[phantom,sloped,description,"\subset"] \urar[equal]
+	% 	\end{tikzcd}
+	% \]
 \end{beweis}
 % subsection das_bild_irreduzibler_darstellungen (end)
 
