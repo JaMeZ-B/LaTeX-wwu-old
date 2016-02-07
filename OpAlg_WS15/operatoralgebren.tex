@@ -1211,7 +1211,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 
 \begin{korollar}[{name=[hereditäre Unteralgebren der Form $\overline{aAa}$]},label=korr:412]
 	Sei $A$ eine $C^*$-Algebra, $a \in A_+$ ein positives Element. 
-	Dann gilt $\overline{aAa} \subher A$. 
+	Dann gilt $\overline{aAa} \subher A$.\marginnote{$\overline{aAa}$ ist die kleinste hereditäre $C^*$-Unteralgebra, die $a$ enthält} 
 	Falls $A$ separabel ist und $B \subher A$, so gilt $B=\overline{hAh}$ für ein $h \in A_+$.
 \end{korollar}
 \begin{beweis}
@@ -1263,9 +1263,9 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 	\]
 	und $\varphi_{n,\infty} := q \circ \varphi_n' \colon A_n \to \Dlim(A_n,\varphi_n)$. 
 	Gegeben $B$ und $\psi_n \colon A_n \to B$, so ist $\psi$ auf $q(C)$ eindeutig bestimmt durch \eqref{eq:413}, das heißt $\psi_n = \psi \circ \varphi_{n,\infty} \colon A_n \to B$.
-	Wie man dies explizit durchführt, wird in \cref{sub:konstruktion_limes} erläutert.
+	% Wie man dies explizit durchführt, wird in \cref{sub:konstruktion_limes} erläutert.
 	Aber $q(C) \subset q(\overline{C})= \Dlim(A_n,\varphi_n)$ ist dicht und $\psi$ ist normvermindernd auf $q(C)$, setzt sich also eindeutig auf $q(\overline{C})$ fort.
-	Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
+	Die Eindeutigkeit von $\Dlim (A_n,\varphi_n)$ ist klar.
 \end{beweis}
 
 \begin{beispiel}[{name=[gerichtete Limites von $C^*$-Algebren]}]
@@ -1351,7 +1351,7 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 		\end{align}
 		\item Sei $(e_\lambda)_\Lambda$ eine approximative Eins. Dann gilt 
 		\[
-			\abs*{\varphi(a)}^2 = \lim_\lambda \abs*{\varphi(e_\lambda \cdot a)}^2  \StackText{C.S.}{\le}\lim_\lambda \varphi(e_\lambda^2) \cdot \varphi(a^*a) \StackText{\ref{satz:54}}{\le} \norm*{\varphi} \cdot \varphi(a^*a) \qedhere
+			\abs*{\varphi(a)}^2 = \lim_\lambda \abs[\big]{\varphi(e_\lambda \cdot a)}^2  \StackText{C.S.}{\le}\lim_\lambda \varphi(e_\lambda^2) \cdot \varphi(a^*a) \StackText{\ref{satz:54}}{\le} \norm*{\varphi} \cdot \varphi(a^*a) \qedhere
 		\]
 	\end{enumerate}
 \end{beweis}
@@ -3445,20 +3445,20 @@ Dann ist $B + J$ eine $C^*$-Unteralgebra.
 \label{sub:her_kleinste}
 \emph{Dies ist eine der Aussagen von \autoref{korr:412}.}\smallskip\\
 Sei $A$ eine $C^*$-Algebra und $a \in  A_+$.
-Danni ist $\overline{aAa}$ die kleinste $C^*$-Unteralgebra, die $a$ enthält.
+Danni ist $\overline{aAa}$ die kleinste $C^*$-Unteralgebra, die $a$ enthält.\marginnote{bei Projektionen kann auf den Abschluss verzichtet werden}
 \begin{beweis}
 	$\overline{aAa}$ ist offensichtlich eine $C^*$-Unteralgebra, denn $a$ ist selbstadjungiert.
 	Wir rechnen nun \autoref{satz:410} nach:
 	Ein beliebiges Element in $\overline{aAa}$ ist der Grenzwert eines Netzes $(ab_\lambda a)_\lambda \subset aAa$.
 	Zu zeigen ist also, dass für $d \in A$
 	\[
-		\lim_\lambda(ab_\lambda a) d \lim_{\mu} (a c_\mu a) \in \overline{aAa}
+		\lim_\lambda(ab_\lambda a)\, d \,\lim_{\mu} (a c_\mu a) \in \overline{aAa}
 	\]
 	ist, sofern die Limiten existieren.
 	Betrachte zunächst eine konstante Folge $c_\mu$.
 	Dann ist 
 	\[
-		\lim_\lambda \Underbracket{a b_\lambda a d a c_\mu a}{\in aAA} \in \overline{aAa}
+		\lim_\lambda \Underbracket{a b_\lambda a d a c_\mu a}{\in aAa} \in \overline{aAa}
 	\]
 	Bildet man von diesen Elementen den Limes über $\mu$, so erhalten wir ein konvergentes Netz.
 	Da $\overline{a A a}$ vollständig ist, ist der Grenzwert in $\overline{aAa}$ enthalten und es folgt $\overline{a A a}\subher A$.
@@ -3478,14 +3478,14 @@ Danni ist $\overline{aAa}$ die kleinste $C^*$-Unteralgebra, die $a$ enthält.
 % subsection her_kleinste (end)
 
 
-\subsection{Konstruktion der eindeutigen Abbildung für den Limes von $C^*$-Algebren} % (fold)
-\label{sub:konstruktion_limes}
-\emph{Mit der Notation aus \autoref{satz:ger_lim}.}\smallskip\\
-Wir definieren zunächst eine geeignete Abbildung 
-\mapdef{\theta \colon C}{B}{(a_n)_{\mathbb{N}}}{\sum_\mathbb{N} \psi_n \enbrace[\big]{a_n - \varphi_{n-1}(a_{n-1})}}{}
-Diese Abbildung ist wohldefiniert, denn nach Definition von $C$ ist die Summe endlich.
-Weiter gilt offensichtlich $\theta \circ \varphi_n' = \psi_n$.
-Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
+% \subsection{Konstruktion der eindeutigen Abbildung für den Limes von $C^*$-Algebren} % (fold)
+% \label{sub:konstruktion_limes}
+% \emph{Mit der Notation aus \autoref{satz:ger_lim}.}\smallskip\\
+% Wir definieren zunächst eine geeignete Abbildung
+% \mapdef{\theta \colon C}{B}{(a_n)_{\mathbb{N}}}{\sum_\mathbb{N} \psi_n \enbrace[\big]{a_n - \varphi_{n-1}(a_{n-1})}}{}
+% Diese Abbildung ist wohldefiniert, denn nach Definition von $C$ ist die Summe endlich.
+% Weiter gilt offensichtlich $\theta \circ \varphi_n' = \psi_n$.
+% Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
 % subsection konstruktion_der_eindeutigen_abbildung_fur_den_limes_von_c_algebren (end)
 
 
