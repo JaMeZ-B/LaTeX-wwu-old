@@ -1299,11 +1299,15 @@ Aus dem bisher gezeigten können wir nun eine Version von \autoref{satz:1.13} f�
 \section{Zustände und die GNS-Konstruktion} % (fold)
 \label{sec:5}
 
-\begin{definition}[{name=[positive Funktionale und Zustände]}]
+\begin{definition}[{name=[positive Funktionale und Zustände]},label=def:51]
 	Sei $A$ eine $C^*$-Algebra. 
 	Eine Abbildung $\varphi \colon A \to \mathbb{C}$ heißt \Index{positives Funktional}, falls $\varphi$ linear ist und $\varphi(A_+) \subset \mathbb{R}_+$ gilt. 
 	$\varphi$ heißt \Index{Zustand}, falls außerdem $\norm*{\varphi}= 1$ gilt. 
-	Wir schreiben $S(A) := \set*{\text{Zustände auf }A}$.\marginnote{engl. \emph{\textbf{s}tates}}
+	Wir schreiben \marginnote{engl. \emph{\textbf{s}tates}}
+	\[
+		S(A) := \set*{\text{Zustände auf }A}
+	\]
+	Wie in \cref{sub:positive_funktionale_sind_stetig} gezeigt, sind positive lineare Abbildungen $A \to \mathbb{C}$ immer stetig.
 \end{definition}
 
 \begin{proposition}[{name=[positive Sesquilinearformen aus positiven Funktionalen]}]
@@ -3484,6 +3488,27 @@ Danni ist $\overline{aAa}$ die kleinste $C^*$-Unteralgebra, die $a$ enthält.\ma
 % Man muss nun noch zeigen, dass $\theta$ die Elemente in $\bigoplus_{\mathbb{N}} A_n$ auf $0$ abbildet, um zu zeigen, dass man $\theta$ auf Repräsentanten in $q(C)$ anwenden kann.\todo{jetzt wo ich anfange das aufzuschreiben, scheint mir das ganze gar nicht mehr so klar \ldots}
 % subsection konstruktion_der_eindeutigen_abbildung_fur_den_limes_von_c_algebren (end)
 
+
+\subsection{Positive Funktionale sind stetig} % (fold)
+\label{sub:positive_funktionale_sind_stetig}
+\emph{Dies begründet die Bezeichnung von positiven linearen $\varphi\colon A \to \mathbb{C}$ als \enquote{Funktionale}, siehe \autoref{def:51}. Dies war Aufgabe 1 von Blatt 8.}\smallskip\\
+Sei $\varphi\colon A \to \mathbb{C}$ positiv und linear für eine $C^*$-Algebra $A$.
+Dann ist $\varphi$ $^*$-erhaltend und beschränkt.
+\begin{beweis}
+	Wir können $a \in A$ schreiben als $a= b_+ -b_- +i \cdot (c_+ - c_-)$ mit $b_\pm,c_\pm \in A_+$.
+	Es gilt
+	\begin{align}
+		\varphi(a^*) = \varphi \enbrace*{b_+ -b_- - i \cdot (c_+ - c_-)} &= \varphi(b_+) - \varphi(b_-) - i \cdot \enbrace*{\varphi(c_+) - \varphi(c_-)} \\
+		&= \varphi(b_+)^* - \varphi(b_-)^* - i \cdot  \enbrace*{\varphi(c_+)^* - \varphi(c_-)^*} = \varphi(a)^*
+	\end{align}
+	Da $\varphi$ positiv und linear ist, erhält $\varphi$ Ungleichungen.
+	Weiter gilt $a \le \norm*{a} \cdot \ind$ nach Gelfand.
+	Damit erhalten wir
+	\[
+		\norm*{\varphi} = \sup_{a \in A_+^1} \norm*{\varphi(a)} \le \sup_{a \in A_+^1} \norm*{\varphi \enbrace*{\norm*{a} \cdot \ind}} = \sup_{a \in A_+^1} \norm*{a} \cdot \norm*{\varphi(\ind)} \le \sup_{a \in A_+^1} \norm*{\varphi(\ind)} < \infty \qedhere
+	\]
+\end{beweis}
+% subsection positive_funktionale_sind_stetig (end)
 
 \subsection{Die GNS-Darstellung ist zyklisch} % (fold)
 \label{sub:gns_zyklisch}
