@@ -3368,6 +3368,249 @@ Finde $\lambda\in H^{\frac{1}{2}}(\Gamma)$, so dass
 \begin{align}
 \sum_{i=1}^2 b_i(H_i\lambda,H_i\eta) = \sum_{i=1}^2 \bigg[ f_i(H_i\eta) - b_i(R_i q, H_i \eta) \bigg] ~\forall \eta\in H^{\frac{1}{2}}(\Gamma).1
 \end{align}
+Zum Nachweis der Existenz und Eindeutigkeit einer Lösung $\lambda$ von (7.21) benötigen wir das folgende Lemma.
+
+\ssect{7.8 Lemma}{}
+Seien $\Omega,\Omega_i,\Sigma_N,\Sigma_D, \Gamma$ wie in Abbildung 7.2 und gelte $\partial\Omega= \bar{\Sigma_D}\cup \bar{\Sigma_N}$.
+Dann ist für alle $\xi,\eta\in H^{\frac{1}{2}}(\Gamma)$ durch
+\begin{align}
+(\xi,\eta)_\Gamma := \sum_{i=1}^2 b_i(H_i\xi,H_i\eta)
+\end{align}
+ein Skalarprodukt auf $H^{\frac{1}{2}}(\Gamma)$ gegeben,wobei $H_i\xi$ Lösung von (7.17).
+Ferner ist $\chi: H^{\frac{1}{2}}(\Gamma) \to \R$ definiert durch
+\begin{align}
+\chi(\eta) := \sum_{i=1}^2 [f_i(H_i\eta) - b_i(R_iq,H_i\eta)] ~ \forall \eta\in H^{\frac{1}{2}}(\Gamma)
+\end{align}
+ein lineares, stetiges Funktional.\\
+
+\bet{Beweis:}\\
+Linearität und Stetigkeit von $(.,.)_\Gamma$ folgen direkt da $b_i$ symmetrisch und $H_i$ lineare Operatoren.
+Damit bleibt zu zeigen, dass $(.,.)_\Gamma$ positiv definit ist.
+
+Mit der Poincaré-Friedrich Ungleichung folgt:
+\begin{align*}
+\sum_{i=1}^2 b_i(H_i\xi,H_i\xi) &= \sum_{i=1}^2 \int_{\Omega_i} \nabla H_i\xi \nabla H_i\xi = \sum_{i=1}^2 \norm{\nabla H_i\xi}_{L^2(\Omega)}\\
+&\ge \sum_{i=1}^2 \frac{1}{1+ c_{p,i}^2} \norm{H_i\xi}_{H^1(\Omega)}^2.
+\end{align*}
+Aus dem Spursatz 7.4 können wir dann folgern, dass:
+\[
+\sum_{i=1}^2 b_i(H_i\xi,H_i\xi) \ge \sum_{i=1}^2 \frac{1}{c_{t,i}^2(1+ c_{p,i}^2)} \norm{\mathcal{T}H_i\xi}_{H^{\frac{1}{2}}(\Gamma)}^2.
+\]
+Damit folgt:
+\begin{align}
+\sum_{i=1}^2 b_i(H_i\xi,H_i\xi) \ge c\cdot \norm{\xi}_{H^{\frac{1}{2}}(\Omega)}^2 \ge 0.
+\end{align}
+Schließlich zeigen wir dann noch:
+\[
+(\xi,\xi)_\Gamma = 0 \Leftrightarrow \xi=0.
+\]
+Sei zunächst $(\xi,\xi)_\Gamma = 0$.
+Dann folgt aus (7.24), dass
+\[
+\norm{\xi}_{H^{\frac{1}{2}}(\Omega)} = 0 \text{ und damit } \xi = 0.
+\]
+Sei umgekehrt $\xi=0$.
+Dann folgt aus der Definition von $H_i\xi$, dass $H_i\xi = 0$ fast überall auf $\Omega_i$ und damit $(\xi,\xi)_\Gamma=0$.
+Damit folgt positiv definit.
+Die Linearität von $\chi$ folgt wieder direkt.
+Zum Nachweis der Stetigkeit wenden wir die Poincaré-Friedrich Ungleichung und (7.20) an:
+\begin{align*}
+\abs{\chi(\eta)} &\le \sum_{i=1}^2 \cenbrace{\int_{\Omega_i} \abs{q|_{\Omega_i} H_i\eta} + \int_{\Omega_i} \abs{\nabla R_i q \nabla H_i\eta} }\\
+&\le \sum_{i=1}^2 \cenbrace{c_{p,i} \norm{q}_{L^2(\Omega_i)} \norm{\nabla H_i\eta}_{L^2(\Omega_i)} + \norm{\nabla R_i q}_{L^2(\Omega_i)} \norm{\nabla H_i\eta}_{L^2(\Omega_i)} }\\
+&\stackrel{(7.18)}{\le} \sum_{i=1}^2 \cenbrace{\enbrace{2c_{p,i} \norm{q}_{L^2(\Omega_i)}}\cdot \norm{\nabla H_i q}_{L^2(\Omega_i)} }\\
+&\stackrel{(7.20)}{\le} c\cdot \norm{\eta}_{H^{\frac{1}{2}}(\Gamma)}.
+\end{align*}
+\hfill $\square$
+
+\ssect{7.9 Satz}{}
+Die Steklov-Poincaré Interface Gleichung (7.21) besitzt unter den Voraussetzungen von Lemma 7.8 eine eindeutige Lösung $\lambda\in H^{\frac{1}{2}}(\Gamma)$.\\
+
+\bet{Beweis:}\\
+Folgt direkt aus Lemma 7.8 und dem Rieszschem Darstellungssatz.
+\hfill $\square$
+
+\ssect{7.10 Bemerkung}{}
+Der Steklov-Poincaré Operator $s:H^{\frac{1}{2}}(\Gamma) \to (H^{\frac{1}{2}}(\Gamma))'$ kann dann wie folgt charakterisiert werden:
+\[
+(s\xi)(\eta) := \sum_{i=1}^2 b_i(H_i\xi,H_i\eta).
+\]
+Der (formale) Zusammenhang zwischen (7.7) und (7.21) ergibt sich durch Multiplikation von beiden Seiten in (7.7) mit einer Testfunktion, Integration über $\Gamma$, partielle Integration und Ausnutzen von (7.4) und (7.3).
+
+\subsection{Port reduced Static Condensation Reduced Basis Element Method (PR-SCRBE)}
+Wir betrachten das parametrische Variationsproblem $(P(\mu))$ aus Definition 3.5.
+Zusätzlich nehmen wir an, dass $b(.,.;\mu)$ symmetrisch und dass $b$ und $f$ affin parametrisch sind.
+Wir betrachten wieder das Gebiet $\Omega$ wie in Abbildung 7.1 und definieren daher $X:=\penbrace{v\in H^1(\Omega)~|~v=0 \text{ auf }\Sigma_D}$.
+
+\ssect{7.11 Definition}{}
+Seien $b,f,X$ wie im Beginn dieses Unterkapitels definiert, $\mathcal{T}_h$ zulässige Triangulierung von $\Omega$, so dass für alle $T_j\in \mathcal{T}_h$ gilt: $S:=T_j\cap \bar{\Gamma}$ ist entweder $(2-k)$-dimensionaler Seitensimplex von $T_j$ für ein $k\in \{1,2\}$ oder es gilt $S=\emptyset$.
+Schließlich sei $X_h\subset X$ zulässiger (linearer) FE Raum.
+Zu $\mu\in P$ heißt $u_h(\mu)\in X_h$ Lösung des (linearen) FE Verfahrens für das parametrische Variationsproblem vom Beginn des Unterkapitels, falls gilt:
+\begin{align}
+b(u_h(\mu),v_h;\mu) = f(v_h;\mu) ~ \forall v_h\in X_h.
+\end{align}
+Nun können wir analog zum kontinuierlichem Fall eine äquivalente Formulierung auf zerlegtem Gebiet angeben.
+
+\ssect{7.12 Lemma}{}
+Seien $\Omega,\Omega_i,\Sigma_D,\Sigma_N,\Gamma$ wie in Abbildung 7.2, $\partial\Omega=\Sigma_N\cup\Sigma_D$, $\mathcal{T}_h$ wie in 7.11 und seien $P_i$ Parametermengen assoziert mit $\Omega_i,i=1,2$.
+Ferner seien $b_i(.,.;\mu_i): H^1(\Omega_i)\times H^1(\Omega_i) \to \R$ und $f_i(.;\mu_i):H^1(\Omega_i)\to \R$ für $\mid_i\in P_i$ mittels Einschränkung des Integrationsgebiets auf $\Omega_i$ definiert.
+Schließlich definieren wir:
+\begin{align}
+\Lambda_h := \penbrace{v_h|_\Gamma~|~v_h\in X_h},
+\end{align}
+\[
+X_{i,h} := \penbrace{v_h|_{\Omega_i} ~|~v_h\in X_h},~ X_{i,h}^0 := \penbrace{v_h\in X_{i,h}~|~v_h|\Gamma = 0}.
+\]
+Dann lässt sich das FE Problem aus Definition 7.11 äquivalent wie folgt definieren:
+
+Finde $u_{1,h}(\mu)\in X_{1,h}, u_{2,h}\in X_{2,h}$, so dass
+\begin{align}
+\begin{split}
+b_1(u_{1,h}(\mu),v_{1,h};\mu_1) &= f_1(v_{1,h};\mu_1)~\forall v_{1,h}\in X_{1,h}^0,\\
+b_2(u_{2,h}(\mu),v_{2,h};\mu_2) &= f_2(v_{2,h};\mu_2)~\forall v_{2,h}\in X_{2,h}^0,\\
+u_{1,h}(\mu) &= u_{2,h}(\mu) \text{ auf } \Gamma\\
+\sum_{i=1}^2 b_i(u_{i,h}(\mu),\mathcal{F}_{i,h}\eta_h;\mu_i) &= \sum_{i=1}^2 f_i(\mathcal{F}_{i,h}\eta_h;\mu_i) ~\forall \eta_h\in \Lambda_h,
+\end{split}
+\end{align}
+wobei $\mathcal{F}_{i,h}: \Lambda_h \to X_{i,h}$ lineare, stetige, diskrete Fortsetzungsoperatoren sind.\\
+
+\bet{Beweis:}\\
+Analog zum Beweis von Lemma 7.6.
+
+\subsubsection{Static condensation}
+Als letztes leiten wir wie im Kontinuierlichem Fall eine Gleichung für die unbekannte Spur $\lambda_h(\mu) = u_h(\mu)|_\Gamma$ her.
+Wieder zerlegen wir $u_{i,h}(\mu) = H_{i,h}(\mu_i)\lambda_h(\mu_i) + R_{i,h}^f(\mu_i)$, wobei $H_{i,h}(\mu_i)\in X_{i,h}$ und $R_{i,h}^f(\mu_i)\in X_{i,h}^0$ Lösungen von 
+\begin{align}
+\begin{split}
+b_i(H_{i,h}(\mu_i)\xi_h, v_{i,h};\mu_i) &= 0 ~ \forall v_{i,h}\in X_{i,h}^0,\\
+H_{i,h}(\mu_i)\xi_h &= \xi_h \text{ auf } \Gamma,
+\end{split}
+\end{align}
+für alle $\xi_h\in \Lambda_h$ und 
+\begin{align}
+b_i(R_{i,h}^f(\mu_i), v_{i,h};\mu_i) = f_i(v_{i,h};\mu_i) ~\forall v_{i,h}\in X_{i,h}^0,
+\end{align}
+für $i=1,2$.
+
+Die $H_{i,h}(\mu_i)$ sind also diskrete harmonische Fortsetzungen von Funktionen in $\Lambda_h$ nach $\Omega_i$.
+Sie haben folgende Eigenschaft.
+
+\ssect{7.13 Lemma}{}
+Seien $H_{i,h}(\mu_i)\in X_{i,h}$ Lösungen von (7.27) und seien die Voraussetzungen von Definition 7.11 und Lemma 7.12 erfüllt, dann existieren Konstanten $c_1,c_2(\mu_i) > 0$, welche von $\Omega_i$, aber nicht von der Gitterweite $h$ abhängen, so dass gilt:
+\begin{align}
+c_1 \norm{\xi_h}_{H^{\frac{1}{2}}(\Gamma)} \le \norm{H_{i,h}(\mu_i)\xi_h}_{H^1(\Omega_i)} \le c_2(\mu_i) \norm{\xi_h}_{H^{\frac{1}{2}}(\Gamma)} ~\forall \xi_h\in \Lambda_h,~ i=1,2.
+\end{align}
+
+\bet{Beweis:}
+
+[Quateroni, Valti, Theorem 4.13, Seite 105f]. \\
+
+Schließlich erhalten wir die diskrete, parametrische Steklov-Poincaré Interface Gleichung:
+
+Finde $\lambda_h(\mu)\in \Lambda_h$:
+\begin{align}
+\sum_{i=1}^2 b_i(H_{i,h}(\mu_i)\cdot \lambda_h(\mu), H_{i,h}(\mu_i)\eta_h; \mu_i) = \sum_{i=1}^2 [ f_i(H_{i,h}(\mu_i)\eta_h; \mu_i) - b_i(R_{i,h}(\mu_i), H_{i,h}(\mu_i)\eta_h ;\mu_i) ] ~\forall\eta_h \in \Lambda_h.
+\end{align}
+Wegen Lemma 7.13 lässt sich die Existenz einer eindeutigen Lösung von (7.30) wie im parameter-unabhängigen, kontinuierlichem Fall nachweisen ( $\rightarrow$ 7.8 Lemma, Satz 7.9).
+
+Bevor wir die RB-Methoden anwenden, führen wir noch parameter-unabhängige, diskrete, harmonische Fortsetzungen ein.
+Dazu sei zunächst
+\begin{align}
+\{\xi_k\}_{k=1}^{\mathcal{N}_\Gamma} \text{ Basis von } \Lambda_h \text{ wobei } \mathcal{N}_\Gamma := \dim(\Lambda_h).
+\end{align}
+Ferner sei $\bar{\mu} = (\bar{\mu}_1,\bar{\mu}_2)\in P_1\times P_2$ Referenzparameter.
+Dann definieren wir
+\begin{align}
+\chi_{i,k} := H_{i,h}(\bar{\mu}_i)\xi_k,~i=1,2,~ k=1\dt{,}\mathcal{N}_\Gamma.
+\end{align}
+Als nächstes seien $b_{i,k}^h(\mu_i)\in X_{i,h}^0$ Lösungen von
+\begin{align}
+b_i(b_{i,k}^h(\mu_i) + \chi_{i,k}, v_{i,h}; \mu_i) = 0 ~\forall v_{i,h}\in X_{i,h}^0,
+\end{align}
+so dass gilt: 
+\[
+H_{i,h}(\mu_i) \xi_k = \chi_{i,k} + b_{i,k}^h(\mu_i).
+\]
+Schließlich definieren wir globale Funktionen
+\begin{align}
+\Psi_k(\mu) := \left\{\begin{array}{lc} \psi_{1,k} + b_{1,k}^h(\mu_1) & \text{in } \Omega_1,\\ \psi_{2,k} + b_{2,k}^h(\mu_2) & \text{in } \Omega_2. \end{array}\right.
+\end{align}
+Wegen (7.30) können wir $u_h(\mu)$, definiert in Definition 7.11, dann wie folgt schreiben:
+\begin{align}
+u_h(\mu) = \sum_{i=1}^2 R_{i,h}^f(\mu_i) + \sum_{k=1}^{\mathcal{N}_\Gamma} U_k(\mu)\Psi_k(\mu),
+\end{align}
+wobei $U_k(\mu)\in \R$ Lösungen des folgenden linearen Gleichungssystems
+\[
+b\enbrace{ \sum_{k=1}^{\mathcal{N}_\Gamma} U_k(\mu)\Psi_k(\mu) , \Psi_l(\mu); \mu} = f(\Psi_l(\mu); \mu) - b\enbrace{\sum_{i=1}^2 R_{i,h}^f(\mu_i); \Psi_l(\mu); \mu},
+\]
+$l=1\dt{,} \mathcal{N}_\Gamma$, wobei wir $R_{i,h}^f(\mu_i)$ auf $\Omega_j$, $j\neq i$ durch Null fortsetzen.
+
+\subsubsection{Static condensation reduced basis element method (SCRBE)}
+Seien $X_{i,N}^f,X_{i,k}^N \subset X_{i,h}^0$ RB Räume.
+Dann definieren wir RB Lösungen $R_{i,N}^f(\mu_i)\in X_{i,N}^f$ und $b_{i,k}^N(\mu_i)\in X_{i,k}^N$, als Lösungen von 
+\begin{align}
+b_i(R_{i,N}^f(\mu_i),v_{i,N};\mu_i) &= f_i(v_{i,N};\mu_i) ~\forall v_{i,N}\in X_{i,N}^f,\\
+b_i(b_{i,k}^N(\mu_i) + \psi_{i,k}, v_{i,k};\mu_i) &= 0 ~\forall v_{i,k}\in X_{i,k}^N.
+\end{align}
+
+\ssect{7.14 Bemerkung}{}
+Alternativ kann auch ein RB-Raum $X_{i,N}\subset X_{i,h}^0$ zur Lösung von (7.37) und (7.38) bestimmt werden.\\
+
+Wieder definieren wir globale Funktionen
+\begin{align}
+\Psi_k^N(\mu) := \left\{\begin{array}{lc} \psi_{1,k} + b_{1,k}^N(\mu_1) & \text{in } \Omega_1,\\ \psi_{2,k} + b_{2,k}^N(\mu_2) & \text{in } \Omega_2, \end{array}\right.
+\end{align}
+und den SCRBE-Raum
+\begin{align}
+X^N(\mu) := \spann \enbrace{\Psi_k^N(\mu)~|~1\le k\le \mathcal{N}_\mu}.
+\end{align}
+Dann erhalten wir eine reduzierte Lösung $\tilde{u}^N(\mu)\in X^N(\mu)$, als Lösung von
+\begin{align}
+b(\tilde{u}^N(\mu),v;\mu) = f(v;\mu) - b\enbrace{\sum_{i=1}^2 R_{i,N}^f(\mu_i),v;\mu} ~\forall v\in X^N(\mu)
+\end{align}
+und definieren schließlich
+\[
+u^N(\mu) = \tilde{u}^N(\mu) + \sum_{i=1}^2 R_{i,N}^f(\mu_i).
+\]
+
+\subsubsection{Port reduced SCRBE (PR-SCRBE)}
+Als nächstes möchten wir auch reduzierte Räume auf dem Interface oder Port $\Gamma$ betrachten.
+Dazu führen wir einen \index{port reduzierten SCRBE} Raum ein
+\begin{align}
+X_M^N(\mu) := \penbrace{\Psi_k^N(\mu)~|~ 1\le k\le M} \subset X^N(\mu).
+\end{align}
+Wir betrachten dann das folgende reduzierte Problem:
+
+Finde $\tilde{u}_M^N(\mu) \in X_M^N(\mu)$:
+\begin{align}
+b(\tilde{u}_M^N(\mu),v;\mu) = f(v;\mu) - b\enbrace{\sum_{i=1}^2 R_{i,N}^f(\mu_i),v;\mu} ~\forall v\in X_M^N(\mu)
+\end{align}
+und erhalten die reduzierte Lösung
+\[
+u_M^N(\mu) = \tilde{u}_M^N(\mu) + \sum_{i=1}^2 R_{i,N}^f(\mu_i).
+\]
+
+\ssect{7.15 Lemma}{(Wohlgestelltheit von Problem (7.43))}
+Das reduzierte Problem (7.43) besitzt unter obigen Annahmen eine eindeutige Lösung $\tilde{u}_M^N(\mu)\in X_N^M(\mu)$ und es gilt die folgende Stabilitätsabschätzung:
+\begin{align}
+\norm{u_M^N(\mu)}_X \le \frac{1}{\alpha_h(\mu)} \enbrace{2 + \frac{\gamma_h(\mu)}{\alpha_h(\mu)}} \norm{f(.;\mu)}_{X'},
+\end{align}
+wobei $\alpha_h(\mu)$ und $\gamma_h(\mu)$ Koerzivitäts- und Stetigkeitskonstante zu $b$ bzgl. $X_h$ definiert in Definition 7.4.\\
+
+\bet{Beweis:}\\
+Da $b$ nach Annahme koerziv und stetig auf $X_h$, folgt die Wohlgestelltheit der RB-Probleme (7.37) und (7.38).
+Aufgrund der Definition der $\Psi_k^N(\mu)$ gilt $X_M^N(\mu)\subset X_h$ und damit folgt die Existenz und Eindeutigkeit einer Lösung von (7.43) mit Lax-Milgram.
+
+Es gilt zunächst $\norm{\sum_{i=1}^2 R_{i,N}^f(\mu_i)}_X \le \frac{1}{\alpha_h(\mu)} \norm{f(.;\mu)}_{X'}$, da $R_{i,N}^f(\mu_i) = 0$ auf $\Omega_j, i\neq j$.
+
+(7.44) folgt dann durch teilen mit $\tilde{u}_M^N(\mu)$ in (7.43).
+\hfill $\square$
+
+\ssect{7.16 Bemerkung}{}
+Optimale Räume im Sinne von Kolmogorov auf dem Interface $\Gamma$ werden in [Smetana, Patera 15] und ein zuverlässiger und effektiver A posteriori Fehlerschätzer in [Smetana 15] eingeführt.
+
+\ssect{7.17 Bemerkung}{}
+Andere Methoden verwenden zum Beispiel nicht-konforme Gebietszerlegungsmethoden [Maday, Ronquist 2002/04] oder Discontinuous Galerkin Methoden [Ohlberger, Schindler 15] zur Kopplung der lokalen reduzierten Lösungen.
+
 
 
 
