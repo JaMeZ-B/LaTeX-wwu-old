@@ -2979,7 +2979,7 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 		\norm*{x \xi} = \norm*{\sum_{i=1}^{n} \bracket{\xi_i}{\xi} \eta_i} \le \sum_{i=1}^{n} \abs[\big]{ \bracket{\xi_i}{\xi}} \cdot \norm*{\eta_i}\enspace &\StackTextClap{\href{https://de.wikipedia.org/wiki/Hölder-Ungleichung}{Hölder}}{\le}\enspace \enbrace*{\sum_{i=1}^{n} \abs[\big]{\bracket{\xi_i}{\xi}}^2 \cdot \sum_{i=1}^{n} \norm*{\eta_i}^2}^{\sfrac{1}{2}}\\
 		&\le \norm*{\xi} \cdot \sqrt{n} \cdot \max_i \norm*{\eta_i}
 	\end{align}
-	Es folgt $\norm*{x} \le \sqrt{n} \cdot \max_i \norm*{\eta_i}$.\todo{ich bin der Meinung, dass aus jeder Summe ein $n$ stammt, sodass am Ende keine Wurzel mehr auftritt}
+	Es folgt $\norm*{x} \le \sqrt{n} \cdot \max_i \norm*{\eta_i}$.
 	Existiert nun $y \in \mathcal{B}(\mathcal{H})_\sa$ mit $y(\xi_i) =\eta_i$, dann gilt
 	\[
 		x = \sum_{i=1}^{n} \ket{\eta_i} \bra{\xi_i} = \sum_{i=1}^{n} \ket{y \xi_i} \bra{\xi_i} = y \Underbracket{\enbrace*{\sum_{i=1}^{n} \ket{\xi_i} \bra{\xi_i}}}{=:p} =y p
@@ -3367,10 +3367,11 @@ Wenig überraschend wird auch die GNS-Konstruktion, siehe \autoref{gns} und \cre
 Hier findet man einige ausgewählte Beweise und Ergänzungen, auf die der Vorlesung hingewiesen wurde und die teilweise im Rahmen von Übungsaufgaben bearbeitet wurden.
 Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch einmal darauf hingewiesen, dass für die Richtigkeit keine Garantie übernommen wird!
 
+Die Reihenfolge richtet sich nach dem Auftreten der Verweise in der Vorlesung.
 
 \subsection{Beweis von \autoref{satz:37} (vii)} % (fold)
 \label{sub:beweis_37_vii}
-\emph{Dies war außerdem die Übungsaufgabe 1 b) von Blatt 5.} \smallskip\\
+\emph{Dies war außerdem die Übungsaufgabe 1~b) von Blatt 5.} \smallskip\\
 Wenn $A$ unital ist und $a \in A$ positiv und invertierbar, dann folgt aus $a \le b$ stets, dass auch $b$ invertierbar ist und $0 \le b^{-1} \le a^{-1}$ gilt.
 \begin{beweis}
 	Da $a$ invertierbar ist, ist $0$ nicht im Spektrum von $a$ enthalten.
@@ -3564,6 +3565,37 @@ Weiter wird gezeigt, dass folgende Identität für $a \in A$ gilt:
 \end{beweis} 
 % subsection gns_konstruktion_ist_zyklisch (end)
 
+\subsection{Äquivalente Eigenschaften von Projektionen} % (fold)
+\label{sub:aquivalente_eigenschaften_von_projektionen}
+\emph{Die folgenden Äquivalenzen sind beim Umgang mit Projektionen oft äußerst nützlich, zum Beispiel bei der nachfolgenden Aussage zu Netzen von Projektionen oder beim Umgang mit minimalen Projektionen.}\smallskip\\
+Sei $A \subset \mathcal{B}(\mathcal{H})$ eine $C^*$-Algebra und $p,q \in A$ Projektionen.
+Dann sind äquivalent:\\[-1em]
+\begin{multicols}{2}
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $p \le q$
+		\item $pq=p$
+		\item $qp=p$
+		\item $p(\mathcal{H}) \subseteq q(\mathcal{H})$
+		\item $\norm*{p(\xi)} \le \norm*{q(\xi)}$ für alle $\xi \in \mathcal{H}$
+		\item $q-p$ ist eine Projektion
+	\end{enumerate}
+\end{multicols}%
+\begin{beweis}[{\cite[Th.~2.3.2, S.~50]{Murphy}}]
+	Die Äquivalenz der Aussagen (ii), (iii) und (iv) ist klar.
+	Offensichtlich gilt (ii) $\implies$ (vi) $\implies$ (i).
+	Angenommen (i) gilt, dann erhalten wir
+	\[
+		\norm*{q(\xi)}^2 - \norm*{p(\xi)}^2 = \skal[\big]{(q-p)\xi}{\xi} = \norm[\big]{(q-p)^{\sfrac{1}{2}} \xi} \ge 0
+	\]
+	und somit muss dann auch (v) gelten. 
+	Gilt nun (v), so erhalten wir
+	\(
+		\norm*{p(1-q)\xi} \le \norm*{(q-q^2) \xi} = 0
+	\)
+	und somit $p=pq$, womit (ii) gilt und die Behauptung bewiesen ist.
+\end{beweis}
+% subsection aquivalente_eigenschaften_von_projektionen (end)
+
 \subsection{Monotones Netz von Projektionen} % (fold)
 \label{sub:mon_proj}
 \emph{Dies war Bestandteil von Blatt 9, Aufgabe 4 und komplettiert \autoref{satz:62}.} \smallskip \\
@@ -3577,7 +3609,7 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 	\leavevmode
 	\begin{enumerate}[(i)]
 		\item Wir müssen zeigen, dass $p_\lambda \xi\to q \xi$ für alle $\xi \in \mathcal{H}$.
-		Für Projektionen gilt\todo{Beweis davon könnte man von Thanh oder \citeauthor{Murphy} übernehmen}
+		Für Projektionen gilt nach \cref{sub:aquivalente_eigenschaften_von_projektionen}
 		\[
 			p_\lambda \le p_\mu \iff p_\lambda(\mathcal{H}) \subset p_\mu(\mathcal{H})
 		\]
@@ -3589,7 +3621,7 @@ Sei $q$ die Projektion auf $\overline{\bigcup_\lambda p_\lambda(\mathcal{H})}$ u
 			\norm*{p_\lambda \xi -q \xi} = \norm*{p_\lambda \xi_1 + p_\lambda \xi_2 - \xi_1} = \norm*{p_\lambda \xi_1 - \xi_1} &= \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0} + x_{n_0}} - \xi_1} \\
 			&\le \norm*{p_\lambda \enbrace*{\xi_1 - x_{n_0}}} + \norm*{x_{n_0} - \xi_1} \\
 			&\le \Underbracket{\norm*{p_\lambda}}{=1} \cdot \norm*{\xi_1 - x_{n_0}} + \norm*{x_{n_0} - \xi_1} \\
-			&< \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+			&< \sfrac{\varepsilon}{2} + \sfrac{\varepsilon}{2} = \varepsilon
 		\end{align}
 		Damit ist $p_\lambda \grenzw{\so} q$ gezeigt.
 		\item Da $p_\lambda$ ein Projektion ist, ist $\ind - p_\lambda$ die Projektion auf $p_\lambda(\mathcal{H})^\bot$.
@@ -3679,6 +3711,6 @@ Dann ist $\pi(A)$ $\so$-dicht in $\mathcal{B}(\mathcal{H})$
 \printindex
 \printbibliography
 \listoffigures
-\todototoc
-\listoftodos[To-do's und andere Baustellen]
+% \todototoc
+% \listoftodos[To-do's und andere Baustellen]
 \end{document}
