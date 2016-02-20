@@ -68,7 +68,7 @@
 	\]
 	Der $\mathbb{Z}$-duale Kokettenkomplex hat dann folgende Gestalt
 	\[
-		\begin{tikzcd}
+		\mbox{ }\hspace{1.5cm}\begin{tikzcd}
 			 \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar["d^0"] \dar["\cong" description] & \Hom_{\mathbb{Z}}(\mathbb{Z},\mathbb{Z}) \rar \dar["\cong" description] 
 			& 0 \rar & \ldots \\
 			\mathbb{Z} \rar["\cdot 2"] & \mathbb{Z}
@@ -423,7 +423,7 @@
 
 \begin{figure}[ht]
 	\centering{
-	\begin{tikzpicture}[scale=1.4]
+	\begin{tikzpicture}[scale=1.6]
 		\draw[fill=DodgerBlue3,fill opacity=0.4] (0,0) -- ++(1,0) -- ++ (120:1) -- cycle;
 		\draw[thick] (0,0) node[below left]{$0$} -- ++(1,0) node[below right]{$2$} -- ++ (120:1) node[above]{$1$} -- cycle;
 		\draw[thick] (3,0) node[below left]{$0$} -- ++(1,0) node[below right]{$2$} -- ++ (120:1) node[above]{$1$} -- cycle;
@@ -469,7 +469,27 @@
 	\end{enumerate}
 \end{lemma}
 \begin{beweis}
-	Übung bzw. Notizen auf Homepage \todo{\TeX{}en wenn Zeit}
+	Wir zeigen nur die erste Aussage, die anderen sind alle klar.
+	Sei dazu $\sigma \colon \abs*{\Delta^{p+q+1}}\to X$ ein singulärer Simplex.
+	Es gilt für den ersten Summanden der rechten Seite\todo{Rechnung durchgucken}
+	\begin{align}
+		d^p(\alpha) \cupp \beta(\sigma) &= (-1)^{q(p+1)}\cdot  (d^p \alpha) \enbrace*{\sigma|_{\benbrace*{0,\ldots ,p+1}}} \beta \enbrace*{\sigma|_{\benbrace*{p+1,\ldots ,p+q+1}}} \\
+		&= \Underbracket{(-1)^{qp+q+p+1} \cdot \sum_{i=0}^{p} (-1)^i \cdot \alpha \enbrace*{\sigma|_{\benbrace*{0, \ldots ,\slashedi,\ldots ,p+1}}} \beta \enbrace*{\sigma|_{\benbrace*{p+1,\ldots ,p+q+1}}}}{=: A} \\
+		&\mathbin{\hphantom{=}} + \Underbracket{(-1)^{pq+q+p+1+p+1} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{0,\ldots ,p}}} \beta \enbrace*{\sigma|_{\benbrace*{p+1,\ldots ,p+q+1}}}}{=: E}
+	\end{align}
+	Für den zweiten Summanden erhalten wir
+	\begin{align}
+		(-1)^p \cdot \enbrace*{\alpha \cupp d^q \beta}(\sigma) &= (-1)^{p+p(q+1)} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{0,\ldots ,p}}} (d^q \beta) \enbrace*{\sigma|_{\benbrace*{p,\ldots ,p+q+1}}} \\
+		&= \Underbracket{(-1)^{p+pq+p+q+1} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{0,\ldots ,p}}} \beta \enbrace*{\sigma|_{\benbrace*{p+1,\ldots ,p+q+1}}}}{= -E}\\
+		&\mathrel{\hphantom{=}} + \Underbracket{(-1)^{pq+q+1} \sum_{j=1}^{q+1} (-1)^j \cdot \alpha \enbrace*{\sigma|_{\benbrace*{0,\ldots ,p}}} \beta \enbrace*{\sigma|_{\benbrace{p,\ldots , \bcancel{p+j}, \ldots , p+q+1}}}}{=: B}
+	\end{align}
+	Wir berechnen nun die linke Seite der Gleichung
+	\begin{align}
+		\enbrace*{d^{p+q}(\alpha \cupp \beta)} (\sigma) &= (-1)^{p+q+1} (\alpha \cupp \beta) \enbrace*{\sum_{i=0}^{p+q+1} (-1)^i \cdot \sigma|_{\benbrace*{0, \ldots ,\slashedi, \ldots , p+q+1}} } \\
+		&= (-1)^{p+q+1+pq} \Big( \sum_{i=0}^{p} (-1)^i \cdot \alpha \enbrace*{\sigma|_{\benbrace{0, \ldots , \slashedi, \ldots ,p+1}}} \beta \enbrace*{\sigma|_{\benbrace{p+1,\ldots , p+q+1}}} \\
+		&\mathrel{\hphantom{=}} + \sum_{j=1}^{q+1} (-1)^{p+j} \cdot \alpha \enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \beta \enbrace*{\sigma_{\benbrace*{p,\ldots , \bcancel{p+j}, \ldots ,p+q+1}}} \Big)\\
+		&= A+ B \qedhere
+	\end{align}
 \end{beweis}
 
 \begin{definition}[{name=[Cup-Produkt in Kohomologie]}]
