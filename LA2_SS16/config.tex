@@ -1,0 +1,155 @@
+%!TEX root = AutF3.tex
+% -- Author: Phil Steinhorst, p.st@wwu.de
+\documentclass[a4paper,twoside,index=totoc,toc=bibliography,fontsize=10,DIV=12,headinclude,BCOR=12mm,cleardoublepage=empty]{scrreprt}
+
+\usepackage[usenames,x11names]{xcolor} % Die Optionen definieren zusätzliche Farben (siehe Dokumentation)
+\usepackage[final]{graphicx}
+
+\usepackage{lmodern}
+\usepackage{mathtools,amssymb,amsthm} % Verbesserung von amsmath (die amsmath selbst lädt)
+\mathtoolsset{showonlyrefs}
+\usepackage[libertine,cmintegrals,bigdelims,varbb]{newtxmath}
+\usepackage[no-math]{fontspec}
+\usepackage{polyglossia} % moderner babel-ersatz
+\setmainlanguage[spelling=new,babelshorthands=true,latesthyphen]{german}
+\shorthandoff{"}
+\defaultfontfeatures{Mapping=tex-text, Ligatures={Required,Common,Contextual}}
+\setmainfont{LinLibertine}[Extension=.otf,UprightFont=*_R,BoldFont=*_RZ,ItalicFont=*_RI,BoldItalicFont=*_RZI,ItalicFeatures={Ligatures=Historical}]
+\setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
+\setmonofont{Inconsolatazi4}[Scale=MatchUppercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,StylisticSet=1]
+\usepackage[final]{microtype}
+
+%%% Mathematikpakete und Einstellungen
+\mathtoolsset{centercolon} % sorgt dafür dass := und =: besser aussehen
+\usepackage{mathdots} % sorgt dafür, dass Punte wie zB \ddots besser aussehen
+
+%%% kommutative Diagramme
+\usepackage{tikz-cd} %-- meiner Meinung nach das beste Paket für kommutative Diagramme
+\tikzset{% um Kompatibilität mit Babel herzustellen und die angenehme "<label>"-Syntax zu nutzen
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes,babel,angles}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows.meta}
+\tikzset{
+	schraffiert/.style={pattern=north west lines,pattern color=#1},
+	schraffiert/.default=black
+}
+
+%%% Biber-Settings
+\usepackage[%
+	backend=biber,
+	sortlocale=auto,
+	natbib,
+	hyperref,
+	backref,
+	backrefstyle=three+,
+	style=alphabetic % eine unvollständige Auswahl von Styles: ieee, numeric, apa
+	]%
+{biblatex}
+\setlength{\bibitemsep}{1em}     % Abstand zwischen den Literaturangaben
+\setlength{\bibhang}{2em}        % Einzug nach jeweils erster Zeile
+\addbibresource{literature.bib} % Literaturdatei einlesen
+
+%%% Hyperref-Konfigration
+\usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Phil Steinhorst}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
+\hypersetup{final}
+
+%%% Aufzählung und Zitate
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,description]{font=\sffamily\bfseries}
+\usepackage[german=quotes]{csquotes}
+
+\usepackage[textsize=small]{todonotes}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\color{gray} \footnotesize }
+\setlength{\parindent}{0em} 
+
+%%% Kopf-/Fußzeilen
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot 
+\setheadsepline{1pt} 
+\automark[chapter]{chapter} % definiert, welcher Text in den Kolumnentiteln erscheinen soll
+\rohead{\rightmark} 
+\lehead{\rightmark} 
+\ofoot[\pagemark]{\pagemark} 
+
+% Indexerstellung
+\usepackage{makeidx}
+\newcommand{\Index}[1]{\textbf{#1}\index{#1}}
+\makeindex
+\renewcommand{\indexpagestyle}{scrheadings}
+
+%-- Theorem-Pakete und Konfiguration
+\usepackage{thmtools}
+
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily,
+	bodyfont=\normalfont,
+	headformat=\NUMBER \ \NAME \NOTE,
+	headpunct={\\},
+	postheadspace=1ex,
+	spaceabove=15pt,spacebelow=10pt]%
+{mainstyle}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily,
+	bodyfont=\normalfont,
+	headformat=\NAME \NOTE,
+	headpunct={\\},
+	postheadspace=1ex,
+	spaceabove=15pt,spacebelow=10pt]%
+{nonumber}
+\declaretheoremstyle[%
+	headfont=\sffamily\bfseries,
+	notefont=\normalfont\sffamily,
+	bodyfont=\normalfont,
+	headformat=\NAME \ \NOTE,
+	headpunct={\\},
+	postheadspace=1ex,
+	spaceabove=15pt,spacebelow=10pt]%
+{miscstyle}
+\declaretheoremstyle[%
+	headfont=\bfseries\scshape,
+	bodyfont=\normalfont,
+	headpunct=:,
+	postheadspace=1ex,
+	spacebelow=12pt,spaceabove=2pt,
+	qed=\qedsymbol]%
+{beweise}
+
+
+\declaretheorem[name=Definition,parent=section,style=mainstyle]{definition}
+\declaretheorem[name=Satz,sharenumber=definition,style=mainstyle]{satz}
+\declaretheorem[name=Korollar,sharenumber=definition,style=mainstyle]{korollar}
+\declaretheorem[name=Lemma,sharenumber=definition,style=mainstyle]{lemma}
+\declaretheorem[name=Proposition,sharenumber=definition,style=mainstyle]{proposition}
+\declaretheorem[name=Bemerkung,sharenumber=definition,style=mainstyle]{bemerkung}
+\declaretheorem[name=Beispiel,sharenumber=definition,style=mainstyle]{beispiel}
+\declaretheorem[name=Erinnerung,sharenumber=definition,style=mainstyle]{erinnerung}
+\declaretheorem[name=Beobachtung,sharenumber=definition,style=mainstyle]{beobachtung}
+\declaretheorem[name=Theorem,sharenumber=definition,style=mainstyle]{theorem}
+\declaretheorem[name=Aufgabe,parent=chapter,style=mainstyle]{aufgabe}
+
+\declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
+
+% \declaretheorem[name=Erinnerung,numbered=no,style=nonumber]{no-erinnerung}
+
+\input{MathCmds.tex}
+
+\usepackage{setspace}
+\usepackage{hyphenat}
+\usepackage{bm}
+\allowdisplaybreaks
+\raggedbottom
+\renewcommand{\phi}{\varphi}
+\usepackage{chngcntr}
+\counterwithout{equation}{chapter} % undo numbering system provided by phstyle.cls
+\counterwithout{section}{chapter}
+\renewcommand\thechapter{\Roman{chapter}}
+\usepackage{faktor}
