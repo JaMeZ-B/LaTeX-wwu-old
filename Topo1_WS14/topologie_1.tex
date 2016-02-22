@@ -1005,11 +1005,1095 @@ Dazu geht man wie folgt vor:
 	\]
 \end{beweis}
 
+\newpage
+
+\section{Singuläre Homologie} % (fold)
+\label{sec:5}
+
+\begin{definition}[{name=[{Singuläre Simplizes und $n$-ter singulärer Kettenmodul}]}]
+	Sei $X$ ein topologischer Raum. 
+	Sei $S_n(X)$ die Menge aller stetigen Abbildungen $\sigma \colon \abs*{\Delta^n} \to X$. 
+	Elemente von $S_n(X)$ heißen \Index{singuläre Simplizes} in $X$. 
+	Sei $R$ ein Ring. 
+	Der \bet{$\mathbf{n}$-te (singuläre) Kettenmodul}\index{n-ter Kettenmodul@$n$-ter Kettenmodul!singulär} von $X$ über $R$ ist
+	\[
+		C_n(X;R) := R \benbrace[\big]{S_n(X)} 
+	\]
+\end{definition}
+
+\begin{definition}[{name=[{Einschränkung eines singulären Simplizes auf eine Seite}]},label=def:52]
+	Für $\sigma \in S_n(X)$ und $j \in \set{0,\ldots ,n}$ sei $\delta_j \sigma \in S_{n-1}(X)$ die Einschränkung von $\sigma$ auf die $j$-te Seite von $\abs*{\Delta^n}$, also $\delta_j(\sigma) = \sigma \circ \iota_{n,j}$, wobei $\iota_{n,j} \colon \abs{\Delta^{n-1}} \to \abs*{\Delta^n}$ die Inklusion der $j$-ten Seite ist:
+	\[
+		\iota_{n,j}(x_0, \ldots ,x_{n-1}) = \enbrace[\big]{x_0, \ldots , x_{j-1}, 0, x_j, \ldots , x_{n-1}}
+	\]
+\end{definition}
+
+\begin{bemerkung}[{name=[{Inklusion der $j$-ten Seite}]}]
+	Es gilt $\iota_{n,j} = \abs*{i_{n,j}}$ wobei $i_{n,j} \colon \Delta^{n-1} \to \Delta^n$ gegeben ist durch \marginnote{vergleiche Blatt 2, Aufgabe 2}
+	\[
+		i_{n,j}(k) = \begin{cases}
+		k, &\text{ falls }k < j\\
+		k+1, &\text{ falls } k\ge j
+	\end{cases}
+	\]
+\end{bemerkung}
+
+\begin{definition}[{name=[{$n$-te singuläre Randabbildung}]}]
+	Die \bet{$\mathbf{n}$-te singuläre Randabbildung}\index{n-te Randabbildung@$n$-te Randabbildung!singulär} $\partial_n \colon C_n(X;R) \to C_{n-1}(X;R)$ ist 
+	definiert durch 
+	\[
+		\partial_n(\sigma) = \sum_{j=0}^{n} (-1)^j \cdot \delta_j(\sigma).
+	\]
+\end{definition}
+
+\begin{proposition}[{name=[{Für die Randabbildungen gilt $\partial_{n-1} \circ \partial_n = 0$}]},label=prop:55]
+	Es gilt
+	\[
+		\partial_{n-1} \circ \partial_n = 0
+	\]
+\end{proposition}
+\begin{beweis}
+	Wir rechnen die Behauptung einfach für $\sigma \colon \abs*{\Delta^n}\to X$ nach:
+	\begin{align*}
+		\partial_{n-1} \circ \partial_n(\sigma) = \partial_{n-1} \enbrace*{\sum_{j=0}^{n} (-1)^j \delta_j(\sigma)} &= 
+		\sum_{k=0}^{n-1} \sum_{j=0}^{n} (-1)^{j+k} \delta_k \delta_j(\sigma)   \\
+		&= \,\sum_{0 \le k < j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) +\!\!\!\smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_k\delta_j(\sigma) \\
+		&\StackText{\ref{lem:56}}{=} \, \sum_{0 \le k < j \le n} \!\!\!(-1)^{k+j} \delta_k \delta_j(\sigma) + \!\!\!\smashoperator[r]{\sum_{0 \le j \le k \le n-1}} \enspace(-1)^{k+j} \delta_j \delta_{k+1}(\sigma) \\
+		&= \,\sum_{0 \le k < j \le n} \!\!\! (-1)^{k+j} \delta_k \delta_j(\sigma) + \smashoperator[r]{\sum_{0 \le j < k \le n}} \enspace(-1)^{k-1+j} \delta_j \delta_k(\sigma) \\
+		&= 0 \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{lemma}[{name=[Hilfslemma für Proposition \ref{prop:55}]},label=lem:56]
+	Für $0 \le j \le k \le n-1$ und $\sigma \in S_n(X)$ ist $\delta_k \delta_j(\sigma) = \delta_j \delta_{k+1}(\sigma)$.
+\end{lemma}
+\begin{beweis}
+	Es gilt
+	\begin{align*}
+		\delta_k \enbrace[\big]{\delta_j(\sigma)} \enbrace*{x_0, \ldots , x_{n-2}} &= \delta_j(\sigma) \enbrace[\big]{x_0, \ldots , x_{k-1}, 0, x_k , \ldots ,x_{n-2}}  \\
+		&= \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j, \ldots , x_{k-1},0,x_k, \ldots, x_{n-2}}  \\
+		\intertext{und}
+		\delta_j \delta_{k+1}(\sigma) \enbrace*{x_0, \ldots , x_{n-2}} &= \delta_{k+1}(\sigma) \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j,\ldots , x_{n-2}} \\
+		&= \enbrace[\big]{x_0, \ldots , x_{j-1},0,x_j, \ldots , x_{k-1},0, x_k, \ldots , x_{n-2}} \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{definition}[{name=[{Singuläre Homologie von $X$}]}]
+	Sei $X$ ein topologischer Raum. 
+	Die Homologie des \bet{singulären Kettenkomplex}\index{singulärer Kettenkomplex} über $R$, $\enbrace[\big]{C_*(X;R), \partial_*}$, heißt die \Index{singuläre Homologie von $X$} mit Koeffizienten in $R$:
+	\[
+		H_n(X;R) := H_n \enbrace[\big]{C_*(X;R), \partial_*} 
+	\]  
+	Für $R=\mathbb{Z}$ schreiben wir kürzer $C_*(X) := C_*(X;\mathbb{Z})$ und $H_n(X) := H_n(X;\mathbb{Z})$.
+	\begin{itemize}
+		\item Die Elemente von $C_n(X;R)$ heißen \bet{$\mathbf{n}$-Ketten}\index{n-Ketten@$n$-Ketten}.
+		\item Die Elemente von $\im \partial_{n+1} \subseteq C_n(X;R)$ heißen \bet{$\mathbf{n}$-Ränder}\index{n-Ränder@$n$-Ränder}.
+		\item Die Elemente von $\ker \partial_{n} \subseteq C_n(X;R)$ heißen \bet{$\mathbf{n}$-Zykel}\index{n-Zykel@$n$-Zykel}.
+	\end{itemize}
+	Jeder $n$-Zykel $\sigma \in C_n(X;R)$ bestimmt eine \Index{Homologieklasse} $[\sigma] := \sigma + \im \partial_{n+1} \in H_n(X;R)$.
+\end{definition}
+
+\begin{beispiel}[{name=[Die Homologie des Ein-Punkt-Raumes]},label=bsp:58]
+	Ist $X= \set{x_0}$ der Ein-Punkt-Raum, so ist 
+	\[
+		H_* \enbrace[\big]{\set{x_0};R} \cong \begin{cases}
+		R, &\text{ falls }*=0\\
+		0 , &\text{ sonst } 
+	\end{cases} 
+	\]
+\end{beispiel}
+\begin{beweis}
+	Es gibt für jedes $n$ genau eine Abbildung $\sigma_n \colon \abs*{\Delta^n} \to \set{x_0}$ nämlich die konstante. 
+	Diese ist offensichtlich stetig. 
+	Also ist$C_n \enbrace*{\set{x_0};R}=R[\sigma_n]$. 
+	Für alle $j$ ist $\delta_j \sigma_n = \sigma_{n-1}$. Daher ist
+	\[
+		\partial_n(\sigma_n) = \begin{cases}
+			0, &\text{ falls }n \text{ ungerade}\\
+			\sigma_{n-1} , &\text{ falls } n \text{ gerade}
+		\end{cases}
+	\]
+	Der singuläre Kettenkomplex von $\set{x_0}$ hat also folgende Gestalt:
+	\[
+		\begin{tikzcd}[row sep=0.4em]
+			C_0 \enbrace[\big]{\set{x_0};R} \arrow[draw=none]{d}[sloped,auto=false]{\cong} 
+			& C_1 \enbrace[\big]{\set{x_0};R} \lar["0", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} & 
+			C_2 \enbrace[\big]{\set{x_0};R} \lar["\cong", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} 
+			& C_3 \enbrace[\big]{\set{x_0};R} \lar["0", swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong}
+			& \cdots \lar["\cong",swap] \arrow[draw=none]{d}[sloped,auto=false]{\cong} \\
+			R & R \lar["0"] & R \lar["\id"] & R \lar["0"] & R \lar["\id"]
+		\end{tikzcd}
+	\]
+	Es folgt
+	\[
+		H_n \enbrace[\big]{\set{x_0};R } \cong \begin{cases}
+			R, &\text{ falls }n=0\\
+			0 , &\text{ sonst}
+		\end{cases} \qedhere
+	\]
+\end{beweis}
+
+\begin{proposition}[{name=[{Eigenschaften von $H_0(X)$ für $X \not= \emptyset$ und $X$ wegzusammenhängend}]}]
+	\leavevmode\begin{enumerate}[1),itemsep=0pt]
+		\item Ist $X \not= \emptyset$, so ist $H_0(X) \not=0$.\marginnote{Eine analoge Aussage für simpliziale Komplexe haben wir in Aufgabe 3 von Blatt 2 bewiesen}
+		\item Ist $X$ wegzusammenhängend, so gilt $H_0(X) \cong \mathbb{Z}$.\footnote{Tatsächlich gilt auch die Umkehrung, wie in Aufgabe 4 von Blatt 3 gezeigt.}
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	\begin{enumerate}[1)]
+		\item Sei die sogenannte \Index{Augmentierung} $\epsilon \colon C_0(X) \to \mathbb{Z}$ definiert durch 
+		\[
+			\epsilon \enbrace*{\sum_{\sigma \in S_0(X)} \hspace{-1ex} r_\sigma \cdot \sigma } := \sum_\sigma r_\sigma.
+		\]
+		Dann ist $\epsilon \circ \partial_1 \colon C_1(X) \to \mathbb{Z}$ trivial, denn für $\sigma \in S_1(X)$ ist $\epsilon \circ \partial_1(\sigma)= \epsilon(\delta_0 \sigma - \delta_1 \sigma) = 0$.
+		Daher induziert $\epsilon$ eine Abbildung $\overline{\epsilon} \colon H_0(X) \to \mathbb{Z}$. 
+		Da $X \not= \emptyset$ ist, gibt es einen singulären $0$-Simplex $\sigma \colon \abs*{\Delta^0} \to X$. 
+		Für $\sigma$ gilt $\overline{\epsilon}( [\sigma])=1$ und daher ist $\overline{\epsilon}$ surjektiv und $H_0(X) \not= 0$.
+		\item Wir zeigen, dass $\overline{\epsilon} \colon H_0(X) \to \mathbb{Z}$ ein Isomorphismus ist, falls $X$ wegzusammenhängend ist. 
+		Dazu zeigen wir $\ker \epsilon = \im \partial_1$. 
+		Dazu definieren wir $s \colon C_0(X) \to C_1(X)$ wie folgt: Sei $\sigma_0$ ein fest gewählter singulärer $0$-Simplex.
+		Zu $\sigma \in S_0(X)$ gibt es, da $X$ wegzusammenhängend ist, $s(\sigma) \in S_1(X)$ mit $\delta_0 s(\sigma)= \sigma$, $\delta_1 s(\sigma)= \sigma_0$.
+		Es gilt nun 
+		\begin{align*}
+			\partial_1 \circ s(\sigma) = \sigma - \sigma_0 = \enbrace*{\id_{C_0(X)} - i \circ \epsilon }(\sigma)
+		\end{align*}
+		wobei $i \colon \mathbb{Z} \to C_0(X)$, $n \mapsto n \cdot \sigma_0$. 
+		Ist nun $v \in \ker \epsilon$, so folgt 
+		\[
+			\partial_1 \circ s(v)= v- i \circ \underbracket[1pt][2pt]{\epsilon(v)}_{=0} = v
+		\]
+		also ist $v \in \im \partial_1$ und es folgt die Behauptung. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{bemerkung}[{name=[{Vorgehen, um später zu zeigen: $H_*(K;R) \cong H_*(\abs*{K};R)$}]}]
+	Sei $K=(V,\Sigma)$ ein geordneter simplizialer Komplex. 
+	Sei $\sigma= \set{v_o, \ldots , v_n} \in \Sigma_n $ ein $n$-Simplex von $K$ mit $v_0 < v_1 < \ldots < v_n$. 
+	Wir ordnen $\sigma$ den singulären $n$-Simplex $f_\sigma \colon \abs*{\Delta^n} \to \abs*{\Delta^\sigma} \subseteq \abs*{K}$ zu, wobei
+	\begin{align*}
+		f_\sigma \enbrace*{\sum_{i=0}^{n} t_i \cdot e_i} = \sum_{i=0}^{n} t_i \cdot v_i. 
+	\end{align*}
+	Nun erhalten wir eine Abbildung 
+	\[
+		C_*(K;R) \to C_*(\abs*{K},R) \quad , \qquad   \sum_{\sigma \in \Sigma_n} r_\sigma \cdot \sigma \longmapsto \sum_{\sigma \in \Sigma_n} r_\sigma \cdot f_\sigma.
+	\]
+	Diese Abbildung induziert(!) eine weitere Abbildung $H_*(K;R) \xrightarrow{\cong} H_*(\abs*{K};R )$ von der wir später zeigen werden, dass sie ein Isomorphismus ist.
+\end{bemerkung}
+
+\newpage
+
+\section{Funktorialität} % (fold)
+\label{sec:6}
+
+\begin{definition}[{name=[{$R$-Kettenabbildung}]},label=def:61]
+	Seien $(C_*,d_*)$ und $(C_*',d_*')$ zwei $R$-Kettenkomplexe. 
+	Dann ist eine \bet{$\mathbf{R}$-Kettenabbildung}\index{R-Kettenabbildung@$R$-Kettenabbildung} $f_* \colon (C_*,d_*) \to (C_*',d_*')$ eine Folge von $R$-linearen Abbildungen $f_n \colon C_n \to C_n'$, sodass
+	\[
+		d_n' \circ f_n = f_{n-1} \circ d_n
+	\]
+	für alle $n\ge 1$ gilt. Also kommutiert folgendes Diagramm
+	\[
+		\begin{tikzcd}[sep=normal]
+			C_0 \dar["f_0", Firebrick3] & C_1 \lar["d_1"'] \dar["f_1", Firebrick3] & C_2 \lar["d_2"'] \dar["f_2", Firebrick3]& C_3 \lar["d_3"'] \dar["f_3", Firebrick3]& \ldots \lar \\
+			C_0' & C_1' \lar["d_1'"]  & C_2' \lar["d_2'"]& C_3' \lar["d_3'"]& \ldots \lar
+		\end{tikzcd}
+	\]
+\end{definition}
+
+\begin{bemerkung}[{name=[{Induzierte Abbildung einer Kettenabbildung auf Homologie}]}]
+	Ist $f_* \colon (C_*,d_*) \to (C_*',d_*')$ eine Kettenabbildung, so erhalten wir eine induzierte Abbildung auf Homologie $H_n(f_*) \colon H_n(C_*,d_*) \to H_n(C_*',d_*')$ durch
+	\[
+		H_n(f_*) \enbrace*{[v]} := \benbrace*{f_n(v)}  
+	\]
+	für $v \in \ker d_n$. Dies ist wohldefiniert, denn:
+	\begin{itemize}
+		\item $d_n' \enbrace[\big]{f_n(v)} = f_{n-1} \enbrace[\big]{d_n(v)} = 0 $, also $f_n(v) \in \ker d_n'$ für $v \in \ker d_n$.
+		\item Ist $[v]=[w]$, mit $v,w \in\ker d_n$, so gibt es $x \in C_{n+1}$ mit $d_{n+1}(x)=v-w$. Dann ist 
+		\[
+			d_{n+1}'\enbrace[\big]{f_{n+1}(x)} = f_n \enbrace[\big]{d_{n+1}(x)} = f_n(v)- f_n(w) 
+		\]
+		also $\benbrace*{f_n(v)} = \benbrace*{f_n(w)} \in H_n(C_*',d_*')$.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{bemerkung}[{name=[Homologie definiert einen Funktor]},label=bem:63]
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item $R$-Kettenkomplexe mit $R$-Kettenabbildungen bilden die Kategorie $R\text{-}\textsc{Ketten}$.
+		\item Homologie definiert nun einen Funktor: $H_n \colon R\text{-}\textsc{Ketten} \to R\text{-}\MOD$.
+	
+		Es gilt $H_n(\id_{(C_*,d_*)}) = \id_{H_n(C_*,d_*)}$ und $H_n(f \circ g) = H_n(f) \circ H_n(g)$, da
+		\[
+			H_n(f \circ g) \enbrace*{[v]} = \benbrace*{f_n \circ g_n(v)} = \benbrace*{f_n \enbrace[\big]{g_n(v)} } = H_n(f) \enbrace[\big]{\benbrace*{g_n(v)}} = H_n(f) \enbrace[\big]{H_n(g)(v)}     
+		\]
+		\item Definiert man die Kategorie der \Index{graduierten} $R$-Moduln als die Kategorie, deren Objekte Folgen $(V_n)_n$ von $\mathbb{R}$-Moduln sind und deren
+		Morphismen Folgen von $R$-linearen Abbildungen $(f_n)_{n}$ sind, so kann man die $H_n$, $n \in \mathbb{N}$ zu einem Funktor
+		\[
+			H_* \colon R\text{-}\textsc{Ketten} \longrightarrow \textsc{Gr}\text{-}R\text{-}\MOD \quad , \qquad (C_*,d_*) \longmapsto \enbrace[\big]{H_n(C_*,d_*)}_n 
+		\]
+		zusammensetzen.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{definition}[{name=[Induzierte Abbildung auf Kettenkomplexen]}]
+	Sei $f \colon X \to Y$ stetig. Wir definieren $C_n(f;R) \colon C_n(X;R) \to C_n(Y;R)$ durch
+	\[
+		C_n(f;R) \enbrace*{\smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot  \sigma} := \smashoperator[r]{\sum_{\sigma \in S_n(X)}} r_\sigma \cdot \enbrace*{f \circ \sigma} 
+	\]
+	Dies ist wohldefiniert, denn für $\sigma \in S_n(X)$ ist $f \circ \sigma \in S_n(Y)$.
+\end{definition}
+
+\begin{proposition}[{name=[{Der singuläre Kettenkomplex über $R$ bildet einen Funktor}]},label=prop:65]
+	Mit dieser Definition von $C_*(f;R)$ wird der singuläre Kettenkomplex über $R$ zu einem Funktor
+	\[
+		C_*(-;R) \colon \textsc{Top} \to R\text{-}\textsc{Ketten}
+	\]
+\end{proposition}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item $C_*(f;R)$ ist eine $R$-Kettenabbildung: Es gilt
+		\begin{align*}
+			C_{n-1}(f;R) \circ \partial_n(\sigma) = C_{n-1} (f;R) \enbrace*{\sum_{l=0}^{n}  (-1)^l \cdot \sigma \circ \iota_{n,l}} &=
+			\sum_{l=0}^{n} (-1)^l \cdot (f \circ \sigma) \circ \iota_{n,l} \\
+			&= \partial_n(f \circ \sigma) = \partial \enbrace[\big]{C_n(f;R)(\sigma)}.
+		\end{align*}
+		\item Zu zeigen: $C_*(f \circ g;R) = C_*(f;R) \circ C_*(g;R)$. Es gilt
+		\begin{align*}
+			C_n(f \circ g;R)(\sigma) = f \circ (g \circ \sigma) = C_n(f;R)(g \circ \sigma) = C_n(f;R) \enbrace[\big]{C_n(g;R)(\sigma)}.
+		\end{align*}
+		\item Zu zeigen: $C_*(\id_X;R) = \id_{C_*(X;R)}$. Es gilt
+		\[
+			C_n({\id_X};R)(\sigma) = {\id_{X}} \circ {\sigma} = \sigma \qedhere
+		\]
+	\end{enumerate}
+\end{beweis}
+
+\begin{korollar}[{name=[{Homologie ist ein Funktor $\TOP \to R\text{-}\textsc{Mod}$}]}]
+	Mit $H_n(f;R) := H_n \enbrace*{C_*(f;R)}$ wird $H_n(-;R)$ zu einem Funktor: $H_n(-;R) \colon \TOP \to R\text{-}\textsc{Mod}$.
+\end{korollar}
+\begin{beweis}
+	$H_n(-;R)$ ist die Komposition des Funktors $C_*(-;R) \colon \TOP \to R\text{-}\textsc{Ketten}$ aus \autoref{prop:65} mit dem Funktor $H_n \colon R\text{-}\textsc{Ketten} \to R\text{-}\textsc{Mod}$ aus \autoref{bem:63}.
+\end{beweis}
+
+\begin{bemerkung}[{name=[Notation für die auf Homologie induzierte Abbildung]}]
+	Oft schreiben wir kurz $f_* = H_n(f;R)$.
+	Für $\benbrace*{\sum_{\sigma \in S_n(X)} r_\sigma \sigma} \in H_n(X;R)$ ist
+	\[
+		f_* \enbrace*{\benbrace*{\sum\limits_{\sigma \in S_n(X)} r_\sigma \sigma}} =  \benbrace*{\sum\limits_{\sigma \in S_n(X)} r_\sigma
+		f\circ \sigma} \in H_n(Y;R)
+	\]
+\end{bemerkung}
+
+\begin{definition}[{name=[Summe oder Koprodukt von topologischen Räumen]}]
+	Seien $X_i$, $i \in I$ topologische Räume. Mit 
+	\[
+		X := \coprod_{i \in I} X_i 
+	\]
+	bezeichnen wir die \bet{Summe}\index{Summe!topologischer Räume} (oder auch das \bet{Koprodukt}\index{Koprodukt!topologischer Räume}) der $X_i$. 
+	Als Menge ist $X$ die disjunkte Vereinigung der $X_i$. 
+	$U \subseteq X$ ist offen genau dann, wenn $X_i \cap U \subseteq X_i$ offen ist für jedes $i \in I$. 
+	Für jedes $i_0$ erhalten wir eine stetige Inklusion $j_{i_0} \colon X_{i_0} \to \coprod_{i} X_i$.
+	Für jedes $i_0$ ist $X_{i_0} \subseteq \coprod_i X_i$ offen und abgeschlossen.
+\end{definition}
+
+\begin{definition}[{name=[{Summe von $R$-Moduln}]}]
+	Seien $V_i$, $i \in I$ $R$-Moduln. Mit 
+	\[
+		V := \bigoplus_{i \in I} V_i
+	\]
+	bezeichnen wir die \bet{Summe}\index{Summe!von $R$-Moduln} (auch das \bet{Koprodukt}\index{Koprodukt!von $R$-Moduln}) der $V_i$. 
+	Elemente von $V$ sind $I$-Folgen $(v_i)_{i \in I}$ mit $v_i \in V_i$ und $v_i=0$ füralle bis auf endlich viele $i$. 
+	Die $R$-Modulstruktur ist erklärt durch: $(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I}$ und $r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}$
+	% \[
+	% 	(v_i)_{i \in I} + (w_i)_{i \in I} := (v_i +w_i)_{i \in I} \qquad ,\qquad r \cdot (v_i)_{i \in I} := (r \cdot v_i)_{i \in I}
+	% \]
+	Für jedes $i_0 \in I$ erhalten wir eine $R$-lineare Abbildung $j_{i_0} \colon V_{i_0} \to V$ mit
+	\[
+		\enbrace*{j_{i_0} (v)}_{i} = \begin{cases}
+			v, &\text{ falls }i=i_0\\
+			0 ,&\text{ sonst}
+		\end{cases} 
+	\]
+\end{definition}
+
+Seien $V_i$ für $i \in I$ $R$-Moduln. Sei $W$ ein weiterer $R$-Modul. Dann gibt es zu jeder Folge $f_i \colon V_i \to W$ von $R$-linearen Abbildungen eine
+$R$-lineare Abbildung 
+\(
+	\oplus_{i \in I} f_i \colon \bigoplus_{i \in I} V_i \to W  
+\)
+mit
+\[
+	\enbrace*{\oplus_{i \in I} f_i} \enbrace[\big]{(v_i)_{i \in I}} = \sum_{i \in I} f_i(v_i)  
+\]
+Ist umgekehrt $f \colon \bigoplus_{i \in I} V_i \to W$ eine $R$-lineare Abbildung, so ist $f_i := f \circ j_{i}$ eine Folge von $R$-linearen Abbildungen mit 
+$f = \bigoplus_{i \in I} f_i$.
+
+\begin{satz}[{name=[{Homologie des Koproduktes topologischer Räume}]}]
+	Sei $X = \coprod_{i \in I} X_i$. Dann induzieren die Inklusionen $j_i \colon X_i \hookrightarrow X$ einen Isomorphismus
+	\[
+		\bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\bigoplus_{i \in I} (j_i)_*}  H_n(X;R)
+	\]
+\end{satz}
+\begin{beweis}
+	Da die $X_i \subseteq X$ offen und abgeschlossen sind und $\abs*{\Delta^n}$ zusammenhängend ist (sogar wegzusammenhängend), gibt es für jedes 
+	$\sigma \colon \abs*{\Delta^n} \to X $ ein eindeutiges $i$ mit $\im \sigma \subseteq  X_i$. Es gilt also $S_n(X) = {\dot{\bigcup}} S_n(X_i)$. Daher induzieren die $j_i$
+	für jedes $n$ einen Isomorphismus
+	\[
+		{\textstyle\bigoplus\limits_{i \in I}} C_n(j_i;R) \colon \bigoplus_{i \in I}C_n(X_i;R) \xrightarrow{\enspace\cong \enspace} C_n(X;R) 
+	\]
+	Da diese Isomorphismen mit den Randabbildungen vertauschen, erhalten wir einen Isomorphismus von $R$-Kettenkomplexen
+	\[
+		\varphi := {\textstyle\bigoplus\limits_{i \in I}} C_*(j_i;R) \colon \bigoplus C_*(X_i;R) \xrightarrow{\enspace\cong \enspace} C_*(X;R)
+	\]
+	Da $\bigoplus_i H_n \enbrace[\big]{C_*(X_i;R)} \cong H_n \enbrace[\big]{\bigoplus_i C_*(X_i;R)}$ induzieren dann auch die $(j_i)_*$ einen Isomorphismus
+	\[
+		{\textstyle\bigoplus\limits_{i \in I}} (j_i)_* \colon \bigoplus_{i \in I} H_n(X_i;R) \xrightarrow{\enspace\cong \enspace} H_n(X;R) \qedhere
+	\]
+\end{beweis}
+
+\newpage
+
+\section{Homotopieinvarianz} % (fold)
+\label{sec:7}
+
+\begin{bemerkung}[{name=[Die induzierte Abbildung eines Homöomorphismus ist ein Isomorphismus]}]
+	Sei $f \colon X \to Y$ ein Homöomorphismus. Dann ist 
+	\(
+		f_* \colon H_n(X;R) \longrightarrow H_n(Y;R)
+	\)
+	ein Isomorphismus.
+\end{bemerkung}
+\begin{beweis}
+	Da Homologie ein Funktor ist, gilt
+	\begin{align*}
+		f_* \circ (f^{-1})_* &= (f \circ f ^{-1})_* = (\id_Y)_* = \id_{H_n(Y;R)} \qquad \text{ und} \\
+		(f ^{-1})_* \circ f_* &= (f ^{-1} \circ f)_* = (\id_X)_* = \id_{H_n(X;R)}
+	\end{align*}
+	Also ist $(f_*)^{-1}=(f ^{-1})_*$. Insbesondere ist $f_*$ ein Isomorphismus.
+\end{beweis}
+
+\begin{definition}[{name=[Homotopieäquivalenz und Homotopieinverse]}]
+	Eine stetige Abbildung $f \colon X \to Y$ heißt eine \Index{Homotopieäquivalenz}, falls es eine stetige Abbildung $g \colon Y \to X$ gibt, so dass $g \circ f$ homotop zu $\id_X$ ist und $f \circ g$ homotop zu $\id_Y$ ist. 
+	$g$ heißt dann eine \Index{Homotopieinverse} zu $f$.
+\end{definition}
+\begin{enumerate}[(i)]
+	\item $f$ ist genau dann eine Homotopieäquivalenz, wenn $[f]$ in $\HTOP$ invertierbar ist. In $\HTOP$ ist dann $[f]^{-1} = [g]$.
+	\item Die Homotopieinverse ist eindeutig bis auf Homotopie.
+\end{enumerate}
+
+\begin{satz}[{name=[Homotopieinvarianz der Homologie]},label=satz:73]
+	Seien $f,g \colon X \to Y$ stetige Abbildungen. 
+	Sind $f$ und $g$ homotop, so gilt für die induzierten Abbildungen $H_n(f;R) = H_n(g;R)$ für alle $n \in \mathbb{N}$.
+\end{satz}
+\begin{beweis}
+	\emph{Siehe \autoref{lem:78}, sowie \autoref{bem:79}.}
+\end{beweis}
+
+\begin{korollar}[{name=[Die induzierte Abbildung einer Homotopieäquivalenz ist ein Isomorphismus]},label=kor:74]
+	Ist $f \colon X \to Y$ eine Homotopieäquivalenz, so ist $f_* \colon H_n(X;R) \to H_n(Y;R)$ ein Isomorphismus.
+\end{korollar}
+\begin{beweis}
+	Sei $g \colon Y \to X$ ein Homotopieinverses zu $f$. Es folgt 
+	\begin{align*}
+		f_* \circ g_* &\stackrel{\text{Funktor}}{=} (f \circ g)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_Y)_* \stackrel{\text{Funktor}}{=} \id_{H_n(Y;R)} \\
+		g_* \circ f_* &\stackrel{\text{Funktor}}{=} (g \circ f)_* \stackrel{\text{Homotopieinvarianz}}{=} (\id_X)_* \stackrel{\text{Funktor}}{=} \id_{H_n(X;R)}\qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{korollar}[{name=[Homologie eines kontrahierbaren Raumes]},label=kor:75]
+	Ist $X$ \Index{kontrahierbar}, d.h. es gibt eine Homotopie $H \colon X \times [0,1] \to X$ mit $H_0 =\id_X$ und $H_1$ konstant, so gilt 
+	\[
+		H_n(X;R) \cong \begin{cases}
+			R, &\text{ falls }n=0\\
+			0, &\text{ sonst}
+		\end{cases}
+	\]
+\end{korollar}
+\begin{beweis}
+	Sei $\set{x_0} =\im H_1$. Dann ist die Inklusion $\set{x_0} \to X$ eine Homotopieäquivalenz. Also gilt nach \autoref{kor:74}
+	\[
+		H_n(X;R) \cong H_n \enbrace[\big]{\set{x_0};R} \StackText{\ref{bsp:58}}{=} \begin{cases}
+			R, &\text{ falls }n=0\\
+			0, &\text{ sonst}
+		\end{cases} \qedhere
+	\]
+\end{beweis}
+
+Es gilt beispielsweise
+\[
+	H_n(\mathbb{R}^k;R) \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases} \qquad \text{ und } \qquad 
+	H_n(D^k;R) \cong \begin{cases}
+		R, &\text{ falls }n=0\\
+		0, &\text{ sonst}
+	\end{cases}
+\]
+
+\begin{definition}[{name=[Kettenhomotopie]},label=def:76]
+	Seien $(C_*,d_*)$ und $(C_*',d_*')$ $R$-Kettenkomplexe. 
+	Seien $f_*,g_* \colon (C_*,d_*) \to (C_*',d_*')$ $R$-Kettenabbildungen.\marginnote{Kettenhomotopie definiert eine Äquivalenzrelation wie in Aufgabe 2 von Blatt 5 gezeigt.}
+	Eine \Index{Kettenhomotopie} von $f_*$ nach $g_*$ ist eine Folge von $R$-linearen Abbildungen $h_n \colon C_n \to C_{n+1}'$, $n \in \mathbb{N}$, sodass für alle $n$ gilt:
+	\[
+		d_{n+1}' \circ h_n + h_{n-1} \circ d_n = f_n - g_n
+	\] 
+	In diesem fall heißen $f_*$ und $g_*$ \Index{kettenhomotop}.
+\end{definition}
+\begin{figure}[th]
+	\centering{
+	\begin{tikzcd}[row sep=2.5em, column sep=3em]
+		C_{n-1} \drar["h_{n-1}"'] & C_n \lar["d_n"'] \dar[shift left,"f_n"] \dar[shift right,"g_n"'] \drar["h_n"] \\
+		& C_n' & C_{n+1}' \lar["d_{n+1}'"]
+	\end{tikzcd}
+	\caption{Diagramm zu \autoref{def:76} (Kettenhomotopie)}}
+\end{figure}
+
+\begin{proposition}[{name=[{Induzierte Abbildungen von kettenhomotopen Kettenabbildungen sind gleich}]}]
+	Seien $f_*,g_* \colon (C_*,d_*) \to (C_*',d_*')$ Kettenabbildungen. Sind $f_*$ und $g_*$ kettenhomotop, so gilt für alle $n$
+	\[
+		H_n(f_*) = H_n(g_*)
+	\]
+\end{proposition}
+\begin{beweis}
+	Sei $x \in H_n(C_*,d_*)$. Also $x=[v]$ mit $v \in \ker d_n \colon C_n \to C_{n-1}$. Dann gilt, da $v \in \ker d_n$
+	\begin{align*}
+		H_n(f_*)(x) = H_n(f_*) \enbrace*{[v]} = \benbrace*{f_n(v)}  &= \benbrace[\Big]{g_n(v) + {\underbrace{ d_{n+1}' \circ h_n(v)}_{\in \im d_{n+1}'}} + {\underbrace{h_{n-1} \circ d_n(v)}_{=0}}} \\[-1pt]
+		&= \benbrace*{g_n(v)} = H_n(g_*) \enbrace*{[v]} = H_n(g_*)(x) \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{lemma}[{name=[{Reduktion von \autoref{satz:73} auf Beweis eines Spezialfalles}]},label=lem:78]
+	Die Homotopieinvarianz von $H_n(-;R)$, also \autoref{satz:73}, folgt aus folgenden Spezialfall:
+	\begin{equation*}
+		\text{Für $i_0,i_1 \colon X \hookrightarrow X \times [0,1]$ gilt $i_0(x)= (x,0)$, $i_1(x)=(x,1)$ $\implies$ $(i_0)_* = (i_1)_*$} \label{eq:78} \tag{\#}
+	\end{equation*}
+\end{lemma}
+\begin{beweis}
+	Sei $H \colon X \times [0,1] \to Y$ eine Homotopie zwischen $f,g \colon X \to Y$, also $f = H \circ i_0$ und $g = H \circ i_1$. Dann folgt mittels Funktorialität 
+	\[
+		f_* = (H \circ i_0)_* = H_* \circ (i_0)_* = H_* \circ (i_1)_* = (H \circ i_1)_* = g_* \qedhere
+	\]
+\end{beweis}
+
+\begin{bemerkung}[{name=[{Bemerkung zum Vorgehen beim Beweis von \textbf{[\#]}}]},label=bem:79]
+	Zum Beweis von \eqref{eq:78} werden wir eine explizite Kettenhomotopie $h_*$ zwischen $C_*(i_0;R)$ und $C_*(i_1;R)$ konstruieren. 
+	Wir brauchen also $h_n \colon C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ für alle $n \in \mathbb{N}$ mit 
+	\begin{equation*}
+		\partial_{n+1} \circ h_n + h_{n-1} \circ \partial_n = C_n(i_0;R)- C_n(i_1;R). \label{eq:79} \tag{\#\#}
+	\end{equation*}
+\end{bemerkung}
+
+Wir besprechen  zunächst eine möglichen -- aber formal nicht korrekten -- Ansatz:
+Für $\sigma \colon \abs*{\Delta^n} \to X $ setze $h_n(\sigma) = \sigma \times \id_{[0,1]} \colon \abs*{\Delta^n} \times [0,1] \to X \times [0,1]$. 
+Dann ist \enquote{$h_{n-1}(\partial_n \sigma) = \partial_n \sigma \times \id_{[0,1]}$} und 
+\[
+	\partial_{n+1}(h_n \sigma) = \partial_{n+1}(\sigma \times \id_{[0,1]}) = (\sigma \times \id)\Big|_{\partial (\abs*{\Delta^n} \times [0,1] )} = \partial_n \sigma \times \id_{[0,1]} + i_0 \sigma + i_1 \sigma
+\]
+da $\partial \enbrace*{\abs*{\Delta^n} \times [0,1]} = \partial \abs*{\Delta^n} \times [0,1] \,\dot{\cup}|, \abs*{\Delta^n} \times \set{0,1}$. \medskip
+
+\noindent Um daraus Sinn zu machen, zerlegen wir $\abs*{\Delta^n} \times [0,1]$ in eine Vereinigung von $(n+1)$-Simplizes. $\Delta^n \times [0,1]$ hat die folgende Form für
+$n \in \set{0,1,2}$:
+\begin{figure}[H]
+	\centering{
+	\scalebox{0.9}{\begin{tikzpicture}[scale=2.3]
+		\coordinate (1) at (0,1);
+		\coordinate (2) at (0,0);
+		
+		\coordinate (3) at (1.7,1);
+		\path (3) ++ (1,0) coordinate (4) ++ (0,-1) coordinate (6) ++ (-1,0) coordinate (5);
+		% \coordinate (4) at (3,1);
+		% \coordinate (5) at (2,0);
+		% \coordinate (6) at (3,0);
+		
+		\coordinate (7) at (4.5,1);
+		\path (7) ++ (0.9,-0.15) coordinate (8);
+		\path (7) ++ (0.5,0.18) coordinate (9);
+		\path (7) ++ (0,-1) coordinate (10);
+		\path (8) ++ (0,-1) coordinate (11);
+		\path (9) ++ (0,-1) coordinate (12);
+		
+		\draw[thick] (2) -- (1) node[above, yshift=0.4cm]{$\Delta^0$} node[midway, left, xshift=-0.3cm]{$[0,1]$};
+		
+		\draw[thick] (3) node[left]{$(0,0)$}-- (4) node[midway, above, yshift=0.4cm]{$\Delta^1$} node[right]{$(1,0)$} -- (6) node[right]{$(1,1)$} 
+		-- (5) node[left]{$(0,1)$} -- cycle;
+		
+		\draw[thick] (7) node[left]{$(0,0)$} node[above, yshift=0.4cm, xshift=0.9cm]{$\Delta^2$} -- (8) node[right]{$(2,0)$} -- (9) node[right,yshift=2pt]{$(1,0)$} -- cycle;
+		
+		\draw[thick] (7) -- (10) node[left]{$(0,1)$} -- (11) node[right]{$(2,1)$} -- (8);
+		\draw[thick, dashed] (10) -- (12) node[above left]{$(1,1)$} -- (9);
+		\draw[thick, dashed] (12) -- (11);
+		
+		\foreach \x in {1,...,12}{
+			\filldraw (\x) circle(0.03);
+		}
+	\end{tikzpicture}}
+	\caption{$\Delta^n \times [0,1]$ für $n=0,1,2$}}
+\end{figure}
+\noindent Die Zerlegung in $3$-Simplizes ist für $\Delta^2 \times [0,1]$ gegeben durch
+\begin{figure}[H]
+	\centering{
+	\[
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2.3]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+			\draw[thick] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed] (10) -- (12) -- (9);
+			\draw[thick, dashed] (12) -- (11);
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+		\enspace =\enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2.3]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			\draw[very thick, Firebrick3] (7) -- (10) -- (11) -- (12) -- (7) -- (11) -- (12) -- (10) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2.3]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick, Goldenrod3] (7) -- (9) -- (12) -- (7) -- (11) -- (12) -- (9) -- (11) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}} 
+		\enspace\cup \enspace
+		\vcenter{\hbox{
+		\begin{tikzpicture}[scale=2.3]
+			\coordinate (7) at (0,1);
+			\path (7) ++ (0.9,-0.15) coordinate (8);
+			\path (7) ++ (0.5,0.18) coordinate (9);
+			\path (7) ++ (0,-1) coordinate (10);
+			\path (8) ++ (0,-1) coordinate (11);
+			\path (9) ++ (0,-1) coordinate (12);
+		
+			\draw[thick, gray] (7)  -- (8) -- (9) -- cycle;
+			\draw[thick, gray] (7) -- (10)  -- (11) -- (8);
+			\draw[thick, dashed, gray] (10) -- (12) -- (9);
+			\draw[thick, dashed, gray] (12) -- (11);
+			
+			\draw[very thick,RoyalBlue3] (7) -- (8) -- (9) -- (11) -- (7) -- (8) -- (11)-- (9) -- cycle;
+		
+			\foreach \x in {7,...,12}{
+				\filldraw (\x) circle(0.02);
+			}
+		\end{tikzpicture}
+		}}
+	\]
+	\caption{Zerlegung von $\Delta^2 \times [0,1]$ in $3$-Simplizes}}
+\end{figure}
+\noindent Dieses Vorgehen verallgemeinern wir jetzt für beliebiges $n \in \mathbb{N}$:
+
+\begin{definition}[{name=[Affin lineare Abbildungen zur Konstruktion der Kettenhomotopie]},label=def:710]
+	Für $j=0, \ldots ,n$ seien $k_{n,j} \colon \abs{\Delta^{n+1}} \to \abs{\Delta^n} \times [0,1]$ und $\iota_{n,j} \colon \abs*{\Delta^{n-1}} \to \abs*{\Delta^n}$\marginnote{$e_1, \ldots , e_n$ sind wieder die Einheitsvektoren von $\mathbb{R}^n$} die eindeutigen affin linearen Abbildungen, für die gilt:
+	\begin{align*}
+		k_{n,j}(e_0)&=(e_0,0) & \iota_{n,j}(e_0) &= e_0\\
+		k_{n,j}(e_1)&= (e_1,0) \enspace\ldots & \iota_{n,j}(e_1)&=e_1  \enspace \ldots \\
+		k_{n,j}(e_j)&= (e_j,0) & \iota_{n,j}(e_{j-1})&= e_{j-1}\\
+		k_{n,j}(e_{j+1})&= (e_j,1) \enspace\ldots & \iota_{n,j}(e_j)&= e_{j+1} \enspace \ldots \\
+		k_{n,j}(e_{n+1})&= (e_n,1)& \iota_{n,j}(e_{n-1}) &= e_n
+	\end{align*}
+\end{definition}
+
+\begin{lemma}[{name=[{Gleichungen für die Abbildungen aus \autoref{def:710}}]},label=lem:711]
+	Es gelten folgende fünf Gleichungen für die Abbildungen $k_{n,j}$ und $\iota_{n,j}$:
+	\begin{enumerate}[(i)]
+		\item Für $0 \le l < j \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l} \times \id_{[0,1]}} \circ k_{n-1,j-1}$
+		\item Für $1 \le j+1 < l \le n+1$ gilt $k_{n,j} \circ \iota_{n+1,l} = \enbrace*{\iota_{n,l-1} \times \id_{[0,1]}} \circ k_{n-1,j} $
+		\item Für $1 \le j+1 = l \le n$ gilt $k_{n,j} \circ \iota_{n+1,l} = k_{n,j+1} \circ \iota_{n+1,l}$
+		\item Für $l=0,j=0$ ist $k_{n,j} \circ \iota_{n+1,l} = i_1 :  \Delta^n \to \Delta^n \times [0,1]$
+		\item Für $l=n,j=n+1$ ist $k_{n,j} \circ \iota_{n+1,l} = i_0 : \Delta^n \to \Delta^n \times [0,1]$
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	Wir zeigen hier nur exemplarisch die erste Gleichung:
+	Die linke Seite der Gleichung entspricht
+		\[
+			\begin{tikzcd}[row sep=2.8em, column sep=0.5em, font=\small]
+				\abs*{\Delta^n} \dar["\iota_{n+1,l}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \drar[mapsto]& \cdots & e_j \drar[mapsto]& \cdots 
+				& e_n \drar[mapsto]& \\
+				\abs*{\Delta^{n+1}} \dar["k_{n,j}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto] & e_{l+1} \dar[mapsto]& e_{j} \dar[mapsto] 
+				& e_{j+1} \arrow[ddl,mapsto, bend left] & e_n & e_{n+1} \arrow[ddl,mapsto, bend left] \\
+				\abs*{\Delta^{n}} \times [0,1] && (e_0,0) & (e_{l-1},0) & (e_l,0) & (e_{l+1},0)& (e_j,0) & & \\
+				 &&  &  &  & & (e_j,1) & \cdots & (e_n,1)
+			\end{tikzcd}
+		\]
+		und die rechte Seite entspricht
+		\[
+			\begin{tikzcd}[row sep=2.8em, column sep=0.2em, font=\small]
+				\abs*{\Delta^n} \dar["k_{n-1,j-1}" description] && e_0 \dar[mapsto] & e_{l-1} \dar[mapsto] & e_l \dar[mapsto]& \cdots 
+				& e_{j-1} \dar[mapsto]& e_j \arrow[ddl,bend left,mapsto]& e_{j+1} \arrow[ddl,bend left,mapsto] & \cdots & e_n \arrow[ddl,mapsto,bend left] \\
+				\abs*{\Delta^{n-1}} \times [0,1] \arrow[dd,"\iota_{n,l}\times \id_{[0,1]}" description] && (e_0,0) \arrow[dd,mapsto] & (e_{l-1},0) \arrow[dd,mapsto] 
+				& (e_l,0) \arrow[ddr, mapsto] & \cdots & (e_{j-1},0) \arrow[dd, controls={+(225:1.2) and +(135:1.2)}, mapsto] &   &  & \cdots \\
+				 &&&&&& (e_{j-1},1) \arrow[dd, controls={+(-45:1) and +(45:1)}, end anchor={[xshift=2ex]north}, mapsto] & (e_{j},1) \arrow[dd, mapsto] & \cdots 
+				 & (e_{n-1},1) \arrow[dd,mapsto]\\
+				 \abs*{\Delta^n} \times [0,1] && (e_0,0)  & (e_{l-1},0) & (e_l,0) & (e_{l+1},0) &(e_j,0) & & & \\
+				 &&&&&& (e_j,1) & (e_{j+1},1) & \cdots & (e_n,1)
+			\end{tikzcd}
+		\]
+		Also folgt insgesamt die Gleichheit. Die anderen Gleichungen folgen genauso.
+\end{beweis}
+
+Damit können wir nun die im vorigen schon vereinfachte zentrale Aussage dieses Abschnitt beweisen:
+
+\begin{beweis}[{name={von \eqref{eq:79}}}]
+	Sei $h_n \colon C_n(X;R) \to C_{n+1}(X \times [0,1];R)$ definiert durch
+	\[
+		h_n(\sigma) := \sum_{j=0}^{n} (-1)^j \cdot \enbrace*{\sigma \times \id} \circ k_{n,j}
+	\]
+	$h_*$ ist nun die gesuchte Kettenhomotopie, da für jedes $n \in \mathbb{N}$ unter Anwendung der Gleichungen aus \autoref{lem:711} gilt:
+	\begin{align*}
+		\partial_{n+1} \enbrace[\big]{h_n(\sigma)} &= \partial_{n+1} \enbrace*{\sum_{j=0}^{n} (-1)^j \cdot (\sigma \times \id) \circ k_{n,j}} \\
+		&=  \sum_{l=0}^{n+1} \sum_{j=0}^{n} (-1)^{j+l} \cdot \enbrace*{ \sigma \times \id} \circ k_{n,j} \circ \iota_{n+1,l} \tag*{(nach Definition \ref{def:52})}\\
+		&= \smashoperator[r]{\sum_{0 \le l < j \le n}} \, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j-1} 
+		+ \enspace\smashoperator{\sum_{1 \le j+1 < l \le n+1}}\, (-1)^{j+l} \enbrace[\big]{(\sigma \circ \iota_{n,l-1}) \times \id} \circ k_{n-1,j} \\
+		& \quad + \smashoperator[r]{\sum_{1 \le j+1=l \le n}} \,(-1)^{j+l} (\sigma \times \id) \circ k_{n,j+1} \circ \iota_{n+1,l} 
+		+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \, (-1)^{j+l} (\sigma\times\id) \circ k_{n,j}\circ \iota_{n+1,l} \\
+		& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 
+		+ \smashoperator[r]{\sum_{n+1=j+1=l}}\, (-1)^{j+l} (\sigma \times \id) \circ i_0 \\
+		&= \smashoperator[r]{\sum_{0 \le l \le j \le n-1}}\, (-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} 
+		+ \enspace\smashoperator{\sum_{1 \le j+1 \le l \le n}} \,(-1)^{j+l+1} \enbrace[\big]{(\sigma \circ \iota_{n,l}) \times \id} \circ k_{n-1,j} \\
+		& \quad + \underbrace{\smashoperator[r]{\sum_{1 \le j=l \le n}}\, (-1)^{j+l-1} (\sigma \times \id) \circ k_{n,j} \circ \iota_{n+1,l} 
+		+ \smashoperator[r]{\sum_{1 \le j=l \le n}} \,(-1)^{j+l} (\sigma\times \id) \circ k_{n,j} \circ \iota_{n+1,l}}_{=0} \\
+		& \quad + \sum_{0=l=j}  (-1)^{j+l} (\sigma \times \id) \circ i_1 + \smashoperator[r]{\sum_{n+1=j+1=l}} (-1)^{j+l} (\sigma\times \id) \circ i_0 \\
+		&= - \smashoperator[r]{\sum_{\substack{0 \le l\le n \\ 0 \le j \le n-1}}} \,(-1)^{j+l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j} 
+		+ (\sigma\times \id) \circ i_1  - (\sigma\times \id) \circ i_0 \\
+		&= - \sum_{j=0}^{n-1} (-1)^j \sum_{l=0}^{n} (-1)^{l} \enbrace[\big]{ \enbrace*{\sigma \circ \iota_{n,l}} \times \id } \circ k_{n-1,j}
+		+ {\underbrace{(\sigma\times \id) \circ i_1}_{= i_1 \circ \sigma}}  - \underbrace{(\sigma\times \id) \circ i_0}_{= i_0 \circ \sigma} \\
+		&= - h_{n-1}(\partial_n \sigma) + C_n(i_1;R)(\sigma) - C_n(i_0;R)(\sigma) \qedhere  
+	\end{align*}
+\end{beweis}
+
+\begin{bemerkung}[{name=[Konstruktion einer Kettenhomotopie aus einer Homotopie]}]
+	Ist $H \colon X \times [0,1] \to Y$ eine Homotopie zwischen $f$ und $g$, so erhalten wir eine Kettenhomotopie $k$ zwischen $C_*(f;R)$ und $C_*(g;R)$ durch
+	\[
+		k_n(\sigma) := C_{n+1}(H;R) \circ h_n = \sum_{j=0}^{n} (-1)^j H \circ (\sigma \times \id) \circ k_{n,j}
+	\]
+\end{bemerkung}
+
+\newpage
+
+\section{Homologie von Paaren} % (fold)
+\label{sec:8}
+
+\begin{definition}[{name=[Paar von topologischen Räumen]}]
+	Sei $A$ ein Teilraum von $X$, dann heißt $(X,A)$ ein \Index{Paar von topologischen Räumen}. 
+	Eine Abbildung von Paaren $f \colon (X,A) \to (Y,B)$ ist eine stetige Abbildung $f \colon X \to Y$ mit $f(A) \subseteq B$. 
+	Manchmal schreiben wir $(f,f|_{A}) \colon (X,A) \to (Y,B)$. 
+	Die Kategorie von Paaren von topologischen Räumen bezeichnen wir mit $\TOP^2$.
+\end{definition}
+
+\begin{definition}[{name=[Singulärer Kettenkomplex und Homologiemodul von Paaren]}]
+	Sei $(X,A)$ ein Paar. Dann definieren wir den \bet{singulären Kettenkomplex}\index{singulärer Kettenkomplex!von Paaren} von $(X,A)$ über $R$ durch
+	\begin{align*}
+		C_n(X,A;R) &:= \nicefrac{C_n(X;R)}{C_n(A;R)} \\
+		\partial_n \enbrace[\big]{\sigma+ C_n(A;R)} &:= \partial_n \sigma + C_{n-1}(A;R)
+	\end{align*}
+	Dies ist wohldefiniert, da $\partial_n \enbrace[\big]{C_n(A;R)} \subseteq C_{n-1}(A;R)$. Weiter heißt
+	\[
+		H_n(X,A;R) := H_n \enbrace[\big]{C_*(X,A;R),\partial_*} 
+	\]
+	der \bet{$\mathbf{n}$-te singuläre Homologiemodul}\index{n-ter Homologiemodul@$n$-ter Homologiemodul!singulär, von Paaren} von $(X,A)$ mit Koeffizienten in $R$.
+\end{definition}
+
+\begin{bemerkung}[{name=[Der singuläre Kettenkomplex von Paaren definiert einen Funktor]}]
+	Der singuläre Kettenkomplex von Paaren definiert offensichtlich einen Funktor $\TOP^2 \to R\text{-}\textsc{Ketten}$.\marginnote{Homologie von Paaren ist auch wieder homotopieinvariant, wie in Aufgabe 1 von Blatt 7 gezeigt.} 
+	Durch Komposition mit Homologie (als Funktor $R\text{-}\textsc{Ketten} \to R\text{-}\MOD$) erhalten wir einen Funktor
+	\[
+		H_n(-,-;R) \colon \TOP^2 \longrightarrow R\text{-}\MOD
+	\]
+	Via $X \mapsto (X,\emptyset)$ können wir jeden Raum auch als Paar auffassen.
+	Somit sind Paare eine Verallgemeinerung von Räumen, passend dazu gilt auch $H_n(X,\emptyset;R) = H_n(X;R)$.
+\end{bemerkung}
+
+Es stellt sich nun die folgende Frage:
+Können wir $H_n(X,A;R)$ durch $H_n(X;R)$ und $H_n(A;R)$ ausdrücken? 
+\begin{description}
+	\item[Ansatz 1:] 
+	\[
+		H_n(X,A;R) \cong \nicefrac{H_n(X;R)}{H_n(A;R)}
+	\]
+	\faWarning \, Problem: $H_n(A;R)$ ist kein Untermodul von $H_n(X;R)$.
+	\item[Ansatz 2:] Ist $H_n(X;R) \to H_n(X,A;R)$ surjektiv?
+	
+	Sei $x \in H_n(X,A;R)$. Dann gibt es $\sigma + C_n(A;R) \in C_n(X,A;R)$ mit $\partial_n \enbrace[\big]{\sigma + C_n(A;R)} = 0$ und $x= [\sigma]$. Es ist 
+	$\sigma \in C_n(X;R)$, aber wir wissen nur $\partial_n \sigma \in C_{n-1}(A;R)$, nicht $\partial_n(\sigma)= 0$. \hfill {\large \faMehO}
+\end{description}
+
+\begin{beispiel}[{name=[{Homologie des Paares $(\abs*{\Delta^n}, \abs*{\partial \Delta^n})$}]}]
+	In $C_n \enbrace[\big]{\abs*{\Delta^n}, \abs*{\partial \Delta^n};R}$ gilt für $\sigma := \id \colon \abs*{\Delta^n} \to \abs*{\Delta^n}$, dass $\partial_n([\sigma])=0$ ist, da 
+	$\partial_n \sigma \in C_{n-1} \enbrace*{\abs*{\partial \Delta^n};R}$. Wir werden später sehen, dass $[\sigma]$ den Homologiemodul
+	\[
+		H_n \enbrace[\big]{\abs*{\Delta^n}, \abs*{\partial \Delta^n};R  } \cong R 
+	\]
+	erzeugt.
+\end{beispiel}
+
+\begin{definition}[{name=[{Lange exakte Sequenz von $R$-Moduln}]}]
+	Eine Folge von $R$-linearen Abbildungen zwischen $R$-Moduln $M_i$
+	\[
+		\begin{tikzcd}
+			\cdots \rar & M_n \rar["f_n"]  & M_{n-1} \rar["f_{n-1}"] & M_{n-2} \rar & \cdots \rar & M_1 \rar & M_0
+		\end{tikzcd}
+	\]
+	heißt \Index{lange exakte Folge}, wenn sie exakt an jeder Stelle $M_i$ ist, d.h. für alle $i$ gilt $\im f_i = \ker f_{i-1}$.
+\end{definition}
+
+\begin{satz}[{name=[Existenz der Paarsequenz]},label=satz:86]
+	Es gibt eine natürliche Transformation $\partial_n$ von $(X,A) \mapsto H_n(X,A;R)$ nach $(X,A) \mapsto H_{n-1}(A;R)$, sodass für jedes Paar $(X,A)$
+	\begin{equation*}
+		\begin{tikzcd}[row sep=1em, column sep=2.4em]
+			\cdots  \rar["\partial_{n+1}"] & H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] 
+			& H_{n-1}(A;R) \rar & \cdots \\
+			\cdots \rar["\partial_1"] & H_0(A;R) \rar & H_0(X;R) \rar & H_0(X,A;R) \rar & 0
+		\end{tikzcd} \label{eq:88}\tag{*}
+	\end{equation*}
+	eine lange exakte Folge ist. 
+	Dabei sind $i \colon A \hookrightarrow X$ und $j \colon (X,\emptyset) \hookrightarrow (X,A)$ die Inklusionen. Das bedeutet: 
+	
+	Für jedes Paar $(X,A)$ haben wir eine $R$-lineare Abbildung $\partial_n \colon H_n(X,A;R) \to H_{n-1}(A;R)$, sodass für jede Abbildung $(f,f|_{A}) \colon (X,A) \to (Y,B)$ von Paaren folgendes Diagramm kommutiert
+	\[
+		\begin{tikzcd}
+			H_{n}(X,A;R) \rar["\partial_n"] \dar["{(f,f|_A)_*}"] & H_{n-1}(A;R) \dar["{(f|_A)_*}"] \\
+			H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R)
+		\end{tikzcd}
+	\]
+\end{satz}
+\begin{beweis}
+	\emph{siehe Seite~\pageref{bew:86}.}
+\end{beweis}
+
+\begin{korollar}[{name=[{Homologiemodul wenn $A$ kontraktibel ist}]}]
+	\leavevmode
+	\begin{enumerate}[(1)]
+		\item Ist die Inklusion $i \colon A \to X$ eine Homotopieäquivalenz, so ist $H_n(X,A;R)= 0$ für alle $n$.
+		\item Sei $A$ kontraktibel. Dann gilt für alle $n \ge 1$. $H_n(X;R) \cong H_n(X,A;R)$
+	\end{enumerate}
+\end{korollar}
+\begin{beweis}
+	\begin{enumerate}[(1)]
+		\item Betrachte den folgenden Ausschnitt aus der langen exakten Folge:
+		\[
+			\begin{tikzcd}
+				H_n(A;R) \rar["i_*"] & H_n(X;R) \rar["j_*"] & H_n(X,A;R) \rar["\partial_n"] & H_{n-1}(A;R) \rar["i_*"] & H_n(X;R)
+			\end{tikzcd}
+		\]
+		Nach \autoref{kor:74} ist $i_* \colon H_n(A;R) \to H_n(X;R)$ ein Isomorphismus. Wegen der Exaktheit gilt
+		$\ker j_* = \im i_* = H_n(X;R)$, also folgt $j_* = 0$. Da $\im \partial_n = \ker i_* = 0$, folgt $\partial_n=0$. Nun ist 
+		\[
+			H_n(X,A;R) = \ker \partial_n = \im j_* = 0
+		\]
+		\item Folgt leicht aus \autoref{kor:75} und der Exaktheit der Paarsequenz \eqref{eq:88}. Für $n=1$ brauchen wir außerdem, dass $\partial_1$ für $A$ wegzusammenhängend
+		trivial ist. Dies folgt aus Aufgabe 1a) von Blatt 6, denn dort wurde gezeigt, dass $i_* \colon H_0(A) \to H_0(X)$ injektiv ist. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{definition}[{name=[Kurze exakte Folge von Kettenkomplexen]}]
+	Seien 
+	\begin{equation*}
+		\begin{tikzcd}
+			(C_*,d_*) \rar["i_*"] & (C_*',d_*') \rar["p_*"] & (C_*'',d_*'') 
+		\end{tikzcd} \label{eq:810}\tag{\#}
+	\end{equation*}
+	\hyperref[def:61]{$R$-Kettenabbildungen}. Ist für jedes $n$ die Folge
+	\(
+		\begin{tikzcd}
+			C_n \rar["i_n"] & C_n' \rar["p_n"] & C_n''
+		\end{tikzcd}
+	\)
+	kurz exakt, so heißt \eqref{eq:810} eine \Index{kurze exakte Folge von Kettenkomplexen}.
+\end{definition}
+
+\begin{beispiel}
+	Für jedes Paar $(X,A)$ ist 
+	\[
+		\begin{tikzcd}
+			\enbrace*{C_*(A;R),\partial_*} \rar["i_*"] & \enbrace*{C_*(X;R),\partial_*} \rar["j_*"] & \enbrace*{C_*(X,A;R),\partial_*}   
+		\end{tikzcd}
+	\]
+	eine kurze exakte Folge von $R$-Kettenkomplexen.
+\end{beispiel}
+
+\begin{satz}[{name={Schlangenlemma}},label=satz:810]
+	Sei 
+	\[
+		\begin{tikzcd}
+			(C_*,d_*) \rar["i_*"] & (C_*',d_*') \rar["p_*"] & (C_*'',d_*'')
+		\end{tikzcd}
+	\]
+	eine kurze exakte Folge von $R$-Kettenkomplexen.
+	\begin{enumerate}[a)]
+		\item Für jedes $n$ gibt es eine eindeutige wohldefinierte $R$-lineare Abbildung $\partial_n \colon H_n(C_*'',d_*'') \to H_{n-1}(C_*,d_*)$ mit:
+		Für $v' \in C_n'$ mit $d_n'' \circ p_n(v')=0$ ist 
+		\[
+			\partial_n \enbrace[\Big]{\underbrace{\benbrace*{p_n(v')}}_{\mathclap{\in H_n(C_*'',d_*'')}} } = [v] \in H_{n-1}(C_*,d_*)
+		\]
+		wobei $v \in C_{n-1}$ bestimmt ist durch $i_{n-1}(v)= d_n'(v')$.
+		\item 
+		\[
+			\begin{tikzcd}
+				\cdots \rar["\partial_{n+1}"] & H_n(C_*,d_*) \rar["i_*"] & 
+					H_n(C_*',d_*') \arrow[d, phantom, ""{coordinate, name=Z}] \rar["p_*"] 
+						& H_n(C_*'',d_*'') \arrow[dll, "\partial_n" very near start, rounded corners, to path={
+																		-- ([xshift=2ex]\tikztostart.east)
+																		|- (Z) [near end]\tikztonodes
+																		-| ([xshift=-2ex]\tikztotarget.west)
+																		-- (\tikztotarget)
+																		}] & \\
+				& H_{n-1}(C_*,d_*) \rar["i_*"] 
+					& H_{n-1}(C_*',d_*') \rar["p_*"] \arrow[d, phantom, ""{coordinate, name=R}]
+						& \quad \cdots  \quad \arrow[dll, "\partial_1" very near start, rounded corners, to path={
+																		-- ([xshift=2ex]\tikztostart.east)
+																		|- (R) [near end]\tikztonodes
+																		-| ([xshift=-2ex]\tikztotarget.west)
+																		-- (\tikztotarget)
+																		}]& \\
+				& H_0(C_*,d_*) \rar["i_*"] & H_0(C_*',d_*') \rar["p_*"] & H_0(C_*'',d_*'') \rar & 0
+			\end{tikzcd}
+		\]
+		ist eine lange exakte Folge.
+	\end{enumerate}
+\end{satz}
+\begin{beweis}
+	\[
+		\begin{tikzcd}[row sep=2em, column sep=3em]
+			C_{n+1} \rar["i_{n+1}"] \dar["d_{n+1}"] & C_{n+1}' \rar["p_{n+1}"] \dar["d_{n+1}'"] & C_{n+1}'' \dar["d_{n+1}''"] \\
+			C_n \rar["i_n"] \dar["d_{n}"]& C_n' \rar["p_n"] \dar["d_{n}'"]& C_n'' \dar["d_{n}''"]\\
+			C_{n-1} \rar["i_{n-1}"] \dar["d_{n-1}"]& C_{n-1}'  \rar["p_{n-1}"] \dar["d_{n-1}'"]& C_{n-1}'' \dar["d_{n-1}''"]\\
+			C_{n-2} \rar["i_{n-2}"]& C_{n-2}' \rar["p_{n-2}"] & C_{n-2}''
+		\end{tikzcd}
+	\]
+	\begin{enumerate}[a)]
+		\item Sei $x'' \in H_n(C_*'',d_*'')$, also $x'' = [v'']$ mit $v'' \in \ker d_n''$. Da $p_n$ surjektiv ist, existiert $v' \in C_n'$ mit $p_n(v')=v''$. Es gilt
+		\[
+			p_{n-1} \circ d_n'(v') = d_n'' \circ p_n(v') = d_n''(v'') = 0
+		\]
+		Also ist $d_n'(v') \in \ker p_{n-1}$. Weiter gilt $\ker p_{n-1}= \im i_{n-1}$, also existiert ein $ v\in C_{n-1}$ mit $i_{n-1}(v)= d_n'(v')$. Dann gilt
+		\[
+			i_{n-2} \enbrace[\big]{d_{n-1}(v)} = d'_{n-1} \enbrace[\big]{i_{n-1}(v)} = d_{n-1}' \enbrace[\big]{d_n'(v')} = 0   
+		\]
+		Da $i_{n-2}$ injektiv ist, folgt somit $d_{n-1}(v)=0$. Also setzen wir $\partial_n(x'') := [v] \in H_{n-1}(C_*,d_*)$. 
+	
+		Es bleibt zu zeigen, dass $[v] \in H_{n-1}(C_*,d_*)$ unabhängig von der Wahl von $v''$ und $v'$ ist.
+		Seien $w'' \in \ker d_n''$, $w' \in C_n'$ und  $w \in C_{n-1}$ mit $x''=[w'']$, $p_n(w')=w''$ und $i_{n-1}(w)= d_n'(w')$.
+		Es ist $[v'']=[w'']$, also existiert ein $a'' \in C_{n+1}''$ mit $d_{n+1}'' (a'')=v'' - w''$. $p_{n+1}$ ist surjektiv, also existiert $a' \in C_{n+1}'$ mit
+		$p_{n+1}(a')=a''$. Es gilt
+		\[
+			p_n \enbrace[\big]{v'-w'- d_{n+1}'(a')} = v'' - w'' - \underbrace{d_{n+1}'' \enbrace[\big]{p_{n+1}(a')}}_{=v''- w''} = 0
+		\]
+		Mit $\ker p_n = \im i_n$ folgt die Existenz von $a \in C_n$ mit $i_n(a)=v'- w' - d_{n+1}(a')$. Es gilt nun %bleibt zu zeigen: $d_n(-a)= v-w$.
+		\begin{align*}
+			i_{n-1} \enbrace[\big]{d_n(a)- (v-w)} & = i_{n-1} \enbrace[\big]{d_n(a)} - i_{n-1}(v-w) \\ &= d_n' \enbrace[\big]{i_n(a)} - \enbrace[\big]{d_n'(v')- d_n'(w')}  \\  
+			&= d_n' \enbrace*{ -d_{n+1}'(a') + v'-w'} - d_n' \enbrace*{v' - w'}  \\
+			&= -d_n' d_{n+1}' (a') + d_n'(v'- w') -  d_n'(v'-w') = 0
+		\end{align*}
+		Da $i_{n-1}$ injektiv ist, folgt $d_n(a)- (v-w) = 0$, also $d_n(a)=(v-w)$. Es folgt $[v]=[w]$.
+		\item Exaktheit der langen Folge:
+		\begin{description}[wide=0cm]
+			\item[{$\boxed{\im (i_n)_* = \ker (p_n)_*}$ :}] 
+			\enquote{$\subseteq$} folgt aus $(p_n)_* \circ (i_n)_* = \enbrace*{p_n \circ i_n}_* = (0)_* =0 $.
+		
+			Für \enquote{$\supseteq$} betrachte $x' \in \ker (p_n)_*$, wobei $x'= [v']$ mit $v' \in C_n'$ und $d_n'(v')=0$.
+			Da nun $\benbrace*{p_n(v')}= (p_n)_* [x'] = 0$ ist, gibt es $a''\in C_n''$ mit $d_{n+1}''(a'') = p_n(v')$.
+			Da $p_{n+1}$ surjektiv ist, existiert $a' \in C_{n+1}'$ mit $p_{n+1}(a')=a''$. Dann gilt
+			\[
+				p_n \enbrace*{v' - d_{n+1}'(a')} =p_n(v') - p_n \circ d_{n+1}'(a') = p_n(v') -
+				\underbracket[0.7pt][2pt]{d_{n+1}''\enbrace[\Big]{\underbracket[0.7pt][2pt]{p_{n+1}(a')}_{=a''}}}_{=p_n(v')} = 0 
+			\]
+			Da $\ker p_n = \im i_n$, gibt es $a \in C_n$ mit $i_n(a)= v'- d_{n+1}'(a')$. Nun ist
+			\[
+				i_{n-1} \enbrace[\big]{d_n(a)} = d_n' \enbrace[\big]{i_n(a)} = d_n' \enbrace[\big]{v'- d_{n+1}'(a')}  = d_n'(v') = 0 
+			\]
+			Da $i_{n-1}$ injektiv ist, folgt $d_n(a)=0$. Insbesondere $[a] \in H_n \enbrace*{C_*,d_*}$. Nun ist 
+			\[
+				(i_n)_* [a] = [i_n(a)] = \benbrace*{v'- d_{n+1}'(a')} = [v'] = x' 
+			\]
+			Also ist $x' \in \im (i_n)_*$.
+			\item[{$\boxed{\im (p_n)_*=\ker \partial_n}$ :}] Für \enquote{$\subseteq$} betrachte $x'' \in \im (p_n)_*$. Dann gibt es $v' \in C_n'$ mit $d_n'(v')=0$ und
+			$x'' = [p_n(v')]$. Es ist $d_n'(v') \in \ker p_{n-1} = \im i_{n-1}$, also existiert ein $v \in C_{n-1}$ mit $i_{n-1}(v)=d_n'(v')$. Es gilt nun $\partial_n(x'')=[v]$.
+			Wegen der Injektivität von $i_{n-1}$ ist $v=0$, also $\partial_n(x'')=[0]$.
+		
+			Sei nun umgekehrt $x'' \in \ker \partial_n$. Wir finden wieder $v' \in C_n'$ und $v \in C_{n-1}$ mit $x''=[p_n(v')]$, $i_{n-1}(v)=d_n'(v')$ und 
+			$0=\partial_n(x'')= [v]$. Daher gibt es $a \in C_n$ mit $d_n(a)=v$. Es folgt
+			\[
+				d_n' \enbrace[\big]{v' - i_n(a)} = i_{n-1}(v) - i_{n-1}\enbrace[\big]{d_n(a)} = 0 
+			\]
+			Es gilt nun $(p_n)_* \benbrace[\big]{v' -i_n(a)}  = \benbrace[\big]{p_n(v') - p_n(i_n(a))} = \benbrace*{p_n(v')} = x''$.
+			\item[{$\boxed{\im \partial_n=\ker (i_{n-1})_*}$ :}] Für \enquote{$\subseteq$} sei $x \in \im \partial_n$. Dann gibt es wieder $v' \in C_n'$ und $v \in C_{n-1}$ mit
+			$d_n''\enbrace*{p_n(v')}=0$, $d_n'(v')=i_{n-1}(v)$ und $x=[v]$. Dann gilt
+			\[
+				(i_{n-1})_*(x) = (i_{n-1})_*[v] = [i_{n-1}(v)] = \benbrace*{d_n'(v')} = 0 
+			\]
+		
+			Sei nun umgekehrt $x \in \ker (i_{n-1})_*$ und $v \in C_{n-1}$ mit $d_{n-1}(v)=0$ und $x=[v]$. Da nun $(i_{n-1})_*(x) = \benbrace*{i_{n-1}(v)}$ und 
+			$x \in \ker (i_{n-1})_*$  ist, gibt es $v' \in C_n'$ mit $d_n'(v')=i_{n-1}(v)$. Es gilt nun
+			\[
+				d_n'' \enbrace*{p_n(v')} = p_{n-1} \enbrace*{d_n'(v')} = p_{n-1} \enbrace*{i_{n-1}(v)} = 0 
+			\]
+			Daraus folgt $\partial_n \benbrace*{p_n(v')}=x$. \qedhere
+		\end{description}
+	\end{enumerate}
+\end{beweis}
+
+\begin{beweis}[name={von \autoref{satz:86}},label=bew:86]
+	Für jedes Paar $(X,A)$ ist die Folge  der singulären Kettenkomplexe
+	\[
+		\begin{tikzcd}
+			\enbrace*{C_*(A;R), \partial_*^A} \rar["C_*(i;R)"] &  \enbrace*{C_*(X;R), \partial_*^X} \rar["C_*(j;R)"] & \enbrace*{C_*(X,A;R), \partial_*^{(X,A)}}
+		\end{tikzcd}
+	\]
+	kurz exakt. Das Schlangenlemma {\ref{satz:810}} produziert $\partial_n \colon H_n(X,A;R) \to H_{n-1}(A;R)$ und die lange exakte Sequenz \eqref{eq:88}.
+	Es bleibt zu zeigen, dass die Randabbildungen aus dem Schlangenlemma wie behauptet eine natürliche Transformation definieren: Sei $(f,f|_{A}) \colon (X,A) \to (Y,B)$ eine
+	Abbildung von Paaren. Zu zeigen ist, dass
+	\[
+		\begin{tikzcd}
+			H_n(X,A;R) \rar["\partial_n"]  \dar["{(f,f|_A)_*}"]& H_{n-1}(A;R) \dar["{(f|_{A})_*}"] \\
+			H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R)
+		\end{tikzcd}
+	\]
+	kommutiert. Sei $x'' \in H_n(X,A;R)$. Sei $v' \in C_n(X;R)$ mit $\partial_n^X(v') \in C_n(A;R)$ und $\benbrace*{v' + C_n(A;R)}= x''$. Dann ist 
+	$\partial_n(x'')= \benbrace*{\partial_n^X(v')} \in H_{n-1}(A;R)$. Dann ist 
+	\[
+		\enbrace*{f,f|_A}_*(x'') =  \enbrace*{f,f|_A}_* \benbrace[\big]{v' + C_n(A;R)}  = \benbrace[\big]{f_*(v')+ C_n(B;R)} \in H_n(Y,B;R) 
+	\]
+	Es ist 
+	\(
+		\partial_n^Y \enbrace[\big]{f_*(v')} = \enbrace*{f|_A}_* \enbrace[\Big]{\underbrace{\partial_n^X(v')}_{\in C_n(A;R)}} \in C_n(B;R)   
+	\).
+	Also
+	\begin{align*}
+		\partial_n^Y \enbrace[\big]{\enbrace*{f,f|_A}_*(x'') } = \benbrace[\Big]{\partial_n^Y \enbrace[\big]{f_*(v')} } = \benbrace*{f_* \circ \partial_n^X(v')} = f_* \circ 
+		\partial_n(x'') \qedhere  
+	\end{align*}
+\end{beweis}
+
+\begin{bemerkung}
+	Für eine Abbildung $(f,f|_A) \colon (X,A) \to (Y,B)$ erhalten wir ein kommutierendes Diagramm:
+	\[
+		\begin{tikzcd}[row sep=2.2em]
+			\cdots \rar["\partial_{n+1}"] & H_n(A;R) \rar["i^A_*"] \dar["(f|_A)_*"] & H_n(X;R) \rar["j^X_*"] \dar["f_*"]& H_n(X,A;R) \rar["\partial_n"] \dar["{(f,f|_A)_*}"]  
+			& H_{n-1}(A;R) \rar \dar["(f|_A)_*"] & \cdots \\
+			\cdots \rar & H_n(B;R) \rar["i^B_*"] & H_n(Y;R) \rar["j^Y_*"] & H_n(Y,B;R) \rar["\partial_n"] & H_{n-1}(B;R) \rar & \cdots
+		\end{tikzcd}
+	\]
+\end{bemerkung}
+
+\begin{lemma}[{name={Fünfer-Lemma}}]
+	Seien die Zeilen in folgendem kommutativen Diagramm von $R$-Moduln exakt.
+	\[
+		\begin{tikzcd}
+			A_4 \rar["\alpha_4"] \dar["f_4" swap, "\cong"] & A_3 \rar["\alpha_3"] \dar["f_3" swap, "\cong"] & A_2 \rar["\alpha_2"]  \dar[Firebrick3, "f_2" swap] & A_1 \rar["\alpha_1"] \dar["f_1" swap, "\cong"] & A_0  \dar["f_0" swap, "\cong"]\\
+			B_4 \rar["\beta_4"] & B_3 \rar["\beta_3"] & B_2 \rar["\beta_2"] & B_1 \rar["\beta_1"] & B_0 
+		\end{tikzcd}
+	\]
+	Sind $f_4, f_3, f_1$ und $f_0$ Isomorphismen, so ist auch $f_2$ ein Isomorphismus.
+\end{lemma}
+\begin{beweis}
+	\begin{description}
+		\item[Injektivität:] Sei $a_2 \in A_2$ mit $f_2(a_2)=0$. Wir erhalten 
+		\[
+			f_1 \enbrace[\big]{\alpha_2(a_2)} = \beta_2 \enbrace[\big]{f_2(a_2)} = \beta_2(0)=0. 
+		\]
+		Da $f_1$ ein Isomorphismus ist, folgt $\alpha_2(a_2)=0$. Damit ist $a_2 \in \ker \alpha_2 = \im \alpha_3$, also existiert $a_3 \in A_3$ mit $\alpha_3(a_3)= a_2$. Es gilt
+		\[
+			\beta_3 \enbrace[\big]{f_3(a_3)} = f_2 \enbrace[\big]{\alpha_3(a_3)} = f_2(a_2)=0  
+		\]
+		Also ist $f_3(a_3) \in \ker \beta_3 = \im \beta_4$. Da $f_4$ Isomorphismus ist, gibt es $a_4 \in A_4$ mit $\beta_4 \enbrace[\big]{f_4(a_4)} = f_3(a_3)$. Nun gilt
+		\[
+			f_3 \enbrace[\big]{\alpha_4(a_4)- a_3} = f_3 \enbrace[\big]{\alpha_4(a_4)} - f_3(a_3) = \beta_4 \enbrace[\big]{f_4(a_4)} - f_3(a_3) = f_3(a_3)- f_3(a_3) =0
+		\]
+		Da $f_3$ ein Isomorphismus ist, folgt nun $\alpha_4(a_4)=a_3$. Nun ist 
+		\[
+			a_2= \alpha_3(\alpha_3)= \alpha_3 \enbrace[\big]{\alpha_4(a_4)} = \underbrace{\alpha_3 \circ \alpha_4}_{=0}(a_4) =0
+		\]
+		\item[Surjektivität:] Sei $b_2 \in B_2$. Fall 1: $\beta_2(b_2)=0$. Da $\im \beta_3 = \ker \beta_2$ und $f_3$ Isomorphismus, existiert $a_3 \in A_3$ mit
+		$\beta_3 \enbrace[\big]{f_3(a_3)} = b_2$. Also ist $b_2= \beta_3 \enbrace[\big]{f_3(a_3)} = f_2  \enbrace[\big]{\alpha_3(a_3)} \in \im f_2$. 
+	
+		Ist $b_2$ beliebig, so genügt es zu zeigen: Es existiert ein $a_2 \in A_2$ mit $\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} =0$. $f_1$ ist ein Isomorphismus, also existiert 
+		ein $ a_1 \in A_1$ mit $f_1(a_1) = \beta_2(b_2)$. Dann folgt
+		\[
+			f_0 \enbrace[\big]{\alpha_1(a_1)} = \beta_1 \enbrace[\big]{f_1(a_1)} = \beta_1 \enbrace[\big]{\beta_2(b_2)} = \underbrace{\beta_1 \circ \beta_2}_{=0} (b_2)=0
+		\]
+		Da $f_0$ ein Isomorphismus ist, folgt $\alpha_1(a_1)=0$. Da $\ker \alpha_1 = \im \alpha_2$, folgt $\alpha_2(a_2)=a_1$. Es gilt nun
+		\begin{align*}
+			\beta_2 \enbrace[\big]{b_2 - f_2(a_2)} = \beta_2(b_2) - \beta_2 \enbrace[\big]{f_2(a_2)} &= \beta_2(b_2) - f_1 \enbrace[\big]{\alpha_2(a_2)} \\ 
+			&= \beta_2(b_2) - f_1(a_1)
+			= \beta_2(b_2) - \beta_2(b_2) =0 \qedhere
+		\end{align*}
+	\end{description}
+\end{beweis}
+
+\begin{lemma}[{name={\enquote{2 von 3}}}]
+	Sei $f \colon (X,A) \to (Y,B)$ eine Abbildung von Paaren. Seien von den drei Abbildungen
+	\begin{enumerate}[(i)]
+		\item $(f|_A)_* \colon  H_n(A;R) \to H_n(B;R)$
+		\item $f_* \colon H_n(X;R) \to H_n(Y;R)$
+		\item $(f,f|_A)_* \colon H_n(X,A;R) \to H_n(Y,B;R)$
+	\end{enumerate}
+	zwei für jeweils alle $n$ Isomorphismen. Dann ist auch die dritte für alle $n$ ein Isomorphismus.
+\end{lemma}
+\begin{beweis}
+	Da die Randabbildung in der Paarfolge eine natürliche Transformation ist, erhalten wir ein kommutatives Leiterdiagramm:
+	\[
+		\begin{tikzcd}[column sep=1.7em, font=\small]
+			H_{n+1}(A) \rar \dar["{(f|_A)_*}"] & H_{n+1}(X) \rar \dar["f_*"] & H_{n+1}(X,A) \rar["\partial_{n+1}"] \dar["{(f,f|_A)_*}"] & H_n(A) \rar \dar["(f|_A)_*"] & H_n(X) \rar \dar["f_*"] & H_n(X,A) \rar["\partial_n"] \dar["{(f,f|_A)_*}"] & H_{n-1}(A) \dar["{(f|_A)_*}"] \\
+			H_{n+1}(B) \rar & H_{n+1}(Y) \rar & H_{n+1}(Y,B) \rar["\partial_{n+1}"] & H_n(B) \rar & H_n(Y) \rar & H_n(Y,B) \rar["\partial_n"] & H_{n-1}(B)
+		\end{tikzcd}\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+	\]
+	Da die Zeilen lang exakt sind, folgt die Behauptung aus dem Fünfer-Lemma.
+\end{beweis}
+
+
+
+
+
+
+
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
 \printindex
 \listoffigures
-% \todototoc
-% \listoftodos[To-do's und andere Baustellen]
+\todototoc
+\listoftodos[To-do's und andere Baustellen]
 \end{document}
