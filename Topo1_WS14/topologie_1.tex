@@ -128,7 +128,7 @@ Es ergeben sich dann schöne topologische Anwendungen, wie zum Beispiel die topo
 	Kleine Kategorien und Funktoren bilden die Kategorie $\KAT$.
 \end{beispiel}
 
-\begin{definition}[{name=[natürliche Transformation]}]
+\begin{definition}[{name=[natürliche Transformation]},label=def:16]
 	Seien $F,G \colon \mathcal{C} \to \mathcal{D}$ zwei Funktoren. 
 	Eine \Index{natürliche Transformation} $\tau \colon F \to G$ ordnet jedem $C \in \Obj(\mathcal{C})$ einen Morphismus $\tau_C \colon F(C) \to G(C)$ in $\mathcal{D}$ zu, sodass für jedes $f \colon C \to C'$ in $\mathcal{C}$
 	\[
@@ -296,7 +296,7 @@ Wir werden in dieser Vorlesung weitere Funktoren und Methoden für ihre Berechnu
 	Dann ist $K$ ein Unterkomplex von $\Delta^V$.
 \end{definition}
 
-\begin{definition}[{name=[simpliziale Abbildung]}]
+\begin{definition}[{name=[simpliziale Abbildung]},label=def:25]
 	Eine \Index{simpliziale Abbildung} $f \colon K_1=(V_1, \Sigma_1) \to K_2=(V_2, \Sigma_2)$ zwischen simplizialen Komplexen ist eine Abbildung $f \colon V_1 \to V_2$, sodass $f(\sigma_1) \in \Sigma_2$ für alle $\sigma_1 \in \Sigma_1$. 
 	Simpliziale Komplexe zusammen mit simplizialen Abbildungen bilden eine Kategorie $\SIMP$.
 \end{definition}
@@ -463,7 +463,7 @@ Selbstverständlich funktioniert dies auch bei dreidimensionalen Komplexen:
 	\end{tikzpicture}}} } &= 6- 12  +8 = 2 
 \end{align*}
 
-\begin{satz}
+\begin{satz}[{name=[die Eulercharakteristik ist eine topologische Invariante]}]
 	Seinen $K$ und $K'$ endliche simpliziale Komplexe. 
 	Gilt $\abs*{K} \cong \abs*{K'}$, so gilt 
 	\[
@@ -471,8 +471,7 @@ Selbstverständlich funktioniert dies auch bei dreidimensionalen Komplexen:
 	\]
 \end{satz}
 \begin{beweis}
-	% \emph{Siehe \ref{sub:1210}.}
-	\todo{auskommentieren}
+	\emph{Siehe \ref{kor:129}.}
 \end{beweis}
 
 Die Euler-Charakteristik ist also eine topologische Invariante von simplizialen Komplexen. 
@@ -2083,8 +2082,1132 @@ Können wir $H_n(X,A;R)$ durch $H_n(X;R)$ und $H_n(A;R)$ ausdrücken?
 	Da die Zeilen lang exakt sind, folgt die Behauptung aus dem Fünfer-Lemma.
 \end{beweis}
 
+\newpage
+
+\section{Ausschneidung und die Mayer-Vietoris Folge} % (fold)
+\label{sec:9}
+
+\begin{satz}[{name={Ausschneidungsisomorphismus}},label=satz:91]
+	Sei $(X,A)$ ein Paar und $L \subseteq A$, sodass der Abschluss $\overline{L}$ von im Inneren $\mathring{A}$ von $A$ liegt. 
+	Dann induziert die Inklusion $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphismus $j_* \colon H_n(X \setminus L, A \setminus L;R) \to H_n(X,A;R)$.
+\end{satz}
+\begin{beweis}
+	% \emph{Siehe Kapitel \ref{sec:13}.}
+	\todo{auskommentieren}
+\end{beweis}
+
+\begin{satz}[{name={Mayer-Vietoris-Folge}}]
+	Seien $A,B \subseteq X$ offen und $X=A \cup B$.\marginnote{Für simpliziale Homologie gibt es auch eine Mayer-Vietoris-Folge, siehe Aufgabe 4 von Blatt 6} 
+	Seien $i_A \colon A \hookrightarrow X$, $i_B \colon B \hookrightarrow X$, $j_A \colon A \cap B \hookrightarrow A$ und 
+	$j_B \colon A \cap B \hookrightarrow B$ die Inklusionen. Dann gibt es eine Randabbildung $\partial_n = \rand{X=A\cup B}_n \colon H_n(X;R) \to H_{n-1}(A \cap B;R)$, sodass
+	\[
+		\begin{tikzcd}[column sep=3.7em]
+			\cdots \rar["\partial_{n+1}"] & H_n(A \cap B) \rar["{\begin{psmallmatrix}(j_A)_* \\ (j_B)_* \end{psmallmatrix}}"] 
+			&  \bigoplus\limits_{H_n(B)}^{H_n(A)} \rar["(i_A)_* - (i_B)_*"] 
+			& H_n(X) \rar["\partial_n"] & H_{n-1}(A\cap B) \rar & \cdots
+		\end{tikzcd} \marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+	\]
+	eine lange exakte Folge ist. Die Randabbildung ist dabei eine natürlicher Transformation: Seien $A',B' \subseteq X'$ offen mit $X'=A' \cup B'$ und sei $f\colon X \to X'$ mit
+	$f(A) \subseteq A'$ und $f(B) \subseteq B'$. Dann kommutiert\index{natürliche Transformation}
+	\[
+		\begin{tikzcd}[column sep=4em, row sep=3em]
+			H_n(X;R) \rar["\rand{X=A \cup B}_n"] \dar["f_*"]  & H_{n-1}(A \cap B;R) \dar["\enbrace*{f|_{A \cap B}}_*"] \\
+			H_n(X';R) \rar["\rand{X'=A' \cup B'}_n"] & H_n(A' \cap B';R)
+		\end{tikzcd}
+	\]
+\end{satz}
+\begin{beweis}
+	Sei $L := X \setminus B$. Dann ist $L$ abgeschlossen und $L \subseteq A=\mathring{A}$. Wir erhalten daher einen Ausschneideisomorphismus 
+	\[
+		H_n(B,A \cap B;R) = H_n(X \setminus L, A \setminus L;R) \xrightarrow{\enspace \cong \enspace} H_n(X,A;R) 
+	\]
+	Betrachte nun das folgende kommutative Leiterdiagramm, das zwei Paarfolgen vergleicht:
+	\[
+		\begin{tikzcd}[font=\small, column sep=1.92em, row sep=2.5em]
+			\cdots \rar & H_{n+1}(B,A \cap B) \rar["\rand{B,A \cap B}_{n+1}"] \arrow{d}{(i_B,j_A)_*}[swap]{\cong} & H_n(A \cap B) \rar["(j_B)_*"] \dar["(j_A)_*"] 
+			& H_n(B) \rar["(l_B)_*"] \dar["(i_B)_*"] & H_n(B,A \cap B) \rar[Firebrick3,"\rand{B,A\cap B}_n"] \arrow[Firebrick3]{d}{(i_B,j_A)_*}[swap]{\cong}
+			& H_{n-1}(A \cap B) \rar \dar["(j_A)_*"] & \cdots \\
+			\cdots \rar & H_{n+1}(X,A) \rar["\rand{X,A}_{n+1}"] & H_n(A) \rar["(i_A)_*"] & H_n(X) \rar[Firebrick3,"(l_X)_*"] & H_n(X,A) \rar["\partial_n^{X,A}"] & H_{n-1}(A) \rar & \cdots
+		\end{tikzcd} \marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+	\]
+	dabei sind $l_B \colon (B,\emptyset) \to (B,A \cap B)$ und $l_X \colon (X, \emptyset) \to (X,A)$ die Inklusionen von Paaren.
+	Definiere nun $\partial_n \colon H_n(X;R) \to H_{n-1}(A\cap B;R)$ durch
+	\[
+		\partial_n := \rand{B, A\cap B}_n \circ  (i_B,j_A)_*^{-1} \circ (l_X)_* 
+	\]
+	Die Natürlichkeit von $\partial_{n}^{B,A \cap B}$ impliziert die Natürlichkeit von $\partial_n$ (siehe auch \autoref{satz:86}). Wir müssen noch die Exaktheit zeigen:
+	\begin{itemize}
+		\item Zu zeigen: $\im \begin{psmallmatrix} (j_A)_* \\ (j_B)_* \end{psmallmatrix} = \ker \enbrace[\big]{(i_A)_* - (i_B)_*} $: 
+		\begin{description}
+			\item[\enquote{$\supseteq$}:] Sei $(a,b) \in \ker \enbrace*{(i_A)_* - (i_B)_*}$. Also $(i_A)_*(a) = (i_B)_*(b)$. Es ist 
+			\[
+				(i_B,j_A)_* \enbrace[\big]{(l_B)_*(b)} = (l_X)_* \circ (i_B)_* (b) = \underbrace{(l_X)_* \circ (i_A)_*}_{=0}(a)= 0 
+			\]
+			$(i_B,j_A)_*$ ist ein Isomorphismus, also $(l_B)_*(b)=0$. Es gilt $\ker (l_B)_* = \im (j_B)_*$, also folgt $\exists x \in H_n(A \cap B;R) : (j_B)_*(x)=b$. Dann gilt
+			\[
+				(i_A)_* \enbrace[\big]{a - (j_A)_*(x)} = (i_A)_*(a) - (i_B)_* \enbrace[\big]{(j_B)_* (x)} = (i_A)_*(a) - (i_B)_* (b) = 0  
+			\]
+			Mit $\ker (i_A)_*  =\im \rand{X,A}_{n+1}$ und $(i_B,j_A)_*$ ist Isomorphismus, folgt $\exists y \in H_{n+1}(B,A\cap B;R)$ mit 
+			\[
+				\rand{X,A}_{n+1} \circ  \enbrace*{i_B,j_A}_* (y) = a - (j_A)_*(x) 
+			\]
+			Es folgt für $z := x + \rand{B,A \cap B}_{n+1}(y)$ nun $(j_B)_*(z) =(j_B)_*(x) = b$ und 
+			\begin{align*}
+				(j_A)_*(z) = (j_A)_*(x) + (j_A)_* \enbrace[\big]{\rand{B,A \cap B}_{n+1}(y)} &= (j_A)_*(x) + \rand{X,A}_{n+1} \circ  \enbrace*{i_B, j_A}_*(y) \\ 
+				&= (j_A)_*(x) + a - (j_A)_*(x) = a  
+			\end{align*}
+			\item[\enquote{$\subseteq$}:] Sei $x \in H_n(A\cap B;R)$. Dann gilt
+			\begin{align*}
+				\enbrace[\big]{(i_A)_* - (i_B)_*} \begin{pmatrix}
+					(j_A)_* \\ (j_B)_*
+				\end{pmatrix}  (x) &= (i_A)_* \circ (j_A)_* (x) - (i_B)_* \circ (j_B)_*(x) \\
+				&= (i_A)_* \circ (j_A)_* (x) - (i_A)_* \circ (j_A)_* (x) = 0
+			\end{align*}
+			da $i_A \circ j_A = i_B \circ j_B$. 
+		\end{description}
+		\item Wir zeigen nun $\im\enbrace[\big]{ (i_A)_* - (i_B)_*} = \ker \partial_n$:
+		\begin{description}
+			\item[\enquote{$\supseteq$}:] Sei $v \in \ker \partial_n$, also $\rand{B, A\cap B}_n \circ  (i_B,j_A)_*^{-1} \circ (l_X)_*(v)=0$. Da $\ker \rand{B, A\cap B}_n =\im (l_B)_*$,
+			gibt es ein $b \in H_n(B;R)$ mit
+			\[
+				(l_B)_*(b) = (i_B,j_A)_*^{-1} \circ (l_X)_*(v) \iff (i_B,j_A)_* \circ(l_B)_*(b) = (l_X)_*(v)
+			\]
+			Nun ist
+			\[
+				(l_X)_* \enbrace[\big]{v- (i_B)_* b} = (l_X)_*(v) - (l_X)_* \circ (i_B)_*(b) = (l_X)_*(v) -(i_B,j_A)_* \circ(l_B)_*(b)=0
+			\]
+			Da $\ker (l_X)_* = \im (i_A)_*$ ist, gibt es ein $a \in H_n(A;R)$ mit $(i_A)_*(a) = v - (i_B)_* (b)$ und somit ist
+			$\enbrace[\big]{(i_A)_* - (i_B)_*}(a,-b) = v$.
+			\item[\enquote{$\subseteq$}:] Sei $\begin{psmallmatrix} a \\ b \end{psmallmatrix} \in \bigoplus\limits_{H_n(B)}^{H_n(A)}$. Dann gilt
+			\begin{align*}
+				\partial_n \enbrace[\big]{(i_A)_* - (i_B)_*}  \begin{psmallmatrix} a \\ b \end{psmallmatrix} 
+				&=  \rand{B, A\cap B}_n \circ  (i_B,j_A)_*^{-1} \circ (l_X)_* \enbrace[\big]{(i_A)_*(a)- (i_B)_*(b)}  \\
+				&=\hphantom{-} \rand{B, A\cap B}_n \circ  (i_B,j_A)_*^{-1} \circ \underbracket[0.7pt][2pt]{(l_X)_* \circ (i_A)_*}_{=0} (a) \\
+				&\,\hphantom{=} -\underbracket[0.7pt][2pt]{\rand{B, A\cap B}_n  \circ (l_B)_*}_{=0} (b) =0
+			\end{align*}
+		\end{description}
+		\item Noch zu zeigen: $\im \partial_n = \ker \begin{psmallmatrix} (j_A)_* \\ (j_B)_* \end{psmallmatrix}$.
+		\begin{description}
+			\item[\enquote{$\supseteq$}:] Sei $x \in \ker \enbrace[\big]{(j_A)_* \oplus (j_B)_*}$, also $(j_A)_*(x) = 0 = (j_B)_*(x)$. Da $\im \rand{B,A \cap B}_n=\ker (j_B)_*$ ist, 
+			gibt es $v \in H_n(B,A\cap B;R)$ mit $\rand{B,A\cap B}_n(v)=x$. Nun ist
+			\[
+				\rand{X,A}_n \circ (i_B,J_A)_*(v) = (j_A)_* \enbrace[\big]{\rand{B,A\cap B}_n(v)} = (j_A)_*(x) = 0
+			\]
+			Da $\ker \rand{X,A}_n = \im (l_X)_*$, finden wir $w \in H_n(X;R)$ mit $(l_X)_*(w) = (i_B,j_A)_* (v)$. Also folgt
+			\[
+				\partial_n(w) = \rand{B,A\cap B}_n \circ (i_B,j_A)_*^{-1} \circ (l_X)_* (w) = \rand{B,A\cap B}_n \circ (i_B,j_A)_*^{-1}\circ (i_B,j_A)_* (v) 
+				= \rand{B,A\cap B}_n(v) = x
+			\]
+			\item[\enquote{$\subseteq$}:] Für $v \in H_n(X;R)$ ist
+			\begin{align*}
+				& \hphantom{=} \enspace \enbrace[\big]{(j_A)_* \oplus (j_B)_*} \circ \partial_n(v) \\
+				&= \enbrace[\Big]{(j_A)_* \circ \rand{B,A \cap B}_n \circ (i_B,j_A)_* ^{-1} \circ (l_X)_*(v) ,
+				{\underbracket[0.7pt][2pt]{(j_B)_* \circ \rand{B,A\cap B}_n}_{=0}} \circ (i_B,j_A)_* ^{-1} \circ (l_X)_* (v) } \\
+				&= \enbrace[\Big]{{\underbracket[0.7pt][2pt]{\rand{X,A}_n \circ (l_X)_*}_{=0}}(v), 0  } = (0,0)\qedhere
+			\end{align*}
+		\end{description}
+	\end{itemize}
+\end{beweis}
+
+\begin{bemerkung}[{name=[Anwendbarkeit der Mayer-Vietoris-Folge]}]
+	Für die Mayer-Vietoris-Folge müssen $A$ und $B$ nicht notwendig offen sein. 
+	Es genügt, dass die Inklusion $(B,A \cap B) \hookrightarrow (X,A)$ einen Isomorphismus $H_*(B,A \cap B;R) \to H_*(X,A;R)$ induziert.
+\end{bemerkung}
+
+\begin{satz}[{name=[{Homologie der $n$-Sphäre}]},label=satz:94]
+	Für die Homologie der $n$-Sphäre $S^n$ gilt
+	\begin{equation*}
+		H_k \enbrace*{S^n ;R} \cong \begin{cases}
+			R \oplus R , &\text{ falls }k=n=0\\
+			R, &\text{ falls } k=0, n \not= 0 \\
+			R, &\text{ falls } k=n\not= 0 \\
+			0, &\text{ sonst}
+		\end{cases} \label{eq:94} \tag{\#}
+	\end{equation*}
+\end{satz}
+
+\begin{definition}[{name=[Reduzierte Homologie]}]
+	Sei $X$ ein nichtleerer topologischer Raum. 
+	Sei $p \colon X  \to \set{\mathrm{pt}}$ die Projektion auf den Ein-Punkt-Raum. 
+	Die \Index{reduzierte singuläre Homologie} von $X$ ist definiert durch 
+	\[
+		\tilde{H}_k(X;R) := \ker \enbrace[\big]{ p_* \colon H_k(X;R) \to H_k(\set{\mathrm{pt}};R )} 
+	\]
+\end{definition}
+
+Einige einfachen Eigenschaften der reduzierten Homologie sind:
+\begin{itemize}
+	\item Es gilt $\tilde{H}_k(X;R) =H_k(X;R)$ für $k>0$, da $H_k \enbrace*{\set{\mathrm{pt}};R }=0$ ist für $k>0$ (siehe \ref{bsp:58}) und somit $p_*$ die Nullabbildung ist.
+	
+	Weiter gilt $H_0(X;R) = R \oplus \tilde{H}_0(X;R)$, da $H_0(\set{\mathrm{pt}};R)=R$ frei ist.
+	\item Es ist nicht schwer die Eigenschaften von singulärer Homologie auf die reduzierte singuläre Homologie zu übertragen. Insbesondere ist $\tilde{H}_*$ 
+	homotopieinvariant und es gibt eine Mayer-Vietoris-Folge.
+	\item Es ist $\tilde{H}_k \enbrace*{\set{\mathrm{pt}}}=0$ und für jeden kontrahierbaren Raum $X$ ist somit $\tilde{H}_n(X;R)=0$ für alle $n$.
+\end{itemize}
+
+\begin{bemerkung}[{name=[{Die Aussage von \autoref{satz:94} in reduzierter Homologie}]}]
+	In reduzierter singulärer Homologie wird \eqref{eq:94} zu
+	\begin{equation*}
+		\tilde{H}_k(S^n;R) \cong \begin{cases}
+			R, &\text{ falls }k=n\\
+			0 , &\text{ sonst}
+		\end{cases} \label{eq:96}\tag{\#\#}
+	\end{equation*}
+\end{bemerkung}
+
+\begin{beweis}[{name={von \autoref{satz:94}}}]
+	Wir berechnen die reduzierte Homologie von $S^n$ per Induktion nach $n$:
+	\begin{description}
+		\item[Induktionsanfang: $n=0$:] Es gilt
+		\begin{align*}
+			H_k(S^0;R) \stackrel{\xleftarrow{\varphi}}{\cong} H_k \enbrace[\big]{\set{\mathrm{pt}};R } \oplus H_k \enbrace[\big]{\set{\mathrm{pt}};R } = \begin{cases}
+				R \oplus R, &\text{ falls }k=0\\
+				0 ,&\text{ sonst}
+			\end{cases}
+		\end{align*} 
+		Seien $i_- \colon \set{\mathrm{pt}} \hookrightarrow S^0$ und $i_+ \colon \set{\mathrm{pt}} \hookrightarrow S^0$ die Inklusionen mit $\im i_{\pm} = \set{\pm 1}$.
+		Der Isomorphismus $\varphi$ ist gegeben durch $\varphi = (i_-)_* + (i_+)_*$. Für
+		$(a,b) \in H_k \enbrace*{\set{-1};R}\oplus H_k \enbrace*{\set{+1};R}$ gilt dann
+		\[
+			p_* \enbrace[\big]{i_-(a) + i_+(b)} = (p \circ i_-)_*(a) + (p \circ i_+)(b) = \id_*(a) + \id_*(b)= a+b
+		\]
+		Also ist $\ker p_* = \set[(a,-a)]{a \in H_k \enbrace[\big]{\set{\mathrm{pt}};R}}$ und damit folgt
+		\[
+			\tilde{H}_k(S^0;R) = \begin{cases}
+				0, &\text{ falls }k \not= 0\\
+				R ,&\text{ falls }k=0
+			\end{cases}
+		\]
+		\item[Induktionsschritt: $n-1  \mapsto n$:] Sei $D_+^n = S^n \setminus \set{(1,0,\ldots ,0)}$ und $D^n_- = S^n \setminus \set{-1,0,\ldots ,0}$. 
+		Dann sind $D^n_+$ und $D^n_-$ offene Teilmengen von $S^n$ mit $S^n = D_+^n \cup D^n_-$. Weiter gilt $D^n_+ \simeq \set{\mathrm{pt}}$ und $D^n_- \simeq \set{\mathrm{pt}}$.
+		Für den Schnitt der beiden Mengen erhalten wir
+		\[
+			D^n_+\cap D^n_- = \set*{x=(x_0,\ldots , x_n) \in S^n \given x_0 \not\in \set{\pm 1}\rule{0cm}{1em}} \simeq S^{n-1} = \set{x=(0, x_1, \ldots , x_n) \in S^n\rule{0cm}{1em}}.
+		\]
+		Betrachte nun die Mayer-Vietoris-Folge zu $S^n = D^n_+ \cup D^n_-$: 
+		\[
+			\begin{tikzcd}
+				\underset{=0}{\tilde{H}_k(D^n_+)} \oplus \underset{=0}{\tilde{H}_k(D^n_-)} \rar & 
+				\tilde{H}_k(S^n) \rar["\partial_k", "\cong"'] &
+				\tilde{H}_{k-1} \enbrace*{D^n_+ \cap D^n_-} \rar & 
+				\underset{=0}{\tilde{H}_{k-1}(D^n_+)} \oplus \underset{=0}{\tilde{H}_{k-1}(D^n_-)} \\
+				 & & \tilde{H}_{k-1}(S^{n-1}) \uar["\cong"]& 
+			\end{tikzcd} \marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+		\]
+		Es folgt $\tilde{H}_k(S^n;R) \cong \tilde{H}_{k-1}(S^{n-1};R) \stackrel{\text{I.A.}}{=} \begin{cases}
+			R, &\text{ falls }k=n\\
+			0, &\text{ sonst}
+		\end{cases}$ \qedhere
+	\end{description}
+\end{beweis}
+
+\newpage
+
+\section{Anwendungen} % (fold)
+\label{sec:10}
+
+\begin{satz}[{name={Invarianz der Dimension}}]
+	Sind $\mathbb{R}^n$ und $\mathbb{R}^m$ homöomorph, so gilt $n=m$.
+\end{satz}
+\begin{beweis}
+	Sei $h \colon \mathbb{R}^n \to \mathbb{R}^m$ ein Homöomorphismus. 
+	Sei $x_0 \in \mathbb{R}^n$ beliebig. 
+	Dann erhalten wir auch einen Homöomorphismus $k := h|_{\mathbb{R}^n\setminus \set{x_0}} \colon \mathbb{R}^n \setminus \set{x_0} \to \mathbb{R}^m  \setminus \set{h(x_0)}$. 
+	Nun ist $\mathbb{R}^n \setminus \set{x_0}$ homotopieäquivalent zu $S^{n-1}$ und $\mathbb{R}^{m}\setminus\set{h(x_0)}$ ist homotopieäquivalent zu $S^{m-1}$. 
+	Da $k$ ein Homöomorphismus ist, ist $k_*$ ein Isomorphismus. Wir erhalten
+	\begin{align*}
+		H_*(S^{n-1}) \cong H_* \enbrace[\big]{\mathbb{R}^n \setminus \set{x_0}}  \cong H_* \enbrace[\big]{\mathbb{R}^m \setminus \set{h(x_0)}} \cong H_*(S^{m-1})
+	\end{align*}
+	Es ist aber $H_*(S^{n-1}) \cong H_*(S^{m-1})$ genau dann, wenn $n=m$.
+\end{beweis}
+
+\begin{satz}[{name={Fixpunktsatz von Brouwer}}]
+	Jede stetige Abbildung $f \colon D^n \to D^n$ besitzt einen Fixpunkt.
+\end{satz}
+\begin{beweis}
+	Durch Widerspruch: Angenommen es gibt $f\colon D^n \to D^n$ ohne Fixpunkt. Aus dem letzten Semester wissen wir, dass es dann eine stetige Abbildung $F\colon D^n \to S^{n-1}$ 
+	gibt mit $F|_{S^{n-1}} = \id_{S^{n-1}}$. In Homologie erhalten wir folgendes kommutatives Diagramm \marginnote{Œ: $n\ge 2$, $n=1$ haben wir bereits im letzen Semester 
+	bewiesen}
+	\[
+		\begin{tikzcd}[row sep=large, column sep=1em]
+			\mathbb{Z}\cong H_{n-1}(S^{n-1}) \arrow[rr,"(\id_{S^{n-1}})_* = \id" ] \arrow[dr,"i_*"'] && H_{n-1}(S^{n-1}) \cong \mathbb{Z} \\
+			& H_{n-1}(D^n)=0  \urar["(F)_*"']&
+		\end{tikzcd}
+	\]
+	wobei $i\colon S^{n-1} \hookrightarrow D^n$ die Inklusion ist. Da $F \circ i = \id_{S^{n-1}}$ ist, gilt $F_* \circ i_* = \id_{H_{n-1}(S^{n-1})}$.
+\end{beweis}
+
+\begin{definition}[{name={Abbildungsgrad}}]
+	Sei $f \colon S^n \to S^n$ eine stetige Abbildung.\marginnote{reduzierte Homologie!} 
+	Da $\tilde{H}_n(S^n) \cong \mathbb{Z}$ ist, gibt es eine ganze Zahl $d(f)$, so dass $f_*(x)= d(f) \cdot x$ für alle $x \in \tilde{H}_n(S^n)$. 
+	Diese Zahl heißt der \Index{Abbildungsgrad} von $f$.
+\end{definition}
+
+\begin{proposition}[{name=[Einfache Eigenschaften des Abbildungsgrades]}]
+	Für den Abbildungsgrad $d$ gilt
+	\begin{enumerate}[a)]
+		\item $d(\id_{S^n}) = 1$.
+		\item Sind $f$ und $g$ homotop, so gilt $d(f)=d(g)$.
+		\item $d(f \circ g) = d(f) \cdot d(g)$.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[a),itemsep=0pt]
+		\item Es ist $(\id_{S^n})_*(x)= \id_\mathbb{Z}(x)= x$.
+		\item Sind $f$ und $g$ homotop, so gilt $f_*=g_*$ und damit folgt $d(f)=d(g)$.
+		\item Für alle $x \in \tilde{H}_n(S^n)$ gilt: $d(f \circ g) \cdot x = (f \circ g)_* (x) = f_* \circ g_*(x)= d(f) \cdot d(g) \cdot x$. Da 
+		$\tilde{H}_n(S^n) \cong \mathbb{Z}$ folgt $d(f \circ g) = d(f) \cdot d(g)$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{beispiel}[{name=[{Abbildungsgrad der Spiegelung $R_i \colon S^n \to S^n$}]},label=bsp:105]
+	Sei $i \in \set{0, \ldots ,n}$ und $R_i \colon S^n \to S^n$ die Spiegelung  an der $x_i$-Achse, also 
+	\[
+		R_i(x_0, \ldots , x_n) = (x_0, \ldots , - x_i, \ldots , x_n)
+	\]
+	Dann ist $d(R_i) = -1$.
+\end{beispiel}
+\begin{beweis}
+	Sei $f \colon S^n \to S^n$ der Homöomorphismus, der die $0$-te und die $i$-te Koordinate vertauscht, also gilt $f(x_0, \ldots , x_n) = (x_i, \ldots , x_0, \ldots , x_m)$. 
+	Dann ist $R_i = f \circ R_0 \circ f$. 
+	Da $f$ ein Homöomorphismus ist, ist $f_*$ ein Isomorphismus und daher ist $d(f)$ invertierbar, also $d(f) \in \set{\pm 1}$. 
+	Mit $d(R_i) = d(f) \cdot d(R_0) \cdot d(f)$ folgt $d(R_0)=d(R_i)$. 
+	Es genügt also $R_0$ zu betrachten.
+	Wir zeigen $d(R_0)= -1$ durch Induktion nach $n$.
+	\begin{description}
+		\item[Induktionsanfang:] Sei $i_- \colon \set{\mathrm{pt}} \to S^0$ die Abbildung mit $\im i_- = \set{-1}$ und $i_+ \colon\set{\mathrm{pt}} \to S^0 $ die Abbildung mit $\im i_+ = \set{+1}$. 
+		Dann ist \marginnote{Unter $H_0(S_0)\cong \mathbb{Z} \otimes \mathbb{Z}$ induziert $R_0$ $(x,y) \mapsto (y,x)$}
+		\begin{align*}
+			H_0(S^0) &= \set[(i_-)_*(a)+ (i_+)_*(b)]{a,b \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}} \qquad \text{und}\\
+			\tilde{H}_0(S^0) &= \set[(i_-)_*(a)- (i_+)_*(a)]{a \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}}
+		\end{align*}
+		Nun ist
+		\begin{align*}
+			(R_0)_* \enbrace[\Big]{(i_-)_*(a)- (i_+)_*(a)} = (R_0)_* (i_-)_* (a) - (R_0)_* (i_+)_* (a) &= (R_0 \circ i_-)_*(a) - (R_0 \circ i_+)_*(a)\\ 
+			&= (i_+)_*(a) - (i_-)_*(a) \\ 
+			&= - \enbrace[\big]{(i_-)_*(a) - (i_+)_*(a)} 
+		\end{align*}
+		Also folgt $d(R_0)=-1$, da wir den Abbildungsgrad für reduzierte Homologie definiert hatten.
+		\item[Induktionsschritt:] Wir definieren zwei offene Teilmengen von $S^n$ wie folgt 
+		\begin{align*}
+			D_+^n &= \set*{(x_0, \ldots , x_n) \in S^n \given x_n \not= -1}\\
+			D_-^n &= \set*{(x_0, \ldots , x_m) \in S^n \given x_n \not= +1}  
+		\end{align*}
+		Wir wissen schon aus dem Beweis von \autoref{satz:94}, dass die Randabbildung aus der dazugehörigen Mayer-Vietoris-Folge $\tilde{H}_n(S^n) \xrightarrow{\partial_n} \tilde{H}_{n-1}(D^n_+ \cap D_-^n)$ ein Isomorphismus ist. 
+		Da die Randabbildung natürlich ist, erhalten wir ein kommutatives Diagramm
+		\[
+			\begin{tikzcd}[row sep=3em, column sep=4em]
+				\tilde{H}_n(S^n) \rar["\partial_n","\cong"'] \dar["(R_0)_*"]
+				& \tilde{H}_{n-1}(D^n_- \cap D^n_+) \dar["\enbrace*{R_0|_{D^n_- \cap D^n_+}}_*"]  
+				& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*","\cong"'] \dar["\enbrace*{R_0|_{S^{n-1}}}_*"]\\
+				\tilde{H}_n(S^n) \rar["\partial_n","\cong"']
+				& \tilde{H}_{n-1}(D^n_- \cap D^n_+) 
+				& \tilde{H}_{n-1}(S^{n-1}) \lar["i_*","\cong"']
+			\end{tikzcd}
+		\]
+		dabei ist $i\colon S^{n-1} \to D^n_- \cap D_+^n$ die Homotopieäquivalenz $i(x_0, \ldots , x_{n-1}) = (x_0, \ldots , x_{n-1},0)$.
+		Nach Induktionsannahme ist $\enbrace*{R_0\big|_{S^{n-1}}}_*(y)= -y$ für alle $y \in \tilde{H}_{n-1}(S^{n-1})$. 
+		Für $x \in \tilde{H}_n(S^n)$ folgt dann
+		\begin{align*}
+			(R_0)_*(x) &= (\partial_n) ^{-1} \circ  (i_*) \circ \enbrace*{R_0\big|_{S^{n-1}}}_* \enbrace[\big]{(i_* ^{-1} \circ \partial_n) (x)} \\
+			&= (\partial_n) ^{-1} \circ (i_*) \enbrace*{- i_*^{-1} \enbrace*{\partial_n (x)} } \\
+			&= - \partial_n ^{-1} \circ (i_*) \circ (i_*)^{-1} \circ \partial_n(x)= -x 
+		\end{align*}
+		Also gilt für den Abbildungsgrad der Spiegelung $d(R_0)=-1$. \qedhere
+	\end{description}
+\end{beweis}
+
+\begin{beispiel}[{name=[Grad der Punktspiegelung]},label=bsp:106]
+	Der Grad der Punktspiegelung $R \colon S^n \to S^n$, $x  \mapsto -x$ ist $d(R)=(-1)^{n+1}$.
+\end{beispiel}
+\begin{beweis}
+	Nach \autoref{bsp:105} ist $d(R)= d(R_0 \circ R_1 \circ \ldots \circ R_n) = d(R_0) \cdot \ldots \cdot d(R_n)= (-1)^{n+1}$.
+\end{beweis}
+
+\begin{erinnerungA}[{name=[Vektorfelder]}]
+	Sei $M$ eine $C^\infty$-Mannigfaltigkeit. 
+	Ein \Index{Vektorfeld} auf $M$ ist eine stetige Abbildung $v \colon M \to \Tmap M$ mit $v(x) \in \Tmap_x M$ für alle $x \in M$.
+	Für $M=S^n$ entspricht ein Vektorfeld genau einer stetigen Abbildung $v \colon S^n \to \mathbb{R}^{n+1}$ mit $\sprod*{v(x)}{x} =0$ für alle $x \in S^n$.\index{Skalarprodukt}
+	\begin{figure}[th]
+		\centering{
+		\begin{tikzpicture}[scale=1.5]
+			\foreach \r in {0,20,...,340}{
+				% \filldraw (\r:1) circle[radius=0.02];
+				\draw[->, thick, DodgerBlue3] (\r:1) -- ++ ($(\r+90:1)$);
+			}
+			\draw[ultra thick] (0,0) circle(1) node{$S^1$};
+		\end{tikzpicture}
+		\caption{Ein nirgends verschwindendes Vektorfeld auf $S^1$}
+		}
+	\end{figure}
+\end{erinnerungA}
+
+\begin{satz}[{name=[{nicht verschwindende Vektorfelder auf $S^n$}]}]
+	Es gibt genau dann ein Vektorfeld ohne Nullstellen auf $S^n$, wenn $n$ ungerade ist.
+\end{satz}
+\begin{beweis}
+	Ist $n$ ungerade, so ist $S^{n} \subseteq \mathbb{R}^{n+1} = \mathbb{C}^{k}$ mit $k=\frac{n+1}{2}$. 
+	Punkte in $S^n$ sind dann genau $k$-Tupel $z=(z_1, \ldots , z_k)$ mit $\abs*{z_1}^2 + \ldots + \abs*{z_k}^2 = 1$. 
+	Ein Vektorfeld entspricht dann einer stetigen Abbildung $v \colon S^n \to \mathbb{C}^k$, so dass für das kanonische komplexe Skalarprodukt $\sprod*{\cdot }{\cdot}_\mathbb{C} $ auf $\mathbb{C}^k$ gilt
+	\[
+		\sprod*{z}{v(z)}_\mathbb{C} \in i \mathbb{R} \marginnote{einfach nachzurechnen}
+	\]
+	Definiere nun $v \colon S^n \to \mathbb{C}^k$ durch $v(z) := i \cdot z$. 
+	Dann ist  $i z\neq 0$ für alle $z \in S^n$ und $\sprod*{z}{i z}= -i \cdot \norm{z} \in i \mathbb{R}$. 
+	Sei umgekehrt $v \colon S^n \to \mathbb{R}^{n+1}$ ein Vektorfeld ohne Nullstellen. 
+	Zu zeigen: $d(R)=1$, denn dann folgt die Behauptung, da $d(R)=(-1)^{n+1}$.
+	Zeige dazu: $R$ ist homotop zu $\id$. 
+	Seien $H, K \colon S^n \times [0,1] \to S^n$ definiert durch 
+	\[
+		H(x,t) := \frac{t x + (1-t)v(x)}{\norm{tx + (1-t)v(x)} } \qquad \text{bzw.}\qquad K(x,t) :=  \frac{-t x + (1-t)v(x)}{\norm{-tx + (1-t)v(x)}}
+	\]
+	Da $\sprod*{v(x)}{x}=0$  und $v(x)\not=0$ folgt für alle $x \in S^n$\marginnote{für orthogonale Vektoren gilt der Satz von Pythagoras}
+	\begin{align*}
+		\norm{t x + (1-t)v(x)}^2 &= \norm{tx}^2 + \norm{(1-t)v(x)}^2 \not=0   \\
+		\norm{-t x + (1-t)v(x)}^2 &= \norm{-tx}^2 + \norm{(1-t)v(x)}^2 \not=0
+	\end{align*}
+	Also sind $H$ und $K$ wohldefiniert. 
+	$H$ ist Homotopie zwischen $\id$ und $x \mapsto \frac{v(x)}{\norm{v(x)}}$ und $K$ ist Homotopie zwischen $-\id=R$ und $x \mapsto \frac{v(x)}{\norm{v(x)} } $.
+\end{beweis}
+
+\begin{satz}[{name={Jordanscher Kurvensatz}}]
+	Sei $f \colon S^1 \to \mathbb{R}^2$ eine stetige, injektive Abbildung. 
+	Dann hat $\mathbb{R}^2 \setminus f(S^1)$ genau zwei Wegzusammenhangskomponenten. 
+	Eine davon ist beschränkt, die andere nicht.\index{Jordanscher Kurvensatz}
+\end{satz}
+\begin{beweis}[{name={mit \ref{satz:1010}}}]
+	Wir können $f$ auch als injektive Abbildung $f \colon S^1 \to \mathbb{R}^2 \subseteq S^2 = \mathbb{R}^2 \cup \set{\infty}$ auffassen. 
+	Nun ist $\tilde{H}_0 \enbrace[\big]{S^2 \setminus f(S^1)} =\mathbb{Z}$ nach \autoref{satz:1010} b). 
+	Also $H_0 \enbrace[\big]{S^2 \setminus f(S^1)}= \mathbb{Z} \oplus \mathbb{Z}$. 
+	Daher besteht $S^2 \setminus f(S^1)$ aus zwei Wegzusammenhangskomponenten $U_1$ und $U_2$. 
+	Sei ohne Einschränkungen $\infty \in U_2$. 
+	Dann ist $U_2 \setminus \set{\infty}$ immer noch wegzusammenhängend: 
+	Seien $x,y \in U_2$, dann gibt es eine Umgebung $V$ von $\infty \in S^2$ mit $V \setminus \set{\infty} \cong D^2 \setminus \set{0} $, $x,y \not\in V$ und $f(S^1) \cap V = \emptyset$. 
+	Also sind $U_1$ und $U_2 \setminus \set{\infty}$ die Wegzusammenhangskomponenten von $\mathbb{R}^2 \setminus f(S^1)$. 
+	$U_1$ ist beschränkt und $U_2$ ist unbeschränkt.
+\end{beweis}
+
+\begin{satz}[{name=[{Homologie von $S^n$ ohne Einbettung vonScheiben $D^k$ und Sphären $S^k$ mit $k<n$}]},label=satz:1010]
+	\leavevmode
+	\begin{enumerate}[a),itemsep=1pt]
+		\item Sei $f \colon D^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt $\tilde{H}_i\enbrace[\big]{S^n \setminus f(D^k)} =0$ für alle $i$.
+		\item Sei $f \colon S^k \to S^n$ eine stetige, injektive Abbildung mit $0 \le k < n$. Dann gilt 
+		\[
+			\tilde{H}_i \enbrace[\big]{S^n \setminus f(S^k)} = \begin{cases}
+				\mathbb{Z}, &\text{ falls }i=n-k-1\\
+				0, &\text{ sonst}
+			\end{cases}
+		\]
+	\end{enumerate}
+\end{satz}
+
+\begin{proposition}[{name=[{Homologie von $X= \bigcup_{a \in N} U_a$ wobei $U_a \subseteq U_{a+1}$}]},label=prop:1011]
+	Seien $U_1 \subseteq U_2 \subseteq \ldots  \subseteq X$ offen mit $X = \bigcup_{i=1}^\infty U_i$. 
+	Seien $i_{a,b} \colon U_a \hookrightarrow U_b$ für $a < b$ und $i_a \colon U_a \hookrightarrow X$ die entsprechenden Inklusionen. Dann gilt\marginnote{Diese Proposition gilt genauso für reduzierte Homologie}
+	\begin{enumerate}[(1)]
+		\item Für jedes $x \in H_k(X;R)$ gibt es $a >0$ und $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=x$.
+		\item Ist $x_a \in H_k(U_a;R)$ mit $(i_a)_*(x_a)=0$, so gibt es $b >a$ mit $(i_{a,b})_*(x_a)=0$.
+	\end{enumerate}
+\end{proposition}
+\begin{beweis}
+	Sei $\sigma \colon \abs*{\Delta^n} \to X$ ein singulärer Simplex in $X$. Dann ist $\set{\sigma^{-1}(U_a)}_{a \in \mathbb{N}}$ eine offene Überdeckung von $\abs*{\Delta^n}$. 
+	Da $\abs*{\Delta^n}$ kompakt ist, gibt es $a$ mit $\abs*{\Delta^n} \subseteq \sigma ^{-1}(U_a)$, also $\sigma \enbrace*{\abs*{\Delta^n}} \subseteq U_a$. Da Elemente  von
+	$C_n(X;R)$ endliche $R$-Linearkombinationen von singulären Simplizes sind, folgt 
+	\[
+		C_n(X;R) = \bigcup_a C_n(U_a;R).
+	\]
+	Damit ergeben sich direkt (1) und (2).
+\end{beweis}
+
+\begin{beweis}[{name={von \autoref{satz:1010}}}]
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(D^0)$ homöomorph zu $\mathbb{R}^n$ und die Behauptung folgt.
+	
+		Induktionsschritt $k \mapsto k+1$: Da $D^{k+1}$ und $[0,1]^{k+1}$ homöomorph sind, können wir $D^{k+1}$ durch $[0,1]^{k+1}$ ersetzen. Sei 
+		$x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$. Es ist
+		\[
+			S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^{k}} = \underbracket[0.8pt][1pt]{S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2}}
+			\times [0,1]^k}}_{=: A} \cup \underbracket[0.8pt][1pt]{S^n \setminus f \enbrace*{\benbrace*{\nicefrac{1}{2},1} \times [0,1]^k}}_{=: B} = A \cup B
+		\]
+		eine Vereinigung von offenen Mengen. Weiter ist 
+		\begin{align*}
+			A \cap B = \enbrace*{S^n \setminus f \enbrace*{\benbrace*{0,\nicefrac{1}{2} } \times [0,1]^k} } \cap \enbrace*{S^n \setminus f 
+			\enbrace*{\benbrace*{\nicefrac{1}{2} ,1} \times [0,1]^k}} =   S^n \setminus f \enbrace*{[0,1]^{k+1}}
+		\end{align*}
+		Die zugehörige Mayer-Vietoris-Folge liefert nun einen Isomorphismus:
+		\[
+			\begin{tikzcd}
+				\underset{=0 \text{ nach I.A.}}{\tilde{H}_{i+1}(A \cup B)} \rar & \tilde{H}_i(A \cap B) \rar["\cong"] & \tilde{H}_i(A) \oplus \tilde{H}_i(B) \rar & 
+				\underset{=0 \text{ nach I.A.}}{\tilde{H}_i(A \cup B)}
+			\end{tikzcd}
+		\]
+		% \[
+		% 	\begin{tikzcd}[column sep=1.3em, font=\small]
+		% 		\underset{=0 \text{ nach I.A.}}{\tilde{H}_{i+1} \enbrace[\Big]{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}}  \times [0,1]^k}}} \rar &
+		% 		\tilde{H}_i \enbrace[\Big]{S^n \setminus f \enbrace*{[0,1]^{k+1}} }  \dar["\cong"] & \\
+		% 		& {\displaystyle\bigoplus\limits_{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[\nicefrac{1}{2},1] \times [0,1]^k} } }
+		% 		^{\textstyle\tilde{H}_i \enbrace*{S^n \setminus f \enbrace[\big]{[0,\nicefrac{1}{2}] \times [0,1]^k} } }} \rar &
+		% 		\underset{=0 \text{ nach I.A.}}{\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{\nicefrac{1}{2}} \times [0,1]^k } } }
+		% 	\end{tikzcd}
+		% \]
+		Angenommen $x \neq 0$. Dann ist das Bild von $x$ in $\tilde{H}_i \enbrace*{A}$ ungleich Null oder in $\tilde{H}_i \enbrace*{B}$ ungleich Null. Indem wir dieses Argument 
+		iterieren, erhalten wir eine Folge von Intervallen
+		\[
+			[0,1] \supseteq I_1 \supseteq I_2 \supseteq \ldots \enspace\text{ sodass } \bigcap_a I_a = \set{t} 
+		\]
+		und das Bild von $x \in \tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{[0,1]^{k+1}}}$ unter der von der Inklusion 
+		$\iota_{0,a} \colon S^n \setminus f \enbrace*{[0,1]^{k+1}} \to S^n \setminus f \enbrace*{I_a \times [0,1]^k}$ induzierten Abbildung 
+		$(\iota_{0,a})_*$ ungleich Null 
+		ist. Nun ist aber 
+		\[
+			\bigcup_a \enbrace[\Big]{S^n \setminus f \enbrace*{I_a \times [0,1]^k}} = S^n \setminus f \enbrace[\big]{\set{t} \times [0,1]^k }  
+		\]
+		und wieder nach Induktionsannahme ist $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{\set{t} \times [0,1]^k}} =0$.  Für die von der Inklusion
+		$\iota_a \colon S^n \setminus f \enbrace*{I_a \times [0,1]^k}  \to S^n \setminus f \enbrace*{\set{t} \times [0,1]^k}$ induzierte Abbildung gilt also
+		$(\iota_a)_*(x)=0$. 
+		Nach \autoref{prop:1011} (2) muss $x$ dann aber schon für ein $i$ in der reduzierten Homologie $\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{I_a \times [0,1]^k} }$ trivial sein. Widerspruch!
+		\item Durch Induktion nach $k$. Für $k=0$ ist $S^n \setminus f(S^0) \cong \mathbb{R}^n \setminus \set{0}$. Da $\mathbb{R}^n \setminus \set{0} \simeq S^{n-1}$
+		folgt für $k=0$ die Behauptung.
+	
+		Induktionsschritt $k-1 \mapsto k$: Wir setzen 
+		\begin{align*}
+			D^k_+ &:= \set*{(x_0,\ldots ,x_k) \in S^k \given x_k \ge 0} \\
+			D^k_- &:= \set*{(x_0, \ldots , x_k) \in S^k \given x_k \le 0}
+		\end{align*}
+		Dann ist 
+		$D^k_+ \cap D^k_- = \set*{(x_0, \ldots ,x_k)\in S^k \given x_k=0} \cong S^{k-1}$. Wieder ist 
+		\[
+			S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} =\enbrace*{S^n \setminus f(D^k_+)} \cup \enbrace*{S^n \setminus f(D^k_-)}  
+		\]
+		eine offene Vereinigung mit $\enbrace*{S^n \setminus f(D^k_+)} \cap (S^n \setminus f(D^k_-)) = S^n \setminus f(S^k)$. Es ist $D^k_{\pm} \cong D^{k}$, also ist
+		wegen a) ist die Randabbildung in der zugehörigen Mayer-Vietoris-Folge
+		\[
+			\tilde{H}_i \enbrace*{S^n \setminus f \enbrace*{D^k_+ \cap D^k_-} } \xrightarrow[\cong]{\minwidthbox{\partial_i}{2em}} \tilde{H}_{i-1} \enbrace*{S^n \setminus f(S^k)}   
+		\]
+		ein Isomorphismus. Die Behauptung folgt dann per Induktion. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\newpage
+
+\section{CW-Komplexe} % (fold)
+\label{sec:11}
+
+\begin{definition}[{name=[Pushout]}]
+	Ein kommutatives Diagramm von topologischen Räumen der Form
+	\begin{equation*}
+		\begin{tikzcd}[row sep=1.6em, column sep=2.1em]
+			A \rar["f"] \dar["g"] & X \dar["\overline{g} "] \\
+			Y \rar["\overline{f}"] & Z
+		\end{tikzcd} \label{eq:111} \tag{\#}
+	\end{equation*}
+	\noindent\begin{minipage}{0.65\textwidth}
+		heißt ein \Index{Pushout}, falls es folgende universelle Eigenschaft hat: \smallskip\\
+		\centering{$\forall \hat{f} \colon X \to \hat{Z}$, $\hat{g}\colon Y \to \hat{Z}$ mit 
+		$\hat{f} \circ f = \hat{g} \circ g$ gilt: 
+		\[
+			\exists ! \varphi \colon Z \to \hat{Z} \text{ mit } \hat{f}= \varphi \circ \overline{g} , \hat{g} = \varphi \circ \overline{f}.
+		\]}
+	\end{minipage}
+	\hfill \begin{minipage}{0.3\textwidth}
+		\hspace{2em}\(
+			\begin{tikzcd}[sep=1.9em]
+				A \rar["f"] \dar["g"] & X \dar["\overline{g}"] \arrow[ddr, "\hat{f}", bend left, Firebrick3] \\
+				Y \rar["\overline{f}"] \arrow[drr, "\hat{g}"',bend right, Firebrick3] & Z  \drar["\varphi", DodgerBlue3] \\
+				& & \hat{Z}
+			\end{tikzcd}
+		\)
+	\end{minipage}\\[-1.2em]
+	Wir sagen dann auch: \eqref{eq:111} ist der Pushout von 
+	\(
+		\begin{tikzcd}[sep=small]
+			Y & A \rar["f"] \lar["g"']& X 
+		\end{tikzcd}
+	\).
+\end{definition}
+
+\begin{bemerkung}[{name=[Existenz von Pushouts]},label=bem:112]
+	Jedes Diagramm $\begin{tikzcd}[sep=small]
+			Y & A \rar["f"] \lar["g"']& X 
+		\end{tikzcd}$ lässt sich zu einem Pushout vervollständigen:
+	Betrachte dazu den Raum $X \cup_A Y := \sfrac{X \coprod Y}{f(a) \sim g(a) \forall a \in A}$ mit der Quotiententopologie. 
+	Sind $\overline{f}\colon Y \to X \cup_A Y$ und $\overline{g}\colon X \to X \cup_A Y$ die von den Inklusionen $X \hookrightarrow X \coprod Y$ und $Y \hookrightarrow X \coprod Y$ induzierten Abbildungen, so ist 
+	\[
+		\begin{tikzcd}[row sep=1.6em]
+			A \rar["f"] \dar["g"'] & X \dar["\overline{g}"] \\
+			Y \rar["\overline{f}"] & X \cup_A Y
+		\end{tikzcd}
+	\]
+	ein Pushout. 
+	Existenz und Eindeutigkeit aus der universellen Eigenschaft können benutzt werden um zu zeigen, dass der Pushout eindeutig bis auf kanonischen Homöomorphismus ist.
+\end{bemerkung}
 
 
+
+\begin{definition}[{name=[CW-Komplex]}]
+	Ein \Index{CW-Komplex} ist ein topologischer Raum $X$ zusammen mit einer Filtrierung durch Unterräume von $X$:\marginnote{$X^\ssbrace{i}$ bezeichnet man auch als $i$-Gerüst oder $i$-Skelett} 
+	\[
+		\emptyset = X^{(-1)} \subseteq X^{\ssbrace{0}} \subseteq X^{(1)} \subseteq X^{(2)} \subseteq  \ldots \subseteq X^\ssbrace{n} \subseteq X^\ssbrace{n+1} 
+		\subseteq \ldots \subseteq X
+	\]
+	sodass die folgenden zwei Eigenschaften erfüllt sind:
+	\begin{enumerate}[(i),itemsep=0pt]
+		\item \Index{Zellstruktur}: Zu jedem $n \in \mathbb{N}$ gibt einen Pushout von topologischen Räumen 
+		\[
+			\begin{tikzcd}[row sep = 2.3em, column sep = 5.2em]
+				\coprod S^{n-1} \rar["\coprod q_i^\ssbrace{n}"] \dar["\coprod j_i"', hook] 
+				& X^\ssbrace{n-1} \dar[hook, "k^{(n)}"] \\
+				\coprod D^n \rar["\coprod Q_i^\ssbrace{n}"] & X^\ssbrace{n}
+			\end{tikzcd}
+			\marginnote{Koprodukte indiziert über $i \in I^\ssbrace{n}$}
+		\]
+		wobei $j_i \colon S^{n-1} \hookrightarrow D^n$ und $k_n \colon X^\ssbrace{n-1} \hookrightarrow X^\ssbrace{n}$ die Inklusionen sind.
+		\item \Index{Schwache Topologie}: Es ist $X= \bigcup_{n \in \mathbb{N}} X^\ssbrace{n}$ und $U \subseteq X$ ist genau dann offen, wenn $U \cap X^\ssbrace{n} \subseteq X^\ssbrace{n}$ für 
+		alle $n$ offen ist.
+	\end{enumerate}
+	Eine Abbildung $f \colon X \to Y$ zwischen CW-Komplexen heißt \bet{zellulär}\index{zelluläre Abbildung}, falls $f\enbrace*{X^\ssbrace{n}}\subseteq Y^{(n)}$ für alle $n \in \mathbb{N}$ gilt.
+\end{definition}
+
+Zitat von \hrefsymX{https://en.wikipedia.org/wiki/CW_complex}{Wikipedia} zum Namen: \textenglish{\emph{The C stands for \enquote{closure-finite}, and the W for \enquote{weak topology}.}} C für \emph{\enquote{cell}} scheint mir allerdings auch sinnvoll.
+
+\begin{bemerkung}
+	\begin{enumerate}[(i)]
+		\item Die Abbildungen $q_i^\ssbrace{n}$ und $Q_i^\ssbrace{n}$ sind \emph{nicht} Teil der Struktur eines CW-Komplex. 
+		Nur die Existenz von $q_i^\ssbrace{n}$ und $Q_i^\ssbrace{n}$ wird gefordert -- sie ist nicht notwendig eindeutig. 
+		Hat man $q_i^\ssbrace{n}$ und $Q_i^\ssbrace{n}$ \emph{gewählt}, so heißt $q_i^\ssbrace{n}$ die \Index{anklebende Abbildung} der $i$-ten $n$-Zelle und $Q_i^\ssbrace{n}$ die \Index{charakteristische Abbildung} der $i$-ten $n$-Zelle.
+		\item Sei $\mathring{D}^n = D^n \setminus S^{n-1}$ das Innere von $D^n$. 
+		Die Abbildungen $Q_i^\ssbrace{n}$ schränken sich zu einem Homöomorphismus $\coprod_{i \in I^{(n)}} \mathring{D}^n \to X^\ssbrace{n} \setminus X^\ssbrace{n-1}$ ein.\footnote{Dass dies ein Homöomorphismus ist, folgt aus der Pushout-Eigenschaft und dem letzen Teil der \autoref{bem:112}, denn es gilt demnach $X^\ssbrace{n}\cong X^\ssbrace{n-1}\cup_{\coprod S^{n-1}} \coprod D^n$.} 
+		Insbesondere lässt ich $I^\ssbrace{n}$ mit der Menge der Wegzusammenhangskomponenten von $X^\ssbrace{n} \setminus X^\ssbrace{n-1}$ identifizieren. 
+		Die Wegzusammenhangskomponenten heißen die \bet{offenen Zellen}\index{offene Zelle} von $X$. 
+		Damit ist jeder CW-Komplex die disjunkte Vereinigung seiner offenen Zellen.
+	
+		\faWarning\,Achtung: Jede offene $n$-Zelle ist offen in $X^\ssbrace{n}$, aber nicht notwendig in $X$.
+		\item Der Abschluss einer offenen Zelle $Q_i^\ssbrace{n}(\mathring{D}^n)$ ist $Q_i^\ssbrace{n}(D^n)$ und insbesondere kompakt. 
+		Die $Q_i^\ssbrace{n}(D^n)$ heißen die \bet{abgeschlossenen Zellen}\index{abgeschlossene Zelle} und sind als Abschluss von offenen Zellen unabhängig von der Wahl der $Q_i^\ssbrace{n}$.
+	
+		\faWarning\,Achtung: Abgeschlossene Zellen sind Bilder von $D^n$ unter stetigen Abbildungen, aber nicht notwendig homöomorph zu $D^n$.
+		\item Ein CW-Komplex $X$ heißt \bet{endlich}\index{CW-Komplex!endlicher}, wenn er nur aus endlich vielen Zellen besteht, also wenn 
+		$I = \bigcup_{n \in \mathbb{N} } I^\ssbrace{n}$ endlich ist. 
+		Insbesondere gibt es dann ein $n$ mit $X=X^\ssbrace{n}$.
+	
+		Die Dimension von $X$ ist die maximale Dimension von Zellen von $X$, also $\dim X := N$, falls $X^\ssbrace{N}=X$, $X^\ssbrace{N-1} \subsetneq X$. Gibt es kein solches $N$ so setzen wir $\dim X := \infty$.
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{beispiel}[label=bsp:115]
+	Viele uns bereits bekannte Räume haben eine CW-Komplex-Stuktur:
+	\begin{enumerate}[(i)]
+		\item $S^n$ mit 
+		\[
+			(S^n)^{(k)} = \begin{cases}
+				\emptyset, &\text{ falls }k=-1\\
+				\set{(1,0,\ldots ,0)}, &\text{ falls } k=0, \ldots n-1 \\
+				S^n , &\text{ falls } k \ge n 
+			\end{cases}
+		\]
+		ist ein CW-Komplex via $S^n \cong \nicefrac{D^n}{S^{n-1}}$
+		\[
+			\begin{tikzcd}
+				S^{n-1} \rar \dar[hook] & \enbrace*{S^n}^{(n-1)} \rar[equal] \dar[hook] & \set{(1,0,\ldots ,0)}   \\
+				D^n \rar & S^n  
+			\end{tikzcd}
+		\]
+		\item $S^n$ mit $(S^n)^{(k)} = \set{(x_0, \ldots ,x_k,0, \ldots ,0) \in S^n} $ ist ebenfalls eine CW-Struktur auf $S^n$.
+		\item Sei $K=(V,\Sigma)$ ein simplizialer Komplex. 
+		Es ist $\abs*{\Delta^n} \cong D^n$ und $\abs*{\partial \Delta^n} \cong S^{n-1}$. 
+		Sei $\Sigma^{(n)} := \Sigma_0 \cup \Sigma_1 \cup \ldots \cup \Sigma_n$. 
+		Dann wird $\abs*{K}$ durch $\abs*{K}^{(n)} := \abs*{\enbrace*{V,\Sigma^{(n)}}}$ für $n \ge 0$ zu einem CW-Komplex. 
+		Ist $f \colon K \to L$ eine \hyperref[def:25]{simpliziale Abbildung}, so ist $\abs*{f} \colon \abs*{K} \to \abs*{L}$ eine zelluläre Abbildung.
+		\item \label{enum:115:4}Der $n$-dimensionale reelle projektive Raum $\mathbb{R}P^n$ kann definiert werden durch\index{reell projektiver Raum} 
+		\[
+			\mathbb{R}P^n := \sfrac{\mathbb{R}^{n+1} \setminus \set{0}}{x \sim \lambda x} = \sfrac{S^n}{x \sim -x}
+		\]
+		Punkte in $\mathbb{R}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln reeller Zahlen und werden als die sogenannten homogenen Koordinaten\index{homogene Koordinaten} $[x_0 : \ldots : x_n]$ geschrieben. Es ist 
+		\[
+			\mathbb{R}P^n = \set*{[x_0 : \ldots : x_n] \given (x_0, \ldots ,x_n) \in S^n \rule{0cm}{1em}} 
+			= \set*{[x_0 : \ldots : x_n] \given (x_0, \ldots ,x_n) \in S^n, x_n \ge 0 \rule{0cm}{1em}}
+		\]
+		Wir erhalten einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^n}{x \sim -x, x \in S^{n-1}} \to \mathbb{R}P^n$ mit
+		\[
+			f^{(n)} \enbrace*{x_1, \ldots ,x_n} = \benbrace*{x_1 : \ldots : x_n : \sqrt{1- {\textstyle\sum\nolimits_{i=1}^{n}} x_i^2}} 
+		\]
+		Ist $Q^\ssbrace{n} \colon D^n \to \mathbb{R}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^n \twoheadrightarrow \nicefrac{D^n}{x \sim -x, x \in S^{n-1}}$ und 
+		$q^\ssbrace{n} \colon S^{n-1} \twoheadrightarrow \mathbb{R}P^{n-1}$ die Projektion, so erhalten wir einen Pushout
+		\[
+			\begin{tikzcd}
+				S^{n-1} \rar["q^\ssbrace{n}"] \dar[hook]& \mathbb{R}P^{n-1} \dar[hook] \\
+				D^n \rar["Q^\ssbrace{n}"] & \mathbb{R}P^n
+			\end{tikzcd}
+		\]
+		Induktiv erhalten wir einen CW-Struktur auf $\mathbb{R}P^n$ mit genau einer $k$-Zelle für $k=0,\ldots ,n$ und 
+		\[
+			\enbrace*{\mathbb{R}P^n}^{(k)} \cong \mathbb{R}P^k 
+		\]
+		\item \label{enum:115:5} Der $n$-dimensionale komplexe projektive Raum $\mathbb{C}P^n$ kann definiert werden durch 
+		\[
+			\mathbb{C}P^n := \sfrac{\mathbb{C}^{n+1} \setminus \set{0}}{z \sim \lambda z} = \sfrac{S^{2n+1}}{z \sim \lambda z, \lambda \in S^1 \subseteq \mathbb{C}}
+		\]
+		Punkte in $\mathbb{C}P^n$ sind Äquivalenzklassen von $(n+1)$-Tupeln komplexer Zahlen und werden als homogenen Koordinaten $[z_0 : \ldots : z_n]$ 
+		geschrieben. Es ist wieder
+		\[
+			\mathbb{C}P^n = \set*{[z_0 : \ldots : z_n] \given (z_0, \ldots ,z_n) \in S^{2n+1} \rule{0cm}{1em}} 
+			= \set*{[z_0 : \ldots : z_n] \given (z_0, \ldots ,z_n) \in S^{2n+1}, \abs{z_n} \ge 0 \rule{0cm}{1em}}
+		\]
+		Wir erhalten wieder einen Homöomorphismus $f^{(n)} \colon \nicefrac{D^{2n+1}}{z \sim \lambda z, z \in S^{2n-1},\lambda \in S^{1}} \to \mathbb{C}P^n$ durch
+		\[
+			f^{(n)} \enbrace*{z_1, \ldots ,z_n} = \benbrace*{z_1 : \ldots : z_n : \sqrt{1- {\textstyle\sum\nolimits_{i=1}^{n}} \abs{z_i}^2}} 
+		\]
+		Ist $Q^{(2n)} \colon D^{2n} \to \mathbb{C}P^n$ die Komposition von $f^{(n)}$ mit der Projektion $D^{2n} \twoheadrightarrow \nicefrac{D^{2n}}{z \sim \lambda z, z \in S^{2n}}$ und 
+		$q^\ssbrace{n} \colon S^{2n+1} \to \mathbb{C}P^{n-1}$ die Projektion, so erhalten wir auch wieder einen Pushout
+		\[
+			\begin{tikzcd}
+				S^{2n-1} \rar["q^\ssbrace{n}"] \dar[hook]& \mathbb{C}P^{n-1} \dar[hook] \\
+				D^{2n} \rar["Q^\ssbrace{n}"] & \mathbb{C}P^n
+			\end{tikzcd}
+		\]
+		Induktiv erhalten wir einen CW-Struktur auf $\mathbb{C}P^n$ mit genau einer $k$-Zelle für $k=0,2,\ldots ,2n$ und 
+		\[
+			\enbrace*{\mathbb{C}P^n}^{(k)} \cong \mathbb{C}P^{\floor*{\frac{k}{2}}} 
+		\]
+	\end{enumerate}
+\end{beispiel}
+
+\begin{lemma}[{name=[Kompaktheit von Teilmengen eines CW-Komplexes]},label=lem:116]
+	Sei $X$ ein CW-Komplex und $K \subseteq X$. 
+	Dann ist $K$ genau dann kompakt, wenn $K$ abgeschlossen ist und $K$ nur endlich viele offene Zellen von $X$ schneidet.
+\end{lemma}
+\begin{beweis}
+	Zunächst: Ist $S \subseteq X$ ein Unterraum der jede offene Zelle höchstens in einem Punkt schneidet, so ist $S$ diskret. 
+	Für $S_0 \subseteq S$ ist $S_0 \cap (X^\ssbrace{n} \setminus X^\ssbrace{n-1})$ abgeschlossen in $X^\ssbrace{n}$, da $S_0$ jede offene $n$-Zelle von $X$ höchstens in einem Punkt schneidet.  
+	Daher ist $S_0 \cap X^\ssbrace{n} \subseteq X^\ssbrace{n}$ abgeschlossen für alle $n$. 
+	Damit ist also jede Teilmenge $S_0 \subseteq S$ abgeschlossen in $X$ und $S$ somit diskret.
+
+	Sei nun $K \subseteq X$ kompakt. Dann ist $K$ sicher abgeschlossen. 
+	Sei $S \subseteq K$ ein Teilraum, der aus jeder offenen Zelle von $X$, die $K$ schneidet, genau einen Punkt enthält. 
+	Wegen der Vorüberlegung ist $S$ diskret. 
+	Da $S \subseteq K$ abgeschlossen und $K$ kompakt ist, ist $S$ auch kompakt. 
+	Damit ist $S$ endlich und $K$ schneidet nur endlich viele offene Zellen.
+
+	Ist nun umgekehrt $K$ abgeschlossen und schneidet nur endlich viele offene Zellen, so ist $K$ enthalten in einer endlichen Vereinigung von abgeschlossen Zellen von $X$.
+	Da diese abgeschlossen Zellen kompakt sind, ist auch diese Vereinigung kompakt, K ist also ein abgeschlossener Teilraum eines kompakten Teilraums und damit selbst kompakt.
+\end{beweis}
+
+\begin{korollarB}[{name=[{ein CW-Komplex ist genau dann kompakt, wenn er endlich ist}]}]
+	Ein CW-Komplex ist genau dann kompakt, wenn er endlich ist.
+\end{korollarB}
+
+\newpage
+
+\section{Zelluläre Homologie} % (fold)
+\label{sec:12}
+
+\begin{definition}[{name=[{$n$-ter zellulärer Kettenmodul und zelluläre Randabbildung}]}]
+	Sei $X$ ein CW-Komplex. Dann heißt 
+	\[
+		C_n^{\cell}(X;R) := H_n \enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1};R} 
+	\]
+	der \bet{$\mathbf{n}$-te zelluläre Kettenmodul}\index{n-ter zellulärer Kettenmodul@$n$-ter zelluläre Kettenmodul} von $X$ mit Koeffizienten in $R$. Wir definieren die 
+	\bet{$\mathbf{n}$-te Randabbildung}\index{n-te Randabbildung@$n$-te Randabbildung!zellulär}
+	$\partial^{\cell}_n \colon C_n^{\cell}(X;R) \to C_{n-1}^{\cell}(X;R)$ durch die Komposition 
+	\[
+		\begin{tikzcd}[column sep=huge, row sep=large]
+			H_n \enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1};R} \rar["\partial_n^{\enbrace{X^\ssbrace{n}, X^\ssbrace{n-1}}}"] & H_{n-1} \enbrace*{X^\ssbrace{n-1};R} \dar["\enbrace*{j^{(n-1)}}_*"] \\
+			& H_{n-1} \enbrace*{X^\ssbrace{n-1}, X^\ssbrace{n-2};R} 
+		\end{tikzcd}
+	\]
+	Dabei ist $\partial_n^{\enbrace{X^\ssbrace{n}, X^\ssbrace{n-1}}}$ die Randabbildung aus der Paarfolge für $\enbrace*{X^\ssbrace{n},X^\ssbrace{n-1}}$ und $j^{(n-1)}$ die Inklusion
+	$\enbrace*{X^\ssbrace{n-1},\emptyset} \hookrightarrow \enbrace*{X^\ssbrace{n-1}, X^\ssbrace{n-2}}$.
+\end{definition}
+
+\begin{lemma}[{name=[{es gilt $\partial_{n-1}^{\cell} \circ \partial_n^{\cell} =0$}]}]
+	Es gilt
+	\[
+		\partial_{n-1}^{\cell} \circ \partial_n^{\cell} =0
+	\]
+\end{lemma}
+\begin{beweis}
+	Wir schreiben die Paarsequenz für $\enbrace*{X^\ssbrace{n},X^\ssbrace{n-1}}$ dreimal übereinander und erhalten:
+	\[
+		\tikzexternaldisable
+		\begin{tikzpicture}[baseline= (a).base]
+		\node[scale=0.81] (a) at (0,0){
+		\begin{tikzcd}[font=\normalsize,column sep=2.4em,arrows={line width=1.23*rule_thickness}]
+			H_n \enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1}} \rar["\partial_n"] \arrow[rrd, bend right,"\partial_n^{\cell}"',Firebrick3]& H_{n-1}(X^\ssbrace{n-1}) \dar[equal] \rar & \cdots\\
+			& H_{n-1}\enbrace*{X^\ssbrace{n-1}} \rar["j^{(n-1)}_*"] & H_{n-1} \enbrace*{X^\ssbrace{n-1}, X^\ssbrace{n-2}} \rar["\partial_{n-1}"] 
+			\arrow[rrd, bend right,"\partial_{n-1}^{\cell}"',Firebrick3] & H_{n-2} \enbrace*{X^\ssbrace{n-2}} \dar[equal] \rar & \cdots \\ 
+			& & & H_{n-2} \enbrace*{X^\ssbrace{n-2}}  \rar["j^{(n-2)}_*"] & H_{n-2} \enbrace*{X^\ssbrace{n-2}, X^{(n-3)}} 
+		\end{tikzcd}
+		};
+		\end{tikzpicture}
+		\tikzexternalenable\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+	\]
+	Also $\partial^{\cell}_{n-1} \circ \partial^{\cell}_n =0$, da wegen der Exaktheit der Paarfolge schon $\partial_{n-1} \circ j^{(n-1)}_* =0$ ist.
+\end{beweis}
+
+\begin{definition}[{name=[{Zellulärer Kettenkomplex und zelluläre Homologie}]}]
+	$\enbrace*{C_*^{\cell}(X;R),\partial_*^{\cell}}$ heißt der \bet{zelluläre Kettenkomplex}\index{zellulärer Kettenkomplex} von $X$ über $R$. 
+	Seine Homologie $H_*^{\cell}(X;R)$ heißt die \Index{zelluläre Homologie} von $X$.
+\end{definition}
+
+Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der Kategorie der CW-Komplexe und zellulären Abbildungen.
+
+\begin{lemma}[{name=[{über $\enbrace{\coprod Q_i^\ssbrace{n}, \coprod q_i^\ssbrace{n}}_* $ und $H_k \enbrace{\coprod_i D^n, \coprod_i S^{n-1};R}$}]},label=lem:124]
+	Sei $X$ ein CW-Komplex. Wähle $q_i^\ssbrace{n}$ und $Q_i^\ssbrace{n}$ für die Zellstruktur auf $X$. Dann gilt
+	\begin{enumerate}[a)]
+		\item Die Abbildung
+		\[
+			\enbrace*{{\textstyle\coprod\limits_{i \in I^{(n)}}} Q_i^\ssbrace{n}, {\textstyle\coprod\limits_{i \in I^{(n)}}} q_i^\ssbrace{n}} 
+			\colon \enbrace*{{\textstyle\coprod\limits_i} D^n, {\textstyle\coprod\limits_i} S^{n-1};R}  \longrightarrow
+			\enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1};R} 
+		\]
+		induziert einen Isomorphismus in Homologie.
+		\item Es gilt
+		\[
+			H_k \enbrace*{{\textstyle\coprod\limits_{i\in I^\ssbrace{n}}} D^n, {\textstyle\coprod\limits_{i\in I^\ssbrace{n}}} S^{n-1};R} = \begin{cases}
+				R[I^\ssbrace{n}], &\text{ falls }k=n\\
+				0, & \text{ sonst}
+			\end{cases}
+		\] 
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Sei $D^n_0 := D^n \setminus \set{0}$, $\frac{1}{2} D^n := \set[\frac{x}{2} ]{x \in D^n}$ und $\frac{1}{2} D^n_0 := \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
+		\[
+			X^\ssbrace{n-1}_{++} := X^\ssbrace{n} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^\ssbrace{n}(\set{0}) \quad \text{ und } \quad 
+			X^\ssbrace{n-1}_+ := X^\ssbrace{n} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^\ssbrace{n}\enbrace*{\frac{1}{2} D^n}
+		\]
+		Dann sind 
+		$X^\ssbrace{n-1} \hookrightarrow X_+^{(n-1)} \hookrightarrow X_{++}^{(n-1)}$ Homotopieäquivalenzen, da $\coprod_{i \in I^{(n)}} Q^\ssbrace{n}_i$ ein Homöomorphismus auf den offenen 
+		$n$-Zellen ist. Betrachte:
+		\[
+			\begin{tikzcd}[sep=large]
+				\enbrace*{\coprod D^n, \coprod S^{n-1}} \dar["\enbrace*{\coprod Q_i^\ssbrace{n}, \coprod q_i^\ssbrace{n}}"] \rar["(1)"] & \enbrace*{\coprod D^n, \coprod D^n_0} \dar &
+				\enbrace*{\coprod \frac{1}{2} D^n, \coprod \frac{1}{2} D_0^n} \lar["(2)"'] \dar["(3)"] \\
+				\enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1}} \rar["(5)"] & \enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1}_{++}}    
+				& \enbrace*{X^\ssbrace{n} \setminus X^\ssbrace{n-1}_+ , X^\ssbrace{n-1}_{++} \setminus X^\ssbrace{n-1}_+} \lar["(4)"'] 
+			\end{tikzcd}
+		\]
+		$(1), (2)$ und $(5)$ sind Homotopieäquivalenzen und induzieren Isomorphismen in Homologie. $(3)$ ist ein Homöomorphismus und induziert einen Isomorphismus in Homologie.
+		$(4)$ erfüllt die Vorraussetzungen für den \hyperref[satz:91]{Ausschneideisomorphismus} und induziert daher auch einen Isomorphismus in Homologie. Damit folgt a).
+		\item Da die Randabbildung aus der Paarsequenz in diesem Fall ein Isomorphismus ist, gilt 
+		\begin{align*}
+			H_k \enbrace*{\coprod_i D^n, \coprod_i S^{n-1};R} \xleftarrow{\cong} \bigoplus_i H_k (D^n,S^{n-1};R) &\xrightarrow{\cong} \bigoplus_i \tilde{H}_{k-1}(S^{n-1};R)\\
+			&\cong \bigoplus_i \begin{cases}
+				R, &\text{ falls }k=n\\
+				0, &\text{ sonst}
+			\end{cases} \\
+			&\cong \begin{cases}
+				R[I^{(n)}], &\text{ falls }k=n\\
+				0, &\text{ sonst}
+			\end{cases} \qedhere
+		\end{align*}
+	\end{enumerate}
+\end{beweis}
+
+\begin{bemerkung}[{name=[{Matrixform der zellulären Randabbildung}]}]
+	Wir haben soeben gezeigt, dass die folgenden Isomorphismen existieren:
+	\[
+		\begin{tikzcd}[row sep=tiny]
+			C_n^{\cell}(X;R) \arrow[draw=none]{d}[sloped,auto=false]{=} \rar["\partial_n^{\cell}"] & C_{n-1}^{\cell}(X;R) \arrow[draw=none]{d}[sloped,auto=false]{=}\\
+			H_n \enbrace*{X^\ssbrace{n},X^\ssbrace{n-1};R} \rar \arrow[draw=none]{d}[sloped,auto=false]{\cong}
+			& H_{n-1} \enbrace*{X^\ssbrace{n-1},X^\ssbrace{n-2};R} \arrow[draw=none]{d}[sloped,auto=false]{\cong}\\
+			R[I^{(n)}] \rar & R[I^{(n-1)}]  
+		\end{tikzcd}
+	\]
+	Die Randabbildung $\partial_n^{\cell}$ wird unter diesen Isomorphismen zu einer $I^{(n-1)} \times I^{(n)}$-Matrix. Für $j \in I^{(n-1)}$ und $k \in I^{(n)}$ ist der 
+	$(j,k)$-Eintrag dieser Matrix genau der Abbildungsgrad einer Selbstabbildung der $(n-1)$-Sphäre: 
+
+	Die $\enbrace{Q_i^\ssbrace{n-1}, q_i^\ssbrace{n-1}}$ induzieren einen Homöomorphismus
+	$\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \cong \nicefrac{X^\ssbrace{n}}{X^\ssbrace{n-1}}$. Durch Komposition mit der Projektion auf die $j$-te Zelle erhalten 
+	wir die folgenden Abbildung
+	\[
+		\nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \xrightarrow{p_j^{(n-1)}}  \nicefrac{D^{n-1}}{S^{n-2}} \cong S^{n-1}.
+	\] 
+	Der $(j,k)$-te Eintrag ist nun der 
+	Abbildungsgrad von 
+	\[
+		\begin{tikzcd}
+			S^{n-1} \rar["q^{(n-2)}_k"] & X^\ssbrace{n-1} \rar & \nicefrac{X^\ssbrace{n-1}}{X^\ssbrace{n-2}} \rar["\cong"] & \nicefrac{\coprod_i D^{n-1}}{\coprod_i S^{n-2}} \rar["p_j^{(n-1)}"]
+			& S^{n-1}
+		\end{tikzcd}
+	\]
+\end{bemerkung}
+
+\begin{definition}[{name=[natürlicher Isomorphismus]}]
+	Eine \hyperref[def:16]{natürliche Transformation} $\tau$ zwischen Funktoren $F,G\colon \mathcal{C} \to \mathcal{D}$ heißt ein \Index{natürlicher Isomorphismus}, wenn $\tau_C \colon F(C) \to G(C)$ für alle Objekte $C$ von $\mathcal{C}$ ein Isomorphismus in $\mathcal{D}$ ist.
+\end{definition}
+
+\begin{satz}[{name=[Natürlicher Isomorphismus zwischen zellulärer und singulärer Homologie]}]
+	Für CW-Komplexe gibt es einen natürlichen Isomorphismus $\tau_X \colon H_*^{\cell}(X;R) \xrightarrow{\cong} H_*(X;R)$.
+\end{satz}
+\begin{beweis}[{name={mit \autoref{lem:128}}}]
+	Betrachte folgendes Diagramm; die diagonalen Folgen sind Ausschnitte aus den Paarsequenzen: 
+	\[
+		{\begin{tikzcd}[row sep=large, column sep=tiny, arrows=thick]
+			& & & \underset{=0}{H_n \enbrace*{X^\ssbrace{n+1}, X^\ssbrace{n}}} \\ 
+			0 \stackrel{\mbox{\scriptsize\ref{lem:128} a)}}{=} H_n \enbrace*{X^\ssbrace{n-1}} \arrow[dr,Firebrick3] & 
+			& H_n \enbrace*{X^\ssbrace{n+1}} \rar["\cong","\mbox{\scriptsize\ref{lem:128} b)}"']  \arrow[ur, Goldenrod2] & H_n(X)\\  
+			& H_n \enbrace*{X^\ssbrace{n}} \arrow[ur, two heads, Goldenrod2] \arrow[dr, hook,"j^{(n)}_*", Firebrick3]\\
+			H_{n+1} \enbrace*{X^\ssbrace{n+1},X^\ssbrace{n}} \arrow[ur, Goldenrod2,"\partial_{n+1}^{X^\ssbrace{n+1},X^\ssbrace{n}}"]\arrow[rr,"\partial_{n+1}^{\cell}"] 
+			& & H_n \enbrace*{X^\ssbrace{n},X^\ssbrace{n-1}} \arrow[rr,"\partial_n^{\cell}"] \arrow[dr,"\partial_n^{X^\ssbrace{n},X^\ssbrace{n-1}}", Firebrick3]
+			& & H_{n-1}  \enbrace*{X^\ssbrace{n-1},X^\ssbrace{n-2}}  \\
+			& & & H_{n-1} \enbrace*{X^\ssbrace{n-1}} \arrow[ur, hook, DodgerBlue3, "j^{(n-1)}_*"'] \\
+			& & \underset{=0}{H_{n-1}\enbrace*{X^\ssbrace{n-2}} } \arrow[ur, DodgerBlue3]
+		\end{tikzcd}}
+		\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+	\]
+	Es folgt, dass $j_*^{(n)}$ wegen Exaktheit einen Isomorphismus $H_n(X^\ssbrace{n};R) \xrightarrow{\cong} \ker\partial_n^{\cell}$ induziert. Da $j_*^{(n)}$ injektiv ist,
+	induziert $j_*^{(n)}$ außerdem einen Isomorphismus $\im \partial_{n+1}^{X^\ssbrace{n+1}, X^\ssbrace{n}} \xrightarrow{\cong} \im \partial_{n+1}^{\cell}$.
+	% Es folgt, dass $j_*^{(n)}$ Isomorphismen $H_n(X^\ssbrace{n};R) \xrightarrow{\cong} \ker \partial_n^{\cell}$ und
+	% $\im \partial_{n+1}^{X^\ssbrace{n+1}, X^\ssbrace{n}} \xrightarrow{\cong} \im \partial_{n+1}^{\cell}$ induziert.
+	Insgesamt erhalten wir natürliche Isomorphismen
+	\[
+		H_n(X;R) \cong H_n \enbrace*{X^\ssbrace{n+1};R} \cong \nicefrac{H_n(X^\ssbrace{n};R)}{ \im \partial_{n+1}^{X^\ssbrace{n+1}, X^\ssbrace{n}}}
+		\cong \nicefrac{\ker \partial_n^{\cell}}{\im \partial_{n+1}^{\cell}} \cong H_n^{\cell}(X;R) \qedhere
+	\]
+\end{beweis}
+
+\begin{lemma}[{name=[{Die Homologie des $n$-Gerüsts und die von $X^\ssbrace{n} \hookrightarrow X$ induzierte Abbildung}]},label=lem:128]
+	Sei $X$ ein CW-Komplex.
+	\begin{enumerate}[a)]
+		\item Für $k >n$ ist $H_k(X^\ssbrace{n};R)=0$.
+		\item Für $k <n$ induziert die Inklusion $l_n\colon X^\ssbrace{n} \hookrightarrow X$ einen Isomorphismus $(l_n)_* \colon H_k(X^\ssbrace{n};R) \to H_k(X;R)$.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Ist $k>n$, so erhalten wir aus der Paarfolge einen Isomorphismus
+		\[
+			\begin{tikzcd}[column sep=small]
+				\underset{\textstyle\StackText{\ref{lem:124}}{=} 0}{H_{k+1}\enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1};R}} \rar &  H_k(X^\ssbrace{n-1};R) \rar["\cong"] & 
+				H_k(X^\ssbrace{n};R) \rar 
+				& H_k \underset{\textstyle\StackText{\ref{lem:124}}{=}0}{\enbrace*{X^\ssbrace{n}, X^\ssbrace{n-1};R} }
+			\end{tikzcd}
+		\]
+		Da $H_k(X^{\ssbrace{0}};R)=0$ für $k>0$, folgt a) nun durch endliche Induktion für $n=0,1, \ldots , k-1$.
+		\item Ist $n >k$, so erhalten wir aus der Paarfolge
+		\[
+			\begin{tikzcd}[column sep=small]
+				\underset{\textstyle\StackText{\ref{lem:124}}{=}0}{H_{k+1} \enbrace*{X^\ssbrace{n+1},X^\ssbrace{n};R}} \rar & H_k \enbrace*{X^\ssbrace{n};R} \rar["\cong"] 
+				& H_k \enbrace*{X^\ssbrace{n+1};R} \rar 
+				& \underset{\textstyle\StackText{\ref{lem:124}}{=}0}{H_k \enbrace*{X^\ssbrace{n+1},X^\ssbrace{n};R}}
+			\end{tikzcd}
+		\]
+		Für $m \ge n >k$ induziert die Inklusion $X^\ssbrace{n} \hookrightarrow X^\ssbrace{m}$ daher einen Isomorphismus in Homologie $H_k(X^\ssbrace{n};R) \to H_k(X^{(m)};R)$. 
+		Ist $\dim X$ endlich, so folgt die Behauptung. 
+	
+		Im allgemeinen Fall beobachten wir zunächst, dass es zu jeder stetigen Abbildung $\sigma\colon\abs{\Delta^j}\to X$ ein $n$ gibt mit 
+		$\im \sigma \subseteq X^\ssbrace{n}$, da $\im \sigma \subseteq X$ kompakt ist und daher nur endlich viele offene Zellen von $X$ trifft (siehe \autoref{lem:116}).
+		Also gilt
+		\(
+			C_*(X;R) = \bigcup_n C_*(X^\ssbrace{n};R)
+		\).
+		Damit folgt \begin{enumerate}[(1)]
+			\item $\forall x \in H_k(X;R) $ existiert ein $n$, sodass $x$ im Bild von $ H_k(X^\ssbrace{n};R) \to H_k(X;R)$.
+			\item $\forall x\in H_k(X^\ssbrace{n};R)$ mit trivialem Bild von $x$ in $H_k(X;R)$, gibt es ein $m \ge n$, sodass das Bild von $x$ in $H_k(X^\ssbrace{m};R)$
+			trivial ist.
+		\end{enumerate}
+		Da für $m \ge n >k$ die Abbildung $H_k(X^\ssbrace{n};R) \to H_k(X^\ssbrace{m};R)$ ein Isomorphismus ist, ergibt sich damit die Behauptung. \qedhere 
+	\end{enumerate}
+\end{beweis}
+
+\begin{korollar}[{name=[Die Eulercharakteristik ist eine topologische Invariante]},label=kor:129]
+	Die Eulercharakteristik eines endlichen simplizialen Komplexes ist eine topologische Invariante.
+\end{korollar}
+\begin{beweis}
+	Sei $a_n$ die Anzahl der $n$-Simplizes von $K$. 
+	Dann gibt es eine CW-Struktur auf $\abs*{K}$, die für jedes $n$ genau $a_n$ Zellen hat.\marginnote{Man beachte, dass \ref{satz:410} für beliebige $\mathbb{Z}$-Kettenkomplexe und deren Homologie gilt}
+	\[
+		\chi(K) = \sum_{i=0}^{\infty} (-1)^i a_i \StackText{\ref{lem:124}}{=} \sum_{i=0}^{\infty} (-1)^i \Rg C_i^{\cell} \enbrace[\big]{\abs*{K}} 
+		\StackText{\ref{satz:410}}{=}
+		\sum_{i=0}^{\infty} (-1)^i \Rg H_i^{\cell} \enbrace[\big]{\abs*{K}} = \sum_{i=0}^{\infty} (-1)^i \Rg H_i \enbrace[\big]{\abs*{K} }    
+	\]
+	Da die $H_i \enbrace[\big]{\abs*{K}}$ eine topologische Invariante sind, ist auch $\chi(K)$ eine topologische Invariante.
+\end{beweis}
+
+\begin{bemerkung}[{name=[{n-te Bettizahl und Eulercharakteristik eines CW-Komplexes}]}]
+	Ist $X$ ein CW-Komplex mit endlich vielen $n$- und $n+1$-Zellen, so ist $H_n(X)$ ein endlich erzeugter $\mathbb{Z}$-Modul. 
+	Man definiert dann die \bet{$\mathbf{n}$-te Bettizahl}\index{n-te Bettizahl@$n$-te Bettizahl} von $X$ als $b_n := \Rg H_n(X)$. 
+	Ist $X$ ein endlicher CW-Komplex, so definiert man die Euler-Charakteristik von $X$ als\index{Euler-Charakteristik!eines CW-Komplex}
+	\[
+		\chi(X) := \sum_{n=0}^{\infty} (-1)^{n} b_n.
+	\]
+	Ist $a_n$ die Anzahl der $n$-Zellen von $X$, so gilt $\chi(X)=\sum_{n=0}^{\infty} (-1)^n a_n$.
+\end{bemerkung}
+
+\begin{beispiel}[{name=[{Homologie des komplex projektiven Raumes}]}]
+	Es gilt 
+	\[
+		H_k \enbrace*{\mathbb{C}P^n;R} \cong  \begin{cases}
+			R, &\text{ falls }k=0,2,4,\ldots ,2n\\
+			0 ,&\text{ sonst}
+		\end{cases}
+	\]
+\end{beispiel}
+\begin{beweis}
+	Aus \hyperref[enum:115:5]{Beispiel \ref*{bsp:115} \ref*{enum:115:5}} wissen wir, dass es auf $\mathbb{C}P^n$ eine CW-Struktur gibt mit genau einer Zelle in der Dimension $0,2,4, \ldots ,2n$ (und keine weiteren 
+	Zellen). Der zelluläre Kettenkomplex hat daher folgende Form:
+	\[
+		\begin{tikzcd}[row sep=small,column sep=2.0em]
+			0 & 1 & 2 & 3 & 4 & \cdots & 2n-1 & 2n & 2n +1 & \cdots \\
+			R & 0 \lar & R \lar& 0 \lar & R \lar & \cdots \lar & 0 \lar& R \lar & 0 \lar & \cdots \lar
+		\end{tikzcd}
+	\]
+	Alle Randabbildungen sind trivial und die Homologie von $\mathbb{C}P^n$ stimmt mit den zellulären Kettenkomplexen überein.
+\end{beweis}
+
+\begin{beispiel}[{name=[{ Homologie des reell projektiven Raumes}]}]
+	Es gilt 
+	\[
+		H_k(\mathbb{R}P^n;\mathbb{Z})\cong \begin{cases}
+			\mathbb{Z}, &\text{ falls }k=0 \text{ oder }(k=n \text{ und $k$ ungerade})\\
+			\nicefrac{\mathbb{Z}}{2 \mathbb{Z}} ,&\text{ falls } 0<k<n \text{ und $k$ ungerade} \\
+			0 ,&\text{ sonst}
+		\end{cases}
+	\]
+\end{beispiel}
+\begin{beweis}
+	Aus \hyperref[enum:115:4]{Beispiel \ref*{bsp:115} \ref*{enum:115:4}} wissen wir, dass es eine CW-Struktur auf $\mathbb{R}P^n$ gibt, die für $k=0,\ldots ,n$ genau eine $k$-Zelle und keine weiteren Zellen besitzt.
+	Der zelluläre Kettenkomplex von $\mathbb{R}P^n$ (über $\mathbb{Z}$) hat also die Form:
+	\[
+		\begin{tikzcd}[column sep=large]
+			\mathbb{Z} & \mathbb{Z} \lar["\partial_1^{\cell}"'] & \mathbb{Z} \lar["\partial_2^{\cell}"'] & \cdots \lar & \mathbb{Z} \lar & \mathbb{Z} 
+			\lar["\partial_n^{\cell}"'] & 0 \lar
+		\end{tikzcd}
+	\]
+	Wir müssen die Randabbildung verstehen. 
+	In der CW-Struktur können wir $(\mathbb{R}P^n)^{(k)}$ mit $\mathbb{R}P^k$ identifizieren. 
+	Die anklebende Abbildung $q^\ssbrace{k+1} \colon S^k \to \mathbb{R}P^k$ der $(k+1)$-Zelle ist die Projektion $(x_0, \ldots ,x_k) \mapsto [x_0 : \ldots : x_k]$. 
+	Die charakteristische Abbildung $Q^\ssbrace{k+1} \colon D^{k+1} \to \mathbb{R}P^{k+1}$ der $(k+1)$-Zelle ist gegeben durch 
+	\[
+		(x_0, \ldots ,x_k) \mapsto \benbrace*{x_0 : \ldots : x_k : {\textstyle\sqrt{\cramped 1- \norm{(x_1,\ldots, x_k)}^2}}} 
+	\]
+	Betrachte folgendes kommutatives Diagramm:\marginnote{Das linke untere Quadrat kommutiert, da die Randabbildung aus der Paarfolge eine natürliche Transformation ist. Das rechte, da die zugrunde liegenden Abbildungen kommutieren.}
+	\[
+		\begin{tikzcd}[column sep=huge, row sep=large]
+			C_{k+1}^{\cell}(\mathbb{R}P^n) \arrow[rr,"\partial_{k+1}^{\cell}"] \dar[equal] & & C_k^{\cell}(\mathbb{R}P^n) \dar[equal]\\
+			H_{k+1} \enbrace*{\mathbb{R}P^{k+1},\mathbb{R}P^k} \rar["\partial^{\mathbb{R}P^{k+1},\mathbb{R}P^k}"] & H_k(\mathbb{R}P^k) \rar
+			& H_k \enbrace*{\mathbb{R}P^k,\mathbb{R}P^{k-1}} \\
+			H_{k+1}(D^{k+1},S^k) \uar["\enbrace*{Q^\ssbrace{k+1},q^\ssbrace{k+1}}_*","\cong"'] \rar["\partial^{D^{k+1},S^k}","\cong"'] & \tilde{H}_k(S^k) \uar["\enbrace*{q^\ssbrace{k+1}}_*"] \rar["j_*"] 
+			& H_k(S^k,S^{k-1}) \uar["\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_*"']
+		\end{tikzcd}
+	\]
+	Das Bild von $\partial_{k+1}^{\cell}$ stimmt also mit dem Bild der Komposition 
+	\[
+		\begin{tikzcd}[column sep=5.5em]
+			H_k(S^k) \rar["j_*"] & H_k(S^k,S^{k-1}) \rar["\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_*"] & H_k \enbrace*{\mathbb{R}P^k, \mathbb{R}P^{k-1}} 
+		\end{tikzcd}
+	\]
+	überein. 
+	Sei $i_{\pm} \colon D^k \to S^k$ definiert durch $i_{\pm}(x)= \enbrace[\big]{\pm x,\pm\sqrt{\cramped 1-{\scriptscriptstyle\norm{\textstyle x}^{2}}}}$. 
+	Sei $l\colon S^{k-1} \hookrightarrow i_-(D^k)$ die Inklusion und $R \colon S^k \to S^k$ die Punktspiegelung $x \mapsto -x$. 
+	Es ist $i_+ = R \circ i_-$. Betrachte
+	\marginnote{faktorisieren über 0}
+	\begin{equation*}
+		\begin{tikzcd}[column sep=huge, row sep=large]
+			& \tilde{H}_k(S^k) \dar["j_*"] \\
+			\bigoplus\limits_{\displaystyle{\color{light_gray}y_- \in } H_k(D^k,S^{k-1})}^{\displaystyle {\color{light_gray}y_+ \in }H_k(D^k,S^{k-1})} 
+			\rar["\bigoplus\limits^{\scriptstyle(i_+,i_+|_{S^{k-1}})_*}_{\scriptstyle(i_-,i_-|_{S^{k-1}})_*}","\cong"'] 
+			& H_k(S^k,S^{k-1}) \dar["\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_*"] \rar["\cong"',"{\begin{pmatrix}
+				\enbrace*{\id_{S^k},l}_* \\ \enbrace{R,R|_{S^{k-1}}}_*
+			\end{pmatrix}}"] 
+			& \bigoplus\limits_{\displaystyle H_k \enbrace*{S^k,i_-(D^k)} {\color{light_gray} \ni x_-}}^{\displaystyle H_k \enbrace*{S^k,i_-(D^k)} {\color{light_gray} \ni x_+}} \\
+			& H_k \enbrace*{\mathbb{R}P^k,\mathbb{R}P^{k-1}} 
+		\end{tikzcd}
+		\label{eq:1213} \tag{\#}
+	\end{equation*}
+	In der Übungen haben wir gesehen, dass die horizontalen Abbildungen Isomorphismen sind.
+	Sei $x \in \tilde{H}_k(S^k)$ ein Erzeuger.
+	Seien $(x_+,x_-)$ und $(y_+,y_-)$ die Elemente, die $j_*(x)$ unter den horizontalen Isomorphismen in \eqref{eq:1213} entsprechen.
+	Mit Hilfe der Paarfolge zu $\enbrace{S^k,i_-(D^k)}$ sehen wir, dass die Inklusion $j_- \colon (S^k, \emptyset) \hookrightarrow \enbrace{S^k,i_-(D^k)}$ einen Isomorphismus $(j_-)_* \colon \tilde{H}_k(S^k) \to \tilde{H}_k \enbrace{S^k, i_-(D^k)}$ induziert. 
+	Es ist nun $(\id_{S^k},l) \circ j = j_-$ und $(R,R|_{S^{k-1}}) \circ j= j_- \circ R$. 
+	Damit ist $x_+$ ein Erzeuger von $H_k(S^k,i_+(D^k))$. 
+	Weiter entspricht $R_*$ der Multiplikation mit $(-1)^{k+1}$ nach \autoref{bsp:106}. Damit folgt
+	\begin{align*}
+		 x_- = \enbrace*{R,R\big|_{S^{k+1}}}_* \circ j_* (x) = \enbrace*{\id_{S^k},l} \circ j_* \circ R_*(x) = \enbrace*{\id_{S^k},l}_* \circ j_* \enbrace*{(-1)^{k+1}x} = 
+		 (-1)^{k+1}\cdot x_+    
+	\end{align*}
+	% Da $(\id_{S^k},l) \circ (i_+,i_+|_{S^{k-1}}) = (R,R|_{S^{k-1}}) \circ (i_-,i_-|_{S^{k-1}})$, folgt auch $y_- = (-1)^{k+1} y_+$.
+	Die Komposition der horizontalen Isomorphismen in \eqref{eq:1213} ist gegeben durch\marginnote{Ich sehe noch immer nicht ganz ein, warum dies so ist. Über genauere Ausführungen wäre ich sehr dankbar}
+	\[
+		\begin{pmatrix}
+			\enbrace*{i_+,l \circ i_+|_{S^{k-1}}}_* & 0 \\
+			0 & \enbrace*{R,R|_{S^{k-1}}}_*  \circ \enbrace*{i_-, i_-|_{S^{k-1}}}_*
+		\end{pmatrix}=
+		\begin{pmatrix}
+			\enbrace*{i_+, l \circ i_+|_{S^{k-1}}}_* & \\
+			& \enbrace*{i_+,l \circ i_+|_{S^{k-1}}}_*
+		\end{pmatrix}
+	\]
+	Es folgt, dass $y_+$ ein Erzeuger von $H_k(D^k,S^{k-1})$ ist und $y_- = (-1)^{k+1} y_+$
+	% \todo{Für die Gleichung unten brauchen wir doch $\scriptscriptstyle\enbrace*{i_-,i_-|_{S^{k-1}}}_*(y_-) = (-1)^{k+1} \enbrace*{i_+,i_+|_{S^{k-1}}}_*(y_+)$ ??}
+	ist. 
+	In \eqref{eq:1213} wird $y_+$ auf $(q^\ssbrace{k+1},q^\ssbrace{k})_* \circ (i_+,i_+|_{S^{k-1}})_*(y_+) = \enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_*(y_+)$ abgebildet. 
+	Insbesondere wird $y_+$ auf einen Erzeuger $z_k \in H_k(\mathbb{R}P^k,\mathbb{R}P^{k-1})$ abgebildet, da diese Abbildung nach \ref{lem:124} ein Isomorphismus ist. Es folgt 
+	\begin{align*}
+		\enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace[\big]{j_*(x)} &= \enbrace*{q^\ssbrace{k+1},q^\ssbrace{k}}_* \enbrace*{\enbrace*{i_+,i_+\big|_{S^{k-1}}}_*(y_+) +
+		\enbrace*{i_-,i_-\big|_{S^{k-1}}}_*(y_-) } \\
+		&= \enbrace*{Q^\ssbrace{k},q^\ssbrace{k}}_* \enbrace*{y_+ + (-1)^{k+1} y_+} \\
+		& = \begin{cases}
+			2 z_k, &\text{ falls }k \text{ ungerade}\\
+			0 , &\text{ sonst}
+		\end{cases}  
+	\end{align*}
+	Es folgt 
+	\[
+		\im  \partial_{k+1}^{\cell} = \begin{cases}
+		2 \cdot C^{\cell}_k(X), &\text{ falls } k \text{ ungerade}\\
+		0 , &\text{ sonst}
+	\end{cases}
+	\]
+	Der zelluläre Kettenkomplex ist daher isomorph zu:
+	\[
+		\begin{tikzcd}
+			\mathbb{Z} & \mathbb{Z} \lar["0"'] & \mathbb{Z} \lar["2"'] & \mathbb{Z} \lar["0"'] & \cdots \lar & \overset{n}{\mathbb{Z}} \lar & 0 \lar & 0 \lar
+		\end{tikzcd}
+	\]
+	Womit die Behauptung folgt.
+\end{beweis}
+
+Für $R=\nicefrac{\mathbb{Z}}{2 \mathbb{Z}}$ ist
+\[
+	H_k \enbrace*{\mathbb{R}P^n; \nicefrac{\mathbb{Z}}{2 \mathbb{Z}}} = \begin{cases}
+		\nicefrac{\mathbb{Z}}{2 \mathbb{Z}}, &\text{ falls }k=0,\ldots ,n\\
+		0 ,&\text{ sonst}
+	\end{cases}
+\]
+
+\begin{satz}[{name=[{Isomorphie zwischen $C_*(K;R)$ und $C^{\cell}_n \enbrace*{\abs*{K};R}$}]}]
+	Sei $K$ ein geordneter simplizialer Komplex. 
+	Für $\sigma = \set{v_0, \ldots ,v_n} \in \Sigma_n$ mit $v_0 < v_1 < \ldots  < v_n$ sei $f_\sigma \colon \abs*{\Delta^n} \to \abs*{K}$ gegeben durch $f_\sigma \enbrace*{\sum_{i=0}^{n} t_i e_i} = \sum_{i=0}^{n} t_i v_i$. 
+	Wir erhalten 
+	\[
+		[f_\sigma] \in H_n \enbrace*{\abs*{K}^{(n)}, \abs*{K}^{(n-1)};R} = C^{\cell}_n \enbrace*{\abs*{K};R}. 
+	\]
+	Diese Zuordnung definiert einen Isomorphismus zwischen dem simplizialen Kettenkomplex von $K$ und dem zellulären Kettenkomplex von $\abs*{K}$
+	\[
+		\tau \colon C_*(K;R) \longrightarrow C_*^{\cell}\enbrace*{\abs*{K},R } 
+	\]
+	Insbesondere ist $H_*(K;R) \cong H_*(\abs*{K};R)$ eine topologische Invariante von $K$.
+\end{satz}
+\begin{beweis}
+	Betrachte 
+	\[
+		\begin{tikzcd}
+			\smashoperator[r]{\bigoplus\limits_{\sigma \in \Sigma_n}} R \dar["\cong"'] \rar["\cong"]
+			& \smashoperator[r]{\bigoplus\limits_{\sigma \in \Sigma_n}} H_n \enbrace*{\abs*{\Delta^\sigma}, \abs*{\partial \Delta^\sigma};R} \dar["\cong"'] \\
+			C_n(K;R) \rar["\tau"] & H_n \enbrace*{\abs*{K}^{(n)}, \abs*{K}^{(n-1)};R} 
+		\end{tikzcd}
+	\]
+	Nun ist auch $\tau$ ein Isomorphismus, da $[f_\sigma]$ ein Erzeuger von $H_n \enbrace*{\abs*{\Delta^\sigma}, \abs*{\partial \Delta^\sigma};R}$ ist, siehe Blatt 8. 
+	Es bleibt zu zeigen, dass $\sigma \mapsto  [f_\sigma]$ mit den Randabbildungen vertauscht. 
+	Dies ergibt sich sofort aus $f_{\partial_j \sigma} = \partial_j f_\sigma$.
+\end{beweis}
 
 
 
