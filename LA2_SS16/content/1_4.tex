@@ -1,0 +1,104 @@
+\section{Gruppen, Ringe, Körper}
+\begin{definition}[Gruppe]
+	\label{def:I.4.1}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(1)]
+		\item Eine \Index{Gruppe} $(G,*)$ besteht aus einer Menge $G$ zusammen mit einer Verknüpfung $*\colon G \times G \rightarrow G, (x,y) \mapsto x*y$ mit folgenden Eigenschaften:
+		\begin{enumerate}[a)]
+			\item $*$ ist \textbf{assoziativ}, das heißt es gilt $(x*y)*z = x * (y*z)$ für alle $x,y,z \in G$. \index{Assoziativität}
+			\item Es existiert ein \textbf{neutrales Element} $1 \in G$ für $*$, das heißt für alle $x \in G$ gilt $1 * x = x * 1 = x$. \index{Neutrales Element}
+			\item Zu jedem $x \in G$ existiert ein \textbf{inverses Element} $x^{-1} \in G$ mit $x * x^{-1} = x^{-1} * x = 1$. \index{Inverses Element}
+		\end{enumerate}
+		\item Eine Gruppe $(G,*)$ heißt \textbf{abelsche Gruppe}, falls zusätzlich das Kommutativgesetz gilt, das heißt für alle $x,y \in G$ gilt $x*y = y*x$. \index{Gruppe!abelsch}
+	\end{enumerate}
+\end{definition}
+
+\setcounter{definition}{3}
+\begin{beispiel}[Symmetrische Gruppe]
+	\label{def:I.4.4}
+	Sei $X$ eine Menge. Die Gruppe $S(X) := \{f \colon X \rightarrow X : f \text{ ist bijektiv}\}$ mit der Komposition $\circ$ als Verknüpfung heißt \textbf{symmetrische Gruppe} von $X$.
+	Besitzt $X$ mehr als zwei Elemente, so ist $(S(X),\circ)$ nicht abelsch. Für $X = \{1,2,\dots,n\}$ schreiben wir $S_n := S(X)$. \index{symmetrische Gruppe}
+\end{beispiel}
+
+\begin{definition}[Ring]
+	\label{def:I.4.5}
+	Ein \Index{Ring} $(R,+,\cdot)$ besteht aus einer abelschen Gruppe $(R,+)$ zusammen mit einer zusätzlichen Verknäpfung $\cdot \colon R \times R \rightarrow R, (x,y) \mapsto x \cdot y$, sodass Folgendes gilt:
+	\begin{enumerate}[(1)]
+		\item Ist $0 \in R$ das neutrale Element für $(R,+)$, so gilt $0 \cdot x = x \cdot 0 = 0$ für alle $x \in R$.
+		\item Die Verknüpfung $\cdot$ ist assoziativ.
+		\item Es gelden die \textbf{Distributivgesetze}, das heißt für alle $x,y,z \in R$ gilt $(x+y) \cdot z = x\cdot z + y \cdot z$ und $x\cdot(y+z) = x \cdot y + x \cdot z$. \index{Distributivität}
+	\end{enumerate}
+	Ist $\cdot$ kommutativ, so heißt $R$ ein \text{kommutativer Ring}.
+	Existiert zusätzlich ein neutrales Element $1 \in R$ für $\cdot$, so heißt $R$ ein \textbf{unitaler Ring} oder \textbf{Ring mit Eins}.
+	Die Menge $R^* := \{x \in R : \text{es existiert ein } x^{-1} \in R \text{ mit } x \cdot x^{-1} = x^{-1} \cdot x = 1\}$ heißt dann die \Index{Einheitengruppe} von $R$. \index{Ring!unital} \index{Ring!mit Eins} \index{Ring!kommutativ}
+\end{definition}
+
+\setcounter{definition}{6}
+\begin{definition}[Schiefkörper, Körper]
+	\label{def:I.4.7}
+	Sei $R$ ein Ring mit Eins.
+	Gilt $R^* = R \setminus \setzero$, so heißt $R$ ein \Index{Schiefkörper}.
+	Ist $R$ zusätzlich kommutativ, so heißt $R$ ein \Index{Körper}.
+\end{definition}
+
+\setcounter{definition}{9}
+\begin{definition}[Komplexe Zahlen]
+	\label{def:I.4.10}
+	Sei $\CC$ die Menge der formalen Summen der Gestalt $x+iy$ mit $x,y \in \RR$, also
+	\[
+		\CC:= \{x+iy : x,y \in \RR\}.
+	\]
+	Vermöge $i^2 := -1$ und der Verknüpfungen
+	\begin{align*}
+		(a+ib) + (c+id) &:= (a+c) + i(b+d) \\
+		(a+ib) \cdot (c+id) &:= (ac-bd) + i(bc+ad)
+	\end{align*}
+	ist $(\CC,+,\cdot)$ ein Körper -- der Körper der \textbf{komplexen Zahlen}. \index{komplexe Zahl}
+	Wir definieren weiter für $z = a+ib \in \CC$:
+	\begin{enumerate}[a)]
+		\item $\Re(z) := a$ -- der \Index{Realteil} von $z$.
+		\item $\Im(z) := b$ -- der \Index{Imaginärteil} von $z$.
+		\newpage
+		\item $\ol{z} := a-ib$ -- das \textbf{komplex Konjugierte} von $z$. \index{komplex Konjugiertes}
+		\item $\abs{z} := \sqrt{a^2+b^2}$ -- der \Index{Betrag} von $z$.
+	\end{enumerate}
+\end{definition}
+
+\setcounter{definition}{11}
+\begin{lemma}
+	\label{def:I.4.12}
+	Für alle $z = a+ib, w = c+id \in \CC$ gilt:
+	\begin{enumerate}[(1)]
+		\item $\abs{z}^2 = z \ol{z}$ und $\abs{zw} = \abs{z} \cdot \abs{w}$.
+		\item Ist $z \neq 0$, so auch $\abs{z}$, und es gilt $z^{-1} = \frac{1}{\abs{z}^2} \ol{z}$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{bemerkung}[Polardarstellung komplexer Zahlen]
+	\label{bem:I.4.13}
+	Ist $z = a+ib \in \CC$, so existiert ein $\varphi \in [0,2\pi]$ mit $\cos(\varphi) = \frac{a}{\abs{z}}$ und $\sin(\varphi) = \frac{b}{\abs{z}}$, das heißt es gilt
+	\[
+		z = \abs{z} \cdot (\cos \varphi + i \cdot \sin \varphi).
+	\]
+	\begin{center}
+			\begin{tikzpicture}[scale=1,>=Latex]
+			\draw [very thick,->] (-1.2,0) -- (3,0);
+			\draw [very thick,->] (0,-1.2) -- (0,2);
+			\draw [color=darkgray] (0,0) circle (1);
+			\draw (.1,1.5) -- (-.1,1.5) node[left]{$b$};
+			\draw (.1,1) -- (-.1,1) node[left]{$1$};
+			
+			\draw (1,.1) -- (1,-.1) node[below]{$1$};
+			\draw (2,.1) -- (2,-.1) node[below]{$a$};
+			
+			\coordinate (N) at (0,0);
+			\coordinate (Z) at (2,1.5);
+			\coordinate (A) at (2,0);
+			
+			\draw [dashed] (A) -- (Z) node[color=red, anchor=south west]{$z=a+ib$};
+			\draw [thick,color=red] (N) -- (Z) node[fill,circle,inner sep=1.5pt]{};
+			\draw pic["$\varphi$",draw=black,angle eccentricity=.7,angle radius=.8cm]{angle=A--N--Z};
+			\draw pic["$\bullet$",draw=black,angle eccentricity=.5,angle radius=.6cm]{angle=Z--A--N};
+		\end{tikzpicture}
+	\end{center}
+\end{bemerkung}

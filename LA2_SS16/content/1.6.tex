@@ -1,0 +1,111 @@
+\section{Lineare Abbildungen von $\mathbf{K^n}$ nach $\mathbf{K^m}$ und Matrizen}
+
+\begin{definition}[Linearkombination]
+	\label{def:I.6.1}
+	Sei $V$ ein $K$-Vektorraum, $v_1,\dots,v_m \in V$ und $\lambda_1,\dots,\lambda_m \in K$, so heißt
+	\[
+		\sum_{i=1}^{m} \lambda_i v_i
+	\]
+	eine \Index{Linearkombination} der Vektoren $v_1,\dots,v_m$ in $V$.
+\end{definition}
+
+\setcounter{definition}{2}
+\begin{lemma}
+	\label{lemma:I.6.3}
+	Sei $A \in M(m \times n,K)$, dann ist die Abbildung
+	\begin{align*}
+		F_A \colon K^n &\longrightarrow K^m \\
+		x &\longmapsto Ax
+	\end{align*}
+	mit $Ax$ wie in \autoref{def:I.3.5}(3) linear.
+\end{lemma}
+
+\begin{satz}[Umkehrung von \autoref{lemma:I.6.3}]
+	\label{satz:I.6.4}
+	Ist $F\colon K^n \rightarrow K^m$ eine lineare Abbildung, dann ist $A_F = (F(e_1),\dots,F(e_n)) \in M(m\times n,K)$ die eindeutige Matrix mit $F(x) = A_F x$ für alle $x \in K^n$.
+\end{satz}
+
+\setcounter{definition}{5}
+\begin{satz}
+	\label{satz:I.6.6}
+	Die Abbildung
+	\begin{align*}
+		\Phi \colon \Hom(K^n,K^m) &\longrightarrow M(m \times n,K) \\
+		F &\longmapsto A_F
+	\end{align*}
+	ist ein Isomorphismus von $K$-Vektorräumen mit Umkehrabbildung $\Phi^{-1}(A) = F_A$.
+	Für $A \in M(m\times n,A)$ setzen wir $\Kern(A) := \Kern(F_A)$ und $\Bild(A) := \Bild(F_A)$.
+\end{satz}
+
+\setcounter{definition}{7}
+\begin{satz}
+	\label{satz:I.6.8}
+	Seien $A \in M(m\times n,K)$ und $b \in K^m$.
+	Dann gilt:
+	\begin{enumerate}[(1)]
+		\item Das LGS $Ax = b$ besitzt genau dann eine Lösung $x \in K^n$, wenn $b \in \Bild(A)$.
+		\item Ist $x_s \in K^n$ eine spezielle Lösung von $Ax=b$, so ist die Menge $\LL$ aller Lösungen von $Ax=b$ gegeben durch
+		\[
+			\LL = x_s + \Kern(A) = \{x_s + x : x \in \Kern(A)\}.
+		\]
+	\end{enumerate}
+\end{satz}
+
+\begin{korollar}
+	\label{folg:I.6.9}
+	Sei $A \in M(m\times n,K)$.
+	Dann sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item Die Gleichung $Ax=b$ besitzt für jedes $b \in K^m$ genau eine Lösung $x \in K^n$.
+		\item Es gilt $\Kern(A) = \setzero$ und $\Bild(A) = K^m$.
+		\item Die Abbildung $F_A$ ist bijektiv.
+	\end{enumerate}
+\end{korollar}
+
+\setcounter{definition}{12}
+\begin{definition}[Matrixmultiplikation]
+	\label{def:I.6.13}
+	Für $B \in M(l \times m,K)$ und $A \in (m \times n,K)$ definieren wir das Produkt $C := B \cdot A = (c_{ij})_{i,j} \in M(l \times n,K)$ durch \index{Matrixmultiplikation}
+	\[
+		c_{ij} := \sum_{k=1}^{m} b_{ik}a_{kj} \quad \text{für } 1 \leq i \leq l \text{ und } 1 \leq j \leq n.
+	\]
+\end{definition}
+
+\begin{satz}
+	\label{satz:I.6.14}
+	Seien $F \colon K^n \rightarrow K^m, G \colon K^m \rightarrow K^l$ linear.
+	Dann gilt $A_{G \circ F} = A_G \cdot A_F$. \\
+	Ist umgekehrt $A \in M(m \times n,K), B \in M(l \times m,K)$, so ist $F_{BA} = F_B \circ F_A$.
+\end{satz}
+
+\setcounter{definition}{16}
+\begin{definition}[Inverse Matrix]
+	\label{def:I.6.17}
+	$A \in M(n \times n,K)$ heißt \Index{invertierbar}, falls eine Matrix $B \in M(n\times n,K)$ existiert mit $BA = AB = E_n$.
+	$B$ heißt die zu $A$ \Index{inverse Matrix} und ist eindeutig bestimmt.
+	Wir schreiben $A^{-1} := B$.
+\end{definition}
+
+\setcounter{definition}{18}
+\begin{satz}
+	\label{satz:I.6.19}
+	Sei $A \in M(n \times n,K)$.
+	Folgende Aussagen sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item $A$ ist invertierbar.
+		\item $F_A\colon K^n \rightarrow K^n$ ist invertierbar und es gilt $(F_A)^{-1} = F_{A^{-1}}$.
+		\item Für jedes $b \in K^n$ existiert genau eine Lösung $x \in K^n$ für das LGS $Ax = b$, und es gilt $x = A^{-1}b$.
+		\item $A$ lässt sich durch elementare Zeilenumformungen in die Einheitsmatrix $E_n$
+	\end{enumerate}
+\end{satz}
+\newpage
+\setcounter{definition}{21}
+\begin{definition}[allgemeine lineare Gruppe]
+	\label{def:I.6.22}
+	Sei $K$ ein Körper und sei $n \in \NN$.
+	Die Menge
+	\[
+		\GL(n,K) := \{A \in M(n\times n,K) : A \text{ ist invertierbar}\} \subseteq M(n\times n,K)
+	\]
+	ist versehen mit der Matrixmultiplikation eine Gruppe -- die \Index{allgemeine lineare Gruppe}.
+\end{definition}

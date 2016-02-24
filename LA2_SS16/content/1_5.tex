@@ -1,0 +1,83 @@
+\section{Vektorräume und lineare Abbildungen}
+\begin{definition}[Vektorraum]
+	\label{def:I.5.1}
+	Sei $K$ ein Körper.
+	Ein $\bm{K}$\textbf{-Vektorraum} besteht aus einer Menge $V \neq \emptyset$ versehen mit zwei Verknüpfungen \index{Vektorraum}
+	\begin{align*}
+		+\colon V \times V \rightarrow V, (u,v) \mapsto u+v \\
+		\cdot \colon K \times V \rightarrow V, (\lambda,v) \mapsto \lambda \cdot v,
+	\end{align*}
+	sodass $(V,+)$ eine abelsche Gruppe ist und für alle $\lambda, \mu \in K$ und $u,v \in V$ gilt:
+	\begin{enumerate}[(1)]
+		\item $(\lambda \mu) v = \lambda (\mu v)$
+		\item $\lambda(v+w) = \lambda v + \lambda w$
+		\item $(\lambda + \mu) v = \lambda v + \mu v$
+		\item $1 \cdot v = v$
+	\end{enumerate}
+\end{definition}
+
+\begin{beispiel}[Diverse Vektorräume]
+	\label{bsp:I.5.2}
+	\mbox{} \\[-1.4cm]
+	\begin{enumerate}[(1)]
+		\item $K^n$ ist ein Vektorraum mit den Verknüpfungen aus \autoref{def:I.3.5}(2).
+		\item $M(m \times n,K)$ ist ein Vektorraum vermöge komponentenweiser Addition und skalarer Multiplikation.
+		\item Für eine Menge $X \neq \emptyset$ und einen $K$-Vektorraum $V$ ist $\Abb(X,V) := \{f \colon X \rightarrow V\}$ ein Vektorraum vermöge
+		\begin{align*}
+			(f+g)(x) &:= f(x) + g(x) \\
+			(\lambda f)(x) &:= \lambda \cdot (f(x))
+		\end{align*}
+		f+r $\lambda \in K, x \in X$ und $f,g \in \Abb(X,V)$.
+		\item Der \Index{Polynomring} $K[T] := \{a_0 + a_1 T + a_2 T^2 + \dots + a_n T^n : a_i \in K, n \in \NN_0\}$ ist ein Vektorraum vermöge
+		\begin{align*}
+			\sum_{k=0}^{n} a_kT^k + \sum_{k=0}^{m} b_kT^k &:= \sum_{k=0}^{\max(m,n)} (a_k + b_k)T^k \\
+			\lambda \cdot \enb{\sum_{k=0}^{n} a_kT^k} &:= \sum_{k=0}^{n} (\lambda a_k)T^k
+		\end{align*}
+	\end{enumerate}	
+\end{beispiel}
+
+\setcounter{definition}{3}
+\begin{definition}[Untervektorraum]
+	\label{def:I.5.4}
+	Sei $V$ ein $K$-Vektorraum und $U \subseteq V$ nichtleer.
+	$U$ heißt \Index{Untervektorraum} von $V$, wenn gilt:
+	\begin{enumerate}[(1)]
+		\item Für alle $v,w \in U$ ist $v+w \in U$.
+		\item Für alle $\lambda \in K$ und $v \in U$ ist $\lambda v \in U$.
+	\end{enumerate}
+\end{definition}
+
+\setcounter{definition}{6}
+\begin{definition}[Lineare Abbildung]
+	\label{def:I.5.7}
+	Sei $K$ ein Körper und $V,W$ zwei $K$-Vektorräume.
+	Eine Abbildung $F \colon V \rightarrow W$ heißt $\mathbf{K}$\textbf{-linear} oder $\mathbf{K}$\textbf{-Vektorraum-Homomorphismus}, wenn für alle $v,w \in V$ und $\lambda \in K$ gilt:
+	\[
+		F(\lambda v + w) = \lambda \cdot F(v) + F(w).
+	\]
+	Wir definieren $\Hom(V,W) = \{F \colon V \rightarrow W \text{ linear}\}$.
+	$\Hom(V,W)$ ist ein Untervektorraum von $\Abb(V,W)$.
+\end{definition}
+
+\begin{beispiel}[Auswertungsabbildung]
+	\label{bsp:I.5.8}
+	Für jedes $x \in K$ ist die \Index{Auswertungsabbildung}
+	\begin{align*}
+		\ev_x \colon K[T] &\longrightarrow K \\
+		p = \sum_{k=0}^{n} a_kT^k &\longmapsto p(x) = \sum_{k=0}^{n} a_kx^k
+	\end{align*}
+	eine lineare Abbildung
+\end{beispiel}
+\newpage
+\begin{definition}[Isomorphismus, Kern, Bild]
+	\label{def:I.5.9}
+	Sei $F\colon V \rightarrow W$ linear.
+	\begin{enumerate}[(1)]
+		\item Ist $F$ bijektiv, so heißt $F$ ein \Index{Isomorphismus}.
+		$F^{-1}$ ist ebenfalls linear.
+		Existiert für zwei Vektorräume $V,W$ ein Isomorphismus $V \rightarrow W$, so heißen $V,W$ \textbf{isomorph} und wir schreiben $V \simeq W$.
+		\item Der Untervektorraum $\Kern(F) := \{v \in V : F(v) = 0_W\} \subseteq V$ heißt \Index{Kern} von $F$. \\
+		Es gilt: $F$ injektiv $\Leftrightarrow \Kern(F) = \setzero$.
+		\item Der Untervektorraum $\Bild(F) := F(V) := \{F(V) : v \in V\} \subseteq W$ heißt \Index{Bild} von $F$.
+	\end{enumerate}
+\end{definition}

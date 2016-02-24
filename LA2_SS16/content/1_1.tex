@@ -1,20 +1,85 @@
 \chapter{Lineare Algebra I (Zusammenfassung)} % (fold)
 \label{cha:1}
-
-	\todo{Zusammenfassung LA I einfügen.}
-\begin{definition}[Eine Definition]
-\label{def:1.1}
-	Ich bin Definition.
-	\begin{equation}
-		\text{und ich eine Gleichung.} \label{gleichung}
-	\end{equation}
+\setcounter{section}{2}
+\section{Lineare Gleichungssysteme}
+\setcounter{definition}{4}
+\begin{definition}[Matrix]
+	\label{def:I.3.5}
+	Sei $K$ ein Körper (siehe \autoref{def:I.4.7}).
+	\begin{enumerate}[(1)]
+		\item Ein Schema der Form
+		\[
+			A := \begin{pmatrix}
+				a_{11} & a_{12} & \dots & a_{1n} \\
+				a_{21} & a_{22} & \dots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \dots & a_{mn}
+			\end{pmatrix} = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}
+		\]
+		mit $a_{ij} \in K$ heißt $\bm{m \times n}$\textbf{-Matrix} über $K$. \index{Matrix}
+		Wir bezeichnen mit $M(m \times n,K)$ die Menge aller $m \times n$-Matrizen über $K$.
+		\item Wir identifizieren $M(n \times 1,K)$ mit $K^n$ (vgl. \todo{Ref. Isom.}), das heißt wir schreiben die Elemente des $K^n$ in der Regel als Spalten.
+		Für $x,y \in K^n$ und $\lambda \in K$ definieren wir:
+		\[
+			x+y = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} + \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} := \begin{pmatrix} x_1 + y_1 \\ \vdots \\ x_n + y_n \end{pmatrix} \qquad \text{und} \qquad \lambda \cdot x = \lambda \cdot \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} := \begin{pmatrix} \lambda x_1 \\ \vdots \\ \lambda x_n \end{pmatrix}
+		\]
+		\item Ist $A = (a_{ij})_{i,j} \in M(m \times n,K)$ und $x = (x_i)_i \in K^n$, so definieren wir $b = (b_i)_i := Ax \in K^m$ durch $b_i := \sum\limits_{j=1}^n a_{ij}x_j$.
+		(Dies ist ein Spezialfall der Matrixmultiplikation, vgl. \autoref{def:I.6.17})
+	\end{enumerate}
 \end{definition}
 
-\begin{beweis}
-	Ich bin ein Beweis, der die Gleichung referenziert: \eqref{gleichung}
-\end{beweis}
+\setcounter{definition}{6}
+\begin{definition}[Lineares Gleichungssystem]
+	\label{def:I.3.7}
+	Sei $K$ ein Körper, $A = (a_{ij})_{i,j} \in M(m\times n, K)$, $b = (b_i)_i \in K^m$. Die Gleichung
+	\[
+		Ax = b
+	\]
+	mit Unbekannten $x = (x_i)_i \in K^n$ heißt ein \textbf{lineares Gleichungssystem (LGS)} über $K$.
+	Ein Tupel $\tilde{x} \in K^n$ mit $A\tilde{x} = b$ \textbf{heißt} Lösung des LGS. \index{Lineares Gleichungssystem}
+\end{definition}
 
-Referenz auf die Definition: \ref{def:1.1}.
+\setcounter{definition}{8}
+\begin{definition}[Elementare Zeilenumformungen]
+	\label{def:I.3.9}
+	Sei $Ax = b$ ein LGS über $K$.
+	Folgende \textbf{elementare Zeilenumformungen} ändern die Lösungsmenge des LGS nicht: \index{elementare Zeilenumformungen}
+	\begin{enumerate}[(I)]
+		\item Vertauschen zweier Zeilen in $A$ und der entsprechenden Einträge in $b$.
+		\item Addition der $i$-ten Zeile von $A$ auf die $j$-te Zeile von $A$ und entsprechend den $i$-ten Eintrag von $b$ auf den $j$-ten Eintrag von $b$, $i \neq j$.
+		\item Multiplikation einer Zeile von $A$ und dem entsprechenden Eintrag von $b$ mit einer Konstanten $\lambda \in K \setminus \setzero$.
+		\item Addition des $\lambda$-fachen der $i$-ten Zeile auf die $j$-te Zeile von $A$, $i \neq j$, und Entsprechendes für die Einträge von $b$.
+	\end{enumerate}
+\end{definition}
 
+Durch diese Umformungen wird das Lösungstupel $x$ nicht verändert.
+Wir betrachten daher oft nur das Schema $(A \mid b)$, das heißt die Matrix, die aus $A$ durch Ergänzen der Spalte $b$ entsteht.
 
-\cleardoubleoddemptypage
+\setcounter{MaxMatrixCols}{20}
+\setcounter{definition}{10}
+\begin{satz}[Gaußsches Eliminationsverfahren]
+	\label{satz:I.3.11}
+	Sei $A \in M(m\times n,K)$ eine Matrix.
+	Dann lässt sich $A$ durch endlich viele elementare Zeilenumformungen der Form auf \Index{Zeilenstufenform} bringen, das heißt auf eine Form
+	\[
+		\tilde{A} = 
+		\begin{pmatrix}
+		0 & \dots & 0 & 1 & * & 0 & \dots &  &  &  &  & 0 \\ 
+		0 & \dots &  & \dots & 0 & 1 & * & 0 & \dots &  &  & 0 \\ 
+		0 & \dots &  &  &  & \dots & 0 & 1 & * & 0 & \dots & 0 \\ 
+		\vdots &  &  &  &  &  &  & \ddots & \ddots & \ddots &  & \vdots \\ 
+		\vdots &  &  &  &  &  &  &  & \ddots & \ddots & \ddots & \vdots \\ 
+		0 & \dots &  &  &  &  &  &  & \dots & 0 & 1 & * \\ 
+		0 & \dots &  &  &  &  &  &  &  &  & \dots & 0 \\ 
+		\vdots &  &  &  &  &  &  &  &  &  &  & \vdots \\ 
+		0 & \dots &  &  &  &  &  &  &  &  & \dots & 0
+		\end{pmatrix}  
+	\]
+\end{satz}
+
+\begin{satz}[Lösbarkeit von linearen Gleichungssystemen]
+	\label{satz:I.3.12}
+	Ein LGS $Ax = b$ ist genau dann lösbar, wenn für die Zeilenstufenform $(\tilde{A} \mid \tilde{b})$ der Matrix $(A \mid b)$ gilt:
+	Für jede Nullzeile in $\tilde{A}$ ist auch der entsprechende Eintrag in $\tilde{b}$ null (mit anderen Worten:
+	Keine der führenden Einsen liegt in $\tilde{b}$).
+\end{satz}
