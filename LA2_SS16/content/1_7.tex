@@ -1,0 +1,99 @@
+\section{Zerlegung von Matrizen in Elementarmatrizen}
+
+\begin{definition}[Elementarmatrizen]
+	\label{def:I.7.1}
+	Sei $A \in M(n \times n,K)$. \index{Elementarmatrix}
+	\begin{enumerate}[(1)]
+		\item	Sei $1 \leq k,l \leq n$ mit $k \neq l$.
+		Definiere $P_{kl} = (p_{ij})_{ij} \in M(n \times n,K)$ mit
+		\[ p_{ij} := \begin{cases}
+			1, & \text{falls } i = j \neq k,l \\
+			1, & \text{falls } i=k \text{ und } j=l \\
+			1, & \text{falls } i=l \text{ und } j=k \\
+			0, & \text{sonst}
+		\end{cases} \qquad \qquad
+		P_{kl} =
+			\begin{pmatrix}
+				1 &  &  &  &  &  &  &  &  &  &  \\ 
+				& \ddots &  &  &  &  &  &  &  &  &  \\ 
+				&  & 1 &  &  &  &  &  &  &  &  \\ 
+				&  &  & 0 &  &  &  & 1 &  &  &  \\ 
+				&  &  &  & 1 &  &  &  &  &  &  \\ 
+				&  &  &  &  & \ddots &  &  &  &  &  \\ 
+				&  &  &  &  &  & 1 &  &  &  &  \\ 
+				&  &  & 1 &  &  &  & 0 &  &  &  \\ 
+				&  &  &  &  &  &  &  & 1 &  &  \\ 
+				&  &  &  &  &  &  &  &  & \ddots &  \\ 
+				&  &  &  &  &  &  &  &  &  & 1
+				\end{pmatrix}
+		\]
+		Das heißt, $P_{kl}$ ist die Einheitsmatrix, bei der die $k$-te und $l$-te Zeile vertauscht wurden.
+		Es gilt $P_{kl}^{-1} = P_{kl}$.
+		
+		Die Multiplikation $P_{kl} A$ vertauscht die $k$-te mit der $l$-ten Zeile von $A$.
+		Analog vertauscht $A P_{kl}$ die entsprechenden Spalten.
+		\item Sei $k \neq l$ und $\lambda \in K \setminus \setzero$.
+		Definiere $A_{kl}(\lambda) := E_n + \lambda \cdot E_{kl}$, wobei $E_{kl} = (e_{ij})_{ij} \in M(n \times n,K)$ mit
+		\[ e_{ij} := \begin{cases}
+			1, & \text{falls } i = k \text{ und } j=l \\
+			0, & \text{sonst}
+			\end{cases} \qquad \qquad
+		A_{kl}(\lambda) =
+		\begin{pmatrix}
+			1 &  &  &  &  &  \\ 
+			& \ddots &  &  & \lambda &  \\ 
+			&  & \ddots &  &  &  \\ 
+			&  &  & \ddots &  &  \\ 
+			&  &  &  & \ddots &  \\ 
+			&  &  &  &  & 1
+		\end{pmatrix} 
+		\]
+		Das heißt, $A_{kl}(\lambda)$ ist die Einheitsmatrix mit einem zusätzlichen $\lambda$ an der Stelle $(k,l)$.
+		Es gilt $A_{kl}(\lambda)^{-1} = A_{kl}(-\lambda)$.
+		
+		Die Multiplikation $A_{kl}(\lambda) A$ bewirkt eine Addition des $\lambda$-fachen der $l$-ten Zeile von $A$ auf die $k$-te Zeile, während $A A_{kl}(\lambda)$ eine Addition des $\lambda$-fachen der $k$-ten Spalte von $A$ auf die $l$-te Spalte bewirkt.		
+		\item Sei $1 \leq k \leq n$ und $\lambda \in K \setminus \setzero$. 
+		Definiere $M_k(\lambda) := (m_{ij})_{ij} \in M(n \times n,K)$ durch
+		\[ e_{ij} := \begin{cases}
+			1, & \text{falls } i = j \neq k \\
+			\lambda, & \text{falls } i=j=k \\
+			0, & \text{sonst}
+		\end{cases} \qquad \qquad
+		M_{k}(\lambda) =
+			\begin{pmatrix}
+			1 &  &  &  &  &  &  \\ 
+			& \ddots &  &  &  &  &  \\ 
+			&  & 1 &  &  &  &  \\ 
+			&  &  & \lambda &  &  &  \\ 
+			&  &  &  & 1 &  &  \\ 
+			&  &  &  &  & \ddots &  \\ 
+			&  &  &  &  &  & 1
+			\end{pmatrix} 
+		\]
+		Das heißt, $M_k(\lambda)$ ist die Einheitsmatrix mit einem $\lambda$ anstatt einer $1$ an der Stelle $(k,k)$.
+		Es gilt $M_k(\lambda)^{-1} = M_k(\lambda^{-1})$.
+		
+		Die Multiplikation $M_{k}(\lambda) A$ multipliziert die $k$-te Zeile von $A$ mit $\lambda$.
+		Analog multipliziert $A M_{k}(\lambda)$ die $k$-te Spalte von $A$ mit $\lambda$.
+	\end{enumerate}
+\end{definition}
+
+\setcounter{definition}{3}
+\begin{satz}
+	\label{satz:I.7.4}
+	Sei $A \in M(m\times n,K)$. Dann existieren endlich viele Elementarmatrizen $D_1,\dots,D_l \in M(m \times m, K)$ und $F_1,\dots,F_r \in M(n \times n,K)$ und ein $k \in \NN$ mit
+	\[
+		D_l \cdots D_1 A F_1 \dots F_r = \enbrace*{\begin{BMAT}[.25cm]{c|c}{c|c}
+			E_k & 0 \\
+			0 & 0
+		\end{BMAT}} = \enbrace*{ \begin{BMAT}(e)[2pt]{cccc|ccc}{cccc|ccc}
+			1 & & & & 			0 & \cdots & 0 \\
+			 & \ddots & & &		\vdots & & \vdots \\
+			 & & \ddots & &		\vdots & & \vdots \\
+			 & & & 1 &			0 & \cdots & 0 \\
+			 0 & \cdots & \cdots & 0 & 0 & \cdots & 0 \\
+			 \vdots & & & \vdots & \vdots & & \vdots \\
+			 0 & \cdots & \cdots & 0 & 0 & \cdots & 0
+	\end{BMAT}}
+	\]
+\end{satz}

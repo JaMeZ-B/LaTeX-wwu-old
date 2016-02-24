@@ -1,0 +1,126 @@
+\newpage
+\section{Basen endlich erzeugter $\mathbf{K}$-Vektorräume}
+
+\begin{definition}[Lineare Hülle, Erzeugendensystem]
+	\label{def:I.8.1}
+	Sei $V$ ein $K$-Vektorraum und sei $M \subseteq V$.
+	Dann heißt
+	\[
+		\LH(M) = \cap\{W : M \subseteq W, W \text{ ist Untervektorraum von } V\}
+	\]
+	die \Index{lineare Hülle} von $M$ in $V$.
+	$\LH(M)$ ist der kleinste Untervektorraum von $V$, der $M$ enthält.
+	
+	$M \subseteq V$ heißt \Index{Erzeugendensystem} von $V$, falls $\LH(M) = V$ gilt.
+	
+	$V$ heißt \Index{endlich erzeugt}, falls ein endliches Erzeugendensystem $M$ von $V$ existiert.
+\end{definition}
+
+\setcounter{definition}{2}
+\begin{lemma}
+	\label{lemma:I.8.3}
+	Sei $V$ ein $K$-Vektorraum und $M \subseteq V$.
+	Dann gilt:
+	\[
+		\LH(M) = \penb{\sum_{i=1}^{k} \lambda_i v_i : k \in \NN, v_1,\dots, v_k \in M, \lambda_1,\dots,\lambda_k}
+	\]
+	Das heißt, $\LH(M)$ ist die Menge aller möglichen (endlichen) Linearkombinationen von Vektoren aus $M$.
+\end{lemma}
+
+\begin{beispiel}
+	\label{bsp:I.8.4}
+	Sei $A \in M(m \times n, K)$ und $a_1, \dots, a_n \in K^m$ die Spalten von $A$.
+	Dann gilt
+	\[
+		\Bild(A) = \{Ax : x \in K^n\} = \LH\{a_1,\dots,a_n\}.
+	\]
+\end{beispiel}
+
+\begin{definition}[lineare Unabhängigkeit]
+	\label{def:I.8.5}
+	Sei $V$ ein $K$-Vektorraum und seien $l \in \NN$ und $v_1,\dots, v_l \in V$.
+	Dann heißen $v_1,\dots,v_l$ \Index{linear unabhängig}, falls für alle $\lambda_1, \dots, \lambda_l \in K$ gilt:
+	\[
+		\lambda_1 v_1 + \dots + \lambda_l v_l = 0 \quad \Rightarrow \quad \lambda_1 = \dots = \lambda_l = 0.
+	\]
+	Allgemein: Eine Menge $M := \{v_i : i \in I\} \subseteq V$ heißt linear unabhängig, wenn jede endliche Teilmenge von $M$ linear unabhängig ist.
+\end{definition}
+
+\setcounter{definition}{8}
+\begin{satz}
+	\label{satz:I.8.9}
+	Sei $A \in M(m\times n, K)$ und $a_1, \dots, a_n \in K^m$ die Spalten von $A$.
+	Dann sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item $a_1,\dots,a_n$ sind linear unabhängig.
+		\item $\Kern(A) = \{x \in K^n : Ax = 0\} = \setzero$.
+		\item Für alle $i \in \{1,\dots,n\}$ gilt:
+		$a_i$ ist keine Linearkombination von $a_1,\dots,a_{i-1},a_{i+1},a_n$.
+	\end{enumerate}
+\end{satz}
+\newpage
+\begin{definition}[Basis]
+	\label{def:I.8.10}
+	Sei $V$ ein $K$-Vektorraum und $B \subseteq V$.
+	Dann heißt $B$ eine \Index{Basis} von $V$, wenn gelten:
+	\begin{enumerate}[(1)]
+		\item $B$ ist linear unabhängig.
+		\item $\LH(B) = V$
+	\end{enumerate}
+\end{definition}
+
+\setcounter{definition}{11}
+\begin{satz}
+	\label{satz:I.8.12}
+	Sei $V$ ein endlich erzeugter $K$-Vektorraum mit $V \neq \setzero$ und $B := \{v_1,\dots,v_n\} \subseteq V$.
+	Dann sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item $B$ ist Basis von $V$.
+		\item Es gilt $V = \LH(B)$ und für alle $i \in \{1,\dots,n\}$ gilt $V \neq \LH(B \setminus \{v_i\})$.
+		Das heißt, $B$ ist ein minimales Erzeugendensystem.
+		\item $B$ ist linear unabhängig und für jedes $v \in V \setminus B$ ist $B \cup \{v\}$ nicht linear unabhängig.
+		Das heißt, $B$ ist maximal linear unabhängig.
+		\item Jedes $v \in V$ lässt sich eindeutig als Linearkombination von $B$ schreiben.
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Basisauswahlsatz]
+	\label{satz:I.8.13}
+	Sei $V \neq \emptyset$ ein $K$-Vektorraum und $M := \{v_1,\dots,v_l\} \subseteq V$ mit $V = \LH(M)$.
+	Dann existiert eine Teilmenge $B \subseteq M$, sodass $B$ eine Basis von $V$ ist.
+\end{satz}
+
+\setcounter{definition}{14}
+\begin{satz}
+	\label{satz:I.8.15}
+	Seien $V,W$ $K$-Vektorräume, $B := \{v_1,\dots v_n\}$ eine Basis von $V$ und $w_1,\dots,w_n \in W$.
+	Dann existiert genau eine lineare Abbildung $F \colon V \rightarrow W$ mit $F(v_i) = w_i$ für alle $1 \leq i \leq n$.
+	Ferner gelten:
+	\begin{enumerate}[(1)]
+		\item $F$ injektiv $\Leftrightarrow$ $w_1,\dots, w_n$ sind linear unabhängig.
+		\item $F$ surjektiv $\Leftrightarrow \LH\{w_1,\dots,w_n\} = W$.
+		\item $F$ bijektiv $\Leftrightarrow \{w_1,\dots,w_n\}$ ist Basis von $W$.
+	\end{enumerate}
+\end{satz}
+
+\begin{korollar}
+	\label{kor:I.8.16}
+	Sei $V$ ein $K$-Vektorraum und $B = \{v_1,\dots,v_n\}$ eine Basis von $V$.
+	\begin{enumerate}[(1)]
+		\item	Es existiert genau ein Isomorphismus $K^n \rightarrow V$, und zwar
+		\begin{align*}
+			\Phi_B \colon K^n &\longrightarrow V \\
+			x &\longmapsto \sum_{i=1}^{n} x_iv_i.
+		\end{align*}
+		\item Ist $B' = \{w_1,\dots,w_m\}$ eine weitere Basis von $V$, so gilt $n = m$.
+	\end{enumerate}
+\end{korollar}
+
+\begin{definition}[Dimension]
+	\label{def:I.8.17}
+	Sei $V \neq \setzero$ ein endlich erzeugter $K$-Vektorraum mit Basis $B := \{v_1,\dots,v_n\}$. 
+	Wir definieren die \Index{Dimension} von $V$ wie folgt:
+	\[
+		\dim_K(V) := \#B = n.
+	\]
+\end{definition}

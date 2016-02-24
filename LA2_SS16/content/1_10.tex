@@ -1,0 +1,136 @@
+\section{Basen und lineare Abbildungen}
+
+\begin{satz}[Darstellungsmatrix]
+	\label{satz:I.10.1}
+	Seien $V,W$ endlich dimensionale $K$-Vektorräume, $B = \{v_1,\dots,v_n\}$ Basis von $V$, $C = \{w_1,\dots,w_m\}$ Basis von $W$ sowie $F \colon V \rightarrow W$ linear.
+	Jedes $F(v_j) \in W$ besitzt eine eindeutige Darstellung
+	\[
+		F(v_j) = \sum_{i=1}^{m} a_{ij} w_i \text{ mit } a_{ij} \in K.
+	\]
+	Die Matrix
+	\[
+		\mat{A}{C}{B}{F} := (a_{ij})_{ij} \in M(m\times n,K)
+	\]
+	heißt \Index{Darstellungsmatrix} von $F$ bezüglich der Basen $B$ und $C$.
+	Die Abbildung
+	\begin{align*}
+		\Hom(V,W) &\longrightarrow M(m \times n,K) \\
+		F &\longmapsto \mat{A}{C}{B}{F}
+	\end{align*}
+	ist ein Isomorphismus von $K$-Vektorräumen.
+\end{satz}
+
+\setcounter{definition}{2}
+\begin{lemma}
+	\label{lemma:I.10.3}
+	Seien $V,W$ zwei $K$-Vektorräume, $B = \{v_1,\dots,v_n\}$ Basis von $V$, $C = \{w_1,\dots,w_m\}$ Basis von $W$ sowie $F \colon V \rightarrow W$ linear.
+	Seien $\Phi_B, \Phi_C$ die Isomorphismen aus \autoref{kor:I.8.16}.
+	Ist $A := \mat{A}{C}{B}{F}$ und $F_A(x) := Ax$, so ist das Diagramm
+	\[
+		\begin{tikzcd}
+			V \arrow[r,"F"] \arrow[d,"\Phi_B^{-1}"'] & W \\
+			K^n \arrow[r,"F_A"'] & K^m \arrow[u,"\Phi_C"']
+		\end{tikzcd}
+	\]
+	kommutativ, das heißt es gilt $F = \Phi_C \circ F_A \circ \Phi_B^{-1}$ bzw. $F_A = \Phi_C^{-1} \circ F \circ \Phi_B$.
+\end{lemma}
+
+\begin{satz}
+	\label{satz:I.10.4}
+	Seien $V,W,U$ $K$-Vektorräume mit Basen $B,C,D$ und $F\colon V \rightarrow W, G \colon W \rightarrow U$ linear.
+	Dann gilt:
+	\begin{enumerate}[(1)]
+		\item	$\mat{A}{D}{B}{G \circ F} = \mat{A}{D}{C}{G} \cdot \mat{A}{C}{B}{F}$.
+		\item $F$ ist bijektiv genau dann, wenn $\mat{A}{C}{B}{F}$ invertierbar ist, und dann gilt $\enb{\mat{A}{C}{B}{F}}^{-1} = \mat{A}{B}{C}{F^{-1}}$.
+	\end{enumerate}
+\end{satz}
+
+\begin{definition}[Basiswechselmatrix]
+	\label{def:I.10.5}
+	Sei $V$ ein $K$-Vektorraum und $B = \{v_1,\dots,v_n\}, C = \{w_1,\dots,w_n\}$ zwei Basen von $V$ und $\id \colon V \rightarrow V$ die Identität auf $V$.
+	Dann heißt $\mat{A}{C}{B}{\id}$ die \Index{Basiswechselmatrix} bezüglich $B$ und $C$.
+\end{definition}
+
+\begin{satz}
+	\label{satz:I.10.6}
+	Sei $V$ ein $K$-Vektorraum und $B,C,D$ Basen von $V$.
+	Dann gelten:
+	\begin{enumerate}[(1)]
+		\item $\mat{A}{B}{B}{\id} = E_n$.
+		\item $\mat{A}{D}{B}{\id} = \mat{A}{D}{C}{\id} \cdot \mat{A}{C}{B}{\id}$.
+		\item $\enb{\mat{A}{C}{B}{\id}}^{-1} = \mat{A}{B}{C}{\id}$
+	\end{enumerate}
+\end{satz}
+
+\begin{satz}[Basiswechsel]
+	\label{satz:I.10.7}
+	Seien $V,W$ endlich-dimensionale $K$-Vektorräume, $B_1,B_2$ Basen von $V$ und $C_1,C_2$ Basen von $W$. 
+	Dann gilt für jede lineare Abbildung $F \colon V \rightarrow W$:
+	\[
+		\mat{A}{C_2}{B_2}{F} = \mat{A}{C_2}{C_1}{\id} \cdot \mat{A}{C_1}{B_1}{F} \cdot \mat{A}{B_1}{B_2}{\id}.
+	\]
+\end{satz}
+
+\setcounter{satz}{9}
+\begin{satz}
+	\label{satz:I.10.10}
+	Sind $V,W$ endlich erzeugte $K$-Vektorräume und $F\colon V \rightarrow W$ ein Isomorphismus, dann gilt $\dim_K(V) = \dim_K(W)$.
+\end{satz}
+
+\begin{satz}
+	\label{satz:I.10.11}
+	Sei $B = \{v_1,\dots,v_n\}$ Basis von $V$ und $A \in \GL(n,K)$.
+	Dann existiert genau eine Basis $C = \{w_1,\dots,w_n\}$ von $V$ mit $A = \mat{A}{B}{C}{\id}$, und diese ist gegeben durch
+	\[
+		w_j := \sum_{i=1}^n a_{ij} v_i \text{ für } 1 \leq j \leq n.
+	\]
+\end{satz}
+
+\setcounter{satz}{12}
+\begin{satz}
+	\label{satz:I.10.13}
+	Seien $V,W$ endlich dimensionale $K$-Vektorräume und sei $F \colon V \rightarrow W$ linear.
+	Dann existiert ein $k \in \NN_0$ und Basen $B$ von $V$ und $C$ von $W$ mit
+	\[
+		\mat{A}{C}{B}{F} = \enb{\begin{BMAT}[.25cm]{c|c}{c|c}
+			E_k & 0 \\
+			0 & 0
+			\end{BMAT}} = \enb{ \begin{BMAT}(e)[1pt]{ccc|c}{ccc|c}
+			1 & & & \\
+			& \ddots & & 0 \\
+			& & 1 & \\
+			& 0 & & 0
+			\end{BMAT}}
+	\]
+\end{satz}
+
+\setcounter{satz}{14}
+\begin{satz}[Dimensionsformel für lineare Abbildungen]
+	\label{satz:I.10.15}
+	Seien $V,W$ endlich dimensionale $K$-Vektorräume und sei $F \colon V \rightarrow W$ linear. \index{Dimensionsformel}
+	Dann gilt:
+	\[
+		\dim_K(V) = \dim_K(\Kern(F)) + \dim_K(\Bild(F)).
+	\]
+\end{satz}
+
+\begin{korollar}
+	\label{kor:I.10.16}
+	Seien $V,W$ $K$-Vektorräume mit $\dim_K(V) = n, \dim_K(W) = m$ und sei $F\colon V \rightarrow W$ linear.
+	Dann gelten:
+	\begin{enumerate}[(1)]
+		\item Ist $F$ injektiv, so gilt $n \leq m$.
+		\item Ist $F$ surjektiv, so gilt $n \geq m$.
+		\item Ist $F$ bijektiv, so gilt $n = m$.
+	\end{enumerate}
+\end{korollar}
+
+\begin{korollar}
+	\label{kor:I.10.17}
+	Seien $V,W$ $K$-Vektorräume mit $\dim_K(V) = \dim_K(W) = n$ und $F \colon V \rightarrow W$ linear.
+	Dann gilt:
+	\[
+		F \text{ injektiv} \quad \Leftrightarrow \quad F \text{ surjektiv} \quad \Leftrightarrow \quad F \text{ bijektiv}.
+	\]
+\end{korollar}
+	
