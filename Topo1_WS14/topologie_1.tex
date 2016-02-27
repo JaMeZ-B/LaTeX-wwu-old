@@ -2017,7 +2017,7 @@ Können wir $H_n(X,A;R)$ durch $H_n(X;R)$ und $H_n(A;R)$ ausdrücken?
 	\]
 \end{bemerkung}
 
-\begin{lemma}[{name={Fünfer-Lemma}}]
+\begin{lemma}[{name={Fünfer-Lemma}},label=lem:812]
 	Seien die Zeilen in folgendem kommutativen Diagramm von $R$-Moduln exakt.
 	\[
 		\begin{tikzcd}
@@ -2092,8 +2092,7 @@ Können wir $H_n(X,A;R)$ durch $H_n(X;R)$ und $H_n(A;R)$ ausdrücken?
 	Dann induziert die Inklusion $\enbrace*{X \setminus L, A \setminus L} \xrightarrow{j} (X,A)$ einen Isomorphismus $j_* \colon H_n(X \setminus L, A \setminus L;R) \to H_n(X,A;R)$.
 \end{satz}
 \begin{beweis}
-	% \emph{Siehe Kapitel \ref{sec:13}.}
-	\todo{auskommentieren}
+	\emph{Siehe Kapitel \ref{sec:13}.}
 \end{beweis}
 
 \begin{satz}[{name={Mayer-Vietoris-Folge}}]
@@ -2271,7 +2270,7 @@ Einige einfachen Eigenschaften der reduzierten Homologie sind:
 		\[
 			p_* \enbrace[\big]{i_-(a) + i_+(b)} = (p \circ i_-)_*(a) + (p \circ i_+)(b) = \id_*(a) + \id_*(b)= a+b
 		\]
-		Also ist $\ker p_* = \set[(a,-a)]{a \in H_k \enbrace[\big]{\set{\mathrm{pt}};R}}$ und damit folgt
+		Also ist $\ker p_* = \set*{(a,-a) \given a \in H_k \enbrace[\big]{\set{\mathrm{pt}};R}}$ und damit folgt
 		\[
 			\tilde{H}_k(S^0;R) = \begin{cases}
 				0, &\text{ falls }k \not= 0\\
@@ -2379,8 +2378,8 @@ Einige einfachen Eigenschaften der reduzierten Homologie sind:
 		\item[Induktionsanfang:] Sei $i_- \colon \set{\mathrm{pt}} \to S^0$ die Abbildung mit $\im i_- = \set{-1}$ und $i_+ \colon\set{\mathrm{pt}} \to S^0 $ die Abbildung mit $\im i_+ = \set{+1}$. 
 		Dann ist \marginnote{Unter $H_0(S_0)\cong \mathbb{Z} \otimes \mathbb{Z}$ induziert $R_0$ $(x,y) \mapsto (y,x)$}
 		\begin{align*}
-			H_0(S^0) &= \set[(i_-)_*(a)+ (i_+)_*(b)]{a,b \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}} \qquad \text{und}\\
-			\tilde{H}_0(S^0) &= \set[(i_-)_*(a)- (i_+)_*(a)]{a \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}}
+			H_0(S^0) &= \set*{(i_-)_*(a)+ (i_+)_*(b) \given a,b \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}} \qquad \text{und}\\
+			\tilde{H}_0(S^0) &= \set*{(i_-)_*(a)- (i_+)_*(a) \given a \in H_0(\set{\mathrm{pt}})\rule{0cm}{1em}}
 		\end{align*}
 		Nun ist
 		\begin{align*}
@@ -2875,7 +2874,7 @@ Der zelluläre Kettenkomplex und die zelluläre Homologie sind Funktoren auf der
 \begin{beweis}
 	\leavevmode
 	\begin{enumerate}[a)]
-		\item Sei $D^n_0 := D^n \setminus \set{0}$, $\frac{1}{2} D^n := \set[\frac{x}{2} ]{x \in D^n}$ und $\frac{1}{2} D^n_0 := \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
+		\item Sei $D^n_0 := D^n \setminus \set{0}$, $\frac{1}{2} D^n := \set{\frac{x}{2} \given x \in D^n}$ und $\frac{1}{2} D^n_0 := \frac{1}{2}D^n \setminus \set{0}$. Wir definieren
 		\[
 			X^\ssbrace{n-1}_{++} := X^\ssbrace{n} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^\ssbrace{n}(\set{0}) \quad \text{ und } \quad 
 			X^\ssbrace{n-1}_+ := X^\ssbrace{n} \setminus \bigcup_{\mathclap{i \in I^{(n)}}} Q_i^\ssbrace{n}\enbrace*{\frac{1}{2} D^n}
@@ -3209,14 +3208,1378 @@ Für $R=\nicefrac{\mathbb{Z}}{2 \mathbb{Z}}$ ist
 	Dies ergibt sich sofort aus $f_{\partial_j \sigma} = \partial_j f_\sigma$.
 \end{beweis}
 
+\newpage
+
+\section{Kleine Simplizes} % (fold)
+\label{sec:13}
+
+\emph{In diesem Abschnitt holen wir den Beweis des Ausschneidungssatzes nach, der vorher schon benutzt wurde.}
+
+\begin{satz}[{name={Ausschneidung}}]
+	Sei $(X,A)$ ein Paar von topologische Räumen. Sei $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. Dann induziert die Inklusion 
+	$(X \setminus L, A \setminus L) \hookrightarrow (X,A)$ den Ausschneidungs-Isomorphismus $H_* \enbrace*{X \setminus L, A \setminus L;R} \grenzw{\cong} H_*(X,A;R)$.
+\end{satz}
+
+\begin{figure}[ht]
+	\centering{
+	\tikzsetnextfilename{skizze_kleine_simplizes_ausschneidung}
+	\begin{tikzpicture}[scale=0.8, line join=bevel]
+		% \draw[help lines] (-4,-3) grid (4,3);
+		\draw[very thick] (0,0) ellipse(4cm and 2.5cm);
+		\node at (-3,2) {$X$};
+
+		\draw[ultra thick] (1,0.4) ellipse(2cm and 1.5cm);
+		\node at (-0.5,1.8) {$A$};
+
+		\draw[ultra thick, Firebrick3, line join=miter] (0,-0.5) rectangle (2,1) node[midway]{$L$};
+
+		% großer Simplex
+		\coordinate (a1) at (-2,-1.7);
+		\coordinate (b1) at (0.3,-0.3);
+		\coordinate (c1) at (-3,0.7);
+		\draw[very thick,dashed,DodgerBlue3] (a1) .. controls +(1,0) and +(170:1) .. (b1) .. controls +(120:1.5) and +(-50:1.5) .. (c1) .. controls +(-80:1.7) and +(110:1.5) .. cycle;
+		\foreach \x in {a1,b1,c1}{
+			\draw[fill=DodgerBlue3, thick] (\x) circle[radius=0.04];
+		}
+
+		% kleiner Simplex in X\A
+		\coordinate (a2) at (-2.3,1);
+		\coordinate (b2) at (-1.9,0.8);
+		\coordinate (c2) at (-2,1.5);
+		\draw[very thick, SeaGreen3] (a2) .. controls +(-40:0.2) and +(180:0.3) .. (b2) .. controls +(70:0.4) and +(-40:0.5) .. (c2) .. controls +(-80:0.7) and +(110:0.5) .. cycle;
+		\foreach \x in {a2,b2,c2}{
+			\draw[fill=SeaGreen3,thick] (\x) circle[radius=0.04];
+		}
+
+		% kleiner Simplex in X und A
+		\coordinate (a3) at (0.5,-1.5);
+		\coordinate (b3) at (1.3,-1.6);
+		\coordinate (c3) at (0.9,-0.8);
+		\draw[very thick, SeaGreen3] (a3) .. controls +(20:0.2) and +(160:0.3) .. (b3) .. controls +(70:0.4) and +(-40:0.5) .. (c3) .. controls +(-80:0.5) and +(75:0.5) .. cycle;
+		\foreach \x in {a3,b3,c3}{
+			\draw[fill=SeaGreen3,thick] (\x) circle[radius=0.04];
+		}
+
+		% kleiner Simplex in L und A
+		\coordinate (a4) at (1.75,-0.1);
+		\coordinate (b4) at (2.3,0.4);
+		\coordinate (c4) at (1.8,0.75);
+		\draw[very thick, SeaGreen3] (a4) .. controls +(20:0.2) and +(160:0.3) .. (b4) .. controls +(85:0.5) and +(10:0.2) .. (c4) .. controls +(-95:0.7) and +(75:0.5) .. cycle;
+		\foreach \x in {a4,b4,c4}{
+			\draw[fill=SeaGreen3,thick] (\x) circle[radius=0.04];
+		}
+
+		% kleiner Simplex in L und A
+		\coordinate (a5) at (-0.2,0.75);
+		\coordinate (b5) at (0.3,0.6);
+		\coordinate (c5) at (0.1,1.3);
+		\draw[very thick, SeaGreen3] (a5) .. controls +(20:0.2) and +(160:0.3) .. (b5) .. controls +(85:0.5) and +(10:0.2) .. (c5) .. controls +(220:0.3) and +(80:0.5) .. cycle;
+		\foreach \x in {a5,b5,c5}{
+			\draw[fill=SeaGreen3,thick] (\x) circle[radius=0.04];
+		}
+
+		% kleiner Simplex in X und A
+		\coordinate (a6) at (0.7,1.55);
+		\coordinate (b6) at (1.3,1.6);
+		\coordinate (c6) at (1,2.3);
+		\draw[very thick, SeaGreen3] (a6) .. controls +(20:0.2) and +(160:0.3) .. (b6) .. controls +(85:0.5) and +(10:0.2) .. (c6) .. controls +(-80:0.3) and +(60:0.5) .. cycle;
+		\foreach \x in {a6,b6,c6}{
+			\draw[fill=SeaGreen3,thick] (\x) circle[radius=0.04];
+		}
+	\end{tikzpicture}
+	\caption{Skizze zur Ausschneidung mit kleinen Simplizes}}
+\end{figure}
+
+\begin{definition}[{name=[{kleine Simplizes}]}]
+	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. 
+	Ein singulärer Simplex $\sigma \colon \abs*{\Delta^n} \to X$ heißt \bet{$\mathcal{U}$-klein}\index{U-klein@$\mathcal{U}$-klein}, falls es ein $U \in \mathcal{U}$ gibt mit $\im \sigma  \subseteq U$. 
+	Die $\mathcal{U}$-kleinen Simplizes erzeugen den Unterkettenkomplex $\enbrace*{C_*^{\mathcal{U}}(X;R),\partial_*}$ des simplizialen Kettenkomplexes $\enbrace*{C_*(X;R),\partial_*}$.
+\end{definition}
+
+\begin{satz}[{name={Satz über kleine Simplizes}}]
+	Die Inklusion $C_*^\mathcal{U}(X;R) \hookrightarrow C_*(X;R)$ induziert einen Isomorphismus in Homologie.
+\end{satz}
+
+\begin{bemerkung}[{name=[{Satz über kleine Simplizes für Paare von topologischen Räumen}]}]
+	Der Satz über kleine Simplizes lässt sich leicht auf Paare von topologischen Räumen verallgemeinern. 
+	Für eine Überdeckung $\mathcal{U}$ von $X$ setzen wir 
+	\[
+		C_*^\mathcal{U} \enbrace*{X,A;R} := \frac{C_*^\mathcal{U}(X;R)}{C_*(A;R) \cap C_*^\mathcal{U}(X;R)} 
+	\]
+	Dann induziert die Inklusion $C_*^\mathcal{U}(X,A;R) \hookrightarrow C_*(X,A;R)$ einen Isomorphismus in Homologie. 
+	Der Beweis benutzt die Paarfolge und das Fünfer-Lemma.
+\end{bemerkung}
+
+\begin{beweis}[{name={des Ausschneidungssatzes}}]
+	Seien $\mathcal{U} := \set{\mathring{A},X \setminus \overline{L}}$ und $\mathcal{U}_L := \set{\mathring{A} \setminus L, X \setminus \overline{L}}$. 
+	Nach dem Satz über kleine Simplizes induzieren die beiden vertikalen Inklusionen in folgendem Diagramm Isomorphismen in Homologie:
+	\[
+		\begin{tikzcd}[row sep=large]
+			C_*^{\mathcal{U}_L} \enbrace*{X \setminus L, A \setminus L;R} \rar["\cong"] \dar[hook]
+			& C_*^\mathcal{U}(X,A;R) \dar[hook] \\
+			C_*(X \setminus L, A \setminus L;R) \rar["(\star)"] & C_*(X,A;R)
+		\end{tikzcd}
+	\]
+	Wie man sich leicht überlegt, ist außerdem die obere Abbildung ein Isomorphismus.
+	Daher induziert auch die Inklusion $(\star)$ einen Isomorphismus in $H_*$.
+\end{beweis}
+
+\begin{wrapfigure}[5]{r}[2cm]{0.33\textwidth}
+	\centering{
+	\tikzsetnextfilename{zerteilung_simplex}
+	\begin{tikzpicture}[scale=4.0, rotate=200]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+	
+		\draw[thick] (a) -- (b) -- (c) -- cycle;
+	
+		\coordinate (ab) at ($(a)!.5!(b)$);
+		\coordinate (ac) at ($(a)!.5!(c)$);
+		\coordinate (bc) at ($(b)!.5!(c)$);
+	
+		\draw[darkgray,thick, name path=erster] (a) -- (bc);
+		\draw[darkgray,thick, name path=zweiter] (b) -- (ac);
+		\draw[darkgray, thick] (c) -- (ab);
+		\path[name intersections={of=erster and zweiter, name=i}] (i-1) coordinate (m);
+	
+		\coordinate (aab) at ($(a)!.5!(ab)$);
+		\coordinate (am) at ($(a)!.5!(m)$);
+		\coordinate (abm) at ($(ab)!.5!(m)$);
+		\coordinate (abb) at ($(ab)!.5!(b)$);
+		\coordinate (bm) at ($(b)!.5!(m)$);
+	
+		\draw[gray, thick, name path=dritter] (a) -- (abm);
+		\draw[gray, thick, name path=vierter] (ab) -- (am);
+		\draw[gray, thick] (m) -- (aab);
+		\path[name intersections={of=dritter and vierter, name=i}] (i-1) coordinate (m1);
+	
+		\draw[gray, thick, name path=fuenfter] (b) -- (abm);
+		\draw[gray, thick, name path=sechster] (m) -- (abb);
+		\draw[gray, thick] (ab) -- (bm);
+		\path[name intersections={of=fuenfter and sechster, name=i}] (i-1) coordinate (m2);
+	
+	
+		% drawing circles
+		\foreach \x in {am,bm,abm,aab,abb}{
+			\draw[thick,fill=IndianRed2] (\x) circle[radius=0.01];
+		}
+		\foreach \x in {a,b,c}{
+			\draw[thick,fill=DodgerBlue2] (\x) circle[radius=0.015];
+		}
+		\foreach \x in {ab,bc,ac}{
+			\draw[thick,fill=SeaGreen3] (\x) circle[radius=0.015];
+		}
+		\draw[thick,fill=Yellow2] (m) circle[radius=0.015];
+		\foreach \x in {m1,m2}{
+			\draw[thick,fill=PaleTurquoise2] (\x) circle[radius=0.01];
+		}
+	\end{tikzpicture}
+	\caption{Zerteilung eines $2$-Simplex}\label{fig:zerteilung_simplex}
+	}
+\end{wrapfigure}
+Um den Satz über kleine Simplizes beweisen zu können, müssen wir uns überlegen, wie wir einen Simplex systematisch in kleinere zerlegen können, siehe dazu \cref{fig:zerteilung_simplex}. Dies führt uns zu folgender Definition
 
 
+\begin{definition}[{name=[{Schwerpunkt und \enquote{Abkegeln}}]}]
+	$s_n := \enbrace*{\frac{1}{n+1}, \ldots , \frac{1}{n+1}} \in \abs*{\Delta^n}$ heißt der \Index{Schwerpunkt} von $\abs*{\Delta^n}$. 
+	Ist $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ ein singulärer $p$-Simplex, so definieren wir $(K_{\Delta^n})(\sigma) \colon \abs*{\Delta^{p+1}} \to \abs*{\Delta^n}$ durch \marginnote{\enquote{Abkegeln}}
+	\[
+		\enbrace*{K_{\Delta^n}} (\sigma) \enbrace*{t_0, \ldots , t_{p+1}} = t_0 \cdot s_n + (1-t_0) \cdot \sigma \enbrace*{\frac{(t_1,\ldots ,t_{p+1})}{1-t_0}} 
+	\]
+	Wir erhalten eine Abbildung $\enbrace*{K_{\Delta^n}}_p \colon C_p \enbrace*{\abs*{\Delta^n};R} \to C_{p+1} \enbrace*{\abs*{\Delta^n};R}$.
+\end{definition}
+
+\begin{figure}[ht]
+	\centering{
+	\tikzsetnextfilename{abkegeln}
+	\begin{tikzpicture}[scale=3.5, rotate=230]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+	
+		\draw[thick] (a) -- (b) -- (c) -- cycle;
+	
+		\coordinate (ab) at ($(a)!.5!(b)$);
+		\coordinate (ac) at ($(a)!.5!(c)$);
+		\coordinate (bc) at ($(b)!.5!(c)$);
+	
+		\path[name path=erster] (a) -- (bc);
+		\path[name path=zweiter] (b) -- (ac);
+		\path[name intersections={of=erster and zweiter, name=i}] (i-1) coordinate (m);
+		
+		\draw[DarkOrange2, thick] (m) -- (ab) node[midway, above right,xshift=-0.2cm]{$K_{\Delta^n}(\sigma)$};
+		\foreach \x in {0.1,0.2,...,0.9,1.0}{
+			\draw[DarkOrange2, thick] (m) -- ($(ab)!\x!(b)$);
+		}
+		\draw[very thick, Firebrick2] (ab) -- (b) node[midway, above left]{\normalsize$\sigma$};
+		
+		% drawing circles
+		\foreach \x in {a,b,c}{
+			\draw[thick,fill=DodgerBlue2] (\x) circle[radius=0.015];
+		}
+		\foreach \x in {ab,bc,ac}{
+			\draw[thick,fill=SeaGreen3] (\x) circle[radius=0.015];
+		}
+		\draw[thick,fill=Yellow2] (m) circle[radius=0.015];
+	\end{tikzpicture}
+	\caption{Skizze des \enquote{Abkegelns}}
+	}
+\end{figure}
+
+\begin{lemma}[{name=[{Kettenhomotopie zwischen $\const_{s_n}$ und $\id$ auf $\abs*{\Delta^n}$}]},label=lem:136]
+	Sei $\const_{s_n} \!\colon \abs*{\Delta^n} \to \abs*{\Delta^n}$ die konstante Abbildung mit $\im (\const_{s_n}) = \set{s_n} $. 
+	Dann ist $\enbrace*{K_{\Delta^n}}_*$ eine \hyperref[def:76]{Kettenhomotopie} zwischen $\id$ und $(\const_{s_n})_*$.
+\end{lemma}
+\begin{beweis}
+	Sei $\sigma$ ein singulärer $p$-Simplex in $\abs*{\Delta^n}$. Dann ist 
+	\begin{align*}
+		\partial_{p+1} \circ \enbrace*{K_{\Delta^n}}_p (\sigma)  = \sum_{j=0}^{p+1} (-1)^{j} \enbrace*{K_{\Delta^n}}_p(\sigma) \circ \iota_{p+1,j} &= \sigma + 
+		\sum_{j=1}^{p+1} (-1)^j (K_{\Delta^n})_p(\sigma) \circ \iota_{p+1,j} \\
+		&= \sigma + \begin{cases}
+			\sum_{j=0}^{p} (-1)^{j+1}  (K_{\Delta^n})_{p-1} \enbrace*{\sigma \circ \iota_{p,j}} , & p \ge 1\\
+			- \const_{s_n} \colon \abs*{\Delta^0} \to \set{s_n} , & p=0  
+		\end{cases} \\
+		&= \sigma - \begin{cases}
+			(K_{\Delta^n})_{p-1} (\partial_p \circ \sigma) , &\text{ falls }p \ge 1\\
+			\const_{s_n}  , &\text{ falls } p=0  
+		\end{cases}
+	\end{align*}
+	Also ist $\partial_{p+1} \circ (K_{\Delta^n})_p + (K_{\Delta^n})_{p-1} \circ \partial_p= \id - (\const_{s_n})_*$.
+\end{beweis}
+
+\begin{definitionUnshaded}[{name=[{Zerteilungsoperatoren}]}]
+	Wir definieren induktiv natürliche Transformationen $B_n \colon C_n(-;R) \to C_n(-;R)$ und $H_n \colon C_n(-;R) \to C_{n+1}(-;R)$ wie folgt: 
+	Für $n=0$ setzen wir $(B_0)_X = \id$. Sei $B_k$ nun schon für $k=0, \ldots ,n-1$ definiert. 
+	Betrachte zunächst $\id_{\abs*{\Delta^n}} \in C_n \enbrace*{\abs*{\Delta^n};R}$. Dafür setzen wir 
+	\[
+		(B_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}} :=  (K_{\Delta^n})_{n-1} \circ (B_{n-1})_{\abs*{\Delta^n}}\circ \partial_n \enbrace*{\id_{\abs*{\Delta^n}}} 
+	\]
+	Ist $\sigma \colon \abs*{\Delta^n} \to X$ ein beliebiger singulärer $n$-Simplex in $X$, so ist $\sigma = \sigma_*\enbrace*{\id_{\abs*{\Delta^n}}}$, also setzen wir\footnote{$(B_n)_X(\sigma) = (B_n)_X\enbrace*{\sigma_*(\id_{\abs*{\Delta^n}})}= \sigma_*\enbrace[\big]{(B_n)_{\abs*{\Delta^n}(\id_{\abs*{\Delta^n}})}}$ muss wegen Natürlichkeit gelten}
+	\[
+		(B_n)_X(\sigma) := \sigma_* \enbrace*{ (B_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}}} 
+	\]
+	Für $n=0$ und $\sigma \colon\abs*{\Delta^0} \to X$ setzen wir $(H_0)_X(\sigma)$ als den konstanten $1$-Simplex, dessen Bild der Punkt $\sigma\enbrace*{\abs*{\Delta^0}}$ ist.
+	% $\tau$ mit $\im \tau = \im \sigma$.
+	Ist $H_{n-1}$ schon definiert, so setzen wir für einen singulären $n$-Simplex $\sigma \colon \abs*{\Delta^n} \to X$
+	\[
+		(H_n)_X(\sigma) := \sigma_* \enbrace[\Big]{ (K_{\Delta^n})_n \enbrace[\big]{ \id_{\abs*{\Delta^n}} - (H_{n-1})_{\abs*{\Delta^n}}\circ\partial_n 
+		\enbrace{\id_{\abs*{\Delta^n}}}}} 
+	\]
+\end{definitionUnshaded}
+
+\begin{figure}[ht]
+	\centering{
+	\tikzsetnextfilename{Zerteilungsoperatoren}
+	\begin{tikzpicture}[scale=1.1, thick]
+		% \draw[help lines] (0,0) grid (8,4);
+		
+		% oberer Teil
+		\node at (-1,2.7) {$B_n$};
+		\coordinate (c) at (0,2.7);
+		\draw (2,2.7) coordinate (d) -- ++(2,0) coordinate (e);
+		\draw ($(d)!0.5!(e) + (0,0.15)$) -- ($(d)!0.5!(e) + (0,-0.15)$);
+		\coordinate (mid) at (7,2.5);
+		\coordinate (f) at ($(mid) + (90:1)$);
+		\coordinate (g) at ($(mid) + (210:1)$);
+		\coordinate (h) at ($(mid) + (-30:1)$);
+		\draw (f) -- (g) -- (h) -- cycle;
+		\draw (f) -- ($(g)!.5!(h) + (0,-0.1)$);
+		\draw (g) -- ($(f)!.5!(h) + (30:0.1)$);
+		\draw (h) -- ($(g)!.5!(f) + (150:0.1)$);
+		
+		% unterer Teil
+		\node at (-1,0.5) {$H_n$};
+		
+		\draw (0,0) coordinate (a) -- (0,1) coordinate (b);
+		
+		\draw (2,-0.5) coordinate (i) -- ++(2,0) coordinate (j) -- ++(0,2) coordinate (k) -- ++ (-2,0) coordinate (l) -- cycle;
+		\draw ($(i)!.5!(j)$) -- (k);
+		\draw ($(i)!.5!(j)$) -- (l);
+		
+		\draw ($(5.5,-0.5) + (0,0.125)$) coordinate (m) -- ++(3,0) coordinate (n) -- ($(m)!.5!(n) + (0,0.75)$) coordinate (o) -- cycle;
+		\draw (m) -- ++ (0,1) coordinate (p);
+		\draw (n) -- ++ (0,1) coordinate (q);
+		\draw[dashed] (o) -- ++ (0,1) coordinate (r);
+		\draw (p) -- (q) -- (r) -- cycle;
+		\coordinate (mitte) at ($(o) + (0,-0.45)$);
+		
+		\coordinate (mitte2) at ($(m)!.5!(n)$);
+		\draw[Chartreuse3, dashed] (m) -- (n) --(q) -- (mitte2) -- (p) -- cycle;
+		\draw[Chartreuse3, dashed] (m) -- (mitte) --(n);
+		\draw[Chartreuse3, dashed] (mitte2) -- (mitte) -- (p);
+		\draw[Chartreuse3, dashed] (mitte) -- (q);
+		
+		\foreach \y in {p,q,r}{
+			\draw[IndianRed2, densely dashed] (mitte) -- (\y);
+		}
+		\draw[IndianRed2, densely dashed] (p) -- (q) -- (r) -- cycle;
+		
+		
+		% punkte
+		\foreach \x in {a,b,...,r}{
+			\draw[fill=DodgerBlue2] (\x) circle[radius=0.045];
+		}
+		
+	\end{tikzpicture}
+	\caption{Die natürlichen Transformationen $B_n$ und $H_n$ für $n=0,1,2$}}
+\end{figure}
+
+\begin{lemma}[{name=[{Kettenhomotopie zwischen $(H_*)_X$ und der Identität}]},label=lem:138]
+	Für jeden topologischen Raum $X$ ist $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine \hyperref[def:76]{Kettenhomotopie} zwischen $(B_*)_X$ und der Identität.
+\end{lemma}
+\begin{beweis}
+	Wir müssen zeigen, dass folgende Gleichung gilt
+	\begin{equation}
+		\partial_{n+1} \circ (H_n)_X + (H_{n-1})_X \circ \partial_n = (B_n)_X - \id \tag{\#} \label{eq:1310}
+	\end{equation}
+	Da $\id$ eine Kettenabbildung ist, ist dann auch $(B_*)_X$ eine Kettenabbildung und $(H_*)_X$ eine Kettenhomotopie zwischen $\id$ und $(B_*)_X$. Wir beweisen \eqref{eq:1310}
+	durch Induktion nach $n$. Für $n=0$ und $\sigma \colon \abs*{\Delta^0} \to X$ ist
+	\[
+		\partial_1 \enbrace[\big]{ (H_0)_X (\sigma)} = 0 \qquad \text{ und } \qquad  (B_0)_X(\sigma) = \sigma 
+	\]
+	Also gilt \eqref{eq:1310} für $n=0$. Für den Induktionsschritt $n-1 \mapsto n$ betrachten wir $\sigma \colon \abs*{\Delta^n} \to X$. Es gilt
+	\begin{align*}
+		\partial_{n+1} \circ (H_n)_X (\sigma) &= \sigma_* \circ \partial_{n+1} \circ (H_n)_{\abs*{\Delta^n}} \enbrace*{\id_{\abs*{\Delta^n}}} \\
+		&= \sigma_* \circ \partial_{n+1} \enbrace[\Big]{(K_{\abs*{\Delta^n} })_n \enbrace*{ \id_{\abs*{\Delta^n}}- (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n 
+		\enbrace{\id_{\abs*{\Delta^n}}}}} \\
+		&\StackTextClap{vgl. \ref{lem:136}}{=} \sigma_* \enbrace[\Big]{- (K_{\abs*{\Delta^n}})_{n-1} \circ \partial_n \enbrace*{\id_{\abs{\Delta^n}} 
+		- (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n (\id_{\abs*{\Delta^n} }) } } \\
+		&\phantom{ = } + \sigma_* \enbrace*{\id_{\abs*{\Delta^n}} - (H_{n-1})_{\abs*{\Delta^n}} \circ \partial_n (\id_{\abs*{\Delta^n}})} \\
+		&\stackrel{\mathclap{\text{I.A.}}}{=} \sigma_*  \enbrace*{- (K_{\abs*{\Delta^n}})_{n-1} \circ \partial_n (\id_{\abs*{\Delta^n}})}  
+		- \sigma_* \enbrace[\Big]{- (K_{\abs*{\Delta^n}})_{n-1}  \enbrace*{\id - (B_{n-1})_{\abs*{\Delta^n}}}  \partial_n (\id_{\abs*{\Delta^n} }) } \\
+		&\phantom{ = } + \sigma- (H_{n-1})_X \circ \partial_n(\sigma) \\
+		&= - \sigma_* \enbrace*{(K_{\abs*{\Delta^n}})_{n-1} \circ (B_{n-1})_{\abs*{\Delta^n}} \circ \partial_n(\id_{\abs*{\Delta^n}})}
+		+ \sigma - (H_{n-1})_X \circ \partial_n(\sigma) \\
+		&= - \sigma_* \enbrace[\big]{(B_n)_{\abs*{\Delta^n}} \enbrace{\id_{\abs*{\Delta^n}}}} + \sigma - (H_{n-1})_X \circ \partial_n (\sigma) \\
+		&= -(B_n)_X(\sigma) + \sigma - (H_{n-1})_X \circ \partial_n(\sigma)
+	\end{align*}
+	Also ist $\partial_{n+1} \circ H_n(\sigma) + H_{n-1} \circ \partial_{n}(\sigma) = \sigma - (B_n)_X(\sigma)$.
+\end{beweis}
+
+\begin{lemma}[{name=[{Eigenschaft von $(B_n)_X$ in Bezug auf eine offene Überdeckung}]},label=lem:139]
+	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Sei $\alpha\in C_n(X;R)$. 
+	Dann existiert ein $k_0\ge 0$ so, dass\marginnote{$(B_n)^{k}_X$ meint die $k$-fache Komposition von $(B_n)_X$} $(B_n)^{k}_X(\alpha)\in C^\mathcal{U}_n(X;R)$ für alle $k\ge k_0$.
+\end{lemma}
+\begin{beweis}
+	Es genügt einen singulären Simplex $\sigma \colon \abs*{\Delta^n} \to X$ zu betrachten. Wir setzen $\sigma^* \mathcal{U}:= \set*{\sigma ^{-1}(U) \given U \in \mathcal{U}}$. Dann gilt
+	\[
+		\sigma_* \enbrace[\big]{C_*^{\sigma^*\mathcal{U}} \enbrace*{\abs*{\Delta^n};R}} \subseteq C_*^\mathcal{U}(X;R). 
+	\]
+	Da $(B_n)_X^k(\sigma) = \sigma_* \enbrace[\big]{(B_n)_{\abs*{\Delta^n}}^k (\id_{\abs*{\Delta^n} })}$ genügt es zu zeigen, dass 
+	$(B_n)^k_{\abs*{\Delta^n}} (\id_{\abs*{\Delta^n} }) \in C_*^{\sigma^* \mathcal{U}}\enbrace*{\abs*{\Delta^n};R}$ für ein geeignetes $k>0$. Sei $\varepsilon>0$ eine 
+	Lebesguezahl\footnote{siehe \url{https://de.wikipedia.org/wiki/Lebesguezahl}} für $\sigma^*\mathcal{U}$, das heißt 
+	\[
+		\forall x \in \abs*{\Delta^n} : \exists V \in \sigma^*\mathcal{U} : B_\varepsilon(x) \subseteq V 
+	\]
+	Wähle nun $k>0$ mit $\enbrace[\big]{\frac{n}{n+1}}^k \cdot \diam(\id_{\abs*{\Delta^n}})< \varepsilon$. Dann gilt nach \autoref{lem:1313} (iii)
+	\[
+		(B_n)_{\abs*{\Delta^n}}^k (\id_{\abs*{\Delta^n}}) \in C_*^{\sigma^*\mathcal{U}} \enbrace*{\abs*{\Delta^n};R} \qedhere
+	\]
+\end{beweis}
+
+\begin{beweis}[{name={des Satzes über kleine Simplizes}}]
+	Sei $x \in H_n(X;R)$. Wähle $\alpha \in C_n(X;R)$ mit $[\alpha]=x$. 
+	Nach \autoref{lem:139} gibt es ein $k$ mit $(B_n)_X^k(\alpha) \in C_n^\mathcal{U}(X;R)$.
+	Mit \autoref{lem:138} folgt $x=[\alpha]= \benbrace*{(B_n)_X^k(\alpha)}$. 
+	Daher ist die von $C_*^\mathcal{U}(X;R) \hookrightarrow C_*(X;R)$ induzierte Abbildung in $H_*$ surjektiv.
+
+	Sei nun $x$ im Kern von $H_n \enbrace*{C_*^\mathcal{U}(X;R)} \to H_n \enbrace*{C_*(X;R)}$. 
+	Sei $\alpha \in C_n^\mathcal{U}(X;R)$ mit $x=[\alpha]$. 
+	Da $x$ im Kern liegt, gibt es $\beta \in C_{n+1}(X;R)$ mit $\partial_{n+1}(\beta)=\alpha$. 
+	Nach \autoref{lem:139} gibt es ein $k$ mit $(B_n)_X^k(\beta) \in C_n^\mathcal{U}(X;R)$. 
+	Mit \autoref{lem:138} folgt nun
+	\[
+		x = [\alpha] = \benbrace*{(B_n)_X^k(\alpha)} = \benbrace*{(B_n)_X^k(\partial_{n+1} \beta)} = \benbrace*{\partial_n \enbrace*{(B_{n+1})_X^k (\beta)} }   
+	\]
+	Also ist $x=0$ in $H_* \enbrace*{C_*^\mathcal{U}(X;R)}$.
+\end{beweis}
+
+\begin{bemerkung}[{name=[{Abbildungen $s_n \colon C_n \to C_{n+1}'$, die den Rang erhöhen}]}]
+	Seien $(C_*,\partial_*)$ und $(C_*',\partial_*')$ Kettenkomplexe und $s_n \colon C_n \to C_{n+1}'$ eine Abbildung, die den Grad um $1$ erhöht. 
+	Dann ist $s_{n-1} \circ \partial_n + \partial_{n+1}' \circ s_n$ eine Kettenabbildung, da
+	\[
+		\enbrace*{s_{n-1} \circ \partial_n + \partial_{n+1}' \circ s_n} \circ \partial_{n+1} = \partial_{n+1}' \circ  \enbrace*{s_n \circ \partial_{n+1} 
+		+ \partial_{n+2}' \circ s_{n+1}}  
+	\]
+	Insbesondere gilt: Wenn $s \circ \partial + \partial' \circ s = f -g$ für eine Kettenabbildung $f \colon C_* \to C'_*$, dann ist auch $g$ eine Kettenabbildung.
+\end{bemerkung}
+
+\begin{definition}[{name=[{Affiner singulärer Simplex}]}]
+	Seien $v_0, \ldots ,v_p \in \abs*{\Delta^n}$. 
+	Dann bezeichnen wir mit $[v_0,\ldots ,v_p]$ den singulären $p$-Simplex mit $\sum_{i=0}^{p} t_i e_i \to \sum_{i=1}^{p} t_i v_i$.
+	Singuläre Simplizes dieser Form heißen \bet{affin}\index{affiner singulärer Simplex}.
+\end{definition}
+
+\begin{definition}[{name=[{Durchmesser eines singulären Simplizes $\abs*{\Delta^p} \to \abs*{\Delta^n}$}]}]
+	Sei $\norm{\cdot}$ eine Norm auf $\mathbb{R}^{n+1}$. 
+	Für einen singulären Simplex $\sigma \colon \abs*{\Delta^p} \to \abs*{\Delta^n}$ definieren wir den \Index{Durchmesser} von $\sigma$ durch
+	\[
+		\diam(\sigma) := \max \set[\big]{\norm{\sigma(x)- \sigma(y)}  \given x,y \in \abs*{\Delta^p}} 
+	\]
+\end{definition}
+
+\begin{lemma}[{name=[{Eigenschaften von affinen singulären Simplizes}]},label=lem:1313]
+	Sei $[v_0, \ldots , v_p]$ ein affiner singulärer $p$-Simplex in $\abs*{\Delta^n}$. Dann gilt:
+	\begin{enumerate}[(i)]
+		\item Es gilt $\diam \enbrace*{[v_0, \ldots ,v_p]}= \max \set*{\norm{v_i - v_j} \given 0 \le i,j\le p\rule{0cm}{0.9em}}$
+		\item Es ist 
+		\[
+			(B_p)_{\abs*{\Delta^n}} \enbrace[\big]{[v_0, \ldots ,v_p]} =
+			\smashoperator{\sum_{\hspace{3em}\sigma \in \sum_{\set{v_0,\ldots ,v_p}}}}
+			\enspace\sgn(\sigma)  \cdot  
+			\underbrace{\benbrace*{\frac{\sum_{i=0}^{p} \sigma(v_i)}{p+1}, \frac{\sum_{i=0}^{p-1} \sigma(v_i)}{p} ,\ldots , \sigma(v_0)  } }_{=: \tau_\sigma}
+		\]
+		\item Für $\sigma \in \sum_{\set{v_0, \ldots ,v_p}}$ ist $\diam \tau_\sigma \le \frac{n}{n+1} \diam [v_0,\ldots ,v_p]$.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Seien $v,v' \in \im \enbrace*{[v_0, \ldots ,v_p]}$. Dann ist $v = \sum_{i=0}^{p} t_i v_i$ und $v' = \sum_{i=0}^{p} t_i' v_i$ mit $t_i, t_i' \in [0,1]$, sowie
+		$\sum_{i=0}^{p} t_i =1 = \sum_{i=0}^{p} t_i'$. Es gilt nun
+		\begin{align*}
+			\norm*{v-v'} = \norm*{\sum_{i=0}^{p} t_i v_i - v'} &= \norm*{\sum_{i=0}^{p} t_i v_i - \sum_{i=0}^{p} t_i v'} = \norm*{\sum_{i=0}^{p} t_i(v_i -v')}
+			\le \sum_{i=0}^{p} t_i \norm{v_i -v'}   \\
+			&\le \enbrace*{\sum_{i=0}^{p} t_i} \max_i \norm*{v_i -v'} = \max_i \norm*{v_i -v} \\
+			&= \max_i \norm*{v_i - \sum_{j=0}^{p} t'_j v_j} \\
+			&= \max_i \norm*{ \sum_{j=0}^{p} t'_j v_i + \sum_{j=0}^p t'_j v_j} 
+			\le \ldots \le \max_{i,j} \norm{v_i - v_j}.   
+		\end{align*}
+		\item Per Induktion nach $p$. Für $p=0$ ist $(B_0)_{\abs{\Delta^n}}=\id$ und die Aussage wahr.
+	
+		Für $p-1 \mapsto p$ genügt es $n=p$ und $[v_0,\ldots ,v_p] =[e_0, \ldots ,e_p]$ zu betrachten. Es gilt
+		\begin{align*}\marginnote{Aus Platzgründen wird der Index $\abs*{\Delta^p}$ bei den Abbildungen $(K_{\abs*{\Delta^p}})_*$ und $(B_*)_{\abs*{\Delta^p}}$ weggelassen}
+			B_p \enbrace[\big]{[v_0,\ldots ,v_p]} &= K_{p-1} \circ B_{p-1} \circ \partial_p \enbrace[\big]{[e_0, \ldots ,e_p]} \\
+			&= \sum_{i=0}^{p} (-1)^i \cdot K_{p-1} \circ B_{p-1} \enbrace[\big]{[e_0, \ldots , e_{i-1}, e_{i+1}, \ldots ,e_p]} \\
+			&\stackrel{\mathclap{\text{I.V.}}}{=} \sum_{i=0}^{p} (-1)^i \cdot
+			\smashoperator{\sum_{\hspace{4em}\sigma \in \sum_{\set{e_0, \ldots, e_p}\setminus \set{e_i}}} }
+			\enspace\sgn(\sigma) \cdot K_{p-1} 
+			\enbrace*{\textstyle\benbrace*{\frac{\sigma(e_0) + \ldots +\sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p},\ldots  } } \\
+			&= \sum_{i=0}^{p} (-1)^i \cdot 
+			\smashoperator{\sum_{\hspace{4em}\sigma \in \sum_{\set{e_0, \ldots, e_p}\setminus \set{e_i}}} }
+			\enspace \sgn(\sigma)\cdot 
+			\benbrace*{\textstyle\frac{e_0 + \ldots + e_p}{p+1}, \frac{\sigma(e_0) + \ldots + \sigma(e_{i-1}) + \sigma(e_{i+1}) + \ldots  + \sigma(e_p)}{p}, \ldots} \\
+			&=\ldots = \smashoperator{\sum_{\hspace{3em}\sigma \in \sum_{\set{e_0, \ldots ,e_n}}}} \enspace\sgn(\sigma) \cdot \benbrace*{\textstyle \frac{\sum_{i=0}^{p} \sigma(e_i)}{p+1}, \ldots , \sigma(e_0)} 
+		\end{align*}
+		\item Es genügt $\sigma=\id$ zu betrachten. Es ist 
+		\begin{align*}
+			\hspace{-1em}\diam \benbrace*{\textstyle\frac{v_0+ \ldots +v_p}{p+1}, \frac{v_0 + \ldots + v_{p-1}}{p}, \ldots ,v_0} &\stackrel{\text{(i)}}{=} \max_{i <j}
+			\norm*{\textstyle \frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_j}{j+1}}  \\
+			&= \max_{i <j} \norm*{\textstyle\frac{v_0+ \ldots +v_i}{i+1} - \frac{v_0 + \ldots + v_i}{j+1} - \frac{v_{i+1}+ \ldots + v_j}{j+1}} \\
+			&= \max_{i<j} \norm*{\textstyle\frac{(j+1)- (i+1)}{(i+1)(j+1)}(v_0 + \ldots + v_i) - \frac{1}{j+1} (v_{i+1} + \ldots +v_j)}  \\
+			&= \max_{i<j} \frac{j-i}{j+1} \cdot \norm[\bigg]{\textstyle{\underbrace{\frac{v_0 + \ldots +v_i}{i+1}}_{\in \im [v_0, \ldots ,v_n]}} - 
+			\underbrace{\frac{v_{i+1} + \ldots  + v_j}{j-i}}_{\in \im [v_0, \ldots , v_n]}} \\
+			&\le  \max_{i<j} \frac{j-i}{j+1} \diam [v_0, \ldots, v_n] \\
+			&\le \max_j \frac{j}{j+1} \diam [v_0, \ldots ,v_n] \le \frac{n}{n+1} \diam [v_0, \ldots , v_n]  \qedhere
+		\end{align*}
+	\end{enumerate}
+\end{beweis}
+
+\newpage
+
+\section{Axiome für Homologie} % (fold)
+\label{sec:14}
+
+Mit $V \colon \TOP^2 \to \TOP^2$ bezeichnen wir in diesem Kapitel den Funktor $V(X,A) = (A,\emptyset)=A$.
+
+\begin{definition}[{name=[Homologietheorie]},label=def:141]
+	Eine \Index{Homologietheorie} mit Werten in $R$-Moduln ist ein Funktor 
+	\[
+		E_* \colon \HTOP^2 \longrightarrow \textsc{Gr}\text{-}R\text{-}\MOD
+	\]
+	zusammen mit einer natürlichen Transformation $\partial_{*+1} \colon E_{*+1}  \to E_{*} \circ V$,\footnote{Genauer: Sei 
+	$S \colon \textsc{Gr}\text{-}R\text{-}\MOD \to \textsc{Gr}\text{-}R\text{-}\MOD$ der Funktor $(S M)_n = M_{n+1}$. Dann ist $\partial_*$ eine natürliche Transformation $S \circ E_* \to E_* \circ V$, für $(X,A)$ also $S \enbrace[\big]{E_*(X,A)} \to E_* \enbrace[\big]{V(X,A)}$, $E_{n+1}(X,A) \xrightarrow{\partial_*}E_n(A)$.} sodass folgende Axiome gelten:
+	\begin{enumerate}[(i)]
+		\item \Index{Paarfolge}: Sei $(X,A)$ ein Paar von topologischen Räumen. 
+		Seien $X= (X,\emptyset) \xrightarrow{\minwidthbox{j}{1em}} (X,A)$ und $A= (A,\emptyset) \xrightarrow{\minwidthbox{i}{1em}} X=(X,\emptyset)$ die Inklusionen. Dann ist 
+		\[
+			\begin{tikzcd}[font=\small]
+				\cdots \rar & E_{n+1}(X,A) \rar["\partial_{n+1}"] & E_n(A) \rar["E_n(i)"] & E_n(X) \rar["E_n(j)"] & E_n(X,A) \rar["\partial_{n}"] & E_{n-1}(A) \rar & \cdots
+			\end{tikzcd}
+		\] 
+		eine lange exakte Folge.
+		\item \Index{Ausschneidung}: Sei $(X,A)$ ein Paar von topologischen Räumen und $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. 
+		Dann induziert die Inklusion
+		$i \colon \enbrace*{X \setminus L, A \setminus L} \hookrightarrow (X,A)$ einen Isomorphismus
+		\[
+			E_*(i) \colon E_* \enbrace*{X \setminus L, A \setminus L} \xrightarrow{\enspace \cong \enspace} E_*(X,A)  
+		\] 
+	\end{enumerate}
+\end{definition}
+
+Homologietheorien sind homotopieinvariant. Oft wird dies als eigenes Axiom formuliert.
+
+\begin{bemerkung}[{name=[Mayer-Vietoris-Folge und disjunkten Vereinigungen]}]
+	Für jede Homologietheorie gibt es eine Mayer-Vietoris-Folge. 
+	Dies ist eine formale Konsequenz aus der Paarfolge und dem Ausschneidungsisomorphismus. 
+	Eine einfache Folgerung aus der Mayer-Vietoris-Folge ist, dass jede Homologietheorie mit \emph{endlichen} disjunkten Vereinigungen verträglich ist: 
+	Sei dazu $X= X_1 \amalg \cdots \amalg X_n$ und $j_i \colon X_i \to X$ die Inklusion, dann ist 
+	\[
+		E_*(X_1) \oplus \cdots \oplus E_*(X_n) \xrightarrow{E_*(j_1) \oplus \cdots \oplus E_*(j_n)} E_*(X)
+	\]
+	ein Isomorphismus.
+\end{bemerkung}
+
+\begin{definition}[{name=[{Dimensionsaxiom und Axiom über disjunkte Vereinigungen}]},label=def:143]
+	Zwei weitere Axiome, die Homologietheorien mit Werten in $R$-Moduln erfüllen können, sind:
+	\begin{description}
+		\item[Dimensionsaxiom:] \index{Dimensionsaxiom}Für den Einpunktraum $\set{x_0}$ ist $E_0(\set{x_0})\cong R$ und $E_n(\set{x_0})=0$ für $n \not=0$.
+		\item[Disjunkte Vereinigung:] \index{disjunkte Vereinigung!Axiom} Sei $X = \coprod_{i \in I} X_i$ und $j_i \colon X_i \to X$ die Inklusion. Dann ist 
+		\[
+			\bigoplus_{i \in I} E_*(j_i) \colon \bigoplus_{i \in I} E_*(X_i) \longrightarrow E_*(X)
+		\]
+		ein Isomorphismus.
+	\end{description}
+\end{definition}
+
+\begin{bemerkung}[{name=[{über Z-graduierte Moduln}]}]
+	In Kapitel \ref{sec:6} haben wir $\textsc{Gr}\text{-}R\text{-}\MOD$ als die Kategorie der $\mathbb{N}$-graduierten $R$-Moduln definiert. 
+	Für viele Homologietheorien muss man diese Kategorie etwas vergrößern und $\mathbb{Z}$"=graduierte $R$-Moduln zulassen. 
+	Objekte sind dann Folgen $(M_n)_{n \in \mathbb{Z}}$ über $\mathbb{Z}$ von $R$-Moduln $M_n$.
+\end{bemerkung}
+
+\begin{bemerkung}[{name=[{Homologie der Sphäre und zur zellulären Homologie}]}]
+	\leavevmode
+	\begin{itemize}
+		\item Für jede Homologietheorie $E_*$ gilt: 
+		\(
+			E_*(S^n) \cong E_* \enbrace*{\set{\mathrm{pt}}} \oplus E_{*-n} \enbrace*{\set{\mathrm{pt}} }  
+		\)\marginnote{Aufgabe 1 Blatt 12}
+		\item Die Konstruktion des zellulären Kettenkomplexes in singulärer Homologie benutzte nur die Axiome aus \autoref{def:141}. 
+		Für die Identifikation der zellulären Homologie mit der singulären Homologie waren zusätzlich die Axiome aus \autoref{def:143} notwendig. 
+		Ohne das Axiom über disjunkte Vereinigungen kann man nur endliche CW-Komplexe behandeln.
+		Ohne das Dimensionsaxiom erhält man an der Stelle der zellulären Kettenkomplex eine sogenannte \Index{Spektralfolge}, die Atiyah-Hirzebruch Spektralfolge. 
+	\end{itemize}
+\end{bemerkung}
+
+\begin{definition}[{name=[Morphismus von Homologietheorien]}]
+	Seien $(E_*,\partial_*^E)$ und $(F_*,\partial_*^F)$ Homologietheorien. 
+	Ein \Index{Morphismus von Homologietheorien} ist eine natürliche Transformation $\tau_* \colon E_* \to F_*$, sodass $\tau_* \circ \partial_{*+1}^E = \partial_*^F \circ \tau_{*+1}$. 
+	Also kommutiert für alle $(X,A)$ das folgende Diagramm
+	\[
+		\begin{tikzcd}[sep=large]
+			E_{n+1}(X,A) \rar["\partial_{n+1}^E"] \dar["\tau_{n+1,(X,A)}"] & E_n(A) \dar["\tau_{n,A}"] \\
+			F_{n+1}(X,A) \rar["\partial_{n+1}^F"] & F_n(A)
+		\end{tikzcd}
+	\]
+\end{definition}
+
+\begin{satz}[{name=[{Isomorphie der Homologie von CW-Komplexen von zwei Homologietheorien}]}]
+	Sei $\tau_* \colon (E_*,\partial_*^E) \to (F_*,\partial_*^F)$ ein Morphismus von Homologietheorien. Ist 
+	\[
+		(\tau_*)_{\set{\mathrm{pt}}} \colon E_*\enbrace[\big]{\set{\mathrm{pt}}} \to F_* \enbrace[\big]{\set{\mathrm{pt}}}
+	\]
+	ein Isomorphismus, dann ist $(\tau_*)_X$ für jeden endlichen CW-Komplex ein Isomorphismus. 
+	Sind $E_*$ und $F_*$ mit beliebigen disjunkten Vereinigungen verträglich, so ist $(\tau_*)_X$ für alle CW-Komplexe ein Isomorphismus.
+\end{satz}
+\begin{beweis}
+	\leavevmode
+	\begin{description}
+		\item[Schritt 1:] Sei $X$ ein $0$-dimensionaler endlicher CW-Komplex, also eine endliche Menge mit der diskreten Topologie. 
+		Für $x \in X$ sei $i_x \colon \set{x} \to X$ die Inklusion. Wir erhalten folgendes Diagramm:
+		\[
+			\begin{tikzcd}[column sep=5.5em, row sep=2.5em]
+				E_*(X) \rar["(\tau_*)_X"] & F_*(X) \\
+				\bigoplus\limits_{\mathclap{x \in X}} E_*(\set{x}) \uar["\cong"] \rar["\bigoplus_{x \in X} (\tau_*)_{\set{x}}","\cong"'] 
+				& \bigoplus\limits_{\mathclap{x \in X}} F_*(\set{x}) \uar["\cong"]
+			\end{tikzcd}
+		\]
+		Das Diagramm kommutiert, da $\tau_*$ eine natürliche Transformation ist.
+		\item[Schritt 2:] Angenommen $(\tau_*)_X$ ist ein Isomorphismus für jeden endlichen CW-Komplex von Dimension echt kleiner als $n$. 
+		Sei $X$ ein $n$-dimensionaler endlicher CW-Komplex:
+		\[
+			\begin{tikzcd}
+				\coprod\limits_{\mathclap{i \in I}} S^{n-1} \rar["\coprod q_i^\ssbrace{n}"] \dar & X^\ssbrace{n-1} \dar\\
+				\coprod\limits_{\mathclap{i \in I}} D^{n} \rar["\coprod Q_i^\ssbrace{n}"] & X
+			\end{tikzcd}
+		\]
+		Sei $X_+^\ssbrace{n-1} := X^\ssbrace{n-1} \cup \coprod_{i \in I} Q^\ssbrace{n}_i \enbrace*{D^n \setminus \set{0}}$ und $Z := \coprod_{i \in I} Q^\ssbrace{n}_i(\mathring{D^n})$. 
+		Dann sind $X^\ssbrace{n-1}_+$, $Z$ und $Z\cap X_+^\ssbrace{n-1}$ homotopieäquivalent zu endlichen CW-Komplexen mit Dimension echt kleiner $n$.
+		Insbesondere sind $(\tau_*)_{X_+^\ssbrace{n-1}}$, $(\tau_*)_Z$ und $(\tau_*)_{X^\ssbrace{n-1}_+ \cap Z}$ Isomorphismen. 
+		Da $X^\ssbrace{n-1}_+ \subseteq X$ und $Z \subseteq X$ offen sind, erhalten wir in $E_*$ und $F_*$ zugehörigen Mayer-Vietoris-Folgen:
+		\[
+			\!\!\begin{tikzcd}[column sep=1.8em, row sep=2.5em,font=\small]
+				\cdots \rar & E_* \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar \dar["(\tau_*)_{X_+^\ssbrace{n-1} \cap Z}","\cong"']
+				& E_*\enbrace{X_+^\ssbrace{n-1}} \oplus E_*(Z) \rar \dar["(\tau_*)_{X_+^\ssbrace{n-1}} \oplus (\tau_*)_{Z}","\cong"']
+				& E_*(X) \rar["\partial_*^{\mathrm{MV},E}"] \dar["(\tau_*)_X"]
+				& E_{*-1} \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar \dar["(\tau_{*-1})_{X_+^\ssbrace{n-1} \cap Z}", "\cong"'] & \cdots  \\
+				\cdots \rar & F_* \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar & F_*\enbrace{X_+^\ssbrace{n-1}} \oplus F_*(Z) \rar 
+				& F_*(X) \rar["\partial_*^{\mathrm{MV},F}"] & F_{*-1} \enbrace{X_+^\ssbrace{n-1} \cap Z} \rar & \cdots
+			\end{tikzcd}
+		\]
+		Da $\tau_*$ eine natürliche Transformation ist, kommutierten die beiden linken Vierecke. 
+		Da $\tau_*$ mit der Randabbildung der Paarfolgen von $E_*$ und $F_*$ kommutiert, kommutiert auch $\tau_*$ mit den Randabbildungen der Mayer-Vietoris-Folgen in $E_*$ und $F_*$. A
+		lso kommutiert auch das das dritte Viereck. 
+		Mit dem 5er-Lemma (\ref{lem:812}) folgt, dass auch $(\tau_*)_X$ ein Isomorphismus ist.
+	
+		Erfüllen $E_*$ und $F_*$ auch das Dimensionsaxiom, so zeigen die Argumente aus Schritt 1 und 2, dass $(\tau_*)_X$ ein Isomorphismus ist für jeden endlich dimensionalen CW-Komplex.
+		\item[Schritt 3:] Sei $X$ ein CW-Komplex. Sei
+		\[
+			X^+ := \set*{(x,t) \given x \in X^\ssbrace{n}, t \in \enbrace*{n+ 1/2,\infty}\rule{0cm}{1em}} \subseteq X \times \enbrace*{1/2 ,\infty}
+		\]
+		Sei weiter
+		\[
+			X_0 := X^+ \cap \enbrace[\Big]{X \times \enbrace[\big]{(1/2,\infty) \setminus \set{1,3,4,\ldots } } } \quad \,\,
+			X_1 := X^+ \cap \enbrace[\Big]{X \times \enbrace[\big]{(1/2,\infty) \setminus \set{2,4,6,\ldots } } } 
+		\]
+		Dann sind $X_0,X_1$ und $X_0 \cap X_1$ homotopieäquivalent zu disjunkten Vereinigungen von endlichen dimensionalen CW-Komplexen. 
+		Sind $E_*$ und $F_*$ mit beliebigen Vereinigungen verträglich, so folgt dass $(\tau_*)_{X_0}$, $(\tau_*)_{X_1}$ und $(\tau_*)_{X_0\cap X_1}$ Isomorphismen sind. 
+		Da $X$ homotopieäquivalent zu $X^+$ ist, $X^+ =X_0 \cup X_1$ und $X_0$ und $X_1$ offen in $X^+$ sind, folgt wie in Schritt 2 mit der 5er-Lemma und der Mayer-Vietoris-Folge, dass auch $(\tau_*)_X$ ein Isomorphismus ist. \qedhere
+	\end{description}
+\end{beweis}
+
+\newpage
+\section{\protect{Zusammenhang zwischen Fundamentalgruppen und Homologiegruppen}} % (fold)
+\label{sec:15}
+
+Zur Vorbereitung müssen wir kurz wiederholen, was eine \emph{Abelisierung} ist:
+
+\begin{definition}[{name=[Kommutatorgruppe]}]
+	Sei $G$ eine Gruppe. Dann heißt die Untergruppe von $G$, die von Elementen der Form $[g,h]:= g h g^{-1} h ^{-1}$ erzeugt wird \Index{Kommutatorgruppe} von $G$. 
+	Wir schreiben hierfür auch $[G,G] \subset G$.
+\end{definition}
+
+\begin{definition}[{name=[{Abelisierung}]}]
+	Der Quotient $G^{\ab} := \sfrac{G}{[G,G]}$ heißt \Index{Abelisierung}\marginnote{Für eine abelsche Gruppe $G$ ist sinnigerweise $G^{\ab}=G$.} (manchmal auch \emph{Abelianisierung}) von G und ist offensichtlich stets abelsch.
+\end{definition}
+
+\begin{bemerkung}
+	\leavevmode
+	\begin{itemize}
+		\item $\GRUPPEN \grenzw{\ab} \ABELGRUPPEN , \quad G \longmapsto G^{\ab} $
+		definiert einen Funktor.
+		\item Dieser Funktor hat die folgende universelle Eigenschaft: Zu jeder abelschen Gruppe $A$ und einem Gruppenhomomorphismus $\varphi \colon G \to A$ existiert ein eindeutiger
+		Gruppenhomomorphismus $\varphi^{\ab} \colon G^{\ab} \to A$, sodass folgendes Diagramm kommutiert
+		\[
+			\begin{tikzcd}
+				G \rar["\varphi"] \dar[two heads]& A \\
+				G^{\ab} \urar["\varphi^{\ab}"']
+			\end{tikzcd}
+		\]
+		\item Sei $X$ ein topologischer Raum. 
+		Da $\abs*{\Delta^1} \cong [0,1]$, liefert jeder Pfad $\omega \colon [0,1] \to X$ einen $1$-Simplex in $C_1(X;\mathbb{Z})$.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{lemma}[{name=[{Für Pfade $\omega,\omega'$ ist $\omega * \omega' - \omega- \omega'$ der Rand eines $2$-Simplex}]},label=lem:154]
+	Seien $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(1)=\omega'(0)$,\marginnote{\enquote{$*$} bezeichnet die Verkettung von Pfaden und wird noch links nach rechts gelesen} dann ist $\omega * \omega' - \omega- \omega' \in C_1(X;\mathbb{Z})$ der Rand eines $2$-Simplex.
+\end{lemma}
+\begin{beweis}
+	Zur Erinnerung: Die geometrische Realisierung des $2$-Simplex ist gegeben durch 
+	\[
+		\abs*{\Delta^2} = \set*{(x_0,x_1,x_2) \in \mathbb{R}^3 \given \sum_{i=0}^{2}x_i=1, x_j \ge 0 \,\forall j \in \set{0,1,2}}.
+	\] 
+	Betrachte nun folgenden singulären Simplex $\sigma \colon \abs*{\Delta^2} \to X$ definiert durch 
+	\[
+		(x_0,x_1,x_2) \longmapsto(\omega*\omega') \enbrace*{\frac{1}{2} (1+x_0-x_2)} = \omega * \omega' \enbrace*{\frac{1}{2}(2x_0 + x_1) }  
+	\]
+	Die Ränder sind
+	\begin{align*}
+		(\delta_0 \sigma)(s) &= \sigma(0,s,1-s) = \omega * \omega' \enbrace*{\frac{1}{2} s}=\omega(s) \\
+		(\delta_1 \sigma)(s) &= \sigma(s, 0, 1-s) = \omega * \omega'(s) \\
+		(\delta_2 \sigma)(s) &= \sigma(s,1-s,0) = (\omega * \omega') \enbrace*{\frac{1}{2} (1+s)} = \omega'(s)
+	\end{align*}
+	Dann folgt $\partial \sigma = \delta_0 \sigma - \delta_1 \sigma + \delta_2 \sigma = \omega - \omega * \omega' + \omega'$.
+\end{beweis}
+\begin{figure}[th]
+	\centering{
+	$\vcenter{\hbox{\begin{tikzpicture}[scale=2]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+		\draw (c) -- ($ (a)!0.5!(b) $) node[midway, below left]{$\downarrow$} node[midway, below right]{$\downarrow$};
+		\draw[thick] (a) -- (b) node[midway, below]{$\omega * \omega'$} -- (c) node[midway, above right]{$\omega'$} -- cycle node[midway, above left]{$\omega$};
+	\end{tikzpicture}}} \quad \xrightarrow{\hspace{1.2cm}} \quad 
+	\begin{tikzpicture}[scale=2, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, gray},baseline=-0.8em] % baseline=-\heightof{$\to$}/2
+		\draw[thick] (1,0.09)--(1,0);
+		\draw[thick] (0,0) -- (2,0);
+		\draw[my brace] (0,0) -- (1,0) node[midway, below=6pt]{$\omega$};
+		\draw[my brace] (1,0) -- (2,0) node[midway, below=6pt]{$\omega'$};
+	\end{tikzpicture}
+	$ \caption{Skizze zum Beweis von \autoref{lem:154}}}
+\end{figure}
+
+\begin{lemma}[{name=[{Summe inverser Wege und der konstante Wege}]},label=lem:155]
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Sei $\omega \colon [0,1] \to X$ ein Pfad und $\omega ^{-1}(s) = \omega(1-s)$ der umgekehrte Pfad. 
+		Dann ist $\omega + \omega ^{-1}$ der Rand einer $2$-Kette, also von einem Element aus $C_2(X;\mathbb{Z})$.
+		\item Der konstante Pfad ist der Rand einer $2$-Kette.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[a)]
+		\item Sei $\sigma \colon \abs*{\Delta^2} \to X$ gegeben durch $\sigma(x_0,x_1,x_2) = \omega(x_1)$. Dann ist 
+		\[
+			\partial \sigma = \omega- {\underbrace{\const_{\omega(0)}}_{=: \partial \tau}} + \omega^{-1}
+		\]
+		Also gilt nach b) $\omega + \omega ^{-1} = \partial(\sigma+\tau)$.
+		\item Der Rand des konstanten $2$-Simplex ist der konstante Pfad. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{figure}[ht]
+	\centering{
+	$\vcenter{\hbox{\begin{tikzpicture}[scale=2]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (-30:1);
+		\coordinate (c) at (30:1);
+		\draw (a) -- ($ (c)!0.5!(b) $) node[pos=0.6, below]{$\uparrow$} node[pos=0.85, below=3pt]{$\uparrow$} node[pos=0.6, above]{$\downarrow$} 
+		node[pos=0.85, above=3pt]{$\downarrow$};
+		\draw[thick] (a) -- (b) node[midway, below]{$\omega$} -- (c) node[midway, right]{$\const_{\omega(0)}$} -- cycle node[midway, above]{$\omega^{-1}$};
+	\end{tikzpicture}}} \quad \xrightarrow{\hspace{1.2cm}} \quad 
+	\vcenter{\hbox{
+	\begin{tikzpicture}[scale=2]
+		\draw[thick] (1,0.06)--(1,-0.06);
+		\draw[thick] (0,0.06)--(0,-0.06);
+		\draw[thick] (0,0) -- (1,0);
+	\end{tikzpicture}
+	}}
+	$ \caption{Skizze zum Beweis von \autoref{lem:155}}}
+\end{figure}
+
+\begin{lemma}[{name=[{Für punktiert homotope Pfade $\omega$ und $\omega'$ ist $\omega-\omega'$ im Rand einer $2$-Kette}]},label=lem:156]
+	Sind $\omega,\omega' \colon [0,1] \to X$ Pfade in $X$ mit $\omega(0)=\omega'(0)$ und $\omega(1)= \omega'(1)$, dann gilt: 
+	Ist $\omega$ homotop zu $\omega'$ relativ zu den Endpunkten, dann ist $\omega- \omega'$ der Rand einer $2$-Kette.
+\end{lemma}
+\begin{beweis}
+	Sei $H \colon [0,1] \times [0,1] \to X$ eine Homotopie zwischen $\omega$ und $\omega'$ mit $H(0,s) = \omega(s)$, $H(1,s)=\omega'(s)$, $H(t,0)=\const_{\omega(0)}$ und $H(t,1)= \const_{\omega(1)}$.
+	Wähle einen Homöomorphismus durch
+	\[
+		\kappa \colon \nicefrac{[0,1] \times [0,1]}{[0,1] \times \set{0}} \to \abs*{\Delta^2} , \qquad [t,s] \longmapsto \enbrace[\big]{st, s(1-t), (1-s)}
+	\]
+	Betrachte nun $\sigma := H \circ \kappa ^{-1} \colon \abs*{\Delta^2} \to X$. 
+	Die Ränder sind $\delta_0 \sigma = \omega$ und $\delta_1 \sigma = \omega'$ und $\delta_2 \sigma = \const_{\omega(1)}$. 
+	Also folgt, dass $\omega- \omega'$ der Rand einer $2$-Kette ist.
+\end{beweis}
+\begin{figure}[th]
+	\centering{
+	$\vcenter{\hbox{\begin{tikzpicture}[scale=1.7]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (1,1);
+		\coordinate (d) at (0,1);
+		\draw[thick] (a) -- (b) node[midway, below]{$\omega$} -- (c) node[midway, right]{$\const_{\omega(1)}$} -- (d) node[midway, above]{$\omega'$}
+		-- cycle node[midway, left]{$\const_{\omega(0)}$};
+	\end{tikzpicture}}} \qquad 
+	\begin{tikzpicture}
+		\draw[-{Classical TikZ Rightarrow[width=2mm, length=1mm]}, decorate, decoration={snake, amplitude=0.4mm, segment length=2.5mm}] (0,0) -- (1,0);
+	\end{tikzpicture}
+	\qquad 
+	\vcenter{\hbox{
+	\begin{tikzpicture}[scale=1.7]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (1,1);
+		\draw[thick] (a) -- (b) node[midway, below]{$\omega$} -- (c) node[midway, right]{$\const_{\omega(1)}$} node[above]{$\phantom{\omega'}$}-- cycle node[midway, above left]{$\omega'$};
+	\end{tikzpicture}
+	}}
+	$ \caption{Skizze zum Beweis von \autoref{lem:156}}}
+\end{figure}
+
+Falls $\omega \colon [0,1] \to X$ eine Schleife ist, dann ist $\partial \omega = \omega(1)- \omega(0)=0$. 
+Also repräsentiert $\omega$ ein Element\marginnote{$\bbenbrace{\cdot}$ für die Homologieklassen und $[\cdot]$ für Homotopieklassen} $\bbenbrace{\omega} \in H_1(X)$. 
+Nach \autoref{lem:156} erhalten wir eine wohldefinierte Abbildung $\theta \colon \pi_1(X,x_0) \to H_1(X)$. 
+Nach \autoref{lem:154} bildet diese Abbildung die Verknüpfung von Schleifen auf Summen von $1$-Ketten ab.
+\begin{align*}
+	\bbenbrace*{\omega * \omega'} = \bbenbrace*{\omega} + \bbenbrace*{\omega'} \quad ,\quad  \bbenbrace*{\omega ^{-1}} = - \bbenbrace*{\omega}
+\end{align*}
+Zusammen mit \autoref{lem:155} erhalten wir einen Gruppenhomomorphismus. 
+Aus der universellen Eigenschaft der Abelisierung erhalten wir 
+\[
+	\theta^{\ab} \colon \pi_1(X,x_0)^{\ab} \longrightarrow H_1(X;\mathbb{Z})
+\]
+Diese Abbildung heißt \Index{Hurewicz-Abbildung}.
+
+\begin{satz}[{name={Hurewicz}}]
+	Für wegzusammenhängende Räume ist $\theta^{\ab}$ ein Isomorphismus.
+\end{satz} 
+\begin{beweis}
+	Sei $X$ wegzusammenhängend. Wähle für jedes $x \in X$ einen Pfad $\lambda_x$ von $x_0$ nach $x$. Wähle $\lambda_{x_0} = \const_{x_0}$. Betrachte 
+	\[
+		\overline{\rho} \colon C_1(X;\mathbb{Z}) \longrightarrow \pi_1(X,x_0)^{\ab} \quad , 
+		\qquad  \omega \longmapsto \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(1)}^{-1}}
+	\]
+	Dies ist ein Gruppenhomomorphismus, den wir auf den Generatoren angegeben haben. 
+	Hier benutzen wir, dass $\pi_1(X,x_0)^{\ab}$ abelsch ist.
+	Nach \autoref{lem:158} induziert $\overline{\rho}$ einen Gruppenhomomorphismus $\rho \colon H_1(X;\mathbb{Z}) \to \pi_1(X,x_0)^{\ab}$. 
+	Für eine Schleife $\omega$ in $x_0$ gilt
+	\begin{align*}
+		(\rho \circ \theta)[\omega] = \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(0)} ^{-1}} = \benbrace*{\lambda_{x_0} * \omega * \lambda_{x_0}^{-1}}=[\omega] 
+	\end{align*}
+	Die Zuordnung $x \mapsto \lambda_x$ liefert einen Gruppenhomomorphismus $\lambda \colon C_0(X;\mathbb{Z}) \to C_1(X;\mathbb{Z})$  
+	\[
+		\sum\nolimits_{i} n_i \cdot x_i  \longmapsto \sum\nolimits_i n_i \cdot \lambda_{x_i}
+	\]
+	Mit \autoref{lem:159} folgt $(\theta \circ \rho)\enbrace[\big]{\bbenbrace{c}} = \bbenbrace{c}$ für alle $\bbenbrace{c} \in H_1(X)$. 
+	Damit ist $\theta^{\ab}$ ein Isomorphismus für wegzusammenhängende Räume $X$.
+\end{beweis}
+
+\begin{lemma}[label=lem:158,{name=[Ränder von 2-Simplizes]}]
+	$\overline{\rho}$ bildet die Ränder von $2$-Simplizes auf $1 \in \pi_1(X,x_0)^{\ab}$ ab.
+\end{lemma}
+\begin{beweis}
+	Sei $\sigma \in C_2(X;\mathbb{Z})$ ein $2$-Simplex. Es gilt mit $\omega_i := \delta_i \sigma$
+	\begin{align*}
+		\overline{\rho}(\partial \sigma) &= \overline{\rho}(\delta_0 \sigma - \delta_1 \sigma + \delta_2 \sigma) \\
+		&= \overline{\rho}(\omega_0) \cdot \overline{\rho}(\omega_1) ^{-1}   \cdot \overline{\rho}(\omega_2) \\
+		&= \benbrace[\Big]{\lambda_{\omega_0(0)} * \omega_0 * \lambda_{\omega_0(1)} ^{-1} * 
+		{\underbrace{\enbrace*{\lambda_{\omega_1(0)} * \omega_1 * \lambda_{\omega_1(1)}^{-1}} ^{-1}}_{=\lambda_{\omega_0(1)} * \omega_1 ^{-1} * \lambda_{\omega_1(0)} ^{-1}}}
+		 * \lambda_{\omega_2(0)} * \omega_2 * \lambda_{\omega_2(1)}} \\
+		 &= \benbrace[\Big]{\lambda_{\omega_0(0)} * {\underbrace{\omega_0 * \omega_1^{-1} * \omega_2}_{=: \gamma}} * \lambda_{\omega_2(1)=\omega_0(0)} ^{-1}} \\
+		 \intertext{Der Pfad $\gamma$ ist die Schleife, die einmal auf dem Rand des $2$-Simplex herumläuft. Also 
+		$\gamma \colon [0,1] \to \abs*{\partial \Delta^2} \hookrightarrow \abs*{\Delta^2} \to X$. Aber $\abs*{\partial \Delta^2} \hookrightarrow \abs*{\Delta^2}$ ist homotop zur 
+		konstanten Abbildung auf $\omega_0(0)$ mit einer Homotopie, die den Punkt $\omega_0(0)$ fixiert.}
+		&= \benbrace*{\lambda_{\omega_0(0)} * \lambda_{\omega_0(0)} ^{-1}} = 1 \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{figure}[th]
+	\centering{
+	\begin{tikzpicture}[scale=1.8, font=\small]
+		\clip (-1.67,-0.65) rectangle (1.5,1.51);
+		% \draw (-2,-2) grid[step=5mm] (2,2);
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (1,0);
+		\coordinate (c) at (60:1);
+		\coordinate (d) at (-1.4,1);
+		\draw[thick,
+			postaction={decorate},
+			decoration={markings,
+				mark=at position 1/6 with {\arrow{to reversed}},
+				mark=at position 0.5 with {\arrow{to}},
+				mark=at position 5/6 with {\arrow{to}}}] 
+		(a) -- (b) node[midway, below]{$\omega_1$} node[below right]{$\omega_1(0)$} 
+		-- (c) node[midway, above right]{$\omega_2$}  node[above right]{$\omega_0(0)$}
+		-- cycle node[midway, above left]{$\omega_0$} node[below]{$\omega_0(1)$};
+		\draw[dashed, thick] (d) node[left]{$x_0$}.. controls +(-70:0.8) and +(125:0.6) .. (a) node[midway, above,sloped]{$\lambda_{\omega_0(1)}$};
+		\draw[dashed, thick] (d) .. controls +(-95:1.0) and +(-108:1.3) .. (b) node[midway, below,sloped]{$\lambda_{\omega_1(0)}$};
+		\draw[dashed, thick] (d) .. controls +(20:0.7) and +(125:0.8) .. (c) node[midway, above,sloped]{$\lambda_{\omega_0(0)}$};
+		
+		\foreach \x in {a,b,c,d}{
+			\draw[fill=DodgerBlue3, thick] (\x) circle[radius=0.03];
+		}
+	\end{tikzpicture}
+	\caption{Skizze zum Beweis von \autoref{lem:158}}}
+\end{figure}
+
+\begin{lemma}[label=lem:159,{name=[Bild von 1-Simplizes unter der Komposition]}]
+	Sei $\omega \colon \abs*{\Delta^1} \to X$ ein $1$-Simplex, dann gilt $\theta \circ \overline{\rho}(\omega) = \bbenbrace{\omega + \lambda_{\partial \omega}}$
+\end{lemma}
+\begin{beweis}
+	Es gilt
+	\[
+		(\theta \circ \overline{\rho}) (\omega) = \theta \enbrace*{ \benbrace*{\lambda_{\omega(0)} * \omega * \lambda_{\omega(1)}^{-1}} } =
+		\left[\!\!\left[\lambda_{\omega(0)} * \omega * \lambda_{\omega(1) ^{-1}} \right]\!\!\right] = \bbenbrace{\omega}  
+		\underbrace{-\bbenbrace{\lambda_{\omega(1)}} + \bbenbrace{\lambda_{\omega(0)}}}_{\lambda_{\omega(0) -\omega(1)} = \lambda_{\partial \omega}} \qedhere
+	\] 
+\end{beweis}
+
+\begin{korollar}[{name=[Erste Homologiegruppe des Produkts wegzusammenhängender Räume]}]
+	Sind $X_1, \ldots , X_n$ wegzusammenhängende Räume, dann gilt
+	\[
+		H_1(X_1 \times \ldots \times X_n) \cong H_1(X_1) \oplus \ldots \oplus H_1(X_n)
+	\]
+\end{korollar}
+\begin{beweis}
+	\begin{align*}
+		H_1(X_1 \times \ldots \times X_n) &\cong \pi_1 \enbrace*{X_1 \times \ldots \times X_n, (x_0^\ssbrace{1}, \ldots , x_0^\ssbrace{n})}^{\ab} \\
+		&\cong \enbrace*{\pi_1 \enbrace*{X_1,x_0^\ssbrace{1}} \times \ldots \times \pi_1 \enbrace*{X_n, x_0^\ssbrace{n}}}^{\ab} \\
+		&\cong \pi_1 \enbrace*{X_1, x_0^\ssbrace{1}}^{\ab} \oplus \ldots \oplus \pi_1 \enbrace*{X_n, x_0^\ssbrace{n}}^{\ab} \tag*{(Übungsaufgabe)} \\
+		&\cong H_1(X_1) \oplus \ldots \oplus H_1(X_n) \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{definition}[{name=[{n-te absolute Homotopiegruppe}]}]
+	Sei $X$ ein topologischer Raum mit Basispunkt $x_0 \in X$, sei $I=[0,1]$ und $n \in \mathbb{N}_0$. 
+	Die \bet{$\mathbf{n}$-te absolute Homotopiegruppe}\index{Homotopiegruppe} $\pi_n(X,x_0)$ ist die Menge der Äquivalenzklassen von stetigen Abbildungen $\omega\colon I^n \to X$ mit $\omega(\partial I^n)=\set{x_0}$. 
+	Die Äquivalenzrelation ist Homotopie relativ zu $\partial I^n$, d.h. $H \colon I^n \times [0,1] \to X$ erfüllt $H_t(\partial I^n)= \set{x_0}$ für alle $t \in [0,1]$. 
+	Die Gruppenverknüpfung in $\pi_n(X,x_0)$ ist gegeben durch 
+	\[
+		(\omega * \omega')(s_1,\ldots ,s_n) = \begin{cases}
+			\omega(2s_1, s_2, \ldots ,s_n), &\text{ falls }0\le s_1 \le \frac{1}{2} \\
+			\omega'(2s_1 -1, s_2, \ldots , s_n) ,&\text{ falls } \frac{1}{2} \le s_1 \le 1
+		\end{cases}
+	\]
+\end{definition}
+
+Bild für $n=2$:
+\[	
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.2]
+		\draw (0,0) rectangle (1,1);
+		\node at (0.5,0.5) {$\omega\vphantom{\omega^\prime}$};
+	\end{tikzpicture}}}
+	 * 
+ 	\vcenter{\hbox{\begin{tikzpicture}[,scale=1.2]
+ 		\draw (0,0) rectangle (1,1);
+		\node at (0.5,0.5){$\omega^\prime$};
+ 	\end{tikzpicture}}}
+	= 
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.2]
+		\draw (0,0) rectangle (1,1);
+		\draw (0.5,0) -- (0.5,1);
+		\node at (0.25,0.5) {$\omega\vphantom{\omega^\prime}$};
+		\node at (0.75,0.5) {$\omega^\prime$};
+	\end{tikzpicture}}}
+\]
+
+\begin{bemerkung}[{name=[{Eigenschaften von $\pi_n(X,x_0)$}]}]
+	Die Verknüpfung hat die folgenden Eigenschaften:
+	\begin{itemize}
+		\item Die Verknüpfung \enquote{$*$} ist assoziativ, hat $\const_{x_0}$, also die konstante Abbildung auf $x_0$, als neutrales Element und 
+		$\omega ^{-1}(s_1,\ldots ,s_n)= \omega(1-s_1,s_2, \ldots ,s_n)$ als inverses Element.
+		\item Die Verknüpfung \enquote{$*$} ist abelsch für $n \ge 2$ (Eckmann-Hilton Argument\footnote{siehe auch \enquote{Analysis, Topologie und Geometrie} 14.5 und 14.6})
+		\[
+			\vcenter{\hbox{\begin{tikzpicture}[scale=1.4]
+				\draw (0,0) rectangle (1,1);
+				\draw (0.5,0) -- (0.5,1);
+				\node at (0.25,0.5) {$\omega\vphantom{\omega^\prime}$};
+				\node at (0.75,0.5) {$\omega^\prime$};
+			\end{tikzpicture}}}
+			\enspace\leadsto\enspace	
+			\vcenter{\hbox{\begin{tikzpicture}[scale=1.4, every node/.style={draw,minimum size=5mm,inner sep=2pt,fill=white}]
+				\draw[fill=DodgerBlue3!30] (0,0) rectangle (1,1);
+				\node at (0.25,0.75) {$\omega$};
+				\node at (0.75,0.25) {$\omega^\prime$};
+			\end{tikzpicture}}}
+			\enspace\leadsto\enspace
+			\vcenter{\hbox{\begin{tikzpicture}[scale=1.4, every node/.style={draw,minimum size=5mm,inner sep=2pt,fill=white}]
+				\draw[fill=DodgerBlue3!30] (0,0) rectangle (1,1);
+				\node at (0.75,0.75) {$\omega$};
+				\node at (0.25,0.25) {$\omega^\prime$};
+			\end{tikzpicture}}}
+			\enspace\leadsto\enspace
+			\vcenter{\hbox{\begin{tikzpicture}[scale=1.4]
+				\draw (0,0) rectangle (1,1);
+				\draw (0.5,0) -- (0.5,1);
+				\node at (0.25,0.5) {$\omega^\prime$};
+				\node at (0.75,0.5) {$\omega\vphantom{\omega^\prime}$};
+			\end{tikzpicture}}}	
+		\]
+		\item $\pi_n\colon \TOP  \to \ABELGRUPPEN$ ist ein Funktor, das heißt eine stetige Abbildung $f \colon (X,x_0) \to (Y,y_0)$ induziert einen Gruppenhomomorphismus 
+		$\pi_n(f) \colon \pi_n(X,x_0) \to \pi_n(Y,y_0)$.
+		\item Da $\nicefrac{I^n}{\partial I^n} \cong S^n$ ist, ergibt sich $\pi_n(X,x_0)$ auch aus den punktierten Homotopieklassen von Abbildungen $(S^n,*) \to (X,x_0)$.
+		\item Falls $x_0$ und $x_0'$ in der gleichen Wegzusammenhangskomponente von $X$ liegen, dann induziert ein Weg von $x_0$ nach $x_0'$ einen Isomorphismus $\pi_n(X,x_0) \cong \pi_n(X,x_0')$.
+	\end{itemize}
+\end{bemerkung}
+
+\begin{definition}[{name=[{n-zusammenhängender Raum}]}]
+	Sei $n \in \mathbb{N}_0$. 
+	Ein topologischer Raum $X$ heißt \bet{$\mathbf{n}$-zusammenhängend}\index{n-zusammenhängend@$n$-zusammenhängend}, falls $\pi_0(X)=\set{*}$ und $\pi_k(X,x_0)$ trivial ist für alle $k \le n$ und einen Basispunkt $x_0 \in X$.
+\end{definition}
+
+\begin{bemerkung}[{name=[Abhängigkeit von der Wahl eines Basispunktes]}]
+	Da ein $n$-zusammenhängender Raum $X$ für $n \ge 0$ mindestens wegzusammenhängend ist, gilt $\pi_k(X,x_0) \cong \pi_k(X,x_0')$. 
+	Somit ist die Definition unabhängig von der Wahl des Basispunktes.
+\end{bemerkung}
+
+Aus der Definition erhalten wir die folgenden Sprechweisen: $0$-zusammenhängend entspricht wegzusammenhängend und $1$"=zusammenhängend entspricht wegzusammenhängend und einfach zusammenhängend.
+
+\begin{definition}[{name=[Relative Homotopiegruppen]}]
+	Sei $X$ ein topologischer Raum, $A \subset X$ ein Unterraum und $x_0 \in A$ ein Basispunkt von $A$ und $X$. 
+	Wir identifizieren $I^{n-1} \subset I^n$ mit der Seitenfläche von $I^n$, für die $s_n=0$ gilt. Außerdem setzen wir 
+	\[
+		J^{n-1} := \overline{\partial I^n \setminus I^{n-1}}
+	\]
+	Die \Index{relative Homotopiegruppe} $\pi_n(X,A,x_0)$ besteht aus den Homotopieklassen von stetigen Abbildungen $\omega\colon I^n  \to X$ mit $\omega(I^{n-1}) \subset A$ und $\omega(J^{n-1})=\set{x_0}$. 
+	Die Homotopien müssen ebenfalls $H_t(I^{n-1}) \subset A$ und $H_t(J^{n-1}) =\set{x_0}$ für alle $t \in [0,1]$ erfüllen.
+	$\pi_n(X,A,x_0)$ ist eine Menge für $n \ge 1$, eine Gruppe für $n \ge 2$ und eine abelsche Gruppe für $n > 2$. 
+	Alternativ können wir relative Homotopiegruppen auch wie folgt beschreiben: $\pi_n(X,A,x_0)$ sind Homotopieklassen von Abbildungen $(D^n,S^{n-1},*) \to (X,A,x_0)$.
+\end{definition}
+
+\begin{figure}[hbt]
+	\centering{
+	$\enbrace*{\vcenter{\hbox{\begin{tikzpicture}[scale=1.4,my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}},font=\small]
+		\draw (0,0) -- (1,0) -- (1,1) node[midway,right]{$\const_{x_0}$} -- (0,1) node[midway, above]{$\const_{x_0}$} -- cycle node[midway, left]{$\const_{x_0}$};
+		\draw[my brace] (0,0) -- (1,0) node[midway, below=6pt]{$ \to A$};
+		\node at (0.5,0.5) {$\omega\vphantom{\omega^\prime}$};
+	\end{tikzpicture}}}}
+	 * 
+ 	\enbrace*{\vcenter{\hbox{\begin{tikzpicture}[,scale=1.4, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}},font=\small]
+ 		\draw (0,0) -- (1,0) -- (1,1) node[midway,right]{$\const_{x_0}$} -- (0,1) node[midway, above]{$\const_{x_0}$} -- cycle node[midway, left]{$\const_{x_0}$};
+		\draw[my brace] (0,0) -- (1,0) node[midway, below=6pt]{$ \to A$};
+		\node at (0.5,0.5){$\omega^\prime$};
+ 	\end{tikzpicture}}}}
+	= 
+	\vcenter{\hbox{\begin{tikzpicture}[scale=1.4,font=\small, my brace/.style={decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}}]
+		\draw (0,0) -- (1,0) -- (1,1) node[midway,right]{$\const_{x_0}$} -- (0,1) node[midway, above]{$\const_{x_0}$} -- cycle node[midway, left]{$\const_{x_0}$};
+		\draw (0.5,0) -- (0.5,1);
+		\draw[my brace] (0,0) -- (1,0) node[midway, below=6pt]{$ \to A$};
+		\node at (0.25,0.5) {$\omega\vphantom{\omega^\prime}$};
+		\node at (0.75,0.5) {$\omega^\prime$};
+	\end{tikzpicture}}}$
+	\caption{Verknüpfung in der relativen Homotopiegruppe für $n=2$}
+	}
+\end{figure}
+
+\begin{bemerkung}[{name=[{Homotopiegruppen bilden keine verallgemeinerte Homologietheorie}]}]
+	Homotopiegruppen bilden \emph{keine} verallgemeinerte Homologietheorie, da sie nicht das Ausschneidungsaxiom erfüllen.
+	Es gibt eine lange exakte Sequenz von Homotopiegruppen:
+	\[
+		\begin{tikzcd}
+			\cdots \rar & \pi_n(A,x_0) \rar & \pi_n(X,x_0) \rar & \pi_n(X,A,x_0) \rar["\partial"] & \pi_{n-1}(A,x_0) \rar & \cdots
+		\end{tikzcd}
+	\]
+\end{bemerkung}
+
+\begin{definition}[{name={Hurewicz-Abbildung}}]
+	Sei $\vartheta \colon \abs*{\Delta^n} \xrightarrow{\cong} D^n$ ein Homöomorphismus. 
+	Dann gilt $\vartheta \enbrace*{\abs*{\partial \Delta^n}}= S^{n-1}$ und $\vartheta$ liefert eine Homologieklasse $\bbenbrace{\vartheta} \in H_n(D^n,S^{n-1}) \cong \mathbb{Z}$. 
+	Diese Klasse ist ein Generator der Gruppe $H_n(D^n,S^{n-1})$. 
+	Sei nun $[\omega] \in \pi_n(X,A,x_0)$ repräsentiert durch $\omega \colon (D^n,S^{n-1},*) \to (X,A,x_0)$. Setze 
+	\[
+		\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A) \enspace, \quad [\omega] \longmapsto \omega_*\bbenbrace{\vartheta} 
+	\]
+	für $n \ge 2$. Dies ist wohldefiniert, denn falls $\omega$ homotop zu $\omega'$ ist (bezüglich $(A,x_0)$), dann ist $\omega_*=\omega_*'$.
+\end{definition}
+
+\begin{lemma}[{name=[Die Hurewicz-Abbildung ist ein Gruppenhomomorphismus]},label=lem:1518]
+	$\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A)$ ist ein Gruppenhomomorphismus.
+\end{lemma}
+\begin{beweis}
+	Wir brauchen eine alternative Beschreibung der Gruppenverknüpfung: 
+	Sei dazu $\gamma$ die Projektion $D^n \to \nicefrac{D^n}{S^{n-2}} \cong D^n \vee D^n$. Dann gilt $\gamma(S^{n-1})= S^{n-1} \vee S^{n-1}$ und folglich ist $\gamma$ eine Abbildung von Raumpaaren
+	$\gamma \colon (D^n,S^{n-1}) \to (D^n \vee D^n, S^{n-1} \vee S^{n-1})$. Seien nun $\omega, \omega' \colon (D^n, S^{n-1},*) \to (X,A,x_0)$ 
+	Für die Verknüpfung $[\omega * \omega'] \in \pi_n(X,A,x_0)$ gilt
+	\[
+		\benbrace[\big]{(\omega \vee \omega') \circ \gamma} = [\omega * \omega'] 
+	\]
+	\begin{figure}[bht]
+		\centering{
+		\begin{tikzpicture}[scale=0.8,>={Classical TikZ Rightarrow[width=2mm,length=1mm]}]
+			\coordinate (a) at (5,-1.2);
+			\coordinate (b) at (7,-1.2);
+			\coordinate (x1) at (5.7,-1.8);
+			\coordinate (x2) at (6.3,-1.8);
+			\draw (-1,0) arc (180:360:1cm and 0.5cm);
+		    \draw[dashed, black!60] (-1,0) arc (180:0:1cm and 0.5cm);
+		    \draw (0,0) circle (1cm);
+		    \shade[ball color=blue!20!white,opacity=0.20] (0,0) circle (1cm);
+		
+			\draw[->] (1.5,0) -- (3.5,0) node[midway, above]{$\gamma$};
+		
+			\draw (4,0) arc (180:360:1cm and 0.5cm);
+		    \draw[dashed, black!60] (4,0) arc (180:0:1cm and 0.5cm);
+		    \draw (5,0) circle (1cm);
+		    \shade[ball color=blue!20!white,opacity=0.20] (5,0) circle (1cm);
+		
+			\draw (6,0) arc (180:360:1cm and 0.5cm);
+		    \draw[dashed, black!60] (6,0) arc (180:0:1cm and 0.5cm);
+		    \draw (7,0) circle (1cm);
+		    \shade[ball color=blue!20!white,opacity=0.20] (7,0) circle (1cm);
+			\draw[->] (a) .. controls +(-90:0.4) and +(180:0.4).. (x1) node[midway, below left,yshift=2mm]{$\omega\vphantom{\omega^\prime}$};
+			\draw[->] (b) .. controls +(-90:0.4) and +(0:0.4).. (x2) node[midway, below right,yshift=2mm]{$\omega'$};
+			\node at (6,-1.8){$X$};
+		\end{tikzpicture}
+		\caption{Die Abbildung $\gamma$ aus \autoref{lem:1518}}}
+	\end{figure}%
+	Sei $p_j \colon (D^n \vee D^n, S^{n-1} \vee S^{n-1}) \to (D^n,S^{n-1})$ die Abbildung, die die $j$-te Kopie von $D^n$ auf den Basispunkt abbildet und auf der anderen Kopie die 
+	Identität ist. Sei weiter $i_k \colon (D^n,S^{n-1}) \to (D^n \vee D^n, S^{n-1} \vee S^{n-1})$ die Inklusion auf die $k$-te Kopie von $(D^n, S^{n-1})$. Betrachte nun die Abbildung
+	\[
+		\enbrace[\big]{(p_1)_*, (p_2)_*} \colon H_n(D^n \vee D^n, S^{n-1} \vee S^{n-1}) \longrightarrow H_n(D^n,S^{n-1}) \oplus H_n(D^n,S^{n-1}) 
+	\]
+	Dies ist ein Isomorphismus mit inverser Abbildung
+	\[
+		(i_{1})_* + (i_2)_* \colon H_n(D^n,S^{n-1}) \oplus H_n(D^n,S^{n-1}) \longrightarrow H_n(D^n \vee D^n, S^{n-1} \vee S^{n-1})
+	\]
+	denn es gilt
+	\begin{align*}
+		\enbrace[\big]{(p_{1})_*, (p_{2})_*} \circ \enbrace[\big]{(i_{1})_* + (i_{2})_*} = \enbrace*{
+		\enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_1 \circ i_1}_{\id}}_* + \enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_1 \circ i_2}_{\const}}_* , 
+		\enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_2 \circ i_1}_{\const}}_* + \enbrace[\Big]{\underbracket[0.8pt][1.2pt]{p_2 \circ i_2}_{\id}} _*} = \id
+	\end{align*}
+	Also ist $\enbrace[\big]{(p_1)_*, (p_2)_*}$ eine surjektive Abbildung und Quelle und Ziel sind freie abelsche Gruppen von gleichem Rang. Die Abbildung $p_j \circ \gamma$ ist homotop 
+	zur Identität (Übung). Also folgt 
+	$\enbrace[\big]{(p_1)_*, (p_2)_*} \circ \gamma \enbrace*{\bbenbrace{\vartheta}} = \enbrace*{\bbenbrace{\vartheta}, \bbenbrace{\vartheta}} $ und weiter
+	\begin{align*}
+		\theta_n \enbrace*{\benbrace*{\omega * \omega'}} = (\omega \vee \omega')_* \circ \gamma_* \enbrace*{\bbenbrace{\vartheta}} &= 
+		(\omega \vee \omega')_* \circ \enbrace[\big]{(i_1)_* + (i_2)_*} \circ \enbrace[\big]{(p_1)_*, (p_2)_*}   \circ \gamma_* \enbrace*{\bbenbrace{\vartheta}} \\
+		&= (\omega \vee \omega')_* \circ \enbrace*{(i_1)_* \enbrace*{\bbenbrace{\vartheta}} + (i_2)_* \enbrace*{\bbenbrace{\vartheta}} } \\
+		&= \omega_* \enbrace*{\bbenbrace{\vartheta}}  + \omega'_* \enbrace*{\bbenbrace{\vartheta}} \qedhere
+	\end{align*}
+\end{beweis}
+
+\begin{satz}[{name={Hurewicz}}]
+	Seien $(X,A)$ mit $A \subset X$ beide wegzusammenhängend. 
+	Es gelte weiter $\pi_1(A,x_0)=1$ und $\pi_k(X,A,x_0)=0$ für $1 \le k \le n-1$, $n \ge 2$. Dann ist 
+	\[
+		\theta_n \colon \pi_n(X,A,x_0) \longrightarrow H_n(X,A)
+	\]
+	ein Isomorphismus.
+\end{satz}
+
+\begin{korollar}[{name=[{Isomorphie von Homotopie- und Homologiegruppen für $(n-1)$-zsmhg. Räume}]},label=korr:1520]
+	Ist $X$ ein $(n-1)$-zusammenhängender Raum für ein $n \ge 2$, dann ist 
+	\[
+		\theta_n \colon \Underbrace{\pi_n(X,x_0)}{=\pi_n(X,\set{x_0},x_0)} \longrightarrow \enspace H_n(X,x_0)\cong H_n(X)
+	\]
+	ein Isomorphismus.
+\end{korollar}
+
+\begin{satz}[{name=[{Homotopiegruppen der Sphäre}]}]
+	Sei $n \ge 1$. Dann ist $\pi_n(S^n,*)\cong \mathbb{Z}$ und $\pi_k(S^n,*)=0$ für $k <n$.
+\end{satz}
+\begin{beweis}
+	Für $n=1$ gilt $\pi_0(S^n,*)= \set{*}$ und $\pi_1(S^1,*)\cong \mathbb{Z}$. Für $n>1$ wissen wir aus dem letzten Semester, dass $\pi_1(S^n,*)=1$ und $S^n$ wegzusammenhängend ist, also 
+	$1$-zusammenhängend ist.
+
+	Angenommen $\pi_i(S^n,*)=0$ für $i=0,\ldots ,k$ und $0 \le k < n$. Dann ist $S^n$ $k$-zusammenhängend und wir erhalten aus dem vorigen \autoref{korr:1520}
+	\[
+		\pi_{k+1}(S^n,*) \xrightarrow{\minwidthbox{\cong}{2em}} H_{k+1}(S^n)= \begin{cases}
+			\mathbb{Z}, &\text{ falls }k+1=n\\
+			0 , &\text{ sonst}
+		\end{cases}
+	\]
+	Falls $k+1<n$ ist, so ist auch $\pi_{k+1}(S^n,*)=0$, sonst sind wir fertig.
+\end{beweis}
+
+\newpage
+\section{Die Fundamentalklasse} % (fold)
+\label{sec:16}
+
+\begin{beispiel}[{name=[Homologiegruppen verschiedener Mannigfaltigkeiten]}]
+	Wir betrachten zu einigen uns gut bekannten Mannigfaltigkeiten die Homologiegruppen in der Dimension der Mannigfaltigkeit:
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item $H_n(\mathbb{R}^n)=0$
+			\item $H_n(S^n)=\mathbb{Z}$
+			\item $H_2(T^2)=\mathbb{Z}$
+			\item $H_{2n}(\mathbb{C}P^n)=\mathbb{Z}$
+			\item $H_{2n}(S^n \times \mathbb{R}^n)=0$
+			\item $H_n(\mathbb{R}P^n)=\mathbb{Z}$, falls $n$ ungerade, $0$ sonst.
+		\end{itemize}
+	\end{multicols}
+\end{beispiel}
+
+\begin{bemerkung}[{name=[Homologie von Mannigfaltigkeiten]}]
+	Sei $M$ ein $n$-Mannigfaltigkeit und $x \in M$. 
+	Da $x$ in $M$ eine Umgebung hat,\marginnote{Ausgeschnitten wird das Komplement dieser Umgebung!} die homöomorph zu $\mathbb{R}^n$ ist, folgt mit dem Ausschneidungsisomorphismus und der Paarfolge
+	\[
+		H_k\enbrace[\big]{M, M\setminus \set{x};R} \cong H_k \enbrace[\big]{\mathbb{R}^n,  \mathbb{R}^n \setminus \set{0};R} \cong H_{k-1}\enbrace[\big]{\mathbb{R}^n \setminus 
+		\set{0};R} \cong H_{k-1}(S^{n-1};R)\cong \begin{cases}
+			R &\text{ falls }k=n\\
+			0 &\text{ sonst}
+		\end{cases}
+	\]
+\end{bemerkung}
+
+\begin{definition}[{name=[Homologische Orientierung in einem Punkt]}]
+	Sei $M$ eine $n$-Mannigfaltigkeit und $x \in M$. 
+	Eine (homologische) \bet{Orientierung}\index{homologische Orientierun!im Punkt} (über $R$) im Punkt $x$ ist ein Erzeuger $\mu_x$ von $H_n(M,M\setminus \set{x};R)$.
+\end{definition}
+
+Über $R=\mathbb{Z}$ gibt es in jedem Punkt genau zwei Orientierungen, da $\mathbb{Z}$ genau zwei Erzeuger hat. 
+Über $R=\mathbb{F}_2$ gibt es in jedem Punkt eine eindeutige Orientierung, da $\mathbb{F}_2$ genau einen Erzeuger hat.
+
+\begin{notation}[{name=[{Einschränkung eines Elementes $v\in H_n(X,X\setminus B;R)$}]}]
+	Seien $A \subseteq B \subseteq X$ Unterräume. Sei $i\colon (X,X\setminus B) \hookrightarrow \enbrace*{X,X\setminus A}$ die Inklusion. 
+	Ist $v\in H_n(X,X\setminus B;R)$, so nennen wir 
+	\[
+		v\big|_A := i_*(v)
+	\]
+	die Einschränkung von $v$ auf $A$. Für $A=\set{x}$ schreiben wir $v|_x := v|_{\set{x}}$.
+\end{notation}
+
+\begin{definition}[{name=[{Homologische Orientierung der gesamten Mannigfaltigkeit}]}]
+	Sei $M$ eine $n$-Mannigfaltigkeit. 
+	Eine (homologische) \bet{Orientierung}\index{homologische Orientierun!global} von $M$ über $R$ ist eine Zuordnung $M \ni x \mapsto \mu_x \in H_n(M,M \setminus\set{x};R)$, die für jeden Punkt $x\in M$ eine Orientierung über $R$ im Punkt $x$ auswählt, sodass folgende Bedingung erfüllt ist:
+	Für alle $x \in M$ gibt es eine Umgebung $U$ von $x \in M$ und $\mu_U \in H_n(M,M \setminus U;R)$ mit $\mu_y =\mu_U|_y$ für alle $y \in U$.
+
+	Gibt es eine solche Orientierung, so heißt $M$ $R$-\bet{orientierbar}\index{orientierbare Mannigfaltigkeit}. 
+	Eine Mannigfaltigkeit zusammen mit einer Orientierung heißt eine $R$-\bet{orientierte Mannigfaltigkeit}\index{orientierte Mannigfaltigkeit}. 
+	Lassen wir $R$ in den Bezeichnungen weg, so ist immer $R=\mathbb{Z}$ gemeint.
+\end{definition}
+
+\begin{beispiel}[{name=[Orientierung der Sphäre]}]
+	Sei $\mu_{S^n} \in \tilde{H}_n(S^n;R)$ ein Erzeuger. 
+	Für $x \in S^n$ ist $\tilde{H}_*(S^n \setminus \set{x};R)= 0$ und daher die Einschränkungsabbildung $\tilde{H}_n(S^n;R) \to \tilde{H}_*(S^n,S^n \setminus \set{x};R)= 0$ ein Isomorphismus und $\mu_{S^n}|_x$ ist ein Erzeuger von $\tilde{H}_n(S^n, S^n\setminus \set{x};R)$. 
+	Daher ist $x \mapsto \mu_{S^n}|_x$ eine Orientierung von $M$ über $R$.
+\end{beispiel}
+
+Eine \Index{geschlossene Mannigfaltigkeit} ist eine kompakte Mannigfaltigkeit (ohne Rand).
+
+\begin{satz}[{name=[{$R$-Orientierbarkeit geschlossener Mannigfaltigkeiten}]}]
+	Sei $M$ eine geschlossene $n$-Mannigfaltigkeit. 
+	Dann ist $M$ genau dann $R$-orientierbar, wenn es $\mu \in H_n(M;R)$ gibt, sodass $\mu|_x \in H_n(M,M\setminus \set{x};R)$ für jedes $x$ eine Orientierung von $M$ in $x$ ist. 
+	Ist $M$ zusammenhängend, so ist $\mu$ ein Erzeuger von $H_n(M;R)$ und $H_n(M;R)\cong R$.
+\end{satz}
+\begin{beweis}[{name={mit \autoref{lem:1611}}}]
+	$H_n(M;R)$ und $\Gamma(M,\mathcal{H})$ sind beide mit $\coprod$ verträglich. 
+	Daher können wir auch annehmen, dass $M$ zusammenhängend ist.
+	Da $M$ kompakt ist, können wir in dem \autoref{lem:1611} $A=M$ setzen und wir erhalten für jede Orientierung $s \in \Gamma(M,\mathcal{H})$ eine Klasse $\mu \in H_n(M;R)$ mit $\mu|_x=s(x)$. 
+	Nach der Überlagerungstheorie aus dem letzten Semester ist jeder Schnitt von $\mathcal{H}$ schon durch seinen Wert an einem Punkt festgelegt. 
+	Insbesondere ist $\ev_x \colon\Gamma(M,\mathcal{H}) \to H_n(M,M \setminus \set{x};R ) \cong R$ injektiv. 
+	Ist $M$ $R$-orientierbar, so ist $\ev_x$ ein Isomorphismus und es folgt
+	\[
+		H_n(M;R) \cong \Gamma(M,\mathcal{H}) \cong H_n(M,M \setminus \set{x};R)\cong R \qedhere
+	\]
+\end{beweis}
+
+\begin{definition}[{name=[{Disjunkte Vereinigung der Homologieklassen}]}]
+	Sei $M$ eine geschlossene $n$-Mannigfaltigkeit. 
+	Wir definieren $\mathcal{H}=\mathcal{H}_R$ als die disjunkte Vereinigung aller $H_n(M,M\setminus \set{x};R)$ mit $x \in M$. 
+	Auf $\mathcal{H}$ definieren wir nun eine Topologie  durch:
+	\begin{align*}
+		V \subseteq H \text{ offen } :\iff \enspace& \forall v \in V \text{ mit } v \in H_n(M,M \setminus \set{x};R) \text{ gibt es eine Umgebung $U$ von $x$ in $M$}\\
+		&\text{und $v_U \in H_n(M,M \setminus U,R)$ mit } v_U\big|_x=v \text{ und } v_U\big|_y \in V \text{ für alle $y \in U$.}
+	\end{align*}
+	Wir definieren $\pi \colon \mathcal{H} \to M$ durch $\pi(v)=x$ für $v \in H_n(M,M \setminus \set{x};R)$. 
+	Es gilt $\pi ^{-1}(\set{x})= H_n(M,M \setminus \set{x};R)$.
+	Mit $\Gamma(M,\mathcal{H})$ bezeichnen wir die Menge aller stetigen Schnitte $s\colon M \to \mathcal{H}$ für $\pi$, das heißt 
+	\[
+		\Gamma(M,\mathcal{H})= \set[\big]{s \colon M \to \mathcal{H} \text{ stetig} \given \pi  \circ s =\id_M} 
+	\]
+\end{definition}
+
+\begin{bemerkung}[{name=[{Eigenschaften der Vereinigung der Homologieklassen}]},label=bem:1612]
+	Einige grundlegende Eigenschaften:
+	\begin{enumerate}[1),itemsep=1pt]
+		\item Für jedes $x \in M$ erbt $H_n(M,M \setminus \set{x};R) \subseteq \mathcal{H}$ die diskrete Topologie.
+		\item $\pi \colon \mathcal{H} \to M$ ist eine Überlagerung.
+		\item $\Gamma(M,\mathcal{H})$ ist ein $R$-Modul. Sind $s,s' \in \Gamma(M,\mathcal{H})$ und $r \in R$, so können wir $s+s'$ und $r \cdot s$ punktweise erklären:
+		\begin{align*}
+			(s+s') (x) &:= s(x) + s'(x) \in H_n(M,M \setminus \set{x};R )\\
+			(r \cdot s) (x) &:= r \cdot s(x) \in H_n(M,M \setminus \set{x};R )
+		\end{align*}
+		\item $R$-Orientierungen von $M$ entsprechen genau den Schnitten $s \in \Gamma(M,\mathcal{H})$, für die gilt: Für alle $x \in M$ ist 
+		$s(x) \in H_n(M,m \setminus \set{x};R)$ ein Erzeuger.
+		\item Eine Folgerung aus der Eindeutigkeit im Hebungssatz aus der Überlagerungstheorie ist folgende Aussage:
+	
+		Sei $M$ zusammenhängend. Dann ist für jedes $x \in M$ die offensichtliche Auswertungsabbildung $\ev_x\colon \Gamma(M,\mathcal{H}) \to H_n(M,M \setminus \set{x};R)$, $\ev_x(s)=s(x)$ injektiv.
+		\item Sei $v \in H_n(M;R)$. Dann erhalten wir durch $(s_v)(x) := v|_x$ einen Schnitt $s_v\in \Gamma(M,\mathcal{H})$. Dies definiert einen $R$-Modul-Homomorphismus
+		$H_n(M;R) \to \Gamma(M,\mathcal{H})$, $v \mapsto s_v$.
+		\item Es gibt immer den Nullschnitt in $\Gamma(M,\mathcal{H})$, $x \mapsto 0\in H_n(M,M\setminus \set{x};R)$.
+		\item Ist $M$ zusammenhängend, so ist $\Gamma(M,\mathcal{H})\not=0$ genau dann, wenn $M$ $R$-orientierbar ist.
+		\item Für $M$ zusammenhängend gilt: $M$ ist $R$-orientierbar $\iff H_n(M;R) \cong R$. 
+	\end{enumerate}
+\end{bemerkung}
+
+\begin{beispiel}[{name=[Für den Restklassenkörper $\mod 2$ erhält man eine 2-fache Überlagerung]}]
+	Für $R=\mathbb{F}_2$ ist $\pi\colon \mathcal{H} \to M$ eine $2$-fache Überlagerung. 
+	Da $\mathcal{H}$ immer den Nullschnitt zulässt, ist $\mathcal{H}$ dann trivial. 
+	Insbesondere ist jede $n$-Mannigfaltigkeit $\mathbb{F}_2$-orientierbar.
+\end{beispiel}
+
+\begin{lemma}[{name=[{über kompakten Teilraum einer $n$-Mannigfaltigkeit}]},label=lem:1611]
+	Sei $M$ eine $n$-Mannigfaltigkeit und $A \subseteq M$ kompakt. Dann gilt
+	\begin{enumerate}[a)]
+		\item \label{enum:16:1} Zu jedem $s \in \Gamma(M,\mathcal{H})$ gibt es ein eindeutiges $v_A \in H_n(M, M \setminus A;R)$ mit $v_A|_x=s(x)$ für alle $x \in A$.
+		\item \label{enum:16:2}Für $i>n$ ist $H_i(M,M \setminus A;R)=0$.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	Wir beweisen die Aussage in vier Schritten:
+	\begin{enumerate}[label=\textbf{Schritt \arabic*:},wide=0cm]
+		\item Seien $A_1,A_2 \subseteq M$ kompakt. Wir zeigen: Gelten \ref{enum:16:1} und \ref{enum:16:2} für $A_1$, $A_2$ und $A_1 \cap A_2$, so auch für $A_1 \cup A_2$.
+		Mit der Mayer-Vietoris-Sequenz aus \autoref{bem:1612} folgt aus 
+		\[
+			H_i(M,M \setminus A_1;R) = H_i(M,M \setminus A_2;R) = H_{i+1}(M,M \setminus A_1 \cap A_2;R) = 0
+		\]
+		direkt $H_i(M, M \setminus A_1 \cup A_2;R)=0$. Daher gilt \ref{enum:16:2} für $A_1 \cup A_2$.
+		Seien $v_1 \in H_n(M,M \setminus A_1;R)$ und $v_2 \in H_n(M,M \setminus A_2;R)$ mit $v_1\big|_x= s(x)$ für alle $x \in A_1$ und $v_2\big|_x=s(x)$ für alle $x \in A_2$.
+		Dann gilt 
+		\[
+			(v_1|_{A_1 \cap A_2})\big|_x = s(x) = (v_2|_{A_1\cap A_2})\big|_x
+		\]
+		für alle $x \in A_1 \cap A_2$. Da $A_1 \cap A_2$ die Eindeutigkeitsaussage aus \ref{enum:16:1} erfüllt, folgt $v_1\big|_{A_1 \cap A_2} = v_2\big|_{A_1 \cap A_2}$.
+		Betrachte nun die Mayer-Vietoris-Folge
+		\[
+			\begin{tikzcd}[font=\small,column sep=1.5em, row sep=0.1em]
+				 H_{n+1}(M,M \setminus A_1 \cap A_2) \rar["\partial"] & H_n(M,M \setminus A_1 \cup A_2) \rar & 
+				{\displaystyle\bigoplus_{H_n(M,M \setminus A_2)}^{H_n(M,M\setminus A_1)}}
+				\rar & H_n(M,M\setminus A_1 \cap A_2) \\
+				0 \ar[draw=none]{u}[sloped,auto=false]{=} & & (v_1,v_2) \arrow[draw=none]{u}[sloped,auto=false]{\in} & v_1|_{A_1 \cap A_2} = v_2|_{A_1 \cap A_2}
+				\arrow[draw=none]{u}[sloped,auto=false]{\in}
+			\end{tikzcd}
+			\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+		\]
+		Daher gibt es ein eindeutiges $v \in H_n(M,M \setminus A_1 \cup A_2;R)$ mit $v|_{A_1} =v_1$ und $v|_{A_2}=v_2$. Für $x \in A_1$ folgt $v|_{x}=v_1|_x=s(x)$ und für 
+		$x \in A_2$ folgt genauso $v|_x = v_2|_x =s(x)$. Ist nun $v' \in H_n(M,M \setminus A_1 \cup A_2;R)$ eine weitere Homologieklasse mit $v'|_x=s(x)$ für alle 
+		$x \in A_1 \cup A_2$, so folgt $v'|_{A_1}=v_1$ und $v'|_{A_2}=v_2$ aus der Eindeutigkeit von $v_1$ und $v_2$. Daher gilt auch $v=v'$.
+		\item Das Lemma ist richtig, wenn $A$ eine abgeschlossene konvexe Teilmenge von $M=\mathbb{R}^n$ ist. Dann ist 
+		$(\mathbb{R}^n, \mathbb{R}^n \setminus A) \to (\mathbb{R}^n, \mathbb{R}^n \setminus \set{x})$ eine Homotopieäquivalenz von Paaren und daher 
+		$H_n(\mathbb{R}^n, \mathbb{R}^n \setminus A;R) \to H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set{x};R)$ ein Isomorphismus. Folglich gibt es 
+		$v \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus A;R)$ mit $v|_x=s(x)$. Da $s|_A$ und $s_v$ beides Schnitte der Überlagerung $\pi ^{-1}(A) \to A$ sind, folgt mit der
+		Eindeutigkeit im Hebungssatz für alle $y \in A$
+		\[
+			v\big|_y = s_v(y) = s(y)
+		\]
+		Ist $v' \in H_n(\mathbb{R}^n, \mathbb{R}^n \setminus A;R)$ eine zweite Homologieklasse mit $v'|_x=s(x)$, so folgt $v=v'$, da $v'|_x =s(x)=v|_x$ ist und $w \mapsto w|_x$
+		ein Isomorphismus $H_n(\mathbb{R}^n,\mathbb{R}^n \setminus A;R) \to H_n(\mathbb{R}^n, \mathbb{R}^n\setminus \set{x};R )$ ist. Offenbar ist 
+		$\mathbb{R}^n \setminus A \simeq S^{n-1}$ und daher $H_i(\mathbb{R}^n \setminus A;R)=0$ für alle $i >n$.
+		\item Das Lemma gilt für $M=\mathbb{R}^n$ und eine beliebige kompakte Teilmenge $A \subseteq M$: Ist $A$ die Vereinigung von endlichen vielen konvexen und kompakten 
+		Teilmengen von $\mathbb{R}^n$, so folgt die Behauptung für $A$ aus Schritt 1 und 2. Für ein beliebiges kompaktes $A \subseteq \mathbb{R}^n$ folgt die Existenzaussage in 
+		\ref{enum:16:1} aus Schritt 2. Wähle dazu $B \subseteq \mathbb{R}^n$ konvex und kompakt mit $A \subseteq B$. Nach Schritt 2 gibt es 
+		$v \in H_n(\mathbb{R}^n, \mathbb{R}^n \setminus B;R)$ mit $v|_x=s(x)$ für alle $x \in B$. Für $v|_A \in H_n(\mathbb{R}^n,\mathbb{R}^n \setminus A;R)$ gilt dann 
+		$(v|_A)\big|_x = v|_x=s(x)$ für alle $x \in A$.
+	
+		Sei nun $v \in H_d(\mathbb{R}^n,\mathbb{R}^n \setminus A;R)$ mit $d \ge n$. Falls $d=n$ ist, so sei $v|_x=0$ für alle $x \in A$. Wir müssen zeigen: $v=0$. Sei 
+		$z \in C_d(\mathbb{R}^n;R)$ ein Repräsentant von $v$. Insbesondere ist $\partial z \in C_{d-1}(\mathbb{R}^n \setminus A;R)$. $\partial z$ ist eine 
+		$R$-Linearkombination von endlich vielen singulären $d-1$-Simplizes in $\mathbb{R}^n \setminus A$. Da jeder dieser singulären $d-1$-Simplizes ein kompaktes Bild in 
+		$\mathbb{R}^n \setminus A$ hat, finden wir endlich viele Bälle $B_i \subseteq \mathbb{R}^n$ mit
+	
+		\begin{enumerate*}[(1),itemjoin={,\hspace{1em}},itemjoin*={{\hspace{1ex}und\hspace{1ex}}}]
+			\item $\forall i : B_i \cap A \not= \emptyset$
+			\item $A \subseteq B_1 \cup \ldots \cup B_n$
+			\item $\partial z \in C_{d-1}\enbrace[\big]{\mathbb{R}^n \setminus (B_1 \cup \ldots \cup B_n);R}$
+		\end{enumerate*}
+	
+		Es folgt, dass $z$ auch eine Homologieklasse $v' \in H_d \enbrace[\big]{\mathbb{R}^n,\mathbb{R}^n \setminus (B_1 \cup \ldots \cup B_n);R}$ repräsentiert mit $v'|_A=v$.
+		Ist $d>n$, so folgt $v'=0$ und daher auch $v=v'|_A=0$. Ist $d=n$, so wählen wir $x_i \in B_i \cap A$. Da $v'|_{x_i}=v|_{x_i}= 0$ ist, folgt $v'|_{B_i}=0$, weil die 
+		Einschränkungsabbildung $w \mapsto w|_{x_i}$ einen Isomorphismus 
+		$H_n(\mathbb{R}^n, \mathbb{R}^n \setminus B_i;R) \to H_n(\mathbb{R}^n,\mathbb{R}^n \setminus \set{x_i};R )$ definiert. Daher gilt $v'|_y=0$ für alle 
+		$y \in B_1 \cup \ldots \cup B_n$. Es folgt $v'=0$ und damit auch $v=v'|_A=0$.
+		\item Für den allgemeinen Fall schreibt man $A=A_1 \cup \ldots \cup A_n$, sodass jedes $A_i$ kompakt ist und in einem Kartengebiet $U_i$ von $M$ enthalten ist. Da wir 
+		Ausschneidungsisomorphismen $H_*(U_i,U_i\setminus A;R) \to H_*(M,M \setminus A;R)$ erhalten und $U_i \cong \mathbb{R}^n$ ist, gilt die Behauptung nach Schritt 3 für 
+		jedes $A_i$. Mit Schritt 1 folgt die Behauptung auch für $A$. \qedhere
+	\end{enumerate}
+\end{beweis}
+
+\begin{bemerkung}[{name=[{Existenz einer Mayer-Vietoris-Folge für $A,B \subseteq X$ abgeschlossen}]}]
+	\leavevmode
+	\begin{enumerate}[1)]
+		\item Zu Unterräumen $A \subseteq B \subseteq X$ gibt es eine kurze exakte Folge von Kettenkomplexen 
+		\[
+			\begin{tikzcd}
+				C_*(B,A;R) \rar[hook] & C_*(X,A;R) \rar[two heads] & C_*(X,B;R) 
+			\end{tikzcd}
+		\]
+		Damit erhalten wir eine lange exakte Folge in Homologie, die man als lange exakte Folge des 
+		Tripels bezeichnet:
+		\[
+			\begin{tikzcd}[sep=small]
+				\cdots \rar & H_{n+1}(X,B;R) \rar["\partial"] & H_n(B,A;R) \rar & H_n(X,A;R) \rar & H_n(X,B;R) \rar & \cdots
+			\end{tikzcd}
+		\]
+		\item Zu abgeschlossenen Unterräumen $A,B \subseteq X$ ist $A \setminus B \subseteq X \setminus A \cap B$ abgeschlossen und $X \setminus B\subseteq X \setminus A \cap B$
+		offen. Da $A \setminus B  \subseteq X \setminus B$ und 
+		\begin{align*}
+			\enbrace*{X \setminus A \cap B} \setminus (A \setminus B) &= X \setminus A \qquad \text{ sowie} \\
+			\enbrace*{X \setminus B} \setminus \enbrace*{A \setminus B} &= X  \setminus (A \cup B)
+		\end{align*}
+		erhalten wir einen Ausschneideisomorphismus 
+		\[
+			H_*\enbrace[\big]{X \setminus A, X \setminus (A \cup B)} \cong H_* \enbrace*{X \setminus A \cap B, X \setminus B;R}
+		\]
+		Zusammen mit der Paarfolge aus 1) erhalten wir eine Mayer-Vietoris-Folge:
+		\[
+			\!\begin{tikzcd}[font=\small,column sep=1.1em]
+				\cdots \rar & H_{n+1}(X,X \setminus A \cap B) \rar["\partial"] & H_n(X,X \setminus A \cup B) \rar & 
+				{\displaystyle\bigoplus_{H_n(X,X \setminus B)}^{H_n(X,X\setminus A)}}
+				\rar & H_n(X,X\setminus A \cap B) \rar & \cdots
+			\end{tikzcd}
+			\marginnote{\enquote{$R$} aus Platzgründen weggelassen}
+		\]
+	\end{enumerate}
+\end{bemerkung}
 
 \cleardoubleoddemptypage
 \pagenumbering{Alph}
 \setcounter{page}{1}
 \printindex
 \listoffigures
-\todototoc
-\listoftodos[To-do's und andere Baustellen]
+% \todototoc
+% \listoftodos[To-do's und andere Baustellen]
 \end{document}
