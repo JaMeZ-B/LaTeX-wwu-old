@@ -37,19 +37,19 @@
 \cleardoubleoddemptypage %sorgt dafür, dass alles folgende erst auf der nächsten freien "rechten" Seite steht
 \pagenumbering{arabic}
 
-\section{Einletung und Motivation}
+\section{Einleitung und Motivation}
 
 \subsection{Parameterabhängige PDGL}
 \label{sub:para_pdgl}
-Sei $\Omega\subseteq \R^d$ ein polygonales Gebiet. Zu einem Parametervektor $\mu \in P\subseteq \R^d$ aus einer Menge von 'erlaubten' Parametern ist eine Funktion, z.B. 'Temperatur'
+Sei $\Omega\subset \R^d$ ein polygonales, beschränktes Gebiet. Zu einem Parametervektor $\mu \in P\subset \R^d$ aus einer Menge von 'erlaubten' Parametern ist eine Funktion, z.B. 'Temperatur'
 \[
 u(\mu): \Omega\to \R
 \]
 gesucht, so dass $-\nabla\big(\kappa(\mu)\nabla u(\mu)\big) = q(\mu)$ in $\Omega$, wobei $u(\mu) = 0$ auf $\partial\Omega$, mit $\kappa(\mu):\Omega\to \R$ dem 'Wärmeleitkoeffizient' und $q(\mu)$ eine 'Wärmequelle', z.B. $q(\mu)=1$.
 %grafik 1
-Weiter kann eine Augabe erwünscht sein, z.B.
+Weiter kann eine Ausgabe erwünscht sein, z.B.
 \[
-s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x,\mu)\dint x,
+s(\mu) = \frac{1}{\abs{\Omega_s}} \int_{\Omega_s} u(x;\mu)\dint x,
 \]
 die mittlere Temperatur auf $\Omega_s$.
 %grafik 2
@@ -66,15 +66,15 @@ für eine Bilinearform $b(\cdot,\cdot;\mu): X\times X \to \R$ und linearen Funkt
 
 Die schwache Formulierung für Beispiel 1.1 lautet:
 \[
-X:= H_0^1(\Omega)= \enbrace{f\in L^2(\Omega)~:+\difff{ }{x_1}f\in L^2(\Omega),~f|_{\partial \Omega = 0}}
+X:= H_0^1(\Omega)= \left\lbrace f\in L^2(\Omega)~:\difff{ }{x_i}f\in L^2(\Omega),~f|_{\partial \Omega = 0} \right\rbrace
 \]
 Dann kann man die Bilinearform über
 \[
-b\big(u(\mu),v;\mu\big) := \int\limits_{\Omega} \kappa(\mu)\nabla u(\mu)\nabla v \dint x; f(v;\mu) := \int\lim\limits_{\Omega} q(\mu) v \dint x
+b\big(u(\mu),v;\mu\big) := \int\limits_{\Omega} \kappa(\mu)\nabla u(\mu)\nabla v \dint x;~ f(v;\mu) := \int\limits_{\Omega} q(\mu) v \dint x
 \]
 ausdrücken und 
 \[
-s(\mu) = \frac{1}{\abs{\Omega_s}} \int\lim\limits_{\Omega_s} u(x;\mu)\dint x =: l\big(u(\mu);\mu\big)
+s(\mu) = \frac{1}{\abs{\Omega_s}} \int\limits_{\Omega_s} u(x;\mu)\dint x =: l\big(u(\mu);\mu\big)
 \]
 ABER: Für sehr wenige PDGL's können wir die Lösung analytisch bestimmen.
 Daher sind wir an einer numerische Approximation interessiert.
@@ -108,7 +108,7 @@ Anwendungen für die Standarddiskretisierungsverfahren sehr teuer oder zu teuer 
 
 \subsection{Parameterabhängige Lösungsmenge}
 \label{sub:para_menge}
-Sei $X :=\{u(\mu)~:~\mu\in P\}\subseteq P$ für $P\in \R^p$ ist die durch $\mu$ parametrisierte Lösungsmenge.
+Sei $M :=\{u(\mu)~:~\mu\in P\}\subseteq P$ für $P\in \R^p$ ist die durch $\mu$ parametrisierte Lösungsmenge.
 $X$ ist im Allgemeinen unendlichdimensional.
 %grafik
 $\Rightarrow$ Motivation für die Suche nach einem 'niedrigdimensionalen' Teilraum $X_N\subseteq X$ zur Approximation von $M$ und einer Approximation $u_N(\mu) \approx u(\mu),~ u_N\in X_N$.
@@ -127,7 +127,7 @@ u_N(\mu) = \alpha_1(\mu)u_1 +\alpha_2(\mu) u_2,
 mit $\alpha_1 = \frac{2}{\mu+1}-1$ und $\alpha_2 = 2-\frac{2}{\mu-1}$.
 Diese erfüllt folgende Fehleraussage und ist somit exakt:
 \[
-\norm{u_N(\mu)-u(\mu)}_\infty = \sup\limits_{\mu\in[0,1]} \abs{u_N(x;\mu)-u(x;\mu)} = 0
+\norm{u_N(\mu)-u(\mu)}_\infty = \sup\limits_{x\in[0,1]} \abs{u_N(x;\mu)-u(x;\mu)} = 0
 \]
 Da $\alpha_1 + \alpha_2 = 1$ und $0\le \alpha_1,\alpha_2\le 1$ ist $M$ die Menge der Konvexkombinationen von $u_1$ und $u_2$.
 %sub end
@@ -141,15 +141,15 @@ b\big(u_N(\mu),v_N;\mu\big) = f(v_N;\mu),~ s_N(\mu) = l_N\big(u_N(\mu);\mu\big) 
 \end{align}
 %sub end
 
-\subsection{Bermerkung (Begrifflichkeit)}
+\subsection{Bemerkung (Begrifflichkeiten)}
 \label{sub:bem_begrifflichkeit}
 Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
 \begin{enumerate}[1)]
-	\item Eine partielle DGL ist ein \bet{analytisches Modell}, welches die analytische Lösung $u(\mu)\in X$ in einem (typischerweise) $\infty$-dimensionalen Funktionenraum charakterisiert ist.
+	\item Eine partielle DGL ist ein \bet{analytisches Modell}, welches die analytische Lösung $u(\mu)\in X$ in einem (typischerweise) $\infty$-dimensionalen Funktionenraum charakterisiert.
 	\item Ein \bet{hochdimensionales, diskretes Modell} ist ein Berechnungsverfahren zur Bestimmung einer Näherung $u_h(\mu)\in X_h$, wobei $X_h$ ein hochdimensionaler Funktionenraum ist.
 	Beispiele sind \bet{Finite Elemente} oder \bet{Finite Volumenräume} und typischerweise hat $X_h$ eine Dimension von mindestens $10^5$.
-	\item Ein \bet{reduziertes Modell} ist ein Berechnungsverfahren zur Bestimmung einer Näherung $u_N(\mu)\in X_N$ in einem sehr problemangepassten und daher niedrigdimensionalen Raum von typischerweise $\dim X_N < 100$.
-	\item \bet{Modellreduktion} beschäftigt sich mit Modellen der Erzeugung von reduzierten Modellen aus hochdimensionalen, diskreten (oder auch analytischen) Modellen und Untersuchungen ihrer Eigenschaften.
+	\item Ein \bet{reduziertes Modell} ist ein Berechnungsverfahren zur Bestimmung einer Näherung $u_N(\mu)\in X_N$ in einem sehr problemangepassten und daher niedrigdimensionalen Raum von typischerweise $\dim X_N \leq 100$.
+	\item \bet{Modellreduktion} beschäftigt sich mit Methoden der Erzeugung von reduzierten Modellen aus hochdimensionalen, diskreten (oder auch analytischen) Modellen und Untersuchungen ihrer Eigenschaften.
 \end{enumerate}
 
 \subsection{Organisation der Vorlesung}
@@ -168,7 +168,7 @@ Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
 
 \minisec{Vorläufige Gliederung (bis Weihnachten)}
 \begin{enumerate}[1)]
-	\item Einleitung / Moitavtion
+	\item Einleitung / Motivation
 	\item Grundlagen:
 	\begin{itemize}
 		\item Kurze Einführung in lineare Funktionalanalysis
@@ -186,6 +186,33 @@ Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
 
 %sec end
 
+\subsection{Literatur}
+\label{sub:lit}
+
+\begin{enumerate}
+\item RB Methoden:
+\begin{itemize}
+\item B. Haasdonk: Skript zur Vorlesung Reduzierte-Basis-Methoden, Preprint IANS, Uni Stuttgart, 2011.
+\item A. T. Patera and G. Rozza: Reduced Basis Approximation and A Posteriori Error Estimation for Parameterized Partial Differential Equations , Version 1.0, Copyright MIT 2006, to appear in (tentative rubric) MIT Pappalardo Graduate Monographs in Mechanical Engineering.
+\item A. Quarteroni, A. Manzoni, and F. Negri: Reduced Basis Methods for Partial Differential Equations. An Introduction, UNITEXT Series, Springer, 2015.
+\item A. Pinkus: n-widths in approximation theory, Springer, 1985.
+\end{itemize}
+\item Funktionalanalysis
+\begin{itemize}
+\item H. W. Alt: Lineare Funktionalanalysis, Springer, 2006. 
+\item D. Werner: Funktionalanalysis, Springer, 2007.
+\end{itemize}
+\item Partielle Differentialgleichungen/ Finite Elemente
+\begin{itemize}
+\item L. C. Evans: Partial Differential Equations, AMS, 2002.
+\item M. Ohlberger: Skript zur Vorlesung Numerik partieller Differentialgleichungen I, WWU, 2012.
+\item G. Dziuk: Theorie und Numerik partieller Differentialgleichungen, de Gruyter, 2010.
+\item D. Braess: Finite Elemente, Springer 2003.
+\item A. Ern and J.-L. Guermond: Theory and practice of finite elements, Springer, 2004.
+\item S. C. Brenner and L. R. Scott: The mathematical theory of finite element methods, Springer, 2008.
+\end{itemize}
+\end{enumerate}
+
 \section{Grundlagen}
 
 \subsection{Lineare Funktionalanalysis in Hilberträumen}
@@ -193,7 +220,7 @@ Zusammengefasst unterscheiden wir zwischen den folgenden drei Modellen:
 \subsubsection{Lineare Operatoren}
 
 \ssect{2.1 Definition}{(Hilbertraum)}
-Sei $X$ ein reeller Vektorraum mit $(\cdot,\cdot):X\times X\to \R$ ein Skalarprodukt und induzierter Norm $\norm{x}:= \sqrt{(x,x)}$, falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum} (HR).
+Sei $X$ ein reeller Vektorraum mit $(\cdot,\cdot):X\times X\to \R$ ein Skalarprodukt und induzierter Norm $\norm{x}:= \sqrt{(x,x)}$. Falls $X$ vollständig bzgl. $\norm{.}$ , ist $X$ ein (reeller) \bet{Hilbertraum} (HR).
 
 \ssect{2.2 Beispiele}{(Hilbertraum)}
 \begin{enumerate}[(1)]
@@ -208,15 +235,16 @@ Ist die Abbildung $T:X\to Y$ linear und $x_0\in X$, so sind äquivalent:
 \begin{enumerate}[(1)]
 	\item $T$ ist stetig.
 	\item $T$ ist stetig in $x_0$.
-	\item $\sup\lim\limits_{\norm{x}_X \le 1} \norm{Tx}_Y < \infty$.
-	\item $\exists$ Konstante (mit $\norm{Tx}_Y \le c\norm{x}_X ~\forall x\in X$)
+	\item $\sup\limits_{\norm{x}_X \le 1} \norm{Tx}_Y < \infty$.
+	\item $\exists$ Konstante $C$ mit $\norm{Tx}_Y \le C\norm{x}_X ~\forall x\in X$.
 \end{enumerate}
+\bet{Beweis:} s. \cite{Alt06}, Lemma 3.1, S.~141f.
 
 \ssect{2.4 Definition}{(Lineare Operatoren)}
 Seinen $X$ und $Y$ reelle Vektorräume.
 Wir definieren
 \[
-L(X;Y) := \enbrace{T:X\to Y~;~ T \text{ ist linear und stetig}}.
+L(X;Y) := \lbrace T:X\to Y~;~ T \text{ ist linear und stetig} \rbrace.
 \]
 Abbildungen in $L(X;Y)$ nennen wir \bet{lineare Operatoren}.
 Nach Lemma 2.3 (3) ist für jeden Operator $T\in L(X;Y)$ die \bet{Operatornorm} von $T$ definiert durch
@@ -232,12 +260,12 @@ Es ist $L(X) := L(X;X)$.
 	Die Elemente von $X'$ nennen wir auch \bet{lineare Funktionale}.
 	\item Die Menge der kompakten (linearen) Operatoren von $X$ nach $Y$ ist definiert durch
 	\[
-	K(X;Y) := \enbrace{T\in L(X;Y)~;~ T(\overline{B_1(0)}) \text{ kompakt}}.
+	K(X;Y) := \lbrace T\in L(X;Y)~;~ \overline{T(B_1(0))} \text{ kompakt} \rbrace.
 	\]
 	\item Eine lineare Abbildung $P:X\to X$ heißt (lineare) \bet{Projektion}, falls $P^2=P$.
-	\item Für $T\in L(X;Y)$ ist $\ker(T) := \enbrace{x\in X~;~ Tx = 0}$ der \bet{Nullraum} oder \bet{Kern} von $T$.
+	\item Für $T\in L(X;Y)$ ist $\ker(T) := \penbrace{x\in X~;~ Tx = 0}$ der \bet{Nullraum} oder \bet{Kern} von $T$.
 	Aus der Stetigkeit von $T$ folgt, dass $\ker(T)$ ein abgeschlossener Unterraum ist.
-	Der \bet{Bildraum} von $T$ ist $\bild(T) := \enbrace{Tx\in Y~;~x\in X}$.
+	Der \bet{Bildraum} von $T$ ist $\bild(T) := \penbrace{Tx\in Y~;~x\in X}$.
 	\item Ist $T\in L(X;Y)$ bijektiv, so ist $T^{-1}\in L(Y;X)$.
 	Dann heißt $T$ (linear, stetiger) \bet{Isomorphismus}.
 	\item $T\in L(X;Y)$ heißt \bet{Isometrie}, falls
@@ -258,15 +286,15 @@ ein Funktional $T_g\in  L^2(\Omega)'$ definiert.
 Sei $X$ ein Hilbertraum und $A\subseteq X$ nicht leer, abgeschlossen und konvex.
 Dann gibt es genau eine Abbildung $P:X\to A$ mit
 \[
-\norm{x-Px}_X = \dist(x,A) = \inf\lim\limits_{y\in A} \norm{x-y}_X ~\forall x\in X.
+\norm{x-Px}_X = \dist(x,A) = \inf\limits_{y\in A} \norm{x-y}_X ~\forall x\in X.
 \]
 Die Abbildung $P:X\to A$ heißt orthogonale Projektion von $X$ auf $A$.
 
-\bet{Beweis:} [Alt, Satz 2.2, S.96]
+\bet{Beweis:} s. \cite{Alt06}, Satz 2.2, S.~96.
 
 \ssect{2.8 Folgerung}{ }
 Ist $A\subseteq X$ nicht-leer, abgeschlossen und Unterraum, so ist $P$ linear und $Px\in A$ charakterisiert durch $(x-Px,a)_X = 0~\forall a\in A$.
-Falls $\dim(A) = n<\infty$ und $\enbrace{\varphi_i}_{i=1}^h$ Orthonormalbasis von $A$, gilt
+Falls $\dim(A) = n<\infty$ und $\enbrace{\varphi_i}_{i=1}^n$ Orthonormalbasis von $A$, gilt
 \[
 Px = \sum_{i=1}^{n} (x, \varphi_i)_X\varphi_i.
 \]
@@ -277,7 +305,7 @@ Ist $X$ Hilbertraum, so ist $J:X\to X'$ definiert durch
 J(v)(w) := (v,w)_X ~\forall v,w\in X 
 \]
 eine stetige, lineare, bijektive Isometrie.
-Insbesondere existiert zu $l\in X'$ ein eindeutiger \bet{Riesz Repräasentant} $V_l := J^{-1}(l)\in X$ mit $l(.) = (v_l,.)_X$.\\
+Insbesondere existiert zu $l\in X'$ ein eindeutiger \bet{Riesz Repräsentant} $V_l := J^{-1}(l)\in X$ mit $l(.) = (v_l,.)_X$.\\
 
 \bet{Beweis:}\\
 C-S-Ungleichung: $\abs{J(v)(w)}\le \norm{v}_X\norm{w}_X$.
@@ -395,6 +423,7 @@ Ferner gilt: $B$ ist bijektiv, $B^{-1}\in L(X)$ mit
 \[
 \norm{B} \le \gamma \text{ und } \norm{B^{-1}}\le \frac{1}{\alpha}.
 \]
+\bet{Beweis:} s. \cite{Alt06}, Satz 4.2, S.~172.
 
 \subsubsection{Sobolevräume}
 
@@ -487,8 +516,7 @@ Dann gibt es einen linearen \bet{Spuroperator} $\tau: H^{1,p}(\Omega) \to L^p(\p
 \]
 Insbesondere gilt für $u\in H_0^{1,p}(\Omega): \tau u = 0$.\\
 
-\bet{Beweis:}\\
-Im Buch von Alt oder von Evans.
+\bet{Beweis:} s. \cite{Alt06}, Satz A 6.6, S.~279; sch\"oner in \cite{Evans02}, S.~257 ff.
 
 \ssect{2.28 Satz}{(2. Soblev'scher Einbettungssatz)}
 Sei $1\le p<\infty$, dann gilt:
@@ -504,8 +532,7 @@ H_0^{2,p}(\Omega) \hookrightarrow C^0(\Omega), \text{ falls } 2-\frac{d}{p} > 0.
 \]
 Ist $\Omega$ ein Lipschitz-Gebiet, so gilt diese Aussage auch für Sobolevräume ohne Nullrandwerte.\\
 
-\bet{Beweis:}\\
-Im Buch von Alt.
+\bet{Beweis:} s. \cite{Alt06}, S\"{a}tze 8.4--8.13, S.~334 ff.
 
 \ssect{2.29 Satz}{(Poincaré-Friedrichs Ungleichung)}
 Sei $\Omega\subset \R^d$ ein Gebiet mit Durchmesser $D:=\diam(\Omega)$ und $1\le p <\infty$.
@@ -514,8 +541,7 @@ Dann gibt es eine Konstante $c_p\le 2D$, so dass für alle $v\in H_0^{1,p}(\Omeg
 \norm{v}_{L^p(\Omega)}  \le c_p \norm{\nabla v}_{L^p(\Omega)}.
 \]
 
-\bet{Beweis:}\\
-Siehe Buch von Dziuk.
+\bet{Beweis:} s. \cite{Dziuk10}, Satz 2.20, S.~55f.
 
 \subsubsection{Schwache Formulierung elliptischer Randwertprobleme}
 Wir betrachten zunächst die stationäre Wärmeleitgleichung.
@@ -608,8 +634,7 @@ Dann gilt für die eindeutige schwache Lösung $u\in H_0^1(\Omega)$ der station�
 \norm{u}_{H^2(\Omega)} \le c\norm{q}_{L^2(\Omega)}
 \]
 
-\bet{Beweis:}\\
-Für glatten Rand: Buch von Evans.
+\bet{Beweis:} f\"{u}r glatten Rand und das Poissonproblem s. \cite{Dziuk10}, S\"{a}tze 2.36/2.38, S.~69 ff., f\"{u}r glatten Rand und Randwertprobleme in Divergenzform s. \cite{Evans02}, Kapitel 6.3, S.~308 ff.
 
 \ssect{2.36 Bemerkung}{}
 Betrachtet man nicht konvexe Lipschitz-Gebiete, so kann man im Allgemeinen keine Lösung $u\in H^2(\Omega)$ erwarten.
@@ -687,7 +712,7 @@ Die einfachste Klasse von Finiten Elementen sind Lagrange Elemente, auf welche w
 Ferner betrachten wir nur Teilräume $X_h$ welche auf einer simplizialen Zerlegung des Gebietes $\Omega$ beruhen.
 In zwei Raumdimensionen besteht das Rechengitter aus Dreiecken, in drei Raumdimensionen aus Tetraedern.
 Eingeschränkt auf einen Simplex wird eine Funktion aus $X_h$, dann ein Polynom mit Grad $\le k,~k\in \N$ sein.
-Für andere FE siehe z.B. das Buch von Brenner und Scott.
+Für andere FE siehe z.B. \cite{BreSco08}.
 
 \ssect{2.43 Definition}{(Simplex)}
 Seien $s\in \penbrace{1\dt{,}d}$ und $a_0\dt{,}a_s\in \R^d$ Punkte, so dass $(a_j-a_0)_{j=1\dt{,}s}$ linear unabhängig sind.
@@ -737,8 +762,7 @@ sowie
 c\cdot \rho(T)^s \le \abs{\det (\nabla F)}= \abs{\det A} =\frac{\abs{T}}{\abs{T_0}}\le C\cdot h(T)^s,~c,C>0.
 \]
 
-\bet{Beweis:}\\
-Im Buch von Dziuk.
+\bet{Beweis:} s. \cite{Dziuk10}, Hilfssatz 3.13, S.~91 ff.
 
 \ssect{2.46 Definition}{(Zulässige Triangulierung)}
 Sei $\Omega\subset\R^d$ ein Gebiet und 
@@ -763,7 +787,7 @@ Dann ist durch Angabe von Werten in den Punkten $a_k\in \delta$ eindeutig eine l
 Durch $\Phi := \penbrace{\varphi_i~|~\varphi_i(a_k)=\delta_{ik}~i,k=1\dt{,}d}$ ist eine modale Basis von $\Pw^1(T)$ gegeben.
 Wir nennen das Tripel $(T,\Phi,\delta)$ \bet{lineres simpliziales Lagrange Element}.
 Die Basisfunktionen $\varphi_i\in\Phi$ werden \bet{Formfunktionen} oder im Englischen \bet{Shapefunctions} genannt und $\delta$ ist die Menge der \bet{modalen Variablen}.
-Zur Wohldefiniertheit kann man im Buch von Dziuk nachschauen.
+Zur Wohldefiniertheit s. \cite{Dziuk10}, Satz 3.16, S.~95f.
 
 \ssect{2.48 Beispiel}{(lineares Lagrange Element für $d=2$)}
 Wir betrachten das Einheitsdreieck $T_0$ mit Eckpunkten $a_0^0=(0,0),a_1^0=(1,0),a_2^0=(0,1)$.
@@ -828,13 +852,13 @@ Liegt nun $u\in H_2(\Omega)$ so gibt es eine Konstante $c>0,c\in \R$, die nur vo
 wobei $\abs{u}_{H^2(\Omega)}:= \norm{D^2u}_{L^2(\Omega)}$.\\
 
 \bet{Beweis:}\\
-Für Poissonproblem siehe Buch von Dziuk.
+Für das Poissonproblem s. \cite{Dziuk10}, Satz 3.34, S.~116f.
 
 \ssect{2.53 Bemerkung}{(a priori $\leftrightarrow$ a posteriori Fehlerabschätzung)}
 Satz 2.52 macht eine Aussage über die Konvergenz des linearen FE Verfahrens.
 Da auf der rechten Seite der Ungleichung (2.4) aber der Term $\abs{u}_{H^2(\Omega)}$ auftaucht, ist (2.4) nicht geeignet um den tatsächlichen Wert des Approximationsfehlers abzuschätzen.
 Zu diesem Zweck leitet man A posteriori Fehlerabschätzungen her, bei denen der Fehler ausschließlich durch berechenbare Größen abgeschätzt wird.
-Für eine Übersicht über A posteriori Fehlerabschätzungen für FE Verfahren verweisen wir auf das Buch von Verfürth.
+Für eine Übersicht über A posteriori Fehlerabschätzungen für FE Verfahren verweisen wir auf \cite{Ver13}.
 
 \ssect{2.54 Bemerkung}{}
 Betrachten wir Definition 2.51 des linearen FE Verfahrens, so stellen wir zunächst fest, dass wir in der schwachen Formulierung exakte Integrale bestimmen müssen, was im Allgemeinen nicht realisierbar ist.
@@ -843,7 +867,7 @@ Ferner schränkt uns Definition 2.51 auf polygonal berandete Gebiete ein.
 Um auch Gebiete mit glattem Rand behandeln zu können , kann man z.B. eine Gebietsapproximation durchführen bei dem alle Ecken auf dem Rand des polygonal berandeten approximierenden Gebiets $\partial\Omega_h$ auch auf $\partial\Omega$ liegen.
 Hier ist dann $X_h$ nicht Teilraum von $X$ und das Lemma von Céa nicht anwendbar.
 Allerdings kann man in beiden Fällen unter gewissen Voraussetzungen zeigen, dass die zusätzlichen Approximationsfehler die Konvergenzordnung des FE Verfahrens nicht beeinflussen.
-Für weitere Details siehe z.B. das Buch von Dziuk oder Brenner und Scott.
+Für weitere Details siehe z.B. \cite{Dziuk10,BreSco08}.
 \newpage
 \section{Reduzierte Basis Methoden für lineare, koerzive Probleme}
 
@@ -1673,11 +1697,10 @@ Sobald das Produkt $\mathbb{Y} = \mathbb{X}_h^{-1}\mathbb{B}_h(\mu)\mathbb{W}$ b
 Alternativ können auch Löser für generalisierte Eigenwertprobleme der Form $\mathbb{B}_h(\mu)\mathbb{Y} = \lambda\mathbb{X}\mathbb{Y}$ verwendet werden.
 
 \ssect{5.53 Bemerkung}{}
-Auch im kontinuierlichen Fall kann man ein Eigenwertproblem betrachten und lösen um $\alpha(\mu)$ zu bestimmen.
-Siehe dazu das Buch von Haardonk.
+Auch im kontinuierlichen Fall kann man ein Eigenwertproblem betrachten und lösen um $\alpha(\mu)$ zu bestimmen. Siehe dazu \cite{Haa11}.
 
 \ssect{3.54 Bemerkung}{}
-Für Probleme in denen man die Min-Theta-Methode nicht anwenden kann, kann man stattdessen die \bet{Successive Constraint Methode} verwenden, siehe Buch von Huynh, Rozza, Sen und Patera.
+Für Probleme in denen man die Min-Theta-Methode nicht anwenden kann, kann man stattdessen die \bet{Successive Constraint Methode} verwenden (s. \cite{HRSP07}).
 
 \ssect{3.55 Bemerkung}{}
 Damit können wir die Offline/Online Zerlegung des Fehlers wie folgt zusammenfassen:
@@ -1856,9 +1879,9 @@ Im Gegensatz dazu resultieren die Indikatoren aus Bemerkung 4.6 in einer größe
 
 \subsubsection{Konvergenzraten des Greedy-Algorithmus}
 Bis vor einigen Jahren wurde der Greedy-Alg. als heuristischer Algorithmus angesehen, welcher in der Praxis in vielen Fällen zwar ausgezeichnet funktioniert, dem aber die theoretische Grundlage fehlt.
-Dann wurden aber sehr nützliche exponentielle [Buffer, Meday, Pattera et al] und dann für algebraische Konvergenz [Biniv, Cohen et al] in HR und schließlich in [DeVore, Petrova et al] für Banachräume.
+Dann wurden aber sehr nützliche approximationstheoretische Resultate gezeigt, zuerst f\"{u}r exponentielle \cite{Bufetal2012} und dann auch für algebraische Konvergenz \cite{Binetal2011} in HR und schließlich in \cite{DePeWo13} für Banachräume.
 
-\ssect{4.8 Satz}{(Konvergenzraten für Greedy-Alg.[BCDDPW,11])}
+\ssect{4.8 Satz}{(Konvergenzraten für Greedy-Alg. \cite{Binetal2011})}
 Sei $M_e := \penbrace{u(\mu)~|~\mu\in P}$, $P$ kompakt und der Fehlerindikator $\Delta(Y,\mu)$ so gewählt, dass für ein geeignetes $\tau\in (0,1]$ gilt:
 \begin{align}
 \ener{u(\mu^{(n+1)})-P_{X_n} u(\mu^{(n+1)})} \ge \tau \cdot \max\limits_{u\in M_e} \ener{u-P_{X_n}u}.
@@ -1880,13 +1903,13 @@ Dann gilt:
 	mit $\rho := \frac{\beta}{\beta+1}$ mit geeignetem (berechenbaren) Konstanten $c,C>0$.
 \end{enumerate}
 
-\bet{Beweis:} siehe Paper.
+\bet{Beweis:} siehe \cite{Binetal2011}.
 
 \ssect{4.9 Bemerkung}{}
 \begin{enumerate}[(1)]
 	\item Lässt sich $M_e$ gut durch einen linearen Unterraum approximieren, so liefert der Greedy-Alg. einen Approximationsraum, welcher nur leicht schlechter ist, als der optimale Unterraum.
 	\item In der Praxis verwenden wir im Greedy-Alg. die Menge $M:=\penbrace{u_h(\mu)~|~ \mu \in P}$.
-	In [BCDPW,11] wurde gezeigt, dass sich in diesem Fall die Konvergenzraten für kleine Diskretisierungsfehler nicht verschlechtern.
+	In \cite{Binetal2011} wurde gezeigt, dass sich in diesem Fall die Konvergenzraten für kleine Diskretisierungsfehler nicht verschlechtern.
 \end{enumerate}
 
 \ssect{4.10}{(strong/weak greedy)}
@@ -1917,8 +1940,8 @@ gelten.
 Daher solte die Approximationsgüte des RB-Modells immer auf einer unabhängigen Testmenge $S_{test}\subset P$ validiert werden.
 
 \ssect{4.13 Bemerkung}{(adaptive Verfeinerung der Trainingsmenge)}
-Um sowohl eine große Trainingsmenge(hoher Rechenaufwand), als auch eine zu klein/schlecht gewählte Trainingsmenge (Overfitting) zu vermeiden, bietet es sich an die Trainingsmenge adaptiv zu verfeinern (siehe [Haasdonk, Dihlmann, Ohlberger, 2012]). 
-Hierbei wird die Trainingsmenge einem Gitter zu geordnet, wobei die Punkte der Trainingsmenge entweder als die Knoten [HO, 07] oder zufällig innerhalb der Gitterelemente gewählt werden [Efftang, Patera, 10].
+Um sowohl eine große Trainingsmenge(hoher Rechenaufwand), als auch eine zu klein/schlecht gewählte Trainingsmenge (Overfitting) zu vermeiden, bietet es sich an die Trainingsmenge adaptiv zu verfeinern (siehe 
+\cite{HaaDihOhl2011,HaaOhl2008b}). Hierbei wird die Trainingsmenge einem Gitter zu geordnet, wobei die Punkte der Trainingsmenge entweder als die Knoten \cite{HaaOhl2008b} oder zufällig innerhalb der Gitterelemente gewählt werden \cite{EftPatRon2010}.
 Wie bei adaptiven FEM wird dann ein (lokaler) Fehlerschätzer auf den Gitterelementen ausgewertet und die Elemente mit dem größten Fehler zur Verfeinerung markiert.
 Durch Verfeinerung der markierten Elemente werden neue Punkte zur Trainingsmenge hinzugenommen.
 Auf diese Weise kann die Trainingsmenge an das betrachtete Problem angepasst und 'schwierige' Bereiche der Parametermenge, z.B. kleine Werte der Diffusionskonstanten, können identifiziert werden.
@@ -1928,7 +1951,7 @@ Außerdem besteht die Möglichkeit Overfitting vorzubeugen.
 \ssect{4.14 Bemerkung}{(Zerlegung des Parameterraums)}
 Im Greedy-Alg. aus Definition 4.3 wählt man im Allgemeinen $N_{\max}$ sehr groß, so dass die gewünschte Toleranz erreicht werden kann.
 Es wäre wünschenswert, wenn man sowohl $N_{\max}$ und damit die Online-Laufzeit, als auch die Toleranz kontrollieren könnte.
-Dies kann mit einer Zerlegung des Parameterraums, dem sogenannten hp-RB-Ansatz [Eftang, Petera, 10] erreicht werden.
+Dies kann mit einer Zerlegung des Parameterraums, dem sogenannten hp-RB-Ansatz \cite{EftPatRon2010} erreicht werden.
 Zunächst wird der Parameterraum adaptiv in Teilgebiete zerlegt (h-Adaptivität).
 Anschließend werden für jedes Teilgebiet lokale reduzierte Basen generiert.
 Falls auf einem Teilgebiet nicht die Toleranz und $N\le N_{\max}$ erreicht werden kann, wird dieses Teilgebiet erneut verfeinert/zerlegt und es werden neue lokale Basen generiert (p-Adaptivität).
@@ -1995,7 +2018,7 @@ Als Minimierer von
 \min\limits_{Y\subset X,\dim Y =N} \int_0^1\int_0^1\abs{u(x,\mu)-\sum_{n=1}^{N}U_n^N(\mu)\phi_n(x)}^2\dint x\dint \mu.
 \]
 Ein solches Problem wurde erstmals von Schmidt 1907 betrachtet.
-Zur Lösung nutzte er aus, dass der Integraloperator $A_u$ aus 4.17 (b) kompakt ist (s. Alt, Satz 8.15, S.353f) und damit auch die Operatoren $A_u\adj A_u$ und $A_uA_u\adj$ kompakt sind, denn:
+Zur Lösung nutzte er aus, dass der Integraloperator $A_u$ aus 4.17 (b) kompakt ist (s. \cite{Alt12}, Satz 8.15, S.353f) und damit auch die Operatoren $A_u\adj A_u$ und $A_uA_u\adj$ kompakt sind, denn:
 
 \ssect{4.18 Satz}{}
 Seien $X,Y,Z$ Banachräume.
@@ -2016,7 +2039,7 @@ A\psi_k = \lambda_k\psi_k
 \]
 und $\lambda_k\to 0,k\to \infty$.\\
 
-\bet{Beweis:} Werner, Theorem VI 3.2, S. 209f.
+\bet{Beweis:} s. \cite{Wer07}, Theorem VI.3.2, S. 269f.
 \hfill $\square$\\
 
 Da $A_u\adj A$ (und analog $A_uA_u\adj$) nicht negativ, weil $(A_u\adj A_u v)_X\ge 0 ~\forall v\in L^2((0,1))$, erhalten wir das folgende Resultat:
@@ -2092,7 +2115,7 @@ J(\phi_1\dt{,}\phi_l) = \sum_{i=l+1}^{\infty} \lambda_i \text{ für jedes } l\in
 
 \bet{Beweis:}\\
 Der Beweis zu Teil 1 der Aussage beruht darauf, dass das Eigenwert-Problem (4.8) die notwendige Optimalitätsbedingung erster Ordnung (nOb1) für (4.10) ist.
-Den Beweis findet man zum Beispiel in [Holmes,L,B, 1996].
+Den Beweis findet man zum Beispiel in \cite{HoLuBeRo12}.
 Für (4.11):
 Da $\{\phi_i\}_{i=1}^\infty$ Orthonormalbasis (ONB) von $X$ gilt
 \[
@@ -2132,7 +2155,7 @@ Dann gilt:
 	\[
 	(R\phi_i,\phi_j)_X = (\lambda_i\phi_i,\phi_j)_X = \lambda_i \delta_{ij}.
 	\]
-	\item siehe [Holmes,LB,1996].
+	\item siehe \cite{HoLuBeRo12}.
 \end{enumerate}
 
 \subsubsection{POD im Diskreten Setting}
@@ -2141,7 +2164,7 @@ Dann gilt:
 Sei $X_N$ HR von Dimension $N$ und $\{u_i^N\}_{i=1}^n\subset X_N$.
 Dann definieren wir den empirischen Korrelationsoperator
 \[
-R_N: X_N\to X_N \text{ durch } R_N u^N := \frac{1}{n} \sum_{i=1}^{n} (u_i,v)_{X_N} u_i ,~ v\in X_N.
+R_N: X_N\to X_N \text{ durch } R_N v := \frac{1}{n} \sum_{i=1}^{n} (u_i,v)_{X_N} u_i ,~ v\in X_N.
 \]
 Es ist $R_N\in K(X_N)$ und es existieren orthonormale Funktionen $\{\phi_i\}_{i=1}^{n'}, n'\le n$ und reelle Zahlen $\{\lambda_i\}_{i=1}^{n'}$ mit $\lambda_1\ge \lambda_2\dt{\ge} \lambda_{n'}> 0$, so dass
 \[
@@ -2155,15 +2178,13 @@ Da $R_N$ endlich dimensionales Bild hat, ist $R_N$ ferner kompakt.
 Damit folgt aus dem Hilbert-Schmidt Theorem die Behauptung, wobei das Orthonormalsystem aus den $\phi_i$ nicht unendlich sein kann, da $R_N$ endliches Bild hat.
 
 \ssect{4.25 Beispiel}{(POD-Basis zur Modellreduktion parameter abhängiger PDgl)}
-Betrachte dazu den HR $X_n$, die Snapshotmenge $M_{\train} = \penbrace{ u_h/\mu_i~|~ \mu_i\in S_{\train}}$ und $R_nv = \frac{1}{n_{\train}} \sum_{i=1}^{n_{\train}} (u_h(\mu_i),v)_{\R} u_h(\mu_i)$. \marginnote{Weiß nicht ob das korrekt ist.}
+Betrachte dazu den HR $X_h$, die Snapshotmenge $M_{\train} = \penbrace{ u_h(\mu_i)~|~ \mu_i\in S_{\train}}$ und\\ $R_hv = \frac{1}{n_{\train}} \sum_{i=1}^{n_{\train}} (u_h(\mu_i),v)_{X} u_h(\mu_i)$. 
 Die POD-Basis wird dann über das entsprechende Eigenwertproblem wie in Satz 4.24 bestimmt.
 
 \ssect{4.26 Beispiel}{(POD in der statistischen Datenanalyse)}
-Die Projektion auf den POD-Raum wird in der statistischen Datenanalyse auch Hotoling-Transformation, Prinicpal Component Analysis (PCA) oder Karkunev-Loewe Transformation genannt.
-\marginnote{Keine Ahnung ob die Namen so geschrieben werden..}
-Hierbei betrachtet man einen Datensatz,welcher als Menge von $n$ Punkten in $N$-dimensionalen Raum veranschaulicht werden kann, dass heißt $X_N=\R^N$ und
+Die Projektion auf den POD-Raum wird in der statistischen Datenanalyse auch Hotelling-Transformation, Principal Component Analysis (PCA) oder Karhunen-Lo\`{e}ve Transformation genannt. Hierbei betrachtet man einen Datensatz,welcher als Menge von $n$ Punkten in $N$-dimensionalen Raum veranschaulicht werden kann, dass heißt $X_N=\R^N$ und
 \[
-R_Nv = \frac{1}{n} \sum_{j=1}^n \abs{(u_j^N,v)_{\R^N}} u_j^N \text{ für } v\in \R^N.
+R_Nv = \frac{1}{n} \sum_{j=1}^n (u_j^N,v)_{\R^N} u_j^N \text{ für } v\in \R^N.
 \]
 
 \ssect{4.27 Bemerkung}{(Eigenschaften der POD-Basis)}
@@ -2208,8 +2229,9 @@ Dann existiert ein eindeutiger Lagrange-Multiplikator $\bar{\lambda}=(\lambda_1\
 \end{align}
 löst.\\
 
-\bet{Beweis:} [Nocedal, Wright,2006]
+\bet{Beweis:} z.B. \cite{NocWri06}.
 \hfill $\square$\\
+
 Nun haben wir alle Hilfsmittel zusammen um den folgenden Satz zu zeigen:
 
 \ssect{4.32 Satz}{}
@@ -2340,7 +2362,7 @@ Wir nehmen nun an, dass für $l\ge 1$ die nOB1 durch
 \frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k) u_j^N = \lambda_k\psi_k \text{ in } \R^N ~\forall k\in\{1\dt{,}l\}
 \end{align}
 gegeben sind.
-Wir wollen nun zeigen, dass die nOB1 für $l+1$ durch
+Wir wollen nun zeigen, dass die nOB1 für eine POD Basis f\"{u}r $l+1$ durch
 \begin{align}
 \frac{1}{n} \sum_{j=1}^n (u_j^N,\psi_k) u_j^N = \lambda_k\psi_k \text{ in } \R^N ~\forall k\in\{1\dt{,}l+1\}
 \end{align}
@@ -2352,9 +2374,9 @@ Aus (4.17) schließen wir
 Da $\{\psi_i\}_{i=1}^{l+1}$ POD-Basis (orthonormal als Lösung von (4.19)) und da $R_N$ selbstadjungiert folgt
 \begin{align*}
 0 &= \lambda_j(\psi_{l+1},\psi_j) = (\psi_{l+1},R_N\psi_j) = (R_N\psi_{l+1},\psi_j)\\
-&= \frac{1}{2} \sum_{i=1}^{l+1} (\lambda_{i,l+1}+\lambda_{l+1,i}) (\psi_i,\psi_j) = \frac{1}{2} (\lambda_{j,l+1}+\lambda_{l+1,j}).
+&= \frac{1}{2} \sum_{i=1}^{l+1} (\lambda_{i,l+1}+\lambda_{l+1,i}) (\psi_i,\psi_j) = \frac{1}{2} (\lambda_{j,l+1}+\lambda_{l+1,j})
 \end{align*}
-Damit folgt
+f\"{u}r $j=1,...,l$. Damit folgt
 \begin{align}
 \lambda_{i,l+1} = \lambda_{l+1,i} \text{ für jedes } i\in\penbrace{1\dt{,}l}.
 \end{align}
@@ -2460,7 +2482,7 @@ Dann sind äquivalent:
 	\item $a=(a_1\dt{,}a_n)\in \R^n$ ist Eigenvektor von $\frac{1}{n} \mathbb{K}$ zu $\lambda>0$, mit Norm $\frac{1}{\sqrt{n\lambda}}$.
 \end{enumerate}
 
-\bet{Beweis:} [Haasdonk, Satz 5.7, S.53f].
+\bet{Beweis:} s. \cite{Haa11}, Satz 5.7, S.53f.
 \hfill $\square$
 
 \ssect{4.36 Bemerkung}{}
@@ -2479,10 +2501,10 @@ R_N\psi_i = \frac{1}{n} UU^T \psi_i = \frac{1}{n} \Psi D \underbracket{V^TV}_{=\
 Die Eigenwerte $\frac{1}{n}\sigma_i^2$ sind monoton fallend, also identisch sortiert wie Spektralzerlegung von $R_N$, das heißt $\frac{1}{n} \sigma_i^2 = \lambda_i$ und $\psi_i=\phi_i$ oder $\psi_i=-\phi_i$.
 
 
-\section{approximationstheorie}
+\section{Approximationstheorie}
 
 
-im letzten Kapitel haben wir gesehen, dass der Greedy-Algorithmus quasi-optimale rB-räume erzeugt, indem Sinne, dass die konstruierten Räume entweder zur gleichen oder einer leicht schlechteren Konvergenzrate, wie die optimalen Räume im Sinne von Kolmogorov, führen.
+Im letzten Kapitel haben wir gesehen, dass der Greedy-Algorithmus quasi-optimale rB-räume erzeugt, indem Sinne, dass die konstruierten Räume entweder zur gleichen oder einer leicht schlechteren Konvergenzrate, wie die optimalen Räume im Sinne von Kolmogorov, führen.
 Ferner konnten wir zeigen, dass die POD-Räume den Projektionsfehler minimieren und in diesemm Sinne optimal sind.
 
 Es ist zu beachten, dass wir aus der (Quasi-)Optimalität der RB-Räume \uline{nicht} schließen können, dass die RB-Räume tatsächlich zu einer schnellen Konvergenz der RB-Approximation führen.
@@ -2504,7 +2526,7 @@ Unter anderem beeinflussen die folgenden Faktoren die Approximationsgüte des RB
 	Schließlich wird im Allgemeinen die Approximationsgüte von RB-Räumen deutlich schlechter, wenn man von elliptischen oder parabolischen zu rein hyperbolischen Problemen übergeht. 
 \end{enumerate}
 
-\ssect{Satz 5.2}{(Globale Exponentielle Konvergenz im Spezialfall [Maday, Patera, Turicini, 2002])}
+\ssect{Satz 5.2}{(Globale Exponentielle Konvergenz im Spezialfall \cite{MaPaTu02})}
 Seien $P=[\mu_{\min}\dt{,}\mu_{\max}] \subset \R^+$ mit $\mu_{\min} = \frac{1}{\sqrt{\mu_r}},\mu_{\max}= \sqrt{\mu_r},\mu_r\in\R^+$ mit $1\le \mu_r < \infty$,
 \[
 b(u,v;\mu) = \mu b^1(u,v) + b^2(u,v) \text{ mit } b^q(u,v) = \int_{\Omega} \nabla u\nabla v ~\forall u,v\in X,~ 1\le q\le 2
@@ -2524,8 +2546,7 @@ Dann gilt:
 \frac{\ener{u_h(\mu)-u_N(\mu)}}{\ener{u_h(\mu)}} \le e^{\frac{N-1}{N_{krit}-1}} ~\forall \mu\in P,~N\ge N_{krit}.
 \]
 
-\bet{Beweis:}
-siehe [Patera, Rozza, 2007]
+\bet{Beweis:} s. \cite{PatRoz2006}.
 \hfill $\square$
 
 \subsection{Reguläre Lösungsabbildungen}
@@ -3623,7 +3644,8 @@ Andere Methoden verwenden zum Beispiel nicht-konforme Gebietszerlegungsmethoden 
 
 
 
-
+\bibliographystyle{siam} 
+\bibliography{kathrin}
 
 
 \cleardoubleoddemptypage
