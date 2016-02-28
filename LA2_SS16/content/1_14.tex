@@ -1,1 +1,105 @@
 \section{Die Entwicklungssätze von \textsc{Laplace} und \textsc{Leibniz}}
+
+\begin{satz}[\textsc{Laplace}-Entwicklungssatz]
+	\label{satz:I.14.1}
+	Sei $K$ ein Körper und $A \in M(n \times n,K)$.
+	Für alle $1 \leq i,j \leq n$ sei $\widehat{A_{ij}} \in M((n-1)\times(n-1),K)$ die Matrix, die aus $A$ durch Streichen der $i$-ten Zeile und der $j$-ten Spalte entsteht: \index{Entwicklungssatz!Laplace}
+	\[
+		\widehat{A_{ij}} := \begin{pmatrix}
+		a_11 & \cdots & a_{1,j-1} & a_{1,j+1} & \cdots & a_{1n} \\ 
+		\vdots &  & \vdots & \vdots &  & \vdots \\ 
+		a_{i-1,1} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{i-1,n} \\ 
+		a_{i+1,1} & \cdots & a_{i+1,j-1} & a_{i+1,j+1} & \cdots & a_{i+1,n} \\ 
+		\vdots &  & \vdots & \vdots &  & \vdots \\ 
+		a_{n1} & \cdots & a_{n,j-1} & a_{n,j+1} & \cdots & a_{nn}
+		\end{pmatrix} 
+	\]
+	Dann gilt für jedes $1 \leq i,j \leq n$:
+	\[
+		\Det_n(A) = \sum_{k=1}^{n} (-1)^{i+k} a_{ik} \Det_{n-1}(\widehat{A_{ik}}) = \sum_{k=1}^{n} (-1)^{k+j} a_{kj} \Det_{n-1}(\widehat{A_{kj}}).
+	\]
+\end{satz}
+
+\setcounter{definition}{3}
+\begin{korollar}
+	\label{kor:I.14.4}
+	Ist $A = (a_{ij})_{ij} \in M(n \times n,K)$ eine obere Dreiecksmatrix, das heißt $a_{ij} = 0$ für alle $i > j$, so gilt
+	\[
+		\Det_n(A) = \prod_{i=1}^{n} a_{ii}.
+	\]
+\end{korollar}
+
+\begin{definition}[Adjunkte]
+	\label{def:I.14.5}
+	Sei $A \in M(n \times n,K)$. Wir definieren die \Index{Adjunkte} $\widehat{A} = (\widehat{a_{ij}})_{ij} \in M(n \times n,K)$ von $A$ durch
+	\[
+		\widehat{a_{ij}} = (-1)^{i+j} \Det_{n-1}(\widehat{A_{\textcolor{red}{ji}}})
+	\]
+	mit $\widehat{A_{ji}}$ wie in \autoref{satz:I.14.1}.
+\end{definition}
+
+\begin{satz}
+	\label{satz:I.14.6}
+	Für alle $A \in M(n \times n,K)$ gilt
+	\[
+		\widehat{A} \cdot A = A  \cdot \widehat{A} = \Det_n(A) \cdot E_n.
+	\]
+\end{satz}
+
+\setcounter{definition}{7}
+\begin{satz}[\textsc{Cramer}sche Regel]
+	\label{satz:I.14.8}
+	Sei $A \in M(n \times n,K)$ mit $\det_n(A) \neq 0$ und sei $b \in K^n$.
+	Für alle $1 \leq i \leq n$ sei $A_i$ die Matrix, die aus $A$ durch Ersetzen der $i$-ten Spalte mit $b$ entsteht, also
+	\[
+		A_i = (a_1,\dots,a_{i-1},b,a_{i+1},\dots,a_n).
+	\]
+	Die eindeutige Lösung $x = (x_i)_i \in K^n$ des LGS $Ax = b$ ist dann gegeben durch
+	\[
+		x_i = \frac{\Det_n(A_i)}{\Det_n(A)}.
+	\]
+\end{satz}
+
+\setcounter{definition}{9}
+\begin{definition}[Transposition]
+	\label{def:I.14.10}
+	Eine Permutation $\tau \in S_n$ (vgl. \autoref{bsp:I.4.4}) heißt \Index{Transposition}, falls $i \neq j \in \{1,\dots,n\}$ existieren mit
+	\[
+		\tau(x) = \begin{cases}
+			j, & \text{falls } x = i \\
+			i, & \text{falls } x = j \\
+			x, & \text{sonst.}
+		\end{cases}
+	\]
+	Es gilt dann $\tau^{-1} = \tau$ bzw. $\tau^2 = \id$.
+\end{definition}
+
+\begin{lemma}
+	\label{lemma:I.14.11}
+	Sei $\id \neq \sigma \in S_n$.
+	Dann existieren endlich viele Transpositionen $\tau_1,\dots,\tau_l$ mit $\sigma = \tau_1 \circ \dots \circ \tau_l$, das heißt jede Permutation ist ein Produkt von endlich vielen Transpositionen.
+\end{lemma}
+
+\setcounter{definition}{12}
+\begin{definition}[Signum]
+	\label{def:I.14.13}
+	Sei $\sigma \in S_n$.
+	Wir definieren das \Index{Signum} bzw. \Index{Vorzeichen} von $\sigma$ durch
+	\[
+		\sign(\sigma) := \begin{cases}
+			(-1)^l, & \text{falls } \sigma \neq \id \text{ und } \sigma = \tau_1 \circ \dots \circ \tau_l \\
+			1, & \text{falls } \sigma = \id.
+		\end{cases}
+	\]
+	Es gilt $\sign(\sigma) = \Det_n(e_{\sigma(1)},\dots,e_{\sigma(n)})$ und $\sign$ ist ein Gruppenhomomorphismus $(S_n,\circ) \rightarrow(\{\pm 1\},\cdot)$.
+\end{definition}
+
+\setcounter{definition}{14}
+\begin{satz}[\textsc{Leibniz}sche Determinantenformel]
+	\label{satz:I.14.15}
+	Sei $A = (a_{ij})_{ij} \in M(n \times n,K)$.
+	Dann gilt \index{Entwicklungssatz!Leibniz}
+	\[
+		\Det_n(A) = \sum_{\sigma \in S_n}^{} \sign(\sigma) \prod_{i=1}^{n} a_{i,\sigma(i)}.
+	\]
+\end{satz}

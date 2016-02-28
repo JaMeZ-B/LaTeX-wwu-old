@@ -1,0 +1,152 @@
+\section{Eigenwerte und Eigenvektoren von Endomorphismen}
+
+\setcounter{definition}{1}
+\begin{definition}[Endomorphismus, Diagonalisierbarkeit]
+	\label{def:I.16.2}
+	Sei $V$ ein $K$-Vektorraum.
+	Eine lineare Abbildung $F \colon V \rightarrow V$ heißt \Index{Endomorphismus}.
+	Wir setzen
+	\[
+		\End(V) = \{F \colon V \rightarrow V \text{ linear}\}.
+	\]
+	Ist $\dim(V) = n$, $F \in \End(V)$ und $B := \{v_1,\dots,v_n\}$ eine Basis von $V$, so bezeichnen wir die Darstellungsmatrix von $F$ bezüglich $B$ mit
+	\[
+		\mat{A}{}{B}{F} := \mat{A}{B}{B}{F} = (a_{ij})_{ij} \in M(n \times n,K),
+	\]
+	das heißt es gilt $F(v_j) = \sum\limits_{i=1}^{n} a_{ij}v_i$ (vgl. \autoref{satz:I.10.1}).
+	
+	$F \in \End(V)$ heißt \Index{diagonalisierbar}, falls eine Basis $B$ von $V$ existiert, sodass $A^B_F$ eine Diagonalmatrix ist.
+\end{definition}
+\newpage
+\begin{definition}[Ähnlichkeit, Diagonalisierbarkeit von Matrizen]
+	\label{def:I.16.3}
+	Zwei Matrizen $A,B \in M(n \times n,K)$ heißen \Index{ähnlich}, falls eine Matrix $S \in \GL(n,K)$ existiert mit $B = S^{-1}AS$.
+	
+	$A \in M(n\times n,K)$ heißt \Index{diagonalisierbar}, wenn $A$ ähnlich zu einer Diagonalmatrix ist.
+\end{definition}
+
+\begin{satz}
+	\label{satz:I.16.4}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum und $F \in \End(V)$.
+	Dann sind folgende Aussagen äquivalent:
+	\begin{enumerate}[(1)]
+		\item $F$ ist diagonalisierbar.
+		\item Jede Darstellungsmatrix von $A$ ist diagonalisierbar.
+	\end{enumerate}
+\end{satz}
+
+\setcounter{definition}{6}
+\begin{definition}[Eigenwert, Eigenvektor, Eigenraum]
+	\label{def:I.16.7}
+	Sei $V$ ein $K$-Vektorraum und $F \in \End(V)$.
+	Ein $\lambda \in K$ heißt \Index{Eigenwert} von $F$, falls ein $v \in V \setminus \setzero$ existiert mit $F(v) = \lambda v$.
+	Dieses $v$ heißt dann \Index{Eigenvektor} zum Eigenwert $\lambda$ von $F$.
+	Der Raum
+	\[
+		E_\lambda(F) := \{v \in V : F(v) = \lambda v\} = \Kern(\lambda \cdot \id_V - F) = \Kern(F - \lambda \cdot \id_V)
+	\]
+	heißt \Index{Eigenraum} von $F$ zum Eigenwert $\lambda$.
+\end{definition}
+
+\setcounter{definition}{8}
+\begin{satz}
+	\label{satz:I.16.9}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum und $F \in \End(V)$.
+	Dann sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item $F$ ist diagonalisierbar.
+		\item $V$ besitzt eine Basis aus Eigenvektoren von $F$.
+	\end{enumerate}
+\end{satz}
+
+\setcounter{definition}{10}
+\begin{definition}[charakteristische Funktion]
+	\label{def:I.16.11}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum, $F \in \End(V)$ sowie $A$ eine Darstellungsmatrix von $F$.
+	Die Abbildung
+	\begin{align*}
+		\chi_A := \chi_F \colon K &\longrightarrow K \\
+		\lambda &\longmapsto \det(\lambda E_n - A)
+	\end{align*}
+	heißt \Index{charakteristische Funktion} von $F$ bzw. $A$.
+\end{definition}
+
+\begin{satz}
+	\label{satz:I.16.12}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum und $F \in \End(V)$.
+	Dann sind für $\lambda \in K$ äquivalent:
+	\begin{enumerate}[(1)]
+		\item $\lambda$ ist Eigenwert von $F$.
+		\item $\chi_F(\lambda) = 0$.
+	\end{enumerate}
+\end{satz}
+
+\setcounter{definition}{13}
+\begin{lemma}
+	\label{def:I.16.14}
+	Eigenvektoren zu zu paarweise verschiedenen Eigenwerten sind linear unabhängig.
+\end{lemma}
+
+\begin{satz}
+	\label{satz:I.16.15}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum und $F \in \End(V)$.
+	Besitzt $F$ genau $n$ paarweise verschiedene Eigenwerte, dann ist $F$ diagonalisierbar.
+\end{satz}
+
+\begin{satz}
+	\label{satz:I.16.16}
+	Besitzt $A \in M(n \times n,K)$ genau $n$ verschiedene Eigenwerte, dann ist $A$ diagonalisierbar.
+	Sind $v_1,\dots,v_n \in K^n$ die Eigenvektoren zu den Eigenwerten $\lambda_1,\dots,\lambda_n \in K$ und ist $S = (v_1,\dots,v_n)$, so gilt
+	\[
+		S^{-1}AS = \begin{pmatrix}
+		\lambda_1 &  &  \\ 
+		& \ddots &  \\ 
+		&  & \lambda_n
+		\end{pmatrix}.
+	\]
+\end{satz}
+
+\begin{definition}[Direkte Summe]
+	\label{def:I.16.17}
+	Sei $V$ ein $K$-Vektorraum und $W_1,\dots,W_l$ Untervektorräume von $V$.
+	$V$ heißt die \Index{direkte Summe} (vgl. \autoref{def:I.12.3}) von $W_1,\dots,W_l$, wenn gelten:
+	\begin{enumerate}[(1)]
+		\item $V = \sum\limits_{i=1}^{l} W_i := \penb{\sum\limits_{i=1}^{l} w_i : w_i \in W_i, 1 \leq i \leq l}$
+		\item Für alle $1 \leq j \leq l$ gilt $W_j \cap \enb{\sum\limits_{\substack{i = 1 \\ i \neq j}}^{l} W_i} = \setzero$.
+	\end{enumerate}
+	Wir schreiben dann
+	\[
+		V = \bigoplus\limits_{i=1}^l W_i.
+	\]
+\end{definition}
+
+\begin{lemma}
+	\label{lemma:I.16.18}
+	Ist $V = \bigoplus\limits_{i=1}^{l}$ und $B_i$ eine Basis von $W_i$, so ist $B = \bigcup\limits_{i=1}^{l}$ eine Basis von $V$.
+\end{lemma}
+
+\begin{satz}
+	\label{satz:I.16.19}
+	Sei $V$ ein $K$-Vektorraum, $F \in \End(V)$ und $\lambda_1,\dots,\lambda_l \in K$ paarweise verschiedene Eigenwerte von $F$.
+	Dann gilt
+	\[
+		\sum\limits_{i=1}^l E_{\lambda_i}(F) = \bigoplus\limits_{i=1}^{l} E_{\lambda_i}(F).
+	\]
+\end{satz}
+\newpage
+\begin{satz}
+	\label{satz:I.16.20}
+	Sei $V$ ein $n$-dimensionaler $K$-Vektorraum und $F \in \End(V)$.
+	Dann existieren höchstens $n$ paarweise verschiedene Eigenwerte von $F$.
+	Sind $\lambda_1,\dots,\lambda_l$ alle paarweise verschiedenen Eigenwerte von $F$, so sind äquivalent:
+	\begin{enumerate}[(1)]
+		\item $F$ ist diagonalisierbar.
+		\item Es gilt $V = \sum\limits_{i=1}^{l} E_{\lambda_i}(F)$.
+		\item Es gilt $\dim(V) = \sum\limits_{i=1}^l \dim(E_{\lambda_i}(F))$.
+	\end{enumerate}
+\end{satz}
+
+\begin{definition}[Geometrische Vielfachheit]
+	\label{def:I.16.21}
+	Die Zahl $\dim(E_{\lambda_i}(F)) \in \NN$ heißt die \Index{geometrische Vielfachheit} des Eigenwerts $\lambda_i$ von $F$.
+\end{definition}
