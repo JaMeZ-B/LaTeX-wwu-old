@@ -2,36 +2,25 @@
 % -- Author: Phil Steinhorst, p.st@wwu.de
 \documentclass[a4paper,twoside,index=totoc,toc=bibliography,fontsize=10,DIV=12,headinclude,BCOR=12mm,cleardoublepage=empty]{scrreprt}
 
-
-%% Grafikpakete
-\usepackage[usenames,x11names]{xcolor} % Die Optionen definieren zusätzliche Farben (siehe Dokumentation)
+\usepackage[usenames,x11names]{xcolor} 
 \usepackage[final]{graphicx}
-
 \usepackage{lmodern}
-\usepackage{mathtools,amssymb,amsthm} % Verbesserung von amsmath (die amsmath selbst lädt)
-\mathtoolsset{showonlyrefs}
+\usepackage{mathtools,amssymb,amsthm}
+\mathtoolsset{showonlyrefs}	
 \usepackage[libertine,cmintegrals,bigdelims,varbb]{newtxmath}
 \usepackage[no-math]{fontspec}
-\usepackage{polyglossia} % moderner babel-ersatz
+\usepackage{polyglossia}
 \setmainlanguage[spelling=new,babelshorthands=true,latesthyphen]{german}
 \shorthandoff{"}
 \defaultfontfeatures{Mapping=tex-text, Ligatures={Required,Common,Contextual}}
 \setmainfont{LinLibertine}[Extension=.otf,UprightFont=*_R,BoldFont=*_RZ,ItalicFont=*_RI,BoldItalicFont=*_RZI]
-%\setmainfont{LinLibertine}[Extension=.otf,UprightFont=*_R,BoldFont=*_RZ,ItalicFont=*_RI,BoldItalicFont=*_RZI,ItalicFeatures={Ligatures=Historical}]
 \setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
 \setmonofont{Inconsolatazi4}[Scale=MatchUppercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,StylisticSet=1]
-%\setmainfont{LinLibertine}[Extension=.otf,UprightFont=*_R,BoldFont=*_RZ,ItalicFont=*_RI,BoldItalicFont=*_RZI,ItalicFeatures={Ligatures=Historical}]
-%\setsansfont{LinBiolinum}[Scale=MatchUppercase, Extension=.otf, UprightFont=*_R, BoldFont=*_RB, ItalicFont=*_RI,BoldItalicFont=*_RBO]
-%\setmonofont{Inconsolatazi4}[Scale=MatchUppercase,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,StylisticSet=1]
 \usepackage[final]{microtype}
-
-%%% Mathematikpakete und Einstellungen
-\mathtoolsset{centercolon} % sorgt dafür dass := und =: besser aussehen
-\usepackage{mathdots} % sorgt dafür, dass Punte wie zB \ddots besser aussehen
-
-%%% kommutative Diagramme
-\usepackage{tikz-cd} %-- meiner Meinung nach das beste Paket für kommutative Diagramme
-\tikzset{% um Kompatibilität mit Babel herzustellen und die angenehme "<label>"-Syntax zu nutzen
+\mathtoolsset{centercolon}
+\usepackage{mathdots}
+\usepackage{tikz-cd}
+\tikzset{
   every picture/.append style={
     execute at begin picture={\shorthandoff{"}},
     execute at end picture={\shorthandon{"}}
@@ -52,8 +41,6 @@
 	schraffiert3/.style={pattern=horizontal lines,pattern color=#1},
 	schraffiert3/.default=black
 }
-
-%%% Biber-Settings
 \usepackage[%
 	backend=biber,
 	sortlocale=auto,
@@ -61,69 +48,49 @@
 	hyperref,
 	backref,
 	backrefstyle=three+,
-	style=alphabetic % eine unvollständige Auswahl von Styles: ieee, numeric, apa
-	]%
-{biblatex}
-\setlength{\bibitemsep}{1em}     % Abstand zwischen den Literaturangaben
-\setlength{\bibhang}{2em}        % Einzug nach jeweils erster Zeile
-\addbibresource{literature.bib} % Literaturdatei einlesen
-
-%%% Hyperref-Konfigration
+	style=alphabetic 
+	]{biblatex}
+\setlength{\bibitemsep}{1em}     
+\setlength{\bibhang}{2em}        
+\addbibresource{literature.bib}
 \usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Phil Steinhorst}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
 \hypersetup{final}
-
-%%% Aufzählung und Zitate
 \usepackage[shortlabels]{enumitem}
 \setlist[enumerate,description]{font=\sffamily\bfseries}
 \usepackage[german=quotes]{csquotes}
-
 \usepackage[textsize=small]{todonotes}
 \usepackage{marginnote}
 \renewcommand*{\marginfont}{\color{gray} \footnotesize }
 \setlength{\parindent}{0em} 
-
-%%% Kopf-/Fußzeilen
 \usepackage{scrpage2}
 \pagestyle{scrheadings}
 \clearscrheadfoot 
 \setheadsepline{1pt} 
-\automark[chapter]{chapter} % definiert, welcher Text in den Kolumnentiteln erscheinen soll
+\automark[chapter]{chapter}
 \rohead{\rightmark} 
 \lehead{\rightmark} 
 \ofoot[\pagemark]{\pagemark} 
-%\ifoot[Titel der Bachelorarbeit]{Titel der Bachelorarbeit}
-%\renewcommand*{\pnumfont}{\LARGE\sffamily} % Seitenzahlen in groß und serifenlos
-%\renewcommand*{\footfont}{\large\sffamily\color{gray}}
-% \renewcommand*{\headfont}{\normalfont}
-
-% Indexerstellung
 \usepackage{makeidx}
 \newcommand{\Index}[1]{\textbf{#1}\index{#1}}
 \makeindex
 \renewcommand{\indexpagestyle}{scrheadings}
-
-
-%-- Theorem-Pakete und Konfiguration
 \usepackage{thmtools}
-
-\declaretheoremstyle[%
+\declaretheoremstyle[
 	headfont=\sffamily\bfseries,
 	notefont=\normalfont\sffamily,
 	bodyfont=\normalfont,
 	headformat=\NUMBER \ \NAME \NOTE,
 	headpunct={\\},
 	postheadspace=1ex,
-	spaceabove=15pt,spacebelow=10pt]%
-{mainstyle}
-\declaretheoremstyle[%
+	spaceabove=15pt,spacebelow=10pt]{mainstyle}
+\declaretheoremstyle[
 	headfont=\sffamily\bfseries,
 	notefont=\normalfont\sffamily,
 	bodyfont=\normalfont,
 	headformat=\NAME \NOTE,
 	headpunct={\\},
 	postheadspace=1ex,
-	spaceabove=15pt,spacebelow=10pt]%
-{nonumber}
+	spaceabove=15pt,spacebelow=10pt]{nonumber}
 \declaretheoremstyle[%
 	headfont=\sffamily\bfseries,
 	notefont=\normalfont\sffamily,
@@ -131,17 +98,14 @@
 	headformat=\NAME \ \NOTE,
 	headpunct={\\},
 	postheadspace=1ex,
-	spaceabove=15pt,spacebelow=10pt]%
-{miscstyle}
-\declaretheoremstyle[%
+	spaceabove=15pt,spacebelow=10pt]{miscstyle}
+\declaretheoremstyle[
 	headfont=\bfseries\scshape,
 	bodyfont=\normalfont,
 	headpunct=:,
 	postheadspace=1ex,
 	spacebelow=12pt,spaceabove=2pt,
-	qed=\qedsymbol]%
-{beweise}
-
+	qed=\qedsymbol]{beweise}
 
 \declaretheorem[name=Definition,parent=chapter,style=mainstyle]{definition}
 \declaretheorem[name=Satz,sharenumber=definition,style=mainstyle]{satz}
@@ -154,7 +118,6 @@
 \declaretheorem[name=Beobachtung,sharenumber=definition,style=mainstyle]{beobachtung}
 \declaretheorem[name=Theorem,sharenumber=definition,style=mainstyle]{theorem}
 \declaretheorem[name=Aufgabe,parent=chapter,style=mainstyle]{aufgabe}
-
 \declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
 
 \declaretheorem[name=Erinnerung,numbered=no,style=nonumber]{no-erinnerung}
@@ -164,7 +127,6 @@
 \declaretheorem[name=Beispiel,numbered=no,style=nonumber]{no-bsp}
 
 \input{MathCmds.tex}
-
 \usepackage{setspace}
 \usepackage{hyphenat}
 \usepackage{bm}
@@ -172,5 +134,5 @@
 \raggedbottom
 \renewcommand{\phi}{\varphi}
 \usepackage{chngcntr}
-\counterwithout{equation}{chapter} % undo numbering system provided by phstyle.cls
+\counterwithout{equation}{chapter}
 \usepackage{faktor}
