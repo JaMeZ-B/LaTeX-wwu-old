@@ -1,0 +1,64 @@
+%!TEX root = topologie_2.tex
+\subsection{Singuläre Kohomologie ist eine Kohomologietheorie} % (fold)
+\label{sub:sing_kohomo}
+\emph{Dies sind die fehlenden Beweise von \autoref{satz:110}, die in den Übungsaufgaben 4 von Blatt 1 und 3 von Blatt 2 behandelt wurden.}
+\begin{enumerate}[i),itemsep=1.5pt]
+	\item \textbf{Dimensionsaxiom:} Es gilt $H^n_\sing(\set{\pt};V) = V$, falls $n=0$ ist und sonst $0$.\index{Dimensionsaxiom}
+	\item \textbf{Paarfolge:} Es gibt eine natürliche Transformation $\partial^*\colon H^*(A;V) \to H^{*+1}(X,A;V)$ sodass für jedes Paar\index{Paarfolge} 
+	\[
+		\begin{tikzcd}
+			0 \rar & H^0(X,A;V) \rar & H^0(X;V) \rar & H^0(A;V) \rar["\partial"] & H^1(X,A;V) \rar & \ldots 
+		\end{tikzcd}
+	\]
+	eine lange exakte Folge ist.
+	\item \textbf{Ausschneidung:} Sei $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. 
+	Dann induziert die Inklusion\index{Ausschneidung} $i \colon (X \setminus L, A \setminus L) \hookrightarrow (X,A)$ einen Isomorphismus $i^* \colon H^*(X,A;V) \to H^*(X \setminus L, A \setminus L;V)$.
+\end{enumerate}
+Die Homotopieinvarianz wurde bereits in der Vorlesung gezeigt.
+\begin{beweis}[name={\cite[S. 199 ff]{Hatcher}}]
+	\leavevmode
+	\begin{enumerate}[(i)]
+		\item Wir wissen schon (Topologie \RM{1}, Bsp. 5.8), dass für den singulären Kettenkomplex von $\set{\pt}$ gilt
+		\[
+			\begin{tikzcd}
+				\mathbb{Z} & \mathbb{Z} \lar["0"'] & \mathbb{Z} \lar["\id"'] & \mathbb{Z} \lar["0"'] & \ldots \lar 
+			\end{tikzcd}
+		\]
+		Der zugehörige Kokettenkomplex mit Koeffizienten in $V$ hat nun die Form
+		\[
+			\begin{tikzcd}
+				V \rar["0"] & V \rar["\id"] & V \rar["0"] & V \rar & \ldots 
+			\end{tikzcd}
+		\]
+		Damit folgt direkt die Behauptung.
+		\item Wir dualisieren zunächst die kurze exakte Sequenz 
+		\[
+			\begin{tikzcd}
+				0 \rar & C_n^\sing(A) \rar["i"] & C_n^\sing (X) \rar["j"] & C_n^\sing(X,A) \rar & 0
+			\end{tikzcd}
+		\]
+		und überlegen uns, dass die resultierende Sequenz
+		\[
+			\begin{tikzcd}
+				0 & C^n_\sing(A) \lar & C^n_\sing(X) \lar["i^*"'] & C^n_\sing(X,A) \lar["j^*"'] & 0 \lar
+			\end{tikzcd}
+		\]
+		auch wieder kurz exakt ist:
+		$i^*$ ist surjektiv, da $i^*$ eine Kokette auf ihre Einschränkung auf singuläre $n$-Simplizes in $A$ abbildet und man eine Kokette in $C^n(A)$ durch $0$ offensichtlich auf singuläre $n$-Simplizes auf ganz $X$ fortsetzten lässt.
+		Der Kern von $i^*$ besteht aus Koketten in $C^n(X)$, die auf Simplizes in $A$ den Wert $0$ annehmen.
+		Da diese aber das gleiche sind, wie Homomorphismen $C_n(X,A) = \sfrac{C_n(X)}{C_n(A)}\to V$, folgt die Exaktheit in der Mitte der Sequenz. Beachte dabei, dass man $C^n(X,A;V)$ als die Menge der Funktionen von singulären $n$-Simplizes in $X$ nach $V$ auffassen kann, die auf singulären Simplizes mit Bild in $A$ verschwinden, denn die Basis von $C_n(X)$ ist die disjunkte Vereinigung der singulären Simplizes, deren Bild in $A$ enthalten ist, mit denen, deren Bild nicht in $A$ enthalten ist.
+		Damit ist die Injektivität von $j^*$ auch klar.
+		\item Wir beweisen die Aussage hier mit dem universellen Koeffizienten-Theorem, einen Beweis ohne das universelle Koeffizienten-Theorem liefert \textcite[S. 201 f]{Hatcher}.
+		
+		Wir wenden die Natürlichkeit des universellen Koeffizienten-Theorems (siehe \autoref{univ_koeff_space}) an:
+		\[
+			\hspace{-1.2em}\begin{tikzcd}[column sep=1.3em]
+				0 \rar & \Ext \enbrace[\big]{H_{n-1}(X\setminus L,A \setminus L),V} \rar & H^n(X\setminus L,A \setminus L;V) \rar & \Hom \enbrace[\big]{H_n(X \setminus L,A\setminus L),V} \rar & 0 \\
+				0 \rar & \Ext \enbrace[\big]{H_{n-1}(X,A),V} \rar \uar["(i_*)^*","\cong"'] & H^n(X,A;V) \uar["i^*"] \rar & \Hom \enbrace[\big]{H_n(X,A),V} \rar \uar["(i_*)^*","\cong"'] & 0 
+			\end{tikzcd}
+		\]
+		Dabei erhalten wir die beiden Isomorphismen aus dem Ausschneidungssatz für Homologie.
+		Mit dem Fünfer-Lemma folgt, dass auch die mittlere Abbildung ein Isomorphismus ist.\qedhere
+	\end{enumerate}
+\end{beweis}
+% subsection sing_kohomo (end)
