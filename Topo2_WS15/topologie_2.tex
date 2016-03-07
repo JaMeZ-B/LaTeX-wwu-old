@@ -174,7 +174,7 @@
 	Damit ist $f^* - g^* =0$ in Kohomologie, da die linke Seite für $\alpha \in \ker d^n$ im Bild von $d^{n-1}$ liegt.
 \end{beweis}
 
-\begin{bemerkung}[{name=[Angabe des Verbindungshomomorphismus]}]
+\begin{bemerkung}[{name=[Angabe des Verbindungshomomorphismus]},label=bem:verbindungshomo]
 	Sei $(X,A)$ ein Paar von topologischen Räumen. Der Verbindungshomomorphismus $\partial \colon H^n(A;V) \to H^{n+1}(X,A;V)$ kann wie folgt beschrieben werden: Sei 
 	$\alpha \colon C_n(A) \to V$ ein Kozykel. Setze $\alpha$  durch $\hat{\alpha}(\sigma)=0$ für $\sigma \colon \abs{\Delta^n} \to X$, $\im \sigma \nsubseteq A$ zu 
 	$\hat{\alpha} \colon C_n(X) \to V$ fort. Dann ist 
@@ -492,7 +492,7 @@
 \end{definition}
 
 \begin{definition}[{name=[Kreuz-Produkt]}]
-	Seien $X$ und $Y$ zwei topologische Räume. Seien $p_X \colon X \times Y \to X$ und $p_Y$ die Projektionen. 
+	Seien $X$ und $Y$ zwei topologische Räume und $p_X \colon X \times Y \to X$, sowie $p_Y$ die Projektionen. 
 	Das \bet{Kreuz-Produkt} ($\times$"~Produkt)\index{Kreuz-Produkt, $\times$-Produkt}
 	\[
 		\times \colon H^p(X;R) \otimes H^q(Y;R) \longrightarrow H^{p+q}(X \times Y;R)
@@ -506,6 +506,7 @@
 	\[
 		\xi \cupp \zeta = \Delta^*(\xi \times \zeta)
 	\]
+	Dies folgt durch Einsetzen der Definitionen und $p_X \circ \Delta = \id_X$.
 \end{bemerkung}
 
 \begin{bemerkung}[{name=[relative Versionen des Cup- und Kreuz-Produktes]}]
@@ -534,8 +535,8 @@
 				H^p(X,A;R) \otimes_R H^q(X,B;R) \rar & H^{p+q}(X,A \cup B;R)
 			\end{tikzcd}
 		\]
-		konstruieren. \emph{Siehe Aufgabe 3 von Blatt 4.}
-		\item Sind $A \subseteq X$ und $B \subseteq Y$ offen, so erhält man ein relatives $\times$-Produkt
+		konstruieren. \emph{Siehe Aufgabe 3 von Blatt 4.}\todo{in den Anhang}
+		\item Sind $A \subseteq X$ und $B \subseteq Y$ offen, so erhält man außerdem ein relatives $\times$-Produkt
 		\[
 			\begin{tikzcd}
 				H^p(X,A;R) \otimes_R H^q(Y,B;R) \rar & H^{p+q}(X \times Y,X \times B \cup A \times Y;R)
@@ -546,7 +547,7 @@
 
 \begin{beispiel}[{name=[Cup-Produkt in der $0$-ten Kohomologie]}]
 	Wir betrachten das $\cupp$-Produkt auf in der $0$-ten Kohomologie $\cupp \colon H^0(X;R) \otimes H^0(X;R) \to H^0(X;R)$. 
-	Sei $A,B \subseteq X$ beide Vereinigungen von Wegzusammenhangskomponenten von $X$. 
+	Seien $A,B \subseteq X$ beides Vereinigungen von Wegzusammenhangskomponenten von $X$. 
 	Seien $1_A, 1_B \in C^0(X;R)$ definiert durch 
 	\[
 		1_A(\sigma) = \begin{cases}
@@ -560,7 +561,7 @@
 \begin{lemma}[label=sec3:lem1,{name=[Randabbildungen und Kreuz-Produkt]}]
 	Sei $(X,A)$ ein Paar von topologischen Räumen und $Y$ ein weiterer topologischer Raum. Seien $\partial \colon H^p(A;R) \to H^{p+1}(X,A;R)$ und 
 	$\partial^{\times} \colon H^{p+q}(A \times Y;R) \to H^{p+q+1}(X\times Y,A \times Y;R)$ die Verbindungshomomorphismen in den Paarfolgen. Dann gilt für $\xi \in H^p(A;R)$
-	und $\zeta \in H^q(X;R)$
+	und $\zeta \in H^q(Y;R)$
 	\[
 		\partial^\times (\xi \times \zeta) = \enbrace*{\partial \xi} \times \zeta
 	\]
@@ -571,10 +572,11 @@
 	\(
 		\benbrace[\big]{d^p \hat{\alpha}}= \partial \benbrace*{\alpha}
 	\)
+	nach \autoref{bem:verbindungshomo}.
 	Weiter ist 
 	\begin{align}
 		\partial^\times(\xi \times \zeta)= \partial^\times \enbrace*{p_A^* \xi \cupp p_Y^* \zeta} = \partial^\times \benbrace[\big]{p_A^* \alpha \cupp p_Y^* \beta} &= 
-		\enbrace[\Big]{d^{p+q} \enbrace[\big]{p^*_X (\hat{\alpha}) \cupp p^*_Y(\beta)}} \\
+		\benbrace[\big]{d^{p+q} \enbrace[\big]{p^*_X (\hat{\alpha}) \cupp p^*_Y(\beta)}} \\
 		\shortintertext{da $p^*_X(\hat{\alpha}) \cupp p_Y^*(\beta)$ eine Fortsetzung von $p_A^* (\alpha) \cupp p_Y^*(\beta)$ ist. Weiter gilt}
 		&= \benbrace[\big]{p_X^* \enbrace*{d^p\hat{\alpha}} \cupp p_Y^*(\beta) \pm p_X^*(\hat{\alpha}) \cupp p_Y^* \enbrace*{d^q \beta}} \\
 		&= p_X^* \benbrace[\big]{d^p(\hat{\alpha})} \cupp p_Y^* \benbrace*{\beta} = \benbrace[\big]{d^p(\hat{\alpha})} \times \benbrace*{\beta} \\ 
@@ -596,7 +598,7 @@
 		\end{tikzcd}
 	\]
 	Behauptung: Beide Spalten sind kurz exakt.
-	Betrachte dazu folgenden Ausschnitt aus der Paarsequenz des Paares $(D^1, \partial D^1)$:
+	Betrachte dazu den folgenden Ausschnitt aus der Paarsequenz des Paares $(D^1, \partial D^1)$:
 	\[
 		\begin{tikzcd}[cramped]
 			\Underbracket{H^0(D^1,\partial D^1;R)}{\StackText{\ref{0teKoho}}{=}0} \rar & H^0(D^1;R) \rar["j^*"] & H^0(\partial D^1;R) \rar & H^1(D^1,\partial D^1;R) \rar & 0
@@ -605,7 +607,7 @@
 	Seien $j \colon \partial D^1 \hookrightarrow D^1$ und $i_\pm \colon \set*{\pm 1} \hookrightarrow \partial D^1$ die Inklusionen. 
 	Sei weiter $p \colon D^1 \to \set*{-1}$ die Projektion. 
 	Dann gilt ${p^*} \circ {i_-^*} \circ {j^*} = \id_{H^0(D^1;R)}$. 
-	Insbesondere spaltet die Sequenz und bleibt exakt nach Anwenden des Funktors ${-}\otimes H^p(X;R)$. 
+	Insbesondere spaltet die Sequenz und bleibt somit exakt nach Anwenden des Funktors ${-}\otimes H^p(X;R)$.
 	Genauso überlegt man sich, dass die Paarfolge
 	\[
 		\begin{tikzcd}
@@ -643,23 +645,23 @@
 	Sei $X$ ein topologischer Raum. Dann ist $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^{p-1}(X;R)$.
 \end{proposition}
 \begin{beweis}
-	Die Paarfolge zu $(S^1 \times X, \set*{\pt} \times X)$ zerfällt in kurze exakte Folgen
+	Die Paarfolge zu $(S^1 \times X, \set*{\pt} \times X)$ zerfällt in kurze exakte Folgen:
 	\[
 		\begin{tikzcd}
 			H^p(S^1 \times X, \set*{\pt} \times X;R) \rar[hook] & H^p(S^1 \times X;R) \rar[two heads,"i^*"] & H^p \enbrace*{\set*{\pt} \times X;R} \lar[bend left,"\pi^*"]
 		\end{tikzcd}
 	\]
-	Die Surjektivität folgt, da $\pi(\lambda,x) = (\pt,x)$ einen Spalt induziert. Damit folgt $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^p(S^1 \times X, \set*{\pt} \times X;R)$.
-	Die Behauptung folgt mittels Ausschneidung und Homotopieinvarianz:
+	$i^*$ ist surjektiv, da $\pi(\lambda,x) = (\pt,x)$ einen Spalt induziert. Damit folgt $H^p(S^1 \times X;R) \cong H^p(X;R) \oplus H^p(S^1 \times X, \set*{\pt} \times X;R)$.
+	Die Behauptung folgt nun mittels Ausschneidung und Homotopieinvarianz:
 	\[
 		H^p \enbrace*{S^1 \times X, \set*{\pt} \times X;R} \cong H^p \enbrace*{D^1 \times X, \partial D^1 \times X;R} \StackText{\ref{sec3:lem2}}{\cong} H^{p-1}(X;R) \qedhere
 	\]
 \end{beweis}
 
 \begin{bemerkung}[{name=[{Angabe der Abbildung in \ref{sec3:prop_Hp-1}}]},label=angabe_iso_s1]
-	Sei $\xi \in H^1(S^1;R)$ ein Erzeuger und $\pi_X \colon S^1 \times X \to X$ die Projektion. Dann ist der Isomorphismus aus \autoref{sec3:prop_Hp-1} gegeben durch
+	Sei $\xi \in H^1(S^1;R)$ ein Erzeuger und $p_X \colon S^1 \times X \to X$ die Projektion. Dann ist der Isomorphismus aus \autoref{sec3:prop_Hp-1} gegeben durch
 	\[
-		H^p \enbrace*{X;R} \oplus H^{p-1}(X;R) \longrightarrow H^p(S^1 \times X;R) \quad , \quad (\eta_1,\eta_2) \longmapsto \enbrace[\big]{\pi_X^*(\eta_1) + \xi\times \eta_2}
+		H^p \enbrace*{X;R} \oplus H^{p-1}(X;R) \longrightarrow H^p(S^1 \times X;R) \quad , \quad (\eta_1,\eta_2) \longmapsto \enbrace[\big]{p_X^*(\eta_1) + \xi\times \eta_2}
 	\]
 \end{bemerkung}
 % section 3 (end)
