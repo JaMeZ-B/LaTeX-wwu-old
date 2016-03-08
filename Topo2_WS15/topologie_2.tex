@@ -146,8 +146,8 @@
 			\end{tikzcd}
 		\]
 		eine lange exakte Folge ist. $\partial$ bezeichnet man auch als \Index{verbindende Abbildung}.
-		\item \textbf{Ausschneidung:} Sei $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$. Dann induziert die Inklusion \index{Ausschneidung}
-		$i \colon (X \setminus L, A \setminus L) \hookrightarrow (X,A)$ einen Isomorphismus $i^* \colon H^*(X,A;V) \to H^*(X \setminus L, A \setminus L;V)$.
+		\item \textbf{Ausschneidung:} Sei $L \subseteq A$ mit $\overline{L} \subseteq \mathring{A}$.\marginnote{siehe \autoref{korr:ausschneidung_sing_koho}}
+		Dann induziert die Inklusion\index{Ausschneidung} $i \colon (X \setminus L, A \setminus L) \hookrightarrow (X,A)$ einen Isomorphismus $i^* \colon H^*(X,A;V) \to H^*(X \setminus L, A \setminus L;V)$.
 		\item \textbf{Homotopieinvarianz:} Sind $f,g \colon (X,A) \to (Y,B)$ homotope Abbildungen von Paaren, so gilt $f^* = g^*$ für die induzierten Abbildungen in singulärer 
 		Kohomologie.\index{Homotopieinvarianz}
 	\end{enumerate}
@@ -683,7 +683,7 @@
 \end{bemerkung}
 
 \begin{lemma}[{name=[Spiegelung von singulären Simplizes]},label=spiegelung_simplex]
-	Für $\sigma \colon \abs{\Delta^p} \to X$ sei $\overline{\sigma} \colon \abs{\Delta^n} \to X$ definiert durch 
+	Für $\sigma \colon \abs{\Delta^p} \to X$ sei die Spiegelung $\overline{\sigma} \colon \abs{\Delta^n} \to X$ definiert durch 
 	\[
 		\overline{\sigma}(t_0, \ldots , t_p ) :=  \sigma(t_p, \ldots ,t_0)
 	\]
@@ -691,26 +691,26 @@
 	Dann erhalten wir eine induzierte Abbildung $\Sp^* \colon C^p(X,A;R) \to C^p(X,A;R)$ definiert durch $\Sp^*(\alpha) := \alpha \circ \Sp$. Es gilt
 	\begin{enumerate}[a)]
 		\item $\Sp$ ist eine Kettenabbildung und $\Sp^*$ ist eine Kokettenabbildung
-		\item Ist $R$ kommutativ, so gilt $\beta \cupp \alpha = (-1)^{p \cdot q}\cdot \Sp^*\enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)}$
+		\item Ist $R$ kommutativ, so gilt $\beta \cupp \alpha = (-1)^{\abs*{\alpha} \cdot \abs*{\beta} }\cdot \Sp^*\enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)}$
 	\end{enumerate}
 \end{lemma}
 \begin{beweis}
 	\begin{enumerate}[a)]
 		\item Sei $\sigma \colon \abs{\Delta^p} \to X$ ein singulärer Simplex. Dann gilt
 		\begin{align}
-			\Sp(d_p \sigma) = \Sp\enbrace*{\sum_{i=0}^{p} (-1)^i \sigma|_{\benbrace*{0, \ldots , \slashedi, \ldots ,p}}} 
-			&= \sum_{i=0}^{p} (-1)^i \Sp \enbrace*{\sigma|_{\benbrace*{0, \ldots , \slashedi, \ldots , p}}} \\
+			\Sp(d_p \sigma) = \Sp\enbrace*{\sum_{i=0}^{p} (-1)^i \cdot \sigma|_{\benbrace*{0, \ldots , \slashedi, \ldots ,p}}} 
+			&= \sum_{i=0}^{p} (-1)^i \cdot \Sp \enbrace*{\sigma|_{\benbrace*{0, \ldots , \slashedi, \ldots , p}}} \\
 			&= \sum_{i=0}^{p} (-1)^i \cdot (-1)^{\frac{p(p-1)}{2}} \,\sigma|_{\benbrace*{p, \ldots , \slashedi, \ldots , 0}}
 		\end{align}
-		wobei $\slashedi$ an der $p-i$-ten Stellen von vorn steht. Weiter ist
+		wobei $\slashedi$ an der $p-i$-ten Stelle von vorn steht. Weiter ist
 		\begin{align}
 			d_p \enbrace[\big]{\Sp(\sigma)} = d_p \enbrace*{(-1)^{\frac{p(p+1)}{2}} \,\sigma|_{\benbrace*{p, \ldots ,0}}} &= (-1)^{\frac{p(p+1)}{2}} \sum_{i=0}^{p} (-1)^i\, 
 			\sigma\big|_{\benbrace*{p, \ldots , \cancel{p-i}, \ldots ,0}} \\ 
 			&= (-1)^{\frac{p(p+1)}{2}} \sum_{i=0}^{p} (-1)^{p-i} \,\sigma\big|_{\benbrace*{p, \ldots ,\slashedi, \ldots ,0}}
 		\end{align}
 		Nun ist $\frac{p(p-1)}{2} \equiv \frac{p(p+1)}{2} + p$ und $x +i \equiv x-i$ und es folgt die Gleichheit.
-		\item Es ist $p=\abs*{\alpha}$, $q=\abs*{\beta}$ und $n=p+q$.
-		Für einen singulären Simplex $\sigma \colon \abs{\Delta^n} \to X$ gilt 
+		\item Es sei $p=\abs*{\alpha}$, $q=\abs*{\beta}$ und $n=p+q$.
+		Für einen singulären Simplex $\sigma \colon \abs{\Delta^n} \to X$ gilt dann
 		\begin{align}
 			\enbrace*{\Sp^* \enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)}}(\sigma) &= (-1)^{\frac{n(n+1)}{2}} \cdot \enbrace[\big]{\Sp^*(\alpha) \cupp \Sp^*(\beta)} 
 			\enbrace*{\sigma|_{\benbrace*{n, \ldots ,0}}} \\
@@ -729,11 +729,11 @@
 			&\equiv \enbrace[\big]{(p+1) + \ldots + n} + (1+ \ldots + q)\\
 			&= (n+1) q = (p+q+1) q = pq + q^2 + q \equiv p \cdot q
 		\end{align}
-		da $q^2 \equiv q$ und es folgt die Behauptung. \qedhere
+		da $q^2 \equiv q$ und es folgt die Behauptung.\qedhere
 	\end{enumerate}
 \end{beweis}
 
-\begin{lemma}[{name=[Spiegelung ist kettenhomotop zur Identität]}]
+\begin{lemma}[{name=[Spiegelung ist kettenhomotop zur Identität]},label=lemma:Sp_kettenhomotop]
 	$\Sp \colon C_*(X,A) \to C_*(X,A)$ ist kettenhomotop zur Identität. 
 \end{lemma}
 \begin{beweis}
@@ -745,7 +745,9 @@
 	Das $\cupp$-Produkt in Kohomologie ist graduiert kommutativ. 
 \end{satz}
 \begin{beweis}
-	Seien $\xi \in H^p(X,A;R)$, $\eta \in H^q(X,B;R)$. Wähle $\alpha \in C^p(X,A;R)$, $\beta \in C^q(X,B;R)$ mit $\xi= [\alpha]$ und $\eta= [\beta]$. Dann ist -- da mit $\Sp$ auch $\Sp^*$ kokettenhomotop zur Identität ist --
+	Seien $\xi \in H^p(X,A;R)$ und $\eta \in H^q(X,B;R)$. 
+	Wähle $\alpha \in C^p(X,A;R)$, $\beta \in C^q(X,B;R)$ mit $\xi= [\alpha]$ und $\eta= [\beta]$. 
+	Dann gilt -- da nach \autoref{lemma:Sp_kettenhomotop} auch $\Sp^*$ kokettenhomotop zur Identität ist --
 	\begin{align}
 		\xi \cupp \eta = \benbrace*{\alpha \cupp \beta} \StackText{\ref{spiegelung_simplex}}{=} (-1)^{pq} \cdot \benbrace*{\Sp^* \enbrace[\big]{\Sp^*(\beta) \cupp \Sp^*(\alpha)}} &= (-1)^{pq} \cdot 
 		\benbrace[\big]{\Sp^*(\beta) \cupp \Sp^*(\alpha)} \\
@@ -755,10 +757,10 @@
 \end{beweis}
 
 \begin{proposition}[label=prop:H0_kettenhomotop,{name=[Nullkettenhomotopie von natürlichen Transformationen]}]
-	Sei $\tau_* \colon C_*^\sing \to C_*^\sing$ eine natürliche Transformation durch Kettenabbildungen. Induziert $\tau$ die triviale Abbildung auf $H_0(\set*{\pt})$, so ist 
-	$\tau_*$ kettenhomotop zur Nullabbildung, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit 
+	Sei $\tau_* \colon C_*^\sing \to C_*^\sing$ eine natürliche Transformation durch Kettenabbildungen. 
+	Induziert $\tau$ die triviale Abbildung auf $H_0(\set*{\pt})$, so ist $\tau_*$ kettenhomotop zur Nullabbildung, das heißt es gibt eine natürliche Transformation $\eta_* \colon C_*^\sing \to C_{*+1}^\sing$ mit 
 	\[
-		d^\sing_{*+1} \circ \eta_* + \eta_{*+1} \circ d_*^\sing = \tau_* 
+		d^\sing_{*+1} \circ \eta_* + \eta_{*-1} \circ d_*^\sing = \tau_* 
 	\]
 \end{proposition}
 \begin{beweis}
@@ -766,8 +768,9 @@
 	\[
 		\tau(\sigma) = \tau \enbrace*{\sigma_* \enbrace*{\id_{\abs*{\Delta^0}}}} = \sigma_* \enbrace*{\tau \enbrace*{\id_{\abs*{\Delta^0}}}} = 0
 	\]
-	Es folgt, dass $\tau_0 \colon C_0(X) \to C_0(X)$ trivial ist. Wir setzen $\eta_0 = 0$ und und definieren $\eta_1, \eta_2, \ldots $ induktiv: Seien $\eta_1, \ldots,\eta_{k-1}$
-	schon konstruiert mit $d^\sing_{l+1} \circ \eta_l + \eta_{l-1} \circ d^\sing_{l}=\tau_l$ für $l=0, \ldots , k-1$. Es folgt
+	Es folgt, dass $\tau_0 \colon C_0(X) \to C_0(X)$ trivial ist. 
+	Wir setzen also $\eta_0 = 0$ und und definieren $\eta_1, \eta_2, \ldots $ induktiv: 
+	Seien $\eta_1, \ldots,\eta_{k-1}$ schon konstruiert mit $d^\sing_{l+1} \circ \eta_l + \eta_{l-1} \circ d^\sing_{l}=\tau_l$ für $l=0, \ldots , k-1$. Es folgt
 	\begin{align}
 		d_k^\sing \enbrace*{\tau_k -  \eta_{k-1} \circ d_k^\sing } &= d^\sing_k \circ \tau_k - d^\sing_k \circ \eta_{k-1} \circ d^\sing_k \\
 		&= \tau_{k-1} \circ d_k^\sing -  \enbrace*{\tau_{k-1} - \eta_{k-2} \circ d_{k-1}^\sing} \circ d_k^\sing =0
@@ -847,7 +850,7 @@
 \begin{beispiel}[{name=[Kohomologieklassen des Torus]}]
 	$\xi_1 \cdots \xi_n$ ist ein Erzeuger von $H^n(T^n;R)$. Jedes $\eta \in H^k(T^n;R)$ für $k>0$ lässt sich schreiben als
 	\[
-		\eta= \!\smashoperator[r]{\sum_{i_1<\ldots <i_k}}\,\, r_{i_1,\ldots ,i_k} \xi_{i_1} \cupp \ldots \cupp x_{i_k}
+		\eta= \!\smashoperator[r]{\sum_{i_1<\ldots <i_k}}\,\, r_{i_1,\ldots ,i_k} \xi_{i_1} \cupp \ldots \cupp \xi_{i_k}
 	\]
 \end{beispiel}
 % section 4 (end)
@@ -878,8 +881,8 @@
 			0 \rar & \mathbb{Z} \rar["\cdot 2",hook] & \mathbb{Z} \rar[two heads] & \sfrac{\mathbb{Z}}{2 \mathbb{Z}} \rar & 0
 		\end{tikzcd}
 	\]
-	ist ein azyklischer Kettenkomplex, der nicht kettenkontraktibel ist, da es keine nicht trivialen Abbildungen $\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \to \mathbb{Z}$ gibt. Damit ist 
-	die Antwort auf die erste Frage \enquote{Nein}.
+	ist ein azyklischer Kettenkomplex, der nicht kettenkontraktibel ist, da es keine nicht trivialen Abbildungen $\sfrac{\mathbb{Z}}{2 \mathbb{Z}} \to \mathbb{Z}$ gibt, eine solche zur Konstruktion einer Kettenhomotopie aber nötig wäre.
+	Damit ist die Antwort auf die erste Frage \enquote{Nein}.
 \end{beispiel}
 
 \begin{definition}[{name=[projektiver Modul]},label=def_projektiv]
@@ -894,7 +897,7 @@
 \end{definition}
 
 \begin{beispiel}[{name=[Freie Moduln sind projektiv]}]
-	Freie Moduln sind projektiv, wie man durch Anwendung der universellen Eigenschaft eines freien Moduls sehr einfach sieht (wurde auch in Topologie \RM{1} bewiesen). 
+	Freie Moduln sind projektiv, wie man durch Anwendung der universellen Eigenschaft eines freien Moduls sehr einfach sieht (wurde auch in Topologie \RM{1} bewiesen).\marginnote{Urbilder der Bilder, der Basiselemente wählen} 
 \end{beispiel}
 
 \begin{satz}[{name=[Projektive Moduln als direkte Summanden in freien Moduln]}]
@@ -912,8 +915,8 @@
 			P \rar["\id"] \urar[dashed,"i"]& P
 		\end{tikzcd}
 	\]
-	Mit $R[S] \cong P \oplus \ker p$ folgt nun die gewünschte Aussage.
-	Die zweite Implikation ergibt sich wie folgt: Nach Vorraussetzung gibt es $i \colon P \to F$ und $p \colon F \to p$, wobei $F$ frei ist und $p \circ i = \id_P$ gilt.
+	Mit $R[P] \cong P \oplus \ker p$ folgt nun die gewünschte Aussage.
+	Die zweite Implikation ergibt sich wie folgt: Nach Vorraussetzung gibt es $i \colon P \hookrightarrow F$ und $p \colon F \twoheadrightarrow p$, wobei $F$ frei ist und $p \circ i = \id_P$ gilt.
 	Seien nun $M$, $N$, $f$ und $\varphi$ wie in \autoref{def_projektiv}.
 	Wir erhalten folgendes Diagramm
 	\[
@@ -924,31 +927,29 @@
 	\]
 	Da $F$ frei und insbesondere projektiv ist, existiert ein Homomorphismus $\hat{\psi}$ mit $f \circ \hat{\psi}=\psi$.
 	Wir setzen nun $\hat{\varphi} := \hat{\psi} \circ i$. 
-	Dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$ und $P$ ist projektiv. \todo{Revision 5}
+	Dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$ und $P$ ist projektiv.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[{azyklische, projektive Kettenkomplexe sind kettenkontrahierbar}]}]
 	Sei $C_*$ ein azyklischer $R$-Kettenkomplex. Sind alle Kettenmoduln $C_n$ projektiv, so ist $C_*$ kettenkontrahierbar.
 \end{satz}
 \begin{beweis}
 	Wir konstruieren induktiv $s_n \colon C_n \to C_{n+1}$, sodass $d_{n+1} \circ s_n + s_{n-1} \circ d_n = \id_{C_n}$ gilt. 	
-	Für $n=0$ gehen wir wie folgt vor: Da $C_*$ azyklisch ist, ist $d_1 \colon C_1 \to C_0$ surjektiv und es gibt $s_0 \colon C_0 \to C_1$ mit $d_1 \circ s_0 = \id_{C_0}$, weil 
-	$C_0$ projektiv ist.
+	Für $n=0$ gehen wir wie folgt vor: Da $C_*$ azyklisch ist, ist $d_1 \colon C_1 \to C_0$ surjektiv und es gibt $s_0 \colon C_0 \to C_1$ mit $d_1 \circ s_0 = \id_{C_0}$, weil $C_0$ projektiv ist.
 	
-	Zum Induktionsschritt $(n-1) \mapsto n$: Da $C_+$ azyklisch ist, ist $d_{n+1} \colon C_{n+1} \to \im d_{n+1}=\ker d_n$ surjektiv. Wegen
+	Zum Induktionsschritt $(n-1) \mapsto n$: Da $C_*$ azyklisch ist, ist $d_{n+1} \colon C_{n+1} \to \im d_{n+1}=\ker d_n$ surjektiv. Wegen
 	\begin{align}
-		d_n \enbrace*{\id_{C_n} - s_{n-1} \circ d_n} &= d_n - \Underbrace{d_n \circ s_{n-1}}{=\id_{C_{n-1}} - s_{n-2} \circ d_{n-1}} \circ d_n \\
-		&= d_n - \enbrace*{- s_{n-2} \circ d_{n-1} + \id_{C_{n-1}}} \circ d_n =0
+		d_n \enbrace*{{\id_{C_n}} - s_{n-1} \circ d_n} &= d_n - \hspace{-1ex}\Underbracket{d_n \circ s_{n-1}}{={\id_{C_{n-1}}} - s_{n-2} \circ d_{n-1}}\hspace{-1ex} \circ d_n \\
+		&= d_n - \enbrace*{- s_{n-2} \circ d_{n-1} + {\id_{C_{n-1}}}} \circ d_n =0
 	\end{align}
-	liegt das Bild von $\id_{C_n} - s_{n-1} \circ d_n$ im Kern von $d_n$. Da $C_n$ projektiv ist, gibt es $s_n \colon C_n \to C_{n+1}$ mit 
-	$d_{n+1} \circ s_n = \id_{C_n} - s_{n-1} \circ d_n$.
-	
+	liegt das Bild von ${\id_{C_n}} - s_{n-1} \circ d_n$ im Kern von $d_n$. 
 	\[
 		\begin{tikzcd}[column sep=2.5cm,row sep=large]
 			\mbox{ } & C_{n+1} \dar["d_{n+1}",two heads] \\
-			C_n \urar["s_n", dashed] \rar["\id_{C_n} - s_{n-1} \circ d_n"'] & \im d_{n+1} = \ker d_n
+			C_n \urar["s_n", dashed] \rar["{\id_{C_n}} - s_{n-1} \circ d_n"'] & \im d_{n+1} = \ker d_n
 		\end{tikzcd}
 	\]
+	Da $C_n$ projektiv ist, gibt es $s_n \colon C_n \to C_{n+1}$ mit $d_{n+1} \circ s_n = {\id_{C_n}} - {s_{n-1} \circ d_n}$.\todo{Revision 5}
 \end{beweis}
 
 \begin{satz}[label=satz:5:kettenhomotopie]
@@ -1026,7 +1027,7 @@
 	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Dann ist die Inklusion $C^{\mathcal{U}}_*(X,A) \to C_*(X,A)$ eine Kettenhomotopieäquivalenz.
 \end{korollarB}
 
-\begin{korollar}
+\begin{korollar}[label=korr:ausschneidung_sing_koho]
 	Singuläre Kohomologie erfüllt das Ausschneidungsaxiom.
 \end{korollar}
 \begin{beweis}
