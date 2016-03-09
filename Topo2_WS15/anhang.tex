@@ -1,4 +1,9 @@
 %!TEX root = topologie_2.tex
+Hier findet man einige ausgewählte Beweise und Ergänzungen, auf die der Vorlesung hingewiesen wurde und die teilweise im Rahmen von Übungsaufgaben bearbeitet wurden.
+Sie stammen also auch hauptsächlich aus den Übungen und deswegen sei hier noch einmal darauf hingewiesen, dass für die Richtigkeit keine Garantie übernommen wird!
+
+Die Reihenfolge richtet sich nach dem Auftreten der Verweise in der Vorlesung.
+
 \subsection{Singuläre Kohomologie ist eine Kohomologietheorie} % (fold)
 \label{sub:sing_kohomo}
 \emph{Dies sind die fehlenden Beweise von \autoref{satz:110}, die in den Übungsaufgaben 4 von Blatt 1 und 3 von Blatt 2 behandelt wurden.}
@@ -63,3 +68,50 @@ Die Homotopieinvarianz wurde bereits in der Vorlesung gezeigt.
 	\end{enumerate}
 \end{beweis}
 % subsection sing_kohomo (end)
+
+\subsection{Relative Cup-Produkte, Blatt 4 Aufgabe 3} % (fold)
+\label{sub:relative_cup_produkte}
+\emph{Dies komplettiert \autoref{bem:rel_cup}.}\smallskip\\
+Seien $X$ ein topologischer Raum und $U$, $V$ offen in $X$.
+\begin{enumerate}[(a)]
+	\item Sei $C^*(X, U+V) \subset C^*(X)$ der Unterkomplex der Koketten, die auf Ketten in $U$ und auf Ketten in $V$ verschwinden. 
+	Dann ist die Inklusion $C^*(X,U \cup V) \hookrightarrow C^*(X,U + V)$ eine Kettenhomotopieäquivalenz.
+	\item Konstruiere ein $\cupp$-Produkt $\cupp \colon H^*(X,U) \otimes H^*(X,V) \to H^*(X, U\cup V)$ derart, dass folgendes Diagramm kommutiert
+	\[
+		\begin{tikzcd}
+			H^*(X,U) \otimes H^*(X,V) \rar["\cupp"]\dar & H^*(X, U \cup V) \dar \\
+			H^*(X) \otimes H^*(X) \rar["\cupp"] & H^*(X)
+		\end{tikzcd}
+	\]
+\end{enumerate}
+\begin{beweis}
+	\leavevmode
+	\begin{enumerate}[(a)]
+		\item $\mathcal{U}=\set*{U,V}$ ist eine offene Überdeckung von $U \cup V$ und somit ist $C_*(U+V)=C_*^{\mathcal{U}}(U\cup V)$.
+		Aus Topologie \RM{1} ist bekannt, dass $C_*(U + V) \hookrightarrow C_*(U \cup V)$ einen Isomorphismus in Homologie induziert, also eine Kettenhomotopieäquivalenz ist nach \autoref{satz:5:kettenhomotopie}.
+		Folgendes Diagramm kommutiert und hat kurze exakte Zeilen:
+		\[
+			\begin{tikzcd}
+				0 \rar & C_*(U+V)\dar[hook] \rar & C_*(X) \dar[equal] \rar & \sfrac{C_*(X)}{C_*(U +V)} \dar \rar & 0 \\
+				0 \rar & C_*(U \cup V) \rar & C_*(X) \rar & C_*(X, U \cup V) \rar & 0
+			\end{tikzcd}
+		\]
+		Nach dem Fünfer-Lemma induziert die rechte Abbildung auch einen Isomorphismus in Homologie und ist somit nach \autoref{satz:5:kettenhomotopie} auch eine Kettenhomotopieäquivalenz.
+		Damit ist nach Anwenden des $\Hom$-Funktors auch $C^*(X, U \cup V) \to \Hom \enbrace*{\sfrac{C_*(X)}{C_*(U +V)}, \mathbb{Z}} = C^*(X, U + V)$ eine Kokettenhomotopieäquivalenz.
+		\item Betrachte folgendes kommutatives Diagramm:
+		\[
+			\begin{tikzcd}
+				C^p(X,U) \otimes C^q(X,V) \dar \rar["\cupp"] & C^{p+q}(X,U+V) \dar \\
+				C^p(X) \otimes C^q(X) \rar["\cupp"] & C^{p+q}(X) 
+			\end{tikzcd}
+		\]
+		Da auch für das obige Cup-Produkt die Formel $d^{p+q}(\alpha \cupp \beta) = d^p(\alpha) \cupp \beta + (-1)^p \cdot \alpha \cupp d^q(\beta)$ gilt, induziert die obere Zeile ein Cup-Produkt
+		\[
+			H^*(X,U) \otimes H^*(X,V) \longrightarrow H^*(X, U+ V) \StackText{a)}{\cong} H^*(X, U \cup V)
+		\]
+		und wir erhalten das gewünschte Cup-Produkt in Kohomologie. \qedhere
+	\end{enumerate}
+\end{beweis}
+In dem Beweis haben wir die Offenheit von $U$ und $V$ nur gebraucht, damit $C_*(U + V) \hookrightarrow C_*(U \cup V)$ einen Isomorphismus in Homologie induziert.
+Dies kann aber auch in anderen Fällen eintreten, zum Beispiel wenn $U$ und $V$ Unterkomplexe des CW-Komplexes $X$ sind.
+% subsection relative_cup_produkte (end)
