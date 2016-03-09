@@ -444,7 +444,7 @@
 	durch $(\alpha \cupp \beta)(\sigma) \coloneqq  (-1)^{p \cdot q} \cdot \alpha\enbrace*{\sigma|_{\benbrace{0,\ldots ,p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{p, \ldots , p+q}}}$ für $\sigma \colon \abs{\Delta^{p+q}} \to X$.
 \end{definition}
 
-\begin{lemma}[{name=[Eigenschaften des Cup-Produktes]}]
+\begin{lemma}[{name=[Eigenschaften des Cup-Produktes]},label=lem:eig_cup]
 	Das $\cupp$-Produkt hat folgende Eigenschaften:
 	\begin{enumerate}[1)]
 		\item $d^{p+q}(\alpha \cupp \beta) = d^p(\alpha) \cupp \beta + (-1)^p \cdot \alpha \cupp d^q(\beta)$
@@ -814,7 +814,7 @@
 	Sind alle $\abs*{a_i}$ gerade, so ist $\Lambda_R \benbrace*{a_1,\ldots,a_n}$ der Polynomring über $R$ in den Variablen $a_1, \ldots ,a_n$.
 	Sind alle $\abs*{a_i}$ ungerade, so ist $\Lambda_R \benbrace*{a_1, \ldots a_n}$ die \Index{äußere Algebra} in den Variablen $a_1, \ldots , a_n$.
 	
-	\emph{Definition der äußeren Algbra aus \cite[Ex. 3.15]{Hatcher}:}
+	\emph{Definition der äußeren Algebra aus \cite[Ex. 3.15]{Hatcher}:}
 	Die \Index{äußere Algebra} $\Lambda_R \benbrace*{a_1,a_2,\ldots }$ über einem kommutativen Ring $R$ ist der freie $R$-Modul, dessen Basis aus endlichen Produkten $a_{i_1} \cdots a_{i_k}$ mit $i_1 < \ldots < i_k$ besteht, versehen mit der Multiplikation, die durch die Forderungen 
 	\[
 		a_i a_j= -a_j a_i \quad \text{ und } \quad  a_i^2=0
@@ -1024,11 +1024,11 @@
 	Mit dem eben gezeigten \autoref{lem:kettenhomotopieaeq_keg_kettenkontraktibel} folgt dann, dass $f$ eine Kettenhomotopieäquivalenz ist.
 \end{beweis}
 
-\begin{korollarB}
+\begin{korollarB}[{name=[{Inklusion der kleinen Simplizes ist eine Kettenhomotopieäquivalenz}]}]
 	Sei $\mathcal{U}$ eine offene Überdeckung von $X$. Dann ist die Inklusion $C^{\mathcal{U}}_*(X,A) \to C_*(X,A)$ eine Kettenhomotopieäquivalenz.
 \end{korollarB}
 
-\begin{korollar}[label=korr:ausschneidung_sing_koho]
+\begin{korollar}[label=korr:ausschneidung_sing_koho,{name=[{Ausschneidung für Kohomologie}]}]
 	Singuläre Kohomologie erfüllt das Ausschneidungsaxiom.
 \end{korollar}
 \begin{beweis}
@@ -1041,47 +1041,46 @@
 \section{Das Cap-Produkt und die Poincaré-Dualitätsabbildung} % (fold)
 \label{sec:6}
 
-\todo[inline]{Revision 6}
 \begin{definition}[{name=[Cap-Produkt]}]
 	Sei $X$ ein topologischer Raum und $R$ ein kommutativer Ring. Wir definieren das \bet{Cap-Produkt} ($\capp$-Produkt)\index{Cap-Produkt, $\capp$-Produkt}
 	\[
 		\capp \colon C^p(X;R) \otimes_R C_{p+q}(X;R) \longrightarrow C_q(X;R)
 	\]
-	durch $\alpha \capp \sigma := (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} \sigma|_{\benbrace*{0,\ldots ,p}}$ für $\alpha \in C^p(X;R)$ und 
+	durch $\alpha \capp \sigma := (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} \cdot \sigma|_{\benbrace*{0,\ldots ,q}}$ für $\alpha \in C^p(X;R)$ und 
 	$\sigma \colon \abs{\Delta^{p+q}}\to X$.
 \end{definition}
 
 \begin{lemma}[{name=[Produktregel für das Cap-Produkt]}]
-	Es gilt $d_q(\alpha \capp \sigma) = d^p \alpha \capp \sigma + (-1)^p \alpha \capp d_{p+q} \sigma$
+	Es gilt die Produktregel $d_q(\alpha \capp \sigma) = d^p \alpha \capp \sigma + (-1)^p \cdot \alpha \capp d_{p+q} \sigma$.\marginnote{vgl. \autoref{lem:eig_cup} (i)}
 \end{lemma}
 \begin{beweis}
 	Sei $n := p+q$. Dann gilt
-	\begin{align}
-		d_q(\alpha \capp \sigma) &= (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} d_q \sigma|_{\benbrace*{0,\ldots ,p}} \\
-		&= \sum_{i=0}^{q} (-1)^{pq+i}  \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,p+q}}} \sigma|_{\benbrace*{0, \ldots ,\slashedi,\ldots ,q}} 
-	\end{align}
+	\[
+		d_q(\alpha \capp \sigma) = (-1)^{pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}} \cdot d_q \sigma|_{\benbrace*{0,\ldots ,q}} 
+		= \sum_{i=0}^{q} (-1)^{pq+i} \cdot \mathul{Coral3}{\alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}}\cdot \sigma|_{\benbrace*{0, \ldots ,\slashedi,\ldots ,q}}}
+	\]
 	Weiter ist 
 	\begin{align}
-		d^p(\alpha) \capp \sigma &= (-1)^{(p+1)(q-1)} \cdot (d^p \alpha) \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,q-1}} \\
-		&= \Underbrace{(-1)^{pq+p+q+1+1+p}}{=(-1)^{pq+q}} \cdot \alpha \enbrace*{ d_{p-1} \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}} \\
-		&= \sum_{i=q-1}^{n} (-1)^{pq+q+i+(q+1)} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots ,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}
+		d^p(\alpha) \capp \sigma &= (-1)^{(p+1)(q-1)} \cdot (d^p \alpha) \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0,\ldots ,q-1}} \\
+		&= \Underbrace{(-1)^{pq-p+q-1+p+1}}{=(-1)^{pq+q}} \cdot \alpha \enbrace*{ d_{p+1} \enbrace*{\sigma|_{\benbrace*{q-1,\ldots ,n}}}} \cdot \sigma|_{\benbrace*{0, \ldots ,q-1}} \\
+		&= \sum_{i=q-1}^{n} (-1)^{pq+q+i-q+1} \cdot \mathul{DeepSkyBlue2}{\alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0, \ldots ,q-1}}}
 	\end{align}
 	und
 	\begin{align}
-		\alpha \capp d_{p+q}(\sigma) &= \sum_{i=0}^{n} (-1)^i \alpha \capp \sigma |_{\benbrace*{0, \ldots , \slashedi,\ldots ,n}} \\
-		&= \sum_{i=0}^{q-1} (-1)^{i+p(q-1)} \alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots , \slashedi,\ldots ,q}}\\
-		&\hspace{1em}+ \sum_{i=q}^{n} (-1)^{i+p(q-1)} \alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots,n}}} \sigma|_{\benbrace*{0, \ldots ,q-1}}
+		(-1)^p \cdot \alpha \capp d_{p+q}(\sigma) &= (-1)^p \cdot \sum_{i=0}^{n} (-1)^i \cdot \alpha \capp \sigma |_{\benbrace*{0, \ldots , \slashedi,\ldots ,n}} \\
+		&= \sum_{i=0}^{q} (-1)^{i+pq} \cdot \mathul{Coral3}{\alpha \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0,\ldots , \slashedi,\ldots ,q}}}\\
+		&\hspace{1em}+ \sum_{i=q-1}^{n} (-1)^{i+pq} \cdot \mathul{DeepSkyBlue2}{\alpha \enbrace*{\sigma|_{\benbrace*{q-1,\ldots,\slashedi,\ldots,n}}} \cdot \sigma|_{\benbrace*{0, \ldots ,q-1}}}
 	\end{align}
-	Die Vorzeichen werden schon passen \ldots 
+	Insgesamt folgt die Behauptung.
 \end{beweis}
 
-\begin{lemma}
+\begin{lemma}[{name=[relative Cap-Produkte]}]
 	Sei $A \subseteq X$. Das $\capp$-Produkt auf $C^*$ induziert folgende $\capp$-Produkte in $H^*$
 	\[
 		\begin{tikzcd}[row sep=0em]
-			\minwidthbox{H^p(X;R) \otimes_R H_n(X;R)}{4.2cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
-			\minwidthbox{H^p(X,A;R) \otimes_R H_n(X,A;R)}{4.2cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
-			\minwidthbox{\hfill H^p(X;R) \otimes_R H_n(X,A;R)}{4.2cm} \rar & \minwidthbox{H_q(X,A;R)}{2cm}
+			\minwidthbox{H^p(X;R) \otimes_R H_{p+q}(X;R)}{4.6cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
+			\minwidthbox{H^p(X,A;R) \otimes_R H_{p+q}(X,A;R)}{4.6cm} \rar & \minwidthbox{H_q(X;R)}{2cm} \\
+			\minwidthbox{\hfill H^p(X;R) \otimes_R H_{p+q}(X,A;R)}{4.6cm} \rar & \minwidthbox{H_q(X,A;R)}{2cm}
 		\end{tikzcd}
 	\]
 \end{lemma}
@@ -1089,51 +1088,65 @@
 	Genauso wie beim $\cupp$-Produkt.
 \end{beweis}
 
-\begin{bemerkung}[label=bem_augmentation_cap] \leavevmode
+\begin{bemerkung}[label=bem_augmentation_cap,{name=[{Augmentation und Cap-Produkt}]}] \leavevmode
 	\begin{itemize}
 		\item Sind $A,B \subseteq X$ offen, so erhalten wir auch ein $\capp$-Produkt
 		\[
-			H^p(X,A;R) \otimes_R H_n(X,A\cup B;R) \longrightarrow H_q(X,B;R)
+			H^p(X,A;R) \otimes_R H_{p+q}(X,A\cup B;R) \longrightarrow H_q(X,B;R)
 		\]
-		\item Sei $\epsilon \colon H_0(X;R) \to R$ die \Index{Augmentation}, also $\epsilon \enbrace*{\sum_{i}r_i \sigma_i} = \sum_i r_i$. Dann ist 
+		\item Sei $\epsilon \colon H_0(X;R) \to R$ die \Index{Augmentation}, induziert von $\epsilon \enbrace*{\sum_{i}r_i \sigma_i} = \sum_i r_i$. Dann ist 
 		\[
 			\epsilon \enbrace*{\xi \capp x} = \xi(x)
 		\]
-		für $\xi \in H^p(X;R)$ und $x \in H_p(X;R)$.
+		für $\xi \in H^p(X;R)$ und $x \in H_p(X;R)$, was man auf Ebene der Kettenkomplexe direkt aus den Definitionen erhält.
 	\end{itemize}
 \end{bemerkung}
 
-\begin{lemma}
-	Für $f \colon X \to Y$ stetig gilt $\xi \capp f_*(x) = f_* \enbrace*{f^* \xi \capp x}$ für $\xi \in H^p(Y;R)$ und $x \in H_{p+q}(X;R)$.
+\begin{lemma}[{name=[Cap-Produkt und induzierte Abbildungen]}]
+	Für $f \colon X \to Y$ stetig, $\xi \in H^p(Y;R)$ und $x \in H_{p+q}(X;R)$ gilt
+	\[
+		\xi \capp f_*(x) = f_* \enbrace*{f^* \xi \capp x}
+	\]
 \end{lemma}
+\begin{beweis}
+	Sei $n := p+q$.
+	Sei $\alpha \in C^p(Y;R)$ mit $\xi=[\alpha]$ und $\sigma \colon \abs*{\Delta^{n}}\to X$ 
+	Dann gilt
+	\begin{align}
+		\alpha \capp f_*(\sigma) = (-1)^{pq} \cdot \alpha \enbrace*{f \circ \sigma|_{\benbrace*{q,\ldots ,n}}} \cdot (f \circ \sigma)|_{\benbrace*{0,\ldots ,q}}
+		&= (-1)^{pq} \cdot (f^* \alpha) \enbrace*{\sigma|_{\benbrace*{q,\ldots ,n}}} \cdot (f_* \sigma)|_{\benbrace*{0,\ldots ,q}} \\
+		&= f_* \enbrace*{f^* \alpha \capp \sigma} \qedhere
+	\end{align}
+\end{beweis}
 
-\begin{lemma}
+\begin{lemma}[{name=[{Zusammenhang von Cup- und Cap-Produkt}]},label=lem:cup_n_cap]
 	Für $\xi \in H^p(X;R)$ und $\eta \in H^q(X;R)$, $x \in H_{p+q+r}(X;R)$ gilt 
 	\[
 		\enbrace*{\xi \cupp \eta} \capp x = \xi \capp \enbrace*{\eta \capp x}
 	\]
 \end{lemma}
 \begin{beweis}
-	Sei $\alpha \in C^p(X)$, $\beta \in C^q(X)$ und $\sigma \colon \abs{\Delta^{p+q+r}}\to X$ ist
+	Sei $\alpha \in C^p(X;R)$, $\beta \in C^q(X;R)$ und $\sigma \colon \abs{\Delta^{p+q+r}}\to X$. Mit $n=p+q+r$ gilt
 	\begin{align}
-		\enbrace*{\alpha \cupp \beta} \capp \sigma &= (-1)^{(p+q)r} \cdot (\alpha \cupp \beta)\enbrace*{\sigma|_{\benbrace*{r,\ldots ,n}}}   \sigma|_{\benbrace*{0,\ldots ,r}} \\
-		&= (-1)^{pr+qr+pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots ,r+p}}} \beta \enbrace*{\sigma|_{\benbrace*{r+q,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,r}}
+		\enbrace*{\alpha \cupp \beta} \capp \sigma &= (-1)^{(p+q)r} \cdot (\alpha \cupp \beta)\enbrace*{\sigma|_{\benbrace*{r,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0,\ldots ,r}} \\
+		&= (-1)^{pr+qr+pq} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots ,r+p}}} \beta \enbrace*{\sigma|_{\benbrace*{r+p,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0,\ldots ,r}}
 	\end{align}
 	Für die andere Seite der Formel gilt
 	\begin{align}
-		\alpha \capp (\beta \capp \sigma) &= (-1)^{q(r+p)} \cdot \alpha \capp \enbrace[\Big]{\beta \enbrace*{\sigma|_{\benbrace*{r+q,\ldots ,n}}} \sigma|_{0,\ldots ,r+p}} \\
-		&= (-1)^{qr+qp+rp} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots,r+p}}} \beta \enbrace*{\sigma|_{\benbrace*{r+p,\ldots ,n}}} \sigma|_{\benbrace*{0,\ldots ,r}}
+		\alpha \capp (\beta \capp \sigma) &= (-1)^{q(r+p)} \cdot \alpha \capp \enbrace[\Big]{\beta \enbrace*{\sigma|_{\benbrace*{r+p,\ldots ,n}}} \cdot \sigma|_{\benbrace{0,\ldots ,r+p}}} \\
+		&= (-1)^{qr+qp+rp} \cdot \alpha \enbrace*{\sigma|_{\benbrace*{r,\ldots,r+p}}} \cdot \beta \enbrace*{\sigma|_{\benbrace*{r+p,\ldots ,n}}} \cdot \sigma|_{\benbrace*{0,\ldots ,r}}
 	\end{align}
 	Damit folgt die Gleichheit.
 \end{beweis}
 
-Ab jetzt: $R$ kommutativ!
+Ab jetzt ist $R$ immer kommutativ! 
+Wir wenden uns nun einmal mehr der Topologie von Mannigfaltigkeiten zu und erinnern uns dazu an das letzte Kapitel aus Topologie \RM{1} über die \emph{Fundamentalklasse}:
 
-\begin{erinnerungA}
+\begin{erinnerungA}[{name=[Fundamentalklasse]}]
 	Sei $M$ eine $R$-orientierbare zusammenhängende geschlossene $n$-Mannigfaltigkeit. 
-	Dann ist $H_n(M;R) \cong R$.\footnote{das sieht man zB. mit der Paarfolge}
+	Dann ist $H_n(M;R) \cong R$.
 	Ein Erzeuger von $H_n(M;R)$ heißt \Index{Fundamentalklasse}.
-	Jeder solcher hat die Eigenschaft, dass $\mu|_x \in H_n(M,M \setminus \set*{x};R) \cong R$ ein Erzeuger ist. 
+	Jeder solcher hat die Eigenschaft, dass $\mu|_x \in H_n(M,M \setminus \set*{x};R) \cong R$ ein Erzeuger ist (Topologie \RM{1}, Satz 16.7). 
 	Die Wahl einer solchen Fundamentalklasse entspricht genau der Wahl einer $R$-Orientierung für $M$.
 	Für $R=\mathbb{F}_2$ ist jede $n$-Mannigfaltigkeit $\mathbb{F}_2$-orientierbar. 
 	$M$ ist genau dann nicht $R$-orientierbar, wenn $H_n(M;R)=0$.
@@ -1144,20 +1157,20 @@ Ab jetzt: $R$ kommutativ!
 	Dann ist $\capp \mu \colon H^p(M;R) \to H_{n-p}(M;R)$ ein Isomorphismus.
 \end{satz}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[Vorgehen zum Beweis des Dualitätssatzes]}]
 	Zum Beweis des Satzes werden wir eine Überdeckung von $M$ durch offene Mengen, die homöomorph zu $\mathbb{R}^n$ sind, und ein Mayer-Vietoris-Argument benutzen.
 	Dazu werden wir die Aussage zunächst so verallgemeinern, dass sie auch für offene Teilmengen des $\mathbb{R}^n$ richtig ist.
 \end{bemerkung}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[{Paarung ist ein Isomorphismus, wenn ein Körper betrachtet wird}]}]
 	Ist $K$ ein Körper, so induziert die Paarung
 	\mapdef{C^*(X;K) \otimes C_*(X;K)}{K}{\alpha \otimes a}{\alpha(a)}{}
 	einen Isomorphismus $H^n(X;K) \cong \Hom_K \enbrace*{H_n(X;K),K}$. 
-	Dies folgt einerseits aus dem universellen Koeffizienten-Theorem und andererseits aus Aufgabe $2$ von Blatt $2$.
+	Dies folgt entweder aus dem universellen Koeffizienten-Theorem (\autoref{univ_koeff_space}), denn über einem Körper verschwindet der $\Ext$-Term nach \autoref{bem:tor_ext_koerper_hir}, oder mit Aufgabe $3$ von Blatt $3$.\todo{in den Anhang}
 \end{bemerkung}
 
 \begin{beispiel}[{name=[Kohomologie des reell projektiven Raumes]}]
-	Es gilt 
+	Es gilt \marginnote{vgl. Topologie \RM{1}, Beispiel 12.12} 
 	\[
 		H^* \enbrace*{\mathbb{R}P^n;\mathbb{F}_2} = \begin{cases}
 			\mathbb{F}_2 &\text{ falls }*=0,\ldots ,n\\
@@ -1166,7 +1179,7 @@ Ab jetzt: $R$ kommutativ!
 	\]
 \end{beispiel}
 
-\begin{bemerkung}
+\begin{bemerkung}[{name=[{Paarung ist ein Isomorphismus, wenn $n-1$-te Homologie verschwindet}]}]
 	Ist $H_{n-1}(X)=0$, so induziert die Paarung $C^n(X) \otimes C_n(X) \to \mathbb{Z}$, $\alpha \otimes a \mapsto \alpha(a)$ einen Isomorphismus $H^n(X) \cong \Hom_\mathbb{Z} \enbrace*{H_n (X),\mathbb{Z}}$.
 	Dies folgt auch wieder entweder aus universellen Koeffizienten-Theorem oder aus Aufgabe $3$ von Blatt $3$.
 \end{bemerkung}
@@ -1192,18 +1205,18 @@ Ab jetzt: $R$ kommutativ!
 	Wir wissen schon, dass es solche Isomorphismen von graduierten Moduln gibt. 
 	Es bleibt das $\cupp$-Produkt zu verstehen. Für $n=0,1$ ist nichts zu zeigen. 
 	Per Induktion nehmen wir an, dass $H^*(\mathbb{R}P^{n-1};\mathbb{F}_2) \cong \sfrac{\mathbb{F}_2[\xi']}{(\xi')^n=0}$, wobei $\xi' := i^*(\xi)$ für $i \colon \mathbb{R}P^{n-1} \to \mathbb{R}P^n$ die Inklusion ist und $\xi \in H^1 \enbrace*{\mathbb{R}P^n;\mathbb{F}_2}$ ein Erzeuger ist.
-	Da $i^*$ mit dem $\cupp$-Produkt verträglich ist und für $0 \le * \le {n-1}$ ein Isomorphismus ist, müssen wir nur noch zeigen, dass $\xi^n\in H^n(\mathbb{R}P^n,\mathbb{F}_2)$ ein Erzeuger ist.
+	Da $i^*$ mit dem $\cupp$-Produkt verträglich ist und für $0 \le * \le {n-1}$ ein Isomorphismus ist, müssen wir nur noch zeigen, dass $\xi^n\in H^n(\mathbb{R}P^n,\mathbb{F}_2) \cong \mathbb{F}_2$ ein Erzeuger ist.
 	Sei $\mu \in H_n \enbrace*{\mathbb{R}P^n,\mathbb{F}_2}$ eine Fundamentalklasse. Wir müssen zeigen $\xi^n(\mu)=  \pm 1$.
-	Nach Induktionsannahme ist $\xi^{n-1}$ ein Erzeuger von $H^{n-1}(\mathbb{R}P^n;\mathbb{F}_2)$. 
-	Nach Poincaré-Dualität ist $\xi^{n-1} \capp \mu$ ein Erzeuger von $H_1(\mathbb{R}P^n,\mathbb{F}_2)$. 
+	Nach Induktionsannahme ist $\xi^{n-1}$ ein Erzeuger von $H^{n-1}(\mathbb{R}P^n;\mathbb{F}_2)$, also ist nach Poincaré-Dualität $\xi^{n-1} \capp \mu$ ein Erzeuger von $H_1(\mathbb{R}P^n,\mathbb{F}_2)$. 
 	Da $\xi$ ein Erzeuger von $H^1(\mathbb{R}P^n,\mathbb{F}_2)$ ist, ist also $\xi \enbrace*{\xi^{n-1} \capp \mu} = \pm 1$. 
 	Daher ist 
 	\[
-		\xi^n(\mu) = \epsilon \enbrace*{\xi^n \capp \mu} = \epsilon \enbrace*{ \xi \capp \enbrace*{\xi^{n-1} \capp \mu}} = \xi \enbrace*{\xi^{n-1} \capp \mu} = \pm 1 \qedhere
+		\xi^n(\mu) \StackText{\ref{bem_augmentation_cap}}{=} \epsilon \enbrace*{\xi^n \capp \mu} \StackText{\ref{lem:cup_n_cap}}{=} \epsilon \enbrace*{ \xi \capp \enbrace*{\xi^{n-1} \capp \mu}} \StackText{\ref{bem_augmentation_cap}}{=} \xi \enbrace*{\xi^{n-1} \capp \mu} = \pm 1
 	\]
+	Für $\mathbb{C}P^n$ geht man genauso vor.
 \end{beweis}
 
-\begin{satz}
+\begin{satz}[{name=[{Eulercharakteristik von Mannigfaltigkeiten ungerader Dimension}]}]
 	Sei $M$ eine geschlossene Mannigfaltigkeit, $\dim M = n = 2d +1$ ungerade. 
 	Sei $M$ weiter homotopieäquivalent zu einen endlichen CW-Komplex.\footnote{Dies ist keine Einschränkung, siehe zB. \cite[Cor. A.12]{Hatcher}; die Umkehrung ist aber nicht richtig, wie Aufgabe 4 von Blatt 5 zeigt} 
 	Dann ist $\chi_M =0$.
@@ -1212,12 +1225,13 @@ Ab jetzt: $R$ kommutativ!
 	Ohne Einschränkungen können wir annehmen, dass $M$ zusammenhängend ist, da die Euler-Charakteristik additiv ist. Es ist nach Poincaré-Dualität 
 	\begin{align}
 		\chi_M = \sum_{k=0}^{n} (-1)^k \dim_{\mathbb{F}_2} H_k(M;\mathbb{F}_2) &= \sum_{k=0}^{n} (-1)^k \dim_{\mathbb{F}_2} H^{n-k}(M;\mathbb{F}_2) \\
-		\intertext{Da $M$ homotopieäquivalent zu einem CW-Komplex ist, ist $\dim_{\mathbb{F}_2} H_k(M; \mathbb{F}_2)<\infty $ und insbesondere $\dim_{\mathbb{F}_2} H_k(M;\mathbb{F}_2) = \dim \mathbb{F}_2 \Hom_{\mathbb{F}_2} \enbrace*{H_k(M; \mathbb{F}_2),\mathbb{F}_2} = \dim_{\mathbb{F}_2} H^k(M; \mathbb{F}_2)$ ist, folgt}
+		\intertext{Da $M$ homotopieäquivalent zu einem CW-Komplex ist, ist $\dim_{\mathbb{F}_2} H_k(M; \mathbb{F}_2)<\infty $ und insbesondere $\dim_{\mathbb{F}_2} H_k(M;\mathbb{F}_2) = \dim_{\mathbb{F}_2} \Hom_{\mathbb{F}_2} \enbrace*{H_k(M; \mathbb{F}_2),\mathbb{F}_2} = \dim_{\mathbb{F}_2} H^k(M; \mathbb{F}_2)$ ist, folgt}
 		&= \sum_{k=0}^{n} (-1)^k \dim_{\mathbb{F}_2} H_{n-k}(M; \mathbb{F}_2) \\
 		&= \sum_{k=0}^{n} (-1)^{n-k} \dim_{\mathbb{F}_2} H_k(M; \mathbb{F}_2) \\
 		&= - \sum_{k=0}^{n} (-1)^k \dim_{\mathbb{F}_2} H_k(M;\mathbb{F}_2) \\
-		&= - \chi_M \qedhere
+		&= - \chi_M
 	\end{align}
+	Damit muss $\chi_M = 0$ gelten.
 \end{beweis}
 % section 6 (end)
 \newpage
@@ -2274,7 +2288,7 @@ Ab jetzt: $R$ kommutativ!
 	\]
 \end{definition}
 
-\begin{bemerkung}
+\begin{bemerkung}[label=bem:tor_ext_koerper_hir]
 	Es gilt $\Tor_0^R(V,M) = V \otimes_R M$ und $\Ext_R^0(M,W)=\Hom_R(M,W)$.
 	Unter einigen zusätzlichen Annahmen, haben wir folgende einfache Schlussfolgerungen für $\Tor$ und $\Ext$:
 	\begin{enumerate}[(i)]
