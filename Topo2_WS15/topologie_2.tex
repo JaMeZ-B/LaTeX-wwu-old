@@ -897,7 +897,7 @@
 \end{definition}
 
 \begin{beispiel}[{name=[Freie Moduln sind projektiv]}]
-	Freie Moduln sind projektiv, wie man durch Anwendung der universellen Eigenschaft eines freien Moduls sehr einfach sieht (wurde auch in Topologie \RM{1} bewiesen).\marginnote{Urbilder der Bilder, der Basiselemente wählen} 
+	Freie Moduln sind projektiv, wie man durch Anwendung\marginnote{Urbilder der Bilder der Basiselemente wählen} der universellen Eigenschaft eines freien Moduls sehr einfach sieht (wurde auch in Topologie \RM{1} bewiesen).
 \end{beispiel}
 
 \begin{satz}[{name=[Projektive Moduln als direkte Summanden in freien Moduln]}]
@@ -930,7 +930,7 @@
 	Dann gilt $f \circ \hat{\varphi} = f \circ \hat{\psi} \circ i = \varphi \circ p \circ i = \varphi$ und $P$ ist projektiv.
 \end{beweis}
 
-\begin{satz}[{name=[{azyklische, projektive Kettenkomplexe sind kettenkontrahierbar}]}]
+\begin{satz}[{name=[{azyklische, projektive Kettenkomplexe sind kettenkontrahierbar}]},label=satz:projektiv_azyklisch_kettenkontrahierbar]
 	Sei $C_*$ ein azyklischer $R$-Kettenkomplex. Sind alle Kettenmoduln $C_n$ projektiv, so ist $C_*$ kettenkontrahierbar.
 \end{satz}
 \begin{beweis}
@@ -942,17 +942,17 @@
 		d_n \enbrace*{{\id_{C_n}} - s_{n-1} \circ d_n} &= d_n - \hspace{-1ex}\Underbracket{d_n \circ s_{n-1}}{={\id_{C_{n-1}}} - s_{n-2} \circ d_{n-1}}\hspace{-1ex} \circ d_n \\
 		&= d_n - \enbrace*{- s_{n-2} \circ d_{n-1} + {\id_{C_{n-1}}}} \circ d_n =0
 	\end{align}
-	liegt das Bild von ${\id_{C_n}} - s_{n-1} \circ d_n$ im Kern von $d_n$. 
+	liegt das Bild von ${\id_{C_n}} - s_{n-1} \circ d_n$ im Kern von $d_n$.
 	\[
 		\begin{tikzcd}[column sep=2.5cm,row sep=large]
 			\mbox{ } & C_{n+1} \dar["d_{n+1}",two heads] \\
 			C_n \urar["s_n", dashed] \rar["{\id_{C_n}} - s_{n-1} \circ d_n"'] & \im d_{n+1} = \ker d_n
 		\end{tikzcd}
 	\]
-	Da $C_n$ projektiv ist, gibt es $s_n \colon C_n \to C_{n+1}$ mit $d_{n+1} \circ s_n = {\id_{C_n}} - {s_{n-1} \circ d_n}$.\todo{Revision 5}
+	Da $C_n$ projektiv ist, gibt es $s_n \colon C_n \to C_{n+1}$ mit $d_{n+1} \circ s_n = {\id_{C_n}} - {s_{n-1} \circ d_n}$.
 \end{beweis}
 
-\begin{satz}[label=satz:5:kettenhomotopie]
+\begin{satz}[label=satz:5:kettenhomotopie,{name=[{Bei projektiven Kettenmoduln werden Isomorphismen in Homologie immer von Kettenhomotopieäquivalenzen induziert}]}]
 	Sei $f \colon C_* \to D_*$ eine Kettenabbildung. Seien alle Kettenmoduln von $C_*$ und $D_*$ projektiv. Dann sind äquivalent: 
 	\begin{enumerate}[(i),itemsep=0pt]
 		\item $f$ ist eine Kettenhomotopieäquivalenz
@@ -960,55 +960,55 @@
 	\end{enumerate}
 \end{satz}
 \begin{beweis}
-	Die Implikation (i) $\Rightarrow$ (ii) ist klar (siehe Topologie \RM{1}.) Die zweite Implikation besprechen wir später (siehe Seite~\pageref{bew:satz5}).
+	Die Implikation (i) $\Rightarrow$ (ii) ist klar (siehe Topologie \RM{1}.) 
+	Die zweite Implikation beweisen wir im restlichen Verlauf dieses Abschnitts.
 \end{beweis}
 
 \begin{definition}[{name=[Kegel und Einhängung]}]
-	Sei $f \colon C_* \to D_*$ eine Kettenabbildung. Der \Index{Kegel} $\Keg(f)_*$ von $f$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $D_n \oplus C_{n-1}$ ist und dessen 
-	$n$-te Randabbildung gegeben ist durch
+	Sei $f \colon C_* \to D_*$ eine Kettenabbildung. 
+	Der \bet{Kegel}\index{Kegel!Kettenkomplex} $\Keg(f)_*$ von $f$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $D_n \oplus C_{n-1}$ ist und dessen $n$-te Randabbildung gegeben ist durch
 	\[
 		d^{\Keg(f)}_n := \begin{pmatrix}
 			d^D_n & f\\
-			0 & -d^C_{n-1}
+			0 & -{d^C_{n-1}}
 		\end{pmatrix}
 	\]
-	Die \Index{Einhängung} $\Sigma C_*$ von $C_*$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $C_{n-1}$ ist und dessen $n$-te Randabbildung $-d_{n-1}^C$ ist.
+	Die \bet{Einhängung}\index{Einhängung!Kettenkomplex} $\Sigma C_*$ von $C_*$ ist der Kettenkomplex, dessen $n$-ter Kettenmodul $C_{n-1}$ ist und dessen $n$-te Randabbildung $-{d_{n-1}^C}$ ist.
 \end{definition}
 
-\begin{lemma}
-	$f$ induziert genau dann einen Isomorphismus in Homologie, wenn $\Keg(f_*)$ azyklisch ist.
+\begin{lemma}[{name=[{Isomorphismus induziert genau dann, wenn der Kegel azyklisch ist}]},label=lem:iso_homo_keg_azyklisch]
+	Eine Kettenabbildung $f\colon C_* \to D_*$ induziert genau dann einen Isomorphismus in Homologie, wenn $\Keg(f_*)$ azyklisch ist.
 \end{lemma}
 \begin{beweis}
 	Betrachte die lange exakte Folge zur kurzen exakten Folge von Kettenkomplexen
 	\[
 		\begin{tikzcd}[cramped]
-			0 \rar & D_* \rar["i"] & \Keg(f)_* \rar["p"] & \Sigma C_* \rar & 0
+			0 \rar & D_* \rar["i",hook] & \Keg(f)_* \rar["p",two heads] & \Sigma C_* \rar & 0
 		\end{tikzcd}
 	\]
-	Der Verbindungshomomorphismus $H_{n+1}(\Sigma C_*) \to H_n(D_*)$ entspricht unter $H_{n+1}(\Sigma C_*) \cong H_n(C_*)$ genau der von $f$ induzierten Abbildung.
+	Der Verbindungshomomorphismus $\partial \colon H_{n+1}(\Sigma C_*) \to H_n(D_*)$ entspricht unter der offensichtlichen Identifikation $H_{n+1}(\Sigma C_*) \cong H_n(C_*)$ genau der von $f$ induzierten Abbildung.
 \end{beweis}
 
-\begin{lemma}
-	$f$ ist genau dann eine Kettenhomotopieäquivalenz, wenn $\Keg(f)_*$ kettenkontraktibel ist.
+\begin{lemma}[{name=[{Kettenhomotopieäquivalenz genau dann, wenn der Kegel kettenkontraktibel ist}]},label=lem:kettenhomotopieaeq_keg_kettenkontraktibel]
+	Eine Kettenabbildung $f\colon C_* \to D_*$ ist genau dann eine Kettenhomotopieäquivalenz, wenn $\Keg(f)_*$ kettenkontraktibel ist.
 \end{lemma}
 \begin{beweis}
 	Sei $\begin{psmallmatrix} \alpha_n & \beta_{n-1} \\ \gamma_n & \delta_{n-1} \end{psmallmatrix}$ eine Kettenkontraktion für $\Keg(f)$. Es folgt 
 	\begin{align}
-		f_n \circ \gamma_n + d^D_{n+1} \circ \alpha_n + \alpha_{n-1} \circ d_n^D &= \id_{D_n} \tag*{(1)} \\
-		d^D_{n+1} \circ \beta_{n-1} + f_n \circ \delta_{n-1} + d_{n-1} \circ f_{n-1} - \beta_{n-2} \circ d_{n-1}^C &= 0 \tag*{(2)}\\
-		- d^C_n \circ \gamma_n + \gamma_n \circ d_n^D &= 0 \tag*{(3)} \\
-		- d_n^C \circ \delta_{n-1} + \gamma_{n-1} \circ f_{n-1} - \delta_{n-2} \circ d^C_{n-1} &= \id_{C_{n-1}} \tag*{(4)}
+		f_n \circ \gamma_n + d^D_{n+1} \circ \alpha_n + \alpha_{n-1} \circ d_n^D &= {\id_{D_n}} \tag*{(1)} \\
+		d^D_{n+1} \circ \beta_{n-1} + f_n \circ \delta_{n-1} + \alpha_{n-1} \circ f_{n-1} - \beta_{n-2} \circ d_{n-1}^C &= 0 \tag*{(2)}\\
+		- d^C_n \circ \gamma_n + \gamma_{n-1} \circ d_n^D &= 0 \tag*{(3)} \\
+		- d_n^C \circ \delta_{n-1} + \gamma_{n-1} \circ f_{n-1} - \delta_{n-2} \circ d^C_{n-1} &= {\id_{C_{n-1}}} \tag*{(4)}
 	\end{align}
 	Daraus folgt
 	\begin{align}
-		&\gamma \text{ ist eine Kettenabbildung} \tag*{(1')} \label{sec5:1-} \\
-		&\id_D \simeq f \circ g \text{ via } \alpha \tag*{(3')} \label{sec5:3-}\\
-		& \gamma \circ f \simeq \id_C \text{ via }  \delta \tag*{(4')} \label{sec5:4-}
+		& {\id_D} \simeq f \circ \gamma \text{ via } \alpha \tag*{(1')} \label{sec5:1-} \\
+		& \gamma \text{ ist eine Kettenabbildung} \tag*{(3')} \label{sec5:3-}\\
+		& \gamma \circ f \simeq {\id_C} \text{ via }  \delta \tag*{(4')} \label{sec5:4-}
 	\end{align}
-	Es folgt, dass $\gamma$ eine Kettenabbildung ist, $\id_D \simeq f \circ g$ via $\alpha$ und $\gamma \circ f \simeq \id_C$ via $\delta$. Damit ist $f$ eine 
-	Kettenhomotopieäquivalenz mit Kettenhomotopieinversem $\gamma$. 
-	Gelten umgekehrt \ref{sec5:1-}, \ref{sec5:3-} und \ref{sec5:4-}, so setzt man $\hat{\delta} := \delta + \gamma \circ f - \delta \gamma f$ und 
-	$\beta := \alpha f \gamma + \alpha^2 f + f \delta^2$ und 
+	Damit ist $f$ eine Kettenhomotopieäquivalenz mit Kettenhomotopieinversem $\gamma$. 
+	Gelten umgekehrt die Aussagen \ref{sec5:1-}, \ref{sec5:3-} und \ref{sec5:4-}, so setzt man $\hat{\delta} := \delta + \gamma \alpha f - \delta \gamma f$ und 
+	$\beta := \alpha f \delta + \alpha^2 f + f \delta^2$. Dann ist\todo{nachrechnen\ldots} 
 	\[
 		S := \begin{pmatrix}
 			\alpha & \beta \\
@@ -1019,8 +1019,9 @@
 \end{beweis}
 
 \begin{beweis}[name={von \autoref{satz:5:kettenhomotopie} zweite Implikation},label=bew:satz5]
-	Ist $H_n(f)$ ein Isomorphismus, so ist $\Keg(f)$ azyklisch. Die direkte Summen von projektiven Moduln ist wieder projektiv sind, sind die Kettenabbildungen von $\Keg(f)$
-	projektiv, falls die von $C_*$ und $D_*$ projektiv sind. Daher ist $\Keg(f)$ kettenkontraktibel und $f$ eine Kettenhomotopieäquivalenz.
+	Ist $H_n(f)$ ein Isomorphismus, so ist $\Keg(f)$ azyklisch nach \autoref{lem:iso_homo_keg_azyklisch}. 
+	Da direkte Summen von projektiven Moduln wieder projektiv sind, ist $\Keg(f)$ kettenkontraktibel nach \autoref{satz:projektiv_azyklisch_kettenkontrahierbar}.
+	Mit dem eben gezeigten \autoref{lem:kettenhomotopieaeq_keg_kettenkontraktibel} folgt dann, dass $f$ eine Kettenhomotopieäquivalenz ist.
 \end{beweis}
 
 \begin{korollarB}
