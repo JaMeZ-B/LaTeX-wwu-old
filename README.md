@@ -1,6 +1,6 @@
-LaTeX-WWU
-=========
-This repository stores some lecture notes made during lectures at the University of Münster.
+---
+
+## Dieses Repository ist umgezogen nach [HIER](https://github.com/JaMeZ-B/LaTeX-WWU)!
 
 ---
 
