@@ -1,6 +1,6 @@
 ---
 
-## Dieses Repository ist umgezogen nach [HIER](https://github.com/JaMeZ-B/LaTeX-WWU)!
+# Dieses Repository ist umgezogen nach [HIER](https://github.com/JaMeZ-B/LaTeX-WWU)!
 
 ---
 
